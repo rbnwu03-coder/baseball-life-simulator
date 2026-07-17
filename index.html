@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>棒球人生：十歲的夏天</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div>
+      <p class="eyebrow">BASEBALL LIFE RPG</p>
+      <h1>棒球人生：十歲的夏天</h1>
+    </div>
+    <div class="save-buttons">
+      <button type="button" onclick="saveGame()">儲存</button>
+      <button type="button" onclick="loadGame()">讀取</button>
+      <button type="button" onclick="deleteSave()">刪除存檔</button>
+    </div>
+  </header>
+
+  <details class="debug-bookmarks">
+    <summary>開發測試書籤（暫時功能）</summary>
+    <p>直接載入代表性測試狀態，不會寫入或覆蓋正式存檔。</p>
+    <div class="bookmark-buttons">
+      <button type="button" onclick="loadTestBookmark('childhoodEnd')">第一章最後一天</button>
+      <button type="button" onclick="loadTestBookmark('chapter2')">少棒入門</button>
+      <button type="button" onclick="loadTestBookmark('firstMatch')">第一季正式比賽</button>
+      <button type="button" onclick="loadTestBookmark('matchInfield')">比賽：內野手</button>
+      <button type="button" onclick="loadTestBookmark('matchOutfield')">比賽：外野手</button>
+      <button type="button" onclick="loadTestBookmark('matchCatcher')">比賽：捕手</button>
+      <button type="button" onclick="loadTestBookmark('matchPitcher')">比賽：投手</button>
+      <button type="button" onclick="loadTestBookmark('competition')">位置競爭</button>
+      <button type="button" onclick="loadTestBookmark('junior')">青少棒開場</button>
+      <button type="button" onclick="loadTestBookmark('pain')">肩膀疼痛事件</button>
+      <button type="button" onclick="loadTestBookmark('juniorSeason')">青少棒分化與升學</button>
+      <button type="button" onclick="loadTestBookmark('highSchool')">青棒第一年</button>
+      <button type="button" onclick="loadTestBookmark('criticalYear')">青棒關鍵年</button>
+      <button type="button" onclick="loadTestBookmark('batPath')">打擊型青棒關鍵年</button>
+      <button type="button" onclick="loadTestBookmark('transitionDraft')">轉換期：選秀</button>
+      <button type="button" onclick="loadTestBookmark('transitionCollege')">轉換期：大學</button>
+      <button type="button" onclick="loadTestBookmark('transitionAmateur')">轉換期：業餘</button>
+      <button type="button" onclick="loadTestBookmark('transitionRehab')">轉換期：復健</button>
+      <button type="button" onclick="loadTestBookmark('development')">二十至二十二歲</button>
+      <button type="button" onclick="loadTestBookmark('careerRoleLoss')">Phase 10：角色失效</button>
+      <button type="button" onclick="loadTestBookmark('careerInjuryTurn')">Phase 10：傷病轉型</button>
+      <button type="button" onclick="loadTestBookmark('careerRebound')">Phase 10：再次被需要</button>
+      <button type="button" onclick="loadTestBookmark('azheTrust')">阿哲：高信任</button>
+      <button type="button" onclick="loadTestBookmark('azheDistance')">阿哲：關係疏遠</button>
+      <button type="button" onclick="loadTestBookmark('takahashiRespect')">高橋：高度尊重</button>
+      <button type="button" onclick="loadTestBookmark('takahashiHostile')">高橋：敵對競爭</button>
+      <button type="button" onclick="loadTestBookmark('coachDependable')">教練：可靠評價</button>
+      <button type="button" onclick="loadTestBookmark('coachDisappointed')">教練：失望評價</button>
+      <button type="button" onclick="loadTestBookmark('characterCrossroads')">三人交叉事件</button>
+      <button type="button" onclick="loadTestBookmark('coachRecommendation')">高中推薦評語</button>
+    </div>
+  </details>
+
+  <section id="characterCreation">
+    <p class="creation-kicker">十歲那年，你還不是球員</p>
+    <h2>你希望棒球帶給你什麼？</h2>
+    <p>這不是職業或能力選擇，而是主角最初的願望。它會改變開場心境與初始性格。</p>
+    <div class="origin-grid" role="group" aria-label="選擇主角最初的願望">
+      <button type="button" class="origin-card selected" data-origin="prove" onclick="selectOrigin('prove')">
+        <strong>希望被看見</strong><span>你不確定自己有沒有天分，但不想永遠站在人群後面。</span><small>自信與競爭種子</small>
+      </button>
+      <button type="button" class="origin-card" data-origin="understand" onclick="selectOrigin('understand')">
+        <strong>希望看懂棒球</strong><span>你著迷的不是歡呼，而是每個人為什麼站在那裡。</span><small>觀察與理解種子</small>
+      </button>
+      <button type="button" class="origin-card" data-origin="belong" onclick="selectOrigin('belong')">
+        <strong>希望有同伴</strong><span>你想知道，自己能不能在一支隊伍裡找到位置。</span><small>家庭與團隊種子</small>
+      </button>
+    </div>
+    <div class="creation-row">
+      <input id="nameInput" maxlength="12" placeholder="輸入主角名字" autocomplete="off">
+      <button type="button" class="start-button" onclick="createPlayer()">走進十歲的夏天</button>
+    </div>
+  </section>
+
+  <main class="main-layout">
+    <section class="left-panel">
+      <div id="time"></div>
+      <div id="story"></div>
+      <div id="changeLog" aria-live="polite"></div>
+      <div id="choices"></div>
+    </section>
+    <aside class="right-panel"><div id="status"></div></aside>
+  </main>
+
+  <footer class="bottom-panel"><div id="player-info"></div></footer>
+
+  <script src="player.js"></script>
+  <script src="npc.js"></script>
+  <script src="coach.js"></script>
+  <script src="rival.js"></script>
+  <script src="story.js"></script>
+  <script src="save.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
