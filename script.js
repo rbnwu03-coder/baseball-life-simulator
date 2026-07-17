@@ -276,6 +276,7 @@ function loadTestBookmark(bookmark) {
 function createPlayer() {
   const name = document.getElementById("nameInput").value.trim() || "無名小將";
   player = createInitialPlayer(name);
+  player.replayMemories = loadReplayMemories();
   player.origin = selectedOrigin;
   const origins = {
     prove: { effects: { confidence: 1, pressure: 1 }, personality: { brave: 1, ambitious: 1 }, flag: "origin_wants_to_be_seen", memory: "在真正碰到棒球以前，你先承認自己希望有一天能被看見。" },
@@ -879,6 +880,7 @@ function choose(eventId, index) {
   if (choice.nextChapter === "developmentYears") return enterDevelopmentYears();
   if (choice.completeSlice) {
     player.completed = true;
+    archiveReplayMemory();
     player.chapter = "垂直切片完成";
     showCurrentEvent();
     return;
@@ -927,6 +929,7 @@ function choose(eventId, index) {
   updateImpression();
   if (choice.resolveStartingCompetition) resolveStartingCompetition();
   processCareerArcEvent(eventId, choice);
+  processEmotionalEvent(eventId, choice);
   showStatChanges(before, getPlayerSnapshot(), choice.memory);
 
   if (choice.resolveStartingCompetition) {
@@ -1264,6 +1267,333 @@ function generateCareerSummary() {
   const fall = lost ? `${lost.title}，${lost.impact}。` : "你沒有遭遇劇烈的角色崩解，但每次評估都迫使你重新證明用途。";
   const rebound = needed ? `${needed.title}：${needed.impact}。` : "你仍在尋找下一種能讓球隊需要你的方法。";
   return `${opening}\n${fall}\n${rebound}\n生涯價值最高 ${player.careerValue.peak}、最低 ${player.careerValue.minimum}，最後趨勢為${({ rising: "上升", stable: "持平", declining: "下降", rebound: "回升" })[player.careerValue.trend] || "持平"}。`;
+}
+
+const REPLAY_MEMORY_KEY = "baseballLifeReplayMemories";
+const emotionLevelRank = { minor: 1, major: 2, legendary: 3 };
+
+function getEmotionChapter(eventId = "") {
+  const map = {
+    ending: "十歲暑假", chapter2_result: "少棒入門", youth_season_result: "少棒第一季",
+    competition_result: "位置競爭", junior_result: "青少棒分化", junior_season_result: "青少棒球季",
+    high_school_result: "青棒第一年", critical_year_result: "高中關鍵年",
+    transition_result: "生涯轉換", development_result: "發展期"
+  };
+  return map[eventId] || player.chapter || "未分類";
+}
+
+function recordLifeEvent(data = {}) {
+  if (!data.id || player.lifeEvents.some(item => item.id === data.id)) return false;
+  player.lifeEvents.push({
+    id: data.id,
+    title: data.title || data.id,
+    age: Number(data.age ?? player.age) || 0,
+    importance: Math.max(1, Math.min(5, Number(data.importance) || 1)),
+    emotion: data.emotion || "hope",
+    remembered: data.remembered !== false,
+    chapter: data.chapter || getEmotionChapter(data.eventId)
+  });
+  return true;
+}
+
+function recordEmotionalPeak(data = {}) {
+  if (!data.id || player.emotionalPeaks.some(item => item.id === data.id)) return false;
+  const level = emotionLevelRank[data.level] ? data.level : "minor";
+  player.emotionalPeaks.push({ id: data.id, title: data.title || data.id, age: player.age, chapter: data.chapter || player.chapter, level, emotion: data.emotion || "pride", importance: Number(data.importance) || emotionLevelRank[level] + 2 });
+  addFlags([`remembered_peak_${data.id}`]);
+  recordLifeEvent({ ...data, importance: Number(data.importance) || emotionLevelRank[level] + 2 });
+  return true;
+}
+
+function recordLowPoint(data = {}) {
+  if (!data.id || player.lowPoints.some(item => item.id === data.id)) return false;
+  player.lowPoints.push({ id: data.id, title: data.title || data.id, age: player.age, chapter: data.chapter || player.chapter, emotion: data.emotion || "loss", importance: Number(data.importance) || 3, impact: data.impact || "這件事改變了你看待棒球與自己的方式。" });
+  addFlags([`carried_low_${data.id}`]);
+  player.lifeThemes.fear = Math.min(20, (player.lifeThemes.fear || 0) + 1);
+  recordLifeEvent({ ...data, emotion: data.emotion || "loss", importance: Number(data.importance) || 3 });
+  return true;
+}
+
+function rememberLifeEvent(id) {
+  return player.lifeEvents.find(item => item.id === id && item.remembered);
+}
+
+function recordNpcEmotionalCallback(npc, eventId, text, chapter = player.chapter) {
+  const id = `${npc}_${eventId}`;
+  if (player.npcEmotionalCallbacks.some(item => item.id === id)) return false;
+  player.npcEmotionalCallbacks.push({ id, npc, eventId, text, age: player.age, chapter });
+  return true;
+}
+
+function getNpcEmotionalCallback(npc) {
+  if (npc === "azhe" && (rememberLifeEvent("azhe_goodbye") || rememberLifeEvent("azhe_stayed"))) return "阿哲低聲說：『那天如果不是你，我可能已經放棄棒球。』";
+  if (npc === "takahashi" && rememberLifeEvent("first_starting_test")) return "高橋說：『我第一次覺得你是對手，就是那場測試。』";
+  if (npc === "yamamoto" && rememberLifeEvent("first_appearance")) return "山本教練說：『我一直記得你第一次站上場時的樣子。』";
+  return "";
+}
+
+function processEmotionalEvent(eventId, choice = {}) {
+  const chapter = getEmotionChapter();
+  if (eventId === "youth_match_entry") recordEmotionalPeak({ id: "first_appearance", title: "第一次正式上場", chapter, level: "minor", emotion: "joy", importance: 4 });
+  if (eventId === "youth_match_mistake") recordLowPoint({ id: "first_failure", title: "第一次在場上失敗", chapter, emotion: "regret", importance: 4, impact: "你第一次知道，失誤會留在心裡，也會逼你決定下一球怎麼辦。" });
+  if (eventId === "echo_coach") recordEmotionalPeak({ id: "first_praise", title: "第一次被教練單獨留下", chapter, level: "minor", emotion: "pride", importance: 4 });
+  if (eventId === "starter_selection_test") recordLifeEvent({ id: "first_starting_test", title: "第一次爭取先發", chapter, emotion: "hope", importance: 4 });
+  if (eventId === "starter_selection_result") {
+    if (player.startingCompetition?.result === "win") recordEmotionalPeak({ id: "first_starting_role", title: "第一次贏得位置", chapter, level: "major", emotion: "pride", importance: 5 });
+    else recordLowPoint({ id: "first_lost_position", title: "第一次失去位置", chapter, emotion: "loss", importance: 5, impact: "你必須重新回答：沒有先發身分時，自己還能替球隊做什麼。" });
+  }
+  if (eventId === "junior_friend_exit") {
+    const stayed = hasFlag("azhe_stayed") || player.characterArc.azhe === "best_friend";
+    if (stayed) recordEmotionalPeak({ id: "azhe_stayed", title: "阿哲選擇留下", chapter, level: "major", emotion: "gratitude", importance: 5 });
+    else recordLowPoint({ id: "azhe_goodbye", title: "和阿哲的重要告別", chapter, emotion: "loss", importance: 5, impact: "好友的離開讓你明白，不是每個人都能用同一種方式留在棒球裡。" });
+  }
+  if (eventId === "junior_pain" || eventId === "critical_injury") recordLowPoint({ id: eventId === "critical_injury" ? "major_injury" : "first_injury", title: eventId === "critical_injury" ? "傷病改變了原本的路" : "第一次感到身體警訊", chapter, emotion: "fear", importance: eventId === "critical_injury" ? 5 : 4, impact: "身體迫使你改變目標、角色與依賴他人的方式。" });
+  if (eventId === "high_school_showcase") recordEmotionalPeak({ id: "first_market_notice_emotion", title: "第一次真正被看見", chapter, level: "major", emotion: "pride", importance: 5 });
+  if (eventId === "high_school_long_bench") recordLowPoint({ id: "long_bench_low", title: "長時間坐在板凳上", chapter, emotion: "regret", importance: 4, impact: "你開始懷疑，沒有上場的自己還算不算球員。" });
+  if (eventId === "development_competition") recordLowPoint({ id: "role_became_invalid", title: "原本的角色失效", chapter, emotion: "loss", importance: 5, impact: "你失去熟悉的位置，被迫尋找另一種留下來的方法。" });
+  if (eventId === "development_opportunity") {
+    recordEmotionalPeak({ id: "needed_again_emotion", title: "再次被球隊需要", chapter, level: player.careerArc.reinventions > 0 ? "legendary" : "major", emotion: "hope", importance: 5 });
+    if (player.careerArc.reinventions > 0 || rememberLifeEvent("major_injury")) recordEmotionalPeak({ id: "first_rebirth", title: "第一次重新成為球員", chapter, level: "legendary", emotion: "relief", importance: 5 });
+  }
+}
+
+const chapterEmotionDefaults = {
+  ending: ["第一次決定如何靠近棒球", "第一次害怕自己不夠好"],
+  chapter2_result: ["第一次完成正式訓練", "第一次發現喜歡不等於做得到"],
+  youth_season_result: ["第一次像球員一樣完成球季", "第一次承受場上失誤"],
+  competition_result: ["第一次真正爭取位置", "第一次面對可能落選"],
+  junior_result: ["找到可能適合自己的高中方向", "發現選擇開始受到現實限制"],
+  junior_season_result: ["撐過青少棒的分化", "和熟悉的人走向不同方向"],
+  high_school_result: ["第一次建立能被描述的價值", "第一次長時間等不到機會"],
+  critical_year_result: ["第一次看見職涯出口", "第一次害怕夢想可能結束"],
+  transition_result: ["在新組織裡重新找到任務", "離開熟悉舞台的失落"],
+  development_result: ["再次被需要", "原本的角色不再有效"]
+};
+
+function ensureChapterEmotionCoverage(eventId) {
+  const defaults = chapterEmotionDefaults[eventId];
+  if (!defaults) return;
+  const chapter = getEmotionChapter(eventId);
+  if (!player.emotionalPeaks.some(item => item.chapter === chapter)) recordEmotionalPeak({ id: `${eventId}_peak`, title: defaults[0], chapter, level: "minor", emotion: "hope", importance: 3 });
+  if (!player.lowPoints.some(item => item.chapter === chapter)) recordLowPoint({ id: `${eventId}_low`, title: defaults[1], chapter, emotion: "fear", importance: 3, impact: "這份不安成為下一章必須回答的問題。" });
+  if (player.lifeEvents.filter(item => item.chapter === chapter).length < 2) recordLifeEvent({ id: `${eventId}_memory`, title: `${chapter}留下的記憶`, chapter, emotion: "gratitude", importance: 3 });
+}
+
+function generateChapterEndingScene(eventId) {
+  if (!chapterEmotionDefaults[eventId]) return "";
+  ensureChapterEmotionCoverage(eventId);
+  const chapter = getEmotionChapter(eventId);
+  const memories = player.lifeEvents.filter(item => item.chapter === chapter && item.remembered).sort((a, b) => b.importance - a.importance);
+  const memory = memories[0];
+  const npc = ["ending", "chapter2_result", "youth_season_result", "competition_result"].includes(eventId) ? "yamamoto" : ["junior_result", "junior_season_result", "high_school_result"].includes(eventId) ? "azhe" : "takahashi";
+  let reaction = getNpcEmotionalCallback(npc);
+  if (!reaction) reaction = npc === "azhe" ? "阿哲看了你一眼，像是想把這一章的你記住。" : npc === "takahashi" ? "高橋沒有安慰你，只說下次會再看你怎麼回答。" : "山本教練沒有只談結果，他提醒你別忘了自己是怎麼走到這裡。";
+  recordNpcEmotionalCallback(npc, eventId, reaction, chapter);
+  if (!player.chapterEndings.some(item => item.id === eventId)) player.chapterEndings.push({ id: eventId, chapter, memoryId: memory?.id || "", npc, age: player.age });
+  return `章末記憶：\n${memory ? `你會記得「${memory.title}」。` : "這一章仍留下了一個你說不清楚的感覺。"}\n\n人物回應：\n${reaction}\n\n這一章留下的不只是評價，也留下了下一次必須回答的問題。`;
+}
+
+function getReplayMemoryEcho() {
+  const memory = player.replayMemories?.[0];
+  return memory ? `前一段人生的回聲：\n你曾經也是這樣選擇。那一世，你記得的是「${memory.title}」。` : "";
+}
+
+function loadReplayMemories() {
+  try { return JSON.parse(localStorage.getItem(REPLAY_MEMORY_KEY) || "[]"); } catch (_) { return []; }
+}
+
+function archiveReplayMemory() {
+  const memories = [...player.lifeEvents].filter(item => item.remembered).sort((a, b) => b.importance - a.importance || a.age - b.age).slice(0, 5);
+  try { localStorage.setItem(REPLAY_MEMORY_KEY, JSON.stringify(memories)); } catch (_) {}
+  return memories;
+}
+
+function getMostImportantPerson() {
+  const scores = [
+    ["阿哲", (player.impression.azhe.trusts || 0) + (player.relationships.teammateBond || 0)],
+    ["高橋", (player.impression.takahashi.respect || 0) + (player.relationships.rivalRespect || 0)],
+    ["山本教練", (player.impression.coach.dependable || 0) + (player.relationships.coachTrust || 0)]
+  ];
+  return scores.sort((a, b) => b[1] - a[1])[0][0];
+}
+
+function generateLifeStory() {
+  const events = [...player.lifeEvents].filter(item => item.remembered).sort((a, b) => b.importance - a.importance || a.age - b.age).slice(0, 5);
+  const peak = [...player.emotionalPeaks].sort((a, b) => emotionLevelRank[b.level] - emotionLevelRank[a.level] || b.importance - a.importance)[0];
+  const low = [...player.lowPoints].sort((a, b) => b.importance - a.importance)[0];
+  const turning = player.turningPoints.find(item => item.id === "needed_again") || player.turningPoints.find(item => item.id.startsWith("role_lost_")) || player.turningPoints[0];
+  const list = events.length ? events.map(item => `${item.age} 歲｜${item.title}`).join("\n") : "還沒有足以寫進人生傳記的事件。";
+  return `你最重要的五件事：\n${list}\n\n最大高峰：${peak?.title || "仍在等待"}\n最大低谷：${low?.title || "尚未留下"}\n最重要的人：${getMostImportantPerson()}\n改變人生的轉折：${turning?.title || "尚未發生"}\n\n${low ? `${low.age} 歲時，你經歷了「${low.title}」。\n${low.impact}` : ""}${peak ? `\n但你後來也記住了「${peak.title}」。` : ""}`;
+}
+
+function auditEmotion() {
+  return Object.entries(chapterEmotionDefaults).map(([eventId]) => {
+    const chapter = getEmotionChapter(eventId);
+    const result = {
+      chapter,
+      peaks: player.emotionalPeaks.filter(item => item.chapter === chapter).length,
+      lows: player.lowPoints.filter(item => item.chapter === chapter).length,
+      lifeEvents: player.lifeEvents.filter(item => item.chapter === chapter).length,
+      npcCallbacks: player.npcEmotionalCallbacks.filter(item => item.chapter === chapter).length
+    };
+    result.meetsTarget = result.peaks >= 1 && result.lows >= 1 && result.lifeEvents >= 2 && result.npcCallbacks >= 1;
+    return result;
+  });
+}
+
+const signatureSceneLibrary = {
+  day1_morning: {
+    id: "summer_first_ball", title: "夏天裡的第一顆球", category: "dream", chapter: "十歲暑假",
+    location: "住家附近的球場外", object: "畫著歪斜記號的球", characters: ["家人"], action: "你隔著鐵網把手指貼在球縫的方向上", emotion: "hope", silent: true,
+    memory: "鐵網被曬得發燙，球場傳來手套接球的悶響。家人沒有催你，只把腳步停在你身後。",
+    text: "鐵網被太陽曬得發燙。場內一顆畫著歪斜記號的球滾過紅土，你隔著網子用手指追著它的球縫。家人沒有催你，只把腳步停在身後。"
+  },
+  chapter2_intro: {
+    id: "oversized_first_uniform", title: "第一次穿上球衣", category: "dream", chapter: "少棒入門",
+    location: "少棒隊器材室", object: "過大的第一件球衣", characters: ["山本教練"], action: "你反覆把過長的袖口往上折", emotion: "fear", silent: true,
+    relationshipMoments: { yamamoto: "joy" }, memory: "球衣大得像借來的人生，手套又硬得闔不起來；器材室裡混著皮革、汗和紅土的味道。",
+    text: "器材室裡混著皮革、汗和紅土的味道。球衣尺寸太大，你把袖口折了一次又一次；新手套硬得闔不起來。山本教練看見你戴反手套，沒有笑，只伸手替你轉正。"
+  },
+  youth_match_entry: {
+    id: "first_game_sun", title: "第一次正式上場", category: "first_game", chapter: "少棒第一季",
+    location: "午後的少棒球場", object: "磨出第一道摺痕的手套", characters: ["山本教練", "阿哲"], action: "你用鞋釘刮過紅土，才敢抬頭看向守備位置", emotion: "pride", silent: false,
+    memory: "太陽壓在帽簷上，灰塵黏住喉嚨；觀眾聲音忽遠忽近，只剩心跳和手套拍擊聲。",
+    text: "太陽壓在帽簷上，鞋釘揚起的灰塵黏住喉嚨。看臺的聲音忽遠忽近，你只聽見自己的心跳，以及阿哲拍了一下手套。那只手套終於磨出了第一道屬於你的摺痕。"
+  },
+  youth_match_mistake: {
+    id: "first_error_silence", title: "失誤後沒有滾走的球", category: "loss", chapter: "少棒第一季",
+    location: "一壘線旁的紅土", object: "沾著白線粉末的球", characters: ["阿哲"], action: "阿哲撿起球，先擦掉白粉才丟回來", emotion: "regret", silent: true,
+    memory: "沒有人立刻責怪你；比責罵更清楚的是球被擦乾淨後落回手套的重量。",
+    text: "球停在白線旁，沾了一圈粉末。阿哲沒有說話，只跑過去撿起來，用拇指擦掉白粉，再把球丟回你的手套。那一聲比任何責罵都清楚。"
+  },
+  starter_selection_test: {
+    id: "takahashi_first_duel", title: "第一次和高橋對決", category: "competition", chapter: "位置競爭",
+    location: "練習結束後的內野", object: "高橋丟回來的測試球", characters: ["高橋", "山本教練"], action: "高橋抬腿、轉肩，乾脆地把球送向你", emotion: "fear", silent: true,
+    memory: "高橋沒有挑釁。球落進手套的啪聲，把兩人之間的沉默切成了競爭。",
+    text: "高橋抬腿、轉肩，動作沒有多餘的停頓。球筆直鑽進你的手套——啪。沒有人說話，他只是攤開手掌，等你把同一顆球丟回去。"
+  },
+  junior_friend_exit: {
+    id: "last_practice_with_azhe", title: "畢業前最後一次一起練球", category: "farewell", chapter: "青少棒分化",
+    location: "夕陽下的空球場", object: "畫著兩人暗號的球", characters: ["阿哲"], action: "阿哲把最後一顆滾地球停在鞋邊，沒有立刻撿起", emotion: "loss", silent: true,
+    relationshipMoments: { azhe: "farewell" }, memory: "夕陽把兩人的影子拉過二游之間；器材都收完了，球場第一次顯得那麼空。",
+    text: "器材車已經推走，空球場只剩夕陽把影子拉過二游之間。阿哲把最後一顆滾地球停在鞋邊，沒有立刻撿起。球上還留著你們以前畫下的暗號。"
+  },
+  junior_pain: {
+    id: "first_pain_under_lamp", title: "第一次不敢抬起手臂", category: "injury", chapter: "青少棒球季",
+    location: "關燈前的休息區", object: "貼歪的舊護腕", characters: ["山本教練"], action: "你試著抬手，最後只把護腕重新拉緊", emotion: "fear", silent: true,
+    memory: "燈一盞盞熄掉，教練看著你的肩膀，等你決定要不要說實話。",
+    text: "球場的燈一盞盞熄掉。你試著抬起手臂，疼痛讓動作停在一半，只好把貼歪的護腕重新拉緊。山本教練站在出口，沒有催問。"
+  },
+  high_school_long_bench: {
+    id: "old_number_on_bench", title: "背號在板凳上變舊", category: "loss", chapter: "青棒第一年",
+    location: "高中球場的板凳末端", object: "逐漸褪色的舊背號", characters: ["高橋"], action: "你把掌心壓在膝上的背號，聽見先發名單被念完", emotion: "regret", silent: true,
+    memory: "沒被叫到名字之後，高橋從場內看了你一眼，隨即把帽簷壓低。",
+    text: "先發名單念完時，你的名字沒有出現。膝上的球衣背號已經洗得褪色，你用掌心把它壓平。高橋從場內看了你一眼，沒有揮手，只把帽簷壓低。"
+  },
+  critical_farewell: {
+    id: "last_high_school_locker", title: "最後一次收拾高中置物櫃", category: "farewell", chapter: "高中關鍵年",
+    location: "比賽後的更衣室", object: "裂開一小段的舊球棒", characters: ["阿哲", "高橋", "山本教練"], action: "你依序拿出球衣、球棒、手套和壓在最底下的獎狀", emotion: "loss", silent: true,
+    relationshipMoments: { azhe: "farewell", takahashi: "farewell", yamamoto: "farewell" }, memory: "櫃子空了以後，比裝滿時更像一段人生；門關上的金屬聲沒有人接話。",
+    text: "你從置物櫃依序拿出球衣、裂開一小段的球棒、磨損的手套，以及壓在最底下的獎狀。阿哲靠著門，高橋站在走廊，山本教練只把鑰匙放在長椅上。櫃門關上的金屬聲後，沒有人接話。"
+  },
+  transition_checkpoint: {
+    id: "new_locker_old_glove", title: "把舊手套放進新的置物櫃", category: "dream", chapter: "生涯轉換",
+    location: "新組織的陌生更衣室", object: "磨損的手套", characters: ["新隊友"], action: "你把舊手套放進空櫃，留下旁邊一大塊空位", emotion: "hope", silent: true,
+    memory: "新的櫃子沒有名字，舊手套卻保留所有接過的球；你第一次知道離開也有重量。",
+    text: "新置物櫃沒有名字，裡面只亮著冷白色的燈。你把磨損的手套放進去，旁邊仍空了一大塊。路過的新隊友看了一眼手套上的舊記號，沒有追問。"
+  },
+  development_opportunity: {
+    id: "return_to_field", title: "重新走回被需要的位置", category: "rebirth", chapter: "發展期",
+    location: "清晨尚未開放的球場", object: "洗到起毛的護腕", characters: ["高橋", "山本教練"], action: "你把護腕拉緊，踩過當年以為不會再碰到的白線", emotion: "relief", silent: true,
+    memory: "草上的水氣沾上鞋尖；這次沒有掌聲，只有有人把球放進你手裡。",
+    text: "清晨的球場還沒開放，草上的水氣沾上鞋尖。你把洗到起毛的護腕拉緊，踩過當年以為不會再碰到的白線。沒有人鼓掌；山本教練只是把球放進你手裡，高橋往自己的位置走去。"
+  },
+  echo_teammate: { id: "azhe_shared_laugh", title: "和阿哲把失誤練成笑話", category: "friendship", chapter: "位置競爭", location: "練習後的球場", object: "畫著暗號的球", characters: ["阿哲"], action: "阿哲模仿自己漏接的動作，終於先笑出聲", emotion: "joy", silent: false, relationshipBeat: "joy", relationshipMoments: { azhe: "joy" }, memory: "你們第一次能笑著談一顆曾經害怕的球。", text: "阿哲模仿自己漏接時僵住的動作，誇張得連帽子都掉了。你們第一次能笑著談那顆曾經害怕的球。" },
+  azhe_bond_low: { id: "azhe_distance_line", title: "二游之間看不見的線", category: "friendship", chapter: "位置競爭", location: "二游防區", object: "沒有喊聲的練習球", characters: ["阿哲"], action: "阿哲把球撿起後直接交給教練", emotion: "regret", silent: true, relationshipBeat: "conflict", relationshipMoments: { azhe: "conflict" }, memory: "兩人的守備範圍重疊，眼神卻不再交會。", text: "一顆球停在你和阿哲中間。你們都走了一步，又同時停下；最後他撿起球，直接交給教練。" },
+  echo_rival_respect: { id: "takahashi_quiet_respect", title: "高橋第一次留下等你", category: "competition", chapter: "位置競爭", location: "暮色裡的傳接球區", object: "高橋的練習球", characters: ["高橋"], action: "高橋把自己的球袋放回地面", emotion: "pride", silent: true, relationshipBeat: "joy", relationshipMoments: { takahashi: "joy" }, memory: "他沒有稱讚你，只多留了十球。", text: "其他人離開後，高橋原本已背起球袋，卻又把它放回地面。他沒有稱讚你，只抬起手套，示意再來十球。" },
+  echo_rival: { id: "takahashi_conflict_throw", title: "高橋不肯放慢的那一球", category: "competition", chapter: "位置競爭", location: "傳接球線", object: "擦過手套邊緣的球", characters: ["高橋"], action: "高橋接回球後立刻加快下一次出手", emotion: "fear", silent: true, relationshipBeat: "conflict", relationshipMoments: { takahashi: "conflict" }, memory: "球擦過手套，高橋連一句道歉也沒有。", text: "球擦過你的手套邊緣，滾出傳接球線。高橋等你撿回來，接球後立刻用更快的動作丟出下一顆。" },
+  junior_coach_disagreement: { id: "yamamoto_closed_notebook", title: "山本教練闔上的筆記本", category: "competition", chapter: "青少棒分化", location: "教練室門口", object: "山本教練的舊筆記本", characters: ["山本教練"], action: "教練聽完你的反對，把筆記本慢慢闔上", emotion: "regret", silent: true, relationshipBeat: "conflict", relationshipMoments: { yamamoto: "conflict" }, memory: "你第一次發現信任也容得下不同意。", text: "山本教練聽完後沒有立刻回答。他把寫滿守位記號的舊筆記本慢慢闔上，指尖停在封面，才重新看向你。" },
+  transition_relationship: { id: "three_people_reunion", title: "多年後同一顆球又回到手裡", category: "rebirth", chapter: "生涯轉換", location: "舊球場外側", object: "畫著歪斜記號的球", characters: ["阿哲", "高橋", "山本教練"], action: "那顆球在三人之間傳了一圈，最後回到你手裡", emotion: "gratitude", silent: true, relationshipBeat: "reunion", relationshipMoments: { azhe: "reunion", takahashi: "reunion", yamamoto: "reunion" }, memory: "大家都變了，接球的聲音卻和以前一樣。", text: "阿哲先把球拋給高橋，高橋再送到山本教練手裡。那顆畫著歪斜記號的球繞了一圈，最後落回你的掌心。大家都變了，接球的聲音卻和以前一樣。" },
+  development_mentor: { id: "yamamoto_reunion_glance", title: "教練再一次看見現在的你", category: "rebirth", chapter: "發展期", location: "看臺最下排", object: "山本教練的舊筆記本", characters: ["山本教練"], action: "教練翻到多年前那頁，又安靜地闔上", emotion: "gratitude", silent: true, relationshipBeat: "reunion", memory: "那頁寫的是以前的你，教練看著的卻是現在。", text: "山本教練翻開舊筆記本，找到多年前寫著你名字的那頁。他看了幾秒，又安靜地闔上。那頁記的是以前的你，他看著的卻是現在。" }
+};
+
+function recordSymbolObject(title, sceneId) {
+  if (!title) return false;
+  const id = title.replace(/\s+/g, "_");
+  const existing = player.symbolObjects.find(item => item.id === id);
+  if (existing) {
+    if (!existing.scenes.includes(sceneId)) existing.scenes.push(sceneId);
+    return false;
+  }
+  player.symbolObjects.push({ id, title, firstScene: sceneId, scenes: [sceneId], remembered: true });
+  return true;
+}
+
+function recordSignatureScene(data = {}) {
+  if (!data.id || player.signatureScenes.some(item => item.id === data.id)) return false;
+  const scene = {
+    id: data.id, title: data.title || data.id, age: Number(data.age ?? player.age) || 0,
+    category: data.category || "dream", chapter: data.chapter || player.chapter,
+    memory: data.memory || "", object: data.object || "", characters: data.characters || [],
+    location: data.location || "", action: data.action || "", emotion: data.emotion || "hope",
+    silent: Boolean(data.silent), relationshipBeat: data.relationshipBeat || "", relationshipMoments: data.relationshipMoments || {}, remembered: data.remembered !== false
+  };
+  player.signatureScenes.push(scene);
+  recordSymbolObject(scene.object, scene.id);
+  return true;
+}
+
+function getSignatureSceneText(eventId) {
+  const scene = signatureSceneLibrary[eventId];
+  if (!scene) return "";
+  recordSignatureScene(scene);
+  return `【記憶場景｜${scene.title}】\n${scene.text}`;
+}
+
+function hasLifeEvent(id) {
+  return Boolean(rememberLifeEvent(id));
+}
+
+function getRevisitSceneText(eventId) {
+  if (eventId === "transition_checkpoint" && hasLifeEvent("first_appearance")) return "你摸到手套第一道摺痕，想起第一次上場時，連手套都戴得不太自然。";
+  if (eventId === "development_opportunity" && hasLifeEvent("first_lost_position")) return "白線就在腳下。你想起第一次失去先發時，曾以為離開位置就等於離開棒球。";
+  if (eventId === "transition_relationship" && hasLifeEvent("azhe_goodbye")) return "你又看見那顆畫著暗號的球。阿哲離開那天，它也曾留在空球場上。";
+  return "";
+}
+
+function auditSceneQuality() {
+  const required = ["location", "characters", "action", "object", "emotion", "memory"];
+  const missing = Object.fromEntries(required.map(key => [key, []]));
+  player.signatureScenes.forEach(scene => required.forEach(key => {
+    const value = scene[key];
+    if (!value || (Array.isArray(value) && !value.length)) missing[key].push(scene.id);
+  }));
+  return {
+    total: player.signatureScenes.length,
+    missingObjects: missing.object,
+    missingCharacters: missing.characters,
+    missingActions: missing.action,
+    missingMemoryPoints: missing.memory,
+    missing
+  };
+}
+
+function auditEmotionalDensity() {
+  const chapters = [...new Set(Object.values(signatureSceneLibrary).map(scene => scene.chapter))];
+  return chapters.map(chapter => {
+    const scenes = player.signatureScenes.filter(scene => scene.chapter === chapter);
+    const objectIds = new Set(scenes.map(scene => scene.object).filter(Boolean));
+    const result = {
+      chapter,
+      signatureScenes: scenes.length,
+      memorableScenes: scenes.filter(scene => scene.remembered && scene.memory).length,
+      symbolObjects: objectIds.size,
+      silentMoments: scenes.filter(scene => scene.silent).length,
+      npcUniqueReactions: scenes.filter(scene => scene.characters.length && (scene.action || scene.relationshipBeat)).length
+    };
+    result.meetsTarget = result.signatureScenes >= 1 && result.memorableScenes >= 1 && result.symbolObjects >= 1 && result.silentMoments >= 1 && result.npcUniqueReactions >= 1;
+    return result;
+  });
 }
 
 function applyFinanceEffects(effects = {}) {
@@ -1758,7 +2088,15 @@ function showStory(eventId) {
   updateGoals(eventId);
   refreshStartingCompetition();
   player.lastEventTitle = event.title;
-  const text = typeof event.text === "function" ? event.text() : event.text;
+  let text = typeof event.text === "function" ? event.text() : event.text;
+  const chapterEnding = generateChapterEndingScene(eventId);
+  const replayEcho = eventId === "day1_morning" ? getReplayMemoryEcho() : "";
+  const signatureScene = getSignatureSceneText(eventId);
+  const revisitScene = getRevisitSceneText(eventId);
+  if (signatureScene) text += `\n\n${signatureScene}`;
+  if (revisitScene) text += `\n\n【往日回聲】\n${revisitScene}`;
+  if (chapterEnding) text += `\n\n${chapterEnding}`;
+  if (replayEcho) text += `\n\n${replayEcho}`;
   const matchHud = eventId.startsWith("youth_match_") ? renderMatchHud() : "";
   document.getElementById("story").innerHTML = `<article class="event-card">${matchHud}<div class="event-kicker">${escapeHtml(getTimeLabel())}</div><h2>${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div></article>`;
   document.getElementById("choices").innerHTML = event.choices.map((choice, index) => `<button type="button" onclick="choose('${eventId}', ${index})">${escapeHtml(choice.text)}</button>`).join("");

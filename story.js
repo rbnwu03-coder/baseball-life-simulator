@@ -1128,7 +1128,7 @@ const developmentEvents = {
   development_result: {
     title: "二十二歲職涯評估",
     text() {
-      return `${player.developmentResult}\n\n${player.developmentDetail}\n\n市場結果：${player.marketOutcome}\n目前角色：${player.roleIdentity.primary || player.organizationRole}\n過去角色：${player.roleIdentity.previous.join(" → ") || "尚無"}\n生涯階段：${player.careerArc.stage}\n生涯價值：目前 ${player.careerValue.current}／最高 ${player.careerValue.peak}／最低 ${player.careerValue.minimum}\n\n${generateCareerSummary()}\n\n這一生反覆回到的問題，是${getLifeThemeSummary()}。\n${getCallbackNarrative()}\n\n二十二歲不是所有人生的選秀終點，卻是第一次必須同時回答棒球與生活能否繼續的年紀。`;
+      return `${player.developmentResult}\n\n${player.developmentDetail}\n\n市場結果：${player.marketOutcome}\n目前角色：${player.roleIdentity.primary || player.organizationRole}\n過去角色：${player.roleIdentity.previous.join(" → ") || "尚無"}\n生涯階段：${player.careerArc.stage}\n生涯價值：目前 ${player.careerValue.current}／最高 ${player.careerValue.peak}／最低 ${player.careerValue.minimum}\n\n${generateCareerSummary()}\n\n人生記憶：\n${generateLifeStory()}\n\n這一生反覆回到的問題，是${getLifeThemeSummary()}。\n${getCallbackNarrative()}\n\n二十二歲不是所有人生的選秀終點，卻是第一次必須同時回答棒球與生活能否繼續的年紀。`;
     },
     choices: [
       { text: "完成二十二歲發展期測試", completeSlice: true },

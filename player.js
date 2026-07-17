@@ -1,4 +1,4 @@
-const SAVE_VERSION = 9;
+const SAVE_VERSION = 10;
 
 function createInitialPlayer(name = "") {
   return {
@@ -27,6 +27,14 @@ function createInitialPlayer(name = "") {
     careerArc: { stage: "emerging", peaks: 0, valleys: 0, reinventions: 0, lostRole: "" },
     turningPoints: [],
     marketEvaluation: { offense: 0, defense: 0, utility: 0, leadership: 0, health: 0 },
+    lifeEvents: [],
+    emotionalPeaks: [],
+    lowPoints: [],
+    npcEmotionalCallbacks: [],
+    chapterEndings: [],
+    replayMemories: [],
+    signatureScenes: [],
+    symbolObjects: [],
     forcedEventId: "",
     startingCompetition: {
       active: false,
