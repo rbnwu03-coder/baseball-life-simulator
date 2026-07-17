@@ -2,6 +2,39 @@
     box-sizing:border-box;
 }
 
+.story-bridge-in,
+.story-bridge-out {
+  margin: 12px 0;
+  padding: 10px 12px;
+  border-left: 3px solid rgba(87, 122, 163, 0.45);
+  color: #536579;
+  background: rgba(231, 238, 246, 0.58);
+  white-space: pre-line;
+}
+
+.story-bridge-out {
+  border-left-color: rgba(191, 125, 55, 0.55);
+  background: rgba(250, 240, 223, 0.64);
+}
+
+.story-bridge-in small,
+.story-bridge-out small {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.relationship-payoff-notice{
+    margin-top:8px;
+    padding:9px 11px;
+    border-left:4px solid #d89b3c;
+    border-radius:6px;
+    background:#fff4d8;
+    color:#65420d;
+    font-weight:700;
+}
+
 body{
     margin:40px;
     font-family:"Noto Sans TC", "Microsoft JhengHei", sans-serif;

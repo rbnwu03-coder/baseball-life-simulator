@@ -388,7 +388,7 @@ function resolveGoal(id, status, message = "") {
   if (!goal || goal.status !== "active") return false;
   if (status === "completed") return completeGoal(id, message);
   goal.status = status;
-  const label = status === "success" ? "成功" : status === "partial" ? "部分成功" : status === "failed" ? "未完成" : "目標更新";
+  const label = status === "success" ? "成功" : status === "partial" ? "部分成功" : status === "failed" ? "尚未形成" : "目標更新";
   pushGoalProgress(goal, message || `${label}：${goal.title}`, status === "success" ? "success" : status === "partial" ? "partial" : status === "failed" ? "failed" : "progress");
   return true;
 }
@@ -397,7 +397,7 @@ function hasCompletedGoal(id) { return Boolean(player.goalState?.completedGoals?
 
 function getGoalProgressText(goal) {
   if (!goal) return "尚未設定";
-  const labels = { active: `${goal.current}／${goal.target}`, completed: "完全成功", success: "成功", partial: "部分成功", failed: "未完成", expired: "已結束" };
+  const labels = { active: `${goal.current}／${goal.target}`, completed: "完全成功", success: "成功", partial: "部分成功", failed: "尚未形成", expired: "已結束" };
   return labels[goal.status] || goal.status;
 }
 
@@ -851,9 +851,10 @@ function showStatChanges(before, after, memory = "") {
   });
   const goalFeedback = consumeGoalFeedback();
   const goalHtml = goalFeedback.map(item => `<div class="${item.type === "complete" ? "goal-complete" : item.type === "success" ? "goal-success" : item.type === "partial" ? "goal-partial" : item.type === "failed" ? "goal-failed" : "goal-progress-change"}">${escapeHtml(item.message)}</div>`).join("");
+  const payoffHtml = consumeRelationshipPayoffFeedback().map(message => `<div class="relationship-payoff-notice">${escapeHtml(message)}</div>`).join("");
   document.getElementById("changeLog").innerHTML = `
     ${memory ? `<div class="memory-line">${escapeHtml(memory)}</div>` : ""}
-    <div>${changes.length ? changes.join("") : "<span class='neutral-change'>這個選擇留下了記憶，而不是數值。</span>"}</div>${goalHtml}`;
+    <div>${changes.length ? changes.join("") : "<span class='neutral-change'>這個選擇留下了記憶，而不是數值。</span>"}</div>${goalHtml}${payoffHtml}`;
 }
 
 function showNotice(message, type = "neutral") {
@@ -930,6 +931,10 @@ function choose(eventId, index) {
   if (choice.resolveStartingCompetition) resolveStartingCompetition();
   processCareerArcEvent(eventId, choice);
   processEmotionalEvent(eventId, choice);
+  processRelationshipPayoffs(eventId);
+  processAspirationEvent(eventId, choice);
+  recordContinuityOutcome(choice.continuityOutcome || createContinuityOutcome(eventId, choice));
+  advanceNarrativeThread(eventId, choice);
   showStatChanges(before, getPlayerSnapshot(), choice.memory);
 
   if (choice.resolveStartingCompetition) {
@@ -1041,6 +1046,9 @@ function enterCareerTransition() {
   applyChapterBreather();
   player.chapter = "生涯轉換期";
   player.transitionStep = 0;
+  const routeKey = getAdultRouteKey();
+  const routeThread = adultNarrativeChains[routeKey];
+  startNarrativeThread({ ...routeThread, route: routeKey });
   if (!player.roleIdentity.primary) changeRoleIdentity(inferRoleIdentity(), "高中階段形成第一個可被市場描述的角色");
   player.careerArc.stage = player.roleIdentity.primary ? "established" : "emerging";
   updateCareerValue();
@@ -1053,6 +1061,14 @@ function enterDevelopmentYears() {
   player.chapter = "發展期";
   player.age = 20;
   player.developmentStep = 0;
+  const routeKey = getAdultRouteKey();
+  startNarrativeThread({
+    id: `${routeKey}_role_revaluation`, route: routeKey,
+    title: routeKey === "rehab" ? "用新方法回到比賽" : "下一種用途開始有形狀",
+    question: routeKey === "draft" ? "名單調整前，你能讓哪一種用途變得不可忽略？" : routeKey === "college" ? "調整節奏後，你能用哪一場表現重新進入球探視野？" : routeKey === "amateur" ? "工作與棒球並行時，你願意為哪一次晚成機會保留時間？" : "改變打法後，哪一項新任務能讓你再次參與比賽？",
+    totalBeats: developmentNarrativeEvents.length,
+    tensions: ["下一次比較將看見你能提供的新用途"]
+  });
   if (!player.roleIdentity.primary) changeRoleIdentity(inferRoleIdentity(), "進入二十歲發展期時建立初始組織角色");
   player.careerArc.stage = "established";
   updateCareerValue({ trend: "stable" });
@@ -1214,6 +1230,17 @@ function processCareerArcEvent(eventId, choice) {
     updateCareerValue({ delta: 7, trend: "rising" });
     return;
   }
+  if (eventId === "transition_checkpoint") {
+    let nextRole = inferRoleIdentity();
+    if (hasFlag("pro_accepted_utility_test") || hasFlag("college_reset_positions") || hasFlag("amateur_presented_profile") || hasFlag("rehab_changed_style")) nextRole = "工具人";
+    if (hasFlag("pro_fought_for_bats") || hasFlag("amateur_showed_ceiling")) nextRole = "打擊型球員";
+    if (hasFlag("pro_showed_primary_tool") || hasFlag("amateur_showed_floor")) nextRole = player.seasonPosition === "捕手" ? "捕手核心" : player.seasonPosition === "投手" ? "短局投手" : "守備後段專家";
+    if (hasFlag("rehab_helped_youth")) nextRole = "場上組織者";
+    changeRoleIdentity(nextRole, "新組織把前兩幕的選擇整理成第一次有限任務");
+    addTurningPoint(`transition_role_${getAdultRouteKey()}`, `第一次以「${nextRole}」接受新組織測試`, "前一回的選擇改變了本回的任務內容");
+    updateCareerValue({ delta: 2, trend: "rising" });
+    return;
+  }
   if (eventId === "development_competition") {
     const failures = { "守備專家": "隊伍補進更年輕、範圍更大的守備者", "工具人": "新教練要求每名球員證明一項專精", "打擊型球員": "長打與擊球品質停滯", "代打": "球隊需要能同時守備的板凳席", "捕手核心": "年輕捕手開始分走配球與先發局數", "中繼投手": "球速與恢復速度不再形成優勢", "速度型球員": "純代跑名額被壓縮", "板凳領袖": "領導力無法單獨保住球員名額" };
     invalidateCurrentRole(failures[player.roleIdentity.primary] || "新競爭者讓原有用途失去稀缺性");
@@ -1251,9 +1278,9 @@ function processCareerArcEvent(eventId, choice) {
 
 function getCareerArcNpcEcho() {
   if (player.careerArc.stage === "declining") {
-    if (player.characterArc.azhe === "best_friend" || player.impression.azhe.trusts >= 4) return "阿哲說：『以前的你一定會硬撐，但現在你可以先想清楚要留下什麼。』";
-    if (player.relationships.rivalRespect >= 6) return "高橋說：『每個人都有被追上的一天。下一次比的是你怎麼改。』";
-    return "山本教練說：『不是每次失去位置，都代表你變差。有時只是球隊不再需要同一種答案。』";
+    if (player.characterArc.azhe === "best_friend" || player.impression.azhe.trusts >= 4) return "阿哲說：『先別急著證明以前的你。你現在最想把哪一件事做好？我可以陪你試一次。』";
+    if (player.relationships.rivalRespect >= 6) return "高橋說：『下一次測試，我會看你能不能把新的做法帶進比賽。』";
+    return "山本教練說：『你讀球和補位的經驗還在。下一次先證明，你能不能把它變成另一個守位的答案。』";
   }
   if (player.careerArc.stage === "reinvented") return "山本教練看完新任務表，只說：『這不是退而求其次，是你重新證明自己能解決什麼。』";
   return "山本教練仍在觀察：一項能力要反覆轉成場上用途，才會成為真正的角色。";
@@ -1264,9 +1291,9 @@ function generateCareerSummary() {
   const lost = player.turningPoints.find(point => point.id.startsWith("role_lost_"));
   const needed = player.turningPoints.find(point => point.id === "needed_again");
   const opening = roles.length > 1 ? `你曾是${roles[0]}，後來轉型為${roles[roles.length - 1]}。` : roles.length ? `你逐漸成為${roles[0]}。` : "你的球員角色直到最後仍沒有完全定型。";
-  const fall = lost ? `${lost.title}，${lost.impact}。` : "你沒有遭遇劇烈的角色崩解，但每次評估都迫使你重新證明用途。";
-  const rebound = needed ? `${needed.title}：${needed.impact}。` : "你仍在尋找下一種能讓球隊需要你的方法。";
-  return `${opening}\n${fall}\n${rebound}\n生涯價值最高 ${player.careerValue.peak}、最低 ${player.careerValue.minimum}，最後趨勢為${({ rising: "上升", stable: "持平", declining: "下降", rebound: "回升" })[player.careerValue.trend] || "持平"}。`;
+  const change = lost ? `${lost.title}之後，你不再只追著原本的定位，而開始試著把經驗帶去新的任務。` : "每次評估都讓你更清楚，自己想用哪一種方式參與比賽。";
+  const possibility = needed ? `${needed.title}：${needed.impact}。` : `下一步仍很具體：${getCurrentAspiration().nextPossibility || "把現有工具轉成一次能被看見的場上任務"}。`;
+  return `${opening}\n${change}\n${possibility}\n你曾經追求的不是一條直線，而是一連串可以實際嘗試的角色；目前的生涯走勢是${({ rising: "正在上升", stable: "穩定累積", declining: "等待下一次調整", rebound: "重新被看見" })[player.careerValue.trend] || "穩定累積"}。\n紀錄中的最高市場評估為 ${player.careerValue.peak}、最低為 ${player.careerValue.minimum}；它們是軌跡，不是人生結論。`;
 }
 
 const REPLAY_MEMORY_KEY = "baseballLifeReplayMemories";
@@ -1326,9 +1353,9 @@ function recordNpcEmotionalCallback(npc, eventId, text, chapter = player.chapter
 }
 
 function getNpcEmotionalCallback(npc) {
-  if (npc === "azhe" && (rememberLifeEvent("azhe_goodbye") || rememberLifeEvent("azhe_stayed"))) return "阿哲低聲說：『那天如果不是你，我可能已經放棄棒球。』";
-  if (npc === "takahashi" && rememberLifeEvent("first_starting_test")) return "高橋說：『我第一次覺得你是對手，就是那場測試。』";
-  if (npc === "yamamoto" && rememberLifeEvent("first_appearance")) return "山本教練說：『我一直記得你第一次站上場時的樣子。』";
+  if (npc === "azhe" && (rememberLifeEvent("azhe_goodbye") || rememberLifeEvent("azhe_stayed"))) return "阿哲說：『我最近也找到想做的事了。下次見面，我想看看我們各自走到了哪裡。』";
+  if (npc === "takahashi" && rememberLifeEvent("first_starting_test")) return "高橋說：『下一次別只跟我比結果。把你現在最有把握的工具帶來。』";
+  if (npc === "yamamoto" && rememberLifeEvent("first_appearance")) return `山本教練說：『我第一次看你上場時，就注意到你會${player.observe >= player.instinct ? "先看懂球怎麼走" : "在球到以前先動起來"}。那可能是你下一個角色的起點。』`;
   return "";
 }
 
@@ -1390,12 +1417,15 @@ function generateChapterEndingScene(eventId) {
   if (!reaction) reaction = npc === "azhe" ? "阿哲看了你一眼，像是想把這一章的你記住。" : npc === "takahashi" ? "高橋沒有安慰你，只說下次會再看你怎麼回答。" : "山本教練沒有只談結果，他提醒你別忘了自己是怎麼走到這裡。";
   recordNpcEmotionalCallback(npc, eventId, reaction, chapter);
   if (!player.chapterEndings.some(item => item.id === eventId)) player.chapterEndings.push({ id: eventId, chapter, memoryId: memory?.id || "", npc, age: player.age });
-  return `章末記憶：\n${memory ? `你會記得「${memory.title}」。` : "這一章仍留下了一個你說不清楚的感覺。"}\n\n人物回應：\n${reaction}\n\n這一章留下的不只是評價，也留下了下一次必須回答的問題。`;
+  const aspiration = getCurrentAspiration();
+  return `章末記憶：\n${memory ? `你會記得「${memory.title}」。` : "這一章仍留下了一個你說不清楚的感覺。"}\n\n人物回應：\n${reaction}\n\n這一階段追過的事：\n${aspiration.current || chapterAspirationGuide[chapter]?.current || "找到下一個能參與棒球的方法"}\n\n下一個可以期待的具體時刻：\n${getHopeHook(eventId).text}`;
 }
 
 function getReplayMemoryEcho() {
   const memory = player.replayMemories?.[0];
-  return memory ? `前一段人生的回聲：\n你曾經也是這樣選擇。那一世，你記得的是「${memory.title}」。` : "";
+  return memory ? memory.type === "aspiration"
+    ? `前一段人生的回聲：\n你曾經追過「${memory.title}」。那一世留下的不是答案，而是「${memory.nextPossibility}」。`
+    : `前一段人生的回聲：\n你曾經也是這樣選擇。那一世，你記得的是「${memory.title}」。` : "";
 }
 
 function loadReplayMemories() {
@@ -1403,7 +1433,9 @@ function loadReplayMemories() {
 }
 
 function archiveReplayMemory() {
-  const memories = [...player.lifeEvents].filter(item => item.remembered).sort((a, b) => b.importance - a.importance || a.age - b.age).slice(0, 5);
+  const pursuits = [...(player.aspirationMoments || [])].sort((a, b) => (b.age || 0) - (a.age || 0)).slice(0, 3).map(item => ({ id: `aspiration_${item.id}`, type: "aspiration", title: item.desire || item.title, nextPossibility: item.possibility || "換一種方法再靠近一次", age: item.age, importance: 6 }));
+  const life = [...player.lifeEvents].filter(item => item.remembered).sort((a, b) => b.importance - a.importance || a.age - b.age);
+  const memories = [...pursuits, ...life].filter((item, index, all) => all.findIndex(other => other.id === item.id) === index).slice(0, 5);
   try { localStorage.setItem(REPLAY_MEMORY_KEY, JSON.stringify(memories)); } catch (_) {}
   return memories;
 }
@@ -1419,11 +1451,16 @@ function getMostImportantPerson() {
 
 function generateLifeStory() {
   const events = [...player.lifeEvents].filter(item => item.remembered).sort((a, b) => b.importance - a.importance || a.age - b.age).slice(0, 5);
+  const pursuits = [...(player.aspirationMoments || [])].sort((a, b) => (a.age || 0) - (b.age || 0));
+  const fulfilled = pursuits.filter(item => item.status === "fulfilled");
+  const redirected = pursuits.filter(item => item.status === "redirected");
   const peak = [...player.emotionalPeaks].sort((a, b) => emotionLevelRank[b.level] - emotionLevelRank[a.level] || b.importance - a.importance)[0];
   const low = [...player.lowPoints].sort((a, b) => b.importance - a.importance)[0];
-  const turning = player.turningPoints.find(item => item.id === "needed_again") || player.turningPoints.find(item => item.id.startsWith("role_lost_")) || player.turningPoints[0];
   const list = events.length ? events.map(item => `${item.age} 歲｜${item.title}`).join("\n") : "還沒有足以寫進人生傳記的事件。";
-  return `你最重要的五件事：\n${list}\n\n最大高峰：${peak?.title || "仍在等待"}\n最大低谷：${low?.title || "尚未留下"}\n最重要的人：${getMostImportantPerson()}\n改變人生的轉折：${turning?.title || "尚未發生"}\n\n${low ? `${low.age} 歲時，你經歷了「${low.title}」。\n${low.impact}` : ""}${peak ? `\n但你後來也記住了「${peak.title}」。` : ""}`;
+  const pursuitList = pursuits.length ? pursuits.slice(-5).map(item => `${item.age} 歲｜想要${item.desire}｜${getAspirationOutcome(item)}`).join("\n") : "你仍在替第一個具體追求命名。";
+  const current = getCurrentAspiration();
+  const payoff = [...(player.relationshipPayoffs || [])].reverse().find(item => item.resolved && !item.absence);
+  return `你一路追過的事：\n${pursuitList}\n\n曾經做到的：${fulfilled.length ? fulfilled.map(item => item.desire).join("、") : "還在累積第一次明確完成"}\n改變方式後仍保留的：${redirected.length ? redirected.map(item => item.desire).join("、") : "目前沒有被迫放棄的追求"}\n最重要的人：${getMostImportantPerson()}\n人物關係實際改變生涯：${payoff ? `${payoff.title}，${payoff.impact || payoff.effect}` : "這一輪沒有任何舊關係直接打開入口，你靠當期組織提出的新條件繼續前進。"}\n\n現在仍想追的事：${current.current || "找到能長久參與棒球的位置"}\n下一個可以期待的具體時刻：${current.nextPossibility || "下一次有人把球交到你手裡"}\n\n你最重要的五件事：\n${list}\n\n情緒記錄索引：\n最大高峰：${peak?.title || "仍在等待"}\n最大低谷：${low?.title || "尚未留下"}`;
 }
 
 function auditEmotion() {
@@ -1525,8 +1562,18 @@ function recordSymbolObject(title, sceneId) {
     if (!existing.scenes.includes(sceneId)) existing.scenes.push(sceneId);
     return false;
   }
-  player.symbolObjects.push({ id, title, firstScene: sceneId, scenes: [sceneId], remembered: true });
+  player.symbolObjects.push({ id, title, firstScene: sceneId, scenes: [sceneId], remembered: true, meaning: getSymbolObjectMeaning(title) });
   return true;
+}
+
+function getSymbolObjectMeaning(title = "") {
+  if (title.includes("置物櫃")) return "下一段尚未發生的生活，已經替你留下可以寫上名字的位置。";
+  if (title.includes("球衣")) return "不是證明你已經是球員，而是提醒你曾經想成為球員。";
+  if (title.includes("手套")) return "不只記得受傷或失誤，也記得你仍想再接住一球。";
+  if (title.includes("球棒")) return "不是逞強的證據，而是你曾相信下一次揮棒能改變角色。";
+  if (title.includes("背號")) return "不只屬於過去，也提醒你下一次想用什麼身分穿上它。";
+  if (title.includes("球")) return "這顆球記得你第一次靠近棒球，也把下一次傳回你手裡。";
+  return "它保存的不是結束，而是一個仍能重新解讀的起點。";
 }
 
 function recordSignatureScene(data = {}) {
@@ -1593,6 +1640,510 @@ function auditEmotionalDensity() {
     };
     result.meetsTarget = result.signatureScenes >= 1 && result.memorableScenes >= 1 && result.symbolObjects >= 1 && result.silentMoments >= 1 && result.npcUniqueReactions >= 1;
     return result;
+  });
+}
+
+const narrativeToneGuide = {
+  coreTheme: "人生只要仍看得見下一個值得追的事，就仍然在向前",
+  avoid: ["反覆強調被淘汰", "將失去位置描述為人格否定", "把傷病直接等同夢想破滅", "使用熱血雞湯式鼓勵", "讓每次轉型都像悲壯重生"],
+  prefer: ["具體而可達成的下一個期待", "現實限制中的新可能", "人物對未來的清醒想像", "小機會帶來的前進感", "不完美結果中的下一個入口"]
+};
+
+const chapterAspirationGuide = {
+  "十歲暑假": { current: "我也想碰到那顆球。", reason: "球場裡的聲音第一次讓棒球變得具體。", next: "下一次，我能不能真正走進球場？" },
+  "少棒入門": { current: "我想知道自己能不能成為球隊的一員。", reason: "穿上球衣不等於已經屬於球隊。", next: "教練會在什麼時候第一次叫到我的名字？" },
+  "少棒第一季": { current: "我想得到第一次正式上場的機會。", reason: "練習開始有了可以交付的任務。", next: "下一場比賽，球隊還會不會再把任務交給我？" },
+  "位置競爭": { current: "我想知道自己離先發還有多遠。", reason: "高橋是一個可以測量高度的對手，不是唯一目標。", next: "我能不能把一次機會變成固定用途？" },
+  "青少棒": { current: "我想知道身體和環境改變後，自己還能怎麼打球。", reason: "原本自然成立的動作開始需要重新理解。", next: "是否存在一個比原本守位更適合自己的入口？" },
+  "青少棒分化": { current: "我想找到一個願意讓自己繼續成長的高中環境。", reason: "學校不是獎品，而是下一段生活的條件。", next: "離開熟悉的人之後，我會遇到怎樣的棒球？" },
+  "青棒": { current: "我想在新的球隊裡找到第一個明確任務。", reason: "新環境還不知道該怎麼使用我。", next: "這個任務能不能成為別人記住自己的理由？" },
+  "青棒關鍵年": { current: "我想讓某一項能力真正換到下一個入口。", reason: "畢業讓能力必須對應到一個具體去處。", next: "畢業之後，棒球會以什麼形式繼續？" },
+  "生涯轉換期": { current: "我想知道新的環境願意怎麼使用我。", reason: "新的名單、課表、工作或復健安排都在重新描述球員用途。", next: "下一個環境會把什麼任務交到我手裡？" },
+  "發展期": { current: "我想知道自己還能走到哪裡。", reason: "角色不是終點，而是下一次嘗試的起點。", next: "下一個開始，會在哪一個具體位置逐漸成形？" }
+};
+
+const chapterResultHopeHooks = {
+  ending: { title: "下一個可以期待的事", text: "明天，球場邊還會有一顆球滾出界外。", source: "chapter_result" },
+  chapter2_result: { title: "下一個可以期待的事", text: "下週，山本教練會第一次按名字分配傳接球組。", source: "chapter_result" },
+  youth_season_result: { title: "下一個可以期待的事", text: "下一場比賽的任務表，仍有一格尚未寫上名字。", source: "chapter_result" },
+  competition_result: { title: "下一個可以期待的事", text: "三天後，教練會安排一次不同守位的測試。", source: "chapter_result" },
+  junior_result: { title: "下一個可以期待的事", text: "下個月的練習裡，有一組球會從新的守位開始。", source: "chapter_result" },
+  junior_season_result: { title: "下一個可以期待的事", text: "高中報到日，新的球場會第一次叫到你的名字。", source: "chapter_result" },
+  high_school_result: { title: "下一個可以期待的事", text: "下一次隊內賽，教練會把尚未固定的任務交給一名替補球員。", source: "chapter_result" },
+  critical_year_result: { title: "下一個可以期待的事", text: "畢業前，你會收到一份寫著具體條件的下一站通知。", source: "chapter_result" },
+  transition_result: { title: "下一個可以期待的事", text: "新置物櫃旁仍空著一個位置，下一次任務會決定名字寫在哪裡。", source: "chapter_result" },
+  development_result: { title: "下一個可以期待的事", text: "二十二歲不是答案，而是下一個開始第一次有了形狀。", source: "chapter_result" }
+};
+
+function getCurrentAspiration() {
+  const guide = chapterAspirationGuide[player.chapter] || {};
+  return Object.assign({ current: guide.current || "我想知道下一次能把什麼任務做好。", reason: guide.reason || "", nextPossibility: guide.next || "下一次事件會讓方向更具體。", sourceEventId: "", status: "active", worldResponse: "" }, player.aspirationState || {});
+}
+
+function setNextAspiration(current, options = {}) {
+  player.aspirationState = Object.assign({}, player.aspirationState || {}, {
+    current: current || getCurrentAspiration().current, reason: options.reason || player.aspirationState?.reason || "",
+    nextPossibility: options.nextPossibility || player.aspirationState?.nextPossibility || "",
+    sourceEventId: options.sourceEventId || "", status: options.status || "active",
+    worldResponse: options.worldResponse || player.aspirationState?.worldResponse || ""
+  });
+  return player.aspirationState;
+}
+
+function getAspirationOutcome(stateInput = null) {
+  const state = stateInput || player.aspirationState || {};
+  const statusText = { active: "這份期待仍在發展。", fulfilled: "原本期待的事情已開始成為現實。", redirected: "現實沒有照原本方向發展，但留下了另一個具體入口。", paused: "這份期待暫時停下，條件不足的部分已經變得清楚。" };
+  return `${statusText[state.status] || statusText.active}${state.worldResponse ? ` ${state.worldResponse}` : ""}`;
+}
+
+function getHopeHook(eventId = "") {
+  return chapterResultHopeHooks[eventId] || { title: "下一個可以期待的事", text: player.aspirationState?.nextPossibility || chapterAspirationGuide[player.chapter]?.next || "下一次事件會帶來一個更具體的問題。", source: player.aspirationState?.sourceEventId || eventId };
+}
+
+function recordAspirationMoment(data = {}) {
+  if (!data.id || player.aspirationMoments.some(item => item.id === data.id)) return false;
+  player.aspirationMoments.push({ id: data.id, title: data.title || data.id, age: Number(data.age ?? player.age) || 0, desire: data.desire || getCurrentAspiration().current, possibility: data.possibility || player.aspirationState?.nextPossibility || "", fulfilled: Boolean(data.fulfilled), status: data.status || "active", chapter: data.chapter || player.chapter });
+  return true;
+}
+
+function resolveAspirationMoment(id, status = "fulfilled", possibility = "") {
+  const moment = player.aspirationMoments.find(item => item.id === id);
+  if (!moment) return false;
+  moment.fulfilled = status === "fulfilled";
+  moment.status = status;
+  if (possibility) moment.possibility = possibility;
+  return true;
+}
+
+function getNextAspirationMemory() {
+  const moment = [...player.aspirationMoments].reverse().find(item => item.possibility || !item.fulfilled);
+  return moment ? `${moment.title}：${moment.possibility || moment.desire}` : player.aspirationState?.nextPossibility || "下一個期待尚未成形。";
+}
+
+function ensureChapterAspiration(eventId = "") {
+  const guide = chapterAspirationGuide[player.chapter];
+  if (!guide) return;
+  const chapterChanged = !player.aspirationState?.current || player.aspirationState.sourceEventId?.startsWith("chapter:") && player.aspirationState.sourceEventId !== `chapter:${player.chapter}`;
+  if (chapterChanged) setNextAspiration(guide.current, { reason: guide.reason, nextPossibility: guide.next, sourceEventId: `chapter:${player.chapter}`, status: "active", worldResponse: "" });
+  if (chapterResultHopeHooks[eventId]) player.aspirationState.nextPossibility = chapterResultHopeHooks[eventId].text;
+}
+
+function processAspirationEvent(eventId, choice = {}) {
+  const memory = choice.memory || "世界給出了具體回應。";
+  const moments = {
+    day1_morning: ["first_touch_desire", "第一次想碰到那顆球", "真正走進球場"],
+    chapter2_intro: ["first_team_desire", "第一次想成為球隊的一員", "教練第一次按名字分組"],
+    youth_match_entry: ["first_game_desire", "第一次期待正式上場", "下一場再次得到任務"],
+    competition_intro: ["starter_distance_desire", "第一次想知道自己離先發多遠", "把一次機會變成固定用途"],
+    junior_position_change: ["new_position_desire", "第一次發現新守位可能更適合自己", "在新守位完成正式任務"],
+    junior_friend_exit: ["azhe_next_life", "第一次和阿哲交換各自下一步", "彼此知道對方最近正在追什麼"],
+    high_school_role: ["first_high_school_task", "第一次期待高中球隊交付任務", "讓一項任務成為可描述的價值"],
+    high_school_long_bench: ["bench_open_task", "第一次注意替補名單仍有空著的用途", "下一次有限打席或後段守備"],
+    critical_scout_interview: ["first_formal_invitation", "第一次收到帶有條件的正式詢問", "把一項工具換成畢業後入口"],
+    transition_checkpoint: ["new_locker_name", "第一次看見新置物櫃仍空著名字", "讓新環境決定怎麼使用自己"],
+    development_opportunity: ["asked_to_try_again", "第一次有人問願不願意用另一種方式再試一次", "讓新角色通過正式評估"]
+  };
+  if (moments[eventId]) {
+    const [id, title, possibility] = moments[eventId];
+    recordAspirationMoment({ id, title, possibility, fulfilled: ["youth_match_entry", "development_opportunity"].includes(eventId), status: ["junior_friend_exit", "high_school_long_bench"].includes(eventId) ? "redirected" : "active" });
+  }
+  if (eventId === "starter_selection_result") setNextAspiration("把一次被看見的機會變成球隊能反覆使用的任務。", { status: player.startingCompetition.result === "win" ? "fulfilled" : "redirected", worldResponse: memory, nextPossibility: "三天後的新守位測試", sourceEventId: eventId });
+  if (eventId === "junior_pain" || eventId === "critical_injury") setNextAspiration("找出不依賴原本負荷的棒球方式。", { status: "redirected", worldResponse: "身體限制改變了可以採取的動作，也讓節奏、配球與準備變成新的研究對象。", nextPossibility: "復健師安排的第一次調整後測試", sourceEventId: eventId });
+  if (eventId === "junior_friend_exit") setNextAspiration(getCurrentAspiration().current, { status: "redirected", worldResponse: "阿哲開始追求自己的課業、紀錄或球場外角色；你們仍會交換下一步。", nextPossibility: "阿哲答應來看的下一場比賽", sourceEventId: eventId });
+  if (eventId === "high_school_long_bench") setNextAspiration("找出替補名單裡還沒有人固定承擔的任務。", { status: "redirected", worldResponse: "先發沒有成真，但代跑、外野後段與守備指揮仍沒有固定人選。", nextPossibility: "下一次有限打席與後段守備名單", sourceEventId: eventId });
+  if (eventId === "development_competition") setNextAspiration("把過去經驗轉成另一種可使用的角色。", { status: "redirected", worldResponse: "原有用途不再完全適配，第二守位、指揮、代打或準備工作開始有了空位。", nextPossibility: "下一回的角色調整提案", sourceEventId: eventId });
+  if (eventId === "development_opportunity") setNextAspiration("讓新的使用方式在正式任務裡成立。", { status: "fulfilled", worldResponse: memory, nextPossibility: "市場重新評估新角色的那一天", sourceEventId: eventId });
+}
+
+function getAspirationEventText(eventId) {
+  const texts = {
+    starter_selection_result: "這次名單回答的是目前距離，不是你和高橋一生的勝負。下一個問題，是球隊願不願意把哪一種固定任務交給你。",
+    junior_friend_exit: "阿哲談起最近想做的事：也許是課業，也許是紀錄比賽。離開球員名單不是停在原地；你們約好，下次見面要交換彼此最近正在追什麼。",
+    junior_pain: "疼痛讓原本的動作暫時停下，也讓你第一次開始注意節奏、準備和如何用較少負荷完成同一個任務。",
+    high_school_long_bench: "背號沒有被念到，但你開始記錄教練何時使用代跑、後段守備與臨時補位。名單之外仍有幾項工作沒有固定人選。",
+    critical_injury: "檢查結果改變了原本的出口，沒有替所有出口關門。復健師在表格最下面寫下第一次調整後測試的日期。",
+    development_competition: "球隊對你的期待正在改變。過去的守備經驗可以移向第二守位、補位指揮；打擊經驗也可能改成代打、選球或推進跑者。",
+    development_opportunity: "這不是悲壯的重生。只是有人把一個不同的任務放到你面前，問你願不願意照新的方式再試一次。",
+    transition_checkpoint: "新環境沒有要求你回到以前。它正在觀察：哪一種任務，會讓置物櫃上的名字真正留下來。"
+  };
+  return texts[eventId] || "";
+}
+
+function auditNarrativeTone() {
+  const negativePattern = /失敗|淘汰|失去|放棄|絕望|最後機會|重新證明|徹底|沒有未來|被需要|重生/g;
+  const terminalPattern = /夢想破滅|沒有未來|一切結束|只能放棄|徹底失去|注定失敗/g;
+  const sloganPattern = /只要努力|永不放棄|相信自己|奇蹟一定|熱血到底/g;
+  const chapters = Object.entries(chapterAspirationGuide).map(([chapter, guide]) => {
+    const resultEntry = Object.entries(chapterResultHopeHooks).find(([eventId]) => getEmotionChapter(eventId) === chapter);
+    const hook = resultEntry?.[1]?.text || guide.next;
+    const relatedText = chapter === "發展期" ? Object.values(getAspirationEventTextMap()).join(" ") : "";
+    const sample = [guide.current, guide.reason, guide.next, hook, relatedText].join(" ");
+    return {
+      chapter,
+      pursuit: guide.current,
+      hopeHook: hook,
+      negativePhrases: sample.match(negativePattern)?.length || 0,
+      terminalPhrases: sample.match(terminalPattern)?.length || 0,
+      sloganPhrases: sample.match(sloganPattern)?.length || 0,
+      hasConcreteExpectation: /明天|下週|下一場|三天後|下個月|報到日|隊內賽|畢業|置物櫃|任務|測試|守位|球場|入口|角色|開始/.test(hook),
+      nextEntranceCount: /入口|名單|任務|測試|守位|球場|置物櫃|比賽|開始/.test(hook) ? 1 : 0,
+      onlyLossWithoutPossibility: Boolean(sample.match(terminalPattern)) && !/下一|入口|任務|測試|可能|開始/.test(sample),
+      needsManualReview: !guide.current || !hook || Boolean(sample.match(terminalPattern)) || Boolean(sample.match(sloganPattern))
+    };
+  });
+  return {
+    guide: narrativeToneGuide,
+    chapters,
+    negativeTotal: chapters.reduce((sum, item) => sum + item.negativePhrases, 0),
+    terminalTotal: chapters.reduce((sum, item) => sum + item.terminalPhrases, 0),
+    sloganTotal: chapters.reduce((sum, item) => sum + item.sloganPhrases, 0),
+    missingConcreteExpectation: chapters.filter(item => !item.hasConcreteExpectation).map(item => item.chapter),
+    manualReview: chapters.filter(item => item.needsManualReview).map(item => item.chapter)
+  };
+}
+
+function getAspirationEventTextMap() {
+  return {
+    longBench: getAspirationEventText("high_school_long_bench"), injury: getAspirationEventText("critical_injury"),
+    roleChange: getAspirationEventText("development_competition"), newOpportunity: getAspirationEventText("development_opportunity")
+  };
+}
+
+const adultNarrativeChains = {
+  draft: {
+    id: "professional_limited_role", title: "下一次名單上的用途", question: "進入新組織後，你能讓哪一項工具先換到第一次正式任務？",
+    events: ["transition_draft_day", "transition_rookie_camp", "transition_checkpoint", "transition_relationship", "transition_cost_check"],
+    tensions: ["報到後四次行動會決定第一次測試角色", "第一次證明將決定你被放在哪一組", "相鄰置物櫃的新人成為下一個比較對象", "名單調整前還有一次把新用途帶進比賽的機會", "球隊將公布下一個角色與任務"]
+  },
+  college: {
+    id: "college_recompetition", title: "大學裡第一個可用角色", question: "課業與健康並行時，你想用哪一次主力機會重新進入球探視野？",
+    events: ["transition_college_arrival", "transition_college_balance", "transition_checkpoint", "transition_relationship", "transition_cost_check"],
+    tensions: ["重新分組前有四次行動可以調整方向", "課業與健康將開始影響輪替順位", "下一次主力機會會檢查你的負荷", "調整後還有一次重新進入視野的機會", "球探將說明繼續追蹤需要看見的條件"]
+  },
+  amateur: {
+    id: "amateur_double_life", title: "工作之外保留下來的棒球", question: "工作與訓練並行時，你想為哪一次晚成測試保留時間？",
+    events: ["transition_amateur_job", "transition_amateur_test", "transition_checkpoint", "transition_relationship", "transition_cost_check"],
+    tensions: ["測試前有四次行動可以調整生活與訓練", "工作排班將開始影響球隊任務", "球隊交付了任務，生活也提出新的安排問題", "晚成測試前還有一次具體準備", "你將決定要為哪一種棒球生活保留時間"]
+  },
+  rehab: {
+    id: "rehab_new_identity", title: "調整後第一次參與比賽", question: "改變打法後，你想用哪一項新工具重新加入正式比賽？",
+    events: ["transition_rehab_plateau", "transition_rehab_identity", "transition_checkpoint", "transition_relationship", "transition_cost_check"],
+    tensions: ["第一次調整後測試前有四次準備", "下一次測試將比較新舊打法的負荷", "新的任務表上仍有一個可嘗試的位置", "還有一次把新角色帶進正式任務的機會", "組織將說明下一階段願意提供的參與方式"]
+  }
+};
+
+const developmentNarrativeEvents = ["development_daily_life", "development_competition", "development_mentor", "development_body_choice", "development_opportunity", "development_market", "development_decision"];
+
+function getAdultRouteKey() {
+  const exit = String(player.careerExit || "");
+  if (exit.includes("大學")) return "college";
+  if (exit.includes("業餘") || exit.includes("社會")) return "amateur";
+  if (exit.includes("復健") || exit.includes("傷")) return "rehab";
+  return "draft";
+}
+
+function startNarrativeThread(config = {}) {
+  player.narrativeThread = Object.assign({}, createInitialPlayer().narrativeThread, {
+    id: config.id || "", title: config.title || "", question: config.question || config.coreQuestion || "", coreQuestion: config.coreQuestion || config.question || "",
+    currentBeat: 0, totalBeats: Number(config.totalBeats) || config.events?.length || 0, previousEventId: "", previousOutcome: "",
+    lastOutcome: "", activeTension: config.tensions?.[0] || "", nextTension: config.tensions?.[0] || "", nextPossibility: config.nextPossibility || config.tensions?.[0] || "",
+    supportingNpc: config.supportingNpc || ({ draft: "二軍教練", college: "大學總教練", amateur: "社會人隊長", rehab: "復健師" })[config.route || getAdultRouteKey()] || "",
+    status: "active", route: config.route || getAdultRouteKey(), history: []
+  });
+  return player.narrativeThread;
+}
+
+function redirectNarrativeThread(config = {}) {
+  const previous = player.narrativeThread || {};
+  const thread = startNarrativeThread(config);
+  thread.status = "redirected";
+  thread.previousOutcome = config.previousOutcome || previous.lastOutcome || previous.previousOutcome || "";
+  return thread;
+}
+
+function ensureNarrativeThreadForEvent(eventId) {
+  const routeKey = getAdultRouteKey();
+  if (!player.narrativeThread?.id && adultNarrativeChains[routeKey]?.events.includes(eventId)) startNarrativeThread({ ...adultNarrativeChains[routeKey], route: routeKey });
+  if ((!player.narrativeThread?.id || !player.narrativeThread.id.includes("role_revaluation")) && (developmentNarrativeEvents.includes(eventId) || eventId === "development_result")) {
+    startNarrativeThread({
+      id: `${routeKey}_role_revaluation`, route: routeKey,
+      title: routeKey === "rehab" ? "調整後第一次參與比賽" : "下一種用途開始有形狀",
+      question: routeKey === "draft" ? "名單調整前，哪一項工具能成為固定任務？" : routeKey === "college" ? "調整節奏後，哪一次表現能重新進入球探視野？" : routeKey === "amateur" ? "工作與棒球並行時，哪一種參與方式可以持續？" : "改變打法後，哪一項新任務能帶你回到正式比賽？",
+      totalBeats: developmentNarrativeEvents.length, tensions: ["下一種用途即將進入正式比較"]
+    });
+  }
+}
+
+function advanceNarrativeThread(eventId, choice = {}) {
+  const thread = player.narrativeThread;
+  if (!thread?.id) return false;
+  const routeConfig = adultNarrativeChains[thread.route];
+  const events = developmentNarrativeEvents.includes(eventId) ? developmentNarrativeEvents : routeConfig?.events || [];
+  const index = events.indexOf(eventId);
+  if (index < 0) return false;
+  const outcome = choice.memory || choice.text || "你完成了這一幕，代價仍會跟到下一次機會。";
+  thread.previousEventId = eventId;
+  thread.previousOutcome = outcome;
+  thread.currentBeat = Math.max(thread.currentBeat, index + 1);
+  thread.lastOutcome = outcome;
+  thread.nextTension = developmentNarrativeEvents.includes(eventId)
+    ? ["原本的角色即將被重新比較", "下一回合必須面對角色失效", "有人會指出你真正缺少的用途", "身體與角色只能優先處理一項", "下一次機會將決定能否重新被需要", "市場會重新計算你的用途", "你必須決定留下方式"][Math.min(index + 1, 6)]
+    : routeConfig.tensions[Math.min(index + 1, routeConfig.tensions.length - 1)];
+  thread.activeTension = thread.nextTension;
+  thread.nextPossibility = getNarrativeBridge(eventId, "out").replace(/^本幕之後：/, "") || thread.nextTension;
+  thread.status = thread.currentBeat >= thread.totalBeats ? "resolved" : "active";
+  thread.history.push({ eventId, outcome, beat: thread.currentBeat, nextPossibility: thread.nextPossibility });
+  thread.history = thread.history.slice(-12);
+  return true;
+}
+
+function resolveNarrativeThread(outcome = "") {
+  if (!player.narrativeThread?.id) return false;
+  player.narrativeThread.lastOutcome = outcome || player.narrativeThread.lastOutcome;
+  player.narrativeThread.currentBeat = player.narrativeThread.totalBeats;
+  player.narrativeThread.nextTension = "這條主軸已得到結果，但結果會進入下一階段。";
+  player.narrativeThread.activeTension = "";
+  player.narrativeThread.nextPossibility = player.aspirationState?.nextPossibility || "下一段生活會回收這個結果。";
+  player.narrativeThread.status = "resolved";
+  return true;
+}
+
+function getNarrativeBridgeIn(eventId) { return getNarrativeBridge(eventId, "in"); }
+function getNarrativeBridgeOut(eventId) { return getNarrativeBridge(eventId, "out"); }
+function getNarrativeThreadSummary() {
+  const thread = player.narrativeThread || {};
+  if (!thread.id) return "目前沒有進行中的敘事主軸。";
+  return `${thread.title}｜${thread.currentBeat}/${thread.totalBeats}\n上一回：${thread.previousOutcome || "尚未發生"}\n正在處理：${thread.activeTension || thread.coreQuestion}\n接下來：${thread.nextPossibility || thread.nextTension}`;
+}
+
+function createContinuityOutcome(eventId, choice = {}) {
+  const isAdultEvent = Object.values(adultNarrativeChains).some(chain => chain.events.includes(eventId)) || developmentNarrativeEvents.includes(eventId);
+  if (!isAdultEvent) return null;
+  const nextEffect = getNarrativeBridge(eventId, "out").replace(/^本幕之後：/, "") || player.narrativeThread?.nextTension || "下一幕會回收這次選擇。";
+  return { id: `${eventId}_${player.narrativeThread?.currentBeat || 0}_${player.continuityOutcomes.length}`, eventId, summary: choice.memory || choice.text || "這一幕留下了具體結果。", nextEffect, routeTag: player.narrativeThread?.route || getAdultRouteKey() };
+}
+
+function recordContinuityOutcome(outcome) {
+  if (!outcome?.id) return false;
+  if (player.continuityOutcomes.some(item => item.id === outcome.id)) return false;
+  player.continuityOutcomes.push({ ...outcome, age: player.age, chapter: player.chapter });
+  player.continuityOutcomes = player.continuityOutcomes.slice(-30);
+  return true;
+}
+
+function getPreviousContinuityOutcome(routeTag = "") {
+  return [...(player.continuityOutcomes || [])].reverse().find(item => !routeTag || item.routeTag === routeTag) || null;
+}
+
+function hasContinuityOutcome(id) { return player.continuityOutcomes.some(item => item.id === id || item.id.startsWith(`${id}_`)); }
+
+function getJointRelationshipScene() {
+  const azheHigh = player.impression.azhe.trusts >= 5 && player.impression.azhe.feelsDistance < 5;
+  const takaHigh = player.impression.takahashi.respect >= 5;
+  const coachHigh = player.impression.coach.dependable >= 5 && player.relationships.coachTrust >= 6;
+  const usableNow = Math.max(player.baseballSkills.batting || 0, player.baseballSkills.catching || 0, player.baseballSkills.baseballIQ || 0, player.baseballSkills.control || 0) >= 7 && player.body.injuryRisk <= 8;
+  const parts = [];
+  parts.push(azheHigh ? "阿哲真的到了。他沒有替你決定，只把那顆畫過暗號的球放在長椅上，說可以陪你完成一次不列入評價的練習。" : "阿哲的位置是空的。你只從舊球上的暗號，猜到他可能聽說了近況。" );
+  parts.push(takaHigh ? "高橋帶來對手的測試紀錄，直接圈出你已經無法在更高層級成立的那一項能力。" : "高橋沒有提供情報；競爭名單上只留下他的名字。" );
+  parts.push(coachHigh && usableNow ? "山本教練把一張聯絡人的名片壓在手套下，但說明這只是一個入口，不是保證。" : coachHigh ? "山本教練到了，卻把名片留在口袋裡。關係讓他願意說實話，不能讓他替目前尚未成立的條件背書。" : "山本教練到場，卻沒有拿出推薦信。他不願用過去的信任掩蓋現在的條件。" );
+  return `【十年關係的兌現】\n${parts.join("\n\n")}`;
+}
+
+function getNarrativeBridge(eventId, direction = "in") {
+  const event = getEvent(eventId);
+  if (event && typeof event[direction === "in" ? "bridgeIn" : "bridgeOut"] === "function") return event[direction === "in" ? "bridgeIn" : "bridgeOut"]();
+  const thread = player.narrativeThread;
+  if (!thread?.id) return "";
+  if (eventId === "development_result") return direction === "in"
+    ? `最後一幕留下的結果是：${thread.lastOutcome || "你已經做完最後一次去留選擇"}。現在必須把這段處境寫成生涯結果。`
+    : "這條主軸會進入人生總結，連同曾幫助你或缺席的人一起被記住。";
+  const routeEvents = adultNarrativeChains[thread.route]?.events || [];
+  if (!routeEvents.includes(eventId) && !developmentNarrativeEvents.includes(eventId)) return "";
+  if (direction === "in") {
+    if (eventId === "transition_relationship") return `${thread.lastOutcome ? `上一幕的結果仍在：${thread.lastOutcome}` : thread.question}\n\n${getJointRelationshipScene()}`;
+    if (thread.lastOutcome) return `承接上一幕：${thread.lastOutcome}\n這一幕仍在往前追問：${thread.question}`;
+    return `這段故事正在追問：${thread.question}`;
+  }
+  const developmentIndex = developmentNarrativeEvents.indexOf(eventId);
+  const routeIndex = routeEvents.indexOf(eventId);
+  const developmentTensions = ["下一種用途即將進入正式比較", "下一回合會看見原角色之外的任務", "有人會指出最值得帶往下一層級的工具", "身體與角色調整需要先選一項開始", "下一次機會可以把新用途帶進比賽", "市場會重新看見你的用途", "你將決定下一段想用什麼方式參與"];
+  const next = developmentIndex >= 0
+    ? developmentTensions[Math.min(developmentIndex + 1, developmentTensions.length - 1)]
+    : routeIndex >= 0 ? adultNarrativeChains[thread.route].tensions[Math.min(routeIndex + 1, adultNarrativeChains[thread.route].tensions.length - 1)] : thread.nextTension;
+  return `本幕之後：${next || "下一次選擇會回收這一幕的結果。"}`;
+}
+
+function recordRelationshipPayoff(data = {}) {
+  if (!data.id || player.relationshipPayoffs.some(item => item.id === data.id)) return false;
+  player.relationshipPayoffs.push({
+    id: data.id, npc: data.npc || "", type: data.type || "information", title: data.title || data.id,
+    source: data.source || data.sourceState || "長期累積的關係", sourceState: data.sourceState || data.source || "長期累積的關係", resolved: data.resolved !== false,
+    effect: data.effect || data.impact || "", impact: data.impact || data.effect || "", changesOption: Boolean(data.changesOption), changesOpportunity: Boolean(data.changesOpportunity),
+    absence: Boolean(data.absence), age: player.age, chapter: player.chapter, announced: false
+  });
+  return true;
+}
+
+function hasRelationshipPayoff(id) {
+  return player.relationshipPayoffs.some(item => item.id === id && item.resolved);
+}
+
+function getRelationshipPayoffCount(npc) { return player.relationshipPayoffs.filter(item => item.npc === npc && item.resolved).length; }
+function getAvailableRelationshipPayoffs(npc) { return player.relationshipPayoffs.filter(item => item.npc === npc && !item.resolved); }
+
+function getRelationshipPayoffSummary(npc = "") {
+  const items = player.relationshipPayoffs.filter(item => !npc || item.npc === npc).slice(-3);
+  return items.length ? items.map(item => `${item.resolved ? "已兌現" : "未兌現"}｜${item.title}`).join("\n") : "關係仍在累積，尚未轉化成具體行動。";
+}
+
+function consumeRelationshipPayoffFeedback() {
+  const items = player.relationshipPayoffs.filter(item => item.resolved && !item.announced);
+  items.forEach(item => { item.announced = true; });
+  return items.map(item => item.absence ? `這次沒有人替你打開入口：${item.title}` : `多年累積的關係產生了回應：${item.title}`);
+}
+
+function getRelationshipStatusText(npc) {
+  if (npc === "azhe") {
+    if (player.impression.azhe.feelsDistance >= 5) return "阿哲已不再主動出現在你的低谷，只能從舊物或別人口中得知近況。";
+    if (player.impression.azhe.trusts >= 5) return "阿哲會分享自己正在追的生活，也願意陪你把下一種選擇說清楚，但不替你決定。";
+    return "阿哲仍在尋找自己的方向；你們下一次談話可能第一次不只談棒球。";
+  }
+  if (npc === "takahashi") {
+    if (player.impression.takahashi.underestimate >= 5) return "高橋不願替你的用途背書，也不再主動提供對手情報。";
+    if (player.impression.takahashi.respect >= 5) return "高橋願意告訴你下一個層級真正比較什麼，並保留一次正面測試的邀請。";
+    return "高橋仍把你放在競爭名單裡，尚未把自己的情報交給你。";
+  }
+  if (player.impression.coach.immature >= 5) return "山本教練不願為你的成熟度背書，第二次機會必須靠場上條件重新取得。";
+  if (player.impression.coach.dependable >= 5) return `山本教練願意替你背書一次，也正在觀察你能否成為「${inferRoleIdentity()}」。`;
+  return `山本教練還不準備推薦你，但已指出「${inferRoleIdentity()}」可能是下一個具體方向。`;
+}
+
+function processRelationshipPayoffs(eventId) {
+  const skills = player.baseballSkills || {};
+  const usableSkill = Math.max(skills.batting || 0, skills.catching || 0, skills.baseballIQ || 0, skills.control || 0) >= 7;
+  const healthyEnough = player.body.injuryRisk <= 8;
+  const azheHigh = player.impression.azhe.trusts >= 5 && player.impression.azhe.feelsDistance < 5;
+  const takaHigh = player.impression.takahashi.respect >= 5 && player.impression.takahashi.underestimate < 5;
+  const coachHigh = player.impression.coach.dependable >= 5 && player.relationships.coachTrust >= 6 && player.impression.coach.immature < 5;
+
+  if (eventId === "development_competition" && azheHigh) {
+    if (recordRelationshipPayoff({ id: "azhe_low_point_practice", npc: "azhe", type: "protection", title: "阿哲陪你完成一次不列入評價的練習", source: "你曾陪他重新處理失誤", effect: "降低倦怠並推進轉型準備" })) {
+      player.burnout = Math.max(0, player.burnout - 2); player.pressure = Math.max(0, player.pressure - 1); addFlags(["azhe_rebirth_practice"]);
+    }
+  }
+  if (eventId === "development_mentor" && azheHigh && ["respected_equal", "confided", "best_friend"].includes(player.characterArc.azhe)) recordRelationshipPayoff({ id: "azhe_equal_information", npc: "azhe", type: "information", title: "阿哲指出你一直避開的轉型問題", source: "平等而不代替決定的關係", effect: "解鎖轉型資訊" }) && addFlags(["azhe_transition_information"]);
+  if (eventId === "transition_relationship" && azheHigh) recordRelationshipPayoff({ id: "azhe_reunion_used", npc: "azhe", type: "reunion", title: "阿哲在生涯低谷時親自出現", source: "多年累積的信任", effect: "低谷時有人陪伴" });
+  if (["transition_college_balance", "transition_amateur_job"].includes(eventId) && azheHigh) recordRelationshipPayoff({ id: "azhe_life_perspective", npc: "azhe", type: "perspective", title: "阿哲分享自己如何讓工作、課業與棒球同時存在", source: "彼此交換球場外追求的平等關係", effect: "解鎖可持續生活選項", changesOption: true }) && addFlags(["azhe_sustainable_option"]);
+  if (eventId === "transition_relationship" && !azheHigh) recordRelationshipPayoff({ id: "azhe_absent_at_turning_point", npc: "azhe", type: "absence", title: "阿哲的位置這次是空的", source: "長期疏遠或尚未形成足夠信任", effect: "無法取得陪伴練習與重新整理追求的選項", absence: true });
+
+  if (eventId === "development_competition" && takaHigh) recordRelationshipPayoff({ id: "takahashi_hard_truth", npc: "takahashi", type: "information", title: "高橋指出原有能力已無法在更高層級成立", source: "多年競爭形成的真實評價", effect: "取得一條轉型方向" }) && addFlags(["takahashi_role_truth"]);
+  if (eventId === "development_opportunity" && player.impression.takahashi.rivalry >= 5 && usableSkill) {
+    if (recordRelationshipPayoff({ id: "takahashi_open_challenge", npc: "takahashi", type: "challenge", title: "高橋替你創造一次正面測試", source: "長期競爭", effect: "增加一次曝光，同時提高失敗代價" })) { player.exposure += 1; player.pressure = Math.min(20, player.pressure + 1); }
+  }
+  if (eventId === "development_market" && takaHigh && usableSkill && healthyEnough) {
+    if (recordRelationshipPayoff({ id: "takahashi_market_backing", npc: "takahashi", type: "recommendation", title: "高橋向新組織具體說明你的場上用途", source: "同行者的市場背書", effect: "市場評價與球探追蹤提高" })) { player.scoutEvaluation += 1; player.reputation += 1; }
+  }
+  if (eventId === "transition_relationship" && takaHigh && usableSkill) recordRelationshipPayoff({ id: "takahashi_test_introduction", npc: "takahashi", type: "introduction", title: "高橋把一份具名測試邀請交給你", source: "高尊重加上已成立的場上工具", effect: "取得特定角色測試入口", changesOpportunity: true }) && addFlags(["takahashi_introduced_test"]);
+  if (eventId === "transition_relationship" && !takaHigh) recordRelationshipPayoff({ id: "takahashi_withheld_information", npc: "takahashi", type: "absence", title: "高橋只留下測試標準，沒有提供方法與對手資料", source: "尊重不足或長期低估", effect: "仍可接受挑戰，但沒有內部情報", absence: true });
+
+  if (eventId === "transition_checkpoint" && coachHigh && usableSkill && healthyEnough) {
+    const profile = player.impression.coach.leader >= 3 ? { title: "山本教練以你的帶隊責任換來組織任務面談", effect: "取得領導與工具角色入口", reputation: 1 }
+      : player.impression.coach.competitive >= 5 ? { title: "山本教練以你的競爭性換來一次高壓測試", effect: "取得測試入口並承擔更高失敗代價", exposure: 1, pressure: 1 }
+        : { title: "山本教練以可靠評價換來一次有條件的推薦", effect: "取得穩定角色入口而非保證", scout: 1 };
+    if (recordRelationshipPayoff({ id: "yamamoto_recommendation_used", npc: "yamamoto", type: "recommendation", title: profile.title, source: "多年累積的可靠、領導、競爭與成熟印象", effect: profile.effect })) {
+      player.scoutEvaluation += profile.scout || 0; player.reputation += profile.reputation || 0; player.exposure += profile.exposure || 0; player.pressure = Math.min(20, player.pressure + (profile.pressure || 0));
+    }
+  }
+  if (eventId === "transition_checkpoint" && coachHigh) {
+    const namedRole = inferRoleIdentity();
+    if (recordRelationshipPayoff({ id: "yamamoto_role_naming", npc: "yamamoto", type: "information", title: `山本教練替「${namedRole}」這個可能取了名字`, source: "多年觀察形成的角色判讀", effect: "新組織測試項目與下一個追求變得明確", changesOption: true })) {
+      addFlags(["yamamoto_named_role"]); setNextAspiration(`讓「${namedRole}」在正式任務中成立。`, { nextPossibility: `下一次${namedRole}測試`, sourceEventId: eventId });
+    }
+  }
+  if (eventId === "development_mentor" && coachHigh) {
+    if (recordRelationshipPayoff({ id: "yamamoto_open_task", npc: "yamamoto", type: "opportunity", title: "山本教練把沒有標準答案的球隊任務交給你", source: "可靠與領導印象", effect: "得到證明責任感的任務" })) addFlags(["yamamoto_open_ended_task"]);
+  }
+  if (eventId === "development_opportunity" && coachHigh && usableSkill && healthyEnough) {
+    if (recordRelationshipPayoff({ id: "yamamoto_second_chance", npc: "yamamoto", type: "second_chance", title: "山本教練替你爭取到一次重新測試", source: "過去信任加上目前仍成立的場上用途", effect: "新增一次測試入口" })) player.exposure += 1;
+  } else if (eventId === "development_opportunity" && coachHigh && (!usableSkill || !healthyEnough)) {
+    addFlags(["yamamoto_refused_unqualified_backing"]);
+    recordRelationshipPayoff({ id: "yamamoto_refused_backing", npc: "yamamoto", type: "absence", title: "山本教練拒絕立即背書，並列出仍未成立的兩項條件", source: "關係足夠但能力或健康尚未符合", effect: "失去立即入口，保留有條件的重新測試", absence: true, changesOpportunity: true });
+  }
+}
+
+function ensureRelationshipPayoffChoices(eventId, event) {
+  if (!event?.choices) return;
+  if (eventId === "development_mentor" && hasFlag("azhe_rebirth_practice") && !event.choices.some(choice => choice.payoffChoiceId === "azhe_equal_view")) event.choices.push({ payoffChoiceId: "azhe_equal_view", text: "請阿哲不要替你決定，只說他看見哪個問題", effects: { pressure: -1 }, flags: ["accepted_azhe_equal_view"], memory: "阿哲沒有給答案，只指出你一直用努力掩蓋角色已經失效。", personalityEffects: { thoughtful: 1 }, lifeThemeEffects: { trust: 1 } });
+  if (eventId === "development_mentor" && hasFlag("takahashi_role_truth") && !event.choices.some(choice => choice.payoffChoiceId === "takahashi_report")) event.choices.push({ payoffChoiceId: "takahashi_report", text: "照高橋圈出的更高層級標準調整下一次測試", effects: { observe: 1, pressure: 1 }, flags: ["used_takahashi_report"], memory: "你沒有直接得到技能，而是得到下一次測試會真正比較的條件。", changesOpportunity: true });
+  if (eventId === "development_mentor" && hasFlag("yamamoto_named_role") && !event.choices.some(choice => choice.payoffChoiceId === "yamamoto_named_trial")) event.choices.push({ payoffChoiceId: "yamamoto_named_trial", text: `以山本命名的「${inferRoleIdentity()}」申請特定角色測試`, effects: { responsibility: 1 }, flags: ["used_yamamoto_role_name"], memory: "你用一個世界聽得懂的角色名稱，申請下一次測試。", changesOpportunity: true });
+}
+
+const importantEventThemes = {
+  transition_draft_day: { keywords: ["有限角色", "名單"], action: "接受、詢問或延後職業入口", next: "新人營角色測試" },
+  transition_rookie_camp: { keywords: ["第一次有限任務", "角色測試"], action: "選擇多守位、主工具或打擊任務", next: "組織公布第一次有限用途" },
+  transition_college_arrival: { keywords: ["重新競爭", "位置重置"], action: "重新定位大學角色", next: "課業與健康負荷" },
+  transition_college_balance: { keywords: ["課業", "輪替任務"], action: "安排課業、身體與主力競爭", next: "有限主力或遠征任務" },
+  transition_amateur_job: { keywords: ["工作", "訓練衝突"], action: "安排工作與球隊時間", next: "晚成測試" },
+  transition_amateur_test: { keywords: ["球隊任務", "晚成觀察"], action: "呈現穩定、上限或完整用途", next: "職業觀察條件" },
+  transition_rehab_plateau: { keywords: ["恢復停滯", "改變打法"], action: "延長復健、改打法或提前測試", next: "舊角色是否失效" },
+  transition_rehab_identity: { keywords: ["新使用方式", "低負荷測試"], action: "維持復健、協助基層或暫離球場", next: "第一次調整後正式測試" },
+  transition_checkpoint: { keywords: ["有限任務", "組織回應"], action: "把前兩幕選擇轉成組織角色", next: "核心人物如何提供資源" },
+  transition_relationship: { keywords: ["關係兌現", "資源差異"], action: "接收陪伴、情報、入口或真實缺席", next: "最後一次條件確認" },
+  transition_cost_check: { keywords: ["現實代價", "下一步"], action: "確認健康、生活與角色是否可持續", next: "十八歲轉換結果" },
+  development_competition: { keywords: ["失去位置", "被重新評價"], action: "專精、擴張角色或要求測試", next: "誰願意提供轉型情報" },
+  development_body_choice: { keywords: ["健康", "角色取捨"], action: "在硬撐、休息與轉守位間選擇", next: "下一次名單機會" },
+  development_opportunity: { keywords: ["再次被需要", "轉型"], action: "用新角色接受實際任務", next: "市場是否承認新用途" },
+  development_market: { keywords: ["市場", "用途"], action: "向外界呈現工具、上限或健康", next: "最後去留決定" },
+  development_result: { keywords: ["生涯結果", "留下方式"], action: "回收角色、關係與市場結果", next: "人生總結" }
+};
+
+function auditTitleContentAlignment() {
+  return Object.entries(importantEventThemes).map(([eventId, meta]) => {
+    const event = getEvent(eventId);
+    const choices = event?.choices || [];
+    const belongsToChain = eventId === "development_result" || developmentNarrativeEvents.includes(eventId) || Object.values(adultNarrativeChains).some(chain => chain.events.includes(eventId));
+    return {
+      eventId, title: event?.title || "缺少事件", expectedTheme: meta.keywords.join("／"),
+      themeIntent: { coreConflict: meta.keywords.join("／"), concreteAction: meta.action, expectedChange: `產生「${meta.next}」的條件`, nextQuestion: meta.next },
+      mainAction: meta.action, changesState: eventId.endsWith("_result") || choices.some(choice => Object.keys(choice).some(key => key.endsWith("Effects") || ["effects", "flags"].includes(key))),
+      hasBridgeIn: belongsToChain || Boolean(getNarrativeBridge(eventId, "in")), hasNextTension: Boolean(meta.next || getNarrativeBridge(eventId, "out")),
+      nextQuestion: meta.next, manualReview: !event || !meta.action || !meta.next
+    };
+  });
+}
+
+function auditNarrativeContinuity() {
+  return Object.entries(adultNarrativeChains).map(([route, chain]) => {
+    const breaks = [];
+    const rows = chain.events.map((eventId, index) => {
+      const hasPrior = index === 0 || Boolean(chain.events[index - 1]);
+      const bridgeIn = index === 0 ? chain.question : `承接「${chain.tensions[index - 1]}」`;
+      const bridgeOut = chain.tensions[index] || chain.tensions.at(-1);
+      const event = getEvent(eventId);
+      const changesStory = Boolean(event?.choices?.length) && chain.tensions[index] !== chain.tensions[index + 1];
+      if (!event || !hasPrior || !bridgeOut || !changesStory) breaks.push(eventId);
+      return { eventId, previousEventId: chain.events[index - 1] || "", previousOutcomeReferenced: hasPrior, bridgeIn, bridgeOut, repeatedIntroduction: index > 0 && /重新介紹|名單邊緣球員/.test(bridgeIn), missingForeshadowing: !bridgeOut, changesStoryState: changesStory };
+    });
+    return { route, chain: chain.title, length: rows.length, breaks, rows, continuityRate: Math.round(rows.filter(item => item.previousOutcomeReferenced && item.bridgeOut && item.changesStoryState).length / rows.length * 100) };
+  });
+}
+
+function auditRelationshipPayoffs() {
+  const thresholds = {
+    azhe: `信任 ${player.impression.azhe.trusts}／距離 ${player.impression.azhe.feelsDistance}`,
+    takahashi: `尊重 ${player.impression.takahashi.respect}／低估 ${player.impression.takahashi.underestimate}`,
+    yamamoto: `可靠 ${player.impression.coach.dependable}／不成熟 ${player.impression.coach.immature}`
+  };
+  return ["azhe", "takahashi", "yamamoto"].map(npc => {
+    const items = player.relationshipPayoffs.filter(item => item.npc === npc);
+    return {
+      npc, relationshipEvents: items.length, impressionThreshold: thresholds[npc], available: getAvailableRelationshipPayoffs(npc).length,
+      resolved: items.filter(item => item.resolved).length, types: [...new Set(items.map(item => item.type))],
+      textOnly: items.filter(item => !item.changesOption && !item.changesOpportunity && !item.absence).length,
+      changesOptions: items.filter(item => item.changesOption).length,
+      changesOpportunities: items.filter(item => item.changesOpportunity || ["opportunity", "recommendation", "introduction", "second_chance", "challenge"].includes(item.type)).length,
+      absences: items.filter(item => item.absence || item.type === "absence").length
+    };
   });
 }
 
@@ -2077,6 +2628,7 @@ function showCurrentEvent() { showStory(getCurrentEventId()); }
 function showStory(eventId) {
   ensureIncrementalSystems();
   if (player.forcedEventId) eventId = player.forcedEventId;
+  ensureChapterAspiration(eventId);
   const event = getEvent(eventId);
   if (!event) {
     document.getElementById("story").innerHTML = "<div class='event-card'><h2>找不到下一個事件</h2><p>請讀取存檔或重新開始。</p></div>";
@@ -2084,21 +2636,29 @@ function showStory(eventId) {
     updateStatus();
     return;
   }
+  ensureRelationshipPayoffChoices(eventId, event);
+  ensureNarrativeThreadForEvent(eventId);
   prepareMatchStateForEvent(eventId);
   updateGoals(eventId);
   refreshStartingCompetition();
   player.lastEventTitle = event.title;
   let text = typeof event.text === "function" ? event.text() : event.text;
+  const bridgeIn = getNarrativeBridge(eventId, "in");
+  const bridgeOut = getNarrativeBridge(eventId, "out");
   const chapterEnding = generateChapterEndingScene(eventId);
   const replayEcho = eventId === "day1_morning" ? getReplayMemoryEcho() : "";
   const signatureScene = getSignatureSceneText(eventId);
   const revisitScene = getRevisitSceneText(eventId);
+  const aspirationText = getAspirationEventText(eventId);
   if (signatureScene) text += `\n\n${signatureScene}`;
   if (revisitScene) text += `\n\n【往日回聲】\n${revisitScene}`;
+  if (aspirationText) text += `\n\n【看見的新可能】\n${aspirationText}`;
   if (chapterEnding) text += `\n\n${chapterEnding}`;
   if (replayEcho) text += `\n\n${replayEcho}`;
   const matchHud = eventId.startsWith("youth_match_") ? renderMatchHud() : "";
-  document.getElementById("story").innerHTML = `<article class="event-card">${matchHud}<div class="event-kicker">${escapeHtml(getTimeLabel())}</div><h2>${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div></article>`;
+  const bridgeInHtml = bridgeIn ? `<div class="story-bridge-in"><small>承接上一回</small>${escapeHtml(bridgeIn)}</div>` : "";
+  const bridgeOutHtml = bridgeOut ? `<div class="story-bridge-out"><small>接下來</small>${escapeHtml(bridgeOut)}</div>` : "";
+  document.getElementById("story").innerHTML = `<article class="event-card">${matchHud}<div class="event-kicker">${escapeHtml(getTimeLabel())}</div>${bridgeInHtml}<h2>${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div>${bridgeOutHtml}</article>`;
   document.getElementById("choices").innerHTML = event.choices.map((choice, index) => `<button type="button" onclick="choose('${eventId}', ${index})">${escapeHtml(choice.text)}</button>`).join("");
   updateStatus();
   if (player.goalState?.recentProgress?.length) {
@@ -2420,18 +2980,20 @@ function updateStatus() {
   const debug = debugMode ? getBalanceDebugSummary() : null;
   const debugHtml = debug ? `<div class="balance-debug"><strong>平衡測試</strong><small>目標 ${escapeHtml(debug.goalId)}｜${escapeHtml(debug.goalTier)}｜${escapeHtml(debug.goalProgress)}</small><small>預估 ${escapeHtml(debug.estimatedResult)}</small><small>競爭：技能 ${Math.round(debug.competition.skillScore)}／信任 ${Math.round(debug.competition.trustScore)}／表現 ${Math.round(debug.competition.performanceScore)}／準備 ${debug.competition.preparationScore}／角色 ${debug.competition.roleScore}</small><small>守位評分 ${debug.positionRating}｜本章技能 +${debug.chapterSkillPoints}</small><small>負荷：壓力 ${debug.load.pressure}／疲勞 ${debug.load.fatigue}／傷病 ${debug.load.injuryRisk}／倦怠 ${debug.load.burnout}</small></div>` : "";
   document.getElementById("status").innerHTML = `
-    <div class="goal-card"><strong>目前目標</strong>${player.goalState?.current ? `${renderTrackedGoal("current", "當下")}${renderTrackedGoal("short", "短期")}${renderTrackedGoal("chapter", "階段")}` : `<div class="goal-line"><small>當下</small><span>${escapeHtml(player.currentGoal)}</span></div><div class="goal-line"><small>短期</small><span>${escapeHtml(player.shortGoal)}</span></div><div class="goal-line"><small>階段</small><span>${escapeHtml(player.longGoal)}</span></div>`}</div>
+    <div class="goal-card"><strong>目前目標</strong>${player.goalState?.current ? `${renderTrackedGoal("current", "當下")}${renderTrackedGoal("short", "短期")}${renderTrackedGoal("chapter", "階段")}` : `<div class="goal-line"><small>當下</small><span>${escapeHtml(player.currentGoal)}</span></div><div class="goal-line"><small>短期</small><span>${escapeHtml(player.shortGoal)}</span></div><div class="goal-line"><small>階段</small><span>${escapeHtml(player.longGoal)}</span></div>`}<div class="goal-line aspiration-line"><small>現在想追的事</small><span>${escapeHtml(getCurrentAspiration().current || "找到下一個能參與棒球的方法")}</span></div><div class="goal-line aspiration-line"><small>目前故事正在處理</small><span>${escapeHtml(player.narrativeThread?.activeTension || player.narrativeThread?.coreQuestion || "讓下一次選擇產生具體承接")}</span></div><div class="goal-line aspiration-line"><small>下一個可以期待的事</small><span>${escapeHtml(getCurrentAspiration().nextPossibility || "下一次把球接進手套")}</span></div></div>
     ${debugHtml}${pendingHtml}${competitionHtml}
     <h2>能力傾向</h2>${renderBar(player.ballSense, "球感")}${renderBar(player.observe, "觀察")}${renderBar(player.fitness, "體能")}
     <h2>人格</h2>${renderBar(player.confidence, "自信")}${renderBar(player.resilience, "韌性")}${renderBar(player.instinct, "野性")}${renderBar(player.discipline, "紀律")}${renderBar(player.responsibility, "責任感")}${renderBar(player.pressure, "壓力", 12)}
     <h2>關係</h2>${renderBar(player.familySupport, "家庭支持")}${renderBar(player.coachAttention, "教練注意")}
     ${showSkills ? `<h2>守位與能力連結</h2>${renderPositionPanel()}<h2>棒球技能</h2>${Array.from(new Set(["catching", "throwing", "batting", "baseRunning", "baseballIQ", ...(getPositionAssessment(player.seasonPosition || calculatePositionRatings()[0].position)?.skills || [])])).map(key => renderBar(player.baseballSkills[key], skillLabels[key])).join("")}` : ""}
     ${showSkills ? `<div class="offense-card"><strong>進攻評價 ${offensiveRating}</strong><p>${offensiveValue ? `目前可提供 +${offensiveValue} 生涯評估修正；具備靠打擊換取名單機會的可能。` : "打擊仍是輔助能力，尚未形成足以改變名單的工具。"}</p></div>` : ""}
-    ${showSeason ? `<h2>隊內關係</h2>${renderBar(player.relationships.coachTrust, "教練信任")}${renderBar(player.relationships.teammateBond, "阿哲羈絆")}${renderBar(player.relationships.rivalRespect, "宿敵敬意")}${renderBar(player.relationships.rivalCompetition, "競爭張力")}<div class="bond-card"><strong>阿哲：${escapeHtml(azheBond.label)}</strong><p>${escapeHtml(azheBond.detail)}</p></div>` : ""}
+    ${showSeason ? `<h2>近期關係狀態</h2><div class="reflection-card"><p>${escapeHtml(getRelationshipStatusText("azhe"))}</p><p>${escapeHtml(getRelationshipStatusText("takahashi"))}</p><p>${escapeHtml(getRelationshipStatusText("yamamoto"))}</p></div>${debugMode ? `${renderBar(player.relationships.coachTrust, "教練信任")}${renderBar(player.relationships.teammateBond, "阿哲羈絆")}${renderBar(player.relationships.rivalRespect, "宿敵敬意")}${renderBar(player.relationships.rivalCompetition, "競爭張力")}` : ""}` : ""}
     ${showBody ? `<h2>身體狀態</h2>${renderBar(player.body.stamina, "體力")}${renderBar(player.body.fatigue, "疲勞")}${renderBar(player.body.recovery, "恢復力")}${renderBar(player.body.injuryRisk, "傷病風險")}${renderBar(player.body.pain, "疼痛")}` : ""}
     ${player.chapter.includes("青少棒") || player.juniorSeasonResult ? `<h2>生活平衡</h2>${renderBar(player.academics, "課業")}${renderBar(player.motivation, "棒球動機")}${renderBar(player.burnout, "倦怠")}` : ""}
     ${player.chapter.includes("青棒") || player.careerExit ? `<h2>生涯資產</h2>${renderBar(player.exposure, "曝光")}${renderBar(player.scoutEvaluation, "球探評價")}${renderBar(player.recentPerformance, "近期表現")}${renderBar(player.reputation, "名聲／可信度")}` : ""}
     ${showCareerArc ? `<div class="career-arc-card"><strong>生涯軌跡：${escapeHtml(player.roleIdentity.primary || "尚未定型")}</strong><p>價值 ${player.careerValue.current}／最高 ${player.careerValue.peak}　${careerTrendLabels[player.careerValue.trend] || "持平"}</p><p>階段：${escapeHtml(player.careerArc.stage)}　轉型 ${player.careerArc.reinventions} 次</p></div><h2>市場重估</h2>${renderBar(player.marketEvaluation.offense, "進攻", 100)}${renderBar(player.marketEvaluation.defense, "守備", 100)}${renderBar(player.marketEvaluation.utility, "工具性", 100)}${renderBar(player.marketEvaluation.leadership, "領導", 100)}${renderBar(player.marketEvaluation.health, "健康", 100)}` : ""}
+    ${player.narrativeThread?.id ? `<div class="goal-card"><strong>本段故事：${escapeHtml(player.narrativeThread.title)}</strong><p>${escapeHtml(player.narrativeThread.question)}</p><small>${escapeHtml(player.narrativeThread.nextTension || "等待下一幕")}</small></div>` : ""}
+    ${player.relationshipPayoffs?.length ? `<div class="reflection-card"><strong>最近的關係回報</strong><p>${escapeHtml(getRelationshipPayoffSummary())}</p></div>` : ""}
     ${player.chapter.includes("生涯轉換") || player.transitionResult ? `<h2>轉換期</h2>${renderBar(player.finances, "經濟穩定")}` : ""}
     <h2>目前輪廓</h2><p>${escapeHtml(getTraitSummary())}</p>
     ${showSeason ? `<div class="reflection-card"><strong>人物反應</strong><p>${escapeHtml(getNpcPerceptionSummary("azhe"))}</p><p>${escapeHtml(getNpcPerceptionSummary("takahashi"))}</p><p>${escapeHtml(getNpcPerceptionSummary("coach"))}</p></div>` : ""}

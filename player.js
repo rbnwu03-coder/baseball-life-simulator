@@ -1,4 +1,4 @@
-const SAVE_VERSION = 10;
+const SAVE_VERSION = 12;
 
 function createInitialPlayer(name = "") {
   return {
@@ -35,6 +35,11 @@ function createInitialPlayer(name = "") {
     replayMemories: [],
     signatureScenes: [],
     symbolObjects: [],
+    narrativeThread: { id: "", route: "", title: "", question: "", coreQuestion: "", currentBeat: 0, totalBeats: 0, previousEventId: "", previousOutcome: "", lastOutcome: "", activeTension: "", nextTension: "", nextPossibility: "", supportingNpc: "", status: "inactive", history: [] },
+    continuityOutcomes: [],
+    relationshipPayoffs: [],
+    aspirationState: { current: "", reason: "", nextPossibility: "", sourceEventId: "", status: "active", worldResponse: "" },
+    aspirationMoments: [],
     forcedEventId: "",
     startingCompetition: {
       active: false,

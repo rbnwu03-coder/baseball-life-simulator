@@ -58,6 +58,12 @@ function normalizeSave(saved) {
   fresh.replayMemories = Array.isArray(saved.replayMemories) ? saved.replayMemories : [];
   fresh.signatureScenes = Array.isArray(saved.signatureScenes) ? saved.signatureScenes : [];
   fresh.symbolObjects = Array.isArray(saved.symbolObjects) ? saved.symbolObjects : [];
+  fresh.narrativeThread = Object.assign({}, createInitialPlayer().narrativeThread, saved.narrativeThread || {});
+  fresh.narrativeThread.history = Array.isArray(saved.narrativeThread?.history) ? saved.narrativeThread.history : [];
+  fresh.continuityOutcomes = Array.isArray(saved.continuityOutcomes) ? saved.continuityOutcomes : [];
+  fresh.relationshipPayoffs = Array.isArray(saved.relationshipPayoffs) ? saved.relationshipPayoffs : [];
+  fresh.aspirationState = Object.assign({}, createInitialPlayer().aspirationState, saved.aspirationState || {});
+  fresh.aspirationMoments = Array.isArray(saved.aspirationMoments) ? saved.aspirationMoments : [];
   if (saved.chapter2Step === undefined && fresh.chapter === "少棒入門") {
     fresh.chapter2Step = fresh.chapter2Phase === "intro" ? 0 : fresh.chapter2Day === 1 ? 1 : fresh.chapter2Day === 2 ? 3 : 5;
   }
