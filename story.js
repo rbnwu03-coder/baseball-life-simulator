@@ -225,7 +225,7 @@ const chapterTwoEvents = {
   },
   slice_complete: {
     title: "二十二歲，暫時寫到這裡",
-    text() { return `測試完成。\n\n你的生涯出口：${player.careerExit || "尚未決定"}\n你的組織角色：${player.organizationRole || "尚未形成"}\n你的市場結果：${player.marketOutcome || "尚未形成"}\n你的發展期評估：${player.developmentResult || "尚未評估"}\n\n你成為的那種人：${getPersonalitySummary()}\n\n阿哲眼中的你：${getNpcReflection("azhe")}\n高橋眼中的你：${getNpcReflection("takahashi")}\n山本教練眼中的你：${getNpcReflection("coach")}\n\n下一階段將依市場結果進入職棒升降、大卒選秀、晚成測試或棒球第二角色。`; },
+    text() { return `測試完成。\n\n你的生涯出口：${player.careerExit || "尚未決定"}\n你的組織角色：${player.organizationRole || "尚未形成"}\n你的市場結果：${player.marketOutcome || "尚未形成"}\n你的發展期評估：${player.developmentResult || "尚未評估"}\n\n你成為的那種人：${getPersonalitySummary()}\n\n阿哲眼中的你：${getNpcReflection("azhe")}\n高橋眼中的你：${getNpcReflection("takahashi")}\n${getNpcDisplayName("yamamoto")}眼中的你：${getNpcReflection("coach")}\n\n下一階段將依市場結果進入職棒升降、大卒選秀、晚成測試或棒球第二角色。`; },
     choices: [{ text: "重新開始", restart: true }]
   }
 };
@@ -619,10 +619,11 @@ const juniorBaseballEvents = {
     ]
   },
   junior_coach_disagreement: {
-    title: "教練做了你不認同的決定",
+    title: "國中隊教練做了你不認同的決定",
     text() {
-      const opening = player.impression.coach.immature >= 5 ? "山本教練先叫你把手套放下：『先把聲音放低，再來問名單。』" : player.impression.coach.dependable >= 5 ? "山本教練沒有避開你的眼神：『你會把話聽完，所以我直接說。今天我選高橋。』" : player.personality.thoughtful >= 5 ? "山本教練把名單推到你面前：『你每次都說知道了。這次我想知道你真正不同意什麼。』" : "山本教練讓高橋繼續先發，即使上一輪你的完成度更高。";
-      return `${opening}\n\n他必須選擇現在最能使用的人；你則必須決定，要如何面對一個不完全認同的答案。`;
+      const opening = player.impression.coach.immature >= 5 ? "國中隊教練先叫你把手套放下：『先把聲音放低，再來問名單。』" : player.impression.coach.dependable >= 5 ? "國中隊教練沒有避開你的眼神：『你會把話聽完，所以我直接說。今天我選高橋。』" : player.personality.thoughtful >= 5 ? "國中隊教練把名單推到你面前：『你每次都說知道了。這次我想知道你真正不同意什麼。』" : "國中隊教練讓高橋繼續先發，即使上一輪你的完成度更高。";
+      const mentorEcho = "幾天後，你把這件事寫進訊息。少棒恩師山本只回：『我不能替你改名單。先想清楚，你要問的是標準，還是不服結果。』";
+      return `${opening}\n\n現任教練必須選擇現在最能使用的人；你則必須決定，要如何面對一個不完全認同的答案。\n\n${mentorEcho}`;
     },
     choices: [
       C("等其他人離開，再問三項評分依據", { observe: 2 }, ["yamamoto_disagreement_done", "asked_coach_reason_privately"], "教練說明了戰術配合，也承認自己更容忍高橋的失誤。", { personalityEffects: { thoughtful: 2, brave: 1 }, impressionEffects: { coach: { dependable: 1 }, takahashi: { respect: 1 } }, relationshipEffects: { coachTrust: 1 }, arcEffects: { yamamoto: "trusted" } }),
@@ -747,10 +748,10 @@ const juniorSeasonEvents = {
     text() {
       const azhe = player.characterArc.azhe === "distant" ? "阿哲的離隊消息沒有由他親口告訴你。" : player.characterArc.azhe === "dependent" ? "阿哲仍在等你替他回答該不該留下。" : "阿哲正決定要用什麼方式留在棒球裡。";
       const taka = player.characterArc.takahashi === "same_school" ? "高橋把同一所學校的簡章留在長椅上。" : "高橋已經把下一次勝負約在不同學校的球場。";
-      return `山本教練把推薦信放進沒有封口的信封，讓你先讀。\n\n${generateCoachRecommendation()}\n\n${azhe}\n${taka}\n\n你第一次看見，教練記錄的不只是守位和成績，也是你怎麼對待一起走到這裡的人。`;
+      return `少棒恩師山本把推薦信放進沒有封口的信封，讓你先讀。這封信只證明他在少棒時期親眼看見的你；高中是否採用、如何安排，仍由現任球隊決定。\n\n${generateCoachRecommendation()}\n\n${azhe}\n${taka}\n\n你第一次看見，恩師記錄的不只是守位和成績，也是你怎麼對待一起走到這裡的人。`;
     },
     choices: [
-      C("請教練保留原文，直接封口", { resilience: 1 }, ["yamamoto_recommendation_done", "accepted_coach_recommendation"], "山本教練沒有再補一句鼓勵，只在封口前確認你的校名。", { impressionEffects: { coach: { dependable: 1 } }, arcEffects: { yamamoto: "recommendation" } }),
+      C("請恩師保留原文，直接封口", { resilience: 1 }, ["yamamoto_recommendation_done", "accepted_coach_recommendation"], "少棒恩師山本沒有再補一句鼓勵，只在封口前確認你的校名。", { impressionEffects: { coach: { dependable: 1 } }, arcEffects: { yamamoto: "recommendation" } }),
       C("請教練把自己的缺點也寫清楚", { confidence: 1, observe: 1 }, ["yamamoto_recommendation_done", "requested_honest_recommendation"], "教練加上一句風險評語：『願意修正，不代表每次都能及時開口。』", { personalityEffects: { brave: 1, thoughtful: 1 }, impressionEffects: { coach: { dependable: 1 } }, arcEffects: { yamamoto: "recommendation" } }),
       C("問他為什麼沒有多寫比賽成績", { pressure: 1 }, ["yamamoto_recommendation_done", "questioned_recommendation_focus"], "教練把筆放下：『成績表學校自己會看。我寫的是他們看不到的部分。』", { personalityEffects: { ambitious: 1 }, impressionEffects: { coach: { competitive: 1 } }, arcEffects: { yamamoto: "recommendation" } })
     ]

@@ -1,6 +1,81 @@
 let isTransitioning = false;
 let selectedOrigin = "prove";
 
+// Phase 14.5：核心 NPC 在不同人生階段的身分與職能。
+// 這份資料只約束敘事權限，不參與能力、平衡或流程判定。
+const npcRolePrinciples = {
+  yamamoto: "山本代表你的過去，提醒你從哪裡開始。",
+  takahashi: "高橋代表你的現在，告訴你這個層級真正需要什麼。",
+  azhe: "阿哲代表你的未來，提醒你人生永遠不只有一條路。"
+};
+
+const npcRoleMap = {
+  yamamoto: {
+    youth: { identity: "少棒正式教練", distance: "球隊內的直接權威", resource: "守位安排、基本功訓練、比賽決策與球員評估", limitation: "權限只及於自己執教的少棒隊", narrativeFunction: "建立玩家的棒球原點" },
+    junior: { identity: "少棒恩師", distance: "偶爾聯絡、回母隊或看比賽時碰面", resource: "回答問題、回顧基本功與提供過往觀察", limitation: "不能決定國中隊名單、守位或戰術", narrativeFunction: "讓玩家用原點理解新的分化" },
+    highSchool: { identity: "長期導師", distance: "高中球隊體系之外的前教練", resource: "整理定位、提醒盲點與有條件推薦", limitation: "不能改變高中教練決策或替玩家取得先發", narrativeFunction: "替尚未成形的可能命名" },
+    transition: { identity: "長期導師", distance: "離開現役組織但仍可聯絡", resource: "舊觀察、有限介紹與角色命名", limitation: "不能替新組織承諾名單或測試結果", narrativeFunction: "把過往經驗翻譯成新環境聽得懂的用途" },
+    adult: { identity: "人生導師", distance: "象徵原點的長期關係", resource: "回顧成長、重新理解角色與有限介紹", limitation: "不能指揮成年球隊、決定工作或職涯", narrativeFunction: "提醒玩家從哪裡開始，也看見已經改變多少" }
+  },
+  takahashi: {
+    youth: { identity: "同梯競爭者", distance: "同一球場的直接比較", resource: "可觀察的技術高度與正面挑戰", limitation: "不能決定玩家是否成功", narrativeFunction: "讓差距第一次變得具體" },
+    junior: { identity: "同齡比較標準", distance: "可能同隊，也可能在不同組別", resource: "更高層級的標準與技術比較", limitation: "不負責教學或安慰玩家", narrativeFunction: "指出目前層級真正要求什麼" },
+    highSchool: { identity: "走向不同方向的比較對象", distance: "不再必然同隊或爭同一位置", resource: "比賽結果、技術情報與下一個標準", limitation: "不再是人生唯一對手", narrativeFunction: "讓玩家看見不同環境下的高度" },
+    transition: { identity: "同世代棒球同行者", distance: "可能在不同學校、組織或聯盟", resource: "測試情報、比較報告與具體挑戰", limitation: "不能降低標準或保證入口", narrativeFunction: "把玩家的工具放進更高層級比較" },
+    adult: { identity: "更高層級資訊來源", distance: "可能成為球員、球探、教練或分析員", resource: "市場標準、對手資料與有限介紹", limitation: "不負責幫助玩家成功", narrativeFunction: "指出下一個可比較的高度" }
+  },
+  azhe: {
+    youth: { identity: "最好的朋友", distance: "每天一起練習", resource: "共同經驗、坦白弱點與場上默契", limitation: "不能替玩家承擔競爭結果", narrativeFunction: "讓棒球首先是一段共享生活" },
+    junior: { identity: "一起追夢的夥伴", distance: "仍同行但開始有各自問題", resource: "彼此見證、合作與不同選擇", limitation: "不是等待玩家照顧的對象", narrativeFunction: "讓同一夢想出現不同走法" },
+    highSchool: { identity: "開始分流的舊友", distance: "可能不同隊、不同學校或退出正式球隊", resource: "球場外視角與熟悉玩家原貌的人", limitation: "不能一直在場邊陪伴或安慰", narrativeFunction: "證明離開同一路線仍能繼續生活" },
+    transition: { identity: "走向另一種棒球人生的朋友", distance: "各自生活，關係決定是否仍聯絡", resource: "課業、工作、地方棒球與生活並行的視角", limitation: "不能替玩家決定下一站", narrativeFunction: "交換彼此最近正在追什麼" },
+    adult: { identity: "另一種人生的見證者", distance: "可能從事一般工作、社會人或地方棒球並建立家庭", resource: "可持續生活的實例與平等觀點", limitation: "不負責安慰或拯救玩家", narrativeFunction: "提醒人生與棒球都不只有一種成功方式" }
+  }
+};
+
+function getNpcLifeStage(chapter = player.chapter) {
+  if (/青少棒/.test(chapter || "")) return "junior";
+  if (/十歲|少棒|位置競爭/.test(chapter || "")) return "youth";
+  if (/青棒|高中/.test(chapter || "")) return "highSchool";
+  if (/生涯轉換/.test(chapter || "")) return "transition";
+  return "adult";
+}
+
+function getNpcRole(npc, chapter = player.chapter) {
+  return npcRoleMap[npc]?.[getNpcLifeStage(chapter)] || null;
+}
+
+function getNpcDisplayName(npc, chapter = player.chapter) {
+  const stage = getNpcLifeStage(chapter);
+  if (npc === "yamamoto") return stage === "youth" ? "山本教練" : stage === "junior" ? "少棒恩師山本" : "山本導師";
+  return npc === "takahashi" ? "高橋" : npc === "azhe" ? "阿哲" : npc;
+}
+
+function auditNpcRoleConflicts() {
+  const requiredFields = ["identity", "distance", "resource", "limitation", "narrativeFunction"];
+  const stages = ["youth", "junior", "highSchool", "transition", "adult"];
+  const roleMapIssues = [];
+  Object.entries(npcRoleMap).forEach(([npc, map]) => stages.forEach(stage => {
+    const missing = requiredFields.filter(field => !map[stage]?.[field]);
+    if (missing.length) roleMapIssues.push({ npc, stage, missing });
+  }));
+
+  const eventChecks = [
+    { eventId: "starter_selection_test", stage: "youth", authority: "yamamoto", expected: "少棒正式教練可決定少棒名單", conflict: false },
+    { eventId: "junior_coach_disagreement", stage: "junior", authority: "current_junior_coach", expected: "國中隊現任教練決定名單；山本僅回應問題", conflict: false },
+    { eventId: "yamamoto_recommendation", stage: "junior", authority: "yamamoto", expected: "少棒恩師提供有限推薦，不決定高中安排", conflict: false },
+    { eventId: "high_school_role", stage: "highSchool", authority: "current_high_school_coach", expected: "高中現任教練安排角色", conflict: false },
+    { eventId: "development_mentor", stage: "adult", authority: "yamamoto", expected: "人生導師命名角色並提供有限介紹，不指揮現任組織", conflict: false }
+  ];
+  return {
+    principles: { ...npcRolePrinciples },
+    matrix: Object.fromEntries(Object.entries(npcRoleMap).map(([npc, map]) => [npc, Object.fromEntries(stages.map(stage => [stage, map[stage].identity]))])),
+    roleMapIssues,
+    eventChecks,
+    conflicts: eventChecks.filter(item => item.conflict)
+  };
+}
+
 const goalByChapter = {
   "十歲暑假": ["完成今天的選擇", "確認自己想用什麼方式靠近棒球", "找到能留在棒球裡的位置"],
   "少棒入門": ["完成眼前的基本動作", "通過少棒入門評估", "成為球隊願意培養的新生"],
@@ -1549,9 +1624,9 @@ const signatureSceneLibrary = {
   azhe_bond_low: { id: "azhe_distance_line", title: "二游之間看不見的線", category: "friendship", chapter: "位置競爭", location: "二游防區", object: "沒有喊聲的練習球", characters: ["阿哲"], action: "阿哲把球撿起後直接交給教練", emotion: "regret", silent: true, relationshipBeat: "conflict", relationshipMoments: { azhe: "conflict" }, memory: "兩人的守備範圍重疊，眼神卻不再交會。", text: "一顆球停在你和阿哲中間。你們都走了一步，又同時停下；最後他撿起球，直接交給教練。" },
   echo_rival_respect: { id: "takahashi_quiet_respect", title: "高橋第一次留下等你", category: "competition", chapter: "位置競爭", location: "暮色裡的傳接球區", object: "高橋的練習球", characters: ["高橋"], action: "高橋把自己的球袋放回地面", emotion: "pride", silent: true, relationshipBeat: "joy", relationshipMoments: { takahashi: "joy" }, memory: "他沒有稱讚你，只多留了十球。", text: "其他人離開後，高橋原本已背起球袋，卻又把它放回地面。他沒有稱讚你，只抬起手套，示意再來十球。" },
   echo_rival: { id: "takahashi_conflict_throw", title: "高橋不肯放慢的那一球", category: "competition", chapter: "位置競爭", location: "傳接球線", object: "擦過手套邊緣的球", characters: ["高橋"], action: "高橋接回球後立刻加快下一次出手", emotion: "fear", silent: true, relationshipBeat: "conflict", relationshipMoments: { takahashi: "conflict" }, memory: "球擦過手套，高橋連一句道歉也沒有。", text: "球擦過你的手套邊緣，滾出傳接球線。高橋等你撿回來，接球後立刻用更快的動作丟出下一顆。" },
-  junior_coach_disagreement: { id: "yamamoto_closed_notebook", title: "山本教練闔上的筆記本", category: "competition", chapter: "青少棒分化", location: "教練室門口", object: "山本教練的舊筆記本", characters: ["山本教練"], action: "教練聽完你的反對，把筆記本慢慢闔上", emotion: "regret", silent: true, relationshipBeat: "conflict", relationshipMoments: { yamamoto: "conflict" }, memory: "你第一次發現信任也容得下不同意。", text: "山本教練聽完後沒有立刻回答。他把寫滿守位記號的舊筆記本慢慢闔上，指尖停在封面，才重新看向你。" },
+  junior_coach_disagreement: { id: "junior_coach_closed_notebook", title: "國中隊教練闔上的筆記本", category: "competition", chapter: "青少棒分化", location: "國中隊教練室門口", object: "現任教練的守位筆記本", characters: ["國中隊教練", "少棒恩師山本"], action: "現任教練闔上名單；山本在訊息中拒絕替你干預", emotion: "regret", silent: true, relationshipBeat: "conflict", relationshipMoments: { yamamoto: "conflict" }, memory: "你第一次明白，少棒恩師的理解不能取代現任教練的決定。", text: "國中隊教練聽完後沒有立刻回答。他把寫滿守位記號的筆記本慢慢闔上，指尖停在封面，才重新看向你。幾天後，少棒恩師山本拒絕替你干預，只透過訊息提醒你把不服氣整理成能被回答的問題。" },
   transition_relationship: { id: "three_people_reunion", title: "多年後同一顆球又回到手裡", category: "rebirth", chapter: "生涯轉換", location: "舊球場外側", object: "畫著歪斜記號的球", characters: ["阿哲", "高橋", "山本教練"], action: "那顆球在三人之間傳了一圈，最後回到你手裡", emotion: "gratitude", silent: true, relationshipBeat: "reunion", relationshipMoments: { azhe: "reunion", takahashi: "reunion", yamamoto: "reunion" }, memory: "大家都變了，接球的聲音卻和以前一樣。", text: "阿哲先把球拋給高橋，高橋再送到山本教練手裡。那顆畫著歪斜記號的球繞了一圈，最後落回你的掌心。大家都變了，接球的聲音卻和以前一樣。" },
-  development_mentor: { id: "yamamoto_reunion_glance", title: "教練再一次看見現在的你", category: "rebirth", chapter: "發展期", location: "看臺最下排", object: "山本教練的舊筆記本", characters: ["山本教練"], action: "教練翻到多年前那頁，又安靜地闔上", emotion: "gratitude", silent: true, relationshipBeat: "reunion", memory: "那頁寫的是以前的你，教練看著的卻是現在。", text: "山本教練翻開舊筆記本，找到多年前寫著你名字的那頁。他看了幾秒，又安靜地闔上。那頁記的是以前的你，他看著的卻是現在。" }
+  development_mentor: { id: "yamamoto_reunion_glance", title: "導師再一次看見現在的你", category: "rebirth", chapter: "發展期", location: "看臺最下排", object: "山本導師的舊筆記本", characters: ["山本導師"], action: "山本翻到多年前那頁，又安靜地闔上", emotion: "gratitude", silent: true, relationshipBeat: "reunion", memory: "那頁寫的是以前的你，山本看著的卻是現在。", text: "山本導師翻開舊筆記本，找到多年前寫著你名字的那頁。他沒有替現任組織做決定，只幫你把一路形成的用途說清楚。那頁記的是以前的你，他看著的卻是現在。" }
 };
 
 function recordSymbolObject(title, sceneId) {
@@ -1943,9 +2018,9 @@ function getJointRelationshipScene() {
   const coachHigh = player.impression.coach.dependable >= 5 && player.relationships.coachTrust >= 6;
   const usableNow = Math.max(player.baseballSkills.batting || 0, player.baseballSkills.catching || 0, player.baseballSkills.baseballIQ || 0, player.baseballSkills.control || 0) >= 7 && player.body.injuryRisk <= 8;
   const parts = [];
-  parts.push(azheHigh ? "阿哲真的到了。他沒有替你決定，只把那顆畫過暗號的球放在長椅上，說可以陪你完成一次不列入評價的練習。" : "阿哲的位置是空的。你只從舊球上的暗號，猜到他可能聽說了近況。" );
+  parts.push(azheHigh ? "阿哲真的到了。他帶來自己在工作、生活與地方棒球之間排出的行事曆，沒有安慰，也沒有替你決定，只問：『你下一段真正想保留的是哪一部分？』" : "阿哲的位置是空的。你只從舊球上的暗號，猜到他可能聽說了近況；疏遠讓另一種人生的答案沒有親自抵達。" );
   parts.push(takaHigh ? "高橋帶來對手的測試紀錄，直接圈出你已經無法在更高層級成立的那一項能力。" : "高橋沒有提供情報；競爭名單上只留下他的名字。" );
-  parts.push(coachHigh && usableNow ? "山本教練把一張聯絡人的名片壓在手套下，但說明這只是一個入口，不是保證。" : coachHigh ? "山本教練到了，卻把名片留在口袋裡。關係讓他願意說實話，不能讓他替目前尚未成立的條件背書。" : "山本教練到場，卻沒有拿出推薦信。他不願用過去的信任掩蓋現在的條件。" );
+  parts.push(coachHigh && usableNow ? "山本導師把一張聯絡人的名片壓在手套下，但說明這只是一個入口，不是名單保證。" : coachHigh ? "山本導師到了，卻把名片留在口袋裡。關係讓他願意說實話，不能讓他替目前尚未成立的條件背書。" : "山本導師到場，卻沒有拿出推薦信。他不願用過去的信任掩蓋現在的條件。" );
   return `【十年關係的兌現】\n${parts.join("\n\n")}`;
 }
 
@@ -2013,9 +2088,9 @@ function getRelationshipStatusText(npc) {
     if (player.impression.takahashi.respect >= 5) return "高橋願意告訴你下一個層級真正比較什麼，並保留一次正面測試的邀請。";
     return "高橋仍把你放在競爭名單裡，尚未把自己的情報交給你。";
   }
-  if (player.impression.coach.immature >= 5) return "山本教練不願為你的成熟度背書，第二次機會必須靠場上條件重新取得。";
-  if (player.impression.coach.dependable >= 5) return `山本教練願意替你背書一次，也正在觀察你能否成為「${inferRoleIdentity()}」。`;
-  return `山本教練還不準備推薦你，但已指出「${inferRoleIdentity()}」可能是下一個具體方向。`;
+  if (player.impression.coach.immature >= 5) return "山本導師不願為你的成熟度背書；他能指出問題，不能替現在的組織改變判斷。";
+  if (player.impression.coach.dependable >= 5) return `山本導師願意提供一次有條件的介紹，也正在觀察你能否成為「${inferRoleIdentity()}」。`;
+  return `山本導師還不準備推薦你，但已指出「${inferRoleIdentity()}」可能是下一個具體方向。`;
 }
 
 function processRelationshipPayoffs(eventId) {
@@ -2027,7 +2102,7 @@ function processRelationshipPayoffs(eventId) {
   const coachHigh = player.impression.coach.dependable >= 5 && player.relationships.coachTrust >= 6 && player.impression.coach.immature < 5;
 
   if (eventId === "development_competition" && azheHigh) {
-    if (recordRelationshipPayoff({ id: "azhe_low_point_practice", npc: "azhe", type: "protection", title: "阿哲陪你完成一次不列入評價的練習", source: "你曾陪他重新處理失誤", effect: "降低倦怠並推進轉型準備" })) {
+    if (recordRelationshipPayoff({ id: "azhe_low_point_practice", npc: "azhe", type: "protection", title: "阿哲用自己的另一種生活，幫你看清真正想保留的東西", source: "你們曾一起追夢，後來走向不同生活", effect: "避免低谷只剩單一路線，並推進轉型準備" })) {
       player.burnout = Math.max(0, player.burnout - 2); player.pressure = Math.max(0, player.pressure - 1); addFlags(["azhe_rebirth_practice"]);
     }
   }
@@ -2047,27 +2122,27 @@ function processRelationshipPayoffs(eventId) {
   if (eventId === "transition_relationship" && !takaHigh) recordRelationshipPayoff({ id: "takahashi_withheld_information", npc: "takahashi", type: "absence", title: "高橋只留下測試標準，沒有提供方法與對手資料", source: "尊重不足或長期低估", effect: "仍可接受挑戰，但沒有內部情報", absence: true });
 
   if (eventId === "transition_checkpoint" && coachHigh && usableSkill && healthyEnough) {
-    const profile = player.impression.coach.leader >= 3 ? { title: "山本教練以你的帶隊責任換來組織任務面談", effect: "取得領導與工具角色入口", reputation: 1 }
-      : player.impression.coach.competitive >= 5 ? { title: "山本教練以你的競爭性換來一次高壓測試", effect: "取得測試入口並承擔更高失敗代價", exposure: 1, pressure: 1 }
-        : { title: "山本教練以可靠評價換來一次有條件的推薦", effect: "取得穩定角色入口而非保證", scout: 1 };
+    const profile = player.impression.coach.leader >= 3 ? { title: "山本導師以過去觀察提供一個組織任務面談入口", effect: "取得領導與工具角色面談，而非直接任務", reputation: 1 }
+      : player.impression.coach.competitive >= 5 ? { title: "山本導師以過去競爭評價介紹一次高壓測試", effect: "取得測試入口並承擔更高失敗代價", exposure: 1, pressure: 1 }
+        : { title: "山本導師以可靠評價提供一次有條件的介紹", effect: "取得穩定角色入口而非保證", scout: 1 };
     if (recordRelationshipPayoff({ id: "yamamoto_recommendation_used", npc: "yamamoto", type: "recommendation", title: profile.title, source: "多年累積的可靠、領導、競爭與成熟印象", effect: profile.effect })) {
       player.scoutEvaluation += profile.scout || 0; player.reputation += profile.reputation || 0; player.exposure += profile.exposure || 0; player.pressure = Math.min(20, player.pressure + (profile.pressure || 0));
     }
   }
   if (eventId === "transition_checkpoint" && coachHigh) {
     const namedRole = inferRoleIdentity();
-    if (recordRelationshipPayoff({ id: "yamamoto_role_naming", npc: "yamamoto", type: "information", title: `山本教練替「${namedRole}」這個可能取了名字`, source: "多年觀察形成的角色判讀", effect: "新組織測試項目與下一個追求變得明確", changesOption: true })) {
+    if (recordRelationshipPayoff({ id: "yamamoto_role_naming", npc: "yamamoto", type: "information", title: `山本導師替「${namedRole}」這個可能取了名字`, source: "多年觀察形成的角色判讀", effect: "新組織測試項目與下一個追求變得明確", changesOption: true })) {
       addFlags(["yamamoto_named_role"]); setNextAspiration(`讓「${namedRole}」在正式任務中成立。`, { nextPossibility: `下一次${namedRole}測試`, sourceEventId: eventId });
     }
   }
   if (eventId === "development_mentor" && coachHigh) {
-    if (recordRelationshipPayoff({ id: "yamamoto_open_task", npc: "yamamoto", type: "opportunity", title: "山本教練把沒有標準答案的球隊任務交給你", source: "可靠與領導印象", effect: "得到證明責任感的任務" })) addFlags(["yamamoto_open_ended_task"]);
+    if (recordRelationshipPayoff({ id: "yamamoto_open_task", npc: "yamamoto", type: "opportunity", title: "山本導師幫你整理一份沒有標準答案的角色提案", source: "可靠與領導印象", effect: "解鎖向現任組織提出責任任務的機會；是否採用仍由現任組織決定", changesOption: true })) addFlags(["yamamoto_open_ended_task"]);
   }
   if (eventId === "development_opportunity" && coachHigh && usableSkill && healthyEnough) {
-    if (recordRelationshipPayoff({ id: "yamamoto_second_chance", npc: "yamamoto", type: "second_chance", title: "山本教練替你爭取到一次重新測試", source: "過去信任加上目前仍成立的場上用途", effect: "新增一次測試入口" })) player.exposure += 1;
+    if (recordRelationshipPayoff({ id: "yamamoto_second_chance", npc: "yamamoto", type: "second_chance", title: "山本導師介紹一個重新測試的聯絡窗口", source: "過去信任加上目前仍成立的場上用途", effect: "新增一次申請測試的入口，結果仍由現任組織決定" })) player.exposure += 1;
   } else if (eventId === "development_opportunity" && coachHigh && (!usableSkill || !healthyEnough)) {
     addFlags(["yamamoto_refused_unqualified_backing"]);
-    recordRelationshipPayoff({ id: "yamamoto_refused_backing", npc: "yamamoto", type: "absence", title: "山本教練拒絕立即背書，並列出仍未成立的兩項條件", source: "關係足夠但能力或健康尚未符合", effect: "失去立即入口，保留有條件的重新測試", absence: true, changesOpportunity: true });
+    recordRelationshipPayoff({ id: "yamamoto_refused_backing", npc: "yamamoto", type: "absence", title: "山本導師拒絕立即背書，並列出仍未成立的兩項條件", source: "關係足夠但能力或健康尚未符合", effect: "失去立即入口，保留有條件的重新測試", absence: true, changesOpportunity: true });
   }
 }
 
