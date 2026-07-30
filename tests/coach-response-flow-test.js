@@ -289,6 +289,18 @@ const delegationContext = vm.createContext({
     isSupportedEvaluation(id) {
       return id === "coach-trust-response:youth_match_entry";
     },
+    getEvaluationSpecification(id) {
+      return id === "coach-trust-response:youth_match_entry"
+        ? {
+            eventId: "youth_match_entry",
+            threshold: 3,
+            matchedCategory: "supportive",
+            unmatchedCategory: "standard",
+            responseId: "youth_match_entry",
+            routeType: "existing-narrative"
+          }
+        : null;
+    },
     getInputSnapshot() {
       return { relationships: { coachTrust: 7 } };
     },

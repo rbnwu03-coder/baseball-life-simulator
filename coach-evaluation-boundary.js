@@ -1,12 +1,28 @@
 var CoachEvaluationBoundary = (() => {
-  const TARGET_EVENT_ID = "youth_match_entry";
-  const TARGET_EVALUATION_ID = `coach-trust-response:${TARGET_EVENT_ID}`;
-  const TARGET_RESPONSE_ID = TARGET_EVENT_ID;
-  const TRUST_THRESHOLD = 3;
   const MIN_TRUST = 0;
   const MAX_TRUST = 20;
   const FORBIDDEN_KEYS = new Set(["__proto__", "constructor", "prototype"]);
-  const SUPPORTED_EVALUATIONS = Object.freeze([TARGET_EVALUATION_ID]);
+  const EVALUATION_SPECIFICATIONS = Object.freeze({
+    "coach-trust-response:youth_match_entry": Object.freeze({
+      eventId: "youth_match_entry",
+      threshold: 3,
+      matchedCategory: "supportive",
+      unmatchedCategory: "standard",
+      responseId: "youth_match_entry",
+      routeType: "existing-narrative"
+    }),
+    "coach-trust-response:high_school_showcase": Object.freeze({
+      eventId: "high_school_showcase",
+      threshold: 8,
+      matchedCategory: "early-opportunity",
+      unmatchedCategory: "late-opportunity",
+      responseId: "high_school_showcase",
+      routeType: "existing-narrative"
+    })
+  });
+  const SUPPORTED_EVALUATIONS = Object.freeze(
+    Object.keys(EVALUATION_SPECIFICATIONS)
+  );
 
   function isRecord(value) {
     if (value === null || typeof value !== "object" || Array.isArray(value)) {
@@ -89,6 +105,11 @@ var CoachEvaluationBoundary = (() => {
     return SUPPORTED_EVALUATIONS.includes(evaluationId);
   }
 
+  function getEvaluationSpecification(evaluationId) {
+    const specification = EVALUATION_SPECIFICATIONS[evaluationId];
+    return specification ? deepFreeze(clone(specification)) : null;
+  }
+
   function validateCoachEvaluationRequest(request) {
     if (!isRecord(request) || hasUnsafeStructure(request)) {
       return failure("Coach Evaluation Request 必須是安全的純物件。");
@@ -115,6 +136,7 @@ var CoachEvaluationBoundary = (() => {
     if (!isSupportedEvaluation(evaluationId)) {
       return failure(`不支援的 Coach Evaluation：${evaluationId}`);
     }
+    const specification = EVALUATION_SPECIFICATIONS[evaluationId];
 
     if (!isRecord(request.context)) {
       return failure("context 必須是純物件。");
@@ -125,11 +147,16 @@ var CoachEvaluationBoundary = (() => {
       "context"
     );
     if (!contextKeys.ok) return contextKeys;
-    if (request.context.eventId !== TARGET_EVENT_ID) {
-      return failure(`eventId 必須是 ${TARGET_EVENT_ID}。`);
+    if (request.context.eventId !== specification.eventId) {
+      return failure(
+        `eventId 必須與 ${evaluationId} 對應的 ${specification.eventId} 一致。`
+      );
     }
     if (request.context.choiceIndex !== null) {
       return failure("此 Coach Response 不是 choice 觸發，choiceIndex 必須是 null。");
+    }
+    if (request.source.trim() !== `event:${specification.eventId}`) {
+      return failure("source 必須與 context.eventId 一致。");
     }
 
     if (!isRecord(request.expected)) {
@@ -188,20 +215,24 @@ var CoachEvaluationBoundary = (() => {
     if (!validation.ok) return validation;
 
     const approved = validation.request;
+    const specification =
+      EVALUATION_SPECIFICATIONS[approved.evaluationId];
     const coachTrust = approved.expected.coachTrust;
-    const isSupportive = coachTrust >= TRUST_THRESHOLD;
+    const matched = coachTrust >= specification.threshold;
 
     return deepFreeze({
       ok: true,
       response: {
         evaluationId: approved.evaluationId,
-        category: isSupportive ? "supportive" : "standard",
-        responseId: TARGET_RESPONSE_ID,
-        routeType: "existing-narrative",
+        category: matched
+          ? specification.matchedCategory
+          : specification.unmatchedCategory,
+        responseId: specification.responseId,
+        routeType: specification.routeType,
         matchedCondition: {
           field: "coachTrust",
-          operator: isSupportive ? ">=" : "<",
-          value: TRUST_THRESHOLD
+          operator: matched ? ">=" : "<",
+          value: specification.threshold
         }
       }
     });
@@ -212,6 +243,7 @@ var CoachEvaluationBoundary = (() => {
     validateCoachEvaluationRequest,
     evaluateCoachResponse,
     getSupportedEvaluationIds,
+    getEvaluationSpecification,
     getCoachTrust,
     isSupportedEvaluation
   });

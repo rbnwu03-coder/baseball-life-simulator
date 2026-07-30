@@ -1,7 +1,7 @@
-var CoachResponseFlow = (() => {
+var NarrativeConditionFlow = (() => {
   const EVENT_EVALUATION_IDS = Object.freeze({
-    youth_match_entry: "coach-trust-response:youth_match_entry",
-    high_school_showcase: "coach-trust-response:high_school_showcase"
+    high_school_scout_feedback:
+      "narrative-condition:high_school_scout_feedback"
   });
   const FORBIDDEN_KEYS = new Set(["__proto__", "constructor", "prototype"]);
 
@@ -15,8 +15,8 @@ var CoachResponseFlow = (() => {
   }
 
   function hasUnsafeStructure(value, seen = new WeakSet()) {
-    if (!isRecord(value)) return false;
-    if (seen.has(value)) return true;
+    if (value === null || typeof value !== "object") return false;
+    if (!isRecord(value) || seen.has(value)) return true;
     seen.add(value);
 
     return Reflect.ownKeys(value).some(key => {
@@ -44,10 +44,12 @@ var CoachResponseFlow = (() => {
   }
 
   function validateExactKeys(value, allowedKeys, label) {
-    const keys = Object.keys(value);
-    const unknownKey = keys.find(key => !allowedKeys.includes(key));
-    if (unknownKey) {
-      return failure(`${label} 含有未允許欄位：${unknownKey}`);
+    const keys = Reflect.ownKeys(value);
+    const unknownKey = keys.find(
+      key => typeof key !== "string" || !allowedKeys.includes(key)
+    );
+    if (unknownKey !== undefined) {
+      return failure(`${label} 含有未允許欄位：${String(unknownKey)}`);
     }
 
     const missingKey = allowedKeys.find(
@@ -60,23 +62,24 @@ var CoachResponseFlow = (() => {
     return { ok: true };
   }
 
-  function validateCoachResponseContext(context) {
+  function validateNarrativeContext(context) {
     if (!isRecord(context) || hasUnsafeStructure(context)) {
-      return failure("Coach Response Context 必須是安全的純物件。");
+      return failure("Narrative Context 必須是安全的純物件。");
     }
 
     const contextKeys = validateExactKeys(
       context,
-      ["eventId", "choiceIndex"],
-      "Coach Response Context"
+      ["eventId"],
+      "Narrative Context"
     );
     if (!contextKeys.ok) return contextKeys;
+    if (typeof context.eventId !== "string" || !context.eventId.trim()) {
+      return failure("Narrative Context eventId 必須是非空白字串。");
+    }
+
     const evaluationId = EVENT_EVALUATION_IDS[context.eventId];
     if (!evaluationId) {
-      return failure(`尚未支援此 Coach Response event：${context.eventId}`);
-    }
-    if (context.choiceIndex !== null) {
-      return failure("此 Coach Response 不是 choice 觸發，choiceIndex 必須是 null。");
+      return failure(`尚未支援此 Narrative Condition event：${context.eventId}`);
     }
 
     const eventResolver = globalThis.getEvent;
@@ -85,34 +88,38 @@ var CoachResponseFlow = (() => {
     }
     const event = eventResolver(context.eventId);
     if (!event || typeof event.text !== "function") {
-      return failure("Coach Response Context 對應的既有事件不存在。");
+      return failure("Narrative Context 對應的既有事件不存在。");
     }
+
     if (
-      typeof CoachEvaluationBoundary !== "object" ||
-      typeof CoachEvaluationBoundary.isSupportedEvaluation !== "function" ||
-      typeof CoachEvaluationBoundary.getEvaluationSpecification !==
+      typeof NarrativeConditionBoundary !== "object" ||
+      typeof NarrativeConditionBoundary.isSupportedEvaluation !== "function" ||
+      typeof NarrativeConditionBoundary.getEvaluationSpecification !==
         "function" ||
-      !CoachEvaluationBoundary.isSupportedEvaluation(evaluationId)
+      !NarrativeConditionBoundary.isSupportedEvaluation(evaluationId)
     ) {
-      return failure("目標 Coach Evaluation 尚未獲得 Boundary 支援。");
+      return failure("目標 Narrative Evaluation 尚未獲得 Boundary 支援。");
     }
     const specification =
-      CoachEvaluationBoundary.getEvaluationSpecification(evaluationId);
-    if (!specification || specification.eventId !== context.eventId) {
-      return failure("Coach Response event 與 evaluation mapping 不一致。");
+      NarrativeConditionBoundary.getEvaluationSpecification(evaluationId);
+    if (
+      !specification ||
+      specification.eventId !== context.eventId ||
+      specification.routeType !== "existing-narrative"
+    ) {
+      return failure("Narrative event 與 evaluation mapping 不一致。");
     }
 
     return {
       ok: true,
       context: {
-        eventId: context.eventId,
-        choiceIndex: null
+        eventId: context.eventId
       }
     };
   }
 
-  function createCoachResponseContext(eventId, choiceIndex = null) {
-    const validation = validateCoachResponseContext({ eventId, choiceIndex });
+  function createNarrativeContext(eventId) {
+    const validation = validateNarrativeContext({ eventId });
     if (!validation.ok) return validation;
     return {
       ok: true,
@@ -120,23 +127,30 @@ var CoachResponseFlow = (() => {
     };
   }
 
-  function createCoachEvaluationRequest(context) {
-    const validation = validateCoachResponseContext(context);
+  function createNarrativeEvaluationRequest(context) {
+    const validation = validateNarrativeContext(context);
     if (!validation.ok) return validation;
 
     const evaluationId =
       EVENT_EVALUATION_IDS[validation.context.eventId];
-    const input = CoachEvaluationBoundary.getInputSnapshot();
+    const specification =
+      NarrativeConditionBoundary.getEvaluationSpecification(evaluationId);
+    const input =
+      NarrativeConditionBoundary.getInputSnapshot(evaluationId);
+    if (!specification || !input) {
+      return failure("Narrative Evaluation Input 無法使用。");
+    }
+
     const request = {
       source: `event:${validation.context.eventId}`,
       evaluationId,
       context: clone(validation.context),
       expected: {
-        coachTrust: input.relationships.coachTrust
+        [specification.sourceField]: input[specification.sourceField]
       }
     };
     const requestValidation =
-      CoachEvaluationBoundary.validateCoachEvaluationRequest(request);
+      NarrativeConditionBoundary.validateNarrativeEvaluationRequest(request);
     if (!requestValidation.ok) return requestValidation;
 
     return {
@@ -145,20 +159,26 @@ var CoachResponseFlow = (() => {
     };
   }
 
-  function resolveCoachResponse(context) {
-    const requestResult = createCoachEvaluationRequest(context);
+  function resolveNarrativeCondition(context) {
+    const requestResult = createNarrativeEvaluationRequest(context);
     if (!requestResult.ok) return requestResult;
-    return CoachEvaluationBoundary.evaluateCoachResponse(requestResult.request);
+    return NarrativeConditionBoundary.evaluateNarrativeCondition(
+      requestResult.request
+    );
   }
 
-  function applyCoachResponse(result) {
+  function applyNarrativeCondition(result) {
     if (!isRecord(result) || hasUnsafeStructure(result)) {
-      return failure("Coach Response Result 必須是安全的純物件。");
+      return failure("Narrative Condition Result 必須是安全的純物件。");
     }
-    const resultKeys = validateExactKeys(result, ["ok", "response"], "Coach Response Result");
+    const resultKeys = validateExactKeys(
+      result,
+      ["ok", "response"],
+      "Narrative Condition Result"
+    );
     if (!resultKeys.ok) return resultKeys;
     if (result.ok !== true || !isRecord(result.response)) {
-      return failure("Coach Response Result 尚未成功解析。");
+      return failure("Narrative Condition Result 尚未成功解析。");
     }
 
     const responseKeys = validateExactKeys(
@@ -170,17 +190,12 @@ var CoachResponseFlow = (() => {
         "routeType",
         "matchedCondition"
       ],
-      "Coach Response"
+      "Narrative Condition Response"
     );
     if (!responseKeys.ok) return responseKeys;
-    if (
-      typeof CoachEvaluationBoundary !== "object" ||
-      typeof CoachEvaluationBoundary.getEvaluationSpecification !== "function"
-    ) {
-      return failure("Coach Evaluation specification 無法使用。");
-    }
+
     const specification =
-      CoachEvaluationBoundary.getEvaluationSpecification(
+      NarrativeConditionBoundary.getEvaluationSpecification(
         result.response.evaluationId
       );
     if (
@@ -188,10 +203,10 @@ var CoachResponseFlow = (() => {
       result.response.responseId !== specification.responseId ||
       result.response.routeType !== specification.routeType
     ) {
-      return failure("Coach Response 不符合本次既有 narrative hook。");
+      return failure("Narrative Condition 不符合既有 narrative hook。");
     }
     if (!isRecord(result.response.matchedCondition)) {
-      return failure("Coach Response 缺少既有門檻資訊。");
+      return failure("Narrative Condition 缺少既有門檻資訊。");
     }
     const conditionKeys = validateExactKeys(
       result.response.matchedCondition,
@@ -199,20 +214,23 @@ var CoachResponseFlow = (() => {
       "matchedCondition"
     );
     if (!conditionKeys.ok) return conditionKeys;
+
     const matched =
       result.response.category === specification.matchedCategory;
     const unmatched =
       result.response.category === specification.unmatchedCategory;
     if (!matched && !unmatched) {
-      return failure("Coach Response category 不符合 evaluation specification。");
+      return failure(
+        "Narrative Condition category 不符合 evaluation specification。"
+      );
     }
-    const expectedOperator = matched ? ">=" : "<";
     if (
-      result.response.matchedCondition.field !== "coachTrust" ||
-      result.response.matchedCondition.operator !== expectedOperator ||
+      result.response.matchedCondition.field !== specification.sourceField ||
+      result.response.matchedCondition.operator !==
+        (matched ? specification.operator : "<") ||
       result.response.matchedCondition.value !== specification.threshold
     ) {
-      return failure("Coach Response 沒有沿用既有 coachTrust 門檻。");
+      return failure("Narrative Condition 沒有沿用既有門檻。");
     }
 
     return deepFreeze({
@@ -228,16 +246,16 @@ var CoachResponseFlow = (() => {
   }
 
   const api = Object.freeze({
-    createCoachResponseContext,
-    validateCoachResponseContext,
-    createCoachEvaluationRequest,
-    resolveCoachResponse,
-    applyCoachResponse,
+    createNarrativeContext,
+    validateNarrativeContext,
+    createNarrativeEvaluationRequest,
+    resolveNarrativeCondition,
+    applyNarrativeCondition,
     getSupportedEventMap
   });
 
   if (typeof window !== "undefined") {
-    window.CoachResponseFlow = api;
+    window.NarrativeConditionFlow = api;
   }
 
   return api;

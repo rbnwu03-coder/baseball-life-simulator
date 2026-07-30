@@ -2075,6 +2075,696 @@ Golden baseline 在測試中還原修改前的 `youth_match_entry` 直接讀值�
 
 Phase 7 工程閘門已通過，但不應自動開始 Phase 8。建議先人工確認 `firstMatch` bookmark 的高／低信任文字、三個選項、下一顆滾地球、手動 Save／Load 與 legacy mirror 相容；確認產品行為沒有偏差後，再以獨立規格選擇下一條固定 coach response。現有大量複合判定仍不適合直接批次遷移。
 
+### Phase 8：Coach Response Expansion — High School Showcase
+
+**Status：Completed**
+
+#### 新增與修改檔案
+
+新增：
+
+- `tests/coach-response-expansion-test.js`
+
+修改：
+
+- `coach-evaluation-boundary.js`：將 Phase 7 單一 evaluation 常數改為 immutable evaluation specification，保留原 evaluation 並加入展示賽 evaluation。
+- `coach-response-flow.js`：加入 immutable event mapping，讓既有 Flow 同時支援少棒首次上場與高中展示賽。
+- `story.js`：只替換 `high_school_showcase.text()` 的 direct coachTrust 判斷；文字、選項、效果及路由未改。
+- `tests/coach-evaluation-boundary-test.js`：更新 supported evaluations 與 public method 驗證。
+- `tests/coach-response-flow-test.js`：更新 Phase 7 delegation fixture，使其符合 specification contract；Phase 7 Golden assertions 未改。
+- `docs/02_Architecture/22_Prototype-Implementation.md`：新增本 Phase 實作紀錄。
+
+本階段未修改 `player.js`、`relationship-boundary.js`、`relationship-flow.js`、`save.js`、`coach.js`、`npc.js`、`application-controller.js`、`index.html` 或任何 bookmark fixture。
+
+#### High School Showcase Coach Response Inventory
+
+1. **Event object**
+   - Event ID：`high_school_showcase`
+   - Event title：`球探第一次坐在看台上`
+   - 實作位置：`story.js:873`
+   - `text()` 原本直接執行 `player.relationships.coachTrust >= 8`。
+
+2. **原本門檻與文字**
+   - Threshold：`8`
+   - 高信任：`教練在第五局讓你上場，並在名單旁寫下你的兩個守位。`
+   - 低信任：`你直到第七局才被叫去熱身。看台上的球探已收起一部分資料，但還沒有離開。`
+   - 固定正文仍為：
+
+```text
+秋季交流賽，看台後方坐著一名拿測速槍與筆記本的人。
+
+<chance>
+
+這可能只是普通觀察，也可能是你第一次被棒球市場看見。
+```
+
+3. **Choices 與 effects**
+   - `完成球隊任務，不改變平常打法`：維持 `discipline +1`、`resilience +1`、`showcase_team_task`、`performance +2`、`exposure +1`、`scoutEvaluation +2`。
+   - `主動展現守位最醒目的工具`：所有守位技能、壓力、疲勞、表現、失誤、曝光及球探評價維持原值。
+   - `用站位與指揮展現理解力`：觀察、責任、棒球理解、守位技能、曝光及球探評價維持原值。
+
+4. **前後事件與選出方式**
+   - 前一事件：`high_school_long_bench`，標題 `一個月沒有正式上場`（`story.js:1284`）。
+   - 下一事件：`high_school_scout_feedback`，標題 `球探沒有給你答案`（`story.js:899`）。
+   - `getCurrentEventId()` 的青棒 sequence 以 `highSchoolStep` 選出事件：
+
+```text
+0 high_school_intro
+1 high_school_load
+2 high_school_life
+3 high_school_call_home
+4 high_school_role
+5 high_school_long_bench
+6 high_school_showcase
+7 high_school_scout_feedback
+```
+
+5. **資料依賴**
+   - `coachTrust >= 8` 只影響正文中的 `chance` 文字。
+   - 判斷本身不讀 `highSchoolRoute`、`seasonPosition`、`secondaryPosition`、`exposure` 或 `scoutEvaluation`。
+   - Event choices 仍由既有 choice processors 依守位套用 effects；Coach Response evaluation 不參與。
+   - `highSchoolStep` 只負責在既有 sequence 中選出事件，Evaluation 不讀寫 step。
+   - Event 顯示不修改 relationship、stats、skills、body、match、exposure 或 scout evaluation。
+
+6. **Debug bookmark**
+   - 已有 `highSchool` bookmark（`script.js:233`），建立合法的 `chapter: "青棒"`、`age: 16`、`highSchoolStep: 0` 與普通高中路線。
+   - 從該 bookmark 可透過六個既有選擇穩定進入 `high_school_showcase`。
+   - 因此沒有新增 bookmark，亦未修改 bookmark 名稱、fixture 或 route。
+
+7. **Save／Load**
+   - `saveGame()`（`save.js:3`）仍儲存整個 player。
+   - `normalizeSave()`（`save.js:9`）與 `loadGame()`（`save.js:75`）未修改。
+   - `highSchoolStep: 6` 與正式 `coachTrust` 由 player Save 還原；Derived Coach Response 不持久化，讀檔 render 時重新評估。
+
+#### 為何選擇 high_school_showcase
+
+此路徑符合 Phase 8 指定的低風險條件：
+
+- 固定存在，無隨機性。
+- 原判斷只讀正式 `coachTrust`。
+- 使用明確 threshold `8`。
+- 只決定兩段既有文字之一。
+- 不決定 event route、choice availability 或 chapter result。
+- 顯示事件時不寫入任何 gameplay state。
+- 三個 choice 及 effects 完全位於判斷之後，可用 Golden baseline 穩定比較。
+
+因此不需要擴大到 `junior_tournament`、chapter-end coach echo、位置競爭評分或其他複合判定。
+
+#### Supported Evaluation IDs
+
+Phase 8 完成後，`CoachEvaluationBoundary.getSupportedEvaluationIds()` 回傳：
+
+```js
+[
+  "coach-trust-response:youth_match_entry",
+  "coach-trust-response:high_school_showcase"
+]
+```
+
+Phase 7 evaluation ID、門檻與 observable behavior 均保留。
+
+#### Immutable Evaluation Specification
+
+`coach-evaluation-boundary.js:5` 使用 frozen specification：
+
+```js
+{
+  "coach-trust-response:youth_match_entry": {
+    eventId: "youth_match_entry",
+    threshold: 3,
+    matchedCategory: "supportive",
+    unmatchedCategory: "standard",
+    responseId: "youth_match_entry",
+    routeType: "existing-narrative"
+  },
+  "coach-trust-response:high_school_showcase": {
+    eventId: "high_school_showcase",
+    threshold: 8,
+    matchedCategory: "early-opportunity",
+    unmatchedCategory: "late-opportunity",
+    responseId: "high_school_showcase",
+    routeType: "existing-narrative"
+  }
+}
+```
+
+外層及每一個 specification 均 `Object.freeze()`。新增的 `getEvaluationSpecification()` 只回傳 deep-frozen clone；外部修改 clone 不會改變內部 threshold 或 mapping。
+
+#### CoachResponseFlow Event Mapping
+
+`coach-response-flow.js:2` 使用 immutable mapping：
+
+```js
+{
+  youth_match_entry: "coach-trust-response:youth_match_entry",
+  high_school_showcase:
+    "coach-trust-response:high_school_showcase"
+}
+```
+
+Flow 不含故事文字、callback 或 mutable event object。`getSupportedEventMap()` 只回傳 deep-frozen clone，用於測試與只讀檢查。
+
+#### Coach Evaluation Request
+
+```js
+{
+  source: "event:high_school_showcase",
+  evaluationId: "coach-trust-response:high_school_showcase",
+  context: {
+    eventId: "high_school_showcase",
+    choiceIndex: null
+  },
+  expected: {
+    coachTrust: 8
+  }
+}
+```
+
+`validateCoachEvaluationRequest()` 現在依 specification 同時驗證：
+
+- evaluation ID 已支援。
+- `context.eventId` 與 specification event ID 一致。
+- `source === "event:" + specification.eventId`。
+- `choiceIndex === null`。
+- 正式值為有限數字且位於 `0～20`。
+- `expected.coachTrust` 與 `RelationshipBoundary` 正式值相同。
+- exact keys、prototype pollution、循環資料及 stale request guard。
+
+Phase 8 沒有放寬 Phase 7 的安全驗證。
+
+#### Coach Response Result
+
+正式 `coachTrust >= 8`：
+
+```js
+{
+  ok: true,
+  response: {
+    evaluationId: "coach-trust-response:high_school_showcase",
+    category: "early-opportunity",
+    responseId: "high_school_showcase",
+    routeType: "existing-narrative",
+    matchedCondition: {
+      field: "coachTrust",
+      operator: ">=",
+      value: 8
+    }
+  }
+}
+```
+
+正式 `coachTrust < 8` 時，`category` 為 `late-opportunity`、operator 為 `<`；其他 identity 與 route 不變。
+
+#### 修改前與修改後資料流
+
+修改前：
+
+```text
+high_school_showcase.text()
+→ 直接讀 player.relationships.coachTrust
+→ coachTrust >= 8
+→ 選擇既有 chance 文字
+→ 回傳完整正文
+```
+
+修改後：
+
+```text
+high_school_showcase.text()
+→ CoachResponseFlow.createCoachResponseContext()
+→ CoachResponseFlow.createCoachEvaluationRequest()
+→ CoachEvaluationBoundary.validateCoachEvaluationRequest()
+→ RelationshipBoundary.getRelationship("coachTrust")
+→ CoachEvaluationBoundary.evaluateCoachResponse()
+→ CoachResponseFlow.applyCoachResponse()
+→ story.js 依 category 選擇既有 chance 文字
+→ 回傳原完整正文
+```
+
+Boundary 與 Flow 不含完整故事文本；`story.js` 仍負責原標題、正文、換行、選項與 effects。
+
+#### Phase 7 相容性
+
+- `youth_match_entry` evaluation ID 仍為 `coach-trust-response:youth_match_entry`。
+- Threshold 仍為 `3`。
+- Categories 仍為 `supportive`／`standard`。
+- 原高低信任文字、守位任務文字與三個 choices 均未修改。
+- 守位分流、Save／Load 重新評估及 mirror mismatch 行為均通過原 Phase 7 tests。
+- `tests/coach-evaluation-boundary-test.js`：73 項通過。
+- `tests/coach-response-flow-test.js`：51 項通過。
+
+#### Coach Mirror Mismatch
+
+- 正式 `coachTrust = 8`、legacy `coach.trust = 0`：得到 `early-opportunity`。
+- 正式 `coachTrust = 7`、legacy `coach.trust = 20`：得到 `late-opportunity`。
+- Evaluation 前後正式 relationship、mirror、player、flags、memories、stats、skills、personality、body、matchState、career、current state、time、DOM 與 storage 均一致。
+- Evaluation 未呼叫 `syncNpcRelationships()`，也未修正 mirror。
+
+#### Golden High School Showcase Flow
+
+Golden baseline 在測試中把 `story.js` 的 Phase 8 區塊還原為原 direct-read 實作，再與目前 runtime 比較。
+
+高信任：
+
+```text
+coachTrust 8 / mirror 0
+→ high_school_showcase
+→ 原第五局上場文字
+→ 完成球隊任務，不改變平常打法
+→ high_school_scout_feedback
+```
+
+低信任：
+
+```text
+coachTrust 7 / mirror 20
+→ high_school_showcase
+→ 原第七局熱身文字
+→ 完成球隊任務，不改變平常打法
+→ high_school_scout_feedback
+```
+
+兩條 Flow 的 event ID、title、完整正文、chance、choice、choice effects、下一事件、highSchoolStep、chapter、day、phase、relationships、mirror、stats、skills、personality、flags、memories、body、matchState、exposure、scoutEvaluation、render、transition、timeout 與 storage writes 均與 baseline 完全一致。
+
+固定 choice 只套用一次：
+
+- `seasonPerformance +2`
+- `exposure +1`
+- `scoutEvaluation +2`
+- `discipline +1`
+- `resilience +1`
+
+沒有 autosave、重複正文、同時顯示高低文字或跳過事件。
+
+#### Save／Load 後重新評估
+
+測試及實際頁面流程：
+
+1. 以正式 `coachTrust = 8` 進入展示賽，顯示第五局文字。
+2. 手動 Save，只產生一次 storage write。
+3. 切換到正式低信任狀態，顯示第七局文字。
+4. Load 還原 `coachTrust = 8` 與 `highSchoolStep = 6`。
+5. `high_school_showcase` 重新經 Boundary 評估並顯示第五局文字。
+
+Save JSON 不含 `early-opportunity`、`late-opportunity` 或 `coach-trust-response:high_school_showcase`，證明 Derived Response 未持久化。
+
+#### Debug Bookmark 與瀏覽器人工測試
+
+- 沿用既有「青棒第一年」bookmark，未新增或修改 bookmark。
+- 高信任實際路線顯示第五局文字及三個原選項。
+- 低信任實際路線顯示第七局文字，未混入高信任文字。
+- 點擊固定 choice 後正確進入 `球探沒有給你答案`。
+- 手動 Save → 低信任路線 → Load：正確回到高信任展示賽文字。
+- Phase 7「第一季正式比賽」bookmark 仍顯示原高信任文字與三個原選項。
+- 刪除存檔及正常創角均通過。
+- Browser Console：`0` error、`0` warning。
+- 專案仍未提供 `favicon.ico`；若瀏覽器主動請求仍可能得到 404，本階段依限制未處理。
+
+#### 測試結果
+
+- `tests/coach-response-expansion-test.js`：125 項驗證通過。
+- Phase 7 Boundary：73 項通過。
+- Phase 7 Flow／Golden：51 項通過。
+- Phase 8 高／低信任 Golden：通過。
+- Immutable specification／event mapping：通過。
+- Event／evaluation／source mismatch：通過。
+- stale expected、unknown field、prototype pollution、cycle guard：通過。
+- 正式 relationship 與 legacy mirror 隔離：通過。
+- Boundary／Flow Source Guard：通過。
+- Save／Load 重新評估與 Derived Response 不持久化：通過。
+- Phase 1～7 及完整 gameplay regression：通過。
+- 全專案 test commands：28／28 通過。
+
+#### 已知限制與 Deferred Items
+
+- Coach Response 架構目前只支援兩個固定、render-triggered、choiceIndex 為 `null` 的 narrative response。
+- `junior_tournament`、chapter-end coach echo、位置競爭評分、高中年度結算及 coach payoff 等複合判定仍直接使用 legacy readers。
+- `coach.trust` 與 `syncNpcRelationships()` 仍保留為 legacy projection。
+- Flow 尚未處理 choice-triggered coach response、隨機判定、多輸入 evaluation、可用選項或路由分流。
+- 不應將本階段解讀為完整 Coach System ownership 已完成。
+
+#### 回退方式
+
+1. 將 `high_school_showcase.text()` 還原為 `player.relationships.coachTrust >= 8` 的原 direct-read chance。
+2. 從 `EVALUATION_SPECIFICATIONS` 移除 `coach-trust-response:high_school_showcase`，保留 Phase 7 specification。
+3. 從 `EVENT_EVALUATION_IDS` 移除 `high_school_showcase` mapping，保留 Phase 7 mapping。
+4. 刪除 `tests/coach-response-expansion-test.js`，並還原兩個 Phase 7 test fixture 的 supported-list 調整。
+5. 移除本 Phase 8 文件紀錄。
+
+不需回退 player、relationship schema、save schema、bookmark、event ID、文字、選項、效果、路由或 ApplicationController。
+
+#### 是否建議進入 Phase 9
+
+Phase 8 工程閘門及人工測試已通過，可以規劃 Phase 9，但不應自動開始。下一階段仍應以獨立規格選擇一條固定 response，或先處理 Coach Response API 的只讀觀測與文件；不建議直接批次遷移 `junior_tournament`、章末 echo、位置競爭或任何同時依賴技能、健康、印象與 flags 的複合路徑。
+
+### Phase 9：Narrative Condition Evaluation Boundary
+
+**Status：Completed**
+
+#### 新增與修改檔案
+
+新增：
+
+- `narrative-condition-boundary.js`
+- `narrative-condition-flow.js`
+- `tests/narrative-condition-boundary-test.js`
+- `tests/narrative-condition-flow-test.js`
+
+修改：
+
+- `index.html`：依既有 Boundary／Flow 順序載入兩個 Phase 9 檔案。
+- `story.js`：只替換 `high_school_scout_feedback.text()` 的正式判斷來源。
+- `tests/coach-response-expansion-test.js`：測試環境補載 Phase 9 Boundary／Flow。
+- `tests/goal-balance-test.js`：測試環境補載 Phase 9 Boundary／Flow。
+- `tests/vertical-slice-smoke.js`：垂直切片測試環境補載 Phase 9 Boundary／Flow。
+- `docs/02_Architecture/22_Prototype-Implementation.md`：新增本 Phase 實作紀錄。
+
+本階段未修改 `player.js`、`save.js`、`application-controller.js`、`relationship-boundary.js`、`relationship-flow.js`、`coach-evaluation-boundary.js`、`coach-response-flow.js`、任何 choice、bookmark fixture 或 gameplay schema。
+
+#### 候選驗證
+
+- Event ID：`high_school_scout_feedback`。
+- 實際標題：`球探沒有給你答案`。
+- 修改前 direct read：`player.scoutEvaluation >= 3`。
+- 正式高評價文字：`球探透過教練留下一句話：『現在不是明星，但有可使用的位置價值。』`
+- 正式低評價文字：`球探的筆記沒有留下明確評語。教練只說，沒被否定不等於已經被看見。`
+- 固定正文：`你必須決定，下一年要用什麼方式提高自己的價值。`
+- 原判斷只決定 `text()` 採用哪一段正文；不決定 choice availability、effects、next event、chapter step、day、phase、stats、relationships、flags、memories、body、injury、matchState 或 career。
+- 既有 `highSchool` Debug bookmark 可穩定進入青棒第一年；依序完成七個既有事件後抵達本事件，不需新增 bookmark。
+- Save 儲存正式 `player.scoutEvaluation`、`chapter` 與 `highSchoolStep`；Load 後由本 Boundary 即時重新評估，不持久化 Derived Result。
+
+#### Narrative Condition Ownership Inventory
+
+| 類型 | Event／函式 | 讀取欄位與門檻 | 影響範圍 | 程式位置 | 本次是否遷移 |
+|---|---|---|---|---|---|
+| Pure Narrative Condition | `high_school_scout_feedback.text()` | `scoutEvaluation >= 3` | 只選擇球探評語正文 | `story.js:899-915` | 是 |
+| Pure Narrative Condition | `critical_game.text()` | `scoutEvaluation >= 4` | 只改看台球探描述 | `story.js:950-953` | 否；延後 |
+| Pure Narrative Condition | `critical_decision.text()` | `scoutEvaluation >= 5` | 只改球團興趣描述 | `story.js:998-1002` | 否；延後 |
+| Composite Condition | `high_school_load.text()` | `body.injuryRisk >= 5` 或疼痛 flags | 改身體警訊正文 | `story.js:834-839` | 否；跨 Body／Flag |
+| Composite Condition | `critical_health.text()` | `body.injuryRisk >= 6` 或多個 flags | 改健康與風險正文 | `story.js:962-965` | 否 |
+| Composite Condition | `getNightEvent()` | `memories`、`flags`、`day` | 回憶正文與日期標題 | `story.js:1415-1430` | 否 |
+| Composite Condition | 阿哲／高橋人物事件 `text()` | `personality`、`impression`、`characterArc`、`relationships`、flags | 人物版本與跨章回響 | `story.js:267-270, 615-620, 1362-1386` | 否 |
+| Route Condition | `getCurrentEventId()` | `chapter`、各章 step、`phase`、`forcedEventId` | 選擇正式事件 ID | `story.js:1433-1505` | 否 |
+| Route Condition | `getCurrentEventId()` 位置競爭 echo | `impression`、`relationships` | 選擇人物回響事件 | `story.js:1472-1486` | 否 |
+| Gameplay Result Condition | `resolveMatchAction()`／比賽結算 | `matchState`、skills、守位能力 | 比分、出局、跑者與表現 | `script.js:1252-1381` | 否 |
+| Gameplay Result Condition | `determineEnding()`／章節 evaluators | stats、skills、flags、relationships、body | 章節結果、角色定位與後續狀態 | `script.js:2598-2879` | 否 |
+| Gameplay Result Condition | `inferRoleIdentity()`／Career evaluators | skills、personality、relationships、career、守位 | 角色、市場與職涯結果 | `script.js:1399-1610` | 否 |
+| Composite Condition | 關係兌現與人物回應 helpers | `relationshipPayoffs`、impression、characterArc、relationships、skills、body | 解鎖機會、資訊與人物文案 | `script.js:2291-2494` | 否 |
+| Choice Availability Condition | 關係兌現 choice injection | payoff flags、人物印象與既有 choices | 加入符合條件的特殊選項 | `script.js:2426-2428` | 否 |
+| Random Condition | `story.js`／`script.js` 載入路徑 | 無 `Math.random` 條件命中 | 無 | 全檔搜尋 | 無候選 |
+
+Inventory 結論：現有 narrative readers 涵蓋 flags、memories、personality、skills、body、matchState、relationships、career、chapter／step、day／phase、NPC mirror、impression、characterArc 與 relationshipPayoffs；其中只有單一來源、固定門檻、只改正文的 `high_school_scout_feedback` 納入本階段。`player.stats` 並非目前正式容器，能力來源為 player 頂層欄位與 `player.baseballSkills`；NPC mirror 仍是 legacy projection，不是本 Evaluation 的正式來源。
+
+#### Narrative 資料分類
+
+1. **Persistent Source Data**：`player.scoutEvaluation`；由 Player System 擁有並由現有 Save 儲存。
+2. **Narrative Evaluation Input**：`{ scoutEvaluation }` 的最小唯讀 Snapshot。
+3. **Narrative Evaluation Specification**：evaluation ID、event ID、source field、operator、threshold、categories、response ID、route type。
+4. **Narrative Condition Result**：`recognized` 或 `uncertain`，以及既有門檻的語意描述。
+5. **Existing Narrative Content**：標題、高低評價文字、固定正文、換行、標點、choices 與 effects；仍由 `story.js` 擁有。
+6. **Runtime UI State**：DOM、render、transition、change log 與 timeout；不進入 Snapshot、Request 或 Result。
+7. **不屬於 Narrative Evaluation 的資料**：完整 player、完整 event、Save payload、callback、chapter routing、choice effects、gameplay state 與 NPC mirror。
+
+#### 正式 Source Ownership
+
+正式欄位仍是 `player.scoutEvaluation`，本階段沒有搬移或複製 schema。`NarrativeConditionBoundary` 委派 `PlayerDataBoundary.getSnapshot()` 取得正式 Player Snapshot，再只抽取 `scoutEvaluation`。`story.js` 與 `NarrativeConditionFlow` 均不接收完整 player，也不建立 scout mirror。
+
+既有 `applyHighSchoolEffects()` 與 `applyCareerEffects()` 都把 `scoutEvaluation` 限制在 `0～20`，因此 Boundary 驗證沿用實際合法範圍 `0～20`，沒有修改 gameplay clamp 或欄位定義。
+
+#### NarrativeConditionBoundary Public Methods
+
+`window.NarrativeConditionBoundary` 提供：
+
+- `getInputSnapshot(evaluationId)`
+- `getSupportedEvaluationIds()`
+- `isSupportedEvaluation(evaluationId)`
+- `getEvaluationSpecification(evaluationId)`
+- `validateNarrativeEvaluationRequest(request)`
+- `evaluateNarrativeCondition(request)`
+
+Public API、規格、Snapshot、已驗證 Request 與 Result 都是 frozen data。Boundary 拒絕未知欄位、不安全 prototype、循環資料、NaN、Infinity、越界數值、evaluation／event／source field mismatch 與 stale expected value。
+
+#### Evaluation Specification
+
+```js
+{
+  "narrative-condition:high_school_scout_feedback": {
+    eventId: "high_school_scout_feedback",
+    sourceField: "scoutEvaluation",
+    operator: ">=",
+    threshold: 3,
+    matchedCategory: "recognized",
+    unmatchedCategory: "uncertain",
+    responseId: "high_school_scout_feedback",
+    routeType: "existing-narrative"
+  }
+}
+```
+
+外層與內層 specification 均凍結；getter 回傳 deep-frozen clone。Specification 不包含故事文字、event object、callback 或 mutable player reference。
+
+#### Input Snapshot
+
+```js
+{
+  scoutEvaluation: 3
+}
+```
+
+Snapshot 是 safe clone、已 freeze，只含本 Evaluation 所需欄位，不含完整 player、event、DOM 或函式。
+
+#### Evaluation Request
+
+```js
+{
+  source: "event:high_school_scout_feedback",
+  evaluationId: "narrative-condition:high_school_scout_feedback",
+  context: {
+    eventId: "high_school_scout_feedback"
+  },
+  expected: {
+    scoutEvaluation: 3
+  }
+}
+```
+
+因判斷在 event `text()` render 時發生，Request 不加入無意義的 `choiceIndex`。
+
+#### Narrative Condition Result
+
+門檻相符：
+
+```js
+{
+  ok: true,
+  response: {
+    evaluationId: "narrative-condition:high_school_scout_feedback",
+    category: "recognized",
+    responseId: "high_school_scout_feedback",
+    routeType: "existing-narrative",
+    matchedCondition: {
+      field: "scoutEvaluation",
+      operator: ">=",
+      value: 3
+    }
+  }
+}
+```
+
+未達門檻時 category 為 `uncertain`、operator 為 `<`，其餘 identity 與 route 不變。Result 只描述評估結果，不持有文字、不 render、不推進事件、不修改任何 state。
+
+#### NarrativeConditionFlow Public Methods
+
+`window.NarrativeConditionFlow` 提供：
+
+- `createNarrativeContext(eventId)`
+- `validateNarrativeContext(context)`
+- `createNarrativeEvaluationRequest(context)`
+- `resolveNarrativeCondition(context)`
+- `applyNarrativeCondition(result)`
+- `getSupportedEventMap()`
+
+Context 固定為 `{ eventId: "high_school_scout_feedback" }`，已 freeze，不包含 player、event、DOM、callback、chapter、day 或 phase。Flow 驗證既有 event 與合法 `text()` renderer、Boundary specification 及 route type，再以最小 Request 委派 Boundary。
+
+#### Event-to-Evaluation Mapping
+
+```js
+{
+  high_school_scout_feedback:
+    "narrative-condition:high_school_scout_feedback"
+}
+```
+
+Mapping 已 freeze，只支援本次真正遷移的單一事件，不預先宣告其他條件。
+
+#### 修改前與修改後資料流
+
+修改前：
+
+```text
+high_school_scout_feedback.text()
+→ 直接讀 player.scoutEvaluation
+→ scoutEvaluation >= 3
+→ 選擇既有高／低文字
+→ 回傳完整正文
+```
+
+修改後：
+
+```text
+high_school_scout_feedback.text()
+→ NarrativeConditionFlow.createNarrativeContext()
+→ NarrativeConditionFlow.createNarrativeEvaluationRequest()
+→ NarrativeConditionBoundary.getInputSnapshot()
+→ PlayerDataBoundary.getSnapshot()
+→ NarrativeConditionBoundary.validateNarrativeEvaluationRequest()
+→ NarrativeConditionBoundary.evaluateNarrativeCondition()
+→ NarrativeConditionFlow.applyNarrativeCondition()
+→ story.js 依 category 選擇既有高／低文字
+→ 回傳原完整正文
+```
+
+`story.js` 仍擁有標題、完整文字、原換行與標點、choices、effects 及既有 next-event behavior。
+
+#### Choice 與 Effects 相容性
+
+目標事件仍有三個原選項：
+
+1. `繼續增加多位置與戰術價值`
+   - `observe +1`、`responsibility +1`
+   - flag：`high_school_commit_utility`
+   - `baseballIQ +2`
+   - `scoutEvaluation +1`
+2. `集中打擊與身體能力，追求更高上限`
+   - `confidence +2`、`pressure +1`
+   - flag：`high_school_commit_upside`
+   - `batting +2`
+   - `fatigue +2`、`injuryRisk +1`
+   - `exposure +1`
+3. `先確保健康與課業，不追逐一次評價`
+   - `discipline +1`、`responsibility +2`
+   - flag：`high_school_commit_balance`
+   - `injuryRisk -1`、`fatigue -1`
+   - `academics +1`、`burnout -1`
+
+三個 choice 的 text、memory、flag、effects、effect 套用次數、`highSchoolStep` 及下一事件均未修改。固定 Golden choice 使用第三項，因其不改 `scoutEvaluation`，可直接證明多次 render 與 Evaluation 不會提前或重複套用 effect；選擇後仍進入 `high_school_result`，chapter 為 `青棒第一年小結`。
+
+#### Coach Boundary 責任隔離
+
+- `CoachEvaluationBoundary.getSupportedEvaluationIds()` 仍只有：
+  - `coach-trust-response:youth_match_entry`
+  - `coach-trust-response:high_school_showcase`
+- Coach specification、Boundary 與 Flow 均未加入 `scoutEvaluation`。
+- Narrative Boundary 不讀 `coachTrust`。
+- Narrative Flow 不依賴、也不呼叫 `CoachResponseFlow`。
+- ApplicationController 維持原 Decision Flow 委派，不執行 threshold 或 category 判斷。
+- Phase 7 少棒首次上場與 Phase 8 高中展示賽原門檻、文字、choices、effects 與 route 均通過回歸。
+
+#### Golden 高／低評價結果
+
+Golden baseline 在測試中將 `high_school_scout_feedback.text()` 還原為修改前 direct-read 版本，再與目前 runtime 逐項比較。
+
+高評價：
+
+```text
+scoutEvaluation = 3
+→ recognized
+→ 只顯示原高評價文字
+→ 選擇「先確保健康與課業，不追逐一次評價」
+→ scoutEvaluation 仍為 3
+→ highSchoolStep = 8
+→ high_school_result
+```
+
+低評價：
+
+```text
+scoutEvaluation = 2
+→ uncertain
+→ 只顯示原低評價文字
+→ 選擇相同 Golden choice
+→ scoutEvaluation 仍為 2
+→ highSchoolStep = 8
+→ high_school_result
+```
+
+兩條 Flow 的 event ID、title、完整文字、換行、標點、choices、effects、player info、status、change log、flags、memories、stats、skills、personality、body、injury、matchState、career、current state、chapter、day、phase、render、transition、timeout 與 storage writes 均與修改前 baseline 一致。等於門檻為高分類，高於門檻仍為高分類，低於門檻為低分類。
+
+#### Save／Load
+
+1. `scoutEvaluation = 3`、`highSchoolStep = 7` 時顯示原高評價正文。
+2. 手動 Save 只產生一次既有 storage write。
+3. 切換為 `scoutEvaluation = 2` 時顯示原低評價正文。
+4. Load 還原正式值與目標事件。
+5. render 時重新取得 Snapshot 並再次顯示原高評價正文。
+
+Save payload 不包含 evaluation ID、`recognized`、`uncertain` 或 `matchedCondition`。Load 與重新評估不新增 storage write，也不重複套用 choice effect。`SAVE_KEY`、`SAVE_VERSION`、save schema、`normalizeSave()`、migration、manual save behavior 與 autosave behavior 均未修改。
+
+#### Debug Bookmark 與瀏覽器人工測試
+
+- 沿用既有「青棒第一年」bookmark，沒有新增或修改 fixture。
+- 由 bookmark 的既有事件鏈可抵達 `球探沒有給你答案`。
+- `scoutEvaluation = 3` 顯示原高評價文字；`2` 顯示原低評價文字。
+- 事件標題、固定正文及三個 choices 完整。
+- Golden choice 後正確進入青棒第一年小結，沒有重複正文或提前 effect。
+- 手動 Save 高評價事件、切換低評價路線、Load 後，恢復高評價事件與文字。
+- Phase 7「第一季正式比賽」bookmark 顯示原事件與三個原選項。
+- Phase 8 高中展示賽高信任文字與三個原選項正常，並可進入 Phase 9 事件。
+- Debug bookmark 不寫入正式 Save；刪除存檔正常。
+- 正常創角、Ideal Self 選擇與第一個故事事件正常。
+- Browser Console：`0` error、`0` warning。
+- 專案仍未提供 `favicon.ico`；瀏覽器若主動請求，獨立 `404` 仍可能存在，本階段依限制未處理。
+
+#### 測試結果
+
+- `tests/narrative-condition-boundary-test.js`：117 項驗證通過。
+- `tests/narrative-condition-flow-test.js`：138 項驗證通過。
+- Boundary method、supported ID、immutable specification、minimal frozen Snapshot：通過。
+- Request exact-key、finite、range、stale、mismatch、prototype pollution 與 cycle guards：通過。
+- `2／3／4` 門檻分類及 operator：通過。
+- Boundary／Flow pure result、deep freeze 與 Source Guard：通過。
+- 原標題、高低正文、固定正文、換行、標點與三個 choices：通過。
+- 高／低 Golden Runtime Flow：通過。
+- Save／Load 即時重新評估與 Derived Result 不持久化：通過。
+- Coach Phase 7／8 隔離與回歸：通過。
+- ApplicationController、Decision、Time、Relationship、Coach 及 gameplay regression：通過。
+- 全專案 test commands：30／30 通過。
+- JavaScript 語法檢查：通過。
+- 實際頁面測試與 Browser Console：通過。
+
+#### Source Guard
+
+`narrative-condition-boundary.js` 與 `narrative-condition-flow.js` 均不得：
+
+- 寫入 player、story、current state、relationship、stats、skills、personality、flags、memories、body、injury、matchState、career、chapter、day 或 phase。
+- 操作 DOM、render、change log、storage、save/load、timer 或 random。
+- 持有完整 player、event、故事文本、callback 或 mutable reference。
+- 呼叫 Coach Boundary／Flow 或改變 Phase 7／8 evaluation。
+
+Boundary 唯一正式資料入口是 `PlayerDataBoundary.getSnapshot()`；Flow 只處理最小 context、request、result 與既有 narrative hook。
+
+#### 已知限制與 Deferred Items
+
+- Phase 9 只支援一個固定、無隨機性、render-triggered 的 Pure Narrative Condition。
+- `critical_game` 的 `scoutEvaluation >= 4` 與 `critical_decision` 的 `scoutEvaluation >= 5` 也是正文判斷，但未經本階段安全審查與 Golden 遷移，維持 deferred。
+- flags、memories、personality、body、relationships、impression、characterArc 與 relationshipPayoffs 的多數文字判斷是複合條件，不能直接套用這個單欄位 Boundary。
+- Route、choice availability、gameplay result、random 與 composite conditions 均未接管。
+- 不建立 Narrative Repository、Rule Engine、result cache、scout mirror 或第二份持久化資料。
+- favicon 仍缺少，獨立 404 不屬於本階段。
+
+#### 回退方式
+
+1. 將 `high_school_scout_feedback.text()` 還原為 `player.scoutEvaluation >= 3` 的原 direct-read 判斷。
+2. 從 `index.html` 與既有 test harness 移除 Phase 9 Boundary／Flow scripts。
+3. 刪除 `narrative-condition-boundary.js`、`narrative-condition-flow.js` 與兩個 Phase 9 tests。
+4. 移除本 Phase 9 實作紀錄。
+
+不需回退 player schema、save schema、event ID、標題、正文、門檻、choices、effects、route、bookmark、ApplicationController 或 Coach Phase 7／8。
+
+#### 是否建議進入 Phase 10
+
+Phase 9 的工程與人工驗收閘門已通過，可以另外規劃 Phase 10；但不應自動開始。下一階段必須有獨立規格，且不應把本次單欄位、純正文 Boundary 直接擴大成通用 Narrative／Rule Engine。若未先確認產品行為，建議仍保留 `critical_game`、`critical_decision` 及所有複合條件為 deferred。
+
 ## Mapping Conclusion
 
 1. **現有程式是否適合漸進式重構：** 適合。理由是已有單一可保存 Snapshot、資料化事件、明確 event ID、可玩的垂直流程與 17 組 characterization tests。這些足以支撐「包裝後抽離」。

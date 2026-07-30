@@ -873,7 +873,21 @@ const highSchoolEvents = {
   high_school_showcase: {
     title: "球探第一次坐在看台上",
     text() {
-      const chance = player.relationships.coachTrust >= 8 ? "教練在第五局讓你上場，並在名單旁寫下你的兩個守位。" : "你直到第七局才被叫去熱身。看台上的球探已收起一部分資料，但還沒有離開。";
+      const contextResult = CoachResponseFlow.createCoachResponseContext(
+        "high_school_showcase",
+        null
+      );
+      if (!contextResult.ok) throw new Error(contextResult.error);
+      const responseResult = CoachResponseFlow.resolveCoachResponse(
+        contextResult.context
+      );
+      if (!responseResult.ok) throw new Error(responseResult.error);
+      const narrativeResult = CoachResponseFlow.applyCoachResponse(
+        responseResult
+      );
+      if (!narrativeResult.ok) throw new Error(narrativeResult.error);
+
+      const chance = narrativeResult.category === "early-opportunity" ? "教練在第五局讓你上場，並在名單旁寫下你的兩個守位。" : "你直到第七局才被叫去熱身。看台上的球探已收起一部分資料，但還沒有離開。";
       return `秋季交流賽，看台後方坐著一名拿測速槍與筆記本的人。\n\n${chance}\n\n這可能只是普通觀察，也可能是你第一次被棒球市場看見。`;
     },
     choices: [
@@ -885,7 +899,19 @@ const highSchoolEvents = {
   high_school_scout_feedback: {
     title: "球探沒有給你答案",
     text() {
-      const evalText = player.scoutEvaluation >= 3 ? "球探透過教練留下一句話：『現在不是明星，但有可使用的位置價值。』" : "球探的筆記沒有留下明確評語。教練只說，沒被否定不等於已經被看見。";
+      const contextResult = NarrativeConditionFlow.createNarrativeContext(
+        "high_school_scout_feedback"
+      );
+      if (!contextResult.ok) throw new Error(contextResult.error);
+      const responseResult = NarrativeConditionFlow.resolveNarrativeCondition(
+        contextResult.context
+      );
+      if (!responseResult.ok) throw new Error(responseResult.error);
+      const narrativeResult =
+        NarrativeConditionFlow.applyNarrativeCondition(responseResult);
+      if (!narrativeResult.ok) throw new Error(narrativeResult.error);
+
+      const evalText = narrativeResult.category === "recognized" ? "球探透過教練留下一句話：『現在不是明星，但有可使用的位置價值。』" : "球探的筆記沒有留下明確評語。教練只說，沒被否定不等於已經被看見。";
       return `${evalText}\n\n你必須決定，下一年要用什麼方式提高自己的價值。`;
     },
     choices: [

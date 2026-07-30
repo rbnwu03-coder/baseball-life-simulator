@@ -104,7 +104,8 @@ assert(
   "getInputSnapshot",
   "validateCoachEvaluationRequest",
   "evaluateCoachResponse",
-  "getSupportedEvaluationIds"
+  "getSupportedEvaluationIds",
+  "getEvaluationSpecification"
 ].forEach(method => {
   assert(
     evaluate(
@@ -145,7 +146,11 @@ assert(
 assert(
   JSON.stringify(
     parse(context, "CoachEvaluationBoundary.getSupportedEvaluationIds()")
-  ) === JSON.stringify(["coach-trust-response:youth_match_entry"]),
+  ) ===
+    JSON.stringify([
+      "coach-trust-response:youth_match_entry",
+      "coach-trust-response:high_school_showcase"
+    ]),
   "Evaluation whitelist 錯誤"
 );
 
