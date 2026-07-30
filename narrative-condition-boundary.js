@@ -94,6 +94,22 @@ var NarrativeConditionBoundary = (() => {
     return specification ? deepFreeze(clone(specification)) : null;
   }
 
+  function getRegistryMetadata() {
+    return deepFreeze(
+      SUPPORTED_EVALUATIONS.map(evaluationId => {
+        const specification = EVALUATION_SPECIFICATIONS[evaluationId];
+        return {
+          evaluationId,
+          owner: "NarrativeConditionBoundary",
+          ownerType: "narrative-condition",
+          eventId: specification.eventId,
+          responseId: specification.responseId,
+          routeType: specification.routeType
+        };
+      })
+    );
+  }
+
   function getFormalSourceValue(specification) {
     if (
       typeof PlayerDataBoundary !== "object" ||
@@ -251,6 +267,7 @@ var NarrativeConditionBoundary = (() => {
     getSupportedEvaluationIds,
     isSupportedEvaluation,
     getEvaluationSpecification,
+    getRegistryMetadata,
     validateNarrativeEvaluationRequest,
     evaluateNarrativeCondition
   });

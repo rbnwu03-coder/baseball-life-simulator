@@ -2765,6 +2765,225 @@ Boundary 唯一正式資料入口是 `PlayerDataBoundary.getSnapshot()`；Flow �
 
 Phase 9 的工程與人工驗收閘門已通過，可以另外規劃 Phase 10；但不應自動開始。下一階段必須有獨立規格，且不應把本次單欄位、純正文 Boundary 直接擴大成通用 Narrative／Rule Engine。若未先確認產品行為，建議仍保留 `critical_game`、`critical_decision` 及所有複合條件為 deferred。
 
+### Phase 10：Evaluation Registry
+
+#### Status
+
+Completed。Phase 10 僅建立「評估身分、Owner 與事件來源」的集中登錄與查詢能力；沒有接管任何評估運算，也沒有開始 Phase 11。
+
+#### Files
+
+- 新增 `evaluation-registry.js`
+- 新增 `evaluation-registry-bootstrap.js`
+- 修改 `coach-evaluation-boundary.js`
+- 修改 `narrative-condition-boundary.js`
+- 修改 `index.html`
+- 修改 `tests/vertical-slice-smoke.js`
+- 新增 `tests/evaluation-registry-test.js`
+- 新增 `tests/evaluation-registry-integration-test.js`
+- 更新 `docs/02_Architecture/22_Prototype-Implementation.md`
+
+#### Evaluation Ownership Inventory
+
+| Evaluation ID | Owner | Owner Type | Event ID | Response ID | Route Type | 實際來源欄位 |
+|---|---|---|---|---|---|---|
+| `coach-trust-response:youth_match_entry` | `CoachEvaluationBoundary` | `coach-evaluation` | `youth_match_entry` | `youth_match_entry` | `existing-narrative` | Relationship snapshot 的 `coachTrust` |
+| `coach-trust-response:high_school_showcase` | `CoachEvaluationBoundary` | `coach-evaluation` | `high_school_showcase` | `high_school_showcase` | `existing-narrative` | Relationship snapshot 的 `coachTrust` |
+| `narrative-condition:high_school_scout_feedback` | `NarrativeConditionBoundary` | `narrative-condition` | `high_school_scout_feedback` | `high_school_scout_feedback` | `existing-narrative` | Player snapshot 的 `scoutEvaluation` |
+
+盤點結果沒有 ID 或 Owner 衝突。規格清單提到 `player-data-boundary.js`，但目前專案沒有這個獨立檔案；`PlayerDataBoundary` 的實際實作位於 `player.js`。本階段沒有因此搬移或重構 Player Data Boundary。
+
+#### Ownership Boundary
+
+`EvaluationRegistry` 負責：
+
+- 驗證最小 metadata contract。
+- 以 `evaluationId` 登錄並防止重複。
+- 提供穩定、唯讀、可查詢的 Evaluation 清單。
+- 以 `eventId` 找到一或多個相關 Evaluation。
+
+`EvaluationRegistry` 不負責：
+
+- 讀取 player、relationship 或任何 gameplay state。
+- 判斷 threshold、operator、category 或 matched condition。
+- 呼叫 Coach／Narrative 的 evaluate 方法。
+- 渲染 UI、改寫事件、儲存存檔、排程 timer 或產生隨機數。
+
+`CoachEvaluationBoundary` 與 `NarrativeConditionBoundary` 仍各自擁有完整 specification、input snapshot、request validation 與 evaluation。Registry 只知道最小 metadata，不知道 Boundary 的內部規則。
+
+#### Public API
+
+`window.EvaluationRegistry` 提供：
+
+- `registerEvaluation(metadata)`
+- `getEvaluationIds()`
+- `isSupportedEvaluation(evaluationId)`
+- `findEvaluation(evaluationId)`
+- `findByEvent(eventId)`
+- `getRegisteredCount()`
+
+API object、成功登錄的內部 metadata、所有公開回傳 clone 與 event query array 都是 frozen。呼叫者無法藉由修改查詢結果改寫 Registry。
+
+#### Metadata Schema
+
+每筆 metadata 僅允許下列六個欄位：
+
+```js
+{
+  evaluationId: "",
+  owner: "",
+  ownerType: "",
+  eventId: "",
+  responseId: "",
+  routeType: ""
+}
+```
+
+所有欄位都必須是非空白字串；拒絕多餘欄位、陣列、日期、函式、DOM-like value、prototype pollution key、非 plain object 與循環結構。
+
+Metadata 刻意不包含：
+
+- `threshold`
+- `operator`
+- `category`
+- `sourceField`
+
+這些仍屬於各 Evaluation Boundary 的私有 specification，不得由 Registry 變成第二份規則來源。
+
+#### Registration and Bootstrap
+
+登錄採「Boundary 公開最小 metadata，獨立 bootstrap 統一登錄」：
+
+1. `CoachEvaluationBoundary.getRegistryMetadata()` 回傳兩筆 deep-frozen metadata。
+2. `NarrativeConditionBoundary.getRegistryMetadata()` 回傳一筆 deep-frozen metadata。
+3. `EvaluationRegistryBootstrap.initialize()` 依固定順序登錄三筆資料。
+
+此方式避免：
+
+- Registry 直接依賴 Boundary 內部 specification。
+- Boundary 直接依賴 Registry。
+- 在 Registry 本身硬編碼 Owner 的 evaluation 清單。
+
+`initialize()` 在同一 runtime 中具冪等性；重複呼叫不會重複登錄。若直接再次呼叫 `registerEvaluation()` 使用既有 ID，則明確拒絕，且 Registry 不發生部分 mutation。
+
+#### Runtime Load Order
+
+`index.html` 的相關載入順序為：
+
+```text
+player.js
+→ current-state-boundary.js
+→ time-boundary.js
+→ relationship-boundary.js
+→ evaluation-registry.js
+→ coach-evaluation-boundary.js
+→ narrative-condition-boundary.js
+→ evaluation-registry-bootstrap.js
+→ decision-flow.js
+→ day-completion-flow.js
+→ relationship-flow.js
+→ coach-response-flow.js
+→ narrative-condition-flow.js
+→ npc.js / coach.js / rival.js / story.js / save.js / script.js
+→ application-controller.js
+```
+
+Bootstrap 在兩個 Boundary 定義完成後、所有 Flow 與 gameplay runtime 啟動前執行。
+
+#### Duplicate and Unknown Behavior
+
+- 重複 `evaluationId`：回傳失敗，不覆寫、不合併、不增加 count。
+- 不存在的 `evaluationId`：`findEvaluation()` 回傳 `null`。
+- 不存在或不合法的 `eventId`：`findByEvent()` 回傳 frozen 空陣列。
+- 一個 event 對多個 evaluation：允許，並維持固定登錄順序。
+
+#### Boundary Compatibility
+
+Phase 7 Coach 路徑維持：
+
+```text
+story.js
+→ CoachResponseFlow
+→ CoachEvaluationBoundary
+→ RelationshipBoundary
+→ 原有 response 文案與 route
+```
+
+Phase 9 Narrative 路徑維持：
+
+```text
+story.js
+→ NarrativeConditionFlow
+→ NarrativeConditionBoundary
+→ PlayerDataBoundary
+→ 原有 response 文案與 route
+```
+
+兩個 Boundary 都能在完全沒有載入 Registry 的隔離 context 中繼續完成 evaluation，證明 Registry 沒有成為新的執行依賴。Registry 本身也不會呼叫任何 evaluate method。
+
+#### Golden Runtime Compatibility
+
+- Phase 7：`youth_match_entry` 的教練信任高低版本、選項、效果與後續流程不變。
+- Phase 8：`high_school_showcase` 的高信任版本仍在第五局給上場與雙守位標記；低信任版本仍到第七局才熱身。
+- Phase 9：`high_school_scout_feedback` 在 `scoutEvaluation = 3` 時仍為 recognized 文案；`scoutEvaluation = 2` 時仍為 uncertain 文案。
+
+#### Save / Load
+
+Registry metadata 是 runtime static registration，不加入 player，不加入 save payload，也不新增 localStorage key。手動 Save／Load 仍只還原 gameplay state；讀檔後 Registry count 維持三筆，不會再次登錄或產生 duplicate error。
+
+#### Source Guard
+
+`evaluation-registry.js` 不得包含或依賴：
+
+- player、coachTrust、scoutEvaluation。
+- RelationshipBoundary、PlayerDataBoundary。
+- Coach／Narrative evaluate methods。
+- threshold、operator、category、sourceField。
+- DOM、render、storage、save/load、timer、random 或 date。
+
+`evaluation-registry-bootstrap.js` 只負責取得 metadata 與呼叫 register；不讀 gameplay state、不執行 evaluation、不渲染、不存檔。
+
+#### Tests
+
+- `tests/evaluation-registry-test.js`：112 項 Registry contract、immutability、invalid input、duplicate、unknown、one-to-many、deterministic order 與 Source Guard 驗證通過。
+- `tests/evaluation-registry-integration-test.js`：57 項 Owner、事件 mapping、bootstrap、Boundary isolation、Phase 7～9 Golden 與載入順序驗證通過。
+- 全部 JavaScript 語法檢查通過。
+- 全專案測試 32／32 通過。
+
+#### Browser Verification
+
+- 正常創角可進入「球場邊的夏天」。
+- `youth_match_entry` 顯示原本「教練叫到你的名字」與三個選項。
+- `high_school_showcase` 高／低教練評價版本皆正確。
+- `high_school_scout_feedback` recognized／uncertain 版本皆正確。
+- 手動 Save 後切換狀態，再 Load 可還原原本高評價畫面。
+- Delete Save 可回到建立角色。
+- Browser Console：0 error、0 warning。
+- 專案仍未提供 `favicon.ico`；這是既有非 gameplay 資產缺口，未納入 Phase 10。
+
+#### Player-visible Behavior
+
+Phase 10 沒有新增玩家可見功能，也沒有改變數值、事件、選項、文案、路由或結果。Registry 是後續架構查詢基礎；目前玩家行為應與 Phase 9 完全相同。
+
+#### Deferred Items
+
+- 不建立集中 Rule Engine。
+- 不把 threshold/operator/category/sourceField 移入 Registry。
+- 不讓 Registry 執行 evaluation。
+- 不加入 runtime debug UI 或玩家可見清單。
+- 不改 save schema。
+- 不遷移其他舊 evaluation-like 判定。
+- 不處理 `critical_game`、`critical_decision` 或新的 Evaluation。
+- 不開始 Phase 11。
+
+#### Rollback Boundary
+
+若需回退 Phase 10，只需移除兩個 Registry 檔案、兩個 Boundary 的 `getRegistryMetadata()`、`index.html` 新增的兩個 Registry script tags、兩個 Registry tests 與 smoke loader 變更；Phase 7～9 的原有 runtime Flow 與 evaluation specification 不需回退。
+
+#### Phase 11 Recommendation
+
+可進入 Phase 11，但建議仍維持「Registry 只回答誰擁有哪個 Evaluation」的界線。任何後續 dispatcher 或 orchestration 都應依 `evaluationId` 導向既有 Owner，不能把 Boundary 私有 threshold 與 evaluation 邏輯搬進 Registry。
+
 ## Mapping Conclusion
 
 1. **現有程式是否適合漸進式重構：** 適合。理由是已有單一可保存 Snapshot、資料化事件、明確 event ID、可玩的垂直流程與 17 組 characterization tests。這些足以支撐「包裝後抽離」。

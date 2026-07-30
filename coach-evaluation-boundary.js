@@ -110,6 +110,22 @@ var CoachEvaluationBoundary = (() => {
     return specification ? deepFreeze(clone(specification)) : null;
   }
 
+  function getRegistryMetadata() {
+    return deepFreeze(
+      SUPPORTED_EVALUATIONS.map(evaluationId => {
+        const specification = EVALUATION_SPECIFICATIONS[evaluationId];
+        return {
+          evaluationId,
+          owner: "CoachEvaluationBoundary",
+          ownerType: "coach-evaluation",
+          eventId: specification.eventId,
+          responseId: specification.responseId,
+          routeType: specification.routeType
+        };
+      })
+    );
+  }
+
   function validateCoachEvaluationRequest(request) {
     if (!isRecord(request) || hasUnsafeStructure(request)) {
       return failure("Coach Evaluation Request 必須是安全的純物件。");
@@ -244,6 +260,7 @@ var CoachEvaluationBoundary = (() => {
     evaluateCoachResponse,
     getSupportedEvaluationIds,
     getEvaluationSpecification,
+    getRegistryMetadata,
     getCoachTrust,
     isSupportedEvaluation
   });
