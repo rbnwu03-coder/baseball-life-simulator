@@ -47,6 +47,7 @@ function normalizeSave(saved) {
   fresh.careerValue.history = Array.isArray(saved.careerValue?.history) ? saved.careerValue.history : [fresh.careerValue.current];
   fresh.roleIdentity = Object.assign({}, createInitialPlayer().roleIdentity, saved.roleIdentity || {});
   fresh.roleIdentity.previous = Array.isArray(saved.roleIdentity?.previous) ? saved.roleIdentity.previous : [];
+  fresh.roleIdentity.previousArchetypes = Array.isArray(saved.roleIdentity?.previousArchetypes) ? saved.roleIdentity.previousArchetypes : [];
   fresh.careerArc = Object.assign({}, createInitialPlayer().careerArc, saved.careerArc || {});
   fresh.turningPoints = Array.isArray(saved.turningPoints) ? saved.turningPoints : [];
   fresh.marketEvaluation = Object.assign({}, createInitialPlayer().marketEvaluation, saved.marketEvaluation || {});

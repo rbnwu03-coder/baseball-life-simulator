@@ -3,7 +3,7 @@ const path = require("path");
 const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
-const files = ["player.js", "story.js", "save.js", "script.js"];
+const files = ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "save.js", "script.js"];
 
 function makeContext() {
   const nodes = new Map();
@@ -39,6 +39,7 @@ function playUntil(game, choices, condition, maxTurns = 20) {
 
 function play(routeChoices, chapter2Choices, seasonChoices, competitionChoices, juniorChoices, juniorSeasonChoices, highSchoolChoices, criticalChoices, transitionChoices) {
   const game = makeContext();
+  vm.runInContext("selectedIdealSelf = '全能型'", game);
   game.createPlayer();
   for (let day = 0; day < 7; day += 1) {
     game.choose(game.getCurrentEventId(), routeChoices[(day * 2) % routeChoices.length]);
@@ -88,6 +89,7 @@ const results = [
 ];
 
 const persistence = makeContext();
+vm.runInContext("selectedIdealSelf = '技術鑽研型'", persistence);
 persistence.createPlayer();
 persistence.choose(persistence.getCurrentEventId(), 0);
 vm.runInContext("player.relationships.coachTrust = 4; player.positionAffinity.infield = 3; player.body.injuryRisk = 2", persistence);
@@ -95,12 +97,18 @@ persistence.saveGame();
 vm.runInContext("player = createInitialPlayer('被覆蓋')", persistence);
 persistence.loadGame();
 if (vm.runInContext("player.name", persistence) !== "測試球員") throw new Error("存讀檔沒有還原角色");
+if (vm.runInContext("player.idealSelf", persistence) !== "技術鑽研型") throw new Error("存讀檔沒有還原理想球員形象");
 if (!vm.runInContext("player.baseballSkills && Array.isArray(player.flags)", persistence)) throw new Error("存檔補欄位失敗");
 if (!vm.runInContext("player.relationships.coachTrust === 4 && player.positionAffinity.infield === 3", persistence)) throw new Error("第一季狀態沒有還原");
 if (!vm.runInContext("player.body.injuryRisk === 2", persistence)) throw new Error("青少棒身體狀態沒有還原");
 
+const legacyIdealSelf = makeContext();
+vm.runInContext("player = normalizeSave({ name: '舊存檔球員' }); updateStatus()", legacyIdealSelf);
+if (vm.runInContext("player.idealSelf", legacyIdealSelf) !== "") throw new Error("舊存檔的理想球員形象 fallback 不正確");
+if (!vm.runInContext("document.getElementById('player-info').innerHTML.includes('理想球員：尚未形成')", legacyIdealSelf)) throw new Error("舊存檔沒有顯示安全 fallback");
+
 const originTest = makeContext();
-vm.runInContext("selectedOrigin = 'understand'", originTest);
+vm.runInContext("selectedOrigin = 'understand'; selectedIdealSelf = '直覺天賦型'", originTest);
 originTest.createPlayer();
 if (!vm.runInContext("player.origin === 'understand' && player.observe === 2 && player.flags.includes('origin_wants_to_understand')", originTest)) throw new Error("角色願望沒有套用");
 if (!vm.runInContext("getEvent('day1_morning').text().includes('答案')", originTest)) throw new Error("角色願望沒有改變開場文字");
@@ -236,7 +244,7 @@ if (vm.runInContext("getCurrentEventId()", azheBondTest) !== "azhe_bond_low") th
 azheBondTest.choose("azhe_bond_low", 0);
 if (!vm.runInContext("player.flags.includes('repaired_azhe_signal') && player.relationships.teammateBond === 4", azheBondTest)) throw new Error("阿哲低羈絆修復選項沒有生效");
 vm.runInContext("player.chapter = '青少棒'; player.juniorStep = 8; player.relationships.teammateBond = 8; player.characterArc.azhe = 'respected_equal'", azheBondTest);
-if (!vm.runInContext("getEvent('junior_friend_exit').text().includes('親自找你')", azheBondTest)) throw new Error("阿哲去留事件沒有回收高羈絆");
+if (!vm.runInContext("getEvent('junior_friend_exit').text().includes('工作表攤開') && getEvent('junior_friend_exit').text().includes('不是替他簽名')", azheBondTest)) throw new Error("阿哲去留事件沒有以具體場景回收高羈絆");
 vm.runInContext("player.relationships.teammateBond = 1; player.characterArc.azhe = 'distant'", azheBondTest);
 if (!vm.runInContext("getEvent('junior_friend_exit').text().includes('教練口中')", azheBondTest)) throw new Error("阿哲去留事件沒有回收低羈絆");
 

@@ -265,14 +265,17 @@ const youthSeasonEvents = {
     title: "沒有被教練看見的失誤",
     text() {
       const i = player.impression.azhe;
-      if (i.trusts >= 2 || player.personality.kind >= 3) return "教練已經走向器材室，阿哲卻把剛才漏掉的滾地球重新放回原位。看見你還在，他把球推過來：『你剛才有看到嗎？我是不是又慢了一步？』";
-      if (player.personality.ambitious >= 3) return "阿哲反覆重做一顆教練沒有注意的滾地球。他先看了一眼器材室，才低聲問：『你不會跟教練說吧？』";
-      return "你收起手套時才發現阿哲仍站在原地。他把同一顆球來回滾了好幾次，看到你回頭，只把球踩住，沒有解釋。";
+      const admission = i.trusts >= 2 || player.personality.kind >= 3
+        ? "他看見你還在，才用鞋尖把球停住：『剛才是不是又慢了一步？』"
+        : player.personality.ambitious >= 3
+          ? "他先看一眼器材室，才壓低聲音：『那球沒有算進測驗，對吧？』"
+          : "他發現你回頭，立刻蹲下去整理鞋帶，像那顆球只是忘了收進袋子。";
+      return `傍晚收操後，器材室的鐵門一開一闔。鋁棒碰進球袋，發出一連串乾硬的聲音；教練在遠處催大家把最後一袋球搬走。\n\n阿哲卻還站在二游之間。他獨自把一顆沾灰的球滾回原位，再向前跨步。球碰到手套外緣，「喀」一聲，又從他的腳邊溜出去。\n\n${admission}\n\n器材室又有人喊了一次阿哲的名字。他把漏掉的球踩在鞋底下，沒有抬頭。`;
     },
     choices: [
-      C("把剛才那一球重新滾給他", { observe: 1, resilience: 1 }, ["azhe_hidden_error_seen", "azhe_error_reworked"], "你們沒有通知教練，只把腳步拆成幾個動作。離開前，阿哲問你明天還會不會記得這一球。", { personalityEffects: { kind: 2, reliable: 1 }, impressionEffects: { azhe: { trusts: 2, depends: 1 } }, skillEffects: { catching: 1, baseballIQ: 1 }, relationshipEffects: { teammateBond: 2 }, bodyEffects: { fatigue: 1 }, arcEffects: { azhe: "confided" } }),
-      C("告訴他教練其實沒有注意", { confidence: 1 }, ["azhe_hidden_error_seen", "azhe_error_minimized"], "阿哲點點頭，把球收進袋子。你替他拿走了被評價的壓力，也沒有回答他真正擔心的事。", { personalityEffects: { thoughtful: 1 }, impressionEffects: { azhe: { feelsDistance: 1 } }, relationshipEffects: { teammateBond: 0 } }),
-      C("打開自己的球袋，繼續原定訓練", { confidence: 1, pressure: 1 }, ["azhe_hidden_error_seen", "chose_solo_over_teammate", "youth_bat_work"], "阿哲看了你一會，只說『明天見』。你們都留下來，卻各自面對自己的問題。", { personalityEffects: { ambitious: 2, selfish: 1 }, impressionEffects: { coach: { competitive: 1 }, azhe: { feelsDistance: 2 } }, skillEffects: { batting: 2 }, relationshipEffects: { teammateBond: -1 }, bodyEffects: { fatigue: 2 } })
+      C("蹲回原來的位置，把球重新滾給他", { observe: 1, resilience: 1 }, ["azhe_hidden_error_seen", "azhe_error_reworked", "azhe_grounder_object"], "你把那顆沾灰的球放回起點，一次又一次滾向同一道彈跳。最後一球收進手套時，阿哲沒有道謝，只把球在掌心轉半圈，問：『明天還記得從這裡開始嗎？』器材室的門在你們身後關上。", { personalityEffects: { kind: 2, reliable: 1 }, impressionEffects: { azhe: { trusts: 2, depends: 1 } }, skillEffects: { catching: 1, baseballIQ: 1 }, relationshipEffects: { teammateBond: 2 }, bodyEffects: { fatigue: 1 }, arcEffects: { azhe: "confided" } }),
+      C("把球丟進袋子，告訴他剛才沒有人看見", { confidence: 1 }, ["azhe_hidden_error_seen", "azhe_error_minimized", "azhe_grounder_object"], "球落進袋底，撞出一聲悶響。阿哲肩膀鬆了一點，立刻拉緊袋口；他沒有再重做那個腳步。隔天同樣的球滾來時，他先看的是教練站在哪裡。", { personalityEffects: { thoughtful: 1 }, impressionEffects: { azhe: { feelsDistance: 1 } }, relationshipEffects: { teammateBond: 0 } }),
+      C("打開自己的球袋，回到原定的十球訓練", { confidence: 1, pressure: 1 }, ["azhe_hidden_error_seen", "chose_solo_over_teammate", "youth_bat_work", "azhe_grounder_object"], "你把自己的十顆球排在打擊網旁。阿哲隔著二游之間的距離看了一會，彎腰撿起那顆漏接球，只說『明天見』。接下來只剩球棒擊網的聲音，和他一個人把球滾回原位的聲音。", { personalityEffects: { ambitious: 2, selfish: 1 }, impressionEffects: { coach: { competitive: 1 }, azhe: { feelsDistance: 2 } }, skillEffects: { batting: 2 }, relationshipEffects: { teammateBond: -1 }, bodyEffects: { fatigue: 2 } })
     ]
   },
   youth_bench: {
@@ -288,10 +291,23 @@ const youthSeasonEvents = {
   youth_match_entry: {
     title: "教練叫到你的名字",
     text() {
-      const trust = player.relationships.coachTrust;
+      const contextResult = CoachResponseFlow.createCoachResponseContext(
+        "youth_match_entry",
+        null
+      );
+      if (!contextResult.ok) throw new Error(contextResult.error);
+      const responseResult = CoachResponseFlow.resolveCoachResponse(
+        contextResult.context
+      );
+      if (!responseResult.ok) throw new Error(responseResult.error);
+      const narrativeResult = CoachResponseFlow.applyCoachResponse(
+        responseResult
+      );
+      if (!narrativeResult.ok) throw new Error(narrativeResult.error);
+
       const assignments = { "內野手": "去二壘，把接傳完成", "外野手": "去右外野，先守住身後", "捕手": "穿護具，從下一名打者開始接", "投手": "去牛棚，下一局由你接手" };
       const assignment = assignments[player.seasonPosition] || "手套拿著，準備上場";
-      const call = trust >= 3
+      const call = narrativeResult.category === "supportive"
         ? `山本教練沒有回頭，只朝你招手：『${assignment}。』他說得像是早就決定要給你機會。`
         : `教練看了板凳一圈，最後叫到你的名字：『${assignment}。』這個機會來得比你預期突然。`;
       return `四局上，少棒隊 1：2 落後，一壘有人、一人出局。\n\n${call}\n\n你站起來時才發現雙腿有點麻。釘鞋踩進紅土，觀眾的聲音忽然從耳邊退遠，只剩捕手手套撞擊的聲音。`;
@@ -454,31 +470,31 @@ const positionCompetitionEvents = {
   azhe_bond_high: {
     title: "阿哲只對你說的事",
     text() {
-      return `先發測試公布後，阿哲沒有先問你的名單。他等其他人離開，才承認自己最近接球時一直怕拖累隊伍。\n\n「我知道你也在競爭，」他捏著手套邊緣說，「但這件事我只敢跟你講。」\n\n你們的關係已經不只是一起練球。他願意把害怕被淘汰的那一面交給你。`;
+      return `先發測試結束後，夕陽只剩在一壘休息區的長椅下。別人的釘鞋聲已經穿過鐵門，阿哲還坐著，把同一截鞋帶拆開、綁緊，又拆開。\n\n他先問：『你明天幾點到？』停了一會，拇指才去摳手套邊緣磨白的線。\n\n『最近球打到二游中間，我會先想是不是會害你來不及補。』他盯著紅土，沒有看你，『有時候一想到，就連自己的第一步也出不去。』\n\n遠處管理員開始收壘包。留給你們的時間，只剩他走到這邊以前反覆想過、卻還沒有說完的幾句話。`;
     },
     choices: [
-      C("坐到旁邊，等他自己把話說完", { resilience: 1, pressure: -1 }, ["azhe_confession_resolved", "azhe_felt_heard"], "你沒有把他的害怕變成訓練題目。離開前，阿哲第一次主動約你明天提早到。", { relationshipEffects: { teammateBond: 2 }, personalityEffects: { kind: 2, thoughtful: 1 }, impressionEffects: { azhe: { trusts: 3 } }, arcEffects: { azhe: "confided" } }),
-      C("把害怕的球設計成一個提醒暗號", { responsibility: 2, observe: 1 }, ["azhe_confession_resolved", "azhe_shared_fear", "azhe_private_signal"], "阿哲記住暗號，也開始在每一顆不確定的球先看向你。", { skillEffects: { baseballIQ: 1 }, relationshipEffects: { teammateBond: 2 }, bodyEffects: { fatigue: 1 }, personalityEffects: { kind: 1, reliable: 2 }, impressionEffects: { azhe: { trusts: 2, depends: 3 } }, arcEffects: { azhe: "dependent" } }),
-      C("說大家都會怕，先別把它想得太大", { confidence: 1 }, ["azhe_confession_resolved", "azhe_fear_minimized"], "阿哲點頭，把手套戴回去。下一次害怕出現時，他沒有再告訴你。", { personalityEffects: { thoughtful: 1 }, impressionEffects: { azhe: { trusts: -1, feelsDistance: 1 } } }),
-      C("提醒他明天也是競爭，自己無法一直提醒", { pressure: 1, responsibility: 1 }, ["azhe_confession_resolved", "azhe_competition_boundary"], "阿哲說『我知道』。隔天測試前，他刻意站到離你更遠的位置。", { personalityEffects: { ambitious: 1, selfish: 1 }, impressionEffects: { azhe: { feelsDistance: 2 } }, relationshipEffects: { teammateBond: -1 }, arcEffects: { azhe: "distant" } })
+      C("把水放在他腳邊，坐下來等他說完", { resilience: 1, pressure: -1 }, ["azhe_confession_resolved", "azhe_felt_heard"], "你把水瓶放在長椅下，沒有去碰那副被捏得變形的手套。阿哲斷斷續續說完三顆球，最後把鞋帶一次綁好：『明天提早十分鐘，可以嗎？』管理員熄燈前，你們才一起起身。", { relationshipEffects: { teammateBond: 2 }, personalityEffects: { kind: 2, thoughtful: 1 }, impressionEffects: { azhe: { trusts: 3 } }, arcEffects: { azhe: "confided" } }),
+      C("用球在紅土畫出責任線，和他約好提醒聲", { responsibility: 2, observe: 1 }, ["azhe_confession_resolved", "azhe_shared_fear", "azhe_private_signal", "azhe_red_dirt_line"], "你用球沿著二游之間壓出一道短線，再把提醒聲喊給他聽。阿哲蹲下，用兩根手指把線尾補直；起身後，他先朝你的位置看了一次，才把球滾過去。那道線隔天會被整平，短音卻留了下來。", { skillEffects: { baseballIQ: 1 }, relationshipEffects: { teammateBond: 2 }, bodyEffects: { fatigue: 1 }, personalityEffects: { kind: 1, reliable: 2 }, impressionEffects: { azhe: { trusts: 2, depends: 3 } }, arcEffects: { azhe: "dependent" } }),
+      C("把球推回他手裡，說明天照常練", { confidence: 1 }, ["azhe_confession_resolved", "azhe_fear_minimized"], "球碰到阿哲手套，他下意識接住。你站起來說明天照常，他也跟著戴回手套；走出鐵門後，他把沒說完的那句話留在空球場裡。下一次害怕出現時，他只自己多做了五球。", { personalityEffects: { thoughtful: 1 }, impressionEffects: { azhe: { trusts: -1, feelsDistance: 1 } } }),
+      C("收好手套，提醒彼此都得完成自己的測試", { pressure: 1, responsibility: 1 }, ["azhe_confession_resolved", "azhe_competition_boundary"], "你扣上球袋，阿哲也把鞋帶塞進鞋舌裡。他說『我知道』，先一步走向鐵門。隔天測試前，他把站位往另一側挪了兩步，中間留下的紅土沒有人踩過。", { personalityEffects: { ambitious: 1, selfish: 1 }, impressionEffects: { azhe: { feelsDistance: 2 } }, relationshipEffects: { teammateBond: -1 }, arcEffects: { azhe: "distant" } })
     ]
   },
   azhe_bond_mid: {
     title: "練習後的一瓶水",
-    text: "阿哲把多買的一瓶水放在你旁邊。你們已經會在場上互相提醒，卻還不太談球場以外的事。這段隊友情正停在可以更近、也可能慢慢疏遠的位置。",
+    text: "午休結束前，休息區只剩風扇轉動和自動販賣機落罐的聲音。阿哲從販賣機走回來，手上多一瓶水。他沒有叫你，只把冰涼的瓶身放在你的守備筆記旁，水珠慢慢暈濕紙角。集合哨還沒響，你們都看著那瓶沒有被打開的水。",
     choices: [
-      C("問他最近練習得怎麼樣", { observe: 1 }, ["checked_on_azhe"], "話題仍從棒球開始，但你第一次關心他的感受而不只是動作。", { relationshipEffects: { teammateBond: 2 } }),
-      C("道謝後，一起安靜坐到集合", { resilience: 1 }, ["shared_silence_with_azhe"], "你們沒有多說什麼，沉默卻不再尷尬。", { relationshipEffects: { teammateBond: 1 } }),
-      C("趁休息時間繼續研究自己的守備", { discipline: 1 }, ["kept_distance_from_azhe"], "你沒有惡意，只是再次把有限時間留給競爭。", { relationshipEffects: { teammateBond: -1 }, skillEffects: { baseballIQ: 1 } })
+      C("旋開瓶蓋，問他哪一球最不對勁", { observe: 1 }, ["checked_on_azhe"], "瓶蓋喀一聲鬆開。阿哲先說『沒什麼』，又用手指在長椅上畫出那顆球的路線。集合哨響時，他還在比最後一次彈跳；你把沒喝完的水一起帶進球場。", { relationshipEffects: { teammateBond: 2 } }),
+      C("把自己的水放到旁邊，和他坐到集合", { resilience: 1 }, ["shared_silence_with_azhe"], "兩個瓶子並排立在腳邊，外壁的水珠落成兩小圈深色痕跡。阿哲沒有找話說，只在哨響時順手把你的那瓶也拿起來。你們一前一後走回守位。", { relationshipEffects: { teammateBond: 1 } }),
+      C("把水推回去，攤開筆記繼續研究守備", { discipline: 1 }, ["kept_distance_from_azhe"], "瓶子沿著長椅滾回阿哲手邊，碰到他的指節才停。他把水收進袋子，沒有再問。你在筆記上補完站位箭頭；下一次集合，他站到了另一排。", { relationshipEffects: { teammateBond: -1 }, skillEffects: { baseballIQ: 1 } })
     ]
   },
   azhe_bond_low: {
     title: "沒有人喊出的補位",
-    text: "分組守備時，你和阿哲都以為對方會處理中間那顆球。球從兩副手套之間穿過，教練吹停練習。\n\n阿哲沒有看你，只低聲說：『我們最近根本不知道對方在想什麼。』\n\n關係疏遠不只讓休息區變安靜，也開始真正影響場上的下一球。",
+    text: "午後分組守備，打者把球削向二游之間。你往左跨，阿哲也往右啟動；兩個人都在第二步停下，等對方先喊。\n\n球沿著紅土滾過兩副手套中間，碰上外野草皮才慢下來。教練的哨聲立刻切斷場邊說話聲。\n\n阿哲跑去撿球，回來時避開你的視線，把球交給教練：『我以為他會處理。』你們腳邊沒有責任線，也沒有約好的提醒聲。下一組已經在本壘後排隊。",
     choices: [
-      C("承認自己最近只顧著競爭，重新約定喊聲", { responsibility: 2, confidence: 1 }, ["repaired_azhe_signal"], "你先承認自己的部分。下一輪，你們的喊聲仍生硬，至少不再沉默。", { relationshipEffects: { teammateBond: 3, coachTrust: 1 }, skillEffects: { baseballIQ: 1 } }),
-      C("要求先把場上責任說清楚", { discipline: 1, pressure: 1 }, ["formalized_azhe_assignment"], "你們暫時沒有變親近，卻用明確分工避免下一次漏接。", { relationshipEffects: { teammateBond: 1 }, skillEffects: { baseballIQ: 1 } }),
-      C("認為那球本來就該由他處理", { confidence: 1, instinct: 1 }, ["blamed_azhe_missed_cover"], "你守住自己的解釋，也讓阿哲不再主動提醒你。", { relationshipEffects: { teammateBond: -2, coachTrust: -1 }, matchEffects: { errors: 1 } })
+      C("用鞋尖畫出責任區，先說自己剛才沒有喊", { responsibility: 2, confidence: 1 }, ["repaired_azhe_signal", "azhe_red_dirt_line"], "你在兩人中間拖出一道紅土線，先指向自己剛才停下的位置。阿哲沒有回話，只用鞋底把線尾往自己那側補了一截。下一球你先喊，他跨過那道線完成補位；教練吹了一聲短哨，示意繼續。", { relationshipEffects: { teammateBond: 3, coachTrust: 1 }, skillEffects: { baseballIQ: 1 } }),
+      C("把球放在分界上，只說清楚下一球歸誰", { discipline: 1, pressure: 1 }, ["formalized_azhe_assignment", "azhe_red_dirt_line"], "你把球壓在兩個守區交界，阿哲用手套指向自己負責的方向。你們沒有談剛才，也沒有靠近；下一顆球按照規則被接住，球進手套後仍沒有人擊掌。", { relationshipEffects: { teammateBond: 1 }, skillEffects: { baseballIQ: 1 } }),
+      C("把球塞進阿哲手裡，說那本來就是他的球", { confidence: 1, instinct: 1 }, ["blamed_azhe_missed_cover"], "阿哲接住球，手套卻垂在腿邊。他往後退一步，把球再交給教練，站到責任區最外側。紀錄板上那次失誤仍寫在整組名下；下一球來時，他沒有再越過中線。", { relationshipEffects: { teammateBond: -2, coachTrust: -1 }, matchEffects: { errors: 1 } })
     ]
   },
   competition_position_test: {
@@ -594,28 +610,48 @@ const juniorBaseballEvents = {
     ]
   },
   junior_azhe_cover: {
-    title: "補位時的沉默",
+    title: "二游之間的下一球",
     text() {
       const arc = player.characterArc.azhe;
-      if (arc === "confided" || hasFlag("azhe_private_signal")) return "二游之間的滾地球突然改變方向。阿哲只喊出你們以前約好的那個短音，你立刻往壘包移動。他沒有等你回答，已經把球送到你手邊。";
-      if (arc === "dependent") return "二游之間的球滾來，阿哲先看向你，像在等你替他決定方向。你也慢了半步，球在兩人都能碰到的位置穿過。";
-      if (arc === "distant" || player.impression.azhe.feelsDistance >= 5) return "你和阿哲都以為對方會處理。沒有人喊聲，球從兩副手套之間穿過。阿哲撿回球後只把它交給教練。";
-      return "二游之間的滾地球逼近。阿哲為了證明自己沒有退縮，先喊了你的球，又在最後一步伸出手套。你們差點撞在一起。";
+      const rememberedGrounder = hasFlag("azhe_grounder_object") ? "那個聲音讓你想起少棒時，球撞上他手套外緣的那一晚。" : "球在不規則的紅土上突然往兩人中間偏。";
+      const rememberedLine = hasFlag("azhe_red_dirt_line") ? "練習前整平過的紅土上，已看不見當年那道責任線。" : "你們腳邊只有剛被釘鞋刮開的新痕跡。";
+      if (arc === "respected_equal" || arc === "confided") return `國中隊的黃昏守備，打者把球敲進二游交界。${rememberedGrounder}\n\n阿哲直接喊出以前約好的短音，沒有先確認你在不在。你踩向壘包時，他的傳球已經貼著紅土送來。球進手套的「啪」聲和他的喊聲幾乎接在一起。\n\n${rememberedLine}下一組打者已經抬棒，你們必須決定這個舊暗號是否仍屬於現在的守備。`;
+      if (arc === "dependent") return `國中隊的黃昏守備，二游之間的球突然改變方向。${rememberedGrounder}\n\n阿哲沒有先喊。他轉頭看你，像在等你替那顆球命名；你也因那一眼慢了半步。球從兩人都伸得到、卻都沒到的位置穿過，外野才把它攔下。\n\n${rememberedLine}教練把下一顆球放上發球架，沒有留時間讓你們解釋。`;
+      if (arc === "distant" || player.impression.azhe.feelsDistance >= 5) return `國中隊的黃昏守備，打者把球敲進二游交界。沒有人喊聲，球從兩副手套之間穿過，只留下滾過紅土的細線。\n\n阿哲跑去撿球，回來時沒有看你，也沒有提少棒那顆球。他把球放進現任教練掌心，轉身站回自己的守區。\n\n下一球已經被舉起；你們之間只剩教練劃定的距離。`;
+      return `國中隊的黃昏守備，二游之間的滾地球逼近。${rememberedGrounder}\n\n你和阿哲都搶著證明自己不會退。你先喊，他也在最後一步伸出手套；兩邊肩膀差點撞在一起，球被鞋尖踢歪。\n\n${rememberedLine}阿哲把手套抵在膝上喘氣，下一組已經開始倒數。你們得在下一球前重新說清楚。`;
     },
     choices: [
-      C("下一球仍照原本暗號處理", { responsibility: 1, observe: 1 }, ["azhe_cover_echo_done", "kept_azhe_signal"], "下一顆相似的球來時，阿哲沒有再確認你是否理解。", { personalityEffects: { reliable: 1 }, impressionEffects: { azhe: { trusts: 2 } }, relationshipEffects: { teammateBond: 1 }, skillEffects: { baseballIQ: 1 }, arcEffects: { azhe: "respected_equal" } }),
-      C("把責任區重新畫在紅土上", { observe: 2 }, ["azhe_cover_echo_done", "redrew_cover_assignment"], "你們得到明確分工，但阿哲仍習慣在啟動前先看你一眼。", { personalityEffects: { thoughtful: 1 }, impressionEffects: { azhe: { depends: 2 } }, skillEffects: { baseballIQ: 1 }, arcEffects: { azhe: "dependent" } }),
-      C("先各自完成自己的球，不再互相補位", { discipline: 1, pressure: 1 }, ["azhe_cover_echo_done", "separated_azhe_cover"], "失誤暫時減少，兩人的守備範圍也像被切出一道看不見的線。", { impressionEffects: { azhe: { feelsDistance: 2 } }, relationshipEffects: { teammateBond: -1 }, arcEffects: { azhe: "distant" } })
+      C("下一球直接喊出以前的短音", { responsibility: 1, observe: 1 }, ["azhe_cover_echo_done", "kept_azhe_signal"], "你在球離棒時先喊出短音。阿哲肩膀沒有再停，從你身後切進來補位，傳球擦過當年畫線的位置。完成出局後，他只用手套背碰了一下你的手肘，立刻面向下一名打者。", { personalityEffects: { reliable: 1 }, relationshipEffects: { teammateBond: 1 }, skillEffects: { baseballIQ: 1 }, azheCoverSignalOutcome: true }),
+      C("用鞋尖把責任區重新畫在紅土上", { observe: 2 }, ["azhe_cover_echo_done", "redrew_cover_assignment", "azhe_red_dirt_line"], "你重新拖出一條線，阿哲蹲下把球放在交界，逐一指過兩種彈跳。下一球照規則完成，卻在啟動前多了一次彼此確認的停頓。哨聲響後，那道線仍清楚留在兩人中間。", { personalityEffects: { thoughtful: 1 }, impressionEffects: { azhe: { depends: 2 } }, skillEffects: { baseballIQ: 1 }, arcEffects: { azhe: "dependent" } }),
+      C("把球放在中線，約定只守各自責任區", { discipline: 1, pressure: 1 }, ["azhe_cover_echo_done", "separated_azhe_cover"], "你把球放在中線，阿哲用手套指向自己的半邊。接下來三球沒有再漏，也沒有一次越區補位。收操時他把那顆球交回球袋；你們的守備可以運作，距離也被規則固定下來。", { impressionEffects: { azhe: { feelsDistance: 2 } }, relationshipEffects: { teammateBond: -1 }, arcEffects: { azhe: "distant" } })
     ]
   },
   junior_takahashi_failure: {
     title: "高橋第一次失常",
-    text: "正式測驗的第三球，高橋把一顆平常能處理的球傳出界外。他沒有摔手套，只走去撿球。回來時，他把下一顆球丟給你：『別用那種表情。你會怎麼修？』",
+    text: "國中隊午後的內野滾地練習，發球機每隔七秒吐出一顆球。高橋前九球都比別人早半步到位；接球、踩穩、傳向一壘，手套與胸前護網輪流響起乾脆的「啪」聲。\n\n第十球照樣進手套，他的傳球卻第一次高過一壘手肩膀。高橋走去撿回那顆球，在縫線旁畫一小道黑記號，重新戴緊手套。接著兩球又微微偏高。排隊的孩子先看球，再互看，原本催促下一輪的聲音全停了。\n\n回母隊看練習的山本沒有責罵，只在高橋重新站回原位時多看了一眼。發球機已經亮起綠燈；你只能決定下一顆球要放回哪裡。",
     choices: [
-      C("直接指出他的跨步比平常早", { observe: 2 }, ["takahashi_first_failure_seen", "takahashi_failure_direct"], "高橋沒有道謝。下一輪，他把跨步延後，然後留下來等你做完自己的球。", { personalityEffects: { thoughtful: 1, brave: 1 }, impressionEffects: { takahashi: { respect: 2, rivalry: 1 } }, relationshipEffects: { rivalRespect: 2 }, arcEffects: { takahashi: "partner" } }),
-      C("把球放回原位，問他要不要再來十球", { resilience: 1, kind: 1 }, ["takahashi_first_failure_seen", "takahashi_failure_practiced"], "你沒有談失誤。高橋也沒有離開，只把每一球加快一點。", { personalityEffects: { kind: 1, ambitious: 1 }, impressionEffects: { takahashi: { respect: 2 } }, relationshipEffects: { rivalRespect: 1 }, bodyEffects: { fatigue: 1 } }),
-      C("趁他失常，把自己的五球全部做完", { confidence: 2, pressure: 1 }, ["takahashi_first_failure_seen", "used_rival_failure"], "你拿走了測驗優勢。高橋記住的不是失誤，而是你在那一刻沒有回頭。", { personalityEffects: { ambitious: 2, selfish: 1 }, impressionEffects: { takahashi: { rivalry: 3, underestimate: 1 } }, relationshipEffects: { rivalCompetition: 2 } }),
-      C("先向隊友說那是場地彈跳問題", { responsibility: 1 }, ["takahashi_first_failure_seen", "covered_rival_failure"], "高橋看了你一眼：『不用替我改答案。』他接受你的好意，卻不喜歡被保護。", { personalityEffects: { kind: 1 }, impressionEffects: { takahashi: { respect: 1, rivalry: 1 } } })
+      C("撿回畫了記號的球，放回發球機旁的固定籃位", { observe: 2 }, ["takahashi_first_failure_seen", "takahashi_failure_direct", "takahashi_first_wild_ball"], "你撿回那顆偏高的球，讓黑記號朝上放進固定籃位。高橋沒有道謝，只照原本七秒的間隔重新跨步；下一球仍高，卻回到一壘手伸手可及的位置。", { personalityEffects: { thoughtful: 1, brave: 1 }, impressionEffects: { takahashi: { respect: 2, rivalry: 1 } }, relationshipEffects: { rivalRespect: 2 }, arcEffects: { takahashi: "partner" } }),
+      C("把記號球放回原位，站到他慣用的傳球終點", { resilience: 1, kind: 1 }, ["takahashi_first_failure_seen", "takahashi_failure_practiced", "takahashi_first_wild_ball"], "你踩回他每次瞄準的白線外，手套維持在胸口高度。高橋把球一顆顆送來，沒有改短距離；收球聲重新連起來，但每次出手前都多了一次握縫線的停頓。", { personalityEffects: { kind: 1, ambitious: 1 }, impressionEffects: { takahashi: { respect: 2 } }, relationshipEffects: { rivalRespect: 1 }, bodyEffects: { fatigue: 1 } }),
+      C("照原本順序完成自己的五顆球", { confidence: 2, pressure: 1 }, ["takahashi_first_failure_seen", "used_rival_failure", "takahashi_first_wild_ball"], "你沒有回頭看籃位，依序接完自己的五顆球。記錄員把你的欄位填滿時，高橋仍在後方重戴手套；下一輪名單照成績往下排，沒有為任何人停住。", { personalityEffects: { ambitious: 2, selfish: 1 }, impressionEffects: { takahashi: { rivalry: 3, underestimate: 1 } }, relationshipEffects: { rivalCompetition: 2 } }),
+      C("把計分板翻到下一輪，保留他的原始分數", { responsibility: 1 }, ["takahashi_first_failure_seen", "covered_rival_failure", "takahashi_first_wild_ball"], "你沒有擦掉偏高球旁的記號，只把計分板翻到下一輪。高橋經過時用指節敲了一下那格，隨即站回隊伍最前面；所有人也跟著移動，沒有人替那三球加上解釋。", { personalityEffects: { kind: 1 }, impressionEffects: { takahashi: { respect: 1, rivalry: 1 } } })
+    ]
+  },
+  junior_takahashi_pressure: {
+    title: "白板上越來越多的名字",
+    text: "一週後，選拔練習換到有看台的主球場。白板中央寫著高橋的名字，旁邊依序貼上守備順位、測速數字和高中球隊來訪的時間。新的比賽球整籃送到他腳邊，隊友卻仍把磨損最久的球遞給他，等他示範縫線怎麼握。\n\n學弟排隊請教，家長隔著鐵網比對成績，現任教練每念一個測驗項目，所有人都先看高橋是否站好。高橋前幾輪仍做得比別人乾淨；每一次「啪」聲落下，看台就安靜等下一球。\n\n輪到那顆畫著黑記號的球時，他拇指在縫線上停了一拍。白板還空著下一格，記錄筆懸在格線上方。",
+    choices: [
+      C("把白板翻到下一頁，照原欄位登記每一球", {}, ["takahashi_pressure_seen", "takahashi_scoreboard", "kept_takahashi_score_raw"], "你把上一頁連同偏高的記號完整折到背面，新頁仍照相同欄位記錄。高橋看見空白格後直接開始；看台沒有變少，筆尖也沒有停，只是每一球都留下原來的結果。", { impressionEffects: { takahashi: { respect: 1 } }, lifeThemeEffects: { competition: 1 } }),
+      C("把新球排在磨損球後面，維持原本出球順序", {}, ["takahashi_pressure_seen", "takahashi_scoreboard", "kept_takahashi_ball_order"], "你把發亮的新球推到籃底，先送出大家平常使用的磨損球。高橋沒有挑球，依序完成；輪到新球時，鐵網後同時響起快門聲，他的手套在胸前多停了半秒。", { impressionEffects: { takahashi: { rivalry: 1 } }, lifeThemeEffects: { competition: 1 } }),
+      C("站到高橋平常回傳的固定位置，等下一球", {}, ["takahashi_pressure_seen", "takahashi_scoreboard", "held_takahashi_target"], "你踩在白線外，手套維持在他每天瞄準的高度。高橋把球送來，後方的人仍在等示範，白板旁的人仍在寫數字；你只把每顆球收進同一個位置，再逐顆放回籃裡。", { impressionEffects: { takahashi: { respect: 1 } }, lifeThemeEffects: { competition: 1 } })
+    ]
+  },
+  junior_takahashi_break: {
+    title: "手套裡消失的節奏",
+    text: "地區賽前最後一輪守備，高橋站在平常不必提醒的位置。第一顆正面滾地球鑽過手套下緣，撞上外野草皮；第二顆他提早跨步，傳球擦過一壘手的指尖；第三顆只是慢速彈跳，他卻在球到面前時換了兩次重心。\n\n不是一次失誤。計分板連續三格留下叉號，原本每七秒一次的接球聲被撿球腳步切斷。高橋把手套脫下、戴回，又重新拉緊束帶；掌心磨到發亮的皮革在夕陽下反光。隊伍沒有人先開口，也沒有人把自己的球交給他示範。\n\n現任教練只把最後三顆球放到籃邊。今天不會有人替高橋找回答；你也只能決定，這一輪要怎麼結束。",
+    choices: [
+      C("站到他慣用的回傳點，把最後三顆球逐一放回球籃", {}, ["takahashi_break_seen", "takahashi_shined_glove", "finished_takahashi_last_three"], "你沒有改短距離，也沒有先說下一球會更好。高橋完成最後三次回傳，仍有一球偏離手套；哨聲響後，他把那副發亮的手套壓進球袋，拉鍊一路拉到底。", { impressionEffects: { takahashi: { respect: 1 } }, lifeThemeEffects: { competition: 1 } }),
+      C("把計分板翻到最後一格，照原順序開始自己的下一輪", {}, ["takahashi_break_seen", "takahashi_shined_glove", "continued_after_takahashi_break"], "你把三個叉號留在背面，沒有擦掉，也沒有加註原因。自己的第一顆球滾來時，高橋站到隊伍末端；他一邊重新拉緊手套束帶，一邊看著計分板從新的一格開始。", { impressionEffects: { takahashi: { rivalry: 1 } }, lifeThemeEffects: { competition: 1 } }),
+      C("收起散在界外的器材，把那副手套留在長椅中央", {}, ["takahashi_break_seen", "takahashi_shined_glove", "closed_takahashi_training_day"], "你把球籃、白板和發球機電線依序收好，沒有碰長椅上的手套。燈熄掉一排後，高橋才回來拿起它；磨亮的掌心朝外，他沿著無人的一壘線走出球場。", { impressionEffects: { takahashi: { respect: 1 } }, lifeThemeEffects: { competition: 1 } })
     ]
   },
   junior_coach_disagreement: {
@@ -636,15 +672,16 @@ const juniorBaseballEvents = {
     title: "阿哲考慮怎麼留下",
     text() {
       const arc = player.characterArc.azhe;
-      if (arc === "respected_equal") return "阿哲親自找你，手上拿著球隊經理的工作表：『我不想再假裝自己一定要靠先發留下。也許我可以幫忙記錄、接牛棚，偶爾再上場。你覺得這算逃走嗎？』他在問你的看法，答案仍準備自己決定。";
-      if (arc === "dependent") return "阿哲在回家路上攔住你：『如果是你，你會叫我繼續嗎？』他把退出申請折在口袋裡，像只要你給一個答案，他就能把選擇交出去。";
-      if (arc === "distant" || player.impression.azhe.feelsDistance >= 5) return "你從教練口中得知阿哲已提出退出。整理器材時，你們站得很近，他只說：『我猜你比較想知道名單會空出哪個位置。』";
-      return "阿哲親口告訴你，他正在考慮退出。不是討厭棒球，而是家裡時間、補習和越來越少的上場機會擠在一起。他說完後等著你，卻沒有請你替他留下。";
+      const setting = "畢業前一週，器材室的日光燈不時閃一下。桌上壓著一張折成四折的退出申請、球隊經理的工作表和補習班時間表；門邊那只球袋還留著沒拍乾淨的紅土。";
+      if (arc === "respected_equal") return `${setting}\n\n阿哲把工作表攤開，鉛筆停在「紀錄」和「牛棚協助」兩欄之間：『我不想再假裝只有先發才算留下。』他把退出申請放在旁邊，沒有推給你，『但這兩格真的是我想做的嗎？』\n\n走廊已有人催你們鎖門。他等的是你看見哪一格，不是替他簽名。`;
+      if (arc === "dependent") return `${setting}\n\n阿哲把折好的退出申請捏在掌心，紙角已經被汗壓軟：『如果是你，會叫我繼續嗎？』工作表仍是一片空白，補習班時間正好劃掉每週兩次練習。\n\n鎖門的人在走廊數到三。只要你替他指出一格，他就可能把整張答案交過來。`;
+      if (arc === "distant" || player.impression.azhe.feelsDistance >= 5) return `${setting}\n\n你是從現任教練口中先聽見消息的。整理器材時，阿哲把退出申請壓在工作表上，只把球袋的拉鍊拉好：『你比較想知道名單會空出哪個位置吧。』\n\n他把表格收進資料夾，沒有讓你看勾了哪一欄。`;
+      return `${setting}\n\n阿哲把補習班時間表和球隊工作表對齊，怎麼排都會少掉兩個下午。他沒有說討厭棒球，只用鉛筆敲著空白的「想保留的任務」欄。\n\n退出申請已經填好名字，簽名欄還空著。門外傳來第二次鎖門提醒。`;
     },
     choices: [
-      C("問他想保留棒球裡的哪一部分", { responsibility: 2, observe: 1 }, ["azhe_exit_decision_done", "respected_azhe_exit"], "阿哲沒有立刻回答。隔天，他主動去問教練能否改成協助紀錄與牛棚。", { relationshipEffects: { teammateBond: 2 }, personalityEffects: { kind: 2, thoughtful: 2 }, impressionEffects: { azhe: { trusts: 2 } }, arcEffects: { azhe: "respected_equal" } }),
-      C("說自己會支持他選擇留下或離開", { resilience: 1, confidence: 1 }, ["azhe_exit_decision_done", "left_door_open_for_azhe"], "你沒有替他決定。幾天後，他親自把最後答案告訴教練，也第一個告訴你。", { relationshipEffects: { teammateBond: 2 }, personalityEffects: { kind: 2, reliable: 1 }, impressionEffects: { azhe: { trusts: 2, depends: -1 } }, arcEffects: { azhe: "confided" } }),
-      C("提醒他退出後名單不會等他", { pressure: 1, instinct: 1 }, ["azhe_exit_decision_done", "questioned_azhe_exit"], "阿哲點頭，把申請表收回去。之後的決定，他只通知教練。", { relationshipEffects: { teammateBond: -1 }, personalityEffects: { emotional: 1, ambitious: 1 }, impressionEffects: { azhe: { feelsDistance: 2 } }, arcEffects: { azhe: "distant" } })
+      C("攤平工作表，圈出他反覆提過的兩項任務", { responsibility: 2, observe: 1 }, ["azhe_exit_decision_done", "respected_azhe_exit", "azhe_record_sheet"], "你只圈下「紀錄」和「牛棚協助」，把鉛筆留在紙上。阿哲看了很久，自己在旁邊補上一句：『偶爾上場，不保證。』隔天他拿著同一張表去找教練；退出申請仍折著，沒有被撕掉。", { relationshipEffects: { teammateBond: 2 }, personalityEffects: { kind: 2, thoughtful: 2 }, impressionEffects: { azhe: { trusts: 2 } }, arcEffects: { azhe: "respected_equal" } }),
+      C("把退出申請折回原樣，交還他決定是否送出", { resilience: 1, confidence: 1 }, ["azhe_exit_decision_done", "left_door_open_for_azhe"], "你沿著原來的摺痕把申請折好，放回阿哲掌心。紙角從他指縫露出來；他沒有立刻收進口袋。幾天後，他親自把答案交給教練，也把工作表的照片第一個傳給你。", { relationshipEffects: { teammateBond: 2 }, personalityEffects: { kind: 2, reliable: 1 }, impressionEffects: { azhe: { trusts: 2, depends: -1 } }, arcEffects: { azhe: "confided" } }),
+      C("指著名單空格，說位置很快會有人補上", { pressure: 1, instinct: 1 }, ["azhe_exit_decision_done", "questioned_azhe_exit"], "你的指尖停在名單空格。阿哲順著看了一眼，把退出申請壓回工作表上，拉起沾紅土的球袋。之後他把最後答案只交給教練；那張表格去了哪裡，你沒有再看見。", { relationshipEffects: { teammateBond: -1 }, personalityEffects: { emotional: 1, ambitious: 1 }, impressionEffects: { azhe: { feelsDistance: 2 } }, arcEffects: { azhe: "distant" } })
     ]
   },
   junior_pain: {
@@ -1034,6 +1071,42 @@ const careerTransitionEvents = {
       C("暫時遠離球場，恢復普通生活", { responsibility: 1 }, ["rehab_took_distance"], "你允許自己不是每一天都必須證明還能回去。", { academicEffects: { burnout: -2 }, bodyEffects: { fatigue: -2 } })
     ]
   },
+  transition_pro_roster_window: {
+    title: "第一次升降窗口",
+    text: "球團一軍出現傷兵，臨時空出一個名額。你和同期新人都在候選名單裡：他身體狀況更穩定，只有一個守位特別明確；你不一定比較弱，卻需要更多句話才能說清楚用途。名單會議比較的不只是哪個人更強，也比較此刻的一軍究竟缺誰。",
+    choices: [
+      C("接受短期工具人任務", { discipline: 1, responsibility: 2 }, ["pro_roster_utility"], "二軍教練把第二守位、代跑、牛棚接捕與臨時守備寫進你的任務表。你更容易被塞進短期名單，代價是主守位專精時間被切成更小的區塊。", { skillEffects: { baseballIQ: 1, catching: 1 }, careerEffects: { reputation: 2, exposure: 1 }, bodyEffects: { fatigue: 1 } }),
+      C("要求用主守位進行直接比較", { confidence: 2, pressure: 2 }, ["pro_roster_primary_showdown"], "教練同意安排一次同守位測試。這可能改寫球團給你的標籤；如果沒有拉開差距，本次窗口也會直接交給用途更清楚的同期新人。", { careerEffects: { exposure: 2, recentPerformance: 2 }, bodyEffects: { fatigue: 1 } }),
+      C("完整說明健康與負荷限制", { responsibility: 2, observe: 1 }, ["pro_roster_health_limit"], "防護員把疼痛、恢復速度、可承擔局數與不宜連續使用的方式放進報告。名單會議少了一項立即升格的理由，卻多了一份組織敢長期採信的健康資料。", { bodyEffects: { pain: -1, injuryRisk: -2, recovery: 1 }, careerEffects: { reputation: 2, exposure: -1 } })
+    ]
+  },
+  transition_college_eligibility: {
+    title: "資格、主力與選秀窗口",
+    text: "全國賽前，主力位置突然空了出來。你有機會進入輪替，但一門課的出席與成績也來到參賽資格警戒線。助教把補課期限圈在行事曆上，教練則把追加訓練排在同一個下午。大學給了你更多發展時間，學籍與參賽資格也替這段時間畫出邊界。",
+    choices: [
+      C("先處理資格，再爭取輪替", { discipline: 2, responsibility: 2 }, ["college_secured_eligibility"], "你和教授、助教及教練重排補課與訓練。參賽資格暫時保住，別人則先拿走額外守備組數；你的順位成長變慢，但整個賽季仍在。", { academicEffects: { academics: 2, burnout: -1 }, careerEffects: { exposure: -1 } }),
+      C("先搶下主力，再處理學業", { confidence: 2, pressure: 2 }, ["college_chased_starting_job"], "你把全國賽前的訓練排在最前面，得到更多被比較的球數。成績單上的警示沒有消失，疲勞和倦怠也開始影響下一週；教練仍未承諾主力。", { careerEffects: { exposure: 2, recentPerformance: 2 }, academicEffects: { academics: -2, burnout: 2 }, bodyEffects: { fatigue: 2 } }),
+      C("放棄這次競爭，延長發展時間", { observe: 1, resilience: 2 }, ["college_delayed_competition"], "你把名字從這次追加測試移開，公開舞台因此少了一次。身體、學籍與下一學期的訓練計畫被完整保留下來，只是下一次空缺何時出現，沒有人能先答應。", { bodyEffects: { fatigue: -2, injuryRisk: -1, maturity: 1 }, academicEffects: { academics: 1, burnout: -1 }, careerEffects: { exposure: -2 } })
+    ]
+  },
+  transition_amateur_company_conflict: {
+    title: "公司要你留下，球隊也要你報到",
+    text: "公司專案進入最後整合，全組今晚都要留下；同一時間，球隊正在進行都市對抗賽最後名單測試。主管並不反對你打球，教練也知道你需要這份工作，但今天兩邊都缺少能接手你任務的人。",
+    choices: [
+      C("和主管協商交換班與完成期限", { responsibility: 2, confidence: 1 }, ["amateur_negotiated_conflict"], "你先完成能交付的部分，和同事換班，承諾賽後補回工時。公司與球隊都保留了一部分信用，人情、睡眠和恢復時間則一起被借到明天。", { financeEffects: { finances: 1 }, careerEffects: { reputation: 1, exposure: 1 }, bodyEffects: { fatigue: 2 } }),
+      C("留在公司完成專案", { discipline: 1, responsibility: 2 }, ["amateur_chose_company"], "主管把最終版本交給你收尾，工作與收入信用上升。球隊測試照常進行，另一名球員接走了原本屬於你的比較球數。", { financeEffects: { finances: 2 }, careerEffects: { exposure: -2, recentPerformance: -1 } }),
+      C("直接請假參加名單測試", { confidence: 2, pressure: 2 }, ["amateur_chose_roster_test"], "你在測試開始前趕到球場，取得正式被比較的機會。手機裡同時留下主管未讀的排班訊息；名單尚未公布，收入與職場信用已先付出代價。", { careerEffects: { exposure: 2, recentPerformance: 1 }, financeEffects: { finances: -2 }, bodyEffects: { fatigue: 1 }, academicEffects: { burnout: 1 } })
+    ]
+  },
+  transition_rehab_reentry_deadline: {
+    title: "測試邀請只保留到月底",
+    text: "一支業餘隊願意把月底測試留給你。醫療報告顯示日常動作已不再疼痛，高速傳球卻仍有波動；多等六到八週可能恢復得更完整，球隊也說不保證屆時還有名額。你必須決定，願意在什麼恢復程度重新接受競爭。",
+    choices: [
+      C("接受測試，但限制負荷與任務", { responsibility: 2, observe: 1 }, ["rehab_tested_with_limits"], "你只接受有限守備、指定局數與有限打席，不做最大強度傳球。球隊留下你的測試資料，也在旁邊註記負荷受限；入口仍在，復發風險沒有消失。", { careerEffects: { exposure: 1, scoutEvaluation: 1, reputation: 1 }, bodyEffects: { injuryRisk: 1, fatigue: 1 } }),
+      C("放棄本次測試，完成復健", { discipline: 2, resilience: 1 }, ["rehab_skipped_reentry_test"], "你回覆球隊不參加月底測試，讓醫療進度繼續決定訓練強度。這個名額不會等你，下一次邀請也沒有日期；肩膀則得到完整恢復的時間。", { bodyEffects: { pain: -1, injuryRisk: -2, recovery: 2 }, careerEffects: { exposure: -2 } }),
+      C("不限制強度，完整測試自己", { confidence: 2, pressure: 3 }, ["rehab_full_reentry_test"], "你要求和其他人接受同一套測試，讓球隊看到最接近完整球員的版本。最後幾次高速傳球後，肩膀重新出現緊繃；測試結果尚未公布，疼痛與復發風險已寫回醫療紀錄。", { careerEffects: { exposure: 3, recentPerformance: 2 }, bodyEffects: { pain: 2, injuryRisk: 3, fatigue: 2 } })
+    ]
+  },
   transition_result: {
     title: "十八歲生涯轉換期評估",
     text() {
@@ -1129,7 +1202,7 @@ const developmentEvents = {
   development_result: {
     title: "二十二歲職涯評估",
     text() {
-      return `${player.developmentResult}\n\n${player.developmentDetail}\n\n市場結果：${player.marketOutcome}\n目前角色：${player.roleIdentity.primary || player.organizationRole}\n過去角色：${player.roleIdentity.previous.join(" → ") || "尚無"}\n生涯階段：${player.careerArc.stage}\n生涯價值：目前 ${player.careerValue.current}／最高 ${player.careerValue.peak}／最低 ${player.careerValue.minimum}\n\n${generateCareerSummary()}\n\n人生記憶：\n${generateLifeStory()}\n\n這一生反覆回到的問題，是${getLifeThemeSummary()}。\n${getCallbackNarrative()}\n\n二十二歲不是所有人生的選秀終點，卻是第一次必須同時回答棒球與生活能否繼續的年紀。`;
+      return `${player.developmentResult}\n\n${player.developmentDetail}\n\n市場結果：${player.marketOutcome}\n球員型態：${refreshPlayerArchetype()}\n系統角色：${player.roleIdentity.primary || player.organizationRole}\n過去角色：${player.roleIdentity.previous.join(" → ") || "尚無"}\n生涯階段：${player.careerArc.stage}\n生涯價值：目前 ${player.careerValue.current}／最高 ${player.careerValue.peak}／最低 ${player.careerValue.minimum}\n\n${generateCareerSummary()}\n\n人生記憶：\n${generateLifeStory()}\n\n這一生反覆回到的問題，是${getLifeThemeSummary()}。\n${getCallbackNarrative()}\n\n二十二歲不是所有人生的選秀終點，卻是第一次必須同時回答棒球與生活能否繼續的年紀。`;
     },
     choices: [
       { text: "完成二十二歲發展期測試", completeSlice: true },
@@ -1257,6 +1330,41 @@ const pacingEvents = {
       C("我不確定，所以想再給自己一段時間", { responsibility: 1 }, ["transition_admitted_uncertainty"], "你沒有用漂亮答案掩蓋倦怠或迷惘。", { academicEffects: { burnout: -2 } })
     ]
   },
+  azhe_adult_record_echo: {
+    title: "工作表背面的那條線",
+    text() {
+      const sheet = hasFlag("azhe_record_sheet")
+        ? "照片裡那張紀錄表的欄位，和畢業前器材室裡被你圈過的工作表幾乎一樣；紙角還留著一道反覆折過的白痕。"
+        : "照片裡的紀錄表背面，畫著一條歪斜的守備責任線，旁邊用原子筆註記『先喊，再動』。";
+      const distance = player.characterArc.azhe === "distant" || player.impression.azhe.feelsDistance >= 5;
+      const message = distance
+        ? "訊息不是阿哲直接傳來的。地方球隊的群組轉發了一張週末聯賽紀錄照，檔名裡才看見他的名字。"
+        : "晚間訓練結束後，手機震了一下。阿哲傳來一張地方週末球隊的攻守紀錄照，沒有先問你的近況。";
+      const life = distance
+        ? "照片角落，他穿著工作服替球隊收球，背號被外套遮住一半。"
+        : "他現在白天上班，週末替地方球隊記錄、接牛棚，偶爾在人數不夠時上場。";
+      return `${message}\n\n${sheet}\n\n${life}\n\n照片下面只有一句：『我們現在把二游責任線畫在這裡。你那邊呢？』\n\n你明天仍有自己的測試、復健或工作要完成。這張照片沒有替你整理生涯，只把一個很久以前用球畫過的問題送回來。`;
+    },
+    choices: [
+      C("傳回最近一場紀錄，只圈出那次沒完成的補位", { observe: 1 }, ["azhe_adult_record_echo_done", "azhe_adult_shared_record"], "你拍下最近的比賽紀錄，把那一格失誤圈起來，沒有附上整段近況。幾分鐘後，阿哲只回一張他們球場中線的照片；兩張紀錄表在對話框裡上下並排。", { personalityEffects: { thoughtful: 1 }, lifeThemeEffects: { trust: 1 }, resumeAfterPending: true }),
+      C("問他現在把責任線畫在哪裡", { responsibility: 1, pressure: 1 }, ["azhe_adult_record_echo_done", "azhe_adult_asked_line"], "阿哲傳來一段七秒影片：鞋尖在地方球場的紅土拖過一條線，隊友從畫面外喊了一聲。他沒有替你回答該去哪裡，只說那條線每一季都會重畫。", { personalityEffects: { thoughtful: 1 }, lifeThemeEffects: { responsibility: 1 }, resumeAfterPending: true }),
+      C("關掉訊息，先完成眼前的測試或工作", { discipline: 1, pressure: -1 }, ["azhe_adult_record_echo_done", "azhe_adult_finished_current_task"], "螢幕暗下去，紀錄表的摺線消失在黑色玻璃裡。你把手機放回袋中，完成今天剩下的項目；收拾時，那張照片仍停在未回覆的位置。", { personalityEffects: { reliable: 1 }, lifeThemeEffects: { freedom: 1 }, resumeAfterPending: true })
+    ]
+  },
+  takahashi_adult_restart_echo: {
+    title: "從零開始的三十球",
+    text() {
+      const markedBall = hasFlag("takahashi_first_wild_ball") ? "籃子最上方放著一顆縫線旁有黑記號的舊球。" : "籃子最上方放著一顆被反覆握過的舊球。";
+      const scoreBoard = hasFlag("takahashi_scoreboard") ? "牆邊白板仍畫著當年的格線，只是標題換成『復健傳球 0／30』。" : "牆邊白板畫著三十個尚未填寫的格子。";
+      const glove = hasFlag("takahashi_shined_glove") ? "高橋手上那副掌心磨到發亮的手套已換過束帶，舊皮仍留在最深的位置。" : "高橋戴著一副換過束帶的舊手套。";
+      return `發展期某個清晨，手機新聞推播沒有比分，只有一段球隊公開的復健影片。鏡頭固定在空牛棚後方，沒有旁白，也沒剪掉高橋第一次回傳偏高的畫面。\n\n${markedBall}${scoreBoard}${glove}\n\n球探報告只列出出手角度、間隔秒數和允許球數，沒有寫他曾經比所有人早半步。影片裡，高橋撿回偏高的球，照原位置重新站好；接住下一次回傳後，他走到白板前，把「0／30」改成「1／30」。鏡頭外沒有人鼓掌，計時器已經再次開始倒數。`;
+    },
+    choices: [
+      C("存下影片，把「1／30」圈進自己的訓練筆記", {}, ["takahashi_adult_restart_echo_done", "saved_takahashi_restart_video"], "你沒有轉傳新聞，只在自己的筆記頁角寫下日期，圈起一個小小的「1／30」。下一次測試開始前，那個數字仍和你的今日項目放在同一頁。", { lifeThemeEffects: { competition: 1 }, resumeAfterPending: true }),
+      C("翻開舊計分頁，在下一格記下自己的第一次嘗試", {}, ["takahashi_adult_restart_echo_done", "used_takahashi_scoreboard_echo"], "舊頁上仍留著當年的三個叉號。你沒有重算高橋的結果，只翻到背面，替自己今天的第一球畫下一格；紙張翻動聲蓋過了影片重新播放的倒數。", { lifeThemeEffects: { responsibility: 1 }, resumeAfterPending: true }),
+      C("關掉報告，帶著自己的手套走回目前的測試位置", {}, ["takahashi_adult_restart_echo_done", "returned_after_takahashi_echo"], "螢幕熄掉後，高橋發亮的舊手套消失在黑色玻璃裡。你把自己的手套拉緊，走回現在被分配的位置；場內的計時器也正從零重新開始。", { lifeThemeEffects: { freedom: 1 }, resumeAfterPending: true })
+    ]
+  },
   transition_cost_check: {
     title: "半年後，這條選擇開始收取代價",
     text() {
@@ -1307,10 +1415,10 @@ function getCurrentEventId() {
   if (player.chapter === "生涯轉換期") {
     const route = player.careerExit.startsWith("高卒") ? "draft" : player.careerExit === "大學棒球" ? "college" : player.careerExit === "業餘／社會人棒球" ? "amateur" : "rehab";
     const sequences = {
-      draft: ["transition_draft_day", "transition_rookie_camp", "transition_checkpoint", "transition_relationship", "transition_cost_check"],
-      college: ["transition_college_arrival", "transition_college_balance", "transition_checkpoint", "transition_relationship", "transition_cost_check"],
-      amateur: ["transition_amateur_job", "transition_amateur_test", "transition_checkpoint", "transition_relationship", "transition_cost_check"],
-      rehab: ["transition_rehab_plateau", "transition_rehab_identity", "transition_checkpoint", "transition_relationship", "transition_cost_check"]
+      draft: ["transition_draft_day", "transition_rookie_camp", "transition_pro_roster_window", "transition_relationship", "transition_cost_check"],
+      college: ["transition_college_arrival", "transition_college_balance", "transition_college_eligibility", "transition_relationship", "transition_cost_check"],
+      amateur: ["transition_amateur_job", "transition_amateur_test", "transition_amateur_company_conflict", "transition_relationship", "transition_cost_check"],
+      rehab: ["transition_rehab_plateau", "transition_rehab_identity", "transition_rehab_reentry_deadline", "transition_relationship", "transition_cost_check"]
     };
     return sequences[route][player.transitionStep] || "transition_result";
   }

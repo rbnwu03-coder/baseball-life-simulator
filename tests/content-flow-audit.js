@@ -3,7 +3,8 @@ const path = require("path");
 const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
-const source = ["player.js", "story.js", "save.js", "script.js"].map(file => fs.readFileSync(path.join(root, file), "utf8"));
+const runtimeFiles = ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "save.js", "script.js"];
+const source = runtimeFiles.map(file => fs.readFileSync(path.join(root, file), "utf8"));
 const nodes = new Map();
 const context = vm.createContext({
   console,
@@ -11,7 +12,7 @@ const context = vm.createContext({
   localStorage: { setItem() {}, getItem() { return null; }, removeItem() {} },
   window: { setTimeout(callback) { callback(); } }
 });
-source.forEach((code, index) => vm.runInContext(code, context, { filename: ["player.js", "story.js", "save.js", "script.js"][index] }));
+source.forEach((code, index) => vm.runInContext(code, context, { filename: runtimeFiles[index] }));
 
 const groups = vm.runInContext(`({
   童年: chapterOneEvents,

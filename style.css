@@ -222,6 +222,58 @@ button:active{
     gap:12px;
 }
 
+.ideal-self-section{
+    margin:22px 0 16px;
+}
+
+.ideal-self-section h3{
+    margin:0 0 12px;
+    color:#2d251f;
+    font-size:19px;
+}
+
+.ideal-self-options{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(145px, 1fr));
+    gap:10px;
+}
+
+#characterCreation .ideal-self-button{
+    min-height:54px;
+    padding:11px 12px;
+    background:#fff;
+    border:2px solid #c4aa85;
+    color:#3d3028;
+    font-size:16px;
+    font-weight:800;
+}
+
+#characterCreation .ideal-self-button.selected{
+    background:#8a3f2b;
+    border-color:#6f2f20;
+    color:#fffaf0;
+    box-shadow:0 4px 0 rgba(69,31,22,.28);
+}
+
+#idealSelfDescription{
+    min-height:28px;
+    margin:12px 0 0;
+    padding:10px 12px;
+    background:#f4ead7;
+    border-left:4px solid #c4aa85;
+    border-radius:6px;
+    color:#4f4036 !important;
+    font-size:16px !important;
+}
+
+.creation-feedback{
+    min-height:24px;
+    margin:0 0 12px;
+    color:#a12622 !important;
+    font-size:16px !important;
+    font-weight:800;
+}
+
 #characterCreation input{
     font-size:20px;
     padding:14px 16px;

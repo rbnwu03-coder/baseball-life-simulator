@@ -1,10 +1,18 @@
 const SAVE_VERSION = 12;
 
+// Phase 2：創角 Identity 的唯一 runtime 合法值來源。
+// UI 與創角流程可以呈現或使用這些值，但輸入是否合法由此契約判定。
+var PlayerIdentityOptions = Object.freeze({
+  origins: Object.freeze(["prove", "understand", "belong"]),
+  idealSelf: Object.freeze(["全能型", "技術鑽研型", "直覺天賦型", "關鍵時刻型", "團隊核心型"])
+});
+
 function createInitialPlayer(name = "") {
   return {
     saveVersion: SAVE_VERSION,
     name,
-    origin: "prove",
+    origin: PlayerIdentityOptions.origins[0],
+    idealSelf: "",
     age: 10,
     chapter: "十歲暑假",
     day: 1,
@@ -23,7 +31,7 @@ function createInitialPlayer(name = "") {
     juniorSchoolFit: { level: "", reasons: [], recovery: "" },
     highSchoolValueAssessment: { level: "", direction: "", skillReady: false, proofReady: false, reasons: [], recovery: "" },
     careerValue: { current: 50, peak: 50, minimum: 50, trend: "stable", history: [50] },
-    roleIdentity: { primary: "", previous: [] },
+    roleIdentity: { primary: "", previous: [], archetype: "", previousArchetypes: [] },
     careerArc: { stage: "emerging", peaks: 0, valleys: 0, reinventions: 0, lostRole: "" },
     turningPoints: [],
     marketEvaluation: { offense: 0, defense: 0, utility: 0, leadership: 0, health: 0 },
@@ -188,7 +196,115 @@ function createInitialPlayer(name = "") {
   };
 }
 
+// Player 仍是完整且唯一的相容 Snapshot；此 Boundary 只建立正式讀取入口，
+// 並收回創角時 name、origin、idealSelf 三個欄位的原子寫入。
+var PlayerDataBoundary = (() => {
+  const deepClone = value => JSON.parse(JSON.stringify(value));
+
+  function createInitialSnapshot() {
+    return createInitialPlayer();
+  }
+
+  function getSnapshot() {
+    return deepClone(player);
+  }
+
+  function getIdentity() {
+    return {
+      name: player.name,
+      origin: player.origin,
+      idealSelf: player.idealSelf
+    };
+  }
+
+  function validateIdentityInput(identityInput) {
+    if (!identityInput || typeof identityInput !== "object" || Array.isArray(identityInput)) {
+      return { ok: false, error: "角色身分資料格式不正確。" };
+    }
+
+    const name = typeof identityInput.name === "string" ? identityInput.name.trim() : "";
+    if (!name) {
+      return { ok: false, error: "請先輸入名字。" };
+    }
+
+    if (!PlayerIdentityOptions.origins.includes(identityInput.origin)) {
+      return { ok: false, error: "角色起點不是目前允許的選項。" };
+    }
+
+    if (!PlayerIdentityOptions.idealSelf.includes(identityInput.idealSelf)) {
+      return { ok: false, error: "請先選擇你最憧憬的球員形象。" };
+    }
+
+    return {
+      ok: true,
+      identity: {
+        name,
+        origin: identityInput.origin,
+        idealSelf: identityInput.idealSelf
+      }
+    };
+  }
+
+  function initializeIdentity(identityInput) {
+    const validation = validateIdentityInput(identityInput);
+    if (!validation.ok) return validation;
+
+    const identity = validation.identity;
+    player.name = identity.name;
+    player.origin = identity.origin;
+    player.idealSelf = identity.idealSelf;
+
+    return {
+      ok: true,
+      identity: getIdentity()
+    };
+  }
+
+  function restoreSnapshot(snapshot) {
+    if (!snapshot || typeof snapshot !== "object" || Array.isArray(snapshot)) {
+      return { ok: false, error: "Player Snapshot 格式不正確。" };
+    }
+
+    try {
+      player = deepClone(snapshot);
+      return { ok: true, snapshot: getSnapshot() };
+    } catch (error) {
+      return { ok: false, error: "Player Snapshot 無法還原。" };
+    }
+  }
+
+  function isIdentityInitialized() {
+    return validateIdentityInput(getIdentity()).ok;
+  }
+
+  return Object.freeze({
+    createInitialSnapshot,
+    getSnapshot,
+    getIdentity,
+    initializeIdentity,
+    restoreSnapshot,
+    isIdentityInitialized,
+    validateIdentityInput
+  });
+})();
+
+if (typeof window !== "undefined") {
+  window.PlayerIdentityOptions = PlayerIdentityOptions;
+  window.PlayerDataBoundary = PlayerDataBoundary;
+}
+
 let player = createInitialPlayer();
+
+// 保留 classic-script 的全域 player 相容入口，並讓外部替換仍同步到唯一 Snapshot。
+if (typeof window !== "undefined" && !Object.getOwnPropertyDescriptor(window, "player")) {
+  Object.defineProperty(window, "player", {
+    configurable: true,
+    get: () => player,
+    set: value => {
+      player = value;
+    }
+  });
+}
 
 const statLabels = {
   ballSense: "球感",

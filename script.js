@@ -1,5 +1,14 @@
 let isTransitioning = false;
-let selectedOrigin = "prove";
+let selectedOrigin = PlayerIdentityOptions.origins[0];
+let selectedIdealSelf = "";
+
+const idealSelfDescriptions = Object.freeze({
+  [PlayerIdentityOptions.idealSelf[0]]: "我想成為任何情況都值得信賴的人。",
+  [PlayerIdentityOptions.idealSelf[1]]: "我想把一件事反覆磨到最好。",
+  [PlayerIdentityOptions.idealSelf[2]]: "我想相信自己的感覺與判斷。",
+  [PlayerIdentityOptions.idealSelf[3]]: "我想在最重要的時候站出來。",
+  [PlayerIdentityOptions.idealSelf[4]]: "我想讓身邊的人一起變得更好。"
+});
 
 // Phase 14.5：核心 NPC 在不同人生階段的身分與職能。
 // 這份資料只約束敘事權限，不參與能力、平衡或流程判定。
@@ -129,6 +138,27 @@ function selectOrigin(origin) {
   document.querySelectorAll(".origin-card").forEach(card => {
     card.classList.toggle("selected", card.dataset.origin === origin);
   });
+}
+
+function selectIdealSelf(type) {
+  selectedIdealSelf = idealSelfDescriptions[type] ? type : "";
+  document.querySelectorAll?.(".ideal-self-button").forEach(button => {
+    const isSelected = button.dataset.idealSelf === selectedIdealSelf;
+    button.classList.toggle("selected", isSelected);
+    button.setAttribute("aria-pressed", String(isSelected));
+  });
+
+  const description = document.getElementById("idealSelfDescription");
+  if (description) {
+    description.textContent = selectedIdealSelf
+      ? idealSelfDescriptions[selectedIdealSelf]
+      : "尚未選擇理想球員形象。";
+  }
+
+  if (selectedIdealSelf) {
+    const feedback = document.getElementById("characterCreationFeedback");
+    if (feedback) feedback.textContent = "";
+  }
 }
 
 function loadTestBookmark(bookmark) {
@@ -349,14 +379,45 @@ function loadTestBookmark(bookmark) {
 }
 
 function createPlayer() {
-  const name = document.getElementById("nameInput").value.trim() || "無名小將";
-  player = createInitialPlayer(name);
+  const nameInput = document.getElementById("nameInput");
+  const feedback = document.getElementById("characterCreationFeedback");
+  const name = nameInput.value.trim();
+
+  if (!name) {
+    if (feedback) feedback.textContent = "請先輸入名字。";
+    nameInput.focus?.();
+    return;
+  }
+
+  if (!selectedIdealSelf) {
+    if (feedback) feedback.textContent = "請先選擇你最憧憬的球員形象。";
+    document.querySelector?.(".ideal-self-button")?.focus();
+    return;
+  }
+
+  const identityInput = {
+    name,
+    origin: selectedOrigin,
+    idealSelf: selectedIdealSelf
+  };
+  const identityValidation = PlayerDataBoundary.validateIdentityInput(identityInput);
+  if (!identityValidation.ok) {
+    if (feedback) feedback.textContent = identityValidation.error;
+    return;
+  }
+
+  if (feedback) feedback.textContent = "";
+  player = PlayerDataBoundary.createInitialSnapshot();
   player.replayMemories = loadReplayMemories();
-  player.origin = selectedOrigin;
+  const identityResult = PlayerDataBoundary.initializeIdentity(identityInput);
+  if (!identityResult.ok) {
+    if (feedback) feedback.textContent = identityResult.error;
+    return;
+  }
   const origins = {
-    prove: { effects: { confidence: 1, pressure: 1 }, personality: { brave: 1, ambitious: 1 }, flag: "origin_wants_to_be_seen", memory: "在真正碰到棒球以前，你先承認自己希望有一天能被看見。" },
-    understand: { effects: { observe: 2 }, personality: { thoughtful: 2 }, flag: "origin_wants_to_understand", memory: "你最初靠近棒球，是因為想知道每個動作背後的原因。" },
-    belong: { effects: { familySupport: 1, resilience: 1 }, personality: { kind: 1, reliable: 1 }, flag: "origin_wants_to_belong", memory: "你希望棒球能讓自己成為某個團體的一員。" }
+    [PlayerIdentityOptions.origins[0]]: { effects: { confidence: 1, pressure: 1 }, personality: { brave: 1, ambitious: 1 }, flag: "origin_wants_to_be_seen", memory: "在真正碰到棒球以前，你先承認自己希望有一天能被看見。" },
+    [PlayerIdentityOptions.origins[1]]: { effects: { observe: 2 }, personality: { thoughtful: 2 }, flag: "origin_wants_to_understand", memory: "你最初靠近棒球，是因為想知道每個動作背後的原因。" },
+    [PlayerIdentityOptions.origins[2]]: { effects: { familySupport: 1, resilience: 1 }, personality: { kind: 1, reliable: 1 }, flag: "origin_wants_to_belong", memory: "你希望棒球能讓自己成為某個團體的一員。" }
   };
   const origin = origins[selectedOrigin];
   applyEffects(origin.effects);
@@ -366,8 +427,9 @@ function createPlayer() {
   player.memories.push(origin.memory);
   document.getElementById("characterCreation").style.display = "none";
   document.getElementById("changeLog").innerHTML = "";
-  selectedOrigin = "prove";
-  document.querySelectorAll?.(".origin-card").forEach(card => card.classList.toggle("selected", card.dataset.origin === "prove"));
+  selectedOrigin = PlayerIdentityOptions.origins[0];
+  document.querySelectorAll?.(".origin-card").forEach(card => card.classList.toggle("selected", card.dataset.origin === PlayerIdentityOptions.origins[0]));
+  selectIdealSelf("");
   showCurrentEvent();
 }
 
@@ -378,6 +440,9 @@ function resetGame() {
   document.getElementById("story").innerHTML = "";
   document.getElementById("choices").innerHTML = "";
   document.getElementById("changeLog").innerHTML = "";
+  const feedback = document.getElementById("characterCreationFeedback");
+  if (feedback) feedback.textContent = "";
+  selectIdealSelf("");
   updateStatus();
 }
 
@@ -598,6 +663,53 @@ function ensureIncrementalSystems() {
   }
 }
 
+function shouldQueueAzheAdultRecordEcho(eventId = "") {
+  if (player.forcedEventId || eventId === "azhe_adult_record_echo" || hasFlag("azhe_adult_record_echo_done")) return false;
+  if (!["transition_relationship", "development_mentor"].includes(eventId)) return false;
+  const relationshipSource = player.characterArc.azhe === "respected_equal" || hasFlag("azhe_record_sheet") || hasFlag("respected_azhe_exit");
+  const reinventionSource = player.chapter === "發展期" && ["declining", "transition", "reinvented"].includes(player.careerArc?.stage);
+  const rehabSource = String(player.careerExit || "").includes("復健") || hasFlag("rehab_helped_youth") || hasFlag("development_adjusted_role");
+  const identityDoubt = player.chapter === "發展期" && !player.roleIdentity?.primary;
+  return relationshipSource || reinventionSource || rehabSource || identityDoubt;
+}
+
+function queueAzheAdultRecordEcho(eventId = "") {
+  if (!shouldQueueAzheAdultRecordEcho(eventId)) return false;
+  player.forcedEventId = "azhe_adult_record_echo";
+  return true;
+}
+
+function shouldQueueTakahashiAdultRestartEcho(eventId = "") {
+  if (player.forcedEventId || eventId === "takahashi_adult_restart_echo" || hasFlag("takahashi_adult_restart_echo_done")) return false;
+  if (eventId !== "development_competition") return false;
+  return hasFlag("takahashi_break_seen");
+}
+
+function queueTakahashiAdultRestartEcho(eventId = "") {
+  if (!shouldQueueTakahashiAdultRestartEcho(eventId)) return false;
+  player.forcedEventId = "takahashi_adult_restart_echo";
+  return true;
+}
+
+function processTakahashiStoryboardFlow(eventId = "") {
+  const flow = {
+    junior_takahashi_failure: { advanceMain: true, next: "junior_takahashi_pressure" },
+    junior_takahashi_pressure: { advanceMain: false, next: "junior_takahashi_break" },
+    junior_takahashi_break: { advanceMain: false, next: "" }
+  }[eventId];
+  if (!flow) return false;
+  if (flow.advanceMain) {
+    advanceAfterAction();
+    tickPendingEvents(eventId);
+  }
+  player.forcedEventId = flow.next;
+  window.setTimeout(() => {
+    isTransitioning = false;
+    showCurrentEvent();
+  }, 420);
+  return true;
+}
+
 function resolveStartingCompetition() {
   refreshStartingCompetition();
   const competition = player.startingCompetition;
@@ -719,6 +831,26 @@ function addImpressionEffects(effects = {}) {
 function applyCharacterArcEffects(effects = {}) {
   player.characterArc = Object.assign({}, createInitialPlayer().characterArc, player.characterArc || {});
   Object.entries(effects).forEach(([npc, state]) => { if (state) player.characterArc[npc] = state; });
+}
+
+function applyAzheCoverSignalOutcome(originalArc = "neutral") {
+  if (["respected_equal", "confided"].includes(originalArc)) {
+    addImpressionEffects({ azhe: { trusts: 2 } });
+    applyCharacterArcEffects({ azhe: "respected_equal" });
+    return;
+  }
+  if (originalArc === "dependent") {
+    addImpressionEffects({ azhe: { trusts: 1, depends: -1 } });
+    applyCharacterArcEffects({ azhe: "dependent" });
+    return;
+  }
+  if (originalArc === "distant") {
+    addImpressionEffects({ azhe: { feelsDistance: -1 } });
+    applyCharacterArcEffects({ azhe: "distant" });
+    return;
+  }
+  addImpressionEffects({ azhe: { trusts: 1 } });
+  applyCharacterArcEffects({ azhe: "confided" });
 }
 
 function personalityTier(value) {
@@ -943,6 +1075,21 @@ function choose(eventId, index) {
   const event = getEvent(eventId);
   const choice = event?.choices?.[index];
   if (!choice) return;
+  let decisionContext = null;
+  let relationshipContext = null;
+  if (eventId === "chapter2_intro" && index === 0) {
+    const contextResult = DecisionFlow.createDecisionContext(eventId, index);
+    if (!contextResult.ok) throw new Error(contextResult.error);
+    decisionContext = contextResult.context;
+  }
+  if (eventId === "youth_season_intro" && index === 0) {
+    const contextResult = RelationshipFlow.createRelationshipContext(
+      eventId,
+      index
+    );
+    if (!contextResult.ok) throw new Error(contextResult.error);
+    relationshipContext = contextResult.context;
+  }
 
   if (choice.restart) return resetGame();
   if (choice.nextChapter === "chapter2") return enterChapterTwo();
@@ -962,13 +1109,33 @@ function choose(eventId, index) {
     return;
   }
   if (choice.sleep) {
-    advanceFromNight();
+    const timeSnapshot = TimeBoundary.getSnapshot();
+    if (
+      eventId === "night" &&
+      index === 0 &&
+      timeSnapshot.day === 1 &&
+      timeSnapshot.phase === "night"
+    ) {
+      const contextResult = DayCompletionFlow.createDayCompletionContext(
+        eventId,
+        index
+      );
+      if (!contextResult.ok) throw new Error(contextResult.error);
+      const completionResult = DayCompletionFlow.completeDay(
+        contextResult.context
+      );
+      if (!completionResult.ok) throw new Error(completionResult.error);
+    }
+    else {
+      advanceFromNight();
+    }
     showCurrentEvent();
     return;
   }
 
   isTransitioning = true;
   const before = getPlayerSnapshot();
+  const originalAzheArc = player.characterArc?.azhe || "neutral";
   applyConsequenceAtEvent(eventId);
   applyEffects(choice.effects);
   addPersonalityEffects(choice.personalityEffects);
@@ -981,7 +1148,25 @@ function choose(eventId, index) {
   }
   if (choice.acceptSuggestedPosition) applySuggestedPositionChange();
   applyPositionSkillEffects(choice.positionSkillEffects);
-  applyNestedEffects("relationships", choice.relationshipEffects);
+  if (relationshipContext) {
+    const result = RelationshipFlow.createRelationshipResult(
+      relationshipContext,
+      {
+        targetId: "coachTrust",
+        amount: choice.relationshipEffects.coachTrust,
+        previousValue: RelationshipBoundary.getRelationship("coachTrust")
+      }
+    );
+    if (!result.ok) throw new Error(result.error);
+    const relationshipChange = RelationshipFlow.applyRelationshipResult(
+      result.relationshipResult
+    );
+    if (!relationshipChange.ok) throw new Error(relationshipChange.error);
+    syncNpcRelationships();
+  }
+  else {
+    applyNestedEffects("relationships", choice.relationshipEffects);
+  }
   applyNestedEffects("positionAffinity", choice.positionEffects);
   applyBodyEffects(choice.bodyEffects);
   applyAcademicEffects(choice.academicEffects);
@@ -1003,6 +1188,7 @@ function choose(eventId, index) {
   }
   updateRoute();
   updateImpression();
+  if (choice.azheCoverSignalOutcome) applyAzheCoverSignalOutcome(originalAzheArc);
   if (choice.resolveStartingCompetition) resolveStartingCompetition();
   processCareerArcEvent(eventId, choice);
   processEmotionalEvent(eventId, choice);
@@ -1011,6 +1197,8 @@ function choose(eventId, index) {
   recordContinuityOutcome(choice.continuityOutcome || createContinuityOutcome(eventId, choice));
   advanceNarrativeThread(eventId, choice);
   showStatChanges(before, getPlayerSnapshot(), choice.memory);
+
+  if (processTakahashiStoryboardFlow(eventId)) return;
 
   if (choice.resolveStartingCompetition) {
     player.forcedEventId = "starter_selection_result";
@@ -1031,7 +1219,7 @@ function choose(eventId, index) {
   }
 
   if (choice.finishChapterOne) finishChapterOne();
-  else advanceAfterAction();
+  else advanceAfterAction(decisionContext);
   tickPendingEvents(eventId);
 
   window.setTimeout(() => {
@@ -1253,10 +1441,19 @@ function updateCareerValue(options = {}) {
 function changeRoleIdentity(nextRole, reason = "") {
   if (!nextRole) return false;
   if (!player.roleIdentity) player.roleIdentity = createInitialPlayer().roleIdentity;
+  if (!Array.isArray(player.roleIdentity.previousArchetypes)) player.roleIdentity.previousArchetypes = [];
   const current = player.roleIdentity.primary;
-  if (current === nextRole) return false;
+  const currentArchetype = player.roleIdentity.archetype || "";
+  const nextArchetype = inferPlayerArchetype(nextRole);
+  if (current === nextRole) {
+    if (currentArchetype && currentArchetype !== nextArchetype && !player.roleIdentity.previousArchetypes.includes(currentArchetype)) player.roleIdentity.previousArchetypes.push(currentArchetype);
+    player.roleIdentity.archetype = nextArchetype;
+    return currentArchetype !== nextArchetype;
+  }
   if (current && !player.roleIdentity.previous.includes(current)) player.roleIdentity.previous.push(current);
+  if (currentArchetype && !player.roleIdentity.previousArchetypes.includes(currentArchetype)) player.roleIdentity.previousArchetypes.push(currentArchetype);
   player.roleIdentity.primary = nextRole;
+  player.roleIdentity.archetype = nextArchetype;
   const priorRole = current || player.careerArc.lostRole;
   if (priorRole) {
     player.careerArc.reinventions += 1;
@@ -1284,14 +1481,83 @@ function inferRoleIdentity() {
   return "守備專家";
 }
 
+const playerArchetypeDescriptions = {
+  "本壘板指揮官": "用配球、觀察與守備指揮掌握整場比賽。", "銅牆鐵壁": "讓穿越防區的球變少。",
+  "雷射肩捕手": "以快速而有威脅的傳球壓制跑者。", "攻擊型捕手": "在捕手守位仍能提供穩定火力。",
+  "火球派投手": "用球威迫使打者縮短反應時間。", "精密控球師": "靠控球與打者閱讀攻擊最難碰觸的位置。",
+  "吃局機器": "用耐力、恢復與穩定性替球隊消化局數。", "短局拆彈手": "在有限局數裡承擔最高壓力的出局任務。",
+  "內野指揮塔": "提早閱讀球路並協調內野站位與補位。", "強肩三游": "用傳球能力擴大三游防區。",
+  "攻守兼備內野手": "守備能站住位置，棒子也能留在先發。", "穩定型內野手": "以確實完成與低失誤累積信任。",
+  "外野獵犬": "依靠起步、反應與範圍追上原本會落地的球。", "雷射肩外野手": "長距離回傳足以改變跑者決策。",
+  "強打外野手": "以進攻產出支撐外野守位價值。", "速度型中外野": "用速度影響守備範圍與壘間壓力。", "外野守護者": "穩定接住飛球並維持外野防線。",
+  "超級工具人": "能在多個位置理解並完成不同任務。", "多功能拼圖": "依照名單缺口提供用途。",
+  "靠棒子生存": "守位不是最大優勢，打席內容決定能否留下。", "攻擊突破口": "球隊需要得分時，棒子是最清楚的使用理由。",
+  "板凳席王牌": "有限打席裡仍能準備好最重要的一次揮棒。", "壘間破壞者": "以速度、判斷和跑壘壓迫整條防線。",
+  "板凳司令塔": "即使不固定先發，仍能讓隊伍準備得更完整。", "場上教練": "把理解轉成隊友能執行的提醒與安排。"
+};
+
+function inferPlayerArchetype(primaryRole = player.roleIdentity?.primary || inferRoleIdentity()) {
+  const s = player.baseballSkills || {};
+  const position = player.seasonPosition || "";
+  if (primaryRole === "工具人") return player.secondaryPosition && (s.baseballIQ || 0) + (s.catching || 0) >= 16 ? "超級工具人" : "多功能拼圖";
+  if (primaryRole === "代打") return "板凳席王牌";
+  if (primaryRole === "速度型球員") return "壘間破壞者";
+  if (primaryRole === "板凳領袖") return "板凳司令塔";
+  if (primaryRole === "場上組織者") return "場上教練";
+  if (primaryRole === "打擊型球員") return (s.batting || 0) >= 12 ? "靠棒子生存" : "攻擊突破口";
+  if (position === "捕手") {
+    if ((s.batting || 0) >= 10 && (s.batting || 0) >= Math.max(s.blocking || 0, s.gameCalling || 0)) return "攻擊型捕手";
+    if ((s.gameCalling || 0) + (s.baseballIQ || 0) >= 18) return "本壘板指揮官";
+    if ((s.blocking || 0) + (s.catching || 0) >= 18) return "銅牆鐵壁";
+    if ((s.armStrength || 0) + (s.throwing || 0) >= 18) return "雷射肩捕手";
+    return "本壘板指揮官";
+  }
+  if (position === "投手") {
+    if ((s.control || 0) >= 10 && (s.baseballIQ || 0) >= 9) return "精密控球師";
+    if ((s.armStrength || 0) >= 11 && (s.throwing || 0) >= 10) return "火球派投手";
+    if ((s.pitchStamina || 0) >= 10 && (player.body?.recovery || 0) >= 7) return "吃局機器";
+    return "短局拆彈手";
+  }
+  if (position === "外野手") {
+    if ((s.range || 0) + (s.reaction || 0) >= 20) return "外野獵犬";
+    if ((s.armStrength || 0) + (s.throwing || 0) >= 20) return "雷射肩外野手";
+    if ((s.batting || 0) >= 10) return "強打外野手";
+    if ((s.baseRunning || 0) >= 9) return "速度型中外野";
+    return "外野守護者";
+  }
+  if ((s.catching || 0) + (s.reaction || 0) + (s.range || 0) >= 28) return "銅牆鐵壁";
+  if ((s.baseballIQ || 0) + (s.reaction || 0) >= 19) return "內野指揮塔";
+  if ((s.throwing || 0) + (s.armStrength || 0) >= 20) return "強肩三游";
+  if ((s.batting || 0) >= 10) return "攻守兼備內野手";
+  return "穩定型內野手";
+}
+
+function refreshPlayerArchetype() {
+  if (!player.roleIdentity?.primary) return "尚未形成";
+  if (!Array.isArray(player.roleIdentity.previousArchetypes)) player.roleIdentity.previousArchetypes = [];
+  const next = inferPlayerArchetype(player.roleIdentity.primary);
+  const current = player.roleIdentity.archetype || "";
+  if (current && current !== next && !player.roleIdentity.previousArchetypes.includes(current)) player.roleIdentity.previousArchetypes.push(current);
+  player.roleIdentity.archetype = next;
+  return next;
+}
+
+function getPlayerArchetypeDescription() {
+  const archetype = refreshPlayerArchetype();
+  return playerArchetypeDescriptions[archetype] || "這種球員型態仍在形成。";
+}
+
 function invalidateCurrentRole(reason) {
   const role = player.roleIdentity.primary;
   if (!role || player.careerArc.stage === "declining") return;
   player.careerArc.stage = "declining";
   player.careerArc.valleys += 1;
   if (!player.roleIdentity.previous.includes(role)) player.roleIdentity.previous.push(role);
+  const archetype = player.roleIdentity.archetype || "";
+  if (archetype && !player.roleIdentity.previousArchetypes.includes(archetype)) player.roleIdentity.previousArchetypes.push(archetype);
   player.careerArc.lostRole = role;
   player.roleIdentity.primary = "";
+  player.roleIdentity.archetype = "";
   addTurningPoint(`role_lost_${player.turningPoints.length + 1}`, `原有角色「${role}」受到挑戰`, reason);
   updateCareerValue({ delta: -12, trend: "declining" });
 }
@@ -1305,13 +1571,13 @@ function processCareerArcEvent(eventId, choice) {
     updateCareerValue({ delta: 7, trend: "rising" });
     return;
   }
-  if (eventId === "transition_checkpoint") {
+  if (eventId === "transition_checkpoint" || transitionRouteDecisionEvents.includes(eventId)) {
     let nextRole = inferRoleIdentity();
-    if (hasFlag("pro_accepted_utility_test") || hasFlag("college_reset_positions") || hasFlag("amateur_presented_profile") || hasFlag("rehab_changed_style")) nextRole = "工具人";
+    if (hasFlag("pro_roster_utility")) nextRole = "工具人";
     if (hasFlag("pro_fought_for_bats") || hasFlag("amateur_showed_ceiling")) nextRole = "打擊型球員";
     if (hasFlag("pro_showed_primary_tool") || hasFlag("amateur_showed_floor")) nextRole = player.seasonPosition === "捕手" ? "捕手核心" : player.seasonPosition === "投手" ? "短局投手" : "守備後段專家";
     if (hasFlag("rehab_helped_youth")) nextRole = "場上組織者";
-    changeRoleIdentity(nextRole, "新組織把前兩幕的選擇整理成第一次有限任務");
+    changeRoleIdentity(nextRole, "路線專屬壓力把前三幕選擇整理成第一次有限任務");
     addTurningPoint(`transition_role_${getAdultRouteKey()}`, `第一次以「${nextRole}」接受新組織測試`, "前一回的選擇改變了本回的任務內容");
     updateCareerValue({ delta: 2, trend: "rising" });
     return;
@@ -1363,12 +1629,14 @@ function getCareerArcNpcEcho() {
 
 function generateCareerSummary() {
   const roles = [...(player.roleIdentity.previous || []), player.roleIdentity.primary].filter(Boolean);
+  const archetype = player.roleIdentity.primary ? refreshPlayerArchetype() : "尚未形成";
+  const archetypeHistory = (player.roleIdentity.previousArchetypes || []).filter(item => item && item !== archetype);
   const lost = player.turningPoints.find(point => point.id.startsWith("role_lost_"));
   const needed = player.turningPoints.find(point => point.id === "needed_again");
   const opening = roles.length > 1 ? `你曾是${roles[0]}，後來轉型為${roles[roles.length - 1]}。` : roles.length ? `你逐漸成為${roles[0]}。` : "你的球員角色直到最後仍沒有完全定型。";
   const change = lost ? `${lost.title}之後，你不再只追著原本的定位，而開始試著把經驗帶去新的任務。` : "每次評估都讓你更清楚，自己想用哪一種方式參與比賽。";
   const possibility = needed ? `${needed.title}：${needed.impact}。` : `下一步仍很具體：${getCurrentAspiration().nextPossibility || "把現有工具轉成一次能被看見的場上任務"}。`;
-  return `${opening}\n${change}\n${possibility}\n你曾經追求的不是一條直線，而是一連串可以實際嘗試的角色；目前的生涯走勢是${({ rising: "正在上升", stable: "穩定累積", declining: "等待下一次調整", rebound: "重新被看見" })[player.careerValue.trend] || "穩定累積"}。\n紀錄中的最高市場評估為 ${player.careerValue.peak}、最低為 ${player.careerValue.minimum}；它們是軌跡，不是人生結論。`;
+  return `${opening}\n你目前形成的球員型態是「${archetype}」：${playerArchetypeDescriptions[archetype] || "仍在形成"}${archetypeHistory.length ? `\n過去曾被描述為：${archetypeHistory.join(" → ")}。` : ""}\n${change}\n${possibility}\n你曾經追求的不是一條直線，而是一連串可以實際嘗試的角色；目前的生涯走勢是${({ rising: "正在上升", stable: "穩定累積", declining: "等待下一次調整", rebound: "重新被看見" })[player.careerValue.trend] || "穩定累積"}。\n紀錄中的最高市場評估為 ${player.careerValue.peak}、最低為 ${player.careerValue.minimum}；它們是軌跡，不是人生結論。`;
 }
 
 const REPLAY_MEMORY_KEY = "baseballLifeReplayMemories";
@@ -1887,25 +2155,32 @@ function getAspirationEventTextMap() {
 const adultNarrativeChains = {
   draft: {
     id: "professional_limited_role", title: "下一次名單上的用途", question: "進入新組織後，你能讓哪一項工具先換到第一次正式任務？",
-    events: ["transition_draft_day", "transition_rookie_camp", "transition_checkpoint", "transition_relationship", "transition_cost_check"],
+    events: ["transition_draft_day", "transition_rookie_camp", "transition_pro_roster_window", "transition_relationship", "transition_cost_check"],
     tensions: ["報到後四次行動會決定第一次測試角色", "第一次證明將決定你被放在哪一組", "相鄰置物櫃的新人成為下一個比較對象", "名單調整前還有一次把新用途帶進比賽的機會", "球隊將公布下一個角色與任務"]
   },
   college: {
     id: "college_recompetition", title: "大學裡第一個可用角色", question: "課業與健康並行時，你想用哪一次主力機會重新進入球探視野？",
-    events: ["transition_college_arrival", "transition_college_balance", "transition_checkpoint", "transition_relationship", "transition_cost_check"],
+    events: ["transition_college_arrival", "transition_college_balance", "transition_college_eligibility", "transition_relationship", "transition_cost_check"],
     tensions: ["重新分組前有四次行動可以調整方向", "課業與健康將開始影響輪替順位", "下一次主力機會會檢查你的負荷", "調整後還有一次重新進入視野的機會", "球探將說明繼續追蹤需要看見的條件"]
   },
   amateur: {
     id: "amateur_double_life", title: "工作之外保留下來的棒球", question: "工作與訓練並行時，你想為哪一次晚成測試保留時間？",
-    events: ["transition_amateur_job", "transition_amateur_test", "transition_checkpoint", "transition_relationship", "transition_cost_check"],
+    events: ["transition_amateur_job", "transition_amateur_test", "transition_amateur_company_conflict", "transition_relationship", "transition_cost_check"],
     tensions: ["測試前有四次行動可以調整生活與訓練", "工作排班將開始影響球隊任務", "球隊交付了任務，生活也提出新的安排問題", "晚成測試前還有一次具體準備", "你將決定要為哪一種棒球生活保留時間"]
   },
   rehab: {
     id: "rehab_new_identity", title: "調整後第一次參與比賽", question: "改變打法後，你想用哪一項新工具重新加入正式比賽？",
-    events: ["transition_rehab_plateau", "transition_rehab_identity", "transition_checkpoint", "transition_relationship", "transition_cost_check"],
+    events: ["transition_rehab_plateau", "transition_rehab_identity", "transition_rehab_reentry_deadline", "transition_relationship", "transition_cost_check"],
     tensions: ["第一次調整後測試前有四次準備", "下一次測試將比較新舊打法的負荷", "新的任務表上仍有一個可嘗試的位置", "還有一次把新角色帶進正式任務的機會", "組織將說明下一階段願意提供的參與方式"]
   }
 };
+
+const transitionRouteDecisionEvents = [
+  "transition_pro_roster_window",
+  "transition_college_eligibility",
+  "transition_amateur_company_conflict",
+  "transition_rehab_reentry_deadline"
+];
 
 const developmentNarrativeEvents = ["development_daily_life", "development_competition", "development_mentor", "development_body_choice", "development_opportunity", "development_market", "development_decision"];
 
@@ -2121,7 +2396,7 @@ function processRelationshipPayoffs(eventId) {
   if (eventId === "transition_relationship" && takaHigh && usableSkill) recordRelationshipPayoff({ id: "takahashi_test_introduction", npc: "takahashi", type: "introduction", title: "高橋把一份具名測試邀請交給你", source: "高尊重加上已成立的場上工具", effect: "取得特定角色測試入口", changesOpportunity: true }) && addFlags(["takahashi_introduced_test"]);
   if (eventId === "transition_relationship" && !takaHigh) recordRelationshipPayoff({ id: "takahashi_withheld_information", npc: "takahashi", type: "absence", title: "高橋只留下測試標準，沒有提供方法與對手資料", source: "尊重不足或長期低估", effect: "仍可接受挑戰，但沒有內部情報", absence: true });
 
-  if (eventId === "transition_checkpoint" && coachHigh && usableSkill && healthyEnough) {
+  if ((eventId === "transition_checkpoint" || transitionRouteDecisionEvents.includes(eventId)) && coachHigh && usableSkill && healthyEnough) {
     const profile = player.impression.coach.leader >= 3 ? { title: "山本導師以過去觀察提供一個組織任務面談入口", effect: "取得領導與工具角色面談，而非直接任務", reputation: 1 }
       : player.impression.coach.competitive >= 5 ? { title: "山本導師以過去競爭評價介紹一次高壓測試", effect: "取得測試入口並承擔更高失敗代價", exposure: 1, pressure: 1 }
         : { title: "山本導師以可靠評價提供一次有條件的介紹", effect: "取得穩定角色入口而非保證", scout: 1 };
@@ -2129,7 +2404,7 @@ function processRelationshipPayoffs(eventId) {
       player.scoutEvaluation += profile.scout || 0; player.reputation += profile.reputation || 0; player.exposure += profile.exposure || 0; player.pressure = Math.min(20, player.pressure + (profile.pressure || 0));
     }
   }
-  if (eventId === "transition_checkpoint" && coachHigh) {
+  if ((eventId === "transition_checkpoint" || transitionRouteDecisionEvents.includes(eventId)) && coachHigh) {
     const namedRole = inferRoleIdentity();
     if (recordRelationshipPayoff({ id: "yamamoto_role_naming", npc: "yamamoto", type: "information", title: `山本導師替「${namedRole}」這個可能取了名字`, source: "多年觀察形成的角色判讀", effect: "新組織測試項目與下一個追求變得明確", changesOption: true })) {
       addFlags(["yamamoto_named_role"]); setNextAspiration(`讓「${namedRole}」在正式任務中成立。`, { nextPossibility: `下一次${namedRole}測試`, sourceEventId: eventId });
@@ -2162,7 +2437,10 @@ const importantEventThemes = {
   transition_amateur_test: { keywords: ["球隊任務", "晚成觀察"], action: "呈現穩定、上限或完整用途", next: "職業觀察條件" },
   transition_rehab_plateau: { keywords: ["恢復停滯", "改變打法"], action: "延長復健、改打法或提前測試", next: "舊角色是否失效" },
   transition_rehab_identity: { keywords: ["新使用方式", "低負荷測試"], action: "維持復健、協助基層或暫離球場", next: "第一次調整後正式測試" },
-  transition_checkpoint: { keywords: ["有限任務", "組織回應"], action: "把前兩幕選擇轉成組織角色", next: "核心人物如何提供資源" },
+  transition_pro_roster_window: { keywords: ["升降窗口", "名單用途"], action: "選擇工具人、主守位比較或健康限制", next: "核心人物如何回應職業名單壓力" },
+  transition_college_eligibility: { keywords: ["參賽資格", "主力競爭"], action: "在學籍、曝光與發展時間間取捨", next: "核心人物如何回應大學窗口" },
+  transition_amateur_company_conflict: { keywords: ["工作責任", "名單測試"], action: "協商、留在公司或直接參加測試", next: "核心人物如何看待雙重生活" },
+  transition_rehab_reentry_deadline: { keywords: ["復健期限", "重返風險"], action: "限制測試、延後或全力測試", next: "核心人物如何回應重返期限" },
   transition_relationship: { keywords: ["關係兌現", "資源差異"], action: "接收陪伴、情報、入口或真實缺席", next: "最後一次條件確認" },
   transition_cost_check: { keywords: ["現實代價", "下一步"], action: "確認健康、生活與角色是否可持續", next: "十八歲轉換結果" },
   development_competition: { keywords: ["失去位置", "被重新評價"], action: "專精、擴張角色或要求測試", next: "誰願意提供轉型情報" },
@@ -2228,7 +2506,7 @@ function applyFinanceEffects(effects = {}) {
   });
 }
 
-function advanceAfterAction() {
+function advanceAfterAction(decisionContext = null) {
   if (player.chapter === "發展期") {
     player.developmentStep += 1;
     if (player.developmentStep >= 7) evaluateDevelopmentYears();
@@ -2270,7 +2548,24 @@ function advanceAfterAction() {
     return;
   }
   if (player.chapter === "少棒入門") {
-    player.chapter2Step = (Number(player.chapter2Step) || 0) + 1;
+    const nextChapter2Step = (Number(player.chapter2Step) || 0) + 1;
+    if (
+      decisionContext?.eventId === "chapter2_intro" &&
+      decisionContext.choiceIndex === 0
+    ) {
+      const decisionResult = DecisionFlow.createDecisionResult(
+        decisionContext,
+        { chapter2Step: nextChapter2Step }
+      );
+      if (!decisionResult.ok) throw new Error(decisionResult.error);
+      const stateChangeResult = DecisionFlow.applyDecisionStateChange(
+        decisionResult.decisionResult
+      );
+      if (!stateChangeResult.ok) throw new Error(stateChangeResult.error);
+    }
+    else {
+      player.chapter2Step = nextChapter2Step;
+    }
     player.chapter2Phase = player.chapter2Step ? "training" : "intro";
     player.chapter2Day = Math.min(3, Math.max(1, Math.ceil(player.chapter2Step / 2)));
     if (player.chapter2Step >= 6) evaluateChapter2Result();
@@ -2702,6 +2997,8 @@ function showCurrentEvent() { showStory(getCurrentEventId()); }
 
 function showStory(eventId) {
   ensureIncrementalSystems();
+  queueAzheAdultRecordEcho(eventId);
+  queueTakahashiAdultRestartEcho(eventId);
   if (player.forcedEventId) eventId = player.forcedEventId;
   ensureChapterAspiration(eventId);
   const event = getEvent(eventId);
@@ -2716,7 +3013,13 @@ function showStory(eventId) {
   prepareMatchStateForEvent(eventId);
   updateGoals(eventId);
   refreshStartingCompetition();
-  player.lastEventTitle = event.title;
+  const currentStateResult = CurrentStateBoundary.applyStateChangeRequest({
+    source: "showStory",
+    changes: { lastEventTitle: event.title }
+  });
+  if (!currentStateResult.ok) {
+    throw new Error(currentStateResult.error);
+  }
   let text = typeof event.text === "function" ? event.text() : event.text;
   const bridgeIn = getNarrativeBridge(eventId, "in");
   const bridgeOut = getNarrativeBridge(eventId, "out");
@@ -3048,6 +3351,7 @@ function updateStatus() {
   const offensiveRating = calculateOffensiveRating();
   const offensiveValue = getOffensiveCareerValue();
   const showCareerArc = player.chapter.includes("青棒關鍵年") || player.chapter.includes("生涯轉換") || player.chapter === "發展期" || player.chapter === "二十二歲職涯小結";
+  const currentArchetype = showCareerArc && player.roleIdentity.primary ? refreshPlayerArchetype() : "";
   if (showCareerArc) evaluateMarket();
   const careerTrendLabels = { rising: "上升", stable: "持平", declining: "下降", rebound: "回升" };
   const competitionHtml = competition?.active ? `<div class="competition-card"><strong>${escapeHtml(competition.position || player.seasonPosition)}先發競爭</strong><div class="competition-row"><span>${escapeHtml(competition.rivalName || getRivalDisplayName())}</span><b>教練評價 ${competition.rivalRating}</b></div><div class="competition-row you"><span>你</span><b>教練評價 ${competition.playerRating}</b></div><p class="competition-gap">${competition.result ? `${escapeHtml(competition.result)}：${escapeHtml(competition.detail)}` : `目前差距 ${Math.abs(competition.rivalRating - competition.playerRating)} 點，測試尚未公布。`}</p></div>` : "";
@@ -3066,7 +3370,7 @@ function updateStatus() {
     ${showBody ? `<h2>身體狀態</h2>${renderBar(player.body.stamina, "體力")}${renderBar(player.body.fatigue, "疲勞")}${renderBar(player.body.recovery, "恢復力")}${renderBar(player.body.injuryRisk, "傷病風險")}${renderBar(player.body.pain, "疼痛")}` : ""}
     ${player.chapter.includes("青少棒") || player.juniorSeasonResult ? `<h2>生活平衡</h2>${renderBar(player.academics, "課業")}${renderBar(player.motivation, "棒球動機")}${renderBar(player.burnout, "倦怠")}` : ""}
     ${player.chapter.includes("青棒") || player.careerExit ? `<h2>生涯資產</h2>${renderBar(player.exposure, "曝光")}${renderBar(player.scoutEvaluation, "球探評價")}${renderBar(player.recentPerformance, "近期表現")}${renderBar(player.reputation, "名聲／可信度")}` : ""}
-    ${showCareerArc ? `<div class="career-arc-card"><strong>生涯軌跡：${escapeHtml(player.roleIdentity.primary || "尚未定型")}</strong><p>價值 ${player.careerValue.current}／最高 ${player.careerValue.peak}　${careerTrendLabels[player.careerValue.trend] || "持平"}</p><p>階段：${escapeHtml(player.careerArc.stage)}　轉型 ${player.careerArc.reinventions} 次</p></div><h2>市場重估</h2>${renderBar(player.marketEvaluation.offense, "進攻", 100)}${renderBar(player.marketEvaluation.defense, "守備", 100)}${renderBar(player.marketEvaluation.utility, "工具性", 100)}${renderBar(player.marketEvaluation.leadership, "領導", 100)}${renderBar(player.marketEvaluation.health, "健康", 100)}` : ""}
+    ${showCareerArc ? `<div class="career-arc-card"><strong>球員型態：${escapeHtml(currentArchetype || "尚未形成")}</strong><p>${escapeHtml(playerArchetypeDescriptions[currentArchetype] || "仍在尋找可被球隊描述的用途。")}</p><small>系統角色：${escapeHtml(player.roleIdentity.primary || "尚未定型")}</small><p>價值 ${player.careerValue.current}／最高 ${player.careerValue.peak}　${careerTrendLabels[player.careerValue.trend] || "持平"}</p><p>階段：${escapeHtml(player.careerArc.stage)}　轉型 ${player.careerArc.reinventions} 次</p></div><h2>市場重估</h2>${renderBar(player.marketEvaluation.offense, "進攻", 100)}${renderBar(player.marketEvaluation.defense, "守備", 100)}${renderBar(player.marketEvaluation.utility, "工具性", 100)}${renderBar(player.marketEvaluation.leadership, "領導", 100)}${renderBar(player.marketEvaluation.health, "健康", 100)}` : ""}
     ${player.narrativeThread?.id ? `<div class="goal-card"><strong>本段故事：${escapeHtml(player.narrativeThread.title)}</strong><p>${escapeHtml(player.narrativeThread.question)}</p><small>${escapeHtml(player.narrativeThread.nextTension || "等待下一幕")}</small></div>` : ""}
     ${player.relationshipPayoffs?.length ? `<div class="reflection-card"><strong>最近的關係回報</strong><p>${escapeHtml(getRelationshipPayoffSummary())}</p></div>` : ""}
     ${player.chapter.includes("生涯轉換") || player.transitionResult ? `<h2>轉換期</h2>${renderBar(player.finances, "經濟穩定")}` : ""}
@@ -3074,7 +3378,7 @@ function updateStatus() {
     ${showSeason ? `<div class="reflection-card"><strong>人物反應</strong><p>${escapeHtml(getNpcPerceptionSummary("azhe"))}</p><p>${escapeHtml(getNpcPerceptionSummary("takahashi"))}</p><p>${escapeHtml(getNpcPerceptionSummary("coach"))}</p></div>` : ""}
     <h2>路線傾向</h2><p>${escapeHtml(player.route)}</p>
     ${player.chapter2Result ? `<div class="result-badge"><small>少棒入門評估</small><strong>${escapeHtml(player.chapter2Result)}</strong></div>` : ""}`;
-  document.getElementById("player-info").innerHTML = `<strong>${escapeHtml(player.name || "尚未建立角色")}</strong><span>${player.age} 歲</span><span>${escapeHtml(player.chapter)}</span><span>${escapeHtml(player.route)}</span>`;
+  document.getElementById("player-info").innerHTML = `<strong>${escapeHtml(player.name || "尚未建立角色")}</strong><span>${player.age} 歲</span><span>${escapeHtml(player.chapter)}</span><span>${escapeHtml(player.route)}</span><span>理想球員：${escapeHtml(player.idealSelf || "尚未形成")}</span>`;
 }
 
 updateStatus();

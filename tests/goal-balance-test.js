@@ -3,7 +3,7 @@ const path = require("path");
 const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
-const files = ["player.js", "story.js", "save.js", "script.js"];
+const files = ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "save.js", "script.js"];
 function makeGame() {
   const nodes = new Map();
   const context = vm.createContext({
@@ -98,7 +98,7 @@ function captureGoals(game) {
 
 function simulate(profileName, weights, variation) {
   const game = makeGame();
-  vm.runInContext(`selectedOrigin=${profileName === "理解基本功" ? "'understand'" : profileName === "隊友關係" ? "'belong'" : "'prove'"}`, game);
+  vm.runInContext(`selectedOrigin=${profileName === "理解基本功" ? "'understand'" : profileName === "隊友關係" ? "'belong'" : "'prove'"}; selectedIdealSelf='全能型'`, game);
   game.createPlayer();
   playUntil(game, "Boolean(player.ending)", weights, variation, 35);
   game.choose("ending", 0);

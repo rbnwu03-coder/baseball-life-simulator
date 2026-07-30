@@ -9,7 +9,7 @@ const context = vm.createContext({
   localStorage: { setItem() {}, getItem() { return null; }, removeItem() {} },
   window: { setTimeout(callback) { callback(); } }
 });
-for (const file of ["player.js", "story.js", "save.js", "script.js"]) vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file });
+for (const file of ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "save.js", "script.js"]) vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file });
 
 const result = vm.runInContext(`
   player = createInitialPlayer("NPC 測試");
