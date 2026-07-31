@@ -245,20 +245,20 @@ const youthSeasonEvents = {
       return `${typeText[player.chapter2Result] || "教練還在觀察你能替球隊做些什麼。"}\n\n新球季開始，山本教練說：『從今天開始，我看的不只是你會不會接球，也看你怎麼和別人一起打球。』`;
     },
     choices: [
-      C("點頭接受球隊安排", { resilience: 1, discipline: 1 }, ["season_accept_structure"], "你決定先學會成為隊伍的一員。", { relationshipEffects: { coachTrust: 1 } }),
-      C("問教練自己最可能守哪裡", { observe: 1, confidence: 1 }, ["season_ask_position"], "你主動詢問自己的位置。", { relationshipEffects: { coachTrust: 1 } }),
-      C("先看看其他孩子怎麼相處", { observe: 2 }, ["season_watch_team"], "你先觀察隊伍裡看不見的規矩。", { relationshipEffects: { teammateBond: 1 } }),
-      C("告訴教練：我也想靠打擊爭取上場", { confidence: 2, pressure: 1 }, ["season_declared_bat_path"], "教練同意讓你多一組打擊，但提醒守備基本功不會因此消失。", { skillEffects: { batting: 2 }, bodyEffects: { fatigue: 1 } })
+      C("把手套放進球隊器材籃，照分組開始熱身", { resilience: 1, discipline: 1 }, ["season_accept_structure"], "你跟著口令跑完兩圈，再把下一組要用的球排好。教練沒有停下筆，只在你的名字旁畫了一個小勾。", { relationshipEffects: { coachTrust: 1 } }),
+      C("指著守位分組表，問自己會先從哪裡開始", { observe: 1, confidence: 1 }, ["season_ask_position"], "教練用筆尖依序點過內野、外野、本壘與投手丘：『每個地方都做三球，再告訴我你看見什麼。』", { relationshipEffects: { coachTrust: 1 } }),
+      C("排到隊伍最後，記住大家輪流搬器材的順序", { observe: 2 }, ["season_watch_team"], "你看見有人先搬壘包、有人清點球袋，也看見阿哲會替後面的人扶住推車。輪到你時，你接過了最容易掉下來的那袋球。", { relationshipEffects: { teammateBond: 1 } }),
+      C("拿起球棒，請教練把自己排進下一組打擊", { confidence: 2, pressure: 1 }, ["season_declared_bat_path"], "教練把你的名字補進打擊組，讓你多揮十球；最後仍把一只手套推回你面前：『打完，守備照做。』", { skillEffects: { batting: 2 }, bodyEffects: { fatigue: 1 } })
     ]
   },
   youth_position_trial: {
     title: "第一次位置測試",
-    text: "教練讓你依序試接內野滾地球、外野飛球，最後蹲到本壘後方接幾顆球。每個位置都像在問不同的問題。",
+    text: "山本教練把十二顆球分成四排，哨音一響，每個位置只有三球。內野看第一步和傳球，外野看追球路線，捕手要把低球留在身前，投手則要把球送進指定的手套位置。\n\n輪到你時，其他孩子退到網子後方。教練沒有報分，只抬起筆，等你選一個位置把三球做完。",
     choices: [
-      C("留在內野，練習判斷彈跳", { observe: 1, pressure: 1 }, ["tried_infield"], "內野的每一步都很短，決定卻必須很快。", { setPrimaryPosition: "內野手", skillEffects: { catching: 1, throwing: 1, baseballIQ: 1, reaction: 2, range: 1 }, positionEffects: { infield: 3 } }),
-      C("去外野追飛球", { fitness: 2, instinct: 1 }, ["tried_outfield"], "你第一次感覺整片草地都可能是自己的守備範圍。", { setPrimaryPosition: "外野手", skillEffects: { catching: 1, reaction: 1, range: 2, armStrength: 2 }, positionEffects: { outfield: 3 } }),
-      C("蹲捕，試著看懂每一球", { observe: 2, resilience: 1 }, ["tried_catcher"], "從本壘後方看出去，整座球場忽然有了形狀。", { setPrimaryPosition: "捕手", skillEffects: { catching: 1, baseballIQ: 2, blocking: 1, gameCalling: 2 }, positionEffects: { catcher: 3 } }),
-      C("站上投手丘，試著把球投進手套", { confidence: 1, resilience: 1, pressure: 1 }, ["tried_pitcher"], "投手丘上的距離看起來不遠，真正出手時卻像所有人都在等你的球。", { setPrimaryPosition: "投手", skillEffects: { throwing: 1, armStrength: 1, control: 2, pitchStamina: 1 }, positionEffects: { pitcher: 3 } })
+      C("壓低身體，等最後一次彈跳再傳一壘", { observe: 1, pressure: 1 }, ["tried_infield"], "前兩球都進了手套，第三球在最後一下彈高。你讓手套跟著球上升，踩穩後把球送進一壘手胸前。教練記下了你的第一步和傳球。", { setPrimaryPosition: "內野手", skillEffects: { catching: 1, throwing: 1, baseballIQ: 1, reaction: 2, range: 1 }, positionEffects: { infield: 3 } }),
+      C("先跑到飛球後方，接住後朝內野回傳", { fitness: 2, instinct: 1 }, ["tried_outfield"], "你先往球後方繞，再迎著落點往前。第三顆球進手套時，身體已朝內野，回傳只在草地上彈了一次。教練沿著你的跑動路線畫了一條線。", { setPrimaryPosition: "外野手", skillEffects: { catching: 1, reaction: 1, range: 2, armStrength: 2 }, positionEffects: { outfield: 3 } }),
+      C("蹲到本壘後方，擋住低球再喊回傳方向", { observe: 2, resilience: 1 }, ["tried_catcher"], "第二球提前落地，你把膝蓋併起來，讓球停在胸前。撿球時，你朝一壘喊出回傳方向；原本分散的守備員都抬頭看向你。", { setPrimaryPosition: "捕手", skillEffects: { catching: 1, baseballIQ: 2, blocking: 1, gameCalling: 2 }, positionEffects: { catcher: 3 } }),
+      C("站上投手丘，用七成力把三球投進手套", { confidence: 1, resilience: 1, pressure: 1 }, ["tried_pitcher"], "第一球偏高，第二球碰到手套外緣。你放慢抬腿，第三球落進捕手胸前。教練沒有看球速，只記下你怎麼把偏掉的球修回來。", { setPrimaryPosition: "投手", skillEffects: { throwing: 1, armStrength: 1, control: 2, pitchStamina: 1 }, positionEffects: { pitcher: 3 } })
     ]
   },
   youth_teammate: {
@@ -280,12 +280,12 @@ const youthSeasonEvents = {
   },
   youth_bench: {
     title: "紅白賽名單沒有你的名字",
-    text: "週末的隊內紅白賽名單公布，你沒有先發。阿哲進了場，另一名動作比你成熟的孩子——高橋——守在你試過的位置。紅隊與白隊都穿著同一套練習衣，記分板上的名字卻已經把隊內順位暫時分開。",
+    text: "紅白兩隊穿著同一套練習衣，喊暗號時卻誰也不肯讓。山本教練站在一壘側，手裡的名單每完成一個守備就多一道短線。\n\n你的名字在候補欄。阿哲已經上場，高橋守在你試過的位置；他接完一顆偏慢的滾地球，沒有急著傳，而是先把腳步踩正。教練的筆又動了一次。板凳旁仍放著筆記本、代跑背心和一袋還沒用過的球。",
     choices: [
-      C("記錄高橋每一球怎麼處理", { observe: 2, pressure: 1 }, ["studied_rival_on_bench"], "你從板凳上研究高橋，也第一次把他視為競爭對手。", { personalityEffects: { thoughtful: 2, ambitious: 1 }, impressionEffects: { takahashi: { rivalry: 1, respect: 1 } }, skillEffects: { baseballIQ: 2 }, relationshipEffects: { rivalRespect: 1, rivalCompetition: 2 } }),
-      C("替隊友喊聲，持續做代跑熱身", { resilience: 2, confidence: 1 }, ["supported_from_bench"], "你沒有上場，卻仍讓身體和注意力留在比賽裡。", { personalityEffects: { kind: 2, reliable: 2 }, impressionEffects: { coach: { dependable: 1 }, azhe: { trusts: 1 } }, skillEffects: { baseRunning: 1 }, relationshipEffects: { teammateBond: 2, coachTrust: 1 } }),
-      C("悶著頭想：我明明不比他差", { confidence: 1, pressure: 2, instinct: 1 }, ["resented_bench"], "你第一次嚐到位置被別人占走的滋味。", { personalityEffects: { ambitious: 1, emotional: 2 }, impressionEffects: { coach: { immature: 1 }, takahashi: { rivalry: 2, underestimate: 1 } }, relationshipEffects: { rivalCompetition: 3, coachTrust: -1 } }),
-      C("從板凳記錄投手的失投位置", { observe: 2 }, ["bench_studied_pitching"], "你沒有守位機會，卻開始替下一個打席準備能攻擊的球。", { skillEffects: { batting: 1, baseballIQ: 1 } })
+      C("在筆記本畫下高橋三次接球的第一步和傳球點", { observe: 2, pressure: 1 }, ["studied_rival_on_bench"], "第三次滾地球結束，你的紙上多了三個箭頭：高橋總會先往球的右側墊一步，再讓胸口對準一壘。下一次教練看向板凳時，也看見你還在記。", { personalityEffects: { thoughtful: 2, ambitious: 1 }, impressionEffects: { takahashi: { rivalry: 1, respect: 1 } }, skillEffects: { baseballIQ: 2 }, relationshipEffects: { rivalRespect: 1, rivalCompetition: 2 } }),
+      C("每半局沿界外線熱身，聽到叫代跑就站到一壘側", { resilience: 2, confidence: 1 }, ["supported_from_bench"], "阿哲上壘後回頭找代跑指示，你已穿好背心站在一壘側。教練最後沒有換人，卻在收回名單時問了你的名字。", { personalityEffects: { kind: 2, reliable: 2 }, impressionEffects: { coach: { dependable: 1 }, azhe: { trusts: 1 } }, skillEffects: { baseRunning: 1 }, relationshipEffects: { teammateBond: 2, coachTrust: 1 } }),
+      C("收起喊聲，只盯著高橋守的那個位置", { confidence: 1, pressure: 2, instinct: 1 }, ["resented_bench"], "隊友完成出局時，板凳一起拍手，你的手卻留在膝蓋上。高橋傳完球朝這邊看了一眼；教練也看見你沒有加入下一次提醒。", { personalityEffects: { ambitious: 1, emotional: 2 }, impressionEffects: { coach: { immature: 1 }, takahashi: { rivalry: 2, underestimate: 1 } }, relationshipEffects: { rivalCompetition: 3, coachTrust: -1 } }),
+      C("把投手偏高、偏外的球各畫一個記號", { observe: 2 }, ["bench_studied_pitching"], "兩局後，投手在落後球數時又把球投高。你在同一格補上第三個記號，並把球棒握短的位置一起寫在旁邊。", { skillEffects: { batting: 1, baseballIQ: 1 } })
     ]
   },
   youth_match_entry: {
@@ -310,51 +310,51 @@ const youthSeasonEvents = {
       const call = narrativeResult.category === "supportive"
         ? `山本教練沒有回頭，只朝你招手：『${assignment}。』他說得像是早就決定要給你機會。`
         : `教練看了板凳一圈，最後叫到你的名字：『${assignment}。』這個機會來得比你預期突然。`;
-      return `四局上，少棒隊 1：2 落後，一壘有人、一人出局。\n\n${call}\n\n你站起來時才發現雙腿有點麻。釘鞋踩進紅土，觀眾的聲音忽然從耳邊退遠，只剩捕手手套撞擊的聲音。`;
+      return `板凳上的說話聲忽然斷了一拍。${call}\n\n旁邊的隊友把手套推到你腳邊，你站起來時才發現雙腿有點麻。釘鞋踩進界外的紅土，場外聲音一下子退遠；守備員正朝各自的位置散開，沒有人會停下來等你緊張完。`;
     },
     choices: [
-      C("告訴教練：我準備好了", { confidence: 2, pressure: 1 }, ["entered_match_confident"], "你站起來，接下了第一次正式上場機會。", { relationshipEffects: { coachTrust: 1 }, matchEffects: { performance: 1 } }),
-      C("先確認自己的守備任務", { observe: 2 }, ["confirmed_assignment"], "你先弄清楚自己該站哪裡、把球傳去哪裡。", { skillEffects: { baseballIQ: 1 }, matchEffects: { performance: 1 } }),
-      C("很緊張，但還是戴上手套", { resilience: 1, pressure: 2 }, ["entered_match_nervous"], "你的手心冒汗，腳還是跨進了場內。教練沒有催你，只把最基本的任務再說一次。", { personalityEffects: { brave: 1 }, impressionEffects: { coach: { dependable: 1 } }, matchEffects: { performance: 0 } })
+      C("套上手套，直接跑向教練指的守位", { confidence: 2, pressure: 1 }, ["entered_match_confident"], "你越過界外線時朝教練點了一次頭，接著把腳踩進守備位置。內野手用手套指向跑者，第一個暗號已經在你到位前傳過來。", { relationshipEffects: { coachTrust: 1 }, matchEffects: { performance: 1 } }),
+      C("指著一壘跑者，先確認球來時要傳哪裡", { observe: 2 }, ["confirmed_assignment"], "教練先指二壘，再指一壘：『來得及就抓前面的，來不及先拿一個出局。』你複誦一次，才跑進場內。", { skillEffects: { baseballIQ: 1 }, matchEffects: { performance: 1 } }),
+      C("在界外線深呼吸三次，再戴上手套進場", { resilience: 1, pressure: 2 }, ["entered_match_nervous"], "第三次吐氣後，手心仍然潮濕。你用球衣擦過掌心才跨進場內；教練沒有催，只把最基本的傳球方向再喊一次。", { personalityEffects: { brave: 1 }, impressionEffects: { coach: { dependable: 1 } }, matchEffects: { performance: 0 } })
     ]
   },
   youth_match_grounder: {
     title: "第一顆正式滾地球",
     text() {
       const insight = player.chapter2Result === "理解型新生" ? "你立刻注意到球會在最後一次彈跳偏向手套側。" : player.chapter2Result === "直覺型新生" ? "你的身體比腦袋更早往球的方向動了。" : "教練反覆要求的腳步在你腦中閃過。";
-      return `投手抬腿，跑者從一壘起跑。球棒發出短促的「喀」一聲。\n\n打者把球打向你。${insight}\n\n游擊手在你右側喊：「二壘！」跑者的釘鞋正刮開紅土。你只有不到一秒決定怎麼處理。`;
+      return `一壘跑者把離壘距離拉得比上一球更遠。投手抬腿時，他立刻往二壘衝；球棒隨即發出短促的「喀」一聲。\n\n球沿著紅土朝你滾來。${insight}\n\n游擊手在你右側喊：「二壘！」他的腳已往壘包移動，你只有一次接球動作決定要拿哪個出局數。`;
     },
     choices: [
-      C("守住正面，先抓打者出局", { resilience: 1 }, ["match_safe_fielding"], "你把球收進胸前，踩穩後傳向一壘。跑者推進到二壘，但你確實拿到第二個出局數。", { skillEffects: { catching: 1, throwing: 1, reaction: 1 }, relationshipEffects: { coachTrust: 2 }, matchEffects: { performance: 2, outs: 1, advanceRunners: true } }),
-      C("搶到二壘前方，挑戰雙殺", { instinct: 1, pressure: 1 }, ["match_aggressive_fielding"], "你反手把球送向游擊手。二壘封殺成功，回傳一壘卻把一壘手拉離壘包。場邊先歡呼，又立刻嘆氣。", { skillEffects: { throwing: 2 }, relationshipEffects: { rivalRespect: 1 }, matchEffects: { performance: 2, errors: 1, outs: 1, clearBases: true } }),
-      C("先讀最後一次彈跳，再踩二壘傳一壘", { observe: 1 }, ["match_read_fielding"], "你等到球彈進最舒服的位置，踩過二壘再轉身。一壘審握拳——雙殺。隊友的喊聲一下子淹過你的心跳。", { skillEffects: { catching: 1, baseballIQ: 2, reaction: 1, range: 1 }, relationshipEffects: { coachTrust: 1 }, matchEffects: { performance: 3, outs: 2, clearBases: true } })
+      C("退半步守住正面，接穩後傳一壘", { resilience: 1 }, ["match_safe_fielding"], "你讓球進到胸前，雙手合住手套後才傳向一壘。一壘手在跑者前踩住壘包；原來的一壘跑者抵達二壘，但你確實拿到第二個出局數。", { skillEffects: { catching: 1, throwing: 1, reaction: 1 }, relationshipEffects: { coachTrust: 2 }, matchEffects: { performance: 2, outs: 1, advanceRunners: true } }),
+      C("往二壘前方搶一步，反手餵給游擊手", { instinct: 1, pressure: 1 }, ["match_aggressive_fielding"], "你在跑者前把球反手送出，游擊手踩到二壘；他的回傳卻把一壘手拉離壘包。前面的跑者已出局，打者安全上壘，場邊的歡呼立刻變成一聲嘆氣。", { skillEffects: { throwing: 2 }, relationshipEffects: { rivalRespect: 1 }, matchEffects: { performance: 2, errors: 1, outs: 1, clearBases: true } }),
+      C("等最後一次彈跳進手套，自己踩二壘再傳一壘", { observe: 1 }, ["match_read_fielding"], "球彈進手套後，你順著移動方向踩過二壘，再轉髖把球送往一壘。兩名裁判先後握拳——雙殺。隊友的喊聲一下子蓋過你的心跳。", { skillEffects: { catching: 1, baseballIQ: 2, reaction: 1, range: 1 }, relationshipEffects: { coachTrust: 1 }, matchEffects: { performance: 3, outs: 2, clearBases: true } })
     ]
   },
   youth_match_outfield: {
     title: "第一顆越過頭頂的飛球",
-    text: "打者把球拉向右外野深處。你先往前跨了一步，才發現球仍在上升。身後是全壘打牆，二壘跑者已經起跑。外野手的錯誤，常在球落地前就已經發生。",
+    text: "右打者上一球拉成界外，這一次擊球聲更厚。球越過內野手頭頂，繼續往右外野深處升高。\n\n你第一步往前，立刻發現判斷太淺；一壘跑者已越過二壘，右側邊線和身後的全壘打牆正在把追球路線越縮越窄。",
     choices: [
-      C("立刻轉身跑到落點，再回頭找球", { observe: 1, discipline: 1 }, ["outfield_took_route"], "你先相信路線而不是一直盯球，最後在警戒區接住。", { skillEffects: { range: 2, reaction: 1, catching: 1 }, relationshipEffects: { coachTrust: 2 }, matchEffects: { performance: 3, outs: 1 } }),
-      C("追上後直接準備長傳本壘", { confidence: 1, pressure: 1 }, ["outfield_set_throw"], "球落進手套後你立刻轉身回傳，跑者停在三壘。", { skillEffects: { armStrength: 2, throwing: 1 }, matchEffects: { performance: 2, outs: 1 } }),
-      C("撲球阻止它落地", { instinct: 2, pressure: 2 }, ["outfield_diving_attempt"], "你碰到球卻沒能控制，球滾向牆邊。你換到掌聲，也讓跑者多推進一個壘包。", { skillEffects: { reaction: 1 }, matchEffects: { performance: 1, errors: 1, opponentRuns: 1 } })
+      C("立刻轉身跑向牆前，再回頭找球", { observe: 1, discipline: 1 }, ["outfield_took_route"], "你先沿著落點路線跑，直到警戒區才回頭舉起手套。球落進掌心，一壘跑者已繞過二壘，只能急踩煞車再退回去。", { skillEffects: { range: 2, reaction: 1, catching: 1 }, relationshipEffects: { coachTrust: 2 }, matchEffects: { performance: 3, outs: 1 } }),
+      C("追到落點後側身接球，讓身體朝向內野", { confidence: 1, pressure: 1 }, ["outfield_set_throw"], "球進手套時，你的右腳已踩向內野。回傳只落地一次就進入截球手套，跑者看見球先到，沒有再多跨一個壘包。", { skillEffects: { armStrength: 2, throwing: 1 }, matchEffects: { performance: 2, outs: 1 } }),
+      C("朝球的前方撲下，阻止它落地彈向牆邊", { instinct: 2, pressure: 2 }, ["outfield_diving_attempt"], "手套碰到球，卻沒有把它留下。球沿草地滾向牆角，你起身追球時，一壘跑者已經繞回本壘；隊友的掌聲和急促回傳聲混在一起。", { skillEffects: { reaction: 1 }, matchEffects: { performance: 1, errors: 1, opponentRuns: 1 } })
     ]
   },
   youth_match_catcher: {
     title: "本壘前的第一次指揮",
-    text: "兩好球後，投手開始急著三振打者。你看見打者提早打開肩膀，也注意到三壘跑者越站越遠。下一個暗號不只決定投什麼球，也決定整組守備怎麼準備。",
+    text: "投手把球握緊又鬆開，等著你給下一個暗號。打者前兩次揮棒都提早打開肩膀；一壘跑者則把離壘距離拉得更長，眼睛一直看著會不會出現低球。\n\n內野手彎下腰等你喊聲。這一球不只要選位置，也要讓投手和守備知道接下來可能發生什麼。",
     choices: [
-      C("配一顆低球，先準備擋住", { observe: 1, responsibility: 1 }, ["match_catcher_block_first"], "球提前落地，你用胸口把它留在面前。三壘跑者不敢動。", { skillEffects: { blocking: 2, catching: 1 }, relationshipEffects: { coachTrust: 2 }, matchEffects: { performance: 2, outs: 1 } }),
-      C("喊出內角球，提醒內野準備拉打", { confidence: 1, pressure: 1 }, ["match_catcher_called_defense"], "打者果然把球打向三壘，你的指揮讓守備員提前一步完成出局。", { skillEffects: { gameCalling: 2, baseballIQ: 2 }, relationshipEffects: { teammateBond: 1 }, matchEffects: { performance: 3, outs: 1 } }),
-      C("相信投手最想投的快速球", { resilience: 1 }, ["match_catcher_backed_pitcher"], "球威足夠，位置卻偏高。打者敲出安打，你仍在下一球前走上投手丘穩住他。", { skillEffects: { gameCalling: 1 }, relationshipEffects: { teammateBond: 2 }, matchEffects: { performance: 1, opponentRuns: 1 } })
+      C("比出低球暗號，膝蓋先往內收準備擋球", { observe: 1, responsibility: 1 }, ["match_catcher_block_first"], "打者揮空，球卻提前落地。你用胸口把球留在面前，撿起後完成第三好球的處理；一壘跑者只能退回原位。", { skillEffects: { blocking: 2, catching: 1 }, relationshipEffects: { coachTrust: 2 }, matchEffects: { performance: 2, outs: 1 } }),
+      C("喊內角球，提醒三壘手往線邊靠一步", { confidence: 1, pressure: 1 }, ["match_catcher_called_defense"], "打者的球棒從內側擠過去，滾地球正好進入三壘手提前移動的路線。傳球抵達一壘時，你的喊聲還留在整組守備裡。", { skillEffects: { gameCalling: 2, baseballIQ: 2 }, relationshipEffects: { teammateBond: 1 }, matchEffects: { performance: 3, outs: 1 } }),
+      C("照投手搖頭後的選擇，配一顆高位快速球", { resilience: 1 }, ["match_catcher_backed_pitcher"], "快速球有速度，位置卻留在打者胸前。球穿過外野空隙，一壘跑者一路繞回本壘；你接回傳球後立刻走上投手丘，把下一個暗號當面說清楚。", { skillEffects: { gameCalling: 1 }, relationshipEffects: { teammateBond: 2 }, matchEffects: { performance: 1, opponentRuns: 1 } })
     ]
   },
   youth_match_pitcher: {
     title: "投手丘上的第一個打者",
-    text: "你接手時一壘有人。捕手把手套擺在外角，打者卻站得離本壘很近。投手丘讓你掌握每一球的開始，也讓每一次失控都沒有地方躲。",
+    text: "捕手把手套擺在外角，打者卻站得離本壘板很近，像是準備把外角球推向另一邊。一壘跑者每次在你低頭看暗號時就多跨半步。\n\n你把鞋尖踩進投手板。第一球還沒出手，打者、跑者和捕手已經同時等著你的動作。",
     choices: [
-      C("先用七成力量把球投進外角", { discipline: 2 }, ["pitcher_first_strike"], "第一球進入手套，呼吸和投球節奏一起穩了下來。", { skillEffects: { control: 2, pitchStamina: 1 }, relationshipEffects: { coachTrust: 2 }, matchEffects: { performance: 2, outs: 1 } }),
-      C("用最快的球正面攻擊", { confidence: 2, pressure: 1 }, ["pitcher_challenged_hitter"], "打者揮空，全場第一次因你的球發出聲音；下一球卻偏離好球帶。", { skillEffects: { armStrength: 2, throwing: 1 }, bodyEffects: { fatigue: 1 }, matchEffects: { performance: 2, errors: 1, outs: 1 } }),
-      C("先觀察揮棒，再改變配球順序", { observe: 2 }, ["pitcher_read_swing"], "你用三顆不同位置的球讓打者打成軟弱滾地球。", { skillEffects: { control: 1, baseballIQ: 2 }, relationshipEffects: { teammateBond: 1 }, matchEffects: { performance: 3, outs: 1 } })
+      C("用七成力量連投外角，先把球送進手套", { discipline: 2 }, ["pitcher_first_strike"], "第一球落在手套邊緣，打者沒有出棒。你照同樣節奏再投兩次，第三球被打成一壘方向的軟弱飛球；一壘手接住後，先指了指你剛才穩住的位置。", { skillEffects: { control: 2, pitchStamina: 1 }, relationshipEffects: { coachTrust: 2 }, matchEffects: { performance: 2, outs: 1 } }),
+      C("抬高出手點，用最快的球攻擊內角", { confidence: 2, pressure: 1 }, ["pitcher_challenged_hitter"], "第一球讓打者揮空，場邊第一次因你的球速出聲。第二球卻從捕手手套上方飛過；重新對準後，打者把下一球打成內野高飛球。出局拿到了，暴投也留在記錄裡。", { skillEffects: { armStrength: 2, throwing: 1 }, bodyEffects: { fatigue: 1 }, matchEffects: { performance: 2, errors: 1, outs: 1 } }),
+      C("先投外角看揮棒，再把下一球移到內側", { observe: 2 }, ["pitcher_read_swing"], "打者的第一棒追著外角出去。你把第二球移到內側，第三球再回到外角；他只能用棒頭碰成投手前的軟弱滾地球，你下丘把球傳向一壘。", { skillEffects: { control: 1, baseballIQ: 2 }, relationshipEffects: { teammateBond: 1 }, matchEffects: { performance: 3, outs: 1 } })
     ]
   },
   youth_match_mistake: {
@@ -363,13 +363,13 @@ const youthSeasonEvents = {
       const task = { "內野手": "下一顆更快的滾地球又朝你的守區而來", "外野手": "下一顆飛球被風推向邊線", "捕手": "下一球再度提前落地，跑者開始試探", "投手": "下一名打者連續碰掉兩顆球" }[player.seasonPosition] || "下一個更困難的局面立刻到來";
       const oldFear = hasCallback("fear_of_failure", false) ? "你又聽見場邊孩子的笑聲，和第一次幾乎一樣。" : hasCallback("family_safe_place", false) ? "你想起第一次失敗後退到家人身邊；這一次，休息區離你很遠。" : "";
       return player.seasonErrors > 0
-        ? `五局上，比分仍只差一分。${oldFear}\n\n剛才的瑕疵還留在腦中，${task}。比賽故意不讓你躲開。`
-        : `五局上，少棒隊仍以一分落後。你完成第一個任務後，${task}。真正的比賽不會因為你剛做好一次就停下。`;
+        ? `攻守交換後，你走回原來的守位。${oldFear}\n\n剛才的瑕疵還留在手套和鞋釘的觸感裡；隊友才剛喊完站位，${task}。沒有人有時間替你把上一球擦掉。`
+        : `攻守交換後，你又走回同一個守位。第一個任務已經完成，隊友的喊聲卻沒有因此放鬆；${task}。這一次，對手也知道球可能會往哪裡落。`;
     },
     choices: [
-      C("先穩住呼吸，把下一個基本任務做好", { resilience: 2, pressure: -1 }, ["recovered_after_play"], "你聽見教練喊『下一球』，把上一個畫面推出腦海，完成目前守位最基本的責任。", { positionSkillEffects: { "內野手": { catching: 1, throwing: 1 }, "外野手": { catching: 1, range: 1 }, "捕手": { blocking: 1, gameCalling: 1 }, "投手": { control: 1, pitchStamina: 1 } }, relationshipEffects: { coachTrust: 1 }, matchEffects: { performance: 2, outs: 1 } }),
-      C("示意阿哲提醒自己的站位", { observe: 1, confidence: 1 }, ["asked_teammate_in_match"], "阿哲往左比了一個手勢。球真的打向那裡，你們用一次短促的喊聲完成出局。回傳球落進你手套時，你第一次覺得自己在隊形裡。", { skillEffects: { baseballIQ: 1 }, relationshipEffects: { teammateBond: 2 }, matchEffects: { performance: 2, outs: 1 } }),
-      C("冒險追求最醒目的處理", { instinct: 2, pressure: 2 }, ["forced_highlight_play"], "你選擇超出穩定範圍的動作。即使碰到球，仍沒能控制局面，跑者趁機推進。", { positionSkillEffects: { "內野手": { reaction: 1 }, "外野手": { range: 1 }, "捕手": { throwing: 1 }, "投手": { armStrength: 1 } }, relationshipEffects: { rivalCompetition: 1 }, matchEffects: { performance: 1, errors: 1, opponentRuns: 1 } })
+      C("退回基本站位，接到球後只做最近的出局點", { resilience: 2, pressure: -1 }, ["recovered_after_play"], "教練喊出『下一球』時，你先把雙腳放回練習過的位置。球進入守區後，你沒有多看第二個跑者，只把傳球送到最近的壘包；裁判的拳頭舉起，這一球乾淨結束。", { positionSkillEffects: { "內野手": { catching: 1, throwing: 1 }, "外野手": { catching: 1, range: 1 }, "捕手": { blocking: 1, gameCalling: 1 }, "投手": { control: 1, pitchStamina: 1 } }, relationshipEffects: { coachTrust: 1 }, matchEffects: { performance: 2, outs: 1 } }),
+      C("朝阿哲喊『往左還是往右？』，照他的手勢移半步", { observe: 1, confidence: 1 }, ["asked_teammate_in_match"], "阿哲沒有回頭，只把手套往左比了一下。你剛移完半步，球就進入兩人之間；你收球、他補位，一聲短促的提醒換來一個出局數。", { skillEffects: { baseballIQ: 1 }, relationshipEffects: { teammateBond: 2 }, matchEffects: { performance: 2, outs: 1 } }),
+      C("往第一個落點衝，試著做全場最難的出局", { instinct: 2, pressure: 2 }, ["forced_highlight_play"], "你在隊友喊聲前就離開原位，手套確實碰到球，身體卻來不及停穩。球從指尖彈開，跑者趁守備重新撿球時跨回本壘；高橋把回傳截住，沒有說話。", { positionSkillEffects: { "內野手": { reaction: 1 }, "外野手": { range: 1 }, "捕手": { throwing: 1 }, "投手": { armStrength: 1 } }, relationshipEffects: { rivalCompetition: 1 }, matchEffects: { performance: 1, errors: 1, opponentRuns: 1 } })
     ]
   },
   youth_match_after: {
@@ -377,14 +377,13 @@ const youthSeasonEvents = {
     text() {
       const personal = player.seasonPerformance >= 6 ? "你完成了教練交代的任務，也讓隊友開始把你當成能上場的人。" : "你的第一次上場並不完整，但至少你知道正式比賽的速度和練習完全不同。";
       const error = player.seasonErrors ? `你留下了 ${player.seasonErrors} 次明顯失誤或瑕疵。` : "你沒有留下明顯失誤。";
-      const score = player.matchState.awayScore > player.matchState.homeScore ? `終場，少棒隊以 ${player.matchState.homeScore}：${player.matchState.awayScore} 輸掉比賽。` : `終場，比分定格在 ${player.matchState.homeScore}：${player.matchState.awayScore}。`;
-      return `${score}\n\n${personal}\n\n${error}\n\n輸贏已經寫上記分板，但教練手上的筆還在記錄別的東西。高橋經過時看了你一眼，阿哲則留在休息區入口等你。`;
+      return `記分員把白板最後一格框起來，裁判收好面罩，兩隊在本壘前排成一列。\n\n${personal}\n\n${error}\n\n握手隊伍散開後，教練手上的筆仍沒有停。高橋把比賽球放回籃子才經過你身邊；阿哲則提著兩只水壺，留在休息區入口等你。`;
     },
     choices: [
-      C("先向隊友道謝，再找教練檢討", { responsibility: 1, resilience: 1 }, ["reviewed_with_team"], "你沒有只記得自己的表現。", { relationshipEffects: { teammateBond: 1, coachTrust: 2 } }),
-      C("找高橋問他怎麼看那顆球", { observe: 2 }, ["asked_rival_after_match"], "你把競爭對手也當成學習的來源。", { relationshipEffects: { rivalRespect: 2, rivalCompetition: 1 } }),
-      C("自己留在場邊重做失誤動作", { resilience: 2, fitness: -1 }, ["repeated_mistake_after_match"], "你一遍遍重做，但疲勞也留在身體裡。", { skillEffects: { catching: 1, throwing: 1 }, relationshipEffects: { coachTrust: 1 } }),
-      C("去打擊區，把沒上場的打席補回來", { confidence: 1, resilience: 1 }, ["postgame_batting_work"], "你用額外揮棒建立另一個上場入口，也犧牲恢復和隊友相處時間。", { skillEffects: { batting: 2 }, relationshipEffects: { teammateBond: -1 }, bodyEffects: { fatigue: 2 } })
+      C("和補位的隊友逐一碰手套，再拿記分紙找教練", { responsibility: 1, resilience: 1 }, ["reviewed_with_team"], "你先向替自己補位的人碰了手套，再把記分紙攤到教練膝上。教練用筆圈出一次完成的任務和一次遲疑，隊友也留在旁邊聽完。", { relationshipEffects: { teammateBond: 1, coachTrust: 2 } }),
+      C("把球滾給高橋，問他第一步會往哪裡", { observe: 2 }, ["asked_rival_after_match"], "高橋沒有先回答，而是把球照原本方向滾回來，自己示範了一次墊步。第二次，他站到旁邊讓你做；直到你的肩膀對準傳球點，他才把球收走。", { relationshipEffects: { rivalRespect: 2, rivalCompetition: 1 } }),
+      C("把壘包放回原位，照剛才的彈跳重做十球", { resilience: 2, fitness: -1 }, ["repeated_mistake_after_match"], "第六球開始，你的腳步終於不再追著球跑。第十球進手套時，球場只剩整理器材的聲音；教練看完最後一球，先指了指你的腿，叫你回家冰敷。", { skillEffects: { catching: 1, throwing: 1 }, relationshipEffects: { coachTrust: 1 } }),
+      C("走進打擊網，補完教練沒排到的十次揮棒", { confidence: 1, resilience: 1 }, ["postgame_batting_work"], "你把十顆球排在打擊網外，逐顆揮完。最後一球打中網心時，隊友已經離開，阿哲留下的水壺也不再冒水珠。", { skillEffects: { batting: 2 }, relationshipEffects: { teammateBond: -1 }, bodyEffects: { fatigue: 2 } })
     ]
   },
   youth_season_result: {

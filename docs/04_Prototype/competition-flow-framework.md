@@ -87,7 +87,40 @@ Header／Transition／Inning Summary／Score／Connector／Timeline
 
 ---
 
-## 6. 能力存在感
+## 6. Content & Presentation Responsibility
+
+### Competition Presentation 負責
+
+- 比賽或測驗身份。
+- 局數、出局數、比分與壘況等結構化局面。
+- 同一場比賽目前進行到哪一幕。
+- 少棒第一季 Timeline。
+- 上一幕如何承接到當前局面。
+- 當前必須處理的任務。
+- 只呈現一項與當前決策最相關的能力線索。
+
+### Story Event 負責
+
+- 人物的動作與反應。
+- 球被打向哪裡、跑者如何移動、隊友怎麼補位。
+- 場上聲音、空間與比賽氣氛。
+- 玩家需要判斷的具體問題。
+- 可想像、符合少棒程度的棒球選項。
+- 選擇後實際發生的動作與人物回應。
+
+### Choice／Effect 負責
+
+- 實際 Gameplay 結果。
+- 能力與身體數值變化。
+- 關係與教練信任變化。
+- Match Effect、位置 Effect 與分支結果。
+- 原本的成功率、門檻、隨機與路由。
+
+Presentation 不取代 Story；Story 也不重新組裝一套比分、局數或 Timeline。正文需要引用局面時，只描述會影響判斷的可觀察細節。
+
+---
+
+## 7. 能力存在感
 
 Validation Event 會把下列既有能力顯示成情境描述：
 
@@ -99,7 +132,7 @@ Validation Event 會把下列既有能力顯示成情境描述：
 
 ---
 
-## 7. 台灣棒球賽事分類與層級資料
+## 8. 台灣棒球賽事分類與層級資料
 
 以下資料只作為後續 Presentation 與企劃參考，不代表目前已全面實作：
 
@@ -123,7 +156,7 @@ Validation Event 會把下列既有能力顯示成情境描述：
 
 ---
 
-## 8. 明確未修改範圍
+## 9. 明確未修改範圍
 
 - Decision、Boundary、Flow、Evaluation、Save。
 - Player Schema、Relationship、Coach Trust、Scout Evaluation。
@@ -134,7 +167,7 @@ Validation Event 會把下列既有能力顯示成情境描述：
 
 ---
 
-## 9. 驗證方式
+## 10. 驗證方式
 
 - 模組測試確認賽事分類、六層級規則與少棒五拍點。
 - 確認正式賽各幕共用同一 `competitionId`。

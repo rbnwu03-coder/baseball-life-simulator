@@ -154,9 +154,11 @@ var CompetitionPresentation = (() => {
       competitionId: "youth_position_rotation",
       competitionTitle: "少棒第一季・守位輪測",
       stageLabel: "第一個驗證點",
-      transition: "球季報到後，教練先用輪測確認每個人的起點。",
-      inningSummary: "無局數｜四項守位依序輪測",
-      connector: "測驗結束後，真正留下來的是收操後沒被記錄的那一球。",
+      transition: "球季報到後，山本先用十二顆球確認每個人的起點。",
+      inningSummary: "第 2 輪｜每個位置剩 3 球",
+      connector: "從四個位置選一個，在三球內把指定動作做完整。",
+      abilityFocus: "observe",
+      tone: "test",
       showScore: false
     }),
     youth_bench: validation({
@@ -164,18 +166,20 @@ var CompetitionPresentation = (() => {
       competitionId: "youth_first_intrasquad",
       competitionTitle: "少棒第一季・第一次紅白賽",
       stageLabel: "第二個驗證點",
-      transition: "幾次收操之後，隊內紅白賽把練習分組變成第一張名單。",
-      inningSummary: "短局數｜隊內分組觀察",
-      connector: "紅白賽的板凳紀錄，會成為正式聯賽名單的前一頁。",
+      transition: "收操後的練習累積成第一張紅白賽名單，你暫時留在候補欄。",
+      inningSummary: "三局下｜候補名單",
+      connector: "教練還沒叫到名字；決定你的雙手、雙腳和目光要留在哪裡。",
+      abilityFocus: "observe",
+      tone: "scrimmage",
       showScore: false
     }),
-    youth_match_entry: officialValidation("報到｜四局上", "紅白賽的板凳觀察，換來正式聯賽的一次臨時任務。", "這場球還沒結束；下一個打者會把球打向你的守區。"),
-    youth_match_grounder: officialValidation("第一個守備｜四局上", "你已走進同一場聯賽，比分、出局數與壘上跑者都延續著。", "完成第一球不代表安全，下一個局面會測試你如何回應。"),
-    youth_match_outfield: officialValidation("第一個守備｜四局上", "你已走進同一場聯賽，比分、出局數與壘上跑者都延續著。", "完成第一球不代表安全，下一個局面會測試你如何回應。"),
-    youth_match_catcher: officialValidation("第一個守備｜四局上", "你已走進同一場聯賽，比分、出局數與壘上跑者都延續著。", "完成第一球不代表安全，下一個局面會測試你如何回應。"),
-    youth_match_pitcher: officialValidation("第一個打者｜四局上", "你已走進同一場聯賽，比分、出局數與壘上跑者都延續著。", "完成第一個打者不代表安全，下一個局面會測試你如何回應。"),
-    youth_match_mistake: officialValidation("回應｜五局上", "上一個處理仍留在記分板上，第五局沒有讓任何人重新開始。", "終場後，教練會把整場而不是單一球寫進評估。"),
-    youth_match_after: officialValidation("終場｜六局", "六局比賽已經結束，之前每一球的結果一起進入賽後評估。", "球季還沒結束；下一張名單將決定你是否再被需要。")
+    youth_match_entry: officialValidation("第一次上場", "紅白賽留下的板凳紀錄，換來正式聯賽的一次臨時任務。", "接下教練指定的守位，先確認第一個出局點。", "pressure"),
+    youth_match_grounder: officialValidation("第一個守備", "你已站進守區；同一個比分、出局數與跑者都沒有重來。", "一壘跑者已起跑：決定要穩拿一個出局，或挑戰前位跑者。", "baseballIQ"),
+    youth_match_outfield: officialValidation("第一個守備", "你已站進右外野；同一個比分、出局數與跑者都沒有重來。", "判斷落點與回傳方向，別讓深遠飛球越過身後。", "observe"),
+    youth_match_catcher: officialValidation("第一次指揮", "你已蹲到本壘後方；同一個比分、出局數與跑者都沒有重來。", "替投手選下一球，並把跑者與整組守備一起算進去。", "baseballIQ"),
+    youth_match_pitcher: officialValidation("第一個打者", "你已踩上投手板；同一個比分、出局數與跑者都沒有重來。", "在打者與跑者同時施壓前，決定第一個對決策略。", "observe"),
+    youth_match_mistake: officialValidation("下一次回應", "攻守交換後，你回到同一場比賽；上一個處理仍留在記錄裡。", "先確認基本站位，再決定這一球要靠自己、隊友或更冒險的動作。", "pressure"),
+    youth_match_after: officialValidation("終場整理", "最後一個出局數已經完成，整場的選擇一起進入賽後評估。", "比賽結束了；決定你先和誰一起理解這場球。", "baseballIQ")
   });
 
   function validation(definition) {
@@ -185,7 +189,7 @@ var CompetitionPresentation = (() => {
     }, definition);
   }
 
-  function officialValidation(stageLabel, transition, connector) {
+  function officialValidation(stageLabel, transition, connector, abilityFocus) {
     return validation({
       typeId: "official_league",
       competitionId: "youth_first_league_game",
@@ -194,6 +198,8 @@ var CompetitionPresentation = (() => {
       transition,
       inningSummary: "依目前局面延續",
       connector,
+      abilityFocus,
+      tone: "official",
       showScore: true
     });
   }
@@ -251,32 +257,33 @@ var CompetitionPresentation = (() => {
   }
 
   function describePressure(value) {
-    if (value >= 8) return "壓力收窄了注意力，基本動作需要刻意確認";
-    if (value >= 4) return "壓力已進入動作，但呼吸仍能找回節奏";
-    return "壓力尚未遮住場上的聲音與指令";
+    if (value >= 8) return "你把手套握得太緊，直到裁判催促才重新鬆開。";
+    if (value >= 4) return "場邊聲音靠得很近，你仍能先確認跑者和隊友的位置。";
+    return "你聽得見隊友的喊聲，也能照順序確認眼前任務。";
   }
 
   function describeObservation(value) {
-    if (value >= 8) return "你能提早察覺站位、彈跳與對手節奏";
-    if (value >= 4) return "你開始看見球以外的細節";
-    return "目前多半跟著球移動，尚未看完整個局面";
+    if (value >= 8) return "你先看見站位和對手的第一步，才把目光移回球。";
+    if (value >= 4) return "你注意到一個可用線索，仍要等球進場才能確認。";
+    return "你的目光先跟著球移動，還沒來得及看完整個隊形。";
   }
 
   function describeBaseballIQ(value) {
-    if (value >= 8) return "你能把出局數、跑者與下一個傳球點連在一起";
-    if (value >= 4) return "你開始理解每個動作之後還有下一個選擇";
-    return "你正在逐球反應，整體局勢仍需要經驗拼起來";
+    if (value >= 8) return "出局數、跑者和下一個傳球點，已經連成同一個處理順序。";
+    if (value >= 4) return "你知道接到球不是結束，還要先找下一個出局點。";
+    return "教練的站位指示仍要多想一下，你先守住最基本的任務。";
   }
 
-  function createAbilityCues(abilities = {}) {
+  function createAbilityCues(abilities = {}, focus = "observe") {
     const pressure = finite(abilities.pressure);
     const observe = finite(abilities.observe);
     const baseballIQ = finite(abilities.baseballIQ);
-    return deepFreeze([
-      { id: "pressure", label: "壓力", value: pressure, description: describePressure(pressure) },
-      { id: "observe", label: "觀察", value: observe, description: describeObservation(observe) },
-      { id: "baseballIQ", label: "棒球理解", value: baseballIQ, description: describeBaseballIQ(baseballIQ) }
-    ]);
+    const cues = {
+      pressure: { id: "pressure", label: "此刻的節奏", value: pressure, description: describePressure(pressure) },
+      observe: { id: "observe", label: "你先注意到", value: observe, description: describeObservation(observe) },
+      baseballIQ: { id: "baseballIQ", label: "局面連起來", value: baseballIQ, description: describeBaseballIQ(baseballIQ) }
+    };
+    return deepFreeze([cues[focus] || cues.observe]);
   }
 
   function finite(value) {
@@ -296,6 +303,37 @@ var CompetitionPresentation = (() => {
       homeScore: Math.floor(finite(matchState.homeScore)),
       runners
     };
+  }
+
+  function getRunnerLabel(runners) {
+    const baseLabels = ["一壘", "二壘", "三壘"];
+    const occupied = runners.reduce((labels, value, index) => value ? labels.concat(baseLabels[index]) : labels, []);
+    return occupied.length ? `${occupied.join("、")}有人` : "無人在壘";
+  }
+
+  function resolveTransition(eventId, definition, context) {
+    if (eventId === "youth_match_mistake") {
+      return finite(context.seasonErrors) > 0
+        ? "攻守交換後，你回到同一場比賽；上一個瑕疵仍留在記分板旁的紀錄裡。"
+        : "攻守交換後，你回到同一場比賽；第一個任務完成了，比分仍沒有拉開。";
+    }
+    if (eventId === "youth_match_after") {
+      return finite(context.seasonErrors) > 0
+        ? "六局結束，完成的任務與留下的瑕疵一起進入賽後評估。"
+        : "六局結束，你完成的每個任務一起進入賽後評估。";
+    }
+    return definition.transition;
+  }
+
+  function resolveTask(eventId, definition, context) {
+    if (eventId !== "youth_match_mistake") return definition.connector;
+    const positionTasks = {
+      "內野手": "回到基本站位，先選定這一球最穩定的出局點。",
+      "外野手": "先守住身後，再決定接球後要把球送回哪裡。",
+      "捕手": "先把球留在本壘前，再喊出跑者與下一個傳球點。",
+      "投手": "先把下一球送進捕手手套，再重新建立對決節奏。"
+    };
+    return positionTasks[context.seasonPosition] || definition.connector;
   }
 
   function createTimeline(eventId) {
@@ -321,14 +359,17 @@ var CompetitionPresentation = (() => {
       competitionId: definition.competitionId,
       competitionTitle: definition.competitionTitle,
       stageLabel: definition.stageLabel,
-      transition: definition.transition,
+      tone: definition.tone || "test",
+      isContinuation: definition.showScore && eventId !== "youth_match_entry",
+      transition: resolveTransition(eventId, definition, context),
       inningSummary: definition.showScore
         ? `${matchState.inning} 局${matchState.half}｜${matchState.outs} 出局`
         : definition.inningSummary,
-      connector: definition.connector,
+      connector: resolveTask(eventId, definition, context),
       showScore: definition.showScore,
       matchState,
-      abilityCues: createAbilityCues(context.abilities),
+      runnerLabel: getRunnerLabel(matchState.runners),
+      abilityCues: createAbilityCues(context.abilities, definition.abilityFocus),
       timeline: createTimeline(eventId)
     });
   }
@@ -338,36 +379,35 @@ var CompetitionPresentation = (() => {
     if (!model) return "";
     const score = model.showScore ? renderScore(model.matchState) : "";
     const abilityCues = model.abilityCues.map(cue => `
-      <div class="validation-ability-cue" data-ability="${escapeHtml(cue.id)}">
-        <span>${escapeHtml(cue.label)} ${cue.value}</span>
+      <div class="validation-ability-cue" data-ability="${escapeHtml(cue.id)}" data-value="${cue.value}">
+        <span>${escapeHtml(cue.label)}</span>
         <small>${escapeHtml(cue.description)}</small>
       </div>`).join("");
     const timeline = model.timeline.map(item => `
       <li class="competition-timeline-item ${escapeHtml(item.status)} ${escapeHtml(item.kind)}">
         <span aria-hidden="true"></span><strong>${escapeHtml(item.label)}</strong>
       </li>`).join("");
-    return `<section class="competition-frame" aria-label="Competition Flow">
+    return `<section class="competition-frame tone-${escapeHtml(model.tone)} ${model.isContinuation ? "continuation" : "opening"}" aria-label="Competition Flow">
       <header class="competition-header">
-        <div><span class="validation-event-label">Validation Event</span><span class="competition-type">${escapeHtml(model.type.label)}</span></div>
+        <div><span class="validation-event-label">驗證場合</span><span class="competition-type">${escapeHtml(model.type.label)}</span><span class="competition-stage">${escapeHtml(model.stageLabel)}</span></div>
         <h3>${escapeHtml(model.competitionTitle)}</h3>
-        <p>${escapeHtml(model.type.purpose)}・${escapeHtml(model.stageLabel)}</p>
+        <p>${escapeHtml(model.type.purpose)}</p>
       </header>
-      <div class="competition-transition"><small>承接</small>${escapeHtml(model.transition)}</div>
+      <div class="competition-transition"><small>從上一幕</small><span>${escapeHtml(model.transition)}</span></div>
       <div class="competition-situation">
-        <div class="inning-summary"><small>局面</small><strong>${escapeHtml(model.inningSummary)}</strong></div>
+        <div class="inning-summary"><small>現在</small><strong>${escapeHtml(model.inningSummary)}</strong>${model.showScore ? `<span>${escapeHtml(model.runnerLabel)}</span>` : ""}</div>
         ${score}
       </div>
-      <div class="validation-ability-panel" aria-label="本次驗證中的能力存在感">${abilityCues}</div>
-      <div class="competition-connector"><small>這場驗證之後</small>${escapeHtml(model.connector)}</div>
+      <div class="validation-ability-panel" aria-label="你從局面中取得的線索">${abilityCues}</div>
+      <div class="competition-connector"><small>這一幕要處理</small><strong>${escapeHtml(model.connector)}</strong></div>
       <ol class="competition-timeline" aria-label="少棒第一季進度">${timeline}</ol>
     </section>`;
   }
 
   function renderScore(matchState) {
     const bases = matchState.runners.map((occupied, index) => `<span class="base ${occupied ? "occupied" : ""}" title="${index + 1}壘"></span>`).join("");
-    return `<div class="competition-score" aria-label="目前比分">
-      <span>客隊 <strong>${matchState.awayScore}</strong></span>
-      <span>少棒隊 <strong>${matchState.homeScore}</strong></span>
+    return `<div class="competition-score" aria-label="目前比分與壘況">
+      <span class="score-line">客隊 <strong>${matchState.awayScore}</strong><i>：</i><strong>${matchState.homeScore}</strong> 少棒隊</span>
       <div class="diamond">${bases}</div>
     </div>`;
   }

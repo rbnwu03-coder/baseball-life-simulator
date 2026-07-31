@@ -3077,7 +3077,10 @@ function renderCompetitionPresentation(eventId) {
       pressure: player.pressure,
       observe: player.observe,
       baseballIQ: player.baseballSkills?.baseballIQ
-    }
+    },
+    seasonPosition: player.seasonPosition,
+    seasonPerformance: player.seasonPerformance,
+    seasonErrors: player.seasonErrors
   });
 }
 

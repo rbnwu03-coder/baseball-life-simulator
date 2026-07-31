@@ -101,21 +101,23 @@ test("正式比賽 Presentation 同時提供 Header、Transition、局面、比�
   assert(Object.isFrozen(model), "Presentation model 應為唯讀");
 });
 
-test("能力存在感只改變描述，不改變輸入或比賽狀態", () => {
+test("能力存在感依事件只呈現一個可用線索，不改變輸入或比賽狀態", () => {
   const input = {
     matchState: { inning: 4, half: "上", outs: 1, runners: [true, false, false], awayScore: 1, homeScore: 0 },
     abilities: { pressure: 1, observe: 2, baseballIQ: 3 }
   };
   const before = JSON.stringify(input);
-  const low = plain(api.createPresentation("youth_match_entry", input));
-  const high = plain(api.createPresentation("youth_match_entry", {
-    matchState: input.matchState,
-    abilities: { pressure: 9, observe: 9, baseballIQ: 9 }
-  }));
+  const lowPressure = plain(api.createPresentation("youth_match_entry", input));
+  const highPressure = plain(api.createPresentation("youth_match_entry", { matchState: input.matchState, abilities: { pressure: 9 } }));
+  const lowObserve = plain(api.createPresentation("youth_match_outfield", input));
+  const highObserve = plain(api.createPresentation("youth_match_outfield", { matchState: input.matchState, abilities: { observe: 9 } }));
+  const lowIq = plain(api.createPresentation("youth_match_catcher", input));
+  const highIq = plain(api.createPresentation("youth_match_catcher", { matchState: input.matchState, abilities: { baseballIQ: 9 } }));
   assert(JSON.stringify(input) === before, "Presentation 修改了輸入資料");
-  assert(low.abilityCues[0].description !== high.abilityCues[0].description, "壓力沒有產生敘事存在感");
-  assert(low.abilityCues[1].description !== high.abilityCues[1].description, "觀察沒有產生敘事存在感");
-  assert(low.abilityCues[2].description !== high.abilityCues[2].description, "棒球理解沒有產生敘事存在感");
+  [lowPressure, highPressure, lowObserve, highObserve, lowIq, highIq].forEach(model => assert(model.abilityCues.length === 1, "單一局面不應同時堆疊三張能力卡"));
+  assert(lowPressure.abilityCues[0].description !== highPressure.abilityCues[0].description, "壓力沒有產生敘事存在感");
+  assert(lowObserve.abilityCues[0].description !== highObserve.abilityCues[0].description, "觀察沒有產生敘事存在感");
+  assert(lowIq.abilityCues[0].description !== highIq.abilityCues[0].description, "棒球理解沒有產生敘事存在感");
 });
 
 test("正式賽顯示比分，紅白賽不偽造比分", () => {
@@ -123,7 +125,7 @@ test("正式賽顯示比分，紅白賽不偽造比分", () => {
   const scrimmage = api.render("youth_bench", {});
   assert(official.includes("competition-score"), "正式賽缺少比分展示");
   assert(official.includes("competition-timeline"), "正式賽缺少球季 Timeline");
-  assert(scrimmage.includes("Validation Event"), "紅白賽缺少 Validation 標示");
+  assert(scrimmage.includes("驗證場合"), "紅白賽缺少 Validation 標示");
   assert(!scrimmage.includes("competition-score"), "紅白賽不應偽造比分");
 });
 
