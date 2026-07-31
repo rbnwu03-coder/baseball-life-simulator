@@ -115,6 +115,9 @@ function playYouthRoute(positionChoice) {
     const eventId = game.getCurrentEventId();
     seen.push(eventId);
     game.choose(eventId, choiceIndex);
+    if (vm.runInContext("Boolean(pendingYouthSeasonOutcome)", game)) {
+      game.continueYouthSeasonOutcome();
+    }
   });
   return { game, seen };
 }

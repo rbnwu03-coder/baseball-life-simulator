@@ -38,6 +38,7 @@ if (!vm.runInContext("hasConsequence('fear_of_mistake') && hasConsequence('trust
 const pressureBefore = vm.runInContext("player.pressure", game);
 vm.runInContext("player.chapter='少棒第一季'; player.seasonStep=6; player.seasonErrors=1", game);
 game.choose("youth_match_mistake", 0);
+game.continueYouthSeasonOutcome();
 if (!vm.runInContext("hasCallback('fear_of_failure', true)", game)) throw new Error("少棒沒有回收童年害怕");
 if (vm.runInContext("player.pressure", game) < pressureBefore + 1) throw new Error("害怕失誤代價沒有在比賽觸發");
 

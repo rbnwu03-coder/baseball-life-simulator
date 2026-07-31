@@ -32,6 +32,7 @@ function playUntil(game, choices, condition, maxTurns = 20) {
   let turn = 0;
   while (!vm.runInContext(condition, game) && turn < maxTurns) {
     game.choose(game.getCurrentEventId(), choices[turn % choices.length] ?? 0);
+    if (vm.runInContext("Boolean(pendingYouthSeasonOutcome)", game)) game.continueYouthSeasonOutcome();
     turn += 1;
   }
   if (!vm.runInContext(condition, game)) throw new Error(`流程未在 ${maxTurns} 回合內完成：${condition}`);
@@ -53,7 +54,10 @@ function play(routeChoices, chapter2Choices, seasonChoices, competitionChoices, 
   playUntil(game, chapter2Choices, "Boolean(player.chapter2Result)", 10);
   if (!vm.runInContext("player.chapter2Result", game)) throw new Error("第二章沒有產生入門評估");
   game.choose("chapter2_result", 0);
-  seasonChoices.forEach(choice => game.choose(game.getCurrentEventId(), choice));
+  seasonChoices.forEach(choice => {
+    game.choose(game.getCurrentEventId(), choice);
+    if (vm.runInContext("Boolean(pendingYouthSeasonOutcome)", game)) game.continueYouthSeasonOutcome();
+  });
   if (!vm.runInContext("player.seasonResult", game)) throw new Error("少棒第一季沒有產生評估");
   game.choose("youth_season_result", 0);
   playUntil(game, competitionChoices, "Boolean(player.competitionResult)");
@@ -175,11 +179,13 @@ const positionRoutes = [
 positionRoutes.forEach(route => {
   vm.runInContext("player = createInitialPlayer('守位事件測試'); player.chapter = '少棒第一季'; player.seasonStep = 1", positionImpactTest);
   positionImpactTest.choose("youth_position_trial", route.choice);
+  positionImpactTest.continueYouthSeasonOutcome();
   if (vm.runInContext("player.seasonPosition", positionImpactTest) !== route.position) throw new Error(`${route.position}沒有成為暫定主守位`);
   vm.runInContext("player.seasonStep = 5", positionImpactTest);
   if (vm.runInContext("getCurrentEventId()", positionImpactTest) !== route.event) throw new Error(`${route.position}沒有觸發專屬比賽事件`);
   const before = vm.runInContext(`player.baseballSkills.${route.skill}`, positionImpactTest);
   positionImpactTest.choose(route.event, 0);
+  positionImpactTest.continueYouthSeasonOutcome();
   if (vm.runInContext(`player.baseballSkills.${route.skill}`, positionImpactTest) <= before) throw new Error(`${route.position}專屬能力沒有成長`);
 });
 vm.runInContext("player = createInitialPlayer('上限測試'); applyNestedEffects('positionAffinity', { catcher: 99 }); applyNestedEffects('relationships', { coachTrust: 99 })", positionImpactTest);

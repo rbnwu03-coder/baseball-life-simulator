@@ -42,6 +42,7 @@ for (const config of eventCases) {
     const game = makeGame();
     vm.runInContext(`player = createInitialPlayer("${config.id}-${index}"); player.chapter = ${JSON.stringify(config.chapter)}; player.${config.step} = ${config.value};`, game);
     game.choose(config.id, index);
+    if (vm.runInContext("Boolean(pendingYouthSeasonOutcome)", game)) game.continueYouthSeasonOutcome();
     const state = vm.runInContext(`({ flag: hasFlag(${JSON.stringify(config.flags[index])}), step: player.${config.step}, transitioning: isTransitioning })`, game);
     if (!state.flag) throw new Error(`${config.id} 選項 ${index + 1} 沒有保留原旗標`);
     if (state.step !== config.value + 1 || state.transitioning) throw new Error(`${config.id} 選項 ${index + 1} 沒有正常返回主流程`);

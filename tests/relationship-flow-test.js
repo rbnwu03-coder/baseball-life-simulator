@@ -456,15 +456,16 @@ assert(
   "事件推進應與舊流程一致"
 );
 assert(
-  migratedGolden.renderCount === 1 &&
+  migratedGolden.renderCount === 0 &&
     migratedGolden.transitionCount === 1 &&
-    migratedGolden.timeoutCount === 1,
-  "render、transition、timeout 次數應與舊流程一致"
+    migratedGolden.timeoutCount === 0,
+  "少棒結果畫面不應自動 render 下一事件或排入 timeout"
 );
 assert(
   migratedGolden.effectMessage === legacyGolden.effectMessage &&
-    migratedGolden.effectMessage.length > 0,
-  "effect message 應與舊流程一致"
+    migratedGolden.story.includes("發生的結果") &&
+    migratedGolden.choices.includes("continueYouthSeasonOutcome"),
+  "effect 與 Choice Outcome 應在新舊 Relationship 路徑保持一致"
 );
 assert(
   migratedGolden.storageWrites === 0,

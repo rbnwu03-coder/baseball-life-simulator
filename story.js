@@ -230,6 +230,104 @@ const chapterTwoEvents = {
   }
 };
 
+function getYouthBenchEcho() {
+  if (hasFlag("studied_rival_on_bench")) {
+    return "紅白賽那天，你在板凳上畫下高橋三次接球的第一步；那張紙後來被夾進訓練筆記。";
+  }
+  if (hasFlag("supported_from_bench")) {
+    return "紅白賽那天，你每半局都沿界外線熱身；教練收名單時，記得你一直處在能被叫上場的位置。";
+  }
+  if (hasFlag("resented_bench")) {
+    return "紅白賽那天，你把掌聲收了起來，只盯著高橋守的位置；教練也把那段沉默記在名單旁。";
+  }
+  if (hasFlag("bench_studied_pitching")) {
+    return "紅白賽那天，你替投手的偏高、偏外球畫了記號；那頁筆記跟著你進入後來幾次練習。";
+  }
+  return "紅白賽結束時，你沒有上場；教練只把你在板凳上的反應留進下一次名單考量。";
+}
+
+function getYouthPreviousPlayEcho() {
+  const echoes = [
+    {
+      flag: "match_safe_fielding",
+      error: false,
+      summary: "上一個守備，你退半步守住正面，傳一壘拿到出局；原來的一壘跑者停在二壘。"
+    },
+    {
+      flag: "match_aggressive_fielding",
+      error: true,
+      summary: "上一個守備，你在二壘封殺前位跑者，回傳卻把一壘手拉離壘包；記錄留下傳球瑕疵。"
+    },
+    {
+      flag: "match_read_fielding",
+      error: false,
+      summary: "上一個守備，你等最後彈跳進手套，踩二壘再傳一壘，完成了雙殺。"
+    },
+    {
+      flag: "outfield_took_route",
+      error: false,
+      summary: "上一個守備，你一路跑到警戒區接殺深遠飛球，一壘跑者只能退回去。"
+    },
+    {
+      flag: "outfield_set_throw",
+      error: false,
+      summary: "上一個守備，你側身接球後快速回傳；跑者看見球先到，沒有多推進一個壘包。"
+    },
+    {
+      flag: "outfield_diving_attempt",
+      error: true,
+      summary: "上一個守備，你撲球碰到球卻沒有留下；球滾向牆角，一壘跑者繞回本壘得分。"
+    },
+    {
+      flag: "match_catcher_block_first",
+      error: false,
+      summary: "上一個守備，你擋住提前落地的第三好球並完成出局，一壘跑者留在原位。"
+    },
+    {
+      flag: "match_catcher_called_defense",
+      error: false,
+      summary: "上一個守備，你的內角配球把滾地球引向提前移動的三壘手，守備完成出局。"
+    },
+    {
+      flag: "match_catcher_backed_pitcher",
+      error: false,
+      summary: "上一個守備，你接受投手的高位快速球選擇；球被打穿外野，一壘跑者回本壘得分。"
+    },
+    {
+      flag: "pitcher_first_strike",
+      error: false,
+      summary: "上一個打者，你用相同節奏連投外角，讓他打成一壘方向的軟弱飛球。"
+    },
+    {
+      flag: "pitcher_challenged_hitter",
+      error: true,
+      summary: "上一個打者，你用內角快速球取得出局，其中一球卻從捕手上方飛過，記錄留下暴投。"
+    },
+    {
+      flag: "pitcher_read_swing",
+      error: false,
+      summary: "上一個打者，你依揮棒改變內外角順序，讓他打成投手前滾地球並完成出局。"
+    }
+  ];
+  const matched = echoes.find(item => hasFlag(item.flag));
+  return matched || {
+    flag: "",
+    error: player.seasonErrors > 0,
+    summary: player.seasonErrors > 0
+      ? "上一個守備留下了瑕疵，記錄仍在場邊的記分紙上。"
+      : "上一個守備已經完成，但這場比賽還沒有結束。"
+  };
+}
+
+function getYouthNextPositionTask() {
+  return {
+    "內野手": "新的滾地球朝二游之間而來，你必須先判斷最近的出局點。",
+    "外野手": "風把一顆平飛球推向邊線，你身後的空間正在縮小。",
+    "捕手": "下一球提前落地，一壘跑者同時往前試探。",
+    "投手": "下一名打者連續碰掉兩顆球，新的對決還在延長。"
+  }[player.seasonPosition] || "新的守備任務已經朝你而來。";
+}
+
 const youthSeasonEvents = {
   youth_season_intro: {
     title: "少棒第一季：成為隊伍的一員",
@@ -253,12 +351,12 @@ const youthSeasonEvents = {
   },
   youth_position_trial: {
     title: "第一次位置測試",
-    text: "山本教練把十二顆球分成四排，哨音一響，每個位置只有三球。內野看第一步和傳球，外野看追球路線，捕手要把低球留在身前，投手則要把球送進指定的手套位置。\n\n輪到你時，其他孩子退到網子後方。教練沒有報分，只抬起筆，等你選一個位置把三球做完。",
+    text: "內野、外野、本壘與投手丘的輪測都已做過一遍。山本教練把最後十二顆球分成四排：四個位置各剩三球，也各有一項收尾任務。\n\n『不要告訴我你想守哪裡。』教練抬起筆，『選一件你現在做得到的事。三球結束後，由我決定你先去哪一組。』其他孩子退到網子後方，等你走向其中一排球。",
     choices: [
-      C("壓低身體，等最後一次彈跳再傳一壘", { observe: 1, pressure: 1 }, ["tried_infield"], "前兩球都進了手套，第三球在最後一下彈高。你讓手套跟著球上升，踩穩後把球送進一壘手胸前。教練記下了你的第一步和傳球。", { setPrimaryPosition: "內野手", skillEffects: { catching: 1, throwing: 1, baseballIQ: 1, reaction: 2, range: 1 }, positionEffects: { infield: 3 } }),
-      C("先跑到飛球後方，接住後朝內野回傳", { fitness: 2, instinct: 1 }, ["tried_outfield"], "你先往球後方繞，再迎著落點往前。第三顆球進手套時，身體已朝內野，回傳只在草地上彈了一次。教練沿著你的跑動路線畫了一條線。", { setPrimaryPosition: "外野手", skillEffects: { catching: 1, reaction: 1, range: 2, armStrength: 2 }, positionEffects: { outfield: 3 } }),
-      C("蹲到本壘後方，擋住低球再喊回傳方向", { observe: 2, resilience: 1 }, ["tried_catcher"], "第二球提前落地，你把膝蓋併起來，讓球停在胸前。撿球時，你朝一壘喊出回傳方向；原本分散的守備員都抬頭看向你。", { setPrimaryPosition: "捕手", skillEffects: { catching: 1, baseballIQ: 2, blocking: 1, gameCalling: 2 }, positionEffects: { catcher: 3 } }),
-      C("站上投手丘，用七成力把三球投進手套", { confidence: 1, resilience: 1, pressure: 1 }, ["tried_pitcher"], "第一球偏高，第二球碰到手套外緣。你放慢抬腿，第三球落進捕手胸前。教練沒有看球速，只記下你怎麼把偏掉的球修回來。", { setPrimaryPosition: "投手", skillEffects: { throwing: 1, armStrength: 1, control: 2, pitchStamina: 1 }, positionEffects: { pitcher: 3 } })
+      C("壓低身體，等最後一次彈跳再傳一壘", { observe: 1, pressure: 1 }, ["tried_infield"], "前兩球都進了手套，第三球在最後一下彈高。你跟著球上升，踩穩後把球送進一壘手胸前。教練看完三球，把你的名字寫進內野組。", { setPrimaryPosition: "內野手", skillEffects: { catching: 1, throwing: 1, baseballIQ: 1, reaction: 2, range: 1 }, positionEffects: { infield: 3 } }),
+      C("先跑到飛球後方，接住後朝內野回傳", { fitness: 2, instinct: 1 }, ["tried_outfield"], "你先往球後方繞，再迎著落點往前。第三顆球進手套時，身體已朝內野，回傳只在草地上彈了一次。教練沿著路線畫完一筆，把你的名字寫進外野組。", { setPrimaryPosition: "外野手", skillEffects: { catching: 1, reaction: 1, range: 2, armStrength: 2 }, positionEffects: { outfield: 3 } }),
+      C("蹲到本壘後方，擋住低球再喊回傳方向", { observe: 2, resilience: 1 }, ["tried_catcher"], "第二球提前落地，你把膝蓋併起來，讓球停在胸前。撿球時，你朝一壘喊出回傳方向。教練看完第三球，把你的名字寫進捕手組。", { setPrimaryPosition: "捕手", skillEffects: { catching: 1, baseballIQ: 2, blocking: 1, gameCalling: 2 }, positionEffects: { catcher: 3 } }),
+      C("站上投手丘，用七成力把三球投進手套", { confidence: 1, resilience: 1, pressure: 1 }, ["tried_pitcher"], "第一球偏高，第二球碰到手套外緣。你放慢抬腿，第三球落進捕手胸前。教練記下你修正偏差的方式，把你的名字寫進投手組。", { setPrimaryPosition: "投手", skillEffects: { throwing: 1, armStrength: 1, control: 2, pitchStamina: 1 }, positionEffects: { pitcher: 3 } })
     ]
   },
   youth_teammate: {
@@ -282,10 +380,10 @@ const youthSeasonEvents = {
     title: "紅白賽名單沒有你的名字",
     text: "紅白兩隊穿著同一套練習衣，喊暗號時卻誰也不肯讓。山本教練站在一壘側，手裡的名單每完成一個守備就多一道短線。\n\n你的名字在候補欄。阿哲已經上場，高橋守在你試過的位置；他接完一顆偏慢的滾地球，沒有急著傳，而是先把腳步踩正。教練的筆又動了一次。板凳旁仍放著筆記本、代跑背心和一袋還沒用過的球。",
     choices: [
-      C("在筆記本畫下高橋三次接球的第一步和傳球點", { observe: 2, pressure: 1 }, ["studied_rival_on_bench"], "第三次滾地球結束，你的紙上多了三個箭頭：高橋總會先往球的右側墊一步，再讓胸口對準一壘。下一次教練看向板凳時，也看見你還在記。", { personalityEffects: { thoughtful: 2, ambitious: 1 }, impressionEffects: { takahashi: { rivalry: 1, respect: 1 } }, skillEffects: { baseballIQ: 2 }, relationshipEffects: { rivalRespect: 1, rivalCompetition: 2 } }),
-      C("每半局沿界外線熱身，聽到叫代跑就站到一壘側", { resilience: 2, confidence: 1 }, ["supported_from_bench"], "阿哲上壘後回頭找代跑指示，你已穿好背心站在一壘側。教練最後沒有換人，卻在收回名單時問了你的名字。", { personalityEffects: { kind: 2, reliable: 2 }, impressionEffects: { coach: { dependable: 1 }, azhe: { trusts: 1 } }, skillEffects: { baseRunning: 1 }, relationshipEffects: { teammateBond: 2, coachTrust: 1 } }),
-      C("收起喊聲，只盯著高橋守的那個位置", { confidence: 1, pressure: 2, instinct: 1 }, ["resented_bench"], "隊友完成出局時，板凳一起拍手，你的手卻留在膝蓋上。高橋傳完球朝這邊看了一眼；教練也看見你沒有加入下一次提醒。", { personalityEffects: { ambitious: 1, emotional: 2 }, impressionEffects: { coach: { immature: 1 }, takahashi: { rivalry: 2, underestimate: 1 } }, relationshipEffects: { rivalCompetition: 3, coachTrust: -1 } }),
-      C("把投手偏高、偏外的球各畫一個記號", { observe: 2 }, ["bench_studied_pitching"], "兩局後，投手在落後球數時又把球投高。你在同一格補上第三個記號，並把球棒握短的位置一起寫在旁邊。", { skillEffects: { batting: 1, baseballIQ: 1 } })
+      C("在筆記本畫下高橋三次接球的第一步和傳球點", { observe: 2, pressure: 1 }, ["studied_rival_on_bench"], "第三次滾地球結束，你的紙上多了三個箭頭。最後半局結束，教練收起名單，大家開始搬壘包；你整場沒有上場，但那頁筆記被他看見了。", { personalityEffects: { thoughtful: 2, ambitious: 1 }, impressionEffects: { takahashi: { rivalry: 1, respect: 1 } }, skillEffects: { baseballIQ: 2 }, relationshipEffects: { rivalRespect: 1, rivalCompetition: 2 } }),
+      C("每半局沿界外線熱身，聽到叫代跑就站到一壘側", { resilience: 2, confidence: 1 }, ["supported_from_bench"], "阿哲上壘後回頭找代跑指示，你已穿好背心站在一壘側。最後半局仍沒有換人；你整場沒有上場，紅白賽結束後，教練收回名單並記下你一直保持熱身。", { personalityEffects: { kind: 2, reliable: 2 }, impressionEffects: { coach: { dependable: 1 }, azhe: { trusts: 1 } }, skillEffects: { baseRunning: 1 }, relationshipEffects: { teammateBond: 2, coachTrust: 1 } }),
+      C("收起喊聲，只盯著高橋守的那個位置", { confidence: 1, pressure: 2, instinct: 1 }, ["resented_bench"], "隊友完成出局時，板凳一起拍手，你的手卻留在膝蓋上。最後半局結束，大家開始收器材；你沒有上場，教練也把這段沉默留在名單旁。", { personalityEffects: { ambitious: 1, emotional: 2 }, impressionEffects: { coach: { immature: 1 }, takahashi: { rivalry: 2, underestimate: 1 } }, relationshipEffects: { rivalCompetition: 3, coachTrust: -1 } }),
+      C("把投手偏高、偏外的球各畫一個記號", { observe: 2 }, ["bench_studied_pitching"], "兩局後，投手在落後球數時又把球投高。最後半局結束，教練收起名單，隊友開始整理球袋；你沒有上場，只把第三個記號和握短球棒的位置一起留在紙上。", { skillEffects: { batting: 1, baseballIQ: 1 } })
     ]
   },
   youth_match_entry: {
@@ -310,7 +408,8 @@ const youthSeasonEvents = {
       const call = narrativeResult.category === "supportive"
         ? `山本教練沒有回頭，只朝你招手：『${assignment}。』他說得像是早就決定要給你機會。`
         : `教練看了板凳一圈，最後叫到你的名字：『${assignment}。』這個機會來得比你預期突然。`;
-      return `板凳上的說話聲忽然斷了一拍。${call}\n\n旁邊的隊友把手套推到你腳邊，你站起來時才發現雙腿有點麻。釘鞋踩進界外的紅土，場外聲音一下子退遠；守備員正朝各自的位置散開，沒有人會停下來等你緊張完。`;
+      const benchEcho = getYouthBenchEcho();
+      return `紅白賽結束後，球隊又練了幾次。正式聯賽那天，新的出賽名單貼在休息區：你的名字仍在候補欄，先從板凳等待。\n\n${benchEcho}\n\n比賽進行到中段，板凳上的說話聲忽然斷了一拍。${call}\n\n旁邊的隊友把手套推到你腳邊。釘鞋踩進界外的紅土，場外聲音一下子退遠；守備員正朝各自的位置散開，沒有人會停下來等你緊張完。`;
     },
     choices: [
       C("套上手套，直接跑向教練指的守位", { confidence: 2, pressure: 1 }, ["entered_match_confident"], "你越過界外線時朝教練點了一次頭，接著把腳踩進守備位置。內野手用手套指向跑者，第一個暗號已經在你到位前傳過來。", { relationshipEffects: { coachTrust: 1 }, matchEffects: { performance: 1 } }),
@@ -358,13 +457,14 @@ const youthSeasonEvents = {
     ]
   },
   youth_match_mistake: {
-    title: "失誤之後的下一球",
+    get title() {
+      return getYouthPreviousPlayEcho().error ? "那次瑕疵之後" : "下一次守備";
+    },
     text() {
-      const task = { "內野手": "下一顆更快的滾地球又朝你的守區而來", "外野手": "下一顆飛球被風推向邊線", "捕手": "下一球再度提前落地，跑者開始試探", "投手": "下一名打者連續碰掉兩顆球" }[player.seasonPosition] || "下一個更困難的局面立刻到來";
+      const previousPlay = getYouthPreviousPlayEcho();
+      const task = getYouthNextPositionTask();
       const oldFear = hasCallback("fear_of_failure", false) ? "你又聽見場邊孩子的笑聲，和第一次幾乎一樣。" : hasCallback("family_safe_place", false) ? "你想起第一次失敗後退到家人身邊；這一次，休息區離你很遠。" : "";
-      return player.seasonErrors > 0
-        ? `攻守交換後，你走回原來的守位。${oldFear}\n\n剛才的瑕疵還留在手套和鞋釘的觸感裡；隊友才剛喊完站位，${task}。沒有人有時間替你把上一球擦掉。`
-        : `攻守交換後，你又走回同一個守位。第一個任務已經完成，隊友的喊聲卻沒有因此放鬆；${task}。這一次，對手也知道球可能會往哪裡落。`;
+      return `${previousPlay.summary}\n\n前一個半局結束後，又過了一局。五局上，零出局、無人在壘，你回到${player.seasonPosition || "原來的守位"}。${oldFear}\n\n${task}隊友已經喊出站位，這是同一場比賽裡的新任務。`;
     },
     choices: [
       C("退回基本站位，接到球後只做最近的出局點", { resilience: 2, pressure: -1 }, ["recovered_after_play"], "教練喊出『下一球』時，你先把雙腳放回練習過的位置。球進入守區後，你沒有多看第二個跑者，只把傳球送到最近的壘包；裁判的拳頭舉起，這一球乾淨結束。", { positionSkillEffects: { "內野手": { catching: 1, throwing: 1 }, "外野手": { catching: 1, range: 1 }, "捕手": { blocking: 1, gameCalling: 1 }, "投手": { control: 1, pitchStamina: 1 } }, relationshipEffects: { coachTrust: 1 }, matchEffects: { performance: 2, outs: 1 } }),

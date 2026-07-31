@@ -1,6 +1,21 @@
 let isTransitioning = false;
+let pendingYouthSeasonOutcome = null;
 let selectedOrigin = PlayerIdentityOptions.origins[0];
 let selectedIdealSelf = "";
+
+const youthSeasonOutcomeEventIds = new Set([
+  "youth_season_intro",
+  "youth_position_trial",
+  "youth_teammate",
+  "youth_bench",
+  "youth_match_entry",
+  "youth_match_grounder",
+  "youth_match_outfield",
+  "youth_match_catcher",
+  "youth_match_pitcher",
+  "youth_match_mistake",
+  "youth_match_after"
+]);
 
 const idealSelfDescriptions = Object.freeze({
   [PlayerIdentityOptions.idealSelf[0]]: "我想成為任何情況都值得信賴的人。",
@@ -1051,7 +1066,7 @@ function formatChange(label, value) {
   return `<span class="${className}">${label} ${value >= 0 ? "+" : ""}${value}</span>`;
 }
 
-function showStatChanges(before, after, memory = "") {
+function showStatChanges(before, after, memory = "", options = {}) {
   const changes = [];
   Object.entries({ ...statLabels, ...skillLabels }).forEach(([key, label]) => {
     if (after[key] !== before[key]) changes.push(formatChange(label, after[key] - before[key]));
@@ -1059,9 +1074,61 @@ function showStatChanges(before, after, memory = "") {
   const goalFeedback = consumeGoalFeedback();
   const goalHtml = goalFeedback.map(item => `<div class="${item.type === "complete" ? "goal-complete" : item.type === "success" ? "goal-success" : item.type === "partial" ? "goal-partial" : item.type === "failed" ? "goal-failed" : "goal-progress-change"}">${escapeHtml(item.message)}</div>`).join("");
   const payoffHtml = consumeRelationshipPayoffFeedback().map(message => `<div class="relationship-payoff-notice">${escapeHtml(message)}</div>`).join("");
-  document.getElementById("changeLog").innerHTML = `
-    ${memory ? `<div class="memory-line">${escapeHtml(memory)}</div>` : ""}
+  const feedbackHtml = `
+    ${memory && options.includeMemory !== false ? `<div class="memory-line">${escapeHtml(memory)}</div>` : ""}
     <div>${changes.length ? changes.join("") : "<span class='neutral-change'>這個選擇留下了記憶，而不是數值。</span>"}</div>${goalHtml}${payoffHtml}`;
+  document.getElementById("changeLog").innerHTML = feedbackHtml;
+  return feedbackHtml;
+}
+
+function shouldShowYouthSeasonOutcome(eventId) {
+  return player.chapter === "少棒第一季" && youthSeasonOutcomeEventIds.has(eventId);
+}
+
+function getYouthSeasonOutcomeHeading(eventId) {
+  if (eventId === "youth_position_trial") return "這次輪測的結果";
+  if (eventId === "youth_bench") return "這段紅白賽的結果";
+  if (eventId === "youth_match_after") return "這場比賽留下的結果";
+  if (eventId.startsWith("youth_match_")) return "這一球的結果";
+  return "這次選擇的結果";
+}
+
+function getYouthSeasonOutcomeReaction(eventId) {
+  if (eventId === "youth_position_trial") return "山本教練把三球的結果寫進分組表，下一段訓練會依這個安排開始。";
+  if (eventId === "youth_teammate") return "器材室的門關上後，阿哲帶著這次互動離開球場；下一次合作時，他不會把它當作沒發生過。";
+  if (eventId === "youth_bench") return "紅白賽收操後，山本教練把名單與你的板凳紀錄一起收回。";
+  if (eventId === "youth_match_entry") return "教練確認你已進入守位，場上的隊友開始把下一球交給你。";
+  if (["youth_match_grounder", "youth_match_outfield", "youth_match_catcher", "youth_match_pitcher"].includes(eventId)) {
+    return "記錄員留下這一球的結果；隊友完成補位後，這場比賽繼續往下一局走。";
+  }
+  if (eventId === "youth_match_mistake") return "場上的喊聲沒有停；這次回應會和前一個守備一起進入賽後評估。";
+  if (eventId === "youth_match_after") return "山本教練收下記分紙，這場比賽會和整個球季一起進入評估。";
+  return "球隊照原本的節奏繼續運作，這次選擇則被留進你的球季紀錄。";
+}
+
+function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
+  pendingYouthSeasonOutcome = { eventId };
+  const competitionFrame = renderCompetitionPresentation(eventId);
+  document.getElementById("story").innerHTML = `
+    <article class="event-card choice-outcome-card">
+      ${competitionFrame}
+      <div class="event-kicker choice-outcome-kicker">行動結果</div>
+      <h2>${escapeHtml(getYouthSeasonOutcomeHeading(eventId))}</h2>
+      <div class="choice-outcome-action"><small>你選擇</small><strong>${escapeHtml(choice.text)}</strong></div>
+      <div class="choice-outcome-result"><small>發生的結果</small><p>${escapeHtml(choice.memory || "這個選擇已經完成，並留下後續影響。")}</p></div>
+      <div class="choice-outcome-reaction"><small>場上的回應</small><p>${escapeHtml(getYouthSeasonOutcomeReaction(eventId))}</p></div>
+      <div class="choice-outcome-feedback"><small>狀態變化</small>${statFeedbackHtml}</div>
+    </article>`;
+  document.getElementById("changeLog").innerHTML = "";
+  document.getElementById("choices").innerHTML = `<button type="button" class="outcome-continue-button" onclick="continueYouthSeasonOutcome()">繼續</button>`;
+  updateStatus();
+}
+
+function continueYouthSeasonOutcome() {
+  if (!pendingYouthSeasonOutcome) return;
+  pendingYouthSeasonOutcome = null;
+  isTransitioning = false;
+  showCurrentEvent();
 }
 
 function showNotice(message, type = "neutral") {
@@ -1196,7 +1263,13 @@ function choose(eventId, index) {
   processAspirationEvent(eventId, choice);
   recordContinuityOutcome(choice.continuityOutcome || createContinuityOutcome(eventId, choice));
   advanceNarrativeThread(eventId, choice);
-  showStatChanges(before, getPlayerSnapshot(), choice.memory);
+  const holdYouthSeasonOutcome = shouldShowYouthSeasonOutcome(eventId);
+  const statFeedbackHtml = showStatChanges(
+    before,
+    getPlayerSnapshot(),
+    choice.memory,
+    { includeMemory: !holdYouthSeasonOutcome }
+  );
 
   if (processTakahashiStoryboardFlow(eventId)) return;
 
@@ -1221,6 +1294,11 @@ function choose(eventId, index) {
   if (choice.finishChapterOne) finishChapterOne();
   else advanceAfterAction(decisionContext);
   tickPendingEvents(eventId);
+
+  if (holdYouthSeasonOutcome) {
+    renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml);
+    return;
+  }
 
   window.setTimeout(() => {
     isTransitioning = false;
@@ -2993,7 +3071,11 @@ function evaluateDevelopmentYears() {
   player.chapter = "二十二歲職涯小結";
 }
 
-function showCurrentEvent() { showStory(getCurrentEventId()); }
+function showCurrentEvent() {
+  pendingYouthSeasonOutcome = null;
+  isTransitioning = false;
+  showStory(getCurrentEventId());
+}
 
 function showStory(eventId) {
   ensureIncrementalSystems();
@@ -3080,7 +3162,10 @@ function renderCompetitionPresentation(eventId) {
     },
     seasonPosition: player.seasonPosition,
     seasonPerformance: player.seasonPerformance,
-    seasonErrors: player.seasonErrors
+    seasonErrors: player.seasonErrors,
+    previousPlayTransition: eventId === "youth_match_mistake" && typeof getYouthPreviousPlayEcho === "function"
+      ? getYouthPreviousPlayEcho().summary
+      : ""
   });
 }
 

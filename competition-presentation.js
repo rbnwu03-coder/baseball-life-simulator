@@ -156,7 +156,7 @@ var CompetitionPresentation = (() => {
       stageLabel: "第一個驗證點",
       transition: "球季報到後，山本先用十二顆球確認每個人的起點。",
       inningSummary: "第 2 輪｜每個位置剩 3 球",
-      connector: "從四個位置選一個，在三球內把指定動作做完整。",
+      connector: "四項輪測都已完成；從四個收尾任務選一項，山本會用最後三球決定你的初始分組。",
       abilityFocus: "observe",
       tone: "test",
       showScore: false
@@ -168,12 +168,12 @@ var CompetitionPresentation = (() => {
       stageLabel: "第二個驗證點",
       transition: "收操後的練習累積成第一張紅白賽名單，你暫時留在候補欄。",
       inningSummary: "三局下｜候補名單",
-      connector: "教練還沒叫到名字；決定你的雙手、雙腳和目光要留在哪裡。",
+      connector: "這場紅白賽仍在進行；決定你如何留在板凳上，直到最後半局與收操結束。",
       abilityFocus: "observe",
       tone: "scrimmage",
       showScore: false
     }),
-    youth_match_entry: officialValidation("第一次上場", "紅白賽留下的板凳紀錄，換來正式聯賽的一次臨時任務。", "接下教練指定的守位，先確認第一個出局點。", "pressure"),
+    youth_match_entry: officialValidation("第一次上場", "紅白賽已經結束；幾次練習後，正式聯賽名單把你留在候補欄，直到比賽中段教練叫到名字。", "接下教練指定的守位，先確認第一個出局點。", "pressure"),
     youth_match_grounder: officialValidation("第一個守備", "你已站進守區；同一個比分、出局數與跑者都沒有重來。", "一壘跑者已起跑：決定要穩拿一個出局，或挑戰前位跑者。", "baseballIQ"),
     youth_match_outfield: officialValidation("第一個守備", "你已站進右外野；同一個比分、出局數與跑者都沒有重來。", "判斷落點與回傳方向，別讓深遠飛球越過身後。", "observe"),
     youth_match_catcher: officialValidation("第一次指揮", "你已蹲到本壘後方；同一個比分、出局數與跑者都沒有重來。", "替投手選下一球，並把跑者與整組守備一起算進去。", "baseballIQ"),
@@ -313,6 +313,9 @@ var CompetitionPresentation = (() => {
 
   function resolveTransition(eventId, definition, context) {
     if (eventId === "youth_match_mistake") {
+      if (typeof context.previousPlayTransition === "string" && context.previousPlayTransition.trim()) {
+        return `${context.previousPlayTransition} 一局過去，五局上的新守備把你叫回同一場比賽。`;
+      }
       return finite(context.seasonErrors) > 0
         ? "攻守交換後，你回到同一場比賽；上一個瑕疵仍留在記分板旁的紀錄裡。"
         : "攻守交換後，你回到同一場比賽；第一個任務完成了，比分仍沒有拉開。";

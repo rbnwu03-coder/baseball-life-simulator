@@ -118,6 +118,15 @@ Header／Transition／Inning Summary／Score／Connector／Timeline
 
 Presentation 不取代 Story；Story 也不重新組裝一套比分、局數或 Timeline。正文需要引用局面時，只描述會影響判斷的可觀察細節。
 
+### Event Continuity Pass 的責任切分
+
+- Outcome：呈現玩家剛才採取的行動、具體結果、人物反應與數值回饋，並完成該幕；它不負責介紹下一個局面。
+- Transition：交代經過的時間、場域或賽事身份改變，例如紅白賽結束、幾次練習後公布正式名單，或同一場比賽進入下一局。
+- Next Story：先精確回收上一幕結果，再提出新的可判斷局面與選項；成功的上一球不得被誤稱為失誤。
+- Competition Presentation：只呈現賽事身份、局數、出局數、比分、壘況、當前任務與 Timeline，不重複 Choice Outcome 的完整結果。
+
+少棒第一季採用暫時性的 Choice Outcome 畫面。選項效果與回合推進仍在原本 `choose()` 路徑執行一次；畫面只暫停顯示，直到玩家按下「繼續」才讀取已推進的下一事件。此暫時狀態不寫入 Player Schema 或存檔。
+
 ---
 
 ## 7. 能力存在感

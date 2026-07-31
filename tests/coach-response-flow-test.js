@@ -452,10 +452,10 @@ assert(
   "Golden Flow 下一事件必須維持原本守位事件"
 );
 assert(
-  supportiveGolden.migrated.renderCount === 2 &&
+  supportiveGolden.migrated.renderCount === 1 &&
     supportiveGolden.migrated.transitionCount === 1 &&
-    supportiveGolden.migrated.timeoutCount === 1,
-  "Golden Flow render、transition、timeout 次數錯誤"
+    supportiveGolden.migrated.timeoutCount === 0,
+  "Golden Flow 應停在 Choice Outcome，不得自動 render 下一事件或排入 timeout"
 );
 assert(
   supportiveGolden.migrated.storageWrites === 0,

@@ -471,6 +471,74 @@ button:active{
     line-height:1.45;
 }
 
+.choice-outcome-card{
+    border-color:#6c5138;
+    background:#fffdf7;
+}
+
+.choice-outcome-kicker{
+    color:#8b5a2b;
+    font-weight:800;
+}
+
+.choice-outcome-action,
+.choice-outcome-result,
+.choice-outcome-reaction,
+.choice-outcome-feedback{
+    margin-top:16px;
+}
+
+.choice-outcome-action,
+.choice-outcome-result{
+    padding:16px 18px;
+    border-radius:12px;
+}
+
+.choice-outcome-action{
+    background:#efe2c7;
+}
+
+.choice-outcome-result{
+    border-left:6px solid #8b5a2b;
+    background:#fff5df;
+}
+
+.choice-outcome-card small{
+    display:block;
+    margin-bottom:7px;
+    color:#766657;
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:.08em;
+}
+
+.choice-outcome-action strong{
+    display:block;
+    font-size:21px;
+    line-height:1.5;
+}
+
+.choice-outcome-result p,
+.choice-outcome-reaction p{
+    margin:0;
+    font-size:20px;
+    line-height:1.7;
+}
+
+.choice-outcome-feedback{
+    padding-top:14px;
+    border-top:1px solid #d8c5aa;
+    font-size:17px;
+    line-height:1.6;
+}
+
+#choices .outcome-continue-button{
+    text-align:center;
+    font-weight:800;
+    background:#6c5138;
+    color:#fffaf0;
+}
+
 .bottom-panel{
     margin-top:34px;
     font-size:26px;
@@ -1073,6 +1141,16 @@ button:active{
 
     .diamond{
         display:none;
+    }
+
+    .choice-outcome-action,
+    .choice-outcome-result{
+        padding:14px;
+    }
+
+    .choice-outcome-result p,
+    .choice-outcome-reaction p{
+        font-size:18px;
     }
 
     #characterCreation input{

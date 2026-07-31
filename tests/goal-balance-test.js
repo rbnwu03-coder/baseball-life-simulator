@@ -76,6 +76,7 @@ function playUntil(game, condition, weights, variation, max = 45) {
   for (let turn = 0; turn < max && !vm.runInContext(condition, game); turn += 1) {
     const eventId = game.getCurrentEventId();
     game.choose(eventId, chooseFor(game, eventId, weights, variation + turn));
+    if (vm.runInContext("Boolean(pendingYouthSeasonOutcome)", game)) game.continueYouthSeasonOutcome();
   }
   if (!vm.runInContext(condition, game)) throw new Error(`未完成流程：${condition}，停在 ${game.getCurrentEventId()}`);
 }
