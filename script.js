@@ -3033,10 +3033,10 @@ function showStory(eventId) {
   if (aspirationText) text += `\n\n【看見的新可能】\n${aspirationText}`;
   if (chapterEnding) text += `\n\n${chapterEnding}`;
   if (replayEcho) text += `\n\n${replayEcho}`;
-  const matchHud = eventId.startsWith("youth_match_") ? renderMatchHud() : "";
+  const competitionFrame = renderCompetitionPresentation(eventId);
   const bridgeInHtml = bridgeIn ? `<div class="story-bridge-in"><small>承接上一回</small>${escapeHtml(bridgeIn)}</div>` : "";
   const bridgeOutHtml = bridgeOut ? `<div class="story-bridge-out"><small>接下來</small>${escapeHtml(bridgeOut)}</div>` : "";
-  document.getElementById("story").innerHTML = `<article class="event-card">${matchHud}<div class="event-kicker">${escapeHtml(getTimeLabel())}</div>${bridgeInHtml}<h2>${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div>${bridgeOutHtml}</article>`;
+  document.getElementById("story").innerHTML = `<article class="event-card">${competitionFrame}<div class="event-kicker">${escapeHtml(getTimeLabel())}</div>${bridgeInHtml}<h2>${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div>${bridgeOutHtml}</article>`;
   document.getElementById("choices").innerHTML = event.choices.map((choice, index) => `<button type="button" onclick="choose('${eventId}', ${index})">${escapeHtml(choice.text)}</button>`).join("");
   updateStatus();
   if (player.goalState?.recentProgress?.length) {
@@ -3056,14 +3056,29 @@ function prepareMatchStateForEvent(eventId) {
   }
 }
 
-function renderMatchHud() {
-  const match = player.matchState;
-  const bases = match.runners.map((occupied, index) => `<span class="base ${occupied ? "occupied" : ""}" title="${index + 1}壘"></span>`).join("");
-  return `<section class="match-hud" aria-label="目前比賽局面">
-    <div class="inning"><strong>${match.inning} 局${match.half}</strong><span>${match.outs} 出局</span></div>
-    <div class="score"><span>客隊 <strong>${match.awayScore}</strong></span><span>少棒隊 <strong>${match.homeScore}</strong></span></div>
-    <div class="diamond">${bases}</div>
-  </section>`;
+function renderCompetitionPresentation(eventId) {
+  if (
+    typeof CompetitionPresentation !== "object" ||
+    typeof CompetitionPresentation.render !== "function"
+  ) {
+    return "";
+  }
+  const match = player.matchState || {};
+  return CompetitionPresentation.render(eventId, {
+    matchState: {
+      inning: match.inning,
+      half: match.half,
+      outs: match.outs,
+      runners: Array.isArray(match.runners) ? match.runners.slice(0, 3) : [],
+      awayScore: match.awayScore,
+      homeScore: match.homeScore
+    },
+    abilities: {
+      pressure: player.pressure,
+      observe: player.observe,
+      baseballIQ: player.baseballSkills?.baseballIQ
+    }
+  });
 }
 
 function getTimeLabel() {

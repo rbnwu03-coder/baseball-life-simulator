@@ -279,8 +279,8 @@ const youthSeasonEvents = {
     ]
   },
   youth_bench: {
-    title: "第一次坐在板凳上",
-    text: "週末的練習賽名單公布，你沒有先發。阿哲進了場，另一名動作比你成熟的孩子——高橋——守在你試過的位置。",
+    title: "紅白賽名單沒有你的名字",
+    text: "週末的隊內紅白賽名單公布，你沒有先發。阿哲進了場，另一名動作比你成熟的孩子——高橋——守在你試過的位置。紅隊與白隊都穿著同一套練習衣，記分板上的名字卻已經把隊內順位暫時分開。",
     choices: [
       C("記錄高橋每一球怎麼處理", { observe: 2, pressure: 1 }, ["studied_rival_on_bench"], "你從板凳上研究高橋，也第一次把他視為競爭對手。", { personalityEffects: { thoughtful: 2, ambitious: 1 }, impressionEffects: { takahashi: { rivalry: 1, respect: 1 } }, skillEffects: { baseballIQ: 2 }, relationshipEffects: { rivalRespect: 1, rivalCompetition: 2 } }),
       C("替隊友喊聲，持續做代跑熱身", { resilience: 2, confidence: 1 }, ["supported_from_bench"], "你沒有上場，卻仍讓身體和注意力留在比賽裡。", { personalityEffects: { kind: 2, reliable: 2 }, impressionEffects: { coach: { dependable: 1 }, azhe: { trusts: 1 } }, skillEffects: { baseRunning: 1 }, relationshipEffects: { teammateBond: 2, coachTrust: 1 } }),
