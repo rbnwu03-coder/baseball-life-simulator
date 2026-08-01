@@ -3118,7 +3118,8 @@ function showStory(eventId) {
   const competitionFrame = renderCompetitionPresentation(eventId);
   const bridgeInHtml = bridgeIn ? `<div class="story-bridge-in"><small>承接上一回</small>${escapeHtml(bridgeIn)}</div>` : "";
   const bridgeOutHtml = bridgeOut ? `<div class="story-bridge-out"><small>接下來</small>${escapeHtml(bridgeOut)}</div>` : "";
-  document.getElementById("story").innerHTML = `<article class="event-card">${competitionFrame}<div class="event-kicker">${escapeHtml(getTimeLabel())}</div>${bridgeInHtml}<h2>${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div>${bridgeOutHtml}</article>`;
+  const sceneContextHtml = event.scene ? `<div class="chapter-one-scene-context"><small>此刻</small><span>${escapeHtml(event.scene)}</span></div>` : "";
+  document.getElementById("story").innerHTML = `<article class="event-card">${competitionFrame}<div class="event-kicker">${escapeHtml(getTimeLabel())}</div>${sceneContextHtml}${bridgeInHtml}<h2>${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div>${bridgeOutHtml}</article>`;
   document.getElementById("choices").innerHTML = event.choices.map((choice, index) => `<button type="button" onclick="choose('${eventId}', ${index})">${escapeHtml(choice.text)}</button>`).join("");
   updateStatus();
   if (player.goalState?.recentProgress?.length) {

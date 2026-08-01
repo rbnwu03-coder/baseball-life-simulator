@@ -1,140 +1,262 @@
 const C = (text, effects, flags, memory, extra = {}) => ({ text, effects, flags, memory, ...extra });
 
+function getChapterOneEcho(entries, fallback = "") {
+  const match = entries.find(([flag]) => hasFlag(flag));
+  return match ? match[1] : fallback;
+}
+
 const chapterOneEvents = {
   day1_morning: {
-    title: "球場邊的夏天",
+    title: "圍欄外的第一眼",
+    scene: "第 1 天・上午｜社區少棒場・三壘側圍欄",
     text() {
       const thought = player.origin === "understand"
         ? "你看不懂為什麼每個守備員站得不一樣，卻很想把答案找出來。"
         : player.origin === "belong"
           ? "場上的孩子互相喊著名字。比起球本身，你先注意到他們像是知道彼此會在哪裡。"
           : "每次有人完成漂亮守備，場邊就會響起掌聲。你忍不住想像，有一天那個聲音會不會是給你的。";
-      return `十歲那年的暑假，家人問你要不要去附近看看少棒隊練習。紅土被太陽曬得發亮。\n\n${thought}\n\n你還不知道自己是不是喜歡棒球，只知道目光一直跟著那顆球走。`;
+      return `十歲那年的暑假，家人帶你去巷口買飲料。回程經過社區球場時，鋁棒擊中球的聲音從圍欄裡傳出來，你停在三壘側沒有跟上。\n\n紅土被太陽曬得發亮。內野手壓低身體，球一離開球棒，幾個人同時移動。${thought}\n\n家人已走出兩步，又折回來站在你身後。你和球場之間只隔著一道鐵網。`;
     },
     choices: [
-      C("站到最前面看他們接球", { observe: 1, confidence: 1 }, ["watched_close"], "你第一次站得離球場那麼近。"),
-      C("躲在家人後面仔細看", { observe: 2, confidence: -1, pressure: 1 }, ["hesitant"], "你沒有靠近，卻記住了每個人的腳步。"),
-      C("問家人：我也能試試看嗎？", { confidence: 2, familySupport: 1 }, ["asked_family"], "你第一次把想打棒球的念頭說出口。")
+      C("把手指勾上鐵網，站到最前面看接球", { observe: 1, confidence: 1 }, ["watched_close"], "你貼近圍欄，直到能看清紅土上的鞋印和手套開口。"),
+      C("留在家人身後，沿著每個人的腳步看", { observe: 2, confidence: -1, pressure: 1 }, ["hesitant"], "你沒有走到圍欄前，卻從家人肩旁記住了內野手移動的先後。"),
+      C("指著最近的接球組，問家人自己能不能試", { confidence: 2, familySupport: 1 }, ["asked_family"], "家人沒有替你喊人，只說如果有機會，可以由你自己開口。")
     ]
   },
   day1_afternoon: {
     title: "第一顆滾來的球",
-    text: "一顆傳偏的球滾到你腳邊。練習中的孩子朝你招手，教練也看了過來。球明明很輕，你卻覺得所有人的目光都有重量。",
+    scene: "第 1 天・午後｜同一座球場・圍欄缺口",
+    text() {
+      const position = getChapterOneEcho([
+        ["watched_close", "你的手指還勾在鐵網上，身體已跟著每次傳球轉向。"],
+        ["hesitant", "你仍站在家人身旁，視線卻沒有離開內野手的腳。"],
+        ["asked_family", "你剛問完能不能試，家人便把位置讓開，沒有替你回答。"]
+      ]);
+      return `${position}\n\n一顆傳偏的球穿過圍欄缺口，沿水泥地滾到你的鞋尖。場內一個同齡孩子停下來，朝你抬起空著的手套：『丟回來！』\n\n他的球衣背後寫著「阿哲」。本壘旁的山本教練沒有出聲，只把下一顆球留在球棒旁，等著看你怎麼處理。`;
+    },
     choices: [
-      C("撿起來，直接傳回去", { ballSense: 1, confidence: 1, instinct: 1 }, ["threw_back"], "你把球傳了回去，方向不完美，但沒有逃開。"),
-      C("先模仿他們的動作再傳", { observe: 2, ballSense: 1 }, ["imitates"], "你照著剛才看見的姿勢，把球送回場內。"),
-      C("請家人幫忙撿球", { familySupport: 1, confidence: -1, pressure: 1 }, ["relied_family"], "家人替你解了圍，你卻一直記得那一刻。")
+      C("撿起球，朝阿哲的手套直接傳回去", { ballSense: 1, confidence: 1, instinct: 1 }, ["threw_back"], "球偏到阿哲右側；他跨一步接住，朝你點了一下手套。"),
+      C("照著剛才看見的跨步，把球送回去", { observe: 2, ballSense: 1 }, ["imitates"], "你先把左腳踩向場內再出手。球落地一次，阿哲把它收進手套。"),
+      C("把腳移開，請家人替你把球撿起來", { familySupport: 1, confidence: -1, pressure: 1 }, ["relied_family"], "家人把球拋回場內。阿哲接住後仍看著你，像在等你下次自己來。")
     ]
   },
   day2_morning: {
-    title: "球場、電視或公園",
-    text: "第二天早上，你還在想昨天那顆球。今天沒有人替你決定，你得自己選擇怎麼靠近棒球。",
+    title: "第二次回去的理由",
+    scene: "第 2 天・上午｜家中餐桌・通往球場的巷子",
+    text() {
+      const residue = getChapterOneEcho([
+        ["threw_back", "昨天那顆球偏到阿哲右側，但他接住後朝你點了手套。"],
+        ["imitates", "昨天那一步跨得不像場內的人，球卻真的沿著你看的方向回去了。"],
+        ["relied_family", "昨天是家人替你把球送回去；阿哲最後那一眼還留在你腦中。"]
+      ], "昨天那顆滾出圍欄的球還沒有從你腦中離開。");
+      return `隔天早餐時，鞋底縫裡掉下一小塊紅土。${residue}\n\n家人沒有再問你喜不喜歡棒球，只問今天要往哪裡走。你可以直接回球場，也可以先用自己的方式把昨天看不懂的部分弄清楚。`;
+    },
     choices: [
-      C("再去球場看少棒隊", { observe: 1, confidence: 1, coachAttention: 1 }, ["returned_ballpark"], "你又回到球場，教練似乎認出了你。"),
-      C("留在家裡把比賽看完", { observe: 2, familySupport: 1 }, ["watched_tv"], "你開始發現守備站位會隨打者改變。"),
-      C("去公園找人玩球", { ballSense: 1, fitness: 1, instinct: 1 }, ["park_ball"], "在沒有規矩的公園裡，你用身體認識棒球。")
+      C("沿昨天的路直接回到三壘側圍欄", { observe: 1, confidence: 1, coachAttention: 1 }, ["returned_ballpark"], "你比練習開始更早到。山本教練搬球袋時，認出了圍欄外那雙鞋。"),
+      C("先把電視比賽看完，再帶著站位圖去球場", { observe: 2, familySupport: 1 }, ["watched_tv"], "你在紙上畫了四個守備點；傍晚經過球場時，仍把那張紙抓在手裡。"),
+      C("先到公園找人投球，散場後抱著球繞去看看", { ballSense: 1, fitness: 1, instinct: 1 }, ["park_ball"], "公園沒有固定站位。朋友回家後，你抱著沾灰的球走到少棒場外。")
     ]
   },
   day2_afternoon: {
     title: "第一次被看見",
-    text: "球場邊的孩子問：『你也想打嗎？』教練沒有催你，只在旁邊等你的回答。",
+    scene: "第 2 天・傍晚｜少棒場入口・器材籃旁",
+    text() {
+      const arrival = getChapterOneEcho([
+        ["returned_ballpark", "你把兩顆滾到場外的球排在器材籃邊，沒有等人開口。"],
+        ["watched_tv", "你隔著圍欄比對紙上的站位，發現二壘手剛好往你畫錯的方向移動。"],
+        ["park_ball", "你把公園帶來的球在掌心轉了一圈，試著用昨天看見的握法抓住縫線。"]
+      ]);
+      const firstBall = hasFlag("relied_family")
+        ? "阿哲先看向你身旁的家人，又把一只舊手套放在界線內側。"
+        : "阿哲認出昨天那顆球回來的方向，把一只舊手套敲了兩下。";
+      return `${arrival}\n\n${firstBall}『你今天是來看，還是要接三球？』\n\n山本教練原本在本壘旁寫練習表。聽見阿哲問話後，他抬頭看了你一眼，沒有替你回答。你做的事第一次讓場內的人停下自己的動作。`;
+    },
     choices: [
-      C("承認自己很想試試看", { confidence: 2, coachAttention: 1 }, ["admitted_interest"], "你承認了自己的期待，也接受可能出糗。"),
-      C("說還想再觀察幾天", { observe: 2, confidence: -1 }, ["slow_warm"], "你沒有拒絕，只是需要更多時間理解這裡。"),
-      C("先問旁邊的孩子怎麼加入", { observe: 1, confidence: 1, coachAttention: 1 }, ["asked_teammate"], "你從同齡孩子那裡找到靠近球隊的方法。")
+      C("接過手套，對阿哲說：『我想先試三球。』", { confidence: 2, coachAttention: 1 }, ["admitted_interest"], "你跨過入口的白線。山本教練把練習表翻到背面，替這三球留了一小格。"),
+      C("留在線外，請阿哲先讓你看完這一組", { observe: 2, confidence: -1 }, ["slow_warm"], "你沒有接手套。阿哲把它掛在圍欄上，告訴你明早會從最短的距離開始。"),
+      C("指著器材籃，先問阿哲新人要排在哪裡", { observe: 1, confidence: 1, coachAttention: 1 }, ["asked_teammate"], "阿哲把你帶到隊伍末端，示範借手套、撿球和排隊的順序。教練沒有把你叫出去。")
     ]
   },
   day3_morning: {
     title: "傳接球的距離",
-    text: "有人把手套借給你。球從幾公尺外飛來時，你才發現『看懂』和『接住』是兩回事。",
+    scene: "第 3 天・上午｜少棒場界外區・兩條白線之間",
+    text() {
+      const access = getChapterOneEcho([
+        ["admitted_interest", "阿哲看見你走近，直接把昨天那只舊手套拋到你胸前。"],
+        ["slow_warm", "你先看完一整組。阿哲依約把掛在圍欄上的手套取下來，放到短線後方。"],
+        ["asked_teammate", "你照昨天學到的順序排到末端。輪到你時，阿哲把借用手套的束帶重新拉緊。"]
+      ]);
+      return `${access}\n\n最初只有三步。阿哲把球輕輕送到你胸前，你至少能讓球碰到手套。第三次之後，他用鞋底向後劃過第二條白線，退到六步外。\n\n同一顆球飛得更平、更快，落點也不再停在胸口。山本教練站在打擊網旁，沒有縮短距離。`;
+    },
     choices: [
-      C("先靠反應把球擋下來", { ballSense: 2, instinct: 1, pressure: 1 }, ["raw_catcher"], "球撞進手套又彈出，你還是追上去撿了回來。"),
-      C("注意腳步和手套位置", { observe: 2, ballSense: 1 }, ["fundamental_focus"], "你把動作拆開，一次只修正一個地方。"),
-      C("漏接也繼續要求再一球", { resilience: 2, fitness: 1 }, ["kept_retrying"], "你漏了好幾球，卻沒有說要停。")
+      C("不等站穩，先用手套把偏球擋在面前", { ballSense: 2, instinct: 1, pressure: 1 }, ["raw_catcher"], "球撞上手套外緣又彈出。你立刻追過白線，把它撿回原來的位置。"),
+      C("先把腳移到落點，再把手套放到球前面", { observe: 2, ballSense: 1 }, ["fundamental_focus"], "第二球仍從手套旁擦過；第三球來時，你先到位，球第一次停在掌心。"),
+      C("每次漏接都把球送回去，請阿哲再投一顆", { resilience: 2, fitness: 1 }, ["kept_retrying"], "你來回追了幾次，呼吸開始變重。阿哲沒有縮短距離，只等你重新站好。")
     ]
   },
   day3_afternoon: {
-    title: "旁邊的小孩笑了",
-    text: "你又漏了一球。旁邊傳來一聲笑，不一定有惡意，卻讓你的耳朵一下子熱了起來。",
+    title: "笑聲落在漏球之後",
+    scene: "第 3 天・午後｜同一條傳接線・球袋旁",
+    text() {
+      const carry = getChapterOneEcho([
+        ["raw_catcher", "你沿著白線追球，剛把前一顆擋回自己面前。"],
+        ["fundamental_focus", "你把腳重新放到剛才接住第三球的位置，等阿哲再退半步。"],
+        ["kept_retrying", "你已經多跑了幾趟，膝蓋沾著追球時揚起的紅土。"]
+      ]);
+      return `${carry}\n\n下一球碰到手套尖端，從兩腿之間一直滾到球袋旁。排隊的人裡傳出一聲短笑，接著又有人跟著笑了一下。\n\n阿哲用鞋底把球停住，沒有替你說話，也沒有把距離拉近。他只把球撿起來，等你決定要不要回到白線。山本教練仍在遠處記錄。`;
+    },
     choices: [
-      C("假裝沒聽見，準備下一球", { resilience: 2, confidence: 1 }, ["ignored_laugh"], "你把目光留在下一顆球上。"),
-      C("停下來想剛才為什麼漏接", { observe: 2, resilience: 1 }, ["analyzed_failure"], "你把難堪變成一個可以回答的問題。"),
-      C("先退到家人身邊休息", { pressure: 2, confidence: -1, familySupport: 1 }, ["backed_off"], "你暫時退開，家人沒有責怪你。")
+      C("走回白線，把手套朝阿哲重新打開", { resilience: 2, confidence: 1 }, ["ignored_laugh"], "笑聲還在身後。你沒有回頭，只把腳尖對準阿哲手裡的下一顆球。"),
+      C("走到漏球點，用鞋尖標出最後一次彈跳", { observe: 2, resilience: 1 }, ["analyzed_failure"], "你在紅土上畫了一道短線。阿哲看懂後，把下一球投向同一個位置。"),
+      C("把手套掛回圍欄，先退到家人身邊喝水", { pressure: 2, confidence: -1, familySupport: 1 }, ["backed_off"], "你坐到場外。家人只把水壺遞給你；阿哲把那顆漏球放在白線上，沒有收進袋子。")
     ]
   },
   day4_morning: {
     title: "被比較的一天",
-    text: "一個和你差不多年紀的孩子接得又快又穩。你第一次清楚看見：喜歡棒球，不代表你會比別人厲害。",
+    scene: "第 4 天・上午｜少棒場內野邊線・三球輪測",
+    text() {
+      const returnAction = getChapterOneEcho([
+        ["ignored_laugh", "你回到昨天那條白線，手套開口朝前，沒有去找笑聲從哪裡來。"],
+        ["analyzed_failure", "你先找到昨天鞋尖畫出的短線，再把腳放到彈跳後方。"],
+        ["backed_off", "你在入口停了一下。家人把水壺留在場外，你自己走到還放著漏球的位置。"]
+      ]);
+      return `${returnAction}\n\n山本教練把你和高橋排在同一條線，各做三顆相同速度的滾地球。你的第一球進了手套，交換到右手時卻停了一拍；第二球傳到一壘前先落地。\n\n輪到高橋時，他在球第二次彈起前已先跨出第一步，手套停在左腳外側。球一進手套就換到右手，三次回傳都落在一壘手胸前。排隊的人沒有笑，只自然往高橋那邊多讓了一步。`;
+    },
     choices: [
-      C("觀察他哪裡做得比你好", { observe: 2, resilience: 1 }, ["learned_from_peer"], "你把比較變成學習的線索。"),
-      C("主動排到他後面，想證明自己", { confidence: 2, ballSense: 1, pressure: 1 }, ["prove_self"], "你沒有躲開那個比你強的人。"),
-      C("去公園找回自由玩球的感覺", { instinct: 2, ballSense: 1 }, ["chose_free_play"], "你在沒有比較的地方，重新想起棒球的快樂。")
+      C("蹲到高橋剛才的位置，照他的第一步再做三球", { observe: 2, resilience: 1 }, ["learned_from_peer"], "你模仿他把手套放到左腳外側。動作仍慢，但第三次換手沒有停在胸前。"),
+      C("排到高橋正後方，要求用同樣速度再做一次", { confidence: 2, ballSense: 1, pressure: 1 }, ["prove_self"], "你把回傳加快，第二球偏出一壘手肩膀。高橋把滾遠的球撿回來，放到你下一輪的起點。"),
+      C("抱著自己的球去公園，把三球改成沒有口令的玩法", { instinct: 2, ballSense: 1 }, ["chose_free_play"], "你離開排隊的白線，在公園對著牆找回熟悉的節奏。牆不記錄誰先完成。")
     ]
   },
   day4_afternoon: {
-    title: "家人的態度",
-    text: "回家路上，家人問你：『如果真的加入球隊，就要固定練習。你還想去嗎？』",
+    title: "冰箱上的練習格",
+    scene: "第 4 天・傍晚｜回家路上・家中廚房",
+    text() {
+      const comparison = getChapterOneEcho([
+        ["learned_from_peer", "回家路上，你一再重做高橋跨出的第一步，鞋底在騎樓留下短短的摩擦聲。"],
+        ["prove_self", "你還記得第二球偏出肩膀的方向，也記得高橋替你把球放回起點。"],
+        ["chose_free_play", "公園的牆沒有評分，但回家時，你仍繞過少棒場看了一眼那條白線。"]
+      ]);
+      return `${comparison}\n\n家人回家後把一張月曆貼到冰箱上，用筆圈出少棒隊固定練習的三個時段：『如果真的跟著練，這些時間就不能每次臨時決定。』\n\n筆停在下一週的空白格。家人把它交給你，沒有替你畫下去。`;
+    },
     choices: [
-      C("說自己願意認真試一段時間", { familySupport: 2, confidence: 1 }, ["family_promise"], "你和家人做了一個還很小、卻認真的約定。"),
-      C("坦白自己還不確定", { familySupport: 1, observe: 1 }, ["uncertain_but_curious"], "你沒有逞強，家人也願意讓你慢慢決定。"),
-      C("說自己比較喜歡在公園玩", { instinct: 1, resilience: 1, familySupport: -1 }, ["independent_play"], "你選擇了自己的玩球方式。")
+      C("把下週三個練習時段都圈起來", { familySupport: 2, confidence: 1 }, ["family_promise"], "你把三個空白格圈好。家人拿出水壺，在第一個日期旁寫下集合時間。"),
+      C("只圈下一次，把筆停在後面的空白格", { familySupport: 1, observe: 1 }, ["uncertain_but_curious"], "你先答應再去一次。家人沒有追問後兩格，只把月曆留在冰箱上。"),
+      C("把週末留給公園，只記下少棒隊開門的時間", { instinct: 1, resilience: 1, familySupport: -1 }, ["independent_play"], "家人擦掉其中兩個圈。你仍把球場開門的時間抄到紙角，夾在月曆旁。")
     ]
   },
   day5_morning: {
-    title: "教練的第一句話",
-    text: "教練把一顆球放進你手裡：『不用證明你很厲害，先讓我看看你怎麼學。』",
+    title: "山本教練的第一句話",
+    scene: "第 5 天・上午｜少棒場內・打擊網旁",
+    text() {
+      const returnReason = getChapterOneEcho([
+        ["family_promise", "冰箱上的第一個圈到了。你提著家人準備的水壺，在集合前站到器材籃旁。"],
+        ["uncertain_but_curious", "你只答應再來一次。走進入口時，後兩個空白格仍沒有答案。"],
+        ["independent_play", "你先在公園投了幾球，仍照紙角記下的時間走到少棒場門口。"]
+      ]);
+      const noticed = hasFlag("learned_from_peer")
+        ? "山本教練看過你模仿高橋的第一步。"
+        : hasFlag("prove_self")
+          ? "山本教練看過你要求用相同速度再做一次，也記得那次偏出的回傳。"
+          : "山本教練看過你離開白線，也看見你今天仍回到門口。";
+      return `${returnReason}\n\n${noticed}他沒有先問你想守哪裡，只從球袋拿出一顆球放進你手裡：『不用證明你比誰厲害。做一次，讓我看你怎麼學。』\n\n他示範跨步、接球、握住縫線，再把原來的位置空給你。`;
+    },
     choices: [
-      C("照他的示範慢慢重做", { observe: 1, ballSense: 1, coachAttention: 2 }, ["coach_trial_observe"], "教練注意到你願意修正動作。"),
-      C("照自己的感覺快速完成", { instinct: 2, ballSense: 1, coachAttention: 1 }, ["coach_trial_instinct"], "你的動作很生，但身體反應讓教練多看了一眼。"),
-      C("請教練再示範一次", { observe: 1, pressure: 1, coachAttention: 1 }, ["asked_demo"], "你承認自己沒看懂，並要求再學一次。")
+      C("站到他的鞋印上，照示範順序慢慢重做", { observe: 1, ballSense: 1, coachAttention: 2 }, ["coach_trial_observe"], "你第一次漏了握球，第二次按跨步、接球、換手的順序完成。教練在紙上畫了兩個記號。"),
+      C("接到球就照自己的節奏快速傳回去", { instinct: 2, ballSense: 1, coachAttention: 1 }, ["coach_trial_instinct"], "球很快離手，落點偏到右側。教練沒有叫停，只把下一球送得更急。"),
+      C("把球放回原位，請教練再示範一次換手", { observe: 1, pressure: 1, coachAttention: 1 }, ["asked_demo"], "山本教練沒有重做整套，只把換手放慢一次。輪到你時，他的筆停在紙上等結果。")
     ]
   },
   day5_afternoon: {
-    title: "隊友或自己",
-    text: "練習結束後，有人邀你一起收球，也有人留在場邊加練。你只能選一邊。",
+    title: "球袋與十顆球",
+    scene: "第 5 天・收操後｜器材室與打擊網之間",
+    text() {
+      const coachEcho = getChapterOneEcho([
+        ["coach_trial_observe", "練習表上留著你第二次按順序完成的兩個記號。"],
+        ["coach_trial_instinct", "最後那顆偏右的快傳仍躺在界外線旁。"],
+        ["asked_demo", "你腦中還留著山本教練放慢換手的那一下。"]
+      ]);
+      return `${coachEcho}\n\n收操口令響起後，阿哲拖著球袋往器材室走，喊你扶住快滑落的一端。另一邊，高橋在打擊網前排好十顆球，準備把剛才不滿意的動作再做一輪。\n\n山本教練已轉身整理明天的紅白分組。收球、觀察別人，或多做自己的十次，現在只能先完成一邊。`;
+    },
     choices: [
-      C("和大家一起收球聊天", { confidence: 1, ballSense: 1, resilience: 1 }, ["joined_kids"], "你開始記住幾個隊友的名字。"),
-      C("觀察大家各自擅長什麼", { observe: 2, coachAttention: 1 }, ["scouted_kids"], "你在隊伍裡尋找自己可能的位置。"),
-      C("留下來獨自多做幾次", { fitness: 2, instinct: 1, pressure: 1 }, ["solo_grind"], "你想靠多做幾次縮短和別人的距離。")
+      C("扶住阿哲的球袋，跟大家一起把器材收完", { confidence: 1, ballSense: 1, resilience: 1 }, ["joined_kids"], "你從器材室走回來時，已能把幾個名字和他們搬走的手套對上。阿哲把明天集合的位置指給你。"),
+      C("站在分組白板旁，記下每個人被放在哪裡", { observe: 2, coachAttention: 1 }, ["scouted_kids"], "你看見高橋的名字被寫在內野前列，也看見自己仍在待分組欄。山本教練發現你沒有只看高橋。"),
+      C("把十顆球排在網前，留下來重做自己的動作", { fitness: 2, instinct: 1, pressure: 1 }, ["solo_grind"], "器材室的聲音漸漸停下，你才完成第十次。離開前，手臂已比開始時更沉。")
     ]
   },
   day6_morning: {
-    title: "小型練習賽",
-    text: "教練讓你們分隊做短短的練習。這不是正式比賽，但第一次有人會記得你的結果。",
+    title: "第一次紅白對抗",
+    scene: "第 6 天・上午｜少棒場・紅白分組線",
+    text() {
+      const preparation = getChapterOneEcho([
+        ["joined_kids", "你照阿哲昨天指的位置放好水壺，也知道紅隊的球袋該搬到哪一側。"],
+        ["scouted_kids", "白板上的名字和昨天相同；你已知道高橋會先站哪裡，也知道自己還在候補欄。"],
+        ["solo_grind", "你比集合時間早到，前臂仍留著昨天十次加練後的沉重。"]
+      ]);
+      return `${preparation}\n\n山本教練用紅、白兩色把孩子分開，做三局短對抗。記分板很小，卻第一次會把接住、漏掉和沒有輪到你的結果留到收操。\n\n教練叫到候補名字時，場內、記分板旁和隔壁公園都在你看得見的位置。`;
+    },
     choices: [
-      C("主動站進場內", { confidence: 2, coachAttention: 1, pressure: 1 }, ["played_scrimmage"], "你在緊張中站進了場內。"),
-      C("先在旁邊研究每個人的站位", { observe: 2, coachAttention: 1 }, ["scrimmage_observer"], "你從場邊看見了比賽的秩序。"),
-      C("回公園用自己的方式玩球", { instinct: 2, ballSense: 1, pressure: -1 }, ["park_over_scrimmage"], "你暫時離開制度，卻沒有離開棒球。")
+      C("聽見候補名字後，跨過白線站進場內", { confidence: 2, coachAttention: 1, pressure: 1 }, ["played_scrimmage"], "你把手套拍了兩下，站到教練指的位置。第一局沒有球過來，你仍跟著每次揮棒移動。"),
+      C("留在記分板旁，把每球後的站位畫下來", { observe: 2, coachAttention: 1 }, ["scrimmage_observer"], "你沒有上場，卻在第三局前指出二壘後方連續空了兩次。教練把鉛筆轉過來，要你繼續記。"),
+      C("留在界外牆邊接短彈，用自己的節奏等候補口令", { instinct: 2, ballSense: 1, pressure: -1 }, ["park_over_scrimmage"], "你沒有離開紅白賽。牆把短彈照原角度送回來；聽見候補口令時，你停球、戴好手套，回到山本教練看得見的白線後。")
     ]
   },
   day6_afternoon: {
-    title: "一顆關鍵球",
-    text: "一顆不規則彈跳的滾地球朝你過來。它不會決定勝負，卻可能決定你怎麼記住今天。",
+    title: "最後一顆不規則彈跳",
+    scene: "第 6 天・午後｜紅白賽最後半局・三壘方向",
+    text() {
+      const entry = getChapterOneEcho([
+        ["played_scrimmage", "最後半局，打者把球打向你站的三壘方向。"],
+        ["scrimmage_observer", "最後半局結束前，山本教練收起記分板：『看了這麼久，最後一球你來。』你被叫到三壘方向。"],
+        ["park_over_scrimmage", "最後半局前，候補口令傳到界外牆邊。你停下短彈，回到白線後；山本教練只指向三壘：『補進去。』"]
+      ]);
+      return `${entry}\n\n球先撞上一小塊硬土，第二次彈跳突然抬高。阿哲在一壘方向張開手套，高橋從你右側移動過來，卻沒有越過你的處理線。\n\n這一球不會改寫紅白賽勝負，但所有人都停在自己的位置，等你決定第一步往哪裡走。`;
+    },
     choices: [
-      C("往前迎球，搶在彈跳前處理", { ballSense: 2, confidence: 1, pressure: 1 }, ["attacked_ball"], "你向球迎了上去，不再只是等待。"),
-      C("先讀彈跳，再移動腳步", { observe: 2, ballSense: 1 }, ["read_bounce"], "你看清彈跳，用判斷補足反應。"),
-      C("用身體擋住，不讓球過去", { resilience: 2, instinct: 1 }, ["body_block"], "球打在身上有點痛，但你把它留在面前。")
+      C("向前跨兩步，搶在高彈跳之前迎球", { ballSense: 2, confidence: 1, pressure: 1 }, ["attacked_ball"], "你在球抬高前把手套壓下去。回傳偏低，阿哲向前一步，讓球留在一壘前。"),
+      C("退半步看清第二次彈跳，再移動手套", { observe: 2, ballSense: 1 }, ["read_bounce"], "你讓高彈跳先越過最難的位置，再從側面接住。高橋停下腳步，把回傳路線留給你。"),
+      C("跪下把身體留在球後方，不讓它穿過去", { resilience: 2, instinct: 1 }, ["body_block"], "球撞在大腿外側，落在手套前。你把它撿起時，紅土已黏在護膝和襪子上。")
     ]
   },
   day7_morning: {
-    title: "最後一天的問題",
-    text: "教練問你：『這一週過後，你想怎麼繼續？』這次沒有人能替你回答。",
+    title: "圍欄前的問題",
+    scene: "第 7 天・上午｜少棒場入口・練習表旁",
+    text() {
+      const rememberedBall = getChapterOneEcho([
+        ["attacked_ball", "昨天那次向前跨出的鞋印已被整平，鞋帶縫裡卻還卡著一點紅土。"],
+        ["read_bounce", "你帶著昨晚畫下的兩次彈跳，紙角已被手指捏得發軟。"],
+        ["body_block", "大腿外側還留著淡淡的球印；那顆球最後沒有穿過你。"]
+      ]);
+      return `${rememberedBall}\n\n練習開始前，山本教練把你叫到入口。第一天你站在圍欄外，今天阿哲在場內整理手套，高橋已排到第一組；家人停在原本等你的地方。\n\n教練把空白練習表壓在球袋上：『這一週結束後，你下一次準備怎麼來？』紙上還沒有你的名字。`;
+    },
     choices: [
-      C("主動問能不能加入球隊", { confidence: 2, coachAttention: 2 }, ["wants_team", "asked_to_join"], "你親口向教練爭取加入球隊。"),
-      C("問教練自己最該先學什麼", { observe: 2, coachAttention: 2 }, ["wants_team", "asked_good_question"], "你用一個問題表達了留下來的意願。"),
-      C("說想繼續在公園自由玩球", { instinct: 2, ballSense: 1 }, ["wants_free_baseball"], "你選擇繼續靠近棒球，但不急著進入球隊。")
+      C("把練習表拉近，問下週能不能一起報到", { confidence: 2, coachAttention: 2 }, ["wants_team", "asked_to_join"], "你親口說出下週想來。山本教練沒有立刻答應，只在空白欄寫下你的名字。"),
+      C("攤開昨晚記的那顆球，問自己應先修哪一步", { observe: 2, coachAttention: 2 }, ["wants_team", "asked_good_question"], "山本教練在紙上圈出第一步和手套位置，接著把下次集合時間寫在旁邊。"),
+      C("把借來的手套交回去，說明天仍會去公園投球", { instinct: 2, ballSense: 1 }, ["wants_free_baseball"], "你沒有把名字寫進固定練習欄。教練仍在紙角留下開門時間：『想再看時，從那道門進來。』")
     ]
   },
   day7_afternoon: {
-    title: "第一週的答案",
-    text: "夕陽落在紅土上。你沒有突然成為厲害的球員，但這七天留下的每一個選擇，已經讓你和第一天不太一樣。",
+    title: "圍欄內側",
+    scene: "第 7 天・午後｜三壘側圍欄・練習結束後",
+    text() {
+      const threshold = getChapterOneEcho([
+        ["asked_to_join", "收操後，山本教練把寫有你名字和集合時間的練習表撕下一角。阿哲從場內替你把門推開。"],
+        ["asked_good_question", "紙角上圈著『第一步』，旁邊是下一次集合時間。山本教練要你到時帶著同一個問題回來。"],
+        ["wants_free_baseball", "你把借來的手套交還阿哲，自己的球仍夾在手臂下。山本教練留下的開門時間寫在一張小紙上。"]
+      ]);
+      const commitment = hasFlag("wants_free_baseball")
+        ? "你還沒有成為球員，也沒有答應固定報到。紙上寫的只是一次開放練習；離開前，你只需要決定要不要把這個日期帶走。"
+        : "你還沒有正式成為球員。離開前，你只需要決定要不要把寫著下一次練習日期的紙帶走。";
+      return `${threshold}\n\n夕陽把鐵網的影子拉進紅土。第一天你只在外面跟著球移動目光；現在你知道入口在哪裡、場內的人叫什麼名字，也知道六步外的球會在哪一刻變快。\n\n${commitment}`;
+    },
     choices: [
-      C("把這一週記在心裡", { resilience: 1 }, ["finished_first_week"], "你記住了自己第一次真正靠近棒球的夏天。", { finishChapterOne: true })
+      C("把紙折好，收進口袋", { resilience: 1 }, ["finished_first_week"], "你走出球場時，紙角貼在口袋內側。圍欄留在身後，上面寫的是下一次走進球場的時間。", { finishChapterOne: true })
     ]
   },
   ending: {
-    title: "第一章小結：你靠近棒球的方式",
-    text() { return `${player.ending}\n\n${player.endingDetail}\n\n這一週沒有決定你會不會成為職棒球員，卻決定了你第一次靠近棒球的姿態。`; },
+    title: "第一章小結：圍欄內外",
+    scene: "第一週結束｜口袋裡的下一次日期",
+    text() { return `${player.ending}\n\n${player.endingDetail}\n\n鞋底的紅土會被洗掉，口袋裡那張紙卻還留著。你跨過的不是成為球員的終點，只是從好奇走到願意再來一次的距離。`; },
     choices: [
       { text: "進入第二章：少棒入門", nextChapter: "chapter2" },
       { text: "以另一種方式重新開始", restart: true }
@@ -144,21 +266,26 @@ const chapterOneEvents = {
 
 const chapterTwoEvents = {
   chapter2_intro: {
-    title: "少棒隊的第一天",
+    title: "少棒隊的開放練習",
     text() {
       const intros = {
         "主動入隊": "你是自己走到教練面前的孩子。教練記得你爭取機會的眼神。",
         "觀察型入隊": "你不是最吵、最衝的孩子，但教練記得你問過的問題。",
-        "公園野球": "你習慣在公園自由玩球。現在，棒球第一次有了隊形與規矩。",
+        "公園野球": "你習慣在公園自由玩球。今天不是報到，只是把那張紙上的一次機會走完。",
         "看球分析型": "你看懂不少細節，但今天必須把理解變成身體動作。",
         "暫時退開": "你曾經退開，這一次家人只陪你再來看看，沒有催促。"
       };
-      return `${intros[player.chapterOneEnding] || "你還不確定自己是哪種孩子，但你又回到了球場。"}\n\n教練把球放進你手裡：『先讓我看看你怎麼接球、怎麼丟球、怎麼面對失誤。』`;
+      const threshold = hasFlag("asked_to_join")
+        ? "到了紙上寫的集合時間，你從入口走進去，阿哲已把球袋放在昨天指過的位置。"
+        : hasFlag("asked_good_question")
+          ? "你攤開紙角上圈著『第一步』的記號，照山本教練留下的時間回到球場。"
+          : "紙角上不是固定集合時間，只寫著一次開放練習。你先在公園投完自己的球，才照時間走到少棒場；家人停在門外，沒有替你進去。";
+      return `${threshold}\n\n${intros[player.chapterOneEnding] || "你還不確定自己是哪種孩子，但你又回到了球場。"}\n\n山本教練把一顆球放進你手裡：『今天先做一組。三球之後，要不要排進下一輪，由你自己決定。先讓我看看你怎麼接、怎麼丟、怎麼處理沒接好的下一球。』`;
     },
     choices: [
-      C("認真照基本動作做", { observe: 1, ballSense: 1, coachAttention: 1 }, ["chapter2_basic_training"], "你開始接受正式訓練。", { skillEffects: { catching: 1, baseballIQ: 1 } }),
-      C("先照自己的感覺接球", { instinct: 1, ballSense: 2, pressure: 1 }, ["chapter2_raw_style"], "教練看得出你有球感，也看得出動作還很生。", { skillEffects: { catching: 1, throwing: 1 } }),
-      C("先看其他人怎麼做", { observe: 2, confidence: -1, pressure: 1 }, ["chapter2_watch_first"], "你先觀察其他孩子的動作。", { skillEffects: { baseballIQ: 2 } })
+      C("站進第一組，照基本動作做完三球", { observe: 1, ballSense: 1, coachAttention: 1 }, ["chapter2_basic_training"], "第三球傳回去後，你沒有走向出口。你把球交給下一個人，排進第二輪；山本教練把你的名字留在練習表上。", { skillEffects: { catching: 1, baseballIQ: 1 } }),
+      C("站進第一組，用自己的節奏接完三球", { instinct: 1, ballSense: 2, pressure: 1 }, ["chapter2_raw_style"], "動作還很生，三球卻都由你自己處理。你把自己的球收進袋裡，留在隊伍中等下一輪。", { skillEffects: { catching: 1, throwing: 1 } }),
+      C("在線旁看完前兩人，再走進去接三球", { observe: 2, confidence: -1, pressure: 1 }, ["chapter2_watch_first"], "輪到你時，你自己跨進白線。三球結束後，你沒有退回門外，而是站到第二輪隊伍的末端。", { skillEffects: { baseballIQ: 2 } })
     ]
   },
   chapter2_day1_training: {
@@ -1513,18 +1640,75 @@ const pacingEvents = {
 
 function getNightEvent() {
   const latest = player.memories[player.memories.length - 1] || "你還在回想今天發生的事。";
-  const reflections = {
-    1: player.confidence > player.observe ? "你反覆想著白天那些看向自己的目光。想被看見和害怕出糗，原來可以同時存在。" : "你閉上眼，仍能看見每個人的腳步。你開始習慣先理解，再決定要不要靠近。",
-    2: hasFlag("park_ball") ? "公園裡沒有名單，但你第一次知道自由和球隊規矩帶來的是兩種不同快樂。" : "第二次回到球場後，那裡不再只是陌生人的練習地。",
-    3: hasFlag("backed_off") ? "被笑的聲音已經變小，身體卻還記得當時想退開的感覺。" : "漏接沒有消失，但你開始記得自己是怎麼準備下一球。",
-    4: hasFlag("family_promise") ? "你和家人的約定還很小，卻讓明天不再只是臨時起意。" : "你還沒有答應任何人，只知道棒球已經占據越來越多睡前時間。",
-    5: hasFlag("solo_grind") ? "你想靠多做幾次追上別人，也第一次感覺到努力可能把人留在自己的世界裡。" : "隊友的名字開始和球場上的位置連在一起。",
-    6: hasFlag("played_scrimmage") ? "比賽很短，輪到自己的那一秒卻比整個下午都長。" : "你從場邊看完一場練習，仍在想如果站進去會發生什麼。"
+  const passages = {
+    1: {
+      title: "鞋底上的紅土",
+      scene: "第 1 天・傍晚｜家門口",
+      text: `${latest}\n\n回到家門口，你脫鞋時，一小塊紅土從鞋底縫裡掉到地板上。家人把它掃進畚箕，問你明天還要不要經過那座球場。\n\n你沒有立刻回答，只把鞋尖朝向門外，留在明早第一眼就能看見的位置。`,
+      choice: "把鞋留在門邊，明天再決定往哪裡走"
+    },
+    2: {
+      title: "約好的三球",
+      scene: "第 2 天・傍晚｜少棒場出口",
+      text: `${latest}\n\n離開前，阿哲把借用手套掛回圍欄。${getChapterOneEcho([
+        ["admitted_interest", "他指著界外區最短的白線：『明早先從這裡三球。』"],
+        ["slow_warm", "他說會先讓你看完一組，再把手套放到最短的白線後方。"],
+        ["asked_teammate", "他重新說了一次排隊順序，要你明早直接站到隊伍最後。"]
+      ])}\n\n球場鐵門關上時，你已經知道下一次要從哪裡進去。`,
+      choice: "記住集合位置，隔天按約定回來"
+    },
+    3: {
+      title: "彈跳畫在紙上",
+      scene: "第 3 天・夜｜家中餐桌",
+      text: `${latest}\n\n晚餐後，你把一張廢紙放在桌上。${getChapterOneEcho([
+        ["ignored_laugh", "你沒有寫下笑聲，只畫了一條白線和朝前打開的手套，提醒自己明天先站回原位。"],
+        ["analyzed_failure", "你照紅土上的短線畫出最後兩次彈跳，圈起球突然抬高的位置。"],
+        ["backed_off", "你把水壺放在紙旁，重新綁好明天要穿的鞋帶；家人沒有問你是不是還怕。"]
+      ])}\n\n紙畫得不像球場，卻足以讓你明天找到要站的地方。`,
+      choice: "把紙壓在水壺下面，明天帶回球場"
+    },
+    4: {
+      title: "月曆上的第一個圈",
+      scene: "第 4 天・傍晚｜家中廚房",
+      text: `${latest}\n\n冰箱上的月曆被風吹得掀起一角。${getChapterOneEcho([
+        ["family_promise", "三個練習格都已圈好，第一個旁邊還寫著水壺和集合時間。"],
+        ["uncertain_but_curious", "只有下一次練習被圈起來，後面兩格仍是空白。"],
+        ["independent_play", "週末留給公園，紙角則保留少棒場開門的時間。"]
+      ])}\n\n日子往下一格移動。等那個圈到來時，你照自己留下的記號出門。`,
+      choice: "到了記下的時間，帶著水壺去球場"
+    },
+    5: {
+      title: "白板上的兩種顏色",
+      scene: "第 5 天・收操後｜少棒場出口",
+      text: `${latest}\n\n離開前，山本教練把明天的紅白分組夾上白板。${getChapterOneEcho([
+        ["joined_kids", "阿哲告訴你紅隊球袋放哪裡，順便把你的水壺移到集合線旁。"],
+        ["scouted_kids", "你把白板上的名字重新看了一次，記住高橋和自己的位置。"],
+        ["solo_grind", "你完成第十次加練才抬頭，白板前已經沒有其他人，手臂也比平常更沉。"]
+      ])}\n\n紅、白兩色沒有保證誰會上場，只把明天第一次有記錄的對抗放到了眼前。`,
+      choice: "記住分組與集合線，隔天按時間到場"
+    },
+    6: {
+      title: "手套裡的一小塊紅土",
+      scene: "第 6 天・夜｜家中書桌",
+      text: `${latest}\n\n你把手套放到書桌上，掌心掉出一小塊紅土。${getChapterOneEcho([
+        ["attacked_ball", "你用兩根手指在紙上畫出向前的兩步，也畫下阿哲向前接低傳的位置。"],
+        ["read_bounce", "你畫了第一下與第二下彈跳，讓兩個落點保持原來的距離。"],
+        ["body_block", "大腿外側還有淡淡的球印；你把沾在護膝上的紅土倒進手套，沒有把那球擦掉。"]
+      ])}\n\n明天山本教練會問這一週之後的安排。你把紙和手套放在一起，準備帶著實際發生過的那一球去回答。`,
+      choice: "把手套扣好，明天帶著那顆球去找教練"
+    }
+  };
+  const passage = passages[player.day] || {
+    title: `第 ${player.day} 天的收尾`,
+    scene: `第 ${player.day} 天・夜｜家中`,
+    text: `${latest}\n\n今天留下的事暫時停在這裡。`,
+    choice: "休息，進入明天"
   };
   return {
-    title: `第 ${player.day} 天晚上`,
-    text: `晚上，你躺在床上。\n\n${latest}\n\n${reflections[player.day] || "棒球像一面鏡子，慢慢照出你是什麼樣的孩子。"}`,
-    choices: [{ text: "睡覺，進入明天", sleep: true }]
+    title: passage.title,
+    scene: passage.scene,
+    text: passage.text,
+    choices: [{ text: passage.choice, sleep: true }]
   };
 }
 

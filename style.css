@@ -410,6 +410,30 @@ button:active{
     margin-bottom:12px;
 }
 
+.chapter-one-scene-context{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:-2px 0 18px;
+    color:#4f463e;
+    font-size:16px;
+}
+
+.chapter-one-scene-context small{
+    flex:0 0 auto;
+    padding:3px 7px;
+    border:1px solid rgba(91,75,61,.28);
+    border-radius:999px;
+    color:#766657;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.08em;
+}
+
+.chapter-one-scene-context span{
+    line-height:1.5;
+}
+
 .event-card h2{
     margin:0 0 20px;
     font-size:32px;
@@ -1151,6 +1175,13 @@ button:active{
     .choice-outcome-result p,
     .choice-outcome-reaction p{
         font-size:18px;
+    }
+
+    .chapter-one-scene-context{
+        align-items:flex-start;
+        flex-direction:column;
+        gap:6px;
+        font-size:15px;
     }
 
     #characterCreation input{
