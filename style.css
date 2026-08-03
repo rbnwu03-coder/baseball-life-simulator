@@ -433,28 +433,41 @@ button:active{
     margin-bottom:12px;
 }
 
+.scene-context,
 .chapter-one-scene-context{
     display:flex;
-    align-items:center;
-    gap:10px;
-    margin:-2px 0 18px;
+    align-items:stretch;
+    flex-wrap:wrap;
+    gap:8px 14px;
+    margin:-2px 0 16px;
+    padding:10px 12px;
+    border:1px solid rgba(91,75,61,.18);
+    border-radius:10px;
+    background:rgba(247,240,229,.72);
     color:#4f463e;
-    font-size:16px;
+    font-size:15px;
 }
 
-.chapter-one-scene-context small{
+.scene-context__item{
+    display:flex;
+    align-items:baseline;
+    min-width:0;
+    gap:7px;
+}
+
+.scene-context__label{
     flex:0 0 auto;
-    padding:3px 7px;
-    border:1px solid rgba(91,75,61,.28);
-    border-radius:999px;
     color:#766657;
-    font-size:12px;
+    font-size:11px;
     font-weight:700;
     letter-spacing:.08em;
 }
 
-.chapter-one-scene-context span{
+.scene-context__value{
+    min-width:0;
     line-height:1.5;
+    font-weight:650;
+    overflow-wrap:anywhere;
 }
 
 .event-card h2{
@@ -1202,11 +1215,17 @@ button:active{
         font-size:18px;
     }
 
+    .scene-context,
     .chapter-one-scene-context{
-        align-items:flex-start;
         flex-direction:column;
         gap:6px;
-        font-size:15px;
+        padding:9px 10px;
+        font-size:14px;
+    }
+
+    .scene-context__item{
+        align-items:flex-start;
+        width:100%;
     }
 
     #characterCreation input{

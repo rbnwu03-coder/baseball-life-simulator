@@ -3099,6 +3099,89 @@ function showCurrentEvent() {
   showStory(getCurrentEventId());
 }
 
+function getCompetitionPresentationContext(eventId) {
+  const match = player.matchState || {};
+  return {
+    matchState: {
+      inning: match.inning,
+      half: match.half,
+      outs: match.outs,
+      runners: Array.isArray(match.runners) ? match.runners.slice(0, 3) : [],
+      awayScore: match.awayScore,
+      homeScore: match.homeScore
+    },
+    abilities: {
+      pressure: player.pressure,
+      observe: player.observe,
+      baseballIQ: player.baseballSkills?.baseballIQ
+    },
+    seasonPosition: player.seasonPosition,
+    seasonPerformance: player.seasonPerformance,
+    seasonErrors: player.seasonErrors,
+    previousPlayTransition: eventId === "youth_match_mistake" && typeof getYouthPreviousPlayEcho === "function"
+      ? getYouthPreviousPlayEcho().summary
+      : ""
+  };
+}
+
+function getSceneContext(eventId, event) {
+  let chapterLabel = typeof player.chapter === "string" ? player.chapter : "";
+  let timeLabel = typeof getTimeLabel === "function" ? getTimeLabel() : "";
+  let sceneLabel = typeof event?.scene === "string" && event.scene.trim()
+    ? event.scene
+    : "";
+  let competitionModel = null;
+
+  if (
+    typeof CompetitionPresentation === "object" &&
+    typeof CompetitionPresentation.createPresentation === "function"
+  ) {
+    competitionModel = CompetitionPresentation.createPresentation(
+      eventId,
+      getCompetitionPresentationContext(eventId)
+    );
+  }
+
+  if (competitionModel) {
+    chapterLabel = competitionModel.competitionTitle || chapterLabel;
+    if (
+      competitionModel.showScore &&
+      competitionModel.matchState?.inning > 0
+    ) {
+      timeLabel = `${competitionModel.matchState.inning} 局${competitionModel.matchState.half || ""}`;
+    }
+    if (!sceneLabel) {
+      sceneLabel = competitionModel.stageLabel || competitionModel.type?.label || "";
+    }
+  }
+
+  return Object.freeze({
+    chapterLabel,
+    timeLabel,
+    sceneLabel,
+    isCompetition: Boolean(competitionModel)
+  });
+}
+
+function renderSceneContext(context) {
+  if (!context || typeof context !== "object") return "";
+  const items = [
+    ["chapter", "章節／階段", context.chapterLabel],
+    ["time", "時間", context.timeLabel],
+    ["location", "場景", context.sceneLabel]
+  ].filter(([, , value]) => typeof value === "string" && value.trim());
+
+  if (!items.length) return "";
+
+  const content = items.map(([type, label, value]) => `
+    <div class="scene-context__item scene-context__${type}">
+      <small class="scene-context__label">${escapeHtml(label)}</small>
+      <span class="scene-context__value">${escapeHtml(value)}</span>
+    </div>`).join("");
+
+  return `<div class="scene-context chapter-one-scene-context" aria-label="場景資訊">${content}</div>`;
+}
+
 function showStory(eventId) {
   ensureIncrementalSystems();
   queueAzheAdultRecordEcho(eventId);
@@ -3137,11 +3220,11 @@ function showStory(eventId) {
   if (aspirationText) text += `\n\n【看見的新可能】\n${aspirationText}`;
   if (chapterEnding) text += `\n\n${chapterEnding}`;
   if (replayEcho) text += `\n\n${replayEcho}`;
+  const sceneContextHtml = renderSceneContext(getSceneContext(eventId, event));
   const competitionFrame = renderCompetitionPresentation(eventId);
   const bridgeInHtml = bridgeIn ? `<div class="story-bridge-in"><small>承接上一回</small>${escapeHtml(bridgeIn)}</div>` : "";
   const bridgeOutHtml = bridgeOut ? `<div class="story-bridge-out"><small>接下來</small>${escapeHtml(bridgeOut)}</div>` : "";
-  const sceneContextHtml = event.scene ? `<div class="chapter-one-scene-context"><small>此刻</small><span>${escapeHtml(event.scene)}</span></div>` : "";
-  document.getElementById("story").innerHTML = `<article class="event-card">${competitionFrame}<div class="event-kicker">${escapeHtml(getTimeLabel())}</div>${sceneContextHtml}${bridgeInHtml}<h2>${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div>${bridgeOutHtml}</article>`;
+  document.getElementById("story").innerHTML = `<article class="event-card">${sceneContextHtml}${competitionFrame}${bridgeInHtml}<h2>${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div>${bridgeOutHtml}</article>`;
   document.getElementById("choices").innerHTML = event.choices.map((choice, index) => `<button type="button" onclick="choose('${eventId}', ${index})">${escapeHtml(choice.text)}</button>`).join("");
   updateStatus();
   if (player.goalState?.recentProgress?.length) {
@@ -3168,28 +3251,10 @@ function renderCompetitionPresentation(eventId) {
   ) {
     return "";
   }
-  const match = player.matchState || {};
-  return CompetitionPresentation.render(eventId, {
-    matchState: {
-      inning: match.inning,
-      half: match.half,
-      outs: match.outs,
-      runners: Array.isArray(match.runners) ? match.runners.slice(0, 3) : [],
-      awayScore: match.awayScore,
-      homeScore: match.homeScore
-    },
-    abilities: {
-      pressure: player.pressure,
-      observe: player.observe,
-      baseballIQ: player.baseballSkills?.baseballIQ
-    },
-    seasonPosition: player.seasonPosition,
-    seasonPerformance: player.seasonPerformance,
-    seasonErrors: player.seasonErrors,
-    previousPlayTransition: eventId === "youth_match_mistake" && typeof getYouthPreviousPlayEcho === "function"
-      ? getYouthPreviousPlayEcho().summary
-      : ""
-  });
+  return CompetitionPresentation.render(
+    eventId,
+    getCompetitionPresentationContext(eventId)
+  );
 }
 
 function getTimeLabel() {
