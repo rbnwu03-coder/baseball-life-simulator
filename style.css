@@ -42,6 +42,12 @@ body{
     color:#251f1a;
 }
 
+body.creation-mode .debug-bookmarks,
+body.creation-mode .main-layout,
+body.creation-mode .bottom-panel{
+    display:none;
+}
+
 .eyebrow{
     margin:0 0 6px;
     color:#8a3f2b;
@@ -144,6 +150,23 @@ button:hover{
 button:active{
     transform:translateY(1px);
     box-shadow:none;
+}
+
+#choices.is-transitioning button:disabled{
+    cursor:wait;
+    border-color:#8d8176;
+    background:#e8dfd1;
+    color:#5f554c;
+    box-shadow:none;
+    transform:none;
+    opacity:.86;
+}
+
+#choices.is-transitioning button:disabled:hover,
+#choices.is-transitioning button:disabled:active{
+    background:#e8dfd1;
+    box-shadow:none;
+    transform:none;
 }
 
 .save-buttons button{
@@ -449,8 +472,9 @@ button:active{
     margin-top:18px;
     padding:12px 18px;
     min-height:78px;
-    max-height:78px;
-    overflow:hidden;
+    height:auto;
+    overflow:visible;
+    overflow-wrap:anywhere;
     font-size:20px;
     font-weight:bold;
     color:#222;
@@ -464,9 +488,10 @@ button:active{
     font-weight:500;
     color:#5d5147;
     margin-bottom:6px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    white-space:normal;
+    overflow:visible;
+    text-overflow:clip;
+    overflow-wrap:anywhere;
 }
 
 .notice{

@@ -176,6 +176,25 @@ function selectIdealSelf(type) {
   }
 }
 
+function setChoiceTransitionState(locked) {
+  const choices = document.getElementById("choices");
+  if (!choices) return;
+
+  if (locked) choices.classList?.add?.("is-transitioning");
+  else choices.classList?.remove?.("is-transitioning");
+
+  choices.querySelectorAll?.("button").forEach(button => {
+    button.disabled = Boolean(locked);
+    if (locked) button.setAttribute?.("aria-disabled", "true");
+    else button.removeAttribute?.("aria-disabled");
+  });
+}
+
+function syncGameUiVisibility() {
+  const hasCreatedPlayer = Boolean(player?.name);
+  document.body?.classList?.toggle?.("creation-mode", !hasCreatedPlayer);
+}
+
 function loadTestBookmark(bookmark) {
   const name = document.getElementById("nameInput").value.trim() || "測試球員";
   player = createInitialPlayer(name);
@@ -1109,6 +1128,7 @@ function getYouthSeasonOutcomeReaction(eventId) {
 function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
   pendingYouthSeasonOutcome = { eventId };
   const competitionFrame = renderCompetitionPresentation(eventId);
+  setChoiceTransitionState(false);
   document.getElementById("story").innerHTML = `
     <article class="event-card choice-outcome-card">
       ${competitionFrame}
@@ -1201,6 +1221,7 @@ function choose(eventId, index) {
   }
 
   isTransitioning = true;
+  setChoiceTransitionState(true);
   const before = getPlayerSnapshot();
   const originalAzheArc = player.characterArc?.azhe || "neutral";
   applyConsequenceAtEvent(eventId);
@@ -3074,6 +3095,7 @@ function evaluateDevelopmentYears() {
 function showCurrentEvent() {
   pendingYouthSeasonOutcome = null;
   isTransitioning = false;
+  setChoiceTransitionState(false);
   showStory(getCurrentEventId());
 }
 
@@ -3441,6 +3463,7 @@ function auditSkillGrowthSources() {
 }
 
 function updateStatus() {
+  syncGameUiVisibility();
   clampStats();
   updateImpression();
   updateGoals(player.forcedEventId || getCurrentEventId());
