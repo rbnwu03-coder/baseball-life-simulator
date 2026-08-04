@@ -496,6 +496,30 @@ button:active{
     border-radius:12px;
 }
 
+#changeLog:empty{
+    display:none;
+}
+
+#changeLog.outcome__feedback{
+    border:1px solid #cdbb9f;
+    border-left:6px solid #8b745d;
+    background:#f4eee4;
+    color:#40372f;
+}
+
+.outcome-feedback__label{
+    margin-bottom:8px;
+    color:#766657;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.08em;
+}
+
+.outcome-feedback__content{
+    min-width:0;
+    overflow-wrap:anywhere;
+}
+
 .memory-line{
     font-size:16px;
     font-weight:500;
@@ -533,9 +557,13 @@ button:active{
     line-height:1.45;
 }
 
+.outcome,
 .choice-outcome-card{
+    min-width:0;
+    max-width:100%;
     border-color:#6c5138;
     background:#fffdf7;
+    overflow-wrap:anywhere;
 }
 
 .choice-outcome-kicker{
@@ -543,26 +571,46 @@ button:active{
     font-weight:800;
 }
 
+.outcome__confirmation,
+.outcome__narrative,
+.outcome__reaction,
+.outcome .outcome__feedback,
 .choice-outcome-action,
 .choice-outcome-result,
 .choice-outcome-reaction,
 .choice-outcome-feedback{
     margin-top:16px;
+    min-width:0;
+    overflow-wrap:anywhere;
 }
 
+.outcome__confirmation,
+.outcome__narrative,
+.outcome__reaction,
 .choice-outcome-action,
-.choice-outcome-result{
+.choice-outcome-result,
+.choice-outcome-reaction{
     padding:16px 18px;
     border-radius:12px;
 }
 
+.outcome__confirmation,
 .choice-outcome-action{
-    background:#efe2c7;
+    border:1px solid #ded0bb;
+    background:#f2eadc;
+    color:#4c4137;
 }
 
+.outcome__narrative,
 .choice-outcome-result{
-    border-left:6px solid #8b5a2b;
+    border-left:7px solid #8b5a2b;
     background:#fff5df;
+}
+
+.outcome__reaction,
+.choice-outcome-reaction{
+    border:1px solid #d8cbb8;
+    background:#f8f4ec;
 }
 
 .choice-outcome-card small{
@@ -574,27 +622,51 @@ button:active{
     letter-spacing:.08em;
 }
 
+.outcome__confirmation strong,
 .choice-outcome-action strong{
     display:block;
     font-size:21px;
     line-height:1.5;
 }
 
+.outcome__narrative p,
 .choice-outcome-result p,
+.outcome__reaction p,
 .choice-outcome-reaction p{
     margin:0;
-    font-size:20px;
     line-height:1.7;
 }
 
+.outcome__narrative p,
+.choice-outcome-result p{
+    color:#2d251f;
+    font-size:22px;
+    font-weight:650;
+}
+
+.outcome__reaction p,
+.choice-outcome-reaction p{
+    color:#51463d;
+    font-size:19px;
+}
+
+.outcome .outcome__feedback,
 .choice-outcome-feedback{
     padding-top:14px;
     border-top:1px solid #d8c5aa;
+    color:#62574c;
     font-size:17px;
     line-height:1.6;
 }
 
+#choices .outcome__action{
+    width:100%;
+    margin-top:24px;
+}
+
 #choices .outcome-continue-button{
+    display:block;
+    max-width:100%;
     text-align:center;
     font-weight:800;
     background:#6c5138;

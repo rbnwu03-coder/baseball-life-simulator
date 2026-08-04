@@ -407,7 +407,7 @@ function loadTestBookmark(bookmark) {
   player.completed = false;
   player.ending = "";
   document.getElementById("characterCreation").style.display = "none";
-  document.getElementById("changeLog").innerHTML = "";
+  clearOutcomeFeedbackPresentation();
   showCurrentEvent();
   showNotice("已載入暫時測試書籤；正式存檔沒有被修改。", "warning");
 }
@@ -460,7 +460,7 @@ function createPlayer() {
   updateImpression();
   player.memories.push(origin.memory);
   document.getElementById("characterCreation").style.display = "none";
-  document.getElementById("changeLog").innerHTML = "";
+  clearOutcomeFeedbackPresentation();
   selectedOrigin = PlayerIdentityOptions.origins[0];
   document.querySelectorAll?.(".origin-card").forEach(card => card.classList.toggle("selected", card.dataset.origin === PlayerIdentityOptions.origins[0]));
   selectIdealSelf("");
@@ -473,7 +473,7 @@ function resetGame() {
   document.getElementById("nameInput").value = "";
   document.getElementById("story").innerHTML = "";
   document.getElementById("choices").innerHTML = "";
-  document.getElementById("changeLog").innerHTML = "";
+  clearOutcomeFeedbackPresentation();
   const feedback = document.getElementById("characterCreationFeedback");
   if (feedback) feedback.textContent = "";
   selectIdealSelf("");
@@ -1085,6 +1085,21 @@ function formatChange(label, value) {
   return `<span class="${className}">${label} ${value >= 0 ? "+" : ""}${value}</span>`;
 }
 
+function setOutcomeFeedbackPresentation(active) {
+  const node = document.getElementById("changeLog");
+  if (!node) return;
+  node.classList?.toggle?.("outcome__feedback", Boolean(active));
+  if (active) node.setAttribute?.("aria-label", "上一個選擇的系統回饋");
+  else node.removeAttribute?.("aria-label");
+}
+
+function clearOutcomeFeedbackPresentation() {
+  const node = document.getElementById("changeLog");
+  if (!node) return;
+  node.innerHTML = "";
+  setOutcomeFeedbackPresentation(false);
+}
+
 function showStatChanges(before, after, memory = "", options = {}) {
   const changes = [];
   Object.entries({ ...statLabels, ...skillLabels }).forEach(([key, label]) => {
@@ -1096,7 +1111,10 @@ function showStatChanges(before, after, memory = "", options = {}) {
   const feedbackHtml = `
     ${memory && options.includeMemory !== false ? `<div class="memory-line">${escapeHtml(memory)}</div>` : ""}
     <div>${changes.length ? changes.join("") : "<span class='neutral-change'>這個選擇留下了記憶，而不是數值。</span>"}</div>${goalHtml}${payoffHtml}`;
-  document.getElementById("changeLog").innerHTML = feedbackHtml;
+  document.getElementById("changeLog").innerHTML = `
+    <div class="outcome-feedback__label">上一個選擇的系統回饋</div>
+    <div class="outcome-feedback__content">${feedbackHtml}</div>`;
+  setOutcomeFeedbackPresentation(true);
   return feedbackHtml;
 }
 
@@ -1128,19 +1146,43 @@ function getYouthSeasonOutcomeReaction(eventId) {
 function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
   pendingYouthSeasonOutcome = { eventId };
   const competitionFrame = renderCompetitionPresentation(eventId);
+  const choiceLabel = typeof choice?.text === "string" ? choice.text.trim() : "";
+  const narrativeOutcome = typeof choice?.memory === "string" ? choice.memory.trim() : "";
+  const reactionValue = getYouthSeasonOutcomeReaction(eventId);
+  const worldReaction = typeof reactionValue === "string" ? reactionValue.trim() : "";
+  const systemFeedback = typeof statFeedbackHtml === "string" ? statFeedbackHtml.trim() : "";
+  const confirmationHtml = choiceLabel ? `
+      <section class="outcome__confirmation choice-outcome-action" aria-label="你的選擇">
+        <small>你選擇</small><strong>${escapeHtml(choiceLabel)}</strong>
+      </section>` : "";
+  const narrativeHtml = narrativeOutcome ? `
+      <section class="outcome__narrative choice-outcome-result" aria-label="事件結果">
+        <small>發生的結果</small><p>${escapeHtml(narrativeOutcome)}</p>
+      </section>` : "";
+  const reactionHtml = worldReaction ? `
+      <section class="outcome__reaction choice-outcome-reaction" aria-label="人物或場上反應">
+        <small>場上的回應</small><p>${escapeHtml(worldReaction)}</p>
+      </section>` : "";
+  const feedbackHtml = systemFeedback ? `
+      <section class="outcome__feedback choice-outcome-feedback" aria-label="系統回饋">
+        <small>狀態變化</small>${systemFeedback}
+      </section>` : "";
   setChoiceTransitionState(false);
   document.getElementById("story").innerHTML = `
-    <article class="event-card choice-outcome-card">
+    <article class="event-card outcome choice-outcome-card" aria-label="選擇結果">
       ${competitionFrame}
       <div class="event-kicker choice-outcome-kicker">行動結果</div>
       <h2>${escapeHtml(getYouthSeasonOutcomeHeading(eventId))}</h2>
-      <div class="choice-outcome-action"><small>你選擇</small><strong>${escapeHtml(choice.text)}</strong></div>
-      <div class="choice-outcome-result"><small>發生的結果</small><p>${escapeHtml(choice.memory || "這個選擇已經完成，並留下後續影響。")}</p></div>
-      <div class="choice-outcome-reaction"><small>場上的回應</small><p>${escapeHtml(getYouthSeasonOutcomeReaction(eventId))}</p></div>
-      <div class="choice-outcome-feedback"><small>狀態變化</small>${statFeedbackHtml}</div>
+      ${confirmationHtml}
+      ${narrativeHtml}
+      ${reactionHtml}
+      ${feedbackHtml}
     </article>`;
-  document.getElementById("changeLog").innerHTML = "";
-  document.getElementById("choices").innerHTML = `<button type="button" class="outcome-continue-button" onclick="continueYouthSeasonOutcome()">繼續</button>`;
+  clearOutcomeFeedbackPresentation();
+  document.getElementById("choices").innerHTML = `
+    <div class="outcome__action" aria-label="前往下一幕">
+      <button type="button" class="outcome-continue-button" onclick="continueYouthSeasonOutcome()">繼續</button>
+    </div>`;
   updateStatus();
 }
 
@@ -1154,6 +1196,7 @@ function continueYouthSeasonOutcome() {
 function showNotice(message, type = "neutral") {
   const node = document.getElementById("changeLog");
   if (!node) return;
+  setOutcomeFeedbackPresentation(false);
   node.innerHTML = `<div class="notice ${type}">${escapeHtml(message)}</div>`;
 }
 
