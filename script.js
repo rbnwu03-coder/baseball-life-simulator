@@ -3540,6 +3540,77 @@ function getBalanceDebugSummary() {
   };
 }
 
+function renderStatusSection(title, content, options = {}) {
+  const safeContent = typeof content === "string" ? content.trim() : "";
+  if (!safeContent) return "";
+  const className = ["status-section", options.className || ""].filter(Boolean).join(" ");
+  return `<details class="${className}"${options.open ? " open" : ""}>
+    <summary>${escapeHtml(title)}</summary>
+    <div class="status-section__content">${safeContent}</div>
+  </details>`;
+}
+
+function renderCurrentGoalSummary() {
+  const trackedGoal = player.goalState?.current;
+  if (trackedGoal?.title) {
+    return `<div class="status-summary__goal">
+      <small>當前目標</small>
+      <strong>${escapeHtml(trackedGoal.title)}</strong>
+      <span>${escapeHtml(getGoalProgressText(trackedGoal))}</span>
+    </div>`;
+  }
+  const fallbackGoal = typeof player.currentGoal === "string" ? player.currentGoal.trim() : "";
+  return fallbackGoal ? `<div class="status-summary__goal"><small>當前目標</small><strong>${escapeHtml(fallbackGoal)}</strong></div>` : "";
+}
+
+function renderCurrentIdentitySummary() {
+  const items = [
+    `<span><small>年齡</small><strong>${Number(player.age) || 0} 歲</strong></span>`,
+    player.chapter ? `<span><small>階段</small><strong>${escapeHtml(player.chapter)}</strong></span>` : "",
+    player.seasonPosition ? `<span><small>守位</small><strong>${escapeHtml(player.seasonPosition)}</strong></span>` : "",
+    player.roleIdentity?.primary ? `<span><small>角色</small><strong>${escapeHtml(player.roleIdentity.primary)}</strong></span>` : "",
+    player.route && player.route !== "尚未定型" ? `<span><small>路線</small><strong>${escapeHtml(player.route)}</strong></span>` : ""
+  ].filter(Boolean);
+  return items.length ? `<div class="status-summary__identity">${items.join("")}</div>` : "";
+}
+
+function renderCurrentBodySummary() {
+  if (!player.body || typeof player.body !== "object") return "";
+  const items = [
+    `<span><small>體力</small><strong>${Number(player.body.stamina) || 0}</strong></span>`,
+    `<span><small>疲勞</small><strong>${Number(player.body.fatigue) || 0}</strong></span>`,
+    Number(player.body.pain) > 0 ? `<span class="is-warning"><small>疼痛</small><strong>${Number(player.body.pain)}</strong></span>` : "",
+    Number(player.body.injuryRisk) > 0 ? `<span class="is-warning"><small>傷病風險</small><strong>${Number(player.body.injuryRisk)}</strong></span>` : "",
+    Number(player.burnout) > 0 ? `<span class="is-warning"><small>倦怠</small><strong>${Number(player.burnout)}</strong></span>` : ""
+  ].filter(Boolean);
+  return items.length ? `<div class="status-summary__body" aria-label="身體狀態">${items.join("")}</div>` : "";
+}
+
+function getCurrentStatusSummary(options = {}) {
+  return {
+    goal: renderCurrentGoalSummary(),
+    identity: renderCurrentIdentitySummary(),
+    body: renderCurrentBodySummary(),
+    pending: typeof options.pendingHtml === "string" ? options.pendingHtml : "",
+    competition: typeof options.competitionHtml === "string" ? options.competitionHtml : ""
+  };
+}
+
+function renderCurrentStatusSummary(summary) {
+  const content = [summary.goal, summary.identity, summary.body, summary.pending, summary.competition].filter(Boolean).join("");
+  return `<section class="status-current-summary" aria-labelledby="currentStatusSummaryTitle">
+    <h2 id="currentStatusSummaryTitle">當下摘要</h2>
+    ${content}
+  </section>`;
+}
+
+function renderStatusResult(label, result, detail = "") {
+  const safeResult = typeof result === "string" ? result.trim() : "";
+  if (!safeResult) return "";
+  const safeDetail = typeof detail === "string" ? detail.trim() : "";
+  return `<div class="result-badge"><small>${escapeHtml(label)}</small><strong>${escapeHtml(safeResult)}</strong>${safeDetail ? `<p>${escapeHtml(safeDetail)}</p>` : ""}</div>`;
+}
+
 function auditSkillGrowthSources() {
   const collections = [chapterOneEvents, chapterTwoEvents, youthSeasonEvents, positionCompetitionEvents, juniorBaseballEvents, juniorSeasonEvents, highSchoolEvents, criticalYearEvents, careerTransitionEvents, pacingEvents, developmentEvents];
   const chapters = ["童年", "少棒入門", "少棒第一季", "位置競爭", "青少棒", "青少棒分化", "青棒", "青棒關鍵年", "生涯轉換", "呼吸事件", "發展期"];
@@ -3574,7 +3645,8 @@ function updateStatus() {
   syncGameUiVisibility();
   clampStats();
   updateImpression();
-  updateGoals(player.forcedEventId || getCurrentEventId());
+  const statusEventId = player.forcedEventId || getCurrentEventId();
+  updateGoals(statusEventId);
   refreshStartingCompetition();
   document.getElementById("time").innerHTML = `<h2>${escapeHtml(player.chapter)}</h2><p>${escapeHtml(getTimeLabel())}</p><div class="progress-track"><div class="progress-fill" style="width:${progressPercent()}%"></div></div>`;
   const showSkills = Boolean(player.chapter2Result) || player.completed;
@@ -3590,29 +3662,69 @@ function updateStatus() {
   if (showCareerArc) evaluateMarket();
   const careerTrendLabels = { rising: "上升", stable: "持平", declining: "下降", rebound: "回升" };
   const competitionHtml = competition?.active ? `<div class="competition-card"><strong>${escapeHtml(competition.position || player.seasonPosition)}先發競爭</strong><div class="competition-row"><span>${escapeHtml(competition.rivalName || getRivalDisplayName())}</span><b>教練評價 ${competition.rivalRating}</b></div><div class="competition-row you"><span>你</span><b>教練評價 ${competition.playerRating}</b></div><p class="competition-gap">${competition.result ? `${escapeHtml(competition.result)}：${escapeHtml(competition.detail)}` : `目前差距 ${Math.abs(competition.rivalRating - competition.playerRating)} 點，測試尚未公布。`}</p></div>` : "";
+  const competitionModel = typeof CompetitionPresentation === "object" && typeof CompetitionPresentation.createPresentation === "function"
+    ? CompetitionPresentation.createPresentation(statusEventId, getCompetitionPresentationContext(statusEventId))
+    : null;
+  const validationSummaryHtml = competitionModel ? `<div class="status-summary__competition"><small>${escapeHtml(competitionModel.type?.label || "驗證場合")}</small><strong>${escapeHtml(competitionModel.competitionTitle)}</strong><span>${escapeHtml(competitionModel.inningSummary)}</span>${competitionModel.showScore ? `<b>客隊 ${competitionModel.matchState.awayScore}：${competitionModel.matchState.homeScore} 少棒隊</b>` : ""}</div>` : "";
   const debugMode = Boolean(document.querySelector?.(".debug-bookmarks")?.open);
   const debug = debugMode ? getBalanceDebugSummary() : null;
   const debugHtml = debug ? `<div class="balance-debug"><strong>平衡測試</strong><small>目標 ${escapeHtml(debug.goalId)}｜${escapeHtml(debug.goalTier)}｜${escapeHtml(debug.goalProgress)}</small><small>預估 ${escapeHtml(debug.estimatedResult)}</small><small>競爭：技能 ${Math.round(debug.competition.skillScore)}／信任 ${Math.round(debug.competition.trustScore)}／表現 ${Math.round(debug.competition.performanceScore)}／準備 ${debug.competition.preparationScore}／角色 ${debug.competition.roleScore}</small><small>守位評分 ${debug.positionRating}｜本章技能 +${debug.chapterSkillPoints}</small><small>負荷：壓力 ${debug.load.pressure}／疲勞 ${debug.load.fatigue}／傷病 ${debug.load.injuryRisk}／倦怠 ${debug.load.burnout}</small></div>` : "";
-  document.getElementById("status").innerHTML = `
-    <div class="goal-card"><strong>目前目標</strong>${player.goalState?.current ? `${renderTrackedGoal("current", "當下")}${renderTrackedGoal("short", "短期")}${renderTrackedGoal("chapter", "階段")}` : `<div class="goal-line"><small>當下</small><span>${escapeHtml(player.currentGoal)}</span></div><div class="goal-line"><small>短期</small><span>${escapeHtml(player.shortGoal)}</span></div><div class="goal-line"><small>階段</small><span>${escapeHtml(player.longGoal)}</span></div>`}<div class="goal-line aspiration-line"><small>現在想追的事</small><span>${escapeHtml(getCurrentAspiration().current || "找到下一個能參與棒球的方法")}</span></div><div class="goal-line aspiration-line"><small>目前故事正在處理</small><span>${escapeHtml(player.narrativeThread?.activeTension || player.narrativeThread?.coreQuestion || "讓下一次選擇產生具體承接")}</span></div><div class="goal-line aspiration-line"><small>下一個可以期待的事</small><span>${escapeHtml(getCurrentAspiration().nextPossibility || "下一次把球接進手套")}</span></div></div>
-    ${debugHtml}${pendingHtml}${competitionHtml}
-    <h2>能力傾向</h2>${renderBar(player.ballSense, "球感")}${renderBar(player.observe, "觀察")}${renderBar(player.fitness, "體能")}
-    <h2>人格</h2>${renderBar(player.confidence, "自信")}${renderBar(player.resilience, "韌性")}${renderBar(player.instinct, "野性")}${renderBar(player.discipline, "紀律")}${renderBar(player.responsibility, "責任感")}${renderBar(player.pressure, "壓力", 12)}
-    <h2>關係</h2>${renderBar(player.familySupport, "家庭支持")}${renderBar(player.coachAttention, "教練注意")}
-    ${showSkills ? `<h2>守位與能力連結</h2>${renderPositionPanel()}<h2>棒球技能</h2>${Array.from(new Set(["catching", "throwing", "batting", "baseRunning", "baseballIQ", ...(getPositionAssessment(player.seasonPosition || calculatePositionRatings()[0].position)?.skills || [])])).map(key => renderBar(player.baseballSkills[key], skillLabels[key])).join("")}` : ""}
-    ${showSkills ? `<div class="offense-card"><strong>進攻評價 ${offensiveRating}</strong><p>${offensiveValue ? `目前可提供 +${offensiveValue} 生涯評估修正；具備靠打擊換取名單機會的可能。` : "打擊仍是輔助能力，尚未形成足以改變名單的工具。"}</p></div>` : ""}
-    ${showSeason ? `<h2>近期關係狀態</h2><div class="reflection-card"><p>${escapeHtml(getRelationshipStatusText("azhe"))}</p><p>${escapeHtml(getRelationshipStatusText("takahashi"))}</p><p>${escapeHtml(getRelationshipStatusText("yamamoto"))}</p></div>${debugMode ? `${renderBar(player.relationships.coachTrust, "教練信任")}${renderBar(player.relationships.teammateBond, "阿哲羈絆")}${renderBar(player.relationships.rivalRespect, "宿敵敬意")}${renderBar(player.relationships.rivalCompetition, "競爭張力")}` : ""}` : ""}
-    ${showBody ? `<h2>身體狀態</h2>${renderBar(player.body.stamina, "體力")}${renderBar(player.body.fatigue, "疲勞")}${renderBar(player.body.recovery, "恢復力")}${renderBar(player.body.injuryRisk, "傷病風險")}${renderBar(player.body.pain, "疼痛")}` : ""}
-    ${player.chapter.includes("青少棒") || player.juniorSeasonResult ? `<h2>生活平衡</h2>${renderBar(player.academics, "課業")}${renderBar(player.motivation, "棒球動機")}${renderBar(player.burnout, "倦怠")}` : ""}
-    ${player.chapter.includes("青棒") || player.careerExit ? `<h2>生涯資產</h2>${renderBar(player.exposure, "曝光")}${renderBar(player.scoutEvaluation, "球探評價")}${renderBar(player.recentPerformance, "近期表現")}${renderBar(player.reputation, "名聲／可信度")}` : ""}
-    ${showCareerArc ? `<div class="career-arc-card"><strong>球員型態：${escapeHtml(currentArchetype || "尚未形成")}</strong><p>${escapeHtml(playerArchetypeDescriptions[currentArchetype] || "仍在尋找可被球隊描述的用途。")}</p><small>系統角色：${escapeHtml(player.roleIdentity.primary || "尚未定型")}</small><p>價值 ${player.careerValue.current}／最高 ${player.careerValue.peak}　${careerTrendLabels[player.careerValue.trend] || "持平"}</p><p>階段：${escapeHtml(player.careerArc.stage)}　轉型 ${player.careerArc.reinventions} 次</p></div><h2>市場重估</h2>${renderBar(player.marketEvaluation.offense, "進攻", 100)}${renderBar(player.marketEvaluation.defense, "守備", 100)}${renderBar(player.marketEvaluation.utility, "工具性", 100)}${renderBar(player.marketEvaluation.leadership, "領導", 100)}${renderBar(player.marketEvaluation.health, "健康", 100)}` : ""}
+  const aspiration = getCurrentAspiration();
+  const summary = getCurrentStatusSummary({ pendingHtml, competitionHtml: competitionHtml || validationSummaryHtml });
+  const detailedGoalHtml = player.goalState?.current
+    ? [
+        player.goalState.short?.title ? renderTrackedGoal("short", "短期") : "",
+        player.goalState.chapter?.title ? renderTrackedGoal("chapter", "階段") : ""
+      ].filter(Boolean).join("")
+    : [
+        player.shortGoal ? `<div class="goal-line"><small>短期</small><span>${escapeHtml(player.shortGoal)}</span></div>` : "",
+        player.longGoal ? `<div class="goal-line"><small>階段</small><span>${escapeHtml(player.longGoal)}</span></div>` : ""
+      ].filter(Boolean).join("");
+  const abilityHtml = `
+    <div class="status-subgroup"><h3>能力傾向</h3>${renderBar(player.ballSense, "球感")}${renderBar(player.observe, "觀察")}${renderBar(player.fitness, "體能")}</div>
+    ${showSkills ? `<div class="status-subgroup"><h3>守位與能力連結</h3>${renderPositionPanel()}</div><div class="status-subgroup"><h3>棒球技能</h3>${Array.from(new Set(["catching", "throwing", "batting", "baseRunning", "baseballIQ", ...(getPositionAssessment(player.seasonPosition || calculatePositionRatings()[0].position)?.skills || [])])).map(key => renderBar(player.baseballSkills[key], skillLabels[key])).join("")}</div><div class="offense-card"><strong>進攻評價 ${offensiveRating}</strong><p>${offensiveValue ? `目前可提供 +${offensiveValue} 生涯評估修正；具備靠打擊換取名單機會的可能。` : "打擊仍是輔助能力，尚未形成足以改變名單的工具。"}</p></div>` : ""}
+    ${showBody ? `<div class="status-subgroup"><h3>身體狀態</h3>${renderBar(player.body.stamina, "體力")}${renderBar(player.body.fatigue, "疲勞")}${renderBar(player.body.recovery, "恢復力")}${renderBar(player.body.injuryRisk, "傷病風險")}${renderBar(player.body.pain, "疼痛")}</div>` : ""}`;
+  const relationshipHtml = `
+    <div class="status-subgroup"><h3>支持與注意</h3>${renderBar(player.familySupport, "家庭支持")}${showSkills ? renderBar(player.coachAttention, "教練注意") : ""}</div>
+    ${showSeason ? `<div class="reflection-card"><p>${escapeHtml(getRelationshipStatusText("azhe"))}</p><p>${escapeHtml(getRelationshipStatusText("takahashi"))}</p><p>${escapeHtml(getRelationshipStatusText("yamamoto"))}</p></div><div class="reflection-card"><strong>人物反應</strong><p>${escapeHtml(getNpcPerceptionSummary("azhe"))}</p><p>${escapeHtml(getNpcPerceptionSummary("takahashi"))}</p><p>${escapeHtml(getNpcPerceptionSummary("coach"))}</p></div>` : ""}
+    ${player.relationshipPayoffs?.length ? `<div class="reflection-card"><strong>最近的關係回報</strong><p>${escapeHtml(getRelationshipPayoffSummary())}</p></div>` : ""}`;
+  const growthHtml = `
+    ${detailedGoalHtml ? `<div class="goal-card"><strong>後續目標</strong>${detailedGoalHtml}</div>` : ""}
+    <div class="status-subgroup"><h3>人格</h3>${renderBar(player.confidence, "自信")}${renderBar(player.resilience, "韌性")}${renderBar(player.instinct, "野性")}${renderBar(player.discipline, "紀律")}${renderBar(player.responsibility, "責任感")}${renderBar(player.pressure, "壓力", 12)}</div>
+    <div class="status-subgroup"><h3>目前輪廓</h3><p>${escapeHtml(getTraitSummary())}</p><p>${escapeHtml(player.route)}</p></div>
+    <div class="goal-card"><strong>追求與敘事方向</strong><div class="goal-line aspiration-line"><small>現在想追的事</small><span>${escapeHtml(aspiration.current)}</span></div><div class="goal-line aspiration-line"><small>目前故事正在處理</small><span>${escapeHtml(player.narrativeThread?.activeTension || player.narrativeThread?.coreQuestion || "讓下一次選擇產生具體承接")}</span></div><div class="goal-line aspiration-line"><small>下一個可以期待的事</small><span>${escapeHtml(aspiration.nextPossibility)}</span></div></div>
     ${player.narrativeThread?.id ? `<div class="goal-card"><strong>本段故事：${escapeHtml(player.narrativeThread.title)}</strong><p>${escapeHtml(player.narrativeThread.question)}</p><small>${escapeHtml(player.narrativeThread.nextTension || "等待下一幕")}</small></div>` : ""}
-    ${player.relationshipPayoffs?.length ? `<div class="reflection-card"><strong>最近的關係回報</strong><p>${escapeHtml(getRelationshipPayoffSummary())}</p></div>` : ""}
-    ${player.chapter.includes("生涯轉換") || player.transitionResult ? `<h2>轉換期</h2>${renderBar(player.finances, "經濟穩定")}` : ""}
-    <h2>目前輪廓</h2><p>${escapeHtml(getTraitSummary())}</p>
-    ${showSeason ? `<div class="reflection-card"><strong>人物反應</strong><p>${escapeHtml(getNpcPerceptionSummary("azhe"))}</p><p>${escapeHtml(getNpcPerceptionSummary("takahashi"))}</p><p>${escapeHtml(getNpcPerceptionSummary("coach"))}</p></div>` : ""}
-    <h2>路線傾向</h2><p>${escapeHtml(player.route)}</p>
-    ${player.chapter2Result ? `<div class="result-badge"><small>少棒入門評估</small><strong>${escapeHtml(player.chapter2Result)}</strong></div>` : ""}`;
+    ${player.chapter.includes("青少棒") || player.juniorSeasonResult ? `<div class="status-subgroup"><h3>生活平衡</h3>${renderBar(player.academics, "課業")}${renderBar(player.motivation, "棒球動機")}${renderBar(player.burnout, "倦怠")}</div>` : ""}`;
+  const evaluationHtml = [
+    renderStatusResult("少棒入門評估", player.chapter2Result, player.chapter2ResultDetail),
+    renderStatusResult("少棒第一季評估", player.seasonResult, player.seasonResultDetail),
+    renderStatusResult("位置競爭評估", player.competitionResult, player.competitionDetail),
+    renderStatusResult("青少棒評估", player.juniorResult, player.juniorDetail),
+    renderStatusResult("青少棒分化評估", player.juniorSeasonResult, player.juniorSeasonDetail),
+    renderStatusResult("青棒第一年評估", player.highSchoolResult, player.highSchoolDetail),
+    renderStatusResult("青棒關鍵年評估", player.criticalYearResult, player.criticalYearDetail),
+    renderStatusResult("生涯轉換評估", player.transitionResult, player.transitionDetail),
+    renderStatusResult("發展期評估", player.developmentResult, player.developmentDetail)
+  ].filter(Boolean).join("");
+  const careerAssetsHtml = player.chapter.includes("青棒") || player.careerExit
+    ? `<div class="status-subgroup"><h3>生涯資產</h3>${renderBar(player.exposure, "曝光")}${renderBar(player.scoutEvaluation, "球探評價")}${renderBar(player.recentPerformance, "近期表現")}${renderBar(player.reputation, "名聲／可信度")}</div>`
+    : "";
+  const careerArcHtml = showCareerArc
+    ? `<div class="career-arc-card"><strong>球員型態：${escapeHtml(currentArchetype || "尚未形成")}</strong><p>${escapeHtml(playerArchetypeDescriptions[currentArchetype] || "仍在尋找可被球隊描述的用途。")}</p><small>系統角色：${escapeHtml(player.roleIdentity.primary || "尚未定型")}</small><p>價值 ${player.careerValue.current}／最高 ${player.careerValue.peak}　${careerTrendLabels[player.careerValue.trend] || "持平"}</p><p>階段：${escapeHtml(player.careerArc.stage)}　轉型 ${player.careerArc.reinventions} 次</p></div><div class="status-subgroup"><h3>市場重估</h3>${renderBar(player.marketEvaluation.offense, "進攻", 100)}${renderBar(player.marketEvaluation.defense, "守備", 100)}${renderBar(player.marketEvaluation.utility, "工具性", 100)}${renderBar(player.marketEvaluation.leadership, "領導", 100)}${renderBar(player.marketEvaluation.health, "健康", 100)}</div>`
+    : "";
+  const transitionHtml = player.chapter.includes("生涯轉換") || player.transitionResult ? `<div class="status-subgroup"><h3>轉換期</h3>${renderBar(player.finances, "經濟穩定")}</div>` : "";
+  const careerHtml = `${careerAssetsHtml}${careerArcHtml}${transitionHtml}`;
+  const debugRelationshipHtml = debug && showSeason ? `<div class="status-subgroup"><h3>原始關係數值</h3>${renderBar(player.relationships.coachTrust, "教練信任")}${renderBar(player.relationships.teammateBond, "阿哲羈絆")}${renderBar(player.relationships.rivalRespect, "宿敵敬意")}${renderBar(player.relationships.rivalCompetition, "競爭張力")}</div>` : "";
+  document.getElementById("status").innerHTML = `
+    ${renderCurrentStatusSummary(summary)}
+    <div class="status-details" aria-label="完整詳細資料">
+      ${renderStatusSection("能力與技能", abilityHtml, { open: true })}
+      ${renderStatusSection("人物關係", relationshipHtml)}
+      ${renderStatusSection("成長與身份", growthHtml)}
+      ${renderStatusSection("章節評估", evaluationHtml)}
+      ${renderStatusSection("生涯與市場", careerHtml)}
+      ${debug ? renderStatusSection("系統／測試資訊", `${debugHtml}${debugRelationshipHtml}`, { className: "status-section--debug" }) : ""}
+    </div>`;
   document.getElementById("player-info").innerHTML = `<strong>${escapeHtml(player.name || "尚未建立角色")}</strong><span>${player.age} 歲</span><span>${escapeHtml(player.chapter)}</span><span>${escapeHtml(player.route)}</span><span>理想球員：${escapeHtml(player.idealSelf || "尚未形成")}</span>`;
 }
 

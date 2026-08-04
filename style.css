@@ -324,12 +324,12 @@ button:active{
 
 .right-panel{
     width:32%;
+    min-width:0;
     padding:22px;
     background:#fffaf0;
     border:2px solid #2d251f;
     border-radius:18px;
-    position:sticky;
-    top:20px;
+    position:static;
 }
 
 #time{
@@ -695,6 +695,226 @@ button:active{
     font-size:18px;
     line-height:1.5;
     margin:10px 0;
+}
+
+#status{
+    min-width:0;
+}
+
+.status-current-summary{
+    min-width:0;
+    margin-bottom:18px;
+    padding:16px;
+    border:2px solid #8a3f2b;
+    border-radius:14px;
+    background:#fff4df;
+    overflow-wrap:anywhere;
+}
+
+.status-current-summary > h2{
+    margin:0 0 14px;
+    padding-bottom:8px;
+    color:#6f3023;
+    font-size:20px;
+}
+
+.status-summary__goal{
+    margin-bottom:14px;
+    padding:12px 13px;
+    border-left:6px solid #8a3f2b;
+    border-radius:8px;
+    background:#fffaf0;
+}
+
+.status-summary__goal small,
+.status-summary__goal strong,
+.status-summary__goal span{
+    display:block;
+}
+
+.status-summary__goal small{
+    margin-bottom:5px;
+    color:#766657;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.08em;
+}
+
+.status-summary__goal strong{
+    font-size:18px;
+    line-height:1.45;
+}
+
+.status-summary__goal span{
+    margin-top:5px;
+    color:#67584c;
+    font-size:14px;
+}
+
+.status-summary__competition{
+    display:grid;
+    gap:4px;
+    margin-top:12px;
+    padding:11px 12px;
+    border:1px solid #b8a58e;
+    border-radius:9px;
+    background:#f7ead4;
+}
+
+.status-summary__competition small{
+    color:#766657;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.06em;
+}
+
+.status-summary__competition strong,
+.status-summary__competition span,
+.status-summary__competition b{
+    min-width:0;
+    overflow-wrap:anywhere;
+}
+
+.status-summary__competition b{
+    color:#8a3f2b;
+    font-size:14px;
+}
+
+.status-summary__identity,
+.status-summary__body{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(105px,1fr));
+    gap:8px;
+    margin-top:10px;
+}
+
+.status-summary__identity > span,
+.status-summary__body > span{
+    min-width:0;
+    padding:9px 10px;
+    border:1px solid #d8c8af;
+    border-radius:8px;
+    background:#fffaf0;
+}
+
+.status-summary__identity small,
+.status-summary__identity strong,
+.status-summary__body small,
+.status-summary__body strong{
+    display:block;
+    overflow-wrap:anywhere;
+}
+
+.status-summary__identity small,
+.status-summary__body small{
+    margin-bottom:3px;
+    color:#766657;
+    font-size:11px;
+    font-weight:700;
+}
+
+.status-summary__identity strong,
+.status-summary__body strong{
+    font-size:15px;
+    line-height:1.35;
+}
+
+.status-summary__body .is-warning{
+    border-color:#c98b68;
+    background:#fff0df;
+}
+
+.status-current-summary .pending-card,
+.status-current-summary .competition-card{
+    margin-top:12px;
+    margin-bottom:0;
+}
+
+.status-details{
+    display:grid;
+    min-width:0;
+    gap:10px;
+}
+
+.status-section{
+    min-width:0;
+    border:1px solid #cdbb9f;
+    border-radius:12px;
+    background:#fffdf7;
+}
+
+.status-section > summary{
+    display:flex;
+    align-items:center;
+    min-height:48px;
+    padding:11px 14px;
+    color:#41362e;
+    cursor:pointer;
+    font-size:17px;
+    font-weight:800;
+    line-height:1.35;
+    list-style:none;
+}
+
+.status-section > summary::-webkit-details-marker{
+    display:none;
+}
+
+.status-section > summary::after{
+    content:"＋";
+    flex:0 0 auto;
+    margin-left:auto;
+    padding-left:12px;
+    color:#8a3f2b;
+    font-size:20px;
+}
+
+.status-section[open] > summary::after{
+    content:"－";
+}
+
+.status-section > summary:focus-visible{
+    outline:3px solid rgba(138,63,43,.35);
+    outline-offset:2px;
+}
+
+.status-section[open] > summary{
+    border-bottom:1px solid #d8c8af;
+    background:#f7ead4;
+}
+
+.status-section__content{
+    min-width:0;
+    padding:4px 14px 16px;
+    overflow-wrap:anywhere;
+}
+
+.status-subgroup{
+    min-width:0;
+    margin-top:16px;
+}
+
+.status-subgroup:first-child{
+    margin-top:10px;
+}
+
+.status-subgroup h3{
+    margin:0 0 10px;
+    padding-bottom:5px;
+    border-bottom:1px solid rgba(45,37,31,.18);
+    color:#5d4b3c;
+    font-size:16px;
+}
+
+.status-section--debug{
+    border-style:dashed;
+    border-color:#9d8060;
+    background:#fffaf0;
+}
+
+.status-section--debug > summary{
+    color:#76512f;
+    font-size:15px;
 }
 
 .goal-card,
@@ -1234,6 +1454,29 @@ button:active{
 
     .right-panel{
         position:static;
+        padding:16px;
+    }
+
+    .status-current-summary{
+        padding:13px;
+    }
+
+    .status-summary__identity,
+    .status-summary__body{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .status-section > summary{
+        width:100%;
+        min-height:52px;
+    }
+
+    .status-section__content{
+        padding:3px 12px 14px;
+    }
+
+    .position-rankings{
+        grid-template-columns:1fr;
     }
 
     .creation-row{
