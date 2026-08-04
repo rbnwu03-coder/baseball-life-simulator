@@ -2,6 +2,18 @@
     box-sizing:border-box;
 }
 
+.visually-hidden{
+    position:absolute !important;
+    width:1px !important;
+    height:1px !important;
+    padding:0 !important;
+    margin:-1px !important;
+    overflow:hidden !important;
+    clip:rect(0 0 0 0) !important;
+    white-space:nowrap !important;
+    border:0 !important;
+}
+
 .story-bridge-in,
 .story-bridge-out {
   margin: 12px 0;
@@ -82,6 +94,9 @@ body.creation-mode .bottom-panel{
 }
 
 .debug-bookmarks summary{
+    display:flex;
+    align-items:center;
+    min-height:44px;
     cursor:pointer;
     color:#8a3f2b;
     font-weight:800;
@@ -133,12 +148,43 @@ body.creation-mode .bottom-panel{
 }
 
 button{
+    min-height:44px;
     cursor:pointer;
     border:2px solid #2d251f;
     background:#fffaf0;
     color:#251f1a;
     border-radius:12px;
     transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+
+button:disabled,
+button[aria-disabled="true"]{
+    cursor:not-allowed;
+    border-color:#8d8176;
+    background:#e8dfd1;
+    color:#5f554c;
+    box-shadow:none;
+    transform:none;
+    opacity:.86;
+}
+
+:where(button,input,select,textarea,summary):focus-visible{
+    outline:3px solid #176b87;
+    outline-offset:3px;
+    box-shadow:0 0 0 5px rgba(23,107,135,.18);
+}
+
+@supports not selector(:focus-visible){
+    :where(button,input,select,textarea,summary):focus{
+        outline:3px solid #176b87;
+        outline-offset:3px;
+    }
+}
+
+#currentEventTitle:focus,
+#outcomeTitle:focus{
+    outline:3px solid #176b87;
+    outline-offset:5px;
 }
 
 button:hover{
@@ -313,6 +359,7 @@ button:active{
 
 .main-layout{
     display:flex;
+    min-width:0;
     gap:32px;
     margin-top:30px;
     align-items:flex-start;
@@ -320,6 +367,7 @@ button:active{
 
 .left-panel{
     width:68%;
+    min-width:0;
 }
 
 .right-panel{
@@ -368,12 +416,14 @@ button:active{
 }
 
 .event-card{
+    min-width:0;
     min-height:430px;
     padding:30px;
     background:#fffaf0;
     border:2px solid #2d251f;
     border-radius:18px;
     box-shadow:0 8px 0 rgba(45,37,31,.12);
+    overflow-wrap:anywhere;
 }
 
 .match-hud{
@@ -473,6 +523,7 @@ button:active{
 .event-card h2{
     margin:0 0 20px;
     font-size:32px;
+    scroll-margin-block:20px;
 }
 
 .event-text{
@@ -544,12 +595,15 @@ button:active{
 }
 
 #choices{
+    min-width:0;
     margin-top:22px;
     min-height:260px;
 }
 
 #choices button{
     width:100%;
+    min-width:0;
+    min-height:48px;
     margin-bottom:12px;
     padding:20px 22px;
     font-size:21px;
@@ -1447,6 +1501,20 @@ button:active{
         flex-direction:column;
     }
 
+    .header{
+        align-items:stretch;
+    }
+
+    .save-buttons{
+        flex-wrap:wrap;
+        width:100%;
+    }
+
+    .save-buttons button{
+        flex:1 1 96px;
+        min-width:0;
+    }
+
     .left-panel,
     .right-panel{
         width:100%;
@@ -1455,6 +1523,28 @@ button:active{
     .right-panel{
         position:static;
         padding:16px;
+    }
+
+    .debug-bookmarks,
+    .bookmark-buttons,
+    .competition-frame,
+    .event-card,
+    .event-text,
+    .story-bridge-in,
+    .story-bridge-out,
+    #changeLog,
+    #choices,
+    #status,
+    .status-section__content{
+        min-width:0;
+        max-width:100%;
+        overflow-wrap:anywhere;
+    }
+
+    .bookmark-buttons button{
+        min-height:44px;
+        white-space:normal;
+        overflow-wrap:anywhere;
     }
 
     .status-current-summary{

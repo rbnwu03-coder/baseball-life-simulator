@@ -190,6 +190,34 @@ function setChoiceTransitionState(locked) {
   });
 }
 
+function focusRenderedElement(selector) {
+  const target = document.querySelector?.(selector);
+  if (!target || typeof target.focus !== "function") return false;
+  try {
+    target.focus({ preventScroll: true });
+  }
+  catch (_) {
+    target.focus();
+  }
+  return true;
+}
+
+function focusCurrentEventHeading() {
+  return focusRenderedElement("#currentEventTitle");
+}
+
+function focusOutcomeHeading() {
+  return focusRenderedElement("#outcomeTitle");
+}
+
+function setOutcomeContinueState(locked) {
+  const button = document.querySelector?.("#choices .outcome-continue-button");
+  if (!button) return;
+  button.disabled = Boolean(locked);
+  if (locked) button.setAttribute?.("aria-disabled", "true");
+  else button.removeAttribute?.("aria-disabled");
+}
+
 function syncGameUiVisibility() {
   const hasCreatedPlayer = Boolean(player?.name);
   document.body?.classList?.toggle?.("creation-mode", !hasCreatedPlayer);
@@ -1169,10 +1197,10 @@ function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
       </section>` : "";
   setChoiceTransitionState(false);
   document.getElementById("story").innerHTML = `
-    <article class="event-card outcome choice-outcome-card" aria-label="選擇結果">
+    <article class="event-card outcome choice-outcome-card" aria-labelledby="outcomeTitle">
       ${competitionFrame}
       <div class="event-kicker choice-outcome-kicker">行動結果</div>
-      <h2>${escapeHtml(getYouthSeasonOutcomeHeading(eventId))}</h2>
+      <h2 id="outcomeTitle" tabindex="-1">${escapeHtml(getYouthSeasonOutcomeHeading(eventId))}</h2>
       ${confirmationHtml}
       ${narrativeHtml}
       ${reactionHtml}
@@ -1184,10 +1212,12 @@ function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
       <button type="button" class="outcome-continue-button" onclick="continueYouthSeasonOutcome()">繼續</button>
     </div>`;
   updateStatus();
+  focusOutcomeHeading();
 }
 
 function continueYouthSeasonOutcome() {
   if (!pendingYouthSeasonOutcome) return;
+  setOutcomeContinueState(true);
   pendingYouthSeasonOutcome = null;
   isTransitioning = false;
   showCurrentEvent();
@@ -3222,7 +3252,9 @@ function renderSceneContext(context) {
       <span class="scene-context__value">${escapeHtml(value)}</span>
     </div>`).join("");
 
-  return `<div class="scene-context chapter-one-scene-context" aria-label="場景資訊">${content}</div>`;
+  return `<section class="scene-context chapter-one-scene-context" aria-labelledby="sceneContextTitle">
+    <h2 id="sceneContextTitle" class="visually-hidden">場景資訊</h2>${content}
+  </section>`;
 }
 
 function showStory(eventId) {
@@ -3233,9 +3265,10 @@ function showStory(eventId) {
   ensureChapterAspiration(eventId);
   const event = getEvent(eventId);
   if (!event) {
-    document.getElementById("story").innerHTML = "<div class='event-card'><h2>找不到下一個事件</h2><p>請讀取存檔或重新開始。</p></div>";
+    document.getElementById("story").innerHTML = "<article class='event-card' aria-labelledby='currentEventTitle'><h2 id='currentEventTitle' tabindex='-1'>找不到下一個事件</h2><p>請讀取存檔或重新開始。</p></article>";
     document.getElementById("choices").innerHTML = "";
     updateStatus();
+    focusCurrentEventHeading();
     return;
   }
   ensureRelationshipPayoffChoices(eventId, event);
@@ -3267,13 +3300,14 @@ function showStory(eventId) {
   const competitionFrame = renderCompetitionPresentation(eventId);
   const bridgeInHtml = bridgeIn ? `<div class="story-bridge-in"><small>承接上一回</small>${escapeHtml(bridgeIn)}</div>` : "";
   const bridgeOutHtml = bridgeOut ? `<div class="story-bridge-out"><small>接下來</small>${escapeHtml(bridgeOut)}</div>` : "";
-  document.getElementById("story").innerHTML = `<article class="event-card">${sceneContextHtml}${competitionFrame}${bridgeInHtml}<h2>${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div>${bridgeOutHtml}</article>`;
+  document.getElementById("story").innerHTML = `<article class="event-card" aria-labelledby="currentEventTitle">${sceneContextHtml}${competitionFrame}${bridgeInHtml}<h2 id="currentEventTitle" tabindex="-1">${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div>${bridgeOutHtml}</article>`;
   document.getElementById("choices").innerHTML = event.choices.map((choice, index) => `<button type="button" onclick="choose('${eventId}', ${index})">${escapeHtml(choice.text)}</button>`).join("");
   updateStatus();
   if (player.goalState?.recentProgress?.length) {
     const feedback = consumeGoalFeedback();
     document.getElementById("changeLog").innerHTML += feedback.map(item => `<div class="${item.type === "complete" ? "goal-complete" : item.type === "success" ? "goal-success" : item.type === "partial" ? "goal-partial" : item.type === "failed" ? "goal-failed" : "goal-progress-change"}">${escapeHtml(item.message)}</div>`).join("");
   }
+  focusCurrentEventHeading();
 }
 
 function prepareMatchStateForEvent(eventId) {

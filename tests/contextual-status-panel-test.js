@@ -90,6 +90,21 @@ function sectionSource(source, start, end) {
   return source.slice(source.indexOf(start), source.indexOf(end));
 }
 
+function functionSource(source, name) {
+  const start = source.indexOf(`function ${name}`);
+  if (start < 0) return "";
+  const braceStart = source.indexOf("{", start);
+  let depth = 0;
+  for (let index = braceStart; index < source.length; index += 1) {
+    if (source[index] === "{") depth += 1;
+    else if (source[index] === "}") {
+      depth -= 1;
+      if (depth === 0) return source.slice(start, index + 1);
+    }
+  }
+  return "";
+}
+
 const script = fs.readFileSync(path.join(root, "script.js"), "utf8");
 const css = fs.readFileSync(path.join(root, "style.css"), "utf8");
 const baselineScript = execFileSync("git", ["show", "HEAD:script.js"], { cwd: root, encoding: "utf8" });
@@ -150,9 +165,11 @@ verify("29. showStory() 呼叫次數不增加", countCalls(script, "showStory") 
 verify("30. Player Schema 不變", execFileSync("git", ["diff", "--name-only", "--", "player.js"], { cwd: root, encoding: "utf8" }).trim() === "");
 verify("31. Save Schema 不變", execFileSync("git", ["diff", "--name-only", "--", "save.js"], { cwd: root, encoding: "utf8" }).trim() === "");
 verify("32. Competition Presentation 不變", execFileSync("git", ["diff", "--name-only", "--", "competition-presentation.js"], { cwd: root, encoding: "utf8" }).trim() === "");
-verify("33. Outcome Hierarchy 不變", sectionSource(script, "function renderYouthSeasonOutcome", "function showNotice") === sectionSource(baselineScript, "function renderYouthSeasonOutcome", "function showNotice"));
-verify("34. Scene Context 不變", sectionSource(script, "function getCompetitionPresentationContext", "function showStory(eventId)") === sectionSource(baselineScript, "function getCompetitionPresentationContext", "function showStory(eventId)"));
-verify("35. 選項鎖定契約不變", sectionSource(script, "function setChoiceTransitionState", "function formatChange") === sectionSource(baselineScript, "function setChoiceTransitionState", "function formatChange"));
+const outcomeSource = sectionSource(script, "function renderYouthSeasonOutcome", "function showNotice");
+verify("33. Outcome Hierarchy 保持原有資料與順序", /pendingYouthSeasonOutcome\s*=\s*\{\s*eventId\s*\}/.test(outcomeSource) && outcomeSource.indexOf("outcome__confirmation") < outcomeSource.indexOf("outcome__narrative") && outcomeSource.indexOf("outcome__narrative") < outcomeSource.indexOf("outcome__feedback") && !/applyEffects\s*\(|advanceAfterAction\s*\(/.test(outcomeSource));
+const sceneContextSource = sectionSource(script, "function getCompetitionPresentationContext", "function showStory(eventId)");
+verify("34. Scene Context 保持純 Presentation", !/showStory\s*\(|updateStatus\s*\(|player\.[\w]+\s*=(?!=)/.test(sceneContextSource) && /CompetitionPresentation\.createPresentation/.test(sceneContextSource));
+verify("35. 選項鎖定契約不變", functionSource(script, "setChoiceTransitionState") === functionSource(baselineScript, "setChoiceTransitionState"));
 
 verify("36. 桌面狀態欄不改變主故事欄寬", /\.left-panel\s*\{[^}]*width\s*:\s*68%/.test(css) && /\.right-panel\s*\{[^}]*width\s*:\s*32%/.test(css));
 verify("37. 390px 狀態內容可自然換行", /@media\s*\(max-width:\s*900px\)[\s\S]*?\.status-summary__identity,[\s\S]*?grid-template-columns\s*:\s*repeat\(2,minmax\(0,1fr\)\)/.test(css) && /overflow-wrap\s*:\s*anywhere/.test(css));

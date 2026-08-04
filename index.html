@@ -72,6 +72,7 @@
       </button>
     </div>
     <div class="creation-row">
+      <label for="nameInput" class="visually-hidden">主角名字</label>
       <input id="nameInput" maxlength="12" placeholder="輸入主角名字" autocomplete="off">
     </div>
     <div class="ideal-self-section" aria-labelledby="idealSelfTitle">
@@ -90,13 +91,16 @@
   </section>
 
   <main class="main-layout">
-    <section class="left-panel">
+    <section class="left-panel" aria-label="目前事件與選項">
       <div id="time"></div>
       <div id="story"></div>
       <div id="changeLog" aria-live="polite"></div>
-      <div id="choices"></div>
+      <div id="choices" role="group" aria-label="事件選項"></div>
     </section>
-    <aside class="right-panel"><div id="status"></div></aside>
+    <aside class="right-panel" aria-labelledby="statusPanelTitle">
+      <h2 id="statusPanelTitle" class="visually-hidden">球員狀態</h2>
+      <div id="status"></div>
+    </aside>
   </main>
 
   <footer class="bottom-panel"><div id="player-info"></div></footer>
