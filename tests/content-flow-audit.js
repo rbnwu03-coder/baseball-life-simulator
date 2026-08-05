@@ -22,6 +22,7 @@ const groups = vm.runInContext(`({
   青少棒開場: juniorBaseballEvents,
   青少棒分化: juniorSeasonEvents,
   青棒: highSchoolEvents,
+  青棒第二年: highSchoolYearTwoEvents,
   青棒關鍵年: criticalYearEvents,
   生涯轉換: careerTransitionEvents,
   發展期: developmentEvents,

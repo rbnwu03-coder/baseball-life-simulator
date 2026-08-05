@@ -9,6 +9,9 @@ function saveGame() {
 function normalizeSave(saved) {
   const fresh = createInitialPlayer(saved.name || "");
   Object.assign(fresh, saved);
+  if (saved.highSchoolYearTwoStep === undefined) fresh.highSchoolYearTwoStep = 0;
+  if (saved.highSchoolYearTwoResult === undefined) fresh.highSchoolYearTwoResult = "";
+  if (saved.highSchoolYearTwoDetail === undefined) fresh.highSchoolYearTwoDetail = "";
   fresh.baseballSkills = Object.assign({}, createInitialPlayer().baseballSkills, saved.baseballSkills || {});
   fresh.relationships = Object.assign({}, createInitialPlayer().relationships, saved.relationships || {});
   fresh.positionAffinity = Object.assign({}, createInitialPlayer().positionAffinity, saved.positionAffinity || {});

@@ -108,6 +108,7 @@ const goalByChapter = {
   "青少棒": ["適應身體與技術差距", "守住球隊中的用途", "找到能延續到高中的位置"],
   "青少棒分化": ["處理主力、課業與身體負荷", "取得合適的高中入口", "把棒球延續到下一階段"],
   "青棒": ["完成目前的球隊任務", "爭取穩定出賽與曝光", "建立升學或選秀價值"],
+  "青棒第二年": ["完成重新排定的球隊任務", "讓角色通過春季與秋季驗證", "帶著可延續的角色進入高三"],
   "青棒關鍵年": ["把握高中最後一年的機會", "取得明確的生涯出口", "讓棒球成為可持續的人生道路"],
   "生涯轉換期": ["適應新的球隊與生活", "建立組織願意保留的用途", "在成年棒球中站穩"],
   "發展期": ["提高近期可用價值", "取得下一份名單或測試機會", "建立能長期留在棒球裡的角色"]
@@ -300,6 +301,17 @@ function loadTestBookmark(bookmark) {
       });
       addFlags(["reported_first_pain", "accepted_junior_rehab", "accepted_junior_position_change", "chose_playing_time_high_school"]);
       Object.assign(player.body, { fatigue: 2, injuryRisk: 1, pain: 0 });
+    },
+    highSchoolYearTwo() {
+      Object.assign(player, {
+        chapter: "青棒第二年", age: 17, highSchoolYearTwoStep: 0,
+        juniorSeasonResult: "用短期機會換取較長的生涯", highSchoolRoute: "普通高中・穩定出賽",
+        highSchoolTeamRole: "多位置工具人與後段輪替", highSchoolResult: "球探開始建立你的追蹤資料",
+        highSchoolYearTwoResult: "", highSchoolYearTwoDetail: "",
+        exposure: 4, scoutEvaluation: 5, recentPerformance: 1, reputation: 2
+      });
+      addFlags(["managed_high_school_load", "accepted_high_school_utility_role", "showcase_baseball_iq", "high_school_commit_utility"]);
+      Object.assign(player.body, { fatigue: 2, injuryRisk: 2, pain: 0 });
     },
     criticalYear() {
       Object.assign(player, {
@@ -538,6 +550,11 @@ const chapterGoalDefinitions = {
     current: { id: "high_school_clear_task", title: "在新環境取得一個明確任務", tier: "small", target: 1 },
     short: { id: "high_school_described_value", title: "建立能被教練描述的價值", tier: "medium", target: 1 },
     chapter: { id: "high_school_market_identity", title: "建立可延續的高中球員定位", tier: "major", target: 1 }
+  },
+  "青棒第二年": {
+    current: { id: "high_school_year_two_reset", title: "完成重新排定的球隊任務", tier: "small", target: 1 },
+    short: { id: "high_school_year_two_proof", title: "讓角色通過春季與秋季驗證", tier: "medium", target: 2 },
+    chapter: { id: "high_school_year_two_plan", title: "確認高三前的投資方向", tier: "major", target: 1 }
   }
 };
 
@@ -859,6 +876,11 @@ function updateGoalProgressForChoice(eventId, choice) {
   if (player.chapter === "青少棒" && choice.flags?.some(flag => /compensate|build_body|position_change|bat_compensation|managed|monitored|accepted_junior/.test(flag))) completeGoal("junior_answer_growth_gap", "小目標完成：你找到一種應對身體差距的方法");
   if (player.chapter === "青少棒分化" && (choice.bodyEffects || choice.academicEffects || choice.flags?.some(flag => /managed|balanced|rehab|health/.test(flag)))) completeGoal("junior_manage_life", "小目標完成：你主動管理了一次身體、課業或訓練");
   if (player.chapter === "青棒" && choice.flags?.some(flag => /utility_role|focused_high_school_position|developed_high_school_bat|team_task|routine/.test(flag))) completeGoal("high_school_clear_task", "小目標完成：你在新環境取得明確任務");
+  if (player.chapter === "青棒第二年") {
+    if (["high_school_year_two_roster_reset", "high_school_year_two_role_test"].includes(eventId)) completeGoal("high_school_year_two_reset", "小目標完成：你完成重新排定的球隊任務");
+    if (["high_school_year_two_spring_game", "high_school_year_two_autumn_stage"].includes(eventId)) advanceGoal("high_school_year_two_proof", 1, "角色驗證推進：這次正式局面留下了可檢查的結果");
+    if (eventId === "high_school_year_two_senior_plan") completeGoal("high_school_year_two_plan", "階段目標完成：高三前的投資方向已確認");
+  }
 }
 
 function clampStats() {
@@ -1258,6 +1280,7 @@ function choose(eventId, index) {
   if (choice.nextChapter === "juniorBaseball") return enterJuniorBaseball();
   if (choice.nextChapter === "juniorSeason") return enterJuniorSeason();
   if (choice.nextChapter === "highSchool") return enterHighSchool();
+  if (choice.nextChapter === "highSchoolYearTwo") return enterHighSchoolYearTwo();
   if (choice.nextChapter === "criticalYear") return enterCriticalYear();
   if (choice.nextChapter === "careerTransition") return enterCareerTransition();
   if (choice.nextChapter === "developmentYears") return enterDevelopmentYears();
@@ -1465,6 +1488,17 @@ function enterHighSchool() {
   player.age = 16;
   player.highSchoolStep = 0;
   showNotice(`你進入${player.highSchoolRoute}，高中棒球正式開始。`, "success");
+  showCurrentEvent();
+}
+
+function enterHighSchoolYearTwo() {
+  applyChapterBreather();
+  player.chapter = "青棒第二年";
+  player.age = 17;
+  player.highSchoolYearTwoStep = 0;
+  player.highSchoolYearTwoResult = "";
+  player.highSchoolYearTwoDetail = "";
+  showNotice("高中第二年開始：原有順位與角色將重新接受驗證。", "success");
   showCurrentEvent();
 }
 
@@ -1818,7 +1852,7 @@ function getEmotionChapter(eventId = "") {
   const map = {
     ending: "十歲暑假", chapter2_result: "少棒入門", youth_season_result: "少棒第一季",
     competition_result: "位置競爭", junior_result: "青少棒分化", junior_season_result: "青少棒球季",
-    high_school_result: "青棒第一年", critical_year_result: "高中關鍵年",
+    high_school_result: "青棒第一年", high_school_year_two_result: "青棒第二年", critical_year_result: "高中關鍵年",
     transition_result: "生涯轉換", development_result: "發展期"
   };
   return map[eventId] || player.chapter || "未分類";
@@ -2172,6 +2206,7 @@ const chapterAspirationGuide = {
   "青少棒": { current: "我想知道身體和環境改變後，自己還能怎麼打球。", reason: "原本自然成立的動作開始需要重新理解。", next: "是否存在一個比原本守位更適合自己的入口？" },
   "青少棒分化": { current: "我想找到一個願意讓自己繼續成長的高中環境。", reason: "學校不是獎品，而是下一段生活的條件。", next: "離開熟悉的人之後，我會遇到怎樣的棒球？" },
   "青棒": { current: "我想在新的球隊裡找到第一個明確任務。", reason: "新環境還不知道該怎麼使用我。", next: "這個任務能不能成為別人記住自己的理由？" },
+  "青棒第二年": { current: "我想確認高一建立的角色能不能維持一整年。", reason: "學長離開、新生加入，原有順位必須重新接受春秋兩段驗證。", next: "高三前，教練會把哪一個投資方向寫進主課表？" },
   "青棒關鍵年": { current: "我想讓某一項能力真正換到下一個入口。", reason: "畢業讓能力必須對應到一個具體去處。", next: "畢業之後，棒球會以什麼形式繼續？" },
   "生涯轉換期": { current: "我想知道新的環境願意怎麼使用我。", reason: "新的名單、課表、工作或復健安排都在重新描述球員用途。", next: "下一個環境會把什麼任務交到我手裡？" },
   "發展期": { current: "我想知道自己還能走到哪裡。", reason: "角色不是終點，而是下一次嘗試的起點。", next: "下一個開始，會在哪一個具體位置逐漸成形？" }
@@ -2185,6 +2220,7 @@ const chapterResultHopeHooks = {
   junior_result: { title: "下一個可以期待的事", text: "下個月的練習裡，有一組球會從新的守位開始。", source: "chapter_result" },
   junior_season_result: { title: "下一個可以期待的事", text: "高中報到日，新的球場會第一次叫到你的名字。", source: "chapter_result" },
   high_school_result: { title: "下一個可以期待的事", text: "下一次隊內賽，教練會把尚未固定的任務交給一名替補球員。", source: "chapter_result" },
+  high_school_year_two_result: { title: "下一個可以期待的事", text: "高三第一張訓練表，會把你今年保住的角色換成最後一年的投資方向。", source: "chapter_result" },
   critical_year_result: { title: "下一個可以期待的事", text: "畢業前，你會收到一份寫著具體條件的下一站通知。", source: "chapter_result" },
   transition_result: { title: "下一個可以期待的事", text: "新置物櫃旁仍空著一個位置，下一次任務會決定名字寫在哪裡。", source: "chapter_result" },
   development_result: { title: "下一個可以期待的事", text: "二十二歲不是答案，而是下一個開始第一次有了形狀。", source: "chapter_result" }
@@ -2254,6 +2290,8 @@ function processAspirationEvent(eventId, choice = {}) {
     junior_friend_exit: ["azhe_next_life", "第一次和阿哲交換各自下一步", "彼此知道對方最近正在追什麼"],
     high_school_role: ["first_high_school_task", "第一次期待高中球隊交付任務", "讓一項任務成為可描述的價值"],
     high_school_long_bench: ["bench_open_task", "第一次注意替補名單仍有空著的用途", "下一次有限打席或後段守備"],
+    high_school_year_two_roster_reset: ["year_two_role_reset", "第一次看見高中順位重新洗牌", "讓原有角色通過春季與秋季兩次驗證"],
+    high_school_year_two_senior_plan: ["senior_year_investment", "第一次把高三前的訓練押在明確方向", "高三第一張完整訓練表"],
     critical_scout_interview: ["first_formal_invitation", "第一次收到帶有條件的正式詢問", "把一項工具換成畢業後入口"],
     transition_checkpoint: ["new_locker_name", "第一次看見新置物櫃仍空著名字", "讓新環境決定怎麼使用自己"],
     development_opportunity: ["asked_to_try_again", "第一次有人問願不願意用另一種方式再試一次", "讓新角色通過正式評估"]
@@ -2694,6 +2732,11 @@ function advanceAfterAction(decisionContext = null) {
     if (player.criticalYearStep >= 8) evaluateCriticalYear();
     return;
   }
+  if (player.chapter === "青棒第二年") {
+    player.highSchoolYearTwoStep += 1;
+    if (player.highSchoolYearTwoStep >= 8) evaluateHighSchoolYearTwo();
+    return;
+  }
   if (player.chapter === "青棒") {
     player.highSchoolStep += 1;
     if (player.highSchoolStep >= 8) evaluateHighSchoolYear();
@@ -3075,6 +3118,49 @@ function evaluateHighSchoolValue() {
   return { level, label: labels[level], direction, skillReady, proofReady, reasons, recovery };
 }
 
+function evaluateHighSchoolYearTwo() {
+  if (player.chapter !== "青棒第二年" || player.highSchoolYearTwoStep < 8) return false;
+
+  if (hasFlag("year_two_plan_utility")) player.highSchoolTeamRole = "多位置輪替與比賽中段調度";
+  else if (hasFlag("year_two_plan_position")) player.highSchoolTeamRole = `${player.seasonPosition || "主守位"}專職競爭者`;
+  else if (hasFlag("year_two_plan_batting")) player.highSchoolTeamRole = "打擊入口與守備替補";
+  else if (hasFlag("year_two_plan_health")) player.highSchoolTeamRole = "健康重整中的有限任務球員";
+
+  const establishedRoleProof = (
+    hasFlag("year_two_role_primary_proof") &&
+    hasFlag("year_two_spring_push") &&
+    hasFlag("year_two_autumn_secure_out") &&
+    hasFlag("year_two_plan_position")
+  ) || (
+    hasFlag("year_two_role_utility_proof") &&
+    hasFlag("year_two_spring_bunt_read") &&
+    hasFlag("year_two_autumn_utility_hold") &&
+    hasFlag("year_two_plan_utility")
+  ) || (
+    hasFlag("year_two_role_bat_proof") &&
+    hasFlag("year_two_spring_first_pitch") &&
+    hasFlag("year_two_autumn_run_creation") &&
+    hasFlag("year_two_plan_batting")
+  );
+
+  if (player.body.injuryRisk >= 8 || player.body.pain >= 5) {
+    player.highSchoolYearTwoResult = "角色仍在，身體負荷先成為高三問題";
+    player.highSchoolYearTwoDetail = "你完成春秋兩段賽事，卻無法再把所有訓練與出賽視為免費成本。高三的第一項工作是確認能穩定完成多少任務。";
+  } else if (establishedRoleProof) {
+    player.highSchoolYearTwoResult = "你的球隊用途通過了一整年的第二次驗證";
+    player.highSchoolYearTwoDetail = `春季的表現沒有停在單場。秋季盃賽再次證明「${player.highSchoolTeamRole || "目前角色"}」能在不同局面被使用，高三將要求它換成更明確的生涯價值。`;
+  } else if (player.relationships.coachTrust >= 8) {
+    player.highSchoolYearTwoResult = "教練願意繼續交付任務，但場上證明仍不完整";
+    player.highSchoolYearTwoDetail = "可靠讓你保留在輪替裡，卻不能代替春秋兩段比賽都留下結果。高三前仍需要一次能被名單與紀錄共同確認的表現。";
+  } else {
+    player.highSchoolYearTwoResult = "高二結束時，角色仍在重新排列";
+    player.highSchoolYearTwoDetail = "你沒有失去球隊位置，也還沒有把高一的用途固定成全年角色。最後一年必須在主守位、工具性、打擊或健康中押下一個可交付方向。";
+  }
+
+  player.chapter = "青棒第二年小結";
+  return true;
+}
+
 function evaluateCriticalYear() {
   const positionValue = getPositionCareerValue();
   const offensiveValue = getOffensiveCareerValue();
@@ -3348,6 +3434,8 @@ function getTimeLabel() {
   if (player.chapter === "青少棒階段小結") return "青少棒・升學評估";
   if (player.chapter === "青棒") return `青棒第一年・第 ${player.highSchoolStep + 1} 階段`;
   if (player.chapter === "青棒第一年小結") return "青棒・第一年評估";
+  if (player.chapter === "青棒第二年") return `青棒第二年・第 ${player.highSchoolYearTwoStep + 1}／8 階段`;
+  if (player.chapter === "青棒第二年小結") return "青棒・第二年評估";
   if (player.chapter === "青棒關鍵年") return `青棒關鍵年・第 ${player.criticalYearStep + 1} 階段`;
   if (player.chapter === "青棒生涯出口") return "青棒・畢業出口評估";
   if (player.chapter === "生涯轉換期") return `十八歲轉換期・第 ${player.transitionStep + 1} 階段`;
@@ -3367,6 +3455,8 @@ function progressPercent() {
   if (player.chapter === "青少棒階段小結") return 100;
   if (player.chapter === "青棒") return 86 + Math.round((player.highSchoolStep / 8) * 13);
   if (player.chapter === "青棒第一年小結") return 100;
+  if (player.chapter === "青棒第二年") return 87 + Math.round((player.highSchoolYearTwoStep / 8) * 12);
+  if (player.chapter === "青棒第二年小結") return 100;
   if (player.chapter === "青棒關鍵年") return 88 + Math.round((player.criticalYearStep / 8) * 11);
   if (player.chapter === "青棒生涯出口") return 100;
   if (player.chapter === "生涯轉換期") return 92 + Math.round((player.transitionStep / 5) * 7);
@@ -3646,8 +3736,8 @@ function renderStatusResult(label, result, detail = "") {
 }
 
 function auditSkillGrowthSources() {
-  const collections = [chapterOneEvents, chapterTwoEvents, youthSeasonEvents, positionCompetitionEvents, juniorBaseballEvents, juniorSeasonEvents, highSchoolEvents, criticalYearEvents, careerTransitionEvents, pacingEvents, developmentEvents];
-  const chapters = ["童年", "少棒入門", "少棒第一季", "位置競爭", "青少棒", "青少棒分化", "青棒", "青棒關鍵年", "生涯轉換", "呼吸事件", "發展期"];
+  const collections = [chapterOneEvents, chapterTwoEvents, youthSeasonEvents, positionCompetitionEvents, juniorBaseballEvents, juniorSeasonEvents, highSchoolEvents, highSchoolYearTwoEvents, criticalYearEvents, careerTransitionEvents, pacingEvents, developmentEvents];
+  const chapters = ["童年", "少棒入門", "少棒第一季", "位置競爭", "青少棒", "青少棒分化", "青棒", "青棒第二年", "青棒關鍵年", "生涯轉換", "呼吸事件", "發展期"];
   const report = {};
   Object.keys(skillLabels).forEach(key => report[key] = { events: 0, totalPoints: 0, firstChapter: "", lastChapter: "", positions: [] });
   collections.forEach((collection, index) => Object.entries(collection).forEach(([eventId, event]) => {
@@ -3736,6 +3826,7 @@ function updateStatus() {
     renderStatusResult("青少棒評估", player.juniorResult, player.juniorDetail),
     renderStatusResult("青少棒分化評估", player.juniorSeasonResult, player.juniorSeasonDetail),
     renderStatusResult("青棒第一年評估", player.highSchoolResult, player.highSchoolDetail),
+    renderStatusResult("青棒第二年評估", player.highSchoolYearTwoResult, player.highSchoolYearTwoDetail),
     renderStatusResult("青棒關鍵年評估", player.criticalYearResult, player.criticalYearDetail),
     renderStatusResult("生涯轉換評估", player.transitionResult, player.transitionDetail),
     renderStatusResult("發展期評估", player.developmentResult, player.developmentDetail)

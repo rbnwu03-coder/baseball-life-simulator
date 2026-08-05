@@ -179,7 +179,33 @@ var CompetitionPresentation = (() => {
     youth_match_catcher: officialValidation("第一次指揮", "你已蹲到本壘後方；同一個比分、出局數與跑者都沒有重來。", "替投手選下一球，並把跑者與整組守備一起算進去。", "baseballIQ"),
     youth_match_pitcher: officialValidation("第一個打者", "你已踩上投手板；同一個比分、出局數與跑者都沒有重來。", "在打者與跑者同時施壓前，決定第一個對決策略。", "observe"),
     youth_match_mistake: officialValidation("下一次回應", "攻守交換後，你回到同一場比賽；上一個處理仍留在記錄裡。", "先確認基本站位，再決定這一球要靠自己、隊友或更冒險的動作。", "pressure"),
-    youth_match_after: officialValidation("終場整理", "最後一個出局數已經完成，整場的選擇一起進入賽後評估。", "比賽結束了；決定你先和誰一起理解這場球。", "baseballIQ")
+    youth_match_after: officialValidation("終場整理", "最後一個出局數已經完成，整場的選擇一起進入賽後評估。", "比賽結束了；決定你先和誰一起理解這場球。", "baseballIQ"),
+    high_school_year_two_spring_game: validation({
+      levelId: "highSchool",
+      typeId: "official_league",
+      competitionId: "high_school_year_two_spring",
+      competitionTitle: "青棒第二年・春季聯賽",
+      stageLabel: "春季角色驗證",
+      transition: "重新排定的角色第一次進入正式比分。",
+      inningSummary: "五局｜一比一｜一人出局、二壘有人",
+      connector: "依高中現任教練的推進方向，選擇具體打席處理。",
+      abilityFocus: "baseballIQ",
+      tone: "official",
+      showScore: false
+    }),
+    high_school_year_two_autumn_stage: validation({
+      levelId: "highSchool",
+      typeId: "tournament",
+      competitionId: "high_school_year_two_autumn",
+      competitionTitle: "青棒第二年・秋季盃賽",
+      stageLabel: "全年角色驗證",
+      transition: "春季建立的用途，必須在不同對手與比分下再次成立。",
+      inningSummary: "六局｜領先一分｜一人出局、一三壘有人",
+      connector: "完成當下球隊任務，確認角色能否維持一整年。",
+      abilityFocus: "observe",
+      tone: "tournament",
+      showScore: false
+    })
   });
 
   function validation(definition) {

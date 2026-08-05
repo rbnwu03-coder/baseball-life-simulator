@@ -1,11 +1,6 @@
 var CareerSpineContract = (() => {
   const KNOWN_GAPS = [
     {
-      id: "high-school-year-two-missing",
-      severity: "known-gap",
-      message: "目前沒有正式的高二 chapter、progress 欄位或可玩節點。"
-    },
-    {
       id: "junior-split-age-mismatch",
       severity: "known-gap",
       message: "青少棒分化由主線以 13 歲進入，但 Debug 書籤以 15 歲建立。"
@@ -111,14 +106,14 @@ var CareerSpineContract = (() => {
       entry: { handler: "enterJuniorSeason", eventId: "junior_consequence" },
       settlement: { eventIds: ["junior_season_result"], handler: "evaluateJuniorSeason" },
       nextChapters: ["青少棒階段小結"],
-      knownIssues: [KNOWN_GAPS[1]],
+      knownIssues: [KNOWN_GAPS[0]],
       route: steps([
         "junior_consequence", "junior_coach_preference", "junior_senior", "junior_starting_job",
         "junior_academics", "junior_tournament", "junior_after_loss", "takahashi_school_question",
         "yamamoto_recommendation", "junior_school_choice"
       ])
     }),
-    resultNode("junior-split-result", "青少棒階段小結", [13, 15], "junior_season_result", ["青棒"], [KNOWN_GAPS[1]]),
+    resultNode("junior-split-result", "青少棒階段小結", [13, 15], "junior_season_result", ["青棒"], [KNOWN_GAPS[0]]),
     node({
       id: "high-school-year-one",
       chapter: "青棒",
@@ -127,13 +122,28 @@ var CareerSpineContract = (() => {
       entry: { handler: "enterHighSchool", eventId: "high_school_intro" },
       settlement: { eventIds: ["high_school_result"], handler: "evaluateHighSchoolYear" },
       nextChapters: ["青棒第一年小結"],
-      knownIssues: [KNOWN_GAPS[0]],
       route: steps([
         "high_school_intro", "high_school_load", "high_school_life", "high_school_call_home",
         "high_school_role", "high_school_long_bench", "high_school_showcase", "high_school_scout_feedback"
       ])
     }),
-    resultNode("high-school-year-one-result", "青棒第一年小結", [16, 16], "high_school_result", ["青棒關鍵年"], [KNOWN_GAPS[0]]),
+    resultNode("high-school-year-one-result", "青棒第一年小結", [16, 16], "high_school_result", ["青棒第二年"]),
+    node({
+      id: "high-school-year-two",
+      chapter: "青棒第二年",
+      age: [17, 17],
+      progress: { field: "highSchoolYearTwoStep", min: 0, max: 7 },
+      entry: { handler: "enterHighSchoolYearTwo", eventId: "high_school_year_two_roster_reset" },
+      settlement: { eventIds: ["high_school_year_two_result"], handler: "evaluateHighSchoolYearTwo" },
+      nextChapters: ["青棒第二年小結"],
+      route: steps([
+        "high_school_year_two_roster_reset", "high_school_year_two_role_test",
+        "high_school_year_two_spring_game", "high_school_year_two_depth_chart",
+        "high_school_year_two_body_load", "high_school_year_two_team_responsibility",
+        "high_school_year_two_autumn_stage", "high_school_year_two_senior_plan"
+      ])
+    }),
+    resultNode("high-school-year-two-result", "青棒第二年小結", [17, 17], "high_school_year_two_result", ["青棒關鍵年"]),
     node({
       id: "high-school-critical-year",
       chapter: "青棒關鍵年",
@@ -142,7 +152,6 @@ var CareerSpineContract = (() => {
       entry: { handler: "enterCriticalYear", eventId: "critical_offseason" },
       settlement: { eventIds: ["critical_year_result"], handler: "evaluateCriticalYear" },
       nextChapters: ["青棒生涯出口"],
-      knownIssues: [KNOWN_GAPS[0]],
       route: steps([
         "critical_offseason", "critical_tournament", "critical_public_attention", "critical_injury",
         "critical_scout_interview", "critical_family", "critical_farewell", "critical_exit_choice"
@@ -176,13 +185,13 @@ var CareerSpineContract = (() => {
       entry: { handler: "enterDevelopmentYears", eventId: "development_daily_life" },
       settlement: { eventIds: ["development_result"], handler: "evaluateDevelopmentYears" },
       nextChapters: ["二十二歲職涯小結"],
-      knownIssues: [KNOWN_GAPS[2]],
+      knownIssues: [KNOWN_GAPS[1]],
       route: steps([
         "development_daily_life", "development_competition", "development_mentor",
         "development_body_choice", "development_opportunity", "development_market", "development_decision"
       ])
     }),
-    resultNode("age-22-career-result", "二十二歲職涯小結", [22, 22], "development_result", ["垂直切片完成"], [KNOWN_GAPS[3]]),
+    resultNode("age-22-career-result", "二十二歲職涯小結", [22, 22], "development_result", ["垂直切片完成"], [KNOWN_GAPS[2]]),
     node({
       id: "vertical-slice-complete",
       chapter: "垂直切片完成",
@@ -192,7 +201,7 @@ var CareerSpineContract = (() => {
       settlement: { eventIds: ["slice_complete"], handler: null },
       nextChapters: [],
       terminal: true,
-      knownIssues: [KNOWN_GAPS[3]],
+      knownIssues: [KNOWN_GAPS[2]],
       route: { kind: "fixed", eventId: "slice_complete" }
     })
   ];
@@ -369,6 +378,38 @@ var CareerSpineContract = (() => {
       }
       if (hasEnding && !isFormalEndingState) {
         issues.push(issue("ending-state-mismatch", "十歲暑假的 ending 只能存在於 day=7 且 phase=ending 的正式結算狀態。"));
+      }
+    }
+
+    if (chapter === "青棒第二年") {
+      const hasResult = typeof state.highSchoolYearTwoResult === "string"
+        && state.highSchoolYearTwoResult.trim() !== "";
+      const hasDetail = typeof state.highSchoolYearTwoDetail === "string"
+        && state.highSchoolYearTwoDetail.trim() !== "";
+      if (hasResult || hasDetail) {
+        issues.push(issue(
+          "high-school-year-two-result-state-mismatch",
+          "青棒第二年的正式結果只能存在於青棒第二年小結。"
+        ));
+      }
+    }
+
+    if (chapter === "青棒第二年小結") {
+      const hasResult = typeof state.highSchoolYearTwoResult === "string"
+        && state.highSchoolYearTwoResult.trim() !== "";
+      const hasDetail = typeof state.highSchoolYearTwoDetail === "string"
+        && state.highSchoolYearTwoDetail.trim() !== "";
+      if (!hasResult || !hasDetail) {
+        issues.push(issue(
+          "high-school-year-two-result-missing",
+          "青棒第二年小結必須同時保有 result 與 detail。"
+        ));
+      }
+      if (state.highSchoolYearTwoStep !== 8) {
+        issues.push(issue(
+          "high-school-year-two-result-step-mismatch",
+          `青棒第二年小結必須由 step=8 進入，目前為 ${String(state.highSchoolYearTwoStep)}。`
+        ));
       }
     }
 

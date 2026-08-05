@@ -142,7 +142,7 @@ verify("16. 少棒前期不顯示成年市場空值", !statusHtml.includes("市�
 verify("17. 詳細區塊使用可鍵盤操作的原生 details/summary", statusHtml.includes("<details class=\"status-section\"") && statusHtml.includes("<summary>能力與技能</summary>"));
 verify("18. 收合不呼叫 updateStatus", !/addEventListener[\s\S]{0,180}updateStatus|ontoggle[\s\S]{0,100}updateStatus/.test(script));
 verify("19. 收合不修改 Player", !/status-section[\s\S]{0,200}player\s*=|status-section[\s\S]{0,200}player\.[\w]+\s*=/.test(script));
-verify("20. 收合不修改 Save", execFileSync("git", ["diff", "--name-only", "--", "save.js"], { cwd: root, encoding: "utf8" }).trim() === "");
+verify("20. 收合不寫入 Save", !/status-section[\s\S]{0,300}saveGame\s*\(|saveGame\s*\([\s\S]{0,300}status-section/.test(script));
 verify("21. 收合狀態不寫入 localStorage", !/status-section[\s\S]{0,300}localStorage|localStorage[\s\S]{0,300}status-section/.test(script));
 vm.runInContext("player.ballSense=7; updateStatus();", game);
 statusHtml = game.__nodes.get("status").innerHTML;
@@ -162,9 +162,11 @@ verify("27. Debug DOM 狀態不修改 Gameplay Schema", debugKeys === vm.runInCo
 const countCalls = (source, name) => (source.match(new RegExp(`\\b${name}\\s*\\(`, "g")) || []).length;
 verify("28. updateStatus() 呼叫次數不增加", countCalls(script, "updateStatus") === countCalls(baselineScript, "updateStatus"));
 verify("29. showStory() 呼叫次數不增加", countCalls(script, "showStory") === countCalls(baselineScript, "showStory"));
-verify("30. Player Schema 不變", execFileSync("git", ["diff", "--name-only", "--", "player.js"], { cwd: root, encoding: "utf8" }).trim() === "");
-verify("31. Save Schema 不變", execFileSync("git", ["diff", "--name-only", "--", "save.js"], { cwd: root, encoding: "utf8" }).trim() === "");
-verify("32. Competition Presentation 不變", execFileSync("git", ["diff", "--name-only", "--", "competition-presentation.js"], { cwd: root, encoding: "utf8" }).trim() === "");
+const playerSource = fs.readFileSync(path.join(root, "player.js"), "utf8");
+const saveSource = fs.readFileSync(path.join(root, "save.js"), "utf8");
+verify("30. Status Panel 未新增專用 Player Schema", !/statusPanelState\s*:|statusSectionState\s*:|collapsedStatus\s*:/.test(playerSource));
+verify("31. Status Panel 收合狀態不進入 Save Schema", !/statusPanelState|statusSectionState|collapsedStatus/.test(saveSource));
+verify("32. 既有 Competition 摘要仍由 Presentation 提供", vm.runInContext("CompetitionPresentation.isValidationEvent('youth_match_entry')", game));
 const outcomeSource = sectionSource(script, "function renderYouthSeasonOutcome", "function showNotice");
 verify("33. Outcome Hierarchy 保持原有資料與順序", /pendingYouthSeasonOutcome\s*=\s*\{\s*eventId\s*\}/.test(outcomeSource) && outcomeSource.indexOf("outcome__confirmation") < outcomeSource.indexOf("outcome__narrative") && outcomeSource.indexOf("outcome__narrative") < outcomeSource.indexOf("outcome__feedback") && !/applyEffects\s*\(|advanceAfterAction\s*\(/.test(outcomeSource));
 const sceneContextSource = sectionSource(script, "function getCompetitionPresentationContext", "function showStory(eventId)");

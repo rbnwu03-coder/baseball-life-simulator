@@ -216,12 +216,18 @@ verify("27. 一般事件 Feedback 依既有重設政策清除", general.__nodes.
 const countCalls = (source, name) => (source.match(new RegExp(`\\b${name}\\s*\\(`, "g")) || []).length;
 verify("28. 不增加 showStory() 呼叫次數", countCalls(script, "showStory") === countCalls(baselineScript, "showStory"));
 verify("29. 不增加 updateStatus() 呼叫次數", countCalls(script, "updateStatus") === countCalls(baselineScript, "updateStatus"));
-verify("30. 不修改 Player Schema", execFileSync("git", ["diff", "--name-only", "--", "player.js"], { cwd: root, encoding: "utf8" }).trim() === "");
-verify("31. 不修改 Save Schema", execFileSync("git", ["diff", "--name-only", "--", "save.js"], { cwd: root, encoding: "utf8" }).trim() === "");
+const playerSource = fs.readFileSync(path.join(root, "player.js"), "utf8");
+const saveSource = fs.readFileSync(path.join(root, "save.js"), "utf8");
+verify("30. Outcome 未新增專用 Player Schema", !/pendingYouthSeasonOutcome\s*:|choiceOutcome\s*:|outcomeCard\s*:/.test(playerSource));
+verify("31. Outcome 未寫入 Save Schema", !/pendingYouthSeasonOutcome|choiceOutcome|outcomeCard/.test(saveSource));
 const matchBefore = vm.runInContext("JSON.stringify(player.matchState)", pureRenderer);
 pureRenderer.renderYouthSeasonOutcome("youth_match_grounder", { text: "守位選擇", memory: "守位結果" }, "");
 verify("32. Outcome 不修改 matchState", vm.runInContext("JSON.stringify(player.matchState)", pureRenderer) === matchBefore);
-verify("33. 不修改事件 effects 或路由", execFileSync("git", ["diff", "--name-only", "--", "story.js", "competition-presentation.js"], { cwd: root, encoding: "utf8" }).trim() === "" && vm.runInContext(gameplaySnapshotExpression, pureRenderer) === rendererGameplayBefore);
+const outcomeRendererSource = script.slice(
+  script.indexOf("function renderYouthSeasonOutcome"),
+  script.indexOf("function showNotice")
+);
+verify("33. Outcome Renderer 不修改事件 effects 或 Gameplay 狀態", vm.runInContext(gameplaySnapshotExpression, pureRenderer) === rendererGameplayBefore && !/applyEffects\s*\(|advanceAfterAction\s*\(/.test(outcomeRendererSource));
 
 verify("34. Outcome 長內容可自然換行", /\.outcome,[\s\S]*?overflow-wrap\s*:\s*anywhere/.test(css) && !/\.choice-outcome-card\s*\{[^}]*height\s*:/.test(css));
 verify("35. 390px 版面不設定水平裁切或固定寬度", /@media\s*\(max-width:\s*900px\)/.test(css) && /\.outcome,[\s\S]*?max-width\s*:\s*100%/.test(css) && !/\.outcome[^}]*width\s*:\s*[4-9]\d{2}px/.test(css));

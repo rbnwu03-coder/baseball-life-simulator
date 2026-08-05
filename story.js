@@ -1153,6 +1153,137 @@ const highSchoolEvents = {
       return `${player.highSchoolResult}\n\n${player.highSchoolDetail}\n\n球隊角色：${player.highSchoolTeamRole}\n角色建立：${value.label || "待評估"}\n${(value.reasons || []).join("；")}\n${value.recovery ? `下一步：${value.recovery}\n` : ""}曝光：${player.exposure}　球探評價：${player.scoutEvaluation}\n疲勞：${player.body.fatigue}　傷病風險：${player.body.injuryRisk}　倦怠：${player.burnout}\n\n取得任務只是入口；方向、能力與實際證明同時成立，才算建立球隊能描述的價值。`;
     },
     choices: [
+      { text: "進入青棒第二年", nextChapter: "highSchoolYearTwo" },
+      { text: "重新體驗另一條人生", restart: true }
+    ]
+  }
+};
+
+const highSchoolYearTwoEvents = {
+  high_school_year_two_roster_reset: {
+    title: "名單重新洗牌",
+    text() {
+      const role = player.highSchoolTeamRole || "尚未固定的輪替角色";
+      return `學長的置物櫃已經清空，新生的球袋則排在門邊。高中現任教練把春季名單擦掉重寫，先念出你高一留下的角色：「${role}。」\n\n他沒有保留原來的順位，只說三週後會重新排一次守位與打線。`;
+    },
+    choices: [
+      C("到主守位組報到，從基本接傳重新排隊", { resilience: 1, discipline: 1 }, ["year_two_reset_primary_group"], "你把高一履歷留在身後，重新完成主守位的第一輪基本球。", { positionSkillEffects: { "內野手": { catching: 1, reaction: 1 }, "外野手": { catching: 1, range: 1 }, "捕手": { blocking: 1, catching: 1 }, "投手": { control: 1, pitchStamina: 1 } }, bodyEffects: { fatigue: 1 } }),
+      C("照教練分組，同時帶兩只手套進輪替測試", { observe: 1, responsibility: 1 }, ["year_two_reset_rotation_group"], "你沒有要求保留舊順位，先把兩個守位的工作表都抄進筆記。", { skillEffects: { baseballIQ: 1 }, relationshipEffects: { coachTrust: 1 } }),
+      C("拿著名單問清楚這次重排的三項標準", { confidence: 1, observe: 1 }, ["year_two_asked_roster_criteria"], "教練圈出守備完成率、戰術執行與出勤，要求你用接下來三週回答。", { relationshipEffects: { coachTrust: 1 }, highSchoolEffects: { exposure: 1 } })
+    ]
+  },
+  high_school_year_two_role_test: {
+    title: "原本的角色還能不能用",
+    text() {
+      const assignment = player.seasonPosition === "捕手"
+        ? "連續擋球後指揮一、三壘防區"
+        : player.seasonPosition === "投手"
+          ? "兩組十五球的控球與牽制"
+          : `${player.seasonPosition || "守備"}的連續處理，再接一次打帶跑掩護`;
+      return `高中現任教練把你排進第二輪測試：${assignment}。\n\n這不是讓你自行選位置。教練要確認，高一建立的用途在新名單裡是否仍能交付。`;
+    },
+    choices: [
+      C("依指定主守位完成整組球，不追加動作", { discipline: 2 }, ["year_two_role_primary_proof"], "你把每顆球照指定出局點完成，沒有為了醒目改變測試內容。", { positionSkillEffects: { "內野手": { catching: 1, throwing: 1 }, "外野手": { range: 1, throwing: 1 }, "捕手": { blocking: 1, gameCalling: 1 }, "投手": { control: 2 } }, relationshipEffects: { coachTrust: 1 }, matchEffects: { performance: 2 } }),
+      C("完成主守位後，接著補上教練指定的第二任務", { responsibility: 2, observe: 1 }, ["year_two_role_utility_proof"], "你在主守位測試後換組，讓教練確認臨時補位不必重新說明整套暗號。", { skillEffects: { baseballIQ: 1, baseRunning: 1 }, relationshipEffects: { coachTrust: 2 }, bodyEffects: { fatigue: 1 }, matchEffects: { performance: 2 } }),
+      C("輪到情境打擊時，握短球棒完成右側推進", { ballSense: 1, discipline: 1 }, ["year_two_role_bat_proof"], "你把外角球推向右側，讓二壘跑者在守備傳球前進到三壘。", { skillEffects: { batting: 2, baseballIQ: 1 }, bodyEffects: { fatigue: 1 }, matchEffects: { performance: 2 } })
+    ]
+  },
+  high_school_year_two_spring_game: {
+    title: "春季聯賽的第一個打席",
+    text: "春季聯賽第五局，比分一比一，一人出局、二壘有人。高中現任教練在你走出休息區前只比向右半邊場地：先讓這一分往前走。",
+    choices: [
+      C("握短球棒，把外角球推向一、二壘之間", { discipline: 1, observe: 1 }, ["year_two_spring_push"], "你讓球穿過前移的一壘手身側，跑者停在三壘，你也安全上一壘。", { skillEffects: { batting: 1, baseballIQ: 1 }, matchEffects: { performance: 3 }, careerEffects: { recentPerformance: 2 } }),
+      C("擺出短棒，等三壘手前移後收棒選球", { observe: 2, pressure: 1 }, ["year_two_spring_bunt_read"], "三壘手往前跨了兩步，你收棒放過偏低壞球，下一球再把短打點向空出的三壘線。", { skillEffects: { baseballIQ: 2, baseRunning: 1 }, matchEffects: { performance: 2 }, careerEffects: { recentPerformance: 1, reputation: 1 } }),
+      C("鎖定第一顆直球，直接攻擊右外野深處", { confidence: 2, pressure: 2 }, ["year_two_spring_first_pitch"], "第一球進到外側好球帶，你把球打向右外野。跑者推進，球也在警戒區前被接住。", { skillEffects: { batting: 2 }, matchEffects: { performance: 2 }, highSchoolEffects: { exposure: 1 }, careerEffects: { recentPerformance: 1 } })
+    ]
+  },
+  high_school_year_two_depth_chart: {
+    title: "名單上的使用方式",
+    text() {
+      const line = hasFlag("year_two_spring_push")
+        ? "先發打線後段／主守位輪替"
+        : hasFlag("year_two_role_utility_proof")
+          ? "多位置輪替／比賽中段調度"
+          : hasFlag("year_two_role_bat_proof")
+            ? "代打候選／守備替補"
+            : "後段守備／替補待命";
+      return `春季賽後，高中現任教練把深度表貼在器材室門口。你的名字旁寫著：「${line}」。\n\n這是今年球隊準備怎麼使用你，不是畢業出口。`;
+    },
+    choices: [
+      C("照表提早到主守位，先完成先發前的接傳", { discipline: 1, responsibility: 1 }, ["year_two_depth_primary"], "你不要求教練改表，先把目前順位需要的準備完成。", { positionSkillEffects: { "內野手": { catching: 1 }, "外野手": { range: 1 }, "捕手": { blocking: 1 }, "投手": { control: 1 } }, relationshipEffects: { coachTrust: 1 } }),
+      C("把兩個守位的暗號與補位責任寫成同一張表", { observe: 2 }, ["year_two_depth_utility"], "你把換位前後的責任接起來，讓臨時調度不必從頭確認。", { skillEffects: { baseballIQ: 2 }, relationshipEffects: { teammateBond: 1 } }),
+      C("到打擊組確認自己會面對的代打球路", { ballSense: 1, confidence: 1 }, ["year_two_depth_batting"], "打擊教練指定外角快速球與低角變化球，要求你只練會在比賽出現的兩種任務。", { skillEffects: { batting: 2 }, bodyEffects: { fatigue: 1 } })
+    ]
+  },
+  high_school_year_two_body_load: {
+    title: "連續出賽後的身體回報",
+    text() {
+      const warning = player.body.pain >= 4 || player.body.injuryRisk >= 7
+        ? "你抬手脫球衣時，舊傷的位置先卡了一下。防護員把疼痛表推到你面前。"
+        : "三週內的比賽與輪替訓練疊在一起，肩膀和下肢恢復速度開始比高一慢。";
+      return `${warning}\n\n週末仍有出賽需求，高中現任教練要求你在名單確認前回報能完成的負荷。`;
+    },
+    choices: [
+      C("把疼痛位置和出現時間完整填進表格", { responsibility: 2 }, ["year_two_reported_body_load"], "防護員刪掉一組高強度傳球，保留你能安全完成的守備局數。", { bodyEffects: { fatigue: -2, injuryRisk: -2, pain: -1 }, relationshipEffects: { coachTrust: 1 }, careerEffects: { reputation: 1 } }),
+      C("保留出賽，但取消賽後追加傳球", { observe: 1, discipline: 1 }, ["year_two_limited_extra_load"], "你完成正式任務後把球交回器材籃，沒有再用加練掩蓋疲勞。", { bodyEffects: { fatigue: -1, injuryRisk: -1 }, highSchoolEffects: { exposure: -1 } }),
+      C("照原排程出賽，把疼痛留到休兵日處理", { resilience: 1, pressure: 2 }, ["year_two_played_through_load"], "你保住這週的名單位置，揮臂後的疼痛卻比前一場多停留了一晚。", { bodyEffects: { fatigue: 2, injuryRisk: 2, pain: 2 }, highSchoolEffects: { exposure: 1 }, careerEffects: { recentPerformance: 1 } })
+    ]
+  },
+  high_school_year_two_team_responsibility: {
+    title: "輪到你帶新生完成收操",
+    text: "練習結束後，高中現任教練把三名新生交給你：一人不熟悉補位，一人總忘記回收器材，另一人正在等自己的追加打擊。你自己的自主訓練時間只剩四十分鐘。",
+    choices: [
+      C("帶他們重跑一次補位，再一起收器材", { responsibility: 2 }, ["year_two_taught_juniors"], "你少做一組個人訓練，卻讓下一次團隊守備少了一個沒人補的位置。", { skillEffects: { baseballIQ: 1 }, relationshipEffects: { teammateBond: 2, coachTrust: 1 }, bodyEffects: { fatigue: 1 } }),
+      C("把工作分成三份，確認完成後回到自己的打擊組", { discipline: 1, responsibility: 1 }, ["year_two_shared_responsibility"], "你沒有替新生做完所有事，也沒有讓自己的訓練消失。", { relationshipEffects: { teammateBond: 1 }, skillEffects: { batting: 1 } }),
+      C("先完成自己的四十球，再回來檢查收操", { confidence: 1, pressure: 1 }, ["year_two_prioritized_own_work"], "你的個人球數沒有減少；回來時，一只器材籃仍留在界外區。", { skillEffects: { batting: 2 }, relationshipEffects: { teammateBond: -1 }, bodyEffects: { fatigue: 1 } })
+    ]
+  },
+  high_school_year_two_autumn_stage: {
+    title: "秋季盃賽：角色能不能留一整年",
+    text: "秋季盃賽第六局，球隊領先一分，一人出局、一三壘有人。春季曾經成立的角色，現在必須在不同比分與不同對手面前再完成一次。",
+    get choices() {
+      const defenseByPosition = {
+        "內野手": {
+          text: "守在雙殺深度，接穩後先封住二壘",
+          memory: "滾地球進到正面，你先踩穩再把球送向二壘。前位跑者出局，三壘跑者沒有趁續傳空檔回本壘。"
+        },
+        "外野手": {
+          text: "退到能接殺也能壓住三壘跑者的深度",
+          memory: "飛球落進手套後，你立刻把身體轉向本壘。三壘跑者看見回傳已進入內野，只能停在壘包上。"
+        },
+        "捕手": {
+          text: "兩好球後配低角球，膝蓋先收住不死三振",
+          memory: "打者揮空，球提前落地。你把球擋在身前後傳向一壘完成出局，三壘跑者沒有離壘。"
+        },
+        "投手": {
+          text: "用低角球製造正面滾地，離板後先抓一壘",
+          memory: "球棒碰出投手前滾地球，你離開投手板把球接穩、傳向一壘；三壘跑者沒有找到起跑空檔。"
+        }
+      };
+      const defense = defenseByPosition[player.seasonPosition] || defenseByPosition["內野手"];
+      return [
+        C(defense.text, { discipline: 1, responsibility: 1 }, ["year_two_autumn_secure_out"], defense.memory, { positionSkillEffects: { "內野手": { catching: 1, throwing: 1 }, "外野手": { throwing: 1, range: 1 }, "捕手": { gameCalling: 1, blocking: 1 }, "投手": { control: 1, pitchStamina: 1 } }, matchEffects: { performance: 3, outs: 1 }, careerEffects: { recentPerformance: 2, reputation: 1 } }),
+        C("打席握短球棒，鎖定能送回三壘跑者的球", { observe: 1, ballSense: 1 }, ["year_two_autumn_run_creation"], "你把中低球送向外野，三壘跑者在接殺後起跑，這次紀錄只有一分打點。", { skillEffects: { batting: 1, baseballIQ: 1 }, matchEffects: { performance: 3 }, careerEffects: { recentPerformance: 2 }, highSchoolEffects: { exposure: 1 } }),
+        C("接受臨時換位，先和相鄰守備確認每個補位", { observe: 2, pressure: 1 }, ["year_two_autumn_utility_hold"], "你在不熟悉的位置先喊完責任，下一球沒有落在你面前，整組守備卻沒有因此斷線。", { skillEffects: { baseballIQ: 2 }, relationshipEffects: { coachTrust: 2, teammateBond: 1 }, matchEffects: { performance: 2 }, careerEffects: { reputation: 1 } })
+      ];
+    }
+  },
+  high_school_year_two_senior_plan: {
+    title: "高三前只剩一個完整休賽季",
+    text: "秋季賽結束，高中現任教練把高三訓練表分成四欄：主守位、跨位置、打擊與健康。每欄都能增加一種用途，也會壓縮其他方向的時間。",
+    choices: [
+      C("把主要份量放在主守位專精", { discipline: 2 }, ["year_two_plan_position"], "教練把主守位的高強度球數寫進你的休賽季主課表。", { positionSkillEffects: { "內野手": { reaction: 2, throwing: 1 }, "外野手": { range: 2, armStrength: 1 }, "捕手": { blocking: 1, gameCalling: 2 }, "投手": { control: 2, pitchStamina: 1 } }, bodyEffects: { fatigue: 1 } }),
+      C("保留兩個守位與比賽中段調度", { observe: 1, responsibility: 1 }, ["year_two_plan_utility"], "教練在你的課表上保留換位、代跑與戰術演練。", { skillEffects: { baseballIQ: 2, baseRunning: 1 }, relationshipEffects: { coachTrust: 1 } }),
+      C("集中打擊，爭取用棒次增加出賽", { confidence: 1, ballSense: 1 }, ["year_two_plan_batting"], "你的休賽季主課表改成特定球路與情境打擊，守備只保留球隊最低要求。", { skillEffects: { batting: 3 }, bodyEffects: { fatigue: 2, injuryRisk: 1 } }),
+      C("先完成疼痛與疲勞重整", { responsibility: 2, resilience: 1 }, ["year_two_plan_health"], "防護員先劃掉兩週高負荷，教練把第一次完整測試延到身體回報穩定之後。", { bodyEffects: { fatigue: -3, pain: -2, injuryRisk: -2, recovery: 1 }, highSchoolEffects: { exposure: -1 } })
+    ]
+  },
+  high_school_year_two_result: {
+    title: "青棒第二年評估",
+    text() {
+      return `${player.highSchoolYearTwoResult}\n\n${player.highSchoolYearTwoDetail}\n\n目前球隊角色：${player.highSchoolTeamRole || "尚未固定"}\n近期表現：${player.recentPerformance}　教練信任：${player.relationships.coachTrust}\n疲勞：${player.body.fatigue}　傷病風險：${player.body.injuryRisk}　疼痛：${player.body.pain}\n\n高二沒有決定畢業出口，但它決定你帶著什麼角色與身體狀態進入最後一年。`;
+    },
+    choices: [
       { text: "進入青棒關鍵年與生涯出口", nextChapter: "criticalYear" },
       { text: "重新體驗另一條人生", restart: true }
     ]
@@ -1737,6 +1868,11 @@ function getCurrentEventId() {
     return sequence[player.criticalYearStep] || "critical_year_result";
   }
   if (player.chapter === "青棒第一年小結") return "high_school_result";
+  if (player.chapter === "青棒第二年小結") return "high_school_year_two_result";
+  if (player.chapter === "青棒第二年") {
+    const sequence = ["high_school_year_two_roster_reset", "high_school_year_two_role_test", "high_school_year_two_spring_game", "high_school_year_two_depth_chart", "high_school_year_two_body_load", "high_school_year_two_team_responsibility", "high_school_year_two_autumn_stage", "high_school_year_two_senior_plan"];
+    return sequence[player.highSchoolYearTwoStep] || "high_school_year_two_result";
+  }
   if (player.chapter === "青棒") {
     const sequence = ["high_school_intro", "high_school_load", "high_school_life", "high_school_call_home", "high_school_role", "high_school_long_bench", "high_school_showcase", "high_school_scout_feedback"];
     return sequence[player.highSchoolStep] || "high_school_result";
@@ -1790,5 +1926,5 @@ function getCurrentEventId() {
 
 function getEvent(eventId) {
   if (eventId === "night") return getNightEvent();
-  return chapterOneEvents[eventId] || chapterTwoEvents[eventId] || youthSeasonEvents[eventId] || positionCompetitionEvents[eventId] || juniorBaseballEvents[eventId] || juniorSeasonEvents[eventId] || highSchoolEvents[eventId] || criticalYearEvents[eventId] || careerTransitionEvents[eventId] || pacingEvents[eventId] || developmentEvents[eventId] || null;
+  return chapterOneEvents[eventId] || chapterTwoEvents[eventId] || youthSeasonEvents[eventId] || positionCompetitionEvents[eventId] || juniorBaseballEvents[eventId] || juniorSeasonEvents[eventId] || highSchoolEvents[eventId] || highSchoolYearTwoEvents[eventId] || criticalYearEvents[eventId] || careerTransitionEvents[eventId] || pacingEvents[eventId] || developmentEvents[eventId] || null;
 }

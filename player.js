@@ -1,4 +1,4 @@
-const SAVE_VERSION = 12;
+const SAVE_VERSION = 13;
 
 // Phase 2：創角 Identity 的唯一 runtime 合法值來源。
 // UI 與創角流程可以呈現或使用這些值，但輸入是否合法由此契約判定。
@@ -165,6 +165,9 @@ function createInitialPlayer(name = "") {
     highSchoolTeamRole: "",
     highSchoolResult: "",
     highSchoolDetail: "",
+    highSchoolYearTwoStep: 0,
+    highSchoolYearTwoResult: "",
+    highSchoolYearTwoDetail: "",
     exposure: 0,
     scoutEvaluation: 0,
     dormStress: 0,

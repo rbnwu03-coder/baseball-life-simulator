@@ -72,6 +72,9 @@ function play(routeChoices, chapter2Choices, seasonChoices, competitionChoices, 
   playUntil(game, highSchoolChoices, "Boolean(player.highSchoolResult)");
   if (!vm.runInContext("player.highSchoolResult && player.highSchoolTeamRole", game)) throw new Error("青棒第一年沒有產生評估");
   game.choose("high_school_result", 0);
+  playUntil(game, criticalChoices, "Boolean(player.highSchoolYearTwoResult)", 12);
+  if (!vm.runInContext("player.highSchoolYearTwoResult && player.age === 17", game)) throw new Error("青棒第二年沒有產生評估");
+  game.choose("high_school_year_two_result", 0);
   playUntil(game, criticalChoices, "Boolean(player.criticalYearResult)");
   if (!vm.runInContext("player.criticalYearResult && player.careerExit", game)) throw new Error("青棒關鍵年沒有產生出口評估");
   game.choose("critical_year_result", 0);
@@ -131,6 +134,7 @@ const bookmarkExpectations = {
   pain: "junior_pain"
   ,juniorSeason: "junior_consequence",
   highSchool: "high_school_intro",
+  highSchoolYearTwo: "high_school_year_two_roster_reset",
   criticalYear: "critical_offseason",
   batPath: "critical_offseason",
   transitionDraft: "transition_draft_day",

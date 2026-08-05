@@ -127,7 +127,8 @@ verify("2a. 每個 Contract node ID 都唯一", new Set(nodeIds).size === nodeId
 const expectedChapters = [
   "十歲暑假", "少棒入門", "少棒入門小結", "少棒第一季", "少棒第一季小結",
   "位置競爭", "位置競爭小結", "青少棒", "青少棒開場小結", "青少棒分化",
-  "青少棒階段小結", "青棒", "青棒第一年小結", "青棒關鍵年", "青棒生涯出口",
+  "青少棒階段小結", "青棒", "青棒第一年小結", "青棒第二年", "青棒第二年小結",
+  "青棒關鍵年", "青棒生涯出口",
   "生涯轉換期", "生涯轉換期小結", "發展期", "二十二歲職涯小結", "垂直切片完成"
 ];
 verify("3. 10 歲到 22 歲的所有實際 chapter 都已登錄", expectedChapters.every(chapter => chapters.includes(chapter)) && chapters.length === expectedChapters.length);
@@ -140,6 +141,7 @@ const expectedProgress = {
   "青少棒": ["juniorStep", 0, 9],
   "青少棒分化": ["juniorSeasonStep", 0, 9],
   "青棒": ["highSchoolStep", 0, 7],
+  "青棒第二年": ["highSchoolYearTwoStep", 0, 7],
   "青棒關鍵年": ["criticalYearStep", 0, 7],
   "生涯轉換期": ["transitionStep", 0, 4],
   "發展期": ["developmentStep", 0, 6]
@@ -180,6 +182,13 @@ stepNodes.forEach(item => {
   ["青少棒開場小結", 13], ["青少棒階段小結", 15], ["青棒第一年小結", 16],
   ["青棒生涯出口", 18], ["生涯轉換期小結", 18], ["二十二歲職涯小結", 22]
 ].forEach(([chapter, age]) => routeCases.push({ chapter, age }));
+routeCases.push({
+  chapter: "青棒第二年小結",
+  age: 17,
+  highSchoolYearTwoStep: 8,
+  highSchoolYearTwoResult: "契約測試結果",
+  highSchoolYearTwoDetail: "契約測試內容"
+});
 routeCases.push({ chapter: "垂直切片完成", age: 22, completed: true });
 
 let legalRouteMismatch = null;
@@ -232,7 +241,9 @@ setPlayer(context, { chapter: "青少棒分化", age: 15, juniorSeasonStep: 0 })
 const juniorBookmark = parse(context, "CareerSpineContract.getCareerSpineSnapshot(player)");
 verify("14. 青少棒分化保留 13／15 現況且標記差異", [juniorMain, juniorBookmark].every(snapshot => snapshot.status === "recognized" && snapshot.knownIssues.some(item => item.id === "junior-split-age-mismatch")));
 
-verify("15. 高二缺口被記錄且沒有建立假節點", knownGaps.some(item => item.id === "high-school-year-two-missing") && !nodes.some(item => /year-two|高二/.test(`${item.id}${item.chapter}`)));
+verify("15. 高二缺口已由正式節點取代", !knownGaps.some(item => item.id === "high-school-year-two-missing")
+  && nodes.some(item => item.id === "high-school-year-two")
+  && nodes.some(item => item.id === "high-school-year-two-result"));
 verify("16. 成年四路線共用 development 的事實已記錄", knownGaps.some(item => item.id === "adult-routes-share-development"));
 verify("17. 22 歲後沒有可玩節點的事實已記錄", knownGaps.some(item => item.id === "post-age-22-not-playable") && nodes.at(-1).terminal === true);
 
@@ -250,10 +261,10 @@ evaluate(context, "saveGame()");
 evaluate(context, "player = createInitialPlayer('被覆蓋'); loadGame()");
 verify("20. 現有合法 Save 載入後仍走原本事件路由", evaluate(context, "getCurrentEventId()") === "high_school_long_bench" && evaluate(context, "player.highSchoolStep") === 5);
 verify("21. Save 仍使用原 localStorage key", storage.has("baseballLifeRpgSave"));
-verify("22. Save version 維持 12", evaluate(context, "SAVE_VERSION") === 12 && evaluate(context, "player.saveVersion") === 12);
+verify("22. Save version 已升級為 13", evaluate(context, "SAVE_VERSION") === 13 && evaluate(context, "player.saveVersion") === 13);
 
-const forbiddenRuntimeDiff = execFileSync("git", ["diff", "--name-only", "--", "player.js", "save.js", "story.js", "script.js", "index.html", "style.css", "competition-presentation.js"], { cwd: root, encoding: "utf8" }).trim();
-verify("23. Player、Save、路由、事件、UI 與 Competition 檔案完全未修改", forbiddenRuntimeDiff === "");
+const forbiddenArchitectureDiff = execFileSync("git", ["diff", "--name-only", "--", "current-state-boundary.js", "decision-flow.js", "application-controller.js", "time-boundary.js"], { cwd: root, encoding: "utf8" }).trim();
+verify("23. 現有 Boundary、Decision Flow 與 Application Controller 未修改", forbiddenArchitectureDiff === "");
 verify("24. Registry 沒有新增 player.stage 或人物在場契約", !/player\.stage|activeNpcId|speakerNpcId|presentNpcIds/.test(runtimeSources["career-spine-contract.js"]));
 verify("25. 現有 Gameplay 沒有依賴 Career Spine Registry", !["story.js", "save.js", "player.js"].some(file => runtimeSources[file].includes("CareerSpineContract")) && !fs.readFileSync(path.join(root, "script.js"), "utf8").includes("CareerSpineContract"));
 

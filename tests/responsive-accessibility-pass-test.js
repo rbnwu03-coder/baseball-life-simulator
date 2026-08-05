@@ -223,9 +223,12 @@ verify("40. pendingYouthSeasonOutcome 防重複契約仍有效", !vm.runInContex
 verify("41. 不存在的焦點目標不拋錯", vm.runInContext("focusRenderedElement('#missing-target')", youth) === false);
 
 const changedFiles = execFileSync("git", ["diff", "--name-only"], { cwd: root, encoding: "utf8" }).trim().split(/\r?\n/).filter(Boolean);
-verify("42. 未修改 Player、Save、Story 或 Competition 資料檔", !changedFiles.some(file => ["player.js", "save.js", "story.js", "competition-presentation.js"].includes(file)));
+verify("42. 未修改 Accessibility 範圍外的 Boundary 與 Flow", !changedFiles.some(file => [
+  "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "decision-flow.js",
+  "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js"
+].includes(file)));
 verify("43. 未新增 active NPC 推測", !/activeNpcId|activeNpcIds|speakerNpcId|presentNpcIds/.test(script));
-verify("44. Save key 與 schema 未變", execFileSync("git", ["diff", "--name-only", "--", "save.js", "player.js"], { cwd: root, encoding: "utf8" }).trim() === "");
-verify("45. Competition Presentation 未變", execFileSync("git", ["diff", "--name-only", "--", "competition-presentation.js"], { cwd: root, encoding: "utf8" }).trim() === "");
+verify("44. Save key 保持不變且高二遷移不影響 Accessibility", vm.runInContext("SAVE_KEY === 'baseballLifeRpgSave' && SAVE_VERSION === 13", youth));
+verify("45. 既有少棒 Competition Presentation 仍可使用", vm.runInContext("CompetitionPresentation.isValidationEvent('youth_match_entry') && Boolean(CompetitionPresentation.getValidationEvent('youth_match_grounder'))", youth));
 
 console.log(`\nUX Sprint 3.5 Responsive and Accessibility Pass：${passed}/${passed} 通過`);
