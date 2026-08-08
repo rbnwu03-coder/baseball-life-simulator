@@ -132,7 +132,7 @@ const runtimeFiles = [
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
   "competition-presentation.js", "career-spine-contract.js", "career-transition-resolver.js",
-  "career-transition-commit.js", "career-transition-runtime-resolver.js", "story.js", "save.js", "script.js"
+  "career-transition-commit.js", "career-transition-runtime-resolver.js", "career-transition-progression.js", "story.js", "save.js", "script.js"
 ];
 
 function makeContext() {
@@ -264,20 +264,23 @@ verify("23. Runtime Resolver 為 pure readonly 且沒有 UI、Save、Storage、R
 verify("24. 生涯轉換期 getAdultRouteKey 與 enterCareerTransition 都使用 Runtime Resolver", scriptSource.includes('if (player.chapter === "生涯轉換期")')
   && scriptSource.includes("const runtimeResult = CareerTransitionRuntimeResolver.resolveTransitionRuntime(player)")
   && scriptSource.includes("const routeKey = runtimeResult.routeKey"));
-verify("25. transitionStep mutation ownership 與既有五回合結算保持不變", scriptSource.includes("player.transitionStep += 1")
-  && scriptSource.includes("if (player.transitionStep >= 5) evaluateCareerTransition()"));
+verify("25. transitionStep mutation ownership 已交由 4.7 Boundary 且既有結算仍保留", !scriptSource.includes("player.transitionStep += 1")
+  && scriptSource.includes("CareerTransitionProgression.advanceTransition")
+  && scriptSource.includes("if (progressionResult.settlementRequired) evaluateCareerTransition()"));
 
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const contractIndex = html.indexOf('src="career-spine-contract.js"');
 const graduationResolverIndex = html.indexOf('src="career-transition-resolver.js"');
 const commitIndex = html.indexOf('src="career-transition-commit.js"');
 const runtimeResolverIndex = html.indexOf('src="career-transition-runtime-resolver.js"');
+const progressionIndex = html.indexOf('src="career-transition-progression.js"');
 const storyIndex = html.indexOf('src="story.js"');
-verify("26. Browser dependency 依 Contract → Graduation Resolver → Commit → Runtime Resolver → Story 載入", contractIndex >= 0
+verify("26. Browser dependency 依 Contract → Graduation Resolver → Commit → Runtime Resolver → Progression → Story 載入", contractIndex >= 0
   && contractIndex < graduationResolverIndex
   && graduationResolverIndex < commitIndex
   && commitIndex < runtimeResolverIndex
-  && runtimeResolverIndex < storyIndex);
+  && runtimeResolverIndex < progressionIndex
+  && progressionIndex < storyIndex);
 
 const protectedDiff = execFileSync("git", [
   "diff", "--name-only", "HEAD", "--",

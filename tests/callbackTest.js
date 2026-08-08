@@ -22,7 +22,7 @@ const game = vm.createContext({
   },
   window: { setTimeout: callback => callback() }
 });
-["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "story.js", "save.js", "script.js"].forEach(file => {
+["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js", "story.js", "save.js", "script.js"].forEach(file => {
   vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), game, { filename: file });
 });
 
@@ -54,7 +54,7 @@ vm.runInContext("player.chapter='青少棒分化'; player.juniorSeasonStep=8", g
 game.choose("yamamoto_recommendation", 0);
 if (!vm.runInContext("hasCallback('asked_for_another_demo', true)", game)) throw new Error("高中入口沒有回收教練示範");
 
-vm.runInContext("player.chapter='生涯轉換期'; player.careerExit='大學棒球'; player.transitionStep=3", game);
+vm.runInContext("player.chapter='生涯轉換期'; player.careerExit='大學棒球'; player.transitionStep=3; player.forcedEventId=''", game);
 game.choose("transition_relationship", 0);
 if (!vm.runInContext("hasCallback('family_safe_place', true)", game)) throw new Error("生涯轉換沒有回收家庭避風港");
 

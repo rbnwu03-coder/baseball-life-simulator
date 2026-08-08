@@ -1254,6 +1254,7 @@ function showNotice(message, type = "neutral") {
 
 function choose(eventId, index) {
   if (isTransitioning) return;
+  if (player.chapter === "生涯轉換期" && getCurrentEventId() !== eventId) return;
   const event = getEvent(eventId);
   const choice = event?.choices?.[index];
   if (!choice) return;
@@ -1409,7 +1410,7 @@ function choose(eventId, index) {
   }
 
   if (choice.finishChapterOne) finishChapterOne();
-  else advanceAfterAction(decisionContext);
+  else advanceAfterAction(decisionContext, eventId);
   tickPendingEvents(eventId);
 
   if (holdYouthSeasonOutcome) {
@@ -2729,16 +2730,20 @@ function applyFinanceEffects(effects = {}) {
   });
 }
 
-function advanceAfterAction(decisionContext = null) {
+function advanceAfterAction(decisionContext = null, completedEventId = null) {
   if (player.chapter === "發展期") {
     player.developmentStep += 1;
     if (player.developmentStep >= 7) evaluateDevelopmentYears();
     return;
   }
   if (player.chapter === "生涯轉換期") {
-    player.transitionStep += 1;
-    if (player.transitionStep >= 5) evaluateCareerTransition();
-    return;
+    const progressionResult = CareerTransitionProgression.advanceTransition(
+      player,
+      completedEventId
+    );
+    if (!progressionResult.advanced) return progressionResult;
+    if (progressionResult.settlementRequired) evaluateCareerTransition();
+    return progressionResult;
   }
   if (player.chapter === "青棒關鍵年") {
     player.criticalYearStep += 1;

@@ -36,9 +36,9 @@ const decisionProgressBlock = `    const nextChapter2Step = (Number(player.chapt
 
 const legacyScriptSource = scriptSource
   .replace(contextBlock, "")
-  .replace("  else advanceAfterAction(decisionContext);", "  else advanceAfterAction();")
+  .replace("  else advanceAfterAction(decisionContext, eventId);", "  else advanceAfterAction();")
   .replace(
-    "function advanceAfterAction(decisionContext = null) {",
+    "function advanceAfterAction(decisionContext = null, completedEventId = null) {",
     "function advanceAfterAction() {"
   )
   .replace(
@@ -593,7 +593,7 @@ assert(
 );
 assert(
   chooseSource.includes("DecisionFlow.createDecisionContext") &&
-    chooseSource.includes("advanceAfterAction(decisionContext)"),
+    chooseSource.includes("advanceAfterAction(decisionContext, eventId)"),
   "choose() 未建立或傳遞被接管的 Decision Context"
 );
 
