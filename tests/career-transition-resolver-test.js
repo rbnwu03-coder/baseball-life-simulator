@@ -121,10 +121,10 @@ verify("22. Resolver 不寫入 chapter、careerExit、route 或 Save", !/\b(?:pl
 
 const forbiddenDiff = execFileSync("git", [
   "diff", "--name-only", "HEAD", "--",
-  "player.js", "story.js", "save.js", "style.css", "career-spine-contract.js",
+  "player.js", "save.js", "style.css", "career-spine-contract.js",
   "competition-presentation.js", "current-state-boundary.js", "decision-flow.js",
   "application-controller.js"
 ], { cwd: root, encoding: "utf8" }).trim();
-verify("23. Resolver、Gameplay 資料、Save、4.3 Contract 與既有 Boundary 均未修改", forbiddenDiff === "");
+verify("23. Resolver、Gameplay 資料、Save、4.3 Contract 與既有 Boundary 均未修改（不含 4.6 授權的 story routing）", forbiddenDiff === "");
 
 console.log(`\nArchitecture Sprint 4.4 Graduation Transition Resolver：${passed}/${passed} 通過`);

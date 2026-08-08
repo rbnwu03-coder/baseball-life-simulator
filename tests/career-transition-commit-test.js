@@ -93,7 +93,7 @@ const files = [
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
   "competition-presentation.js", "career-spine-contract.js", "career-transition-resolver.js",
-  "career-transition-commit.js", "story.js", "save.js", "script.js"
+  "career-transition-commit.js", "career-transition-runtime-resolver.js", "story.js", "save.js", "script.js"
 ];
 
 function makeContext() {
@@ -211,18 +211,20 @@ verify("20. Player Schema、Save version 與 localStorage key 完全不變", !fs
 
 const protectedDiff = execFileSync("git", [
   "diff", "--name-only", "HEAD", "--",
-  "career-transition-resolver.js", "career-spine-contract.js", "player.js", "save.js", "story.js",
+  "career-transition-resolver.js", "career-spine-contract.js", "player.js", "save.js",
   "current-state-boundary.js", "decision-flow.js", "application-controller.js", "competition-presentation.js"
 ], { cwd: root, encoding: "utf8" }).trim();
-verify("21. Resolver、Career Spine Contract、Player、Save、Story 與既有 Boundary 均未修改", protectedDiff === "");
+verify("21. Resolver、Career Spine Contract、Player、Save 與既有 Boundary 均未修改", protectedDiff === "");
 
 verify("22. index.html 依 Contract → Resolver → Commit → Runtime 順序載入", (() => {
   const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
   const contractIndex = html.indexOf('src="career-spine-contract.js"');
   const resolverIndex = html.indexOf('src="career-transition-resolver.js"');
   const commitIndex = html.indexOf('src="career-transition-commit.js"');
+  const runtimeResolverIndex = html.indexOf('src="career-transition-runtime-resolver.js"');
   const runtimeIndex = html.indexOf('src="script.js"');
-  return contractIndex >= 0 && contractIndex < resolverIndex && resolverIndex < commitIndex && commitIndex < runtimeIndex;
+  return contractIndex >= 0 && contractIndex < resolverIndex && resolverIndex < commitIndex
+    && commitIndex < runtimeResolverIndex && runtimeResolverIndex < runtimeIndex;
 })());
 
 const nonWritableTransitionState = graduationState("大學棒球");

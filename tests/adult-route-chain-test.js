@@ -10,11 +10,11 @@ function makeGame() {
     localStorage: { setItem() {}, getItem() { return null; }, removeItem() {} },
     window: { setTimeout(callback) { callback(); } }
   });
-  for (const file of ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "save.js", "script.js"]) vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file });
+  for (const file of ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "story.js", "save.js", "script.js"]) vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file });
   return context;
 }
 
-const exits = { draft: "高卒選秀候選", college: "大學棒球", amateur: "業餘／社會人棒球", rehab: "復健與生涯暫停" };
+const exits = { draft: "高卒選秀・中後段指名候選", college: "大學棒球", amateur: "業餘／社會人棒球", rehab: "復健與生涯暫停" };
 const reports = [];
 for (const [route, exit] of Object.entries(exits)) {
   const game = makeGame();

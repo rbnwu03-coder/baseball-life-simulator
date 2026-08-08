@@ -10,12 +10,12 @@ function makeGame() {
     localStorage: { setItem() {}, getItem() { return null; }, removeItem() {} },
     window: { setTimeout(callback) { callback(); } }
   });
-  for (const file of ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "save.js", "script.js"]) vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file });
+  for (const file of ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "story.js", "save.js", "script.js"]) vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file });
   return context;
 }
 
 const routes = {
-  draft: { exit: "高卒選秀候選", third: "transition_pro_roster_window" },
+  draft: { exit: "高卒選秀・中後段指名候選", third: "transition_pro_roster_window" },
   college: { exit: "大學棒球", third: "transition_college_eligibility" },
   amateur: { exit: "業餘／社會人棒球", third: "transition_amateur_company_conflict" },
   rehab: { exit: "復健與生涯暫停", third: "transition_rehab_reentry_deadline" }
@@ -37,7 +37,7 @@ for (const [route, config] of Object.entries(routes)) {
     applyAcademicEffects(choice.academicEffects); applyCareerEffects(choice.careerEffects); applyFinanceEffects(choice.financeEffects); addFlags(choice.flags);
     player.transitionStep = 3; const fourthId = getCurrentEventId();
     player.transitionStep = 4; const fifthId = getCurrentEventId();
-    player.transitionStep = 5; const resultId = getCurrentEventId();
+    player.transitionStep = 5; player.chapter = "生涯轉換期小結"; const resultId = getCurrentEventId();
     ({ thirdId, title: event.title, choices: event.choices.length, changed: before !== JSON.stringify(player), fourthId, fifthId, resultId, checkpointExists: Boolean(getEvent("transition_checkpoint")), chain: adultNarrativeChains[${JSON.stringify(route)}].events });
   `, game);
   if (result.thirdId !== config.third) throw new Error(`${route} 第三事件錯誤：${result.thirdId}`);

@@ -1515,8 +1515,11 @@ function enterCareerTransition() {
   const commitResult = CareerTransitionCommitBoundary.commitGraduationTransition(player);
   if (!commitResult.committed) return commitResult;
 
+  const runtimeResult = CareerTransitionRuntimeResolver.resolveTransitionRuntime(player);
+  if (!runtimeResult.resolved) return runtimeResult;
+
   applyChapterBreather();
-  const routeKey = getAdultRouteKey();
+  const routeKey = runtimeResult.routeKey;
   const routeThread = adultNarrativeChains[routeKey];
   startNarrativeThread({ ...routeThread, route: routeKey });
   if (!player.roleIdentity.primary) changeRoleIdentity(inferRoleIdentity(), "高中階段形成第一個可被市場描述的角色");
@@ -2397,6 +2400,14 @@ const transitionRouteDecisionEvents = [
 const developmentNarrativeEvents = ["development_daily_life", "development_competition", "development_mentor", "development_body_choice", "development_opportunity", "development_market", "development_decision"];
 
 function getAdultRouteKey() {
+  if (player.chapter === "生涯轉換期") {
+    if (
+      typeof CareerTransitionRuntimeResolver !== "object" ||
+      typeof CareerTransitionRuntimeResolver.resolveTransitionRuntime !== "function"
+    ) return null;
+    const runtimeResult = CareerTransitionRuntimeResolver.resolveTransitionRuntime(player);
+    return runtimeResult.resolved ? runtimeResult.routeKey : null;
+  }
   const exit = String(player.careerExit || "");
   if (exit.includes("大學")) return "college";
   if (exit.includes("業餘") || exit.includes("社會")) return "amateur";

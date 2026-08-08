@@ -20,7 +20,7 @@ function makeGame() {
     },
     window: { setTimeout(callback) { callback(); } }
   });
-  for (const file of ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "save.js", "script.js"]) {
+  for (const file of ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "story.js", "save.js", "script.js"]) {
     vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file });
   }
   return context;
@@ -118,7 +118,7 @@ function testAdultEcho(setup, mainEvent) {
   if (after.steps !== before || after.current !== mainEvent) throw new Error("成年阿哲回響消耗了主線回合或沒有回到原事件");
 }
 
-testAdultEcho(`player.chapter="生涯轉換期"; player.transitionStep=3; addFlags(["azhe_record_sheet"]);`, "transition_relationship");
+testAdultEcho(`player.chapter="生涯轉換期"; player.careerExit="大學棒球"; player.transitionStep=3; addFlags(["azhe_record_sheet"]);`, "transition_relationship");
 testAdultEcho(`player.chapter="發展期"; player.developmentStep=2; player.careerArc.stage="transition";`, "development_mentor");
 
 const persistence = makeGame();

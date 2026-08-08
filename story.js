@@ -1853,14 +1853,12 @@ function getCurrentEventId() {
   }
   if (player.chapter === "生涯轉換期小結") return "transition_result";
   if (player.chapter === "生涯轉換期") {
-    const route = player.careerExit.startsWith("高卒") ? "draft" : player.careerExit === "大學棒球" ? "college" : player.careerExit === "業餘／社會人棒球" ? "amateur" : "rehab";
-    const sequences = {
-      draft: ["transition_draft_day", "transition_rookie_camp", "transition_pro_roster_window", "transition_relationship", "transition_cost_check"],
-      college: ["transition_college_arrival", "transition_college_balance", "transition_college_eligibility", "transition_relationship", "transition_cost_check"],
-      amateur: ["transition_amateur_job", "transition_amateur_test", "transition_amateur_company_conflict", "transition_relationship", "transition_cost_check"],
-      rehab: ["transition_rehab_plateau", "transition_rehab_identity", "transition_rehab_reentry_deadline", "transition_relationship", "transition_cost_check"]
-    };
-    return sequences[route][player.transitionStep] || "transition_result";
+    if (
+      typeof CareerTransitionRuntimeResolver !== "object" ||
+      typeof CareerTransitionRuntimeResolver.resolveTransitionRuntime !== "function"
+    ) return null;
+    const runtimeResult = CareerTransitionRuntimeResolver.resolveTransitionRuntime(player);
+    return runtimeResult.resolved ? runtimeResult.eventId : null;
   }
   if (player.chapter === "青棒生涯出口") return "critical_year_result";
   if (player.chapter === "青棒關鍵年") {

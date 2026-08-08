@@ -10,7 +10,7 @@ function makeGame() {
     localStorage: { setItem() {}, getItem() { return null; }, removeItem() {} },
     window: { setTimeout(callback) { callback(); } }
   });
-  for (const file of ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "save.js", "script.js"]) vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file });
+  for (const file of ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "story.js", "save.js", "script.js"]) vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file });
   return context;
 }
 
@@ -19,7 +19,7 @@ function evaluateFlag(flag, eventId = "transition_pro_roster_window", batting = 
   return vm.runInContext(`
     player = createInitialPlayer("${flag}");
     player.chapter = "生涯轉換期";
-    player.careerExit = "高卒選秀候選";
+    player.careerExit = "高卒選秀・中後段指名候選";
     player.seasonPosition = "內野手";
     player.secondaryPosition = "";
     Object.assign(player.baseballSkills, { batting: ${batting}, catching: 8, throwing: 8, reaction: 8, range: 8, baseballIQ: 4, baseRunning: 3, control: 2 });

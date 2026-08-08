@@ -5,7 +5,7 @@ const { execFileSync } = require("child_process");
 
 const root = path.resolve(__dirname, "..");
 const runtimeSources = Object.fromEntries(
-  ["player.js", "career-spine-contract.js", "story.js", "save.js"]
+  ["player.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "story.js", "save.js"]
     .map(file => [file, fs.readFileSync(path.join(root, file), "utf8")])
 );
 
@@ -39,6 +39,7 @@ function makeContext() {
 
   vm.runInContext(runtimeSources["player.js"], context, { filename: "player.js" });
   vm.runInContext(runtimeSources["career-spine-contract.js"], context, { filename: "career-spine-contract.js" });
+  vm.runInContext(runtimeSources["career-transition-runtime-resolver.js"], context, { filename: "career-transition-runtime-resolver.js" });
   vm.runInContext("module = { exports: {} };", context);
   vm.runInContext(`
     function hasFlag(flag) {
@@ -403,9 +404,9 @@ verify("32. 兩種高卒、大學、業餘與復健五條成年入口均精確�
 })));
 
 const invalidAdultExitCases = ["", "未辨識出口", "大學棒球候選"];
-verify("33. 空白與未辨識 careerExit 回報問題但仍精確反映 Gameplay 的復健 fallback", invalidAdultExitCases.every(careerExit => {
-  const result = runtimeMatches({ chapter: "生涯轉換期", age: 18, transitionStep: 0, careerExit }, "transition_rehab_plateau");
-  return result.exact
+verify("33. 空白與未辨識 careerExit 仍由 Contract 回報問題，Live Runtime 不再採用復健 fallback", invalidAdultExitCases.every(careerExit => {
+  const result = runtimeMatches({ chapter: "生涯轉換期", age: 18, transitionStep: 0, careerExit }, null);
+  return result.actualEventId === null
     && result.snapshot.status === "inconsistent"
     && result.snapshot.issues.some(item => item.code === "career-exit-out-of-contract")
     && !result.snapshot.effectiveEventIds.includes("transition_draft_day");

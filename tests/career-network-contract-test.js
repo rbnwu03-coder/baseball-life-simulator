@@ -10,7 +10,7 @@ const files = [
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
   "competition-presentation.js", "career-spine-contract.js", "career-transition-resolver.js",
-  "career-transition-commit.js", "story.js", "save.js", "script.js"
+  "career-transition-commit.js", "career-transition-runtime-resolver.js", "story.js", "save.js", "script.js"
 ];
 
 let passed = 0;
@@ -313,9 +313,9 @@ verify("34. Save version 與 localStorage key 保持 v13 既有契約", evaluate
 
 const forbiddenDiff = execFileSync("git", [
   "diff", "--name-only", "HEAD", "--",
-  "player.js", "save.js", "story.js", "event.js", "time.js", "style.css",
+  "player.js", "save.js", "event.js", "time.js", "style.css",
   "current-state-boundary.js", "decision-flow.js", "application-controller.js", "competition-presentation.js"
 ], { cwd: root, encoding: "utf8" }).trim();
-verify("35. Career Network、Gameplay 資料、Save、UI 與既有 Boundary 均未修改", forbiddenDiff === "");
+verify("35. Career Network、Gameplay 資料、Save、UI 與既有 Boundary 均未修改（不含 4.6 授權的 story routing）", forbiddenDiff === "");
 
 console.log(`\nArchitecture Sprint 4.3 Career Network Contract：${passed}/${passed} 通過`);
