@@ -1512,9 +1512,10 @@ function enterCriticalYear() {
 }
 
 function enterCareerTransition() {
+  const commitResult = CareerTransitionCommitBoundary.commitGraduationTransition(player);
+  if (!commitResult.committed) return commitResult;
+
   applyChapterBreather();
-  player.chapter = "生涯轉換期";
-  player.transitionStep = 0;
   const routeKey = getAdultRouteKey();
   const routeThread = adultNarrativeChains[routeKey];
   startNarrativeThread({ ...routeThread, route: routeKey });
@@ -1523,6 +1524,7 @@ function enterCareerTransition() {
   updateCareerValue();
   showNotice(`你進入「${player.careerExit}」分流，事件鏈將不再相同。`, "success");
   showCurrentEvent();
+  return commitResult;
 }
 
 function enterDevelopmentYears() {
