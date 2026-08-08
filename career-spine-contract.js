@@ -25,6 +25,56 @@ var CareerSpineContract = (() => {
     "復健與生涯暫停"
   ];
 
+  const CAREER_NETWORK_METADATA = {
+    "high-school-career-exit": {
+      careerStage: "high-school-exit",
+      networkRole: "initial-exit-record",
+      currentContentEndpoint: false,
+      transitionGap: false
+    },
+    "career-transition": {
+      careerStage: "adult-transition",
+      networkRole: "initial-route-and-shared-transition",
+      currentContentEndpoint: false,
+      transitionGap: false
+    },
+    "career-transition-result": {
+      careerStage: "adult-transition-result",
+      networkRole: "shared-transition-result",
+      currentContentEndpoint: false,
+      transitionGap: false
+    },
+    "development-years": {
+      careerStage: "adult-development",
+      networkRole: "shared-development",
+      currentContentEndpoint: false,
+      transitionGap: true
+    },
+    "age-22-career-result": {
+      careerStage: "age-22-result",
+      networkRole: "current-content-gate",
+      currentContentEndpoint: true,
+      transitionGap: true
+    },
+    "vertical-slice-complete": {
+      careerStage: "prototype-complete",
+      networkRole: "current-terminal",
+      currentContentEndpoint: true,
+      transitionGap: true
+    }
+  };
+
+  const CANDIDATE_TRANSITIONS = [
+    candidate("college-to-professional", "college", "professional"),
+    candidate("college-to-amateur", "college", "amateur"),
+    candidate("amateur-to-professional", "amateur", "professional"),
+    candidate("professional-to-amateur", "professional", "amateur"),
+    candidate("professional-to-baseball-industry", "professional", "baseball-industry"),
+    candidate("college-to-baseball-industry", "college", "baseball-industry"),
+    candidate("amateur-to-baseball-industry", "amateur", "baseball-industry"),
+    candidate("rehab-to-player-reentry", "rehab", "player-competition")
+  ];
+
   const NODES = [
     node({
       id: "childhood-summer",
@@ -213,6 +263,17 @@ var CareerSpineContract = (() => {
     }, definition);
   }
 
+  function candidate(id, sourceRoute, targetRoute) {
+    return {
+      id,
+      sourceRoute,
+      targetRoute,
+      implemented: false,
+      eventIds: [],
+      contractStatus: "candidate-only"
+    };
+  }
+
   function resultNode(id, chapter, age, eventId, nextChapters, knownIssues = []) {
     return node({
       id,
@@ -247,8 +308,11 @@ var CareerSpineContract = (() => {
 
   deepFreeze(KNOWN_GAPS);
   deepFreeze(NODES);
+  deepFreeze(CAREER_NETWORK_METADATA);
+  deepFreeze(CANDIDATE_TRANSITIONS);
 
   const NODE_BY_CHAPTER = new Map(NODES.map(item => [item.chapter, item]));
+  const NODE_BY_ID = new Map(NODES.map(item => [item.id, item]));
 
   function getNodes() {
     return deepFreeze(clone(NODES));
@@ -261,6 +325,106 @@ var CareerSpineContract = (() => {
   function getNodeByChapter(chapter) {
     const found = NODE_BY_CHAPTER.get(chapter);
     return found ? deepFreeze(clone(found)) : null;
+  }
+
+  function getActualEdges() {
+    const edges = [];
+    NODES.forEach(sourceNode => {
+      sourceNode.nextChapters.forEach(nextChapter => {
+        const targetNode = NODE_BY_CHAPTER.get(nextChapter);
+        edges.push({
+          id: `${sourceNode.id}->${targetNode?.id || `missing:${nextChapter}`}`,
+          fromNodeId: sourceNode.id,
+          toNodeId: targetNode?.id || null,
+          toChapter: nextChapter,
+          implemented: true,
+          source: "nextChapters"
+        });
+      });
+    });
+    return deepFreeze(clone(edges));
+  }
+
+  function getCandidateTransitions() {
+    return deepFreeze(clone(CANDIDATE_TRANSITIONS));
+  }
+
+  function getDeclaredActualEventIds() {
+    const eventIds = [];
+    NODES.forEach(contractNode => {
+      if (contractNode.entry?.eventId) eventIds.push(contractNode.entry.eventId);
+      (contractNode.settlement?.eventIds || []).forEach(eventId => eventIds.push(eventId));
+      if (contractNode.route?.kind === "fixed" && contractNode.route.eventId) {
+        eventIds.push(contractNode.route.eventId);
+      }
+      if (contractNode.route?.kind === "steps") {
+        contractNode.route.events.forEach(stepEvents => stepEvents.forEach(eventId => eventIds.push(eventId)));
+      }
+      if (contractNode.route?.kind === "route-steps") {
+        Object.values(contractNode.route.routes).forEach(routeEvents => routeEvents.forEach(eventId => eventIds.push(eventId)));
+      }
+    });
+    return [...new Set(eventIds)];
+  }
+
+  function getSharedRouteSuffix(routes) {
+    const routeLists = Object.values(routes);
+    if (!routeLists.length) return [];
+    const shortestLength = Math.min(...routeLists.map(routeEvents => routeEvents.length));
+    const shared = [];
+    for (let offset = 1; offset <= shortestLength; offset += 1) {
+      const candidateEventId = routeLists[0][routeLists[0].length - offset];
+      if (!routeLists.every(routeEvents => routeEvents[routeEvents.length - offset] === candidateEventId)) break;
+      shared.unshift(candidateEventId);
+    }
+    return shared;
+  }
+
+  function getCareerNetwork() {
+    const transitionNode = NODE_BY_ID.get("career-transition");
+    const routes = transitionNode.route.routes;
+    const sharedTransitionEventIds = getSharedRouteSuffix(routes);
+    const sharedStartStep = routes.draft.length - sharedTransitionEventIds.length;
+    const initialRoutes = Object.entries(routes).map(([routeKey, eventIds]) => ({
+      routeKey,
+      careerExits: VALID_CAREER_EXITS.filter(value => getAdultRouteKey({ careerExit: value }) === routeKey),
+      exclusiveEventIds: eventIds.slice(0, sharedStartStep),
+      sharedEventIds: eventIds.slice(sharedStartStep),
+      rejoinStep: sharedStartStep
+    }));
+    const adultNodes = Object.entries(CAREER_NETWORK_METADATA).map(([nodeId, metadata]) => {
+      const contractNode = NODE_BY_ID.get(nodeId);
+      return Object.assign({
+        nodeId,
+        chapter: contractNode.chapter,
+        age: clone(contractNode.age),
+        progress: clone(contractNode.progress),
+        settlement: clone(contractNode.settlement),
+        actualNextNodeIds: getActualEdges()
+          .filter(edge => edge.fromNodeId === nodeId)
+          .map(edge => edge.toNodeId)
+      }, clone(metadata));
+    });
+    return deepFreeze({
+      adultNodes,
+      initialRoutes,
+      sharedTransition: {
+        nodeId: transitionNode.id,
+        startsAtStep: sharedStartStep,
+        eventIds: sharedTransitionEventIds
+      },
+      sharedDevelopment: {
+        nodeId: "development-years",
+        eventIds: NODE_BY_ID.get("development-years").route.events.map(stepEvents => stepEvents[0])
+      },
+      currentEndpoint: {
+        resultNodeId: "age-22-career-result",
+        terminalNodeId: "vertical-slice-complete",
+        playableAfterTerminal: false
+      },
+      actualEdges: getActualEdges(),
+      candidateTransitions: getCandidateTransitions()
+    });
   }
 
   function getAdultRouteKey(state) {
@@ -312,6 +476,166 @@ var CareerSpineContract = (() => {
 
   function issue(code, message) {
     return { code, severity: "error", message };
+  }
+
+  function hasText(value) {
+    return typeof value === "string" && value.trim() !== "";
+  }
+
+  function getCareerNetworkSegment(contractNode, state, networkMetadata) {
+    if (!networkMetadata) return "pre-adult-spine";
+    if (contractNode.id === "career-transition") {
+      const sharedStartStep = getCareerNetwork().sharedTransition.startsAtStep;
+      return Number.isInteger(state.transitionStep) && state.transitionStep >= sharedStartStep
+        ? "shared-transition"
+        : "route-exclusive-transition";
+    }
+    return networkMetadata.networkRole;
+  }
+
+  function validateAdultState(state, contractNode) {
+    const issues = [];
+    const adultNode = Boolean(CAREER_NETWORK_METADATA[contractNode.id]);
+    if (!adultNode) return issues;
+
+    if (!VALID_CAREER_EXITS.includes(state.careerExit)) {
+      issues.push(issue(
+        "career-exit-out-of-contract",
+        `成年 Career Network 的 careerExit 不是現行合法值：${String(state.careerExit || "（空白）")}。Gameplay 仍會依既有規則 fallback 到復健路線。`
+      ));
+    }
+
+    if (contractNode.id === "high-school-career-exit") {
+      if (state.criticalYearStep !== 8) {
+        issues.push(issue("critical-year-result-step-mismatch", `青棒生涯出口必須由 criticalYearStep=8 進入，目前為 ${String(state.criticalYearStep)}。`));
+      }
+      if (!hasText(state.criticalYearResult) || !hasText(state.criticalYearDetail)) {
+        issues.push(issue("critical-year-result-missing", "青棒生涯出口必須保有 criticalYearResult 與 criticalYearDetail。"));
+      }
+    }
+
+    if (contractNode.id === "career-transition" && (hasText(state.transitionResult) || hasText(state.transitionDetail))) {
+      issues.push(issue("transition-result-state-mismatch", "生涯轉換期尚未結算，不應已有 transitionResult 或 transitionDetail。"));
+    }
+    if (contractNode.id === "career-transition-result") {
+      if (state.transitionStep !== 5) {
+        issues.push(issue("transition-result-step-mismatch", `生涯轉換期小結必須由 transitionStep=5 進入，目前為 ${String(state.transitionStep)}。`));
+      }
+      if (!hasText(state.transitionResult) || !hasText(state.transitionDetail)) {
+        issues.push(issue("transition-result-missing", "生涯轉換期小結必須保有 transitionResult 與 transitionDetail。"));
+      }
+    }
+
+    if (contractNode.id === "development-years" && (
+      hasText(state.developmentResult) || hasText(state.developmentDetail) || hasText(state.marketOutcome)
+    )) {
+      issues.push(issue("development-result-state-mismatch", "發展期尚未結算，不應已有 developmentResult、developmentDetail 或 marketOutcome。"));
+    }
+    if (["age-22-career-result", "vertical-slice-complete"].includes(contractNode.id)) {
+      if (state.developmentStep !== 7) {
+        issues.push(issue("development-result-step-mismatch", `二十二歲結果必須由 developmentStep=7 進入，目前為 ${String(state.developmentStep)}。`));
+      }
+      if (!hasText(state.developmentResult) || !hasText(state.developmentDetail) || !hasText(state.marketOutcome)) {
+        issues.push(issue("development-result-missing", "二十二歲結果必須保有 developmentResult、developmentDetail 與 marketOutcome。"));
+      }
+    }
+    return issues;
+  }
+
+  function getCareerNetworkSnapshot(state) {
+    const spineSnapshot = getCareerSpineSnapshot(state);
+    const contractNode = spineSnapshot.nodeId ? NODE_BY_ID.get(spineSnapshot.nodeId) : null;
+    const networkMetadata = contractNode ? CAREER_NETWORK_METADATA[contractNode.id] || null : null;
+    const network = getCareerNetwork();
+    const actualNextNodeIds = contractNode
+      ? network.actualEdges.filter(edge => edge.fromNodeId === contractNode.id).map(edge => edge.toNodeId)
+      : [];
+    const adultIssues = contractNode ? validateAdultState(state || {}, contractNode) : [];
+    const issues = clone(spineSnapshot.issues).concat(adultIssues);
+    const status = spineSnapshot.status === "unknown"
+      ? "unknown"
+      : issues.length
+        ? "inconsistent"
+        : spineSnapshot.status;
+
+    return deepFreeze(Object.assign({}, clone(spineSnapshot), {
+      status,
+      careerStage: networkMetadata?.careerStage || "pre-adult",
+      networkSegment: contractNode ? getCareerNetworkSegment(contractNode, state || {}, networkMetadata) : "unknown",
+      adultRouteKey: networkMetadata ? getAdultRouteKey(state || {}) : null,
+      careerExit: typeof state?.careerExit === "string" ? state.careerExit : "",
+      actualNextNodeIds,
+      rejoinsOtherRoutes: contractNode?.id === "career-transition"
+        && Number.isInteger(state?.transitionStep)
+        && state.transitionStep >= network.sharedTransition.startsAtStep,
+      currentContentEndpoint: networkMetadata?.currentContentEndpoint === true,
+      transitionGap: networkMetadata?.transitionGap === true,
+      candidateTransitionIds: [],
+      issues
+    }));
+  }
+
+  function auditCareerNetwork(eventResolver, state) {
+    const issues = [];
+    const actualEdges = getActualEdges();
+    const candidateTransitions = getCandidateTransitions();
+    const nodeIds = NODES.map(contractNode => contractNode.id);
+    const duplicateNodeIds = nodeIds.filter((nodeId, index) => nodeIds.indexOf(nodeId) !== index);
+    duplicateNodeIds.forEach(nodeId => issues.push(issue("duplicate-node-id", `Contract node ID 重複：${nodeId}。`)));
+
+    actualEdges.forEach(edge => {
+      if (!NODE_BY_ID.has(edge.fromNodeId) || !edge.toNodeId || !NODE_BY_ID.has(edge.toNodeId)) {
+        issues.push(issue("actual-edge-node-missing", `Actual edge 無法解析：${edge.id}。`));
+      }
+    });
+
+    const reachable = new Set(NODES.length ? [NODES[0].id] : []);
+    let changed = true;
+    while (changed) {
+      changed = false;
+      actualEdges.forEach(edge => {
+        if (reachable.has(edge.fromNodeId) && edge.toNodeId && !reachable.has(edge.toNodeId)) {
+          reachable.add(edge.toNodeId);
+          changed = true;
+        }
+      });
+    }
+    NODES.forEach(contractNode => {
+      if (!reachable.has(contractNode.id)) {
+        issues.push(issue("unreachable-actual-node", `正式 Contract node 沒有可達 actual edge：${contractNode.id}。`));
+      }
+    });
+
+    const actualEdgeIds = new Set(actualEdges.map(edge => edge.id));
+    candidateTransitions.forEach(candidateTransition => {
+      if (candidateTransition.implemented || candidateTransition.eventIds.length) {
+        issues.push(issue("candidate-marked-implemented", `Candidate transition 被標記為已實作：${candidateTransition.id}。`));
+      }
+      if (actualEdgeIds.has(candidateTransition.id)) {
+        issues.push(issue("candidate-mixed-with-actual-edge", `Candidate transition 混入 actual edge：${candidateTransition.id}。`));
+      }
+    });
+
+    if (typeof eventResolver === "function") {
+      getDeclaredActualEventIds().forEach(eventId => {
+        if (!eventResolver(eventId)) issues.push(issue("actual-event-missing", `Registry 宣告的事件不存在：${eventId}。`));
+      });
+      if (state && typeof state === "object") {
+        const snapshot = getCareerNetworkSnapshot(state);
+        [...snapshot.underlyingEventIds, ...snapshot.effectiveEventIds].forEach(eventId => {
+          if (eventId && !eventResolver(eventId)) issues.push(issue("runtime-event-missing", `目前狀態指向不存在的事件：${eventId}。`));
+        });
+      }
+    }
+
+    return deepFreeze({
+      status: issues.length ? "error" : "valid",
+      nodeCount: NODES.length,
+      actualEdgeCount: actualEdges.length,
+      candidateTransitionCount: candidateTransitions.length,
+      declaredActualEventCount: getDeclaredActualEventIds().length,
+      issues
+    });
   }
 
   function getCareerSpineSnapshot(state) {
@@ -455,8 +779,13 @@ var CareerSpineContract = (() => {
     getNodes,
     getKnownGaps,
     getNodeByChapter,
+    getActualEdges,
+    getCandidateTransitions,
+    getCareerNetwork,
     getRuntimeEventExpectation,
-    getCareerSpineSnapshot
+    getCareerSpineSnapshot,
+    getCareerNetworkSnapshot,
+    auditCareerNetwork
   });
 
   if (typeof window !== "undefined") window.CareerSpineContract = api;
