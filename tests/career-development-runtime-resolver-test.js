@@ -357,9 +357,9 @@ const protectedDiff = execFileSync("git", [
   "diff", "--name-only", "HEAD", "--",
   "career-spine-contract.js", "career-transition-resolver.js", "career-transition-commit.js",
   "career-transition-runtime-resolver.js", "career-transition-progression.js",
-  "player.js", "save.js", "style.css"
+  "player.js", "style.css"
 ], { cwd: root, encoding: "utf8" }).trim();
-verify("36. Contract、Transition 4.4–4.7、Player、Save 與 CSS 均未修改", protectedDiff === "");
+verify("36. Contract、Transition 4.4–4.7、Player 與 CSS 均未修改（Save 僅允許 4.10 Admission integration）", protectedDiff === "");
 verify("37. Player Schema、Save version 與 localStorage key 完全不變", !/developmentRoute|currentDevelopmentNode|developmentEventId|adultRoute|routeKey/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
   && evaluate(runtimeContext, "SAVE_VERSION") === 13
   && fs.readFileSync(path.join(root, "save.js"), "utf8").includes('"baseballLifeRpgSave"'));

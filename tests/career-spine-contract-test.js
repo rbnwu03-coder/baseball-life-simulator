@@ -5,7 +5,7 @@ const { execFileSync } = require("child_process");
 
 const root = path.resolve(__dirname, "..");
 const runtimeSources = Object.fromEntries(
-  ["player.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "story.js", "save.js"]
+  ["player.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "career-save-admission.js", "story.js", "save.js"]
     .map(file => [file, fs.readFileSync(path.join(root, file), "utf8")])
 );
 
@@ -41,6 +41,7 @@ function makeContext() {
   vm.runInContext(runtimeSources["career-spine-contract.js"], context, { filename: "career-spine-contract.js" });
   vm.runInContext(runtimeSources["career-transition-runtime-resolver.js"], context, { filename: "career-transition-runtime-resolver.js" });
   vm.runInContext(runtimeSources["career-development-runtime-resolver.js"], context, { filename: "career-development-runtime-resolver.js" });
+  vm.runInContext(runtimeSources["career-save-admission.js"], context, { filename: "career-save-admission.js" });
   vm.runInContext("module = { exports: {} };", context);
   vm.runInContext(`
     function hasFlag(flag) {

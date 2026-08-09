@@ -110,6 +110,10 @@ function makeGameContext({ legacy = false, controller = false } = {}) {
     "day-completion-flow.js",
     "relationship-flow.js",
     "coach-response-flow.js",
+    "career-spine-contract.js",
+    "career-transition-runtime-resolver.js",
+    "career-development-runtime-resolver.js",
+    "career-save-admission.js",
     "npc.js",
     "coach.js",
     "rival.js"

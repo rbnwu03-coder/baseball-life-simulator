@@ -79,7 +79,22 @@ function loadGame() {
   const raw = localStorage.getItem(SAVE_KEY);
   if (!raw) return showNotice("目前沒有可讀取的存檔。", "warning");
   try {
-    player = normalizeSave(JSON.parse(raw));
+    const candidate = normalizeSave(JSON.parse(raw));
+    if (
+      typeof AdultCareerSaveAdmission !== "object" ||
+      typeof AdultCareerSaveAdmission.evaluate !== "function"
+    ) {
+      showNotice("存檔驗證模組無法使用，無法讀取。", "error");
+      return;
+    }
+
+    const admission = AdultCareerSaveAdmission.evaluate(candidate);
+    if (!admission || admission.admitted !== true) {
+      showNotice("存檔生涯狀態不一致，無法讀取。", "error");
+      return;
+    }
+
+    player = candidate;
     document.getElementById("characterCreation").style.display = "none";
     showCurrentEvent();
     showNotice("進度讀取完成。", "success");

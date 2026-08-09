@@ -32,7 +32,7 @@ function makeNode(id) {
   };
 }
 
-function makeGameContext(files = ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "save.js", "script.js", "application-controller.js"]) {
+function makeGameContext(files = ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "career-save-admission.js", "story.js", "save.js", "script.js", "application-controller.js"]) {
   const nodes = new Map();
   const storage = new Map();
   const document = {

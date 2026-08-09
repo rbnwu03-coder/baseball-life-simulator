@@ -9,7 +9,7 @@ const files = [
   "evaluation-registry.js", "coach-evaluation-boundary.js", "narrative-condition-boundary.js",
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
-  "competition-presentation.js", "career-spine-contract.js", "career-development-runtime-resolver.js",
+  "competition-presentation.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "career-save-admission.js",
   "story.js", "save.js", "script.js"
 ];
 

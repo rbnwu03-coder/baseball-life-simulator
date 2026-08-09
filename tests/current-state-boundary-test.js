@@ -103,7 +103,7 @@ function makeGameContext({ legacy = false } = {}) {
   vm.runInContext(dayCompletionFlowSource, context, { filename: "day-completion-flow.js" });
   vm.runInContext(relationshipFlowSource, context, { filename: "relationship-flow.js" });
   vm.runInContext(coachResponseFlowSource, context, { filename: "coach-response-flow.js" });
-  ["story.js", "save.js"].forEach(file => {
+  ["career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "career-save-admission.js", "story.js", "save.js"].forEach(file => {
     vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, {
       filename: file
     });

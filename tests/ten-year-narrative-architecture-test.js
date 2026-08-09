@@ -19,6 +19,10 @@ const runtimeFiles = [
   "coach-response-flow.js",
   "narrative-condition-flow.js",
   "competition-presentation.js",
+  "career-spine-contract.js",
+  "career-transition-runtime-resolver.js",
+  "career-development-runtime-resolver.js",
+  "career-save-admission.js",
   "story.js",
   "save.js",
   "script.js"

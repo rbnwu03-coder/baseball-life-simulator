@@ -211,10 +211,10 @@ verify("20. Player Schema、Save version 與 localStorage key 完全不變", !fs
 
 const protectedDiff = execFileSync("git", [
   "diff", "--name-only", "HEAD", "--",
-  "career-transition-resolver.js", "career-spine-contract.js", "player.js", "save.js",
+  "career-transition-resolver.js", "career-spine-contract.js", "player.js",
   "current-state-boundary.js", "decision-flow.js", "application-controller.js", "competition-presentation.js"
 ], { cwd: root, encoding: "utf8" }).trim();
-verify("21. Resolver、Career Spine Contract、Player、Save 與既有 Boundary 均未修改", protectedDiff === "");
+verify("21. Resolver、Career Spine Contract、Player 與既有 Boundary 均未修改（Save 僅允許 4.10 Admission integration）", protectedDiff === "");
 
 verify("22. index.html 依 Contract → Resolver → Commit → Runtime 順序載入", (() => {
   const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
