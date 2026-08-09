@@ -22,7 +22,7 @@ const game = vm.createContext({
   },
   window: { setTimeout: callback => callback() }
 });
-["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js", "story.js", "save.js", "script.js"].forEach(file => {
+["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js", "career-development-runtime-resolver.js", "career-development-progression.js", "story.js", "save.js", "script.js"].forEach(file => {
   vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), game, { filename: file });
 });
 
@@ -58,7 +58,7 @@ vm.runInContext("player.chapter='生涯轉換期'; player.careerExit='大學棒�
 game.choose("transition_relationship", 0);
 if (!vm.runInContext("hasCallback('family_safe_place', true)", game)) throw new Error("生涯轉換沒有回收家庭避風港");
 
-vm.runInContext("player.chapter='發展期'; player.developmentStep=6", game);
+vm.runInContext("player.chapter='發展期'; player.age=21; player.developmentStep=6", game);
 game.choose("development_decision", 1);
 if (!vm.runInContext("hasCallback('freedom_origin', true)", game)) throw new Error("二十二歲沒有回收自由起點");
 

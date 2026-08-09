@@ -150,7 +150,7 @@ const runtimeFiles = [
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
   "competition-presentation.js", "career-spine-contract.js", "career-transition-resolver.js",
   "career-transition-commit.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
-  "career-development-runtime-resolver.js", "story.js", "save.js", "script.js"
+  "career-development-runtime-resolver.js", "career-development-progression.js", "story.js", "save.js", "script.js"
 ];
 
 function makeContext() {
@@ -334,21 +334,24 @@ verify("32. script.js 不再保存 hard-coded Development Narrative topology", !
   && scriptSource.includes("CareerSpineContract.getCareerNetwork()?.sharedDevelopment?.eventIds"));
 verify("33. 發展期 getAdultRouteKey 使用 Development Resolver", scriptSource.includes('if (player.chapter === "發展期")')
   && scriptSource.includes("CareerDevelopmentRuntimeResolver.resolveDevelopmentRuntime(player)"));
-verify("34. developmentStep mutation ownership與既有結算保持不變", scriptSource.includes("player.developmentStep += 1")
-  && scriptSource.includes("if (player.developmentStep >= 7) evaluateDevelopmentYears()")
+verify("34. developmentStep mutation ownership交由 4.9 Boundary 且既有結算保持不變", !scriptSource.includes("player.developmentStep += 1")
+  && scriptSource.includes("CareerDevelopmentProgression.advanceDevelopment")
+  && scriptSource.includes("if (progressionResult.settlementRequired) evaluateDevelopmentYears()")
   && scriptSource.includes('player.chapter = "二十二歲職涯小結"'));
 
 const html = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const contractIndex = html.indexOf('src="career-spine-contract.js"');
 const transitionProgressionIndex = html.indexOf('src="career-transition-progression.js"');
 const developmentResolverIndex = html.indexOf('src="career-development-runtime-resolver.js"');
+const developmentProgressionIndex = html.indexOf('src="career-development-progression.js"');
 const storyIndex = html.indexOf('src="story.js"');
 const scriptIndex = html.indexOf('src="script.js"');
-verify("35. Browser dependency 依 Contract／Transition modules → Development Resolver → Story／Script 載入", contractIndex >= 0
+verify("35. Browser dependency 依 Contract／Transition modules → Development Resolver → Progression → Story／Script 載入", contractIndex >= 0
   && contractIndex < transitionProgressionIndex
   && transitionProgressionIndex < developmentResolverIndex
-  && developmentResolverIndex < storyIndex
-  && developmentResolverIndex < scriptIndex);
+  && developmentResolverIndex < developmentProgressionIndex
+  && developmentProgressionIndex < storyIndex
+  && developmentProgressionIndex < scriptIndex);
 
 const protectedDiff = execFileSync("git", [
   "diff", "--name-only", "HEAD", "--",
