@@ -20,7 +20,7 @@ function makeGame() {
     },
     window: { setTimeout(callback) { callback(); } }
   });
-  for (const file of ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js", "story.js", "save.js", "script.js"]) {
+  for (const file of ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js", "career-development-runtime-resolver.js", "story.js", "save.js", "script.js"]) {
     vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file });
   }
   return context;
@@ -119,7 +119,7 @@ function testAdultEcho(setup, mainEvent) {
 }
 
 testAdultEcho(`player.chapter="生涯轉換期"; player.careerExit="大學棒球"; player.transitionStep=3; addFlags(["azhe_record_sheet"]);`, "transition_relationship");
-testAdultEcho(`player.chapter="發展期"; player.developmentStep=2; player.careerArc.stage="transition";`, "development_mentor");
+testAdultEcho(`player.chapter="發展期"; player.age=20; player.careerExit="大學棒球"; player.developmentStep=2; player.careerArc.stage="transition";`, "development_mentor");
 
 const persistence = makeGame();
 vm.runInContext(`player=createInitialPlayer("物件存檔"); addFlags(["azhe_grounder_object","azhe_red_dirt_line","azhe_record_sheet"]); saveGame(); player=createInitialPlayer("覆蓋"); loadGame();`, persistence);

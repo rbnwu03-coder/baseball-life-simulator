@@ -1537,11 +1537,12 @@ function enterDevelopmentYears() {
   player.age = 20;
   player.developmentStep = 0;
   const routeKey = getAdultRouteKey();
+  const developmentEventIds = getDevelopmentNarrativeEventIds();
   startNarrativeThread({
     id: `${routeKey}_role_revaluation`, route: routeKey,
     title: routeKey === "rehab" ? "用新方法回到比賽" : "下一種用途開始有形狀",
     question: routeKey === "draft" ? "名單調整前，你能讓哪一種用途變得不可忽略？" : routeKey === "college" ? "調整節奏後，你能用哪一場表現重新進入球探視野？" : routeKey === "amateur" ? "工作與棒球並行時，你願意為哪一次晚成機會保留時間？" : "改變打法後，哪一項新任務能讓你再次參與比賽？",
-    totalBeats: developmentNarrativeEvents.length,
+    totalBeats: developmentEventIds.length,
     tensions: ["下一次比較將看見你能提供的新用途"]
   });
   if (!player.roleIdentity.primary) changeRoleIdentity(inferRoleIdentity(), "進入二十歲發展期時建立初始組織角色");
@@ -2398,7 +2399,18 @@ const transitionRouteDecisionEvents = [
   "transition_rehab_reentry_deadline"
 ];
 
-const developmentNarrativeEvents = ["development_daily_life", "development_competition", "development_mentor", "development_body_choice", "development_opportunity", "development_market", "development_decision"];
+function getDevelopmentNarrativeEventIds() {
+  if (
+    typeof CareerSpineContract !== "object" ||
+    typeof CareerSpineContract.getCareerNetwork !== "function"
+  ) return [];
+  try {
+    const eventIds = CareerSpineContract.getCareerNetwork()?.sharedDevelopment?.eventIds;
+    return Array.isArray(eventIds) ? eventIds.slice() : [];
+  } catch (_error) {
+    return [];
+  }
+}
 
 function getAdultRouteKey() {
   if (player.chapter === "生涯轉換期") {
@@ -2407,6 +2419,14 @@ function getAdultRouteKey() {
       typeof CareerTransitionRuntimeResolver.resolveTransitionRuntime !== "function"
     ) return null;
     const runtimeResult = CareerTransitionRuntimeResolver.resolveTransitionRuntime(player);
+    return runtimeResult.resolved ? runtimeResult.routeKey : null;
+  }
+  if (player.chapter === "發展期") {
+    if (
+      typeof CareerDevelopmentRuntimeResolver !== "object" ||
+      typeof CareerDevelopmentRuntimeResolver.resolveDevelopmentRuntime !== "function"
+    ) return null;
+    const runtimeResult = CareerDevelopmentRuntimeResolver.resolveDevelopmentRuntime(player);
     return runtimeResult.resolved ? runtimeResult.routeKey : null;
   }
   const exit = String(player.careerExit || "");
@@ -2437,13 +2457,14 @@ function redirectNarrativeThread(config = {}) {
 
 function ensureNarrativeThreadForEvent(eventId) {
   const routeKey = getAdultRouteKey();
+  const developmentEventIds = getDevelopmentNarrativeEventIds();
   if (!player.narrativeThread?.id && adultNarrativeChains[routeKey]?.events.includes(eventId)) startNarrativeThread({ ...adultNarrativeChains[routeKey], route: routeKey });
-  if ((!player.narrativeThread?.id || !player.narrativeThread.id.includes("role_revaluation")) && (developmentNarrativeEvents.includes(eventId) || eventId === "development_result")) {
+  if ((!player.narrativeThread?.id || !player.narrativeThread.id.includes("role_revaluation")) && (developmentEventIds.includes(eventId) || eventId === "development_result")) {
     startNarrativeThread({
       id: `${routeKey}_role_revaluation`, route: routeKey,
       title: routeKey === "rehab" ? "調整後第一次參與比賽" : "下一種用途開始有形狀",
       question: routeKey === "draft" ? "名單調整前，哪一項工具能成為固定任務？" : routeKey === "college" ? "調整節奏後，哪一次表現能重新進入球探視野？" : routeKey === "amateur" ? "工作與棒球並行時，哪一種參與方式可以持續？" : "改變打法後，哪一項新任務能帶你回到正式比賽？",
-      totalBeats: developmentNarrativeEvents.length, tensions: ["下一種用途即將進入正式比較"]
+      totalBeats: developmentEventIds.length, tensions: ["下一種用途即將進入正式比較"]
     });
   }
 }
@@ -2452,7 +2473,9 @@ function advanceNarrativeThread(eventId, choice = {}) {
   const thread = player.narrativeThread;
   if (!thread?.id) return false;
   const routeConfig = adultNarrativeChains[thread.route];
-  const events = developmentNarrativeEvents.includes(eventId) ? developmentNarrativeEvents : routeConfig?.events || [];
+  const developmentEventIds = getDevelopmentNarrativeEventIds();
+  const isDevelopmentEvent = developmentEventIds.includes(eventId);
+  const events = isDevelopmentEvent ? developmentEventIds : routeConfig?.events || [];
   const index = events.indexOf(eventId);
   if (index < 0) return false;
   const outcome = choice.memory || choice.text || "你完成了這一幕，代價仍會跟到下一次機會。";
@@ -2460,7 +2483,7 @@ function advanceNarrativeThread(eventId, choice = {}) {
   thread.previousOutcome = outcome;
   thread.currentBeat = Math.max(thread.currentBeat, index + 1);
   thread.lastOutcome = outcome;
-  thread.nextTension = developmentNarrativeEvents.includes(eventId)
+  thread.nextTension = isDevelopmentEvent
     ? ["原本的角色即將被重新比較", "下一回合必須面對角色失效", "有人會指出你真正缺少的用途", "身體與角色只能優先處理一項", "下一次機會將決定能否重新被需要", "市場會重新計算你的用途", "你必須決定留下方式"][Math.min(index + 1, 6)]
     : routeConfig.tensions[Math.min(index + 1, routeConfig.tensions.length - 1)];
   thread.activeTension = thread.nextTension;
@@ -2491,7 +2514,7 @@ function getNarrativeThreadSummary() {
 }
 
 function createContinuityOutcome(eventId, choice = {}) {
-  const isAdultEvent = Object.values(adultNarrativeChains).some(chain => chain.events.includes(eventId)) || developmentNarrativeEvents.includes(eventId);
+  const isAdultEvent = Object.values(adultNarrativeChains).some(chain => chain.events.includes(eventId)) || getDevelopmentNarrativeEventIds().includes(eventId);
   if (!isAdultEvent) return null;
   const nextEffect = getNarrativeBridge(eventId, "out").replace(/^本幕之後：/, "") || player.narrativeThread?.nextTension || "下一幕會回收這次選擇。";
   return { id: `${eventId}_${player.narrativeThread?.currentBeat || 0}_${player.continuityOutcomes.length}`, eventId, summary: choice.memory || choice.text || "這一幕留下了具體結果。", nextEffect, routeTag: player.narrativeThread?.route || getAdultRouteKey() };
@@ -2532,13 +2555,14 @@ function getNarrativeBridge(eventId, direction = "in") {
     ? `最後一幕留下的結果是：${thread.lastOutcome || "你已經做完最後一次去留選擇"}。現在必須把這段處境寫成生涯結果。`
     : "這條主軸會進入人生總結，連同曾幫助你或缺席的人一起被記住。";
   const routeEvents = adultNarrativeChains[thread.route]?.events || [];
-  if (!routeEvents.includes(eventId) && !developmentNarrativeEvents.includes(eventId)) return "";
+  const developmentEventIds = getDevelopmentNarrativeEventIds();
+  if (!routeEvents.includes(eventId) && !developmentEventIds.includes(eventId)) return "";
   if (direction === "in") {
     if (eventId === "transition_relationship") return `${thread.lastOutcome ? `上一幕的結果仍在：${thread.lastOutcome}` : thread.question}\n\n${getJointRelationshipScene()}`;
     if (thread.lastOutcome) return `承接上一幕：${thread.lastOutcome}\n這一幕仍在往前追問：${thread.question}`;
     return `這段故事正在追問：${thread.question}`;
   }
-  const developmentIndex = developmentNarrativeEvents.indexOf(eventId);
+  const developmentIndex = developmentEventIds.indexOf(eventId);
   const routeIndex = routeEvents.indexOf(eventId);
   const developmentTensions = ["下一種用途即將進入正式比較", "下一回合會看見原角色之外的任務", "有人會指出最值得帶往下一層級的工具", "身體與角色調整需要先選一項開始", "下一次機會可以把新用途帶進比賽", "市場會重新看見你的用途", "你將決定下一段想用什麼方式參與"];
   const next = developmentIndex >= 0
@@ -2675,10 +2699,11 @@ const importantEventThemes = {
 };
 
 function auditTitleContentAlignment() {
+  const developmentEventIds = getDevelopmentNarrativeEventIds();
   return Object.entries(importantEventThemes).map(([eventId, meta]) => {
     const event = getEvent(eventId);
     const choices = event?.choices || [];
-    const belongsToChain = eventId === "development_result" || developmentNarrativeEvents.includes(eventId) || Object.values(adultNarrativeChains).some(chain => chain.events.includes(eventId));
+    const belongsToChain = eventId === "development_result" || developmentEventIds.includes(eventId) || Object.values(adultNarrativeChains).some(chain => chain.events.includes(eventId));
     return {
       eventId, title: event?.title || "缺少事件", expectedTheme: meta.keywords.join("／"),
       themeIntent: { coreConflict: meta.keywords.join("／"), concreteAction: meta.action, expectedChange: `產生「${meta.next}」的條件`, nextQuestion: meta.next },

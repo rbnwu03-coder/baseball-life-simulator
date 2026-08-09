@@ -5,7 +5,7 @@ const { execFileSync } = require("child_process");
 
 const root = path.resolve(__dirname, "..");
 const runtimeSources = Object.fromEntries(
-  ["player.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "story.js", "save.js"]
+  ["player.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "story.js", "save.js"]
     .map(file => [file, fs.readFileSync(path.join(root, file), "utf8")])
 );
 
@@ -40,6 +40,7 @@ function makeContext() {
   vm.runInContext(runtimeSources["player.js"], context, { filename: "player.js" });
   vm.runInContext(runtimeSources["career-spine-contract.js"], context, { filename: "career-spine-contract.js" });
   vm.runInContext(runtimeSources["career-transition-runtime-resolver.js"], context, { filename: "career-transition-runtime-resolver.js" });
+  vm.runInContext(runtimeSources["career-development-runtime-resolver.js"], context, { filename: "career-development-runtime-resolver.js" });
   vm.runInContext("module = { exports: {} };", context);
   vm.runInContext(`
     function hasFlag(flag) {
@@ -162,7 +163,12 @@ routeCases.push({ chapter: "十歲暑假", age: 10, day: 7, phase: "ending", end
 const stepNodes = nodes.filter(item => item.progress && item.chapter !== "十歲暑假" && item.chapter !== "生涯轉換期");
 stepNodes.forEach(item => {
   for (let step = item.progress.min; step <= item.progress.max; step += 1) {
-    routeCases.push({ chapter: item.chapter, age: item.age[0], [item.progress.field]: step });
+    routeCases.push({
+      chapter: item.chapter,
+      age: item.age[0],
+      [item.progress.field]: step,
+      ...(item.chapter === "發展期" ? { careerExit: "大學棒球" } : {})
+    });
   }
 });
 
@@ -267,7 +273,16 @@ verify("22. Save version 已升級為 13", evaluate(context, "SAVE_VERSION") ===
 const forbiddenArchitectureDiff = execFileSync("git", ["diff", "--name-only", "--", "current-state-boundary.js", "decision-flow.js", "application-controller.js", "time-boundary.js"], { cwd: root, encoding: "utf8" }).trim();
 verify("23. 現有 Boundary、Decision Flow 與 Application Controller 未修改", forbiddenArchitectureDiff === "");
 verify("24. Registry 沒有新增 player.stage 或人物在場契約", !/player\.stage|activeNpcId|speakerNpcId|presentNpcIds/.test(runtimeSources["career-spine-contract.js"]));
-verify("25. 現有 Gameplay 沒有依賴 Career Spine Registry", !["story.js", "save.js", "player.js"].some(file => runtimeSources[file].includes("CareerSpineContract")) && !fs.readFileSync(path.join(root, "script.js"), "utf8").includes("CareerSpineContract"));
+const scriptSource = fs.readFileSync(path.join(root, "script.js"), "utf8");
+const developmentHelperStart = scriptSource.indexOf("function getDevelopmentNarrativeEventIds()");
+const developmentHelperEnd = scriptSource.indexOf("function getAdultRouteKey()", developmentHelperStart);
+const scriptOutsideDevelopmentHelper = developmentHelperStart >= 0 && developmentHelperEnd > developmentHelperStart
+  ? scriptSource.slice(0, developmentHelperStart) + scriptSource.slice(developmentHelperEnd)
+  : scriptSource;
+verify("25. Gameplay Router 不直接依賴 Registry；4.8 只允許 Narrative topology helper 唯讀查詢", !["story.js", "save.js", "player.js"].some(file => runtimeSources[file].includes("CareerSpineContract"))
+  && developmentHelperStart >= 0
+  && scriptSource.slice(developmentHelperStart, developmentHelperEnd).includes("CareerSpineContract.getCareerNetwork()")
+  && !scriptOutsideDevelopmentHelper.includes("CareerSpineContract"));
 
 const declaredEventIds = [...new Set(nodes.flatMap(collectDeclaredEventIds))];
 const missingDeclaredEventIds = declaredEventIds.filter(eventId => !evaluate(context, `Boolean(getEvent(${JSON.stringify(eventId)}))`));
@@ -282,7 +297,8 @@ nodes
       const result = runtimeMatches({
         chapter: node.chapter,
         age: node.age[0],
-        [node.progress.field]: step
+        [node.progress.field]: step,
+        ...(node.chapter === "發展期" ? { careerExit: "大學棒球" } : {})
       }, eventIds[0]);
       if (!result.exact) fixedStepMismatches.push({ node: node.id, step, result });
     });

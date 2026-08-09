@@ -23,7 +23,7 @@ function makeGame() {
     },
     window: { setTimeout(callback) { callback(); } }
   });
-  for (const file of ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "save.js", "script.js"]) {
+  for (const file of ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "career-spine-contract.js", "career-development-runtime-resolver.js", "story.js", "save.js", "script.js"]) {
     vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file });
   }
   return context;
@@ -72,7 +72,7 @@ for (let index = 0; index < 3; index += 1) {
 
 for (let index = 0; index < 3; index += 1) {
   const game = makeGame();
-  const queued = vm.runInContext(`player=createInitialPlayer("成年回響-${index}"); player.chapter="發展期"; player.age=20; player.developmentStep=1; addFlags(["takahashi_first_failure_seen","takahashi_first_wild_ball","takahashi_pressure_seen","takahashi_scoreboard","takahashi_break_seen","takahashi_shined_glove"]); queueTakahashiAdultRestartEcho("development_competition")`, game);
+  const queued = vm.runInContext(`player=createInitialPlayer("成年回響-${index}"); player.chapter="發展期"; player.age=20; player.careerExit="大學棒球"; player.developmentStep=1; addFlags(["takahashi_first_failure_seen","takahashi_first_wild_ball","takahashi_pressure_seen","takahashi_scoreboard","takahashi_break_seen","takahashi_shined_glove"]); queueTakahashiAdultRestartEcho("development_competition")`, game);
   if (!queued || vm.runInContext("player.forcedEventId", game) !== "takahashi_adult_restart_echo") throw new Error(`成年回響選項 ${index + 1} 沒有插入`);
   const adultText = vm.runInContext("getEvent('takahashi_adult_restart_echo').text()", game);
   if (!["黑記號", "白板", "磨到發亮"].every(clue => adultText.includes(clue))) throw new Error("成年回響沒有收回三個跨章物件");

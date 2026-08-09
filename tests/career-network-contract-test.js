@@ -10,7 +10,8 @@ const files = [
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
   "competition-presentation.js", "career-spine-contract.js", "career-transition-resolver.js",
-  "career-transition-commit.js", "career-transition-runtime-resolver.js", "career-transition-progression.js", "story.js", "save.js", "script.js"
+  "career-transition-commit.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
+  "career-development-runtime-resolver.js", "story.js", "save.js", "script.js"
 ];
 
 let passed = 0;
@@ -306,7 +307,17 @@ const expectedEdgePairs = nodes.slice(0, -1).map((node, index) => [node.id, node
 verify("30. Contract 的現行主幹 actual edge 與 chapter 順序一致", expectedEdgePairs.every(([from, to]) => actualEdges.some(edge => edge.fromNodeId === from && edge.toNodeId === to))
   && actualEdges.length === expectedEdgePairs.length);
 verify("31. 舊 transition_checkpoint 沒有被偽裝成成年正式路由", !network.initialRoutes.some(route => route.exclusiveEventIds.concat(route.sharedEventIds).includes("transition_checkpoint")));
-verify("32. Gameplay 未依賴 Career Spine Contract 作為 Router", ["player.js", "story.js", "save.js", "script.js"].every(file => !fs.readFileSync(path.join(root, file), "utf8").includes("CareerSpineContract")));
+const storySource = fs.readFileSync(path.join(root, "story.js"), "utf8");
+const scriptSource = fs.readFileSync(path.join(root, "script.js"), "utf8");
+const narrativeHelperStart = scriptSource.indexOf("function getDevelopmentNarrativeEventIds()");
+const narrativeHelperEnd = scriptSource.indexOf("function getAdultRouteKey()", narrativeHelperStart);
+const scriptOutsideNarrativeHelper = narrativeHelperStart >= 0 && narrativeHelperEnd > narrativeHelperStart
+  ? scriptSource.slice(0, narrativeHelperStart) + scriptSource.slice(narrativeHelperEnd)
+  : scriptSource;
+verify("32. Gameplay Router 不直接讀 Contract；只有 4.8 Narrative topology helper 讀取", !storySource.includes("CareerSpineContract")
+  && narrativeHelperStart >= 0
+  && scriptSource.slice(narrativeHelperStart, narrativeHelperEnd).includes("CareerSpineContract.getCareerNetwork()")
+  && !scriptOutsideNarrativeHelper.includes("CareerSpineContract"));
 verify("33. Contract 未新增 current route 或 transition history Gameplay 欄位", !/currentCareerRoute|careerTransitionHistory/.test(fs.readFileSync(path.join(root, "career-spine-contract.js"), "utf8")));
 verify("34. Save version 與 localStorage key 保持 v13 既有契約", evaluate(context, "SAVE_VERSION") === 13
   && fs.readFileSync(path.join(root, "save.js"), "utf8").includes('"baseballLifeRpgSave"'));

@@ -324,14 +324,14 @@ verify("38. Browser 依 Contract → Runtime Resolver → Progression → Story�
 
 const protectedFiles = [
   "career-spine-contract.js", "career-transition-resolver.js", "career-transition-commit.js",
-  "career-transition-runtime-resolver.js", "player.js", "save.js", "story.js", "style.css"
+  "career-transition-runtime-resolver.js", "player.js", "save.js", "style.css"
 ];
 const { execFileSync } = require("child_process");
 const protectedDiff = execFileSync("git", ["diff", "--name-only", "HEAD", "--", ...protectedFiles], {
   cwd: root,
   encoding: "utf8"
 }).trim();
-verify("39. Contract、Resolver、Commit、Runtime Resolver、Player、Save、Story、CSS 均未修改", protectedDiff === "");
+verify("39. Contract、Resolver、Commit、Runtime Resolver、Player、Save 與 CSS 均未修改（不含 4.8 授權的 Story routing）", protectedDiff === "");
 verify("40. Player Schema、Save version 與 localStorage key 完全不變", !/adultRoute|careerRouteKey|currentCareerNode|lastCompletedTransitionEvent|transitionNonce|progressToken/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
   && evaluate(integrationContext, "SAVE_VERSION") === 13
   && fs.readFileSync(path.join(root, "save.js"), "utf8").includes('"baseballLifeRpgSave"'));

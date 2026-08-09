@@ -1848,8 +1848,12 @@ function getCurrentEventId() {
   if (player.forcedEventId) return player.forcedEventId;
   if (player.chapter === "二十二歲職涯小結") return "development_result";
   if (player.chapter === "發展期") {
-    const sequence = ["development_daily_life", "development_competition", "development_mentor", "development_body_choice", "development_opportunity", "development_market", "development_decision"];
-    return sequence[player.developmentStep] || "development_result";
+    if (
+      typeof CareerDevelopmentRuntimeResolver !== "object" ||
+      typeof CareerDevelopmentRuntimeResolver.resolveDevelopmentRuntime !== "function"
+    ) return null;
+    const runtimeResult = CareerDevelopmentRuntimeResolver.resolveDevelopmentRuntime(player);
+    return runtimeResult.resolved ? runtimeResult.eventId : null;
   }
   if (player.chapter === "生涯轉換期小結") return "transition_result";
   if (player.chapter === "生涯轉換期") {
