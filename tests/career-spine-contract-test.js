@@ -5,7 +5,7 @@ const { execFileSync } = require("child_process");
 
 const root = path.resolve(__dirname, "..");
 const runtimeSources = Object.fromEntries(
-  ["player.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "career-save-admission.js", "story.js", "save.js"]
+  ["player.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "career-age22-outcome-resolver.js", "career-save-admission.js", "story.js", "save.js"]
     .map(file => [file, fs.readFileSync(path.join(root, file), "utf8")])
 );
 
@@ -41,6 +41,7 @@ function makeContext() {
   vm.runInContext(runtimeSources["career-spine-contract.js"], context, { filename: "career-spine-contract.js" });
   vm.runInContext(runtimeSources["career-transition-runtime-resolver.js"], context, { filename: "career-transition-runtime-resolver.js" });
   vm.runInContext(runtimeSources["career-development-runtime-resolver.js"], context, { filename: "career-development-runtime-resolver.js" });
+  vm.runInContext(runtimeSources["career-age22-outcome-resolver.js"], context, { filename: "career-age22-outcome-resolver.js" });
   vm.runInContext(runtimeSources["career-save-admission.js"], context, { filename: "career-save-admission.js" });
   vm.runInContext("module = { exports: {} };", context);
   vm.runInContext(`
@@ -269,7 +270,7 @@ evaluate(context, "saveGame()");
 evaluate(context, "player = createInitialPlayer('被覆蓋'); loadGame()");
 verify("20. 現有合法 Save 載入後仍走原本事件路由", evaluate(context, "getCurrentEventId()") === "high_school_long_bench" && evaluate(context, "player.highSchoolStep") === 5);
 verify("21. Save 仍使用原 localStorage key", storage.has("baseballLifeRpgSave"));
-verify("22. Save version 已升級為 13", evaluate(context, "SAVE_VERSION") === 13 && evaluate(context, "player.saveVersion") === 13);
+verify("22. Save version 已升級為 14", evaluate(context, "SAVE_VERSION") === 14 && evaluate(context, "player.saveVersion") === 14);
 
 const forbiddenArchitectureDiff = execFileSync("git", ["diff", "--name-only", "--", "current-state-boundary.js", "decision-flow.js", "application-controller.js", "time-boundary.js"], { cwd: root, encoding: "utf8" }).trim();
 verify("23. 現有 Boundary、Decision Flow 與 Application Controller 未修改", forbiddenArchitectureDiff === "");

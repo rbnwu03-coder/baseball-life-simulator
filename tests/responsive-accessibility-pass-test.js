@@ -228,7 +228,7 @@ verify("42. 未修改 Accessibility 範圍外的 Boundary 與 Flow", !changedFil
   "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js"
 ].includes(file)));
 verify("43. 未新增 active NPC 推測", !/activeNpcId|activeNpcIds|speakerNpcId|presentNpcIds/.test(script));
-verify("44. Save key 保持不變且高二遷移不影響 Accessibility", vm.runInContext("SAVE_KEY === 'baseballLifeRpgSave' && SAVE_VERSION === 13", youth));
+verify("44. Save key 保持不變且 4.12 migration 不影響 Accessibility", vm.runInContext("SAVE_KEY === 'baseballLifeRpgSave' && SAVE_VERSION === 14", youth));
 verify("45. 既有少棒 Competition Presentation 仍可使用", vm.runInContext("CompetitionPresentation.isValidationEvent('youth_match_entry') && Boolean(CompetitionPresentation.getValidationEvent('youth_match_grounder'))", youth));
 
 console.log(`\nUX Sprint 3.5 Responsive and Accessibility Pass：${passed}/${passed} 通過`);

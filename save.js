@@ -7,6 +7,7 @@ function saveGame() {
 }
 
 function normalizeSave(saved) {
+  const sourceSaveVersion = saved.saveVersion;
   const fresh = createInitialPlayer(saved.name || "");
   Object.assign(fresh, saved);
   if (saved.highSchoolYearTwoStep === undefined) fresh.highSchoolYearTwoStep = 0;
@@ -70,6 +71,21 @@ function normalizeSave(saved) {
   fresh.aspirationMoments = Array.isArray(saved.aspirationMoments) ? saved.aspirationMoments : [];
   if (saved.chapter2Step === undefined && fresh.chapter === "少棒入門") {
     fresh.chapter2Step = fresh.chapter2Phase === "intro" ? 0 : fresh.chapter2Day === 1 ? 1 : fresh.chapter2Day === 2 ? 3 : 5;
+  }
+  if (
+    sourceSaveVersion === 13 &&
+    saved.age22OutcomeCode === undefined &&
+    ["二十二歲職涯小結", "垂直切片完成"].includes(fresh.chapter) &&
+    typeof CareerAge22OutcomeResolver === "object" &&
+    typeof CareerAge22OutcomeResolver.resolveLegacyOutcome === "function"
+  ) {
+    const migratedOutcome = CareerAge22OutcomeResolver.resolveLegacyOutcome({
+      careerExit: fresh.careerExit,
+      marketOutcome: fresh.marketOutcome
+    });
+    if (migratedOutcome?.resolved) {
+      fresh.age22OutcomeCode = migratedOutcome.outcomeCode;
+    }
   }
   fresh.saveVersion = SAVE_VERSION;
   return fresh;

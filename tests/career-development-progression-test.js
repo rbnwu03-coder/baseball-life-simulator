@@ -239,7 +239,7 @@ const runtimeFiles = [
   "competition-presentation.js", "career-spine-contract.js", "career-transition-resolver.js",
   "career-transition-commit.js", "career-transition-runtime-resolver.js",
   "career-transition-progression.js", "career-development-runtime-resolver.js",
-  "career-development-progression.js", "story.js", "save.js", "script.js"
+  "career-development-progression.js", "career-age22-outcome-resolver.js", "story.js", "save.js", "script.js"
 ];
 
 function makeContext() {
@@ -387,15 +387,16 @@ const protectedFiles = [
   "career-spine-contract.js", "career-development-runtime-resolver.js",
   "career-transition-resolver.js", "career-transition-commit.js",
   "career-transition-runtime-resolver.js", "career-transition-progression.js",
-  "player.js", "story.js", "style.css"
+  "story.js", "style.css"
 ];
 const protectedDiff = execFileSync("git", ["diff", "--name-only", "HEAD", "--", ...protectedFiles], {
   cwd: root,
   encoding: "utf8"
 }).trim();
-verify("46. Career Contract、4.8 Resolver、Transition 4.4–4.7、Player、Story 與 CSS 均未修改（Save 僅允許 4.10 Admission integration）", protectedDiff === "");
-verify("47. Player Schema、Save version 與 localStorage key 完全不變", !/lastDevelopmentEvent|developmentRoute|developmentProgressToken|developmentNonce|developmentNode/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
-  && evaluate(integrationContext, "SAVE_VERSION") === 13
+verify("46. Career Contract、4.8 Resolver、Transition 4.4–4.7、Story 與 CSS 均未修改", protectedDiff === "");
+verify("47. Player 只新增 4.12 結果欄位、Save version 為 14 且 localStorage key 不變", !/lastDevelopmentEvent|developmentRoute|developmentProgressToken|developmentNonce|developmentNode/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
+  && /age22OutcomeCode:\s*""/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
+  && evaluate(integrationContext, "SAVE_VERSION") === 14
   && fs.readFileSync(path.join(root, "save.js"), "utf8").includes('"baseballLifeRpgSave"'));
 
 console.log(`\nArchitecture Sprint 4.9 Development Years Progression Boundary：${validations}/${validations} 通過`);

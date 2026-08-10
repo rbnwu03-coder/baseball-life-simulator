@@ -285,11 +285,11 @@ verify("26. Browser dependency 依 Contract → Graduation Resolver → Commit �
 const protectedDiff = execFileSync("git", [
   "diff", "--name-only", "HEAD", "--",
   "career-spine-contract.js", "career-transition-resolver.js", "career-transition-commit.js",
-  "player.js", "style.css"
+  "style.css"
 ], { cwd: root, encoding: "utf8" }).trim();
-verify("27. 4.3 Contract、4.4 Resolver、4.5 Commit、Player 與 CSS 均未修改（Save 僅允許 4.10 Admission integration）", protectedDiff === "");
-verify("28. Player Schema、Save version 與 localStorage key 完全不變", !/adultRoute|careerRouteKey|currentCareerNode|transitionRoute|currentTransitionEventId/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
-  && evaluate(runtimeContext, "SAVE_VERSION") === 13
+verify("27. 4.3 Contract、4.4 Resolver、4.5 Commit 與 CSS 均未修改", protectedDiff === "");
+verify("28. Player 未新增 Transition 路由欄位、Save version 為 14 且 localStorage key 不變", !/adultRoute|careerRouteKey|currentCareerNode|transitionRoute|currentTransitionEventId/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
+  && evaluate(runtimeContext, "SAVE_VERSION") === 14
   && fs.readFileSync(path.join(root, "save.js"), "utf8").includes('"baseballLifeRpgSave"'));
 
 console.log(`\nArchitecture Sprint 4.6 Adult Transition Runtime Routing Boundary：${passed}/${passed} 通過`);

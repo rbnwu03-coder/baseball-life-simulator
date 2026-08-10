@@ -3269,34 +3269,28 @@ function evaluateCareerTransition() {
 }
 
 function evaluateDevelopmentYears() {
-  player.age = 22;
   const marketScore = player.scoutEvaluation + player.recentPerformance + player.reputation + Math.floor(player.exposure / 2) + Math.max(getPositionCareerValue(), getOffensiveCareerValue()) - player.body.injuryRisk;
-  if (player.careerExit.startsWith("高卒")) {
-    if (marketScore >= 12) {
-      player.marketOutcome = "一軍短期升格／正式名單競爭";
-      player.developmentResult = "職業體系開始把你當成可用戰力";
-      player.developmentDetail = "你仍不是穩定一軍球員，但角色、健康與近期表現已足以換到真正的升格機會。";
-    } else {
-      player.marketOutcome = "二軍續留邊緣／球團耐心下降";
-      player.developmentResult = "職業名額開始計算你的替代成本";
-      player.developmentDetail = "年紀與新秀加入讓球團不再只看潛力。下一次評估可能直接決定釋出或轉隊。";
-    }
-  } else if (player.careerExit === "大學棒球") {
-    player.marketOutcome = marketScore >= 11 ? "大卒選秀追蹤名單" : "大學主力／落選風險並存";
-    player.developmentResult = marketScore >= 11 ? "四年成長讓球探重新回來" : "大學延長了時間，尚未消除市場疑問";
-    player.developmentDetail = "大學路線的價值取決於二十二歲時能否立即使用，而不再只是晚熟想像。";
-  } else if (player.careerExit === "業餘／社會人棒球") {
-    player.marketOutcome = marketScore >= 10 ? "晚成選秀／職業測試邀請" : "業餘主力與穩定工作";
-    player.developmentResult = marketScore >= 10 ? "有限曝光終於形成職業入口" : "你建立了能長期留在棒球裡的生活";
-    player.developmentDetail = "職業機會不一定出現，但經濟與棒球不再只能二選一。";
-  } else {
-    player.marketOutcome = player.body.injuryRisk <= 4 ? "復出測試／業餘隊邀請" : "持續復健／轉向第二角色";
-    player.developmentResult = player.body.injuryRisk <= 4 ? "你重新取得以球員身分被評估的資格" : "回到原本球員樣貌不再是唯一答案";
-    player.developmentDetail = "復健結果同時打開球員測試、基層協助與棒球第二職涯的可能。";
-  }
+  if (
+    typeof CareerAge22OutcomeResolver !== "object" ||
+    typeof CareerAge22OutcomeResolver.resolve !== "function"
+  ) return false;
+
+  const outcome = CareerAge22OutcomeResolver.resolve({
+    careerExit: player.careerExit,
+    marketScore,
+    injuryRisk: player.body.injuryRisk
+  });
+  if (!outcome || outcome.resolved !== true) return false;
+
+  player.age = 22;
+  player.age22OutcomeCode = outcome.outcomeCode;
+  player.marketOutcome = outcome.marketOutcome;
+  player.developmentResult = outcome.developmentResult;
+  player.developmentDetail = outcome.developmentDetail;
   evaluateMarket();
   updateCareerValue();
   player.chapter = "二十二歲職涯小結";
+  return true;
 }
 
 function showCurrentEvent() {

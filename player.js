@@ -1,4 +1,4 @@
-const SAVE_VERSION = 13;
+const SAVE_VERSION = 14;
 
 // Phase 2：創角 Identity 的唯一 runtime 合法值來源。
 // UI 與創角流程可以呈現或使用這些值，但輸入是否合法由此契約判定。
@@ -186,6 +186,7 @@ function createInitialPlayer(name = "") {
     developmentResult: "",
     developmentDetail: "",
     marketOutcome: "",
+    age22OutcomeCode: "",
     matchState: {
       inning: 4,
       half: "上",

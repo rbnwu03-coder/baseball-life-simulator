@@ -150,7 +150,7 @@ const runtimeFiles = [
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
   "competition-presentation.js", "career-spine-contract.js", "career-transition-resolver.js",
   "career-transition-commit.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
-  "career-development-runtime-resolver.js", "career-development-progression.js", "story.js", "save.js", "script.js"
+  "career-development-runtime-resolver.js", "career-development-progression.js", "career-age22-outcome-resolver.js", "story.js", "save.js", "script.js"
 ];
 
 function makeContext() {
@@ -357,11 +357,11 @@ const protectedDiff = execFileSync("git", [
   "diff", "--name-only", "HEAD", "--",
   "career-spine-contract.js", "career-transition-resolver.js", "career-transition-commit.js",
   "career-transition-runtime-resolver.js", "career-transition-progression.js",
-  "player.js", "style.css"
+  "style.css"
 ], { cwd: root, encoding: "utf8" }).trim();
-verify("36. Contract、Transition 4.4–4.7、Player 與 CSS 均未修改（Save 僅允許 4.10 Admission integration）", protectedDiff === "");
-verify("37. Player Schema、Save version 與 localStorage key 完全不變", !/developmentRoute|currentDevelopmentNode|developmentEventId|adultRoute|routeKey/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
-  && evaluate(runtimeContext, "SAVE_VERSION") === 13
+verify("36. Contract、Transition 4.4–4.7 與 CSS 均未修改", protectedDiff === "");
+verify("37. Player 未新增 Development 路由欄位、Save version 為 14 且 localStorage key 不變", !/developmentRoute|currentDevelopmentNode|developmentEventId|adultRoute|routeKey/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
+  && evaluate(runtimeContext, "SAVE_VERSION") === 14
   && fs.readFileSync(path.join(root, "save.js"), "utf8").includes('"baseballLifeRpgSave"'));
 
 console.log(`\nArchitecture Sprint 4.8 Development Years Runtime Routing Boundary：${passed}/${passed} 通過`);

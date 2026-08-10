@@ -8,6 +8,7 @@ const boundaryFiles = [
   "career-spine-contract.js",
   "career-transition-runtime-resolver.js",
   "career-development-runtime-resolver.js",
+  "career-age22-outcome-resolver.js",
   "career-save-admission.js"
 ];
 
@@ -112,14 +113,44 @@ function developmentState(context, careerExit = "大學棒球", developmentStep 
 }
 
 function age22Result(context, careerExit = "大學棒球", overrides = {}) {
+  const fixture = {
+    "高卒選秀・中後段指名候選": {
+      age22OutcomeCode: "professional-competitive",
+      marketOutcome: "一軍短期升格／正式名單競爭",
+      developmentResult: "職業體系開始把你當成可用戰力",
+      developmentDetail: "你仍不是穩定一軍球員，但角色、健康與近期表現已足以換到真正的升格機會。"
+    },
+    "高卒選秀・落選／培訓測試": {
+      age22OutcomeCode: "professional-roster-risk",
+      marketOutcome: "二軍續留邊緣／球團耐心下降",
+      developmentResult: "職業名額開始計算你的替代成本",
+      developmentDetail: "年紀與新秀加入讓球團不再只看潛力。下一次評估可能直接決定釋出或轉隊。"
+    },
+    "大學棒球": {
+      age22OutcomeCode: "college-draft-window",
+      marketOutcome: "大卒選秀追蹤名單",
+      developmentResult: "四年成長讓球探重新回來",
+      developmentDetail: "大學路線的價值取決於二十二歲時能否立即使用，而不再只是晚熟想像。"
+    },
+    "業餘／社會人棒球": {
+      age22OutcomeCode: "amateur-professional-window",
+      marketOutcome: "晚成選秀／職業測試邀請",
+      developmentResult: "有限曝光終於形成職業入口",
+      developmentDetail: "職業機會不一定出現，但經濟與棒球不再只能二選一。"
+    },
+    "復健與生涯暫停": {
+      age22OutcomeCode: "rehab-player-reentry",
+      marketOutcome: "復出測試／業餘隊邀請",
+      developmentResult: "你重新取得以球員身分被評估的資格",
+      developmentDetail: "復健結果同時打開球員測試、基層協助與棒球第二職涯的可能。"
+    }
+  }[careerExit] || {};
   return fresh(context, Object.assign({
     chapter: "二十二歲職涯小結",
     age: 22,
     careerExit,
     developmentStep: 7,
-    developmentResult: "發展期完成",
-    developmentDetail: "七幕發展已完成。",
-    marketOutcome: "進入追蹤名單"
+    ...fixture
   }, overrides));
 }
 
@@ -220,6 +251,10 @@ const invalidAge22States = [
   age22Result(context, "大學棒球", { developmentResult: "" }),
   age22Result(context, "大學棒球", { developmentDetail: "" }),
   age22Result(context, "大學棒球", { marketOutcome: "" }),
+  age22Result(context, "大學棒球", { age22OutcomeCode: "" }),
+  age22Result(context, "大學棒球", { age22OutcomeCode: "__invalid__" }),
+  age22Result(context, "大學棒球", { age22OutcomeCode: "amateur-stable" }),
+  age22Result(context, "大學棒球", { marketOutcome: "業餘主力與穩定工作" }),
   age22Result(context, "__invalid__")
 ];
 verify("16. Invalid 22 歲結果狀態全部 rejected", invalidAge22States.every(state => !admission.evaluate(state).admitted));
@@ -280,7 +315,28 @@ legacyLoad.storage.set("baseballLifeRpgSave", JSON.stringify({
   seasonStep: 2
 }));
 evaluate(legacyLoad.context, "loadGame()");
-verify("33. 舊存檔先 normalize 到 v13 再由 pre-adult Admission 放行", evaluate(legacyLoad.context, "player.name === '舊少棒存檔' && player.saveVersion === 13 && player.baseballSkills && player.relationships") && legacyLoad.counters.render === 1);
+verify("33. 舊存檔先 normalize 到 v14 再由 pre-adult Admission 放行", evaluate(legacyLoad.context, "player.name === '舊少棒存檔' && player.saveVersion === 14 && player.age22OutcomeCode === '' && player.baseballSkills && player.relationships") && legacyLoad.counters.render === 1);
+
+const legacyAge22Load = makeContext(runtimeFiles);
+const legacyAge22State = age22Result(legacyAge22Load.context, "大學棒球", { saveVersion: 13 });
+delete legacyAge22State.age22OutcomeCode;
+const legacyAge22Raw = JSON.stringify(legacyAge22State);
+legacyAge22Load.storage.set("baseballLifeRpgSave", legacyAge22Raw);
+evaluate(legacyAge22Load.context, "loadGame()");
+verify("33a. 合法 v13 二十二歲結果以既有 marketOutcome 遷移到 v14 code", evaluate(legacyAge22Load.context, "player.saveVersion === 14 && player.age22OutcomeCode === 'college-draft-window'") && legacyAge22Load.counters.render === 1);
+verify("33b. v13 Load migration 不自動覆寫原始 Storage", legacyAge22Load.storage.get("baseballLifeRpgSave") === legacyAge22Raw && legacyAge22Load.counters.storageWrites === 0);
+
+const invalidLegacyAge22Load = makeContext(runtimeFiles);
+const invalidLegacyState = age22Result(invalidLegacyAge22Load.context, "大學棒球", {
+  saveVersion: 13,
+  marketOutcome: "一軍短期升格／正式名單競爭"
+});
+delete invalidLegacyState.age22OutcomeCode;
+const invalidLegacyRaw = JSON.stringify(invalidLegacyState);
+invalidLegacyAge22Load.storage.set("baseballLifeRpgSave", invalidLegacyRaw);
+evaluate(invalidLegacyAge22Load.context, "player = createInitialPlayer('遷移拒絕前'); var __beforeInvalidLegacy = player; var __beforeInvalidLegacyJson = JSON.stringify(player); loadGame()");
+verify("33c. 路線與舊中文結果矛盾的 v13 存檔被拒且 live Player zero mutation", evaluate(invalidLegacyAge22Load.context, "player === __beforeInvalidLegacy && JSON.stringify(player) === __beforeInvalidLegacyJson") && invalidLegacyAge22Load.counters.render === 0);
+verify("33d. 無法遷移的 v13 存檔不修改 Storage", invalidLegacyAge22Load.storage.get("baseballLifeRpgSave") === invalidLegacyRaw && invalidLegacyAge22Load.counters.storageWrites === 0 && invalidLegacyAge22Load.counters.storageDeletes === 0);
 
 const forcedLoad = makeContext(runtimeFiles);
 forcedLoad.storage.set("baseballLifeRpgSave", JSON.stringify(forcedDevelopment));
@@ -305,6 +361,7 @@ const loadOrder = [
   "career-spine-contract.js",
   "career-transition-runtime-resolver.js",
   "career-development-runtime-resolver.js",
+  "career-age22-outcome-resolver.js",
   "career-save-admission.js",
   "save.js"
 ].map(file => indexSource.indexOf(`<script src="${file}"></script>`));
@@ -312,8 +369,8 @@ verify("38. Browser dependency 依 Contract → Runtime Resolvers → Admission 
 
 const playerSource = fs.readFileSync(path.join(root, "player.js"), "utf8");
 const saveSource = fs.readFileSync(path.join(root, "save.js"), "utf8");
-verify("39. SAVE_VERSION、SAVE_KEY 與 saveGame snapshot shape 保持不變", /const SAVE_VERSION = 13;/.test(playerSource) && /const SAVE_KEY = "baseballLifeRpgSave";/.test(saveSource) && /localStorage\.setItem\(SAVE_KEY, JSON\.stringify\(player\)\)/.test(saveSource));
-verify("40. Player Schema 未新增 Admission persistence 欄位", !/saveValid|admissionStatus|adultNodeId|loadedRoute|saveAdmissionVersion/.test(playerSource));
+verify("39. SAVE_VERSION 升級為 14，SAVE_KEY 與 saveGame snapshot shape 保持不變", /const SAVE_VERSION = 14;/.test(playerSource) && /const SAVE_KEY = "baseballLifeRpgSave";/.test(saveSource) && /localStorage\.setItem\(SAVE_KEY, JSON\.stringify\(player\)\)/.test(saveSource));
+verify("40. Player Schema 只新增 age22OutcomeCode，未新增 currentIdentity 或 Admission persistence 欄位", /age22OutcomeCode:\s*""/.test(playerSource) && !/currentCareerIdentity|adultCareerIdentity|saveValid|admissionStatus|adultNodeId|loadedRoute|saveAdmissionVersion/.test(playerSource));
 verify("41. loadGame 明確維持 candidate-first、admission-second、commit-last", saveSource.indexOf("const candidate = normalizeSave") < saveSource.indexOf("AdultCareerSaveAdmission.evaluate(candidate)") && saveSource.indexOf("AdultCareerSaveAdmission.evaluate(candidate)") < saveSource.indexOf("player = candidate"));
 
 console.log(`\nArchitecture Sprint 4.10 Adult Career Save Admission Boundary：${passed}/${passed} 通過`);

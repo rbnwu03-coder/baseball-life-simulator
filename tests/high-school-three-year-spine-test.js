@@ -9,7 +9,7 @@ const files = [
   "evaluation-registry.js", "coach-evaluation-boundary.js", "narrative-condition-boundary.js",
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
-  "competition-presentation.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "career-save-admission.js",
+  "competition-presentation.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "career-age22-outcome-resolver.js", "career-save-admission.js",
   "story.js", "save.js", "script.js"
 ];
 
@@ -137,17 +137,17 @@ const highThreeIds = [
 
 const { context, storage, nodes } = makeContext();
 
-verify("1. Player Schema 只新增三個高二持久欄位", [
+verify("1. Player Schema 保留三個高二持久欄位", [
   "highSchoolYearTwoStep", "highSchoolYearTwoResult", "highSchoolYearTwoDetail"
 ].every(key => Object.prototype.hasOwnProperty.call(parse(context, "createInitialPlayer('測試')"), key)));
-verify("2. SAVE_VERSION 已由 12 升級為 13", evaluate(context, "SAVE_VERSION === 13 && player.saveVersion === 13"));
+verify("2. SAVE_VERSION 已由 13 升級為 14", evaluate(context, "SAVE_VERSION === 14 && player.saveVersion === 14"));
 verify("3. localStorage key 保持不變", evaluate(context, "SAVE_KEY") === "baseballLifeRpgSave");
 
 evaluate(context, `var __legacyV12 = createInitialPlayer("v12"); __legacyV12.saveVersion = 12;
   delete __legacyV12.highSchoolYearTwoStep; delete __legacyV12.highSchoolYearTwoResult; delete __legacyV12.highSchoolYearTwoDetail;
   var __migratedV12 = normalizeSave(__legacyV12);`);
 verify("4. v12 存檔補入高二預設欄位", evaluate(context, "__migratedV12.highSchoolYearTwoStep === 0 && __migratedV12.highSchoolYearTwoResult === '' && __migratedV12.highSchoolYearTwoDetail === ''"));
-verify("5. v12 遷移後標記為 v13", evaluate(context, "__migratedV12.saveVersion === 13"));
+verify("5. v12 遷移後標記為目前 v14", evaluate(context, "__migratedV12.saveVersion === 14"));
 
 evaluate(context, `player = normalizeSave(Object.assign(createInitialPlayer("舊高一結果"), {
   saveVersion: 12, chapter: "青棒第一年小結", age: 16, highSchoolResult: "舊結果", highSchoolDetail: "舊內容"

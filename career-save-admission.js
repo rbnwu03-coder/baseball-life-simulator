@@ -1,4 +1,4 @@
-var AdultCareerSaveAdmission = ((careerSpineContract, transitionRuntimeResolver, developmentRuntimeResolver) => {
+var AdultCareerSaveAdmission = ((careerSpineContract, transitionRuntimeResolver, developmentRuntimeResolver, age22OutcomeResolver) => {
   "use strict";
 
   function clone(value) {
@@ -67,6 +67,15 @@ var AdultCareerSaveAdmission = ((careerSpineContract, transitionRuntimeResolver,
         "目前 Career Spine Contract 無法辨識這份存檔的人生節點。",
         snapshot,
         snapshot.issues
+      );
+    }
+
+    const isAge22Result = ["age-22-career-result", "vertical-slice-complete"].includes(snapshot?.nodeId);
+    if (!isAge22Result && typeof candidateState.age22OutcomeCode === "string" && candidateState.age22OutcomeCode) {
+      return rejection(
+        "career-save-age22-outcome-premature",
+        "尚未進入二十二歲結果節點，不應已有 age22OutcomeCode。",
+        snapshot
       );
     }
 
@@ -143,6 +152,28 @@ var AdultCareerSaveAdmission = ((careerSpineContract, transitionRuntimeResolver,
       }
     }
 
+    if (isAge22Result) {
+      if (
+        !age22OutcomeResolver ||
+        typeof age22OutcomeResolver.validatePersistedOutcome !== "function"
+      ) {
+        return rejection(
+          "age22-outcome-resolver-unavailable",
+          "無法驗證二十二歲存檔的持久化結果。",
+          snapshot
+        );
+      }
+      const persistedOutcome = age22OutcomeResolver.validatePersistedOutcome(candidateState);
+      if (!persistedOutcome?.resolved) {
+        return rejection(
+          "age22-persisted-outcome-invalid",
+          "二十二歲存檔的結果代碼、路線或既有文案不一致。",
+          snapshot,
+          persistedOutcome?.issues
+        );
+      }
+    }
+
     return result("admitted", true, snapshot, []);
   }
 
@@ -165,5 +196,10 @@ var AdultCareerSaveAdmission = ((careerSpineContract, transitionRuntimeResolver,
     ? CareerDevelopmentRuntimeResolver
     : typeof require === "function"
       ? require("./career-development-runtime-resolver.js")
+      : null,
+  typeof CareerAge22OutcomeResolver !== "undefined"
+    ? CareerAge22OutcomeResolver
+    : typeof require === "function"
+      ? require("./career-age22-outcome-resolver.js")
       : null
 );

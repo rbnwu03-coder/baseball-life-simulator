@@ -11,7 +11,7 @@ const files = [
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
   "competition-presentation.js", "career-spine-contract.js", "career-transition-resolver.js",
   "career-transition-commit.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
-  "career-development-runtime-resolver.js", "career-save-admission.js", "story.js", "save.js", "script.js"
+  "career-development-runtime-resolver.js", "career-age22-outcome-resolver.js", "career-save-admission.js", "story.js", "save.js", "script.js"
 ];
 
 let passed = 0;
@@ -319,14 +319,14 @@ verify("32. Gameplay Router 不直接讀 Contract；只有 4.8 Narrative topolog
   && scriptSource.slice(narrativeHelperStart, narrativeHelperEnd).includes("CareerSpineContract.getCareerNetwork()")
   && !scriptOutsideNarrativeHelper.includes("CareerSpineContract"));
 verify("33. Contract 未新增 current route 或 transition history Gameplay 欄位", !/currentCareerRoute|careerTransitionHistory/.test(fs.readFileSync(path.join(root, "career-spine-contract.js"), "utf8")));
-verify("34. Save version 與 localStorage key 保持 v13 既有契約", evaluate(context, "SAVE_VERSION") === 13
+verify("34. Save version 已升級為 v14 且 localStorage key 保持既有契約", evaluate(context, "SAVE_VERSION") === 14
   && fs.readFileSync(path.join(root, "save.js"), "utf8").includes('"baseballLifeRpgSave"'));
 
 const forbiddenDiff = execFileSync("git", [
   "diff", "--name-only", "HEAD", "--",
-  "player.js", "event.js", "time.js", "style.css",
+  "event.js", "time.js", "style.css",
   "current-state-boundary.js", "decision-flow.js", "application-controller.js", "competition-presentation.js"
 ], { cwd: root, encoding: "utf8" }).trim();
-verify("35. Career Network、Gameplay 資料、UI 與既有 Boundary 均未修改（Save 僅允許 4.10 Admission integration）", forbiddenDiff === "");
+verify("35. Career Network、Gameplay 事件、UI 與既有 Boundary 均未修改", forbiddenDiff === "");
 
 console.log(`\nArchitecture Sprint 4.3 Career Network Contract：${passed}/${passed} 通過`);
