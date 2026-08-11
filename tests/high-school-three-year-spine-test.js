@@ -9,7 +9,7 @@ const files = [
   "evaluation-registry.js", "coach-evaluation-boundary.js", "narrative-condition-boundary.js",
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
-  "competition-presentation.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "career-age22-outcome-resolver.js", "career-save-admission.js",
+  "competition-presentation.js", "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js", "baseball-offense-prototype.js", "baseball-gameplay-integration.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "career-age22-outcome-resolver.js", "career-save-admission.js",
   "story.js", "save.js", "script.js"
 ];
 
@@ -78,7 +78,8 @@ function resetToYearTwo(context, overrides = {}) {
     seasonPosition: "內野手",
     careerExit: "",
     ...overrides
-  })});`);
+  })}); pendingYouthSeasonOutcome = null; pendingBaseballGameplay = null; isTransitioning = false;
+  createOffensiveGameplayRolls = () => Object.freeze({ execution: 0.01, battedBall: 0.01, defense: 0.01, result: 0.5, runnerAdvance: 0.5 });`);
 }
 
 function fingerprint(context, ids) {
@@ -103,7 +104,10 @@ function fingerprint(context, ids) {
 function playYearTwoRoute(context, choiceIndexes, setup = "") {
   resetToYearTwo(context);
   if (setup) evaluate(context, setup);
-  yearTwoIds.forEach((eventId, step) => evaluate(context, `choose(${JSON.stringify(eventId)}, ${choiceIndexes[step]})`));
+  yearTwoIds.forEach((eventId, step) => {
+    evaluate(context, `choose(${JSON.stringify(eventId)}, ${choiceIndexes[step]})`);
+    if (eventId === "high_school_year_two_spring_game") evaluate(context, "continueYouthSeasonOutcome()");
+  });
   return parse(context, `({
     chapter: player.chapter,
     result: player.highSchoolYearTwoResult,
@@ -186,8 +190,10 @@ verify("15. 高二每個事件都提供具體選擇", yearTwoIds.every(id => {
 const effectChecks = [];
 yearTwoIds.forEach((id, step) => {
   resetToYearTwo(context, { highSchoolYearTwoStep: step });
+  if (id === "high_school_year_two_spring_game") evaluate(context, "showCurrentEvent()");
   const before = evaluate(context, "JSON.stringify(player)");
   evaluate(context, `choose(${JSON.stringify(id)}, 0)`);
+  if (id === "high_school_year_two_spring_game") evaluate(context, "continueYouthSeasonOutcome()");
   const after = evaluate(context, "JSON.stringify(player)");
   effectChecks.push({
     id,
@@ -222,7 +228,10 @@ verify("21. 高二小結只會正式產生一次", firstEvaluation === true && s
 verify("22. 高二小結 result 與 detail 都不是空白", evaluate(context, "Boolean(player.highSchoolYearTwoResult.trim()) && Boolean(player.highSchoolYearTwoDetail.trim())"));
 
 resetToYearTwo(context);
-for (let step = 0; step < yearTwoIds.length; step += 1) evaluate(context, `choose(${JSON.stringify(yearTwoIds[step])}, 0)`);
+for (let step = 0; step < yearTwoIds.length; step += 1) {
+  evaluate(context, `choose(${JSON.stringify(yearTwoIds[step])}, 0)`);
+  if (yearTwoIds[step] === "high_school_year_two_spring_game") evaluate(context, "continueYouthSeasonOutcome()");
+}
 verify("23. 八幕完成後進入青棒第二年小結", evaluate(context, "player.chapter === '青棒第二年小結' && getCurrentEventId() === 'high_school_year_two_result'"));
 verify("24. 高二整段不會提前寫入 careerExit", evaluate(context, "player.careerExit === ''"));
 evaluate(context, "choose('high_school_year_two_result', 0)");
@@ -274,7 +283,11 @@ verify("46. 高三八幕選項與效果指紋維持 Sprint 前基線", fingerpri
 verify("47. 高二事件沒有直接寫入 careerExit", yearTwoIds.every(id => evaluate(context, `getEvent(${JSON.stringify(id)}).choices.every(choice => !Object.prototype.hasOwnProperty.call(choice, 'careerExit'))`)));
 verify("48. 高二事件沒有新增 roll 或隱藏 outcome 欄位", yearTwoIds.every(id => evaluate(context, `getEvent(${JSON.stringify(id)}).choices.every(choice => !('roll' in choice) && !('outcome' in choice))`)));
 
-const establishedRoute = playYearTwoRoute(context, [0, 0, 0, 0, 0, 1, 0, 0]);
+const establishedRoute = playYearTwoRoute(
+  context,
+  [0, 0, 0, 0, 0, 1, 0, 0],
+  "player.ballSense = 10; player.discipline = 10; Object.assign(player.baseballSkills, { batting: 10, baseballIQ: 10, baseRunning: 10 });"
+);
 verify("49. 主守位的春秋證明與高三計畫一致時可抵達全年驗證成功", establishedRoute.result === "你的球隊用途通過了一整年的第二次驗證" && establishedRoute.role === "內野手專職競爭者");
 
 const coachRoute = playYearTwoRoute(context, [2, 1, 0, 0, 0, 0, 0, 3], "player.relationships.coachTrust = 2");

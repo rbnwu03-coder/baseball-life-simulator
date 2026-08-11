@@ -1196,6 +1196,7 @@ function shouldShowYouthSeasonOutcome(eventId) {
 }
 
 function getYouthSeasonOutcomeHeading(eventId) {
+  if (eventId === "high_school_year_two_spring_game") return "春季聯賽打席結果";
   if (eventId === "youth_position_trial") return "這次輪測的結果";
   if (eventId === "youth_bench") return "這段紅白賽的結果";
   if (eventId === "youth_match_after") return "這場比賽留下的結果";
@@ -1204,6 +1205,7 @@ function getYouthSeasonOutcomeHeading(eventId) {
 }
 
 function getYouthSeasonOutcomeReaction(eventId) {
+  if (eventId === "high_school_year_two_spring_game") return "記錄員把這個打席寫進春季聯賽成績；高中現任教練沒有改動深度表，只讓下一棒走進打擊區。";
   if (eventId === "youth_position_trial") return "山本教練把三球的結果寫進分組表，下一段訓練會依這個安排開始。";
   if (eventId === "youth_teammate") return "器材室的門關上後，阿哲帶著這次互動離開球場；下一次合作時，他不會把它當作沒發生過。";
   if (eventId === "youth_bench") return "紅白賽收操後，山本教練把名單與你的板凳紀錄一起收回。";
@@ -1230,6 +1232,16 @@ function createGameplayRolls() {
     fieldingResult: Math.random(),
     throwExecution: Math.random(),
     result: Math.random()
+  });
+}
+
+function createOffensiveGameplayRolls() {
+  return Object.freeze({
+    execution: Math.random(),
+    battedBall: Math.random(),
+    defense: Math.random(),
+    result: Math.random(),
+    runnerAdvance: Math.random()
   });
 }
 
@@ -1429,9 +1441,188 @@ function renderIntegratedYouthGrounder(event, prepared = {}) {
   document.getElementById("choices").innerHTML = buttons;
 }
 
+function getHighSchoolSpringApproachChoice(approach) {
+  return getEvent("high_school_year_two_spring_game")?.choices?.find(choice => choice.gameplayApproach === approach) || null;
+}
+
+function applyIntegratedOffensivePlayResult(result) {
+  if (!result || result.status !== "resolved" || result.stage !== "complete" || !result.mutation) {
+    return { ok: false, error: "invalid-integrated-offensive-result" };
+  }
+  const mutation = result.mutation;
+  if (
+    !Number.isInteger(mutation.outsAdded) ||
+    !Number.isInteger(mutation.runsScored) ||
+    !Array.isArray(mutation.runners) ||
+    mutation.runners.length !== 3 ||
+    !mutation.runners.every(value => typeof value === "boolean") ||
+    typeof mutation.performanceDelta !== "number" ||
+    typeof mutation.resultFlag !== "string" ||
+    !mutation.resultFlag
+  ) {
+    return { ok: false, error: "invalid-integrated-offensive-mutation" };
+  }
+  player.matchState.outs = Math.min(3, (Number(player.matchState.outs) || 0) + mutation.outsAdded);
+  player.matchState.runners = mutation.runners.slice();
+  player.matchState.homeScore = (Number(player.matchState.homeScore) || 0) + mutation.runsScored;
+  player.seasonPerformance += mutation.performanceDelta;
+  return { ok: true };
+}
+
+function createIntegratedHighSchoolSpringChoice(approach, result) {
+  const approachChoice = getHighSchoolSpringApproachChoice(approach) || {};
+  return Object.assign({}, approachChoice, {
+    text: approachChoice.text || approach,
+    flags: [...(approachChoice.flags || []), result.mutation.resultFlag],
+    memory: result.narrative
+  });
+}
+
+function completeIntegratedHighSchoolSpringAtBat(result, approach) {
+  const pending = pendingBaseballGameplay;
+  if (
+    !pending ||
+    pending.eventId !== "high_school_year_two_spring_game" ||
+    pending.gameplayFamily !== "offense" ||
+    pending.stage !== "resolving-at-bat"
+  ) return false;
+  if (
+    typeof BaseballGameplayIntegration !== "object" ||
+    BaseballGameplayIntegration.getHighSchoolYearTwoSpringSnapshotKey(player) !== pending.playerSnapshotKey
+  ) {
+    clearPendingBaseballGameplay();
+    isTransitioning = false;
+    setChoiceTransitionState(false);
+    showNotice("場上狀態已改變，請重新處理這個打席。", "warning");
+    showCurrentEvent();
+    return false;
+  }
+
+  pending.stage = "committing";
+  pending.resolvedPlay = result;
+  const before = getPlayerSnapshot();
+  const choice = createIntegratedHighSchoolSpringChoice(approach, result);
+  const applied = applyIntegratedOffensivePlayResult(result);
+  if (!applied.ok) {
+    clearPendingBaseballGameplay();
+    isTransitioning = false;
+    setChoiceTransitionState(false);
+    showNotice("本次場上處理無法完成，請重新選擇。", "error");
+    showCurrentEvent();
+    return false;
+  }
+
+  applyConsequenceAtEvent("high_school_year_two_spring_game");
+  applyEffects(choice.effects);
+  addPersonalityEffects(choice.personalityEffects);
+  addImpressionEffects(choice.impressionEffects);
+  applyCharacterArcEffects(choice.arcEffects);
+  applySkillEffects(choice.skillEffects);
+  applyNestedEffects("relationships", choice.relationshipEffects);
+  applyNestedEffects("positionAffinity", choice.positionEffects);
+  applyBodyEffects(choice.bodyEffects);
+  applyAcademicEffects(choice.academicEffects);
+  applyHighSchoolEffects(choice.highSchoolEffects);
+  applyCareerEffects(choice.careerEffects);
+  applyFinanceEffects(choice.financeEffects);
+  addFlags(choice.flags);
+  (choice.callbackUnlocks || []).forEach(unlockCallback);
+  (choice.callbackResolves || []).forEach(item => resolveCallback(typeof item === "string" ? item : item.id, typeof item === "string" ? 1 : item.impact));
+  (choice.consequences || []).forEach(addConsequence);
+  addLifeThemeEffects(choice.lifeThemeEffects);
+  resolveCallbacksForEvent("high_school_year_two_spring_game");
+  applyTrainingFocusBonus(choice);
+  updateGoalProgressForChoice("high_school_year_two_spring_game", choice);
+  if (choice.memory) {
+    player.memories.push(choice.memory);
+    player.memories = player.memories.slice(-20);
+  }
+  updateRoute();
+  updateImpression();
+  processCareerArcEvent("high_school_year_two_spring_game", choice);
+  processEmotionalEvent("high_school_year_two_spring_game", choice);
+  processRelationshipPayoffs("high_school_year_two_spring_game");
+  processAspirationEvent("high_school_year_two_spring_game", choice);
+  recordContinuityOutcome(choice.continuityOutcome || createContinuityOutcome("high_school_year_two_spring_game", choice));
+  advanceNarrativeThread("high_school_year_two_spring_game", choice);
+  const statFeedbackHtml = showStatChanges(before, getPlayerSnapshot(), choice.memory, { includeMemory: false });
+
+  advanceAfterAction(null, "high_school_year_two_spring_game");
+  tickPendingEvents("high_school_year_two_spring_game");
+  clearPendingBaseballGameplay();
+  renderYouthSeasonOutcome("high_school_year_two_spring_game", choice, statFeedbackHtml);
+  return true;
+}
+
+function chooseHighSchoolSpringApproach(approach) {
+  if (
+    isTransitioning ||
+    pendingBaseballGameplay ||
+    getCurrentEventId() !== "high_school_year_two_spring_game"
+  ) return false;
+  const choice = getHighSchoolSpringApproachChoice(approach);
+  if (
+    !choice ||
+    typeof BaseballGameplayIntegration !== "object" ||
+    typeof BaseballGameplayIntegration.resolveHighSchoolYearTwoSpringAtBat !== "function"
+  ) {
+    showNotice("這個打席策略目前不能使用。", "warning");
+    return false;
+  }
+
+  isTransitioning = true;
+  setChoiceTransitionState(true);
+  const rolls = createOffensiveGameplayRolls();
+  pendingBaseballGameplay = {
+    eventId: "high_school_year_two_spring_game",
+    gameplayFamily: "offense",
+    stage: "resolving-at-bat",
+    approach,
+    rolls,
+    resolvedPlay: null,
+    playerSnapshotKey: BaseballGameplayIntegration.getHighSchoolYearTwoSpringSnapshotKey(player)
+  };
+  const result = BaseballGameplayIntegration.resolveHighSchoolYearTwoSpringAtBat(player, approach, rolls);
+  if (!result || result.status !== "resolved" || result.stage !== "complete") {
+    clearPendingBaseballGameplay();
+    isTransitioning = false;
+    setChoiceTransitionState(false);
+    showNotice("本次場上處理無法完成，請重新選擇。", "error");
+    showCurrentEvent();
+    return false;
+  }
+  return completeIntegratedHighSchoolSpringAtBat(result, approach);
+}
+
+function renderIntegratedHighSchoolSpringAtBat(event, prepared = {}) {
+  const text = prepared.text || (typeof event.text === "function" ? event.text() : event.text);
+  const buttons = event.choices
+    .filter(choice => choice.gameplayApproach)
+    .map(choice => `<button type="button" onclick="chooseHighSchoolSpringApproach('${choice.gameplayApproach}')">${escapeHtml(choice.text)}</button>`)
+    .join("");
+  const sceneContextHtml = prepared.sceneContextHtml || renderSceneContext(getSceneContext("high_school_year_two_spring_game", event));
+  const competitionFrame = prepared.competitionFrame || renderCompetitionPresentation("high_school_year_two_spring_game");
+  const scoreFrame = renderHighSchoolSpringScore();
+  const bridgeInHtml = prepared.bridgeInHtml || "";
+  const bridgeOutHtml = prepared.bridgeOutHtml || "";
+  document.getElementById("story").innerHTML = `<article class="event-card integrated-gameplay-card" aria-labelledby="currentEventTitle">${sceneContextHtml}${competitionFrame}${scoreFrame}${bridgeInHtml}<div class="event-kicker">打席策略</div><h2 id="currentEventTitle" tabindex="-1">${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div>${bridgeOutHtml}</article>`;
+  document.getElementById("choices").innerHTML = buttons;
+}
+
+function renderHighSchoolSpringScore() {
+  const match = player.matchState || {};
+  const runners = Array.isArray(match.runners) ? match.runners.slice(0, 3) : [false, false, false];
+  const bases = runners.map((occupied, index) => `<span class="base ${occupied ? "occupied" : ""}" title="${index + 1}壘"></span>`).join("");
+  return `<div class="competition-score" aria-label="目前比分與壘況">
+    <span class="score-line">客隊 <strong>${Number(match.awayScore) || 0}</strong><i>：</i><strong>${Number(match.homeScore) || 0}</strong> 高中球隊</span>
+    <div class="diamond">${bases}</div>
+  </div>`;
+}
+
 function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
   pendingYouthSeasonOutcome = { eventId };
   const competitionFrame = renderCompetitionPresentation(eventId);
+  const integratedScoreFrame = eventId === "high_school_year_two_spring_game" ? renderHighSchoolSpringScore() : "";
   const choiceLabel = typeof choice?.text === "string" ? choice.text.trim() : "";
   const narrativeOutcome = typeof choice?.memory === "string" ? choice.memory.trim() : "";
   const reactionValue = getYouthSeasonOutcomeReaction(eventId);
@@ -1456,7 +1647,7 @@ function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
   setChoiceTransitionState(false);
   document.getElementById("story").innerHTML = `
     <article class="event-card outcome choice-outcome-card" aria-labelledby="outcomeTitle">
-      ${competitionFrame}
+      ${competitionFrame}${integratedScoreFrame}
       <div class="event-kicker choice-outcome-kicker">行動結果</div>
       <h2 id="outcomeTitle" tabindex="-1">${escapeHtml(getYouthSeasonOutcomeHeading(eventId))}</h2>
       ${confirmationHtml}
@@ -1497,6 +1688,9 @@ function choose(eventId, index) {
   if (!choice) return;
   if (eventId === "youth_match_grounder" && choice.gameplayApproach) {
     return chooseYouthGrounderFielding(choice.gameplayApproach);
+  }
+  if (eventId === "high_school_year_two_spring_game" && choice.gameplayApproach) {
+    return chooseHighSchoolSpringApproach(choice.gameplayApproach);
   }
   let decisionContext = null;
   let relationshipContext = null;
@@ -3414,19 +3608,40 @@ function evaluateHighSchoolYearTwo() {
   else if (hasFlag("year_two_plan_batting")) player.highSchoolTeamRole = "打擊入口與守備替補";
   else if (hasFlag("year_two_plan_health")) player.highSchoolTeamRole = "健康重整中的有限任務球員";
 
+  const springProductiveResult = [
+    "hs_y2_spring_groundout_advance",
+    "hs_y2_spring_single_runner_third",
+    "hs_y2_spring_single_rbi",
+    "hs_y2_spring_extra_base_rbi",
+    "hs_y2_spring_infield_hit",
+    "hs_y2_spring_bunt_advance",
+    "hs_y2_spring_bunt_all_safe",
+    "hs_y2_spring_bunt_single"
+  ].some(hasFlag);
+  const springUtilityResult = [
+    "hs_y2_spring_bunt_advance",
+    "hs_y2_spring_bunt_all_safe",
+    "hs_y2_spring_bunt_single"
+  ].some(hasFlag);
+  const springBattingResult = [
+    "hs_y2_spring_single_runner_third",
+    "hs_y2_spring_single_rbi",
+    "hs_y2_spring_extra_base_rbi",
+    "hs_y2_spring_infield_hit"
+  ].some(hasFlag);
   const establishedRoleProof = (
     hasFlag("year_two_role_primary_proof") &&
-    hasFlag("year_two_spring_push") &&
+    (springProductiveResult || hasFlag("year_two_spring_push")) &&
     hasFlag("year_two_autumn_secure_out") &&
     hasFlag("year_two_plan_position")
   ) || (
     hasFlag("year_two_role_utility_proof") &&
-    hasFlag("year_two_spring_bunt_read") &&
+    (springUtilityResult || hasFlag("year_two_spring_bunt_read")) &&
     hasFlag("year_two_autumn_utility_hold") &&
     hasFlag("year_two_plan_utility")
   ) || (
     hasFlag("year_two_role_bat_proof") &&
-    hasFlag("year_two_spring_first_pitch") &&
+    (springBattingResult || hasFlag("year_two_spring_first_pitch")) &&
     hasFlag("year_two_autumn_run_creation") &&
     hasFlag("year_two_plan_batting")
   );
@@ -3674,6 +3889,8 @@ function showStory(eventId) {
   const bridgeOutHtml = bridgeOut ? `<div class="story-bridge-out"><small>接下來</small>${escapeHtml(bridgeOut)}</div>` : "";
   if (eventId === "youth_match_grounder") {
     renderIntegratedYouthGrounder(event, { text, sceneContextHtml, competitionFrame, bridgeInHtml, bridgeOutHtml });
+  } else if (eventId === "high_school_year_two_spring_game") {
+    renderIntegratedHighSchoolSpringAtBat(event, { text, sceneContextHtml, competitionFrame, bridgeInHtml, bridgeOutHtml });
   } else {
     document.getElementById("story").innerHTML = `<article class="event-card" aria-labelledby="currentEventTitle">${sceneContextHtml}${competitionFrame}${bridgeInHtml}<h2 id="currentEventTitle" tabindex="-1">${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div>${bridgeOutHtml}</article>`;
     document.getElementById("choices").innerHTML = event.choices.map((choice, index) => `<button type="button" onclick="choose('${eventId}', ${index})">${escapeHtml(choice.text)}</button>`).join("");
@@ -3690,6 +3907,8 @@ function prepareMatchStateForEvent(eventId) {
   const match = player.matchState;
   if (eventId === "youth_match_entry" || eventId === "youth_match_grounder") {
     Object.assign(match, { inning: 4, half: "上", outs: 1, runners: [true, false, false] });
+  } else if (eventId === "high_school_year_two_spring_game") {
+    Object.assign(match, { inning: 5, half: "下", outs: 1, runners: [false, true, false], awayScore: 1, homeScore: 1 });
   } else if (eventId === "youth_match_mistake") {
     Object.assign(match, { inning: 5, half: "上", outs: 0, runners: [false, false, false] });
   } else if (eventId === "youth_match_after") {

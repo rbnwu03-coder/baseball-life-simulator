@@ -1210,11 +1210,12 @@ const highSchoolYearTwoEvents = {
   },
   high_school_year_two_spring_game: {
     title: "春季聯賽的第一個打席",
-    text: "春季聯賽第五局，比分一比一，一人出局、二壘有人。高中現任教練在你走出休息區前只比向右半邊場地：先讓這一分往前走。",
+    text: "春季聯賽第五局，比分一比一，一人出局、二壘有人。二壘跑者腳程普通，對方投手前兩輪主要用外角球搶好球。高中現任教練在你走出休息區前只比向右半邊場地：先讓這一分往前走。",
     choices: [
-      C("握短球棒，把外角球推向一、二壘之間", { discipline: 1, observe: 1 }, ["year_two_spring_push"], "你讓球穿過前移的一壘手身側，跑者停在三壘，你也安全上一壘。", { skillEffects: { batting: 1, baseballIQ: 1 }, matchEffects: { performance: 3 }, careerEffects: { recentPerformance: 2 } }),
-      C("擺出短棒，等三壘手前移後收棒選球", { observe: 2, pressure: 1 }, ["year_two_spring_bunt_read"], "三壘手往前跨了兩步，你收棒放過偏低壞球，下一球再把短打點向空出的三壘線。", { skillEffects: { baseballIQ: 2, baseRunning: 1 }, matchEffects: { performance: 2 }, careerEffects: { recentPerformance: 1, reputation: 1 } }),
-      C("鎖定第一顆直球，直接攻擊右外野深處", { confidence: 2, pressure: 2 }, ["year_two_spring_first_pitch"], "第一球進到外側好球帶，你把球打向右外野。跑者推進，球也在警戒區前被接住。", { skillEffects: { batting: 2 }, matchEffects: { performance: 2 }, highSchoolEffects: { exposure: 1 }, careerEffects: { recentPerformance: 1 } })
+      C("拉打｜主動攻擊有利球，尋求更強擊球", { confidence: 1, pressure: 1 }, ["hs_y2_spring_pull"], "", { gameplayApproach: "pull", skillEffects: { batting: 1 } }),
+      C("推打｜順著外側球路，把球送向另一側", { discipline: 1, observe: 1 }, ["hs_y2_spring_opposite"], "", { gameplayApproach: "opposite", skillEffects: { batting: 1, baseballIQ: 1 } }),
+      C("握短棒｜縮短揮棒，提高擊球控制", { discipline: 1 }, ["hs_y2_spring_shorten"], "", { gameplayApproach: "shorten", skillEffects: { batting: 1 } }),
+      C("犧牲觸擊｜用一個出局換取二壘跑者推進；成功後會形成兩出局", { responsibility: 1, pressure: 1 }, ["hs_y2_spring_sac_bunt"], "", { gameplayApproach: "sac-bunt", skillEffects: { baseballIQ: 1, baseRunning: 1 } })
     ]
   },
   high_school_year_two_depth_chart: {

@@ -45,6 +45,35 @@ function resolve(throwDecision, customPlayer = {}, customRolls = {}) {
   );
 }
 
+function offensivePlayerFacts(overrides = {}) {
+  const result = playerFacts({
+    chapter: "青棒第二年",
+    highSchoolYearTwoStep: 2,
+    seasonPosition: "內野手",
+    ballSense: 10,
+    discipline: 10,
+    baseballSkills: {
+      catching: 10,
+      reaction: 10,
+      range: 10,
+      throwing: 10,
+      batting: 10,
+      baseballIQ: 10,
+      baseRunning: 10
+    },
+    matchState: { inning: 5, half: "下", outs: 1, runners: [false, true, false], awayScore: 1, homeScore: 1 }
+  });
+  Object.entries(overrides).forEach(([key, nested]) => {
+    if (nested && typeof nested === "object" && !Array.isArray(nested) && result[key]) Object.assign(result[key], nested);
+    else result[key] = nested;
+  });
+  return result;
+}
+
+function offensiveRolls(overrides = {}) {
+  return Object.assign({ execution: 0.5, battedBall: 0.5, defense: 0.5, result: 0.5, runnerAdvance: 0.5 }, overrides);
+}
+
 const runtimeFiles = [
   "player.js",
   "current-state-boundary.js",
@@ -147,11 +176,13 @@ test("youth_match_grounder 標記為 live defense", () => {
   });
 });
 
-test("高中春季打擊只標記 readiness-only", () => {
-  assert.strictEqual(integration.getIntegrationEvent("high_school_year_two_spring_game").mode, "readiness-only");
+test("高中春季打擊已標記為 live offense", () => {
+  const registration = integration.getIntegrationEvent("high_school_year_two_spring_game");
+  assert.strictEqual(registration.mode, "live");
+  assert.strictEqual(registration.gameplayFamily, "offense");
 });
 
-test("高中二壘有人已與 Offensive Core base state 相容但仍維持 readiness-only", () => {
+test("高中二壘有人與 Offensive Core base state 相容", () => {
   assert.deepStrictEqual(integration.evaluateOffensiveEventReadiness("high_school_year_two_spring_game"), {
     compatible: true,
     reason: "compatible-base-state",
@@ -259,6 +290,164 @@ test("Result flag 反映實際結果而不是 secure approach", () => {
   const result = resolve("secure-first", {}, { result: 0.96 });
   assert.strictEqual(result.resultType, "all-safe");
   assert.strictEqual(result.mutation.resultFlag, "youth_grounder_all_safe");
+});
+
+test("高中春季 Registry 固定二壘 Base State 與可見 Event Facts", () => {
+  const registration = integration.getIntegrationEvent("high_school_year_two_spring_game");
+  assert.deepStrictEqual(registration, {
+    eventId: "high_school_year_two_spring_game",
+    mode: "live",
+    gameplayFamily: "offense",
+    baseState: "one-out-runner-on-second",
+    runnerSpeed: "average",
+    pitcherTendency: "outside",
+    pitchDifficulty: "normal",
+    nextBatterReliability: "medium",
+    defenseQuality: "average"
+  });
+});
+
+test("高中春季 Production input 只傳 Core 所需資料", () => {
+  const prepared = integration.createHighSchoolYearTwoSpringInput(offensivePlayerFacts(), "opposite", offensiveRolls());
+  assert.strictEqual(prepared.status, "ready");
+  assert.deepStrictEqual(prepared.input.situation, {
+    baseState: "one-out-runner-on-second",
+    scoreState: "tied",
+    runnerSpeed: "average",
+    pitcherTendency: "outside"
+  });
+  assert.deepStrictEqual(Object.keys(prepared.input).sort(), ["approach", "defenseQuality", "pitchDifficulty", "player", "rolls", "situation"]);
+});
+
+test("Power adapter 直接使用既有 batting，不新增 Player skill", () => {
+  const prepared = integration.createHighSchoolYearTwoSpringInput(offensivePlayerFacts({ baseballSkills: { batting: 8 } }), "pull", offensiveRolls());
+  assert.strictEqual(prepared.adaptedFacts.powerScore, 8);
+  assert.strictEqual(prepared.input.player.power, "high");
+});
+
+test("Contact adapter 由 batting、ballSense、discipline 單一衍生", () => {
+  const prepared = integration.createHighSchoolYearTwoSpringInput(offensivePlayerFacts({ ballSense: 7, discipline: 6, baseballSkills: { batting: 8 } }), "opposite", offensiveRolls());
+  assert.strictEqual(prepared.adaptedFacts.contactScore, 7);
+  assert.strictEqual(prepared.input.player.contact, "average");
+});
+
+test("Bunt adapter 由 baseballIQ、baseRunning、discipline 單一衍生", () => {
+  const prepared = integration.createHighSchoolYearTwoSpringInput(offensivePlayerFacts({ discipline: 6, baseballSkills: { baseballIQ: 9, baseRunning: 6 } }), "sac-bunt", offensiveRolls());
+  assert.strictEqual(prepared.adaptedFacts.buntScore, 7);
+  assert.strictEqual(prepared.input.player.bunt, "average");
+});
+
+test("Offense 與 Defense 共用 Body adapter", () => {
+  const prepared = integration.createHighSchoolYearTwoSpringInput(offensivePlayerFacts({ body: { fatigue: 7, pain: 0, injuryRisk: 0 } }), "shorten", offensiveRolls());
+  assert.strictEqual(prepared.input.player.body, "fatigued");
+});
+
+test("Runner、投手、球難度、下一棒與守備品質均來自 Event Facts", () => {
+  const prepared = integration.createHighSchoolYearTwoSpringInput(offensivePlayerFacts(), "opposite", offensiveRolls());
+  assert.deepStrictEqual({
+    runnerSpeed: prepared.input.situation.runnerSpeed,
+    pitcherTendency: prepared.input.situation.pitcherTendency,
+    pitchDifficulty: prepared.input.pitchDifficulty,
+    nextBatterReliability: prepared.input.player.nextBatterReliability,
+    defenseQuality: prepared.input.defenseQuality
+  }, {
+    runnerSpeed: "average",
+    pitcherTendency: "outside",
+    pitchDifficulty: "normal",
+    nextBatterReliability: "medium",
+    defenseQuality: "average"
+  });
+});
+
+test("高中春季 supplied rolls 產生 deterministic 結果", () => {
+  const facts = offensivePlayerFacts();
+  const fixed = offensiveRolls();
+  assert.deepStrictEqual(
+    integration.resolveHighSchoolYearTwoSpringAtBat(facts, "opposite", fixed),
+    integration.resolveHighSchoolYearTwoSpringAtBat(facts, "opposite", fixed)
+  );
+});
+
+test("高中春季 invalid rolls fail closed", () => {
+  [-0.1, 1, NaN].forEach(value => {
+    const result = integration.resolveHighSchoolYearTwoSpringAtBat(offensivePlayerFacts(), "opposite", offensiveRolls({ execution: value }));
+    assert.strictEqual(result.status, "unresolved");
+    assert.strictEqual(result.issues[0].code, "rolls");
+  });
+});
+
+test("高中春季不相容壘況與比分 fail closed", () => {
+  const wrongBase = integration.resolveHighSchoolYearTwoSpringAtBat(offensivePlayerFacts({ matchState: { runners: [true, false, false] } }), "opposite", offensiveRolls());
+  const wrongScore = integration.resolveHighSchoolYearTwoSpringAtBat(offensivePlayerFacts({ matchState: { homeScore: 2 } }), "opposite", offensiveRolls());
+  assert.strictEqual(wrongBase.status, "unresolved");
+  assert.strictEqual(wrongScore.status, "unresolved");
+});
+
+test("runnersAfter 是正式壘況 mapping 的唯一來源", () => {
+  const result = integration.resolveHighSchoolYearTwoSpringAtBat(offensivePlayerFacts(), "opposite", offensiveRolls());
+  assert.deepStrictEqual(result.mutation.runners, result.stateDelta.runnersAfter);
+});
+
+test("Groundout advance 正確映射出局與三壘跑者", () => {
+  const result = integration.resolveHighSchoolYearTwoSpringAtBat(offensivePlayerFacts(), "opposite", offensiveRolls());
+  assert.strictEqual(result.mutation.outsAdded, 1);
+  assert.strictEqual(result.mutation.runsScored, 0);
+  assert.deepStrictEqual(result.mutation.runners, [false, false, true]);
+});
+
+test("RBI single 正確映射得分與一壘打者", () => {
+  const result = integration.resolveHighSchoolYearTwoSpringAtBat(offensivePlayerFacts(), "opposite", offensiveRolls({ battedBall: 0.01, result: 0.25, runnerAdvance: 0.5 }));
+  assert.strictEqual(result.resultType, "single");
+  assert.strictEqual(result.mutation.runsScored, 1);
+  assert.deepStrictEqual(result.mutation.runners, [true, false, false]);
+  assert.strictEqual(result.mutation.resultFlag, "hs_y2_spring_single_rbi");
+});
+
+test("XBH RBI 正確映射得分與二壘打者", () => {
+  const result = integration.resolveHighSchoolYearTwoSpringAtBat(offensivePlayerFacts(), "pull", offensiveRolls({ execution: 0.01, battedBall: 0.5, defense: 0.01, result: 0.75, runnerAdvance: 0.01 }));
+  assert.strictEqual(result.resultType, "extra-base-hit");
+  assert.strictEqual(result.mutation.runsScored, 1);
+  assert.deepStrictEqual(result.mutation.runners, [false, true, false]);
+});
+
+test("觸擊前位跑者出局使用 Actual Result flag", () => {
+  const result = integration.resolveHighSchoolYearTwoSpringAtBat(offensivePlayerFacts(), "sac-bunt", offensiveRolls({ result: 0.01 }));
+  assert.strictEqual(result.resultType, "lead-runner-out-third");
+  assert.strictEqual(result.mutation.resultFlag, "hs_y2_spring_bunt_lead_runner_out");
+});
+
+test("觸擊成功推進使用獨立 Actual Result flag", () => {
+  const result = integration.resolveHighSchoolYearTwoSpringAtBat(offensivePlayerFacts(), "sac-bunt", offensiveRolls({ result: 0.1 }));
+  assert.strictEqual(result.resultType, "batter-out-runner-third");
+  assert.strictEqual(result.mutation.resultFlag, "hs_y2_spring_bunt_advance");
+});
+
+test("Decision Quality 不取代 machine result", () => {
+  const result = integration.resolveHighSchoolYearTwoSpringAtBat(offensivePlayerFacts(), "opposite", offensiveRolls({ execution: 0.01, battedBall: 0.01, defense: 0.01, result: 0.01 }));
+  assert.strictEqual(result.coreResult.decision.quality, "excellent");
+  assert.strictEqual(result.resultType, "lineout");
+  assert.strictEqual(result.mutation.runsScored, 0);
+});
+
+test("Offensive Integration 不修改 Core input", () => {
+  const prepared = integration.createHighSchoolYearTwoSpringInput(offensivePlayerFacts(), "opposite", offensiveRolls());
+  const before = JSON.stringify(prepared.input);
+  integration.resolveHighSchoolYearTwoSpringAtBat(offensivePlayerFacts(), "opposite", offensiveRolls());
+  assert.strictEqual(JSON.stringify(prepared.input), before);
+});
+
+test("Offensive Integration 不修改 Player input", () => {
+  const facts = offensivePlayerFacts();
+  const before = JSON.stringify(facts);
+  integration.resolveHighSchoolYearTwoSpringAtBat(facts, "opposite", offensiveRolls());
+  assert.strictEqual(JSON.stringify(facts), before);
+});
+
+test("Approach 與 Actual Result 在 Integration output 中保持分離", () => {
+  const result = integration.resolveHighSchoolYearTwoSpringAtBat(offensivePlayerFacts(), "sac-bunt", offensiveRolls({ result: 0.01 }));
+  assert.strictEqual(result.coreResult.input.approach, "sac-bunt");
+  assert.strictEqual(result.mutation.resultFlag, "hs_y2_spring_bunt_lead_runner_out");
+  assert.ok(!result.mutation.resultFlag.includes("success"));
 });
 
 test("完整 Double Play Runtime 只推進一次並等待 Continue", () => {

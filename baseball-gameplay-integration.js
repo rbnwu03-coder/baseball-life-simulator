@@ -14,9 +14,14 @@ var BaseballGameplayIntegration = ((utils, defense, offense) => {
     },
     high_school_year_two_spring_game: {
       eventId: "high_school_year_two_spring_game",
-      mode: "readiness-only",
+      mode: "live",
       gameplayFamily: "offense",
-      baseState: "one-out-runner-on-second"
+      baseState: "one-out-runner-on-second",
+      runnerSpeed: "average",
+      pitcherTendency: "outside",
+      pitchDifficulty: "normal",
+      nextBatterReliability: "medium",
+      defenseQuality: "average"
     }
   });
 
@@ -69,6 +74,84 @@ var BaseballGameplayIntegration = ((utils, defense, offense) => {
       errorDelta: 0,
       resultFlag: "youth_grounder_ball_through",
       narrative: "球從你身側穿過，外野手把球攔回來時，打者留在一壘，原跑者已進到三壘。"
+    }
+  });
+
+  const OFFENSIVE_RESULT_PRESENTATION = utils.deepFreeze({
+    strikeout: {
+      performanceDelta: 0,
+      resultFlag: "hs_y2_spring_strikeout",
+      narrative: "最後一球沒有碰到球，打者出局，二壘跑者仍留在原位。"
+    },
+    "groundout-hold": {
+      performanceDelta: 0,
+      resultFlag: "hs_y2_spring_groundout_hold",
+      narrative: "內野滾地形成出局，二壘跑者判斷無法前進，仍停在二壘。"
+    },
+    "groundout-advance": {
+      performanceDelta: 1,
+      resultFlag: "hs_y2_spring_groundout_advance",
+      narrative: "打者在一壘前出局，二壘跑者趁守備處理移到三壘。"
+    },
+    "single-runner-third": {
+      performanceDelta: 2,
+      resultFlag: "hs_y2_spring_single_runner_third",
+      narrative: "球穿過守備空檔，你站上一壘，二壘跑者停在三壘。"
+    },
+    "single-rbi": {
+      performanceDelta: 3,
+      resultFlag: "hs_y2_spring_single_rbi",
+      narrative: "安打落地後，二壘跑者直接回到本壘，你留在一壘。"
+    },
+    "extra-base-rbi": {
+      performanceDelta: 3,
+      resultFlag: "hs_y2_spring_extra_base_rbi",
+      narrative: "球越過外野手的處理範圍，二壘跑者得分，你站上二壘。"
+    },
+    "infield-hit": {
+      performanceDelta: 2,
+      resultFlag: "hs_y2_spring_infield_hit",
+      narrative: "守備來不及完成傳球，你先踩上一壘，二壘跑者仍留在原位。"
+    },
+    "fielding-error": {
+      performanceDelta: 1,
+      resultFlag: "hs_y2_spring_fielding_error",
+      narrative: "守備沒能把球收穩，你到達一壘，二壘跑者推進到三壘。"
+    },
+    lineout: {
+      performanceDelta: 0,
+      resultFlag: "hs_y2_spring_lineout",
+      narrative: "擊球直接飛進守備手套，打者出局，二壘跑者沒有移動。"
+    },
+    flyout: {
+      performanceDelta: 0,
+      resultFlag: "hs_y2_spring_flyout",
+      narrative: "外野手完成接殺，打者出局，二壘跑者留在原位。"
+    },
+    popout: {
+      performanceDelta: 0,
+      resultFlag: "hs_y2_spring_popout",
+      narrative: "內野手接住高飛球，打者出局，二壘跑者留在原位。"
+    },
+    "bunt-lead-runner-out": {
+      performanceDelta: -1,
+      resultFlag: "hs_y2_spring_bunt_lead_runner_out",
+      narrative: "守備直接把球送往三壘，前位跑者被封殺，你停在一壘。"
+    },
+    "bunt-advance": {
+      performanceDelta: 2,
+      resultFlag: "hs_y2_spring_bunt_advance",
+      narrative: "觸擊把球點進守備空檔，打者出局，二壘跑者推進到三壘。"
+    },
+    "bunt-all-safe": {
+      performanceDelta: 2,
+      resultFlag: "hs_y2_spring_bunt_all_safe",
+      narrative: "守備沒有取得出局，你站上一壘，原本的二壘跑者也到達三壘。"
+    },
+    "bunt-single": {
+      performanceDelta: 3,
+      resultFlag: "hs_y2_spring_bunt_single",
+      narrative: "觸擊落在無人能及時處理的位置，你站上一壘，二壘跑者推進到三壘。"
     }
   });
 
@@ -296,6 +379,169 @@ var BaseballGameplayIntegration = ((utils, defense, offense) => {
     );
   }
 
+  function averageExistingValues(values) {
+    if (values.some(value => typeof value !== "number" || !Number.isFinite(value) || value < 0)) return null;
+    return Math.round(values.reduce((sum, value) => sum + value, 0) / values.length);
+  }
+
+  function deriveOffensiveSkillScores(playerState) {
+    if (!utils.isPlainObject(playerState) || !utils.isPlainObject(playerState.baseballSkills)) return null;
+    const skills = playerState.baseballSkills;
+    const powerScore = averageExistingValues([skills.batting]);
+    const contactScore = averageExistingValues([skills.batting, playerState.ballSense, playerState.discipline]);
+    const buntScore = averageExistingValues([skills.baseballIQ, skills.baseRunning, playerState.discipline]);
+    if ([powerScore, contactScore, buntScore].some(value => value == null)) return null;
+    return { powerScore, contactScore, buntScore };
+  }
+
+  function getHighSchoolYearTwoSpringSnapshotKey(playerState) {
+    if (!utils.isPlainObject(playerState)) return "";
+    return JSON.stringify({
+      chapter: playerState.chapter,
+      highSchoolYearTwoStep: playerState.highSchoolYearTwoStep,
+      offensiveFacts: {
+        batting: playerState.baseballSkills?.batting,
+        baseballIQ: playerState.baseballSkills?.baseballIQ,
+        baseRunning: playerState.baseballSkills?.baseRunning,
+        ballSense: playerState.ballSense,
+        discipline: playerState.discipline
+      },
+      body: {
+        fatigue: playerState.body?.fatigue,
+        pain: playerState.body?.pain,
+        injuryRisk: playerState.body?.injuryRisk
+      },
+      matchState: {
+        inning: playerState.matchState?.inning,
+        half: playerState.matchState?.half,
+        outs: playerState.matchState?.outs,
+        runners: Array.isArray(playerState.matchState?.runners) ? playerState.matchState.runners.slice(0, 3) : null,
+        awayScore: playerState.matchState?.awayScore,
+        homeScore: playerState.matchState?.homeScore
+      }
+    });
+  }
+
+  function createHighSchoolYearTwoSpringInput(playerState, approach, rolls) {
+    if (!utils.isPlainObject(playerState)) {
+      return unresolved("player-shape", "High-school spring integration requires plain Player facts.");
+    }
+    const registration = getIntegrationEvent("high_school_year_two_spring_game");
+    const scores = deriveOffensiveSkillScores(playerState);
+    const body = deriveBodyState(playerState.body);
+    const scoreState = getScoreStateFromMatchState(playerState.matchState);
+    const runners = playerState.matchState?.runners;
+    const compatibleBaseState = playerState.matchState?.outs === 1 &&
+      Array.isArray(runners) &&
+      runners.length >= 3 &&
+      runners[0] === false &&
+      runners[1] === true &&
+      runners[2] === false;
+    if (!registration || registration.mode !== "live" || !scores || !body || !scoreState) {
+      return unresolved("player-facts", "Player facts could not be adapted to the offensive core.");
+    }
+    if (!compatibleBaseState || scoreState !== "tied") {
+      return unresolved("base-state", "The pilot requires a tied game with one out and a runner on second.");
+    }
+    if (!utils.validateRolls(rolls, ["execution", "battedBall", "defense", "result", "runnerAdvance"])) {
+      return unresolved("rolls", "All offensive rolls must be supplied before resolution.");
+    }
+    const power = mapNumericSkillTier(scores.powerScore);
+    const contact = mapNumericSkillTier(scores.contactScore);
+    const bunt = mapNumericSkillTier(scores.buntScore);
+    if (!power || !contact || !bunt) {
+      return unresolved("player-skills", "Offensive skill tiers could not be derived.");
+    }
+    return utils.deepFreeze({
+      status: "ready",
+      input: {
+        situation: {
+          baseState: registration.baseState,
+          scoreState,
+          runnerSpeed: registration.runnerSpeed,
+          pitcherTendency: registration.pitcherTendency
+        },
+        player: {
+          power,
+          contact,
+          bunt,
+          body,
+          nextBatterReliability: registration.nextBatterReliability
+        },
+        pitchDifficulty: registration.pitchDifficulty,
+        defenseQuality: registration.defenseQuality,
+        approach,
+        rolls: utils.clone(rolls)
+      },
+      adaptedFacts: Object.assign({}, scores, {
+        power,
+        contact,
+        bunt,
+        body,
+        scoreState,
+        runnerSpeed: registration.runnerSpeed,
+        pitcherTendency: registration.pitcherTendency,
+        pitchDifficulty: registration.pitchDifficulty,
+        nextBatterReliability: registration.nextBatterReliability,
+        defenseQuality: registration.defenseQuality
+      })
+    });
+  }
+
+  function getOffensivePresentationKey(resultType, stateDelta) {
+    if (resultType === "groundout") return stateDelta.leadRunner?.toBase === 3 ? "groundout-advance" : "groundout-hold";
+    if (resultType === "single") return stateDelta.runsScored > 0 ? "single-rbi" : "single-runner-third";
+    if (resultType === "extra-base-hit") return "extra-base-rbi";
+    if (resultType === "lead-runner-out-third") return "bunt-lead-runner-out";
+    if (resultType === "batter-out-runner-third") return "bunt-advance";
+    if (resultType === "all-safe") return "bunt-all-safe";
+    return resultType;
+  }
+
+  function adaptResolvedHighSchoolYearTwoSpring(coreResult, adaptedFacts) {
+    if (!coreResult || coreResult.status !== "resolved" || !coreResult.result?.stateDelta) {
+      return unresolved("core-result", "The offensive core did not return a resolved at-bat.");
+    }
+    const stateDelta = coreResult.result.stateDelta;
+    const presentationKey = getOffensivePresentationKey(coreResult.result.resultType, stateDelta);
+    const presentation = OFFENSIVE_RESULT_PRESENTATION[presentationKey];
+    if (
+      !presentation ||
+      !Number.isInteger(stateDelta.outsAdded) ||
+      !Number.isInteger(stateDelta.runsScored) ||
+      !Array.isArray(stateDelta.runnersAfter) ||
+      stateDelta.runnersAfter.length !== 3 ||
+      !stateDelta.runnersAfter.every(value => typeof value === "boolean")
+    ) {
+      return unresolved("result-type", "The offensive result cannot be mapped to the production match state.");
+    }
+    return utils.deepFreeze({
+      status: "resolved",
+      stage: "complete",
+      resultType: coreResult.result.resultType,
+      stateDelta: utils.clone(stateDelta),
+      mutation: {
+        outsAdded: stateDelta.outsAdded,
+        runsScored: stateDelta.runsScored,
+        runners: utils.clone(stateDelta.runnersAfter),
+        performanceDelta: presentation.performanceDelta,
+        resultFlag: presentation.resultFlag
+      },
+      narrative: presentation.narrative,
+      adaptedFacts: utils.clone(adaptedFacts),
+      coreResult
+    });
+  }
+
+  function resolveHighSchoolYearTwoSpringAtBat(playerState, approach, rolls) {
+    const prepared = createHighSchoolYearTwoSpringInput(playerState, approach, rolls);
+    if (prepared.status !== "ready") return prepared;
+    return adaptResolvedHighSchoolYearTwoSpring(
+      offense.resolveAtBat(prepared.input),
+      prepared.adaptedFacts
+    );
+  }
+
   function evaluateOffensiveEventReadiness(eventId, facts) {
     const registration = getIntegrationEvent(eventId);
     if (!registration || registration.gameplayFamily !== "offense") {
@@ -330,10 +576,13 @@ var BaseballGameplayIntegration = ((utils, defense, offense) => {
     deriveBodyState,
     getScoreStateFromMatchState,
     getYouthGrounderSnapshotKey,
+    getHighSchoolYearTwoSpringSnapshotKey,
     createYouthGrounderInput,
+    createHighSchoolYearTwoSpringInput,
     isFieldingApproachAvailable,
     resolveYouthGrounderFielding,
-    resolveYouthGrounder
+    resolveYouthGrounder,
+    resolveHighSchoolYearTwoSpringAtBat
   });
 })(
   typeof BaseballGameplayPrototypeUtils !== "undefined" ? BaseballGameplayPrototypeUtils : (typeof require === "function" ? require("./baseball-gameplay-prototype-utils.js") : null),
