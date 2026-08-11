@@ -1,6 +1,7 @@
 let isTransitioning = false;
 let pendingYouthSeasonOutcome = null;
 let pendingBaseballGameplay = null;
+let pendingTrainingOutcome = null;
 let selectedOrigin = PlayerIdentityOptions.origins[0];
 let selectedIdealSelf = "";
 
@@ -531,6 +532,7 @@ function createPlayer() {
 
 function resetGame() {
   clearPendingBaseballGameplay();
+  pendingTrainingOutcome = null;
   player = createInitialPlayer();
   document.getElementById("characterCreation").style.display = "block";
   document.getElementById("nameInput").value = "";
@@ -1226,6 +1228,174 @@ function clearPendingBaseballGameplay() {
   pendingBaseballGameplay = null;
 }
 
+const highSchoolTrainingEventIds = Object.freeze({
+  a: "high_school_year_two_training_a",
+  b: "high_school_year_two_training_b"
+});
+
+const trainingChangeLabels = Object.freeze({
+  batting: "打擊",
+  ballSense: "球感",
+  discipline: "紀律",
+  reaction: "反應",
+  range: "守備範圍",
+  throwing: "傳球",
+  fatigue: "疲勞"
+});
+
+function isHighSchoolTrainingEvent(eventId) {
+  return Object.values(highSchoolTrainingEventIds).includes(eventId);
+}
+
+function hasCompletedHighSchoolTrainingSlot(slot) {
+  const prefix = `hs_y2_training_${slot}_`;
+  return player.flags.some(flag => typeof flag === "string" && flag.startsWith(prefix));
+}
+
+function queueHighSchoolTrainingAfter(eventId) {
+  if (player.chapter !== "青棒第二年" || player.forcedEventId) return false;
+  if (eventId === "high_school_year_two_roster_reset" && !hasCompletedHighSchoolTrainingSlot("a")) {
+    player.forcedEventId = highSchoolTrainingEventIds.a;
+    return true;
+  }
+  if (eventId === "high_school_year_two_role_test" && !hasCompletedHighSchoolTrainingSlot("b")) {
+    player.forcedEventId = highSchoolTrainingEventIds.b;
+    return true;
+  }
+  return false;
+}
+
+function createTrainingPlayerSnapshot() {
+  return {
+    ballSense: player.ballSense,
+    discipline: player.discipline,
+    baseballSkills: {
+      batting: player.baseballSkills?.batting,
+      reaction: player.baseballSkills?.reaction,
+      range: player.baseballSkills?.range,
+      throwing: player.baseballSkills?.throwing
+    },
+    body: { fatigue: player.body?.fatigue }
+  };
+}
+
+function applyResolvedTrainingResult(result) {
+  if (!result || result.status !== "resolved") return false;
+  const topLevelEffects = {};
+  const baseballSkillEffects = {};
+  Object.entries(result.skillDeltas).forEach(([key, value]) => {
+    if (key === "ballSense" || key === "discipline") topLevelEffects[key] = value;
+    else baseballSkillEffects[key] = value;
+  });
+  applyEffects(topLevelEffects);
+  applySkillEffects(baseballSkillEffects);
+  if (!player.body || typeof player.body !== "object") return false;
+  Object.entries(result.bodyDeltas).forEach(([key, value]) => {
+    player.body[key] = Math.max(0, Math.min(20, (Number(player.body[key]) || 0) + value));
+  });
+  return true;
+}
+
+function applyTrainingRelationshipHook(trainingCode) {
+  if (trainingCode !== "contact-control" || hasFlag("hs_y2_training_contact_coach_echo")) return "";
+  applyNestedEffects("relationships", { coachTrust: 1 });
+  addFlags(["hs_y2_training_contact_coach_echo"]);
+  return "高中現任教練看完你把三個落點依序打完，只在訓練表上圈起『能重複』三個字。";
+}
+
+function getTrainingChoice(eventId, trainingCode) {
+  return getEvent(eventId)?.choices?.find(choice => choice.trainingCode === trainingCode) || null;
+}
+
+function getTrainingChoiceFlag(slot, trainingCode) {
+  return `hs_y2_training_${slot}_${trainingCode.replace(/-/g, "_")}`;
+}
+
+function renderHighSchoolTraining(eventId, event, prepared = {}) {
+  const text = prepared.text || (typeof event.text === "function" ? event.text() : event.text);
+  const buttons = event.choices.map(choice => `<button type="button" onclick="chooseHighSchoolTraining('${eventId}', '${choice.trainingCode}')">${escapeHtml(choice.text)}</button>`).join("");
+  const sceneContextHtml = prepared.sceneContextHtml || renderSceneContext(getSceneContext(eventId, event));
+  const bridgeInHtml = prepared.bridgeInHtml || "";
+  const bridgeOutHtml = prepared.bridgeOutHtml || "";
+  document.getElementById("story").innerHTML = `<article class="event-card" aria-labelledby="currentEventTitle">${sceneContextHtml}${bridgeInHtml}<div class="event-kicker">自主訓練</div><h2 id="currentEventTitle" tabindex="-1">${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div>${bridgeOutHtml}</article>`;
+  document.getElementById("choices").innerHTML = buttons;
+}
+
+function renderTrainingOutcome() {
+  const pending = pendingTrainingOutcome;
+  if (!pending) return;
+  const changes = pending.result.changes
+    .filter(change => change.delta !== 0)
+    .map(change => {
+      const sign = change.delta > 0 ? "+" : "";
+      return `<li><span>${escapeHtml(trainingChangeLabels[change.key] || change.key)}</span><strong>${escapeHtml(`${sign}${change.delta}`)}</strong><small>${escapeHtml(`${change.before} → ${change.after}`)}</small></li>`;
+    })
+    .join("") || "<li><span>狀態</span><strong>無變化</strong><small>已達上下限</small></li>";
+  const reaction = pending.relationshipEcho
+    ? `<section class="outcome__reaction choice-outcome-reaction" aria-label="教練回應"><small>教練回應</small><p>${escapeHtml(pending.relationshipEcho)}</p></section>`
+    : "";
+  setChoiceTransitionState(false);
+  document.getElementById("story").innerHTML = `<article class="event-card outcome choice-outcome-card" aria-labelledby="outcomeTitle"><div class="event-kicker choice-outcome-kicker">訓練結果</div><h2 id="outcomeTitle" tabindex="-1">${escapeHtml(pending.title)}</h2><section class="outcome__confirmation choice-outcome-action" aria-label="你的選擇"><small>你選擇</small><strong>${escapeHtml(pending.choiceText)}</strong></section>${reaction}<section class="outcome__feedback choice-outcome-feedback" aria-label="狀態變化"><small>狀態變化</small><ul class="training-outcome-list">${changes}</ul></section></article>`;
+  clearOutcomeFeedbackPresentation();
+  document.getElementById("choices").innerHTML = `<div class="outcome__action" aria-label="前往下一幕"><button type="button" class="outcome-continue-button" onclick="continueTrainingOutcome()">繼續</button></div>`;
+  focusOutcomeHeading();
+}
+
+function chooseHighSchoolTraining(eventId, trainingCode) {
+  if (
+    isTransitioning ||
+    pendingTrainingOutcome ||
+    getCurrentEventId() !== eventId ||
+    !isHighSchoolTrainingEvent(eventId)
+  ) return false;
+  const event = getEvent(eventId);
+  const choice = getTrainingChoice(eventId, trainingCode);
+  if (
+    !event ||
+    !choice ||
+    typeof BaseballTrainingResolver !== "object" ||
+    typeof BaseballTrainingResolver.resolveTraining !== "function"
+  ) {
+    showNotice("這個訓練目前不能執行。", "warning");
+    return false;
+  }
+
+  isTransitioning = true;
+  setChoiceTransitionState(true);
+  const result = BaseballTrainingResolver.resolveTraining(createTrainingPlayerSnapshot(), trainingCode);
+  if (result.status !== "resolved" || !applyResolvedTrainingResult(result)) {
+    isTransitioning = false;
+    setChoiceTransitionState(false);
+    showNotice("訓練狀態無法安全結算，請重新選擇。", "error");
+    return false;
+  }
+
+  const slot = event.trainingSlot;
+  addFlags([getTrainingChoiceFlag(slot, trainingCode)]);
+  const relationshipEcho = applyTrainingRelationshipHook(trainingCode);
+  player.forcedEventId = "";
+  pendingTrainingOutcome = {
+    eventId,
+    trainingCode,
+    title: event.title,
+    choiceText: choice.text,
+    relationshipEcho,
+    result
+  };
+  updateImpression();
+  renderTrainingOutcome();
+  return true;
+}
+
+function continueTrainingOutcome() {
+  if (!pendingTrainingOutcome) return false;
+  setOutcomeContinueState(true);
+  pendingTrainingOutcome = null;
+  isTransitioning = false;
+  showCurrentEvent();
+  return true;
+}
+
 function createGameplayRolls() {
   return Object.freeze({
     fieldingExecution: Math.random(),
@@ -1681,6 +1851,8 @@ function showNotice(message, type = "neutral") {
 
 function choose(eventId, index) {
   if (isTransitioning) return;
+  if (pendingTrainingOutcome) return;
+  if (isHighSchoolTrainingEvent(player.forcedEventId) && player.forcedEventId !== eventId) return;
   if (player.chapter === "生涯轉換期" && getCurrentEventId() !== eventId) return;
   if (player.chapter === "發展期" && getCurrentEventId() !== eventId) return;
   const event = getEvent(eventId);
@@ -1691,6 +1863,9 @@ function choose(eventId, index) {
   }
   if (eventId === "high_school_year_two_spring_game" && choice.gameplayApproach) {
     return chooseHighSchoolSpringApproach(choice.gameplayApproach);
+  }
+  if (isHighSchoolTrainingEvent(eventId) && choice.trainingCode) {
+    return chooseHighSchoolTraining(eventId, choice.trainingCode);
   }
   let decisionContext = null;
   let relationshipContext = null;
@@ -3216,6 +3391,7 @@ function advanceAfterAction(decisionContext = null, completedEventId = null) {
   }
   if (player.chapter === "青棒第二年") {
     player.highSchoolYearTwoStep += 1;
+    queueHighSchoolTrainingAfter(completedEventId);
     if (player.highSchoolYearTwoStep >= 8) evaluateHighSchoolYearTwo();
     return;
   }
@@ -3750,6 +3926,7 @@ function evaluateDevelopmentYears() {
 
 function showCurrentEvent() {
   pendingYouthSeasonOutcome = null;
+  pendingTrainingOutcome = null;
   const eventId = getCurrentEventId();
   if (pendingBaseballGameplay && pendingBaseballGameplay.eventId !== eventId) {
     clearPendingBaseballGameplay();
@@ -3891,6 +4068,8 @@ function showStory(eventId) {
     renderIntegratedYouthGrounder(event, { text, sceneContextHtml, competitionFrame, bridgeInHtml, bridgeOutHtml });
   } else if (eventId === "high_school_year_two_spring_game") {
     renderIntegratedHighSchoolSpringAtBat(event, { text, sceneContextHtml, competitionFrame, bridgeInHtml, bridgeOutHtml });
+  } else if (isHighSchoolTrainingEvent(eventId)) {
+    renderHighSchoolTraining(eventId, event, { text, sceneContextHtml, bridgeInHtml, bridgeOutHtml });
   } else {
     document.getElementById("story").innerHTML = `<article class="event-card" aria-labelledby="currentEventTitle">${sceneContextHtml}${competitionFrame}${bridgeInHtml}<h2 id="currentEventTitle" tabindex="-1">${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div>${bridgeOutHtml}</article>`;
     document.getElementById("choices").innerHTML = event.choices.map((choice, index) => `<button type="button" onclick="choose('${eventId}', ${index})">${escapeHtml(choice.text)}</button>`).join("");

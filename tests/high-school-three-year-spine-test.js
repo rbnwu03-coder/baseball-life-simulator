@@ -9,7 +9,7 @@ const files = [
   "evaluation-registry.js", "coach-evaluation-boundary.js", "narrative-condition-boundary.js",
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
-  "competition-presentation.js", "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js", "baseball-offense-prototype.js", "baseball-gameplay-integration.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "career-age22-outcome-resolver.js", "career-save-admission.js",
+  "competition-presentation.js", "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js", "baseball-offense-prototype.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "career-age22-outcome-resolver.js", "career-save-admission.js",
   "story.js", "save.js", "script.js"
 ];
 
@@ -79,7 +79,14 @@ function resetToYearTwo(context, overrides = {}) {
     careerExit: "",
     ...overrides
   })}); pendingYouthSeasonOutcome = null; pendingBaseballGameplay = null; isTransitioning = false;
-  createOffensiveGameplayRolls = () => Object.freeze({ execution: 0.01, battedBall: 0.01, defense: 0.01, result: 0.5, runnerAdvance: 0.5 });`);
+  pendingTrainingOutcome = null; createOffensiveGameplayRolls = () => Object.freeze({ execution: 0.01, battedBall: 0.01, defense: 0.01, result: 0.5, runnerAdvance: 0.5 });`);
+}
+
+function completeQueuedTraining(context, code = "recovery") {
+  const eventId = evaluate(context, "player.forcedEventId");
+  if (!eventId || !eventId.startsWith("high_school_year_two_training_")) return;
+  evaluate(context, `chooseHighSchoolTraining(${JSON.stringify(eventId)}, ${JSON.stringify(code)})`);
+  evaluate(context, "continueTrainingOutcome()");
 }
 
 function fingerprint(context, ids) {
@@ -107,6 +114,7 @@ function playYearTwoRoute(context, choiceIndexes, setup = "") {
   yearTwoIds.forEach((eventId, step) => {
     evaluate(context, `choose(${JSON.stringify(eventId)}, ${choiceIndexes[step]})`);
     if (eventId === "high_school_year_two_spring_game") evaluate(context, "continueYouthSeasonOutcome()");
+    if (step <= 1) completeQueuedTraining(context);
   });
   return parse(context, `({
     chapter: player.chapter,
@@ -231,6 +239,7 @@ resetToYearTwo(context);
 for (let step = 0; step < yearTwoIds.length; step += 1) {
   evaluate(context, `choose(${JSON.stringify(yearTwoIds[step])}, 0)`);
   if (yearTwoIds[step] === "high_school_year_two_spring_game") evaluate(context, "continueYouthSeasonOutcome()");
+  if (step <= 1) completeQueuedTraining(context);
 }
 verify("23. 八幕完成後進入青棒第二年小結", evaluate(context, "player.chapter === '青棒第二年小結' && getCurrentEventId() === 'high_school_year_two_result'"));
 verify("24. 高二整段不會提前寫入 careerExit", evaluate(context, "player.careerExit === ''"));

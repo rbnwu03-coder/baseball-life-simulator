@@ -1179,6 +1179,16 @@ const highSchoolEvents = {
   }
 };
 
+function createHighSchoolTrainingChoices() {
+  return [
+    { text: "長打訓練｜增加揮棒強度，承受較高疲勞", trainingCode: "power-hitting" },
+    { text: "擊球控制｜把球穩定送進指定方向", trainingCode: "contact-control" },
+    { text: "守備腳步｜反覆處理第一步與橫移路線", trainingCode: "defensive-footwork" },
+    { text: "傳球基本功｜固定跨步與出手方向", trainingCode: "throwing-basics" },
+    { text: "恢復調整｜縮短訓練，完成伸展與冰敷", trainingCode: "recovery" }
+  ];
+}
+
 const highSchoolYearTwoEvents = {
   high_school_year_two_roster_reset: {
     title: "名單重新洗牌",
@@ -1191,6 +1201,15 @@ const highSchoolYearTwoEvents = {
       C("照教練分組，同時帶兩只手套進輪替測試", { observe: 1, responsibility: 1 }, ["year_two_reset_rotation_group"], "你沒有要求保留舊順位，先把兩個守位的工作表都抄進筆記。", { skillEffects: { baseballIQ: 1 }, relationshipEffects: { coachTrust: 1 } }),
       C("拿著名單問清楚這次重排的三項標準", { confidence: 1, observe: 1 }, ["year_two_asked_roster_criteria"], "教練圈出守備完成率、戰術執行與出勤，要求你用接下來三週回答。", { relationshipEffects: { coachTrust: 1 }, highSchoolEffects: { exposure: 1 } })
     ]
+  },
+  high_school_year_two_training_a: {
+    title: "第一次自主訓練",
+    trainingSlot: "a",
+    text() {
+      const fatigue = Number(player.body?.fatigue) || 0;
+      return `名單重新洗牌後，下一次角色測試還沒開始。高中現任教練把下午最後四十分鐘交還給每個人，只要求離場前在訓練表上寫下實際完成的內容。\n\n你目前的疲勞是 ${fatigue}。今天只能把時間放在一個方向。`;
+    },
+    choices: createHighSchoolTrainingChoices()
   },
   high_school_year_two_role_test: {
     title: "原本的角色還能不能用",
@@ -1207,6 +1226,15 @@ const highSchoolYearTwoEvents = {
       C("完成主守位後，接著補上教練指定的第二任務", { responsibility: 2, observe: 1 }, ["year_two_role_utility_proof"], "你在主守位測試後換組，讓教練確認臨時補位不必重新說明整套暗號。", { skillEffects: { baseballIQ: 1, baseRunning: 1 }, relationshipEffects: { coachTrust: 2 }, bodyEffects: { fatigue: 1 }, matchEffects: { performance: 2 } }),
       C("輪到情境打擊時，握短球棒完成右側推進", { ballSense: 1, discipline: 1 }, ["year_two_role_bat_proof"], "你把外角球推向右側，讓二壘跑者在守備傳球前進到三壘。", { skillEffects: { batting: 2, baseballIQ: 1 }, bodyEffects: { fatigue: 1 }, matchEffects: { performance: 2 } })
     ]
+  },
+  high_school_year_two_training_b: {
+    title: "春季聯賽前的最後調整",
+    trainingSlot: "b",
+    text() {
+      const fatigue = Number(player.body?.fatigue) || 0;
+      return `角色測試結束後，春季聯賽名單只剩一次練習就要封存。打擊籠、內野區與牛棚都還亮著燈，防護員則把恢復區的計時器重新歸零。\n\n你目前的疲勞是 ${fatigue}。這次選擇會直接成為進入比賽前的身體與技術狀態。`;
+    },
+    choices: createHighSchoolTrainingChoices()
   },
   high_school_year_two_spring_game: {
     title: "春季聯賽的第一個打席",
