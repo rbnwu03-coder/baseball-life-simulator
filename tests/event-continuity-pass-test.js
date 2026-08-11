@@ -19,6 +19,10 @@ const files = [
   "coach-response-flow.js",
   "narrative-condition-flow.js",
   "competition-presentation.js",
+  "baseball-gameplay-prototype-utils.js",
+  "baseball-defense-prototype.js",
+  "baseball-offense-prototype.js",
+  "baseball-gameplay-integration.js",
   "career-spine-contract.js",
   "career-transition-runtime-resolver.js",
   "career-development-runtime-resolver.js",
@@ -44,7 +48,7 @@ const youthEventIds = [
   "youth_match_after",
   "youth_season_result"
 ];
-const expectedGameplayHash = "c3f3210302b281c5423ee946f3f03cd6791e724f849b70af2db02b6754e6f703";
+const expectedGameplayHash = "1b82c8a5c045abce06629ee62bc780f35cd8cf99c4de2714d681059ca184d982";
 
 let passed = 0;
 
@@ -124,12 +128,15 @@ function choiceGameplayContract(game) {
 
 function chooseAndContinue(game, eventId, choiceIndex) {
   game.choose(eventId, choiceIndex);
+  if (eventId === "youth_match_grounder" && vm.runInContext("pendingBaseballGameplay?.stage === 'throw-decision'", game)) {
+    game.chooseYouthGrounderThrow("secure-first");
+  }
   if (vm.runInContext("Boolean(pendingYouthSeasonOutcome)", game)) {
     game.continueYouthSeasonOutcome();
   }
 }
 
-test("Gameplay 合約雜湊、事件 ID 與 Choice identity 維持不變", () => {
+test("Gameplay 合約雜湊包含 5.2 Grounder Pilot，事件 ID 維持不變", () => {
   const game = makeContext();
   const hash = crypto.createHash("sha256").update(JSON.stringify(choiceGameplayContract(game))).digest("hex");
   assert(hash === expectedGameplayHash, `Gameplay 合約變動：${hash}`);
@@ -205,11 +212,15 @@ test("連點原選項與連點繼續都不會重複套用效果", () => {
   assert(nextEvent === "youth_teammate" && game.getCurrentEventId() === nextEvent, "連點繼續重複推進流程");
 });
 
-test("十二種正式守備選擇都精確回收上一球，標題區分瑕疵與完成", () => {
+test("實際 Grounder 結果與其他守位選擇都精確回收上一球", () => {
   const cases = [
-    ["match_safe_fielding", false, "傳一壘拿到出局"],
-    ["match_aggressive_fielding", true, "回傳卻把一壘手拉離壘包"],
-    ["match_read_fielding", false, "完成了雙殺"],
+    ["youth_grounder_double_play", false, "雙殺結束了那次攻勢"],
+    ["youth_grounder_force_second", false, "打者則趁回傳前留在一壘"],
+    ["youth_grounder_batter_out", false, "原本的一壘跑者則進到二壘"],
+    ["youth_grounder_all_safe", false, "一、二壘兩名跑者"],
+    ["youth_grounder_fielding_error", true, "記錄留下接球失誤"],
+    ["youth_grounder_throwing_error", true, "記錄留下傳球失誤"],
+    ["youth_grounder_ball_through", false, "原跑者推進到三壘"],
     ["outfield_took_route", false, "警戒區接殺"],
     ["outfield_set_throw", false, "沒有多推進一個壘包"],
     ["outfield_diving_attempt", true, "一壘跑者繞回本壘得分"],
@@ -235,12 +246,12 @@ test("十二種正式守備選擇都精確回收上一球，標題區分瑕疵�
 test("第五局 Presentation 使用上一球回收文字與既有比賽狀態", () => {
   const game = makeContext();
   prepareYouthSeason(game, 6);
-  vm.runInContext("player.seasonPosition='內野手'; addFlags(['match_read_fielding'])", game);
+  vm.runInContext("player.seasonPosition='內野手'; addFlags(['youth_grounder_double_play'])", game);
   game.showStory("youth_match_mistake");
   const state = vm.runInContext("JSON.stringify(player.matchState)", game);
   const html = game.__nodes.get("story").innerHTML;
   assert(state.includes('"inning":5') && state.includes('"outs":0') && state.includes('"runners":[false,false,false]'), "第五局狀態被改動");
-  assert(html.includes("完成了雙殺") && html.includes("一局過去"), "Presentation 沒有接上精確上一球結果");
+  assert(html.includes("雙殺結束了那次攻勢") && html.includes("一局過去"), "Presentation 沒有接上精確上一球結果");
 });
 
 test("存讀結果畫面只還原已推進狀態，不重套效果也不增加 schema", () => {

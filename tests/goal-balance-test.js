@@ -3,7 +3,7 @@ const path = require("path");
 const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
-const files = ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "narrative-condition-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js", "story.js", "save.js", "script.js"];
+const files = ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "narrative-condition-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js", "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js", "baseball-offense-prototype.js", "baseball-gameplay-integration.js", "story.js", "save.js", "script.js"];
 function makeGame() {
   const nodes = new Map();
   const context = vm.createContext({
@@ -68,7 +68,10 @@ function chooseFor(game, eventId, weights, variation) {
   const event = game.getEvent(eventId);
   if (!event?.choices?.length) throw new Error(`找不到事件或選項：${eventId}`);
   if (eventId === "night" || event.choices.length === 1) return 0;
-  const ranked = event.choices.map((choice, index) => ({ index, score: scoreChoice(choice, weights) + (((variation + index * 7) % 11) - 5) * .08 })).sort((a, b) => b.score - a.score);
+  const availableChoices = event.choices
+    .map((choice, index) => ({ choice, index }))
+    .filter(({ choice }) => eventId !== "youth_match_grounder" || game.BaseballGameplayIntegration.isFieldingApproachAvailable(choice.gameplayApproach));
+  const ranked = availableChoices.map(({ choice, index }) => ({ index, score: scoreChoice(choice, weights) + (((variation + index * 7) % 11) - 5) * .08 })).sort((a, b) => b.score - a.score);
   return variation % 7 === 6 && ranked[1] ? ranked[1].index : ranked[0].index;
 }
 
@@ -76,6 +79,9 @@ function playUntil(game, condition, weights, variation, max = 45) {
   for (let turn = 0; turn < max && !vm.runInContext(condition, game); turn += 1) {
     const eventId = game.getCurrentEventId();
     game.choose(eventId, chooseFor(game, eventId, weights, variation + turn));
+    if (vm.runInContext("Boolean(pendingBaseballGameplay?.stage === 'throw-decision')", game)) {
+      game.chooseYouthGrounderThrow((weights.baseballIQ || 0) >= (weights.throwing || 0) ? "turn-two" : "secure-first");
+    }
     if (vm.runInContext("Boolean(pendingYouthSeasonOutcome)", game)) game.continueYouthSeasonOutcome();
   }
   if (!vm.runInContext(condition, game)) throw new Error(`未完成流程：${condition}，停在 ${game.getCurrentEventId()}`);

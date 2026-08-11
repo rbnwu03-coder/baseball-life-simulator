@@ -2,6 +2,9 @@ const SAVE_KEY = "baseballLifeRpgSave";
 
 function saveGame() {
   if (!player.name) return showNotice("請先建立角色。", "warning");
+  if (typeof isBaseballGameplayPending === "function" && isBaseballGameplayPending()) {
+    return showNotice("目前場上處理尚未完成，請完成後再儲存。", "warning");
+  }
   localStorage.setItem(SAVE_KEY, JSON.stringify(player));
   showNotice("進度已儲存。", "success");
 }
@@ -110,6 +113,7 @@ function loadGame() {
       return;
     }
 
+    if (typeof clearPendingBaseballGameplay === "function") clearPendingBaseballGameplay();
     player = candidate;
     document.getElementById("characterCreation").style.display = "none";
     showCurrentEvent();
@@ -122,6 +126,7 @@ function loadGame() {
 
 function deleteSave() {
   localStorage.removeItem(SAVE_KEY);
+  if (typeof clearPendingBaseballGameplay === "function") clearPendingBaseballGameplay();
   player = createInitialPlayer();
   document.getElementById("characterCreation").style.display = "block";
   document.getElementById("story").innerHTML = "";

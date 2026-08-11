@@ -3,7 +3,7 @@ const path = require("path");
 const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
-const files = ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "evaluation-registry.js", "coach-evaluation-boundary.js", "narrative-condition-boundary.js", "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js", "competition-presentation.js", "career-spine-contract.js", "career-transition-resolver.js", "career-transition-commit.js", "career-transition-runtime-resolver.js", "career-transition-progression.js", "career-development-runtime-resolver.js", "career-development-progression.js", "career-age22-outcome-resolver.js", "career-save-admission.js", "story.js", "save.js", "script.js"];
+const files = ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "evaluation-registry.js", "coach-evaluation-boundary.js", "narrative-condition-boundary.js", "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js", "competition-presentation.js", "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js", "baseball-offense-prototype.js", "baseball-gameplay-integration.js", "career-spine-contract.js", "career-transition-resolver.js", "career-transition-commit.js", "career-transition-runtime-resolver.js", "career-transition-progression.js", "career-development-runtime-resolver.js", "career-development-progression.js", "career-age22-outcome-resolver.js", "career-save-admission.js", "story.js", "save.js", "script.js"];
 
 function makeContext() {
   const nodes = new Map();
@@ -38,6 +38,12 @@ function playUntil(game, choices, condition, maxTurns = 20) {
   if (!vm.runInContext(condition, game)) throw new Error(`流程未在 ${maxTurns} 回合內完成：${condition}`);
 }
 
+function completeIntegratedGrounderIfNeeded(game) {
+  if (vm.runInContext("pendingBaseballGameplay?.stage === 'throw-decision'", game)) {
+    game.chooseYouthGrounderThrow("secure-first");
+  }
+}
+
 function play(routeChoices, chapter2Choices, seasonChoices, competitionChoices, juniorChoices, juniorSeasonChoices, highSchoolChoices, criticalChoices, transitionChoices) {
   const game = makeContext();
   vm.runInContext("selectedIdealSelf = '全能型'", game);
@@ -55,7 +61,9 @@ function play(routeChoices, chapter2Choices, seasonChoices, competitionChoices, 
   if (!vm.runInContext("player.chapter2Result", game)) throw new Error("第二章沒有產生入門評估");
   game.choose("chapter2_result", 0);
   seasonChoices.forEach(choice => {
-    game.choose(game.getCurrentEventId(), choice);
+    const eventId = game.getCurrentEventId();
+    game.choose(eventId, choice);
+    if (eventId === "youth_match_grounder") completeIntegratedGrounderIfNeeded(game);
     if (vm.runInContext("Boolean(pendingYouthSeasonOutcome)", game)) game.continueYouthSeasonOutcome();
   });
   if (!vm.runInContext("player.seasonResult", game)) throw new Error("少棒第一季沒有產生評估");
@@ -175,7 +183,7 @@ Object.entries(positionProfiles).forEach(([expected, setup]) => {
 
 const positionImpactTest = makeContext();
 const positionRoutes = [
-  { choice: 0, position: "內野手", event: "youth_match_grounder", skill: "reaction" },
+  { choice: 0, position: "內野手", event: "youth_match_grounder", skill: "catching" },
   { choice: 1, position: "外野手", event: "youth_match_outfield", skill: "range" },
   { choice: 2, position: "捕手", event: "youth_match_catcher", skill: "blocking" },
   { choice: 3, position: "投手", event: "youth_match_pitcher", skill: "control" }
@@ -189,6 +197,7 @@ positionRoutes.forEach(route => {
   if (vm.runInContext("getCurrentEventId()", positionImpactTest) !== route.event) throw new Error(`${route.position}沒有觸發專屬比賽事件`);
   const before = vm.runInContext(`player.baseballSkills.${route.skill}`, positionImpactTest);
   positionImpactTest.choose(route.event, 0);
+  if (route.event === "youth_match_grounder") completeIntegratedGrounderIfNeeded(positionImpactTest);
   positionImpactTest.continueYouthSeasonOutcome();
   if (vm.runInContext(`player.baseballSkills.${route.skill}`, positionImpactTest) <= before) throw new Error(`${route.position}專屬能力沒有成長`);
 });

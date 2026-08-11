@@ -17,7 +17,8 @@ const coreFiles = ["baseball-gameplay-prototype-utils.js", "baseball-offense-pro
 const coreSource = coreFiles.map(read).join("\n");
 
 verify("獨立 gameplay-prototype.html 已建立", fs.existsSync(path.join(root, "gameplay-prototype.html")));
-verify("正式 index.html 不載入任何 Prototype JS", !/baseball-(?:offense|defense|gameplay)-prototype/i.test(productionPage));
+verify("正式 index.html 只載入 Gameplay Core 與 Integration adapter", coreFiles.every(file => productionPage.includes(`src="${file}"`)) && productionPage.includes('src="baseball-gameplay-integration.js"'));
+verify("正式 index.html 不載入 Sandbox controller 或樣式", !/baseball-gameplay-prototype-sandbox\.js|gameplay-prototype\.css/i.test(productionPage));
 verify("Prototype 頁面不載入 player.js", !/src=["']player\.js["']/i.test(page));
 verify("Prototype 頁面不載入 save.js", !/src=["']save\.js["']/i.test(page));
 verify("Prototype 頁面不載入 story.js", !/src=["']story\.js["']/i.test(page));

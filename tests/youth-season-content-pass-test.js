@@ -18,7 +18,7 @@ const youthEventIds = [
   "youth_match_after",
   "youth_season_result"
 ];
-const expectedGameplayHash = "c3f3210302b281c5423ee946f3f03cd6791e724f849b70af2db02b6754e6f703";
+const expectedGameplayHash = "1b82c8a5c045abce06629ee62bc780f35cd8cf99c4de2714d681059ca184d982";
 
 const files = [
   "player.js",
@@ -35,6 +35,10 @@ const files = [
   "coach-response-flow.js",
   "narrative-condition-flow.js",
   "competition-presentation.js",
+  "baseball-gameplay-prototype-utils.js",
+  "baseball-defense-prototype.js",
+  "baseball-offense-prototype.js",
+  "baseball-gameplay-integration.js",
   "career-spine-contract.js",
   "career-transition-runtime-resolver.js",
   "career-development-runtime-resolver.js",
@@ -119,6 +123,9 @@ function playYouthRoute(positionChoice) {
     const eventId = game.getCurrentEventId();
     seen.push(eventId);
     game.choose(eventId, choiceIndex);
+    if (eventId === "youth_match_grounder" && vm.runInContext("pendingBaseballGameplay?.stage === 'throw-decision'", game)) {
+      game.chooseYouthGrounderThrow("secure-first");
+    }
     if (vm.runInContext("Boolean(pendingYouthSeasonOutcome)", game)) {
       game.continueYouthSeasonOutcome();
     }
@@ -126,7 +133,7 @@ function playYouthRoute(positionChoice) {
   return { game, seen };
 }
 
-test("Choice 索引、Flag、Effect、關係與所有 Gameplay 欄位保持原快照", () => {
+test("少棒事件合約包含 5.2 Grounder Pilot，其他內容維持快照", () => {
   const game = makeContext();
   const hash = crypto.createHash("sha256").update(JSON.stringify(choiceGameplayContract(game))).digest("hex");
   assert(hash === expectedGameplayHash, `Gameplay 合約變動：${hash}`);
@@ -223,7 +230,13 @@ test("棒球選項改為具體動作，結果先描述場上後果", () => {
     game.getEvent(eventId).choices.forEach((choice, index) => {
       forbidden.forEach(word => assert(!choice.text.includes(word), `${eventId}[${index}] 使用抽象選項：${word}`));
       assert(choice.text.length >= 8, `${eventId}[${index}] 選項缺少具體動作`);
-      assert(typeof choice.memory === "string" && choice.memory.length >= 20, `${eventId}[${index}] 結果敘述過薄`);
+      if (eventId === "youth_match_grounder") {
+        assert(["secure", "attack", "dive"].includes(choice.gameplayApproach), `${eventId}[${index}] 缺少接球方式 machine code`);
+        assert(!choice.matchEffects, `${eventId}[${index}] 仍由 Story Choice 擁有比賽結果`);
+      }
+      else {
+        assert(typeof choice.memory === "string" && choice.memory.length >= 20, `${eventId}[${index}] 結果敘述過薄`);
+      }
     });
   });
 });

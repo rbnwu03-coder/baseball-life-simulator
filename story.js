@@ -376,19 +376,39 @@ function getYouthBenchEcho() {
 function getYouthPreviousPlayEcho() {
   const echoes = [
     {
-      flag: "match_safe_fielding",
+      flag: "youth_grounder_double_play",
       error: false,
-      summary: "上一個守備，你退半步守住正面，傳一壘拿到出局；原來的一壘跑者停在二壘。"
+      summary: "上一個守備，你先在二壘封殺前位跑者，再由隊友轉傳一壘，雙殺結束了那次攻勢。"
     },
     {
-      flag: "match_aggressive_fielding",
+      flag: "youth_grounder_force_second",
+      error: false,
+      summary: "上一個守備，你先封掉往二壘的跑者，打者則趁回傳前留在一壘。"
+    },
+    {
+      flag: "youth_grounder_batter_out",
+      error: false,
+      summary: "上一個守備，你選擇先抓一壘的打者，原本的一壘跑者則進到二壘。"
+    },
+    {
+      flag: "youth_grounder_all_safe",
+      error: false,
+      summary: "上一個守備，你的接傳沒有趕上任何跑者，場上留下了一、二壘兩名跑者。"
+    },
+    {
+      flag: "youth_grounder_fielding_error",
       error: true,
-      summary: "上一個守備，你在二壘封殺前位跑者，回傳卻把一壘手拉離壘包；記錄留下傳球瑕疵。"
+      summary: "上一個守備，球碰到手套後留在紅土上；記錄留下接球失誤。"
     },
     {
-      flag: "match_read_fielding",
+      flag: "youth_grounder_throwing_error",
+      error: true,
+      summary: "上一個守備，傳球偏離接球點；記錄留下傳球失誤。"
+    },
+    {
+      flag: "youth_grounder_ball_through",
       error: false,
-      summary: "上一個守備，你等最後彈跳進手套，踩二壘再傳一壘，完成了雙殺。"
+      summary: "上一個守備，滾地球從你身側穿過，打者上一壘，原跑者推進到三壘。"
     },
     {
       flag: "outfield_took_route",
@@ -548,12 +568,12 @@ const youthSeasonEvents = {
     title: "第一顆正式滾地球",
     text() {
       const insight = player.chapter2Result === "理解型新生" ? "你立刻注意到球會在最後一次彈跳偏向手套側。" : player.chapter2Result === "直覺型新生" ? "你的身體比腦袋更早往球的方向動了。" : "教練反覆要求的腳步在你腦中閃過。";
-      return `一壘跑者把離壘距離拉得比上一球更遠。投手抬腿時，他立刻往二壘衝；球棒隨即發出短促的「喀」一聲。\n\n球沿著紅土朝你滾來。${insight}\n\n游擊手在你右側喊：「二壘！」他的腳已往壘包移動，你只有一次接球動作決定要拿哪個出局數。`;
+      return `一壘跑者把離壘距離拉得比上一球更遠。投手抬腿時，他立刻往二壘衝；腳程普通的打者隨即把球打向二游正面。\n\n這是一顆正常速度、沒有突然改變方向的滾地球。${insight}\n\n游擊手在你右側喊：「二壘！」他的腳已往壘包移動。你要先把球控制住，才有資格決定接下來拿哪個出局數。`;
     },
     choices: [
-      C("退半步守住正面，接穩後傳一壘", { resilience: 1 }, ["match_safe_fielding"], "你讓球進到胸前，雙手合住手套後才傳向一壘。一壘手在跑者前踩住壘包；原來的一壘跑者抵達二壘，但你確實拿到第二個出局數。", { skillEffects: { catching: 1, throwing: 1, reaction: 1 }, relationshipEffects: { coachTrust: 2 }, matchEffects: { performance: 2, outs: 1, advanceRunners: true } }),
-      C("往二壘前方搶一步，反手餵給游擊手", { instinct: 1, pressure: 1 }, ["match_aggressive_fielding"], "你在跑者前把球反手送出，游擊手踩到二壘；他的回傳卻把一壘手拉離壘包。前面的跑者已出局，打者安全上壘，場邊的歡呼立刻變成一聲嘆氣。", { skillEffects: { throwing: 2 }, relationshipEffects: { rivalRespect: 1 }, matchEffects: { performance: 2, errors: 1, outs: 1, clearBases: true } }),
-      C("等最後一次彈跳進手套，自己踩二壘再傳一壘", { observe: 1 }, ["match_read_fielding"], "球彈進手套後，你順著移動方向踩過二壘，再轉髖把球送往一壘。兩名裁判先後握拳——雙殺。隊友的喊聲一下子蓋過你的心跳。", { skillEffects: { catching: 1, baseballIQ: 2, reaction: 1, range: 1 }, relationshipEffects: { coachTrust: 1 }, matchEffects: { performance: 3, outs: 2, clearBases: true } })
+      C("退半步讓球進入身體正面", { resilience: 1 }, [], "", { gameplayApproach: "secure", skillEffects: { catching: 1 } }),
+      C("向前搶一步，在短彈跳前接球", { instinct: 1, pressure: 1 }, [], "", { gameplayApproach: "attack", skillEffects: { reaction: 1 } }),
+      C("往身側延伸手套，把球擋在內野", { observe: 1, pressure: 1 }, [], "", { gameplayApproach: "dive", skillEffects: { range: 1 } })
     ]
   },
   youth_match_outfield: {

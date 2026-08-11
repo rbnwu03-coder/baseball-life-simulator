@@ -1,5 +1,6 @@
 let isTransitioning = false;
 let pendingYouthSeasonOutcome = null;
+let pendingBaseballGameplay = null;
 let selectedOrigin = PlayerIdentityOptions.origins[0];
 let selectedIdealSelf = "";
 
@@ -24,6 +25,27 @@ const idealSelfDescriptions = Object.freeze({
   [PlayerIdentityOptions.idealSelf[3]]: "我想在最重要的時候站出來。",
   [PlayerIdentityOptions.idealSelf[4]]: "我想讓身邊的人一起變得更好。"
 });
+
+const youthGrounderThrowChoices = Object.freeze([
+  Object.freeze({
+    code: "secure-first",
+    text: "接穩後轉向一壘，先抓打者",
+    flag: "youth_grounder_throw_first",
+    skillEffects: Object.freeze({ throwing: 1 })
+  }),
+  Object.freeze({
+    code: "force-lead-runner",
+    text: "反手送二壘，先封殺前位跑者",
+    flag: "youth_grounder_throw_force_second",
+    skillEffects: Object.freeze({ throwing: 1 })
+  }),
+  Object.freeze({
+    code: "turn-two",
+    text: "餵給二壘後補位，挑戰雙殺",
+    flag: "youth_grounder_turn_two",
+    skillEffects: Object.freeze({ baseballIQ: 1 })
+  })
+]);
 
 // Phase 14.5：核心 NPC 在不同人生階段的身分與職能。
 // 這份資料只約束敘事權限，不參與能力、平衡或流程判定。
@@ -508,6 +530,7 @@ function createPlayer() {
 }
 
 function resetGame() {
+  clearPendingBaseballGameplay();
   player = createInitialPlayer();
   document.getElementById("characterCreation").style.display = "block";
   document.getElementById("nameInput").value = "";
@@ -1193,6 +1216,219 @@ function getYouthSeasonOutcomeReaction(eventId) {
   return "球隊照原本的節奏繼續運作，這次選擇則被留進你的球季紀錄。";
 }
 
+function isBaseballGameplayPending() {
+  return Boolean(pendingBaseballGameplay);
+}
+
+function clearPendingBaseballGameplay() {
+  pendingBaseballGameplay = null;
+}
+
+function createGameplayRolls() {
+  return Object.freeze({
+    fieldingExecution: Math.random(),
+    fieldingResult: Math.random(),
+    throwExecution: Math.random(),
+    result: Math.random()
+  });
+}
+
+function getYouthGrounderApproachChoice(approach) {
+  return getEvent("youth_match_grounder")?.choices?.find(choice => choice.gameplayApproach === approach) || null;
+}
+
+function getYouthGrounderApproachFlag(approach) {
+  return {
+    secure: "youth_grounder_secure",
+    attack: "youth_grounder_attack",
+    dive: "youth_grounder_dive"
+  }[approach] || "";
+}
+
+function mergeGameplaySkillEffects(...groups) {
+  const merged = {};
+  groups.forEach(group => Object.entries(group || {}).forEach(([key, value]) => {
+    merged[key] = (merged[key] || 0) + value;
+  }));
+  return merged;
+}
+
+function createIntegratedYouthGrounderChoice(approach, throwDecision, result) {
+  const approachChoice = getYouthGrounderApproachChoice(approach) || {};
+  const throwChoice = youthGrounderThrowChoices.find(choice => choice.code === throwDecision) || null;
+  const flags = [
+    getYouthGrounderApproachFlag(approach),
+    throwChoice?.flag || "",
+    result.mutation?.resultFlag || ""
+  ].filter(Boolean);
+  return {
+    text: [approachChoice.text, throwChoice?.text].filter(Boolean).join("；"),
+    effects: Object.assign({}, approachChoice.effects || {}),
+    skillEffects: mergeGameplaySkillEffects(approachChoice.skillEffects, throwChoice?.skillEffects),
+    flags,
+    memory: result.narrative,
+    matchEffects: {
+      performance: result.mutation?.performanceDelta || 0,
+      errors: result.mutation?.errorDelta || 0,
+      outs: result.mutation?.outsAdded || 0
+    }
+  };
+}
+
+function applyIntegratedBaseballPlayResult(result) {
+  if (!result || result.status !== "resolved" || result.stage !== "complete" || !result.mutation) {
+    return { ok: false, error: "invalid-integrated-result" };
+  }
+  const mutation = result.mutation;
+  if (
+    !Number.isInteger(mutation.outsAdded) ||
+    !Array.isArray(mutation.runners) ||
+    mutation.runners.length !== 3 ||
+    typeof mutation.performanceDelta !== "number" ||
+    typeof mutation.errorDelta !== "number" ||
+    typeof mutation.resultFlag !== "string"
+  ) {
+    return { ok: false, error: "invalid-integrated-mutation" };
+  }
+  player.matchState.outs = Math.min(3, (Number(player.matchState.outs) || 0) + mutation.outsAdded);
+  player.matchState.runners = mutation.runners.map(Boolean);
+  player.seasonPerformance += mutation.performanceDelta;
+  player.seasonErrors += mutation.errorDelta;
+  return { ok: true };
+}
+
+function completeIntegratedYouthGrounder(result, approach, throwDecision = null) {
+  if (!pendingBaseballGameplay || pendingBaseballGameplay.stage === "committing") return false;
+  pendingBaseballGameplay.stage = "committing";
+  isTransitioning = true;
+  setChoiceTransitionState(true);
+  const before = getPlayerSnapshot();
+  const choice = createIntegratedYouthGrounderChoice(approach, throwDecision, result);
+  const applied = applyIntegratedBaseballPlayResult(result);
+  if (!applied.ok) {
+    clearPendingBaseballGameplay();
+    isTransitioning = false;
+    setChoiceTransitionState(false);
+    showNotice("這一球的結果無法安全套用，請重新整理後再試一次。", "error");
+    return false;
+  }
+
+  applyConsequenceAtEvent("youth_match_grounder");
+  applyEffects(choice.effects);
+  applySkillEffects(choice.skillEffects);
+  addFlags(choice.flags);
+  updateGoalProgressForChoice("youth_match_grounder", choice);
+  if (choice.memory) {
+    player.memories.push(choice.memory);
+    player.memories = player.memories.slice(-20);
+  }
+  updateRoute();
+  updateImpression();
+  processCareerArcEvent("youth_match_grounder", choice);
+  processEmotionalEvent("youth_match_grounder", choice);
+  processRelationshipPayoffs("youth_match_grounder");
+  processAspirationEvent("youth_match_grounder", choice);
+  recordContinuityOutcome(choice.continuityOutcome || createContinuityOutcome("youth_match_grounder", choice));
+  advanceNarrativeThread("youth_match_grounder", choice);
+  const statFeedbackHtml = showStatChanges(before, getPlayerSnapshot(), choice.memory, { includeMemory: false });
+
+  advanceAfterAction(null, "youth_match_grounder");
+  tickPendingEvents("youth_match_grounder");
+  clearPendingBaseballGameplay();
+  renderYouthSeasonOutcome("youth_match_grounder", choice, statFeedbackHtml);
+  return true;
+}
+
+function chooseYouthGrounderFielding(approach) {
+  if (isTransitioning || pendingBaseballGameplay || getCurrentEventId() !== "youth_match_grounder") return false;
+  if (
+    typeof BaseballGameplayIntegration !== "object" ||
+    typeof BaseballGameplayIntegration.resolveYouthGrounderFielding !== "function" ||
+    !BaseballGameplayIntegration.isFieldingApproachAvailable(approach)
+  ) {
+    showNotice("這個接球方式目前不能使用。", "warning");
+    return false;
+  }
+  const rolls = createGameplayRolls();
+  pendingBaseballGameplay = {
+    eventId: "youth_match_grounder",
+    stage: "resolving-fielding",
+    fieldingApproach: approach,
+    rolls,
+    playerSnapshotKey: BaseballGameplayIntegration.getYouthGrounderSnapshotKey(player)
+  };
+  const result = BaseballGameplayIntegration.resolveYouthGrounderFielding(player, approach, rolls);
+  if (result.status !== "resolved") {
+    clearPendingBaseballGameplay();
+    showNotice("這一球無法完成判定，請重新選擇。", "error");
+    return false;
+  }
+  if (result.stage === "complete") {
+    return completeIntegratedYouthGrounder(result, approach, null);
+  }
+  pendingBaseballGameplay.stage = "throw-decision";
+  pendingBaseballGameplay.controlQuality = result.controlQuality;
+  renderIntegratedYouthGrounder(getEvent("youth_match_grounder"));
+  return true;
+}
+
+function chooseYouthGrounderThrow(throwDecision) {
+  const pending = pendingBaseballGameplay;
+  if (
+    isTransitioning ||
+    !pending ||
+    pending.eventId !== "youth_match_grounder" ||
+    pending.stage !== "throw-decision" ||
+    getCurrentEventId() !== "youth_match_grounder" ||
+    !youthGrounderThrowChoices.some(choice => choice.code === throwDecision)
+  ) return false;
+  if (BaseballGameplayIntegration.getYouthGrounderSnapshotKey(player) !== pending.playerSnapshotKey) {
+    clearPendingBaseballGameplay();
+    showNotice("場上狀態已改變，請重新處理這一球。", "warning");
+    showCurrentEvent();
+    return false;
+  }
+  pending.stage = "resolving-throw";
+  const result = BaseballGameplayIntegration.resolveYouthGrounder(
+    player,
+    { fieldingApproach: pending.fieldingApproach, throwDecision },
+    pending.rolls
+  );
+  if (result.status !== "resolved" || result.stage !== "complete") {
+    clearPendingBaseballGameplay();
+    showNotice("傳球結果無法安全判定，請重新處理這一球。", "error");
+    showCurrentEvent();
+    return false;
+  }
+  return completeIntegratedYouthGrounder(result, pending.fieldingApproach, throwDecision);
+}
+
+function renderIntegratedYouthGrounder(event, prepared = {}) {
+  const text = prepared.text || (typeof event.text === "function" ? event.text() : event.text);
+  const stage = pendingBaseballGameplay?.stage === "throw-decision" ? "throw" : "fielding";
+  const controlText = pendingBaseballGameplay?.controlQuality === "clean"
+    ? "球穩穩留在身前，腳步也已轉向傳球方向。"
+    : pendingBaseballGameplay?.controlQuality === "delayed"
+      ? "球留在手套裡，但你多用了一步才把身體轉回來。"
+      : pendingBaseballGameplay?.controlQuality === "off-balance"
+        ? "你勉強把球擋在身前，出手時身體仍偏向一側。"
+        : "";
+  const stagePrompt = stage === "throw"
+    ? `${controlText}\n\n跑者仍往二壘衝，打者也已越過一半的壘間。現在要決定把球送到哪裡。`
+    : text;
+  const buttons = stage === "throw"
+    ? youthGrounderThrowChoices.map(choice => `<button type="button" onclick="chooseYouthGrounderThrow('${choice.code}')">${escapeHtml(choice.text)}</button>`).join("")
+    : event.choices
+      .filter(choice => BaseballGameplayIntegration.isFieldingApproachAvailable(choice.gameplayApproach))
+      .map(choice => `<button type="button" onclick="chooseYouthGrounderFielding('${choice.gameplayApproach}')">${escapeHtml(choice.text)}</button>`).join("");
+  const sceneContextHtml = prepared.sceneContextHtml || renderSceneContext(getSceneContext("youth_match_grounder", event));
+  const competitionFrame = prepared.competitionFrame || renderCompetitionPresentation("youth_match_grounder");
+  const bridgeInHtml = prepared.bridgeInHtml || "";
+  const bridgeOutHtml = stage === "fielding" ? (prepared.bridgeOutHtml || "") : "";
+  document.getElementById("story").innerHTML = `<article class="event-card integrated-gameplay-card" aria-labelledby="currentEventTitle">${sceneContextHtml}${competitionFrame}${bridgeInHtml}<div class="event-kicker">${stage === "fielding" ? "接球判斷" : "傳球判斷"}</div><h2 id="currentEventTitle" tabindex="-1">${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(stagePrompt)}</div>${bridgeOutHtml}</article>`;
+  document.getElementById("choices").innerHTML = buttons;
+}
+
 function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
   pendingYouthSeasonOutcome = { eventId };
   const competitionFrame = renderCompetitionPresentation(eventId);
@@ -1259,6 +1495,9 @@ function choose(eventId, index) {
   const event = getEvent(eventId);
   const choice = event?.choices?.[index];
   if (!choice) return;
+  if (eventId === "youth_match_grounder" && choice.gameplayApproach) {
+    return chooseYouthGrounderFielding(choice.gameplayApproach);
+  }
   let decisionContext = null;
   let relationshipContext = null;
   if (eventId === "chapter2_intro" && index === 0) {
@@ -1441,6 +1680,7 @@ function enterChapterTwo() {
 }
 
 function enterYouthSeason() {
+  clearPendingBaseballGameplay();
   applyChapterBreather();
   player.chapter = "少棒第一季";
   player.seasonStep = 0;
@@ -3295,9 +3535,13 @@ function evaluateDevelopmentYears() {
 
 function showCurrentEvent() {
   pendingYouthSeasonOutcome = null;
+  const eventId = getCurrentEventId();
+  if (pendingBaseballGameplay && pendingBaseballGameplay.eventId !== eventId) {
+    clearPendingBaseballGameplay();
+  }
   isTransitioning = false;
   setChoiceTransitionState(false);
-  showStory(getCurrentEventId());
+  showStory(eventId);
 }
 
 function getCompetitionPresentationContext(eventId) {
@@ -3428,8 +3672,12 @@ function showStory(eventId) {
   const competitionFrame = renderCompetitionPresentation(eventId);
   const bridgeInHtml = bridgeIn ? `<div class="story-bridge-in"><small>承接上一回</small>${escapeHtml(bridgeIn)}</div>` : "";
   const bridgeOutHtml = bridgeOut ? `<div class="story-bridge-out"><small>接下來</small>${escapeHtml(bridgeOut)}</div>` : "";
-  document.getElementById("story").innerHTML = `<article class="event-card" aria-labelledby="currentEventTitle">${sceneContextHtml}${competitionFrame}${bridgeInHtml}<h2 id="currentEventTitle" tabindex="-1">${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div>${bridgeOutHtml}</article>`;
-  document.getElementById("choices").innerHTML = event.choices.map((choice, index) => `<button type="button" onclick="choose('${eventId}', ${index})">${escapeHtml(choice.text)}</button>`).join("");
+  if (eventId === "youth_match_grounder") {
+    renderIntegratedYouthGrounder(event, { text, sceneContextHtml, competitionFrame, bridgeInHtml, bridgeOutHtml });
+  } else {
+    document.getElementById("story").innerHTML = `<article class="event-card" aria-labelledby="currentEventTitle">${sceneContextHtml}${competitionFrame}${bridgeInHtml}<h2 id="currentEventTitle" tabindex="-1">${escapeHtml(event.title)}</h2><div class="event-text">${escapeHtml(text)}</div>${bridgeOutHtml}</article>`;
+    document.getElementById("choices").innerHTML = event.choices.map((choice, index) => `<button type="button" onclick="choose('${eventId}', ${index})">${escapeHtml(choice.text)}</button>`).join("");
+  }
   updateStatus();
   if (player.goalState?.recentProgress?.length) {
     const feedback = consumeGoalFeedback();
