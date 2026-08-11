@@ -10,7 +10,7 @@ function verify(title, condition) {
 
 function base(overrides = {}) {
   const input = {
-    situation: { scoreState: "tied", runnerSpeed: "average", pitcherTendency: "inside" },
+    situation: { baseState: "one-out-runner-on-first", scoreState: "tied", runnerSpeed: "average", pitcherTendency: "inside" },
     player: { power: "average", contact: "average", bunt: "average", body: "normal", nextBatterReliability: "medium" },
     approach: "opposite",
     pitchDifficulty: "normal",

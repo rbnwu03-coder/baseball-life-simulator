@@ -35,5 +35,6 @@ verify("SAVE_KEY 維持 baseballLifeRpgSave", /const\s+SAVE_KEY\s*=\s*["']baseba
 verify("正式 Player Schema 未加入 transient gameplay state", !/decisionQuality\s*:|executionQuality\s*:|currentAtBatApproach\s*:|fieldingApproach\s*:|throwDecision\s*:/.test(read("player.js")));
 verify("Sandbox RNG 僅在獨立 UI 記憶體中運作", /function\s+nextRandom/.test(read("baseball-gameplay-prototype-sandbox.js")) && !/localStorage|sessionStorage|indexedDB/.test(read("baseball-gameplay-prototype-sandbox.js")));
 verify("Stage A 重跑前會清除舊的 Stage B 結果", /function\s+runFielding\s*\(\)\s*\{\s*clearThrowOutcome\(\)/.test(read("baseball-gameplay-prototype-sandbox.js")));
+verify("二壘打擊 Base State 僅達 readiness，未新增 Production offensive mutation", /high_school_year_two_spring_game[\s\S]*?mode:\s*["']readiness-only["']/.test(read("baseball-gameplay-integration.js")) && !/resolveHighSchool.*Offense|applyHighSchool.*Offense|pendingOffensiveGameplay/.test([read("baseball-gameplay-integration.js"), read("script.js"), read("player.js")].join("\n")));
 
 console.log(`\nGameplay Sprint 5.1 Prototype Isolation：${passed}/${passed} 通過`);

@@ -35,11 +35,22 @@
 
   function offenseInput(rolls) {
     return {
-      situation: { scoreState: value("offScore"), runnerSpeed: value("offRunner"), pitcherTendency: value("offPitcher") },
+      situation: { baseState: value("offBaseState"), scoreState: value("offScore"), runnerSpeed: value("offRunner"), pitcherTendency: value("offPitcher") },
       player: { power: value("offPower"), contact: value("offContact"), bunt: value("offBunt"), body: value("offBody"), nextBatterReliability: value("offNext") },
       approach: offenseApproach,
       pitchDifficulty: value("offDifficulty"),
       defenseQuality: value("offDefense"),
+      rolls
+    };
+  }
+
+  function offenseTenInput(rolls) {
+    return {
+      situation: { baseState: "one-out-runner-on-second", scoreState: "tied", runnerSpeed: "average", pitcherTendency: "outside" },
+      player: { power: "average", contact: "high", bunt: "average", body: "normal", nextBatterReliability: "high" },
+      approach: "opposite",
+      pitchDifficulty: "normal",
+      defenseQuality: "average",
       rolls
     };
   }
@@ -70,13 +81,16 @@
       $("offenseTrace").textContent = JSON.stringify(result, null, 2);
       return;
     }
+    const delta = result.result.stateDelta;
     $("offenseResult").innerHTML = [
+      card("Base State", result.input.situation.baseState),
       card("Decision Quality", `${result.decision.quality}（raw ${result.decision.rawScore}）`),
       card("Execution", `${result.execution.tier}（${result.execution.score}）`),
       card("Batted Ball", result.battedBall ? result.battedBall.profile : "不適用"),
-      card("Defense Interaction", result.defense ? result.defense.tier : "不適用"),
-      card("Final Result", result.result.resultType),
-      card("New Game State", JSON.stringify(result.result.stateDelta))
+      card("Defense", result.defense ? result.defense.tier : "不適用"),
+      card("Result", result.result.resultType),
+      card("Runners After", JSON.stringify(delta.runnersAfter)),
+      card("Runs Scored", delta.runsScored)
     ].join("");
     $("offenseTrace").textContent = JSON.stringify(result.trace, null, 2);
   }
@@ -100,14 +114,14 @@
   }
 
   function runOffenseTen() {
-    const results = Array.from({ length: 10 }, () => BaseballOffensePrototype.resolveAtBat(offenseInput(offenseRolls())));
+    const results = Array.from({ length: 10 }, () => BaseballOffensePrototype.resolveAtBat(offenseTenInput(offenseRolls())));
     renderOffense(results[results.length - 1]);
     $("offenseSummary").innerHTML = [
       summaryBlock("Decision Quality distribution", countBy(results, result => result.decision && result.decision.quality)),
       summaryBlock("Execution distribution", countBy(results, result => result.execution && result.execution.tier)),
       summaryBlock("Result distribution", countBy(results, result => result.result && result.result.resultType))
     ].join("");
-    $("offenseTrace").textContent = JSON.stringify({ runs: results.map(result => ({ rolls: result.input.rolls, decision: result.decision.quality, execution: result.execution.tier, result: result.result.resultType })) }, null, 2);
+    $("offenseTrace").textContent = JSON.stringify({ fixedScenario: offenseTenInput(null), runs: results.map(result => ({ rolls: result.input.rolls, baseStateModifier: result.decision.modifiers.baseState, decision: result.decision.quality, execution: result.execution.tier, result: result.result.resultType, leadRunner: result.result.stateDelta.leadRunner, runnersAfter: result.result.stateDelta.runnersAfter })) }, null, 2);
   }
 
   function fieldingDecisionInput(roll) {

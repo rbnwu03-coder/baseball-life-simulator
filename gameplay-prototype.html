@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gameplay Sprint 5.1 Prototype</title>
+  <title>Gameplay Sprint 5.3 Prototype</title>
   <link rel="stylesheet" href="gameplay-prototype.css">
 </head>
 <body>
   <main class="prototype-shell">
     <header class="prototype-header">
-      <p class="eyebrow">Gameplay Sprint 5.1</p>
+      <p class="eyebrow">Gameplay Sprint 5.3</p>
       <h1>Variable Baseball Situation Prototype</h1>
       <p>此頁為隔離式開發 Prototype，不讀取、不修改正式玩家與存檔。</p>
       <div class="seed-row">
@@ -26,12 +26,13 @@
 
     <section id="offensePanel" class="prototype-panel active">
       <div class="panel-heading">
-        <div><p class="eyebrow">第 7 局・一出局・一壘有人</p><h2>完整打席策略</h2></div>
+        <div><p class="eyebrow">第 7 局・一出局・Base State 可切換</p><h2>完整打席策略</h2></div>
         <p>局勢決定選擇品質；能力與有限波動決定執行。</p>
       </div>
       <div class="control-grid" id="offenseControls">
+        <label>Base State<select id="offBaseState"><option value="one-out-runner-on-first" selected>一出局・一壘有人</option><option value="one-out-runner-on-second">一出局・二壘有人</option></select></label>
         <label>比分<select id="offScore"><option value="behind-2-plus">落後兩分以上</option><option value="behind-1" selected>落後一分</option><option value="tied">平手</option><option value="ahead">領先</option></select></label>
-        <label>一壘跑者<select id="offRunner"><option value="slow">慢</option><option value="average">平均</option><option value="fast" selected>快</option></select></label>
+        <label>前位跑者<select id="offRunner"><option value="slow">慢</option><option value="average">平均</option><option value="fast" selected>快</option></select></label>
         <label>投手傾向<select id="offPitcher"><option value="inside">內角</option><option value="outside" selected>外角</option><option value="breaking">變化球</option><option value="fatigued">疲勞</option></select></label>
         <label>來球難度<select id="offDifficulty"><option value="easy">容易</option><option value="normal" selected>普通</option><option value="difficult">困難</option></select></label>
         <label>力量<select id="offPower"><option value="low">低</option><option value="average" selected>平均</option><option value="high">高</option><option value="elite">頂尖</option></select></label>
@@ -47,7 +48,7 @@
         <button type="button" data-offense-approach="shorten">握短棒</button>
         <button type="button" data-offense-approach="sac-bunt">犧牲觸擊</button>
       </div>
-      <div class="action-row"><button id="runOffenseOnce" class="primary" type="button">Run Once</button><button id="runOffenseTen" type="button">Run 10</button></div>
+      <div class="action-row"><button id="runOffenseOnce" class="primary" type="button">Run Once</button><button id="runOffenseTen" type="button">Run 10 固定二壘情境</button></div>
       <div id="offenseResult" class="result-grid" aria-live="polite"></div>
       <div id="offenseSummary" class="summary-panel"></div>
       <details><summary>Debug Trace</summary><pre id="offenseTrace">尚未執行</pre></details>

@@ -302,15 +302,23 @@ var BaseballGameplayIntegration = ((utils, defense, offense) => {
       return utils.deepFreeze({ compatible: false, reason: "event-not-registered" });
     }
     const requiredBaseState = facts?.baseState || registration.baseState;
-    if (requiredBaseState !== "one-out-runner-on-first") {
+    const supportedBaseStates = typeof offense.getSupportedBaseStates === "function"
+      ? offense.getSupportedBaseStates()
+      : [];
+    if (!supportedBaseStates.includes(requiredBaseState)) {
       return utils.deepFreeze({
         compatible: false,
         reason: "runner-state-unsupported",
         requiredBaseState,
-        currentCoreBaseState: "one-out-runner-on-first"
+        supportedBaseStates: utils.clone(supportedBaseStates)
       });
     }
-    return utils.deepFreeze({ compatible: true, reason: "compatible-base-state" });
+    return utils.deepFreeze({
+      compatible: true,
+      reason: "compatible-base-state",
+      requiredBaseState,
+      supportedBaseStates: utils.clone(supportedBaseStates)
+    });
   }
 
   return utils.deepFreeze({

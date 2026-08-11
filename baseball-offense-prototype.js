@@ -4,6 +4,11 @@ var BaseballOffensePrototype = ((utils) => {
   if (!utils) return Object.freeze({ unavailable: true });
 
   const APPROACH_IDS = utils.deepFreeze(["pull", "opposite", "shorten", "sac-bunt"]);
+  const BASE_STATE_IDS = utils.deepFreeze(["one-out-runner-on-first", "one-out-runner-on-second"]);
+  const BASE_STATES = utils.deepFreeze({
+    "one-out-runner-on-first": { outs: 1, runners: [true, false, false], leadRunnerBase: 1 },
+    "one-out-runner-on-second": { outs: 1, runners: [false, true, false], leadRunnerBase: 2 }
+  });
   const SCORE_STATES = ["behind-2-plus", "behind-1", "tied", "ahead"];
   const SPEEDS = ["slow", "average", "fast"];
   const PITCHER_TENDENCIES = ["inside", "outside", "breaking", "fatigued"];
@@ -20,10 +25,21 @@ var BaseballOffensePrototype = ((utils) => {
     tied: { pull: 0, opposite: 1, shorten: 0, "sac-bunt": 1 },
     ahead: { pull: 0, opposite: 1, shorten: 1, "sac-bunt": 0 }
   };
-  const RUNNER_WEIGHTS = {
-    slow: { pull: -1, opposite: 0, shorten: 0, "sac-bunt": -1 },
-    average: { pull: 0, opposite: 0, shorten: 0, "sac-bunt": 0 },
-    fast: { pull: 0, opposite: 1, shorten: 0, "sac-bunt": 1 }
+  const RUNNER_WEIGHTS_BY_BASE_STATE = {
+    "one-out-runner-on-first": {
+      slow: { pull: -1, opposite: 0, shorten: 0, "sac-bunt": -1 },
+      average: { pull: 0, opposite: 0, shorten: 0, "sac-bunt": 0 },
+      fast: { pull: 0, opposite: 1, shorten: 0, "sac-bunt": 1 }
+    },
+    "one-out-runner-on-second": {
+      slow: { pull: 0, opposite: 0, shorten: 0, "sac-bunt": 0 },
+      average: { pull: 0, opposite: 0, shorten: 0, "sac-bunt": 0 },
+      fast: { pull: 0, opposite: 1, shorten: 0, "sac-bunt": 1 }
+    }
+  };
+  const BASE_STATE_DECISION_WEIGHTS = {
+    "one-out-runner-on-first": { pull: 0, opposite: 0, shorten: 0, "sac-bunt": 0 },
+    "one-out-runner-on-second": { pull: 0, opposite: 1, shorten: 0, "sac-bunt": 0 }
   };
   const PITCHER_WEIGHTS = {
     outside: { pull: -1, opposite: 2, shorten: 0, "sac-bunt": 0 },
@@ -93,15 +109,32 @@ var BaseballOffensePrototype = ((utils) => {
       rows: [[97, 3], [94, 6], [90, 10], [85, 15], [75, 25]]
     }
   };
+  const RUNNER_SECOND_RESULT_TABLES = {
+    "ground-ball": {
+      outcomes: ["groundout", "single"],
+      rows: [[70, 30], [62, 38], [55, 45], [45, 55], [35, 65]]
+    },
+    "weak-grounder": {
+      outcomes: ["groundout", "infield-hit"],
+      rows: [[85, 15], [80, 20], [70, 30], [55, 45], [45, 55]]
+    }
+  };
   const BUNT_TABLES = {
     "poor-bunt": { "lead-runner-out": 45, "batter-out-runner-second": 40, "all-safe": 15 },
     "playable-bunt": { "lead-runner-out": 25, "batter-out-runner-second": 60, "all-safe": 15 },
     "good-bunt": { "lead-runner-out": 10, "batter-out-runner-second": 75, "all-safe": 15 },
     "excellent-bunt": { "lead-runner-out": 5, "batter-out-runner-second": 70, "bunt-single": 25 }
   };
+  const RUNNER_SECOND_BUNT_TABLES = {
+    "poor-bunt": { "lead-runner-out-third": 40, "batter-out-runner-third": 40, "all-safe": 20 },
+    "playable-bunt": { "lead-runner-out-third": 20, "batter-out-runner-third": 60, "all-safe": 20 },
+    "good-bunt": { "lead-runner-out-third": 10, "batter-out-runner-third": 70, "all-safe": 20 },
+    "excellent-bunt": { "lead-runner-out-third": 5, "batter-out-runner-third": 65, "bunt-single": 30 }
+  };
 
   function validateInput(input) {
     if (!utils.isPlainObject(input) || !utils.isPlainObject(input.situation) || !utils.isPlainObject(input.player)) return "input-shape";
+    if (!utils.isEnum(input.situation.baseState, BASE_STATE_IDS)) return "base-state";
     if (!utils.isEnum(input.situation.scoreState, SCORE_STATES)) return "score-state";
     if (!utils.isEnum(input.situation.runnerSpeed, SPEEDS)) return "runner-speed";
     if (!utils.isEnum(input.situation.pitcherTendency, PITCHER_TENDENCIES)) return "pitcher-tendency";
@@ -126,7 +159,8 @@ var BaseballOffensePrototype = ((utils) => {
     const approach = input.approach;
     const modifiers = {
       scoreState: SCORE_WEIGHTS[input.situation.scoreState][approach],
-      runnerSpeed: RUNNER_WEIGHTS[input.situation.runnerSpeed][approach],
+      runnerSpeed: RUNNER_WEIGHTS_BY_BASE_STATE[input.situation.baseState][input.situation.runnerSpeed][approach],
+      baseState: BASE_STATE_DECISION_WEIGHTS[input.situation.baseState][approach],
       pitcherTendency: PITCHER_WEIGHTS[input.situation.pitcherTendency][approach],
       skillFit: skillDecisionModifier(input),
       body: BODY_DECISION_WEIGHTS[input.player.body][approach],
@@ -227,23 +261,47 @@ var BaseballOffensePrototype = ((utils) => {
     return adjusted;
   }
 
-  function buntDistribution(executionTier, defenseQuality) {
+  function buntDistribution(baseStateId, executionTier, defenseQuality) {
     if (executionTier === "failed-bunt") return { strikeout: 100 };
-    const weights = Object.assign({}, BUNT_TABLES[executionTier]);
+    const runnerOnSecond = baseStateId === "one-out-runner-on-second";
+    const tables = runnerOnSecond ? RUNNER_SECOND_BUNT_TABLES : BUNT_TABLES;
+    const leadOutKey = runnerOnSecond ? "lead-runner-out-third" : "lead-runner-out";
+    const weights = Object.assign({}, tables[executionTier]);
     const successKey = executionTier === "excellent-bunt" ? "bunt-single" : "all-safe";
     if (defenseQuality === "strong") {
       const moved = Math.min(10, weights[successKey]);
       weights[successKey] -= moved;
-      weights["lead-runner-out"] += moved;
+      weights[leadOutKey] += moved;
     } else if (defenseQuality === "weak") {
-      const moved = Math.min(10, weights["lead-runner-out"]);
-      weights["lead-runner-out"] -= moved;
+      const moved = Math.min(10, weights[leadOutKey]);
+      weights[leadOutKey] -= moved;
       weights[successKey] = (weights[successKey] || 0) + moved;
     }
     return utils.normalizeWeights(weights);
   }
 
-  function stateDelta(resultType, runnerSpeed, runnerRoll) {
+  function runnersAfter(batterBase, leadRunnerBase) {
+    const runners = [false, false, false];
+    if (batterBase >= 1 && batterBase <= 3) runners[batterBase - 1] = true;
+    if (leadRunnerBase >= 1 && leadRunnerBase <= 3) runners[leadRunnerBase - 1] = true;
+    return runners;
+  }
+
+  function runnerSecondGroundoutBase(approach, speed, roll) {
+    const thresholds = {
+      pull: { slow: 0.2, average: 0.3, fast: 0.4 },
+      opposite: { slow: 0.55, average: 0.7, fast: 0.8 },
+      shorten: { slow: 0.45, average: 0.6, fast: 0.7 }
+    };
+    return roll < thresholds[approach][speed] ? 3 : 2;
+  }
+
+  function runnerSecondSingleBase(speed, roll) {
+    const thirdBaseThreshold = { slow: 0.7, average: 0.4, fast: 0.2 }[speed];
+    return roll < thirdBaseThreshold ? 3 : 4;
+  }
+
+  function stateDeltaRunnerFirst(resultType, runnerSpeed, runnerRoll) {
     const simple = {
       strikeout: [1, 0, 1],
       "double-play": [2, 0, 0],
@@ -273,30 +331,95 @@ var BaseballOffensePrototype = ((utils) => {
     } else {
       [outsAdded, batterBase, runnerFromFirstBase] = simple[resultType];
     }
+    const leadRunner = { fromBase: 1, toBase: runnerFromFirstBase };
     return {
       resultType,
       outsAdded,
       runsScored,
       batterBase,
+      leadRunner,
+      runnersAfter: runnersAfter(batterBase, runnerFromFirstBase),
       runnerFromFirstBase,
+      runnerFromSecondBase: null,
       inningEnded: 1 + outsAdded >= 3
     };
+  }
+
+  function stateDeltaRunnerSecond(resultType, approach, runnerSpeed, runnerRoll) {
+    let outsAdded = 0;
+    let runsScored = 0;
+    let batterBase = 0;
+    let runnerFromSecondBase = 2;
+
+    if (resultType === "groundout") {
+      outsAdded = 1;
+      runnerFromSecondBase = runnerSecondGroundoutBase(approach, runnerSpeed, runnerRoll);
+    } else if (resultType === "single") {
+      batterBase = 1;
+      runnerFromSecondBase = runnerSecondSingleBase(runnerSpeed, runnerRoll);
+    } else if (resultType === "infield-hit") {
+      batterBase = 1;
+    } else if (resultType === "extra-base-hit") {
+      batterBase = 2;
+      runnerFromSecondBase = 4;
+    } else if (resultType === "fielding-error") {
+      batterBase = 1;
+      runnerFromSecondBase = 3;
+    } else if (["strikeout", "lineout", "flyout", "popout"].includes(resultType)) {
+      outsAdded = 1;
+    } else if (resultType === "lead-runner-out-third") {
+      outsAdded = 1;
+      batterBase = 1;
+      runnerFromSecondBase = 0;
+    } else if (resultType === "batter-out-runner-third") {
+      outsAdded = 1;
+      runnerFromSecondBase = 3;
+    } else if (["all-safe", "bunt-single"].includes(resultType)) {
+      batterBase = 1;
+      runnerFromSecondBase = 3;
+    }
+
+    runsScored = runnerFromSecondBase === 4 ? 1 : 0;
+    const leadRunner = { fromBase: 2, toBase: runnerFromSecondBase };
+    return {
+      resultType,
+      outsAdded,
+      runsScored,
+      batterBase,
+      leadRunner,
+      runnersAfter: runnersAfter(batterBase, runnerFromSecondBase),
+      runnerFromFirstBase: null,
+      runnerFromSecondBase,
+      inningEnded: 1 + outsAdded >= 3
+    };
+  }
+
+  function stateDelta(input, resultType) {
+    if (input.situation.baseState === "one-out-runner-on-second") {
+      return stateDeltaRunnerSecond(resultType, input.approach, input.situation.runnerSpeed, input.rolls.runnerAdvance);
+    }
+    return stateDeltaRunnerFirst(resultType, input.situation.runnerSpeed, input.rolls.runnerAdvance);
   }
 
   function resolveResult(input, execution, battedBall, defense) {
     let distribution;
     if (input.approach === "sac-bunt") {
-      distribution = buntDistribution(execution.tier, input.defenseQuality);
+      distribution = buntDistribution(input.situation.baseState, execution.tier, input.defenseQuality);
     } else if (execution.tier === "miss") {
       distribution = { strikeout: 100 };
     } else {
-      const table = RESULT_TABLES[battedBall.profile];
+      const table = input.situation.baseState === "one-out-runner-on-second"
+        ? (RUNNER_SECOND_RESULT_TABLES[battedBall.profile] || RESULT_TABLES[battedBall.profile])
+        : RESULT_TABLES[battedBall.profile];
       const row = table.rows[DEFENSE_TIERS.indexOf(defense.tier)];
-      const weights = applyRunnerModifier(battedBall.profile, input.situation.runnerSpeed, distributionFromRow(table.outcomes, row));
+      const baseWeights = distributionFromRow(table.outcomes, row);
+      const weights = input.situation.baseState === "one-out-runner-on-first"
+        ? applyRunnerModifier(battedBall.profile, input.situation.runnerSpeed, baseWeights)
+        : baseWeights;
       distribution = utils.normalizeWeights(weights);
     }
     const resultType = utils.sampleDistribution(distribution, input.rolls.result);
-    return { distribution, resultType, stateDelta: stateDelta(resultType, input.situation.runnerSpeed, input.rolls.runnerAdvance) };
+    return { distribution, resultType, stateDelta: stateDelta(input, resultType) };
   }
 
   function resolveAtBat(input) {
@@ -312,12 +435,13 @@ var BaseballOffensePrototype = ((utils) => {
       { stage: "execution", score: execution.score, tier: execution.tier, components: utils.clone(execution.components), roll: input.rolls.execution },
       { stage: "batted-ball", distribution: battedBall ? utils.clone(battedBall.distribution) : null, profile: battedBall ? battedBall.profile : null, roll: input.rolls.battedBall },
       { stage: "defense", score: defense ? defense.score : null, tier: defense ? defense.tier : null, roll: input.rolls.defense },
-      { stage: "result", distribution: utils.clone(result.distribution), resultType: result.resultType, resultRoll: input.rolls.result, runnerAdvanceRoll: input.rolls.runnerAdvance }
+      { stage: "result", distribution: utils.clone(result.distribution), resultType: result.resultType, resultRoll: input.rolls.result, runnerAdvanceRoll: input.rolls.runnerAdvance, leadRunner: utils.clone(result.stateDelta.leadRunner), runnersAfter: utils.clone(result.stateDelta.runnersAfter) }
     ];
+    const baseState = BASE_STATES[input.situation.baseState];
     return utils.deepFreeze({
       status: "resolved",
       input: utils.clone(input),
-      baseState: { inning: 7, outs: 1, scoreFor: { "behind-2-plus": 0, "behind-1": 1, tied: 1, ahead: 2 }[input.situation.scoreState], scoreAgainst: { "behind-2-plus": 2, "behind-1": 2, tied: 1, ahead: 1 }[input.situation.scoreState], runnerOnFirst: true },
+      baseState: { inning: 7, outs: baseState.outs, scoreFor: { "behind-2-plus": 0, "behind-1": 1, tied: 1, ahead: 2 }[input.situation.scoreState], scoreAgainst: { "behind-2-plus": 2, "behind-1": 2, tied: 1, ahead: 1 }[input.situation.scoreState], runners: utils.clone(baseState.runners) },
       decision,
       execution,
       battedBall,
@@ -329,6 +453,8 @@ var BaseballOffensePrototype = ((utils) => {
 
   return utils.deepFreeze({
     APPROACH_IDS,
+    BASE_STATE_IDS,
+    getSupportedBaseStates: () => BASE_STATE_IDS,
     resolveAtBat,
     evaluateDecision,
     resolveExecution,

@@ -151,12 +151,12 @@ test("高中春季打擊只標記 readiness-only", () => {
   assert.strictEqual(integration.getIntegrationEvent("high_school_year_two_spring_game").mode, "readiness-only");
 });
 
-test("高中二壘有人與 Offensive Core base state 不相容", () => {
+test("高中二壘有人已與 Offensive Core base state 相容但仍維持 readiness-only", () => {
   assert.deepStrictEqual(integration.evaluateOffensiveEventReadiness("high_school_year_two_spring_game"), {
-    compatible: false,
-    reason: "runner-state-unsupported",
+    compatible: true,
+    reason: "compatible-base-state",
     requiredBaseState: "one-out-runner-on-second",
-    currentCoreBaseState: "one-out-runner-on-first"
+    supportedBaseStates: ["one-out-runner-on-first", "one-out-runner-on-second"]
   });
 });
 
