@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gameplay Sprint 5.1 Prototype</title>
+  <link rel="stylesheet" href="gameplay-prototype.css">
+</head>
+<body>
+  <main class="prototype-shell">
+    <header class="prototype-header">
+      <p class="eyebrow">Gameplay Sprint 5.1</p>
+      <h1>Variable Baseball Situation Prototype</h1>
+      <p>此頁為隔離式開發 Prototype，不讀取、不修改正式玩家與存檔。</p>
+      <div class="seed-row">
+        <label for="prototypeSeed">Seed</label>
+        <input id="prototypeSeed" type="number" value="5101" step="1">
+        <button id="resetPrototype" type="button">Reset</button>
+      </div>
+    </header>
+
+    <nav class="prototype-tabs" aria-label="Prototype 類型">
+      <button class="tab-button selected" type="button" data-tab="offensePanel">Offensive Prototype A</button>
+      <button class="tab-button" type="button" data-tab="defensePanel">Defensive Prototype B</button>
+    </nav>
+
+    <section id="offensePanel" class="prototype-panel active">
+      <div class="panel-heading">
+        <div><p class="eyebrow">第 7 局・一出局・一壘有人</p><h2>完整打席策略</h2></div>
+        <p>局勢決定選擇品質；能力與有限波動決定執行。</p>
+      </div>
+      <div class="control-grid" id="offenseControls">
+        <label>比分<select id="offScore"><option value="behind-2-plus">落後兩分以上</option><option value="behind-1" selected>落後一分</option><option value="tied">平手</option><option value="ahead">領先</option></select></label>
+        <label>一壘跑者<select id="offRunner"><option value="slow">慢</option><option value="average">平均</option><option value="fast" selected>快</option></select></label>
+        <label>投手傾向<select id="offPitcher"><option value="inside">內角</option><option value="outside" selected>外角</option><option value="breaking">變化球</option><option value="fatigued">疲勞</option></select></label>
+        <label>來球難度<select id="offDifficulty"><option value="easy">容易</option><option value="normal" selected>普通</option><option value="difficult">困難</option></select></label>
+        <label>力量<select id="offPower"><option value="low">低</option><option value="average" selected>平均</option><option value="high">高</option><option value="elite">頂尖</option></select></label>
+        <label>打擊技巧<select id="offContact"><option value="low">低</option><option value="average">平均</option><option value="high" selected>高</option><option value="elite">頂尖</option></select></label>
+        <label>觸擊<select id="offBunt"><option value="low">低</option><option value="average" selected>平均</option><option value="high">高</option><option value="elite">頂尖</option></select></label>
+        <label>身體<select id="offBody"><option value="normal" selected>正常</option><option value="fatigued">疲勞</option><option value="minor-injury">輕傷</option></select></label>
+        <label>下一棒<select id="offNext"><option value="low">低可靠</option><option value="medium">中等</option><option value="high" selected>高可靠</option></select></label>
+        <label>對方守備<select id="offDefense"><option value="weak">弱</option><option value="average" selected>平均</option><option value="strong">強</option></select></label>
+      </div>
+      <div class="choice-row" aria-label="打擊策略">
+        <button type="button" data-offense-approach="pull">拉打</button>
+        <button type="button" class="selected" data-offense-approach="opposite">推打</button>
+        <button type="button" data-offense-approach="shorten">握短棒</button>
+        <button type="button" data-offense-approach="sac-bunt">犧牲觸擊</button>
+      </div>
+      <div class="action-row"><button id="runOffenseOnce" class="primary" type="button">Run Once</button><button id="runOffenseTen" type="button">Run 10</button></div>
+      <div id="offenseResult" class="result-grid" aria-live="polite"></div>
+      <div id="offenseSummary" class="summary-panel"></div>
+      <details><summary>Debug Trace</summary><pre id="offenseTrace">尚未執行</pre></details>
+    </section>
+
+    <section id="defensePanel" class="prototype-panel">
+      <div class="panel-heading">
+        <div><p class="eyebrow">第 7 局・一出局・一壘有人・游擊手</p><h2>兩階段內野守備</h2></div>
+        <p>先控制來球，再根據剩餘時間選擇出局方式。</p>
+      </div>
+      <section class="stage-card">
+        <h3>Stage A — Ball Acquisition</h3>
+        <div class="control-grid">
+          <label>來球類型<select id="defBallType"><option value="routine">正面球</option><option value="slow-roller" selected>慢滾地</option><option value="deep-grounder">深遠滾地</option><option value="range-ball">橫向範圍球</option></select></label>
+          <label>難度<select id="defDifficulty"><option value="easy">容易</option><option value="normal" selected>普通</option><option value="difficult">困難</option></select></label>
+          <label>打者速度<select id="defBatter"><option value="slow">慢</option><option value="average">平均</option><option value="fast" selected>快</option></select></label>
+          <label>守備<select id="defFielding"><option value="low">低</option><option value="average">平均</option><option value="high" selected>高</option><option value="elite">頂尖</option></select></label>
+          <label>身體<select id="defBody"><option value="normal" selected>正常</option><option value="fatigued">疲勞</option><option value="minor-injury">輕傷</option></select></label>
+        </div>
+        <div class="choice-row" aria-label="接球策略">
+          <button type="button" data-fielding-approach="secure">穩定處理</button>
+          <button type="button" class="selected" data-fielding-approach="attack">主動前壓</button>
+          <button type="button" data-fielding-approach="dive">延伸／撲接</button>
+        </div>
+        <div class="action-row"><button id="runFielding" class="primary" type="button">執行接球</button></div>
+        <div id="fieldingResult" class="result-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="throwStage" class="stage-card disabled-stage" aria-disabled="true">
+        <h3>Stage B — Throw Decision</h3>
+        <p id="controlCarry">先完成 Stage A；Control Quality 不可由玩家任意改寫。</p>
+        <div class="control-grid">
+          <label>比分<select id="defScore"><option value="behind-1">落後一分</option><option value="tied" selected>平手</option><option value="ahead-1">領先一分</option></select></label>
+          <label>前位跑者<select id="defRunner"><option value="slow">慢</option><option value="average">平均</option><option value="fast" selected>快</option></select></label>
+          <label>打者速度（由 Stage A 帶入）<select id="defThrowBatter" disabled><option value="slow">慢</option><option value="average">平均</option><option value="fast" selected>快</option></select></label>
+          <label>傳球<select id="defThrowing"><option value="low">低</option><option value="average">平均</option><option value="high" selected>高</option><option value="elite">頂尖</option></select></label>
+        </div>
+        <div class="choice-row" aria-label="傳球策略">
+          <button type="button" data-throw-decision="secure-first">傳一壘</button>
+          <button type="button" class="selected" data-throw-decision="force-lead-runner">封殺二壘跑者</button>
+          <button type="button" data-throw-decision="turn-two">挑戰雙殺</button>
+        </div>
+        <div class="action-row"><button id="runDefenseOnce" class="primary" type="button">Run Once</button><button id="runDefenseTen" type="button">Run 10</button></div>
+        <div id="defenseResult" class="result-grid" aria-live="polite"></div>
+        <div id="defenseSummary" class="summary-panel"></div>
+      </section>
+      <details><summary>Debug Trace</summary><pre id="defenseTrace">尚未執行</pre></details>
+    </section>
+  </main>
+
+  <script src="baseball-gameplay-prototype-utils.js"></script>
+  <script src="baseball-offense-prototype.js"></script>
+  <script src="baseball-defense-prototype.js"></script>
+  <script src="baseball-gameplay-prototype-sandbox.js"></script>
+</body>
+</html>
