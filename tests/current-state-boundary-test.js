@@ -399,7 +399,7 @@ function collectGoldenState(targetContext) {
 
 function runGoldenFlow(legacy) {
   const golden = makeGameContext({ legacy });
-  evaluate(golden.context, "selectedOrigin = 'understand'; selectedIdealSelf = '全能型'; createPlayer()");
+  evaluate(golden.context, "selectedOrigin = 'understand'; selectedIdealSelf = '全能型'; pendingGenesisRoll=rollCharacterGenesis(()=>0); pendingGenesisAllocation={ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0}; createPlayer()");
   const afterFirstEvent = collectGoldenState(golden.context);
   const firstEventId = evaluate(golden.context, "getCurrentEventId()");
   evaluate(golden.context, `choose(${JSON.stringify(firstEventId)}, 0)`);
@@ -429,7 +429,9 @@ assert(
 const persistence = makeGameContext();
 evaluate(persistence.context, `
   selectedOrigin = "belong";
-  selectedIdealSelf = "團隊核心型";
+  selectedIdealSelf = "棒球理解型";
+  pendingGenesisRoll=rollCharacterGenesis(()=>0);
+  pendingGenesisAllocation={ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0};
   createPlayer();
   CurrentStateBoundary.applyStateChangeRequest({
     source: "save-round-trip",

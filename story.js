@@ -1066,7 +1066,8 @@ const highSchoolEvents = {
     title: "高中球場比記憶中更大",
     text() {
       const callbackEcho = hasCallback("takahashi_ten_ball", true) ? "高橋當年的十球挑戰仍留在你衡量競爭的方式裡。" : hasCallback("azhe_hidden_grounder", true) ? "你偶爾仍會想起阿哲反覆重做、卻沒被教練看見的那顆球。" : "";
-      const past = `你帶著「${player.juniorSeasonResult || player.juniorResult || "尚未定型"}」的國中評語，以及${player.secondaryPosition ? `${player.seasonPosition}／${player.secondaryPosition}` : player.seasonPosition || "未定"}的守位履歷報到。${callbackEcho}`;
+      const genesis = player.characterGenesis?.shape ? `創角時的能力形狀「${player.characterGenesis.shape}」` : "舊存檔承接的成長軌跡";
+      const past = `你帶著「${player.juniorSeasonResult || player.juniorResult || "尚未定型"}」的國中評語、${player.secondaryPosition ? `${player.seasonPosition}／${player.secondaryPosition}` : player.seasonPosition || "未定"}的守位履歷，以及${genesis}報到。你是${formatHandedness(player.bats, player.throws)}，理想中的自己仍是「${player.idealSelf || "尚未形成"}」。${callbackEcho}`;
       if (player.highSchoolRoute.startsWith("強豪")) return `${past}\n\n報到第一天，休息區坐著十幾名和你守相同位置的球員。有人國中就是全國大賽主力，卻連一軍練習組都排不進去。你第一次明白，曝光最高的地方也可能最看不見你。`;
       if (player.highSchoolRoute.startsWith("普通")) return `${past}\n\n教練在報到表上圈起你的名字：『我們需要你盡快進入輪替。』這裡沒有滿牆獎盃，卻把真正的比賽責任直接放到你面前。`;
       return `${past}\n\n放學鐘響後，你得穿過半個校園才能趕到球場。隊友已開始熱身，而書包裡還放著明天要交的報告。你保留了多條道路，也必須每天重新安排它們。`;
@@ -1078,15 +1079,16 @@ const highSchoolEvents = {
     ]
   },
   high_school_load: {
-    title: "第一次高強度訓練週",
+    title: "現任教練重新排你的守位",
     text() {
-      const warning = player.body.injuryRisk >= 5 || hasFlag("continued_hiding_pain") ? "第三天，你熟悉的肩膀緊繃又回來了。這次訓練量比國中更高，身體不再允許你假裝過去沒有發生。" : "到第三天，腿像灌了水泥，揮臂速度也開始下降。高中訓練第一次逼你思考恢復，而不是只想多做幾次。";
-      return `清晨體能、放學守備、晚間自主訓練連續排在一起。\n\n${warning}`;
+      const history = player.highSchoolPositionPreference || player.primaryPosition || "尚未固定";
+      const ideal = player.idealSelf || "尚未形成";
+      return `現任教練把國中履歷、三組守備測試、打跑能力和隊內缺口放在同一張表上。你的過往主守是${history}，理想球員是「${ideal}」。\n\n他說：『守位不是你報到時填的答案。告訴我你希望保留什麼，再讓能力與球隊需要一起決定。』`;
     },
     choices: [
-      C("完整回報身體狀況，調整訓練量", { responsibility: 2, discipline: 1 }, ["managed_high_school_load"], "你接受短期落後訓練進度，換取身體能繼續適應。", { bodyEffects: { fatigue: -2, injuryRisk: -2, pain: -1 }, relationshipEffects: { coachTrust: 1 } }),
-      C("照表完成，但取消自主加練", { observe: 1, resilience: 1 }, ["cut_high_school_extra_work"], "你完成團隊要求，也第一次主動刪除不必要的額外負荷。", { bodyEffects: { fatigue: -1 }, academicEffects: { burnout: -1 } }),
-      C("全部做完，不能第一週就落後", { confidence: 1, pressure: 2 }, ["overtrained_high_school"], "你撐過第一週，名字沒有掉出訓練組，身體風險卻繼續累積。", { bodyEffects: { fatigue: 3, injuryRisk: 2, pain: 1 }, highSchoolEffects: { exposure: 1 } })
+      C("請教練先把國中主守當作第一參考", { confidence: 1, responsibility: 1 }, ["hs_position_hold_history", "managed_high_school_load"], "你清楚說出想延續的守位，但接受它仍要通過高中測試。", { relationshipEffects: { coachTrust: 1 } }),
+      C("不先指定位置，讓能力測試主導評估", { observe: 2, resilience: 1 }, ["hs_position_open_evaluation", "cut_high_school_extra_work"], "你暫時放下守位名稱，要求教練說明每個判斷依據。", { skillEffects: { baseballIQ: 1 } }),
+      C("願意回應球隊缺口，但只保留一個第二守位", { responsibility: 2, discipline: 1 }, ["hs_position_team_need", "managed_high_school_load"], "你接受球隊需求會改變位置，同時要求訓練範圍不要失控。", { relationshipEffects: { coachTrust: 1 }, bodyEffects: { fatigue: -1 } })
     ]
   },
   high_school_life: {
@@ -1103,62 +1105,38 @@ const highSchoolEvents = {
     ]
   },
   high_school_role: {
-    title: "你在高中球隊的第一個角色",
+    title: "現任教練公布暫定角色",
     text() {
-      const route = player.highSchoolRoute;
-      if (route.startsWith("強豪")) return "一軍名單暫時沒有你的名字。教練問你是否願意先成為守備與跑壘替補，等待少量但真實的機會。";
-      if (route.startsWith("普通")) return `教練準備讓你以${player.seasonPosition}進入先發輪替，但要求你同時支援另一個位置。`;
-      return "教練願意讓你參與週末比賽，但平日訓練時數不足，你必須選擇最值得保留的能力。";
+      const evaluation = player.highSchoolCoachEvaluation || {};
+      return `守位測試結束後，你被排在${player.primaryPosition || "未定守位"}${player.secondaryPosition ? `／${player.secondaryPosition}` : ""}組。\n\n教練的判斷：${evaluation.context || evaluation.rationale || `你原本憧憬「${player.idealSelf || "未定"}」，教練目前先看見「${evaluation.coachIdentity || "仍在觀察"}」。`}\n\n這是高一眼前任務的暫定判斷，不是永久位置。教練不讓你自己挑先發或板凳，只讓你選擇接下來要用哪一項準備回應評估。角色會由守位適配、能力、信任、健康與準備共同決定。`;
     },
     choices: [
-      C("接受工具人、代跑與替補角色", { responsibility: 2, resilience: 1 }, ["accepted_high_school_utility_role"], "你先爭取被帶進比賽，而不是堅持理想位置。", { skillEffects: { baseRunning: 2, baseballIQ: 1 }, relationshipEffects: { coachTrust: 2 } }),
-      C("集中原守位，等待完整競爭機會", { confidence: 2, pressure: 1 }, ["focused_high_school_position"], "你接受機會更少，也希望用專精建立不可替代性。", { positionSkillEffects: { "內野手": { catching: 1, reaction: 2 }, "外野手": { range: 2, armStrength: 1 }, "捕手": { blocking: 1, gameCalling: 2 }, "投手": { control: 2, pitchStamina: 1 } }, highSchoolEffects: { exposure: 1 } }),
-      C("優先發展打擊，增加上場入口", { instinct: 1, discipline: 1 }, ["developed_high_school_bat"], "你開始把打擊視為跨過守位競爭的另一扇門。", { skillEffects: { batting: 3 }, bodyEffects: { fatigue: 1 } })
+      C("把主守位的基本動作做到可重複", { discipline: 2, confidence: 1 }, ["hs_role_strengthen_primary", "focused_high_school_position"], "你選擇先讓一項守位工作變得可預期。", { positionSkillEffects: { "內野手": { catching: 1, reaction: 1 }, "外野手": { range: 1, catching: 1 }, "捕手": { blocking: 1, gameCalling: 1 }, "投手": { control: 1, pitchStamina: 1 } }, relationshipEffects: { coachTrust: 1 } }),
+      C("把第二守位、跑壘與戰術理解串成一套", { responsibility: 2, observe: 1 }, ["hs_role_expand_utility", "accepted_high_school_utility_role"], "你練的是比賽中可被調度的組合，不是替自己挑選名單名稱。", { skillEffects: { baseRunning: 1, baseballIQ: 1 }, relationshipEffects: { coachTrust: 1 } }),
+      C("用打擊增加同一個正式比賽的入口", { instinct: 1, discipline: 1 }, ["hs_role_bat_entry", "developed_high_school_bat"], "你把打擊當作附加入口，角色仍由現任教練依完整證據判定。", { skillEffects: { batting: 2 }, bodyEffects: { fatigue: 1 } })
     ]
   },
   high_school_showcase: {
-    title: "球探第一次坐在看台上",
+    title: "秋季交流賽：第七局的同一個打席",
     text() {
-      const contextResult = CoachResponseFlow.createCoachResponseContext(
-        "high_school_showcase",
-        null
-      );
-      if (!contextResult.ok) throw new Error(contextResult.error);
-      const responseResult = CoachResponseFlow.resolveCoachResponse(
-        contextResult.context
-      );
-      if (!responseResult.ok) throw new Error(responseResult.error);
-      const narrativeResult = CoachResponseFlow.applyCoachResponse(
-        responseResult
-      );
-      if (!narrativeResult.ok) throw new Error(narrativeResult.error);
-
-      const chance = narrativeResult.category === "early-opportunity" ? "教練在第五局讓你上場，並在名單旁寫下你的兩個守位。" : "你直到第七局才被叫去熱身。看台上的球探已收起一部分資料，但還沒有離開。";
-      return `秋季交流賽，看台後方坐著一名拿測速槍與筆記本的人。\n\n${chance}\n\n這可能只是普通觀察，也可能是你第一次被棒球市場看見。`;
+      const match = player.highSchoolMatch || {};
+      return `比賽編號：${match.id || "待建立"}\n對手：${match.opponent || "待確認"}\n${match.inning || 7}局${match.half || "下"}，${match.outs ?? 1}出局，比分 ${match.scores?.home ?? 2}：${match.scores?.away ?? 2}，二壘有人。\n\n角色：${player.highSchoolTeamRole || "待確認"}\n守位：${match.position || player.primaryPosition || "未定"}\n任務：${match.assignment || "等待現任教練指派"}\n\n無論你是先發、輪替或發展名單，這次都在同一場正式交流賽裡。能力會改變執行結果，不會取消你做決定的資格。`;
     },
     choices: [
-      C("完成球隊任務，不改變平常打法", { discipline: 1, resilience: 1 }, ["showcase_team_task"], "你沒有為球探改變處理方式，留下穩定但不突出的紀錄。", { matchEffects: { performance: 2 }, highSchoolEffects: { exposure: 1, scoutEvaluation: 2 } }),
-      C("主動展現守位最醒目的工具", { confidence: 2, pressure: 2 }, ["showcase_tools"], "你留下該守位最容易被看見的一次亮點，也出現一次過於急躁的處理。", { positionSkillEffects: { "內野手": { throwing: 1, reaction: 1 }, "外野手": { armStrength: 2, range: 1 }, "捕手": { throwing: 1, blocking: 1 }, "投手": { armStrength: 2, control: 1 } }, matchEffects: { performance: 2, errors: 1 }, highSchoolEffects: { exposure: 2, scoutEvaluation: 2 }, bodyEffects: { fatigue: 1 } }),
-      C("用站位與指揮展現理解力", { observe: 2, responsibility: 1 }, ["showcase_baseball_iq"], "球探未必記得你的速度，卻記下你在球出手前就讀懂局面。", { skillEffects: { baseballIQ: 1 }, positionSkillEffects: { "內野手": { reaction: 1 }, "外野手": { range: 1 }, "捕手": { gameCalling: 2 }, "投手": { control: 1 } }, highSchoolEffects: { exposure: 1, scoutEvaluation: 3 } })
+      C("搶第一顆可攻擊球，直接挑戰外野空檔", { confidence: 1, pressure: 1 }, [], "你選擇搶攻。", { matchDecision: "attack" }),
+      C("守住好球帶，讓對方投手先承擔壓力", { observe: 1, discipline: 1 }, [], "你選擇控制好球帶。", { matchDecision: "zone" }),
+      C("縮短揮棒，優先把二壘跑者推進", { responsibility: 1, ballSense: 1 }, [], "你選擇執行推進任務。", { matchDecision: "advance" })
     ]
   },
   high_school_scout_feedback: {
-    title: "球探沒有給你答案",
+    title: "高橋把同一場比賽變成高二問題",
     text() {
-      const contextResult = NarrativeConditionFlow.createNarrativeContext(
-        "high_school_scout_feedback"
-      );
-      if (!contextResult.ok) throw new Error(contextResult.error);
-      const responseResult = NarrativeConditionFlow.resolveNarrativeCondition(
-        contextResult.context
-      );
-      if (!responseResult.ok) throw new Error(responseResult.error);
-      const narrativeResult =
-        NarrativeConditionFlow.applyNarrativeCondition(responseResult);
-      if (!narrativeResult.ok) throw new Error(narrativeResult.error);
-
-      const evalText = narrativeResult.category === "recognized" ? "球探透過教練留下一句話：『現在不是明星，但有可使用的位置價值。』" : "球探的筆記沒有留下明確評語。教練只說，沒被否定不等於已經被看見。";
-      return `${evalText}\n\n你必須決定，下一年要用什麼方式提高自己的價值。`;
+      const rival = player.highSchoolRivalContext || {};
+      const match = player.highSchoolMatch || {};
+      const scout = match.completed
+        ? `球探留下比賽編號、角色與「${match.outcome || "已完成任務"}」的可追蹤紀錄。`
+        : "球探沒有下結論，只保留球隊提交的比賽名單。";
+      return `${scout}\n\n外部對手入口：${rival.entryType || "observed"}\n${rival.encounter || "你從比賽紀錄上重新看見高橋的名字。"}\n高橋不是隊內名單的權威，也不會替你取得機會；他提供的是外部同世代標準。\n\n交流賽結果：${match.outcome || "未留下結果"}\n高二壓力：${rival.yearTwoPressure || "下一次正式任務必須證明這項用途能否重複。"}`;
     },
     choices: [
       C("繼續增加多位置與戰術價值", { observe: 1, responsibility: 1 }, ["high_school_commit_utility"], "你接受自己可能不是球星，卻能成為球隊很難取代的人。", { skillEffects: { baseballIQ: 2 }, highSchoolEffects: { scoutEvaluation: 1 } }),
@@ -1700,21 +1678,31 @@ const pacingEvents = {
     ]
   },
   high_school_long_bench: {
-    title: "一個月沒有正式上場",
-    text: "練習狀況不差，名單卻連續四週沒有你的名字。你開始熟悉替別人撿頭盔、記球數和在第七局才熱身的節奏。",
+    title: "第一份高中實戰名單",
+    text() {
+      const role = player.highSchoolRoleContext || {};
+      if (role.code === "starter") return `你的名字出現在交流賽先發欄。這不是永久主力保證；現任教練要求你在${player.primaryPosition}完成前段守備，並保留第七局關鍵打席。`;
+      if (role.code === "rotation") return `你的名字被寫在輪替欄。現任教練指定你在同一場交流賽中段接手${player.primaryPosition}，第七局若輪到打序就必須完成打席。`;
+      return `你仍在發展名單，卻不是固定看完整場。現任教練把同一場交流賽的第七局代打與短局${player.primaryPosition || "守備"}任務交給你。`;
+    },
     choices: [
-      C("把板凳資訊整理成對手筆記", { observe: 2, responsibility: 1 }, ["built_bench_report"], "你讓沒有上場的時間也能產生球隊價值。", { skillEffects: { baseballIQ: 2 }, relationshipEffects: { coachTrust: 1 } }),
-      C("要求教練說明自己缺少什麼", { confidence: 2, pressure: 1 }, ["challenged_bench_feedback"], "答案不溫柔，但比猜測更有用。", { relationshipEffects: { coachTrust: 1 } }),
-      C("增加自主訓練，逼出明顯進步", { resilience: 2 }, ["trained_through_bench"], "你的能力增加，疲勞也在無人注意時累積。", { bodyEffects: { fatigue: 2, injuryRisk: 1 }, skillEffects: { batting: 1 } })
+      C("整理對手投手與守備站位，準備第七局局面", { observe: 2, responsibility: 1 }, ["built_bench_report"], "你把角色不同造成的等待時間，轉成同一場比賽可使用的情報。", { skillEffects: { baseballIQ: 1 }, relationshipEffects: { coachTrust: 1 } }),
+      C("和現任教練確認進場條件與下一棒任務", { confidence: 1, discipline: 1 }, ["challenged_bench_feedback"], "你確認的是實際進場條件，不是要求教練預先保證結果。", { relationshipEffects: { coachTrust: 1 } }),
+      C("完成短量打擊與守備熱身，不追加疲勞", { resilience: 1, responsibility: 1 }, ["trained_through_bench"], "你讓身體保持可用，沒有用過量加練換取心理安心。", { bodyEffects: { fatigue: -1 }, skillEffects: { batting: 1 } })
     ]
   },
   high_school_call_home: {
-    title: "寮裡熄燈後的一通電話",
-    text: "家人問你高中生活好不好。走廊有人經過，你下意識把聲音壓低。說『很好』最簡單，但也會讓真正的疲勞只留在自己身上。",
+    title: "賽後打給阿哲的一通電話",
+    text() {
+      const match = player.highSchoolMatch || {};
+      const relationship = player.impression.azhe || {};
+      const history = hasFlag("azhe_error_reworked") || hasFlag("azhe_hidden_error_seen") ? "你們都記得少棒時那顆反覆重做、卻沒有立刻被看見的滾地球。" : "你們已不在同一支隊伍，仍認得彼此說起失敗時會停頓多久。";
+      return `交流賽結束後，你在寮舍走廊打給阿哲，說明第七局、平手、二壘有人，以及自己做出的選擇。你只分享親自經歷的局面，沒有把球探內部評語當成已知事實。\n\n比賽結果：${match.outcome || "尚未留下"}。\n${history}\n你不知道這通電話會改變誰；只有之後的行動，能證明這段共同經驗是否真的被帶到了下一個球場。`;
+    },
     choices: [
-      C("說出最近沒有上場的失落", { confidence: 1, pressure: -1 }, ["admitted_high_school_struggle"], "你沒有讓家人只看見堅強版本。", { academicEffects: { burnout: -1 } }),
-      C("只報告訓練進度", { discipline: 1 }, ["reported_only_progress"], "你維持了讓人放心的形象，也繼續獨自承擔。"),
-      C("先問家裡最近怎麼樣", { responsibility: 2 }, ["checked_family_from_dorm"], "你想起支持你的人也有自己的生活。", { highSchoolEffects: { dormStress: -1 } })
+      C("把自己如何拆解那個打席完整告訴阿哲", { observe: 1, confidence: 1 }, ["admitted_high_school_struggle"], "你沒有只報告成敗，而是說明自己看見的局面與仍不會的部分。", { relationshipEffects: { teammateBond: 1 } }),
+      C("請阿哲拿兒時那顆滾地球和這次打席一起比較", { responsibility: 1, resilience: 1 }, ["reported_only_progress"], "你們用一段共享經驗檢查：角色是否真的能由一次結果決定。", { relationshipEffects: { teammateBond: 1 } }),
+      C("先問阿哲現在如何留在棒球裡，再談自己", { responsibility: 2 }, ["checked_family_from_dorm"], "這通電話不是單向求助；你也把阿哲的新生活當成正式答案。", { highSchoolEffects: { dormStress: -1 }, impressionEffects: { azhe: { trusts: 1 } } })
     ]
   },
   critical_public_attention: {
@@ -1925,7 +1913,7 @@ function getCurrentEventId() {
     return sequence[player.highSchoolYearTwoStep] || "high_school_year_two_result";
   }
   if (player.chapter === "青棒") {
-    const sequence = ["high_school_intro", "high_school_load", "high_school_life", "high_school_call_home", "high_school_role", "high_school_long_bench", "high_school_showcase", "high_school_scout_feedback"];
+    const sequence = ["high_school_intro", "high_school_load", "high_school_life", "high_school_role", "high_school_long_bench", "high_school_showcase", "high_school_call_home", "high_school_scout_feedback"];
     return sequence[player.highSchoolStep] || "high_school_result";
   }
   if (player.chapter === "青少棒階段小結") return "junior_season_result";

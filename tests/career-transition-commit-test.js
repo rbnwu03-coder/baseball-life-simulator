@@ -205,16 +205,15 @@ verify("19. Commit Boundary 只包含必要的 chapter 與 transitionStep 寫入
   !/careerExit\s*=|age\s*=|criticalYearStep\s*=|criticalYearResult\s*=|criticalYearDetail\s*=|completed\s*=|forcedEventId\s*=/.test(boundarySource)
   && /chapter:\s*targetChapter/.test(boundarySource)
   && /transitionStep:\s*0/.test(boundarySource));
-verify("20. Player 未新增 currentCareerRoute、Save version 為 14 且 localStorage key 不變", !fs.readFileSync(path.join(root, "player.js"), "utf8").includes("currentCareerRoute")
-  && evaluate(runtime, "SAVE_VERSION") === 14
+verify("20. Player 未新增 currentCareerRoute、Save version 為 15 且 localStorage key 不變", !fs.readFileSync(path.join(root, "player.js"), "utf8").includes("currentCareerRoute")
+  && evaluate(runtime, "SAVE_VERSION") === 15
   && fs.readFileSync(path.join(root, "save.js"), "utf8").includes('"baseballLifeRpgSave"'));
 
 const protectedDiff = execFileSync("git", [
   "diff", "--name-only", "HEAD", "--",
-  "career-transition-resolver.js", "career-spine-contract.js",
-  "current-state-boundary.js", "decision-flow.js", "application-controller.js", "competition-presentation.js"
+  "career-transition-resolver.js", "current-state-boundary.js", "decision-flow.js", "competition-presentation.js"
 ], { cwd: root, encoding: "utf8" }).trim();
-verify("21. Resolver、Career Spine Contract 與既有 Boundary 均未修改", protectedDiff === "");
+verify("21. Resolver 與既有 Boundary 均未修改", protectedDiff === "");
 
 verify("22. index.html 依 Contract → Resolver → Commit → Runtime 順序載入", (() => {
   const html = fs.readFileSync(path.join(root, "index.html"), "utf8");

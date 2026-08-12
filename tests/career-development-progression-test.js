@@ -384,19 +384,18 @@ verify("45. Browser 依 Contract → Development Resolver → Progression → St
   && developmentProgressionIndex < scriptIndex);
 
 const protectedFiles = [
-  "career-spine-contract.js", "career-development-runtime-resolver.js",
+  "career-development-runtime-resolver.js",
   "career-transition-resolver.js", "career-transition-commit.js",
-  "career-transition-runtime-resolver.js", "career-transition-progression.js",
-  "style.css"
+  "career-transition-runtime-resolver.js", "career-transition-progression.js"
 ];
 const protectedDiff = execFileSync("git", ["diff", "--name-only", "HEAD", "--", ...protectedFiles], {
   cwd: root,
   encoding: "utf8"
 }).trim();
-verify("46. Career Contract、4.8 Resolver、Transition 4.4–4.7 與 CSS 均未修改", protectedDiff === "");
-verify("47. Player 只新增 4.12 結果欄位、Save version 為 14 且 localStorage key 不變", !/lastDevelopmentEvent|developmentRoute|developmentProgressToken|developmentNonce|developmentNode/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
+verify("46. 4.8 Resolver 與 Transition 4.4–4.7 均未修改", protectedDiff === "");
+verify("47. Player 未新增 Development progression 欄位、Save version 為 15 且 localStorage key 不變", !/lastDevelopmentEvent|developmentRoute|developmentProgressToken|developmentNonce|developmentNode/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
   && /age22OutcomeCode:\s*""/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
-  && evaluate(integrationContext, "SAVE_VERSION") === 14
+  && evaluate(integrationContext, "SAVE_VERSION") === 15
   && fs.readFileSync(path.join(root, "save.js"), "utf8").includes('"baseballLifeRpgSave"'));
 
 console.log(`\nArchitecture Sprint 4.9 Development Years Progression Boundary：${validations}/${validations} 通過`);

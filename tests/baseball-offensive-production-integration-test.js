@@ -406,10 +406,10 @@ test("正式 UI 不顯示隱藏 Decision grade、roll 或 distribution", () => {
   });
 });
 
-test("Player Schema、SAVE_VERSION 與 SAVE_KEY 維持不變", () => {
+test("進攻暫存未污染 Player Schema，SAVE_VERSION 為 15 且 SAVE_KEY 未改變", () => {
   const playerSource = fs.readFileSync(path.join(root, "player.js"), "utf8");
   const saveSource = fs.readFileSync(path.join(root, "save.js"), "utf8");
-  assert.ok(/const\s+SAVE_VERSION\s*=\s*14\s*;/.test(playerSource));
+  assert.ok(/const\s+SAVE_VERSION\s*=\s*15\s*;/.test(playerSource));
   assert.ok(/const\s+SAVE_KEY\s*=\s*["']baseballLifeRpgSave["']\s*;/.test(saveSource));
   assert.ok(!/pendingAtBat\s*:|currentApproach\s*:|offensiveDecisionQuality\s*:/.test(playerSource));
 });

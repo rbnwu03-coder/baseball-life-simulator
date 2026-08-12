@@ -30,7 +30,7 @@ verify("Prototype core 不存取正式全域 Player", !/window\.player|globalThi
 verify("Prototype core 不依賴 Story、Save、NPC、Coach、Relationship 或 Time", !/Story|saveGame|loadGame|NPC|Coach|Relationship|TimeBoundary|ApplicationController/.test(coreSource));
 verify("Prototype core 不自行呼叫非決定性亂數或時間", !/Math\.random|Date\.now|performance\.now/.test(coreSource));
 verify("Prototype core 可由 Node 獨立載入", coreFiles.every(file => require(path.join(root, file))));
-verify("SAVE_VERSION 維持 14", /const\s+SAVE_VERSION\s*=\s*14\s*;/.test(read("player.js")));
+verify("SAVE_VERSION 已升級為 15", /const\s+SAVE_VERSION\s*=\s*15\s*;/.test(read("player.js")));
 verify("SAVE_KEY 維持 baseballLifeRpgSave", /const\s+SAVE_KEY\s*=\s*["']baseballLifeRpgSave["']\s*;/.test(read("save.js")));
 verify("正式 Player Schema 未加入 transient gameplay state", !/decisionQuality\s*:|executionQuality\s*:|currentAtBatApproach\s*:|fieldingApproach\s*:|throwDecision\s*:/.test(read("player.js")));
 verify("Sandbox RNG 僅在獨立 UI 記憶體中運作", /function\s+nextRandom/.test(read("baseball-gameplay-prototype-sandbox.js")) && !/localStorage|sessionStorage|indexedDB/.test(read("baseball-gameplay-prototype-sandbox.js")));

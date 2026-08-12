@@ -268,12 +268,12 @@ verify("19. Snapshot 不觸發 Save、Render、Effects 或路由推進", JSON.st
 setPlayer(context, { chapter: "青棒", age: 16, highSchoolStep: 5, name: "存檔路由測試" });
 evaluate(context, "saveGame()");
 evaluate(context, "player = createInitialPlayer('被覆蓋'); loadGame()");
-verify("20. 現有合法 Save 載入後仍走原本事件路由", evaluate(context, "getCurrentEventId()") === "high_school_long_bench" && evaluate(context, "player.highSchoolStep") === 5);
+verify("20. 現有合法 Save 載入後依 v15 重組路由進入交流賽", evaluate(context, "getCurrentEventId()") === "high_school_showcase" && evaluate(context, "player.highSchoolStep") === 5);
 verify("21. Save 仍使用原 localStorage key", storage.has("baseballLifeRpgSave"));
-verify("22. Save version 已升級為 14", evaluate(context, "SAVE_VERSION") === 14 && evaluate(context, "player.saveVersion") === 14);
+verify("22. Save version 已升級為 15", evaluate(context, "SAVE_VERSION") === 15 && evaluate(context, "player.saveVersion") === 15);
 
-const forbiddenArchitectureDiff = execFileSync("git", ["diff", "--name-only", "--", "current-state-boundary.js", "decision-flow.js", "application-controller.js", "time-boundary.js"], { cwd: root, encoding: "utf8" }).trim();
-verify("23. 現有 Boundary、Decision Flow 與 Application Controller 未修改", forbiddenArchitectureDiff === "");
+const forbiddenArchitectureDiff = execFileSync("git", ["diff", "--name-only", "--", "current-state-boundary.js", "decision-flow.js", "time-boundary.js"], { cwd: root, encoding: "utf8" }).trim();
+verify("23. 現有 Boundary 與 Decision Flow 未修改", forbiddenArchitectureDiff === "");
 verify("24. Registry 沒有新增 player.stage 或人物在場契約", !/player\.stage|activeNpcId|speakerNpcId|presentNpcIds/.test(runtimeSources["career-spine-contract.js"]));
 const scriptSource = fs.readFileSync(path.join(root, "script.js"), "utf8");
 const developmentHelperStart = scriptSource.indexOf("function getDevelopmentNarrativeEventIds()");

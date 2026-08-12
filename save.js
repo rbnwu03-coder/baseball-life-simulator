@@ -13,6 +13,30 @@ function normalizeSave(saved) {
   const sourceSaveVersion = saved.saveVersion;
   const fresh = createInitialPlayer(saved.name || "");
   Object.assign(fresh, saved);
+  const savedPrimaryPosition = saved.primaryPosition !== undefined ? saved.primaryPosition : saved.seasonPosition;
+  const savedSecondaryPositions = Array.isArray(saved.secondaryPositions)
+    ? saved.secondaryPositions
+    : saved.secondaryPosition ? [saved.secondaryPosition] : [];
+  applyCanonicalPositionProfile(fresh, savedPrimaryPosition || "", savedSecondaryPositions);
+  fresh.bats = PlayerIdentityOptions.bats.includes(saved.bats) ? saved.bats : "R";
+  fresh.throws = PlayerIdentityOptions.throws.includes(saved.throws) ? saved.throws : "R";
+  const legacyIdealSelfMap = {
+    "技術鑽研型": "技巧型",
+    "直覺天賦型": "全能型",
+    "關鍵時刻型": "強打型",
+    "團隊核心型": "棒球理解型"
+  };
+  if (sourceSaveVersion < 15 && legacyIdealSelfMap[fresh.idealSelf]) fresh.idealSelf = legacyIdealSelfMap[fresh.idealSelf];
+  const defaultGenesis = createInitialPlayer().characterGenesis;
+  fresh.characterGenesis = Object.assign({}, defaultGenesis, saved.characterGenesis || {});
+  fresh.characterGenesis.baseRoll = Object.assign({}, defaultGenesis.baseRoll, saved.characterGenesis?.baseRoll || {});
+  fresh.characterGenesis.allocation = Object.assign({}, defaultGenesis.allocation, saved.characterGenesis?.allocation || {});
+  if (sourceSaveVersion < 15 && fresh.name && !saved.characterGenesis) {
+    fresh.characterGenesis.completed = true;
+    fresh.characterGenesis.shape = "舊存檔沿用既有成長";
+    fresh.characterGenesis.archetype = fresh.idealSelf || "全能型";
+    fresh.characterGenesis.initialAspiration = fresh.origin || PlayerIdentityOptions.origins[0];
+  }
   if (saved.highSchoolYearTwoStep === undefined) fresh.highSchoolYearTwoStep = 0;
   if (saved.highSchoolYearTwoResult === undefined) fresh.highSchoolYearTwoResult = "";
   if (saved.highSchoolYearTwoDetail === undefined) fresh.highSchoolYearTwoDetail = "";
@@ -50,6 +74,40 @@ function normalizeSave(saved) {
   fresh.juniorSchoolFit.reasons = Array.isArray(saved.juniorSchoolFit?.reasons) ? saved.juniorSchoolFit.reasons : [];
   fresh.highSchoolValueAssessment = Object.assign({}, createInitialPlayer().highSchoolValueAssessment, saved.highSchoolValueAssessment || {});
   fresh.highSchoolValueAssessment.reasons = Array.isArray(saved.highSchoolValueAssessment?.reasons) ? saved.highSchoolValueAssessment.reasons : [];
+  const highSchoolDefaults = createInitialPlayer();
+  fresh.highSchoolCoachEvaluation = Object.assign({}, highSchoolDefaults.highSchoolCoachEvaluation, saved.highSchoolCoachEvaluation || {});
+  fresh.highSchoolCoachEvaluation.secondaryPositions = Array.isArray(saved.highSchoolCoachEvaluation?.secondaryPositions) ? saved.highSchoolCoachEvaluation.secondaryPositions.slice(0, 1) : [];
+  fresh.highSchoolRoleContext = Object.assign({}, highSchoolDefaults.highSchoolRoleContext, saved.highSchoolRoleContext || {});
+  fresh.highSchoolRoleContext.evidence = Array.isArray(saved.highSchoolRoleContext?.evidence) ? saved.highSchoolRoleContext.evidence : [];
+  fresh.highSchoolMatch = Object.assign({}, highSchoolDefaults.highSchoolMatch, saved.highSchoolMatch || {});
+  fresh.highSchoolMatch.scores = Object.assign({}, highSchoolDefaults.highSchoolMatch.scores, saved.highSchoolMatch?.scores || {});
+  fresh.highSchoolMatch.runners = Array.isArray(saved.highSchoolMatch?.runners) ? saved.highSchoolMatch.runners : [];
+  fresh.highSchoolAzheEcho = Object.assign({}, highSchoolDefaults.highSchoolAzheEcho, saved.highSchoolAzheEcho || {});
+  fresh.highSchoolAzheEcho.evidence = Array.isArray(saved.highSchoolAzheEcho?.evidence) ? saved.highSchoolAzheEcho.evidence : [];
+  fresh.highSchoolRivalContext = Object.assign({}, highSchoolDefaults.highSchoolRivalContext, saved.highSchoolRivalContext || {});
+  const legacyCompletedYearOne = sourceSaveVersion < 15 && (
+    fresh.chapter === "青棒第一年小結" ||
+    fresh.chapter === "青棒第二年" ||
+    fresh.chapter === "青棒第二年小結" ||
+    fresh.chapter === "青棒關鍵年" ||
+    fresh.age > 18
+  );
+  if (legacyCompletedYearOne) {
+    fresh.highSchoolYearOneComplete = true;
+    if (fresh.chapter === "青棒第一年小結" && fresh.highSchoolStep < 8) fresh.highSchoolStep = 8;
+    if (!fresh.highSchoolMatch.completed) {
+      fresh.highSchoolMatch = Object.assign({}, fresh.highSchoolMatch, {
+        id: "legacy-high-school-year-one",
+        opponent: "舊存檔既有對手",
+        role: fresh.highSchoolRoleCode || "legacy",
+        position: fresh.primaryPosition,
+        assignment: "舊版高中第一年比賽紀錄",
+        outcome: fresh.highSchoolResult || "已完成",
+        consequence: fresh.highSchoolDetail || "由舊存檔承接",
+        completed: true
+      });
+    }
+  }
   fresh.careerValue = Object.assign({}, createInitialPlayer().careerValue, saved.careerValue || {});
   fresh.careerValue.history = Array.isArray(saved.careerValue?.history) ? saved.careerValue.history : [fresh.careerValue.current];
   fresh.roleIdentity = Object.assign({}, createInitialPlayer().roleIdentity, saved.roleIdentity || {});

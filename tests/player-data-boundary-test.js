@@ -97,7 +97,7 @@ function getGoldenSnapshot(context) {
 
 function runBoundaryCreation(origin, idealSelf, useController = false) {
   const { context } = makeGameContext();
-  evaluate(context, `selectedOrigin=${JSON.stringify(origin)}; selectedIdealSelf=${JSON.stringify(idealSelf)};`);
+  evaluate(context, `selectedOrigin=${JSON.stringify(origin)}; selectedIdealSelf=${JSON.stringify(idealSelf)}; pendingGenesisRoll=rollCharacterGenesis(()=>0); pendingGenesisAllocation={ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0};`);
   if (useController) {
     const result = evaluate(context, "ApplicationController.startGame()");
     assert(result.ok, `Controller 創角失敗：${origin} × ${idealSelf}`);
@@ -116,6 +116,7 @@ function runLegacyCreation(origin, idealSelf) {
       player.replayMemories = loadReplayMemories();
       player.origin = ${JSON.stringify(origin)};
       player.idealSelf = ${JSON.stringify(idealSelf)};
+      applyCharacterGenesis(player, { baseRoll:rollCharacterGenesis(()=>0).baseRoll, allocation:{ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0}, bats:"R", throws:"R" });
       const legacyOrigins = {
         prove: { effects: { confidence: 1, pressure: 1 }, personality: { brave: 1, ambitious: 1 }, flag: "origin_wants_to_be_seen", memory: "在真正碰到棒球以前，你先承認自己希望有一天能被看見。" },
         understand: { effects: { observe: 2 }, personality: { thoughtful: 2 }, flag: "origin_wants_to_understand", memory: "你最初靠近棒球，是因為想知道每個動作背後的原因。" },
@@ -151,7 +152,7 @@ assert(evaluate(playerOnly, "window.player === player"), "window.player legacy �
   assert(evaluate(playerOnly, `typeof PlayerDataBoundary.${method} === "function"`), `缺少 Boundary method：${method}`);
 });
 assert(evaluate(playerOnly, "PlayerIdentityOptions.origins.length === 3"), "Origin runtime 合法值不是 3 種");
-assert(evaluate(playerOnly, "PlayerIdentityOptions.idealSelf.length === 5"), "Ideal Self runtime 合法值不是 5 種");
+assert(evaluate(playerOnly, "PlayerIdentityOptions.idealSelf.length === 6"), "Ideal Self runtime 合法值不是 6 種");
 assert(evaluate(playerOnly, "Object.isFrozen(PlayerIdentityOptions) && Object.isFrozen(PlayerIdentityOptions.origins) && Object.isFrozen(PlayerIdentityOptions.idealSelf)"), "Identity 合法值來源不是唯讀");
 
 // Factory delegation and read isolation.
@@ -185,11 +186,11 @@ const beforeValidNonIdentity = evaluate(playerOnly, `(() => {
 const validResult = evaluate(playerOnly, `PlayerDataBoundary.initializeIdentity({
   name:"  原子測試球員  ",
   origin:"understand",
-  idealSelf:"技術鑽研型"
+  idealSelf:"技巧型"
 })`);
 assert(validResult.ok, "合法 Identity 初始化失敗");
-assert(JSON.stringify(validResult.identity) === JSON.stringify({ name: "原子測試球員", origin: "understand", idealSelf: "技術鑽研型" }), "合法 Identity 回傳值不正確");
-assert(evaluate(playerOnly, "player.name==='原子測試球員' && player.origin==='understand' && player.idealSelf==='技術鑽研型'"), "合法 Identity 未一次寫入三欄");
+assert(JSON.stringify(validResult.identity) === JSON.stringify({ name: "原子測試球員", origin: "understand", idealSelf: "技巧型" }), "合法 Identity 回傳值不正確");
+assert(evaluate(playerOnly, "player.name==='原子測試球員' && player.origin==='understand' && player.idealSelf==='技巧型'"), "合法 Identity 未一次寫入三欄");
 assert(evaluate(playerOnly, `(() => {
   const value=PlayerDataBoundary.getSnapshot();
   delete value.name; delete value.origin; delete value.idealSelf;
@@ -213,7 +214,7 @@ assert(evaluate(playerOnly, "PlayerDataBoundary.isIdentityInitialized()"), "合�
 // Restore wrapper compatibility and clone isolation.
 const restoreResult = evaluate(playerOnly, `PlayerDataBoundary.restoreSnapshot(Object.assign(
   PlayerDataBoundary.createInitialSnapshot(),
-  { name:"還原球員", origin:"belong", idealSelf:"團隊核心型", chapter:"少棒入門" }
+  { name:"還原球員", origin:"belong", idealSelf:"棒球理解型", chapter:"少棒入門" }
 ))`);
 assert(restoreResult.ok, "restoreSnapshot 無法還原合法 Snapshot");
 assert(evaluate(playerOnly, "player.name==='還原球員' && player.chapter==='少棒入門'"), "restoreSnapshot 沒有替換完整 Snapshot");
@@ -255,7 +256,7 @@ const boundarySource = playerSource.slice(boundaryStart, boundaryEnd);
 
 // Golden Character Creation Matrix: current Boundary flow vs pre-Phase-2 creation orchestration.
 const origins = ["prove", "understand", "belong"];
-const idealSelfValues = ["全能型", "技術鑽研型", "直覺天賦型", "關鍵時刻型", "團隊核心型"];
+const idealSelfValues = ["全能型", "強打型", "技巧型", "守備型", "速度型", "棒球理解型"];
 let matrixCases = 0;
 origins.forEach(origin => {
   idealSelfValues.forEach(idealSelf => {
@@ -266,7 +267,7 @@ origins.forEach(origin => {
     matrixCases += 1;
   });
 });
-assert(matrixCases === 15, "Golden Matrix 未完整測試 15 組");
+assert(matrixCases === 18, "Golden Matrix 未完整測試 18 組");
 
 // Controller equivalence remains unchanged.
 const directSnapshot = runBoundaryCreation("understand", "全能型", false);
@@ -276,12 +277,12 @@ assert(/startGame\(\)\s*\{\s*return invokeLegacy\("startGame", "createPlayer"\)/
 
 // Save/load and legacy fixture compatibility.
 const persistence = makeGameContext();
-evaluate(persistence.context, "selectedOrigin='belong'; selectedIdealSelf='團隊核心型'; createPlayer()");
+evaluate(persistence.context, "selectedOrigin='belong'; selectedIdealSelf='棒球理解型'; pendingGenesisRoll=rollCharacterGenesis(()=>0); pendingGenesisAllocation={ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0}; createPlayer()");
 const beforeSave = evaluate(persistence.context, "JSON.stringify(PlayerDataBoundary.getSnapshot())");
 evaluate(persistence.context, "saveGame(); player=createInitialPlayer('覆蓋'); loadGame()");
 const afterLoad = evaluate(persistence.context, "JSON.stringify(PlayerDataBoundary.getSnapshot())");
 assert(afterLoad === beforeSave, "Save → Load round-trip Snapshot 不一致");
-assert(evaluate(persistence.context, "player.name==='邊界測試球員' && player.origin==='belong' && player.idealSelf==='團隊核心型'"), "Save → Load 沒有保留 Identity");
+assert(evaluate(persistence.context, "player.name==='邊界測試球員' && player.origin==='belong' && player.idealSelf==='棒球理解型'"), "Save → Load 沒有保留 Identity");
 
 const legacyFixture = makeGameContext();
 evaluate(legacyFixture.context, "player=normalizeSave({name:'舊存檔球員'}); updateStatus()");

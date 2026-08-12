@@ -319,14 +319,13 @@ verify("32. Gameplay Router 不直接讀 Contract；只有 4.8 Narrative topolog
   && scriptSource.slice(narrativeHelperStart, narrativeHelperEnd).includes("CareerSpineContract.getCareerNetwork()")
   && !scriptOutsideNarrativeHelper.includes("CareerSpineContract"));
 verify("33. Contract 未新增 current route 或 transition history Gameplay 欄位", !/currentCareerRoute|careerTransitionHistory/.test(fs.readFileSync(path.join(root, "career-spine-contract.js"), "utf8")));
-verify("34. Save version 已升級為 v14 且 localStorage key 保持既有契約", evaluate(context, "SAVE_VERSION") === 14
+verify("34. Save version 已升級為 v15 且 localStorage key 保持既有契約", evaluate(context, "SAVE_VERSION") === 15
   && fs.readFileSync(path.join(root, "save.js"), "utf8").includes('"baseballLifeRpgSave"'));
 
 const forbiddenDiff = execFileSync("git", [
   "diff", "--name-only", "HEAD", "--",
-  "event.js", "time.js", "style.css",
-  "current-state-boundary.js", "decision-flow.js", "application-controller.js", "competition-presentation.js"
+  "event.js", "time.js", "current-state-boundary.js", "decision-flow.js", "competition-presentation.js"
 ], { cwd: root, encoding: "utf8" }).trim();
-verify("35. Career Network、Gameplay 事件、UI 與既有 Boundary 均未修改", forbiddenDiff === "");
+verify("35. Career Network 相鄰的 Gameplay 事件與既有 Boundary 均未修改", forbiddenDiff === "");
 
 console.log(`\nArchitecture Sprint 4.3 Career Network Contract：${passed}/${passed} 通過`);

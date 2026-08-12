@@ -60,7 +60,7 @@
   <section id="characterCreation">
     <p class="creation-kicker">十歲那年，你還不是球員</p>
     <h2>你希望棒球帶給你什麼？</h2>
-    <p>這不是職業或能力選擇，而是主角最初的願望。它會改變開場心境與初始性格。</p>
+    <p>先決定最初的願望與理想球員形象，再揭示一組總量相同、形狀不同的初始能力。這些是起點，不是位置或職涯鎖定。</p>
     <div class="origin-grid" role="group" aria-label="選擇主角最初的願望">
       <button type="button" class="origin-card selected" data-origin="prove" onclick="ApplicationController.selectOrigin('prove')">
         <strong>希望被看見</strong><span>你不確定自己有沒有天分，但不想永遠站在人群後面。</span><small>自信與競爭種子</small>
@@ -80,15 +80,41 @@
       <h3 id="idealSelfTitle">請選擇你最憧憬的球員形象</h3>
       <div class="ideal-self-options" role="group" aria-label="理想中的球員形象">
         <button type="button" class="ideal-self-button" data-ideal-self="全能型" aria-pressed="false" onclick="ApplicationController.selectIdealSelf('全能型')">全能型</button>
-        <button type="button" class="ideal-self-button" data-ideal-self="技術鑽研型" aria-pressed="false" onclick="ApplicationController.selectIdealSelf('技術鑽研型')">技術鑽研型</button>
-        <button type="button" class="ideal-self-button" data-ideal-self="直覺天賦型" aria-pressed="false" onclick="ApplicationController.selectIdealSelf('直覺天賦型')">直覺天賦型</button>
-        <button type="button" class="ideal-self-button" data-ideal-self="關鍵時刻型" aria-pressed="false" onclick="ApplicationController.selectIdealSelf('關鍵時刻型')">關鍵時刻型</button>
-        <button type="button" class="ideal-self-button" data-ideal-self="團隊核心型" aria-pressed="false" onclick="ApplicationController.selectIdealSelf('團隊核心型')">團隊核心型</button>
+        <button type="button" class="ideal-self-button" data-ideal-self="強打型" aria-pressed="false" onclick="ApplicationController.selectIdealSelf('強打型')">強打型</button>
+        <button type="button" class="ideal-self-button" data-ideal-self="技巧型" aria-pressed="false" onclick="ApplicationController.selectIdealSelf('技巧型')">技巧型</button>
+        <button type="button" class="ideal-self-button" data-ideal-self="守備型" aria-pressed="false" onclick="ApplicationController.selectIdealSelf('守備型')">守備型</button>
+        <button type="button" class="ideal-self-button" data-ideal-self="速度型" aria-pressed="false" onclick="ApplicationController.selectIdealSelf('速度型')">速度型</button>
+        <button type="button" class="ideal-self-button" data-ideal-self="棒球理解型" aria-pressed="false" onclick="ApplicationController.selectIdealSelf('棒球理解型')">棒球理解型</button>
       </div>
       <p id="idealSelfDescription" aria-live="polite">尚未選擇理想球員形象。</p>
     </div>
+    <section class="genesis-section" aria-labelledby="genesisTitle">
+      <h3 id="genesisTitle">初始能力形狀</h3>
+      <p>六項能力的擲骰總量固定為 12；揭示後不能重擲。你另有 3 點可配置，單項最多加 2 點。</p>
+      <button id="genesisRollButton" type="button" onclick="ApplicationController.generateGenesisProfile()">揭示這次人生的能力形狀</button>
+      <p id="genesisShape" aria-live="polite">尚未揭示。</p>
+      <div id="genesisAllocation" class="genesis-allocation" aria-label="初始能力配置"></div>
+      <p id="genesisBudget" aria-live="polite">剩餘配置點數：3</p>
+    </section>
+    <div class="handedness-row">
+      <label for="batsSelect">打擊慣用側
+        <select id="batsSelect"><option value="R">右打 R</option><option value="L">左打 L</option><option value="S">左右開弓 S</option></select>
+      </label>
+      <label for="throwsSelect">傳球慣用側
+        <select id="throwsSelect"><option value="R">右投 R</option><option value="L">左投 L</option></select>
+      </label>
+    </div>
     <p id="characterCreationFeedback" class="creation-feedback" aria-live="assertive"></p>
-    <button type="button" class="start-button" onclick="ApplicationController.startGame()">走進十歲的夏天</button>
+    <button id="careerStartButton" type="button" class="start-button" onclick="ApplicationController.startGame()">走進十歲的夏天</button>
+    <details class="development-entry">
+      <summary>開發／試玩入口</summary>
+      <p>只縮短人工驗收路徑；不會刪除或改寫正常的少棒、青少棒人生。</p>
+      <div class="development-entry__choices" role="group" aria-label="選擇試玩起點">
+        <button type="button" data-development-entry="full" aria-pressed="true" onclick="ApplicationController.selectDevelopmentEntry('full')">正常開始</button>
+        <button type="button" data-development-entry="highSchool" aria-pressed="false" onclick="ApplicationController.selectDevelopmentEntry('highSchool')">高中篇測試開始</button>
+      </div>
+      <p id="developmentEntryDescription" aria-live="polite">目前會從十歲的夏天開始完整人生。</p>
+    </details>
   </section>
 
   <main class="main-layout">

@@ -1,18 +1,127 @@
-const SAVE_VERSION = 14;
+const SAVE_VERSION = 15;
 
 // Phase 2：創角 Identity 的唯一 runtime 合法值來源。
 // UI 與創角流程可以呈現或使用這些值，但輸入是否合法由此契約判定。
 var PlayerIdentityOptions = Object.freeze({
   origins: Object.freeze(["prove", "understand", "belong"]),
-  idealSelf: Object.freeze(["全能型", "技術鑽研型", "直覺天賦型", "關鍵時刻型", "團隊核心型"])
+  idealSelf: Object.freeze(["全能型", "強打型", "技巧型", "守備型", "速度型", "棒球理解型"]),
+  bats: Object.freeze(["R", "L", "S"]),
+  throws: Object.freeze(["R", "L"])
 });
 
+const CHARACTER_GENESIS_ABILITY_KEYS = Object.freeze([
+  "ballSense", "observe", "fitness", "batting", "baseRunning", "baseballIQ"
+]);
+
+function rollCharacterGenesis(random = Math.random) {
+  const values = [3, 3, 2, 2, 1, 1];
+  for (let index = values.length - 1; index > 0; index -= 1) {
+    const sample = Number(random());
+    const safeSample = Number.isFinite(sample) ? Math.max(0, Math.min(0.999999, sample)) : 0;
+    const swapIndex = Math.floor(safeSample * (index + 1));
+    [values[index], values[swapIndex]] = [values[swapIndex], values[index]];
+  }
+  const baseRoll = Object.fromEntries(CHARACTER_GENESIS_ABILITY_KEYS.map((key, index) => [key, values[index]]));
+  return Object.freeze({
+    baseRoll: Object.freeze(baseRoll),
+    total: values.reduce((sum, value) => sum + value, 0),
+    shape: CHARACTER_GENESIS_ABILITY_KEYS.filter(key => baseRoll[key] === 3).join("＋")
+  });
+}
+
+function validateCharacterGenesisAllocation(allocation) {
+  const normalized = Object.fromEntries(CHARACTER_GENESIS_ABILITY_KEYS.map(key => [key, Math.max(0, Math.min(2, Number(allocation?.[key]) || 0))]));
+  const spent = Object.values(normalized).reduce((sum, value) => sum + value, 0);
+  return { ok: spent === 3, allocation: normalized, spent, budget: 3 };
+}
+
+function applyCharacterGenesis(target, genesisInput = {}) {
+  const rolled = genesisInput.baseRoll || {};
+  const rollValues = CHARACTER_GENESIS_ABILITY_KEYS.map(key => Number(rolled[key]));
+  const allocation = validateCharacterGenesisAllocation(genesisInput.allocation);
+  const validRoll = rollValues.every(value => Number.isInteger(value) && value >= 1 && value <= 3)
+    && rollValues.reduce((sum, value) => sum + value, 0) === 12;
+  if (!validRoll || !allocation.ok) return { ok: false, error: "初始能力形狀或配置點數不合法。" };
+  if (!PlayerIdentityOptions.bats.includes(genesisInput.bats) || !PlayerIdentityOptions.throws.includes(genesisInput.throws)) {
+    return { ok: false, error: "投打慣用側不合法。" };
+  }
+
+  CHARACTER_GENESIS_ABILITY_KEYS.forEach(key => {
+    const value = rolled[key] + allocation.allocation[key];
+    if (["batting", "baseRunning", "baseballIQ"].includes(key)) target.baseballSkills[key] = value;
+    else target[key] = value;
+  });
+  target.bats = genesisInput.bats;
+  target.throws = genesisInput.throws;
+  target.characterGenesis = {
+    completed: true,
+    baseRoll: { ...rolled },
+    allocation: { ...allocation.allocation },
+    allocationBudget: allocation.budget,
+    allocationSpent: allocation.spent,
+    total: 15,
+    shape: genesisInput.shape || CHARACTER_GENESIS_ABILITY_KEYS.filter(key => rolled[key] === 3).join("＋"),
+    archetype: target.idealSelf,
+    initialAspiration: target.origin
+  };
+  return { ok: true, genesis: target.characterGenesis };
+}
+
+function applyCanonicalPositionProfile(target, primaryPosition = "", secondaryPositions = []) {
+  target.primaryPosition = typeof primaryPosition === "string" ? primaryPosition : "";
+  target.secondaryPositions = Array.from(new Set((Array.isArray(secondaryPositions) ? secondaryPositions : [])
+    .filter(position => typeof position === "string" && position && position !== target.primaryPosition))).slice(0, 1);
+  return target;
+}
+
+function attachLegacyPositionCompatibility(target) {
+  if (Object.getOwnPropertyDescriptor(target, "seasonPosition")?.get) return target;
+  Object.defineProperties(target, {
+    seasonPosition: {
+      configurable: true,
+      enumerable: true,
+      get() { return this.primaryPosition || ""; },
+      set(value) { this.primaryPosition = typeof value === "string" ? value : ""; }
+    },
+    secondaryPosition: {
+      configurable: true,
+      enumerable: true,
+      get() { return this.secondaryPositions?.[0] || ""; },
+      set(value) { this.secondaryPositions = typeof value === "string" && value && value !== this.primaryPosition ? [value] : []; }
+    }
+  });
+  return target;
+}
+
+function restorePlayerSnapshotShape(snapshot = {}) {
+  const restored = createInitialPlayer(snapshot.name || "");
+  Object.assign(restored, snapshot);
+  const primary = snapshot.primaryPosition !== undefined ? snapshot.primaryPosition : snapshot.seasonPosition;
+  const secondaries = Array.isArray(snapshot.secondaryPositions)
+    ? snapshot.secondaryPositions
+    : snapshot.secondaryPosition ? [snapshot.secondaryPosition] : [];
+  return applyCanonicalPositionProfile(restored, primary || "", secondaries);
+}
+
 function createInitialPlayer(name = "") {
-  return {
+  const state = {
     saveVersion: SAVE_VERSION,
     name,
     origin: PlayerIdentityOptions.origins[0],
     idealSelf: "",
+    bats: "R",
+    throws: "R",
+    characterGenesis: {
+      completed: false,
+      baseRoll: Object.fromEntries(CHARACTER_GENESIS_ABILITY_KEYS.map(key => [key, 0])),
+      allocation: Object.fromEntries(CHARACTER_GENESIS_ABILITY_KEYS.map(key => [key, 0])),
+      allocationBudget: 3,
+      allocationSpent: 0,
+      total: 0,
+      shape: "",
+      archetype: "",
+      initialAspiration: ""
+    },
     age: 10,
     chapter: "十歲暑假",
     day: 1,
@@ -134,8 +243,8 @@ function createInitialPlayer(name = "") {
     seasonErrors: 0,
     seasonResult: "",
     seasonResultDetail: "",
-    seasonPosition: "",
-    secondaryPosition: "",
+    primaryPosition: "",
+    secondaryPositions: [],
     seasonRole: "",
     seasonCoachComment: "",
     careerPrimaryTool: "尚未形成",
@@ -163,6 +272,14 @@ function createInitialPlayer(name = "") {
     highSchoolRoute: "",
     highSchoolStep: 0,
     highSchoolTeamRole: "",
+    highSchoolRoleCode: "",
+    highSchoolPositionPreference: "",
+    highSchoolCoachEvaluation: { primaryPosition: "", secondaryPositions: [], rating: 0, rationale: "", idealAlignment: "", coachIdentity: "", context: "" },
+    highSchoolRoleContext: { code: "", label: "", evidence: [], opportunity: "", assignment: "" },
+    highSchoolMatch: { id: "", opponent: "", inning: 0, half: "", outs: 0, scores: { home: 0, away: 0 }, runners: [], role: "", position: "", assignment: "", decision: "", outcome: "", consequence: "", coachReaction: "", teamReaction: "", completed: false },
+    highSchoolAzheEcho: { variant: "", influenceDirection: "", evidence: [], cause: "", change: "", recall: "", summary: "", persistentFlag: "" },
+    highSchoolRivalContext: { rivalId: "takahashi", rivalName: "高橋", entryType: "", encounter: "", yearTwoPressure: "" },
+    highSchoolYearOneComplete: false,
     highSchoolResult: "",
     highSchoolDetail: "",
     highSchoolYearTwoStep: 0,
@@ -198,6 +315,7 @@ function createInitialPlayer(name = "") {
     completed: false,
     lastEventTitle: ""
   };
+  return attachLegacyPositionCompatibility(state);
 }
 
 // Player 仍是完整且唯一的相容 Snapshot；此 Boundary 只建立正式讀取入口，
@@ -270,7 +388,7 @@ var PlayerDataBoundary = (() => {
     }
 
     try {
-      player = deepClone(snapshot);
+      player = restorePlayerSnapshotShape(deepClone(snapshot));
       return { ok: true, snapshot: getSnapshot() };
     } catch (error) {
       return { ok: false, error: "Player Snapshot 無法還原。" };

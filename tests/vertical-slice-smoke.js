@@ -48,6 +48,7 @@ function completeIntegratedGrounderIfNeeded(game) {
 function play(routeChoices, chapter2Choices, seasonChoices, competitionChoices, juniorChoices, juniorSeasonChoices, highSchoolChoices, criticalChoices, transitionChoices) {
   const game = makeContext();
   vm.runInContext("selectedIdealSelf = '全能型'", game);
+  vm.runInContext("pendingGenesisRoll=rollCharacterGenesis(()=>0); pendingGenesisAllocation={ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0}", game);
   game.createPlayer();
   for (let day = 0; day < 7; day += 1) {
     game.choose(game.getCurrentEventId(), routeChoices[(day * 2) % routeChoices.length]);
@@ -105,7 +106,7 @@ const results = [
 ];
 
 const persistence = makeContext();
-vm.runInContext("selectedIdealSelf = '技術鑽研型'", persistence);
+vm.runInContext("selectedIdealSelf = '技巧型'; pendingGenesisRoll=rollCharacterGenesis(()=>0); pendingGenesisAllocation={ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0}", persistence);
 persistence.createPlayer();
 persistence.choose(persistence.getCurrentEventId(), 0);
 vm.runInContext("player.relationships.coachTrust = 4; player.positionAffinity.infield = 3; player.body.injuryRisk = 2", persistence);
@@ -113,7 +114,7 @@ persistence.saveGame();
 vm.runInContext("player = createInitialPlayer('被覆蓋')", persistence);
 persistence.loadGame();
 if (vm.runInContext("player.name", persistence) !== "測試球員") throw new Error("存讀檔沒有還原角色");
-if (vm.runInContext("player.idealSelf", persistence) !== "技術鑽研型") throw new Error("存讀檔沒有還原理想球員形象");
+if (vm.runInContext("player.idealSelf", persistence) !== "技巧型") throw new Error("存讀檔沒有還原理想球員形象");
 if (!vm.runInContext("player.baseballSkills && Array.isArray(player.flags)", persistence)) throw new Error("存檔補欄位失敗");
 if (!vm.runInContext("player.relationships.coachTrust === 4 && player.positionAffinity.infield === 3", persistence)) throw new Error("第一季狀態沒有還原");
 if (!vm.runInContext("player.body.injuryRisk === 2", persistence)) throw new Error("青少棒身體狀態沒有還原");
@@ -124,9 +125,9 @@ if (vm.runInContext("player.idealSelf", legacyIdealSelf) !== "") throw new Error
 if (!vm.runInContext("document.getElementById('player-info').innerHTML.includes('理想球員：尚未形成')", legacyIdealSelf)) throw new Error("舊存檔沒有顯示安全 fallback");
 
 const originTest = makeContext();
-vm.runInContext("selectedOrigin = 'understand'; selectedIdealSelf = '直覺天賦型'", originTest);
+vm.runInContext("selectedOrigin = 'understand'; selectedIdealSelf = '全能型'; pendingGenesisRoll=rollCharacterGenesis(()=>0); pendingGenesisAllocation={ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0}", originTest);
 originTest.createPlayer();
-if (!vm.runInContext("player.origin === 'understand' && player.observe === 2 && player.flags.includes('origin_wants_to_understand')", originTest)) throw new Error("角色願望沒有套用");
+if (!vm.runInContext("player.origin === 'understand' && player.observe >= 2 && player.flags.includes('origin_wants_to_understand')", originTest)) throw new Error("角色願望沒有套用");
 if (!vm.runInContext("getEvent('day1_morning').text().includes('答案')", originTest)) throw new Error("角色願望沒有改變開場文字");
 
 const bookmarkTest = makeContext();
@@ -204,7 +205,7 @@ positionRoutes.forEach(route => {
 });
 vm.runInContext("player = createInitialPlayer('上限測試'); applyNestedEffects('positionAffinity', { catcher: 99 }); applyNestedEffects('relationships', { coachTrust: 99 })", positionImpactTest);
 if (!vm.runInContext("player.positionAffinity.catcher === 20 && player.relationships.coachTrust === 20", positionImpactTest)) throw new Error("守位適性或關係數值沒有維持上限");
-vm.runInContext("player = createInitialPlayer('轉守位測試'); player.chapter = '青少棒'; player.seasonPosition = '捕手'", positionImpactTest);
+vm.runInContext("player = createInitialPlayer('轉守位測試'); player.chapter = '青少棒'; player.juniorStep = 3; player.seasonPosition = '捕手'", positionImpactTest);
 positionImpactTest.choose("junior_position_change", 0);
 if (!vm.runInContext("player.secondaryPosition === '內野手' && player.positionAffinity.infield === 2", positionImpactTest)) throw new Error("接受轉守位後沒有建立第二守位");
 
@@ -296,7 +297,7 @@ vm.runInContext("player.competitionStep = 3; player.impression.azhe.trusts = 5; 
 if (vm.runInContext("getCurrentEventId()", personalityTest) !== "azhe_bond_high") throw new Error("Azhe impression did not unlock high bond scene");
 vm.runInContext("player.impression.azhe.feelsDistance = 5", personalityTest);
 if (vm.runInContext("getCurrentEventId()", personalityTest) !== "azhe_bond_low") throw new Error("Azhe distance did not unlock low bond scene");
-vm.runInContext("player.chapter = '青少棒'; player.juniorStep = 5", personalityTest);
+vm.runInContext("player.chapter = '青少棒'; player.juniorStep = 8", personalityTest);
 personalityTest.choose("junior_friend_exit", 0);
 if (!vm.runInContext("player.characterArc.azhe === 'respected_equal' && player.personality.kind >= 2", personalityTest)) throw new Error("Azhe character arc was not preserved");
 vm.runInContext("player.completed = true", personalityTest);

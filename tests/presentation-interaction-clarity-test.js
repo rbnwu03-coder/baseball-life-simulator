@@ -187,7 +187,7 @@ test("少棒第一季 Outcome Continue 不會被一般選項鎖定", () => {
 test("創角、讀檔與刪除存檔會同步切換 creation-mode", () => {
   const game = makeContext();
   assert(game.__body.classList.contains("creation-mode"), "初始 runtime 沒有維持創角模式");
-  vm.runInContext("selectedIdealSelf='全能型'; createPlayer();", game);
+  vm.runInContext("selectedIdealSelf='全能型'; pendingGenesisRoll=rollCharacterGenesis(()=>0); pendingGenesisAllocation={ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0}; createPlayer();", game);
   assert(!game.__body.classList.contains("creation-mode"), "建立角色後主 UI 沒有顯示");
   game.saveGame();
   game.resetGame();

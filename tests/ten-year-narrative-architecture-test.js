@@ -195,7 +195,7 @@ test("選項維持原養成方向，顯示文字改為當下可做的行動", ()
 
 test("快速連點同一選項只套用一次效果與一次推進", () => {
   const { context, timers } = makeGame({ immediateTimers: false });
-  evaluate(context, "selectedIdealSelf = '全能型'; createPlayer()");
+  evaluate(context, "selectedIdealSelf = '全能型'; pendingGenesisRoll=rollCharacterGenesis(()=>0); pendingGenesisAllocation={ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0}; createPlayer()");
   const before = JSON.parse(evaluate(context, "JSON.stringify({observe:player.observe,confidence:player.confidence,phase:player.phase,memories:player.memories.length})"));
   evaluate(context, "choose('day1_morning', 0); choose('day1_morning', 0)");
   const after = JSON.parse(evaluate(context, "JSON.stringify({observe:player.observe,confidence:player.confidence,phase:player.phase,memories:player.memories.length})"));
@@ -206,7 +206,7 @@ test("快速連點同一選項只套用一次效果與一次推進", () => {
 
 function playChildhoodRoute(choiceIndex) {
   const { context } = makeGame();
-  evaluate(context, `selectedIdealSelf = "全能型"; createPlayer()`);
+  evaluate(context, `selectedIdealSelf = "全能型"; pendingGenesisRoll=rollCharacterGenesis(()=>0); pendingGenesisAllocation={ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0}; createPlayer()`);
   const visited = [];
   let guard = 0;
   while (!evaluate(context, "Boolean(player.ending)") && guard < 30) {
@@ -278,7 +278,9 @@ test("舊存檔指向任一夜間或白天事件仍可安全解析", () => {
 test("十歲篇中途 Save／Load 還原同一事件、旗標與記憶", () => {
   const { context } = makeGame();
   evaluate(context, `
-    selectedIdealSelf = "技術鑽研型";
+    selectedIdealSelf = "技巧型";
+    pendingGenesisRoll=rollCharacterGenesis(()=>0);
+    pendingGenesisAllocation={ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0};
     createPlayer();
     choose("day1_morning", 1);
     choose("day1_afternoon", 1);

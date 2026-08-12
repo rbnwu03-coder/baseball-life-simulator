@@ -22,6 +22,7 @@ function makeDelegationContext(overrides = {}) {
     deleteSave: () => calls.push(["deleteSave"]),
     selectOrigin: (...args) => calls.push(["selectOrigin", ...args]),
     selectIdealSelf: (...args) => calls.push(["selectIdealSelf", ...args]),
+    selectDevelopmentEntry: (...args) => calls.push(["selectDevelopmentEntry", ...args]),
     loadTestBookmark: (...args) => calls.push(["loadTestBookmark", ...args]),
     ...overrides
   });
@@ -52,7 +53,8 @@ vm.runInContext(`
   ApplicationController.resumeSession();
   ApplicationController.deleteSession();
   ApplicationController.selectOrigin("understand");
-  ApplicationController.selectIdealSelf("技術鑽研型");
+  ApplicationController.selectIdealSelf("技巧型");
+  ApplicationController.selectDevelopmentEntry("highSchool");
   ApplicationController.loadTestBookmark("chapter2");
 `, delegation);
 
@@ -64,7 +66,8 @@ assert(JSON.stringify(delegation.calls) === JSON.stringify([
   ["loadGame"],
   ["deleteSave"],
   ["selectOrigin", "understand"],
-  ["selectIdealSelf", "技術鑽研型"],
+  ["selectIdealSelf", "技巧型"],
+  ["selectDevelopmentEntry", "highSchool"],
   ["loadTestBookmark", "chapter2"]
 ]), "façade 委派函式或參數順序不正確");
 
@@ -141,7 +144,7 @@ function makeGameContext() {
 
 function runGoldenFlow(useController) {
   const game = makeGameContext();
-  vm.runInContext("selectedOrigin = 'understand'; selectedIdealSelf = '全能型'", game);
+  vm.runInContext("selectedOrigin = 'understand'; selectedIdealSelf = '全能型'; pendingGenesisRoll=rollCharacterGenesis(()=>0); pendingGenesisAllocation={ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0}", game);
 
   if (useController) {
     const start = vm.runInContext("ApplicationController.startGame()", game);
@@ -195,14 +198,15 @@ assert(indexSource.indexOf('<script src="application-controller.js"></script>') 
   "ApplicationController.deleteSession()",
   "ApplicationController.selectOrigin(",
   "ApplicationController.selectIdealSelf(",
+  "ApplicationController.selectDevelopmentEntry(",
   "ApplicationController.loadTestBookmark("
 ].forEach(command => assert(indexSource.includes(command), `主要 UI command 尚未改走 Controller：${command}`));
 
 const scriptSource = fs.readFileSync(path.join(root, "script.js"), "utf8");
 assert(/onclick="choose\('\$\{eventId\}', \$\{index\}\)"/.test(scriptSource), "動態 Decision handler 未依 Phase 1 保留 legacy choose()");
 
-console.log("ApplicationController public methods：9／9");
-console.log("Legacy delegation：9／9");
+console.log("ApplicationController public methods：10／10");
+console.log("Legacy delegation：10／10");
 console.log("Golden Flow：Legacy Entry 與 Controller Entry Snapshot 一致");
 console.log("Dynamic Decision handler：Deferred Compatibility Item（仍直接呼叫 choose）");
 console.log("Phase 1 Application Controller Compatibility Façade test passed.");

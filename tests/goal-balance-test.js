@@ -105,7 +105,7 @@ function captureGoals(game) {
 
 function simulate(profileName, weights, variation) {
   const game = makeGame();
-  vm.runInContext(`selectedOrigin=${profileName === "理解基本功" ? "'understand'" : profileName === "隊友關係" ? "'belong'" : "'prove'"}; selectedIdealSelf='全能型'`, game);
+  vm.runInContext(`selectedOrigin=${profileName === "理解基本功" ? "'understand'" : profileName === "隊友關係" ? "'belong'" : "'prove'"}; selectedIdealSelf='全能型'; pendingGenesisRoll=rollCharacterGenesis(()=>0); pendingGenesisAllocation={ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0}`, game);
   game.createPlayer();
   playUntil(game, "Boolean(player.ending)", weights, variation, 35);
   game.choose("ending", 0);

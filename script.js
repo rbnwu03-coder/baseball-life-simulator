@@ -4,6 +4,9 @@ let pendingBaseballGameplay = null;
 let pendingTrainingOutcome = null;
 let selectedOrigin = PlayerIdentityOptions.origins[0];
 let selectedIdealSelf = "";
+let selectedDevelopmentEntry = "full";
+let pendingGenesisRoll = null;
+let pendingGenesisAllocation = Object.fromEntries(CHARACTER_GENESIS_ABILITY_KEYS.map(key => [key, 0]));
 
 const youthSeasonOutcomeEventIds = new Set([
   "youth_season_intro",
@@ -21,11 +24,30 @@ const youthSeasonOutcomeEventIds = new Set([
 
 const idealSelfDescriptions = Object.freeze({
   [PlayerIdentityOptions.idealSelf[0]]: "我想成為任何情況都值得信賴的人。",
-  [PlayerIdentityOptions.idealSelf[1]]: "我想把一件事反覆磨到最好。",
-  [PlayerIdentityOptions.idealSelf[2]]: "我想相信自己的感覺與判斷。",
-  [PlayerIdentityOptions.idealSelf[3]]: "我想在最重要的時候站出來。",
-  [PlayerIdentityOptions.idealSelf[4]]: "我想讓身邊的人一起變得更好。"
+  [PlayerIdentityOptions.idealSelf[1]]: "我想用最有威脅的擊球改變比賽。",
+  [PlayerIdentityOptions.idealSelf[2]]: "我想靠細膩動作與球感解決問題。",
+  [PlayerIdentityOptions.idealSelf[3]]: "我想成為讓全隊放心的守備者。",
+  [PlayerIdentityOptions.idealSelf[4]]: "我想用速度擴大每一次機會。",
+  [PlayerIdentityOptions.idealSelf[5]]: "我想比別人更早看懂下一球。"
 });
+
+const genesisAbilityLabels = Object.freeze({
+  ballSense: "球感", observe: "觀察", fitness: "體能",
+  batting: "打擊", baseRunning: "跑壘", baseballIQ: "棒球理解"
+});
+
+function formatCharacterGenesisShape(shape = "") {
+  return shape.split("＋").map(key => genesisAbilityLabels[key] || key).filter(Boolean).join("＋");
+}
+
+const handednessLabels = Object.freeze({
+  bats: Object.freeze({ R: "右打", L: "左打", S: "左右開弓" }),
+  throws: Object.freeze({ R: "右投", L: "左投" })
+});
+
+function formatHandedness(bats = "R", throws = "R") {
+  return `${handednessLabels.bats[bats] || "右打"}／${handednessLabels.throws[throws] || "右投"}`;
+}
 
 const youthGrounderThrowChoices = Object.freeze([
   Object.freeze({
@@ -200,6 +222,121 @@ function selectIdealSelf(type) {
   }
 }
 
+function renderCharacterGenesis() {
+  const allocationElement = document.getElementById("genesisAllocation");
+  const shapeElement = document.getElementById("genesisShape");
+  const budgetElement = document.getElementById("genesisBudget");
+  const rollButton = document.getElementById("genesisRollButton");
+  const spent = Object.values(pendingGenesisAllocation).reduce((sum, value) => sum + value, 0);
+  if (shapeElement) shapeElement.textContent = pendingGenesisRoll
+    ? `能力總量 12｜突出形狀：${formatCharacterGenesisShape(pendingGenesisRoll.shape)}`
+    : "尚未揭示。";
+  if (budgetElement) budgetElement.textContent = `剩餘配置點數：${3 - spent}`;
+  if (rollButton) rollButton.disabled = Boolean(pendingGenesisRoll);
+  if (!allocationElement) return;
+  allocationElement.innerHTML = pendingGenesisRoll ? CHARACTER_GENESIS_ABILITY_KEYS.map(key => {
+    const base = pendingGenesisRoll.baseRoll[key];
+    const allocated = pendingGenesisAllocation[key];
+    return `<div class="genesis-ability"><strong>${genesisAbilityLabels[key]}</strong><span>${base}${allocated ? `＋${allocated}` : ""}</span><button type="button" aria-label="減少${genesisAbilityLabels[key]}配置" onclick="ApplicationController.adjustGenesisAbility('${key}', -1)">−</button><button type="button" aria-label="增加${genesisAbilityLabels[key]}配置" onclick="ApplicationController.adjustGenesisAbility('${key}', 1)">＋</button></div>`;
+  }).join("") : "";
+}
+
+function generateGenesisProfile(random = Math.random) {
+  if (pendingGenesisRoll) return pendingGenesisRoll;
+  pendingGenesisRoll = rollCharacterGenesis(random);
+  renderCharacterGenesis();
+  return pendingGenesisRoll;
+}
+
+function adjustGenesisAbility(key, delta) {
+  if (!pendingGenesisRoll || !CHARACTER_GENESIS_ABILITY_KEYS.includes(key) || ![-1, 1].includes(delta)) return false;
+  const spent = Object.values(pendingGenesisAllocation).reduce((sum, value) => sum + value, 0);
+  const current = pendingGenesisAllocation[key];
+  if ((delta > 0 && (spent >= 3 || current >= 2)) || (delta < 0 && current <= 0)) return false;
+  pendingGenesisAllocation[key] += delta;
+  renderCharacterGenesis();
+  return true;
+}
+
+function resetCharacterGenesisSelection() {
+  pendingGenesisRoll = null;
+  pendingGenesisAllocation = Object.fromEntries(CHARACTER_GENESIS_ABILITY_KEYS.map(key => [key, 0]));
+  const batsSelect = document.getElementById("batsSelect");
+  const throwsSelect = document.getElementById("throwsSelect");
+  if (batsSelect) batsSelect.value = "R";
+  if (throwsSelect) throwsSelect.value = "R";
+  renderCharacterGenesis();
+}
+
+function selectDevelopmentEntry(entry) {
+  if (!["full", "highSchool"].includes(entry)) return false;
+  selectedDevelopmentEntry = entry;
+  document.querySelectorAll?.("[data-development-entry]").forEach(button => {
+    const selected = button.dataset.developmentEntry === entry;
+    button.classList.toggle("selected", selected);
+    button.setAttribute("aria-pressed", String(selected));
+  });
+  const direct = entry === "highSchool";
+  const startButton = document.getElementById("careerStartButton");
+  const description = document.getElementById("developmentEntryDescription");
+  if (startButton) startButton.textContent = direct ? "完成創角，進入高中第一年" : "走進十歲的夏天";
+  if (description) description.textContent = direct
+    ? "創角、憧憬球員、能力揭示、有限加點與投打選擇照常完成；之後直接進入高中第一年。"
+    : "目前會從十歲的夏天開始完整人生。";
+  return true;
+}
+
+function createHighSchoolDirectStartHistory() {
+  return {
+    route: "觀察理解型",
+    chapterOneEnding: "願意先看懂場上的責任",
+    chapter2Result: "以基本動作留在球隊",
+    seasonRole: "內野替補與短局守備",
+    seasonResult: "能完成有限任務的輪替球員",
+    competitionResult: "在競爭中保留下一次機會",
+    juniorResult: "用觀察與基本動作跟上身體差距",
+    juniorPath: "內野守備與替補起步",
+    juniorSeasonResult: "用有限出場確認自己仍想留在棒球裡",
+    highSchoolRoute: "普通高中・穩定出賽",
+    primaryPosition: "內野手",
+    secondaryPositions: [],
+    relationships: { coachTrust: 3, teammateBond: 4, rivalRespect: 2, rivalCompetition: 2 },
+    impression: {
+      coach: { dependable: 2, leader: 0, competitive: 1, immature: 0 },
+      azhe: { trusts: 4, depends: 1, feelsDistance: 0 },
+      takahashi: { respect: 2, rivalry: 2, underestimate: 0 }
+    },
+    characterArc: { azhe: "shared_grounder", takahashi: "rival", yamamoto: "trusted" },
+    flags: ["direct_start_history", "azhe_hidden_error_seen", "accepted_junior_position_change", "chose_playing_time_high_school"],
+    memory: "少棒時，你和阿哲把一顆沒被注意到的滾地球重新做完；國中階段，你以內野替補身分留下有限出場紀錄。"
+  };
+}
+
+function applyHighSchoolDirectStartHistory(target) {
+  const history = createHighSchoolDirectStartHistory();
+  Object.assign(target, {
+    route: history.route,
+    chapterOneEnding: history.chapterOneEnding,
+    chapter2Result: history.chapter2Result,
+    seasonRole: history.seasonRole,
+    seasonResult: history.seasonResult,
+    competitionResult: history.competitionResult,
+    juniorResult: history.juniorResult,
+    juniorPath: history.juniorPath,
+    juniorSeasonResult: history.juniorSeasonResult,
+    highSchoolRoute: history.highSchoolRoute
+  });
+  applyCanonicalPositionProfile(target, history.primaryPosition, history.secondaryPositions);
+  Object.assign(target.relationships, history.relationships);
+  Object.assign(target.impression.coach, history.impression.coach);
+  Object.assign(target.impression.azhe, history.impression.azhe);
+  Object.assign(target.impression.takahashi, history.impression.takahashi);
+  Object.assign(target.characterArc, history.characterArc);
+  target.flags = Array.from(new Set([...(target.flags || []), ...history.flags]));
+  target.memories.push(history.memory);
+  return target;
+}
+
 function setChoiceTransitionState(locked) {
   const choices = document.getElementById("choices");
   if (!choices) return;
@@ -245,6 +382,37 @@ function setOutcomeContinueState(locked) {
 function syncGameUiVisibility() {
   const hasCreatedPlayer = Boolean(player?.name);
   document.body?.classList?.toggle?.("creation-mode", !hasCreatedPlayer);
+}
+
+function applyDebugBookmarkCharacterProfile(target) {
+  const roll = rollCharacterGenesis(() => 0.25);
+  const allocation = validateCharacterGenesisAllocation({
+    ballSense: 1,
+    observe: 1,
+    fitness: 0,
+    batting: 0,
+    baseRunning: 0,
+    baseballIQ: 1
+  });
+  const idealSelf = "棒球理解型";
+  target.idealSelf = idealSelf;
+  target.bats = "R";
+  target.throws = "R";
+  target.characterGenesis = {
+    completed: true,
+    baseRoll: { ...roll.baseRoll },
+    allocation: { ...allocation.allocation },
+    allocationBudget: allocation.budget,
+    allocationSpent: allocation.spent,
+    total: roll.total + allocation.spent,
+    shape: formatCharacterGenesisShape(roll.shape),
+    archetype: idealSelf,
+    initialAspiration: target.origin
+  };
+  const primary = target.primaryPosition || "捕手";
+  const secondaries = Array.isArray(target.secondaryPositions) ? target.secondaryPositions : [];
+  applyCanonicalPositionProfile(target, primary, secondaries);
+  return target;
 }
 
 function loadTestBookmark(bookmark) {
@@ -467,6 +635,7 @@ function loadTestBookmark(bookmark) {
 
   if (!bookmarks[bookmark]) return showNotice("找不到這個測試書籤。", "error");
   bookmarks[bookmark]();
+  applyDebugBookmarkCharacterProfile(player);
   player.completed = false;
   player.ending = "";
   document.getElementById("characterCreation").style.display = "none";
@@ -492,6 +661,15 @@ function createPlayer() {
     return;
   }
 
+  const allocationValidation = validateCharacterGenesisAllocation(pendingGenesisAllocation);
+  if (!pendingGenesisRoll || !allocationValidation.ok) {
+    if (feedback) feedback.textContent = !pendingGenesisRoll
+      ? "請先揭示初始能力形狀。"
+      : `請配置完 3 點初始能力（目前已配置 ${allocationValidation.spent} 點）。`;
+    document.getElementById("genesisRollButton")?.focus?.();
+    return;
+  }
+
   const identityInput = {
     name,
     origin: selectedOrigin,
@@ -511,6 +689,18 @@ function createPlayer() {
     if (feedback) feedback.textContent = identityResult.error;
     return;
   }
+  const genesisResult = applyCharacterGenesis(player, {
+    baseRoll: pendingGenesisRoll.baseRoll,
+    allocation: pendingGenesisAllocation,
+    shape: formatCharacterGenesisShape(pendingGenesisRoll.shape),
+    bats: document.getElementById("batsSelect")?.value || "R",
+    throws: document.getElementById("throwsSelect")?.value || "R"
+  });
+  if (!genesisResult.ok) {
+    if (feedback) feedback.textContent = genesisResult.error;
+    return;
+  }
+  const directStart = selectedDevelopmentEntry === "highSchool";
   const origins = {
     [PlayerIdentityOptions.origins[0]]: { effects: { confidence: 1, pressure: 1 }, personality: { brave: 1, ambitious: 1 }, flag: "origin_wants_to_be_seen", memory: "在真正碰到棒球以前，你先承認自己希望有一天能被看見。" },
     [PlayerIdentityOptions.origins[1]]: { effects: { observe: 2 }, personality: { thoughtful: 2 }, flag: "origin_wants_to_understand", memory: "你最初靠近棒球，是因為想知道每個動作背後的原因。" },
@@ -522,12 +712,16 @@ function createPlayer() {
   addFlags([origin.flag]);
   updateImpression();
   player.memories.push(origin.memory);
+  if (directStart) applyHighSchoolDirectStartHistory(player);
   document.getElementById("characterCreation").style.display = "none";
   clearOutcomeFeedbackPresentation();
   selectedOrigin = PlayerIdentityOptions.origins[0];
   document.querySelectorAll?.(".origin-card").forEach(card => card.classList.toggle("selected", card.dataset.origin === PlayerIdentityOptions.origins[0]));
   selectIdealSelf("");
-  showCurrentEvent();
+  resetCharacterGenesisSelection();
+  selectDevelopmentEntry("full");
+  if (directStart) enterHighSchool();
+  else showCurrentEvent();
 }
 
 function resetGame() {
@@ -542,6 +736,8 @@ function resetGame() {
   const feedback = document.getElementById("characterCreationFeedback");
   if (feedback) feedback.textContent = "";
   selectIdealSelf("");
+  resetCharacterGenesisSelection();
+  selectDevelopmentEntry("full");
   updateStatus();
 }
 
@@ -1194,10 +1390,11 @@ function showStatChanges(before, after, memory = "", options = {}) {
 }
 
 function shouldShowYouthSeasonOutcome(eventId) {
-  return player.chapter === "少棒第一季" && youthSeasonOutcomeEventIds.has(eventId);
+  return eventId === "high_school_showcase" || (player.chapter === "少棒第一季" && youthSeasonOutcomeEventIds.has(eventId));
 }
 
 function getYouthSeasonOutcomeHeading(eventId) {
+  if (eventId === "high_school_showcase") return "秋季交流賽打席結果";
   if (eventId === "high_school_year_two_spring_game") return "春季聯賽打席結果";
   if (eventId === "youth_position_trial") return "這次輪測的結果";
   if (eventId === "youth_bench") return "這段紅白賽的結果";
@@ -1207,6 +1404,7 @@ function getYouthSeasonOutcomeHeading(eventId) {
 }
 
 function getYouthSeasonOutcomeReaction(eventId) {
+  if (eventId === "high_school_showcase") return `${player.highSchoolMatch.coachReaction || "高中現任教練記下這次處理。"}${player.highSchoolMatch.teamReaction ? ` ${player.highSchoolMatch.teamReaction}` : ""}`;
   if (eventId === "high_school_year_two_spring_game") return "記錄員把這個打席寫進春季聯賽成績；高中現任教練沒有改動深度表，只讓下一棒走進打擊區。";
   if (eventId === "youth_position_trial") return "山本教練把三球的結果寫進分組表，下一段訓練會依這個安排開始。";
   if (eventId === "youth_teammate") return "器材室的門關上後，阿哲帶著這次互動離開球場；下一次合作時，他不會把它當作沒發生過。";
@@ -1852,11 +2050,12 @@ function showNotice(message, type = "neutral") {
 function choose(eventId, index) {
   if (isTransitioning) return;
   if (pendingTrainingOutcome) return;
+  if (getCurrentEventId() !== eventId) return false;
   if (isHighSchoolTrainingEvent(player.forcedEventId) && player.forcedEventId !== eventId) return;
-  if (player.chapter === "生涯轉換期" && getCurrentEventId() !== eventId) return;
-  if (player.chapter === "發展期" && getCurrentEventId() !== eventId) return;
+  if (player.chapter === "生涯轉換期" && getCurrentEventId() !== eventId) return false;
+  if (player.chapter === "發展期" && getCurrentEventId() !== eventId) return false;
   const event = getEvent(eventId);
-  const choice = event?.choices?.[index];
+  let choice = event?.choices?.[index];
   if (!choice) return;
   if (eventId === "youth_match_grounder" && choice.gameplayApproach) {
     return chooseYouthGrounderFielding(choice.gameplayApproach);
@@ -1975,6 +2174,8 @@ function choose(eventId, index) {
   addLifeThemeEffects(choice.lifeThemeEffects);
   resolveCallbacksForEvent(eventId);
   applyTrainingFocusBonus(choice);
+  const highSchoolNarrative = processHighSchoolYearOneChoice(eventId, choice);
+  if (highSchoolNarrative) choice = { ...choice, memory: highSchoolNarrative };
   updateGoalProgressForChoice(eventId, choice);
   if (choice.memory) {
     player.memories.push(choice.memory);
@@ -2093,16 +2294,299 @@ function enterJuniorSeason() {
   showCurrentEvent();
 }
 
+function getHighSchoolIdealAlignment(formation) {
+  const skills = player.baseballSkills || {};
+  const values = {
+    "強打型": (skills.batting || 0) * 2 + (player.ballSense || 0),
+    "技巧型": (player.ballSense || 0) + (skills.catching || 0) + (skills.throwing || 0),
+    "守備型": (formation.rating || 0) + (skills.reaction || 0),
+    "速度型": (skills.baseRunning || 0) * 2 + (player.fitness || 0),
+    "棒球理解型": (skills.baseballIQ || 0) * 2 + (player.observe || 0)
+  };
+  const ranked = Object.entries(values).sort((a, b) => b[1] - a[1]);
+  const coachIdentity = ranked[0]?.[0] || "全能型";
+  let idealAlignment = "衝突";
+  if (player.idealSelf === "全能型") {
+    const scores = Object.values(values);
+    const spread = Math.max(...scores) - Math.min(...scores);
+    idealAlignment = spread <= 4 ? "一致" : spread <= 9 ? "部分一致" : "衝突";
+  } else if (coachIdentity === player.idealSelf) idealAlignment = "一致";
+  else if ((values[player.idealSelf] || 0) >= (ranked[0]?.[1] || 0) - 5) idealAlignment = "部分一致";
+  return { idealAlignment, coachIdentity, values };
+}
+
+function resolveHighSchoolPositionFormation() {
+  const previousPrimary = player.highSchoolPositionPreference || player.primaryPosition || "";
+  const previousSecondaries = Array.isArray(player.secondaryPositions) ? [...player.secondaryPositions] : [];
+  const teamNeeds = player.highSchoolRoute.startsWith("強豪")
+    ? { "捕手": 5, "投手": 4, "內野手": 1, "外野手": 0 }
+    : player.highSchoolRoute.startsWith("普通")
+      ? { "內野手": 5, "外野手": 4, "捕手": 2, "投手": 1 }
+      : { "外野手": 4, "內野手": 3, "捕手": 2, "投手": 1 };
+  const openEvaluation = hasFlag("hs_position_open_evaluation");
+  const acceptNeed = hasFlag("hs_position_team_need");
+  const ratings = calculatePositionRatings().map(item => ({
+    ...item,
+    formationScore: item.rating
+      + (item.position === previousPrimary ? 5 : previousSecondaries.includes(item.position) ? 2 : 0)
+      + (hasFlag("hs_position_hold_history") && item.position === previousPrimary ? 4 : 0)
+      + (acceptNeed ? teamNeeds[item.position] || 0 : Math.min(2, teamNeeds[item.position] || 0))
+      + (openEvaluation ? Math.round(item.rating * 0.08) : 0)
+  })).sort((a, b) => b.formationScore - a.formationScore || b.rating - a.rating);
+  const primary = ratings[0]?.position || previousPrimary || "內野手";
+  const secondaryCandidate = ratings.find(item => item.position !== primary);
+  const allowSecondary = Boolean(secondaryCandidate) && (
+    previousSecondaries.includes(secondaryCandidate.position) || openEvaluation || acceptNeed
+  ) && secondaryCandidate.formationScore >= ratings[0].formationScore - 8;
+  const secondaries = allowSecondary ? [secondaryCandidate.position] : [];
+  applyCanonicalPositionProfile(player, primary, secondaries);
+  const alignment = getHighSchoolIdealAlignment({ rating: ratings[0]?.rating || 0 });
+  const historyText = previousPrimary ? `國中主守${previousPrimary}` : "沒有固定的國中主守位";
+  const assessment = getPositionAssessment(primary);
+  const teamNeedText = (teamNeeds[primary] || 0) >= 4 ? "球隊在這個守位有明確缺口" : "球隊需求只作為次要參考";
+  const identityContext = alignment.idealAlignment === "一致"
+    ? `你原本憧憬「${player.idealSelf}」，教練目前也最先看見「${alignment.coachIdentity}」的能力方向。`
+    : alignment.idealAlignment === "部分一致"
+      ? `你原本憧憬「${player.idealSelf}」，教練先看見「${alignment.coachIdentity}」；兩者仍有可共同發展的能力，只是眼前任務不同。`
+      : `你原本憧憬「${player.idealSelf}」，教練目前更相信「${alignment.coachIdentity}」；這是依現階段能力與隊伍缺口做的暫定安排，不是永久改寫你的方向。`;
+  const context = `${historyText}；測試中較能支撐${primary}的是${assessment?.strengths || "基本動作與判讀"}；${teamNeedText}。${identityContext}`;
+  player.highSchoolCoachEvaluation = {
+    primaryPosition: primary,
+    secondaryPositions: [...secondaries],
+    rating: ratings[0]?.rating || 0,
+    rationale: `${historyText}；${assessment?.strengths || "基本動作與判讀"}；${teamNeedText}`,
+    idealAlignment: alignment.idealAlignment,
+    coachIdentity: alignment.coachIdentity,
+    context
+  };
+  addFlags([`hs_ideal_${alignment.idealAlignment === "一致" ? "aligned" : alignment.idealAlignment === "部分一致" ? "partial" : "conflict"}`]);
+  return player.highSchoolCoachEvaluation;
+}
+
+function resolveHighSchoolProvisionalRole() {
+  const positionRating = getPositionAssessment(player.primaryPosition)?.rating || player.highSchoolCoachEvaluation.rating || 0;
+  const skills = player.baseballSkills || {};
+  const healthy = player.body.injuryRisk < 8 && player.body.pain < 5;
+  const positionReady = positionRating >= 18;
+  const coachReady = player.relationships.coachTrust >= 6;
+  const priorProof = player.seasonPerformance >= 2 || player.recentPerformance >= 2 || player.impression.coach.dependable >= 3;
+  const roleToolReady = hasFlag("hs_role_expand_utility")
+    ? Boolean(player.secondaryPosition) && (skills.baseballIQ || 0) + (skills.baseRunning || 0) >= 7
+    : hasFlag("hs_role_bat_entry")
+      ? (skills.batting || 0) + (player.ballSense || 0) >= 8
+      : positionRating >= 20;
+  const rotationEvidence = [positionReady, coachReady, roleToolReady, Boolean(player.secondaryPosition), priorProof].filter(Boolean).length;
+  let code = "bench";
+  if (healthy && positionReady && coachReady && roleToolReady && priorProof) code = "starter";
+  else if (healthy && rotationEvidence >= 2) code = "rotation";
+  const labels = {
+    starter: "先發／關鍵任務",
+    rotation: "輪替／替補任務",
+    bench: "發展／板凳任務"
+  };
+  const opportunities = {
+    starter: "交流賽先發並在關鍵局續留",
+    rotation: "同一場交流賽的中段代打與守備接替",
+    bench: "同一場交流賽的指定代打與短局守備"
+  };
+  player.highSchoolRoleCode = code;
+  player.highSchoolTeamRole = labels[code];
+  player.highSchoolRoleContext = {
+    code,
+    label: labels[code],
+    evidence: [
+      `守位適配 ${positionRating}`,
+      coachReady ? "現任教練已有基本信任" : "現任教練仍需更多可預期執行",
+      roleToolReady ? "所選發展工具已達可測試門檻" : "所選發展工具仍在形成",
+      healthy ? "身體可承擔正式任務" : "健康限制正式任務"
+    ],
+    opportunity: opportunities[code],
+    assignment: ""
+  };
+  return player.highSchoolRoleContext;
+}
+
+function prepareHighSchoolYearOneMatch() {
+  if (player.highSchoolMatch?.id === "hs-y1-autumn-exhibition") return player.highSchoolMatch;
+  const code = player.highSchoolRoleCode || "bench";
+  const assignments = {
+    starter: `以${player.primaryPosition || "守備"}先發，第七局平手時輪到你打擊`,
+    rotation: `第五局接替${player.primaryPosition || "守備"}，第七局平手時輪到你打擊`,
+    bench: `第七局被指定代打，若攻勢延續再以${player.primaryPosition || "守備"}完成短局任務`
+  };
+  player.highSchoolMatch = {
+    id: "hs-y1-autumn-exhibition",
+    opponent: "高橋所屬的地區強校",
+    inning: 7,
+    half: "下",
+    outs: 1,
+    scores: { home: 2, away: 2 },
+    runners: [false, true, false],
+    role: code,
+    position: player.primaryPosition || "未定守位",
+    assignment: `${assignments[code]}；${formatHandedness(player.bats, player.throws)}`,
+    decision: "",
+    outcome: "",
+    consequence: "",
+    coachReaction: "",
+    teamReaction: "",
+    completed: false
+  };
+  player.highSchoolRoleContext.assignment = assignments[code];
+  return player.highSchoolMatch;
+}
+
+function resolveHighSchoolYearOneMatch(decision) {
+  const match = prepareHighSchoolYearOneMatch();
+  const skills = player.baseballSkills || {};
+  const decisionScores = {
+    attack: (skills.batting || 0) * 2 + (player.ballSense || 0) + (player.instinct || 0),
+    zone: (skills.batting || 0) + (player.observe || 0) + (player.discipline || 0) + (skills.baseballIQ || 0),
+    advance: (skills.baseballIQ || 0) * 2 + (player.ballSense || 0) + (skills.batting || 0)
+  };
+  const score = decisionScores[decision] || 0;
+  const tier = score >= 25 ? "strong" : score >= 15 ? "productive" : "learning";
+  const outcomes = {
+    attack: {
+      strong: ["左中間二壘安打，二壘跑者回來超前", "你把第一顆可攻擊球送進空檔，替球隊取得 3：2 領先。"],
+      productive: ["深遠飛球形成推進，二壘跑者站上三壘", "揮棒選擇成立，球隊得到下一棒可得分的局面。"],
+      learning: ["追打外角球揮空三振", "能力尚不足以支撐搶攻，但教練記下你願意承擔決定。"]
+    },
+    zone: {
+      strong: ["纏鬥後選到保送", "你把壓力交給投手，形成一、二壘有人。"],
+      productive: ["打成右側穿越安打，跑者停在三壘", "你守住好球帶，球隊攻勢延續。"],
+      learning: ["看著內角邊緣球進壘遭到三振", "判斷方向合理，但你還需要更早辨認這個層級的內角球。"]
+    },
+    advance: {
+      strong: ["縮短揮棒打穿一、二壘間，二壘跑者回來超前", "戰術意圖與擊球結果同時成立。"],
+      productive: ["二壘方向滾地球送跑者上三壘", "記錄是出局，但下一棒獲得一支安打就能超前的局面。"],
+      learning: ["觸擊成小飛球被接殺", "你讀懂任務，執行品質還沒有跟上。"]
+    }
+  };
+  const [outcome, consequence] = outcomes[decision]?.[tier] || outcomes.advance.learning;
+  match.decision = decision;
+  match.outcome = outcome;
+  match.consequence = consequence;
+  match.coachReaction = tier === "strong"
+    ? "現任教練把你的名字留在下一場實戰名單。"
+    : tier === "productive"
+      ? "現任教練記下你完成了角色所要求的局面。"
+      : "現任教練沒有撤回下一次機會，但把執行缺口寫進評估。";
+  match.teamReaction = tier === "learning" ? "隊友接著守下一局，沒有把一次失敗變成出場資格的終點。" : "休息區用同一場正式比賽的後續任務回應你。";
+  match.completed = true;
+  player.seasonPerformance += tier === "strong" ? 3 : tier === "productive" ? 2 : 0;
+  player.recentPerformance += tier === "strong" ? 2 : tier === "productive" ? 1 : -1;
+  player.exposure += tier === "strong" ? 2 : 1;
+  player.scoutEvaluation += tier === "strong" ? 2 : tier === "productive" ? 1 : 0;
+  addFlags(["hs_y1_match_completed", `hs_y1_match_${tier}`, `showcase_${decision === "advance" ? "baseball_iq" : decision === "attack" ? "tools" : "team_task"}`]);
+  return `${outcome}。${consequence}`;
+}
+
+function resolveHighSchoolAzheEcho() {
+  const azhe = player.impression.azhe || {};
+  const relationshipEvidence = (azhe.trusts || 0) + (player.relationships.teammateBond || 0) - (azhe.feelsDistance || 0);
+  const sharedProof = ["azhe_error_reworked", "azhe_grounder_object", "azhe_hidden_error_seen"].filter(hasFlag);
+  const capability = (player.baseballSkills.baseballIQ || 0) + (player.observe || 0) + (player.idealSelf === "棒球理解型" ? 3 : 0);
+  let variant = "azhe-guides";
+  let influenceDirection = "阿哲影響玩家";
+  let cause = "你說完交流賽的打席後，阿哲沒有先問結果，只問你下一次還能替球隊完成什麼。";
+  let change = "你把他的問題寫進高二準備表，第一次把失敗後的下一個任務列在成績前面。";
+  let recall = "掛電話前，阿哲提醒你：那顆一起重做的滾地球，也不是靠一次結果決定價值。";
+  if (relationshipEvidence >= 8 && capability >= 13 && sharedProof.length) {
+    variant = "player-guides";
+    influenceDirection = "玩家影響阿哲";
+    cause = "你把交流賽拆成出局數、跑者與下一棒任務，也提起你們少棒時反覆重做的那顆滾地球。";
+    change = "下一個週末，阿哲在地方球隊先畫好補位線，再請隊友各自說出下一球的責任；他沒有再把一次失誤當成誰不適合上場。";
+    recall = "練習後他傳來沾著紅土的守備紙，只寫：『這次我先把下一個任務說清楚了。』";
+  } else if (relationshipEvidence >= 4 || sharedProof.length) {
+    variant = "co-discovery";
+    influenceDirection = "彼此共同發現";
+    cause = "你和阿哲把交流賽的打席，和少棒時一起重做的滾地球放在同一張紙上。";
+    change = "你們各寫下一個仍能完成的任務；幾天後，阿哲把自己的那一條帶進地方球隊的守備練習。";
+    recall = "他傳來練習照片時，紙角還留著你寫的那句：『角色不是先發名稱。』";
+  }
+  const summary = `${cause} ${change} ${recall}`;
+  const persistentFlag = `hs_y1_azhe_${variant.replaceAll("-", "_")}`;
+  player.highSchoolAzheEcho = {
+    variant,
+    influenceDirection,
+    evidence: [`關係證據 ${relationshipEvidence}`, `能力證據 ${capability}`, ...sharedProof],
+    cause,
+    change,
+    recall,
+    summary,
+    persistentFlag
+  };
+  addFlags([persistentFlag]);
+  return player.highSchoolAzheEcho;
+}
+
+function prepareHighSchoolRivalPressure() {
+  const role = player.highSchoolRoleCode || "bench";
+  const entry = role === "starter"
+    ? ["direct", "賽後高橋直接走到休息區，指出你在第七局做出的選擇"]
+    : role === "rotation"
+      ? ["limited", "你只在球員通道和高橋短暫交換了那個打席的判讀"]
+      : ["observed", "你沒有和高橋正面交談，但拿到他在同場比賽的打席與守備紀錄"];
+  player.highSchoolRivalContext = {
+    rivalId: "takahashi",
+    rivalName: "高橋",
+    entryType: entry[0],
+    encounter: entry[1],
+    yearTwoPressure: "高二必須用第二次正式任務證明：這不是單場偶然，而是可重複的球員用途。"
+  };
+  addFlags([`hs_y1_takahashi_${entry[0]}`, "hs_y2_external_pressure_set"]);
+  return player.highSchoolRivalContext;
+}
+
+function processHighSchoolYearOneChoice(eventId, choice) {
+  if (player.chapter !== "青棒") return "";
+  if (eventId === "high_school_load") {
+    const formation = resolveHighSchoolPositionFormation();
+    return `${choice.memory} 現任教練把你排為${formation.primaryPosition}${formation.secondaryPositions.length ? `，並保留${formation.secondaryPositions[0]}作為第二守位` : "，暫不設第二守位"}。${formation.context}`;
+  }
+  if (eventId === "high_school_role") {
+    const role = resolveHighSchoolProvisionalRole();
+    return `${choice.memory} 綜合守位、能力、信任、健康與準備後，你的暫定角色是「${role.label}」；正式交流賽任務仍保留。`;
+  }
+  if (eventId === "high_school_long_bench") {
+    const match = prepareHighSchoolYearOneMatch();
+    return `${choice.memory} 名單確認你將在${match.opponent}的同一場交流賽執行：${match.assignment}。`;
+  }
+  if (eventId === "high_school_showcase") return resolveHighSchoolYearOneMatch(choice.matchDecision);
+  if (eventId === "high_school_call_home") {
+    const echo = resolveHighSchoolAzheEcho();
+    prepareHighSchoolRivalPressure();
+    return `${choice.memory} ${echo.summary}`;
+  }
+  return "";
+}
+
 function enterHighSchool() {
   applyChapterBreather();
   player.chapter = "青棒";
   player.age = 16;
   player.highSchoolStep = 0;
+  player.highSchoolPositionPreference = player.primaryPosition || "";
+  player.highSchoolRoleCode = "";
+  player.highSchoolYearOneComplete = false;
+  player.highSchoolMatch = createInitialPlayer().highSchoolMatch;
+  player.highSchoolAzheEcho = createInitialPlayer().highSchoolAzheEcho;
+  player.highSchoolRivalContext = createInitialPlayer().highSchoolRivalContext;
   showNotice(`你進入${player.highSchoolRoute}，高中棒球正式開始。`, "success");
   showCurrentEvent();
 }
 
 function enterHighSchoolYearTwo() {
+  if (
+    player.chapter !== "青棒第一年小結" ||
+    player.highSchoolStep < 8 ||
+    player.highSchoolYearOneComplete !== true ||
+    player.highSchoolMatch?.completed !== true
+  ) {
+    showNotice("高中第一年尚未完成合法結算，不能提前進入第二年。", "warning");
+    return false;
+  }
   applyChapterBreather();
   player.chapter = "青棒第二年";
   player.age = 17;
@@ -2111,6 +2595,7 @@ function enterHighSchoolYearTwo() {
   player.highSchoolYearTwoDetail = "";
   showNotice("高中第二年開始：原有順位與角色將重新接受驗證。", "success");
   showCurrentEvent();
+  return true;
 }
 
 function enterCriticalYear() {
@@ -3698,13 +4183,8 @@ function evaluateJuniorSchoolFit() {
 }
 
 function evaluateHighSchoolYear() {
-  if (hasFlag("accepted_high_school_utility_role") || hasFlag("high_school_commit_utility")) {
-    player.highSchoolTeamRole = "多位置工具人與後段輪替";
-  } else if (hasFlag("focused_high_school_position")) {
-    player.highSchoolTeamRole = `${player.seasonPosition}專職競爭者`;
-  } else {
-    player.highSchoolTeamRole = "打擊入口與守備替補";
-  }
+  if (player.chapter !== "青棒" || player.highSchoolStep < 8 || player.highSchoolMatch?.completed !== true) return false;
+  if (!player.highSchoolRoleCode) resolveHighSchoolProvisionalRole();
   if (player.body.injuryRisk >= 8 || player.body.pain >= 5) {
     player.highSchoolResult = "高中強度放大了舊有身體風險";
     player.highSchoolDetail = "你仍留在球隊，但訓練與出賽安排開始受傷病限制。下一階段必須在曝光、復健與轉型之間做出更昂貴的選擇。";
@@ -3721,6 +4201,16 @@ function evaluateHighSchoolYear() {
     player.highSchoolResult = "仍在曝光邊緣的高中球員";
     player.highSchoolDetail = "你完成第一年，卻尚未建立明確市場標籤。第二年需要在專精、全面性或身體上限中選擇真正的投資方向。";
   }
+  const formation = player.highSchoolCoachEvaluation || {};
+  const role = player.highSchoolRoleContext || {};
+  const match = player.highSchoolMatch || {};
+  const azhe = player.highSchoolAzheEcho || {};
+  const rivalPressure = player.highSchoolRivalContext || {};
+  player.highSchoolDetail += `\n\n守位形成：${player.primaryPosition || "未定"}${player.secondaryPosition ? `／${player.secondaryPosition}` : ""}；理想自我與教練評估${formation.idealAlignment || "待確認"}。`;
+  player.highSchoolDetail += `\n暫定角色：${role.label || player.highSchoolTeamRole}；機會：${role.opportunity || "正式比賽任務"}。`;
+  player.highSchoolDetail += `\n交流賽：${match.opponent}，${match.outcome}；${match.consequence}`;
+  player.highSchoolDetail += `\n阿哲回聲：${azhe.influenceDirection || "尚未形成"}；${azhe.summary || "未留下持續證據"}`;
+  player.highSchoolDetail += `\n外部壓力：${rivalPressure.rivalName || "高橋"}（${rivalPressure.entryType || "observed"}）；${rivalPressure.yearTwoPressure || "高二需再次驗證角色"}`;
   completeGoal("high_school_clear_task", `小目標完成：${player.highSchoolTeamRole}`);
   const valueAssessment = evaluateHighSchoolValue();
   player.highSchoolValueAssessment = valueAssessment;
@@ -3736,7 +4226,9 @@ function evaluateHighSchoolYear() {
     player.careerArc.stage = "emerging";
   }
   updateCareerValue();
+  player.highSchoolYearOneComplete = true;
   player.chapter = "青棒第一年小結";
+  return true;
 }
 
 function evaluateHighSchoolValue() {
@@ -3744,7 +4236,7 @@ function evaluateHighSchoolValue() {
   const utilityDirection = hasFlag("accepted_high_school_utility_role") || hasFlag("high_school_commit_utility");
   const positionDirection = hasFlag("focused_high_school_position");
   const battingDirection = hasFlag("developed_high_school_bat") || hasFlag("high_school_commit_upside");
-  const proofReady = hasFlag("showcase_team_task") || hasFlag("showcase_tools") || hasFlag("showcase_baseball_iq");
+  const proofReady = player.highSchoolMatch?.completed === true && (hasFlag("showcase_team_task") || hasFlag("showcase_tools") || hasFlag("showcase_baseball_iq"));
   const direction = utilityDirection ? "工具人" : positionDirection ? `${player.seasonPosition}專職` : battingDirection ? "打擊入口" : "定位模糊";
   let skillReady = false;
   if (utilityDirection) skillReady = Boolean(player.secondaryPosition) && player.baseballSkills.baseballIQ + player.baseballSkills.baseRunning >= 8;
@@ -4230,11 +4722,12 @@ function getPositionAssessment(position) {
 
 function renderPositionPanel() {
   const ratings = calculatePositionRatings();
-  const primary = player.seasonPosition || ratings[0].position;
+  const primary = player.primaryPosition || ratings[0].position;
   const assessment = getPositionAssessment(primary);
   return `<div class="position-card">
     <div class="position-heading"><span>主要守位</span><strong>${escapeHtml(primary)}</strong><b>${assessment.rating}</b></div>
-    <p>第二守位：${escapeHtml(player.secondaryPosition || ratings[1].position)}</p>
+    <p>第二守位：${escapeHtml(player.secondaryPositions?.[0] || "尚未設定")}</p>
+    <p>投打：${escapeHtml(formatHandedness(player.bats, player.throws))}</p>
     <p><em>目前優勢</em>${escapeHtml(assessment.strengths)}</p>
     <p><em>需要補強</em>${escapeHtml(assessment.gaps)}</p>
     <p><em>守位任務</em>${escapeHtml(assessment.role)}</p>
@@ -4386,6 +4879,54 @@ function renderCurrentIdentitySummary() {
   return items.length ? `<div class="status-summary__identity">${items.join("")}</div>` : "";
 }
 
+function getReadableAbilityProfile() {
+  if (!player.characterGenesis?.completed) return null;
+  const currentValues = {
+    ballSense: Number(player.ballSense) || 0,
+    observe: Number(player.observe) || 0,
+    fitness: Number(player.fitness) || 0,
+    batting: Number(player.baseballSkills?.batting) || 0,
+    baseRunning: Number(player.baseballSkills?.baseRunning) || 0,
+    baseballIQ: Number(player.baseballSkills?.baseballIQ) || 0
+  };
+  const ranked = Object.entries(currentValues).sort((a, b) => b[1] - a[1] || CHARACTER_GENESIS_ABILITY_KEYS.indexOf(a[0]) - CHARACTER_GENESIS_ABILITY_KEYS.indexOf(b[0]));
+  const strongest = ranked.slice(0, 2).map(([key]) => genesisAbilityLabels[key]);
+  const weakest = ranked.slice(-2).reverse().map(([key]) => genesisAbilityLabels[key]);
+  const allocated = CHARACTER_GENESIS_ABILITY_KEYS
+    .filter(key => Number(player.characterGenesis.allocation?.[key]) > 0)
+    .map(key => genesisAbilityLabels[key]);
+  const tendencyDescriptions = {
+    ballSense: "以球感調整動作",
+    observe: "先觀察再判斷",
+    fitness: "靠身體條件承擔任務",
+    batting: "以打擊創造入口",
+    baseRunning: "用跑壘擴大機會",
+    baseballIQ: "提早讀懂比賽局面"
+  };
+  return {
+    tendency: tendencyDescriptions[ranked[0]?.[0]] || "仍在形成",
+    strongest: strongest.join("、"),
+    weakest: weakest.join("、"),
+    rolledShape: formatCharacterGenesisShape(player.characterGenesis.shape) || "舊存檔承接",
+    allocated: allocated.length ? allocated.join("、") : "舊存檔承接",
+    idealSelf: player.idealSelf || "尚未形成",
+    primaryPosition: player.primaryPosition || "尚未固定",
+    handedness: formatHandedness(player.bats, player.throws)
+  };
+}
+
+function renderReadableAbilityProfile() {
+  const profile = getReadableAbilityProfile();
+  if (!profile) return "";
+  return `<section class="ability-profile-summary" aria-labelledby="abilityProfileSummaryTitle">
+    <h3 id="abilityProfileSummaryTitle">球員概況</h3>
+    <p><small>目前傾向</small><strong>${escapeHtml(profile.tendency)}</strong></p>
+    <div class="ability-profile-summary__shape"><span><small>創角擲到</small><strong>${escapeHtml(profile.rolledShape)}</strong></span><span><small>加點後著重</small><strong>${escapeHtml(profile.allocated)}</strong></span></div>
+    <p>明顯優勢：${escapeHtml(profile.strongest)}　｜　仍待磨練：${escapeHtml(profile.weakest)}</p>
+    <div class="ability-profile-summary__identity"><span><small>憧憬球員</small><strong>${escapeHtml(profile.idealSelf)}</strong></span><span><small>目前主守</small><strong>${escapeHtml(profile.primaryPosition)}</strong></span><span><small>投打</small><strong>${escapeHtml(profile.handedness)}</strong></span></div>
+  </section>`;
+}
+
 function renderCurrentBodySummary() {
   if (!player.body || typeof player.body !== "object") return "";
   const items = [
@@ -4402,6 +4943,7 @@ function getCurrentStatusSummary(options = {}) {
   return {
     goal: renderCurrentGoalSummary(),
     identity: renderCurrentIdentitySummary(),
+    ability: renderReadableAbilityProfile(),
     body: renderCurrentBodySummary(),
     pending: typeof options.pendingHtml === "string" ? options.pendingHtml : "",
     competition: typeof options.competitionHtml === "string" ? options.competitionHtml : ""
@@ -4409,7 +4951,7 @@ function getCurrentStatusSummary(options = {}) {
 }
 
 function renderCurrentStatusSummary(summary) {
-  const content = [summary.goal, summary.identity, summary.body, summary.pending, summary.competition].filter(Boolean).join("");
+  const content = [summary.goal, summary.identity, summary.ability, summary.body, summary.pending, summary.competition].filter(Boolean).join("");
   return `<section class="status-current-summary" aria-labelledby="currentStatusSummaryTitle">
     <h2 id="currentStatusSummaryTitle">當下摘要</h2>
     ${content}
@@ -4531,14 +5073,14 @@ function updateStatus() {
   document.getElementById("status").innerHTML = `
     ${renderCurrentStatusSummary(summary)}
     <div class="status-details" aria-label="完整詳細資料">
-      ${renderStatusSection("能力與技能", abilityHtml, { open: true })}
+      ${renderStatusSection("能力與技能", abilityHtml)}
       ${renderStatusSection("人物關係", relationshipHtml)}
       ${renderStatusSection("成長與身份", growthHtml)}
       ${renderStatusSection("章節評估", evaluationHtml)}
       ${renderStatusSection("生涯與市場", careerHtml)}
       ${debug ? renderStatusSection("系統／測試資訊", `${debugHtml}${debugRelationshipHtml}`, { className: "status-section--debug" }) : ""}
     </div>`;
-  document.getElementById("player-info").innerHTML = `<strong>${escapeHtml(player.name || "尚未建立角色")}</strong><span>${player.age} 歲</span><span>${escapeHtml(player.chapter)}</span><span>${escapeHtml(player.route)}</span><span>理想球員：${escapeHtml(player.idealSelf || "尚未形成")}</span>`;
+  document.getElementById("player-info").innerHTML = `<strong>${escapeHtml(player.name || "尚未建立角色")}</strong><span>${player.age} 歲</span><span>${escapeHtml(player.chapter)}</span><span>${escapeHtml(player.route)}</span><span>${escapeHtml(formatHandedness(player.bats, player.throws))}</span><span>理想球員：${escapeHtml(player.idealSelf || "尚未形成")}</span>`;
 }
 
 updateStatus();

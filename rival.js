@@ -1,6 +1,6 @@
 let rival = {
 
-name:"佐藤蓮",
+name:"高橋",
 
 age:10,
 

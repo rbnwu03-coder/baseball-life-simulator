@@ -50,7 +50,7 @@ vm.runInContext("player.chapter='青少棒'; player.juniorStep=5", game);
 game.choose("junior_takahashi_failure", 0);
 if (!vm.runInContext("hasCallback('takahashi_ten_ball', true)", game)) throw new Error("青少棒沒有回收十球挑戰");
 
-vm.runInContext("player.chapter='青少棒分化'; player.juniorSeasonStep=8", game);
+vm.runInContext("player.chapter='青少棒分化'; player.juniorSeasonStep=8; player.forcedEventId=''", game);
 game.choose("yamamoto_recommendation", 0);
 if (!vm.runInContext("hasCallback('asked_for_another_demo', true)", game)) throw new Error("高中入口沒有回收教練示範");
 

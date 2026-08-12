@@ -76,6 +76,25 @@
       return invokeLegacy("selectIdealSelf", "selectIdealSelf", [idealSelf]);
     },
 
+    generateGenesisProfile() {
+      return invokeLegacy("generateGenesisProfile", "generateGenesisProfile");
+    },
+
+    adjustGenesisAbility(ability, delta) {
+      const validationError = requireText("adjustGenesisAbility", "ability", ability);
+      if (validationError) return validationError;
+      if (!Number.isInteger(delta) || ![-1, 1].includes(delta)) {
+        return failure("adjustGenesisAbility", "delta 必須是 -1 或 1。");
+      }
+      return invokeLegacy("adjustGenesisAbility", "adjustGenesisAbility", [ability, delta]);
+    },
+
+    selectDevelopmentEntry(entry) {
+      const validationError = requireText("selectDevelopmentEntry", "entry", entry);
+      if (validationError) return validationError;
+      return invokeLegacy("selectDevelopmentEntry", "selectDevelopmentEntry", [entry]);
+    },
+
     loadTestBookmark(bookmark) {
       const validationError = requireText("loadTestBookmark", "bookmark", bookmark);
       if (validationError) return validationError;

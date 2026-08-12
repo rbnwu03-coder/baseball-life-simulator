@@ -107,6 +107,46 @@ body.creation-mode .bottom-panel{
     color:#67584c;
 }
 
+.development-entry{
+    max-width:760px;
+    margin:18px auto 0;
+    padding:0 14px 12px;
+    border:1px dashed #b8a58e;
+    border-radius:10px;
+    background:#fffaf0;
+    color:#67584c;
+}
+
+.development-entry summary{
+    min-height:44px;
+    display:flex;
+    align-items:center;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:800;
+}
+
+.development-entry__choices{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+#characterCreation .development-entry__choices button{
+    width:auto;
+    margin:0;
+    padding:9px 12px;
+    font-size:14px;
+    background:#efe3d2;
+    color:#493b31;
+}
+
+#characterCreation .development-entry__choices button.selected,
+#characterCreation .development-entry__choices button[aria-pressed="true"]{
+    background:#8a3f2b;
+    color:#fff;
+}
+
 .goal-progress-change,
 .goal-complete,
 .goal-success,
@@ -293,6 +333,57 @@ button:active{
 
 .ideal-self-section{
     margin:22px 0 16px;
+}
+
+.genesis-section{
+    margin:22px 0;
+    padding:18px;
+    border:1px solid #c4aa85;
+    border-radius:12px;
+    background:#fff6e7;
+}
+
+.genesis-allocation{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:10px;
+    margin:14px 0;
+}
+
+.genesis-ability{
+    display:grid;
+    grid-template-columns:1fr auto auto auto;
+    align-items:center;
+    gap:8px;
+    padding:9px;
+    border:1px solid #d8c4a5;
+    border-radius:9px;
+}
+
+.genesis-ability button{
+    min-width:38px;
+    min-height:38px;
+}
+
+.handedness-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:18px;
+    margin:18px 0;
+}
+
+.handedness-row label{
+    display:grid;
+    gap:6px;
+    font-weight:700;
+}
+
+.handedness-row select{
+    min-height:44px;
+    padding:8px 12px;
+    border:1px solid #8d8176;
+    border-radius:8px;
+    background:#fff;
 }
 
 .ideal-self-section h3{
@@ -882,6 +973,59 @@ button:active{
 .status-current-summary .competition-card{
     margin-top:12px;
     margin-bottom:0;
+}
+
+.ability-profile-summary{
+    margin-top:12px;
+    padding:12px 13px;
+    border:1px solid #c7aa7d;
+    border-radius:10px;
+    background:#fffdf7;
+}
+
+.ability-profile-summary h3{
+    margin:0 0 10px;
+    color:#6f3023;
+    font-size:17px;
+}
+
+.ability-profile-summary p{
+    margin:7px 0;
+    font-size:14px;
+}
+
+.ability-profile-summary p small,
+.ability-profile-summary p strong,
+.ability-profile-summary__shape small,
+.ability-profile-summary__shape strong,
+.ability-profile-summary__identity small,
+.ability-profile-summary__identity strong{
+    display:block;
+}
+
+.ability-profile-summary p small,
+.ability-profile-summary__shape small,
+.ability-profile-summary__identity small{
+    margin-bottom:3px;
+    color:#766657;
+    font-size:11px;
+    font-weight:700;
+}
+
+.ability-profile-summary__shape,
+.ability-profile-summary__identity{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:7px;
+}
+
+.ability-profile-summary__shape > span,
+.ability-profile-summary__identity > span{
+    min-width:0;
+    padding:8px 9px;
+    border-radius:7px;
+    background:#f7ead4;
+    overflow-wrap:anywhere;
 }
 
 .status-details{

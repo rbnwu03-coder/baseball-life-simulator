@@ -191,7 +191,7 @@ verify("擊球控制會改變 5.4 Offensive Adapter 的 contactScore 來源事�
 verify("守備腳步會改變既有 Defense Adapter 的 fieldingScore 來源事實", evaluate(context, "__fieldingAfter > __fieldingBefore"));
 
 verify("Player Schema 未新增訓練持久欄位", JSON.stringify(schemaBefore) === JSON.stringify(parse(context, "Object.keys(createInitialPlayer('b')).sort()")));
-verify("SAVE_VERSION 與 localStorage key 保持不變", evaluate(context, "SAVE_VERSION === 14 && SAVE_KEY === 'baseballLifeRpgSave'"));
+verify("SAVE_VERSION 升級為 15 且 localStorage key 保持不變", evaluate(context, "SAVE_VERSION === 15 && SAVE_KEY === 'baseballLifeRpgSave'"));
 verify("高二 Career Spine 八幕序列保持不變", evaluate(context, "CareerSpineContract.getCareerSpineSnapshot(Object.assign(createInitialPlayer('c'), { chapter: '青棒第二年', age: 17, highSchoolYearTwoStep: 2 })).underlyingEventIds[0]") === "high_school_year_two_spring_game");
 verify("訓練 Resolver 未依賴 DOM、全域 Player、Save 或 Story", !fs.readFileSync(path.join(root, "baseball-training-resolver.js"), "utf8").match(/document|localStorage|\bplayer\s*\.|getEvent|saveGame/));
 

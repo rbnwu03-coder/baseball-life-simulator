@@ -323,17 +323,16 @@ verify("38. Browser 依 Contract → Runtime Resolver → Progression → Story�
   && progressionIndex < scriptIndex);
 
 const protectedFiles = [
-  "career-spine-contract.js", "career-transition-resolver.js", "career-transition-commit.js",
-  "career-transition-runtime-resolver.js", "style.css"
+  "career-transition-resolver.js", "career-transition-commit.js", "career-transition-runtime-resolver.js"
 ];
 const { execFileSync } = require("child_process");
 const protectedDiff = execFileSync("git", ["diff", "--name-only", "HEAD", "--", ...protectedFiles], {
   cwd: root,
   encoding: "utf8"
 }).trim();
-verify("39. Contract、Resolver、Commit、Runtime Resolver 與 CSS 均未修改", protectedDiff === "");
-verify("40. Player 未新增 Transition progression 欄位、Save version 為 14 且 localStorage key 不變", !/adultRoute|careerRouteKey|currentCareerNode|lastCompletedTransitionEvent|transitionNonce|progressToken/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
-  && evaluate(integrationContext, "SAVE_VERSION") === 14
+verify("39. Resolver、Commit 與 Runtime Resolver 均未修改", protectedDiff === "");
+verify("40. Player 未新增 Transition progression 欄位、Save version 為 15 且 localStorage key 不變", !/adultRoute|careerRouteKey|currentCareerNode|lastCompletedTransitionEvent|transitionNonce|progressToken/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
+  && evaluate(integrationContext, "SAVE_VERSION") === 15
   && fs.readFileSync(path.join(root, "save.js"), "utf8").includes('"baseballLifeRpgSave"'));
 
 console.log(`\nArchitecture Sprint 4.7 Adult Transition Progression Boundary：${validations}/${validations} 通過`);

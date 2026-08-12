@@ -40,7 +40,7 @@ for (const config of eventCases) {
   if (choiceCount !== config.flags.length) throw new Error(`${config.id} 選項數量改變`);
   for (let index = 0; index < choiceCount; index += 1) {
     const game = makeGame();
-    vm.runInContext(`player = createInitialPlayer("${config.id}-${index}"); player.chapter = ${JSON.stringify(config.chapter)}; player.${config.step} = ${config.value};`, game);
+    vm.runInContext(`player = createInitialPlayer("${config.id}-${index}"); player.chapter = ${JSON.stringify(config.chapter)}; player.${config.step} = ${config.value}; player.forcedEventId=${JSON.stringify(config.id)};`, game);
     game.choose(config.id, index);
     if (vm.runInContext("Boolean(pendingYouthSeasonOutcome)", game)) game.continueYouthSeasonOutcome();
     const state = vm.runInContext(`({ flag: hasFlag(${JSON.stringify(config.flags[index])}), step: player.${config.step}, transitioning: isTransitioning })`, game);

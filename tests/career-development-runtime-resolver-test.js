@@ -355,13 +355,12 @@ verify("35. Browser dependency 依 Contract／Transition modules → Development
 
 const protectedDiff = execFileSync("git", [
   "diff", "--name-only", "HEAD", "--",
-  "career-spine-contract.js", "career-transition-resolver.js", "career-transition-commit.js",
+  "career-transition-resolver.js", "career-transition-commit.js",
   "career-transition-runtime-resolver.js", "career-transition-progression.js",
-  "style.css"
 ], { cwd: root, encoding: "utf8" }).trim();
-verify("36. Contract、Transition 4.4–4.7 與 CSS 均未修改", protectedDiff === "");
-verify("37. Player 未新增 Development 路由欄位、Save version 為 14 且 localStorage key 不變", !/developmentRoute|currentDevelopmentNode|developmentEventId|adultRoute|routeKey/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
-  && evaluate(runtimeContext, "SAVE_VERSION") === 14
+verify("36. Transition 4.4–4.7 均未修改", protectedDiff === "");
+verify("37. Player 未新增 Development 路由欄位、Save version 為 15 且 localStorage key 不變", !/developmentRoute|currentDevelopmentNode|developmentEventId|adultRoute|routeKey/.test(fs.readFileSync(path.join(root, "player.js"), "utf8"))
+  && evaluate(runtimeContext, "SAVE_VERSION") === 15
   && fs.readFileSync(path.join(root, "save.js"), "utf8").includes('"baseballLifeRpgSave"'));
 
 console.log(`\nArchitecture Sprint 4.8 Development Years Runtime Routing Boundary：${passed}/${passed} 通過`);

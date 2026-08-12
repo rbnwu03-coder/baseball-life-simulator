@@ -315,7 +315,7 @@ legacyLoad.storage.set("baseballLifeRpgSave", JSON.stringify({
   seasonStep: 2
 }));
 evaluate(legacyLoad.context, "loadGame()");
-verify("33. 舊存檔先 normalize 到 v14 再由 pre-adult Admission 放行", evaluate(legacyLoad.context, "player.name === '舊少棒存檔' && player.saveVersion === 14 && player.age22OutcomeCode === '' && player.baseballSkills && player.relationships") && legacyLoad.counters.render === 1);
+verify("33. 舊存檔先 normalize 到 v15 再由 pre-adult Admission 放行", evaluate(legacyLoad.context, "player.name === '舊少棒存檔' && player.saveVersion === 15 && player.age22OutcomeCode === '' && player.baseballSkills && player.relationships") && legacyLoad.counters.render === 1);
 
 const legacyAge22Load = makeContext(runtimeFiles);
 const legacyAge22State = age22Result(legacyAge22Load.context, "大學棒球", { saveVersion: 13 });
@@ -323,7 +323,7 @@ delete legacyAge22State.age22OutcomeCode;
 const legacyAge22Raw = JSON.stringify(legacyAge22State);
 legacyAge22Load.storage.set("baseballLifeRpgSave", legacyAge22Raw);
 evaluate(legacyAge22Load.context, "loadGame()");
-verify("33a. 合法 v13 二十二歲結果以既有 marketOutcome 遷移到 v14 code", evaluate(legacyAge22Load.context, "player.saveVersion === 14 && player.age22OutcomeCode === 'college-draft-window'") && legacyAge22Load.counters.render === 1);
+verify("33a. 合法 v13 二十二歲結果以既有 marketOutcome 遷移到 v15 code", evaluate(legacyAge22Load.context, "player.saveVersion === 15 && player.age22OutcomeCode === 'college-draft-window'") && legacyAge22Load.counters.render === 1);
 verify("33b. v13 Load migration 不自動覆寫原始 Storage", legacyAge22Load.storage.get("baseballLifeRpgSave") === legacyAge22Raw && legacyAge22Load.counters.storageWrites === 0);
 
 const invalidLegacyAge22Load = makeContext(runtimeFiles);
@@ -369,7 +369,7 @@ verify("38. Browser dependency 依 Contract → Runtime Resolvers → Admission 
 
 const playerSource = fs.readFileSync(path.join(root, "player.js"), "utf8");
 const saveSource = fs.readFileSync(path.join(root, "save.js"), "utf8");
-verify("39. SAVE_VERSION 升級為 14，SAVE_KEY 與 saveGame snapshot shape 保持不變", /const SAVE_VERSION = 14;/.test(playerSource) && /const SAVE_KEY = "baseballLifeRpgSave";/.test(saveSource) && /localStorage\.setItem\(SAVE_KEY, JSON\.stringify\(player\)\)/.test(saveSource));
+verify("39. SAVE_VERSION 升級為 15，SAVE_KEY 與 saveGame snapshot shape 保持不變", /const SAVE_VERSION = 15;/.test(playerSource) && /const SAVE_KEY = "baseballLifeRpgSave";/.test(saveSource) && /localStorage\.setItem\(SAVE_KEY, JSON\.stringify\(player\)\)/.test(saveSource));
 verify("40. Player Schema 只新增 age22OutcomeCode，未新增 currentIdentity 或 Admission persistence 欄位", /age22OutcomeCode:\s*""/.test(playerSource) && !/currentCareerIdentity|adultCareerIdentity|saveValid|admissionStatus|adultNodeId|loadedRoute|saveAdmissionVersion/.test(playerSource));
 verify("41. loadGame 明確維持 candidate-first、admission-second、commit-last", saveSource.indexOf("const candidate = normalizeSave") < saveSource.indexOf("AdultCareerSaveAdmission.evaluate(candidate)") && saveSource.indexOf("AdultCareerSaveAdmission.evaluate(candidate)") < saveSource.indexOf("player = candidate"));
 

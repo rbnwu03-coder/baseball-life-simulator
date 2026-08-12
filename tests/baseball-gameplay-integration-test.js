@@ -508,10 +508,10 @@ test("Stage A pending 時 Save fail closed，完成後可儲存", () => {
   assert.strictEqual(Object.prototype.hasOwnProperty.call(saved, "pendingBaseballGameplay"), false);
 });
 
-test("Player Schema、SAVE_VERSION 與 SAVE_KEY 均未改變", () => {
+test("Gameplay 暫存未污染 Player Schema，SAVE_VERSION 為 15 且 SAVE_KEY 未改變", () => {
   const playerSource = fs.readFileSync(path.join(root, "player.js"), "utf8");
   const saveSource = fs.readFileSync(path.join(root, "save.js"), "utf8");
-  assert.ok(/const\s+SAVE_VERSION\s*=\s*14\s*;/.test(playerSource));
+  assert.ok(/const\s+SAVE_VERSION\s*=\s*15\s*;/.test(playerSource));
   assert.ok(/const\s+SAVE_KEY\s*=\s*["']baseballLifeRpgSave["']\s*;/.test(saveSource));
   assert.ok(!/pendingBaseballGameplay\s*:/.test(playerSource));
 });

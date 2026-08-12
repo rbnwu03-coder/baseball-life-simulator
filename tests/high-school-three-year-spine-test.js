@@ -139,8 +139,8 @@ const yearTwoIds = [
   "high_school_year_two_senior_plan"
 ];
 const highOneIds = [
-  "high_school_intro", "high_school_load", "high_school_life", "high_school_call_home",
-  "high_school_role", "high_school_long_bench", "high_school_showcase", "high_school_scout_feedback"
+  "high_school_intro", "high_school_load", "high_school_life", "high_school_role",
+  "high_school_long_bench", "high_school_showcase", "high_school_call_home", "high_school_scout_feedback"
 ];
 const highThreeIds = [
   "critical_offseason", "critical_tournament", "critical_public_attention", "critical_injury",
@@ -152,14 +152,14 @@ const { context, storage, nodes } = makeContext();
 verify("1. Player Schema 保留三個高二持久欄位", [
   "highSchoolYearTwoStep", "highSchoolYearTwoResult", "highSchoolYearTwoDetail"
 ].every(key => Object.prototype.hasOwnProperty.call(parse(context, "createInitialPlayer('測試')"), key)));
-verify("2. SAVE_VERSION 已由 13 升級為 14", evaluate(context, "SAVE_VERSION === 14 && player.saveVersion === 14"));
+verify("2. SAVE_VERSION 已升級為 15", evaluate(context, "SAVE_VERSION === 15 && player.saveVersion === 15"));
 verify("3. localStorage key 保持不變", evaluate(context, "SAVE_KEY") === "baseballLifeRpgSave");
 
 evaluate(context, `var __legacyV12 = createInitialPlayer("v12"); __legacyV12.saveVersion = 12;
   delete __legacyV12.highSchoolYearTwoStep; delete __legacyV12.highSchoolYearTwoResult; delete __legacyV12.highSchoolYearTwoDetail;
   var __migratedV12 = normalizeSave(__legacyV12);`);
 verify("4. v12 存檔補入高二預設欄位", evaluate(context, "__migratedV12.highSchoolYearTwoStep === 0 && __migratedV12.highSchoolYearTwoResult === '' && __migratedV12.highSchoolYearTwoDetail === ''"));
-verify("5. v12 遷移後標記為目前 v14", evaluate(context, "__migratedV12.saveVersion === 14"));
+verify("5. v12 遷移後標記為目前 v15", evaluate(context, "__migratedV12.saveVersion === 15"));
 
 evaluate(context, `player = normalizeSave(Object.assign(createInitialPlayer("舊高一結果"), {
   saveVersion: 12, chapter: "青棒第一年小結", age: 16, highSchoolResult: "舊結果", highSchoolDetail: "舊內容"
@@ -287,7 +287,8 @@ resetToYearTwo(context, {
 });
 verify("44. 合法高二小結 Snapshot 可辨識", evaluate(context, "CareerSpineContract.getCareerSpineSnapshot(player).status === 'recognized' && getCurrentEventId() === 'high_school_year_two_result'"));
 
-verify("45. 高一八幕選項與效果指紋維持 Sprint 前基線", fingerprint(context, highOneIds) === "98fd7fa4bcfac6a8dc3ae2ae3e6c4ce9fbfaf595198d664f4187da7fa0ee3d78");
+const highOneFingerprint = fingerprint(context, highOneIds);
+verify("45. 高一八幕選項與效果指紋維持 Integration 1.1 基線", highOneFingerprint === "ce584773fc9e42811c041dd6cabd2dce0f29de030d48adf7dfe3479d863d7104");
 verify("46. 高三八幕選項與效果指紋維持 Sprint 前基線", fingerprint(context, highThreeIds) === "62efa6c57ea795cd060ca7c34aefe89d3481d66ae085a822bbde4fbd90109f44");
 verify("47. 高二事件沒有直接寫入 careerExit", yearTwoIds.every(id => evaluate(context, `getEvent(${JSON.stringify(id)}).choices.every(choice => !Object.prototype.hasOwnProperty.call(choice, 'careerExit'))`)));
 verify("48. 高二事件沒有新增 roll 或隱藏 outcome 欄位", yearTwoIds.every(id => evaluate(context, `getEvent(${JSON.stringify(id)}).choices.every(choice => !('roll' in choice) && !('outcome' in choice))`)));
