@@ -95,6 +95,13 @@
       return invokeLegacy("selectDevelopmentEntry", "selectDevelopmentEntry", [entry]);
     },
 
+    selectDevelopmentTestPosition(position) {
+      if (typeof position !== "string") {
+        return failure("selectDevelopmentTestPosition", "position 必須是字串。");
+      }
+      return invokeLegacy("selectDevelopmentTestPosition", "selectDevelopmentTestPosition", [position]);
+    },
+
     loadTestBookmark(bookmark) {
       const validationError = requireText("loadTestBookmark", "bookmark", bookmark);
       if (validationError) return validationError;

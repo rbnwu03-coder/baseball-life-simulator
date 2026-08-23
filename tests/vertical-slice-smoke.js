@@ -31,7 +31,18 @@ function makeContext() {
 function playUntil(game, choices, condition, maxTurns = 20) {
   let turn = 0;
   while (!vm.runInContext(condition, game) && turn < maxTurns) {
-    game.choose(game.getCurrentEventId(), choices[turn % choices.length] ?? 0);
+    if (game.getCurrentEventId() === "high_school_showcase") {
+      const match = vm.runInContext("player.highSchoolMatch", game);
+      if (game.isHighSchoolMatchDecisionVisible(match)) {
+        const matchChoices = game.getHighSchoolYearOneMatchMomentChoices(match);
+        const choice = matchChoices[(choices[turn % choices.length] ?? 0) % matchChoices.length];
+        game.chooseHighSchoolYearOneMatchMoment(choice.matchDecision, choice.matchMomentId, () => 0.6);
+      } else {
+        game.advanceHighSchoolMatchPlaybackStep(match);
+      }
+    } else {
+      game.choose(game.getCurrentEventId(), choices[turn % choices.length] ?? 0);
+    }
     if (vm.runInContext("Boolean(pendingYouthSeasonOutcome)", game)) game.continueYouthSeasonOutcome();
     if (vm.runInContext("Boolean(pendingTrainingOutcome)", game)) game.continueTrainingOutcome();
     turn += 1;
@@ -79,7 +90,7 @@ function play(routeChoices, chapter2Choices, seasonChoices, competitionChoices, 
   playUntil(game, juniorSeasonChoices, "Boolean(player.juniorSeasonResult)");
   if (!vm.runInContext("player.juniorSeasonResult && player.highSchoolRoute", game)) throw new Error("青少棒階段沒有產生升學評估");
   game.choose("junior_season_result", 0);
-  playUntil(game, highSchoolChoices, "Boolean(player.highSchoolResult)");
+  playUntil(game, highSchoolChoices, "Boolean(player.highSchoolResult)", 1500);
   if (!vm.runInContext("player.highSchoolResult && player.highSchoolTeamRole", game)) throw new Error("青棒第一年沒有產生評估");
   game.choose("high_school_result", 0);
   playUntil(game, criticalChoices, "Boolean(player.highSchoolYearTwoResult)", 12);
@@ -121,8 +132,8 @@ if (!vm.runInContext("player.body.injuryRisk === 2", persistence)) throw new Err
 
 const legacyIdealSelf = makeContext();
 vm.runInContext("player = normalizeSave({ name: '舊存檔球員' }); updateStatus()", legacyIdealSelf);
-if (vm.runInContext("player.idealSelf", legacyIdealSelf) !== "") throw new Error("舊存檔的理想球員形象 fallback 不正確");
-if (!vm.runInContext("document.getElementById('player-info').innerHTML.includes('理想球員：尚未形成')", legacyIdealSelf)) throw new Error("舊存檔沒有顯示安全 fallback");
+if (vm.runInContext("player.idealSelf", legacyIdealSelf) !== "全能型") throw new Error("舊存檔的 deterministic Ideal Self migration 不正確");
+if (!vm.runInContext("player.capabilityState.migration?.migrationVersion === 'hs-entry-capability-v1'", legacyIdealSelf)) throw new Error("舊存檔沒有保存 Capability migration provenance");
 
 const originTest = makeContext();
 vm.runInContext("selectedOrigin = 'understand'; selectedIdealSelf = '全能型'; pendingGenesisRoll=rollCharacterGenesis(()=>0); pendingGenesisAllocation={ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0}", originTest);
@@ -235,7 +246,7 @@ if (vm.runInContext("getCurrentEventId()", pacingTest) !== "transition_cost_chec
 
 const skillCapTest = makeContext();
 skillCapTest.loadTestBookmark("firstMatch");
-vm.runInContext("player.baseballSkills.reaction = 20; applySkillEffects({reaction: 3}); updateStatus()", skillCapTest);
+vm.runInContext("player.baseballSkills.reaction = 20; applySkillEffects({reaction: 3}, {sourceType: CAPABILITY_MUTATION_SOURCE_TYPES.LEGACY_YOUTH, sourceContract: LEGACY_YOUTH_SOURCE_CONTRACT, eventId: 'skill-cap-fixture', choiceId: 'cap'}); updateStatus()", skillCapTest);
 if (!vm.runInContext("player.baseballSkills.reaction === 20", skillCapTest)) throw new Error("棒球技能上限失效");
 if (vm.runInContext("document.getElementById('status').innerHTML.includes('undefined')", skillCapTest)) throw new Error("棒球技能顯示 undefined");
 

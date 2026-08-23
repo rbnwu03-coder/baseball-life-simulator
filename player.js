@@ -13,6 +13,584 @@ const CHARACTER_GENESIS_ABILITY_KEYS = Object.freeze([
   "ballSense", "observe", "fitness", "batting", "baseRunning", "baseballIQ"
 ]);
 
+const INITIAL_SKILL_FORMULA_VERSION = "initial-skills-v1";
+const HS_ENTRY_CAPABILITY_SETTLEMENT_VERSION = "hs-entry-capability-v1";
+const UNIVERSAL_BASEBALL_SKILL_KEYS = Object.freeze([
+  "catching", "throwing", "batting", "baseRunning", "baseballIQ", "armStrength", "reaction", "range"
+]);
+const SPECIALIST_BASEBALL_SKILL_KEYS = Object.freeze([
+  "blocking", "gameCalling", "control", "pitchStamina"
+]);
+const CAPABILITY_MUTATION_SOURCE_TYPES = Object.freeze({
+  LEGACY_YOUTH: "legacy-youth-skill-effect",
+  YOUTH_OUTCOME_V1: "youth-event-outcome-v1",
+  SPECIALIST_ACTIVATION: "specialist-activation",
+  DEVELOPMENT: "development-event",
+  MIGRATION: "migration",
+  LEGACY_NORMALIZATION: "legacy-normalization",
+  DEBUG_BOOKMARK: "debug-bookmark-fixture"
+});
+const LEGACY_YOUTH_SOURCE_CONTRACT = "legacy-youth-narrative-v0";
+const YOUTH_OUTCOME_V1_SOURCE_CONTRACT = "youth-event-outcome-v1";
+const CAPABILITY_PROVENANCE_SOURCE_ORDER = Object.freeze([
+  "initial-formula",
+  CAPABILITY_MUTATION_SOURCE_TYPES.LEGACY_YOUTH,
+  CAPABILITY_MUTATION_SOURCE_TYPES.YOUTH_OUTCOME_V1,
+  CAPABILITY_MUTATION_SOURCE_TYPES.SPECIALIST_ACTIVATION,
+  CAPABILITY_MUTATION_SOURCE_TYPES.DEVELOPMENT,
+  CAPABILITY_MUTATION_SOURCE_TYPES.DEBUG_BOOKMARK,
+  CAPABILITY_MUTATION_SOURCE_TYPES.MIGRATION,
+  CAPABILITY_MUTATION_SOURCE_TYPES.LEGACY_NORMALIZATION
+]);
+
+const IDEAL_SELF_STARTING_BIASES = Object.freeze({
+  "全能型": Object.freeze({ batting: 0.25, baseRunning: 0.25, baseballIQ: 0.25, catching: 0.25 }),
+  "強打型": Object.freeze({ batting: 0.5, armStrength: 0.25 }),
+  "技巧型": Object.freeze({ batting: 0.25, catching: 0.25, throwing: 0.25, baseballIQ: 0.25 }),
+  "守備型": Object.freeze({ catching: 0.5, throwing: 0.5, reaction: 0.5, range: 0.5, armStrength: 0.25 }),
+  "速度型": Object.freeze({ baseRunning: 0.5, range: 0.5, reaction: 0.25 }),
+  "棒球理解型": Object.freeze({ baseballIQ: 0.5, throwing: 0.25, baseRunning: 0.25 })
+});
+
+const INITIAL_SKILL_FORMULAS = Object.freeze({
+  catching: Object.freeze({ ballSense: 0.45, observe: 0.30, baseballIQ: 0.15 }),
+  throwing: Object.freeze({ ballSense: 0.35, baseballIQ: 0.25, observe: 0.20, fitness: 0.10 }),
+  batting: Object.freeze({ batting: 0.60, ballSense: 0.25, observe: 0.15 }),
+  baseRunning: Object.freeze({ baseRunning: 0.55, fitness: 0.20, observe: 0.15, baseballIQ: 0.10 }),
+  baseballIQ: Object.freeze({ baseballIQ: 0.60, observe: 0.25, ballSense: 0.15 }),
+  armStrength: Object.freeze({ fitness: 0.50, ballSense: 0.20 }),
+  reaction: Object.freeze({ ballSense: 0.40, observe: 0.35, fitness: 0.15 }),
+  range: Object.freeze({ fitness: 0.35, observe: 0.25, ballSense: 0.20, baseballIQ: 0.10 })
+});
+
+function createDefaultCapabilityState() {
+  return {
+    initialized: false,
+    settlementVersion: "",
+    initialSkillFormulaVersion: "",
+    characterSeed: "",
+    initialBaseballSkills: {},
+    youthOutcomes: [],
+    positionExperience: {},
+    specialistExperience: { catcher: 0, pitcher: 0 },
+    developmentProfile: { originIdealSelf: "", biasTags: [] },
+    provenance: { initialSkills: {}, capabilityLedger: [], normalizations: [], settlement: null },
+    originType: "",
+    migration: null
+  };
+}
+
+function stableCapabilityHash(value) {
+  const text = String(value ?? "");
+  let hash = 2166136261;
+  for (let index = 0; index < text.length; index += 1) {
+    hash ^= text.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+}
+
+function getFinalizedGenesisAbilities(target) {
+  const savedFinal = target?.characterGenesis?.finalAbilities || {};
+  return Object.fromEntries(CHARACTER_GENESIS_ABILITY_KEYS.map(key => {
+    const savedValue = Number(savedFinal[key]);
+    if (Number.isFinite(savedValue) && savedValue >= 1) return [key, savedValue];
+    const base = Number(target?.characterGenesis?.baseRoll?.[key]);
+    const allocation = Number(target?.characterGenesis?.allocation?.[key]);
+    if (Number.isFinite(base) && base >= 1) return [key, base + (Number.isFinite(allocation) ? allocation : 0)];
+    const current = ["batting", "baseRunning", "baseballIQ"].includes(key)
+      ? Number(target?.baseballSkills?.[key]) : Number(target?.[key]);
+    return [key, Number.isFinite(current) && current >= 1 ? Math.min(5, current) : 3];
+  }));
+}
+
+function createCapabilityCharacterSeed(target, genesisAbilities = getFinalizedGenesisAbilities(target)) {
+  const basis = [
+    target?.name || "anonymous",
+    target?.bats || "R",
+    target?.throws || "R",
+    ...CHARACTER_GENESIS_ABILITY_KEYS.map(key => genesisAbilities[key])
+  ].join("|");
+  return `cap-${stableCapabilityHash(basis).toString(16).padStart(8, "0")}`;
+}
+
+function getDeterministicSkillVariation(characterSeed, skillKey) {
+  const sample = stableCapabilityHash(`${characterSeed}|${skillKey}|${INITIAL_SKILL_FORMULA_VERSION}`) / 4294967295;
+  return sample - 0.5;
+}
+
+function generateInitialBaseballSkills(target) {
+  if (!target?.characterGenesis?.completed) {
+    return { ok: false, error: "Character Genesis 尚未完成，不能產生初始棒球技能。" };
+  }
+  if (!PlayerIdentityOptions.idealSelf.includes(target.idealSelf)) {
+    return { ok: false, error: "Ideal Self 不合法，不能產生初始棒球技能。" };
+  }
+  const genesis = getFinalizedGenesisAbilities(target);
+  const characterSeed = target.capabilityState?.characterSeed || createCapabilityCharacterSeed(target, genesis);
+  const biases = IDEAL_SELF_STARTING_BIASES[target.idealSelf] || {};
+  const skills = {};
+  const trace = {};
+  UNIVERSAL_BASEBALL_SKILL_KEYS.forEach(skillKey => {
+    const contributions = Object.entries(INITIAL_SKILL_FORMULAS[skillKey] || {}).map(([traitKey, weight]) => ({
+      trait: traitKey,
+      traitValue: genesis[traitKey],
+      delta: genesis[traitKey] - 3,
+      weight,
+      contribution: (genesis[traitKey] - 3) * weight
+    }));
+    const bias = Number(biases[skillKey]) || 0;
+    const variation = getDeterministicSkillVariation(characterSeed, skillKey);
+    const raw = 3 + contributions.reduce((sum, item) => sum + item.contribution, 0) + bias + variation;
+    const result = Math.max(1, Math.min(7, Math.round(raw)));
+    skills[skillKey] = result;
+    trace[skillKey] = { baseline: 3, contributions, idealSelfBias: bias, variation, raw, result };
+  });
+  SPECIALIST_BASEBALL_SKILL_KEYS.forEach(skillKey => { skills[skillKey] = 0; });
+  return { ok: true, skills, trace, genesis, characterSeed };
+}
+
+function initializePlayerCapabilityFromGenesis(target) {
+  const generated = generateInitialBaseballSkills(target);
+  if (!generated.ok) return generated;
+  target.capabilityState = createDefaultCapabilityState();
+  target.capabilityState.initialSkillFormulaVersion = INITIAL_SKILL_FORMULA_VERSION;
+  target.capabilityState.characterSeed = generated.characterSeed;
+  target.capabilityState.initialBaseballSkills = { ...generated.skills };
+  target.capabilityState.developmentProfile = {
+    originIdealSelf: target.idealSelf,
+    biasTags: Object.keys(IDEAL_SELF_STARTING_BIASES[target.idealSelf] || {})
+  };
+  target.capabilityState.provenance.initialSkills = generated.trace;
+  target.baseballSkills = { ...generated.skills };
+  return { ok: true, skills: target.baseballSkills, capabilityState: target.capabilityState };
+}
+
+function ensureCapabilityStateShape(target) {
+  const defaults = createDefaultCapabilityState();
+  const saved = target?.capabilityState || {};
+  target.capabilityState = Object.assign(defaults, saved);
+  target.capabilityState.initialBaseballSkills = Object.assign({}, saved.initialBaseballSkills || {});
+  target.capabilityState.youthOutcomes = Array.isArray(saved.youthOutcomes) ? saved.youthOutcomes.map(item => JSON.parse(JSON.stringify(item))) : [];
+  target.capabilityState.positionExperience = Object.assign({}, saved.positionExperience || {});
+  target.capabilityState.specialistExperience = Object.assign({}, defaults.specialistExperience, saved.specialistExperience || {});
+  target.capabilityState.developmentProfile = Object.assign({}, defaults.developmentProfile, saved.developmentProfile || {});
+  target.capabilityState.developmentProfile.biasTags = Array.isArray(saved.developmentProfile?.biasTags) ? saved.developmentProfile.biasTags.slice() : [];
+  target.capabilityState.provenance = Object.assign({}, defaults.provenance, saved.provenance || {});
+  target.capabilityState.provenance.initialSkills = Object.assign({}, saved.provenance?.initialSkills || {});
+  target.capabilityState.provenance.capabilityLedger = Array.isArray(saved.provenance?.capabilityLedger)
+    ? saved.provenance.capabilityLedger.map(item => Object.assign({}, item)) : [];
+  target.capabilityState.provenance.normalizations = Array.isArray(saved.provenance?.normalizations)
+    ? saved.provenance.normalizations.map(item => Object.assign({}, item, {
+      skills: Array.isArray(item.skills) ? item.skills.slice() : []
+    })) : [];
+  return target.capabilityState;
+}
+
+function isYouthOrPreHighSchoolCapabilityPhase(target) {
+  const chapter = String(target?.chapter || "");
+  if (/青棒|高中|生涯轉換|發展期|職涯/.test(chapter)) return false;
+  return Number(target?.age) < 16 || /十歲|少棒|位置競爭|青少棒/.test(chapter);
+}
+
+function assertCapabilityMutationSource(target, source = {}) {
+  const sourceType = source.sourceType;
+  const knownSources = Object.values(CAPABILITY_MUTATION_SOURCE_TYPES);
+  if (!sourceType) {
+    if (isYouthOrPreHighSchoolCapabilityPhase(target)) {
+      throw new Error("Youth/pre-HS capability mutation 缺少明確 source contract；unknown 不得默認為 legacy。");
+    }
+    return CAPABILITY_MUTATION_SOURCE_TYPES.DEVELOPMENT;
+  }
+  if (!knownSources.includes(sourceType)) {
+    throw new Error(`Unknown capability mutation sourceType: ${sourceType}`);
+  }
+  if (sourceType === CAPABILITY_MUTATION_SOURCE_TYPES.LEGACY_YOUTH && source.sourceContract !== LEGACY_YOUTH_SOURCE_CONTRACT) {
+    throw new Error("Legacy youth capability mutation 必須明確提供 legacy source contract。");
+  }
+  if (sourceType === CAPABILITY_MUTATION_SOURCE_TYPES.YOUTH_OUTCOME_V1 && (
+    source.sourceContract !== YOUTH_OUTCOME_V1_SOURCE_CONTRACT || source.entryPoint !== "applyYouthEventOutcome"
+  )) {
+    throw new Error("Youth v1 capability mutation 只能由 applyYouthEventOutcome entry point 寫入。");
+  }
+  return sourceType;
+}
+
+function recordCapabilitySkillChanges(target, effects = {}, source = {}) {
+  if (!target?.characterGenesis?.completed) return [];
+  const state = ensureCapabilityStateShape(target);
+  const relevantEffects = Object.entries(effects || {}).filter(([skill, delta]) =>
+    [...UNIVERSAL_BASEBALL_SKILL_KEYS, ...SPECIALIST_BASEBALL_SKILL_KEYS].includes(skill)
+    && Number.isFinite(Number(delta)) && Number(delta) !== 0
+  );
+  if (!relevantEffects.length) return [];
+  const sourceType = assertCapabilityMutationSource(target, source);
+  const entries = [];
+  relevantEffects.forEach(([skill, delta]) => {
+    const entry = {
+      skill,
+      delta: Number(delta),
+      sourceType,
+      sourceContract: source.sourceContract || null,
+      eventId: source.eventId || "runtime-event",
+      choiceId: source.choiceId === undefined ? "runtime-choice" : String(source.choiceId),
+      provenance: source.provenance || "choice-resolution",
+      resolvedSeed: source.resolvedSeed ?? null
+    };
+    state.provenance.capabilityLedger.push(entry);
+    entries.push(entry);
+  });
+  return entries;
+}
+
+function recordLegacySpecialistNormalization(target, type, skills) {
+  const state = target?.capabilityState;
+  if (!state?.provenance?.normalizations) return null;
+  const field = `specialistExperience.${type}`;
+  if (state.provenance.normalizations.some(item => item.field === field && item.sourceType === CAPABILITY_MUTATION_SOURCE_TYPES.LEGACY_NORMALIZATION)) return null;
+  const entry = {
+    sourceType: CAPABILITY_MUTATION_SOURCE_TYPES.LEGACY_NORMALIZATION,
+    field,
+    from: 0,
+    to: 1,
+    skills: skills.slice(),
+    reason: "legacy-specialist-skill-without-explicit-experience"
+  };
+  state.provenance.normalizations.push(entry);
+  return entry;
+}
+
+function establishSpecialistExperience(target, experience = {}) {
+  const type = experience.type;
+  const map = { catcher: ["blocking", "gameCalling"], pitcher: ["control", "pitchStamina"] };
+  if (!map[type]) return { ok: false, error: "不支援的專項經驗類型。" };
+  const state = ensureCapabilityStateShape(target);
+  const amount = Math.max(1, Math.floor(Number(experience.amount) || 1));
+  state.specialistExperience[type] = Math.min(20, (Number(state.specialistExperience[type]) || 0) + amount);
+  target.baseballSkills = Object.assign({}, createInitialPlayer().baseballSkills, target.baseballSkills || {});
+  map[type].forEach(skill => {
+    if ((Number(target.baseballSkills[skill]) || 0) === 0) {
+      target.baseballSkills[skill] = 1;
+      recordCapabilitySkillChanges(target, { [skill]: 1 }, {
+        sourceType: CAPABILITY_MUTATION_SOURCE_TYPES.SPECIALIST_ACTIVATION,
+        eventId: experience.eventId || `${type}-experience-established`,
+        choiceId: experience.choiceId || "activation",
+        provenance: experience.provenance || "specialist-activation",
+        resolvedSeed: experience.resolvedSeed
+      });
+    }
+  });
+  return { ok: true, type, experience: state.specialistExperience[type] };
+}
+
+function validateYouthEventOutcome(target, outcome = {}) {
+  if (!target?.characterGenesis?.completed) return { ok: false, error: "Youth outcome 需要 completed Character Genesis。" };
+  if (!outcome.eventId || !outcome.choiceId) return { ok: false, error: "Youth outcome 缺少 eventId 或 choiceId。" };
+  const invalidSkillDelta = Object.entries(outcome.skillDeltas || {}).some(([skill, delta]) =>
+    ![...UNIVERSAL_BASEBALL_SKILL_KEYS, ...SPECIALIST_BASEBALL_SKILL_KEYS].includes(skill)
+    || !Number.isFinite(Number(delta)) || Number(delta) < 0 || Number(delta) > 1
+  );
+  if (invalidSkillDelta) return { ok: false, error: "Youth outcome skill delta 必須是合法技能的 0 或 +1。" };
+  const requestedSpecialistSkills = Object.keys(outcome.skillDeltas || {}).filter(skill => SPECIALIST_BASEBALL_SKILL_KEYS.includes(skill) && Number(outcome.skillDeltas[skill]) > 0);
+  if (requestedSpecialistSkills.length) return { ok: false, error: "Specialist skill 必須由 specialistExperienceDeltas activation 建立。" };
+  const validKeys = [...UNIVERSAL_BASEBALL_SKILL_KEYS];
+  const skillDeltas = Object.fromEntries(Object.entries(outcome.skillDeltas || {}).filter(([skill, delta]) =>
+    validKeys.includes(skill) && Number.isFinite(Number(delta)) && Number(delta) >= 0
+  ).map(([skill, delta]) => [skill, Number(delta)]));
+  const skillEntries = Object.entries(skillDeltas).filter(([, delta]) => delta > 0);
+  const maxSkillEffects = outcome.milestone === true ? 2 : 1;
+  if (skillEntries.length > maxSkillEffects) return { ok: false, error: "Youth outcome 超出 v1 skill effect budget。" };
+  const invalidPositionExperience = Object.entries(outcome.positionExperienceDeltas || {}).some(([position, delta]) =>
+    !position || !Number.isFinite(Number(delta)) || Number(delta) <= 0
+  );
+  if (invalidPositionExperience) return { ok: false, error: "Youth outcome position experience 必須是明確守位的正數。" };
+  const invalidSpecialistExperience = Object.entries(outcome.specialistExperienceDeltas || {}).some(([type, delta]) =>
+    !["catcher", "pitcher"].includes(type) || !Number.isFinite(Number(delta)) || Number(delta) <= 0
+  );
+  if (invalidSpecialistExperience) return { ok: false, error: "Youth outcome specialist experience 必須是 catcher／pitcher 的正數。" };
+  return { ok: true, skillDeltas, skillEntries };
+}
+
+// 正式 Youth v1 capability mutation 的唯一 entry point。Generic applySkillEffects 不擁有此 contract。
+function applyYouthEventOutcome(target, outcome = {}) {
+  const validation = validateYouthEventOutcome(target, outcome);
+  if (!validation.ok) return validation;
+  const state = ensureCapabilityStateShape(target);
+  const signature = `${outcome.eventId}|${outcome.choiceId}|${outcome.resolvedSeed ?? "deterministic"}`;
+  const existing = state.youthOutcomes.find(item => item.signature === signature);
+  if (existing) return { ok: true, duplicate: true, outcome: existing };
+  const { skillDeltas, skillEntries } = validation;
+  target.baseballSkills = Object.assign({}, createInitialPlayer().baseballSkills, target.baseballSkills || {});
+  skillEntries.forEach(([skill, delta]) => {
+    target.baseballSkills[skill] = Math.max(0, Math.min(20, Number(target.baseballSkills[skill]) + delta));
+  });
+  Object.entries(outcome.positionExperienceDeltas || {}).forEach(([position, delta]) => {
+    if (Number.isFinite(Number(delta)) && Number(delta) > 0) state.positionExperience[position] = Math.min(20, (Number(state.positionExperience[position]) || 0) + Number(delta));
+  });
+  Object.entries(outcome.specialistExperienceDeltas || {}).forEach(([type, delta]) => {
+    if (Number(delta) > 0) establishSpecialistExperience(target, { type, amount: delta, eventId: outcome.eventId, choiceId: outcome.choiceId, resolvedSeed: outcome.resolvedSeed });
+  });
+  const outcomeState = ensureCapabilityStateShape(target);
+  const normalized = {
+    signature,
+    eventId: outcome.eventId,
+    choiceId: outcome.choiceId,
+    skillDeltas,
+    positionExperienceDeltas: { ...(outcome.positionExperienceDeltas || {}) },
+    specialistExperienceDeltas: { ...(outcome.specialistExperienceDeltas || {}) },
+    identitySeeds: Array.isArray(outcome.identitySeeds) ? outcome.identitySeeds.slice() : [],
+    relationshipDeltas: { ...(outcome.relationshipDeltas || {}) },
+    provenance: outcome.provenance || "youth-event-outcome-v1",
+    sourceType: CAPABILITY_MUTATION_SOURCE_TYPES.YOUTH_OUTCOME_V1,
+    sourceContract: YOUTH_OUTCOME_V1_SOURCE_CONTRACT,
+    entryPoint: "applyYouthEventOutcome",
+    resolvedSeed: outcome.resolvedSeed ?? null,
+    milestone: outcome.milestone === true
+  };
+  outcomeState.youthOutcomes.push(normalized);
+  recordCapabilitySkillChanges(target, skillDeltas, normalized);
+  return { ok: true, duplicate: false, outcome: normalized };
+}
+
+function applySyntheticYouthOrigin(target) {
+  const seed = ensureCapabilityStateShape(target).characterSeed || createCapabilityCharacterSeed(target);
+  const outcomes = [
+    { eventId: "synthetic-youth-basic-catch", choiceId: "repeat-basic-reps", skillDeltas: { catching: 1 }, positionExperienceDeltas: { "內野手": 1 } },
+    { eventId: "synthetic-youth-basic-throw", choiceId: "finish-throwing-form", skillDeltas: { throwing: 1 }, positionExperienceDeltas: { "內野手": 1 } },
+    { eventId: "synthetic-junior-first-step", choiceId: "clean-footwork", skillDeltas: { reaction: 1 }, positionExperienceDeltas: { "內野手": 1 } },
+    { eventId: "synthetic-junior-game-study", choiceId: "review-assignment", skillDeltas: { baseballIQ: 1 }, identitySeeds: ["observational-infielder"] }
+  ];
+  outcomes.forEach((outcome, index) => applyYouthEventOutcome(target, {
+    ...outcome,
+    provenance: "deterministic-synthetic-youth-origin-v1",
+    resolvedSeed: `${seed}-${index + 1}`
+  }));
+  const state = ensureCapabilityStateShape(target);
+  state.originType = "synthetic-youth-origin-v1";
+  return outcomes;
+}
+
+function validateHighSchoolEntryCapability(target) {
+  const errors = [];
+  if (target?.characterGenesis?.completed !== true) errors.push("character-genesis-incomplete");
+  CHARACTER_GENESIS_ABILITY_KEYS.forEach(key => {
+    const value = target?.characterGenesis?.finalAbilities?.[key];
+    if (!Number.isFinite(value) || value < 1 || value > 5) errors.push(`finalized-genesis-invalid:${key}`);
+  });
+  if (!PlayerIdentityOptions.idealSelf.includes(target?.idealSelf)) errors.push("ideal-self-invalid");
+  if (!PlayerIdentityOptions.bats.includes(target?.bats) || !PlayerIdentityOptions.throws.includes(target?.throws)) errors.push("handedness-invalid");
+  if (target?.capabilityState?.initialized !== true) errors.push("capability-not-settled");
+  if (target?.capabilityState?.initialSkillFormulaVersion !== INITIAL_SKILL_FORMULA_VERSION) errors.push("initial-formula-version-invalid");
+  if (target?.capabilityState?.settlementVersion !== HS_ENTRY_CAPABILITY_SETTLEMENT_VERSION) errors.push("settlement-version-invalid");
+  UNIVERSAL_BASEBALL_SKILL_KEYS.forEach(skill => {
+    const value = target?.baseballSkills?.[skill];
+    if (!Number.isFinite(value) || value < 1 || value > 20) errors.push(`universal-skill-invalid:${skill}`);
+  });
+  SPECIALIST_BASEBALL_SKILL_KEYS.forEach(skill => {
+    const value = target?.baseballSkills?.[skill];
+    if (!Number.isFinite(value) || value < 0 || value > 20) errors.push(`specialist-skill-invalid:${skill}`);
+  });
+  return { ok: errors.length === 0, errors };
+}
+
+function settleHighSchoolEntryCapability(target, options = {}) {
+  const state = ensureCapabilityStateShape(target);
+  if (state.initialized && state.settlementVersion === HS_ENTRY_CAPABILITY_SETTLEMENT_VERSION) {
+    const validation = validateHighSchoolEntryCapability(target);
+    return validation.ok ? { ok: true, existing: true, capabilityState: state } : { ok: false, error: "既有高中能力結算不合法。", validation };
+  }
+  if (!target?.characterGenesis?.completed) return { ok: false, error: "Character Genesis 未完成，不能進行高中能力結算。" };
+  if (!Object.keys(state.initialBaseballSkills || {}).length) {
+    const initialized = initializePlayerCapabilityFromGenesis(target);
+    if (!initialized.ok) return initialized;
+  }
+  const activeState = ensureCapabilityStateShape(target);
+  target.baseballSkills = Object.assign({}, createInitialPlayer().baseballSkills, target.baseballSkills || {});
+  UNIVERSAL_BASEBALL_SKILL_KEYS.forEach(skill => {
+    const current = Number(target.baseballSkills[skill]);
+    const initial = Number(activeState.initialBaseballSkills[skill]);
+    target.baseballSkills[skill] = Math.max(1, Math.min(20, Number.isFinite(current) && current > 0 ? current : initial));
+  });
+  SPECIALIST_BASEBALL_SKILL_KEYS.forEach(skill => {
+    const current = Number(target.baseballSkills[skill]);
+    target.baseballSkills[skill] = Math.max(0, Math.min(20, Number.isFinite(current) ? current : 0));
+  });
+  const affinityExperienceMap = { infield: "內野手", outfield: "外野手", catcher: "捕手", pitcher: "投手" };
+  Object.entries(affinityExperienceMap).forEach(([affinity, position]) => {
+    const value = Number(target.positionAffinity?.[affinity]);
+    if (Number.isFinite(value) && value > 0 && !Number.isFinite(Number(activeState.positionExperience[position]))) {
+      activeState.positionExperience[position] = Math.min(20, value);
+    }
+  });
+  if (target.baseballSkills.blocking > 0 || target.baseballSkills.gameCalling > 0) {
+    const missingCatcherExperience = !(Number(activeState.specialistExperience.catcher) > 0);
+    activeState.specialistExperience.catcher = Math.max(1, Number(activeState.specialistExperience.catcher) || 0);
+    if (missingCatcherExperience) recordLegacySpecialistNormalization(target, "catcher", ["blocking", "gameCalling"].filter(skill => target.baseballSkills[skill] > 0));
+  }
+  if (target.baseballSkills.control > 0 || target.baseballSkills.pitchStamina > 0) {
+    const missingPitcherExperience = !(Number(activeState.specialistExperience.pitcher) > 0);
+    activeState.specialistExperience.pitcher = Math.max(1, Number(activeState.specialistExperience.pitcher) || 0);
+    if (missingPitcherExperience) recordLegacySpecialistNormalization(target, "pitcher", ["control", "pitchStamina"].filter(skill => target.baseballSkills[skill] > 0));
+  }
+  activeState.initialized = true;
+  activeState.initialSkillFormulaVersion = INITIAL_SKILL_FORMULA_VERSION;
+  activeState.settlementVersion = HS_ENTRY_CAPABILITY_SETTLEMENT_VERSION;
+  activeState.originType = options.originType || activeState.originType || "normal-youth-outcomes";
+  activeState.developmentProfile = {
+    originIdealSelf: target.idealSelf,
+    biasTags: Object.keys(IDEAL_SELF_STARTING_BIASES[target.idealSelf] || {})
+  };
+  activeState.provenance.settlement = {
+    version: HS_ENTRY_CAPABILITY_SETTLEMENT_VERSION,
+    formulaVersion: INITIAL_SKILL_FORMULA_VERSION,
+    originType: activeState.originType,
+    youthOutcomeCount: activeState.youthOutcomes.length,
+    ledgerEntryCount: activeState.provenance.capabilityLedger.length,
+    universalMinimum: 1,
+    specialistZeroAllowed: true
+  };
+  const validation = validateHighSchoolEntryCapability(target);
+  if (!validation.ok) {
+    activeState.initialized = false;
+    return { ok: false, error: "高中能力結算 validation failed。", validation };
+  }
+  return { ok: true, existing: false, capabilityState: activeState };
+}
+
+function migrateLegacyPlayerCapability(target, options = {}) {
+  const state = ensureCapabilityStateShape(target);
+  if (state.initialized && validateHighSchoolEntryCapability(target).ok) return { ok: true, migrated: false, capabilityState: state };
+  if (!PlayerIdentityOptions.idealSelf.includes(target.idealSelf)) target.idealSelf = "全能型";
+  target.bats = PlayerIdentityOptions.bats.includes(target.bats) ? target.bats : "R";
+  target.throws = PlayerIdentityOptions.throws.includes(target.throws) ? target.throws : "R";
+  target.characterGenesis = Object.assign({}, createInitialPlayer().characterGenesis, target.characterGenesis || {});
+  target.characterGenesis.completed = true;
+  target.characterGenesis.archetype = target.characterGenesis.archetype || target.idealSelf;
+  target.characterGenesis.initialAspiration = target.characterGenesis.initialAspiration || target.origin || PlayerIdentityOptions.origins[0];
+  target.characterGenesis.finalAbilities = getFinalizedGenesisAbilities(target);
+  const generated = generateInitialBaseballSkills(target);
+  if (!generated.ok) return generated;
+  state.characterSeed = state.characterSeed || generated.characterSeed;
+  state.initialSkillFormulaVersion = INITIAL_SKILL_FORMULA_VERSION;
+  state.initialBaseballSkills = Object.keys(state.initialBaseballSkills).length ? state.initialBaseballSkills : { ...generated.skills };
+  state.provenance.initialSkills = Object.keys(state.provenance.initialSkills).length ? state.provenance.initialSkills : generated.trace;
+  state.developmentProfile = { originIdealSelf: target.idealSelf, biasTags: Object.keys(IDEAL_SELF_STARTING_BIASES[target.idealSelf] || {}) };
+  target.baseballSkills = Object.assign({}, createInitialPlayer().baseballSkills, target.baseballSkills || {});
+  UNIVERSAL_BASEBALL_SKILL_KEYS.forEach(skill => {
+    const saved = Number(target.baseballSkills[skill]);
+    target.baseballSkills[skill] = Number.isFinite(saved) && saved > 0 ? Math.min(20, saved) : generated.skills[skill];
+  });
+  SPECIALIST_BASEBALL_SKILL_KEYS.forEach(skill => {
+    const saved = Number(target.baseballSkills[skill]);
+    target.baseballSkills[skill] = Number.isFinite(saved) && saved >= 0 ? Math.min(20, saved) : 0;
+  });
+  state.migration = {
+    sourceSaveVersion: options.sourceSaveVersion ?? null,
+    migrationVersion: HS_ENTRY_CAPABILITY_SETTLEMENT_VERSION,
+    deterministicDefault: "genesis-or-neutral-three",
+    preservedExistingPositiveSkills: true
+  };
+  state.originType = "legacy-save-migration";
+  const reachedHighSchool = Number(target.age) >= 16 || String(target.chapter || "").includes("青棒") || Number(target.highSchoolStep) > 0;
+  if (reachedHighSchool) return { ...settleHighSchoolEntryCapability(target, { originType: "legacy-save-migration" }), migrated: true };
+  return { ok: true, migrated: true, capabilityState: state };
+}
+
+function buildCapabilitySkillProvenance(target, state, provenance) {
+  const sourceRank = new Map(CAPABILITY_PROVENANCE_SOURCE_ORDER.map((sourceType, index) => [sourceType, index]));
+  const ledger = Array.isArray(provenance.capabilityLedger) ? provenance.capabilityLedger : [];
+  const normalizations = Array.isArray(provenance.normalizations) ? provenance.normalizations : [];
+  return Object.fromEntries([...UNIVERSAL_BASEBALL_SKILL_KEYS, ...SPECIALIST_BASEBALL_SKILL_KEYS].map(skill => {
+    const sources = [];
+    const initialValue = Number(state.initialBaseballSkills?.[skill]);
+    if (Number.isFinite(initialValue)) {
+      sources.push({
+        sourceType: "initial-formula",
+        formulaVersion: state.initialSkillFormulaVersion || INITIAL_SKILL_FORMULA_VERSION,
+        value: initialValue
+      });
+    }
+    ledger.filter(item => item.skill === skill).forEach(item => sources.push({ ...item }));
+    if (state.migration) {
+      sources.push({
+        sourceType: CAPABILITY_MUTATION_SOURCE_TYPES.MIGRATION,
+        migrationVersion: state.migration.migrationVersion || "",
+        preservedValue: Number(target?.baseballSkills?.[skill]) || 0
+      });
+    }
+    normalizations.filter(item => item.skills?.includes(skill)).forEach(item => sources.push({ ...item, skills: Object.freeze(item.skills.slice()) }));
+    sources.sort((left, right) => (sourceRank.get(left.sourceType) ?? 999) - (sourceRank.get(right.sourceType) ?? 999));
+    return [skill, Object.freeze({
+      finalValue: Number(target?.baseballSkills?.[skill]) || 0,
+      sources: Object.freeze(sources.map(item => Object.freeze(item)))
+    })];
+  }));
+}
+
+function getDebugCapabilitySnapshot(target) {
+  const state = target?.capabilityState || createDefaultCapabilityState();
+  const youthOutcomes = Array.isArray(state.youthOutcomes) ? state.youthOutcomes : [];
+  const provenance = state.provenance || createDefaultCapabilityState().provenance;
+  const developmentProfile = state.developmentProfile || createDefaultCapabilityState().developmentProfile;
+  const youthDeltas = Object.fromEntries([...UNIVERSAL_BASEBALL_SKILL_KEYS, ...SPECIALIST_BASEBALL_SKILL_KEYS].map(skill => [
+    skill,
+    youthOutcomes.reduce((sum, outcome) => sum + (Number(outcome.skillDeltas?.[skill]) || 0), 0)
+  ]));
+  const skillProvenance = buildCapabilitySkillProvenance(target, state, provenance);
+  return Object.freeze({
+    genesis: Object.freeze(getFinalizedGenesisAbilities(target)),
+    idealSelf: target.idealSelf,
+    initialSkills: Object.freeze({ ...state.initialBaseballSkills }),
+    youthDeltas: Object.freeze(youthDeltas),
+    youthOutcomes: Object.freeze(youthOutcomes.map(item => Object.freeze(JSON.parse(JSON.stringify(item))))),
+    finalHighSchoolEntrySkills: Object.freeze({ ...(target.baseballSkills || {}) }),
+    positionExperience: Object.freeze({ ...state.positionExperience }),
+    specialistExperience: Object.freeze({ ...state.specialistExperience }),
+    developmentProfile: Object.freeze({ ...developmentProfile, biasTags: Object.freeze((developmentProfile.biasTags || []).slice()) }),
+    initialSkillFormulaVersion: state.initialSkillFormulaVersion,
+    settlementVersion: state.settlementVersion,
+    initialized: state.initialized === true,
+    skillProvenance: Object.freeze(skillProvenance),
+    provenanceSummary: Object.freeze({
+      initialSkills: Object.freeze({ ...(provenance.initialSkills || {}) }),
+      capabilityLedger: Object.freeze((provenance.capabilityLedger || []).map(item => Object.freeze({ ...item }))),
+      normalizations: Object.freeze((provenance.normalizations || []).map(item => Object.freeze({ ...item, skills: Object.freeze((item.skills || []).slice()) }))),
+      settlement: provenance.settlement ? Object.freeze({ ...provenance.settlement }) : null,
+      migration: state.migration ? Object.freeze({ ...state.migration }) : null
+    })
+  });
+}
+
+function createRepresentativeHighSchoolEntryFixture(profile = "ordinary", seed = 1) {
+  const profiles = {
+    ordinary: { idealSelf: "全能型", allocation: { ballSense: 1, observe: 1, fitness: 0, batting: 0, baseRunning: 0, baseballIQ: 1 } },
+    defense: { idealSelf: "守備型", allocation: { ballSense: 1, observe: 1, fitness: 1, batting: 0, baseRunning: 0, baseballIQ: 0 } },
+    batting: { idealSelf: "強打型", allocation: { ballSense: 1, observe: 0, fitness: 0, batting: 2, baseRunning: 0, baseballIQ: 0 } },
+    low: { idealSelf: "棒球理解型", allocation: { ballSense: 0, observe: 0, fitness: 0, batting: 0, baseRunning: 1, baseballIQ: 2 } }
+  };
+  const config = profiles[profile] || profiles.ordinary;
+  let randomState = Math.max(1, Number(seed) >>> 0);
+  const random = () => {
+    randomState = (Math.imul(randomState, 1664525) + 1013904223) >>> 0;
+    return randomState / 4294967296;
+  };
+  const target = createInitialPlayer(`代表性高中球員-${profile}-${seed}`);
+  target.origin = "understand";
+  target.idealSelf = config.idealSelf;
+  const roll = rollCharacterGenesis(random);
+  const genesis = applyCharacterGenesis(target, { baseRoll: roll.baseRoll, allocation: config.allocation, shape: roll.shape, bats: "R", throws: "R" });
+  if (!genesis.ok) throw new Error(genesis.error);
+  applyCanonicalPositionProfile(target, "內野手", []);
+  applySyntheticYouthOrigin(target);
+  const settlement = settleHighSchoolEntryCapability(target, { originType: `representative-${profile}` });
+  if (!settlement.ok) throw new Error(settlement.error);
+  target.chapter = "青棒";
+  target.age = 16;
+  target.highSchoolStep = 5;
+  target.highSchoolRoleCode = profile === "low" ? "bench" : "rotation";
+  return target;
+}
+
 function rollCharacterGenesis(random = Math.random) {
   const values = [3, 3, 2, 2, 1, 1];
   for (let index = values.length - 1; index > 0; index -= 1) {
@@ -62,9 +640,12 @@ function applyCharacterGenesis(target, genesisInput = {}) {
     total: 15,
     shape: genesisInput.shape || CHARACTER_GENESIS_ABILITY_KEYS.filter(key => rolled[key] === 3).join("＋"),
     archetype: target.idealSelf,
-    initialAspiration: target.origin
+    initialAspiration: target.origin,
+    finalAbilities: Object.fromEntries(CHARACTER_GENESIS_ABILITY_KEYS.map(key => [key, rolled[key] + allocation.allocation[key]]))
   };
-  return { ok: true, genesis: target.characterGenesis };
+  const capability = initializePlayerCapabilityFromGenesis(target);
+  if (!capability.ok) return capability;
+  return { ok: true, genesis: target.characterGenesis, initialSkills: { ...target.baseballSkills } };
 }
 
 function applyCanonicalPositionProfile(target, primaryPosition = "", secondaryPositions = []) {
@@ -120,8 +701,10 @@ function createInitialPlayer(name = "") {
       total: 0,
       shape: "",
       archetype: "",
-      initialAspiration: ""
+      initialAspiration: "",
+      finalAbilities: Object.fromEntries(CHARACTER_GENESIS_ABILITY_KEYS.map(key => [key, 0]))
     },
+    capabilityState: createDefaultCapabilityState(),
     age: 10,
     chapter: "十歲暑假",
     day: 1,
@@ -276,7 +859,30 @@ function createInitialPlayer(name = "") {
     highSchoolPositionPreference: "",
     highSchoolCoachEvaluation: { primaryPosition: "", secondaryPositions: [], rating: 0, rationale: "", idealAlignment: "", coachIdentity: "", context: "" },
     highSchoolRoleContext: { code: "", label: "", evidence: [], opportunity: "", assignment: "" },
-    highSchoolMatch: { id: "", opponent: "", inning: 0, half: "", outs: 0, scores: { home: 0, away: 0 }, runners: [], role: "", position: "", assignment: "", decision: "", outcome: "", consequence: "", coachReaction: "", teamReaction: "", completed: false },
+    highSchoolMatch: {
+      id: "", opponent: "", inning: 0, half: "", outs: 0,
+      scores: { home: 0, away: 0 }, runners: [], role: "", position: "", assignment: "",
+      momentIndex: 0, currentMomentId: "", currentDomain: "", completedMoments: [],
+      offenseTeam: "", defenseTeam: "", currentBatter: "", currentAssignment: "", matchEntryHistory: "",
+      battingOrderIndex: { home: 0, away: 0 }, halfInningResolved: false,
+      regulationInnings: 7, lineScore: { home: [], away: [] },
+      simulationPhase: "idle", simulationCursor: 0, simulationSeed: 0, simulationLog: [], presentedEventCursor: 0, scoreboardRevealHalfIndex: 0, rosters: { home: null, away: null },
+      playerLineupStatus: "", playerLineupSlot: -1, playerFieldingAssignment: "", playerEntryWindowInning: 1, playerEntryCompleted: false,
+      performanceEvidence: {}, developmentFullMatchStart: false,
+      playerRunnerLocation: -1,
+      coachTacticalDirection: { domain: "", intent: "", riskPreference: "", priority: "", sourceCoachId: "", presentationStyle: "" },
+      coachTacticalContextSignature: "",
+      opponentTacticalTruth: { code: "", targetRunnerId: "" },
+      ballContext: { type: "", family: "", pace: "", label: "", detail: "", timeWindow: "" },
+      positionDecisionFamily: "", currentFieldingPosition: "", developmentPositionOverride: "", defensiveSituation: {},
+      playerEventClassification: "ordinaryPlay", decisionTension: "none", decisionGate: null,
+      lastDefensiveResolution: {},
+      playerContribution: { strong: 0, mixed: 0, failure: 0, runsCreated: 0, runsScored: 0, hits: 0, walks: 0, outsCreated: 0, errors: 0 },
+      previousMomentDecision: "", previousMomentOutcome: "", passage: "",
+      opponentAdjustment: "", coachInstruction: "", decision: "", outcomeTier: "",
+      outcome: "", consequence: "", coachReaction: "", teamReaction: "",
+      performanceSummary: "", teamResult: "", settled: false, pendingGameSettlement: "", eventSettlementApplied: false, completed: false
+    },
     highSchoolAzheEcho: { variant: "", influenceDirection: "", evidence: [], cause: "", change: "", recall: "", summary: "", persistentFlag: "" },
     highSchoolRivalContext: { rivalId: "takahashi", rivalName: "高橋", entryType: "", encounter: "", yearTwoPressure: "" },
     highSchoolYearOneComplete: false,

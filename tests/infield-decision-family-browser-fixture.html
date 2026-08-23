@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Infield Decision Family Browser Validation</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    body { padding: 20px; background: #f4f0e6; }
+    .fixture-toolbar { max-width: 1180px; margin: 0 auto 16px; padding: 16px; border-radius: 16px; background: #fff; box-shadow: 0 8px 30px #1d2d2530; }
+    .fixture-toolbar h1 { margin: 0 0 8px; font-size: 1.25rem; }
+    .fixture-toolbar p { margin: 0 0 12px; color: #46564d; }
+    .fixture-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+    .fixture-buttons button { padding: 9px 13px; border: 1px solid #8b9a90; border-radius: 999px; background: #fff; cursor: pointer; }
+    .fixture-buttons button[aria-pressed="true"] { color: #fff; background: #234c3a; border-color: #234c3a; }
+    .fixture-result { max-width: 880px; margin: 16px auto; padding: 20px; border-radius: 18px; background: #fff; box-shadow: 0 8px 30px #1d2d2530; }
+    .fixture-result h2 { margin-top: 0; }
+    .fixture-result dl { display: grid; grid-template-columns: 110px 1fr; gap: 10px 14px; }
+    .fixture-result dt { font-weight: 800; color: #234c3a; }
+    .fixture-result dd { margin: 0; line-height: 1.55; }
+  </style>
+</head>
+<body>
+  <header class="fixture-toolbar">
+    <h1>Baseball Match Foundation 2.1｜瀏覽器驗收情境</h1>
+    <p>以下按鈕使用正式 Situation Builder、Choice Generator、Resolver 與 Presentation Adapter；不是另一套比賽引擎。</p>
+    <div class="fixture-buttons" role="group" aria-label="選擇內野驗收情境">
+      <button type="button" data-case="routine" onclick="showFixtureCase('routine')">A｜游擊例行雙殺</button>
+      <button type="button" data-case="second" onclick="showFixtureCase('second')">E｜二壘同類球</button>
+      <button type="button" data-case="slow" onclick="showFixtureCase('slow')">B｜三壘慢滾</button>
+      <button type="button" data-case="deep" onclick="showFixtureCase('deep')">C｜游擊深處球</button>
+      <button type="button" data-case="loaded" onclick="showFixtureCase('loaded')">D｜滿壘壓力</button>
+      <button type="button" data-case="causes" onclick="showFixtureCase('causes')">F｜四種原因</button>
+    </div>
+  </header>
+  <main>
+    <div id="story"></div>
+    <div id="choices"></div>
+    <div id="changeLog"></div>
+    <div id="status"></div>
+    <div id="time"></div>
+    <div id="player-info"></div>
+  </main>
+
+  <script src="../player.js"></script>
+  <script src="../current-state-boundary.js"></script>
+  <script src="../time-boundary.js"></script>
+  <script src="../relationship-boundary.js"></script>
+  <script src="../evaluation-registry.js"></script>
+  <script src="../coach-evaluation-boundary.js"></script>
+  <script src="../narrative-condition-boundary.js"></script>
+  <script src="../evaluation-registry-bootstrap.js"></script>
+  <script src="../decision-flow.js"></script>
+  <script src="../day-completion-flow.js"></script>
+  <script src="../relationship-flow.js"></script>
+  <script src="../coach-response-flow.js"></script>
+  <script src="../narrative-condition-flow.js"></script>
+  <script src="../competition-presentation.js"></script>
+  <script src="../baseball-gameplay-prototype-utils.js"></script>
+  <script src="../baseball-defense-prototype.js"></script>
+  <script src="../baseball-offense-prototype.js"></script>
+  <script src="../baseball-gameplay-integration.js"></script>
+  <script src="../baseball-training-resolver.js"></script>
+  <script src="../career-spine-contract.js"></script>
+  <script src="../career-transition-resolver.js"></script>
+  <script src="../career-transition-commit.js"></script>
+  <script src="../career-transition-runtime-resolver.js"></script>
+  <script src="../career-transition-progression.js"></script>
+  <script src="../career-development-runtime-resolver.js"></script>
+  <script src="../career-development-progression.js"></script>
+  <script src="../career-age22-outcome-resolver.js"></script>
+  <script src="../career-save-admission.js"></script>
+  <script src="../npc.js"></script>
+  <script src="../coach.js"></script>
+  <script src="../rival.js"></script>
+  <script src="../story.js"></script>
+  <script src="../save.js"></script>
+  <script src="../script.js?v=21"></script>
+  <script>
+    const fixtureCases = Object.freeze({
+      routine: { position: "游擊手", type: "hardGrounder", direction: "straightAtPlayer", runners: ["away-sim-2", null, null], outs: 1, inning: 5, home: 1, away: 1 },
+      second: { position: "二壘手", type: "hardGrounder", direction: "upTheMiddle", runners: ["away-sim-2", null, null], outs: 1, inning: 5, home: 1, away: 1 },
+      slow: { position: "三壘手", type: "slowGrounder", direction: "lineSide", runners: ["away-sim-2", null, null], outs: 0, inning: 4, home: 1, away: 1, batterSpeed: 9 },
+      deep: { position: "游擊手", type: "deepGrounder", direction: "towardHole", runners: [null, null, null], outs: 1, inning: 5, home: 2, away: 2, batterSpeed: 6 },
+      loaded: { position: "三壘手", type: "normalGrounder", direction: "straightAtPlayer", runners: ["away-sim-2", "away-sim-3", "away-sim-5"], outs: 1, inning: 7, home: 2, away: 2 }
+    });
+
+    function createFixtureMatch(config, level = 7) {
+      player = createInitialPlayer("瀏覽器驗收球員");
+      applyDebugBookmarkCharacterProfile(player);
+      settleHighSchoolEntryCapability(player, { originType: "browser-test-fixture" });
+      applyCanonicalPositionProfile(player, "內野手", ["外野手"]);
+      player.chapter = "青棒";
+      player.highSchoolStep = 5;
+      player.highSchoolRoleCode = "starter";
+      player.highSchoolTeamRole = "先發／關鍵守備任務";
+      Object.keys(player.baseballSkills).forEach(key => { player.baseballSkills[key] = level; });
+      Object.assign(player, { ballSense: level, observe: level, fitness: level, instinct: level, discipline: level, responsibility: level });
+      const match = prepareHighSchoolYearOneMatch();
+      Object.assign(match, {
+        momentIndex: 1,
+        currentMomentId: highSchoolYearOneMomentIds[1],
+        currentDomain: "defense",
+        simulationPhase: "moment_2_ready",
+        inning: config.inning,
+        half: "上",
+        offenseTeam: "away",
+        defenseTeam: "home",
+        outs: config.outs,
+        runners: config.runners.slice(),
+        scores: { home: config.home, away: config.away },
+        currentBatter: "away-sim-4",
+        currentFieldingPosition: config.position,
+        positionDecisionFamily: "",
+        defensiveSituation: {}
+      });
+      match.scoreboardRevealHalfIndex = getHighSchoolHalfInningIndex(match.inning, match.half);
+      getHighSchoolMatchSimulationEntity(match, match.currentBatter).speed = config.batterSpeed || 5;
+      setHighSchoolDefensiveBallContext(match, config.type);
+      buildInfieldMeaningfulMoment(match, player, {
+        playerPosition: config.position,
+        ballDirection: config.direction,
+        batterSpeed: config.batterSpeed
+      });
+      match.currentAssignment = getHighSchoolDefensiveSituationText(match);
+      setHighSchoolCoachTacticalDirection(match);
+      return match;
+    }
+
+    function renderFixtureMatch(caseId) {
+      const match = createFixtureMatch(fixtureCases[caseId]);
+      const model = getHighSchoolMatchPresentation(match);
+      const choices = getHighSchoolDefensiveMomentChoices(match);
+      document.getElementById("story").innerHTML = `<article class="event-card high-school-match-card match-mode">
+        ${renderHighSchoolYearOneScore("header", model)}
+        <div class="match-mode-lower-grid">
+          <div class="match-mode-context-column">${renderHighSchoolLiveSituation(model)}${renderHighSchoolLiveFeed(model)}</div>
+          <div class="match-mode-decision-column">
+            <h2>${escapeHtml(match.currentFieldingPosition)}｜內野守備判讀</h2>
+            <section class="match-current-assignment"><small>Situation</small><strong>${escapeHtml(match.currentAssignment)}</strong></section>
+            ${renderHighSchoolOpponentInformation(model)}
+            ${renderHighSchoolCoachDirection(model)}
+          </div>
+        </div>
+      </article>`;
+      document.getElementById("choices").innerHTML = `<section class="match-player-decisions"><small>你的決定</small><div class="match-decision-buttons">${choices.map(choice => `<button type="button">${escapeHtml(choice.text)}</button>`).join("")}</div></section>`;
+    }
+
+    function findCauseResult(config, decision, cause, capabilities = null, primaryOnly = false) {
+      for (let index = 0; index < 101; index += 1) {
+        const match = createFixtureMatch(config, 7);
+        if (capabilities) {
+          match.defensiveSituation.playerCapabilities = { ...match.defensiveSituation.playerCapabilities, ...capabilities };
+          match.defensiveSituation.windows = deriveInfieldExecutionWindows(match.defensiveSituation);
+        }
+        const resolution = resolveHighSchoolDefensivePlay(match, decision, index / 101);
+        if (resolution && (resolution.primaryCause === cause || (!primaryOnly && resolution.secondaryCause === cause))) return { match, resolution, decision };
+      }
+      return null;
+    }
+
+    function renderCauseCases() {
+      const weakPivot = {
+        receivingFielder: { name: "二壘手", capabilities: { fielding: 1, reaction: 1, throwing: 1 } },
+        pivotFielder: { name: "二壘手", capabilities: { fielding: 1, reaction: 1, throwing: 1 } },
+        firstBaseReceiver: { name: "一壘手", capabilities: { fielding: 7, reaction: 7, throwing: 7 } }
+      };
+      const causeCases = [
+        findCauseResult(fixtureCases.slow, "secure", "slowGrounder"),
+        findCauseResult(fixtureCases.slow, "secure", "fastBatter", null, true),
+        findCauseResult(fixtureCases.deep, "secure", "weakArm", { fielding: 10, reaction: 10, range: 10, arm: 2, throwing: 7, decision: 10 }),
+        (() => {
+          for (let index = 0; index < 101; index += 1) {
+            const match = createFixtureMatch(fixtureCases.routine, 10);
+            match.defensiveSituation.teammates = weakPivot;
+            const resolution = resolveHighSchoolDefensivePlay(match, "challenge", index / 101);
+            if (resolution.primaryCause === "teammateIssue") return { match, resolution, decision: "challenge" };
+          }
+          return null;
+        })()
+      ].filter(Boolean);
+      const labels = ["慢滾前衝", "快打者壓縮", "深處弱臂", "隊友轉傳"];
+      document.getElementById("story").innerHTML = causeCases.map((item, index) => {
+        const view = presentInfieldDecision(item.match.defensiveSituation, item.resolution, item.decision);
+        return `<article class="fixture-result"><h2>${labels[index]}</h2><dl>
+          <dt>Situation</dt><dd>${escapeHtml(view.situation)}</dd>
+          <dt>Decision</dt><dd>${escapeHtml(view.decision)}</dd>
+          <dt>Execution</dt><dd>${escapeHtml(view.execution)}</dd>
+          <dt>Outcome</dt><dd>${escapeHtml(view.outcome)}</dd>
+          <dt>Why</dt><dd>${escapeHtml(view.why)}</dd>
+        </dl></article>`;
+      }).join("");
+      document.getElementById("choices").innerHTML = "";
+    }
+
+    function showFixtureCase(caseId) {
+      document.querySelectorAll("[data-case]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.case === caseId)));
+      if (caseId === "causes") renderCauseCases();
+      else renderFixtureMatch(caseId);
+    }
+
+    showFixtureCase("routine");
+  </script>
+</body>
+</html>

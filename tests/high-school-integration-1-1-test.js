@@ -97,18 +97,24 @@ const roleCodes = parse(`(() => {
 verify("8. 複合判定可形成先發／輪替／發展三種內部角色", JSON.stringify(roleCodes) === JSON.stringify(["starter", "rotation", "bench"]));
 
 const roleMatches = parse(`(() => ["starter","rotation","bench"].map(code=>{
-  player=createInitialPlayer(code); player.primaryPosition="內野手"; player.highSchoolRoleCode=code; player.highSchoolTeamRole=code;
+  player=createRepresentativeHighSchoolEntryFixture("ordinary",11000+["starter","rotation","bench"].indexOf(code)); player.highSchoolRoleCode=code; player.highSchoolTeamRole=code;
   const match=prepareHighSchoolYearOneMatch(); return {code,id:match.id,opponent:match.opponent,assignment:match.assignment};
 }))()`);
 verify("9. 三種角色都進入同一場正式交流賽", roleMatches.every(item => item.id === "hs-y1-autumn-exhibition" && item.opponent.includes("高橋") && item.assignment));
 
 const abilityOutcomes = parse(`(() => {
-  const run=high=>{ player=createInitialPlayer(high?"高能力":"低能力"); player.primaryPosition="內野手"; player.highSchoolRoleCode="bench";
+  const run=high=>{ player=createRepresentativeHighSchoolEntryFixture(high?"defense":"low",high?11102:11101); player.highSchoolRoleCode="bench";
     if(high) Object.assign(player.baseballSkills,{batting:14,baseballIQ:10}); if(high) Object.assign(player,{ballSense:10,observe:8,discipline:8});
-    const text=resolveHighSchoolYearOneMatch("zone"); return {text,completed:player.highSchoolMatch.completed,id:player.highSchoolMatch.id}; };
+    pendingHighSchoolMatchSimulationSeed=high?11102:11101;
+    const texts=[];let safety=0;while(!player.highSchoolMatch.completed&&safety++<1400){
+      const match=prepareHighSchoolYearOneMatch();
+      if(isHighSchoolMatchDecisionVisible(match)){const choices=getHighSchoolYearOneMatchMomentChoices(match);const preferred=match.currentDomain==="defense"?"secure":"zone";const choice=choices.find(item=>item.matchDecision===preferred)||choices[0];texts.push(resolveHighSchoolYearOneMatch(choice.matchDecision,choice.matchMomentId,()=>high?0.99:0));}
+      else advanceHighSchoolMatchPlaybackStep(match);
+    }
+    return {text:texts.join("｜"),completed:player.highSchoolMatch.completed,id:player.highSchoolMatch.id,moments:player.highSchoolMatch.completedMoments.length}; };
   return [run(false),run(true)];
 })()`);
-verify("10. 能力會改變打席結果，但不會改變是否能做決定", abilityOutcomes.every(item => item.completed && item.id === "hs-y1-autumn-exhibition") && abilityOutcomes[0].text !== abilityOutcomes[1].text);
+verify("10. 能力會改變場上結果，但 Regulation 只決定一至三次合法決策", abilityOutcomes.every(item => item.completed && item.moments >= 1 && item.moments <= 3 && item.id === "hs-y1-autumn-exhibition") && abilityOutcomes[0].text !== abilityOutcomes[1].text);
 
 const azheVariants = parse(`(() => {
   const run=(kind)=>{ player=createInitialPlayer(kind); player.idealSelf="棒球理解型";

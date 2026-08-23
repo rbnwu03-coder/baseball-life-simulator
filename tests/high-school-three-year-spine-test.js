@@ -90,6 +90,7 @@ function completeQueuedTraining(context, code = "recovery") {
 }
 
 function fingerprint(context, ids) {
+  if (ids.includes("high_school_showcase")) evaluate(context, `player=createRepresentativeHighSchoolEntryFixture("ordinary",33001);`);
   const data = ids.map(id => {
     const event = evaluate(context, `getEvent(${JSON.stringify(id)})`);
     return {
@@ -288,7 +289,7 @@ resetToYearTwo(context, {
 verify("44. 合法高二小結 Snapshot 可辨識", evaluate(context, "CareerSpineContract.getCareerSpineSnapshot(player).status === 'recognized' && getCurrentEventId() === 'high_school_year_two_result'"));
 
 const highOneFingerprint = fingerprint(context, highOneIds);
-verify("45. 高一八幕選項與效果指紋維持 Integration 1.1 基線", highOneFingerprint === "ce584773fc9e42811c041dd6cabd2dce0f29de030d48adf7dfe3479d863d7104");
+verify("45. 高一八幕選項與效果指紋更新為 Integration 1.2／Match Foundation 累積基線", highOneFingerprint === "1fed24b4dc412bbf7a7745f5f1903933bbe03a50b82317e28c956bccb2e4d0d7");
 verify("46. 高三八幕選項與效果指紋維持 Sprint 前基線", fingerprint(context, highThreeIds) === "62efa6c57ea795cd060ca7c34aefe89d3481d66ae085a822bbde4fbd90109f44");
 verify("47. 高二事件沒有直接寫入 careerExit", yearTwoIds.every(id => evaluate(context, `getEvent(${JSON.stringify(id)}).choices.every(choice => !Object.prototype.hasOwnProperty.call(choice, 'careerExit'))`)));
 verify("48. 高二事件沒有新增 roll 或隱藏 outcome 欄位", yearTwoIds.every(id => evaluate(context, `getEvent(${JSON.stringify(id)}).choices.every(choice => !('roll' in choice) && !('outcome' in choice))`)));

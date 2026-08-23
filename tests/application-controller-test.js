@@ -23,6 +23,7 @@ function makeDelegationContext(overrides = {}) {
     selectOrigin: (...args) => calls.push(["selectOrigin", ...args]),
     selectIdealSelf: (...args) => calls.push(["selectIdealSelf", ...args]),
     selectDevelopmentEntry: (...args) => calls.push(["selectDevelopmentEntry", ...args]),
+    selectDevelopmentTestPosition: (...args) => calls.push(["selectDevelopmentTestPosition", ...args]),
     loadTestBookmark: (...args) => calls.push(["loadTestBookmark", ...args]),
     ...overrides
   });
@@ -55,6 +56,7 @@ vm.runInContext(`
   ApplicationController.selectOrigin("understand");
   ApplicationController.selectIdealSelf("技巧型");
   ApplicationController.selectDevelopmentEntry("highSchool");
+  ApplicationController.selectDevelopmentTestPosition("游擊手");
   ApplicationController.loadTestBookmark("chapter2");
 `, delegation);
 
@@ -68,6 +70,7 @@ assert(JSON.stringify(delegation.calls) === JSON.stringify([
   ["selectOrigin", "understand"],
   ["selectIdealSelf", "技巧型"],
   ["selectDevelopmentEntry", "highSchool"],
+  ["selectDevelopmentTestPosition", "游擊手"],
   ["loadTestBookmark", "chapter2"]
 ]), "façade 委派函式或參數順序不正確");
 

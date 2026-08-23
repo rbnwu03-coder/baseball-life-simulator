@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Second Base Reference v1.0 Browser Fixture</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    body { margin: 0; padding: 24px; background: #f4f0e6; }
+    .fixture-toolbar, #story, #choices, .fixture-debug { max-width: 1180px; margin: 0 auto 16px; }
+    .fixture-toolbar, .fixture-debug { padding: 18px; border-radius: 16px; background: #fff; box-shadow: 0 8px 30px #1d2d2530; }
+    .fixture-toolbar h1 { margin: 0 0 8px; font-size: 1.35rem; }
+    .fixture-toolbar p { margin: 0 0 12px; color: #536157; }
+    .fixture-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+    .fixture-buttons button { width: auto; margin: 0; padding: 9px 13px; border: 1px solid #8b9a90; border-radius: 999px; background: #fff; color: #243a30; }
+    .fixture-debug { border-left: 5px solid #9c5b32; }
+    .fixture-debug h2 { margin: 0 0 10px; font-size: 1rem; }
+    .fixture-debug dl { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 7px 12px; margin: 0; }
+    .fixture-debug dt { font-weight: 800; color: #6f4d31; }
+    .fixture-debug dd { margin: 0; overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <header class="fixture-toolbar">
+    <h1>Baseball Match Foundation 2.2.4｜Second Base Reference v1.0</h1>
+    <p>八個案例都使用正式 Full Match state、Infield Decision Family、責任解析、路線窗口與 resolver。</p>
+    <div class="fixture-buttons" role="group" aria-label="二壘手八個參考案例">
+      <button type="button" data-case="1" onclick="showCase1()">1｜Routine Grounder</button>
+      <button type="button" data-case="2" onclick="showCase2()">2｜4-6-3</button>
+      <button type="button" data-case="3" onclick="showCase3()">3｜6-4-3</button>
+      <button type="button" data-case="4" onclick="showCase4()">4｜Lead Runner</button>
+      <button type="button" data-case="5" onclick="showCase5()">5｜Run Prevention</button>
+      <button type="button" data-case="6" onclick="showCase6()">6｜Bases Loaded</button>
+      <button type="button" data-case="7" onclick="showCase7()">7｜Slow Roller</button>
+      <button type="button" data-case="8" onclick="showCase8()">8｜Coverage Failure</button>
+    </div>
+  </header>
+  <main id="story"></main>
+  <div id="choices"></div>
+  <aside class="fixture-debug" aria-labelledby="debugTitle">
+    <h2 id="debugTitle">Fixture Debug（不屬於正式 UI）</h2>
+    <dl id="fixtureDebug"></dl>
+  </aside>
+  <div id="changeLog" hidden></div><div id="status" hidden></div><div id="time" hidden></div><div id="player-info" hidden></div>
+
+  <script>
+    window.fixtureErrors = [];
+    window.fixtureAudit = {};
+    window.addEventListener("error", event => window.fixtureErrors.push(event.message || "error"));
+    window.addEventListener("unhandledrejection", event => window.fixtureErrors.push(String(event.reason || "rejection")));
+  </script>
+  <script src="../player.js"></script><script src="../current-state-boundary.js"></script><script src="../time-boundary.js"></script>
+  <script src="../relationship-boundary.js"></script><script src="../evaluation-registry.js"></script><script src="../coach-evaluation-boundary.js"></script>
+  <script src="../narrative-condition-boundary.js"></script><script src="../evaluation-registry-bootstrap.js"></script><script src="../decision-flow.js"></script>
+  <script src="../day-completion-flow.js"></script><script src="../relationship-flow.js"></script><script src="../coach-response-flow.js"></script>
+  <script src="../narrative-condition-flow.js"></script><script src="../competition-presentation.js"></script><script src="../baseball-gameplay-prototype-utils.js"></script>
+  <script src="../baseball-defense-prototype.js"></script><script src="../baseball-offense-prototype.js"></script><script src="../baseball-gameplay-integration.js"></script>
+  <script src="../baseball-training-resolver.js"></script><script src="../career-spine-contract.js"></script><script src="../career-transition-runtime-resolver.js"></script>
+  <script src="../career-transition-progression.js"></script><script src="../career-development-runtime-resolver.js"></script><script src="../career-development-progression.js"></script>
+  <script src="../career-age22-outcome-resolver.js"></script><script src="../career-save-admission.js"></script><script src="../story.js"></script><script src="../save.js"></script>
+  <script src="../script.js?v=224"></script>
+  <script>
+    let fixtureMatch = null;
+    let fixtureResolution = null;
+
+    function startSecondBaseFixture(seed = 224001) {
+      stopHighSchoolMatchPlayback(); pendingYouthSeasonOutcome = null; isTransitioning = false;
+      player = createInitialPlayer("二壘手參考驗收球員");
+      applyDebugBookmarkCharacterProfile(player); settleHighSchoolEntryCapability(player, { originType: "browser-test-fixture" }); applyCanonicalPositionProfile(player, "內野手", ["外野手"]);
+      player.chapter = "青棒"; player.highSchoolStep = 5; player.highSchoolRoleCode = "starter"; player.highSchoolTeamRole = "starter";
+      pendingHighSchoolMatchSimulationSeed = seed;
+      fixtureMatch = prepareHighSchoolYearOneMatch();
+      Object.assign(fixtureMatch, {
+        inning: 5, half: "上", offenseTeam: "away", defenseTeam: "home", outs: 0,
+        runners: [null, null, null], scores: { home: 2, away: 2 }, simulationPhase: "moment_2_ready",
+        momentIndex: 1, currentMomentId: highSchoolYearOneMomentIds[1], currentDomain: "defense",
+        completed: false, settled: false, position: "內野手", developmentPositionOverride: "二壘手",
+        currentFieldingPosition: "二壘手", playerEntryCompleted: true, playerLineupStatus: "starter",
+        defensiveSituation: {}, positionDecisionFamily: "", currentAssignment: "二壘手守備責任正在形成。"
+      });
+      fixtureMatch.battingOrderIndex.away = 2;
+      fixtureMatch.currentBatter = getHighSchoolMatchLineupBatter(fixtureMatch, "away").id;
+      fixtureResolution = null;
+      return fixtureMatch;
+    }
+
+    function buildCase(options = {}) {
+      const match = startSecondBaseFixture(options.seed || 224001);
+      Object.assign(match, { runners: (options.runners || [null, null, null]).slice(), outs: options.outs ?? 0 });
+      setHighSchoolDefensiveBallContext(match, options.ball || "normalGrounder");
+      const level = options.level ?? 8;
+      buildInfieldMeaningfulMoment(match, player, {
+        playerPosition: "二壘手", primaryFielderPosition: options.primary || "二壘手",
+        ballDirection: options.direction || "straightAtPlayer", ...(options.depth ? { ballDepth: options.depth } : {}),
+        batterSpeed: options.batterSpeed ?? 5, runnerSpeeds: options.runnerSpeeds || [6, 6, 6],
+        activeRunnerBase: options.activeRunnerBase, runnerMovementProgress: options.runnerMovementProgress || {},
+        playerCapabilities: { fielding: level, reaction: level, range: level, arm: level, throwing: level, decision: level },
+        routeWindowOverrides: options.routeWindows || {}, executionChange: options.executionChange || "",
+        upstreamThrowQuality: options.upstreamThrowQuality || "", coverageQuality: options.coverageQuality || ""
+      });
+      const choices = getHighSchoolDefensiveMomentChoices(match);
+      const classification = classifyPositionFamilyPlay(match.defensiveSituation, choices, true);
+      match.playerEventClassification = classification.eventClassification;
+      match.decisionTension = classification.decisionTension;
+      match.decisionGate = classification.gate;
+      if (classification.eventClassification === "playerMeaningfulDecision") {
+        recordHighSchoolMatchSimulationEvent(match, { type: "meaningfulMomentReached", presentationImportance: "attention", momentId: match.currentMomentId, assignment: match.currentAssignment });
+        match.presentedEventCursor = match.simulationLog.length;
+      }
+      player.highSchoolMatch = match;
+      return { match, choices, classification };
+    }
+
+    function renderFixture(caseNumber, note, result = null) {
+      fixtureResolution = result;
+      renderHighSchoolYearOneMatch({ title: `二壘手參考案例 ${caseNumber}` }, { sceneContextHtml: "<span hidden></span>" });
+      const situation = fixtureMatch.defensiveSituation;
+      const choices = getHighSchoolDefensiveMomentChoices(fixtureMatch);
+      const commentary = result?.initialRoute === "coverSecondFor643"
+        ? formatHighSchoolRoutineDefensiveCommentary({
+          type: "playerRoutinePlay", batterId: situation.batterId, ballContext: result.ballContext,
+          ballDirection: result.ballDirection, playerPosition: situation.playerPosition,
+          initialRoute: result.initialRoute, fallbackRoute: result.fallbackRoute,
+          outsCreated: result.outsCreated, error: result.error, runnerChanges: result.runnerChanges,
+          upstreamThrowQuality: result.upstreamThrowQuality, after: { outs: Math.min(3, situation.outs + result.outsCreated) }
+        }, fixtureMatch)
+        : result ? Object.values(presentInfieldDecision(situation, result, choices.find(choice => choice.routeId === result.initialRoute)?.matchDecision || "")).filter(Boolean).join(" ") : "尚未解算";
+      const fields = {
+        "Case": `${caseNumber}｜${note}`,
+        "Player Role": situation.responsibility?.playerRole || "",
+        "Primary Fielder": `${situation.responsibility?.primaryFielder?.position || ""} / ${situation.responsibility?.primaryFielder?.actor || ""}`,
+        "Available Routes": choices.map(choice => choice.routeId || choice.route).join("、") || "無玩家選項（自動重評估）",
+        "Execution Readiness": choices.map(choice => `${choice.routeId || choice.route}:${choice.readiness?.level || "n/a"}`).join("、"),
+        "Current Windows": Object.entries(situation.routeWindows || {}).map(([key, value]) => `${key}:${value.state}`).join("、"),
+        "Primary Cause": result?.primaryCause || "尚未解算",
+        "Responsible Actor": result?.responsibleActor || "尚未解算",
+        "Fallback Route": result?.fallbackRoute || "無",
+        "Commentary": commentary,
+        "JavaScript Errors": String(window.fixtureErrors.length)
+      };
+      document.getElementById("fixtureDebug").innerHTML = Object.entries(fields).map(([key, value]) => `<dt>${escapeHtml(key)}</dt><dd>${escapeHtml(String(value))}</dd>`).join("");
+      window.fixtureAudit = { caseNumber, note, situation, choices, resolution: result, errors: window.fixtureErrors.slice() };
+      document.querySelectorAll("[data-case]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.case === String(caseNumber))));
+    }
+
+    function showCase1() {
+      const x = buildCase();
+      const r = resolveRoutineDefensivePlay(x.match, x.match.defensiveSituation, () => .9);
+      renderFixture(1, "空壘普通滾地球；只有一壘路線，Routine。", r);
+    }
+    function showCase2() {
+      const x = buildCase({ runners: ["away-sim-4", null, null], outs: 1, routeWindows: { doublePlayWindow: "wide" } });
+      const r = resolveInfieldDecision(x.match.defensiveSituation, "challenge", x.match, () => .9);
+      renderFixture(2, "4-6-3：玩家發動、游擊手補二壘並轉傳。", r);
+    }
+    function showCase3() {
+      const x = buildCase({ runners: ["away-sim-4", null, null], outs: 1, primary: "游擊手", direction: "leftSide", coverageQuality: "good", upstreamThrowQuality: "slightlyOffLine", routeWindows: { doublePlayWindow: "normal" } });
+      const r = resolveRoutineDefensivePlay(x.match, x.match.defensiveSituation, () => .75);
+      renderFixture(3, "6-4-3：游擊手發動，玩家補二壘、接球與 pivot。", r);
+    }
+    function showCase4() {
+      const x = buildCase({ runners: [null, "away-sim-4", null], activeRunnerBase: 2, runnerMovementProgress: { 1: "advancing" }, routeWindows: { leadRunnerThirdWindow: "normal" } });
+      renderFixture(4, "二壘跑者實際往三壘推進；一壘與三壘路線並存。", null);
+    }
+    function showCase5() {
+      const x = buildCase({ runners: [null, null, "away-sim-4"], outs: 1, activeRunnerBase: 3, runnerMovementProgress: { 2: "advancing" }, routeWindows: { homeOutWindow: "normal" } });
+      renderFixture(5, "非滿壘防分；本壘路線使用觸殺語意。", null);
+    }
+    function showCase6() {
+      const x = buildCase({ runners: ["away-sim-2", "away-sim-3", "away-sim-4"], outs: 1, executionChange: "bobble", routeWindows: { firstBaseOutWindow: "narrow", doublePlayWindow: "wide", homeOutWindow: "wide" } });
+      const r = resolveInfieldDecision(x.match.defensiveSituation, "challenge", x.match, () => .8);
+      renderFixture(6, "滿壘 4-6-3 因重新握球失效，依 live state 改抓本壘 force。", r);
+    }
+    function showCase7() {
+      const x = buildCase({ runners: ["away-sim-4", null, null], ball: "slowGrounder", direction: "rightSide", batterSpeed: 9, runnerSpeeds: [9, null, null] });
+      const r = resolveRoutineDefensivePlay(x.match, x.match.defensiveSituation, () => .8);
+      renderFixture(7, "慢滾球使二壘與雙殺窗口失效；不跳 Decision。", r);
+    }
+    function showCase8() {
+      const x = buildCase({ runners: ["away-sim-4", null, null], outs: 1, primary: "游擊手", direction: "leftSide", coverageQuality: "failed", routeWindows: { doublePlayWindow: "wide", firstBaseOutWindow: "wide" } });
+      const r = resolveRoutineDefensivePlay(x.match, x.match.defensiveSituation, () => .8);
+      renderFixture(8, "玩家補位失敗；游擊手不傳空壘包，重評估後改抓一壘。", r);
+    }
+
+    showCase1();
+  </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2.2.4.2 Production Playback Liveness Fixture</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    body { margin: 0; padding: 24px; background: #f4f0e6; }
+    .fixture-toolbar, .fixture-audit, #story, #choices { max-width: 1180px; margin: 0 auto 16px; }
+    .fixture-toolbar, .fixture-audit { padding: 18px; border-radius: 16px; background: #fff; box-shadow: 0 8px 30px #1d2d2530; }
+    .fixture-toolbar h1 { margin: 0 0 8px; font-size: 1.35rem; }
+    .fixture-toolbar p { margin: 0 0 12px; color: #536157; }
+    .fixture-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+    .fixture-buttons button { width: auto; margin: 0; padding: 9px 13px; border: 1px solid #8b9a90; border-radius: 999px; background: #fff; color: #243a30; }
+    .fixture-status { display: inline-block; margin-bottom: 8px; padding: 3px 9px; border-radius: 999px; font-weight: 800; }
+    .fixture-status.pass { color: #174b2d; background: #dff4e6; }
+    .fixture-status.fail { color: #7c231f; background: #f8deda; }
+    .fixture-audit pre { margin: 0; max-height: 44rem; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font: 0.82rem/1.5 ui-monospace, monospace; }
+  </style>
+</head>
+<body>
+  <header class="fixture-toolbar">
+    <h1>Baseball Match Foundation 2.2.4.2｜Production Playback Liveness</h1>
+    <p>從正式創角與 High School Full Match Direct Start 進入比賽；不注入 match、游標、局數或球員入場狀態。</p>
+    <div class="fixture-buttons" role="group" aria-label="Production path 驗收案例">
+      <button type="button" data-testid="start-a" onclick="runProductionPathCase('A', 22424201)">Production A</button>
+      <button type="button" data-testid="start-b" onclick="runProductionPathCase('B', 22424202)">Production B</button>
+      <button type="button" data-testid="real-smoke" onclick="startRealTimerSmoke(22424203)">Real Timer Smoke</button>
+    </div>
+  </header>
+  <section class="fixture-audit" aria-labelledby="fixtureAuditTitle">
+    <h2 id="fixtureAuditTitle">Fixture Debug（不屬於正式玩家 UI）</h2>
+    <span id="fixtureStatus" class="fixture-status">尚未執行</span>
+    <pre id="fixtureReport" data-testid="fixture-report">請選擇案例。</pre>
+  </section>
+  <main id="story"></main>
+  <div id="choices"></div>
+  <div id="changeLog" hidden></div><div id="status" hidden></div><div id="time" hidden></div><div id="player-info" hidden></div>
+  <section id="characterCreation" hidden>
+    <input id="nameInput" value="Production Playback 驗收球員">
+    <div id="characterCreationFeedback"></div><div id="idealSelfDescription"></div>
+    <div id="genesisAllocation"></div><div id="genesisShape"></div><div id="genesisBudget"></div>
+    <button id="genesisRollButton" type="button"></button><button id="careerStartButton" type="button"></button>
+    <select id="batsSelect"><option value="R" selected>右打</option></select>
+    <select id="throwsSelect"><option value="R" selected>右投</option></select>
+    <div id="developmentEntryDescription"></div><div id="developmentPositionDescription"></div>
+  </section>
+
+  <script>
+    window.fixtureErrors = [];
+    window.fixtureAudit = {};
+    window.addEventListener("error", event => window.fixtureErrors.push(event.message || "error"));
+    window.addEventListener("unhandledrejection", event => window.fixtureErrors.push(String(event.reason || "rejection")));
+    const fixtureUsesVirtualClock = new URLSearchParams(location.search).get("clock") === "virtual";
+    const fixtureTimers = new Map();
+    let fixtureTimerId = 1;
+    if (fixtureUsesVirtualClock) {
+      window.setTimeout = (callback, delay) => {
+        const id = fixtureTimerId++;
+        fixtureTimers.set(id, { callback, delay });
+        return id;
+      };
+      window.clearTimeout = id => fixtureTimers.delete(id);
+    }
+  </script>
+  <script src="../player.js"></script><script src="../current-state-boundary.js"></script><script src="../time-boundary.js"></script>
+  <script src="../relationship-boundary.js"></script><script src="../evaluation-registry.js"></script><script src="../coach-evaluation-boundary.js"></script>
+  <script src="../narrative-condition-boundary.js"></script><script src="../evaluation-registry-bootstrap.js"></script><script src="../decision-flow.js"></script>
+  <script src="../day-completion-flow.js"></script><script src="../relationship-flow.js"></script><script src="../coach-response-flow.js"></script>
+  <script src="../narrative-condition-flow.js"></script><script src="../competition-presentation.js"></script><script src="../baseball-gameplay-prototype-utils.js"></script>
+  <script src="../baseball-defense-prototype.js"></script><script src="../baseball-offense-prototype.js"></script><script src="../baseball-gameplay-integration.js"></script>
+  <script src="../baseball-training-resolver.js"></script><script src="../career-spine-contract.js"></script><script src="../career-transition-runtime-resolver.js"></script>
+  <script src="../career-transition-progression.js"></script><script src="../career-development-runtime-resolver.js"></script><script src="../career-development-progression.js"></script>
+  <script src="../career-age22-outcome-resolver.js"></script><script src="../career-save-admission.js"></script><script src="../story.js"></script><script src="../save.js"></script>
+  <script src="../script.js?v=2242423"></script>
+  <script>
+    function getProductionFixtureSnapshot(match = player.highSchoolMatch) {
+      const debug = getHighSchoolMatchPlaybackDebugState(match);
+      return {
+        inning: match?.inning || 0,
+        half: match?.half || "",
+        outs: match?.outs || 0,
+        score: match?.scores ? { ...match.scores } : {},
+        runners: Array.isArray(match?.runners) ? match.runners.slice() : [],
+        offenseTeam: match?.offenseTeam || "",
+        defenseTeam: match?.defenseTeam || "",
+        currentBatter: match?.currentBatter || "",
+        battingOrderIndex: match?.battingOrderIndex ? { ...match.battingOrderIndex } : {},
+        cursor: debug.cursor,
+        logLength: debug.logLength,
+        phase: debug.phase,
+        decisionActive: debug.decisionActive,
+        blockingOutcome: debug.blockingOutcome,
+        completed: debug.completed,
+        timerScheduled: debug.timerScheduled,
+        playerLineupStatus: match?.playerLineupStatus || "",
+        playerEntryCompleted: match?.playerEntryCompleted === true,
+        currentEventId: getCurrentEventId(),
+        currentDomain: match?.currentDomain || "",
+        momentIndex: match?.momentIndex ?? -1,
+        currentMomentId: match?.currentMomentId || "",
+        shouldReachDefense: typeof shouldReachHighSchoolDefensiveMoment === "function" ? shouldReachHighSchoolDefensiveMoment(match) : false,
+        defensiveDebug: match?.defensiveSituation?.familyId === "infield" ? (() => {
+          const choices = getHighSchoolDefensiveMomentChoices(match);
+          const classification = classifyPositionFamilyPlay(match.defensiveSituation, choices, true);
+          return {
+            playerPosition: match.defensiveSituation.playerPosition,
+            batterId: match.defensiveSituation.batterId,
+            eventClassification: classification.eventClassification,
+            decisionTension: classification.decisionTension,
+            choices: choices.map(choice => ({ matchDecision: choice.matchDecision || "", routeId: choice.routeId || "", objective: choice.objective || "" }))
+          };
+        })() : null,
+        integrityIssues: typeof getHighSchoolMatchStateIntegrityIssues === "function" ? [...getHighSchoolMatchStateIntegrityIssues(match)] : [],
+        lastEvents: Array.isArray(match?.simulationLog) ? match.simulationLog.slice(-6).map(event => ({
+          sequence: event.sequence, type: event.type, importance: event.presentationImportance || "",
+          inning: event.inning, half: event.half, batterId: event.batterId || "", outs: event.outs ?? event.after?.outs ?? -1
+        })) : []
+      };
+    }
+
+    function hasFixtureForwardProgress(before, after) {
+      return before.cursor !== after.cursor
+        || before.logLength !== after.logLength
+        || before.phase !== after.phase
+        || before.decisionActive !== after.decisionActive
+        || before.blockingOutcome !== after.blockingOutcome
+        || before.completed !== after.completed
+        || before.inning !== after.inning
+        || before.half !== after.half
+        || before.outs !== after.outs
+        || JSON.stringify(before.score) !== JSON.stringify(after.score);
+    }
+
+    function runFixtureTimer() {
+      const next = fixtureTimers.entries().next().value;
+      if (!next) return { fired: false, delay: 0 };
+      const [id, timer] = next;
+      fixtureTimers.delete(id);
+      timer.callback();
+      return { fired: true, delay: timer.delay };
+    }
+
+    function startProductionDirectMatch(seed) {
+      stopHighSchoolMatchPlayback();
+      if (fixtureUsesVirtualClock) fixtureTimers.clear();
+      pendingYouthSeasonOutcome = null;
+      isTransitioning = false;
+      resetGame();
+      setHighSchoolMatchPlaybackDebugEnabled(true);
+      clearHighSchoolMatchPlaybackTrace();
+      document.getElementById("nameInput").value = "Production Playback 驗收球員";
+      selectOrigin(PlayerIdentityOptions.origins[1]);
+      selectIdealSelf("棒球理解型");
+      generateGenesisProfile(() => 0.25);
+      adjustGenesisAbility("ballSense", 1);
+      adjustGenesisAbility("observe", 1);
+      adjustGenesisAbility("baseballIQ", 1);
+      selectDevelopmentEntry("highSchoolFullMatch");
+      selectDevelopmentTestPosition("二壘手");
+      pendingHighSchoolMatchSimulationSeed = seed;
+      createPlayer();
+      return player.highSchoolMatch;
+    }
+
+    function chooseProductionDecision(sample = .82) {
+      const choice = getHighSchoolYearOneMatchMomentChoices(player.highSchoolMatch)[0];
+      return Boolean(choice) && chooseHighSchoolYearOneMatchMoment(choice.matchDecision, choice.matchMomentId, () => sample);
+    }
+
+    function publishFixture(id, report, pass) {
+      report.errors = window.fixtureErrors.slice();
+      window.fixtureAudit[id] = report;
+      const success = pass && report.errors.length === 0;
+      const status = document.getElementById("fixtureStatus");
+      status.textContent = `${id}｜${success ? "PASS" : "FAIL"}`;
+      status.className = `fixture-status ${success ? "pass" : "fail"}`;
+      status.dataset.testid = `status-${id}`;
+      document.getElementById("fixtureReport").textContent = JSON.stringify(report, null, 2);
+      return success;
+    }
+
+    function runProductionPathCase(label, seed) {
+      if (!fixtureUsesVirtualClock) return publishFixture(`Production ${label}`, { error: "請以 ?clock=virtual 執行 deterministic case" }, false);
+      const match = startProductionDirectMatch(seed);
+      const report = {
+        label, seed, role: match.role, initialLineupStatus: match.playerLineupStatus,
+        beats: 0, decisions: 0, outcomes: 0, continues: 0, noProgress: 0, orphan: 0,
+        entrySnapshot: null, lateSnapshots: [], timerDelays: [], final: null
+      };
+      while (!match.completed && report.beats < 5000) {
+        const before = getProductionFixtureSnapshot(match);
+        if (before.blockingOutcome) {
+          continueYouthSeasonOutcome();
+          report.outcomes += 1;
+          report.continues += 1;
+        } else if (before.decisionActive) {
+          report.decisions += 1;
+          if (!chooseProductionDecision()) { report.orphan += 1; break; }
+        } else {
+          const fired = runFixtureTimer();
+          if (!fired.fired) { report.orphan += 1; break; }
+          if (report.timerDelays.length < 120) report.timerDelays.push(fired.delay);
+          const after = getProductionFixtureSnapshot(match);
+          if (!hasFixtureForwardProgress(before, after)) {
+            report.noProgress += 1;
+            report.firstNoProgress = report.firstNoProgress || { before, after };
+            if (report.noProgress >= 3) break;
+          }
+        }
+        report.beats += 1;
+        const current = getProductionFixtureSnapshot(match);
+        if (!report.entrySnapshot && current.playerEntryCompleted) report.entrySnapshot = current;
+        if (current.inning >= 6 && report.lateSnapshots.length < 12) report.lateSnapshots.push(current);
+      }
+      report.final = getProductionFixtureSnapshot(match);
+      report.timerCount = fixtureTimers.size;
+      const trace = getHighSchoolMatchPlaybackTrace();
+      report.traceActions = Array.from(new Set(trace.map(entry => entry.action)));
+      report.traceTail = trace.slice(-24);
+      const validDelays = report.timerDelays.every(delay => [MATCH_FLOW_BEAT_MS, MATCH_ATTENTION_BEAT_MS, MATCH_MAJOR_TRANSITION_MS].includes(delay));
+      const requiredTraceActions = ["schedule-request", "schedule-created", "callback-fired", "step-start", "step-end", "decision-enter", "decision-exit", "outcome-enter", "outcome-exit", "resume-request", "render"];
+      const pass = ["bench", "rotation"].includes(report.role) && report.initialLineupStatus === "bench"
+        && Boolean(report.entrySnapshot) && report.final.completed && report.orphan === 0 && report.noProgress === 0
+        && report.decisions >= 3 && report.outcomes >= 3 && report.timerCount === 0 && validDelays
+        && requiredTraceActions.every(action => report.traceActions.includes(action));
+      return publishFixture(`Production ${label}`, report, pass);
+    }
+
+    function startRealTimerSmoke(seed) {
+      if (fixtureUsesVirtualClock) return publishFixture("Real Timer Smoke", { error: "請移除 ?clock=virtual 執行 real timer case" }, false);
+      const match = startProductionDirectMatch(seed);
+      const initial = getProductionFixtureSnapshot(match);
+      const report = { seed, role: match.role, startedAt: Date.now(), observations: 0, samples: [initial], decisions: 0, outcomes: 0 };
+      window.fixtureRealSmoke = report;
+      const observer = window.setInterval(() => {
+        const state = getProductionFixtureSnapshot(match);
+        report.observations += 1;
+        const progressKey = sample => JSON.stringify([sample.cursor, sample.logLength, sample.phase, sample.decisionActive, sample.blockingOutcome, sample.completed]);
+        if (progressKey(state) !== progressKey(report.samples.at(-1))) report.samples.push(state);
+        if (state.blockingOutcome) { continueYouthSeasonOutcome(); report.outcomes += 1; }
+        else if (state.decisionActive) { chooseProductionDecision(); report.decisions += 1; }
+        const automaticBeats = Math.max(0, report.samples.length - 1);
+        document.getElementById("fixtureReport").textContent = JSON.stringify({ ...report, automaticBeats }, null, 2);
+        if (match.completed || automaticBeats >= 22 || report.observations >= 220) {
+          window.clearInterval(observer);
+          const trace = getHighSchoolMatchPlaybackTrace();
+          const observedDelays = Array.from(new Set(trace.filter(entry => entry.action === "schedule-created").map(entry => Number(entry.result)).filter(Number.isFinite)));
+          const final = getProductionFixtureSnapshot(match);
+          const transition = report.samples.some(sample => sample.inning !== initial.inning || sample.half !== initial.half);
+          const pass = automaticBeats >= 20 && transition && (final.timerScheduled || final.completed) && window.fixtureErrors.length === 0
+            && [MATCH_FLOW_BEAT_MS, MATCH_ATTENTION_BEAT_MS, MATCH_MAJOR_TRANSITION_MS].every(delay => observedDelays.includes(delay));
+          publishFixture("Real Timer Smoke", { ...report, automaticBeats, transition, observedDelays, final }, pass);
+        }
+      }, 250);
+      return report;
+    }
+  </script>
+</body>
+</html>

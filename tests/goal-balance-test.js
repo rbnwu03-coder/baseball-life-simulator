@@ -10,7 +10,7 @@ function makeGame() {
     console,
     document: {
       getElementById(id) {
-        if (!nodes.has(id)) nodes.set(id, { innerHTML: "", value: "平衡測試球員", style: {} });
+        if (!nodes.has(id)) nodes.set(id, { innerHTML: "", value: id === "batsSelect" || id === "throwsSelect" ? "R" : "平衡測試球員", style: {} });
         return nodes.get(id);
       },
       querySelectorAll() { return []; }
@@ -181,7 +181,7 @@ const gapWithinTen = pct(allRuns.filter(run => run.finalGap >= -10).length, allR
 console.log(`位置競爭差距不低於 -10：${gapWithinTen}%`);
 
 const skillAuditGame = makeGame();
-const skillAudit = vm.runInContext("auditSkillGrowthSources()", skillAuditGame);
+const skillAudit = vm.runInContext("player=createRepresentativeHighSchoolEntryFixture('ordinary',44001);auditSkillGrowthSources()", skillAuditGame);
 console.table(Object.entries(skillAudit).filter(([key]) => ["baseRunning", "armStrength", "reaction", "range", "blocking", "gameCalling", "control", "pitchStamina", "batting"].includes(key)).map(([skill, data]) => ({ skill, ...data, positions: data.positions.join("／") })));
 
 if (chapterReport.find(row => row.chapter === "少棒入門").smallGoal < 85) throw new Error("少棒入門小目標完成率不足 85%");

@@ -286,8 +286,8 @@ assert(evaluate(persistence.context, "player.name==='邊界測試球員' && play
 
 const legacyFixture = makeGameContext();
 evaluate(legacyFixture.context, "player=normalizeSave({name:'舊存檔球員'}); updateStatus()");
-assert(evaluate(legacyFixture.context, "player.name==='舊存檔球員' && player.origin==='prove' && player.idealSelf===''"), "舊存檔 Identity fallback 不相容");
-assert(evaluate(legacyFixture.context, "document.getElementById('player-info').innerHTML.includes('理想球員：尚未形成')"), "舊存檔 UI fallback 不相容");
+assert(evaluate(legacyFixture.context, "player.name==='舊存檔球員' && player.origin==='prove' && player.idealSelf==='全能型'"), "舊存檔 deterministic Ideal Self migration 不相容");
+assert(evaluate(legacyFixture.context, "player.capabilityState.migration?.migrationVersion==='hs-entry-capability-v1'"), "舊存檔 Capability migration provenance 缺失");
 
 // Existing load order and runtime source projections.
 const playerIndex = indexSource.indexOf('<script src="player.js"></script>');

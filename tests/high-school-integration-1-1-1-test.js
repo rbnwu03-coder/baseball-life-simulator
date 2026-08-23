@@ -113,7 +113,7 @@ const abilityUi = evaluate(`(() => {
 verify("8. Genesis 後預設摘要可讀取能力輪廓", abilityUi.includes("球員概況") && abilityUi.includes("創角擲到") && abilityUi.includes("加點後著重") && abilityUi.includes("明顯優勢") && abilityUi.includes("仍待磨練"));
 verify("9. Ideal Self、主守位與投打保持可見", abilityUi.includes("速度型") && abilityUi.includes("外野手") && abilityUi.includes("左右開弓／左投"));
 verify("10. 玩家可見能力摘要不洩漏 raw identifiers", !["ballSense", "observe", "fitness", "batting", "baseRunning", "baseballIQ"].some(key => abilityUi.includes(key)));
-verify("11. 精確能力仍留在既有預設收合詳細區塊", abilityUi.includes('<details class="status-section">\n    <summary>能力與技能</summary>') && abilityUi.includes("球感"));
+verify("11. 精確能力仍留在既定預設展開詳細區塊", abilityUi.includes('<details class="status-section" data-status-disclosure="abilities" open>\n    <summary>能力與技能</summary>') && abilityUi.includes("球感"));
 
 const contexts = parse(`(() => {
   const run=(ideal,skills,stats)=>{ player=createInitialPlayer(ideal); player.idealSelf=ideal; player.highSchoolRoute="普通高中・穩定出賽"; player.primaryPosition="內野手"; Object.assign(player.baseballSkills,skills); Object.assign(player,stats); return resolveHighSchoolPositionFormation(); };

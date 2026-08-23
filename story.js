@@ -1117,16 +1117,11 @@ const highSchoolEvents = {
     ]
   },
   high_school_showcase: {
-    title: "秋季交流賽：第七局的同一個打席",
+    title: "秋季交流賽：同一場比賽的關鍵時刻",
     text() {
-      const match = player.highSchoolMatch || {};
-      return `比賽編號：${match.id || "待建立"}\n對手：${match.opponent || "待確認"}\n${match.inning || 7}局${match.half || "下"}，${match.outs ?? 1}出局，比分 ${match.scores?.home ?? 2}：${match.scores?.away ?? 2}，二壘有人。\n\n角色：${player.highSchoolTeamRole || "待確認"}\n守位：${match.position || player.primaryPosition || "未定"}\n任務：${match.assignment || "等待現任教練指派"}\n\n無論你是先發、輪替或發展名單，這次都在同一場正式交流賽裡。能力會改變執行結果，不會取消你做決定的資格。`;
+      return getHighSchoolYearOneMatchPresentation();
     },
-    choices: [
-      C("搶第一顆可攻擊球，直接挑戰外野空檔", { confidence: 1, pressure: 1 }, [], "你選擇搶攻。", { matchDecision: "attack" }),
-      C("守住好球帶，讓對方投手先承擔壓力", { observe: 1, discipline: 1 }, [], "你選擇控制好球帶。", { matchDecision: "zone" }),
-      C("縮短揮棒，優先把二壘跑者推進", { responsibility: 1, ballSense: 1 }, [], "你選擇執行推進任務。", { matchDecision: "advance" })
-    ]
+    get choices() { return getHighSchoolYearOneMatchMomentChoices(); }
   },
   high_school_scout_feedback: {
     title: "高橋把同一場比賽變成高二問題",

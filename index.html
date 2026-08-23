@@ -112,8 +112,18 @@
       <div class="development-entry__choices" role="group" aria-label="選擇試玩起點">
         <button type="button" data-development-entry="full" aria-pressed="true" onclick="ApplicationController.selectDevelopmentEntry('full')">正常開始</button>
         <button type="button" data-development-entry="highSchool" aria-pressed="false" onclick="ApplicationController.selectDevelopmentEntry('highSchool')">高中篇測試開始</button>
+        <button type="button" data-development-entry="highSchoolFullMatch" aria-pressed="false" onclick="ApplicationController.selectDevelopmentEntry('highSchoolFullMatch')">完整比賽｜1局上 0：0</button>
       </div>
       <p id="developmentEntryDescription" aria-live="polite">目前會從十歲的夏天開始完整人生。</p>
+      <p class="development-entry__label">開發測試：指定本場守位</p>
+      <div class="development-entry__choices" role="group" aria-label="指定高中測試比賽守位">
+        <button type="button" data-development-position="" aria-pressed="true" onclick="ApplicationController.selectDevelopmentTestPosition('')">不指定</button>
+        <button type="button" data-development-position="一壘手" aria-pressed="false" onclick="ApplicationController.selectDevelopmentTestPosition('一壘手')">一壘手</button>
+        <button type="button" data-development-position="二壘手" aria-pressed="false" onclick="ApplicationController.selectDevelopmentTestPosition('二壘手')">二壘手</button>
+        <button type="button" data-development-position="游擊手" aria-pressed="false" onclick="ApplicationController.selectDevelopmentTestPosition('游擊手')">游擊手</button>
+        <button type="button" data-development-position="三壘手" aria-pressed="false" onclick="ApplicationController.selectDevelopmentTestPosition('三壘手')">三壘手</button>
+      </div>
+      <p id="developmentPositionDescription" aria-live="polite">不指定本場守位，沿用角色與教練安排。</p>
     </details>
   </section>
 

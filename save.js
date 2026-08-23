@@ -31,6 +31,7 @@ function normalizeSave(saved) {
   fresh.characterGenesis = Object.assign({}, defaultGenesis, saved.characterGenesis || {});
   fresh.characterGenesis.baseRoll = Object.assign({}, defaultGenesis.baseRoll, saved.characterGenesis?.baseRoll || {});
   fresh.characterGenesis.allocation = Object.assign({}, defaultGenesis.allocation, saved.characterGenesis?.allocation || {});
+  fresh.characterGenesis.finalAbilities = Object.assign({}, defaultGenesis.finalAbilities, saved.characterGenesis?.finalAbilities || {});
   if (sourceSaveVersion < 15 && fresh.name && !saved.characterGenesis) {
     fresh.characterGenesis.completed = true;
     fresh.characterGenesis.shape = "舊存檔沿用既有成長";
@@ -41,6 +42,20 @@ function normalizeSave(saved) {
   if (saved.highSchoolYearTwoResult === undefined) fresh.highSchoolYearTwoResult = "";
   if (saved.highSchoolYearTwoDetail === undefined) fresh.highSchoolYearTwoDetail = "";
   fresh.baseballSkills = Object.assign({}, createInitialPlayer().baseballSkills, saved.baseballSkills || {});
+  const capabilityState = ensureCapabilityStateShape(fresh);
+  const hasVersionedInitialCapability = capabilityState.initialSkillFormulaVersion === INITIAL_SKILL_FORMULA_VERSION
+    && UNIVERSAL_BASEBALL_SKILL_KEYS.every(skill => Number.isFinite(Number(capabilityState.initialBaseballSkills?.[skill])) && Number(capabilityState.initialBaseballSkills[skill]) >= 1);
+  if (!hasVersionedInitialCapability) {
+    const migration = migrateLegacyPlayerCapability(fresh, { sourceSaveVersion });
+    if (!migration.ok) throw new Error(`舊存檔 Capability migration 失敗：${migration.error}`);
+  }
+  else {
+    const reachedHighSchool = Number(fresh.age) >= 16 || String(fresh.chapter || "").includes("青棒") || Number(fresh.highSchoolStep) > 0;
+    if (reachedHighSchool && capabilityState.initialized !== true) {
+      const settlement = settleHighSchoolEntryCapability(fresh, { originType: capabilityState.originType || "save-reload-settlement" });
+      if (!settlement.ok) throw new Error(`存檔 Capability settlement 失敗：${settlement.error}`);
+    }
+  }
   fresh.relationships = Object.assign({}, createInitialPlayer().relationships, saved.relationships || {});
   fresh.positionAffinity = Object.assign({}, createInitialPlayer().positionAffinity, saved.positionAffinity || {});
   fresh.matchState = Object.assign({}, createInitialPlayer().matchState, saved.matchState || {});
@@ -82,6 +97,222 @@ function normalizeSave(saved) {
   fresh.highSchoolMatch = Object.assign({}, highSchoolDefaults.highSchoolMatch, saved.highSchoolMatch || {});
   fresh.highSchoolMatch.scores = Object.assign({}, highSchoolDefaults.highSchoolMatch.scores, saved.highSchoolMatch?.scores || {});
   fresh.highSchoolMatch.runners = Array.isArray(saved.highSchoolMatch?.runners) ? saved.highSchoolMatch.runners : [];
+  fresh.highSchoolMatch.completedMoments = Array.isArray(saved.highSchoolMatch?.completedMoments)
+    ? saved.highSchoolMatch.completedMoments.map(moment => Object.assign({}, moment, {
+      scores: Object.assign({}, moment.scores || {}),
+      runners: Array.isArray(moment.runners) ? moment.runners.slice(0, 3) : [],
+      runnerChanges: Array.isArray(moment.runnerChanges) ? moment.runnerChanges.map(change => Object.assign({}, change)) : [],
+      scoringRunnerIds: Array.isArray(moment.scoringRunnerIds) ? moment.scoringRunnerIds.slice() : []
+    }))
+    : [];
+  fresh.highSchoolMatch.playerContribution = Object.assign(
+    {},
+    highSchoolDefaults.highSchoolMatch.playerContribution,
+    saved.highSchoolMatch?.playerContribution || {}
+  );
+  fresh.highSchoolMatch.performanceEvidence = Object.fromEntries(
+    Object.entries(saved.highSchoolMatch?.performanceEvidence || {}).map(([actorId, evidence]) => [
+      actorId,
+      Object.assign({}, evidence)
+    ])
+  );
+  fresh.highSchoolMatch.battingOrderIndex = Object.assign(
+    {},
+    highSchoolDefaults.highSchoolMatch.battingOrderIndex,
+    saved.highSchoolMatch?.battingOrderIndex || {}
+  );
+  let previousHighSchoolPresentationSnapshot = null;
+  fresh.highSchoolMatch.simulationLog = Array.isArray(saved.highSchoolMatch?.simulationLog)
+    ? saved.highSchoolMatch.simulationLog.map((item, index) => {
+      const scores = item.scores ? Object.assign({}, item.scores) : item.scores;
+      const before = item.before ? Object.assign({}, item.before, {
+        scores: Object.assign({}, item.before.scores || {}),
+        runners: Array.isArray(item.before.runners) ? item.before.runners.slice(0, 3) : []
+      }) : item.before;
+      const after = item.after ? Object.assign({}, item.after, {
+        scores: Object.assign({}, item.after.scores || {}),
+        runners: Array.isArray(item.after.runners) ? item.after.runners.slice(0, 3) : []
+      }) : item.after;
+      const eventFacts = {};
+      if (Array.isArray(item.runnerChanges)) eventFacts.runnerChanges = item.runnerChanges.map(change => Object.assign({}, change));
+      if (Array.isArray(item.scoringRunnerIds)) eventFacts.scoringRunnerIds = item.scoringRunnerIds.slice();
+      const sourceSnapshot = item.presentationSnapshot || item.after || item;
+      const fallbackSnapshot = previousHighSchoolPresentationSnapshot || {
+        inning: 1, half: "上", outs: 0, runners: [], scores: { home: 0, away: 0 },
+        lineScoreRevealHalfIndex: 0, assignment: "", position: "", currentBatter: "", battingOrderSlot: 0
+      };
+      const snapshotScores = sourceSnapshot.scores || scores || fallbackSnapshot.scores;
+      const snapshotRunners = Array.isArray(sourceSnapshot.runners) ? sourceSnapshot.runners : fallbackSnapshot.runners;
+      const presentationSnapshot = Object.freeze({
+        inning: Math.max(1, Math.floor(Number(sourceSnapshot.inning ?? fallbackSnapshot.inning) || 1)),
+        half: ["上", "下", "終"].includes(sourceSnapshot.half) ? sourceSnapshot.half : fallbackSnapshot.half,
+        outs: Math.max(0, Math.min(3, Math.floor(Number(sourceSnapshot.outs ?? fallbackSnapshot.outs) || 0))),
+        runners: Object.freeze(snapshotRunners.slice(0, 3)),
+        scores: Object.freeze({ home: Number(snapshotScores.home) || 0, away: Number(snapshotScores.away) || 0 }),
+        lineScoreRevealHalfIndex: Math.max(0, Math.floor(Number(sourceSnapshot.lineScoreRevealHalfIndex ?? fallbackSnapshot.lineScoreRevealHalfIndex) || 0)),
+        assignment: typeof sourceSnapshot.assignment === "string" ? sourceSnapshot.assignment : fallbackSnapshot.assignment,
+        position: typeof sourceSnapshot.position === "string" ? sourceSnapshot.position : fallbackSnapshot.position,
+        currentBatter: typeof sourceSnapshot.currentBatter === "string" ? sourceSnapshot.currentBatter : fallbackSnapshot.currentBatter,
+        battingOrderSlot: Math.max(0, Math.floor(Number(sourceSnapshot.battingOrderSlot ?? fallbackSnapshot.battingOrderSlot) || 0))
+      });
+      previousHighSchoolPresentationSnapshot = presentationSnapshot;
+      return Object.assign({ sequence: index }, item, {
+        presentationImportance: item.presentationImportance || (item.type === "matchEntry" ? "hidden" : "visible"),
+        scores, before, after, ...eventFacts, presentationSnapshot
+      });
+    })
+    : [];
+  fresh.highSchoolMatch.lastDefensiveResolution = saved.highSchoolMatch?.lastDefensiveResolution
+    ? Object.assign(JSON.parse(JSON.stringify(saved.highSchoolMatch.lastDefensiveResolution)), {
+      runnerChanges: Array.isArray(saved.highSchoolMatch.lastDefensiveResolution.runnerChanges)
+        ? saved.highSchoolMatch.lastDefensiveResolution.runnerChanges.map(change => Object.assign({}, change)) : [],
+      scoringRunnerIds: Array.isArray(saved.highSchoolMatch.lastDefensiveResolution.scoringRunnerIds)
+        ? saved.highSchoolMatch.lastDefensiveResolution.scoringRunnerIds.slice() : [],
+      runnersAfter: Array.isArray(saved.highSchoolMatch.lastDefensiveResolution.runnersAfter)
+        ? saved.highSchoolMatch.lastDefensiveResolution.runnersAfter.slice(0, 3) : []
+    })
+    : null;
+  fresh.highSchoolMatch.regulationInnings = Number(saved.highSchoolMatch?.regulationInnings) > 0
+    ? Number(saved.highSchoolMatch.regulationInnings)
+    : highSchoolDefaults.highSchoolMatch.regulationInnings;
+  fresh.highSchoolMatch.lineScore = {
+    home: Array.isArray(saved.highSchoolMatch?.lineScore?.home) ? saved.highSchoolMatch.lineScore.home.map(run => run === null ? null : Math.max(0, Number(run) || 0)) : [],
+    away: Array.isArray(saved.highSchoolMatch?.lineScore?.away) ? saved.highSchoolMatch.lineScore.away.map(run => run === null ? null : Math.max(0, Number(run) || 0)) : []
+  };
+  // Migration boundary: clamp the exclusive "next unseen event" cursor to the restored log.
+  fresh.highSchoolMatch.presentedEventCursor = Math.min(
+    fresh.highSchoolMatch.simulationLog.length,
+    Math.max(0, Number(saved.highSchoolMatch?.presentedEventCursor) || 0)
+  );
+  const readyHighSchoolMoment = ["moment_1_ready", "moment_2_ready", "moment_3_ready"].includes(fresh.highSchoolMatch.simulationPhase);
+  const hasReadyHighSchoolMomentEvent = fresh.highSchoolMatch.simulationLog.some(item =>
+    item.type === "meaningfulMomentReached" && (!item.momentId || item.momentId === fresh.highSchoolMatch.currentMomentId)
+  );
+  if (readyHighSchoolMoment && !hasReadyHighSchoolMomentEvent) {
+    const scores = Object.freeze({
+      home: Number(fresh.highSchoolMatch.scores?.home) || 0,
+      away: Number(fresh.highSchoolMatch.scores?.away) || 0
+    });
+    const runners = Object.freeze((Array.isArray(fresh.highSchoolMatch.runners) ? fresh.highSchoolMatch.runners : []).slice(0, 3));
+    fresh.highSchoolMatch.simulationLog.push({
+      sequence: fresh.highSchoolMatch.simulationLog.length,
+      type: "meaningfulMomentReached",
+      momentId: fresh.highSchoolMatch.currentMomentId || "",
+      domain: fresh.highSchoolMatch.currentDomain || "",
+      inning: Math.max(1, Number(fresh.highSchoolMatch.inning) || 1),
+      half: fresh.highSchoolMatch.half || "上",
+      outs: Math.max(0, Math.min(3, Number(fresh.highSchoolMatch.outs) || 0)),
+      scores,
+      runners,
+      assignment: fresh.highSchoolMatch.currentAssignment || fresh.highSchoolMatch.assignment || "",
+      presentationImportance: "attention",
+      presentationSnapshot: Object.freeze({
+        inning: Math.max(1, Number(fresh.highSchoolMatch.inning) || 1),
+        half: fresh.highSchoolMatch.half || "上",
+        outs: Math.max(0, Math.min(3, Number(fresh.highSchoolMatch.outs) || 0)),
+        runners,
+        scores,
+        lineScoreRevealHalfIndex: Math.max(0, Number(fresh.highSchoolMatch.scoreboardRevealHalfIndex) || 0),
+        assignment: fresh.highSchoolMatch.currentAssignment || fresh.highSchoolMatch.assignment || "",
+        position: fresh.highSchoolMatch.currentFieldingPosition || fresh.highSchoolMatch.playerFieldingAssignment || fresh.highSchoolMatch.position || "",
+        currentBatter: fresh.highSchoolMatch.currentBatter || "",
+        battingOrderSlot: Math.max(0, Number(fresh.highSchoolMatch.battingOrderIndex?.[fresh.highSchoolMatch.offenseTeam]) || 0)
+      })
+    });
+    fresh.highSchoolMatch.presentedEventCursor = fresh.highSchoolMatch.simulationLog.length;
+  }
+  fresh.highSchoolMatch.scoreboardRevealHalfIndex = Math.max(
+    0,
+    Math.floor(Number(saved.highSchoolMatch?.scoreboardRevealHalfIndex) || 0)
+  );
+  fresh.highSchoolMatch.playerLineupStatus = ["starter", "bench", "substitute"].includes(saved.highSchoolMatch?.playerLineupStatus)
+    ? saved.highSchoolMatch.playerLineupStatus : highSchoolDefaults.highSchoolMatch.playerLineupStatus;
+  fresh.highSchoolMatch.playerLineupSlot = Number.isInteger(saved.highSchoolMatch?.playerLineupSlot)
+    ? saved.highSchoolMatch.playerLineupSlot : highSchoolDefaults.highSchoolMatch.playerLineupSlot;
+  fresh.highSchoolMatch.playerFieldingAssignment = typeof saved.highSchoolMatch?.playerFieldingAssignment === "string"
+    ? saved.highSchoolMatch.playerFieldingAssignment : "";
+  fresh.highSchoolMatch.playerEntryWindowInning = Math.max(1, Number(saved.highSchoolMatch?.playerEntryWindowInning) || highSchoolDefaults.highSchoolMatch.playerEntryWindowInning);
+  fresh.highSchoolMatch.playerEntryCompleted = saved.highSchoolMatch?.playerEntryCompleted === true;
+  fresh.highSchoolMatch.developmentFullMatchStart = saved.highSchoolMatch?.developmentFullMatchStart === true;
+  fresh.highSchoolMatch.developmentPositionOverride = typeof saved.highSchoolMatch?.developmentPositionOverride === "string"
+    ? saved.highSchoolMatch.developmentPositionOverride : "";
+  fresh.highSchoolMatch.coachTacticalDirection = Object.assign(
+    {},
+    highSchoolDefaults.highSchoolMatch.coachTacticalDirection,
+    saved.highSchoolMatch?.coachTacticalDirection || {}
+  );
+  fresh.highSchoolMatch.coachTacticalContextSignature = typeof saved.highSchoolMatch?.coachTacticalContextSignature === "string"
+    ? saved.highSchoolMatch.coachTacticalContextSignature : "";
+  fresh.highSchoolMatch.opponentTacticalTruth = Object.assign(
+    {},
+    highSchoolDefaults.highSchoolMatch.opponentTacticalTruth,
+    saved.highSchoolMatch?.opponentTacticalTruth || {}
+  );
+  fresh.highSchoolMatch.ballContext = Object.assign(
+    {},
+    highSchoolDefaults.highSchoolMatch.ballContext,
+    saved.highSchoolMatch?.ballContext || {}
+  );
+  fresh.highSchoolMatch.positionDecisionFamily = typeof saved.highSchoolMatch?.positionDecisionFamily === "string"
+    ? saved.highSchoolMatch.positionDecisionFamily : "";
+  fresh.highSchoolMatch.currentFieldingPosition = typeof saved.highSchoolMatch?.currentFieldingPosition === "string"
+    ? saved.highSchoolMatch.currentFieldingPosition : "";
+  fresh.highSchoolMatch.defensiveSituation = saved.highSchoolMatch?.defensiveSituation
+    ? JSON.parse(JSON.stringify(saved.highSchoolMatch.defensiveSituation))
+    : {};
+  fresh.highSchoolMatch.playerEventClassification = ["ordinaryPlay", "playerRoutinePlay", "playerMeaningfulDecision"].includes(saved.highSchoolMatch?.playerEventClassification)
+    ? saved.highSchoolMatch.playerEventClassification : "ordinaryPlay";
+  fresh.highSchoolMatch.decisionTension = ["none", "low", "meaningful", "high"].includes(saved.highSchoolMatch?.decisionTension)
+    ? saved.highSchoolMatch.decisionTension : "none";
+  fresh.highSchoolMatch.decisionGate = saved.highSchoolMatch?.decisionGate
+    ? JSON.parse(JSON.stringify(saved.highSchoolMatch.decisionGate)) : null;
+  fresh.highSchoolMatch.lastDefensiveResolution = Object.assign(
+    {},
+    highSchoolDefaults.highSchoolMatch.lastDefensiveResolution,
+    saved.highSchoolMatch?.lastDefensiveResolution ? JSON.parse(JSON.stringify(saved.highSchoolMatch.lastDefensiveResolution)) : {}
+  );
+  fresh.highSchoolMatch.eventSettlementApplied = saved.highSchoolMatch?.eventSettlementApplied === true;
+  fresh.highSchoolMatch.rosters = saved.highSchoolMatch?.rosters
+    ? {
+      home: saved.highSchoolMatch.rosters.home ? {
+        lineup: Array.isArray(saved.highSchoolMatch.rosters.home.lineup) ? saved.highSchoolMatch.rosters.home.lineup.map(item => Object.assign({}, item)) : [],
+        bench: Array.isArray(saved.highSchoolMatch.rosters.home.bench) ? saved.highSchoolMatch.rosters.home.bench.map(item => Object.assign({}, item)) : []
+      } : null,
+      away: saved.highSchoolMatch.rosters.away ? {
+        lineup: Array.isArray(saved.highSchoolMatch.rosters.away.lineup) ? saved.highSchoolMatch.rosters.away.lineup.map(item => Object.assign({}, item)) : [],
+        bench: Array.isArray(saved.highSchoolMatch.rosters.away.bench) ? saved.highSchoolMatch.rosters.away.bench.map(item => Object.assign({}, item)) : []
+      } : null
+    }
+    : { home: null, away: null };
+  if (
+    saved.highSchoolMatch?.id === "hs-y1-autumn-exhibition" &&
+    (
+      saved.highSchoolMatch?.momentIndex === undefined ||
+      typeof saved.highSchoolMatch?.simulationPhase !== "string" ||
+      !Array.isArray(saved.highSchoolMatch?.rosters?.home?.lineup) ||
+      !Array.isArray(saved.highSchoolMatch?.rosters?.away?.lineup) ||
+      !Array.isArray(saved.highSchoolMatch?.lineScore?.home) ||
+      !Array.isArray(saved.highSchoolMatch?.lineScore?.away)
+    ) &&
+    saved.highSchoolMatch?.completed !== true
+  ) {
+    fresh.highSchoolMatch = Object.assign({}, highSchoolDefaults.highSchoolMatch);
+    fresh.highSchoolMatch.scores = Object.assign({}, highSchoolDefaults.highSchoolMatch.scores);
+    fresh.highSchoolMatch.runners = [];
+    fresh.highSchoolMatch.completedMoments = [];
+    fresh.highSchoolMatch.playerContribution = Object.assign({}, highSchoolDefaults.highSchoolMatch.playerContribution);
+    fresh.highSchoolMatch.battingOrderIndex = Object.assign({}, highSchoolDefaults.highSchoolMatch.battingOrderIndex);
+    fresh.highSchoolMatch.lineScore = { home: [], away: [] };
+    fresh.highSchoolMatch.simulationLog = [];
+    fresh.highSchoolMatch.coachTacticalDirection = Object.assign({}, highSchoolDefaults.highSchoolMatch.coachTacticalDirection);
+    fresh.highSchoolMatch.coachTacticalContextSignature = "";
+    fresh.highSchoolMatch.ballContext = Object.assign({}, highSchoolDefaults.highSchoolMatch.ballContext);
+    fresh.highSchoolMatch.positionDecisionFamily = "";
+    fresh.highSchoolMatch.currentFieldingPosition = "";
+    fresh.highSchoolMatch.defensiveSituation = {};
+    fresh.highSchoolMatch.lastDefensiveResolution = Object.assign({}, highSchoolDefaults.highSchoolMatch.lastDefensiveResolution);
+    fresh.highSchoolMatch.rosters = { home: null, away: null };
+  }
   fresh.highSchoolAzheEcho = Object.assign({}, highSchoolDefaults.highSchoolAzheEcho, saved.highSchoolAzheEcho || {});
   fresh.highSchoolAzheEcho.evidence = Array.isArray(saved.highSchoolAzheEcho?.evidence) ? saved.highSchoolAzheEcho.evidence : [];
   fresh.highSchoolRivalContext = Object.assign({}, highSchoolDefaults.highSchoolRivalContext, saved.highSchoolRivalContext || {});
@@ -171,10 +402,18 @@ function loadGame() {
       return;
     }
 
+    if (typeof stopHighSchoolMatchPlayback === "function") stopHighSchoolMatchPlayback();
     if (typeof clearPendingBaseballGameplay === "function") clearPendingBaseballGameplay();
+    if (typeof clearTransientYouthSeasonOutcome === "function") clearTransientYouthSeasonOutcome();
     player = candidate;
+    if (typeof recordHighSchoolMatchOpportunityCheckpoint === "function" && player.highSchoolMatch?.opportunityDebugTrace) {
+      recordHighSchoolMatchOpportunityCheckpoint("save-reload-restored", player.highSchoolMatch);
+    }
     document.getElementById("characterCreation").style.display = "none";
     showCurrentEvent();
+    if (typeof ensureMatchPlaybackLiveness === "function" && getCurrentEventId() === "high_school_showcase") {
+      ensureMatchPlaybackLiveness("active-match-reload", player.highSchoolMatch);
+    }
     showNotice("進度讀取完成。", "success");
   } catch (error) {
     console.error(error);
@@ -183,6 +422,7 @@ function loadGame() {
 }
 
 function deleteSave() {
+  if (typeof stopHighSchoolMatchPlayback === "function") stopHighSchoolMatchPlayback();
   localStorage.removeItem(SAVE_KEY);
   if (typeof clearPendingBaseballGameplay === "function") clearPendingBaseballGameplay();
   player = createInitialPlayer();
