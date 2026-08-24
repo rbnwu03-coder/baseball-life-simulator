@@ -473,6 +473,7 @@ function applyDebugBookmarkCharacterProfile(target) {
   if (Number(target.age) >= 16 || String(target.chapter || "").includes("青棒")) {
     const settlement = settleHighSchoolEntryCapability(target, { originType: "debug-bookmark-fixture" });
     if (!settlement.ok) throw new Error(settlement.error);
+    generateSchoolInvitationSet(target, { compatibilityMode: "debug-bookmark-bypass" });
   }
   return target;
 }
@@ -7240,6 +7241,9 @@ function enterHighSchool() {
   if (!settlement.ok) {
     throw new Error(`高中入口能力結算失敗：${settlement.error}${settlement.validation ? ` (${settlement.validation.errors.join(",")})` : ""}`);
   }
+  generateSchoolInvitationSet(player, {
+    compatibilityMode: originType === "synthetic-youth-origin-v1" ? "direct-start-bypass" : "generation-only"
+  });
   applyChapterBreather();
   player.chapter = "青棒";
   player.age = 16;

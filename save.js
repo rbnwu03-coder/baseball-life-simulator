@@ -56,6 +56,11 @@ function normalizeSave(saved) {
       if (!settlement.ok) throw new Error(`存檔 Capability settlement 失敗：${settlement.error}`);
     }
   }
+  fresh.schoolInvitationState = restoreSchoolInvitationState(saved.schoolInvitationState);
+  const reachedHighSchoolStory = Number(fresh.age) >= 16 || /青棒|高中/.test(String(fresh.chapter || "")) || Number(fresh.highSchoolStep) > 0;
+  if (reachedHighSchoolStory && !validateSchoolInvitationSet(fresh.schoolInvitationState).ok) {
+    markLegacySchoolInvitationCompatibility(fresh, "legacy-existing-school");
+  }
   fresh.relationships = Object.assign({}, createInitialPlayer().relationships, saved.relationships || {});
   fresh.positionAffinity = Object.assign({}, createInitialPlayer().positionAffinity, saved.positionAffinity || {});
   fresh.matchState = Object.assign({}, createInitialPlayer().matchState, saved.matchState || {});

@@ -561,6 +561,505 @@ function getDebugCapabilitySnapshot(target) {
   });
 }
 
+const SCHOOL_INVITATION_VERSION = "school-invitation-v1";
+const SCHOOL_INVITATION_GENERATION_NAMESPACE = "high-school-entry-recruiting-cycle-v1";
+const SCHOOL_INVITATION_TIERS = Object.freeze(["powerhouse", "competitive", "standard", "development"]);
+const SCHOOL_RECRUITING_PREFERENCES = Object.freeze(["balanced", "defenseFirst", "offenseFirst", "athletic", "baseballIQ"]);
+const SCHOOL_PROJECTED_ROLES = Object.freeze(["depthCandidate", "benchCandidate", "rotationCandidate", "starterCompetition", "coreCandidate"]);
+const SCHOOL_POSITION_IDS = Object.freeze(["P", "C", "1B", "2B", "3B", "SS", "OF"]);
+const SCHOOL_POSITION_NEED_LEVELS = Object.freeze(["low", "medium", "high"]);
+
+const SCHOOL_TIER_PROFILES = Object.freeze({
+  powerhouse: Object.freeze({
+    teamStrength: "elite", trainingQuality: "elite", competitionDepth: "veryHigh",
+    matchCompetitionLevel: "high", playingTimeOpportunity: "low", recruitingStandard: 5.5
+  }),
+  competitive: Object.freeze({
+    teamStrength: "strong", trainingQuality: "strong", competitionDepth: "high",
+    matchCompetitionLevel: "mediumHigh", playingTimeOpportunity: "medium", recruitingStandard: 4.8
+  }),
+  standard: Object.freeze({
+    teamStrength: "standard", trainingQuality: "standard", competitionDepth: "medium",
+    matchCompetitionLevel: "medium", playingTimeOpportunity: "mediumHigh", recruitingStandard: 4
+  }),
+  development: Object.freeze({
+    teamStrength: "emerging", trainingQuality: "limited", competitionDepth: "low",
+    matchCompetitionLevel: "lowMedium", playingTimeOpportunity: "high", recruitingStandard: 3.2
+  })
+});
+
+const SCHOOL_NAME_POOLS = Object.freeze({
+  powerhouse: Object.freeze(["蒼岳學園", "北辰學院", "海陵高中", "赤城學園", "白峰高中", "東雲學院"]),
+  competitive: Object.freeze(["景川高中", "明稜學園", "青嶺高中", "瑞原學院", "南星高中", "松濤學園"]),
+  standard: Object.freeze(["河岸高中", "新田學園", "光丘高中", "港南學院", "朝野高中", "楓林學園"]),
+  development: Object.freeze(["春浦高中", "森原學園", "石橋高中", "潮見學院", "綠谷高中", "平川學園"])
+});
+
+const SCHOOL_POSITION_SKILL_WEIGHTS = Object.freeze({
+  P: Object.freeze({ throwing: 1.5, armStrength: 2, control: 2, pitchStamina: 1.5, baseballIQ: 1 }),
+  C: Object.freeze({ catching: 2, throwing: 1.5, blocking: 2, gameCalling: 2, baseballIQ: 1.5 }),
+  "1B": Object.freeze({ catching: 1.5, reaction: 1, armStrength: 1, batting: 1.2, baseballIQ: 0.8 }),
+  "2B": Object.freeze({ catching: 1.5, throwing: 1.2, reaction: 2, range: 1.7, baseballIQ: 1.5 }),
+  "3B": Object.freeze({ catching: 1.2, throwing: 1.5, reaction: 1.5, armStrength: 1.5, batting: 0.8 }),
+  SS: Object.freeze({ catching: 1.5, throwing: 1.5, reaction: 2, range: 2, baseballIQ: 1.5 }),
+  OF: Object.freeze({ catching: 1.5, throwing: 1, armStrength: 1.7, range: 2, reaction: 1.2 })
+});
+
+const SCHOOL_PREFERENCE_SKILL_WEIGHTS = Object.freeze({
+  balanced: Object.freeze({ catching: 1, throwing: 1, batting: 1, baseRunning: 1, baseballIQ: 1, armStrength: 1, reaction: 1, range: 1 }),
+  defenseFirst: Object.freeze({ catching: 1.5, throwing: 1.3, baseballIQ: 1.2, reaction: 1.6, range: 1.6 }),
+  offenseFirst: Object.freeze({ batting: 2, baseRunning: 1.2, baseballIQ: 0.8, armStrength: 0.5 }),
+  athletic: Object.freeze({ baseRunning: 1.5, armStrength: 1.2, reaction: 1.5, range: 1.8 }),
+  baseballIQ: Object.freeze({ baseballIQ: 2, catching: 0.8, throwing: 0.8, reaction: 1, baseRunning: 0.6 })
+});
+
+const SCHOOL_SKILL_REASON_CODES = Object.freeze({
+  catching: "defensiveReliability", throwing: "throwingReliability", batting: "battingUpside",
+  baseRunning: "speed", baseballIQ: "baseballUnderstanding", armStrength: "armStrength",
+  reaction: "defensiveReaction", range: "defensiveRange", blocking: "catcherBlocking",
+  gameCalling: "gameCalling", control: "pitchCommand", pitchStamina: "pitchingDurability"
+});
+
+function createDefaultSchoolInvitationState() {
+  return {
+    completed: false,
+    bypassed: false,
+    version: SCHOOL_INVITATION_VERSION,
+    generationSeed: "",
+    generatedAtCapabilityVersion: "",
+    compatibilityMode: "",
+    legacyExistingSchool: null,
+    invitations: []
+  };
+}
+
+function cloneSchoolInvitationValue(value) {
+  return value === undefined ? undefined : JSON.parse(JSON.stringify(value));
+}
+
+function restoreSchoolInvitationState(savedState = {}) {
+  const defaults = createDefaultSchoolInvitationState();
+  if (!savedState || typeof savedState !== "object") return defaults;
+  const restored = Object.assign(defaults, cloneSchoolInvitationValue(savedState));
+  restored.invitations = Array.isArray(savedState.invitations) ? cloneSchoolInvitationValue(savedState.invitations) : [];
+  restored.legacyExistingSchool = savedState.legacyExistingSchool ? cloneSchoolInvitationValue(savedState.legacyExistingSchool) : null;
+  return restored;
+}
+
+function markLegacySchoolInvitationCompatibility(target, source = "legacy-existing-school") {
+  const existing = restoreSchoolInvitationState(target?.schoolInvitationState);
+  if (validateSchoolInvitationSet(existing).ok) {
+    target.schoolInvitationState = existing;
+    return existing;
+  }
+  existing.completed = false;
+  existing.bypassed = true;
+  existing.version = SCHOOL_INVITATION_VERSION;
+  existing.compatibilityMode = source;
+  existing.legacyExistingSchool = {
+    schoolId: "legacy-existing-school",
+    schoolName: target?.highSchoolRoute || "既有高中路線",
+    source
+  };
+  existing.invitations = [];
+  target.schoolInvitationState = existing;
+  return existing;
+}
+
+function stableSchoolInvitationHash(value) {
+  return stableCapabilityHash(`school-invitation|${String(value ?? "")}`);
+}
+
+function stableSchoolInvitationUnit(value) {
+  return stableSchoolInvitationHash(value) / 4294967295;
+}
+
+function weightedSchoolSkillScore(skills = {}, weights = {}) {
+  const entries = Object.entries(weights).filter(([, weight]) => Number(weight) > 0);
+  const totalWeight = entries.reduce((sum, [, weight]) => sum + Number(weight), 0);
+  if (!totalWeight) return 0;
+  return entries.reduce((sum, [skill, weight]) => sum + (Number(skills[skill]) || 0) * Number(weight), 0) / totalWeight;
+}
+
+function getSchoolRecruitingLegalPositions(target) {
+  return target?.throws === "L"
+    ? Object.freeze(["P", "C", "1B", "OF"])
+    : Object.freeze(SCHOOL_POSITION_IDS.slice());
+}
+
+function mapCanonicalPositionToSchoolCandidates(position, throws = "R") {
+  const direct = {
+    "投手": ["P"], "捕手": ["C"], "一壘手": ["1B"], "二壘手": ["2B"],
+    "三壘手": ["3B"], "游擊手": ["SS"], "外野手": ["OF"]
+  };
+  if (direct[position]) return direct[position].filter(id => throws !== "L" || !["2B", "3B", "SS"].includes(id));
+  if (position === "內野手") return throws === "L" ? ["1B", "P"] : ["2B", "SS", "3B", "1B"];
+  return [];
+}
+
+function getSchoolRecruitingPositionProfile(target) {
+  const legalPositions = getSchoolRecruitingLegalPositions(target);
+  const candidates = [];
+  const add = position => {
+    mapCanonicalPositionToSchoolCandidates(position, target?.throws).forEach(id => {
+      if (legalPositions.includes(id) && !candidates.includes(id)) candidates.push(id);
+    });
+  };
+  add(target?.primaryPosition || "");
+  (target?.secondaryPositions || []).forEach(add);
+  const experience = target?.capabilityState?.positionExperience || {};
+  Object.keys(experience).sort((left, right) => (Number(experience[right]) || 0) - (Number(experience[left]) || 0)).forEach(add);
+  if (!candidates.length) {
+    const ranked = legalPositions.slice().sort((left, right) =>
+      weightedSchoolSkillScore(target?.baseballSkills, SCHOOL_POSITION_SKILL_WEIGHTS[right])
+      - weightedSchoolSkillScore(target?.baseballSkills, SCHOOL_POSITION_SKILL_WEIGHTS[left])
+      || left.localeCompare(right)
+    );
+    candidates.push(...ranked.slice(0, 2));
+  }
+  return Object.freeze({
+    primaryCandidate: candidates[0] || legalPositions[0],
+    secondaryCandidates: Object.freeze(candidates.slice(1)),
+    candidatePositions: Object.freeze(candidates),
+    legalPositions,
+    positionExperience: Object.freeze({ ...experience })
+  });
+}
+
+function createSchoolPositionNeeds(schoolSeed) {
+  const needs = Object.fromEntries(SCHOOL_POSITION_IDS.map(position => {
+    const index = stableSchoolInvitationHash(`${schoolSeed}|need|${position}`) % SCHOOL_POSITION_NEED_LEVELS.length;
+    return [position, SCHOOL_POSITION_NEED_LEVELS[index]];
+  }));
+  if (!Object.values(needs).includes("high")) needs[SCHOOL_POSITION_IDS[stableSchoolInvitationHash(`${schoolSeed}|forced-high`) % SCHOOL_POSITION_IDS.length]] = "high";
+  if (!Object.values(needs).includes("low")) needs[SCHOOL_POSITION_IDS[stableSchoolInvitationHash(`${schoolSeed}|forced-low`) % SCHOOL_POSITION_IDS.length]] = "low";
+  return needs;
+}
+
+function createSchoolProfile(generationSeed, tier, slot) {
+  if (!SCHOOL_INVITATION_TIERS.includes(tier)) throw new Error(`不合法的 School Tier：${tier}`);
+  const tierProfile = SCHOOL_TIER_PROFILES[tier];
+  const pool = SCHOOL_NAME_POOLS[tier];
+  const rotation = stableSchoolInvitationHash(`${generationSeed}|${tier}|name-rotation`) % pool.length;
+  const nameIndex = (rotation + slot) % pool.length;
+  const schoolSeed = `${generationSeed}|${tier}|${slot}|${nameIndex}`;
+  const preference = SCHOOL_RECRUITING_PREFERENCES[stableSchoolInvitationHash(`${schoolSeed}|preference`) % SCHOOL_RECRUITING_PREFERENCES.length];
+  const coachStyles = ["fundamentals", "competition", "development", "analysis"];
+  return {
+    schoolId: `school-${tier}-${stableSchoolInvitationHash(schoolSeed).toString(16).padStart(8, "0")}`,
+    schoolName: pool[nameIndex],
+    schoolSeed,
+    schoolTier: tier,
+    teamStrength: tierProfile.teamStrength,
+    trainingQuality: tierProfile.trainingQuality,
+    competitionDepth: tierProfile.competitionDepth,
+    matchCompetitionLevel: tierProfile.matchCompetitionLevel,
+    playingTimeOpportunity: tierProfile.playingTimeOpportunity,
+    recruitingStandard: tierProfile.recruitingStandard,
+    positionNeeds: createSchoolPositionNeeds(schoolSeed),
+    recruitingPreference: preference,
+    coachProfile: { coachId: `coach-${stableSchoolInvitationHash(`${schoolSeed}|coach`).toString(16).padStart(8, "0")}`, coachStyle: coachStyles[stableSchoolInvitationHash(`${schoolSeed}|coach-style`) % coachStyles.length] }
+  };
+}
+
+function validateSchoolProfile(school) {
+  const errors = [];
+  if (!school || typeof school !== "object") return { ok: false, errors: ["school-profile-missing"] };
+  if (typeof school.schoolId !== "string" || !school.schoolId) errors.push("school-id-invalid");
+  if (typeof school.schoolName !== "string" || !school.schoolName) errors.push("school-name-invalid");
+  if (typeof school.schoolSeed !== "string" || !school.schoolSeed) errors.push("school-seed-invalid");
+  if (!SCHOOL_INVITATION_TIERS.includes(school.schoolTier)) errors.push("school-tier-invalid");
+  if (!SCHOOL_RECRUITING_PREFERENCES.includes(school.recruitingPreference)) errors.push("recruiting-preference-invalid");
+  if (!SCHOOL_TIER_PROFILES[school.schoolTier]) errors.push("tier-profile-missing");
+  else {
+    const tier = SCHOOL_TIER_PROFILES[school.schoolTier];
+    ["teamStrength", "trainingQuality", "competitionDepth", "matchCompetitionLevel", "playingTimeOpportunity"].forEach(field => {
+      if (school[field] !== tier[field]) errors.push(`${field}-invalid`);
+    });
+    if (Number(school.recruitingStandard) !== tier.recruitingStandard) errors.push("recruiting-standard-invalid");
+  }
+  SCHOOL_POSITION_IDS.forEach(position => {
+    if (!SCHOOL_POSITION_NEED_LEVELS.includes(school.positionNeeds?.[position])) errors.push(`position-need-invalid:${position}`);
+  });
+  if (typeof school.coachProfile?.coachId !== "string" || typeof school.coachProfile?.coachStyle !== "string") errors.push("coach-profile-invalid");
+  return { ok: errors.length === 0, errors };
+}
+
+function calculateSchoolCapabilityMatch(target, school) {
+  const validation = validateHighSchoolEntryCapability(target);
+  if (!validation.ok) throw new Error(`School Invitation 拒絕未完成 Capability Settlement 的球員：${validation.errors.join(",")}`);
+  const positionProfile = getSchoolRecruitingPositionProfile(target);
+  const needValues = { low: 0, medium: 1, high: 2 };
+  const positionScores = positionProfile.candidatePositions.map(position => ({
+    position,
+    score: weightedSchoolSkillScore(target.baseballSkills, SCHOOL_POSITION_SKILL_WEIGHTS[position]),
+    need: school.positionNeeds[position],
+    needValue: needValues[school.positionNeeds[position]] || 0
+  })).sort((left, right) => (right.score + right.needValue * 0.2) - (left.score + left.needValue * 0.2) || left.position.localeCompare(right.position));
+  const selected = positionScores[0];
+  const weights = SCHOOL_POSITION_SKILL_WEIGHTS[selected.position];
+  const contributors = Object.entries(weights).map(([skill, weight]) => ({
+    skill, weight, value: Number(target.baseballSkills[skill]) || 0,
+    contribution: (Number(target.baseballSkills[skill]) || 0) * Number(weight)
+  })).sort((left, right) => right.contribution - left.contribution || left.skill.localeCompare(right.skill));
+  return Object.freeze({
+    score: Number(selected.score.toFixed(4)),
+    candidatePosition: selected.position,
+    positionNeed: selected.need,
+    contributors: Object.freeze(contributors.map(item => Object.freeze(item))),
+    positionProfile
+  });
+}
+
+function deriveSchoolInterest(target, school) {
+  const capability = calculateSchoolCapabilityMatch(target, school);
+  const preferenceFit = weightedSchoolSkillScore(target.baseballSkills, SCHOOL_PREFERENCE_SKILL_WEIGHTS[school.recruitingPreference]);
+  const needValue = { low: 0, medium: 1, high: 2 }[capability.positionNeed] || 0;
+  const standardFit = capability.score - Number(school.recruitingStandard);
+  const variation = stableSchoolInvitationUnit(`${school.schoolSeed}|${target.capabilityState.characterSeed}|interest`) * 4 - 2;
+  const rawScore = 25 + capability.score * 5 + preferenceFit * 1.5 + needValue * 8 + standardFit * 6 + variation;
+  const score = Number(Math.max(0, Math.min(100, rawScore)).toFixed(2));
+  const category = score >= 70 ? "veryHigh" : score >= 56 ? "high" : score >= 42 ? "moderate" : "limited";
+  const topContributor = capability.contributors[0];
+  const specializedInterest = capability.positionNeed === "high" && Number(topContributor?.value) >= 6
+    && preferenceFit >= capability.score - 0.25;
+  const interestReasons = Array.from(new Set([
+    ...capability.contributors.slice(0, 2).map(item => SCHOOL_SKILL_REASON_CODES[item.skill] || item.skill),
+    capability.positionNeed === "high" ? "positionNeedHigh" : capability.positionNeed === "medium" ? "positionNeedMedium" : "",
+    `preference:${school.recruitingPreference}`,
+    specializedInterest ? "specializedProfileFit" : ""
+  ].filter(Boolean)));
+  const riskSignals = [];
+  if (["veryHigh", "high"].includes(school.competitionDepth)) riskSignals.push("highInternalCompetition");
+  if (capability.positionNeed === "low") riskSignals.push("crowdedPositionRoom");
+  if (school.playingTimeOpportunity === "low") riskSignals.push("limitedImmediatePlayingTime");
+  if (school.trainingQuality === "limited") riskSignals.push("lowerTrainingEnvironment");
+  if (school.matchCompetitionLevel === "lowMedium") riskSignals.push("weakerCompetitionSchedule");
+  return Object.freeze({
+    score, category, capabilityMatch: capability.score, preferenceFit: Number(preferenceFit.toFixed(4)),
+    recruitingStandardFit: Number(standardFit.toFixed(4)), positionNeed: capability.positionNeed,
+    candidatePosition: capability.candidatePosition, deterministicVariation: Number(variation.toFixed(4)),
+    specializedInterest, interestReasons: Object.freeze(interestReasons), riskSignals: Object.freeze(riskSignals)
+  });
+}
+
+function deriveSchoolProjectedRole(school, interest) {
+  const need = { low: 0, medium: 1, high: 2 }[interest.positionNeed] || 0;
+  const depthPenalty = { veryHigh: 2, high: 1.25, medium: 0.5, low: 0 }[school.competitionDepth] || 0;
+  const roleScore = interest.recruitingStandardFit + need - depthPenalty;
+  let projectedRole = roleScore >= 3 ? "coreCandidate"
+    : roleScore >= 1.6 ? "starterCompetition"
+      : roleScore >= 0.3 ? "rotationCandidate"
+        : roleScore >= -1 ? "benchCandidate" : "depthCandidate";
+  if (projectedRole === "coreCandidate" && ["veryHigh", "high"].includes(school.competitionDepth)) {
+    projectedRole = "starterCompetition";
+  }
+  if (projectedRole === "coreCandidate" && school.competitionDepth === "medium" && interest.positionNeed !== "high") {
+    projectedRole = "starterCompetition";
+  }
+  return projectedRole;
+}
+
+function createSchoolInvitation(target, school) {
+  const interest = deriveSchoolInterest(target, school);
+  return {
+    ...cloneSchoolInvitationValue(school),
+    schoolInterest: cloneSchoolInvitationValue(interest),
+    projectedRole: deriveSchoolProjectedRole(school, interest),
+    interestReasons: interest.interestReasons.slice(),
+    riskSignals: interest.riskSignals.slice(),
+    specializedInterest: interest.specializedInterest
+  };
+}
+
+function getSchoolInvitationDiversity(invitations = []) {
+  const unique = key => new Set(invitations.map(item => item?.[key]).filter(Boolean)).size;
+  const signatures = new Set(invitations.map(item => [
+    item.schoolTier, item.projectedRole, item.schoolInterest?.positionNeed,
+    item.trainingQuality, item.competitionDepth, item.recruitingPreference
+  ].join("|")));
+  return Object.freeze({
+    roleCategories: unique("projectedRole"),
+    competitionDepthCategories: unique("competitionDepth"),
+    trainingQualityCategories: unique("trainingQuality"),
+    tierCategories: unique("schoolTier"),
+    mechanicalSignatures: signatures.size,
+    roleDiversity: unique("projectedRole") >= 2,
+    competitionDiversity: unique("competitionDepth") >= 2,
+    environmentDiversity: unique("trainingQuality") >= 2,
+    tierDiversity: unique("schoolTier") >= 2,
+    noDominantDuplicate: signatures.size >= 2
+  });
+}
+
+function validateSchoolInvitationSet(stateOrInvitations) {
+  const state = Array.isArray(stateOrInvitations) ? null : stateOrInvitations;
+  const invitations = Array.isArray(stateOrInvitations) ? stateOrInvitations : stateOrInvitations?.invitations;
+  const errors = [];
+  if (!Array.isArray(invitations) || invitations.length !== 4) errors.push("invitation-count-invalid");
+  const safeInvitations = Array.isArray(invitations) ? invitations : [];
+  safeInvitations.forEach((invitation, index) => {
+    validateSchoolProfile(invitation).errors.forEach(error => errors.push(`invitation-${index}:${error}`));
+    if (!SCHOOL_PROJECTED_ROLES.includes(invitation?.projectedRole)) errors.push(`invitation-${index}:projected-role-invalid`);
+    if (!Number.isFinite(Number(invitation?.schoolInterest?.score))) errors.push(`invitation-${index}:interest-invalid`);
+    if (!Array.isArray(invitation?.interestReasons) || !Array.isArray(invitation?.riskSignals)) errors.push(`invitation-${index}:explanation-invalid`);
+  });
+  if (new Set(safeInvitations.map(item => item.schoolId)).size !== safeInvitations.length) errors.push("duplicate-school-id");
+  if (new Set(safeInvitations.map(item => item.schoolName)).size !== safeInvitations.length) errors.push("duplicate-school-name");
+  if (new Set(safeInvitations).size !== safeInvitations.length) errors.push("duplicate-object-identity");
+  const diversity = getSchoolInvitationDiversity(safeInvitations);
+  ["roleDiversity", "competitionDiversity", "environmentDiversity", "tierDiversity", "noDominantDuplicate"].forEach(key => {
+    if (!diversity[key]) errors.push(`diversity-invalid:${key}`);
+  });
+  if (state && state.version !== SCHOOL_INVITATION_VERSION) errors.push("invitation-version-invalid");
+  if (state && state.completed !== true) errors.push("invitation-state-incomplete");
+  return { ok: errors.length === 0, errors, diversity };
+}
+
+function getSchoolInvitationMinimumScore(tier) {
+  return { powerhouse: 45, competitive: 40, standard: 34, development: 0 }[tier] ?? 0;
+}
+
+function selectSchoolInvitationCandidates(candidates, generationSeed) {
+  const tierBonus = { powerhouse: 8, competitive: 5, standard: 2, development: 0 };
+  const ranked = candidates.map(candidate => ({
+    ...candidate,
+    selectionPriority: candidate.schoolInterest.score + tierBonus[candidate.schoolTier]
+      + Math.max(-6, Math.min(6, candidate.schoolInterest.recruitingStandardFit * 4))
+  })).sort((left, right) => right.selectionPriority - left.selectionPriority || left.schoolId.localeCompare(right.schoolId));
+  const eligible = ranked.filter(candidate => candidate.schoolInterest.score >= getSchoolInvitationMinimumScore(candidate.schoolTier) || candidate.specializedInterest);
+  const source = eligible.length >= 4 ? eligible : ranked;
+  const selected = [];
+  for (const candidate of source) {
+    if (selected.length >= 4) break;
+    if (selected.filter(item => item.schoolTier === candidate.schoolTier).length >= 3) continue;
+    selected.push(candidate);
+  }
+  for (const candidate of ranked) {
+    if (selected.length >= 4) break;
+    if (!selected.some(item => item.schoolId === candidate.schoolId)) selected.push(candidate);
+  }
+  const replaceFor = predicate => {
+    if (predicate(selected)) return;
+    const replacement = ranked.find(candidate => !selected.some(item => item.schoolId === candidate.schoolId)
+      && predicate([...selected.slice(0, 3), candidate]));
+    if (replacement) selected.splice(3, 1, replacement);
+  };
+  replaceFor(items => new Set(items.map(item => item.schoolTier)).size >= 2);
+  replaceFor(items => {
+    const diversity = getSchoolInvitationDiversity(items);
+    return diversity.tierDiversity && diversity.roleDiversity && diversity.noDominantDuplicate;
+  });
+  const order = selected.slice(0, 4).sort((left, right) =>
+    stableSchoolInvitationHash(`${generationSeed}|display-order|${left.schoolId}`)
+    - stableSchoolInvitationHash(`${generationSeed}|display-order|${right.schoolId}`)
+    || left.schoolId.localeCompare(right.schoolId)
+  );
+  return order.map(({ selectionPriority, ...candidate }) => candidate);
+}
+
+function deriveSchoolInvitationGenerationSeed(target, explicitSeed) {
+  if (explicitSeed !== undefined && explicitSeed !== null && String(explicitSeed)) return String(explicitSeed);
+  const positionProfile = getSchoolRecruitingPositionProfile(target);
+  const positionExperience = Object.entries(positionProfile.positionExperience)
+    .filter(([, value]) => Number.isFinite(Number(value)) && Number(value) > 0)
+    .sort(([left], [right]) => left < right ? -1 : left > right ? 1 : 0)
+    .map(([position, value]) => `${position}:${Number(value)}`);
+  const basis = [
+    target?.capabilityState?.characterSeed || "no-capability-seed",
+    SCHOOL_INVITATION_GENERATION_NAMESPACE,
+    target?.bats || "R", target?.throws || "R",
+    `primary:${positionProfile.primaryCandidate}`,
+    `secondary:${positionProfile.secondaryCandidates.join(",")}`,
+    `legal:${positionProfile.legalPositions.join(",")}`,
+    `experience:${positionExperience.join(",")}`
+  ].join("|");
+  return `school-${stableSchoolInvitationHash(basis).toString(16).padStart(8, "0")}`;
+}
+
+function generateSchoolInvitationSet(target, options = {}) {
+  if (validateSchoolInvitationSet(target?.schoolInvitationState).ok) return target.schoolInvitationState;
+  const restored = restoreSchoolInvitationState(target?.schoolInvitationState);
+  if (validateSchoolInvitationSet(restored).ok) {
+    target.schoolInvitationState = restored;
+    return restored;
+  }
+  const capability = validateHighSchoolEntryCapability(target);
+  if (!capability.ok) throw new Error(`School Invitation 生成前置條件失敗：${capability.errors.join(",")}`);
+  const generationSeed = deriveSchoolInvitationGenerationSeed(target, options.generationSeed);
+  const candidatePool = SCHOOL_INVITATION_TIERS.flatMap(tier =>
+    Array.from({ length: SCHOOL_NAME_POOLS[tier].length }, (_, slot) => createSchoolInvitation(target, createSchoolProfile(generationSeed, tier, slot)))
+  );
+  const invitations = selectSchoolInvitationCandidates(candidatePool, generationSeed);
+  const state = {
+    completed: true,
+    bypassed: options.compatibilityMode === "direct-start-bypass",
+    version: SCHOOL_INVITATION_VERSION,
+    generationSeed,
+    generatedAtCapabilityVersion: target.capabilityState.settlementVersion,
+    compatibilityMode: options.compatibilityMode || "generation-only",
+    legacyExistingSchool: options.compatibilityMode === "direct-start-bypass" ? {
+      schoolId: "direct-start-existing-school",
+      schoolName: target.highSchoolRoute || "Direct Start 測試高中",
+      source: "direct-start-bypass"
+    } : null,
+    invitations
+  };
+  const validation = validateSchoolInvitationSet(state);
+  if (!validation.ok) throw new Error(`School Invitation Set validation failed：${validation.errors.join(",")}`);
+  target.schoolInvitationState = state;
+  return state;
+}
+
+function deepFreezeSchoolInvitationValue(value) {
+  if (!value || typeof value !== "object" || Object.isFrozen(value)) return value;
+  Object.values(value).forEach(deepFreezeSchoolInvitationValue);
+  return Object.freeze(value);
+}
+
+function getSchoolInvitationDebugSnapshot(target) {
+  const state = restoreSchoolInvitationState(target?.schoolInvitationState);
+  const positionProfile = getSchoolRecruitingPositionProfile(target);
+  const snapshot = {
+    invitationVersion: state.version,
+    generationCompleted: state.completed,
+    generationSeed: state.generationSeed,
+    compatibilityMode: state.compatibilityMode,
+    playerCapabilitySummary: {
+      initialSkillFormulaVersion: target?.capabilityState?.initialSkillFormulaVersion || "",
+      settlementVersion: target?.capabilityState?.settlementVersion || "",
+      bats: target?.bats || "",
+      throws: target?.throws || "",
+      baseballSkills: { ...(target?.baseballSkills || {}) }
+    },
+    narrativeIdentity: {
+      idealSelf: target?.idealSelf || "",
+      recruitingUsage: "future-presentation-only-not-used-in-recruiting-generation"
+    },
+    recruitingPositionProfile: cloneSchoolInvitationValue(positionProfile),
+    schools: state.invitations.map(invitation => ({
+      id: invitation.schoolId, name: invitation.schoolName, schoolSeed: invitation.schoolSeed,
+      tier: invitation.schoolTier, recruitingPreference: invitation.recruitingPreference,
+      candidatePosition: invitation.schoolInterest.candidatePosition,
+      positionNeed: invitation.schoolInterest.positionNeed,
+      capabilityMatch: invitation.schoolInterest.capabilityMatch,
+      recruitingStandard: invitation.recruitingStandard,
+      recruitingStandardFit: invitation.schoolInterest.recruitingStandardFit,
+      interestScore: invitation.schoolInterest.score,
+      interestCategory: invitation.schoolInterest.category,
+      projectedRole: invitation.projectedRole,
+      trainingQuality: invitation.trainingQuality,
+      competitionDepth: invitation.competitionDepth,
+      matchCompetitionLevel: invitation.matchCompetitionLevel,
+      playingTimeOpportunity: invitation.playingTimeOpportunity,
+      specializedInterest: invitation.specializedInterest,
+      reasons: invitation.interestReasons.slice(), riskSignals: invitation.riskSignals.slice()
+    })),
+    diversityValidation: cloneSchoolInvitationValue(validateSchoolInvitationSet(state).diversity)
+  };
+  return deepFreezeSchoolInvitationValue(snapshot);
+}
+
 function createRepresentativeHighSchoolEntryFixture(profile = "ordinary", seed = 1) {
   const profiles = {
     ordinary: { idealSelf: "全能型", allocation: { ballSense: 1, observe: 1, fitness: 0, batting: 0, baseRunning: 0, baseballIQ: 1 } },
@@ -853,6 +1352,7 @@ function createInitialPlayer(name = "") {
     juniorSeasonResult: "",
     juniorSeasonDetail: "",
     highSchoolRoute: "",
+    schoolInvitationState: createDefaultSchoolInvitationState(),
     highSchoolStep: 0,
     highSchoolTeamRole: "",
     highSchoolRoleCode: "",
