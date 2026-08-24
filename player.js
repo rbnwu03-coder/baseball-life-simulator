@@ -563,6 +563,7 @@ function getDebugCapabilitySnapshot(target) {
 
 const SCHOOL_INVITATION_VERSION = "school-invitation-v1";
 const SCHOOL_INVITATION_GENERATION_NAMESPACE = "high-school-entry-recruiting-cycle-v1";
+const SCHOOL_CHOICE_VERSION = "school-choice-v1";
 const SCHOOL_INVITATION_TIERS = Object.freeze(["powerhouse", "competitive", "standard", "development"]);
 const SCHOOL_RECRUITING_PREFERENCES = Object.freeze(["balanced", "defenseFirst", "offenseFirst", "athletic", "baseballIQ"]);
 const SCHOOL_PROJECTED_ROLES = Object.freeze(["depthCandidate", "benchCandidate", "rotationCandidate", "starterCompetition", "coreCandidate"]);
@@ -629,6 +630,10 @@ function createDefaultSchoolInvitationState() {
     generatedAtCapabilityVersion: "",
     compatibilityMode: "",
     legacyExistingSchool: null,
+    selectedSchoolId: "",
+    selectionFinalized: false,
+    selectionVersion: "",
+    selectionFinalizedAtCapabilityVersion: "",
     invitations: []
   };
 }
@@ -643,6 +648,11 @@ function restoreSchoolInvitationState(savedState = {}) {
   const restored = Object.assign(defaults, cloneSchoolInvitationValue(savedState));
   restored.invitations = Array.isArray(savedState.invitations) ? cloneSchoolInvitationValue(savedState.invitations) : [];
   restored.legacyExistingSchool = savedState.legacyExistingSchool ? cloneSchoolInvitationValue(savedState.legacyExistingSchool) : null;
+  restored.selectedSchoolId = typeof savedState.selectedSchoolId === "string" ? savedState.selectedSchoolId : "";
+  restored.selectionFinalized = savedState.selectionFinalized === true;
+  restored.selectionVersion = typeof savedState.selectionVersion === "string" ? savedState.selectionVersion : "";
+  restored.selectionFinalizedAtCapabilityVersion = typeof savedState.selectionFinalizedAtCapabilityVersion === "string"
+    ? savedState.selectionFinalizedAtCapabilityVersion : "";
   return restored;
 }
 
@@ -656,6 +666,10 @@ function markLegacySchoolInvitationCompatibility(target, source = "legacy-existi
   existing.bypassed = true;
   existing.version = SCHOOL_INVITATION_VERSION;
   existing.compatibilityMode = source;
+  existing.selectedSchoolId = "";
+  existing.selectionFinalized = false;
+  existing.selectionVersion = "";
+  existing.selectionFinalizedAtCapabilityVersion = "";
   existing.legacyExistingSchool = {
     schoolId: "legacy-existing-school",
     schoolName: target?.highSchoolRoute || "既有高中路線",
@@ -913,7 +927,67 @@ function validateSchoolInvitationSet(stateOrInvitations) {
   });
   if (state && state.version !== SCHOOL_INVITATION_VERSION) errors.push("invitation-version-invalid");
   if (state && state.completed !== true) errors.push("invitation-state-incomplete");
+  if (state?.selectionFinalized === true) {
+    if (!state.selectedSchoolId || !safeInvitations.some(invitation => invitation.schoolId === state.selectedSchoolId)) {
+      errors.push("selected-school-invalid");
+    }
+    if (state.selectionVersion !== SCHOOL_CHOICE_VERSION) errors.push("school-choice-version-invalid");
+  }
+  else if (state?.selectedSchoolId) errors.push("unfinalized-school-selection-invalid");
   return { ok: errors.length === 0, errors, diversity };
+}
+
+function getSelectedSchoolInvitation(target) {
+  const state = target?.schoolInvitationState;
+  if (!state?.selectionFinalized || !state.selectedSchoolId) return null;
+  return Array.isArray(state.invitations)
+    ? state.invitations.find(invitation => invitation.schoolId === state.selectedSchoolId) || null
+    : null;
+}
+
+function getSelectedHighSchoolContext(target) {
+  const selected = getSelectedSchoolInvitation(target);
+  if (!selected) return null;
+  return deepFreezeSchoolInvitationValue({
+    schoolId: selected.schoolId,
+    schoolName: selected.schoolName,
+    schoolTier: selected.schoolTier,
+    trainingQuality: selected.trainingQuality,
+    competitionDepth: selected.competitionDepth,
+    matchCompetitionLevel: selected.matchCompetitionLevel,
+    playingTimeOpportunity: selected.playingTimeOpportunity,
+    recruitingPreference: selected.recruitingPreference,
+    coachProfile: cloneSchoolInvitationValue(selected.coachProfile),
+    projectedRole: selected.projectedRole
+  });
+}
+
+function isSchoolInvitationChoicePending(target) {
+  const state = target?.schoolInvitationState;
+  return validateSchoolInvitationSet(state).ok
+    && state.compatibilityMode === "generation-only"
+    && state.selectionFinalized !== true;
+}
+
+function finalizeSchoolInvitationSelection(target, schoolId) {
+  const state = target?.schoolInvitationState;
+  const validation = validateSchoolInvitationSet(state);
+  if (!validation.ok) return { ok: false, error: `School Invitation Set 不合法：${validation.errors.join(",")}` };
+  if (state.compatibilityMode !== "generation-only") return { ok: false, error: "Compatibility route 不接受正式選校。" };
+  if (state.selectionFinalized === true) {
+    const selected = getSelectedSchoolInvitation(target);
+    return selected?.schoolId === schoolId
+      ? { ok: true, existing: true, selectedSchoolId: selected.schoolId, context: getSelectedHighSchoolContext(target) }
+      : { ok: false, error: "School Choice 已完成，不能改選。" };
+  }
+  const selected = state.invitations.find(invitation => invitation.schoolId === schoolId);
+  if (!selected) return { ok: false, error: "選擇的學校不在既有 Invitation Set。" };
+  state.selectedSchoolId = selected.schoolId;
+  state.selectionFinalized = true;
+  state.selectionVersion = SCHOOL_CHOICE_VERSION;
+  state.selectionFinalizedAtCapabilityVersion = target?.capabilityState?.settlementVersion || "";
+  target.schoolInvitationState = state;
+  return { ok: true, existing: false, selectedSchoolId: selected.schoolId, context: getSelectedHighSchoolContext(target) };
 }
 
 function getSchoolInvitationMinimumScore(tier) {
@@ -1003,6 +1077,10 @@ function generateSchoolInvitationSet(target, options = {}) {
       schoolName: target.highSchoolRoute || "Direct Start 測試高中",
       source: "direct-start-bypass"
     } : null,
+    selectedSchoolId: "",
+    selectionFinalized: false,
+    selectionVersion: "",
+    selectionFinalizedAtCapabilityVersion: "",
     invitations
   };
   const validation = validateSchoolInvitationSet(state);

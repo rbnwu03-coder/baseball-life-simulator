@@ -97,10 +97,11 @@ const syntheticB = parse("createHighSchoolDirectStartHistory()");
 verify("4. synthetic history 完全 deterministic", JSON.stringify(syntheticA) === JSON.stringify(syntheticB));
 verify("5. synthetic history 僅提供高一必要的有限前史", syntheticA.primaryPosition === "內野手" && syntheticA.flags.includes("azhe_hidden_error_seen") && Object.values(syntheticA.relationships).every(value => value <= 4));
 verify("6. Direct Start 不製造異常能力或關係", evaluate("player.characterGenesis.total === 15 && Math.max(...Object.values(player.relationships)) <= 4"));
-verify("6a. 正常高中入口在 settlement 後只生成資料，不改 route 或強迫選校", evaluate(`(() => {
+verify("6a. 正常高中入口在 settlement 後停在正式四校選擇，不提前進高中", evaluate(`(() => {
   player=createRepresentativeHighSchoolEntryFixture("ordinary",11001);player.chapter="青少棒分化";player.age=15;player.highSchoolRoute="普通高中・穩定出賽";
   const route=player.highSchoolRoute;enterHighSchool();
-  return validateSchoolInvitationSet(player.schoolInvitationState).ok&&player.schoolInvitationState.compatibilityMode==="generation-only"&&player.highSchoolRoute===route&&player.chapter==="青棒";
+  const markup=document.getElementById("choices").innerHTML;
+  return validateSchoolInvitationSet(player.schoolInvitationState).ok&&isSchoolInvitationChoicePending(player)&&player.highSchoolRoute===route&&player.chapter==="青少棒分化"&&player.age===15&&document.getElementById("story").innerHTML.includes("高中邀請")&&(markup.match(/class="school-invitation-card"/g)||[]).length===4;
 })()`));
 
 verify("7. 正常完整人生仍從十歲夏天開始", evaluate(`(() => {

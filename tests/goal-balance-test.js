@@ -77,6 +77,10 @@ function chooseFor(game, eventId, weights, variation) {
 
 function playUntil(game, condition, weights, variation, max = 45) {
   for (let turn = 0; turn < max && !vm.runInContext(condition, game); turn += 1) {
+    if (vm.runInContext("isSchoolInvitationChoicePending(player)", game)) {
+      vm.runInContext(`beginSchoolInvitationConfirmationAt(${Math.abs(variation + turn) % 4}); confirmSchoolInvitationSelection();`, game);
+      continue;
+    }
     const eventId = game.getCurrentEventId();
     game.choose(eventId, chooseFor(game, eventId, weights, variation + turn));
     if (vm.runInContext("Boolean(pendingBaseballGameplay?.stage === 'throw-decision')", game)) {

@@ -708,6 +708,133 @@ button:active{
     line-height:1.45;
 }
 
+.school-invitation-screen{
+    min-height:auto;
+}
+
+.school-invitation-context,
+.school-invitation-guidance{
+    max-width:72ch;
+    font-size:20px;
+    line-height:1.7;
+}
+
+.school-invitation-guidance{
+    margin-top:18px;
+    padding:12px 15px;
+    border-left:5px solid #8b745d;
+    background:#f4eee4;
+}
+
+.school-invitation-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:18px;
+    min-width:0;
+}
+
+.school-invitation-card{
+    display:flex;
+    min-width:0;
+    padding:20px;
+    flex-direction:column;
+    border:2px solid #8b745d;
+    border-radius:14px;
+    background:#fffdf7;
+    overflow-wrap:anywhere;
+}
+
+.school-invitation-card header small{
+    color:#766657;
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:.05em;
+}
+
+.school-invitation-card h3{
+    margin:5px 0 14px;
+    font-size:25px;
+}
+
+.school-invitation-card h4{
+    margin:15px 0 6px;
+    font-size:17px;
+}
+
+.school-invitation-card ul{
+    margin:0;
+    padding-left:22px;
+    line-height:1.55;
+}
+
+.school-invitation-card li + li{
+    margin-top:5px;
+}
+
+.school-invitation-echo{
+    margin:0 0 14px;
+    padding:10px 12px;
+    border-radius:9px;
+    background:#efe2c7;
+    color:#51463d;
+    font-style:italic;
+    line-height:1.55;
+}
+
+.school-invitation-comparison,
+.school-invitation-confirmation__summary{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:9px;
+    margin:0;
+}
+
+.school-invitation-comparison > div,
+.school-invitation-confirmation__summary > div{
+    min-width:0;
+    padding:10px;
+    border:1px solid #d8c9b4;
+    border-radius:9px;
+    background:#fffaf0;
+}
+
+.school-invitation-comparison dt,
+.school-invitation-confirmation__summary dt{
+    color:#766657;
+    font-size:12px;
+    font-weight:800;
+}
+
+.school-invitation-comparison dd,
+.school-invitation-confirmation__summary dd{
+    margin:4px 0 0;
+    font-weight:750;
+    line-height:1.45;
+}
+
+#choices .school-invitation-card button{
+    margin-top:auto;
+    margin-bottom:0;
+    padding:14px 16px;
+    font-size:18px;
+    text-align:center;
+}
+
+.school-invitation-confirmation{
+    min-height:auto;
+}
+
+.school-invitation-confirmation > p{
+    font-size:20px;
+    line-height:1.65;
+}
+
+#choices .school-choice-confirm{
+    border-color:#5b4634;
+    background:#f0dfbd;
+    font-weight:850;
+}
+
 .outcome,
 .choice-outcome-card{
     min-width:0;
@@ -2211,6 +2338,12 @@ button:active{
 }
 
 @media (max-width: 900px){
+    .school-invitation-grid,
+    .school-invitation-comparison,
+    .school-invitation-confirmation__summary{
+        grid-template-columns:1fr;
+    }
+
     body{
         margin:20px;
     }

@@ -410,6 +410,7 @@ function loadGame() {
     if (typeof stopHighSchoolMatchPlayback === "function") stopHighSchoolMatchPlayback();
     if (typeof clearPendingBaseballGameplay === "function") clearPendingBaseballGameplay();
     if (typeof clearTransientYouthSeasonOutcome === "function") clearTransientYouthSeasonOutcome();
+    if (typeof clearPendingSchoolInvitationSelection === "function") clearPendingSchoolInvitationSelection();
     player = candidate;
     if (typeof recordHighSchoolMatchOpportunityCheckpoint === "function" && player.highSchoolMatch?.opportunityDebugTrace) {
       recordHighSchoolMatchOpportunityCheckpoint("save-reload-restored", player.highSchoolMatch);
@@ -430,6 +431,7 @@ function deleteSave() {
   if (typeof stopHighSchoolMatchPlayback === "function") stopHighSchoolMatchPlayback();
   localStorage.removeItem(SAVE_KEY);
   if (typeof clearPendingBaseballGameplay === "function") clearPendingBaseballGameplay();
+  if (typeof clearPendingSchoolInvitationSelection === "function") clearPendingSchoolInvitationSelection();
   player = createInitialPlayer();
   document.getElementById("characterCreation").style.display = "block";
   document.getElementById("story").innerHTML = "";

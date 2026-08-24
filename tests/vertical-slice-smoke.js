@@ -31,6 +31,11 @@ function makeContext() {
 function playUntil(game, choices, condition, maxTurns = 20) {
   let turn = 0;
   while (!vm.runInContext(condition, game) && turn < maxTurns) {
+    if (vm.runInContext("isSchoolInvitationChoicePending(player)", game)) {
+      vm.runInContext(`beginSchoolInvitationConfirmationAt(${Math.abs(choices[turn % choices.length] ?? 0) % 4}); confirmSchoolInvitationSelection();`, game);
+      turn += 1;
+      continue;
+    }
     if (game.getCurrentEventId() === "high_school_showcase") {
       const match = vm.runInContext("player.highSchoolMatch", game);
       if (game.isHighSchoolMatchDecisionVisible(match)) {
@@ -88,7 +93,7 @@ function play(routeChoices, chapter2Choices, seasonChoices, competitionChoices, 
   if (!vm.runInContext("player.juniorResult", game)) throw new Error("青少棒開場沒有產生評估");
   game.choose("junior_result", 0);
   playUntil(game, juniorSeasonChoices, "Boolean(player.juniorSeasonResult)");
-  if (!vm.runInContext("player.juniorSeasonResult && player.highSchoolRoute", game)) throw new Error("青少棒階段沒有產生升學評估");
+  if (!vm.runInContext("player.juniorSeasonResult && !player.highSchoolRoute && !hasLegacyJuniorSchoolChoice(player)", game)) throw new Error("青少棒階段沒有產生中性的招生前評估");
   game.choose("junior_season_result", 0);
   playUntil(game, highSchoolChoices, "Boolean(player.highSchoolResult)", 1500);
   if (!vm.runInContext("player.highSchoolResult && player.highSchoolTeamRole", game)) throw new Error("青棒第一年沒有產生評估");

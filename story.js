@@ -1034,11 +1034,13 @@ const juniorSeasonEvents = {
       return `少棒恩師山本把推薦信放進沒有封口的信封，讓你先讀。這封信只證明他在少棒時期親眼看見的你；高中是否採用、如何安排，仍由現任球隊決定。\n\n${generateCoachRecommendation()}\n\n${azhe}\n${taka}\n\n你第一次看見，恩師記錄的不只是守位和成績，也是你怎麼對待一起走到這裡的人。`;
     },
     choices: [
-      C("請恩師保留原文，直接封口", { resilience: 1 }, ["yamamoto_recommendation_done", "accepted_coach_recommendation"], "少棒恩師山本沒有再補一句鼓勵，只在封口前確認你的校名。", { impressionEffects: { coach: { dependable: 1 } }, arcEffects: { yamamoto: "recommendation" } }),
+      C("請恩師保留原文，直接封口", { resilience: 1 }, ["yamamoto_recommendation_done", "accepted_coach_recommendation"], "少棒恩師山本沒有再補一句鼓勵，只在封口前確認推薦信上的姓名。", { impressionEffects: { coach: { dependable: 1 } }, arcEffects: { yamamoto: "recommendation" } }),
       C("請教練把自己的缺點也寫清楚", { confidence: 1, observe: 1 }, ["yamamoto_recommendation_done", "requested_honest_recommendation"], "教練加上一句風險評語：『願意修正，不代表每次都能及時開口。』", { personalityEffects: { brave: 1, thoughtful: 1 }, impressionEffects: { coach: { dependable: 1 } }, arcEffects: { yamamoto: "recommendation" } }),
       C("問他為什麼沒有多寫比賽成績", { pressure: 1 }, ["yamamoto_recommendation_done", "questioned_recommendation_focus"], "教練把筆放下：『成績表學校自己會看。我寫的是他們看不到的部分。』", { personalityEffects: { ambitious: 1 }, impressionEffects: { coach: { competitive: 1 } }, arcEffects: { yamamoto: "recommendation" } })
     ]
   },
+  // Legacy save compatibility only. Normal Route 在 yamamoto_recommendation 後直接結算；
+  // 未來 Youth Compressed Origin 若重用此概念，只能產生 preference／motivation seed，不能 finalize school。
   junior_school_choice: {
     title: "三張高中簡章",
     text: "畢業前，桌上放著三張簡章：競爭激烈、曝光很高的強豪；能承諾較多出賽的普通高中；以及一所以課業為主、仍保留棒球隊的學校。",
@@ -1052,7 +1054,10 @@ const juniorSeasonEvents = {
     title: "青少棒階段結算：前往青棒",
     text() {
       const fit = player.juniorSchoolFit || {};
-      return `${player.juniorSeasonResult}\n\n${player.juniorSeasonDetail}\n\n高中方向：${player.highSchoolRoute}\n入口適配：${fit.label || "待評估"}\n${(fit.reasons || []).join("；")}\n${fit.recovery ? `後續修正：${fit.recovery}\n` : ""}課業：${player.academics}　動機：${player.motivation}　倦怠：${player.burnout}\n疲勞：${player.body.fatigue}　傷病風險：${player.body.injuryRisk}\n\n有高中可去，不等於已找到適合這一輪球員的高中。`;
+      const legacyDirection = hasLegacyJuniorSchoolChoice(player) && player.highSchoolRoute
+        ? `高中方向：${player.highSchoolRoute}`
+        : "招生狀態：已完成高中招生前的階段結算，尚未決定下一所學校";
+      return `${player.juniorSeasonResult}\n\n${player.juniorSeasonDetail}\n\n${legacyDirection}\n升學條件：${fit.label || "待評估"}\n${(fit.reasons || []).join("；")}\n${fit.recovery ? `後續修正：${fit.recovery}\n` : ""}課業：${player.academics}　動機：${player.motivation}　倦怠：${player.burnout}\n疲勞：${player.body.fatigue}　傷病風險：${player.body.injuryRisk}\n\n有高中可去，不等於已找到適合這一輪球員的高中。`;
     },
     choices: [
       { text: "進入青棒第一年", nextChapter: "highSchool" },
@@ -1067,9 +1072,11 @@ const highSchoolEvents = {
     text() {
       const callbackEcho = hasCallback("takahashi_ten_ball", true) ? "高橋當年的十球挑戰仍留在你衡量競爭的方式裡。" : hasCallback("azhe_hidden_grounder", true) ? "你偶爾仍會想起阿哲反覆重做、卻沒被教練看見的那顆球。" : "";
       const genesis = player.characterGenesis?.shape ? `創角時的能力形狀「${player.characterGenesis.shape}」` : "舊存檔承接的成長軌跡";
-      const past = `你帶著「${player.juniorSeasonResult || player.juniorResult || "尚未定型"}」的國中評語、${player.secondaryPosition ? `${player.seasonPosition}／${player.secondaryPosition}` : player.seasonPosition || "未定"}的守位履歷，以及${genesis}報到。你是${formatHandedness(player.bats, player.throws)}，理想中的自己仍是「${player.idealSelf || "尚未形成"}」。${callbackEcho}`;
-      if (player.highSchoolRoute.startsWith("強豪")) return `${past}\n\n報到第一天，休息區坐著十幾名和你守相同位置的球員。有人國中就是全國大賽主力，卻連一軍練習組都排不進去。你第一次明白，曝光最高的地方也可能最看不見你。`;
-      if (player.highSchoolRoute.startsWith("普通")) return `${past}\n\n教練在報到表上圈起你的名字：『我們需要你盡快進入輪替。』這裡沒有滿牆獎盃，卻把真正的比賽責任直接放到你面前。`;
+      const selectedSchool = getSelectedHighSchoolContext(player);
+      const schoolArrival = selectedSchool ? `你正式走進${selectedSchool.schoolName}的球場。` : "";
+      const past = `${schoolArrival}你帶著「${player.juniorSeasonResult || player.juniorResult || "尚未定型"}」的國中評語、${player.secondaryPosition ? `${player.seasonPosition}／${player.secondaryPosition}` : player.seasonPosition || "未定"}的守位履歷，以及${genesis}報到。你是${formatHandedness(player.bats, player.throws)}，理想中的自己仍是「${player.idealSelf || "尚未形成"}」。${callbackEcho}`;
+      if (selectedSchool?.schoolTier === "powerhouse" || (!selectedSchool && player.highSchoolRoute.startsWith("強豪"))) return `${past}\n\n報到第一天，休息區坐著十幾名和你守相同位置的球員。有人國中就是全國大賽主力，卻連一軍練習組都排不進去。你第一次明白，曝光最高的地方也可能最看不見你。`;
+      if (["competitive", "standard"].includes(selectedSchool?.schoolTier) || (!selectedSchool && player.highSchoolRoute.startsWith("普通"))) return `${past}\n\n教練在報到表上圈起你的名字：『邀請只是我們看見你的起點，接下來要用訓練決定排序。』球隊把機會放在面前，也沒有替你保留位置。`;
       return `${past}\n\n放學鐘響後，你得穿過半個校園才能趕到球場。隊友已開始熱身，而書包裡還放著明天要交的報告。你保留了多條道路，也必須每天重新安排它們。`;
     },
     choices: [
@@ -1094,8 +1101,9 @@ const highSchoolEvents = {
   high_school_life: {
     title: "球場之外也在消耗你",
     text() {
-      if (player.highSchoolRoute.startsWith("強豪")) return "寮生活裡，學長決定洗澡順序、熄燈時間與公共區域工作。你很少真正獨處，連疲勞都得等到棉被裡才敢承認。";
-      if (player.highSchoolRoute.startsWith("普通")) return "球隊人手不足，你除了訓練還得整理場地、協助學弟與記錄器材。上場機會多，責任也沒有替補。";
+      const selectedSchool = getSelectedHighSchoolContext(player);
+      if (selectedSchool?.schoolTier === "powerhouse" || (!selectedSchool && player.highSchoolRoute.startsWith("強豪"))) return "寮生活裡，學長決定洗澡順序、熄燈時間與公共區域工作。你很少真正獨處，連疲勞都得等到棉被裡才敢承認。";
+      if (["competitive", "standard"].includes(selectedSchool?.schoolTier) || (!selectedSchool && player.highSchoolRoute.startsWith("普通"))) return "球隊把有限人力分進不同訓練組，你除了練習還得整理場地與記錄器材。邀請時談過的機會，仍要每天重新爭取。";
       return "課業老師提醒你缺交作業，教練則問你為什麼總是最後到場。沒有人要求你放棄其中一邊，但兩邊都只看見你缺席的部分。";
     },
     choices: [

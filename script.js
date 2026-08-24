@@ -11,6 +11,7 @@ let pendingHighSchoolFullMatchTest = false;
 let pendingHighSchoolMatchSimulationSeed = 0;
 let pendingGenesisRoll = null;
 let pendingGenesisAllocation = Object.fromEntries(CHARACTER_GENESIS_ABILITY_KEYS.map(key => [key, 0]));
+let pendingSchoolInvitationSelectionId = "";
 const statusPanelDisclosureState = Object.create(null);
 const statusPanelDisclosureBoundRoots = new WeakSet();
 
@@ -430,6 +431,187 @@ function syncGameUiVisibility() {
   document.body?.classList?.toggle?.("creation-mode", !hasCreatedPlayer);
 }
 
+const SCHOOL_INVITATION_PRESENTATION_LABELS = Object.freeze({
+  tier: Object.freeze({ powerhouse: "全國強權", competitive: "中上競爭校", standard: "一般競爭校", development: "發展型球隊" }),
+  training: Object.freeze({ elite: "頂尖", strong: "良好", standard: "一般", limited: "有限" }),
+  competition: Object.freeze({ veryHigh: "非常激烈", high: "激烈", medium: "普通", low: "較低" }),
+  playingTime: Object.freeze({ low: "不容易，需要長期競爭", medium: "需要競爭", mediumHigh: "有機會", high: "很有機會，但仍需爭取" }),
+  projectedRole: Object.freeze({
+    depthCandidate: "預期從競爭名單開始",
+    benchCandidate: "預期有機會進入替補名單",
+    rotationCandidate: "預期有望進入輪替",
+    starterCompetition: "預期有機會直接競爭先發",
+    coreCandidate: "校方預期把你視為這屆重要戰力候選"
+  }),
+  reason: Object.freeze({
+    defensiveReliability: "教練注意到你的守備穩定度。",
+    throwingReliability: "你的傳球可靠度讓教練留下印象。",
+    battingUpside: "校方看見你的打擊發展空間。",
+    speed: "你的速度能替球隊擴大進攻選擇。",
+    baseballUnderstanding: "你的棒球理解讓教練留下印象。",
+    armStrength: "你的臂力符合球隊目前的需求。",
+    defensiveReaction: "教練注意到你的守備反應。",
+    defensiveRange: "你的守備範圍是校方看中的工具。",
+    catcherBlocking: "你的捕手擋球能力符合球隊規劃。",
+    gameCalling: "教練看見你協助組織比賽的能力。",
+    pitchCommand: "你的投球控制力符合校方尋找的方向。",
+    pitchingDurability: "校方看中你承擔投球工作的潛力。",
+    positionNeedHigh: "球隊目前很需要你能負責的守位。",
+    positionNeedMedium: "球隊在你的候選守位仍有補強空間。",
+    specializedProfileFit: "你的突出工具正好回應球隊的特定缺口。"
+  }),
+  risk: Object.freeze({
+    highInternalCompetition: "隊內競爭非常激烈。",
+    crowdedPositionRoom: "同守位人選較多，需要爭取排序。",
+    limitedImmediatePlayingTime: "短期內上場機會有限。",
+    lowerTrainingEnvironment: "訓練資源不如競爭層級更高的球隊。",
+    weakerCompetitionSchedule: "平時面對的對手強度相對有限。"
+  })
+});
+
+function getSchoolInvitationReasonText(reason) {
+  if (SCHOOL_INVITATION_PRESENTATION_LABELS.reason[reason]) return SCHOOL_INVITATION_PRESENTATION_LABELS.reason[reason];
+  if (String(reason || "").startsWith("preference:")) return "你的能力組合符合教練團目前的招生方向。";
+  return "校方認為你的現有工具能回應球隊規劃。";
+}
+
+function getSchoolInvitationRiskText(risk) {
+  return SCHOOL_INVITATION_PRESENTATION_LABELS.risk[risk]
+    || "入學後的實際安排仍要由競爭與表現決定。";
+}
+
+function getSchoolInvitationIdentityEcho(target, invitation) {
+  const flags = new Set(target?.flags || []);
+  const powerhouse = invitation?.schoolTier === "powerhouse";
+  const playingTime = invitation?.playingTimeOpportunity;
+  if (flags.has("challengePower") && powerhouse) return "這個名字，你以前想的是有一天站到他們對面。";
+  if (flags.has("aspireToPower") && powerhouse) return "曾經只能仰望的名字，現在出現在邀請裡。";
+  if (flags.has("proveMyself")) return "這封邀請不是答案，而是一次證明自己能不能留下的入口。";
+  if ((flags.has("playingTimePriority") || flags.has("chose_playing_time_high_school")) && playingTime === "low") {
+    return "你很清楚，進去之後可能要等很久。";
+  }
+  if ((flags.has("playingTimePriority") || flags.has("chose_playing_time_high_school")) && ["mediumHigh", "high"].includes(playingTime)) {
+    return "這裡或許能更早讓你真正站上場。";
+  }
+  if (flags.has("chose_powerhouse_high_school") && powerhouse) return "你曾主動把目光放向更擁擠的舞台，現在它真的回望你。";
+  return "";
+}
+
+function createSchoolInvitationPresentationModel(target) {
+  const state = target?.schoolInvitationState;
+  if (!validateSchoolInvitationSet(state).ok) return null;
+  return Object.freeze({
+    title: "高中邀請",
+    context: "少年階段結束後，你陸續收到四間高中的邀請。每一間看中的工具、競爭環境與可用機會都不相同。",
+    cards: Object.freeze(state.invitations.map(invitation => Object.freeze({
+      schoolId: invitation.schoolId,
+      schoolName: invitation.schoolName,
+      tier: SCHOOL_INVITATION_PRESENTATION_LABELS.tier[invitation.schoolTier] || "高中棒球校隊",
+      training: SCHOOL_INVITATION_PRESENTATION_LABELS.training[invitation.trainingQuality] || "待了解",
+      competition: SCHOOL_INVITATION_PRESENTATION_LABELS.competition[invitation.competitionDepth] || "待了解",
+      playingTime: SCHOOL_INVITATION_PRESENTATION_LABELS.playingTime[invitation.playingTimeOpportunity] || "需要入學後競爭",
+      projectedRole: SCHOOL_INVITATION_PRESENTATION_LABELS.projectedRole[invitation.projectedRole] || "預期角色仍待入學後確認",
+      reasons: Object.freeze((invitation.interestReasons || []).slice(0, 2).map(getSchoolInvitationReasonText)),
+      risks: Object.freeze((invitation.riskSignals || []).slice(0, 2).map(getSchoolInvitationRiskText)),
+      identityEcho: getSchoolInvitationIdentityEcho(target, invitation)
+    })))
+  });
+}
+
+function renderSchoolInvitationList(items, emptyText) {
+  const values = items.length ? items : [emptyText];
+  return `<ul>${values.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul>`;
+}
+
+function renderSchoolInvitationPresentation() {
+  const model = createSchoolInvitationPresentationModel(player);
+  if (!model || !isSchoolInvitationChoicePending(player)) return false;
+  document.getElementById("story").innerHTML = `<article class="event-card school-invitation-screen" aria-labelledby="currentEventTitle">
+    <div class="event-kicker">高中升學</div>
+    <h2 id="currentEventTitle" tabindex="-1">${escapeHtml(model.title)}</h2>
+    <p class="school-invitation-context">${escapeHtml(model.context)}</p>
+    <p class="school-invitation-guidance">訓練、競爭與出賽機會沒有單一答案；請比較你願意承擔的取捨。</p>
+  </article>`;
+  document.getElementById("choices").innerHTML = `<section class="school-invitation-grid" aria-label="四間高中邀請">
+    ${model.cards.map((card, index) => `<article class="school-invitation-card" aria-labelledby="schoolInvitationName${index}">
+      <header><small>${escapeHtml(card.tier)}</small><h3 id="schoolInvitationName${index}">${escapeHtml(card.schoolName)}</h3></header>
+      ${card.identityEcho ? `<p class="school-invitation-echo">${escapeHtml(card.identityEcho)}</p>` : ""}
+      <dl class="school-invitation-comparison">
+        <div><dt>訓練環境</dt><dd>${escapeHtml(card.training)}</dd></div>
+        <div><dt>隊內競爭</dt><dd>${escapeHtml(card.competition)}</dd></div>
+        <div><dt>出賽機會</dt><dd>${escapeHtml(card.playingTime)}</dd></div>
+        <div><dt>校方預期</dt><dd>${escapeHtml(card.projectedRole)}</dd></div>
+      </dl>
+      <section aria-label="校方看中你的原因"><h4>為什麼邀請你</h4>${renderSchoolInvitationList(card.reasons, "校方認為你的能力能回應目前規劃。")}</section>
+      <section aria-label="需要考量的取捨"><h4>需要考量</h4>${renderSchoolInvitationList(card.risks, "目前沒有特別突出的短期風險，但實際角色仍要靠入學後競爭。")}</section>
+      <button type="button" onclick="beginSchoolInvitationConfirmationAt(${index})" aria-label="選擇${escapeHtml(card.schoolName)}">選擇這間學校</button>
+    </article>`).join("")}
+  </section>`;
+  focusCurrentEventHeading();
+  return true;
+}
+
+function renderSchoolInvitationConfirmation() {
+  if (!isSchoolInvitationChoicePending(player)) return false;
+  const model = createSchoolInvitationPresentationModel(player);
+  const card = model?.cards.find(item => item.schoolId === pendingSchoolInvitationSelectionId);
+  if (!card) return renderSchoolInvitationPresentation();
+  document.getElementById("story").innerHTML = `<article class="event-card school-invitation-confirmation" aria-labelledby="currentEventTitle">
+    <div class="event-kicker">確認高中選擇</div>
+    <h2 id="currentEventTitle" tabindex="-1">你決定加入「${escapeHtml(card.schoolName)}」？</h2>
+    <p>這是入學前的校方預期，不保證實際先發或固定角色。</p>
+    <dl class="school-invitation-confirmation__summary">
+      <div><dt>訓練環境</dt><dd>${escapeHtml(card.training)}</dd></div>
+      <div><dt>隊內競爭</dt><dd>${escapeHtml(card.competition)}</dd></div>
+      <div><dt>校方預期</dt><dd>${escapeHtml(card.projectedRole)}</dd></div>
+    </dl>
+  </article>`;
+  document.getElementById("choices").innerHTML = `<button type="button" class="school-choice-confirm" onclick="confirmSchoolInvitationSelection()">確認加入${escapeHtml(card.schoolName)}</button>
+    <button type="button" onclick="cancelSchoolInvitationConfirmation()">返回比較</button>`;
+  focusCurrentEventHeading();
+  return true;
+}
+
+function beginSchoolInvitationConfirmation(schoolId) {
+  if (isTransitioning || !isSchoolInvitationChoicePending(player)) return false;
+  if (!player.schoolInvitationState.invitations.some(invitation => invitation.schoolId === schoolId)) return false;
+  pendingSchoolInvitationSelectionId = schoolId;
+  return renderSchoolInvitationConfirmation();
+}
+
+function beginSchoolInvitationConfirmationAt(index) {
+  const model = createSchoolInvitationPresentationModel(player);
+  const card = model?.cards[index];
+  if (!card) return false;
+  return beginSchoolInvitationConfirmation(card.schoolId);
+}
+
+function cancelSchoolInvitationConfirmation() {
+  if (isTransitioning || !isSchoolInvitationChoicePending(player)) return false;
+  pendingSchoolInvitationSelectionId = "";
+  return renderSchoolInvitationPresentation();
+}
+
+function clearPendingSchoolInvitationSelection() {
+  pendingSchoolInvitationSelectionId = "";
+}
+
+function confirmSchoolInvitationSelection() {
+  if (isTransitioning || !pendingSchoolInvitationSelectionId || !isSchoolInvitationChoicePending(player)) return false;
+  isTransitioning = true;
+  setChoiceTransitionState(true);
+  const result = finalizeSchoolInvitationSelection(player, pendingSchoolInvitationSelectionId);
+  if (!result.ok || result.existing) {
+    isTransitioning = false;
+    setChoiceTransitionState(false);
+    showNotice(result.error || "這次選校已經完成。", result.ok ? "warning" : "error");
+    return false;
+  }
+  pendingSchoolInvitationSelectionId = "";
+  if (typeof saveGame === "function") saveGame();
+  return completeHighSchoolEntry({ source: "school-choice-confirmation" });
+}
+
 function applyDebugBookmarkCharacterProfile(target) {
   const existingSkills = { ...(target.baseballSkills || {}) };
   const existingTraits = Object.fromEntries(["ballSense", "observe", "fitness"].map(key => [key, Number(target[key]) || 0]));
@@ -479,6 +661,7 @@ function applyDebugBookmarkCharacterProfile(target) {
 }
 
 function loadTestBookmark(bookmark) {
+  clearPendingSchoolInvitationSelection();
   const name = document.getElementById("nameInput").value.trim() || "測試球員";
   player = createInitialPlayer(name);
   Object.assign(player, {
@@ -804,6 +987,7 @@ function createPlayer() {
 
 function resetGame() {
   clearPendingBaseballGameplay();
+  clearPendingSchoolInvitationSelection();
   pendingTrainingOutcome = null;
   resetStatusPanelDisclosureState();
   player = createInitialPlayer();
@@ -7235,15 +7419,20 @@ function processHighSchoolYearOneChoice(eventId, choice) {
   return "";
 }
 
-function enterHighSchool() {
-  const originType = player.flags?.includes("direct_start_history") ? "synthetic-youth-origin-v1" : "normal-youth-outcomes";
-  const settlement = settleHighSchoolEntryCapability(player, { originType });
-  if (!settlement.ok) {
-    throw new Error(`高中入口能力結算失敗：${settlement.error}${settlement.validation ? ` (${settlement.validation.errors.join(",")})` : ""}`);
+function completeHighSchoolEntry(options = {}) {
+  const state = player?.schoolInvitationState;
+  const invitationValidation = validateSchoolInvitationSet(state);
+  if (!invitationValidation.ok) {
+    showNotice("高中邀請資料不完整，暫時不能進入高中主篇。", "error");
+    return false;
   }
-  generateSchoolInvitationSet(player, {
-    compatibilityMode: originType === "synthetic-youth-origin-v1" ? "direct-start-bypass" : "generation-only"
-  });
+  const directStartBypass = state.compatibilityMode === "direct-start-bypass";
+  if (!directStartBypass && state.selectionFinalized !== true) {
+    showNotice("請先確認一間高中，再進入高中主篇。", "warning");
+    return false;
+  }
+  if (player.chapter === "青棒" && Number(player.age) === 16) return true;
+  const schoolContext = getSelectedHighSchoolContext(player);
   applyChapterBreather();
   player.chapter = "青棒";
   player.age = 16;
@@ -7254,7 +7443,26 @@ function enterHighSchool() {
   player.highSchoolMatch = createInitialPlayer().highSchoolMatch;
   player.highSchoolAzheEcho = createInitialPlayer().highSchoolAzheEcho;
   player.highSchoolRivalContext = createInitialPlayer().highSchoolRivalContext;
-  showNotice(`你進入${player.highSchoolRoute}，高中棒球正式開始。`, "success");
+  const schoolName = schoolContext?.schoolName || state.legacyExistingSchool?.schoolName || player.highSchoolRoute;
+  showNotice(`你進入${schoolName}，高中棒球正式開始。`, "success");
+  showCurrentEvent();
+  return true;
+}
+
+function enterHighSchool() {
+  const originType = player.flags?.includes("direct_start_history") ? "synthetic-youth-origin-v1" : "normal-youth-outcomes";
+  const settlement = settleHighSchoolEntryCapability(player, { originType });
+  if (!settlement.ok) {
+    throw new Error(`高中入口能力結算失敗：${settlement.error}${settlement.validation ? ` (${settlement.validation.errors.join(",")})` : ""}`);
+  }
+  const invitationState = generateSchoolInvitationSet(player, {
+    compatibilityMode: originType === "synthetic-youth-origin-v1" ? "direct-start-bypass" : "generation-only"
+  });
+  if (invitationState.compatibilityMode === "direct-start-bypass" || invitationState.selectionFinalized === true) {
+    return completeHighSchoolEntry({ source: invitationState.compatibilityMode });
+  }
+  clearPendingSchoolInvitationSelection();
+  showNotice("你收到四間高中的邀請，請先比較再做決定。", "success");
   showCurrentEvent();
   return true;
 }
@@ -8002,7 +8210,7 @@ const chapterResultHopeHooks = {
   youth_season_result: { title: "下一個可以期待的事", text: "下一場比賽的任務表，仍有一格尚未寫上名字。", source: "chapter_result" },
   competition_result: { title: "下一個可以期待的事", text: "三天後，教練會安排一次不同守位的測試。", source: "chapter_result" },
   junior_result: { title: "下一個可以期待的事", text: "下個月的練習裡，有一組球會從新的守位開始。", source: "chapter_result" },
-  junior_season_result: { title: "下一個可以期待的事", text: "高中報到日，新的球場會第一次叫到你的名字。", source: "chapter_result" },
+  junior_season_result: { title: "下一個可以期待的事", text: "高中的邀請即將陸續送到，你很快就得比較條件並決定下一站。", source: "chapter_result" },
   high_school_result: { title: "下一個可以期待的事", text: "下一次隊內賽，教練會把尚未固定的任務交給一名替補球員。", source: "chapter_result" },
   high_school_year_two_result: { title: "下一個可以期待的事", text: "高三第一張訓練表，會把你今年保住的角色換成最後一年的投資方向。", source: "chapter_result" },
   critical_year_result: { title: "下一個可以期待的事", text: "畢業前，你會收到一份寫著具體條件的下一站通知。", source: "chapter_result" },
@@ -8569,6 +8777,12 @@ function advanceAfterAction(decisionContext = null, completedEventId = null) {
   }
   if (player.chapter === "青少棒分化") {
     player.juniorSeasonStep += 1;
+    if (completedEventId === "yamamoto_recommendation") {
+      // Normal Route 的正式選校責任已移交 Four-School Invitation；index 9 僅留給明確載入的 legacy state。
+      player.juniorSeasonStep = 10;
+      evaluateJuniorSeason();
+      return;
+    }
     if (player.juniorSeasonStep >= 10) evaluateJuniorSeason();
     return;
   }
@@ -8788,17 +9002,28 @@ function evaluateJuniorOpening() {
   player.chapter = "青少棒開場小結";
 }
 
+function hasLegacyJuniorSchoolChoice(target = player) {
+  const flags = new Set(target?.flags || []);
+  return ["chose_powerhouse_high_school", "chose_playing_time_high_school", "chose_balanced_high_school"]
+    .some(flag => flags.has(flag));
+}
+
 function evaluateJuniorSeason() {
+  const legacySchoolChoice = hasLegacyJuniorSchoolChoice(player);
   if (hasFlag("chose_powerhouse_high_school")) {
     player.highSchoolRoute = "強豪高中・高競爭高曝光";
   } else if (hasFlag("chose_playing_time_high_school")) {
     player.highSchoolRoute = "普通高中・穩定出賽";
-  } else {
+  } else if (hasFlag("chose_balanced_high_school")) {
     player.highSchoolRoute = "課業並行・保留多重道路";
+  } else {
+    player.highSchoolRoute = "";
   }
   const schoolFit = evaluateJuniorSchoolFit();
   player.juniorSchoolFit = schoolFit;
-  const fitMessage = `${schoolFit.label}：${player.highSchoolRoute}。${schoolFit.reasons.join("；")}`;
+  const fitMessage = legacySchoolChoice
+    ? `${schoolFit.label}：${player.highSchoolRoute}。${schoolFit.reasons.join("；")}`
+    : `${schoolFit.label}：高中招生前條件已結算。${schoolFit.reasons.join("；")}`;
   if (schoolFit.level === "complete") completeGoal("junior_school_entry", fitMessage);
   else resolveGoal("junior_school_entry", schoolFit.level, fitMessage);
   if (schoolFit.level === "complete") completeGoal("junior_enter_high_school", "這個入口符合你的球員狀態，也有可持續方案");
@@ -8848,12 +9073,18 @@ function evaluateJuniorSchoolFit() {
     else fitScore = 1;
     if (!hasStableRole) reasons.push("穩定出賽仍缺少明確守位用途");
     if (injury >= 7) reasons.push("即使有出賽承諾，健康仍可能限制上場");
-  } else {
+  } else if (hasFlag("chose_balanced_high_school")) {
     if (academics >= 6 && burnout <= 4 && injury <= 6) fitScore = 3;
     else if (academics >= 4 && burnout <= 6) fitScore = 2;
     else fitScore = 1;
     if (academics < 4) reasons.push("課業資格不足以支撐並行方案");
     if (burnout >= 6) reasons.push("兩條道路同時維持的負荷過高");
+  } else {
+    if (academics >= 6 && burnout <= 4 && injury <= 6) fitScore = 3;
+    else if (academics >= 4 && burnout <= 6) fitScore = 2;
+    else fitScore = 1;
+    if (academics < 4) reasons.push("升學準備仍受課業條件限制");
+    if (burnout >= 6) reasons.push("目前負荷可能限制接下來的選校空間");
   }
 
   if (severe) fitScore = 0;
@@ -9100,6 +9331,24 @@ function evaluateDevelopmentYears() {
 
 function showCurrentEvent() {
   pendingTrainingOutcome = null;
+  const invitationState = player?.schoolInvitationState;
+  if (
+    invitationState?.selectionFinalized === true
+    && invitationState.compatibilityMode === "generation-only"
+    && Number(player.age) < 16
+    && !String(player.chapter || "").includes("青棒")
+  ) {
+    completeHighSchoolEntry({ source: "finalized-choice-resume" });
+    return;
+  }
+  if (isSchoolInvitationChoicePending(player)) {
+    isTransitioning = false;
+    setChoiceTransitionState(false);
+    if (pendingSchoolInvitationSelectionId) renderSchoolInvitationConfirmation();
+    else renderSchoolInvitationPresentation();
+    return;
+  }
+  clearPendingSchoolInvitationSelection();
   const eventId = getCurrentEventId();
   if (pendingBaseballGameplay && pendingBaseballGameplay.eventId !== eventId) {
     clearPendingBaseballGameplay();
@@ -9597,11 +9846,13 @@ function renderCurrentGoalSummary() {
 }
 
 function renderCurrentIdentitySummary() {
+  const selectedSchool = getSelectedHighSchoolContext(player);
   const items = [
     `<span><small>年齡</small><strong>${Number(player.age) || 0} 歲</strong></span>`,
     player.chapter ? `<span><small>階段</small><strong>${escapeHtml(player.chapter)}</strong></span>` : "",
     player.seasonPosition ? `<span><small>守位</small><strong>${escapeHtml(player.seasonPosition)}</strong></span>` : "",
     player.roleIdentity?.primary ? `<span><small>角色</small><strong>${escapeHtml(player.roleIdentity.primary)}</strong></span>` : "",
+    selectedSchool?.schoolName ? `<span><small>高中</small><strong>${escapeHtml(selectedSchool.schoolName)}</strong></span>` : "",
     player.route && player.route !== "尚未定型" ? `<span><small>路線</small><strong>${escapeHtml(player.route)}</strong></span>` : ""
   ].filter(Boolean);
   return items.length ? `<div class="status-summary__identity">${items.join("")}</div>` : "";
@@ -9811,7 +10062,8 @@ function updateStatus() {
       ${renderStatusSection("生涯與市場", careerHtml, { disclosureKey: "career" })}
       ${debug ? renderStatusSection("系統／測試資訊", `${debugHtml}${debugRelationshipHtml}`, { className: "status-section--debug", disclosureKey: "debug" }) : ""}
     </div>`;
-  document.getElementById("player-info").innerHTML = `<strong>${escapeHtml(player.name || "尚未建立角色")}</strong><span>${player.age} 歲</span><span>${escapeHtml(player.chapter)}</span><span>${escapeHtml(player.route)}</span><span>${escapeHtml(formatHandedness(player.bats, player.throws))}</span><span>理想球員：${escapeHtml(player.idealSelf || "尚未形成")}</span>`;
+  const selectedSchool = getSelectedHighSchoolContext(player);
+  document.getElementById("player-info").innerHTML = `<strong>${escapeHtml(player.name || "尚未建立角色")}</strong><span>${player.age} 歲</span><span>${escapeHtml(player.chapter)}</span><span>${escapeHtml(player.route)}</span>${selectedSchool?.schoolName ? `<span>高中：${escapeHtml(selectedSchool.schoolName)}</span>` : ""}<span>${escapeHtml(formatHandedness(player.bats, player.throws))}</span><span>理想球員：${escapeHtml(player.idealSelf || "尚未形成")}</span>`;
 }
 
 updateStatus();

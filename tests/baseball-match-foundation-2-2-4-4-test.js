@@ -87,6 +87,10 @@ function makeContext() {
       __prepareGenesis244("full");
       createPlayer();
       enterHighSchool();
+      if (isSchoolInvitationChoicePending(player)) {
+        beginSchoolInvitationConfirmationAt(0);
+        confirmSchoolInvitationSelection();
+      }
       for (const eventId of ["high_school_intro", "high_school_load", "high_school_life", "high_school_role"]) {
         if (getCurrentEventId() !== eventId) throw new Error("Narrative setup failed before " + eventId);
         choose(eventId, 0);
