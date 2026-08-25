@@ -11,6 +11,8 @@ const files = [
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
   "competition-presentation.js", "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js",
   "baseball-offense-prototype.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
+  "match-experience-development.js",
+  "match-development-settlement-presentation.js",
   "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
   "career-development-runtime-resolver.js", "career-development-progression.js", "career-age22-outcome-resolver.js",
   "career-save-admission.js", "story.js", "save.js", "script.js"
@@ -121,6 +123,7 @@ function makeContext() {
       const playbackMode = options.playbackMode || "timer";
       const policy = options.policy || "first";
       const sample = Number.isFinite(Number(options.sample)) ? Number(options.sample) : .82;
+      MatchExperienceDevelopment.setEnabled(options.bridge !== false);
       let match = pathMode === "narrative" ? __setupNarrative244(seed, options.instrumentation !== false) : __setupDirect244(seed, options.instrumentation !== false);
       if (playbackMode === "direct") { stopHighSchoolMatchPlayback("direct-audit-replay"); __clearTimers244(); }
       let steps = 0; let decisions = 0; let reloaded = false; let orphan = 0;
@@ -151,11 +154,30 @@ function makeContext() {
       const truth = {
         completed: match.completed,
         score: { ...match.scores },
+        lineScore: JSON.parse(JSON.stringify(match.lineScore || {})),
+        outs: match.outs,
+        runners: JSON.parse(JSON.stringify(match.runners || {})),
         simulationCursor: match.simulationCursor,
         playerPA: match.performanceEvidence?.player?.plateAppearances || 0,
-        decisions: match.completedMoments.map(moment => ({ domain: moment.domain, decision: moment.decision, tier: moment.tier }))
+        decisions: match.completedMoments.map(moment => ({ domain: moment.domain, decision: moment.decision, tier: moment.tier })),
+        simulationLog: (match.simulationLog || []).map(event => ({
+          type: event.type,
+          inning: event.inning,
+          half: event.half,
+          batterId: event.batterId || "",
+          result: event.result || event.outcome || "",
+          outsBefore: event.outsBefore,
+          outsAfter: event.outsAfter
+        }))
       };
-      return { seed, pathMode, playbackMode, policy, sample, steps, decisions, reloaded, orphan, trace, truth };
+      const matchExperience = match.matchExperience ? {
+        finalized: match.matchExperience.finalized,
+        settled: match.matchExperience.settled,
+        evidenceCount: match.matchExperience.evidence?.length || 0,
+        contextCount: match.matchExperience.selectedContexts?.length || 0,
+        settlementId: match.matchExperience.matchExperienceSettlementId || ""
+      } : null;
+      return { seed, pathMode, playbackMode, policy, sample, steps, decisions, reloaded, orphan, trace, truth, matchExperience };
     }
 
     function __compareRuns244(left, right) {
@@ -199,6 +221,12 @@ const parityResults = paritySeeds.map(seed => {
 });
 verify("P9. 20/20 Browser production 與 Node-style audit replay signature parity", parityResults.every(result => result.equal));
 verify("P10. 20 seeds entry／PA／Decision／defense／final truth 全部 parity", parityResults.every(result => JSON.stringify(result.browser.trace.summary) === JSON.stringify(result.audit.trace.summary) && JSON.stringify(result.browser.truth) === JSON.stringify(result.audit.truth)));
+
+const bridgeDisabled = run({ seed: 22424201, playbackMode: "direct", bridge: false });
+const bridgeEnabled = run({ seed: 22424201, playbackMode: "direct", bridge: true });
+verify("M1. Match Experience bridge 開／關不改逐局、出局、壘包、log、Decision 與終場 truth", JSON.stringify(bridgeDisabled.truth) === JSON.stringify(bridgeEnabled.truth));
+verify("M2. Bridge 關閉不建立 side state；開啟只在終場建立 settled state", bridgeDisabled.matchExperience === null && bridgeEnabled.matchExperience?.finalized && bridgeEnabled.matchExperience?.settled);
+verify("M3. 正式 Direct Start 完整比賽的主要 Development Context 不超過 3", bridgeEnabled.matchExperience.contextCount <= 3 && bridgeEnabled.matchExperience.settlementId.includes("match-experience-development-v1"));
 
 const freshReloadPairs = paritySeeds.map(seed => ({
   fresh: run({ seed, playbackMode: "timer" }),

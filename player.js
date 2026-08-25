@@ -1815,7 +1815,9 @@ function createInitialPlayer(name = "") {
       previousMomentDecision: "", previousMomentOutcome: "", passage: "",
       opponentAdjustment: "", coachInstruction: "", decision: "", outcomeTier: "",
       outcome: "", consequence: "", coachReaction: "", teamReaction: "",
-      performanceSummary: "", teamResult: "", settled: false, pendingGameSettlement: "", eventSettlementApplied: false, completed: false
+      performanceSummary: "", teamResult: "", settled: false, pendingGameSettlement: "", eventSettlementApplied: false, completed: false,
+      developmentPresentationCompleted: false,
+      matchExperience: null
     },
     highSchoolAzheEcho: { variant: "", influenceDirection: "", evidence: [], cause: "", change: "", recall: "", summary: "", persistentFlag: "" },
     highSchoolRivalContext: { rivalId: "takahashi", rivalName: "高橋", entryType: "", encounter: "", yearTwoPressure: "" },

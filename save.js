@@ -281,6 +281,13 @@ function normalizeSave(saved) {
     saved.highSchoolMatch?.lastDefensiveResolution ? JSON.parse(JSON.stringify(saved.highSchoolMatch.lastDefensiveResolution)) : {}
   );
   fresh.highSchoolMatch.eventSettlementApplied = saved.highSchoolMatch?.eventSettlementApplied === true;
+  const hasDevelopmentPresentationFlag = Object.prototype.hasOwnProperty.call(saved.highSchoolMatch || {}, "developmentPresentationCompleted");
+  fresh.highSchoolMatch.developmentPresentationCompleted = hasDevelopmentPresentationFlag
+    ? saved.highSchoolMatch.developmentPresentationCompleted === true
+    : Boolean(saved.highSchoolMatch?.eventSettlementApplied && saved.highSchoolMatch?.matchExperience?.settled !== true);
+  fresh.highSchoolMatch.matchExperience = typeof MatchExperienceDevelopment !== "undefined"
+    ? MatchExperienceDevelopment.normalizeMatchExperienceState(saved.highSchoolMatch?.matchExperience, fresh.highSchoolMatch)
+    : saved.highSchoolMatch?.matchExperience ? JSON.parse(JSON.stringify(saved.highSchoolMatch.matchExperience)) : null;
   fresh.highSchoolMatch.rosters = saved.highSchoolMatch?.rosters
     ? {
       home: saved.highSchoolMatch.rosters.home ? {

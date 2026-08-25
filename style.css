@@ -2036,6 +2036,107 @@ button:active{
     line-height:1.65;
 }
 
+.match-development-settlement{
+    min-width:0;
+    overflow-wrap:anywhere;
+    border-left:6px solid #52644b;
+    background:#f4f7ef;
+}
+
+.match-development-settlement > h3{
+    margin:0 0 14px;
+    color:#35412f;
+    font-size:22px;
+}
+
+.match-development-block{
+    min-width:0;
+    padding:14px 0;
+    border-top:1px solid #ccd5c4;
+}
+
+.match-development-block > h4{
+    margin:0 0 10px;
+    color:#4c5946;
+    font-size:16px;
+}
+
+.match-development-participation{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:10px;
+    margin:0;
+}
+
+.match-development-participation div{
+    min-width:0;
+    padding:10px 12px;
+    border-radius:9px;
+    background:#fffdf7;
+}
+
+.match-development-participation dt{
+    color:#766657;
+    font-size:13px;
+    font-weight:750;
+}
+
+.match-development-participation dd{
+    margin:4px 0 0;
+    color:#2d251f;
+    font-size:18px;
+    font-weight:850;
+}
+
+.post-match-section .match-development-learning,
+.post-match-section .match-development-breakthroughs{
+    display:grid;
+    gap:10px;
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
+.match-development-learning li,
+.match-development-breakthroughs li{
+    min-width:0;
+    margin:0;
+    padding:12px 14px;
+    border:1px solid #d8dfd2;
+    border-radius:10px;
+    background:#fffdf7;
+}
+
+.match-development-learning h4{
+    margin:0 0 5px;
+    color:#35412f;
+}
+
+.match-development-learning small{
+    margin:7px 0 0;
+    color:#6b6258;
+    letter-spacing:0;
+}
+
+.match-development-breakthroughs strong{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:baseline;
+    color:#71451f;
+    font-size:19px;
+}
+
+.match-development-breakthroughs strong span{
+    display:inline;
+    font-size:21px;
+}
+
+.match-development-empty,
+.match-development-no-breakthrough{
+    color:#5f584f;
+}
+
 .match-current-assignment{
     display:flex;
     flex-direction:column;
@@ -2401,6 +2502,19 @@ button:active{
 
     .status-current-summary{
         padding:13px;
+    }
+
+    .match-development-participation{
+        grid-template-columns:1fr;
+    }
+
+    .match-development-settlement,
+    .match-development-block,
+    .match-development-learning li,
+    .match-development-breakthroughs li{
+        max-width:100%;
+        min-width:0;
+        overflow-wrap:anywhere;
     }
 
     .status-summary__identity,

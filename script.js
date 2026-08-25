@@ -2935,6 +2935,13 @@ function exportHighSchoolMatchOpportunityDebug(match = player.highSchoolMatch) {
       completed: Boolean(match.completed),
       simulationCursor: Number(match.simulationCursor) || 0,
       completedMoments: (match.completedMoments || []).map(moment => ({ momentId: moment.momentId || "", domain: moment.domain || "", decision: moment.decision || "", tier: moment.tier || "" }))
+    },
+    matchExperience: typeof MatchExperienceDevelopment !== "undefined"
+      ? MatchExperienceDevelopment.getDebugSnapshot(match) : null,
+    matchDevelopmentPresentation: {
+      completed: match.developmentPresentationCompleted === true,
+      model: typeof MatchDevelopmentSettlementPresentation !== "undefined"
+        ? MatchDevelopmentSettlementPresentation.createViewModel(match, { skillLabels }) : null
     }
   };
   return JSON.stringify(payload, null, 2);
@@ -3271,6 +3278,11 @@ function renderHighSchoolPostMatchOutcome(choice, statFeedbackHtml) {
   const performances = match.completedMoments.map((moment, index) => `<li><strong>第${["一", "二", "三"][index] || index + 1}次關鍵回合</strong>${moment.execution ? `<span class="post-match-execution">你的執行：${escapeHtml(moment.execution)}</span>` : ""}<span>${escapeHtml(moment.outcome)}。${escapeHtml(moment.consequence)}</span>${moment.causeExplanation ? `<span class="post-match-cause">原因：${escapeHtml(moment.causeExplanation)}</span>` : ""}</li>`).join("");
   const feedbackHtml = typeof statFeedbackHtml === "string" && statFeedbackHtml.trim()
     ? `<section class="outcome__feedback choice-outcome-feedback" aria-label="狀態變化"><small>狀態變化</small>${statFeedbackHtml}</section>` : "";
+  const developmentPresentationModel = typeof MatchDevelopmentSettlementPresentation !== "undefined"
+    ? MatchDevelopmentSettlementPresentation.createViewModel(match, { skillLabels }) : null;
+  const experienceHtml = developmentPresentationModel
+    ? MatchDevelopmentSettlementPresentation.render(developmentPresentationModel)
+    : `<section class="post-match-section match-development-settlement" aria-labelledby="matchDevelopmentTitle"><h3 id="matchDevelopmentTitle">本場實戰成長</h3><p>本場未產生可結算的實戰成長資料。</p></section>`;
   setChoiceTransitionState(false);
   document.getElementById("story").innerHTML = `<article class="event-card outcome choice-outcome-card high-school-post-match" aria-labelledby="outcomeTitle">
     ${renderHighSchoolYearOneScore()}
@@ -3280,6 +3292,7 @@ function renderHighSchoolPostMatchOutcome(choice, statFeedbackHtml) {
     <section class="post-match-section" aria-labelledby="postMatchPerformance"><small id="postMatchPerformance">你的關鍵表現</small><ol>${performances || "<li>你依照目前角色完成了這場比賽。</li>"}</ol></section>
     <section class="post-match-section post-match-coach" aria-labelledby="postMatchCoach"><small id="postMatchCoach">教練評語</small><p>${escapeHtml(match.coachReaction)}</p></section>
     <section class="post-match-section post-match-impact" aria-labelledby="postMatchImpact"><small id="postMatchImpact">接下來的影響</small><p>${escapeHtml(match.consequence)}</p></section>
+    ${experienceHtml}
     ${feedbackHtml}
   </article>`;
   clearOutcomeFeedbackPresentation();
@@ -3359,19 +3372,23 @@ function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
 }
 
 function continueYouthSeasonOutcome() {
-  if (!pendingYouthSeasonOutcome) return;
+  if (!pendingYouthSeasonOutcome) return false;
   const completedEventId = pendingYouthSeasonOutcome.eventId;
   if (completedEventId === "high_school_showcase") {
     recordHighSchoolMatchPlaybackTrace("outcome-exit", completedEventId, player.highSchoolMatch);
     markHighSchoolMatchDecisionLifecycle("continue", player.highSchoolMatch);
   }
   setOutcomeContinueState(true);
+  if (completedEventId === "high_school_showcase" && player.highSchoolMatch?.completed) {
+    player.highSchoolMatch.developmentPresentationCompleted = true;
+  }
   pendingYouthSeasonOutcome = null;
   isTransitioning = false;
   showCurrentEvent();
   if (completedEventId === "high_school_showcase" && !player.highSchoolMatch?.completed) {
     resumeHighSchoolMatchPlayback("outcome-continue", player.highSchoolMatch);
   }
+  return true;
 }
 
 function showNotice(message, type = "neutral") {
@@ -6281,6 +6298,7 @@ function prepareHighSchoolYearOneMatch() {
     playerEntryWindowInning: roleAssignment.entryWindowInning,
     playerEntryCompleted: code === "starter",
     performanceEvidence: {},
+    matchExperience: null,
     developmentFullMatchStart: pendingHighSchoolFullMatchTest,
     playerRunnerLocation: -1,
     momentIndex: 0,
@@ -6310,6 +6328,7 @@ function prepareHighSchoolYearOneMatch() {
     settled: false,
     pendingGameSettlement: "",
     eventSettlementApplied: false,
+    developmentPresentationCompleted: false,
     completed: false
   };
   if (isHighSchoolMatchOpportunityDebugMode()) ensureHighSchoolMatchOpportunityTrace(player.highSchoolMatch);
@@ -6636,7 +6655,12 @@ function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
     approach: choice.approach,
     route: choice.route,
     riskProfile: choice.riskProfile,
-    objectiveSucceeded
+    objectiveSucceeded,
+    decisionQuality: "acceptable",
+    executionQuality: tier === "strong" ? "strong" : tier === "mixed" ? "normal" : "weak",
+    primaryCause: tier === "failure" ? "executionFeedback" : "balancedExecution",
+    secondaryCause: "",
+    responsibleActor: "player"
   });
   recordHighSchoolYearOneMoment(match, choice.matchDecision, tier, playerFacingResult.outcome, playerFacingResult.consequence, situationAfter, {
     runnerChanges: runnerFacts.runnerChanges,
@@ -6656,7 +6680,12 @@ function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
     objectiveSucceeded,
     runnerChanges: runnerFacts.runnerChanges.map(change => ({ ...change })),
     scoringRunnerIds: runnerFacts.scoringRunnerIds.slice(),
-    baseballMeaning
+    baseballMeaning,
+    decisionQuality: "acceptable",
+    executionQuality: tier === "strong" ? "strong" : tier === "mixed" ? "normal" : "weak",
+    primaryCause: tier === "failure" ? "executionFeedback" : "balancedExecution",
+    secondaryCause: "",
+    responsibleActor: "player"
   });
   match.lastOffensiveResolution = {
     objective: choice.objective,
@@ -6730,6 +6759,9 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
     executionStage: resolution.executionStage || "",
     playerResponsibility: resolution.playerResponsibility,
     teammateResponsibility: resolution.teammateResponsibility,
+    playerLeg: resolution.playerLeg ? JSON.parse(JSON.stringify(resolution.playerLeg)) : {},
+    teammateLeg: resolution.teammateLeg ? JSON.parse(JSON.stringify(resolution.teammateLeg)) : {},
+    timingResolution: resolution.timingResolution ? JSON.parse(JSON.stringify(resolution.timingResolution)) : {},
     causeExplanation: resolution.causeExplanation,
     ballContext: resolution.ballContext,
     ballDirection: resolution.ballDirection,
@@ -6739,6 +6771,9 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
     type: "defensiveResolution", presentationImportance: "hidden", inning: match.inning, half: match.half,
     familyId: "infield", route: resolution.route, routeId: resolution.routeId || "", initialRoute: resolution.initialRoute || "", activeRoute: resolution.activeRoute || "", fallbackRoute: resolution.fallbackRoute || "", resultCode: resolution.resultCode,
     playerRole: resolution.playerRole || situation.responsibility?.playerRole || "", primaryCause: resolution.primaryCause, responsibleActor: resolution.responsibleActor || "",
+    decisionQuality: resolution.decisionQuality, executionQuality: resolution.executionQuality,
+    secondaryCause: resolution.secondaryCause || "", playerResponsibility: resolution.playerResponsibility || "", teammateResponsibility: resolution.teammateResponsibility || "",
+    playerLeg: resolution.playerLeg || {}, teammateLeg: resolution.teammateLeg || {}, timingResolution: resolution.timingResolution || {},
     outsCreated: resolution.outsCreated, runsAllowed: resolution.runsAllowed,
     runnerChanges: resolution.runnerChanges, scoringRunnerIds: resolution.scoringRunnerIds,
     outs: match.outs, scores: match.scores, runners: match.runners
@@ -6823,8 +6858,16 @@ function applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution) {
     playerRole: resolution.playerRole || situation.responsibility?.playerRole || "",
     coverageQuality: resolution.coverageQuality || "",
     upstreamThrowQuality: resolution.upstreamThrowQuality || "",
+    decisionQuality: resolution.decisionQuality || "routine",
+    executionQuality: resolution.executionQuality || "notApplicable",
     primaryCause: resolution.primaryCause || "",
+    secondaryCause: resolution.secondaryCause || "",
     responsibleActor: resolution.responsibleActor || "",
+    playerResponsibility: resolution.playerResponsibility || "",
+    teammateResponsibility: resolution.teammateResponsibility || "",
+    playerLeg: resolution.playerLeg || {},
+    teammateLeg: resolution.teammateLeg || {},
+    timingResolution: resolution.timingResolution || {},
     resultCode: resolution.resultCode,
     outsCreated: resolution.outsCreated,
     error: resolution.error,
@@ -7016,6 +7059,9 @@ function settleHighSchoolYearOneMatch(match, finalDecision) {
   recordHighSchoolMatchSimulationEvent(match, {
     type: "gameEnd", inning: match.inning, half: "終", scores: match.scores
   });
+  if (typeof MatchExperienceDevelopment !== "undefined") {
+    MatchExperienceDevelopment.settleMatchExperienceDevelopment(player, match);
+  }
 
   player.seasonPerformance += Math.max(0, contribution.strong * 2 + contribution.mixed);
   player.recentPerformance += overallTier === "strong" ? 2 : overallTier === "mixed" ? 1 : -1;
@@ -9361,6 +9407,14 @@ function showCurrentEvent() {
     return;
   }
   clearPendingSchoolInvitationSelection();
+  if (
+    player.highSchoolMatch?.completed
+    && player.highSchoolMatch.matchExperience?.settled === true
+    && player.highSchoolMatch.developmentPresentationCompleted !== true
+  ) {
+    showHighSchoolCompletedMatchOutcome(player.highSchoolMatch);
+    return;
+  }
   const eventId = getCurrentEventId();
   if (pendingBaseballGameplay && pendingBaseballGameplay.eventId !== eventId) {
     clearPendingBaseballGameplay();
