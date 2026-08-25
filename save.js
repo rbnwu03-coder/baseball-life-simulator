@@ -56,6 +56,10 @@ function normalizeSave(saved) {
       if (!settlement.ok) throw new Error(`存檔 Capability settlement 失敗：${settlement.error}`);
     }
   }
+  fresh.developmentState = ensureDevelopmentStateShape(fresh, saved.developmentState || null, {
+    migrateMissing: true,
+    sourceSaveVersion
+  });
   fresh.schoolInvitationState = restoreSchoolInvitationState(saved.schoolInvitationState);
   const reachedHighSchoolStory = Number(fresh.age) >= 16 || /青棒|高中/.test(String(fresh.chapter || "")) || Number(fresh.highSchoolStep) > 0;
   if (reachedHighSchoolStory && !validateSchoolInvitationSet(fresh.schoolInvitationState).ok) {

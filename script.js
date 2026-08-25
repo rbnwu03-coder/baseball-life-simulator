@@ -1772,37 +1772,37 @@ function createTrainingPlayerSnapshot() {
   return {
     ballSense: player.ballSense,
     discipline: player.discipline,
-    baseballSkills: {
-      batting: player.baseballSkills?.batting,
-      reaction: player.baseballSkills?.reaction,
-      range: player.baseballSkills?.range,
-      throwing: player.baseballSkills?.throwing
-    },
     body: { fatigue: player.body?.fatigue }
   };
 }
 
-function applyResolvedTrainingResult(result) {
-  if (!result || result.status !== "resolved") return false;
-  const topLevelEffects = {};
-  const baseballSkillEffects = {};
-  Object.entries(result.skillDeltas).forEach(([key, value]) => {
-    if (key === "ballSense" || key === "discipline") topLevelEffects[key] = value;
-    else baseballSkillEffects[key] = value;
-  });
-  applyEffects(topLevelEffects);
-  applySkillEffects(baseballSkillEffects, {
-    sourceType: CAPABILITY_MUTATION_SOURCE_TYPES.DEVELOPMENT,
-    sourceContract: "development-runtime-v1",
-    eventId: "high-school-year-two-training",
-    choiceId: result.trainingCode || "resolved-training",
-    provenance: "training-resolver"
-  });
-  if (!player.body || typeof player.body !== "object") return false;
+function applyResolvedTrainingResult(result, eventId) {
+  if (!result || result.status !== "resolved" || !player.body || typeof player.body !== "object") {
+    return { ok: false, error: "invalid-training-result" };
+  }
+  let developmentApplication = null;
+  if (result.developmentContext) {
+    developmentApplication = applyDevelopmentResult(player, {
+      ...result.developmentContext,
+      sourceId: eventId,
+      sourceType: "training",
+      playerChoice: result.code,
+      metadata: {
+        settlementId: `${eventId}|${result.code}`,
+        trainingCode: result.code,
+        schoolTrainingQualityBridge: "future-only-not-applied",
+        playingTimeExperienceBridge: "future-only-not-applied"
+      }
+    });
+    if (!developmentApplication.ok || developmentApplication.status !== "applied") {
+      return { ok: false, error: developmentApplication.errors?.join(",") || developmentApplication.status };
+    }
+  }
+  applyEffects(result.topLevelDeltas);
   Object.entries(result.bodyDeltas).forEach(([key, value]) => {
     player.body[key] = Math.max(0, Math.min(20, (Number(player.body[key]) || 0) + value));
   });
-  return true;
+  return { ok: true, developmentApplication };
 }
 
 function applyTrainingRelationshipHook(trainingCode) {
@@ -1843,11 +1843,21 @@ function renderTrainingOutcome() {
   const reaction = pending.relationshipEcho
     ? `<section class="outcome__reaction choice-outcome-reaction" aria-label="教練回應"><small>教練回應</small><p>${escapeHtml(pending.relationshipEcho)}</p></section>`
     : "";
+  const development = pending.developmentResult;
+  const developmentHtml = development ? `<section class="outcome__development choice-outcome-result" aria-label="技術學習結果"><small>技術學習</small><p>${escapeHtml(getTrainingDevelopmentResultText(development))}</p></section>` : "";
   setChoiceTransitionState(false);
-  document.getElementById("story").innerHTML = `<article class="event-card outcome choice-outcome-card" aria-labelledby="outcomeTitle"><div class="event-kicker choice-outcome-kicker">訓練結果</div><h2 id="outcomeTitle" tabindex="-1">${escapeHtml(pending.title)}</h2><section class="outcome__confirmation choice-outcome-action" aria-label="你的選擇"><small>你選擇</small><strong>${escapeHtml(pending.choiceText)}</strong></section>${reaction}<section class="outcome__feedback choice-outcome-feedback" aria-label="狀態變化"><small>狀態變化</small><ul class="training-outcome-list">${changes}</ul></section></article>`;
+  document.getElementById("story").innerHTML = `<article class="event-card outcome choice-outcome-card" aria-labelledby="outcomeTitle"><div class="event-kicker choice-outcome-kicker">訓練結果</div><h2 id="outcomeTitle" tabindex="-1">${escapeHtml(pending.title)}</h2><section class="outcome__confirmation choice-outcome-action" aria-label="你的選擇"><small>你選擇</small><strong>${escapeHtml(pending.choiceText)}</strong></section>${developmentHtml}${reaction}<section class="outcome__feedback choice-outcome-feedback" aria-label="狀態變化"><small>其他狀態變化</small><ul class="training-outcome-list">${changes}</ul></section></article>`;
   clearOutcomeFeedbackPresentation();
   document.getElementById("choices").innerHTML = `<div class="outcome__action" aria-label="前往下一幕"><button type="button" class="outcome-continue-button" onclick="continueTrainingOutcome()">繼續</button></div>`;
   focusOutcomeHeading();
+}
+
+function getTrainingDevelopmentResultText(result) {
+  const skill = skillLabels[result.targetSkill] || trainingChangeLabels[result.targetSkill] || "這項技術";
+  if (result.skillCapReached && result.skillBefore >= 20) return `${skill}已達目前能力上限，這次練習改以維持動作品質為主。`;
+  if (result.levelUps > 0) return `反覆修正後，先前累積的練習開始真正固定下來。${skill}能力有所提升。`;
+  if (result.learningQuality === "limited") return `你仍留下了一些可用的修正線索，但這次吸收有限，還沒有形成穩定的技術改變。`;
+  return `你逐漸抓到${skill}的練習節奏，這次累積了實際進展，但還沒有形成永久的能力提升。`;
 }
 
 function chooseHighSchoolTraining(eventId, trainingCode) {
@@ -1872,7 +1882,8 @@ function chooseHighSchoolTraining(eventId, trainingCode) {
   isTransitioning = true;
   setChoiceTransitionState(true);
   const result = BaseballTrainingResolver.resolveTraining(createTrainingPlayerSnapshot(), trainingCode);
-  if (result.status !== "resolved" || !applyResolvedTrainingResult(result)) {
+  const application = result.status === "resolved" ? applyResolvedTrainingResult(result, eventId) : { ok: false };
+  if (result.status !== "resolved" || !application.ok) {
     isTransitioning = false;
     setChoiceTransitionState(false);
     showNotice("訓練狀態無法安全結算，請重新選擇。", "error");
@@ -1889,7 +1900,8 @@ function chooseHighSchoolTraining(eventId, trainingCode) {
     title: event.title,
     choiceText: choice.text,
     relationshipEcho,
-    result
+    result,
+    developmentResult: application.developmentApplication?.result || null
   };
   updateImpression();
   renderTrainingOutcome();
@@ -9769,6 +9781,7 @@ function getBalanceDebugSummary() {
   const goal = player.goalState?.current;
   const competition = getStartingCompetitionBreakdown();
   const position = getPositionAssessment(player.seasonPosition || competition.position);
+  const development = getDevelopmentDebugSnapshot(player);
   return {
     goalId: goal?.id || "none",
     goalProgress: goal ? getGoalProgressText(goal) : "none",
@@ -9778,7 +9791,8 @@ function getBalanceDebugSummary() {
     positionRating: position?.rating || 0,
     positionStrengths: position?.strengths || "尚未形成",
     chapterSkillPoints: player.balanceDebug?.chapterSkillPoints || 0,
-    load: { pressure: player.pressure, fatigue: player.body.fatigue, injuryRisk: player.body.injuryRisk, pain: player.body.pain, burnout: player.burnout }
+    load: { pressure: player.pressure, fatigue: player.body.fatigue, injuryRisk: player.body.injuryRisk, pain: player.body.pain, burnout: player.burnout },
+    development
   };
 }
 
@@ -10004,7 +10018,12 @@ function updateStatus() {
   const validationSummaryHtml = competitionModel ? `<div class="status-summary__competition"><small>${escapeHtml(competitionModel.type?.label || "驗證場合")}</small><strong>${escapeHtml(competitionModel.competitionTitle)}</strong><span>${escapeHtml(competitionModel.inningSummary)}</span>${competitionModel.showScore ? `<b>客隊 ${competitionModel.matchState.awayScore}：${competitionModel.matchState.homeScore} 少棒隊</b>` : ""}</div>` : "";
   const debugMode = Boolean(document.querySelector?.(".debug-bookmarks")?.open);
   const debug = debugMode ? getBalanceDebugSummary() : null;
-  const debugHtml = debug ? `<div class="balance-debug"><strong>平衡測試</strong><small>目標 ${escapeHtml(debug.goalId)}｜${escapeHtml(debug.goalTier)}｜${escapeHtml(debug.goalProgress)}</small><small>預估 ${escapeHtml(debug.estimatedResult)}</small><small>競爭：技能 ${Math.round(debug.competition.skillScore)}／信任 ${Math.round(debug.competition.trustScore)}／表現 ${Math.round(debug.competition.performanceScore)}／準備 ${debug.competition.preparationScore}／角色 ${debug.competition.roleScore}</small><small>守位評分 ${debug.positionRating}｜本章技能 +${debug.chapterSkillPoints}</small><small>負荷：壓力 ${debug.load.pressure}／疲勞 ${debug.load.fatigue}／傷病 ${debug.load.injuryRisk}／倦怠 ${debug.load.burnout}</small></div>` : "";
+  const developmentDebug = debug?.development;
+  const lastDevelopment = developmentDebug?.lastResult;
+  const progressDebug = developmentDebug
+    ? Object.entries(developmentDebug.skillProgress).filter(([, value]) => value > 0).map(([skill, value]) => `${skill}:${value}`).join("／") || "尚無累積"
+    : "";
+  const debugHtml = debug ? `<div class="balance-debug"><strong>平衡測試</strong><small>目標 ${escapeHtml(debug.goalId)}｜${escapeHtml(debug.goalTier)}｜${escapeHtml(debug.goalProgress)}</small><small>預估 ${escapeHtml(debug.estimatedResult)}</small><small>競爭：技能 ${Math.round(debug.competition.skillScore)}／信任 ${Math.round(debug.competition.trustScore)}／表現 ${Math.round(debug.competition.performanceScore)}／準備 ${debug.competition.preparationScore}／角色 ${debug.competition.roleScore}</small><small>守位評分 ${debug.positionRating}｜本章技能 +${debug.chapterSkillPoints}</small><small>負荷：壓力 ${debug.load.pressure}／疲勞 ${debug.load.fatigue}／傷病 ${debug.load.injuryRisk}／倦怠 ${debug.load.burnout}</small><small>Development：${escapeHtml(progressDebug)}</small>${lastDevelopment ? `<small>最近：${escapeHtml(lastDevelopment.sourceId)}／${escapeHtml(lastDevelopment.targetSkill)} +${lastDevelopment.progressGained}｜trait ${lastDevelopment.diagnostics.traitScore.toFixed(2)}／difficulty ${lastDevelopment.diagnostics.skillDifficultyModifier.toFixed(2)}／bias ${lastDevelopment.diagnostics.biasModifier.toFixed(2)}／variation ${lastDevelopment.diagnostics.variation.toFixed(3)}</small>` : ""}</div>` : "";
   const aspiration = getCurrentAspiration();
   const summary = getCurrentStatusSummary({ pendingHtml, competitionHtml: competitionHtml || validationSummaryHtml });
   const detailedGoalHtml = player.goalState?.current

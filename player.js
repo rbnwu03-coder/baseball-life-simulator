@@ -63,6 +63,361 @@ const INITIAL_SKILL_FORMULAS = Object.freeze({
   range: Object.freeze({ fitness: 0.35, observe: 0.25, ballSense: 0.20, baseballIQ: 0.10 })
 });
 
+const DEVELOPMENT_STATE_VERSION = "development-v1";
+const DEVELOPMENT_RESULT_VERSION = "development-result-v1";
+const DEVELOPMENT_PROGRESS_THRESHOLD = 100;
+const DEVELOPMENT_HISTORY_LIMIT = 200;
+const DEVELOPMENT_SKILL_KEYS = Object.freeze([
+  ...UNIVERSAL_BASEBALL_SKILL_KEYS,
+  ...SPECIALIST_BASEBALL_SKILL_KEYS
+]);
+const DEVELOPMENT_SOURCE_TYPES = Object.freeze([
+  "training", "event", "gameExperience", "coachInstruction", "debug"
+]);
+const DEVELOPMENT_ACTIVITY_TYPES = Object.freeze([
+  "technical", "physical", "recognition", "decision", "repetition", "specialist"
+]);
+const DEVELOPMENT_DIFFICULTIES = Object.freeze(["easy", "appropriate", "challenging", "overmatched"]);
+const DEVELOPMENT_QUALITIES = Object.freeze(["limited", "standard", "good", "elite"]);
+
+const DEVELOPMENT_ACTIVITY_TRAIT_WEIGHTS = Object.freeze({
+  technical: Object.freeze({ ballSense: 0.45, observe: 0.30, baseballIQ: 0.25 }),
+  physical: Object.freeze({ fitness: 0.55, ballSense: 0.25, baseRunning: 0.20 }),
+  recognition: Object.freeze({ observe: 0.45, baseballIQ: 0.35, ballSense: 0.20 }),
+  decision: Object.freeze({ baseballIQ: 0.55, observe: 0.35, ballSense: 0.10 }),
+  repetition: Object.freeze({ fitness: 0.40, ballSense: 0.35, observe: 0.25 }),
+  specialist: Object.freeze({ ballSense: 0.30, observe: 0.25, baseballIQ: 0.25, fitness: 0.20 })
+});
+
+const DEVELOPMENT_SKILL_LEARNING_PROFILES = Object.freeze({
+  catching: Object.freeze({ technical: 0.60, recognition: 0.40 }),
+  throwing: Object.freeze({ technical: 0.55, physical: 0.45 }),
+  batting: Object.freeze({ technical: 0.55, recognition: 0.45 }),
+  baseRunning: Object.freeze({ physical: 0.55, decision: 0.45 }),
+  baseballIQ: Object.freeze({ decision: 0.60, recognition: 0.40 }),
+  armStrength: Object.freeze({ physical: 0.80, repetition: 0.20 }),
+  reaction: Object.freeze({ recognition: 0.60, physical: 0.40 }),
+  range: Object.freeze({ physical: 0.55, recognition: 0.45 }),
+  blocking: Object.freeze({ specialist: 0.55, technical: 0.25, recognition: 0.20 }),
+  gameCalling: Object.freeze({ specialist: 0.45, decision: 0.35, recognition: 0.20 }),
+  control: Object.freeze({ specialist: 0.45, technical: 0.30, repetition: 0.25 }),
+  pitchStamina: Object.freeze({ specialist: 0.40, physical: 0.35, repetition: 0.25 })
+});
+
+const DEVELOPMENT_IDEAL_SELF_BIASES = Object.freeze({
+  "全能型": Object.freeze(DEVELOPMENT_SKILL_KEYS.reduce((result, skill) => ({ ...result, [skill]: 0.04 }), {})),
+  "強打型": Object.freeze({ batting: 0.09, armStrength: 0.09 }),
+  "技巧型": Object.freeze({ batting: 0.09, catching: 0.09, throwing: 0.09, baseballIQ: 0.09 }),
+  "守備型": Object.freeze({ catching: 0.09, throwing: 0.09, reaction: 0.09, range: 0.09, blocking: 0.06, gameCalling: 0.06 }),
+  "速度型": Object.freeze({ baseRunning: 0.09, range: 0.09, reaction: 0.09 }),
+  "棒球理解型": Object.freeze({ baseballIQ: 0.09, gameCalling: 0.07, control: 0.05 })
+});
+
+const DEVELOPMENT_QUALITY_MODIFIERS = Object.freeze({
+  limited: 0.80,
+  standard: 1,
+  good: 1.12,
+  elite: 1.24
+});
+
+function createDefaultDevelopmentState(options = {}) {
+  return {
+    version: DEVELOPMENT_STATE_VERSION,
+    formulaVersion: DEVELOPMENT_RESULT_VERSION,
+    initialized: true,
+    skillProgress: Object.fromEntries(DEVELOPMENT_SKILL_KEYS.map(skill => [skill, 0])),
+    history: [],
+    appliedSettlementIds: [],
+    migration: options.migration || null
+  };
+}
+
+function cloneDevelopmentValue(value) {
+  return value === undefined ? undefined : JSON.parse(JSON.stringify(value));
+}
+
+function freezeDevelopmentValue(value) {
+  if (!value || typeof value !== "object" || Object.isFrozen(value)) return value;
+  Object.values(value).forEach(freezeDevelopmentValue);
+  return Object.freeze(value);
+}
+
+function ensureDevelopmentStateShape(target, savedState = target?.developmentState, options = {}) {
+  if (!target || typeof target !== "object") return null;
+  const saved = savedState && typeof savedState === "object" ? savedState : null;
+  const missing = !saved || saved.version !== DEVELOPMENT_STATE_VERSION;
+  const defaults = createDefaultDevelopmentState();
+  const state = Object.assign(defaults, saved || {});
+  state.version = DEVELOPMENT_STATE_VERSION;
+  state.formulaVersion = DEVELOPMENT_RESULT_VERSION;
+  state.initialized = true;
+  state.skillProgress = Object.fromEntries(DEVELOPMENT_SKILL_KEYS.map(skill => {
+    const currentSkill = Number(target?.baseballSkills?.[skill]);
+    const value = Number(saved?.skillProgress?.[skill]);
+    const progress = currentSkill >= 20 ? 0 : Math.max(0, Math.min(99, Number.isFinite(value) ? Math.floor(value) : 0));
+    return [skill, progress];
+  }));
+  state.history = Array.isArray(saved?.history)
+    ? saved.history.slice(-DEVELOPMENT_HISTORY_LIMIT).map(item => cloneDevelopmentValue(item)) : [];
+  state.appliedSettlementIds = Array.isArray(saved?.appliedSettlementIds)
+    ? Array.from(new Set(saved.appliedSettlementIds.filter(id => typeof id === "string" && id))).slice(-DEVELOPMENT_HISTORY_LIMIT)
+    : state.history.map(item => item.settlementId).filter(Boolean).slice(-DEVELOPMENT_HISTORY_LIMIT);
+  state.migration = saved?.migration ? cloneDevelopmentValue(saved.migration)
+    : options.migrateMissing && missing ? {
+      from: "missing-development-state",
+      to: DEVELOPMENT_STATE_VERSION,
+      sourceSaveVersion: options.sourceSaveVersion ?? null,
+      initializedProgress: 0,
+      preservedBaseballSkills: true
+    } : null;
+  target.developmentState = state;
+  return state;
+}
+
+function getDevelopmentTraitValue(target, traitKey) {
+  if (["ballSense", "observe", "fitness"].includes(traitKey)) {
+    const current = Number(target?.[traitKey]);
+    if (Number.isFinite(current) && current > 0) return current;
+  }
+  const genesis = getFinalizedGenesisAbilities(target);
+  const value = Number(genesis?.[traitKey]);
+  return Number.isFinite(value) && value > 0 ? value : 3;
+}
+
+function getDevelopmentTraitWeights(targetSkill, activityType) {
+  const combined = {};
+  const addWeights = (weights, share) => Object.entries(weights || {}).forEach(([trait, weight]) => {
+    combined[trait] = (combined[trait] || 0) + weight * share;
+  });
+  addWeights(DEVELOPMENT_ACTIVITY_TRAIT_WEIGHTS[activityType], 0.60);
+  Object.entries(DEVELOPMENT_SKILL_LEARNING_PROFILES[targetSkill] || {}).forEach(([profileActivity, weight]) => {
+    addWeights(DEVELOPMENT_ACTIVITY_TRAIT_WEIGHTS[profileActivity], weight * 0.40);
+  });
+  const total = Object.values(combined).reduce((sum, value) => sum + value, 0) || 1;
+  return Object.fromEntries(Object.entries(combined).map(([trait, weight]) => [trait, weight / total]));
+}
+
+function calculateDevelopmentTraitScore(target, targetSkill, activityType) {
+  const weights = getDevelopmentTraitWeights(targetSkill, activityType);
+  const contributions = Object.entries(weights).map(([trait, weight]) => ({
+    trait,
+    traitValue: getDevelopmentTraitValue(target, trait),
+    weight,
+    contribution: getDevelopmentTraitValue(target, trait) * weight
+  }));
+  const score = contributions.reduce((sum, item) => sum + item.contribution, 0);
+  return { score, weights, contributions };
+}
+
+function getDevelopmentSkillDifficultyModifier(skill) {
+  const value = Math.max(0, Math.min(20, Number(skill) || 0));
+  if (value <= 4) return 1.20;
+  if (value <= 8) return 1;
+  if (value <= 12) return 0.80;
+  if (value <= 16) return 0.60;
+  if (value <= 19) return 0.40;
+  return 0;
+}
+
+function getDevelopmentDifficultyFitModifier(difficulty, currentSkill, traitScore) {
+  const readiness = Math.max(0, Math.min(1,
+    (Math.max(0, Math.min(20, Number(currentSkill) || 0)) / 20) * 0.55
+    + (Math.max(1, Math.min(5, traitScore)) - 1) / 4 * 0.45
+  ));
+  const modifier = difficulty === "easy" ? 0.72
+    : difficulty === "appropriate" ? 1
+      : difficulty === "challenging" ? 0.82 + readiness * 0.25
+        : 0.35 + readiness * 0.30;
+  return { modifier, readiness };
+}
+
+function getDevelopmentBiasModifier(target, targetSkill) {
+  const bias = Number(DEVELOPMENT_IDEAL_SELF_BIASES[target?.idealSelf]?.[targetSkill]) || 0;
+  return { modifier: 1 + bias, bias };
+}
+
+function getDevelopmentVariation(target, context, settlementId) {
+  const characterSeed = target?.capabilityState?.characterSeed || createCapabilityCharacterSeed(target);
+  const sample = stableCapabilityHash([
+    characterSeed,
+    DEVELOPMENT_RESULT_VERSION,
+    settlementId,
+    context.sourceId,
+    context.playerChoice,
+    context.targetSkill
+  ].join("|")) / 4294967295;
+  const amplitude = context.activityType === "repetition" ? 0.03 : 0.06;
+  return { sample, modifier: 1 + (sample * 2 - 1) * amplitude };
+}
+
+function validateDevelopmentContext(target, context = {}) {
+  const errors = [];
+  if (!target || typeof target !== "object") errors.push("invalid-player");
+  if (!DEVELOPMENT_SOURCE_TYPES.includes(context.sourceType)) errors.push("invalid-source-type");
+  if (!context.sourceId || typeof context.sourceId !== "string") errors.push("missing-source-id");
+  if (!DEVELOPMENT_SKILL_KEYS.includes(context.targetSkill)) errors.push("invalid-target-skill");
+  if (!DEVELOPMENT_ACTIVITY_TYPES.includes(context.activityType)) errors.push("invalid-activity-type");
+  if (!DEVELOPMENT_DIFFICULTIES.includes(context.difficulty)) errors.push("invalid-difficulty");
+  if (!DEVELOPMENT_QUALITIES.includes(context.quality)) errors.push("invalid-quality");
+  if (!context.playerChoice || typeof context.playerChoice !== "string") errors.push("missing-player-choice");
+  const currentSkill = Number(target?.baseballSkills?.[context.targetSkill]);
+  if (!Number.isFinite(currentSkill) || currentSkill < 0 || currentSkill > 20) errors.push("invalid-current-skill");
+  if (SPECIALIST_BASEBALL_SKILL_KEYS.includes(context.targetSkill)) {
+    const specialistType = ["blocking", "gameCalling"].includes(context.targetSkill) ? "catcher" : "pitcher";
+    const experience = Number(target?.capabilityState?.specialistExperience?.[specialistType]) || 0;
+    if (context.activityType !== "specialist" || context.metadata?.specialistEligible !== true || experience <= 0) {
+      errors.push("specialist-activation-required");
+    }
+  }
+  return { ok: errors.length === 0, errors };
+}
+
+function settleDevelopmentProgress(skillBefore, progressBefore, progressGained) {
+  let skill = Math.max(0, Math.min(20, Math.floor(Number(skillBefore) || 0)));
+  let progress = Math.max(0, Math.floor(Number(progressBefore) || 0));
+  const gained = Math.max(0, Math.floor(Number(progressGained) || 0));
+  if (skill >= 20) return { skillAfter: 20, progressAfter: 0, levelUps: 0, skillCapReached: true };
+  progress += gained;
+  let levelUps = 0;
+  while (progress >= DEVELOPMENT_PROGRESS_THRESHOLD && skill < 20) {
+    progress -= DEVELOPMENT_PROGRESS_THRESHOLD;
+    skill += 1;
+    levelUps += 1;
+  }
+  if (skill >= 20) progress = 0;
+  return { skillAfter: skill, progressAfter: progress, levelUps, skillCapReached: skill >= 20 };
+}
+
+function getDevelopmentLearningQuality(progressGained) {
+  if (progressGained >= 22) return "excellent";
+  if (progressGained >= 17) return "good";
+  if (progressGained >= 10) return "normal";
+  return "limited";
+}
+
+function applyDevelopmentResult(target, context = {}) {
+  const validation = validateDevelopmentContext(target, context);
+  if (!validation.ok) return freezeDevelopmentValue({ ok: false, status: "rejected", errors: validation.errors.slice() });
+  const state = ensureDevelopmentStateShape(target);
+  const settlementId = String(context.settlementId || context.metadata?.settlementId
+    || `${context.sourceType}|${context.sourceId}|${context.playerChoice}|${context.targetSkill}`);
+  if (state.appliedSettlementIds.includes(settlementId)) {
+    const existing = state.history.find(item => item.settlementId === settlementId) || null;
+    return freezeDevelopmentValue({ ok: true, status: "duplicate", duplicate: true, settlementId, result: cloneDevelopmentValue(existing) });
+  }
+
+  const targetSkill = context.targetSkill;
+  const skillBefore = Math.max(0, Math.min(20, Math.floor(Number(target.baseballSkills[targetSkill]) || 0)));
+  const progressBefore = skillBefore >= 20 ? 0 : Math.max(0, Math.min(99, Math.floor(Number(state.skillProgress[targetSkill]) || 0)));
+  const trait = calculateDevelopmentTraitScore(target, targetSkill, context.activityType);
+  const traitModifier = Math.max(0.70, Math.min(1.35, 1 + (trait.score - 3) * 0.10));
+  const skillDifficultyModifier = getDevelopmentSkillDifficultyModifier(skillBefore);
+  const difficultyFit = getDevelopmentDifficultyFitModifier(context.difficulty, skillBefore, trait.score);
+  const qualityModifier = DEVELOPMENT_QUALITY_MODIFIERS[context.quality];
+  const bias = getDevelopmentBiasModifier(target, targetSkill);
+  const variation = getDevelopmentVariation(target, context, settlementId);
+  const calculatedGain = skillBefore >= 20 ? 0 : Math.max(1, Math.round(
+    18 * traitModifier * skillDifficultyModifier * difficultyFit.modifier * qualityModifier * bias.modifier * variation.modifier
+  ));
+  const progressGained = context.sourceType === "debug" && Number.isFinite(Number(context.metadata?.progressOverride))
+    ? Math.max(0, Math.floor(Number(context.metadata.progressOverride))) : calculatedGain;
+  const settlement = settleDevelopmentProgress(skillBefore, progressBefore, progressGained);
+  const reasons = [];
+  if (skillBefore >= 20) reasons.push("skillCapReached");
+  else {
+    if (trait.score >= 3.6) reasons.push("strongTraitFit");
+    else if (trait.score <= 2.4) reasons.push("limitedTraitFit");
+    if (context.difficulty === "appropriate") reasons.push("appropriateDifficulty");
+    else if (context.difficulty === "easy") reasons.push("lowChallenge");
+    else if (context.difficulty === "challenging") reasons.push("challengingFit");
+    else reasons.push("poorContextFit");
+    if (bias.bias > 0) reasons.push("developmentBias");
+    if (skillBefore >= 17) reasons.push("eliteRefinement");
+    else if (skillBefore >= 9) reasons.push("highCurrentSkillDifficulty");
+    if (["good", "elite"].includes(context.quality)) reasons.push("highContextQuality");
+  }
+  target.baseballSkills[targetSkill] = settlement.skillAfter;
+  state.skillProgress[targetSkill] = settlement.progressAfter;
+  const resolvedSeed = `${target?.capabilityState?.characterSeed || createCapabilityCharacterSeed(target)}|${settlementId}`;
+  if (settlement.levelUps > 0) {
+    recordCapabilitySkillChanges(target, { [targetSkill]: settlement.levelUps }, {
+      sourceType: CAPABILITY_MUTATION_SOURCE_TYPES.DEVELOPMENT,
+      sourceContract: DEVELOPMENT_RESULT_VERSION,
+      eventId: context.sourceId,
+      choiceId: context.playerChoice,
+      provenance: "development-progress-threshold",
+      resolvedSeed
+    });
+  }
+  const record = {
+    settlementId,
+    developmentVersion: DEVELOPMENT_STATE_VERSION,
+    formulaVersion: DEVELOPMENT_RESULT_VERSION,
+    sourceId: context.sourceId,
+    sourceType: context.sourceType,
+    targetSkill,
+    activityType: context.activityType,
+    difficulty: context.difficulty,
+    quality: context.quality,
+    playerChoice: context.playerChoice,
+    developmentBias: context.developmentBias || "ideal-self",
+    skillBefore,
+    skillAfter: settlement.skillAfter,
+    progressBefore,
+    progressGained,
+    progressAfter: settlement.progressAfter,
+    levelUps: settlement.levelUps,
+    skillCapReached: settlement.skillCapReached,
+    learningQuality: getDevelopmentLearningQuality(progressGained),
+    reasons,
+    resolvedSeed,
+    diagnostics: {
+      traitScore: trait.score,
+      traitModifier,
+      skillDifficultyModifier,
+      difficultyFitModifier: difficultyFit.modifier,
+      readiness: difficultyFit.readiness,
+      qualityModifier,
+      biasModifier: bias.modifier,
+      variation: variation.modifier
+    },
+    metadata: cloneDevelopmentValue(context.metadata || {})
+  };
+  state.history.push(record);
+  state.history = state.history.slice(-DEVELOPMENT_HISTORY_LIMIT);
+  state.appliedSettlementIds.push(settlementId);
+  state.appliedSettlementIds = Array.from(new Set(state.appliedSettlementIds)).slice(-DEVELOPMENT_HISTORY_LIMIT);
+  return freezeDevelopmentValue({ ok: true, status: "applied", duplicate: false, settlementId, result: cloneDevelopmentValue(record) });
+}
+
+function validateDevelopmentState(target) {
+  const state = target?.developmentState;
+  const errors = [];
+  if (!state || state.version !== DEVELOPMENT_STATE_VERSION || state.formulaVersion !== DEVELOPMENT_RESULT_VERSION || state.initialized !== true) {
+    errors.push("development-state-contract-invalid");
+  }
+  DEVELOPMENT_SKILL_KEYS.forEach(skill => {
+    const progress = Number(state?.skillProgress?.[skill]);
+    if (!Number.isInteger(progress) || progress < 0 || progress > 99) errors.push(`development-progress-invalid:${skill}`);
+    if (Number(target?.baseballSkills?.[skill]) >= 20 && progress !== 0) errors.push(`capped-progress-invalid:${skill}`);
+  });
+  if (!Array.isArray(state?.history) || !Array.isArray(state?.appliedSettlementIds)) errors.push("development-ledger-invalid");
+  return { ok: errors.length === 0, errors };
+}
+
+function getDevelopmentDebugSnapshot(target) {
+  const state = ensureDevelopmentStateShape(target);
+  return freezeDevelopmentValue({
+    version: state.version,
+    formulaVersion: state.formulaVersion,
+    initialized: state.initialized,
+    skillProgress: cloneDevelopmentValue(state.skillProgress),
+    history: cloneDevelopmentValue(state.history),
+    migration: cloneDevelopmentValue(state.migration),
+    lastResult: state.history.length ? cloneDevelopmentValue(state.history[state.history.length - 1]) : null
+  });
+}
+
 function createDefaultCapabilityState() {
   return {
     initialized: false,
@@ -1282,6 +1637,7 @@ function createInitialPlayer(name = "") {
       finalAbilities: Object.fromEntries(CHARACTER_GENESIS_ABILITY_KEYS.map(key => [key, 0]))
     },
     capabilityState: createDefaultCapabilityState(),
+    developmentState: createDefaultDevelopmentState(),
     age: 10,
     chapter: "十歲暑假",
     day: 1,
