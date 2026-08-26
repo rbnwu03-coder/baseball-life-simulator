@@ -269,6 +269,12 @@ function normalizeSave(saved) {
   fresh.highSchoolMatch.defensiveSituation = saved.highSchoolMatch?.defensiveSituation
     ? JSON.parse(JSON.stringify(saved.highSchoolMatch.defensiveSituation))
     : {};
+  fresh.highSchoolMatch.pendingHalfInningTermination = saved.highSchoolMatch?.pendingHalfInningTermination
+    ? JSON.parse(JSON.stringify(saved.highSchoolMatch.pendingHalfInningTermination)) : null;
+  fresh.highSchoolMatch.catcherDecisionState = saved.highSchoolMatch?.catcherDecisionState
+    ? JSON.parse(JSON.stringify(saved.highSchoolMatch.catcherDecisionState)) : null;
+  fresh.highSchoolMatch.catcherReassessmentTrigger = saved.highSchoolMatch?.catcherReassessmentTrigger
+    ? JSON.parse(JSON.stringify(saved.highSchoolMatch.catcherReassessmentTrigger)) : null;
   fresh.highSchoolMatch.playerEventClassification = ["ordinaryPlay", "playerRoutinePlay", "playerMeaningfulDecision"].includes(saved.highSchoolMatch?.playerEventClassification)
     ? saved.highSchoolMatch.playerEventClassification : "ordinaryPlay";
   fresh.highSchoolMatch.decisionTension = ["none", "low", "meaningful", "high"].includes(saved.highSchoolMatch?.decisionTension)
