@@ -243,6 +243,11 @@ function normalizeSave(saved) {
   fresh.highSchoolMatch.playerEntryWindowInning = Math.max(1, Number(saved.highSchoolMatch?.playerEntryWindowInning) || highSchoolDefaults.highSchoolMatch.playerEntryWindowInning);
   fresh.highSchoolMatch.playerEntryCompleted = saved.highSchoolMatch?.playerEntryCompleted === true;
   fresh.highSchoolMatch.developmentFullMatchStart = saved.highSchoolMatch?.developmentFullMatchStart === true;
+  fresh.highSchoolMatch.gameExposureState = saved.highSchoolMatch?.gameExposureState
+    ? (typeof PlayingTimeGameExposure !== "undefined"
+      ? PlayingTimeGameExposure.normalizeGameExposureState(saved.highSchoolMatch.gameExposureState, fresh.highSchoolMatch.id)
+      : JSON.parse(JSON.stringify(saved.highSchoolMatch.gameExposureState)))
+    : null;
   fresh.highSchoolMatch.developmentPositionOverride = typeof saved.highSchoolMatch?.developmentPositionOverride === "string"
     ? saved.highSchoolMatch.developmentPositionOverride : "";
   fresh.highSchoolMatch.coachTacticalDirection = Object.assign(

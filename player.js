@@ -1802,7 +1802,7 @@ function createInitialPlayer(name = "") {
       regulationInnings: 7, lineScore: { home: [], away: [] },
       simulationPhase: "idle", simulationCursor: 0, simulationSeed: 0, simulationLog: [], presentedEventCursor: 0, scoreboardRevealHalfIndex: 0, rosters: { home: null, away: null },
       playerLineupStatus: "", playerLineupSlot: -1, playerFieldingAssignment: "", playerEntryWindowInning: 1, playerEntryCompleted: false,
-      performanceEvidence: {}, developmentFullMatchStart: false,
+      performanceEvidence: {}, developmentFullMatchStart: false, gameExposureState: null,
       playerRunnerLocation: -1,
       coachTacticalDirection: { domain: "", intent: "", riskPreference: "", priority: "", sourceCoachId: "", presentationStyle: "" },
       coachTacticalContextSignature: "",

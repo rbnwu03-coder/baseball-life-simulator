@@ -4461,6 +4461,18 @@ function insertPlayerIntoHighSchoolMatchLineup(match) {
 }
 
 function shouldEnterHighSchoolMatchPlayer(match) {
+  const exposureState = match?.gameExposureState;
+  if (exposureState) {
+    if (exposureState.pitcherExposureDeferred || exposureState.plannedUsage?.appearanceType === "noAppearance") return false;
+    const opportunity = exposureState.opportunitySnapshot || {};
+    const margin = Math.abs((Number(match.scores?.home) || 0) - (Number(match.scores?.away) || 0));
+    const coachStyle = opportunity.coachUsageStyle || "balanced";
+    const actualRole = opportunity.actualRole || match.role || "bench";
+    const contextAllowsEntry = coachStyle === "developmental"
+      || actualRole === "starter"
+      || (coachStyle === "conservative" ? margin >= 3 : coachStyle === "performanceFirst" ? actualRole === "rotation" || margin <= 2 : actualRole === "rotation" || margin >= 2);
+    if (!contextAllowsEntry || match.inning < 5) return false;
+  }
   return Boolean(match && !match.playerEntryCompleted && match.playerLineupStatus === "bench"
     && match.offenseTeam === "home" && match.half === "下"
     && match.inning >= Math.max(1, Number(match.playerEntryWindowInning) || 1)
@@ -4475,15 +4487,19 @@ function enterHighSchoolMatchPlayer(match) {
   if (!insertion) return false;
   match.playerLineupStatus = "substitute";
   match.playerEntryCompleted = true;
-  match.playerFieldingAssignment = match.developmentPositionOverride || match.position;
+  match.playerFieldingAssignment = match.gameExposureState?.opportunitySnapshot?.assignedPosition || match.developmentPositionOverride || match.position;
   match.currentFieldingPosition = match.playerFieldingAssignment;
   match.currentBatter = "player";
-  match.matchEntryHistory = `${match.inning}局${match.half}${match.outs}出局時，教練叫你代打；進場比分與壘況沿用當下比賽。`;
+  const plannedAppearance = match.gameExposureState?.plannedUsage?.appearanceType || "lateGameAppearance";
+  const entryLabel = !match.gameExposureState ? "叫你代打"
+    : plannedAppearance === "defensiveSubstitution" ? "準備接替守備，並先從這個打席進入比賽"
+    : plannedAppearance === "pinchHit" ? "叫你代打" : "叫你進入比賽";
+  match.matchEntryHistory = `${match.inning}局${match.half}${match.outs}出局時，教練${entryLabel}；進場比分與壘況沿用當下比賽。`;
   match.currentAssignment = `${formatHighSchoolMatchRunners(match.runners)}、${match.outs} 出局；你從板凳進入第 ${insertion.slot + 1} 棒。`;
   setHighSchoolCoachTacticalDirection(match);
   const event = recordHighSchoolMatchSimulationEvent(match, {
     type: "playerEntry", inning: entryTruth.inning, half: entryTruth.half,
-    lineupSlot: insertion.slot, replacedPlayerId: insertion.replaced?.id || "",
+    lineupSlot: insertion.slot, replacedPlayerId: insertion.replaced?.id || "", plannedAppearanceType: plannedAppearance,
     assignment: match.currentAssignment, outs: entryTruth.outs, scores: entryTruth.scores, runners: entryTruth.runners
   });
   recordHighSchoolMatchOpportunityCheckpoint("player-entry", match, {
@@ -6378,6 +6394,65 @@ function getHighSchoolYearOneMatchMomentChoices(match = prepareHighSchoolYearOne
   return buildOffensiveDecisionChoices(match).filter(choice => isOffensiveDecisionChoiceLegal(choice, match));
 }
 
+function getHighSchoolPlayingTimeSchoolContext(subject = player) {
+  const invitation = typeof getSelectedSchoolInvitation === "function" ? getSelectedSchoolInvitation(subject) : null;
+  if (invitation) {
+    return Object.freeze({
+      schoolId: invitation.schoolId || "",
+      playingTimeEnvironment: invitation.playingTimeOpportunity || "medium",
+      competitionDepth: invitation.competitionDepth || "medium",
+      positionNeed: invitation.schoolInterest?.positionNeed || "medium",
+      projectedRole: invitation.projectedRole || "",
+      coachStyle: invitation.coachProfile?.coachStyle || "balanced"
+    });
+  }
+  const route = String(subject?.highSchoolRoute || "");
+  if (route.startsWith("強豪")) {
+    return Object.freeze({ schoolId: "legacy-powerhouse", playingTimeEnvironment: "low", competitionDepth: "veryHigh", positionNeed: "medium", projectedRole: "", coachStyle: "competition" });
+  }
+  if (route.startsWith("普通")) {
+    return Object.freeze({ schoolId: "legacy-standard", playingTimeEnvironment: "mediumHigh", competitionDepth: "medium", positionNeed: "medium", projectedRole: "", coachStyle: "development" });
+  }
+  return Object.freeze({ schoolId: "school-context-unavailable", playingTimeEnvironment: "medium", competitionDepth: "medium", positionNeed: "medium", projectedRole: "", coachStyle: "analysis" });
+}
+
+function createHighSchoolPlayingTimeOpportunity(options = {}) {
+  if (typeof PlayingTimeGameExposure === "undefined") return null;
+  const requestedPosition = options.requestedPosition || player.primaryPosition || "內野手";
+  const school = getHighSchoolPlayingTimeSchoolContext(player);
+  const readinessSnapshot = PlayingTimeGameExposure.createOpportunityReadinessSnapshot({
+    subject: player,
+    playerId: [player.name || "player", player.characterGenesis?.shape || "", school.schoolId].join("|"),
+    position: requestedPosition,
+    capabilityProvider: getDefensiveSimulationCapability,
+    positionAssessmentProvider: getPositionAssessment
+  });
+  return PlayingTimeGameExposure.resolveStartingOpportunity({
+    matchId: options.matchId,
+    readinessSnapshot,
+    opportunitySeed: `${player.capabilityState?.settlementId || player.capabilityState?.version || "capability"}|${options.matchId || "match"}`,
+    actualRole: options.actualRole,
+    projectedRole: school.projectedRole,
+    playingTimeEnvironment: school.playingTimeEnvironment,
+    competitionDepth: school.competitionDepth,
+    positionNeed: school.positionNeed,
+    coachUsageStyle: school.coachStyle,
+    directStartForced: options.directStartForced === true,
+    gameContext: { gameType: "highSchoolExhibition", inning: 0, expectedGameImportance: "regular", importance: "regular", leverage: "normal", scoreMargin: 0 }
+  });
+}
+
+function getHighSchoolPlayingTimeAssignmentText(decision) {
+  if (decision?.pitcherExposureDeferred) return "本場投手使用仍由既有比賽流程處理，不套用野手出賽安排";
+  if (decision?.plannedUsage?.appearanceType === "start") {
+    return decision.exposureSource === "direct-start-forced"
+      ? `本次直接開局把你排進${decision.assignedPosition || "守備"}先發，從開賽起進入守備與打序`
+      : `教練把你排進本場${decision.assignedPosition || "守備"}先發，實際任務仍由場上局面決定`;
+  }
+  if (decision?.plannedUsage?.appearanceType === "noAppearance") return "本場先從板凳觀察；是否獲得實際上場機會仍由比賽局勢決定";
+  return `本場先從板凳待命，教練預計在${decision.plannedUsage.entryInning || 5}局後依比分與守位需求決定是否換你上場`;
+}
+
 function prepareHighSchoolYearOneMatch() {
   assertHighSchoolMatchCapabilityAdmission(player);
   if (player.highSchoolMatch?.id === "hs-y1-autumn-exhibition") {
@@ -6398,13 +6473,29 @@ function prepareHighSchoolYearOneMatch() {
     rotation: { lineupStatus: "bench", entryWindowInning: 4, history: `本場先從板凳待命，預計在中段代打並接替${player.primaryPosition || "守備"}` },
     bench: { lineupStatus: "bench", entryWindowInning: 5, history: `本場先從板凳觀察，等待中後段代打與短局守備機會` }
   };
-  const roleAssignment = roleAssignments[code];
   const position = player.primaryPosition || "內野手";
   const developmentPositionOverride = infieldPositions.includes(pendingHighSchoolMatchPositionOverride)
     ? pendingHighSchoolMatchPositionOverride : "";
-  const rosters = createHighSchoolMatchSimulationRoster(code, position);
-  const playerLineupSlot = rosters.home.lineup.findIndex(item => item.id === "player");
   const simulationSeed = createHighSchoolMatchSimulationSeed();
+  const directStartForced = Array.isArray(player.flags) && player.flags.includes("direct_start_history");
+  const opportunityDecision = createHighSchoolPlayingTimeOpportunity({
+    matchId: "hs-y1-autumn-exhibition",
+    actualRole: code,
+    requestedPosition: developmentPositionOverride || position,
+    directStartForced
+  });
+  const plannedAppearance = opportunityDecision?.plannedUsage?.appearanceType || (code === "starter" ? "start" : "lateGameAppearance");
+  const starts = plannedAppearance === "start";
+  const roleAssignment = opportunityDecision
+    ? {
+      lineupStatus: starts ? "starter" : "bench",
+      entryWindowInning: starts ? 1 : Math.max(5, Number(opportunityDecision.plannedUsage.entryInning) || 5),
+      history: getHighSchoolPlayingTimeAssignmentText(opportunityDecision)
+    }
+    : roleAssignments[code];
+  const assignedPosition = opportunityDecision?.assignedPosition || developmentPositionOverride || position;
+  const rosters = createHighSchoolMatchSimulationRoster(starts ? "starter" : code === "starter" ? "bench" : code, assignedPosition);
+  const playerLineupSlot = rosters.home.lineup.findIndex(item => item.id === "player");
   player.highSchoolMatch = {
     id: "hs-y1-autumn-exhibition",
     opponent: "高橋所屬的地區強校",
@@ -6417,7 +6508,7 @@ function prepareHighSchoolYearOneMatch() {
     position,
     assignment: roleAssignment.history,
     matchEntryHistory: `${roleAssignment.history}；${formatHandedness(player.bats, player.throws)}`,
-    currentAssignment: code === "starter" ? "比賽從一局上開始；先完成守備，再等待打序輪到你。" : "比賽從一局上開始；你在板凳觀察，但場上每個打席都會完整進行。",
+    currentAssignment: starts ? "比賽從一局上開始；先完成守備，再等待打序輪到你。" : "比賽從一局上開始；你在板凳觀察，但場上每個打席都會完整進行。",
     offenseTeam: "away",
     defenseTeam: "home",
     currentBatter: rosters.away.lineup[0]?.id || "",
@@ -6434,11 +6525,13 @@ function prepareHighSchoolYearOneMatch() {
     rosters,
     playerLineupStatus: roleAssignment.lineupStatus,
     playerLineupSlot,
-    playerFieldingAssignment: code === "starter" ? (developmentPositionOverride || position) : "",
+    playerFieldingAssignment: starts ? assignedPosition : "",
     playerEntryWindowInning: roleAssignment.entryWindowInning,
-    playerEntryCompleted: code === "starter",
+    playerEntryCompleted: starts,
     performanceEvidence: {},
     matchExperience: null,
+    gameExposureState: opportunityDecision && typeof PlayingTimeGameExposure !== "undefined"
+      ? PlayingTimeGameExposure.createGameExposureState(opportunityDecision) : null,
     developmentFullMatchStart: pendingHighSchoolFullMatchTest,
     playerRunnerLocation: -1,
     momentIndex: 0,
@@ -6448,7 +6541,7 @@ function prepareHighSchoolYearOneMatch() {
     coachTacticalContextSignature: "",
     opponentTacticalTruth: { code: "", targetRunnerId: "" },
     ballContext: { type: "", family: "", pace: "", label: "", detail: "", timeWindow: "" },
-    positionDecisionFamily: "", currentFieldingPosition: code === "starter" ? developmentPositionOverride : "", developmentPositionOverride, defensiveSituation: {},
+    positionDecisionFamily: "", currentFieldingPosition: starts && (developmentPositionOverride || opportunityDecision?.positionFallbackApplied) ? assignedPosition : "", developmentPositionOverride, defensiveSituation: {},
     lastDefensiveResolution: { resultCode: "", tier: "", decisionQuality: "", executionQuality: "", primaryCause: "", secondaryCause: "", causeExplanation: "" },
     pendingHalfInningTermination: null,
     catcherDecisionState: null,
@@ -6459,7 +6552,7 @@ function prepareHighSchoolYearOneMatch() {
     previousMomentOutcome: "",
     passage: "",
     opponentAdjustment: "",
-    coachInstruction: code === "starter" ? "先跟著比賽完成每個守備與打席。" : "先讀完整比賽流；被叫到時直接接進當下局面。",
+    coachInstruction: starts ? "先跟著比賽完成每個守備與打席。" : "先讀完整比賽流；被叫到時直接接進當下局面。",
     decision: "",
     outcomeTier: "",
     outcome: "",
@@ -7488,6 +7581,39 @@ function resolveHighSchoolYearOneFinalMoment(match, decisionOrChoice, tier) {
   return `${completedMoment.outcome}。${completedMoment.consequence}`;
 }
 
+function deriveHighSchoolMatchActualExposure(match) {
+  const log = Array.isArray(match?.simulationLog) ? match.simulationLog : [];
+  const entryEvent = log.find(event => event.type === "playerEntry") || null;
+  const started = match?.playerLineupStatus === "starter";
+  const participated = started || (match?.playerLineupStatus === "substitute" && (match.playerEntryCompleted || entryEvent));
+  if (!participated) {
+    return Object.freeze({ matchId: match?.id || "", participated: false, started: false, appearanceType: "noAppearance", entryInning: null, exitInning: null, defensiveInnings: 0, plateAppearances: 0, role: match?.role || "bench" });
+  }
+  const entrySequence = started ? -1 : Number(entryEvent?.sequence) || 0;
+  const defensiveInnings = new Set(log.filter(event => event.type === "halfInningEnd" && event.half === "上"
+    && Number(event.sequence) >= entrySequence).map(event => Number(event.inning) || 0).filter(Boolean)).size;
+  const plateAppearances = log.filter(event => event.type === "plateAppearance" && event.batterId === "player"
+    && Number(event.sequence) >= entrySequence).length;
+  return Object.freeze({
+    matchId: match?.id || "",
+    participated: true,
+    started,
+    appearanceType: started ? "start" : match?.gameExposureState?.plannedUsage?.appearanceType || "lateGameAppearance",
+    entryInning: started ? 1 : Number(entryEvent?.inning) || Number(match?.inning) || 1,
+    exitInning: Number(match?.inning) || null,
+    defensiveInnings,
+    plateAppearances,
+    role: match?.role || match?.playerLineupStatus || "bench"
+  });
+}
+
+function finalizeHighSchoolGameExposure(match) {
+  if (!match?.gameExposureState || typeof PlayingTimeGameExposure === "undefined") return null;
+  const finalization = PlayingTimeGameExposure.finalizeGameExposure(match.gameExposureState, deriveHighSchoolMatchActualExposure(match));
+  if (finalization.ok) match.gameExposureState = finalization.state;
+  return finalization;
+}
+
 function settleHighSchoolYearOneMatch(match, finalDecision) {
   if (match.settled || match.completed) return false;
   const contribution = match.playerContribution;
@@ -7501,10 +7627,13 @@ function settleHighSchoolYearOneMatch(match, finalDecision) {
   const resultLabel = match.scores.home > match.scores.away ? "球隊勝利" : match.scores.home < match.scores.away ? "球隊落敗" : "球隊和局";
   match.teamResult = `${resultLabel}，終場 ${match.scores.home}：${match.scores.away}`;
   const momentCount = match.completedMoments.length;
+  const participationTruth = deriveHighSchoolMatchActualExposure(match);
   const overallTier = contribution.strong > contribution.failure ? "strong" : contribution.failure > contribution.strong ? "failure" : "mixed";
   const countLabel = momentCount === 1 ? "一個" : momentCount === 2 ? "兩個" : "三個";
   const performanceLines = match.completedMoments.map((moment, index) => `第${["一", "二", "三"][index] || index + 1}次：${moment.outcome}。`).join(" ");
-  match.performanceSummary = `本場${countLabel}關鍵時刻：${performanceLines || "你依照角色完成了這場比賽。"}`;
+  match.performanceSummary = participationTruth.participated
+    ? `本場${countLabel}關鍵時刻：${performanceLines || "你依照角色完成了這場比賽。"}`
+    : "本場比賽完整結束，但教練沒有把你換上場；沒有虛構守備局數、打席或比賽成長。";
   match.outcome = `${match.teamResult}。${match.performanceSummary}`;
   match.coachReaction = overallTier === "strong"
     ? "「今天幾次輪到你，你都把眼前的球處理清楚。下一場繼續照這個節奏準備。」"
@@ -7529,16 +7658,28 @@ function settleHighSchoolYearOneMatch(match, finalDecision) {
   recordHighSchoolMatchSimulationEvent(match, {
     type: "gameEnd", inning: match.inning, half: "終", scores: match.scores
   });
+  finalizeHighSchoolGameExposure(match);
   if (typeof MatchExperienceDevelopment !== "undefined") {
-    MatchExperienceDevelopment.settleMatchExperienceDevelopment(player, match);
+    const finalizedExposure = match.gameExposureState?.finalized
+      ? {
+        defensiveInnings: match.gameExposureState.defensiveInnings,
+        plateAppearances: match.gameExposureState.plateAppearances,
+        role: match.role || match.playerLineupStatus || "bench"
+      }
+      : undefined;
+    MatchExperienceDevelopment.settleMatchExperienceDevelopment(player, match, finalizedExposure ? { exposure: finalizedExposure } : {});
   }
 
-  player.seasonPerformance += Math.max(0, contribution.strong * 2 + contribution.mixed);
-  player.recentPerformance += overallTier === "strong" ? 2 : overallTier === "mixed" ? 1 : -1;
-  player.exposure += overallTier === "strong" ? 2 : 1;
-  player.scoutEvaluation += overallTier === "strong" ? 2 : overallTier === "mixed" ? 1 : 0;
-  const proofFlag = finalDecision === "attack" ? "showcase_tools" : finalDecision === "advance" ? "showcase_baseball_iq" : "showcase_team_task";
-  addFlags(["hs_y1_match_completed", `hs_y1_match_${overallTier}`, proofFlag]);
+  if (participationTruth.participated) {
+    player.seasonPerformance += Math.max(0, contribution.strong * 2 + contribution.mixed);
+    player.recentPerformance += overallTier === "strong" ? 2 : overallTier === "mixed" ? 1 : -1;
+    player.exposure += overallTier === "strong" ? 2 : 1;
+    player.scoutEvaluation += overallTier === "strong" ? 2 : overallTier === "mixed" ? 1 : 0;
+    const proofFlag = finalDecision === "attack" ? "showcase_tools" : finalDecision === "advance" ? "showcase_baseball_iq" : "showcase_team_task";
+    addFlags(["hs_y1_match_completed", `hs_y1_match_${overallTier}`, proofFlag]);
+  } else {
+    addFlags(["hs_y1_match_completed", "hs_y1_match_no_appearance"]);
+  }
   return match.performanceSummary;
 }
 
