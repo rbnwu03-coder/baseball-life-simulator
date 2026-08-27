@@ -209,8 +209,19 @@ verify("P3. 22424201 Browser-style production 與 direct audit replay 完全 par
 verify("P4. Header 含 seed／route／role／position／ability／opponent／lineup／build signature", ["seed", "directStartMode", "role", "primaryPosition", "secondaryPosition", "playerAbilities", "opponentId", "lineupSignature", "entryRule", "buildVersionOrRuntimeSignature"].every(key => Object.hasOwn(humanSeed.trace.header, key)));
 verify("P5. Defensive opportunity schema 含責任、routes、window、created 與 rejection", ["outsBefore", "basesBefore", "scoreBefore", "batterId", "playerEnteredGame", "playerCurrentPosition", "ballInPlay", "ballContext", "responsibilityCheck", "primaryFielder", "playerRole", "playerRoles", "legalRoutes", "viableRoutes", "routeWindows", "decisionWindowAvailable", "defensiveDecisionAlreadyUsed", "meaningfulDecisionCandidate", "defensiveDecisionCreated", "defensiveDecisionPresented", "defensiveDecisionResolved", "rejectionReason", "eventId", "simulationLogIndex"].every(key => Object.hasOwn(humanSeed.trace.opportunities.find(item => item.domain === "defense"), key)));
 verify("P6. Offensive opportunity schema 區分 scripted 與 emergent", humanSeed.trace.opportunities.some(item => item.scriptedDecisionCandidate) && humanSeed.trace.opportunities.some(item => item.emergentDecisionCandidate));
-verify("P7. 22424201 defense lifecycle created／presented／resolved 三層一致", humanSeed.trace.summary.defensiveMeaningfulDecisions === 1 && humanSeed.trace.summary.defensiveDecisionPresented === 1 && humanSeed.trace.summary.defensiveDecisionResolved === 1);
-verify("P8. One-shot checkpoint 顯示 first offense 後開窗、defense 後 consumed", humanSeed.trace.checkpoints.some(item => item.oneShot.defensiveDecisionWindowAvailable) && humanSeed.trace.checkpoints.some(item => item.oneShot.defensiveDecisionAlreadyUsed));
+console.log("DECISION_DENSITY_LIFECYCLE_JSON=" + JSON.stringify({
+  created: humanSeed.trace.summary.defensiveMeaningfulDecisions,
+  presented: humanSeed.trace.summary.defensiveDecisionPresented,
+  resolved: humanSeed.trace.summary.defensiveDecisionResolved,
+  decisions: humanSeed.decisions,
+  orphan: humanSeed.orphan
+}));
+verify("P7. 22424201 defense lifecycle created／presented／resolved 三層一致", humanSeed.trace.summary.defensiveMeaningfulDecisions >= 1
+  && humanSeed.trace.summary.defensiveMeaningfulDecisions === humanSeed.trace.summary.defensiveDecisionPresented
+  && humanSeed.trace.summary.defensiveMeaningfulDecisions === humanSeed.trace.summary.defensiveDecisionResolved);
+verify("P8. Density checkpoint 顯示防守決策開窗且保留已完成診斷", humanSeed.trace.checkpoints.some(item => item.oneShot.defensiveDecisionWindowAvailable)
+  && humanSeed.trace.checkpoints.some(item => item.oneShot.defensiveDecisionAlreadyUsed)
+  && humanSeed.trace.checkpoints.some(item => item.density?.defensiveMeaningfulDecisionCount >= 1));
 
 const paritySeeds = Array.from({ length: 20 }, (_, index) => 22424201 + index);
 const parityResults = paritySeeds.map(seed => {

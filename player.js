@@ -1810,6 +1810,13 @@ function createInitialPlayer(name = "") {
       ballContext: { type: "", family: "", pace: "", label: "", detail: "", timeWindow: "" },
       positionDecisionFamily: "", currentFieldingPosition: "", developmentPositionOverride: "", defensiveSituation: {},
       playerEventClassification: "ordinaryPlay", decisionTension: "none", decisionGate: null,
+      matchDecisionDensityState: {
+        version: "match-decision-density-v1", defensiveMeaningfulDecisionCount: 0, lastDecisionPlayIndex: -1,
+        lastNoveltyKey: "", recentSituationFamilies: [], recentRouteFamilies: [], repeatedOpportunityCount: 0,
+        suppressedOpportunityCount: 0, currentConsecutiveMeaningfulDecisions: 0, maxConsecutiveMeaningfulDecisions: 0,
+        lastDecisionInning: 0, lastDecisionHalf: "", lastSelectedRoute: "", lastFinalRoute: ""
+      },
+      pendingDefensiveResumeState: null,
       lastDefensiveResolution: {},
       pendingHalfInningTermination: null,
       catcherDecisionState: null,

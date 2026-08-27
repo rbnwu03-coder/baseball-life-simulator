@@ -55,6 +55,7 @@ function makeContext() {
       Object.keys(player.baseballSkills).forEach(key=>player.baseballSkills[key]=level);
       Object.assign(player,{ballSense:level,observe:level,fitness:level,instinct:level,discipline:level,responsibility:level});
       pendingHighSchoolMatchSimulationSeed=12201;
+      pendingHighSchoolMatchPositionOverride=position==="內野手"?"二壘手":"";
       const match=prepareHighSchoolYearOneMatch();
       match.scoreboardRevealHalfIndex=getHighSchoolHalfInningIndex(match.inning,match.half);
       return match;
@@ -72,11 +73,16 @@ function makeContext() {
       return result;
     }
     function __complete122(role="starter", sample=0.99) {
-      __setup122(role);
-      __resolveAdvance122("zone",sample);
-      __resolveAdvance122("secure",sample);
-      __resolveAdvance122("zone",sample);
-      return player.highSchoolMatch;
+      const match=__setup122(role); let safety=0;
+      while(!match.completed&&safety++<1200){
+        if(isHighSchoolMatchDecisionVisible(match)){
+          const choices=getHighSchoolYearOneMatchMomentChoices(match);
+          const choice=choices.find(item=>item.matchDecision===(match.currentDomain==="defense"?"secure":"zone"))||choices[0];
+          if(!choice||!resolveHighSchoolYearOneMatch(choice.matchDecision,choice.matchMomentId,()=>sample))break;
+        }else if(isHighSchoolMatchPlaybackPhase(match)) advanceHighSchoolMatchSimulation(match);
+        else break;
+      }
+      return match;
     }
   `, context);
   return context;
@@ -218,7 +224,7 @@ verify("34. Side change 後 save/load 保留 inning／half 與逐局比分", eva
 })()`));
 
 verify("35. Moment 2 後 reload 保留 defense direction，下一段依 Regulation 抵達決策或終場", evaluate(`(() => {
-  const match=__setup122();__resolveAdvance122("zone",0.99);const defenseIntent=match.coachTacticalDirection.intent;__resolve122("secure",0.99);match.presentedEventCursor=match.simulationLog.length;player=normalizeSave(JSON.parse(JSON.stringify(player)));const restored=player.highSchoolMatch;const preserved=restored.coachTacticalDirection.intent===defenseIntent;advanceHighSchoolMatchSimulation(restored);const feed=getHighSchoolMatchLiveFeed(restored);const nextType=feed.at(-1)?.type;return defenseIntent&&preserved&&["moment_3_ready","complete"].includes(restored.simulationPhase)&&feed.length>0&&["meaningfulMomentReached","gameEnd"].includes(nextType);
+  const match=__setup122();__resolveAdvance122("zone",0.99);const defenseIntent=match.coachTacticalDirection.intent;__resolve122("secure",0.99);match.presentedEventCursor=match.simulationLog.length;player=normalizeSave(JSON.parse(JSON.stringify(player)));const restored=player.highSchoolMatch;const preserved=restored.coachTacticalDirection.intent===defenseIntent;advanceHighSchoolMatchSimulation(restored);const feed=getHighSchoolMatchLiveFeed(restored);const nextType=feed.at(-1)?.type;return defenseIntent&&preserved&&["moment_2_ready","moment_3_ready","complete"].includes(restored.simulationPhase)&&feed.length>0&&["meaningfulMomentReached","gameEnd"].includes(nextType);
 })()`));
 
 verify("36. Flow Mode 同時包含比分、局勢、feed、目前打者與目前賽況，隱藏教練決策區", evaluate(`(() => {

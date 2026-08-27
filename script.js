@@ -2567,6 +2567,147 @@ function cloneHighSchoolMatchOpportunityDebugValue(value) {
   return value === undefined ? undefined : JSON.parse(JSON.stringify(value));
 }
 
+const MATCH_DECISION_DENSITY_VERSION = "match-decision-density-v1";
+const MATCH_DECISION_ABSOLUTE_SAFETY_CAP = 6;
+const MATCH_DECISION_REPEAT_SPACING = 8;
+const MATCH_DECISION_MAX_CONSECUTIVE = 2;
+
+function createHighSchoolMatchDecisionDensityState() {
+  return {
+    version: MATCH_DECISION_DENSITY_VERSION,
+    defensiveMeaningfulDecisionCount: 0,
+    lastDecisionPlayIndex: -1,
+    lastNoveltyKey: "",
+    recentSituationFamilies: [],
+    recentRouteFamilies: [],
+    repeatedOpportunityCount: 0,
+    suppressedOpportunityCount: 0,
+    currentConsecutiveMeaningfulDecisions: 0,
+    maxConsecutiveMeaningfulDecisions: 0,
+    lastDecisionInning: 0,
+    lastDecisionHalf: "",
+    lastSelectedRoute: "",
+    lastFinalRoute: ""
+  };
+}
+
+function normalizeHighSchoolMatchDecisionDensityState(saved = {}) {
+  const state = Object.assign(createHighSchoolMatchDecisionDensityState(), saved || {});
+  state.version = MATCH_DECISION_DENSITY_VERSION;
+  state.defensiveMeaningfulDecisionCount = Math.max(0, Math.floor(Number(saved?.defensiveMeaningfulDecisionCount) || 0));
+  state.lastDecisionPlayIndex = Number.isFinite(Number(saved?.lastDecisionPlayIndex)) ? Math.floor(Number(saved.lastDecisionPlayIndex)) : -1;
+  state.lastNoveltyKey = typeof saved?.lastNoveltyKey === "string" ? saved.lastNoveltyKey : "";
+  state.recentSituationFamilies = Array.isArray(saved?.recentSituationFamilies) ? saved.recentSituationFamilies.filter(value => typeof value === "string").slice(-6) : [];
+  state.recentRouteFamilies = Array.isArray(saved?.recentRouteFamilies) ? saved.recentRouteFamilies.filter(value => typeof value === "string").slice(-6) : [];
+  state.repeatedOpportunityCount = Math.max(0, Math.floor(Number(saved?.repeatedOpportunityCount) || 0));
+  state.suppressedOpportunityCount = Math.max(0, Math.floor(Number(saved?.suppressedOpportunityCount) || 0));
+  state.currentConsecutiveMeaningfulDecisions = Math.max(0, Math.floor(Number(saved?.currentConsecutiveMeaningfulDecisions) || 0));
+  state.maxConsecutiveMeaningfulDecisions = Math.max(state.currentConsecutiveMeaningfulDecisions, Math.floor(Number(saved?.maxConsecutiveMeaningfulDecisions) || 0));
+  state.lastDecisionInning = Math.max(0, Math.floor(Number(saved?.lastDecisionInning) || 0));
+  state.lastDecisionHalf = typeof saved?.lastDecisionHalf === "string" ? saved.lastDecisionHalf : "";
+  state.lastSelectedRoute = typeof saved?.lastSelectedRoute === "string" ? saved.lastSelectedRoute : "";
+  state.lastFinalRoute = typeof saved?.lastFinalRoute === "string" ? saved.lastFinalRoute : "";
+  return state;
+}
+
+function ensureHighSchoolMatchDecisionDensityState(match = player.highSchoolMatch) {
+  if (!match) return null;
+  match.matchDecisionDensityState = normalizeHighSchoolMatchDecisionDensityState(match.matchDecisionDensityState);
+  return match.matchDecisionDensityState;
+}
+
+function getHighSchoolDefensiveRunnerTopology(runners = []) {
+  return runners.slice(0, 3).map(Boolean).map(Number).join("");
+}
+
+function getHighSchoolDefensiveRouteFamily(choices = []) {
+  return [...new Set(choices.filter(choice => choice && choice.executionOnly !== true && choice.legal !== false && choice.viable !== false)
+    .map(choice => choice.routeId || choice.infieldRoute || choice.route || "").filter(Boolean))].sort().join("+");
+}
+
+function createHighSchoolDefensiveNoveltyDescriptor(situation, legalChoices = []) {
+  const routeFamily = getHighSchoolDefensiveRouteFamily(legalChoices);
+  const topology = getHighSchoolDefensiveRunnerTopology(situation?.runners || []);
+  const leverage = situation?.scoreContext?.runPriority || "balanced";
+  const situationFamily = [situation?.scenarioFamily || "infield", topology, Number(situation?.outs) || 0,
+    situation?.responsibility?.playerRole || "", situation?.ballContext?.type || "", situation?.ballDirection || "", leverage].join("|");
+  return Object.freeze({
+    situationFamily,
+    routeFamily,
+    noveltyKey: `${situationFamily}|${routeFamily}`,
+    topology,
+    leverage
+  });
+}
+
+function evaluateHighSchoolMatchDefensiveDecisionDensity(match, situation, legalChoices = [], classification = null) {
+  const state = ensureHighSchoolMatchDecisionDensityState(match);
+  const descriptor = createHighSchoolDefensiveNoveltyDescriptor(situation, legalChoices);
+  const playIndex = Array.isArray(match?.simulationLog) ? match.simulationLog.length : 0;
+  const spacing = state?.lastDecisionPlayIndex >= 0 ? playIndex - state.lastDecisionPlayIndex : Number.POSITIVE_INFINITY;
+  const meaningfulCandidate = classification?.eventClassification === "playerMeaningfulDecision";
+  const repeated = meaningfulCandidate && descriptor.noveltyKey === state?.lastNoveltyKey;
+  const situationNovel = meaningfulCandidate && !state?.recentSituationFamilies.includes(descriptor.situationFamily);
+  const routeNovel = meaningfulCandidate && !state?.recentRouteFamilies.includes(descriptor.routeFamily);
+  let allowed = meaningfulCandidate;
+  let suppressionReason = "";
+  if (!meaningfulCandidate) {
+    allowed = false;
+    suppressionReason = "not-meaningful";
+  } else if ((state?.defensiveMeaningfulDecisionCount || 0) >= 4 && !routeNovel) {
+    allowed = false;
+    suppressionReason = "route-family-density";
+  } else if (repeated && spacing < MATCH_DECISION_REPEAT_SPACING) {
+    allowed = false;
+    suppressionReason = "repeated-situation-spacing";
+  } else if ((state?.currentConsecutiveMeaningfulDecisions || 0) >= MATCH_DECISION_MAX_CONSECUTIVE && spacing <= 1) {
+    allowed = false;
+    suppressionReason = "decision-density-spacing";
+  } else if ((state?.defensiveMeaningfulDecisionCount || 0) >= MATCH_DECISION_ABSOLUTE_SAFETY_CAP) {
+    allowed = false;
+    suppressionReason = "absolute-safety-cap";
+  }
+  return Object.freeze({
+    version: MATCH_DECISION_DENSITY_VERSION,
+    allowed,
+    meaningfulCandidate,
+    suppressionReason,
+    playIndex,
+    spacing: Number.isFinite(spacing) ? spacing : null,
+    repeated,
+    situationNovel,
+    routeNovel,
+    highNovelty: situationNovel || routeNovel,
+    absoluteSafetyCap: MATCH_DECISION_ABSOLUTE_SAFETY_CAP,
+    maxConsecutiveMeaningfulDecisions: MATCH_DECISION_MAX_CONSECUTIVE,
+    ...descriptor
+  });
+}
+
+function applyHighSchoolMatchDefensiveDecisionDensity(match, density, created) {
+  const state = ensureHighSchoolMatchDecisionDensityState(match);
+  if (!state || !density?.meaningfulCandidate) return state;
+  if (!created) {
+    state.suppressedOpportunityCount += 1;
+    if (density.repeated) state.repeatedOpportunityCount += 1;
+    state.currentConsecutiveMeaningfulDecisions = 0;
+    return state;
+  }
+  state.defensiveMeaningfulDecisionCount += 1;
+  state.lastDecisionPlayIndex = density.playIndex;
+  state.lastNoveltyKey = density.noveltyKey;
+  state.lastDecisionInning = Math.max(0, Math.floor(Number(match?.inning) || 0));
+  state.lastDecisionHalf = typeof match?.half === "string" ? match.half : "";
+  state.recentSituationFamilies = [...state.recentSituationFamilies, density.situationFamily].slice(-6);
+  state.recentRouteFamilies = [...state.recentRouteFamilies, density.routeFamily].slice(-6);
+  state.currentConsecutiveMeaningfulDecisions = density.spacing !== null && density.spacing <= 1
+    ? state.currentConsecutiveMeaningfulDecisions + 1 : 1;
+  state.maxConsecutiveMeaningfulDecisions = Math.max(state.maxConsecutiveMeaningfulDecisions, state.currentConsecutiveMeaningfulDecisions);
+  state.lastDecisionInning = Math.max(1, Number(match?.inning) || 1);
+  state.lastDecisionHalf = match?.half || "";
+  return state;
+}
+
 function getHighSchoolMatchOpportunityOneShotState(match = player.highSchoolMatch) {
   const completed = Array.isArray(match?.completedMoments) ? match.completedMoments : [];
   const firstMomentId = highSchoolYearOneMomentIds[0];
@@ -2631,13 +2772,14 @@ function createHighSchoolMatchOpportunityHeader(match) {
 
 function ensureHighSchoolMatchOpportunityTrace(match = player.highSchoolMatch) {
   if (!match || match.id !== "hs-y1-autumn-exhibition") return null;
+  ensureHighSchoolMatchDecisionDensityState(match);
   if (!match.opportunityDebugTrace || match.opportunityDebugTrace.schemaVersion !== "2.2.4.4") {
     match.opportunityDebugTrace = {
       schemaVersion: "2.2.4.4",
       header: createHighSchoolMatchOpportunityHeader(match),
       opportunities: [],
       lifecycle: [],
-      checkpoints: [{ stage: "match-initialized", oneShot: { ...getHighSchoolMatchOpportunityOneShotState(match) }, simulationCursor: Number(match.simulationCursor) || 0 }]
+      checkpoints: [{ stage: "match-initialized", oneShot: { ...getHighSchoolMatchOpportunityOneShotState(match) }, density: cloneHighSchoolMatchOpportunityDebugValue(match.matchDecisionDensityState), simulationCursor: Number(match.simulationCursor) || 0 }]
     };
   }
   return match.opportunityDebugTrace;
@@ -2656,6 +2798,7 @@ function recordHighSchoolMatchOpportunityCheckpoint(stage, match = player.highSc
     inning: Number(match.inning) || 0,
     half: match.half || "",
     oneShot: { ...getHighSchoolMatchOpportunityOneShotState(match) },
+    density: cloneHighSchoolMatchOpportunityDebugValue(ensureHighSchoolMatchDecisionDensityState(match)),
     simulationCursor: Number(match.simulationCursor) || 0,
     ...cloneHighSchoolMatchOpportunityDebugValue(details)
   };
@@ -2681,8 +2824,7 @@ function recordHighSchoolMatchOpportunityLifecycle(match, opportunity, stage, de
   return entry;
 }
 
-function getHighSchoolMatchOpportunityRejectionReason({ decisionWindowAvailable, defensiveDecisionAlreadyUsed, responsibilityCheck, legalRoutes = [], viableRoutes = [], gate = null, playerRole = "" } = {}) {
-  if (defensiveDecisionAlreadyUsed) return "decision-window-already-consumed";
+function getHighSchoolMatchOpportunityRejectionReason({ decisionWindowAvailable, responsibilityCheck, legalRoutes = [], viableRoutes = [], gate = null, playerRole = "", density = null } = {}) {
   if (!decisionWindowAvailable) return "window-expired";
   if (!responsibilityCheck) return "no-player-responsibility";
   if (legalRoutes.length <= 1) return "only-one-legal-route";
@@ -2690,6 +2832,7 @@ function getHighSchoolMatchOpportunityRejectionReason({ decisionWindowAvailable,
   if ((gate?.meaningfulChoiceCount || 0) < 2) return ["cover", "coverPivot"].includes(playerRole) ? "routine-coverage" : "execution-only";
   if ((gate?.commitments || []).length < 2) return "duplicate-commitment";
   if ((gate?.tradeoffs || []).length < 2) return "no-real-tradeoff";
+  if (density?.meaningfulCandidate && !density.allowed) return density.suppressionReason || "density-suppressed";
   return "not-created";
 }
 
@@ -2717,8 +2860,12 @@ function beginHighSchoolMatchDefensiveOpportunity(match, batter, target) {
     playerRoles: [],
     legalRoutes: [],
     viableRoutes: [],
+    candidateRoutes: [],
     routeWindows: {},
-    decisionWindowAvailable: target === "defense" && oneShot.defensiveDecisionWindowAvailable,
+    density: null,
+    densitySuppressionReason: "",
+    noveltyKey: "",
+    decisionWindowAvailable: target !== "firstOffense",
     defensiveDecisionAlreadyUsed: oneShot.defensiveDecisionAlreadyUsed,
     meaningfulDecisionCandidate: false,
     meaningfulDecisionCreated: false,
@@ -2741,7 +2888,8 @@ function updateHighSchoolMatchDefensiveOpportunityFromSituation(match, opportuni
   if (!opportunity || !situation) return opportunity;
   const routeStatuses = Object.values(SECOND_BASE_ROUTE_DEFINITIONS).map(route => ({
     id: route.id,
-    ...evaluateDefensiveRouteAvailability(situation, route)
+    ...evaluateDefensiveRouteAvailability(situation, route),
+    readiness: evaluateExecutionReadiness({ route, situation })
   }));
   const legalRoutes = routeStatuses.filter(route => route.legal).map(route => route.id);
   const viableRoutes = routeStatuses.filter(route => route.viable).map(route => route.id);
@@ -2755,7 +2903,11 @@ function updateHighSchoolMatchDefensiveOpportunityFromSituation(match, opportuni
     playerRoles: (situation.responsibility?.playerRoles || []).slice(),
     legalRoutes,
     viableRoutes,
+    candidateRoutes: cloneHighSchoolMatchOpportunityDebugValue(routeStatuses),
     routeWindows: cloneHighSchoolMatchOpportunityDebugValue(situation.routeWindows || {}),
+    density: cloneHighSchoolMatchOpportunityDebugValue(classification?.density || null),
+    densitySuppressionReason: classification?.density?.suppressionReason || "",
+    noveltyKey: classification?.density?.noveltyKey || "",
     meaningfulDecisionCandidate: viableRoutes.length >= 2 && (gate.meaningfulChoiceCount || 0) >= 2 && (gate.commitments || []).length >= 2,
     meaningfulDecisionCreated: classification?.eventClassification === "playerMeaningfulDecision",
     defensiveDecisionCreated: classification?.eventClassification === "playerMeaningfulDecision"
@@ -2767,12 +2919,12 @@ function updateHighSchoolMatchDefensiveOpportunityFromSituation(match, opportuni
   } else {
     opportunity.rejectionReason = getHighSchoolMatchOpportunityRejectionReason({
       decisionWindowAvailable: opportunity.decisionWindowAvailable,
-      defensiveDecisionAlreadyUsed: opportunity.defensiveDecisionAlreadyUsed,
       responsibilityCheck: opportunity.responsibilityCheck,
       legalRoutes,
       viableRoutes,
       gate,
-      playerRole: opportunity.playerRole
+      playerRole: opportunity.playerRole,
+      density: classification?.density
     });
   }
   return opportunity;
@@ -2786,10 +2938,10 @@ function finalizeHighSchoolMatchDefensiveOpportunity(match, opportunity, event =
   if (!opportunity.defensiveDecisionCreated && !opportunity.rejectionReason) {
     opportunity.rejectionReason = getHighSchoolMatchOpportunityRejectionReason({
       decisionWindowAvailable: opportunity.decisionWindowAvailable,
-      defensiveDecisionAlreadyUsed: opportunity.defensiveDecisionAlreadyUsed,
       responsibilityCheck: opportunity.responsibilityCheck,
       legalRoutes: opportunity.legalRoutes,
-      viableRoutes: opportunity.viableRoutes
+      viableRoutes: opportunity.viableRoutes,
+      density: opportunity.density
     });
   }
   return opportunity;
@@ -2835,16 +2987,21 @@ function markHighSchoolMatchDecisionLifecycle(stage, match = player.highSchoolMa
   const decisions = [...(match?.opportunityDebugTrace?.opportunities || [])].reverse().filter(item => item.defensiveDecisionCreated || item.decisionCreated);
   const opportunity = ["outcomePresented", "continue"].includes(stage)
     ? decisions.find(item => stage === "outcomePresented" ? !item.outcomePresented : item.outcomePresented && !item.continued)
-    : findActiveHighSchoolMatchDecisionOpportunity(match);
+    : findActiveHighSchoolMatchDecisionOpportunity(match, details.domain || match?.currentDomain);
   if (!opportunity) return null;
   if (stage === "presented") {
     opportunity.decisionPresented = true;
     if (opportunity.domain === "defense") opportunity.defensiveDecisionPresented = true;
   }
-  if (stage === "choiceReceived") opportunity.choiceReceived = true;
+  if (stage === "choiceReceived") {
+    opportunity.choiceReceived = true;
+    opportunity.selectedDecision = details.decision || "";
+  }
   if (stage === "resolved") {
     opportunity.decisionResolved = true;
     if (opportunity.domain === "defense") opportunity.defensiveDecisionResolved = true;
+    opportunity.selectedRoute = details.selectedRoute || opportunity.selectedRoute || "";
+    opportunity.finalRoute = details.finalRoute || opportunity.finalRoute || "";
   }
   if (stage === "outcomePresented") opportunity.outcomePresented = true;
   if (stage === "continue") opportunity.continued = true;
@@ -2875,6 +3032,7 @@ function getHighSchoolMatchOpportunitySummary(traceOrMatch = player.highSchoolMa
     defensiveMeaningfulDecisions: defensive.filter(item => item.defensiveDecisionCreated).length,
     defensiveDecisionPresented: defensive.filter(item => item.defensiveDecisionPresented).length,
     defensiveDecisionResolved: defensive.filter(item => item.defensiveDecisionResolved).length,
+    defensiveDecisionDensity: Object.freeze({ ...(traceOrMatch?.matchDecisionDensityState || player.highSchoolMatch?.matchDecisionDensityState || {}) }),
     defensiveRejectionReasons: Object.freeze(rejections)
   });
 }
@@ -2890,6 +3048,8 @@ function getHighSchoolMatchCanonicalOpportunitySignature(traceOrMatch = player.h
     item.playerRole || "",
     (item.legalRoutes || []).join(","),
     (item.viableRoutes || []).join(","),
+    item.noveltyKey || "",
+    item.densitySuppressionReason || "",
     item.decisionWindowAvailable ? "open" : "closed",
     item.defensiveDecisionCreated || item.decisionCreated ? "created" : "rejected",
     item.rejectionReason || ""
@@ -3243,6 +3403,7 @@ function chooseHighSchoolYearOneMatchMoment(decision, expectedMomentId, randomSo
   const choice = getHighSchoolYearOneMatchMomentChoices(match).find(item => item.matchDecision === decision && item.matchMomentId === expectedMomentId);
   if (!choice || !currentMomentId || expectedMomentId !== currentMomentId) return false;
   markHighSchoolMatchDecisionLifecycle("choiceReceived", match, { decision, expectedMomentId });
+  const decisionDomain = match.currentDomain;
 
   isTransitioning = true;
   setChoiceTransitionState(true);
@@ -3255,8 +3416,13 @@ function chooseHighSchoolYearOneMatchMoment(decision, expectedMomentId, randomSo
   }
   const resolvedMoment = match.completedMoments.at(-1);
   const executionText = resolvedMoment.executionText || getHighSchoolDecisionExecutionText(match, decision);
-  markHighSchoolMatchDecisionLifecycle("resolved", match, { decision, expectedMomentId, resolvedPhase: match.simulationPhase });
-  recordHighSchoolMatchOpportunityCheckpoint(`decision-resolved:${match.currentDomain}`, match, { decision, expectedMomentId });
+  const defensiveResolution = decisionDomain === "defense" ? match.lastDefensiveResolution || {} : {};
+  markHighSchoolMatchDecisionLifecycle("resolved", match, {
+    decision, expectedMomentId, resolvedPhase: match.simulationPhase, domain: decisionDomain,
+    selectedRoute: defensiveResolution.initialRoute || defensiveResolution.routeId || "",
+    finalRoute: defensiveResolution.activeRoute || defensiveResolution.routeId || defensiveResolution.route || ""
+  });
+  recordHighSchoolMatchOpportunityCheckpoint(`decision-resolved:${decisionDomain}`, match, { decision, expectedMomentId });
   resolvedMoment.execution = executionText;
   advanceHighSchoolPresentationCursor(match);
   const outcomeChoice = { text: choice.text, memory: narrative, executionText, causeText: resolvedMoment.causeExplanation || "" };
@@ -3774,6 +3940,8 @@ const highSchoolYearOneMomentIds = Object.freeze([
 
 function getHighSchoolYearOneMomentId(match = player.highSchoolMatch) {
   if (match?.completed) return "";
+  if (match?.simulationPhase === "moment_2_ready" && match?.currentDomain === "defense"
+    && /^hs_y1_match_defense_\d+$/.test(match?.currentMomentId || "")) return match.currentMomentId;
   return highSchoolYearOneMomentIds[Math.max(0, Math.min(2, Number(match?.momentIndex) || 0))];
 }
 
@@ -5141,7 +5309,7 @@ const SECOND_BASE_ROUTE_DEFINITIONS = Object.freeze({
   secureFirstBaseOut: Object.freeze({ id: "secureFirstBaseOut", objective: "secureOut", action: "throwFirst", targetBase: "first", route: "4-3", playerRole: "primaryFielder", teammateChain: Object.freeze(["1B"]), requirements: Object.freeze(["fieldBall"]), executionOnly: false, infieldRoute: "secureFirst" }),
   initiate463: Object.freeze({ id: "initiate463", objective: "attemptDoublePlay", action: "throwSecond", targetBase: "secondThenFirst", route: "4-6-3", playerRole: "initiator", teammateChain: Object.freeze(["SS", "1B"]), requirements: Object.freeze(["runnerOnFirst", "fewerThanTwoOuts", "forceAtSecond"]), executionOnly: false, infieldRoute: "doublePlay" }),
   coverSecondFor643: Object.freeze({ id: "coverSecondFor643", objective: "executeCoverage", action: "coverAndPivot", targetBase: "secondThenFirst", route: "6-4-3", playerRole: "coverPivot", teammateChain: Object.freeze(["SS", "1B"]), requirements: Object.freeze(["runnerOnFirst", "fewerThanTwoOuts", "forceAtSecond"]), executionOnly: true, infieldRoute: "doublePlay" }),
-  attackLeadRunnerThird: Object.freeze({ id: "attackLeadRunnerThird", objective: "attackLeadRunner", action: "throwThird", targetBase: "third", route: "4-5", playerRole: "initiator", teammateChain: Object.freeze(["3B"]), requirements: Object.freeze(["runnerAdvancingSecondToThird"]), executionOnly: false, infieldRoute: "forceThird" }),
+  attackLeadRunnerThird: Object.freeze({ id: "attackLeadRunnerThird", objective: "attackLeadRunner", action: "throwThird", targetBase: "third", route: "4-5", playerRole: "initiator", teammateChain: Object.freeze(["3B"]), requirements: Object.freeze(["runnerOnSecond", "thirdBaseOutWindow"]), executionOnly: false, infieldRoute: "forceThird" }),
   preventRunHome: Object.freeze({ id: "preventRunHome", objective: "preventRun", action: "throwHomeForTag", targetBase: "home", route: "4-2-tag", playerRole: "initiator", teammateChain: Object.freeze(["C"]), requirements: Object.freeze(["runnerAttemptingHome", "tagAtHome"]), executionOnly: false, infieldRoute: "tagHome" }),
   homeForceOut: Object.freeze({ id: "homeForceOut", objective: "preventRun", action: "throwHomeForForce", targetBase: "home", route: "4-2-force", playerRole: "initiator", teammateChain: Object.freeze(["C"]), requirements: Object.freeze(["forceAtHome"]), executionOnly: false, infieldRoute: "forceHome" })
 });
@@ -5212,20 +5380,19 @@ function classifyDefensiveExecutionWindow(value) {
 }
 
 function deriveSecondBaseExecutionWindows(situation, overrides = {}) {
-  const base = situation.windows;
   const firstRunnerSpeed = Number(situation.runnerSpeeds?.[0]) || 5;
   const secondRunnerSpeed = Number(situation.runnerSpeeds?.[1]) || 5;
   const thirdRunnerSpeed = Number(situation.runnerSpeeds?.[2]) || 5;
-  const chargePenalty = situation.ballContext.pace === "slow" ? 2.4 : situation.ballDepth === "deep" ? 0.9 : 0;
-  const orientationPenalty = ["rightSide", "leftSide", "towardHole", "lineSide"].includes(situation.ballDirection) ? 0.65 : 0;
-  const pivot = situation.teammates?.shortstop?.capabilities || situation.teammates?.pivotFielder?.capabilities || {};
-  const pivotSupport = ((Number(pivot.fielding) || 5) + (Number(pivot.throwing) || 5) + (Number(pivot.reaction) || 5)) / 15;
+  // Availability is canonical geometry/timing. Player and teammate ability belong to Readiness/Execution.
+  const chargePenalty = situation.ballContext.pace === "slow" ? 2 : 0;
+  const depthPenalty = situation.ballDepth === "deep" ? 1.2 : situation.ballDepth === "shallow" ? 0.45 : 0;
+  const orientationPenalty = ["rightSide", "leftSide", "towardHole", "lineSide"].includes(situation.ballDirection) ? 1.2 : 0;
   const numeric = {
-    firstBaseOutWindow: base.throw + base.transfer * 0.12 - chargePenalty - Math.max(0, situation.batterSpeed - 6) * 0.25,
-    secondBaseForceWindow: base.transfer + 1.2 - firstRunnerSpeed * 0.32 - chargePenalty - orientationPenalty,
-    doublePlayWindow: Math.min(base.transfer + 1.2 - firstRunnerSpeed * 0.32 - chargePenalty - orientationPenalty, base.throw + pivotSupport - situation.batterSpeed * 0.42 - chargePenalty),
-    leadRunnerThirdWindow: base.transfer + base.throw * 0.35 - secondRunnerSpeed * 0.48 - orientationPenalty - (situation.ballDepth === "deep" ? 1.2 : 0),
-    homeOutWindow: base.transfer + base.throw * 0.3 - thirdRunnerSpeed * 0.5 - orientationPenalty - (situation.ballDepth === "deep" ? 1.1 : 0)
+    firstBaseOutWindow: 7 - chargePenalty - depthPenalty - Math.max(0, situation.batterSpeed - 6) * 0.3,
+    secondBaseForceWindow: 7.2 - firstRunnerSpeed * 0.32 - chargePenalty - depthPenalty - orientationPenalty,
+    doublePlayWindow: Math.min(7.2 - firstRunnerSpeed * 0.32 - chargePenalty - depthPenalty - orientationPenalty, 7.4 - situation.batterSpeed * 0.42 - chargePenalty - depthPenalty),
+    leadRunnerThirdWindow: 7.2 - secondRunnerSpeed * 0.48 - chargePenalty - depthPenalty - orientationPenalty,
+    homeOutWindow: 7 - thirdRunnerSpeed * 0.5 - chargePenalty - depthPenalty - orientationPenalty
   };
   Object.entries(overrides || {}).forEach(([key, value]) => {
     if (Object.hasOwn(numeric, key)) numeric[key] = typeof value === "string"
@@ -5252,19 +5419,38 @@ function evaluateDefensiveRouteAvailability(situation, routeDefinition) {
     secureFirstBaseOut: true,
     initiate463: Boolean(force.doublePlayEligible && force.forceAtSecond),
     coverSecondFor643: Boolean(force.doublePlayEligible && force.forceAtSecond && situation.responsibility?.playerRole === "coverPivot"),
-    attackLeadRunnerThird: Boolean(runnerAtSecond && runnerAtSecond.targetBase === "third" && ["advancing", "committed"].includes(runnerAtSecond.movementProgress)),
+    attackLeadRunnerThird: Boolean(runnerAtSecond && runnerAtSecond.targetBase === "third"
+      && (force.forceAtThird || ["advancing", "committed"].includes(runnerAtSecond.movementProgress))),
     preventRunHome: Boolean(runnerAtThird && runnerAtThird.targetBase === "home" && ["advancing", "committed"].includes(runnerAtThird.movementProgress) && !force.forceAtHome && situation.outs < 2),
     homeForceOut: Boolean(force.forceAtHome)
   };
   const window = getSecondBaseRouteWindow(routeId, situation.routeWindows);
   const legal = legalByRoute[routeId] === true;
   const viable = legal && window.state !== "expired";
+  const unavailableReasons = {
+    secureFirstBaseOut: "firstBaseRouteUnavailable",
+    initiate463: "doublePlayForceUnavailable",
+    coverSecondFor643: "coverPivotRoleUnavailable",
+    attackLeadRunnerThird: "thirdBaseOutOpportunityUnavailable",
+    preventRunHome: "runnerNotBreakingHome",
+    homeForceOut: "homeForceUnavailable"
+  };
+  const expiredReasons = {
+    secureFirstBaseOut: "firstBaseWindowExpired",
+    initiate463: "doublePlayWindowExpired",
+    coverSecondFor643: "doublePlayWindowExpired",
+    attackLeadRunnerThird: "thirdBaseWindowExpired",
+    preventRunHome: "homeTagWindowExpired",
+    homeForceOut: "homeForceWindowExpired"
+  };
+  const unavailableReason = !legal ? unavailableReasons[routeId] || "routeTopologyUnavailable"
+    : !viable ? expiredReasons[routeId] || "routeWindowExpired" : "";
   const reasons = [];
   if (!legal) reasons.push("目前跑者與封殺關係不支援這條處理路線。");
   else if (!viable) reasons.push("這條路線的出局窗口已經關閉。");
   else if (window.state === "narrow") reasons.push("這條路線仍合法，但出手窗口很窄。");
   else reasons.push("這條路線仍在可執行窗口內。");
-  return Object.freeze({ legal, viable, windowState: window.state, reasons: Object.freeze(reasons) });
+  return Object.freeze({ legal, viable, windowState: window.state, unavailableReason, reasons: Object.freeze(reasons) });
 }
 
 function evaluateExecutionReadiness({ route, situation, teammates = situation?.teammates } = {}) {
@@ -5362,7 +5548,24 @@ function buildInfieldMeaningfulMoment(matchState, playerContext = player, overri
   };
   situation.firstStepDemand = deriveInfieldFirstStepDemand(playerPosition, situation.ballDirection, situation.ballDepth, ballContext.pace);
   situation.windows = deriveInfieldExecutionWindows(situation);
-  situation.runnerContext = deriveDefensiveRunnerContext(situation.runners, situation.runnerSpeeds, overrides);
+  const inferredRunnerMovement = { ...(overrides.runnerMovementProgress || {}) };
+  const inferredRunnerTargets = { ...(overrides.runnerTargets || {}) };
+  if (situation.forceState.forceAtThird && situation.runners[1]) {
+    inferredRunnerMovement[1] = inferredRunnerMovement[1] || "committed";
+    inferredRunnerTargets[1] = "third";
+  }
+  if (situation.forceState.forceAtHome && situation.runners[2]) {
+    inferredRunnerMovement[2] = inferredRunnerMovement[2] || "committed";
+    inferredRunnerTargets[2] = "home";
+  } else if (situation.runners[2] && situation.outs < 2 && matchState.opponentTacticalTruth?.targetRunnerId === situation.runners[2]) {
+    inferredRunnerMovement[2] = inferredRunnerMovement[2] || "advancing";
+    inferredRunnerTargets[2] = "home";
+  }
+  situation.runnerContext = deriveDefensiveRunnerContext(situation.runners, situation.runnerSpeeds, {
+    ...overrides,
+    runnerMovementProgress: inferredRunnerMovement,
+    runnerTargets: inferredRunnerTargets
+  });
   situation.responsibility = resolveDefensivePlayResponsibility({ situation, primaryFielderPosition: situation.primaryFielderPosition });
   situation.demands = deriveInfieldDemandModel(situation);
   situation.routeWindows = deriveSecondBaseExecutionWindows(situation, overrides.routeWindowOverrides || {});
@@ -5498,6 +5701,7 @@ function generateInfieldLegalChoices(situation, matchState = null) {
   }
   const choices = [];
   const secureText = position === "一壘手" && situation.ballDepth !== "deep" ? "控制來球後自己踩上一壘，先完成打者出局"
+    : position === "二壘手" && situation.ballDepth !== "deep" ? "穩穩傳一壘，先拿打者。"
     : situation.ballDepth === "deep" ? "站穩後長傳一壘，挑戰打者跑壘時間" : situation.ballContext.pace === "slow" ? "前衝收球後直接傳一壘" : "傳一壘，先拿最穩定的出局數";
   choices.push(make(secureText, "secure", "secureFirst"));
   if (force.forceAtHome) {
@@ -5513,14 +5717,14 @@ function generateInfieldLegalChoices(situation, matchState = null) {
     const dpReachable = situation.ballDirection !== "lineSide" || ["一壘手", "三壘手"].includes(position) || situation.ballDepth !== "deep";
     if (dpReachable) {
       const dpText = position === "游擊手" ? "轉傳二壘，再由二壘手轉一壘挑戰雙殺"
-        : position === "二壘手" ? "把球送給補位游擊手封殺一壘跑者，再由他轉傳一壘"
+        : position === "二壘手" ? "傳二壘封殺跑者，嘗試完成雙殺。"
           : position === "三壘手" ? "傳二壘封殺前位跑者，再由二壘手轉一壘"
             : "傳游擊手封殺一壘跑者，再回傳一壘挑戰雙殺";
       choices.push(make(dpText, "challenge", "doublePlay"));
     }
   }
   if (force.forceAtThird && position === "三壘手") choices.push(make("踩三壘完成封殺，再觀察一壘傳球", "lead", "forceThird"));
-  else if ((force.forceAtThird || (position === "二壘手" && situation.runnerContext?.[1]?.targetBase === "third" && ["advancing", "committed"].includes(situation.runnerContext[1].movementProgress))) && ["游擊手", "二壘手"].includes(position)) choices.push(make("傳三壘封殺正往前推進的二壘跑者", "lead", "forceThird"));
+  else if ((force.forceAtThird || (position === "二壘手" && situation.runnerContext?.[1]?.targetBase === "third" && ["advancing", "committed"].includes(situation.runnerContext[1].movementProgress))) && ["游擊手", "二壘手"].includes(position)) choices.push(make(position === "二壘手" ? "直接傳三壘，先封殺領先跑者。" : "傳三壘封殺正往前推進的二壘跑者", "lead", "forceThird"));
   else if (force.forceAtSecond && position === "一壘手") choices.push(make("傳二壘封殺起跑跑者，由游擊手接球", "lead", "forceSecond"));
   const hasRunner = situation.runners.some(Boolean);
   if (position !== "二壘手" || situation.ballDepth === "deep") {
@@ -5574,6 +5778,20 @@ function classifyPositionFamilyPlay(situation, legalChoices = [], playerInvolved
     eventClassification: gate.shouldCreateDecision ? "playerMeaningfulDecision" : "playerRoutinePlay",
     decisionTension: gate.decisionTension,
     gate
+  });
+}
+
+function classifyHighSchoolMatchDefensiveOpportunity(match, situation, legalChoices = [], playerInvolved = true) {
+  const classification = classifyPositionFamilyPlay(situation, legalChoices, playerInvolved);
+  const density = evaluateHighSchoolMatchDefensiveDecisionDensity(match, situation, legalChoices, classification);
+  if (classification.eventClassification !== "playerMeaningfulDecision" || density.allowed) {
+    return Object.freeze({ ...classification, density });
+  }
+  return Object.freeze({
+    eventClassification: "playerRoutinePlay",
+    decisionTension: "low",
+    gate: classification.gate,
+    density
   });
 }
 
@@ -6119,10 +6337,10 @@ function presentInfieldDecision(situation, resolution = null, decision = "") {
     ,coverageFailure: "你未能及時補到二壘；游擊手保留球權，沒有朝無人接應的壘包傳球。"
     ,tagOutHome: "捕手接球後完成觸殺，阻止三壘跑者得分。"
     ,forceOutHome: "傳球先到本壘，捕手踩住壘包完成封殺。"
-    ,leadRunnerOut: "三壘手接球完成觸殺，正在推進的二壘跑者出局。"
+    ,leadRunnerOut: "三壘手踩住壘包完成封殺，領先跑者在三壘前出局。"
   }[resolution.detailedResult] : "";
   return Object.freeze({
-    situation: `${situation.outs} 出局，${formatHighSchoolMatchRunners(situation.runners)}。${information.pace}${information.direction}；${information.depth}。`,
+    situation: `${situation.outs} 出局，${formatHighSchoolMatchRunners(situation.runners)}。${information.pace}${information.direction}；${information.depth}。${information.runnerCue ? `${information.runnerCue}。` : ""}${information.readCue}`,
     decision: choice?.text || "",
     execution: choice ? executions[choice.infieldRoute] || "你依照局面完成這次守備動作。" : "",
     outcome: outcomes || "",
@@ -6542,6 +6760,8 @@ function prepareHighSchoolYearOneMatch() {
     opponentTacticalTruth: { code: "", targetRunnerId: "" },
     ballContext: { type: "", family: "", pace: "", label: "", detail: "", timeWindow: "" },
     positionDecisionFamily: "", currentFieldingPosition: starts && (developmentPositionOverride || opportunityDecision?.positionFallbackApplied) ? assignedPosition : "", developmentPositionOverride, defensiveSituation: {},
+    matchDecisionDensityState: createHighSchoolMatchDecisionDensityState(),
+    pendingDefensiveResumeState: null,
     lastDefensiveResolution: { resultCode: "", tier: "", decisionQuality: "", executionQuality: "", primaryCause: "", secondaryCause: "", causeExplanation: "" },
     pendingHalfInningTermination: null,
     catcherDecisionState: null,
@@ -6853,11 +7073,11 @@ function getInfieldRoutineExecutionRoute(situation) {
   return canSelfCover ? "selfCoverFirst" : "pitcherCoverFirst";
 }
 
-function resolveRoutineDefensivePlay(match, situation = match?.defensiveSituation, randomSource = null) {
+function resolveRoutineDefensivePlay(match, situation = match?.defensiveSituation, randomSource = null, options = {}) {
   if (!match || situation?.familyId !== "infield") return null;
   const legalChoices = infieldDecisionFamily.generateLegalChoices(situation, match);
   const classification = classifyPositionFamilyPlay(situation, legalChoices, true);
-  if (classification.eventClassification !== "playerRoutinePlay") return null;
+  if (classification.eventClassification !== "playerRoutinePlay" && options.densitySuppressed !== true) return null;
   const source = randomSource === null ? () => nextHighSchoolMatchSimulationRandom(match) : randomSource;
   const routineChoice = legalChoices.find(choice => choice.routeId === "coverSecondFor643") || legalChoices.find(choice => choice.matchDecision === "secure") || legalChoices[0];
   const resolution = routineChoice ? infieldDecisionFamily.resolve(situation, routineChoice.matchDecision, match, source) : null;
@@ -7105,6 +7325,20 @@ function normalizeHighSchoolTerminalRunnerChanges(resolution, thirdOutResolution
   }));
 }
 
+function restoreHighSchoolMatchAfterDefensiveDecision(match, fallbackPhase = "moment_2_resolved") {
+  const resume = match?.pendingDefensiveResumeState;
+  if (resume) {
+    match.simulationPhase = resume.simulationPhase || fallbackPhase;
+    match.momentIndex = Math.max(0, Math.min(2, Number(resume.momentIndex) || 0));
+    match.currentMomentId = resume.currentMomentId || match.currentMomentId;
+    match.currentDomain = resume.currentDomain || "flow";
+  } else {
+    match.simulationPhase = fallbackPhase;
+  }
+  match.pendingDefensiveResumeState = null;
+  return match.simulationPhase;
+}
+
 function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
   const situation = match.defensiveSituation;
   const situationBefore = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
@@ -7139,6 +7373,9 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
     error: resolution.error
   });
   match.lastDefensiveResolution = JSON.parse(JSON.stringify(appliedResolution));
+  const densityState = ensureHighSchoolMatchDecisionDensityState(match);
+  densityState.lastSelectedRoute = resolution.initialRoute || resolution.routeId || decision || "";
+  densityState.lastFinalRoute = resolution.activeRoute || resolution.routeId || resolution.route || "";
   Object.assign(match.completedMoments.at(-1), {
     positionDecisionFamily: "infield",
     playerPosition: situation.playerPosition,
@@ -7184,7 +7421,7 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
   });
   advanceHighSchoolMatchBattingOrder(match, "away");
   assertHighSchoolMatchStateIntegrity(match, "player-defense-decision");
-  match.simulationPhase = "moment_2_resolved";
+  restoreHighSchoolMatchAfterDefensiveDecision(match);
   match.currentAssignment = "等待球隊完成這個守備半局。";
   match.coachReaction = resolution.decisionQuality === "aggressive" && resolution.executionQuality !== "complete"
     ? "現任教練確認路徑合法，同時記下這次積極選擇沒有完整執行。"
@@ -7416,7 +7653,7 @@ function applyCatcherResolutionToHighSchoolMatch(match, decision, resolution) {
     scores: match.scores,
     runners: match.runners
   });
-  match.simulationPhase = "moment_2_resolved";
+  restoreHighSchoolMatchAfterDefensiveDecision(match);
   match.currentAssignment = resolution.thirdOutResolution.halfInningEnded
     ? "第三個出局已完成，等待攻守交換。"
     : "捕手處理完成，原打席依目前球數繼續。";
@@ -7557,7 +7794,7 @@ function advanceHighSchoolYearOneAfterMomentTwo(match, decision, tier, defensive
     ballContext: resolution.ballContext
   });
   advanceHighSchoolMatchBattingOrder(match, "away");
-  match.simulationPhase = "moment_2_resolved";
+  restoreHighSchoolMatchAfterDefensiveDecision(match);
   match.currentAssignment = "等待球隊完成這個守備半局。";
   match.coachReaction = tier === "failure" ? "現任教練立刻重申補位與最短出局責任。" : "現任教練確認這次守備決策已寫進比賽紀錄。";
   match.teamReaction = "球隊依目前出局數與壘況繼續完成守備。";
@@ -7713,6 +7950,7 @@ function prepareHighSchoolFirstOffensiveMomentFromSimulation(match) {
 
 function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
   const opportunity = findHighSchoolMatchOpportunity(match, options.opportunityTraceId);
+  const densityState = ensureHighSchoolMatchDecisionDensityState(match);
   const flowState = {
     momentIndex: match.momentIndex,
     currentMomentId: match.currentMomentId,
@@ -7720,9 +7958,19 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
     currentDomain: match.currentDomain,
     currentAssignment: match.currentAssignment
   };
+  const primaryDefensiveDecision = flowState.simulationPhase === "moment_1_resolved"
+    && (densityState?.defensiveMeaningfulDecisionCount || 0) === 0;
+  match.pendingDefensiveResumeState = {
+    simulationPhase: primaryDefensiveDecision ? "moment_2_resolved" : flowState.simulationPhase,
+    momentIndex: primaryDefensiveDecision ? 1 : flowState.momentIndex,
+    currentMomentId: primaryDefensiveDecision ? highSchoolYearOneMomentIds[1] : flowState.currentMomentId,
+    currentDomain: "flow",
+    currentAssignment: flowState.currentAssignment
+  };
   match.currentBatter = getHighSchoolMatchLineupBatter(match, match.offenseTeam)?.id || "";
   match.momentIndex = 1;
-  match.currentMomentId = highSchoolYearOneMomentIds[1];
+  match.currentMomentId = primaryDefensiveDecision ? highSchoolYearOneMomentIds[1]
+    : `hs_y1_match_defense_${(densityState?.defensiveMeaningfulDecisionCount || 0) + 1}`;
   match.currentDomain = "defense";
   setHighSchoolDefensiveBallContext(match, options.ballContextType || "");
   match.currentAssignment = getHighSchoolDefensiveSituationText(match);
@@ -7748,28 +7996,31 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
   match.opponentAdjustment = "跑者與打者的準備動作出現變化；只呈現你在場上能看見的線索。";
   const legalChoices = getHighSchoolDefensiveMomentChoices(match);
   const classification = match.defensiveSituation?.familyId === "infield"
-    ? classifyPositionFamilyPlay(match.defensiveSituation, legalChoices, true)
+    ? classifyHighSchoolMatchDefensiveOpportunity(match, match.defensiveSituation, legalChoices, true)
     : Object.freeze({ eventClassification: "playerMeaningfulDecision", decisionTension: "meaningful", gate: null });
   match.playerEventClassification = classification.eventClassification;
   match.decisionTension = classification.decisionTension;
   match.decisionGate = classification.gate ? JSON.parse(JSON.stringify(classification.gate)) : null;
+  applyHighSchoolMatchDefensiveDecisionDensity(match, classification.density, classification.eventClassification === "playerMeaningfulDecision");
   updateHighSchoolMatchDefensiveOpportunityFromSituation(match, opportunity, match.defensiveSituation, legalChoices, classification);
   if (classification.eventClassification === "playerRoutinePlay") {
-    const resolution = resolveRoutineDefensivePlay(match, match.defensiveSituation, options.randomSource ?? null);
+    const resolution = resolveRoutineDefensivePlay(match, match.defensiveSituation, options.randomSource ?? null, {
+      densitySuppressed: classification.density?.meaningfulCandidate === true && classification.density?.allowed === false
+    });
     if (!resolution) {
       match.momentIndex = flowState.momentIndex;
       match.currentMomentId = flowState.currentMomentId;
       match.simulationPhase = flowState.simulationPhase;
       match.currentDomain = flowState.currentDomain;
       match.currentAssignment = flowState.currentAssignment;
+      match.pendingDefensiveResumeState = null;
       setHighSchoolCoachTacticalDirection(match);
       finalizeHighSchoolMatchDefensiveOpportunity(match, opportunity, null, "no-routine-resolution");
       return null;
     }
     const event = applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution);
-    match.momentIndex = flowState.momentIndex;
-    match.currentMomentId = flowState.currentMomentId;
-    match.simulationPhase = flowState.simulationPhase;
+    restoreHighSchoolMatchAfterDefensiveDecision(match, flowState.simulationPhase);
+    match.currentDomain = "flow";
     setHighSchoolCoachTacticalDirection(match);
     finalizeHighSchoolMatchDefensiveOpportunity(match, opportunity, event, "routine");
     return event;
@@ -7935,7 +8186,10 @@ function advanceHighSchoolMatchPlaybackStep(match = player.highSchoolMatch) {
     match.passage = summarizeHighSchoolSimulationSegment(match, startIndex, scoresBefore, playerStartedOnBase);
     return getHighSchoolPlaybackResultForPresentedEvent(advanceHighSchoolPresentationCursor(match));
   }
-  const defensiveResponsibilityReached = target === "defense" && shouldReachHighSchoolDefensiveMoment(match);
+  const activeFieldingPosition = match.developmentPositionOverride || match.playerFieldingAssignment || match.currentFieldingPosition || match.position;
+  const defensiveOpportunityPhase = target === "defense"
+    || (activeFieldingPosition === "二壘手" && ["finalOffense", "finish"].includes(target));
+  const defensiveResponsibilityReached = defensiveOpportunityPhase && shouldReachHighSchoolDefensiveMoment(match);
   if (defensiveOpportunity) defensiveOpportunity.responsibilityCheck = defensiveResponsibilityReached;
   if (defensiveResponsibilityReached) {
     const defensiveEvent = prepareHighSchoolDefensiveMomentFromSimulation(match, { opportunityTraceId: defensiveOpportunity?.opportunityId || "" });

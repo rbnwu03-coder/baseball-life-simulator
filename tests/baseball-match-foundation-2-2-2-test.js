@@ -109,7 +109,7 @@ function verify(title, condition) {
 }
 
 verify("1. 空壘一壘手強勁正面球分類為 routine", evaluate(`(() => {const x=__candidate2222();return x.event.type==="playerRoutinePlay"&&x.match.playerEventClassification==="playerRoutinePlay";})()`));
-verify("2. routine 不建立 meaningful decision pause", evaluate(`(() => {const x=__candidate2222();advanceHighSchoolPresentationCursor(x.match);return x.match.simulationPhase==="moment_1_resolved"&&!isHighSchoolMatchDecisionVisible(x.match);})()`));
+verify("2. routine 不建立 meaningful decision pause，並推進既定防守段", evaluate(`(() => {const x=__candidate2222();advanceHighSchoolPresentationCursor(x.match);return x.match.simulationPhase==="moment_2_resolved"&&!isHighSchoolMatchDecisionVisible(x.match);})()`));
 verify("3. routine 不占用三個關鍵 Moment", evaluate(`(() => {const x=__candidate2222();return x.match.completedMoments.length===1&&x.match.completedMoments[0].id===highSchoolYearOneMomentIds[0];})()`));
 verify("4. routine 成功由同一 resolver 寫回一個出局", evaluate(`(() => {const x=__candidate2222();return x.event.outsCreated===1&&x.match.outs===1&&x.match.playerContribution.outsCreated===1;})()`));
 verify("5. 一壘手正面球走自踩一壘 execution route", evaluate(`(() => __candidate2222().event.executionRoute==="selfCoverFirst")()`));
@@ -150,7 +150,7 @@ verify("32. flow UI 仍以記分板、局勢、出局、壘況與 recent feed �
 verify("33. routine presentation snapshot 保留結果後目前打者", evaluate(`(() => {const x=__candidate2222();const next=getHighSchoolMatchLineupBatter(x.match,"away");return x.event.presentationSnapshot.currentBatter===next.id&&x.event.presentationSnapshot.battingOrderSlot===x.match.battingOrderIndex.away;})()`));
 verify("34. routine save/reload 保留 gate、事件分類與目前打者 snapshot", evaluate(`(() => {const x=__candidate2222();player.highSchoolMatch=x.match;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const e=restored.simulationLog.find(v=>v.type==="playerRoutinePlay");return restored.playerEventClassification==="playerRoutinePlay"&&restored.decisionGate.meaningfulChoiceCount===1&&e.presentationSnapshot.currentBatter===x.event.presentationSnapshot.currentBatter;})()`));
 verify("35. position family contract 公開 classify adapter", evaluate(`typeof getPositionDecisionFamily("infield").classify==="function"`));
-verify("36. full match 仍完成三個關鍵 Moment", evaluate(`(() => {const x=__finish2222();return x.match.completed&&x.match.completedMoments.length===3&&x.safety<1400;})()`));
+verify("36. full match 完成兩個既定進攻 Moment；防守 Moment 只在真實 Decision 時成立", evaluate(`(() => {const x=__finish2222();const ids=x.match.completedMoments.map(moment=>moment.id);return x.match.completed&&ids.includes(highSchoolYearOneMomentIds[0])&&ids.includes(highSchoolYearOneMomentIds[2])&&x.match.completedMoments.filter(moment=>moment.domain==="defense").length===x.match.matchDecisionDensityState.defensiveMeaningfulDecisionCount&&x.safety<1400;})()`));
 verify("37. full match 全程維持 game-state invariant", evaluate(`(() => {const x=__finish2222(88222);return x.match.completed&&getHighSchoolMatchStateIntegrityIssues(x.match).length===0;})()`));
 verify("38. 玩家可見 routine commentary 不含 raw identifier", evaluate(`(() => {const x=__candidate2222();const t=formatMatchSimulationEvent(x.event,x.match).text;return !["hardGrounder","straightAtPlayer","playerRoutinePlay","selfCoverFirst","decisionTension"].some(raw=>t.includes(raw));})()`));
 

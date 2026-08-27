@@ -167,7 +167,7 @@ verify("D3. timer handle／flag／generation 維持 atomic valid invariant", eva
 verify("D4. 正式 UI 已移除 generic half-inning meta narration", !fs.readFileSync(path.join(root, "script.js"), "utf8").includes("你的打席結束後，球隊仍完成了這個半局") && !fs.readFileSync(path.join(root, "script.js"), "utf8").includes("【比賽推進】"));
 verify("D5. timing constants 維持 1000／1700／1850", evaluate(`MATCH_FLOW_BEAT_MS===1000&&MATCH_ATTENTION_BEAT_MS===1700&&MATCH_MAJOR_TRANSITION_MS===1850`));
 
-verify("P1. Production Full Match A：bench → entry → 3 Decisions → 終場", fullA.role === "bench" && fullA.completed && fullA.decisions === 3 && fullA.outcomes === 3 && fullA.orphan === 0 && fullA.integrity === 0 && fullA.finalTimer === 0);
+verify("P1. Production Full Match A：bench → entry → multi Decisions → 終場", fullA.role === "bench" && fullA.completed && fullA.decisions >= 3 && fullA.outcomes === fullA.decisions && fullA.orphan === 0 && fullA.integrity === 0 && fullA.finalTimer === 0);
 verify("P2. Production Full Match B：不同 seed 同樣無 orphan／no-progress", fullB.seed !== fullA.seed && fullB.role === "bench" && fullB.completed && fullB.noProgress === 0 && fullB.orphan === 0 && fullB.integrity === 0 && fullB.finalTimer === 0);
 verify("P3. Production A/B 只使用正式 timing constants", [...fullA.delays, ...fullB.delays].every(delay => [1000, 1700, 1850].includes(delay)));
 

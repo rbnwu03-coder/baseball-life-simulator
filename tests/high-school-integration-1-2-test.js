@@ -59,6 +59,7 @@ function makeContext() {
       Object.keys(player.baseballSkills).forEach(key=>player.baseballSkills[key]=value);
       Object.assign(player,{ballSense:value,observe:value,fitness:value,instinct:value,discipline:value,responsibility:value});
       pendingHighSchoolMatchSimulationSeed=12001;
+      pendingHighSchoolMatchPositionOverride=position==="內野手"?"二壘手":"";
       return prepareHighSchoolYearOneMatch();
     }
     function __resolveCurrent(decision, sample) {
@@ -81,14 +82,31 @@ function makeContext() {
       const needed=Math.max(0,match.scores.home+20-match.scores.away);
       if(needed>0){ensureHighSchoolMatchLineScoreInning(match,"away");match.scores.away+=needed;match.lineScore.away[match.inning-1]+=needed;}
     }
+    function __advanceToFinalMoment120(sample=0.99) {
+      const match=player.highSchoolMatch; let safety=0;
+      while(!match.completed&&match.simulationPhase!=="moment_3_ready"&&safety++<700){
+        if(isHighSchoolMatchDecisionVisible(match)){
+          if(match.currentDomain!=="defense")break;
+          const choices=getHighSchoolYearOneMatchMomentChoices(match);
+          const choice=choices.find(item=>item.matchDecision==="secure")||choices[0];
+          if(!choice||!resolveHighSchoolYearOneMatch(choice.matchDecision,choice.matchMomentId,()=>sample))break;
+        }else if(isHighSchoolMatchPlaybackPhase(match))__resumeSimulation();
+        else break;
+      }
+      return match.simulationPhase==="moment_3_ready";
+    }
     function __completeDirect(role="starter", level="high", sample=0.99) {
-      __setupHighSchoolMatch(role,"內野手",level);
-      __resolveAndAdvance("attack",sample);
-      __resolveCurrent("secure",sample);
-      __forceThirdMomentPath();
-      __resumeSimulation();
-      __resolveAndAdvance("zone",sample);
-      return player.highSchoolMatch;
+      const match=__setupHighSchoolMatch(role,"內野手",level); let safety=0;
+      while(!match.completed&&safety++<1400){
+        if(isHighSchoolMatchDecisionVisible(match)){
+          const choices=getHighSchoolYearOneMatchMomentChoices(match);
+          const preferred=match.currentDomain==="defense"?"secure":match.momentIndex===0?"attack":"zone";
+          const choice=choices.find(item=>item.matchDecision===preferred)||choices[0];
+          if(!choice||!resolveHighSchoolYearOneMatch(choice.matchDecision,choice.matchMomentId,()=>sample))break;
+        }else if(isHighSchoolMatchPlaybackPhase(match))__resumeSimulation();
+        else break;
+      }
+      return match;
     }
   `, context);
   return context;
@@ -108,17 +126,19 @@ verify("1. 比賽固定三個穩定 Moment identity，且沿用唯一 showcase e
 
 const shared = parse(`(() => {
   const match=__setupHighSchoolMatch("starter"); const id=match.id,opponent=match.opponent;
-  const snapshots=[];
-  for(const decision of ["attack","challenge","zone"]){ snapshots.push({id:match.id,opponent:match.opponent,score:{...match.scores},moment:match.currentMomentId}); __resolveCurrent(decision,0.99);if(match.simulationPhase==="moment_2_resolved")__forceThirdMomentPath();__resumeSimulation(); }
+  const snapshots=[];let safety=0;
+  while(!match.completed&&safety++<1400){if(isHighSchoolMatchDecisionVisible(match)){snapshots.push({id:match.id,opponent:match.opponent,score:{...match.scores},moment:match.currentMomentId,domain:match.currentDomain});const choices=getHighSchoolYearOneMatchMomentChoices(match);const choice=choices[0];resolveHighSchoolYearOneMatch(choice.matchDecision,choice.matchMomentId,()=>.99);}else if(isHighSchoolMatchPlaybackPhase(match))__resumeSimulation();else break;}
   return {id,opponent,snapshots,completed:match.completed,count:match.completedMoments.length};
 })()`);
-verify("2. 三個 Moment 共用 match identity、對手與累積比分", shared.completed && shared.count === 3 && shared.snapshots.every(item => item.id === shared.id && item.opponent === shared.opponent) && shared.snapshots[1].score.home >= shared.snapshots[0].score.home);
-verify("3. Moment 依序 1 → 2 → 3 → Match End", JSON.stringify(shared.snapshots.map(item => item.moment)) === JSON.stringify(["hs_y1_match_moment_1", "hs_y1_match_moment_2", "hs_y1_match_moment_3"]));
+verify("2. 全部 Moment 共用 match identity、對手與累積比分", shared.completed && shared.count === shared.snapshots.length && shared.snapshots.every(item => item.id === shared.id && item.opponent === shared.opponent) && shared.snapshots[1].score.home >= shared.snapshots[0].score.home);
+const sharedFixedMoments = shared.snapshots.map(item => item.moment).filter(id => ["hs_y1_match_moment_1", "hs_y1_match_moment_2", "hs_y1_match_moment_3"].includes(id));
+verify("3. 固定進攻 Moment 1 → 3 保持順序；Moment 2 只在首個真實防守 Decision 成立", sharedFixedMoments[0] === "hs_y1_match_moment_1" && sharedFixedMoments.at(-1) === "hs_y1_match_moment_3"
+  && (!sharedFixedMoments.includes("hs_y1_match_moment_2") || sharedFixedMoments.indexOf("hs_y1_match_moment_2") === 1));
 
 const roleFlows = parse(`(() => ["starter","rotation","bench"].map(role=>{
-  const match=__completeDirect(role); return {role,completed:match.completed,count:match.completedMoments.length,domains:match.completedMoments.map(item=>item.domain),assignment:match.assignment};
+  const match=__completeDirect(role); return {role,completed:match.completed,count:match.completedMoments.length,defensiveDecisions:match.matchDecisionDensityState.defensiveMeaningfulDecisionCount,domains:match.completedMoments.map(item=>item.domain),assignment:match.assignment};
 }))()`);
-verify("4. Starter／Rotation／Bench 都依 regulation 以一至三次 active decision 完成同一 loop", roleFlows.every(item => item.completed && item.count >= 1 && item.count <= 3 && item.assignment));
+verify("4. Starter／Rotation／Bench 都依 regulation 完成 density-controlled active decision loop", roleFlows.every(item => item.completed && item.count === item.defensiveDecisions + 2 && item.assignment));
 verify("5. 每條角色路線都正式涵蓋 offense 與 defense", roleFlows.every(item => new Set(item.domains).has("offense") && new Set(item.domains).has("defense")));
 
 const positionContext = evaluate(`(() => {
@@ -130,18 +150,18 @@ verify("6. 守備 Moment 正式讀取 canonical primaryPosition", positionContex
 verify("7. 投打慣用側只提供可見 context，不 gate 選項", evaluate(`(() => { __setupHighSchoolMatch("bench","外野手","low"); player.bats="S";player.throws="L";return getHighSchoolYearOneMatchPresentation().includes("左右開弓／左投")&&getHighSchoolYearOneMatchMomentChoices().length===3; })()`));
 
 const firstCausality = parse(`(() => {
-  const run=(level,sample)=>{__setupHighSchoolMatch("starter","內野手",level);__resolveAndAdvance("attack",sample);return {moment:player.highSchoolMatch.currentMomentId,coach:player.highSchoolMatch.coachInstruction,opponent:player.highSchoolMatch.opponentAdjustment,previous:player.highSchoolMatch.previousMomentOutcome};};
+  const run=(level,sample)=>{__setupHighSchoolMatch("starter","內野手",level);__resolveAndAdvance("attack",sample);return {moment:player.highSchoolMatch.currentMomentId,phase:player.highSchoolMatch.simulationPhase,domain:player.highSchoolMatch.currentDomain,coach:player.highSchoolMatch.coachInstruction,opponent:player.highSchoolMatch.opponentAdjustment,previous:player.highSchoolMatch.previousMomentOutcome};};
   return [run("high",0.99),run("low",0)];
 })()`);
-verify("8. Moment 1 成功與失敗都進入 Moment 2，並形成不同教練 context", firstCausality.every(item => item.moment === "hs_y1_match_moment_2" && item.previous) && firstCausality[0].coach !== firstCausality[1].coach);
+verify("8. Moment 1 成功與失敗都離開首段並形成不同教練 context", firstCausality.every(item => item.phase !== "moment_1_ready" && item.previous) && firstCausality[0].coach !== firstCausality[1].coach);
 verify("9. 對手會依 Moment 1 選擇更新 hidden tactical truth", evaluate(`(() => { const contexts=[];for(const decision of ["attack","zone","advance"]){__setupHighSchoolMatch();__resolveAndAdvance(decision,0.5);contexts.push(player.highSchoolMatch.opponentTacticalTruth.code);}return new Set(contexts).size===3; })()`));
 
 const secondCausality = parse(`(() => {
-  const run=(level,sample)=>{__setupHighSchoolMatch("starter","內野手",level);__resolveAndAdvance("zone",sample);__resolveCurrent("secure",sample);__forceThirdMomentPath();__resumeSimulation();return {moment:player.highSchoolMatch.currentMomentId,coach:player.highSchoolMatch.coachInstruction,opponent:player.highSchoolMatch.opponentAdjustment,previous:player.highSchoolMatch.previousMomentOutcome};};
+  const run=(level,sample)=>{__setupHighSchoolMatch("starter","內野手",level);__resolveAndAdvance("zone",sample);__resolveCurrent("secure",sample);__forceThirdMomentPath();__advanceToFinalMoment120(sample);return {moment:player.highSchoolMatch.currentMomentId,coach:player.highSchoolMatch.coachInstruction,opponent:player.highSchoolMatch.opponentAdjustment,previous:player.highSchoolMatch.previousMomentOutcome};};
   return [run("high",0.99),run("low",0)];
 })()`);
 verify("10. Moment 2 結果改變後續教練回應，Regulation 可優先終場", secondCausality.every(item => ["hs_y1_match_moment_3", ""].includes(item.moment) && item.previous) && secondCausality[0].coach !== secondCausality[1].coach);
-verify("11. 前兩段失敗且比賽尚未結束時仍保留後續核心 Moment", evaluate(`(() => {__setupHighSchoolMatch("bench","內野手","low");__resolveAndAdvance("attack",0);__resolveCurrent("challenge",0);__forceThirdMomentPath();__resumeSimulation();const before=getHighSchoolYearOneMatchMomentChoices().length;__resolveAndAdvance("zone",0);return before===3&&player.highSchoolMatch.completed&&player.highSchoolMatch.completedMoments.length===3;})()`));
+verify("11. 前兩段失敗且比賽尚未結束時仍保留後續核心 Moment", evaluate(`(() => {__setupHighSchoolMatch("bench","內野手","low");__resolveAndAdvance("attack",0);__resolveCurrent("challenge",0);__forceThirdMomentPath();if(!__advanceToFinalMoment120(0))return false;const before=getHighSchoolYearOneMatchMomentChoices().length;const final=getHighSchoolYearOneMatchMomentChoices()[0];resolveHighSchoolYearOneMatch(final.matchDecision,final.matchMomentId,()=>0);return before===3&&player.highSchoolMatch.completedMoments.some(moment=>moment.id===highSchoolYearOneMomentIds[2]);})()`));
 
 verify("12. Wrong／stale／replayed Moment submission 完全零 mutation", evaluate(`(() => {
   __setupHighSchoolMatch(); const wrongBefore=JSON.stringify(player); const wrong=resolveHighSchoolYearOneMatch("attack","hs_y1_match_moment_3",()=>0.99); const wrongStable=wrong===false&&JSON.stringify(player)===wrongBefore;
@@ -154,14 +174,16 @@ verify("14. strong／mixed／failure outcome 可 deterministic 注入測試", ev
 verify("15. 能力影響 outcome tier，但所有能力層級都有三個選項", evaluate(`(() => {const tiers=[];for(const level of ["high","low"]){__setupHighSchoolMatch("starter","內野手",level);const count=getHighSchoolYearOneMatchMomentChoices().length;__resolveCurrent("zone",level==="high"?0.99:0);tiers.push([count,player.highSchoolMatch.completedMoments[0].tier]);}return tiers[0][0]===3&&tiers[1][0]===3&&tiers[0][1]!==tiers[1][1];})()`));
 
 const aggregate = parse(`(() => {
-  __setupHighSchoolMatch("starter","內野手","high");__resolveAndAdvance("attack",0.99);__resolveCurrent("challenge",0.99);__forceThirdMomentPath();__resumeSimulation();
+  __setupHighSchoolMatch("starter","內野手","high");__resolveAndAdvance("attack",0.99);__resolveCurrent("challenge",0.99);__forceThirdMomentPath();__advanceToFinalMoment120(.99);
   UNIVERSAL_BASEBALL_SKILL_KEYS.forEach(key=>player.baseballSkills[key]=1);SPECIALIST_BASEBALL_SKILL_KEYS.forEach(key=>player.baseballSkills[key]=0);Object.assign(player,{ballSense:0,observe:0,instinct:0,discipline:0});__resolveAndAdvance("zone",0);
-  return {last:player.highSchoolMatch.completedMoments.at(-1).tier,firstOutcome:player.highSchoolMatch.completedMoments[0].outcome,lastOutcome:player.highSchoolMatch.completedMoments.at(-1).outcome,summary:player.highSchoolMatch.performanceSummary,flag:player.flags.includes("hs_y1_match_strong")};
+  const match=player.highSchoolMatch;let safety=0;while(!match.completed&&safety++<900){if(isHighSchoolMatchDecisionVisible(match)){const choice=getHighSchoolYearOneMatchMomentChoices(match)[0];resolveHighSchoolYearOneMatch(choice.matchDecision,choice.matchMomentId,()=>0);}else if(isHighSchoolMatchPlaybackPhase(match))__resumeSimulation();else break;}
+  const finalMoment=match.completedMoments.find(moment=>moment.id===highSchoolYearOneMomentIds[2]);
+  return {last:finalMoment?.tier,firstOutcome:match.completedMoments[0].outcome,lastOutcome:finalMoment?.outcome,summary:match.performanceSummary,strong:match.playerContribution.strong,failure:match.playerContribution.failure};
 })()`);
-verify("16. Final summary 累積三個 Moment，不被最後一次 failure 覆蓋", aggregate.last === "failure" && aggregate.flag && aggregate.summary.includes("三個關鍵時刻") && aggregate.summary.includes(aggregate.firstOutcome) && aggregate.summary.includes(aggregate.lastOutcome));
+verify("16. Final summary 累積全部 Moment，不被最後一次 failure 覆蓋", aggregate.last === "failure" && aggregate.strong > 0 && aggregate.failure > 0 && aggregate.summary.includes("關鍵時刻") && aggregate.summary.includes(aggregate.firstOutcome) && aggregate.summary.includes(aggregate.lastOutcome));
 
 const separation = parse(`(() => {const match=__completeDirect("starter","high",0.99);return {strong:match.playerContribution.strong,result:match.teamResult,summary:match.performanceSummary};})()`);
-verify("17. 個人表現與球隊賽果分開記錄", separation.strong === 3 && separation.result.includes("球隊") && separation.summary.includes("三個關鍵時刻") && !separation.summary.includes(separation.result));
+verify("17. 個人表現與球隊賽果分開記錄", separation.strong > 0 && separation.result.includes("球隊") && separation.summary.includes("關鍵時刻") && !separation.summary.includes(separation.result));
 
 verify("18. Match completion 與 season／exposure／scout effects 僅結算一次", evaluate(`(() => {const match=__completeDirect("rotation","high",0.99);const snapshot=JSON.stringify({season:player.seasonPerformance,recent:player.recentPerformance,exposure:player.exposure,scout:player.scoutEvaluation,flags:player.flags});const repeated=resolveHighSchoolYearOneMatch("zone","hs_y1_match_moment_3",()=>0.99);return match.settled&&repeated===false&&snapshot===JSON.stringify({season:player.seasonPerformance,recent:player.recentPerformance,exposure:player.exposure,scout:player.scoutEvaluation,flags:player.flags});})()`));
 
@@ -174,7 +196,7 @@ verify("20. Moment 2 後 save／reload 保留第三段入口，且未提前完�
 verify("21. normalizeSave 深層恢復 completedMoments 與 accumulated contribution", evaluate(`(() => {const match=__completeDirect("bench");const saved=JSON.parse(JSON.stringify(player));const expected=saved.highSchoolMatch.playerContribution.strong;const restored=normalizeSave(saved);restored.highSchoolMatch.completedMoments[0].outcome="改寫";return saved.highSchoolMatch.completedMoments[0].outcome!=="改寫"&&expected>=1&&restored.highSchoolMatch.playerContribution.strong===expected;})()`));
 
 verify("22. Outcome 保留閱讀與 Continue，前兩段不推進 Career Spine", evaluate(`(() => {
-  __setupHighSchoolMatch("starter","內野手","high");let safety=0;while(!isHighSchoolMatchDecisionVisible(player.highSchoolMatch)&&safety++<300)advanceHighSchoolMatchPlaybackStep(player.highSchoolMatch);const id=getHighSchoolYearOneMomentId();const ok=chooseHighSchoolYearOneMatchMoment("attack",id,()=>0.99);const held=pendingYouthSeasonOutcome?.eventId==="high_school_showcase"&&player.highSchoolStep===5&&document.getElementById("choices").innerHTML.includes("繼續");continueYouthSeasonOutcome();while(!isHighSchoolMatchDecisionVisible(player.highSchoolMatch)&&safety++<600)advanceHighSchoolMatchPlaybackStep(player.highSchoolMatch);return ok&&held&&player.highSchoolStep===5&&getCurrentEventId()==="high_school_showcase"&&getHighSchoolYearOneMomentId()==="hs_y1_match_moment_2";
+  __setupHighSchoolMatch("starter","內野手","high");let safety=0;while(!isHighSchoolMatchDecisionVisible(player.highSchoolMatch)&&safety++<300)advanceHighSchoolMatchPlaybackStep(player.highSchoolMatch);const id=getHighSchoolYearOneMomentId();const ok=chooseHighSchoolYearOneMatchMoment("attack",id,()=>0.99);const held=pendingYouthSeasonOutcome?.eventId==="high_school_showcase"&&player.highSchoolStep===5&&document.getElementById("choices").innerHTML.includes("繼續");continueYouthSeasonOutcome();while(!isHighSchoolMatchDecisionVisible(player.highSchoolMatch)&&safety++<600)advanceHighSchoolMatchPlaybackStep(player.highSchoolMatch);return ok&&held&&player.highSchoolStep===5&&getCurrentEventId()==="high_school_showcase"&&player.highSchoolMatch.currentDomain==="defense";
 })()`));
 verify("23. Regulation 終場後只推進一次，Continue 才前往下一個高一事件", evaluate(`(() => {
   __setupHighSchoolMatch("starter","內野手","high");let safety=0;while(!player.highSchoolMatch.completed&&safety++<1200){if(isHighSchoolMatchDecisionVisible(player.highSchoolMatch)){const choice=getHighSchoolYearOneMatchMomentChoices()[0];chooseHighSchoolYearOneMatchMoment(choice.matchDecision,choice.matchMomentId,()=>0.99);if(!player.highSchoolMatch.completed)continueYouthSeasonOutcome();}else advanceHighSchoolMatchPlaybackStep(player.highSchoolMatch);}const held=player.highSchoolStep===6&&pendingYouthSeasonOutcome?.eventId==="high_school_showcase";continueYouthSeasonOutcome();return held&&getCurrentEventId()==="high_school_call_home";
@@ -187,7 +209,7 @@ verify("24. Regulation 合法結束的比賽仍可進入既有 Year One settleme
 const visible = evaluate(`(() => {__setupHighSchoolMatch("bench","外野手","low");const text=getHighSchoolYearOneMatchPresentation()+getHighSchoolYearOneMatchMomentChoices().map(item=>item.text).join("");return !["hs_y1_match_moment","matchDecision","playerContribution","outcomeTier"].some(raw=>text.includes(raw));})()`);
 verify("25. 玩家可見比賽內容沒有 raw identifier", visible);
 const finalContextProof = parse(`(() => {
-  __setupHighSchoolMatch("bench","內野手","low");__resolveAndAdvance("attack",0);__resolveCurrent("challenge",0);__forceThirdMomentPath();__resumeSimulation();
+  __setupHighSchoolMatch("bench","內野手","low");__resolveAndAdvance("attack",0);__resolveCurrent("challenge",0);__forceThirdMomentPath();__advanceToFinalMoment120(0);
   const context=getHighSchoolYearOneMatchPresentation()+getHighSchoolYearOneMatchMomentChoices().map(item=>item.text).join("｜");
   Object.assign(player.baseballSkills,{batting:4,baseballIQ:4});player.ballSense=2;__resolveAndAdvance("advance",0.5);
   const finalMoment=player.highSchoolMatch.completedMoments.at(-1);

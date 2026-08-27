@@ -72,6 +72,7 @@ function makeContext() {
       Object.keys(player.baseballSkills).forEach(key=>player.baseballSkills[key]=level);
       Object.assign(player,{ballSense:level,observe:level,fitness:level,instinct:level,discipline:level,responsibility:level});
       pendingHighSchoolMatchSimulationSeed=12211;
+      pendingHighSchoolMatchPositionOverride=position==="內野手"?"二壘手":"";
       const match=prepareHighSchoolYearOneMatch();
       match.scoreboardRevealHalfIndex=getHighSchoolHalfInningIndex(match.inning,match.half);
       return match;

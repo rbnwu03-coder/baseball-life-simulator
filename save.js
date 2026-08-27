@@ -286,6 +286,16 @@ function normalizeSave(saved) {
     ? saved.highSchoolMatch.decisionTension : "none";
   fresh.highSchoolMatch.decisionGate = saved.highSchoolMatch?.decisionGate
     ? JSON.parse(JSON.stringify(saved.highSchoolMatch.decisionGate)) : null;
+  fresh.highSchoolMatch.matchDecisionDensityState = typeof normalizeHighSchoolMatchDecisionDensityState === "function"
+    ? normalizeHighSchoolMatchDecisionDensityState(saved.highSchoolMatch?.matchDecisionDensityState)
+    : Object.assign({}, highSchoolDefaults.highSchoolMatch.matchDecisionDensityState, saved.highSchoolMatch?.matchDecisionDensityState || {}, {
+      recentSituationFamilies: Array.isArray(saved.highSchoolMatch?.matchDecisionDensityState?.recentSituationFamilies)
+        ? saved.highSchoolMatch.matchDecisionDensityState.recentSituationFamilies.slice(-6) : [],
+      recentRouteFamilies: Array.isArray(saved.highSchoolMatch?.matchDecisionDensityState?.recentRouteFamilies)
+        ? saved.highSchoolMatch.matchDecisionDensityState.recentRouteFamilies.slice(-6) : []
+    });
+  fresh.highSchoolMatch.pendingDefensiveResumeState = saved.highSchoolMatch?.pendingDefensiveResumeState
+    ? JSON.parse(JSON.stringify(saved.highSchoolMatch.pendingDefensiveResumeState)) : null;
   fresh.highSchoolMatch.lastDefensiveResolution = Object.assign(
     {},
     highSchoolDefaults.highSchoolMatch.lastDefensiveResolution,
