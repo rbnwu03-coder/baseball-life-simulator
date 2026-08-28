@@ -10,7 +10,7 @@ const files = [
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
   "competition-presentation.js", "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js",
-  "baseball-offense-prototype.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
+  "baseball-offense-prototype.js", "offensive-plate-approach.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
   "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
   "career-development-runtime-resolver.js", "career-development-progression.js", "career-age22-outcome-resolver.js",
   "career-save-admission.js", "story.js", "save.js", "script.js"
@@ -100,7 +100,7 @@ function makeContext() {
     function __complete1222() {
       const match=__setup1222("starter",10,true);
       let safety=0;
-      while(!match.completed&&safety<4){
+      while(!match.completed&&safety<20){
         const choice=getHighSchoolYearOneMatchMomentChoices(match)[0];
         if(choice) resolveHighSchoolYearOneMatch(choice.matchDecision,choice.matchMomentId,()=>0.99);
         advanceHighSchoolMatchSimulation(match);
@@ -140,7 +140,7 @@ verify("15. defense 的出局數與壘況改變會刷新 priority", evaluate(`((
 verify("15a. defense → offense 時不會殘留拿出局數的舊建議", evaluate(`(() => {const m=__setup1222("bench",10,true);m.currentDomain="defense";m.currentMomentId="hs_y1_match_moment_2";m.outs=2;m.runners=[null,null,null];m.currentAssignment="完成第三個出局";setHighSchoolCoachTacticalDirection(m);m.currentDomain="offense";m.currentMomentId="hs_y1_match_moment_3";m.outs=1;m.runners=["r1",null,null];m.currentAssignment="完成追分打席";const v=getHighSchoolMatchPresentation(m);return v.coachDirection.domain==="offense"&&!v.coachLine.includes("出局收乾淨")&&!v.coachDirection.priority.includes("第三個出局");})()`));
 verify("16. normalizeSave 保存 coach context signature", evaluate(`(() => {const m=__setup1222("bench",10,true);const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return restored.coachTacticalContextSignature===m.coachTacticalContextSignature&&restored.coachTacticalDirection.intent===m.coachTacticalDirection.intent;})()`));
 
-verify("17. 三種進攻選擇依真實壘況產生相符且不預告 outcome 的執行文字", evaluate(`(() => {const m=__setup1222("bench",10,true);m.currentDomain="offense";m.runners=[null,null,null];const empty=["attack","zone","advance"].map(d=>getHighSchoolDecisionExecutionText(m,d));m.runners=["r1",null,null];const withRunner=getHighSchoolDecisionExecutionText(m,"advance");return empty[0].includes("第一顆")&&empty[1].includes("好球帶")&&empty[2].includes("確實擊中")&&!empty[2].includes("跑者")&&withRunner.includes("跑者")&&[...empty,withRunner].every(t=>!t.includes("安打")&&!t.includes("三振"));})()`));
+verify("17. 三種進攻選擇依真實壘況產生相符且不預告 outcome 的執行文字", evaluate(`(() => {const m=__setup1222("bench",10,true);m.currentDomain="offense";m.runners=[null,null,null];const empty=["attack","zone","advance"].map(d=>getHighSchoolDecisionExecutionText(m,d));m.runners=["r1",null,null];const withRunner=getHighSchoolDecisionExecutionText(m,"advance");return empty[0].includes("第一顆")&&(empty[1].includes("攻擊區")||empty[1].includes("甜蜜點"))&&empty[2].includes("確實擊中")&&!empty[2].includes("跑者")&&withRunner.includes("跑者")&&[...empty,withRunner].every(t=>!t.includes("安打")&&!t.includes("三振"));})()`));
 verify("18. 守備選擇的執行文字會隨傳球目標改變", evaluate(`(() => {const m=__setup1222("bench",10,true);m.currentDomain="defense";const lead=getHighSchoolDecisionExecutionText(m,"lead");const home=getHighSchoolDecisionExecutionText(m,"home");return lead.includes("最前位跑者")&&home.includes("本壘")&&lead!==home;})()`));
 verify("19. 結果卡依序顯示你的選擇、你的執行、發生的結果", evaluate(`(() => {__setup1222("bench",10,true);renderYouthSeasonOutcome("high_school_showcase",{text:"等球進入好球帶",executionText:"你把擊球點留在好球帶。",memory:"你把球打向右前方。"},"");const h=document.getElementById("story").innerHTML;return h.indexOf("你的選擇")<h.indexOf("你的執行")&&h.indexOf("你的執行")<h.indexOf("發生的結果");})()`));
 verify("20. 玩家做出 match choice 後同一張卡立即完成 execution bridge，只有繼續操作", evaluate(`(() => {const m=__setup1222("bench",10,true);let safety=0;while(!isHighSchoolMatchDecisionVisible(m)&&safety++<400)advanceHighSchoolMatchPlaybackStep(m);const c=getHighSchoolYearOneMatchMomentChoices(m)[1];const ok=chooseHighSchoolYearOneMatchMoment(c.matchDecision,c.matchMomentId,()=>0.5);const h=document.getElementById("story").innerHTML;const buttons=document.getElementById("choices").innerHTML;return ok&&h.includes("choice-outcome-execution")&&h.includes("發生的結果")&&(buttons.match(/<button/g)||[]).length===1&&buttons.includes("繼續");})()`));

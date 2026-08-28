@@ -10,7 +10,7 @@ const files = [
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
   "competition-presentation.js", "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js",
-  "baseball-offense-prototype.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
+  "baseball-offense-prototype.js", "offensive-plate-approach.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
   "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
   "career-development-runtime-resolver.js", "career-development-progression.js", "career-age22-outcome-resolver.js",
   "career-save-admission.js", "story.js", "save.js", "script.js"
@@ -84,6 +84,12 @@ function makeContext() {
       const meaning=deriveHighSchoolOffensiveBaseballMeaning({before,after,paResult,runnerChanges,scoringRunnerIds});
       const text=formatHighSchoolOffensivePlayerFacingResult({approach:"compactContact"},paResult,meaning);
       return {meaning,text};
+    }
+    function __resolveGrounder241(match,choice) {
+      return resolveHighSchoolOffensiveDecision(match,choice,null,{plateAppearance:{
+        pitchSequence:[{pitchLocationClass:"chasePitch"}],
+        pitchOptions:[{recognitionRoll:0,decisionRoll:0,contactRoll:0,foulRoll:1,outcomeRoll:.4}]
+      }});
     }
     function __runUntilDecision241(limit=500) {
       let steps=0;
@@ -185,7 +191,7 @@ function verify(title, condition) {
   console.log(`✓ ${title}`);
 }
 
-verify("A1. 空壘 ground out 只說明打者出局與壘上無人", evaluate(`(() => {const m=__off241();const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.matchDecision==="advance");const r=resolveHighSchoolOffensiveDecision(m,c,"mixed");const text=r.outcome+r.consequence;return text.includes("打者出局")&&text.includes("壘上無人")&&!text.includes("跑者推進")&&!text.includes("原有跑者")&&!text.includes("預設文案")&&!text.includes("虛構");})()`));
+verify("A1. 空壘 ground out 只說明打者出局與壘上無人", evaluate(`(() => {const m=__off241();const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.matchDecision==="advance");const r=__resolveGrounder241(m,c);const text=r.outcome+r.consequence;return text.includes("打者出局")&&text.includes("壘上無人")&&!text.includes("跑者推進")&&!text.includes("原有跑者")&&!text.includes("預設文案")&&!text.includes("虛構");})()`));
 verify("A2. 真有一壘跑者未動時才生成留在原壘", evaluate(`(() => {const x=__meaning241({outs:0,runners:["r1",null,null],scores:{home:0,away:0}},{outs:1,runners:["r1",null,null],scores:{home:0,away:0}},"out",[{runnerId:"r1",from:1,to:1},{runnerId:"b",from:"batter",to:"out"}]);return x.meaning.runnersHeld.length===1&&x.text.consequence.includes("一壘跑者留在原壘");})()`));
 verify("A3. 二壘到三壘由 runnerChanges 生成明確推進", evaluate(`(() => {const x=__meaning241({outs:0,runners:[null,"r2",null],scores:{home:0,away:0}},{outs:1,runners:[null,null,"r2"],scores:{home:0,away:0}},"productiveOut",[{runnerId:"r2",from:2,to:3},{runnerId:"b",from:"batter",to:"out"}]);return x.meaning.runnersAdvanced.length===1&&x.text.consequence.includes("二壘跑者推進到三壘");})()`));
 verify("A4. 三壘回本壘由真實得分變化生成", evaluate(`(() => {const x=__meaning241({outs:0,runners:[null,null,"r3"],scores:{home:0,away:0}},{outs:1,runners:[null,null,null],scores:{home:1,away:0}},"productiveOut",[{runnerId:"r3",from:3,to:"home"},{runnerId:"b",from:"batter",to:"out"}],["r3"]);return x.meaning.runnersScored.length===1&&x.meaning.runsScored===1&&x.text.consequence.includes("三壘跑者回到本壘得分");})()`));

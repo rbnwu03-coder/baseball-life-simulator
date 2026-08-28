@@ -10,7 +10,7 @@ const files = [
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
   "competition-presentation.js", "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js",
-  "baseball-offense-prototype.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
+  "baseball-offense-prototype.js", "offensive-plate-approach.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
   "match-experience-development.js",
   "match-development-settlement-presentation.js",
   "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
@@ -126,7 +126,7 @@ function makeContext() {
       MatchExperienceDevelopment.setEnabled(options.bridge !== false);
       let match = pathMode === "narrative" ? __setupNarrative244(seed, options.instrumentation !== false) : __setupDirect244(seed, options.instrumentation !== false);
       if (playbackMode === "direct") { stopHighSchoolMatchPlayback("direct-audit-replay"); __clearTimers244(); }
-      let steps = 0; let decisions = 0; let reloaded = false; let orphan = 0;
+      let steps = 0; let decisions = 0; let reloaded = false; let orphan = 0; const choiceSequence = [];
       while (!match.completed && steps++ < 5000) {
         if (hasBlockingHighSchoolMatchOutcome()) {
           continueYouthSeasonOutcome();
@@ -135,6 +135,7 @@ function makeContext() {
           showCurrentEvent();
           const choice = __pickChoice244(match, policy, decisions);
           if (!choice || !chooseHighSchoolYearOneMatchMoment(choice.matchDecision, choice.matchMomentId, () => sample)) { orphan += 1; break; }
+          choiceSequence.push(choice.matchDecision);
           decisions += 1;
           if (playbackMode === "direct") { stopHighSchoolMatchPlayback("direct-after-choice"); __clearTimers244(); }
         } else if (playbackMode === "timer") {
@@ -177,7 +178,7 @@ function makeContext() {
         contextCount: match.matchExperience.selectedContexts?.length || 0,
         settlementId: match.matchExperience.matchExperienceSettlementId || ""
       } : null;
-      return { seed, pathMode, playbackMode, policy, sample, steps, decisions, reloaded, orphan, trace, truth, matchExperience };
+      return { seed, pathMode, playbackMode, policy, sample, steps, decisions, choiceSequence, reloaded, orphan, trace, truth, matchExperience };
     }
 
     function __compareRuns244(left, right) {
@@ -280,7 +281,7 @@ verify("S1. Choice Policy A controlled run 200/200 完成", policyA.matches === 
 verify("S2. Choice Policy B controlled run 200/200 完成", policyB.matches === 200);
 verify("S3. Execution samples 0.2／0.5／0.82 各 200 場完成", [sample02, sample05, sample082].every(item => item.matches === 200));
 
-const recordedChoices = humanSeed.trace.lifecycle.filter(item => item.stage === "choiceReceived").map(item => item.decision);
+const recordedChoices = humanSeed.choiceSequence;
 const recordedReplay = run({ seed: 22424201, playbackMode: "direct", policy: recordedChoices, sample: 0.82 });
 verify("S4. Recorded Human choices 可直接 replay 並保持 canonical parity", parse(`compareHighSchoolMatchOpportunityTraces(${JSON.stringify(humanSeed.trace)},${JSON.stringify(recordedReplay.trace)})`).equal);
 

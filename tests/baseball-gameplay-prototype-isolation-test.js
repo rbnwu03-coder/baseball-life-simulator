@@ -13,7 +13,7 @@ function verify(title, condition) {
 
 const page = read("gameplay-prototype.html");
 const productionPage = read("index.html");
-const coreFiles = ["baseball-gameplay-prototype-utils.js", "baseball-offense-prototype.js", "baseball-defense-prototype.js"];
+const coreFiles = ["baseball-gameplay-prototype-utils.js", "baseball-offense-prototype.js", "offensive-plate-approach.js", "baseball-defense-prototype.js"];
 const coreSource = coreFiles.map(read).join("\n");
 
 verify("獨立 gameplay-prototype.html 已建立", fs.existsSync(path.join(root, "gameplay-prototype.html")));

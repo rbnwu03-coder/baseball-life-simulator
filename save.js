@@ -194,10 +194,14 @@ function normalizeSave(saved) {
     Math.max(0, Number(saved.highSchoolMatch?.presentedEventCursor) || 0)
   );
   const readyHighSchoolMoment = ["moment_1_ready", "moment_2_ready", "moment_3_ready"].includes(fresh.highSchoolMatch.simulationPhase);
+  const readyHighSchoolAgency = fresh.highSchoolMatch.simulationPhase === "offensive_agency_ready"
+    && fresh.highSchoolMatch.offensivePlayerAgencyState?.status === "pending";
   const hasReadyHighSchoolMomentEvent = fresh.highSchoolMatch.simulationLog.some(item =>
-    item.type === "meaningfulMomentReached" && (!item.momentId || item.momentId === fresh.highSchoolMatch.currentMomentId)
+    (readyHighSchoolAgency ? item.type === "playerAgencyOpportunityReached"
+      && item.agencyIdentity === fresh.highSchoolMatch.offensivePlayerAgencyState?.agencyIdentity
+      : item.type === "meaningfulMomentReached" && (!item.momentId || item.momentId === fresh.highSchoolMatch.currentMomentId))
   );
-  if (readyHighSchoolMoment && !hasReadyHighSchoolMomentEvent) {
+  if ((readyHighSchoolMoment || readyHighSchoolAgency) && !hasReadyHighSchoolMomentEvent) {
     const scores = Object.freeze({
       home: Number(fresh.highSchoolMatch.scores?.home) || 0,
       away: Number(fresh.highSchoolMatch.scores?.away) || 0
@@ -205,7 +209,9 @@ function normalizeSave(saved) {
     const runners = Object.freeze((Array.isArray(fresh.highSchoolMatch.runners) ? fresh.highSchoolMatch.runners : []).slice(0, 3));
     fresh.highSchoolMatch.simulationLog.push({
       sequence: fresh.highSchoolMatch.simulationLog.length,
-      type: "meaningfulMomentReached",
+      type: readyHighSchoolAgency ? "playerAgencyOpportunityReached" : "meaningfulMomentReached",
+      agencyIdentity: readyHighSchoolAgency ? fresh.highSchoolMatch.offensivePlayerAgencyState.agencyIdentity : undefined,
+      agencyReason: readyHighSchoolAgency ? fresh.highSchoolMatch.offensivePlayerAgencyState.agencyReason : undefined,
       momentId: fresh.highSchoolMatch.currentMomentId || "",
       domain: fresh.highSchoolMatch.currentDomain || "",
       inning: Math.max(1, Number(fresh.highSchoolMatch.inning) || 1),
@@ -296,6 +302,14 @@ function normalizeSave(saved) {
     });
   fresh.highSchoolMatch.pendingDefensiveResumeState = saved.highSchoolMatch?.pendingDefensiveResumeState
     ? JSON.parse(JSON.stringify(saved.highSchoolMatch.pendingDefensiveResumeState)) : null;
+  fresh.highSchoolMatch.offensivePlateAppearanceState = typeof OffensivePlateApproach !== "undefined"
+    ? OffensivePlateApproach.normalizePlateAppearanceState(saved.highSchoolMatch?.offensivePlateAppearanceState)
+    : saved.highSchoolMatch?.offensivePlateAppearanceState
+      ? JSON.parse(JSON.stringify(saved.highSchoolMatch.offensivePlateAppearanceState)) : null;
+  fresh.highSchoolMatch.pendingOffensiveOpportunity = saved.highSchoolMatch?.pendingOffensiveOpportunity
+    ? JSON.parse(JSON.stringify(saved.highSchoolMatch.pendingOffensiveOpportunity)) : null;
+  fresh.highSchoolMatch.offensivePlayerAgencyState = saved.highSchoolMatch?.offensivePlayerAgencyState
+    ? JSON.parse(JSON.stringify(saved.highSchoolMatch.offensivePlayerAgencyState)) : null;
   fresh.highSchoolMatch.lastDefensiveResolution = Object.assign(
     {},
     highSchoolDefaults.highSchoolMatch.lastDefensiveResolution,

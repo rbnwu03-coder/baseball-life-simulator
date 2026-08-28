@@ -1814,8 +1814,14 @@ function createInitialPlayer(name = "") {
         version: "match-decision-density-v1", defensiveMeaningfulDecisionCount: 0, lastDecisionPlayIndex: -1,
         lastNoveltyKey: "", recentSituationFamilies: [], recentRouteFamilies: [], repeatedOpportunityCount: 0,
         suppressedOpportunityCount: 0, currentConsecutiveMeaningfulDecisions: 0, maxConsecutiveMeaningfulDecisions: 0,
-        lastDecisionInning: 0, lastDecisionHalf: "", lastSelectedRoute: "", lastFinalRoute: ""
+        lastDecisionInning: 0, lastDecisionHalf: "", lastSelectedRoute: "", lastFinalRoute: "",
+        offensiveDecisionCount: 0, lastOffensiveDecisionPA: 0, lastOffensiveDecisionPlayIndex: -1,
+        lastOffensiveNoveltyKey: "", recentOffensiveSituationFamilies: [], offensiveSuppressedCount: 0,
+        offensiveRepeatSuppressedCount: 0, lastOffensiveDecisionInning: 0, lastOffensiveDecisionHalf: ""
       },
+      offensivePlateAppearanceState: null,
+      pendingOffensiveOpportunity: null,
+      offensivePlayerAgencyState: null,
       pendingDefensiveResumeState: null,
       lastDefensiveResolution: {},
       pendingHalfInningTermination: null,

@@ -10,7 +10,7 @@ const files = [
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
   "competition-presentation.js", "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js",
-  "baseball-offense-prototype.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
+  "baseball-offense-prototype.js", "offensive-plate-approach.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
   "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
   "career-development-runtime-resolver.js", "career-development-progression.js", "career-age22-outcome-resolver.js",
   "career-save-admission.js", "story.js", "save.js", "script.js"
@@ -73,6 +73,12 @@ function makeContext() {
       setHighSchoolCoachTacticalDirection(match);
       return match;
     }
+    function __resolveGrounder223(match,choice) {
+      return resolveHighSchoolOffensiveDecision(match,choice,null,{plateAppearance:{
+        pitchSequence:[{pitchLocationClass:"chasePitch"}],
+        pitchOptions:[{recognitionRoll:0,decisionRoll:0,contactRoll:0,foulRoll:1,outcomeRoll:.4}]
+      }});
+    }
     function __def223({position="一壘手",runners=["away-sim-4",null,null],outs=0,level=8,batterSpeed=6}={}) {
       const match=__base223(position);
       Object.assign(match,{
@@ -111,16 +117,16 @@ verify("5. Objective 與 Approach 是分離欄位", evaluate(`(() => getHighScho
 
 verify("6. 手動注入空壘 advanceRunner 會被 resolver 拒絕", evaluate(`(() => {const m=__off223();const base=buildOffensiveDecisionChoices(m)[2];const illegal={...base,objective:"advanceRunner",requirements:[]};const before=JSON.stringify({outs:m.outs,runners:m.runners,scores:m.scores,moments:m.completedMoments});return resolveHighSchoolOffensiveDecision(m,illegal,"mixed")===false&&before===JSON.stringify({outs:m.outs,runners:m.runners,scores:m.scores,moments:m.completedMoments});})()`));
 verify("7. renderer 會過濾 requirements 已失效的 stale choice", evaluate(`(() => {const m=__off223({runners:["runner",null,null]});const c=buildOffensiveDecisionChoices(m).find(x=>x.objective==="advanceRunner");m.runners=[null,null,null];return !isOffensiveDecisionChoiceLegal(c,m)&&!getHighSchoolYearOneMatchMomentChoices(m).some(x=>x.objective==="advanceRunner");})()`));
-verify("8. 空壘一出局 contact ground out 後為兩出局空壘", evaluate(`(() => {const m=__off223();const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.matchDecision==="advance");resolveHighSchoolOffensiveDecision(m,c,"mixed");return m.outs===2&&m.runners.every(x=>!x)&&m.lastOffensiveResolution.resultCode==="productiveOut";})()`));
-verify("9. 空壘 ground out 意義不宣稱完成推進", evaluate(`(() => {const m=__off223();const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.matchDecision==="advance");const r=resolveHighSchoolOffensiveDecision(m,c,"mixed");return r.outcome.includes("打者出局")&&!r.outcome.includes("完成推進")&&!r.consequence.includes("實際向前推進");})()`));
-verify("10. 二壘有人同一 ground out 真的把跑者送上三壘", evaluate(`(() => {const m=__off223({runners:[null,"runner-2",null]});const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.matchDecision==="advance");const r=resolveHighSchoolOffensiveDecision(m,c,"mixed");return m.runners[2]==="runner-2"&&r.runnerChanges.some(x=>x.runnerId==="runner-2"&&x.from===2&&x.to===3)&&r.consequence.includes("二壘跑者推進到三壘");})()`));
-verify("11. 棒球意義在 PA 與 runner rules 之後由 before/after 推導", evaluate(`(() => {const m=__off223({runners:[null,"runner-2",null]});const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.matchDecision==="advance");resolveHighSchoolOffensiveDecision(m,c,"mixed");const e=m.simulationLog.findLast(x=>x.type==="plateAppearance"&&x.meaningful);return e.before.runners[1]==="runner-2"&&e.after.runners[2]==="runner-2"&&e.result==="productiveOut";})()`));
+verify("8. 空壘一出局 contact ground out 後為兩出局空壘", evaluate(`(() => {const m=__off223();const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.matchDecision==="advance");__resolveGrounder223(m,c);return m.outs===2&&m.runners.every(x=>!x)&&m.lastOffensiveResolution.resultCode==="out";})()`));
+verify("9. 空壘 ground out 意義不宣稱完成推進", evaluate(`(() => {const m=__off223();const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.matchDecision==="advance");const r=__resolveGrounder223(m,c);return (r.outcome+r.consequence).includes("打者出局")&&!r.outcome.includes("完成推進")&&!r.consequence.includes("實際向前推進");})()`));
+verify("10. 二壘有人同一 ground out 真的把跑者送上三壘", evaluate(`(() => {const m=__off223({runners:[null,"runner-2",null]});const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.matchDecision==="advance");const r=__resolveGrounder223(m,c);return m.runners[2]==="runner-2"&&r.runnerChanges.some(x=>x.runnerId==="runner-2"&&x.from===2&&x.to===3)&&r.consequence.includes("二壘跑者推進到三壘");})()`));
+verify("11. 棒球意義在 PA 與 runner rules 之後由 before/after 推導", evaluate(`(() => {const m=__off223({runners:[null,"runner-2",null]});const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.matchDecision==="advance");__resolveGrounder223(m,c);const e=m.simulationLog.findLast(x=>x.type==="plateAppearance"&&x.meaningful);return e.before.runners[1]==="runner-2"&&e.after.runners[2]==="runner-2"&&e.result==="productiveOut";})()`));
 
 verify("12. 一壘有人一出局可生成 advanceRunner", evaluate(`(() => getHighSchoolYearOneMatchMomentChoices(__off223({runners:["runner-1",null,null]})).some(c=>c.objective==="advanceRunner"&&c.requirements.includes("runnerOnFirst")))()`));
 verify("13. 三壘有人一出局可生成 scoreRunner", evaluate(`(() => getHighSchoolYearOneMatchMomentChoices(__off223({runners:[null,null,"runner-3"]})).some(c=>c.objective==="scoreRunner"&&c.requirements.includes("runnerOnThird")))()`));
-verify("14. 三壘 runner 只有實際得分後 objective 才成功", evaluate(`(() => {const m=__off223({runners:[null,null,"runner-3"]});const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.objective==="scoreRunner");const r=resolveHighSchoolOffensiveDecision(m,c,"mixed");return m.scores.home===3&&r.objectiveSucceeded&&r.scoringRunnerIds.includes("runner-3");})()`));
+verify("14. 三壘 runner 只有實際得分後 objective 才成功", evaluate(`(() => {const m=__off223({runners:[null,null,"runner-3"]});const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.objective==="scoreRunner");const r=__resolveGrounder223(m,c);return m.scores.home===3&&r.objectiveSucceeded&&r.scoringRunnerIds.includes("runner-3");})()`));
 verify("15. 兩出局不產生 sacrifice objective 或 route", evaluate(`(() => getHighSchoolYearOneMatchMomentChoices(__off223({runners:[null,null,"runner-3"],outs:2})).every(c=>![c.objective,c.route].some(v=>["sacrificeForRun","sacrificeAdvance","sacrificeFly"].includes(v))))()`));
-verify("16. 三壘有人兩出局不以出局換一分", evaluate(`(() => {const m=__off223({runners:[null,null,"runner-3"],outs:2});const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.matchDecision==="advance");const r=resolveHighSchoolOffensiveDecision(m,c,"mixed");return m.outs===3&&m.scores.home===2&&!r.objectiveSucceeded&&!r.consequence.includes("送回 1 名");})()`));
+verify("16. 三壘有人兩出局不以出局換一分", evaluate(`(() => {const m=__off223({runners:[null,null,"runner-3"],outs:2});const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.matchDecision==="advance");const r=__resolveGrounder223(m,c);return m.outs===3&&m.scores.home===2&&!r.objectiveSucceeded&&!r.consequence.includes("送回 1 名");})()`));
 verify("17. 滿壘可合法生成 scoreRunner context", evaluate(`(() => getHighSchoolYearOneMatchMomentChoices(__off223({runners:["r1","r2","r3"]})).some(c=>c.objective==="scoreRunner"))()`));
 verify("18. 大比分落後且空壘的 Coach 不提推進、跑者或犧牲", evaluate(`(() => {const m=__off223({inning:7,scores:{home:1,away:7}});setHighSchoolCoachTacticalDirection(m);return m.coachTacticalDirection.intent==="controlledAttack"&&!/[推進跑者犧牲]/.test(m.coachInstruction);})()`));
 
@@ -143,7 +149,7 @@ verify("32. 普通事件使用 flow timing", evaluate(`(() => {const m=__off223(
 verify("33. attention 事件使用 attention timing", evaluate(`(() => {const m=__off223();m.simulationLog.push({type:"playerRoutinePlay",presentationImportance:"attention"});m.presentedEventCursor=m.simulationLog.length;return getHighSchoolMatchPlaybackDelay(m)===MATCH_ATTENTION_BEAT_MS;})()`));
 verify("34. 換邊等重大轉場不回到三秒", evaluate(`(() => {const m=__off223();m.simulationLog.push({type:"sideChange",presentationImportance:"attention"});m.presentedEventCursor=m.simulationLog.length;return getHighSchoolMatchPlaybackDelay(m)===MATCH_MAJOR_TRANSITION_MS&&MATCH_MAJOR_TRANSITION_MS<3000;})()`));
 verify("35. Meaningful Decision 維持完全 pause", evaluate(`(() => {const m=__off223();m.simulationLog.push({type:"meaningfulMomentReached",presentationImportance:"attention",momentId:m.currentMomentId});m.presentedEventCursor=m.simulationLog.length;return isHighSchoolMatchDecisionVisible(m)&&scheduleHighSchoolMatchPlayback(m)===false;})()`));
-verify("36. offensive choice metadata 與 before/after 可通過 save normalization", evaluate(`(() => {const m=__off223({runners:["runner-1",null,null]});const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.objective==="advanceRunner");resolveHighSchoolOffensiveDecision(m,c,"mixed");player.highSchoolMatch=m;const r=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return r.completedMoments[0].objective==="advanceRunner"&&r.completedMoments[0].approach&&r.lastOffensiveResolution.before.runners[0]==="runner-1"&&r.lastOffensiveResolution.after.runners[1]==="runner-1";})()`));
+verify("36. offensive choice metadata 與 before/after 可通過 save normalization", evaluate(`(() => {const m=__off223({runners:["runner-1",null,null]});const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.objective==="advanceRunner");__resolveGrounder223(m,c);player.highSchoolMatch=m;const r=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return r.completedMoments[0].objective==="advanceRunner"&&r.completedMoments[0].approach&&r.lastOffensiveResolution.before.runners[0]==="runner-1"&&r.lastOffensiveResolution.after.runners[1]==="runner-1";})()`));
 verify("37. 玩家可見 Choice 不暴露 internal identifiers", evaluate(`(() => {const m=__off223({runners:["runner-1",null,null]});renderHighSchoolYearOneMatch({title:"秋季交流賽"});const h=document.getElementById("choices").innerHTML;return !["advanceRunner","compactContact","3-6-3","riskProfile","runnerOnFirst"].some(raw=>h.includes(raw));})()`));
 
 console.log(`\nBaseball Match Foundation 2.2.3：${passed}/${passed} 通過`);

@@ -37,7 +37,7 @@ const files = [
   "competition-presentation.js",
   "baseball-gameplay-prototype-utils.js",
   "baseball-defense-prototype.js",
-  "baseball-offense-prototype.js",
+  "baseball-offense-prototype.js", "offensive-plate-approach.js",
   "baseball-gameplay-integration.js",
   "career-spine-contract.js",
   "career-transition-runtime-resolver.js",

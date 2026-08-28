@@ -2432,7 +2432,7 @@ function renderHighSchoolOpponentInformation(model) {
 
 function isHighSchoolMatchPlaybackPhase(match = player.highSchoolMatch) {
   if (!match || match.completed) return false;
-  if (["moment_1_ready", "moment_2_ready", "moment_3_ready"].includes(match.simulationPhase)) {
+  if (["moment_1_ready", "moment_2_ready", "moment_3_ready", "offensive_agency_ready"].includes(match.simulationPhase)) {
     return !isHighSchoolMatchDecisionVisible(match);
   }
   const resolvedPhase = ["moment_1_resolved", "moment_2_resolved", "moment_3_resolved"].includes(match.simulationPhase);
@@ -2468,7 +2468,7 @@ function getHighSchoolYearOneMatchPresentation() {
     ? `${match.role === "starter" ? "你在先發計畫裡迎來前段打席。" : match.role === "rotation" ? "教練在中段叫到你的名字；代打之後你會留在場上守備。" : "教練叫你拿起球棒：代打不是觀察，而是這場比賽的第一個正式任務。"}`
     : match.momentIndex === 1
       ? getHighSchoolDefensiveSituationText(match)
-      : `${formatHighSchoolMatchRunners(match.runners)}；這個打席代表${match.scores.home - match.scores.away === -1 ? "追平機會" : match.scores.home < match.scores.away ? "縮小差距的機會" : match.scores.home === match.scores.away ? "超前機會" : "增加保險分的機會"}。\n投手目前的處理：${match.opponentAdjustment}`;
+      : `${formatHighSchoolMatchRunners(match.runners)}；這個打席代表${getHighSchoolOffensiveObjectiveContext(match)}。\n投手目前的處理：${match.opponentAdjustment}`;
   const previous = match.previousMomentOutcome ? `\n前一個結果：${match.previousMomentOutcome}` : "";
   const currentPosition = match.playerLineupStatus === "bench"
     ? "板凳待命"
@@ -2479,7 +2479,8 @@ function getHighSchoolYearOneMatchPresentation() {
 function renderHighSchoolYearOneMatch(event, prepared = {}) {
   const match = prepareHighSchoolYearOneMatch();
   const decisionActive = isHighSchoolMatchDecisionVisible(match);
-  if (decisionActive) markHighSchoolMatchDecisionLifecycle("presented", match);
+  const agencyActive = decisionActive && match.simulationPhase === "offensive_agency_ready";
+  if (decisionActive && !agencyActive) markHighSchoolMatchDecisionLifecycle("presented", match);
   const playbackActive = !decisionActive;
   const uiMode = decisionActive ? "match-decision-mode" : "match-flow-mode";
   const choices = decisionActive ? getHighSchoolYearOneMatchMomentChoices(match) : [];
@@ -2487,21 +2488,25 @@ function renderHighSchoolYearOneMatch(event, prepared = {}) {
     const readiness = choice.readiness?.level
       ? `<span class="match-choice-readiness"><strong>執行把握：${escapeHtml({ high: "高", medium: "中", low: "低" }[choice.readiness.level] || "中")}</strong>${choice.readiness.reasons?.[0] ? `<small>${escapeHtml(choice.readiness.reasons[0])}</small>` : ""}</span>`
       : "";
-    return `<button type="button" onclick="chooseHighSchoolYearOneMatchMoment('${choice.matchDecision}', '${choice.matchMomentId}')"><span>${escapeHtml(choice.text)}</span>${readiness}</button>`;
+    const handler = choice.agencyDecision
+      ? `chooseHighSchoolOffensiveAgency('${choice.agencyDecision}', '${choice.matchMomentId}')`
+      : `chooseHighSchoolYearOneMatchMoment('${choice.matchDecision}', '${choice.matchMomentId}')`;
+    return `<button type="button" onclick="${handler}"><span>${escapeHtml(choice.text)}</span>${readiness}</button>`;
   }).join("");
   const text = prepared.text || getHighSchoolYearOneMatchPresentation();
   const sceneContextHtml = prepared.sceneContextHtml || renderSceneContext(getSceneContext("high_school_showcase", event));
   const bridgeInHtml = prepared.bridgeInHtml || "";
   const bridgeOutHtml = prepared.bridgeOutHtml || "";
   const model = getHighSchoolMatchPresentation(match);
-  const kicker = playbackActive ? "同一場交流賽・比賽自動進行中" : `同一場交流賽・第 ${match.completedMoments.length + 1} 個關鍵時刻（最多 3 次）`;
+  const kicker = playbackActive ? "同一場交流賽・比賽自動進行中"
+    : agencyActive ? "同一場交流賽・打席參與方式" : `同一場交流賽・第 ${match.completedMoments.length + 1} 個關鍵時刻`;
   const decisionContext = decisionActive
-    ? `${renderHighSchoolOpponentInformation(model)}${renderHighSchoolCoachDirection(model)}`
+    ? `${agencyActive ? renderHighSchoolOffensiveAgencyContext(match) : match.currentDomain === "offense" ? renderHighSchoolPlateAppearanceContext(match) : ""}${agencyActive ? "" : `${renderHighSchoolOpponentInformation(model)}${renderHighSchoolCoachDirection(model)}`}`
     : "";
   document.getElementById("story").innerHTML = `<article class="event-card high-school-match-card match-mode ${uiMode}" aria-labelledby="currentEventTitle">${sceneContextHtml}${renderHighSchoolYearOneScore("header", model)}${bridgeInHtml}<div class="match-mode-lower-grid"><div class="match-mode-context-column">${renderHighSchoolLiveSituation(model)}${renderHighSchoolLiveFeed(model)}${bridgeOutHtml ? `<div class="match-mode-recall">${bridgeOutHtml}</div>` : ""}</div><div class="match-mode-decision-column"><div class="event-kicker">${kicker}</div><h2 id="currentEventTitle" tabindex="-1">${escapeHtml(event.title)}</h2>${renderHighSchoolCurrentBatter(model)}<section class="match-current-assignment" aria-labelledby="matchAssignmentTitle"><small id="matchAssignmentTitle">${playbackActive ? "目前賽況" : "目前任務"}</small><strong>${escapeHtml(model.currentSituation.assignment)}</strong></section><section class="match-recent-context" aria-label="最近賽況"><small>最近賽況</small><div class="event-text">${escapeHtml(text)}</div></section>${decisionContext}</div></div></article>`;
   document.getElementById("choices").innerHTML = playbackActive
     ? `<div class="match-playback-status" role="status"><strong>比賽持續進行</strong><span>下一個出局、得分、跑壘或半局節點會自動更新；遇到你的決策時才會停下來。</span></div>`
-    : `<section class="match-player-decisions" aria-labelledby="matchDecisionTitle"><small id="matchDecisionTitle">你的決定</small><div class="match-decision-buttons">${buttons}</div></section>`;
+    : `<section class="match-player-decisions" aria-labelledby="matchDecisionTitle"><small id="matchDecisionTitle">${agencyActive ? "這個打席要怎麼進行？" : "你的決定"}</small><div class="match-decision-buttons">${buttons}</div></section>`;
   document.getElementById("choices").innerHTML += renderHighSchoolMatchOpportunityDebugControls();
 }
 
@@ -2587,7 +2592,16 @@ function createHighSchoolMatchDecisionDensityState() {
     lastDecisionInning: 0,
     lastDecisionHalf: "",
     lastSelectedRoute: "",
-    lastFinalRoute: ""
+    lastFinalRoute: "",
+    offensiveDecisionCount: 0,
+    lastOffensiveDecisionPA: 0,
+    lastOffensiveDecisionPlayIndex: -1,
+    lastOffensiveNoveltyKey: "",
+    recentOffensiveSituationFamilies: [],
+    offensiveSuppressedCount: 0,
+    offensiveRepeatSuppressedCount: 0,
+    lastOffensiveDecisionInning: 0,
+    lastOffensiveDecisionHalf: ""
   };
 }
 
@@ -2607,6 +2621,16 @@ function normalizeHighSchoolMatchDecisionDensityState(saved = {}) {
   state.lastDecisionHalf = typeof saved?.lastDecisionHalf === "string" ? saved.lastDecisionHalf : "";
   state.lastSelectedRoute = typeof saved?.lastSelectedRoute === "string" ? saved.lastSelectedRoute : "";
   state.lastFinalRoute = typeof saved?.lastFinalRoute === "string" ? saved.lastFinalRoute : "";
+  state.offensiveDecisionCount = Math.max(0, Math.floor(Number(saved?.offensiveDecisionCount) || 0));
+  state.lastOffensiveDecisionPA = Math.max(0, Math.floor(Number(saved?.lastOffensiveDecisionPA) || 0));
+  state.lastOffensiveDecisionPlayIndex = Number.isFinite(Number(saved?.lastOffensiveDecisionPlayIndex)) ? Math.floor(Number(saved.lastOffensiveDecisionPlayIndex)) : -1;
+  state.lastOffensiveNoveltyKey = typeof saved?.lastOffensiveNoveltyKey === "string" ? saved.lastOffensiveNoveltyKey : "";
+  state.recentOffensiveSituationFamilies = Array.isArray(saved?.recentOffensiveSituationFamilies)
+    ? saved.recentOffensiveSituationFamilies.filter(value => typeof value === "string").slice(-6) : [];
+  state.offensiveSuppressedCount = Math.max(0, Math.floor(Number(saved?.offensiveSuppressedCount) || 0));
+  state.offensiveRepeatSuppressedCount = Math.max(0, Math.floor(Number(saved?.offensiveRepeatSuppressedCount) || 0));
+  state.lastOffensiveDecisionInning = Math.max(0, Math.floor(Number(saved?.lastOffensiveDecisionInning) || 0));
+  state.lastOffensiveDecisionHalf = typeof saved?.lastOffensiveDecisionHalf === "string" ? saved.lastOffensiveDecisionHalf : "";
   return state;
 }
 
@@ -2947,9 +2971,10 @@ function finalizeHighSchoolMatchDefensiveOpportunity(match, opportunity, event =
   return opportunity;
 }
 
-function recordHighSchoolMatchOffensiveOpportunity(match, kind, choices = []) {
+function recordHighSchoolMatchOffensiveOpportunity(match, kind, choices = [], classification = null, density = null) {
   const trace = match?.opportunityDebugTrace;
   if (!trace) return null;
+  const decisionCreated = ["scripted", "emergent", "classified"].includes(kind);
   const opportunity = {
     opportunityId: `${match.id}:offense:${trace.opportunities.filter(item => item.domain === "offense").length + 1}`,
     decisionId: "",
@@ -2959,16 +2984,21 @@ function recordHighSchoolMatchOffensiveOpportunity(match, kind, choices = []) {
     outs: match.outs,
     bases: match.runners.slice(0, 3),
     score: { ...match.scores },
-    playerPANumber: (match.simulationLog || []).filter(event => event.type === "plateAppearance" && event.batterId === "player").length + 1,
+    playerPANumber: classification?.playerPANumber || getHighSchoolOffensivePlayerPANumber(match),
     firstOffensiveMomentUsed: getHighSchoolMatchOpportunityOneShotState(match).firstOffensiveMomentUsed,
     availableObjectives: [...new Set(choices.map(choice => choice.objective).filter(Boolean))],
     availableApproaches: [...new Set(choices.map(choice => choice.approach).filter(Boolean))],
     scriptedDecisionCandidate: kind === "scripted",
     emergentDecisionCandidate: kind === "emergent",
-    decisionCreated: kind !== "routine",
+    agencyOpportunityCandidate: kind === "agency",
+    decisionCreated,
     decisionPresented: false,
     decisionResolved: false,
-    rejectionReason: kind === "routine" ? "no-offensive-moment-trigger" : "",
+    leverageClass: classification?.leverageClass || (kind === "scripted" ? "scripted" : "routine"),
+    opportunityClassification: classification ? cloneHighSchoolMatchOpportunityDebugValue(classification) : null,
+    density: density ? cloneHighSchoolMatchOpportunityDebugValue(density) : null,
+    noveltyKey: classification?.noveltyKey || "",
+    rejectionReason: kind === "routine" ? (density?.suppressionReason || "routine-opportunity") : "",
     eventId: getCurrentEventId(),
     simulationLogIndex: match.simulationLog?.length || 0
   };
@@ -3026,6 +3056,16 @@ function getHighSchoolMatchOpportunitySummary(traceOrMatch = player.highSchoolMa
     playerPACount: offensive.length,
     scriptedOffensiveDecisions: offensive.filter(item => item.scriptedDecisionCandidate && item.decisionCreated).length,
     emergentOffensiveDecisions: offensive.filter(item => item.emergentDecisionCandidate && item.decisionCreated).length,
+    offensiveDecisionCount: offensive.filter(item => item.decisionCreated).length,
+    offensiveRoutineSuppressed: offensive.filter(item => !item.decisionCreated && item.rejectionReason === "routine-opportunity").length,
+    offensiveRepeatSuppressed: offensive.filter(item => !item.decisionCreated && item.rejectionReason === "repeated-routine-structure").length,
+    offensiveAgencyOpportunities: offensive.filter(item => item.agencyOpportunityCandidate).length,
+    offensiveAgencyManual: offensive.filter(item => item.agencySelection === "manual").length,
+    offensiveAgencySimulated: offensive.filter(item => item.agencySelection === "simulate").length,
+    lateMeaningfulCandidates: offensive.filter(item => item.opportunityClassification?.lateGame && item.opportunityClassification?.meaningfulCandidate).length,
+    lateMeaningfulAdmitted: offensive.filter(item => item.opportunityClassification?.lateGame && item.opportunityClassification?.meaningfulCandidate && item.decisionCreated).length,
+    criticalCandidates: offensive.filter(item => item.leverageClass === "critical").length,
+    criticalAdmitted: offensive.filter(item => item.leverageClass === "critical" && item.decisionCreated).length,
     defensiveResponsibilityCount: defensive.filter(item => item.responsibilityCheck).length,
     defensiveViableRouteCount: defensive.filter(item => item.viableRoutes.length > 0).length,
     defensiveMultiRouteCount: defensive.filter(item => item.viableRoutes.length >= 2).length,
@@ -3290,9 +3330,9 @@ function applyHighSchoolShowcaseEventSettlement(match, outcomeChoice) {
   return true;
 }
 
-function showHighSchoolCompletedMatchOutcome(match, choiceText = "比賽依正式局數結束", statFeedbackHtml = "", executionText = "") {
+function showHighSchoolCompletedMatchOutcome(match, choiceText = "比賽依正式局數結束", statFeedbackHtml = "", executionText = "", pitchFeed = [], coachFeedback = "") {
   stopHighSchoolMatchPlayback();
-  const outcomeChoice = { text: choiceText, memory: match.performanceSummary, executionText };
+  const outcomeChoice = { text: choiceText, memory: match.performanceSummary, executionText, pitchFeed, coachFeedback };
   applyHighSchoolShowcaseEventSettlement(match, outcomeChoice);
   renderYouthSeasonOutcome("high_school_showcase", outcomeChoice, statFeedbackHtml);
 }
@@ -3393,9 +3433,76 @@ function getHighSchoolDecisionExecutionText(match, decision) {
   return executions[decision] || "你依照剛才的判斷完成這次場上動作。";
 }
 
+function chooseHighSchoolOffensiveAgency(selection, expectedMomentId) {
+  if (isTransitioning || pendingYouthSeasonOutcome || getCurrentEventId() !== "high_school_showcase") return false;
+  const match = prepareHighSchoolYearOneMatch();
+  const state = match.offensivePlayerAgencyState;
+  if (!isHighSchoolMatchDecisionVisible(match) || match.simulationPhase !== "offensive_agency_ready"
+    || state?.status !== "pending" || state.momentId !== expectedMomentId || !["manual", "simulate"].includes(selection)) return false;
+  stopHighSchoolMatchPlayback("agency-selected");
+  state.selection = selection;
+  state.status = selection === "manual" ? "manualSelected" : "simulating";
+  state.selectedAtCursor = getHighSchoolPresentedEventCursor(match);
+  const traceAgency = [...(match.opportunityDebugTrace?.opportunities || [])].reverse().find(item => item.agencyOpportunityCandidate
+    && item.playerPANumber === state.playerPANumber && !item.agencySelection);
+  if (traceAgency) traceAgency.agencySelection = selection;
+  if (selection === "manual") {
+    const classification = state.classification;
+    const density = state.density;
+    if (state.routeTarget === "firstOffense") {
+      prepareHighSchoolFirstOffensiveMomentFromSimulation(match);
+    } else if (state.routeTarget === "finalOffense") {
+      prepareHighSchoolFinalOffensiveMomentFromSimulation(match);
+    } else {
+      if (density?.allowed) applyHighSchoolOffensiveDecisionDensity(match, classification, density, true);
+      prepareHighSchoolMeaningfulOffensiveMomentFromSimulation(match, classification, density, { resumePhase: state.resumePhase });
+    }
+    state.status = "manualReady";
+    const pending = advanceHighSchoolPresentationCursor(match);
+    if (pending?.type !== "meaningfulMomentReached") return false;
+    showCurrentEvent();
+    return true;
+  }
+  const flow = state.priorFlow || {};
+  const beforePA = (match.simulationLog || []).filter(event => event.type === "plateAppearance" && event.batterId === "player").length;
+  const result = resolveSimulatedHighSchoolPlateAppearance(match, null, { allowPlayer: true });
+  if (!result || result.batterId !== "player") {
+    state.status = "pending";
+    state.selection = "";
+    return false;
+  }
+  const afterPA = (match.simulationLog || []).filter(event => event.type === "plateAppearance" && event.batterId === "player").length;
+  if (afterPA !== beforePA + 1) throw new Error("Agency simulation must consume exactly one canonical player PA");
+  state.status = "resolved";
+  state.result = result.result;
+  state.resultApplied = true;
+  if (traceAgency) {
+    traceAgency.agencyResolved = true;
+    traceAgency.result = result.result;
+  }
+  state.resolvedAtCursor = getHighSchoolPresentedEventCursor(match);
+  match.simulationPhase = state.resumePhase;
+  match.momentIndex = Number.isFinite(Number(flow.momentIndex)) ? Number(flow.momentIndex) : match.momentIndex;
+  match.currentMomentId = flow.currentMomentId || state.momentId;
+  match.currentDomain = flow.currentDomain || "flow";
+  match.currentAssignment = flow.currentAssignment || "比賽依目前局面繼續進行。";
+  if (isHighSchoolMatchWalkOff(match)) {
+    recordHighSchoolMatchSimulationEvent(match, { type: "walkOff", inning: match.inning, half: match.half, scores: match.scores });
+    match.pendingGameSettlement = "walkOff";
+  }
+  assertHighSchoolMatchStateIntegrity(match, "agency-auto-player-pa");
+  showCurrentEvent();
+  resumeHighSchoolMatchPlayback("agency-simulated", match);
+  return true;
+}
+
 function chooseHighSchoolYearOneMatchMoment(decision, expectedMomentId, randomSource = Math.random) {
   if (isTransitioning || pendingYouthSeasonOutcome || getCurrentEventId() !== "high_school_showcase") return false;
   const match = prepareHighSchoolYearOneMatch();
+  if (match.simulationPhase === "offensive_agency_ready") {
+    const agencySelection = decision === "agencyManual" ? "manual" : decision === "agencySimulate" ? "simulate" : "";
+    return agencySelection ? chooseHighSchoolOffensiveAgency(agencySelection, expectedMomentId) : false;
+  }
   if (!isHighSchoolMatchDecisionVisible(match)) return false;
   recordHighSchoolMatchPlaybackTrace("decision-exit", decision, match);
   stopHighSchoolMatchPlayback("decision-selected");
@@ -3425,13 +3532,20 @@ function chooseHighSchoolYearOneMatchMoment(decision, expectedMomentId, randomSo
   recordHighSchoolMatchOpportunityCheckpoint(`decision-resolved:${decisionDomain}`, match, { decision, expectedMomentId });
   resolvedMoment.execution = executionText;
   advanceHighSchoolPresentationCursor(match);
-  const outcomeChoice = { text: choice.text, memory: narrative, executionText, causeText: resolvedMoment.causeExplanation || "" };
+  const outcomeChoice = {
+    text: choice.text,
+    memory: narrative,
+    executionText,
+    causeText: resolvedMoment.causeExplanation || "",
+    pitchFeed: decisionDomain === "offense" ? formatHighSchoolOffensivePitchFeed(resolvedMoment.pitchHistory) : [],
+    coachFeedback: decisionDomain === "offense" ? resolvedMoment.coachFeedback || "" : ""
+  };
   player.memories.push(narrative);
   player.memories = player.memories.slice(-20);
 
   const statFeedbackHtml = showStatChanges(before, getPlayerSnapshot(), narrative, { includeMemory: false });
   if (match.completed) {
-    showHighSchoolCompletedMatchOutcome(match, choice.text, statFeedbackHtml, executionText);
+    showHighSchoolCompletedMatchOutcome(match, choice.text, statFeedbackHtml, executionText, outcomeChoice.pitchFeed, outcomeChoice.coachFeedback);
   } else {
     outcomeChoice.memory = resolvedMoment.causeExplanation ? resolvedMoment.outcome : `${resolvedMoment.outcome}。${resolvedMoment.consequence}`;
     renderYouthSeasonOutcome("high_school_showcase", outcomeChoice, statFeedbackHtml);
@@ -3443,8 +3557,11 @@ function renderHighSchoolPostMatchOutcome(choice, statFeedbackHtml) {
   const match = player.highSchoolMatch;
   const choiceLabel = typeof choice?.text === "string" ? choice.text.trim() : "";
   const executionText = typeof choice?.executionText === "string" ? choice.executionText.trim() : "";
+  const pitchFeed = Array.isArray(choice?.pitchFeed) ? choice.pitchFeed.filter(item => typeof item === "string" && item.trim()) : [];
   const confirmationHtml = choiceLabel ? `<section class="outcome__confirmation choice-outcome-action" aria-label="你的選擇"><small>你選擇</small><strong>${escapeHtml(choiceLabel)}</strong></section>` : "";
   const executionHtml = executionText ? `<section class="outcome__execution choice-outcome-execution" aria-label="你的執行"><small>你的執行</small><p>${escapeHtml(executionText)}</p></section>` : "";
+  const pitchFeedHtml = pitchFeed.length
+    ? `<section class="post-match-section plate-approach-feed" aria-label="這個打席的逐球紀錄"><small>逐球紀錄</small><ol>${pitchFeed.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ol></section>` : "";
   const performances = match.completedMoments.map((moment, index) => `<li><strong>第${["一", "二", "三"][index] || index + 1}次關鍵回合</strong>${moment.execution ? `<span class="post-match-execution">你的執行：${escapeHtml(moment.execution)}</span>` : ""}<span>${escapeHtml(moment.outcome)}。${escapeHtml(moment.consequence)}</span>${moment.causeExplanation ? `<span class="post-match-cause">原因：${escapeHtml(moment.causeExplanation)}</span>` : ""}</li>`).join("");
   const feedbackHtml = typeof statFeedbackHtml === "string" && statFeedbackHtml.trim()
     ? `<section class="outcome__feedback choice-outcome-feedback" aria-label="狀態變化"><small>狀態變化</small>${statFeedbackHtml}</section>` : "";
@@ -3458,9 +3575,9 @@ function renderHighSchoolPostMatchOutcome(choice, statFeedbackHtml) {
     ${renderHighSchoolYearOneScore()}
     <div class="event-kicker choice-outcome-kicker">秋季交流賽・終場</div>
     <h2 id="outcomeTitle" tabindex="-1">${escapeHtml(match.teamResult)}</h2>
-    ${confirmationHtml}${executionHtml}
+    ${confirmationHtml}${executionHtml}${pitchFeedHtml}
     <section class="post-match-section" aria-labelledby="postMatchPerformance"><small id="postMatchPerformance">你的關鍵表現</small><ol>${performances || "<li>你依照目前角色完成了這場比賽。</li>"}</ol></section>
-    <section class="post-match-section post-match-coach" aria-labelledby="postMatchCoach"><small id="postMatchCoach">教練評語</small><p>${escapeHtml(match.coachReaction)}</p></section>
+    <section class="post-match-section post-match-coach" aria-labelledby="postMatchCoach"><small id="postMatchCoach">教練評語</small><p>${escapeHtml(choice?.coachFeedback || match.coachReaction)}</p></section>
     <section class="post-match-section post-match-impact" aria-labelledby="postMatchImpact"><small id="postMatchImpact">接下來的影響</small><p>${escapeHtml(match.consequence)}</p></section>
     ${experienceHtml}
     ${feedbackHtml}
@@ -3486,8 +3603,11 @@ function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
   const choiceLabel = typeof choice?.text === "string" ? choice.text.trim() : "";
   const executionText = typeof choice?.executionText === "string" ? choice.executionText.trim() : "";
   const narrativeOutcome = typeof choice?.memory === "string" ? choice.memory.trim() : "";
+  const pitchFeed = Array.isArray(choice?.pitchFeed) ? choice.pitchFeed.filter(item => typeof item === "string" && item.trim()) : [];
   const causeText = typeof choice?.causeText === "string" ? choice.causeText.trim() : "";
-  const reactionValue = getYouthSeasonOutcomeReaction(eventId);
+  const reactionValue = eventId === "high_school_showcase" && typeof choice?.coachFeedback === "string" && choice.coachFeedback.trim()
+    ? `${choice.coachFeedback.trim()}${player.highSchoolMatch?.teamReaction ? ` ${player.highSchoolMatch.teamReaction}` : ""}`
+    : getYouthSeasonOutcomeReaction(eventId);
   const worldReaction = typeof reactionValue === "string" ? reactionValue.trim() : "";
   const systemFeedback = typeof statFeedbackHtml === "string" ? statFeedbackHtml.trim() : "";
   const confirmationHtml = choiceLabel ? `
@@ -3497,6 +3617,10 @@ function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
   const executionHtml = executionText ? `
       <section class="outcome__execution choice-outcome-execution" aria-label="你的執行">
         <small>你的執行</small><p>${escapeHtml(executionText)}</p>
+      </section>` : "";
+  const pitchFeedHtml = pitchFeed.length ? `
+      <section class="outcome__pitch-feed plate-approach-feed" aria-label="這個打席的逐球紀錄">
+        <small>逐球紀錄</small><ol>${pitchFeed.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ol>
       </section>` : "";
   const narrativeHtml = narrativeOutcome ? `
       <section class="outcome__narrative choice-outcome-result" aria-label="事件結果">
@@ -3522,6 +3646,7 @@ function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
       <h2 id="outcomeTitle" tabindex="-1">${escapeHtml(getYouthSeasonOutcomeHeading(eventId))}</h2>
       ${confirmationHtml}
       ${executionHtml}
+      ${pitchFeedHtml}
       ${narrativeHtml}
       ${causeHtml}
       ${reactionHtml}
@@ -3940,6 +4065,7 @@ const highSchoolYearOneMomentIds = Object.freeze([
 
 function getHighSchoolYearOneMomentId(match = player.highSchoolMatch) {
   if (match?.completed) return "";
+  if (match?.currentDomain === "offense" && /^hs_y1_match_offense_\d+$/.test(match?.currentMomentId || "")) return match.currentMomentId;
   if (match?.simulationPhase === "moment_2_ready" && match?.currentDomain === "defense"
     && /^hs_y1_match_defense_\d+$/.test(match?.currentMomentId || "")) return match.currentMomentId;
   return highSchoolYearOneMomentIds[Math.max(0, Math.min(2, Number(match?.momentIndex) || 0))];
@@ -4039,6 +4165,12 @@ function isHighSchoolMatchPresentationEventVisible(event) {
 
 function isHighSchoolMatchDecisionVisible(match) {
   if (!match || match.completed) return false;
+  if (match.simulationPhase === "offensive_agency_ready") {
+    const presentedAgencyEvent = getHighSchoolPresentedEvent(match);
+    return presentedAgencyEvent?.type === "playerAgencyOpportunityReached"
+      && presentedAgencyEvent.agencyIdentity === match.offensivePlayerAgencyState?.agencyIdentity
+      && match.offensivePlayerAgencyState?.status === "pending";
+  }
   if (!["moment_1_ready", "moment_2_ready", "moment_3_ready"].includes(match.simulationPhase)) return false;
   const presentedEvent = getHighSchoolPresentedEvent(match);
   return presentedEvent?.type === "meaningfulMomentReached"
@@ -4071,6 +4203,7 @@ function getHighSchoolPlaybackResultForPresentedEvent(event) {
   if (event.type === "halfInningEnd") return "halfInningEnd";
   if (event.type === "sideChange") return "sideChange";
   if (event.type === "meaningfulMomentReached") return "decision";
+  if (event.type === "playerAgencyOpportunityReached") return "decision";
   if (event.type === "playerRoutinePlay") return "playerRoutinePlay";
   if (event.type === "walkOff") return "walkOff";
   if (event.type === "gameEnd") return "gameEnd";
@@ -4972,7 +5105,7 @@ function applyHighSchoolSimulatedPlateAppearance(match, result, batterId, offens
     if (runnerId) scoringAttempts.push({ runnerId, timing });
   };
   let outsCreated = 0;
-  if (result === "out") {
+  if (["out", "strikeout"].includes(result)) {
     outsCreated = 1;
   } else if (result === "productiveOut") {
     outsCreated = 1;
@@ -6486,11 +6619,251 @@ function analyzeHighSchoolOffensiveDecisionContext(match) {
   });
 }
 
+function getHighSchoolOffensiveObjectiveContext(match) {
+  const context = analyzeHighSchoolOffensiveDecisionContext(match);
+  if (context.scoreDifference === -1) return "追平機會";
+  if (context.scoreDifference < -1) return "縮小差距的機會";
+  if (context.scoreDifference === 0) return "超前機會";
+  return context.hasRunner ? "擴大領先並送回跑者的機會" : "上壘延續攻勢、擴大領先的機會";
+}
+
+function getHighSchoolOffensivePlayerPANumber(match) {
+  return (match?.simulationLog || []).filter(event => event.type === "plateAppearance" && event.batterId === "player").length + 1;
+}
+
+function classifyHighSchoolOffensiveOpportunity(match, choices = buildOffensiveDecisionChoices(match)) {
+  const inning = Math.max(1, Math.floor(Number(match?.inning) || 1));
+  const regulationInnings = Math.max(1, Math.floor(Number(match?.regulationInnings) || 7));
+  const half = match?.half === "上" ? "上" : "下";
+  const outs = Math.max(0, Math.min(2, Math.floor(Number(match?.outs) || 0)));
+  const runners = (match?.runners || []).slice(0, 3);
+  while (runners.length < 3) runners.push(null);
+  const runnerCount = runners.filter(Boolean).length;
+  const scoringPosition = Boolean(runners[1] || runners[2]);
+  const scoreDifference = (Number(match?.scores?.home) || 0) - (Number(match?.scores?.away) || 0);
+  const deficit = Math.max(0, -scoreDifference);
+  const finalInningBottom = inning >= regulationInnings && half === "下";
+  const lateGame = inning >= Math.max(5, regulationInnings - 1);
+  const gameLive = !match?.completed && !match?.pendingGameSettlement && outs < 3;
+  const canTieOrLead = deficit > 0 && deficit <= runnerCount + 1;
+  const approachCommitments = [...new Set((choices || []).map(choice => `${choice.selectionProfile || ""}|${choice.swingIntent || ""}`).filter(value => value !== "|"))];
+  const strategicObjectives = [...new Set((choices || []).map(choice => choice.objective).filter(Boolean))];
+  const distinctTradeoffs = approachCommitments.length >= 2 && strategicObjectives.length >= 2;
+  let leverageClass = "routine";
+  let reason = "routine-game-state";
+  if (gameLive && finalInningBottom && canTieOrLead && (scoringPosition || outs === 2)) {
+    leverageClass = "critical";
+    reason = "final-inning-tying-or-go-ahead-run";
+  } else if (gameLive && finalInningBottom && deficit > 0 && deficit <= 3) {
+    leverageClass = "highLeverage";
+    reason = scoringPosition ? "late-run-scoring-pressure" : "late-game-on-base-relevance";
+  } else if (gameLive && lateGame && Math.abs(scoreDifference) <= 2 && (scoreDifference <= 0 || scoringPosition || runnerCount > 0)) {
+    leverageClass = "meaningful";
+    reason = "close-late-game-context";
+  } else if (gameLive && scoringPosition && Math.abs(scoreDifference) <= 3) {
+    leverageClass = "meaningful";
+    reason = "run-scoring-opportunity";
+  }
+  const scoreBand = scoreDifference <= -4 ? "large-deficit" : scoreDifference < 0 ? "trailing-close"
+    : scoreDifference === 0 ? "tied" : scoreDifference >= 4 ? "large-lead" : "leading-close";
+  const topology = runners.map(Boolean).map(Number).join("");
+  const situationFamily = `${lateGame ? "late" : "early"}|${scoreBand}|${outs}|${topology}|${leverageClass}`;
+  return Object.freeze({
+    version: "offensive-opportunity-v1",
+    leverageClass,
+    reason,
+    meaningfulCandidate: gameLive && leverageClass !== "routine" && distinctTradeoffs,
+    gameLive,
+    inning,
+    half,
+    outs,
+    runners: Object.freeze(runners),
+    runnerCount,
+    scoringPosition,
+    scoreDifference,
+    deficit,
+    finalInningBottom,
+    lateGame,
+    canTieOrLead,
+    distinctTradeoffs,
+    approachCommitments: Object.freeze(approachCommitments),
+    strategicObjectives: Object.freeze(strategicObjectives),
+    situationFamily,
+    noveltyKey: situationFamily,
+    playerPANumber: getHighSchoolOffensivePlayerPANumber(match)
+  });
+}
+
+function evaluateHighSchoolOffensiveDecisionDensity(match, classification, options = {}) {
+  const state = ensureHighSchoolMatchDecisionDensityState(match);
+  const playIndex = Array.isArray(match?.simulationLog) ? match.simulationLog.length : 0;
+  const repeated = classification?.noveltyKey === state?.lastOffensiveNoveltyKey
+    && classification?.playerPANumber === (state?.lastOffensiveDecisionPA || 0) + 1;
+  const highLeverageOverride = ["critical", "highLeverage"].includes(classification?.leverageClass);
+  let allowed = Boolean(classification?.meaningfulCandidate);
+  let suppressionReason = "";
+  if (options.forceScripted === true && classification?.gameLive && classification?.distinctTradeoffs) {
+    allowed = true;
+  } else if (!classification?.meaningfulCandidate) {
+    allowed = false;
+    suppressionReason = classification?.distinctTradeoffs ? "routine-opportunity" : "no-strategic-tradeoff";
+  } else if (repeated && !highLeverageOverride) {
+    allowed = false;
+    suppressionReason = "repeated-routine-structure";
+  }
+  return Object.freeze({
+    version: "offensive-decision-density-v1",
+    allowed,
+    suppressionReason,
+    repeated,
+    highLeverageOverride,
+    forcedScripted: options.forceScripted === true,
+    playIndex,
+    playerPANumber: classification?.playerPANumber || 0,
+    noveltyKey: classification?.noveltyKey || ""
+  });
+}
+
+function applyHighSchoolOffensiveDecisionDensity(match, classification, density, created) {
+  const state = ensureHighSchoolMatchDecisionDensityState(match);
+  if (!state || !classification) return state;
+  if (!created) {
+    if (classification.meaningfulCandidate || classification.leverageClass === "routine") state.offensiveSuppressedCount += 1;
+    if (density?.repeated) state.offensiveRepeatSuppressedCount += 1;
+    return state;
+  }
+  state.offensiveDecisionCount += 1;
+  state.lastOffensiveDecisionPA = classification.playerPANumber;
+  state.lastOffensiveDecisionPlayIndex = density.playIndex;
+  state.lastOffensiveNoveltyKey = classification.noveltyKey;
+  state.recentOffensiveSituationFamilies = [...state.recentOffensiveSituationFamilies, classification.situationFamily].slice(-6);
+  state.lastOffensiveDecisionInning = classification.inning;
+  state.lastOffensiveDecisionHalf = classification.half;
+  return state;
+}
+
+function evaluateHighSchoolOffensivePlayerAgency(match, classification = null) {
+  const regulationInnings = Math.max(1, Math.floor(Number(match?.regulationInnings) || 7));
+  const inning = Math.max(1, Math.floor(Number(match?.inning) || 1));
+  const batter = getHighSchoolMatchLineupBatter(match, match?.offenseTeam);
+  const playerActive = isHighSchoolMatchPlayerActive(match);
+  const playerBatting = match?.offenseTeam === "home" && batter?.id === "player";
+  const gameLive = !match?.completed && !match?.pendingGameSettlement && Number(match?.outs) < 3 && !isHighSchoolMatchWalkOff(match);
+  const playerPANumber = classification?.playerPANumber || getHighSchoolOffensivePlayerPANumber(match);
+  const candidateIdentity = [match?.id || "match", "agency", inning, match?.half || "", playerPANumber, "player"].join("|");
+  const priorAgency = match?.offensivePlayerAgencyState;
+  const alreadyResolved = priorAgency?.agencyIdentity === candidateIdentity && (priorAgency.resultApplied === true || priorAgency.status === "resolved");
+  const lateGamePlayerAgency = Boolean(gameLive && playerActive && playerBatting && inning >= regulationInnings && !alreadyResolved);
+  return Object.freeze({
+    version: "offensive-player-agency-v1",
+    agencyReason: lateGamePlayerAgency ? "late-game-canonical-player-pa" : alreadyResolved ? "canonical-pa-already-resolved" : "agency-not-required",
+    lateGamePlayerAgency,
+    gameLive,
+    playerActive,
+    playerBatting,
+    inning,
+    half: match?.half || "",
+    regulationInnings,
+    playerPANumber,
+    leverageClass: classification?.leverageClass || "routine"
+  });
+}
+
+function createHighSchoolOffensiveAgencyIdentity(match, agency) {
+  return [match?.id || "match", "agency", agency?.inning || 0, agency?.half || "", agency?.playerPANumber || 0, "player"].join("|");
+}
+
+function prepareHighSchoolOffensiveAgencyChoice(match, classification, density, options = {}) {
+  const agency = evaluateHighSchoolOffensivePlayerAgency(match, classification);
+  if (!agency.lateGamePlayerAgency) return null;
+  const existing = match.offensivePlayerAgencyState;
+  const agencyIdentity = createHighSchoolOffensiveAgencyIdentity(match, agency);
+  if (existing?.agencyIdentity === agencyIdentity && existing.status !== "resolved") return existing;
+  const routeTarget = options.routeTarget || "classified";
+  const resumePhase = routeTarget === "firstOffense" ? "moment_1_resolved"
+    : routeTarget === "finalOffense" ? "moment_3_resolved" : (match.simulationPhase || "full_match_flow");
+  const priorFlow = {
+    simulationPhase: match.simulationPhase,
+    momentIndex: match.momentIndex,
+    currentMomentId: match.currentMomentId,
+    currentDomain: match.currentDomain,
+    currentAssignment: match.currentAssignment
+  };
+  const momentId = routeTarget === "firstOffense" ? highSchoolYearOneMomentIds[0]
+    : routeTarget === "finalOffense" ? highSchoolYearOneMomentIds[2]
+      : `hs_y1_match_offense_${agency.playerPANumber}`;
+  const paIdentity = OffensivePlateApproach.createPlateAppearanceIdentity({
+    matchId: match.id, paId: momentId, batterId: "player", inning: match.inning, half: match.half
+  });
+  match.currentBatter = "player";
+  match.currentMomentId = momentId;
+  match.currentDomain = "offenseAgency";
+  match.simulationPhase = "offensive_agency_ready";
+  match.currentAssignment = "這個打席已經輪到你；選擇要自己操作，或交給既有比賽模擬完成。";
+  match.offensivePlayerAgencyState = {
+    version: "offensive-player-agency-v1",
+    agencyIdentity,
+    agencyReason: agency.agencyReason,
+    status: "pending",
+    selection: "",
+    canonicalPAIdentity: paIdentity,
+    inning: agency.inning,
+    half: agency.half,
+    playerPANumber: agency.playerPANumber,
+    resumePhase,
+    routeTarget,
+    momentId,
+    leverageClass: classification?.leverageClass || "routine",
+    lateGamePlayerAgency: true,
+    classification: JSON.parse(JSON.stringify(classification)),
+    density: JSON.parse(JSON.stringify(density)),
+    priorFlow,
+    resultApplied: false,
+    result: ""
+  };
+  recordHighSchoolMatchOffensiveOpportunity(match, "agency", buildOffensiveDecisionChoices(match), classification, density);
+  recordHighSchoolMatchSimulationEvent(match, {
+    type: "playerAgencyOpportunityReached", eventClassification: "playerAgencyOpportunity",
+    agencyIdentity, agencyReason: agency.agencyReason, leverageClass: classification?.leverageClass || "routine",
+    inning: match.inning, half: match.half, momentId, domain: "offenseAgency", assignment: match.currentAssignment,
+    outs: match.outs, scores: match.scores, runners: match.runners
+  });
+  return match.offensivePlayerAgencyState;
+}
+
+function getHighSchoolOffensiveAgencyChoices(match) {
+  const state = match?.offensivePlayerAgencyState;
+  if (!state || state.status !== "pending" || match?.simulationPhase !== "offensive_agency_ready") return [];
+  return [
+    Object.freeze({ text: "自己打", agencyDecision: "manual", matchDecision: "agencyManual", matchMomentId: state.momentId }),
+    Object.freeze({ text: "交給模擬", agencyDecision: "simulate", matchDecision: "agencySimulate", matchMomentId: state.momentId })
+  ];
+}
+
+function renderHighSchoolOffensiveAgencyContext(match) {
+  const state = match?.offensivePlayerAgencyState;
+  if (!state) return "";
+  return `<section class="match-current-assignment offensive-agency-choice" aria-labelledby="offensiveAgencyTitle"><small id="offensiveAgencyTitle">打席參與方式</small><strong>這個打席要不要自己操作？</strong><p>這只決定由你操作或交給比賽模擬；角色評價與能力不受影響。</p></section>`;
+}
+
+function renderHighSchoolPlateAppearanceContext(match) {
+  const state = match?.offensivePlateAppearanceState;
+  const sameMoment = state?.paIdentity?.includes(getHighSchoolYearOneMomentId(match) || "__none__");
+  const balls = sameMoment ? Number(state.balls) || 0 : 0;
+  const strikes = sameMoment ? Number(state.strikes) || 0 : 0;
+  const lastPitch = sameMoment && Array.isArray(state.pitchHistory) ? state.pitchHistory.at(-1) : null;
+  const lastPitchText = lastPitch
+    ? `<small>上一球：${escapeHtml(lastPitch.pitch?.impression || "投手完成上一球")}；${escapeHtml(lastPitch.action === "swing" ? "出棒" : "放掉")}，${escapeHtml({ ball: "壞球", calledStrike: "主審判好球", swingingStrike: "揮棒落空", foul: "界外球", ballInPlay: "球進入場內" }[lastPitch.pitchResult] || lastPitch.pitchResult)}</small>`
+    : "<small>打席從 0-0 開始；選定策略後，系統會依每顆實際來球自動執行。</small>";
+  return `<section class="match-current-assignment plate-approach-count" aria-label="目前打席球數"><small>球數 B-S</small><strong>${balls}-${strikes}</strong>${lastPitchText}</section>`;
+}
+
 function buildOffensiveDecisionChoices(match) {
   const context = analyzeHighSchoolOffensiveDecisionContext(match);
   const momentId = getHighSchoolYearOneMomentId(match);
   if (!momentId || match?.currentDomain === "defense") return [];
   const make = ({ text, matchDecision, objective, approach, route, riskProfile, requirements = [], executionText }) => Object.freeze({
+    ...OffensivePlateApproach.normalizeApproachPackage(approach),
     text,
     matchDecision,
     matchMomentId: momentId,
@@ -6506,7 +6879,8 @@ function buildOffensiveDecisionChoices(match) {
   });
   const attackTask = context.scoreDifference === -1 ? "直接挑戰追平機會"
     : context.scoreDifference < -1 ? "嘗試長打縮小差距"
-      : context.scoreDifference === 0 ? "直接挑戰超前機會" : "挑戰外野空檔增加保險分";
+      : context.scoreDifference === 0 ? "直接挑戰超前機會"
+        : context.hasRunner ? "挑戰外野空檔增加保險分" : "挑戰外野空檔擴大領先";
   const choices = [
     make({
       text: `搶第一顆可攻擊球，${attackTask}`,
@@ -6518,13 +6892,13 @@ function buildOffensiveDecisionChoices(match) {
       executionText: "你提早備妥揮棒，鎖定第一顆進入可攻擊區域的球。"
     }),
     make({
-      text: "守住好球帶，讓投手把球帶進可處理的區域",
+      text: "縮小攻擊區，邊角球放掉，只打真正進入甜蜜點的球",
       matchDecision: "zone",
       objective: "reachBase",
       approach: "patientSelection",
       route: "selectivePlateAppearance",
       riskProfile: "low",
-      executionText: "你收住外圍球，把擊球點留給真正進入好球帶的球。"
+      executionText: "你收窄攻擊區，但仍準備攻擊真正進入甜蜜點的球。"
     })
   ];
   if (!context.hasRunner) {
@@ -6604,6 +6978,7 @@ function isOffensiveDecisionChoiceLegal(choice, match) {
 }
 
 function getHighSchoolYearOneMatchMomentChoices(match = prepareHighSchoolYearOneMatch()) {
+  if (match?.simulationPhase === "offensive_agency_ready") return getHighSchoolOffensiveAgencyChoices(match);
   const momentId = getHighSchoolYearOneMomentId(match);
   if (!momentId) return [];
   if (match.momentIndex === 1) {
@@ -6761,6 +7136,9 @@ function prepareHighSchoolYearOneMatch() {
     ballContext: { type: "", family: "", pace: "", label: "", detail: "", timeWindow: "" },
     positionDecisionFamily: "", currentFieldingPosition: starts && (developmentPositionOverride || opportunityDecision?.positionFallbackApplied) ? assignedPosition : "", developmentPositionOverride, defensiveSituation: {},
     matchDecisionDensityState: createHighSchoolMatchDecisionDensityState(),
+    offensivePlateAppearanceState: null,
+    pendingOffensiveOpportunity: null,
+    offensivePlayerAgencyState: null,
     pendingDefensiveResumeState: null,
     lastDefensiveResolution: { resultCode: "", tier: "", decisionQuality: "", executionQuality: "", primaryCause: "", secondaryCause: "", causeExplanation: "" },
     pendingHalfInningTermination: null,
@@ -7139,14 +7517,169 @@ function recordHighSchoolYearOneMoment(match, decision, tier, outcome, consequen
   });
 }
 
-function getHighSchoolOffensivePlateAppearanceResult(choice, tier) {
-  const distributions = {
-    aggressiveEarlySwing: { strong: "double", mixed: "productiveOut", failure: "out" },
-    patientSelection: { strong: "single", mixed: "walk", failure: "out" },
-    compactContact: { strong: "single", mixed: "productiveOut", failure: "out" },
-    compactLineDrive: { strong: "single", mixed: "productiveOut", failure: "out" }
-  };
-  return distributions[choice?.approach]?.[tier] || "out";
+function getHighSchoolOffensivePlateApproachAbilities(subject = player) {
+  return Object.freeze({
+    observe: Number(subject?.observe) || 0,
+    ballSense: Number(subject?.ballSense) || 0,
+    baseballIQ: Number(subject?.baseballSkills?.baseballIQ) || 0,
+    batting: Number(subject?.baseballSkills?.batting) || Number(subject?.batting) || 0
+  });
+}
+
+function createHighSchoolOffensivePlateAppearanceIdentity(match, choice) {
+  return OffensivePlateApproach.createPlateAppearanceIdentity({
+    matchId: match?.id,
+    paId: choice?.matchMomentId || getHighSchoolYearOneMomentId(match),
+    batterId: "player",
+    inning: match?.inning,
+    half: match?.half
+  });
+}
+
+function ensureHighSchoolOffensivePlateAppearanceState(match, choice) {
+  const paIdentity = createHighSchoolOffensivePlateAppearanceIdentity(match, choice);
+  const existing = OffensivePlateApproach.normalizePlateAppearanceState(match?.offensivePlateAppearanceState);
+  if (existing?.paIdentity === paIdentity && existing.approach === choice.approach) return existing;
+  const context = analyzeHighSchoolOffensiveDecisionContext(match);
+  const state = OffensivePlateApproach.createPlateAppearanceState({
+    paIdentity,
+    batterId: "player",
+    approach: choice.approach,
+    context: {
+      inning: match.inning,
+      half: match.half,
+      outs: match.outs,
+      hasRunner: context.hasRunner,
+      scoringPosition: context.scoringPosition,
+      runners: match.runners.slice(),
+      scores: { ...match.scores }
+    }
+  });
+  match.offensivePlateAppearanceState = JSON.parse(JSON.stringify(state));
+  if (match.pendingOffensiveOpportunity?.status === "pending") {
+    match.pendingOffensiveOpportunity.paIdentity = state.paIdentity;
+    match.pendingOffensiveOpportunity.selectedApproach = choice.approach;
+    match.pendingOffensiveOpportunity.selectionProfile = choice.selectionProfile;
+    match.pendingOffensiveOpportunity.swingIntent = choice.swingIntent;
+  }
+  return state;
+}
+
+function resolveHighSchoolOffensivePlateAppearance(match, choice, options = {}) {
+  const current = ensureHighSchoolOffensivePlateAppearanceState(match, choice);
+  if (current.resultApplied) return false;
+  const state = current.completed ? current : OffensivePlateApproach.simulatePlateAppearance({
+    state: current,
+    abilities: getHighSchoolOffensivePlateApproachAbilities(player),
+    pitchSequence: options.pitchSequence,
+    pitchOptions: options.pitchOptions
+  });
+  match.offensivePlateAppearanceState = JSON.parse(JSON.stringify(state));
+  return state;
+}
+
+function formatHighSchoolOffensivePitchSequence(state) {
+  const history = Array.isArray(state?.pitchHistory) ? state.pitchHistory : [];
+  const takes = history.filter(item => item.action === "take");
+  const swings = history.filter(item => item.action === "swing");
+  const protected = history.filter(item => item.protectAdjusted);
+  if (state?.result === "walk") return `你連續放掉 ${takes.length} 顆沒有進入攻擊區的球，球數累積到四壞後取得保送。`;
+  if (state?.result === "strikeout" && state.selectionProfile === "selective") {
+    const last = history.at(-1);
+    return last?.pitchResult === "calledStrike"
+      ? "你把攻擊區收得太窄，兩好球後仍放掉邊角好球，主審判定第三好球。"
+      : "你辨認到必須保護的球，但最後一次揮棒沒有完成接觸。";
+  }
+  if (["single", "double", "triple", "homeRun"].includes(state?.result) && state.selectionProfile === "selective") {
+    return "你先放掉不在攻擊區內的球，直到投手把球留進真正可攻擊的位置才出棒。";
+  }
+  if (state?.swingIntent === "contact" && protected.length) return `兩好球後你縮短揮棒，透過 ${Math.max(1, state.swingExecutionSummary?.fouls || 0)} 次界外接觸延長打席。`;
+  if (state?.selectionProfile === "aggressive" && swings.length) return "你提早準備攻擊，對進入攻擊區的球立即出棒。";
+  return `這個打席經過 ${history.length} 球，最後由球數與實際接觸共同決定結果。`;
+}
+
+function formatHighSchoolOffensiveExecutionText(choice, state) {
+  const history = Array.isArray(state?.pitchHistory) ? state.pitchHistory : [];
+  const finalPitch = history.at(-1) || null;
+  const swings = Number(state?.swingExecutionSummary?.swings) || 0;
+  const takes = Number(state?.swingExecutionSummary?.takes) || 0;
+  const fouls = Number(state?.swingExecutionSummary?.fouls) || 0;
+  const correctOutsideTakes = history.filter(item => item.action === "take" && item.pitch?.strike === false && item.recognition?.correct).length;
+  if (state?.result === "walk" && swings === 0 && takes > 0 && correctOutsideTakes === takes) {
+    return "你收窄攻擊區，連續放掉沒有進入攻擊區的球。";
+  }
+  if (state?.result === "strikeout" && finalPitch?.pitchResult === "calledStrike") {
+    return "兩好球後你仍放掉邊角好球，主審判定第三好球。";
+  }
+  if (state?.result === "strikeout" && finalPitch?.pitchResult === "swingingStrike") {
+    return "你判斷最後一球可以攻擊並出棒，但沒有碰到球。";
+  }
+  if (choice?.swingIntent === "contact" && fouls > 0) {
+    return `兩好球後你縮短揮棒，以 ${fouls} 次界外接觸延長打席，再完成最後一次處理。`;
+  }
+  if (choice?.approach === "aggressiveEarlySwing" && history.length === 1 && finalPitch?.action === "swing") {
+    return "你提早準備攻擊，第一顆可打球進來就出棒。";
+  }
+  if (choice?.selectionProfile === "selective" && (Number(state?.recognitionSummary?.hitterPitchRecognized) || 0) > 0 && swings > 0) {
+    return "你先守住攻擊區，等球真正進入可攻擊位置後才出棒。";
+  }
+  return formatHighSchoolOffensivePitchSequence(state);
+}
+
+function formatHighSchoolOffensiveCoachFeedback(choice, state) {
+  const history = Array.isArray(state?.pitchHistory) ? state.pitchHistory : [];
+  const finalPitch = history.at(-1) || null;
+  const summary = state?.swingExecutionSummary || {};
+  const recognition = state?.recognitionSummary || {};
+  const swings = Number(summary.swings) || 0;
+  const takes = Number(summary.takes) || 0;
+  const contacts = (Number(summary.fouls) || 0) + (Number(summary.ballsInPlay) || 0);
+  const correctOutsideTakes = history.filter(item => item.action === "take" && item.pitch?.strike === false && item.recognition?.correct).length;
+  const chasedPitch = history.some(item => item.action === "swing" && ["chasePitch", "clearBall"].includes(item.pitch?.pitchLocationClass));
+  const isHit = ["single", "double", "triple", "homeRun"].includes(state?.result);
+  const decisionWasSound = ["strong", "acceptable"].includes(state?.decisionQuality);
+
+  if (state?.result === "walk" && swings === 0 && takes > 0 && correctOutsideTakes === takes) {
+    return "現任教練記下這次進攻：攻擊區守得很清楚，沒有被壞球帶走。";
+  }
+  if (state?.result === "strikeout" && finalPitch?.pitchResult === "calledStrike") {
+    return "現任教練記下這次進攻：兩好球後的保護範圍還需要調整。";
+  }
+  if (state?.result === "strikeout" && finalPitch?.pitchResult === "swingingStrike") {
+    return decisionWasSound
+      ? "現任教練記下這次進攻：判斷方向合理，但最後一次揮棒沒有跟上。"
+      : "現任教練記下這次進攻：最後一次出棒沒有形成接觸，攻擊球選擇仍要持續確認。";
+  }
+  if (isHit && chasedPitch && (Number(recognition.misread) || 0) > 0) {
+    return "現任教練記下這次進攻：結果雖然上壘，但這顆球不是理想的攻擊選擇。";
+  }
+  if (["out", "productiveOut"].includes(state?.result) && decisionWasSound && contacts > 0) {
+    return "現任教練記下這次進攻：攻擊選擇合理，但擊球結果沒有形成安打。";
+  }
+  if (isHit && choice?.approach === "aggressiveEarlySwing" && history.length === 1
+    && finalPitch?.action === "swing" && ["hitterPitch", "competitiveStrike"].includes(finalPitch.pitch?.pitchLocationClass)) {
+    return "現任教練記下這次進攻：你提早準備，抓住第一顆可攻擊球。";
+  }
+  if (choice?.swingIntent === "contact" && contacts > 0) {
+    return (Number(summary.fouls) || 0) > 0
+      ? "現任教練記下這次進攻：縮短揮棒與界外接觸延長了打席。"
+      : "現任教練記下這次進攻：你依照接觸意圖縮短揮棒並把球打進場內。";
+  }
+  if (isHit && choice?.selectionProfile === "selective" && (Number(recognition.hitterPitchRecognized) || 0) > 0) {
+    return "現任教練記下這次進攻：你耐心等到可攻擊球，並把握住出棒機會。";
+  }
+  return "教練記下這次進攻打席的選擇與結果，後續仍會持續觀察。";
+}
+
+function formatHighSchoolOffensivePitchFeed(history = []) {
+  const resultLabels = { ball: "壞球", calledStrike: "主審判好球", swingingStrike: "揮棒落空", foul: "界外球", ballInPlay: "球進入場內" };
+  return (Array.isArray(history) ? history : []).map(item => {
+    const before = `${Number(item.countBefore?.balls) || 0}-${Number(item.countBefore?.strikes) || 0}`;
+    const after = `${Number(item.countAfter?.balls) || 0}-${Number(item.countAfter?.strikes) || 0}`;
+    const adjustment = item.protectAdjusted ? "兩好球保護區擴大；" : "";
+    const action = item.action === "swing" ? "出棒" : "放掉";
+    return `第 ${item.pitchNumber} 球（${before}）：${item.pitch?.impression || "投手完成投球"}；${adjustment}${action}，${resultLabels[item.pitchResult] || item.pitchResult}，球數 ${after}。`;
+  });
 }
 
 function deriveHighSchoolOffensiveBaseballMeaning({ before = {}, after = {}, paResult = "", runnerChanges = [], scoringRunnerIds = [] } = {}) {
@@ -7157,7 +7690,7 @@ function deriveHighSchoolOffensiveBaseballMeaning({ before = {}, after = {}, paR
   const runnersAdvanced = existingRunnerChanges.filter(change => Number.isFinite(Number(change.to)) && Number(change.to) > Number(change.from));
   const scoredIds = new Set(Array.isArray(scoringRunnerIds) ? scoringRunnerIds : []);
   const runnersScored = normalizedChanges.filter(change => change.to === "home" || scoredIds.has(change.runnerId));
-  const batterOut = batterChange?.to === "out" || (["out", "productiveOut"].includes(paResult) && batterChange?.to !== "home");
+  const batterOut = batterChange?.to === "out" || (["out", "productiveOut", "strikeout"].includes(paResult) && batterChange?.to !== "home");
   const halfInningEnded = Number(after.outs) >= 3;
   return Object.freeze({
     batterOut,
@@ -7176,12 +7709,20 @@ function deriveHighSchoolOffensiveBaseballMeaning({ before = {}, after = {}, paR
   });
 }
 
-function formatHighSchoolOffensivePlayerFacingResult(choice, result, meaning) {
+function formatHighSchoolOffensivePlayerFacingResult(choice, result, meaning, plateAppearanceState = null) {
+  const finalPitch = Array.isArray(plateAppearanceState?.pitchHistory) ? plateAppearanceState.pitchHistory.at(-1) : null;
   const labels = {
     double: choice.approach === "aggressiveEarlySwing" ? "你把可攻擊球送進左中間形成二壘安打" : "你把球打進外野空檔形成二壘安打",
-    single: choice.approach === "patientSelection" ? "你守住好球帶，把球推成右前方安打" : "你縮短揮棒，把球打穿守備形成安打",
-    walk: "你守住好球帶，最後選到保送",
-    out: choice.approach === "patientSelection" ? "邊緣球被判第三好球，打者出局" : choice.approach === "aggressiveEarlySwing" ? "你提早出棒但沒有跟上變化球，打者出局" : "你縮短揮棒後仍打成容易處理的出局球"
+    single: choice.approach === "patientSelection" ? "你守住好球帶，把球推成右前方一壘安打" : "你縮短揮棒，把球打穿守備形成一壘安打",
+    triple: "你把球送往外野深處，形成三壘安打",
+    homeRun: "你把球擊出全壘打",
+    walk: "球數走到四壞，你取得四壞保送",
+    strikeout: finalPitch?.pitchResult === "calledStrike"
+      ? "你選擇放掉這顆球，但主審判定第三好球，三振出局"
+      : "你出棒但揮擊落空，第三個好球形成三振",
+    out: choice.approach === "aggressiveEarlySwing" ? "你提早出棒，球被打進場內後形成出局"
+      : choice.swingIntent === "contact" ? "你縮短揮棒把球打進場內，但守備完成出局"
+        : "你把球打進場內，守備完成打者出局"
   };
   let outcome = labels[result] || "這個打席依實際擊球結果結束";
   if (result === "productiveOut") outcome = "滾地球形成打者出局";
@@ -7214,13 +7755,17 @@ function didHighSchoolOffensiveObjectiveSucceed(choice, result, meaning) {
 
 function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
   if (!choice || choice.matchMomentId !== getHighSchoolYearOneMomentId(match) || !isOffensiveDecisionChoiceLegal(choice, match)) return false;
-  const result = getHighSchoolOffensivePlateAppearanceResult(choice, tier);
+  const plateAppearanceState = resolveHighSchoolOffensivePlateAppearance(match, choice, options.plateAppearance || {});
+  if (!plateAppearanceState?.completed || !plateAppearanceState.result || plateAppearanceState.resultApplied) return false;
+  const result = plateAppearanceState.result;
+  const resolvedTier = plateAppearanceState.executionQuality === "strong" ? "strong"
+    : plateAppearanceState.executionQuality === "weak" ? "failure" : "mixed";
   const situationBefore = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
   const scoresBefore = { ...match.scores };
   const runnerFacts = applyHighSchoolSimulatedPlateAppearance(match, result, "player", "home");
   advanceHighSchoolMatchBattingOrder(match, "home");
   match.playerContribution.runsCreated += match.scores.home - scoresBefore.home;
-  if (["single", "double"].includes(result)) match.playerContribution.hits += 1;
+  if (["single", "double", "triple", "homeRun"].includes(result)) match.playerContribution.hits += 1;
   if (result === "walk") match.playerContribution.walks += 1;
   const situationAfter = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
   const baseballMeaning = deriveHighSchoolOffensiveBaseballMeaning({
@@ -7230,22 +7775,30 @@ function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
     runnerChanges: runnerFacts.runnerChanges,
     scoringRunnerIds: runnerFacts.scoringRunnerIds
   });
-  const playerFacingResult = formatHighSchoolOffensivePlayerFacingResult(choice, result, baseballMeaning);
+  const playerFacingResult = formatHighSchoolOffensivePlayerFacingResult(choice, result, baseballMeaning, plateAppearanceState);
+  const executionText = formatHighSchoolOffensiveExecutionText(choice, plateAppearanceState);
+  const coachFeedback = formatHighSchoolOffensiveCoachFeedback(choice, plateAppearanceState);
   const objectiveSucceeded = didHighSchoolOffensiveObjectiveSucceed(choice, result, baseballMeaning);
   const plateAppearanceEvent = recordHighSchoolMeaningfulPlateAppearance(match, "player", result, situationBefore, situationAfter, match.scores.home - scoresBefore.home, runnerFacts);
   Object.assign(plateAppearanceEvent, {
     objective: choice.objective,
     approach: choice.approach,
+    selectionProfile: choice.selectionProfile,
+    swingIntent: choice.swingIntent,
     route: choice.route,
     riskProfile: choice.riskProfile,
     objectiveSucceeded,
-    decisionQuality: "acceptable",
-    executionQuality: tier === "strong" ? "strong" : tier === "mixed" ? "normal" : "weak",
-    primaryCause: tier === "failure" ? "executionFeedback" : "balancedExecution",
+    decisionQuality: plateAppearanceState.decisionQuality,
+    executionQuality: plateAppearanceState.executionQuality,
+    recognitionSummary: JSON.parse(JSON.stringify(plateAppearanceState.recognitionSummary)),
+    swingExecutionSummary: JSON.parse(JSON.stringify(plateAppearanceState.swingExecutionSummary)),
+    pitchCount: plateAppearanceState.pitchNumber,
+    coachFeedback,
+    primaryCause: result === "walk" ? "countAccumulation" : result === "strikeout" ? "strikeAccumulation" : "contactExecution",
     secondaryCause: "",
     responsibleActor: "player"
   });
-  recordHighSchoolYearOneMoment(match, choice.matchDecision, tier, playerFacingResult.outcome, playerFacingResult.consequence, situationAfter, {
+  recordHighSchoolYearOneMoment(match, choice.matchDecision, resolvedTier, playerFacingResult.outcome, playerFacingResult.consequence, situationAfter, {
     runnerChanges: runnerFacts.runnerChanges,
     scoringRunnerIds: runnerFacts.scoringRunnerIds,
     thirdOutResolution: runnerFacts.thirdOutResolution,
@@ -7255,6 +7808,8 @@ function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
   Object.assign(completedMoment, {
     objective: choice.objective,
     approach: choice.approach,
+    selectionProfile: choice.selectionProfile,
+    swingIntent: choice.swingIntent,
     action: choice.action,
     route: choice.route,
     riskProfile: choice.riskProfile,
@@ -7265,26 +7820,61 @@ function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
     runnerChanges: runnerFacts.runnerChanges.map(change => ({ ...change })),
     scoringRunnerIds: runnerFacts.scoringRunnerIds.slice(),
     baseballMeaning,
-    decisionQuality: "acceptable",
-    executionQuality: tier === "strong" ? "strong" : tier === "mixed" ? "normal" : "weak",
-    primaryCause: tier === "failure" ? "executionFeedback" : "balancedExecution",
+    decisionQuality: plateAppearanceState.decisionQuality,
+    executionQuality: plateAppearanceState.executionQuality,
+    recognitionSummary: JSON.parse(JSON.stringify(plateAppearanceState.recognitionSummary)),
+    swingExecutionSummary: JSON.parse(JSON.stringify(plateAppearanceState.swingExecutionSummary)),
+    pitchCount: plateAppearanceState.pitchNumber,
+    pitchHistory: JSON.parse(JSON.stringify(plateAppearanceState.pitchHistory)),
+    executionText,
+    coachFeedback,
+    primaryCause: result === "walk" ? "countAccumulation" : result === "strikeout" ? "strikeAccumulation" : "contactExecution",
     secondaryCause: "",
     responsibleActor: "player"
   });
   match.lastOffensiveResolution = {
     objective: choice.objective,
     approach: choice.approach,
+    selectionProfile: choice.selectionProfile,
+    swingIntent: choice.swingIntent,
     route: choice.route,
     resultCode: result,
     objectiveSucceeded,
     baseballMeaning,
     before: situationBefore,
-    after: situationAfter
+    after: situationAfter,
+    balls: plateAppearanceState.balls,
+    strikes: plateAppearanceState.strikes,
+    pitchNumber: plateAppearanceState.pitchNumber,
+    pitchHistory: JSON.parse(JSON.stringify(plateAppearanceState.pitchHistory)),
+    recognitionSummary: JSON.parse(JSON.stringify(plateAppearanceState.recognitionSummary)),
+    swingExecutionSummary: JSON.parse(JSON.stringify(plateAppearanceState.swingExecutionSummary)),
+    decisionQuality: plateAppearanceState.decisionQuality,
+    executionQuality: plateAppearanceState.executionQuality,
+    coachFeedback
   };
+  match.offensivePlateAppearanceState = JSON.parse(JSON.stringify(OffensivePlateApproach.markResultApplied(plateAppearanceState)));
+  if (match.pendingOffensiveOpportunity) {
+    match.pendingOffensiveOpportunity.status = "resolved";
+    match.pendingOffensiveOpportunity.result = result;
+    match.pendingOffensiveOpportunity.resultApplied = true;
+  }
+  if (match.offensivePlayerAgencyState?.selection === "manual"
+    && match.offensivePlayerAgencyState.canonicalPAIdentity === plateAppearanceState.paIdentity) {
+    match.offensivePlayerAgencyState.status = "resolved";
+    match.offensivePlayerAgencyState.result = result;
+    match.offensivePlayerAgencyState.resultApplied = true;
+    const traceAgency = [...(match.opportunityDebugTrace?.opportunities || [])].reverse().find(item => item.agencyOpportunityCandidate
+      && item.playerPANumber === match.offensivePlayerAgencyState.playerPANumber && item.agencySelection === "manual");
+    if (traceAgency) {
+      traceAgency.agencyResolved = true;
+      traceAgency.result = result;
+    }
+  }
   assertHighSchoolMatchStateIntegrity(match, options.integrityLabel || "player-offense-decision");
   match.simulationPhase = options.resolvedPhase || "moment_1_resolved";
   match.currentAssignment = options.assignment || "等待隊友完成這個半局。";
-  match.coachReaction = tier === "failure" ? "現任教練記下這次動作慢了一拍，但下一個守備任務仍然照常。" : "現任教練記下你完成了第一段進攻工作。";
+  match.coachReaction = coachFeedback;
   match.teamReaction = match.playerRunnerLocation >= 0 ? "你留在壘上，後續棒次開始接手。" : "後續棒次走進打擊區，比賽沒有因你的結果停止。";
   return completedMoment;
 }
@@ -7805,13 +8395,11 @@ function resolveHighSchoolYearOneFinalMoment(match, decisionOrChoice, tier) {
     : buildOffensiveDecisionChoices(match).find(item => item.matchDecision === decisionOrChoice);
   const completedMoment = resolveHighSchoolOffensiveDecision(match, choice, tier, {
     integrityLabel: "player-final-offense-decision",
-    resolvedPhase: "moment_3_resolved",
+    resolvedPhase: match.pendingOffensiveOpportunity?.resumePhase || "moment_3_resolved",
     assignment: "等待這個半局走到終場。"
   });
   if (!completedMoment) return false;
-  match.coachReaction = tier === "failure"
-    ? "現任教練記下這次進攻執行慢了一步，示意你先看完這個半局。"
-    : "現任教練確認你已按目前進攻任務完成打席，後續交回場上比分決定。";
+  match.coachReaction = completedMoment.coachFeedback;
   match.teamReaction = match.playerRunnerLocation >= 0
     ? "休息區跟著後續棒次準備，你仍留在壘上等待攻勢延續。"
     : "後續棒次接著走進打擊區，這個半局仍依實際出局數與比分進行。";
@@ -7866,7 +8454,7 @@ function settleHighSchoolYearOneMatch(match, finalDecision) {
   const momentCount = match.completedMoments.length;
   const participationTruth = deriveHighSchoolMatchActualExposure(match);
   const overallTier = contribution.strong > contribution.failure ? "strong" : contribution.failure > contribution.strong ? "failure" : "mixed";
-  const countLabel = momentCount === 1 ? "一個" : momentCount === 2 ? "兩個" : "三個";
+  const countLabel = momentCount === 1 ? "一個" : momentCount === 2 ? "兩個" : momentCount === 3 ? "三個" : `${momentCount} 個`;
   const performanceLines = match.completedMoments.map((moment, index) => `第${["一", "二", "三"][index] || index + 1}次：${moment.outcome}。`).join(" ");
   match.performanceSummary = participationTruth.participated
     ? `本場${countLabel}關鍵時刻：${performanceLines || "你依照角色完成了這場比賽。"}`
@@ -7938,10 +8526,54 @@ function prepareHighSchoolFirstOffensiveMomentFromSimulation(match) {
   match.currentAssignment = `${match.inning}局${match.half}、${match.outs} 出局、${formatHighSchoolMatchRunners(match.runners)}；完成你進入本場後的第一個關鍵打席。`;
   match.opponentAdjustment = "投手依當下比分與壘況進入這個打席，沒有預先指定結果。";
   setHighSchoolCoachTacticalDirection(match);
-  const opportunity = recordHighSchoolMatchOffensiveOpportunity(match, "scripted", buildOffensiveDecisionChoices(match).filter(choice => isOffensiveDecisionChoiceLegal(choice, match)));
+  const choices = buildOffensiveDecisionChoices(match).filter(choice => isOffensiveDecisionChoiceLegal(choice, match));
+  const classification = classifyHighSchoolOffensiveOpportunity(match, choices);
+  const density = evaluateHighSchoolOffensiveDecisionDensity(match, classification, { forceScripted: true });
+  applyHighSchoolOffensiveDecisionDensity(match, classification, density, true);
+  match.pendingOffensiveOpportunity = {
+    version: "offensive-opportunity-v1", status: "pending", kind: "scripted", momentId: match.currentMomentId,
+    paIdentity: "", classification: JSON.parse(JSON.stringify(classification)), density: JSON.parse(JSON.stringify(density)),
+    resumePhase: "moment_1_resolved", playerPANumber: classification.playerPANumber
+  };
+  const opportunity = recordHighSchoolMatchOffensiveOpportunity(match, "scripted", choices, classification, density);
   const event = recordHighSchoolMatchSimulationEvent(match, {
     type: "meaningfulMomentReached", eventClassification: "playerMeaningfulDecision", inning: match.inning, half: match.half,
     momentId: match.currentMomentId, domain: match.currentDomain, assignment: match.currentAssignment,
+    outs: match.outs, scores: match.scores, runners: match.runners
+  });
+  if (opportunity) opportunity.simulationLogIndex = event.sequence;
+  return event;
+}
+
+function prepareHighSchoolMeaningfulOffensiveMomentFromSimulation(match, classification, density, options = {}) {
+  const legacyFinal = options.legacyFinal === true;
+  const resumePhase = options.resumePhase || (legacyFinal ? "moment_3_resolved" : (match.simulationPhase || "full_match_flow"));
+  const playerPANumber = classification?.playerPANumber || getHighSchoolOffensivePlayerPANumber(match);
+  match.currentBatter = "player";
+  ensureHighSchoolMatchLineScoreInning(match, "home", match.inning);
+  match.momentIndex = 2;
+  match.currentMomentId = legacyFinal ? highSchoolYearOneMomentIds[2] : `hs_y1_match_offense_${playerPANumber}`;
+  match.currentDomain = "offense";
+  match.simulationPhase = "moment_3_ready";
+  match.currentAssignment = `${match.inning}局${match.half}、${match.outs} 出局、${formatHighSchoolMatchRunners(match.runners)}；處理${getHighSchoolOffensiveObjectiveContext(match)}。`;
+  match.coachInstruction = classification?.leverageClass === "critical"
+    ? "這個打席直接關係追平或延續比賽；先讀球數，再選擇真正願意承擔的攻擊方式。"
+    : classification?.leverageClass === "highLeverage"
+      ? "終盤比分仍在一個打席可影響的範圍；依壘況選擇攻擊區與揮棒意圖。"
+      : "依目前比分、出局數與壘況，選擇這次打席的攻擊方式。";
+  match.opponentAdjustment = "投手依當下比分、壘況與球數投球；玩家策略不會改寫來球位置。";
+  setHighSchoolCoachTacticalDirection(match);
+  const choices = buildOffensiveDecisionChoices(match).filter(choice => isOffensiveDecisionChoiceLegal(choice, match));
+  match.pendingOffensiveOpportunity = {
+    version: "offensive-opportunity-v1", status: "pending", kind: legacyFinal ? "legacyFinal" : "classified",
+    momentId: match.currentMomentId, paIdentity: "", classification: JSON.parse(JSON.stringify(classification)),
+    density: JSON.parse(JSON.stringify(density)), resumePhase, playerPANumber
+  };
+  const opportunity = recordHighSchoolMatchOffensiveOpportunity(match, legacyFinal ? "emergent" : "classified", choices, classification, density);
+  const event = recordHighSchoolMatchSimulationEvent(match, {
+    type: "meaningfulMomentReached", eventClassification: "playerMeaningfulDecision", inning: match.inning, half: match.half,
+    momentId: match.currentMomentId, domain: match.currentDomain, assignment: match.currentAssignment,
+    leverageClass: classification?.leverageClass || "meaningful", opportunityClassification: classification,
     outs: match.outs, scores: match.scores, runners: match.runners
   });
   if (opportunity) opportunity.simulationLogIndex = event.sequence;
@@ -8037,34 +8669,12 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
 }
 
 function prepareHighSchoolFinalOffensiveMomentFromSimulation(match) {
-  match.currentBatter = "player";
-  ensureHighSchoolMatchLineScoreInning(match, "home", match.inning);
-  match.momentIndex = 2;
-  match.currentMomentId = highSchoolYearOneMomentIds[2];
   match.currentDomain = "offense";
-  match.simulationPhase = "moment_3_ready";
-  const scoreDifference = match.scores.home - match.scores.away;
-  match.currentAssignment = `${formatHighSchoolMatchRunners(match.runners)}、${match.outs} 出局；${scoreDifference === -1 ? "處理追平機會" : scoreDifference < -1 ? "延續追分" : scoreDifference === 0 ? "爭取超前" : "增加保險分"}。`;
-  const defenseTier = match.completedMoments[1]?.tier;
-  match.coachInstruction = defenseTier === "strong"
-    ? "守備責任已完成；終盤依比分與壘況自行選擇攻擊方式。"
-    : defenseTier === "mixed"
-      ? "先看最前方跑者與出局數，再決定搶攻或推進。"
-      : "把上一段守備留在場上；這次先讓球進場並延續攻勢。";
-  match.opponentAdjustment = defenseTier === "strong"
-    ? "對手投手用第一球內角直球搶回主動。"
-    : defenseTier === "mixed"
-      ? "對手投手在內外角間加快節奏，不讓你久等。"
-      : "對手取得場面優勢後，用慢球引誘你提早出棒。";
-  setHighSchoolCoachTacticalDirection(match);
-  const opportunity = recordHighSchoolMatchOffensiveOpportunity(match, "emergent", buildOffensiveDecisionChoices(match).filter(choice => isOffensiveDecisionChoiceLegal(choice, match)));
-  const event = recordHighSchoolMatchSimulationEvent(match, {
-    type: "meaningfulMomentReached", eventClassification: "playerMeaningfulDecision", inning: match.inning, half: match.half,
-    momentId: match.currentMomentId, domain: match.currentDomain, assignment: match.currentAssignment,
-    outs: match.outs, scores: match.scores, runners: match.runners
-  });
-  if (opportunity) opportunity.simulationLogIndex = event.sequence;
-  return event;
+  const choices = buildOffensiveDecisionChoices(match).filter(choice => isOffensiveDecisionChoiceLegal(choice, match));
+  const classification = classifyHighSchoolOffensiveOpportunity(match, choices);
+  const density = evaluateHighSchoolOffensiveDecisionDensity(match, classification, { forceScripted: true });
+  applyHighSchoolOffensiveDecisionDensity(match, classification, density, true);
+  return prepareHighSchoolMeaningfulOffensiveMomentFromSimulation(match, classification, density, { legacyFinal: true });
 }
 
 function finishHighSchoolMatchBySimulation(match) {
@@ -8180,6 +8790,19 @@ function advanceHighSchoolMatchPlaybackStep(match = player.highSchoolMatch) {
   }
 
   const batter = getHighSchoolMatchLineupBatter(match, match.offenseTeam);
+  if (batter?.id === "player") {
+    const agencyChoices = buildOffensiveDecisionChoices(match).filter(choice => isOffensiveDecisionChoiceLegal(choice, match));
+    const agencyClassification = classifyHighSchoolOffensiveOpportunity(match, agencyChoices);
+    const agencyDensity = evaluateHighSchoolOffensiveDecisionDensity(match, agencyClassification);
+    const agency = evaluateHighSchoolOffensivePlayerAgency(match, agencyClassification);
+    if (agency.lateGamePlayerAgency) {
+      const routeTarget = target === "firstOffense" && shouldCreateHighSchoolFirstOffensiveMoment(match) ? "firstOffense"
+        : target === "finalOffense" && shouldReachHighSchoolFinalOffensiveMoment(match) ? "finalOffense" : "classified";
+      prepareHighSchoolOffensiveAgencyChoice(match, agencyClassification, agencyDensity, { routeTarget });
+      match.passage = summarizeHighSchoolSimulationSegment(match, startIndex, scoresBefore, playerStartedOnBase);
+      return getHighSchoolPlaybackResultForPresentedEvent(advanceHighSchoolPresentationCursor(match));
+    }
+  }
   const defensiveOpportunity = beginHighSchoolMatchDefensiveOpportunity(match, batter, target);
   if (target === "firstOffense" && shouldCreateHighSchoolFirstOffensiveMoment(match)) {
     prepareHighSchoolFirstOffensiveMomentFromSimulation(match);
@@ -8203,8 +8826,20 @@ function advanceHighSchoolMatchPlaybackStep(match = player.highSchoolMatch) {
     match.passage = summarizeHighSchoolSimulationSegment(match, startIndex, scoresBefore, playerStartedOnBase);
     return getHighSchoolPlaybackResultForPresentedEvent(advanceHighSchoolPresentationCursor(match));
   }
-  const offensiveRoutineOpportunity = batter?.id === "player"
-    ? recordHighSchoolMatchOffensiveOpportunity(match, "routine", []) : null;
+  let offensiveRoutineOpportunity = null;
+  if (batter?.id === "player") {
+    const choices = buildOffensiveDecisionChoices(match).filter(choice => isOffensiveDecisionChoiceLegal(choice, match));
+    const classification = classifyHighSchoolOffensiveOpportunity(match, choices);
+    const density = evaluateHighSchoolOffensiveDecisionDensity(match, classification);
+    if (density.allowed) {
+      applyHighSchoolOffensiveDecisionDensity(match, classification, density, true);
+      prepareHighSchoolMeaningfulOffensiveMomentFromSimulation(match, classification, density);
+      match.passage = summarizeHighSchoolSimulationSegment(match, startIndex, scoresBefore, playerStartedOnBase);
+      return getHighSchoolPlaybackResultForPresentedEvent(advanceHighSchoolPresentationCursor(match));
+    }
+    applyHighSchoolOffensiveDecisionDensity(match, classification, density, false);
+    offensiveRoutineOpportunity = recordHighSchoolMatchOffensiveOpportunity(match, "routine", choices, classification, density);
+  }
   const simulationLogLengthBeforePA = match.simulationLog.length;
   const result = batter ? resolveSimulatedHighSchoolPlateAppearance(match, null, { allowPlayer: batter.id === "player" }) : false;
   if (!result) return false;
@@ -8250,24 +8885,27 @@ function advanceHighSchoolMatchSimulation(match = player.highSchoolMatch) {
 
 function resolveHighSchoolYearOneMatch(decision, expectedMomentId = "", randomSource = Math.random) {
   const match = prepareHighSchoolYearOneMatch();
+  if (match.simulationPhase === "offensive_agency_ready") {
+    const agencySelection = decision === "agencyManual" ? "manual" : decision === "agencySimulate" ? "simulate" : "";
+    return agencySelection ? chooseHighSchoolOffensiveAgency(agencySelection, expectedMomentId || match.offensivePlayerAgencyState?.momentId) : false;
+  }
   const currentMomentId = getHighSchoolYearOneMomentId(match);
   const legalChoices = getHighSchoolYearOneMatchMomentChoices(match);
   const legalChoice = legalChoices.find(choice => choice.matchDecision === decision);
   const expectedPhase = `moment_${match.momentIndex + 1}_ready`;
   if (match.completed || match.simulationPhase !== expectedPhase || !currentMomentId || (expectedMomentId && expectedMomentId !== currentMomentId) || !legalChoice) return false;
   if (match.completedMoments.some(moment => moment.id === currentMomentId)) return false;
-  const defensiveResolution = match.momentIndex === 1 ? resolveHighSchoolDefensivePlay(match, decision, randomSource) : null;
-  const score = defensiveResolution ? 0 : getHighSchoolYearOneMomentAbilityScore(match, decision);
-  const tier = defensiveResolution?.tier || getHighSchoolYearOneOutcomeTier(score, randomSource);
   if (match.momentIndex === 0) {
-    if (!advanceHighSchoolYearOneAfterMomentOne(match, legalChoice, tier)) return false;
+    if (!advanceHighSchoolYearOneAfterMomentOne(match, legalChoice, null)) return false;
     return `${match.completedMoments.at(-1).outcome}。${match.completedMoments.at(-1).consequence}`;
   }
   if (match.momentIndex === 1) {
+    const defensiveResolution = resolveHighSchoolDefensivePlay(match, decision, randomSource);
+    const tier = defensiveResolution?.tier || "failure";
     advanceHighSchoolYearOneAfterMomentTwo(match, decision, tier, defensiveResolution);
     return `${match.completedMoments.at(-1).outcome}。${match.completedMoments.at(-1).consequence}`;
   }
-  return resolveHighSchoolYearOneFinalMoment(match, legalChoice, tier);
+  return resolveHighSchoolYearOneFinalMoment(match, legalChoice, null);
 }
 
 function resolveHighSchoolAzheEcho() {

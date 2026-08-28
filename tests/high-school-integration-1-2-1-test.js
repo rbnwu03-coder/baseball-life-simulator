@@ -10,7 +10,7 @@ const files = [
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
   "competition-presentation.js", "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js",
-  "baseball-offense-prototype.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
+  "baseball-offense-prototype.js", "offensive-plate-approach.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
   "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
   "career-development-runtime-resolver.js", "career-development-progression.js", "career-age22-outcome-resolver.js",
   "career-save-admission.js", "story.js", "save.js", "script.js"
@@ -44,6 +44,8 @@ function makeContext() {
   files.forEach(file => vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file }));
   vm.runInContext(`
     function __setup121(role="starter", position="內野手", level=10) {
+      pendingYouthSeasonOutcome=null;
+      isTransitioning=false;
       player=createInitialPlayer("1.2.1 測試球員");
       applyDebugBookmarkCharacterProfile(player);
       settleHighSchoolEntryCapability(player,{originType:"test-fixture"});
@@ -60,10 +62,17 @@ function makeContext() {
     }
     function __resolve121(decision, sample=0.99) {
       let safety=0;
-      while(!isHighSchoolMatchDecisionVisible(player.highSchoolMatch)&&isHighSchoolMatchPlaybackPhase(player.highSchoolMatch)&&safety++<400) advanceHighSchoolMatchPlaybackStep(player.highSchoolMatch);
+      while(safety++<400){
+        while(!isHighSchoolMatchDecisionVisible(player.highSchoolMatch)&&isHighSchoolMatchPlaybackPhase(player.highSchoolMatch)&&safety++<400) advanceHighSchoolMatchPlaybackStep(player.highSchoolMatch);
+        if(player.highSchoolMatch.simulationPhase!=="offensive_agency_ready")break;
+        const target=player.highSchoolMatch.offensivePlayerAgencyState?.routeTarget;
+        const agencyDecision=target==="finalOffense"?"agencyManual":"agencySimulate";
+        const agency=getHighSchoolYearOneMatchMomentChoices(player.highSchoolMatch).find(item=>item.matchDecision===agencyDecision);
+        if(!agency||!resolveHighSchoolYearOneMatch(agency.matchDecision,agency.matchMomentId,()=>sample))return false;
+      }
       const choices=getHighSchoolYearOneMatchMomentChoices(player.highSchoolMatch);
       const choice=choices.find(item=>item.matchDecision===decision)||choices[0];
-      return choice ? resolveHighSchoolYearOneMatch(choice.matchDecision,getHighSchoolYearOneMomentId(),()=>sample) : false;
+      return choice ? resolveHighSchoolYearOneMatch(choice.matchDecision,choice.matchMomentId,()=>sample) : false;
     }
     function __resolveAdvance121(decision, sample=0.99) {
       const result=__resolve121(decision,sample);
@@ -77,16 +86,20 @@ function makeContext() {
     }
     function __advanceToThird121(sample=0.99) {
       const match=player.highSchoolMatch; let safety=0;
-      while(!match.completed&&match.simulationPhase!=="moment_3_ready"&&safety++<600){
+      while(!match.completed&&!(match.simulationPhase==="moment_3_ready"&&match.currentMomentId===highSchoolYearOneMomentIds[2])&&safety++<600){
         if(isHighSchoolMatchDecisionVisible(match)){
-          if(match.currentDomain!=="defense")break;
           const choices=getHighSchoolYearOneMatchMomentChoices(match);
-          const choice=choices.find(item=>item.matchDecision==="secure")||choices[0];
+          let choice;
+          if(match.simulationPhase==="offensive_agency_ready"){
+            const agencyDecision=match.offensivePlayerAgencyState?.routeTarget==="finalOffense"?"agencyManual":"agencySimulate";
+            choice=choices.find(item=>item.matchDecision===agencyDecision);
+          }else if(match.currentDomain==="defense")choice=choices.find(item=>item.matchDecision==="secure")||choices[0];
+          else choice=choices.find(item=>item.matchDecision==="zone")||choices[0];
           if(!choice||!resolveHighSchoolYearOneMatch(choice.matchDecision,choice.matchMomentId,()=>sample))break;
         }else if(isHighSchoolMatchPlaybackPhase(match)) advanceHighSchoolMatchSimulation(match);
         else break;
       }
-      return match.simulationPhase==="moment_3_ready";
+      return match.simulationPhase==="moment_3_ready"&&match.currentMomentId===highSchoolYearOneMomentIds[2];
     }
     function __complete121(role="starter", sample=0.99) {
       __setup121(role);
@@ -99,7 +112,9 @@ function makeContext() {
       while(!match.completed&&safety++<800){
         if(isHighSchoolMatchDecisionVisible(match)){
           const choices=getHighSchoolYearOneMatchMomentChoices(match);
-          const choice=choices.find(item=>item.matchDecision==="secure")||choices[0];
+          const choice=match.simulationPhase==="offensive_agency_ready"
+            ? choices.find(item=>item.matchDecision==="agencySimulate")||choices[0]
+            : choices.find(item=>item.matchDecision==="secure")||choices[0];
           if(!choice||!resolveHighSchoolYearOneMatch(choice.matchDecision,choice.matchMomentId,()=>sample))break;
         }else if(isHighSchoolMatchPlaybackPhase(match)) advanceHighSchoolMatchSimulation(match);
         else break;
@@ -197,7 +212,7 @@ verify("24. Moment 2 decision 直接更新 outs、runners snapshot 與 defensive
 
 verify("25. 守備後若又遇到合法 Decision 先完成，再推進到終盤 Moment 3", evaluate(`(() => {const match=__setup121();__resolveAdvance121("zone",0.99);__resolve121("secure",0.99);__forceThirdMoment121();const reached=__advanceToThird121(0.99);return reached&&match.simulationPhase==="moment_3_ready"&&match.momentIndex===2&&match.inning>=5&&match.half==="下"&&match.offenseTeam==="home"&&match.currentBatter==="player";})()`));
 
-verify("26. Moment 3 任務會依 simulator 的落後、平手、領先比分切換", evaluate(`(() => {const match=__setup121();match.momentIndex=2;match.runners=[null,null,null];match.outs=1;const texts=[];for(const scores of [{home:1,away:3},{home:2,away:2},{home:4,away:2}]){match.scores=scores;texts.push(getHighSchoolYearOneMatchMomentChoices(match).map(item=>item.text).join("｜"));}return texts[0].includes("縮小差距")&&texts[1].includes("超前")&&texts[2].includes("保險分");})()`));
+verify("26. Moment 3 任務會依 simulator 的落後、平手、領先比分切換", evaluate(`(() => {const match=__setup121();match.momentIndex=2;match.runners=[null,null,null];match.outs=1;const texts=[];for(const scores of [{home:1,away:3},{home:2,away:2},{home:4,away:2}]){match.scores=scores;texts.push(getHighSchoolYearOneMatchMomentChoices(match).map(item=>item.text).join("｜"));}return texts[0].includes("縮小差距")&&texts[1].includes("超前")&&texts[2].includes("挑戰外野空檔")&&!texts[2].includes("保險分");})()`));
 
 verify("27. Moment 3 寫回後可處理後續防守 Decision，再由 simulator 結算終場一次", evaluate(`(() => {const match=__complete121("starter");const ids=match.completedMoments.map(moment=>moment.id);return match.completed&&match.settled&&match.simulationPhase==="complete"&&match.half==="終"&&match.outs>=0&&match.outs<=3&&match.currentMomentId===""&&ids.includes(highSchoolYearOneMomentIds[0])&&ids.includes(highSchoolYearOneMomentIds[2])&&match.completedMoments.filter(moment=>moment.domain==="defense").length===match.matchDecisionDensityState.defensiveMeaningfulDecisionCount&&match.teamResult.includes("終場");})()`));
 

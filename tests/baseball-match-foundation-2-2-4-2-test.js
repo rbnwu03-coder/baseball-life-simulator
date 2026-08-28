@@ -10,7 +10,7 @@ const files = [
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
   "competition-presentation.js", "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js",
-  "baseball-offense-prototype.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
+  "baseball-offense-prototype.js", "offensive-plate-approach.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
   "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
   "career-development-runtime-resolver.js", "career-development-progression.js", "career-age22-outcome-resolver.js",
   "career-save-admission.js", "story.js", "save.js", "script.js"
@@ -103,13 +103,13 @@ function makeContext() {
       return {ok:predicate(match),steps,noProgress,orphan:false};
     }
     function __full242(seed) {
-      const match=__setup242(seed); const report={seed,role:match.role,steps:0,decisions:0,outcomes:0,continues:0,noProgress:0,orphan:0,
+      const match=__setup242(seed); const report={seed,role:match.role,steps:0,decisions:0,agencyChoices:0,outcomes:0,continues:0,noProgress:0,orphan:0,
         visibleAfterEntry:0,entry:false,integrity:0,delays:[],completed:false,traceActions:[]};
       let lastVisible=getHighSchoolPresentedEventCursor(match);
       while(!match.completed&&report.steps++<5000) {
         const d=getHighSchoolMatchPlaybackDebugState(match);
         if(d.blockingOutcome){report.outcomes+=1;continueYouthSeasonOutcome();report.continues+=1;}
-        else if(d.decisionActive){report.decisions+=1;if(!__choose242()){report.orphan+=1;break;}}
+        else if(d.decisionActive){report.decisions+=1;if(match.simulationPhase==="offensive_agency_ready")report.agencyChoices+=1;if(!__choose242()){report.orphan+=1;break;}}
         else {
           if(__timerCount()!==1){report.orphan+=1;break;}
           report.delays.push(__timerDelays()[0]); const beat=__autoBeat242();
@@ -167,7 +167,7 @@ verify("D3. timer handle／flag／generation 維持 atomic valid invariant", eva
 verify("D4. 正式 UI 已移除 generic half-inning meta narration", !fs.readFileSync(path.join(root, "script.js"), "utf8").includes("你的打席結束後，球隊仍完成了這個半局") && !fs.readFileSync(path.join(root, "script.js"), "utf8").includes("【比賽推進】"));
 verify("D5. timing constants 維持 1000／1700／1850", evaluate(`MATCH_FLOW_BEAT_MS===1000&&MATCH_ATTENTION_BEAT_MS===1700&&MATCH_MAJOR_TRANSITION_MS===1850`));
 
-verify("P1. Production Full Match A：bench → entry → multi Decisions → 終場", fullA.role === "bench" && fullA.completed && fullA.decisions >= 3 && fullA.outcomes === fullA.decisions && fullA.orphan === 0 && fullA.integrity === 0 && fullA.finalTimer === 0);
+verify("P1. Production Full Match A：bench → entry → multi Decisions → 終場", fullA.role === "bench" && fullA.completed && fullA.decisions >= 3 && fullA.outcomes + fullA.agencyChoices === fullA.decisions && fullA.orphan === 0 && fullA.integrity === 0 && fullA.finalTimer === 0);
 verify("P2. Production Full Match B：不同 seed 同樣無 orphan／no-progress", fullB.seed !== fullA.seed && fullB.role === "bench" && fullB.completed && fullB.noProgress === 0 && fullB.orphan === 0 && fullB.integrity === 0 && fullB.finalTimer === 0);
 verify("P3. Production A/B 只使用正式 timing constants", [...fullA.delays, ...fullB.delays].every(delay => [1000, 1700, 1850].includes(delay)));
 
