@@ -279,6 +279,12 @@ The resolved moment, canonical meaningful PA event, and last offensive resolutio
 
 Focused fixtures cover every supported terminal result, selective four-ball discipline, called and swinging strikeouts, good-decision/bad-outcome separation, poor-decision/lucky-hit separation, first-pitch aggressive success, compact-contact foul extension, reload determinism, Match RNG isolation, Match Truth immutability, and canonical PA accounting. A 3,000-sample deterministic presentation audit reports zero hit-type mismatch, strikeout-semantic mismatch, feedback-attribution mismatch, no-swing violation, no-contact violation, RNG drift, or NaN. The existing 2,000-game canonical/Game Exposure/settlement PA accounting audit remains at zero mismatch.
 
+## Offensive Approach to Outcome Attribution Fix
+
+`formatHighSchoolOffensivePlayerFacingResult()` previously used the terminal result to reverse-infer execution wording. Its `single` fallback described every non-selective approach as a shortened swing, so an `aggressiveEarlySwing` first-pitch single was presented with `compactContact` semantics. The same label map also inferred unsupported hit direction, depth, and ground-ball shape from result codes alone.
+
+The outcome formatter now owns only the canonical PA result (`single`, `double`, `triple`, `homeRun`, `walk`, `strikeout`, `out`, or `productiveOut`). Approach semantics remain in `formatHighSchoolOffensiveExecutionText()`, where first-pitch attack, selective take/swing behavior, and compact-contact wording require the corresponding saved pitch or swing evidence. Coach feedback remains evidence-based and independent of whether the terminal result was successful. No batted-ball direction, contact strength, depth, wall interaction, or bloop classification is invented; detailed batted-ball context remains deferred to a future source of Match Truth.
+
 ## Final Closeout Audit Notes
 
 The production diff was audited against Capability, School Invitation, Development coefficients, Playing-Time formulas, Game Exposure probability, defensive route legality, second-base availability, third-out scoring, runner conservation, coach evaluator architecture, position evaluation, and unrelated random namespaces. No unrelated production change was found. The Foundation reads existing offensive capability values but does not change their formulas. Match Experience and Development keep their existing aggregation and coefficients.

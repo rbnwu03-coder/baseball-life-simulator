@@ -7994,20 +7994,18 @@ function deriveHighSchoolOffensiveBaseballMeaning({ before = {}, after = {}, paR
 function formatHighSchoolOffensivePlayerFacingResult(choice, result, meaning, plateAppearanceState = null) {
   const finalPitch = Array.isArray(plateAppearanceState?.pitchHistory) ? plateAppearanceState.pitchHistory.at(-1) : null;
   const labels = {
-    double: choice.approach === "aggressiveEarlySwing" ? "你把可攻擊球送進左中間形成二壘安打" : "你把球打進外野空檔形成二壘安打",
-    single: choice.approach === "patientSelection" ? "你守住好球帶，把球推成右前方一壘安打" : "你縮短揮棒，把球打穿守備形成一壘安打",
-    triple: "你把球送往外野深處，形成三壘安打",
-    homeRun: "你把球擊出全壘打",
+    single: "這個打席形成一壘安打",
+    double: "這個打席形成二壘安打",
+    triple: "這個打席形成三壘安打",
+    homeRun: "這個打席形成全壘打",
     walk: "球數走到四壞，你取得四壞保送",
     strikeout: finalPitch?.pitchResult === "calledStrike"
       ? "你選擇放掉這顆球，但主審判定第三好球，三振出局"
       : "你出棒但揮擊落空，第三個好球形成三振",
-    out: choice.approach === "aggressiveEarlySwing" ? "你提早出棒，球被打進場內後形成出局"
-      : choice.swingIntent === "contact" ? "你縮短揮棒把球打進場內，但守備完成出局"
-        : "你把球打進場內，守備完成打者出局"
+    out: "這個打席形成打者出局",
+    productiveOut: "這個打席形成具推進效果的打者出局"
   };
   let outcome = labels[result] || "這個打席依實際擊球結果結束";
-  if (result === "productiveOut") outcome = "滾地球形成打者出局";
   const baseLabels = { 1: "一壘", 2: "二壘", 3: "三壘" };
   const clauses = [];
   meaning.runnersScored.forEach(change => clauses.push(change.from === "batter"

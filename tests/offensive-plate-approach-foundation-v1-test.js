@@ -286,7 +286,7 @@ function makeContext() {
       return {runnersScored:result==="homeRun"?[{from:"batter",to:"home",runnerId:"player"}]:[],runnersAdvanced:[],runnersHeld:[],batterSafe:safe&&result!=="homeRun",batterOut:out,halfInningEnded:false,basesEmptyAfter:!safe};
     }
     function __presentationState(result,variant="selective") {
-      const approach=variant==="aggressive"?"aggressiveEarlySwing":variant==="contact"?"compactContact":"patientSelection";
+      const approach=variant==="aggressive"?"aggressiveEarlySwing":variant==="contact"?"compactContact":variant==="lineDrive"?"compactLineDrive":variant==="balanced"?"balancedAttack":"patientSelection";
       let pitchHistory=[];
       let recognitionSummary={correct:1,misread:0,chaseRecognized:0,hitterPitchRecognized:1};
       let swingExecutionSummary={swings:1,takes:0,whiffs:0,fouls:0,ballsInPlay:1,hardContacts:1};
@@ -299,7 +299,7 @@ function makeContext() {
         pitchHistory=[{pitchNumber:3,pitch:{pitchLocationClass:"edgeStrike",strike:true},recognition:{correct:true},action:swinging?"swing":"take",pitchResult:swinging?"swingingStrike":"calledStrike",contact:swinging?false:null,countBefore:{balls:0,strikes:2},countAfter:{balls:0,strikes:3},protectAdjusted:true}];
         recognitionSummary={correct:1,misread:0,chaseRecognized:0,hitterPitchRecognized:0};swingExecutionSummary={swings:swinging?1:0,takes:swinging?0:1,whiffs:swinging?1:0,fouls:0,ballsInPlay:0,hardContacts:0};decisionQuality=swinging?"acceptable":"questionable";executionQuality="weak";
       }else{
-        const chase=variant==="chase";const contact=variant==="contact";
+        const chase=variant==="chase";const contact=["contact","lineDrive"].includes(variant);
         pitchHistory=contact
           ? [{pitchNumber:3,pitch:{pitchLocationClass:"competitiveStrike",strike:true},recognition:{correct:true},action:"swing",pitchResult:"foul",contact:true,countBefore:{balls:0,strikes:2},countAfter:{balls:0,strikes:2},protectAdjusted:true},{pitchNumber:4,pitch:{pitchLocationClass:"hitterPitch",strike:true},recognition:{correct:true},action:"swing",pitchResult:"ballInPlay",contact:true,countBefore:{balls:0,strikes:2},countAfter:{balls:0,strikes:2},protectAdjusted:true}]
           : [{pitchNumber:1,pitch:{pitchLocationClass:chase?"chasePitch":"hitterPitch",strike:!chase},recognition:{correct:!chase},action:"swing",pitchResult:"ballInPlay",contact:true,countBefore:{balls:0,strikes:0},countAfter:{balls:0,strikes:0},protectAdjusted:false}];
@@ -310,7 +310,7 @@ function makeContext() {
       return OffensivePlateApproach.createPlateAppearanceState({matchId:"presentation-audit",paId:result+"-"+variant,batterId:"player",approach,pitchHistory,pitchNumber:pitchHistory.length,completed:true,result,recognitionSummary,swingExecutionSummary,decisionQuality,executionQuality});
     }
     function __presentationChoice(variant="selective") {
-      const approach=variant==="aggressive"?"aggressiveEarlySwing":variant==="contact"?"compactContact":"patientSelection";
+      const approach=variant==="aggressive"?"aggressiveEarlySwing":variant==="contact"?"compactContact":variant==="lineDrive"?"compactLineDrive":variant==="balanced"?"balancedAttack":"patientSelection";
       const packageInfo=OffensivePlateApproach.normalizeApproachPackage(approach);
       return {approach,selectionProfile:packageInfo.selectionProfile,swingIntent:packageInfo.swingIntent};
     }
@@ -614,6 +614,36 @@ const presentationAudit = JSON.parse(JSON.stringify(evaluate(`__runOffensivePres
 verify("109. 3,000 PA presentation audit 的 semantic mismatch、guard violation、RNG drift 與 NaN 均為 0", Object.entries(presentationAudit).filter(([key]) => key !== "samples").every(([, value]) => value === 0));
 verify("110. 結果卡優先呈現該 offensive PA 的 evidence-based coach feedback", evaluate(`(() => {const m=__opaMatch();player.highSchoolMatch=m;m.coachReaction="舊的動作慢評語";const feedback="現任教練記下這次進攻：攻擊區守得很清楚，沒有被壞球帶走。";renderYouthSeasonOutcome("high_school_showcase",{text:"等球進攻擊區",executionText:"連續放掉壞球",memory:"球數走到四壞，你取得四壞保送。",coachFeedback:feedback},"");const html=document.getElementById("story").innerHTML;return html.includes(feedback)&&!html.includes("舊的動作慢評語");})()`));
 verify("111. resolved PA 經正式 save normalization 保留 result text 與 feedback category", evaluate(`(() => {const m=__opaMatch();const moment=__resolveOPA(m,"zone",[__pitch("clearBall"),__pitch("clearBall"),__pitch("clearBall"),__pitch("clearBall")],Array.from({length:4},()=>({decisionRoll:.99,recognitionRoll:0})));const before={outcome:moment.outcome,feedback:moment.coachFeedback};player.highSchoolMatch=m;player=normalizeSave(JSON.parse(JSON.stringify(player)));const loaded=player.highSchoolMatch.completedMoments.at(-1);return loaded.outcome===before.outcome&&loaded.coachFeedback===before.feedback&&player.highSchoolMatch.lastOffensiveResolution.coachFeedback===before.feedback;})()`));
+
+const aggressiveSinglePresentation = presentationFixture("single", "aggressive");
+verify("112. reported bug：aggressive + single 保留提早攻擊與一壘安打語意", aggressiveSinglePresentation.execution.includes("提早") && aggressiveSinglePresentation.execution.includes("第一顆") && aggressiveSinglePresentation.outcome.includes("一壘安打"));
+verify("113. reported bug：aggressive + single 不洩漏 compact／patient 語意", !/(縮短揮棒|耐心等待|放掉邊角球)/.test(aggressiveSinglePresentation.execution + aggressiveSinglePresentation.outcome));
+
+const attributionFixtures = {
+  aggressiveOut: presentationFixture("out", "aggressive"),
+  aggressiveDouble: presentationFixture("double", "aggressive"),
+  patientSingle: presentationFixture("single", "selective"),
+  patientWalk: presentationFixture("walk", "selective"),
+  compactSingle: presentationFixture("single", "contact"),
+  compactOut: presentationFixture("out", "contact"),
+  lineDriveSingle: presentationFixture("single", "lineDrive"),
+  balancedSingle: presentationFixture("single", "balanced")
+};
+verify("114. aggressive out／double 仍由 execution 描述提早攻擊，不借用 compact 語意", [attributionFixtures.aggressiveOut, attributionFixtures.aggressiveDouble].every(item => item.execution.includes("提早") && !item.execution.includes("縮短揮棒")));
+verify("115. patient single／walk 只在 evidence 支援下描述選球", attributionFixtures.patientSingle.execution.includes("攻擊區") && attributionFixtures.patientSingle.execution.includes("才出棒") && attributionFixtures.patientWalk.execution.includes("連續放掉"));
+verify("116. compactContact／compactLineDrive 才可擁有縮短揮棒語意", [attributionFixtures.compactSingle, attributionFixtures.compactOut, attributionFixtures.lineDriveSingle].every(item => item.execution.includes("縮短揮棒")));
+verify("117. balanced single 使用中性 execution，不冒用 aggressive／patient／compact 語意", !/(提早|守住攻擊區|縮短揮棒)/.test(attributionFixtures.balancedSingle.execution));
+verify("118. 相同 single 依 approach 產生不同 execution，但共用 canonical outcome", new Set([aggressiveSinglePresentation, attributionFixtures.patientSingle, attributionFixtures.compactSingle, attributionFixtures.balancedSingle].map(item => item.execution)).size === 4 && [aggressiveSinglePresentation, attributionFixtures.patientSingle, attributionFixtures.compactSingle, attributionFixtures.balancedSingle].every(item => item.outcome === "這個打席形成一壘安打"));
+
+const resultSemanticMatrix = [
+  ["single", "一壘安打"], ["double", "二壘安打"], ["triple", "三壘安打"], ["homeRun", "全壘打"],
+  ["walk", "四壞保送"], ["strikeout", "三振"], ["out", "打者出局"], ["productiveOut", "具推進效果的打者出局"]
+];
+verify("119. Result semantic matrix 逐一呈現 canonical PA result", resultSemanticMatrix.every(([result, token]) => presentationFixture(result, result === "strikeout" ? "called" : "balanced").outcome.includes(token)));
+verify("120. Outcome formatter 不反推 approach 或無證據 batted-ball detail", ["single", "double", "triple", "homeRun", "out", "productiveOut"].every(result => !/(縮短揮棒|提早出棒|守住好球帶|右前方|左中間|外野空檔|外野深處|打穿守備|滾地球|強勁|牆)/.test(presentationFixture(result, "aggressive").outcome)));
+verify("121. aggressive + out 的合理 process 不因出局被改寫成錯誤決策", attributionFixtures.aggressiveOut.feedback.includes("攻擊選擇合理") && !attributionFixtures.aggressiveOut.feedback.includes("判斷錯誤"));
+verify("122. aggressive + single save/reload 保留 approach、result 與三種 presentation", evaluate(`(() => {const s=__presentationState("single","aggressive");const c=__presentationChoice("aggressive");const present=x=>[x.approach,x.result,formatHighSchoolOffensiveExecutionText(c,x),formatHighSchoolOffensivePlayerFacingResult(c,x.result,__presentationMeaning(x.result),x).outcome,formatHighSchoolOffensiveCoachFeedback(c,x)];const loaded=OffensivePlateApproach.normalizePlateAppearanceState(JSON.parse(JSON.stringify(s)));return JSON.stringify(present(s))===JSON.stringify(present(loaded))&&loaded.approach==="aggressiveEarlySwing"&&loaded.result==="single";})()`));
+verify("123. aggressive + single presentation 不消耗 RNG 且不修改 canonical state", evaluate(`(() => {const m=__opaMatch({seed:94701});const s=__presentationState("single","aggressive");const c=__presentationChoice("aggressive");const before=JSON.stringify({cursor:m.simulationCursor,state:s});formatHighSchoolOffensiveExecutionText(c,s);formatHighSchoolOffensivePlayerFacingResult(c,s.result,__presentationMeaning(s.result),s);formatHighSchoolOffensiveCoachFeedback(c,s);return before===JSON.stringify({cursor:m.simulationCursor,state:s});})()`));
 
 console.log(`\nStructural audit：${JSON.stringify(audit)}`);
 console.log(`\nOpportunity structural audit：${JSON.stringify(opportunityAudit)}`);
