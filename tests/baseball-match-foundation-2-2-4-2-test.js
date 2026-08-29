@@ -143,8 +143,8 @@ verify("E1. Bench player 第一局未入場且無虛構打席敘述", evaluate(`
 verify("E2. 正式 Player Entry event 發生後 playback 繼續前進", evaluate(`(() => {__setup242();const r=__advanceUntil242(m=>m.playerEntryCompleted);const before=__state242();const beat=__autoBeat242();return r.ok&&r.noProgress===0&&player.highSchoolMatch.simulationLog.some(e=>e.type==="playerEntry")&&beat.fired&&beat.progress&&before.entered;})()`));
 verify("E3. 已進場但本半局未 PA 時不顯示虛構 PA 文案", evaluate(`(() => {__setup242();const r=__advanceUntil242(m=>m.inning>=6&&m.half==="上"&&!getHighSchoolMatchPlaybackDebugState(m).decisionActive);showCurrentEvent();const p=getHighSchoolMatchPlayerParticipationState(player.highSchoolMatch);const ui=document.getElementById("story").innerHTML;return r.ok&&p.playerEnteredGame&&!p.playerHadPlateAppearanceThisHalf&&!/你的打席結束後|你完成打席後|你的攻擊結束後/.test(ui);})()`));
 verify("E4. Actual player PA 寫入 evidence，Outcome Continue 後恢復 Flow", evaluate(`(() => {__setup242();const r=__advanceUntil242(m=>isHighSchoolMatchDecisionVisible(m)&&m.currentDomain==="offense");const chosen=r.ok&&__choose242();const p=getHighSchoolMatchPlayerParticipationState(player.highSchoolMatch);const blocked=hasBlockingHighSchoolMatchOutcome();continueYouthSeasonOutcome();return chosen&&p.playerHadPlateAppearance&&blocked&&isHighSchoolMatchPlaybackScheduled()&&__timerCount()===1;})()`));
-const fullA = parse(`__full242(22424201)`);
-const fullB = parse(`__full242(22424202)`);
+const fullA = parse(`__full242(22424202)`);
+const fullB = parse(`__full242(22424201)`);
 verify("E5. Post-entry late inning 連續 20+ visible beats 並完成終場", fullA.entry && fullA.visibleAfterEntry >= 20 && fullA.completed && fullA.noProgress === 0);
 
 verify("T1. schedule → fire → valid replacement schedule", evaluate(`(() => {__setup242();const before=getHighSchoolMatchPlaybackDebugState();const beat=__autoBeat242();const after=getHighSchoolMatchPlaybackDebugState();return before.timerScheduled&&beat.progress&&after.timerScheduled&&after.timerGeneration>before.timerGeneration;})()`));

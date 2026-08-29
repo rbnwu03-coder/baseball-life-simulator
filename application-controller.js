@@ -102,6 +102,10 @@
       return invokeLegacy("selectDevelopmentTestPosition", "selectDevelopmentTestPosition", [position]);
     },
 
+    updateDevelopmentTestPositionLegality() {
+      return invokeLegacy("updateDevelopmentTestPositionLegality", "updateDevelopmentTestPositionLegality");
+    },
+
     loadTestBookmark(bookmark) {
       const validationError = requireText("loadTestBookmark", "bookmark", bookmark);
       if (validationError) return validationError;

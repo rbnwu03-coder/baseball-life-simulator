@@ -209,7 +209,10 @@ const humanComparison = parse(`compareHighSchoolMatchOpportunityTraces(${JSON.st
 verify("P3. 22424201 Browser-style production 與 direct audit replay 完全 parity", humanComparison.equal);
 verify("P4. Header 含 seed／route／role／position／ability／opponent／lineup／build signature", ["seed", "directStartMode", "role", "primaryPosition", "secondaryPosition", "playerAbilities", "opponentId", "lineupSignature", "entryRule", "buildVersionOrRuntimeSignature"].every(key => Object.hasOwn(humanSeed.trace.header, key)));
 verify("P5. Defensive opportunity schema 含責任、routes、window、created 與 rejection", ["outsBefore", "basesBefore", "scoreBefore", "batterId", "playerEnteredGame", "playerCurrentPosition", "ballInPlay", "ballContext", "responsibilityCheck", "primaryFielder", "playerRole", "playerRoles", "legalRoutes", "viableRoutes", "routeWindows", "decisionWindowAvailable", "defensiveDecisionAlreadyUsed", "meaningfulDecisionCandidate", "defensiveDecisionCreated", "defensiveDecisionPresented", "defensiveDecisionResolved", "rejectionReason", "eventId", "simulationLogIndex"].every(key => Object.hasOwn(humanSeed.trace.opportunities.find(item => item.domain === "defense"), key)));
-verify("P6. Offensive opportunity schema 區分 scripted 與 emergent", humanSeed.trace.opportunities.some(item => item.scriptedDecisionCandidate) && humanSeed.trace.opportunities.some(item => item.emergentDecisionCandidate));
+const humanOffensiveOpportunities = humanSeed.trace.opportunities.filter(item => item.domain === "offense");
+verify("P6. Offensive opportunity schema 明確區分 scripted 與 emergent", humanOffensiveOpportunities.length > 0
+  && humanOffensiveOpportunities.every(item => Object.hasOwn(item, "scriptedDecisionCandidate") && Object.hasOwn(item, "emergentDecisionCandidate"))
+  && humanOffensiveOpportunities.every(item => !(item.scriptedDecisionCandidate && item.emergentDecisionCandidate)));
 console.log("DECISION_DENSITY_LIFECYCLE_JSON=" + JSON.stringify({
   created: humanSeed.trace.summary.defensiveMeaningfulDecisions,
   presented: humanSeed.trace.summary.defensiveDecisionPresented,
@@ -280,6 +283,7 @@ const sample082 = policyA;
 verify("S1. Choice Policy A controlled run 200/200 完成", policyA.matches === 200);
 verify("S2. Choice Policy B controlled run 200/200 完成", policyB.matches === 200);
 verify("S3. Execution samples 0.2／0.5／0.82 各 200 場完成", [sample02, sample05, sample082].every(item => item.matches === 200));
+verify("S3a. scripted 與 emergent offensive opportunity 在多 seed audit 中皆保持可達", [policyA, policyB, sample02, sample05, sample082].every(item => item.laterOffense > 0));
 
 const recordedChoices = humanSeed.choiceSequence;
 const recordedReplay = run({ seed: 22424201, playbackMode: "direct", policy: recordedChoices, sample: 0.82 });

@@ -291,6 +291,7 @@ function resetCharacterGenesisSelection() {
   const throwsSelect = document.getElementById("throwsSelect");
   if (batsSelect) batsSelect.value = "R";
   if (throwsSelect) throwsSelect.value = "R";
+  updateDevelopmentTestPositionLegality();
   renderCharacterGenesis();
 }
 
@@ -316,9 +317,69 @@ function selectDevelopmentEntry(entry) {
 }
 
 const developmentTestPositions = Object.freeze(["", "一壘手", "二壘手", "游擊手", "三壘手"]);
+const DEVELOPMENT_MATCH_POSITION_TEST_FALLBACK_VERSION = "development-match-position-test-fallback-v1";
+const DEVELOPMENT_MATCH_POSITION_TEST_BENCHMARK_VERSION = "development-playable-position-v2";
+const developmentMatchPositionTestBenchmark = Object.freeze({
+  source: "effective-match-behavior-calibration",
+  fixtureSource: "createRepresentativeHighSchoolEntryFixture",
+  sampleSize: 1000,
+  profiles: Object.freeze(["ordinary", "defense", "batting", "low"]),
+  means: Object.freeze({ catching: 3.856, throwing: 3.934, armStrength: 2.67, reaction: 3.62, range: 2.613, baseballIQ: 4.154 }),
+  floorRule: "minimum-sufficient-deep-chain-reachability",
+  targetPlayerBasicExecutionBand: Object.freeze([0.65, 0.75]),
+  floors: Object.freeze({ catching: 9, throwing: 9, armStrength: 9, reaction: 8, range: 8, baseballIQ: 9 })
+});
+const developmentMatchPositionTestSkillMap = Object.freeze({
+  "一壘手": Object.freeze([...positionConfigs["內野手"].skills]),
+  "二壘手": Object.freeze([...positionConfigs["內野手"].skills]),
+  "游擊手": Object.freeze([...positionConfigs["內野手"].skills, "armStrength"]),
+  "三壘手": Object.freeze([...positionConfigs["內野手"].skills.filter(skill => skill !== "range"), "armStrength"])
+});
+
+function isDevelopmentTestPositionLegalForThrowingHand(position = "", throws = "R", age = 16) {
+  if (!position) return true;
+  if (!developmentTestPositions.includes(position)) return false;
+  if (typeof PlayingTimeGameExposure !== "undefined") {
+    return PlayingTimeGameExposure.isPositionLegalForThrowingHand(position, throws, age);
+  }
+  return throws !== "L" || Number(age) <= 12 || position === "一壘手";
+}
+
+function getDevelopmentTestPositionLegalityMessage(position = "", throws = "R") {
+  if (isDevelopmentTestPositionLegalForThrowingHand(position, throws, 16)) return "";
+  return `左投於高中階段不可指定為${position}。`;
+}
+
+function updateDevelopmentTestPositionLegality() {
+  const throws = document.getElementById("throwsSelect")?.value || "R";
+  let selectionRejected = false;
+  document.querySelectorAll?.("[data-development-position]").forEach(button => {
+    const position = button.dataset.developmentPosition || "";
+    const legal = isDevelopmentTestPositionLegalForThrowingHand(position, throws, 16);
+    button.disabled = !legal;
+    button.setAttribute("aria-disabled", String(!legal));
+    if (!legal && selectedDevelopmentTestPosition === position) selectionRejected = true;
+  });
+  if (selectionRejected) selectedDevelopmentTestPosition = "";
+  document.querySelectorAll?.("[data-development-position]").forEach(button => {
+    const selected = button.dataset.developmentPosition === selectedDevelopmentTestPosition;
+    button.classList.toggle("selected", selected);
+    button.setAttribute("aria-pressed", String(selected));
+  });
+  const description = document.getElementById("developmentPositionDescription");
+  if (description && selectionRejected) description.textContent = "左投於高中階段不可指定為二壘手、游擊手或三壘手；已改回不指定。";
+  return !selectionRejected;
+}
 
 function selectDevelopmentTestPosition(position = "") {
   if (!developmentTestPositions.includes(position)) return false;
+  const throws = document.getElementById("throwsSelect")?.value || "R";
+  const legalityMessage = getDevelopmentTestPositionLegalityMessage(position, throws);
+  if (legalityMessage) {
+    const description = document.getElementById("developmentPositionDescription");
+    if (description) description.textContent = legalityMessage;
+    return false;
+  }
   selectedDevelopmentTestPosition = position;
   document.querySelectorAll?.("[data-development-position]").forEach(button => {
     const selected = button.dataset.developmentPosition === position;
@@ -327,9 +388,46 @@ function selectDevelopmentTestPosition(position = "") {
   });
   const description = document.getElementById("developmentPositionDescription");
   if (description) description.textContent = position
-    ? `高中篇測試開始後，本場守備關鍵球固定由你擔任${position}；不會改寫生涯主守位。`
+    ? `高中篇測試開始後，本場守備關鍵球固定由你擔任${position}；本場測試能力保護已啟用，相關守備能力使用開發測試基準，不會改寫生涯能力或主守位。`
     : "不指定本場守位，沿用角色與教練安排。";
   return true;
+}
+
+function createDevelopmentMatchPositionTestCapabilityOverride(position = "", subject = player) {
+  if (!developmentMatchPositionTestSkillMap[position]) return null;
+  if (!isDevelopmentTestPositionLegalForThrowingHand(position, subject?.throws || "R", Number(subject?.age) || 16)) return null;
+  const skillFloors = Object.fromEntries(developmentMatchPositionTestSkillMap[position]
+    .map(skill => [skill, developmentMatchPositionTestBenchmark.floors[skill]]));
+  return Object.freeze({
+    version: DEVELOPMENT_MATCH_POSITION_TEST_FALLBACK_VERSION,
+    active: true,
+    position,
+    source: "development-position-test",
+    reason: "minimum-sufficient-deep-chain-reachability",
+    benchmarkVersion: DEVELOPMENT_MATCH_POSITION_TEST_BENCHMARK_VERSION,
+    skillFloors: Object.freeze(skillFloors)
+  });
+}
+
+function getDevelopmentMatchPositionTestCapabilityAudit(subject = player, match = subject?.highSchoolMatch) {
+  const override = match?.developmentTestCapabilityOverride;
+  if (!override?.active || override.version !== DEVELOPMENT_MATCH_POSITION_TEST_FALLBACK_VERSION) {
+    return Object.freeze({ active: false, source: "canonical-player", position: match?.playerFieldingAssignment || match?.position || "", skills: Object.freeze({}) });
+  }
+  const skills = Object.fromEntries(Object.entries(override.skillFloors || {}).map(([skill, floor]) => {
+    const raw = Number(subject?.baseballSkills?.[skill]) || 0;
+    const normalizedFloor = Number(floor) || 0;
+    const effective = Math.max(raw, normalizedFloor);
+    return [skill, Object.freeze({
+      raw,
+      floor: normalizedFloor,
+      effective,
+      overrideApplied: effective > raw,
+      source: override.source,
+      benchmarkVersion: override.benchmarkVersion
+    })];
+  }));
+  return Object.freeze({ active: true, version: override.version, benchmarkVersion: override.benchmarkVersion, source: override.source, position: override.position, skills: Object.freeze(skills) });
 }
 
 function createHighSchoolDirectStartHistory() {
@@ -950,6 +1048,11 @@ function createPlayer() {
   const directStart = ["highSchool", "highSchoolFullMatch"].includes(selectedDevelopmentEntry);
   const fullMatchTest = selectedDevelopmentEntry === "highSchoolFullMatch";
   const developmentPositionOverride = directStart ? selectedDevelopmentTestPosition : "";
+  const developmentPositionError = getDevelopmentTestPositionLegalityMessage(developmentPositionOverride, player.throws);
+  if (developmentPositionError) {
+    if (feedback) feedback.textContent = developmentPositionError;
+    return;
+  }
   const origins = {
     [PlayerIdentityOptions.origins[0]]: { effects: { confidence: 1, pressure: 1 }, personality: { brave: 1, ambitious: 1 }, flag: "origin_wants_to_be_seen", memory: "在真正碰到棒球以前，你先承認自己希望有一天能被看見。" },
     [PlayerIdentityOptions.origins[1]]: { effects: { observe: 2 }, personality: { thoughtful: 2 }, flag: "origin_wants_to_understand", memory: "你最初靠近棒球，是因為想知道每個動作背後的原因。" },
@@ -3535,10 +3638,11 @@ function chooseHighSchoolYearOneMatchMoment(decision, expectedMomentId, randomSo
   const outcomeChoice = {
     text: choice.text,
     memory: narrative,
-    executionText,
-    causeText: resolvedMoment.causeExplanation || "",
+    judgmentText: decisionDomain === "defense" ? resolvedMoment.defensiveOutcomeExplanation?.judgment || "" : "",
+    executionText: decisionDomain === "defense" ? resolvedMoment.defensiveOutcomeExplanation?.executionSummary || executionText : executionText,
+    causeText: decisionDomain === "defense" ? resolvedMoment.defensiveOutcomeExplanation?.causeText || resolvedMoment.causeExplanation || "" : resolvedMoment.causeExplanation || "",
     pitchFeed: decisionDomain === "offense" ? formatHighSchoolOffensivePitchFeed(resolvedMoment.pitchHistory) : [],
-    coachFeedback: decisionDomain === "offense" ? resolvedMoment.coachFeedback || "" : ""
+    coachFeedback: resolvedMoment.coachFeedback || ""
   };
   player.memories.push(narrative);
   player.memories = player.memories.slice(-20);
@@ -3601,6 +3705,7 @@ function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
     ? renderHighSchoolSpringScore()
     : eventId === "high_school_showcase" ? renderHighSchoolYearOneScore(true) : "";
   const choiceLabel = typeof choice?.text === "string" ? choice.text.trim() : "";
+  const judgmentText = typeof choice?.judgmentText === "string" ? choice.judgmentText.trim() : "";
   const executionText = typeof choice?.executionText === "string" ? choice.executionText.trim() : "";
   const narrativeOutcome = typeof choice?.memory === "string" ? choice.memory.trim() : "";
   const pitchFeed = Array.isArray(choice?.pitchFeed) ? choice.pitchFeed.filter(item => typeof item === "string" && item.trim()) : [];
@@ -3613,6 +3718,10 @@ function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
   const confirmationHtml = choiceLabel ? `
       <section class="outcome__confirmation choice-outcome-action" aria-label="你的選擇">
         <small>你選擇</small><strong>${escapeHtml(choiceLabel)}</strong>
+      </section>` : "";
+  const judgmentHtml = judgmentText ? `
+      <section class="outcome__judgment choice-outcome-judgment" aria-label="你的判斷">
+        <small>你的判斷</small><p>${escapeHtml(judgmentText)}</p>
       </section>` : "";
   const executionHtml = executionText ? `
       <section class="outcome__execution choice-outcome-execution" aria-label="你的執行">
@@ -3645,6 +3754,7 @@ function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
       <div class="event-kicker choice-outcome-kicker">行動結果</div>
       <h2 id="outcomeTitle" tabindex="-1">${escapeHtml(getYouthSeasonOutcomeHeading(eventId))}</h2>
       ${confirmationHtml}
+      ${judgmentHtml}
       ${executionHtml}
       ${pitchFeedHtml}
       ${narrativeHtml}
@@ -4754,7 +4864,9 @@ function insertPlayerIntoHighSchoolMatchLineup(match) {
   }
   const slot = Math.max(0, Math.min(8, Number(match.battingOrderIndex?.home) || 0));
   const replaced = lineup[slot];
-  lineup[slot] = { id: "player", name: player.name || "你", position: match.position, bats: player.bats, source: "canonical-player" };
+  const assignedPosition = match.gameExposureState?.opportunitySnapshot?.assignedPosition
+    || match.developmentPositionOverride || match.playerFieldingAssignment || match.position;
+  lineup[slot] = { id: "player", name: player.name || "你", position: assignedPosition, bats: player.bats, source: "canonical-player" };
   match.rosters.home.bench = (Array.isArray(bench) ? bench : []).filter(item => item.id !== "player");
   if (replaced) match.rosters.home.bench.push(replaced);
   match.playerLineupSlot = slot;
@@ -4824,11 +4936,17 @@ function getOffensiveSimulationCapability(subject = player) {
   });
 }
 
-function getDefensiveSimulationCapability(subject = player, position = player.primaryPosition) {
+function getDefensiveSimulationCapability(subject = player, position = player.primaryPosition, matchContext = subject?.highSchoolMatch) {
   if (subject?.source === "simulation-roster") {
     return Object.freeze({ fielding: subject.defense, reaction: subject.defense, range: subject.defense, arm: subject.arm, throwing: subject.arm, decision: Math.round((subject.defense + subject.contact) / 2) });
   }
-  const skills = subject.baseballSkills || {};
+  const rawSkills = subject.baseballSkills || {};
+  const activeMatch = matchContext || (subject === player ? player.highSchoolMatch : null);
+  const audit = getDevelopmentMatchPositionTestCapabilityAudit(subject, activeMatch);
+  const skills = audit.active && !activeMatch?.completed
+    ? Object.fromEntries(Object.keys(rawSkills).map(skill => [skill, audit.skills[skill]?.effective ?? rawSkills[skill]]))
+    : rawSkills;
+  const effectivePosition = audit.active ? audit.position : position;
   const positionTools = {
     "內野手": ["catching", "reaction", "throwing"],
     "外野手": ["catching", "range", "armStrength"],
@@ -4838,11 +4956,12 @@ function getDefensiveSimulationCapability(subject = player, position = player.pr
   const values = positionTools.map(key => Number(skills[key]) || 0);
   const reactionSkill = Number(skills.reaction) || values[1] || 0;
   const throwingSkill = values[2] || 0;
+  const armSkill = ["游擊手", "三壘手"].includes(effectivePosition) ? Number(skills.armStrength) || throwingSkill : throwingSkill;
   return Object.freeze({
     fielding: Math.round((values[0] * 2 + values[1] + (Number(subject.ballSense) || 0)) / 4),
     reaction: Math.round((reactionSkill * 2 + (Number(subject.ballSense) || 0)) / 3),
     range: Math.round(((Number(skills.range) || reactionSkill) * 2 + (Number(subject.fitness) || 0)) / 3),
-    arm: Math.round((throwingSkill * 2 + (Number(subject.fitness) || 0)) / 3),
+    arm: Math.round((armSkill * 2 + (Number(subject.fitness) || 0)) / 3),
     throwing: Math.round((throwingSkill * 2 + (Number(subject.observe) || 0)) / 3),
     decision: Math.round(((Number(skills.baseballIQ) || 0) + (Number(subject.observe) || 0) + (Number(subject.discipline) || 0)) / 3)
   });
@@ -6134,6 +6253,158 @@ function getSecondBaseCauseExplanation(primaryCause, secondaryCause = "", fallba
   return text;
 }
 
+const DEFENSIVE_EXPLAINABILITY_VERSION = "defensive-outcome-explainability-v1";
+
+function getDefensiveExplainabilityCauseCategory(sourceCause = "", resolution = {}) {
+  const categories = {
+    playerFieldingControl: "fieldingControl",
+    playerFirstThrow: "throwAccuracy",
+    playerCoverage: "releaseTiming",
+    playerPivot: "transfer",
+    playerSecondThrow: "throwAccuracy",
+    teammateUpstreamThrow: "throwAccuracy",
+    teammatePivot: "receiverExecution",
+    teammateFirstBaseReceive: "receiverExecution",
+    timingWindow: resolution.routeAvailability?.windowState === "expired" ? "windowExpired" : "runnerTiming",
+    balancedExecution: (resolution.playerRole === "coverPivot" || Object.keys(resolution.teammateLeg || {}).length) ? "sharedExecution" : "fieldingControl"
+  };
+  return categories[sourceCause] || "unknown";
+}
+
+function getDefensiveExplainabilityActor(resolution = {}) {
+  if (resolution.responsibleActor === "timingWindow") return "systemTiming";
+  if (resolution.primaryCause === "balancedExecution" && Object.keys(resolution.teammateLeg || {}).length) return "shared";
+  if (["player", "teammate", "runner", "systemTiming", "shared", "unknown"].includes(resolution.responsibleActor)) return resolution.responsibleActor;
+  return "unknown";
+}
+
+function getDefensiveDecisionExplanation(choice = {}, resolution = {}) {
+  const qualityLabels = {
+    strong: "判斷穩健",
+    reasonable: "判斷合理",
+    aggressive: "判斷積極、風險較高",
+    conservative: "判斷保守但合理",
+    routine: "例行責任"
+  };
+  const routeId = resolution.initialRoute || choice.routeId || "";
+  const routeText = {
+    secureFirstBaseOut: "你選擇先抓一壘的確定出局。",
+    initiate463: "你選擇啟動 4-6-3 雙殺，承擔第二段轉傳的時間風險。",
+    coverSecondFor643: "這球由游擊手啟動，你進入二壘補位，負責接球、踩壘與轉傳。",
+    attackLeadRunnerThird: "你選擇直接挑戰三壘領先跑者，承擔較窄的傳球窗口。",
+    preventRunHome: "你選擇傳本壘挑戰得分跑者，這是一條需要捕手觸殺的高壓路線。",
+    homeForceOut: "你選擇利用滿壘封殺關係傳本壘，優先阻止失分。"
+  }[routeId] || "你依照當下壘況承擔這次守備責任。";
+  const quality = resolution.decisionQuality || choice.advisable || "reasonable";
+  return Object.freeze({ quality, label: qualityLabels[quality] || "判斷已有正式記錄", text: `${routeText}${qualityLabels[quality] ? ` ${qualityLabels[quality]}。` : ""}` });
+}
+
+function getDefensiveExecutionExplanation(resolution = {}) {
+  const sourceCause = resolution.primaryCause || "";
+  const byCause = {
+    playerFieldingControl: "第一下控球不完整，重新握球壓縮了後續處理時間。",
+    playerFirstThrow: "接球與轉傳動作已開始，但第一傳沒有進入接球者能直接處理的位置。",
+    playerCoverage: "你未能在傳球窗口內到達二壘補位點。",
+    playerPivot: "你接到第一傳後重新調整腳步，轉傳窗口因此關閉。",
+    playerSecondThrow: "你完成二壘封殺，但回傳一壘沒有送到可接位置。",
+    teammateUpstreamThrow: "你已進入補位位置，但游擊手第一傳偏離理想接球點。",
+    teammatePivot: "你的第一傳已送到可接範圍，後續接球與轉傳沒有完整完成。",
+    teammateFirstBaseReceive: "前兩段傳球已完成，但一壘端沒有穩定收下來球。",
+    timingWindow: "接球、轉傳與接球端處理沒有明顯失誤，但跑者先一步抵達壘包。"
+  };
+  if (resolution.reassessed) {
+    const fallback = resolution.fallbackRoute === "homeForceOut" ? "改傳本壘完成封殺"
+      : resolution.fallbackRoute === "secureFirstBaseOut" ? "改抓一壘的確定出局"
+        : resolution.fallbackRoute === "attackLeadRunnerThird" ? "改抓三壘領先跑者" : "改走仍有效的出局路線";
+    return `原路線的窗口消失後，你重新讀取壘況並${fallback}。`;
+  }
+  if (byCause[sourceCause]) return byCause[sourceCause];
+  if (resolution.resultCode === "twoOuts") return resolution.playerRole === "coverPivot"
+    ? "你完成二壘補位、接球、踩壘與轉傳，隊友也完成一壘接球。"
+    : "你完成接球與第一傳，隊友接續完成轉傳與一壘接球。";
+  if (resolution.resultCode === "oneOut") return "接球與出手都在有效窗口內，接球端完成這個出局。";
+  return "現有執行紀錄不足以把未完成的環節歸到單一動作。";
+}
+
+function getDefensiveCausePresentation(primaryCause, actor, resolution = {}) {
+  const textByCause = {
+    fieldingControl: "主要原因：第一下控球沒有完成。",
+    transfer: "主要原因：接球後的轉傳調整耗掉了窗口。",
+    throwAccuracy: actor === "teammate" ? "主要原因：隊友的傳球偏離理想接球點。" : "主要原因：傳球偏離接球點。",
+    releaseTiming: "主要原因：到位或出手時間慢了一拍。",
+    receiverExecution: "主要原因：接球端沒有完成後續處理。",
+    runnerTiming: "主要原因：跑者先一步抵達，出局窗口不足。",
+    windowExpired: "主要原因：原本的出局窗口已經關閉。",
+    routeTradeoff: "主要原因：這條合法路線本來就承擔較高風險。",
+    forceState: "主要原因：當下的封殺關係決定了出局方式。",
+    sharedExecution: "主要原因：各段守備都在有效窗口內完成。",
+    unknown: "這次出局沒有完成，現有紀錄不足以把原因歸到單一環節。"
+  };
+  if (resolution.reassessed && resolution.outsCreated > 0) return "主要原因：原路線窗口消失後的即時重判，保住了仍可完成的出局。";
+  return textByCause[primaryCause] || textByCause.unknown;
+}
+
+function getDefensiveCoachFeedback(explanation = {}, resolution = {}) {
+  const actor = explanation.responsibleActor;
+  const cause = explanation.primaryCause;
+  const quality = explanation.decisionQuality;
+  if (actor === "teammate") return "你的責任環節已經做到位，這次是後續隊友執行沒有完成。";
+  if (actor === "systemTiming" || actor === "runner") return "處理本身沒有明顯問題，這個出局窗口本來就很窄。";
+  if (resolution.reassessed && resolution.outsCreated > 0) return "原路線消失後能立即改抓仍有效的出局，這次重判是合理處理。";
+  if (quality === "aggressive" && resolution.outsCreated > 0) return "這球抓到了，但你選的是高風險處理；下次仍要先確認跑者與出局窗口。";
+  if (quality === "aggressive") return "這條路線合法，但風險較高；結果不會反過來改寫你當下的判斷。";
+  if (cause === "throwAccuracy") return "這個判斷沒有問題，問題在傳球位置；下次先把球送到接球點。";
+  if (["fieldingControl", "transfer", "releaseTiming"].includes(cause)) return "路線判斷可以成立；下次把第一下控球與出手節奏處理乾淨。";
+  if (cause === "unknown") return "先保留這次判斷；現有紀錄不足以把責任歸到單一環節。";
+  return "判斷與執行會分開記錄，這次結果不會反向改寫你的選擇品質。";
+}
+
+function createDefensiveOutcomeExplanation(situation, choice, resolution) {
+  if (!situation || !choice || !resolution || situation.playerPosition !== "二壘手" || !choice.routeId) return null;
+  const presentation = presentInfieldDecision(situation, resolution, choice.matchDecision || "");
+  const responsibleActor = getDefensiveExplainabilityActor(resolution);
+  const primaryCause = getDefensiveExplainabilityCauseCategory(resolution.primaryCause, resolution);
+  const secondaryCause = resolution.secondaryCause ? getDefensiveExplainabilityCauseCategory(resolution.secondaryCause, resolution) : null;
+  const judgment = getDefensiveDecisionExplanation(choice, resolution);
+  const executionSummary = getDefensiveExecutionExplanation(resolution);
+  const causeText = getDefensiveCausePresentation(primaryCause, responsibleActor, resolution);
+  const sourceEvidenceIds = [
+    "choice.advisable", "choice.availability", "choice.readiness", "resolution.resultCode",
+    "resolution.detailedResult", "resolution.primaryCause", "resolution.responsibleActor"
+  ];
+  if (Object.keys(resolution.playerLeg || {}).length) sourceEvidenceIds.push("resolution.playerLeg");
+  if (Object.keys(resolution.teammateLeg || {}).length) sourceEvidenceIds.push("resolution.teammateLeg");
+  if (Object.keys(resolution.timingResolution || {}).length) sourceEvidenceIds.push("resolution.timingResolution");
+  if (resolution.reassessment) sourceEvidenceIds.push("resolution.reassessment");
+  const explanation = {
+    version: DEFENSIVE_EXPLAINABILITY_VERSION,
+    routeId: resolution.initialRoute || choice.routeId,
+    finalRouteId: resolution.activeRoute || resolution.routeId || choice.routeId,
+    role: resolution.playerRole || choice.playerRole || situation.responsibility?.playerRole || "",
+    decisionQuality: judgment.quality,
+    readiness: choice.readiness ? JSON.parse(JSON.stringify(choice.readiness)) : null,
+    judgment: judgment.text,
+    executionSummary,
+    outcome: presentation.outcome || "守備依正式比賽結果完成。",
+    primaryCause,
+    secondaryCause: secondaryCause && secondaryCause !== primaryCause ? secondaryCause : null,
+    responsibleActor,
+    causeText,
+    reassessmentSummary: resolution.reassessed ? executionSummary : "",
+    sourcePrimaryCause: resolution.primaryCause || "",
+    sourceSecondaryCause: resolution.secondaryCause || "",
+    sourceEvidenceIds: Object.freeze(sourceEvidenceIds)
+  };
+  explanation.coachFeedback = getDefensiveCoachFeedback(explanation, resolution);
+  return Object.freeze(explanation);
+}
+
+function attachDefensiveOutcomeExplanation(situation, choice, resolution) {
+  if (!resolution) return null;
+  const defensiveOutcomeExplanation = createDefensiveOutcomeExplanation(situation, choice, resolution);
+  return Object.freeze({ ...resolution, defensiveOutcomeExplanation });
+}
+
 function resolveSecondBaseInitiatedRoute(situation, choice, sample) {
   const swing = (sample - 0.5) * 4;
   const windows = situation.windows;
@@ -6311,8 +6582,8 @@ function resolveInfieldDecision(situation, decision, matchState, randomSource = 
   if (!choice) return null;
   const rawSample = typeof randomSource === "function" ? Number(randomSource()) : Number(randomSource);
   const sample = Number.isFinite(rawSample) ? Math.max(0, Math.min(0.999999, rawSample)) : 0.5;
-  if (situation.playerPosition === "二壘手" && choice.routeId === "coverSecondFor643") return resolveSecondBaseCoverage643(situation, choice, sample);
-  if (situation.playerPosition === "二壘手" && choice.routeId) return resolveSecondBaseInitiatedRoute(situation, choice, sample);
+  if (situation.playerPosition === "二壘手" && choice.routeId === "coverSecondFor643") return attachDefensiveOutcomeExplanation(situation, choice, resolveSecondBaseCoverage643(situation, choice, sample));
+  if (situation.playerPosition === "二壘手" && choice.routeId) return attachDefensiveOutcomeExplanation(situation, choice, resolveSecondBaseInitiatedRoute(situation, choice, sample));
   const swing = (sample - 0.5) * 4;
   const windows = situation.windows;
   const fieldControlled = windows.fielding + swing >= 2.8;
@@ -6452,9 +6723,13 @@ function presentInfieldDecision(situation, resolution = null, decision = "") {
     closeSafe: resolution.outsCreated ? "二壘封殺成功，但轉傳一壘時打者已早一步踩壘，只拿到一個出局。" : "球傳到壘包前，打者已先一步踩壘，場上沒有新增出局。",
     cleanLongThrowOut: "你在深處完成接球，長傳仍趕在打者之前抵達一壘。",
     inaccurateThrow: "你已在深處接到球，但長傳偏離接球者，打者安全上壘。",
-    lateThrow: situation.ballDepth === "deep"
-      ? "你接到球後再完成長傳，球到一壘時打者已經安全。"
-      : "你把球傳向一壘，但球到壘包前，打者已經安全。",
+    lateThrow: resolution.routeId === "attackLeadRunnerThird"
+      ? "你把球傳向三壘，但球到壘包前，領先跑者已經安全。"
+      : ["preventRunHome", "homeForceOut"].includes(resolution.routeId)
+        ? "你把球傳向本壘，但球到達前，三壘跑者已經得分。"
+        : situation.ballDepth === "deep"
+          ? "你接到球後再完成長傳，球到一壘時打者已經安全。"
+          : "你把球傳向一壘，但球到壘包前，打者已經安全。",
     controlledNoThrow: "你保住球權，沒有為了勉強傳球擴大成失誤；打者安全上一壘。",
     cleanOut: "傳球在跑者之前到壘，完成一個出局。",
     fieldingError: "球沒有在第一下被控制住。",
@@ -7067,8 +7342,12 @@ function prepareHighSchoolYearOneMatch() {
     bench: { lineupStatus: "bench", entryWindowInning: 5, history: `本場先從板凳觀察，等待中後段代打與短局守備機會` }
   };
   const position = player.primaryPosition || "內野手";
-  const developmentPositionOverride = infieldPositions.includes(pendingHighSchoolMatchPositionOverride)
+  const requestedDevelopmentPosition = infieldPositions.includes(pendingHighSchoolMatchPositionOverride)
     ? pendingHighSchoolMatchPositionOverride : "";
+  if (requestedDevelopmentPosition && !isDevelopmentTestPositionLegalForThrowingHand(requestedDevelopmentPosition, player.throws, player.age)) {
+    throw new Error(getDevelopmentTestPositionLegalityMessage(requestedDevelopmentPosition, player.throws));
+  }
+  const developmentPositionOverride = requestedDevelopmentPosition;
   const simulationSeed = createHighSchoolMatchSimulationSeed();
   const directStartForced = Array.isArray(player.flags) && player.flags.includes("direct_start_history");
   const opportunityDecision = createHighSchoolPlayingTimeOpportunity({
@@ -7087,6 +7366,8 @@ function prepareHighSchoolYearOneMatch() {
     }
     : roleAssignments[code];
   const assignedPosition = opportunityDecision?.assignedPosition || developmentPositionOverride || position;
+  const developmentTestCapabilityOverride = developmentPositionOverride
+    ? createDevelopmentMatchPositionTestCapabilityOverride(developmentPositionOverride, player) : null;
   const rosters = createHighSchoolMatchSimulationRoster(starts ? "starter" : code === "starter" ? "bench" : code, assignedPosition);
   const playerLineupSlot = rosters.home.lineup.findIndex(item => item.id === "player");
   player.highSchoolMatch = {
@@ -7134,7 +7415,8 @@ function prepareHighSchoolYearOneMatch() {
     coachTacticalContextSignature: "",
     opponentTacticalTruth: { code: "", targetRunnerId: "" },
     ballContext: { type: "", family: "", pace: "", label: "", detail: "", timeWindow: "" },
-    positionDecisionFamily: "", currentFieldingPosition: starts && (developmentPositionOverride || opportunityDecision?.positionFallbackApplied) ? assignedPosition : "", developmentPositionOverride, defensiveSituation: {},
+    positionDecisionFamily: "", currentFieldingPosition: starts && (developmentPositionOverride || opportunityDecision?.positionFallbackApplied) ? assignedPosition : "", developmentPositionOverride,
+    developmentTestCapabilityOverride, defensiveSituation: {},
     matchDecisionDensityState: createHighSchoolMatchDecisionDensityState(),
     offensivePlateAppearanceState: null,
     pendingOffensiveOpportunity: null,
@@ -7933,6 +8215,7 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
   const situation = match.defensiveSituation;
   const situationBefore = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
   const presentation = infieldDecisionFamily.present(situation, resolution, decision);
+  const explanation = resolution.defensiveOutcomeExplanation || createDefensiveOutcomeExplanation(situation, getInfieldDecisionChoice(situation, match, decision), resolution);
   const thirdOutResolution = finalizeHighSchoolDefensiveThirdOut(match, situationBefore, resolution);
   const runnerChanges = normalizeHighSchoolTerminalRunnerChanges(resolution, thirdOutResolution);
   match.outs = thirdOutResolution.outsAfter;
@@ -7993,7 +8276,10 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
     playerLeg: resolution.playerLeg ? JSON.parse(JSON.stringify(resolution.playerLeg)) : {},
     teammateLeg: resolution.teammateLeg ? JSON.parse(JSON.stringify(resolution.teammateLeg)) : {},
     timingResolution: resolution.timingResolution ? JSON.parse(JSON.stringify(resolution.timingResolution)) : {},
-    causeExplanation: resolution.causeExplanation,
+    defensiveOutcomeExplanation: explanation ? JSON.parse(JSON.stringify(explanation)) : null,
+    executionText: explanation?.executionSummary || presentation.execution,
+    causeExplanation: explanation?.causeText || resolution.causeExplanation,
+    coachFeedback: explanation?.coachFeedback || "",
     ballContext: resolution.ballContext,
     ballDirection: resolution.ballDirection,
     ballDepth: resolution.ballDepth
@@ -8013,11 +8299,7 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
   assertHighSchoolMatchStateIntegrity(match, "player-defense-decision");
   restoreHighSchoolMatchAfterDefensiveDecision(match);
   match.currentAssignment = "等待球隊完成這個守備半局。";
-  match.coachReaction = resolution.decisionQuality === "aggressive" && resolution.executionQuality !== "complete"
-    ? "現任教練確認路徑合法，同時記下這次積極選擇沒有完整執行。"
-    : resolution.teammateResponsibility === "major"
-      ? "現任教練確認你的傳球已到位，後續未完成不會全部記在你身上。"
-      : "現任教練把你的判斷與實際執行分開記錄。";
+  match.coachReaction = explanation?.coachFeedback || "現任教練把你的判斷與實際執行分開記錄。";
   match.teamReaction = resolution.teammateResponsibility === "major"
     ? "接球隊友舉手示意責任在自己，守備依目前出局數繼續。"
     : "球隊依目前出局數與壘況繼續完成守備。";
@@ -11173,6 +11455,34 @@ function renderBar(value, label, max = 20) {
   return `<div class="stat-row"><div class="stat-label"><span>${label || "未命名能力"}</span><strong>${normalizedValue}</strong></div><div class="stat-bar"><div class="stat-fill" style="width:${percent}%"></div></div></div>`;
 }
 
+function getDevelopmentTestEffectiveCapabilityDisplay(subject = player, match = subject?.highSchoolMatch) {
+  const audit = getDevelopmentMatchPositionTestCapabilityAudit(subject, match);
+  if (!audit.active || match?.completed) {
+    return Object.freeze({ active: false, source: "canonical-player", position: match?.playerFieldingAssignment || match?.position || "", skills: Object.freeze({}) });
+  }
+  return Object.freeze({
+    active: true,
+    source: audit.source,
+    position: audit.position,
+    benchmarkVersion: audit.benchmarkVersion,
+    skills: audit.skills
+  });
+}
+
+function renderDevelopmentTestCapabilityBar(skill, label, display) {
+  const raw = Number(player?.baseballSkills?.[skill]) || 0;
+  const skillDisplay = display?.active ? display.skills?.[skill] : null;
+  if (!skillDisplay?.overrideApplied) return renderBar(raw, label);
+  const effective = Math.max(0, Math.min(20, Number(skillDisplay.effective) || 0));
+  const percent = Math.max(0, Math.min(100, Math.round((effective / 20) * 100)));
+  return `<div class="stat-row development-test-capability-row" data-development-effective-skill="${escapeHtml(skill)}" data-effective-value="${effective}" data-raw-value="${raw}"><div class="stat-label"><span>${escapeHtml(label || "未命名能力")} <small class="development-test-capability-badge">開發測試</small></span><strong class="development-test-capability-value">${effective}<small>（原始 ${raw}）</small></strong></div><div class="stat-bar"><div class="stat-fill" style="width:${percent}%"></div></div></div>`;
+}
+
+function renderDevelopmentTestCapabilityNotice(display) {
+  if (!display?.active || !Object.values(display.skills || {}).some(skill => skill.overrideApplied)) return "";
+  return `<div class="development-test-capability-notice" role="note"><strong>開發測試能力覆蓋中</strong><span>本場顯示值為比賽實際使用能力；原始球員能力不受影響。</span></div>`;
+}
+
 function calculatePositionRatings() {
   return Object.entries(positionConfigs).map(([position, config]) => {
     let skillPoints = 0;
@@ -11572,6 +11882,7 @@ function updateStatus() {
   const azheBond = getAzheBondState();
   const offensiveRating = calculateOffensiveRating();
   const offensiveValue = getOffensiveCareerValue();
+  const developmentCapabilityDisplay = getDevelopmentTestEffectiveCapabilityDisplay(player, player.highSchoolMatch);
   const showCareerArc = player.chapter.includes("青棒關鍵年") || player.chapter.includes("生涯轉換") || player.chapter === "發展期" || player.chapter === "二十二歲職涯小結";
   const currentArchetype = showCareerArc && player.roleIdentity.primary ? refreshPlayerArchetype() : "";
   if (showCareerArc) evaluateMarket();
@@ -11602,7 +11913,7 @@ function updateStatus() {
       ].filter(Boolean).join("");
   const abilityHtml = `
     <div class="status-subgroup"><h3>能力傾向</h3>${renderBar(player.ballSense, "球感")}${renderBar(player.observe, "觀察")}${renderBar(player.fitness, "體能")}</div>
-    ${showSkills ? `<div class="status-subgroup"><h3>守位與能力連結</h3>${renderPositionPanel()}</div><div class="status-subgroup"><h3>棒球技能</h3>${Array.from(new Set(["catching", "throwing", "batting", "baseRunning", "baseballIQ", ...(getPositionAssessment(player.seasonPosition || calculatePositionRatings()[0].position)?.skills || [])])).map(key => renderBar(player.baseballSkills[key], skillLabels[key])).join("")}</div><div class="offense-card"><strong>進攻評價 ${offensiveRating}</strong><p>${offensiveValue ? `目前可提供 +${offensiveValue} 生涯評估修正；具備靠打擊換取名單機會的可能。` : "打擊仍是輔助能力，尚未形成足以改變名單的工具。"}</p></div>` : ""}
+    ${showSkills ? `<div class="status-subgroup"><h3>守位與能力連結</h3>${renderPositionPanel()}</div><div class="status-subgroup"><h3>棒球技能</h3>${renderDevelopmentTestCapabilityNotice(developmentCapabilityDisplay)}${Array.from(new Set(["catching", "throwing", "batting", "baseRunning", "baseballIQ", ...(getPositionAssessment(player.seasonPosition || calculatePositionRatings()[0].position)?.skills || [])])).map(key => renderDevelopmentTestCapabilityBar(key, skillLabels[key], developmentCapabilityDisplay)).join("")}</div><div class="offense-card"><strong>進攻評價 ${offensiveRating}</strong><p>${offensiveValue ? `目前可提供 +${offensiveValue} 生涯評估修正；具備靠打擊換取名單機會的可能。` : "打擊仍是輔助能力，尚未形成足以改變名單的工具。"}</p></div>` : ""}
     ${showBody ? `<div class="status-subgroup"><h3>身體狀態</h3>${renderBar(player.body.stamina, "體力")}${renderBar(player.body.fatigue, "疲勞")}${renderBar(player.body.recovery, "恢復力")}${renderBar(player.body.injuryRisk, "傷病風險")}${renderBar(player.body.pain, "疼痛")}</div>` : ""}`;
   const relationshipHtml = `
     <div class="status-subgroup"><h3>支持與注意</h3>${renderBar(player.familySupport, "家庭支持")}${showSkills ? renderBar(player.coachAttention, "教練注意") : ""}</div>

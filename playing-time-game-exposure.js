@@ -73,14 +73,29 @@
 
   function resolveLegalPosition(input = {}) {
     const requested = normalizePosition(input.position);
-    if (requested === "投手") return deepFreeze({ requested, assigned: "投手", legal: true, pitcherExposureDeferred: true, fallbackApplied: false });
+    if (requested === "投手") return deepFreeze({
+      requested, assigned: "投手", legal: true, pitcherExposureDeferred: true, fallbackApplied: false,
+      assignmentSource: "requested-position", assignmentReason: "pitcher-exposure-deferred"
+    });
+    if (requested === "內野手" && (input.throws !== "L" || Number(input.age) <= 12)) {
+      return deepFreeze({
+        requested, assigned: "二壘手", legal: true, pitcherExposureDeferred: false, fallbackApplied: true,
+        assignmentSource: "match-assignment", assignmentReason: "playable-2b-vertical"
+      });
+    }
     if (isPositionLegalForThrowingHand(requested, input.throws, input.age)) {
-      return deepFreeze({ requested, assigned: requested, legal: true, pitcherExposureDeferred: false, fallbackApplied: false });
+      return deepFreeze({
+        requested, assigned: requested, legal: true, pitcherExposureDeferred: false, fallbackApplied: false,
+        assignmentSource: "requested-position", assignmentReason: "specific-position-request"
+      });
     }
     const candidates = Array.isArray(input.secondaryPositions) ? input.secondaryPositions : [];
     const legalSecondary = candidates.find(position => position !== "投手" && isPositionLegalForThrowingHand(position, input.throws, input.age));
     const assigned = legalSecondary || (input.throws === "L" && Number(input.age) > 12 ? "一壘手" : requested);
-    return deepFreeze({ requested, assigned, legal: isPositionLegalForThrowingHand(assigned, input.throws, input.age), pitcherExposureDeferred: false, fallbackApplied: assigned !== requested });
+    return deepFreeze({
+      requested, assigned, legal: isPositionLegalForThrowingHand(assigned, input.throws, input.age), pitcherExposureDeferred: false, fallbackApplied: assigned !== requested,
+      assignmentSource: "handedness-legality-fallback", assignmentReason: legalSecondary ? "legal-secondary-position" : "left-throw-infield-1b-only"
+    });
   }
 
   function getReadinessBand(positionReadiness) {
@@ -144,6 +159,8 @@
       confidence: "provisional",
       positionLegal: legality.legal,
       positionFallbackApplied: legality.fallbackApplied,
+      assignmentSource: legality.assignmentSource,
+      assignmentReason: legality.assignmentReason,
       pitcherExposureDeferred: legality.pitcherExposureDeferred,
       reasons,
       provenance: {
@@ -266,6 +283,8 @@
       assignedPosition: position.assigned,
       requestedPosition: position.requested,
       positionFallbackApplied: position.fallbackApplied,
+      assignmentSource: readiness.assignmentSource || (position.fallbackApplied ? "position-fallback" : "requested-position"),
+      assignmentReason: readiness.assignmentReason || (position.fallbackApplied ? `legal-position-fallback:${position.assigned}` : "specific-position-request"),
       pitcherExposureDeferred: position.pitcherExposureDeferred,
       startingOpportunity,
       startingDecision: startingOpportunity,

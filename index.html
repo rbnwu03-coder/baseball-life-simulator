@@ -101,7 +101,7 @@
         <select id="batsSelect"><option value="R">右打 R</option><option value="L">左打 L</option><option value="S">左右開弓 S</option></select>
       </label>
       <label for="throwsSelect">傳球慣用側
-        <select id="throwsSelect"><option value="R">右投 R</option><option value="L">左投 L</option></select>
+        <select id="throwsSelect" onchange="ApplicationController.updateDevelopmentTestPositionLegality()"><option value="R">右投 R</option><option value="L">左投 L</option></select>
       </label>
     </div>
     <p id="characterCreationFeedback" class="creation-feedback" aria-live="assertive"></p>

@@ -256,6 +256,12 @@ function normalizeSave(saved) {
     : null;
   fresh.highSchoolMatch.developmentPositionOverride = typeof saved.highSchoolMatch?.developmentPositionOverride === "string"
     ? saved.highSchoolMatch.developmentPositionOverride : "";
+  if (Object.prototype.hasOwnProperty.call(saved.highSchoolMatch || {}, "developmentTestCapabilityOverride")) {
+    fresh.highSchoolMatch.developmentTestCapabilityOverride = saved.highSchoolMatch.developmentTestCapabilityOverride
+      ? JSON.parse(JSON.stringify(saved.highSchoolMatch.developmentTestCapabilityOverride)) : null;
+  } else {
+    delete fresh.highSchoolMatch.developmentTestCapabilityOverride;
+  }
   fresh.highSchoolMatch.coachTacticalDirection = Object.assign(
     {},
     highSchoolDefaults.highSchoolMatch.coachTacticalDirection,
