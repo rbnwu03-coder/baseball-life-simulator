@@ -4422,14 +4422,120 @@ function formatHighSchoolBatterHandedness(bats) {
   return bats === "L" ? "左打" : bats === "S" ? "左右開弓" : "右打";
 }
 
+let highSchoolOffensiveTacticalDebugTrace = null;
+
+function getHighSchoolOffensiveTacticalDebugTrace() {
+  return highSchoolOffensiveTacticalDebugTrace
+    ? Object.freeze(JSON.parse(JSON.stringify(highSchoolOffensiveTacticalDebugTrace))) : null;
+}
+
+function createHighSchoolOffensiveTacticalIdentity(match) {
+  return [
+    match?.id || "match",
+    match?.inning || 0,
+    match?.half || "",
+    match?.offenseTeam || "",
+    match?.currentBatter || "",
+    Number(match?.battingOrderIndex?.[match?.offenseTeam]) || 0,
+    Number(match?.outs) || 0,
+    (match?.runners || []).map(Boolean).join("")
+  ].join("|");
+}
+
+function getHighSchoolProvisionalOffensiveTacticalProfile(match) {
+  const trailing = (Number(match?.scores?.[match?.offenseTeam]) || 0) < (Number(match?.scores?.[match?.defenseTeam]) || 0);
+  return Object.freeze({
+    outPreservation: trailing ? 0.66 : 0.54,
+    pressureCreation: (match?.runners || []).some(Boolean) ? 0.62 : 0.5,
+    variancePreference: trailing && Number(match?.inning) >= Number(match?.regulationInnings) - 1 ? 0.6 : 0.42,
+    coordinationTrust: 0.52,
+    informationExploitation: 0.55
+  });
+}
+
+function getHighSchoolProvisionalOffensiveTacticalCapabilities(match) {
+  const batter = getHighSchoolMatchSimulationEntity(match, match?.currentBatter);
+  const offense = batter ? getOffensiveSimulationCapability(batter) : {};
+  return Object.freeze({
+    batting: Number(offense.contact) || Number(batter?.batting) || 5,
+    baseRunning: Number(offense.speed) || Number(batter?.speed) || 5,
+    baseballIQ: Number(offense.discipline) || Number(batter?.decision) || 5,
+    ballSense: Number(batter?.ballSense) || Number(offense.contact) || 5
+  });
+}
+
+function prepareHighSchoolOffensiveTacticalAction(match, options = {}) {
+  if (!match || typeof OffensiveTacticalOpportunity === "undefined" || typeof OffensiveTacticalDecision === "undefined" || typeof OffensiveTacticalAction === "undefined") return null;
+  const identity = createHighSchoolOffensiveTacticalIdentity(match);
+  const existing = OffensiveTacticalAction.normalizeTacticalActionState(match.offensiveTacticalActionState);
+  if (existing?.identity === identity) {
+    match.offensiveTacticalActionState = existing;
+    match.opponentTacticalTruth = { code: existing.selectedTacticalAction, targetRunnerId: match.runners?.[1] || match.runners?.[0] || match.runners?.[2] || "" };
+    return existing;
+  }
+  const scoreDifference = (Number(match.scores?.[match.offenseTeam]) || 0) - (Number(match.scores?.[match.defenseTeam]) || 0);
+  const opportunity = OffensiveTacticalOpportunity.resolveTacticalOpportunity({
+    inning: match.inning,
+    regulationInnings: match.regulationInnings,
+    outs: match.outs,
+    runners: match.runners,
+    livePA: !match.completed && match.outs < 3,
+    half: match.half,
+    offenseTeam: match.offenseTeam,
+    defenseTeam: match.defenseTeam,
+    scoreDifference,
+    batterId: match.currentBatter
+  });
+  let decision = OffensiveTacticalDecision.resolveTacticalDecision({
+    opportunity,
+    identity,
+    seed: match.simulationSeed,
+    tacticalProfile: getHighSchoolProvisionalOffensiveTacticalProfile(match),
+    playerCapabilities: getHighSchoolProvisionalOffensiveTacticalCapabilities(match),
+    recentObservableEvidence: Array.isArray(match.recentObservableTacticalEvidence) ? match.recentObservableTacticalEvidence : []
+  });
+  const fixtureOverride = options.tacticalActionOverride;
+  if (fixtureOverride && opportunity.candidateActions.includes(fixtureOverride)) {
+    decision = Object.freeze({ ...decision, selectedAction: fixtureOverride, debugTrace: Object.freeze({ ...decision.debugTrace, selectedTacticalAction: fixtureOverride, fixtureOverride: true }) });
+  }
+  const actionState = OffensiveTacticalAction.createTacticalActionState(decision);
+  match.offensiveTacticalActionState = actionState;
+  highSchoolOffensiveTacticalDebugTrace = {
+    ...JSON.parse(JSON.stringify(decision.debugTrace)),
+    identity: actionState.identity,
+    commitment: { batter: actionState.batterCommitment, runner: actionState.runnerCommitment },
+    revealTiming: actionState.revealTiming,
+    observableEvents: JSON.parse(JSON.stringify(actionState.observableEvents)),
+    executionDeferred: true,
+    rngNamespace: decision.rngNamespace
+  };
+  match.opponentTacticalTruth = { code: actionState.selectedTacticalAction, targetRunnerId: match.runners?.[1] || match.runners?.[0] || match.runners?.[2] || "" };
+  return actionState;
+}
+
+function advanceHighSchoolOffensiveTacticalReveal(match, phase = "lateReveal") {
+  if (!match?.offensiveTacticalActionState || typeof OffensiveTacticalAction === "undefined") return null;
+  match.offensiveTacticalActionState = OffensiveTacticalAction.advanceTacticalReveal(match.offensiveTacticalActionState, phase);
+  if (highSchoolOffensiveTacticalDebugTrace?.identity === match.offensiveTacticalActionState.identity) {
+    highSchoolOffensiveTacticalDebugTrace.observableEvents = JSON.parse(JSON.stringify(match.offensiveTacticalActionState.observableEvents));
+  }
+  return match.offensiveTacticalActionState;
+}
+
 function getHighSchoolOpponentObservableCues(match) {
+  const tacticalCues = typeof OffensiveTacticalAction !== "undefined"
+    ? OffensiveTacticalAction.formatObservableTacticalInformation(
+      OffensiveTacticalAction.getObservableTacticalEvents(match?.offensiveTacticalActionState)
+    ) : [];
   if (!(match.runners || []).some(Boolean)) {
     return Object.freeze([
+      ...tacticalCues,
       "打者已完成起跑準備，接球後要盡快把球送往一壘。",
       "先讀球的速度與落點，再決定接球腳步與傳球節奏。"
     ]);
   }
   return Object.freeze([
+    ...tacticalCues,
     "壘上跑者隨投球準備啟動。",
     "先讀球的速度與落點，再確認最短的出局目標。"
   ]);
@@ -5811,10 +5917,9 @@ function buildInfieldMeaningfulMoment(matchState, playerContext = player, overri
   if (situation.forceState.forceAtHome && situation.runners[2]) {
     inferredRunnerMovement[2] = inferredRunnerMovement[2] || "committed";
     inferredRunnerTargets[2] = "home";
-  } else if (situation.runners[2] && situation.outs < 2 && matchState.opponentTacticalTruth?.targetRunnerId === situation.runners[2]) {
-    inferredRunnerMovement[2] = inferredRunnerMovement[2] || "advancing";
-    inferredRunnerTargets[2] = "home";
   }
+  // Sprint A tactical intent is non-physical while execution is deferred.
+  // Actual runner movement must come from canonical force or execution state.
   situation.runnerContext = deriveDefensiveRunnerContext(situation.runners, situation.runnerSpeeds, {
     ...overrides,
     runnerMovementProgress: inferredRunnerMovement,
@@ -7484,6 +7589,7 @@ function prepareHighSchoolYearOneMatch() {
     offensivePlateAppearanceState: null,
     pendingOffensiveOpportunity: null,
     offensivePlayerAgencyState: null,
+    offensiveTacticalActionState: null,
     pendingDefensiveResumeState: null,
     lastDefensiveResolution: { resultCode: "", tier: "", decisionQuality: "", executionQuality: "", primaryCause: "", secondaryCause: "", causeExplanation: "" },
     pendingHalfInningTermination: null,
@@ -9121,6 +9227,15 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
   match.currentMomentId = primaryDefensiveDecision ? highSchoolYearOneMomentIds[1]
     : `hs_y1_match_defense_${(densityState?.defensiveMeaningfulDecisionCount || 0) + 1}`;
   match.currentDomain = "defense";
+  const offensiveTacticalState = prepareHighSchoolOffensiveTacticalAction(match, options);
+  if (offensiveTacticalState) {
+    advanceHighSchoolOffensiveTacticalReveal(match, options.tacticalRevealPhase || "lateReveal");
+  } else {
+    match.opponentTacticalTruth = {
+      code: match.previousMomentDecision === "zone" ? "hitAndRun" : match.previousMomentDecision === "attack" ? "earlyBreak" : "shortSwing",
+      targetRunnerId: match.runners[1] || match.runners[0] || match.runners[2] || ""
+    };
+  }
   setHighSchoolDefensiveBallContext(match, options.ballContextType || "");
   match.currentAssignment = getHighSchoolDefensiveSituationText(match);
   const priorTier = match.completedMoments[0]?.tier;
@@ -9129,10 +9244,6 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
     : priorTier === "mixed"
       ? "先把最穩定的守備出局處理乾淨，不讓壘況繼續擴大。"
       : "前一段結果不影響你的守備資格；這一球只看補位與最短合法出局。";
-  match.opponentTacticalTruth = {
-    code: match.previousMomentDecision === "zone" ? "hitAndRun" : match.previousMomentDecision === "attack" ? "earlyBreak" : "shortSwing",
-    targetRunnerId: match.runners[1] || match.runners[0] || match.runners[2] || ""
-  };
   if (isInfieldDecisionFamilyPosition(match.developmentPositionOverride || match.position)) {
     match.defensiveSituation = {};
     buildInfieldMeaningfulMoment(match, player, options.situationOverrides || {});

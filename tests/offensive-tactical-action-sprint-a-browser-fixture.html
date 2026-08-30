@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Offensive Tactical Action Sprint A 驗收 Fixture</title>
+  <style>
+    body { max-width: 760px; margin: 32px auto; padding: 0 20px; font: 16px/1.6 system-ui, sans-serif; color: #17202a; }
+    button { margin: 4px; padding: 8px 12px; }
+    section { margin-top: 20px; padding: 16px; border: 1px solid #ccd3da; border-radius: 10px; }
+    #playerFacing { min-height: 28px; font-size: 18px; }
+    code { overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <h1>Offensive Tactical Action Sprint A</h1>
+  <p>Development-only deterministic fixture；不屬於正式玩家介面。</p>
+  <div>
+    <button id="sacrifice" type="button">A：犧牲短打（early）</button>
+    <button id="surprise" type="button">B：突襲短打（reveal 前）</button>
+    <button id="reveal" type="button">B：推進到 late reveal</button>
+    <button id="standard" type="button">C：正常進攻</button>
+    <button id="saveReload" type="button">D：存檔／讀檔</button>
+  </div>
+  <section aria-labelledby="playerTitle">
+    <h2 id="playerTitle">守備玩家可見資訊</h2>
+    <p id="playerFacing">尚未建立情境。</p>
+  </section>
+  <section aria-labelledby="debugTitle">
+    <h2 id="debugTitle">Developer Trace</h2>
+    <code id="debugTrace">—</code>
+  </section>
+  <script src="../offensive-tactical-action.js"></script>
+  <script>
+    const storageKey = "offensive-tactical-sprint-a-fixture";
+    let state = localStorage.getItem(storageKey)
+      ? OffensiveTacticalAction.normalizeTacticalActionState(JSON.parse(localStorage.getItem(storageKey))) : null;
+    function render() {
+      const events = OffensiveTacticalAction.getObservableTacticalEvents(state);
+      const lines = OffensiveTacticalAction.formatObservableTacticalInformation(events);
+      document.getElementById("playerFacing").textContent = lines.join(" ") || "沒有可觀察到的特殊戰術動作。";
+      document.getElementById("debugTrace").textContent = state
+        ? JSON.stringify({ selectedTacticalAction: state.selectedTacticalAction, currentPhase: state.currentPhase, emittedEventIds: state.emittedEventIds, executionDeferred: state.executionDeferred }) : "—";
+    }
+    function select(action, identity) {
+      state = OffensiveTacticalAction.createTacticalActionState({ selectedAction: action, identity });
+      render();
+    }
+    document.getElementById("sacrifice").addEventListener("click", () => select("sacrificeBunt", "fixture-sacrifice"));
+    document.getElementById("surprise").addEventListener("click", () => select("surpriseBunt", "fixture-surprise"));
+    document.getElementById("reveal").addEventListener("click", () => { state = OffensiveTacticalAction.advanceTacticalReveal(state, "lateReveal"); render(); });
+    document.getElementById("standard").addEventListener("click", () => select("standardAttack", "fixture-standard"));
+    document.getElementById("saveReload").addEventListener("click", () => {
+      if (!state) select("surpriseBunt", "fixture-reload");
+      localStorage.setItem(storageKey, JSON.stringify(state));
+      state = OffensiveTacticalAction.normalizeTacticalActionState(JSON.parse(localStorage.getItem(storageKey)));
+      render();
+    });
+    render();
+  </script>
+</body>
+</html>
