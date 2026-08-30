@@ -1819,6 +1819,8 @@ function createInitialPlayer(name = "") {
         lastOffensiveNoveltyKey: "", recentOffensiveSituationFamilies: [], offensiveSuppressedCount: 0,
         offensiveRepeatSuppressedCount: 0, lastOffensiveDecisionInning: 0, lastOffensiveDecisionHalf: ""
       },
+      pitcherRuntimeState: null,
+      pitcherSequencingDebugTrace: [],
       offensivePlateAppearanceState: null,
       pendingOffensiveOpportunity: null,
       offensivePlayerAgencyState: null,

@@ -7418,6 +7418,8 @@ function prepareHighSchoolYearOneMatch() {
     positionDecisionFamily: "", currentFieldingPosition: starts && (developmentPositionOverride || opportunityDecision?.positionFallbackApplied) ? assignedPosition : "", developmentPositionOverride,
     developmentTestCapabilityOverride, defensiveSituation: {},
     matchDecisionDensityState: createHighSchoolMatchDecisionDensityState(),
+    pitcherRuntimeState: null,
+    pitcherSequencingDebugTrace: [],
     offensivePlateAppearanceState: null,
     pendingOffensiveOpportunity: null,
     offensivePlayerAgencyState: null,
@@ -7447,6 +7449,7 @@ function prepareHighSchoolYearOneMatch() {
     developmentPresentationCompleted: false,
     completed: false
   };
+  ensureHighSchoolPitcherRuntimeState(player.highSchoolMatch);
   if (isHighSchoolMatchOpportunityDebugMode()) ensureHighSchoolMatchOpportunityTrace(player.highSchoolMatch);
   setHighSchoolCoachTacticalDirection(player.highSchoolMatch);
   recordHighSchoolMatchSimulationEvent(player.highSchoolMatch, {
@@ -7808,6 +7811,50 @@ function getHighSchoolOffensivePlateApproachAbilities(subject = player) {
   });
 }
 
+function ensureHighSchoolPitcherRuntimeState(match) {
+  if (!match || typeof PitchSequencing === "undefined") return null;
+  const fallback = {
+    runtimeId: `${match.id || "match"}|opponent-pitcher`,
+    responseProfile: PitcherMentalState.RESPONSE_PROFILE_FIXTURES.simplifyReset,
+    mentalState: { arousal: 50, confidence: 50, cognitiveLoad: 40, resultAttachment: 35 },
+    control: 8
+  };
+  match.pitcherRuntimeState = PitchSequencing.normalizePitcherRuntimeState(match.pitcherRuntimeState, fallback);
+  if (!Array.isArray(match.pitcherSequencingDebugTrace)) match.pitcherSequencingDebugTrace = [];
+  return match.pitcherRuntimeState;
+}
+
+function deriveHighSchoolPitcherMentalStimulus(result, runtimeState) {
+  if (result === "walk") return runtimeState?.previousPAResult === "walk" ? "consecutiveWalk" : "walk";
+  if (result === "single") return "hit";
+  if (["double", "triple", "homeRun"].includes(result)) return "extraBaseHit";
+  if (result === "strikeout") return "strikeout";
+  return "";
+}
+
+function settleHighSchoolPitcherRuntimeAfterPlateAppearance(match, plateAppearanceState) {
+  if (!match || !plateAppearanceState?.completed || typeof PitchSequencing === "undefined") return null;
+  const current = ensureHighSchoolPitcherRuntimeState(match);
+  const recentPitchClasses = (plateAppearanceState.pitchHistory || [])
+    .map(item => item.pitch?.pitchLocationClass)
+    .filter(item => PitchSequencing.PITCH_CLASSES.includes(item))
+    .slice(-6);
+  const traces = (plateAppearanceState.pitchHistory || [])
+    .map(item => item.pitch?.pitcherSequencingTrace)
+    .filter(Boolean);
+  match.pitcherSequencingDebugTrace = [...match.pitcherSequencingDebugTrace, ...JSON.parse(JSON.stringify(traces))].slice(-40);
+  const stimulus = deriveHighSchoolPitcherMentalStimulus(plateAppearanceState.result, current);
+  match.pitcherRuntimeState = stimulus
+    ? PitchSequencing.advancePitcherRuntimeState(current, stimulus, {
+      paResult: plateAppearanceState.result,
+      recentPitchClasses,
+      highLeverage: Boolean(plateAppearanceState.context?.highLeverage),
+      twoStrikeCount: Number(plateAppearanceState.strikes) >= 2
+    })
+    : PitchSequencing.createPitcherRuntimeState({ ...JSON.parse(JSON.stringify(current)), previousPAResult: plateAppearanceState.result, recentPitchClasses });
+  return match.pitcherRuntimeState;
+}
+
 function createHighSchoolOffensivePlateAppearanceIdentity(match, choice) {
   return OffensivePlateApproach.createPlateAppearanceIdentity({
     matchId: match?.id,
@@ -7823,16 +7870,19 @@ function ensureHighSchoolOffensivePlateAppearanceState(match, choice) {
   const existing = OffensivePlateApproach.normalizePlateAppearanceState(match?.offensivePlateAppearanceState);
   if (existing?.paIdentity === paIdentity && existing.approach === choice.approach) return existing;
   const context = analyzeHighSchoolOffensiveDecisionContext(match);
+  const pitcherRuntime = ensureHighSchoolPitcherRuntimeState(match);
   const state = OffensivePlateApproach.createPlateAppearanceState({
     paIdentity,
     batterId: "player",
     approach: choice.approach,
+    pitcherRuntime,
     context: {
       inning: match.inning,
       half: match.half,
       outs: match.outs,
       hasRunner: context.hasRunner,
       scoringPosition: context.scoringPosition,
+      highLeverage: context.lateGame && Math.abs(context.scoreDiff) <= 2,
       runners: match.runners.slice(),
       scores: { ...match.scores }
     }
@@ -8038,6 +8088,7 @@ function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
   const plateAppearanceState = resolveHighSchoolOffensivePlateAppearance(match, choice, options.plateAppearance || {});
   if (!plateAppearanceState?.completed || !plateAppearanceState.result || plateAppearanceState.resultApplied) return false;
   const result = plateAppearanceState.result;
+  settleHighSchoolPitcherRuntimeAfterPlateAppearance(match, plateAppearanceState);
   const resolvedTier = plateAppearanceState.executionQuality === "strong" ? "strong"
     : plateAppearanceState.executionQuality === "weak" ? "failure" : "mixed";
   const situationBefore = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };

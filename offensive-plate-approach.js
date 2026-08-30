@@ -1,8 +1,9 @@
 (function (root, factory) {
-  const api = factory();
+  const sequencing = root.PitchSequencing || (typeof module === "object" && module.exports && typeof require === "function" ? require("./pitch-sequencing.js") : null);
+  const api = factory(sequencing);
   root.OffensivePlateApproach = api;
   if (typeof module === "object" && module.exports) module.exports = api;
-})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+})(typeof globalThis !== "undefined" ? globalThis : this, function (PitchSequencing) {
   "use strict";
 
   const VERSION = "offensive-plate-approach-v1";
@@ -90,6 +91,7 @@
       resultApplied: input.resultApplied === true,
       safetyFallbackUsed: input.safetyFallbackUsed === true,
       context: clone(input.context || {}),
+      pitcherRuntime: input.pitcherRuntime ? clone(input.pitcherRuntime) : null,
       recognitionSummary: clone(input.recognitionSummary || { correct: 0, misread: 0, chaseRecognized: 0, hitterPitchRecognized: 0 }),
       swingExecutionSummary: clone(input.swingExecutionSummary || { swings: 0, takes: 0, whiffs: 0, fouls: 0, ballsInPlay: 0, hardContacts: 0 }),
       decisionQuality: input.decisionQuality || "none",
@@ -120,10 +122,44 @@
         recognitionDifficulty: clamp(override.recognitionDifficulty, 0, 1, profile.recognitionDifficulty),
         attackability: clamp(override.attackability, 0, 1, profile.attackability),
         strike: override.strike === undefined ? profile.strike : override.strike === true,
-        impression: override.impression || profile.impression
+        impression: override.impression || profile.impression,
+        generatorAuthority: override.generatorAuthority || "deterministicFixtureOverride",
+        intendedPitchClass: PITCH_CLASSES.includes(override.intendedPitchClass) ? override.intendedPitchClass : override.pitchLocationClass,
+        controlRealization: override.controlRealization ? clone(override.controlRealization) : null,
+        pitcherSequencingTrace: override.pitcherSequencingTrace ? clone(override.pitcherSequencingTrace) : null
       });
     }
     const pitchNumber = state.pitchNumber + 1;
+    if (PitchSequencing && state.pitcherRuntime) {
+      const recentPitchClasses = (state.pitchHistory || []).map(item => item.pitch?.pitchLocationClass).filter(item => PITCH_CLASSES.includes(item)).slice(-6);
+      const decision = PitchSequencing.createPitchDecision({
+        paIdentity: state.paIdentity,
+        pitchNumber,
+        balls: state.balls,
+        strikes: state.strikes,
+        recentPitchClasses,
+        previousPAResult: state.pitcherRuntime.previousPAResult,
+        scoringPosition: Boolean(state.context?.scoringPosition),
+        highLeverage: Boolean(state.context?.highLeverage),
+        pitcherRuntime: state.pitcherRuntime
+      });
+      const pitchLocationClass = decision.actualPitchClass;
+      const profile = PITCH_CLASS_PROFILES[pitchLocationClass];
+      const realization = decision.controlRealization;
+      return deepFreeze({
+        pitchId: `${state.paIdentity}|pitch-${pitchNumber}`,
+        pitchLocationClass,
+        pitchQuality: realization.realizationQuality === "heldTarget" ? "high" : realization.realizationQuality === "adjacentDrift" ? "competitive" : "missedTarget",
+        recognitionDifficulty: round(clamp(profile.recognitionDifficulty + realization.realizationDistance * 0.025)),
+        attackability: round(clamp(profile.attackability)),
+        strike: profile.strike,
+        impression: profile.impression,
+        generatorAuthority: "pitchSequencingCoreSprintA",
+        intendedPitchClass: decision.intendedPitchClass,
+        controlRealization: clone(realization),
+        pitcherSequencingTrace: clone(decision.debugTrace)
+      });
+    }
     const pitchLocationClass = classifyPitchRoll(deterministicUnit(state.paIdentity, `pitch-class|${pitchNumber}`));
     const profile = PITCH_CLASS_PROFILES[pitchLocationClass];
     const qualityRoll = deterministicUnit(state.paIdentity, `pitch-quality|${pitchNumber}`);
@@ -134,7 +170,11 @@
       recognitionDifficulty: round(clamp(profile.recognitionDifficulty + (qualityRoll - 0.5) * 0.12)),
       attackability: round(clamp(profile.attackability + (qualityRoll - 0.5) * 0.1)),
       strike: profile.strike,
-      impression: profile.impression
+      impression: profile.impression,
+      generatorAuthority: "legacyCompatibilityFallback",
+      intendedPitchClass: pitchLocationClass,
+      controlRealization: null,
+      pitcherSequencingTrace: null
     });
   }
 

@@ -308,6 +308,16 @@ function normalizeSave(saved) {
     });
   fresh.highSchoolMatch.pendingDefensiveResumeState = saved.highSchoolMatch?.pendingDefensiveResumeState
     ? JSON.parse(JSON.stringify(saved.highSchoolMatch.pendingDefensiveResumeState)) : null;
+  fresh.highSchoolMatch.pitcherRuntimeState = typeof PitchSequencing !== "undefined"
+    ? PitchSequencing.normalizePitcherRuntimeState(saved.highSchoolMatch?.pitcherRuntimeState, {
+      runtimeId: `${fresh.highSchoolMatch.id || "match"}|opponent-pitcher`,
+      responseProfile: typeof PitcherMentalState !== "undefined" ? PitcherMentalState.RESPONSE_PROFILE_FIXTURES.simplifyReset : undefined,
+      control: 8
+    })
+    : saved.highSchoolMatch?.pitcherRuntimeState
+      ? JSON.parse(JSON.stringify(saved.highSchoolMatch.pitcherRuntimeState)) : null;
+  fresh.highSchoolMatch.pitcherSequencingDebugTrace = Array.isArray(saved.highSchoolMatch?.pitcherSequencingDebugTrace)
+    ? JSON.parse(JSON.stringify(saved.highSchoolMatch.pitcherSequencingDebugTrace.slice(-40))) : [];
   fresh.highSchoolMatch.offensivePlateAppearanceState = typeof OffensivePlateApproach !== "undefined"
     ? OffensivePlateApproach.normalizePlateAppearanceState(saved.highSchoolMatch?.offensivePlateAppearanceState)
     : saved.highSchoolMatch?.offensivePlateAppearanceState
