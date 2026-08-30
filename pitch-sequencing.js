@@ -243,8 +243,8 @@
       scoringPosition: input.scoringPosition,
       highLeverage: input.highLeverage
     };
-    const strategicPlan = buildStrategicPitchDistribution(context, runtime.processState);
-    const frozenDistribution = freezePitchDistribution(strategicPlan);
+    const strategicPlan = input.frozenDistribution ? null : buildStrategicPitchDistribution(context, runtime.processState);
+    const frozenDistribution = freezePitchDistribution(input.frozenDistribution || strategicPlan);
     const intent = sampleIntendedPitchClass(frozenDistribution, { identity, label: "intended-pitch", roll: input.intentRoll });
     const controlRealization = resolvePitchControl({
       intendedPitchClass: intent.intendedPitchClass,
@@ -284,6 +284,46 @@
     });
   }
 
+  function createObservablePitchRecord(input = {}) {
+    const pitch = input.pitch && typeof input.pitch === "object" ? input.pitch : input;
+    const pitchClassCandidate = pitch.pitchClass || pitch.actualPitchClass || pitch.pitchLocationClass;
+    const pitchClass = PITCH_CLASSES.includes(pitchClassCandidate) ? pitchClassCandidate : "";
+    const distance = Number(pitch.controlRealization?.realizationDistance);
+    const commandCue = typeof pitch.commandCue === "string" && pitch.commandCue
+      ? pitch.commandCue
+      : !Number.isFinite(distance) ? "commandUnknown"
+        : distance === 0 ? "commandAppearsStable"
+          : distance === 1 ? "minorLocationDrift" : "visibleLocationMiss";
+    return deepFreeze({
+      pitchClass,
+      pitchResult: typeof input.pitchResult === "string" ? input.pitchResult : "",
+      ballsAfter: Math.max(0, Math.min(4, Number(input.ballsAfter) || 0)),
+      strikesAfter: Math.max(0, Math.min(3, Number(input.strikesAfter) || 0)),
+      commandCue
+    });
+  }
+
+  function buildObservablePitcherEvidence(input = {}) {
+    const records = Array.isArray(input.observableHistory) ? input.observableHistory.slice(-16) : [];
+    const sanitized = records.map(createObservablePitchRecord).filter(record => PITCH_CLASSES.includes(record.pitchClass));
+    const recentPitchClasses = sanitized.map(record => record.pitchClass);
+    const observableCues = sanitized.map(record => record.commandCue).filter(Boolean).slice(-8);
+    const counts = Object.fromEntries(PITCH_CLASSES.map(pitchClass => [pitchClass, recentPitchClasses.filter(item => item === pitchClass).length]));
+    const challengeCount = counts.hitterPitch + counts.competitiveStrike;
+    const expansionCount = counts.edgeStrike + counts.chasePitch;
+    if (sanitized.length >= 3 && challengeCount / sanitized.length >= 0.55) observableCues.push("recentChallengeHeavy");
+    if (sanitized.length >= 3 && expansionCount / sanitized.length >= 0.5) observableCues.push("recentExpansionPattern");
+    if (sanitized.slice(-4).filter(record => record.commandCue === "visibleLocationMiss").length >= 2) observableCues.push("recentCommandInstability");
+    return deepFreeze({
+      version: VERSION,
+      sampleSize: sanitized.length,
+      recentPitchClasses,
+      observableCues: observableCues.slice(-10),
+      observedClassCounts: counts,
+      previousPitchResult: sanitized.at(-1)?.pitchResult || ""
+    });
+  }
+
   return deepFreeze({
     VERSION,
     RNG_NAMESPACE,
@@ -301,6 +341,8 @@
     createPitcherRuntimeState,
     normalizePitcherRuntimeState,
     advancePitcherRuntimeState,
-    createPitchDecision
+    createPitchDecision,
+    createObservablePitchRecord,
+    buildObservablePitcherEvidence
   });
 });

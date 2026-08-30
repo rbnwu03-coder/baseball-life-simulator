@@ -7259,6 +7259,7 @@ function getHighSchoolYearOneMatchMomentChoices(match = prepareHighSchoolYearOne
   if (match.momentIndex === 1) {
     return getHighSchoolDefensiveMomentChoices(match);
   }
+  ensureHighSchoolBatterAnticipationState(match);
   return buildOffensiveDecisionChoices(match).filter(choice => isOffensiveDecisionChoiceLegal(choice, match));
 }
 
@@ -7420,6 +7421,9 @@ function prepareHighSchoolYearOneMatch() {
     matchDecisionDensityState: createHighSchoolMatchDecisionDensityState(),
     pitcherRuntimeState: null,
     pitcherSequencingDebugTrace: [],
+    pitcherObservableHistory: [],
+    batterAnticipationState: null,
+    prePitchPlanningState: null,
     offensivePlateAppearanceState: null,
     pendingOffensiveOpportunity: null,
     offensivePlayerAgencyState: null,
@@ -7824,6 +7828,72 @@ function ensureHighSchoolPitcherRuntimeState(match) {
   return match.pitcherRuntimeState;
 }
 
+function ensureHighSchoolBatterAnticipationState(match) {
+  if (!match || typeof PitchSequencing === "undefined" || typeof BatterAnticipation === "undefined") return null;
+  const paIdentity = createHighSchoolOffensivePlateAppearanceIdentity(match, { matchMomentId: getHighSchoolYearOneMomentId(match) });
+  if (match.batterAnticipationState?.identity === paIdentity && match.prePitchPlanningState?.paIdentity === paIdentity) {
+    return match.batterAnticipationState;
+  }
+  const pitcherRuntime = ensureHighSchoolPitcherRuntimeState(match);
+  const context = analyzeHighSchoolOffensiveDecisionContext(match);
+  const strategicPlan = PitchSequencing.buildStrategicPitchDistribution({
+    balls: 0,
+    strikes: 0,
+    recentPitchClasses: pitcherRuntime.recentPitchClasses,
+    previousPAResult: pitcherRuntime.previousPAResult,
+    scoringPosition: context.scoringPosition,
+    highLeverage: match.inning >= 6 && Math.abs(context.scoreDifference) <= 2
+  }, pitcherRuntime.processState);
+  const frozenDistribution = PitchSequencing.freezePitchDistribution(strategicPlan);
+  const observableEvidence = PitchSequencing.buildObservablePitcherEvidence({ observableHistory: match.pitcherObservableHistory });
+  const publicContext = BatterAnticipation.createPublicContext({
+    balls: 0,
+    strikes: 0,
+    outs: context.outs,
+    runners: context.runners.map(Boolean),
+    scoreDifference: context.scoreDifference,
+    inning: match.inning,
+    highLeverage: match.inning >= 6 && Math.abs(context.scoreDifference) <= 2,
+    previousPitchResult: observableEvidence.previousPitchResult,
+    previousPAResult: pitcherRuntime.previousPAResult
+  });
+  const anticipation = BatterAnticipation.prepareBatterAnticipation({
+    identity: paIdentity,
+    publicContext,
+    observableEvidence,
+    batterCapabilities: getHighSchoolOffensivePlateApproachAbilities(player)
+  });
+  const debugEvaluation = BatterAnticipation.evaluateAnticipationDebug(anticipation, frozenDistribution.finalFrozenDistribution);
+  match.prePitchPlanningState = {
+    paIdentity,
+    frozenDistribution: JSON.parse(JSON.stringify(frozenDistribution))
+  };
+  match.batterAnticipationState = {
+    ...JSON.parse(JSON.stringify(anticipation)),
+    chosenApproach: "",
+    readiness: null,
+    prePitchReadiness: null,
+    debug: {
+      ...JSON.parse(JSON.stringify(debugEvaluation)),
+      frozenTrueDistribution: JSON.parse(JSON.stringify(frozenDistribution.finalFrozenDistribution))
+    },
+    debugTrace: {
+      publicContext: JSON.parse(JSON.stringify(anticipation.publicContext)),
+      observableEvidenceRaw: JSON.parse(JSON.stringify(anticipation.observableEvidenceRaw)),
+      observationResult: JSON.parse(JSON.stringify(anticipation.observationResult)),
+      interpretationResult: JSON.parse(JSON.stringify(anticipation.interpretationResult)),
+      subjectivePitchDistribution: JSON.parse(JSON.stringify(anticipation.subjectivePitchDistribution)),
+      anticipationConfidence: anticipation.anticipationConfidence,
+      directionAccuracy: debugEvaluation.directionAccuracy,
+      confidenceCalibration: debugEvaluation.confidenceCalibration,
+      chosenApproach: "",
+      prePitchReadiness: null,
+      frozenTrueDistribution: JSON.parse(JSON.stringify(frozenDistribution.finalFrozenDistribution))
+    }
+  };
+  return match.batterAnticipationState;
+}
+
 function deriveHighSchoolPitcherMentalStimulus(result, runtimeState) {
   if (result === "walk") return runtimeState?.previousPAResult === "walk" ? "consecutiveWalk" : "walk";
   if (result === "single") return "hit";
@@ -7843,6 +7913,14 @@ function settleHighSchoolPitcherRuntimeAfterPlateAppearance(match, plateAppearan
     .map(item => item.pitch?.pitcherSequencingTrace)
     .filter(Boolean);
   match.pitcherSequencingDebugTrace = [...match.pitcherSequencingDebugTrace, ...JSON.parse(JSON.stringify(traces))].slice(-40);
+  if (!Array.isArray(match.pitcherObservableHistory)) match.pitcherObservableHistory = [];
+  const observableRecords = (plateAppearanceState.pitchHistory || []).map(item => PitchSequencing.createObservablePitchRecord({
+    pitch: item.pitch,
+    pitchResult: item.pitchResult,
+    ballsAfter: item.countAfter?.balls,
+    strikesAfter: item.countAfter?.strikes
+  }));
+  match.pitcherObservableHistory = [...match.pitcherObservableHistory, ...JSON.parse(JSON.stringify(observableRecords))].slice(-16);
   const stimulus = deriveHighSchoolPitcherMentalStimulus(plateAppearanceState.result, current);
   match.pitcherRuntimeState = stimulus
     ? PitchSequencing.advancePitcherRuntimeState(current, stimulus, {
@@ -7871,11 +7949,30 @@ function ensureHighSchoolOffensivePlateAppearanceState(match, choice) {
   if (existing?.paIdentity === paIdentity && existing.approach === choice.approach) return existing;
   const context = analyzeHighSchoolOffensiveDecisionContext(match);
   const pitcherRuntime = ensureHighSchoolPitcherRuntimeState(match);
+  const anticipation = ensureHighSchoolBatterAnticipationState(match);
+  const readiness = typeof BatterAnticipation !== "undefined" && anticipation
+    ? BatterAnticipation.derivePrePitchReadiness(anticipation, choice.approach) : null;
+  if (anticipation) {
+    match.batterAnticipationState = {
+      ...JSON.parse(JSON.stringify(anticipation)),
+      chosenApproach: choice.approach,
+      readiness: readiness ? JSON.parse(JSON.stringify(readiness)) : null,
+      prePitchReadiness: readiness ? JSON.parse(JSON.stringify(readiness)) : null,
+      debugTrace: anticipation.debugTrace ? {
+        ...JSON.parse(JSON.stringify(anticipation.debugTrace)),
+        chosenApproach: choice.approach,
+        prePitchReadiness: readiness ? JSON.parse(JSON.stringify(readiness)) : null
+      } : null
+    };
+  }
   const state = OffensivePlateApproach.createPlateAppearanceState({
     paIdentity,
     batterId: "player",
     approach: choice.approach,
     pitcherRuntime,
+    batterAnticipation: match.batterAnticipationState,
+    prePitchFrozenDistribution: match.prePitchPlanningState?.paIdentity === paIdentity
+      ? match.prePitchPlanningState.frozenDistribution : null,
     context: {
       inning: match.inning,
       half: match.half,

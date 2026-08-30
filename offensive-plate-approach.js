@@ -92,6 +92,8 @@
       safetyFallbackUsed: input.safetyFallbackUsed === true,
       context: clone(input.context || {}),
       pitcherRuntime: input.pitcherRuntime ? clone(input.pitcherRuntime) : null,
+      batterAnticipation: input.batterAnticipation ? clone(input.batterAnticipation) : null,
+      prePitchFrozenDistribution: input.prePitchFrozenDistribution ? clone(input.prePitchFrozenDistribution) : null,
       recognitionSummary: clone(input.recognitionSummary || { correct: 0, misread: 0, chaseRecognized: 0, hitterPitchRecognized: 0 }),
       swingExecutionSummary: clone(input.swingExecutionSummary || { swings: 0, takes: 0, whiffs: 0, fouls: 0, ballsInPlay: 0, hardContacts: 0 }),
       decisionQuality: input.decisionQuality || "none",
@@ -141,7 +143,8 @@
         previousPAResult: state.pitcherRuntime.previousPAResult,
         scoringPosition: Boolean(state.context?.scoringPosition),
         highLeverage: Boolean(state.context?.highLeverage),
-        pitcherRuntime: state.pitcherRuntime
+        pitcherRuntime: state.pitcherRuntime,
+        frozenDistribution: pitchNumber === 1 ? state.prePitchFrozenDistribution : null
       });
       const pitchLocationClass = decision.actualPitchClass;
       const profile = PITCH_CLASS_PROFILES[pitchLocationClass];
