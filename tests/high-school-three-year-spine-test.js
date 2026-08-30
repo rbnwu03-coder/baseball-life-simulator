@@ -289,7 +289,7 @@ resetToYearTwo(context, {
 verify("44. 合法高二小結 Snapshot 可辨識", evaluate(context, "CareerSpineContract.getCareerSpineSnapshot(player).status === 'recognized' && getCurrentEventId() === 'high_school_year_two_result'"));
 
 const highOneFingerprint = fingerprint(context, highOneIds);
-verify("45. 高一八幕選項與效果指紋更新為 Offensive Plate Approach Foundation v1 累積基線", highOneFingerprint === "a98289f41cf0783c8a9b02aed8637c211d5a9aa5af2c733561d0008371c86e84");
+verify("45. 高一八幕選項與效果指紋更新為 Sprint C Human UX 累積基線", highOneFingerprint === "ffee1f2f7a064fc9e175f689aca82426069e48e60c96a292b83e0b3e3c384f40");
 verify("46. 高三八幕選項與效果指紋維持 Sprint 前基線", fingerprint(context, highThreeIds) === "62efa6c57ea795cd060ca7c34aefe89d3481d66ae085a822bbde4fbd90109f44");
 verify("47. 高二事件沒有直接寫入 careerExit", yearTwoIds.every(id => evaluate(context, `getEvent(${JSON.stringify(id)}).choices.every(choice => !Object.prototype.hasOwnProperty.call(choice, 'careerExit'))`)));
 verify("48. 高二事件沒有新增 roll 或隱藏 outcome 欄位", yearTwoIds.every(id => evaluate(context, `getEvent(${JSON.stringify(id)}).choices.every(choice => !('roll' in choice) && !('outcome' in choice))`)));

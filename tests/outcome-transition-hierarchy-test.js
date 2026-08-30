@@ -193,7 +193,7 @@ general.choose("day1_morning", 0);
 verify("15. 一般事件仍使用 420ms", general.__timers.length === 1 && general.__timers[0].delay === 420);
 verify("16. 一般事件不新增 Continue", !general.__nodes.get("choices").innerHTML.includes("continueYouthSeasonOutcome") && !general.__nodes.get("choices").innerHTML.includes(">繼續<"));
 verify("17. changeLog 仍為原始回饋容器", general.__nodes.get("changeLog").innerHTML.includes("outcome-feedback__content"));
-verify("18. 一般回饋具有 Outcome Feedback 語意 class", general.__nodes.get("changeLog").classList.contains("outcome__feedback") && general.__nodes.get("changeLog").getAttribute("aria-label") === "上一個選擇的系統回饋");
+verify("18. 一般回饋具有 Outcome Feedback 語意 class", general.__nodes.get("changeLog").classList.contains("outcome__feedback") && general.__nodes.get("changeLog").getAttribute("aria-label") === "上一個選擇帶來的回應");
 verify("19. 一般回饋完整顯示且不裁切", /#changeLog\s*\{[\s\S]*?height\s*:\s*auto[\s\S]*?overflow\s*:\s*visible/.test(css) && !/#changeLog\.outcome__feedback\s*\{[^}]*overflow\s*:\s*hidden/.test(css));
 general.__timers.shift().callback();
 verify("20. 新事件出現後新選項可操作", buttons(general).length > 0 && buttons(general).every(button => !button.disabled));
