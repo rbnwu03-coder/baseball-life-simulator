@@ -13,6 +13,15 @@
     "commandAppearsStable", "minorLocationDrift", "visibleLocationMiss",
     "recentChallengeHeavy", "recentExpansionPattern", "recentCommandInstability"
   ]);
+  const CONFIDENCE_THRESHOLDS = Object.freeze({ medium: 0.45, high: 0.72 });
+  const OBSERVABLE_CUE_PLAYER_TEXT = Object.freeze({
+    recentChallengeHeavy: "投手最近較常主動進入好球帶。",
+    recentExpansionPattern: "投手最近開始增加讓打者追出好球帶的球。",
+    commandAppearsStable: "投手最近的控球看起來相對穩定。",
+    minorLocationDrift: "投手最近的進壘位置開始有些偏移。",
+    visibleLocationMiss: "最近幾球出現了較明顯的控球偏差。",
+    recentCommandInstability: "投手最近的控球穩定度正在下降。"
+  });
 
   function clone(value) {
     return value === undefined ? undefined : JSON.parse(JSON.stringify(value));
@@ -291,12 +300,130 @@
     });
   }
 
+  function formatObservableCueSummary(observationResult = {}) {
+    const observedPitchClasses = Array.isArray(observationResult.observedPitchClasses)
+      ? observationResult.observedPitchClasses.filter(item => PITCH_CLASSES.includes(item)) : [];
+    const observedCues = Array.isArray(observationResult.observedCues) ? observationResult.observedCues : [];
+    const cueLines = [...new Set(observedCues.map(cue => OBSERVABLE_CUE_PLAYER_TEXT[cue]).filter(Boolean))];
+    if (cueLines.length) return deepFreeze(cueLines.slice(0, 2));
+    if (!observedPitchClasses.length) return deepFreeze(["目前還沒有足夠線索判斷投手的攻擊方式。"]);
+    const challenge = observedPitchClasses.filter(item => ["hitterPitch", "competitiveStrike"].includes(item)).length;
+    const expansion = observedPitchClasses.filter(item => ["edgeStrike", "chasePitch"].includes(item)).length;
+    if (challenge >= expansion + 2) return deepFreeze(["你看到投手近期較常把球送進可處理區域。"]);
+    if (expansion >= challenge + 2) return deepFreeze(["你看到投手近期較常把球壓向邊角或好球帶外。"]);
+    return deepFreeze(["你看到了幾顆來球，但目前還沒有一致的明顯傾向。"]);
+  }
+
+  function classifySubjectiveAnticipation(anticipation = {}) {
+    const distribution = normalizeDistribution(anticipation.subjectivePitchDistribution || anticipation.subjectiveDistribution || anticipation.interpretationResult?.subjectivePitchDistribution || BASE_PRIOR);
+    const uncertainty = clamp(anticipation.interpretationResult?.uncertainty, 0, 1, 0.5);
+    const challenge = distribution.hitterPitch + distribution.competitiveStrike;
+    const expansion = distribution.edgeStrike + distribution.chasePitch;
+    if (uncertainty >= 0.64 && Math.abs(challenge - expansion) < 0.15) return "unclear";
+    if (Math.abs(challenge - expansion) < 0.08) return "mixed";
+    return challenge > expansion ? "challenge" : "expansion";
+  }
+
+  function formatAnticipationSummary(anticipation = {}) {
+    const tendency = classifySubjectiveAnticipation(anticipation);
+    if (tendency === "challenge") return "你比較期待投手主動進入可以處理的區域。";
+    if (tendency === "expansion") return "你比較警戒壓在邊角或誘使追打的球。";
+    if (tendency === "unclear") return "你目前比較難確定投手會不會主動進入好球帶。";
+    return "目前沒有很明確的攻擊方向。";
+  }
+
+  function formatAnticipationConfidence(confidence) {
+    const value = clamp(confidence, 0, 1, 0);
+    return value >= CONFIDENCE_THRESHOLDS.high ? "高" : value >= CONFIDENCE_THRESHOLDS.medium ? "中等" : "低";
+  }
+
+  function formatPlayerFacingPitchClass(pitchClass) {
+    const labels = {
+      hitterPitch: "一顆相對容易積極攻擊的球。",
+      competitiveStrike: "一顆進入可處理區域的好球。",
+      edgeStrike: "一顆壓在好球帶邊緣附近的球。",
+      chasePitch: "一顆試圖讓你追出好球帶的球。",
+      clearBall: "一顆明顯離開可攻擊區域的球。"
+    };
+    return labels[pitchClass] || "投手完成了這一球。";
+  }
+
+  function formatRecognitionResult(recognition = {}, actualPitchClass = "") {
+    if (recognition.correct !== true) return "球出手後，你沒有完整辨認這顆球的進壘性質。";
+    if (["chasePitch", "clearBall"].includes(actualPitchClass)) return "球出手後，你辨認出它正在離開可攻擊區域。";
+    if (actualPitchClass === "edgeStrike") return "球出手後，你辨認出它正壓在好球帶邊緣。";
+    return "球出手後，你及時辨認出這顆球可以處理。";
+  }
+
+  function formatExecutionResult(pitchEvent = {}) {
+    if (pitchEvent.action === "take") return "你沒有出棒。";
+    if (pitchEvent.action !== "swing") return "你依照原本的打席策略等待來球。";
+    if (pitchEvent.contact !== true) return "你選擇出棒，但沒有碰到球。";
+    if (pitchEvent.pitchResult === "foul") return "你出棒並碰到球，結果形成界外球。";
+    if (pitchEvent.pitchResult === "ballInPlay") return "你出棒並讓球進入場內。";
+    return "你選擇出棒處理這顆球。";
+  }
+
+  function createPrePAPresentation(anticipation = {}) {
+    return deepFreeze({
+      observationLines: clone(formatObservableCueSummary(anticipation.observationResult)),
+      anticipationText: formatAnticipationSummary(anticipation),
+      confidenceText: formatAnticipationConfidence(anticipation.anticipationConfidence ?? anticipation.confidence),
+      tendency: classifySubjectiveAnticipation(anticipation)
+    });
+  }
+
+  function classifyActualPitchDirection(pitchClass) {
+    return ["hitterPitch", "competitiveStrike"].includes(pitchClass) ? "challenge"
+      : ["edgeStrike", "chasePitch"].includes(pitchClass) ? "expansion" : "clearBall";
+  }
+
+  function createPostPAExplainability(input = {}) {
+    const anticipation = input.anticipation || {};
+    const openingPitchEvent = input.openingPitchEvent || input.pitchEvent || {};
+    const finalPitchEvent = input.finalPitchEvent || input.pitchEvent || {};
+    const actualPitchClass = openingPitchEvent.pitch?.pitchLocationClass || openingPitchEvent.pitch?.actualPitchClass || "";
+    const hasOpeningPitch = PITCH_CLASSES.includes(actualPitchClass);
+    const anticipatedDirection = classifySubjectiveAnticipation(anticipation);
+    const actualDirection = classifyActualPitchDirection(actualPitchClass);
+    const directionComparable = hasOpeningPitch && ["challenge", "expansion"].includes(anticipatedDirection) && ["challenge", "expansion"].includes(actualDirection);
+    const directionMatched = directionComparable ? anticipatedDirection === actualDirection : null;
+    const recognitionCorrect = openingPitchEvent.recognition?.correct === true;
+    let openingAttributionText = hasOpeningPitch
+      ? recognitionCorrect ? "一開始沒有明確預判，但球出手後你看清了第一球。" : "一開始沒有明確預判，第一球出手後也沒能完全看清。"
+      : "這次沒有留下足夠的逐球資訊，無法回顧一開始的判讀。";
+    if (directionMatched === false && recognitionCorrect) openingAttributionText = "你一開始沒有抓到第一球的方向，但球出手後及時修正了判斷。";
+    else if (directionMatched === false) openingAttributionText = "你一開始沒有抓到第一球的方向，球出手後也沒能完全修正。";
+    else if (directionMatched === true && recognitionCorrect) openingAttributionText = "你一開始讀到了第一球，球出手後也看清了進壘位置。";
+    else if (directionMatched === true) openingAttributionText = "你一開始抓到第一球的大致方向，但出手後沒有完全看清。";
+    const finalExecutionMiss = finalPitchEvent.action === "swing" && finalPitchEvent.contact !== true;
+    const causalityText = directionMatched === true && recognitionCorrect && finalExecutionMiss
+      ? `${openingAttributionText} 但最後沒有完成理想的揮棒。`
+      : openingAttributionText;
+    const singlePitch = input.singlePitch === true || (input.singlePitch === undefined && Boolean(input.pitchEvent));
+    return deepFreeze({
+      anticipationText: formatAnticipationSummary(anticipation),
+      confidenceText: formatAnticipationConfidence(anticipation.anticipationConfidence ?? anticipation.confidence),
+      actualPitchText: hasOpeningPitch ? formatPlayerFacingPitchClass(actualPitchClass) : "沒有足夠的第一球資料。",
+      recognitionText: hasOpeningPitch ? formatRecognitionResult(openingPitchEvent.recognition, actualPitchClass) : "沒有足夠的第一球辨認資料。",
+      executionText: finalPitchEvent.pitch ? formatExecutionResult(finalPitchEvent) : "沒有足夠的最後執行資料。",
+      outcomeText: typeof input.outcomeText === "string" ? input.outcomeText : "這個打席已經結束。",
+      openingAttributionText,
+      causalityText,
+      directionMatched,
+      hasOpeningPitch,
+      singlePitch
+    });
+  }
+
   return deepFreeze({
     VERSION,
     RNG_NAMESPACE,
     PITCH_CLASSES,
     BASE_PRIOR,
     OBSERVABLE_CUE_VOCABULARY,
+    CONFIDENCE_THRESHOLDS,
+    OBSERVABLE_CUE_PLAYER_TEXT,
     stableHash,
     deterministicUnit,
     normalizeDistribution,
@@ -305,6 +432,15 @@
     resolveAnticipationInterpretation,
     prepareBatterAnticipation,
     evaluateAnticipationDebug,
-    derivePrePitchReadiness
+    derivePrePitchReadiness,
+    formatObservableCueSummary,
+    classifySubjectiveAnticipation,
+    formatAnticipationSummary,
+    formatAnticipationConfidence,
+    formatPlayerFacingPitchClass,
+    formatRecognitionResult,
+    formatExecutionResult,
+    createPrePAPresentation,
+    createPostPAExplainability
   });
 });
