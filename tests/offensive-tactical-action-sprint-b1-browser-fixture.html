@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Offensive Tactical Action Sprint B1 — Deterministic Fixtures</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background:#10151d; color:#eef4ff; }
+    body { max-width:980px; margin:0 auto; padding:28px 18px 48px; }
+    h1 { font-size:1.55rem; margin-bottom:8px; }
+    p { color:#b9c8dc; line-height:1.6; }
+    .controls { display:flex; flex-wrap:wrap; gap:10px; margin:22px 0; }
+    button { border:1px solid #4a668a; border-radius:8px; background:#1b2b40; color:#fff; padding:10px 14px; cursor:pointer; }
+    button:hover, button:focus-visible { background:#274364; outline:2px solid #86b9ff; }
+    .card { background:#161f2b; border:1px solid #2f435d; border-radius:12px; padding:18px; }
+    .pass { color:#7ee2a8; font-weight:700; }
+    dl { display:grid; grid-template-columns:minmax(160px, 240px) 1fr; gap:8px 18px; }
+    dt { color:#9eb5d1; } dd { margin:0; overflow-wrap:anywhere; }
+    code { color:#ffdaa2; }
+  </style>
+</head>
+<body>
+  <h1>短打執行與打席持續性 — B1 人工驗證</h1>
+  <p>以下六個入口完全固定，不需重開比賽碰運氣。它們只驗證短打的來球、辨識、收／點、準備、接觸、球形與球數；不會建立跑者移動或守備路線。</p>
+  <div class="controls" aria-label="Deterministic fixtures">
+    <button data-fixture="hold">1. 收棒壞球</button>
+    <button data-fixture="controlled">2. 受控犧牲短打</button>
+    <button data-fixture="hardSecond">3. 強勁二壘側</button>
+    <button data-fixture="surprise">4. 突襲短打</button>
+    <button data-fixture="twoStrike">5. 兩好球界外</button>
+    <button data-fixture="rescue">6. 誤判後碰成界內</button>
+  </div>
+  <section class="card" id="result" aria-live="polite"><p>請選擇一個固定案例。</p></section>
+
+  <script src="../offensive-tactical-action.js"></script>
+  <script src="../offensive-bunt-count-rules.js"></script>
+  <script src="../offensive-bunt-execution.js"></script>
+  <script>
+    const fixtures = {
+      hold: { label:"收棒壞球", action:"sacrificeBunt", pitch:{pitchLocationClass:"clearBall",strike:false}, recognition:{correct:true,perceivedPitchClass:"clearBall"}, rolls:{attempt:.99} },
+      controlled: { label:"受控犧牲短打", action:"sacrificeBunt", pitch:{pitchLocationClass:"competitiveStrike",strike:true}, recognition:{correct:true,perceivedPitchClass:"competitiveStrike"}, rolls:{attempt:0,preparation:0,contact:.99,fairBallType:.9,pace:.6,placement:.9} },
+      hardSecond: { label:"強勁二壘側短打", action:"sacrificeBunt", pitch:{pitchLocationClass:"competitiveStrike",strike:true}, recognition:{correct:true,perceivedPitchClass:"competitiveStrike"}, rolls:{attempt:0,preparation:.4,contact:.99,fairBallType:.9,pace:.99,placement:.51} },
+      surprise: { label:"突襲短打仍可成功碰球", action:"surpriseBunt", pitch:{pitchLocationClass:"edgeStrike",strike:true}, recognition:{correct:true,perceivedPitchClass:"edgeStrike"}, rolls:{attempt:0,preparation:.78,contact:.99,fairBallType:.9,pace:.26,placement:.26} },
+      twoStrike: { label:"兩好球短打界外", action:"sacrificeBunt", count:{balls:1,strikes:2}, pitch:{pitchLocationClass:"competitiveStrike",strike:true}, recognition:{correct:true,perceivedPitchClass:"competitiveStrike"}, rolls:{attempt:0,preparation:0,contact:.15} },
+      rescue: { label:"誤判後仍碰成界內", action:"surpriseBunt", pitch:{pitchLocationClass:"edgeStrike",strike:true}, recognition:{correct:false,perceivedPitchClass:"chasePitch"}, rolls:{attempt:0,preparation:.6,contact:.99,fairBallType:.9,pace:.51,placement:.51} }
+    };
+    function runFixture(key) {
+      const fixture=fixtures[key];
+      const actionState=OffensiveTacticalAction.createTacticalActionState({identity:`browser-${key}`,selectedAction:fixture.action});
+      const plan=OffensiveBuntExecution.createPATacticalPlan({actionState,count:fixture.count});
+      const output=OffensiveBuntExecution.resolveAndAdvanceBuntPitch({plan,actualPitch:fixture.pitch,recognition:fixture.recognition,capabilities:{batting:10,reaction:10,baseballIQ:10,ballSense:10},rolls:fixture.rolls});
+      const r=output.resolution, c=output.countResult;
+      const noDownstream=r.runnerMovement===null&&r.runnerTargets===null&&r.defensiveRoutes===null&&r.finalOutcome===null&&r.batterOut===false;
+      document.getElementById("result").innerHTML=`
+        <h2>${fixture.label} <span class="pass">PASS</span></h2>
+        <p>${OffensiveBuntExecution.formatBuntPhysicalTruth(r)}</p>
+        <dl>
+          <dt>PA 戰術</dt><dd><code>${r.paTacticalPlan.selectedTacticalAction}</code>（${output.plan.status}）</dd>
+          <dt>本球承諾</dt><dd><code>${r.currentPitchTacticalCommitment.commitment}</code></dd>
+          <dt>Reveal</dt><dd><code>${r.revealTiming}</code></dd>
+          <dt>實際來球／辨識</dt><dd><code>${r.actualPitch.pitchLocationClass}</code>／${r.recognition.correct?"正確":"不完美"}</dd>
+          <dt>Attempt／Preparation</dt><dd><code>${r.attemptDecision}</code>／<code>${r.preparationState??"—"}</code></dd>
+          <dt>Contact／Ball</dt><dd><code>${r.contactResult??"—"}</code>／<code>${r.fairBallType??"—"}</code></dd>
+          <dt>Pace／Placement</dt><dd><code>${r.pace??"—"}</code>／<code>${r.placement??"—"}</code></dd>
+          <dt>球數／打席</dt><dd>${c.countAfter.balls}-${c.countAfter.strikes}；<code>${c.paResult||"continues"}</code></dd>
+          <dt>B1 防火牆</dt><dd class="${noDownstream?"pass":""}">${noDownstream?"PASS：無跑者移動、無守備路線、無最終 outcome":"FAIL"}</dd>
+        </dl>`;
+    }
+    document.querySelectorAll("button[data-fixture]").forEach(button=>button.addEventListener("click",()=>runFixture(button.dataset.fixture)));
+    runFixture("hold");
+  </script>
+</body>
+</html>

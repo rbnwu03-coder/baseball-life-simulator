@@ -1828,6 +1828,8 @@ function createInitialPlayer(name = "") {
       pendingOffensiveOpportunity: null,
       offensivePlayerAgencyState: null,
       offensiveTacticalActionState: null,
+      offensiveBuntPAState: null,
+      buntBallInPlayState: null,
       pendingDefensiveResumeState: null,
       lastDefensiveResolution: {},
       pendingHalfInningTermination: null,

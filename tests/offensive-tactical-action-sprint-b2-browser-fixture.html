@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Offensive Tactical Action Sprint B2 — 人工驗證</title>
+  <style>
+    :root { color-scheme:dark; font-family:system-ui,sans-serif; background:#10151d; color:#eef4ff; }
+    body { max-width:920px; margin:0 auto; padding:28px 18px 48px; }
+    h1 { font-size:1.55rem; } p { color:#bed0e5; line-height:1.65; }
+    .controls { display:flex; gap:10px; flex-wrap:wrap; margin:22px 0; }
+    button { border:1px solid #56749a; border-radius:8px; background:#1b2b40; color:white; padding:10px 14px; cursor:pointer; }
+    button:hover,button:focus-visible { background:#294a70; outline:2px solid #8fc2ff; }
+    .card { background:#161f2b; border:1px solid #30465f; border-radius:12px; padding:18px; }
+    .eyebrow { color:#83e7ae; font-weight:700; } ul { line-height:1.8; } strong { color:#ffdda6; }
+  </style>
+</head>
+<body>
+  <h1>一般滾地球 vs 短打守備 — B2 固定案例</h1>
+  <p>三個入口都是固定結果。請比較球況、跑者動作、第一出局選擇，以及完成二壘封殺後的一壘轉傳窗口。</p>
+  <div class="controls">
+    <button data-fixture="ordinary">1. 一般滾地球</button>
+    <button data-fixture="slow">2. 偏強二壘側短打・慢打者</button>
+    <button data-fixture="fast">3. 同一短打・快打者</button>
+  </div>
+  <section class="card" id="result" aria-live="polite"></section>
+  <script src="../offensive-bunt-defensive-handoff.js"></script>
+  <script>
+    const windowText={wide:"窗口充足",normal:"仍有合理窗口",narrow:"窗口很緊",expired:"窗口已關閉"};
+    function makeBunt(speed){
+      return OffensiveBuntDefensiveHandoff.createHandoff({
+        identity:`human-b2-${speed}`,
+        physicalTruth:{contactResult:"fairContact",fairBallType:"groundBunt",pace:"hard",placement:"secondBaseSide",preparationState:"set"},
+        existingRunners:[{runnerId:"一壘跑者",originBase:1,speed:2,reaction:7}],
+        batterRunner:{runnerId:"打者跑者",speed}, forceState:{forceAtSecond:true},
+        priorRunnerCommitment:"conditionalAdvance", defenderContext:{playerPosition:"二壘手"}
+      });
+    }
+    const fixtures={ordinary:{title:"一般滾地球",html:`<p>一般深度的滾地球進入二壘手守區。一壘跑者隨擊球推進，打者往一壘跑。</p><ul><li>第一出局：傳一壘拿打者，或啟動既有二壘封殺路線</li><li>球況來源：一般守備球況</li><li>第二傳：依一般雙殺窗口解析</li></ul>`},slow:makeBunt(2),fast:makeBunt(9)};
+    function render(key){
+      if(key==="ordinary"){result.innerHTML=`<div class="eyebrow">Fixture 1</div><h2>${fixtures.ordinary.title}</h2>${fixtures.ordinary.html}`;return;}
+      const h=fixtures[key],lead=h.runnerReassessment.existingRunners[0],batter=h.runnerReassessment.batterRunner;
+      const relay=h.timingWindows.relayToFirstWindow.state;
+      result.innerHTML=`<div class="eyebrow">${key==="slow"?"Fixture 2":"Fixture 3"}</div><h2>${key==="slow"?"偏強二壘側短打・慢打者":"同一顆偏強二壘側短打・快打者"}</h2>
+        <p>打者把球點得偏強，球往二壘手一側滾去。一壘跑者已啟動往二壘；打者跑者正衝向一壘。</p>
+        <ul><li>二壘手接球機會：<strong>較有利</strong></li><li>一壘跑者：${lead.startQuality==="preparedStart"?"準備後啟動":"一般啟動"}，往二壘推進</li><li>打者到一壘：${batter.timingProfile==="early"?"較早":"一般"}</li><li>第一出局選擇：<strong>穩穩拿打者</strong>／<strong>傳二壘封殺前位跑者</strong></li><li>二壘封殺後再讀一壘：<strong>${windowText[relay]}</strong></li><li>預期：${relay==="expired"?"第一個出局成立後，不會自動再傳出第二個出局。":"第一個出局成立後，重新判斷仍可轉傳一壘。"}</li></ul>`;
+    }
+    document.querySelectorAll("button[data-fixture]").forEach(button=>button.addEventListener("click",()=>render(button.dataset.fixture)));
+    render("ordinary");
+  </script>
+</body>
+</html>

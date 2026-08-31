@@ -2572,7 +2572,7 @@ function getHighSchoolYearOneMatchPresentation() {
     : match.momentIndex === 1
       ? getHighSchoolDefensiveSituationText(match)
       : `${formatHighSchoolMatchRunners(match.runners)}；這個打席代表${getHighSchoolOffensiveObjectiveContext(match)}。\n投手目前的處理：${match.opponentAdjustment}`;
-  const previous = match.previousMomentOutcome ? `\n前一個結果：${match.previousMomentOutcome}` : "";
+  const previous = match.previousMomentOutcome && match.currentDomain !== "defense" ? `\n前一個結果：${match.previousMomentOutcome}` : "";
   const currentPosition = match.playerLineupStatus === "bench"
     ? "板凳待命"
     : match.playerFieldingAssignment || match.currentFieldingPosition || match.position;
@@ -4198,7 +4198,7 @@ function createHighSchoolMatchSimulationSeed(randomSource = Math.random) {
 function getHighSchoolMatchEventPresentationImportance(event = {}) {
   if (event.presentationImportance) return event.presentationImportance;
   if (event.type === "matchEntry") return "hidden";
-  if (["run", "halfInningEnd", "sideChange", "meaningfulMomentReached", "meaningfulMomentResolved", "playerRoutinePlay", "playerEntry", "walkOff", "gameEnd"].includes(event.type)) return "attention";
+  if (["run", "halfInningEnd", "sideChange", "meaningfulMomentReached", "meaningfulMomentResolved", "playerRoutinePlay", "playerEntry", "buntPitchResolved", "buntDefensiveFallback", "walkOff", "gameEnd"].includes(event.type)) return "attention";
   if (event.type === "plateAppearance" && (["double", "triple", "homeRun"].includes(event.result) || Number(event.runsBattedIn) > 0 || Number(event.after?.outs) >= 3)) return "attention";
   return "flow";
 }
@@ -4382,6 +4382,9 @@ const highSchoolBallContexts = Object.freeze({
 });
 
 function getHighSchoolBallContext(match) {
+  if (match?.ballContext && typeof match.ballContext === "object" && match.ballContext.sourceFamily === "bunt") {
+    return Object.freeze({ ...match.ballContext });
+  }
   const type = typeof match?.ballContext === "string" ? match.ballContext : match?.ballContext?.type;
   return highSchoolBallContexts[type] || highSchoolBallContexts.normalGrounder;
 }
@@ -4423,10 +4426,16 @@ function formatHighSchoolBatterHandedness(bats) {
 }
 
 let highSchoolOffensiveTacticalDebugTrace = null;
+let highSchoolOffensiveBuntDebugTrace = null;
 
 function getHighSchoolOffensiveTacticalDebugTrace() {
   return highSchoolOffensiveTacticalDebugTrace
     ? Object.freeze(JSON.parse(JSON.stringify(highSchoolOffensiveTacticalDebugTrace))) : null;
+}
+
+function getHighSchoolOffensiveBuntDebugTrace() {
+  return highSchoolOffensiveBuntDebugTrace
+    ? Object.freeze(JSON.parse(JSON.stringify(highSchoolOffensiveBuntDebugTrace))) : null;
 }
 
 function createHighSchoolOffensiveTacticalIdentity(match) {
@@ -4470,6 +4479,7 @@ function prepareHighSchoolOffensiveTacticalAction(match, options = {}) {
   const existing = OffensiveTacticalAction.normalizeTacticalActionState(match.offensiveTacticalActionState);
   if (existing?.identity === identity) {
     match.offensiveTacticalActionState = existing;
+    ensureHighSchoolOffensiveBuntPATacticalPlan(match);
     match.opponentTacticalTruth = { code: existing.selectedTacticalAction, targetRunnerId: match.runners?.[1] || match.runners?.[0] || match.runners?.[2] || "" };
     return existing;
   }
@@ -4500,6 +4510,7 @@ function prepareHighSchoolOffensiveTacticalAction(match, options = {}) {
   }
   const actionState = OffensiveTacticalAction.createTacticalActionState(decision);
   match.offensiveTacticalActionState = actionState;
+  ensureHighSchoolOffensiveBuntPATacticalPlan(match);
   highSchoolOffensiveTacticalDebugTrace = {
     ...JSON.parse(JSON.stringify(decision.debugTrace)),
     identity: actionState.identity,
@@ -4511,6 +4522,276 @@ function prepareHighSchoolOffensiveTacticalAction(match, options = {}) {
   };
   match.opponentTacticalTruth = { code: actionState.selectedTacticalAction, targetRunnerId: match.runners?.[1] || match.runners?.[0] || match.runners?.[2] || "" };
   return actionState;
+}
+
+function ensureHighSchoolOffensiveBuntPATacticalPlan(match) {
+  if (!match || typeof OffensiveBuntExecution === "undefined") return null;
+  const actionState = typeof OffensiveTacticalAction !== "undefined"
+    ? OffensiveTacticalAction.normalizeTacticalActionState(match.offensiveTacticalActionState) : match.offensiveTacticalActionState;
+  const isBuntPlan = OffensiveBuntExecution.BUNT_ACTIONS.includes(actionState?.selectedTacticalAction);
+  if (!actionState || !isBuntPlan) {
+    match.offensiveBuntPAState = null;
+    match.buntBallInPlayState = null;
+    return null;
+  }
+  const existing = OffensiveBuntExecution.normalizePATacticalPlan(match.offensiveBuntPAState);
+  if (existing?.identity === actionState.identity) {
+    match.offensiveBuntPAState = existing;
+    return existing;
+  }
+  match.offensiveBuntPAState = OffensiveBuntExecution.createPATacticalPlan({
+    actionState,
+    count: { balls: 0, strikes: 0 }
+  });
+  match.buntBallInPlayState = null;
+  return match.offensiveBuntPAState;
+}
+
+function getHighSchoolProvisionalBuntExecutionCapabilities(match) {
+  const batter = getHighSchoolMatchSimulationEntity(match, match?.currentBatter);
+  const offense = batter ? getOffensiveSimulationCapability(batter) : {};
+  return Object.freeze({
+    batting: Number(offense.contact) || Number(batter?.batting) || 5,
+    reaction: Number(batter?.baseballSkills?.reaction) || Number(batter?.reaction) || Number(batter?.defense) || 5,
+    baseballIQ: Number(offense.discipline) || Number(batter?.baseballSkills?.baseballIQ) || Number(batter?.decision) || 5,
+    ballSense: Number(batter?.ballSense) || Number(offense.contact) || 5
+  });
+}
+
+function createHighSchoolBuntActualPitch(match, plan, options = {}) {
+  if (options.actualPitch) return OffensiveBuntExecution.normalizeActualPitch(options.actualPitch);
+  if (typeof OffensivePlateApproach === "undefined") return OffensiveBuntExecution.normalizeActualPitch({});
+  const pitcherRuntime = ensureHighSchoolPitcherRuntimeState(match);
+  const state = OffensivePlateApproach.createPlateAppearanceState({
+    paIdentity: plan.identity,
+    batterId: match.currentBatter || "batter",
+    balls: plan.count.balls,
+    strikes: plan.count.strikes,
+    pitchNumber: plan.pitchNumber,
+    pitcherRuntime,
+    context: {
+      scoringPosition: Boolean(match.runners?.[1] || match.runners?.[2]),
+      highLeverage: Number(match.inning) >= Number(match.regulationInnings || 7) - 1
+    }
+  });
+  const pitch = OffensivePlateApproach.generatePitchOpportunity(state);
+  return OffensiveBuntExecution.normalizeActualPitch(pitch);
+}
+
+function getHighSchoolBuntPitchRecognition(match, plan, actualPitch, capabilities, options = {}) {
+  if (options.recognition) return OffensiveBuntExecution.normalizeRecognition(options.recognition, actualPitch);
+  if (typeof OffensivePlateApproach === "undefined") return OffensiveBuntExecution.normalizeRecognition({}, actualPitch);
+  const profile = OffensivePlateApproach.PITCH_CLASS_PROFILES[actualPitch.pitchLocationClass];
+  const recognitionPitch = {
+    ...actualPitch,
+    recognitionDifficulty: profile?.recognitionDifficulty ?? 0.5
+  };
+  const recognitionState = OffensivePlateApproach.createPlateAppearanceState({
+    paIdentity: plan.identity,
+    balls: plan.count.balls,
+    strikes: plan.count.strikes,
+    pitchNumber: plan.pitchNumber
+  });
+  const recognition = OffensivePlateApproach.getRecognitionResult(recognitionState, recognitionPitch, {
+    observe: capabilities.reaction,
+    baseballIQ: capabilities.baseballIQ,
+    ballSense: capabilities.ballSense
+  }, options.recognitionRoll);
+  return OffensiveBuntExecution.normalizeRecognition(recognition, actualPitch);
+}
+
+function resolveHighSchoolOffensiveBuntPitch(match, options = {}) {
+  if (!match || typeof OffensiveBuntExecution === "undefined") return null;
+  const plan = ensureHighSchoolOffensiveBuntPATacticalPlan(match);
+  if (!plan || plan.status !== "active" || plan.completed || plan.cancelled) return null;
+  const actionState = match.offensiveTacticalActionState;
+  const pitchCommitment = OffensiveBuntExecution.createCurrentPitchTacticalCommitment(plan, {
+    revealTiming: actionState?.revealTiming
+  });
+  const actualPitch = createHighSchoolBuntActualPitch(match, plan, options);
+  const capabilities = getHighSchoolProvisionalBuntExecutionCapabilities(match);
+  const recognition = getHighSchoolBuntPitchRecognition(match, plan, actualPitch, capabilities, options);
+  const provisionalBuntFit = OffensiveBuntExecution.createProvisionalBuntExecutionFit(capabilities);
+  const result = OffensiveBuntExecution.resolveAndAdvanceBuntPitch({
+    plan,
+    pitchCommitment,
+    actualPitch,
+    recognition,
+    provisionalBuntFit,
+    rolls: options.rolls
+  });
+  match.offensiveBuntPAState = result.plan;
+  highSchoolOffensiveBuntDebugTrace = result.debugTrace ? JSON.parse(JSON.stringify(result.debugTrace)) : null;
+  return result;
+}
+
+function getHighSchoolLatestBuntPitchRecord(plan) {
+  const history = Array.isArray(plan?.pitchHistory) ? plan.pitchHistory : [];
+  return history.length ? history[history.length - 1] : null;
+}
+
+function findPendingHighSchoolBuntPitchPresentation(match, plan) {
+  const latest = getHighSchoolLatestBuntPitchRecord(plan);
+  const pitchIdentity = latest?.buntResolution?.currentPitchTacticalCommitment?.pitchIdentity || "";
+  if (!pitchIdentity) return null;
+  const cursor = getHighSchoolPresentedEventCursor(match);
+  return (match.simulationLog || []).find(event => event.type === "buntPitchResolved"
+    && event.buntPitchIdentity === pitchIdentity && Number(event.sequence) >= cursor) || null;
+}
+
+function applyHighSchoolBuntTerminalPlateAppearance(match, result) {
+  if (!match || !["walk", "strikeout"].includes(result)) return null;
+  const batterId = match.currentBatter;
+  const offenseTeam = match.offenseTeam;
+  const before = { outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
+  const runnerFacts = applyHighSchoolSimulatedPlateAppearance(match, result, batterId, offenseTeam);
+  const runsBattedIn = Math.max(0, match.scores[offenseTeam] - before.scores[offenseTeam]);
+  recordHighSchoolMatchPlateAppearanceEvidence(match, batterId, result, runsBattedIn);
+  const plateAppearanceEvent = recordHighSchoolMatchSimulationEvent(match, {
+    type: "plateAppearance", presentationImportance: "hidden", inning: match.inning, half: match.half,
+    eventClassification: "ordinaryPlay", offenseTeam, batterId, result, runsBattedIn,
+    currentBatterAfter: getHighSchoolMatchNextLineupBatter(match, offenseTeam)?.id || "",
+    runnerChanges: runnerFacts.runnerChanges, scoringRunnerIds: runnerFacts.scoringRunnerIds,
+    thirdOutResolution: runnerFacts.thirdOutResolution, before,
+    after: { outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() },
+    resultAuthority: "offensiveBuntPAState.countResult"
+  });
+  advanceHighSchoolMatchBattingOrder(match, offenseTeam);
+  assertHighSchoolMatchStateIntegrity(match, "bunt-terminal-plate-appearance");
+  return plateAppearanceEvent;
+}
+
+function recordHighSchoolProductionBuntPitchEvent(match, result, batterId = match.currentBatter) {
+  const resolution = result.resolution;
+  const countResult = result.countResult;
+  const presentation = formatHighSchoolBuntPhysicalTruth(resolution);
+  return recordHighSchoolMatchSimulationEvent(match, {
+    type: "buntPitchResolved",
+    inning: match.inning,
+    half: match.half,
+    offenseTeam: match.offenseTeam,
+    batterId,
+    buntPAIdentity: resolution.paTacticalPlan.identity,
+    buntPitchIdentity: resolution.currentPitchTacticalCommitment.pitchIdentity,
+    buntPitchNumber: resolution.currentPitchTacticalCommitment.pitchNumber,
+    sourceAuthority: "offensiveBuntPAState.pitchHistory",
+    presentation,
+    assignment: `${presentation} 球數 ${countResult.countAfter.balls}-${countResult.countAfter.strikes}。`,
+    countBefore: countResult.countBefore,
+    countAfter: countResult.countAfter,
+    pitchResult: countResult.pitchResult,
+    paResult: countResult.paResult,
+    paContinues: !countResult.paEnded,
+    paEnds: countResult.paEnded,
+    outs: match.outs,
+    scores: match.scores,
+    runners: match.runners
+  });
+}
+
+function resolveHighSchoolProductionBuntPitch(match, options = {}) {
+  if (!match || typeof OffensiveBuntExecution === "undefined") return null;
+  let plan = ensureHighSchoolOffensiveBuntPATacticalPlan(match);
+  if (!plan) return null;
+  if (options.initialCount && plan.pitchNumber === 0 && plan.pitchHistory.length === 0) {
+    plan = OffensiveBuntExecution.createPATacticalPlan({
+      ...JSON.parse(JSON.stringify(plan)),
+      count: options.initialCount
+    });
+    match.offensiveBuntPAState = plan;
+  }
+  const pendingEvent = findPendingHighSchoolBuntPitchPresentation(match, plan);
+  if (pendingEvent) return Object.freeze({ status: "pendingPresentation", event: pendingEvent, shouldBuildDefense: false });
+  if (plan.completed || plan.cancelled) {
+    return Object.freeze({
+      status: plan.paResult === "ballInPlayPendingDefense" ? "fairBallReady" : "completed",
+      event: null,
+      shouldBuildDefense: plan.paResult === "ballInPlayPendingDefense"
+    });
+  }
+  const result = resolveHighSchoolOffensiveBuntPitch(match, options);
+  if (!result?.resolution || !result?.countResult) return null;
+  const batterId = match.currentBatter;
+  if (result.countResult.paEnded && ["walk", "strikeout"].includes(result.countResult.paResult)) {
+    applyHighSchoolBuntTerminalPlateAppearance(match, result.countResult.paResult);
+  }
+  const event = recordHighSchoolProductionBuntPitchEvent(match, result, batterId);
+  return Object.freeze({
+    status: result.countResult.paEnded
+      ? result.countResult.paResult === "ballInPlayPendingDefense" ? "fairBallResolved" : "paEnded"
+      : "paContinues",
+    event,
+    shouldBuildDefense: false
+  });
+}
+
+function getHighSchoolCompletedBuntPhysicalTruth(match) {
+  const history = match?.offensiveBuntPAState?.pitchHistory;
+  const resolution = Array.isArray(history) ? history.at(-1)?.buntResolution : null;
+  return resolution?.contactResult === "fairContact" ? resolution : null;
+}
+
+function ensureHighSchoolBuntBallInPlayHandoff(match) {
+  if (!match || typeof OffensiveBuntDefensiveHandoff === "undefined") return null;
+  const physicalTruth = getHighSchoolCompletedBuntPhysicalTruth(match);
+  if (!physicalTruth) return null;
+  const identity = `${match.offensiveBuntPAState.identity}|defensive-handoff`;
+  const existing = OffensiveBuntDefensiveHandoff.normalizeHandoff(match.buntBallInPlayState);
+  if (existing?.identity === identity) {
+    match.buntBallInPlayState = existing;
+    return existing;
+  }
+  const forceState = getHighSchoolDefensiveForceState(match);
+  const existingRunners = (match.runners || []).map((runnerId, index) => {
+    if (!runnerId) return null;
+    const entity = getHighSchoolMatchSimulationEntity(match, runnerId);
+    return {
+      runnerId,
+      originBase: index + 1,
+      speed: Number(entity?.speed) || 5,
+      reaction: Number(entity?.reaction) || Number(entity?.defense) || 5
+    };
+  }).filter(Boolean);
+  const batter = getHighSchoolMatchSimulationEntity(match, match.currentBatter);
+  match.buntBallInPlayState = OffensiveBuntDefensiveHandoff.createHandoff({
+    identity,
+    physicalTruth,
+    existingRunners,
+    batterRunner: { runnerId: match.currentBatter, speed: Number(batter?.speed) || 5 },
+    forceState,
+    priorRunnerCommitment: match.offensiveTacticalActionState?.runnerCommitment || "",
+    defenderContext: { playerPosition: match.developmentPositionOverride || getHighSchoolInfieldAssignmentPosition(match, player) }
+  });
+  return match.buntBallInPlayState;
+}
+
+function getHighSchoolBuntDefensiveSituationOverrides(handoff) {
+  if (!handoff?.supported || typeof OffensiveBuntDefensiveHandoff === "undefined") return null;
+  const projection = OffensiveBuntDefensiveHandoff.projectCanonicalRunnerMovement(handoff.runnerReassessment);
+  return Object.freeze({
+    playerPosition: "二壘手",
+    primaryFielderPosition: "二壘手",
+    ballContext: handoff.ballContext,
+    ballDirection: handoff.ballContext.ballDirection,
+    ballDepth: handoff.ballContext.ballDepth,
+    runnerMovementProgress: projection.runnerMovementProgress,
+    runnerTargets: projection.runnerTargets,
+    routeWindowOverrides: {
+      firstBaseOutWindow: handoff.timingWindows.batterRunnerFirstBaseWindow.state,
+      doublePlayWindow: handoff.timingWindows.leadRunnerForceWindow.state
+    },
+    buntDefensiveContext: handoff
+  });
+}
+
+function cancelHighSchoolOffensiveBuntPATacticalPlan(match, reason = "explicitCancellation") {
+  if (!match?.offensiveBuntPAState || typeof OffensiveBuntExecution === "undefined") return null;
+  match.offensiveBuntPAState = OffensiveBuntExecution.cancelPATacticalPlan(match.offensiveBuntPAState, reason);
+  return match.offensiveBuntPAState;
+}
+
+function formatHighSchoolBuntPhysicalTruth(resolution) {
+  return typeof OffensiveBuntExecution === "undefined" ? "" : OffensiveBuntExecution.formatBuntPhysicalTruth(resolution);
 }
 
 function advanceHighSchoolOffensiveTacticalReveal(match, phase = "lateReveal") {
@@ -4805,6 +5086,16 @@ function formatMatchSimulationEvent(event, match) {
   }
   if (event.type === "playerRoutinePlay") {
     return { type: event.type, priority: 5, playerRelated: true, text: formatHighSchoolRoutineDefensiveCommentary(event, match) };
+  }
+  if (event.type === "buntPitchResolved") {
+    const continuation = event.paEnds
+      ? event.paResult === "strikeout" ? "這個打席以三振結束。"
+        : event.paResult === "walk" ? "這個打席形成保送。" : "球已進入場內，等待後續守備處理。"
+      : `球數來到 ${event.countAfter?.balls || 0}-${event.countAfter?.strikes || 0}，打席繼續。`;
+    return { type: event.type, priority: 4, text: `${event.outs ?? match.outs} 出局｜${event.presentation} ${continuation}` };
+  }
+  if (event.type === "buntDefensiveFallback") {
+    return { type: event.type, priority: 4, text: `${event.outs ?? match.outs} 出局｜${event.presentation || event.assignment}` };
   }
   if (event.type === "defensiveResolution") {
     const result = event.outsCreated >= 2 ? "完成雙殺" : event.outsCreated === 1 ? "取得一個出局" : event.error ? "守備失誤讓跑者推進" : "沒有取得出局";
@@ -5904,7 +6195,8 @@ function buildInfieldMeaningfulMoment(matchState, playerContext = player, overri
     upstreamThrowQuality: overrides.upstreamThrowQuality || "",
     coverageQuality: overrides.coverageQuality || "",
     executionChange: overrides.executionChange || "",
-    routeWindowOverrides: Object.freeze({ ...(overrides.routeWindowOverrides || {}) })
+    routeWindowOverrides: Object.freeze({ ...(overrides.routeWindowOverrides || {}) }),
+    buntDefensiveContext: overrides.buntDefensiveContext ? JSON.parse(JSON.stringify(overrides.buntDefensiveContext)) : null
   };
   situation.firstStepDemand = deriveInfieldFirstStepDemand(playerPosition, situation.ballDirection, situation.ballDepth, ballContext.pace);
   situation.windows = deriveInfieldExecutionWindows(situation);
@@ -6019,7 +6311,8 @@ function generateInfieldLegalChoices(situation, matchState = null) {
     const definition = position === "二壘手" && commitment.id ? commitment : null;
     const availability = definition ? evaluateDefensiveRouteAvailability(situation, definition) : Object.freeze({ legal: true, viable: true, windowState: "normal", reasons: Object.freeze([]) });
     const choice = {
-      text,
+      text: situation.buntDefensiveContext && commitment.id === "secureFirstBaseOut" ? "穩穩拿打者的一壘出局"
+        : situation.buntDefensiveContext && commitment.id === "initiate463" ? "傳二壘封殺前位跑者" : text,
       matchDecision,
       infieldRoute: route,
       advisable: getInfieldChoiceAdvisability(situation, route),
@@ -6033,6 +6326,11 @@ function generateInfieldLegalChoices(situation, matchState = null) {
       riskProfile: position === "一壘手" && route === "forceSecond" ? "high" : getInfieldChoiceTradeoff(situation, route).risk,
       matchMomentId: momentId
     };
+    if (situation.buntDefensiveContext && commitment.id === "initiate463") {
+      const lead = situation.buntDefensiveContext.timingWindows?.leadRunnerForceWindow?.state;
+      const first = situation.buntDefensiveContext.timingWindows?.batterRunnerFirstBaseWindow?.state;
+      if (["narrow", "expired"].includes(lead) && ["wide", "normal"].includes(first)) choice.advisable = "aggressive";
+    }
     choice.readiness = definition ? evaluateExecutionReadiness({ route: definition, situation }) : null;
     return choice;
   };
@@ -6568,13 +6866,14 @@ function resolveSecondBaseInitiatedRoute(situation, choice, sample) {
     const ssPivot = ssReceive && (Number(ss.reaction) || 5) + (Number(ss.throwing) || 5) * 0.35 + swing - situation.batterSpeed * 0.25 >= 4.2;
     const firstBaseReceive = ssPivot && (Number(situation.teammates?.firstBaseReceiver?.capabilities?.fielding) || 5) + swing >= 2.8;
     const firstOutCompleted = firstThrowCompleted && routeWindow.state !== "expired" && ssReceive;
-    const secondOutCompleted = firstOutCompleted && ssPivot && firstBaseReceive && routeWindow.state !== "narrow";
+    const continuationWindow = situation.buntDefensiveContext?.timingWindows?.relayToFirstWindow?.state || routeWindow.state;
+    const secondOutCompleted = firstOutCompleted && ssPivot && firstBaseReceive && !["narrow", "expired"].includes(continuationWindow);
     resultCode = secondOutCompleted ? "twoOuts" : firstOutCompleted ? "oneOut" : "zeroOuts";
     detailedResult = secondOutCompleted ? "completedDoublePlay" : firstOutCompleted ? "secondStageExpired" : "lateForce";
     teammateStages = { shortstopReceive: ssReceive ? "completed" : "failed", shortstopPivot: ssPivot ? "completed" : "late", shortstopSecondThrow: ssPivot ? "completed" : "notCompleted", firstBaseReceive: firstBaseReceive ? "completed" : "notCompleted" };
     if (!firstThrowCompleted) primaryCause = "playerFirstThrow";
     else if (!ssReceive) { primaryCause = "teammatePivot"; responsibleActor = "teammate"; }
-    else if (!ssPivot && (situation.batterSpeed >= 8 || routeWindow.state === "narrow")) { primaryCause = "timingWindow"; secondaryCause = "teammatePivot"; responsibleActor = "timingWindow"; }
+    else if (!ssPivot && (situation.batterSpeed >= 8 || continuationWindow === "narrow")) { primaryCause = "timingWindow"; secondaryCause = "teammatePivot"; responsibleActor = "timingWindow"; }
     else if (!ssPivot) { primaryCause = "teammatePivot"; responsibleActor = "teammate"; }
     else if (!firstBaseReceive) { primaryCause = "teammateFirstBaseReceive"; responsibleActor = "teammate"; }
     else if (!secondOutCompleted) { primaryCause = "timingWindow"; responsibleActor = "timingWindow"; secondaryCause = situation.batterSpeed >= 8 ? "timingWindow" : ""; }
@@ -6601,7 +6900,18 @@ function resolveSecondBaseInitiatedRoute(situation, choice, sample) {
     playerResponsibility: responsibleActor === "player" ? (resultCode === "error" ? "major" : "handled") : "limited",
     teammateResponsibility: responsibleActor === "teammate" ? "major" : choice.teammateChain?.length ? "shared" : "none",
     causeExplanation: getSecondBaseCauseExplanation(primaryCause, secondaryCause, reassessment?.fallbackRoute),
-    playerLeg: Object.freeze(playerStages), teammateLeg: Object.freeze(teammateStages), timingResolution: Object.freeze({ routeWindow: routeWindow.state, batterSpeed: situation.batterSpeed }),
+    playerLeg: Object.freeze(playerStages), teammateLeg: Object.freeze(teammateStages), timingResolution: Object.freeze({
+      routeWindow: routeWindow.state,
+      leadRunnerForceWindow: situation.buntDefensiveContext?.timingWindows?.leadRunnerForceWindow?.state || routeWindow.state,
+      relayToFirstWindow: situation.buntDefensiveContext?.timingWindows?.relayToFirstWindow?.state || routeWindow.state,
+      batterSpeed: situation.batterSpeed
+    }),
+    firstLegState: choice.routeId === "initiate463" ? Object.freeze({ status: resultCode === "zeroOuts" ? "failed" : "completed", targetBase: "second" }) : null,
+    continuationState: choice.routeId === "initiate463" ? Object.freeze({
+      status: resultCode === "twoOuts" ? "completed" : resultCode === "oneOut" ? "windowClosed" : "notReached",
+      window: situation.buntDefensiveContext?.timingWindows?.relayToFirstWindow?.state || routeWindow.state,
+      targetBase: "first"
+    }) : null,
     executionStage: detailedResult, routeAvailability: choice.availability, readiness: choice.readiness,
     ballContext: situation.ballContext.type, ballDirection: situation.ballDirection, ballDepth: situation.ballDepth,
     batterSpeed: situation.batterSpeed, runnerSpeed: Math.max(...situation.runnerSpeeds.filter(Number.isFinite), 0),
@@ -6779,6 +7089,22 @@ function adaptInfieldInformation(situation, playerContext = player) {
   const depthLabels = { shallow: "落點很淺，需要往前衝", normal: "落點在一般守備深度", deep: "落點很深，接球後仍要長傳" };
   const clarity = (Number(playerContext?.baseballSkills?.baseballIQ) || 0) + (Number(playerContext?.observe) || 0) >= 12;
   const importantRunner = situation.runnerSpeeds.map((speed, index) => Number.isFinite(speed) ? { base: index + 1, speed } : null).filter(Boolean).sort((a, b) => b.base - a.base)[0];
+  const bunt = situation.buntDefensiveContext;
+  if (bunt) {
+    const leadState = bunt.timingWindows?.leadRunnerForceWindow?.state;
+    const firstState = bunt.timingWindows?.batterRunnerFirstBaseWindow?.state;
+    const windowText = state => ({ wide: "窗口充足", normal: "仍有合理窗口", narrow: "窗口很緊", expired: "窗口已關閉" }[state] || "仍需判斷");
+    const existingRunner = bunt.runnerReassessment?.existingRunners?.find(state => state.originBase === 1);
+    return Object.freeze({
+      position: situation.playerPosition,
+      direction: bunt.ballContext?.physicalTruth?.placement === "secondBaseSide" ? "往二壘手一側滾動" : directionLabels[situation.ballDirection] || "進入內野",
+      depth: "短打落點很淺，需要往前處理",
+      pace: bunt.ballContext?.label || "短打",
+      batterSpeed: formatHighSchoolMatchSpeed(situation.batterSpeed),
+      runnerCue: existingRunner?.movementState === "advancing" ? "一壘跑者已啟動往二壘，打者跑者也正衝向一壘" : "壘上跑者仍在讀球，打者跑者正往一壘",
+      readCue: `這是短打形成的守備：二壘封殺${windowText(leadState)}，打者的一壘出局${windowText(firstState)}。`
+    });
+  }
   return Object.freeze({
     position: situation.playerPosition,
     direction: directionLabels[situation.ballDirection] || "進入你的守區",
@@ -7590,6 +7916,8 @@ function prepareHighSchoolYearOneMatch() {
     pendingOffensiveOpportunity: null,
     offensivePlayerAgencyState: null,
     offensiveTacticalActionState: null,
+    offensiveBuntPAState: null,
+    buntBallInPlayState: null,
     pendingDefensiveResumeState: null,
     lastDefensiveResolution: { resultCode: "", tier: "", decisionQuality: "", executionQuality: "", primaryCause: "", secondaryCause: "", causeExplanation: "" },
     pendingHalfInningTermination: null,
@@ -8587,6 +8915,13 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
     error: resolution.error
   });
   match.lastDefensiveResolution = JSON.parse(JSON.stringify(appliedResolution));
+  if (match.buntBallInPlayState && situation.buntDefensiveContext) {
+    match.buntBallInPlayState = Object.freeze({
+      ...JSON.parse(JSON.stringify(match.buntBallInPlayState)),
+      firstLegState: resolution.firstLegState ? JSON.parse(JSON.stringify(resolution.firstLegState)) : { status: "notSelected", targetBase: "" },
+      continuationState: resolution.continuationState ? JSON.parse(JSON.stringify(resolution.continuationState)) : { status: "notApplicable", window: "", targetBase: "" }
+    });
+  }
   const densityState = ensureHighSchoolMatchDecisionDensityState(match);
   densityState.lastSelectedRoute = resolution.initialRoute || resolution.routeId || decision || "";
   densityState.lastFinalRoute = resolution.activeRoute || resolution.routeId || resolution.route || "";
@@ -9236,7 +9571,46 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
       targetRunnerId: match.runners[1] || match.runners[0] || match.runners[2] || ""
     };
   }
-  setHighSchoolDefensiveBallContext(match, options.ballContextType || "");
+  const productionBunt = offensiveTacticalState && typeof OffensiveBuntExecution !== "undefined"
+    ? resolveHighSchoolProductionBuntPitch(match, {
+      ...(options.buntPitchOptions || {}),
+      initialCount: options.buntInitialCount
+    }) : null;
+  if (productionBunt?.event) {
+    match.momentIndex = flowState.momentIndex;
+    match.currentMomentId = flowState.currentMomentId;
+    match.simulationPhase = flowState.simulationPhase;
+    match.currentDomain = flowState.currentDomain;
+    match.currentAssignment = flowState.currentAssignment;
+    match.pendingDefensiveResumeState = null;
+    setHighSchoolCoachTacticalDirection(match);
+    finalizeHighSchoolMatchDefensiveOpportunity(match, opportunity, productionBunt.event, productionBunt.status);
+    return productionBunt.event;
+  }
+  const buntHandoff = productionBunt?.shouldBuildDefense ? ensureHighSchoolBuntBallInPlayHandoff(match) : null;
+  if (buntHandoff && !buntHandoff.supported) {
+    if (buntHandoff.fallbackPresented !== true) {
+      const fallbackText = buntHandoff.ballContext.downstreamSupport === "unsupportedPopBuntFallback"
+        ? "短打形成小飛球，壘上跑者回頭確認球是否落地；本階段不預判接殺或離壘出局。"
+        : `短打落在${buntHandoff.ballContext.physicalTruth.placement === "thirdBaseSide" ? "三壘側" : buntHandoff.ballContext.physicalTruth.placement === "firstBaseSide" ? "一壘側" : "投手附近"}；此守備位置尚未納入二壘手垂直切片。`;
+      match.buntBallInPlayState = Object.freeze({ ...JSON.parse(JSON.stringify(buntHandoff)), fallbackPresented: true });
+      const fallbackEvent = recordHighSchoolMatchSimulationEvent(match, {
+        type: "buntDefensiveFallback", presentationImportance: "attention", inning: match.inning, half: match.half,
+        assignment: fallbackText, presentation: fallbackText, outs: match.outs, scores: match.scores, runners: match.runners
+      });
+      match.momentIndex = flowState.momentIndex;
+      match.currentMomentId = flowState.currentMomentId;
+      match.simulationPhase = flowState.simulationPhase;
+      match.currentDomain = flowState.currentDomain;
+      match.currentAssignment = flowState.currentAssignment;
+      match.pendingDefensiveResumeState = null;
+      finalizeHighSchoolMatchDefensiveOpportunity(match, opportunity, fallbackEvent, "unsupported-bunt-defense");
+      return fallbackEvent;
+    }
+    return null;
+  }
+  if (buntHandoff) match.ballContext = JSON.parse(JSON.stringify(buntHandoff.ballContext));
+  else setHighSchoolDefensiveBallContext(match, options.ballContextType || "");
   match.currentAssignment = getHighSchoolDefensiveSituationText(match);
   const priorTier = match.completedMoments[0]?.tier;
   match.coachInstruction = priorTier === "strong"
@@ -9246,7 +9620,10 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
       : "前一段結果不影響你的守備資格；這一球只看補位與最短合法出局。";
   if (isInfieldDecisionFamilyPosition(match.developmentPositionOverride || match.position)) {
     match.defensiveSituation = {};
-    buildInfieldMeaningfulMoment(match, player, options.situationOverrides || {});
+    const buntOverrides = getHighSchoolBuntDefensiveSituationOverrides(buntHandoff);
+    buildInfieldMeaningfulMoment(match, player, buntOverrides
+      ? { ...(options.situationOverrides || {}), ...buntOverrides }
+      : options.situationOverrides || {});
     match.currentAssignment = getHighSchoolDefensiveSituationText(match);
   } else {
     match.positionDecisionFamily = "";

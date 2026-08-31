@@ -336,6 +336,14 @@ function normalizeSave(saved) {
     ? OffensiveTacticalAction.normalizeTacticalActionState(saved.highSchoolMatch?.offensiveTacticalActionState)
     : saved.highSchoolMatch?.offensiveTacticalActionState
       ? JSON.parse(JSON.stringify(saved.highSchoolMatch.offensiveTacticalActionState)) : null;
+  fresh.highSchoolMatch.offensiveBuntPAState = typeof OffensiveBuntExecution !== "undefined"
+    ? OffensiveBuntExecution.normalizePATacticalPlan(saved.highSchoolMatch?.offensiveBuntPAState)
+    : saved.highSchoolMatch?.offensiveBuntPAState
+      ? JSON.parse(JSON.stringify(saved.highSchoolMatch.offensiveBuntPAState)) : null;
+  fresh.highSchoolMatch.buntBallInPlayState = typeof OffensiveBuntDefensiveHandoff !== "undefined"
+    ? OffensiveBuntDefensiveHandoff.normalizeHandoff(saved.highSchoolMatch?.buntBallInPlayState)
+    : saved.highSchoolMatch?.buntBallInPlayState
+      ? JSON.parse(JSON.stringify(saved.highSchoolMatch.buntBallInPlayState)) : null;
   fresh.highSchoolMatch.lastDefensiveResolution = Object.assign(
     {},
     highSchoolDefaults.highSchoolMatch.lastDefensiveResolution,
