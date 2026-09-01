@@ -8558,6 +8558,15 @@ function formatHighSchoolOffensiveExecutionText(choice, state) {
   const takes = Number(state?.swingExecutionSummary?.takes) || 0;
   const fouls = Number(state?.swingExecutionSummary?.fouls) || 0;
   const correctOutsideTakes = history.filter(item => item.action === "take" && item.pitch?.strike === false && item.recognition?.correct).length;
+  if (choice?.approach === "aggressiveEarlySwing" && finalPitch?.action === "swing"
+    && ["chasePitch", "clearBall"].includes(finalPitch?.pitch?.pitchLocationClass)
+    && ["hitterPitch", "competitiveStrike"].includes(finalPitch?.recognition?.perceivedPitchClass)) {
+    return "你原本準備搶第一顆可攻擊球，但把這顆離開攻擊區的球判成了可攻擊球。";
+  }
+  if (choice?.selectionProfile === "selective" && finalPitch?.action === "take"
+    && finalPitch?.recognition?.correct && finalPitch?.recognition?.perceivedPitchClass === "edgeStrike") {
+    return "你看出球壓在邊緣，但這不是你設定要積極攻擊的位置。";
+  }
   if (state?.result === "walk" && swings === 0 && takes > 0 && correctOutsideTakes === takes) {
     return "你收窄攻擊區，連續放掉沒有進入攻擊區的球。";
   }

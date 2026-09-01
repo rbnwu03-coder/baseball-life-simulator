@@ -25,10 +25,17 @@
     compactLineDrive: Object.freeze({ approach: "compactLineDrive", selectionProfile: "balanced", swingIntent: "contact" }),
     balancedAttack: Object.freeze({ approach: "balancedAttack", selectionProfile: "balanced", swingIntent: "normal" })
   });
-  const SWING_TENDENCIES = Object.freeze({
-    aggressive: Object.freeze({ hitterPitch: 0.97, competitiveStrike: 0.86, edgeStrike: 0.63, chasePitch: 0.29, clearBall: 0.05 }),
-    balanced: Object.freeze({ hitterPitch: 0.92, competitiveStrike: 0.72, edgeStrike: 0.42, chasePitch: 0.16, clearBall: 0.025 }),
-    selective: Object.freeze({ hitterPitch: 0.88, competitiveStrike: 0.54, edgeStrike: 0.22, chasePitch: 0.065, clearBall: 0.012 })
+  const ATTACK_WINDOWS = Object.freeze({
+    aggressive: Object.freeze({ hitterPitch: 0.98, competitiveStrike: 0.88, edgeStrike: 0.52, chasePitch: 0.09, clearBall: 0.015 }),
+    balanced: Object.freeze({ hitterPitch: 0.92, competitiveStrike: 0.72, edgeStrike: 0.38, chasePitch: 0.07, clearBall: 0.012 }),
+    selective: Object.freeze({ hitterPitch: 0.88, competitiveStrike: 0.52, edgeStrike: 0.16, chasePitch: 0.03, clearBall: 0.008 })
+  });
+  // Compatibility export name. These values are semantic attack windows, not generic approach swing bonuses.
+  const SWING_TENDENCIES = ATTACK_WINDOWS;
+  const ATTACK_WINDOW_LABELS = Object.freeze({
+    aggressive: Object.freeze({ hitterPitch: "core", competitiveStrike: "core", edgeStrike: "conditional", chasePitch: "outside", clearBall: "clearlyOutside" }),
+    balanced: Object.freeze({ hitterPitch: "core", competitiveStrike: "normal", edgeStrike: "conditional", chasePitch: "outside", clearBall: "clearlyOutside" }),
+    selective: Object.freeze({ hitterPitch: "core", competitiveStrike: "conditional", edgeStrike: "outside", chasePitch: "outside", clearBall: "clearlyOutside" })
   });
 
   function clone(value) {
@@ -210,16 +217,27 @@
   }
 
   function getSwingTendency(state, recognition) {
-    const profile = SWING_TENDENCIES[state.selectionProfile] || SWING_TENDENCIES.balanced;
-    let tendency = profile[recognition.perceivedPitchClass] ?? 0.5;
+    const selectionProfile = ATTACK_WINDOWS[state.selectionProfile] ? state.selectionProfile : "balanced";
+    const profile = ATTACK_WINDOWS[selectionProfile];
+    const perceivedPitchClass = PITCH_CLASSES.includes(recognition?.perceivedPitchClass) ? recognition.perceivedPitchClass : "competitiveStrike";
+    const baseTendency = profile[perceivedPitchClass] ?? 0.5;
+    let tendency = baseTendency;
     const protectAdjusted = state.strikes === 2;
     if (protectAdjusted) {
-      if (recognition.perceivedPitchClass === "hitterPitch") tendency = Math.max(tendency, 0.98);
-      if (recognition.perceivedPitchClass === "competitiveStrike") tendency = Math.max(tendency, 0.94);
-      if (recognition.perceivedPitchClass === "edgeStrike") tendency = Math.max(tendency, 0.82);
-      if (recognition.perceivedPitchClass === "chasePitch") tendency = Math.min(0.46, tendency + 0.14);
+      if (perceivedPitchClass === "hitterPitch") tendency = Math.max(tendency, 0.98);
+      if (perceivedPitchClass === "competitiveStrike") tendency = Math.max(tendency, 0.94);
+      if (perceivedPitchClass === "edgeStrike") tendency = Math.max(tendency, selectionProfile === "selective" ? 0.78 : 0.82);
+      if (perceivedPitchClass === "chasePitch") tendency = Math.min(0.28, tendency + 0.1);
+      if (perceivedPitchClass === "clearBall") tendency = Math.min(0.06, tendency + 0.02);
     }
-    return deepFreeze({ tendency: round(clamp(tendency)), protectAdjusted });
+    return deepFreeze({
+      tendency: round(clamp(tendency)),
+      baseTendency: round(baseTendency),
+      protectAdjusted,
+      perceivedPitchClass,
+      attackWindow: ATTACK_WINDOW_LABELS[selectionProfile][perceivedPitchClass],
+      semanticAuthority: "approachAttackWindow+recognition+count"
+    });
   }
 
   function getContactProbability(state, pitch, abilities = {}, recognition = {}) {
@@ -271,10 +289,14 @@
 
   function summarizeQualities(state) {
     const history = state.pitchHistory || [];
-    const positive = history.filter(item => (item.action === "take" && !item.pitch.strike) || (item.action === "swing" && ["hitterPitch", "competitiveStrike"].includes(item.pitch.pitchLocationClass))).length;
-    const negative = history.filter(item => (item.action === "take" && item.pitch.strike) || (item.action === "swing" && ["chasePitch", "clearBall"].includes(item.pitch.pitchLocationClass))).length;
-    const decisionRatio = history.length ? (positive - negative * 0.7) / history.length : 0;
-    const decisionQuality = decisionRatio >= 0.58 ? "strong" : decisionRatio >= 0.28 ? "acceptable" : decisionRatio >= 0 ? "questionable" : "poor";
+    const decisionFit = history.map(item => {
+      const perceivedPitchClass = item.recognition?.perceivedPitchClass || item.pitch?.pitchLocationClass;
+      const profileState = { selectionProfile: item.selectionProfile || state.selectionProfile, strikes: Number(item.countBefore?.strikes) || 0 };
+      const tendency = getSwingTendency(profileState, { perceivedPitchClass }).tendency;
+      return item.action === "swing" ? tendency : 1 - tendency;
+    });
+    const decisionRatio = decisionFit.length ? decisionFit.reduce((sum, value) => sum + value, 0) / decisionFit.length : 0;
+    const decisionQuality = decisionRatio >= 0.72 ? "strong" : decisionRatio >= 0.52 ? "acceptable" : decisionRatio >= 0.35 ? "questionable" : "poor";
     const execution = state.swingExecutionSummary;
     const executionQuality = execution.ballsInPlay > 0
       ? execution.hardContacts > 0 ? "strong" : "normal"
@@ -382,6 +404,8 @@
       swingIntent: state.swingIntent,
       protectAdjusted: swingProfile.protectAdjusted,
       swingTendency: swingProfile.tendency,
+      attackWindow: swingProfile.attackWindow,
+      swingDecisionAuthority: swingProfile.semanticAuthority,
       action,
       pitchResult,
       contact,
@@ -430,6 +454,7 @@
     PITCH_CLASSES,
     PITCH_CLASS_PROFILES,
     APPROACH_PACKAGES,
+    ATTACK_WINDOWS,
     SWING_TENDENCIES,
     stableHash,
     deterministicUnit,
@@ -443,6 +468,7 @@
     getRecognitionResult,
     getSwingTendency,
     getContactProbability,
+    summarizeQualities,
     resolveLegacyBallInPlayOutcome,
     resolveFairContactBallInPlay,
     assertPitchResultIntegrity,
