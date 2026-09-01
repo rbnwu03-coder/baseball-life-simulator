@@ -1,9 +1,10 @@
 (function (root, factory) {
   const sequencing = root.PitchSequencing || (typeof module === "object" && module.exports && typeof require === "function" ? require("./pitch-sequencing.js") : null);
-  const api = factory(sequencing);
+  const battedBallPhysical = root.BattedBallPhysical || (typeof module === "object" && module.exports && typeof require === "function" ? require("./batted-ball-physical.js") : null);
+  const api = factory(sequencing, battedBallPhysical);
   root.OffensivePlateApproach = api;
   if (typeof module === "object" && module.exports) module.exports = api;
-})(typeof globalThis !== "undefined" ? globalThis : this, function (PitchSequencing) {
+})(typeof globalThis !== "undefined" ? globalThis : this, function (PitchSequencing, BattedBallPhysical) {
   "use strict";
 
   const VERSION = "offensive-plate-approach-v1";
@@ -88,6 +89,8 @@
       pitchHistory: Array.isArray(input.pitchHistory) ? clone(input.pitchHistory).slice(-ABSOLUTE_PITCH_SAFETY_CAP) : [],
       completed: input.completed === true,
       result: typeof input.result === "string" ? input.result : "",
+      battedBallPhysicalTruth: BattedBallPhysical
+        ? BattedBallPhysical.normalizeBattedBallPhysicalTruth(input.battedBallPhysicalTruth) : input.battedBallPhysicalTruth ? clone(input.battedBallPhysicalTruth) : null,
       resultApplied: input.resultApplied === true,
       safetyFallbackUsed: input.safetyFallbackUsed === true,
       context: clone(input.context || {}),
@@ -228,21 +231,42 @@
     return round(clamp(0.2 + pitch.attackability * 0.46 + ability * 0.3 + intentModifier + recognitionModifier, 0.08, 0.97));
   }
 
-  function resolveBallInPlayResult(state, pitch, abilities, recognition, outcomeRoll) {
+  // Transitional downstream adapter. It may read canonical physical truth, but never writes or revises it.
+  function resolveLegacyBallInPlayOutcome(state, pitch, abilities, recognition, physicalTruth, outcomeRoll) {
     const batting = Number(abilities.batting) || 0;
     const ballSense = Number(abilities.ballSense) || 0;
     const ability = clamp((batting * 0.65 + ballSense * 0.35) / 15);
     const intentQuality = state.swingIntent === "power" ? 0.14 : state.swingIntent === "contact" ? -0.09 : 0.04;
-    const quality = clamp(pitch.attackability * 0.48 + ability * 0.36 + intentQuality + (recognition.correct ? 0.04 : -0.06));
+    const legacyFallbackQuality = clamp(pitch.attackability * 0.48 + ability * 0.36 + intentQuality + (recognition.correct ? 0.04 : -0.06));
+    const physicalContactScore = Number(physicalTruth?.executionEvidence?.continuousContactScore);
+    const quality = Number.isFinite(physicalContactScore) ? clamp(physicalContactScore) : legacyFallbackQuality;
     const roll = Number.isFinite(Number(outcomeRoll)) ? clamp(outcomeRoll) : deterministicUnit(state.paIdentity, `bip-outcome|${state.pitchNumber + 1}`);
-    const resolved = clamp(quality + (roll - 0.5) * 0.62);
+    const outcomeIntentModifier = state.swingIntent === "power" ? 0.08 : state.swingIntent === "contact" ? -0.07 : 0.02;
+    const resolved = clamp(0.25 + quality * 0.5 + outcomeIntentModifier + (roll - 0.5) * 0.7);
     let result = "out";
     if (resolved >= 0.91) result = "homeRun";
     else if (resolved >= 0.82) result = "triple";
     else if (resolved >= 0.68) result = "double";
     else if (resolved >= 0.46) result = "single";
     else if (state.context?.hasRunner && Number(state.context?.outs) < 2 && roll > 0.38) result = "productiveOut";
-    return deepFreeze({ result, contactQuality: round(quality), resolvedContact: round(resolved) });
+    return deepFreeze({ result, contactQuality: round(quality), resolvedContact: round(resolved), adapterAuthority: "legacyDownstreamOutcomeAdapter" });
+  }
+
+  function resolveFairContactBallInPlay(state, pitch, abilities, recognition, options = {}) {
+    const identity = `${state.paIdentity}|pitch-${state.pitchNumber + 1}`;
+    const physicalTruth = BattedBallPhysical ? BattedBallPhysical.resolveBattedBallPhysicalTruth({
+      identity,
+      actualPitch: pitch,
+      recognition,
+      action: "swing",
+      contact: true,
+      swingIntent: state.swingIntent,
+      bats: abilities.bats || "R",
+      abilities: { batting: abilities.batting, power: abilities.power },
+      rolls: options.physicalRolls
+    }) : null;
+    const outcome = resolveLegacyBallInPlayOutcome(state, pitch, abilities, recognition, physicalTruth, options.outcomeRoll);
+    return deepFreeze({ physicalTruth, outcome });
   }
 
   function summarizeQualities(state) {
@@ -287,6 +311,7 @@
     let pitchResult = "";
     let paResult = "";
     let contactQuality = null;
+    let battedBallPhysicalTruth = null;
     let contact = null;
     const recognitionSummary = clone(state.recognitionSummary);
     recognitionSummary[recognition.correct ? "correct" : "misread"] += 1;
@@ -300,10 +325,11 @@
       contact = true;
       swingExecutionSummary.swings += 1;
       swingExecutionSummary.ballsInPlay += 1;
-      const bip = resolveBallInPlayResult(state, pitch, abilities, recognition, options.outcomeRoll);
-      paResult = bip.result;
-      contactQuality = bip.contactQuality;
-      if (bip.contactQuality >= 0.72) swingExecutionSummary.hardContacts += 1;
+      const bip = resolveFairContactBallInPlay(state, pitch, abilities, recognition, options);
+      paResult = bip.outcome.result;
+      contactQuality = bip.outcome.contactQuality;
+      battedBallPhysicalTruth = bip.physicalTruth;
+      if (bip.outcome.contactQuality >= 0.72) swingExecutionSummary.hardContacts += 1;
     } else if (action === "take") {
       swingExecutionSummary.takes += 1;
       if (pitch.strike) {
@@ -336,10 +362,11 @@
           pitchResult = "ballInPlay";
           contact = true;
           swingExecutionSummary.ballsInPlay += 1;
-          const bip = resolveBallInPlayResult(state, pitch, abilities, recognition, options.outcomeRoll);
-          paResult = bip.result;
-          contactQuality = bip.contactQuality;
-          if (bip.contactQuality >= 0.72) swingExecutionSummary.hardContacts += 1;
+          const bip = resolveFairContactBallInPlay(state, pitch, abilities, recognition, options);
+          paResult = bip.outcome.result;
+          contactQuality = bip.outcome.contactQuality;
+          battedBallPhysicalTruth = bip.physicalTruth;
+          if (bip.outcome.contactQuality >= 0.72) swingExecutionSummary.hardContacts += 1;
         }
       }
     }
@@ -359,6 +386,7 @@
       pitchResult,
       contact,
       contactQuality,
+      battedBallPhysicalTruth,
       countBefore,
       countAfter: { balls: Math.min(4, balls), strikes: Math.min(3, strikes) },
       paResult
@@ -366,6 +394,7 @@
     const next = {
       ...clone(state), balls: Math.min(4, balls), strikes: Math.min(3, strikes), pitchNumber,
       pendingPitch: null, pitchHistory: [...state.pitchHistory, event], completed: Boolean(paResult), result: paResult,
+      battedBallPhysicalTruth: battedBallPhysicalTruth || state.battedBallPhysicalTruth,
       safetyFallbackUsed: state.safetyFallbackUsed || safetyFallbackUsed, recognitionSummary, swingExecutionSummary
     };
     const qualities = summarizeQualities(next);
@@ -414,6 +443,8 @@
     getRecognitionResult,
     getSwingTendency,
     getContactProbability,
+    resolveLegacyBallInPlayOutcome,
+    resolveFairContactBallInPlay,
     assertPitchResultIntegrity,
     resolveNextPitch,
     simulatePlateAppearance,

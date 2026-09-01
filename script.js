@@ -8298,11 +8298,14 @@ function recordHighSchoolYearOneMoment(match, decision, tier, outcome, consequen
 }
 
 function getHighSchoolOffensivePlateApproachAbilities(subject = player) {
+  const offense = getOffensiveSimulationCapability(subject);
   return Object.freeze({
     observe: Number(subject?.observe) || 0,
     ballSense: Number(subject?.ballSense) || 0,
     baseballIQ: Number(subject?.baseballSkills?.baseballIQ) || 0,
-    batting: Number(subject?.baseballSkills?.batting) || Number(subject?.batting) || 0
+    batting: Number(subject?.baseballSkills?.batting) || Number(subject?.batting) || 0,
+    power: Number(offense?.power) || 0,
+    bats: subject?.bats || "R"
   });
 }
 
@@ -8674,6 +8677,9 @@ function formatHighSchoolOffensivePlayerFacingResult(choice, result, meaning, pl
     productiveOut: "這個打席形成具推進效果的打者出局"
   };
   let outcome = labels[result] || "這個打席依實際擊球結果結束";
+  if (plateAppearanceState?.battedBallPhysicalTruth && typeof BattedBallPhysical !== "undefined") {
+    outcome = `${BattedBallPhysical.formatBattedBallPhysicalTruth(plateAppearanceState.battedBallPhysicalTruth, { bats: player.bats })} ${outcome}`;
+  }
   const baseLabels = { 1: "一壘", 2: "二壘", 3: "三壘" };
   const clauses = [];
   meaning.runnersScored.forEach(change => clauses.push(change.from === "batter"
@@ -8742,6 +8748,8 @@ function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
     recognitionSummary: JSON.parse(JSON.stringify(plateAppearanceState.recognitionSummary)),
     swingExecutionSummary: JSON.parse(JSON.stringify(plateAppearanceState.swingExecutionSummary)),
     pitchCount: plateAppearanceState.pitchNumber,
+    battedBallPhysicalTruth: plateAppearanceState.battedBallPhysicalTruth ? JSON.parse(JSON.stringify(plateAppearanceState.battedBallPhysicalTruth)) : null,
+    physicalOutcomeFlow: plateAppearanceState.battedBallPhysicalTruth ? "physicalTruthToLegacyDownstreamOutcome" : "notBallInPlay",
     coachFeedback,
     primaryCause: result === "walk" ? "countAccumulation" : result === "strikeout" ? "strikeAccumulation" : "contactExecution",
     secondaryCause: "",
@@ -8775,6 +8783,7 @@ function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
     swingExecutionSummary: JSON.parse(JSON.stringify(plateAppearanceState.swingExecutionSummary)),
     pitchCount: plateAppearanceState.pitchNumber,
     pitchHistory: JSON.parse(JSON.stringify(plateAppearanceState.pitchHistory)),
+    battedBallPhysicalTruth: plateAppearanceState.battedBallPhysicalTruth ? JSON.parse(JSON.stringify(plateAppearanceState.battedBallPhysicalTruth)) : null,
     batterAnticipation: plateAppearanceState.batterAnticipation ? JSON.parse(JSON.stringify(plateAppearanceState.batterAnticipation)) : null,
     executionText,
     coachFeedback,
@@ -8797,6 +8806,8 @@ function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
     strikes: plateAppearanceState.strikes,
     pitchNumber: plateAppearanceState.pitchNumber,
     pitchHistory: JSON.parse(JSON.stringify(plateAppearanceState.pitchHistory)),
+    battedBallPhysicalTruth: plateAppearanceState.battedBallPhysicalTruth ? JSON.parse(JSON.stringify(plateAppearanceState.battedBallPhysicalTruth)) : null,
+    physicalOutcomeFlow: plateAppearanceState.battedBallPhysicalTruth ? "physicalTruthToLegacyDownstreamOutcome" : "notBallInPlay",
     batterAnticipation: plateAppearanceState.batterAnticipation ? JSON.parse(JSON.stringify(plateAppearanceState.batterAnticipation)) : null,
     recognitionSummary: JSON.parse(JSON.stringify(plateAppearanceState.recognitionSummary)),
     swingExecutionSummary: JSON.parse(JSON.stringify(plateAppearanceState.swingExecutionSummary)),
