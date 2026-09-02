@@ -1830,6 +1830,8 @@ function createInitialPlayer(name = "") {
       offensiveTacticalActionState: null,
       offensiveBuntPAState: null,
       buntBallInPlayState: null,
+      ordinaryDefensivePlateAppearanceState: null,
+      groundBallInPlayState: null,
       pendingDefensiveResumeState: null,
       lastDefensiveResolution: {},
       pendingHalfInningTermination: null,

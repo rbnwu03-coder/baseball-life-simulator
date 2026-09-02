@@ -283,7 +283,11 @@
       abilities: { batting: abilities.batting, power: abilities.power },
       rolls: options.physicalRolls
     }) : null;
-    const outcome = resolveLegacyBallInPlayOutcome(state, pitch, abilities, recognition, physicalTruth, options.outcomeRoll);
+    const physicalOutcome = physicalTruth && typeof options.physicalOutcomeResolver === "function"
+      ? options.physicalOutcomeResolver({ physicalTruth, state, pitch, abilities, recognition }) : null;
+    const outcome = physicalOutcome?.result
+      ? deepFreeze({ ...clone(physicalOutcome), adapterAuthority: physicalOutcome.authority || "physicalOutcomeResolver" })
+      : resolveLegacyBallInPlayOutcome(state, pitch, abilities, recognition, physicalTruth, options.outcomeRoll);
     return deepFreeze({ physicalTruth, outcome });
   }
 

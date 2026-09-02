@@ -25,8 +25,8 @@ verify("7. conditionalAdvance 只改善 prepared start，不直接宣告 safe", 
 verify("8. canonical projection 寫入既有 runnerMovementProgress", Handoff.projectCanonicalRunnerMovement(controlled.runnerReassessment).runnerMovementProgress[0] === "advancing");
 verify("9. canonical projection 寫入既有 runnerTargets", Handoff.projectCanonicalRunnerMovement(controlled.runnerReassessment).runnerTargets[0] === "second");
 
-const noForce = create({ forceState: {} });
-verify("10. 無 force 時 prior commitment 不會直接生成推進", noForce.runnerPhysicalStates[0].movementDecision === "holdBase" && noForce.runnerPhysicalStates[0].movementState === "holding");
+const noForce = create({ existingRunners: [{ runnerId: "r2", originBase: 2, speed: 5, reaction: 7 }], forceState: {} });
+verify("10. 二壘單獨有人時 prior commitment 不會直接生成自願推進", noForce.runnerPhysicalStates[0].movementDecision === "holdBase" && noForce.runnerPhysicalStates[0].movementState === "holding" && noForce.runnerPhysicalStates[0].isForced === false);
 const hold = create({ physicalTruth: { contactResult: null, fairBallType: null }, forceState: { forceAtSecond: true } });
 verify("11. Hold／未擊成界內球沒有實體推進", hold.runnerReassessment.status === "noPhysicalAdvance" && hold.runnerPhysicalStates.every(state => state.movementState === "holding"));
 const foul = create({ physicalTruth: { contactResult: "foulContact", fairBallType: null }, forceState: { forceAtSecond: true } });

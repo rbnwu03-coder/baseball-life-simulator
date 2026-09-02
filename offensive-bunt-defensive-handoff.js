@@ -1,8 +1,10 @@
 (function (root, factory) {
-  const api = factory();
+  const forceAdvancement = root.ForceAdvancement
+    || (typeof module === "object" && module.exports && typeof require === "function" ? require("./force-advancement.js") : null);
+  const api = factory(forceAdvancement);
   root.OffensiveBuntDefensiveHandoff = api;
   if (typeof module === "object" && module.exports) module.exports = api;
-})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+})(typeof globalThis !== "undefined" ? globalThis : this, function (ForceAdvancement) {
   "use strict";
 
   const VERSION = "offensive-bunt-defensive-handoff-v1";
@@ -50,10 +52,18 @@
     const isFair = truth.contactResult === "fairContact";
     const isGround = isFair && truth.fairBallType === "groundBunt";
     const isPop = isFair && truth.fairBallType === "popBunt";
-    const forceState = input.forceState || {};
+    const sourceBases = [null, null, null];
+    existing.forEach(runner => { const index = Number(runner?.originBase) - 1; if (index >= 0 && index < 3) sourceBases[index] = runner.runnerId; });
+    const forceChain = input.forceChain || (ForceAdvancement ? ForceAdvancement.buildInitialLiveBallForceChain({
+      runners: sourceBases,
+      batterRunnerId: input.batterRunner?.runnerId || "batter-runner"
+    }) : null);
+    const forceState = forceChain && ForceAdvancement
+      ? ForceAdvancement.deriveCompatibilityForceState(forceChain, { outs: input.outs }) : input.forceState || {};
     const states = existing.filter(runner => runner?.runnerId).map(runner => {
       const originBase = Number(runner.originBase) || 1;
-      const forced = originBase === 1 ? forceState.forceAtSecond === true
+      const forcedMovement = forceChain && ForceAdvancement ? ForceAdvancement.getForcedMovement(forceChain, runner.runnerId) : null;
+      const forced = forcedMovement ? true : originBase === 1 ? forceState.forceAtSecond === true
         : originBase === 2 ? forceState.forceAtThird === true
           : originBase === 3 ? forceState.forceAtHome === true : false;
       const movementDecision = isPop ? "retreat" : isGround && forced ? "commitAdvance" : "holdBase";
@@ -63,16 +73,23 @@
         fairBallType: truth.fairBallType,
         preparationState: truth.preparationState
       });
-      return createRunnerPhysicalState({
+      const state = createRunnerPhysicalState({
         runnerId: runner.runnerId,
         originBase,
-        targetBase: movementDecision === "commitAdvance" ? baseName(originBase + 1) : baseName(originBase),
+        targetBase: movementDecision === "commitAdvance" ? forcedMovement?.targetBase || baseName(originBase + 1) : baseName(originBase),
         movementDecision,
         startQuality,
         speed: runner.speed
       });
+      return deepFreeze({
+        ...state,
+        isForced: forced,
+        forcedMovementTarget: forcedMovement?.targetBase || (forced ? state.targetBase : null),
+        forceReason: forcedMovement?.forceReason || "",
+        chainDepth: forcedMovement?.chainDepth ?? null
+      });
     });
-    const batterRunner = isFair ? createRunnerPhysicalState({
+    const batterState = isFair ? createRunnerPhysicalState({
       runnerId: input.batterRunner?.runnerId || "batter-runner",
       originBase: "batter",
       targetBase: "first",
@@ -80,10 +97,19 @@
       startQuality: isGround ? (truth.preparationState === "set" ? "preparedStart" : "normalStart") : "normalStart",
       speed: input.batterRunner?.speed
     }) : null;
+    const batterRunner = batterState ? deepFreeze({
+      ...batterState,
+      isForced: isGround,
+      forcedMovementTarget: isGround ? "first" : null,
+      forceReason: isGround ? forceChain?.batterRunner?.forceReason || "batterRunnerRequiredToFirst" : "",
+      chainDepth: isGround ? 0 : null
+    }) : null;
     return deepFreeze({
       version: "runner-reassessment-v1",
       authority: "physicalBallAndRunnerReassessment",
       status: !isFair ? "noPhysicalAdvance" : isPop ? "popBuntReturnPending" : "groundBuntRealized",
+      forceChain,
+      forceState,
       existingRunners: states,
       batterRunner,
       downstreamSupport: isGround ? "groundBunt" : isPop ? "unsupportedPopBuntDefense" : "none"
@@ -155,6 +181,8 @@
       version: VERSION,
       identity: String(input.identity || "bunt-ball-in-play"),
       sourceAuthority: "offensiveBuntPAState.pitchHistory",
+      forceChain: runnerReassessment.forceChain,
+      forceState: runnerReassessment.forceState,
       runnerReassessment,
       runnerPhysicalStates: [...runnerReassessment.existingRunners, ...(runnerReassessment.batterRunner ? [runnerReassessment.batterRunner] : [])],
       ballContext,
