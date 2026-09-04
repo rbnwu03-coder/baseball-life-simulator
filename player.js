@@ -1833,6 +1833,7 @@ function createInitialPlayer(name = "") {
       ordinaryDefensivePlateAppearanceState: null,
       groundBallInPlayState: null,
       lineDriveCatchState: null,
+      flyBallCatchState: null,
       pendingDefensiveResumeState: null,
       lastDefensiveResolution: {},
       pendingHalfInningTermination: null,

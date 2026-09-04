@@ -356,6 +356,10 @@ function normalizeSave(saved) {
     ? BattedBallLineDriveDefense.normalizeCatchState(saved.highSchoolMatch?.lineDriveCatchState)
     : saved.highSchoolMatch?.lineDriveCatchState
       ? JSON.parse(JSON.stringify(saved.highSchoolMatch.lineDriveCatchState)) : null;
+  fresh.highSchoolMatch.flyBallCatchState = typeof BattedBallFlyBallDefense !== "undefined"
+    ? BattedBallFlyBallDefense.normalizeFlyBallCatchState(saved.highSchoolMatch?.flyBallCatchState)
+    : saved.highSchoolMatch?.flyBallCatchState
+      ? JSON.parse(JSON.stringify(saved.highSchoolMatch.flyBallCatchState)) : null;
   fresh.highSchoolMatch.lastDefensiveResolution = Object.assign(
     {},
     highSchoolDefaults.highSchoolMatch.lastDefensiveResolution,

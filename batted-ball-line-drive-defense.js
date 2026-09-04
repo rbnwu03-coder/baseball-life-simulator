@@ -31,7 +31,7 @@
   function baseName(base) { return ["first", "second", "third"][Number(base) - 1] || ""; }
 
   function buildAirborneBallContext(physicalTruth = {}) {
-    if (physicalTruth.ballType !== "lineDrive") return null;
+    if (!["lineDrive", "flyBall"].includes(physicalTruth.ballType)) return null;
     return deepFreeze({
       version: "airborne-ball-context-v1",
       sourceAuthority: "BattedBallPhysicalTruth",
@@ -45,7 +45,7 @@
 
   function buildRunnerInitialReadStates(input = {}) {
     const airborneContext = input.airborneContext || buildAirborneBallContext(input.physicalTruth);
-    if (!airborneContext) return [];
+    if (airborneContext?.ballType !== "lineDrive") return [];
     const preContact = input.preContactRunnerStates || {};
     return deepFreeze((input.runnerEntities || []).filter(runner => runner?.runnerId).map(runner => {
       const prior = preContact[runner.runnerId] || {};
@@ -107,7 +107,7 @@
   function buildCatchOpportunity(input = {}) {
     const physicalTruth = input.physicalTruth || {};
     const airborneContext = buildAirborneBallContext(physicalTruth);
-    if (!airborneContext) return null;
+    if (airborneContext?.ballType !== "lineDrive") return null;
     const runnerInitialReadStates = buildRunnerInitialReadStates({ ...input, airborneContext });
     const defensiveAccess = resolveCatchAccess({ ...input, airborneContext });
     const catchWindow = buildCatchTimingWindow({ airborneContext, defensiveAccess });
@@ -147,9 +147,10 @@
     const catching = clamp(defenderContext.catching ?? defenderContext.fielding, 0, 20, 5);
     const reaction = clamp(defenderContext.reaction, 0, 20, 5);
     const range = clamp(defenderContext.range, 0, 20, 5);
+    const rngNamespace = String(options.rngNamespace || RNG_NAMESPACES.catchExecution);
     const rawRoll = Number(options.executionRoll);
     const roll = Number.isFinite(rawRoll) ? clamp(rawRoll, 0, 0.999999, 0.5)
-      : deterministicUnit(RNG_NAMESPACES.catchExecution, opportunity.identity);
+      : deterministicUnit(rngNamespace, opportunity.identity);
     const windowModifier = { wide: 1.2, normal: 0.4, narrow: -0.8, expired: -4 }[opportunity.catchWindow.state] ?? -4;
     const executionScore = catching * 0.45 + reaction * 0.35 + range * 0.2 + windowModifier + (0.5 - roll) * 8;
     const caught = executionScore >= 6.5;
@@ -173,7 +174,7 @@
         catching, reaction, range, windowState: opportunity.catchWindow.state,
         executionScore: Math.round(executionScore * 1000) / 1000,
         roll,
-        rngNamespace: RNG_NAMESPACES.catchExecution
+        rngNamespace
       },
       officialScoring: "deferred"
     });
