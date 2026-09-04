@@ -1,10 +1,11 @@
 (function (root, factory) {
   const sequencing = root.PitchSequencing || (typeof module === "object" && module.exports && typeof require === "function" ? require("./pitch-sequencing.js") : null);
   const battedBallPhysical = root.BattedBallPhysical || (typeof module === "object" && module.exports && typeof require === "function" ? require("./batted-ball-physical.js") : null);
-  const api = factory(sequencing, battedBallPhysical);
+  const tacticalIntegration = root.PitcherCatcherTacticalIntegration || (typeof module === "object" && module.exports && typeof require === "function" ? require("./pitcher-catcher-tactical-integration.js") : null);
+  const api = factory(sequencing, battedBallPhysical, tacticalIntegration);
   root.OffensivePlateApproach = api;
   if (typeof module === "object" && module.exports) module.exports = api;
-})(typeof globalThis !== "undefined" ? globalThis : this, function (PitchSequencing, BattedBallPhysical) {
+})(typeof globalThis !== "undefined" ? globalThis : this, function (PitchSequencing, BattedBallPhysical, PitcherCatcherTacticalIntegration) {
   "use strict";
 
   const VERSION = "offensive-plate-approach-v1";
@@ -124,6 +125,9 @@
       pitchNumber: Math.max(0, Math.floor(Number(input.pitchNumber) || 0)),
       pendingPitch: input.pendingPitch ? clone(input.pendingPitch) : null,
       pitchHistory: Array.isArray(input.pitchHistory) ? clone(input.pitchHistory).slice(-ABSOLUTE_PITCH_SAFETY_CAP) : [],
+      tacticalSequenceHistory: PitcherCatcherTacticalIntegration
+        ? clone(PitcherCatcherTacticalIntegration.normalizeSequenceHistory(input.tacticalSequenceHistory))
+        : Array.isArray(input.tacticalSequenceHistory) ? clone(input.tacticalSequenceHistory).slice(-6) : [],
       completed: input.completed === true,
       result: typeof input.result === "string" ? input.result : "",
       battedBallPhysicalTruth: BattedBallPhysical
@@ -174,16 +178,23 @@
     const pitchNumber = state.pitchNumber + 1;
     if (PitchSequencing && state.pitcherRuntime) {
       const recentPitchClasses = (state.pitchHistory || []).map(item => item.pitch?.pitchLocationClass).filter(item => PITCH_CLASSES.includes(item)).slice(-6);
-      const decision = PitchSequencing.createPitchDecision({
+      const tactical = PitcherCatcherTacticalIntegration ? PitcherCatcherTacticalIntegration.createTacticalPitchDecision({
         paIdentity: state.paIdentity,
-        pitchNumber,
+        pitchIndex: pitchNumber,
+        pitchIdentity: `${state.paIdentity}|pitch-${pitchNumber}`,
         balls: state.balls,
         strikes: state.strikes,
         recentPitchClasses,
+        sequenceHistory: state.tacticalSequenceHistory,
+        context: state.context,
         previousPAResult: state.pitcherRuntime.previousPAResult,
-        scoringPosition: Boolean(state.context?.scoringPosition),
-        highLeverage: Boolean(state.context?.highLeverage),
         pitcherRuntime: state.pitcherRuntime,
+        frozenDistribution: pitchNumber === 1 ? state.prePitchFrozenDistribution : null
+      }) : null;
+      const decision = tactical?.pitchDecision || PitchSequencing.createPitchDecision({
+        paIdentity: state.paIdentity, pitchNumber, balls: state.balls, strikes: state.strikes, recentPitchClasses,
+        previousPAResult: state.pitcherRuntime.previousPAResult, scoringPosition: Boolean(state.context?.scoringPosition),
+        highLeverage: Boolean(state.context?.highLeverage), pitcherRuntime: state.pitcherRuntime,
         frozenDistribution: pitchNumber === 1 ? state.prePitchFrozenDistribution : null
       });
       const pitchLocationClass = decision.actualPitchClass;
@@ -200,7 +211,8 @@
         generatorAuthority: "pitchSequencingCoreSprintA",
         intendedPitchClass: decision.intendedPitchClass,
         controlRealization: clone(realization),
-        pitcherSequencingTrace: clone(decision.debugTrace)
+        pitcherSequencingTrace: clone(decision.debugTrace),
+        pitchTacticalState: tactical ? clone(tactical) : null
       }, {}));
     }
     const pitchLocationClass = classifyPitchRoll(deterministicUnit(state.paIdentity, `pitch-class|${pitchNumber}`));
@@ -510,9 +522,15 @@
         pitchChallenge: profile.challenges
       };
     }
+    const tacticalFeedback = PitcherCatcherTacticalIntegration
+      ? PitcherCatcherTacticalIntegration.recordPitchTacticalFeedback(pitch.pitchTacticalState, event) : null;
+    if (tacticalFeedback) event.tacticalFeedback = clone(tacticalFeedback);
     const next = {
       ...clone(state), balls: Math.min(4, balls), strikes: Math.min(3, strikes), pitchNumber,
       pendingPitch: null, pitchHistory: [...state.pitchHistory, event], completed: Boolean(paResult), result: paResult,
+      tacticalSequenceHistory: tacticalFeedback
+        ? [...(state.tacticalSequenceHistory || []), clone(tacticalFeedback)].slice(-6)
+        : clone(state.tacticalSequenceHistory || []),
       battedBallPhysicalTruth: battedBallPhysicalTruth || state.battedBallPhysicalTruth,
       safetyFallbackUsed: state.safetyFallbackUsed || safetyFallbackUsed, recognitionSummary, swingExecutionSummary
     };

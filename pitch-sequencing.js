@@ -245,7 +245,12 @@
     };
     const strategicPlan = input.frozenDistribution ? null : buildStrategicPitchDistribution(context, runtime.processState);
     const frozenDistribution = freezePitchDistribution(input.frozenDistribution || strategicPlan);
-    const intent = sampleIntendedPitchClass(frozenDistribution, { identity, label: "intended-pitch", roll: input.intentRoll });
+    const compatibleIntentOverride = PITCH_CLASSES.includes(input.intendedPitchClassOverride)
+      && Number(frozenDistribution.finalFrozenDistribution[input.intendedPitchClassOverride]) > 0
+      ? input.intendedPitchClassOverride : "";
+    const intent = compatibleIntentOverride
+      ? deepFreeze({ intendedPitchClass: compatibleIntentOverride, intentRoll: null, frozenDistribution })
+      : sampleIntendedPitchClass(frozenDistribution, { identity, label: "intended-pitch", roll: input.intentRoll });
     const controlRealization = resolvePitchControl({
       intendedPitchClass: intent.intendedPitchClass,
       control: runtime.control,
@@ -267,6 +272,7 @@
       strategicModifiers: { context: clone(frozenDistribution.contextModifiers), process: clone(frozenDistribution.processModifiers) },
       frozenPitchDistribution: clone(frozenDistribution.finalFrozenDistribution),
       intendedPitchClass: intent.intendedPitchClass,
+      intendedPitchSource: compatibleIntentOverride ? "acceptedTacticalCall" : "sequencingSample",
       control: controlRealization.control,
       targetDifficulty: controlRealization.targetDifficulty,
       realizationStability: controlRealization.realizationStability,

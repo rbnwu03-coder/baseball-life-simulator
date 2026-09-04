@@ -8859,6 +8859,8 @@ function prepareHighSchoolYearOneMatch() {
     pitcherRuntimeState: null,
     pitcherSequencingDebugTrace: [],
     pitcherObservableHistory: [],
+    pitcherTacticalSequenceHistory: [],
+    pitcherTacticalDebugTrace: [],
     batterAnticipationState: null,
     prePitchPlanningState: null,
     offensivePlateAppearanceState: null,
@@ -9356,6 +9358,7 @@ function settleHighSchoolPitcherRuntimeAfterPlateAppearance(match, plateAppearan
     .map(item => item.pitch?.pitcherSequencingTrace)
     .filter(Boolean);
   match.pitcherSequencingDebugTrace = [...match.pitcherSequencingDebugTrace, ...JSON.parse(JSON.stringify(traces))].slice(-40);
+  syncHighSchoolPitcherTacticalState(match, plateAppearanceState);
   if (!Array.isArray(match.pitcherObservableHistory)) match.pitcherObservableHistory = [];
   const observableRecords = (plateAppearanceState.pitchHistory || []).map(item => PitchSequencing.createObservablePitchRecord({
     pitch: item.pitch,
@@ -9374,6 +9377,21 @@ function settleHighSchoolPitcherRuntimeAfterPlateAppearance(match, plateAppearan
     })
     : PitchSequencing.createPitcherRuntimeState({ ...JSON.parse(JSON.stringify(current)), previousPAResult: plateAppearanceState.result, recentPitchClasses });
   return match.pitcherRuntimeState;
+}
+
+function syncHighSchoolPitcherTacticalState(match, plateAppearanceState) {
+  if (!match || !plateAppearanceState || typeof PitcherCatcherTacticalIntegration === "undefined") return null;
+  match.pitcherTacticalSequenceHistory = JSON.parse(JSON.stringify(
+    PitcherCatcherTacticalIntegration.normalizeSequenceHistory(plateAppearanceState.tacticalSequenceHistory)
+  ));
+  const incoming = (plateAppearanceState.pitchHistory || [])
+    .map(item => item.pitch?.pitchTacticalState)
+    .filter(Boolean)
+    .map(state => ({ tacticalIdentity: state.tacticalIdentity, ...JSON.parse(JSON.stringify(state.developerTrace || {})) }));
+  const existing = Array.isArray(match.pitcherTacticalDebugTrace) ? match.pitcherTacticalDebugTrace : [];
+  const byIdentity = new Map([...existing, ...incoming].map(trace => [trace.tacticalIdentity, trace]));
+  match.pitcherTacticalDebugTrace = [...byIdentity.values()].slice(-40);
+  return match.pitcherTacticalSequenceHistory;
 }
 
 function createHighSchoolOffensivePlateAppearanceIdentity(match, choice) {
@@ -9416,6 +9434,7 @@ function ensureHighSchoolOffensivePlateAppearanceState(match, choice) {
     batterAnticipation: match.batterAnticipationState,
     prePitchFrozenDistribution: match.prePitchPlanningState?.paIdentity === paIdentity
       ? match.prePitchPlanningState.frozenDistribution : null,
+    tacticalSequenceHistory: match.pitcherTacticalSequenceHistory,
     context: {
       inning: match.inning,
       half: match.half,
@@ -9502,6 +9521,7 @@ function resolveHighSchoolPlateDecisionPitch(match, routeId, options = {}) {
     executionOptions: options
   });
   match.offensivePlateAppearanceState = JSON.parse(JSON.stringify(resolved.plateAppearanceState));
+  syncHighSchoolPitcherTacticalState(match, resolved.plateAppearanceState);
   match.lastClosedSituationSummary = MatchSituationLifecycle.createClosedSituationSummary(resolved.situation);
   match.activeSituation = null;
   state.lastPitchEvent = resolved.event ? JSON.parse(JSON.stringify(resolved.event)) : null;

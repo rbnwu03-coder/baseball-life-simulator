@@ -320,6 +320,12 @@ function normalizeSave(saved) {
     ? JSON.parse(JSON.stringify(saved.highSchoolMatch.pitcherSequencingDebugTrace.slice(-40))) : [];
   fresh.highSchoolMatch.pitcherObservableHistory = Array.isArray(saved.highSchoolMatch?.pitcherObservableHistory)
     ? JSON.parse(JSON.stringify(saved.highSchoolMatch.pitcherObservableHistory.slice(-16))) : [];
+  fresh.highSchoolMatch.pitcherTacticalSequenceHistory = typeof PitcherCatcherTacticalIntegration !== "undefined"
+    ? JSON.parse(JSON.stringify(PitcherCatcherTacticalIntegration.normalizeSequenceHistory(saved.highSchoolMatch?.pitcherTacticalSequenceHistory)))
+    : Array.isArray(saved.highSchoolMatch?.pitcherTacticalSequenceHistory)
+      ? JSON.parse(JSON.stringify(saved.highSchoolMatch.pitcherTacticalSequenceHistory.slice(-6))) : [];
+  fresh.highSchoolMatch.pitcherTacticalDebugTrace = Array.isArray(saved.highSchoolMatch?.pitcherTacticalDebugTrace)
+    ? JSON.parse(JSON.stringify(saved.highSchoolMatch.pitcherTacticalDebugTrace.slice(-40))) : [];
   fresh.highSchoolMatch.batterAnticipationState = saved.highSchoolMatch?.batterAnticipationState
     ? JSON.parse(JSON.stringify(saved.highSchoolMatch.batterAnticipationState)) : null;
   fresh.highSchoolMatch.prePitchPlanningState = saved.highSchoolMatch?.prePitchPlanningState

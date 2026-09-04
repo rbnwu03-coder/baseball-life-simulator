@@ -1822,6 +1822,8 @@ function createInitialPlayer(name = "") {
       pitcherRuntimeState: null,
       pitcherSequencingDebugTrace: [],
       pitcherObservableHistory: [],
+      pitcherTacticalSequenceHistory: [],
+      pitcherTacticalDebugTrace: [],
       batterAnticipationState: null,
       prePitchPlanningState: null,
       offensivePlateAppearanceState: null,
