@@ -360,6 +360,12 @@ function normalizeSave(saved) {
     ? BattedBallFlyBallDefense.normalizeFlyBallCatchState(saved.highSchoolMatch?.flyBallCatchState)
     : saved.highSchoolMatch?.flyBallCatchState
       ? JSON.parse(JSON.stringify(saved.highSchoolMatch.flyBallCatchState)) : null;
+  fresh.highSchoolMatch.activeSituation = typeof MatchSituationLifecycle !== "undefined"
+    ? MatchSituationLifecycle.normalizeSituation(saved.highSchoolMatch?.activeSituation)
+    : saved.highSchoolMatch?.activeSituation
+      ? JSON.parse(JSON.stringify(saved.highSchoolMatch.activeSituation)) : null;
+  fresh.highSchoolMatch.lastClosedSituationSummary = saved.highSchoolMatch?.lastClosedSituationSummary
+    ? JSON.parse(JSON.stringify(saved.highSchoolMatch.lastClosedSituationSummary)) : null;
   fresh.highSchoolMatch.lastDefensiveResolution = Object.assign(
     {},
     highSchoolDefaults.highSchoolMatch.lastDefensiveResolution,

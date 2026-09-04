@@ -3530,6 +3530,11 @@ function getHighSchoolMatchPlaybackDelay(match) {
 }
 
 function getHighSchoolDecisionExecutionText(match, decision) {
+  if (match.activeSituation?.type === "runnerTagUpDecision") {
+    return decision === "tagUpSendHome"
+      ? "你等球進入外野手手套後踩穩三壘，隨即全力衝向本壘。"
+      : "你確認接球成立後留在三壘，保留下一棒的進攻機會。";
+  }
   if (match.currentDomain === "defense" && match.defensiveSituation?.familyId === "infield") {
     return infieldDecisionFamily.present(match.defensiveSituation, null, decision).execution;
   }
@@ -4294,6 +4299,10 @@ function isHighSchoolMatchPresentationEventVisible(event) {
 
 function isHighSchoolMatchDecisionVisible(match) {
   if (!match || match.completed) return false;
+  const activeSituation = typeof MatchSituationLifecycle !== "undefined"
+    ? MatchSituationLifecycle.normalizeSituation(match.activeSituation) : null;
+  if (activeSituation?.type === "runnerTagUpDecision"
+    && activeSituation.lifecycleState === "presented" && match.simulationPhase === "moment_2_ready") return true;
   if (match.simulationPhase === "offensive_agency_ready") {
     const presentedAgencyEvent = getHighSchoolPresentedEvent(match);
     return presentedAgencyEvent?.type === "playerAgencyOpportunityReached"
@@ -4533,7 +4542,9 @@ function prepareHighSchoolOffensiveTacticalAction(match, options = {}) {
     revealTiming: actionState.revealTiming,
     observableEvents: JSON.parse(JSON.stringify(actionState.observableEvents)),
     executionDeferred: true,
-    rngNamespace: decision.rngNamespace
+    rngNamespace: decision.rngNamespace,
+    previousSituationSummary: match.lastClosedSituationSummary
+      ? JSON.parse(JSON.stringify(match.lastClosedSituationSummary)) : null
   };
   match.opponentTacticalTruth = { code: actionState.selectedTacticalAction, targetRunnerId: match.runners?.[1] || match.runners?.[0] || match.runners?.[2] || "" };
   return actionState;
@@ -4672,6 +4683,15 @@ function applyHighSchoolBuntTerminalPlateAppearance(match, result) {
     resultAuthority: "offensiveBuntPAState.countResult"
   });
   advanceHighSchoolMatchBattingOrder(match, offenseTeam);
+  match.lastClosedSituationSummary = {
+    situationId: `${match.offensiveTacticalActionState?.identity || "tactical-pa"}|offensive-tactical-action`,
+    type: "offensiveTacticalActionCompatibility",
+    lifecycleState: "closed",
+    previousTacticalAction: match.offensiveTacticalActionState?.selectedTacticalAction || "",
+    outcome: result,
+    outsBefore: Number(before.outs) || 0,
+    outsAfter: Number(match.outs) || 0
+  };
   assertHighSchoolMatchStateIntegrity(match, "bunt-terminal-plate-appearance");
   return plateAppearanceEvent;
 }
@@ -5300,6 +5320,215 @@ function applyHighSchoolFlyBallCatchResolution(match) {
   });
   assertHighSchoolMatchStateIntegrity(match, "fly-ball-catch-resolution");
   return event;
+}
+
+const HIGH_SCHOOL_TAG_UP_ROUTES = Object.freeze({
+  sendHome: Object.freeze({ routeId: "tagUpSendHome", matchDecision: "tagUpSendHome", text: "衝本壘" }),
+  holdThird: Object.freeze({ routeId: "tagUpHoldThird", matchDecision: "tagUpHoldThird", text: "留在三壘" })
+});
+
+function getHighSchoolTagUpReceivingTarget(match) {
+  const catcher = (match?.rosters?.[match.defenseTeam]?.lineup || []).find(entity => entity.position === "捕手") || null;
+  const capability = catcher ? getDefensiveSimulationCapability(catcher, "捕手", match) : { fielding: 5, reaction: 5 };
+  return {
+    receiverId: catcher?.id || `${match?.defenseTeam || "defense"}-catcher-abstraction`,
+    position: "捕手",
+    receiving: Number(capability.fielding) || 5,
+    reaction: Number(capability.reaction) || 5,
+    authority: catcher ? "existingRosterFieldTopology" : "minimalReceivingAbstraction"
+  };
+}
+
+function createHighSchoolRunnerTagUpSituation(match) {
+  if (!match || typeof MatchSituationLifecycle === "undefined") return null;
+  const flyState = typeof BattedBallFlyBallDefense !== "undefined"
+    ? BattedBallFlyBallDefense.normalizeFlyBallCatchState(match.flyBallCatchState) : match.flyBallCatchState;
+  const handoff = flyState?.pendingTagUpHandoff;
+  if (!flyState?.settlementApplied || handoff?.status !== "available" || flyState.outsAfterCatch >= 3) return null;
+  const candidateId = handoff.runnerCandidates?.[0] || "";
+  const runnerState = flyState.postCatchRunnerStates?.find(item => item.runnerId === candidateId) || null;
+  if (!runnerState?.tagUpLegality?.advancementLegal) return null;
+  const originBase = Number(runnerState.originBase) || 0;
+  const targetBase = runnerState.tagUpLegality.targetBase || "";
+  const verticalSupported = originBase === 3 && targetBase === "home";
+  const playerOwnsDecision = candidateId === "player";
+  const simulationPoint = `${flyState.identity}|${candidateId}|${originBase}|${targetBase}`;
+  const situationId = MatchSituationLifecycle.createSituationId({
+    gameId: match.id, inning: match.inning, half: match.half,
+    paIdentity: flyState.identity, simulationPoint,
+    type: MatchSituationLifecycle.TYPES.runnerTagUpDecision
+  });
+  const existing = MatchSituationLifecycle.normalizeSituation(match.activeSituation);
+  if (existing?.situationId === situationId) return existing;
+  if (existing && !MatchSituationLifecycle.canResumeSimulation(existing)) return existing;
+  const runnerEntity = getHighSchoolMatchSimulationEntity(match, candidateId) || {};
+  const catchDefender = flyState.defenderContext || {};
+  const catchCapability = getDefensiveSimulationCapability(catchDefender, catchDefender.position, match);
+  const legalRoutes = verticalSupported
+    ? [HIGH_SCHOOL_TAG_UP_ROUTES.sendHome, HIGH_SCHOOL_TAG_UP_ROUTES.holdThird]
+    : [];
+  let situation = MatchSituationLifecycle.createSituation({
+    situationId,
+    type: MatchSituationLifecycle.TYPES.runnerTagUpDecision,
+    actor: { id: candidateId, role: "runner", ownsDecision: playerOwnsDecision },
+    sourceAuthority: "BattedBallFlyBallDefense.pendingTagUpHandoff",
+    sourcePhysicalStateRef: flyState.physicalTruth?.identity || flyState.identity,
+    createdAt: {
+      inning: match.inning, half: match.half, outs: match.outs,
+      score: { ...match.scores }, bases: match.runners.slice(0, 3),
+      paIdentity: flyState.identity, simulationPoint
+    },
+    contextSnapshot: {
+      gameContext: {
+        gameId: match.id, inning: match.inning, half: match.half, outsAfterCatch: match.outs,
+        score: { ...match.scores }, bases: match.runners.slice(0, 3),
+        offenseTeam: match.offenseTeam, defenseTeam: match.defenseTeam, paIdentity: flyState.identity
+      },
+      runnerContext: {
+        runnerId: candidateId, originBase: originBase === 3 ? "third" : originBase === 2 ? "second" : "first", targetBase,
+        retouchState: runnerState.retouchState, tagUpLegality: runnerState.tagUpLegality,
+        speed: Number(runnerState.readState?.speed) || Number(runnerEntity.speed) || 5,
+        readQuality: runnerState.readState?.readQuality || "ordinary",
+        responseTiming: runnerState.readState?.responseTiming || "normal"
+      },
+      defensiveContext: {
+        catchDefender: {
+          defenderId: catchDefender.defenderId || "", position: catchDefender.position || "",
+          arm: Number(catchCapability.arm) || Number(catchDefender.arm) || 5,
+          throwing: Number(catchCapability.throwing) || Number(catchDefender.throwing) || 5
+        },
+        receivingTarget: getHighSchoolTagUpReceivingTarget(match),
+        catchContext: {
+          direction: flyState.airborneContext?.direction || "",
+          depth: flyState.airborneContext?.depth || "",
+          pace: flyState.airborneContext?.pace || ""
+        }
+      },
+      physicalTruthRef: flyState.physicalTruth?.identity || "",
+      catchIdentity: flyState.identity,
+      handoffIdentity: `${flyState.identity}|pending-tag-up`,
+      presentationText: "外野飛球被接住。你已踩在三壘壘包上，球仍在外野手手中。"
+    },
+    legalRoutes,
+    recommendation: null,
+    previousSituationSummary: match.lastClosedSituationSummary || null
+  });
+  situation = MatchSituationLifecycle.admitSituation(situation, {
+    supported: verticalSupported,
+    playerOwnsDecision,
+    reason: !verticalSupported ? "tagUpTargetTopologyDeferred"
+      : playerOwnsDecision ? "playerRunnerOwnsMeaningfulTagUpDecision" : "nonPlayerRunnerDecisionOwnershipDenied"
+  });
+  if (situation.admission.admittedToPlayer) {
+    situation = MatchSituationLifecycle.presentSituation(situation);
+    match.activeSituation = situation;
+    match.currentDomain = "offense";
+    match.simulationPhase = "moment_2_ready";
+    match.currentAssignment = situation.contextSnapshot.presentationText;
+    return situation;
+  }
+  const terminalReason = situation.admission.mode === "unsupportedFallback"
+    ? "unsupportedTagUpTopology" : "nonPlayerTagUpDecisionDeferred";
+  situation = MatchSituationLifecycle.abandonSituation(situation, { reason: terminalReason });
+  match.lastClosedSituationSummary = MatchSituationLifecycle.createClosedSituationSummary(situation);
+  match.activeSituation = null;
+  return situation;
+}
+
+function beginHighSchoolRunnerTagUpDecision(match, selectedRoute) {
+  if (!match || typeof MatchSituationLifecycle === "undefined") return null;
+  let situation = MatchSituationLifecycle.normalizeSituation(match.activeSituation);
+  if (!situation || situation.type !== MatchSituationLifecycle.TYPES.runnerTagUpDecision) return null;
+  if (situation.lifecycleState === "presented") {
+    situation = MatchSituationLifecycle.recordDecision(situation, { selectedRoute, decidedBy: "player" });
+  }
+  if (situation.lifecycleState === "decided") {
+    situation = MatchSituationLifecycle.beginExecution(situation, {
+      selectedRoute: situation.decision.selectedRoute,
+      handoffRef: situation.contextSnapshot.handoffIdentity,
+      executionIdentity: `${situation.situationId}|execution|${situation.decision.selectedRoute}`,
+      reason: "tagUpPhysicalResolverHandoff"
+    });
+  }
+  match.activeSituation = situation;
+  return situation;
+}
+
+function settleAndCloseHighSchoolRunnerTagUpSituation(match, execution) {
+  let situation = MatchSituationLifecycle.normalizeSituation(match?.activeSituation);
+  if (!situation || situation.type !== MatchSituationLifecycle.TYPES.runnerTagUpDecision) return null;
+  if (situation.lifecycleState === "resolved" && situation.settlement?.applied !== true) {
+    const outcome = execution || situation.resolution?.executionEvidence;
+    const runnerId = situation.contextSnapshot.runnerContext.runnerId;
+    const originIndex = 2;
+    const offenseTeam = situation.contextSnapshot.gameContext.offenseTeam;
+    const before = { outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice(0, 3) };
+    if (match.runners[originIndex] === runnerId && outcome.physicalOutcome.code !== "heldThird") {
+      match.runners[originIndex] = null;
+      if (outcome.physicalOutcome.code === "safeHome") {
+        const scoringEvent = scoreHighSchoolMatchRunner(match, runnerId, offenseTeam, "tagUp", { deferEvent: true });
+        if (scoringEvent) recordHighSchoolMatchSimulationEvent(match, { ...scoringEvent, presentationImportance: "hidden" });
+      } else if (outcome.physicalOutcome.code === "taggedOutAtHome") {
+        match.outs = Math.min(3, match.outs + 1);
+        if (match.outs >= 3) match.pendingHalfInningTermination = {
+          halfInningEnded: true, outsBefore: before.outs, outsAfter: 3,
+          thirdOutType: HIGH_SCHOOL_THIRD_OUT_TYPES.nonForceTag,
+          scoringAllowed: false, legalScoringRunnerIds: [], basesBefore: before.runners, basesAfter: match.runners.slice(0, 3), strandedRunnerIds: match.runners.filter(Boolean)
+        };
+      }
+    }
+    syncHighSchoolMatchPlayerRunnerLocation(match);
+    const after = { outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice(0, 3) };
+    recordHighSchoolMatchSimulationEvent(match, {
+      type: "runnerTagUpResolution", presentationImportance: "attention",
+      situationId: situation.situationId, selectedRoute: situation.decision?.selectedRoute || "",
+      outcome: outcome.physicalOutcome.code, timingMargin: outcome.timingMargin,
+      executionEvidence: outcome, before, after, inning: match.inning, half: match.half,
+      outs: match.outs, scores: match.scores, runners: match.runners,
+      presentation: outcome.physicalOutcome.code === "safeHome" ? "你從三壘啟動，搶在回傳前滑回本壘得分。"
+        : outcome.physicalOutcome.code === "taggedOutAtHome" ? "你從三壘啟動，但回傳先到本壘，觸殺出局。"
+          : "你留在三壘，沒有在接球後冒險啟動。"
+    });
+    situation = MatchSituationLifecycle.markSettled(situation, { identity: `${situation.situationId}|tag-up-settlement` });
+  }
+  if (situation.lifecycleState === "settled") situation = MatchSituationLifecycle.closeSituation(situation, { reason: "tagUpAftermathComplete" });
+  if (situation.lifecycleState === "closed") {
+    match.lastClosedSituationSummary = MatchSituationLifecycle.createClosedSituationSummary(situation);
+    match.activeSituation = null;
+    const resumeAssignment = match.pendingDefensiveResumeState?.currentAssignment || "";
+    restoreHighSchoolMatchAfterDefensiveDecision(match);
+    match.currentDomain = "flow";
+    if (resumeAssignment) match.currentAssignment = resumeAssignment;
+  } else match.activeSituation = situation;
+  assertHighSchoolMatchStateIntegrity(match, "runner-tag-up-settlement");
+  return situation;
+}
+
+function resolveHighSchoolRunnerTagUpDecision(match, selectedRoute, options = {}) {
+  if (!match || typeof MatchSituationLifecycle === "undefined" || typeof BattedBallTagUpExecution === "undefined") return null;
+  let situation = beginHighSchoolRunnerTagUpDecision(match, selectedRoute);
+  if (!situation) return null;
+  let execution = situation.resolution?.executionEvidence || null;
+  if (situation.lifecycleState === "executing") {
+    execution = BattedBallTagUpExecution.resolveTagUpExecution({
+      situationId: situation.situationId,
+      executionIdentity: situation.executionState.executionIdentity,
+      selectedRoute: situation.decision.selectedRoute,
+      contextSnapshot: situation.contextSnapshot
+    }, options);
+    if (!execution) return null;
+    situation = MatchSituationLifecycle.resolveSituation(situation, {
+      physicalOutcomeRef: execution.executionIdentity,
+      outsDelta: execution.physicalOutcome.outsDelta,
+      runsDelta: execution.physicalOutcome.runsDelta,
+      runnerActorOutcomes: [{ runnerId: situation.actor.id, result: execution.physicalOutcome.runnerResult }],
+      executionEvidence: execution,
+      reason: execution.physicalOutcome.code
+    });
+    match.activeSituation = situation;
+  }
+  if (options.deferSettlement === true) return situation;
+  return settleAndCloseHighSchoolRunnerTagUpSituation(match, execution);
 }
 
 function cancelHighSchoolOffensiveBuntPATacticalPlan(match, reason = "explicitCancellation") {
@@ -7880,6 +8109,14 @@ const infieldDecisionFamily = Object.freeze({
 registerPositionDecisionFamily(infieldDecisionFamily);
 
 function getHighSchoolDefensiveSituationText(match) {
+  const lifecycle = typeof MatchSituationLifecycle !== "undefined"
+    ? MatchSituationLifecycle.normalizeSituation(match?.activeSituation) : null;
+  if (lifecycle?.type === "runnerTagUpDecision"
+    && ["presented", "decided", "executing"].includes(lifecycle.lifecycleState)
+    && lifecycle.contextSnapshot?.presentationText) return lifecycle.contextSnapshot.presentationText;
+  if (lifecycle?.type === "groundBallDefensiveDecision"
+    && ["presented", "decided", "executing", "reassessing"].includes(lifecycle.lifecycleState)
+    && lifecycle.contextSnapshot?.presentationText) return lifecycle.contextSnapshot.presentationText;
   const baseText = formatHighSchoolMatchRunners(match.runners);
   const position = match.position;
   if (position === "外野手") return `${baseText}，一記平飛球落在你前方，跑者正在判斷是否多推進一個壘包。`;
@@ -7932,6 +8169,18 @@ function getHighSchoolCatcherReassessment(match, selectedRoute) {
 }
 
 function getHighSchoolDefensiveMomentChoices(match) {
+  const lifecycle = typeof MatchSituationLifecycle !== "undefined"
+    ? MatchSituationLifecycle.normalizeSituation(match?.activeSituation) : null;
+  if (lifecycle?.type === "runnerTagUpDecision"
+    && lifecycle.admission?.admittedToPlayer === true
+    && ["presented", "decided"].includes(lifecycle.lifecycleState)) {
+    return lifecycle.legalRoutes.map(route => JSON.parse(JSON.stringify(route)));
+  }
+  if (lifecycle?.type === "groundBallDefensiveDecision"
+    && lifecycle.admission?.admittedToPlayer === true
+    && ["presented", "decided"].includes(lifecycle.lifecycleState)) {
+    return lifecycle.legalRoutes.map(route => JSON.parse(JSON.stringify(route)));
+  }
   const momentId = getHighSchoolYearOneMomentId(match);
   const force = getHighSchoolDefensiveForceState(match);
   const position = match.position;
@@ -9516,7 +9765,174 @@ function normalizeHighSchoolTerminalRunnerChanges(resolution, thirdOutResolution
   }));
 }
 
+function createGroundBallMatchSituation(match, legalChoices, classification, opportunity = null) {
+  if (!match || typeof MatchSituationLifecycle === "undefined" || !match.groundBallInPlayState?.supported
+    || match.defensiveSituation?.familyId !== "infield") return null;
+  const handoff = match.groundBallInPlayState;
+  const situationId = MatchSituationLifecycle.createSituationId({
+    gameId: match.id,
+    inning: match.inning,
+    half: match.half,
+    paIdentity: handoff.identity,
+    simulationPoint: opportunity?.opportunityId || match.currentMomentId || match.simulationCursor,
+    type: MatchSituationLifecycle.TYPES.groundBallDefensiveDecision
+  });
+  const existing = MatchSituationLifecycle.normalizeSituation(match.activeSituation);
+  if (existing?.situationId === situationId) {
+    match.activeSituation = existing;
+    return existing;
+  }
+  if (existing && !MatchSituationLifecycle.canResumeSimulation(existing)) return existing;
+  const presentationText = getHighSchoolDefensiveSituationText(match);
+  let situation = MatchSituationLifecycle.createSituation({
+    situationId,
+    type: MatchSituationLifecycle.TYPES.groundBallDefensiveDecision,
+    actor: {
+      id: "player",
+      role: match.defensiveSituation.responsibility?.playerRole || "",
+      position: match.defensiveSituation.playerPosition || ""
+    },
+    sourceAuthority: "BattedBallPhysicalTruth+GroundBallRunnerRealization+InfieldRouteAvailability",
+    sourcePhysicalStateRef: handoff.identity,
+    createdAt: {
+      inning: match.inning,
+      half: match.half,
+      outs: match.outs,
+      score: { ...match.scores },
+      bases: match.runners.slice(0, 3),
+      paIdentity: handoff.identity,
+      simulationPoint: opportunity?.opportunityId || match.currentMomentId || match.simulationCursor
+    },
+    contextSnapshot: {
+      familyId: "infield",
+      playerPosition: match.defensiveSituation.playerPosition,
+      ballContext: handoff.ballContext,
+      physicalIdentity: handoff.physicalTruth?.identity || "",
+      runnerRealization: handoff.runnerRealization,
+      forceState: handoff.forceState,
+      timingWindows: handoff.timingWindows,
+      presentationText
+    },
+    legalRoutes: legalChoices,
+    recommendation: {
+      direction: match.coachTacticalDirection ? JSON.parse(JSON.stringify(match.coachTacticalDirection)) : null,
+      presentation: match.coachInstruction || ""
+    },
+    previousSituationSummary: match.lastClosedSituationSummary || null
+  });
+  situation = MatchSituationLifecycle.admitSituation(situation, {
+    supported: true,
+    playerOwnsDecision: classification?.eventClassification === "playerMeaningfulDecision",
+    reason: classification?.eventClassification === "playerMeaningfulDecision"
+      ? "groundBallMultipleMeaningfulRoutes" : "groundBallAutomaticResolution"
+  });
+  if (situation.admission.admittedToPlayer) situation = MatchSituationLifecycle.presentSituation(situation);
+  match.activeSituation = situation;
+  return situation;
+}
+
+function beginGroundBallSituationDecision(match, decision) {
+  if (!match || typeof MatchSituationLifecycle === "undefined") return null;
+  let situation = MatchSituationLifecycle.normalizeSituation(match.activeSituation);
+  if (!situation || situation.type !== MatchSituationLifecycle.TYPES.groundBallDefensiveDecision) return null;
+  const selected = situation.legalRoutes.find(route => route.matchDecision === decision || route.routeId === decision);
+  if (!selected) return null;
+  if (situation.lifecycleState === "presented") {
+    situation = MatchSituationLifecycle.recordDecision(situation, {
+      selectedRoute: selected.routeId || selected.matchDecision,
+      decidedBy: "player"
+    });
+  }
+  if (situation.lifecycleState === "decided") {
+    situation = MatchSituationLifecycle.beginExecution(situation, {
+      selectedRoute: situation.decision.selectedRoute,
+      handoffRef: match.groundBallInPlayState?.identity || ""
+    });
+  }
+  match.activeSituation = situation;
+  return situation;
+}
+
+function beginAutomaticGroundBallSituationExecution(match) {
+  if (!match || typeof MatchSituationLifecycle === "undefined") return null;
+  let situation = MatchSituationLifecycle.normalizeSituation(match.activeSituation);
+  if (!situation || situation.type !== MatchSituationLifecycle.TYPES.groundBallDefensiveDecision
+    || situation.lifecycleState !== "admitted" || situation.admission?.admittedToPlayer) return situation;
+  const route = situation.legalRoutes[0];
+  situation = MatchSituationLifecycle.beginExecution(situation, {
+    selectedRoute: route?.routeId || route?.matchDecision || "automatic",
+    handoffRef: match.groundBallInPlayState?.identity || "",
+    reason: "automaticGroundBallExecution"
+  });
+  match.activeSituation = situation;
+  return situation;
+}
+
+function recordGroundBallSituationResolution(match, resolution) {
+  if (!match || !resolution || typeof MatchSituationLifecycle === "undefined") return null;
+  let situation = MatchSituationLifecycle.normalizeSituation(match.activeSituation);
+  if (!situation || situation.type !== MatchSituationLifecycle.TYPES.groundBallDefensiveDecision
+    || situation.lifecycleState !== "executing") return situation;
+  if (resolution.reassessment) {
+    const remaining = (resolution.reassessment.availableRouteIds || []).map(routeId => ({ routeId }));
+    situation = MatchSituationLifecycle.beginReassessment(situation, {
+      trigger: resolution.reassessment.reason,
+      updatedPhysicalState: {
+        firstLegState: resolution.firstLegState || null,
+        continuationState: resolution.continuationState || null,
+        forceState: resolution.reassessment.forceState || null
+      },
+      remainingLegalRoutes: remaining,
+      requiresDecision: false,
+      firstLegApplied: resolution.firstLegState?.status === "completed"
+    });
+  }
+  situation = MatchSituationLifecycle.resolveSituation(situation, {
+    physicalOutcomeRef: `${situation.situationId}|physical-resolution`,
+    outsDelta: resolution.outsCreated,
+    runsDelta: resolution.runsAllowed,
+    runnerActorOutcomes: resolution.runnerChanges,
+    reason: resolution.reassessment ? "postExecutionReassessmentComplete" : "groundBallExecutionComplete"
+  });
+  match.activeSituation = situation;
+  return situation;
+}
+
+function settleAndCloseGroundBallSituation(match) {
+  if (!match || typeof MatchSituationLifecycle === "undefined") return null;
+  let situation = MatchSituationLifecycle.normalizeSituation(match.activeSituation);
+  if (!situation || situation.type !== MatchSituationLifecycle.TYPES.groundBallDefensiveDecision) return situation;
+  if (situation.lifecycleState === "resolved") {
+    situation = MatchSituationLifecycle.markSettled(situation, {
+      identity: `${situation.situationId}|${match.groundBallInPlayState?.identity || "ground-ball"}|settlement`
+    });
+  }
+  if (situation.lifecycleState === "settled") situation = MatchSituationLifecycle.closeSituation(situation);
+  if (situation.lifecycleState === "closed") {
+    match.lastClosedSituationSummary = MatchSituationLifecycle.createClosedSituationSummary(situation);
+    match.activeSituation = null;
+  } else {
+    match.activeSituation = situation;
+  }
+  return situation;
+}
+
+function abandonActiveMatchSituation(match, reason) {
+  if (!match || typeof MatchSituationLifecycle === "undefined") return null;
+  const active = MatchSituationLifecycle.normalizeSituation(match.activeSituation);
+  if (!active) return null;
+  const abandoned = MatchSituationLifecycle.abandonSituation(active, { reason });
+  if (abandoned.lifecycleState === "closed") {
+    match.lastClosedSituationSummary = MatchSituationLifecycle.createClosedSituationSummary(abandoned);
+    match.activeSituation = null;
+  } else match.activeSituation = abandoned;
+  return abandoned;
+}
+
 function restoreHighSchoolMatchAfterDefensiveDecision(match, fallbackPhase = "moment_2_resolved") {
+  const activeSituation = typeof MatchSituationLifecycle !== "undefined"
+    ? MatchSituationLifecycle.normalizeSituation(match?.activeSituation) : null;
+  if (activeSituation && !MatchSituationLifecycle.canResumeSimulation(activeSituation)) return match.simulationPhase;
   const resume = match?.pendingDefensiveResumeState;
   if (resume) {
     match.simulationPhase = resume.simulationPhase || fallbackPhase;
@@ -9534,6 +9950,8 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
   const situation = match.defensiveSituation;
   const groundBallContext = situation?.groundBallDefensiveContext;
   if (groundBallContext && match.groundBallInPlayState?.settlementApplied) return match.completedMoments.at(-1) || null;
+  beginGroundBallSituationDecision(match, decision);
+  recordGroundBallSituationResolution(match, resolution);
   const situationBefore = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
   const presentation = infieldDecisionFamily.present(situation, resolution, decision);
   const explanation = resolution.defensiveOutcomeExplanation || createDefensiveOutcomeExplanation(situation, getInfieldDecisionChoice(situation, match, decision), resolution);
@@ -9658,6 +10076,7 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
   });
   advanceHighSchoolMatchBattingOrder(match, "away");
   assertHighSchoolMatchStateIntegrity(match, "player-defense-decision");
+  settleAndCloseGroundBallSituation(match);
   restoreHighSchoolMatchAfterDefensiveDecision(match);
   match.currentAssignment = "等待球隊完成這個守備半局。";
   match.coachReaction = explanation?.coachFeedback || "現任教練提醒你先確認跑者，再決定最短的出局路線。";
@@ -9669,6 +10088,8 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
 
 function applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution) {
   if (!match || !resolution || resolution.eventClassification !== "playerRoutinePlay") return null;
+  beginAutomaticGroundBallSituationExecution(match);
+  recordGroundBallSituationResolution(match, resolution);
   const situation = match.defensiveSituation;
   const situationBefore = {
     inning: match.inning,
@@ -9763,6 +10184,7 @@ function applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution) {
     assignment: match.currentAssignment
   });
   assertHighSchoolMatchStateIntegrity(match, "player-routine-defense");
+  settleAndCloseGroundBallSituation(match);
   return event;
 }
 
@@ -10313,6 +10735,12 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
   if (!productionBunt && flyBallCatchOpportunity?.supported) {
     resolveHighSchoolFlyBallCatchOpportunity(match, options);
     const catchEvent = applyHighSchoolFlyBallCatchResolution(match);
+    const tagUpSituation = createHighSchoolRunnerTagUpSituation(match);
+    if (tagUpSituation?.admission?.admittedToPlayer && tagUpSituation.lifecycleState === "presented") {
+      setHighSchoolCoachTacticalDirection(match);
+      finalizeHighSchoolMatchDefensiveOpportunity(match, opportunity, catchEvent, "tag-up-decision-created");
+      return catchEvent;
+    }
     restoreHighSchoolMatchAfterDefensiveDecision(match, flowState.simulationPhase);
     match.currentDomain = "flow";
     setHighSchoolCoachTacticalDirection(match);
@@ -10353,11 +10781,18 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
   match.decisionGate = classification.gate ? JSON.parse(JSON.stringify(classification.gate)) : null;
   applyHighSchoolMatchDefensiveDecisionDensity(match, classification.density, classification.eventClassification === "playerMeaningfulDecision");
   updateHighSchoolMatchDefensiveOpportunityFromSituation(match, opportunity, match.defensiveSituation, legalChoices, classification);
+  setHighSchoolCoachTacticalDirection(match);
+  createGroundBallMatchSituation(match, legalChoices, classification, opportunity);
   if (classification.eventClassification === "playerRoutinePlay") {
+    beginAutomaticGroundBallSituationExecution(match);
     const resolution = resolveRoutineDefensivePlay(match, match.defensiveSituation, options.randomSource ?? null, {
       densitySuppressed: classification.density?.meaningfulCandidate === true && classification.density?.allowed === false
     });
     if (!resolution) {
+      if (typeof MatchSituationLifecycle !== "undefined"
+        && match.activeSituation?.type === MatchSituationLifecycle.TYPES.groundBallDefensiveDecision) {
+        abandonActiveMatchSituation(match, "noRoutineResolution");
+      }
       match.momentIndex = flowState.momentIndex;
       match.currentMomentId = flowState.currentMomentId;
       match.simulationPhase = flowState.simulationPhase;
@@ -10368,6 +10803,7 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
       finalizeHighSchoolMatchDefensiveOpportunity(match, opportunity, null, "no-routine-resolution");
       return null;
     }
+    recordGroundBallSituationResolution(match, resolution);
     const event = applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution);
     restoreHighSchoolMatchAfterDefensiveDecision(match, flowState.simulationPhase);
     match.currentDomain = "flow";
@@ -10376,7 +10812,6 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
     return event;
   }
   match.simulationPhase = "moment_2_ready";
-  setHighSchoolCoachTacticalDirection(match);
   const event = recordHighSchoolMatchSimulationEvent(match, {
     type: "meaningfulMomentReached", eventClassification: "playerMeaningfulDecision", decisionTension: classification.decisionTension, inning: match.inning, half: match.half,
     momentId: match.currentMomentId, domain: match.currentDomain, assignment: match.currentAssignment,
@@ -10458,6 +10893,9 @@ function shouldReachHighSchoolFinalOffensiveMoment(match) {
 
 function advanceHighSchoolMatchPlaybackStep(match = player.highSchoolMatch) {
   if (!match || match.completed || !isHighSchoolMatchPlaybackPhase(match)) return false;
+  const activeSituation = typeof MatchSituationLifecycle !== "undefined"
+    ? MatchSituationLifecycle.normalizeSituation(match.activeSituation) : null;
+  if (activeSituation && !MatchSituationLifecycle.canResumeSimulation(activeSituation)) return "decision";
   const pendingEvent = advanceHighSchoolPresentationCursor(match);
   if (pendingEvent) return getHighSchoolPlaybackResultForPresentedEvent(pendingEvent);
   if (match.pendingGameSettlement) {
@@ -10607,6 +11045,16 @@ function resolveHighSchoolYearOneMatch(decision, expectedMomentId = "", randomSo
     const agencySelection = decision === "agencyManual" ? "manual" : decision === "agencySimulate" ? "simulate" : "";
     return agencySelection ? chooseHighSchoolOffensiveAgency(agencySelection, expectedMomentId || match.offensivePlayerAgencyState?.momentId) : false;
   }
+  const activeSituation = typeof MatchSituationLifecycle !== "undefined"
+    ? MatchSituationLifecycle.normalizeSituation(match.activeSituation) : null;
+  if (activeSituation?.type === "runnerTagUpDecision") {
+    if (expectedMomentId && expectedMomentId !== match.currentMomentId) return false;
+    const legalRoute = activeSituation.legalRoutes.find(route => route.routeId === decision || route.matchDecision === decision);
+    if (!legalRoute) return false;
+    const closed = resolveHighSchoolRunnerTagUpDecision(match, legalRoute.routeId, { randomSource });
+    const outcome = match.lastClosedSituationSummary?.outcome || closed?.resolution?.reason || "";
+    return outcome === "safeHome" ? "你衝回本壘得分。" : outcome === "taggedOutAtHome" ? "你在本壘前被觸殺出局。" : "你留在三壘。";
+  }
   const currentMomentId = getHighSchoolYearOneMomentId(match);
   const legalChoices = getHighSchoolYearOneMatchMomentChoices(match);
   const legalChoice = legalChoices.find(choice => choice.matchDecision === decision);
@@ -10618,7 +11066,9 @@ function resolveHighSchoolYearOneMatch(decision, expectedMomentId = "", randomSo
     return `${match.completedMoments.at(-1).outcome}。${match.completedMoments.at(-1).consequence}`;
   }
   if (match.momentIndex === 1) {
+    beginGroundBallSituationDecision(match, decision);
     const defensiveResolution = resolveHighSchoolDefensivePlay(match, decision, randomSource);
+    recordGroundBallSituationResolution(match, defensiveResolution);
     const tier = defensiveResolution?.tier || "failure";
     advanceHighSchoolYearOneAfterMomentTwo(match, decision, tier, defensiveResolution);
     return `${match.completedMoments.at(-1).outcome}。${match.completedMoments.at(-1).consequence}`;

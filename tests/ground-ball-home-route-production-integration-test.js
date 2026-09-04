@@ -15,6 +15,7 @@ const runtimeFiles = [
   "offensive-tactical-opportunity.js", "offensive-tactical-decision.js", "offensive-tactical-action.js", "offensive-bunt-count-rules.js",
   "offensive-bunt-execution.js", "force-advancement.js", "offensive-bunt-defensive-handoff.js", "batted-ball-ground-defense.js",
   "batted-ball-line-drive-defense.js", "batted-ball-fly-ball-defense.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
+  "match-situation-lifecycle.js",
   "playing-time-game-exposure.js", "match-experience-development.js", "match-development-settlement-presentation.js",
   "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js", "career-development-runtime-resolver.js",
   "career-development-progression.js", "career-age22-outcome-resolver.js", "career-save-admission.js", "story.js", "save.js", "script.js"
@@ -65,13 +66,14 @@ evaluate(`
 const created = JSON.parse(evaluate(`(() => {const x=__prepareHome();return JSON.stringify({
   truth:x.m.groundBallInPlayState.runnerRealization,window:x.s.routeWindows.homeOutWindow,evaluation:x.s.homeRouteEvaluation,
   routes:x.choices.map(c=>({id:c.routeId,route:c.infieldRoute,hint:c.successChanceHint,basis:c.successChanceBasis,tradeoff:c.strategicTradeoff})),
-  coach:x.m.coachInstruction,text:getHighSchoolDefensiveSituationText(x.m)
+  coach:x.m.coachInstruction,text:getHighSchoolDefensiveSituationText(x.m),lifecycle:x.m.activeSituation
 });})()`));
 verify("1. Production chain 由普通擊球 physical truth 建立原三壘跑者攻本壘", created.truth.authority === "bbpPhysicalTruth+baseForceState" && created.truth.existingRunners.some(runner => runner.originBase === 3 && runner.targetBase === "home" && runner.movementState === "advancing" && !runner.isForced));
 verify("2. Fixture A 同時提供本壘、二壘與一壘三條 legal route", ["preventRunHome", "initiate463", "secureFirstBaseOut"].every(id => created.routes.some(route => route.id === id)));
 verify("3. preventRunHome 是 tagHome，不是 homeForceOut", created.routes.some(route => route.id === "preventRunHome" && route.route === "tagHome") && !created.routes.some(route => route.id === "homeForceOut"));
 verify("4. Normal window 可讀為成功機會中，且標記不是固定 probability", created.window.state === "normal" && created.routes.some(route => route.id === "preventRunHome" && route.hint === "中" && route.basis === "roughOpportunityWindowNotProbability" && route.tradeoff.includes("觸殺")));
 verify("5. 場上資訊與教練建議都讀到同一 runner threat", created.text.includes("三壘跑者已啟動攻本壘") && created.text.includes("本壘觸殺") && created.coach.includes("先守住得分"));
+verify("5a. Ground Ball canonical Situation 已 presented 且 freeze 三條 routes", created.lifecycle.type === "groundBallDefensiveDecision" && created.lifecycle.lifecycleState === "presented" && created.lifecycle.legalRoutes.length === 3 && created.lifecycle.decision === null && Object.keys(created.lifecycle.contextSnapshot).length < 12);
 
 const expired = JSON.parse(evaluate(`(() => {const x=__prepareHome(99502,{}, {attack:true,committed:true,late:true});return JSON.stringify({routes:x.choices.map(c=>c.routeId),evaluation:x.s.homeRouteEvaluation,coach:x.m.coachInstruction});})()`));
 verify("6. Fixture B expired 是已評估但不可用，其他路線保留", expired.evaluation.legal && !expired.evaluation.viable && expired.evaluation.unavailableReason === "homeTagWindowExpired" && !expired.routes.includes("preventRunHome") && expired.routes.includes("secureFirstBaseOut") && expired.routes.includes("initiate463"));
@@ -93,6 +95,8 @@ const success = JSON.parse(evaluate(`(() => {
 })()`));
 verify("11. Fixture D 本壘成功要求 possession + tag，再將 runner3B 判出局", success.r.homeTagLeg.possession === "secured" && success.r.homeTagLeg.tagRequired && success.r.homeTagLeg.tagOpportunity === "formed" && success.r.homeTagLeg.result === "out" && success.after.outs === success.before.outs + 1 && success.after.away === success.before.away);
 verify("12. 選本壘後 batter-runner 與 runner1B 依 force continuation 到一、二壘", success.after.runners[0] === success.r.runnerChanges.find(change => change.from === "batter").runnerId && success.after.runners[1] === success.before.runners[0] && success.after.runners[2] === null);
+const homeLifecycle = JSON.parse(evaluate(`JSON.stringify(player.highSchoolMatch.lastClosedSituationSummary)`));
+verify("12a. Fixture B Home route 經完整 lifecycle 關閉後才恢復 simulation", homeLifecycle.lifecycleState === "closed" && homeLifecycle.selectedRoute === "preventRunHome" && homeLifecycle.transitionHistory.map(item=>item.state).join("|") === "created|admitted|presented|decided|executing|resolved|settled|closed");
 
 const failure = JSON.parse(evaluate(`(() => {
   const x=__prepareHome(99507),m=x.m,c=x.choices.find(c=>c.routeId==="preventRunHome");m.defensiveSituation.teammates.catcher.capabilities={fielding:5,reaction:5,range:5,arm:5,throwing:5,decision:5};
@@ -101,7 +105,7 @@ const failure = JSON.parse(evaluate(`(() => {
 })()`));
 verify("13. Fixture E 捕手接球後 runner beat tag 會得分且不增加出局", failure.r.homeTagLeg.possession === "secured" && failure.r.homeTagLeg.tagOpportunity === "formed" && failure.r.homeTagLeg.result === "safe" && failure.after.away === failure.before.away + 1 && failure.after.outs === failure.before.outs);
 
-const saveReload = JSON.parse(evaluate(`(() => {const x=__prepareHome(99508),m=x.m;player.highSchoolMatch=m;const before=JSON.stringify({runner:m.groundBallInPlayState.runnerRealization,window:m.defensiveSituation.routeWindows.homeOutWindow,evaluation:m.defensiveSituation.homeRouteEvaluation,routes:getHighSchoolDefensiveMomentChoices(m),coach:m.coachInstruction});const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const after=JSON.stringify({runner:restored.groundBallInPlayState.runnerRealization,window:restored.defensiveSituation.routeWindows.homeOutWindow,evaluation:restored.defensiveSituation.homeRouteEvaluation,routes:getHighSchoolDefensiveMomentChoices(restored),coach:restored.coachInstruction});return JSON.stringify({same:before===after});})()`));
+const saveReload = JSON.parse(evaluate(`(() => {const x=__prepareHome(99508),m=x.m;player.highSchoolMatch=m;const before=JSON.stringify({runner:m.groundBallInPlayState.runnerRealization,window:m.defensiveSituation.routeWindows.homeOutWindow,evaluation:m.defensiveSituation.homeRouteEvaluation,routes:getHighSchoolDefensiveMomentChoices(m),coach:m.coachInstruction,lifecycle:m.activeSituation});const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const after=JSON.stringify({runner:restored.groundBallInPlayState.runnerRealization,window:restored.defensiveSituation.routeWindows.homeOutWindow,evaluation:restored.defensiveSituation.homeRouteEvaluation,routes:getHighSchoolDefensiveMomentChoices(restored),coach:restored.coachInstruction,lifecycle:restored.activeSituation});return JSON.stringify({same:before===after});})()`));
 verify("14. Fixture I pending decision save/reload 不重抽 runner、window、route 或 recommendation", saveReload.same);
 
 const noDouble = JSON.parse(evaluate(`(() => {const x=__prepareHome(99509),m=x.m,c=x.choices.find(c=>c.routeId==="preventRunHome"),r=resolveHighSchoolDefensivePlay(m,c.matchDecision,()=>.99);applyInfieldResolutionToHighSchoolMatch(m,c.matchDecision,r);const once={outs:m.outs,score:m.scores.away,runners:m.runners.slice(),order:m.battingOrderIndex.away,pa:m.simulationLog.filter(e=>e.type==="plateAppearance").length,event:m.simulationLog.filter(e=>e.type==="defensiveResolution").length};applyInfieldResolutionToHighSchoolMatch(m,c.matchDecision,r);const twice={outs:m.outs,score:m.scores.away,runners:m.runners.slice(),order:m.battingOrderIndex.away,pa:m.simulationLog.filter(e=>e.type==="plateAppearance").length,event:m.simulationLog.filter(e=>e.type==="defensiveResolution").length};return JSON.stringify({same:JSON.stringify(once)===JSON.stringify(twice),once,h:m.groundBallInPlayState});})()`));
@@ -144,5 +148,38 @@ const coachFirewall = JSON.parse(evaluate(`(() => {
   return JSON.stringify({same:before===after});
 })()`));
 verify("22. Fixture F defensive coach preference 不改寫對手跑者 decision", coachFirewall.same);
+
+const reassessmentLifecycle = JSON.parse(evaluate(`(() => {
+  const x=__prepareHome(99515),m=x.m,c=x.choices.find(c=>c.routeId==="initiate463");
+  m.defensiveSituation.executionChange="bobble";
+  const r=resolveHighSchoolDefensivePlay(m,c.matchDecision,()=>.99);
+  applyInfieldResolutionToHighSchoolMatch(m,c.matchDecision,r);
+  return JSON.stringify({reassessed:r.reassessed,summary:m.lastClosedSituationSummary,active:m.activeSituation,pending:m.pendingDefensiveResumeState});
+})()`));
+verify("23. Fixture C multi-leg execution 在同一 Situation 經 reassessing 後關閉", reassessmentLifecycle.reassessed && reassessmentLifecycle.summary.transitionHistory.some(item=>item.state==="reassessing") && reassessmentLifecycle.summary.phase === "reassessment");
+verify("24. Situation closed 後清除 active pointer 與 pending resume，才允許 simulation 繼續", reassessmentLifecycle.active === null && reassessmentLifecycle.pending === null);
+
+const automaticThirdOut = JSON.parse(evaluate(`(() => {
+  const m=__homeRouteMatch(99516,{outs:2}),opts=__homeRouteOptions(m,{attack:false});
+  opts.randomSource=()=>.99;
+  prepareHighSchoolDefensiveMomentFromSimulation(m,opts);
+  return JSON.stringify({summary:m.lastClosedSituationSummary,active:m.activeSituation,pending:m.pendingHalfInningTermination,routes:m.lastClosedSituationSummary?.transitionHistory||[]});
+})()`));
+verify("25. Fixture E 單一路線走 automatic lifecycle，不建立 player decision", automaticThirdOut.summary.transitionHistory.some(item=>item.state==="admitted") && !automaticThirdOut.summary.transitionHistory.some(item=>item.state==="presented"));
+verify("26. 第三出局前 active Situation 已 settled／closed 並清除 pointer", automaticThirdOut.summary.lifecycleState === "closed" && automaticThirdOut.active === null && automaticThirdOut.pending?.halfInningEnded === true);
+verify("27. Presentation 不洩漏 lifecycle／admission／reassessment developer words", !/lifecycle|admitted|reassessing|unsupported fallback|vertical slice/i.test(ui));
+
+const abandonedRoutine = JSON.parse(evaluate(`(() => {
+  const m=__homeRouteMatch(99517),opts=__homeRouteOptions(m,{attack:false});
+  prepareHighSchoolDefensiveMomentFromSimulation(m,opts);
+  if (!m.activeSituation) {
+    let s=MatchSituationLifecycle.createSituation({type:MatchSituationLifecycle.TYPES.groundBallDefensiveDecision,gameId:m.id,inning:m.inning,half:m.half,paIdentity:"routine-no-resolution",simulationPoint:"fallback",legalRoutes:[{routeId:"automatic"}]});
+    s=MatchSituationLifecycle.admitSituation(s,{supported:true,playerOwnsDecision:false});
+    s=MatchSituationLifecycle.beginExecution(s,{selectedRoute:"automatic"});m.activeSituation=s;
+  }
+  const closed=abandonActiveMatchSituation(m,"noRoutineResolution");
+  return JSON.stringify({closed,summary:m.lastClosedSituationSummary,active:m.activeSituation});
+})()`));
+verify("28. routine resolver 無 resolution 時由 lifecycle abandon 後才清 pointer", abandonedRoutine.closed.closeState.terminalMode === "abandoned" && abandonedRoutine.summary.outcome === "noRoutineResolution" && abandonedRoutine.active === null);
 
 console.log(`Ground Ball Home Route Production Integration tests: ${passed}/${passed} passed`);

@@ -18,7 +18,7 @@ const runtimeFiles = [
   "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js", "baseball-offense-prototype.js", "pitcher-mental-state.js",
   "pitcher-process-state.js", "pitch-sequencing.js", "batter-anticipation.js", "offensive-plate-approach.js",
   "offensive-tactical-opportunity.js", "offensive-tactical-decision.js", "offensive-tactical-action.js", "offensive-bunt-count-rules.js",
-  "offensive-bunt-execution.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js", "playing-time-game-exposure.js",
+  "offensive-bunt-execution.js", "match-situation-lifecycle.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js", "playing-time-game-exposure.js",
   "match-experience-development.js", "match-development-settlement-presentation.js", "career-spine-contract.js",
   "career-transition-runtime-resolver.js", "career-transition-progression.js", "career-development-runtime-resolver.js",
   "career-development-progression.js", "career-age22-outcome-resolver.js", "career-save-admission.js", "story.js", "save.js", "script.js"
@@ -77,5 +77,19 @@ verify("12. Standard Attack 正式 flow 完全不建立或呼叫 B1 state", eval
 verify("13. Production save/reload：未呈現 pitch 不 reroll、不重複 history/count/reveal", evaluate(`(() => {const m=__b101Match(77307);const e=prepareHighSchoolDefensiveMomentFromSimulation(m,${holdOptions});player.highSchoolMatch=m;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const before=JSON.stringify(restored.offensiveBuntPAState);const revealCount=restored.offensiveTacticalActionState.observableEvents.length;const again=prepareHighSchoolDefensiveMomentFromSimulation(restored,${holdOptions});return again.buntPitchIdentity===e.buntPitchIdentity&&JSON.stringify(restored.offensiveBuntPAState)===before&&restored.offensiveTacticalActionState.observableEvents.length===revealCount&&restored.offensiveBuntPAState.pitchHistory.length===1;})()`));
 verify("14. Production pitch history 是 Actual Pitch／Recognition／Count 的單一 B1 authority", evaluate(`(() => {const h=player.highSchoolMatch.offensiveBuntPAState.pitchHistory[0];return h.buntResolution.actualPitch.pitchLocationClass==="clearBall"&&h.buntResolution.recognition.authority==="existingActualPitchRecognition"&&h.countResult.outcomeAuthority==="countAndPARules";})()`));
 verify("15. Bunt presentation 只讀 canonical physical projection，hold 不會顯示球已點進場內", evaluate(`(() => {const m=player.highSchoolMatch,e=m.simulationLog.find(x=>x.type==="buntPitchResolved");const text=formatMatchSimulationEvent(e,m).text;return text.includes("收回短棒")&&text.includes("打席繼續")&&!text.includes("點進場內");})()`));
+
+const tacticalReassessment = JSON.parse(evaluate(`(() => {
+  const m=__b101Match(77308);m.outs=1;
+  const beforeIdentity=createHighSchoolOffensiveTacticalIdentity(m);
+  const event=prepareHighSchoolDefensiveMomentFromSimulation(m,{tacticalActionOverride:"sacrificeBunt",buntInitialCount:{balls:1,strikes:2},buntPitchOptions:{actualPitch:{pitchLocationClass:"clearBall",strike:false},recognition:{correct:false,perceivedPitchClass:"chasePitch"},rolls:{attempt:0,preparation:0,contact:.4}}});
+  const summary=JSON.parse(JSON.stringify(m.lastClosedSituationSummary));
+  const next=prepareHighSchoolOffensiveTacticalAction(m);
+  return JSON.stringify({eventType:event.type,outs:m.outs,beforeIdentity,nextIdentity:next.identity,selected:next.selectedTacticalAction,candidates:highSchoolOffensiveTacticalDebugTrace.candidateActions,entries:highSchoolOffensiveTacticalDebugTrace.opportunityEntries,summary,previous:highSchoolOffensiveTacticalDebugTrace.previousSituationSummary});
+})()`));
+verify("16. Mandatory scenario：1 out sacrifice bunt failure 只增加一個 out 並關閉前 tactical situation summary", tacticalReassessment.outs === 2 && tacticalReassessment.summary.lifecycleState === "closed" && tacticalReassessment.summary.previousTacticalAction === "sacrificeBunt" && tacticalReassessment.summary.outsBefore === 1 && tacticalReassessment.summary.outsAfter === 2);
+verify("17. 下一 PA 使用新 identity 並重新執行 tactical admission", tacticalReassessment.beforeIdentity !== tacticalReassessment.nextIdentity && tacticalReassessment.previous.situationId === tacticalReassessment.summary.situationId);
+verify("18. 兩出局 sacrificeBunt 從 admission 排除，不只是降低權重", !tacticalReassessment.candidates.includes("sacrificeBunt") && tacticalReassessment.entries.find(item=>item.action==="sacrificeBunt").status === "irrelevant" && tacticalReassessment.entries.find(item=>item.action==="sacrificeBunt").reasons.includes("twoOutSacrificeValueAbsent"));
+verify("19. Surprise Bunt firewall：兩出局仍可 admissible", tacticalReassessment.candidates.includes("surpriseBunt") && tacticalReassessment.entries.find(item=>item.action==="surpriseBunt").status === "available");
+verify("20. 新 tactical selection 不會沿用上一 PA 的 sacrificeBunt", tacticalReassessment.selected !== "sacrificeBunt");
 
 console.log(`Offensive Tactical Action Sprint B1.0.1 tests: ${passed}/${passed} passed`);

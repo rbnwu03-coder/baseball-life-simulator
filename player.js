@@ -1834,6 +1834,8 @@ function createInitialPlayer(name = "") {
       groundBallInPlayState: null,
       lineDriveCatchState: null,
       flyBallCatchState: null,
+      activeSituation: null,
+      lastClosedSituationSummary: null,
       pendingDefensiveResumeState: null,
       lastDefensiveResolution: {},
       pendingHalfInningTermination: null,
