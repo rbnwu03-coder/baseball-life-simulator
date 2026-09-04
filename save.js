@@ -328,6 +328,8 @@ function normalizeSave(saved) {
     ? OffensivePlateApproach.normalizePlateAppearanceState(saved.highSchoolMatch?.offensivePlateAppearanceState)
     : saved.highSchoolMatch?.offensivePlateAppearanceState
       ? JSON.parse(JSON.stringify(saved.highSchoolMatch.offensivePlateAppearanceState)) : null;
+  fresh.highSchoolMatch.plateDecisionState = saved.highSchoolMatch?.plateDecisionState
+    ? JSON.parse(JSON.stringify(saved.highSchoolMatch.plateDecisionState)) : null;
   fresh.highSchoolMatch.pendingOffensiveOpportunity = saved.highSchoolMatch?.pendingOffensiveOpportunity
     ? JSON.parse(JSON.stringify(saved.highSchoolMatch.pendingOffensiveOpportunity)) : null;
   fresh.highSchoolMatch.offensivePlayerAgencyState = saved.highSchoolMatch?.offensivePlayerAgencyState

@@ -2577,11 +2577,15 @@ function getHighSchoolFirstOffensiveMomentRolePresentation(match) {
 
 function getHighSchoolYearOneMatchPresentation() {
   const match = prepareHighSchoolYearOneMatch();
+  const plateDecisionContext = typeof PlateDecisionFoundation !== "undefined"
+    ? PlateDecisionFoundation.getPlayerFacingContext(match.activeSituation) : null;
   const visibleState = getHighSchoolMatchPresentation(match).currentSituation;
   const context = match.simulationPhase === "full_match_flow"
     ? match.playerLineupStatus === "bench"
       ? `${visibleState.inning}局${visibleState.half}持續進行，你仍在板凳讀取打者與教練指示；尚未被叫進打序或守備位置。`
       : `${visibleState.inning}局${visibleState.half}持續進行，你已在先發打序與守備配置中，等待比賽自然輪到你的任務。`
+    : plateDecisionContext
+      ? `${plateDecisionContext.perceivedPitch.locationCue}，${plateDecisionContext.perceivedPitch.velocityCue}；${plateDecisionContext.perceivedPitch.movementCue}。\n你判斷：${plateDecisionContext.perceivedPitch.zoneCue}。`
     : match.momentIndex === 0
     ? getHighSchoolFirstOffensiveMomentRolePresentation(match)
     : match.momentIndex === 1
@@ -2619,7 +2623,7 @@ function renderHighSchoolYearOneMatch(event, prepared = {}) {
   const kicker = playbackActive ? "同一場交流賽・場上進行中"
     : agencyActive ? "同一場交流賽・打席參與方式" : `同一場交流賽・第 ${match.completedMoments.length + 1} 個關鍵時刻`;
   const decisionContext = decisionActive
-    ? `${agencyActive ? renderHighSchoolOffensiveAgencyContext(match) : match.currentDomain === "offense" ? `${renderHighSchoolPlateAppearanceContext(match)}${renderHighSchoolBatterAnticipationPanel(match)}` : ""}${agencyActive ? "" : `${renderHighSchoolOpponentInformation(model)}${renderHighSchoolCoachDirection(model)}`}`
+    ? `${agencyActive ? renderHighSchoolOffensiveAgencyContext(match) : match.currentDomain === "offense" ? `${renderHighSchoolPlateAppearanceContext(match)}${renderHighSchoolPlateDecisionContext(match)}${renderHighSchoolBatterAnticipationPanel(match)}` : ""}${agencyActive ? "" : `${renderHighSchoolOpponentInformation(model)}${renderHighSchoolCoachDirection(model)}`}`
     : "";
   document.getElementById("story").innerHTML = `<article class="event-card high-school-match-card match-mode ${uiMode}" aria-labelledby="currentEventTitle">${sceneContextHtml}${renderHighSchoolYearOneScore("header", model)}${bridgeInHtml}<div class="match-mode-lower-grid"><div class="match-mode-context-column">${renderHighSchoolLiveSituation(model)}${renderHighSchoolLiveFeed(model)}${bridgeOutHtml ? `<div class="match-mode-recall">${bridgeOutHtml}</div>` : ""}</div><div class="match-mode-decision-column"><div class="event-kicker">${kicker}</div><h2 id="currentEventTitle" tabindex="-1">${escapeHtml(event.title)}</h2>${renderHighSchoolCurrentBatter(model)}<section class="match-current-assignment" aria-labelledby="matchAssignmentTitle"><small id="matchAssignmentTitle">${playbackActive ? "目前賽況" : "目前任務"}</small><strong>${escapeHtml(model.currentSituation.assignment)}</strong></section><section class="match-recent-context" aria-label="最近賽況"><small>最近賽況</small><div class="event-text">${escapeHtml(text)}</div></section>${decisionContext}</div></div></article>`;
   document.getElementById("choices").innerHTML = playbackActive
@@ -3632,6 +3636,40 @@ function chooseHighSchoolYearOneMatchMoment(decision, expectedMomentId, randomSo
   const currentMomentId = getHighSchoolYearOneMomentId(match);
   const choice = getHighSchoolYearOneMatchMomentChoices(match).find(item => item.matchDecision === decision && item.matchMomentId === expectedMomentId);
   if (!choice || !currentMomentId || expectedMomentId !== currentMomentId) return false;
+  const activeSituation = typeof MatchSituationLifecycle !== "undefined"
+    ? MatchSituationLifecycle.normalizeSituation(match.activeSituation) : null;
+  if (activeSituation?.type === "plateDecision") {
+    const before = getPlayerSnapshot();
+    const narrative = resolveHighSchoolYearOneMatch(decision, expectedMomentId, randomSource);
+    if (!narrative) return false;
+    if (match.activeSituation?.type === "plateDecision") {
+      showCurrentEvent();
+      return true;
+    }
+    const resolvedMoment = match.completedMoments.at(-1);
+    if (!resolvedMoment) return false;
+    player.memories.push(narrative);
+    player.memories = player.memories.slice(-20);
+    const statFeedbackHtml = showStatChanges(before, getPlayerSnapshot(), narrative, { includeMemory: false });
+    const outcomeChoice = {
+      text: choice.text,
+      memory: `${resolvedMoment.outcome}。${resolvedMoment.consequence}`,
+      executionText: resolvedMoment.executionText || formatHighSchoolPlateDecisionPitchResult(match.plateDecisionState?.lastPitchEvent),
+      pitchFeed: formatHighSchoolOffensivePitchFeed(resolvedMoment.pitchHistory),
+      coachFeedback: resolvedMoment.coachFeedback || "",
+      offensiveExplainability: createHighSchoolOffensiveExplainabilityModel(resolvedMoment)
+    };
+    if (match.completed) showHighSchoolCompletedMatchOutcome(match, choice.text, statFeedbackHtml, outcomeChoice.executionText, outcomeChoice.pitchFeed, outcomeChoice.coachFeedback, outcomeChoice.offensiveExplainability);
+    else renderYouthSeasonOutcome("high_school_showcase", outcomeChoice, statFeedbackHtml);
+    return true;
+  }
+  if (match.currentDomain === "offense" && typeof PlateDecisionFoundation !== "undefined") {
+    const situation = prepareHighSchoolPlateDecision(match, choice);
+    if (!situation) return false;
+    recordHighSchoolMatchPlaybackTrace("plate-decision-enter", situation.situationId, match, { approach: choice.approach });
+    showCurrentEvent();
+    return true;
+  }
   markHighSchoolMatchDecisionLifecycle("choiceReceived", match, { decision, expectedMomentId });
   const decisionDomain = match.currentDomain;
 
@@ -4301,6 +4339,8 @@ function isHighSchoolMatchDecisionVisible(match) {
   if (!match || match.completed) return false;
   const activeSituation = typeof MatchSituationLifecycle !== "undefined"
     ? MatchSituationLifecycle.normalizeSituation(match.activeSituation) : null;
+  if (activeSituation?.type === "plateDecision"
+    && activeSituation.lifecycleState === "presented") return true;
   if (activeSituation?.type === "runnerTagUpDecision"
     && activeSituation.lifecycleState === "presented" && match.simulationPhase === "moment_2_ready") return true;
   if (match.simulationPhase === "offensive_agency_ready") {
@@ -8488,6 +8528,32 @@ function renderHighSchoolPlateAppearanceContext(match) {
   return `<section class="match-current-assignment plate-approach-count" aria-label="目前打席球數"><small>球數 B-S</small><strong>${balls}-${strikes}</strong>${lastPitchText}</section>`;
 }
 
+function renderHighSchoolPlateDecisionContext(match) {
+  if (typeof PlateDecisionFoundation === "undefined") return "";
+  const context = PlateDecisionFoundation.getPlayerFacingContext(match?.activeSituation);
+  if (!context) return "";
+  const stateLabels = { accurate: "看得清楚", partial: "只掌握部分軌跡", misread: "判讀仍有疑點", late: "判讀偏晚" };
+  return `<section class="match-batter-read plate-decision-context" aria-labelledby="plateDecisionContextTitle">
+    <small id="plateDecisionContextTitle">第 ${context.pitchIndex} 球・你的即時判讀</small>
+    <div class="match-batter-read__item"><strong>來球印象</strong><p>${escapeHtml(context.perceivedPitch.locationCue)}，${escapeHtml(context.perceivedPitch.velocityCue)}；${escapeHtml(context.perceivedPitch.movementCue)}。</p></div>
+    <div class="match-batter-read__item"><strong>你的判斷</strong><p>${escapeHtml(context.perceivedPitch.zoneCue)}。${escapeHtml(stateLabels[context.recognitionState] || "正在辨識")}</p></div>
+  </section>`;
+}
+
+function getHighSchoolPlateDecisionChoices(match) {
+  if (typeof PlateDecisionFoundation === "undefined") return [];
+  const context = PlateDecisionFoundation.getPlayerFacingContext(match?.activeSituation);
+  const momentId = getHighSchoolYearOneMomentId(match);
+  if (!context || !momentId) return [];
+  return context.routes.map(route => Object.freeze({
+    text: route.text,
+    matchDecision: route.matchDecision,
+    matchMomentId: momentId,
+    strategicTradeoff: route.tradeoff,
+    plateDecisionRoute: route.routeId
+  }));
+}
+
 function renderHighSchoolBatterAnticipationPanel(match) {
   if (typeof BatterAnticipation === "undefined" || !match?.batterAnticipationState) return "";
   const presentation = BatterAnticipation.createPrePAPresentation(match.batterAnticipationState);
@@ -8620,6 +8686,10 @@ function isOffensiveDecisionChoiceLegal(choice, match) {
 }
 
 function getHighSchoolYearOneMatchMomentChoices(match = prepareHighSchoolYearOneMatch()) {
+  const activeSituation = typeof MatchSituationLifecycle !== "undefined"
+    ? MatchSituationLifecycle.normalizeSituation(match?.activeSituation) : null;
+  if (activeSituation?.type === "plateDecision"
+    && activeSituation.lifecycleState === "presented") return getHighSchoolPlateDecisionChoices(match);
   if (match?.simulationPhase === "offensive_agency_ready") return getHighSchoolOffensiveAgencyChoices(match);
   const momentId = getHighSchoolYearOneMomentId(match);
   if (!momentId) return [];
@@ -9378,6 +9448,84 @@ function resolveHighSchoolOffensivePlateAppearance(match, choice, options = {}) 
   });
   match.offensivePlateAppearanceState = JSON.parse(JSON.stringify(state));
   return state;
+}
+
+function prepareHighSchoolPlateDecision(match, choice, options = {}) {
+  if (!match || !choice || typeof PlateDecisionFoundation === "undefined" || typeof MatchSituationLifecycle === "undefined") return null;
+  const currentSituation = MatchSituationLifecycle.normalizeSituation(match.activeSituation);
+  if (currentSituation?.type === "plateDecision" && currentSituation.lifecycleState === "presented") return currentSituation;
+  const plateAppearanceState = ensureHighSchoolOffensivePlateAppearanceState(match, choice);
+  if (!plateAppearanceState || plateAppearanceState.completed || plateAppearanceState.resultApplied) return null;
+  const prepared = PlateDecisionFoundation.prepare({
+    gameId: match.id,
+    inning: match.inning,
+    half: match.half,
+    batterId: "player",
+    pitcherId: match.rosters?.away?.lineup?.find(entity => entity.position === "投手")?.id || "opponent-pitcher",
+    plateAppearanceState,
+    abilities: getHighSchoolOffensivePlateApproachAbilities(player),
+    pitch: options.pitch || null,
+    recognitionRoll: options.recognitionRoll,
+    playerOwnsDecision: true,
+    previousSituationSummary: match.lastClosedSituationSummary
+  });
+  if (!prepared?.situation) return null;
+  match.offensivePlateAppearanceState = JSON.parse(JSON.stringify(prepared.plateAppearanceState));
+  match.activeSituation = JSON.parse(JSON.stringify(prepared.situation));
+  match.plateDecisionState = {
+    version: PlateDecisionFoundation.VERSION,
+    paIdentity: prepared.plateAppearanceState.paIdentity,
+    pitchIdentity: prepared.plateAppearanceState.pendingPitch?.pitchId || "",
+    selectedOffensiveChoice: JSON.parse(JSON.stringify(choice)),
+    recognition: prepared.recognition ? JSON.parse(JSON.stringify(prepared.recognition)) : null,
+    lastPitchEvent: null,
+    settlementApplied: false,
+    situationId: prepared.situation.situationId
+  };
+  match.currentAssignment = `第 ${prepared.plateAppearanceState.pitchNumber + 1} 球已進入本壘板前；依你看到的軌跡決定處理方式。`;
+  return prepared.situation;
+}
+
+function resolveHighSchoolPlateDecisionPitch(match, routeId, options = {}) {
+  if (!match || typeof PlateDecisionFoundation === "undefined" || typeof MatchSituationLifecycle === "undefined") return null;
+  const situation = MatchSituationLifecycle.normalizeSituation(match.activeSituation);
+  const state = match.plateDecisionState;
+  if (!situation || situation.type !== "plateDecision" || situation.lifecycleState !== "presented"
+    || !state || state.situationId !== situation.situationId || state.settlementApplied) return null;
+  const recognition = state.recognition || null;
+  const resolved = PlateDecisionFoundation.resolve({
+    situation,
+    plateAppearanceState: match.offensivePlateAppearanceState,
+    routeId,
+    recognition,
+    abilities: getHighSchoolOffensivePlateApproachAbilities(player),
+    executionOptions: options
+  });
+  match.offensivePlateAppearanceState = JSON.parse(JSON.stringify(resolved.plateAppearanceState));
+  match.lastClosedSituationSummary = MatchSituationLifecycle.createClosedSituationSummary(resolved.situation);
+  match.activeSituation = null;
+  state.lastPitchEvent = resolved.event ? JSON.parse(JSON.stringify(resolved.event)) : null;
+  state.settlementApplied = true;
+  state.closedSituation = JSON.parse(JSON.stringify(resolved.situation));
+  const selectedChoice = state.selectedOffensiveChoice;
+  if (!resolved.plateAppearanceState.completed) {
+    const next = prepareHighSchoolPlateDecision(match, selectedChoice, options.nextPitch || {});
+    return Object.freeze({ ...resolved, nextSituation: next, plateAppearanceCompleted: false });
+  }
+  match.currentAssignment = "這個打席已完成，正式結果將交給既有比賽結算。";
+  return Object.freeze({ ...resolved, plateAppearanceCompleted: true, selectedOffensiveChoice: JSON.parse(JSON.stringify(selectedChoice)) });
+}
+
+function formatHighSchoolPlateDecisionPitchResult(event) {
+  if (!event) return "這一球尚未完成。";
+  const labels = {
+    ball: "你放掉這顆球，實際位置在好球帶外，球數增加一顆壞球。",
+    calledStrike: "你選擇放掉，但實際來球進入好球帶，主審判為好球。",
+    swingingStrike: "你決定出棒，但時間或碰球窗口沒有對上，形成揮棒落空。",
+    foul: "你碰到球但打成界外；兩好球後好球數不再增加。",
+    ballInPlay: "你完成有效接觸，球進入場內，後續交由既有擊球與守備系統處理。"
+  };
+  return labels[event.pitchResult] || "這一球已依實際來球與你的執行完成。";
 }
 
 function formatHighSchoolOffensivePitchSequence(state) {
@@ -11047,6 +11195,20 @@ function resolveHighSchoolYearOneMatch(decision, expectedMomentId = "", randomSo
   }
   const activeSituation = typeof MatchSituationLifecycle !== "undefined"
     ? MatchSituationLifecycle.normalizeSituation(match.activeSituation) : null;
+  if (activeSituation?.type === "plateDecision") {
+    if (expectedMomentId && expectedMomentId !== getHighSchoolYearOneMomentId(match)) return false;
+    const legalRoute = activeSituation.legalRoutes.find(route => route.routeId === decision || route.matchDecision === decision);
+    if (!legalRoute) return false;
+    const resolvedPitch = resolveHighSchoolPlateDecisionPitch(match, legalRoute.routeId);
+    if (!resolvedPitch) return false;
+    const pitchText = formatHighSchoolPlateDecisionPitchResult(resolvedPitch.event);
+    if (!resolvedPitch.plateAppearanceCompleted) return pitchText;
+    const selectedChoice = resolvedPitch.selectedOffensiveChoice || match.plateDecisionState?.selectedOffensiveChoice;
+    const completed = match.momentIndex === 0
+      ? advanceHighSchoolYearOneAfterMomentOne(match, selectedChoice, null)
+      : resolveHighSchoolYearOneFinalMoment(match, selectedChoice, null);
+    return completed ? `${pitchText} ${match.completedMoments.at(-1).outcome}。${match.completedMoments.at(-1).consequence}` : false;
+  }
   if (activeSituation?.type === "runnerTagUpDecision") {
     if (expectedMomentId && expectedMomentId !== match.currentMomentId) return false;
     const legalRoute = activeSituation.legalRoutes.find(route => route.routeId === decision || route.matchDecision === decision);

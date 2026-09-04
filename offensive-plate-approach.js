@@ -76,6 +76,36 @@
     return APPROACH_PACKAGES[approach] || APPROACH_PACKAGES.balancedAttack;
   }
 
+  const PLATE_DECISION_ROUTES = Object.freeze({
+    take: Object.freeze({ action: "take", swingIntent: "none" }),
+    contactSwing: Object.freeze({ action: "swing", swingIntent: "contact" }),
+    powerSwing: Object.freeze({ action: "swing", swingIntent: "power" })
+  });
+
+  function getPitchPhysicalProfile(state, pitchLocationClass, override = {}) {
+    const pitchNumber = Math.max(1, Number(state?.pitchNumber) + 1 || 1);
+    const identity = state?.paIdentity || "pa";
+    const typeRoll = deterministicUnit(identity, `pitch-type|${pitchNumber}`);
+    const pitchType = override.pitchType || (typeRoll < 0.52 ? "fastball" : typeRoll < 0.74 ? "slider" : typeRoll < 0.9 ? "changeup" : "curveball");
+    const baseVelocity = pitchType === "fastball" ? 89 : pitchType === "slider" ? 82 : pitchType === "changeup" ? 80 : 76;
+    const velocity = round(clamp(override.velocity, 60, 105, baseVelocity + (deterministicUnit(identity, `velocity|${pitchNumber}`) - 0.5) * 6), 1);
+    const movement = override.movement || (pitchType === "fastball" ? "subtle" : pitchType === "changeup" ? "fading" : "breaking");
+    const location = override.location || ({ hitterPitch: "middle-middle", competitiveStrike: "outer-middle", edgeStrike: "outer-low", chasePitch: "outer-below", clearBall: "well-outside" }[pitchLocationClass] || "outer-middle");
+    return { pitchType, velocity, movement, location };
+  }
+
+  function completePitchTruth(state, pitchLocationClass, base = {}, override = {}) {
+    const physical = getPitchPhysicalProfile(state, pitchLocationClass, override);
+    return {
+      ...base,
+      ...physical,
+      zone: base.strike ? "inZone" : "outOfZone",
+      pitcherId: override.pitcherId || state?.context?.pitcherId || "opponent-pitcher",
+      paIdentity: state?.paIdentity || "",
+      count: { balls: Number(state?.balls) || 0, strikes: Number(state?.strikes) || 0 }
+    };
+  }
+
   function createPlateAppearanceIdentity(input = {}) {
     return [input.matchId || "match", input.paId || input.momentId || "pa", input.batterId || "player", input.inning || 0, input.half || ""].join("|");
   }
@@ -127,7 +157,7 @@
   function generatePitchOpportunity(state, override = null) {
     if (override && PITCH_CLASSES.includes(override.pitchLocationClass)) {
       const profile = PITCH_CLASS_PROFILES[override.pitchLocationClass];
-      return deepFreeze({
+      return deepFreeze(completePitchTruth(state, override.pitchLocationClass, {
         pitchId: override.pitchId || `${state.paIdentity}|pitch-${state.pitchNumber + 1}`,
         pitchLocationClass: override.pitchLocationClass,
         pitchQuality: override.pitchQuality || (profile.attackability >= 0.75 ? "high" : profile.attackability >= 0.4 ? "competitive" : "low"),
@@ -139,7 +169,7 @@
         intendedPitchClass: PITCH_CLASSES.includes(override.intendedPitchClass) ? override.intendedPitchClass : override.pitchLocationClass,
         controlRealization: override.controlRealization ? clone(override.controlRealization) : null,
         pitcherSequencingTrace: override.pitcherSequencingTrace ? clone(override.pitcherSequencingTrace) : null
-      });
+      }, override));
     }
     const pitchNumber = state.pitchNumber + 1;
     if (PitchSequencing && state.pitcherRuntime) {
@@ -159,7 +189,7 @@
       const pitchLocationClass = decision.actualPitchClass;
       const profile = PITCH_CLASS_PROFILES[pitchLocationClass];
       const realization = decision.controlRealization;
-      return deepFreeze({
+      return deepFreeze(completePitchTruth(state, pitchLocationClass, {
         pitchId: `${state.paIdentity}|pitch-${pitchNumber}`,
         pitchLocationClass,
         pitchQuality: realization.realizationQuality === "heldTarget" ? "high" : realization.realizationQuality === "adjacentDrift" ? "competitive" : "missedTarget",
@@ -171,12 +201,12 @@
         intendedPitchClass: decision.intendedPitchClass,
         controlRealization: clone(realization),
         pitcherSequencingTrace: clone(decision.debugTrace)
-      });
+      }, {}));
     }
     const pitchLocationClass = classifyPitchRoll(deterministicUnit(state.paIdentity, `pitch-class|${pitchNumber}`));
     const profile = PITCH_CLASS_PROFILES[pitchLocationClass];
     const qualityRoll = deterministicUnit(state.paIdentity, `pitch-quality|${pitchNumber}`);
-    return deepFreeze({
+    return deepFreeze(completePitchTruth(state, pitchLocationClass, {
       pitchId: `${state.paIdentity}|pitch-${pitchNumber}`,
       pitchLocationClass,
       pitchQuality: qualityRoll > 0.68 ? "high" : qualityRoll > 0.3 ? "competitive" : "missedTarget",
@@ -188,7 +218,7 @@
       intendedPitchClass: pitchLocationClass,
       controlRealization: null,
       pitcherSequencingTrace: null
-    });
+    }, {}));
   }
 
   function prepareNextPitch(state, override = null) {
@@ -203,16 +233,32 @@
 
   function getRecognitionResult(state, pitch, abilities = {}, overrideRoll) {
     const score = getRecognitionScore(abilities);
-    const accuracy = clamp(0.48 + score / 35 - pitch.recognitionDifficulty * 0.22, 0.32, 0.96);
+    const velocityPenalty = clamp((Number(pitch.velocity) - 82) / 30, 0, 1, 0) * 0.035;
+    const movementPenalty = pitch.movement === "breaking" ? 0.025 : pitch.movement === "fading" ? 0.015 : 0;
+    const qualityPenalty = pitch.pitchQuality === "high" ? 0.02 : 0;
+    const countAdjustment = Number(state?.strikes) >= 2 ? 0.02 : Number(state?.balls) >= 3 ? 0.01 : 0;
+    const accuracy = clamp(0.48 + score / 35 - pitch.recognitionDifficulty * 0.22 - velocityPenalty - movementPenalty - qualityPenalty + countAdjustment, 0.32, 0.96);
     const roll = Number.isFinite(Number(overrideRoll)) ? clamp(overrideRoll) : deterministicUnit(state.paIdentity, `recognition|${state.pitchNumber + 1}`);
     const correct = roll <= accuracy;
-    const misreadMap = { hitterPitch: "competitiveStrike", competitiveStrike: "edgeStrike", edgeStrike: "chasePitch", chasePitch: "edgeStrike", clearBall: "chasePitch" };
+    const partial = !correct && roll <= Math.min(0.985, accuracy + 0.1);
+    const late = !correct && !partial && Number(pitch.velocity) >= 88 && roll <= Math.min(0.995, accuracy + 0.2);
+    const misreadMap = { hitterPitch: "competitiveStrike", competitiveStrike: "edgeStrike", edgeStrike: "chasePitch", chasePitch: "competitiveStrike", clearBall: "chasePitch" };
+    const perceivedPitchClass = correct ? pitch.pitchLocationClass : partial ? misreadMap[pitch.pitchLocationClass] : misreadMap[pitch.pitchLocationClass];
+    const perceivedLocation = ({ hitterPitch: "球往中央可攻擊區靠近", competitiveStrike: "球路接近好球帶", edgeStrike: "球壓向邊角", chasePitch: "球可能往好球帶外滑開", clearBall: "球看來明顯偏離好球帶" })[perceivedPitchClass];
     return deepFreeze({
       score,
       quality: score >= 12 ? "high" : score >= 6 ? "medium" : "low",
       accuracy: round(accuracy),
+      recognitionChallenge: { velocity: round(velocityPenalty), movement: round(movementPenalty), pitchQuality: round(qualityPenalty), count: round(countAdjustment) },
       correct,
-      perceivedPitchClass: correct ? pitch.pitchLocationClass : misreadMap[pitch.pitchLocationClass]
+      recognitionState: correct ? "accurate" : partial ? "partial" : late ? "late" : "misread",
+      perceivedPitchClass,
+      perceivedPitch: {
+        locationCue: perceivedLocation,
+        velocityCue: Number(pitch.velocity) >= 88 ? "速度很快" : Number(pitch.velocity) >= 80 ? "速度中等" : "速度偏慢",
+        movementCue: pitch.movement === "subtle" ? "軌跡看來較直" : "軌跡帶有變化",
+        zoneCue: ["hitterPitch", "competitiveStrike"].includes(perceivedPitchClass) ? "看來可以攻擊" : perceivedPitchClass === "edgeStrike" ? "可能擦過邊角" : "可能離開好球帶"
+      }
     });
   }
 
@@ -240,13 +286,38 @@
     });
   }
 
-  function getContactProbability(state, pitch, abilities = {}, recognition = {}) {
+  function getContactProbability(state, pitch, abilities = {}, recognition = {}, swingIntentOverride = "") {
     const batting = Number(abilities.batting) || 0;
     const ballSense = Number(abilities.ballSense) || 0;
     const ability = clamp((batting * 0.65 + ballSense * 0.35) / 15);
-    const intentModifier = state.swingIntent === "contact" ? 0.14 : state.swingIntent === "power" ? -0.1 : 0;
+    const swingIntent = swingIntentOverride || state.swingIntent;
+    const intentModifier = swingIntent === "contact" ? 0.14 : swingIntent === "power" ? -0.1 : 0;
     const recognitionModifier = recognition.correct ? 0.04 : -0.08;
     return round(clamp(0.2 + pitch.attackability * 0.46 + ability * 0.3 + intentModifier + recognitionModifier, 0.08, 0.97));
+  }
+
+  function getSwingExecutionProfile(state, pitch, abilities = {}, recognition = {}, decisionRoute = "contactSwing") {
+    const route = PLATE_DECISION_ROUTES[decisionRoute] || PLATE_DECISION_ROUTES.contactSwing;
+    const reaction = Number(abilities.reaction ?? abilities.ballSense) || 0;
+    const batting = Number(abilities.batting) || 0;
+    const ballSense = Number(abilities.ballSense) || 0;
+    const velocityChallenge = clamp((Number(pitch.velocity) - 72) / 30);
+    const movementChallenge = pitch.movement === "subtle" ? 0.18 : pitch.movement === "fading" ? 0.48 : 0.62;
+    const qualityChallenge = pitch.pitchQuality === "high" ? 0.68 : pitch.pitchQuality === "competitive" ? 0.46 : 0.3;
+    const recognitionModifier = recognition.correct ? 0.1 : recognition.recognitionState === "partial" ? 0 : recognition.recognitionState === "late" ? -0.12 : -0.16;
+    const routeTimingModifier = route.swingIntent === "contact" ? 0.1 : route.swingIntent === "power" ? -0.11 : 0;
+    const routeBatModifier = route.swingIntent === "contact" ? 0.12 : route.swingIntent === "power" ? -0.09 : 0;
+    const timingWindow = clamp(0.42 + reaction / 30 + recognitionModifier + routeTimingModifier - velocityChallenge * 0.18 - qualityChallenge * 0.08, 0.08, 0.96);
+    const batToBallWindow = clamp(0.34 + (batting * 0.7 + ballSense * 0.3) / 30 + recognitionModifier + routeBatModifier - movementChallenge * 0.14 - qualityChallenge * 0.08, 0.08, 0.97);
+    const damageCeiling = clamp(0.45 + (Number(abilities.power) || 0) / 24 + (route.swingIntent === "power" ? 0.2 : route.swingIntent === "contact" ? -0.12 : 0), 0.2, 1);
+    return deepFreeze({
+      decisionRoute,
+      swingIntent: route.swingIntent,
+      timingWindow: round(timingWindow),
+      batToBallWindow: round(batToBallWindow),
+      damageCeiling: round(damageCeiling),
+      challenges: { velocity: round(velocityChallenge), movement: round(movementChallenge), pitchQuality: round(qualityChallenge) }
+    });
   }
 
   // Transitional downstream adapter. It may read canonical physical truth, but never writes or revises it.
@@ -272,13 +343,14 @@
 
   function resolveFairContactBallInPlay(state, pitch, abilities, recognition, options = {}) {
     const identity = `${state.paIdentity}|pitch-${state.pitchNumber + 1}`;
+    const swingIntent = options.swingIntent || state.swingIntent;
     const physicalTruth = BattedBallPhysical ? BattedBallPhysical.resolveBattedBallPhysicalTruth({
       identity,
       actualPitch: pitch,
       recognition,
       action: "swing",
       contact: true,
-      swingIntent: state.swingIntent,
+      swingIntent,
       bats: abilities.bats || "R",
       abilities: { batting: abilities.batting, power: abilities.power },
       rolls: options.physicalRolls
@@ -287,7 +359,7 @@
       ? options.physicalOutcomeResolver({ physicalTruth, state, pitch, abilities, recognition }) : null;
     const outcome = physicalOutcome?.result
       ? deepFreeze({ ...clone(physicalOutcome), adapterAuthority: physicalOutcome.authority || "physicalOutcomeResolver" })
-      : resolveLegacyBallInPlayOutcome(state, pitch, abilities, recognition, physicalTruth, options.outcomeRoll);
+      : resolveLegacyBallInPlayOutcome({ ...state, swingIntent }, pitch, abilities, recognition, physicalTruth, options.outcomeRoll);
     return deepFreeze({ physicalTruth, outcome });
   }
 
@@ -328,12 +400,15 @@
     if (!state.pendingPitch) state = prepareNextPitch(state, options.pitch || null);
     const pitch = state.pendingPitch;
     const countBefore = { balls: state.balls, strikes: state.strikes };
-    const recognition = getRecognitionResult(state, pitch, abilities, options.recognitionRoll);
+    const recognition = options.recognition ? deepFreeze(clone(options.recognition)) : getRecognitionResult(state, pitch, abilities, options.recognitionRoll);
     const swingProfile = getSwingTendency(state, recognition);
     const decisionRoll = Number.isFinite(Number(options.decisionRoll)) ? clamp(options.decisionRoll)
       : deterministicUnit(state.paIdentity, `swing-decision|${state.pitchNumber + 1}`);
     const safetyPitch = state.pitchNumber + 1 >= ABSOLUTE_PITCH_SAFETY_CAP;
-    let action = safetyPitch ? "swing" : decisionRoll < swingProfile.tendency ? "swing" : "take";
+    const explicitDecision = PLATE_DECISION_ROUTES[options.decisionRoute] ? options.decisionRoute : "";
+    const decisionProfile = explicitDecision ? PLATE_DECISION_ROUTES[explicitDecision] : null;
+    let action = safetyPitch ? "swing" : decisionProfile ? decisionProfile.action : decisionRoll < swingProfile.tendency ? "swing" : "take";
+    const pitchSwingIntent = decisionProfile?.swingIntent || state.swingIntent;
     let pitchResult = "";
     let paResult = "";
     let contactQuality = null;
@@ -351,7 +426,7 @@
       contact = true;
       swingExecutionSummary.swings += 1;
       swingExecutionSummary.ballsInPlay += 1;
-      const bip = resolveFairContactBallInPlay(state, pitch, abilities, recognition, options);
+      const bip = resolveFairContactBallInPlay(state, pitch, abilities, recognition, { ...options, swingIntent: pitchSwingIntent });
       paResult = bip.outcome.result;
       contactQuality = bip.outcome.contactQuality;
       battedBallPhysicalTruth = bip.physicalTruth;
@@ -367,16 +442,22 @@
       }
     } else {
       swingExecutionSummary.swings += 1;
-      const contactProbability = getContactProbability(state, pitch, abilities, recognition);
+      const executionProfile = explicitDecision ? getSwingExecutionProfile(state, pitch, abilities, recognition, explicitDecision) : null;
+      const contactProbability = getContactProbability(state, pitch, abilities, recognition, pitchSwingIntent);
       const contactRoll = Number.isFinite(Number(options.contactRoll)) ? clamp(options.contactRoll)
         : deterministicUnit(state.paIdentity, `contact|${state.pitchNumber + 1}`);
-      if (contactRoll > contactProbability) {
+      const timingRoll = Number.isFinite(Number(options.timingRoll)) ? clamp(options.timingRoll) : contactRoll;
+      const batToBallRoll = Number.isFinite(Number(options.batToBallRoll)) ? clamp(options.batToBallRoll) : contactRoll;
+      const executionContact = executionProfile
+        ? timingRoll <= executionProfile.timingWindow && batToBallRoll <= executionProfile.batToBallWindow
+        : contactRoll <= contactProbability;
+      if (!executionContact) {
         pitchResult = "swingingStrike";
         contact = false;
         swingExecutionSummary.whiffs += 1;
         strikes += 1;
       } else {
-        const foulRate = state.swingIntent === "contact" ? 0.36 : state.swingIntent === "power" ? 0.18 : 0.25;
+        const foulRate = pitchSwingIntent === "contact" ? 0.36 : pitchSwingIntent === "power" ? 0.18 : 0.25;
         const foulRoll = Number.isFinite(Number(options.foulRoll)) ? clamp(options.foulRoll)
           : deterministicUnit(state.paIdentity, `foul|${state.pitchNumber + 1}`);
         if (foulRoll < foulRate) {
@@ -388,7 +469,7 @@
           pitchResult = "ballInPlay";
           contact = true;
           swingExecutionSummary.ballsInPlay += 1;
-          const bip = resolveFairContactBallInPlay(state, pitch, abilities, recognition, options);
+          const bip = resolveFairContactBallInPlay(state, pitch, abilities, recognition, { ...options, swingIntent: pitchSwingIntent });
           paResult = bip.outcome.result;
           contactQuality = bip.outcome.contactQuality;
           battedBallPhysicalTruth = bip.physicalTruth;
@@ -405,7 +486,8 @@
       pitch,
       recognition,
       selectionProfile: state.selectionProfile,
-      swingIntent: state.swingIntent,
+      swingIntent: pitchSwingIntent,
+      plateDecision: explicitDecision || null,
       protectAdjusted: swingProfile.protectAdjusted,
       swingTendency: swingProfile.tendency,
       attackWindow: swingProfile.attackWindow,
@@ -419,6 +501,15 @@
       countAfter: { balls: Math.min(4, balls), strikes: Math.min(3, strikes) },
       paResult
     };
+    if (action === "swing") {
+      const profile = getSwingExecutionProfile(state, pitch, abilities, recognition, explicitDecision || (pitchSwingIntent === "power" ? "powerSwing" : "contactSwing"));
+      event.executionEvidence = {
+        timing: { window: profile.timingWindow, roll: Number.isFinite(Number(options.timingRoll)) ? clamp(options.timingRoll) : Number.isFinite(Number(options.contactRoll)) ? clamp(options.contactRoll) : deterministicUnit(state.paIdentity, `contact|${state.pitchNumber + 1}`) },
+        batToBall: { window: profile.batToBallWindow, roll: Number.isFinite(Number(options.batToBallRoll)) ? clamp(options.batToBallRoll) : Number.isFinite(Number(options.contactRoll)) ? clamp(options.contactRoll) : deterministicUnit(state.paIdentity, `contact|${state.pitchNumber + 1}`) },
+        contactQuality: { damageCeiling: profile.damageCeiling, realized: contact === true ? contactQuality : null },
+        pitchChallenge: profile.challenges
+      };
+    }
     const next = {
       ...clone(state), balls: Math.min(4, balls), strikes: Math.min(3, strikes), pitchNumber,
       pendingPitch: null, pitchHistory: [...state.pitchHistory, event], completed: Boolean(paResult), result: paResult,
@@ -458,6 +549,7 @@
     PITCH_CLASSES,
     PITCH_CLASS_PROFILES,
     APPROACH_PACKAGES,
+    PLATE_DECISION_ROUTES,
     ATTACK_WINDOWS,
     SWING_TENDENCIES,
     stableHash,
@@ -472,6 +564,7 @@
     getRecognitionResult,
     getSwingTendency,
     getContactProbability,
+    getSwingExecutionProfile,
     summarizeQualities,
     resolveLegacyBallInPlayOutcome,
     resolveFairContactBallInPlay,

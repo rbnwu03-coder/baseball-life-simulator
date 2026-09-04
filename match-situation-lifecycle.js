@@ -8,7 +8,8 @@
   const VERSION = "match-situation-lifecycle-v1";
   const TYPES = Object.freeze({
     groundBallDefensiveDecision: "groundBallDefensiveDecision",
-    runnerTagUpDecision: "runnerTagUpDecision"
+    runnerTagUpDecision: "runnerTagUpDecision",
+    plateDecision: "plateDecision"
   });
   const STATES = Object.freeze(["created", "admitted", "presented", "decided", "executing", "reassessing", "resolved", "settled", "closed"]);
   const PHASES = Object.freeze(["initial", "reassessment"]);
