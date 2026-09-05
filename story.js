@@ -1192,8 +1192,11 @@ const highSchoolYearTwoEvents = {
   high_school_year_two_roster_reset: {
     title: "名單重新洗牌",
     text() {
-      const role = player.highSchoolTeamRole || "尚未固定的輪替角色";
-      return `學長的置物櫃已經清空，新生的球袋則排在門邊。高中現任教練把春季名單擦掉重寫，先念出你高一留下的角色：「${role}。」\n\n他沒有保留原來的順位，只說三週後會重新排一次守位與打線。`;
+      const labels = typeof HighSchoolCompetitionReassessment !== "undefined" ? HighSchoolCompetitionReassessment.ROLE_LABELS : {};
+      const role = labels[player.highSchoolRoleCode] || player.highSchoolTeamRole || "尚未固定的輪替角色";
+      const competition = player.schoolInvitationState?.selectedPositionCompetitionContext || {};
+      const density = { low: "較淺", medium: "一般", high: "偏深", veryHigh: "很深" }[competition.competitionDensity] || "待確認";
+      return `學長的置物櫃已經清空，新生的球袋則排在門邊。高中現任教練依升級後的名單重新檢查順位，先念出你高一帶進來的角色：「${role}。」\n\n目前同守位競爭深度是${density}；這次重排會以新名單與你已累積的正式證據繼續判定，不會抹掉高一結果。`;
     },
     choices: [
       C("到主守位組報到，從基本接傳重新排隊", { resilience: 1, discipline: 1 }, ["year_two_reset_primary_group"], "你把高一履歷留在身後，重新完成主守位的第一輪基本球。", { positionSkillEffects: { "內野手": { catching: 1, reaction: 1 }, "外野手": { catching: 1, range: 1 }, "捕手": { blocking: 1, catching: 1 }, "投手": { control: 1, pitchStamina: 1 } }, bodyEffects: { fatigue: 1 } }),
@@ -1248,14 +1251,14 @@ const highSchoolYearTwoEvents = {
   high_school_year_two_depth_chart: {
     title: "名單上的使用方式",
     text() {
-      const line = hasFlag("year_two_spring_push")
-        ? "先發打線後段／主守位輪替"
-        : hasFlag("year_two_role_utility_proof")
-          ? "多位置輪替／比賽中段調度"
-          : hasFlag("year_two_role_bat_proof")
-            ? "代打候選／守備替補"
-            : "後段守備／替補待命";
-      return `春季賽後，高中現任教練把深度表貼在器材室門口。你的名字旁寫著：「${line}」。\n\n這是今年球隊準備怎麼使用你，不是畢業出口。`;
+      const labels = typeof HighSchoolCompetitionReassessment !== "undefined" ? HighSchoolCompetitionReassessment.ROLE_LABELS : {};
+      const role = labels[player.highSchoolRoleCode] || player.highSchoolTeamRole || "待評估";
+      const usage = hasFlag("year_two_role_utility_proof")
+        ? "測試多位置調度"
+        : hasFlag("year_two_role_bat_proof")
+          ? "測試打擊入口"
+          : "主守位任務";
+      return `春季賽後，高中現任教練把深度表貼在器材室門口。你的正式角色是「${role}」，接下來的使用計畫是「${usage}」。\n\n使用計畫描述訓練與調度方向，不會取代正式角色。`;
     },
     choices: [
       C("照表提早到主守位，先完成先發前的接傳", { discipline: 1, responsibility: 1 }, ["year_two_depth_primary"], "你不要求教練改表，先把目前順位需要的準備完成。", { positionSkillEffects: { "內野手": { catching: 1 }, "外野手": { range: 1 }, "捕手": { blocking: 1 }, "投手": { control: 1 } }, relationshipEffects: { coachTrust: 1 } }),
@@ -1329,7 +1332,10 @@ const highSchoolYearTwoEvents = {
   high_school_year_two_result: {
     title: "青棒第二年評估",
     text() {
-      return `${player.highSchoolYearTwoResult}\n\n${player.highSchoolYearTwoDetail}\n\n目前球隊角色：${player.highSchoolTeamRole || "尚未固定"}\n近期表現：${player.recentPerformance}　教練信任：${player.relationships.coachTrust}\n疲勞：${player.body.fatigue}　傷病風險：${player.body.injuryRisk}　疼痛：${player.body.pain}\n\n高二沒有決定畢業出口，但它決定你帶著什麼角色與身體狀態進入最後一年。`;
+      const labels = typeof HighSchoolCompetitionReassessment !== "undefined" ? HighSchoolCompetitionReassessment.ROLE_LABELS : {};
+      const role = labels[player.highSchoolRoleCode] || player.highSchoolTeamRole || "尚未固定";
+      const plans = { utility: "多位置輪替與比賽中段調度", position: "主守位專精", batting: "打擊入口", health: "健康重整" };
+      return `${player.highSchoolYearTwoResult}\n\n${player.highSchoolYearTwoDetail}\n\n目前球隊角色：${role}\n高三前使用計畫：${plans[player.highSchoolYearTwoPlan] || "待確認"}\n近期表現：${player.recentPerformance}　教練信任：${player.relationships.coachTrust}\n疲勞：${player.body.fatigue}　傷病風險：${player.body.injuryRisk}　疼痛：${player.body.pain}\n\n高二沒有決定畢業出口，但它決定你帶著什麼角色與身體狀態進入最後一年。`;
     },
     choices: [
       { text: "進入青棒關鍵年與生涯出口", nextChapter: "criticalYear" },
@@ -1342,7 +1348,8 @@ const criticalYearEvents = {
   critical_offseason: {
     title: "最後一個完整休賽季",
     text() {
-      const role = player.highSchoolTeamRole || "尚未固定的角色";
+      const labels = typeof HighSchoolCompetitionReassessment !== "undefined" ? HighSchoolCompetitionReassessment.ROLE_LABELS : {};
+      const role = labels[player.highSchoolRoleCode] || player.highSchoolTeamRole || "尚未固定的角色";
       return `升上高三前，你在球隊的定位是「${role}」。\n\n教練提醒，下一個夏天之後，球探、大學與業餘隊不再只看潛力，而會問你現在能替一支球隊做什麼。你只能把有限的恢復與訓練時間押在一個方向。`;
     },
     choices: [

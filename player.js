@@ -995,6 +995,7 @@ function createDefaultSchoolInvitationState() {
     selectedSchoolYearRosterIdentity: null,
     selectedBaseRoster: null,
     selectedSchoolRoster: null,
+    selectedTeamStrengthProfile: null,
     selectedPositionCompetitionContext: null,
     selectedPlayerInjectionState: null,
     invitations: []
@@ -1523,6 +1524,7 @@ function generateSchoolInvitationSet(target, options = {}) {
     selectedSchoolYearRosterIdentity: null,
     selectedBaseRoster: null,
     selectedSchoolRoster: null,
+    selectedTeamStrengthProfile: null,
     selectedPositionCompetitionContext: null,
     selectedPlayerInjectionState: null,
     invitations
@@ -1916,10 +1918,13 @@ function createInitialPlayer(name = "") {
     highSchoolCompetitionEvaluation: null,
     highSchoolOpportunityHistory: [],
     highSchoolNextOpportunity: null,
+    highSchoolYearTransitionState: { version: "", currentHighSchoolYear: 0, lastTransitionIdentity: "", history: [] },
     highSchoolYearOneStartingRole: "",
     highSchoolYearOneMatchHistory: [],
+    highSchoolYearTwoPlan: "",
+    highSchoolYearTwoMatchHistory: [],
     highSchoolMatch: {
-      id: "", eventId: "", matchType: "", opportunityIndex: 0, opponent: "", inning: 0, half: "", outs: 0,
+      id: "", eventId: "", matchType: "", highSchoolYear: 0, opportunityIndex: 0, opponent: "", inning: 0, half: "", outs: 0,
       scores: { home: 0, away: 0 }, runners: [], role: "", position: "", assignment: "",
       momentIndex: 0, currentMomentId: "", currentDomain: "", completedMoments: [],
       offenseTeam: "", defenseTeam: "", currentBatter: "", currentAssignment: "", matchEntryHistory: "",

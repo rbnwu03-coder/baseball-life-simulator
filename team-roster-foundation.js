@@ -123,6 +123,7 @@
     return Object.freeze({
       playerId: playerActor?.playerId || playerActor?.id || "player", id: playerActor?.id || "player",
       name: playerActor?.name || "你", age: Number(playerActor?.age) || 15,
+      year: Math.max(1, Math.min(3, Number(playerActor?.year) || ((Number(playerActor?.age) || 16) - 15))),
       primaryPosition, secondaryPositions: Object.freeze((playerActor?.secondaryPositions || []).map(normalizePosition).filter(Boolean)),
       bats: playerActor?.bats || "R", throws: playerActor?.throws || "R",
       contact: clamp(offense.contact ?? playerActor?.contact ?? 5), power: clamp(offense.power ?? playerActor?.power ?? 5),
@@ -133,7 +134,7 @@
     });
   }
 
-  function orderLineup(starters) {
+  function orderLineup(starters, defensiveAssignments = {}) {
     const remaining = starters.slice();
     const takeBest = scorer => remaining.splice(remaining.reduce((best, player, index, list) => scorer(player) > scorer(list[best]) ? index : best, 0), 1)[0];
     const ordered = [];
@@ -143,7 +144,64 @@
     ordered.push(takeBest(player => player.power * 0.75 + player.contact * 0.25));
     ordered.push(takeBest(player => player.power * 0.6 + player.contact * 0.4));
     remaining.sort((a, b) => (b.contact + b.power + b.speed * 0.4) - (a.contact + a.power + a.speed * 0.4));
-    return Object.freeze([...ordered, ...remaining].map((player, index) => Object.freeze({ battingOrder: index + 1, playerId: player.playerId, defensivePosition: player.primaryPosition })));
+    return Object.freeze([...ordered, ...remaining].map((player, index) => Object.freeze({
+      battingOrder: index + 1,
+      playerId: player.playerId,
+      defensivePosition: defensiveAssignments[player.playerId] || player.primaryPosition
+    })));
+  }
+
+  function getRosterSelectionScore(player, position) {
+    if (position === "P") return Number(player?.pitchingProfile?.effectiveness ?? player?.pitching) || 0;
+    const defense = Number(player?.defense) || 0;
+    const arm = Number(player?.arm) || 0;
+    const contact = Number(player?.contact) || 0;
+    const power = Number(player?.power) || 0;
+    const speed = Number(player?.speed) || 0;
+    if (["C", "SS", "2B", "CF"].includes(position)) return defense * 0.55 + arm * 0.2 + speed * 0.15 + contact * 0.1;
+    return defense * 0.4 + arm * 0.2 + contact * 0.2 + power * 0.15 + speed * 0.05;
+  }
+
+  function rebuildTeamRoster(options = {}) {
+    const sourceRoster = options.sourceRoster || {};
+    const players = (options.players || []).filter(player => player?.playerId && player.id !== "player");
+    if (new Set(players.map(player => player.playerId)).size !== players.length) {
+      throw new Error("TeamRoster rebuild requires unique actor identities.");
+    }
+    const used = new Set();
+    const assignments = {};
+    const starters = POSITION_ORDER.map(position => {
+      const candidate = players
+        .filter(player => !used.has(player.playerId) && isPositionEligible(player, position))
+        .sort((left, right) => Number(right.primaryPosition === position) - Number(left.primaryPosition === position)
+          || getRosterSelectionScore(right, position) - getRosterSelectionScore(left, position)
+          || left.playerId.localeCompare(right.playerId))[0];
+      if (!candidate) throw new Error(`TeamRoster rebuild cannot cover ${position}.`);
+      used.add(candidate.playerId);
+      assignments[candidate.playerId] = position;
+      return candidate;
+    });
+    const benchPlayers = players.filter(player => !used.has(player.playerId));
+    const battingOrder = orderLineup(starters, assignments);
+    const startingPitcher = starters.find(player => assignments[player.playerId] === "P");
+    const secondaryPitchers = players
+      .filter(player => player.playerId !== startingPitcher?.playerId && isPositionEligible(player, "P"))
+      .sort((left, right) => (Number(right.pitching) || 0) - (Number(left.pitching) || 0))
+      .map(player => player.playerId);
+    return Object.freeze({
+      version: VERSION,
+      teamId: String(options.teamId || sourceRoster.teamId || "generated-team"),
+      schoolId: String(options.schoolId || sourceRoster.schoolId || options.teamId || sourceRoster.teamId || "generated-team"),
+      schoolStandard: SCHOOL_STANDARDS.includes(options.schoolStandard) ? options.schoolStandard : sourceRoster.schoolStandard || "standard",
+      yearIdentity: String(options.yearIdentity || sourceRoster.yearIdentity || "year-1"),
+      generationSeed: String(options.generationSeed || sourceRoster.generationSeed || "rebuild"),
+      composition: options.composition || sourceRoster.composition || "natural",
+      players: Object.freeze(players.slice()),
+      starters: Object.freeze(starters),
+      benchPlayers: Object.freeze(benchPlayers),
+      pitchingStaff: Object.freeze({ starter: startingPitcher?.playerId || "", secondaryPitchers: Object.freeze(secondaryPitchers) }),
+      battingOrder
+    });
   }
 
   function generateTeamRoster(options = {}) {
@@ -254,7 +312,8 @@
     const benchPlayers = baseRoster.benchPlayers.filter(player => player.id !== "player").slice();
     let replacedPlayerId = "";
     if (starterAllowed) {
-      const index = starters.findIndex(player => player.primaryPosition === requestedPosition);
+      const assignedStarterId = baseRoster.battingOrder?.find(slot => slot.defensivePosition === requestedPosition)?.playerId;
+      const index = starters.findIndex(player => player.playerId === assignedStarterId);
       if (index >= 0) {
         const incumbent = starters[index];
         replacedPlayerId = incumbent.playerId;
@@ -283,6 +342,6 @@
   return Object.freeze({
     VERSION, POSITION_ORDER, POSITION_LABELS, LEFT_HANDED_RESTRICTED, STANDARD_PRIORS, SCHOOL_STANDARDS,
     normalizePosition, isPositionEligible, isHighSchoolPositionAssignmentLegal, getLegalHighSchoolPositions,
-    createSeededRandom, generateTeamRoster, toMatchRoster, validateRoster, getPositionCompetition, injectPlayerIntoRoster
+    createSeededRandom, generateTeamRoster, rebuildTeamRoster, toMatchRoster, validateRoster, getPositionCompetition, injectPlayerIntoRoster
   });
 });

@@ -122,6 +122,8 @@ function playYearTwoRoute(context, choiceIndexes, setup = "") {
     result: player.highSchoolYearTwoResult,
     detail: player.highSchoolYearTwoDetail,
     role: player.highSchoolTeamRole,
+    roleCode: player.highSchoolRoleCode,
+    plan: player.highSchoolYearTwoPlan,
     coachTrust: player.relationships.coachTrust,
     injuryRisk: player.body.injuryRisk,
     pain: player.body.pain,
@@ -299,7 +301,7 @@ const establishedRoute = playYearTwoRoute(
   [0, 0, 0, 0, 0, 1, 0, 0],
   "player.ballSense = 10; player.discipline = 10; Object.assign(player.baseballSkills, { batting: 10, baseballIQ: 10, baseRunning: 10 });"
 );
-verify("49. 主守位的春秋證明與高三計畫一致時可抵達全年驗證成功", establishedRoute.result === "你的球隊用途通過了一整年的第二次驗證" && establishedRoute.role === "內野手專職競爭者");
+verify("49. 主守位的春秋證明與高三計畫一致時可抵達全年驗證成功", establishedRoute.result === "你的球隊用途通過了一整年的第二次驗證" && establishedRoute.plan === "position" && establishedRoute.role === "多位置工具人與後段輪替");
 
 const coachRoute = playYearTwoRoute(context, [2, 1, 0, 0, 0, 0, 0, 3], "player.relationships.coachTrust = 2");
 verify("50. 角色證明不一致但教練信任足夠時可抵達保留任務", coachRoute.result === "教練願意繼續交付任務，但場上證明仍不完整" && coachRoute.coachTrust >= 8);
