@@ -5,7 +5,7 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const context = vm.createContext({ console, module: { exports: {} } });
-["player.js", "save.js"].forEach(file => vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file }));
+["team-roster-foundation.js", "team-strength-model.js", "high-school-entry-roster-context.js", "player.js", "save.js"].forEach(file => vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file }));
 vm.runInContext(`
   const __identityFlags = ["challengePower", "aspireToPower", "proveMyself", "playingTimePriority"];
   const __identityVariants = [
@@ -112,14 +112,16 @@ const strongSets = population.filter(item => item.band === "strong");
 const specialistSets = population.filter(item => item.band === "specialist");
 const diversityPassCount = population.filter(item => context.validateSchoolInvitationSet(item.state).ok).length;
 const duplicateSchoolSetCount = population.filter(item => new Set(item.state.invitations.map(school => school.schoolId)).size !== 4 || new Set(item.state.invitations.map(school => school.schoolName)).size !== 4).length;
-const specialistPowerhouseCases = specialistSets.filter(item => item.state.invitations.some(school => school.schoolTier === "powerhouse" && school.specializedInterest)).length;
+const specialistPowerhouseTradeoffCases = specialistSets.filter(item => item.state.invitations.some(school => school.schoolTier === "powerhouse"
+  && ["high", "veryHigh"].includes(school.schoolInterest.category)
+  && ["rotationCandidate", "benchCandidate"].includes(school.projectedRole))).length;
 
 verify("29. 修正後 population 1000/1000 都是合法四校", population.every(item => item.state.invitations.length === 4 && context.validateSchoolInvitationSet(item.state).ok));
 verify("30. 修正後 diversity 1000/1000 PASS", diversityPassCount === 1000);
 verify("31. 修正後 duplicate school sets 為 0", duplicateSchoolSetCount === 0);
 verify("32. Low profile 200/200 仍合法", lowSets.every(item => context.validateSchoolInvitationSet(item.state).ok));
 verify("33. Strong profile 200/200 仍有 non-powerhouse tradeoff", strongSets.every(item => item.state.invitations.some(school => school.schoolTier !== "powerhouse")));
-verify("34. Specialist profile 仍有 powerhouse specialized interest case", specialistPowerhouseCases > 0);
+verify("34. Specialist profile 仍有 powerhouse 高興趣但非保證先發的 roster tradeoff", specialistPowerhouseTradeoffCases > 0);
 
 let identityComparisons = 0;
 let identityMismatches = 0;
@@ -145,7 +147,7 @@ const auditResult = {
   duplicateSchoolSetCount,
   lowProfileLegalSetCount: lowSets.filter(item => context.validateSchoolInvitationSet(item.state).ok).length,
   strongProfileNonPowerhouseSetCount: strongSets.filter(item => item.state.invitations.some(school => school.schoolTier !== "powerhouse")).length,
-  specialistPowerhouseCases,
+  specialistPowerhouseTradeoffCases,
   identityObjectivePlayers: 200,
   identityVariants: 5,
   identityComparisons,

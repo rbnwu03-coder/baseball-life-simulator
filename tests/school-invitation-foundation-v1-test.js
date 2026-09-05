@@ -5,7 +5,7 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const context = vm.createContext({ console, module: { exports: {} } });
-["player.js", "save.js"].forEach(file => vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file }));
+["team-roster-foundation.js", "team-strength-model.js", "high-school-entry-roster-context.js", "player.js", "save.js"].forEach(file => vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file }));
 vm.runInContext(`
   const __schoolProfiles = ["ordinary", "defense", "batting", "low"];
   function __schoolPlayer(profile="ordinary", seed=1, position="二壘手", throws="R") {
@@ -114,7 +114,9 @@ const strongSets = audit.filter(item => item.band === "strong");
 const specialistSets = audit.filter(item => item.band === "specialist");
 const diversityPassCount = audit.filter(item => context.validateSchoolInvitationSet(item.state).ok).length;
 const duplicateSchoolSetCount = audit.filter(item => new Set(item.state.invitations.map(school => school.schoolId)).size !== 4 || new Set(item.state.invitations.map(school => school.schoolName)).size !== 4).length;
-const specialistPowerhouseCases = specialistSets.filter(item => item.state.invitations.some(school => school.schoolTier === "powerhouse" && school.specializedInterest)).length;
+const specialistPowerhouseTradeoffCases = specialistSets.filter(item => item.state.invitations.some(school => school.schoolTier === "powerhouse"
+  && ["high", "veryHigh"].includes(school.schoolInterest.category)
+  && ["rotationCandidate", "benchCandidate"].includes(school.projectedRole))).length;
 const positionNeedChecks = Array.from({ length: 100 }, (_, index) => evaluate(`(() => {const p=__schoolPlayer("ordinary",${73000 + index});p.capabilityState.positionExperience={};const low=createSchoolProfile("need-audit-${index}","standard",0),high=JSON.parse(JSON.stringify(low));low.positionNeeds["2B"]="low";high.positionNeeds["2B"]="high";const li=deriveSchoolInterest(p,low),hi=deriveSchoolInterest(p,high);return hi.score>li.score&&({depthCandidate:0,benchCandidate:1,rotationCandidate:2,starterCompetition:3,coreCandidate:4})[deriveSchoolProjectedRole(high,hi)]>=({depthCandidate:0,benchCandidate:1,rotationCandidate:2,starterCompetition:3,coreCandidate:4})[deriveSchoolProjectedRole(low,li)];})()`));
 
 verify("36. 1000/1000 sets 都有合法四校", audit.every(item => item.state.invitations.length === 4 && context.validateSchoolInvitationSet(item.state).ok));
@@ -122,7 +124,7 @@ verify("37. 1000-set diversity pass rate 為 100%", diversityPassCount === audit
 verify("38. 1000-set duplicate school rate 為 0", duplicateSchoolSetCount === 0);
 verify("39. Low profile 200/200 仍有合法四校", lowSets.every(item => context.validateSchoolInvitationSet(item.state).ok));
 verify("40. Strong profile 仍保留 non-powerhouse tradeoff", strongSets.every(item => item.state.invitations.some(school => school.schoolTier !== "powerhouse")));
-verify("41. Specialist profile 可產生 powerhouse specialized interest", specialistPowerhouseCases > 0);
+verify("41. Specialist profile 可產生 powerhouse 高興趣但非保證先發的 roster tradeoff", specialistPowerhouseTradeoffCases > 0);
 verify("42. Position need influence 100/100 成立", positionNeedChecks.every(Boolean));
 
 const auditResult = {
@@ -140,7 +142,7 @@ const auditResult = {
   lowProfileLegalSetRate: lowSets.filter(item => context.validateSchoolInvitationSet(item.state).ok).length / lowSets.length,
   strongProfileNonPowerhouseSetCount: strongSets.filter(item => item.state.invitations.some(school => school.schoolTier !== "powerhouse")).length,
   strongProfileNonPowerhouseOfferRate: strongSets.filter(item => item.state.invitations.some(school => school.schoolTier !== "powerhouse")).length / strongSets.length,
-  specialistPowerhouseCases,
+  specialistPowerhouseTradeoffCases,
   positionNeedInfluencePassRate: positionNeedChecks.filter(Boolean).length / positionNeedChecks.length,
   idealSelfProfiles: ideals
 };

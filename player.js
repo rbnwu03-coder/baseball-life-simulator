@@ -919,7 +919,9 @@ function getDebugCapabilitySnapshot(target) {
 const SCHOOL_INVITATION_VERSION = "school-invitation-v1";
 const SCHOOL_INVITATION_GENERATION_NAMESPACE = "high-school-entry-recruiting-cycle-v1";
 const SCHOOL_CHOICE_VERSION = "school-choice-v1";
-const SCHOOL_INVITATION_TIERS = Object.freeze(["powerhouse", "competitive", "standard", "development"]);
+const SCHOOL_INVITATION_TIERS = Object.freeze(typeof TeamRosterFoundation !== "undefined"
+  ? TeamRosterFoundation.SCHOOL_STANDARDS.slice()
+  : ["powerhouse", "competitive", "standard", "development"]);
 const SCHOOL_RECRUITING_PREFERENCES = Object.freeze(["balanced", "defenseFirst", "offenseFirst", "athletic", "baseballIQ"]);
 const SCHOOL_PROJECTED_ROLES = Object.freeze(["depthCandidate", "benchCandidate", "rotationCandidate", "starterCompetition", "coreCandidate"]);
 const SCHOOL_POSITION_IDS = Object.freeze(["P", "C", "1B", "2B", "3B", "SS", "OF"]);
@@ -989,6 +991,12 @@ function createDefaultSchoolInvitationState() {
     selectionFinalized: false,
     selectionVersion: "",
     selectionFinalizedAtCapabilityVersion: "",
+    rosterContextVersion: "",
+    selectedSchoolYearRosterIdentity: null,
+    selectedBaseRoster: null,
+    selectedSchoolRoster: null,
+    selectedPositionCompetitionContext: null,
+    selectedPlayerInjectionState: null,
     invitations: []
   };
 }
@@ -1051,8 +1059,12 @@ function weightedSchoolSkillScore(skills = {}, weights = {}) {
 }
 
 function getSchoolRecruitingLegalPositions(target) {
+  if (typeof TeamRosterFoundation !== "undefined") {
+    const legal = TeamRosterFoundation.getLegalHighSchoolPositions(target).map(position => ["LF", "CF", "RF"].includes(position) ? "OF" : position);
+    return Object.freeze(Array.from(new Set(legal)));
+  }
   return target?.throws === "L"
-    ? Object.freeze(["P", "C", "1B", "OF"])
+    ? Object.freeze(["P", "1B", "OF"])
     : Object.freeze(SCHOOL_POSITION_IDS.slice());
 }
 
@@ -1061,7 +1073,7 @@ function mapCanonicalPositionToSchoolCandidates(position, throws = "R") {
     "投手": ["P"], "捕手": ["C"], "一壘手": ["1B"], "二壘手": ["2B"],
     "三壘手": ["3B"], "游擊手": ["SS"], "外野手": ["OF"]
   };
-  if (direct[position]) return direct[position].filter(id => throws !== "L" || !["2B", "3B", "SS"].includes(id));
+  if (direct[position]) return direct[position].filter(id => throws !== "L" || !["C", "2B", "3B", "SS"].includes(id));
   if (position === "內野手") return throws === "L" ? ["1B", "P"] : ["2B", "SS", "3B", "1B"];
   return [];
 }
@@ -1118,6 +1130,7 @@ function createSchoolProfile(generationSeed, tier, slot) {
     schoolId: `school-${tier}-${stableSchoolInvitationHash(schoolSeed).toString(16).padStart(8, "0")}`,
     schoolName: pool[nameIndex],
     schoolSeed,
+    schoolStandard: tier,
     schoolTier: tier,
     teamStrength: tierProfile.teamStrength,
     trainingQuality: tierProfile.trainingQuality,
@@ -1138,6 +1151,7 @@ function validateSchoolProfile(school) {
   if (typeof school.schoolName !== "string" || !school.schoolName) errors.push("school-name-invalid");
   if (typeof school.schoolSeed !== "string" || !school.schoolSeed) errors.push("school-seed-invalid");
   if (!SCHOOL_INVITATION_TIERS.includes(school.schoolTier)) errors.push("school-tier-invalid");
+  if (school.schoolStandard && school.schoolStandard !== school.schoolTier) errors.push("school-standard-mismatch");
   if (!SCHOOL_RECRUITING_PREFERENCES.includes(school.recruitingPreference)) errors.push("recruiting-preference-invalid");
   if (!SCHOOL_TIER_PROFILES[school.schoolTier]) errors.push("tier-profile-missing");
   else {
@@ -1213,6 +1227,9 @@ function deriveSchoolInterest(target, school) {
 }
 
 function deriveSchoolProjectedRole(school, interest) {
+  if (school?.positionCompetitionContext && typeof HighSchoolEntryRosterContext !== "undefined") {
+    return HighSchoolEntryRosterContext.projectEntryRole(school.positionCompetitionContext);
+  }
   const need = { low: 0, medium: 1, high: 2 }[interest.positionNeed] || 0;
   const depthPenalty = { veryHigh: 2, high: 1.25, medium: 0.5, low: 0 }[school.competitionDepth] || 0;
   const roleScore = interest.recruitingStandardFit + need - depthPenalty;
@@ -1230,13 +1247,50 @@ function deriveSchoolProjectedRole(school, interest) {
 }
 
 function createSchoolInvitation(target, school) {
-  const interest = deriveSchoolInterest(target, school);
+  let contextualSchool = { ...cloneSchoolInvitationValue(school), schoolStandard: school.schoolStandard || school.schoolTier };
+  let candidateRosterContext = null;
+  if (typeof HighSchoolEntryRosterContext !== "undefined" && typeof TeamRosterFoundation !== "undefined") {
+    candidateRosterContext = HighSchoolEntryRosterContext.createCandidateSchoolYearContext({
+      schoolId: contextualSchool.schoolId,
+      schoolStandard: contextualSchool.schoolStandard,
+      schoolSeed: contextualSchool.schoolSeed,
+      yearIdentity: `hs-year-1-age-${Math.max(16, Number(target?.age) || 16)}`
+    });
+    contextualSchool = {
+      ...contextualSchool,
+      positionNeeds: cloneSchoolInvitationValue(candidateRosterContext.positionNeeds),
+      schoolYearRosterIdentity: cloneSchoolInvitationValue(candidateRosterContext.schoolYearRosterIdentity),
+      yearIdentity: candidateRosterContext.yearIdentity,
+      rosterGenerationSeed: candidateRosterContext.rosterGenerationSeed,
+      baseRoster: cloneSchoolInvitationValue(candidateRosterContext.baseRoster),
+      teamStrengthProfile: cloneSchoolInvitationValue(candidateRosterContext.teamStrengthProfile)
+    };
+  }
+  const interest = deriveSchoolInterest(target, contextualSchool);
+  const adaptedRosterCapability = candidateRosterContext && typeof createHighSchoolRosterPlayerActor === "function"
+    ? HighSchoolEntryRosterContext.getPositionCapability(createHighSchoolRosterPlayerActor(target, interest.candidatePosition), interest.candidatePosition)
+    : NaN;
+  const playerRosterCapability = Number.isFinite(adaptedRosterCapability) && adaptedRosterCapability > 0
+    ? adaptedRosterCapability : interest.capabilityMatch;
+  const positionCompetitionContext = candidateRosterContext
+    ? HighSchoolEntryRosterContext.derivePlayerCompetitionContext(candidateRosterContext, interest.candidatePosition, playerRosterCapability)
+    : null;
+  if (positionCompetitionContext) contextualSchool.positionCompetitionContext = cloneSchoolInvitationValue(positionCompetitionContext);
+  const rosterRiskSignals = positionCompetitionContext
+    ? interest.riskSignals.filter(signal => signal !== "highInternalCompetition")
+    : interest.riskSignals.slice();
+  if (["high", "veryHigh"].includes(positionCompetitionContext?.competitionDensity) && !rosterRiskSignals.includes("highInternalCompetition")) {
+    rosterRiskSignals.push("highInternalCompetition");
+  }
   return {
-    ...cloneSchoolInvitationValue(school),
+    ...cloneSchoolInvitationValue(contextualSchool),
     schoolInterest: cloneSchoolInvitationValue(interest),
-    projectedRole: deriveSchoolProjectedRole(school, interest),
+    positionNeed: interest.positionNeed,
+    projectedRole: positionCompetitionContext
+      ? HighSchoolEntryRosterContext.projectEntryRole(positionCompetitionContext)
+      : deriveSchoolProjectedRole(contextualSchool, interest),
     interestReasons: interest.interestReasons.slice(),
-    riskSignals: interest.riskSignals.slice(),
+    riskSignals: rosterRiskSignals,
     specializedInterest: interest.specializedInterest
   };
 }
@@ -1245,16 +1299,17 @@ function getSchoolInvitationDiversity(invitations = []) {
   const unique = key => new Set(invitations.map(item => item?.[key]).filter(Boolean)).size;
   const signatures = new Set(invitations.map(item => [
     item.schoolTier, item.projectedRole, item.schoolInterest?.positionNeed,
-    item.trainingQuality, item.competitionDepth, item.recruitingPreference
+    item.trainingQuality, item.positionCompetitionContext?.competitionDensity || item.competitionDepth, item.recruitingPreference
   ].join("|")));
+  const competitionDepthCategories = new Set(invitations.map(item => item.positionCompetitionContext?.competitionDensity || item.competitionDepth).filter(Boolean)).size;
   return Object.freeze({
     roleCategories: unique("projectedRole"),
-    competitionDepthCategories: unique("competitionDepth"),
+    competitionDepthCategories,
     trainingQualityCategories: unique("trainingQuality"),
     tierCategories: unique("schoolTier"),
     mechanicalSignatures: signatures.size,
     roleDiversity: unique("projectedRole") >= 2,
-    competitionDiversity: unique("competitionDepth") >= 2,
+    competitionDiversity: competitionDepthCategories >= 2,
     environmentDiversity: unique("trainingQuality") >= 2,
     tierDiversity: unique("schoolTier") >= 2,
     noDominantDuplicate: signatures.size >= 2
@@ -1306,7 +1361,13 @@ function getSelectedHighSchoolContext(target) {
   return deepFreezeSchoolInvitationValue({
     schoolId: selected.schoolId,
     schoolName: selected.schoolName,
+    schoolStandard: selected.schoolStandard || selected.schoolTier,
     schoolTier: selected.schoolTier,
+    schoolYearRosterIdentity: cloneSchoolInvitationValue(selected.schoolYearRosterIdentity),
+    yearIdentity: selected.yearIdentity || "",
+    rosterGenerationSeed: selected.rosterGenerationSeed || "",
+    positionNeed: selected.positionNeed || selected.schoolInterest?.positionNeed || "medium",
+    positionCompetitionContext: cloneSchoolInvitationValue(selected.positionCompetitionContext),
     trainingQuality: selected.trainingQuality,
     competitionDepth: selected.competitionDepth,
     matchCompetitionLevel: selected.matchCompetitionLevel,
@@ -1341,6 +1402,12 @@ function finalizeSchoolInvitationSelection(target, schoolId) {
   state.selectionFinalized = true;
   state.selectionVersion = SCHOOL_CHOICE_VERSION;
   state.selectionFinalizedAtCapabilityVersion = target?.capabilityState?.settlementVersion || "";
+  state.rosterContextVersion = selected.schoolYearRosterIdentity?.version || "";
+  state.selectedSchoolYearRosterIdentity = cloneSchoolInvitationValue(selected.schoolYearRosterIdentity);
+  state.selectedBaseRoster = cloneSchoolInvitationValue(selected.baseRoster);
+  state.selectedSchoolRoster = null;
+  state.selectedPositionCompetitionContext = cloneSchoolInvitationValue(selected.positionCompetitionContext);
+  state.selectedPlayerInjectionState = { status: "pending-entry-evaluation", playerId: "player", rosterRole: "bench", assignedPosition: "" };
   target.schoolInvitationState = state;
   return { ok: true, existing: false, selectedSchoolId: selected.schoolId, context: getSelectedHighSchoolContext(target) };
 }
@@ -1370,14 +1437,28 @@ function selectSchoolInvitationCandidates(candidates, generationSeed) {
   }
   const replaceFor = predicate => {
     if (predicate(selected)) return;
-    const replacement = ranked.find(candidate => !selected.some(item => item.schoolId === candidate.schoolId)
-      && predicate([...selected.slice(0, 3), candidate]));
-    if (replacement) selected.splice(3, 1, replacement);
+    for (const replaceIndex of [3, 2, 1, 0]) {
+      const replacement = ranked.find(candidate => {
+        if (selected.some(item => item.schoolId === candidate.schoolId)) return false;
+        const trial = selected.slice();
+        trial[replaceIndex] = candidate;
+        return predicate(trial);
+      });
+      if (replacement) {
+        selected.splice(replaceIndex, 1, replacement);
+        return;
+      }
+    }
   };
   replaceFor(items => new Set(items.map(item => item.schoolTier)).size >= 2);
   replaceFor(items => {
     const diversity = getSchoolInvitationDiversity(items);
     return diversity.tierDiversity && diversity.roleDiversity && diversity.noDominantDuplicate;
+  });
+  replaceFor(items => {
+    const diversity = getSchoolInvitationDiversity(items);
+    return diversity.tierDiversity && diversity.roleDiversity && diversity.competitionDiversity
+      && diversity.environmentDiversity && diversity.noDominantDuplicate;
   });
   const order = selected.slice(0, 4).sort((left, right) =>
     stableSchoolInvitationHash(`${generationSeed}|display-order|${left.schoolId}`)
@@ -1407,7 +1488,9 @@ function deriveSchoolInvitationGenerationSeed(target, explicitSeed) {
 }
 
 function generateSchoolInvitationSet(target, options = {}) {
-  if (validateSchoolInvitationSet(target?.schoolInvitationState).ok) return target.schoolInvitationState;
+  if (validateSchoolInvitationSet(target?.schoolInvitationState).ok) {
+    return ensureSchoolInvitationRosterContexts(target);
+  }
   const restored = restoreSchoolInvitationState(target?.schoolInvitationState);
   if (validateSchoolInvitationSet(restored).ok) {
     target.schoolInvitationState = restored;
@@ -1436,10 +1519,47 @@ function generateSchoolInvitationSet(target, options = {}) {
     selectionFinalized: false,
     selectionVersion: "",
     selectionFinalizedAtCapabilityVersion: "",
+    rosterContextVersion: typeof HighSchoolEntryRosterContext !== "undefined" ? HighSchoolEntryRosterContext.VERSION : "",
+    selectedSchoolYearRosterIdentity: null,
+    selectedBaseRoster: null,
+    selectedSchoolRoster: null,
+    selectedPositionCompetitionContext: null,
+    selectedPlayerInjectionState: null,
     invitations
   };
   const validation = validateSchoolInvitationSet(state);
   if (!validation.ok) throw new Error(`School Invitation Set validation failed：${validation.errors.join(",")}`);
+  target.schoolInvitationState = state;
+  return state;
+}
+
+function ensureSchoolInvitationRosterContexts(target) {
+  const state = target?.schoolInvitationState && typeof target.schoolInvitationState === "object"
+    ? target.schoolInvitationState
+    : restoreSchoolInvitationState(target?.schoolInvitationState);
+  if (typeof HighSchoolEntryRosterContext === "undefined" || !Array.isArray(state.invitations) || state.invitations.length !== 4) {
+    target.schoolInvitationState = state;
+    return state;
+  }
+  state.invitations = state.invitations.map(invitation => invitation.schoolYearRosterIdentity?.identity && invitation.baseRoster
+    ? invitation
+    : createSchoolInvitation(target, invitation));
+  state.rosterContextVersion = HighSchoolEntryRosterContext.VERSION;
+  if (state.selectionFinalized && state.selectedSchoolId) {
+    const selected = state.invitations.find(invitation => invitation.schoolId === state.selectedSchoolId);
+    if (selected) {
+      if (!state.selectedSchoolYearRosterIdentity?.identity) {
+        state.selectedSchoolYearRosterIdentity = cloneSchoolInvitationValue(selected.schoolYearRosterIdentity);
+      }
+      if (!state.selectedBaseRoster) state.selectedBaseRoster = cloneSchoolInvitationValue(selected.baseRoster);
+      if (!state.selectedPositionCompetitionContext) {
+        state.selectedPositionCompetitionContext = cloneSchoolInvitationValue(selected.positionCompetitionContext);
+      }
+      if (!state.selectedPlayerInjectionState) {
+        state.selectedPlayerInjectionState = { status: "pending-entry-evaluation", playerId: "player", rosterRole: "bench", assignedPosition: "" };
+      }
+    }
+  }
   target.schoolInvitationState = state;
   return state;
 }

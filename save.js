@@ -61,6 +61,9 @@ function normalizeSave(saved) {
     sourceSaveVersion
   });
   fresh.schoolInvitationState = restoreSchoolInvitationState(saved.schoolInvitationState);
+  if (typeof ensureSchoolInvitationRosterContexts === "function" && fresh.schoolInvitationState.invitations.length === 4) {
+    ensureSchoolInvitationRosterContexts(fresh);
+  }
   const reachedHighSchoolStory = Number(fresh.age) >= 16 || /青棒|高中/.test(String(fresh.chapter || "")) || Number(fresh.highSchoolStep) > 0;
   if (reachedHighSchoolStory && !validateSchoolInvitationSet(fresh.schoolInvitationState).ok) {
     markLegacySchoolInvitationCompatibility(fresh, "legacy-existing-school");

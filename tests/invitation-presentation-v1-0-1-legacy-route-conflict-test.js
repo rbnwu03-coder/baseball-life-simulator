@@ -5,6 +5,7 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const files = [
+  "team-roster-foundation.js", "team-strength-model.js", "high-school-entry-roster-context.js",
   "player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js",
   "evaluation-registry.js", "coach-evaluation-boundary.js", "narrative-condition-boundary.js",
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
