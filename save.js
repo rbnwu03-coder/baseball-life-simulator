@@ -106,6 +106,16 @@ function normalizeSave(saved) {
   fresh.highSchoolCoachEvaluation.secondaryPositions = Array.isArray(saved.highSchoolCoachEvaluation?.secondaryPositions) ? saved.highSchoolCoachEvaluation.secondaryPositions.slice(0, 1) : [];
   fresh.highSchoolRoleContext = Object.assign({}, highSchoolDefaults.highSchoolRoleContext, saved.highSchoolRoleContext || {});
   fresh.highSchoolRoleContext.evidence = Array.isArray(saved.highSchoolRoleContext?.evidence) ? saved.highSchoolRoleContext.evidence : [];
+  fresh.highSchoolCompetitionEvaluation = saved.highSchoolCompetitionEvaluation
+    ? (typeof HighSchoolCompetitionReassessment !== "undefined"
+      ? HighSchoolCompetitionReassessment.normalizeEvaluationState(saved.highSchoolCompetitionEvaluation)
+      : JSON.parse(JSON.stringify(saved.highSchoolCompetitionEvaluation)))
+    : null;
+  fresh.highSchoolOpportunityHistory = typeof HighSchoolCompetitionReassessment !== "undefined"
+    ? HighSchoolCompetitionReassessment.normalizeOpportunityHistory(saved.highSchoolOpportunityHistory)
+    : Array.isArray(saved.highSchoolOpportunityHistory) ? saved.highSchoolOpportunityHistory.slice(-5) : [];
+  fresh.highSchoolNextOpportunity = saved.highSchoolNextOpportunity
+    ? JSON.parse(JSON.stringify(saved.highSchoolNextOpportunity)) : null;
   fresh.highSchoolMatch = Object.assign({}, highSchoolDefaults.highSchoolMatch, saved.highSchoolMatch || {});
   fresh.highSchoolMatch.scores = Object.assign({}, highSchoolDefaults.highSchoolMatch.scores, saved.highSchoolMatch?.scores || {});
   fresh.highSchoolMatch.runners = Array.isArray(saved.highSchoolMatch?.runners) ? saved.highSchoolMatch.runners : [];

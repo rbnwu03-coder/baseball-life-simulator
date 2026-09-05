@@ -30,7 +30,7 @@ verify("正式宿敵 identity 為高橋", /rivalName:\s*"高橋"/.test(playerSou
 const settlementStart = scriptSource.indexOf("function evaluateHighSchoolYear()");
 const settlementEnd = scriptSource.indexOf("function evaluateHighSchoolValue()", settlementStart);
 const settlement = scriptSource.slice(settlementStart, settlementEnd);
-verify("第一年結算回收守位、角色、交流賽、阿哲與外部壓力", ["守位形成", "暫定角色", "交流賽", "阿哲回聲", "外部壓力"].every(token => settlement.includes(token)));
+verify("第一年結算回收守位、最新角色、交流賽、阿哲與外部壓力", ["守位形成", "目前角色", "競爭再評估", "交流賽", "阿哲回聲", "外部壓力"].every(token => settlement.includes(token)));
 verify("合法結算才寫入第一年完成旗標", settlement.includes("player.highSchoolYearOneComplete = true"));
 
 console.log(`NarrativeConditionFlow validations：${validations}`);

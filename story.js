@@ -1136,10 +1136,13 @@ const highSchoolEvents = {
     text() {
       const rival = player.highSchoolRivalContext || {};
       const match = player.highSchoolMatch || {};
+      const nextOpportunity = player.highSchoolNextOpportunity
+        ? `下一次隊內評估安排：${player.highSchoolRoleContext?.opportunity || "教練會依本場證據重新安排用途"}。`
+        : "下一次隊內評估仍等待本場證據完成整理。";
       const scout = match.completed
         ? `球探留下比賽編號、角色與「${match.outcome || "已完成任務"}」的可追蹤紀錄。`
         : "球探沒有下結論，只保留球隊提交的比賽名單。";
-      return `${scout}\n\n外部對手入口：${rival.entryType || "observed"}\n${rival.encounter || "你從比賽紀錄上重新看見高橋的名字。"}\n高橋不是隊內名單的權威，也不會替你取得機會；他提供的是外部同世代標準。\n\n交流賽結果：${match.outcome || "未留下結果"}\n高二壓力：${rival.yearTwoPressure || "下一次正式任務必須證明這項用途能否重複。"}`;
+      return `${scout}\n${nextOpportunity}\n\n外部對手入口：${rival.entryType || "observed"}\n${rival.encounter || "你從比賽紀錄上重新看見高橋的名字。"}\n高橋不是隊內名單的權威，也不會替你取得機會；他提供的是外部同世代標準。\n\n交流賽結果：${match.outcome || "未留下結果"}\n高二壓力：${rival.yearTwoPressure || "下一次正式任務必須證明這項用途能否重複。"}`;
     },
     choices: [
       C("繼續增加多位置與戰術價值", { observe: 1, responsibility: 1 }, ["high_school_commit_utility"], "你接受自己可能不是球星，卻能成為球隊很難取代的人。", { skillEffects: { baseballIQ: 2 }, highSchoolEffects: { scoutEvaluation: 1 } }),
@@ -1684,9 +1687,9 @@ const pacingEvents = {
     title: "第一份高中實戰名單",
     text() {
       const role = player.highSchoolRoleContext || {};
-      if (role.code === "starter") return `你的名字出現在交流賽先發欄。這不是永久主力保證；現任教練要求你在${player.primaryPosition}完成前段守備，並保留第七局關鍵打席。`;
-      if (role.code === "rotation") return `你的名字被寫在輪替欄。現任教練指定你在同一場交流賽中段接手${player.primaryPosition}，第七局若輪到打序就必須完成打席。`;
-      return `你仍在發展名單，卻不是固定看完整場。現任教練把同一場交流賽的第七局代打與短局${player.primaryPosition || "守備"}任務交給你。`;
+      if (role.code === "starter") return `你的名字進入交流賽先發候選討論。這不是永久主力保證；現任教練準備讓你在${player.primaryPosition}承擔前段守備，實際任務仍以賽前名單與場上局面為準。`;
+      if (role.code === "rotation") return `你的名字被寫在輪替候選欄。現任教練準備在同一場交流賽視局面讓你接手${player.primaryPosition}或完成打席，是否進場仍由正式安排決定。`;
+      return `你仍在發展名單，卻不是固定看完整場。現任教練要你準備第七局附近的代打與短局${player.primaryPosition || "守備"}用途；真正是否上場，要等正式安排與比賽局勢決定。`;
     },
     choices: [
       C("整理對手投手與守備站位，準備第七局局面", { observe: 2, responsibility: 1 }, ["built_bench_report"], "你把角色不同造成的等待時間，轉成同一場比賽可使用的情報。", { skillEffects: { baseballIQ: 1 }, relationshipEffects: { coachTrust: 1 } }),

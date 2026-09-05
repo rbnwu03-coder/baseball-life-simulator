@@ -6083,8 +6083,8 @@ function materializeSelectedHighSchoolRoster(subject = player, options = {}) {
   const playerCapability = HighSchoolEntryRosterContext.getPositionCapability(
     selectedRoster.players.find(actor => actor.id === "player"), requestedPosition
   );
-  const invitationCompetition = invitation.positionCompetitionContext;
-  const competition = invitationCompetition?.position === requestedPosition
+  const invitationCompetition = invitation?.positionCompetitionContext;
+  const competition = options.refreshCompetition !== true && invitationCompetition?.position === requestedPosition
     ? cloneSchoolInvitationValue(invitationCompetition)
     : HighSchoolEntryRosterContext.deriveCompetitionContext(baseRoster, requestedPosition, playerCapability);
   state.selectedSchoolYearRosterIdentity = cloneSchoolInvitationValue(invitation.schoolYearRosterIdentity);
@@ -6097,6 +6097,23 @@ function materializeSelectedHighSchoolRoster(subject = player, options = {}) {
     schoolYearRosterIdentity: invitation.schoolYearRosterIdentity.identity
   };
   return selectedRoster;
+}
+
+function refreshSelectedPositionCompetitionContext(subject = player, requestedPosition = subject?.primaryPosition) {
+  const state = subject?.schoolInvitationState;
+  const invitation = getSelectedSchoolInvitation(subject);
+  const baseRoster = state?.selectedBaseRoster || invitation?.baseRoster;
+  if (!baseRoster || typeof HighSchoolEntryRosterContext === "undefined" || typeof TeamRosterFoundation === "undefined") return null;
+  const invitationPosition = invitation?.positionCompetitionContext?.position || invitation?.schoolInterest?.candidatePosition || "";
+  const rawPosition = requestedPosition || subject?.primaryPosition || invitationPosition;
+  const normalized = TeamRosterFoundation.normalizePosition(rawPosition);
+  const position = ["內野手", "外野手"].includes(rawPosition) && invitationPosition
+    ? TeamRosterFoundation.normalizePosition(invitationPosition) : normalized;
+  const actor = createHighSchoolRosterPlayerActor(subject, position);
+  const capability = HighSchoolEntryRosterContext.getPositionCapability(actor, position);
+  const context = HighSchoolEntryRosterContext.deriveCompetitionContext(baseRoster, position, capability);
+  state.selectedPositionCompetitionContext = cloneSchoolInvitationValue(context);
+  return state.selectedPositionCompetitionContext;
 }
 
 function createHighSchoolMatchSimulationRoster(role, playerPosition, simulationSeed = 1, selectedHomeRoster = null) {
@@ -8798,27 +8815,38 @@ function getHighSchoolPlayingTimeSchoolContext(subject = player) {
   return Object.freeze({ schoolId: "school-context-unavailable", playingTimeEnvironment: "medium", competitionDepth: "medium", positionNeed: "medium", projectedRole: "", coachStyle: "analysis" });
 }
 
+function createHighSchoolOpportunityReadinessSnapshot(requestedPosition, subject = player) {
+  const school = getHighSchoolPlayingTimeSchoolContext(subject);
+  return PlayingTimeGameExposure.createOpportunityReadinessSnapshot({
+    subject,
+    playerId: [subject.name || "player", subject.characterGenesis?.shape || "", school.schoolId].join("|"),
+    position: requestedPosition || subject.primaryPosition || "內野手",
+    capabilityProvider: getDefensiveSimulationCapability,
+    positionAssessmentProvider: getPositionAssessment
+  });
+}
+
 function createHighSchoolPlayingTimeOpportunity(options = {}) {
   if (typeof PlayingTimeGameExposure === "undefined") return null;
   const requestedPosition = options.requestedPosition || player.primaryPosition || "內野手";
   const school = getHighSchoolPlayingTimeSchoolContext(player);
-  const readinessSnapshot = PlayingTimeGameExposure.createOpportunityReadinessSnapshot({
-    subject: player,
-    playerId: [player.name || "player", player.characterGenesis?.shape || "", school.schoolId].join("|"),
-    position: requestedPosition,
-    capabilityProvider: getDefensiveSimulationCapability,
-    positionAssessmentProvider: getPositionAssessment
-  });
+  const readinessSnapshot = createHighSchoolOpportunityReadinessSnapshot(requestedPosition, player);
+  const opportunityIndex = Math.max(1, Number(options.opportunityIndex) || 1);
+  const schoolYearIdentity = player.schoolInvitationState?.selectedSchoolYearRosterIdentity?.identity
+    || `${school.schoolId}|legacy-high-school-year-one`;
+  const opportunityPhase = options.opportunityPhase || (opportunityIndex === 1 ? "autumn-exhibition" : "post-autumn-evaluation");
   return PlayingTimeGameExposure.resolveStartingOpportunity({
     matchId: options.matchId,
     readinessSnapshot,
-    opportunitySeed: `${player.capabilityState?.settlementId || player.capabilityState?.version || "capability"}|${options.matchId || "match"}`,
+    opportunitySeed: [player.capabilityState?.settlementId || player.capabilityState?.version || "capability", schoolYearIdentity, "high-school-year-one", opportunityPhase, opportunityIndex, options.matchId || "match"].join("|"),
     actualRole: options.actualRole,
     projectedRole: school.projectedRole,
     playingTimeEnvironment: school.playingTimeEnvironment,
     competitionDepth: school.competitionDepth,
     positionNeed: school.positionNeed,
     coachUsageStyle: school.coachStyle,
+    evaluationTrend: options.evaluationTrend,
+    previousActualExposure: options.previousActualExposure,
     directStartForced: options.directStartForced === true,
     gameContext: { gameType: "highSchoolExhibition", inning: 0, expectedGameImportance: "regular", importance: "regular", leverage: "normal", scoreMargin: 0 }
   });
@@ -8868,8 +8896,17 @@ function prepareHighSchoolYearOneMatch() {
     matchId: "hs-y1-autumn-exhibition",
     actualRole: code,
     requestedPosition: developmentPositionOverride || position,
-    directStartForced
+    directStartForced,
+    opportunityIndex: 1,
+    opportunityPhase: "autumn-exhibition"
   });
+  if (opportunityDecision && typeof HighSchoolCompetitionReassessment !== "undefined") {
+    player.highSchoolOpportunityHistory = HighSchoolCompetitionReassessment.recordOpportunity(player.highSchoolOpportunityHistory, {
+      opportunity: opportunityDecision,
+      opportunityIndex: 1,
+      roleAtCreation: code
+    });
+  }
   const plannedAppearance = opportunityDecision?.plannedUsage?.appearanceType || (code === "starter" ? "start" : "lateGameAppearance");
   const starts = plannedAppearance === "start";
   const roleAssignment = opportunityDecision
@@ -10759,6 +10796,126 @@ function finalizeHighSchoolGameExposure(match) {
   return finalization;
 }
 
+function getHighSchoolCompetitionEvaluationIdentity(subject = player) {
+  const rosterIdentity = subject?.schoolInvitationState?.selectedSchoolYearRosterIdentity?.identity
+    || subject?.schoolInvitationState?.selectedBaseRoster?.identity
+    || `legacy-${subject?.highSchoolRoute || "high-school"}`;
+  return `${rosterIdentity}|high-school-year-one`;
+}
+
+function getHighSchoolCompetitionReasonText(reason) {
+  return {
+    sustainedPositivePerformance: "近期持續交出正向內容",
+    sustainedNegativePerformance: "近期多次執行未達角色要求",
+    trainingImprovement: "訓練與準備度正在提升",
+    competitionGapClosed: "與同守位競爭者的差距已縮小",
+    competitionStillAhead: "同守位競爭者目前仍居前",
+    limitedSample: "目前正式樣本仍有限",
+    noActualExposure: "上一場沒有實際上場樣本"
+  }[reason] || "教練仍在累積正式證據";
+}
+
+function formatHighSchoolCompetitionEvaluation(evaluation = {}) {
+  const trend = { positive: "上升", negative: "承壓", neutral: "持平" }[evaluation.recentTrend] || "持平";
+  const reasons = (evaluation.lastReassessmentReason || []).map(getHighSchoolCompetitionReasonText);
+  return `${trend}${reasons.length ? `；${reasons.join("、")}` : ""}`;
+}
+
+function applyHighSchoolCompetitionMatchSettlement(match) {
+  if (!match?.completed || !match?.gameExposureState?.finalized || typeof HighSchoolCompetitionReassessment === "undefined") return null;
+  const identity = getHighSchoolCompetitionEvaluationIdentity(player);
+  const readiness = createHighSchoolOpportunityReadinessSnapshot(
+    match.gameExposureState.opportunitySnapshot?.assignedPosition || player.primaryPosition,
+    player
+  );
+  const evidence = HighSchoolCompetitionReassessment.collectCompetitionEvidence({
+    match,
+    exposure: match.gameExposureState,
+    readiness,
+    coachTrust: player.relationships?.coachTrust,
+    health: player.body
+  });
+  const evaluationUpdate = HighSchoolCompetitionReassessment.updateCompetitionEvaluation(
+    player.highSchoolCompetitionEvaluation,
+    evidence,
+    identity
+  );
+  if (evaluationUpdate.status !== "applied") return evaluationUpdate;
+
+  player.highSchoolCompetitionEvaluation = evaluationUpdate.state;
+  const competition = refreshSelectedPositionCompetitionContext(player, readiness.position)
+    || player.schoolInvitationState?.selectedPositionCompetitionContext
+    || {};
+  const roleResult = HighSchoolCompetitionReassessment.reassessRole({
+    currentRole: player.highSchoolRoleCode,
+    evaluation: player.highSchoolCompetitionEvaluation,
+    competition,
+    readiness,
+    coachTrust: player.relationships?.coachTrust
+  });
+  HighSchoolCompetitionReassessment.applyRoleResult(player, roleResult);
+  const refreshedRoster = materializeSelectedHighSchoolRoster(player, {
+    rosterRole: roleResult.nextRole === "starter" ? "starter" : "bench",
+    playerPosition: readiness.position,
+    refreshCompetition: true
+  });
+  const refreshedCompetition = refreshedRoster
+    ? player.schoolInvitationState.selectedPositionCompetitionContext
+    : competition;
+  player.highSchoolCompetitionEvaluation.lastReassessmentReason = roleResult.reasons.slice();
+  player.highSchoolCompetitionEvaluation.lastReassessmentAt = `${match.id}|settled`;
+
+  const currentOpportunity = match.gameExposureState.opportunitySnapshot || {};
+  player.highSchoolOpportunityHistory = HighSchoolCompetitionReassessment.recordOpportunity(player.highSchoolOpportunityHistory, {
+    opportunity: currentOpportunity,
+    opportunityIndex: 1,
+    roleAtCreation: currentOpportunity.actualRole || match.role,
+    actualExposure: {
+      appearanceType: match.gameExposureState.appearanceType,
+      started: match.gameExposureState.appearanceType === "start",
+      participated: match.gameExposureState.plateAppearances > 0 || match.gameExposureState.defensiveInnings > 0,
+      plateAppearances: match.gameExposureState.plateAppearances,
+      defensiveInnings: match.gameExposureState.defensiveInnings
+    },
+    evaluationConsequence: {
+      evaluationIdentity: identity,
+      accumulatedScore: player.highSchoolCompetitionEvaluation.accumulatedScore,
+      trend: player.highSchoolCompetitionEvaluation.recentTrend,
+      roleChange: roleResult.change,
+      nextRole: roleResult.nextRole,
+      reasons: roleResult.reasons.slice()
+    }
+  });
+
+  const nextOpportunity = createHighSchoolPlayingTimeOpportunity({
+    matchId: "hs-y1-followup-evaluation-2",
+    actualRole: player.highSchoolRoleCode,
+    requestedPosition: readiness.position,
+    directStartForced: false,
+    opportunityIndex: 2,
+    opportunityPhase: "post-autumn-evaluation",
+    evaluationTrend: player.highSchoolCompetitionEvaluation.trendScore,
+    previousActualExposure: match.gameExposureState
+  });
+  player.highSchoolNextOpportunity = nextOpportunity ? cloneSchoolInvitationValue({
+    ...nextOpportunity,
+    opportunityIndex: 2,
+    phase: "post-autumn-evaluation",
+    evaluationIdentity: identity,
+    previousMatchId: match.id,
+    competitionSnapshot: refreshedCompetition
+  }) : null;
+  if (nextOpportunity) {
+    player.highSchoolOpportunityHistory = HighSchoolCompetitionReassessment.recordOpportunity(player.highSchoolOpportunityHistory, {
+      opportunity: nextOpportunity,
+      opportunityIndex: 2,
+      roleAtCreation: player.highSchoolRoleCode
+    });
+    player.highSchoolRoleContext.opportunity = getHighSchoolPlayingTimeAssignmentText(nextOpportunity);
+  }
+  return { status: "applied", evidence, evaluation: player.highSchoolCompetitionEvaluation, roleResult, competition: refreshedCompetition, nextOpportunity: player.highSchoolNextOpportunity };
+}
+
 function settleHighSchoolYearOneMatch(match, finalDecision) {
   if (match.settled || match.completed) return false;
   const contribution = match.playerContribution;
@@ -10825,6 +10982,7 @@ function settleHighSchoolYearOneMatch(match, finalDecision) {
   } else {
     addFlags(["hs_y1_match_completed", "hs_y1_match_no_appearance"]);
   }
+  applyHighSchoolCompetitionMatchSettlement(match);
   return match.performanceSummary;
 }
 
@@ -11448,6 +11606,9 @@ function completeHighSchoolEntry(options = {}) {
   player.highSchoolStep = 0;
   player.highSchoolPositionPreference = player.primaryPosition || "";
   player.highSchoolRoleCode = "";
+  player.highSchoolCompetitionEvaluation = null;
+  player.highSchoolOpportunityHistory = [];
+  player.highSchoolNextOpportunity = null;
   player.highSchoolYearOneComplete = false;
   player.highSchoolMatch = createInitialPlayer().highSchoolMatch;
   player.highSchoolAzheEcho = createInitialPlayer().highSchoolAzheEcho;
@@ -13129,7 +13290,11 @@ function evaluateHighSchoolYear() {
   const azhe = player.highSchoolAzheEcho || {};
   const rivalPressure = player.highSchoolRivalContext || {};
   player.highSchoolDetail += `\n\n守位形成：${player.primaryPosition || "未定"}${player.secondaryPosition ? `／${player.secondaryPosition}` : ""}；理想自我與教練評估${formation.idealAlignment || "待確認"}。`;
-  player.highSchoolDetail += `\n暫定角色：${role.label || player.highSchoolTeamRole}；機會：${role.opportunity || "正式比賽任務"}。`;
+  const currentRoleLabel = (typeof HighSchoolCompetitionReassessment !== "undefined"
+    ? HighSchoolCompetitionReassessment.ROLE_LABELS[player.highSchoolRoleCode] : "") || player.highSchoolTeamRole || role.label;
+  const competitionEvaluation = player.highSchoolCompetitionEvaluation || {};
+  player.highSchoolDetail += `\n目前角色：${currentRoleLabel}；下一次機會：${role.opportunity || "正式比賽任務"}。`;
+  if (competitionEvaluation.sampleCount) player.highSchoolDetail += `\n競爭再評估：${formatHighSchoolCompetitionEvaluation(competitionEvaluation)}。`;
   player.highSchoolDetail += `\n交流賽：${match.opponent}，${match.outcome}；${match.consequence}`;
   player.highSchoolDetail += `\n阿哲回聲：${azhe.influenceDirection || "尚未形成"}；${azhe.summary || "未留下持續證據"}`;
   player.highSchoolDetail += `\n外部壓力：${rivalPressure.rivalName || "高橋"}（${rivalPressure.entryType || "observed"}）；${rivalPressure.yearTwoPressure || "高二需再次驗證角色"}`;

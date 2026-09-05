@@ -222,11 +222,20 @@
     };
     const directStartForced = input.directStartForced === true;
     const gameContext = input.gameContext || {};
-    const decisionIdentity = [OPPORTUNITY_VERSION, matchId, playerId, input.opportunitySeed || "", actualRole,
+    const previousActualExposure = input.previousActualExposure ? {
+      appearanceType: input.previousActualExposure.appearanceType || "noAppearance",
+      plateAppearances: Math.max(0, Number(input.previousActualExposure.plateAppearances) || 0),
+      defensiveInnings: Math.max(0, Number(input.previousActualExposure.defensiveInnings) || 0)
+    } : null;
+    const evaluationTrend = clamp(input.evaluationTrend, -4, 4, 0);
+    const decisionIdentityParts = [OPPORTUNITY_VERSION, matchId, playerId, input.opportunitySeed || "", actualRole,
       input.projectedRole || "", input.playingTimeEnvironment || "medium", input.competitionDepth || "medium",
       input.positionNeed || "medium", coachUsageStyle, position.assigned, positionCapability, positionFit, positionExperience,
       gameContext.gameType || "game", gameContext.inning || 0, gameContext.scoreMargin || 0,
-      gameContext.expectedGameImportance || gameContext.importance || "regular", gameContext.leverage || "normal"].join("|");
+      gameContext.expectedGameImportance || gameContext.importance || "regular", gameContext.leverage || "normal"];
+    if (input.evaluationTrend !== undefined) decisionIdentityParts.push(evaluationTrend);
+    if (previousActualExposure) decisionIdentityParts.push([previousActualExposure.appearanceType, previousActualExposure.plateAppearances, previousActualExposure.defensiveInnings].join(":"));
+    const decisionIdentity = decisionIdentityParts.join("|");
     const opportunityHash = stableHash(decisionIdentity);
     const hashVariation = (opportunityHash % 31) - 15;
     const scoreBreakdown = {
@@ -242,6 +251,7 @@
       gameContext: deriveGameContextModifier(gameContext),
       deterministicVariation: hashVariation
     };
+    if (input.evaluationTrend !== undefined) scoreBreakdown.evaluationTrend = Math.round(evaluationTrend);
     const opportunityScore = Object.values(scoreBreakdown).reduce((sum, value) => sum + Number(value || 0), 0);
     let plannedUsage = resolvePlannedAppearance(opportunityScore, actualRole, coachUsageStyle, opportunityHash);
     let exposureSource = "opportunity-resolver";
@@ -276,6 +286,8 @@
       competitionDepth: input.competitionDepth || "medium",
       positionCompetition: input.competitionDepth || "medium",
       positionNeed: input.positionNeed || "medium",
+      evaluationTrend,
+      previousActualExposure,
       coachUsageStyle,
       positionCapability,
       positionFit,
