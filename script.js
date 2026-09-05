@@ -6023,7 +6023,7 @@ function getHighSchoolMatchPresentation(match = prepareHighSchoolYearOneMatch())
   });
 }
 
-function createHighSchoolMatchSimulationRoster(role, playerPosition) {
+function createLegacyHighSchoolMatchSimulationRoster(role, playerPosition) {
   const positions = ["投手", "捕手", "一壘手", "二壘手", "三壘手", "游擊手", "左外野手", "中外野手", "右外野手"];
   const homeNames = ["佐藤", "森", "小林", "中村", "伊藤", "渡邊", "山田", "吉田", "松本"];
   const awayNames = ["高橋", "石井", "清水", "林", "山口", "阿部", "池田", "橋本", "山崎"];
@@ -6047,6 +6047,37 @@ function createHighSchoolMatchSimulationRoster(role, playerPosition) {
   return {
     home: { lineup: home, bench: role === "starter" ? [] : [playerEntity] },
     away: { lineup: away, bench: [] }
+  };
+}
+
+function createHighSchoolMatchSimulationRoster(role, playerPosition, simulationSeed = 1) {
+  if (typeof TeamRosterFoundation === "undefined" || typeof TeamStrengthModel === "undefined") {
+    return createLegacyHighSchoolMatchSimulationRoster(role, playerPosition);
+  }
+  const selectedSchool = getSelectedHighSchoolContext(player);
+  const playerRole = role === "starter" ? "starter" : "bench";
+  const playerActor = {
+    id: "player", name: player.name || "你", age: player.age, primaryPosition: playerPosition,
+    secondaryPositions: player.secondaryPositions || [], bats: player.bats, throws: player.throws,
+    simulationCapability: {
+      offense: getOffensiveSimulationCapability(player),
+      defense: getDefensiveSimulationCapability(player, playerPosition)
+    }
+  };
+  const homeRoster = TeamRosterFoundation.generateTeamRoster({
+    teamId: selectedSchool?.schoolId || "home-school", schoolId: selectedSchool?.schoolId || "home-school",
+    schoolStandard: selectedSchool?.schoolTier || "standard", yearIdentity: `hs-y1-${player.age || 15}`,
+    seed: `${simulationSeed}|home`, playerActor, playerRole, playerPosition
+  });
+  const awayRoster = TeamRosterFoundation.generateTeamRoster({
+    teamId: "regional-power-school", schoolId: "regional-power-school", schoolStandard: "competitive",
+    yearIdentity: `hs-y1-${player.age || 15}`, seed: `${simulationSeed}|away`
+  });
+  const homeStrength = TeamStrengthModel.deriveTeamStrengthProfile(homeRoster);
+  const awayStrength = TeamStrengthModel.deriveTeamStrengthProfile(awayRoster);
+  return {
+    home: TeamRosterFoundation.toMatchRoster(homeRoster, homeStrength),
+    away: TeamRosterFoundation.toMatchRoster(awayRoster, awayStrength)
   };
 }
 
@@ -6121,7 +6152,7 @@ function enterHighSchoolMatchPlayer(match) {
 
 function getOffensiveSimulationCapability(subject = player) {
   if (subject?.id === "player") subject = player;
-  if (subject?.source === "simulation-roster") {
+  if (["simulation-roster", "team-roster-foundation"].includes(subject?.source)) {
     return Object.freeze({ contact: subject.contact, power: subject.power, speed: subject.speed, discipline: Math.round((subject.contact + subject.speed) / 2) });
   }
   const skills = subject.baseballSkills || {};
@@ -6134,7 +6165,7 @@ function getOffensiveSimulationCapability(subject = player) {
 }
 
 function getDefensiveSimulationCapability(subject = player, position = player.primaryPosition, matchContext = subject?.highSchoolMatch) {
-  if (subject?.source === "simulation-roster") {
+  if (["simulation-roster", "team-roster-foundation"].includes(subject?.source)) {
     return Object.freeze({ fielding: subject.defense, reaction: subject.defense, range: subject.defense, arm: subject.arm, throwing: subject.arm, decision: Math.round((subject.defense + subject.contact) / 2) });
   }
   const rawSkills = subject.baseballSkills || {};
@@ -8806,7 +8837,7 @@ function prepareHighSchoolYearOneMatch() {
   const assignedPosition = opportunityDecision?.assignedPosition || developmentPositionOverride || position;
   const developmentTestCapabilityOverride = developmentPositionOverride
     ? createDevelopmentMatchPositionTestCapabilityOverride(developmentPositionOverride, player) : null;
-  const rosters = createHighSchoolMatchSimulationRoster(starts ? "starter" : code === "starter" ? "bench" : code, assignedPosition);
+  const rosters = createHighSchoolMatchSimulationRoster(starts ? "starter" : code === "starter" ? "bench" : code, assignedPosition, simulationSeed);
   const playerLineupSlot = rosters.home.lineup.findIndex(item => item.id === "player");
   player.highSchoolMatch = {
     id: "hs-y1-autumn-exhibition",
@@ -9262,11 +9293,13 @@ function getHighSchoolOffensivePlateApproachAbilities(subject = player) {
 
 function ensureHighSchoolPitcherRuntimeState(match) {
   if (!match || typeof PitchSequencing === "undefined") return null;
+  const opponentPitcher = (match.rosters?.away?.lineup || []).find(actor => actor.position === "投手") || null;
+  const rosterControl = Number(opponentPitcher?.pitchingProfile?.control);
   const fallback = {
-    runtimeId: `${match.id || "match"}|opponent-pitcher`,
+    runtimeId: `${match.id || "match"}|${opponentPitcher?.id || "opponent-pitcher"}`,
     responseProfile: PitcherMentalState.RESPONSE_PROFILE_FIXTURES.simplifyReset,
     mentalState: { arousal: 50, confidence: 50, cognitiveLoad: 40, resultAttachment: 35 },
-    control: 8
+    control: Number.isFinite(rosterControl) ? Math.max(1, Math.min(20, rosterControl * 2)) : 8
   };
   match.pitcherRuntimeState = PitchSequencing.normalizePitcherRuntimeState(match.pitcherRuntimeState, fallback);
   if (!Array.isArray(match.pitcherSequencingDebugTrace)) match.pitcherSequencingDebugTrace = [];

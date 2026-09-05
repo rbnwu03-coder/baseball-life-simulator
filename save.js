@@ -389,14 +389,14 @@ function normalizeSave(saved) {
     : saved.highSchoolMatch?.matchExperience ? JSON.parse(JSON.stringify(saved.highSchoolMatch.matchExperience)) : null;
   fresh.highSchoolMatch.rosters = saved.highSchoolMatch?.rosters
     ? {
-      home: saved.highSchoolMatch.rosters.home ? {
+      home: saved.highSchoolMatch.rosters.home ? Object.assign({}, JSON.parse(JSON.stringify(saved.highSchoolMatch.rosters.home)), {
         lineup: Array.isArray(saved.highSchoolMatch.rosters.home.lineup) ? saved.highSchoolMatch.rosters.home.lineup.map(item => Object.assign({}, item)) : [],
         bench: Array.isArray(saved.highSchoolMatch.rosters.home.bench) ? saved.highSchoolMatch.rosters.home.bench.map(item => Object.assign({}, item)) : []
-      } : null,
-      away: saved.highSchoolMatch.rosters.away ? {
+      }) : null,
+      away: saved.highSchoolMatch.rosters.away ? Object.assign({}, JSON.parse(JSON.stringify(saved.highSchoolMatch.rosters.away)), {
         lineup: Array.isArray(saved.highSchoolMatch.rosters.away.lineup) ? saved.highSchoolMatch.rosters.away.lineup.map(item => Object.assign({}, item)) : [],
         bench: Array.isArray(saved.highSchoolMatch.rosters.away.bench) ? saved.highSchoolMatch.rosters.away.bench.map(item => Object.assign({}, item)) : []
-      } : null
+      }) : null
     }
     : { home: null, away: null };
   if (
