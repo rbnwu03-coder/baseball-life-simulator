@@ -116,6 +116,10 @@ function normalizeSave(saved) {
     : Array.isArray(saved.highSchoolOpportunityHistory) ? saved.highSchoolOpportunityHistory.slice(-5) : [];
   fresh.highSchoolNextOpportunity = saved.highSchoolNextOpportunity
     ? JSON.parse(JSON.stringify(saved.highSchoolNextOpportunity)) : null;
+  fresh.highSchoolYearOneStartingRole = typeof saved.highSchoolYearOneStartingRole === "string"
+    ? saved.highSchoolYearOneStartingRole : "";
+  fresh.highSchoolYearOneMatchHistory = Array.isArray(saved.highSchoolYearOneMatchHistory)
+    ? saved.highSchoolYearOneMatchHistory.slice(-2).map(item => JSON.parse(JSON.stringify(item))) : [];
   fresh.highSchoolMatch = Object.assign({}, highSchoolDefaults.highSchoolMatch, saved.highSchoolMatch || {});
   fresh.highSchoolMatch.scores = Object.assign({}, highSchoolDefaults.highSchoolMatch.scores, saved.highSchoolMatch?.scores || {});
   fresh.highSchoolMatch.runners = Array.isArray(saved.highSchoolMatch?.runners) ? saved.highSchoolMatch.runners : [];

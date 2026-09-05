@@ -214,9 +214,9 @@ verify("22. Outcome 保留閱讀與 Continue，前兩段不推進 Career Spine",
 verify("23. Regulation 終場後只推進一次，Continue 才前往下一個高一事件", evaluate(`(() => {
   __setupHighSchoolMatch("starter","內野手","high");let safety=0;while(!player.highSchoolMatch.completed&&safety++<1200){if(isHighSchoolMatchDecisionVisible(player.highSchoolMatch)){const choice=getHighSchoolYearOneMatchMomentChoices()[0];chooseHighSchoolYearOneMatchMoment(choice.matchDecision,choice.matchMomentId,()=>0.99);if(!player.highSchoolMatch.completed)continueYouthSeasonOutcome();}else advanceHighSchoolMatchPlaybackStep(player.highSchoolMatch);}const held=player.highSchoolStep===6&&pendingYouthSeasonOutcome?.eventId==="high_school_showcase";continueYouthSeasonOutcome();return held&&getCurrentEventId()==="high_school_call_home";
 })()`));
-verify("24. Regulation 合法結束的比賽仍可進入既有 Year One settlement", evaluate(`(() => {
+verify("24. Regulation 合法結束的 legacy fixture 仍可跳過不存在的 Opportunity 2 並進入 Year One settlement", evaluate(`(() => {
   __setupHighSchoolMatch("rotation","內野手","high");let safety=0;while(!player.highSchoolMatch.completed&&safety++<1200){if(isHighSchoolMatchDecisionVisible(player.highSchoolMatch)){const choice=getHighSchoolYearOneMatchMomentChoices()[0];chooseHighSchoolYearOneMatchMoment(choice.matchDecision,choice.matchMomentId,()=>0.99);continueYouthSeasonOutcome();}else advanceHighSchoolMatchPlaybackStep(player.highSchoolMatch);}
-  choose("high_school_call_home",0);choose("high_school_scout_feedback",0);return player.highSchoolYearOneComplete&&player.chapter==="青棒第一年小結"&&player.highSchoolStep===8&&player.highSchoolDetail.includes("關鍵時刻");
+  choose("high_school_call_home",0);choose("high_school_scout_feedback",0);return player.highSchoolYearOneComplete&&player.chapter==="青棒第一年小結"&&player.highSchoolStep===10&&player.highSchoolDetail.includes("關鍵時刻");
 })()`));
 
 const visible = evaluate(`(() => {__setupHighSchoolMatch("bench","外野手","low");const text=getHighSchoolYearOneMatchPresentation()+getHighSchoolYearOneMatchMomentChoices().map(item=>item.text).join("");return !["hs_y1_match_moment","matchDecision","playerContribution","outcomeTier"].some(raw=>text.includes(raw));})()`);

@@ -1796,13 +1796,14 @@ function showStatChanges(before, after, memory = "", options = {}) {
 }
 
 function shouldShowYouthSeasonOutcome(eventId) {
-  return eventId === "high_school_showcase" || (player.chapter === "少棒第一季" && youthSeasonOutcomeEventIds.has(eventId));
+  return isHighSchoolYearOneMatchEventId(eventId) || (player.chapter === "少棒第一季" && youthSeasonOutcomeEventIds.has(eventId));
 }
 
 function getYouthSeasonOutcomeHeading(eventId) {
-  if (eventId === "high_school_showcase") {
+  if (isHighSchoolYearOneMatchEventId(eventId)) {
     const count = player.highSchoolMatch?.completedMoments?.length || 1;
-    return player.highSchoolMatch?.completed ? "秋季交流賽完整結果" : `秋季交流賽・關鍵時刻 ${count} 的結果`;
+    const label = eventId === "high_school_followup_evaluation" ? "第二次實戰評估" : "秋季交流賽";
+    return player.highSchoolMatch?.completed ? `${label}完整結果` : `${label}・關鍵時刻 ${count} 的結果`;
   }
   if (eventId === "high_school_year_two_spring_game") return "春季聯賽打席結果";
   if (eventId === "youth_position_trial") return "這次輪測的結果";
@@ -1813,7 +1814,7 @@ function getYouthSeasonOutcomeHeading(eventId) {
 }
 
 function getYouthSeasonOutcomeReaction(eventId) {
-  if (eventId === "high_school_showcase") return `${player.highSchoolMatch.coachReaction || "高中現任教練記下這次處理。"}${player.highSchoolMatch.teamReaction ? ` ${player.highSchoolMatch.teamReaction}` : ""}`;
+  if (isHighSchoolYearOneMatchEventId(eventId)) return `${player.highSchoolMatch.coachReaction || "高中現任教練記下這次處理。"}${player.highSchoolMatch.teamReaction ? ` ${player.highSchoolMatch.teamReaction}` : ""}`;
   if (eventId === "high_school_year_two_spring_game") return "記錄員把這個打席寫進春季聯賽成績；高中現任教練沒有改動深度表，只讓下一棒走進打擊區。";
   if (eventId === "youth_position_trial") return "山本教練把三球的結果寫進分組表，下一段訓練會依這個安排開始。";
   if (eventId === "youth_teammate") return "器材室的門關上後，阿哲帶著這次互動離開球場；下一次合作時，他不會把它當作沒發生過。";
@@ -2577,7 +2578,7 @@ function getHighSchoolFirstOffensiveMomentRolePresentation(match) {
 }
 
 function getHighSchoolYearOneMatchPresentation() {
-  const match = prepareHighSchoolYearOneMatch();
+  const match = prepareCurrentHighSchoolYearOneMatch();
   const plateDecisionContext = typeof PlateDecisionFoundation !== "undefined"
     ? PlateDecisionFoundation.getPlayerFacingContext(match.activeSituation) : null;
   const visibleState = getHighSchoolMatchPresentation(match).currentSituation;
@@ -2600,7 +2601,7 @@ function getHighSchoolYearOneMatchPresentation() {
 }
 
 function renderHighSchoolYearOneMatch(event, prepared = {}) {
-  const match = prepareHighSchoolYearOneMatch();
+  const match = prepareCurrentHighSchoolYearOneMatch();
   const decisionActive = isHighSchoolMatchDecisionVisible(match);
   const agencyActive = decisionActive && match.simulationPhase === "offensive_agency_ready";
   if (decisionActive && !agencyActive) markHighSchoolMatchDecisionLifecycle("presented", match);
@@ -2617,12 +2618,14 @@ function renderHighSchoolYearOneMatch(event, prepared = {}) {
     return `<button type="button" onclick="${handler}"><span>${escapeHtml(choice.text)}</span>${readiness}</button>`;
   }).join("");
   const text = prepared.text || getHighSchoolYearOneMatchPresentation();
-  const sceneContextHtml = prepared.sceneContextHtml || renderSceneContext(getSceneContext("high_school_showcase", event));
+  const matchEventId = getHighSchoolYearOneMatchEventId(match);
+  const sceneContextHtml = prepared.sceneContextHtml || renderSceneContext(getSceneContext(matchEventId, event));
   const bridgeInHtml = prepared.bridgeInHtml || "";
   const bridgeOutHtml = prepared.bridgeOutHtml || "";
   const model = getHighSchoolMatchPresentation(match);
-  const kicker = playbackActive ? "同一場交流賽・場上進行中"
-    : agencyActive ? "同一場交流賽・打席參與方式" : `同一場交流賽・第 ${match.completedMoments.length + 1} 個關鍵時刻`;
+  const matchLabel = match.opportunityIndex === 2 ? "第二次實戰評估" : "同一場交流賽";
+  const kicker = playbackActive ? `${matchLabel}・場上進行中`
+    : agencyActive ? `${matchLabel}・打席參與方式` : `${matchLabel}・第 ${match.completedMoments.length + 1} 個關鍵時刻`;
   const decisionContext = decisionActive
     ? `${agencyActive ? renderHighSchoolOffensiveAgencyContext(match) : match.currentDomain === "offense" ? `${renderHighSchoolPlateAppearanceContext(match)}${renderHighSchoolPlateDecisionContext(match)}${renderHighSchoolBatterAnticipationPanel(match)}` : ""}${agencyActive ? "" : `${renderHighSchoolOpponentInformation(model)}${renderHighSchoolCoachDirection(model)}`}`
     : "";
@@ -3328,7 +3331,7 @@ function isHighSchoolMatchPlaybackScheduled() {
 }
 
 function hasBlockingHighSchoolMatchOutcome() {
-  return pendingYouthSeasonOutcome?.eventId === "high_school_showcase";
+  return isHighSchoolYearOneMatchEventId(pendingYouthSeasonOutcome?.eventId);
 }
 
 function clearTransientYouthSeasonOutcome() {
@@ -3366,7 +3369,8 @@ function getHighSchoolMatchPlaybackDebugState(match = player.highSchoolMatch) {
   const timerHandlePresent = highSchoolMatchPlaybackTimer !== null;
   const timerScheduledFlag = highSchoolMatchPlaybackScheduled;
   return Object.freeze({
-    matchActive: Boolean(player.highSchoolMatch === match && match?.id === "hs-y1-autumn-exhibition" && getCurrentEventId() === "high_school_showcase"),
+    matchActive: Boolean(player.highSchoolMatch === match && isHighSchoolYearOneMatchEventId(getCurrentEventId())
+      && getCurrentEventId() === getHighSchoolYearOneMatchEventId(match)),
     matchCompleted,
     completed: matchCompleted,
     inning: Math.max(0, Number(match?.inning) || 0),
@@ -3438,18 +3442,19 @@ function resumeHighSchoolMatchPlayback(reason = "unspecified", match = player.hi
 function applyHighSchoolShowcaseEventSettlement(match, outcomeChoice) {
   if (match.eventSettlementApplied) return false;
   match.eventSettlementApplied = true;
-  applyConsequenceAtEvent("high_school_showcase");
-  updateGoalProgressForChoice("high_school_showcase", outcomeChoice);
+  const eventId = getHighSchoolYearOneMatchEventId(match);
+  applyConsequenceAtEvent(eventId);
+  updateGoalProgressForChoice(eventId, outcomeChoice);
   updateRoute();
   updateImpression();
-  processCareerArcEvent("high_school_showcase", outcomeChoice);
-  processEmotionalEvent("high_school_showcase", outcomeChoice);
-  processRelationshipPayoffs("high_school_showcase");
-  processAspirationEvent("high_school_showcase", outcomeChoice);
-  recordContinuityOutcome(createContinuityOutcome("high_school_showcase", outcomeChoice));
-  advanceNarrativeThread("high_school_showcase", outcomeChoice);
-  advanceAfterAction(null, "high_school_showcase");
-  tickPendingEvents("high_school_showcase");
+  processCareerArcEvent(eventId, outcomeChoice);
+  processEmotionalEvent(eventId, outcomeChoice);
+  processRelationshipPayoffs(eventId);
+  processAspirationEvent(eventId, outcomeChoice);
+  recordContinuityOutcome(createContinuityOutcome(eventId, outcomeChoice));
+  advanceNarrativeThread(eventId, outcomeChoice);
+  advanceAfterAction(null, eventId);
+  tickPendingEvents(eventId);
   return true;
 }
 
@@ -3457,7 +3462,7 @@ function showHighSchoolCompletedMatchOutcome(match, choiceText = "比賽依正�
   stopHighSchoolMatchPlayback();
   const outcomeChoice = { text: choiceText, memory: match.performanceSummary, executionText, pitchFeed, coachFeedback, offensiveExplainability };
   applyHighSchoolShowcaseEventSettlement(match, outcomeChoice);
-  renderYouthSeasonOutcome("high_school_showcase", outcomeChoice, statFeedbackHtml);
+  renderYouthSeasonOutcome(getHighSchoolYearOneMatchEventId(match), outcomeChoice, statFeedbackHtml);
 }
 
 function scheduleHighSchoolMatchPlayback(match = player.highSchoolMatch, reason = "scheduler") {
@@ -3562,8 +3567,8 @@ function getHighSchoolDecisionExecutionText(match, decision) {
 }
 
 function chooseHighSchoolOffensiveAgency(selection, expectedMomentId) {
-  if (isTransitioning || pendingYouthSeasonOutcome || getCurrentEventId() !== "high_school_showcase") return false;
-  const match = prepareHighSchoolYearOneMatch();
+  if (isTransitioning || pendingYouthSeasonOutcome || !isHighSchoolYearOneMatchEventId(getCurrentEventId())) return false;
+  const match = prepareCurrentHighSchoolYearOneMatch();
   const state = match.offensivePlayerAgencyState;
   if (!isHighSchoolMatchDecisionVisible(match) || match.simulationPhase !== "offensive_agency_ready"
     || state?.status !== "pending" || state.momentId !== expectedMomentId || !["manual", "simulate"].includes(selection)) return false;
@@ -3625,8 +3630,9 @@ function chooseHighSchoolOffensiveAgency(selection, expectedMomentId) {
 }
 
 function chooseHighSchoolYearOneMatchMoment(decision, expectedMomentId, randomSource = Math.random) {
-  if (isTransitioning || pendingYouthSeasonOutcome || getCurrentEventId() !== "high_school_showcase") return false;
-  const match = prepareHighSchoolYearOneMatch();
+  if (isTransitioning || pendingYouthSeasonOutcome || !isHighSchoolYearOneMatchEventId(getCurrentEventId())) return false;
+  const match = prepareCurrentHighSchoolYearOneMatch();
+  const matchEventId = getHighSchoolYearOneMatchEventId(match);
   if (match.simulationPhase === "offensive_agency_ready") {
     const agencySelection = decision === "agencyManual" ? "manual" : decision === "agencySimulate" ? "simulate" : "";
     return agencySelection ? chooseHighSchoolOffensiveAgency(agencySelection, expectedMomentId) : false;
@@ -3661,7 +3667,7 @@ function chooseHighSchoolYearOneMatchMoment(decision, expectedMomentId, randomSo
       offensiveExplainability: createHighSchoolOffensiveExplainabilityModel(resolvedMoment)
     };
     if (match.completed) showHighSchoolCompletedMatchOutcome(match, choice.text, statFeedbackHtml, outcomeChoice.executionText, outcomeChoice.pitchFeed, outcomeChoice.coachFeedback, outcomeChoice.offensiveExplainability);
-    else renderYouthSeasonOutcome("high_school_showcase", outcomeChoice, statFeedbackHtml);
+    else renderYouthSeasonOutcome(matchEventId, outcomeChoice, statFeedbackHtml);
     return true;
   }
   if (match.currentDomain === "offense" && typeof PlateDecisionFoundation !== "undefined") {
@@ -3712,7 +3718,7 @@ function chooseHighSchoolYearOneMatchMoment(decision, expectedMomentId, randomSo
     showHighSchoolCompletedMatchOutcome(match, choice.text, statFeedbackHtml, executionText, outcomeChoice.pitchFeed, outcomeChoice.coachFeedback, outcomeChoice.offensiveExplainability);
   } else {
     outcomeChoice.memory = resolvedMoment.causeExplanation ? resolvedMoment.outcome : `${resolvedMoment.outcome}。${resolvedMoment.consequence}`;
-    renderYouthSeasonOutcome("high_school_showcase", outcomeChoice, statFeedbackHtml);
+    renderYouthSeasonOutcome(matchEventId, outcomeChoice, statFeedbackHtml);
   }
   return true;
 }
@@ -3738,7 +3744,7 @@ function renderHighSchoolPostMatchOutcome(choice, statFeedbackHtml) {
   setChoiceTransitionState(false);
   document.getElementById("story").innerHTML = `<article class="event-card outcome choice-outcome-card high-school-post-match" aria-labelledby="outcomeTitle">
     ${renderHighSchoolYearOneScore()}
-    <div class="event-kicker choice-outcome-kicker">秋季交流賽・終場</div>
+    <div class="event-kicker choice-outcome-kicker">${match.opportunityIndex === 2 ? "第二次實戰評估" : "秋季交流賽"}・終場</div>
     <h2 id="outcomeTitle" tabindex="-1">${escapeHtml(match.teamResult)}</h2>
     ${confirmationHtml}${offensiveExplainabilityHtml}${executionHtml}${pitchFeedHtml}
     <section class="post-match-section" aria-labelledby="postMatchPerformance"><small id="postMatchPerformance">你的關鍵表現</small><ol>${performances || "<li>你依照目前角色完成了這場比賽。</li>"}</ol></section>
@@ -3753,26 +3759,26 @@ function renderHighSchoolPostMatchOutcome(choice, statFeedbackHtml) {
 }
 
 function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
-  if (eventId === "high_school_showcase") {
+  if (isHighSchoolYearOneMatchEventId(eventId)) {
     stopHighSchoolMatchPlayback("outcome-entered");
     recordHighSchoolMatchPlaybackTrace("outcome-enter", eventId, player.highSchoolMatch);
   }
   pendingYouthSeasonOutcome = { eventId };
-  if (eventId === "high_school_showcase" && player.highSchoolMatch?.completed) {
+  if (isHighSchoolYearOneMatchEventId(eventId) && player.highSchoolMatch?.completed) {
     renderHighSchoolPostMatchOutcome(choice, statFeedbackHtml);
   } else {
     const competitionFrame = renderCompetitionPresentation(eventId);
   const integratedScoreFrame = eventId === "high_school_year_two_spring_game"
     ? renderHighSchoolSpringScore()
-    : eventId === "high_school_showcase" ? renderHighSchoolYearOneScore(true) : "";
+    : isHighSchoolYearOneMatchEventId(eventId) ? renderHighSchoolYearOneScore(true) : "";
   const choiceLabel = typeof choice?.text === "string" ? choice.text.trim() : "";
   const judgmentText = typeof choice?.judgmentText === "string" ? choice.judgmentText.trim() : "";
   const executionText = typeof choice?.executionText === "string" ? choice.executionText.trim() : "";
-  const offensiveExplainabilityHtml = eventId === "high_school_showcase" ? renderHighSchoolOffensiveExplainability(choice?.offensiveExplainability) : "";
+  const offensiveExplainabilityHtml = isHighSchoolYearOneMatchEventId(eventId) ? renderHighSchoolOffensiveExplainability(choice?.offensiveExplainability) : "";
   const narrativeOutcome = typeof choice?.memory === "string" ? choice.memory.trim() : "";
   const pitchFeed = Array.isArray(choice?.pitchFeed) ? choice.pitchFeed.filter(item => typeof item === "string" && item.trim()) : [];
   const causeText = typeof choice?.causeText === "string" ? choice.causeText.trim() : "";
-  const reactionValue = eventId === "high_school_showcase" && typeof choice?.coachFeedback === "string" && choice.coachFeedback.trim()
+  const reactionValue = isHighSchoolYearOneMatchEventId(eventId) && typeof choice?.coachFeedback === "string" && choice.coachFeedback.trim()
     ? `${choice.coachFeedback.trim()}${player.highSchoolMatch?.teamReaction ? ` ${player.highSchoolMatch.teamReaction}` : ""}`
     : getYouthSeasonOutcomeReaction(eventId);
   const worldReaction = typeof reactionValue === "string" ? reactionValue.trim() : "";
@@ -3831,7 +3837,7 @@ function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
       <button type="button" class="outcome-continue-button" onclick="continueYouthSeasonOutcome()">繼續</button>
     </div>`;
   }
-  if (eventId === "high_school_showcase") {
+  if (isHighSchoolYearOneMatchEventId(eventId)) {
     markHighSchoolMatchDecisionLifecycle("outcomePresented", player.highSchoolMatch, { completed: Boolean(player.highSchoolMatch?.completed) });
     document.getElementById("choices").innerHTML += renderHighSchoolMatchOpportunityDebugControls();
   }
@@ -3842,18 +3848,18 @@ function renderYouthSeasonOutcome(eventId, choice, statFeedbackHtml) {
 function continueYouthSeasonOutcome() {
   if (!pendingYouthSeasonOutcome) return false;
   const completedEventId = pendingYouthSeasonOutcome.eventId;
-  if (completedEventId === "high_school_showcase") {
+  if (isHighSchoolYearOneMatchEventId(completedEventId)) {
     recordHighSchoolMatchPlaybackTrace("outcome-exit", completedEventId, player.highSchoolMatch);
     markHighSchoolMatchDecisionLifecycle("continue", player.highSchoolMatch);
   }
   setOutcomeContinueState(true);
-  if (completedEventId === "high_school_showcase" && player.highSchoolMatch?.completed) {
+  if (isHighSchoolYearOneMatchEventId(completedEventId) && player.highSchoolMatch?.completed) {
     player.highSchoolMatch.developmentPresentationCompleted = true;
   }
   pendingYouthSeasonOutcome = null;
   isTransitioning = false;
   showCurrentEvent();
-  if (completedEventId === "high_school_showcase" && !player.highSchoolMatch?.completed) {
+  if (isHighSchoolYearOneMatchEventId(completedEventId) && !player.highSchoolMatch?.completed) {
     resumeHighSchoolMatchPlayback("outcome-continue", player.highSchoolMatch);
   }
   return true;
@@ -3882,7 +3888,7 @@ function choose(eventId, index) {
   if (eventId === "high_school_year_two_spring_game" && choice.gameplayApproach) {
     return chooseHighSchoolSpringApproach(choice.gameplayApproach);
   }
-  if (eventId === "high_school_showcase" && choice.matchDecision) {
+  if (isHighSchoolYearOneMatchEventId(eventId) && choice.matchDecision) {
     return chooseHighSchoolYearOneMatchMoment(choice.matchDecision, choice.matchMomentId);
   }
   if (isHighSchoolTrainingEvent(eventId) && choice.trainingCode) {
@@ -4214,6 +4220,7 @@ function resolveHighSchoolProvisionalRole() {
     bench: "同一場交流賽的指定代打與短局守備"
   };
   player.highSchoolRoleCode = code;
+  if (!player.highSchoolYearOneStartingRole) player.highSchoolYearOneStartingRole = code;
   player.highSchoolTeamRole = labels[code];
   player.highSchoolRoleContext = {
     code,
@@ -4235,6 +4242,27 @@ const highSchoolYearOneMomentIds = Object.freeze([
   "hs_y1_match_moment_2",
   "hs_y1_match_moment_3"
 ]);
+
+const highSchoolYearOneMatchEventIds = Object.freeze(["high_school_showcase", "high_school_followup_evaluation"]);
+
+function isHighSchoolYearOneMatchEventId(eventId) {
+  return highSchoolYearOneMatchEventIds.includes(eventId);
+}
+
+function getHighSchoolYearOneMatchEventId(match = player.highSchoolMatch) {
+  if (isHighSchoolYearOneMatchEventId(match?.eventId)) return match.eventId;
+  return match?.id === "hs-y1-followup-evaluation-2" ? "high_school_followup_evaluation" : "high_school_showcase";
+}
+
+function createHighSchoolMatchSimulationSeedFromIdentity(identity) {
+  const text = String(identity || "hs-y1-match");
+  let hash = 2166136261;
+  for (let index = 0; index < text.length; index += 1) {
+    hash ^= text.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return Math.max(1, hash >>> 0);
+}
 
 function getHighSchoolYearOneMomentId(match = player.highSchoolMatch) {
   if (match?.completed) return "";
@@ -5925,7 +5953,7 @@ function getHighSchoolMatchLiveFeed(match, startIndex = Math.max(0, getHighSchoo
   return selected.sort((a, b) => formatted.indexOf(a) - formatted.indexOf(b)).slice(-4);
 }
 
-function getHighSchoolMatchPresentation(match = prepareHighSchoolYearOneMatch()) {
+function getHighSchoolMatchPresentation(match = prepareCurrentHighSchoolYearOneMatch()) {
   const regulationInnings = Math.max(1, Number(match.regulationInnings) || 7);
   const cursor = getHighSchoolPresentedEventCursor(match);
   const snapshot = getHighSchoolPresentationSnapshot(match);
@@ -8777,7 +8805,7 @@ function isOffensiveDecisionChoiceLegal(choice, match) {
   return (choice.requirements || []).every(requirement => checks[requirement] === true);
 }
 
-function getHighSchoolYearOneMatchMomentChoices(match = prepareHighSchoolYearOneMatch()) {
+function getHighSchoolYearOneMatchMomentChoices(match = prepareCurrentHighSchoolYearOneMatch()) {
   const activeSituation = typeof MatchSituationLifecycle !== "undefined"
     ? MatchSituationLifecycle.normalizeSituation(match?.activeSituation) : null;
   if (activeSituation?.type === "plateDecision"
@@ -8863,9 +8891,12 @@ function getHighSchoolPlayingTimeAssignmentText(decision) {
   return `本場先從板凳待命，教練預計在${decision.plannedUsage.entryInning || 5}局後依比分與守位需求決定是否換你上場`;
 }
 
-function prepareHighSchoolYearOneMatch() {
+function prepareHighSchoolYearOneMatch(options = {}) {
   assertHighSchoolMatchCapabilityAdmission(player);
-  if (player.highSchoolMatch?.id === "hs-y1-autumn-exhibition") {
+  const targetMatchId = options.matchId || "hs-y1-autumn-exhibition";
+  const targetEventId = options.eventId || "high_school_showcase";
+  const opportunityIndex = Math.max(1, Number(options.opportunityIndex) || 1);
+  if (player.highSchoolMatch?.id === targetMatchId) {
     const match = player.highSchoolMatch;
     if (match.completed || (typeof match.simulationPhase === "string" && match.rosters?.home?.lineup?.length === 9 && match.rosters?.away?.lineup?.length === 9)) {
       match.currentMomentId = getHighSchoolYearOneMomentId(match);
@@ -8878,32 +8909,40 @@ function prepareHighSchoolYearOneMatch() {
     }
   }
   const code = ["starter", "rotation", "bench"].includes(player.highSchoolRoleCode) ? player.highSchoolRoleCode : "bench";
+  if (!player.highSchoolYearOneStartingRole) player.highSchoolYearOneStartingRole = code;
   const roleAssignments = {
     starter: { lineupStatus: "starter", entryWindowInning: 1, history: `以${player.primaryPosition || "守備"}先發，從開賽起進入守備與打序` },
     rotation: { lineupStatus: "bench", entryWindowInning: 4, history: `本場先從板凳待命，預計在中段代打並接替${player.primaryPosition || "守備"}` },
     bench: { lineupStatus: "bench", entryWindowInning: 5, history: `本場先從板凳觀察，等待中後段代打與短局守備機會` }
   };
   const position = player.primaryPosition || "內野手";
-  const requestedDevelopmentPosition = infieldPositions.includes(pendingHighSchoolMatchPositionOverride)
+  const requestedDevelopmentPosition = opportunityIndex === 1 && infieldPositions.includes(pendingHighSchoolMatchPositionOverride)
     ? pendingHighSchoolMatchPositionOverride : "";
   if (requestedDevelopmentPosition && !isDevelopmentTestPositionLegalForThrowingHand(requestedDevelopmentPosition, player.throws, player.age)) {
     throw new Error(getDevelopmentTestPositionLegalityMessage(requestedDevelopmentPosition, player.throws));
   }
   const developmentPositionOverride = requestedDevelopmentPosition;
-  const simulationSeed = createHighSchoolMatchSimulationSeed();
-  const directStartForced = Array.isArray(player.flags) && player.flags.includes("direct_start_history");
-  const opportunityDecision = createHighSchoolPlayingTimeOpportunity({
-    matchId: "hs-y1-autumn-exhibition",
+  const suppliedOpportunity = options.opportunityDecision || null;
+  const simulationSeed = suppliedOpportunity
+    ? createHighSchoolMatchSimulationSeedFromIdentity(suppliedOpportunity.decisionId || suppliedOpportunity.matchId)
+    : createHighSchoolMatchSimulationSeed();
+  const directStartForced = opportunityIndex === 1
+    && Array.isArray(player.flags) && player.flags.includes("direct_start_history");
+  const opportunityDecision = suppliedOpportunity || createHighSchoolPlayingTimeOpportunity({
+    matchId: targetMatchId,
     actualRole: code,
     requestedPosition: developmentPositionOverride || position,
     directStartForced,
-    opportunityIndex: 1,
-    opportunityPhase: "autumn-exhibition"
+    opportunityIndex,
+    opportunityPhase: options.opportunityPhase || "autumn-exhibition"
   });
+  if ((suppliedOpportunity || opportunityIndex > 1) && (!opportunityDecision || opportunityDecision.matchId !== targetMatchId)) {
+    throw new Error(`高一第 ${opportunityIndex} 次實戰必須直接消費相同 match identity 的既有 Opportunity。`);
+  }
   if (opportunityDecision && typeof HighSchoolCompetitionReassessment !== "undefined") {
     player.highSchoolOpportunityHistory = HighSchoolCompetitionReassessment.recordOpportunity(player.highSchoolOpportunityHistory, {
       opportunity: opportunityDecision,
-      opportunityIndex: 1,
+      opportunityIndex,
       roleAtCreation: code
     });
   }
@@ -8931,8 +8970,11 @@ function prepareHighSchoolYearOneMatch() {
   );
   const playerLineupSlot = rosters.home.lineup.findIndex(item => item.id === "player");
   player.highSchoolMatch = {
-    id: "hs-y1-autumn-exhibition",
-    opponent: "高橋所屬的地區強校",
+    id: targetMatchId,
+    eventId: targetEventId,
+    matchType: options.matchType || "autumn-exhibition",
+    opportunityIndex,
+    opponent: options.opponent || "高橋所屬的地區強校",
     inning: 1,
     half: "上",
     outs: 0,
@@ -9030,6 +9072,28 @@ function prepareHighSchoolYearOneMatch() {
   pendingHighSchoolFullMatchTest = false;
   player.highSchoolRoleContext.assignment = roleAssignment.history;
   return player.highSchoolMatch;
+}
+
+function prepareHighSchoolFollowupEvaluationMatch() {
+  const opportunity = player.highSchoolNextOpportunity;
+  if (!opportunity || opportunity.matchId !== "hs-y1-followup-evaluation-2" || Number(opportunity.opportunityIndex) !== 2) {
+    throw new Error("第二次隊內實戰評估缺少既有 Opportunity N+1。");
+  }
+  return prepareHighSchoolYearOneMatch({
+    matchId: opportunity.matchId,
+    eventId: "high_school_followup_evaluation",
+    matchType: "evaluation-practice",
+    opponent: "受邀協助評估的地區校隊",
+    opportunityIndex: 2,
+    opportunityPhase: "post-autumn-evaluation",
+    opportunityDecision: opportunity
+  });
+}
+
+function prepareCurrentHighSchoolYearOneMatch() {
+  return getCurrentEventId() === "high_school_followup_evaluation"
+    ? prepareHighSchoolFollowupEvaluationMatch()
+    : prepareHighSchoolYearOneMatch();
 }
 
 function getHighSchoolYearOneMomentAbilityScore(match, decision) {
@@ -10866,9 +10930,10 @@ function applyHighSchoolCompetitionMatchSettlement(match) {
   player.highSchoolCompetitionEvaluation.lastReassessmentAt = `${match.id}|settled`;
 
   const currentOpportunity = match.gameExposureState.opportunitySnapshot || {};
+  const opportunityIndex = Math.max(1, Number(match.opportunityIndex || currentOpportunity.opportunityIndex) || 1);
   player.highSchoolOpportunityHistory = HighSchoolCompetitionReassessment.recordOpportunity(player.highSchoolOpportunityHistory, {
     opportunity: currentOpportunity,
-    opportunityIndex: 1,
+    opportunityIndex,
     roleAtCreation: currentOpportunity.actualRole || match.role,
     actualExposure: {
       appearanceType: match.gameExposureState.appearanceType,
@@ -10887,7 +10952,7 @@ function applyHighSchoolCompetitionMatchSettlement(match) {
     }
   });
 
-  const nextOpportunity = createHighSchoolPlayingTimeOpportunity({
+  const nextOpportunity = opportunityIndex === 1 ? createHighSchoolPlayingTimeOpportunity({
     matchId: "hs-y1-followup-evaluation-2",
     actualRole: player.highSchoolRoleCode,
     requestedPosition: readiness.position,
@@ -10896,7 +10961,7 @@ function applyHighSchoolCompetitionMatchSettlement(match) {
     opportunityPhase: "post-autumn-evaluation",
     evaluationTrend: player.highSchoolCompetitionEvaluation.trendScore,
     previousActualExposure: match.gameExposureState
-  });
+  }) : null;
   player.highSchoolNextOpportunity = nextOpportunity ? cloneSchoolInvitationValue({
     ...nextOpportunity,
     opportunityIndex: 2,
@@ -10914,6 +10979,37 @@ function applyHighSchoolCompetitionMatchSettlement(match) {
     player.highSchoolRoleContext.opportunity = getHighSchoolPlayingTimeAssignmentText(nextOpportunity);
   }
   return { status: "applied", evidence, evaluation: player.highSchoolCompetitionEvaluation, roleResult, competition: refreshedCompetition, nextOpportunity: player.highSchoolNextOpportunity };
+}
+
+function recordHighSchoolYearOneMatchHistory(match, competitionSettlement) {
+  if (!match?.id) return [];
+  const history = Array.isArray(player.highSchoolYearOneMatchHistory) ? player.highSchoolYearOneMatchHistory.slice(-2) : [];
+  const exposure = match.gameExposureState || {};
+  const record = {
+    matchId: match.id,
+    opportunityIndex: Math.max(1, Number(match.opportunityIndex) || 1),
+    opponent: match.opponent || "",
+    outcome: match.outcome || "",
+    actualExposure: {
+      appearanceType: exposure.appearanceType || "noAppearance",
+      plateAppearances: Math.max(0, Number(exposure.plateAppearances) || 0),
+      defensiveInnings: Math.max(0, Number(exposure.defensiveInnings) || 0),
+      participated: (Number(exposure.plateAppearances) || 0) > 0 || (Number(exposure.defensiveInnings) || 0) > 0
+    },
+    playerContribution: JSON.parse(JSON.stringify(match.playerContribution || {})),
+    evaluationConsequence: competitionSettlement?.roleResult ? {
+      previousRole: competitionSettlement.roleResult.currentRole,
+      currentRole: competitionSettlement.roleResult.nextRole,
+      change: competitionSettlement.roleResult.change,
+      reasons: competitionSettlement.roleResult.reasons.slice(),
+      trend: competitionSettlement.evaluation?.recentTrend || "neutral"
+    } : null
+  };
+  const existingIndex = history.findIndex(item => item.matchId === record.matchId);
+  if (existingIndex >= 0) history[existingIndex] = record;
+  else history.push(record);
+  player.highSchoolYearOneMatchHistory = history.slice(-2);
+  return player.highSchoolYearOneMatchHistory;
 }
 
 function settleHighSchoolYearOneMatch(match, finalDecision) {
@@ -10982,7 +11078,8 @@ function settleHighSchoolYearOneMatch(match, finalDecision) {
   } else {
     addFlags(["hs_y1_match_completed", "hs_y1_match_no_appearance"]);
   }
-  applyHighSchoolCompetitionMatchSettlement(match);
+  const competitionSettlement = applyHighSchoolCompetitionMatchSettlement(match);
+  recordHighSchoolYearOneMatchHistory(match, competitionSettlement);
   return match.performanceSummary;
 }
 
@@ -11453,7 +11550,7 @@ function advanceHighSchoolMatchSimulation(match = player.highSchoolMatch) {
 }
 
 function resolveHighSchoolYearOneMatch(decision, expectedMomentId = "", randomSource = Math.random) {
-  const match = prepareHighSchoolYearOneMatch();
+  const match = prepareCurrentHighSchoolYearOneMatch();
   if (match.simulationPhase === "offensive_agency_ready") {
     const agencySelection = decision === "agencyManual" ? "manual" : decision === "agencySimulate" ? "simulate" : "";
     return agencySelection ? chooseHighSchoolOffensiveAgency(agencySelection, expectedMomentId || match.offensivePlayerAgencyState?.momentId) : false;
@@ -11574,13 +11671,87 @@ function processHighSchoolYearOneChoice(eventId, choice) {
     const match = prepareHighSchoolYearOneMatch();
     return `${choice.memory} 名單確認你將在${match.opponent}的同一場交流賽執行：${match.assignment}。`;
   }
-  if (eventId === "high_school_showcase") return resolveHighSchoolYearOneMatch(choice.matchDecision);
+  if (isHighSchoolYearOneMatchEventId(eventId)) return resolveHighSchoolYearOneMatch(choice.matchDecision);
   if (eventId === "high_school_call_home") {
     const echo = resolveHighSchoolAzheEcho();
     prepareHighSchoolRivalPressure();
     return `${choice.memory} ${echo.summary}`;
   }
   return "";
+}
+
+function getHighSchoolCallHomePresentation() {
+  const match = player.highSchoolMatch || {};
+  const exposure = match.gameExposureState || {};
+  const moments = Array.isArray(match.completedMoments) ? match.completedMoments : [];
+  const participated = (Number(exposure.plateAppearances) || 0) > 0 || (Number(exposure.defensiveInnings) || 0) > 0;
+  const lastMoment = moments.at(-1) || null;
+  const situation = lastMoment
+    ? `${lastMoment.inning ? `${lastMoment.inning}局${lastMoment.half || ""}` : "實際輪到你的局面"}，${lastMoment.outcome || "你完成了當下任務"}`
+    : "自己實際經歷的比賽片段";
+  const experience = participated
+    ? `你只說明親自經歷的內容：${situation}。你沒有把球探內部評語當成已知事實。`
+    : "你坦白說，這場比賽沒有真的輪到你上場；你談的是等待、熱身與看完整場比賽時記下的事，沒有虛構任何打席或守備選擇。";
+  const history = hasFlag("azhe_error_reworked") || hasFlag("azhe_hidden_error_seen")
+    ? "你們都記得少棒時那顆反覆重做、卻沒有立刻被看見的滾地球。"
+    : "你們已不在同一支隊伍，仍認得彼此說起失敗時會停頓多久。";
+  return `交流賽結束後，你在寮舍走廊打給阿哲。${experience}\n\n比賽結果：${match.outcome || "尚未留下"}。\n${history}\n你不知道這通電話會改變誰；只有之後的行動，能證明這段共同經驗是否真的被帶到了下一個球場。`;
+}
+
+function getHighSchoolFollowupEvaluationPresentation() {
+  const opportunity = player.highSchoolNextOpportunity || {};
+  const role = player.highSchoolRoleCode || "bench";
+  const trend = player.highSchoolCompetitionEvaluation?.recentTrend || "neutral";
+  const previous = player.highSchoolOpportunityHistory?.find(item => item.opportunityIndex === 1)?.actualExposure || null;
+  const previousText = previous?.participated
+    ? `上一場留下 ${previous.plateAppearances || 0} 個打席、${previous.defensiveInnings || 0} 局守備的正式證據。`
+    : "上一場沒有實際上場樣本，教練沒有把等待當成負面表現。";
+  const roleText = role === "starter"
+    ? "你仍在名單核心，但這次用途仍由上一場證據與目前競爭重新決定。"
+    : role === "rotation"
+      ? "你在輪替名單中接近更重的任務，也仍需要證明執行能夠重複。"
+      : "你仍從發展名單爭取入口；這次機會可能增加、維持，也可能仍停在觀察。";
+  const trendText = { positive: "近期評估上升", negative: "近期評估承壓", neutral: "近期評估持平" }[trend] || "近期評估持平";
+  return `數週後，現任教練安排一次不列入正式賽程的隊內實戰評估。\n${previousText}\n${roleText}\n${trendText}；本次安排：${getHighSchoolPlayingTimeAssignmentText(opportunity)}。\n\n這不是保證上場。名單、進場時機與沒有出賽都沿用既有機會安排。`;
+}
+
+function getHighSchoolRoleReassessmentFeedbackText() {
+  const latest = (player.highSchoolYearOneMatchHistory || []).at(-1) || {};
+  const consequence = latest.evaluationConsequence || {};
+  const labels = typeof HighSchoolCompetitionReassessment !== "undefined" ? HighSchoolCompetitionReassessment.ROLE_LABELS : {};
+  const previousLabel = labels[consequence.previousRole] || "前次角色";
+  const currentLabel = labels[player.highSchoolRoleCode] || player.highSchoolTeamRole || "目前角色";
+  const changeText = consequence.change === "promotion"
+    ? `角色由「${previousLabel}」升為「${currentLabel}」`
+    : consequence.change === "demotion"
+      ? `角色由「${previousLabel}」降為「${currentLabel}」`
+      : `角色維持「${currentLabel}」`;
+  const reasons = (consequence.reasons || []).map(getHighSchoolCompetitionReasonText);
+  const exposure = latest.actualExposure || {};
+  const exposureText = exposure.participated
+    ? `本次實際留下 ${exposure.plateAppearances || 0} 個打席、${exposure.defensiveInnings || 0} 局守備。`
+    : "本次沒有實際上場，教練不把等待算成負面表現。";
+  const pressureText = player.highSchoolRoleCode === "rotation" && player.highSchoolCompetitionEvaluation?.recentTrend === "positive"
+    ? "目前仍是輪替角色；正向壓力已保存，仍需下一筆正式證據才可能跨過先發門檻。"
+    : "目前角色會帶進下一階段，不由球探改寫。";
+  return `${exposureText}\n現任教練完成第二次評估：${changeText}。\n原因：${reasons.join("、") || "正式樣本與競爭差距仍需繼續累積"}。\n${pressureText}`;
+}
+
+function getHighSchoolYearOneRoleJourneyText() {
+  const history = Array.isArray(player.highSchoolYearOneMatchHistory) ? player.highSchoolYearOneMatchHistory : [];
+  const startingRole = player.highSchoolYearOneStartingRole || history[0]?.evaluationConsequence?.previousRole || "bench";
+  const currentRole = player.highSchoolRoleCode || startingRole;
+  const labels = typeof HighSchoolCompetitionReassessment !== "undefined" ? HighSchoolCompetitionReassessment.ROLE_LABELS : {};
+  const matchLines = history.map((item, index) => {
+    const exposure = item.actualExposure || {};
+    return `機會 ${index + 1}：${exposure.participated ? `${exposure.plateAppearances || 0} 打席、${exposure.defensiveInnings || 0} 局守備` : "沒有實際上場"}`;
+  });
+  const transition = startingRole === currentRole
+    ? `角色由「${labels[startingRole] || startingRole}」維持為「${labels[currentRole] || currentRole}」`
+    : `角色由「${labels[startingRole] || startingRole}」變為「${labels[currentRole] || currentRole}」`;
+  const pressure = currentRole === "rotation" && player.highSchoolCompetitionEvaluation?.recentTrend === "positive"
+    ? "；正向競爭壓力已累積，但尚未達三筆正式證據的先發門檻" : "";
+  return `${transition}；${matchLines.join("；") || "尚未留下實戰機會紀錄"}${pressure}。`;
 }
 
 function completeHighSchoolEntry(options = {}) {
@@ -11609,6 +11780,8 @@ function completeHighSchoolEntry(options = {}) {
   player.highSchoolCompetitionEvaluation = null;
   player.highSchoolOpportunityHistory = [];
   player.highSchoolNextOpportunity = null;
+  player.highSchoolYearOneStartingRole = "";
+  player.highSchoolYearOneMatchHistory = [];
   player.highSchoolYearOneComplete = false;
   player.highSchoolMatch = createInitialPlayer().highSchoolMatch;
   player.highSchoolAzheEcho = createInitialPlayer().highSchoolAzheEcho;
@@ -12087,7 +12260,17 @@ function processEmotionalEvent(eventId, choice = {}) {
   }
   if (eventId === "junior_pain" || eventId === "critical_injury") recordLowPoint({ id: eventId === "critical_injury" ? "major_injury" : "first_injury", title: eventId === "critical_injury" ? "傷病改變了原本的路" : "第一次感到身體警訊", chapter, emotion: "fear", importance: eventId === "critical_injury" ? 5 : 4, impact: "身體迫使你改變目標、角色與依賴他人的方式。" });
   if (eventId === "high_school_showcase") recordEmotionalPeak({ id: "first_market_notice_emotion", title: "第一次真正被看見", chapter, level: "major", emotion: "pride", importance: 5 });
-  if (eventId === "high_school_long_bench") recordLowPoint({ id: "long_bench_low", title: "長時間坐在板凳上", chapter, emotion: "regret", importance: 4, impact: "你開始懷疑，沒有上場的自己還算不算球員。" });
+  if (eventId === "high_school_long_bench") {
+    const role = player.highSchoolRoleCode || player.highSchoolRoleContext?.code || "bench";
+    if (role === "bench") recordLowPoint({ id: "long_bench_low", title: "長時間坐在板凳上", chapter, emotion: "regret", importance: 4, impact: "你開始懷疑，沒有上場的自己還算不算球員。" });
+    else recordLifeEvent({
+      id: role === "starter" ? "first_high_school_starting_assignment" : "first_high_school_rotation_assignment",
+      title: role === "starter" ? "第一次進入高中先發討論" : "第一次進入高中輪替名單",
+      chapter,
+      emotion: "hope",
+      importance: 4
+    });
+  }
   if (eventId === "development_competition") recordLowPoint({ id: "role_became_invalid", title: "原本的角色失效", chapter, emotion: "loss", importance: 5, impact: "你失去熟悉的位置，被迫尋找另一種留下來的方法。" });
   if (eventId === "development_opportunity") {
     recordEmotionalPeak({ id: "needed_again_emotion", title: "再次被球隊需要", chapter, level: player.careerArc.reinventions > 0 ? "legendary" : "major", emotion: "hope", importance: 5 });
@@ -12302,6 +12485,24 @@ function recordSignatureScene(data = {}) {
 }
 
 function getSignatureSceneText(eventId) {
+  if (eventId === "high_school_long_bench") {
+    const role = player.highSchoolRoleCode || player.highSchoolRoleContext?.code || "bench";
+    if (role !== "bench") {
+      const scene = role === "starter" ? {
+        id: "first_high_school_lineup_card", title: "先發名單旁的空白", category: "opportunity", chapter: "青棒第一年",
+        location: "高中球場的休息區", object: "尚未定稿的先發名單", characters: ["山本教練"], action: "你看見自己的名字被鉛筆寫進先發討論欄", emotion: "hope", silent: true,
+        memory: "名字仍可能被擦掉；真正的角色要等場上任務完成後才成立。",
+        text: "山本教練把尚未定稿的名單壓在戰術板下。你的名字以鉛筆寫在先發討論欄，旁邊仍留著可以修改的空白。"
+      } : {
+        id: "first_high_school_rotation_card", title: "輪替名單上的進場時機", category: "opportunity", chapter: "青棒第一年",
+        location: "高中球場的休息區", object: "標著進場局數的輪替卡", characters: ["山本教練"], action: "你把預定進場局數與守位記進自己的小冊", emotion: "hope", silent: true,
+        memory: "這不是先發保證，也不是被遺忘；你第一次有一個明確的高中實戰入口。",
+        text: "輪替卡上寫著你的守位與可能進場局數。你沒有把它當成出賽保證，只把必須準備好的任務逐項記下。"
+      };
+      recordSignatureScene(scene);
+      return `【記憶場景｜${scene.title}】\n${scene.text}`;
+    }
+  }
   const scene = signatureSceneLibrary[eventId];
   if (!scene) return "";
   recordSignatureScene(scene);
@@ -12451,7 +12652,7 @@ function processAspirationEvent(eventId, choice = {}) {
     junior_position_change: ["new_position_desire", "第一次發現新守位可能更適合自己", "在新守位完成正式任務"],
     junior_friend_exit: ["azhe_next_life", "第一次和阿哲交換各自下一步", "彼此知道對方最近正在追什麼"],
     high_school_role: ["first_high_school_task", "第一次期待高中球隊交付任務", "讓一項任務成為可描述的價值"],
-    high_school_long_bench: ["bench_open_task", "第一次注意替補名單仍有空著的用途", "下一次有限打席或後段守備"],
+    high_school_long_bench: ["high_school_first_assignment", "第一次看見高中實戰任務如何分配", "把眼前的名單安排變成正式證據"],
     high_school_year_two_roster_reset: ["year_two_role_reset", "第一次看見高中順位重新洗牌", "讓原有角色通過春季與秋季兩次驗證"],
     high_school_year_two_senior_plan: ["senior_year_investment", "第一次把高三前的訓練押在明確方向", "高三第一張完整訓練表"],
     critical_scout_interview: ["first_formal_invitation", "第一次收到帶有條件的正式詢問", "把一項工具換成畢業後入口"],
@@ -12460,17 +12661,32 @@ function processAspirationEvent(eventId, choice = {}) {
   };
   if (moments[eventId]) {
     const [id, title, possibility] = moments[eventId];
-    recordAspirationMoment({ id, title, possibility, fulfilled: ["youth_match_entry", "development_opportunity"].includes(eventId), status: ["junior_friend_exit", "high_school_long_bench"].includes(eventId) ? "redirected" : "active" });
+    const longBenchRedirected = eventId === "high_school_long_bench"
+      && (player.highSchoolRoleCode || player.highSchoolRoleContext?.code || "bench") === "bench";
+    recordAspirationMoment({ id, title, possibility, fulfilled: ["youth_match_entry", "development_opportunity"].includes(eventId), status: eventId === "junior_friend_exit" || longBenchRedirected ? "redirected" : "active" });
   }
   if (eventId === "starter_selection_result") setNextAspiration("把一次被看見的機會變成球隊能反覆使用的任務。", { status: player.startingCompetition.result === "win" ? "fulfilled" : "redirected", worldResponse: memory, nextPossibility: "三天後的新守位測試", sourceEventId: eventId });
   if (eventId === "junior_pain" || eventId === "critical_injury") setNextAspiration("找出不依賴原本負荷的棒球方式。", { status: "redirected", worldResponse: "身體限制改變了可以採取的動作，也讓節奏、配球與準備變成新的研究對象。", nextPossibility: "復健師安排的第一次調整後測試", sourceEventId: eventId });
   if (eventId === "junior_friend_exit") setNextAspiration(getCurrentAspiration().current, { status: "redirected", worldResponse: "阿哲開始追求自己的課業、紀錄或球場外角色；你們仍會交換下一步。", nextPossibility: "阿哲答應來看的下一場比賽", sourceEventId: eventId });
-  if (eventId === "high_school_long_bench") setNextAspiration("找出替補名單裡還沒有人固定承擔的任務。", { status: "redirected", worldResponse: "先發沒有成真，但代跑、外野後段與守備指揮仍沒有固定人選。", nextPossibility: "下一次有限打席與後段守備名單", sourceEventId: eventId });
+  if (eventId === "high_school_long_bench") {
+    const role = player.highSchoolRoleCode || player.highSchoolRoleContext?.code || "bench";
+    const aspiration = role === "starter"
+      ? ["把先發討論轉成能反覆承擔的正式任務。", "名字進入先發候選，但實際角色仍要由比賽證據確認。", "第一次高中先發評估", "active"]
+      : role === "rotation"
+        ? ["把輪替入口轉成更穩定的場上用途。", "教練已安排可能的進場時機，但沒有保證實際出賽。", "下一次輪替打席或守備任務", "active"]
+        : ["找出替補名單裡還沒有人固定承擔的任務。", "先發沒有成真，但代跑、外野後段與守備指揮仍沒有固定人選。", "下一次有限打席與後段守備名單", "redirected"];
+    setNextAspiration(aspiration[0], { status: aspiration[3], worldResponse: aspiration[1], nextPossibility: aspiration[2], sourceEventId: eventId });
+  }
   if (eventId === "development_competition") setNextAspiration("把過去經驗轉成另一種可使用的角色。", { status: "redirected", worldResponse: "原有用途不再完全適配，第二守位、指揮、代打或準備工作開始有了空位。", nextPossibility: "下一回的角色調整提案", sourceEventId: eventId });
   if (eventId === "development_opportunity") setNextAspiration("讓新的使用方式在正式任務裡成立。", { status: "fulfilled", worldResponse: memory, nextPossibility: "市場重新評估新角色的那一天", sourceEventId: eventId });
 }
 
 function getAspirationEventText(eventId) {
+  if (eventId === "high_school_long_bench") {
+    const role = player.highSchoolRoleCode || player.highSchoolRoleContext?.code || "bench";
+    if (role === "starter") return "名字進入先發討論，不等於已經站穩位置。你開始準備從第一局起可能承擔的守備與打序，也保留名單仍會調整的真實性。";
+    if (role === "rotation") return "輪替卡上有你的守位與可能進場時機。它不是出賽保證，卻是一個可以用正式證據擴大的入口。";
+  }
   const texts = {
     starter_selection_result: "這次名單回答的是目前距離，不是你和高橋一生的勝負。下一個問題，是球隊願不願意把哪一種固定任務交給你。",
     junior_friend_exit: "阿哲談起最近想做的事：也許是課業，也許是紀錄比賽。離開球員名單不是停在原地；你們約好，下次見面要交換彼此最近正在追什麼。",
@@ -12942,7 +13158,11 @@ function advanceAfterAction(decisionContext = null, completedEventId = null) {
   }
   if (player.chapter === "青棒") {
     player.highSchoolStep += 1;
-    if (player.highSchoolStep >= 8) evaluateHighSchoolYear();
+    if (completedEventId === "high_school_call_home" && !player.highSchoolNextOpportunity) {
+      // 沒有 Opportunity side-state 的舊開發 fixture 不偽造第二場，直接進入既有收尾。
+      player.highSchoolStep = 9;
+    }
+    if (player.highSchoolStep >= 10) evaluateHighSchoolYear();
     return;
   }
   if (player.chapter === "青少棒分化") {
@@ -13266,7 +13486,7 @@ function evaluateJuniorSchoolFit() {
 }
 
 function evaluateHighSchoolYear() {
-  if (player.chapter !== "青棒" || player.highSchoolStep < 8 || player.highSchoolMatch?.completed !== true) return false;
+  if (player.chapter !== "青棒" || player.highSchoolStep < 10 || player.highSchoolMatch?.completed !== true) return false;
   if (!player.highSchoolRoleCode) resolveHighSchoolProvisionalRole();
   if (player.body.injuryRisk >= 8 || player.body.pain >= 5) {
     player.highSchoolResult = "高中強度放大了舊有身體風險";
@@ -13295,7 +13515,20 @@ function evaluateHighSchoolYear() {
   const competitionEvaluation = player.highSchoolCompetitionEvaluation || {};
   player.highSchoolDetail += `\n目前角色：${currentRoleLabel}；下一次機會：${role.opportunity || "正式比賽任務"}。`;
   if (competitionEvaluation.sampleCount) player.highSchoolDetail += `\n競爭再評估：${formatHighSchoolCompetitionEvaluation(competitionEvaluation)}。`;
-  player.highSchoolDetail += `\n交流賽：${match.opponent}，${match.outcome}；${match.consequence}`;
+  player.highSchoolDetail += `\n高一角色歷程：${getHighSchoolYearOneRoleJourneyText()}`;
+  const matchHistory = Array.isArray(player.highSchoolYearOneMatchHistory) ? player.highSchoolYearOneMatchHistory : [];
+  if (matchHistory.length) {
+    player.highSchoolDetail += matchHistory.map((item, index) => {
+      const exposure = item.actualExposure || {};
+      const exposureText = exposure.participated
+        ? `${exposure.plateAppearances || 0} 打席、${exposure.defensiveInnings || 0} 局守備`
+        : "沒有實際上場";
+      const matchLabel = index === 0 ? "交流賽" : "第二次實戰評估";
+      return `\n實戰機會 ${index + 1}（${matchLabel}）：${item.opponent || "對手未記錄"}；${exposureText}；${item.outcome || "比賽已結束"}`;
+    }).join("");
+  } else {
+    player.highSchoolDetail += `\n第二次實戰評估：${match.opponent}，${match.outcome}；${match.consequence}`;
+  }
   player.highSchoolDetail += `\n阿哲回聲：${azhe.influenceDirection || "尚未形成"}；${azhe.summary || "未留下持續證據"}`;
   player.highSchoolDetail += `\n外部壓力：${rivalPressure.rivalName || "高橋"}（${rivalPressure.entryType || "observed"}）；${rivalPressure.yearTwoPressure || "高二需再次驗證角色"}`;
   completeGoal("high_school_clear_task", `小目標完成：${player.highSchoolTeamRole}`);
@@ -13535,7 +13768,7 @@ function showCurrentEvent() {
   if (pendingBaseballGameplay && pendingBaseballGameplay.eventId !== eventId) {
     clearPendingBaseballGameplay();
   }
-  if (eventId === "high_school_showcase" && player.highSchoolMatch?.completed && !player.highSchoolMatch.eventSettlementApplied) {
+  if (isHighSchoolYearOneMatchEventId(eventId) && player.highSchoolMatch?.completed && !player.highSchoolMatch.eventSettlementApplied) {
     showHighSchoolCompletedMatchOutcome(player.highSchoolMatch);
     return;
   }
@@ -13673,7 +13906,7 @@ function showStory(eventId) {
   const competitionFrame = renderCompetitionPresentation(eventId);
   const bridgeInHtml = bridgeIn ? `<div class="story-bridge-in"><small>承接上一回</small>${escapeHtml(bridgeIn)}</div>` : "";
   const bridgeOutHtml = bridgeOut ? `<div class="story-bridge-out"><small>接下來</small>${escapeHtml(bridgeOut)}</div>` : "";
-  if (eventId === "high_school_showcase") {
+  if (isHighSchoolYearOneMatchEventId(eventId)) {
     renderHighSchoolYearOneMatch(event, { text, sceneContextHtml, bridgeInHtml, bridgeOutHtml });
   } else if (eventId === "youth_match_grounder") {
     renderIntegratedYouthGrounder(event, { text, sceneContextHtml, competitionFrame, bridgeInHtml, bridgeOutHtml });
@@ -13731,7 +13964,7 @@ function getTimeLabel() {
   if (player.chapter === "青少棒開場小結") return "青少棒・十三歲評估";
   if (player.chapter === "青少棒分化") return `青少棒分化・第 ${player.juniorSeasonStep + 1} 階段`;
   if (player.chapter === "青少棒階段小結") return "青少棒・升學評估";
-  if (player.chapter === "青棒") return `青棒第一年・第 ${player.highSchoolStep + 1} 階段`;
+  if (player.chapter === "青棒") return `青棒第一年・第 ${player.highSchoolStep + 1}／10 階段`;
   if (player.chapter === "青棒第一年小結") return "青棒・第一年評估";
   if (player.chapter === "青棒第二年") return `青棒第二年・第 ${player.highSchoolYearTwoStep + 1}／8 階段`;
   if (player.chapter === "青棒第二年小結") return "青棒・第二年評估";
@@ -13752,7 +13985,7 @@ function progressPercent() {
   if (player.chapter === "青少棒開場小結") return 100;
   if (player.chapter === "青少棒分化") return 84 + Math.round((player.juniorSeasonStep / 10) * 15);
   if (player.chapter === "青少棒階段小結") return 100;
-  if (player.chapter === "青棒") return 86 + Math.round((player.highSchoolStep / 8) * 13);
+  if (player.chapter === "青棒") return 86 + Math.round((player.highSchoolStep / 10) * 13);
   if (player.chapter === "青棒第一年小結") return 100;
   if (player.chapter === "青棒第二年") return 87 + Math.round((player.highSchoolYearTwoStep / 8) * 12);
   if (player.chapter === "青棒第二年小結") return 100;

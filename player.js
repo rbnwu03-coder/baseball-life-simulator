@@ -1916,8 +1916,10 @@ function createInitialPlayer(name = "") {
     highSchoolCompetitionEvaluation: null,
     highSchoolOpportunityHistory: [],
     highSchoolNextOpportunity: null,
+    highSchoolYearOneStartingRole: "",
+    highSchoolYearOneMatchHistory: [],
     highSchoolMatch: {
-      id: "", opponent: "", inning: 0, half: "", outs: 0,
+      id: "", eventId: "", matchType: "", opportunityIndex: 0, opponent: "", inning: 0, half: "", outs: 0,
       scores: { home: 0, away: 0 }, runners: [], role: "", position: "", assignment: "",
       momentIndex: 0, currentMomentId: "", currentDomain: "", completedMoments: [],
       offenseTeam: "", defenseTeam: "", currentBatter: "", currentAssignment: "", matchEntryHistory: "",

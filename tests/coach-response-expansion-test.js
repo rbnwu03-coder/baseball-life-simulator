@@ -27,15 +27,15 @@ verify("展示賽保留三個真正打席決策", ["attack", "zone", "advance"].
 verify("展示賽新增守備 domain 與三段穩定 identity", ["secure", "challenge", "contain"].every(code => multiMomentMatch.includes(`matchDecision: "${code}"`)) && [1, 2, 3].every(index => multiMomentMatch.includes(`hs_y1_match_moment_${index}`)));
 
 const roleStart = scriptSource.indexOf("function resolveHighSchoolProvisionalRole()");
-const roleEnd = scriptSource.indexOf("function prepareHighSchoolYearOneMatch()", roleStart);
+const roleEnd = scriptSource.indexOf("function prepareHighSchoolYearOneMatch(", roleStart);
 const roleResolver = scriptSource.slice(roleStart, roleEnd);
 verify("暫定角色採守位、信任、工具、健康與過往證明的複合判定", ["positionRating", "coachReady", "roleToolReady", "healthy", "priorProof"].every(token => roleResolver.includes(token)));
 verify("三種角色均保留正式比賽任務", ["starter", "rotation", "bench"].every(code => roleResolver.includes(code)) && !/code\s*===\s*["']bench["'][\s\S]*return false/.test(roleResolver));
 
-const matchStart = scriptSource.indexOf("function prepareHighSchoolYearOneMatch()");
+const matchStart = scriptSource.indexOf("function prepareHighSchoolYearOneMatch(");
 const matchEnd = scriptSource.indexOf("function resolveHighSchoolYearOneMatch", matchStart);
 const matchPreparation = scriptSource.slice(matchStart, matchEnd);
-verify("三種角色共用同一比賽 id", matchPreparation.includes('id: "hs-y1-autumn-exhibition"'));
+verify("三種角色共用同一預設比賽 id", matchPreparation.includes('targetMatchId = options.matchId || "hs-y1-autumn-exhibition"') && matchPreparation.includes("id: targetMatchId"));
 verify("投打慣用側進入任務脈絡", matchPreparation.includes("player.bats") && matchPreparation.includes("player.throws"));
 
 console.log(`Coach Response Expansion validations：${validations}`);

@@ -144,7 +144,7 @@ const expectedProgress = {
   "位置競爭": ["competitionStep", 0, 5],
   "青少棒": ["juniorStep", 0, 9],
   "青少棒分化": ["juniorSeasonStep", 0, 9],
-  "青棒": ["highSchoolStep", 0, 7],
+  "青棒": ["highSchoolStep", 0, 9],
   "青棒第二年": ["highSchoolYearTwoStep", 0, 7],
   "青棒關鍵年": ["criticalYearStep", 0, 7],
   "生涯轉換期": ["transitionStep", 0, 4],
@@ -236,7 +236,7 @@ setPlayer(context, { chapter: "不存在的章節", age: 17 });
 const unknown = parse(context, "CareerSpineContract.getCareerSpineSnapshot(player)");
 verify("11. 未知 chapter 回報 unknown", unknown.status === "unknown" && unknown.issues.some(item => item.code === "unknown-chapter"));
 
-setPlayer(context, { chapter: "青棒", age: 16, highSchoolStep: 8 });
+setPlayer(context, { chapter: "青棒", age: 16, highSchoolStep: 10 });
 const overflow = parse(context, "CareerSpineContract.getCareerSpineSnapshot(player)");
 verify("12. 合法 chapter 搭配越界 step 回報 inconsistent", overflow.status === "inconsistent" && overflow.issues.some(item => item.code === "progress-out-of-contract"));
 

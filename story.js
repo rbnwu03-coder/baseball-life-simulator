@@ -1131,14 +1131,29 @@ const highSchoolEvents = {
     },
     get choices() { return getHighSchoolYearOneMatchMomentChoices(); }
   },
+  high_school_followup_evaluation: {
+    title: "數週後：第二次隊內實戰評估",
+    text() { return getHighSchoolFollowupEvaluationPresentation(); },
+    get choices() { return getHighSchoolYearOneMatchMomentChoices(); }
+  },
+  high_school_role_reassessment_feedback: {
+    title: "現任教練完成第二次角色評估",
+    text() { return getHighSchoolRoleReassessmentFeedbackText(); },
+    choices: [
+      C("確認目前角色與下一階段要求", { observe: 1, responsibility: 1 }, ["hs_y1_received_second_reassessment"], "你把角色變化與原因一起記下，沒有把一次升降當成永久結論。")
+    ]
+  },
   high_school_scout_feedback: {
-    title: "高橋把同一場比賽變成高二問題",
+    title: "兩次實戰之後，高橋留下高二問題",
     text() {
       const rival = player.highSchoolRivalContext || {};
       const match = player.highSchoolMatch || {};
-      const nextOpportunity = player.highSchoolNextOpportunity
-        ? `下一次隊內評估安排：${player.highSchoolRoleContext?.opportunity || "教練會依本場證據重新安排用途"}。`
-        : "下一次隊內評估仍等待本場證據完成整理。";
+      const secondEvaluationComplete = (player.highSchoolYearOneMatchHistory || []).some(item => item.opportunityIndex === 2);
+      const nextOpportunity = secondEvaluationComplete
+        ? `第二次隊內評估已完成，目前角色為「${player.highSchoolTeamRole || "待評估"}」。`
+        : player.highSchoolNextOpportunity
+          ? `下一次隊內評估安排：${player.highSchoolRoleContext?.opportunity || "教練會依本場證據重新安排用途"}。`
+          : "下一次隊內評估仍等待本場證據完成整理。";
       const scout = match.completed
         ? `球探留下比賽編號、角色與「${match.outcome || "已完成任務"}」的可追蹤紀錄。`
         : "球探沒有下結論，只保留球隊提交的比賽名單。";
@@ -1700,10 +1715,7 @@ const pacingEvents = {
   high_school_call_home: {
     title: "賽後打給阿哲的一通電話",
     text() {
-      const match = player.highSchoolMatch || {};
-      const relationship = player.impression.azhe || {};
-      const history = hasFlag("azhe_error_reworked") || hasFlag("azhe_hidden_error_seen") ? "你們都記得少棒時那顆反覆重做、卻沒有立刻被看見的滾地球。" : "你們已不在同一支隊伍，仍認得彼此說起失敗時會停頓多久。";
-      return `交流賽結束後，你在寮舍走廊打給阿哲，說明第七局、平手、二壘有人，以及自己做出的選擇。你只分享親自經歷的局面，沒有把球探內部評語當成已知事實。\n\n比賽結果：${match.outcome || "尚未留下"}。\n${history}\n你不知道這通電話會改變誰；只有之後的行動，能證明這段共同經驗是否真的被帶到了下一個球場。`;
+      return getHighSchoolCallHomePresentation();
     },
     choices: [
       C("把自己如何拆解那個打席完整告訴阿哲", { observe: 1, confidence: 1 }, ["admitted_high_school_struggle"], "你沒有只報告成敗，而是說明自己看見的局面與仍不會的部分。", { relationshipEffects: { teammateBond: 1 } }),
@@ -1919,7 +1931,7 @@ function getCurrentEventId() {
     return sequence[player.highSchoolYearTwoStep] || "high_school_year_two_result";
   }
   if (player.chapter === "青棒") {
-    const sequence = ["high_school_intro", "high_school_load", "high_school_life", "high_school_role", "high_school_long_bench", "high_school_showcase", "high_school_call_home", "high_school_scout_feedback"];
+    const sequence = ["high_school_intro", "high_school_load", "high_school_life", "high_school_role", "high_school_long_bench", "high_school_showcase", "high_school_call_home", "high_school_followup_evaluation", "high_school_role_reassessment_feedback", "high_school_scout_feedback"];
     return sequence[player.highSchoolStep] || "high_school_result";
   }
   if (player.chapter === "青少棒階段小結") return "junior_season_result";

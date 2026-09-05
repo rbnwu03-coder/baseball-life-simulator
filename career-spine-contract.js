@@ -168,13 +168,14 @@ var CareerSpineContract = (() => {
       id: "high-school-year-one",
       chapter: "青棒",
       age: [16, 16],
-      progress: { field: "highSchoolStep", min: 0, max: 7 },
+      progress: { field: "highSchoolStep", min: 0, max: 9 },
       entry: { handler: "enterHighSchool", eventId: "high_school_intro" },
       settlement: { eventIds: ["high_school_result"], handler: "evaluateHighSchoolYear" },
       nextChapters: ["青棒第一年小結"],
       route: steps([
         "high_school_intro", "high_school_load", "high_school_life", "high_school_role",
-        "high_school_long_bench", "high_school_showcase", "high_school_call_home", "high_school_scout_feedback"
+        "high_school_long_bench", "high_school_showcase", "high_school_call_home",
+        "high_school_followup_evaluation", "high_school_role_reassessment_feedback", "high_school_scout_feedback"
       ])
     }),
     resultNode("high-school-year-one-result", "青棒第一年小結", [16, 16], "high_school_result", ["青棒第二年"]),
