@@ -2002,6 +2002,11 @@ function getCurrentEventId() {
 }
 
 function getEvent(eventId) {
+  if (typeof isCanonicalHighSchoolYearThreeRoute === "function" && isCanonicalHighSchoolYearThreeRoute()
+    && (eventId.startsWith("critical_") || eventId === "transition_draft_day")) {
+    const finale = getHighSchoolYearThreeEvent(eventId);
+    if (finale) return finale;
+  }
   if (eventId === "night") return getNightEvent();
   return chapterOneEvents[eventId] || chapterTwoEvents[eventId] || youthSeasonEvents[eventId] || positionCompetitionEvents[eventId] || juniorBaseballEvents[eventId] || juniorSeasonEvents[eventId] || highSchoolEvents[eventId] || highSchoolYearTwoEvents[eventId] || criticalYearEvents[eventId] || careerTransitionEvents[eventId] || pacingEvents[eventId] || developmentEvents[eventId] || null;
 }

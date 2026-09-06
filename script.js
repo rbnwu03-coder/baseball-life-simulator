@@ -2581,8 +2581,7 @@ function getHighSchoolFirstOffensiveMomentRolePresentation(match) {
   return "你仍在板凳等待正式進場，目前不會生成玩家打席。";
 }
 
-function getHighSchoolYearOneMatchPresentation() {
-  const match = prepareCurrentHighSchoolYearOneMatch();
+function getHighSchoolYearOneMatchPresentation(match = prepareCurrentHighSchoolYearOneMatch()) {
   const plateDecisionContext = typeof PlateDecisionFoundation !== "undefined"
     ? PlateDecisionFoundation.getPlayerFacingContext(match.activeSituation) : null;
   const visibleState = getHighSchoolMatchPresentation(match).currentSituation;
@@ -3747,7 +3746,7 @@ function renderHighSchoolPostMatchOutcome(choice, statFeedbackHtml) {
     : `<section class="post-match-section match-development-settlement" aria-labelledby="matchDevelopmentTitle"><h3 id="matchDevelopmentTitle">本場實戰成長</h3><p>本場未產生可結算的實戰成長資料。</p></section>`;
   setChoiceTransitionState(false);
   document.getElementById("story").innerHTML = `<article class="event-card outcome choice-outcome-card high-school-post-match" aria-labelledby="outcomeTitle">
-    ${renderHighSchoolYearOneScore()}
+    ${renderHighSchoolYearOneScore("full", getHighSchoolMatchPresentation(match))}
     <div class="event-kicker choice-outcome-kicker">${getHighSchoolFormalMatchLabel(match)}・終場</div>
     <h2 id="outcomeTitle" tabindex="-1">${escapeHtml(match.teamResult)}</h2>
     ${confirmationHtml}${offensiveExplainabilityHtml}${executionHtml}${pitchFeedHtml}
@@ -3886,6 +3885,8 @@ function choose(eventId, index) {
   const event = getEvent(eventId);
   let choice = event?.choices?.[index];
   if (!choice) return;
+  if (isCanonicalHighSchoolYearThreeRoute() && eventId === "critical_offseason") return chooseHighSchoolYearThreePreparation(index);
+  if (isCanonicalHighSchoolYearThreeRoute() && eventId === "critical_exit_choice") return selectHighSchoolCareerOffer(choice.offerId);
   if (eventId === "youth_match_grounder" && choice.gameplayApproach) {
     return chooseYouthGrounderFielding(choice.gameplayApproach);
   }
@@ -4263,6 +4264,7 @@ const highSchoolYearOneMomentIds = Object.freeze([
 const highSchoolYearOneMatchEventIds = Object.freeze(["high_school_showcase", "high_school_followup_evaluation"]);
 
 function getHighSchoolFormalMatchLabel(match = player.highSchoolMatch, yearOneFallback = "秋季交流賽") {
+  if (Number(match?.highSchoolYear) === 3) return "高三最終正式評估";
   if (match?.eventId === "high_school_year_two_autumn_stage") return "高二秋季正式評估";
   if (Number(match?.highSchoolYear) === 2) return "高二春季正式評估";
   if (Number(match?.opportunityIndex) === 2) return "第二次實戰評估";
@@ -4270,6 +4272,7 @@ function getHighSchoolFormalMatchLabel(match = player.highSchoolMatch, yearOneFa
 }
 
 function isHighSchoolYearOneMatchEventId(eventId) {
+  if (eventId === "critical_tournament") return isCanonicalHighSchoolYearThreeRoute();
   if (highSchoolYearOneMatchEventIds.includes(eventId)) return true;
   if (eventId === "high_school_year_two_spring_game") {
     return isCanonicalHighSchoolYearTwoRoute()
@@ -8930,6 +8933,137 @@ function createHighSchoolPlayingTimeOpportunity(options = {}) {
   });
 }
 
+function isCanonicalHighSchoolYearThreeRoute() {
+  return Number(player.highSchoolYearTransitionState?.currentHighSchoolYear) === 3
+    && Boolean(player.schoolInvitationState?.selectedSchoolYearRosterIdentity?.identity);
+}
+
+function chooseHighSchoolYearThreePreparation(index) {
+  if (player.chapter !== "青棒關鍵年" || player.criticalYearStep !== 0 || player.highSchoolCareerPreparation) return false;
+  const codes = ["defensive-footwork", "power-hitting", "recovery"];
+  const code = codes[index];
+  if (!code) return false;
+  const result = BaseballTrainingResolver.resolveTraining(createTrainingPlayerSnapshot(), code);
+  const applied = applyResolvedTrainingResult(result, "critical_offseason");
+  if (!applied.ok) return false;
+  player.highSchoolCareerPreparation = { version: "hs-y3-preparation-v1", code, developmentResult: applied.developmentApplication?.result || null };
+  player.criticalYearStep = 1;
+  ensureHighSchoolYearThreeOpportunity();
+  showCurrentEvent();
+  const development = player.highSchoolCareerPreparation.developmentResult;
+  showNotice(development
+    ? `高三準備完成：${skillLabels[development.targetSkill] || "棒球能力"}累積 ${development.progressGained} 點成長進度；出場安排已讀取訓練後的能力與身體狀態。`
+    : "恢復準備完成；出場安排已讀取目前身體狀態。", "success");
+  return true;
+}
+
+function ensureHighSchoolYearThreeOpportunity() {
+  if (!isCanonicalHighSchoolYearThreeRoute() || !player.highSchoolCareerPreparation) return null;
+  if (player.highSchoolNextOpportunity?.matchId === "hs-y3-final-competition-1") return player.highSchoolNextOpportunity;
+  if (player.highSchoolYearThreeMatchHistory?.length) return null;
+  const competition = refreshSelectedPositionCompetitionContext(player, player.primaryPosition)
+    || player.schoolInvitationState.selectedPositionCompetitionContext;
+  const previous = [...(player.highSchoolOpportunityHistory || [])].reverse().find(item => item.actualExposure)?.actualExposure || null;
+  const decision = createHighSchoolPlayingTimeOpportunity({
+    matchId: "hs-y3-final-competition-1", actualRole: player.highSchoolRoleCode,
+    requestedPosition: competition?.position || player.primaryPosition, highSchoolYear: 3,
+    opportunityIndex: 1, opportunityPhase: "final-competition", includeDynamicReadiness: true,
+    evaluationTrend: player.highSchoolCompetitionEvaluation?.trendScore, previousActualExposure: previous
+  });
+  const unavailable = player.body.injuryRisk >= 10 || player.body.pain >= 7;
+  player.highSchoolNextOpportunity = cloneSchoolInvitationValue({ ...decision,
+    ...(unavailable ? { plannedUsage: { ...decision.plannedUsage, appearanceType: "noAppearance" }, healthUnavailable: true } : {}),
+    highSchoolYear: 3, opportunityIndex: 1, phase: "final-competition", competitionSnapshot: competition,
+    evaluationIdentity: player.highSchoolCompetitionEvaluation?.evaluationIdentity || ""
+  });
+  player.highSchoolOpportunityHistory = HighSchoolCompetitionReassessment.recordOpportunity(player.highSchoolOpportunityHistory, {
+    opportunity: player.highSchoolNextOpportunity, opportunityIndex: 1, roleAtCreation: player.highSchoolRoleCode
+  });
+  return player.highSchoolNextOpportunity;
+}
+
+function prepareHighSchoolYearThreeMatch() {
+  if (player.highSchoolMatch?.id === "hs-y3-final-competition-1") return player.highSchoolMatch;
+  const opportunity = ensureHighSchoolYearThreeOpportunity();
+  if (!opportunity) throw new Error("高三正式比賽缺少完成準備後的出場安排。");
+  return prepareHighSchoolYearOneMatch({matchId: opportunity.matchId, eventId: "critical_tournament",
+    matchType: "final-competition", opponent: "高三最終交流評估對手", opponentRosterId: "hs-y3-final-regional-opponent",
+    highSchoolYear: 3, opportunityIndex: 1, opportunityPhase: "final-competition", opportunityDecision: opportunity});
+}
+
+function ensureHighSchoolCareerOffers() {
+  if (player.highSchoolCareerSettlement) return player.highSchoolCareerSettlement;
+  if (!isCanonicalHighSchoolYearThreeRoute() || player.chapter !== "青棒關鍵年" || player.criticalYearStep !== 7
+    || !player.highSchoolYearThreeMatchHistory?.length || !player.highSchoolMatch?.eventSettlementApplied) return null;
+  const intent = hasFlag("family_declared_pro") || hasFlag("entered_high_school_draft") ? "draft" : "open";
+  const evidence = HighSchoolCareerEvaluation.derive(player, {
+    intent, positionFit: getPositionAssessment(player.seasonPosition)?.rating || 0
+  });
+  const offerSet = HighSchoolCareerOffers.generate(evidence);
+  if (!offerSet?.offers.length) return null;
+  player.highSchoolCareerSettlement = {
+    version: "high-school-career-settlement-v1", settlementIdentity: `${offerSet.offerSetIdentity}|settlement`,
+    evidence: cloneSchoolInvitationValue(evidence), offerSet, selectedOffer: null, careerExit: "", appliedSettlementIdentity: ""
+  };
+  return player.highSchoolCareerSettlement;
+}
+
+function selectHighSchoolCareerOffer(offerId) {
+  if (getCurrentEventId() !== "critical_exit_choice") return false;
+  const result = HighSchoolCareerOffers.commitHighSchoolCareerChoice(player, offerId);
+  if (!result.ok) return false;
+  player.criticalYearStep = 8;
+  evaluateCriticalYear();
+  showCurrentEvent();
+  return true;
+}
+
+function getHighSchoolCareerSummaryText() {
+  const state = player.highSchoolCareerSettlement;
+  if (!state) return "高中職涯資料尚未完成。";
+  const e = state.evidence;
+  const labels = HighSchoolCompetitionReassessment.ROLE_LABELS;
+  const roles = e.roleJourney.years.map(item => `高${["一","二","三"][item.year-1]}：${labels[item.startingRole] || "未記錄"} → ${labels[item.finalRole] || "未記錄"}`).join("\n");
+  const matches = e.formalMatches.years.map(item => `高${["一","二","三"][item.year-1]}正式比賽 ${item.matches.length} 場；${item.matches.reduce((n,m)=>n+m.plateAppearances,0)} 打席、${item.matches.reduce((n,m)=>n+m.defensiveInnings,0)} 局守備`).join("\n");
+  const reasons = (state.selectedOffer?.reasonCodes || []).map(code => HighSchoolCareerOffers.REASONS[code] || "仍需進一步評估").join("；");
+  const settledOpportunities = e.opportunityHistory.filter(item => item.actualExposure);
+  const opportunities = `出場安排紀錄 ${e.opportunityHistory.length} 筆；已結算 ${settledOpportunities.length} 次，其中 ${settledOpportunities.filter(item => !item.actualExposure.participated).length} 次未上場。`;
+  return `${roles}\n\n${matches}\n${opportunities}\n正式參賽樣本：${e.performanceProof.sampleCount}；證據可信度：${Math.round(e.performanceProof.confidence*100)}%。\n能力成長：平均 ${e.developmentTrajectory.growth.toFixed(1)}；訓練／比賽成長紀錄 ${e.developmentTrajectory.history.length} 筆。\n累積競爭趨勢：${{positive:"上升",negative:"承壓",neutral:"持平"}[e.competitionProof.recentTrend] || "持平"}。\n疲勞 ${e.healthRisk.fatigue}；疼痛 ${e.healthRisk.pain}；傷病風險 ${e.healthRisk.injuryRisk}。\n${e.positionProfile.pitchingEvidenceUnavailable ? "投手正式投球證據尚未建立；本次不以投球實績提供職業邀請。\n" : ""}\n可選入口 ${state.offerSet.offers.length} 個；你的選擇：${state.selectedOffer?.careerExit || "尚未選擇"}。\n${reasons}`;
+}
+
+function getHighSchoolYearThreeEvent(eventId) {
+  const original = criticalYearEvents[eventId] || pacingEvents[eventId];
+  if (eventId === "transition_draft_day" && player.highSchoolCareerSettlement?.selectedOffer) {
+    return {...careerTransitionEvents[eventId], text: "你帶著高中累積的證據進入選秀與測試窗口。先前的觀察興趣不是指名保證；接下來仍要接受組織評估。"};
+  }
+  if (!original) return null;
+  if (eventId === "critical_offseason") return {...original, choices: [
+    {text:"練習守備腳步與第一步反應"}, {text:"集中打擊與爆發力"}, {text:"降低疲勞，完成恢復"}
+  ]};
+  if (eventId === "critical_tournament") return {...original, title:"高三最後一次正式實戰評估",
+    text: () => getHighSchoolYearOneMatchPresentation(prepareHighSchoolYearThreeMatch()),
+    get choices() { return getHighSchoolYearOneMatchMomentChoices(prepareHighSchoolYearThreeMatch()); }};
+  if (eventId === "critical_exit_choice") {
+    const state = ensureHighSchoolCareerOffers();
+    if (!state) return {...original,text:"正式實戰與職涯資料尚未完成，暫時無法選擇出口。",choices:[]};
+    const unavailable = state.offerSet.eligibility.routes.filter(item=>!item.eligible).map(item=>`${{draft:"選秀",college:"大學",amateur:"業餘",rehab:"復健"}[item.route]}：${item.reasonCodes.map(code=>HighSchoolCareerOffers.REASONS[code]).join("、")}`).join("\n");
+    return {...original,title:"畢業前可選擇的入口",text:`系統依三年能力、正式出場、健康與課業整理了以下入口。選擇只決定下一段發展方向，並不保證未來主力位置。\n${unavailable}`,
+      choices:state.offerSet.offers.map(offer=>({text:`${offer.careerExit}（${offer.confidence==="low"?"觀察／測試":offer.confidence==="moderate"?"有正式關注":"發展入口"}）：${offer.reasonCodes.map(code=>HighSchoolCareerOffers.REASONS[code]).join("、")}`,offerId:offer.offerId}))};
+  }
+  if (eventId === "critical_year_result") return {...original,text:()=>getHighSchoolCareerSummaryText()};
+  if (eventId === "critical_public_attention") return {...original,title:"如何回應外界詢問",text:()=>{
+    const match=player.highSchoolYearThreeMatchHistory?.at(-1);
+    return match?.actualExposure?.participated ? `比賽紀錄留下了你的 ${match.actualExposure.plateAppearances} 個打席、${match.actualExposure.defensiveInnings} 局守備。你如何回應外界詢問？` : "這次比賽沒有你的正式上場紀錄。你仍可整理能力與發展方向供外界了解，但這不等於比賽實績。";
+  },choices:original.choices.map(choice=>({...choice,text:choice.text.replace("下一場任務","下一階段準備")}))};
+  if (eventId === "critical_injury") return {...original,title:"正式評估後的身體回報",text:()=>`最後一次正式評估後，你和防護員檢視目前的負荷：疲勞 ${player.body.fatigue}、疼痛 ${player.body.pain}、傷病風險 ${player.body.injuryRisk}。接下來的發展安排需反映這些限制。`,choices:original.choices.map(choice=>{
+    const copy={...choice,careerEffects:{...choice.careerEffects}}; delete copy.careerEffects.recentPerformance;
+    return {...copy,text:choice.text.replace("退出下一場","調整後續負荷").replace("把最後大賽打完","繼續承擔負荷"),memory:"你與防護員重新確認下一段發展的健康限制；這不會新增任何比賽實績。"};
+  })};
+  if (eventId === "critical_scout_interview") return {...original,title:"整理下一階段的球員資料",text:"教練協助你整理能力、正式參賽紀錄與健康資料。你可以說明未來方向；訪談印象不會替代比賽證據。"};
+  if (eventId === "critical_family") return {...original,text:"家人把升學、選秀與繼續培養的資料放在桌上，詢問你希望承擔哪一種風險。你可以表達意願；真正開放的入口仍須依能力、正式證據、課業與健康決定。"};
+  return original;
+}
+
 function isCanonicalHighSchoolYearTwoRoute() {
   return player.chapter === "青棒第二年"
     && Number(player.highSchoolYearTransitionState?.currentHighSchoolYear) === 2
@@ -9304,6 +9438,7 @@ function prepareHighSchoolYearTwoAutumnMatch() {
 }
 
 function prepareCurrentHighSchoolYearOneMatch() {
+  if (getCurrentEventId() === "critical_tournament" && isCanonicalHighSchoolYearThreeRoute()) return prepareHighSchoolYearThreeMatch();
   if (getCurrentEventId() === "high_school_year_two_autumn_stage" && isHighSchoolYearOneMatchEventId("high_school_year_two_autumn_stage")) {
     return prepareHighSchoolYearTwoAutumnMatch();
   }
@@ -11216,12 +11351,22 @@ function applyHighSchoolCompetitionMatchSettlement(match) {
 function recordHighSchoolYearOneMatchHistory(match, competitionSettlement) {
   if (!match?.id) return [];
   const highSchoolYear = Math.max(1, Number(match.highSchoolYear) || 1);
-  const historyKey = highSchoolYear === 2 ? "highSchoolYearTwoMatchHistory" : "highSchoolYearOneMatchHistory";
+  const historyKey = highSchoolYear === 3 ? "highSchoolYearThreeMatchHistory" : highSchoolYear === 2 ? "highSchoolYearTwoMatchHistory" : "highSchoolYearOneMatchHistory";
   const history = Array.isArray(player[historyKey]) ? player[historyKey].slice(-2) : [];
   const exposure = match.gameExposureState || {};
   const record = {
     matchId: match.id,
     highSchoolYear,
+    phase: match.matchType || "",
+    competitionContext: {
+      homeRosterIdentity: player.schoolInvitationState?.selectedSchoolYearRosterIdentity?.identity || "",
+      opponentRosterIdentity: match.rosters?.away?.teamRoster
+        ? `${match.rosters.away.teamRoster.teamId}|${match.rosters.away.teamRoster.yearIdentity}|${match.rosters.away.teamRoster.generationSeed}` : "",
+      homeStrength: cloneSchoolInvitationValue(match.rosters?.home?.teamStrengthProfile || {}),
+      opponentStrength: cloneSchoolInvitationValue(match.rosters?.away?.teamStrengthProfile || {})
+    },
+    competitionEvidence: competitionSettlement?.evidence ? cloneSchoolInvitationValue(competitionSettlement.evidence) : null,
+    decisionExecutionSummary: (match.completedMoments || []).map(item => ({ decision: item.decision, decisionQuality: item.decisionQuality, executionQuality: item.executionQuality, tier: item.tier })),
     opportunityIndex: Math.max(1, Number(match.opportunityIndex) || 1),
     opponent: match.opponent || "",
     outcome: match.outcome || "",
@@ -12229,6 +12374,8 @@ function enterCriticalYear() {
 }
 
 function enterCareerTransition() {
+  if (isCanonicalHighSchoolYearThreeRoute() && (!player.highSchoolCareerSettlement?.appliedSettlementIdentity
+    || player.highSchoolCareerSettlement.careerExit !== player.careerExit)) return { committed: false, reason: "high-school-offer-selection-required" };
   const commitResult = CareerTransitionCommitBoundary.commitGraduationTransition(player);
   if (!commitResult.committed) return commitResult;
 
@@ -14041,6 +14188,15 @@ function evaluateHighSchoolYearTwo() {
 }
 
 function evaluateCriticalYear() {
+  if (isCanonicalHighSchoolYearThreeRoute()) {
+    const state = player.highSchoolCareerSettlement;
+    if (!state?.appliedSettlementIdentity || player.criticalYearStep < 8) return false;
+    player.criticalYearResult = "三年累積，走向你選擇的下一站";
+    player.criticalYearDetail = getHighSchoolCareerSummaryText();
+    player.careerPrimaryTool = state.evidence.positionProfile.primaryPosition || "綜合能力";
+    player.chapter = "青棒生涯出口";
+    return true;
+  }
   const positionValue = getPositionCareerValue();
   const offensiveValue = getOffensiveCareerValue();
   player.careerPrimaryTool = offensiveValue >= 2 && offensiveValue > positionValue ? "打擊" : positionValue > 0 ? player.seasonPosition : "綜合能力";

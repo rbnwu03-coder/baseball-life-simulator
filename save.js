@@ -130,6 +130,25 @@ function normalizeSave(saved) {
   fresh.highSchoolYearTwoPlan = typeof saved.highSchoolYearTwoPlan === "string" ? saved.highSchoolYearTwoPlan : "";
   fresh.highSchoolYearTwoMatchHistory = Array.isArray(saved.highSchoolYearTwoMatchHistory)
     ? saved.highSchoolYearTwoMatchHistory.slice(-2).map(item => JSON.parse(JSON.stringify(item))) : [];
+  fresh.highSchoolYearThreeMatchHistory = Array.isArray(saved.highSchoolYearThreeMatchHistory)
+    ? saved.highSchoolYearThreeMatchHistory.slice(-2).map(item => JSON.parse(JSON.stringify(item))) : [];
+  fresh.highSchoolCareerPreparation = saved.highSchoolCareerPreparation ? JSON.parse(JSON.stringify(saved.highSchoolCareerPreparation)) : null;
+  fresh.highSchoolCareerSettlement = saved.highSchoolCareerSettlement ? JSON.parse(JSON.stringify(saved.highSchoolCareerSettlement)) : null;
+  if (fresh.highSchoolCareerSettlement) {
+    const settlement = fresh.highSchoolCareerSettlement;
+    if (typeof HighSchoolCareerOffers === "undefined" || !settlement.evidence || !settlement.offerSet
+      || !HighSchoolCareerEvaluation.isValidSnapshot(settlement.evidence)
+      || settlement.settlementIdentity !== `${settlement.offerSet.offerSetIdentity}|settlement`
+      || JSON.stringify(HighSchoolCareerOffers.generate(settlement.evidence)) !== JSON.stringify(settlement.offerSet)) {
+      throw new Error("高中職涯邀請資料不一致。");
+    }
+    if (settlement.appliedSettlementIdentity) {
+      const offer = settlement.offerSet.offers.find(item => item.offerId === settlement.selectedOffer?.offerId);
+      if (!offer || JSON.stringify(offer) !== JSON.stringify(settlement.selectedOffer)
+        || settlement.appliedSettlementIdentity !== settlement.settlementIdentity
+        || offer.careerExit !== settlement.careerExit || offer.careerExit !== fresh.careerExit) throw new Error("高中職涯選擇資料不一致。");
+    } else if (fresh.careerExit || settlement.careerExit || settlement.selectedOffer) throw new Error("未選擇邀請卻已有職涯出口。");
+  }
   fresh.highSchoolMatch = Object.assign({}, highSchoolDefaults.highSchoolMatch, saved.highSchoolMatch || {});
   fresh.highSchoolMatch.scores = Object.assign({}, highSchoolDefaults.highSchoolMatch.scores, saved.highSchoolMatch?.scores || {});
   fresh.highSchoolMatch.runners = Array.isArray(saved.highSchoolMatch?.runners) ? saved.highSchoolMatch.runners : [];
