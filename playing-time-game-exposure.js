@@ -60,8 +60,25 @@
     return ACTUAL_ROLES.includes(role) ? role : "bench";
   }
 
+  const BASEBALL_POSITION_LABELS = Object.freeze({
+    P: "投手", C: "捕手", "1B": "一壘手", "2B": "二壘手", "3B": "三壘手", SS: "游擊手",
+    LF: "外野手", CF: "外野手", RF: "外野手", OF: "外野手"
+  });
+
+  function normalizeBaseballPosition(position) {
+    const value = typeof position === "string" ? position.trim() : "";
+    if (!value) return "內野手";
+    const code = value.toUpperCase();
+    if (BASEBALL_POSITION_LABELS[code]) return BASEBALL_POSITION_LABELS[code];
+    const compatibility = {
+      一壘: "一壘手", 二壘: "二壘手", 三壘: "三壘手", 游擊: "游擊手",
+      左外野手: "外野手", 中外野手: "外野手", 右外野手: "外野手"
+    };
+    return compatibility[value] || value;
+  }
+
   function normalizePosition(position) {
-    return typeof position === "string" && position.trim() ? position.trim() : "內野手";
+    return normalizeBaseballPosition(position);
   }
 
   function isPositionLegalForThrowingHand(position, throws = "R", age = 16) {
@@ -228,15 +245,22 @@
       defensiveInnings: Math.max(0, Number(input.previousActualExposure.defensiveInnings) || 0)
     } : null;
     const evaluationTrend = clamp(input.evaluationTrend, -4, 4, 0);
+    const coachTrust = input.coachTrust === undefined ? null : clamp(input.coachTrust, 0, 10, 5);
+    const health = input.health && typeof input.health === "object" ? input.health : null;
+    const healthReadiness = health
+      ? -Math.round(clamp(health.fatigue, 0, 20, 0) * 0.45 + clamp(health.pain, 0, 20, 0) * 0.8 + clamp(health.injuryRisk, 0, 20, 0) * 0.35)
+      : null;
     const decisionIdentityParts = [OPPORTUNITY_VERSION, matchId, playerId, input.opportunitySeed || "", actualRole,
       input.projectedRole || "", input.playingTimeEnvironment || "medium", input.competitionDepth || "medium",
       input.positionNeed || "medium", coachUsageStyle, position.assigned, positionCapability, positionFit, positionExperience,
       gameContext.gameType || "game", gameContext.inning || 0, gameContext.scoreMargin || 0,
       gameContext.expectedGameImportance || gameContext.importance || "regular", gameContext.leverage || "normal"];
     if (input.evaluationTrend !== undefined) decisionIdentityParts.push(evaluationTrend);
+    if (coachTrust !== null) decisionIdentityParts.push(coachTrust);
+    if (healthReadiness !== null) decisionIdentityParts.push(healthReadiness);
     if (previousActualExposure) decisionIdentityParts.push([previousActualExposure.appearanceType, previousActualExposure.plateAppearances, previousActualExposure.defensiveInnings].join(":"));
     const decisionIdentity = decisionIdentityParts.join("|");
-    const opportunityHash = stableHash(decisionIdentity);
+    const opportunityHash = stableHash(input.stableVariationSeed || decisionIdentity);
     const hashVariation = (opportunityHash % 31) - 15;
     const scoreBreakdown = {
       actualRole: ROLE_BASE[actualRole],
@@ -252,6 +276,8 @@
       deterministicVariation: hashVariation
     };
     if (input.evaluationTrend !== undefined) scoreBreakdown.evaluationTrend = Math.round(evaluationTrend);
+    if (coachTrust !== null) scoreBreakdown.coachTrust = Math.round((coachTrust - 5) * 1.5);
+    if (healthReadiness !== null) scoreBreakdown.healthReadiness = healthReadiness;
     const opportunityScore = Object.values(scoreBreakdown).reduce((sum, value) => sum + Number(value || 0), 0);
     let plannedUsage = resolvePlannedAppearance(opportunityScore, actualRole, coachUsageStyle, opportunityHash);
     let exposureSource = "opportunity-resolver";
@@ -391,6 +417,7 @@
     APPEARANCE_TYPES,
     stableHash,
     normalizeCoachUsageStyle,
+    normalizeBaseballPosition,
     isPositionLegalForThrowingHand,
     resolveLegalPosition,
     createOpportunityReadinessSnapshot,

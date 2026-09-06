@@ -1240,7 +1240,12 @@ const highSchoolYearTwoEvents = {
   },
   high_school_year_two_spring_game: {
     title: "春季聯賽的第一個打席",
-    text: "春季聯賽第五局，比分一比一，一人出局、二壘有人。二壘跑者腳程普通，對方投手前兩輪主要用外角球搶好球。高中現任教練在你走出休息區前只比向右半邊場地：先讓這一分往前走。",
+    text() {
+      if (typeof isCanonicalHighSchoolYearTwoRoute === "function" && isCanonicalHighSchoolYearTwoRoute()) {
+        return getHighSchoolYearOneMatchPresentation();
+      }
+      return "春季聯賽第五局，比分一比一，一人出局、二壘有人。二壘跑者腳程普通，對方投手前兩輪主要用外角球搶好球。高中現任教練在你走出休息區前只比向右半邊場地：先讓這一分往前走。";
+    },
     choices: [
       C("拉打｜主動攻擊有利球，尋求更強擊球", { confidence: 1, pressure: 1 }, ["hs_y2_spring_pull"], "", { gameplayApproach: "pull", skillEffects: { batting: 1 } }),
       C("推打｜順著外側球路，把球送向另一側", { discipline: 1, observe: 1 }, ["hs_y2_spring_opposite"], "", { gameplayApproach: "opposite", skillEffects: { batting: 1, baseballIQ: 1 } }),
@@ -1291,8 +1296,16 @@ const highSchoolYearTwoEvents = {
   },
   high_school_year_two_autumn_stage: {
     title: "秋季盃賽：角色能不能留一整年",
-    text: "秋季盃賽第六局，球隊領先一分，一人出局、一三壘有人。春季曾經成立的角色，現在必須在不同比分與不同對手面前再完成一次。",
+    text() {
+      if (typeof isCanonicalHighSchoolYearTwoRoute === "function" && isCanonicalHighSchoolYearTwoRoute()) {
+        return getHighSchoolYearOneMatchPresentation();
+      }
+      return "秋季盃賽第六局，球隊領先一分，一人出局、一三壘有人。春季曾經成立的角色，現在必須在不同比分與不同對手面前再完成一次。";
+    },
     get choices() {
+      if (typeof isCanonicalHighSchoolYearTwoRoute === "function" && isCanonicalHighSchoolYearTwoRoute()) {
+        return getHighSchoolYearOneMatchMomentChoices();
+      }
       const defenseByPosition = {
         "內野手": {
           text: "守在雙殺深度，接穩後先封住二壘",
