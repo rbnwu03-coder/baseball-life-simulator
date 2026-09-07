@@ -7154,6 +7154,14 @@ function getSecondBaseRouteWindow(routeId, routeWindows = {}) {
   return routeWindows[key] || Object.freeze({ value: 0, state: "expired" });
 }
 
+function hasHighSchoolHomePlay(situation) {
+  const runner = situation.runnerContext?.[2];
+  const input = { forceHome: situation.forceState?.forceAtHome === true, runner };
+  if (typeof DefensiveDecisionThrowFoundation !== "undefined") return DefensiveDecisionThrowFoundation.hasHomePlay(input);
+  // Isolated legacy harness: same context rule, never a position-specific or two-out exemption.
+  return input.forceHome || Boolean(runner?.targetBase === "home" && ["advancing", "committed"].includes(runner.movementProgress));
+}
+
 function evaluateDefensiveRouteAvailability(situation, routeDefinition) {
   const routeId = routeDefinition?.id || "";
   const runnerAtSecond = situation.runnerContext?.[1];
@@ -7168,7 +7176,7 @@ function evaluateDefensiveRouteAvailability(situation, routeDefinition) {
     coverSecondFor643: Boolean(force.doublePlayEligible && force.forceAtSecond && situation.responsibility?.playerRole === "coverPivot"),
     attackLeadRunnerThird: Boolean(runnerAtSecond && runnerAtSecond.targetBase === "third"
       && (force.forceAtThird || ["advancing", "committed"].includes(runnerAtSecond.movementProgress))),
-    preventRunHome: Boolean(runnerAtThird && runnerAtThird.targetBase === "home" && ["advancing", "committed"].includes(runnerAtThird.movementProgress) && !force.forceAtHome && situation.outs < 2 && playerControlsBall && catcherAvailable),
+    preventRunHome: Boolean(hasHighSchoolHomePlay(situation) && !force.forceAtHome && playerControlsBall && catcherAvailable),
     homeForceOut: Boolean(force.forceAtHome && playerControlsBall && catcherAvailable)
   };
   const window = getSecondBaseRouteWindow(routeId, situation.routeWindows);
@@ -7482,7 +7490,7 @@ function generateInfieldLegalChoices(situation, matchState = null) {
         : "接球後直接傳本壘完成封殺，阻止三壘跑者得分";
     choices.push(make(homeText, "home", "forceHome"));
   } else if (force.third && ["游擊手", "三壘手", "二壘手"].includes(position) && situation.ballDepth !== "deep"
-    && (position !== "二壘手" || ["advancing", "committed"].includes(situation.runnerContext?.[2]?.movementProgress))) {
+    && hasHighSchoolHomePlay(situation)) {
     choices.push(make("接球後傳本壘，挑戰正要得分的三壘跑者", "home", "tagHome"));
   }
   if (force.doublePlayEligible) {
@@ -10720,18 +10728,61 @@ function beginAutomaticGroundBallSituationExecution(match) {
   return situation;
 }
 
+function getHighSchoolControlledDecisionInput(match, state = match?.groundBallInPlayState) {
+  if (typeof DefensiveDecisionThrowFoundation === "undefined" || state?.settlementApplied || !state?.secureResolution || !state.defensiveAccess?.reachResolution) return null;
+  const routeWindows = {};
+  for (const id of Object.keys(SECOND_BASE_ROUTE_DEFINITIONS)) {
+    routeWindows[id] = getSecondBaseRouteWindow(id, match.defensiveSituation?.routeWindows || {}).state;
+  }
+  return { physicalTruth: state.physicalTruth, opportunity: getHighSchoolDefensiveOpportunity(match, state.physicalTruth),
+    activeRoster: match.rosters[match.defenseTeam], capabilities: state.defensiveAccess.secureCapabilities,
+    reachResult: state.defensiveAccess.reachResolution, secureResult: state.secureResolution,
+    runners: match.runners, outs: match.outs, inning: match.inning, half: match.half, scores: match.scores,
+    batterRunnerId: state.runnerRealization?.batterRunner?.runnerId, forceChain: state.forceChain,
+    runnerStates: (state.runnerPhysicalStates || []).filter(r => match.runners.includes(r.runnerId)), routeWindows };
+}
+
+function getHighSchoolControlledDefensiveRoutes(match) {
+  const input = getHighSchoolControlledDecisionInput(match);
+  return input ? DefensiveDecisionThrowFoundation.buildDecisionOpportunity(input) : null;
+}
+
+function validateHighSchoolDecisionThrowState(match) {
+  const state = match?.groundBallInPlayState;
+  if (!state?.decisionThrowState || state.settlementApplied || typeof DefensiveDecisionThrowFoundation === "undefined") return;
+  DefensiveDecisionThrowFoundation.validateStoredStage(state.decisionThrowState, getHighSchoolControlledDecisionInput(match, state));
+}
+
+function projectHighSchoolControlledDecisionThrow(match, resolution, state = match?.groundBallInPlayState) {
+  const input = getHighSchoolControlledDecisionInput(match, state);
+  if (!input) return null;
+  const opportunity = DefensiveDecisionThrowFoundation.buildDecisionOpportunity(input);
+  const intentRoute = resolution.initialRoute || resolution.routeId;
+  if (opportunity.status !== "controlledDecision") return { opportunity, preControlIntent: intentRoute, selection: null, throwResolution: null };
+  const selection = DefensiveDecisionThrowFoundation.selectDefensiveRoute(opportunity, intentRoute, input);
+  const finalRoute = resolution.activeRoute || resolution.routeId;
+  const activeSelection = finalRoute === intentRoute ? selection : DefensiveDecisionThrowFoundation.selectDefensiveRoute(opportunity, finalRoute, input);
+  const throwResolution = DefensiveDecisionThrowFoundation.projectExistingThrow({ input, opportunity, selection: activeSelection,
+    playerLeg: resolution.playerLeg, evidence: { ...resolution.controlEvidence, arm: resolution.arm, throwing: resolution.throwing,
+      firstThrowWindow: resolution.windows?.throw } });
+  return { opportunity, preControlIntent: intentRoute, selection, activeSelection, throwResolution };
+}
+
 function recordGroundBallSituationResolution(match, resolution) {
   if (!match || !resolution || typeof MatchSituationLifecycle === "undefined") return null;
   let situation = MatchSituationLifecycle.normalizeSituation(match.activeSituation);
   if (!situation || situation.type !== MatchSituationLifecycle.TYPES.groundBallDefensiveDecision
     || situation.lifecycleState !== "executing") return situation;
+  validateHighSchoolDecisionThrowState(match);
   const handoff = match.groundBallInPlayState;
   if (handoff?.supported && !handoff.settlementApplied && !handoff.secureResolution
     && handoff.defensiveAccess?.reachResolution && resolution.playerLeg?.control
     && typeof DefensiveReachSecureFoundation !== "undefined") {
     assertHighSchoolDetailedResponsibility(match, handoff.physicalTruth, "2B", "player");
-    match.groundBallInPlayState = BattedBallGroundDefense.normalizeHandoff({ ...handoff,
+    const securedHandoff = BattedBallGroundDefense.normalizeHandoff({ ...handoff,
       secureResolution: DefensiveReachSecureFoundation.projectGroundControl(handoff.defensiveAccess.reachResolution, resolution.playerLeg.control, resolution.controlEvidence) });
+    const decisionThrowState = projectHighSchoolControlledDecisionThrow(match, resolution, securedHandoff);
+    match.groundBallInPlayState = BattedBallGroundDefense.normalizeHandoff({ ...securedHandoff, ...(decisionThrowState ? { decisionThrowState } : {}) });
   }
   if (resolution.reassessment) {
     const remaining = (resolution.reassessment.availableRouteIds || []).map(routeId => ({ routeId }));

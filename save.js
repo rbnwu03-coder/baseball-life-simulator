@@ -489,6 +489,7 @@ function normalizeSave(saved) {
     }
   }
   fresh.highSchoolAzheEcho.evidence = Array.isArray(saved.highSchoolAzheEcho?.evidence) ? saved.highSchoolAzheEcho.evidence : [];
+  if (typeof validateHighSchoolDecisionThrowState === "function") validateHighSchoolDecisionThrowState(fresh.highSchoolMatch);
   fresh.highSchoolRivalContext = Object.assign({}, highSchoolDefaults.highSchoolRivalContext, saved.highSchoolRivalContext || {});
   const legacyCompletedYearOne = sourceSaveVersion < 15 && (
     fresh.chapter === "青棒第一年小結" ||
