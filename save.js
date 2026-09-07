@@ -483,6 +483,11 @@ function normalizeSave(saved) {
     }
   }
   fresh.highSchoolAzheEcho = Object.assign({}, highSchoolDefaults.highSchoolAzheEcho, saved.highSchoolAzheEcho || {});
+  if (typeof DefensiveReachSecureFoundation !== "undefined") {
+    for (const state of [fresh.highSchoolMatch.groundBallInPlayState, fresh.highSchoolMatch.lineDriveCatchState, fresh.highSchoolMatch.flyBallCatchState]) {
+      DefensiveReachSecureFoundation.validatePendingState(state, fresh.highSchoolMatch.rosters[fresh.highSchoolMatch.defenseTeam]);
+    }
+  }
   fresh.highSchoolAzheEcho.evidence = Array.isArray(saved.highSchoolAzheEcho?.evidence) ? saved.highSchoolAzheEcho.evidence : [];
   fresh.highSchoolRivalContext = Object.assign({}, highSchoolDefaults.highSchoolRivalContext, saved.highSchoolRivalContext || {});
   const legacyCompletedYearOne = sourceSaveVersion < 15 && (

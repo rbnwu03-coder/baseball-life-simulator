@@ -80,6 +80,7 @@
         : context.depth !== "shallow" ? "unsupportedLineDriveDepth" : "unsupportedScope";
       return deepFreeze({ playerPosition: defender.playerPosition || "", level: "unsupported", supported: false, score: 0, reason });
     }
+    if (defender.reachAccess) return deepFreeze({ playerPosition: defender.playerPosition, ...clone(defender.reachAccess) });
     const reaction = clamp(defender.reaction, 0, 20, 5);
     const range = clamp(defender.range, 0, 20, 5);
     const catching = clamp(defender.catching ?? defender.fielding, 0, 20, 5);
@@ -148,15 +149,22 @@
     const reaction = clamp(defenderContext.reaction, 0, 20, 5);
     const range = clamp(defenderContext.range, 0, 20, 5);
     const rngNamespace = String(options.rngNamespace || RNG_NAMESPACES.catchExecution);
+    const secure = options.secureResolution;
+    const reach = opportunity.defensiveAccess?.reachResolution;
+    if (secure && (secure.physicalIdentity !== opportunity.physicalTruth.identity || !secure.attemptAvailable
+      || !reach || secure.reachIdentity !== reach.identity || secure.defenderId !== reach.defenderId || secure.position !== reach.position
+      || secure.secured !== (secure.secureQuality === "caughtBeforeGround")
+      || !["caughtBeforeGround", "notCaught"].includes(secure.secureQuality))) throw new Error("Incompatible secure catch result");
     const rawRoll = Number(options.executionRoll);
-    const roll = Number.isFinite(rawRoll) ? clamp(rawRoll, 0, 0.999999, 0.5)
+    const roll = secure ? secure.variationEvidence.roll : Number.isFinite(rawRoll) ? clamp(rawRoll, 0, 0.999999, 0.5)
       : deterministicUnit(rngNamespace, opportunity.identity);
     const windowModifier = { wide: 1.2, normal: 0.4, narrow: -0.8, expired: -4 }[opportunity.catchWindow.state] ?? -4;
-    const executionScore = catching * 0.45 + reaction * 0.35 + range * 0.2 + windowModifier + (0.5 - roll) * 8;
-    const caught = executionScore >= 6.5;
+    const executionScore = secure ? null : catching * 0.45 + reaction * 0.35 + range * 0.2 + windowModifier + (0.5 - roll) * 8;
+    const caught = secure ? secure.secured : executionScore >= 6.5;
     return deepFreeze({
       version: "line-drive-catch-result-v1",
-      authority: "catchOpportunity+existingDefensiveCapabilities+deterministicVariation",
+      authority: secure ? "canonicalSecureToExistingCatchSettlement" : "catchOpportunity+existingDefensiveCapabilities+deterministicVariation",
+      ...(secure ? { secureResolution: clone(secure) } : {}),
       result: caught ? "caught" : "notCaught",
       caught,
       ballState: caught ? "securedBeforeGround" : "liveAfterGroundContact",
@@ -170,7 +178,8 @@
         automaticHit: false,
         authority: "catchFailurePhysicalResult"
       },
-      executionEvidence: {
+      executionEvidence: secure ? { ...clone(secure.inputs), secureDemand: secure.secureDemand, margin: secure.margin,
+        roll: secure.variationEvidence.roll, rngNamespace: secure.variationEvidence.namespace } : {
         catching, reaction, range, windowState: opportunity.catchWindow.state,
         executionScore: Math.round(executionScore * 1000) / 1000,
         roll,

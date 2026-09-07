@@ -72,6 +72,7 @@
           : !expectedPosition ? "unsupportedFlyBallDirection" : "defenderAssignmentUnavailable";
       return deepFreeze({ defenderId: defender.defenderId || "", defenderPosition: defender.position || "", level: "unsupported", supported: false, score: 0, reason });
     }
+    if (defender.reachAccess) return deepFreeze({ defenderId: defender.defenderId, defenderPosition: defender.position, ...clone(defender.reachAccess) });
     const reaction = clamp(defender.reaction, 0, 20, 5);
     const range = clamp(defender.range, 0, 20, 5);
     const catching = clamp(defender.catching ?? defender.fielding, 0, 20, 5);
@@ -107,13 +108,14 @@
     const defensiveAccess = resolveFlyBallCatchAccess({ ...input, airborneContext });
     const catchWindow = buildFlyBallCatchTimingWindow({ airborneContext, defensiveAccess });
     const supported = defensiveAccess.supported && catchWindow.state !== "expired";
+    const { reachAccess, ...defenderContext } = input.defenderContext || {}; // Reach persists once, under defensiveAccess.
     return deepFreeze({
       version: VERSION,
       identity: String(input.identity || `${physicalTruth.identity || "fly-ball"}|catch`),
       sourceAuthority: "BattedBallPhysicalTruth",
       physicalTruth: clone(physicalTruth),
       airborneContext,
-      defenderContext: clone(input.defenderContext || {}),
+      defenderContext: clone(defenderContext),
       runnerInitialReadStates,
       defensiveAccess,
       catchWindow,
@@ -133,6 +135,7 @@
     if (!opportunity?.supported || !AirborneDefense) return null;
     const result = AirborneDefense.resolveCatchExecution(opportunity, opportunity.defenderContext || {}, {
       executionRoll: options.executionRoll,
+      secureResolution: options.secureResolution,
       rngNamespace: RNG_NAMESPACES.catchExecution
     });
     return result ? deepFreeze({ ...clone(result), retouchRequirements: [] }) : null;

@@ -238,6 +238,7 @@
     if (truth.ballType !== "groundBall" || !directionSupported || !positionSupported) {
       return deepFreeze({ playerPosition: defender.playerPosition || "", level: "unsupported", supported: false, score: 0, reason: truth.direction === "leftSide" ? "leftSideNoPlayerBallMagnet" : "unsupportedScope" });
     }
+    if (defender.reachAccess) return deepFreeze({ playerPosition: defender.playerPosition, ...clone(defender.reachAccess) });
     const reaction = clamp(defender.reaction, 0, 20, 5);
     const range = clamp(defender.range, 0, 20, 5);
     const paceAdjustment = truth.pace === "hard" ? (reaction - 5) * 0.1
