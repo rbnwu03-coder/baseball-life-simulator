@@ -474,6 +474,14 @@ function normalizeSave(saved) {
     fresh.highSchoolMatch.lastDefensiveResolution = Object.assign({}, highSchoolDefaults.highSchoolMatch.lastDefensiveResolution);
     fresh.highSchoolMatch.rosters = { home: null, away: null };
   }
+  if (typeof TeamRosterFoundation !== "undefined" && (
+    fresh.highSchoolMatch.rosters.home || fresh.highSchoolMatch.rosters.away
+    || (fresh.highSchoolMatch.simulationPhase && fresh.highSchoolMatch.simulationPhase !== "idle")
+  )) {
+    for (const roster of Object.values(fresh.highSchoolMatch.rosters)) {
+      TeamRosterFoundation.assertActiveDefense(roster);
+    }
+  }
   fresh.highSchoolAzheEcho = Object.assign({}, highSchoolDefaults.highSchoolAzheEcho, saved.highSchoolAzheEcho || {});
   fresh.highSchoolAzheEcho.evidence = Array.isArray(saved.highSchoolAzheEcho?.evidence) ? saved.highSchoolAzheEcho.evidence : [];
   fresh.highSchoolRivalContext = Object.assign({}, highSchoolDefaults.highSchoolRivalContext, saved.highSchoolRivalContext || {});

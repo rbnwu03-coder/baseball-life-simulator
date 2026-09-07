@@ -5,6 +5,9 @@ const vm = require("vm");
 const root = path.resolve(__dirname, "..");
 const files = ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "evaluation-registry.js", "coach-evaluation-boundary.js", "narrative-condition-boundary.js", "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js", "competition-presentation.js", "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js", "baseball-offense-prototype.js", "offensive-plate-approach.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js", "career-spine-contract.js", "career-transition-resolver.js", "career-transition-commit.js", "career-transition-runtime-resolver.js", "career-transition-progression.js", "career-development-runtime-resolver.js", "career-development-progression.js", "career-age22-outcome-resolver.js", "career-save-admission.js", "story.js", "save.js", "script.js"];
 
+// Exercise the production roster boundary rather than the pre-roster fallback.
+files.splice(files.indexOf("story.js"), 0, "team-roster-foundation.js", "team-strength-model.js");
+
 function makeContext() {
   const nodes = new Map();
   const document = {

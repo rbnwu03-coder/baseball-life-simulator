@@ -267,7 +267,9 @@
     });
     const starterIds = new Set(lineup.map(player => player.playerId));
     const bench = teamRoster.benchPlayers.filter(player => !starterIds.has(player.playerId)).map(player => Object.freeze({ ...player, id: player.id || player.playerId, position: POSITION_LABELS[player.primaryPosition], source: player.id === "player" ? "canonical-player" : "simulation-roster" }));
-    return { lineup, bench, pitchingStaff: teamRoster.pitchingStaff, teamRoster, teamStrengthProfile: strengthProfile, source: VERSION };
+    const roster = { lineup, bench, pitchingStaff: teamRoster.pitchingStaff, teamRoster, teamStrengthProfile: strengthProfile, source: VERSION };
+    assertActiveDefense(roster);
+    return roster;
   }
 
   function validateRoster(roster) {
@@ -300,6 +302,51 @@
       benchCompetitorIds: Object.freeze(benchCompetitors.map(player => player.playerId)),
       competitionCount: competitorIds.length
     });
+  }
+
+  // Match lineup is the current assignment authority; TeamRoster is its season snapshot.
+  function validateActiveDefense(roster) {
+    const issues = [];
+    const lineup = Array.isArray(roster?.lineup) ? roster.lineup : [];
+    const bench = Array.isArray(roster?.bench) ? roster.bench : [];
+    if (roster?.bench && !Array.isArray(roster.bench)) issues.push("active-bench-invalid");
+    const benchIds = new Set(bench.flatMap(actor => [actor?.id, actor?.playerId].filter(Boolean)));
+    const rosterPlayers = Array.isArray(roster?.teamRoster?.players) ? roster.teamRoster.players : null;
+    if ((roster?.teamRoster || roster?.source === VERSION) && !rosterPlayers) issues.push("active-roster-reference-missing");
+    const actorIds = new Set();
+    const playerIds = new Set();
+    const positions = new Set();
+    if (lineup.length !== POSITION_ORDER.length) issues.push("active-defense-size");
+    for (const actor of lineup) {
+      const id = actor?.id;
+      const playerId = actor?.playerId || id;
+      const code = normalizePosition(actor?.defensivePosition || actor?.position);
+      if (!id || actorIds.has(id) || playerIds.has(playerId)) issues.push("active-actor-identity");
+      if (benchIds.has(id) || benchIds.has(playerId)) issues.push("active-actor-on-bench");
+      actorIds.add(id);
+      playerIds.add(playerId);
+      if (!code || positions.has(code)) issues.push("active-position-duplicate-or-invalid");
+      positions.add(code);
+      if (actor?.position && normalizePosition(actor.position) !== code) issues.push("active-position-alias-conflict");
+      if (!isHighSchoolPositionAssignmentLegal(actor, code)) issues.push("active-position-ineligible");
+      if (rosterPlayers && !rosterPlayers.some(item => item.id === id && (!actor.playerId || item.playerId === actor.playerId))) {
+        issues.push("active-actor-not-in-roster");
+      }
+    }
+    for (const code of POSITION_ORDER) if (!positions.has(code)) issues.push(`active-position-missing-${code}`);
+    return { ok: issues.length === 0, issues };
+  }
+
+  function assertActiveDefense(roster) {
+    const result = validateActiveDefense(roster);
+    if (!result.ok) throw new Error(`Active defense integrity failed: ${result.issues.join(",")}`);
+    return true;
+  }
+
+  function getCurrentDefender(roster, position) {
+    if (!validateActiveDefense(roster).ok) return null;
+    const code = normalizePosition(position);
+    return roster.lineup.find(actor => normalizePosition(actor.defensivePosition || actor.position) === code) || null;
   }
 
   function injectPlayerIntoRoster(baseRoster, playerActor, options = {}) {
@@ -342,6 +389,7 @@
   return Object.freeze({
     VERSION, POSITION_ORDER, POSITION_LABELS, LEFT_HANDED_RESTRICTED, STANDARD_PRIORS, SCHOOL_STANDARDS,
     normalizePosition, isPositionEligible, isHighSchoolPositionAssignmentLegal, getLegalHighSchoolPositions,
-    createSeededRandom, generateTeamRoster, rebuildTeamRoster, toMatchRoster, validateRoster, getPositionCompetition, injectPlayerIntoRoster
+    createSeededRandom, generateTeamRoster, rebuildTeamRoster, toMatchRoster, validateRoster, getPositionCompetition, injectPlayerIntoRoster,
+    validateActiveDefense, assertActiveDefense, getCurrentDefender
   });
 });

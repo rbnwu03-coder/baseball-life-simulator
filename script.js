@@ -4932,9 +4932,8 @@ function getHighSchoolFlyBallDefenderCatchContext(match, physicalTruth, options 
   if (options.flyBallDefenderContext) return Object.freeze({ ...options.flyBallDefenderContext });
   const expectedPosition = physicalTruth?.direction === "rightSide" ? "右外野手"
     : physicalTruth?.direction === "middle" ? "中外野手" : "";
-  const roster = match?.rosters?.[match.defenseTeam] || {};
-  const defender = [...(roster.lineup || []), ...(roster.bench || [])]
-    .find(entity => entity?.id !== "player" && entity.position === expectedPosition);
+  const currentDefender = getCurrentHighSchoolMatchDefender(match, match.defenseTeam, expectedPosition);
+  const defender = currentDefender?.id === "player" ? null : currentDefender;
   if (!defender) return Object.freeze({ defenderId: "", name: "", position: expectedPosition, assignmentAuthority: "unavailable" });
   const capability = getDefensiveSimulationCapability(defender, "外野手", match);
   return Object.freeze({
@@ -5435,14 +5434,15 @@ const HIGH_SCHOOL_TAG_UP_ROUTES = Object.freeze({
 });
 
 function getHighSchoolTagUpReceivingTarget(match) {
-  const catcher = (match?.rosters?.[match.defenseTeam]?.lineup || []).find(entity => entity.position === "捕手") || null;
-  const capability = catcher ? getDefensiveSimulationCapability(catcher, "捕手", match) : { fielding: 5, reaction: 5 };
+  const catcher = getCurrentHighSchoolMatchDefender(match, match.defenseTeam, "捕手");
+  if (!catcher) throw new Error("Active defense integrity failed: missing tag-up receiver");
+  const capability = getDefensiveSimulationCapability(catcher, "捕手", match);
   return {
-    receiverId: catcher?.id || `${match?.defenseTeam || "defense"}-catcher-abstraction`,
+    receiverId: catcher.id,
     position: "捕手",
     receiving: Number(capability.fielding) || 5,
     reaction: Number(capability.reaction) || 5,
-    authority: catcher ? "existingRosterFieldTopology" : "minimalReceivingAbstraction"
+    authority: "existingRosterFieldTopology"
   };
 }
 
@@ -6215,6 +6215,7 @@ function createHighSchoolMatchSimulationRoster(role, playerPosition, simulationS
 function insertPlayerIntoHighSchoolMatchLineup(match) {
   const lineup = match.rosters?.home?.lineup;
   const bench = match.rosters?.home?.bench;
+  if (typeof TeamRosterFoundation !== "undefined") TeamRosterFoundation.assertActiveDefense(match.rosters?.home);
   if (!Array.isArray(lineup)) return false;
   const existingSlot = lineup.findIndex(item => item.id === "player");
   if (existingSlot >= 0) {
@@ -6225,14 +6226,30 @@ function insertPlayerIntoHighSchoolMatchLineup(match) {
   const replaced = lineup[slot];
   const assignedPosition = match.gameExposureState?.opportunitySnapshot?.assignedPosition
     || match.developmentPositionOverride || match.playerFieldingAssignment || match.position;
-  lineup[slot] = { id: "player", name: player.name || "你", position: assignedPosition, bats: player.bats, source: "canonical-player" };
-  match.rosters.home.bench = (Array.isArray(bench) ? bench : []).filter(item => item.id !== "player");
-  if (replaced) match.rosters.home.bench.push(replaced);
+  const incumbent = getCurrentHighSchoolMatchDefender(match, "home", assignedPosition);
+  if (!incumbent) throw new Error("Active defense integrity failed: missing substitution incumbent");
+  if (incumbent !== replaced) return false;
+  const benchPlayer = (bench || []).find(item => item.id === "player");
+  if (!benchPlayer) throw new Error("Active defense integrity failed: incoming player not on bench");
+  const incoming = { ...benchPlayer, id: "player", name: player.name || "你",
+    position: replaced.position, defensivePosition: replaced.defensivePosition,
+    bats: player.bats, throws: player.throws, age: player.age, source: "canonical-player" };
+  const nextRoster = { ...match.rosters.home, lineup: lineup.map((actor, index) => index === slot ? incoming : actor),
+    bench: [...(bench || []).filter(item => item.id !== "player"), replaced] };
+  if (typeof TeamRosterFoundation !== "undefined") TeamRosterFoundation.assertActiveDefense(nextRoster);
+  match.rosters.home = nextRoster;
   match.playerLineupSlot = slot;
   return { slot, replaced };
 }
 
 function shouldEnterHighSchoolMatchPlayer(match) {
+  if (match && !match.playerEntryCompleted && match.playerLineupStatus === "bench") {
+    const assignedPosition = match.gameExposureState?.opportunitySnapshot?.assignedPosition
+      || match.developmentPositionOverride || match.playerFieldingAssignment || match.position;
+    const incumbent = getCurrentHighSchoolMatchDefender(match, "home", assignedPosition);
+    if (!incumbent) throw new Error("Active defense integrity failed: missing substitution incumbent");
+    if (match.rosters.home.lineup[Number(match.battingOrderIndex?.home) || 0] !== incumbent) return false;
+  }
   const exposureState = match?.gameExposureState;
   if (exposureState) {
     if (exposureState.pitcherExposureDeferred || exposureState.plannedUsage?.appearanceType === "noAppearance") return false;
@@ -6415,6 +6432,9 @@ function getHighSchoolMatchStateIntegrityIssues(match) {
     if (expectedBatter && match.currentBatter !== expectedBatter) issues.push("current-batter-mismatch");
   }
   ["home", "away"].forEach(team => {
+    if (typeof TeamRosterFoundation !== "undefined") {
+      issues.push(...TeamRosterFoundation.validateActiveDefense(match?.rosters?.[team]).issues.map(issue => `${team}-${issue}`));
+    }
     const index = Number(match?.battingOrderIndex?.[team]);
     const length = match?.rosters?.[team]?.lineup?.length || 0;
     if (!Number.isInteger(index) || index < 0 || (length && index >= length)) issues.push(`${team}-batting-order-index-invalid`);
@@ -6662,7 +6682,8 @@ function resolveSimulatedHighSchoolPlateAppearance(match, randomSource = null, o
   const batter = getHighSchoolMatchLineupBatter(match, match.offenseTeam);
   if (!batter || (batter.id === "player" && options.allowPlayer !== true)) return false;
   const capability = getOffensiveSimulationCapability(batter);
-  const pitcher = (match.rosters?.[match.defenseTeam]?.lineup || []).find(item => item.position === "投手");
+  const pitcher = getCurrentHighSchoolMatchDefender(match, match.defenseTeam, "投手");
+  if (typeof TeamRosterFoundation !== "undefined" && !pitcher) throw new Error("Active defense integrity failed: missing active pitcher");
   const pitcherCapability = pitcher ? getDefensiveSimulationCapability(pitcher, "投手") : { fielding: 5, arm: 5, decision: 5 };
   const rawSample = typeof randomSource === "function" ? Number(randomSource()) : nextHighSchoolMatchSimulationRandom(match);
   const sample = Math.max(0, Math.min(0.999999, Number.isFinite(rawSample) ? rawSample : 0.5));
@@ -6893,20 +6914,29 @@ function deriveInfieldScoreContext(match) {
   });
 }
 
+function getCurrentHighSchoolMatchDefender(match, team, position) {
+  const roster = match?.rosters?.[team];
+  if (typeof TeamRosterFoundation !== "undefined") return TeamRosterFoundation.getCurrentDefender(roster, position);
+  // Compatibility for isolated legacy harnesses without the canonical roster module.
+  const candidates = (roster?.lineup || []).filter(actor => actor.position === position);
+  return candidates.length === 1 && !(roster?.bench || []).some(actor => actor.id === candidates[0].id) ? candidates[0] : null;
+}
+
 function getInfieldTeammateForPosition(match, position) {
-  const entities = [...(match?.rosters?.home?.lineup || []), ...(match?.rosters?.home?.bench || [])];
-  return entities.find(entity => entity.id !== "player" && entity.position === position) || null;
+  const actor = getCurrentHighSchoolMatchDefender(match, "home", position);
+  return actor?.id === "player" ? null : actor;
 }
 
 function buildInfieldTeammateContext(match, playerPosition) {
+  if (typeof TeamRosterFoundation !== "undefined") TeamRosterFoundation.assertActiveDefense(match?.rosters?.home);
   const pivotPosition = playerPosition === "二壘手" ? "游擊手" : playerPosition === "一壘手" ? "游擊手" : "二壘手";
   const firstBasePosition = playerPosition === "一壘手" ? "投手" : "一壘手";
   const pivot = getInfieldTeammateForPosition(match, pivotPosition);
   const firstBase = getInfieldTeammateForPosition(match, firstBasePosition);
   const adapt = (entity, fallbackPosition) => {
-    const capability = entity ? getDefensiveSimulationCapability(entity, entity.position) : { fielding: 5, reaction: 5, range: 5, arm: 5, throwing: 5, decision: 5 };
+    const capability = entity ? getDefensiveSimulationCapability(entity, entity.position) : {};
     return Object.freeze({
-      id: entity?.id || `fallback-${fallbackPosition}`,
+      id: entity?.id || "",
       name: entity?.name || fallbackPosition,
       position: entity?.position || fallbackPosition,
       receivingAvailable: Boolean(entity),
@@ -7204,8 +7234,7 @@ function buildInfieldMeaningfulMoment(matchState, playerContext = player, overri
   matchState.positionDecisionFamily = "infield";
   matchState.currentFieldingPosition = playerPosition;
   matchState.defensiveSituation = JSON.parse(JSON.stringify(situation));
-  const rosterPlayer = [...(matchState.rosters?.home?.lineup || []), ...(matchState.rosters?.home?.bench || [])].find(entity => entity.id === "player");
-  if (rosterPlayer) rosterPlayer.position = playerPosition;
+  // Situation derivation must never mutate the active roster assignment.
   return matchState.defensiveSituation;
 }
 
@@ -9802,7 +9831,10 @@ function getHighSchoolOffensivePlateApproachAbilities(subject = player) {
 
 function ensureHighSchoolPitcherRuntimeState(match) {
   if (!match || typeof PitchSequencing === "undefined") return null;
-  const opponentPitcher = (match.rosters?.away?.lineup || []).find(actor => actor.position === "投手") || null;
+  const opponentPitcher = getCurrentHighSchoolMatchDefender(match, "away", "投手");
+  if (match.rosters?.away && typeof TeamRosterFoundation !== "undefined" && !opponentPitcher) {
+    throw new Error("Active defense integrity failed: missing sequencing pitcher");
+  }
   const rosterControl = Number(opponentPitcher?.pitchingProfile?.control);
   const fallback = {
     runtimeId: `${match.id || "match"}|${opponentPitcher?.id || "opponent-pitcher"}`,
@@ -10022,7 +10054,7 @@ function prepareHighSchoolPlateDecision(match, choice, options = {}) {
     inning: match.inning,
     half: match.half,
     batterId: "player",
-    pitcherId: match.rosters?.away?.lineup?.find(entity => entity.position === "投手")?.id || "opponent-pitcher",
+    pitcherId: getCurrentHighSchoolMatchDefender(match, "away", "投手")?.id || "",
     plateAppearanceState,
     abilities: getHighSchoolOffensivePlateApproachAbilities(player),
     pitch: options.pitch || null,
