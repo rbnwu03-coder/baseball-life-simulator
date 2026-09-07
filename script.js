@@ -4935,6 +4935,31 @@ function getHighSchoolDefensiveOpportunity(match, physicalTruth) {
   });
 }
 
+function getHighSchoolReachAccess(match, physicalTruth, opportunity, defenderContext) {
+  if (typeof DefensiveReachSecureFoundation === "undefined" || !opportunity?.supported) return null;
+  const actor = TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam], opportunity.primaryPosition);
+  const source = actor.id === "player" ? player : actor;
+  const adapted = getDefensiveSimulationCapability(source, opportunity.primaryPosition, match);
+  const capabilities = { defenderId: actor.id,
+    reaction: defenderContext.reaction ?? adapted.reaction,
+    range: defenderContext.range ?? adapted.range,
+    mobility: getOffensiveSimulationCapability(source).speed,
+    fielding: defenderContext.fielding ?? defenderContext.catching ?? adapted.fielding,
+    catching: defenderContext.catching ?? defenderContext.fielding ?? adapted.fielding };
+  const reach = DefensiveReachSecureFoundation.resolveReach({ physicalTruth, opportunity,
+    activeRoster: match.rosters[match.defenseTeam], capabilities, roll: defenderContext.reachRoll });
+  return { ...DefensiveReachSecureFoundation.projectAccess(reach), secureCapabilities: capabilities };
+}
+
+function resolveHighSchoolCanonicalSecure(match, state, roll) {
+  const reachResult = state?.defensiveAccess?.reachResolution;
+  if (!reachResult || typeof DefensiveReachSecureFoundation === "undefined") return null;
+  return DefensiveReachSecureFoundation.resolveSecure({ physicalTruth: state.physicalTruth,
+    opportunity: getHighSchoolDefensiveOpportunity(match, state.physicalTruth),
+    activeRoster: match.rosters[match.defenseTeam], capabilities: state.defensiveAccess.secureCapabilities,
+    reachResult, roll });
+}
+
 function getHighSchoolPhysicalDefensePlayerContext(match, physicalTruth, defenderContext) {
   const opportunity = getHighSchoolDefensiveOpportunity(match, physicalTruth);
   if (!opportunity) return defenderContext; // Pre-foundation isolated harness compatibility.
@@ -4942,7 +4967,8 @@ function getHighSchoolPhysicalDefensePlayerContext(match, physicalTruth, defende
   const ownsExistingSecondBaseSlice = opportunity.supported && opportunity.primaryPosition === "2B"
     && opportunity.primaryDefenderId === "player";
   return { ...defenderContext, playerPosition: ownsExistingSecondBaseSlice ? "二壘手" : "",
-    defensiveOpportunity: opportunity };
+    defensiveOpportunity: opportunity,
+    ...(ownsExistingSecondBaseSlice ? { reachAccess: getHighSchoolReachAccess(match, physicalTruth, opportunity, defenderContext) } : {}) };
 }
 
 function assertHighSchoolDetailedResponsibility(match, physicalTruth, position, defenderId) {
@@ -4951,6 +4977,13 @@ function assertHighSchoolDetailedResponsibility(match, physicalTruth, position, 
   if (!opportunity.supported || opportunity.primaryPosition !== TeamRosterFoundation.normalizePosition(position)
     || opportunity.primaryDefenderId !== defenderId) {
     throw new Error("Defensive opportunity integrity failed: stale or unsupported detailed defender");
+  }
+  if (typeof DefensiveReachSecureFoundation !== "undefined") {
+    for (const state of [match.groundBallInPlayState, match.lineDriveCatchState, match.flyBallCatchState]) {
+      if (state?.physicalTruth?.identity === physicalTruth?.identity) {
+        DefensiveReachSecureFoundation.validatePendingState(state, match.rosters[match.defenseTeam]);
+      }
+    }
   }
 }
 
@@ -4968,13 +5001,14 @@ function getHighSchoolFlyBallDefenderCatchContext(match, physicalTruth, options 
       throw new Error("Defensive opportunity integrity failed: defender override cannot replace assignment");
     }
     const capability = getDefensiveSimulationCapability(defender, "外野手", match);
-    return Object.freeze({
+    const context = {
       defenderId: defender.id, name: defender.name || position, position,
       catching: override?.catching ?? (Number(capability.fielding) || 5),
       reaction: override?.reaction ?? (Number(capability.reaction) || 5),
       range: override?.range ?? (Number(capability.range) || 5),
       assignmentAuthority: "defensiveOpportunity"
-    });
+    };
+    return Object.freeze({ ...context, reachAccess: getHighSchoolReachAccess(match, physicalTruth, opportunity, context) });
   }
   // Legacy harness only; production uses direction + depth topology above.
   if (options.flyBallDefenderContext) return Object.freeze({ ...options.flyBallDefenderContext });
@@ -5223,7 +5257,8 @@ function resolveHighSchoolLineDriveCatchOpportunity(match, options = {}) {
   const catchResult = BattedBallLineDriveDefense.resolveCatchExecution(
     state,
     getHighSchoolLineDriveCatchDefenderContext(match, options),
-    { executionRoll: options.lineDriveCatchExecutionRoll }
+    { executionRoll: options.lineDriveCatchExecutionRoll,
+      secureResolution: resolveHighSchoolCanonicalSecure(match, state, options.lineDriveCatchExecutionRoll) }
   );
   if (!catchResult) return state;
   let paCompatibilityResult = {
@@ -5356,7 +5391,8 @@ function resolveHighSchoolFlyBallCatchOpportunity(match, options = {}) {
   if (!state?.supported || state.catchResult) return state;
   assertHighSchoolDetailedResponsibility(match, state.physicalTruth, state.defenderContext?.position, state.defenderContext?.defenderId);
   const catchResult = BattedBallFlyBallDefense.resolveFlyBallCatchExecution(state, {
-    executionRoll: options.flyBallCatchExecutionRoll
+    executionRoll: options.flyBallCatchExecutionRoll,
+    secureResolution: resolveHighSchoolCanonicalSecure(match, state, options.flyBallCatchExecutionRoll)
   });
   if (!catchResult) return state;
   let paCompatibilityResult = {
@@ -7931,7 +7967,9 @@ function resolveSecondBaseInitiatedRoute(situation, choice, sample) {
   let resultCode = "zeroOuts";
   let detailedResult = "lateThrow";
   let playerStages = {
-    reach: windows.fielding + swing >= 2.2 ? "completed" : "late",
+    reach: physicalContext?.defensiveAccess?.reachResolution
+      ? (physicalContext.defensiveAccess.reachResolution.reached ? "completed" : "late")
+      : windows.fielding + swing >= 2.2 ? "completed" : "late",
     control: fieldControlled ? (situation.executionChange === "bobble" ? "recovered" : "completed") : "failed",
     transfer: transferCompleted ? "completed" : situation.executionChange === "bobble" ? "delayed" : "failed",
     firstThrow: firstThrowCompleted ? "completed" : "notCompleted"
@@ -8024,6 +8062,11 @@ function resolveSecondBaseInitiatedRoute(situation, choice, sample) {
     playerResponsibility: responsibleActor === "player" ? (resultCode === "error" ? "major" : "handled") : "limited",
     teammateResponsibility: responsibleActor === "teammate" ? "major" : choice.teammateChain?.length ? "shared" : "none",
     causeExplanation: getSecondBaseCauseExplanation(primaryCause, secondaryCause, reassessment?.fallbackRoute),
+    ...(situation.groundBallDefensiveContext?.defensiveAccess?.reachResolution ? {
+      controlEvidence: Object.freeze({ fieldingWindow: windows.fielding, controlThreshold: 2.8, sample, swing,
+        fielding: situation.playerCapabilities.fielding, reaction: situation.playerCapabilities.reaction,
+        range: situation.playerCapabilities.range, executionChange: situation.executionChange || "" })
+    } : {}),
     playerLeg: Object.freeze(playerStages), teammateLeg: Object.freeze(teammateStages), timingResolution: Object.freeze({
       routeWindow: routeWindow.state,
       homeOutWindow: actualChoice.routeId === "preventRunHome" ? routeWindow.state : null,
@@ -10682,6 +10725,14 @@ function recordGroundBallSituationResolution(match, resolution) {
   let situation = MatchSituationLifecycle.normalizeSituation(match.activeSituation);
   if (!situation || situation.type !== MatchSituationLifecycle.TYPES.groundBallDefensiveDecision
     || situation.lifecycleState !== "executing") return situation;
+  const handoff = match.groundBallInPlayState;
+  if (handoff?.supported && !handoff.settlementApplied && !handoff.secureResolution
+    && handoff.defensiveAccess?.reachResolution && resolution.playerLeg?.control
+    && typeof DefensiveReachSecureFoundation !== "undefined") {
+    assertHighSchoolDetailedResponsibility(match, handoff.physicalTruth, "2B", "player");
+    match.groundBallInPlayState = BattedBallGroundDefense.normalizeHandoff({ ...handoff,
+      secureResolution: DefensiveReachSecureFoundation.projectGroundControl(handoff.defensiveAccess.reachResolution, resolution.playerLeg.control, resolution.controlEvidence) });
+  }
   if (resolution.reassessment) {
     const remaining = (resolution.reassessment.availableRouteIds || []).map(routeId => ({ routeId }));
     situation = MatchSituationLifecycle.beginReassessment(situation, {

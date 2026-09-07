@@ -47,7 +47,9 @@ test("production BBP -> responsibility -> supported 2B ground path", () => {
 test("opportunity query does not mutate match, lifecycle or physical truth", () => {
   run("var queryBefore=JSON.stringify(ground.m);getHighSchoolDefensiveOpportunity(ground.m,groundTruth);");
   assert.equal(run("JSON.stringify(ground.m)===queryBefore"), true);
-  assert.equal(run('JSON.stringify(ground.m).includes("defensive-opportunity-v1")'), false);
+  assert.equal(run('Object.hasOwn(ground.m,"defensiveOpportunity")'), false);
+  // 1.1 persists the linked opportunity identity inside the Reach stage, not a second opportunity authority.
+  assert.equal(run('ground.m.groundBallInPlayState.defensiveAccess.reachResolution.opportunityIdentity'), run('getHighSchoolDefensiveOpportunity(ground.m,groundTruth).identity'));
 });
 test("ground active situation survives save with identical derived responsibility", () => {
   run("var groundReload=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;");
@@ -112,11 +114,10 @@ test("re-query after legitimate replacement binds new actor; pending catch canno
   assert.throws(() => run("resolveHighSchoolFlyBallCatchOpportunity(pending)"), /stale or unsupported/);
   assert.equal(run("JSON.stringify(pending)===pendingBefore"), true);
 });
-test("save/reload retains physical identity and recomputes binding without duplicate state", () => {
-  run("var reloadPlayer=JSON.parse(JSON.stringify(player));reloadPlayer.highSchoolMatch=pending;var pendingReload=normalizeSave(reloadPlayer).highSchoolMatch;");
-  assert.deepEqual(json("getHighSchoolDefensiveOpportunity(pendingReload,flyTruth)"), json("getHighSchoolDefensiveOpportunity(pending,flyTruth)"));
-  assert.throws(() => run("resolveHighSchoolFlyBallCatchOpportunity(pendingReload)"), /stale or unsupported/);
-  assert.equal(run('JSON.stringify(pendingReload).includes("defensive-opportunity-v1")'), false);
+test("save/reload rejects stale persisted Reach without rebinding the live play", () => {
+  run("var reloadPlayer=JSON.parse(JSON.stringify(player));reloadPlayer.highSchoolMatch=pending;var pendingReload=JSON.parse(JSON.stringify(pending));");
+  assert.throws(() => run("normalizeSave(reloadPlayer)"), /invalid or stale/);
+  assert.equal(run("JSON.stringify(pending)===pendingBefore"), true);
 });
 test("ground reload cannot execute for a player no longer assigned to 2B", () => {
   run(`var staleGround=JSON.parse(JSON.stringify(groundReload));var home=staleGround.rosters.home;
