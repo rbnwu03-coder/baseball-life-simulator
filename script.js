@@ -4928,7 +4928,55 @@ function getHighSchoolBuntDefensiveSituationOverrides(handoff) {
   });
 }
 
+function getHighSchoolDefensiveOpportunity(match, physicalTruth) {
+  if (typeof DefensiveOpportunityFoundation === "undefined") return null;
+  return DefensiveOpportunityFoundation.resolveDefensiveOpportunity({
+    physicalTruth, activeRoster: match?.rosters?.[match.defenseTeam]
+  });
+}
+
+function getHighSchoolPhysicalDefensePlayerContext(match, physicalTruth, defenderContext) {
+  const opportunity = getHighSchoolDefensiveOpportunity(match, physicalTruth);
+  if (!opportunity) return defenderContext; // Pre-foundation isolated harness compatibility.
+  if (opportunity.bindingStatus === "invalid") throw new Error("Active defense integrity failed: defensive opportunity binding");
+  const ownsExistingSecondBaseSlice = opportunity.supported && opportunity.primaryPosition === "2B"
+    && opportunity.primaryDefenderId === "player";
+  return { ...defenderContext, playerPosition: ownsExistingSecondBaseSlice ? "二壘手" : "",
+    defensiveOpportunity: opportunity };
+}
+
+function assertHighSchoolDetailedResponsibility(match, physicalTruth, position, defenderId) {
+  const opportunity = getHighSchoolDefensiveOpportunity(match, physicalTruth);
+  if (!opportunity) return; // No new persisted responsibility state in legacy saves.
+  if (!opportunity.supported || opportunity.primaryPosition !== TeamRosterFoundation.normalizePosition(position)
+    || opportunity.primaryDefenderId !== defenderId) {
+    throw new Error("Defensive opportunity integrity failed: stale or unsupported detailed defender");
+  }
+}
+
 function getHighSchoolFlyBallDefenderCatchContext(match, physicalTruth, options = {}) {
+  const opportunity = getHighSchoolDefensiveOpportunity(match, physicalTruth);
+  if (opportunity) {
+    const position = TeamRosterFoundation.POSITION_LABELS[opportunity.primaryPosition] || "";
+    const defender = opportunity.supported
+      ? TeamRosterFoundation.getCurrentDefender(match?.rosters?.[match.defenseTeam], opportunity.primaryPosition) : null;
+    // Responsibility supports every active actor; player OF execution remains deferred.
+    if (!defender || defender.id === "player") return Object.freeze({ defenderId: "", name: "", position, assignmentAuthority: "unavailable" });
+    const override = options.flyBallDefenderContext;
+    if (override && ((override.defenderId && override.defenderId !== defender.id)
+      || (override.position && TeamRosterFoundation.normalizePosition(override.position) !== opportunity.primaryPosition))) {
+      throw new Error("Defensive opportunity integrity failed: defender override cannot replace assignment");
+    }
+    const capability = getDefensiveSimulationCapability(defender, "外野手", match);
+    return Object.freeze({
+      defenderId: defender.id, name: defender.name || position, position,
+      catching: override?.catching ?? (Number(capability.fielding) || 5),
+      reaction: override?.reaction ?? (Number(capability.reaction) || 5),
+      range: override?.range ?? (Number(capability.range) || 5),
+      assignmentAuthority: "defensiveOpportunity"
+    });
+  }
+  // Legacy harness only; production uses direction + depth topology above.
   if (options.flyBallDefenderContext) return Object.freeze({ ...options.flyBallDefenderContext });
   const expectedPosition = physicalTruth?.direction === "rightSide" ? "右外野手"
     : physicalTruth?.direction === "middle" ? "中外野手" : "";
@@ -4959,14 +5007,17 @@ function ensureHighSchoolOrdinaryGroundBallInPlayHandoff(match, options = {}) {
   const existingFlyBall = typeof BattedBallFlyBallDefense !== "undefined"
     ? BattedBallFlyBallDefense.normalizeFlyBallCatchState(match.flyBallCatchState) : null;
   if (existing?.identity === `${paIdentity}|ground-defense`) {
+    if (existing.supported && !existing.settlementApplied) assertHighSchoolDetailedResponsibility(match, existing.physicalTruth, "2B", "player");
     match.groundBallInPlayState = existing;
     return existing;
   }
   if (existingLineDrive?.identity === `${paIdentity}|line-drive-catch`) {
+    if (existingLineDrive.supported && !existingLineDrive.settlementApplied) assertHighSchoolDetailedResponsibility(match, existingLineDrive.physicalTruth, "2B", "player");
     match.lineDriveCatchState = existingLineDrive;
     return null;
   }
   if (existingFlyBall?.identity === `${paIdentity}|fly-ball-catch`) {
+    if (existingFlyBall.supported && !existingFlyBall.settlementApplied) assertHighSchoolDetailedResponsibility(match, existingFlyBall.physicalTruth, existingFlyBall.defenderContext?.position, existingFlyBall.defenderContext?.defenderId);
     match.flyBallCatchState = existingFlyBall;
     return null;
   }
@@ -4974,6 +5025,9 @@ function ensureHighSchoolOrdinaryGroundBallInPlayHandoff(match, options = {}) {
     ...getDefensiveSimulationCapability(player, "內野手"),
     ...(options.situationOverrides?.playerCapabilities || {})
   };
+  const physicalDefenderContext = physicalTruth => getHighSchoolPhysicalDefensePlayerContext(match, physicalTruth, {
+    playerPosition, catching: defender.fielding, reaction: defender.reaction, range: defender.range
+  });
   const offense = getHighSchoolProvisionalOffensiveTacticalCapabilities(match);
   const initial = OffensivePlateApproach.createPlateAppearanceState({
     paIdentity,
@@ -4993,7 +5047,7 @@ function ensureHighSchoolOrdinaryGroundBallInPlayHandoff(match, options = {}) {
     physicalOutcomeResolver({ physicalTruth }) {
       const access = BattedBallGroundDefense.resolveGroundBallDefensiveAccess({
         physicalTruth,
-        defenderContext: { playerPosition, reaction: defender.reaction, range: defender.range }
+        defenderContext: physicalDefenderContext(physicalTruth)
       });
       if (access.supported) return {
         result: "groundBallDefensePending",
@@ -5005,7 +5059,7 @@ function ensureHighSchoolOrdinaryGroundBallInPlayHandoff(match, options = {}) {
         const airborneContext = BattedBallLineDriveDefense.buildAirborneBallContext(physicalTruth);
         const catchAccess = airborneContext ? BattedBallLineDriveDefense.resolveCatchAccess({
           airborneContext,
-          defenderContext: { playerPosition, catching: defender.fielding, reaction: defender.reaction, range: defender.range }
+          defenderContext: physicalDefenderContext(physicalTruth)
         }) : null;
         const catchWindow = catchAccess ? BattedBallLineDriveDefense.buildCatchTimingWindow({ airborneContext, defensiveAccess: catchAccess }) : null;
         if (catchAccess?.supported && catchWindow?.state !== "expired") return {
@@ -5067,7 +5121,7 @@ function ensureHighSchoolOrdinaryGroundBallInPlayHandoff(match, options = {}) {
       outs: match.outs,
       runnerEntities,
       preContactRunnerStates: options.preContactRunnerStates || {},
-      defenderContext: { playerPosition, catching: defender.fielding, reaction: defender.reaction, range: defender.range }
+      defenderContext: physicalDefenderContext(physicalTruth)
     });
     return null;
   }
@@ -5099,7 +5153,7 @@ function ensureHighSchoolOrdinaryGroundBallInPlayHandoff(match, options = {}) {
       ? BattedBallLineDriveDefense.buildCatchOpportunity({
         identity: `${paIdentity}|line-drive-catch`, physicalTruth, runners: match.runners, outs: match.outs,
         runnerEntities, preContactRunnerStates: options.preContactRunnerStates || {},
-        defenderContext: { playerPosition, catching: defender.fielding, reaction: defender.reaction, range: defender.range }
+        defenderContext: physicalDefenderContext(physicalTruth)
       }) : null;
     match.flyBallCatchState = physicalTruth?.ballType === "flyBall" && typeof BattedBallFlyBallDefense !== "undefined"
       ? BattedBallFlyBallDefense.buildFlyBallCatchOpportunity({
@@ -5121,7 +5175,7 @@ function ensureHighSchoolOrdinaryGroundBallInPlayHandoff(match, options = {}) {
     runnerEntities,
     batterRunner: { runnerId: match.currentBatter, speed: Number(batter?.speed) || 5 },
     preContactRunnerStates: options.preContactRunnerStates || {},
-    defenderContext: { playerPosition, reaction: defender.reaction, range: defender.range }
+    defenderContext: physicalDefenderContext(physicalTruth)
   });
   return match.groundBallInPlayState;
 }
@@ -5165,6 +5219,7 @@ function resolveHighSchoolLineDriveCatchOpportunity(match, options = {}) {
   if (!match || typeof BattedBallLineDriveDefense === "undefined") return null;
   const state = BattedBallLineDriveDefense.normalizeCatchState(match.lineDriveCatchState);
   if (!state?.supported || state.catchResult) return state;
+  assertHighSchoolDetailedResponsibility(match, state.physicalTruth, "2B", "player");
   const catchResult = BattedBallLineDriveDefense.resolveCatchExecution(
     state,
     getHighSchoolLineDriveCatchDefenderContext(match, options),
@@ -5210,6 +5265,7 @@ function applyHighSchoolLineDriveCatchResolution(match) {
   const state = BattedBallLineDriveDefense.normalizeCatchState(match.lineDriveCatchState);
   if (!state?.supported || !state.catchResult || !state.paCompatibilityResult) return null;
   if (state.settlementApplied) return state.settlementFacts?.event || null;
+  assertHighSchoolDetailedResponsibility(match, state.physicalTruth, "2B", "player");
   const batterId = match.currentBatter;
   const offenseTeam = match.offenseTeam;
   const before = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
@@ -5298,6 +5354,7 @@ function resolveHighSchoolFlyBallCatchOpportunity(match, options = {}) {
   if (!match || typeof BattedBallFlyBallDefense === "undefined") return null;
   const state = BattedBallFlyBallDefense.normalizeFlyBallCatchState(match.flyBallCatchState);
   if (!state?.supported || state.catchResult) return state;
+  assertHighSchoolDetailedResponsibility(match, state.physicalTruth, state.defenderContext?.position, state.defenderContext?.defenderId);
   const catchResult = BattedBallFlyBallDefense.resolveFlyBallCatchExecution(state, {
     executionRoll: options.flyBallCatchExecutionRoll
   });
@@ -5341,6 +5398,7 @@ function applyHighSchoolFlyBallCatchResolution(match) {
   const state = BattedBallFlyBallDefense.normalizeFlyBallCatchState(match.flyBallCatchState);
   if (!state?.supported || !state.catchResult || !state.paCompatibilityResult) return null;
   if (state.settlementApplied) return state.settlementFacts?.event || null;
+  assertHighSchoolDetailedResponsibility(match, state.physicalTruth, state.defenderContext?.position, state.defenderContext?.defenderId);
   const batterId = match.currentBatter;
   const offenseTeam = match.offenseTeam;
   const before = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
@@ -9736,6 +9794,9 @@ function resolveLegacyHighSchoolDefensivePlay(match, decision, randomSource = Ma
 
 function resolveHighSchoolDefensivePlay(match, decision, randomSource = Math.random) {
   if (match?.positionDecisionFamily === "infield" && match.defensiveSituation?.familyId === "infield") {
+    if (match.defensiveSituation.groundBallDefensiveContext?.supported) {
+      assertHighSchoolDetailedResponsibility(match, match.defensiveSituation.groundBallDefensiveContext.physicalTruth, "2B", "player");
+    }
     return infieldDecisionFamily.resolve(match.defensiveSituation, decision, match, randomSource);
   }
   if (match?.position === "捕手") return resolveHighSchoolCatcherDecision(match, decision, randomSource);
@@ -9753,6 +9814,9 @@ function getInfieldRoutineExecutionRoute(situation) {
 
 function resolveRoutineDefensivePlay(match, situation = match?.defensiveSituation, randomSource = null, options = {}) {
   if (!match || situation?.familyId !== "infield") return null;
+  if (situation.groundBallDefensiveContext?.supported) {
+    assertHighSchoolDetailedResponsibility(match, situation.groundBallDefensiveContext.physicalTruth, "2B", "player");
+  }
   const legalChoices = infieldDecisionFamily.generateLegalChoices(situation, match);
   const classification = classifyPositionFamilyPlay(situation, legalChoices, true);
   if (classification.eventClassification !== "playerRoutinePlay" && options.densitySuppressed !== true) return null;
@@ -10511,6 +10575,7 @@ function createGroundBallMatchSituation(match, legalChoices, classification, opp
   if (!match || typeof MatchSituationLifecycle === "undefined" || !match.groundBallInPlayState?.supported
     || match.defensiveSituation?.familyId !== "infield") return null;
   const handoff = match.groundBallInPlayState;
+  assertHighSchoolDetailedResponsibility(match, handoff.physicalTruth, "2B", "player");
   const situationId = MatchSituationLifecycle.createSituationId({
     gameId: match.id,
     inning: match.inning,
@@ -10577,6 +10642,7 @@ function beginGroundBallSituationDecision(match, decision) {
   if (!match || typeof MatchSituationLifecycle === "undefined") return null;
   let situation = MatchSituationLifecycle.normalizeSituation(match.activeSituation);
   if (!situation || situation.type !== MatchSituationLifecycle.TYPES.groundBallDefensiveDecision) return null;
+  assertHighSchoolDetailedResponsibility(match, match.groundBallInPlayState?.physicalTruth, "2B", "player");
   const selected = situation.legalRoutes.find(route => route.matchDecision === decision || route.routeId === decision);
   if (!selected) return null;
   if (situation.lifecycleState === "presented") {
@@ -10600,6 +10666,7 @@ function beginAutomaticGroundBallSituationExecution(match) {
   let situation = MatchSituationLifecycle.normalizeSituation(match.activeSituation);
   if (!situation || situation.type !== MatchSituationLifecycle.TYPES.groundBallDefensiveDecision
     || situation.lifecycleState !== "admitted" || situation.admission?.admittedToPlayer) return situation;
+  assertHighSchoolDetailedResponsibility(match, match.groundBallInPlayState?.physicalTruth, "2B", "player");
   const route = situation.legalRoutes[0];
   situation = MatchSituationLifecycle.beginExecution(situation, {
     selectedRoute: route?.routeId || route?.matchDecision || "automatic",
