@@ -134,8 +134,28 @@
   }
   function normalizeForceChain(saved) { return saved && typeof saved === "object" ? deepFreeze(clone(saved)) : null; }
 
+  function deriveForceChainAfterRetirements(forceChain, retiredRunnerIds = []) {
+    if (!forceChain) return null;
+    if (forceChain.version !== VERSION || !Array.isArray(forceChain.allRequiredMovements)) throw new Error("Invalid force chain continuation");
+    const retired = new Set([...(forceChain.retiredRunnerIds || []), ...retiredRunnerIds]);
+    const initial = forceChain.initialRequiredMovements || forceChain.allRequiredMovements;
+    // Retiring a trailing forced actor removes the force on actors ahead of that actor.
+    // Retiring a lead actor does not remove the batter-runner's requirement to reach first.
+    const breakDepth = Math.min(Infinity, ...initial.filter(actor => retired.has(actor.runnerId)).map(actor => actor.chainDepth));
+    const remaining = initial.filter(actor => !retired.has(actor.runnerId) && actor.chainDepth < breakDepth);
+    return deepFreeze({ ...clone(forceChain), phase: "afterRetirement", authority: "canonicalForceChainRetirementProjection",
+      initialRequiredMovements: clone(initial), retiredRunnerIds: [...retired],
+      batterRunner: remaining.find(actor => actor.originBase === "batter") || null,
+      forcedRunners: remaining.filter(actor => actor.originBase !== "batter"), allRequiredMovements: remaining,
+      forceTargets: Object.fromEntries(remaining.map(actor => [actor.runnerId, actor.targetBase])),
+      unforcedRunners: [...(forceChain.unforcedRunners || []).filter(actor => !retired.has(actor.runnerId)),
+        ...initial.filter(actor => !retired.has(actor.runnerId) && actor.chainDepth >= breakDepth)
+          .map(actor => ({ runnerId: actor.runnerId, originBase: actor.originBase, isForced: false, forcedMovementTarget: null }))]
+        .filter((actor, index, all) => all.findIndex(other => other.runnerId === actor.runnerId) === index) });
+  }
+
   return deepFreeze({
     VERSION, BASE_NAMES, buildInitialLiveBallForceChain, getForcedMovement,
-    deriveCompatibilityForceState, settleForceAdvancement, normalizeForceChain
+    deriveCompatibilityForceState, settleForceAdvancement, normalizeForceChain, deriveForceChainAfterRetirements
   });
 });

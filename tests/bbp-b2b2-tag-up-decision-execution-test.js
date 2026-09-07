@@ -31,7 +31,7 @@ const runtimeFiles = [
   "pitcher-process-state.js", "pitch-sequencing.js", "batter-anticipation.js", "batted-ball-physical.js", "offensive-plate-approach.js",
   "offensive-tactical-opportunity.js", "offensive-tactical-decision.js", "offensive-tactical-action.js", "offensive-bunt-count-rules.js",
   "offensive-bunt-execution.js", "force-advancement.js", "offensive-bunt-defensive-handoff.js", "batted-ball-ground-defense.js",
-  "batted-ball-line-drive-defense.js", "batted-ball-fly-ball-defense.js", "batted-ball-tag-up-execution.js", "match-situation-lifecycle.js",
+  "batted-ball-line-drive-defense.js", "batted-ball-fly-ball-defense.js", "batted-ball-tag-up-execution.js", "match-situation-lifecycle.js", "defensive-runner-throw-settlement-foundation.js",
   "baseball-gameplay-integration.js", "baseball-training-resolver.js", "playing-time-game-exposure.js", "match-experience-development.js",
   "match-development-settlement-presentation.js", "career-spine-contract.js", "career-transition-runtime-resolver.js",
   "career-transition-progression.js", "career-development-runtime-resolver.js", "career-development-progression.js",
@@ -111,4 +111,10 @@ const routed = JSON.parse(evaluate(`(() => {const x=__bbpB2B2Match({seed:99611})
 verify("17. 正式 match decision entry 可執行 HOLD 並關閉 situation", routed.result.includes("留在三壘") && routed.runner === "player" && routed.active === null && routed.summary.selectedRoute === "tagUpHoldThird");
 verify("18. runtime load order 在 fly defense 後、script 前載入 execution 與 lifecycle", runtimeFiles.indexOf("batted-ball-fly-ball-defense.js") < runtimeFiles.indexOf("batted-ball-tag-up-execution.js") && runtimeFiles.indexOf("batted-ball-tag-up-execution.js") < runtimeFiles.indexOf("script.js"));
 
-console.log(`BBP-B2B2 Tag-Up Decision & Execution tests: ${passed}/${passed} passed`);
+const timingProjection=JSON.parse(evaluate(`(() => {const {m}=__bbpB2B2Match({seed:99701});resolveHighSchoolRunnerTagUpDecision(m,"tagUpSendHome",{rolls:{runnerRoll:0,throwRoll:.999,receivingRoll:.999},deferSettlement:true});const execution=m.activeSituation.resolution.executionEvidence;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const same=JSON.stringify(restored.activeSituation.resolution.executionEvidence)===JSON.stringify(execution);settleAndCloseHighSchoolRunnerTagUpSituation(restored);return JSON.stringify({same,timing:execution.runnerThrowTiming,margin:execution.timingMargin,score:restored.scores.home});})()`));
+verify("1.3 tag-up projects original timing without reroll and preserves pending facts",timingProjection.same && timingProjection.timing.timingMargin===-timingProjection.margin && timingProjection.timing.variationEvidence.consumed===false && timingProjection.score===2);
+evaluate('var staleTag=__bbpB2B2Match({seed:99702}).m;resolveHighSchoolRunnerTagUpDecision(staleTag,"tagUpSendHome",{deferSettlement:true});var badTag=JSON.parse(JSON.stringify(player));badTag.highSchoolMatch.runners[2]=null;');
+assert.throws(()=>evaluate('normalizeSave(badTag)'),/stale settlement/);passed++;
+evaluate('badTag=JSON.parse(JSON.stringify(player));badTag.highSchoolMatch.activeSituation.resolution.executionEvidence.runnerThrowTiming.receiverId="other";');
+assert.throws(()=>evaluate('normalizeSave(badTag)'),/Stale tag-up/);passed++;
+console.log(`Including 1.3: ${passed}/${passed} PASS`);

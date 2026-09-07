@@ -94,4 +94,35 @@ for(const position of ["游擊手","三壘手","二壘手"])test(`${position}: a
       return generateInfieldLegalChoices(legacy.defensiveSituation,legacy).some(c=>c.infieldRoute==="tagHome");}`);
   assert.equal(run('homeOptions("holding")'),false);assert.equal(run('homeOptions("committed")'),true);
 });
-console.log(`${passed}/${passed} PASS`);
+test("1.3 timing and settlement persist, apply once and retain actual receiver",()=>{
+  run('var timingMatch=decisionMatch();var te=executeDecision(timingMatch);var timing=timingMatch.groundBallInPlayState.runnerThrowTiming;');
+  assert.equal(run('timing.throwIdentity'),run('timingMatch.groundBallInPlayState.decisionThrowState.throwResolution.identity'));
+  assert.equal(run('timing.receiverId'),run('TeamRosterFoundation.getCurrentDefender(timingMatch.rosters.home,"1B").id'));
+  assert.equal(run('timing.variationEvidence.consumed'),false);
+  run('var restoredTiming=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;');
+  assert.deepEqual(json('restoredTiming.groundBallInPlayState.runnerThrowTiming'),json('timing'));
+  run('applyInfieldResolutionToHighSchoolMatch(restoredTiming,te.choice.matchDecision,te.resolution);var ts=restoredTiming.groundBallInPlayState.playSettlement;var oneTiming=facts(restoredTiming);applyInfieldResolutionToHighSchoolMatch(restoredTiming,te.choice.matchDecision,te.resolution);applyHighSchoolDefensiveSettlementFacts(restoredTiming,ts);');
+  assert.equal(run('ts.settlementApplied'),true);assert.equal(run('ts.timingIdentity'),run('timing.identity'));
+  assert.deepEqual(json('ts.baseChanges'),json('restoredTiming.runners'));assert.equal(run('oneTiming===facts(restoredTiming)'),true);
+});
+test("1.3 pending timing rejects stale actor linkage on reload and application",()=>{
+  run('var staleTiming=decisionMatch();var st=executeDecision(staleTiming);var badTiming=JSON.parse(JSON.stringify(player));badTiming.highSchoolMatch.groundBallInPlayState.runnerThrowTiming.receiverId="bench";');
+  assert.throws(()=>run('normalizeSave(badTiming)'),/stale projected timing/);
+  run('staleTiming.runners[0]=null;');assert.throws(()=>run('applyInfieldResolutionToHighSchoolMatch(staleTiming,st.choice.matchDecision,st.resolution)'),/stale|force chain/);
+});
+test("1.3 pending execution rejects replacement outcomes and altered timing facts",()=>{
+  run('var integrityMatch=decisionMatch();var ie=executeDecision(integrityMatch);var replacementResolution={...ie.resolution,outsCreated:2};');
+  assert.throws(()=>run('applyInfieldResolutionToHighSchoolMatch(integrityMatch,ie.choice.matchDecision,replacementResolution)'),/Stale defensive settlement/);
+  run('var tampered=JSON.parse(JSON.stringify(player));tampered.highSchoolMatch.groundBallInPlayState.runnerThrowTiming.timingClassification="closePlay";tampered.highSchoolMatch.groundBallInPlayState.runnerThrowTiming.timingMargin=99;');
+  assert.throws(()=>run('normalizeSave(tampered)'),/stale projected timing facts/);
+  run('var persisted=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;applyInfieldResolutionToHighSchoolMatch(persisted,ie.choice.matchDecision,persisted.activeSituation.resolution.executionEvidence);var savedSettlement=persisted.groundBallInPlayState.playSettlement;');
+  assert.equal(run('savedSettlement.settlementApplied'),true);
+  run('player.highSchoolMatch=persisted;var closedReload=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;');
+  assert.deepEqual(json('closedReload.groundBallInPlayState.playSettlement'),json('savedSettlement'));
+});
+test("1.3 production resolver resumes resolved timing without any RNG or different choice",()=>{
+  run('var resumeMatch=decisionMatch();var re=executeDecision(resumeMatch);var resumeReload=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;var resumedResolution=resolveHighSchoolDefensivePlay(resumeReload,re.choice.matchDecision,()=>{throw Error("reroll");});');
+  assert.deepEqual(json('resumedResolution'),json('re.resolution'));
+  assert.throws(()=>run('resolveHighSchoolDefensivePlay(resumeReload,"holdBall",()=>{throw Error("reroll");})'),/Stale defensive decision/);
+});
+console.log(`Final including resume: ${passed}/${passed} PASS`);

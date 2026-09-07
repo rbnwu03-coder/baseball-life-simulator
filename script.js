@@ -5664,7 +5664,14 @@ function settleAndCloseHighSchoolRunnerTagUpSituation(match, execution) {
     const originIndex = 2;
     const offenseTeam = situation.contextSnapshot.gameContext.offenseTeam;
     const before = { outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice(0, 3) };
-    if (match.runners[originIndex] === runnerId && outcome.physicalOutcome.code !== "heldThird") {
+    if (outcome.runnerThrowTiming && typeof DefensiveRunnerThrowSettlementFoundation !== "undefined") {
+      validateHighSchoolRunnerTagUpTiming(match);
+      if (JSON.stringify(outcome) !== JSON.stringify(situation.resolution.executionEvidence)) throw new Error("Stale tag-up execution");
+      const settlement = DefensiveRunnerThrowSettlementFoundation.projectTagUpSettlement(outcome, situation.contextSnapshot, resolveHighSchoolThirdOutIntegrity);
+      const applied = applyHighSchoolDefensiveSettlementFacts(match, settlement, "tagUp");
+      situation = MatchSituationLifecycle.normalizeSituation({ ...situation, resolution: { ...situation.resolution,
+        executionEvidence: { ...outcome, playSettlement: applied } } });
+    } else if (match.runners[originIndex] === runnerId && outcome.physicalOutcome.code !== "heldThird") {
       match.runners[originIndex] = null;
       if (outcome.physicalOutcome.code === "safeHome") {
         const scoringEvent = scoreHighSchoolMatchRunner(match, runnerId, offenseTeam, "tagUp", { deferEvent: true });
@@ -5684,7 +5691,7 @@ function settleAndCloseHighSchoolRunnerTagUpSituation(match, execution) {
       type: "runnerTagUpResolution", presentationImportance: "attention",
       situationId: situation.situationId, selectedRoute: situation.decision?.selectedRoute || "",
       outcome: outcome.physicalOutcome.code, timingMargin: outcome.timingMargin,
-      executionEvidence: outcome, before, after, inning: match.inning, half: match.half,
+      executionEvidence: situation.resolution?.executionEvidence || outcome, before, after, inning: match.inning, half: match.half,
       outs: match.outs, scores: match.scores, runners: match.runners,
       presentation: outcome.physicalOutcome.code === "safeHome" ? "你從三壘啟動，搶在回傳前滑回本壘得分。"
         : outcome.physicalOutcome.code === "taggedOutAtHome" ? "你從三壘啟動，但回傳先到本壘，觸殺出局。"
@@ -5718,6 +5725,9 @@ function resolveHighSchoolRunnerTagUpDecision(match, selectedRoute, options = {}
       contextSnapshot: situation.contextSnapshot
     }, options);
     if (!execution) return null;
+    if (typeof DefensiveRunnerThrowSettlementFoundation !== "undefined") {
+      execution = Object.freeze({ ...execution, runnerThrowTiming: DefensiveRunnerThrowSettlementFoundation.projectTagUpTiming(execution, situation.contextSnapshot) });
+    }
     situation = MatchSituationLifecycle.resolveSituation(situation, {
       physicalOutcomeRef: execution.executionIdentity,
       outsDelta: execution.physicalOutcome.outsDelta,
@@ -5730,6 +5740,18 @@ function resolveHighSchoolRunnerTagUpDecision(match, selectedRoute, options = {}
   }
   if (options.deferSettlement === true) return situation;
   return settleAndCloseHighSchoolRunnerTagUpSituation(match, execution);
+}
+
+function validateHighSchoolRunnerTagUpTiming(match) {
+  const s = match?.activeSituation, execution = s?.resolution?.executionEvidence;
+  if (!execution?.runnerThrowTiming || s.settlement?.applied || typeof DefensiveRunnerThrowSettlementFoundation === "undefined") return;
+  const context = s.contextSnapshot;
+  const expected = DefensiveRunnerThrowSettlementFoundation.projectTagUpTiming(execution, context);
+  if (JSON.stringify(expected) !== JSON.stringify(execution.runnerThrowTiming)
+    || context.gameContext.gameId !== match.id || context.gameContext.inning !== match.inning || context.gameContext.half !== match.half
+    || getHighSchoolTagUpReceivingTarget(match).receiverId !== expected.receiverId) throw new Error("Stale tag-up timing / receiver");
+  DefensiveRunnerThrowSettlementFoundation.validateBefore({ version: expected.version,
+    before: { runners: context.gameContext.bases, scores: context.gameContext.score }, outsBefore: context.gameContext.outsAfterCatch }, match);
 }
 
 function cancelHighSchoolOffensiveBuntPATacticalPlan(match, reason = "explicitCancellation") {
@@ -7951,6 +7973,7 @@ function resolveSecondBaseInitiatedRoute(situation, choice, sample) {
   const windows = situation.windows;
   const physicalContext = situation.groundBallDefensiveContext || situation.buntDefensiveContext;
   const routeWindow = getSecondBaseRouteWindow(choice.routeId, situation.routeWindows);
+  let firstLegTimingWindow = routeWindow;
   const fieldControlled = situation.executionChange === "bobble" ? true : windows.fielding + swing >= 2.8;
   const transferCompleted = fieldControlled && situation.executionChange !== "bobble" && windows.transfer + swing >= 3.8;
   const firstThrowCompleted = transferCompleted && windows.throw + swing >= 2.8;
@@ -7989,6 +8012,7 @@ function resolveSecondBaseInitiatedRoute(situation, choice, sample) {
   let responsibleActor = "player";
   if (reassessment?.fallbackRoute) {
     const fallbackWindow = getSecondBaseRouteWindow(actualChoice.routeId, reassessment.liveSituation.routeWindows);
+    firstLegTimingWindow = fallbackWindow;
     const fallbackCompleted = fieldControlled && fallbackWindow.state !== "expired";
     resultCode = fallbackCompleted ? "oneOut" : "zeroOuts";
     detailedResult = fallbackCompleted ? "fallbackOut" : "fallbackLate";
@@ -8071,6 +8095,7 @@ function resolveSecondBaseInitiatedRoute(situation, choice, sample) {
     teammateResponsibility: responsibleActor === "teammate" ? "major" : choice.teammateChain?.length ? "shared" : "none",
     causeExplanation: getSecondBaseCauseExplanation(primaryCause, secondaryCause, reassessment?.fallbackRoute),
     ...(situation.groundBallDefensiveContext?.defensiveAccess?.reachResolution ? {
+      firstLegTimingWindow: Object.freeze({ ...firstLegTimingWindow }),
       controlEvidence: Object.freeze({ fieldingWindow: windows.fielding, controlThreshold: 2.8, sample, swing,
         fielding: situation.playerCapabilities.fielding, reaction: situation.playerCapabilities.reaction,
         range: situation.playerCapabilities.range, executionChange: situation.executionChange || "" })
@@ -9844,6 +9869,13 @@ function resolveLegacyHighSchoolDefensivePlay(match, decision, randomSource = Ma
 }
 
 function resolveHighSchoolDefensivePlay(match, decision, randomSource = Math.random) {
+  const pending = match?.activeSituation;
+  if (match?.groundBallInPlayState?.runnerThrowTiming && pending?.lifecycleState === "resolved" && pending.resolution?.executionEvidence) {
+    validateHighSchoolDecisionThrowState(match);
+    const selected = pending.legalRoutes.find(route => route.matchDecision === decision || route.routeId === decision);
+    if (!selected || (selected.routeId || selected.matchDecision) !== pending.decision?.selectedRoute) throw new Error("Stale defensive decision after execution");
+    return pending.resolution.executionEvidence;
+  }
   if (match?.positionDecisionFamily === "infield" && match.defensiveSituation?.familyId === "infield") {
     if (match.defensiveSituation.groundBallDefensiveContext?.supported) {
       assertHighSchoolDetailedResponsibility(match, match.defensiveSituation.groundBallDefensiveContext.physicalTruth, "2B", "player");
@@ -10751,6 +10783,10 @@ function validateHighSchoolDecisionThrowState(match) {
   const state = match?.groundBallInPlayState;
   if (!state?.decisionThrowState || state.settlementApplied || typeof DefensiveDecisionThrowFoundation === "undefined") return;
   DefensiveDecisionThrowFoundation.validateStoredStage(state.decisionThrowState, getHighSchoolControlledDecisionInput(match, state));
+  if (state.runnerThrowTiming && typeof DefensiveRunnerThrowSettlementFoundation !== "undefined") {
+    DefensiveRunnerThrowSettlementFoundation.validateProjectedTiming(state.runnerThrowTiming, state.decisionThrowState, state.runnerPhysicalStates,
+      match.activeSituation?.resolution?.executionEvidence);
+  }
 }
 
 function projectHighSchoolControlledDecisionThrow(match, resolution, state = match?.groundBallInPlayState) {
@@ -10783,6 +10819,16 @@ function recordGroundBallSituationResolution(match, resolution) {
       secureResolution: DefensiveReachSecureFoundation.projectGroundControl(handoff.defensiveAccess.reachResolution, resolution.playerLeg.control, resolution.controlEvidence) });
     const decisionThrowState = projectHighSchoolControlledDecisionThrow(match, resolution, securedHandoff);
     match.groundBallInPlayState = BattedBallGroundDefense.normalizeHandoff({ ...securedHandoff, ...(decisionThrowState ? { decisionThrowState } : {}) });
+    if (decisionThrowState && typeof DefensiveRunnerThrowSettlementFoundation !== "undefined") {
+      const route = decisionThrowState.activeSelection?.route || decisionThrowState.selection?.route;
+      const receiverFact = route?.routeId === "initiate463" ? resolution.teammateLeg?.shortstopReceive
+        : route?.routeId === "preventRunHome" && !resolution.reassessed ? resolution.teammateLeg?.catcherReceive : resolution.teammateLeg?.receiver;
+      const runnerThrowTiming = DefensiveRunnerThrowSettlementFoundation.projectExistingTiming({ stage: decisionThrowState,
+        runnerState: handoff.runnerPhysicalStates?.find(r => r.runnerId === route?.targetRunnerId),
+        windowState: resolution.firstLegTimingWindow?.state || "expired", receiverFact: receiverFact || "unavailable",
+        tagFact: resolution.homeTagLeg?.arrivalComparison || null });
+      match.groundBallInPlayState = BattedBallGroundDefense.normalizeHandoff({ ...match.groundBallInPlayState, runnerThrowTiming });
+    }
   }
   if (resolution.reassessment) {
     const remaining = (resolution.reassessment.availableRouteIds || []).map(routeId => ({ routeId }));
@@ -10803,6 +10849,7 @@ function recordGroundBallSituationResolution(match, resolution) {
     outsDelta: resolution.outsCreated,
     runsDelta: resolution.runsAllowed,
     runnerActorOutcomes: resolution.runnerChanges,
+    executionEvidence: match.groundBallInPlayState?.runnerThrowTiming ? resolution : null,
     reason: resolution.reassessment ? "postExecutionReassessmentComplete" : "groundBallExecutionComplete"
   });
   match.activeSituation = situation;
@@ -10857,17 +10904,49 @@ function restoreHighSchoolMatchAfterDefensiveDecision(match, fallbackPhase = "mo
   return match.simulationPhase;
 }
 
+function applyHighSchoolDefensiveSettlementFacts(match, settlement, source = "defensive-play-settlement") {
+  if (settlement.settlementApplied) return settlement;
+  DefensiveRunnerThrowSettlementFoundation.validateBefore(settlement, match);
+  const third = settlement.thirdOut;
+  if (settlement.outsAfter !== third.outsAfter || JSON.stringify(settlement.baseChanges) !== JSON.stringify(third.basesAfter)
+    || JSON.stringify(settlement.runChanges) !== JSON.stringify(third.legalScoringRunnerIds)) throw new Error("Settlement / third-out mismatch");
+  match.outs = third.outsAfter;
+  for (const runnerId of settlement.runChanges) scoreHighSchoolMatchRunner(match, runnerId, match.offenseTeam, source, {
+    presentationImportance: "hidden", outsOverride: third.halfInningEnded && third.thirdOutType === HIGH_SCHOOL_THIRD_OUT_TYPES.nonForceTag ? settlement.outsBefore : match.outs
+  });
+  match.runners = settlement.baseChanges.slice();
+  if (third.halfInningEnded) match.pendingHalfInningTermination = JSON.parse(JSON.stringify(third));
+  syncHighSchoolMatchPlayerRunnerLocation(match);
+  return Object.freeze({ ...settlement, settlementApplied: true });
+}
+
+function validateHighSchoolStoredDefensiveResolution(match, resolution) {
+  const stored = match.activeSituation?.resolution?.executionEvidence;
+  if (match.groundBallInPlayState?.runnerThrowTiming && stored && JSON.stringify(stored) !== JSON.stringify(resolution)) {
+    throw new Error("Stale defensive settlement execution facts");
+  }
+}
+
 function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
   const situation = match.defensiveSituation;
   const groundBallContext = situation?.groundBallDefensiveContext;
   if (groundBallContext && match.groundBallInPlayState?.settlementApplied) return match.completedMoments.at(-1) || null;
+  validateHighSchoolDecisionThrowState(match);
   beginGroundBallSituationDecision(match, decision);
   recordGroundBallSituationResolution(match, resolution);
+  validateHighSchoolStoredDefensiveResolution(match, resolution);
   const situationBefore = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
   const presentation = infieldDecisionFamily.present(situation, resolution, decision);
   const explanation = resolution.defensiveOutcomeExplanation || createDefensiveOutcomeExplanation(situation, getInfieldDecisionChoice(situation, match, decision), resolution);
   const thirdOutResolution = finalizeHighSchoolDefensiveThirdOut(match, situationBefore, resolution);
   const runnerChanges = normalizeHighSchoolTerminalRunnerChanges(resolution, thirdOutResolution);
+  if (match.groundBallInPlayState?.runnerThrowTiming && typeof DefensiveRunnerThrowSettlementFoundation !== "undefined") {
+    const handoff = match.groundBallInPlayState;
+    const settlement = DefensiveRunnerThrowSettlementFoundation.projectExistingSettlement({ timing: handoff.runnerThrowTiming,
+      stage: handoff.decisionThrowState, before: situationBefore, resolution, thirdOut: thirdOutResolution });
+    const applied = applyHighSchoolDefensiveSettlementFacts(match, settlement, "infield-decision-family");
+    match.groundBallInPlayState = BattedBallGroundDefense.normalizeHandoff({ ...handoff, playSettlement: applied });
+  } else {
   match.outs = thirdOutResolution.outsAfter;
   thirdOutResolution.legalScoringRunnerIds.forEach(runnerId => {
     scoreHighSchoolMatchRunner(match, runnerId, "away", "infield-decision-family", {
@@ -10878,6 +10957,7 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
   });
   match.runners = thirdOutResolution.basesAfter.slice();
   if (thirdOutResolution.halfInningEnded) match.pendingHalfInningTermination = JSON.parse(JSON.stringify(thirdOutResolution));
+  }
   if (resolution.error) match.playerContribution.errors += 1;
   match.playerContribution.outsCreated += resolution.outsCreated;
   syncHighSchoolMatchPlayerRunnerLocation(match);
@@ -10999,8 +11079,11 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
 
 function applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution) {
   if (!match || !resolution || resolution.eventClassification !== "playerRoutinePlay") return null;
+  if (match.groundBallInPlayState?.playSettlement?.settlementApplied) return null;
+  validateHighSchoolDecisionThrowState(match);
   beginAutomaticGroundBallSituationExecution(match);
   recordGroundBallSituationResolution(match, resolution);
+  validateHighSchoolStoredDefensiveResolution(match, resolution);
   const situation = match.defensiveSituation;
   const situationBefore = {
     inning: match.inning,
@@ -11011,6 +11094,13 @@ function applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution) {
   };
   const thirdOutResolution = finalizeHighSchoolDefensiveThirdOut(match, situationBefore, resolution);
   const runnerChanges = normalizeHighSchoolTerminalRunnerChanges(resolution, thirdOutResolution);
+  if (match.groundBallInPlayState?.runnerThrowTiming && typeof DefensiveRunnerThrowSettlementFoundation !== "undefined") {
+    const handoff = match.groundBallInPlayState;
+    const settlement = DefensiveRunnerThrowSettlementFoundation.projectExistingSettlement({ timing: handoff.runnerThrowTiming,
+      stage: handoff.decisionThrowState, before: situationBefore, resolution, thirdOut: thirdOutResolution });
+    const applied = applyHighSchoolDefensiveSettlementFacts(match, settlement, "player-routine-play");
+    match.groundBallInPlayState = BattedBallGroundDefense.normalizeHandoff({ ...handoff, playSettlement: applied, settlementApplied: true });
+  } else {
   match.outs = thirdOutResolution.outsAfter;
   thirdOutResolution.legalScoringRunnerIds.forEach(runnerId => {
     scoreHighSchoolMatchRunner(match, runnerId, "away", "player-routine-play", {
@@ -11021,6 +11111,7 @@ function applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution) {
   });
   match.runners = thirdOutResolution.basesAfter.slice();
   if (thirdOutResolution.halfInningEnded) match.pendingHalfInningTermination = JSON.parse(JSON.stringify(thirdOutResolution));
+  }
   if (resolution.error) match.playerContribution.errors += 1;
   match.playerContribution.outsCreated += resolution.outsCreated;
   syncHighSchoolMatchPlayerRunnerLocation(match);
