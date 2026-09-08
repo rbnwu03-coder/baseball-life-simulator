@@ -148,6 +148,17 @@
       status: "active", startContext: copy(input.startContext || {}), endContext: null };
     player.temporaryTeamAssignments.push(assignment); return assignment;
   }
+  function setRepresentativeRosterEntryStatus(player, input) {
+    const state = initializePlayer(player);
+    const roster = state.representativeRosters.find(item => item.teamId === input.teamId && item.competitionEditionId === input.competitionEditionId);
+    check(roster, "Unknown representative roster");
+    const entry = roster.entries.find(item => item.playerId === input.playerId);
+    check(entry, "Unknown representative roster player");
+    const status = one(input.status, ["active", "completed", "withdrawn"]);
+    if (entry.status !== "active") { check(entry.status === status, "Representative roster entry already ended"); return entry; }
+    entry.status = status;
+    return entry;
+  }
   function endTemporaryAssignment(player, assignmentId, status = "completed", endContext = {}) {
     one(status, ["completed", "withdrawn"]);
     const assignment = find(player.temporaryTeamAssignments || [], "assignmentId", assignmentId);
@@ -224,5 +235,6 @@
   return Object.freeze({ VERSION, emptyState, createTeamContext, createCompetitionDefinition, createCompetitionEdition,
     evaluateCompetitionEligibility, registerDefinition, registerEdition, registerTeam, assignPrimarySchool, enterCompetition,
     recordParticipation, addRepresentativeRosterEntry, startTemporaryAssignment, endTemporaryAssignment, completeEdition,
+    setRepresentativeRosterEntryStatus,
     getActiveAssignments, getHistoricalAssignments, assertIntegrity, restorePlayer });
 });

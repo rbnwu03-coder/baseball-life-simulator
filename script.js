@@ -12509,6 +12509,7 @@ function initializeHighSchoolYearTransition(nextHighSchoolYear = 2, options = {}
   }
   if (typeof HighSchoolCompetitionEvidence !== "undefined") HighSchoolCompetitionEvidence.restorePlayer(player);
   if (typeof CountySelectionOpportunity !== "undefined") CountySelectionOpportunity.restorePlayer(player);
+  if (typeof NationalSelectionPipeline !== "undefined") NationalSelectionPipeline.restorePlayer(player);
   const state = player?.schoolInvitationState;
   const baseRoster = state?.selectedBaseRoster;
   const currentYear = Number(player.highSchoolYearTransitionState?.currentHighSchoolYear) || 0;

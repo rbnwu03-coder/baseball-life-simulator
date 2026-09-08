@@ -571,6 +571,11 @@ function normalizeSave(saved) {
   } else if (saved.countySelectionState?.opportunities?.length) {
     throw new Error("County selection module is required to restore opportunity identity.");
   }
+  if (typeof NationalSelectionPipeline !== "undefined") {
+    NationalSelectionPipeline.restorePlayer(fresh, saved.nationalSelectionState);
+  } else if (saved.nationalSelectionState?.pipelines?.length) {
+    throw new Error("National selection module is required to restore pipeline identity.");
+  }
   return fresh;
 }
 

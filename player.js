@@ -1751,6 +1751,7 @@ function createInitialPlayer(name = "") {
     competitionFoundation: null,
     competitionEvidenceState: null,
     countySelectionState: null,
+    nationalSelectionState: null,
     name,
     origin: PlayerIdentityOptions.origins[0],
     idealSelf: "",

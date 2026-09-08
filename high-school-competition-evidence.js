@@ -43,7 +43,7 @@
     check(definition, `Unknown competition definition: ${edition.competitionId}`);
     const configuredWeight = Number(edition.selectionConfig?.exposureWeight);
     const relevance = edition.selectionConfig?.selectionRelevance ?? definition.selectionRelevance ?? null;
-    const relevanceLevel = typeof relevance === "object" ? relevance.level || relevance.value || "configured" : relevance;
+    const relevanceLevel = relevance && typeof relevance === "object" ? relevance.level || relevance.value || "configured" : relevance;
     const exposureWeight = Number.isFinite(configuredWeight) ? Math.max(0, configuredWeight)
       : relevanceLevel === "high" ? 1.2 : relevanceLevel === "medium" ? 1 : relevanceLevel === "low" ? 0.8 : 1;
     return Object.freeze({
