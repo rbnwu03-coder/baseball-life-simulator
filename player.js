@@ -1399,6 +1399,11 @@ function finalizeSchoolInvitationSelection(target, schoolId) {
   }
   const selected = state.invitations.find(invitation => invitation.schoolId === schoolId);
   if (!selected) return { ok: false, error: "選擇的學校不在既有 Invitation Set。" };
+  if (typeof HighSchoolCompetitionFoundation !== "undefined") {
+    HighSchoolCompetitionFoundation.assignPrimarySchool(target, {
+      teamType: "school", teamId: selected.schoolId, organizationId: selected.schoolId
+    });
+  }
   state.selectedSchoolId = selected.schoolId;
   state.selectionFinalized = true;
   state.selectionVersion = SCHOOL_CHOICE_VERSION;
@@ -1741,6 +1746,9 @@ function restorePlayerSnapshotShape(snapshot = {}) {
 function createInitialPlayer(name = "") {
   const state = {
     saveVersion: SAVE_VERSION,
+    primaryTeamAssignment: null,
+    temporaryTeamAssignments: [],
+    competitionFoundation: null,
     name,
     origin: PlayerIdentityOptions.origins[0],
     idealSelf: "",

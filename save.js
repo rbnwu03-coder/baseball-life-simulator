@@ -556,6 +556,11 @@ function normalizeSave(saved) {
     }
   }
   fresh.saveVersion = SAVE_VERSION;
+  if (typeof HighSchoolCompetitionFoundation !== "undefined") {
+    HighSchoolCompetitionFoundation.restorePlayer(fresh);
+  } else if (saved.competitionFoundation || saved.primaryTeamAssignment || saved.temporaryTeamAssignments?.length) {
+    throw new Error("Competition foundation is required to restore assignment identity.");
+  }
   return fresh;
 }
 

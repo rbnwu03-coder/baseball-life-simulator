@@ -12492,6 +12492,9 @@ function enterHighSchool() {
 }
 
 function initializeHighSchoolYearTransition(nextHighSchoolYear = 2, options = {}) {
+  if (typeof HighSchoolCompetitionFoundation !== "undefined") {
+    HighSchoolCompetitionFoundation.restorePlayer(player);
+  }
   const state = player?.schoolInvitationState;
   const baseRoster = state?.selectedBaseRoster;
   const currentYear = Number(player.highSchoolYearTransitionState?.currentHighSchoolYear) || 0;
