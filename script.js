@@ -2463,12 +2463,12 @@ function getHighSchoolScoreboardRevealFeed(match) {
 
 function renderHighSchoolLineScore(model) {
   const headings = model.scoreboard.innings.map(inning => `<th scope="col">${inning}</th>`).join("");
-  const renderTeam = team => `<tr><th scope="row">${escapeHtml(team.name)}</th>${team.cells.map(run => `<td${run === "…" ? ' class="line-score-in-progress" aria-label="本半局進行中"' : ""}>${run === null ? "—" : run}</td>`).join("")}<td class="line-score-total">${team.visibleTotal}</td></tr>`;
+  const renderTeam = team => `<tr><th scope="row">${escapeHtml(team.name)}</th>${team.cells.map(run => `<td${run === "…" ? ' class="line-score-in-progress" aria-label="本半局進行中"' : ""}>${run === null ? "—" : run}</td>`).join("")}<td class="line-score-total">${team.visibleTotal}</td><td>${model.completed ? team.hits : "—"}</td><td>${model.completed ? team.errors : "—"}</td></tr>`;
   return `<section class="match-scoreboard" aria-labelledby="matchScoreboardTitle">
-    <div class="match-section-heading"><span id="matchScoreboardTitle">7 局記分板</span><small>${model.scoreboard.innings.length > model.regulationInnings ? "延長賽" : "秋季交流賽"}</small></div>
+    <div class="match-section-heading"><span id="matchScoreboardTitle">${model.regulationInnings} 局記分板</span><small>${model.scoreboard.innings.length > model.regulationInnings ? "延長賽" : "秋季交流賽"}</small></div>
     <div class="line-score-wrap" tabindex="0">
       <table class="line-score-table">
-        <thead><tr><th scope="col">球隊</th>${headings}<th scope="col">R</th></tr></thead>
+        <thead><tr><th scope="col">球隊</th>${headings}<th scope="col">R</th><th scope="col">H</th><th scope="col">E</th></tr></thead>
         <tbody>${renderTeam(model.scoreboard.away)}${renderTeam(model.scoreboard.home)}</tbody>
       </table>
     </div>
@@ -4348,6 +4348,26 @@ function recordHighSchoolMatchSimulationEvent(match, event) {
   if (Array.isArray(record.scoringRunnerIds)) record.scoringRunnerIds = record.scoringRunnerIds.slice();
   record.presentationSnapshot = createHighSchoolMatchPresentationSnapshot(match, record);
   match.simulationLog.push(record);
+  if (typeof MatchGameRecord !== "undefined") {
+    if (!match.gameRecord) {
+      match.gameRecord = MatchGameRecord.createGameRecord({
+        gameId: match.id,
+        competitionEditionId: match.competitionEditionId,
+        competitionEntryId: match.competitionEntryId,
+        homeTeamId: match.competitionTeamId || match.rosters?.home?.teamRoster?.teamId || "home",
+        awayTeamId: match.rosters?.away?.teamRoster?.teamId || "away",
+        inningsScheduled: match.regulationInnings,
+        rosters: match.rosters
+      });
+    }
+    MatchGameRecord.recordEvent(match.gameRecord, record, {
+      rosters: match.rosters,
+      playerId: "player",
+      playerTeam: "home",
+      playerRole: match.playerLineupStatus || match.role,
+      playerPosition: match.playerFieldingAssignment || match.currentFieldingPosition || match.position
+    });
+  }
   return record;
 }
 
@@ -6138,11 +6158,18 @@ function getHighSchoolMatchPresentation(match = prepareCurrentHighSchoolYearOneM
     ? authoritativeHalfIndex + 1
     : Math.min(authoritativeHalfIndex, getHighSchoolScoreboardRevealHalfIndex(match));
   const visibleHalf = getHighSchoolHalfInningFromIndex(revealHalfIndex);
+  const canonicalScoreboard = typeof MatchGameRecord !== "undefined" && match.gameRecord
+    ? MatchGameRecord.getScoreboard(match.gameRecord) : null;
+  const canonicalInningLines = canonicalScoreboard?.inningLines || [];
   const innings = match.completed
-    ? Math.max(regulationInnings, match.inning || 1, match.lineScore?.home?.length || 0, match.lineScore?.away?.length || 0)
+    ? Math.max(regulationInnings, match.inning || 1, canonicalScoreboard?.inningsPlayed || 0, canonicalInningLines.length)
     : Math.max(regulationInnings, visibleHalf.inning);
   const inningNumbers = Array.from({ length: innings }, (_, index) => index + 1);
-  const normalizeRuns = team => inningNumbers.map((_, index) => Number.isFinite(Number(match.lineScore?.[team]?.[index])) && match.lineScore[team][index] !== null ? Number(match.lineScore[team][index]) : null);
+  const normalizeRuns = team => inningNumbers.map((_, index) => {
+    const canonicalLine = canonicalInningLines.find(line => line.inning === index + 1);
+    if (canonicalLine) return Number(canonicalLine[team === "home" ? "homeRuns" : "awayRuns"]) || 0;
+    return Number.isFinite(Number(match.lineScore?.[team]?.[index])) && match.lineScore[team][index] !== null ? Number(match.lineScore[team][index]) : null;
+  });
   const createTeamPresentation = (team, name) => {
     const runs = normalizeRuns(team);
     const halfOffset = team === "home" ? 1 : 0;
@@ -6161,7 +6188,16 @@ function getHighSchoolMatchPresentation(match = prepareCurrentHighSchoolYearOneM
       : revealHalfIndex < authoritativeHalfIndex
         ? historicalTotal
         : Number(presentationState.scores?.[team]) || 0;
-    return Object.freeze({ name, runs: Object.freeze(runs), cells: Object.freeze(cells), total: Number(match.scores?.[team]) || 0, visibleTotal });
+    const canonicalTotal = Number(canonicalScoreboard?.totals?.[team]?.runs);
+    return Object.freeze({
+      name,
+      runs: Object.freeze(runs),
+      cells: Object.freeze(cells),
+      total: Number.isFinite(canonicalTotal) ? canonicalTotal : Number(match.scores?.[team]) || 0,
+      hits: Number(canonicalScoreboard?.totals?.[team]?.hits) || 0,
+      errors: Number(canonicalScoreboard?.totals?.[team]?.errors) || 0,
+      visibleTotal
+    });
   };
   const awayPresentation = createTeamPresentation("away", match.opponent);
   const homePresentation = createTeamPresentation("home", "高中球隊");
@@ -9468,6 +9504,7 @@ function prepareHighSchoolYearOneMatch(options = {}) {
     scoreboardRevealHalfIndex: 0,
     regulationInnings: 7,
     lineScore: { home: [], away: [] },
+    gameRecord: null,
     rosters,
     playerLineupStatus: roleAssignment.lineupStatus,
     playerLineupSlot,
@@ -11506,6 +11543,31 @@ function finalizeHighSchoolGameExposure(match) {
   return finalization;
 }
 
+function finalizeHighSchoolGameRecord(match) {
+  if (!match || typeof MatchGameRecord === "undefined") return null;
+  if (!match.gameRecord) {
+    match.gameRecord = MatchGameRecord.createGameRecord({
+      gameId: match.id,
+      competitionEditionId: match.competitionEditionId,
+      competitionEntryId: match.competitionEntryId,
+      homeTeamId: match.competitionTeamId || match.rosters?.home?.teamRoster?.teamId || "home",
+      awayTeamId: match.rosters?.away?.teamRoster?.teamId || "away",
+      inningsScheduled: match.regulationInnings,
+      rosters: match.rosters
+    });
+  }
+  return MatchGameRecord.finalizeGameRecord(match.gameRecord, {
+    inningsPlayed: match.inning,
+    competitionEditionId: match.competitionEditionId,
+    competitionEntryId: match.competitionEntryId
+  });
+}
+
+function getHighSchoolMatchPlayerGameLine(match = player.highSchoolMatch, playerId = "player") {
+  return typeof MatchGameRecord !== "undefined" && match?.gameRecord
+    ? MatchGameRecord.getPlayerGameLine(match.gameRecord, playerId) : null;
+}
+
 function getHighSchoolCompetitionEvaluationIdentity(subject = player) {
   const schoolId = subject?.schoolInvitationState?.selectedSchoolId
     || subject?.schoolInvitationState?.selectedSchoolYearRosterIdentity?.schoolId;
@@ -11669,6 +11731,12 @@ function recordHighSchoolYearOneMatchHistory(match, competitionSettlement) {
       participated: (Number(exposure.plateAppearances) || 0) > 0 || (Number(exposure.defensiveInnings) || 0) > 0
     },
     playerContribution: JSON.parse(JSON.stringify(match.playerContribution || {})),
+    gameRecordId: match.gameRecord?.gameId || "",
+    gameRecordSummary: match.gameRecord?.result ? {
+      finalScore: JSON.parse(JSON.stringify(match.gameRecord.result.finalScore)),
+      totals: JSON.parse(JSON.stringify(match.gameRecord.totals)),
+      playerLine: typeof MatchGameRecord !== "undefined" ? MatchGameRecord.getPlayerGameLine(match.gameRecord, "player") : null
+    } : null,
     evaluationConsequence: competitionSettlement?.roleResult ? {
       previousRole: competitionSettlement.roleResult.currentRole,
       currentRole: competitionSettlement.roleResult.nextRole,
@@ -11728,6 +11796,7 @@ function settleHighSchoolYearOneMatch(match, finalDecision) {
   recordHighSchoolMatchSimulationEvent(match, {
     type: "gameEnd", inning: match.inning, half: "終", scores: match.scores
   });
+  finalizeHighSchoolGameRecord(match);
   finalizeHighSchoolGameExposure(match);
   if (typeof MatchExperienceDevelopment !== "undefined") {
     const finalizedExposure = match.gameExposureState?.finalized

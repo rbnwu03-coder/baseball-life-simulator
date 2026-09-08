@@ -2,10 +2,13 @@
   const foundation = typeof module === "object" && module.exports
     ? require("./high-school-competition-foundation.js")
     : root.HighSchoolCompetitionFoundation;
-  const api = factory(foundation);
+  const gameRecord = typeof module === "object" && module.exports
+    ? require("./match-game-record.js")
+    : root.MatchGameRecord;
+  const api = factory(foundation, gameRecord);
   if (typeof module === "object" && module.exports) module.exports = api;
   if (root) root.HighSchoolCompetitionEvidence = api;
-})(typeof globalThis !== "undefined" ? globalThis : this, function (CompetitionFoundation) {
+})(typeof globalThis !== "undefined" ? globalThis : this, function (CompetitionFoundation, MatchGameRecord) {
   "use strict";
 
   const VERSION = "high-school-competition-evidence-v1";
@@ -121,6 +124,7 @@
       teamId: String(input.teamId),
       sourceType: input.sourceType,
       evidenceType: input.evidenceType,
+      evidenceLayer: String(input.evidenceLayer || (input.sourceType === "match" ? "decision" : "evaluation")),
       position: String(input.position || ""),
       role: String(input.role || "participant"),
       sample: { type: String(input.sample.type), count: Math.max(1, Number(input.sample.count) || 1) },
@@ -129,6 +133,54 @@
       reliability: getReliability(input.sample.count),
       createdContext: clone(input.createdContext || {})
     };
+  }
+
+  function fullGamePerformanceValue(evidenceType, line) {
+    if (evidenceType === "offense") {
+      const stats = line.batting;
+      return round((stats.H * 2 + stats.doubles + stats.triples * 2 + stats.HR * 3 + stats.BB - stats.SO * 0.5) / Math.max(1, stats.PA));
+    }
+    if (evidenceType === "pitching") {
+      const stats = line.pitching;
+      return round((stats.SO * 1.5 - stats.H - stats.BB - stats.HBP - stats.ER * 1.5) / Math.max(1, stats.BF));
+    }
+    const stats = line.defense;
+    return round((stats.PO + stats.A - stats.E * 2) / Math.max(1, stats.chances));
+  }
+
+  function integrateFullGameProductionEvidence(player, input, entry, participation) {
+    entry = entry || resolveEntry(player, input || {});
+    const playerId = String(input?.playerId || "player");
+    participation = participation || resolveParticipation(player, { ...(input || {}), playerId }, entry);
+    const match = input.match || {};
+    const gameRecord = match.gameRecord;
+    if (!MatchGameRecord || !gameRecord || gameRecord.status !== "final") return [];
+    const line = MatchGameRecord.getPlayerGameLine(gameRecord, playerId);
+    if (!line || !participation || participation.participationStatus !== "appeared") return [];
+    const state = getState(player);
+    const specs = [];
+    if (Number(line.batting?.PA) > 0) specs.push(["offense", "PA", line.batting.PA, line.batting]);
+    if (Number(line.pitching?.BF) > 0) specs.push(["pitching", "BF", line.pitching.BF, line.pitching]);
+    if (Number(line.defense?.chances) > 0) specs.push(["defense", "defensive_chances", line.defense.chances, line.defense]);
+    return specs.map(([evidenceType, sampleType, count, stats]) => {
+      const sourceId = `${gameRecord.gameId}|full-game|${evidenceType}`;
+      return putRecord(state, createRecord({
+        evidenceId: identity(playerId, entry.competitionEditionId, gameRecord.gameId, "full-game-production", evidenceType),
+        playerId,
+        competitionEditionId: entry.competitionEditionId,
+        competitionEntryId: entry.entryId,
+        teamId: entry.teamId,
+        sourceType: "match",
+        evidenceType,
+        evidenceLayer: "fullGameProduction",
+        position: input.position || line.position || match.position,
+        role: input.role || line.role || match.role,
+        sample: { type: sampleType, count },
+        context: { matchId: String(match.id || gameRecord.gameId), gameRecordId: gameRecord.gameId, sourceEvidenceId: sourceId },
+        performance: { value: fullGamePerformanceValue(evidenceType, line), stats: clone(stats) },
+        createdContext: input.createdContext || { seasonYear: input.seasonYear ?? null, sequence: input.sequence ?? null }
+      }));
+    });
   }
 
   function integrateMatchEvidence(player, input = {}) {
@@ -142,9 +194,10 @@
     const match = input.match || {};
     check(match.completed === true, "Competition match evidence requires a completed match");
     const canonicalState = match.matchExperience;
-    check(canonicalState?.finalized === true && Array.isArray(canonicalState.evidence), "Canonical match experience evidence is required");
+    const productionRecords = integrateFullGameProductionEvidence(player, input, entry, participation);
+    check(productionRecords.length > 0 || (canonicalState?.finalized === true && Array.isArray(canonicalState.evidence)), "Canonical match experience evidence or full game production is required");
     const state = getState(player);
-    const records = canonicalState.evidence.map((source, index) => {
+    const decisionRecords = (canonicalState?.evidence || []).map((source, index) => {
       const evidenceType = mapEvidenceType(source, input.position || match.position);
       const sample = getSample(source, evidenceType);
       const sourceId = source.evidenceId || `${match.id}|${index}`;
@@ -156,6 +209,7 @@
         teamId: entry.teamId,
         sourceType: "match",
         evidenceType,
+        evidenceLayer: "decision",
         position: input.position || match.position || match.playerFieldingAssignment,
         role: input.role || match.role || match.playerLineupStatus,
         sample,
@@ -170,6 +224,7 @@
         createdContext: input.createdContext || { seasonYear: input.seasonYear ?? null, sequence: input.sequence ?? null }
       }));
     });
+    const records = [...productionRecords, ...decisionRecords];
     return Object.freeze({ status: records.length ? "applied" : "no-canonical-evidence", records: clone(records) });
   }
 
@@ -268,7 +323,7 @@
 
   return Object.freeze({
     VERSION, SOURCE_TYPES: Object.freeze(SOURCE_TYPES.slice()), EVIDENCE_TYPES: Object.freeze(EVIDENCE_TYPES.slice()),
-    emptyState, getReliability, getCompetitionContext, integrateMatchEvidence, integrateEvaluationEvidence,
+    emptyState, getReliability, getCompetitionContext, integrateMatchEvidence, integrateFullGameProductionEvidence, integrateEvaluationEvidence,
     getEvidence, getCompetitionEvidenceSummary, normalizeState, assertIntegrity, restorePlayer
   });
 });

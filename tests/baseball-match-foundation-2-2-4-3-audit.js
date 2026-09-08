@@ -5,7 +5,7 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const files = [
-  "player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js",
+  "match-game-record.js", "player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js",
   "evaluation-registry.js", "coach-evaluation-boundary.js", "narrative-condition-boundary.js",
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
@@ -234,7 +234,9 @@ function makeContext() {
       const attentionBeats = routineEvents.length + defensiveMoments.length;
       const result = {
         seed, role, choicePolicy, executionSample, completed: match.completed, steps, orphan, noProgress,
-        integrityIssues: getHighSchoolMatchStateIntegrityIssues(match), finalScore: { ...match.scores },
+        integrityIssues: getHighSchoolMatchStateIntegrityIssues(match),
+        gameRecordIntegrityIssues: match.gameRecord ? MatchGameRecord.getIntegrityIssues(match.gameRecord) : ["missing-game-record"],
+        finalScore: { ...match.scores },
         entry: role === "starter" ? { inning: 1, half: "上", outs: 0, runners: [null, null, null],
           scoreDifferential: 0, lineupSlot: match.playerLineupSlot, immediateFirstBatter: false, eventType: "starter-lineup" }
           : entry ? { inning: entry.inning, half: entry.half, outs: entry.outs, runners: entry.runners.slice(),
@@ -391,7 +393,8 @@ function summarize(matches) {
     completed: matches.filter(match => match.completed).length,
     orphan: matches.reduce((sum, match) => sum + match.orphan, 0),
     noProgress: matches.reduce((sum, match) => sum + match.noProgress, 0),
-    integrityIssues: matches.reduce((sum, match) => sum + match.integrityIssues.length, 0)
+    integrityIssues: matches.reduce((sum, match) => sum + match.integrityIssues.length, 0),
+    gameRecordIntegrityIssues: matches.reduce((sum, match) => sum + match.gameRecordIntegrityIssues.length, 0)
   };
 }
 
@@ -436,6 +439,7 @@ assert.strictEqual(starterSummary.completed, starter.length, "所有 Starter aud
 assert.strictEqual(benchSummary.orphan + starterSummary.orphan, 0, "Audit 不應產生 orphan playback");
 assert.strictEqual(benchSummary.noProgress + starterSummary.noProgress, 0, "Audit 不應接受 no-progress callback");
 assert.strictEqual(benchSummary.integrityIssues + starterSummary.integrityIssues, 0, "Audit 不應產生 game-state integrity issue");
+assert.strictEqual(benchSummary.gameRecordIntegrityIssues + starterSummary.gameRecordIntegrityIssues, 0, "Audit 不應產生 game-record integrity issue");
 assert.ok(deterministic, "相同 seeds 的 audit events 必須可重現");
 assert.ok(instrumentationNeutral, "Instrumentation 開關不得改變 canonical match outcome");
 

@@ -445,6 +445,19 @@ function normalizeSave(saved) {
       }) : null
     }
     : { home: null, away: null };
+  fresh.highSchoolMatch.gameRecord = saved.highSchoolMatch?.gameRecord
+    ? (typeof MatchGameRecord !== "undefined"
+      ? MatchGameRecord.normalizeGameRecord(saved.highSchoolMatch.gameRecord, {
+        gameId: fresh.highSchoolMatch.id,
+        competitionEditionId: fresh.highSchoolMatch.competitionEditionId,
+        competitionEntryId: fresh.highSchoolMatch.competitionEntryId,
+        homeTeamId: fresh.highSchoolMatch.competitionTeamId || fresh.highSchoolMatch.rosters.home?.teamRoster?.teamId || "home",
+        awayTeamId: fresh.highSchoolMatch.rosters.away?.teamRoster?.teamId || "away",
+        inningsScheduled: fresh.highSchoolMatch.regulationInnings,
+        rosters: fresh.highSchoolMatch.rosters
+      })
+      : JSON.parse(JSON.stringify(saved.highSchoolMatch.gameRecord)))
+    : null;
   if (
     saved.highSchoolMatch?.id === "hs-y1-autumn-exhibition" &&
     (
