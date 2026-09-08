@@ -105,9 +105,10 @@ function functionSource(source, name) {
   return "";
 }
 
-const script = fs.readFileSync(path.join(root, "script.js"), "utf8");
+const normalizeSourceNewlines = source => source.replace(/\r\n?/g, "\n");
+const script = normalizeSourceNewlines(fs.readFileSync(path.join(root, "script.js"), "utf8"));
 const css = fs.readFileSync(path.join(root, "style.css"), "utf8");
-const baselineScript = execFileSync("git", ["show", "HEAD:script.js"], { cwd: root, encoding: "utf8" });
+const baselineScript = normalizeSourceNewlines(execFileSync("git", ["show", "HEAD:script.js"], { cwd: root, encoding: "utf8" }));
 const game = makeContext(false);
 
 vm.runInContext("player=createInitialPlayer('摘要測試'); player.chapter='少棒入門'; player.body.stamina=9; player.body.fatigue=2; updateStatus();", game);

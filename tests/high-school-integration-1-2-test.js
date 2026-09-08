@@ -5,6 +5,7 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const files = [
+  "team-roster-foundation.js", "team-strength-model.js",
   "player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js",
   "evaluation-registry.js", "coach-evaluation-boundary.js", "narrative-condition-boundary.js",
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
@@ -208,8 +209,8 @@ verify("20. Moment 2 後 save／reload 保留第三段入口，且未提前完�
 })()`));
 verify("21. normalizeSave 深層恢復 completedMoments 與 accumulated contribution", evaluate(`(() => {const match=__completeDirect("bench");const saved=JSON.parse(JSON.stringify(player));const expected=JSON.stringify(saved.highSchoolMatch.playerContribution);const total=saved.highSchoolMatch.playerContribution.strong+saved.highSchoolMatch.playerContribution.mixed+saved.highSchoolMatch.playerContribution.failure;const restored=normalizeSave(saved);restored.highSchoolMatch.completedMoments[0].outcome="改寫";return saved.highSchoolMatch.completedMoments[0].outcome!=="改寫"&&total>=1&&JSON.stringify(restored.highSchoolMatch.playerContribution)===expected;})()`));
 
-verify("22. Outcome 保留閱讀與 Continue，前兩段不推進 Career Spine", evaluate(`(() => {
-  __setupHighSchoolMatch("starter","內野手","high");let safety=0;while(!isHighSchoolMatchDecisionVisible(player.highSchoolMatch)&&safety++<300)advanceHighSchoolMatchPlaybackStep(player.highSchoolMatch);const id=getHighSchoolYearOneMomentId();const ok=chooseHighSchoolYearOneMatchMoment("attack",id,()=>0.99);const held=pendingYouthSeasonOutcome?.eventId==="high_school_showcase"&&player.highSchoolStep===5&&document.getElementById("choices").innerHTML.includes("繼續");continueYouthSeasonOutcome();while(!isHighSchoolMatchDecisionVisible(player.highSchoolMatch)&&safety++<600)advanceHighSchoolMatchPlaybackStep(player.highSchoolMatch);return ok&&held&&player.highSchoolStep===5&&getCurrentEventId()==="high_school_showcase"&&player.highSchoolMatch.currentDomain==="defense";
+verify("22. Outcome 保留閱讀與 Continue，下一個合法決策不推進 Career Spine", evaluate(`(() => {
+  __setupHighSchoolMatch("starter","內野手","high");let safety=0;while(!isHighSchoolMatchDecisionVisible(player.highSchoolMatch)&&safety++<300)advanceHighSchoolMatchPlaybackStep(player.highSchoolMatch);const id=getHighSchoolYearOneMomentId();const ok=chooseHighSchoolYearOneMatchMoment("attack",id,()=>0.99);const held=pendingYouthSeasonOutcome?.eventId==="high_school_showcase"&&player.highSchoolStep===5&&document.getElementById("choices").innerHTML.includes("繼續");continueYouthSeasonOutcome();while(!isHighSchoolMatchDecisionVisible(player.highSchoolMatch)&&safety++<600)advanceHighSchoolMatchPlaybackStep(player.highSchoolMatch);const match=player.highSchoolMatch;return ok&&held&&player.highSchoolStep===5&&getCurrentEventId()==="high_school_showcase"&&isHighSchoolMatchDecisionVisible(match);
 })()`));
 verify("23. Regulation 終場後只推進一次，Continue 才前往下一個高一事件", evaluate(`(() => {
   __setupHighSchoolMatch("starter","內野手","high");let safety=0;while(!player.highSchoolMatch.completed&&safety++<1200){if(isHighSchoolMatchDecisionVisible(player.highSchoolMatch)){const choice=getHighSchoolYearOneMatchMomentChoices()[0];chooseHighSchoolYearOneMatchMoment(choice.matchDecision,choice.matchMomentId,()=>0.99);if(!player.highSchoolMatch.completed)continueYouthSeasonOutcome();}else advanceHighSchoolMatchPlaybackStep(player.highSchoolMatch);}const held=player.highSchoolStep===6&&pendingYouthSeasonOutcome?.eventId==="high_school_showcase";continueYouthSeasonOutcome();return held&&getCurrentEventId()==="high_school_call_home";

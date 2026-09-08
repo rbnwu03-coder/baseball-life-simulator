@@ -3,16 +3,17 @@ const path = require("path");
 const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
-const boundarySource = fs.readFileSync(path.join(root, "current-state-boundary.js"), "utf8");
-const timeBoundarySource = fs.readFileSync(path.join(root, "time-boundary.js"), "utf8");
-const relationshipBoundarySource = fs.readFileSync(path.join(root, "relationship-boundary.js"), "utf8");
-const coachEvaluationBoundarySource = fs.readFileSync(path.join(root, "coach-evaluation-boundary.js"), "utf8");
-const dayCompletionFlowSource = fs.readFileSync(path.join(root, "day-completion-flow.js"), "utf8");
-const decisionFlowSource = fs.readFileSync(path.join(root, "decision-flow.js"), "utf8");
-const relationshipFlowSource = fs.readFileSync(path.join(root, "relationship-flow.js"), "utf8");
-const coachResponseFlowSource = fs.readFileSync(path.join(root, "coach-response-flow.js"), "utf8");
-const scriptSource = fs.readFileSync(path.join(root, "script.js"), "utf8");
-const indexSource = fs.readFileSync(path.join(root, "index.html"), "utf8");
+const readSource = file => fs.readFileSync(path.join(root, file), "utf8").replace(/\r\n?/g, "\n");
+const boundarySource = readSource("current-state-boundary.js");
+const timeBoundarySource = readSource("time-boundary.js");
+const relationshipBoundarySource = readSource("relationship-boundary.js");
+const coachEvaluationBoundarySource = readSource("coach-evaluation-boundary.js");
+const dayCompletionFlowSource = readSource("day-completion-flow.js");
+const decisionFlowSource = readSource("decision-flow.js");
+const relationshipFlowSource = readSource("relationship-flow.js");
+const coachResponseFlowSource = readSource("coach-response-flow.js");
+const scriptSource = readSource("script.js");
+const indexSource = readSource("index.html");
 
 const boundaryWriteBlock = `  const currentStateResult = CurrentStateBoundary.applyStateChangeRequest({
     source: "showStory",

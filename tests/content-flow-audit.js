@@ -3,7 +3,7 @@ const path = require("path");
 const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
-const runtimeFiles = ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "save.js", "script.js"];
+const runtimeFiles = ["team-roster-foundation.js", "team-strength-model.js", "player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "offensive-plate-approach.js", "story.js", "save.js", "script.js"];
 const source = runtimeFiles.map(file => fs.readFileSync(path.join(root, file), "utf8"));
 const nodes = new Map();
 const context = vm.createContext({
@@ -13,6 +13,15 @@ const context = vm.createContext({
   window: { setTimeout(callback) { callback(); } }
 });
 source.forEach((code, index) => vm.runInContext(code, context, { filename: runtimeFiles[index] }));
+vm.runInContext(`
+  player=createInitialPlayer("Content flow audit");
+  applyDebugBookmarkCharacterProfile(player);
+  settleHighSchoolEntryCapability(player,{originType:"test-fixture"});
+  applyCanonicalPositionProfile(player,"內野手",["外野手"]);
+  player.chapter="青棒";
+  player.highSchoolStep=5;
+  player.highSchoolRoleCode="starter";
+`, context);
 
 const groups = vm.runInContext(`({
   童年: chapterOneEvents,

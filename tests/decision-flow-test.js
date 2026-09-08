@@ -3,10 +3,11 @@ const path = require("path");
 const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
-const decisionFlowSource = fs.readFileSync(path.join(root, "decision-flow.js"), "utf8");
-const scriptSource = fs.readFileSync(path.join(root, "script.js"), "utf8");
-const indexSource = fs.readFileSync(path.join(root, "index.html"), "utf8");
-const controllerSource = fs.readFileSync(path.join(root, "application-controller.js"), "utf8");
+const readSource = file => fs.readFileSync(path.join(root, file), "utf8").replace(/\r\n?/g, "\n");
+const decisionFlowSource = readSource("decision-flow.js");
+const scriptSource = readSource("script.js");
+const indexSource = readSource("index.html");
+const controllerSource = readSource("application-controller.js");
 
 const contextBlock = `  let decisionContext = null;
   if (eventId === "chapter2_intro" && index === 0) {

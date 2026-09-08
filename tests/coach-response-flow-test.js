@@ -3,14 +3,12 @@ const path = require("path");
 const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
-const flowSource = fs.readFileSync(path.join(root, "coach-response-flow.js"), "utf8");
-const storySource = fs.readFileSync(path.join(root, "story.js"), "utf8");
-const scriptSource = fs.readFileSync(path.join(root, "script.js"), "utf8");
-const controllerSource = fs.readFileSync(
-  path.join(root, "application-controller.js"),
-  "utf8"
-);
-const indexSource = fs.readFileSync(path.join(root, "index.html"), "utf8");
+const readSource = file => fs.readFileSync(path.join(root, file), "utf8").replace(/\r\n?/g, "\n");
+const flowSource = readSource("coach-response-flow.js");
+const storySource = readSource("story.js");
+const scriptSource = readSource("script.js");
+const controllerSource = readSource("application-controller.js");
+const indexSource = readSource("index.html");
 
 const migratedCoachBlock = `      const contextResult = CoachResponseFlow.createCoachResponseContext(
         "youth_match_entry",

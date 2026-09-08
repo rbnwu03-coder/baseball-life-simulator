@@ -65,14 +65,14 @@ function makeContext() {
       match.presentedEventCursor=match.simulationLog.length;
       return match;
     }
-    function __candidate2222({position="一壘手",runners=[null,null,null],outs=0,inning=5,scores={home:1,away:1},ball="hardGrounder",direction="straightAtPlayer",depth,level=8,sample=.99,batterSpeed}={}) {
+    function __candidate2222({position="一壘手",runners=[null,null,null],outs=0,inning=5,scores={home:1,away:1},ball="hardGrounder",direction="straightAtPlayer",depth,level=8,sample=.99,batterSpeed,runnerMovementProgress={},runnerTargets={}}={}) {
       const match=__setup2222(position);
       Object.assign(match,{runners:runners.slice(),outs,inning,scores:{...scores}});
       const event=prepareHighSchoolDefensiveMomentFromSimulation(match,{
         ballContextType:ball,
         randomSource:()=>sample,
         situationOverrides:{
-          playerPosition:position,ballDirection:direction,
+          playerPosition:position,ballDirection:direction,runnerMovementProgress,runnerTargets,
           ...(depth?{ballDepth:depth}:{}),...(batterSpeed?{batterSpeed}:{}),
           playerCapabilities:{fielding:level,reaction:level,range:level,arm:level,throwing:level,decision:level}
         }
@@ -132,8 +132,8 @@ verify("18. 雙殺情境至少有 secureOut 與 attemptDoublePlay 兩種目標",
 verify("19. 雙殺情境 legal choice metadata 包含風險與棒球價值", evaluate(`(() => {const x=__candidate2222({position:"游擊手",runners:["away-sim-4",null,null],outs:1,ball:"normalGrounder",direction:"straightAtPlayer"});return x.choices.every(c=>c.objective&&c.risk&&c.baseballValue);})()`));
 verify("20. 雙殺情境 tension 為 high", evaluate(`(() => __candidate2222({position:"游擊手",runners:["away-sim-4",null,null],outs:1,ball:"normalGrounder",direction:"straightAtPlayer"}).match.decisionTension==="high")()`));
 
-verify("21. 三壘手三壘有人一出局平手時建立 decision", evaluate(`(() => {const x=__candidate2222({position:"三壘手",runners:[null,null,"away-sim-4"],outs:1,inning:7,scores:{home:2,away:2},ball:"slowGrounder",direction:"lineSide"});return x.event.type==="meaningfulMomentReached";})()`));
-verify("22. 三壘高張力局面提供防止得分與先拿出局兩種目標", evaluate(`(() => {const x=__candidate2222({position:"三壘手",runners:[null,null,"away-sim-4"],outs:1,inning:7,scores:{home:2,away:2},ball:"slowGrounder",direction:"lineSide"});const o=x.match.decisionGate.objectives;return o.includes("preventRun")&&o.includes("secureOut")&&x.match.decisionTension==="high";})()`));
+verify("21. 三壘手面對已啟動攻本壘跑者時建立 decision", evaluate(`(() => {const x=__candidate2222({position:"三壘手",runners:[null,null,"away-sim-4"],outs:1,inning:7,scores:{home:2,away:2},ball:"slowGrounder",direction:"lineSide",runnerMovementProgress:{2:"committed"},runnerTargets:{2:"home"}});return x.event.type==="meaningfulMomentReached";})()`));
+verify("22. 三壘高張力局面提供防止得分與先拿出局兩種目標", evaluate(`(() => {const x=__candidate2222({position:"三壘手",runners:[null,null,"away-sim-4"],outs:1,inning:7,scores:{home:2,away:2},ball:"slowGrounder",direction:"lineSide",runnerMovementProgress:{2:"committed"},runnerTargets:{2:"home"}});const o=x.match.decisionGate.objectives;return o.includes("preventRun")&&o.includes("secureOut")&&x.match.decisionTension==="high";})()`));
 verify("23. 滿壘情境保留防本壘與其他合法出局價值", evaluate(`(() => {const x=__candidate2222({position:"三壘手",runners:["away-sim-2","away-sim-3","away-sim-4"],outs:1,ball:"hardGrounder",direction:"straightAtPlayer"});return x.event.type==="meaningfulMomentReached"&&x.choices.some(c=>c.objective==="preventRun")&&x.choices.some(c=>c.objective==="attemptDoublePlay");})()`));
 verify("24. 能力高低不決定 agency gate", evaluate(`(() => {const a=__candidate2222({position:"游擊手",runners:["away-sim-4",null,null],outs:1,level:1,ball:"normalGrounder"});const b=__candidate2222({position:"游擊手",runners:["away-sim-4",null,null],outs:1,level:10,ball:"normalGrounder"});return a.match.playerEventClassification===b.match.playerEventClassification&&a.match.decisionGate.objectives.join()===b.match.decisionGate.objectives.join();})()`));
 verify("25. 玩家未參與時共用分類為 ordinaryPlay", evaluate(`classifyPositionFamilyPlay({},[],false).eventClassification==="ordinaryPlay"`));
