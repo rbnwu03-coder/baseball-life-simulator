@@ -1749,6 +1749,8 @@ function createInitialPlayer(name = "") {
     primaryTeamAssignment: null,
     temporaryTeamAssignments: [],
     competitionFoundation: null,
+    competitionEvidenceState: null,
+    countySelectionState: null,
     name,
     origin: PlayerIdentityOptions.origins[0],
     idealSelf: "",

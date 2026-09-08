@@ -561,6 +561,16 @@ function normalizeSave(saved) {
   } else if (saved.competitionFoundation || saved.primaryTeamAssignment || saved.temporaryTeamAssignments?.length) {
     throw new Error("Competition foundation is required to restore assignment identity.");
   }
+  if (typeof HighSchoolCompetitionEvidence !== "undefined") {
+    HighSchoolCompetitionEvidence.restorePlayer(fresh, saved.competitionEvidenceState);
+  } else if (saved.competitionEvidenceState?.records?.length) {
+    throw new Error("Competition evidence module is required to restore evidence identity.");
+  }
+  if (typeof CountySelectionOpportunity !== "undefined") {
+    CountySelectionOpportunity.restorePlayer(fresh, saved.countySelectionState);
+  } else if (saved.countySelectionState?.opportunities?.length) {
+    throw new Error("County selection module is required to restore opportunity identity.");
+  }
   return fresh;
 }
 

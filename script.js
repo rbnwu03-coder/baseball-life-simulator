@@ -11739,6 +11739,18 @@ function settleHighSchoolYearOneMatch(match, finalDecision) {
       : undefined;
     MatchExperienceDevelopment.settleMatchExperienceDevelopment(player, match, finalizedExposure ? { exposure: finalizedExposure } : {});
   }
+  if (typeof HighSchoolCompetitionEvidence !== "undefined" && (match.competitionEditionId || match.competitionEntryId)) {
+    HighSchoolCompetitionEvidence.integrateMatchEvidence(player, {
+      playerId: match.playerId || "player",
+      competitionEditionId: match.competitionEditionId,
+      competitionEntryId: match.competitionEntryId,
+      teamId: match.competitionTeamId,
+      match,
+      position: match.playerFieldingAssignment || match.position,
+      role: match.role || match.playerLineupStatus,
+      createdContext: { highSchoolYear: match.highSchoolYear, opportunityIndex: match.opportunityIndex }
+    });
+  }
 
   if (participationTruth.participated) {
     player.seasonPerformance += Math.max(0, contribution.strong * 2 + contribution.mixed);
@@ -12495,6 +12507,8 @@ function initializeHighSchoolYearTransition(nextHighSchoolYear = 2, options = {}
   if (typeof HighSchoolCompetitionFoundation !== "undefined") {
     HighSchoolCompetitionFoundation.restorePlayer(player);
   }
+  if (typeof HighSchoolCompetitionEvidence !== "undefined") HighSchoolCompetitionEvidence.restorePlayer(player);
+  if (typeof CountySelectionOpportunity !== "undefined") CountySelectionOpportunity.restorePlayer(player);
   const state = player?.schoolInvitationState;
   const baseRoster = state?.selectedBaseRoster;
   const currentYear = Number(player.highSchoolYearTransitionState?.currentHighSchoolYear) || 0;
