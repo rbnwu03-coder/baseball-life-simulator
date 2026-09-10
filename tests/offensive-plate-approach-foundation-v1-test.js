@@ -486,7 +486,9 @@ const audit = runAudit();
 verify("24. 16,000 PA structural audit 完成且四種 package 均有 BB/K/BIP", Object.values(audit.approaches).every(item => item.pa === 4000 && item.walkRate > 0 && item.strikeoutRate > 0 && item.ballInPlayRate > 0));
 verify("25. selective chase rate 低於 aggressive 且平均打席較長", audit.approaches.patientSelection.chaseRate < audit.approaches.aggressiveEarlySwing.chaseRate && audit.approaches.patientSelection.avgPitches > audit.approaches.aggressiveEarlySwing.avgPitches);
 verify("26. selective 並非 walk-only 且 hitterPitch 仍明顯出棒", audit.approaches.patientSelection.ballInPlayRate > 0.2 && audit.approaches.patientSelection.hitterPitchTakeRate < 0.3);
-verify("27. compact contact whiff 與 extra-base tendency 均低於 aggressive", audit.approaches.compactContact.whiffRate < audit.approaches.aggressiveEarlySwing.whiffRate && audit.approaches.compactContact.extraBaseRate < audit.approaches.aggressiveEarlySwing.extraBaseRate);
+// The removed legacy intent bonus is not a contract for the physical-only official mapper.
+// Preserve the upstream compact-contact advantage; physical mediation is asserted by the mapping tests.
+verify("27. compact contact 保留較低 whiff；各 approach 長打分布仍非退化", audit.approaches.compactContact.whiffRate < audit.approaches.aggressiveEarlySwing.whiffRate && Object.values(audit.approaches).every(item => item.extraBaseRate > 0 && item.extraBaseRate < item.hitRate));
 verify("28. structural audit 無 NaN、duplicate PA 或 RNG drift", audit.nan === 0 && audit.duplicatePA === 0 && audit.rngDrift === 0);
 
 const calledThird = OffensivePlateApproach.resolveNextPitch(state("patientSelection", { id: "called-third", strikes: 2 }), abilities, { pitch: pitch("edgeStrike"), decisionRoll: 0.99, recognitionRoll: 0 });

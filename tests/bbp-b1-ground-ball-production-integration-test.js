@@ -11,7 +11,7 @@ const runtimeFiles = [
   "coach-evaluation-boundary.js", "narrative-condition-boundary.js", "evaluation-registry-bootstrap.js", "decision-flow.js",
   "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js", "competition-presentation.js",
   "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js", "baseball-offense-prototype.js", "pitcher-mental-state.js",
-  "pitcher-process-state.js", "pitch-sequencing.js", "batter-anticipation.js", "batted-ball-physical.js", "offensive-plate-approach.js",
+  "pitcher-process-state.js", "pitch-sequencing.js", "batter-anticipation.js", "batted-ball-physical.js", "batted-ball-outcome-mapping.js", "offensive-plate-approach.js",
   "offensive-tactical-opportunity.js", "offensive-tactical-decision.js", "offensive-tactical-action.js", "offensive-bunt-count-rules.js",
   "offensive-bunt-execution.js", "force-advancement.js", "offensive-bunt-defensive-handoff.js", "batted-ball-ground-defense.js", "baseball-gameplay-integration.js",
   "baseball-training-resolver.js", "playing-time-game-exposure.js", "match-experience-development.js", "match-development-settlement-presentation.js",
@@ -79,7 +79,7 @@ const settlement = JSON.parse(evaluate(`(() => {
   return JSON.stringify({before,after,duplicate,resolution,completed,handoff:m.groundBallInPlayState,paState:m.ordinaryDefensivePlateAppearanceState});
 })()`));
 verify("8. 先傳二壘後第一腿與 relay continuation 分開解析", settlement.resolution.firstLegState.status === "completed" && settlement.resolution.continuationState.status === "completed" && settlement.resolution.outsCreated === 2);
-verify("9. Physical outcome 先產生，再投影 PA-compatible result", settlement.handoff.physicalOutcome?.authority === "defensiveExecution+runnerTiming" && settlement.handoff.paCompatibilityResult?.authority === "physicalOutcomeToLegacyPACompatibility" && settlement.handoff.physicalOutcome.officialScoring === "deferred");
+verify("9. Physical outcome 先產生，再投影 PA-compatible result", settlement.handoff.physicalOutcome?.authority === "defensiveExecution+runnerTiming" && settlement.handoff.paCompatibilityResult?.authority === "physicalOutcomeMappingV1" && settlement.handoff.physicalOutcome.officialScoring === "deferred");
 verify("10. Supported play 只增加一次 outs、PA、打序與 defensive event", settlement.after.outs - settlement.before.outs === 2 && settlement.after.pa - settlement.before.pa === 1 && settlement.after.def - settlement.before.def === 1 && settlement.after.order !== settlement.before.order);
 verify("11. 重送結算不會再次改 outs、bases、PA、打序或 event", JSON.stringify(settlement.after) === JSON.stringify(settlement.duplicate) && settlement.handoff.settlementApplied && settlement.paState.resultApplied);
 verify("12. Physical outcome 保存 batter/lead runner safe-out 與 base occupancy", settlement.handoff.physicalOutcome.batterRunner.result === "out" && settlement.handoff.physicalOutcome.leadRunner.result === "out" && settlement.handoff.physicalOutcome.baseOccupancy.length === 3);

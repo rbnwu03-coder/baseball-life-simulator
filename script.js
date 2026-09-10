@@ -4339,6 +4339,7 @@ function ensureHighSchoolMatchLineScoreInning(match, team, inning = match.inning
 }
 
 function recordHighSchoolMatchSimulationEvent(match, event) {
+  if (event.type === "plateAppearance" && /Pending$/.test(event.result || "")) throw new Error("Pending defense cannot enter the official PA ledger");
   if (!Array.isArray(match.simulationLog)) match.simulationLog = [];
   const defaultImportance = getHighSchoolMatchEventPresentationImportance(event);
   const record = Object.assign({ sequence: match.simulationLog.length, presentationImportance: defaultImportance }, event);
@@ -5281,36 +5282,11 @@ function resolveHighSchoolLineDriveCatchOpportunity(match, options = {}) {
       secureResolution: resolveHighSchoolCanonicalSecure(match, state, options.lineDriveCatchExecutionRoll) }
   );
   if (!catchResult) return state;
-  let paCompatibilityResult = {
-    result: "out",
-    authority: "physicalCatchResultToPACompatibility",
-    officialScoring: "deferred"
-  };
-  if (!catchResult.caught) {
-    const paState = OffensivePlateApproach.normalizePlateAppearanceState(match.ordinaryDefensivePlateAppearanceState);
-    const lastPitch = paState?.pitchHistory?.at(-1) || {};
-    const offense = getHighSchoolProvisionalOffensiveTacticalCapabilities(match);
-    const batter = getHighSchoolMatchSimulationEntity(match, match.currentBatter);
-    const legacyContinuation = OffensivePlateApproach.resolveLegacyBallInPlayOutcome(
-      paState,
-      lastPitch.pitch || { attackability: 0.5 },
-      {
-        batting: Number(offense.batting) || 5,
-        ballSense: Number(offense.ballSense) || 5,
-        power: Number(batter?.power) || Number(offense.batting) || 5,
-        bats: batter?.bats || "R"
-      },
-      lastPitch.recognition || { correct: true },
-      state.physicalTruth,
-      options.ordinaryPlateAppearance?.outcomeRoll
-    );
-    paCompatibilityResult = {
-      ...JSON.parse(JSON.stringify(legacyContinuation)),
-      authority: "catchFailureToTransitionalLegacyContinuation",
-      upstreamCatchResult: "notCaught",
-      officialScoring: "deferred"
-    };
-  }
+  const paCompatibilityResult = BattedBallOutcomeMapping.resolveOfficialBallInPlayOutcome({
+    physicalTruth: state.physicalTruth,
+    defenseOutcome: { caught: catchResult.caught, authority: catchResult.authority || "canonicalCatchExecution", physicalIdentity: state.physicalTruth.identity },
+    rolls: options.ordinaryPlateAppearance?.mappingRolls
+  });
   match.lineDriveCatchState = BattedBallLineDriveDefense.applyCatchResult(state, catchResult, { paCompatibilityResult });
   return match.lineDriveCatchState;
 }
@@ -5328,7 +5304,8 @@ function applyHighSchoolLineDriveCatchResolution(match) {
   const runnerFacts = applyHighSchoolSimulatedPlateAppearance(match, paResult, batterId, offenseTeam);
   const after = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
   const runsBattedIn = Math.max(0, after.scores[offenseTeam] - before.scores[offenseTeam]);
-  recordHighSchoolRoutinePlateAppearance(match, batterId, paResult, before, after, runsBattedIn, runnerFacts);
+  const paEvent = recordHighSchoolRoutinePlateAppearance(match, batterId, paResult, before, after, runsBattedIn, runnerFacts);
+  Object.assign(paEvent, { physicalOutcomeFlow: "physicalTruthToOfficialOutcome", officialBallInPlayOutcome: JSON.parse(JSON.stringify(state.paCompatibilityResult)) });
   const playerEvidence = getHighSchoolMatchPerformanceEvidence(match, "player");
   if (playerEvidence) playerEvidence.defensiveInvolvements += 1;
   if (state.catchResult.caught) match.playerContribution.outsCreated += 1;
@@ -5336,6 +5313,7 @@ function applyHighSchoolLineDriveCatchResolution(match) {
     match.ordinaryDefensivePlateAppearanceState = OffensivePlateApproach.createPlateAppearanceState({
       ...JSON.parse(JSON.stringify(match.ordinaryDefensivePlateAppearanceState)),
       result: paResult,
+      officialBallInPlayOutcome: state.paCompatibilityResult,
       completed: true,
       resultApplied: true
     });
@@ -5415,36 +5393,11 @@ function resolveHighSchoolFlyBallCatchOpportunity(match, options = {}) {
     secureResolution: resolveHighSchoolCanonicalSecure(match, state, options.flyBallCatchExecutionRoll)
   });
   if (!catchResult) return state;
-  let paCompatibilityResult = {
-    result: "out",
-    authority: "physicalFlyBallCatchToPACompatibility",
-    officialScoring: "deferred"
-  };
-  if (!catchResult.caught) {
-    const paState = OffensivePlateApproach.normalizePlateAppearanceState(match.ordinaryDefensivePlateAppearanceState);
-    const lastPitch = paState?.pitchHistory?.at(-1) || {};
-    const offense = getHighSchoolProvisionalOffensiveTacticalCapabilities(match);
-    const batter = getHighSchoolMatchSimulationEntity(match, match.currentBatter);
-    const legacyContinuation = OffensivePlateApproach.resolveLegacyBallInPlayOutcome(
-      paState,
-      lastPitch.pitch || { attackability: 0.5 },
-      {
-        batting: Number(offense.batting) || 5,
-        ballSense: Number(offense.ballSense) || 5,
-        power: Number(batter?.power) || Number(offense.batting) || 5,
-        bats: batter?.bats || "R"
-      },
-      lastPitch.recognition || { correct: true },
-      state.physicalTruth,
-      options.ordinaryPlateAppearance?.outcomeRoll
-    );
-    paCompatibilityResult = {
-      ...JSON.parse(JSON.stringify(legacyContinuation)),
-      authority: "flyBallCatchFailureToTransitionalLegacyContinuation",
-      upstreamCatchResult: "notCaught",
-      officialScoring: "deferred"
-    };
-  }
+  const paCompatibilityResult = BattedBallOutcomeMapping.resolveOfficialBallInPlayOutcome({
+    physicalTruth: state.physicalTruth,
+    defenseOutcome: { caught: catchResult.caught, authority: catchResult.authority || "canonicalCatchExecution", physicalIdentity: state.physicalTruth.identity },
+    rolls: options.ordinaryPlateAppearance?.mappingRolls
+  });
   match.flyBallCatchState = BattedBallFlyBallDefense.applyFlyBallCatchResult(state, catchResult, { paCompatibilityResult });
   return match.flyBallCatchState;
 }
@@ -5462,11 +5415,13 @@ function applyHighSchoolFlyBallCatchResolution(match) {
   const runnerFacts = applyHighSchoolSimulatedPlateAppearance(match, paResult, batterId, offenseTeam);
   const after = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
   const runsBattedIn = Math.max(0, after.scores[offenseTeam] - before.scores[offenseTeam]);
-  recordHighSchoolRoutinePlateAppearance(match, batterId, paResult, before, after, runsBattedIn, runnerFacts);
+  const paEvent = recordHighSchoolRoutinePlateAppearance(match, batterId, paResult, before, after, runsBattedIn, runnerFacts);
+  Object.assign(paEvent, { physicalOutcomeFlow: "physicalTruthToOfficialOutcome", officialBallInPlayOutcome: JSON.parse(JSON.stringify(state.paCompatibilityResult)) });
   if (match.ordinaryDefensivePlateAppearanceState && typeof OffensivePlateApproach !== "undefined") {
     match.ordinaryDefensivePlateAppearanceState = OffensivePlateApproach.createPlateAppearanceState({
       ...JSON.parse(JSON.stringify(match.ordinaryDefensivePlateAppearanceState)),
       result: paResult,
+      officialBallInPlayOutcome: state.paCompatibilityResult,
       completed: true,
       resultApplied: true
     });
@@ -10563,7 +10518,8 @@ function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
     swingExecutionSummary: JSON.parse(JSON.stringify(plateAppearanceState.swingExecutionSummary)),
     pitchCount: plateAppearanceState.pitchNumber,
     battedBallPhysicalTruth: plateAppearanceState.battedBallPhysicalTruth ? JSON.parse(JSON.stringify(plateAppearanceState.battedBallPhysicalTruth)) : null,
-    physicalOutcomeFlow: plateAppearanceState.battedBallPhysicalTruth ? "physicalTruthToLegacyDownstreamOutcome" : "notBallInPlay",
+    physicalOutcomeFlow: plateAppearanceState.officialBallInPlayOutcome?.authority === "physicalOutcomeMappingV1" ? "physicalTruthToOfficialOutcome" : plateAppearanceState.officialBallInPlayOutcome?.authority === "legacyCompatibilityFallback" ? "legacyCompatibilityFallback" : plateAppearanceState.battedBallPhysicalTruth ? "physicalTruthToLegacyDownstreamOutcome" : "notBallInPlay",
+    officialBallInPlayOutcome: plateAppearanceState.officialBallInPlayOutcome ? JSON.parse(JSON.stringify(plateAppearanceState.officialBallInPlayOutcome)) : null,
     coachFeedback,
     primaryCause: result === "walk" ? "countAccumulation" : result === "strikeout" ? "strikeAccumulation" : "contactExecution",
     secondaryCause: "",
@@ -10621,7 +10577,8 @@ function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
     pitchNumber: plateAppearanceState.pitchNumber,
     pitchHistory: JSON.parse(JSON.stringify(plateAppearanceState.pitchHistory)),
     battedBallPhysicalTruth: plateAppearanceState.battedBallPhysicalTruth ? JSON.parse(JSON.stringify(plateAppearanceState.battedBallPhysicalTruth)) : null,
-    physicalOutcomeFlow: plateAppearanceState.battedBallPhysicalTruth ? "physicalTruthToLegacyDownstreamOutcome" : "notBallInPlay",
+    physicalOutcomeFlow: plateAppearanceState.officialBallInPlayOutcome?.authority === "physicalOutcomeMappingV1" ? "physicalTruthToOfficialOutcome" : plateAppearanceState.officialBallInPlayOutcome?.authority === "legacyCompatibilityFallback" ? "legacyCompatibilityFallback" : plateAppearanceState.battedBallPhysicalTruth ? "physicalTruthToLegacyDownstreamOutcome" : "notBallInPlay",
+    officialBallInPlayOutcome: plateAppearanceState.officialBallInPlayOutcome ? JSON.parse(JSON.stringify(plateAppearanceState.officialBallInPlayOutcome)) : null,
     batterAnticipation: plateAppearanceState.batterAnticipation ? JSON.parse(JSON.stringify(plateAppearanceState.batterAnticipation)) : null,
     recognitionSummary: JSON.parse(JSON.stringify(plateAppearanceState.recognitionSummary)),
     swingExecutionSummary: JSON.parse(JSON.stringify(plateAppearanceState.swingExecutionSummary)),
@@ -11011,14 +10968,18 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
   const groundBallPhysicalOutcome = groundBallContext && typeof BattedBallGroundDefense !== "undefined"
     ? BattedBallGroundDefense.settleGroundBallPhysicalOutcome(groundBallContext, provisionalResolution) : null;
   const paCompatibilityResult = groundBallPhysicalOutcome && typeof BattedBallGroundDefense !== "undefined"
-    ? BattedBallGroundDefense.derivePACompatibilityResult(groundBallPhysicalOutcome) : null;
+    ? BattedBallOutcomeMapping.resolveOfficialBallInPlayOutcome({
+      physicalTruth: groundBallContext.physicalTruth,
+      defenseOutcome: { ...BattedBallGroundDefense.derivePACompatibilityResult(groundBallPhysicalOutcome), settled: true }
+    }) : null;
   const batterResult = paCompatibilityResult?.result || (resolution.outsCreated > 0 ? "out" : "single");
   const appliedResolution = {
     ...provisionalResolution,
     groundBallPhysicalOutcome,
     paCompatibilityResult
   };
-  recordHighSchoolMeaningfulPlateAppearance(match, situation.batterId, batterResult, situationBefore, situationAfter, thirdOutResolution.legalScoringRunnerIds.length, appliedResolution);
+  const paEvent = recordHighSchoolMeaningfulPlateAppearance(match, situation.batterId, batterResult, situationBefore, situationAfter, thirdOutResolution.legalScoringRunnerIds.length, appliedResolution);
+  if (paCompatibilityResult) Object.assign(paEvent, { physicalOutcomeFlow: "physicalTruthToOfficialOutcome", officialBallInPlayOutcome: JSON.parse(JSON.stringify(paCompatibilityResult)) });
   getHighSchoolMatchPerformanceEvidence(match, "player").defensiveInvolvements += 1;
   recordHighSchoolYearOneMoment(match, decision, resolution.tier, explanation?.outcome || presentation.outcome, consequence, situationAfter, {
     runnerChanges,
@@ -11047,7 +11008,7 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
       settlementApplied: true
     });
     if (match.ordinaryDefensivePlateAppearanceState && typeof OffensivePlateApproach !== "undefined") {
-      match.ordinaryDefensivePlateAppearanceState = OffensivePlateApproach.markResultApplied(match.ordinaryDefensivePlateAppearanceState);
+      match.ordinaryDefensivePlateAppearanceState = OffensivePlateApproach.markResultApplied({ ...match.ordinaryDefensivePlateAppearanceState, result: batterResult, completed: true, officialBallInPlayOutcome: paCompatibilityResult });
     }
   }
   const densityState = ensureHighSchoolMatchDecisionDensityState(match);

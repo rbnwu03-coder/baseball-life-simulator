@@ -11,7 +11,7 @@ const runtimeFiles = [
   "coach-response-flow.js", "narrative-condition-flow.js", "competition-presentation.js",
   "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js", "baseball-offense-prototype.js",
   "pitcher-mental-state.js", "pitcher-process-state.js", "pitch-sequencing.js", "batter-anticipation.js",
-  "batted-ball-physical.js", "offensive-plate-approach.js", "baseball-gameplay-integration.js",
+  "batted-ball-physical.js", "batted-ball-outcome-mapping.js", "offensive-plate-approach.js", "baseball-gameplay-integration.js",
   "offensive-bunt-count-rules.js", "offensive-bunt-execution.js",
   "baseball-training-resolver.js", "playing-time-game-exposure.js", "match-experience-development.js",
   "match-development-settlement-presentation.js", "career-spine-contract.js",
@@ -78,7 +78,7 @@ const integrated = JSON.parse(evaluate(`(() => {
   return JSON.stringify({moment,pa,event,last:match.lastOffensiveResolution,abilities:getHighSchoolOffensivePlateApproachAbilities(player)});
 })()`));
 verify("1. 正式普通打席自動建立 canonical Batted-Ball Physical Truth", integrated.pa.battedBallPhysicalTruth?.version === "batted-ball-physical-v1");
-verify("2. Contact → Physical Truth → downstream outcome 次序可稽核", integrated.pa.pitchHistory.at(-1).contact === true && integrated.pa.pitchHistory.at(-1).battedBallPhysicalTruth && integrated.last.physicalOutcomeFlow === "physicalTruthToLegacyDownstreamOutcome");
+verify("2. Contact → Physical Truth → downstream outcome 次序可稽核", integrated.pa.pitchHistory.at(-1).contact === true && integrated.pa.pitchHistory.at(-1).battedBallPhysicalTruth && integrated.last.physicalOutcomeFlow === "physicalTruthToOfficialOutcome");
 verify("3. 正式能力輸入沿用既有 batting／power／bats truth", Number.isFinite(integrated.abilities.batting) && Number.isFinite(integrated.abilities.power) && integrated.abilities.bats === "R");
 verify("4. Physical Truth 同步寫入 PA event、completed moment 與 last resolution", JSON.stringify(integrated.pa.battedBallPhysicalTruth) === JSON.stringify(integrated.event.battedBallPhysicalTruth) && JSON.stringify(integrated.pa.battedBallPhysicalTruth) === JSON.stringify(integrated.moment.battedBallPhysicalTruth) && JSON.stringify(integrated.pa.battedBallPhysicalTruth) === JSON.stringify(integrated.last.battedBallPhysicalTruth));
 verify("5. Physical layer 不持有結果、跑者或防守路徑 authority", !/(resultCode|outcome|runner|defense|fielder|route)/i.test(Object.keys(integrated.pa.battedBallPhysicalTruth).join("|")));

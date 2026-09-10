@@ -8,13 +8,13 @@ const root=path.resolve(__dirname,'..'),clone=x=>JSON.parse(JSON.stringify(x)),t
 function source(file){return fs.readFileSync(path.join(root,file),'utf8').replace(/\r\n?/g,'\n');}
 function section(file,name){const s=source(file),start=s.indexOf(`function ${name}(`);assert(start>=0,`${file}:${name}`);const next=s.indexOf('\nfunction ',start+1);const nested=s.indexOf('\n  function ',start+1);const ends=[next,nested].filter(n=>n>start);return s.slice(start,ends.length?Math.min(...ends):s.length);}
 function reference(file,name){const s=source(file),token=`function ${name}(`,offset=s.indexOf(token);assert(offset>=0,token);return {module:file,function:name,line:s.slice(0,offset).split('\n').length,sourceHash:crypto.createHash('sha256').update(section(file,name)).digest('hex')};}
-function powerProof(){
+function powerProof(expectedResolved=false){
   const state=Plate.createPlateAppearanceState({paIdentity:'mapping-power-fixed',approach:'balancedAttack',context:{outs:0,hasRunner:false}});
   const pitch={attackability:0.8,pitchLocationClass:'hitterPitch',strike:true},recognition={correct:true};
   const abilities={batting:12,power:12,ballSense:10};
   const options={physicalRolls:{contactQuality:0.8,ballType:0.8,pace:0.55,direction:0.5,depth:0.6},outcomeRoll:0.5};
   const before=JSON.stringify({state,pitch,recognition,abilities,options});
-  const rows=tiers.map(power=>{const view={...abilities,power};const r=Plate.resolveFairContactBallInPlay(state,pitch,view,recognition,options);return {power,abilities:view,physical:r.physicalTruth,mapping:r.outcome};});
+  const rows=tiers.map(power=>{const view={...abilities,power};const r=Plate.resolveFairContactBallInPlay(state,pitch,view,recognition,options);return {power,abilities:view,physical:r.physicalTruth,mapping:expectedResolved ? Plate.resolveLegacyBallInPlayOutcome(state,pitch,view,recognition,r.physicalTruth,options.outcomeRoll) : r.outcome,...(expectedResolved ? {currentMapping:r.outcome} : {})};});
   assert.equal(JSON.stringify({state,pitch,recognition,abilities,options}),before);
   assert(new Set(rows.map(r=>r.physical.pace+'|'+r.physical.depth)).size>1);
   assert.equal(new Set(rows.map(r=>r.physical.executionEvidence.continuousContactScore)).size,1);
@@ -155,6 +155,6 @@ function architecture(r){
   r.recommendation={split:true,boundaries:['A. Batted-Ball Outcome Mapping: physical + defense + context → official BIP outcome','B. AI Plate Appearance Outcome Expansion: compressed execution inputs including Control; compatible BB/SO/BIP outcomes'],reason:'Different authority boundaries. Control and AI SO may share B if its compressed execution contract is explicit; do not merge B with physical/defensive BIP adjudication merely to reduce sprint count.',calibration:'Only after architecture repair; no calibration numbers proposed',started:false};
   return r;
 }
-function run(){return architecture({baseline:'35ba350',power:powerProof(),interactive:interactiveProof(),ordinary:ordinaryProof(),ledger:ledgerProof()});}
+function run(options={}){const r=architecture({baseline:'35ba350',power:powerProof(options.expectedResolved),interactive:interactiveProof(),ordinary:ordinaryProof(),ledger:ledgerProof()}); if(options.expectedResolved){assert(r.power.rows.every(row=>row.currentMapping.authority==='physicalOutcomeMappingV1'));r.mode='historicalRootCauseWithResolvedNormalRoute';r.paths[0].historicalClassification=r.paths[0].classification;r.paths[0].classification='CONNECTED';r.paths[0].firstBrokenBoundary=null;} return r;}
 module.exports={source,section,reference,powerProof,interactiveProof,ordinaryProof,ledgerProof,architecture,run};
 if(require.main===module){const result=run();fs.writeFileSync(path.join(root,'docs/match-simulation-outcome-mapping-audit-results.json'),JSON.stringify(result,null,2)+'\n');console.log('Mapping diagnostics PASS');}

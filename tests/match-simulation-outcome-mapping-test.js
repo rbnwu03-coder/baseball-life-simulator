@@ -1,16 +1,17 @@
 const assert=require('assert/strict');
 const Audit=require('./match-simulation-outcome-mapping-audit.cjs');
-const result=Audit.run();
+const result=Audit.run({expectedResolved:true});
 let passed=0;
 function test(name,fn){fn();passed++;console.log(`PASS ${passed}. ${name}`);}
 test('Power changes physical pace and depth',()=>{
   assert(new Set(result.power.rows.map(r=>r.physical.pace)).size>1);
   assert(new Set(result.power.rows.map(r=>r.physical.depth)).size>1);
 });
-test('Power signal loss demonstrated before unchanged statistical adapter',()=>{
+test('Historical legacy signal loss retained; normal route now uses physical mapper',()=>{
   assert.equal(new Set(result.power.rows.map(r=>r.physical.executionEvidence.continuousContactScore)).size,1);
   assert.equal(new Set(result.power.rows.map(r=>JSON.stringify(r.mapping))).size,1);
   assert.notEqual(result.power.reverse[0].result,result.power.reverse[1].result);
+  assert(result.power.rows.every(r=>r.currentMapping.authority==='physicalOutcomeMappingV1'));
 });
 test('Mapper consumers explicitly captured and guarded against source drift',()=>{
   const body=Audit.section('offensive-plate-approach.js','resolveLegacyBallInPlayOutcome');

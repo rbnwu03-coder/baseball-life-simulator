@@ -11,7 +11,7 @@ const runtimeFiles = [
   "coach-evaluation-boundary.js", "narrative-condition-boundary.js", "evaluation-registry-bootstrap.js", "decision-flow.js",
   "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js", "competition-presentation.js",
   "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js", "baseball-offense-prototype.js", "pitcher-mental-state.js",
-  "pitcher-process-state.js", "pitch-sequencing.js", "batter-anticipation.js", "batted-ball-physical.js", "offensive-plate-approach.js",
+  "pitcher-process-state.js", "pitch-sequencing.js", "batter-anticipation.js", "batted-ball-physical.js", "batted-ball-outcome-mapping.js", "offensive-plate-approach.js",
   "offensive-tactical-opportunity.js", "offensive-tactical-decision.js", "offensive-tactical-action.js", "offensive-bunt-count-rules.js",
   "offensive-bunt-execution.js", "force-advancement.js", "offensive-bunt-defensive-handoff.js", "batted-ball-ground-defense.js",
   "batted-ball-line-drive-defense.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js", "playing-time-game-exposure.js",
@@ -64,15 +64,15 @@ const success = JSON.parse(evaluate(`(() => {const x=__bbpB2APrepare();return JS
 verify("1. Production flow 經 Actual Pitch → Recognition → Swing → Fair Contact", success.pa.pitchHistory.length === 1 && success.pa.pitchHistory[0].recognition && success.pa.pitchHistory[0].action === "swing" && success.pa.pitchHistory[0].contact === true);
 verify("2. BBP-A 先建立 lineDrive/rightSide/shallow truth", success.pa.battedBallPhysicalTruth.ballType === "lineDrive" && success.pa.battedBallPhysicalTruth.direction === "rightSide" && success.pa.battedBallPhysicalTruth.depth === "shallow");
 verify("3. Supported production 自動建立 runner read、access、window、opportunity", success.state.sourceAuthority === "BattedBallPhysicalTruth" && success.state.runnerInitialReadStates.length === 1 && success.state.defensiveAccess.supported && success.state.catchWindow.state !== "expired");
-verify("4. Catch success 才向下游投影 PA out", success.state.catchResult.result === "caught" && success.state.paCompatibilityResult.result === "out" && success.state.paCompatibilityResult.authority === "physicalCatchResultToPACompatibility");
+verify("4. Catch success 才向下游投影 PA out", success.state.catchResult.result === "caught" && success.state.paCompatibilityResult.result === "out" && success.state.paCompatibilityResult.authority === "physicalOutcomeMappingV1");
 verify("5. Catch success 只增加一次 out、PA、batting cursor 與 routine event", success.after.outs - success.before.outs === 1 && success.after.pa - success.before.pa === 1 && success.after.routine - success.before.routine === 1 && success.after.order !== success.before.order);
 verify("6. Stationary runner 留在一壘且沒有 automatic double-off", success.after.runners[0] === "away-sim-2" && success.state.retouchRequirements[0].runnerOut === false && success.state.retouchRequirements[0].satisfiedAtCatch);
 verify("7. 呈現只在結果後說球進手套與 retouch，不含 raw identifier", success.event.presentation.includes("球在落地前進入手套") && !/(rightSide|lineDrive|caughtAirBall|lineDriveCatch)/.test(success.event.presentation));
 
 const failure = JSON.parse(evaluate(`(() => {const x=__bbpB2APrepare(99202,{executionRoll:.999,outcomeRoll:.85});return JSON.stringify({state:x.m.lineDriveCatchState,pa:x.m.ordinaryDefensivePlateAppearanceState,event:x.event,before:x.before,after:x.after});})()`));
-verify("8. Catch failure 先固定 notCaught，再交 transitional legacy continuation", failure.state.catchResult.result === "notCaught" && failure.state.liveBallContinuation.ballRemainsLive && failure.state.paCompatibilityResult.authority === "catchFailureToTransitionalLegacyContinuation" && failure.state.paCompatibilityResult.upstreamCatchResult === "notCaught");
+verify("8. Catch failure 先固定 notCaught，再交 physical official continuation", failure.state.catchResult.result === "notCaught" && failure.state.liveBallContinuation.ballRemainsLive && failure.state.paCompatibilityResult.authority === "physicalOutcomeMappingV1" && failure.state.paCompatibilityResult.resolutionMode === "compressedOfficialClassification");
 verify("9. Catch failure presentation 不直接宣稱安打", failure.event.presentation.includes("仍是活球") && !failure.event.presentation.includes("安打") && failure.state.catchResult.batterRunner.finalBaseOutcome === "unresolved");
-verify("10. Legacy continuation 不回頭改寫 physical catch result", failure.state.catchResult.result === "notCaught" && failure.state.paCompatibilityResult.result === failure.pa.result);
+verify("10. Physical continuation 不回頭改寫 physical catch result", failure.state.catchResult.result === "notCaught" && failure.state.paCompatibilityResult.result === failure.pa.result);
 
 const advancing = JSON.parse(evaluate(`(() => {const x=__bbpB2APrepare(99203,{preContactRunnerStates:{"away-sim-2":{movementState:"advancing"}}});return JSON.stringify({state:x.m.lineDriveCatchState,runners:x.m.runners});})()`));
 verify("11. Future H&R interface 讀到 advancing 後 brake/retreat，接殺只建立回一壘義務", advancing.state.runnerInitialReadStates[0].readAction === "brakeAndRetreat" && advancing.state.runnerInitialReadStates[0].movementState === "retreating" && advancing.state.retouchRequirements[0].targetBase === "first" && advancing.state.retouchRequirements[0].runnerOut === false);

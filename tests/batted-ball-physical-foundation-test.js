@@ -67,7 +67,7 @@ const barredOut = plateBall("barreled-out", { contactQuality: 1, ballType: .5, p
 verify("29. Outcome firewall：barreled lineDrive 可 downstream out", barredOut.event.battedBallPhysicalTruth.contactQuality === "barreled" && barredOut.event.battedBallPhysicalTruth.ballType === "lineDrive" && ["out", "productiveOut"].includes(barredOut.state.result));
 const poorHit = plateBall("poor-hit", { contactQuality: 0, ballType: .1, pace: .1, direction: .5 }, 1, { batting: 1, power: 1, pitchClass: "clearBall", attackability: .08, recognitionRoll: 1 });
 verify("30. Outcome firewall：poor groundBall 可 downstream safe hit", poorHit.event.battedBallPhysicalTruth.contactQuality === "poor" && poorHit.event.battedBallPhysicalTruth.ballType === "groundBall" && ["single", "double", "triple", "homeRun"].includes(poorHit.state.result));
-verify("31. Legacy adapter 明確位於 physical truth 下游", Plate.resolveLegacyBallInPlayOutcome(state("adapter"), base.actualPitch, base.abilities, base.recognition, fixtureC, .5).adapterAuthority === "legacyDownstreamOutcomeAdapter");
+verify("31. Legacy adapter 明確位於 physical truth 下游", Plate.resolveLegacyBallInPlayOutcome(state("adapter"), base.actualPitch, base.abilities, base.recognition, fixtureC, .5).adapterAuthority === "legacyCompatibilityFallback");
 
 const samples = Array.from({ length: 1200 }, (_, index) => index);
 const audit = samples.map(index => truth(`audit-${index}`, null, { abilities: { batting: 2 + index % 18, power: 1 + (index * 7) % 20 }, bats: index % 2 ? "L" : "R" }));
