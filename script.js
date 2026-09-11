@@ -6794,13 +6794,14 @@ function resolveSimulatedHighSchoolPlateAppearance(match, randomSource = null, o
   const pitcherCapability = pitcher ? getDefensiveSimulationCapability(pitcher, "投手") : { fielding: 5, arm: 5, decision: 5 };
   const rawSample = typeof randomSource === "function" ? Number(randomSource()) : nextHighSchoolMatchSimulationRandom(match);
   const sample = Math.max(0, Math.min(0.999999, Number.isFinite(rawSample) ? rawSample : 0.5));
-  const quality = capability.contact * 0.025 + capability.power * 0.012 + capability.discipline * 0.008;
-  const pitcherPressure = ((Number(pitcher?.pitching) || 5) * 2 + pitcherCapability.decision) * 0.004;
-  const runnerPressure = match.runners.some(Boolean) ? 0.01 : 0;
-  const twoOutPenalty = match.outs === 2 ? 0.015 : 0;
-  const trailingUrgency = match.scores[match.offenseTeam] < match.scores[match.defenseTeam] ? 0.005 : 0;
-  const adjusted = Math.max(0, Math.min(0.999999, sample + quality + runnerPressure + trailingUrgency - pitcherPressure - twoOutPenalty - 0.18));
-  const result = adjusted < 0.46 ? "out" : adjusted < 0.58 ? "productiveOut" : adjusted < 0.69 ? "walk" : adjusted < 0.88 ? "single" : adjusted < 0.955 ? "double" : adjusted < 0.985 ? "triple" : "homeRun";
+  const control = pitcher?.pitchingProfile?.control;
+  const identity = `${match.id}|pa-${match.simulationLog?.filter(event => event.type === "plateAppearance").length || 0}|${batter.id}|${pitcher?.id || "missing-pitcher"}`;
+  const outcome = AIPlateAppearanceOutcome.resolveCompressedPlateAppearanceOutcome({
+    identity, sample, batter: capability,
+    pitcher: { pitchingQuality: Number(pitcher?.pitching) || 5, decision: pitcherCapability.decision, control: Number.isFinite(control) ? control : null },
+    context: { hasRunner: match.runners.some(Boolean), outs: match.outs, offenseTrailing: match.scores[match.offenseTeam] < match.scores[match.defenseTeam] }
+  });
+  const result = outcome.result;
   const before = { outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
   const runnerFacts = applyHighSchoolSimulatedPlateAppearance(match, result, batter.id, match.offenseTeam);
   const runsBattedIn = Math.max(0, match.scores[match.offenseTeam] - before.scores[match.offenseTeam]);
@@ -6808,6 +6809,7 @@ function resolveSimulatedHighSchoolPlateAppearance(match, randomSource = null, o
   recordHighSchoolMatchSimulationEvent(match, {
     type: "plateAppearance", inning: match.inning, half: match.half,
     eventClassification: "ordinaryPlay",
+    outcomeAuthority: outcome.authority, resolutionMode: outcome.resolutionMode, compressedOutcomeTrace: outcome.trace,
     offenseTeam: match.offenseTeam, batterId: batter.id, result, runsBattedIn,
     currentBatterAfter: getHighSchoolMatchNextLineupBatter(match, match.offenseTeam)?.id || "",
     runnerChanges: runnerFacts.runnerChanges, scoringRunnerIds: runnerFacts.scoringRunnerIds,

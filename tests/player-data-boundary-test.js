@@ -33,7 +33,7 @@ function makeNode(id) {
   };
 }
 
-function makeGameContext(files = ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "career-save-admission.js", "story.js", "save.js", "script.js", "application-controller.js"]) {
+function makeGameContext(files = ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-development-runtime-resolver.js", "career-save-admission.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "script.js", "application-controller.js"]) {
   const nodes = new Map();
   const storage = new Map();
   const document = {
@@ -295,7 +295,7 @@ const playerIndex = indexSource.indexOf('<script src="player.js"></script>');
 const scriptIndex = indexSource.indexOf('<script src="script.js"></script>');
 const controllerIndex = indexSource.indexOf('<script src="application-controller.js"></script>');
 assert(playerIndex >= 0 && playerIndex < scriptIndex && scriptIndex < controllerIndex, "VM／瀏覽器 runtime 載入順序不正確");
-assert(evaluate(makeGameContext(["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "script.js"]).context, "typeof PlayerDataBoundary==='object' && typeof createPlayer==='function'"), "Phase 1～7 runtime VM 載入失敗");
+assert(evaluate(makeGameContext(["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "ai-plate-appearance-outcome.js", "script.js"]).context, "typeof PlayerDataBoundary==='object' && typeof createPlayer==='function'"), "Phase 1～7 runtime VM 載入失敗");
 assert(scriptSource.includes("[PlayerIdentityOptions.idealSelf[0]]") && scriptSource.includes("[PlayerIdentityOptions.origins[0]]"), "script.js 未使用單一合法值 runtime source");
 
 console.log(`PlayerDataBoundary validations：${validations}`);

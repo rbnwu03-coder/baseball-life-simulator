@@ -28,6 +28,7 @@ const runtimeFiles = [
   "rival.js",
   "story.js",
   "save.js",
+  "ai-plate-appearance-outcome.js",
   "script.js"
 ];
 

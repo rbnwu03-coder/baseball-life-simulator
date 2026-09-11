@@ -25,6 +25,7 @@ const runtimeFiles = [
   "career-save-admission.js",
   "story.js",
   "save.js",
+  "ai-plate-appearance-outcome.js",
   "script.js"
 ];
 

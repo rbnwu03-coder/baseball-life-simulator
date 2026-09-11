@@ -1,5 +1,9 @@
 const assert=require('assert/strict');
 const Audit=require('./match-simulation-outcome-mapping-audit.cjs');
+const historical=require('../docs/match-simulation-outcome-mapping-audit-results.json');
+assert.equal(historical.paths.find(p=>p.id==='control').classification,'MISSING_INPUT_PATH');
+assert.equal(historical.paths.find(p=>p.id==='strikeout').classification,'OUTCOME_SPACE_GAP');
+assert(!historical.ordinary.outcomes.includes('strikeout'));
 const result=Audit.run({expectedResolved:true});
 let passed=0;
 function test(name,fn){fn();passed++;console.log(`PASS ${passed}. ${name}`);}
@@ -31,8 +35,8 @@ test('Interactive Control changes realized zone with identical intended class',(
 });
 test('Ordinary AI BB input trace matches untouched resolver deterministically',()=>{
   assert.equal(result.ordinary.comparisonCount,160);
-  for(const t of result.ordinary.tiers)assert(t.identicalToOtherTiers);
-  assert(result.ordinary.outcomeLine.includes('adjusted < 0.69 ? "walk"'));
+  for(const t of result.ordinary.tiers)assert(t.genericScoreIdentical);
+  assert(result.ordinary.outcomeLine.includes('adjusted < walkUpper ? "walk"'));
 });
 test('Control isolated at real roster input without unrelated capability changes',()=>{
   assert(result.ordinary.capabilityInputUnchanged);
@@ -42,17 +46,17 @@ test('Control isolated at real roster input without unrelated capability changes
   assert(defense.includes('decision: Math.round((subject.defense + subject.contact) / 2)'));
 });
 test('All ordinary terminal outcomes are captured from current production source',()=>{
-  assert.deepEqual(result.ordinary.outcomes,['out','productiveOut','walk','single','double','triple','homeRun']);
+  assert.deepEqual(result.ordinary.outcomes,['out','productiveOut','walk','single','double','triple','homeRun','strikeout']);
   assert(result.ordinary.source.sourceHash);
 });
 test('Interactive strikeout terminates on real third strike',()=>{
   assert.equal(result.interactive.strikeout.result,'strikeout');assert.equal(result.interactive.strikeout.strikes,3);
   assert.equal(result.interactive.strikeout.pitches.at(-1),'calledStrike');
 });
-test('Ordinary AI lacks SO while aggregate pitching remains connected',()=>{
-  assert(!result.ordinary.outcomes.includes('strikeout'));
+test('Ordinary AI has SO while aggregate pitching remains connected',()=>{
+  assert(result.ordinary.outcomes.includes('strikeout'));
   const body=Audit.section('script.js','resolveSimulatedHighSchoolPlateAppearance');
-  assert(!/\b(control|stuff|PitchSequencing)\b/.test(body));
+  assert(body.includes('pitchingProfile?.control'));assert(!/\b(stuff|PitchSequencing)\b/.test(body));
   assert(result.ordinary.quality[1].trace.pitcherPressure>result.ordinary.quality[0].trace.pitcherPressure);
 });
 test('GameRecord credits batter and active pitcher SO and BB',()=>{
@@ -64,7 +68,7 @@ test('CompetitionEvidence retains canonical BB/SO/HR without aggregation loss',(
 });
 test('Outcome parity matrix includes statistical and physical boundaries',()=>{
   assert.equal(result.sharedOutcomeMatrix.length,10);
-  assert.equal(result.sharedOutcomeMatrix.find(r=>r.outcome==='strikeout').ordinaryAI,false);
+  assert.equal(result.sharedOutcomeMatrix.find(r=>r.outcome==='strikeout').ordinaryAI,true);
   assert.equal(result.sharedOutcomeMatrix.find(r=>r.outcome==='homeRun').ordinaryAI,true);
 });
 test('Instrumentation preserves native RNG sequence and resolved outcome',()=>assert(result.ordinary.nativeRngCursorParity));

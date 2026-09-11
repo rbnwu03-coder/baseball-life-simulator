@@ -53,10 +53,11 @@ test('canonical projection aggregation never depends on decision counts',()=>{
   assert.deepEqual(Core.aggregate([s]),Core.aggregate([{...s,decisions:Array(999).fill({})}]));
   assert.equal(JSON.stringify(s.record),before);
 });
-test('player pitcher exposure blocker and ordinary AI outcome gap detected',()=>{
+test('player pitcher exposure blocker retained and historical AI gaps resolved',()=>{
+  const historical=require('../docs/ability-performance-correlation-audit-results-v1.1.json');assert.equal(historical.structural.control.controlRead,false);assert.equal(historical.structural.strikeout.verdict,'OUTCOME_SPACE_GAP');assert(!historical.structural.strikeout.observedOutcomeSpace.includes('strikeout'));
   const s=A.structural();assert.equal(s.playerPitcher.playerBF,0);assert.notEqual(s.playerPitcher.assignment,'player');
-  assert.equal(s.playerPitcher.verdict,'BLOCKED_BY_EXPOSURE');assert.equal(s.strikeout.verdict,'OUTCOME_SPACE_GAP');
-  assert(s.strikeout.observedOutcomeSpace.includes('walk'));assert(!s.strikeout.observedOutcomeSpace.includes('strikeout'));
-  assert.equal(s.control.walkExists,true);assert.equal(s.control.controlRead,false);
+  assert.equal(s.playerPitcher.verdict,'BLOCKED_BY_EXPOSURE');assert.equal(s.strikeout.verdict,'OBSERVABLE');
+  assert(s.strikeout.observedOutcomeSpace.includes('walk'));assert(s.strikeout.observedOutcomeSpace.includes('strikeout'));
+  assert.equal(s.control.walkExists,true);assert.equal(s.control.controlRead,true);
 });
 console.log(`Observability extension: ${passed}/${passed} PASS`);

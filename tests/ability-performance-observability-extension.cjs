@@ -131,13 +131,12 @@ function structural(){
   const start=source.indexOf('function resolveSimulatedHighSchoolPlateAppearance('),end=source.indexOf('\nfunction ',start+1);
   assert(start>=0&&end>start,'Cannot locate ordinary PA source boundary');
   const ordinary=source.slice(start,end);
-  const outcomeLine=ordinary.split(/\r?\n/).find(line=>line.includes('const result = adjusted'));
-  assert(outcomeLine,'Ordinary PA outcome definition must be inspected, not assumed');
-  const outcomes=[...outcomeLine.matchAll(/"([^"]+)"/g)].map(m=>m[1]);
+  assert(ordinary.includes('AIPlateAppearanceOutcome.resolveCompressedPlateAppearanceOutcome'));
+  const outcomes=[...require('../ai-plate-appearance-outcome.js').RESULTS];
   return {playerPitcher:{verdict:'BLOCKED_BY_EXPOSURE',classification:'BLOCKED_BY_GAMEPLAY_EXPOSURE',selectedPosition:h.base.primaryPosition,matchRole:h.base.highSchoolMatch.role,assignment:h.ctx.json('getCurrentHighSchoolMatchDefender(player.highSchoolMatch,"home","投手").id'),playerBF:sample.line.pitching.BF,playerOuts:sample.line.pitching.outsRecorded,path:['playing-time-game-exposure.js: pitcherExposureDeferred → noAppearance','script.js: shouldEnterHighSchoolMatchPlayer rejects deferred exposure','active roster incumbent remains pitcher','match-game-record.js: BF credited to active defensive P']},
     steal:{verdict:'OUTCOME_SPACE_GAP',stopCondition:'C',attempts:null,successes:null,CS:null,reason:'Record supports SB/CS ingestion, but production has no steal execution producer. A forced attempt cannot be resolved without constructing a new result.'},
-    control:{verdict:'WEAK',walkExists:outcomes.includes('walk'),controlRead:/\bcontrol\b/.test(ordinary),cause:'B: ordinary AI PA has walk but does not read control. Control is read by human PA sequencing; separate from the ordinary AI stream.'},
-    strikeout:{verdict:outcomes.includes('strikeout')?'OBSERVABLE':'OUTCOME_SPACE_GAP',observedOutcomeSpace:outcomes,reason:'resolveSimulatedHighSchoolPlateAppearance outcome set excludes SO; human PlateApproach does support strikeout.'},
+    control:{verdict:'CONNECTED',walkExists:outcomes.includes('walk'),controlRead:/\bcontrol\b/.test(ordinary),cause:'Current compressed walk band reads raw active pitcher profile.control; missing Control uses zero adjustment.'},
+    strikeout:{verdict:outcomes.includes('strikeout')?'OBSERVABLE':'OUTCOME_SPACE_GAP',observedOutcomeSpace:outcomes,reason:'Current compressed resolver subclasses plain out as SO; interactive third-strike producer remains separate.'},
     catcher:{verdict:'NOT_OBSERVABLE',decisionClassification:'DECISION_ONLY_OBSERVABLE',reason:'Pitcher-catcher tactical calls and receiving/throw legs exist; no complete canonical catcher-specific blocking, framing, passed-ball or steal-defense statistical producer.'},
     discipline:{verdict:'NOT_OBSERVABLE',reason:'No independent discipline input in the standalone PlateApproach ability seam. Its selectionProfile is a tactical policy, not a player ability; do not relabel it discipline.'}};
 }

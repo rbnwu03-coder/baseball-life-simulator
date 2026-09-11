@@ -17,7 +17,7 @@ const runtimeFiles = [
   "match-development-settlement-presentation.js", "career-spine-contract.js",
   "career-transition-runtime-resolver.js", "career-transition-progression.js",
   "career-development-runtime-resolver.js", "career-development-progression.js",
-  "career-age22-outcome-resolver.js", "career-save-admission.js", "story.js", "save.js", "script.js"
+  "career-age22-outcome-resolver.js", "career-save-admission.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "script.js"
 ];
 
 let passed = 0;

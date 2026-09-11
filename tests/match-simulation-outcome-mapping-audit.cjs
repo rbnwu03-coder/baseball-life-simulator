@@ -48,10 +48,12 @@ function ordinaryProof(){
   const marker='  const before =',end=fn.indexOf(marker);assert(end>0);
   const prefix=fn.slice(0,end).replace('function resolveSimulatedHighSchoolPlateAppearance(','function mappingTrace(');
   // Evaluate the exact production prefix in a disposable VM. Never replace the real resolver.
-  ctx.run(prefix+'return {capability,pitcherCapability,sample,quality,pitcherPressure,runnerPressure,twoOutPenalty,trailingUrgency,adjusted,result};\n}');
-  const outcomeLine=fn.split('\n').find(l=>l.includes('const result = adjusted'));
-  const outcomes=[...outcomeLine.matchAll(/"([^"]+)"/g)].map(m=>m[1]);
-  const expressions=Object.fromEntries(['quality','pitcherPressure','runnerPressure','twoOutPenalty','trailingUrgency','adjusted','result'].map(key=>[key,fn.split('\n').find(l=>l.includes(`const ${key} =`)).trim()]));
+  ctx.run(prefix+'return {capability,pitcherCapability,...outcome.trace,result};\n}');
+  const moduleSource=source('ai-plate-appearance-outcome.js');
+  assert(fn.includes('AIPlateAppearanceOutcome.resolveCompressedPlateAppearanceOutcome'));
+  const outcomeLine=moduleSource.split('\n').find(l=>l.includes('const preStrikeoutResult ='));
+  const outcomes=[...require('../ai-plate-appearance-outcome.js').RESULTS];
+  const expressions={adapter:fn,module:moduleSource};
   function reset(control,seed){
     const fixture=clone(base);fixture.highSchoolMatch.simulationSeed=seed;
     const m=fixture.highSchoolMatch,p=m.rosters[m.defenseTeam].lineup.find(p=>p.defensivePosition==='P');assert(p);
@@ -74,17 +76,17 @@ function ordinaryProof(){
     }
     return {control,rosterControl:control/2,rows};
   });
-  perTier.forEach(t=>assert.deepEqual(t.rows,perTier[0].rows));
+  perTier.forEach(t=>t.rows.forEach((row,i)=>{const first=perTier[0].rows[i];assert.deepEqual(row.capability,first.capability);assert.deepEqual(row.pitcherCapability,first.pitcherCapability);assert.equal(row.adjusted,first.adjusted);assert.equal(row.strikeoutRoll,first.strikeoutRoll);assert.equal(row.pitcherControl,t.rosterControl);}));
   // Vary the existing aggregate pitching input, not Control, to prove the generic signal is connected.
   const quality=[];
   for(const pitching of [4,8]){reset(12,1);ctx.run(`getCurrentHighSchoolMatchDefender(player.highSchoolMatch,player.highSchoolMatch.defenseTeam,"投手").pitching=${pitching}`);quality.push({pitching,trace:ctx.json('mappingTrace(player.highSchoolMatch,()=>0.9)')});}
   assert(quality[1].trace.pitcherPressure>quality[0].trace.pitcherPressure);
   assert(quality[1].trace.adjusted<quality[0].trace.adjusted);
   assert.equal(JSON.stringify(h.base),JSON.stringify(base));
-  return {outcomes,outcomeLine,expressions,tiers:perTier.map(t=>({control:t.control,rosterControl:t.rosterControl,comparedPA:t.rows.length,firstTrace:t.rows[0],resultCounts:t.rows.reduce((a,r)=>(a[r.result]=(a[r.result]||0)+1,a),{}),identicalToOtherTiers:true})),quality,
+  return {outcomes,outcomeLine,expressions,tiers:perTier.map(t=>({control:t.control,rosterControl:t.rosterControl,comparedPA:t.rows.length,firstTrace:t.rows[0],resultCounts:t.rows.reduce((a,r)=>(a[r.result]=(a[r.result]||0)+1,a),{}),genericScoreIdentical:true})),quality,
     comparisonCount:160,nativeRngCursorParity:true,capabilityInputUnchanged:true,baseFixtureUnchanged:true,
     source:reference('script.js','resolveSimulatedHighSchoolPlateAppearance'),
-    note:'Real canonical active NPC pitcher profile.control varied 4–8 (runtime 8–16); no player P admission manufactured. Trace prefix and untouched full resolver start from separate identical VM copies, consume the same native RNG draw and agree. Match event mutations are expected only inside disposable VM copies.'};
+    note:'Current adapter directly consumes canonical active NPC pitcher profile.control 4–8; tier labels 8–16 remain the historical interactive x2 comparison labels. No player P admission manufactured. Trace prefix and untouched full resolver start from separate identical VM copies, consume the same native RNG draw and agree. Match event mutations are expected only inside disposable VM copies.'};
 }
 function ledgerProof(){
   const rosters={home:{lineup:[{id:'batter',defensivePosition:'SS'}]},away:{lineup:[{id:'pitcher',defensivePosition:'P'}]}};
@@ -155,6 +157,6 @@ function architecture(r){
   r.recommendation={split:true,boundaries:['A. Batted-Ball Outcome Mapping: physical + defense + context → official BIP outcome','B. AI Plate Appearance Outcome Expansion: compressed execution inputs including Control; compatible BB/SO/BIP outcomes'],reason:'Different authority boundaries. Control and AI SO may share B if its compressed execution contract is explicit; do not merge B with physical/defensive BIP adjudication merely to reduce sprint count.',calibration:'Only after architecture repair; no calibration numbers proposed',started:false};
   return r;
 }
-function run(options={}){const r=architecture({baseline:'35ba350',power:powerProof(options.expectedResolved),interactive:interactiveProof(),ordinary:ordinaryProof(),ledger:ledgerProof()}); if(options.expectedResolved){assert(r.power.rows.every(row=>row.currentMapping.authority==='physicalOutcomeMappingV1'));r.mode='historicalRootCauseWithResolvedNormalRoute';r.paths[0].historicalClassification=r.paths[0].classification;r.paths[0].classification='CONNECTED';r.paths[0].firstBrokenBoundary=null;} return r;}
+function run(options={}){const r=architecture({baseline:'35ba350',power:powerProof(options.expectedResolved),interactive:interactiveProof(),ordinary:ordinaryProof(),ledger:ledgerProof()}); if(options.expectedResolved){assert(r.power.rows.every(row=>row.currentMapping.authority==='physicalOutcomeMappingV1'));r.mode='historicalRootCauseWithResolvedNormalRoute';r.paths[0].historicalClassification=r.paths[0].classification;r.paths[0].classification='CONNECTED';r.paths[0].firstBrokenBoundary=null; for(const path of r.paths.slice(1)){path.historicalClassification=path.classification;path.classification='CONNECTED';path.firstBrokenBoundary=null;}r.sharedOutcomeMatrix.find(row=>row.outcome==='strikeout').semanticParity='canonical terminal semantics; compressed provenance';r.currentAI={authority:require('../ai-plate-appearance-outcome.js').AUTHORITY,controlSource:'active pitcher.pitchingProfile.control (raw roster scalar)',strikeout:'plain out subclassification'};} return r;}
 module.exports={source,section,reference,powerProof,interactiveProof,ordinaryProof,ledgerProof,architecture,run};
 if(require.main===module){const result=run();fs.writeFileSync(path.join(root,'docs/match-simulation-outcome-mapping-audit-results.json'),JSON.stringify(result,null,2)+'\n');console.log('Mapping diagnostics PASS');}

@@ -9,7 +9,7 @@ const context = vm.createContext({
   localStorage: { setItem() {}, getItem() { return null; }, removeItem() {} },
   window: { setTimeout(callback) { callback(); } }
 });
-for (const file of ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "save.js", "script.js"]) vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file });
+for (const file of ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "script.js"]) vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file });
 
 const cases = [
   ["本壘板指揮官", "捕手", "捕手核心", { gameCalling: 10, baseballIQ: 10, blocking: 5, catching: 6 }],

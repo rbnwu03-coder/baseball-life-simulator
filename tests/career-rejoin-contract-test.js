@@ -184,7 +184,7 @@ verify("32. Future identity 作為 synthetic chapter 時仍由 4.10 Admission �
 
 const productionSource = fs.readFileSync(path.join(root, "career-rejoin-contract.js"), "utf8");
 const indexSource = fs.readFileSync(path.join(root, "index.html"), "utf8");
-const guardedRuntimeFiles = ["player.js", "save.js", "story.js", "script.js", "career-save-admission.js"];
+const guardedRuntimeFiles = ["player.js", "save.js", "story.js", "ai-plate-appearance-outcome.js", "script.js", "career-save-admission.js"];
 verify("33. Production source 沒有硬編八條 candidate ID", expectedCandidateIds.every(id => !productionSource.includes(id)));
 verify("34. Production source 沒有硬編七個 identity registry", !/\[\s*["']draft["'][\s\S]*["']player-competition["']\s*\]/.test(productionSource));
 verify("35. 4.11 不載入 Browser Runtime，既有 Runtime 亦不依賴它", !indexSource.includes("career-rejoin-contract.js")

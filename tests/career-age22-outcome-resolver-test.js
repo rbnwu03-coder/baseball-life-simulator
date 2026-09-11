@@ -204,7 +204,9 @@ const runtimeFiles = [
   "competition-presentation.js", "career-spine-contract.js", "career-transition-resolver.js",
   "career-transition-commit.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
   "career-development-runtime-resolver.js", "career-development-progression.js",
-  "career-age22-outcome-resolver.js", "career-save-admission.js", "story.js", "save.js", "script.js"
+  "career-age22-outcome-resolver.js", "career-save-admission.js", "story.js", "save.js",
+  "ai-plate-appearance-outcome.js",
+  "script.js"
 ];
 
 function makeRuntimeContext() {
@@ -284,6 +286,7 @@ const loadOrder = [
   "career-save-admission.js",
   "story.js",
   "save.js",
+  "ai-plate-appearance-outcome.js",
   "script.js"
 ].map(file => html.indexOf(`<script src="${file}"></script>`));
 verify("27. Browser 依 Contract → Age22 Resolver → Admission → Story／Save／Script 載入", loadOrder.every((position, index) => position >= 0 && (index === 0 || position > loadOrder[index - 1])));

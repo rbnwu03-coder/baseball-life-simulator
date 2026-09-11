@@ -3,7 +3,7 @@ const path = require("path");
 const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
-const runtimeFiles = ["team-roster-foundation.js", "team-strength-model.js", "player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "offensive-plate-approach.js", "story.js", "save.js", "script.js"];
+const runtimeFiles = ["team-roster-foundation.js", "team-strength-model.js", "player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "offensive-plate-approach.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "script.js"];
 const source = runtimeFiles.map(file => fs.readFileSync(path.join(root, file), "utf8"));
 const nodes = new Map();
 const context = vm.createContext({
