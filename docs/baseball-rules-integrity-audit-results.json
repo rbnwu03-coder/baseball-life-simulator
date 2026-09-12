@@ -1,0 +1,1143 @@
+{
+  "audit": "Baseball Rules Integrity Audit Sprint 1",
+  "date": "2026-09-12",
+  "status": "AUDIT_PASS_WITH_FINDINGS",
+  "allRulesCorrect": false,
+  "baseline": {
+    "branch": "main",
+    "head": "e46475c59b452a50d2dec8f2c674405da85348b0",
+    "originMain": "e46475c59b452a50d2dec8f2c674405da85348b0",
+    "ahead": 0,
+    "behind": 0,
+    "initialWorkingTreeClean": true
+  },
+  "method": "User-provided Baseball Rules Contract v1; source inspection, unchanged existing tests and ephemeral in-memory diagnostics; no full league rules certification or original-user-save/browser replay claimed.",
+  "authorityReferences": {
+    "force": {
+      "file": "force-advancement.js",
+      "function": "buildInitialLiveBallForceChain",
+      "line": 35
+    },
+    "retire": {
+      "file": "force-advancement.js",
+      "function": "deriveForceChainAfterRetirements",
+      "line": 137
+    },
+    "forceSettle": {
+      "file": "force-advancement.js",
+      "function": "settleForceAdvancement",
+      "line": 87
+    },
+    "build": {
+      "file": "script.js",
+      "function": "buildInfieldMeaningfulMoment",
+      "line": 7284
+    },
+    "runner": {
+      "file": "script.js",
+      "function": "applyDefensiveRunnerOutcome",
+      "line": 7650
+    },
+    "runnerFacts": {
+      "file": "script.js",
+      "function": "buildInfieldRunnerFacts",
+      "line": 7724
+    },
+    "settle": {
+      "file": "defensive-runner-throw-settlement-foundation.js",
+      "function": "deriveSettlement",
+      "line": 70
+    },
+    "timing": {
+      "file": "defensive-runner-throw-settlement-foundation.js",
+      "function": "resolveTiming",
+      "line": 14
+    },
+    "project": {
+      "file": "defensive-runner-throw-settlement-foundation.js",
+      "function": "projectExistingSettlement",
+      "line": 120
+    },
+    "decision": {
+      "file": "defensive-decision-throw-foundation.js",
+      "function": "buildDecisionOpportunity",
+      "line": 61
+    },
+    "dp": {
+      "file": "script.js",
+      "function": "resolveSecondBaseInitiatedRoute",
+      "line": 7964
+    },
+    "dpExec": {
+      "file": "script.js",
+      "function": "resolveInfieldDecision",
+      "line": 8193
+    },
+    "third": {
+      "file": "script.js",
+      "function": "resolveHighSchoolThirdOutIntegrity",
+      "line": 6658
+    },
+    "thirdAdapter": {
+      "file": "script.js",
+      "function": "finalizeHighSchoolDefensiveThirdOut",
+      "line": 10632
+    },
+    "thirdType": {
+      "file": "script.js",
+      "function": "getHighSchoolDefensiveThirdOutType",
+      "line": 10623
+    },
+    "pa": {
+      "file": "script.js",
+      "function": "applyHighSchoolSimulatedPlateAppearance",
+      "line": 6704
+    },
+    "score": {
+      "file": "script.js",
+      "function": "scoreHighSchoolMatchRunner",
+      "line": 6633
+    },
+    "inning": {
+      "file": "script.js",
+      "function": "advanceHighSchoolMatchAfterHalfInning",
+      "line": 6824
+    },
+    "mutation": {
+      "file": "script.js",
+      "function": "applyHighSchoolDefensiveSettlementFacts",
+      "line": 10903
+    },
+    "applyInfield": {
+      "file": "script.js",
+      "function": "applyInfieldResolutionToHighSchoolMatch",
+      "line": 10926
+    },
+    "fc": {
+      "file": "batted-ball-ground-defense.js",
+      "function": "derivePACompatibilityResult",
+      "line": 365
+    },
+    "groundRunner": {
+      "file": "batted-ball-ground-defense.js",
+      "function": "buildGroundBallRunnerRealization",
+      "line": 144
+    },
+    "mapping": {
+      "file": "batted-ball-outcome-mapping.js",
+      "function": "resolveOfficialBallInPlayOutcome",
+      "line": 35
+    },
+    "retouch": {
+      "file": "batted-ball-fly-ball-defense.js",
+      "function": "buildRetouchState",
+      "line": 144
+    },
+    "fly": {
+      "file": "batted-ball-fly-ball-defense.js",
+      "function": "resolveFlyBallCatchExecution",
+      "line": 134
+    },
+    "tagLegal": {
+      "file": "batted-ball-fly-ball-defense.js",
+      "function": "buildTagUpLegality",
+      "line": 168
+    },
+    "tagExecution": {
+      "file": "batted-ball-tag-up-execution.js",
+      "function": "resolveTagUpExecution",
+      "line": 39
+    },
+    "tagSituation": {
+      "file": "script.js",
+      "function": "createHighSchoolRunnerTagUpSituation",
+      "line": 5518
+    },
+    "tagApply": {
+      "file": "script.js",
+      "function": "settleAndCloseHighSchoolRunnerTagUpSituation",
+      "line": 5633
+    },
+    "catcher": {
+      "file": "script.js",
+      "function": "resolveHighSchoolCatcherDecision",
+      "line": 9672
+    },
+    "render": {
+      "file": "script.js",
+      "function": "renderHighSchoolLineScore",
+      "line": 2464
+    },
+    "presentation": {
+      "file": "script.js",
+      "function": "getHighSchoolMatchPresentation",
+      "line": 6085
+    },
+    "cursor": {
+      "file": "script.js",
+      "function": "advanceHighSchoolPresentationCursor",
+      "line": 4446
+    },
+    "record": {
+      "file": "match-game-record.js",
+      "function": "recordEvent",
+      "line": 265
+    },
+    "recordPA": {
+      "file": "match-game-record.js",
+      "function": "recordPlateAppearance",
+      "line": 164
+    },
+    "recordRun": {
+      "file": "match-game-record.js",
+      "function": "recordRun",
+      "line": 205
+    },
+    "recordRunner": {
+      "file": "match-game-record.js",
+      "function": "recordRunnerEvent",
+      "line": 248
+    },
+    "recordBoard": {
+      "file": "match-game-record.js",
+      "function": "getScoreboard",
+      "line": 378
+    },
+    "integrity": {
+      "file": "match-game-record.js",
+      "function": "getIntegrityIssues",
+      "line": 293
+    },
+    "event": {
+      "file": "script.js",
+      "function": "recordHighSchoolMatchSimulationEvent",
+      "line": 4341
+    },
+    "evidence": {
+      "file": "high-school-competition-evidence.js",
+      "function": "integrateFullGameProductionEvidence",
+      "line": 151
+    }
+  },
+  "rules": [
+    {
+      "ruleId": "RUN-FORCE-001",
+      "chineseName": "打者跑者一壘權利",
+      "englishName": "Batter first-base entitlement",
+      "status": "IMPLEMENTED",
+      "severity": "P0",
+      "authority": {
+        "file": "force-advancement.js",
+        "function": "buildInitialLiveBallForceChain",
+        "line": 35
+      },
+      "expected": "uncaught fair BIP 建立 BR→1B entitlement。",
+      "currentBehavior": "buildInitialLiveBallForceChain.batterRunner / chainDepth=0 明確建立；ground-ball handoff 重用。",
+      "primaryGap": "初始契約成立；不代表後續所有路徑消費同一鏈。",
+      "scenario": "空壘 fair ground ball。",
+      "downstream": "BR targetBase 與守備一壘出局。",
+      "repairCluster": "A",
+      "existingTest": "force-advancement-foundation-test.js"
+    },
+    {
+      "ruleId": "RUN-FORCE-002",
+      "chineseName": "一壘強迫進壘",
+      "englishName": "First-base force",
+      "status": "PARTIAL",
+      "severity": "P0",
+      "authority": {
+        "file": "force-advancement.js",
+        "function": "buildInitialLiveBallForceChain",
+        "line": 35
+      },
+      "expected": "R1 由 BR 推往 2B。",
+      "currentBehavior": "共用鏈正確；舊 builder 僅保存 forceState，runnerContext R1 可仍標 holding。",
+      "primaryGap": "initial force 與 movement intent／後續結算未統一。",
+      "scenario": "R1 ground ball，走無 physicalOverrides 的內野路徑。",
+      "downstream": "runner movement、force contest。",
+      "repairCluster": "A/B",
+      "existingTest": "force-advancement-foundation-test.js"
+    },
+    {
+      "ruleId": "RUN-FORCE-003",
+      "chineseName": "連鎖强迫進壘",
+      "englishName": "Chained force advancement",
+      "status": "CONFLICT",
+      "severity": "P0",
+      "authority": {
+        "file": "script.js",
+        "function": "buildInfieldMeaningfulMoment",
+        "line": 7284
+      },
+      "expected": "一二壘／滿壘逐級建立 required movement；BUG-01 survivor 應完成契約指定進壘。",
+      "currentBehavior": "共用 force chain 可到 home；普通 builder forceChain=null，DP fallback 固定保留 R2/R3。",
+      "primaryGap": "建立的布林 forceState 與實際 survivor 結算分離。",
+      "scenario": "0 out loaded successful 4-6-3：實得 2 out、R2/R3 原壘、0 run。",
+      "downstream": "比分、壘況、R/RBI、Evidence。",
+      "repairCluster": "A/B",
+      "existingTest": "force-advancement-foundation-test.js"
+    },
+    {
+      "ruleId": "RUN-FORCE-004",
+      "chineseName": "無後方推擠不強迫",
+      "englishName": "No disconnected force",
+      "status": "IMPLEMENTED",
+      "severity": "P0",
+      "authority": {
+        "file": "force-advancement.js",
+        "function": "buildInitialLiveBallForceChain",
+        "line": 35
+      },
+      "expected": "2B only、3B only、2B+3B 無 BR force；1B+3B 僅 R1 forced。",
+      "currentBehavior": "force chain 遇空壘停止，unforcedRunners 保留 identity；walk/secureFirst 對第三壘單獨有人不憑空得分。",
+      "primaryGap": "成立於 initial force 與受查路徑；explicit advance 必須另行判定。",
+      "scenario": "所有非連續壘況。",
+      "downstream": "force target 合法性。",
+      "repairCluster": "A",
+      "existingTest": "force-advancement-foundation-test.js"
+    },
+    {
+      "ruleId": "RUN-FORCE-005",
+      "chineseName": "出局後解除強迫",
+      "englishName": "Force removal",
+      "status": "PARTIAL",
+      "severity": "P0",
+      "authority": {
+        "file": "force-advancement.js",
+        "function": "deriveForceChainAfterRetirements",
+        "line": 137
+      },
+      "expected": "BR 先出局則前方 runners 解除 force。",
+      "currentBehavior": "deriveForceChainAfterRetirements 正確移除 depth 之後的 forced actors；after state 有保存。",
+      "primaryGap": "Decision builder 只接受 initial chain，通用第二段 consumer 未完成；舊 aggregate settlement 不依 ordered retirement 動態裁定。",
+      "scenario": "BR 先在一壘出局，繼續傳二壘。",
+      "downstream": "若沿用初始 force 會錯把踩壘當 out；本輪未觀測完整第二段。",
+      "repairCluster": "A/B",
+      "existingTest": "defensive-runner-throw-settlement-foundation-test.js"
+    },
+    {
+      "ruleId": "RUN-MULTI-001",
+      "chineseName": "全跑者結算",
+      "englishName": "All-runner settlement",
+      "status": "CONFLICT",
+      "severity": "P0",
+      "authority": {
+        "file": "script.js",
+        "function": "applyDefensiveRunnerOutcome",
+        "line": 7650
+      },
+      "expected": "每個 active runner 的 intent、retirement、survival 都需在 finalize 前結算。",
+      "currentBehavior": "共用 settle 枚舉 actors；generic first leg 保留 pending/inTransit；legacy DP 只處理兩個 out 並凍結 survivors。",
+      "primaryGap": "沒有跨路徑的完整 continuation drain / all-actors-settled barrier。",
+      "scenario": "BUG-01 loaded DP。",
+      "downstream": "丟失推進與得分，錯誤半局輸入。",
+      "repairCluster": "B",
+      "existingTest": "defensive-runner-throw-settlement-foundation-test.js"
+    },
+    {
+      "ruleId": "RUN-MULTI-002",
+      "chineseName": "跑者身分與結算完整性",
+      "englishName": "Runner identity and completion",
+      "status": "PARTIAL",
+      "severity": "P0",
+      "authority": {
+        "file": "defensive-runner-throw-settlement-foundation.js",
+        "function": "deriveSettlement",
+        "line": 70
+      },
+      "expected": "runnerId/origin/target/forced/committed/out/scored 可追且所有 actor 有終態。",
+      "currentBehavior": "bases 是 ID/null，不是僅 boolean；force/physical/runnerChanges 有 ID，generic pending 也保留 ID。",
+      "primaryGap": "各 state 欄位不同；沒有統一 committed + terminal status，legacy 未用 intents。",
+      "scenario": "目標壘 occupied 且 runner 還在途中。",
+      "downstream": "continuation 若未消費會遺留或誤覆寫 actor。",
+      "repairCluster": "B",
+      "existingTest": "defensive-runner-throw-settlement-foundation-test.js"
+    },
+    {
+      "ruleId": "RUN-TAG-001",
+      "chineseName": "非強迫需觸殺",
+      "englishName": "Non-force tag required",
+      "status": "PARTIAL",
+      "severity": "P0",
+      "authority": {
+        "file": "defensive-runner-throw-settlement-foundation.js",
+        "function": "deriveSettlement",
+        "line": 70
+      },
+      "expected": "非 forced runner，踩壘先到不足以構成 out。",
+      "currentBehavior": "generic deriveSettlement 明確比較 tagAvailable/tagCompletion；home detailed/tag-up 有 tag leg。",
+      "primaryGap": "非本壘的 generic leg 尚無完整 production continuation；舊路線及 catcher 分數判定無普遍 tag facts。",
+      "scenario": "R2 only 自願跑3B；或 catcher 抓離壘者。",
+      "downstream": "錯誤 out/third-out type 的結構風險。",
+      "repairCluster": "A/B",
+      "existingTest": "defensive-runner-throw-settlement-foundation-test.js"
+    },
+    {
+      "ruleId": "RUN-TAG-002",
+      "chineseName": "解除強迫後需觸殺",
+      "englishName": "Tag after force removal",
+      "status": "PARTIAL",
+      "severity": "P0",
+      "authority": {
+        "file": "force-advancement.js",
+        "function": "deriveForceChainAfterRetirements",
+        "line": 137
+      },
+      "expected": "BR 先出局後，R1 須 tag，不能只踩2B。",
+      "currentBehavior": "retirement projection 成立、tag first-leg 成立。",
+      "primaryGap": "兩者尚未連成可繼續執行的第二段 authority；不得把兩個 unit PASS 當整 play PASS。",
+      "scenario": "BR-out→R1 contest。",
+      "downstream": "force/tag/out/run validity。",
+      "repairCluster": "A/B",
+      "existingTest": "defensive-runner-throw-settlement-foundation-test.js"
+    },
+    {
+      "ruleId": "OUT-DP-001",
+      "chineseName": "依序保存雙殺出局",
+      "englishName": "Ordered double-play outs",
+      "status": "PARTIAL",
+      "severity": "P0",
+      "authority": {
+        "file": "script.js",
+        "function": "resolveSecondBaseInitiatedRoute",
+        "line": 7964
+      },
+      "expected": "保存每個 out 的 actor/type/base/sequence，按順序更新 force。",
+      "currentBehavior": "二壘 detailed route 有 first/relay windows、playerLeg/teammateLeg；terminal 卻以 resultCode/outsCreated 聚合。",
+      "primaryGap": "outRunnerIds 不是具各自 type/time 的 ordered out ledger；第三出局類型以路線推斷。",
+      "scenario": "twoOuts 成立，或先 BR 再tag的雙殺。",
+      "downstream": "force removal 與第三出局分類無法完整重建。",
+      "repairCluster": "B/C",
+      "existingTest": "high-school-integration-1-2-2-2-test.js"
+    },
+    {
+      "ruleId": "OUT-DP-002",
+      "chineseName": "雙殺倖存跑者推進",
+      "englishName": "Survivors during double play",
+      "status": "CONFLICT",
+      "severity": "P0",
+      "authority": {
+        "file": "script.js",
+        "function": "applyDefensiveRunnerOutcome",
+        "line": 7650
+      },
+      "expected": "DP 不凍結其他 runner。",
+      "currentBehavior": "Force settle 可給 loaded 正確結果；legacy doublePlay twoOuts 回 [null,R2,R3]。",
+      "primaryGap": "fallback 不消費已標 committed 的 R2/R3。",
+      "scenario": "BUG-01。",
+      "downstream": "少1分、R2未到3B。",
+      "repairCluster": "B",
+      "existingTest": "force-advancement-foundation-test.js"
+    },
+    {
+      "ruleId": "RUN-SCORE-001",
+      "chineseName": "本壘觸及先暫定",
+      "englishName": "Provisional home touch",
+      "status": "PARTIAL",
+      "severity": "P0",
+      "authority": {
+        "file": "script.js",
+        "function": "resolveHighSchoolThirdOutIntegrity",
+        "line": 6658
+      },
+      "expected": "provisional scoring→第三出局→legal run commit。",
+      "currentBehavior": "主要 adapter 先建 scoringAttempts，經 validator 才呼叫 scoreHighSchoolMatchRunner。",
+      "primaryGap": "缺少共用 crossing timeline；defensive finalizer 把所有 scoringRunnerIds 一律標 beforeThirdOut。",
+      "scenario": "多runner在tag第三出局前後先後過本壘。",
+      "downstream": "run可能依錯誤 timing label 被接納。",
+      "repairCluster": "C",
+      "existingTest": "third-out-runner-resolution-integrity-v1-test.js"
+    },
+    {
+      "ruleId": "RUN-SCORE-002",
+      "chineseName": "強迫第三出局不計分",
+      "englishName": "Force third out cancels runs",
+      "status": "IMPLEMENTED",
+      "severity": "P0",
+      "authority": {
+        "file": "script.js",
+        "function": "resolveHighSchoolThirdOutIntegrity",
+        "line": 6658
+      },
+      "expected": "force third out 取消同play得分。",
+      "currentBehavior": "validator scoringBarredByOutType；fixture beforeThirdOut 也被取消。",
+      "primaryGap": "成立以正確第三出局類型輸入為前提。",
+      "scenario": "2 outs+force out+同play home touch。",
+      "downstream": "legalScoringRunnerIds=[]。",
+      "repairCluster": "C",
+      "existingTest": "third-out-runner-resolution-integrity-v1-test.js"
+    },
+    {
+      "ruleId": "RUN-SCORE-003",
+      "chineseName": "打者一壘前第三出局不計分",
+      "englishName": "Batter before first cancels runs",
+      "status": "IMPLEMENTED",
+      "severity": "P0",
+      "authority": {
+        "file": "script.js",
+        "function": "resolveHighSchoolThirdOutIntegrity",
+        "line": 6658
+      },
+      "expected": "BR 一壘前第三出局取消同play得分。",
+      "currentBehavior": "batterRunnerBeforeFirst 與 force 同樣排除 scoring。",
+      "primaryGap": "普通 out 路徑用該類型；未建 appeal 類型。",
+      "scenario": "2 outs+BR一壘前出局。",
+      "downstream": "run commit 正確取消。",
+      "repairCluster": "C",
+      "existingTest": "third-out-runner-resolution-integrity-v1-test.js"
+    },
+    {
+      "ruleId": "RUN-SCORE-004",
+      "chineseName": "非強迫第三出局時間判定",
+      "englishName": "Timing-play run validity",
+      "status": "PARTIAL",
+      "severity": "P0",
+      "authority": {
+        "file": "script.js",
+        "function": "finalizeHighSchoolDefensiveThirdOut",
+        "line": 10632
+      },
+      "expected": "tag third out 前合法到home可計；之後不得計。",
+      "currentBehavior": "validator 接納 beforeThirdOut、拒絕 afterThirdOut；generic seam 可傳不同label。",
+      "primaryGap": "production finalizer 對所有 scoring IDs硬編 beforeThirdOut；無通用 ordered crossing。",
+      "scenario": "多人跑者同play tag第三出局。",
+      "downstream": "有predicate，缺完整producer時間證據。",
+      "repairCluster": "C",
+      "existingTest": "defensive-runner-throw-settlement-foundation-test.js"
+    },
+    {
+      "ruleId": "RUN-WALK-001",
+      "chineseName": "保送強迫鏈",
+      "englishName": "Walk force chain",
+      "status": "IMPLEMENTED",
+      "severity": "P0",
+      "authority": {
+        "file": "script.js",
+        "function": "applyHighSchoolSimulatedPlateAppearance",
+        "line": 6704
+      },
+      "expected": "empty/R1/R1R2/loaded 推進；R3 only留壘。",
+      "currentBehavior": "applyHighSchoolSimulatedPlateAppearance 的 nested first/second 正確實作。",
+      "primaryGap": "與 ForceAdvancement 独立維護，屬 architecture duplication；本輪未見所列壘況語意錯誤。",
+      "scenario": "loaded walk +1；R3 only walk +0。",
+      "downstream": "bases、BB、R一致。",
+      "repairCluster": "A",
+      "existingTest": "ai-plate-appearance-outcome-production-integration-test.js"
+    },
+    {
+      "ruleId": "RUN-TAGUP-001",
+      "chineseName": "接殺後再觸壘與進壘",
+      "englishName": "Retouch and tag-up",
+      "status": "PARTIAL",
+      "severity": "P1",
+      "authority": {
+        "file": "batted-ball-fly-ball-defense.js",
+        "function": "buildRetouchState",
+        "line": 144
+      },
+      "expected": "caught batter out；runner legal retouch 後方可advance。",
+      "currentBehavior": "catchResult、readState、retouchRequired/Satisfied、tagUpLegality 有狀態；3B→home有正式執行。",
+      "primaryGap": "不觸原壘時blocked；無通用retouch completion/appeal；只選候選第一人且垂直範圍3B→home。",
+      "scenario": "R1/R2 tag-up、先離壘再回壘、多人tag-up。",
+      "downstream": "可能保守holding或尚未執行，不可概括為全部非法。",
+      "repairCluster": "D",
+      "existingTest": "bbp-b2b2-tag-up-decision-execution-test.js"
+    },
+    {
+      "ruleId": "RUN-FC-001",
+      "chineseName": "野選不自動記安打",
+      "englishName": "Fielder choice is not a hit",
+      "status": "CONFLICT",
+      "severity": "P0",
+      "authority": {
+        "file": "batted-ball-ground-defense.js",
+        "function": "derivePACompatibilityResult",
+        "line": 365
+      },
+      "expected": "守備抓existing runner而BR上1B，不能自動H。",
+      "currentBehavior": "physical compatibility 按 batter out/safe 映成 out/single；正式mapper承接settled result。",
+      "primaryGap": "無 fielderChoice token；BR safe即single。legacy有outs則out也未保存FC原因。",
+      "scenario": "lead runner force out、BR safe。",
+      "downstream": "H/AB/RBI与selection evidence失真。",
+      "repairCluster": "F",
+      "existingTest": "match-full-game-record-test.js"
+    },
+    {
+      "ruleId": "RUN-FC-002",
+      "chineseName": "野選全安全仍需記錄裁定",
+      "englishName": "All-safe fielder-choice scoring",
+      "status": "CONFLICT",
+      "severity": "P0",
+      "authority": {
+        "file": "batted-ball-ground-defense.js",
+        "function": "derivePACompatibilityResult",
+        "line": 365
+      },
+      "expected": "lead-runner attempt全safe仍需scorer判定，不能直接single。",
+      "currentBehavior": "derivePACompatibilityResult safe→single，routine adapter zeroOuts亦single。",
+      "primaryGap": "結果安全與安打裁定混為一談；officialScoring deferred仍送入正式統計。",
+      "scenario": "throw lead runner late，全safe。",
+      "downstream": "H與pitcher H被高估。",
+      "repairCluster": "F",
+      "existingTest": "batted-ball-outcome-production-integration-test.js"
+    },
+    {
+      "ruleId": "RUN-APPEAL-001",
+      "chineseName": "漏踩壘申訴",
+      "englishName": "Missed-base appeal",
+      "status": "MISSING",
+      "severity": "P1",
+      "authority": {
+        "file": "batted-ball-fly-ball-defense.js",
+        "function": "buildRetouchState",
+        "line": 144
+      },
+      "expected": "missed base事件、pending appeal及out裁定可表達。",
+      "currentBehavior": "未找到missed-base或appeal producer/state/token。",
+      "primaryGap": "缺base touch history與appeal生命周期。",
+      "scenario": "跑者漏踩2B後到3B；目前不能表達。",
+      "downstream": "此類out/run修正無法執行；非已重現GUI事件。",
+      "repairCluster": "D",
+      "existingTest": null
+    },
+    {
+      "ruleId": "RUN-APPEAL-002",
+      "chineseName": "提早離壘申訴",
+      "englishName": "Early-departure appeal",
+      "status": "PARTIAL",
+      "severity": "P1",
+      "authority": {
+        "file": "batted-ball-fly-ball-defense.js",
+        "function": "buildRetouchState",
+        "line": 144
+      },
+      "expected": "caught-ball未retouch可被申訴，不等同自動全員錯誤。",
+      "currentBehavior": "retouch unsatisfied 已表達並阻擋tag-up。",
+      "primaryGap": "沒有提出/結算appeal；只是較保守的合法性gate。",
+      "scenario": "left-early / retreatUnresolved runner。",
+      "downstream": "不能處理defense appeal out。",
+      "repairCluster": "D",
+      "existingTest": "bbp-b2b1-fly-ball-tag-up-legality-test.js"
+    },
+    {
+      "ruleId": "RUN-APPEAL-003",
+      "chineseName": "申訴後出局得分重裁",
+      "englishName": "Appeal outcome and run revalidation",
+      "status": "MISSING",
+      "severity": "P1",
+      "authority": {
+        "file": "script.js",
+        "function": "resolveHighSchoolThirdOutIntegrity",
+        "line": 6658
+      },
+      "expected": "申訴裁定需串回out/run validity。",
+      "currentBehavior": "thirdOut types僅force/batterBeforeFirst/nonForceTag/none。",
+      "primaryGap": "沒有appeal out、觸壘序或後續重裁狀態；包含額外出局申訴尚未建。",
+      "scenario": "已過home後發現需申訴的漏壘。",
+      "downstream": "run/inning不能按該程序重裁。",
+      "repairCluster": "D/C",
+      "existingTest": null
+    },
+    {
+      "ruleId": "BIP-IFF-001",
+      "chineseName": "內野高飛必死球條件",
+      "englishName": "Infield-fly eligibility",
+      "status": "MISSING",
+      "severity": "P0",
+      "authority": {
+        "file": "batted-ball-fly-ball-defense.js",
+        "function": "resolveFlyBallCatchExecution",
+        "line": 134
+      },
+      "expected": "R1R2或loaded、<2outs、fair非bunt非LD且ordinary-effort內野可接。",
+      "currentBehavior": "只有一般fly physical/access/catch route，無規則predicate。",
+      "primaryGap": "缺條件集合與ordinaryEffort規則判定；未把一般physical catchability當規則。",
+      "scenario": "符合條件pop fly，實際漏接。",
+      "downstream": "BR可能被當safe，force未解除。",
+      "repairCluster": "A/F",
+      "existingTest": null
+    },
+    {
+      "ruleId": "BIP-IFF-002",
+      "chineseName": "內野高飛規則出局仍活球",
+      "englishName": "Infield-fly out with live ball",
+      "status": "MISSING",
+      "severity": "P0",
+      "authority": {
+        "file": "batted-ball-fly-ball-defense.js",
+        "function": "resolveFlyBallCatchExecution",
+        "line": 134
+      },
+      "expected": "batter依rule出局不依實際接到，ball remains live。",
+      "currentBehavior": "無infieldFly token/branch；caught結果才產生out，未caught可mapping成hit。",
+      "primaryGap": "缺rule-out與catch-out分離。",
+      "scenario": "eligible fly dropped；是可構造production input類型，非已重現正式IFF fixture。",
+      "downstream": "outs、BR state、force錯誤。",
+      "repairCluster": "A/F",
+      "existingTest": null
+    },
+    {
+      "ruleId": "BIP-IFF-003",
+      "chineseName": "內野高飛跑者後續",
+      "englishName": "Infield-fly runner continuation",
+      "status": "MISSING",
+      "severity": "P0",
+      "authority": {
+        "file": "force-advancement.js",
+        "function": "deriveForceChainAfterRetirements",
+        "line": 137
+      },
+      "expected": "rule-out解除BR force，caught時仍需retouch；未caught仍活球。",
+      "currentBehavior": "retirement模組有能力但無IFF caller。",
+      "primaryGap": "缺IFF→retirement→live runner continuation wiring。",
+      "scenario": "eligible dropped fly後守方踩2B。",
+      "downstream": "錯誤force-out與壘況風險。",
+      "repairCluster": "A/B/F",
+      "existingTest": null
+    },
+    {
+      "ruleId": "INNING-001",
+      "chineseName": "半局生命週期",
+      "englishName": "Half-inning lifecycle",
+      "status": "PARTIAL",
+      "severity": "P0",
+      "authority": {
+        "file": "script.js",
+        "function": "advanceHighSchoolMatchAfterHalfInning",
+        "line": 6824
+      },
+      "expected": "先裁run、finalize play/half、記LOB，再clear/swap。",
+      "currentBehavior": "先validator得legalScoring及stranded，再commit run/clear bases，pending保存；halfEnd後swap。",
+      "primaryGap": "沒有官方全員LOB ledger；pending stranded非持久LOB。clear雖早於halfEnd事件，但晚於run判定，不是先清壘才裁分。",
+      "scenario": "2 outs+最後出局+留壘者。",
+      "downstream": "LOB資料不完整，需保留finalization順序。",
+      "repairCluster": "B/C",
+      "existingTest": "third-out-runner-resolution-integrity-v1-test.js"
+    },
+    {
+      "ruleId": "SCOREBOARD-001",
+      "chineseName": "即時安打欄",
+      "englishName": "Live hit total",
+      "status": "CONFLICT",
+      "severity": "P2",
+      "authority": {
+        "file": "script.js",
+        "function": "renderHighSchoolLineScore",
+        "line": 2464
+      },
+      "expected": "已settled且已展示的H應即時顯示。",
+      "currentBehavior": "record H即增、model.hits=1，render卻因completed=false顯示—。",
+      "primaryGap": "renderTeam使用model.completed門檻；不是只半局門檻。",
+      "scenario": "已展示single但整場未終場。",
+      "downstream": "畫面H缺值，canonical H正確。",
+      "repairCluster": "E",
+      "existingTest": "match-full-game-record-test.js"
+    },
+    {
+      "ruleId": "SCOREBOARD-002",
+      "chineseName": "當前半局得分格",
+      "englishName": "Current-half run cell",
+      "status": "CONFLICT",
+      "severity": "P2",
+      "authority": {
+        "file": "script.js",
+        "function": "getHighSchoolMatchPresentation",
+        "line": 6085
+      },
+      "expected": "當前半局已展示得分應顯示目前數字。",
+      "currentBehavior": "canonical inningRuns=1/model.runs=1，但halfIndex==revealHalfIndex時cell固定…；R可為1。",
+      "primaryGap": "把當前可見半局與未知資料等同。",
+      "scenario": "同一半局已得1分，尚未3out。",
+      "downstream": "inning cell延遲；score record不遲。",
+      "repairCluster": "E",
+      "existingTest": "high-school-integration-1-2-2-2-test.js"
+    },
+    {
+      "ruleId": "SCOREBOARD-003",
+      "chineseName": "播放游標一致投影",
+      "englishName": "Cursor-consistent scoreboard",
+      "status": "PARTIAL",
+      "severity": "P2",
+      "authority": {
+        "file": "script.js",
+        "function": "advanceHighSchoolPresentationCursor",
+        "line": 4446
+      },
+      "expected": "所有R/H/inning數字只顯示目前已播放事件。",
+      "currentBehavior": "R/currentSituation讀presentation snapshot；hits讀完整canonical totals；historical reveal另遮數值。",
+      "primaryGap": "直接解除H遮罩會洩漏尚未播放canonical future；沒有同游標的H投影。",
+      "scenario": "simulation跑在presentation前方。",
+      "downstream": "比分板欄位時間不一致。",
+      "repairCluster": "E",
+      "existingTest": "high-school-integration-1-2-2-2-test.js"
+    },
+    {
+      "ruleId": "RECORD-001",
+      "chineseName": "事件驅動官方紀錄",
+      "englishName": "Canonical event record",
+      "status": "IMPLEMENTED",
+      "severity": "P0",
+      "authority": {
+        "file": "match-game-record.js",
+        "function": "recordEvent",
+        "line": 265
+      },
+      "expected": "正式PA/run事件各一次進GameRecord。",
+      "currentBehavior": "recordEvent以eventId冪等；PA即增H/BB/SO，run即增inning/R；scoreboard為clone projection。",
+      "primaryGap": "此結論只關於ingestion，不證明上游規則正確。",
+      "scenario": "single、walk、SO、run、重播event。",
+      "downstream": "Stats canonical owner清楚。",
+      "repairCluster": "F",
+      "existingTest": "match-full-game-record-test.js"
+    },
+    {
+      "ruleId": "RECORD-002",
+      "chineseName": "記錄與規則一致性",
+      "englishName": "Rules-to-record consistency",
+      "status": "PARTIAL",
+      "severity": "P0",
+      "authority": {
+        "file": "match-game-record.js",
+        "function": "getIntegrityIssues",
+        "line": 293
+      },
+      "expected": "統計應反映完整且合法的play outcomes。",
+      "currentBehavior": "integrity檢查H/AB、team H、run totals、event IDs等代數關係。",
+      "primaryGap": "除不驗force/FC外，pitcher.outsRecorded只在PA事件增加；runnerTagUpResolution的出局不由recordRunnerEvent計入。事件可被接納且integrity無報錯。",
+      "scenario": "獨立tag-up第三段runner out：before.outs=1、after.outs=2，recorded event=1但pitcher outs=0；為ingestion診斷，未冒稱完整GUI重播。",
+      "downstream": "GameRecord與Evidence忠實放大上游錯誤。",
+      "repairCluster": "B/C/F",
+      "existingTest": "full-game-competition-evidence-test.js"
+    }
+  ],
+  "statusCounts": {
+    "IMPLEMENTED": 6,
+    "PARTIAL": 13,
+    "CONFLICT": 7,
+    "MISSING": 5
+  },
+  "observations": {
+    "legacyDP": {
+      "forceChain": null,
+      "route": "doublePlay",
+      "resultCode": "twoOuts",
+      "outs": 2,
+      "runnersBefore": [
+        "hs-y3-final-regional-opponent-player-06",
+        "hs-y3-final-regional-opponent-player-05",
+        "hs-y3-final-regional-opponent-player-07"
+      ],
+      "runnersAfter": [
+        null,
+        "hs-y3-final-regional-opponent-player-05",
+        "hs-y3-final-regional-opponent-player-07"
+      ],
+      "scoring": [],
+      "thirdOut": {
+        "outsBefore": 0,
+        "outsAfter": 2,
+        "thirdOutType": "none",
+        "halfInningEnded": false,
+        "scoringAllowed": true,
+        "legalScoringRunnerIds": [],
+        "invalidatedScoringRunnerIds": [],
+        "basesBefore": [
+          "hs-y3-final-regional-opponent-player-06",
+          "hs-y3-final-regional-opponent-player-05",
+          "hs-y3-final-regional-opponent-player-07"
+        ],
+        "basesAfter": [
+          null,
+          "hs-y3-final-regional-opponent-player-05",
+          "hs-y3-final-regional-opponent-player-07"
+        ],
+        "strandedRunnerIds": [],
+        "halfInningTransition": "none"
+      }
+    },
+    "sharedForceDP": {
+      "runnersAfter": [
+        null,
+        null,
+        "r2"
+      ],
+      "scoringRunnerIds": [
+        "r3"
+      ],
+      "outRunnerIds": [
+        "r1",
+        "br"
+      ]
+    },
+    "liveScoreboard": {
+      "settledResult": "single",
+      "completed": false,
+      "outs": 0,
+      "canonicalHits": 1,
+      "canonicalRuns": 1,
+      "canonicalInningRuns": 1,
+      "projectionHits": 1,
+      "projectionCurrentCell": "…",
+      "renderedH": "—",
+      "visibleR": 1,
+      "scope": "actual PA producer + GameRecord + model + HTML renderer; presented event cursor caught up and reveal aligned"
+    },
+    "runnerOnlyOutIngestion": {
+      "pitcherOuts": 0,
+      "eventRecorded": 1,
+      "integrityIssues": []
+    }
+  },
+  "existingTests": [
+    {
+      "file": "tests/force-advancement-foundation-test.js",
+      "passed": 22,
+      "total": 22,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/defensive-runner-throw-settlement-foundation-test.js",
+      "passed": 22,
+      "total": 22,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/third-out-runner-resolution-integrity-v1-test.js",
+      "passed": 16,
+      "total": 16,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/bbp-b2b1-fly-ball-tag-up-legality-test.js",
+      "passed": 17,
+      "total": 17,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+      "passed": 21,
+      "total": 21,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/match-full-game-record-test.js",
+      "passed": 13,
+      "total": 13,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/high-school-integration-1-2-2-2-test.js",
+      "passed": 27,
+      "total": 27,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/ai-plate-appearance-outcome-production-integration-test.js",
+      "passed": 19,
+      "total": 19,
+      "exitCode": 0
+    }
+  ],
+  "fullRegressionRun": false,
+  "repairClusters": [
+    {
+      "id": "A",
+      "name": "Force / Entitlement Integration",
+      "rules": [
+        "RUN-FORCE-001～005",
+        "RUN-WALK-001",
+        "RUN-TAG-002",
+        "BIP-IFF-003"
+      ],
+      "files": [
+        "force-advancement.js",
+        "script.js",
+        "defensive-decision-throw-foundation.js",
+        "batted-ball-ground-defense.js",
+        "offensive-bunt-defensive-handoff.js"
+      ],
+      "dependsOn": [],
+      "risk": "HIGH",
+      "proposal": "保留既有 initial/retirement foundation，讓所有路徑攜帶同一 play force/entitlement，區分 initial force、當前 force 與 committed movement；不是重新發明不存在的 force graph。"
+    },
+    {
+      "id": "B",
+      "name": "Multi-Runner / Ordered-Out Settlement",
+      "rules": [
+        "RUN-MULTI-001～002",
+        "OUT-DP-001～002",
+        "RUN-TAG-001～002",
+        "INNING-001"
+      ],
+      "files": [
+        "script.js",
+        "defensive-runner-throw-settlement-foundation.js",
+        "force-advancement.js",
+        "match-situation-lifecycle.js"
+      ],
+      "dependsOn": [
+        "A"
+      ],
+      "risk": "HIGH",
+      "proposal": "以全 actor 的 pending/inTransit/terminal 狀態、ordered outs 與 finalization barrier 統一結算，保留 detailed execution。不要只替滿壘 DP 補一條得分 if。"
+    },
+    {
+      "id": "C",
+      "name": "Third-Out / Run Validation",
+      "rules": [
+        "RUN-SCORE-001～004",
+        "INNING-001",
+        "RECORD-002"
+      ],
+      "files": [
+        "script.js",
+        "defensive-runner-throw-settlement-foundation.js",
+        "match-game-record.js"
+      ],
+      "dependsOn": [
+        "A",
+        "B"
+      ],
+      "risk": "HIGH",
+      "proposal": "保留 third-out predicate，補最後 out 的實際 type/sequence 與各 runner home-touch timing、LOB。取消全體 scoring ID 硬編 beforeThirdOut 的假設。"
+    },
+    {
+      "id": "D",
+      "name": "Tag-Up / Retouch / Appeal",
+      "rules": [
+        "RUN-TAGUP-001",
+        "RUN-APPEAL-001～003"
+      ],
+      "files": [
+        "batted-ball-fly-ball-defense.js",
+        "batted-ball-line-drive-defense.js",
+        "batted-ball-tag-up-execution.js",
+        "script.js",
+        "match-situation-lifecycle.js"
+      ],
+      "dependsOn": [
+        "A",
+        "B",
+        "C"
+      ],
+      "risk": "HIGH",
+      "proposal": "先確認擴充範圍，再建立 retouch completion、其他壘及多人 continuation、appeal lifecycle；不因缺 appeal 就否定現有合法 3B→home vertical。"
+    },
+    {
+      "id": "E",
+      "name": "Live Scoreboard Projection",
+      "rules": [
+        "SCOREBOARD-001～003"
+      ],
+      "files": [
+        "script.js",
+        "match-game-record.js"
+      ],
+      "dependsOn": [],
+      "risk": "MEDIUM",
+      "proposal": "先統一 presentedEventCursor 下的 R/H/inning projection，再解除 completed/ellipsis 遮罩；不能直接洩漏 simulation 已計算但尚未播放的 H，也不要加 UI own stats。"
+    },
+    {
+      "id": "F",
+      "name": "Official Outcome / Event Vocabulary",
+      "rules": [
+        "RUN-FC-001～002",
+        "BIP-IFF-001～003",
+        "RECORD-001～002"
+      ],
+      "files": [
+        "script.js",
+        "batted-ball-ground-defense.js",
+        "batted-ball-outcome-mapping.js",
+        "match-game-record.js",
+        "high-school-competition-evidence.js"
+      ],
+      "dependsOn": [
+        "A",
+        "B",
+        "C"
+      ],
+      "risk": "HIGH",
+      "proposal": "將 BR safe 與 scorer hit 分離，支援 FC/rule-out；補 runner-only out 官方投影並防止與 PA 重算。IFF 需要 rule predicate + live continuation，不能只加 token。"
+    }
+  ],
+  "deferredRules": [
+    {
+      "rule": "Dropped third strike",
+      "status": "OUT_OF_SCOPE",
+      "severity": "DEFERRED",
+      "evidence": "未找到 producer；普通 SO 為 terminal，不把 catcher blocking 冒稱未接第三好球規則。"
+    },
+    {
+      "rule": "HBP",
+      "status": "OUT_OF_SCOPE",
+      "severity": "DEFERRED",
+      "evidence": "GameRecord 支援 hitByPitch/HBP ingestion、Evidence讀counter，但未找到 gameplay producer；ledger token 不等於半套 gameplay award。"
+    },
+    {
+      "rule": "Balk",
+      "status": "OUT_OF_SCOPE",
+      "severity": "DEFERRED",
+      "evidence": "受查 production 無 balk/rule award branch。"
+    },
+    {
+      "rule": "Wild pitch / passed ball",
+      "status": "PARTIAL",
+      "severity": "P1",
+      "authority": {
+        "file": "script.js",
+        "function": "resolveHighSchoolCatcherDecision",
+        "line": 9672
+      },
+      "evidence": "已有捕手彈球 block/control/傳壘情境，因此不能全域稱無相關 producer；沒有 WP/PB official classification 或完整逃逸球進壘模型。"
+    },
+    {
+      "rule": "Obstruction / interference",
+      "status": "OUT_OF_SCOPE",
+      "severity": "DEFERRED",
+      "evidence": "未找到 rule state 或 award producer。沒有聲稱已支援此類碰撞。"
+    },
+    {
+      "rule": "Dead-ball awards",
+      "status": "OUT_OF_SCOPE",
+      "severity": "DEFERRED",
+      "evidence": "未找到 dead-ball award/live-dead 邊界；catcher throwingError 不足以證明死球給壘。"
+    },
+    {
+      "rule": "Overthrow awards",
+      "status": "PARTIAL",
+      "severity": "P1",
+      "authority": {
+        "file": "script.js",
+        "function": "resolveHighSchoolCatcherDecision",
+        "line": 9672
+      },
+      "evidence": "throwingError 已讓目標跑者多進一壘或回home；未區分活球續跑與出界給壘、投球時/傳球時基準，不能標成完全無 producer。"
+    }
+  ],
+  "stopConditions": [],
+  "changes": {
+    "production": 0,
+    "tests": 0,
+    "otherNonDocs": 0,
+    "commit": false,
+    "push": false,
+    "newFiles": [
+      "docs/baseball-rules-integrity-audit-sprint-1.md",
+      "docs/baseball-rules-integrity-audit-results.json"
+    ]
+  },
+  "finalVerification": {
+    "trackedDiffFiles": 0,
+    "stagedDiffFiles": 0,
+    "untrackedFiles": [
+      "docs/baseball-rules-integrity-audit-sprint-1.md",
+      "docs/baseball-rules-integrity-audit-results.json"
+    ],
+    "diffCheck": "PASS including new files",
+    "branch": "main",
+    "head": "e46475c",
+    "ahead": 0,
+    "behind": 0
+  }
+}
