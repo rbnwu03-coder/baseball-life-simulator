@@ -1,0 +1,1432 @@
+{
+  "baseline": "107b6a17bb19f2463666c788c568ad3c58ffdadc",
+  "newTests": {
+    "foundation": 19,
+    "production": 16
+  },
+  "syntax": {
+    "passed": 258,
+    "total": 258
+  },
+  "selectedRegression": "PASS",
+  "fullRegression": {
+    "status": "FULL GREEN",
+    "passed": 170,
+    "total": 170,
+    "elapsedSeconds": 554,
+    "files": [
+      "tests/ability-performance-gradient-test.js",
+      "tests/ability-performance-observability-extension-test.js",
+      "tests/active-defensive-assignment-integrity-test.js",
+      "tests/adult-route-chain-test.js",
+      "tests/ai-plate-appearance-outcome-production-integration-test.js",
+      "tests/ai-plate-appearance-outcome-test.js",
+      "tests/application-controller-test.js",
+      "tests/aspiration-narrative-test.js",
+      "tests/azhe-storyboard-test.js",
+      "tests/baseball-defense-prototype-test.js",
+      "tests/baseball-gameplay-integration-test.js",
+      "tests/baseball-gameplay-prototype-isolation-test.js",
+      "tests/baseball-match-foundation-2-1-1-1-test.js",
+      "tests/baseball-match-foundation-2-1-1-test.js",
+      "tests/baseball-match-foundation-2-1-test.js",
+      "tests/baseball-match-foundation-2-2-1-test.js",
+      "tests/baseball-match-foundation-2-2-2-test.js",
+      "tests/baseball-match-foundation-2-2-3-test.js",
+      "tests/baseball-match-foundation-2-2-4-1-test.js",
+      "tests/baseball-match-foundation-2-2-4-2-test.js",
+      "tests/baseball-match-foundation-2-2-4-4-test.js",
+      "tests/baseball-match-foundation-2-2-4-5-test.js",
+      "tests/baseball-match-foundation-2-2-4-test.js",
+      "tests/baseball-match-foundation-2-2-test.js",
+      "tests/baseball-offense-base-state-test.js",
+      "tests/baseball-offense-prototype-test.js",
+      "tests/baseball-offensive-production-integration-test.js",
+      "tests/baseball-training-rhythm-test.js",
+      "tests/batted-ball-outcome-mapping-test.js",
+      "tests/batted-ball-outcome-production-integration-test.js",
+      "tests/batted-ball-physical-foundation-test.js",
+      "tests/batted-ball-physical-production-integration-test.js",
+      "tests/batter-anticipation-sprint-b-test.js",
+      "tests/bbp-b1-ground-ball-production-integration-test.js",
+      "tests/bbp-b1-ground-ball-runner-handoff-test.js",
+      "tests/bbp-b2a-line-drive-production-integration-test.js",
+      "tests/bbp-b2a-line-drive-read-catch-test.js",
+      "tests/bbp-b2b1-fly-ball-production-integration-test.js",
+      "tests/bbp-b2b1-fly-ball-tag-up-legality-test.js",
+      "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+      "tests/career-age22-outcome-resolver-test.js",
+      "tests/career-arc-test.js",
+      "tests/career-development-progression-test.js",
+      "tests/career-development-runtime-resolver-test.js",
+      "tests/career-network-contract-test.js",
+      "tests/career-rejoin-contract-test.js",
+      "tests/career-save-admission-test.js",
+      "tests/career-spine-contract-test.js",
+      "tests/career-transition-commit-test.js",
+      "tests/career-transition-progression-test.js",
+      "tests/career-transition-resolver-test.js",
+      "tests/career-transition-role-test.js",
+      "tests/career-transition-route-difference-test.js",
+      "tests/career-transition-runtime-resolver-test.js",
+      "tests/catcher-choice-outcome-integrity-v1-test.js",
+      "tests/coach-evaluation-boundary-test.js",
+      "tests/coach-response-expansion-test.js",
+      "tests/coach-response-flow-test.js",
+      "tests/competition-flow-framework-test.js",
+      "tests/contextual-status-panel-test.js",
+      "tests/county-selection-opportunity-test.js",
+      "tests/current-state-boundary-test.js",
+      "tests/day-completion-flow-test.js",
+      "tests/decision-flow-test.js",
+      "tests/defensive-decision-throw-foundation-test.js",
+      "tests/defensive-decision-throw-production-integration-test.js",
+      "tests/defensive-opportunity-foundation-test.js",
+      "tests/defensive-opportunity-production-integration-test.js",
+      "tests/defensive-outcome-cause-explainability-foundation-v1-test.js",
+      "tests/defensive-reach-secure-foundation-test.js",
+      "tests/defensive-reach-secure-production-integration-test.js",
+      "tests/defensive-runner-throw-settlement-foundation-test.js",
+      "tests/development-match-position-test-fallback-v1-test.js",
+      "tests/development-training-result-foundation-v1-test.js",
+      "tests/emotional-payoff-test.js",
+      "tests/evaluation-registry-integration-test.js",
+      "tests/evaluation-registry-test.js",
+      "tests/event-continuity-pass-test.js",
+      "tests/first-offensive-moment-role-presentation-test.js",
+      "tests/force-advancement-foundation-test.js",
+      "tests/force-multi-runner-settlement-integration-test.js",
+      "tests/force-multi-runner-settlement-production-integration-test.js",
+      "tests/full-game-competition-evidence-test.js",
+      "tests/full-game-player-line-test.js",
+      "tests/generic-infield-position-admission-diagnostic-test.js",
+      "tests/goal-balance-test.js",
+      "tests/ground-ball-home-route-integrity-test.js",
+      "tests/ground-ball-home-route-production-integration-test.js",
+      "tests/high-school-career-evidence-test.js",
+      "tests/high-school-career-exit-integration-test.js",
+      "tests/high-school-career-offer-test.js",
+      "tests/high-school-competition-evidence-test.js",
+      "tests/high-school-competition-foundation-test.js",
+      "tests/high-school-competition-reassessment-test.js",
+      "tests/high-school-entry-roster-integration-test.js",
+      "tests/high-school-integration-1-1-1-test.js",
+      "tests/high-school-integration-1-1-test.js",
+      "tests/high-school-integration-1-2-1-test.js",
+      "tests/high-school-integration-1-2-2-1-test.js",
+      "tests/high-school-integration-1-2-2-2-test.js",
+      "tests/high-school-integration-1-2-2-test.js",
+      "tests/high-school-integration-1-2-3-test.js",
+      "tests/high-school-integration-1-2-test.js",
+      "tests/high-school-position-code-normalization-test.js",
+      "tests/high-school-three-year-spine-test.js",
+      "tests/high-school-year-one-competition-loop-test.js",
+      "tests/high-school-year-one-opportunity-two-integration-test.js",
+      "tests/high-school-year-three-competition-loop-test.js",
+      "tests/high-school-year-transition-continuity-test.js",
+      "tests/high-school-year-two-autumn-match-integration-test.js",
+      "tests/high-school-year-two-competition-loop-test.js",
+      "tests/invitation-presentation-school-choice-integration-v1-test.js",
+      "tests/invitation-presentation-v1-0-1-legacy-route-conflict-test.js",
+      "tests/match-development-settlement-presentation-v1-test.js",
+      "tests/match-experience-development-foundation-v1-test.js",
+      "tests/match-full-game-record-test.js",
+      "tests/match-opportunity-structural-completion-v1-test.js",
+      "tests/match-simulation-outcome-mapping-test.js",
+      "tests/match-situation-lifecycle-test.js",
+      "tests/narrative-condition-boundary-test.js",
+      "tests/narrative-condition-flow-test.js",
+      "tests/narrative-continuity-test.js",
+      "tests/national-selection-pipeline-test.js",
+      "tests/npc-role-refactor-test.js",
+      "tests/offensive-plate-approach-foundation-v1-test.js",
+      "tests/offensive-production-presentation-sprint-c-test.js",
+      "tests/offensive-tactical-action-sprint-a-test.js",
+      "tests/offensive-tactical-action-sprint-b1-0-1-test.js",
+      "tests/offensive-tactical-action-sprint-b1-test.js",
+      "tests/offensive-tactical-action-sprint-b2-defensive-handoff-test.js",
+      "tests/offensive-tactical-action-sprint-b2-runner-realization-test.js",
+      "tests/opportunity-evaluation-boundary-v1-0-1-test.js",
+      "tests/outcome-transition-hierarchy-test.js",
+      "tests/pitch-sequencing-core-sprint-a-test.js",
+      "tests/pitcher-catcher-tactical-integration-test.js",
+      "tests/pitcher-mental-state-sprint-a-test.js",
+      "tests/pitcher-process-state-sprint-a-test.js",
+      "tests/plate-approach-semantic-integrity-test.js",
+      "tests/plate-decision-foundation-test.js",
+      "tests/plate-decision-production-integration-test.js",
+      "tests/player-archetype-test.js",
+      "tests/player-capability-hierarchy-foundation-v1-0-1-test.js",
+      "tests/player-capability-hierarchy-foundation-v1-test.js",
+      "tests/player-data-boundary-test.js",
+      "tests/playing-time-game-exposure-foundation-v1-test.js",
+      "tests/presentation-interaction-clarity-test.js",
+      "tests/relationship-boundary-test.js",
+      "tests/relationship-flow-test.js",
+      "tests/relationship-payoff-test.js",
+      "tests/representative-team-contract-test.js",
+      "tests/responsive-accessibility-pass-test.js",
+      "tests/scene-context-layer-test.js",
+      "tests/scene-depth-test.js",
+      "tests/school-invitation-foundation-v1-0-1-test.js",
+      "tests/school-invitation-foundation-v1-test.js",
+      "tests/sprint-c-human-ux-closeout-test.js",
+      "tests/status-panel-disclosure-persistence-test.js",
+      "tests/takahashi-storyboard-test.js",
+      "tests/team-roster-foundation-test.js",
+      "tests/team-roster-match-integration-test.js",
+      "tests/team-strength-model-test.js",
+      "tests/ten-year-narrative-architecture-test.js",
+      "tests/third-out-runner-resolution-integrity-v1-test.js",
+      "tests/time-boundary-test.js",
+      "tests/u18-roster-construction-test.js",
+      "tests/youth-season-content-pass-test.js",
+      "tests/callbackTest.js",
+      "tests/content-flow-audit.js",
+      "tests/vertical-slice-smoke.js",
+      "tests/baseball-match-foundation-2-2-4-3-audit.js"
+    ]
+  },
+  "matrix": [
+    {
+      "scenario": "R1",
+      "initialBases": [
+        "R1",
+        null,
+        null
+      ],
+      "initialOuts": 0,
+      "forceChain": {
+        "BR": "first",
+        "R1": "second"
+      },
+      "retirements": [],
+      "forceAfterRetirements": {
+        "BR": "first",
+        "R1": "second"
+      },
+      "survivors": [
+        {
+          "runnerId": "BR",
+          "from": "batter",
+          "to": 1,
+          "targetBase": "first",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "batterRunnerRequiredToFirst"
+        },
+        {
+          "runnerId": "R1",
+          "from": 1,
+          "to": 2,
+          "targetBase": "second",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "batterRunnerRequiresFirstBase"
+        }
+      ],
+      "finalBases": [
+        "BR",
+        "R1",
+        null
+      ],
+      "scoringRunnerIds": [],
+      "runs": 0,
+      "finalOuts": 0
+    },
+    {
+      "scenario": "R1+R2",
+      "initialBases": [
+        "R1",
+        "R2",
+        null
+      ],
+      "initialOuts": 0,
+      "forceChain": {
+        "BR": "first",
+        "R1": "second",
+        "R2": "third"
+      },
+      "retirements": [],
+      "forceAfterRetirements": {
+        "BR": "first",
+        "R1": "second",
+        "R2": "third"
+      },
+      "survivors": [
+        {
+          "runnerId": "BR",
+          "from": "batter",
+          "to": 1,
+          "targetBase": "first",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "batterRunnerRequiredToFirst"
+        },
+        {
+          "runnerId": "R1",
+          "from": 1,
+          "to": 2,
+          "targetBase": "second",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "batterRunnerRequiresFirstBase"
+        },
+        {
+          "runnerId": "R2",
+          "from": 2,
+          "to": 3,
+          "targetBase": "third",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "precedingForcedRunnerRequiresOccupiedBase"
+        }
+      ],
+      "finalBases": [
+        "BR",
+        "R1",
+        "R2"
+      ],
+      "scoringRunnerIds": [],
+      "runs": 0,
+      "finalOuts": 0
+    },
+    {
+      "scenario": "R1+R3",
+      "initialBases": [
+        "R1",
+        null,
+        "R3"
+      ],
+      "initialOuts": 0,
+      "forceChain": {
+        "BR": "first",
+        "R1": "second"
+      },
+      "retirements": [],
+      "forceAfterRetirements": {
+        "BR": "first",
+        "R1": "second"
+      },
+      "survivors": [
+        {
+          "runnerId": "BR",
+          "from": "batter",
+          "to": 1,
+          "targetBase": "first",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "batterRunnerRequiredToFirst"
+        },
+        {
+          "runnerId": "R1",
+          "from": 1,
+          "to": 2,
+          "targetBase": "second",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "batterRunnerRequiresFirstBase"
+        },
+        {
+          "runnerId": "R3",
+          "from": 3,
+          "to": 3,
+          "targetBase": "third",
+          "isForced": false,
+          "movementRequired": false,
+          "committed": false,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": ""
+        }
+      ],
+      "finalBases": [
+        "BR",
+        "R1",
+        "R3"
+      ],
+      "scoringRunnerIds": [],
+      "runs": 0,
+      "finalOuts": 0
+    },
+    {
+      "scenario": "R2",
+      "initialBases": [
+        null,
+        "R2",
+        null
+      ],
+      "initialOuts": 0,
+      "forceChain": {
+        "BR": "first"
+      },
+      "retirements": [],
+      "forceAfterRetirements": {
+        "BR": "first"
+      },
+      "survivors": [
+        {
+          "runnerId": "BR",
+          "from": "batter",
+          "to": 1,
+          "targetBase": "first",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "batterRunnerRequiredToFirst"
+        },
+        {
+          "runnerId": "R2",
+          "from": 2,
+          "to": 2,
+          "targetBase": "second",
+          "isForced": false,
+          "movementRequired": false,
+          "committed": false,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": ""
+        }
+      ],
+      "finalBases": [
+        "BR",
+        "R2",
+        null
+      ],
+      "scoringRunnerIds": [],
+      "runs": 0,
+      "finalOuts": 0
+    },
+    {
+      "scenario": "R3",
+      "initialBases": [
+        null,
+        null,
+        "R3"
+      ],
+      "initialOuts": 0,
+      "forceChain": {
+        "BR": "first"
+      },
+      "retirements": [],
+      "forceAfterRetirements": {
+        "BR": "first"
+      },
+      "survivors": [
+        {
+          "runnerId": "BR",
+          "from": "batter",
+          "to": 1,
+          "targetBase": "first",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "batterRunnerRequiredToFirst"
+        },
+        {
+          "runnerId": "R3",
+          "from": 3,
+          "to": 3,
+          "targetBase": "third",
+          "isForced": false,
+          "movementRequired": false,
+          "committed": false,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": ""
+        }
+      ],
+      "finalBases": [
+        "BR",
+        null,
+        "R3"
+      ],
+      "scoringRunnerIds": [],
+      "runs": 0,
+      "finalOuts": 0
+    },
+    {
+      "scenario": "loaded",
+      "initialBases": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "initialOuts": 0,
+      "forceChain": {
+        "BR": "first",
+        "R1": "second",
+        "R2": "third",
+        "R3": "home"
+      },
+      "retirements": [],
+      "forceAfterRetirements": {
+        "BR": "first",
+        "R1": "second",
+        "R2": "third",
+        "R3": "home"
+      },
+      "survivors": [
+        {
+          "runnerId": "BR",
+          "from": "batter",
+          "to": 1,
+          "targetBase": "first",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "batterRunnerRequiredToFirst"
+        },
+        {
+          "runnerId": "R1",
+          "from": 1,
+          "to": 2,
+          "targetBase": "second",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "batterRunnerRequiresFirstBase"
+        },
+        {
+          "runnerId": "R2",
+          "from": 2,
+          "to": 3,
+          "targetBase": "third",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "precedingForcedRunnerRequiresOccupiedBase"
+        },
+        {
+          "runnerId": "R3",
+          "from": 3,
+          "to": "home",
+          "targetBase": "home",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": true,
+          "forceReason": "precedingForcedRunnerRequiresOccupiedBase"
+        }
+      ],
+      "finalBases": [
+        "BR",
+        "R1",
+        "R2"
+      ],
+      "scoringRunnerIds": [
+        "R3"
+      ],
+      "runs": 1,
+      "finalOuts": 0
+    },
+    {
+      "scenario": "R1 DP",
+      "initialBases": [
+        "R1",
+        null,
+        null
+      ],
+      "initialOuts": 0,
+      "forceChain": {
+        "BR": "first",
+        "R1": "second"
+      },
+      "retirements": [
+        {
+          "runnerId": "R1",
+          "targetBase": "second",
+          "outType": "force",
+          "sequence": 1,
+          "forceTargetsAfter": {
+            "BR": "first"
+          }
+        },
+        {
+          "runnerId": "BR",
+          "targetBase": "first",
+          "outType": "batterRunnerBeforeFirst",
+          "sequence": 2,
+          "forceTargetsAfter": {}
+        }
+      ],
+      "forceAfterRetirements": {},
+      "survivors": [],
+      "finalBases": [
+        null,
+        null,
+        null
+      ],
+      "scoringRunnerIds": [],
+      "runs": 0,
+      "finalOuts": 2
+    },
+    {
+      "scenario": "R1+R2 DP",
+      "initialBases": [
+        "R1",
+        "R2",
+        null
+      ],
+      "initialOuts": 0,
+      "forceChain": {
+        "BR": "first",
+        "R1": "second",
+        "R2": "third"
+      },
+      "retirements": [
+        {
+          "runnerId": "R1",
+          "targetBase": "second",
+          "outType": "force",
+          "sequence": 1,
+          "forceTargetsAfter": {
+            "BR": "first"
+          }
+        },
+        {
+          "runnerId": "BR",
+          "targetBase": "first",
+          "outType": "batterRunnerBeforeFirst",
+          "sequence": 2,
+          "forceTargetsAfter": {}
+        }
+      ],
+      "forceAfterRetirements": {},
+      "survivors": [
+        {
+          "runnerId": "R2",
+          "from": 2,
+          "to": 3,
+          "targetBase": "third",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "precedingForcedRunnerRequiresOccupiedBase"
+        }
+      ],
+      "finalBases": [
+        null,
+        null,
+        "R2"
+      ],
+      "scoringRunnerIds": [],
+      "runs": 0,
+      "finalOuts": 2
+    },
+    {
+      "scenario": "loaded DP",
+      "initialBases": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "initialOuts": 0,
+      "forceChain": {
+        "BR": "first",
+        "R1": "second",
+        "R2": "third",
+        "R3": "home"
+      },
+      "retirements": [
+        {
+          "runnerId": "R1",
+          "targetBase": "second",
+          "outType": "force",
+          "sequence": 1,
+          "forceTargetsAfter": {
+            "BR": "first"
+          }
+        },
+        {
+          "runnerId": "BR",
+          "targetBase": "first",
+          "outType": "batterRunnerBeforeFirst",
+          "sequence": 2,
+          "forceTargetsAfter": {}
+        }
+      ],
+      "forceAfterRetirements": {},
+      "survivors": [
+        {
+          "runnerId": "R2",
+          "from": 2,
+          "to": 3,
+          "targetBase": "third",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "precedingForcedRunnerRequiresOccupiedBase"
+        },
+        {
+          "runnerId": "R3",
+          "from": 3,
+          "to": "home",
+          "targetBase": "home",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": true,
+          "forceReason": "precedingForcedRunnerRequiresOccupiedBase"
+        }
+      ],
+      "finalBases": [
+        null,
+        null,
+        "R2"
+      ],
+      "scoringRunnerIds": [
+        "R3"
+      ],
+      "runs": 1,
+      "finalOuts": 2
+    },
+    {
+      "scenario": "loaded 1-out DP",
+      "initialBases": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "initialOuts": 1,
+      "forceChain": {
+        "BR": "first",
+        "R1": "second",
+        "R2": "third",
+        "R3": "home"
+      },
+      "retirements": [
+        {
+          "runnerId": "R1",
+          "targetBase": "second",
+          "outType": "force",
+          "sequence": 1,
+          "forceTargetsAfter": {
+            "BR": "first"
+          }
+        },
+        {
+          "runnerId": "BR",
+          "targetBase": "first",
+          "outType": "batterRunnerBeforeFirst",
+          "sequence": 2,
+          "forceTargetsAfter": {}
+        }
+      ],
+      "forceAfterRetirements": {},
+      "survivors": [
+        {
+          "runnerId": "R2",
+          "from": 2,
+          "to": 3,
+          "targetBase": "third",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "precedingForcedRunnerRequiresOccupiedBase"
+        },
+        {
+          "runnerId": "R3",
+          "from": 3,
+          "to": "home",
+          "targetBase": "home",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": true,
+          "forceReason": "precedingForcedRunnerRequiresOccupiedBase"
+        }
+      ],
+      "finalBases": [
+        null,
+        null,
+        null
+      ],
+      "scoringRunnerIds": [],
+      "runs": 0,
+      "finalOuts": 3
+    },
+    {
+      "scenario": "BR-first force removal",
+      "initialBases": [
+        "R1",
+        null,
+        null
+      ],
+      "initialOuts": 0,
+      "forceChain": {
+        "BR": "first",
+        "R1": "second"
+      },
+      "retirements": [
+        {
+          "runnerId": "BR",
+          "targetBase": "first",
+          "outType": "batterRunnerBeforeFirst",
+          "sequence": 1,
+          "forceTargetsAfter": {}
+        }
+      ],
+      "forceAfterRetirements": {},
+      "survivors": [
+        {
+          "runnerId": "R1",
+          "from": 1,
+          "to": 2,
+          "targetBase": "second",
+          "isForced": true,
+          "movementRequired": true,
+          "committed": true,
+          "retired": false,
+          "safe": true,
+          "scored": false,
+          "forceReason": "batterRunnerRequiresFirstBase"
+        }
+      ],
+      "finalBases": [
+        null,
+        "R1",
+        null
+      ],
+      "scoringRunnerIds": [],
+      "runs": 0,
+      "finalOuts": 1
+    }
+  ],
+  "historicalAuditPreserved": true,
+  "existingTestLoaders": {
+    "count": 94,
+    "assertionsUnchanged": true
+  },
+  "productionFiles": [
+    "defensive-runner-throw-settlement-foundation.js",
+    "force-advancement.js",
+    "script.js"
+  ],
+  "git": {
+    "branch": "main",
+    "head": "107b6a17bb19f2463666c788c568ad3c58ffdadc",
+    "aheadBehind": "0\t0",
+    "diffCheck": "PASS (tracked and untracked)",
+    "status": [
+      "M defensive-runner-throw-settlement-foundation.js",
+      " M force-advancement.js",
+      " M script.js",
+      " M tests/adult-route-chain-test.js",
+      " M tests/application-controller-test.js",
+      " M tests/aspiration-narrative-test.js",
+      " M tests/azhe-storyboard-test.js",
+      " M tests/baseball-gameplay-integration-test.js",
+      " M tests/baseball-match-foundation-2-1-1-1-test.js",
+      " M tests/baseball-match-foundation-2-1-1-test.js",
+      " M tests/baseball-match-foundation-2-1-test.js",
+      " M tests/baseball-match-foundation-2-2-1-test.js",
+      " M tests/baseball-match-foundation-2-2-2-test.js",
+      " M tests/baseball-match-foundation-2-2-3-test.js",
+      " M tests/baseball-match-foundation-2-2-4-1-test.js",
+      " M tests/baseball-match-foundation-2-2-4-2-test.js",
+      " M tests/baseball-match-foundation-2-2-4-3-audit.js",
+      " M tests/baseball-match-foundation-2-2-4-4-test.js",
+      " M tests/baseball-match-foundation-2-2-4-5-test.js",
+      " M tests/baseball-match-foundation-2-2-4-test.js",
+      " M tests/baseball-match-foundation-2-2-test.js",
+      " M tests/baseball-offensive-production-integration-test.js",
+      " M tests/baseball-training-rhythm-test.js",
+      " M tests/batted-ball-physical-production-integration-test.js",
+      " M tests/bbp-b1-ground-ball-production-integration-test.js",
+      " M tests/bbp-b2a-line-drive-production-integration-test.js",
+      " M tests/bbp-b2b1-fly-ball-production-integration-test.js",
+      " M tests/callbackTest.js",
+      " M tests/career-age22-outcome-resolver-test.js",
+      " M tests/career-arc-test.js",
+      " M tests/career-development-progression-test.js",
+      " M tests/career-development-runtime-resolver-test.js",
+      " M tests/career-network-contract-test.js",
+      " M tests/career-rejoin-contract-test.js",
+      " M tests/career-transition-commit-test.js",
+      " M tests/career-transition-progression-test.js",
+      " M tests/career-transition-resolver-test.js",
+      " M tests/career-transition-role-test.js",
+      " M tests/career-transition-route-difference-test.js",
+      " M tests/career-transition-runtime-resolver-test.js",
+      " M tests/catcher-choice-outcome-integrity-v1-test.js",
+      " M tests/content-flow-audit.js",
+      " M tests/contextual-status-panel-test.js",
+      " M tests/defensive-outcome-cause-explainability-foundation-v1-test.js",
+      " M tests/development-match-position-test-fallback-v1-test.js",
+      " M tests/emotional-payoff-test.js",
+      " M tests/event-continuity-pass-test.js",
+      " M tests/first-offensive-moment-role-presentation-test.js",
+      " M tests/generic-infield-position-admission-diagnostic-test.js",
+      " M tests/goal-balance-test.js",
+      " M tests/ground-ball-home-route-production-integration-test.js",
+      " M tests/high-school-entry-roster-integration-test.js",
+      " M tests/high-school-integration-1-1-1-test.js",
+      " M tests/high-school-integration-1-1-test.js",
+      " M tests/high-school-integration-1-2-1-test.js",
+      " M tests/high-school-integration-1-2-2-1-test.js",
+      " M tests/high-school-integration-1-2-2-2-test.js",
+      " M tests/high-school-integration-1-2-2-test.js",
+      " M tests/high-school-integration-1-2-3-test.js",
+      " M tests/high-school-integration-1-2-test.js",
+      " M tests/high-school-three-year-spine-test.js",
+      " M tests/high-school-year-one-competition-loop-test.js",
+      " M tests/high-school-year-one-opportunity-two-integration-test.js",
+      " M tests/high-school-year-transition-continuity-test.js",
+      " M tests/high-school-year-two-competition-loop-test.js",
+      " M tests/invitation-presentation-school-choice-integration-v1-test.js",
+      " M tests/invitation-presentation-v1-0-1-legacy-route-conflict-test.js",
+      " M tests/match-development-settlement-presentation-v1-test.js",
+      " M tests/match-opportunity-structural-completion-v1-test.js",
+      " M tests/narrative-continuity-test.js",
+      " M tests/npc-role-refactor-test.js",
+      " M tests/offensive-plate-approach-foundation-v1-test.js",
+      " M tests/offensive-production-presentation-sprint-c-test.js",
+      " M tests/offensive-tactical-action-sprint-a-test.js",
+      " M tests/offensive-tactical-action-sprint-b1-0-1-test.js",
+      " M tests/offensive-tactical-action-sprint-b1-test.js",
+      " M tests/offensive-tactical-action-sprint-b2-defensive-handoff-test.js",
+      " M tests/outcome-transition-hierarchy-test.js",
+      " M tests/plate-decision-production-integration-test.js",
+      " M tests/player-archetype-test.js",
+      " M tests/player-capability-hierarchy-foundation-v1-0-1-test.js",
+      " M tests/player-capability-hierarchy-foundation-v1-test.js",
+      " M tests/player-data-boundary-test.js",
+      " M tests/playing-time-game-exposure-foundation-v1-test.js",
+      " M tests/presentation-interaction-clarity-test.js",
+      " M tests/relationship-payoff-test.js",
+      " M tests/responsive-accessibility-pass-test.js",
+      " M tests/scene-context-layer-test.js",
+      " M tests/scene-depth-test.js",
+      " M tests/sprint-c-human-ux-closeout-test.js",
+      " M tests/status-panel-disclosure-persistence-test.js",
+      " M tests/takahashi-storyboard-test.js",
+      " M tests/team-roster-match-integration-test.js",
+      " M tests/ten-year-narrative-architecture-test.js",
+      " M tests/third-out-runner-resolution-integrity-v1-test.js",
+      " M tests/vertical-slice-smoke.js",
+      " M tests/youth-season-content-pass-test.js",
+      "?? docs/force-multi-runner-settlement-integration-sprint-1.md",
+      "?? docs/force-multi-runner-settlement-validation.json",
+      "?? tests/force-multi-runner-settlement-integration-test.js",
+      "?? tests/force-multi-runner-settlement-production-integration-test.js"
+    ],
+    "committed": false,
+    "pushed": false
+  },
+  "knownBugGameRecord": {
+    "runEvents": 1,
+    "recordRuns": 1,
+    "inningRuns": 1,
+    "runnerRuns": 1
+  },
+  "gameAudit": {
+    "schemaVersion": "2.2.4.3",
+    "seedStrategy": {
+      "bench": {
+        "base": 22430000,
+        "count": 1000,
+        "last": 22430999
+      },
+      "starter": {
+        "base": 22431000,
+        "count": 400,
+        "last": 22431399
+      },
+      "deterministicRepeatSeeds": [
+        22430000,
+        22430001,
+        22430002,
+        22430003,
+        22430004,
+        22430005,
+        22430006,
+        22430007,
+        22430008,
+        22430009
+      ]
+    },
+    "choicePolicy": "每個正式 Decision 選第一個合法 choice；execution sample 固定為 0.82；不消耗 match simulation RNG。",
+    "bench": {
+      "matches": 1000,
+      "entryInning": {
+        "5": 645,
+        "6": 355
+      },
+      "entryHalf": {
+        "下": 1000
+      },
+      "entryOuts": {
+        "0": 506,
+        "1": 390,
+        "2": 104
+      },
+      "entryBases": {
+        "2B": 132,
+        "empty": 647,
+        "1B+2B": 96,
+        "1B": 71,
+        "3B": 21,
+        "1B+3B": 33
+      },
+      "entryScoreDifferential": {
+        "0": 234,
+        "1": 160,
+        "2": 102,
+        "3": 72,
+        "4": 56,
+        "5": 47,
+        "6": 44,
+        "7": 6,
+        "8": 3,
+        "-3": 15,
+        "-1": 158,
+        "-2": 79,
+        "-4": 11,
+        "-5": 5,
+        "-6": 8
+      },
+      "entryLineupSlot": {
+        "3": 1000
+      },
+      "immediateFirstBatter": 1000,
+      "playerPA": {
+        "min": 1,
+        "max": 4,
+        "mean": 1.576,
+        "median": 1,
+        "p25": 1,
+        "p75": 2
+      },
+      "scriptedOffense": {
+        "min": 1,
+        "max": 1,
+        "mean": 1,
+        "median": 1,
+        "p25": 1,
+        "p75": 1
+      },
+      "scriptedOffenseCounts": {
+        "1": 1000
+      },
+      "emergentOffense": {
+        "min": 0,
+        "max": 1,
+        "mean": 0.433,
+        "median": 0,
+        "p25": 0,
+        "p75": 1
+      },
+      "emergentOffenseCounts": {
+        "0": 567,
+        "1": 433
+      },
+      "firstOnly": 567,
+      "firstOnlyRate": 0.567,
+      "defensiveInnings": {
+        "min": 1,
+        "max": 6,
+        "mean": 2.015,
+        "median": 2,
+        "p25": 1,
+        "p75": 2
+      },
+      "defensiveHalfShare": {
+        "min": 0.14285714285714285,
+        "max": 0.5454545454545454,
+        "mean": 0.26372709235209374,
+        "median": 0.2857142857142857,
+        "p25": 0.14285714285714285,
+        "p75": 0.2857142857142857
+      },
+      "defensivePA": {
+        "min": 3,
+        "max": 30,
+        "mean": 8.393,
+        "median": 8,
+        "p25": 5,
+        "p75": 9
+      },
+      "defensiveBallsInPlay": {
+        "min": 2,
+        "max": 25,
+        "mean": 7.263,
+        "median": 6,
+        "p25": 5,
+        "p75": 8
+      },
+      "defensiveInvolvement": {
+        "min": 1,
+        "max": 13,
+        "mean": 3.925,
+        "median": 3,
+        "p25": 2,
+        "p75": 5
+      },
+      "defensiveRoutine": {
+        "min": 1,
+        "max": 6,
+        "mean": 2.04,
+        "median": 2,
+        "p25": 1,
+        "p75": 2
+      },
+      "defensiveAttention": {
+        "min": 1,
+        "max": 10,
+        "mean": 3.873,
+        "median": 3,
+        "p25": 2,
+        "p75": 5
+      },
+      "defensiveDecision": {
+        "min": 0,
+        "max": 4,
+        "mean": 1.833,
+        "median": 2,
+        "p25": 1,
+        "p75": 3
+      },
+      "zeroDefense": 204,
+      "zeroDefenseRate": 0.204,
+      "coverage": {
+        "min": 0,
+        "max": 0,
+        "mean": 0,
+        "median": 0,
+        "p25": 0,
+        "p75": 0
+      },
+      "primaryFielding": {
+        "min": 1,
+        "max": 13,
+        "mean": 3.925,
+        "median": 3,
+        "p25": 2,
+        "p75": 5
+      },
+      "funnel": {
+        "playerOnDefensePA": 8393,
+        "decisionWindowChecks": 17801,
+        "relevantResponsibility": 3925,
+        "playerInvolvement": 3925,
+        "viableRoutes": 3925,
+        "multiCommitment": 1885,
+        "meaningfulDecision": 1885
+      },
+      "rejections": {
+        "only-one-legal-route": 2040,
+        "no-player-responsibility": 13876,
+        "window-expired": -9408
+      },
+      "routesAvailable": {
+        "secureFirstBaseOut": 3925,
+        "initiate463": 1885,
+        "attackLeadRunnerThird": 184
+      },
+      "routesExecuted": {
+        "secureFirstBaseOut": 3873
+      },
+      "totalDecisions": {
+        "min": 1,
+        "max": 6,
+        "mean": 3.266,
+        "median": 3,
+        "p25": 2,
+        "p75": 4
+      },
+      "decisionCounts": {
+        "1": 164,
+        "2": 131,
+        "3": 340,
+        "4": 122,
+        "5+": 243
+      },
+      "offensiveDecisionTiming": {
+        "scripted:PA1": 1000,
+        "emergent:PA2": 433
+      },
+      "defensiveDecisionTiming": {
+        "6上": 708,
+        "7上": 941,
+        "8上": 91,
+        "9上": 60,
+        "10上": 11,
+        "11上": 22
+      },
+      "preEntryPAShare": 0.7275338530980714,
+      "archetypes": {
+        "C-scripted-plus-defense-only": 403,
+        "D-scripted-plus-defense-plus-emergent-offense": 393,
+        "A-scripted-only-no-defense": 164,
+        "B-scripted-plus-emergent-no-defense": 40
+      },
+      "completed": 1000,
+      "orphan": 0,
+      "noProgress": 0,
+      "integrityIssues": 0,
+      "gameRecordIntegrityIssues": 0
+    },
+    "starter": {
+      "matches": 400,
+      "entryInning": {
+        "1": 400
+      },
+      "entryHalf": {
+        "上": 400
+      },
+      "entryOuts": {
+        "0": 400
+      },
+      "entryBases": {
+        "empty": 400
+      },
+      "entryScoreDifferential": {
+        "0": 400
+      },
+      "entryLineupSlot": {
+        "5": 400
+      },
+      "immediateFirstBatter": 0,
+      "playerPA": {
+        "min": 3,
+        "max": 5,
+        "mean": 3.545,
+        "median": 4,
+        "p25": 3,
+        "p75": 4
+      },
+      "scriptedOffense": {
+        "min": 1,
+        "max": 1,
+        "mean": 1,
+        "median": 1,
+        "p25": 1,
+        "p75": 1
+      },
+      "scriptedOffenseCounts": {
+        "1": 400
+      },
+      "emergentOffense": {
+        "min": 1,
+        "max": 1,
+        "mean": 1,
+        "median": 1,
+        "p25": 1,
+        "p75": 1
+      },
+      "emergentOffenseCounts": {
+        "1": 400
+      },
+      "firstOnly": 0,
+      "firstOnlyRate": 0,
+      "defensiveInnings": {
+        "min": 7,
+        "max": 9,
+        "mean": 7.0775,
+        "median": 7,
+        "p25": 7,
+        "p75": 7
+      },
+      "defensiveHalfShare": {
+        "min": 1,
+        "max": 1,
+        "mean": 1,
+        "median": 1,
+        "p25": 1,
+        "p75": 1
+      },
+      "defensivePA": {
+        "min": 25,
+        "max": 48,
+        "mean": 32.0775,
+        "median": 32,
+        "p25": 30,
+        "p75": 34
+      },
+      "defensiveBallsInPlay": {
+        "min": 20,
+        "max": 42,
+        "mean": 26.78,
+        "median": 27,
+        "p25": 25,
+        "p75": 28
+      },
+      "defensiveInvolvement": {
+        "min": 7,
+        "max": 20,
+        "mean": 10.8025,
+        "median": 11,
+        "p25": 9,
+        "p75": 12
+      },
+      "defensiveRoutine": {
+        "min": 5,
+        "max": 8,
+        "mean": 5.575,
+        "median": 6,
+        "p25": 5,
+        "p75": 6
+      },
+      "defensiveAttention": {
+        "min": 7,
+        "max": 13,
+        "mean": 9.5375,
+        "median": 10,
+        "p25": 9,
+        "p75": 10
+      },
+      "defensiveDecision": {
+        "min": 2,
+        "max": 6,
+        "mean": 3.9625,
+        "median": 4,
+        "p25": 4,
+        "p75": 4
+      },
+      "zeroDefense": 0,
+      "zeroDefenseRate": 0,
+      "coverage": {
+        "min": 0,
+        "max": 0,
+        "mean": 0,
+        "median": 0,
+        "p25": 0,
+        "p75": 0
+      },
+      "primaryFielding": {
+        "min": 7,
+        "max": 20,
+        "mean": 10.8025,
+        "median": 11,
+        "p25": 9,
+        "p75": 12
+      },
+      "funnel": {
+        "playerOnDefensePA": 12831,
+        "decisionWindowChecks": 20545,
+        "relevantResponsibility": 4321,
+        "playerInvolvement": 4321,
+        "viableRoutes": 4321,
+        "multiCommitment": 2091,
+        "meaningfulDecision": 2091
+      },
+      "rejections": {
+        "no-player-responsibility": 16224,
+        "only-one-legal-route": 2230,
+        "window-expired": -7714
+      },
+      "routesAvailable": {
+        "secureFirstBaseOut": 4321,
+        "initiate463": 2091,
+        "attackLeadRunnerThird": 423,
+        "homeForceOut": 5
+      },
+      "routesExecuted": {
+        "secureFirstBaseOut": 3815
+      },
+      "totalDecisions": {
+        "min": 4,
+        "max": 8,
+        "mean": 5.9625,
+        "median": 6,
+        "p25": 6,
+        "p75": 6
+      },
+      "decisionCounts": {
+        "4": 16,
+        "5+": 384
+      },
+      "offensiveDecisionTiming": {
+        "scripted:PA1": 400,
+        "emergent:PA3": 333,
+        "emergent:PA4+": 67
+      },
+      "defensiveDecisionTiming": {
+        "4上": 412,
+        "5上": 200,
+        "7上": 171,
+        "6上": 161,
+        "3上": 299,
+        "2上": 337,
+        "8上": 5
+      },
+      "preEntryPAShare": 0,
+      "archetypes": {
+        "D-scripted-plus-defense-plus-emergent-offense": 400
+      },
+      "completed": 400,
+      "orphan": 0,
+      "noProgress": 0,
+      "integrityIssues": 0,
+      "gameRecordIntegrityIssues": 0
+    },
+    "deterministic": true,
+    "instrumentationNeutral": true,
+    "fiveConsecutiveZeroDefenseProbability": 0.0003533058570239999,
+    "runtimeMs": 250272
+  },
+  "sprintStatus": "PASS",
+  "stopConditionsTriggered": []
+}

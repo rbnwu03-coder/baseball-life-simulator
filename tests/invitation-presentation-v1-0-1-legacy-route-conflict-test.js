@@ -15,7 +15,7 @@ const files = [
   "career-spine-contract.js", "career-transition-resolver.js", "career-transition-commit.js",
   "career-transition-runtime-resolver.js", "career-transition-progression.js",
   "career-development-runtime-resolver.js", "career-development-progression.js", "career-age22-outcome-resolver.js",
-  "career-save-admission.js", "npc.js", "coach.js", "rival.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "script.js",
+  "career-save-admission.js", "npc.js", "coach.js", "rival.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "script.js",
   "application-controller.js"
 ];
 

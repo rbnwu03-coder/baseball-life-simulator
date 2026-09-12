@@ -193,7 +193,7 @@ const runtimeFiles = [
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
   "competition-presentation.js", "career-spine-contract.js", "career-transition-resolver.js",
   "career-transition-commit.js", "career-transition-runtime-resolver.js",
-  "career-transition-progression.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "script.js"
+  "career-transition-progression.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "script.js"
 ];
 
 function makeContext() {

@@ -139,7 +139,7 @@ function makeGameContext() {
     },
     window: { setTimeout: callback => callback() }
   });
-  ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "script.js", "application-controller.js"].forEach(file => {
+  ["player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "script.js", "application-controller.js"].forEach(file => {
     vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file });
   });
   return context;

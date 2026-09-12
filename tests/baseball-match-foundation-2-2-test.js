@@ -14,7 +14,7 @@ const files = [
   "baseball-offense-prototype.js", "offensive-plate-approach.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
   "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
   "career-development-runtime-resolver.js", "career-development-progression.js", "career-age22-outcome-resolver.js",
-  "career-save-admission.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "script.js"
+  "career-save-admission.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "script.js"
 ];
 
 function makeContext() {

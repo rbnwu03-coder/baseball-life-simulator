@@ -114,7 +114,7 @@ verify("18. Resolver 不讀寫全域 player", vm.runInContext("JSON.stringify(pl
 const resolverSource = fs.readFileSync(path.join(root, "career-transition-resolver.js"), "utf8");
 verify("19. Resolver 沒有 RNG、時間、UI、Storage 或 Save 依賴", !/Math\.random|Date\.|document\.|localStorage|sessionStorage|saveGame|showStory|showCurrentEvent/.test(resolverSource));
 verify("20. Resolver 沒有複製四條 route key registry", !/\[\s*["']draft["']\s*,\s*["']college["']\s*,\s*["']amateur["']\s*,\s*["']rehab["']\s*\]/.test(resolverSource));
-verify("21. Gameplay 與 Save 沒有接入 Resolver", ["player.js", "story.js", "ai-plate-appearance-outcome.js", "script.js", "save.js"].every(file =>
+verify("21. Gameplay 與 Save 沒有接入 Resolver", ["player.js", "story.js", "ai-plate-appearance-outcome.js", "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "script.js", "save.js"].every(file =>
   !fs.readFileSync(path.join(root, file), "utf8").includes("GraduationTransitionResolver")
 ));
 verify("22. Resolver 不寫入 chapter、careerExit、route 或 Save", !/\b(?:player|graduationState)\s*\[[^\]]+\]\s*=|\b(?:player|graduationState)\.[A-Za-z_$][\w$]*\s*=/.test(resolverSource));

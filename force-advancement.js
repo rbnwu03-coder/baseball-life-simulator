@@ -84,16 +84,60 @@
       authority: "initialLiveBallForceChainProjection"
     });
   }
-  function settleForceAdvancement({ forceChain, route = "", resultCode = "" } = {}) {
+  function buildMovementIntents(forceChain, runnerContext = []) {
+    if (!forceChain) return [];
+    return deepFreeze([...forceChain.allRequiredMovements, ...forceChain.unforcedRunners].map(actor => {
+      const context = runnerContext.find(item => item?.runnerId === actor.runnerId);
+      const committed = actor.isForced === true || ["committed", "advancing"].includes(context?.movementProgress);
+      return { runnerId: actor.runnerId, originBase: actor.originBase,
+        targetBase: actor.isForced ? actor.targetBase : committed ? context.targetBase : BASE_NAMES[Number(actor.originBase) - 1],
+        forced: actor.isForced === true, movementRequired: actor.isForced === true, committed };
+    }));
+  }
+  function classifyContinuationTarget(forceChain, runnerId, targetBase) {
+    const actor = getForcedMovement(forceChain, runnerId);
+    const forceAvailable = Boolean(actor && actor.targetBase === targetBase);
+    return deepFreeze({ runnerId, targetBase, forceAvailable, tagRequired: !forceAvailable,
+      classification: forceAvailable ? "forceOutAvailable" : "noForceOut" });
+  }
+  function settleForceAdvancement({ forceChain, route = "", resultCode = "", movementIntents, retirements: suppliedRetirements } = {}) {
     if (!forceChain) return null;
     const batterId = forceChain.batterRunner.runnerId;
     const runnerAtFirst = forceChain.sourceBaseState[0];
+    const intents = movementIntents || buildMovementIntents(forceChain);
+    const actors = [...forceChain.allRequiredMovements, ...forceChain.unforcedRunners];
+    if (intents.length !== actors.length || new Set(intents.map(actor => actor.runnerId)).size !== actors.length
+      || intents.some(intent => !actors.some(actor => actor.runnerId === intent.runnerId && actor.originBase === intent.originBase)
+        || !BASE_NAMES.includes(intent.targetBase))) throw new Error("Incomplete runner movement identities");
+    const candidates = [];
+    const retire = (runnerId, targetBase, outType) => { if (runnerId) candidates.push({ runnerId, targetBase, outType, sequence: candidates.length + 1 }); };
+    if (suppliedRetirements) candidates.push(...clone(suppliedRetirements));
+    else if (route === "doublePlay") {
+      if (["oneOut", "twoOuts"].includes(resultCode)) retire(runnerAtFirst, "second", "force");
+      if (resultCode === "twoOuts") retire(batterId, "first", "batterRunnerBeforeFirst");
+    } else if (resultCode === "oneOut") {
+      if (route === "secureFirst") retire(batterId, "first", "batterRunnerBeforeFirst");
+      if (route === "forceSecond") retire(runnerAtFirst, "second", "force");
+      if (route === "forceThird") retire(forceChain.sourceBaseState[1], "third", "force");
+      if (route === "forceHome") retire(forceChain.sourceBaseState[2], "home", "force");
+      if (route === "tagHome") retire(forceChain.sourceBaseState[2], "home", "nonForceTag");
+    }
     const outRunnerIds = new Set();
-    if (route === "doublePlay") {
-      if (["oneOut", "twoOuts"].includes(resultCode) && runnerAtFirst) outRunnerIds.add(runnerAtFirst);
-      if (resultCode === "twoOuts") outRunnerIds.add(batterId);
-    } else if (route === "secureFirst" && resultCode === "oneOut") {
-      outRunnerIds.add(batterId);
+    let liveForce = forceChain;
+    const retirements = [], continuationClassifications = [];
+    for (const candidate of candidates) {
+      if (!intents.some(actor => actor.runnerId === candidate.runnerId) || outRunnerIds.has(candidate.runnerId)) throw new Error("Invalid retirement identity");
+      if (candidate.sequence !== retirements.length + continuationClassifications.length + 1) throw new Error("Invalid retirement sequence");
+      const legality = classifyContinuationTarget(liveForce, candidate.runnerId, candidate.targetBase);
+      if (candidate.outType === "force" && !legality.forceAvailable) {
+        continuationClassifications.push({ ...legality, sequence: candidate.sequence });
+        continue;
+      }
+      if (!["force", "batterRunnerBeforeFirst", "nonForceTag"].includes(candidate.outType)
+        || (candidate.outType === "batterRunnerBeforeFirst" && (candidate.runnerId !== batterId || candidate.targetBase !== "first"))) throw new Error("Invalid retirement type");
+      outRunnerIds.add(candidate.runnerId);
+      liveForce = deriveForceChainAfterRetirements(liveForce, [candidate.runnerId]);
+      retirements.push({ ...candidate, forceTargetsAfter: clone(liveForce.forceTargets) });
     }
     const outcomes = [];
     const addOutcome = (actor, targetBase) => {
@@ -104,13 +148,14 @@
         from: actor.originBase,
         to: numericTarget >= 0 && numericTarget < 3 ? numericTarget + 1 : resolvedTarget,
         targetBase: resolvedTarget,
-        isForced: actor.isForced === true,
-        forceReason: actor.forceReason || ""
+        isForced: actor.forced === true,
+        movementRequired: actor.movementRequired, committed: actor.committed,
+        retired: resolvedTarget === "out", safe: resolvedTarget !== "out", scored: resolvedTarget === "home",
+        forceReason: getForcedMovement(forceChain, actor.runnerId)?.forceReason || ""
       }));
     };
-    addOutcome(forceChain.batterRunner, "first");
-    forceChain.forcedRunners.forEach(actor => addOutcome(actor, actor.targetBase));
-    forceChain.unforcedRunners.forEach(actor => addOutcome(actor, BASE_NAMES[Number(actor.originBase) - 1]));
+    // Initial committed movement survives removal of the force; retirement overrides it.
+    intents.forEach(actor => addOutcome(actor, actor.targetBase));
     const runnersAfter = [null, null, null];
     const scoringRunnerIds = [];
     outcomes.forEach(outcome => {
@@ -120,7 +165,8 @@
         return;
       }
       const baseIndex = BASE_NAMES.indexOf(outcome.targetBase);
-      if (baseIndex >= 0 && baseIndex < 3 && !runnersAfter[baseIndex]) runnersAfter[baseIndex] = outcome.runnerId;
+      if (baseIndex < 0 || baseIndex > 2 || runnersAfter[baseIndex]) throw new Error("Unresolved runner destination collision");
+      runnersAfter[baseIndex] = outcome.runnerId;
     });
     return deepFreeze({
       version: "force-advancement-settlement-v1",
@@ -129,7 +175,10 @@
       runnerChanges: outcomes,
       scoringRunnerIds,
       runsAllowed: scoringRunnerIds.length,
-      outRunnerIds: [...outRunnerIds]
+      outRunnerIds: [...outRunnerIds], outsCreated: outRunnerIds.size,
+      initialForceChain: forceChain, movementIntents: clone(intents), retirements,
+      forceChainAfterRetirements: liveForce, continuationClassifications,
+      survivors: outcomes.filter(actor => !actor.retired)
     });
   }
   function normalizeForceChain(saved) { return saved && typeof saved === "object" ? deepFreeze(clone(saved)) : null; }
@@ -156,6 +205,7 @@
 
   return deepFreeze({
     VERSION, BASE_NAMES, buildInitialLiveBallForceChain, getForcedMovement,
-    deriveCompatibilityForceState, settleForceAdvancement, normalizeForceChain, deriveForceChainAfterRetirements
+    deriveCompatibilityForceState, settleForceAdvancement, normalizeForceChain, deriveForceChainAfterRetirements,
+    buildMovementIntents, classifyContinuationTarget
   });
 });

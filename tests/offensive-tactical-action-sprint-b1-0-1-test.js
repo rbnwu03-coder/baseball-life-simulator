@@ -21,7 +21,7 @@ const runtimeFiles = [
   "offensive-bunt-execution.js", "match-situation-lifecycle.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js", "playing-time-game-exposure.js",
   "match-experience-development.js", "match-development-settlement-presentation.js", "career-spine-contract.js",
   "career-transition-runtime-resolver.js", "career-transition-progression.js", "career-development-runtime-resolver.js",
-  "career-development-progression.js", "career-age22-outcome-resolver.js", "career-save-admission.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "script.js"
+  "career-development-progression.js", "career-age22-outcome-resolver.js", "career-save-admission.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "script.js"
 ];
 const nodes = new Map();
 const storage = new Map();

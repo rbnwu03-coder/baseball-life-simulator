@@ -33,7 +33,7 @@ const files = [
   "story.js",
   "save.js",
   "ai-plate-appearance-outcome.js",
-  "script.js"
+  "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "script.js"
 ];
 const youthEventIds = [
   "youth_season_intro",

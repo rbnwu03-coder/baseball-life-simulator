@@ -9,7 +9,7 @@ const runtimeFiles = [
   "evaluation-registry.js", "coach-evaluation-boundary.js", "narrative-condition-boundary.js",
   "evaluation-registry-bootstrap.js", "decision-flow.js", "day-completion-flow.js",
   "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js",
-  "competition-presentation.js", "npc.js", "coach.js", "rival.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "script.js"
+  "competition-presentation.js", "npc.js", "coach.js", "rival.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "script.js"
 ];
 
 let passed = 0;

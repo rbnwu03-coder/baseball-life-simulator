@@ -29,7 +29,7 @@ const runtimeFiles = [
   "story.js",
   "save.js",
   "ai-plate-appearance-outcome.js",
-  "script.js"
+  "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "script.js"
 ];
 
 let passed = 0;

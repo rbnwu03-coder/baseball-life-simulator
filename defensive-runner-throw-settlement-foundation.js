@@ -130,7 +130,21 @@
       forceStateBefore:clone(force),forceStateAfter:Force.deriveForceChainAfterRetirements(force,outs),
       continuation:thirdOut.halfInningEnded?{status:"inningEnded"}:clone(resolution.continuationState||{status:"existingVerticalComplete"}),
       ballRemainsLive:!thirdOut.halfInningEnded,thirdOut:clone(thirdOut),settlementApplied:false,scope:"existingDetailedVertical",
+      runnerSettlement:clone(resolution.runnerSettlement||null),
       authority:"existingDetailedSettlement+canonicalThirdOutIntegrity"});
+  }
+  function projectInfieldSettlement({identity,before,resolution,thirdOut}){
+    const facts=resolution.runnerSettlement;
+    if(!facts||facts.outsCreated!==resolution.outsCreated)fail("missing canonical infield settlement");
+    if(!same(facts.initialForceChain.sourceBaseState,before.runners)
+      ||!same(facts.runnersAfter,resolution.runnersAfter)||!same(facts.scoringRunnerIds,resolution.scoringRunnerIds))fail("stale infield settlement facts");
+    return freeze({version:VERSION,identity:`${identity}|settlement-v1`,before:clone(before),
+      outsBefore:before.outs,outsAfter:thirdOut.outsAfter,outRunnerIds:clone(facts.outRunnerIds),
+      baseChanges:clone(thirdOut.basesAfter),runChanges:clone(thirdOut.legalScoringRunnerIds),
+      runnerMovement:clone(resolution.runnerChanges),runnerSettlement:clone(facts),
+      forceStateBefore:clone(facts.initialForceChain),forceStateAfter:clone(facts.forceChainAfterRetirements),
+      continuation:thirdOut.halfInningEnded?{status:"inningEnded"}:{status:"existingVerticalComplete",classifications:clone(facts.continuationClassifications)},
+      thirdOut:clone(thirdOut),settlementApplied:false,authority:"canonicalForceSettlement+canonicalThirdOutIntegrity"});
   }
   function projectTagUpTiming(execution,context){
     const attempted=execution.runnerAdvanceChallenge.attempted;
@@ -177,5 +191,5 @@
       if(!same(timing,expected))fail("stale projected timing facts");
     }
   }
-  return freeze({VERSION,resolveTiming,deriveSettlement,projectExistingTiming,projectExistingSettlement,projectTagUpTiming,projectTagUpSettlement,validateBefore,validateProjectedTiming});
+  return freeze({VERSION,resolveTiming,deriveSettlement,projectExistingTiming,projectExistingSettlement,projectInfieldSettlement,projectTagUpTiming,projectTagUpSettlement,validateBefore,validateProjectedTiming});
 });
