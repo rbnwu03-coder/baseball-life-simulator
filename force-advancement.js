@@ -136,8 +136,10 @@
       if (!["force", "batterRunnerBeforeFirst", "nonForceTag"].includes(candidate.outType)
         || (candidate.outType === "batterRunnerBeforeFirst" && (candidate.runnerId !== batterId || candidate.targetBase !== "first"))) throw new Error("Invalid retirement type");
       outRunnerIds.add(candidate.runnerId);
+      const forceStateAtRetirement = { forceTargets: clone(liveForce.forceTargets) };
       liveForce = deriveForceChainAfterRetirements(liveForce, [candidate.runnerId]);
-      retirements.push({ ...candidate, forceTargetsAfter: clone(liveForce.forceTargets) });
+      retirements.push({ ...candidate, forceStateAtRetirement, isBatterRunner: candidate.runnerId === batterId,
+        beforeFirst: candidate.outType === "batterRunnerBeforeFirst", forceTargetsAfter: clone(liveForce.forceTargets) });
     }
     const outcomes = [];
     const addOutcome = (actor, targetBase) => {

@@ -5301,7 +5301,7 @@ function applyHighSchoolLineDriveCatchResolution(match) {
   const offenseTeam = match.offenseTeam;
   const before = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
   const paResult = state.paCompatibilityResult.result || "out";
-  const runnerFacts = applyHighSchoolSimulatedPlateAppearance(match, paResult, batterId, offenseTeam);
+  const runnerFacts = applyHighSchoolSimulatedPlateAppearance(match, paResult, batterId, offenseTeam, state.catchResult.caught ? "caughtBallOut" : null);
   const after = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
   const runsBattedIn = Math.max(0, after.scores[offenseTeam] - before.scores[offenseTeam]);
   const paEvent = recordHighSchoolRoutinePlateAppearance(match, batterId, paResult, before, after, runsBattedIn, runnerFacts);
@@ -5412,7 +5412,7 @@ function applyHighSchoolFlyBallCatchResolution(match) {
   const offenseTeam = match.offenseTeam;
   const before = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
   const paResult = state.paCompatibilityResult.result || "out";
-  const runnerFacts = applyHighSchoolSimulatedPlateAppearance(match, paResult, batterId, offenseTeam);
+  const runnerFacts = applyHighSchoolSimulatedPlateAppearance(match, paResult, batterId, offenseTeam, state.catchResult.caught ? "caughtBallOut" : null);
   const after = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
   const runsBattedIn = Math.max(0, after.scores[offenseTeam] - before.scores[offenseTeam]);
   const paEvent = recordHighSchoolRoutinePlateAppearance(match, batterId, paResult, before, after, runsBattedIn, runnerFacts);
@@ -6652,8 +6652,21 @@ const HIGH_SCHOOL_THIRD_OUT_TYPES = Object.freeze({
   force: "force",
   batterRunnerBeforeFirst: "batterRunnerBeforeFirst",
   nonForceTag: "nonForceTag",
+  caughtBallOut: "caughtBallOut",
+  strikeout: "strikeout",
   none: "none"
 });
+
+function classifyHighSchoolOrderedThirdOut(retirements = [], outsBefore = 0) {
+  for (let index = 0; index < retirements.length; index += 1) {
+    const fact = retirements[index];
+    if (!fact.runnerId || !fact.targetBase || fact.sequence !== index + 1) throw new Error("Invalid ordered retirement facts");
+    if (fact.outType === "force" && fact.forceStateAtRetirement?.forceTargets?.[fact.runnerId] !== fact.targetBase) throw new Error("Force absent at retirement");
+    if (fact.outType === "batterRunnerBeforeFirst" && (!fact.isBatterRunner || !fact.beforeFirst)) throw new Error("Missing batter-before-first evidence");
+    if (!Object.values(HIGH_SCHOOL_THIRD_OUT_TYPES).includes(fact.outType) || fact.outType === "none") throw new Error("Unsupported retirement type");
+  }
+  return retirements[Math.max(0, 3 - outsBefore - 1)] || null;
+}
 
 function resolveHighSchoolThirdOutIntegrity({
   outsBefore = 0,
@@ -6661,27 +6674,36 @@ function resolveHighSchoolThirdOutIntegrity({
   runnersBefore = [],
   proposedRunnersAfter = [],
   scoringAttempts = [],
-  thirdOutType = HIGH_SCHOOL_THIRD_OUT_TYPES.none
+  thirdOutType = HIGH_SCHOOL_THIRD_OUT_TYPES.none,
+  orderedRetirements = null
 } = {}) {
   const normalizedBefore = runnersBefore.slice(0, 3);
   const normalizedAfter = proposedRunnersAfter.slice(0, 3);
   while (normalizedBefore.length < 3) normalizedBefore.push(null);
   while (normalizedAfter.length < 3) normalizedAfter.push(null);
+  const thirdRetirement = orderedRetirements ? classifyHighSchoolOrderedThirdOut(orderedRetirements, outsBefore) : null;
+  if (orderedRetirements) outsCreated = orderedRetirements.length;
   const outsAfter = Math.min(3, Math.max(0, Number(outsBefore) || 0) + Math.max(0, Number(outsCreated) || 0));
   const halfInningEnded = outsAfter >= 3;
   const resolvedType = halfInningEnded
-    ? Object.values(HIGH_SCHOOL_THIRD_OUT_TYPES).includes(thirdOutType) && thirdOutType !== HIGH_SCHOOL_THIRD_OUT_TYPES.none
+    ? thirdRetirement ? thirdRetirement.outType : Object.values(HIGH_SCHOOL_THIRD_OUT_TYPES).includes(thirdOutType) && thirdOutType !== HIGH_SCHOOL_THIRD_OUT_TYPES.none
       ? thirdOutType : HIGH_SCHOOL_THIRD_OUT_TYPES.batterRunnerBeforeFirst
     : HIGH_SCHOOL_THIRD_OUT_TYPES.none;
   const attempts = (Array.isArray(scoringAttempts) ? scoringAttempts : []).filter(attempt => attempt?.runnerId);
-  const scoringBarredByOutType = halfInningEnded && [HIGH_SCHOOL_THIRD_OUT_TYPES.force, HIGH_SCHOOL_THIRD_OUT_TYPES.batterRunnerBeforeFirst].includes(resolvedType);
+  const scoringBarredByOutType = halfInningEnded && [HIGH_SCHOOL_THIRD_OUT_TYPES.force, HIGH_SCHOOL_THIRD_OUT_TYPES.batterRunnerBeforeFirst, HIGH_SCHOOL_THIRD_OUT_TYPES.caughtBallOut, HIGH_SCHOOL_THIRD_OUT_TYPES.strikeout].includes(resolvedType);
+  const timingFor = attempt => {
+    if (["beforeThirdOut", "afterThirdOut"].includes(attempt.timing)) return attempt.timing;
+    if (Number.isFinite(attempt.order) && Number.isFinite(thirdRetirement?.order)) return attempt.order < thirdRetirement.order ? "beforeThirdOut" : "afterThirdOut";
+    return "timingUnresolved";
+  };
+  const unresolvedScoringRunnerIds = attempts.filter(attempt => halfInningEnded && !scoringBarredByOutType && timingFor(attempt) === "timingUnresolved").map(attempt => attempt.runnerId);
   const legalScoringAttempts = attempts.filter(attempt => {
     if (scoringBarredByOutType) return false;
-    if (halfInningEnded && resolvedType === HIGH_SCHOOL_THIRD_OUT_TYPES.nonForceTag) return attempt.timing === "beforeThirdOut";
+    if (halfInningEnded) return timingFor(attempt) === "beforeThirdOut";
     return true;
   });
   const legalScoringRunnerIds = legalScoringAttempts.map(attempt => attempt.runnerId);
-  const invalidatedScoringRunnerIds = attempts.filter(attempt => !legalScoringRunnerIds.includes(attempt.runnerId)).map(attempt => attempt.runnerId);
+  const invalidatedScoringRunnerIds = attempts.filter(attempt => !legalScoringRunnerIds.includes(attempt.runnerId) && !unresolvedScoringRunnerIds.includes(attempt.runnerId)).map(attempt => attempt.runnerId);
   const basesAfter = halfInningEnded ? [null, null, null] : normalizedAfter;
   const strandedRunnerIds = halfInningEnded
     ? normalizedAfter.filter(runnerId => runnerId && !legalScoringRunnerIds.includes(runnerId))
@@ -6690,6 +6712,11 @@ function resolveHighSchoolThirdOutIntegrity({
     outsBefore: Math.max(0, Number(outsBefore) || 0),
     outsAfter,
     thirdOutType: resolvedType,
+    thirdRetirement: thirdRetirement ? Object.freeze({ ...thirdRetirement }) : null,
+    orderedRetirements: orderedRetirements ? Object.freeze(orderedRetirements.slice(0, Math.max(0, 3 - outsBefore))) : null,
+    settlementReady: unresolvedScoringRunnerIds.length === 0,
+    timingStatus: unresolvedScoringRunnerIds.length ? "TIMING_PLAY_UNRESOLVED" : "resolved",
+    unresolvedScoringRunnerIds: Object.freeze(unresolvedScoringRunnerIds),
     halfInningEnded,
     scoringAllowed: !scoringBarredByOutType,
     legalScoringRunnerIds: Object.freeze(legalScoringRunnerIds),
@@ -6701,7 +6728,7 @@ function resolveHighSchoolThirdOutIntegrity({
   });
 }
 
-function applyHighSchoolSimulatedPlateAppearance(match, result, batterId, offenseTeam) {
+function applyHighSchoolSimulatedPlateAppearance(match, result, batterId, offenseTeam, supportedOutType = null) {
   const runnersBefore = match.runners.slice(0, 3);
   const [first, second, third] = runnersBefore;
   let proposedRunnersAfter = runnersBefore.slice(0, 3);
@@ -6749,7 +6776,10 @@ function applyHighSchoolSimulatedPlateAppearance(match, result, batterId, offens
     runnersBefore,
     proposedRunnersAfter,
     scoringAttempts,
-    thirdOutType: outsCreated > 0 ? HIGH_SCHOOL_THIRD_OUT_TYPES.batterRunnerBeforeFirst : HIGH_SCHOOL_THIRD_OUT_TYPES.none
+    thirdOutType: outsCreated > 0 ? HIGH_SCHOOL_THIRD_OUT_TYPES.batterRunnerBeforeFirst : HIGH_SCHOOL_THIRD_OUT_TYPES.none,
+    orderedRetirements: outsCreated ? [{runnerId:batterId,targetBase:supportedOutType === "caughtBallOut" ? "caught" : "first",
+      outType:supportedOutType || (result === "strikeout" ? "strikeout" : "batterRunnerBeforeFirst"),sequence:1,
+      forceStateAtRetirement:{forceTargets:{}},isBatterRunner:true,beforeFirst:!supportedOutType && result !== "strikeout"}] : []
   });
   match.outs = thirdOutResolution.outsAfter;
   const scoringEvents = thirdOutResolution.legalScoringRunnerIds.map(runnerId =>
@@ -9651,7 +9681,8 @@ function resolveHighSchoolCatcherDecision(match, selectedRoute, randomSource = M
     runnersBefore,
     proposedRunnersAfter: runnersAfter,
     scoringAttempts,
-    thirdOutType: outsCreated ? HIGH_SCHOOL_THIRD_OUT_TYPES.nonForceTag : HIGH_SCHOOL_THIRD_OUT_TYPES.none
+    thirdOutType: outsCreated ? HIGH_SCHOOL_THIRD_OUT_TYPES.nonForceTag : HIGH_SCHOOL_THIRD_OUT_TYPES.none,
+    orderedRetirements: outsCreated ? [{runnerId:targetRunnerId,targetBase:finalRoute === "attemptHomeOut" ? "home" : ["first","second","third"][targetBase-1],outType:"nonForceTag",sequence:1,forceStateAtRetirement:{forceTargets:{}},isBatterRunner:false,beforeFirst:false}] : []
   });
   const finalRunners = thirdOutResolution.basesAfter.slice();
   runnersBefore.forEach((runnerId, index) => {
@@ -9689,6 +9720,7 @@ function resolveHighSchoolCatcherDecision(match, selectedRoute, randomSource = M
     : selectedDefinition.executionText;
   return Object.freeze({
     familyId: "catcher",
+    outEventIdentity: `${match.id}|catcher|${match.currentMomentId}|${match.simulationCursor}`,
     availableRoutes: Object.freeze(availableRoutes),
     selectedRoute,
     finalRoute,
@@ -10548,26 +10580,23 @@ function advanceHighSchoolYearOneAfterMomentOne(match, decisionOrChoice, tier) {
   return resolveHighSchoolOffensiveDecision(match, choice, tier);
 }
 
-function getHighSchoolDefensiveThirdOutType(resolution = {}) {
-  const retirement = resolution.runnerSettlement?.retirements?.at(-1);
-  if (retirement) return HIGH_SCHOOL_THIRD_OUT_TYPES[retirement.outType];
-  const route = resolution.activeRoute || resolution.route || resolution.routeId || "";
-  if (["tagHome", "preventRunHome"].includes(route)) return HIGH_SCHOOL_THIRD_OUT_TYPES.nonForceTag;
-  if (["doublePlay", "forceHome", "forceThird", "forceSecond", "initiate463", "coverSecondFor643", "homeForceOut", "attackLeadRunnerThird"].includes(route)) {
-    return HIGH_SCHOOL_THIRD_OUT_TYPES.force;
-  }
-  return HIGH_SCHOOL_THIRD_OUT_TYPES.batterRunnerBeforeFirst;
+function getHighSchoolDefensiveThirdOutType(resolution = {}, outsBefore = 0) {
+  const retirements = resolution.runnerSettlement?.retirements || resolution.orderedRetirements;
+  if (retirements) return classifyHighSchoolOrderedThirdOut(retirements, outsBefore)?.outType || HIGH_SCHOOL_THIRD_OUT_TYPES.none;
+  // Other existing producers can provide an explicit settled type; no route/base inference.
+  return resolution.thirdOutResolution?.thirdOutType || HIGH_SCHOOL_THIRD_OUT_TYPES.none;
 }
 
 function finalizeHighSchoolDefensiveThirdOut(match, situationBefore, resolution) {
-  const scoringAttempts = (resolution.scoringRunnerIds || []).map(runnerId => ({ runnerId, timing: "beforeThirdOut" }));
+  const scoringAttempts = resolution.scoringAttempts || (resolution.scoringRunnerIds || []).map(runnerId => ({ runnerId, timing: "timingUnresolved" }));
   return resolveHighSchoolThirdOutIntegrity({
     outsBefore: situationBefore.outs,
     outsCreated: resolution.outsCreated,
     runnersBefore: situationBefore.runners,
     proposedRunnersAfter: resolution.runnersAfter || match.runners,
     scoringAttempts,
-    thirdOutType: getHighSchoolDefensiveThirdOutType(resolution)
+    thirdOutType: getHighSchoolDefensiveThirdOutType(resolution, situationBefore.outs),
+    orderedRetirements: resolution.runnerSettlement?.retirements || resolution.orderedRetirements || null
   });
 }
 
@@ -10832,6 +10861,7 @@ function restoreHighSchoolMatchAfterDefensiveDecision(match, fallbackPhase = "mo
 
 function applyHighSchoolDefensiveSettlementFacts(match, settlement, source = "defensive-play-settlement") {
   if (settlement.settlementApplied) return settlement;
+  if (settlement.thirdOut?.settlementReady === false) throw new Error("TIMING_PLAY_UNRESOLVED: settlement cannot commit");
   DefensiveRunnerThrowSettlementFoundation.validateBefore(settlement, match);
   const third = settlement.thirdOut;
   if (settlement.outsAfter !== third.outsAfter || JSON.stringify(settlement.baseChanges) !== JSON.stringify(third.basesAfter)
@@ -11112,6 +11142,7 @@ function applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution) {
 
 function applyCatcherResolutionToHighSchoolMatch(match, decision, resolution) {
   if (!match || resolution?.familyId !== "catcher") return null;
+  if (resolution.outEventIdentity && match.lastDefensiveResolution?.outEventIdentity === resolution.outEventIdentity) return match.completedMoments.at(-1) || null;
   const situationBefore = {
     inning: match.inning,
     half: match.half,

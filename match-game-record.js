@@ -153,7 +153,7 @@
   function getActivePitcher(record, defenseSide, context = {}) {
     const roster = context.rosters?.[defenseSide];
     const actor = (roster?.lineup || []).find(item => ["P", "投手"].includes(String(item?.defensivePosition || item?.position || "")));
-    const playerId = actor?.playerId || actor?.id || roster?.pitchingStaff?.starter;
+    const playerId = actor?.playerId || actor?.id;
     return playerId ? ensurePlayerLine(record, playerId, {
       teamId: defenseSide === "home" ? record.homeTeamId : record.awayTeamId,
       role: "starter",
@@ -196,9 +196,6 @@
       if (["hitByPitch", "HBP"].includes(result)) stats.HBP += 1;
       if (result === "strikeout") stats.SO += 1;
       if (result === "homeRun") stats.HR += 1;
-      const beforeOuts = integer(event.before?.outs);
-      const afterOuts = integer(event.after?.outs);
-      stats.outsRecorded += Math.max(0, afterOuts - beforeOuts);
     }
   }
 
@@ -262,6 +259,24 @@
     }
   }
 
+  function attributePitcherOuts(record, event, context) {
+    // A PA owns its entire settled out delta, including DP / FC runner outs.
+    // Independent runner events own only their subsequent, non-PA delta.
+    const independent = ["runnerTagUpResolution", "runnerOut", "caughtStealing", "stealCaught"].includes(event.type)
+      || (event.type === "defensiveResolution" && event.familyId === "catcher");
+    if (event.type !== "plateAppearance" && !independent) return null;
+    const delta = Math.max(0, Math.min(3, integer(event.after?.outs)) - Math.min(3, integer(event.before?.outs)));
+    if (!delta) return null;
+    const defenseSide = sideForEvent(record, event, context) === "home" ? "away" : "home";
+    const pitcher = getActivePitcher(record, defenseSide, context);
+    if (!pitcher) {
+      check(!independent, "Independent out requires active defensive pitcher");
+      return null; // Historical isolated PA records may omit roster context.
+    }
+    pitcher.pitching.outsRecorded += delta;
+    return { pitcherId: pitcher.playerId, outs: delta };
+  }
+
   function recordEvent(record, event = {}, context = {}) {
     check(record?.version === VERSION, "Game record schema is required");
     if (FINAL_STATUSES.has(record.status)) return Object.freeze({ status: "locked", eventId: getEventId(record, event) });
@@ -286,7 +301,8 @@
       }
     }
     recordRunnerEvent(record, event, context);
-    record.eventRefs.push({ eventId, type: String(event.type || "event"), sequence: integer(event.sequence), inning: Math.max(1, integer(event.inning) || 1), half: String(event.half || "") });
+    const pitcherOuts = attributePitcherOuts(record, event, context);
+    record.eventRefs.push({ eventId, type: String(event.type || "event"), sequence: integer(event.sequence), inning: Math.max(1, integer(event.inning) || 1), half: String(event.half || ""), ...(pitcherOuts ? { pitcherOuts } : {}) });
     return Object.freeze({ status: "applied", eventId });
   }
 
@@ -311,7 +327,9 @@
       if (batting.H > batting.AB) issues.push(`player-h-ab:${line.playerId}`);
       if (batting.HR > batting.H || batting.doubles + batting.triples + batting.HR > batting.H) issues.push(`player-extra-base-hits:${line.playerId}`);
       if (line.pitching.ER > line.pitching.R) issues.push(`pitcher-er-r:${line.playerId}`);
-      if (line.pitching.BF * 3 < line.pitching.outsRecorded) issues.push(`pitcher-bf-outs:${line.playerId}`);
+      // A reliever can retire an inherited runner before facing a completed PA.
+      const attributedOuts = record.eventRefs.reduce((sum, ref) => sum + (ref.pitcherOuts?.pitcherId === line.playerId ? integer(ref.pitcherOuts.outs) : 0), 0);
+      if (line.pitching.outsRecorded < attributedOuts) issues.push(`pitcher-event-outs:${line.playerId}`);
     });
     if (battingHits.away !== integer(record.totals.away.hits)) issues.push("away-player-hits-mismatch");
     if (battingHits.home !== integer(record.totals.home.hits)) issues.push("home-player-hits-mismatch");
@@ -367,7 +385,7 @@
     };
     record.result = saved.result ? clone(saved.result) : null;
     record.playerLines = Object.fromEntries(Object.entries(saved.playerLines || {}).map(([id, line]) => [id, normalizePlayerLine(line, { playerId: id })]));
-    record.eventRefs = (saved.eventRefs || []).map(ref => ({ eventId: String(ref.eventId), type: String(ref.type || "event"), sequence: integer(ref.sequence), inning: Math.max(1, integer(ref.inning) || 1), half: String(ref.half || "") }));
+    record.eventRefs = (saved.eventRefs || []).map(ref => ({ eventId: String(ref.eventId), type: String(ref.type || "event"), sequence: integer(ref.sequence), inning: Math.max(1, integer(ref.inning) || 1), half: String(ref.half || ""), ...(ref.pitcherOuts ? { pitcherOuts: { pitcherId: String(ref.pitcherOuts.pitcherId), outs: integer(ref.pitcherOuts.outs) } } : {}) }));
     record.integrity = { checked: saved.integrity?.checked === true, issues: Array.isArray(saved.integrity?.issues) ? saved.integrity.issues.map(String) : [] };
     record.finalizedAtEventId = saved.finalizedAtEventId ? String(saved.finalizedAtEventId) : null;
     const issues = getIntegrityIssues(record);

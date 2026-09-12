@@ -58,10 +58,13 @@
     runnersAfter,outIds,scoringAttempts,runnerMovement,forceBefore,continuation,resolveThirdOut,scope="genericFirstLeg"}){
     if(typeof resolveThirdOut!=="function")fail("canonical third-out authority required");
     const thirdOutType=outIds.length?(playType==="batterRunner"?"batterRunnerBeforeFirst":playType==="force"?"force":"nonForceTag"):"none";
+    const orderedRetirements=outIds.map((runnerId,index)=>({runnerId,targetBase,outType:thirdOutType,sequence:index+1,
+      forceStateAtRetirement:{forceTargets:clone(forceBefore?.forceTargets||{})},
+      isBatterRunner:playType==="batterRunner",beforeFirst:playType==="batterRunner"}));
     const thirdOut=resolveThirdOut({outsBefore:before.outs,outsCreated:outIds.length,runnersBefore:before.runners,
-      proposedRunnersAfter:runnersAfter,scoringAttempts,thirdOutType});
+      proposedRunnersAfter:runnersAfter,scoringAttempts,thirdOutType,orderedRetirements});
     return freeze({version:VERSION,identity,timingIdentity:timing.identity,routeId,targetRunnerId,targetBase,playType,runnerResult,
-      outRecorded:outIds.includes(targetRunnerId),outRunnerIds:outIds,outsBefore:before.outs,outsAfter:thirdOut.outsAfter,
+      outRecorded:outIds.includes(targetRunnerId),outRunnerIds:outIds,orderedRetirements,outsBefore:before.outs,outsAfter:thirdOut.outsAfter,
       before:clone(before),baseChanges:clone(thirdOut.basesAfter),runChanges:clone(thirdOut.legalScoringRunnerIds),runnerMovement,
       forceStateBefore:forceBefore?clone(forceBefore):null,forceStateAfter:Force.deriveForceChainAfterRetirements(forceBefore,outIds),
       ballRemainsLive:!thirdOut.halfInningEnded,continuation:thirdOut.halfInningEnded?{status:"inningEnded"}:continuation,
