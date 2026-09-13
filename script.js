@@ -2463,7 +2463,7 @@ function getHighSchoolScoreboardRevealFeed(match) {
 
 function renderHighSchoolLineScore(model) {
   const headings = model.scoreboard.innings.map(inning => `<th scope="col">${inning}</th>`).join("");
-  const renderTeam = team => `<tr><th scope="row">${escapeHtml(team.name)}</th>${team.cells.map(run => `<td${run === "…" ? ' class="line-score-in-progress" aria-label="本半局進行中"' : ""}>${run === null ? "—" : run}</td>`).join("")}<td class="line-score-total">${team.visibleTotal}</td><td>${model.completed ? team.hits : "—"}</td><td>${model.completed ? team.errors : "—"}</td></tr>`;
+  const renderTeam = team => `<tr><th scope="row">${escapeHtml(team.name)}</th>${team.cells.map(run => `<td${run === "…" ? ' class="line-score-in-progress" aria-label="本半局尚未播放"' : ""}>${run === null ? "—" : run}</td>`).join("")}<td class="line-score-total">${team.visibleTotal}</td><td>${team.hits}</td><td>${team.errors}</td></tr>`;
   return `<section class="match-scoreboard" aria-labelledby="matchScoreboardTitle">
     <div class="match-section-heading"><span id="matchScoreboardTitle">${model.regulationInnings} 局記分板</span><small>${model.scoreboard.innings.length > model.regulationInnings ? "延長賽" : "秋季交流賽"}</small></div>
     <div class="line-score-wrap" tabindex="0">
@@ -4416,7 +4416,7 @@ function getHighSchoolPresentationSnapshot(match) {
   for (let index = getHighSchoolPresentedEventCursor(match) - 1; index >= 0; index -= 1) {
     if (log[index]?.presentationSnapshot) return log[index].presentationSnapshot;
   }
-  return log.find(event => event?.presentationImportance === "hidden" && event.presentationSnapshot)?.presentationSnapshot || null;
+  return null;
 }
 
 function isHighSchoolMatchPresentationEventVisible(event) {
@@ -6082,118 +6082,90 @@ function getHighSchoolMatchLiveFeed(match, startIndex = Math.max(0, getHighSchoo
   return selected.sort((a, b) => formatted.indexOf(a) - formatted.indexOf(b)).slice(-4);
 }
 
+function getHighSchoolVisibleScoreboardProjection(match) {
+  // presentedEventCursor is the existing exclusive boundary (next unseen event).
+  const cursor = getHighSchoolPresentedEventCursor(match);
+  const events = (match.simulationLog || []).slice(0, cursor);
+  const record = typeof MatchGameRecord !== "undefined"
+    ? MatchGameRecord.getScoreboardFromEvents({
+      id: match.id,
+      regulationInnings: match.regulationInnings,
+      homeTeamId: match.gameRecord?.homeTeamId,
+      awayTeamId: match.gameRecord?.awayTeamId
+    }, events) : null;
+  const states = new Map();
+  let completed = false;
+  let currentHalf = { inning: 1, half: "上" };
+  events.forEach(event => {
+    if (["上", "下"].includes(event.half)) {
+      currentHalf = { inning: Math.max(1, Number(event.inning) || 1), half: event.half };
+      const index = getHighSchoolHalfInningIndex(currentHalf.inning, currentHalf.half);
+      // A visible transition also closes previously visible halves.
+      for (const [prior] of states) if (prior < index) states.set(prior, "completed");
+      if (!states.has(index)) states.set(index, "live");
+      if (event.type === "halfInningEnd") states.set(index, "completed");
+    }
+    if (event.type === "gameEnd") {
+      completed = true;
+      for (const [index] of states) states.set(index, "completed");
+    }
+  });
+  const innings = Object.freeze(Array.from({ length: Math.max(1, Number(match.regulationInnings) || 7, record?.inningsPlayed || currentHalf.inning) }, (_, index) => index + 1));
+  const team = (side, name) => {
+    const runs = innings.map(inning => Number(record?.inningLines.find(line => line.inning === inning)?.[side === "away" ? "awayRuns" : "homeRuns"]) || 0);
+    const cellStates = innings.map(inning => states.get(getHighSchoolHalfInningIndex(inning, side === "away" ? "上" : "下")) || "notStarted");
+    const total = record?.totals[side] || { runs: 0, hits: 0, errors: 0 };
+    return Object.freeze({ name, runs: Object.freeze(runs), cellStates: Object.freeze(cellStates),
+      cells: Object.freeze(runs.map((run, index) => cellStates[index] === "notStarted" ? "…" : run)),
+      visibleTotal: total.runs, total: total.runs, hits: total.hits, errors: total.errors });
+  };
+  return Object.freeze({
+    authority: "presentedEventCursor", visibleEventCount: cursor,
+    visibleThroughEventId: record?.visibleThroughEventId || null,
+    innings, currentHalf: Object.freeze(currentHalf), completed,
+    away: team("away", match.opponent), home: team("home", "高中球隊")
+  });
+}
+
 function getHighSchoolMatchPresentation(match = prepareCurrentHighSchoolYearOneMatch()) {
   const regulationInnings = Math.max(1, Number(match.regulationInnings) || 7);
   const cursor = getHighSchoolPresentedEventCursor(match);
   const snapshot = getHighSchoolPresentationSnapshot(match);
-  const timelineStarted = Array.isArray(match.simulationLog) && match.simulationLog.length > 0;
-  const presentationState = snapshot || (timelineStarted ? {
-    inning: 1,
-    half: "上",
-    outs: 0,
-    runners: [null, null, null],
-    scores: { home: 0, away: 0 },
-    assignment: "比賽尚未播放。",
-    position: match.position || "",
-    currentBatter: match.currentBatter || "",
-    battingOrderSlot: Math.max(0, Number(match.battingOrderIndex?.away) || 0)
-  } : {
-    inning: match.inning,
-    half: match.half,
-    outs: match.outs,
-    runners: match.runners,
-    scores: match.scores,
-    assignment: match.currentAssignment,
-    position: match.currentFieldingPosition || match.position,
-    currentBatter: match.currentBatter || "",
-    battingOrderSlot: Math.max(0, Number(match.battingOrderIndex?.[match.offenseTeam]) || 0)
-  });
-  const authoritativeHalfIndex = getHighSchoolHalfInningIndex(presentationState.inning, presentationState.half);
-  const revealHalfIndex = match.completed
-    ? authoritativeHalfIndex + 1
-    : Math.min(authoritativeHalfIndex, getHighSchoolScoreboardRevealHalfIndex(match));
-  const visibleHalf = getHighSchoolHalfInningFromIndex(revealHalfIndex);
-  const canonicalScoreboard = typeof MatchGameRecord !== "undefined" && match.gameRecord
-    ? MatchGameRecord.getScoreboard(match.gameRecord) : null;
-  const canonicalInningLines = canonicalScoreboard?.inningLines || [];
-  const innings = match.completed
-    ? Math.max(regulationInnings, match.inning || 1, canonicalScoreboard?.inningsPlayed || 0, canonicalInningLines.length)
-    : Math.max(regulationInnings, visibleHalf.inning);
-  const inningNumbers = Array.from({ length: innings }, (_, index) => index + 1);
-  const normalizeRuns = team => inningNumbers.map((_, index) => {
-    const canonicalLine = canonicalInningLines.find(line => line.inning === index + 1);
-    if (canonicalLine) return Number(canonicalLine[team === "home" ? "homeRuns" : "awayRuns"]) || 0;
-    return Number.isFinite(Number(match.lineScore?.[team]?.[index])) && match.lineScore[team][index] !== null ? Number(match.lineScore[team][index]) : null;
-  });
-  const createTeamPresentation = (team, name) => {
-    const runs = normalizeRuns(team);
-    const halfOffset = team === "home" ? 1 : 0;
-    const cells = runs.map((run, index) => {
-      if (match.completed) return run;
-      const halfIndex = index * 2 + halfOffset;
-      if (halfIndex < revealHalfIndex) return run;
-      return halfIndex === revealHalfIndex ? "…" : null;
-    });
-    const historicalTotal = runs.reduce((total, run, index) => {
-      const halfIndex = index * 2 + halfOffset;
-      return total + (halfIndex < revealHalfIndex && run !== null ? run : 0);
-    }, 0);
-    const visibleTotal = match.completed
-      ? Number(match.scores?.[team]) || 0
-      : revealHalfIndex < authoritativeHalfIndex
-        ? historicalTotal
-        : Number(presentationState.scores?.[team]) || 0;
-    const canonicalTotal = Number(canonicalScoreboard?.totals?.[team]?.runs);
-    return Object.freeze({
-      name,
-      runs: Object.freeze(runs),
-      cells: Object.freeze(cells),
-      total: Number.isFinite(canonicalTotal) ? canonicalTotal : Number(match.scores?.[team]) || 0,
-      hits: Number(canonicalScoreboard?.totals?.[team]?.hits) || 0,
-      errors: Number(canonicalScoreboard?.totals?.[team]?.errors) || 0,
-      visibleTotal
-    });
+  const scoreboard = getHighSchoolVisibleScoreboardProjection(match);
+  const presentationState = snapshot || {
+    inning: scoreboard.currentHalf.inning, half: scoreboard.currentHalf.half,
+    outs: 0, runners: [null, null, null], assignment: "比賽尚未播放。",
+    position: match.playerFieldingAssignment || match.position || "", currentBatter: "", battingOrderSlot: 0
   };
-  const awayPresentation = createTeamPresentation("away", match.opponent);
-  const homePresentation = createTeamPresentation("home", "高中球隊");
-  const revealingHistory = !match.completed && revealHalfIndex < authoritativeHalfIndex;
-  const visibleScore = revealingHistory
-    ? { home: homePresentation.visibleTotal, away: awayPresentation.visibleTotal }
-    : { ...presentationState.scores };
-  const visibleRunners = revealingHistory ? [null, null, null] : presentationState.runners.slice(0, 3);
-  const visibleOuts = revealingHistory ? 0 : presentationState.outs;
+  const visibleScore = { home: scoreboard.home.visibleTotal, away: scoreboard.away.visibleTotal };
+  const visibleRunners = presentationState.runners.slice(0, 3);
+  const visibleOuts = presentationState.outs;
   const currentBatter = getHighSchoolCurrentBatterPresentation(match, presentationState);
   const coachDirection = getHighSchoolCurrentCoachTacticalDirection(match);
   return Object.freeze({
     matchId: match.id,
     opponent: match.opponent,
     regulationInnings,
-    scoreboard: Object.freeze({
-      innings: inningNumbers,
-      revealHalfIndex,
-      currentHalf: visibleHalf,
-      away: awayPresentation,
-      home: homePresentation
-    }),
+    scoreboard,
     currentSituation: Object.freeze({
-      inning: revealingHistory ? visibleHalf.inning : presentationState.inning,
-      half: revealingHistory ? visibleHalf.half : presentationState.half,
+      inning: presentationState.inning,
+      half: presentationState.half,
       outs: visibleOuts,
       score: Object.freeze(visibleScore),
       runners: Object.freeze(visibleRunners),
       position: presentationState.position || match.position,
-      assignment: revealingHistory ? `${visibleHalf.inning}局${visibleHalf.half}正在進行。` : presentationState.assignment,
+      assignment: presentationState.assignment,
       currentBatter
     }),
     bases: Object.freeze(visibleRunners.map(Boolean)),
     outs: Object.freeze([0, 1, 2].map(index => index < Math.min(3, Number(visibleOuts) || 0))),
-    feed: Object.freeze((revealingHistory ? getHighSchoolScoreboardRevealFeed(match) : getHighSchoolMatchLiveFeed(match, Math.max(0, cursor - 6), cursor)).map(item => Object.freeze({ ...item }))),
+    feed: Object.freeze(getHighSchoolMatchLiveFeed(match, Math.max(0, cursor - 6), cursor).map(item => Object.freeze({ ...item }))),
     coachDirection: Object.freeze({ ...coachDirection }),
     coachLine: formatHighSchoolCoachTacticalDirection(coachDirection, match),
     defensiveObservation: getHighSchoolDefensiveObservation(match),
     playerRole: player.highSchoolTeamRole || match.role,
     entryHistory: match.matchEntryHistory,
-    completed: Boolean(match.completed)
+    completed: scoreboard.completed
   });
 }
 

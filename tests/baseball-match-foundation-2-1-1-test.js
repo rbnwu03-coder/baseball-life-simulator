@@ -13,7 +13,7 @@ const files = [
   "baseball-offense-prototype.js", "offensive-plate-approach.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
   "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
   "career-development-runtime-resolver.js", "career-development-progression.js", "career-age22-outcome-resolver.js",
-  "career-save-admission.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "script.js"
+  "career-save-admission.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "match-game-record.js", "script.js"
 ];
 
 function makeContext() {
@@ -67,6 +67,9 @@ function makeContext() {
       Object.assign(match,{inning:5,half:team==="away"?"上":"下",offenseTeam:team,defenseTeam:team==="away"?"home":"away",outs,runners:runners.slice(),scores:{...scores},simulationPhase:"moment_1_resolved"});
       match.scoreboardRevealHalfIndex=getHighSchoolHalfInningIndex(match.inning,match.half);
       ensureHighSchoolMatchLineScoreInning(match,team,5);
+      // Seed the fixture's pre-existing 1:1 via canonical run facts.
+      for(const side of ["away","home"]) for(let i=0;i<scores[side];i++)
+        recordHighSchoolMatchSimulationEvent(match,{type:"run",presentationImportance:"hidden",inning:1,half:side==="away"?"上":"下",team:side,runnerId:side+"-fixture-run-"+i});
       const start=match.simulationLog.length;
       const batter=getHighSchoolMatchLineupBatter(match,team);
       const before={outs:match.outs,scores:{...match.scores},runners:match.runners.slice()};

@@ -13,7 +13,7 @@ const files = [
   "baseball-offense-prototype.js", "offensive-plate-approach.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
   "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
   "career-development-runtime-resolver.js", "career-development-progression.js", "career-age22-outcome-resolver.js",
-  "career-save-admission.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "script.js"
+  "career-save-admission.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "match-game-record.js", "script.js"
 ];
 
 function makeContext() {
@@ -57,6 +57,10 @@ function makeContext() {
       match.scoreboardRevealHalfIndex=getHighSchoolHalfInningIndex(match.inning,match.half);
       match.simulationLog=[];
       match.presentedEventCursor=0;
+      match.gameRecord=MatchGameRecord.createGameRecord({id:match.id,rosters:match.rosters});
+      // The queue starts at 1:1; provide its actual run ledger before fixtureStart.
+      for(const side of ["away","home"])
+        recordHighSchoolMatchSimulationEvent(match,{type:"run",presentationImportance:"hidden",inning:1,half:side==="away"?"上":"下",team:side,runnerId:side+"-fixture-run"});
       recordHighSchoolMatchSimulationEvent(match,{type:"fixtureStart",presentationImportance:"hidden",inning:5,half:"上",outs:0,runners:match.runners,scores:match.scores});
       match.presentedEventCursor=match.simulationLog.length;
       return match;

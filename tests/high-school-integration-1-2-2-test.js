@@ -13,7 +13,7 @@ const files = [
   "baseball-offense-prototype.js", "offensive-plate-approach.js", "baseball-gameplay-integration.js", "baseball-training-resolver.js",
   "career-spine-contract.js", "career-transition-runtime-resolver.js", "career-transition-progression.js",
   "career-development-runtime-resolver.js", "career-development-progression.js", "career-age22-outcome-resolver.js",
-  "career-save-admission.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "script.js"
+  "career-save-admission.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "match-game-record.js", "script.js"
 ];
 
 function makeContext() {
@@ -131,7 +131,7 @@ verify("9. 額外局只擴充 presentation columns，不改 regulationInnings", 
 })()`));
 
 verify("10. Current Situation 反映 presented snapshot 的 inning／half／score／outs／runners", evaluate(`(() => {
-  const match=__setup122();match.inning=6;match.half="上";match.scoreboardRevealHalfIndex=getHighSchoolHalfInningIndex(match.inning,match.half);match.outs=2;match.runners=["r1",null,"r3"];match.scores={home:2,away:3};recordHighSchoolMatchSimulationEvent(match,{type:"fixtureState",inning:match.inning,half:match.half,outs:match.outs,runners:match.runners,scores:match.scores});match.presentedEventCursor=match.simulationLog.length;const now=getHighSchoolMatchPresentation(match).currentSituation;return now.inning===6&&now.half==="上"&&now.outs===2&&now.score.home===2&&now.score.away===3&&now.runners.join()===match.runners.join();
+  const match=__setup122();match.inning=6;match.half="上";match.scoreboardRevealHalfIndex=getHighSchoolHalfInningIndex(match.inning,match.half);match.outs=2;match.runners=["r1",null,"r3"];match.scores={home:2,away:3};/* Seed official run history for the presented snapshot. */for(const side of ["away","home"])for(let i=0;i<match.scores[side];i++)recordHighSchoolMatchSimulationEvent(match,{type:"run",presentationImportance:"hidden",inning:1,half:side==="away"?"上":"下",team:side,runnerId:side+"-fixture-run-"+i});recordHighSchoolMatchSimulationEvent(match,{type:"fixtureState",inning:match.inning,half:match.half,outs:match.outs,runners:match.runners,scores:match.scores});match.presentedEventCursor=match.simulationLog.length;const now=getHighSchoolMatchPresentation(match).currentSituation;return now.inning===6&&now.half==="上"&&now.outs===2&&now.score.home===2&&now.score.away===3&&now.runners.join()===match.runners.join();
 })()`));
 
 verify("11. Base 與 Outs UI 由 presented occupancy／outs 產生", evaluate(`(() => {

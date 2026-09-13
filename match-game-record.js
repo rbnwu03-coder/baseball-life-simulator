@@ -406,6 +406,35 @@
     });
   }
 
+  // A prefix may end before complementary fielding / pitching facts arrive.
+  // Replay only the official scoreboard writers, without validating a partial
+  // player ledger as though it were a complete GameRecord. Nothing is retained.
+  function getScoreboardFromEvents(config = {}, events = []) {
+    const record = createGameRecord({
+      gameId: config.gameId || config.id,
+      homeTeamId: config.homeTeamId,
+      awayTeamId: config.awayTeamId,
+      inningsScheduled: config.inningsScheduled || config.regulationInnings
+    });
+    const seen = new Set();
+    let visibleThroughEventId = null;
+    events.forEach(event => {
+      const eventId = getEventId(record, event);
+      visibleThroughEventId = eventId;
+      if (seen.has(eventId)) return;
+      seen.add(eventId);
+      ensureInningLine(record, event.inning || 1);
+      if (event.type === "plateAppearance") recordPlateAppearance(record, event, {}, eventId);
+      if (event.type === "run") recordRun(record, event, {});
+    });
+    return Object.freeze({
+      inningsPlayed: record.inningsPlayed,
+      inningLines: Object.freeze(record.inningLines.map(line => Object.freeze({ ...line }))),
+      totals: Object.freeze(Object.fromEntries(Object.entries(record.totals).map(([side, total]) => [side, Object.freeze({ ...total })]))),
+      visibleThroughEventId
+    });
+  }
+
   function getPlayerGameLine(record, playerId) {
     const line = record?.playerLines?.[String(playerId || "")];
     return line ? Object.freeze(clone(line)) : null;
@@ -441,6 +470,7 @@
     recordEvent,
     finalizeGameRecord,
     getScoreboard,
+    getScoreboardFromEvents,
     getPlayerGameLine,
     aggregatePlayerGameLines,
     getIntegrityIssues,
