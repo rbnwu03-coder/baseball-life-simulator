@@ -445,14 +445,28 @@ function normalizeSave(saved) {
       }) : null
     }
     : { home: null, away: null };
+  if (saved.highSchoolMatch?.id && typeof MatchContextFoundation !== "undefined") {
+    const old = saved.highSchoolMatch;
+    const legacyHome = old.homeTeamId || old.gameRecord?.homeTeamId || fresh.highSchoolMatch.rosters.home?.teamRoster?.teamId || "home";
+    const legacyAway = old.awayTeamId || old.gameRecord?.awayTeamId || fresh.highSchoolMatch.rosters.away?.teamRoster?.teamId || "away";
+    fresh.highSchoolMatch.matchContext = MatchContextFoundation.normalizeMatchContext(old.matchContext || {
+      matchId: old.id, playerTeamId: old.playerTeamId || legacyHome,
+      opponentTeamId: old.opponentTeamId || (old.playerTeamId === legacyAway ? legacyHome : legacyAway),
+      homeTeamId: legacyHome, awayTeamId: legacyAway,
+      assignmentSource: old.homeTeamId && old.awayTeamId ? "explicitAssignment" : "legacyFallback",
+      assignmentReason: old.homeTeamId && old.awayTeamId ? "restoredExplicitTeamIds" : "historicalPlayerHome",
+      provenance: {source:old.homeTeamId && old.awayTeamId ? "savedTeamAssignment" : "legacyFallback", reasonCode:"restoredWithoutMatchContext"}
+    });
+    if (fresh.highSchoolMatch.matchContext.matchId !== old.id) throw new Error("Saved match context identity mismatch");
+  }
   fresh.highSchoolMatch.gameRecord = saved.highSchoolMatch?.gameRecord
     ? (typeof MatchGameRecord !== "undefined"
       ? MatchGameRecord.normalizeGameRecord(saved.highSchoolMatch.gameRecord, {
         gameId: fresh.highSchoolMatch.id,
         competitionEditionId: fresh.highSchoolMatch.competitionEditionId,
         competitionEntryId: fresh.highSchoolMatch.competitionEntryId,
-        homeTeamId: fresh.highSchoolMatch.competitionTeamId || fresh.highSchoolMatch.rosters.home?.teamRoster?.teamId || "home",
-        awayTeamId: fresh.highSchoolMatch.rosters.away?.teamRoster?.teamId || "away",
+        homeTeamId: fresh.highSchoolMatch.matchContext?.homeTeamId || fresh.highSchoolMatch.competitionTeamId || fresh.highSchoolMatch.rosters.home?.teamRoster?.teamId || "home",
+        awayTeamId: fresh.highSchoolMatch.matchContext?.awayTeamId || fresh.highSchoolMatch.rosters.away?.teamRoster?.teamId || "away",
         inningsScheduled: fresh.highSchoolMatch.regulationInnings,
         rosters: fresh.highSchoolMatch.rosters
       })

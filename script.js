@@ -2991,7 +2991,7 @@ function getHighSchoolMatchOpportunityRejectionReason({ decisionWindowAvailable,
 
 function beginHighSchoolMatchDefensiveOpportunity(match, batter, target) {
   const trace = match?.opportunityDebugTrace;
-  if (!trace || !isHighSchoolMatchPlayerActive(match) || match.offenseTeam !== "away") return null;
+  if (!trace || !isHighSchoolMatchPlayerActive(match) || match.offenseTeam !== getHighSchoolOpponentTeamSide(match)) return null;
   const oneShot = getHighSchoolMatchOpportunityOneShotState(match);
   const opportunity = {
     opportunityId: `${match.id}:defense:${trace.opportunities.filter(item => item.domain === "defense").length + 1}`,
@@ -3353,7 +3353,7 @@ function getHighSchoolMatchPlayerParticipationState(match = player.highSchoolMat
     playerEnteredGame: entered,
     playerEntryInning: entryEvent?.inning || (match?.role === "starter" ? 1 : 0),
     playerEntryHalf: entryEvent?.half || (match?.role === "starter" ? "上" : ""),
-    playerCurrentlyInLineup: Boolean(entered && match?.rosters?.home?.lineup?.some(entity => entity.id === "player")),
+    playerCurrentlyInLineup: Boolean(entered && match?.rosters?.[getHighSchoolPlayerTeamSide(match)]?.lineup?.some(entity => entity.id === "player")),
     playerHadPlateAppearance: playerPlateAppearances.length > 0,
     playerHadPlateAppearanceThisHalf: hadPlateAppearanceThisHalf,
     playerHasDefensiveAppearance: defensiveEvents.length > 0,
@@ -4355,8 +4355,8 @@ function recordHighSchoolMatchSimulationEvent(match, event) {
         gameId: match.id,
         competitionEditionId: match.competitionEditionId,
         competitionEntryId: match.competitionEntryId,
-        homeTeamId: match.competitionTeamId || match.rosters?.home?.teamRoster?.teamId || "home",
-        awayTeamId: match.rosters?.away?.teamRoster?.teamId || "away",
+        homeTeamId: match.matchContext?.homeTeamId || match.competitionTeamId || match.rosters?.home?.teamRoster?.teamId || "home",
+        awayTeamId: match.matchContext?.awayTeamId || match.rosters?.away?.teamRoster?.teamId || "away",
         inningsScheduled: match.regulationInnings,
         rosters: match.rosters
       });
@@ -4364,7 +4364,7 @@ function recordHighSchoolMatchSimulationEvent(match, event) {
     MatchGameRecord.recordEvent(match.gameRecord, record, {
       rosters: match.rosters,
       playerId: "player",
-      playerTeam: "home",
+      playerTeam: getHighSchoolPlayerTeamSide(match),
       playerRole: match.playerLineupStatus || match.role,
       playerPosition: match.playerFieldingAssignment || match.currentFieldingPosition || match.position
     });
@@ -5794,7 +5794,7 @@ function getHighSchoolDefensiveObservation(match) {
 
 function deriveHighSchoolCoachTacticalDirection(match) {
   const domain = match.currentDomain === "defense" ? "defense" : "offense";
-  const scoreDifference = (Number(match.scores?.home) || 0) - (Number(match.scores?.away) || 0);
+  const scoreDifference = getHighSchoolPlayerScoreDifference(match);
   const force = getHighSchoolDefensiveForceState(match);
   const offensiveContext = analyzeHighSchoolOffensiveDecisionContext(match);
   const previousTier = match.completedMoments?.at(-1)?.tier || "";
@@ -5939,10 +5939,10 @@ function getHighSchoolCommentaryRunnerChanges(event) {
   }).filter(Boolean);
 }
 
-function formatHighSchoolScoringContext(event) {
+function formatHighSchoolScoringContext(event, match) {
   const runs = Math.max(0, Number(event.runsBattedIn) || (event.scoringRunnerIds || []).length);
   if (!runs || !event.after?.scores) return "";
-  const team = event.offenseTeam === "home" ? "高中球隊" : "對手";
+  const team = event.offenseTeam === getHighSchoolPlayerTeamSide(match) ? "高中球隊" : "對手";
   return `${team}攻下${runs}分，目前比分 ${event.after.scores.away}：${event.after.scores.home}`;
 }
 
@@ -5953,7 +5953,7 @@ function formatHighSchoolPlateAppearanceCommentary(event, match) {
     .filter(change => !thirdOut && change.from !== "batter" && change.to !== change.from && change.to !== "halfInningEnd")
     .map(change => formatDefensiveRunnerChange(change, match))
     .filter(Boolean);
-  const scoring = formatHighSchoolScoringContext(event);
+  const scoring = formatHighSchoolScoringContext(event, match);
   const clauses = [`${batterName}${getHighSchoolPlateAppearanceResultText(event)}`, ...movements];
   if (scoring) clauses.push(scoring);
   if (thirdOut) clauses.push("形成第三個出局，半局結束");
@@ -6014,7 +6014,7 @@ function formatMatchSimulationEvent(event, match) {
     const playerRun = event.runnerId === "player";
     return { type: event.type, priority: playerRun ? 5 : 4, playerRelated: playerRun, text: playerRun
       ? `${event.outs ?? match.outs} 出局｜你回本壘得分，高中球隊攻下一分。`
-      : `${event.outs ?? match.outs} 出局｜${getHighSchoolMatchSimulationEntityName(match, event.runnerId)}回本壘得分，${event.team === "home" ? "高中球隊" : "對手"}攻下一分。` };
+      : `${event.outs ?? match.outs} 出局｜${getHighSchoolMatchSimulationEntityName(match, event.runnerId)}回本壘得分，${event.team === getHighSchoolPlayerTeamSide(match) ? "高中球隊" : "對手"}攻下一分。` };
   }
   if (event.type === "plateAppearance") {
     const beforePlayer = event.before?.runners?.indexOf("player") ?? -1;
@@ -6028,7 +6028,7 @@ function formatMatchSimulationEvent(event, match) {
   }
   if (event.type === "halfInningEnd") {
     const stranded = event.playerStranded ? " 你留在壘上，這個半局未能回到本壘。" : "";
-    return { type: event.type, priority: event.playerStranded ? 5 : 4, playerRelated: Boolean(event.playerStranded), text: `3 出局｜${halfLabel}結束，${event.offenseTeam === "home" ? "我方" : "對手"}${event.runsScored ? `攻下 ${event.runsScored} 分` : "沒有得分"}。${stranded}` };
+    return { type: event.type, priority: event.playerStranded ? 5 : 4, playerRelated: Boolean(event.playerStranded), text: `3 出局｜${halfLabel}結束，${event.offenseTeam === getHighSchoolPlayerTeamSide(match) ? "我方" : "對手"}${event.runsScored ? `攻下 ${event.runsScored} 分` : "沒有得分"}。${stranded}` };
   }
   if (event.type === "sideChange") {
     return { type: event.type, priority: 4, text: `0 出局｜攻守交換，進入${halfLabel}；目前比分 ${event.scores.away}：${event.scores.home}。` };
@@ -6057,7 +6057,7 @@ function formatMatchSimulationEvent(event, match) {
     const result = event.outsCreated >= 2 ? "完成雙殺" : event.outsCreated === 1 ? "取得一個出局" : event.error ? "守備失誤讓跑者推進" : "沒有取得出局";
     return { type: event.type, priority: 5, playerRelated: true, text: `${event.outs ?? match.outs} 出局｜這次守備${result}；目前${formatHighSchoolMatchRunners(event.runners)}。` };
   }
-  if (event.type === "walkOff") return { type: event.type, priority: 5, text: `${halfLabel}，我方超前，這場比賽就此結束。` };
+  if (event.type === "walkOff") return { type: event.type, priority: 5, text: `${halfLabel}，${getHighSchoolPlayerTeamSide(match) === "home" ? "我方" : "對手"}超前，這場比賽就此結束。` };
   if (event.type === "gameEnd") return { type: event.type, priority: 5, text: `比賽結束，終場 ${event.scores.away}：${event.scores.home}。` };
   return null;
 }
@@ -6123,7 +6123,7 @@ function getHighSchoolVisibleScoreboardProjection(match) {
     authority: "presentedEventCursor", visibleEventCount: cursor,
     visibleThroughEventId: record?.visibleThroughEventId || null,
     innings, currentHalf: Object.freeze(currentHalf), completed,
-    away: team("away", match.opponent), home: team("home", "高中球隊")
+    away: team("away", getHighSchoolPlayerTeamSide(match) === "away" ? "高中球隊" : match.opponent), home: team("home", getHighSchoolPlayerTeamSide(match) === "home" ? "高中球隊" : match.opponent)
   });
 }
 
@@ -6148,6 +6148,7 @@ function getHighSchoolMatchPresentation(match = prepareCurrentHighSchoolYearOneM
     regulationInnings,
     scoreboard,
     currentSituation: Object.freeze({
+      ...(match.matchContext && ["上", "下"].includes(presentationState.half) ? MatchContextFoundation.deriveBattingSide(match.matchContext, presentationState.half) : {}),
       inning: presentationState.inning,
       half: presentationState.half,
       outs: visibleOuts,
@@ -6292,20 +6293,20 @@ function createHighSchoolMatchSimulationRoster(role, playerPosition, simulationS
 }
 
 function insertPlayerIntoHighSchoolMatchLineup(match) {
-  const lineup = match.rosters?.home?.lineup;
-  const bench = match.rosters?.home?.bench;
-  if (typeof TeamRosterFoundation !== "undefined") TeamRosterFoundation.assertActiveDefense(match.rosters?.home);
+  const lineup = match.rosters?.[getHighSchoolPlayerTeamSide(match)]?.lineup;
+  const bench = match.rosters?.[getHighSchoolPlayerTeamSide(match)]?.bench;
+  if (typeof TeamRosterFoundation !== "undefined") TeamRosterFoundation.assertActiveDefense(match.rosters?.[getHighSchoolPlayerTeamSide(match)]);
   if (!Array.isArray(lineup)) return false;
   const existingSlot = lineup.findIndex(item => item.id === "player");
   if (existingSlot >= 0) {
     match.playerLineupSlot = existingSlot;
     return false;
   }
-  const slot = Math.max(0, Math.min(8, Number(match.battingOrderIndex?.home) || 0));
+  const slot = Math.max(0, Math.min(8, Number(match.battingOrderIndex?.[getHighSchoolPlayerTeamSide(match)]) || 0));
   const replaced = lineup[slot];
   const assignedPosition = match.gameExposureState?.opportunitySnapshot?.assignedPosition
     || match.developmentPositionOverride || match.playerFieldingAssignment || match.position;
-  const incumbent = getCurrentHighSchoolMatchDefender(match, "home", assignedPosition);
+  const incumbent = getCurrentHighSchoolMatchDefender(match, getHighSchoolPlayerTeamSide(match), assignedPosition);
   if (!incumbent) throw new Error("Active defense integrity failed: missing substitution incumbent");
   if (incumbent !== replaced) return false;
   const benchPlayer = (bench || []).find(item => item.id === "player");
@@ -6313,10 +6314,10 @@ function insertPlayerIntoHighSchoolMatchLineup(match) {
   const incoming = { ...benchPlayer, id: "player", name: player.name || "你",
     position: replaced.position, defensivePosition: replaced.defensivePosition,
     bats: player.bats, throws: player.throws, age: player.age, source: "canonical-player" };
-  const nextRoster = { ...match.rosters.home, lineup: lineup.map((actor, index) => index === slot ? incoming : actor),
+  const nextRoster = { ...match.rosters[getHighSchoolPlayerTeamSide(match)], lineup: lineup.map((actor, index) => index === slot ? incoming : actor),
     bench: [...(bench || []).filter(item => item.id !== "player"), replaced] };
   if (typeof TeamRosterFoundation !== "undefined") TeamRosterFoundation.assertActiveDefense(nextRoster);
-  match.rosters.home = nextRoster;
+  match.rosters[getHighSchoolPlayerTeamSide(match)] = nextRoster;
   match.playerLineupSlot = slot;
   return { slot, replaced };
 }
@@ -6325,15 +6326,15 @@ function shouldEnterHighSchoolMatchPlayer(match) {
   if (match && !match.playerEntryCompleted && match.playerLineupStatus === "bench") {
     const assignedPosition = match.gameExposureState?.opportunitySnapshot?.assignedPosition
       || match.developmentPositionOverride || match.playerFieldingAssignment || match.position;
-    const incumbent = getCurrentHighSchoolMatchDefender(match, "home", assignedPosition);
+    const incumbent = getCurrentHighSchoolMatchDefender(match, getHighSchoolPlayerTeamSide(match), assignedPosition);
     if (!incumbent) throw new Error("Active defense integrity failed: missing substitution incumbent");
-    if (match.rosters.home.lineup[Number(match.battingOrderIndex?.home) || 0] !== incumbent) return false;
+    if (match.rosters[getHighSchoolPlayerTeamSide(match)].lineup[Number(match.battingOrderIndex?.[getHighSchoolPlayerTeamSide(match)]) || 0] !== incumbent) return false;
   }
   const exposureState = match?.gameExposureState;
   if (exposureState) {
     if (exposureState.pitcherExposureDeferred || exposureState.plannedUsage?.appearanceType === "noAppearance") return false;
     const opportunity = exposureState.opportunitySnapshot || {};
-    const margin = Math.abs((Number(match.scores?.home) || 0) - (Number(match.scores?.away) || 0));
+    const margin = Math.abs(getHighSchoolPlayerScoreDifference(match));
     const coachStyle = opportunity.coachUsageStyle || "balanced";
     const actualRole = opportunity.actualRole || match.role || "bench";
     const contextAllowsEntry = coachStyle === "developmental"
@@ -6342,7 +6343,7 @@ function shouldEnterHighSchoolMatchPlayer(match) {
     if (!contextAllowsEntry || match.inning < 5) return false;
   }
   return Boolean(match && !match.playerEntryCompleted && match.playerLineupStatus === "bench"
-    && match.offenseTeam === "home" && match.half === "下"
+    && match.offenseTeam === getHighSchoolPlayerTeamSide(match)
     && match.inning >= Math.max(1, Number(match.playerEntryWindowInning) || 1)
     && match.outs < 3);
 }
@@ -7013,9 +7014,7 @@ function deriveInfieldBallDepth(ballContext) {
 }
 
 function deriveInfieldScoreContext(match) {
-  const home = Number(match?.scores?.home) || 0;
-  const away = Number(match?.scores?.away) || 0;
-  const differential = home - away;
+  const differential = getHighSchoolPlayerScoreDifference(match);
   const regulationInnings = Number(match?.regulationInnings) || 7;
   const late = Number(match?.inning) >= Math.max(1, regulationInnings - 1);
   return Object.freeze({
@@ -7034,12 +7033,12 @@ function getCurrentHighSchoolMatchDefender(match, team, position) {
 }
 
 function getInfieldTeammateForPosition(match, position) {
-  const actor = getCurrentHighSchoolMatchDefender(match, "home", position);
+  const actor = getCurrentHighSchoolMatchDefender(match, getHighSchoolPlayerTeamSide(match), position);
   return actor?.id === "player" ? null : actor;
 }
 
 function buildInfieldTeammateContext(match, playerPosition) {
-  if (typeof TeamRosterFoundation !== "undefined") TeamRosterFoundation.assertActiveDefense(match?.rosters?.home);
+  if (typeof TeamRosterFoundation !== "undefined") TeamRosterFoundation.assertActiveDefense(match?.rosters?.[getHighSchoolPlayerTeamSide(match)]);
   const pivotPosition = playerPosition === "二壘手" ? "游擊手" : playerPosition === "一壘手" ? "游擊手" : "二壘手";
   const firstBasePosition = playerPosition === "一壘手" ? "投手" : "一壘手";
   const pivot = getInfieldTeammateForPosition(match, pivotPosition);
@@ -8533,7 +8532,7 @@ function analyzeHighSchoolOffensiveDecisionContext(match) {
     scoringPosition: Boolean(second || third),
     twoOuts: outs === 2,
     outs,
-    scoreDifference: (Number(match?.scores?.home) || 0) - (Number(match?.scores?.away) || 0)
+    scoreDifference: getHighSchoolPlayerScoreDifference(match)
   });
 }
 
@@ -8558,9 +8557,10 @@ function classifyHighSchoolOffensiveOpportunity(match, choices = buildOffensiveD
   while (runners.length < 3) runners.push(null);
   const runnerCount = runners.filter(Boolean).length;
   const scoringPosition = Boolean(runners[1] || runners[2]);
-  const scoreDifference = (Number(match?.scores?.home) || 0) - (Number(match?.scores?.away) || 0);
+  const scoreDifference = getHighSchoolPlayerScoreDifference(match);
   const deficit = Math.max(0, -scoreDifference);
   const finalInningBottom = inning >= regulationInnings && half === "下";
+  const finalPlayerOffense = inning >= regulationInnings && half === (getHighSchoolPlayerTeamSide(match) === "home" ? "下" : "上");
   const lateGame = inning >= Math.max(5, regulationInnings - 1);
   const gameLive = !match?.completed && !match?.pendingGameSettlement && outs < 3;
   const canTieOrLead = deficit > 0 && deficit <= runnerCount + 1;
@@ -8569,10 +8569,10 @@ function classifyHighSchoolOffensiveOpportunity(match, choices = buildOffensiveD
   const distinctTradeoffs = approachCommitments.length >= 2 && strategicObjectives.length >= 2;
   let leverageClass = "routine";
   let reason = "routine-game-state";
-  if (gameLive && finalInningBottom && canTieOrLead && (scoringPosition || outs === 2)) {
+  if (gameLive && finalPlayerOffense && canTieOrLead && (scoringPosition || outs === 2)) {
     leverageClass = "critical";
     reason = "final-inning-tying-or-go-ahead-run";
-  } else if (gameLive && finalInningBottom && deficit > 0 && deficit <= 3) {
+  } else if (gameLive && finalPlayerOffense && deficit > 0 && deficit <= 3) {
     leverageClass = "highLeverage";
     reason = scoringPosition ? "late-run-scoring-pressure" : "late-game-on-base-relevance";
   } else if (gameLive && lateGame && Math.abs(scoreDifference) <= 2 && (scoreDifference <= 0 || scoringPosition || runnerCount > 0)) {
@@ -8665,7 +8665,7 @@ function evaluateHighSchoolOffensivePlayerAgency(match, classification = null) {
   const inning = Math.max(1, Math.floor(Number(match?.inning) || 1));
   const batter = getHighSchoolMatchLineupBatter(match, match?.offenseTeam);
   const playerActive = isHighSchoolMatchPlayerActive(match);
-  const playerBatting = match?.offenseTeam === "home" && batter?.id === "player";
+  const playerBatting = match?.offenseTeam === getHighSchoolPlayerTeamSide(match) && batter?.id === "player";
   const gameLive = !match?.completed && !match?.pendingGameSettlement && Number(match?.outs) < 3 && !isHighSchoolMatchWalkOff(match);
   const playerPANumber = classification?.playerPANumber || getHighSchoolOffensivePlayerPANumber(match);
   const candidateIdentity = [match?.id || "match", "agency", inning, match?.half || "", playerPANumber, "player"].join("|");
@@ -9280,14 +9280,32 @@ function getHighSchoolPlayingTimeAssignmentText(decision) {
   return `本場先從板凳待命，教練預計在${decision.plannedUsage.entryInning || 5}局後依比分與守位需求決定是否換你上場`;
 }
 
+function getHighSchoolPlayerTeamSide(match) {
+  return match?.matchContext ? (match.matchContext.playerTeamId === match.matchContext.homeTeamId ? "home" : "away") : "home";
+}
+
+function getHighSchoolOpponentTeamSide(match) {
+  return getHighSchoolPlayerTeamSide(match) === "home" ? "away" : "home";
+}
+
+function getHighSchoolPlayerScoreDifference(match) {
+  return (Number(match?.scores?.[getHighSchoolPlayerTeamSide(match)]) || 0) - (Number(match?.scores?.[getHighSchoolOpponentTeamSide(match)]) || 0);
+}
+
 function prepareHighSchoolYearOneMatch(options = {}) {
   assertHighSchoolMatchCapabilityAdmission(player);
+  if (options.matchContext && typeof MatchContextFoundation === "undefined") throw new Error("Explicit match context requires MatchContextFoundation");
   const targetMatchId = options.matchId || "hs-y1-autumn-exhibition";
   const targetEventId = options.eventId || "high_school_showcase";
   const highSchoolYear = Math.max(1, Math.min(3, Math.floor(Number(options.highSchoolYear) || 1)));
   const opportunityIndex = Math.max(1, Number(options.opportunityIndex) || 1);
   if (player.highSchoolMatch?.id === targetMatchId) {
     const match = player.highSchoolMatch;
+    if (options.matchContext) {
+      if (!match.matchContext) throw new Error("Existing match has no explicit context; cannot reassign a started match");
+      const requested = MatchContextFoundation.normalizeMatchContext({...match.matchContext, ...options.matchContext});
+      if (JSON.stringify(requested) !== JSON.stringify(match.matchContext)) throw new Error("Existing match context cannot change");
+    }
     if (match.completed || (typeof match.simulationPhase === "string" && match.rosters?.home?.lineup?.length === 9 && match.rosters?.away?.lineup?.length === 9)) {
       match.currentMomentId = getHighSchoolYearOneMomentId(match);
       if (!match.completed && match.currentDomain === "defense" && isInfieldDecisionFamilyPosition(match.developmentPositionOverride || match.position) && match.defensiveSituation?.familyId !== "infield") {
@@ -9360,9 +9378,21 @@ function prepareHighSchoolYearOneMatch(options = {}) {
     selectedSchoolRoster,
     options.opponentRosterId || "regional-power-school"
   );
-  const playerLineupSlot = rosters.home.lineup.findIndex(item => item.id === "player");
+  const matchContext = typeof MatchContextFoundation !== "undefined" ? MatchContextFoundation.createMatchContext({
+    matchId: targetMatchId,
+    playerTeamId: rosters.home.teamRoster?.teamId || "home",
+    opponentTeamId: rosters.away.teamRoster?.teamId || "away",
+    matchOrigin: options.matchType === "final-competition" ? "officialCompetition" : "developmentMatch",
+    legacyFallback: !options.matchContext,
+    ...options.matchContext
+  }) : null;
+  if (matchContext && (matchContext.matchId !== targetMatchId || matchContext.playerTeamId !== (rosters.home.teamRoster?.teamId || "home") || matchContext.opponentTeamId !== (rosters.away.teamRoster?.teamId || "away"))) throw new Error("Match context / roster identity mismatch");
+  if (matchContext && MatchContextFoundation.isPlayerAway(matchContext)) [rosters.home, rosters.away] = [rosters.away, rosters.home];
+  const playerSide = matchContext ? MatchContextFoundation.playerSide(matchContext) : "home";
+  const playerLineupSlot = rosters[playerSide].lineup.findIndex(item => item.id === "player");
   player.highSchoolMatch = {
     id: targetMatchId,
+    matchContext,
     eventId: targetEventId,
     matchType: options.matchType || "autumn-exhibition",
     highSchoolYear,
@@ -9377,7 +9407,7 @@ function prepareHighSchoolYearOneMatch(options = {}) {
     position,
     assignment: roleAssignment.history,
     matchEntryHistory: `${roleAssignment.history}；${formatHandedness(player.bats, player.throws)}`,
-    currentAssignment: starts ? "比賽從一局上開始；先完成守備，再等待打序輪到你。" : "比賽從一局上開始；你在板凳觀察，但場上每個打席都會完整進行。",
+    currentAssignment: starts ? (playerSide === "home" ? "比賽從一局上開始；先完成守備，再等待打序輪到你。" : "比賽從一局上開始；依打序完成進攻，再進入守備。") : "比賽從一局上開始；你在板凳觀察，但場上每個打席都會完整進行。",
     offenseTeam: "away",
     defenseTeam: "home",
     currentBatter: rosters.away.lineup[0]?.id || "",
@@ -9904,8 +9934,8 @@ function getHighSchoolOffensivePlateApproachAbilities(subject = player) {
 
 function ensureHighSchoolPitcherRuntimeState(match) {
   if (!match || typeof PitchSequencing === "undefined") return null;
-  const opponentPitcher = getCurrentHighSchoolMatchDefender(match, "away", "投手");
-  if (match.rosters?.away && typeof TeamRosterFoundation !== "undefined" && !opponentPitcher) {
+  const opponentPitcher = getCurrentHighSchoolMatchDefender(match, getHighSchoolOpponentTeamSide(match), "投手");
+  if (match.rosters?.[getHighSchoolOpponentTeamSide(match)] && typeof TeamRosterFoundation !== "undefined" && !opponentPitcher) {
     throw new Error("Active defense integrity failed: missing sequencing pitcher");
   }
   const rosterControl = Number(opponentPitcher?.pitchingProfile?.control);
@@ -10127,7 +10157,7 @@ function prepareHighSchoolPlateDecision(match, choice, options = {}) {
     inning: match.inning,
     half: match.half,
     batterId: "player",
-    pitcherId: getCurrentHighSchoolMatchDefender(match, "away", "投手")?.id || "",
+    pitcherId: getCurrentHighSchoolMatchDefender(match, getHighSchoolOpponentTeamSide(match), "投手")?.id || "",
     plateAppearanceState,
     abilities: getHighSchoolOffensivePlateApproachAbilities(player),
     pitch: options.pitch || null,
@@ -10420,9 +10450,9 @@ function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
     : plateAppearanceState.executionQuality === "weak" ? "failure" : "mixed";
   const situationBefore = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
   const scoresBefore = { ...match.scores };
-  const runnerFacts = applyHighSchoolSimulatedPlateAppearance(match, result, "player", "home");
-  advanceHighSchoolMatchBattingOrder(match, "home");
-  match.playerContribution.runsCreated += match.scores.home - scoresBefore.home;
+  const runnerFacts = applyHighSchoolSimulatedPlateAppearance(match, result, "player", getHighSchoolPlayerTeamSide(match));
+  advanceHighSchoolMatchBattingOrder(match, getHighSchoolPlayerTeamSide(match));
+  match.playerContribution.runsCreated += match.scores[getHighSchoolPlayerTeamSide(match)] - scoresBefore[getHighSchoolPlayerTeamSide(match)];
   if (["single", "double", "triple", "homeRun"].includes(result)) match.playerContribution.hits += 1;
   if (result === "walk") match.playerContribution.walks += 1;
   const situationAfter = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
@@ -10437,7 +10467,7 @@ function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
   const executionText = formatHighSchoolOffensiveExecutionText(choice, plateAppearanceState);
   const coachFeedback = formatHighSchoolOffensiveCoachFeedback(choice, plateAppearanceState);
   const objectiveSucceeded = didHighSchoolOffensiveObjectiveSucceed(choice, result, baseballMeaning);
-  const plateAppearanceEvent = recordHighSchoolMeaningfulPlateAppearance(match, "player", result, situationBefore, situationAfter, match.scores.home - scoresBefore.home, runnerFacts);
+  const plateAppearanceEvent = recordHighSchoolMeaningfulPlateAppearance(match, "player", result, situationBefore, situationAfter, match.scores[getHighSchoolPlayerTeamSide(match)] - scoresBefore[getHighSchoolPlayerTeamSide(match)], runnerFacts);
   Object.assign(plateAppearanceEvent, {
     objective: choice.objective,
     approach: choice.approach,
@@ -10992,7 +11022,7 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
     groundBallPhysicalOutcome, paCompatibilityResult,
     outs: match.outs, scores: match.scores, runners: match.runners
   });
-  advanceHighSchoolMatchBattingOrder(match, "away");
+  advanceHighSchoolMatchBattingOrder(match, getHighSchoolOpponentTeamSide(match));
   assertHighSchoolMatchStateIntegrity(match, "player-defense-decision");
   settleAndCloseGroundBallSituation(match);
   restoreHighSchoolMatchAfterDefensiveDecision(match);
@@ -11056,7 +11086,7 @@ function applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution) {
   );
   getHighSchoolMatchPerformanceEvidence(match, "player").defensiveInvolvements += 1;
   match.lastDefensiveResolution = JSON.parse(JSON.stringify({ ...resolution, runnerChanges, scoringRunnerIds: thirdOutResolution.legalScoringRunnerIds, thirdOutResolution }));
-  advanceHighSchoolMatchBattingOrder(match, "away");
+  advanceHighSchoolMatchBattingOrder(match, getHighSchoolOpponentTeamSide(match));
   match.currentDomain = "flow";
   match.currentAssignment = resolution.error
     ? formatHighSchoolMatchWorldState(match, "這次例行守備形成失誤。")
@@ -11070,7 +11100,7 @@ function applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution) {
     presentationImportance: "attention",
     inning: match.inning,
     half: match.half,
-    offenseTeam: "away",
+    offenseTeam: getHighSchoolOpponentTeamSide(match),
     batterId: situation.batterId,
     currentBatterAfter: match.currentBatter,
     playerPosition: situation.playerPosition,
@@ -11124,7 +11154,7 @@ function applyCatcherResolutionToHighSchoolMatch(match, decision, resolution) {
   };
   match.outs = resolution.thirdOutResolution.outsAfter;
   (resolution.scoringRunnerIds || []).forEach(runnerId => {
-    scoreHighSchoolMatchRunner(match, runnerId, "away", "catcher-decision", {
+    scoreHighSchoolMatchRunner(match, runnerId, getHighSchoolOpponentTeamSide(match), "catcher-decision", {
       presentationImportance: "hidden",
       outsOverride: resolution.thirdOutResolution.halfInningEnded ? situationBefore.outs : match.outs
     });
@@ -11317,7 +11347,7 @@ function advanceHighSchoolYearOneAfterMomentTwo(match, decision, tier, defensive
   }
   match.outs = Math.min(3, match.outs + outsCreated);
   if (runsAllowed && match.runners[2]) {
-    scoreHighSchoolMatchRunner(match, match.runners[2], "away", "player-defense");
+    scoreHighSchoolMatchRunner(match, match.runners[2], getHighSchoolOpponentTeamSide(match), "player-defense");
     match.runners[2] = null;
   }
   if (decision === "challenge") {
@@ -11332,7 +11362,7 @@ function advanceHighSchoolYearOneAfterMomentTwo(match, decision, tier, defensive
     }
   } else if (tier === "failure") {
     const [first, second, third] = match.runners;
-    if (third && !runsAllowed) scoreHighSchoolMatchRunner(match, third, "away", "player-defense");
+    if (third && !runsAllowed) scoreHighSchoolMatchRunner(match, third, getHighSchoolOpponentTeamSide(match), "player-defense");
     match.runners = ["away-batter-moment", first, second];
     if (resolution.resultCode === "error") match.playerContribution.errors += 1;
   } else if (decision === "lead") {
@@ -11373,7 +11403,7 @@ function advanceHighSchoolYearOneAfterMomentTwo(match, decision, tier, defensive
     causeExplanation: resolution.causeExplanation,
     ballContext: resolution.ballContext
   });
-  advanceHighSchoolMatchBattingOrder(match, "away");
+  advanceHighSchoolMatchBattingOrder(match, getHighSchoolOpponentTeamSide(match));
   restoreHighSchoolMatchAfterDefensiveDecision(match);
   match.currentAssignment = "等待球隊完成這個守備半局。";
   match.coachReaction = tier === "failure" ? "現任教練立刻重申補位與最短出局責任。" : "現任教練點頭示意，提醒內野準備下一球。";
@@ -11405,7 +11435,7 @@ function deriveHighSchoolMatchActualExposure(match) {
     return Object.freeze({ matchId: match?.id || "", participated: false, started: false, appearanceType: "noAppearance", entryInning: null, exitInning: null, defensiveInnings: 0, plateAppearances: 0, role: match?.role || "bench" });
   }
   const entrySequence = started ? -1 : Number(entryEvent?.sequence) || 0;
-  const defensiveInnings = new Set(log.filter(event => event.type === "halfInningEnd" && event.half === "上"
+  const defensiveInnings = new Set(log.filter(event => event.type === "halfInningEnd" && event.half === (getHighSchoolPlayerTeamSide(match) === "home" ? "上" : "下")
     && Number(event.sequence) >= entrySequence).map(event => Number(event.inning) || 0).filter(Boolean)).size;
   const plateAppearances = log.filter(event => event.type === "plateAppearance" && event.batterId === "player"
     && Number(event.sequence) >= entrySequence).length;
@@ -11436,8 +11466,8 @@ function finalizeHighSchoolGameRecord(match) {
       gameId: match.id,
       competitionEditionId: match.competitionEditionId,
       competitionEntryId: match.competitionEntryId,
-      homeTeamId: match.competitionTeamId || match.rosters?.home?.teamRoster?.teamId || "home",
-      awayTeamId: match.rosters?.away?.teamRoster?.teamId || "away",
+      homeTeamId: match.matchContext?.homeTeamId || match.competitionTeamId || match.rosters?.home?.teamRoster?.teamId || "home",
+      awayTeamId: match.matchContext?.awayTeamId || match.rosters?.away?.teamRoster?.teamId || "away",
       inningsScheduled: match.regulationInnings,
       rosters: match.rosters
     });
@@ -11600,10 +11630,10 @@ function recordHighSchoolYearOneMatchHistory(match, competitionSettlement) {
     phase: match.matchType || "",
     competitionContext: {
       homeRosterIdentity: player.schoolInvitationState?.selectedSchoolYearRosterIdentity?.identity || "",
-      opponentRosterIdentity: match.rosters?.away?.teamRoster
-        ? `${match.rosters.away.teamRoster.teamId}|${match.rosters.away.teamRoster.yearIdentity}|${match.rosters.away.teamRoster.generationSeed}` : "",
-      homeStrength: cloneSchoolInvitationValue(match.rosters?.home?.teamStrengthProfile || {}),
-      opponentStrength: cloneSchoolInvitationValue(match.rosters?.away?.teamStrengthProfile || {})
+      opponentRosterIdentity: match.rosters?.[getHighSchoolOpponentTeamSide(match)]?.teamRoster
+        ? `${match.rosters[getHighSchoolOpponentTeamSide(match)].teamRoster.teamId}|${match.rosters[getHighSchoolOpponentTeamSide(match)].teamRoster.yearIdentity}|${match.rosters[getHighSchoolOpponentTeamSide(match)].teamRoster.generationSeed}` : "",
+      homeStrength: cloneSchoolInvitationValue(match.rosters?.[getHighSchoolPlayerTeamSide(match)]?.teamStrengthProfile || {}),
+      opponentStrength: cloneSchoolInvitationValue(match.rosters?.[getHighSchoolOpponentTeamSide(match)]?.teamStrengthProfile || {})
     },
     competitionEvidence: competitionSettlement?.evidence ? cloneSchoolInvitationValue(competitionSettlement.evidence) : null,
     decisionExecutionSummary: (match.completedMoments || []).map(item => ({ decision: item.decision, decisionQuality: item.decisionQuality, executionQuality: item.executionQuality, tier: item.tier })),
@@ -11648,8 +11678,8 @@ function settleHighSchoolYearOneMatch(match, finalDecision) {
     finalMoment.outs = 3;
     finalMoment.half = "終";
   }
-  const resultLabel = match.scores.home > match.scores.away ? "球隊勝利" : match.scores.home < match.scores.away ? "球隊落敗" : "球隊和局";
-  match.teamResult = `${resultLabel}，終場 ${match.scores.home}：${match.scores.away}`;
+  const resultLabel = getHighSchoolPlayerScoreDifference(match) > 0 ? "球隊勝利" : getHighSchoolPlayerScoreDifference(match) < 0 ? "球隊落敗" : "球隊和局";
+  match.teamResult = `${resultLabel}，終場 ${match.scores[getHighSchoolPlayerTeamSide(match)]}：${match.scores[getHighSchoolOpponentTeamSide(match)]}`;
   const momentCount = match.completedMoments.length;
   const participationTruth = deriveHighSchoolMatchActualExposure(match);
   const overallTier = contribution.strong > contribution.failure ? "strong" : contribution.failure > contribution.strong ? "failure" : "mixed";
@@ -11738,7 +11768,7 @@ function isHighSchoolMatchPlayerActive(match) {
 function shouldCreateHighSchoolFirstOffensiveMoment(match) {
   return match?.momentIndex === 0 && match.currentMomentId === highSchoolYearOneMomentIds[0]
     && isHighSchoolMatchPlayerActive(match)
-    && match.offenseTeam === "home" && getHighSchoolMatchLineupBatter(match, "home")?.id === "player";
+    && match.offenseTeam === getHighSchoolPlayerTeamSide(match) && getHighSchoolMatchLineupBatter(match, getHighSchoolPlayerTeamSide(match))?.id === "player";
 }
 
 function prepareHighSchoolFirstOffensiveMomentFromSimulation(match) {
@@ -11774,7 +11804,7 @@ function prepareHighSchoolMeaningfulOffensiveMomentFromSimulation(match, classif
   const resumePhase = options.resumePhase || (legacyFinal ? "moment_3_resolved" : (match.simulationPhase || "full_match_flow"));
   const playerPANumber = classification?.playerPANumber || getHighSchoolOffensivePlayerPANumber(match);
   match.currentBatter = "player";
-  ensureHighSchoolMatchLineScoreInning(match, "home", match.inning);
+  ensureHighSchoolMatchLineScoreInning(match, getHighSchoolPlayerTeamSide(match), match.inning);
   match.momentIndex = 2;
   match.currentMomentId = legacyFinal ? highSchoolYearOneMomentIds[2] : `hs_y1_match_offense_${playerPANumber}`;
   match.currentDomain = "offense";
@@ -12032,9 +12062,9 @@ function finishHighSchoolMatchAtCompletedHalf(match, inning, half) {
 }
 
 function shouldReachHighSchoolDefensiveMoment(match) {
-  if (!isHighSchoolMatchPlayerActive(match) || match.offenseTeam !== "away" || match.outs >= 3) return false;
+  if (!isHighSchoolMatchPlayerActive(match) || match.offenseTeam !== getHighSchoolOpponentTeamSide(match) || match.outs >= 3) return false;
   const force = getHighSchoolDefensiveForceState(match);
-  const scoreDifference = Math.abs((Number(match.scores?.home) || 0) - (Number(match.scores?.away) || 0));
+  const scoreDifference = Math.abs(getHighSchoolPlayerScoreDifference(match));
   const naturalPressure = match.outs < 2 && (force.doublePlayEligible || (force.third && scoreDifference <= 1));
   const fallbackInning = Math.max(2, (Number(match.playerEntryWindowInning) || 1) + 1);
   const routineAlreadyShownThisHalf = (match.simulationLog || []).some(event => event.type === "playerRoutinePlay"
@@ -12046,7 +12076,7 @@ function shouldReachHighSchoolFinalOffensiveMoment(match) {
   const batter = getHighSchoolMatchLineupBatter(match, match.offenseTeam);
   const targetInning = Math.max(5, (Number(match.playerEntryWindowInning) || 1) + 1);
   return isHighSchoolMatchPlayerActive(match) && match.inning >= targetInning
-    && match.half === "下" && match.offenseTeam === "home" && batter?.id === "player";
+    && match.offenseTeam === getHighSchoolPlayerTeamSide(match) && batter?.id === "player";
 }
 
 function advanceHighSchoolMatchPlaybackStep(match = player.highSchoolMatch) {
