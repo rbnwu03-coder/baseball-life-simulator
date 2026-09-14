@@ -9516,6 +9516,65 @@ function getHighSchoolScheduleExecutionContext() {
     mandatorySlots:careerYear === 3 ? [{careerYear:3,seasonPhase:"final-competition",sequence:1,sourceId:"hs-y3-final-competition-1"}] : []};
 }
 
+function getHighSchoolMatchOpportunityGenerationInput(options = {}) {
+  const eventId = getCurrentEventId();
+  const matchEvents = ["high_school_showcase","high_school_followup_evaluation","high_school_year_two_spring_game","high_school_year_two_autumn_stage","critical_tournament"];
+  const context = matchEvents.includes(eventId) ? getHighSchoolScheduleExecutionContext() : {
+    careerId:player.schoolInvitationState?.generationSeed,careerYear:Number(player.highSchoolYearTransitionState?.currentHighSchoolYear) || 1,
+    seasonPhase:eventId,playerSchoolId:player.schoolInvitationState?.selectedSchoolId,mandatorySlots:[],
+    schoolIds:(player.schoolInvitationState?.invitations || []).map(school => school.schoolId)
+  };
+  context.sequence = options.sequence ?? Math.max(1, Number(player.highSchoolNextOpportunity?.opportunityIndex) || 1);
+  context.graduated = !/青棒|高中/.test(String(player.chapter || ""));
+  const schoolRecords = (player.schoolInvitationState?.invitations || []).map(school => ({
+    schoolId:school.schoolId,teamType:"school",sourceRef:`schoolInvitationState:${school.schoolId}`,
+    rosterValid:validateSchoolProfile(school).ok && TeamRosterFoundation.validateRoster(school.baseRoster).ok
+      && school.baseRoster.teamId === school.schoolId,
+    schoolStandard:school.schoolStandard, strengthRef:school.schoolYearRosterIdentity?.identity,
+    coachRef:school.coachProfile?.coachId
+  }));
+  for (const team of player.competitionFoundation?.teams || []) schoolRecords.push({schoolId:team.teamId,teamType:team.teamType,
+    sourceRef:`competitionFoundation.teams:${team.teamId}`,rosterValid:team.teamType === "school" && Boolean(team.organizationId)});
+  // These IDs already belong to the schedule execution context's legacy match entry points.
+  // Reading their template identities does not instantiate or reroll a roster.
+  for (const schoolId of context.schoolIds) if (!schoolRecords.some(item => item.schoolId === schoolId)) schoolRecords.push({
+    schoolId,teamType:"school",sourceRef:`getHighSchoolScheduleExecutionContext:${schoolId}`,rosterValid:true});
+  const sources = [];
+  const next = player.highSchoolNextOpportunity;
+  if (next?.matchId === "hs-y1-followup-evaluation-2" && context.careerYear === 1 && context.seasonPhase === "post-autumn-evaluation") {
+    sources.push({opportunityType:"developmentMatchOpportunity",opponentSchoolId:"regional-power-school",sequence:2,
+      source:{type:"developmentSchedule",sourceId:next.matchId},sourceAuthority:"existing",careerYear:1,seasonPhase:context.seasonPhase,
+      matchId:next.matchId,plannedContext:{homeTeamId:context.playerSchoolId,awayTeamId:"regional-power-school",assignmentSource:"developmentSchedule"},
+      provenance:{reasonCode:"existing-followup-evaluation",foundationSelection:"existingDevelopmentStage"}});
+  }
+  for (const slot of context.mandatorySlots) if (slot.careerYear === context.careerYear && slot.seasonPhase === context.seasonPhase) {
+    sources.push({opportunityType:"officialCompetitionOpportunity",opponentSchoolId:"hs-y3-final-regional-opponent",sequence:slot.sequence,
+      source:{type:"competitionCalendar",sourceId:slot.sourceId},sourceAuthority:"existing",careerYear:slot.careerYear,
+      seasonPhase:slot.seasonPhase,matchId:slot.sourceId,provenance:{stageRef:slot.sourceId}});
+  }
+  const history = ["highSchoolYearOneMatchHistory","highSchoolYearTwoMatchHistory","highSchoolYearThreeMatchHistory"]
+    .flatMap(key => (player[key] || []).map(record => ({matchId:record.matchId,careerYear:record.highSchoolYear,
+      opponentSchoolId:record.competitionContext?.opponentRosterIdentity?.split("|")[0]})));
+  return {context,schoolRecords,sources:[...sources,...(options.sources || [])],history,
+    activeMatch:player.highSchoolMatch?.id ? {id:player.highSchoolMatch.id,completed:player.highSchoolMatch.completed} : null,
+    competition:player.competitionFoundation,schedule:player.highSchoolSchedule,
+    includeFoundationFallback:options.includeFoundationFallback !== false};
+}
+
+function deriveHighSchoolMatchOpportunityCandidates(options = {}) {
+  assertHighSchoolMatchCapabilityAdmission(player);
+  return HighSchoolMatchOpportunityGeneration.deriveOpportunityCandidates(getHighSchoolMatchOpportunityGenerationInput(options));
+}
+
+function materializeHighSchoolMatchOpportunityCandidate(candidate, options = {}) {
+  assertHighSchoolMatchCapabilityAdmission(player);
+  const input = getHighSchoolMatchOpportunityGenerationInput(options);
+  getHighSchoolScheduleCompetitionRefs(candidate);
+  const opportunity = HighSchoolMatchOpportunityGeneration.materializeOpportunityCandidate(player.highSchoolSchedule,candidate,input);
+  getHighSchoolScheduleCompetitionRefs(opportunity);
+  return opportunity;
+}
+
 function offerHighSchoolMatchOpportunity(input) {
   assertHighSchoolMatchCapabilityAdmission(player);
   const context = getHighSchoolScheduleExecutionContext();
@@ -9578,11 +9637,15 @@ function prepareHighSchoolFollowupEvaluationMatch() {
   if (typeof HighSchoolScheduleOpportunity === "undefined") return prepareHighSchoolYearOneMatch(options);
   if (player.highSchoolMatch?.id === opportunity.matchId) return player.highSchoolMatch;
   const context = getHighSchoolScheduleExecutionContext();
-  const matchOpportunity = offerHighSchoolMatchOpportunity({opportunityType:"developmentMatchOpportunity",
+  const candidate = typeof HighSchoolMatchOpportunityGeneration !== "undefined"
+    ? deriveHighSchoolMatchOpportunityCandidates().eligible.find(item => item.opportunityType === "developmentMatchOpportunity" && item.source.sourceId === opportunity.matchId) : null;
+  const alreadyOffered = player.highSchoolSchedule?.opportunities.find(item => item.source.sourceId === opportunity.matchId && item.careerYear === 1 && item.opportunityType === "developmentMatchOpportunity");
+  if (typeof HighSchoolMatchOpportunityGeneration !== "undefined" && !candidate && !alreadyOffered) throw new Error("No eligible development match candidate");
+  const matchOpportunity = alreadyOffered || (candidate ? materializeHighSchoolMatchOpportunityCandidate(candidate) : offerHighSchoolMatchOpportunity({opportunityType:"developmentMatchOpportunity",
     source:{type:"developmentSchedule",sourceId:opportunity.matchId}, sequence:2,
     opponentSchoolId:"regional-power-school", provenance:{reasonCode:"existing-followup-evaluation"},
     // Preserve the established fixture assignment explicitly; MatchContext validates it.
-    plannedContext:{homeTeamId:context.playerSchoolId,awayTeamId:"regional-power-school",assignmentSource:"developmentSchedule"}});
+    plannedContext:{homeTeamId:context.playerSchoolId,awayTeamId:"regional-power-school",assignmentSource:"developmentSchedule"}}));
   // This existing mandatory career evaluation is accepted by its current entry point.
   if (matchOpportunity.status === "offered") HighSchoolScheduleOpportunity.setOpportunityStatus(player.highSchoolSchedule,matchOpportunity.opportunityId,"accepted");
   const entry = HighSchoolScheduleOpportunity.scheduleOpportunity(player.highSchoolSchedule,matchOpportunity.opportunityId,context);

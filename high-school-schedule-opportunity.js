@@ -7,7 +7,7 @@
   const VERSION = "high-school-schedule-v1";
   const ORIGIN_MAP = Object.freeze({officialCompetitionOpportunity:"officialCompetition", incomingFriendlyInvitation:"awayInvitationFriendly",
     outgoingFriendlyInvitation:"homeInvitationFriendly", trainingCampOpportunity:"trainingCamp", developmentMatchOpportunity:"developmentMatch", neutralExchangeOpportunity:"neutralFriendly"});
-  const SOURCES = Object.freeze(["competitionCalendar", "coachNetwork", "schoolRelationship", "trainingCampPlan", "developmentSchedule", "legacyFallback"]);
+  const SOURCES = Object.freeze(["competitionCalendar", "coachNetwork", "schoolRelationship", "trainingCampPlan", "developmentSchedule", "legacyFallback", "systemEligibility"]);
   const OPPORTUNITY_STATUSES = Object.freeze(["offered", "accepted", "declined", "scheduled", "expired"]);
   const ENTRY_STATUSES = Object.freeze(["scheduled", "inProgress", "completed", "cancelled"]);
   const copy = value => JSON.parse(JSON.stringify(value));
