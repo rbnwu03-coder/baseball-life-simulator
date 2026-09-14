@@ -1932,6 +1932,7 @@ function createInitialPlayer(name = "") {
     highSchoolYearTransitionState: { version: "", currentHighSchoolYear: 0, lastTransitionIdentity: "", history: [] },
     highSchoolYearOneStartingRole: "",
     highSchoolYearOneMatchHistory: [],
+    highSchoolSchedule: { version: "high-school-schedule-v1", opportunities: [], entries: [] },
     highSchoolYearTwoPlan: "",
     highSchoolYearTwoMatchHistory: [],
     highSchoolYearThreeMatchHistory: [],

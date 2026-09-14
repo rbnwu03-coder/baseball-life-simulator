@@ -13,6 +13,9 @@ function normalizeSave(saved) {
   const sourceSaveVersion = saved.saveVersion;
   const fresh = createInitialPlayer(saved.name || "");
   Object.assign(fresh, saved);
+  if (typeof HighSchoolScheduleOpportunity !== "undefined") {
+    fresh.highSchoolSchedule = HighSchoolScheduleOpportunity.normalizeState(saved.highSchoolSchedule);
+  }
   const savedPrimaryPosition = saved.primaryPosition !== undefined ? saved.primaryPosition : saved.seasonPosition;
   const savedSecondaryPositions = Array.isArray(saved.secondaryPositions)
     ? saved.secondaryPositions
@@ -509,6 +512,7 @@ function normalizeSave(saved) {
       TeamRosterFoundation.assertActiveDefense(roster);
     }
   }
+  if (typeof HighSchoolScheduleOpportunity !== "undefined") HighSchoolScheduleOpportunity.assertActiveMatchLink(fresh.highSchoolSchedule,fresh.highSchoolMatch);
   fresh.highSchoolAzheEcho = Object.assign({}, highSchoolDefaults.highSchoolAzheEcho, saved.highSchoolAzheEcho || {});
   if (typeof DefensiveReachSecureFoundation !== "undefined") {
     for (const state of [fresh.highSchoolMatch.groundBallInPlayState, fresh.highSchoolMatch.lineDriveCatchState, fresh.highSchoolMatch.flyBallCatchState]) {
