@@ -12027,6 +12027,9 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
   const buntHandoff = productionBunt?.shouldBuildDefense ? ensureHighSchoolBuntBallInPlayHandoff(match) : null;
   const groundBallHandoff = !productionBunt && offensiveTacticalState?.selectedTacticalAction === "standardAttack"
     ? ensureHighSchoolOrdinaryGroundBallInPlayHandoff(match, options) : null;
+  // Only this plate appearance's handoff may own a ground-ball lifecycle or apply guard.
+  // A prior completed grounder must not suppress a later routine defensive settlement.
+  match.groundBallInPlayState = groundBallHandoff;
   if (buntHandoff && !buntHandoff.supported) {
     if (buntHandoff.fallbackPresented !== true) {
       const fallbackText = buntHandoff.ballContext.downstreamSupport === "unsupportedPopBuntFallback"
@@ -12220,8 +12223,46 @@ function shouldReachHighSchoolFinalOffensiveMoment(match) {
     && match.offenseTeam === getHighSchoolPlayerTeamSide(match) && batter?.id === "player";
 }
 
+function resumeResolvedHighSchoolGroundBallSettlement(match) {
+  const active = match?.activeSituation;
+  if (active?.type !== "groundBallDefensiveDecision" || active.lifecycleState !== "resolved") return null;
+  const handoff = match.groundBallInPlayState;
+  const situation = match.defensiveSituation;
+  const resolution = active.resolution?.executionEvidence;
+  const before = active.createdAt;
+  const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+  // Recovery delivers recorded execution; it must never reinterpret an old play in a new state.
+  if (!resolution || !handoff?.runnerThrowTiming || handoff.settlementApplied || handoff.playSettlement?.settlementApplied
+    || active.sourcePhysicalStateRef !== handoff.identity || situation?.groundBallDefensiveContext?.identity !== handoff.identity
+    || active.contextSnapshot?.physicalIdentity !== handoff.physicalTruth?.identity
+    || active.situationId !== MatchSituationLifecycle.createSituationId({ gameId: match.id, inning: before?.inning,
+      half: before?.half, paIdentity: handoff.identity, simulationPoint: before?.simulationPoint, type: active.type })
+    || before?.inning !== match.inning || before?.half !== match.half || before?.outs !== match.outs
+    || !same(before?.bases, match.runners) || !same(before?.score, match.scores)
+    || situation.batterId !== match.currentBatter || resolution.runnerSettlementIdentity !== situation.runnerSettlementIdentity) {
+    throw new Error("Stale resolved ground-ball settlement context");
+  }
+  validateHighSchoolDecisionThrowState(match);
+  validateHighSchoolStoredDefensiveResolution(match, resolution);
+  let event;
+  if (resolution.eventClassification === "playerRoutinePlay") {
+    event = applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution);
+  } else {
+    const route = active.decision?.selectedRoute || active.executionState?.selectedRoute;
+    const choice = active.legalRoutes.find(item => (item.routeId || item.matchDecision) === route);
+    if (!choice) throw new Error("Stale resolved ground-ball decision route");
+    event = applyInfieldResolutionToHighSchoolMatch(match, choice.matchDecision, resolution);
+  }
+  restoreHighSchoolMatchAfterDefensiveDecision(match);
+  return event;
+}
+
 function advanceHighSchoolMatchPlaybackStep(match = player.highSchoolMatch) {
-  if (!match || match.completed || !isHighSchoolMatchPlaybackPhase(match)) return false;
+  if (!match || match.completed) return false;
+  if (match.activeSituation?.type === "groundBallDefensiveDecision" && match.activeSituation.lifecycleState === "resolved") {
+    return resumeResolvedHighSchoolGroundBallSettlement(match);
+  }
+  if (!isHighSchoolMatchPlaybackPhase(match)) return false;
   const activeSituation = typeof MatchSituationLifecycle !== "undefined"
     ? MatchSituationLifecycle.normalizeSituation(match.activeSituation) : null;
   if (activeSituation && !MatchSituationLifecycle.canResumeSimulation(activeSituation)) return "decision";
