@@ -69,8 +69,8 @@ test("16 provenance stores refs without evidence object copy",()=>{
   assert.strictEqual(typeof provenance.networkEvidenceRef,"string");
   assert.strictEqual(provenance.networkEvidenceRef,evidenceId);
   // Generator source/candidate refs, Schedule linkage, and MatchContext reasonCode.
-  const allowedKeys=["sourceReason","networkEvidenceRef","evidenceCareerYear","supportingEvidenceRefs","candidateRef",
-    "source","sourceId","opportunityId","scheduleEntryId","opportunitySource","competitionRefs","reasonCode"];
+  const allowedKeys=["invitationSourceId","producerType","evidenceRefs","reasonCode","sourceReason","networkEvidenceRef","evidenceCareerYear","supportingEvidenceRefs","candidateRef",
+    "source","sourceId","opportunityId","scheduleEntryId","opportunitySource","competitionRefs"];
   assert(Object.keys(provenance).every(key=>allowedKeys.includes(key)),"unexpected provenance own key");
   const candidateKeys=["candidateId","sourceAuthority","sourceRefs","priorMatchRefs","networkEvidenceRef",
     "relationshipEvidenceRef","opponentStrengthRef","coachRef","eligibilityReasons","generationVersion"];
