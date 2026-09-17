@@ -1,9 +1,10 @@
 (function(root,factory) {
   const api=factory(typeof module==="object"&&module.exports?require("./high-school-schedule-opportunity"):root.HighSchoolScheduleOpportunity,
-    typeof module==="object"&&module.exports?require("./high-school-friendly-invitation-producer"):root.HighSchoolFriendlyInvitationSource);
+    typeof module==="object"&&module.exports?require("./high-school-friendly-invitation-producer"):root.HighSchoolFriendlyInvitationSource,
+    typeof module==="object"&&module.exports?require("./high-school-training-camp-producer"):root.HighSchoolTrainingCampSource);
   if(typeof module==="object"&&module.exports) module.exports=api;
   else root.HighSchoolMatchOpportunityGeneration=api;
-})(typeof globalThis!=="undefined"?globalThis:this,function(Schedule,Producer) {
+})(typeof globalThis!=="undefined"?globalThis:this,function(Schedule,Producer,Camp) {
   "use strict";
   const VERSION="high-school-opportunity-generation-v1";
   const copy=value=>JSON.parse(JSON.stringify(value));
@@ -25,7 +26,7 @@
     if(context.graduated) reasons.push("graduated");
     if(!MATCH_PHASES.includes(context.seasonPhase)) reasons.push("phaseNotMatchEligible");
     if(type==="officialCompetitionOpportunity"&&source.source?.type!=="competitionCalendar") reasons.push("missingCompetitionAuthority");
-    if(type==="trainingCampOpportunity"&&!(source.source?.type==="trainingCampPlan"&&(source.sourceAuthority==="existing"||source.explicit===true))) reasons.push("missingTrainingCampPlan");
+    if(type==="trainingCampOpportunity"&&!(source.source?.type==="trainingCampPlan"&&(source.sourceAuthority==="existing"||source.explicit===true||source.sourceAuthority==="canonicalTrainingCampProducer"))) reasons.push("missingTrainingCampPlan");
     if(type==="neutralExchangeOpportunity"&&source.explicit!==true) reasons.push("missingNeutralSource");
     return {allowed:reasons.length===0,reasons,eligibleReasons:reasons.length?[]:["seasonPhaseAllowed","phaseAllowsMatchWithoutCalendarAssumption"]};
   }
@@ -63,7 +64,9 @@
     const context=deriveEligibilityContext(input.context),pool=deriveOpponentCandidatePool(input.schoolRecords,context.playerSchoolId);
     const schedule=input.schedule||Schedule.emptyState(),producerResult=Producer?Producer.deriveFriendlyInvitationSources(input):{sources:[],diagnostics:[]};
     const relationshipSources=producerResult.sources.map(s=>Producer.materializeInvitationSourceToCandidateInput(s,input));
-    const sources=[...copy(input.sources||[]),...relationshipSources],diagnostics=[...pool.rejected.map(copy),...producerResult.diagnostics.map(copy)];
+    const campResult=Camp?Camp.deriveTrainingCampSources(input):{matchSources:[],diagnostics:[]};
+    const campSources=campResult.matchSources.map(s=>Camp.adaptCampMatchSourceToCandidateInput(s,input));
+    const sources=[...copy((input.sources||[]).filter(s=>!Camp||!Camp.isExplicitPlan(s))),...relationshipSources,...campSources],diagnostics=[...pool.rejected.map(copy),...producerResult.diagnostics.map(copy),...campResult.diagnostics.map(copy)];
     const winners=new Map();
     for(const source of relationshipSources) {
       if(source.producerExclusionReasons.some(reason=>reason!=="existingOpportunityPreserved"))continue;
@@ -95,7 +98,7 @@
         const winner=winners.get(signature([candidate.opportunityType,candidate.opponentSchoolId,candidate.sequence]));
         if(source.canonicalEvidence&&winner&&winner.source.sourceId!==source.source.sourceId)reasons.push("supersededByHigherPriorityProducer");
         if(!validId(context.careerId)||!validId(context.playerSchoolId))reasons.push("invalidCareerIdentity");
-        if(!["existing","fallback","fixture","canonicalRelationshipProducer"].includes(source.sourceAuthority))reasons.push("missingSourceAuthority");
+        if(!["existing","fallback","fixture","canonicalRelationshipProducer","canonicalTrainingCampProducer"].includes(source.sourceAuthority))reasons.push("missingSourceAuthority");
         if((candidate.source.type==="coachNetwork"&&!source.networkEvidenceRef)||(candidate.source.type==="schoolRelationship"&&!source.relationshipEvidenceRef))reasons.push("missingRelationshipAuthority");
         if(source.careerYear!==undefined&&source.careerYear!==context.careerYear)reasons.push("staleSourceYear");
         if(source.seasonPhase!==undefined&&source.seasonPhase!==context.seasonPhase)reasons.push("staleSourcePhase");
