@@ -9556,6 +9556,7 @@ function getHighSchoolMatchOpportunityGenerationInput(options = {}) {
     .flatMap(key => (player[key] || []).map(record => ({matchId:record.matchId,careerYear:record.highSchoolYear,
       opponentSchoolId:record.competitionContext?.opponentRosterIdentity?.split("|")[0]})));
   return {context,schoolRecords,sources:[...sources,...(options.sources || [])],history,
+    relationshipLedger:player.highSchoolExchangeNetwork,currentCoachId:getSelectedSchoolInvitation(player)?.coachProfile?.coachId,
     activeMatch:player.highSchoolMatch?.id ? {id:player.highSchoolMatch.id,completed:player.highSchoolMatch.completed} : null,
     competition:player.competitionFoundation,schedule:player.highSchoolSchedule,
     includeFoundationFallback:options.includeFoundationFallback !== false};
@@ -9564,6 +9565,25 @@ function getHighSchoolMatchOpportunityGenerationInput(options = {}) {
 function deriveHighSchoolMatchOpportunityCandidates(options = {}) {
   assertHighSchoolMatchCapabilityAdmission(player);
   return HighSchoolMatchOpportunityGeneration.deriveOpportunityCandidates(getHighSchoolMatchOpportunityGenerationInput(options));
+}
+
+function ingestHighSchoolCoachSchoolConnection(fact) {
+  assertHighSchoolMatchCapabilityAdmission(player);
+  const input = getHighSchoolMatchOpportunityGenerationInput();
+  const authority = {schoolIds:input.schoolRecords.filter(item=>item.rosterValid).map(item=>item.schoolId),
+    coachIds:(player.schoolInvitationState?.invitations||[]).map(item=>item.coachProfile?.coachId).filter(Boolean)};
+  const evidence = HighSchoolExchangeNetwork.deriveCoachSchoolEvidence({...fact,careerId:input.context.careerId,
+    careerYear:input.context.careerYear,seasonPhase:input.context.seasonPhase,sequence:fact.sequence??input.context.sequence,
+    schoolAId:input.context.playerSchoolId},authority);
+  HighSchoolExchangeNetwork.appendEvidence(player.highSchoolExchangeNetwork,[evidence]);
+  return evidence;
+}
+
+function recordHighSchoolExchangeCompletion(match) {
+  if (typeof HighSchoolExchangeNetwork === "undefined") return [];
+  const evidence = HighSchoolExchangeNetwork.deriveExchangeEvidenceFromCompletedMatch(match,player.highSchoolSchedule);
+  if (evidence.length) HighSchoolExchangeNetwork.appendEvidence(player.highSchoolExchangeNetwork,evidence);
+  return evidence;
 }
 
 function materializeHighSchoolMatchOpportunityCandidate(candidate, options = {}) {
@@ -11898,6 +11918,7 @@ function settleHighSchoolYearOneMatch(match, finalDecision) {
   recordHighSchoolYearOneMatchHistory(match, competitionSettlement);
   if (typeof HighSchoolScheduleOpportunity !== "undefined" && player.highSchoolSchedule) {
     HighSchoolScheduleOpportunity.markScheduleCompleted(player.highSchoolSchedule,match);
+    recordHighSchoolExchangeCompletion(match);
   }
   return match.performanceSummary;
 }

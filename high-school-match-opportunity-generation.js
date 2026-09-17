@@ -1,8 +1,9 @@
 (function(root,factory) {
-  const api=factory(typeof module==="object"&&module.exports?require("./high-school-schedule-opportunity"):root.HighSchoolScheduleOpportunity);
+  const api=factory(typeof module==="object"&&module.exports?require("./high-school-schedule-opportunity"):root.HighSchoolScheduleOpportunity,
+    typeof module==="object"&&module.exports?require("./high-school-exchange-network"):root.HighSchoolExchangeNetwork);
   if(typeof module==="object"&&module.exports) module.exports=api;
   else root.HighSchoolMatchOpportunityGeneration=api;
-})(typeof globalThis!=="undefined"?globalThis:this,function(Schedule) {
+})(typeof globalThis!=="undefined"?globalThis:this,function(Schedule,Network) {
   "use strict";
   const VERSION="high-school-opportunity-generation-v1";
   const copy=value=>JSON.parse(JSON.stringify(value));
@@ -58,9 +59,30 @@
         ...(candidate.opponentStrengthRef?{opponentStrengthRef:copy(candidate.opponentStrengthRef)}:{}),
         ...(candidate.coachRef?{coachRef:copy(candidate.coachRef)}:{}),eligibilityReasons:copy(candidate.eligibilityReasons),generationVersion:VERSION}}};
   }
+  function deriveRelationshipSources(input,context) {
+    if(!Network||!input.relationshipLedger)return [];
+    const evidence=Network.queryRelationshipEvidence(input.relationshipLedger,{schoolAId:context.playerSchoolId})
+      .filter(e=>e.schoolAId===context.playerSchoolId&&e.careerId===context.careerId&&e.careerYear<=context.careerYear);
+    const groups=new Map();
+    for(const e of evidence) {
+      const coach=e.evidenceType==="coachSchoolConnection";
+      if(coach&&e.coachId!==input.currentCoachId)continue;
+      if(!coach&&!["schoolExchangeMatch","developmentExchange","sharedTrainingContext","returnVisitEligible"].includes(e.evidenceType))continue;
+      if(e.evidenceType==="schoolExchangeMatch"&&evidence.some(item=>item.evidenceType==="returnVisitEligible"&&item.matchId===e.matchId))continue;
+      const types=e.evidenceType==="returnVisitEligible"?[e.candidateIntent]:["incomingFriendlyInvitation","outgoingFriendlyInvitation"];
+      for(const opportunityType of types) {
+        const source={opportunityType,opponentSchoolId:e.schoolBId,source:{type:coach?"coachNetwork":"schoolRelationship",sourceId:e.evidenceId},
+          sourceAuthority:"existing",canonicalEvidence:true,...(coach?{networkEvidenceRef:e.evidenceId}:{relationshipEvidenceRef:e.evidenceId}),
+          provenance:{sourceReason:e.sourceReason,...(coach?{networkEvidenceRef:e.evidenceId}:{relationshipEvidenceRef:e.evidenceId}),evidenceCareerYear:e.careerYear}};
+        const key=signature([opportunityType,e.schoolBId,context.sequence]);const group=groups.get(key)||[];group.push(source);groups.set(key,group);
+      }
+    }
+    return [...groups.values()].map(group=>{group.sort((a,b)=>compare(a.source.sourceId,b.source.sourceId));
+      const first=group[0];first.provenance.supportingEvidenceRefs=group.map(s=>s.source.sourceId).sort(compare);return first;});
+  }
   function deriveOpportunityCandidates(input) {
     const context=deriveEligibilityContext(input.context),pool=deriveOpponentCandidatePool(input.schoolRecords,context.playerSchoolId);
-    const schedule=input.schedule||Schedule.emptyState(),sources=copy(input.sources||[]),diagnostics=pool.rejected.map(copy);
+    const schedule=input.schedule||Schedule.emptyState(),relationshipSources=deriveRelationshipSources(input,context),sources=[...copy(input.sources||[]),...relationshipSources],diagnostics=pool.rejected.map(copy);
     if(input.includeFoundationFallback!==false) for(const opportunityType of ["incomingFriendlyInvitation","outgoingFriendlyInvitation"])
       sources.push({opportunityType,source:{type:"systemEligibility",sourceId:"foundation-eligibility"},sourceAuthority:"fallback"});
     const candidates=[],seen=new Set();
@@ -108,6 +130,10 @@
           if(candidate.priority==="optional"&&schedule.entries.some(item=>item.status!=="cancelled"&&item.matchOrigin==="officialCompetition"&&slotEqual(item,candidate)))reasons.push("blockedByMandatoryCompetition");
           const existing=schedule.opportunities.find(item=>item.opportunityId===canonical.opportunityId||item.provenance?.candidateRef?.candidateId===candidate.candidateId);
           if(existing)reasons.push("existingOpportunity");
+          if(source.canonicalEvidence&&schedule.opportunities.some(item=>item.careerId===candidate.careerId&&slotEqual(item,candidate)
+            &&item.opportunityType===candidate.opportunityType&&item.opponentSchoolId===candidate.opponentSchoolId))reasons.push("existingOpportunity");
+          if(source.sourceAuthority==="fallback"&&relationshipSources.some(item=>item.opportunityType===candidate.opportunityType&&item.opponentSchoolId===candidate.opponentSchoolId
+            &&(item.sequence??context.sequence)===candidate.sequence))reasons.push("supersededByCanonicalSource");
           if((input.history||[]).some(item=>item.careerYear===candidate.careerYear&&item.matchId===source.matchId))reasons.push("completedSourceMatch");
           if(input.activeMatch?.id&&input.activeMatch.id===source.matchId&&!input.activeMatch.completed)reasons.push("activeSourceMatch");
         }catch(error){reasons.push("invalidOpportunityFacts");}

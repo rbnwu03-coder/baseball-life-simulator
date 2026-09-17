@@ -1933,6 +1933,7 @@ function createInitialPlayer(name = "") {
     highSchoolYearOneStartingRole: "",
     highSchoolYearOneMatchHistory: [],
     highSchoolSchedule: { version: "high-school-schedule-v1", opportunities: [], entries: [] },
+    highSchoolExchangeNetwork: { version: "high-school-exchange-network-v1", evidence: [] },
     highSchoolYearTwoPlan: "",
     highSchoolYearTwoMatchHistory: [],
     highSchoolYearThreeMatchHistory: [],

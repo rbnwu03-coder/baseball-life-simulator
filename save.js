@@ -13,6 +13,9 @@ function normalizeSave(saved) {
   const sourceSaveVersion = saved.saveVersion;
   const fresh = createInitialPlayer(saved.name || "");
   Object.assign(fresh, saved);
+  if (typeof HighSchoolExchangeNetwork !== "undefined") {
+    fresh.highSchoolExchangeNetwork = HighSchoolExchangeNetwork.normalizeState(saved.highSchoolExchangeNetwork);
+  } else if (saved.highSchoolExchangeNetwork?.evidence?.length) throw new Error("Exchange network module required to restore evidence");
   if (typeof HighSchoolScheduleOpportunity !== "undefined") {
     fresh.highSchoolSchedule = HighSchoolScheduleOpportunity.normalizeState(saved.highSchoolSchedule);
   }
