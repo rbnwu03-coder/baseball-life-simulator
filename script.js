@@ -9567,6 +9567,18 @@ function deriveHighSchoolMatchOpportunityCandidates(options = {}) {
   return HighSchoolMatchOpportunityGeneration.deriveOpportunityCandidates(getHighSchoolMatchOpportunityGenerationInput(options));
 }
 
+function deriveHighSchoolOpportunitySelection(options = {}) {
+  assertHighSchoolMatchCapabilityAdmission(player);
+  return HighSchoolOpportunitySelection.selectOpportunityCandidates({...getHighSchoolMatchOpportunityGenerationInput(options),
+    maxOptionalPerSelectionWindow:options.maxOptionalPerSelectionWindow});
+}
+
+function materializeHighSchoolSelectedOpportunities(selection, options = {}) {
+  assertHighSchoolMatchCapabilityAdmission(player);
+  const input = {...getHighSchoolMatchOpportunityGenerationInput(options),maxOptionalPerSelectionWindow:options.maxOptionalPerSelectionWindow};
+  return HighSchoolOpportunitySelection.materializeSelectedCandidates(player.highSchoolSchedule,selection,input);
+}
+
 function ingestHighSchoolCoachSchoolConnection(fact) {
   assertHighSchoolMatchCapabilityAdmission(player);
   const input = getHighSchoolMatchOpportunityGenerationInput();
@@ -9657,11 +9669,14 @@ function prepareHighSchoolFollowupEvaluationMatch() {
   if (typeof HighSchoolScheduleOpportunity === "undefined") return prepareHighSchoolYearOneMatch(options);
   if (player.highSchoolMatch?.id === opportunity.matchId) return player.highSchoolMatch;
   const context = getHighSchoolScheduleExecutionContext();
+  const selection = typeof HighSchoolOpportunitySelection !== "undefined" ? deriveHighSchoolOpportunitySelection() : null;
   const candidate = typeof HighSchoolMatchOpportunityGeneration !== "undefined"
-    ? deriveHighSchoolMatchOpportunityCandidates().eligible.find(item => item.opportunityType === "developmentMatchOpportunity" && item.source.sourceId === opportunity.matchId) : null;
+    ? (selection ? selection.selectedCandidates : deriveHighSchoolMatchOpportunityCandidates().eligible).find(item => item.opportunityType === "developmentMatchOpportunity" && item.source.sourceId === opportunity.matchId) : null;
   const alreadyOffered = player.highSchoolSchedule?.opportunities.find(item => item.source.sourceId === opportunity.matchId && item.careerYear === 1 && item.opportunityType === "developmentMatchOpportunity");
   if (typeof HighSchoolMatchOpportunityGeneration !== "undefined" && !candidate && !alreadyOffered) throw new Error("No eligible development match candidate");
-  const matchOpportunity = alreadyOffered || (candidate ? materializeHighSchoolMatchOpportunityCandidate(candidate) : offerHighSchoolMatchOpportunity({opportunityType:"developmentMatchOpportunity",
+  const selectedMaterialization = !alreadyOffered && selection && candidate ? materializeHighSchoolSelectedOpportunities(selection) : null;
+  if (selectedMaterialization?.diagnostics.length) throw new Error("Development selection stale at materialization");
+  const matchOpportunity = alreadyOffered || (candidate ? (selectedMaterialization ? selectedMaterialization.materialized[0] : materializeHighSchoolMatchOpportunityCandidate(candidate)) : offerHighSchoolMatchOpportunity({opportunityType:"developmentMatchOpportunity",
     source:{type:"developmentSchedule",sourceId:opportunity.matchId}, sequence:2,
     opponentSchoolId:"regional-power-school", provenance:{reasonCode:"existing-followup-evaluation"},
     // Preserve the established fixture assignment explicitly; MatchContext validates it.
