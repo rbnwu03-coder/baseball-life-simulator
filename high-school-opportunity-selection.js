@@ -1,9 +1,10 @@
 (function(root,factory) {
   const api=factory(typeof module==="object"&&module.exports?require("./high-school-match-opportunity-generation"):root.HighSchoolMatchOpportunityGeneration,
     typeof module==="object"&&module.exports?require("./high-school-friendly-invitation-producer"):root.HighSchoolFriendlyInvitationSource,
-    typeof module==="object"&&module.exports?require("./high-school-schedule-opportunity"):root.HighSchoolScheduleOpportunity);
+    typeof module==="object"&&module.exports?require("./high-school-schedule-opportunity"):root.HighSchoolScheduleOpportunity,
+    typeof module==="object"&&module.exports?require("./high-school-opportunity-probability"):root.HighSchoolOpportunityProbability);
   if(typeof module==="object"&&module.exports)module.exports=api;else root.HighSchoolOpportunitySelection=api;
-})(typeof globalThis!=="undefined"?globalThis:this,function(Generation,Friendly,Schedule) {
+})(typeof globalThis!=="undefined"?globalThis:this,function(Generation,Friendly,Schedule,Probability) {
   "use strict";
   const POLICY_VERSION="high-school-opportunity-selection-v1";
   const TYPE_ORDER=Object.freeze(["officialCompetitionOpportunity","trainingCampOpportunity","incomingFriendlyInvitation","outgoingFriendlyInvitation","developmentMatchOpportunity","neutralExchangeOpportunity"]);
@@ -59,7 +60,8 @@
     const used=optional.length+orphanEntries.length;
     return {maxOptionalPerSelectionWindow:context.maxOptionalPerSelectionWindow,existingUsed:used,remaining:Math.max(0,context.maxOptionalPerSelectionWindow-used),selectedUsed:0};
   }
-  function resolveCandidateConflicts(context) {
+  function resolveCandidateConflicts(context, deferOptionalChoice=false) {
+    const optionalPool=[];
     const budget=applyOpportunityBudget(context),outcomes=[],selected=[],seenIds=new Set(),seenSemantic=new Set();
     const valid=c=>c&&id(c.candidateId)&&id(c.opponentSchoolId)&&c.opponentSchoolId!==c.playerSchoolId&&Object.hasOwn(Schedule.ORIGIN_MAP,c.opportunityType)
       &&c.eligible===true&&Array.isArray(c.exclusionReasons)&&c.exclusionReasons.length===0;
@@ -77,6 +79,15 @@
         if(context.existingOpportunities.length)reasons.push("blockedByExistingOpportunity");
         if(!isMandatory&&mandatoryClaim)reasons.push("blockedByMandatorySelection");
         if(seenIds.has(c.candidateId)||seenSemantic.has(semantic(c)))reasons.push("semanticDuplicate");
+      }
+      if(deferOptionalChoice&&!isMandatory&&!reasons.length) {
+        if(optionalPool.length&&typeOrder(c)!==typeOrder(optionalPool[0]))reasons.push("typeConflict");
+        if(budget.remaining<=0)reasons.push("budgetExceeded");
+        if(!reasons.length){
+          optionalPool.push(c);seenSemantic.add(semantic(c));seenIds.add(c.candidateId);
+          outcomes.push({candidateId:c.candidateId,selected:false,classification:"optional",reasons:["eligibleForProbability"],upstreamReasons:[],semanticKey:semantic(c),campSourceId:c.sourceProvenance?.campSourceId||null});
+          continue;
+        }
       }
       if(!reasons.length) {
         if(selected.length) {
@@ -98,14 +109,22 @@
         upstreamReasons:copy(c.exclusionReasons||[]),semanticKey:semantic(c),campSourceId:c.sourceProvenance?.campSourceId||null});
     }
     for(const c of context.candidateSet.filter(c=>!c||typeof c!=="object"))outcomes.push({candidateId:null,selected:false,classification:"optional",reasons:["invalidCandidate"],upstreamReasons:[],semanticKey:null,campSourceId:null});
-    return {selected,outcomes,budget};
+    return {selected,outcomes,budget,...(deferOptionalChoice?{optionalPool}:{})};
   }
   function selectOpportunityCandidates(input) {
-    const context=deriveSelectionContext(input),resolved=resolveCandidateConflicts(context);
+    const enabled=input.probabilityPolicy==="enabled",context=deriveSelectionContext(input),resolved=resolveCandidateConflicts(context,enabled);
+    let probabilityResult;
+    if(enabled){
+      const bypass=context.existingOpportunities.length?"existingOpportunityBypass":context.existingScheduleEntries.length||context.existingLifecycleMatches.length?"blockedBeforeProbability":resolved.selected.some(mandatory)||context.mandatoryReservations.length?"mandatoryBypassProbability":null;
+      probabilityResult=Probability.deriveProbabilityResult({candidates:resolved.optionalPool,context,budget:resolved.budget.remaining,bypassReason:bypass});
+      const chosen=new Set(probabilityResult.selectedCandidateIds);
+      for(const c of resolved.optionalPool){const outcome=resolved.outcomes.find(o=>o.candidateId===c.candidateId);outcome.selected=chosen.has(c.candidateId);outcome.reasons=[outcome.selected?"selectedByWeightedDraw":"notSelectedByWeightedDraw"];if(outcome.selected){resolved.selected.push(c);resolved.budget.selectedUsed++;resolved.budget.remaining--;}}
+    }
     return {policyVersion:POLICY_VERSION,selectionWindowId:context.selectionWindowId,context,
       selectedCandidateIds:resolved.selected.map(c=>c.candidateId),selectedCandidates:copy(resolved.selected),
       mandatorySelections:resolved.selected.filter(mandatory).map(c=>c.candidateId),optionalSelections:resolved.selected.filter(c=>!mandatory(c)).map(c=>c.candidateId),
       mandatoryFacts:context.candidateSet.filter(c=>c&&mandatory(c)&&sameSlot(c,context)).map(c=>c.candidateId),
+      ...(enabled?{probabilityPolicy:"enabled",probabilityResult}:{}),
       selectionReasons:resolved.outcomes,rejectedCandidates:resolved.outcomes.filter(o=>!o.selected),diagnostics:resolved.outcomes.filter(o=>!o.selected),budget:resolved.budget};
   }
   function materializeSelectedCandidates(state,result,input) {
@@ -133,6 +152,11 @@
       // Only freshly created Opportunities receive selection refs; old provenance is immutable.
       o.provenance.selectionPolicyVersion=POLICY_VERSION;o.provenance.selectionWindowId=current.selectionWindowId;
       o.provenance.selectionReason=mandatory(c)?"selectedMandatory":"selectedOptional";
+      if(current.probabilityResult?.selectedCandidateIds.includes(c.candidateId)){
+        const probability=current.probabilityResult,profile=probability.weights.find(w=>w.candidateId===c.candidateId);
+        o.provenance.probabilityVersion=probability.probabilityVersion;o.provenance.candidatePoolIdentity=probability.candidatePoolIdentity;
+        o.provenance.selectedWeightClass=profile.weightClass;o.provenance.drawRef=probability.draws.find(d=>d.selectedCandidateId===c.candidateId).drawRef;
+      }
       output.materialized.push(o);
     }
     return output;

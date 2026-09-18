@@ -1,6 +1,6 @@
 const {makeContext}=require("./high-school-career-test-context");
-module.exports=function makeSelectionTestContext(){
-const {run,json,context,flushTransitions}=makeContext();context.flushProducerTransitions=flushTransitions;
+module.exports=function makeSelectionTestContext(probabilityPolicy="disabled"){
+const {run,json,context,flushTransitions}=makeContext();context.flushProducerTransitions=flushTransitions;context.selectionProbabilityPolicy=probabilityPolicy;
 
 run(`
   function finishProducerMatch() {
@@ -43,9 +43,9 @@ run(`
 `);
 run(`
   var selectionSources=[];
-  function selectedInput(sequence=1){return getHighSchoolMatchOpportunityGenerationInput({sequence,sources:selectionSources});}
-  function selectedResult(sequence=1){return deriveHighSchoolOpportunitySelection({sequence,sources:selectionSources});}
-  function selectedMaterialize(result,sequence=1){return materializeHighSchoolSelectedOpportunities(result,{sequence,sources:selectionSources});}
+  function selectedInput(sequence=1){return getHighSchoolMatchOpportunityGenerationInput({sequence,sources:selectionSources,probabilityPolicy:selectionProbabilityPolicy});}
+  function selectedResult(sequence=1){return deriveHighSchoolOpportunitySelection({sequence,sources:selectionSources,probabilityPolicy:selectionProbabilityPolicy});}
+  function selectedMaterialize(result,sequence=1){return materializeHighSchoolSelectedOpportunities(result,{sequence,sources:selectionSources,probabilityPolicy:selectionProbabilityPolicy});}
   function startFrequencyCareer(){
     stopHighSchoolMatchPlayback();pendingYouthSeasonOutcome=null;isTransitioning=false;
     player=createRepresentativeHighSchoolEntryFixture("ordinary",97001);player.name="Frequency career";applyCanonicalPositionProfile(player,"游擊手",[]);

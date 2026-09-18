@@ -9570,12 +9570,12 @@ function deriveHighSchoolMatchOpportunityCandidates(options = {}) {
 function deriveHighSchoolOpportunitySelection(options = {}) {
   assertHighSchoolMatchCapabilityAdmission(player);
   return HighSchoolOpportunitySelection.selectOpportunityCandidates({...getHighSchoolMatchOpportunityGenerationInput(options),
-    maxOptionalPerSelectionWindow:options.maxOptionalPerSelectionWindow});
+    probabilityPolicy:options.probabilityPolicy??"enabled",maxOptionalPerSelectionWindow:options.maxOptionalPerSelectionWindow});
 }
 
 function materializeHighSchoolSelectedOpportunities(selection, options = {}) {
   assertHighSchoolMatchCapabilityAdmission(player);
-  const input = {...getHighSchoolMatchOpportunityGenerationInput(options),maxOptionalPerSelectionWindow:options.maxOptionalPerSelectionWindow};
+  const input = {...getHighSchoolMatchOpportunityGenerationInput(options),probabilityPolicy:options.probabilityPolicy??"enabled",maxOptionalPerSelectionWindow:options.maxOptionalPerSelectionWindow};
   return HighSchoolOpportunitySelection.materializeSelectedCandidates(player.highSchoolSchedule,selection,input);
 }
 
