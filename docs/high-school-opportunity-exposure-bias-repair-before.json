@@ -1,0 +1,123 @@
+{
+  "careers": 5000,
+  "returnVisit": {
+    "generated": 10000,
+    "eligible": 7500,
+    "reachable": 0,
+    "selected": 0,
+    "materialized": 0,
+    "eligibleTypeConflict": 5000
+  },
+  "y2New": {
+    "generated": 103358,
+    "eligible": 101372,
+    "reachable": 0,
+    "selected": 0,
+    "materialized": 0,
+    "eligibleTypeConflict": 101372
+  },
+  "y2Repeat": {
+    "generated": 118456,
+    "eligible": 57942,
+    "reachable": 19314,
+    "selected": 10000,
+    "materialized": 10000,
+    "eligibleTypeConflict": 38628
+  },
+  "firstLoss": {
+    "notSelectedByWeightedDraw": 44314,
+    "upstreamExcluded_notRecoverableFromCompactBaseline": 208407,
+    "blockedByMandatorySelection": 75000,
+    "typeConflict": 175000
+  },
+  "sourceCounts": {
+    "foundationFallback": {
+      "generated": 350000,
+      "eligible": 229969,
+      "reachable": 33750,
+      "selected": 2326,
+      "materialized": 2326,
+      "eligibleTypeConflict": 134886
+    },
+    "coachNetwork": {
+      "generated": 20000,
+      "eligible": 16001,
+      "reachable": 2500,
+      "selected": 1424,
+      "materialized": 1424,
+      "eligibleTypeConflict": 9834
+    },
+    "mandatory": {
+      "generated": 10000,
+      "eligible": 10000,
+      "reachable": 0,
+      "selected": 10000,
+      "materialized": 10000
+    },
+    "explicitReturnVisit": {
+      "generated": 10000,
+      "eligible": 7500,
+      "reachable": 0,
+      "selected": 0,
+      "materialized": 0,
+      "eligibleTypeConflict": 5000
+    },
+    "schoolRelationship": {
+      "generated": 114763,
+      "eligible": 40842,
+      "reachable": 10562,
+      "selected": 5456,
+      "materialized": 5456,
+      "eligibleTypeConflict": 25280
+    },
+    "sharedTrainingContext": {
+      "generated": 19208,
+      "eligible": 11252,
+      "reachable": 8752,
+      "selected": 4544,
+      "materialized": 4544
+    },
+    "explicitCampPlan": {
+      "generated": 3750,
+      "eligible": 3750,
+      "reachable": 3750,
+      "selected": 1250,
+      "materialized": 1250
+    }
+  },
+  "types": {
+    "friendly": {
+      "generated": 478750,
+      "eligible": 280000,
+      "reachable": 35000,
+      "selected": 2500,
+      "materialized": 2500,
+      "eligibleTypeConflict": 175000
+    },
+    "development": {
+      "generated": 5000,
+      "eligible": 5000,
+      "reachable": 0,
+      "selected": 5000,
+      "materialized": 5000
+    },
+    "trainingCamp": {
+      "generated": 38971,
+      "eligible": 29314,
+      "reachable": 24314,
+      "selected": 12500,
+      "materialized": 12500
+    },
+    "officialCompetition": {
+      "generated": 5000,
+      "eligible": 5000,
+      "reachable": 0,
+      "selected": 5000,
+      "materialized": 5000
+    }
+  },
+  "careerDigest": "bb95f8609d5d127bd4ecbffa2a98b67bf561a59db11fbd430602a4d43e0404a2",
+  "matchesCommittedBaseline": true,
+  "identitySetMatches": true,
+  "note": "Complete baseline checkpoint validated against committed careerDigest. Compact baseline omits upstream exclusion reasons, so upstream loss categories are not invented. Four pre-repair full raw traces separately retain exact source/dedup facts."
+}

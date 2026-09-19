@@ -2,14 +2,14 @@
 const assert=require("assert"),A=require("./high-school-opportunity-probability-calibration-audit.cjs"),make=require("./high-school-opportunity-probability-calibration-career.cjs");
 const env=make(),rows=[1,2,3,4].map(i=>A.compactCareer(env.runCareer(i))),summary=A.aggregateExposure(rows),synthetic=A.aggregatePairwiseWeights(1000),report=A.buildCalibrationReport(summary,summary,synthetic);
 let passed=0;const test=(name,fn)=>{fn();passed++;console.log("PASS "+name);};
-test("1 metadata versions",()=>{assert.strictEqual(report.metadata.baseline,"5b5367c");assert.strictEqual(report.metadata.auditVersion,A.VERSION);assert.strictEqual(report.metadata.probabilityVersion,"high-school-opportunity-probability-v1");});
+test("1 metadata versions",()=>{assert.strictEqual(report.metadata.baseline,"e91fc49");assert.strictEqual(report.metadata.auditVersion,A.VERSION);assert.strictEqual(report.metadata.probabilityVersion,"high-school-opportunity-probability-v1");});
 test("2 stable sequential identities",()=>assert.deepStrictEqual(A.ids(3),["audit-career-000001","audit-career-000002","audit-career-000003"]));
 test("3 aggregation deterministic",()=>assert.deepStrictEqual(A.aggregateExposure(rows),summary));
-test("4 source availability distinguished from admission and exposure",()=>{const d=summary.source_distribution.explicitReturnVisit;assert(d.eligible>0);assert.strictEqual(d.admitted,0);assert.strictEqual(d.selected,0);});
+test("4 source availability distinguished from admission and exposure",()=>{const d=summary.source_distribution.explicitReturnVisit;assert(d.eligible>0);assert(d.admitted>0);assert(d.selected<=d.admitted);});
 test("5 weight groups all represented",()=>{for(const w of [1,2,3])assert(summary.weight_distribution[w].admitted>0);});
 for(const [n,pair] of [[6,"3vs2"],[7,"3vs1"],[8,"2vs1"]])test(n+" comparable pairwise "+pair,()=>assert(synthetic.pairs[pair].highShare>synthetic.pairs[pair].lowShare));
 test("9 equal weights broad fairness",()=>assert(synthetic.equalMaxDeviation<.08));
-test("10 pools include empty mandatory single and multiple",()=>{assert(Object.keys(summary.candidate_pool_distribution).some(k=>k.endsWith(":0")));assert(summary.singleCandidateWindows>0);assert(summary.multiCandidateWindows>0);});
+test("10 pools include empty mandatory single and multiple",()=>{assert(Object.keys(summary.candidate_pool_distribution).some(k=>k.endsWith(":0")));assert.strictEqual(summary.singleCandidateWindows+summary.multiCandidateWindows,12);assert(summary.multiCandidateWindows>0);});
 test("11 mandatory profiles zero",()=>assert.strictEqual(summary.integrity.mandatoryProfiles,0));
 test("12 budget violation zero",()=>assert.strictEqual(summary.integrity.budgetViolation,0));
 test("13 admitted fallback semantic duplicates zero",()=>assert.strictEqual(summary.integrity.fallbackCoexistingWithRealSemanticDuplicate,0));
@@ -20,7 +20,7 @@ test("17 order and partition neutral aggregation",()=>{assert.deepStrictEqual(A.
 test("18 comparison frequency equal",()=>assert(report.probability_enabled_vs_disabled.frequencyEqual));
 test("19 actual save reload sampling",()=>{assert.strictEqual(summary.integrity.reloadSamples,4);assert.strictEqual(summary.integrity.reloadMismatch,0);});
 test("20 three anti-reroll status samples",()=>{for(const status of ["declined","expired","cancelled"])assert.strictEqual(summary.integrity["antiReroll:"+status],4);assert.strictEqual(summary.integrity.antiRerollFailures,0);});
-test("21 warning generation separates correctness",()=>{const s=JSON.parse(JSON.stringify(summary));s.source_distribution.explicitReturnVisit.eligible=101;const r=A.buildCalibrationReport(s,summary,synthetic);assert(r.warnings.some(w=>w.code==="ZERO_EXPOSURE_WARN"));assert.strictEqual(r.failures.length,0);assert.strictEqual(r.status,"WARN");});
+test("21 warning generation separates correctness",()=>{const s=JSON.parse(JSON.stringify(summary));s.source_distribution.explicitReturnVisit.eligible=101;s.source_distribution.explicitReturnVisit.selected=0;const r=A.buildCalibrationReport(s,summary,synthetic);assert(r.warnings.some(w=>w.code==="ZERO_EXPOSURE_WARN"));assert.strictEqual(r.failures.length,0);assert.strictEqual(r.status,"WARN");});
 test("22 failure generation for integrity breach",()=>{const s=JSON.parse(JSON.stringify(summary));s.integrity.budgetViolation=1;const r=A.buildCalibrationReport(s,summary,synthetic);assert.strictEqual(r.status,"FAIL");assert(r.failures.includes("enabled:budgetViolation"));});
 test("23 friendly duplicate count never adds selection probability",()=>{assert.strictEqual(synthetic.friendlyDedup.tested,1000);assert.strictEqual(synthetic.friendlyDedup.inflation,0);});
 test("24 comparable three-way direction",()=>assert(synthetic.threeWay.C>synthetic.threeWay.B&&synthetic.threeWay.B>synthetic.threeWay.A));

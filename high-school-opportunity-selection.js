@@ -6,7 +6,7 @@
   if(typeof module==="object"&&module.exports)module.exports=api;else root.HighSchoolOpportunitySelection=api;
 })(typeof globalThis!=="undefined"?globalThis:this,function(Generation,Friendly,Schedule,Probability) {
   "use strict";
-  const POLICY_VERSION="high-school-opportunity-selection-v1";
+  const POLICY_VERSION="high-school-opportunity-selection-v2";
   const TYPE_ORDER=Object.freeze(["officialCompetitionOpportunity","trainingCampOpportunity","incomingFriendlyInvitation","outgoingFriendlyInvitation","developmentMatchOpportunity","neutralExchangeOpportunity"]);
   const LIFECYCLE_SLOTS=Object.freeze({
     "hs-y1-autumn-exhibition":{careerYear:1,seasonPhase:"autumn-exhibition",sequence:1},
@@ -37,7 +37,7 @@
     if(!id(context.careerId)||!id(context.playerSchoolId)||![1,2,3].includes(context.careerYear)||!id(context.seasonPhase)||!Number.isInteger(context.sequence)||context.sequence<1)throw Error("Invalid selection context");
     const limit=input.maxOptionalPerSelectionWindow??1;
     // A window is one existing match slot. Larger budgets would change lifecycle frequency.
-    if(![0,1].includes(limit))throw Error("Selection policy v1 supports optional budget 0 or 1 per existing slot");
+    if(![0,1].includes(limit))throw Error("Selection policy supports optional budget 0 or 1 per existing slot");
     const generated=input.candidateSet===undefined?Generation.deriveOpportunityCandidates(input).candidates:input.candidateSet;
     if(!Array.isArray(generated))throw Error("Invalid candidate set");
     const state=input.schedule||Schedule.emptyState();
@@ -81,7 +81,7 @@
         if(seenIds.has(c.candidateId)||seenSemantic.has(semantic(c)))reasons.push("semanticDuplicate");
       }
       if(deferOptionalChoice&&!isMandatory&&!reasons.length) {
-        if(optionalPool.length&&typeOrder(c)!==typeOrder(optionalPool[0]))reasons.push("typeConflict");
+        // Legal alternatives share the draw; only the winner consumes this existing slot.
         if(budget.remaining<=0)reasons.push("budgetExceeded");
         if(!reasons.length){
           optionalPool.push(c);seenSemantic.add(semantic(c));seenIds.add(c.candidateId);

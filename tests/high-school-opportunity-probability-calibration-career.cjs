@@ -22,6 +22,7 @@ function installCareerAudit(){
       const evidenceBefore=input.relationshipLedger.evidence.length;
       const r=HighSchoolOpportunitySelection.selectOpportunityCandidates(input);
       if(trace)HighSchoolOpportunitySelection.auditSelection(r);
+      const flow=auditFlow(input,r);
       const admitted=HighSchoolOpportunitySelection.resolveCandidateConflicts(r.context,true).optionalPool;
       const profiles=HighSchoolOpportunityProbability.deriveCandidateWeights(admitted,r.context);
       checks.budgetViolation+=Number(r.optionalSelections.length>r.budget.maxOptionalPerSelectionWindow);
@@ -46,6 +47,7 @@ function installCareerAudit(){
       const repeat=materializeHighSchoolSelectedOpportunities(r,opts);checks.duplicateWindowMaterialization+=repeat.materialized.length;
       checks.selectedWithoutOpportunity+=r.selectedCandidateIds.filter(id=>!out.materialized.some(o=>o.provenance.candidateRef.candidateId===id)).length;
       checks.unselectedMaterialized+=out.materialized.filter(o=>!r.selectedCandidateIds.includes(o.provenance.candidateRef.candidateId)).length;
+      for(const row of flow.rows)if(out.materialized.some(o=>o.provenance.candidateRef.candidateId===row.candidateId)){row.materialized=true;row.statusAtEachStage.materialization="pass";}
       const o=out.materialized[0];HighSchoolScheduleOpportunity.setOpportunityStatus(player.highSchoolSchedule,o.opportunityId,"accepted");
       const e=HighSchoolScheduleOpportunity.scheduleOpportunity(player.highSchoolSchedule,o.opportunityId,getHighSchoolScheduleExecutionContext());
       // First Y1 game has no playing-time decision seed. Reuse the established audit seed hook.
@@ -53,7 +55,7 @@ function installCareerAudit(){
       const m=launchHighSchoolScheduleEntry(e.scheduleEntryId,options);
       const cursor=m.simulationCursor;HighSchoolOpportunitySelection.selectOpportunityCandidates(input);checks.gameplayRngMismatch+=Number(cursor!==m.simulationCursor);
       finishProducerMatch();if(!m.completed||!MatchGameRecord.assertIntegrity(m.gameRecord))throw Error("Audit game integrity");
-      windows.push({year:r.context.careerYear,phase:r.context.seasonPhase,sequence,windowId:r.selectionWindowId,candidates:r.context.candidateSet,profiles,probability:r.probabilityResult,selected:r.selectedCandidates,mandatoryIds:r.mandatorySelections,rejections:r.rejectedCandidates,budget:r.budget,opportunity:o,schedule:e,completed:m.completed,evidenceBefore,evidenceCount:player.highSchoolExchangeNetwork.evidence.length,availableOpponents:[...new Set(input.schoolRecords.filter(s=>s.rosterValid&&s.schoolId!==input.context.playerSchoolId).map(s=>s.schoolId))],recordIntegrity:true,gameRecordSignature:auditHash(m.gameRecord)});
+      windows.push({flow,year:r.context.careerYear,phase:r.context.seasonPhase,sequence,windowId:r.selectionWindowId,candidates:r.context.candidateSet,profiles,probability:r.probabilityResult,selected:r.selectedCandidates,mandatoryIds:r.mandatorySelections,rejections:r.rejectedCandidates,budget:r.budget,opportunity:o,schedule:e,completed:m.completed,evidenceBefore,evidenceCount:player.highSchoolExchangeNetwork.evidence.length,availableOpponents:[...new Set(input.schoolRecords.filter(s=>s.rosterValid&&s.schoolId!==input.context.playerSchoolId).map(s=>s.schoolId))],recordIntegrity:true,gameRecordSignature:auditHash(m.gameRecord)});
     }
     play(1,{matchId:"hs-y1-autumn-exhibition",eventId:"high_school_showcase",matchType:"autumn-exhibition",opportunityIndex:1});player.highSchoolStep=7;
     play(2,{matchId:"hs-y1-followup-evaluation-2",eventId:"high_school_followup_evaluation",matchType:"evaluation-practice",opportunityIndex:2,opportunityDecision:player.highSchoolNextOpportunity});
@@ -67,4 +69,4 @@ function installCareerAudit(){
     return {careerAuditId,cohort,mode,windows,checks};
   };
 }
-module.exports=function(){const env=make("enabled");env.context.auditHash=value=>require("crypto").createHash("sha256").update(JSON.stringify(value)).digest("hex");env.run("("+installCareerAudit.toString()+")()");return {runCareer:(index,mode="enabled",trace=false)=>env.json("runAuditCareer("+JSON.stringify(index)+","+JSON.stringify(mode)+","+trace+")"),env};};
+module.exports=function(){const env=make("enabled");env.context.auditFlow=require("./high-school-opportunity-exposure-flow.cjs").traceFlow;env.context.auditHash=value=>require("crypto").createHash("sha256").update(JSON.stringify(value)).digest("hex");env.run("("+installCareerAudit.toString()+")()");return {runCareer:(index,mode="enabled",trace=false)=>env.json("runAuditCareer("+JSON.stringify(index)+","+JSON.stringify(mode)+","+trace+")"),env};};
