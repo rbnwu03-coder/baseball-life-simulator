@@ -3,12 +3,15 @@ const make=require("./high-school-opportunity-selection-test-context.cjs");
 function installCareerAudit(){
   function beginAuditCareer(index){
     stopHighSchoolMatchPlayback();pendingYouthSeasonOutcome=null;isTransitioning=false;
-    const auditId="audit-career-"+String(index).padStart(6,"0");
-    player=createRepresentativeHighSchoolEntryFixture("ordinary",97001);player.name=auditId;applyCanonicalPositionProfile(player,"游擊手",[]);
-    player.schoolInvitationState=createDefaultSchoolInvitationState();const set=generateSchoolInvitationSet(player,{generationSeed:auditId});
-    finalizeSchoolInvitationSelection(player,set.invitations[0].schoolId);materializeSelectedHighSchoolRoster(player,{rosterRole:"bench"});completeHighSchoolEntry({source:"probability-calibration-audit"});
-    player.highSchoolStep=5;applyHighSchoolRoleState("bench");return auditId;
+    const auditId=(auditSettings.namespace||"audit-career")+"-"+String(index).padStart(6,"0");
+    player=createRepresentativeHighSchoolEntryFixture(auditSettings.profile||"ordinary",auditSettings.fixtureSeed||97001);player.name=auditId;applyCanonicalPositionProfile(player,"游擊手",[]);
+    player.schoolInvitationState=createDefaultSchoolInvitationState();const set=generateSchoolInvitationSet(player,{generationSeed:auditSettings.admissionNamespace?auditSettings.admissionNamespace+"-"+String(index).padStart(6,"0"):auditId});
+    finalizeSchoolInvitationSelection(player,set.invitations[auditSettings.invitationIndex||0].schoolId);materializeSelectedHighSchoolRoster(player,{rosterRole:"bench"});completeHighSchoolEntry({source:"probability-calibration-audit"});
+    player.highSchoolStep=5;applyHighSchoolRoleState("bench");
+    if(auditSettings.validateEntry){const checks={capability:validateHighSchoolEntryCapability(player).ok,invitation:validateSchoolInvitationSet(player.schoolInvitationState).ok,roster:TeamRosterFoundation.validateRoster(player.schoolInvitationState.selectedSchoolRoster).ok,school:getSelectedHighSchoolContext(player)?.schoolId===player.schoolInvitationState.selectedSchoolRoster.schoolId};if(Object.values(checks).some(v=>!v))throw Error("FIXTURE_FAILURE "+auditId+" "+JSON.stringify(checks));}
+    return auditId;
   }
+  globalThis.prepareAuditCareer=beginAuditCareer;
   globalThis.runAuditCareer=function(index,mode="enabled",trace=false){
     const careerAuditId=beginAuditCareer(index),windows=[],cohort=index%4;
     const initial=getHighSchoolMatchOpportunityGenerationInput({sequence:1});
@@ -16,10 +19,12 @@ function installCareerAudit(){
     if(cohort===1||cohort===2)ingestHighSchoolCoachSchoolConnection({coachId:initial.currentCoachId,schoolBId:opponents[0],source:{type:cohort===1?"initiatedContact":"knownCounterpart",sourceId:careerAuditId+":coach-contact"}});
     const sources=cohort===3?[{opportunityType:"trainingCampOpportunity",source:{type:"trainingCampPlan",sourceId:careerAuditId+":explicit-plan"},explicit:true,careerYear:1,seasonPhase:"autumn-exhibition",participantSchoolIds:[initial.context.playerSchoolId,...opponents.slice(0,3)]}]:[];
     const checks={reloadSamples:0,reloadMismatch:0,antiReroll:{declined:0,expired:0,cancelled:0},antiRerollFailures:0,duplicateWindowMaterialization:0,budgetViolation:0,mandatoryProfiles:0,selectedWithoutOpportunity:0,unselectedMaterialized:0,gameplayRngMismatch:0,neutralityMismatch:0};
+    function boundaryReload(){if(!auditSettings.extended||index>100)return;checks.crossYearReloadSamples=(checks.crossYearReloadSamples||0)+1;const snapshot=JSON.stringify([player.highSchoolExchangeNetwork,player.highSchoolSchedule]);saveGame();const render=showCurrentEvent;try{showCurrentEvent=()=>{};loadGame();}finally{showCurrentEvent=render;}checks.crossYearReloadMismatch=(checks.crossYearReloadMismatch||0)+Number(snapshot!==JSON.stringify([player.highSchoolExchangeNetwork,player.highSchoolSchedule]));if(checks.crossYearReloadMismatch)throw Error("SAVE_RELOAD_FAILURE at year boundary");}
     function play(sequence,options){
       const opts={sequence,sources,probabilityPolicy:mode};
       const input={...getHighSchoolMatchOpportunityGenerationInput(opts),probabilityPolicy:mode,trace};
       const evidenceBefore=input.relationshipLedger.evidence.length;
+      const observations=auditSettings.extended?{availableOpponents:input.schoolRecords.filter(s=>s.rosterValid&&s.schoolId!==input.context.playerSchoolId).map(s=>s.schoolId),priorEvidence:input.relationshipLedger.evidence.map(e=>({schoolId:e.schoolBId,evidenceType:e.evidenceType,evidenceId:e.evidenceId})),schoolId:input.context.playerSchoolId}:undefined;
       const r=HighSchoolOpportunitySelection.selectOpportunityCandidates(input);
       if(trace)HighSchoolOpportunitySelection.auditSelection(r);
       const flow=auditFlow(input,r);
@@ -55,18 +60,18 @@ function installCareerAudit(){
       const m=launchHighSchoolScheduleEntry(e.scheduleEntryId,options);
       const cursor=m.simulationCursor;HighSchoolOpportunitySelection.selectOpportunityCandidates(input);checks.gameplayRngMismatch+=Number(cursor!==m.simulationCursor);
       finishProducerMatch();if(!m.completed||!MatchGameRecord.assertIntegrity(m.gameRecord))throw Error("Audit game integrity");
-      windows.push({flow,year:r.context.careerYear,phase:r.context.seasonPhase,sequence,windowId:r.selectionWindowId,candidates:r.context.candidateSet,profiles,probability:r.probabilityResult,selected:r.selectedCandidates,mandatoryIds:r.mandatorySelections,rejections:r.rejectedCandidates,budget:r.budget,opportunity:o,schedule:e,completed:m.completed,evidenceBefore,evidenceCount:player.highSchoolExchangeNetwork.evidence.length,availableOpponents:[...new Set(input.schoolRecords.filter(s=>s.rosterValid&&s.schoolId!==input.context.playerSchoolId).map(s=>s.schoolId))],recordIntegrity:true,gameRecordSignature:auditHash(m.gameRecord)});
+      windows.push({...(observations?{observations}:{}),flow,year:r.context.careerYear,phase:r.context.seasonPhase,sequence,windowId:r.selectionWindowId,candidates:r.context.candidateSet,profiles,probability:r.probabilityResult,selected:r.selectedCandidates,mandatoryIds:r.mandatorySelections,rejections:r.rejectedCandidates,budget:r.budget,opportunity:o,schedule:e,completed:m.completed,evidenceBefore,evidenceCount:player.highSchoolExchangeNetwork.evidence.length,availableOpponents:[...new Set(input.schoolRecords.filter(s=>s.rosterValid&&s.schoolId!==input.context.playerSchoolId).map(s=>s.schoolId))],recordIntegrity:true,gameRecordSignature:auditHash(m.gameRecord)});
     }
     play(1,{matchId:"hs-y1-autumn-exhibition",eventId:"high_school_showcase",matchType:"autumn-exhibition",opportunityIndex:1});player.highSchoolStep=7;
     play(2,{matchId:"hs-y1-followup-evaluation-2",eventId:"high_school_followup_evaluation",matchType:"evaluation-practice",opportunityIndex:2,opportunityDecision:player.highSchoolNextOpportunity});
-    initializeHighSchoolYearTransition(2);player.chapter="青棒第二年";player.highSchoolYearTwoStep=2;
+    boundaryReload();initializeHighSchoolYearTransition(2);player.chapter="青棒第二年";player.highSchoolYearTwoStep=2;
     play(1,{matchId:"hs-y2-spring-evaluation-1",eventId:"high_school_year_two_spring_game",matchType:"year-two-spring-evaluation",opportunityIndex:1,opportunityDecision:ensureHighSchoolYearTwoSpringOpportunity()});player.highSchoolYearTwoStep=6;
     play(2,{matchId:"hs-y2-autumn-evaluation-2",eventId:"high_school_year_two_autumn_stage",matchType:"year-two-autumn-evaluation",opportunityIndex:2,opportunityDecision:ensureHighSchoolYearTwoAutumnOpportunity()});
-    initializeHighSchoolYearTransition(3);player.chapter="青棒關鍵年";player.criticalYearStep=0;
+    boundaryReload();initializeHighSchoolYearTransition(3);player.chapter="青棒關鍵年";player.criticalYearStep=0;
     const render=showCurrentEvent;try{showCurrentEvent=()=>{};choose("critical_offseason",1);}finally{showCurrentEvent=render;}
     play(1,{matchId:"hs-y3-final-competition-1",eventId:"critical_tournament",matchType:"final-competition",opportunityIndex:1,opportunityDecision:ensureHighSchoolYearThreeOpportunity()});
     checks.evidenceOrphans=HighSchoolExchangeNetwork.auditRelationshipEvidence(player.highSchoolExchangeNetwork,player.highSchoolSchedule).orphanRefs;
     return {careerAuditId,cohort,mode,windows,checks};
   };
 }
-module.exports=function(){const env=make("enabled");env.context.auditFlow=require("./high-school-opportunity-exposure-flow.cjs").traceFlow;env.context.auditHash=value=>require("crypto").createHash("sha256").update(JSON.stringify(value)).digest("hex");env.run("("+installCareerAudit.toString()+")()");return {runCareer:(index,mode="enabled",trace=false)=>env.json("runAuditCareer("+JSON.stringify(index)+","+JSON.stringify(mode)+","+trace+")"),env};};
+module.exports=function(settings={}){const env=make("enabled");env.context.auditSettings=settings;env.context.auditFlow=require("./high-school-opportunity-exposure-flow.cjs").traceFlow;env.context.auditHash=value=>require("crypto").createHash("sha256").update(JSON.stringify(value)).digest("hex");env.run("("+installCareerAudit.toString()+")()");return {prepareCareer:index=>{env.run("prepareAuditCareer("+index+")");return env.json("({schoolId:getSelectedHighSchoolContext(player).schoolId,capability:player.baseballSkills,rosterValid:TeamRosterFoundation.validateRoster(player.schoolInvitationState.selectedSchoolRoster).ok})");},runCareer:(index,mode="enabled",trace=false)=>env.json("runAuditCareer("+JSON.stringify(index)+","+JSON.stringify(mode)+","+trace+")"),env};};
