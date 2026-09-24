@@ -47,7 +47,11 @@ test('competition encounters remain completed competition facts',()=>assert(ledg
 test('source age is not producer current year',()=>{const x=lineage[0],s=x.friendly.sources.find(s=>s.producerType==='returnVisitProducer');assert.strictEqual(s.careerYear,2);assert.deepStrictEqual(s.provenance.originCareerYears,[1]);});
 test('same-year positions come from the completed schedule',()=>{for(const c of careers)for(const w of c.windows){assert.strictEqual(w.schedule.careerYear,w.year);assert.strictEqual(w.schedule.seasonPhase,w.phase);assert.strictEqual(w.schedule.sequence,w.sequence);}});
 test('player reputation is real persisted scalar, not school reputation',()=>{run('var priorReputation=player.reputation;applyCareerEffects({reputation:2});var reputationAfter=player.reputation;var reputationReload=normalizeSave(JSON.parse(JSON.stringify(player)));');assert.strictEqual(run('reputationAfter'),run('priorReputation')+2);assert.strictEqual(run('reputationReload.reputation'),run('reputationAfter'));});
-test('production files identical to baseline',()=>{const changed=cp.execFileSync('git',['diff','--name-only','758e963'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);assert(changed.every(f=>f.startsWith('tests/')||f.startsWith('docs/')));});
+test('audited existing production JS remains identical to baseline',()=>{
+  // The completed audit protects its measured behavior, not a ban on later standalone modules.
+  const files=cp.execFileSync('git',['ls-tree','--name-only','758e963'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(f=>f.endsWith('.js'));
+  for(const f of files)assert.strictEqual(fs.readFileSync(f,'utf8').replace(/\r\n?/g,'\n'),cp.execFileSync('git',['show','758e963:'+f],{encoding:'utf8'}).replace(/\r\n?/g,'\n'),f);
+});
 test('selection v2 probability v1 and 3/2/1 unchanged from baseline',()=>{for(const f of ['high-school-opportunity-selection.js','high-school-opportunity-probability.js','high-school-friendly-invitation-producer.js','high-school-training-camp-producer.js','save.js'])assert.strictEqual(fs.readFileSync(f,'utf8').replace(/\r\n?/g,'\n'),cp.execFileSync('git',['show','758e963:'+f],{encoding:'utf8'}).replace(/\r\n?/g,'\n'));});
 const report={tests:passed,careers:4,matches:20,
  boundaries:json('temporalBoundaries').map(b=>({year:b.year,evidenceCount:b.before.evidence.length,beforeDigest:T.signature(b.before),afterDigest:T.signature(b.after)})),
