@@ -1,0 +1,38 @@
+"use strict";
+const assert=require('assert'),N=require('../high-school-exchange-network'),T=require('./high-school-relationship-recency-reputation-feasibility-audit.cjs');
+let passed=0;const test=(name,fn)=>{fn();passed++;console.log('PASS '+name);};
+function event(type,year=1,phase='autumn-exhibition',sequence=1){
+ const origin={schoolExchangeMatch:'neutralFriendly',homeVisit:'homeInvitationFriendly',awayVisit:'awayInvitationFriendly',sharedTrainingContext:'trainingCamp',competitionEncounter:'officialCompetition',developmentExchange:'developmentMatch'}[type];
+ return N.createRelationshipEvidence({evidenceType:type,careerId:'temporal-fixture',careerYear:year,seasonPhase:phase,sequence,schoolAId:'a',schoolBId:'b',source:{type:'completedMatch',sourceId:`match-${type}-${year}-${sequence}-${phase}`},sourceReason:type,matchId:`match-${type}-${year}-${sequence}-${phase}`,scheduleEntryId:`schedule-${type}-${year}-${sequence}-${phase}`,matchOrigin:origin,completed:true,direction:type==='homeVisit'?'hostedOpponent':type==='awayVisit'?'visitedOpponent':'neutral',...(type==='homeVisit'?{hostSchoolId:'a',visitorSchoolId:'b'}:type==='awayVisit'?{hostSchoolId:'b',visitorSchoolId:'a'}:{})});
+}
+const state=N.emptyState();
+N.appendEvidence(state,['schoolExchangeMatch','homeVisit','awayVisit','sharedTrainingContext','competitionEncounter','developmentExchange'].map(t=>event(t)));
+N.appendEvidence(state,[N.deriveReturnVisitEvidence(state.evidence.find(e=>e.evidenceType==='homeVisit'))]);
+N.appendEvidence(state,[N.deriveCoachSchoolEvidence({careerId:'temporal-fixture',careerYear:1,seasonPhase:'autumn-exhibition',sequence:1,schoolAId:'a',schoolBId:'b',coachId:'coach',source:{type:'knownCounterpart',sourceId:'contact'}},{schoolIds:['a','b'],coachIds:['coach']})]);
+test('eight canonical types inventoried',()=>assert.deepStrictEqual([...new Set(state.evidence.map(e=>e.evidenceType))].sort(),[...N.TYPES].sort()));
+test('all types preserve explicit temporal fields through normalization',()=>{for(const e of N.normalizeState(JSON.parse(JSON.stringify(state))).evidence){assert.strictEqual(e.careerYear,1);assert.strictEqual(e.seasonPhase,'autumn-exhibition');assert.strictEqual(e.sequence,1);}});
+test('missing year is rejected instead of synthesized',()=>assert.throws(()=>N.createRelationshipEvidence({...state.evidence[0],careerYear:undefined})));
+test('missing phase is rejected',()=>assert.throws(()=>N.createRelationshipEvidence({...state.evidence[0],seasonPhase:''})));
+test('missing sequence is rejected',()=>assert.throws(()=>N.createRelationshipEvidence({...state.evidence[0],sequence:undefined})));
+test('Y1 to Y2/Y3 year distance remains 1/2',()=>{for(const y of [2,3])assert(T.inspectLedger(state,{careerYear:y}).every(e=>e.recordedYearDistance===y-1));});
+test('same-phase sequence distance is reconstructible',()=>assert(T.inspectLedger(state,{careerYear:1,seasonPhase:'autumn-exhibition',sequence:3}).every(e=>e.sequenceDistance===2)));
+test('cross-phase exact age is deliberately unavailable',()=>assert(T.inspectLedger(state,{careerYear:1,seasonPhase:'post-autumn-evaluation',sequence:2}).every(e=>e.sequenceDistance===null)));
+test('coach observation is durable and not inception',()=>{const e=T.inspectLedger(state,{careerYear:3}).find(e=>e.durable);assert.strictEqual(e.evidenceType,'coachSchoolConnection');assert(e.ageMeaning.includes('not relationship inception'));});
+test('episodic types retain match and schedule refs',()=>assert(T.inspectLedger(state,{careerYear:3}).filter(e=>!e.durable).every(e=>e.matchRef&&e.scheduleRef)));
+test('return preserves parent temporal facts',()=>{const r=state.evidence.find(e=>e.evidenceType==='returnVisitEligible'),p=state.evidence.find(e=>e.evidenceId===r.parentEvidenceId);for(const k of ['careerYear','seasonPhase','sequence','matchId','scheduleEntryId'])assert.deepStrictEqual(r[k],p[k]);assert.strictEqual(r.completed,false);});
+test('return orphan rejected',()=>assert.throws(()=>N.normalizeState({...state,evidence:state.evidence.filter(e=>e.evidenceType!=='homeVisit')})));
+test('camp has completed-match source rather than plan creation date',()=>{const e=state.evidence.find(e=>e.evidenceType==='sharedTrainingContext');assert.strictEqual(e.source.sourceId,e.matchId);assert(e.completed);});
+test('multiple evidence uses latest year not first entry',()=>{const next=N.normalizeState(state);N.appendEvidence(next,[event('schoolExchangeMatch',2)]);const r=T.inspectRefs(next,next.evidence.map(e=>e.evidenceId),{careerYear:3});assert.strictEqual(r.mostRecentYear,2);assert.strictEqual(r.oldestYear,1);assert.strictEqual(r.evidenceCount,9);});
+test('unresolved reference cannot invent temporal authority',()=>assert.throws(()=>T.inspectRefs(state,['missing'],{careerYear:2})));
+test('query neither mutates state nor creates recency save state',()=>{const before=JSON.stringify(state);T.inspectLedger(state,{careerYear:3});assert.strictEqual(JSON.stringify(state),before);});
+test('ledger order and replay deterministic',()=>assert.deepStrictEqual(T.inspectLedger({...state,evidence:[...state.evidence].reverse()},{careerYear:3}),T.inspectLedger(state,{careerYear:3})));
+test('arbitrary phase is accepted by canonical schema: no invented phase ordering',()=>{const e=event('developmentExchange',1,'custom-phase');assert.strictEqual(e.seasonPhase,'custom-phase');});
+test('future evidence is reported as negative age not silently current',()=>assert(T.inspectLedger(state,{careerYear:0}).every(e=>e.recordedYearDistance===-1)));
+test('classification scoped to partial readiness',()=>{assert.strictEqual(T.classifications.recency,'PARTIAL');assert.strictEqual(T.classifications.reputation,'PARTIAL');});
+const Roster=require('../team-roster-foundation'),Strength=require('../team-strength-model');
+const roster=Roster.generateTeamRoster({teamId:'authority-audit',schoolStandard:'standard',yearIdentity:2026,seed:4101});
+test('team strength derives competitive quality from roster, not prestige',()=>{const p=Strength.deriveTeamStrengthProfile(roster);assert(Number.isFinite(p.overallSummary));assert(!Object.hasOwn(p,'reputation'));assert(!Object.hasOwn(p,'prestige'));});
+test('school standard label alone cannot change an existing roster strength',()=>assert.deepStrictEqual(Strength.deriveTeamStrengthProfile({...roster,schoolStandard:'powerhouse'}),Strength.deriveTeamStrengthProfile(roster)));
+test('coach connection stores identity and source, not a reputation grade',()=>{const e=state.evidence.find(e=>e.evidenceType==='coachSchoolConnection');assert.strictEqual(e.coachId,'coach');assert(!Object.hasOwn(e,'reputation'));assert(!Object.hasOwn(e,'grade'));});
+test('competition level is categorization, not a prestige value',()=>{const C=require('../high-school-competition-foundation');const d=C.createCompetitionDefinition({competitionId:'audit-u18',competitionType:'international',entryUnit:'national_team',level:'international_u18'});assert.deepStrictEqual(Object.keys(d).sort(),['competitionId','competitionType','entryUnit','level','selectionRelevance'].sort());assert.strictEqual(d.level,'international_u18');});
+console.log(`${passed}/${passed} PASS`);
