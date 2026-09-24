@@ -35405,5 +35405,205 @@
   },
   "warnings": [],
   "failures": [],
-  "status": "PASS"
+  "status": "PASS",
+  "closeoutVerification": {
+    "revisedBaseline": "ad7e831",
+    "recordedAuditBase": "a918199",
+    "provenance": "Recorded base remains historical. Current source content digest exactly matches the formal audit; ad7e831 only commits Sprint 2 non-production infrastructure and evidence.",
+    "auditSourceDigestMatches": true,
+    "sprintCommitFiles": [
+      "docs/high-school-opportunity-post-repair-calibration-full.json",
+      "docs/high-school-opportunity-post-repair-calibration-selected.json",
+      "docs/high-school-opportunity-post-repair-calibration-sprint-2.md",
+      "docs/high-school-opportunity-post-repair-calibration-syntax.json",
+      "docs/high-school-opportunity-post-repair-calibration.json",
+      "package.json",
+      "tests/high-school-opportunity-post-repair-calibration-audit.cjs",
+      "tests/high-school-opportunity-post-repair-calibration-foundation-test.js",
+      "tests/high-school-opportunity-post-repair-calibration-production-integration-test.js",
+      "tests/high-school-opportunity-post-repair-calibration-runner.cjs",
+      "tests/high-school-opportunity-probability-calibration-career.cjs"
+    ],
+    "productionDiff": {
+      "selection": 0,
+      "probability": 0,
+      "otherGameplay": 0
+    },
+    "unchangedWeightConstants": {
+      "explicitReturnVisit": 3,
+      "explicitCampPlan": 3,
+      "coachNetwork": 2,
+      "schoolRelationship": 2,
+      "sharedTrainingContext": 2,
+      "foundationFallback": 1,
+      "unknownSource": 1
+    },
+    "cohortIdentityDigestsVerified": true,
+    "derived": {
+      "yearShares": {
+        "1": {
+          "newShare": 0.93235,
+          "repeatShare": 0.06765,
+          "campOptionalShare": 0.0685
+        },
+        "2": {
+          "newShare": 0.44935,
+          "repeatShare": 0.55065,
+          "campOptionalShare": 0.1857
+        },
+        "3": {
+          "newShare": 0.7235,
+          "repeatShare": 0.2765,
+          "campOptionalShare": null
+        }
+      },
+      "returnVisit": {
+        "reachableShare": 0.05539608919266997,
+        "selectionShare": 0.11273333333333334,
+        "exposureRatio": 2.035041371625386,
+        "selectedToExpected": 1.027489061958133
+      },
+      "feedback": {
+        "1": {
+          "priorRelationshipCount": 38630,
+          "priorRelationshipSchools": 18647,
+          "withPrior": {
+            "available": 18647,
+            "candidates": 97146,
+            "optionalSelected": 1353,
+            "reachable": 12500,
+            "selected": 2706
+          },
+          "withoutPrior": {
+            "available": 121353,
+            "candidates": 258853,
+            "optionalSelected": 8647,
+            "reachable": 137500,
+            "selected": 17294
+          },
+          "optionalSelectionShare": 0.1353,
+          "reachableShare": 0.08333333333333333,
+          "selectionToReachableRatio": 1.6236000000000002
+        },
+        "2": {
+          "priorRelationshipCount": 113732,
+          "priorRelationshipSchools": 48862,
+          "withPrior": {
+            "available": 48862,
+            "candidates": 284786,
+            "optionalSelected": 12182,
+            "reachable": 142920,
+            "selected": 12182
+          },
+          "withoutPrior": {
+            "available": 91138,
+            "candidates": 182276,
+            "optionalSelected": 7818,
+            "reachable": 182276,
+            "selected": 7818
+          },
+          "optionalSelectionShare": 0.6091,
+          "reachableShare": 0.43948880060025336,
+          "selectionToReachableRatio": 1.3859283767142458
+        },
+        "3": {
+          "priorRelationshipCount": 96202,
+          "priorRelationshipSchools": 30112,
+          "withPrior": {
+            "available": 30112,
+            "candidates": 204715,
+            "optionalSelected": 0,
+            "reachable": 0,
+            "selected": 2765
+          },
+          "withoutPrior": {
+            "available": 39888,
+            "candidates": 87011,
+            "optionalSelected": 0,
+            "reachable": 0,
+            "selected": 7235
+          },
+          "optionalSelectionShare": null,
+          "reachableShare": null,
+          "selectionToReachableRatio": null
+        }
+      },
+      "fairness": {
+        "A": {
+          "equalMaxDeviation": 0.010000000000000009,
+          "prefixMaxDeviation": 0.017600000000000005,
+          "campGroupInflationRatio": 1.0504774897680764,
+          "maxWithinCampOpponentDeviation": 0.0072760345611641575
+        },
+        "B": {
+          "equalMaxDeviation": 0.02400000000000002,
+          "prefixMaxDeviation": 0.02400000000000002,
+          "campGroupInflationRatio": 1.0256237356709375,
+          "maxWithinCampOpponentDeviation": 0.02005259697567391
+        },
+        "C": {
+          "equalMaxDeviation": 0.017600000000000005,
+          "prefixMaxDeviation": 0.0252,
+          "campGroupInflationRatio": 1.0206391478029293,
+          "maxWithinCampOpponentDeviation": 0.009881422924901184
+        },
+        "D": {
+          "equalMaxDeviation": 0.009200000000000014,
+          "prefixMaxDeviation": 0.009200000000000014,
+          "campGroupInflationRatio": 1.0324137931034483,
+          "maxWithinCampOpponentDeviation": 0.001609195402298813
+        }
+      }
+    },
+    "recordedValidation": {
+      "newFoundation": 24,
+      "newIntegration": 25,
+      "selected": {
+        "pass": 69,
+        "fail": 0
+      },
+      "syntax": {
+        "pass": 300,
+        "fail": 0
+      },
+      "full": {
+        "pass": 197,
+        "fail": 0
+      },
+      "gameAudit": {
+        "bench": 1000,
+        "starter": 400,
+        "orphan": 0,
+        "noProgress": 0,
+        "matchState": 0,
+        "gameRecord": 0,
+        "deterministic": true,
+        "instrumentationNeutral": true
+      }
+    },
+    "reruns": [],
+    "preservedStashes": [
+      "0daf1e954f74ddb45efe620107970567dec6fffd",
+      "8cc34a930df052067d1bad3ea798fe0b9d2ae036"
+    ],
+    "warningsReconciled": true,
+    "finalStatus": "PASS",
+    "stopConditions": [],
+    "recommendation": "A: Relationship Recency / Reputation Feasibility Audit; not started",
+    "finalGit": {
+      "branch": "main",
+      "head": "ad7e831",
+      "originMain": "ad7e831",
+      "ahead": 0,
+      "behind": 0,
+      "diffCheck": "PASS",
+      "changedFiles": [
+        "docs/high-school-opportunity-post-repair-calibration-sprint-2.md",
+        "docs/high-school-opportunity-post-repair-calibration.json"
+      ],
+      "existingStashesPreserved": true,
+      "committed": false,
+      "pushed": false
+    }
+  }
 }
