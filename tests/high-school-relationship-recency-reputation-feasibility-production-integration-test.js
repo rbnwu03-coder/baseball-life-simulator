@@ -1,5 +1,6 @@
 "use strict";
-const assert=require('assert'),fs=require('fs'),cp=require('child_process');
+const assert=require('assert');
+const Scope=require('./relationship-feasibility-production-scope.cjs');
 const T=require('./high-school-relationship-recency-reputation-feasibility-audit.cjs');
 const make=require('./high-school-opportunity-probability-calibration-career.cjs');
 let passed=0;const test=(name,fn)=>{fn();passed++;console.log('PASS '+name);};
@@ -47,12 +48,15 @@ test('competition encounters remain completed competition facts',()=>assert(ledg
 test('source age is not producer current year',()=>{const x=lineage[0],s=x.friendly.sources.find(s=>s.producerType==='returnVisitProducer');assert.strictEqual(s.careerYear,2);assert.deepStrictEqual(s.provenance.originCareerYears,[1]);});
 test('same-year positions come from the completed schedule',()=>{for(const c of careers)for(const w of c.windows){assert.strictEqual(w.schedule.careerYear,w.year);assert.strictEqual(w.schedule.seasonPhase,w.phase);assert.strictEqual(w.schedule.sequence,w.sequence);}});
 test('player reputation is real persisted scalar, not school reputation',()=>{run('var priorReputation=player.reputation;applyCareerEffects({reputation:2});var reputationAfter=player.reputation;var reputationReload=normalizeSave(JSON.parse(JSON.stringify(player)));');assert.strictEqual(run('reputationAfter'),run('priorReputation')+2);assert.strictEqual(run('reputationReload.reputation'),run('reputationAfter'));});
-test('audited existing production JS remains identical to baseline',()=>{
-  // The completed audit protects its measured behavior, not a ban on later standalone modules.
-  const files=cp.execFileSync('git',['ls-tree','--name-only','758e963'],{encoding:'utf8'}).trim().split(/\r?\n/).filter(f=>f.endsWith('.js'));
-  for(const f of files)assert.strictEqual(fs.readFileSync(f,'utf8').replace(/\r\n?/g,'\n'),cp.execFileSync('git',['show','758e963:'+f],{encoding:'utf8'}).replace(/\r\n?/g,'\n'),f);
+// script.js integration is protected above by real completion, frequency,
+// lineage, materialization, anti-reroll and save/reload behavior assertions.
+test('audited opportunity relationship and persistence sources retain their contract',()=>Scope.assertWorkingTree());
+test('selection v2 probability v1 and 3/2/1 unchanged from baseline',()=>{
+  assert.strictEqual(require('../high-school-opportunity-selection').POLICY_VERSION,'high-school-opportunity-selection-v2');
+  const probability=require('../high-school-opportunity-probability');
+  assert.strictEqual(probability.VERSION,'high-school-opportunity-probability-v1');
+  assert.deepStrictEqual([...new Set(Object.values(probability.WEIGHTS))].sort(),[1,2,3]);
 });
-test('selection v2 probability v1 and 3/2/1 unchanged from baseline',()=>{for(const f of ['high-school-opportunity-selection.js','high-school-opportunity-probability.js','high-school-friendly-invitation-producer.js','high-school-training-camp-producer.js','save.js'])assert.strictEqual(fs.readFileSync(f,'utf8').replace(/\r\n?/g,'\n'),cp.execFileSync('git',['show','758e963:'+f],{encoding:'utf8'}).replace(/\r\n?/g,'\n'));});
 const report={tests:passed,careers:4,matches:20,
  boundaries:json('temporalBoundaries').map(b=>({year:b.year,evidenceCount:b.before.evidence.length,beforeDigest:T.signature(b.before),afterDigest:T.signature(b.after)})),
  evidenceByType:Object.fromEntries(T.TYPES.map(type=>{const e=[...ledgers,...lineage.map(x=>x.ledger)].flatMap(l=>l.evidence).find(e=>e.evidenceType===type);return [type,e||null];})),
