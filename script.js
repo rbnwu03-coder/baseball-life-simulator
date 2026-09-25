@@ -4305,7 +4305,9 @@ function createHighSchoolMatchSimulationSeedFromIdentity(identity) {
 function getHighSchoolYearOneMomentId(match = player.highSchoolMatch) {
   if (match?.completed) return "";
   if (match?.currentDomain === "offense" && /^hs_y1_match_offense_\d+$/.test(match?.currentMomentId || "")) return match.currentMomentId;
-  if (match?.simulationPhase === "moment_2_ready" && match?.currentDomain === "defense"
+  // The producer assigns this identity before materializing lifecycle routes;
+  // presentation readiness must not change the identity those routes capture.
+  if (match?.currentDomain === "defense"
     && /^hs_y1_match_defense_\d+$/.test(match?.currentMomentId || "")) return match.currentMomentId;
   return highSchoolYearOneMomentIds[Math.max(0, Math.min(2, Number(match?.momentIndex) || 0))];
 }
