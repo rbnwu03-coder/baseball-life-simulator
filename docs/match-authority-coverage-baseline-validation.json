@@ -1,0 +1,1114 @@
+{
+  "metadata": {
+    "title": "Match Authority & Coverage Baseline Sprint M0 Resume",
+    "date": "2026-09-25",
+    "status": "STOP_NEW_PRODUCTION_BLOCKER"
+  },
+  "initialAttempt": {
+    "metadata": {
+      "title": "Match Authority & Coverage Baseline Sprint M0",
+      "date": "2026-09-25",
+      "scope": "Stopped during production-route preflight; not a completed coverage baseline"
+    },
+    "baseline": {
+      "branch": "main",
+      "head": "156218b",
+      "originMain": "156218b",
+      "ahead": 0,
+      "behind": 0,
+      "initialWorkingTree": "clean",
+      "stashes": [
+        "0daf1e954f74ddb45efe620107970567dec6fffd",
+        "8cc34a930df052067d1bad3ea798fe0b9d2ae036"
+      ]
+    },
+    "auditVersion": "match-authority-coverage-m0-v1",
+    "authorityMatrix": [
+      {
+        "domain": "Ground defensive decision identity",
+        "producer": {
+          "file": "script.js",
+          "function": "prepareHighSchoolDefensiveMomentFromSimulation",
+          "line": 12014
+        },
+        "authority": {
+          "file": "script.js",
+          "function": "getHighSchoolYearOneMomentId",
+          "line": 4305
+        },
+        "consumer": {
+          "file": "script.js",
+          "function": "chooseHighSchoolYearOneMatchMoment",
+          "line": 3635
+        },
+        "persistentRepresentation": "activeSituation.legalRoutes[].matchMomentId / currentMomentId",
+        "status": "BLOCKED",
+        "gap": "Frozen route identity disagrees with admission current identity"
+      },
+      {
+        "domain": "Ground decision choices",
+        "producer": {
+          "file": "script.js",
+          "function": "generateInfieldLegalChoices",
+          "line": 7434
+        },
+        "authority": {
+          "file": "script.js",
+          "function": "createGroundBallMatchSituation",
+          "line": 10787
+        },
+        "consumer": {
+          "file": "script.js",
+          "function": "getHighSchoolDefensiveMomentChoices",
+          "line": 8458
+        },
+        "persistentRepresentation": "activeSituation.legalRoutes",
+        "status": "BLOCKED"
+      }
+    ],
+    "lifecycleMatrix": {
+      "status": "PARTIAL",
+      "types": {
+        "groundBallDefensiveDecision": "groundBallDefensiveDecision",
+        "runnerTagUpDecision": "runnerTagUpDecision",
+        "plateDecision": "plateDecision"
+      },
+      "observedBlocker": "groundBallDefensiveDecision / presented"
+    },
+    "paCoverage": {
+      "status": "PREFLIGHT_ONLY",
+      "games": [
+        {
+          "seed": 22430000,
+          "role": "bench",
+          "pa": 71,
+          "battingPA": 71,
+          "pitcherBF": 71,
+          "completed": true,
+          "orphan": 0,
+          "noProgress": 0,
+          "actualRole": "starter",
+          "requestedLegacyFixtureLabel": "bench",
+          "playerPA": 4
+        },
+        {
+          "seed": 22430001,
+          "role": "bench",
+          "pa": 68,
+          "battingPA": 68,
+          "pitcherBF": 68,
+          "completed": true,
+          "orphan": 0,
+          "noProgress": 0,
+          "actualRole": "starter",
+          "requestedLegacyFixtureLabel": "bench",
+          "playerPA": 3
+        },
+        {
+          "seed": 22430002,
+          "role": "bench",
+          "pa": 32,
+          "battingPA": 32,
+          "pitcherBF": 32,
+          "completed": false,
+          "orphan": 1,
+          "noProgress": 0,
+          "actualRole": "starter",
+          "requestedLegacyFixtureLabel": "bench",
+          "playerPA": 1
+        }
+      ],
+      "reconciliation": "Each attempted game has PA events = batting PA = pitcher BF; the third game cannot finish. No PA accounting failure claimed."
+    },
+    "bbpCoverage": {
+      "status": "NOT_COMPLETED"
+    },
+    "bbpStructuralMatrix": {
+      "status": "NOT_COMPLETED"
+    },
+    "bbpObservedMatrix": {
+      "status": "NOT_COMPLETED"
+    },
+    "defenseCoverage": {
+      "status": "BLOCKED",
+      "witness": {
+        "reproduced": true,
+        "steps": 62,
+        "witness": {
+          "matchId": "hs-y1-autumn-exhibition",
+          "seed": 22430002,
+          "actualRole": "starter",
+          "inning": 4,
+          "half": "上",
+          "outs": 1,
+          "currentMomentId": "hs_y1_match_defense_2",
+          "phase": "moment_2_ready",
+          "lifecycleType": "groundBallDefensiveDecision",
+          "lifecycleState": "presented",
+          "sourcePhysicalStateRef": "hs-y1-autumn-exhibition|4|上|away|regional-power-school-player-06|0|1|truetruefalse|ordinary-contact|ground-defense",
+          "completed": false,
+          "blockingOutcome": false,
+          "transitioning": false,
+          "paEvents": 32,
+          "battingPA": 32,
+          "stateIssues": [],
+          "recordIssues": []
+        },
+        "retries": [
+          {
+            "decision": "secure",
+            "momentId": "hs_y1_match_moment_2",
+            "accepted": false
+          },
+          {
+            "decision": "challenge",
+            "momentId": "hs_y1_match_moment_2",
+            "accepted": false
+          },
+          {
+            "decision": "lead",
+            "momentId": "hs_y1_match_moment_2",
+            "accepted": false
+          }
+        ]
+      }
+    },
+    "fallbackReasons": {
+      "status": "NOT_MEASURED"
+    },
+    "unsupportedCombinations": {
+      "status": "NOT_COMPLETED"
+    },
+    "runnerCoverage": {
+      "status": "NOT_COMPLETED"
+    },
+    "ruleEventCoverage": {
+      "status": "NOT_COMPLETED"
+    },
+    "schemaOnlyCapabilities": {
+      "status": "NOT_COMPLETED"
+    },
+    "gameRecordCoverage": {
+      "status": "PARTIAL",
+      "recordIntegrityAtBlocker": [],
+      "paEvents": 32,
+      "battingPA": 32,
+      "pitcherBF": 32
+    },
+    "saveReloadCoverage": {
+      "status": "NOT_RUN"
+    },
+    "pitchTruthInventory": {
+      "status": "NOT_COMPLETED"
+    },
+    "sequenceContextInventory": {
+      "status": "NOT_COMPLETED"
+    },
+    "catcherAbilityInventory": {
+      "status": "NOT_COMPLETED"
+    },
+    "pitcherFatigueInventory": {
+      "status": "NOT_COMPLETED"
+    },
+    "evaluationInventory": {
+      "status": "NOT_COMPLETED"
+    },
+    "sampleMetadata": {
+      "formalPlanned": {
+        "bench": 1000,
+        "starter": 400
+      },
+      "formalCompleted": 0,
+      "preflightAttempted": 3,
+      "preflightCompleted": 2,
+      "controlledIndependentReproducer": 1,
+      "seedPolicy": "Existing audit seed prefix, first displayed legal choice, execution sample .82",
+      "browserScripts": "index.html except application-controller.js, matching existing production integration helper",
+      "legacyAuditLimitation": "Existing 1,400-game loader omits PlateDecisionFoundation / BattedBallPhysical and current canonical roster modules; cannot claim production route coverage.",
+      "fixtureLabelLimitation": "Legacy requested bench setup becomes actual starter under current production creation. Preflight is NOT a Bench cohort. No population percentages claimed.",
+      "sourceDigest": {
+        "file": "script.js",
+        "normalizedLF_SHA256": "280177f69c941194b5a97a709c80b38efc261b62a118a7519cd4f8ca72fa5092"
+      }
+    },
+    "distributionBaseline": {
+      "status": "NOT_ESTABLISHED",
+      "frequency": {
+        "blocked": 1,
+        "attempted": 3,
+        "denominator": "Sequential preflight only; stopped at first blocker, not representative prevalence"
+      }
+    },
+    "determinism": {
+      "status": "PARTIAL_PASS",
+      "seed": 22430002,
+      "entireMatchEqual": true,
+      "eventsEqual": true,
+      "handoffsEqual": true
+    },
+    "instrumentationNeutrality": {
+      "status": "PARTIAL_PASS",
+      "seed": 22430002,
+      "entireMatchEqual": true,
+      "gameRecordEqual": true,
+      "simulationCursorEqual": true,
+      "presentationCursorEqual": true,
+      "observerCallsGameplayRNG": false,
+      "independentObserverFreeReproducer": true,
+      "scope": "One blocked trajectory only; not the planned formal neutrality gate"
+    },
+    "batchOrderNeutrality": {
+      "status": "NOT_RUN"
+    },
+    "selectedRegression": {
+      "status": "NOT_RUN_AFTER_STOP"
+    },
+    "syntax": {
+      "status": "PASS",
+      "total": 311,
+      "passed": 311,
+      "failed": 0,
+      "failures": []
+    },
+    "fullRegression": {
+      "status": "NOT_RUN_AFTER_STOP"
+    },
+    "gameAudit1400": {
+      "status": "NOT_RUN_AFTER_STOP",
+      "formalCompleted": 0
+    },
+    "warnings": [
+      {
+        "code": "LEGACY_AUDIT_MODULE_SCOPE",
+        "message": "Historical 1,400 sample is not current full-browser module coverage."
+      },
+      {
+        "code": "LEGACY_NOPROGRESS_KEY",
+        "message": "Old progress key omits pitch/lifecycle progress; test-loader adaptation includes these to avoid falsely flagging legitimate pitches."
+      },
+      {
+        "code": "LEGACY_ROLE_LABEL",
+        "message": "Use actual admitted roster role, not requested legacy bench label."
+      }
+    ],
+    "failures": [
+      {
+        "code": "PRODUCTION_DECISION_IDENTITY_BLOCKER",
+        "severity": "P1",
+        "seed": 22430002,
+        "route": "Supported ordinary rightSide groundBall -> admitted groundBallDefensiveDecision -> UI choice -> identity guard rejection",
+        "rootCause": "Choices generated before simulationPhase is set to moment_2_ready capture static hs_y1_match_moment_2. Lifecycle freezes those choices. After phase changes, current identity resolves to hs_y1_match_defense_2; all displayed choices fail the identity guard.",
+        "references": [
+          {
+            "file": "script.js",
+            "function": "prepareHighSchoolDefensiveMomentFromSimulation",
+            "line": 12014
+          },
+          {
+            "file": "script.js",
+            "function": "getHighSchoolYearOneMomentId",
+            "line": 4305
+          },
+          {
+            "file": "script.js",
+            "function": "generateInfieldLegalChoices",
+            "line": 7434
+          },
+          {
+            "file": "script.js",
+            "function": "createGroundBallMatchSituation",
+            "line": 10787
+          },
+          {
+            "file": "script.js",
+            "function": "getHighSchoolDefensiveMomentChoices",
+            "line": 8458
+          },
+          {
+            "file": "script.js",
+            "function": "chooseHighSchoolYearOneMatchMoment",
+            "line": 3635
+          }
+        ],
+        "independentReproducer": {
+          "reproduced": true,
+          "steps": 62,
+          "witness": {
+            "matchId": "hs-y1-autumn-exhibition",
+            "seed": 22430002,
+            "actualRole": "starter",
+            "inning": 4,
+            "half": "上",
+            "outs": 1,
+            "currentMomentId": "hs_y1_match_defense_2",
+            "phase": "moment_2_ready",
+            "lifecycleType": "groundBallDefensiveDecision",
+            "lifecycleState": "presented",
+            "sourcePhysicalStateRef": "hs-y1-autumn-exhibition|4|上|away|regional-power-school-player-06|0|1|truetruefalse|ordinary-contact|ground-defense",
+            "completed": false,
+            "blockingOutcome": false,
+            "transitioning": false,
+            "paEvents": 32,
+            "battingPA": 32,
+            "stateIssues": [],
+            "recordIssues": []
+          },
+          "retries": [
+            {
+              "decision": "secure",
+              "momentId": "hs_y1_match_moment_2",
+              "accepted": false
+            },
+            {
+              "decision": "challenge",
+              "momentId": "hs_y1_match_moment_2",
+              "accepted": false
+            },
+            {
+              "decision": "lead",
+              "momentId": "hs_y1_match_moment_2",
+              "accepted": false
+            }
+          ]
+        }
+      }
+    ],
+    "status": "STOP_EXISTING_PRODUCTION_BLOCKER",
+    "stopConditions": {
+      "triggered": [
+        "Section 142: existing correctness bug invalidates baseline integrity"
+      ],
+      "note": "The full 1,400 audit and full regression were not run; do not claim completed Stop O/N results. Preflight orphan gate failed. No probability, schema, RNG, or gameplay repair attempted."
+    },
+    "productionBehaviorDiff": 0,
+    "recommendation": {
+      "case": "B-like integrity blocker (decision lifecycle, not PA accounting)",
+      "nextSprint": "Match Integrity Repair — Ground Defensive Decision Identity / Lifecycle Handoff",
+      "M1": "NOT_READY",
+      "M2": "NOT_ASSESSED",
+      "M3": "NOT_ASSESSED",
+      "M4": "No measured fallback ranking available",
+      "repairBoundary": "Reconcile canonical current moment identity with frozen route identities at producer/lifecycle handoff. Preserve stale-choice rejection; do not bypass admission validation. Add full-production repeated defensive decision regression, then resume M0."
+    },
+    "foundationTests": {
+      "status": "NOT_IMPLEMENTED_AFTER_STOP"
+    },
+    "integrationTests": {
+      "status": "NOT_IMPLEMENTED_AFTER_STOP"
+    },
+    "git": {
+      "diffCheck": "PASS",
+      "noCommit": true,
+      "noPush": true,
+      "noStashDrop": true,
+      "newFileWhitespaceChecks": "4/4 PASS",
+      "trackedDiffFiles": 0,
+      "stagedFiles": 0,
+      "status": [
+        {
+          "file": "tests/match-authority-coverage-audit.cjs",
+          "status": "untracked"
+        },
+        {
+          "file": "tests/match-authority-coverage-blocker-repro.cjs",
+          "status": "untracked"
+        },
+        {
+          "file": "docs/match-authority-coverage-baseline-validation.json",
+          "status": "untracked"
+        },
+        {
+          "file": "docs/match-authority-coverage-baseline-sprint-m0.md",
+          "status": "untracked"
+        }
+      ],
+      "head": "156218b",
+      "stashHashes": [
+        "0daf1e954f74ddb45efe620107970567dec6fffd",
+        "8cc34a930df052067d1bad3ea798fe0b9d2ae036"
+      ]
+    }
+  },
+  "blockerRepair": {
+    "head": "37c06d7",
+    "scopeRepairHead": "f1cc66b",
+    "mandatorySeed": 22430002,
+    "reproduced": false,
+    "completed": true,
+    "steps": 131
+  },
+  "resumedAudit": {
+    "baseline": "f1cc66b",
+    "auditVersion": "match-authority-coverage-m0-v2",
+    "status": "STOP",
+    "planned": 1400,
+    "attempted": 362,
+    "completed": 361,
+    "unattempted": 1038,
+    "actualRoles": {
+      "starter": 361
+    },
+    "completedPrefixAccounting": {
+      "pa": 24871,
+      "battingPA": 24871,
+      "pitcherBF": 24871
+    },
+    "failures": [
+      {
+        "seed": 22430361,
+        "role": "bench",
+        "code": "CURRENT_PRODUCTION_EXCEPTION",
+        "error": "script.js:12281\n    throw new Error(\"Stale resolved ground-ball settlement context\");\n    ^\n\nError: Stale resolved ground-ball settlement context\n    at resumeResolvedHighSchoolGroundBallSettlement (script.js:12281:11)\n    at advanceHighSchoolMatchPlaybackStep (script.js:12301:12)\n    at Object.callback (script.js:3507:24)\n    at __runNextTimer (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-4-3-audit.js:45:13)\n    at __runOpportunityMatch243 (evalmachine.<anonymous>:143:21)\n    at evalmachine.<anonymous>:1:16\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\match-authority-coverage-audit.cjs:31:32)\n    at json (E:\\meng\\baseball_life_sim_semirefactor\\tests\\match-authority-coverage-audit.cjs:32:41)"
+      }
+    ],
+    "reproducer": {
+      "status": "REPRODUCED_PRODUCTION_BLOCKER",
+      "observerNeutral": true,
+      "deterministic": true,
+      "evidence": {
+        "observe": false,
+        "seed": 22430361,
+        "requestedRole": "bench",
+        "actualRole": "starter",
+        "error": "Stale resolved ground-ball settlement context",
+        "completed": false,
+        "inning": 16,
+        "half": "上",
+        "lifecycle": "resolved",
+        "situationId": "hs-y1-autumn-exhibition|16|上|hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense|hs_y1_match_defense_5|groundBallDefensiveDecision",
+        "sourcePhysicalStateRef": "hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense",
+        "handoffIdentity": "hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense",
+        "createdAt": {
+          "inning": 16,
+          "half": "上",
+          "outs": 1,
+          "score": {
+            "home": 2,
+            "away": 2
+          },
+          "bases": [
+            "regional-power-school-player-08",
+            null,
+            null
+          ],
+          "paIdentity": "hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense",
+          "simulationPoint": "hs_y1_match_defense_5"
+        },
+        "current": {
+          "outs": 2,
+          "bases": [
+            "regional-power-school-player-08",
+            null,
+            null
+          ],
+          "score": {
+            "home": 2,
+            "away": 2
+          },
+          "batter": "regional-power-school-player-03"
+        },
+        "guards": {
+          "executionEvidencePresent": true,
+          "runnerTimingPresent": true,
+          "handoffSettlementApplied": false,
+          "playSettlementApplied": false,
+          "sourceIdentityMatches": true,
+          "contextIdentityMatches": true,
+          "physicalIdentityMatches": true,
+          "inningMatches": true,
+          "halfMatches": true,
+          "outsMatch": false,
+          "basesMatch": true,
+          "scoreMatches": true,
+          "batterMatches": false,
+          "settlementIdentityMatches": true
+        },
+        "paCount": 134,
+        "recentEvents": [
+          {
+            "sequence": 254,
+            "type": "sideChange",
+            "inning": 16,
+            "half": "上"
+          },
+          {
+            "sequence": 255,
+            "type": "buntPitchResolved",
+            "inning": 16,
+            "half": "上",
+            "batterId": "regional-power-school-player-06"
+          },
+          {
+            "sequence": 256,
+            "type": "buntDefensiveFallback",
+            "inning": 16,
+            "half": "上"
+          },
+          {
+            "sequence": 257,
+            "type": "plateAppearance",
+            "inning": 16,
+            "half": "上",
+            "batterId": "regional-power-school-player-06",
+            "result": "out"
+          },
+          {
+            "sequence": 258,
+            "type": "buntPitchResolved",
+            "inning": 16,
+            "half": "上",
+            "batterId": "regional-power-school-player-08"
+          },
+          {
+            "sequence": 259,
+            "type": "buntDefensiveFallback",
+            "inning": 16,
+            "half": "上"
+          },
+          {
+            "sequence": 260,
+            "type": "plateAppearance",
+            "inning": 16,
+            "half": "上",
+            "batterId": "regional-power-school-player-08",
+            "result": "single"
+          },
+          {
+            "sequence": 261,
+            "type": "plateAppearance",
+            "inning": 16,
+            "half": "上",
+            "batterId": "regional-power-school-player-09",
+            "result": "out"
+          }
+        ]
+      },
+      "repetitions": 3
+    },
+    "artifacts": [
+      {
+        "path": "C:\\Users\\User\\AppData\\Local\\Temp\\match-m0-f1cc66b-v2\\cohort.json",
+        "bytes": 96253,
+        "sha256": "19d07af540123d17c30922b0761facf9f37498b296d1b76498d58bca022bda63"
+      },
+      {
+        "path": "C:\\Users\\User\\AppData\\Local\\Temp\\match-m0-f1cc66b-v2\\games.jsonl.gz",
+        "bytes": 49692035,
+        "sha256": "144464aaaa5f875c5311a3e2398e33578cdc2ac7b15406fe4bc1a963546560cd"
+      },
+      {
+        "path": "C:\\Users\\User\\AppData\\Local\\Temp\\match-m0-f1cc66b-v2\\blocked-player.json",
+        "bytes": 2494408,
+        "sha256": "ac31730744c070ec0f27fe016a18a42eec3f9f4f67e456d067131cc65a452f74"
+      }
+    ],
+    "severity": "P1",
+    "observedFailureFrequency": {
+      "numerator": 1,
+      "attemptedDenominator": 362,
+      "interpretation": "First-failure-truncated sample; not a population rate."
+    },
+    "confirmedBoundary": "groundBallDefensiveDecision remains resolved/unapplied; simulationLog sequence 261 settles the same batter via compressedAIPlateAppearanceOutcomeV1, advancing outs and batter before next recovery; recovery correctly rejects mismatching context.",
+    "rootCauseStatus": "Boundary violation confirmed; exact earlier branch and repair require separately authorized integrity sprint.",
+    "recommendation": "Preserve stale-context validation. Audit resolved-ground handoff versus compressed PA dispatch and lifecycle closure; prevent advancing the same PA through a competing settlement authority."
+  },
+  "finalValidation": {
+    "status": "STOP",
+    "productionDiff": 0,
+    "observerNeutralAtBlocker": true,
+    "deterministicAtBlocker": true,
+    "selectedRegression": "NOT_RUN_AFTER_STOP",
+    "fullSyntax": "NOT_RUN_AFTER_STOP",
+    "fullRegression": "NOT_RUN_AFTER_STOP",
+    "historical1400": "NOT_RUN_AFTER_STOP",
+    "current1400": "STOP_361_COMPLETED",
+    "commit": false,
+    "push": false,
+    "stashDrop": false
+  },
+  "changedFiles": [
+    "docs/match-authority-coverage-baseline-sprint-m0.md",
+    "docs/match-authority-coverage-baseline-validation.json",
+    "tests/match-authority-coverage-audit.cjs",
+    "tests/match-authority-coverage-blocker-repro.cjs",
+    "tests/match-authority-coverage-cohort.cjs",
+    "tests/match-authority-coverage-resume-blocker-repro.cjs"
+  ],
+  "closeout": [
+    {
+      "number": 1,
+      "item": "Resume baseline",
+      "result": "main / f1cc66b / origin/main f1cc66b; ahead/behind 0/0; two original stashes retained."
+    },
+    {
+      "number": 2,
+      "item": "Initial M0 Stop preserved",
+      "result": "Original 156218b M0 stop retained verbatim in initialAttempt and original report section."
+    },
+    {
+      "number": 3,
+      "item": "R1 repair confirmation",
+      "result": "Mandatory seed 22430002 completed, 131 steps; original identity blocker not reproduced. This is not a full R1 regression claim."
+    },
+    {
+      "number": 4,
+      "item": "Existing M0 files reused",
+      "result": "Four original M0 files retained; observer upgraded and two diagnostics/cohort files added."
+    },
+    {
+      "number": 5,
+      "item": "Changed files",
+      "result": "Six untracked M0 files; see changedFiles."
+    },
+    {
+      "number": 6,
+      "item": "Production diff",
+      "result": "0 tracked diff; no production edits."
+    },
+    {
+      "number": 7,
+      "item": "Audit version",
+      "result": "match-authority-coverage-m0-v2"
+    },
+    {
+      "number": 8,
+      "item": "Current-production loader",
+      "result": "index.html script list excluding application-controller.js (application boot entry); browser globals without CommonJS module stub."
+    },
+    {
+      "number": 9,
+      "item": "Historical loader distinction",
+      "result": "Historical fixed-list audit remains distinct and was not rerun after stop."
+    },
+    {
+      "number": 10,
+      "item": "Formal sample design",
+      "result": "Planned 1000 requested bench seeds 22430000..22430999 plus 400 requested starter seeds 22431000..22431399; no rejected-seed substitution."
+    },
+    {
+      "number": 11,
+      "item": "Formal current-production game count",
+      "result": "362 attempted / 361 completed / 1 exception / 1038 not attempted; admitted roles of completed games: starter 361."
+    },
+    {
+      "number": 12,
+      "item": "Controlled fixture count",
+      "result": "Three fresh blocker reproductions, same seed: observer OFF/ON/OFF. Not independent population samples."
+    },
+    {
+      "number": 13,
+      "item": "Authority matrix",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 14,
+      "item": "Lifecycle matrix",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 15,
+      "item": "Player PA route",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 16,
+      "item": "NPC PA route",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 17,
+      "item": "PA totals",
+      "result": "Completed-prefix totals only: 24871 PA events, 24871 batting PA, 24871 pitcher BF. Blocked game has 134 PA events and is excluded."
+    },
+    {
+      "number": 18,
+      "item": "Player/NPC ratio",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 19,
+      "item": "Non-BBP coverage",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 20,
+      "item": "BBP total",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 21,
+      "item": "Ground total",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 22,
+      "item": "Line total",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 23,
+      "item": "Fly total",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 24,
+      "item": "Direction distribution",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 25,
+      "item": "Depth distribution",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 26,
+      "item": "Strength distribution",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 27,
+      "item": "Structural BBP matrix",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 28,
+      "item": "Observed BBP matrix",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 29,
+      "item": "Ground canonical/fallback/unsupported",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 30,
+      "item": "Line canonical/fallback/unsupported",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 31,
+      "item": "Fly canonical/fallback/unsupported",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 32,
+      "item": "Fallback reason counts",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 33,
+      "item": "Unsupported cells",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 34,
+      "item": "Fielder attribution",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 35,
+      "item": "Runner settlement",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 36,
+      "item": "Force route",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 37,
+      "item": "Multi-runner route",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 38,
+      "item": "DP",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 39,
+      "item": "Tag-up",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 40,
+      "item": "Third-out integrity",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 41,
+      "item": "Run legality",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 42,
+      "item": "SB",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 43,
+      "item": "CS",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 44,
+      "item": "Pickoff",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 45,
+      "item": "WP",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 46,
+      "item": "PB",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 47,
+      "item": "Errors",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 48,
+      "item": "FC",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 49,
+      "item": "Hit attribution",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 50,
+      "item": "GameRecord settlement",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 51,
+      "item": "Batting-line attribution",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 52,
+      "item": "Pitcher-line attribution",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 53,
+      "item": "Scoreboard ownership",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 54,
+      "item": "Save/reload coverage",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 55,
+      "item": "Save idempotency",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 56,
+      "item": "R1 identity regression",
+      "result": "Original blocker diagnostic passed; new blocker has matching ground physical identities. Full R1 suite not rerun after stop."
+    },
+    {
+      "number": 57,
+      "item": "Identity mismatch count",
+      "result": "Completed-prefix observed decision identity mismatches: 0; does not prove all identity contracts."
+    },
+    {
+      "number": 58,
+      "item": "Current choice rejection",
+      "result": "Completed-prefix observed current-choice rejections: 0."
+    },
+    {
+      "number": 59,
+      "item": "Stale choice rejection",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 60,
+      "item": "Pitch truth inventory",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 61,
+      "item": "Tactical target connection",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 62,
+      "item": "Sequence context inventory",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 63,
+      "item": "Physical sequence connection",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 64,
+      "item": "Catcher ability coverage",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 65,
+      "item": "Pitcher fatigue coverage",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 66,
+      "item": "Evaluation coverage",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 67,
+      "item": "Schema-only capabilities",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 68,
+      "item": "Population distribution",
+      "result": "All 361 completed games actually admitted starter despite requested bench. No bench-population claim."
+    },
+    {
+      "number": 69,
+      "item": "Match outcome baseline",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 70,
+      "item": "Observer neutrality",
+      "result": "Blocker full match deep equality passed for observer OFF/ON/OFF; prior two completed witnesses also ON/OFF equal."
+    },
+    {
+      "number": 71,
+      "item": "RNG neutrality",
+      "result": "No observer gameplay RNG calls added; full blocked match equality includes RNG cursor. Formal population RNG gate incomplete."
+    },
+    {
+      "number": 72,
+      "item": "Trace neutrality",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 73,
+      "item": "Batch-order neutrality",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 74,
+      "item": "PA accounting",
+      "result": "Completed prefix PA accounting passes (24871/24871/24871); complete 1400 accounting unavailable."
+    },
+    {
+      "number": 75,
+      "item": "BBP accounting",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 76,
+      "item": "Fallback accounting",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 77,
+      "item": "GameRecord accounting",
+      "result": "Not completed after correctness stop; no coverage/support/PASS claim."
+    },
+    {
+      "number": 78,
+      "item": "Foundation tests",
+      "result": "Not implemented after correctness stop."
+    },
+    {
+      "number": 79,
+      "item": "Integration tests",
+      "result": "Not implemented after correctness stop; independent reproducible blocker diagnostic delivered."
+    },
+    {
+      "number": 80,
+      "item": "Selected regression",
+      "result": "Not run after stop."
+    },
+    {
+      "number": 81,
+      "item": "Syntax",
+      "result": "Changed CJS syntax only checked; full syntax not run after stop."
+    },
+    {
+      "number": 82,
+      "item": "Full regression",
+      "result": "Not run after stop; earlier PASS not reused."
+    },
+    {
+      "number": 83,
+      "item": "Historical 1,400 audit",
+      "result": "Not run after stop; not conflated with current-production sample."
+    },
+    {
+      "number": 84,
+      "item": "Current-production 1,400 audit",
+      "result": "STOP at seed 22430361: 361 completed of 1400 planned."
+    },
+    {
+      "number": 85,
+      "item": "Warnings",
+      "result": "Truncated sample is not an unbiased rate estimate; requested bench differs from actual admitted starter."
+    },
+    {
+      "number": 86,
+      "item": "Failures",
+      "result": "P1 production lifecycle/settlement blocker: resolved ground state coexists with later compressed PA settlement; recovery rejects stale outs/batter context."
+    },
+    {
+      "number": 87,
+      "item": "Final status",
+      "result": "STOP_NEW_PRODUCTION_BLOCKER; M0 NOT PASS."
+    },
+    {
+      "number": 88,
+      "item": "M1 readiness",
+      "result": "Not ready; M0 correctness blocked."
+    },
+    {
+      "number": 89,
+      "item": "M2 readiness",
+      "result": "Not assessed."
+    },
+    {
+      "number": 90,
+      "item": "M3 readiness",
+      "result": "Not assessed."
+    },
+    {
+      "number": 91,
+      "item": "M4 expansion candidates",
+      "result": "No measured ranking; deferred."
+    },
+    {
+      "number": 92,
+      "item": "Recommended next Sprint",
+      "result": "Case B: Match Integrity Repair — Ground Resolved Lifecycle / Compressed PA Settlement Handoff; requires separate authorization."
+    },
+    {
+      "number": 93,
+      "item": "git diff --check",
+      "result": "PASS (tracked diff and untracked M0 file whitespace checks)."
+    },
+    {
+      "number": 94,
+      "item": "git status",
+      "result": "Six untracked M0 files only; no tracked/staged modifications; no commit/push/stash drop."
+    },
+    {
+      "number": 95,
+      "item": "Stop Conditions",
+      "result": "New progression/settlement correctness blocker and current-production cohort integrity stop triggered. No production repair performed."
+    }
+  ]
+}

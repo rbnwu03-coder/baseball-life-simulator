@@ -6791,6 +6791,12 @@ function applyHighSchoolSimulatedPlateAppearance(match, result, batterId, offens
 
 function resolveSimulatedHighSchoolPlateAppearance(match, randomSource = null, options = {}) {
   if (match.completed || match.outs >= 3 || !["home", "away"].includes(match.offenseTeam)) return false;
+  // A ground lifecycle owns this PA until its canonical settlement is consumed.
+  // Recovery validates the original context before applying recorded execution.
+  if (match.activeSituation?.type === "groundBallDefensiveDecision") {
+    if (match.activeSituation.lifecycleState === "resolved") return resumeResolvedHighSchoolGroundBallSettlement(match);
+    if (!MatchSituationLifecycle.canResumeSimulation(match.activeSituation)) return false;
+  }
   const batter = getHighSchoolMatchLineupBatter(match, match.offenseTeam);
   if (!batter || (batter.id === "player" && options.allowPlayer !== true)) return false;
   const capability = getOffensiveSimulationCapability(batter);
@@ -10040,7 +10046,9 @@ function resolveRoutineDefensivePlay(match, situation = match?.defensiveSituatio
   if (!resolution) return null;
   return Object.freeze({
     ...resolution,
-    eventClassification: classification.eventClassification,
+    // Density suppression already admitted this execution as a routine play.
+    // Reusing the candidate's meaningful label would make routine settlement reject it.
+    eventClassification: "playerRoutinePlay",
     decisionTension: classification.decisionTension,
     executionRoute: getInfieldRoutineExecutionRoute(situation)
   });

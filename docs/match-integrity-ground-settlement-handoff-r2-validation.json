@@ -1,0 +1,5854 @@
+{
+  "title": "Match Integrity Repair R2 — Ground Resolved Lifecycle / Compressed PA Settlement Handoff",
+  "date": "2026-09-26",
+  "status": "PASS — R2 repair complete; ready for M0 Resume",
+  "baseline": {
+    "branch": "main",
+    "head": "f1cc66b351360918db5a1bea3817d7cf7ad1f0e1",
+    "originMain": "f1cc66b351360918db5a1bea3817d7cf7ad1f0e1",
+    "ahead": 0,
+    "behind": 0,
+    "initialWorkingTree": "Six existing untracked M0 files only",
+    "stashes": [
+      "0daf1e954f74ddb45efe620107970567dec6fffd",
+      "8cc34a930df052067d1bad3ea798fe0b9d2ae036"
+    ]
+  },
+  "m0Preserved": [
+    {
+      "file": "docs/match-authority-coverage-baseline-sprint-m0.md",
+      "sha256": "4fb8a29c272b600ebbead5ea61617cdf52be12cd2e8b5655571af0deda5af97c",
+      "preserved": true
+    },
+    {
+      "file": "docs/match-authority-coverage-baseline-validation.json",
+      "sha256": "d0da8cdc1ced4bdec1d19e2722ebd166b4c34422055bff7709317f555cb9730f",
+      "preserved": true
+    },
+    {
+      "file": "tests/match-authority-coverage-audit.cjs",
+      "sha256": "a24e991d93e14e8d4fa2fc3d9d08c06f927b1412010eff28c3a97535725f2037",
+      "preserved": true
+    },
+    {
+      "file": "tests/match-authority-coverage-blocker-repro.cjs",
+      "sha256": "05994a5a836dffd7e4bb9e55d9e51335510bb3a68834a71b5c1ba790acc0b82d",
+      "preserved": true
+    },
+    {
+      "file": "tests/match-authority-coverage-cohort.cjs",
+      "sha256": "4873acfb7cc91072a575b504e02a45888b1cff172b46823e8ac6d2f92c205b68",
+      "preserved": true
+    },
+    {
+      "file": "tests/match-authority-coverage-resume-blocker-repro.cjs",
+      "sha256": "7bcebf486378c433c25ba627936357caebc2ed518379b992382f70dbfac24a06",
+      "preserved": true
+    }
+  ],
+  "rootCause": {
+    "classification": "Production settlement handoff bug",
+    "chain": [
+      "advanceHighSchoolMatchPlaybackStep",
+      "prepareHighSchoolDefensiveMomentFromSimulation",
+      "ensureHighSchoolOrdinaryGroundBallInPlayHandoff produces supported physical ground state",
+      "classifyHighSchoolMatchDefensiveOpportunity applies density suppression; createGroundBallMatchSituation admits automatic routine execution",
+      "beginAutomaticGroundBallSituationExecution",
+      "resolveRoutineDefensivePlay reclassifies the candidate as playerMeaningfulDecision despite densitySuppressed=true",
+      "recordGroundBallSituationResolution sets resolved / unapplied",
+      "applyRoutineDefensiveResolutionToHighSchoolMatch rejects mismatched execution label and returns null",
+      "prepareHighSchoolDefensiveMomentFromSimulation returns null",
+      "same playback invocation falls through to resolveSimulatedHighSchoolPlateAppearance",
+      "AIPlateAppearanceOutcome.resolveCompressedPlateAppearanceOutcome chooses outcome; applyHighSchoolSimulatedPlateAppearance mutates outs/runners/scores; recordHighSchoolMatchSimulationEvent records PA; advanceHighSchoolMatchBattingOrder changes batter",
+      "next playback invocation calls resumeResolvedHighSchoolGroundBallSettlement, which correctly rejects stale outs/batter"
+    ],
+    "canonicalOwner": "applyRoutineDefensiveResolutionToHighSchoolMatch -> applyHighSchoolDefensiveSettlementFacts -> recordHighSchoolRoutinePlateAppearance -> advanceHighSchoolMatchBattingOrder -> settleAndCloseGroundBallSituation",
+    "competingOwner": "resolveSimulatedHighSchoolPlateAppearance",
+    "samePA": true,
+    "firstOutsAndBatterSettlement": "compressed PA, sequence 261, 16 top, same batter regional-power-school-player-09",
+    "whyAdmissible": "Playback only checked existing resolved lifecycle at entry; a new resolved lifecycle was created later in that invocation, and null defensive event allowed fallthrough. Compressed entry had no lifecycle ownership check.",
+    "ownershipSignal": "Existing activeSituation.type / lifecycleState; no new state model",
+    "repair": [
+      "Successful routine execution retains playerRoutinePlay classification, including density-suppressed meaningful candidates. Resolution physics and existing density policy unchanged.",
+      "Compressed entry delegates resolved ground to existing validated recovery before RNG or PA work and refuses other non-resumable ground states."
+    ],
+    "staleGuard": "resumeResolvedHighSchoolGroundBallSettlement byte-identical to f1cc66b; negative outs and batter witnesses still reject before mutation.",
+    "trajectoryDifference": "Same bug also affects inning 13 supported bunt routine without formal ground lifecycle. Repair consumes its already-computed routine resolution instead of resampling compressed outcome. Full seed therefore completes in inning 14; original inning 16 pre-execution production boundary is separately replayed and canonically applied once. No probability parameters changed."
+  },
+  "beforeRepair": {
+    "diagnostic": "tests/match-authority-coverage-resume-blocker-repro.cjs",
+    "status": "REPRODUCED_PRODUCTION_BLOCKER",
+    "seed": 22430361,
+    "observer": "OFF/ON/OFF identical full match before production edits",
+    "trace": {
+      "error": "Stale resolved ground-ball settlement context",
+      "chain": [
+        {
+          "name": "prepareHighSchoolDefensiveMomentFromSimulation",
+          "inning": 16,
+          "half": "上",
+          "stack": [],
+          "before": {
+            "outs": 0,
+            "batter": "regional-power-school-player-06",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 1
+            },
+            "pa": 131,
+            "classification": "playerRoutinePlay"
+          },
+          "returned": true,
+          "after": {
+            "outs": 0,
+            "batter": "regional-power-school-player-06",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 1
+            },
+            "pa": 131,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "prepareHighSchoolDefensiveMomentFromSimulation",
+          "inning": 16,
+          "half": "上",
+          "stack": [],
+          "before": {
+            "outs": 0,
+            "batter": "regional-power-school-player-06",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 1
+            },
+            "pa": 131,
+            "classification": "playerRoutinePlay"
+          },
+          "returned": true,
+          "after": {
+            "outs": 0,
+            "batter": "regional-power-school-player-06",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 1
+            },
+            "pa": 131,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "prepareHighSchoolDefensiveMomentFromSimulation",
+          "inning": 16,
+          "half": "上",
+          "stack": [],
+          "before": {
+            "outs": 0,
+            "batter": "regional-power-school-player-06",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 1
+            },
+            "pa": 131,
+            "classification": "playerRoutinePlay"
+          },
+          "returned": false,
+          "after": {
+            "outs": 0,
+            "batter": "regional-power-school-player-06",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 1
+            },
+            "pa": 131,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "resolveSimulatedHighSchoolPlateAppearance",
+          "inning": 16,
+          "half": "上",
+          "stack": [],
+          "before": {
+            "outs": 0,
+            "batter": "regional-power-school-player-06",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 1
+            },
+            "pa": 131,
+            "classification": "playerRoutinePlay"
+          },
+          "returned": true,
+          "after": {
+            "outs": 1,
+            "batter": "regional-power-school-player-08",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 2
+            },
+            "pa": 132,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "advanceHighSchoolMatchBattingOrder",
+          "inning": 16,
+          "half": "上",
+          "stack": [
+            "resolveSimulatedHighSchoolPlateAppearance"
+          ],
+          "before": {
+            "outs": 1,
+            "batter": "regional-power-school-player-06",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 1
+            },
+            "pa": 132,
+            "classification": "playerRoutinePlay"
+          },
+          "returned": false,
+          "after": {
+            "outs": 1,
+            "batter": "regional-power-school-player-08",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 2
+            },
+            "pa": 132,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "prepareHighSchoolDefensiveMomentFromSimulation",
+          "inning": 16,
+          "half": "上",
+          "stack": [],
+          "before": {
+            "outs": 1,
+            "batter": "regional-power-school-player-08",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 2
+            },
+            "pa": 132,
+            "classification": "playerRoutinePlay"
+          },
+          "returned": true,
+          "after": {
+            "outs": 1,
+            "batter": "regional-power-school-player-08",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 2
+            },
+            "pa": 132,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "prepareHighSchoolDefensiveMomentFromSimulation",
+          "inning": 16,
+          "half": "上",
+          "stack": [],
+          "before": {
+            "outs": 1,
+            "batter": "regional-power-school-player-08",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 2
+            },
+            "pa": 132,
+            "classification": "playerRoutinePlay"
+          },
+          "returned": true,
+          "after": {
+            "outs": 1,
+            "batter": "regional-power-school-player-08",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 2
+            },
+            "pa": 132,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "prepareHighSchoolDefensiveMomentFromSimulation",
+          "inning": 16,
+          "half": "上",
+          "stack": [],
+          "before": {
+            "outs": 1,
+            "batter": "regional-power-school-player-08",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 2
+            },
+            "pa": 132,
+            "classification": "playerRoutinePlay"
+          },
+          "returned": false,
+          "after": {
+            "outs": 1,
+            "batter": "regional-power-school-player-08",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 2
+            },
+            "pa": 132,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "resolveSimulatedHighSchoolPlateAppearance",
+          "inning": 16,
+          "half": "上",
+          "stack": [],
+          "before": {
+            "outs": 1,
+            "batter": "regional-power-school-player-08",
+            "runners": [
+              null,
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 2
+            },
+            "pa": 132,
+            "classification": "playerRoutinePlay"
+          },
+          "returned": true,
+          "after": {
+            "outs": 1,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 133,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "advanceHighSchoolMatchBattingOrder",
+          "inning": 16,
+          "half": "上",
+          "stack": [
+            "resolveSimulatedHighSchoolPlateAppearance"
+          ],
+          "before": {
+            "outs": 1,
+            "batter": "regional-power-school-player-08",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 2
+            },
+            "pa": 133,
+            "classification": "playerRoutinePlay"
+          },
+          "returned": false,
+          "after": {
+            "outs": 1,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 133,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "prepareHighSchoolDefensiveMomentFromSimulation",
+          "inning": 16,
+          "half": "上",
+          "stack": [],
+          "before": {
+            "outs": 1,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 133,
+            "classification": "playerRoutinePlay"
+          },
+          "returned": false,
+          "after": {
+            "outs": 1,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 133,
+            "active": "hs-y1-autumn-exhibition|16|上|hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense|hs_y1_match_defense_5|groundBallDefensiveDecision",
+            "state": "resolved",
+            "applied": false,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+          "inning": 16,
+          "half": "上",
+          "stack": [
+            "prepareHighSchoolDefensiveMomentFromSimulation"
+          ],
+          "before": {
+            "outs": 1,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 133,
+            "classification": "playerRoutinePlay"
+          },
+          "returned": true,
+          "after": {
+            "outs": 1,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 133,
+            "applied": false,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "createGroundBallMatchSituation",
+          "inning": 16,
+          "half": "上",
+          "stack": [
+            "prepareHighSchoolDefensiveMomentFromSimulation"
+          ],
+          "before": {
+            "outs": 1,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 133,
+            "applied": false,
+            "classification": "playerRoutinePlay"
+          },
+          "returned": true,
+          "after": {
+            "outs": 1,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 133,
+            "active": "hs-y1-autumn-exhibition|16|上|hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense|hs_y1_match_defense_5|groundBallDefensiveDecision",
+            "state": "admitted",
+            "applied": false,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "resolveRoutineDefensivePlay",
+          "inning": 16,
+          "half": "上",
+          "stack": [
+            "prepareHighSchoolDefensiveMomentFromSimulation"
+          ],
+          "before": {
+            "outs": 1,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 133,
+            "active": "hs-y1-autumn-exhibition|16|上|hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense|hs_y1_match_defense_5|groundBallDefensiveDecision",
+            "state": "executing",
+            "applied": false,
+            "classification": "playerRoutinePlay"
+          },
+          "densitySuppressed": true,
+          "resultClassification": "playerMeaningfulDecision",
+          "returned": true,
+          "after": {
+            "outs": 1,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 133,
+            "active": "hs-y1-autumn-exhibition|16|上|hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense|hs_y1_match_defense_5|groundBallDefensiveDecision",
+            "state": "executing",
+            "applied": false,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "recordGroundBallSituationResolution",
+          "inning": 16,
+          "half": "上",
+          "stack": [
+            "prepareHighSchoolDefensiveMomentFromSimulation"
+          ],
+          "before": {
+            "outs": 1,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 133,
+            "active": "hs-y1-autumn-exhibition|16|上|hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense|hs_y1_match_defense_5|groundBallDefensiveDecision",
+            "state": "executing",
+            "applied": false,
+            "classification": "playerRoutinePlay"
+          },
+          "resolution": "playerMeaningfulDecision",
+          "returned": true,
+          "after": {
+            "outs": 1,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 133,
+            "active": "hs-y1-autumn-exhibition|16|上|hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense|hs_y1_match_defense_5|groundBallDefensiveDecision",
+            "state": "resolved",
+            "applied": false,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "applyRoutineDefensiveResolutionToHighSchoolMatch",
+          "inning": 16,
+          "half": "上",
+          "stack": [
+            "prepareHighSchoolDefensiveMomentFromSimulation"
+          ],
+          "before": {
+            "outs": 1,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 133,
+            "active": "hs-y1-autumn-exhibition|16|上|hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense|hs_y1_match_defense_5|groundBallDefensiveDecision",
+            "state": "resolved",
+            "applied": false,
+            "classification": "playerRoutinePlay"
+          },
+          "resolution": "playerMeaningfulDecision",
+          "returned": false,
+          "after": {
+            "outs": 1,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 133,
+            "active": "hs-y1-autumn-exhibition|16|上|hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense|hs_y1_match_defense_5|groundBallDefensiveDecision",
+            "state": "resolved",
+            "applied": false,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "resolveSimulatedHighSchoolPlateAppearance",
+          "inning": 16,
+          "half": "上",
+          "stack": [],
+          "before": {
+            "outs": 1,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 133,
+            "active": "hs-y1-autumn-exhibition|16|上|hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense|hs_y1_match_defense_5|groundBallDefensiveDecision",
+            "state": "resolved",
+            "applied": false,
+            "classification": "playerRoutinePlay"
+          },
+          "returned": true,
+          "after": {
+            "outs": 2,
+            "batter": "regional-power-school-player-03",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 4
+            },
+            "pa": 134,
+            "active": "hs-y1-autumn-exhibition|16|上|hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense|hs_y1_match_defense_5|groundBallDefensiveDecision",
+            "state": "resolved",
+            "applied": false,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "advanceHighSchoolMatchBattingOrder",
+          "inning": 16,
+          "half": "上",
+          "stack": [
+            "resolveSimulatedHighSchoolPlateAppearance"
+          ],
+          "before": {
+            "outs": 2,
+            "batter": "regional-power-school-player-09",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 3
+            },
+            "pa": 134,
+            "active": "hs-y1-autumn-exhibition|16|上|hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense|hs_y1_match_defense_5|groundBallDefensiveDecision",
+            "state": "resolved",
+            "applied": false,
+            "classification": "playerRoutinePlay"
+          },
+          "returned": false,
+          "after": {
+            "outs": 2,
+            "batter": "regional-power-school-player-03",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 4
+            },
+            "pa": 134,
+            "active": "hs-y1-autumn-exhibition|16|上|hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense|hs_y1_match_defense_5|groundBallDefensiveDecision",
+            "state": "resolved",
+            "applied": false,
+            "classification": "playerRoutinePlay"
+          }
+        },
+        {
+          "name": "resumeResolvedHighSchoolGroundBallSettlement",
+          "inning": 16,
+          "half": "上",
+          "stack": [],
+          "before": {
+            "outs": 2,
+            "batter": "regional-power-school-player-03",
+            "runners": [
+              "regional-power-school-player-08",
+              null,
+              null
+            ],
+            "scores": {
+              "home": 2,
+              "away": 2
+            },
+            "order": {
+              "home": 4,
+              "away": 4
+            },
+            "pa": 134,
+            "active": "hs-y1-autumn-exhibition|16|上|hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense|hs_y1_match_defense_5|groundBallDefensiveDecision",
+            "state": "resolved",
+            "applied": false,
+            "classification": "playerRoutinePlay"
+          },
+          "error": "Stale resolved ground-ball settlement context"
+        }
+      ],
+      "earlierRejectedRoutine": [
+        {
+          "inning": 13,
+          "half": "上",
+          "batter": "regional-power-school-player-05",
+          "classification": "playerMeaningfulDecision"
+        },
+        {
+          "inning": 16,
+          "half": "上",
+          "batter": "regional-power-school-player-09",
+          "classification": "playerMeaningfulDecision",
+          "active": "hs-y1-autumn-exhibition|16|上|hs-y1-autumn-exhibition|16|上|away|regional-power-school-player-09|3|1|truefalsefalse|ordinary-contact|ground-defense|hs_y1_match_defense_5|groundBallDefensiveDecision"
+        }
+      ],
+      "m0Hashes": {
+        "docs/match-authority-coverage-baseline-sprint-m0.md": "4fb8a29c272b600ebbead5ea61617cdf52be12cd2e8b5655571af0deda5af97c",
+        "docs/match-authority-coverage-baseline-validation.json": "d0da8cdc1ced4bdec1d19e2722ebd166b4c34422055bff7709317f555cb9730f",
+        "tests/match-authority-coverage-audit.cjs": "a24e991d93e14e8d4fa2fc3d9d08c06f927b1412010eff28c3a97535725f2037",
+        "tests/match-authority-coverage-blocker-repro.cjs": "05994a5a836dffd7e4bb9e55d9e51335510bb3a68834a71b5c1ba790acc0b82d",
+        "tests/match-authority-coverage-cohort.cjs": "4873acfb7cc91072a575b504e02a45888b1cff172b46823e8ac6d2f92c205b68",
+        "tests/match-authority-coverage-resume-blocker-repro.cjs": "7bcebf486378c433c25ba627936357caebc2ed518379b992382f70dbfac24a06"
+      }
+    }
+  },
+  "targeted": {
+    "file": "tests/ground-settlement-handoff-r2-production-integration-test.js",
+    "passed": 21,
+    "failed": 0,
+    "seed": 22430361,
+    "completed": true,
+    "steps": 235,
+    "score": {
+      "home": 1,
+      "away": 3
+    },
+    "paEvents": 122,
+    "battingPA": 122,
+    "pitcherBF": 122,
+    "duplicateSettlementCount": 0,
+    "validCurrentStaleRejections": 0,
+    "intentionalStaleWitnesses": 2,
+    "originalInning16Boundary": "actual captured baseline pre-execution context, replayed without fabricated lifecycle or probability override; one PA/BF/order advance, duplicate inert",
+    "determinism": "full match equal with passive trace/observer ON and fresh OFF run",
+    "repeatedGroundSeed": 22430119
+  },
+  "previousBlocker": {
+    "seed": 22430002,
+    "completed": true,
+    "paEvents": 64,
+    "battingPA": 64,
+    "pitcherBF": 64,
+    "score": {
+      "home": 0,
+      "away": 3
+    },
+    "currentChoicesAccepted": true,
+    "staleChoicesRejected": true,
+    "repairTests": 15,
+    "integrationSweep": 21
+  },
+  "validation": {
+    "initialIntegration": [
+      {
+        "file": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/bbp-b1-ground-ball-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/force-multi-runner-settlement-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/third-out-run-out-attribution-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/ground-ball-home-route-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      }
+    ],
+    "neighborhood": {
+      "range": [
+        22430340,
+        22430380
+      ],
+      "attempted": 41,
+      "completed": 41,
+      "exceptions": 0,
+      "failures": [],
+      "games": [
+        {
+          "seed": 22430340,
+          "role": "bench",
+          "pa": 75,
+          "battingPA": 75,
+          "pitcherBF": 75,
+          "failures": []
+        },
+        {
+          "seed": 22430341,
+          "role": "bench",
+          "pa": 67,
+          "battingPA": 67,
+          "pitcherBF": 67,
+          "failures": []
+        },
+        {
+          "seed": 22430342,
+          "role": "bench",
+          "pa": 69,
+          "battingPA": 69,
+          "pitcherBF": 69,
+          "failures": []
+        },
+        {
+          "seed": 22430343,
+          "role": "bench",
+          "pa": 75,
+          "battingPA": 75,
+          "pitcherBF": 75,
+          "failures": []
+        },
+        {
+          "seed": 22430344,
+          "role": "bench",
+          "pa": 68,
+          "battingPA": 68,
+          "pitcherBF": 68,
+          "failures": []
+        },
+        {
+          "seed": 22430345,
+          "role": "bench",
+          "pa": 63,
+          "battingPA": 63,
+          "pitcherBF": 63,
+          "failures": []
+        },
+        {
+          "seed": 22430346,
+          "role": "bench",
+          "pa": 67,
+          "battingPA": 67,
+          "pitcherBF": 67,
+          "failures": []
+        },
+        {
+          "seed": 22430347,
+          "role": "bench",
+          "pa": 63,
+          "battingPA": 63,
+          "pitcherBF": 63,
+          "failures": []
+        },
+        {
+          "seed": 22430348,
+          "role": "bench",
+          "pa": 63,
+          "battingPA": 63,
+          "pitcherBF": 63,
+          "failures": []
+        },
+        {
+          "seed": 22430349,
+          "role": "bench",
+          "pa": 78,
+          "battingPA": 78,
+          "pitcherBF": 78,
+          "failures": []
+        },
+        {
+          "seed": 22430350,
+          "role": "bench",
+          "pa": 58,
+          "battingPA": 58,
+          "pitcherBF": 58,
+          "failures": []
+        },
+        {
+          "seed": 22430351,
+          "role": "bench",
+          "pa": 61,
+          "battingPA": 61,
+          "pitcherBF": 61,
+          "failures": []
+        },
+        {
+          "seed": 22430352,
+          "role": "bench",
+          "pa": 67,
+          "battingPA": 67,
+          "pitcherBF": 67,
+          "failures": []
+        },
+        {
+          "seed": 22430353,
+          "role": "bench",
+          "pa": 61,
+          "battingPA": 61,
+          "pitcherBF": 61,
+          "failures": []
+        },
+        {
+          "seed": 22430354,
+          "role": "bench",
+          "pa": 68,
+          "battingPA": 68,
+          "pitcherBF": 68,
+          "failures": []
+        },
+        {
+          "seed": 22430355,
+          "role": "bench",
+          "pa": 71,
+          "battingPA": 71,
+          "pitcherBF": 71,
+          "failures": []
+        },
+        {
+          "seed": 22430356,
+          "role": "bench",
+          "pa": 74,
+          "battingPA": 74,
+          "pitcherBF": 74,
+          "failures": []
+        },
+        {
+          "seed": 22430357,
+          "role": "bench",
+          "pa": 63,
+          "battingPA": 63,
+          "pitcherBF": 63,
+          "failures": []
+        },
+        {
+          "seed": 22430358,
+          "role": "bench",
+          "pa": 63,
+          "battingPA": 63,
+          "pitcherBF": 63,
+          "failures": []
+        },
+        {
+          "seed": 22430359,
+          "role": "bench",
+          "pa": 65,
+          "battingPA": 65,
+          "pitcherBF": 65,
+          "failures": []
+        },
+        {
+          "seed": 22430360,
+          "role": "bench",
+          "pa": 66,
+          "battingPA": 66,
+          "pitcherBF": 66,
+          "failures": []
+        },
+        {
+          "seed": 22430361,
+          "role": "bench",
+          "pa": 122,
+          "battingPA": 122,
+          "pitcherBF": 122,
+          "failures": []
+        },
+        {
+          "seed": 22430362,
+          "role": "bench",
+          "pa": 65,
+          "battingPA": 65,
+          "pitcherBF": 65,
+          "failures": []
+        },
+        {
+          "seed": 22430363,
+          "role": "bench",
+          "pa": 77,
+          "battingPA": 77,
+          "pitcherBF": 77,
+          "failures": []
+        },
+        {
+          "seed": 22430364,
+          "role": "bench",
+          "pa": 64,
+          "battingPA": 64,
+          "pitcherBF": 64,
+          "failures": []
+        },
+        {
+          "seed": 22430365,
+          "role": "bench",
+          "pa": 70,
+          "battingPA": 70,
+          "pitcherBF": 70,
+          "failures": []
+        },
+        {
+          "seed": 22430366,
+          "role": "bench",
+          "pa": 66,
+          "battingPA": 66,
+          "pitcherBF": 66,
+          "failures": []
+        },
+        {
+          "seed": 22430367,
+          "role": "bench",
+          "pa": 76,
+          "battingPA": 76,
+          "pitcherBF": 76,
+          "failures": []
+        },
+        {
+          "seed": 22430368,
+          "role": "bench",
+          "pa": 67,
+          "battingPA": 67,
+          "pitcherBF": 67,
+          "failures": []
+        },
+        {
+          "seed": 22430369,
+          "role": "bench",
+          "pa": 69,
+          "battingPA": 69,
+          "pitcherBF": 69,
+          "failures": []
+        },
+        {
+          "seed": 22430370,
+          "role": "bench",
+          "pa": 68,
+          "battingPA": 68,
+          "pitcherBF": 68,
+          "failures": []
+        },
+        {
+          "seed": 22430371,
+          "role": "bench",
+          "pa": 56,
+          "battingPA": 56,
+          "pitcherBF": 56,
+          "failures": []
+        },
+        {
+          "seed": 22430372,
+          "role": "bench",
+          "pa": 59,
+          "battingPA": 59,
+          "pitcherBF": 59,
+          "failures": []
+        },
+        {
+          "seed": 22430373,
+          "role": "bench",
+          "pa": 86,
+          "battingPA": 86,
+          "pitcherBF": 86,
+          "failures": []
+        },
+        {
+          "seed": 22430374,
+          "role": "bench",
+          "pa": 66,
+          "battingPA": 66,
+          "pitcherBF": 66,
+          "failures": []
+        },
+        {
+          "seed": 22430375,
+          "role": "bench",
+          "pa": 72,
+          "battingPA": 72,
+          "pitcherBF": 72,
+          "failures": []
+        },
+        {
+          "seed": 22430376,
+          "role": "bench",
+          "pa": 62,
+          "battingPA": 62,
+          "pitcherBF": 62,
+          "failures": []
+        },
+        {
+          "seed": 22430377,
+          "role": "bench",
+          "pa": 63,
+          "battingPA": 63,
+          "pitcherBF": 63,
+          "failures": []
+        },
+        {
+          "seed": 22430378,
+          "role": "bench",
+          "pa": 68,
+          "battingPA": 68,
+          "pitcherBF": 68,
+          "failures": []
+        },
+        {
+          "seed": 22430379,
+          "role": "bench",
+          "pa": 59,
+          "battingPA": 59,
+          "pitcherBF": 59,
+          "failures": []
+        },
+        {
+          "seed": 22430380,
+          "role": "bench",
+          "pa": 66,
+          "battingPA": 66,
+          "pitcherBF": 66,
+          "failures": []
+        }
+      ]
+    },
+    "domain": {
+      "mode": "domain",
+      "total": 67,
+      "executed": 67,
+      "passed": 67,
+      "failed": 0,
+      "reusedResults": 0,
+      "files": [
+        {
+          "file": "tests/active-defensive-assignment-integrity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ai-plate-appearance-outcome-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ai-plate-appearance-outcome-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-1-1-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-1-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-3-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-4-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-5-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batted-ball-outcome-mapping-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batted-ball-outcome-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batted-ball-physical-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batted-ball-physical-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batter-anticipation-sprint-b-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b1-ground-ball-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b1-ground-ball-runner-handoff-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b2a-line-drive-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b2a-line-drive-read-catch-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b2b1-fly-ball-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b2b1-fly-ball-tag-up-legality-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-save-admission-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-decision-throw-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-decision-throw-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-opportunity-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-opportunity-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-outcome-cause-explainability-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-reach-secure-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-reach-secure-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-runner-throw-settlement-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/force-advancement-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/force-multi-runner-settlement-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/force-multi-runner-settlement-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-ball-home-route-integrity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-ball-home-route-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-defensive-decision-identity-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0,
+          "R1_JSON=": {
+            "seed22430002": {
+              "completed": true,
+              "pa": 64,
+              "pitcherBF": 64,
+              "score": {
+                "home": 0,
+                "away": 3
+              },
+              "winner": "regional-power-school",
+              "status": "final",
+              "outs": 42
+            },
+            "determinism": true,
+            "observerNeutral": true,
+            "simulationCursorEqual": true,
+            "sweep": [
+              {
+                "seed": 22430000,
+                "completed": true,
+                "defensiveMoments": 0,
+                "groundLifecycleMoments": 0,
+                "ids": [],
+                "positions": [],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 71,
+                "pitcherBF": 71
+              },
+              {
+                "seed": 22430001,
+                "completed": true,
+                "defensiveMoments": 1,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 68,
+                "pitcherBF": 68
+              },
+              {
+                "seed": 22430002,
+                "completed": true,
+                "defensiveMoments": 2,
+                "groundLifecycleMoments": 1,
+                "ids": [
+                  "hs_y1_match_moment_2",
+                  "hs_y1_match_defense_2"
+                ],
+                "positions": [
+                  "內野手",
+                  "二壘手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 1,
+                "staleRejected": 1,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 64,
+                "pitcherBF": 64
+              },
+              {
+                "seed": 22430003,
+                "completed": true,
+                "defensiveMoments": 2,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 1,
+                "staleRejected": 1,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 83,
+                "pitcherBF": 83
+              },
+              {
+                "seed": 22430004,
+                "completed": true,
+                "defensiveMoments": 2,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 1,
+                "staleRejected": 1,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 90,
+                "pitcherBF": 90
+              },
+              {
+                "seed": 22430005,
+                "completed": true,
+                "defensiveMoments": 0,
+                "groundLifecycleMoments": 0,
+                "ids": [],
+                "positions": [],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 65,
+                "pitcherBF": 65
+              },
+              {
+                "seed": 22430006,
+                "completed": true,
+                "defensiveMoments": 2,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 1,
+                "staleRejected": 1,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 64,
+                "pitcherBF": 64
+              },
+              {
+                "seed": 22430007,
+                "completed": true,
+                "defensiveMoments": 0,
+                "groundLifecycleMoments": 0,
+                "ids": [],
+                "positions": [],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 65,
+                "pitcherBF": 65
+              },
+              {
+                "seed": 22430008,
+                "completed": true,
+                "defensiveMoments": 1,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 70,
+                "pitcherBF": 70
+              },
+              {
+                "seed": 22430009,
+                "completed": true,
+                "defensiveMoments": 1,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 69,
+                "pitcherBF": 69
+              },
+              {
+                "seed": 22430010,
+                "completed": true,
+                "defensiveMoments": 2,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 1,
+                "staleRejected": 1,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 83,
+                "pitcherBF": 83
+              },
+              {
+                "seed": 22430011,
+                "completed": true,
+                "defensiveMoments": 1,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 58,
+                "pitcherBF": 58
+              },
+              {
+                "seed": 22430012,
+                "completed": true,
+                "defensiveMoments": 1,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 67,
+                "pitcherBF": 67
+              },
+              {
+                "seed": 22430013,
+                "completed": true,
+                "defensiveMoments": 0,
+                "groundLifecycleMoments": 0,
+                "ids": [],
+                "positions": [],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 63,
+                "pitcherBF": 63
+              },
+              {
+                "seed": 22430014,
+                "completed": true,
+                "defensiveMoments": 2,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 1,
+                "staleRejected": 1,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 66,
+                "pitcherBF": 66
+              },
+              {
+                "seed": 22430015,
+                "completed": true,
+                "defensiveMoments": 4,
+                "groundLifecycleMoments": 1,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2",
+                  "hs_y1_match_defense_3",
+                  "hs_y1_match_defense_4"
+                ],
+                "positions": [
+                  "內野手",
+                  "二壘手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 3,
+                "staleRejected": 3,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 68,
+                "pitcherBF": 68
+              },
+              {
+                "seed": 22430016,
+                "completed": true,
+                "defensiveMoments": 0,
+                "groundLifecycleMoments": 0,
+                "ids": [],
+                "positions": [],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 65,
+                "pitcherBF": 65
+              },
+              {
+                "seed": 22430017,
+                "completed": true,
+                "defensiveMoments": 3,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_moment_2",
+                  "hs_y1_match_defense_2",
+                  "hs_y1_match_defense_3"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 2,
+                "staleRejected": 2,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 70,
+                "pitcherBF": 70
+              },
+              {
+                "seed": 22430018,
+                "completed": true,
+                "defensiveMoments": 1,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 62,
+                "pitcherBF": 62
+              },
+              {
+                "seed": 22430019,
+                "completed": true,
+                "defensiveMoments": 3,
+                "groundLifecycleMoments": 1,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2",
+                  "hs_y1_match_defense_3"
+                ],
+                "positions": [
+                  "內野手",
+                  "二壘手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 2,
+                "staleRejected": 2,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 105,
+                "pitcherBF": 105
+              },
+              {
+                "seed": 22430119,
+                "completed": true,
+                "defensiveMoments": 2,
+                "groundLifecycleMoments": 2,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2"
+                ],
+                "positions": [
+                  "二壘手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 1,
+                "staleRejected": 1,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 90,
+                "pitcherBF": 90
+              }
+            ],
+            "warnings": [
+              "Current production ground lifecycle trajectory sample is admitted 2B; no unsupported positions forced."
+            ]
+          }
+        },
+        {
+          "file": "tests/ground-defensive-decision-identity-repair-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-settlement-handoff-r2-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0,
+          "R2_JSON=": {
+            "passed": 16,
+            "seed": 22430361,
+            "check": {
+              "seed": 22430361,
+              "role": "bench",
+              "pa": 122,
+              "battingPA": 122,
+              "pitcherBF": 122,
+              "failures": []
+            },
+            "steps": 235,
+            "score": {
+              "home": 1,
+              "away": 3
+            },
+            "groundApplications": 1,
+            "densitySuppressed": 1,
+            "duplicateSettlements": 0,
+            "validStaleRejections": 0,
+            "negativeWitnesses": 2,
+            "deterministic": true
+          }
+        },
+        {
+          "file": "tests/high-school-integration-1-1-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-2-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-2-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-3-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-full-game-record-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-situation-lifecycle-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-plate-approach-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-tactical-action-sprint-b2-defensive-handoff-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/pitch-sequencing-core-sprint-a-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/pitcher-catcher-tactical-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/plate-approach-semantic-integrity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/plate-decision-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/plate-decision-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/scoreboard-presentation-integrity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/scoreboard-presentation-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/third-out-run-out-attribution-integrity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/third-out-run-out-attribution-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/third-out-runner-resolution-integrity-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        }
+      ]
+    },
+    "syntax": {
+      "mode": "syntax",
+      "total": 320,
+      "executed": 320,
+      "passed": 320,
+      "failed": 0,
+      "reusedResults": 0,
+      "files": [
+        {
+          "file": "ai-plate-appearance-outcome.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "application-controller.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "baseball-defense-prototype.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "baseball-gameplay-integration.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "baseball-gameplay-prototype-sandbox.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "baseball-gameplay-prototype-utils.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "baseball-offense-prototype.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "baseball-training-resolver.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "batted-ball-fly-ball-defense.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "batted-ball-ground-defense.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "batted-ball-line-drive-defense.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "batted-ball-outcome-mapping.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "batted-ball-physical.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "batted-ball-tag-up-execution.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "batter-anticipation.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "career-age22-outcome-resolver.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "career-development-progression.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "career-development-runtime-resolver.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "career-rejoin-contract.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "career-save-admission.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "career-spine-contract.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "career-transition-commit.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "career-transition-progression.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "career-transition-resolver.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "career-transition-runtime-resolver.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "coach-evaluation-boundary.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "coach-response-flow.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "coach.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "competition-presentation.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "county-selection-opportunity.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "current-state-boundary.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "day-completion-flow.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "decision-flow.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "defensive-decision-throw-foundation.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "defensive-opportunity-foundation.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "defensive-reach-secure-foundation.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "defensive-runner-throw-settlement-foundation.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "evaluation-registry-bootstrap.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "evaluation-registry.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "event.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "force-advancement.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-career-evaluation.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-career-offers.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-competition-evidence.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-competition-foundation.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-competition-reassessment.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-entry-roster-context.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-exchange-network.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-friendly-invitation-producer.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-match-opportunity-generation.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-opportunity-probability.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-opportunity-selection.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-relationship-recency.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-relationship-temporal-authority.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-schedule-opportunity.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-training-camp-producer.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "high-school-year-transition.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "injury.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "match-context-foundation.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "match-development-settlement-presentation.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "match-experience-development.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "match-game-record.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "match-situation-lifecycle.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "narrative-condition-boundary.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "narrative-condition-flow.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "national-selection-pipeline.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "npc.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "offensive-bunt-count-rules.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "offensive-bunt-defensive-handoff.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "offensive-bunt-execution.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "offensive-plate-approach.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "offensive-tactical-action.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "offensive-tactical-decision.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "offensive-tactical-opportunity.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "pitch-sequencing.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "pitcher-catcher-tactical-integration.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "pitcher-mental-state.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "pitcher-process-state.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "plate-decision-foundation.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "player.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "playing-time-game-exposure.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "relationship-boundary.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "relationship-flow.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "rival.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "save.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "script.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "story.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "team-roster-foundation.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "team-strength-model.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ability-performance-correlation-audit.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ability-performance-gradient-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ability-performance-observability-extension-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ability-performance-observability-extension.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/active-defensive-assignment-integrity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/adult-route-chain-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ai-plate-appearance-outcome-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ai-plate-appearance-outcome-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ai-plate-appearance-outcome-validation.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/application-controller-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/aspiration-narrative-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/azhe-storyboard-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-defense-prototype-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-gameplay-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-gameplay-prototype-isolation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-1-1-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-1-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-3-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-3-audit.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-4-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-5-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-offense-base-state-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-offense-prototype-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-offensive-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-training-rhythm-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batted-ball-outcome-mapping-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batted-ball-outcome-mapping-validation.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batted-ball-outcome-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batted-ball-physical-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batted-ball-physical-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batter-anticipation-sprint-b-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b1-ground-ball-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b1-ground-ball-runner-handoff-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b2a-line-drive-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b2a-line-drive-read-catch-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b2b1-fly-ball-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b2b1-fly-ball-tag-up-legality-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/callbackTest.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-age22-outcome-resolver-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-arc-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-development-progression-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-development-runtime-resolver-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-network-contract-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-rejoin-contract-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-save-admission-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-spine-contract-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-transition-commit-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-transition-progression-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-transition-resolver-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-transition-role-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-transition-route-difference-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-transition-runtime-resolver-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/catcher-choice-outcome-integrity-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/coach-evaluation-boundary-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/coach-response-expansion-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/coach-response-flow-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/competition-flow-framework-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/content-flow-audit.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/contextual-status-panel-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/county-selection-opportunity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/current-state-boundary-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/day-completion-flow-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/decision-flow-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-decision-throw-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-decision-throw-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-opportunity-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-opportunity-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-outcome-cause-explainability-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-reach-secure-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-reach-secure-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-runner-throw-settlement-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/development-match-position-test-fallback-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/development-training-result-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/emotional-payoff-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/evaluation-registry-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/evaluation-registry-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/event-continuity-pass-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/first-offensive-moment-role-presentation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/force-advancement-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/force-multi-runner-settlement-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/force-multi-runner-settlement-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/full-game-competition-evidence-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/full-game-player-line-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/generic-infield-position-admission-diagnostic-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/goal-balance-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-ball-home-route-integrity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-ball-home-route-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-defensive-decision-identity-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-defensive-decision-identity-repair-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-defensive-decision-identity-test-context.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-settlement-handoff-r2-context.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-settlement-handoff-r2-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-career-evidence-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-career-exit-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-career-offer-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-career-test-context.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-competition-evidence-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-competition-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-competition-reassessment-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-entry-roster-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-exchange-network-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-exchange-network-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-friendly-invitation-producer-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-friendly-invitation-producer-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-1-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-2-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-2-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-3-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-match-opportunity-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-match-opportunity-generation-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-match-opportunity-generation-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-exposure-bias-repair-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-exposure-bias-repair-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-exposure-flow.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-post-repair-calibration-audit.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-post-repair-calibration-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-post-repair-calibration-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-post-repair-calibration-runner.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-probability-calibration-audit.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-probability-calibration-career.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-probability-calibration-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-probability-calibration-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-probability-calibration-runner.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-probability-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-probability-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-selection-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-selection-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-selection-test-context.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-position-code-normalization-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-relationship-recency-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-relationship-recency-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-relationship-recency-reputation-feasibility-audit.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-relationship-recency-reputation-feasibility-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-relationship-recency-reputation-feasibility-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-relationship-temporal-authority-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-relationship-temporal-authority-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-schedule-opportunity-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-three-year-spine-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-training-camp-producer-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-training-camp-producer-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-year-one-competition-loop-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-year-one-opportunity-two-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-year-three-competition-loop-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-year-transition-continuity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-year-two-autumn-match-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-year-two-competition-loop-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/invitation-presentation-school-choice-integration-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/invitation-presentation-v1-0-1-legacy-route-conflict-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-authority-coverage-audit.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-authority-coverage-blocker-repro.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-authority-coverage-cohort.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-authority-coverage-resume-blocker-repro.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-context-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-context-schedule-origin-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-development-settlement-presentation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-experience-development-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-full-game-record-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-opportunity-structural-completion-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-simulation-outcome-mapping-audit.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-simulation-outcome-mapping-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-situation-lifecycle-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/narrative-condition-boundary-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/narrative-condition-flow-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/narrative-continuity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/national-selection-fixture.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/national-selection-pipeline-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/npc-role-refactor-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-plate-approach-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-production-presentation-sprint-c-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-tactical-action-sprint-a-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-tactical-action-sprint-b1-0-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-tactical-action-sprint-b1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-tactical-action-sprint-b2-defensive-handoff-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-tactical-action-sprint-b2-runner-realization-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/opportunity-evaluation-boundary-v1-0-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/outcome-transition-hierarchy-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/pitch-sequencing-core-sprint-a-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/pitcher-catcher-tactical-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/pitcher-mental-state-sprint-a-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/pitcher-process-state-sprint-a-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/plate-approach-semantic-integrity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/plate-decision-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/plate-decision-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/player-archetype-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/player-capability-hierarchy-foundation-v1-0-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/player-capability-hierarchy-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/player-data-boundary-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/playing-time-game-exposure-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/presentation-interaction-clarity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/relationship-boundary-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/relationship-feasibility-production-scope-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/relationship-feasibility-production-scope.cjs",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/relationship-flow-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/relationship-payoff-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/representative-team-contract-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/responsive-accessibility-pass-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/scene-context-layer-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/scene-depth-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/school-invitation-foundation-v1-0-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/school-invitation-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/scoreboard-presentation-integrity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/scoreboard-presentation-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/sprint-c-human-ux-closeout-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/status-panel-disclosure-persistence-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/takahashi-storyboard-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/team-roster-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/team-roster-match-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/team-strength-model-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ten-year-narrative-architecture-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/third-out-run-out-attribution-integrity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/third-out-run-out-attribution-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/third-out-runner-resolution-integrity-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/time-boundary-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/u18-roster-construction-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/vertical-slice-smoke.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/youth-season-content-pass-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "time-boundary.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "time.js",
+          "status": "PASS",
+          "exitCode": 0
+        }
+      ]
+    },
+    "full": {
+      "mode": "full",
+      "total": 207,
+      "executed": 207,
+      "passed": 207,
+      "failed": 0,
+      "reusedResults": 0,
+      "files": [
+        {
+          "file": "tests/ability-performance-gradient-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ability-performance-observability-extension-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/active-defensive-assignment-integrity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/adult-route-chain-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ai-plate-appearance-outcome-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ai-plate-appearance-outcome-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/application-controller-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/aspiration-narrative-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/azhe-storyboard-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-defense-prototype-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-gameplay-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-gameplay-prototype-isolation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-1-1-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-1-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-3-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-3-audit.js",
+          "status": "PASS",
+          "exitCode": 0,
+          "AUDIT_JSON=": {
+            "schemaVersion": "2.2.4.3",
+            "seedStrategy": {
+              "bench": {
+                "base": 22430000,
+                "count": 1000,
+                "last": 22430999
+              },
+              "starter": {
+                "base": 22431000,
+                "count": 400,
+                "last": 22431399
+              },
+              "deterministicRepeatSeeds": [
+                22430000,
+                22430001,
+                22430002,
+                22430003,
+                22430004,
+                22430005,
+                22430006,
+                22430007,
+                22430008,
+                22430009
+              ]
+            },
+            "choicePolicy": "每個正式 Decision 選第一個合法 choice；execution sample 固定為 0.82；不消耗 match simulation RNG。",
+            "bench": {
+              "matches": 1000,
+              "entryInning": {
+                "5": 645,
+                "6": 355
+              },
+              "entryHalf": {
+                "下": 1000
+              },
+              "entryOuts": {
+                "0": 506,
+                "1": 390,
+                "2": 104
+              },
+              "entryBases": {
+                "2B": 132,
+                "empty": 647,
+                "1B+2B": 96,
+                "1B": 71,
+                "3B": 21,
+                "1B+3B": 33
+              },
+              "entryScoreDifferential": {
+                "0": 234,
+                "1": 160,
+                "2": 102,
+                "3": 72,
+                "4": 56,
+                "5": 47,
+                "6": 44,
+                "7": 6,
+                "8": 3,
+                "-3": 15,
+                "-1": 158,
+                "-2": 79,
+                "-4": 11,
+                "-5": 5,
+                "-6": 8
+              },
+              "entryLineupSlot": {
+                "3": 1000
+              },
+              "immediateFirstBatter": 1000,
+              "playerPA": {
+                "min": 1,
+                "max": 5,
+                "mean": 1.579,
+                "median": 1,
+                "p25": 1,
+                "p75": 2
+              },
+              "scriptedOffense": {
+                "min": 1,
+                "max": 1,
+                "mean": 1,
+                "median": 1,
+                "p25": 1,
+                "p75": 1
+              },
+              "scriptedOffenseCounts": {
+                "1": 1000
+              },
+              "emergentOffense": {
+                "min": 0,
+                "max": 1,
+                "mean": 0.433,
+                "median": 0,
+                "p25": 0,
+                "p75": 1
+              },
+              "emergentOffenseCounts": {
+                "0": 567,
+                "1": 433
+              },
+              "firstOnly": 567,
+              "firstOnlyRate": 0.567,
+              "defensiveInnings": {
+                "min": 1,
+                "max": 8,
+                "mean": 2.019,
+                "median": 2,
+                "p25": 1,
+                "p75": 2
+              },
+              "defensiveHalfShare": {
+                "min": 0.14285714285714285,
+                "max": 0.6153846153846154,
+                "mean": 0.2638416999667013,
+                "median": 0.2857142857142857,
+                "p25": 0.14285714285714285,
+                "p75": 0.2857142857142857
+              },
+              "defensivePA": {
+                "min": 3,
+                "max": 37,
+                "mean": 8.388,
+                "median": 8,
+                "p25": 5,
+                "p75": 9
+              },
+              "defensiveBallsInPlay": {
+                "min": 2,
+                "max": 30,
+                "mean": 7.265,
+                "median": 6,
+                "p25": 5,
+                "p75": 8
+              },
+              "defensiveInvolvement": {
+                "min": 1,
+                "max": 16,
+                "mean": 3.921,
+                "median": 3,
+                "p25": 2,
+                "p75": 5
+              },
+              "defensiveRoutine": {
+                "min": 1,
+                "max": 12,
+                "mean": 2.088,
+                "median": 2,
+                "p25": 1,
+                "p75": 2
+              },
+              "defensiveAttention": {
+                "min": 1,
+                "max": 16,
+                "mean": 3.921,
+                "median": 3,
+                "p25": 2,
+                "p75": 5
+              },
+              "defensiveDecision": {
+                "min": 0,
+                "max": 4,
+                "mean": 1.833,
+                "median": 2,
+                "p25": 1,
+                "p75": 3
+              },
+              "zeroDefense": 204,
+              "zeroDefenseRate": 0.204,
+              "coverage": {
+                "min": 0,
+                "max": 0,
+                "mean": 0,
+                "median": 0,
+                "p25": 0,
+                "p75": 0
+              },
+              "primaryFielding": {
+                "min": 1,
+                "max": 16,
+                "mean": 3.921,
+                "median": 3,
+                "p25": 2,
+                "p75": 5
+              },
+              "funnel": {
+                "playerOnDefensePA": 8388,
+                "decisionWindowChecks": 17775,
+                "relevantResponsibility": 3921,
+                "playerInvolvement": 3921,
+                "viableRoutes": 3921,
+                "multiCommitment": 1893,
+                "meaningfulDecision": 1893
+              },
+              "rejections": {
+                "only-one-legal-route": 2028,
+                "no-player-responsibility": 13854,
+                "window-expired": -9387
+              },
+              "routesAvailable": {
+                "secureFirstBaseOut": 3921,
+                "initiate463": 1893,
+                "attackLeadRunnerThird": 185
+              },
+              "routesExecuted": {
+                "secureFirstBaseOut": 3921
+              },
+              "totalDecisions": {
+                "min": 1,
+                "max": 6,
+                "mean": 3.266,
+                "median": 3,
+                "p25": 2,
+                "p75": 4
+              },
+              "decisionCounts": {
+                "1": 164,
+                "2": 131,
+                "3": 340,
+                "4": 122,
+                "5+": 243
+              },
+              "offensiveDecisionTiming": {
+                "scripted:PA1": 1000,
+                "emergent:PA2": 433
+              },
+              "defensiveDecisionTiming": {
+                "6上": 708,
+                "7上": 941,
+                "8上": 91,
+                "9上": 60,
+                "10上": 11,
+                "11上": 22
+              },
+              "preEntryPAShare": 0.7277707006369427,
+              "archetypes": {
+                "C-scripted-plus-defense-only": 403,
+                "D-scripted-plus-defense-plus-emergent-offense": 393,
+                "A-scripted-only-no-defense": 164,
+                "B-scripted-plus-emergent-no-defense": 40
+              },
+              "completed": 1000,
+              "orphan": 0,
+              "noProgress": 0,
+              "integrityIssues": 0,
+              "gameRecordIntegrityIssues": 0
+            },
+            "starter": {
+              "matches": 400,
+              "entryInning": {
+                "1": 400
+              },
+              "entryHalf": {
+                "上": 400
+              },
+              "entryOuts": {
+                "0": 400
+              },
+              "entryBases": {
+                "empty": 400
+              },
+              "entryScoreDifferential": {
+                "0": 400
+              },
+              "entryLineupSlot": {
+                "5": 400
+              },
+              "immediateFirstBatter": 0,
+              "playerPA": {
+                "min": 3,
+                "max": 6,
+                "mean": 3.6175,
+                "median": 4,
+                "p25": 3,
+                "p75": 4
+              },
+              "scriptedOffense": {
+                "min": 1,
+                "max": 1,
+                "mean": 1,
+                "median": 1,
+                "p25": 1,
+                "p75": 1
+              },
+              "scriptedOffenseCounts": {
+                "1": 400
+              },
+              "emergentOffense": {
+                "min": 1,
+                "max": 1,
+                "mean": 1,
+                "median": 1,
+                "p25": 1,
+                "p75": 1
+              },
+              "emergentOffenseCounts": {
+                "1": 400
+              },
+              "firstOnly": 0,
+              "firstOnlyRate": 0,
+              "defensiveInnings": {
+                "min": 7,
+                "max": 10,
+                "mean": 7.09,
+                "median": 7,
+                "p25": 7,
+                "p75": 7
+              },
+              "defensiveHalfShare": {
+                "min": 1,
+                "max": 1,
+                "mean": 1,
+                "median": 1,
+                "p25": 1,
+                "p75": 1
+              },
+              "defensivePA": {
+                "min": 25,
+                "max": 48,
+                "mean": 31.275,
+                "median": 31,
+                "p25": 30,
+                "p75": 32
+              },
+              "defensiveBallsInPlay": {
+                "min": 20,
+                "max": 41,
+                "mean": 26.2275,
+                "median": 26,
+                "p25": 24,
+                "p75": 28
+              },
+              "defensiveInvolvement": {
+                "min": 7,
+                "max": 21,
+                "mean": 10.955,
+                "median": 11,
+                "p25": 9,
+                "p75": 13
+              },
+              "defensiveRoutine": {
+                "min": 5,
+                "max": 16,
+                "mean": 6.9375,
+                "median": 7,
+                "p25": 5,
+                "p75": 8
+              },
+              "defensiveAttention": {
+                "min": 7,
+                "max": 21,
+                "mean": 10.955,
+                "median": 11,
+                "p25": 9,
+                "p75": 13
+              },
+              "defensiveDecision": {
+                "min": 2,
+                "max": 6,
+                "mean": 4.0175,
+                "median": 4,
+                "p25": 4,
+                "p75": 4
+              },
+              "zeroDefense": 0,
+              "zeroDefenseRate": 0,
+              "coverage": {
+                "min": 0,
+                "max": 0,
+                "mean": 0,
+                "median": 0,
+                "p25": 0,
+                "p75": 0
+              },
+              "primaryFielding": {
+                "min": 7,
+                "max": 21,
+                "mean": 10.955,
+                "median": 11,
+                "p25": 9,
+                "p75": 13
+              },
+              "funnel": {
+                "playerOnDefensePA": 12510,
+                "decisionWindowChecks": 20378,
+                "relevantResponsibility": 4382,
+                "playerInvolvement": 4382,
+                "viableRoutes": 4382,
+                "multiCommitment": 2152,
+                "meaningfulDecision": 2152
+              },
+              "rejections": {
+                "no-player-responsibility": 15996,
+                "only-one-legal-route": 2230,
+                "window-expired": -7868
+              },
+              "routesAvailable": {
+                "secureFirstBaseOut": 4382,
+                "initiate463": 2152,
+                "attackLeadRunnerThird": 426,
+                "homeForceOut": 12
+              },
+              "routesExecuted": {
+                "secureFirstBaseOut": 4382
+              },
+              "totalDecisions": {
+                "min": 4,
+                "max": 8,
+                "mean": 6.0175,
+                "median": 6,
+                "p25": 6,
+                "p75": 6
+              },
+              "decisionCounts": {
+                "4": 16,
+                "5+": 384
+              },
+              "offensiveDecisionTiming": {
+                "scripted:PA1": 400,
+                "emergent:PA3": 333,
+                "emergent:PA4+": 67
+              },
+              "defensiveDecisionTiming": {
+                "4上": 398,
+                "5上": 204,
+                "7上": 186,
+                "6上": 178,
+                "3上": 299,
+                "2上": 337,
+                "8上": 5
+              },
+              "preEntryPAShare": 0,
+              "archetypes": {
+                "D-scripted-plus-defense-plus-emergent-offense": 400
+              },
+              "completed": 400,
+              "orphan": 0,
+              "noProgress": 0,
+              "integrityIssues": 0,
+              "gameRecordIntegrityIssues": 0
+            },
+            "deterministic": true,
+            "instrumentationNeutral": true,
+            "fiveConsecutiveZeroDefenseProbability": 0.0003533058570239999,
+            "runtimeMs": 197398
+          }
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-4-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-5-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-4-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-offense-base-state-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-offense-prototype-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-offensive-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/baseball-training-rhythm-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batted-ball-outcome-mapping-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batted-ball-outcome-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batted-ball-physical-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batted-ball-physical-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/batter-anticipation-sprint-b-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b1-ground-ball-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b1-ground-ball-runner-handoff-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b2a-line-drive-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b2a-line-drive-read-catch-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b2b1-fly-ball-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b2b1-fly-ball-tag-up-legality-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/callbackTest.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-age22-outcome-resolver-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-arc-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-development-progression-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-development-runtime-resolver-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-network-contract-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-rejoin-contract-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-save-admission-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-spine-contract-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-transition-commit-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-transition-progression-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-transition-resolver-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-transition-role-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-transition-route-difference-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/career-transition-runtime-resolver-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/catcher-choice-outcome-integrity-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/coach-evaluation-boundary-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/coach-response-expansion-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/coach-response-flow-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/competition-flow-framework-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/content-flow-audit.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/contextual-status-panel-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/county-selection-opportunity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/current-state-boundary-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/day-completion-flow-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/decision-flow-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-decision-throw-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-decision-throw-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-opportunity-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-opportunity-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-outcome-cause-explainability-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-reach-secure-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-reach-secure-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/defensive-runner-throw-settlement-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/development-match-position-test-fallback-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/development-training-result-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/emotional-payoff-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/evaluation-registry-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/evaluation-registry-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/event-continuity-pass-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/first-offensive-moment-role-presentation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/force-advancement-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/force-multi-runner-settlement-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/force-multi-runner-settlement-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/full-game-competition-evidence-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/full-game-player-line-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/generic-infield-position-admission-diagnostic-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/goal-balance-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-ball-home-route-integrity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-ball-home-route-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-defensive-decision-identity-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0,
+          "R1_JSON=": {
+            "seed22430002": {
+              "completed": true,
+              "pa": 64,
+              "pitcherBF": 64,
+              "score": {
+                "home": 0,
+                "away": 3
+              },
+              "winner": "regional-power-school",
+              "status": "final",
+              "outs": 42
+            },
+            "determinism": true,
+            "observerNeutral": true,
+            "simulationCursorEqual": true,
+            "sweep": [
+              {
+                "seed": 22430000,
+                "completed": true,
+                "defensiveMoments": 0,
+                "groundLifecycleMoments": 0,
+                "ids": [],
+                "positions": [],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 71,
+                "pitcherBF": 71
+              },
+              {
+                "seed": 22430001,
+                "completed": true,
+                "defensiveMoments": 1,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 68,
+                "pitcherBF": 68
+              },
+              {
+                "seed": 22430002,
+                "completed": true,
+                "defensiveMoments": 2,
+                "groundLifecycleMoments": 1,
+                "ids": [
+                  "hs_y1_match_moment_2",
+                  "hs_y1_match_defense_2"
+                ],
+                "positions": [
+                  "內野手",
+                  "二壘手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 1,
+                "staleRejected": 1,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 64,
+                "pitcherBF": 64
+              },
+              {
+                "seed": 22430003,
+                "completed": true,
+                "defensiveMoments": 2,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 1,
+                "staleRejected": 1,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 83,
+                "pitcherBF": 83
+              },
+              {
+                "seed": 22430004,
+                "completed": true,
+                "defensiveMoments": 2,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 1,
+                "staleRejected": 1,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 90,
+                "pitcherBF": 90
+              },
+              {
+                "seed": 22430005,
+                "completed": true,
+                "defensiveMoments": 0,
+                "groundLifecycleMoments": 0,
+                "ids": [],
+                "positions": [],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 65,
+                "pitcherBF": 65
+              },
+              {
+                "seed": 22430006,
+                "completed": true,
+                "defensiveMoments": 2,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 1,
+                "staleRejected": 1,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 64,
+                "pitcherBF": 64
+              },
+              {
+                "seed": 22430007,
+                "completed": true,
+                "defensiveMoments": 0,
+                "groundLifecycleMoments": 0,
+                "ids": [],
+                "positions": [],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 65,
+                "pitcherBF": 65
+              },
+              {
+                "seed": 22430008,
+                "completed": true,
+                "defensiveMoments": 1,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 70,
+                "pitcherBF": 70
+              },
+              {
+                "seed": 22430009,
+                "completed": true,
+                "defensiveMoments": 1,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 69,
+                "pitcherBF": 69
+              },
+              {
+                "seed": 22430010,
+                "completed": true,
+                "defensiveMoments": 2,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 1,
+                "staleRejected": 1,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 83,
+                "pitcherBF": 83
+              },
+              {
+                "seed": 22430011,
+                "completed": true,
+                "defensiveMoments": 1,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 58,
+                "pitcherBF": 58
+              },
+              {
+                "seed": 22430012,
+                "completed": true,
+                "defensiveMoments": 1,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 67,
+                "pitcherBF": 67
+              },
+              {
+                "seed": 22430013,
+                "completed": true,
+                "defensiveMoments": 0,
+                "groundLifecycleMoments": 0,
+                "ids": [],
+                "positions": [],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 63,
+                "pitcherBF": 63
+              },
+              {
+                "seed": 22430014,
+                "completed": true,
+                "defensiveMoments": 2,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 1,
+                "staleRejected": 1,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 66,
+                "pitcherBF": 66
+              },
+              {
+                "seed": 22430015,
+                "completed": true,
+                "defensiveMoments": 4,
+                "groundLifecycleMoments": 1,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2",
+                  "hs_y1_match_defense_3",
+                  "hs_y1_match_defense_4"
+                ],
+                "positions": [
+                  "內野手",
+                  "二壘手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 3,
+                "staleRejected": 3,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 68,
+                "pitcherBF": 68
+              },
+              {
+                "seed": 22430016,
+                "completed": true,
+                "defensiveMoments": 0,
+                "groundLifecycleMoments": 0,
+                "ids": [],
+                "positions": [],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 65,
+                "pitcherBF": 65
+              },
+              {
+                "seed": 22430017,
+                "completed": true,
+                "defensiveMoments": 3,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_moment_2",
+                  "hs_y1_match_defense_2",
+                  "hs_y1_match_defense_3"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 2,
+                "staleRejected": 2,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 70,
+                "pitcherBF": 70
+              },
+              {
+                "seed": 22430018,
+                "completed": true,
+                "defensiveMoments": 1,
+                "groundLifecycleMoments": 0,
+                "ids": [
+                  "hs_y1_match_defense_1"
+                ],
+                "positions": [
+                  "內野手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 0,
+                "staleRejected": 0,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 62,
+                "pitcherBF": 62
+              },
+              {
+                "seed": 22430019,
+                "completed": true,
+                "defensiveMoments": 3,
+                "groundLifecycleMoments": 1,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2",
+                  "hs_y1_match_defense_3"
+                ],
+                "positions": [
+                  "內野手",
+                  "二壘手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 2,
+                "staleRejected": 2,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 105,
+                "pitcherBF": 105
+              },
+              {
+                "seed": 22430119,
+                "completed": true,
+                "defensiveMoments": 2,
+                "groundLifecycleMoments": 2,
+                "ids": [
+                  "hs_y1_match_defense_1",
+                  "hs_y1_match_defense_2"
+                ],
+                "positions": [
+                  "二壘手"
+                ],
+                "displayedChoiceMomentIdMismatch": 0,
+                "rejectedCurrent": 0,
+                "staleAttempted": 1,
+                "staleRejected": 1,
+                "noProgress": 0,
+                "stateIssues": 0,
+                "recordIssues": 0,
+                "pa": 90,
+                "pitcherBF": 90
+              }
+            ],
+            "warnings": [
+              "Current production ground lifecycle trajectory sample is admitted 2B; no unsupported positions forced."
+            ]
+          }
+        },
+        {
+          "file": "tests/ground-defensive-decision-identity-repair-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ground-settlement-handoff-r2-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0,
+          "R2_JSON=": {
+            "passed": 21,
+            "seed": 22430361,
+            "check": {
+              "seed": 22430361,
+              "role": "bench",
+              "pa": 122,
+              "battingPA": 122,
+              "pitcherBF": 122,
+              "failures": []
+            },
+            "steps": 235,
+            "score": {
+              "home": 1,
+              "away": 3
+            },
+            "groundApplications": 1,
+            "densitySuppressed": 1,
+            "duplicateSettlements": 0,
+            "validStaleRejections": 0,
+            "negativeWitnesses": 2,
+            "deterministic": true
+          }
+        },
+        {
+          "file": "tests/high-school-career-evidence-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-career-exit-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-career-offer-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-competition-evidence-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-competition-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-competition-reassessment-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-entry-roster-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-exchange-network-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-exchange-network-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-friendly-invitation-producer-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-friendly-invitation-producer-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-1-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-2-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-2-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-3-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-integration-1-2-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-match-opportunity-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-match-opportunity-generation-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-match-opportunity-generation-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-exposure-bias-repair-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-exposure-bias-repair-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-post-repair-calibration-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-post-repair-calibration-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-probability-calibration-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-probability-calibration-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-probability-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-probability-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-selection-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-opportunity-selection-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-position-code-normalization-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-relationship-recency-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-relationship-recency-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-relationship-recency-reputation-feasibility-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-relationship-recency-reputation-feasibility-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-relationship-temporal-authority-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-relationship-temporal-authority-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-schedule-opportunity-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-three-year-spine-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-training-camp-producer-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-training-camp-producer-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-year-one-competition-loop-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-year-one-opportunity-two-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-year-three-competition-loop-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-year-transition-continuity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-year-two-autumn-match-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/high-school-year-two-competition-loop-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/invitation-presentation-school-choice-integration-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/invitation-presentation-v1-0-1-legacy-route-conflict-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-context-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-context-schedule-origin-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-development-settlement-presentation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-experience-development-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-full-game-record-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-opportunity-structural-completion-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-simulation-outcome-mapping-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/match-situation-lifecycle-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/narrative-condition-boundary-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/narrative-condition-flow-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/narrative-continuity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/national-selection-pipeline-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/npc-role-refactor-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-plate-approach-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-production-presentation-sprint-c-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-tactical-action-sprint-a-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-tactical-action-sprint-b1-0-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-tactical-action-sprint-b1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-tactical-action-sprint-b2-defensive-handoff-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/offensive-tactical-action-sprint-b2-runner-realization-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/opportunity-evaluation-boundary-v1-0-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/outcome-transition-hierarchy-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/pitch-sequencing-core-sprint-a-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/pitcher-catcher-tactical-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/pitcher-mental-state-sprint-a-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/pitcher-process-state-sprint-a-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/plate-approach-semantic-integrity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/plate-decision-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/plate-decision-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/player-archetype-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/player-capability-hierarchy-foundation-v1-0-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/player-capability-hierarchy-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/player-data-boundary-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/playing-time-game-exposure-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/presentation-interaction-clarity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/relationship-boundary-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/relationship-feasibility-production-scope-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/relationship-flow-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/relationship-payoff-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/representative-team-contract-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/responsive-accessibility-pass-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/scene-context-layer-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/scene-depth-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/school-invitation-foundation-v1-0-1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/school-invitation-foundation-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/scoreboard-presentation-integrity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/scoreboard-presentation-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/sprint-c-human-ux-closeout-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/status-panel-disclosure-persistence-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/takahashi-storyboard-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/team-roster-foundation-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/team-roster-match-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/team-strength-model-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/ten-year-narrative-architecture-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/third-out-run-out-attribution-integrity-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/third-out-run-out-attribution-production-integration-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/third-out-runner-resolution-integrity-v1-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/time-boundary-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/u18-roster-construction-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/vertical-slice-smoke.js",
+          "status": "PASS",
+          "exitCode": 0
+        },
+        {
+          "file": "tests/youth-season-content-pass-test.js",
+          "status": "PASS",
+          "exitCode": 0
+        }
+      ]
+    }
+  },
+  "productionFiles": [
+    {
+      "file": "script.js",
+      "purpose": "Routine classification coherence and compressed PA ground ownership admission"
+    }
+  ],
+  "testsAdded": [
+    {
+      "file": "tests/ground-settlement-handoff-r2-context.cjs",
+      "purpose": "Passive production trace, actual boundary capture and historical two-function replay from f1cc66b"
+    },
+    {
+      "file": "tests/ground-settlement-handoff-r2-production-integration-test.js",
+      "purpose": "21 focused assertions for full game, original boundary, atomicity, repeated ground lifecycles, determinism and stale rejection"
+    }
+  ],
+  "git": {
+    "diffCheck": "PASS",
+    "status": "M script.js\n?? docs/match-authority-coverage-baseline-sprint-m0.md\n?? docs/match-authority-coverage-baseline-validation.json\n?? docs/match-integrity-ground-settlement-handoff-r2-validation.json\n?? docs/match-integrity-ground-settlement-handoff-r2.md\n?? tests/ground-settlement-handoff-r2-context.cjs\n?? tests/ground-settlement-handoff-r2-production-integration-test.js\n?? tests/match-authority-coverage-audit.cjs\n?? tests/match-authority-coverage-blocker-repro.cjs\n?? tests/match-authority-coverage-cohort.cjs\n?? tests/match-authority-coverage-resume-blocker-repro.cjs",
+    "stash": "0daf1e954f74ddb45efe620107970567dec6fffd\n8cc34a930df052067d1bad3ea798fe0b9d2ae036",
+    "commit": false,
+    "push": false,
+    "stashDrop": false
+  },
+  "remainingIssue": "Requested Bench M0 cohort currently resolves to actual starter admissions; Bench coverage remains unproven and is deferred to M0 Resume work.",
+  "formalM0Cohort": "NOT_RUN",
+  "nextAction": "Manual acceptance, then separately authorized M0 Resume; no automatic continuation",
+  "stopConditions": []
+}
