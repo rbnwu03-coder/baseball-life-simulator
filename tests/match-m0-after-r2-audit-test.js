@@ -1,0 +1,44 @@
+const assert=require('assert/strict');
+const fs=require('fs'),os=require('os'),path=require('path');
+const {discover,playAdmitted}=require('./match-m0-after-r2-admission-context.cjs');
+const {projectGame,aggregate,structuralMatrix}=require('./match-m0-after-r2-coverage.cjs');
+let passed=0;function test(name,fn){fn();passed++;console.log('PASS '+name);}
+const cases=[{seed:440000,setup:{},role:'starter'},{seed:440201,setup:{schoolIndex:1,choiceIndex:1,youthChoiceIndex:2},role:'bench'}];
+const games=cases.map(c=>playAdmitted(c.seed,{...c.setup,observe:true}));
+test('actual admission determines both populations',()=>cases.forEach((c,i)=>assert.equal(games[i].row.actualAdmittedRole,c.role)));
+test('normal origin preserves genesis capability and school selection',()=>games.forEach(g=>{assert.equal(g.row.directStartHistory,false);assert(g.row.capability.initialized);assert(g.row.school);assert(g.row.matchReached);}));
+test('both representative games pass production and ledger checks',()=>games.forEach(g=>assert.deepEqual(g.check.failures,[])));
+const projected=games.map(g=>projectGame({admission:g.row,match:g.match,observed:g.observed}));
+test('physical and runner projections have no missing facts or integrity issue',()=>projected.forEach(p=>assert.deepEqual(p.integrity,[])));
+test('PA route counts reconcile',()=>projected.forEach(p=>assert.equal(Object.values(p.classes).reduce((a,b)=>a+b,0),p.pa)));
+test('zero-observation structural cells remain explicit',()=>{assert.equal(structuralMatrix().length,21);assert.equal(structuralMatrix().filter(c=>c.type==='flyBall').length,9);assert(structuralMatrix().every(c=>c.observed===0));});
+test('batch order preserves counts and bounded sorted witnesses',()=>assert.deepEqual(aggregate(projected),aggregate([...projected].reverse())));
+for(const [i,c]of cases.entries())test('observer and repeat neutrality '+c.seed,()=>{assert.deepEqual(playAdmitted(c.seed,{...c.setup,observe:false}).match,games[i].match);assert.deepEqual(playAdmitted(c.seed,{...c.setup,observe:true}).match,games[i].match);});
+test('reverse execution order preserves each entire match',()=>{for(const c of [...cases].reverse()){const index=cases.indexOf(c);assert.deepEqual(playAdmitted(c.seed,{...c.setup,observe:true}).match,games[index].match);}});
+const h=discover(440000).h;
+function step(){if(h.run('!!pendingYouthSeasonOutcome'))h.run('continueYouthSeasonOutcome()');else if(h.run('isHighSchoolMatchDecisionVisible(player.highSchoolMatch)'))h.run('var c=getHighSchoolYearOneMatchMomentChoices(player.highSchoolMatch)[0];chooseHighSchoolYearOneMatchMoment(c.matchDecision,c.matchMomentId)');else assert(h.run('__runNextTimer()'));}
+let count=0;while(!h.run("player.highSchoolMatch.activeSituation?.type==='plateDecision'")&&count++<500)step();
+const signature='({id:player.highSchoolMatch.id,active:player.highSchoolMatch.activeSituation,batter:player.highSchoolMatch.currentBatter,outs:player.highSchoolMatch.outs,scores:player.highSchoolMatch.scores,runners:player.highSchoolMatch.runners,record:player.highSchoolMatch.gameRecord})';
+h.run('stopHighSchoolMatchPlayback()');
+test('presented plate decision survives save reload',()=>{const before=h.json(signature);assert.equal(before.active.lifecycleState,'presented');h.run('saveGame();loadGame();stopHighSchoolMatchPlayback();');assert.deepEqual(h.json(signature),before);});
+test('one pitch advances to a new lifecycle and repeated reload does not redeliver it',()=>{
+  const old=h.json(signature);const pitches=h.run('player.highSchoolMatch.offensivePlateAppearanceState.pitchNumber');
+  h.run('var oldChoice=getHighSchoolYearOneMatchMomentChoices(player.highSchoolMatch)[0];chooseHighSchoolYearOneMatchMoment(oldChoice.matchDecision,oldChoice.matchMomentId);');
+  const once=h.json(signature);assert.notEqual(once.active.situationId,old.active.situationId);
+  assert.equal(h.run('player.highSchoolMatch.offensivePlateAppearanceState.pitchNumber'),pitches+1);
+  h.run('saveGame();loadGame();stopHighSchoolMatchPlayback();loadGame();stopHighSchoolMatchPlayback();');
+  assert.deepEqual(h.json(signature),once);
+});
+h.run(`var savedGround='';const originalM0Ground=recordGroundBallSituationResolution;
+  recordGroundBallSituationResolution=function(m,r){const result=originalM0Ground.apply(this,arguments);
+    if(!savedGround&&m.activeSituation?.lifecycleState==='resolved'&&m.groundBallInPlayState?.runnerThrowTiming&&!m.groundBallInPlayState.settlementApplied)savedGround=JSON.stringify(player);return result;};
+  resumeHighSchoolMatchPlayback('audit-save-witness',player.highSchoolMatch);`);
+count=0;while(!h.run('!!savedGround')&&!h.run('player.highSchoolMatch.completed')&&count++<1000)step();
+test('normal trajectory supplies an actual pending ground boundary',()=>assert(h.run('!!savedGround')));
+h.run('stopHighSchoolMatchPlayback();player=JSON.parse(savedGround);');
+test('resolved unapplied ground identity and ledger survive reload',()=>{const before=h.json(signature);h.run('saveGame();loadGame();stopHighSchoolMatchPlayback();');assert.deepEqual(h.json(signature),before);});
+test('reloaded ground applies exactly once and clears ownership',()=>{h.run('var m=player.highSchoolMatch;var execution=m.activeSituation.resolution.executionEvidence;var priorPA=m.simulationLog.filter(e=>e.type==="plateAppearance").length;advanceHighSchoolMatchPlaybackStep(m);');assert.equal(h.run('m.activeSituation'),null);assert.equal(h.run('m.simulationLog.filter(e=>e.type==="plateAppearance").length-priorPA'),1);const once=h.json('m');h.run('applyRoutineDefensiveResolutionToHighSchoolMatch(m,execution);resumeResolvedHighSchoolGroundBallSettlement(m);');assert.deepEqual(h.json('m'),once);});
+test('completed-play reload keeps the ledger unchanged',()=>{const once=h.json(signature);h.run('saveGame();loadGame();stopHighSchoolMatchPlayback();');assert.deepEqual(h.json(signature),once);});
+const report={passed,failed:0,representativeSeeds:cases.map(c=>c.seed),observerNeutral:true,repeatDeterminism:true,batchOrderNeutral:true,saveReload:['plateDecision presented','ground resolved unapplied','completed ground play'],duplicateDelivery:'unchanged'};
+if(process.env.M0_AUDIT_REPORT)fs.writeFileSync(process.env.M0_AUDIT_REPORT,JSON.stringify(report,null,2)+'\n');
+console.log('M0_AUDIT_JSON='+JSON.stringify(report));
