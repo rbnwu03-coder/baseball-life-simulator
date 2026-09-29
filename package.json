@@ -4,5 +4,8 @@
   "scripts": {
     "audit:opportunity-probability": "node tests/high-school-opportunity-probability-calibration-runner.cjs",
     "audit:opportunity-post-repair": "node tests/high-school-opportunity-post-repair-calibration-runner.cjs"
+  },
+  "devDependencies": {
+    "fast-check": "^4.10.2"
   }
 }
