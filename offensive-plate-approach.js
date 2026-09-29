@@ -84,6 +84,68 @@
     powerSwing: Object.freeze({ action: "swing", swingIntent: "power" })
   });
 
+  // Coarse categorical plate regions, in the fixed RHB reference frame.
+  // "inner" is the RHB inside plate side; LHB inside maps to "outer".
+  const LOCATION_BANDS = Object.freeze(["core", "strike", "edge", "chase", "ball"]);
+  const LEGACY_LOCATIONS = Object.freeze({
+    "middle-middle": ["middle", "middle", "hitterPitch"],
+    "outer-middle": ["outer", "middle", "competitiveStrike"],
+    "outer-low": ["outer", "low", "edgeStrike"],
+    "outer-below": ["outer", "low", "chasePitch"],
+    "well-outside": ["outer", "middle", "clearBall"]
+  });
+  function normalizeTargetIntent(target, intendedPitchClass, source = "tacticalTarget") {
+    const labels = { middle: ["middle", "middle"], inner: ["inside", "middle"], outer: ["away", "middle"],
+      low: ["middle", "low"], high: ["middle", "high"], outerLow: ["away", "low"], innerLow: ["inside", "low"] };
+    const pair = typeof target === "string" ? labels[target] : target && [target.horizontal, target.vertical];
+    if (!pair || !["inside", "middle", "away"].includes(pair[0]) || !["high", "middle", "low"].includes(pair[1])) return null;
+    const expectedZone = ["chasePitch", "clearBall"].includes(intendedPitchClass) ? "chase" : intendedPitchClass === "edgeStrike" ? "edge" : "strike";
+    const zoneIntent = typeof target === "object" ? target.zoneIntent : expectedZone;
+    if (zoneIntent !== expectedZone) return null; // One intent: class and target cannot disagree about zone.
+    if (!["strike", "edge", "chase"].includes(zoneIntent) || target?.frame && target.frame !== "batterRelative") return null;
+    return deepFreeze({ version: "pitch-target-intent-v1", horizontal: pair[0], vertical: pair[1], zoneIntent, frame: "batterRelative", source });
+  }
+  function decodePitchLocation(location) {
+    let tuple = LEGACY_LOCATIONS[location];
+    if (!tuple && typeof location === "string") {
+      const parts = location.split("-");
+      if (parts.length === 3 && ["inner", "middle", "outer"].includes(parts[0]) && ["high", "middle", "low"].includes(parts[1]) && LOCATION_BANDS.includes(parts[2]))
+        tuple = [parts[0], parts[1], PITCH_CLASSES[LOCATION_BANDS.indexOf(parts[2])]];
+    }
+    return tuple ? deepFreeze({ horizontal: tuple[0], vertical: tuple[1], pitchLocationClass: tuple[2],
+      strike: PITCH_CLASS_PROFILES[tuple[2]].strike, frame: "fixedRHBReference" }) : null;
+  }
+  function encodePitchLocation(horizontal, vertical, pitchLocationClass) {
+    const old = Object.entries(LEGACY_LOCATIONS).find(([, t]) => t[0] === horizontal && t[1] === vertical && t[2] === pitchLocationClass);
+    return old ? old[0] : [horizontal, vertical, LOCATION_BANDS[PITCH_CLASSES.indexOf(pitchLocationClass)]].join("-");
+  }
+  function resolvePitchLocation({ targetIntent, intendedPitchClass, controlRealization, bats = "R", legacyLocation } = {}) {
+    const target = normalizeTargetIntent(targetIntent, intendedPitchClass, targetIntent?.source || "tacticalTarget");
+    if (!target || !controlRealization?.actualDistribution || !PITCH_CLASSES.includes(controlRealization.actualPitchClass))
+      return deepFreeze({ location: legacyLocation, targetIntent: target, targetSource: "legacyLocationFallback", fallbackReason: !target ? targetIntent ? "invalidOrConflictingTargetIntent" : "targetAbsent" : "controlRealizationUnavailable", targetError: null, executionClassification: "unmeasured" });
+    const actualClass = controlRealization.actualPitchClass;
+    const horizontal = ["inner", "middle", "outer"], vertical = ["high", "middle", "low"];
+    const targetSide = target.horizontal === "middle" ? "middle" : (target.horizontal === "inside") === (bats !== "L") ? "inner" : "outer";
+    let h = horizontal.indexOf(targetSide), v = vertical.indexOf(target.vertical);
+    // Conditional CDF residual reuses the already-owned command realization draw.
+    const mass = Number(controlRealization.actualDistribution[actualClass]);
+    const lower = PITCH_CLASSES.slice(0, PITCH_CLASSES.indexOf(actualClass)).reduce((n, k) => n + Number(controlRealization.actualDistribution[k] || 0), 0);
+    const residual = clamp((controlRealization.realizationRoll - lower) / mass, 0, 0.999999999, 0);
+    const stability = clamp(controlRealization.realizationStability, 0, 0.94, 0);
+    if (residual > stability) {
+      const direction = Math.min(3, Math.floor((residual - stability) / (1 - stability) * 4));
+      if (direction < 2) h = h === 1 ? (direction === 0 ? 0 : 2) : 1;
+      else v = v === 1 ? (direction === 2 ? 0 : 2) : 1;
+    }
+    const location = encodePitchLocation(horizontal[h], vertical[v], actualClass);
+    const targetError = Math.abs(h - horizontal.indexOf(targetSide)) + Math.abs(v - vertical.indexOf(target.vertical))
+      + Math.abs(PITCH_CLASSES.indexOf(actualClass) - PITCH_CLASSES.indexOf(intendedPitchClass));
+    return deepFreeze({ location, targetIntent: target, targetSource: target.source,
+      targetError, executionClassification: targetError === 0 ? "hitTarget" : targetError === 1 ? "nearTarget" : "missedTarget",
+      command: controlRealization.control, handedness: bats === "L" ? "L" : "R", frame: "fixedRHBReference",
+      warning: "TARGET_GEOMETRY_LIMITED", rng: "conditionalResidualOfExistingControlRoll" });
+  }
+
   function getPitchPhysicalProfile(state, pitchLocationClass, override = {}) {
     const pitchNumber = Math.max(1, Number(state?.pitchNumber) + 1 || 1);
     const identity = state?.paIdentity || "pa";
@@ -98,10 +160,20 @@
 
   function completePitchTruth(state, pitchLocationClass, base = {}, override = {}) {
     const physical = getPitchPhysicalProfile(state, pitchLocationClass, override);
+    const target = override.targetIntent || base.pitchTacticalState?.pitcherResponse?.targetLocation || null;
+    const locationRealization = resolvePitchLocation({ targetIntent: target, intendedPitchClass: base.intendedPitchClass,
+      controlRealization: base.controlRealization, bats: state.context?.bats || "R", legacyLocation: physical.location });
+    physical.location = locationRealization.location;
+    const { location: realizedLocation, targetIntent, ...locationExecution } = locationRealization;
+    const realizedRegion = targetIntent && locationExecution.targetError !== null ? decodePitchLocation(realizedLocation) : null;
     return {
       ...base,
       ...physical,
-      zone: base.strike ? "inZone" : "outOfZone",
+      pitchIntent: { pitchType: physical.pitchType, intendedPitchClass: base.intendedPitchClass },
+      targetIntent,
+      locationRealization: locationExecution,
+      ...(realizedRegion ? { pitchLocationClass: realizedRegion.pitchLocationClass, strike: realizedRegion.strike } : {}),
+      zone: (realizedRegion ? realizedRegion.strike : base.strike) ? "inZone" : "outOfZone",
       pitcherId: override.pitcherId || state?.context?.pitcherId || "opponent-pitcher",
       paIdentity: state?.paIdentity || "",
       count: { balls: Number(state?.balls) || 0, strikes: Number(state?.strikes) || 0 }
@@ -259,6 +331,7 @@
     const late = !correct && !partial && Number(pitch.velocity) >= 88 && roll <= Math.min(0.995, accuracy + 0.2);
     const misreadMap = { hitterPitch: "competitiveStrike", competitiveStrike: "edgeStrike", edgeStrike: "chasePitch", chasePitch: "competitiveStrike", clearBall: "chasePitch" };
     const perceivedPitchClass = correct ? pitch.pitchLocationClass : partial ? misreadMap[pitch.pitchLocationClass] : misreadMap[pitch.pitchLocationClass];
+    const actualRegion = decodePitchLocation(pitch.location);
     const perceivedLocation = ({ hitterPitch: "球往中央可攻擊區靠近", competitiveStrike: "球路接近好球帶", edgeStrike: "球壓向邊角", chasePitch: "球可能往好球帶外滑開", clearBall: "球看來明顯偏離好球帶" })[perceivedPitchClass];
     return deepFreeze({
       score,
@@ -270,6 +343,7 @@
       perceivedPitchClass,
       perceivedPitch: {
         locationCue: perceivedLocation,
+        region: correct && actualRegion ? { horizontal: actualRegion.horizontal, vertical: actualRegion.vertical, frame: actualRegion.frame } : null,
         velocityCue: Number(pitch.velocity) >= 88 ? "速度很快" : Number(pitch.velocity) >= 80 ? "速度中等" : "速度偏慢",
         movementCue: pitch.movement === "subtle" ? "軌跡看來較直" : "軌跡帶有變化",
         zoneCue: ["hitterPitch", "competitiveStrike"].includes(perceivedPitchClass) ? "看來可以攻擊" : perceivedPitchClass === "edgeStrike" ? "可能擦過邊角" : "可能離開好球帶"
@@ -573,6 +647,16 @@
     return state;
   }
 
+  function getPitchExecutionTrace(event = {}) {
+    const pitch = event.pitch || {};
+    return deepFreeze({ pitchIdentity: pitch.pitchId, pitchIntent: clone(pitch.pitchIntent || null),
+      targetIntent: clone(pitch.targetIntent || null), targetSource: pitch.locationRealization?.targetSource || "legacyLocationFallback",
+      command: pitch.controlRealization?.control ?? null, actualPitchClass: pitch.pitchLocationClass,
+      actualLocation: pitch.location, targetError: pitch.locationRealization?.targetError ?? null,
+      executionClassification: pitch.locationRealization?.executionClassification || "unmeasured",
+      recognition: clone(event.recognition || null), batterResponse: event.action || null, pitchResult: event.pitchResult || null });
+  }
+
   function markResultApplied(state) {
     const normalized = normalizePlateAppearanceState(state);
     return normalized ? createPlateAppearanceState({ ...clone(normalized), resultApplied: true }) : null;
@@ -596,6 +680,10 @@
     normalizePlateAppearanceState,
     generatePitchOpportunity,
     prepareNextPitch,
+    getPitchExecutionTrace,
+    normalizeTargetIntent,
+    decodePitchLocation,
+    resolvePitchLocation,
     getRecognitionScore,
     getRecognitionResult,
     getSwingTendency,

@@ -10295,7 +10295,9 @@ function ensureHighSchoolOffensivePlateAppearanceState(match, choice) {
     prePitchFrozenDistribution: match.prePitchPlanningState?.paIdentity === paIdentity
       ? match.prePitchPlanningState.frozenDistribution : null,
     tacticalSequenceHistory: match.pitcherTacticalSequenceHistory,
+    // Batter-relative target semantics are resolved before the pitch is presented.
     context: {
+      bats: player.bats || "R",
       inning: match.inning,
       half: match.half,
       outs: match.outs,

@@ -1,0 +1,2881 @@
+{
+  "status": "STOP_REGRESSION_FAILURE",
+  "baseline": {
+    "branch": "main",
+    "head": "f916faf955b3d07f213d90dfd59ef16ac0638f6c",
+    "originMain": "f916faf955b3d07f213d90dfd59ef16ac0638f6c",
+    "ahead": 0,
+    "behind": 0,
+    "initialWorkingTree": "clean"
+  },
+  "stashes": [
+    "0daf1e954f74ddb45efe620107970567dec6fffd",
+    "8cc34a930df052067d1bad3ea798fe0b9d2ae036"
+  ],
+  "foundation": {
+    "passed": 13,
+    "failed": 0
+  },
+  "integration": {
+    "passed": 9,
+    "failed": 0,
+    "summaries": [
+      {
+        "seed": 440000,
+        "policy": "take",
+        "actualRole": "starter",
+        "pa": 59,
+        "battingPA": 59,
+        "pitcherBF": 59,
+        "pitches": 13,
+        "saved": false
+      },
+      {
+        "seed": 440000,
+        "policy": "swing",
+        "actualRole": "starter",
+        "pa": 59,
+        "battingPA": 59,
+        "pitcherBF": 59,
+        "pitches": 26,
+        "saved": false
+      },
+      {
+        "seed": 440201,
+        "policy": "take",
+        "actualRole": "bench",
+        "pa": 70,
+        "battingPA": 70,
+        "pitcherBF": 70,
+        "pitches": 0,
+        "saved": false
+      },
+      {
+        "seed": 440201,
+        "policy": "swing",
+        "actualRole": "bench",
+        "pa": 70,
+        "battingPA": 70,
+        "pitcherBF": 70,
+        "pitches": 0,
+        "saved": false
+      }
+    ],
+    "counts": {
+      "calledStrike": 9,
+      "ball": 4,
+      "foul": 23,
+      "ballInPlay": 3
+    },
+    "saveBoundary": null
+  },
+  "save": {
+    "passed": 2,
+    "failed": 0,
+    "summaries": [
+      {
+        "seed": 440000,
+        "policy": "take",
+        "actualRole": "starter",
+        "pa": 59,
+        "battingPA": 59,
+        "pitcherBF": 59,
+        "pitches": 13,
+        "saved": true
+      }
+    ],
+    "counts": {},
+    "saveBoundary": "after actual realization, before pitch result; target selection/realization synchronous, no separate supported save point"
+  },
+  "domain": {
+    "planned": 11,
+    "executed": 11,
+    "passed": 11,
+    "failed": 0,
+    "rows": [
+      {
+        "file": "pitch-sequencing-core-sprint-a-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "pitcher-catcher-tactical-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "offensive-plate-approach-foundation-v1-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "plate-approach-semantic-integrity-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "plate-decision-foundation-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "plate-decision-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "batter-anticipation-sprint-b-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "ai-plate-appearance-outcome-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "ai-plate-appearance-outcome-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "pitcher-mental-state-sprint-a-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "pitcher-process-state-sprint-a-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      }
+    ]
+  },
+  "statistical": {
+    "status": "PASS",
+    "totalAttempts": 13824,
+    "metric": "categorical Manhattan side/height distance + existing pitch-class topology distance; no continuous geometry",
+    "tiers": [
+      {
+        "command": 2,
+        "attempts": 4608,
+        "meanError": 1.2552083333333333
+      },
+      {
+        "command": 10,
+        "attempts": 4608,
+        "meanError": 0.7200520833333334
+      },
+      {
+        "command": 18,
+        "attempts": 4608,
+        "meanError": 0.3515625
+      }
+    ],
+    "rows": [
+      {
+        "pitchType": "fastball",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 37,
+        "nearTarget": 163,
+        "missedTarget": 56,
+        "error": 279,
+        "locations": {
+          "middle-low-strike": 60,
+          "inner-middle-core": 16,
+          "inner-middle-strike": 90,
+          "inner-low-strike": 37,
+          "middle-low-edge": 8,
+          "inner-low-chase": 3,
+          "inner-middle-edge": 15,
+          "inner-low-edge": 9,
+          "inner-middle-chase": 3,
+          "middle-low-core": 10,
+          "inner-low-core": 4,
+          "middle-low-chase": 1
+        },
+        "meanError": 1.08984375
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 104,
+        "nearTarget": 143,
+        "missedTarget": 9,
+        "error": 161,
+        "locations": {
+          "inner-low-strike": 104,
+          "inner-middle-strike": 67,
+          "middle-low-strike": 65,
+          "inner-low-edge": 7,
+          "inner-middle-edge": 3,
+          "inner-middle-core": 4,
+          "inner-low-core": 4,
+          "middle-low-core": 1,
+          "middle-low-edge": 1
+        },
+        "meanError": 0.62890625
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 188,
+        "nearTarget": 67,
+        "missedTarget": 1,
+        "error": 69,
+        "locations": {
+          "inner-low-strike": 188,
+          "middle-low-strike": 32,
+          "inner-middle-strike": 30,
+          "inner-low-edge": 3,
+          "inner-low-core": 2,
+          "inner-middle-core": 1
+        },
+        "meanError": 0.26953125
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 37,
+        "nearTarget": 163,
+        "missedTarget": 56,
+        "error": 279,
+        "locations": {
+          "outer-middle": 33,
+          "middle-low-core": 8,
+          "middle-low-strike": 42,
+          "middle-middle-strike": 37,
+          "inner-middle-strike": 27,
+          "middle-high-strike": 48,
+          "outer-middle-edge": 5,
+          "middle-middle-chase": 3,
+          "middle-high-edge": 9,
+          "middle-middle-edge": 9,
+          "middle-low-chase": 2,
+          "middle-high-core": 8,
+          "inner-middle-core": 5,
+          "middle-middle": 4,
+          "outer-middle-core": 5,
+          "middle-low-edge": 6,
+          "inner-middle-edge": 3,
+          "outer-middle-chase": 1,
+          "middle-high-chase": 1
+        },
+        "meanError": 1.08984375
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 104,
+        "nearTarget": 143,
+        "missedTarget": 9,
+        "error": 161,
+        "locations": {
+          "middle-middle-strike": 104,
+          "middle-low-strike": 39,
+          "outer-middle": 43,
+          "inner-middle-strike": 22,
+          "middle-middle-edge": 7,
+          "middle-high-strike": 28,
+          "middle-low-edge": 2,
+          "middle-low-core": 3,
+          "middle-middle": 4,
+          "outer-middle-core": 1,
+          "outer-middle-edge": 1,
+          "middle-high-core": 1,
+          "middle-high-edge": 1
+        },
+        "meanError": 0.62890625
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 188,
+        "nearTarget": 67,
+        "missedTarget": 1,
+        "error": 69,
+        "locations": {
+          "middle-middle-strike": 188,
+          "outer-middle": 19,
+          "middle-high-strike": 13,
+          "middle-low-strike": 17,
+          "middle-middle-edge": 3,
+          "middle-middle": 2,
+          "inner-middle-strike": 13,
+          "middle-low-core": 1
+        },
+        "meanError": 0.26953125
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 37,
+        "nearTarget": 163,
+        "missedTarget": 56,
+        "error": 279,
+        "locations": {
+          "middle-high-strike": 60,
+          "outer-middle-core": 16,
+          "outer-middle": 90,
+          "outer-high-strike": 37,
+          "middle-high-edge": 8,
+          "outer-high-chase": 3,
+          "outer-middle-edge": 15,
+          "outer-high-edge": 9,
+          "outer-middle-chase": 3,
+          "middle-high-core": 10,
+          "outer-high-core": 4,
+          "middle-high-chase": 1
+        },
+        "meanError": 1.08984375
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 104,
+        "nearTarget": 143,
+        "missedTarget": 9,
+        "error": 161,
+        "locations": {
+          "outer-high-strike": 104,
+          "outer-middle": 67,
+          "middle-high-strike": 65,
+          "outer-high-edge": 7,
+          "outer-middle-edge": 3,
+          "outer-middle-core": 4,
+          "outer-high-core": 4,
+          "middle-high-core": 1,
+          "middle-high-edge": 1
+        },
+        "meanError": 0.62890625
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 188,
+        "nearTarget": 67,
+        "missedTarget": 1,
+        "error": 69,
+        "locations": {
+          "outer-high-strike": 188,
+          "middle-high-strike": 32,
+          "outer-middle": 30,
+          "outer-high-edge": 3,
+          "outer-high-core": 2,
+          "outer-middle-core": 1
+        },
+        "meanError": 0.26953125
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 15,
+        "nearTarget": 144,
+        "missedTarget": 97,
+        "error": 353,
+        "locations": {
+          "middle-low-edge": 53,
+          "middle-low-strike": 24,
+          "middle-low-chase": 21,
+          "inner-middle-strike": 14,
+          "inner-middle-edge": 86,
+          "inner-middle-chase": 21,
+          "middle-low-ball": 4,
+          "inner-low-chase": 2,
+          "inner-middle-ball": 3,
+          "inner-middle-core": 5,
+          "inner-low-edge": 15,
+          "middle-low-core": 3,
+          "inner-low-ball": 1,
+          "inner-low-strike": 3,
+          "inner-low-core": 1
+        },
+        "meanError": 1.37890625
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 78,
+        "nearTarget": 157,
+        "missedTarget": 21,
+        "error": 200,
+        "locations": {
+          "middle-low-edge": 66,
+          "inner-low-edge": 78,
+          "inner-middle-edge": 79,
+          "middle-low-chase": 5,
+          "inner-low-chase": 9,
+          "inner-low-ball": 1,
+          "inner-middle-strike": 5,
+          "middle-low-strike": 5,
+          "middle-low-core": 1,
+          "inner-low-strike": 3,
+          "inner-middle-chase": 3,
+          "inner-low-core": 1
+        },
+        "meanError": 0.78125
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 155,
+        "nearTarget": 100,
+        "missedTarget": 1,
+        "error": 102,
+        "locations": {
+          "inner-low-edge": 155,
+          "inner-middle-edge": 48,
+          "middle-low-edge": 45,
+          "middle-low-chase": 1,
+          "inner-low-strike": 4,
+          "inner-low-chase": 3
+        },
+        "meanError": 0.3984375
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 15,
+        "nearTarget": 144,
+        "missedTarget": 97,
+        "error": 353,
+        "locations": {
+          "outer-middle-edge": 27,
+          "outer-middle": 12,
+          "inner-middle-chase": 12,
+          "middle-high-strike": 7,
+          "inner-middle-edge": 26,
+          "middle-low-edge": 43,
+          "middle-high-chase": 8,
+          "middle-high-edge": 43,
+          "inner-middle-strike": 12,
+          "inner-middle-ball": 3,
+          "middle-middle-chase": 2,
+          "middle-low-chase": 13,
+          "outer-middle-chase": 9,
+          "middle-low-ball": 1,
+          "middle-low-core": 4,
+          "middle-middle-edge": 15,
+          "inner-middle-core": 1,
+          "middle-high-core": 1,
+          "middle-low-strike": 7,
+          "outer-middle-core": 2,
+          "middle-middle-ball": 1,
+          "middle-middle-strike": 3,
+          "well-outside": 1,
+          "middle-high-ball": 2,
+          "middle-middle": 1
+        },
+        "meanError": 1.37890625
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 78,
+        "nearTarget": 157,
+        "missedTarget": 21,
+        "error": 200,
+        "locations": {
+          "inner-middle-edge": 26,
+          "middle-middle-edge": 78,
+          "middle-low-edge": 35,
+          "middle-high-edge": 44,
+          "outer-middle-chase": 3,
+          "outer-middle-edge": 40,
+          "middle-middle-chase": 9,
+          "middle-middle-ball": 1,
+          "middle-low-strike": 3,
+          "inner-middle-strike": 3,
+          "inner-middle-core": 1,
+          "middle-middle-strike": 3,
+          "outer-middle": 2,
+          "inner-middle-chase": 2,
+          "middle-high-strike": 2,
+          "middle-high-chase": 1,
+          "middle-low-chase": 2,
+          "middle-middle": 1
+        },
+        "meanError": 0.78125
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 155,
+        "nearTarget": 100,
+        "missedTarget": 1,
+        "error": 102,
+        "locations": {
+          "middle-middle-edge": 155,
+          "middle-high-edge": 24,
+          "inner-middle-edge": 24,
+          "middle-low-edge": 24,
+          "outer-middle-edge": 21,
+          "inner-middle-chase": 1,
+          "middle-middle-strike": 4,
+          "middle-middle-chase": 3
+        },
+        "meanError": 0.3984375
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 15,
+        "nearTarget": 144,
+        "missedTarget": 97,
+        "error": 353,
+        "locations": {
+          "middle-high-edge": 53,
+          "middle-high-strike": 24,
+          "middle-high-chase": 21,
+          "outer-middle": 14,
+          "outer-middle-edge": 86,
+          "outer-middle-chase": 21,
+          "middle-high-ball": 4,
+          "outer-high-chase": 2,
+          "well-outside": 3,
+          "outer-middle-core": 5,
+          "outer-high-edge": 15,
+          "middle-high-core": 3,
+          "outer-high-ball": 1,
+          "outer-high-strike": 3,
+          "outer-high-core": 1
+        },
+        "meanError": 1.37890625
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 78,
+        "nearTarget": 157,
+        "missedTarget": 21,
+        "error": 200,
+        "locations": {
+          "middle-high-edge": 66,
+          "outer-high-edge": 78,
+          "outer-middle-edge": 79,
+          "middle-high-chase": 5,
+          "outer-high-chase": 9,
+          "outer-high-ball": 1,
+          "outer-middle": 5,
+          "middle-high-strike": 5,
+          "middle-high-core": 1,
+          "outer-high-strike": 3,
+          "outer-middle-chase": 3,
+          "outer-high-core": 1
+        },
+        "meanError": 0.78125
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 155,
+        "nearTarget": 100,
+        "missedTarget": 1,
+        "error": 102,
+        "locations": {
+          "outer-high-edge": 155,
+          "outer-middle-edge": 48,
+          "middle-high-edge": 45,
+          "middle-high-chase": 1,
+          "outer-high-strike": 4,
+          "outer-high-chase": 3
+        },
+        "meanError": 0.3984375
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 16,
+        "nearTarget": 160,
+        "missedTarget": 80,
+        "error": 332,
+        "locations": {
+          "middle-low-chase": 59,
+          "middle-low-edge": 23,
+          "inner-middle-chase": 90,
+          "inner-middle-edge": 14,
+          "middle-low-ball": 16,
+          "inner-middle-ball": 15,
+          "inner-low-ball": 6,
+          "inner-low-chase": 16,
+          "inner-low-edge": 5,
+          "inner-middle-strike": 6,
+          "middle-low-core": 2,
+          "middle-low-strike": 2,
+          "inner-low-strike": 2
+        },
+        "meanError": 1.296875
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 82,
+        "nearTarget": 156,
+        "missedTarget": 18,
+        "error": 192,
+        "locations": {
+          "middle-low-chase": 65,
+          "inner-low-chase": 82,
+          "inner-middle-chase": 81,
+          "inner-low-ball": 7,
+          "inner-middle-ball": 2,
+          "inner-middle-edge": 5,
+          "middle-low-edge": 5,
+          "inner-low-strike": 2,
+          "inner-low-edge": 3,
+          "middle-low-ball": 4
+        },
+        "meanError": 0.75
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 158,
+        "nearTarget": 97,
+        "missedTarget": 1,
+        "error": 99,
+        "locations": {
+          "inner-low-chase": 158,
+          "inner-middle-chase": 47,
+          "middle-low-chase": 43,
+          "inner-low-ball": 4,
+          "inner-low-edge": 3,
+          "middle-low-edge": 1
+        },
+        "meanError": 0.38671875
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 16,
+        "nearTarget": 160,
+        "missedTarget": 80,
+        "error": 332,
+        "locations": {
+          "outer-middle-chase": 32,
+          "inner-middle-edge": 13,
+          "middle-low-chase": 43,
+          "middle-high-edge": 6,
+          "inner-middle-chase": 27,
+          "middle-high-chase": 47,
+          "well-outside": 12,
+          "middle-high-ball": 11,
+          "outer-middle-edge": 10,
+          "middle-middle-ball": 6,
+          "middle-low-ball": 4,
+          "middle-middle-chase": 16,
+          "middle-middle-edge": 5,
+          "middle-high-strike": 3,
+          "middle-low-edge": 8,
+          "outer-middle-core": 1,
+          "outer-middle": 2,
+          "middle-middle-strike": 2,
+          "inner-middle-ball": 4,
+          "middle-low-strike": 3,
+          "inner-middle-core": 1
+        },
+        "meanError": 1.296875
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 82,
+        "nearTarget": 156,
+        "missedTarget": 18,
+        "error": 192,
+        "locations": {
+          "inner-middle-chase": 28,
+          "middle-middle-chase": 82,
+          "middle-low-chase": 40,
+          "middle-high-chase": 41,
+          "middle-middle-ball": 7,
+          "outer-middle-chase": 37,
+          "middle-high-ball": 2,
+          "middle-low-edge": 3,
+          "inner-middle-edge": 4,
+          "middle-middle-strike": 2,
+          "middle-middle-edge": 3,
+          "middle-high-edge": 2,
+          "inner-middle-ball": 2,
+          "well-outside": 2,
+          "outer-middle-edge": 1
+        },
+        "meanError": 0.75
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 158,
+        "nearTarget": 97,
+        "missedTarget": 1,
+        "error": 99,
+        "locations": {
+          "middle-middle-chase": 158,
+          "middle-high-chase": 24,
+          "inner-middle-chase": 24,
+          "middle-low-chase": 23,
+          "outer-middle-chase": 19,
+          "middle-middle-ball": 4,
+          "middle-middle-edge": 3,
+          "inner-middle-edge": 1
+        },
+        "meanError": 0.38671875
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 16,
+        "nearTarget": 160,
+        "missedTarget": 80,
+        "error": 332,
+        "locations": {
+          "middle-high-chase": 59,
+          "middle-high-edge": 23,
+          "outer-middle-chase": 90,
+          "outer-middle-edge": 14,
+          "middle-high-ball": 16,
+          "well-outside": 15,
+          "outer-high-ball": 6,
+          "outer-high-chase": 16,
+          "outer-high-edge": 5,
+          "outer-middle": 6,
+          "middle-high-core": 2,
+          "middle-high-strike": 2,
+          "outer-high-strike": 2
+        },
+        "meanError": 1.296875
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 82,
+        "nearTarget": 156,
+        "missedTarget": 18,
+        "error": 192,
+        "locations": {
+          "middle-high-chase": 65,
+          "outer-high-chase": 82,
+          "outer-middle-chase": 81,
+          "outer-high-ball": 7,
+          "well-outside": 2,
+          "outer-middle-edge": 5,
+          "middle-high-edge": 5,
+          "outer-high-strike": 2,
+          "outer-high-edge": 3,
+          "middle-high-ball": 4
+        },
+        "meanError": 0.75
+      },
+      {
+        "pitchType": "fastball",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 158,
+        "nearTarget": 97,
+        "missedTarget": 1,
+        "error": 99,
+        "locations": {
+          "outer-high-chase": 158,
+          "outer-middle-chase": 47,
+          "middle-high-chase": 43,
+          "outer-high-ball": 4,
+          "outer-high-edge": 3,
+          "middle-high-edge": 1
+        },
+        "meanError": 0.38671875
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 37,
+        "nearTarget": 163,
+        "missedTarget": 56,
+        "error": 279,
+        "locations": {
+          "middle-low-strike": 60,
+          "inner-middle-core": 16,
+          "inner-middle-strike": 90,
+          "inner-low-strike": 37,
+          "middle-low-edge": 8,
+          "inner-low-chase": 3,
+          "inner-middle-edge": 15,
+          "inner-low-edge": 9,
+          "inner-middle-chase": 3,
+          "middle-low-core": 10,
+          "inner-low-core": 4,
+          "middle-low-chase": 1
+        },
+        "meanError": 1.08984375
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 104,
+        "nearTarget": 143,
+        "missedTarget": 9,
+        "error": 161,
+        "locations": {
+          "inner-low-strike": 104,
+          "inner-middle-strike": 67,
+          "middle-low-strike": 65,
+          "inner-low-edge": 7,
+          "inner-middle-edge": 3,
+          "inner-middle-core": 4,
+          "inner-low-core": 4,
+          "middle-low-core": 1,
+          "middle-low-edge": 1
+        },
+        "meanError": 0.62890625
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 188,
+        "nearTarget": 67,
+        "missedTarget": 1,
+        "error": 69,
+        "locations": {
+          "inner-low-strike": 188,
+          "middle-low-strike": 32,
+          "inner-middle-strike": 30,
+          "inner-low-edge": 3,
+          "inner-low-core": 2,
+          "inner-middle-core": 1
+        },
+        "meanError": 0.26953125
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 37,
+        "nearTarget": 163,
+        "missedTarget": 56,
+        "error": 279,
+        "locations": {
+          "outer-middle": 33,
+          "middle-low-core": 8,
+          "middle-low-strike": 42,
+          "middle-middle-strike": 37,
+          "inner-middle-strike": 27,
+          "middle-high-strike": 48,
+          "outer-middle-edge": 5,
+          "middle-middle-chase": 3,
+          "middle-high-edge": 9,
+          "middle-middle-edge": 9,
+          "middle-low-chase": 2,
+          "middle-high-core": 8,
+          "inner-middle-core": 5,
+          "middle-middle": 4,
+          "outer-middle-core": 5,
+          "middle-low-edge": 6,
+          "inner-middle-edge": 3,
+          "outer-middle-chase": 1,
+          "middle-high-chase": 1
+        },
+        "meanError": 1.08984375
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 104,
+        "nearTarget": 143,
+        "missedTarget": 9,
+        "error": 161,
+        "locations": {
+          "middle-middle-strike": 104,
+          "middle-low-strike": 39,
+          "outer-middle": 43,
+          "inner-middle-strike": 22,
+          "middle-middle-edge": 7,
+          "middle-high-strike": 28,
+          "middle-low-edge": 2,
+          "middle-low-core": 3,
+          "middle-middle": 4,
+          "outer-middle-core": 1,
+          "outer-middle-edge": 1,
+          "middle-high-core": 1,
+          "middle-high-edge": 1
+        },
+        "meanError": 0.62890625
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 188,
+        "nearTarget": 67,
+        "missedTarget": 1,
+        "error": 69,
+        "locations": {
+          "middle-middle-strike": 188,
+          "outer-middle": 19,
+          "middle-high-strike": 13,
+          "middle-low-strike": 17,
+          "middle-middle-edge": 3,
+          "middle-middle": 2,
+          "inner-middle-strike": 13,
+          "middle-low-core": 1
+        },
+        "meanError": 0.26953125
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 37,
+        "nearTarget": 163,
+        "missedTarget": 56,
+        "error": 279,
+        "locations": {
+          "middle-high-strike": 60,
+          "outer-middle-core": 16,
+          "outer-middle": 90,
+          "outer-high-strike": 37,
+          "middle-high-edge": 8,
+          "outer-high-chase": 3,
+          "outer-middle-edge": 15,
+          "outer-high-edge": 9,
+          "outer-middle-chase": 3,
+          "middle-high-core": 10,
+          "outer-high-core": 4,
+          "middle-high-chase": 1
+        },
+        "meanError": 1.08984375
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 104,
+        "nearTarget": 143,
+        "missedTarget": 9,
+        "error": 161,
+        "locations": {
+          "outer-high-strike": 104,
+          "outer-middle": 67,
+          "middle-high-strike": 65,
+          "outer-high-edge": 7,
+          "outer-middle-edge": 3,
+          "outer-middle-core": 4,
+          "outer-high-core": 4,
+          "middle-high-core": 1,
+          "middle-high-edge": 1
+        },
+        "meanError": 0.62890625
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "competitiveStrike",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "strike",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 188,
+        "nearTarget": 67,
+        "missedTarget": 1,
+        "error": 69,
+        "locations": {
+          "outer-high-strike": 188,
+          "middle-high-strike": 32,
+          "outer-middle": 30,
+          "outer-high-edge": 3,
+          "outer-high-core": 2,
+          "outer-middle-core": 1
+        },
+        "meanError": 0.26953125
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 15,
+        "nearTarget": 144,
+        "missedTarget": 97,
+        "error": 353,
+        "locations": {
+          "middle-low-edge": 53,
+          "middle-low-strike": 24,
+          "middle-low-chase": 21,
+          "inner-middle-strike": 14,
+          "inner-middle-edge": 86,
+          "inner-middle-chase": 21,
+          "middle-low-ball": 4,
+          "inner-low-chase": 2,
+          "inner-middle-ball": 3,
+          "inner-middle-core": 5,
+          "inner-low-edge": 15,
+          "middle-low-core": 3,
+          "inner-low-ball": 1,
+          "inner-low-strike": 3,
+          "inner-low-core": 1
+        },
+        "meanError": 1.37890625
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 78,
+        "nearTarget": 157,
+        "missedTarget": 21,
+        "error": 200,
+        "locations": {
+          "middle-low-edge": 66,
+          "inner-low-edge": 78,
+          "inner-middle-edge": 79,
+          "middle-low-chase": 5,
+          "inner-low-chase": 9,
+          "inner-low-ball": 1,
+          "inner-middle-strike": 5,
+          "middle-low-strike": 5,
+          "middle-low-core": 1,
+          "inner-low-strike": 3,
+          "inner-middle-chase": 3,
+          "inner-low-core": 1
+        },
+        "meanError": 0.78125
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 155,
+        "nearTarget": 100,
+        "missedTarget": 1,
+        "error": 102,
+        "locations": {
+          "inner-low-edge": 155,
+          "inner-middle-edge": 48,
+          "middle-low-edge": 45,
+          "middle-low-chase": 1,
+          "inner-low-strike": 4,
+          "inner-low-chase": 3
+        },
+        "meanError": 0.3984375
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 15,
+        "nearTarget": 144,
+        "missedTarget": 97,
+        "error": 353,
+        "locations": {
+          "outer-middle-edge": 27,
+          "outer-middle": 12,
+          "inner-middle-chase": 12,
+          "middle-high-strike": 7,
+          "inner-middle-edge": 26,
+          "middle-low-edge": 43,
+          "middle-high-chase": 8,
+          "middle-high-edge": 43,
+          "inner-middle-strike": 12,
+          "inner-middle-ball": 3,
+          "middle-middle-chase": 2,
+          "middle-low-chase": 13,
+          "outer-middle-chase": 9,
+          "middle-low-ball": 1,
+          "middle-low-core": 4,
+          "middle-middle-edge": 15,
+          "inner-middle-core": 1,
+          "middle-high-core": 1,
+          "middle-low-strike": 7,
+          "outer-middle-core": 2,
+          "middle-middle-ball": 1,
+          "middle-middle-strike": 3,
+          "well-outside": 1,
+          "middle-high-ball": 2,
+          "middle-middle": 1
+        },
+        "meanError": 1.37890625
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 78,
+        "nearTarget": 157,
+        "missedTarget": 21,
+        "error": 200,
+        "locations": {
+          "inner-middle-edge": 26,
+          "middle-middle-edge": 78,
+          "middle-low-edge": 35,
+          "middle-high-edge": 44,
+          "outer-middle-chase": 3,
+          "outer-middle-edge": 40,
+          "middle-middle-chase": 9,
+          "middle-middle-ball": 1,
+          "middle-low-strike": 3,
+          "inner-middle-strike": 3,
+          "inner-middle-core": 1,
+          "middle-middle-strike": 3,
+          "outer-middle": 2,
+          "inner-middle-chase": 2,
+          "middle-high-strike": 2,
+          "middle-high-chase": 1,
+          "middle-low-chase": 2,
+          "middle-middle": 1
+        },
+        "meanError": 0.78125
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 155,
+        "nearTarget": 100,
+        "missedTarget": 1,
+        "error": 102,
+        "locations": {
+          "middle-middle-edge": 155,
+          "middle-high-edge": 24,
+          "inner-middle-edge": 24,
+          "middle-low-edge": 24,
+          "outer-middle-edge": 21,
+          "inner-middle-chase": 1,
+          "middle-middle-strike": 4,
+          "middle-middle-chase": 3
+        },
+        "meanError": 0.3984375
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 15,
+        "nearTarget": 144,
+        "missedTarget": 97,
+        "error": 353,
+        "locations": {
+          "middle-high-edge": 53,
+          "middle-high-strike": 24,
+          "middle-high-chase": 21,
+          "outer-middle": 14,
+          "outer-middle-edge": 86,
+          "outer-middle-chase": 21,
+          "middle-high-ball": 4,
+          "outer-high-chase": 2,
+          "well-outside": 3,
+          "outer-middle-core": 5,
+          "outer-high-edge": 15,
+          "middle-high-core": 3,
+          "outer-high-ball": 1,
+          "outer-high-strike": 3,
+          "outer-high-core": 1
+        },
+        "meanError": 1.37890625
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 78,
+        "nearTarget": 157,
+        "missedTarget": 21,
+        "error": 200,
+        "locations": {
+          "middle-high-edge": 66,
+          "outer-high-edge": 78,
+          "outer-middle-edge": 79,
+          "middle-high-chase": 5,
+          "outer-high-chase": 9,
+          "outer-high-ball": 1,
+          "outer-middle": 5,
+          "middle-high-strike": 5,
+          "middle-high-core": 1,
+          "outer-high-strike": 3,
+          "outer-middle-chase": 3,
+          "outer-high-core": 1
+        },
+        "meanError": 0.78125
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "edgeStrike",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "edge",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 155,
+        "nearTarget": 100,
+        "missedTarget": 1,
+        "error": 102,
+        "locations": {
+          "outer-high-edge": 155,
+          "outer-middle-edge": 48,
+          "middle-high-edge": 45,
+          "middle-high-chase": 1,
+          "outer-high-strike": 4,
+          "outer-high-chase": 3
+        },
+        "meanError": 0.3984375
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 16,
+        "nearTarget": 160,
+        "missedTarget": 80,
+        "error": 332,
+        "locations": {
+          "middle-low-chase": 59,
+          "middle-low-edge": 23,
+          "inner-middle-chase": 90,
+          "inner-middle-edge": 14,
+          "middle-low-ball": 16,
+          "inner-middle-ball": 15,
+          "inner-low-ball": 6,
+          "inner-low-chase": 16,
+          "inner-low-edge": 5,
+          "inner-middle-strike": 6,
+          "middle-low-core": 2,
+          "middle-low-strike": 2,
+          "inner-low-strike": 2
+        },
+        "meanError": 1.296875
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 82,
+        "nearTarget": 156,
+        "missedTarget": 18,
+        "error": 192,
+        "locations": {
+          "middle-low-chase": 65,
+          "inner-low-chase": 82,
+          "inner-middle-chase": 81,
+          "inner-low-ball": 7,
+          "inner-middle-ball": 2,
+          "inner-middle-edge": 5,
+          "middle-low-edge": 5,
+          "inner-low-strike": 2,
+          "inner-low-edge": 3,
+          "middle-low-ball": 4
+        },
+        "meanError": 0.75
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "inside",
+          "vertical": "low",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 158,
+        "nearTarget": 97,
+        "missedTarget": 1,
+        "error": 99,
+        "locations": {
+          "inner-low-chase": 158,
+          "inner-middle-chase": 47,
+          "middle-low-chase": 43,
+          "inner-low-ball": 4,
+          "inner-low-edge": 3,
+          "middle-low-edge": 1
+        },
+        "meanError": 0.38671875
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 16,
+        "nearTarget": 160,
+        "missedTarget": 80,
+        "error": 332,
+        "locations": {
+          "outer-middle-chase": 32,
+          "inner-middle-edge": 13,
+          "middle-low-chase": 43,
+          "middle-high-edge": 6,
+          "inner-middle-chase": 27,
+          "middle-high-chase": 47,
+          "well-outside": 12,
+          "middle-high-ball": 11,
+          "outer-middle-edge": 10,
+          "middle-middle-ball": 6,
+          "middle-low-ball": 4,
+          "middle-middle-chase": 16,
+          "middle-middle-edge": 5,
+          "middle-high-strike": 3,
+          "middle-low-edge": 8,
+          "outer-middle-core": 1,
+          "outer-middle": 2,
+          "middle-middle-strike": 2,
+          "inner-middle-ball": 4,
+          "middle-low-strike": 3,
+          "inner-middle-core": 1
+        },
+        "meanError": 1.296875
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 82,
+        "nearTarget": 156,
+        "missedTarget": 18,
+        "error": 192,
+        "locations": {
+          "inner-middle-chase": 28,
+          "middle-middle-chase": 82,
+          "middle-low-chase": 40,
+          "middle-high-chase": 41,
+          "middle-middle-ball": 7,
+          "outer-middle-chase": 37,
+          "middle-high-ball": 2,
+          "middle-low-edge": 3,
+          "inner-middle-edge": 4,
+          "middle-middle-strike": 2,
+          "middle-middle-edge": 3,
+          "middle-high-edge": 2,
+          "inner-middle-ball": 2,
+          "well-outside": 2,
+          "outer-middle-edge": 1
+        },
+        "meanError": 0.75
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "middle",
+          "vertical": "middle",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 158,
+        "nearTarget": 97,
+        "missedTarget": 1,
+        "error": 99,
+        "locations": {
+          "middle-middle-chase": 158,
+          "middle-high-chase": 24,
+          "inner-middle-chase": 24,
+          "middle-low-chase": 23,
+          "outer-middle-chase": 19,
+          "middle-middle-ball": 4,
+          "middle-middle-edge": 3,
+          "inner-middle-edge": 1
+        },
+        "meanError": 0.38671875
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 2,
+        "attempts": 256,
+        "hitTarget": 16,
+        "nearTarget": 160,
+        "missedTarget": 80,
+        "error": 332,
+        "locations": {
+          "middle-high-chase": 59,
+          "middle-high-edge": 23,
+          "outer-middle-chase": 90,
+          "outer-middle-edge": 14,
+          "middle-high-ball": 16,
+          "well-outside": 15,
+          "outer-high-ball": 6,
+          "outer-high-chase": 16,
+          "outer-high-edge": 5,
+          "outer-middle": 6,
+          "middle-high-core": 2,
+          "middle-high-strike": 2,
+          "outer-high-strike": 2
+        },
+        "meanError": 1.296875
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 10,
+        "attempts": 256,
+        "hitTarget": 82,
+        "nearTarget": 156,
+        "missedTarget": 18,
+        "error": 192,
+        "locations": {
+          "middle-high-chase": 65,
+          "outer-high-chase": 82,
+          "outer-middle-chase": 81,
+          "outer-high-ball": 7,
+          "well-outside": 2,
+          "outer-middle-edge": 5,
+          "middle-high-edge": 5,
+          "outer-high-strike": 2,
+          "outer-high-edge": 3,
+          "middle-high-ball": 4
+        },
+        "meanError": 0.75
+      },
+      {
+        "pitchType": "slider",
+        "pitchClass": "chasePitch",
+        "target": {
+          "horizontal": "away",
+          "vertical": "high",
+          "zoneIntent": "chase",
+          "frame": "batterRelative"
+        },
+        "command": 18,
+        "attempts": 256,
+        "hitTarget": 158,
+        "nearTarget": 97,
+        "missedTarget": 1,
+        "error": 99,
+        "locations": {
+          "outer-high-chase": 158,
+          "outer-middle-chase": 47,
+          "middle-high-chase": 43,
+          "outer-high-ball": 4,
+          "outer-high-edge": 3,
+          "middle-high-edge": 1
+        },
+        "meanError": 0.38671875
+      }
+    ],
+    "warning": "TARGET_GEOMETRY_LIMITED",
+    "pitchTypeNote": "same general control authority for both existing types; no invented type difficulty"
+  },
+  "syntax": {
+    "passed": 328,
+    "failed": 0,
+    "files": [
+      "ai-plate-appearance-outcome.js",
+      "application-controller.js",
+      "baseball-defense-prototype.js",
+      "baseball-gameplay-integration.js",
+      "baseball-gameplay-prototype-sandbox.js",
+      "baseball-gameplay-prototype-utils.js",
+      "baseball-offense-prototype.js",
+      "baseball-training-resolver.js",
+      "batted-ball-fly-ball-defense.js",
+      "batted-ball-ground-defense.js",
+      "batted-ball-line-drive-defense.js",
+      "batted-ball-outcome-mapping.js",
+      "batted-ball-physical.js",
+      "batted-ball-tag-up-execution.js",
+      "batter-anticipation.js",
+      "career-age22-outcome-resolver.js",
+      "career-development-progression.js",
+      "career-development-runtime-resolver.js",
+      "career-rejoin-contract.js",
+      "career-save-admission.js",
+      "career-spine-contract.js",
+      "career-transition-commit.js",
+      "career-transition-progression.js",
+      "career-transition-resolver.js",
+      "career-transition-runtime-resolver.js",
+      "coach-evaluation-boundary.js",
+      "coach-response-flow.js",
+      "coach.js",
+      "competition-presentation.js",
+      "county-selection-opportunity.js",
+      "current-state-boundary.js",
+      "day-completion-flow.js",
+      "decision-flow.js",
+      "defensive-decision-throw-foundation.js",
+      "defensive-opportunity-foundation.js",
+      "defensive-reach-secure-foundation.js",
+      "defensive-runner-throw-settlement-foundation.js",
+      "evaluation-registry-bootstrap.js",
+      "evaluation-registry.js",
+      "event.js",
+      "force-advancement.js",
+      "high-school-career-evaluation.js",
+      "high-school-career-offers.js",
+      "high-school-competition-evidence.js",
+      "high-school-competition-foundation.js",
+      "high-school-competition-reassessment.js",
+      "high-school-entry-roster-context.js",
+      "high-school-exchange-network.js",
+      "high-school-friendly-invitation-producer.js",
+      "high-school-match-opportunity-generation.js",
+      "high-school-opportunity-probability.js",
+      "high-school-opportunity-selection.js",
+      "high-school-relationship-recency.js",
+      "high-school-relationship-temporal-authority.js",
+      "high-school-schedule-opportunity.js",
+      "high-school-training-camp-producer.js",
+      "high-school-year-transition.js",
+      "injury.js",
+      "match-context-foundation.js",
+      "match-development-settlement-presentation.js",
+      "match-experience-development.js",
+      "match-game-record.js",
+      "match-situation-lifecycle.js",
+      "narrative-condition-boundary.js",
+      "narrative-condition-flow.js",
+      "national-selection-pipeline.js",
+      "npc.js",
+      "offensive-bunt-count-rules.js",
+      "offensive-bunt-defensive-handoff.js",
+      "offensive-bunt-execution.js",
+      "offensive-plate-approach.js",
+      "offensive-tactical-action.js",
+      "offensive-tactical-decision.js",
+      "offensive-tactical-opportunity.js",
+      "pitch-sequencing.js",
+      "pitcher-catcher-tactical-integration.js",
+      "pitcher-mental-state.js",
+      "pitcher-process-state.js",
+      "plate-decision-foundation.js",
+      "player.js",
+      "playing-time-game-exposure.js",
+      "relationship-boundary.js",
+      "relationship-flow.js",
+      "rival.js",
+      "save.js",
+      "script.js",
+      "story.js",
+      "team-roster-foundation.js",
+      "team-strength-model.js",
+      "tests/ability-performance-correlation-audit.cjs",
+      "tests/ability-performance-gradient-test.js",
+      "tests/ability-performance-observability-extension-test.js",
+      "tests/ability-performance-observability-extension.cjs",
+      "tests/active-defensive-assignment-integrity-test.js",
+      "tests/adult-route-chain-test.js",
+      "tests/ai-plate-appearance-outcome-production-integration-test.js",
+      "tests/ai-plate-appearance-outcome-test.js",
+      "tests/ai-plate-appearance-outcome-validation.cjs",
+      "tests/application-controller-test.js",
+      "tests/aspiration-narrative-test.js",
+      "tests/azhe-storyboard-test.js",
+      "tests/baseball-defense-prototype-test.js",
+      "tests/baseball-gameplay-integration-test.js",
+      "tests/baseball-gameplay-prototype-isolation-test.js",
+      "tests/baseball-match-foundation-2-1-1-1-test.js",
+      "tests/baseball-match-foundation-2-1-1-test.js",
+      "tests/baseball-match-foundation-2-1-test.js",
+      "tests/baseball-match-foundation-2-2-1-test.js",
+      "tests/baseball-match-foundation-2-2-2-test.js",
+      "tests/baseball-match-foundation-2-2-3-test.js",
+      "tests/baseball-match-foundation-2-2-4-1-test.js",
+      "tests/baseball-match-foundation-2-2-4-2-test.js",
+      "tests/baseball-match-foundation-2-2-4-3-audit.js",
+      "tests/baseball-match-foundation-2-2-4-4-test.js",
+      "tests/baseball-match-foundation-2-2-4-5-test.js",
+      "tests/baseball-match-foundation-2-2-4-test.js",
+      "tests/baseball-match-foundation-2-2-test.js",
+      "tests/baseball-offense-base-state-test.js",
+      "tests/baseball-offense-prototype-test.js",
+      "tests/baseball-offensive-production-integration-test.js",
+      "tests/baseball-training-rhythm-test.js",
+      "tests/batted-ball-outcome-mapping-test.js",
+      "tests/batted-ball-outcome-mapping-validation.cjs",
+      "tests/batted-ball-outcome-production-integration-test.js",
+      "tests/batted-ball-physical-foundation-test.js",
+      "tests/batted-ball-physical-production-integration-test.js",
+      "tests/batter-anticipation-sprint-b-test.js",
+      "tests/bbp-b1-ground-ball-production-integration-test.js",
+      "tests/bbp-b1-ground-ball-runner-handoff-test.js",
+      "tests/bbp-b2a-line-drive-production-integration-test.js",
+      "tests/bbp-b2a-line-drive-read-catch-test.js",
+      "tests/bbp-b2b1-fly-ball-production-integration-test.js",
+      "tests/bbp-b2b1-fly-ball-tag-up-legality-test.js",
+      "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+      "tests/callbackTest.js",
+      "tests/career-age22-outcome-resolver-test.js",
+      "tests/career-arc-test.js",
+      "tests/career-development-progression-test.js",
+      "tests/career-development-runtime-resolver-test.js",
+      "tests/career-network-contract-test.js",
+      "tests/career-rejoin-contract-test.js",
+      "tests/career-save-admission-test.js",
+      "tests/career-spine-contract-test.js",
+      "tests/career-transition-commit-test.js",
+      "tests/career-transition-progression-test.js",
+      "tests/career-transition-resolver-test.js",
+      "tests/career-transition-role-test.js",
+      "tests/career-transition-route-difference-test.js",
+      "tests/career-transition-runtime-resolver-test.js",
+      "tests/catcher-choice-outcome-integrity-v1-test.js",
+      "tests/coach-evaluation-boundary-test.js",
+      "tests/coach-response-expansion-test.js",
+      "tests/coach-response-flow-test.js",
+      "tests/competition-flow-framework-test.js",
+      "tests/content-flow-audit.js",
+      "tests/contextual-status-panel-test.js",
+      "tests/county-selection-opportunity-test.js",
+      "tests/current-state-boundary-test.js",
+      "tests/day-completion-flow-test.js",
+      "tests/decision-flow-test.js",
+      "tests/defensive-decision-throw-foundation-test.js",
+      "tests/defensive-decision-throw-production-integration-test.js",
+      "tests/defensive-opportunity-foundation-test.js",
+      "tests/defensive-opportunity-production-integration-test.js",
+      "tests/defensive-outcome-cause-explainability-foundation-v1-test.js",
+      "tests/defensive-reach-secure-foundation-test.js",
+      "tests/defensive-reach-secure-production-integration-test.js",
+      "tests/defensive-runner-throw-settlement-foundation-test.js",
+      "tests/development-match-position-test-fallback-v1-test.js",
+      "tests/development-training-result-foundation-v1-test.js",
+      "tests/emotional-payoff-test.js",
+      "tests/evaluation-registry-integration-test.js",
+      "tests/evaluation-registry-test.js",
+      "tests/event-continuity-pass-test.js",
+      "tests/first-offensive-moment-role-presentation-test.js",
+      "tests/force-advancement-foundation-test.js",
+      "tests/force-multi-runner-settlement-integration-test.js",
+      "tests/force-multi-runner-settlement-production-integration-test.js",
+      "tests/full-game-competition-evidence-test.js",
+      "tests/full-game-player-line-test.js",
+      "tests/generic-infield-position-admission-diagnostic-test.js",
+      "tests/goal-balance-test.js",
+      "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+      "tests/ground-ball-home-route-integrity-test.js",
+      "tests/ground-ball-home-route-production-integration-test.js",
+      "tests/ground-defensive-decision-identity-production-integration-test.js",
+      "tests/ground-defensive-decision-identity-repair-test.js",
+      "tests/ground-defensive-decision-identity-test-context.cjs",
+      "tests/ground-settlement-handoff-r2-context.cjs",
+      "tests/ground-settlement-handoff-r2-production-integration-test.js",
+      "tests/high-school-career-evidence-test.js",
+      "tests/high-school-career-exit-integration-test.js",
+      "tests/high-school-career-offer-test.js",
+      "tests/high-school-career-test-context.js",
+      "tests/high-school-competition-evidence-test.js",
+      "tests/high-school-competition-foundation-test.js",
+      "tests/high-school-competition-reassessment-test.js",
+      "tests/high-school-entry-roster-integration-test.js",
+      "tests/high-school-exchange-network-foundation-test.js",
+      "tests/high-school-exchange-network-production-integration-test.js",
+      "tests/high-school-friendly-invitation-producer-foundation-test.js",
+      "tests/high-school-friendly-invitation-producer-production-integration-test.js",
+      "tests/high-school-integration-1-1-1-test.js",
+      "tests/high-school-integration-1-1-test.js",
+      "tests/high-school-integration-1-2-1-test.js",
+      "tests/high-school-integration-1-2-2-1-test.js",
+      "tests/high-school-integration-1-2-2-2-test.js",
+      "tests/high-school-integration-1-2-2-test.js",
+      "tests/high-school-integration-1-2-3-test.js",
+      "tests/high-school-integration-1-2-test.js",
+      "tests/high-school-match-opportunity-foundation-test.js",
+      "tests/high-school-match-opportunity-generation-foundation-test.js",
+      "tests/high-school-match-opportunity-generation-production-integration-test.js",
+      "tests/high-school-opportunity-exposure-bias-repair-foundation-test.js",
+      "tests/high-school-opportunity-exposure-bias-repair-production-integration-test.js",
+      "tests/high-school-opportunity-exposure-flow.cjs",
+      "tests/high-school-opportunity-post-repair-calibration-audit.cjs",
+      "tests/high-school-opportunity-post-repair-calibration-foundation-test.js",
+      "tests/high-school-opportunity-post-repair-calibration-production-integration-test.js",
+      "tests/high-school-opportunity-post-repair-calibration-runner.cjs",
+      "tests/high-school-opportunity-probability-calibration-audit.cjs",
+      "tests/high-school-opportunity-probability-calibration-career.cjs",
+      "tests/high-school-opportunity-probability-calibration-foundation-test.js",
+      "tests/high-school-opportunity-probability-calibration-production-integration-test.js",
+      "tests/high-school-opportunity-probability-calibration-runner.cjs",
+      "tests/high-school-opportunity-probability-foundation-test.js",
+      "tests/high-school-opportunity-probability-production-integration-test.js",
+      "tests/high-school-opportunity-selection-foundation-test.js",
+      "tests/high-school-opportunity-selection-production-integration-test.js",
+      "tests/high-school-opportunity-selection-test-context.cjs",
+      "tests/high-school-position-code-normalization-test.js",
+      "tests/high-school-relationship-recency-foundation-test.js",
+      "tests/high-school-relationship-recency-production-integration-test.js",
+      "tests/high-school-relationship-recency-reputation-feasibility-audit.cjs",
+      "tests/high-school-relationship-recency-reputation-feasibility-foundation-test.js",
+      "tests/high-school-relationship-recency-reputation-feasibility-production-integration-test.js",
+      "tests/high-school-relationship-temporal-authority-foundation-test.js",
+      "tests/high-school-relationship-temporal-authority-production-integration-test.js",
+      "tests/high-school-schedule-opportunity-production-integration-test.js",
+      "tests/high-school-three-year-spine-test.js",
+      "tests/high-school-training-camp-producer-foundation-test.js",
+      "tests/high-school-training-camp-producer-production-integration-test.js",
+      "tests/high-school-year-one-competition-loop-test.js",
+      "tests/high-school-year-one-opportunity-two-integration-test.js",
+      "tests/high-school-year-three-competition-loop-test.js",
+      "tests/high-school-year-transition-continuity-test.js",
+      "tests/high-school-year-two-autumn-match-integration-test.js",
+      "tests/high-school-year-two-competition-loop-test.js",
+      "tests/invitation-presentation-school-choice-integration-v1-test.js",
+      "tests/invitation-presentation-v1-0-1-legacy-route-conflict-test.js",
+      "tests/match-authority-coverage-audit.cjs",
+      "tests/match-authority-coverage-blocker-repro.cjs",
+      "tests/match-authority-coverage-cohort.cjs",
+      "tests/match-authority-coverage-resume-blocker-repro.cjs",
+      "tests/match-context-production-integration-test.js",
+      "tests/match-context-schedule-origin-foundation-test.js",
+      "tests/match-development-settlement-presentation-v1-test.js",
+      "tests/match-experience-development-foundation-v1-test.js",
+      "tests/match-full-game-record-test.js",
+      "tests/match-m0-after-r2-admission-context.cjs",
+      "tests/match-m0-after-r2-audit-test.js",
+      "tests/match-m0-after-r2-census.cjs",
+      "tests/match-m0-after-r2-cohort.cjs",
+      "tests/match-m0-after-r2-coverage.cjs",
+      "tests/match-opportunity-structural-completion-v1-test.js",
+      "tests/match-simulation-outcome-mapping-audit.cjs",
+      "tests/match-simulation-outcome-mapping-test.js",
+      "tests/match-situation-lifecycle-test.js",
+      "tests/narrative-condition-boundary-test.js",
+      "tests/narrative-condition-flow-test.js",
+      "tests/narrative-continuity-test.js",
+      "tests/national-selection-fixture.cjs",
+      "tests/national-selection-pipeline-test.js",
+      "tests/npc-role-refactor-test.js",
+      "tests/offensive-plate-approach-foundation-v1-test.js",
+      "tests/offensive-production-presentation-sprint-c-test.js",
+      "tests/offensive-tactical-action-sprint-a-test.js",
+      "tests/offensive-tactical-action-sprint-b1-0-1-test.js",
+      "tests/offensive-tactical-action-sprint-b1-test.js",
+      "tests/offensive-tactical-action-sprint-b2-defensive-handoff-test.js",
+      "tests/offensive-tactical-action-sprint-b2-runner-realization-test.js",
+      "tests/opportunity-evaluation-boundary-v1-0-1-test.js",
+      "tests/outcome-transition-hierarchy-test.js",
+      "tests/pitch-sequencing-core-sprint-a-test.js",
+      "tests/pitch-target-location-foundation-test.js",
+      "tests/pitch-target-location-production-integration-test.js",
+      "tests/pitch-target-location-statistical-audit.cjs",
+      "tests/pitcher-catcher-tactical-integration-test.js",
+      "tests/pitcher-mental-state-sprint-a-test.js",
+      "tests/pitcher-process-state-sprint-a-test.js",
+      "tests/plate-approach-semantic-integrity-test.js",
+      "tests/plate-decision-foundation-test.js",
+      "tests/plate-decision-production-integration-test.js",
+      "tests/player-archetype-test.js",
+      "tests/player-capability-hierarchy-foundation-v1-0-1-test.js",
+      "tests/player-capability-hierarchy-foundation-v1-test.js",
+      "tests/player-data-boundary-test.js",
+      "tests/playing-time-game-exposure-foundation-v1-test.js",
+      "tests/presentation-interaction-clarity-test.js",
+      "tests/relationship-boundary-test.js",
+      "tests/relationship-feasibility-production-scope-test.js",
+      "tests/relationship-feasibility-production-scope.cjs",
+      "tests/relationship-flow-test.js",
+      "tests/relationship-payoff-test.js",
+      "tests/representative-team-contract-test.js",
+      "tests/responsive-accessibility-pass-test.js",
+      "tests/scene-context-layer-test.js",
+      "tests/scene-depth-test.js",
+      "tests/school-invitation-foundation-v1-0-1-test.js",
+      "tests/school-invitation-foundation-v1-test.js",
+      "tests/scoreboard-presentation-integrity-test.js",
+      "tests/scoreboard-presentation-production-integration-test.js",
+      "tests/sprint-c-human-ux-closeout-test.js",
+      "tests/status-panel-disclosure-persistence-test.js",
+      "tests/takahashi-storyboard-test.js",
+      "tests/team-roster-foundation-test.js",
+      "tests/team-roster-match-integration-test.js",
+      "tests/team-strength-model-test.js",
+      "tests/ten-year-narrative-architecture-test.js",
+      "tests/third-out-run-out-attribution-integrity-test.js",
+      "tests/third-out-run-out-attribution-production-integration-test.js",
+      "tests/third-out-runner-resolution-integrity-v1-test.js",
+      "tests/time-boundary-test.js",
+      "tests/u18-roster-construction-test.js",
+      "tests/vertical-slice-smoke.js",
+      "tests/youth-season-content-pass-test.js",
+      "time-boundary.js",
+      "time.js"
+    ]
+  },
+  "full": {
+    "planned": 210,
+    "executed": 89,
+    "passed": 88,
+    "failed": 1,
+    "rows": [
+      {
+        "file": "tests/ability-performance-gradient-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/ability-performance-observability-extension-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/active-defensive-assignment-integrity-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/adult-route-chain-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/ai-plate-appearance-outcome-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/ai-plate-appearance-outcome-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/application-controller-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/aspiration-narrative-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/azhe-storyboard-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-defense-prototype-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-gameplay-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-gameplay-prototype-isolation-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-1-1-1-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-1-1-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-1-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-1-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-2-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-3-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-4-1-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-4-2-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-4-3-audit.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-4-4-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-4-5-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-4-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-offense-base-state-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-offense-prototype-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-offensive-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/baseball-training-rhythm-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/batted-ball-outcome-mapping-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/batted-ball-outcome-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/batted-ball-physical-foundation-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/batted-ball-physical-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/batter-anticipation-sprint-b-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/bbp-b1-ground-ball-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/bbp-b1-ground-ball-runner-handoff-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/bbp-b2a-line-drive-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/bbp-b2a-line-drive-read-catch-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/bbp-b2b1-fly-ball-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/bbp-b2b1-fly-ball-tag-up-legality-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/callbackTest.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/career-age22-outcome-resolver-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/career-arc-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/career-development-progression-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/career-development-runtime-resolver-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/career-network-contract-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/career-rejoin-contract-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/career-save-admission-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/career-spine-contract-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/career-transition-commit-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/career-transition-progression-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/career-transition-resolver-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/career-transition-role-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/career-transition-route-difference-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/career-transition-runtime-resolver-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/catcher-choice-outcome-integrity-v1-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/coach-evaluation-boundary-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/coach-response-expansion-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/coach-response-flow-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/competition-flow-framework-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/content-flow-audit.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/contextual-status-panel-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/county-selection-opportunity-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/current-state-boundary-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/day-completion-flow-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/decision-flow-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/defensive-decision-throw-foundation-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/defensive-decision-throw-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/defensive-opportunity-foundation-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/defensive-opportunity-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/defensive-outcome-cause-explainability-foundation-v1-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/defensive-reach-secure-foundation-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/defensive-reach-secure-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/defensive-runner-throw-settlement-foundation-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/development-match-position-test-fallback-v1-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/development-training-result-foundation-v1-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/emotional-payoff-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/evaluation-registry-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/evaluation-registry-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/event-continuity-pass-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/first-offensive-moment-role-presentation-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/force-advancement-foundation-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/force-multi-runner-settlement-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/force-multi-runner-settlement-production-integration-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/full-game-competition-evidence-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/full-game-player-line-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/generic-infield-position-admission-diagnostic-test.js",
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "file": "tests/goal-balance-test.js",
+        "status": "FAIL",
+        "exitCode": 1
+      }
+    ],
+    "notRun": 121
+  },
+  "r1": {
+    "passed": 15,
+    "failed": 0,
+    "seed": 22430002
+  },
+  "r2": {
+    "passed": 21,
+    "failed": 0,
+    "seed": 22430361,
+    "pa": 122,
+    "battingPA": 122,
+    "pitcherBF": 122,
+    "duplicateSettlements": 0,
+    "validCurrentStaleRejections": 0
+  },
+  "failure": {
+    "file": "tests/goal-balance-test.js",
+    "line": 91,
+    "callerLine": 132,
+    "condition": "Boolean(player.highSchoolResult)",
+    "event": "high_school_scout_feedback",
+    "errorLog": "E:\\meng\\baseball_life_sim_semirefactor\\tests\\goal-balance-test.js:91\r\n  if (!vm.runInContext(condition, game)) throw new Error(`未完成流程：${condition}，停在 ${game.getCurrentEventId()}`);\r\n                                         ^\r\n\r\nError: 未完成流程：Boolean(player.highSchoolResult)，停在 high_school_scout_feedback\r\n    at playUntil (E:\\meng\\baseball_life_sim_semirefactor\\tests\\goal-balance-test.js:91:48)\r\n    at simulate (E:\\meng\\baseball_life_sim_semirefactor\\tests\\goal-balance-test.js:132:3)\r\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\goal-balance-test.js:141:82)\r\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\r\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\r\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\r\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\r\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\r\n    at node:internal/main/run_main_module:33:47\r\n\r\nNode.js v24.19.0\r\n",
+    "cause": "UNDETERMINED: production defect / stale harness / baseline nondeterminism not established",
+    "baselineReproduced": false,
+    "unrelatedRepairAttempted": false
+  },
+  "remainingValidation": [
+    "Investigate the stopped goal-balance regression under separate authorization; no failure allowlist",
+    "Final production integration test includes one new fallback assertion not yet executed",
+    "Resume full validation only after regression is resolved/authorized; do not declare M1 complete"
+  ],
+  "closeout": [
+    {
+      "number": 1,
+      "item": "Baseline",
+      "result": "main; HEAD=origin/main=f916faf955b3d07f213d90dfd59ef16ac0638f6c; 0/0; initially clean; both original stashes preserved"
+    },
+    {
+      "number": 2,
+      "item": "Pre-M1 authority chain",
+      "result": "See pitch-target-location-m1-authority.md, recorded before production edits: normal detailed PA → tactical recommendation/acceptance → existing control → physical truth → recognition → plate decision → feedback"
+    },
+    {
+      "number": 3,
+      "item": "Authority matrix",
+      "result": "M1-A authority matrix covers all ten requested facts; only one existing control and physical location authority identified"
+    },
+    {
+      "number": 4,
+      "item": "Root gap",
+      "result": "Accepted tactical target label was not used to realize physical side/height; location was fixed by actual pitch class"
+    },
+    {
+      "number": 5,
+      "item": "M1 contract",
+      "result": "Existing target → canonical batter-relative TargetIntent → existing command outcome plus conditional residual → one pitch.location → existing recognition/swing/take → extended feedback; implementation retained pending regression investigation"
+    },
+    {
+      "number": 6,
+      "item": "Production files changed",
+      "result": [
+        "offensive-plate-approach.js: admission/codec/resolver/physical integration/recognition region/diagnostic",
+        "pitcher-catcher-tactical-integration.js: existing feedback extensions only",
+        "script.js: batter handedness in detailed PA context"
+      ]
+    },
+    {
+      "number": 7,
+      "item": "New target schema",
+      "result": "TargetIntent version/horizontal/vertical/zoneIntent/frame/source; inside/away batter-relative; zone must agree with existing intended class; explicit legacy fallback reasons"
+    },
+    {
+      "number": 8,
+      "item": "Actual location authority",
+      "result": "One canonical pitch.location string; legacy categories retained, new coarse categories decoded as derived projections; no second random location state"
+    },
+    {
+      "number": 9,
+      "item": "Control authority",
+      "result": "PitchSequencing.resolvePitchControl; roster pitchingProfile.control × 2; existing precisionIntent/rhythm/tempo/class difficulty"
+    },
+    {
+      "number": 10,
+      "item": "RNG contract",
+      "result": "0 new draws; reuse conditional residual of existing control-realization draw; original identity namespaces/draw order unchanged; physical location/feedback snapshots intentionally differ"
+    },
+    {
+      "number": 11,
+      "item": "Command monotonicity",
+      "result": [
+        {
+          "command": 2,
+          "attempts": 4608,
+          "meanError": 1.2552083333333333
+        },
+        {
+          "command": 10,
+          "attempts": 4608,
+          "meanError": 0.7200520833333334
+        },
+        {
+          "command": 18,
+          "attempts": 4608,
+          "meanError": 0.3515625
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "item": "Target influence",
+      "result": "Paired target distributions differ. Slider/edge/command10: inside-low top inner-middle-edge 79, inner-low-edge 78; away-high top outer-middle-edge 79, outer-high-edge 78 (256 each)"
+    },
+    {
+      "number": 13,
+      "item": "Execution variance",
+      "result": "High command 18: 3006 exact / 1584 near / 18 miss over 4608 samples; target is not guaranteed"
+    },
+    {
+      "number": 14,
+      "item": "Handedness",
+      "result": "RHB inside-low maps to fixed inner plate side; LHB inside-low maps to opposite outer side; semantic intent unchanged; focused test PASS"
+    },
+    {
+      "number": 15,
+      "item": "Recognition",
+      "result": "Hidden target changes with identical physical pitch leave recognition/take identical; same target with different realized location/class yields different perceived input; focused negative proofs PASS"
+    },
+    {
+      "number": 16,
+      "item": "Swing/take",
+      "result": "Existing resolveNextPitch/getSwingExecutionProfile remain authoritative; natural take, calledStrike, ball, foul and ballInPlay observed; no batting bonus introduced"
+    },
+    {
+      "number": 17,
+      "item": "Sequence feedback",
+      "result": "Existing normalized tactical feedback receives pitchIntent, targetIntent, actualLocation and derived error/classification; feedback does not rewrite pitch"
+    },
+    {
+      "number": 18,
+      "item": "NPC compressed route",
+      "result": "No fake target, actualPitchLocation, pitchHistory or sequenceIntent on compressed PA; real-match assertions passed"
+    },
+    {
+      "number": 19,
+      "item": "Production integration",
+      "result": "Last completed integration run 9/9; four seed/policy scenarios × OFF/ON/repeat. A subsequently added real-production fallback assertion has not run because the full suite stopped before this test file; do not claim final integration test 10/10"
+    },
+    {
+      "number": 20,
+      "item": "PA accounting",
+      "result": "Four completed scenario witnesses: 59/59/59, 59/59/59, 70/70/70, 70/70/70 (PA/battingPA/BF); not an independent population estimate"
+    },
+    {
+      "number": 21,
+      "item": "GameRecord accounting",
+      "result": "0 detected duplicate/mismatch in completed integration witnesses; full regression incomplete"
+    },
+    {
+      "number": 22,
+      "item": "R1 regression",
+      "result": "Focused R1 15/15 PASS, seed 22430002; current choices accepted, stale rejected, completes"
+    },
+    {
+      "number": 23,
+      "item": "R2 regression",
+      "result": "Focused R2 21/21 PASS, seed 22430361; PA=battingPA=BF=122; no duplicate/competing settlement; current stale rejects 0"
+    },
+    {
+      "number": 24,
+      "item": "Save/reload",
+      "result": "Targeted save 2/2 PASS at presented realized pitch before settlement; synchronous target selection/realization has no distinct legal intermediate save boundary"
+    },
+    {
+      "number": 25,
+      "item": "Determinism",
+      "result": "Deterministic physical replay PASS in 13824 controlled samples and whole-match representative repeats"
+    },
+    {
+      "number": 26,
+      "item": "Observer neutrality",
+      "result": "Entire match OFF/ON deep equality PASS for four representative seed/policy scenarios"
+    },
+    {
+      "number": 27,
+      "item": "Statistical audit",
+      "result": "13824 structural samples; 3 command tiers × 3 targets × 3 classes × 2 existing types × 256 identities; all 18 paired cells strictly monotonic; no balance calibration"
+    },
+    {
+      "number": 28,
+      "item": "Affected-domain regression",
+      "result": "Last completed affected-domain run 11/11 PASS; no unrelated test edits"
+    },
+    {
+      "number": 29,
+      "item": "Full regression",
+      "result": "Planned 210; executed 89; 88 PASS / 1 FAIL / 121 NOT RUN. goal-balance-test.js failed; suite stopped at first failure"
+    },
+    {
+      "number": 30,
+      "item": "Syntax",
+      "result": "328 JS/CJS syntax PASS; final integration-test addition separately syntax-checked"
+    },
+    {
+      "number": 31,
+      "item": "`git diff --check`",
+      "result": "PASS; tracked git diff --check and new text whitespace checks"
+    },
+    {
+      "number": 32,
+      "item": "Production scope",
+      "result": "Only three production files; no unrelated probability, defense, catcher ability, fatigue, UI or new pitch-type/velocity/movement model changes"
+    },
+    {
+      "number": 33,
+      "item": "Warnings",
+      "result": "TARGET_GEOMETRY_LIMITED: coarse categorical bands, no precise edge/tunnel/backdoor geometry. This warning does not excuse the regression failure"
+    },
+    {
+      "number": 34,
+      "item": "Stop conditions",
+      "result": "I triggered. Other stop conditions not observed in completed work; unfinished full regression prevents complete clearance. Cause of goal-balance failure is unproven; no baseline reproduction or unrelated repair attempted"
+    },
+    {
+      "number": 35,
+      "item": "Final status",
+      "result": "STOP_REGRESSION_FAILURE"
+    }
+  ],
+  "sourceHashes": [
+    {
+      "file": "offensive-plate-approach.js",
+      "sha256": "792294584c26b8081eafa29cc0a959c8ff76705179eb1de9cdffecf909b7d6cb"
+    },
+    {
+      "file": "pitcher-catcher-tactical-integration.js",
+      "sha256": "09154895cc113a1b59df5fddf7518ef737250033662781ca54e783f8a6e3f01f"
+    },
+    {
+      "file": "script.js",
+      "sha256": "b7519d60703eb8bfd510b124168b4eabafc47a2c44704f9de61cddaf0814a116"
+    },
+    {
+      "file": "tests/pitch-target-location-foundation-test.js",
+      "sha256": "07541622c7de7432935965056085488006821574df42676b98954b0e01cdcb6b"
+    },
+    {
+      "file": "tests/pitch-target-location-production-integration-test.js",
+      "sha256": "3b81173139f8653f2b5f8092578ff5a4807f55f5b983d9883128bd81f2492d6e"
+    },
+    {
+      "file": "tests/pitch-target-location-statistical-audit.cjs",
+      "sha256": "c1ab20d615b45eae64cde211282c1b1fb4cf3a67857a80adbb16deaaa1cce469"
+    }
+  ],
+  "stopConditions": [
+    "I — STOP_REGRESSION_FAILURE"
+  ],
+  "committed": false,
+  "pushed": false,
+  "stashDropped": false,
+  "m2Started": false,
+  "m0FormalCohortRerun": false
+}

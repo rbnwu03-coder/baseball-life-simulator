@@ -4,7 +4,7 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 const files = ["team-roster-foundation.js", "team-strength-model.js", "player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "coach-evaluation-boundary.js", "narrative-condition-boundary.js", "decision-flow.js", "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js", "baseball-gameplay-prototype-utils.js", "baseball-defense-prototype.js", "baseball-offense-prototype.js", "offensive-plate-approach.js", "baseball-gameplay-integration.js", "story.js", "save.js", "ai-plate-appearance-outcome.js", "force-advancement.js", "defensive-runner-throw-settlement-foundation.js", "script.js"];
-function makeGame() {
+function makeGame(randomSource) {
   const nodes = new Map();
   const context = vm.createContext({
     console,
@@ -18,6 +18,10 @@ function makeGame() {
     localStorage: { setItem() {}, getItem() { return null; }, removeItem() {} },
     window: { setTimeout(callback) { callback(); } }
   });
+  if (randomSource) {
+    context.testRandomSource = randomSource;
+    vm.runInContext("Math.random = testRandomSource; delete globalThis.testRandomSource", context);
+  }
   files.forEach(file => vm.runInContext(fs.readFileSync(path.join(root, file), "utf8"), context, { filename: file }));
   return context;
 }
@@ -75,20 +79,67 @@ function chooseFor(game, eventId, weights, variation) {
   return variation % 7 === 6 && ranked[1] ? ranked[1].index : ranked[0].index;
 }
 
-function playUntil(game, condition, weights, variation, max = 45) {
+// Not an event-count contract: production permits extra innings and multiple
+// decisions per PA (up to 15 pitches). 2048 leaves room for >100 fully manual
+// PAs plus chapter events. This is a diagnostic ceiling, not a gameplay limit
+// or a claim that every possible extra-inning game is finitely bounded.
+const HIGH_SCHOOL_SAFETY_CEILING = 2048;
+function highSchoolProgress(game) {
+  return vm.runInContext(`(() => {
+    const match = player.highSchoolMatch;
+    const pa = match?.offensivePlateAppearanceState;
+    return {
+      event: getCurrentEventId(), step: player.highSchoolStep,
+      result: player.highSchoolResult, forcedEventId: player.forcedEventId, isTransitioning,
+      invitation: isSchoolInvitationChoicePending(player),
+      outcome: pendingYouthSeasonOutcome?.eventId || null,
+      gameplayStage: pendingBaseballGameplay?.stage || null,
+      match: match ? {
+        id: match.id, seed: match.simulationSeed, inning: match.inning, half: match.half,
+        phase: match.simulationPhase, cursor: match.simulationCursor,
+        moment: match.currentMomentId, completed: match.completed,
+        outs: match.outs, scores: match.scores, runners: match.runners,
+        pa: pa ? { id: pa.paIdentity, pitch: pa.pitchNumber,
+          pendingPitch: pa.pendingPitch?.pitchId, balls: pa.balls,
+          strikes: pa.strikes, completed: pa.completed,
+          awaitingDefense: pa.awaitingDefense, result: pa.result } : null
+      } : null
+    };
+  })()`, game);
+}
+
+function playUntil(game, condition, weights, variation, max = 45, progress = null) {
+  const visits = new Map();
+  let turns = 0;
+  if (progress) visits.set(JSON.stringify(highSchoolProgress(game)), 1);
   for (let turn = 0; turn < max && !vm.runInContext(condition, game); turn += 1) {
     if (vm.runInContext("isSchoolInvitationChoicePending(player)", game)) {
       vm.runInContext(`beginSchoolInvitationConfirmationAt(${Math.abs(variation + turn) % 4}); confirmSchoolInvitationSelection();`, game);
-      continue;
-    }
+    } else {
     const eventId = game.getCurrentEventId();
     game.choose(eventId, chooseFor(game, eventId, weights, variation + turn));
     if (vm.runInContext("Boolean(pendingBaseballGameplay?.stage === 'throw-decision')", game)) {
       game.chooseYouthGrounderThrow((weights.baseballIQ || 0) >= (weights.throwing || 0) ? "turn-two" : "secure-first");
     }
     if (vm.runInContext("Boolean(pendingYouthSeasonOutcome)", game)) game.continueYouthSeasonOutcome();
+    }
+    turns = turn + 1;
+    if (progress) {
+      const state = highSchoolProgress(game);
+      progress.onTurn?.(turns, state);
+      if (!vm.runInContext(condition, game)) {
+        const key = JSON.stringify(state);
+        const count = (visits.get(key) || 0) + 1;
+        visits.set(key, count);
+        // Three visits to the same canonical state catches both fixed points
+        // and cycles, without mistaking changing innings/pitches for a stall.
+        if (count >= 3) throw new Error(`NO_PROGRESS: turn=${turns}, visits=${count}, state=${key}`);
+      }
+    }
   }
+  if (progress && !vm.runInContext(condition, game)) throw new Error(`SAFETY_CEILING: turns=${turns}, target=${condition}, state=${JSON.stringify(highSchoolProgress(game))}`);
   if (!vm.runInContext(condition, game)) throw new Error(`未完成流程：${condition}，停在 ${game.getCurrentEventId()}`);
+  return turns;
 }
 
 function captureGoals(game) {
@@ -107,8 +158,8 @@ function captureGoals(game) {
   })()`, game);
 }
 
-function simulate(profileName, weights, variation) {
-  const game = makeGame();
+function simulate(profileName, weights, variation, options = {}) {
+  const game = makeGame(options.randomSource);
   vm.runInContext(`selectedOrigin=${profileName === "理解基本功" ? "'understand'" : profileName === "隊友關係" ? "'belong'" : "'prove'"}; selectedIdealSelf='全能型'; pendingGenesisRoll=rollCharacterGenesis(()=>0); pendingGenesisAllocation={ballSense:1,observe:1,fitness:1,batting:0,baseRunning:0,baseballIQ:0}`, game);
   game.createPlayer();
   playUntil(game, "Boolean(player.ending)", weights, variation, 35);
@@ -129,12 +180,79 @@ function simulate(profileName, weights, variation) {
   const junior = captureGoals(game); game.choose("junior_result", 0);
   playUntil(game, "Boolean(player.juniorSeasonResult)", weights, variation, 20);
   const juniorSeason = captureGoals(game); game.choose("junior_season_result", 0);
-  playUntil(game, "Boolean(player.highSchoolResult)", weights, variation, 18);
+  const highSchoolTurns = playUntil(game, "Boolean(player.highSchoolResult)", weights, variation, HIGH_SCHOOL_SAFETY_CEILING, { onTurn: options.onHighSchoolTurn });
   const highSchool = captureGoals(game);
   const state = vm.runInContext(`({skills:Object.values(player.baseballSkills),pressure:player.pressure,fatigue:player.body.fatigue,injuryRisk:player.body.injuryRisk,role:player.highSchoolTeamRole,result:player.highSchoolResult,schoolFit:player.juniorSchoolFit.level,valueLevel:player.highSchoolValueAssessment.level})`, game);
-  return { intro, youth, competition, junior, juniorSeason, highSchool, initialGap, finalGap, competitionTier, ...state };
+  return { intro, youth, competition, junior, juniorSeason, highSchool, highSchoolTurns, initialGap, finalGap, competitionTier, ...state };
 }
 
+function runRarePathWitness() {
+  const assert = require("node:assert/strict");
+  // Synthetic harness fixtures, not production-state bypasses: independently
+  // prove stalled/cycling states fail and pitch-only/inning-only progress passes.
+  function fixture(advance) {
+    const context = vm.createContext({
+      player: { highSchoolStep: 5, highSchoolResult: "", highSchoolMatch: {
+        id: "guard-fixture", inning: 7, half: "下", simulationPhase: "ready",
+        simulationCursor: 1, currentMomentId: "same-moment", completed: false,
+        offensivePlateAppearanceState: { paIdentity: "same-pa", pitchNumber: 0 }
+      } },
+      isTransitioning: false, pendingYouthSeasonOutcome: null, pendingBaseballGameplay: null,
+      isSchoolInvitationChoicePending: () => false,
+      getCurrentEventId: () => "guard-fixture",
+      getEvent: () => ({ choices: [{}] })
+    });
+    context.choose = () => advance(context.player);
+    return context;
+  }
+  const target = "Boolean(player.highSchoolResult)";
+  assert.throws(() => playUntil(fixture(() => {}), target, {}, 0, 20, {}), /NO_PROGRESS: turn=2/);
+  assert.throws(() => playUntil(fixture(p => { p.highSchoolStep = p.highSchoolStep === 5 ? 6 : 5; }), target, {}, 0, 20, {}), /NO_PROGRESS: turn=4/);
+  assert.throws(() => playUntil(fixture(p => { p.highSchoolMatch.inning++; }), target, {}, 0, 4, {}), /SAFETY_CEILING: turns=4/);
+  for (const field of ["pitch", "inning"]) {
+    let turns = 0;
+    const context = fixture(p => {
+      if (field === "pitch") p.highSchoolMatch.offensivePlateAppearanceState.pitchNumber++;
+      else p.highSchoolMatch.inning++;
+      if (++turns === 5) p.highSchoolResult = "fixture-complete";
+    });
+    assert.equal(playUntil(context, target, {}, 0, 5, {}), 5);
+  }
+  // Captured run-011 tape index 206 / realm vm-64. Each scenario has a fresh
+  // VM; the first 206 draws belong only to preceding scenarios, not this one.
+  const tape = [0.08262938573712408];
+  let draws = 0;
+  let oldBound;
+  let matchCompletionIteration;
+  const result = simulate("隊友關係", profiles["隊友關係"], 13, {
+    randomSource() {
+      assert.ok(draws < tape.length, "Captured random tape exhausted");
+      return tape[draws++];
+    },
+    onHighSchoolTurn(iteration, state) {
+      if (iteration === 18) oldBound = state;
+      if (state.match?.completed && matchCompletionIteration === undefined) matchCompletionIteration = iteration;
+    }
+  });
+  assert.equal(draws, tape.length);
+  assert.equal(oldBound.event, "high_school_showcase");
+  assert.equal(oldBound.step, 5);
+  assert.equal(oldBound.result, "");
+  assert.equal(oldBound.match.seed, 82627);
+  assert.equal(oldBound.match.inning, 18);
+  assert.equal(oldBound.match.half, "下");
+  assert.equal(oldBound.match.phase, "moment_3_ready");
+  assert.equal(oldBound.match.cursor, 173);
+  assert.equal(oldBound.match.completed, false);
+  assert.ok(result.highSchoolTurns > 18);
+  assert.equal(matchCompletionIteration, 19);
+  assert.equal(result.highSchoolTurns, 21);
+  assert.ok(result.result);
+  console.log("LONG_GAME_WITNESS=" + JSON.stringify({ seed: 82627, draws, matchCompletionIteration, resultCompletionIteration: result.highSchoolTurns, noProgress: false, guardChecks: 5, result: result.result }));
+}
+
+runRarePathWitness();
+if (!process.argv.includes("--rare-path")) {
 const runsPerRoute = 25;
 const allRuns = [];
 for (const [name, weights] of Object.entries(profiles)) {
@@ -191,3 +309,4 @@ console.table(Object.entries(skillAudit).filter(([key]) => ["baseRunning", "armS
 if (chapterReport.find(row => row.chapter === "少棒入門").smallGoal < 85) throw new Error("少棒入門小目標完成率不足 85%");
 if (chapterReport.find(row => row.chapter === "少棒第一季").smallGoal < 80) throw new Error("少棒第一季小目標完成率不足 80%");
 if (gapWithinTen < 75) throw new Error("位置競爭合理差距比例不足 75%");
+}
