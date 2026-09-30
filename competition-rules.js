@@ -41,7 +41,8 @@
         enabled,
         startInning: enabled ? innings + 1 : null,
         runnerBase: enabled ? 2 : null,
-        runnerSource: enabled ? "previousLineupSlot" : null
+        runnerSource: enabled ? "previousLineupSlot" : null,
+        earnedRunTreatment: enabled ? "deemedReachedOnError" : null
       }
     });
   }
@@ -75,14 +76,23 @@
     check(Object.values(RULE_SET_IDS).includes(ruleSetId), "unsupported rule set identity");
     check(rules && rules.version === VERSION, "unsupported rules version");
     check(Number.isInteger(rules.regulationInnings) && rules.regulationInnings > 0, "invalid regulation innings");
-    const tiebreak = rules.extraInningTiebreak;
+    // Older captured v1 snapshots predate the ER clause. Keep their ruleset
+    // identity and add only the now-authoritative treatment on normalization.
+    const normalizedRules = copy(rules);
+    const tiebreak = normalizedRules.extraInningTiebreak;
     check(tiebreak && typeof tiebreak.enabled === "boolean", "invalid tiebreak contract");
+    if (tiebreak.earnedRunTreatment === undefined) {
+      tiebreak.earnedRunTreatment = tiebreak.enabled ? "deemedReachedOnError" : null;
+    }
     if (tiebreak.enabled) {
       check(Number.isInteger(tiebreak.startInning) && tiebreak.startInning > rules.regulationInnings, "invalid tiebreak start inning");
       check(tiebreak.runnerBase === 2, "unsupported tiebreak runner base");
       check(tiebreak.runnerSource === "previousLineupSlot", "unsupported tiebreak runner source");
+      check(tiebreak.earnedRunTreatment === "deemedReachedOnError", "unsupported tiebreak earned-run treatment");
+    } else {
+      check(tiebreak.earnedRunTreatment === null, "disabled tiebreak has earned-run treatment");
     }
-    return snapshot(ruleSetId, rules);
+    return snapshot(ruleSetId, normalizedRules);
   }
 
   function normalizeMatchRulesSnapshot(captured, matchContext, options = {}) {

@@ -11,7 +11,8 @@ test("official competition resolves to the high-school full-game ruleset", () =>
   assert.deepStrictEqual(plain(result), {
     ruleSetId: "highSchoolFullGameV1",
     rules: { version: 1, regulationInnings: 7, extraInningTiebreak: {
-      enabled: true, startInning: 8, runnerBase: 2, runnerSource: "previousLineupSlot"
+      enabled: true, startInning: 8, runnerBase: 2, runnerSource: "previousLineupSlot",
+      earnedRunTreatment: "deemedReachedOnError"
     } },
     warning: ""
   });

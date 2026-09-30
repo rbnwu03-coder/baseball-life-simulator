@@ -216,7 +216,9 @@
     const pitcher = getActivePitcher(record, defenseSide, context);
     if (pitcher) {
       pitcher.pitching.R += 1;
-      if (String(event.source || "") !== "error") pitcher.pitching.ER += 1;
+      // Match settlement supplies runner-specific responsibility. Preserve the
+      // actual play source; an exemption is not a charged fielding error.
+      if (event.pitcherEarnedRunEligible !== false && String(event.source || "") !== "error") pitcher.pitching.ER += 1;
     }
   }
 

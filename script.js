@@ -6485,6 +6485,42 @@ function getHighSchoolMatchLineupBatter(match, team) {
   return lineup[index] || null;
 }
 
+function resolveHighSchoolExtraInningTiebreakPlacement(match) {
+  const rule = match?.rules?.extraInningTiebreak;
+  if (rule?.enabled !== true || match.completed || match.pendingGameSettlement
+    || match.inning < rule.startInning) return null;
+  if (!Number.isInteger(rule.startInning) || rule.runnerBase !== 2
+    || rule.runnerSource !== "previousLineupSlot" || rule.earnedRunTreatment !== "deemedReachedOnError") {
+    throw new Error("Unsupported extra-inning tiebreak rule");
+  }
+  const team = match.offenseTeam;
+  const lineup = match.rosters?.[team]?.lineup;
+  const index = match.battingOrderIndex?.[team];
+  if (!Array.isArray(lineup) || lineup.length < 2 || !Number.isInteger(index)
+    || index < 0 || index >= lineup.length) throw new Error("Invalid tiebreak lineup state");
+  const lineupSlot = (index - 1 + lineup.length) % lineup.length;
+  const runnerId = lineup[lineupSlot]?.id;
+  if (!runnerId || runnerId === lineup[index]?.id) throw new Error("Invalid tiebreak runner identity");
+  return Object.freeze({ runnerId, lineupSlot, runnerBase: rule.runnerBase,
+    earnedRunTreatment: rule.earnedRunTreatment });
+}
+
+function initializeHighSchoolExtraInningTiebreakHalf(match) {
+  const placement = resolveHighSchoolExtraInningTiebreakPlacement(match);
+  if (!placement) return false;
+  const marker = match.tiebreakHalfInitialization;
+  if (marker?.applied && marker.inning === match.inning && marker.half === match.half) return false;
+  if (match.outs !== 0 || match.runners.some(Boolean)) throw new Error("Tiebreak half already has live state");
+  match.runners[placement.runnerBase - 1] = placement.runnerId;
+  match.tiebreakHalfInitialization = {
+    inning: match.inning, half: match.half, applied: true,
+    runnerId: placement.runnerId, lineupSlot: placement.lineupSlot,
+    earnedRunTreatment: placement.earnedRunTreatment, runnerResponsibilityActive: true
+  };
+  syncHighSchoolMatchPlayerRunnerLocation(match);
+  return true;
+}
+
 function getHighSchoolMatchNextLineupBatter(match, team) {
   const lineup = match.rosters?.[team]?.lineup || [];
   if (!lineup.length) return null;
@@ -6534,6 +6570,9 @@ function assertHighSchoolMatchStateIntegrity(match, boundary = "match") {
 
 function syncHighSchoolMatchPlayerRunnerLocation(match) {
   match.playerRunnerLocation = match.runners.findIndex(runnerId => runnerId === "player");
+  const marker = match.tiebreakHalfInitialization;
+  if (marker?.runnerResponsibilityActive && marker.inning === match.inning && marker.half === match.half
+    && !match.runners.includes(marker.runnerId)) marker.runnerResponsibilityActive = false;
   return match.playerRunnerLocation;
 }
 
@@ -6619,6 +6658,17 @@ function scoreHighSchoolMatchRunner(match, runnerId, offenseTeam, source, option
     outs: Number.isFinite(Number(options.outsOverride)) ? Number(options.outsOverride) : match.outs,
     scores: { ...match.scores }
   };
+  const marker = match.tiebreakHalfInitialization;
+  if (marker?.applied && marker.runnerResponsibilityActive && marker.inning === match.inning && marker.half === match.half
+    && marker.runnerId === runnerId) {
+    const treatment = match.rules?.extraInningTiebreak?.earnedRunTreatment;
+    if (treatment !== "deemedReachedOnError" || marker.earnedRunTreatment !== treatment) {
+      throw new Error("Unsupported tiebreak runner earned-run responsibility");
+    }
+    event.runnerProvenance = { origin: "extraInningTiebreak", earnedRunTreatment: treatment };
+    event.pitcherEarnedRunEligible = false;
+    marker.runnerResponsibilityActive = false;
+  }
   if (options.presentationImportance) event.presentationImportance = options.presentationImportance;
   return options.deferEvent ? event : recordHighSchoolMatchSimulationEvent(match, event);
 }
@@ -6868,6 +6918,8 @@ function advanceHighSchoolMatchAfterHalfInning(match) {
     halfInningResolved: false
   });
   match.pendingHalfInningTermination = null;
+  match.tiebreakHalfInitialization = null;
+  initializeHighSchoolExtraInningTiebreakHalf(match);
   syncHighSchoolMatchPlayerRunnerLocation(match);
   recordHighSchoolMatchSimulationEvent(match, {
     type: "sideChange", inning: match.inning, half: match.half,
@@ -9431,6 +9483,7 @@ function prepareHighSchoolYearOneMatch(options = {}) {
     defenseTeam: "home",
     currentBatter: rosters.away.lineup[0]?.id || "",
     battingOrderIndex: { home: 0, away: 0 },
+    tiebreakHalfInitialization: null,
     halfInningResolved: false,
     simulationPhase: "full_match_flow",
     simulationCursor: 0,
