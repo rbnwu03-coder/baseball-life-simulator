@@ -2,13 +2,14 @@ const fs=require("fs");
 const path=require("path");
 const vm=require("vm");
 const root=path.resolve(__dirname,"..");
-function makeContext() {
+function makeContext(options = {}) {
   const nodes=new Map(),storage=new Map(),timers=new Map();let timerId=0;
   const context=vm.createContext({console,document:{body:{classList:{add(){},remove(){},toggle(){},contains(){return false;}}},
     getElementById(id){if(!nodes.has(id))nodes.set(id,{innerHTML:"",textContent:"",value:"",style:{},dataset:{},classList:{add(){},remove(){},toggle(){},contains(){return false;}},focus(){},setAttribute(){},removeAttribute(){},querySelectorAll(){return [];}});return nodes.get(id);},querySelector(){return null;},querySelectorAll(){return [];}},
     localStorage:{setItem(k,v){storage.set(k,v);},getItem(k){return storage.get(k)||null;},removeItem(k){storage.delete(k);}},
     window:{setTimeout(callback,delay){timers.set(++timerId,{callback,delay});return timerId;},clearTimeout(id){timers.delete(id);}}});
-  const files=[...fs.readFileSync(path.join(root,"index.html"),"utf8").matchAll(/<script src="([^"]+)"/g)].map(item=>item[1]).filter(file=>file!=="application-controller.js");
+  const excludedFiles = new Set(options.excludeFiles || []);
+  const files=[...fs.readFileSync(path.join(root,"index.html"),"utf8").matchAll(/<script src="([^"]+)"/g)].map(item=>item[1]).filter(file=>file!=="application-controller.js"&&!excludedFiles.has(file));
   files.forEach(file=>vm.runInContext(fs.readFileSync(path.join(root,file),"utf8"),context,{filename:file}));
   const run=text=>vm.runInContext(text,context);
   run(`

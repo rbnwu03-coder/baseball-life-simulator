@@ -9398,9 +9398,19 @@ function prepareHighSchoolYearOneMatch(options = {}) {
   if (matchContext && MatchContextFoundation.isPlayerAway(matchContext)) [rosters.home, rosters.away] = [rosters.away, rosters.home];
   const playerSide = matchContext ? MatchContextFoundation.playerSide(matchContext) : "home";
   const playerLineupSlot = rosters[playerSide].lineup.findIndex(item => item.id === "player");
+  const resolvedCompetitionRules = typeof CompetitionRules !== "undefined"
+    ? CompetitionRules.resolveMatchCompetitionRules(matchContext)
+    : null;
+  const regulationInnings = resolvedCompetitionRules?.rules.regulationInnings
+    || Math.max(1, Number(player.highSchoolMatch?.regulationInnings) || 7);
   player.highSchoolMatch = {
     id: targetMatchId,
     matchContext,
+    ...(resolvedCompetitionRules ? {
+      ruleSetId: resolvedCompetitionRules.ruleSetId,
+      rules: resolvedCompetitionRules.rules,
+      ruleSetWarning: resolvedCompetitionRules.warning
+    } : {}),
     ...(options.scheduleCompetitionRefs || {}),
     eventId: targetEventId,
     matchType: options.matchType || "autumn-exhibition",
@@ -9428,7 +9438,7 @@ function prepareHighSchoolYearOneMatch(options = {}) {
     simulationLog: [],
     presentedEventCursor: 0,
     scoreboardRevealHalfIndex: 0,
-    regulationInnings: 7,
+    regulationInnings,
     lineScore: { home: [], away: [] },
     gameRecord: null,
     rosters,

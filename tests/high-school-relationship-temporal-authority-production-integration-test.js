@@ -7,6 +7,7 @@ const settings={namespace:'temporal-authority',extended:true,validateEntry:true}
 const plain=make(settings),observed=make(settings);
 observed.env.run(`
  var temporalChecks={calls:0,sources:0,plans:0};
+ var temporalPlanWitness=null;
  var originalTemporalInput=getHighSchoolMatchOpportunityGenerationInput;
  getHighSchoolMatchOpportunityGenerationInput=function(options){
    const input=originalTemporalInput(options),before=JSON.stringify(input);
@@ -15,7 +16,10 @@ observed.env.run(`
    const camp=HighSchoolTrainingCampSource.deriveTrainingCampSources(input);
    for(const source of [...friendly.sources,...camp.sources]){
      const summary=HighSchoolRelationshipTemporalAuthority.buildRelationshipTemporalSummary(input.relationshipLedger,source,input.context);
-     temporalChecks.sources++;if(summary.status==='PLAN_CURRENT_CONTEXT')temporalChecks.plans++;
+     temporalChecks.sources++;if(summary.status==='PLAN_CURRENT_CONTEXT'){
+       temporalChecks.plans++;
+       if(!temporalPlanWitness)temporalPlanWitness=JSON.parse(JSON.stringify({source,context:input.context}));
+     }
    }
    if(JSON.stringify(input)!==before)throw Error('Temporal read mutated generation input');
    if(JSON.stringify(HighSchoolOpportunitySelection.selectOpportunityCandidates(input))!==selectionBefore)throw Error('Temporal read changed selection');
@@ -34,8 +38,27 @@ test('real Y1 exchange evidence',()=>assert(all.some(e=>e.evidenceType==='school
 test('real coach connection is recordedAt, not inferred inception',()=>{const e=all.find(e=>e.evidenceType==='coachSchoolConnection');assert(e);assert.strictEqual(T.classifyRelationshipEvidenceLifetime(e).recordedAtMeaning,'RECORDED_CONTACT_NOT_INCEPTION_OR_LAST_CONTACT');});
 test('Y1 evidence survives Y3 and actual reload',()=>{
  const env=observed.env,before=env.json('player.highSchoolExchangeNetwork');
+ const y1=before.evidence.find(e=>e.careerYear===1&&e.evidenceType==='schoolExchangeMatch');
+ const officialEvidence=before.evidence.find(e=>e.evidenceType==='competitionEncounter'&&e.matchOrigin==='officialCompetition');
+ const plan=env.json('temporalPlanWitness');
+ assert(y1&&officialEvidence&&plan);
+ const current={careerYear:3,seasonPhase:'final-competition',sequence:1};
+ const summaryCases=[{source:{evidenceRefs:[y1.evidenceId]},context:current},
+   {source:{evidenceRefs:[officialEvidence.evidenceId]},context:current},
+   {source:plan.source,context:plan.context,status:'PLAN_CURRENT_CONTEXT'}];
+ const summariesBefore=summaryCases.map(({source,context})=>T.buildRelationshipTemporalSummary(before,source,context));
+ assert.strictEqual(summariesBefore[0].latestAgeClass,'OLDER_THAN_ONE_YEAR');
+ assert.strictEqual(summariesBefore[1].status,'RESOLVED');
+ assert.deepStrictEqual(summariesBefore[1].supportingEvidenceIds,[officialEvidence.evidenceId]);
+ assert.strictEqual(summariesBefore[2].status,'PLAN_CURRENT_CONTEXT');
+ const rulesBefore=env.json('({ruleSetId:player.highSchoolMatch.ruleSetId,rules:player.highSchoolMatch.rules,ruleSetWarning:player.highSchoolMatch.ruleSetWarning})');
+ assert.strictEqual(rulesBefore.ruleSetId,'highSchoolFullGameV1');
+ assert.strictEqual(rulesBefore.rules.version,1);
  env.run('saveGame();var temporalRenderer=showCurrentEvent;try{showCurrentEvent=()=>{};loadGame();}finally{showCurrentEvent=temporalRenderer;}');
- assert.deepStrictEqual(env.json('player.highSchoolExchangeNetwork'),before);
+ const after=env.json('player.highSchoolExchangeNetwork');
+ assert.deepStrictEqual(after,before);
+ assert.deepStrictEqual(summaryCases.map(({source,context})=>T.buildRelationshipTemporalSummary(after,source,context)),summariesBefore);
+ assert.deepStrictEqual(env.json('({ruleSetId:player.highSchoolMatch.ruleSetId,rules:player.highSchoolMatch.rules,ruleSetWarning:player.highSchoolMatch.ruleSetWarning})'),rulesBefore);
  assert(before.evidence.filter(e=>e.careerYear===1).length);
  for(const e of before.evidence.filter(e=>e.careerYear===1))assert.strictEqual(T.classifyRelationshipEvidenceAge(e,{careerYear:3,seasonPhase:'final-competition',sequence:1},before),'OLDER_THAN_ONE_YEAR');
 });
@@ -97,8 +120,9 @@ test('friendly summaries preserve all refs',()=>{for(const x of scenarios)for(co
 test('merged camp refs produce one shared temporal summary',()=>{const x=scenarios[1];assert(x.camp.sources.length);for(const s of x.camp.sources){const r=T.buildRelationshipTemporalSummary(x.input.relationshipLedger,s,x.input.context);assert.strictEqual(r.evidenceCount,new Set(s.evidenceRefs).size);assert.strictEqual(r.latestAgeClass,'PREVIOUS_YEAR');}});
 test('real explicit camp plan no-ref context is not fake recency',()=>assert(observed.env.json('temporalChecks').plans>0));
 test('same event evidence multiplicity preserved without inflated contacts',()=>{const x=scenarios[1],e=x.input.relationshipLedger.evidence.filter(e=>e.sequence===2);const r=T.buildRelationshipTemporalSummary(x.input.relationshipLedger,{evidenceRefs:e.map(e=>e.evidenceId)},x.input.context);assert.strictEqual(r.evidenceCount,3);assert.strictEqual(r.completedEventCount,1);assert.strictEqual(r.contactCount,null);});
-test('old save unknown phase still loads without new schema',()=>{const env=observed.env;env.run('var temporalOld=JSON.parse(JSON.stringify(player));for(const e of temporalOld.highSchoolExchangeNetwork.evidence)e.seasonPhase="legacy-unmapped";var temporalRestored=normalizeSave(temporalOld);');const ledger=env.json('temporalRestored.highSchoolExchangeNetwork');assert(ledger.evidence.length);assert.strictEqual(T.resolveMostRecentRelationshipEvidence(ledger).status,'UNKNOWN');});
-test('selection probability producer save and record source files unchanged',()=>{for(const f of ['high-school-opportunity-selection.js','high-school-opportunity-probability.js','high-school-friendly-invitation-producer.js','high-school-training-camp-producer.js','high-school-exchange-network.js','save.js','match-game-record.js','high-school-competition-evidence.js'])assert.strictEqual(fs.readFileSync(f,'utf8').replace(/\r\n?/g,'\n'),cp.execFileSync('git',['show','f300b2f:'+f],{encoding:'utf8'}).replace(/\r\n?/g,'\n'));});
+test('old save unknown phase still loads without new schema',()=>{const env=observed.env;env.run('var temporalOld=JSON.parse(JSON.stringify(player));for(const e of temporalOld.highSchoolExchangeNetwork.evidence)e.seasonPhase="legacy-unmapped";var temporalRestored=normalizeSave(temporalOld);');const original=env.json('temporalOld.highSchoolExchangeNetwork'),ledger=env.json('temporalRestored.highSchoolExchangeNetwork');assert.deepStrictEqual(ledger,original);assert(ledger.evidence.length);const result=T.resolveMostRecentRelationshipEvidence(ledger);assert.strictEqual(result.status,'UNKNOWN');assert.deepStrictEqual(T.resolveMostRecentRelationshipEvidence(env.json('normalizeSave(temporalOld).highSchoolExchangeNetwork')),result);});
+// The historical save.js freeze guarded this Sprint's scope; real persistence is asserted above.
+test('selection probability producer and record source files unchanged',()=>{for(const f of ['high-school-opportunity-selection.js','high-school-opportunity-probability.js','high-school-friendly-invitation-producer.js','high-school-training-camp-producer.js','high-school-exchange-network.js','match-game-record.js','high-school-competition-evidence.js'])assert.strictEqual(fs.readFileSync(f,'utf8').replace(/\r\n?/g,'\n'),cp.execFileSync('git',['show','f300b2f:'+f],{encoding:'utf8'}).replace(/\r\n?/g,'\n'));});
 test('v2 v1 and weights unchanged',()=>{assert.strictEqual(require('../high-school-opportunity-selection').POLICY_VERSION,'high-school-opportunity-selection-v2');const P=require('../high-school-opportunity-probability');assert.strictEqual(P.VERSION,'high-school-opportunity-probability-v1');assert.deepStrictEqual([...new Set(Object.values(P.WEIGHTS))].sort(),[1,2,3]);});
 const report={tests:passed,careerPairs:4,matchesPerArm:20,frequency:[2,2,1],behaviorEquivalent:true,competitionEvidenceRecords:official.run('player.competitionEvidenceState.records.length'),observer:observed.env.json('temporalChecks'),scenarios:scenarios.map(x=>({type:x.type,evidenceTypes:[...new Set(x.input.relationshipLedger.evidence.map(e=>e.evidenceType))],ageClasses:[...new Set(x.summaries.map(s=>s.latestAgeClass))],saveReload:true})),checks:actual.map(c=>c.checks)};
 console.log('TEMPORAL_JSON='+JSON.stringify(report));console.log(`${passed}/${passed} PASS`);

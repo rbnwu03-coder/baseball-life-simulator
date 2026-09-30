@@ -233,9 +233,6 @@ function normalizeSave(saved) {
         ? saved.highSchoolMatch.lastDefensiveResolution.runnersAfter.slice(0, 3) : []
     })
     : null;
-  fresh.highSchoolMatch.regulationInnings = Number(saved.highSchoolMatch?.regulationInnings) > 0
-    ? Number(saved.highSchoolMatch.regulationInnings)
-    : highSchoolDefaults.highSchoolMatch.regulationInnings;
   fresh.highSchoolMatch.lineScore = {
     home: Array.isArray(saved.highSchoolMatch?.lineScore?.home) ? saved.highSchoolMatch.lineScore.home.map(run => run === null ? null : Math.max(0, Number(run) || 0)) : [],
     away: Array.isArray(saved.highSchoolMatch?.lineScore?.away) ? saved.highSchoolMatch.lineScore.away.map(run => run === null ? null : Math.max(0, Number(run) || 0)) : []
@@ -464,6 +461,23 @@ function normalizeSave(saved) {
       provenance: {source:old.homeTeamId && old.awayTeamId ? "savedTeamAssignment" : "legacyFallback", reasonCode:"restoredWithoutMatchContext"}
     });
     if (fresh.highSchoolMatch.matchContext.matchId !== old.id) throw new Error("Saved match context identity mismatch");
+  }
+  if (saved.highSchoolMatch?.id && typeof CompetitionRules !== "undefined") {
+    const capturedRules = CompetitionRules.normalizeMatchRulesSnapshot({
+      ruleSetId: saved.highSchoolMatch.ruleSetId,
+      rules: saved.highSchoolMatch.rules,
+      warning: saved.highSchoolMatch.ruleSetWarning
+    }, saved.highSchoolMatch.matchContext || null, {
+      legacyRegulationInnings: saved.highSchoolMatch.regulationInnings
+    });
+    fresh.highSchoolMatch.ruleSetId = capturedRules.ruleSetId;
+    fresh.highSchoolMatch.rules = capturedRules.rules;
+    fresh.highSchoolMatch.ruleSetWarning = capturedRules.warning;
+    fresh.highSchoolMatch.regulationInnings = capturedRules.rules.regulationInnings;
+  } else {
+    fresh.highSchoolMatch.regulationInnings = Number(saved.highSchoolMatch?.regulationInnings) > 0
+      ? Number(saved.highSchoolMatch.regulationInnings)
+      : highSchoolDefaults.highSchoolMatch.regulationInnings;
   }
   fresh.highSchoolMatch.gameRecord = saved.highSchoolMatch?.gameRecord
     ? (typeof MatchGameRecord !== "undefined"
