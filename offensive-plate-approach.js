@@ -146,12 +146,23 @@
       warning: "TARGET_GEOMETRY_LIMITED", rng: "conditionalResidualOfExistingControlRoll" });
   }
 
+  // Shared production baseline; unknown types have no observational baseline.
+  function getPitchVelocityBaseline(pitchType) {
+    switch (pitchType) {
+      case "fastball": return 89;
+      case "slider": return 82;
+      case "changeup": return 80;
+      case "curveball": return 76;
+      default: return null;
+    }
+  }
+
   function getPitchPhysicalProfile(state, pitchLocationClass, override = {}) {
     const pitchNumber = Math.max(1, Number(state?.pitchNumber) + 1 || 1);
     const identity = state?.paIdentity || "pa";
     const typeRoll = deterministicUnit(identity, `pitch-type|${pitchNumber}`);
     const pitchType = override.pitchType || (typeRoll < 0.52 ? "fastball" : typeRoll < 0.74 ? "slider" : typeRoll < 0.9 ? "changeup" : "curveball");
-    const baseVelocity = pitchType === "fastball" ? 89 : pitchType === "slider" ? 82 : pitchType === "changeup" ? 80 : 76;
+    const baseVelocity = getPitchVelocityBaseline(pitchType) ?? 76;
     const velocity = round(clamp(override.velocity, 60, 105, baseVelocity + (deterministicUnit(identity, `velocity|${pitchNumber}`) - 0.5) * 6), 1);
     const movement = override.movement || (pitchType === "fastball" ? "subtle" : pitchType === "changeup" ? "fading" : "breaking");
     const location = override.location || ({ hitterPitch: "middle-middle", competitiveStrike: "outer-middle", edgeStrike: "outer-low", chasePitch: "outer-below", clearBall: "well-outside" }[pitchLocationClass] || "outer-middle");
@@ -683,6 +694,7 @@
     getPitchExecutionTrace,
     normalizeTargetIntent,
     decodePitchLocation,
+    getPitchVelocityBaseline,
     resolvePitchLocation,
     getRecognitionScore,
     getRecognitionResult,
