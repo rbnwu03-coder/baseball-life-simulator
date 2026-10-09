@@ -233,8 +233,9 @@
   function resolveGroundBallDefensiveAccess(input = {}) {
     const truth = input.physicalTruth || {};
     const defender = input.defenderContext || {};
-    const directionSupported = truth.direction === "rightSide";
-    const positionSupported = defender.playerPosition === "二壘手";
+    const shortstop = defender.playerPosition === "游擊手";
+    const directionSupported = shortstop ? ["leftSide", "middle"].includes(truth.direction) : truth.direction === "rightSide";
+    const positionSupported = shortstop || defender.playerPosition === "二壘手";
     if (truth.ballType !== "groundBall" || !directionSupported || !positionSupported) {
       return deepFreeze({ playerPosition: defender.playerPosition || "", level: "unsupported", supported: false, score: 0, reason: truth.direction === "leftSide" ? "leftSideNoPlayerBallMagnet" : "unsupportedScope" });
     }
@@ -265,8 +266,8 @@
       type,
       family: "groundBall",
       pace,
-      label: pace === "hard" ? "強勁的右半邊滾地球" : pace === "weak" ? "需要前壓的緩慢滾地球" : "往右半邊滾動的滾地球",
-      detail: pace === "hard" ? "球較早進入守區，但第一步反應壓力較高。" : pace === "weak" ? "球速偏慢，需要前壓並壓縮後續轉傳時間。" : "球進入二壘手一側的合理處理範圍。",
+      label: defensiveAccess?.playerPosition === "游擊手" ? "進入游擊守區的滾地球" : pace === "hard" ? "強勁的右半邊滾地球" : pace === "weak" ? "需要前壓的緩慢滾地球" : "往右半邊滾動的滾地球",
+      detail: defensiveAccess?.playerPosition === "游擊手" ? "依正式守位與來球方向確認處理責任，再比較跑者及傳球時間。" : pace === "hard" ? "球較早進入守區，但第一步反應壓力較高。" : pace === "weak" ? "球速偏慢，需要前壓並壓縮後續轉傳時間。" : "球進入二壘手一側的合理處理範圍。",
       timeWindow: pace === "hard" ? "reaction" : pace === "weak" ? "charge" : "balanced",
       ballDirection: physicalTruth?.direction || "",
       ballDepth: null,
@@ -275,7 +276,7 @@
       reactionPressure: pace === "hard" ? "high" : "normal",
       physicalTruth: clone(physicalTruth),
       defensiveAccess: clone(defensiveAccess),
-      downstreamSupport: defensiveAccess?.supported ? "supported2BOrdinaryGroundBall" : "legacyFallback"
+      downstreamSupport: defensiveAccess?.supported ? (defensiveAccess.playerPosition === "游擊手" ? "supportedSSOrdinaryGroundBall" : "supported2BOrdinaryGroundBall") : "legacyFallback"
     });
   }
   function buildGroundBallTimingWindows({ ballContext, runnerRealization } = {}) {
@@ -316,7 +317,10 @@
     const homeRunner = runnerRealization.existingRunners.find(state => state.originBase === 3
       && state.targetBase === "home" && ["advancing", "committed"].includes(state.movementState));
     const choices = defensiveAccess.supported ? ["secureFirstBaseOut"] : [];
-    if (defensiveAccess.supported && forceState.forceAtSecond && Number(input.outs) < 2) choices.push("initiate463");
+    if (defensiveAccess.supported && forceState.forceAtSecond) {
+      if (defensiveAccess.playerPosition === "游擊手") choices.push("forceSecond");
+      if (Number(input.outs) < 2) choices.push(defensiveAccess.playerPosition === "游擊手" ? "startDoublePlaySecond" : "initiate463");
+    }
     if (defensiveAccess.supported && forceState.forceAtHome && timingWindows.homeOutWindow.state !== "expired") choices.push("homeForceOut");
     else if (defensiveAccess.supported && homeRunner && timingWindows.homeOutWindow.state !== "expired") choices.push("preventRunHome");
     return deepFreeze({

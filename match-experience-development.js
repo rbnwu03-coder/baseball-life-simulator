@@ -237,14 +237,15 @@ const MatchExperienceDevelopment = (() => {
 
   function createDefensiveEvidence(match, source, index) {
     const position = source.playerPosition || match.developmentPositionOverride || match.playerFieldingAssignment || match.currentFieldingPosition || "";
-    if (position !== "二壘手") return [];
+    if (!["二壘手", "游擊手"].includes(position)) return [];
     const rawRole = source.playerRole || "primaryFielder";
     const participationType = normalizeParticipationType(rawRole);
     const meaningful = source.domain === "defense" || source.eventClassification === "playerMeaningfulDecision";
     const decisionQuality = meaningful ? normalizeDecisionQuality(source.decisionQuality) : "none";
     const overallExecution = normalizeExecutionQuality(source.executionQuality);
     const stages = source.playerLeg || source.executionEvidence?.stages || {};
-    const situation = buildSituation({ ...source, meaningful, playFamily: meaningful ? "secondBaseMeaningful" : "secondBaseRoutine" }, match);
+    const family = position === "游擊手" ? "shortstop" : "secondBase";
+    const situation = buildSituation({ ...source, meaningful, playFamily: `${family}${meaningful ? "Meaningful" : "Routine"}` }, match);
     const playId = source.id || source.playId || `defense-${index + 1}`;
     const common = {
       matchId: match.id, playId, playerId: "player", evidenceType: "active", participationType, role: rawRole,
