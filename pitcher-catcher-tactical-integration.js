@@ -162,11 +162,18 @@
     return eligible.at(-1) || "challenge";
   }
 
-  function chooseTacticalIntent(context, options = {}) {
+  // Shared semantic eligibility only; no selection, weights, or sampling.
+  function getRepeatSuccessEligibility(context) {
     const previous = context.previousFeedback;
     const response = previous?.observableBatterResponse || {};
     const repeatFailed = previous?.intent === "repeatSuccess" && response.hardContactObservable;
     const repeatEligible = !repeatFailed && Boolean(previous?.recommendedPitchClass) && (response.chased || response.whiffed);
+    return { repeatFailed, repeatEligible };
+  }
+
+  function chooseTacticalIntent(context, options = {}) {
+    const { repeatFailed, repeatEligible } = getRepeatSuccessEligibility(context);
+    const response = context.previousFeedback?.observableBatterResponse || {};
     const repeatedCalls = consecutiveSameRecommendations(context.sequenceHistory || []);
     const scores = {
       challenge: context.count.balls === 3 ? 1.15 : 0.5,
@@ -382,6 +389,7 @@
     normalizeFeedback,
     normalizeSequenceHistory,
     buildTacticalContext,
+    getRepeatSuccessEligibility,
     chooseTacticalIntent,
     buildCatcherRecommendation,
     biasPitchDistribution,

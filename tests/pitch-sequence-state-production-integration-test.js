@@ -130,12 +130,13 @@ test('7 finished persisted copies rebuild identically without a new save authori
     assert(!JSON.stringify(run.match).includes(S.VERSION)); assert(!Object.hasOwn(run.match, 'pitchSequenceState'));
   }
 });
-test('8 Observation and production authority source files remain baseline-identical', () => {
+test('8 source guards permit only the exact canonical repeat eligibility extraction', () => {
   const root = path.resolve(__dirname, '..');
   for (const file of ['pitch-observation-foundation.js', 'offensive-plate-approach.js', 'pitcher-catcher-tactical-integration.js', 'pitch-sequencing.js', 'save.js', 'script.js']) {
     const current = fs.readFileSync(path.join(root, file), 'utf8').replace(/\r\n?/g, '\n');
     const baseline = cp.execFileSync('git', ['show', 'a0e512b439446990d8df118e3e7d737b9f2f51d3:' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\r\n?/g, '\n');
-    assert.equal(current, baseline, file);
+    if (file === 'pitcher-catcher-tactical-integration.js') require('./pitch-tactical-selector-extraction-baseline.cjs').assertOnlyRepeatEligibilityExtraction(current, baseline);
+    else assert.equal(current, baseline, file);
   }
 });
 const history = on.histories.find(h => h.length >= 3);

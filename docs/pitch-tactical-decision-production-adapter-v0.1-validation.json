@@ -1,0 +1,560 @@
+{
+  "date": "2026-10-09",
+  "baseline": "9b9546f94a7286afef474be634fd93c57eb455db",
+  "adapterUnit": {
+    "passed": 22,
+    "failed": 0,
+    "rngDraws": 0,
+    "tacticalHashDraws": 0,
+    "inputMutations": 0
+  },
+  "production": {
+    "passed": 11,
+    "failed": 0,
+    "baseline": "9b9546f94a7286afef474be634fd93c57eb455db",
+    "summary": {
+      "totalEvaluated": 82,
+      "candidate": 16,
+      "abstain": 66,
+      "matches": 3,
+      "differences": 13,
+      "unsupported": 0,
+      "byIntent": {
+        "challenge": {
+          "candidate": 7,
+          "matches": 2,
+          "differences": 5,
+          "production": {
+            "challenge": 2,
+            "expand": 4,
+            "repeatSuccess": 0,
+            "changeLook": 1
+          }
+        },
+        "expand": {
+          "candidate": 8,
+          "matches": 1,
+          "differences": 7,
+          "production": {
+            "challenge": 4,
+            "expand": 1,
+            "repeatSuccess": 0,
+            "changeLook": 3
+          }
+        },
+        "repeatSuccess": {
+          "candidate": 1,
+          "matches": 0,
+          "differences": 1,
+          "production": {
+            "challenge": 0,
+            "expand": 1,
+            "repeatSuccess": 0,
+            "changeLook": 0
+          }
+        },
+        "changeLook": {
+          "candidate": 0,
+          "matches": 0,
+          "differences": 0,
+          "production": {
+            "challenge": 0,
+            "expand": 0,
+            "repeatSuccess": 0,
+            "changeLook": 0
+          }
+        }
+      },
+      "abstentionReasons": {
+        "NEUTRAL_DECISION_ABSTENTION": 66
+      }
+    },
+    "byPolicy": {
+      "take": {
+        "totalEvaluated": 13,
+        "candidate": 7,
+        "abstain": 6,
+        "matches": 2,
+        "differences": 5,
+        "unsupported": 0,
+        "byIntent": {
+          "challenge": {
+            "candidate": 7,
+            "matches": 2,
+            "differences": 5,
+            "production": {
+              "challenge": 2,
+              "expand": 4,
+              "repeatSuccess": 0,
+              "changeLook": 1
+            }
+          },
+          "expand": {
+            "candidate": 0,
+            "matches": 0,
+            "differences": 0,
+            "production": {
+              "challenge": 0,
+              "expand": 0,
+              "repeatSuccess": 0,
+              "changeLook": 0
+            }
+          },
+          "repeatSuccess": {
+            "candidate": 0,
+            "matches": 0,
+            "differences": 0,
+            "production": {
+              "challenge": 0,
+              "expand": 0,
+              "repeatSuccess": 0,
+              "changeLook": 0
+            }
+          },
+          "changeLook": {
+            "candidate": 0,
+            "matches": 0,
+            "differences": 0,
+            "production": {
+              "challenge": 0,
+              "expand": 0,
+              "repeatSuccess": 0,
+              "changeLook": 0
+            }
+          }
+        },
+        "abstentionReasons": {
+          "NEUTRAL_DECISION_ABSTENTION": 6
+        }
+      },
+      "contactSwing": {
+        "totalEvaluated": 69,
+        "candidate": 9,
+        "abstain": 60,
+        "matches": 1,
+        "differences": 8,
+        "unsupported": 0,
+        "byIntent": {
+          "challenge": {
+            "candidate": 0,
+            "matches": 0,
+            "differences": 0,
+            "production": {
+              "challenge": 0,
+              "expand": 0,
+              "repeatSuccess": 0,
+              "changeLook": 0
+            }
+          },
+          "expand": {
+            "candidate": 8,
+            "matches": 1,
+            "differences": 7,
+            "production": {
+              "challenge": 4,
+              "expand": 1,
+              "repeatSuccess": 0,
+              "changeLook": 3
+            }
+          },
+          "repeatSuccess": {
+            "candidate": 1,
+            "matches": 0,
+            "differences": 1,
+            "production": {
+              "challenge": 0,
+              "expand": 1,
+              "repeatSuccess": 0,
+              "changeLook": 0
+            }
+          },
+          "changeLook": {
+            "candidate": 0,
+            "matches": 0,
+            "differences": 0,
+            "production": {
+              "challenge": 0,
+              "expand": 0,
+              "repeatSuccess": 0,
+              "changeLook": 0
+            }
+          }
+        },
+        "abstentionReasons": {
+          "NEUTRAL_DECISION_ABSTENTION": 60
+        }
+      }
+    },
+    "baseSeedSummary": {
+      "totalEvaluated": 39,
+      "candidate": 11,
+      "abstain": 28,
+      "matches": 2,
+      "differences": 9,
+      "unsupported": 0,
+      "byIntent": {
+        "challenge": {
+          "candidate": 7,
+          "matches": 2,
+          "differences": 5,
+          "production": {
+            "challenge": 2,
+            "expand": 4,
+            "repeatSuccess": 0,
+            "changeLook": 1
+          }
+        },
+        "expand": {
+          "candidate": 4,
+          "matches": 0,
+          "differences": 4,
+          "production": {
+            "challenge": 2,
+            "expand": 0,
+            "repeatSuccess": 0,
+            "changeLook": 2
+          }
+        },
+        "repeatSuccess": {
+          "candidate": 0,
+          "matches": 0,
+          "differences": 0,
+          "production": {
+            "challenge": 0,
+            "expand": 0,
+            "repeatSuccess": 0,
+            "changeLook": 0
+          }
+        },
+        "changeLook": {
+          "candidate": 0,
+          "matches": 0,
+          "differences": 0,
+          "production": {
+            "challenge": 0,
+            "expand": 0,
+            "repeatSuccess": 0,
+            "changeLook": 0
+          }
+        }
+      },
+      "abstentionReasons": {
+        "NEUTRAL_DECISION_ABSTENTION": 28
+      }
+    },
+    "naturalSearch": {
+      "seeds": [
+        440001,
+        440002,
+        440003,
+        440010,
+        440100,
+        441000
+      ],
+      "summary": {
+        "totalEvaluated": 43,
+        "candidate": 5,
+        "abstain": 38,
+        "matches": 1,
+        "differences": 4,
+        "unsupported": 0,
+        "byIntent": {
+          "challenge": {
+            "candidate": 0,
+            "matches": 0,
+            "differences": 0,
+            "production": {
+              "challenge": 0,
+              "expand": 0,
+              "repeatSuccess": 0,
+              "changeLook": 0
+            }
+          },
+          "expand": {
+            "candidate": 4,
+            "matches": 1,
+            "differences": 3,
+            "production": {
+              "challenge": 2,
+              "expand": 1,
+              "repeatSuccess": 0,
+              "changeLook": 1
+            }
+          },
+          "repeatSuccess": {
+            "candidate": 1,
+            "matches": 0,
+            "differences": 1,
+            "production": {
+              "challenge": 0,
+              "expand": 1,
+              "repeatSuccess": 0,
+              "changeLook": 0
+            }
+          },
+          "changeLook": {
+            "candidate": 0,
+            "matches": 0,
+            "differences": 0,
+            "production": {
+              "challenge": 0,
+              "expand": 0,
+              "repeatSuccess": 0,
+              "changeLook": 0
+            }
+          }
+        },
+        "abstentionReasons": {
+          "NEUTRAL_DECISION_ABSTENTION": 38
+        }
+      }
+    },
+    "witnesses": {
+      "challenge": {
+        "seed": 440000,
+        "policy": "take",
+        "paIdentity": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|1|下",
+        "completedPitches": 2,
+        "nextPitch": 3,
+        "decisionIntent": "challenge",
+        "status": "candidate",
+        "candidateIntent": "challenge",
+        "productionIntent": "challenge",
+        "diagnostic": "CANDIDATE_MATCHES_PRODUCTION"
+      },
+      "expand": {
+        "seed": 440000,
+        "policy": "contactSwing",
+        "paIdentity": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|1|下",
+        "completedPitches": 3,
+        "nextPitch": 4,
+        "decisionIntent": "expand",
+        "status": "candidate",
+        "candidateIntent": "expand",
+        "productionIntent": "challenge",
+        "diagnostic": "CANDIDATE_DIFFERS_FROM_PRODUCTION"
+      },
+      "repeatSuccess": {
+        "seed": 440001,
+        "policy": "contactSwing",
+        "paIdentity": "hs-y1-autumn-exhibition|hs_y1_match_offense_2|player|3|下",
+        "completedPitches": 2,
+        "nextPitch": 3,
+        "decisionIntent": "repeatSuccess",
+        "status": "candidate",
+        "candidateIntent": "repeatSuccess",
+        "productionIntent": "expand",
+        "diagnostic": "CANDIDATE_DIFFERS_FROM_PRODUCTION"
+      },
+      "changeLook": null,
+      "resetNeutral": {
+        "seed": 440000,
+        "policy": "take",
+        "paIdentity": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|1|下",
+        "completedPitches": 0,
+        "nextPitch": 1,
+        "decisionIntent": "resetNeutral",
+        "status": "abstain",
+        "candidateIntent": null,
+        "productionIntent": "challenge",
+        "diagnostic": "ADAPTER_ABSTAIN"
+      }
+    },
+    "notNaturallyObserved": [
+      "changeLook"
+    ],
+    "checks": {
+      "take": {
+        "calls": 13,
+        "rngDraws": 0,
+        "sourceMutations": 0,
+        "decisionMutations": 0,
+        "boundaryMutations": 0,
+        "rebuilds": 1300
+      },
+      "contactSwing": {
+        "calls": 26,
+        "rngDraws": 0,
+        "sourceMutations": 0,
+        "decisionMutations": 0,
+        "boundaryMutations": 0,
+        "rebuilds": 2600
+      },
+      "reload": {
+        "calls": 14,
+        "rngDraws": 0,
+        "sourceMutations": 0,
+        "decisionMutations": 0,
+        "boundaryMutations": 0,
+        "rebuilds": 1400
+      },
+      "supplementary": {
+        "440001": {
+          "calls": 7,
+          "rngDraws": 0,
+          "sourceMutations": 0,
+          "decisionMutations": 0,
+          "boundaryMutations": 0,
+          "rebuilds": 700
+        },
+        "440002": {
+          "calls": 4,
+          "rngDraws": 0,
+          "sourceMutations": 0,
+          "decisionMutations": 0,
+          "boundaryMutations": 0,
+          "rebuilds": 400
+        },
+        "440003": {
+          "calls": 5,
+          "rngDraws": 0,
+          "sourceMutations": 0,
+          "decisionMutations": 0,
+          "boundaryMutations": 0,
+          "rebuilds": 500
+        },
+        "440010": {
+          "calls": 21,
+          "rngDraws": 0,
+          "sourceMutations": 0,
+          "decisionMutations": 0,
+          "boundaryMutations": 0,
+          "rebuilds": 2100
+        },
+        "440100": {
+          "calls": 4,
+          "rngDraws": 0,
+          "sourceMutations": 0,
+          "decisionMutations": 0,
+          "boundaryMutations": 0,
+          "rebuilds": 400
+        },
+        "441000": {
+          "calls": 2,
+          "rngDraws": 0,
+          "sourceMutations": 0,
+          "decisionMutations": 0,
+          "boundaryMutations": 0,
+          "rebuilds": 200
+        }
+      }
+    },
+    "compressedRejected": 48,
+    "wholeMatchEquivalent": true,
+    "tacticalStateEquivalent": true,
+    "gameRecordEquivalent": true,
+    "rngCursorEquivalent": true,
+    "liveAndFinishedSaveReload": true
+  },
+  "selector": {
+    "passed": 5,
+    "failed": 0,
+    "baseline": "9b9546f94a7286afef474be634fd93c57eb455db",
+    "contexts": 23040,
+    "comparisons": 161280,
+    "rawComparisons": 429,
+    "fullChainComparisons": 48,
+    "baselineHashCursor": 69285,
+    "extractedHashCursor": 69285,
+    "randomDraws": 0,
+    "weightsIdentical": true,
+    "eligibilityIdentical": true,
+    "selectedIntentIdentical": true,
+    "hashCursorIdentical": true
+  },
+  "regressions": [
+    {
+      "file": "tests/pitch-tactical-decision-foundation-test.js",
+      "passed": 33,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-integration-test.js",
+      "passed": 12,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/pitch-tactical-interpretation-foundation-test.js",
+      "passed": 24,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "passed": 10,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/pitch-sequence-state-foundation-test.js",
+      "passed": 25,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/pitch-sequence-state-production-integration-test.js",
+      "passed": 8,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/pitch-observation-foundation-test.js",
+      "passed": 22,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/pitch-observation-production-integration-test.js",
+      "passed": 7,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/pitcher-catcher-tactical-integration-test.js",
+      "passed": 34,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/pitch-sequencing-core-sprint-a-test.js",
+      "passed": 26,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/plate-decision-foundation-test.js",
+      "passed": 19,
+      "failed": 0,
+      "exitCode": 0
+    },
+    {
+      "file": "tests/plate-decision-production-integration-test.js",
+      "passed": 15,
+      "failed": 0,
+      "exitCode": 0
+    }
+  ],
+  "validation": {
+    "suites": 15,
+    "passed": 273,
+    "failed": 0
+  },
+  "gitIntegrity": {
+    "branch": "main",
+    "HEAD": "9b9546f94a7286afef474be634fd93c57eb455db",
+    "originMain": "9b9546f94a7286afef474be634fd93c57eb455db",
+    "stagedFiles": [],
+    "committed": false,
+    "pushed": false,
+    "protectedFiles": {
+      "tests/fast-check-smoke-test.cjs": "Existing modified/unstaged status preserved; not read, modified, staged, or committed by this sprint",
+      "install.ps1": "Existing untracked status preserved; not read, executed, modified, staged, or committed by this sprint"
+    },
+    "stashes": [
+      "0daf1e954f74ddb45efe620107970567dec6fffd",
+      "8cc34a930df052067d1bad3ea798fe0b9d2ae036"
+    ]
+  }
+}
