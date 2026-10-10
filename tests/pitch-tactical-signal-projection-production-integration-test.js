@@ -4,6 +4,7 @@ const { discover } = require('./match-m0-after-r2-admission-context.cjs');
 const O = require('../pitch-observation-foundation'), S = require('../pitch-sequence-state-foundation');
 const I = require('../pitch-tactical-interpretation-foundation'), G = require('../pitch-tactical-signal-projection-foundation');
 const P = require('../offensive-plate-approach');
+const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');
 const clone = value => JSON.parse(JSON.stringify(value));
 const BASELINE = '674e49115a9ed7d67c69a3023b5a594d41fe584c';
 
@@ -256,14 +257,15 @@ function main() {
       assert(row.projection.signals.every(signal => G.SIGNAL_TYPES.includes(signal.type)));
     }
   });
-  test('14 all existing runtime owners, browser loading and save sources are baseline-identical', () => {
+  test('14 protected pitch runtime owners, browser loading and save sources retain their original freeze boundaries', () => {
     const root = path.resolve(__dirname, '..');
     for (const file of ['pitch-observation-foundation.js', 'pitch-sequence-state-foundation.js', 'pitch-tactical-interpretation-foundation.js',
       'pitch-tactical-decision-foundation.js', 'pitch-tactical-decision-production-adapter.js', 'pitcher-catcher-tactical-integration.js',
       'offensive-plate-approach.js', 'plate-decision-foundation.js', 'pitch-sequencing.js', 'script.js', 'save.js', 'index.html']) {
       const current = fs.readFileSync(path.join(root, file), 'utf8').replace(/\r\n?/g, '\n');
       const baseline = cp.execFileSync('git', ['show', BASELINE + ':' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\r\n?/g, '\n');
-      assert.equal(current, baseline, file);
+      if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);
+      else assert.equal(current, baseline, file);
     }
   });
   const gaps = G.SIGNAL_TYPES.filter(type => !witness(type)).map(type => 'COVERAGE_GAP: NATURAL_' + type);

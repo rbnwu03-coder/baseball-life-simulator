@@ -13,6 +13,16 @@ run(`
     careerFixture(options.position||"游擊手","starter",77001);choose("critical_offseason",1);
     const m=player.highSchoolMatch;
     m.rosters=JSON.parse(JSON.stringify(m.rosters));
+    // A declared 2B physical fixture must own the current active assignment.
+    // The career opportunity may select bench status before this explicit setup.
+    if(options.position==="二壘手"&&TeamRosterFoundation.getCurrentDefender(m.rosters.home,"2B").id!=="player") {
+      const roster=TeamRosterFoundation.injectPlayerIntoRoster(m.rosters.home.teamRoster,
+        createHighSchoolRosterPlayerActor(player,"二壘手"),{playerRole:"starter",playerPosition:"二壘手"});
+      m.rosters.home=TeamRosterFoundation.toMatchRoster(roster,TeamStrengthModel.deriveTeamStrengthProfile(roster));
+      m.rosters=JSON.parse(JSON.stringify(m.rosters));
+      Object.assign(m,{playerFieldingAssignment:"二壘手",playerLineupStatus:"starter",playerEntryCompleted:true});
+      m.playerLineupSlot=m.rosters.home.lineup.findIndex(a=>a.id==="player");
+    }
     Object.assign(m,{inning:5,half:"上",offenseTeam:"away",defenseTeam:"home",outs:options.outs||0,
       runners:[null,null,null],scores:{home:1,away:1},simulationPhase:"moment_1_resolved",currentDomain:"defense",
       activeSituation:null,groundBallInPlayState:null,lineDriveCatchState:null,flyBallCatchState:null,defensiveSituation:{}});

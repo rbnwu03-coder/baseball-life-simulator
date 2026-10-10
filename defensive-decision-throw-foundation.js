@@ -188,6 +188,61 @@
     if (!result || identityKeys.some(key => !same(result[key], expected[key]))) fail("stale throw actor / target identity");
     return true;
   }
+  // Facts only: this contract neither resolves an action nor applies a retirement.
+  // Dependencies describe the actual ball path, so a base touch cannot invent an assist.
+  const ACTION_TYPES = Object.freeze(["field", "throw", "receive", "baseTouch", "tag", "pivot"]);
+  function createActionFacts({ playIdentity, physicalIdentity = null, sourceAuthority = "declaredActionFacts", actions = [] } = {}) {
+    if (!playIdentity || !Array.isArray(actions)) fail("invalid action context");
+    const seen = new Set();
+    const normalized = actions.map((action, index) => {
+      if (!action.actorId || !action.actorPosition || !ACTION_TYPES.includes(action.type)
+        || !["completed", "failed", "late", "notAttempted", "unavailable"].includes(action.status)) fail("invalid action facts");
+      const identity = `${playIdentity}|action|${index + 1}`;
+      const dependsOn = (action.dependsOn || []).slice();
+      if (dependsOn.some(id => !seen.has(id))) fail("invalid action dependency");
+      seen.add(identity);
+      return { ...clone(action), identity, playIdentity, physicalIdentity, sequence: index + 1,
+        receiverId: action.receiverId || null, targetBase: action.targetBase || null,
+        runnerId: action.runnerId || null, dependsOn, responsibleActor: action.responsibleActor || action.actorId,
+        provenance: clone(action.provenance || { authority: sourceAuthority }), factType: "execution" };
+    });
+    return freeze({ version: VERSION, identity: `${playIdentity}|actions-v1`, playIdentity, physicalIdentity,
+      sourceAuthority, factType: "execution", actions: normalized });
+  }
+  function projectDefensiveAttribution(facts, retirements = []) {
+    if (!facts || !same(facts, createActionFacts(facts))) fail("invalid action contract");
+    const actors = new Map(), byId = new Map(facts.actions.map(a => [a.identity, a]));
+    function actor(action) {
+      if (!actors.has(action.actorId)) actors.set(action.actorId, { actorId: action.actorId, actorPosition: action.actorPosition,
+        PO: 0, A: 0, E: 0, DP: 0, actionIds: [], retirementSequences: [] });
+      const result = actors.get(action.actorId);
+      if (!result.actionIds.includes(action.identity)) result.actionIds.push(action.identity);
+      return result;
+    }
+    facts.actions.forEach(a => { actor(a); if (a.errorCharged === true && a.status === "failed") actor(a).E = 1; });
+    const ledger = retirements.map(retirement => {
+      const terminal = facts.actions.find(a => ["baseTouch", "tag"].includes(a.type) && a.status === "completed"
+        && a.runnerId === retirement.runnerId && a.targetBase === retirement.targetBase);
+      if (!terminal) fail("retirement lacks completed actor action");
+      const chain = new Map();
+      function visit(action) { if (chain.has(action.identity)) return; chain.set(action.identity, action);
+        action.dependsOn.forEach(id => visit(byId.get(id))); }
+      visit(terminal);
+      if ([...chain.values()].some(a => a.status !== "completed")) fail("retirement uses incomplete action");
+      const assists = [...new Set([...chain.values()].filter(a => a.type === "throw" && a.actorId !== terminal.actorId).map(a => a.actorId))];
+      actor(terminal).PO += 1;
+      assists.forEach(id => { actors.get(id).A = 1; });
+      const participants = [...new Set([terminal.actorId, ...assists])];
+      participants.forEach(id => actors.get(id).retirementSequences.push(retirement.sequence));
+      return { ...clone(retirement), putoutActorId: terminal.actorId, assistActorIds: assists,
+        participantActorIds: participants, terminalActionId: terminal.identity };
+    });
+    if (ledger.length >= 2) ledger.forEach(r => r.participantActorIds.forEach(id => { actors.get(id).DP = 1; }));
+    return freeze({ version: VERSION, identity: `${facts.playIdentity}|attribution-v1`, playIdentity: facts.playIdentity,
+      physicalIdentity: facts.physicalIdentity, factType: "settlement", retirements: ledger, actors: [...actors.values()],
+      authority: "completedActionDependencies+orderedActualRetirements" });
+  }
   return freeze({ VERSION, RNG_NAMESPACES, isAdvancingTo, hasHomePlay, controlled, buildDecisionOpportunity,
-    selectDefensiveRoute, validateOpportunity, validateSelection, resolveThrow, projectExistingThrow, throwDemand, validateStoredStage });
+    selectDefensiveRoute, validateOpportunity, validateSelection, resolveThrow, projectExistingThrow, throwDemand, validateStoredStage,
+    ACTION_TYPES, createActionFacts, projectDefensiveAttribution });
 });

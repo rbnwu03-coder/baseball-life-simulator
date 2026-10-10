@@ -15,7 +15,9 @@ test('zero-observation structural cells remain explicit',()=>{assert.equal(struc
 test('batch order preserves counts and bounded sorted witnesses',()=>assert.deepEqual(aggregate(projected),aggregate([...projected].reverse())));
 for(const [i,c]of cases.entries())test('observer and repeat neutrality '+c.seed,()=>{assert.deepEqual(playAdmitted(c.seed,{...c.setup,observe:false}).match,games[i].match);assert.deepEqual(playAdmitted(c.seed,{...c.setup,observe:true}).match,games[i].match);});
 test('reverse execution order preserves each entire match',()=>{for(const c of [...cases].reverse()){const index=cases.indexOf(c);assert.deepEqual(playAdmitted(c.seed,{...c.setup,observe:true}).match,games[index].match);}});
-const h=discover(440000).h;
+// R1 no longer manufactures a player ground from unsupported contact. This
+// normal-origin seed retains a real physical ground save boundary, without overrides.
+const h=discover(440002).h;
 function step(){if(h.run('!!pendingYouthSeasonOutcome'))h.run('continueYouthSeasonOutcome()');else if(h.run('isHighSchoolMatchDecisionVisible(player.highSchoolMatch)'))h.run('var c=getHighSchoolYearOneMatchMomentChoices(player.highSchoolMatch)[0];chooseHighSchoolYearOneMatchMoment(c.matchDecision,c.matchMomentId)');else assert(h.run('__runNextTimer()'));}
 let count=0;while(!h.run("player.highSchoolMatch.activeSituation?.type==='plateDecision'")&&count++<500)step();
 const signature='({id:player.highSchoolMatch.id,active:player.highSchoolMatch.activeSituation,batter:player.highSchoolMatch.currentBatter,outs:player.highSchoolMatch.outs,scores:player.highSchoolMatch.scores,runners:player.highSchoolMatch.runners,record:player.highSchoolMatch.gameRecord})';

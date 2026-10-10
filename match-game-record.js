@@ -1,8 +1,9 @@
 (function (root, factory) {
-  const api = factory();
+  const api = factory(() => root?.DefensiveDecisionThrowFoundation
+    || (typeof module === "object" && module.exports ? require("./defensive-decision-throw-foundation.js") : null));
   if (typeof module === "object" && module.exports) module.exports = api;
   if (root) root.MatchGameRecord = api;
-})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+})(typeof globalThis !== "undefined" ? globalThis : this, function (getActionContract) {
   "use strict";
 
   const VERSION = "match-game-record-v1";
@@ -222,8 +223,34 @@
     }
   }
 
+  function validateDefensiveAttribution(event) {
+    const attribution = event.defensiveAttribution;
+    if (!attribution) return; // Historical events retain their original adapter.
+    check(attribution.factType === "settlement" && attribution.playIdentity && event.actionFacts,
+      "Defensive action / attribution contract is required");
+    check(attribution.playIdentity === event.actionFacts.playIdentity, "Defensive action / attribution identity mismatch");
+    const contract = getActionContract();
+    check(contract && JSON.stringify(contract.projectDefensiveAttribution(event.actionFacts, attribution.retirements)) === JSON.stringify(attribution),
+      "Defensive attribution does not match completed actor actions");
+  }
+
   function recordDefensivePlay(record, event, context, eventId) {
     const defenseSide = sideForEvent(record, event, context) === "home" ? "away" : "home";
+    const attribution = event.defensiveAttribution;
+    if (attribution?.factType === "settlement" && attribution.playIdentity && event.actionFacts) {
+      // Multiple events can describe one ball; only the first owns actor statistics.
+      if (record.eventRefs.some(ref => ref.defensivePlayIdentity === attribution.playIdentity)) return;
+      for (const facts of attribution.actors) {
+        const line = ensurePlayerLine(record, facts.actorId, {
+          teamId: defenseSide === "home" ? record.homeTeamId : record.awayTeamId,
+          role: facts.actorId === "player" ? context.playerRole : "participant", position: facts.actorPosition
+        });
+        if (event.actionFacts.actions.some(a => a.actorId === facts.actorId && !["notAttempted", "unavailable"].includes(a.status))) line.defense.chances += 1;
+        for (const stat of ["PO", "A", "E", "DP"]) line.defense[stat] += integer(facts[stat]);
+        addPositionAppearance(line, facts.actorPosition, line.role, eventId);
+      }
+      return;
+    }
     const playerId = String(event.fielderId || event.playerId || context.playerId || (event.type === "playerRoutinePlay" || event.domain === "defense" ? "player" : ""));
     if (!playerId) return;
     const position = event.playerPosition || event.position || context.playerPosition || "";
@@ -284,6 +311,7 @@
     if (FINAL_STATUSES.has(record.status)) return Object.freeze({ status: "locked", eventId: getEventId(record, event) });
     const eventId = getEventId(record, event);
     if (record.eventRefs.some(ref => ref.eventId === eventId)) return Object.freeze({ status: "duplicate", eventId });
+    validateDefensiveAttribution(event);
     ensureInningLine(record, event.inning || 1);
     if (event.type === "plateAppearance") recordPlateAppearance(record, event, context, eventId);
     if (event.type === "run") recordRun(record, event, context);
@@ -304,7 +332,8 @@
     }
     recordRunnerEvent(record, event, context);
     const pitcherOuts = attributePitcherOuts(record, event, context);
-    record.eventRefs.push({ eventId, type: String(event.type || "event"), sequence: integer(event.sequence), inning: Math.max(1, integer(event.inning) || 1), half: String(event.half || ""), ...(pitcherOuts ? { pitcherOuts } : {}) });
+    record.eventRefs.push({ eventId, type: String(event.type || "event"), sequence: integer(event.sequence), inning: Math.max(1, integer(event.inning) || 1), half: String(event.half || ""),
+      ...(event.defensiveAttribution ? { defensivePlayIdentity: event.defensiveAttribution.playIdentity } : {}), ...(pitcherOuts ? { pitcherOuts } : {}) });
     return Object.freeze({ status: "applied", eventId });
   }
 
@@ -387,7 +416,9 @@
     };
     record.result = saved.result ? clone(saved.result) : null;
     record.playerLines = Object.fromEntries(Object.entries(saved.playerLines || {}).map(([id, line]) => [id, normalizePlayerLine(line, { playerId: id })]));
-    record.eventRefs = (saved.eventRefs || []).map(ref => ({ eventId: String(ref.eventId), type: String(ref.type || "event"), sequence: integer(ref.sequence), inning: Math.max(1, integer(ref.inning) || 1), half: String(ref.half || ""), ...(ref.pitcherOuts ? { pitcherOuts: { pitcherId: String(ref.pitcherOuts.pitcherId), outs: integer(ref.pitcherOuts.outs) } } : {}) }));
+    record.eventRefs = (saved.eventRefs || []).map(ref => ({ eventId: String(ref.eventId), type: String(ref.type || "event"), sequence: integer(ref.sequence), inning: Math.max(1, integer(ref.inning) || 1), half: String(ref.half || ""),
+      ...(ref.defensivePlayIdentity ? { defensivePlayIdentity: String(ref.defensivePlayIdentity) } : {}),
+      ...(ref.pitcherOuts ? { pitcherOuts: { pitcherId: String(ref.pitcherOuts.pitcherId), outs: integer(ref.pitcherOuts.outs) } } : {}) }));
     record.integrity = { checked: saved.integrity?.checked === true, issues: Array.isArray(saved.integrity?.issues) ? saved.integrity.issues.map(String) : [] };
     record.finalizedAtEventId = saved.finalizedAtEventId ? String(saved.finalizedAtEventId) : null;
     const issues = getIntegrityIssues(record);

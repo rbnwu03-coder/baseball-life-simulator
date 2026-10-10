@@ -5197,13 +5197,16 @@ function ensureHighSchoolOrdinaryGroundBallInPlayHandoff(match, options = {}) {
     return null;
   }
   if (plateAppearanceState.result !== "groundBallDefensePending" || !physicalTruth) {
+    const ordinaryInfield = isInfieldDecisionFamilyPosition(match.developmentPositionOverride || match.playerFieldingAssignment || match.position);
     match.groundBallInPlayState = BattedBallGroundDefense.normalizeHandoff({
       version: BattedBallGroundDefense.VERSION,
       identity: `${paIdentity}|ground-defense`,
       sourceAuthority: "unsupportedOrdinaryContactLegacyFallback",
       physicalTruth: physicalTruth ? JSON.parse(JSON.stringify(physicalTruth)) : null,
       supported: false,
-      fallbackAuthority: "existingSyntheticDefensiveContext",
+      ...(ordinaryInfield ? { fallbackAuthority: "existingOrdinaryPhysicalOutcome",
+        defensiveOpportunity: physicalTruth ? getHighSchoolDefensiveOpportunity(match, physicalTruth) : null }
+        : { fallbackAuthority: "existingSyntheticDefensiveContext" }),
       legacyFallbackResult: plateAppearanceState.result || ""
     });
     match.lineDriveCatchState = physicalTruth?.ballType === "lineDrive" && typeof BattedBallLineDriveDefense !== "undefined"
@@ -6623,6 +6626,11 @@ function recordHighSchoolRoutinePlateAppearance(match, batterId, result, before,
     presentationImportance: "hidden",
     meaningful: false,
     eventClassification: "playerRoutinePlay",
+    ...(runnerFacts.outcomeAuthority === "existingOrdinaryPhysicalOutcome" ? {
+      eventClassification: "ordinaryPlay", outcomeAuthority: runnerFacts.outcomeAuthority,
+      physicalTruth: JSON.parse(JSON.stringify(runnerFacts.physicalTruth)), physicalIdentity: runnerFacts.physicalTruth?.identity || null,
+      defensiveOpportunity: runnerFacts.defensiveOpportunity ? JSON.parse(JSON.stringify(runnerFacts.defensiveOpportunity)) : null
+    } : {}),
     inning: after.inning,
     half: after.half,
     offenseTeam: after.half === "上" ? "away" : "home",
@@ -7793,6 +7801,7 @@ function getSecondBaseCauseExplanation(primaryCause, secondaryCause = "", fallba
     playerSecondThrow: "你完成二壘封殺，但回傳一壘的出手沒有到達可接位置。",
     teammateUpstreamThrow: "游擊手的第一傳偏離理想接球點，迫使你先重新調整腳步。",
     teammatePivot: "你的第一傳已送到可接位置，但游擊手的轉身與第二傳慢了一拍。",
+    teammateSecondThrow: "游擊手已完成接球與封殺，但回傳一壘沒有送到可接位置。",
     teammateFirstBaseReceive: "前兩段傳球已完成，但一壘接球沒有穩定收下。",
     teammateHomeReceive: "傳球已送往本壘，但捕手沒有先把球控制住。",
     homeTagTiming: "捕手已接住傳球並形成觸殺機會，但跑者先一步碰到本壘。",
@@ -7821,6 +7830,7 @@ function getDefensiveExplainabilityCauseCategory(sourceCause = "", resolution = 
     playerSecondThrow: "throwAccuracy",
     teammateUpstreamThrow: "throwAccuracy",
     teammatePivot: "receiverExecution",
+    teammateSecondThrow: "throwAccuracy",
     teammateFirstBaseReceive: "receiverExecution",
     teammateHomeReceive: "receiverExecution",
     homeTagTiming: "runnerTiming",
@@ -7871,7 +7881,9 @@ function getDefensiveExecutionExplanation(resolution = {}) {
     playerSecondThrow: "你完成二壘封殺，但回傳一壘沒有送到可接位置。",
     teammateUpstreamThrow: "你已進入補位位置，但游擊手第一傳偏離理想接球點。",
     teammatePivot: "你的第一傳已送到可接範圍，後續接球與轉傳沒有完整完成。",
+    teammateSecondThrow: "隊友完成二壘封殺與轉身，但回傳一壘沒有送到可接位置。",
     teammateFirstBaseReceive: "前兩段傳球已完成，但一壘端沒有穩定收下來球。",
+    teammateReceive: "第一傳已送到可接範圍，但接球端沒有控制住來球。",
     teammateHomeReceive: "球已送往本壘，但捕手沒有先把傳球控制住。",
     homeTagTiming: "捕手已接球並形成觸殺機會，但跑者先一步碰到本壘。",
     timingWindow: "接球、轉傳與接球端處理沒有明顯失誤，但跑者先一步抵達壘包。"
@@ -7980,7 +7992,25 @@ function resolveInfieldRelayToFirst(situation, firstThrowCompleted, sample, cont
   return { receive, turn, firstBaseReceive, secondOutAvailable: turn && firstBaseReceive && !["narrow", "expired"].includes(continuationWindow) };
 }
 
-function resolveSecondBaseInitiatedRoute(situation, choice, sample) {
+function resolveHighSchoolInfieldReceiver(situation, choice, sample, deliveryCompleted, match) {
+  const position = choice.targetBase === "third" ? "3B" : choice.targetBase === "home" ? "C"
+    : choice.targetBase === "second" || choice.targetBase === "secondThenFirst" ? "SS" : "1B";
+  const legacy = position === "1B" ? situation.teammates?.firstBaseReceiver : position === "3B" ? situation.teammates?.thirdBaseReceiver
+    : position === "C" ? situation.teammates?.catcher : situation.teammates?.shortstop;
+  const actor = match?.rosters?.[match.defenseTeam] && typeof TeamRosterFoundation !== "undefined"
+    ? TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam], position) : null;
+  const capabilities = actor ? getDefensiveSimulationCapability(actor, actor.position, match) : legacy?.capabilities || {};
+  const fielding = Number(capabilities.fielding ?? 5), swing = (sample - .5) * 4;
+  const available = Boolean((actor ? actor.id !== "player" : legacy) && legacy?.receivingAvailable !== false);
+  const ready = available && fielding + swing >= 2.8;
+  return Object.freeze({ receiverId: actor?.id || legacy?.id || null, receiverPosition: position, available, ready,
+    secured: Boolean(deliveryCompleted && ready), status: !deliveryCompleted ? "notAttempted" : !available ? "unavailable" : ready ? "completed" : "failed",
+    responsibleActor: deliveryCompleted && !ready ? "teammate" : "player",
+    provenance: Object.freeze({ authority: actor ? "activeRosterReceiver+existingExecutionSample" : "declaredLegacyReceiver+existingExecutionSample",
+      fielding, sample, swing, threshold: 2.8, consumedRng: false }) });
+}
+
+function resolveSecondBaseInitiatedRoute(situation, choice, sample, match) {
   const swing = (sample - 0.5) * 4;
   const windows = situation.windows;
   const physicalContext = situation.groundBallDefensiveContext || situation.buntDefensiveContext;
@@ -8018,6 +8048,7 @@ function resolveSecondBaseInitiatedRoute(situation, choice, sample) {
     firstThrow: firstThrowCompleted ? "completed" : "notCompleted"
   };
   let teammateStages = {};
+  let receiverResolution = null;
   let homeTagLeg = null;
   let primaryCause = "balancedExecution";
   let secondaryCause = "";
@@ -8025,12 +8056,15 @@ function resolveSecondBaseInitiatedRoute(situation, choice, sample) {
   if (reassessment?.fallbackRoute) {
     const fallbackWindow = getSecondBaseRouteWindow(actualChoice.routeId, reassessment.liveSituation.routeWindows);
     firstLegTimingWindow = fallbackWindow;
-    const fallbackCompleted = fieldControlled && fallbackWindow.state !== "expired";
+    const fallbackRelease = fieldControlled && fallbackWindow.state !== "expired";
+    receiverResolution = resolveHighSchoolInfieldReceiver(situation, actualChoice, sample, fallbackRelease, match);
+    const fallbackCompleted = fallbackRelease && receiverResolution.secured;
     resultCode = fallbackCompleted ? "oneOut" : "zeroOuts";
     detailedResult = fallbackCompleted ? "fallbackOut" : "fallbackLate";
-    playerStages = { ...playerStages, reassessment: "completed", fallbackRelease: fallbackCompleted ? "completed" : "late" };
-    teammateStages = { receiver: fallbackCompleted ? "completed" : "notReached" };
-    primaryCause = "playerFieldingControl";
+    playerStages = { ...playerStages, reassessment: "completed", fallbackRelease: fallbackRelease ? "completed" : "late" };
+    teammateStages = { receiver: receiverResolution.status };
+    primaryCause = fallbackRelease && !receiverResolution.secured ? "teammateFirstBaseReceive" : "playerFieldingControl";
+    if (fallbackRelease && !receiverResolution.secured) responsibleActor = "teammate";
     secondaryCause = fallbackCompleted ? "" : "timingWindow";
   } else if (!fieldControlled) {
     resultCode = windows.fielding + swing < 1 ? "error" : "zeroOuts";
@@ -8040,16 +8074,21 @@ function resolveSecondBaseInitiatedRoute(situation, choice, sample) {
     const ss = situation.teammates?.shortstop?.capabilities || situation.teammates?.pivotFielder?.capabilities || {};
     const continuationWindow = physicalContext?.timingWindows?.relayToFirstWindow?.state || routeWindow.state;
     const relay = resolveInfieldRelayToFirst(situation, firstThrowCompleted, sample, continuationWindow, ss);
-    const ssReceive = relay.receive, ssPivot = relay.turn, firstBaseReceive = relay.firstBaseReceive;
+    const ssReceive = relay.receive, ssPivot = relay.turn;
+    // A completed pivot preserves the force out, but cannot guarantee delivery.
+    // Reuse the existing cover/pivot throw threshold and the owned sample.
+    const ssSecondThrow = ssPivot && Number(ss.throwing ?? 5) + Number(ss.arm ?? 5) * .3 + swing >= 4;
+    const firstBaseReceive = ssSecondThrow && relay.firstBaseReceive;
     const firstOutCompleted = firstThrowCompleted && routeWindow.state !== "expired" && ssReceive;
-    const secondOutCompleted = firstOutCompleted && relay.secondOutAvailable;
+    const secondOutCompleted = firstOutCompleted && ssSecondThrow && relay.secondOutAvailable;
     resultCode = secondOutCompleted ? "twoOuts" : firstOutCompleted ? "oneOut" : "zeroOuts";
     detailedResult = secondOutCompleted ? "completedDoublePlay" : firstOutCompleted ? "secondStageExpired" : "lateForce";
-    teammateStages = { shortstopReceive: ssReceive ? "completed" : "failed", shortstopPivot: ssPivot ? "completed" : "late", shortstopSecondThrow: ssPivot ? "completed" : "notCompleted", firstBaseReceive: firstBaseReceive ? "completed" : "notCompleted" };
+    teammateStages = { shortstopReceive: ssReceive ? "completed" : "failed", shortstopPivot: ssPivot ? "completed" : "late", shortstopSecondThrow: ssSecondThrow ? "completed" : "notCompleted", firstBaseReceive: firstBaseReceive ? "completed" : "notCompleted" };
     if (!firstThrowCompleted) primaryCause = "playerFirstThrow";
     else if (!ssReceive) { primaryCause = "teammatePivot"; responsibleActor = "teammate"; }
     else if (!ssPivot && (situation.batterSpeed >= 8 || continuationWindow === "narrow")) { primaryCause = "timingWindow"; secondaryCause = "teammatePivot"; responsibleActor = "timingWindow"; }
     else if (!ssPivot) { primaryCause = "teammatePivot"; responsibleActor = "teammate"; }
+    else if (!ssSecondThrow) { primaryCause = "teammateSecondThrow"; responsibleActor = "teammate"; }
     else if (!firstBaseReceive) { primaryCause = "teammateFirstBaseReceive"; responsibleActor = "teammate"; }
     else if (!secondOutCompleted) { primaryCause = "timingWindow"; responsibleActor = "timingWindow"; secondaryCause = situation.batterSpeed >= 8 ? "timingWindow" : ""; }
   } else if (actualChoice.routeId === "preventRunHome") {
@@ -8083,11 +8122,17 @@ function resolveSecondBaseInitiatedRoute(situation, choice, sample) {
     else if (!catcherReceive) { primaryCause = "teammateHomeReceive"; responsibleActor = "teammate"; }
     else if (!tagCompleted) { primaryCause = "timingWindow"; responsibleActor = "timingWindow"; }
   } else {
-    const completed = firstThrowCompleted && routeWindow.state !== "expired";
+    receiverResolution = resolveHighSchoolInfieldReceiver(situation, actualChoice, sample, firstThrowCompleted, match);
+    const completed = firstThrowCompleted && receiverResolution.secured && routeWindow.state !== "expired";
     resultCode = completed ? "oneOut" : "zeroOuts";
     detailedResult = completed ? (actualChoice.routeId === "preventRunHome" ? "tagOutHome" : actualChoice.routeId === "homeForceOut" ? "forceOutHome" : actualChoice.routeId === "attackLeadRunnerThird" ? "leadRunnerOut" : "cleanOut") : "lateThrow";
-    teammateStages = { receiver: completed ? "completed" : "notReached" };
+    teammateStages = { receiver: receiverResolution.status };
     if (!firstThrowCompleted) primaryCause = fieldControlled ? "playerFirstThrow" : "playerFieldingControl";
+    else if (!receiverResolution.secured) {
+      primaryCause = receiverResolution.receiverPosition === "1B" ? "teammateFirstBaseReceive"
+        : receiverResolution.receiverPosition === "C" ? "teammateHomeReceive" : "teammateReceive";
+      responsibleActor = "teammate";
+    }
     else if (!completed) { primaryCause = "timingWindow"; responsibleActor = "timingWindow"; }
   }
   const runnerFacts = buildInfieldRunnerFacts(situation, actualChoice, resultCode);
@@ -8125,7 +8170,7 @@ function resolveSecondBaseInitiatedRoute(situation, choice, sample) {
       window: physicalContext?.timingWindows?.relayToFirstWindow?.state || routeWindow.state,
       targetBase: "first"
     }) : choice.routeId === "preventRunHome" ? Object.freeze({ status: "settledByActorOutcomes", window: routeWindow.state, targetBase: "firstAndSecond" }) : null,
-    homeTagLeg,
+    homeTagLeg, receiverResolution,
     executionStage: detailedResult, routeAvailability: choice.availability, readiness: choice.readiness,
     ballContext: situation.ballContext.type, ballDirection: situation.ballDirection, ballDepth: situation.ballDepth,
     batterSpeed: situation.batterSpeed, runnerSpeed: Math.max(...situation.runnerSpeeds.filter(Number.isFinite), 0),
@@ -8228,8 +8273,10 @@ function resolveInfieldDecision(situation, decision, matchState, randomSource = 
   }
   const rawSample = typeof randomSource === "function" ? Number(randomSource()) : Number(randomSource);
   const sample = Number.isFinite(rawSample) ? Math.max(0, Math.min(0.999999, rawSample)) : 0.5;
-  if (situation.playerPosition === "二壘手" && choice.routeId === "coverSecondFor643") return attachDefensiveOutcomeExplanation(situation, choice, resolveSecondBaseCoverage643(situation, choice, sample));
-  if (situation.playerPosition === "二壘手" && choice.routeId) return attachDefensiveOutcomeExplanation(situation, choice, resolveSecondBaseInitiatedRoute(situation, choice, sample));
+  if (situation.playerPosition === "二壘手" && choice.routeId === "coverSecondFor643") return attachHighSchoolInfieldActionFacts(matchState, situation, choice,
+    attachDefensiveOutcomeExplanation(situation, choice, resolveSecondBaseCoverage643(situation, choice, sample)), sample);
+  if (situation.playerPosition === "二壘手" && choice.routeId) return attachHighSchoolInfieldActionFacts(matchState, situation, choice,
+    attachDefensiveOutcomeExplanation(situation, choice, resolveSecondBaseInitiatedRoute(situation, choice, sample, matchState)), sample);
   const swing = (sample - 0.5) * 4;
   const windows = situation.windows;
   const fieldControlled = windows.fielding + swing >= 2.8;
@@ -10206,7 +10253,8 @@ function recordHighSchoolYearOneMoment(match, decision, tier, outcome, consequen
     scoringRunnerIds: Array.isArray(eventFacts.scoringRunnerIds) ? eventFacts.scoringRunnerIds.slice() : [],
     thirdOutResolution: eventFacts.thirdOutResolution || null,
     resultCode: eventFacts.resultCode || "",
-    error: Boolean(eventFacts.error)
+    error: Boolean(eventFacts.error),
+    ...(eventFacts.defensiveFacts || {})
   });
 }
 
@@ -11014,6 +11062,99 @@ function beginAutomaticGroundBallSituationExecution(match) {
 
 // SS integrates existing physical and rule owners. This adapter never mutates bases,
 // outs, score, batting order, or the lifecycle; those remain settlement authority.
+function attachHighSchoolInfieldActionFacts(match, situation, choice, resolution, sample) {
+  if (typeof DefensiveDecisionThrowFoundation === "undefined" || typeof TeamRosterFoundation === "undefined"
+    || !match?.rosters?.[match.defenseTeam]) return resolution; // Isolated historical scenario harnesses.
+  const roster = match.rosters[match.defenseTeam], playerPosition = TeamRosterFoundation.normalizePosition(situation.playerPosition);
+  const coverage = resolution.playerRole === "coverPivot";
+  const primaryPosition = coverage ? "SS" : playerPosition;
+  const primary = TeamRosterFoundation.getCurrentDefender(roster, primaryPosition);
+  const physicalIdentity = situation.groundBallDefensiveContext?.physicalTruth?.identity || null;
+  const playIdentity = situation.runnerSettlementIdentity;
+  const actions = [];
+  const timing = resolution.timingResolution || {};
+  const timingProvenance = { routeWindow: timing.routeWindow || timing.secondBaseForceWindow || null,
+    timingClassification: timing.firstLeg?.timingClassification || null, timingMargin: timing.firstLeg?.timingMargin ?? null,
+    relayToFirstWindow: timing.relayToFirstWindow || timing.relayToFirstWindowState || null, batterSpeed: situation.batterSpeed };
+  const completed = value => ["completed", "recovered", "clean", "slightlyOffLine", "good"].includes(value);
+  const status = (value, attempted = true) => completed(value) ? "completed" : !attempted ? "notAttempted" : "failed";
+  function add(position, type, state, targetBase, receiverId, dependsOn = [], extra = {}) {
+    const actor = TeamRosterFoundation.getCurrentDefender(roster, position);
+    if (!actor) throw new Error("Invalid infield action actor");
+    const capabilities = actor.id === "player" ? situation.playerCapabilities : getDefensiveSimulationCapability(actor, actor.position, match);
+    const identity = `${playIdentity}|action|${actions.length + 1}`;
+    actions.push({ actorId: actor.id, actorPosition: position, type, status: state, targetBase, receiverId,
+      dependsOn, responsibleActor: actor.id === "player" ? "player" : "teammate",
+      provenance: { authority: physicalIdentity ? "existingInfieldExecution+activeRoster" : "declaredLegacyInfieldExecution+activeRoster",
+        sample, consumedRng: false, capabilities: { ...capabilities }, timing: timingProvenance,
+        sourceStage: extra.sourceStage || type }, ...extra });
+    return identity;
+  }
+  const control = coverage ? resolution.teammateLeg?.shortstopFielding : resolution.playerLeg?.control;
+  const field = add(primaryPosition, "field", status(control), null, null, [], {
+    sourceStage: coverage ? "shortstopFielding" : "control", errorCharged: resolution.error && !completed(control) });
+  const routeId = resolution.activeRoute || resolution.routeId || choice.routeId;
+  const dp = resolution.route === "doublePlay" && !resolution.reassessed;
+  const target = dp || routeId === "forceSecond" ? "second" : routeId === "attackLeadRunnerThird" ? "third"
+    : ["homeForceOut", "preventRunHome"].includes(routeId) ? "home" : "first";
+  const receiverPosition = target === "second" ? (primaryPosition === "SS" ? "2B" : "SS")
+    : target === "third" ? "3B" : target === "home" ? "C" : "1B";
+  const receiver = TeamRosterFoundation.getCurrentDefender(roster, receiverPosition);
+  const held = resolution.route === "controlledNoThrow" || routeId === "holdBall";
+  const throwStage = coverage ? resolution.teammateLeg?.shortstopFirstThrow
+    : resolution.reassessed ? resolution.playerLeg?.fallbackRelease : resolution.playerLeg?.firstThrow;
+  const throwStatus = held ? "notAttempted" : status(throwStage, completed(control));
+  const firstThrow = add(primaryPosition, "throw", throwStatus, target, receiver?.id, [field], {
+    sourceStage: coverage ? "shortstopFirstThrow" : resolution.reassessed ? "fallbackRelease" : "firstThrow",
+    errorCharged: resolution.error && completed(control) });
+  const received = coverage ? resolution.playerLeg?.receive : dp
+    ? (playerPosition === "SS" ? resolution.teammateLeg?.secondBaseReceive : resolution.teammateLeg?.shortstopReceive)
+    : resolution.teammateLeg?.catcherReceive || resolution.teammateLeg?.receiver;
+  const receiveStatus = throwStatus !== "completed" ? "notAttempted" : status(received);
+  const receive = add(receiverPosition, "receive", receiveStatus, target, null, [firstThrow], { sourceStage: "receiver" });
+  const retirements = resolution.runnerSettlement?.retirements || [];
+  const firstRetirement = retirements.find(r => r.targetBase === target);
+  const firstTargetRunner = firstRetirement?.runnerId || (target === "first" ? situation.batterId
+    : target === "second" ? situation.runners[0] : target === "third" ? situation.runners[1] : situation.runners[2]);
+  const tagged = routeId === "preventRunHome" || firstRetirement?.outType === "nonForceTag";
+  const terminal = add(receiverPosition, tagged ? "tag" : "baseTouch",
+    firstRetirement ? "completed" : receiveStatus === "completed" ? "late" : "notAttempted", target, null, [receive], {
+      runnerId: firstTargetRunner, sourceStage: tagged ? "tagCompletion" : "retirementBaseTouch" });
+  if (dp) {
+    const pivotStage = coverage ? resolution.playerLeg?.pivot
+      : playerPosition === "SS" ? resolution.teammateLeg?.secondBasePivot : resolution.teammateLeg?.shortstopPivot;
+    const secondThrowStage = coverage ? resolution.playerLeg?.secondThrow
+      : playerPosition === "SS" ? resolution.teammateLeg?.secondBaseSecondThrow : resolution.teammateLeg?.shortstopSecondThrow;
+    const pivot = add(receiverPosition, "pivot", firstRetirement ? status(pivotStage) : "notAttempted", "first", null, [terminal]);
+    const firstBase = TeamRosterFoundation.getCurrentDefender(roster, "1B");
+    const secondThrow = add(receiverPosition, "throw", firstRetirement ? status(secondThrowStage, completed(pivotStage)) : "notAttempted",
+      "first", firstBase?.id, [pivot], { sourceStage: "secondThrow" });
+    const firstReceive = add("1B", "receive", completed(secondThrowStage) && firstRetirement
+      ? status(resolution.teammateLeg?.firstBaseReceive) : "notAttempted", "first", null, [secondThrow], { sourceStage: "firstBaseReceive" });
+    const secondRetirement = retirements.find(r => r.targetBase === "first");
+    add("1B", "baseTouch", secondRetirement ? "completed" : "notAttempted", "first", null, [firstReceive], {
+      runnerId: situation.batterId, sourceStage: "secondRetirementBaseTouch" });
+  }
+  const actionFacts = DefensiveDecisionThrowFoundation.createActionFacts({ playIdentity, physicalIdentity,
+    sourceAuthority: physicalIdentity ? "physicalInfieldExecution" : "declaredLegacyInfieldScenario", actions });
+  return Object.freeze({ ...resolution, executionSample: sample, actionFacts });
+}
+
+function getHighSchoolInfieldFinalFacts(match, situation, resolution) {
+  if (!resolution.actionFacts || typeof DefensiveDecisionThrowFoundation === "undefined") return {};
+  const actionFacts = resolution.actionFacts;
+  const defensiveAttribution = DefensiveDecisionThrowFoundation.projectDefensiveAttribution(actionFacts, resolution.runnerSettlement.retirements);
+  const lifecycle = match.activeSituation;
+  const stage = match.groundBallInPlayState?.decisionThrowState;
+  return { actionFacts, defensiveAttribution, playerPosition: situation.playerPosition,
+    physicalIdentity: actionFacts.physicalIdentity, situationId: lifecycle?.situationId || null,
+    momentId: match.currentMomentId, decisionIdentity: stage?.selection?.identity || `${actionFacts.playIdentity}|decision|${resolution.initialRoute}`,
+    decisionProvenance: lifecycle?.decision || { decidedBy: resolution.eventClassification === "playerRoutinePlay" ? "system" : "player",
+      sourceAuthority: actionFacts.sourceAuthority },
+    contextSnapshot: lifecycle?.contextSnapshot || null, availableOptions: lifecycle?.legalRoutes || situation.legalChoices,
+    executionFactsIdentity: actionFacts.identity, settlementFactsIdentity: defensiveAttribution.identity };
+}
+
 function buildHighSchoolShortstopExecution(match, situation, choice, sample) {
   const handoff = match.groundBallInPlayState;
   if (!Number.isFinite(sample) || sample < 0 || sample >= 1) throw new Error("Invalid SS execution sample");
@@ -11100,7 +11241,7 @@ function buildHighSchoolShortstopExecution(match, situation, choice, sample) {
   });
   return { sample, choice: { routeId: choice.routeId, matchDecision: choice.matchDecision }, secureResolution,
     decisionThrowState,
-    runnerThrowTiming, resolution };
+    runnerThrowTiming, resolution: attachHighSchoolInfieldActionFacts(match, situation, choice, resolution, sample) };
 }
 
 function getHighSchoolControlledDecisionInput(match, state = match?.groundBallInPlayState) {
@@ -11131,6 +11272,12 @@ function validateHighSchoolDecisionThrowState(match) {
     const choice = getInfieldDecisionChoice(match.defensiveSituation, match, stored.choice.matchDecision);
     if (!choice || choice.routeId !== stored.choice.routeId) throw new Error("Stale SS legal route");
     const fresh = buildHighSchoolShortstopExecution(match, match.defensiveSituation, choice, stored.sample);
+    if (!stored.resolution.actionFacts) {
+      // New facts are optional for historical executed saves. Validate every
+      // pre-existing SS fact against reconstruction without rewriting the source.
+      const { actionFacts, executionSample, ...historicalResolution } = fresh.resolution;
+      fresh.resolution = historicalResolution;
+    }
     if (JSON.stringify(fresh) !== JSON.stringify(stored)
       || JSON.stringify(state.secureResolution) !== JSON.stringify(fresh.secureResolution)
       || JSON.stringify(state.decisionThrowState) !== JSON.stringify(fresh.decisionThrowState)
@@ -11138,6 +11285,20 @@ function validateHighSchoolDecisionThrowState(match) {
     return;
   }
   DefensiveDecisionThrowFoundation.validateStoredStage(state.decisionThrowState, getHighSchoolControlledDecisionInput(match, state));
+  const evidence = match.activeSituation?.resolution?.executionEvidence;
+  // Historical stages without the new contract retain their existing admission.
+  if (evidence?.actionFacts) {
+    if (!Number.isFinite(evidence.executionSample) || evidence.executionSample < 0 || evidence.executionSample >= 1) throw new Error("Invalid 2B execution sample");
+    const routeId = match.activeSituation.decision?.selectedRoute || state.decisionThrowState.preControlIntent;
+    const choice = generateInfieldLegalChoices(match.defensiveSituation, match).find(c => c.routeId === routeId);
+    if (!choice) throw new Error("Stale 2B execution route");
+    const raw = choice.routeId === "coverSecondFor643" ? resolveSecondBaseCoverage643(match.defensiveSituation, choice, evidence.executionSample)
+      : resolveSecondBaseInitiatedRoute(match.defensiveSituation, choice, evidence.executionSample, match);
+    const fresh = attachHighSchoolInfieldActionFacts(match, match.defensiveSituation, choice, raw, evidence.executionSample);
+    if (JSON.stringify(fresh.actionFacts) !== JSON.stringify(evidence.actionFacts)
+      || JSON.stringify(fresh.receiverResolution) !== JSON.stringify(evidence.receiverResolution)
+      || fresh.outsCreated !== evidence.outsCreated || fresh.resultCode !== evidence.resultCode) throw new Error("Stale 2B receiver / action facts");
+  }
   if (state.runnerThrowTiming && typeof DefensiveRunnerThrowSettlementFoundation !== "undefined") {
     DefensiveRunnerThrowSettlementFoundation.validateProjectedTiming(state.runnerThrowTiming, state.decisionThrowState, state.runnerPhysicalStates,
       match.activeSituation?.resolution?.executionEvidence);
@@ -11332,12 +11493,13 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
       physicalTruth: groundBallContext.physicalTruth,
       defenseOutcome: { ...BattedBallGroundDefense.derivePACompatibilityResult(groundBallPhysicalOutcome), settled: true }
     }) : null;
-  const batterResult = match.groundBallInPlayState?.shortstopExecution && resolution.error ? "error"
+  const batterResult = resolution.error ? "error"
     : paCompatibilityResult?.result || (resolution.outsCreated > 0 ? "out" : "single");
   const appliedResolution = {
     ...provisionalResolution,
     groundBallPhysicalOutcome,
-    paCompatibilityResult
+    paCompatibilityResult,
+    ...getHighSchoolInfieldFinalFacts(match, situation, resolution)
   };
   const paEvent = recordHighSchoolMeaningfulPlateAppearance(match, situation.batterId, batterResult, situationBefore, situationAfter, thirdOutResolution.legalScoringRunnerIds.length, appliedResolution);
   if (paCompatibilityResult) Object.assign(paEvent, { physicalOutcomeFlow: "physicalTruthToOfficialOutcome", officialBallInPlayOutcome: JSON.parse(JSON.stringify(paCompatibilityResult)) });
@@ -11347,7 +11509,8 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
     scoringRunnerIds: thirdOutResolution.legalScoringRunnerIds,
     thirdOutResolution,
     resultCode: resolution.resultCode,
-    error: resolution.error
+    error: resolution.error,
+    defensiveFacts: getHighSchoolInfieldFinalFacts(match, situation, resolution)
   });
   match.lastDefensiveResolution = JSON.parse(JSON.stringify(appliedResolution));
   if (match.buntBallInPlayState && situation.buntDefensiveContext) {
@@ -11376,6 +11539,7 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
   densityState.lastSelectedRoute = resolution.initialRoute || resolution.routeId || decision || "";
   densityState.lastFinalRoute = resolution.activeRoute || resolution.routeId || resolution.route || "";
   Object.assign(match.completedMoments.at(-1), {
+    ...getHighSchoolInfieldFinalFacts(match, situation, resolution),
     positionDecisionFamily: "infield",
     playerPosition: situation.playerPosition,
     route: resolution.route,
@@ -11414,6 +11578,7 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
   });
   recordHighSchoolMatchSimulationEvent(match, {
     type: "defensiveResolution", presentationImportance: "hidden", inning: match.inning, half: match.half,
+    ...getHighSchoolInfieldFinalFacts(match, situation, resolution),
     ...(match.groundBallInPlayState?.shortstopExecution ? { playerPosition: situation.playerPosition,
       situationId: match.activeSituation?.situationId, decisionIdentity: match.groundBallInPlayState.decisionThrowState.selection?.identity
         || `${match.activeSituation?.situationId}|decision|${resolution.initialRoute}`,
@@ -11486,7 +11651,8 @@ function applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution) {
     : resolution.outsCreated > 0 ? "out" : "single";
   const appliedResolution = { ...resolution, runnerChanges, runnersAfter: thirdOutResolution.basesAfter,
     scoringRunnerIds: thirdOutResolution.legalScoringRunnerIds,
-    runsAllowed: thirdOutResolution.legalScoringRunnerIds.length, thirdOutResolution };
+    runsAllowed: thirdOutResolution.legalScoringRunnerIds.length, thirdOutResolution,
+    ...getHighSchoolInfieldFinalFacts(match, situation, resolution) };
   recordHighSchoolRoutinePlateAppearance(
     match,
     situation.batterId,
@@ -11507,6 +11673,7 @@ function applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution) {
       : formatHighSchoolMatchWorldState(match, "你完成例行處理。" );
   const event = recordHighSchoolMatchSimulationEvent(match, {
     type: "playerRoutinePlay",
+    ...getHighSchoolInfieldFinalFacts(match, situation, resolution),
     eventClassification: "playerRoutinePlay",
     decisionTension: resolution.decisionTension,
     presentationImportance: "attention",
@@ -12252,7 +12419,7 @@ function prepareHighSchoolMeaningfulOffensiveMomentFromSimulation(match, classif
 }
 
 function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
-  if (getHighSchoolInfieldAssignmentPosition(match, player) === "游擊手" && match.activeSituation
+  if (match.activeSituation
     && !MatchSituationLifecycle.canResumeSimulation(match.activeSituation)) return null;
   const opportunity = findHighSchoolMatchOpportunity(match, options.opportunityTraceId);
   const densityState = ensureHighSchoolMatchDecisionDensityState(match);
@@ -12357,24 +12524,28 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
     finalizeHighSchoolMatchDefensiveOpportunity(match, opportunity, catchEvent, "routine-fly-ball-catch");
     return catchEvent;
   }
-  if (getHighSchoolInfieldAssignmentPosition(match, player) === "游擊手" && groundBallHandoff && !groundBallHandoff.supported) {
-    // An actual ball outside SS responsibility stays an ordinary PA. Never replace
-    // its physical direction with a synthetic SS grounder to manufacture agency.
+  if (groundBallHandoff && !groundBallHandoff.supported
+    && isInfieldDecisionFamilyPosition(match.developmentPositionOverride || match.playerFieldingAssignment || match.position)) {
+    // Preserve this PA's physical source for every assignment. Unsupported contact
+    // cannot acquire a synthetic player primary merely by entering the infield family.
     const result = groundBallHandoff.legacyFallbackResult;
     const before = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
     const facts = applyHighSchoolSimulatedPlateAppearance(match, result, match.currentBatter, match.offenseTeam);
     const after = { inning: match.inning, half: match.half, outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };
     const event = recordHighSchoolRoutinePlateAppearance(match, match.currentBatter, result, before, after,
       Math.max(0, after.scores[match.offenseTeam] - before.scores[match.offenseTeam]), {
-        ...facts, physicalTruth: groundBallHandoff.physicalTruth, outcomeAuthority: "existingOrdinaryPhysicalOutcome",
+        ...facts, physicalTruth: groundBallHandoff.physicalTruth, defensiveOpportunity: groundBallHandoff.defensiveOpportunity,
+        outcomeAuthority: "existingOrdinaryPhysicalOutcome",
         eventClassification: "ordinaryPlay" });
     advanceHighSchoolMatchBattingOrder(match, match.offenseTeam);
     match.ordinaryDefensivePlateAppearanceState = OffensivePlateApproach.markResultApplied(match.ordinaryDefensivePlateAppearanceState);
     Object.assign(match, { momentIndex: flowState.momentIndex, currentMomentId: flowState.currentMomentId,
       simulationPhase: flowState.simulationPhase, currentDomain: flowState.currentDomain, currentAssignment: flowState.currentAssignment,
-      pendingDefensiveResumeState: null, defensiveSituation: {}, positionDecisionFamily: "" });
-    assertHighSchoolMatchStateIntegrity(match, "ordinary-non-SS-ball");
-    finalizeHighSchoolMatchDefensiveOpportunity(match, opportunity, event, "outside-SS-ground-scope");
+      pendingDefensiveResumeState: null, defensiveSituation: {}, positionDecisionFamily: "",
+      playerEventClassification: "ordinaryPlay", decisionGate: null, decisionTension: "none" });
+    match.groundBallInPlayState = BattedBallGroundDefense.normalizeHandoff({ ...groundBallHandoff, settlementApplied: true });
+    assertHighSchoolMatchStateIntegrity(match, "ordinary-outside-player-physical-scope");
+    finalizeHighSchoolMatchDefensiveOpportunity(match, opportunity, event, "outside-player-physical-scope");
     return event;
   }
   if (buntHandoff) match.ballContext = JSON.parse(JSON.stringify(buntHandoff.ballContext));

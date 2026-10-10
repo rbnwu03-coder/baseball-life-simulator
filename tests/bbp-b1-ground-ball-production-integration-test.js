@@ -95,11 +95,13 @@ const aggressive = JSON.parse(evaluate(`(() => {
 verify("K. Tight lead window 的 aggressive quality 不隨失敗 outcome 改寫", aggressive.choice === "aggressive" && aggressive.resolution === "aggressive" && aggressive.outs === 0);
 
 const unsupported = JSON.parse(evaluate(`(() => {const x=__bbpB1Prepare(99104,.05,.1,5);return JSON.stringify({handoff:x.m.groundBallInPlayState,pa:x.m.ordinaryDefensivePlateAppearanceState,ball:x.m.ballContext,situation:x.m.defensiveSituation});})()`));
-verify("13. Left-side ordinary ground ball 保留 BBP truth 但不強制 2B primary opportunity", unsupported.handoff.supported === false && unsupported.handoff.physicalTruth.direction === "leftSide" && unsupported.handoff.fallbackAuthority === "existingSyntheticDefensiveContext" && !unsupported.situation.groundBallDefensiveContext);
-verify("14. Unsupported scope 使用單一 legacy fallback result", unsupported.pa.result !== "groundBallDefensePending" && unsupported.handoff.legacyFallbackResult === unsupported.pa.result && !unsupported.handoff.settlementApplied);
+// Sprint 1 R1: unsupported physical contact now consumes its original ordinary PA.
+// Retaining a synthetic defensive context here would preserve the audited bug.
+verify("13. Left-side ordinary ground ball 保留原責任並不建立 synthetic 2B situation", unsupported.handoff.supported === false && unsupported.handoff.physicalTruth.direction === "leftSide" && unsupported.handoff.fallbackAuthority === "existingOrdinaryPhysicalOutcome" && Object.keys(unsupported.situation).length === 0);
+verify("14. Unsupported scope 已由原始普通 PA 一次結算", unsupported.pa.result !== "groundBallDefensePending" && unsupported.handoff.legacyFallbackResult === unsupported.pa.result && unsupported.handoff.settlementApplied && unsupported.pa.resultApplied);
 
 const airborne = JSON.parse(evaluate(`(() => {const x=__bbpB1Prepare(99105,.9,.95,5);return JSON.stringify({handoff:x.m.groundBallInPlayState,pa:x.m.ordinaryDefensivePlateAppearanceState});})()`));
-verify("15. Line drive / fly ball 維持 legacy fallback", airborne.handoff.supported === false && airborne.handoff.fallbackAuthority === "existingSyntheticDefensiveContext" && ["lineDrive","flyBall"].includes(airborne.handoff.physicalTruth.ballType) && airborne.pa.result !== "groundBallDefensePending");
+verify("15. Unsupported airborne contact 維持原始普通 PA", airborne.handoff.supported === false && airborne.handoff.fallbackAuthority === "existingOrdinaryPhysicalOutcome" && ["lineDrive","flyBall"].includes(airborne.handoff.physicalTruth.ballType) && airborne.pa.result !== "groundBallDefensePending" && airborne.handoff.settlementApplied);
 
 const saved = JSON.parse(evaluate(`(() => {
   const x=__bbpB1Prepare(99106,.9,.1,4),m=x.m;player.highSchoolMatch=m;

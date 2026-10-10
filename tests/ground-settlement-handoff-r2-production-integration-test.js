@@ -14,7 +14,7 @@ test('no zombie lifecycle at completion',()=>assert.equal(t.game.match.activeSit
 test('full-game PA batting PA and pitcher BF agree',()=>{assert.equal(t.check.pa,t.check.battingPA);assert.equal(t.check.pa,t.check.pitcherBF);});
 test('same seed deterministic full match',()=>assert.deepEqual(createHarness({observe:false}).play(22430361).match,t.game.match));
 test('repeated actual ground lifecycles exercised without leaking ownership',()=>{
-  const repeated=trajectory(22430119);assert.deepEqual(repeated.check.failures,[]);
+  const repeated=trajectory(22430124);assert.deepEqual(repeated.check.failures,[]);
   const applications=repeated.rows.filter(r=>['applyRoutineDefensiveResolutionToHighSchoolMatch','applyInfieldResolutionToHighSchoolMatch'].includes(r.name)&&r.before.active&&r.returned);
   assert(new Set(applications.map(r=>r.before.active)).size>1);
   assert(applications.every(r=>!r.after.active&&r.after.pa-r.before.pa===1));

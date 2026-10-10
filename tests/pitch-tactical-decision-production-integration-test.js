@@ -1,6 +1,7 @@
 'use strict';
 const assert = require('assert/strict'), fs = require('fs'), cp = require('child_process'), path = require('path');
 const { discover } = require('./match-m0-after-r2-admission-context.cjs');
+const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');
 const O = require('../pitch-observation-foundation'), S = require('../pitch-sequence-state-foundation');
 const I = require('../pitch-tactical-interpretation-foundation');
 const D = require('../pitch-tactical-decision-foundation'), T = require('../pitcher-catcher-tactical-integration');
@@ -158,12 +159,13 @@ test('7 finished persisted copies rebuild identically without a new save authori
     assert(!JSON.stringify(run.match).includes(S.VERSION)); assert(!Object.hasOwn(run.match, 'pitchSequenceState'));
   }
 });
-test('8 source guards permit only the exact canonical repeat eligibility extraction', () => {
+test('8 protected pitch sources retain scoped script freeze and exact repeat eligibility extraction', () => {
   const root = path.resolve(__dirname, '..');
   for (const file of ['pitch-tactical-interpretation-foundation.js', 'pitch-sequence-state-foundation.js', 'pitch-observation-foundation.js', 'offensive-plate-approach.js', 'pitcher-catcher-tactical-integration.js', 'pitch-sequencing.js', 'save.js', 'script.js']) {
     const current = fs.readFileSync(path.join(root, file), 'utf8').replace(/\r\n?/g, '\n');
     const baseline = cp.execFileSync('git', ['show', 'ac53bf61964bde4b40501c77e15269bae99b55cc:' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\r\n?/g, '\n');
     if (file === 'pitcher-catcher-tactical-integration.js') require('./pitch-tactical-selector-extraction-baseline.cjs').assertOnlyRepeatEligibilityExtraction(current, baseline);
+    else if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);
     else assert.equal(current, baseline, file);
   }
 });

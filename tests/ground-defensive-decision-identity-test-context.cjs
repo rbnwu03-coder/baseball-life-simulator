@@ -1,7 +1,10 @@
 const assert = require('assert/strict');
 const { createHarness, inspectGame } = require('./match-authority-coverage-audit.cjs');
 
-function trajectory(seed = 22430002, { observe = false, route = null, stale = false } = {}) {
+// Bounded source-only search after R1 admission repair: two real 2B ground
+// lifecycles, with secure/challenge/lead on the second. No in-game overrides.
+const REPEATED_PHYSICAL_SEED = 22430124;
+function trajectory(seed = REPEATED_PHYSICAL_SEED, { observe = false, route = null, stale = false } = {}) {
   const h = createHarness({ observe });
   h.context.r1Route = route;
   h.context.r1Stale = stale;
@@ -50,4 +53,4 @@ function assertComplete(t) {
   assert.equal(new Set(t.moments.map(m => m.id)).size, t.moments.length);
   assert(t.duplicates.every(x => !x.accepted && x.unchanged));
 }
-module.exports = { trajectory, assertComplete };
+module.exports = { trajectory, assertComplete, REPEATED_PHYSICAL_SEED };

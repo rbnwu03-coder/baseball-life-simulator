@@ -2,6 +2,7 @@
 const assert = require('assert/strict'), fs = require('fs'), cp = require('child_process'), path = require('path');
 const { discover } = require('./match-m0-after-r2-admission-context.cjs');
 const { BASELINE, assertOnlyRepeatEligibilityExtraction } = require('./pitch-tactical-selector-extraction-baseline.cjs');
+const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');
 const O = require('../pitch-observation-foundation'), S = require('../pitch-sequence-state-foundation');
 const I = require('../pitch-tactical-interpretation-foundation'), D = require('../pitch-tactical-decision-foundation');
 const A = require('../pitch-tactical-decision-production-adapter'), T = require('../pitcher-catcher-tactical-integration');
@@ -171,13 +172,14 @@ function main() {
       assert.equal(A.adapt(decision, null).supported, false); assert.equal(A.adapt(decision, null).reason, 'UNSUPPORTED_DECISION');
     }
   });
-  test('8 all production sources remain baseline-identical except the exact canonical helper extraction', () => {
+  test('8 protected pitch production source remains frozen with exact helper extraction and bounded defensive projections', () => {
     const root = path.resolve(__dirname, '..');
     for (const file of ['pitch-tactical-decision-foundation.js', 'pitch-tactical-interpretation-foundation.js', 'pitch-sequence-state-foundation.js',
       'pitch-observation-foundation.js', 'offensive-plate-approach.js', 'pitcher-catcher-tactical-integration.js', 'pitch-sequencing.js', 'save.js', 'script.js']) {
       const current = fs.readFileSync(path.join(root, file), 'utf8').replace(/\r\n?/g, '\n');
       const baseline = cp.execFileSync('git', ['show', BASELINE + ':' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\r\n?/g, '\n');
       if (file === 'pitcher-catcher-tactical-integration.js') assertOnlyRepeatEligibilityExtraction(current, baseline);
+      else if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);
       else assert.equal(current, baseline, file);
     }
   });
