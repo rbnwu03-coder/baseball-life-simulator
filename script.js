@@ -4953,8 +4953,17 @@ function getHighSchoolBuntDefensiveSituationOverrides(handoff) {
 
 function getHighSchoolDefensiveOpportunity(match, physicalTruth) {
   if (typeof DefensiveOpportunityFoundation === "undefined") return null;
+  const prior = match?.groundBallInPlayState;
+  const samePhysical = prior?.physicalTruth?.identity === physicalTruth?.identity;
+  const historical = samePhysical && (prior?.defensiveOpportunity || (prior?.defensiveAccess?.reachResolution
+    ? { topologyVersion: "regulation-coarse-zones-v1" } : null));
+  const responsibility = DefensiveOpportunityFoundation.deriveGroundResponsibility?.(physicalTruth);
+  // The classifier is shared by player and NPC assignments. Unchanged SS/2B
+  // lanes keep their existing execution identities; saved lanes retain their version.
+  const topologyVersion = historical ? historical.topologyVersion
+    : responsibility?.primaryPosition === "3B" ? DefensiveOpportunityFoundation.GROUND_TOPOLOGY_VERSION : undefined;
   return DefensiveOpportunityFoundation.resolveDefensiveOpportunity({
-    physicalTruth, activeRoster: match?.rosters?.[match.defenseTeam]
+    physicalTruth, activeRoster: match?.rosters?.[match.defenseTeam], topologyVersion
   });
 }
 
@@ -4988,8 +4997,8 @@ function getHighSchoolPhysicalDefensePlayerContext(match, physicalTruth, defende
   if (!opportunity) return defenderContext; // Pre-foundation isolated harness compatibility.
   if (opportunity.bindingStatus === "invalid") throw new Error("Active defense integrity failed: defensive opportunity binding");
   const ownsGroundSlice = opportunity.supported && opportunity.primaryDefenderId === "player"
-    && (opportunity.primaryPosition === "2B" || (opportunity.primaryPosition === "SS" && physicalTruth.ballType === "groundBall"));
-  return { ...defenderContext, playerPosition: ownsGroundSlice ? (opportunity.primaryPosition === "SS" ? "游擊手" : "二壘手") : "",
+    && (opportunity.primaryPosition === "2B" || (["SS", "3B"].includes(opportunity.primaryPosition) && physicalTruth.ballType === "groundBall"));
+  return { ...defenderContext, playerPosition: ownsGroundSlice ? TeamRosterFoundation.POSITION_LABELS[opportunity.primaryPosition] : "",
     defensiveOpportunity: opportunity,
     ...(ownsGroundSlice ? { reachAccess: getHighSchoolReachAccess(match, physicalTruth, opportunity, defenderContext) } : {}) };
 }
@@ -7455,6 +7464,16 @@ function getInfieldChoiceTradeoff(situation, route) {
 
 function getInfieldChoiceCommitment(situation, route) {
   const position = situation.playerPosition;
+  if (position === "三壘手" && situation.groundBallDefensiveContext?.supported) {
+    const definition = {
+      secureFirst: ["secureFirstBaseOut", "throwFirst", "first", "5-3", ["1B"]],
+      doublePlay: ["initiate543", "throwSecond", "secondThenFirst", "5-4-3", ["2B", "1B"]],
+      forceThird: ["stepThird", "baseTouch", "third", "5U", []],
+      controlledNoThrow: ["holdBall", "holdBall", "none", "controlledHold", []]
+    }[route];
+    if (definition) return Object.freeze({ id: definition[0], action: definition[1], targetBase: definition[2],
+      route: definition[3], teammateChain: definition[4], playerRole: "initiator", infieldRoute: route, executionOnly: false });
+  }
   if (position === "游擊手" && situation.groundBallDefensiveContext?.supported) {
     const definition = {
       secureFirst: ["secureFirstBaseOut", "throwFirst", "first", "6-3", ["1B"]],
@@ -7587,12 +7606,13 @@ function generateInfieldLegalChoices(situation, matchState = null) {
   if (position === "游擊手" && situation.groundBallDefensiveContext?.supported && force.forceAtSecond) {
     choices.push(make("傳二壘封殺一壘跑者，先完成一個出局", "forceSecond", "forceSecond"));
   }
-  if (force.forceAtHome) {
+  if (force.forceAtHome && !(position === "三壘手" && situation.groundBallDefensiveContext?.supported)) {
     const homeText = position === "一壘手" ? "收球後傳本壘完成封殺，再由捕手控制後方跑者"
       : position === "三壘手" ? "向前收球後傳本壘，完成最短的得分封殺"
         : "接球後直接傳本壘完成封殺，阻止三壘跑者得分";
     choices.push(make(homeText, "home", "forceHome"));
   } else if (force.third && ["游擊手", "三壘手", "二壘手"].includes(position) && situation.ballDepth !== "deep"
+    && !(position === "三壘手" && situation.groundBallDefensiveContext?.supported)
     && hasHighSchoolHomePlay(situation)) {
     choices.push(make("接球後傳本壘，挑戰正要得分的三壘跑者", "home", "tagHome"));
   }
@@ -7937,7 +7957,7 @@ function getDefensiveCoachFeedback(explanation = {}, resolution = {}) {
 
 function createDefensiveOutcomeExplanation(situation, choice, resolution) {
   if (!situation || !choice || !resolution || !choice.routeId
-    || (situation.playerPosition !== "二壘手" && !(situation.playerPosition === "游擊手" && situation.groundBallDefensiveContext?.supported))) return null;
+    || (situation.playerPosition !== "二壘手" && !(["游擊手", "三壘手"].includes(situation.playerPosition) && situation.groundBallDefensiveContext?.supported))) return null;
   const presentation = presentInfieldDecision(situation, resolution, choice.matchDecision || "");
   const responsibleActor = getDefensiveExplainabilityActor(resolution);
   const primaryCause = getDefensiveExplainabilityCauseCategory(resolution.primaryCause, resolution);
@@ -8256,6 +8276,21 @@ function resolveSecondBaseCoverage643(situation, choice, sample) {
 function resolveInfieldDecision(situation, decision, matchState, randomSource = Math.random) {
   const choice = getInfieldDecisionChoice(situation, matchState, decision);
   if (!choice) return null;
+  if (situation.playerPosition === "三壘手" && situation.groundBallDefensiveContext?.supported) {
+    const stored = matchState.groundBallInPlayState?.thirdBaseExecution;
+    if (stored) {
+      validateHighSchoolDecisionThrowState(matchState);
+      if (stored.choice.routeId !== choice.routeId) throw new Error("Stale 3B decision after execution");
+      return stored.resolution;
+    }
+    const raw = typeof randomSource === "function" ? Number(randomSource()) : Number(randomSource);
+    const sample = Number.isFinite(raw) ? Math.max(0, Math.min(.999999, raw)) : .5;
+    const execution = buildHighSchoolThirdBaseExecution(matchState, situation, choice, sample);
+    matchState.groundBallInPlayState = BattedBallGroundDefense.normalizeHandoff({ ...matchState.groundBallInPlayState,
+      secureResolution: execution.secureResolution, decisionThrowState: execution.decisionThrowState,
+      runnerThrowTiming: execution.runnerThrowTiming, thirdBaseExecution: execution });
+    return execution.resolution;
+  }
   if (situation.playerPosition === "游擊手" && situation.groundBallDefensiveContext?.supported) {
     if (matchState.groundBallInPlayState?.shortstopExecution) {
       validateHighSchoolDecisionThrowState(matchState);
@@ -11063,6 +11098,8 @@ function beginAutomaticGroundBallSituationExecution(match) {
 // SS integrates existing physical and rule owners. This adapter never mutates bases,
 // outs, score, batting order, or the lifecycle; those remain settlement authority.
 function attachHighSchoolInfieldActionFacts(match, situation, choice, resolution, sample) {
+  if (situation.playerPosition === "三壘手" && situation.groundBallDefensiveContext?.supported)
+    return attachHighSchoolThirdBaseActionFacts(match, situation, choice, resolution, sample);
   if (typeof DefensiveDecisionThrowFoundation === "undefined" || typeof TeamRosterFoundation === "undefined"
     || !match?.rosters?.[match.defenseTeam]) return resolution; // Isolated historical scenario harnesses.
   const roster = match.rosters[match.defenseTeam], playerPosition = TeamRosterFoundation.normalizePosition(situation.playerPosition);
@@ -11147,12 +11184,189 @@ function getHighSchoolInfieldFinalFacts(match, situation, resolution) {
   const lifecycle = match.activeSituation;
   const stage = match.groundBallInPlayState?.decisionThrowState;
   return { actionFacts, defensiveAttribution, playerPosition: situation.playerPosition,
+    ...(resolution.thirdBaseEvidence ? { thirdBaseEvidence: resolution.thirdBaseEvidence,
+      runnersAfter: match.runners.slice(), orderedRetirements: resolution.runnerSettlement.retirements.map(r => ({ ...r })) } : {}),
     physicalIdentity: actionFacts.physicalIdentity, situationId: lifecycle?.situationId || null,
     momentId: match.currentMomentId, decisionIdentity: stage?.selection?.identity || `${actionFacts.playIdentity}|decision|${resolution.initialRoute}`,
     decisionProvenance: lifecycle?.decision || { decidedBy: resolution.eventClassification === "playerRoutinePlay" ? "system" : "player",
       sourceAuthority: actionFacts.sourceAuthority },
     contextSnapshot: lifecycle?.contextSnapshot || null, availableOptions: lifecycle?.legalRoutes || situation.legalChoices,
     executionFactsIdentity: actionFacts.identity, settlementFactsIdentity: defensiveAttribution.identity };
+}
+
+function attachHighSchoolThirdBaseActionFacts(match, situation, choice, resolution, sample) {
+  const roster = match.rosters[match.defenseTeam], actions = [], playIdentity = situation.runnerSettlementIdentity;
+  const physicalIdentity = situation.groundBallDefensiveContext.physicalTruth.identity;
+  const done = value => value === "completed";
+  const status = value => done(value) ? "completed" : ["notAttempted", "notReached"].includes(value) ? "notAttempted" : value === "late" ? "late" : "failed";
+  function add(position, type, state, targetBase, dependencies = [], extra = {}) {
+    const actor = TeamRosterFoundation.getCurrentDefender(roster, position);
+    if (!actor) throw new Error("Invalid 3B action actor");
+    const capabilities = actor.id === "player" ? situation.playerCapabilities : getDefensiveSimulationCapability(actor, actor.position, match);
+    actions.push({ actorId: actor.id, actorPosition: position, type, status: state, targetBase, dependsOn: dependencies,
+      responsibleActor: actor.id === "player" ? "player" : "teammate", provenance: {
+        authority: "canonicalThirdBaseExecution+activeRoster", sample, consumedRng: false,
+        capabilities: { ...capabilities }, timing: resolution.timingResolution }, ...extra });
+    return `${playIdentity}|action|${actions.length}`;
+  }
+  const field = add("3B", "field", status(resolution.playerLeg.control), null, [], {
+    errorCharged: resolution.error && !done(resolution.playerLeg.control) });
+  const retirements = resolution.runnerSettlement.retirements;
+  if (choice.action === "baseTouch") {
+    add("3B", "baseTouch", status(resolution.playerLeg.baseTouch), "third", [field], { runnerId: situation.runners[1] });
+  } else if (choice.action !== "holdBall") {
+    const dp = choice.infieldRoute === "doublePlay", receiverPosition = dp ? "2B" : "1B";
+    const target = dp ? "second" : "first", receiver = TeamRosterFoundation.getCurrentDefender(roster, receiverPosition);
+    const thrown = add("3B", "throw", status(resolution.playerLeg.firstThrow), target, [field], {
+      receiverId: receiver.id, errorCharged: resolution.error && done(resolution.playerLeg.control) });
+    const receive = add(receiverPosition, "receive", status(resolution.teammateLeg.receiver), target, [thrown], {
+      errorCharged: resolution.teammateLeg.receiver === "failed" && resolution.timingResolution.firstLeg.ballArrival?.quality === "onTarget" });
+    const firstOut = retirements.find(r => r.targetBase === target);
+    const terminal = add(receiverPosition, "baseTouch", firstOut ? "completed" : done(resolution.teammateLeg.receiver) ? "late" : "notAttempted",
+      target, [receive], { runnerId: dp ? situation.runners[0] : situation.batterId });
+    if (dp) {
+      const pivot = add("2B", "pivot", status(resolution.teammateLeg.secondBasePivot), "first", [terminal]);
+      const secondThrow = add("2B", "throw", status(resolution.teammateLeg.secondBaseSecondThrow), "first", [pivot], {
+        receiverId: TeamRosterFoundation.getCurrentDefender(roster, "1B").id,
+        errorCharged: resolution.teammateLeg.secondBaseSecondThrow === "failed" && resolution.timingResolution.secondLeg.accuracyMargin < 0 });
+      const firstReceive = add("1B", "receive", status(resolution.teammateLeg.firstBaseReceive), "first", [secondThrow], {
+        errorCharged: resolution.teammateLeg.firstBaseReceive === "failed" && resolution.timingResolution.secondLeg.accuracyMargin >= 1 });
+      add("1B", "baseTouch", retirements.some(r => r.targetBase === "first") ? "completed" : "notAttempted", "first", [firstReceive], { runnerId: situation.batterId });
+    }
+  }
+  return Object.freeze({ ...resolution, executionSample: sample, actionFacts: DefensiveDecisionThrowFoundation.createActionFacts({
+    playIdentity, physicalIdentity, sourceAuthority: "canonicalThirdBaseGroundExecution", actions }) });
+}
+
+function buildHighSchoolThirdBaseExecution(match, situation, choice, sample) {
+  const handoff = match.groundBallInPlayState;
+  if (!Number.isFinite(sample) || sample < 0 || sample >= 1) throw new Error("Invalid 3B execution sample");
+  if (!handoff?.supported || situation.playerPosition !== "三壘手") throw new Error("Invalid 3B production context");
+  assertHighSchoolDetailedResponsibility(match, handoff.physicalTruth, "3B", "player");
+  const secureResolution = resolveHighSchoolCanonicalSecure(match, handoff, sample);
+  const input = getHighSchoolControlledDecisionInput(match, { ...handoff, secureResolution });
+  const opportunity = DefensiveDecisionThrowFoundation.buildDecisionOpportunity(input);
+  const controlled = opportunity.status === "controlledDecision", hold = choice.action === "holdBall", self = choice.action === "baseTouch";
+  const selection = controlled ? DefensiveDecisionThrowFoundation.selectDefensiveRoute(opportunity, choice.routeId, input) : null;
+  const thrown = selection && !self ? DefensiveDecisionThrowFoundation.resolveThrow({ input, opportunity, selection,
+    capabilities: { defenderId: "player", arm: situation.playerCapabilities.arm, throwing: situation.playerCapabilities.throwing },
+    rolls: { strength: sample, accuracy: sample }, transferState: secureResolution.secureQuality === "bobbleButControlled" ? "delayed" : "ready" }) : null;
+  const baseTouchResolution = selection && self ? DefensiveDecisionThrowFoundation.resolveBaseTouch({ input, opportunity, selection }) : null;
+  const swing = (sample - .5) * 4;
+  const receiver = selection && !self && !hold ? TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam], selection.route.receiverPosition) : null;
+  const receiverCapabilities = receiver ? getDefensiveSimulationCapability(receiver, receiver.position, match) : {};
+  const receiverReady = Boolean(receiver && Number(receiverCapabilities.fielding ?? 5) + swing >= 3.2 + (thrown?.throwQuality === "challengingReceive" ? 1 : 0));
+  const delivery = Boolean(thrown?.throwAttempted && thrown.throwQuality !== "offline");
+  input.receiverState = { receiverId: receiver?.id || null, ready: receiverReady, atBase: true, tagAvailable: false, tagDelay: 1 };
+  const decisionThrowState = { opportunity, preControlIntent: choice.routeId, selection, activeSelection: selection, throwResolution: thrown,
+    baseTouchResolution };
+  let runnerThrowTiming = DefensiveRunnerThrowSettlementFoundation.projectExistingTiming({ stage: decisionThrowState,
+    runnerState: null, windowState: "expired", receiverFact: "unavailable" });
+  let firstLegSettlement = null;
+  if (selection) {
+    const runnerState = input.runnerPhysicalStates.find(r => r.runnerId === selection.route.targetRunnerId);
+    if (self) runnerThrowTiming = DefensiveRunnerThrowSettlementFoundation.resolveBaseTouchTiming({ input, opportunity, selection, baseTouchResolution, runnerState });
+    else {
+      const args = { input, opportunity, selection, throwResolution: thrown, runnerState,
+        receiverState: input.receiverState, resolveThirdOut: resolveHighSchoolThirdOutIntegrity };
+      runnerThrowTiming = DefensiveRunnerThrowSettlementFoundation.resolveTiming(args);
+      firstLegSettlement = DefensiveRunnerThrowSettlementFoundation.deriveSettlement({ ...args, timing: runnerThrowTiming });
+    }
+  }
+  const firstOut = self ? runnerThrowTiming.contestAvailable && runnerThrowTiming.timingMargin > 0 : firstLegSettlement?.outRecorded === true;
+  const isDoublePlay = choice.infieldRoute === "doublePlay";
+  const pivot = isDoublePlay && firstOut && situation.outs < 2
+    && (Number(receiverCapabilities.fielding ?? 5) + Number(receiverCapabilities.reaction ?? 5)) / 2 + swing >= 4.2;
+  const relayStrengthMargin = Number(receiverCapabilities.arm ?? 5) - 5 + swing;
+  const relayAccuracyMargin = Number(receiverCapabilities.throwing ?? 5) - 4 + swing;
+  const secondThrow = pivot && relayStrengthMargin >= 0 && relayAccuracyMargin >= 0;
+  const firstBase = TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam], "1B");
+  const firstBaseCapabilities = getDefensiveSimulationCapability(firstBase, firstBase.position, match);
+  const firstBaseReceive = secondThrow && Number(firstBaseCapabilities.fielding ?? 5) + swing >= 3.2;
+  const batterState = input.runnerPhysicalStates.find(r => r.runnerId === situation.batterId);
+  const batterArrival = DefensiveRunnerThrowSettlementFoundation.deriveRunnerArrival(batterState).relativeArrival;
+  const relayCompletion = firstOut && isDoublePlay ? runnerThrowTiming.receiverCompletion.relativeCompletion + 1 + 3 : null;
+  const relayMargin = relayCompletion === null ? null : Math.round((batterArrival - relayCompletion) * 1000) / 1000;
+  const secondOut = isDoublePlay && firstOut && firstBaseReceive && relayMargin > 0;
+  const retirements = firstOut ? [{ runnerId: selection.route.targetRunnerId, targetBase: selection.route.targetBase,
+    outType: self || isDoublePlay ? "force" : "batterRunnerBeforeFirst", sequence: 1 }] : [];
+  if (secondOut) retirements.push({ runnerId: situation.batterId, targetBase: "first", outType: "batterRunnerBeforeFirst", sequence: 2 });
+  const runnerSettlement = ForceAdvancement.settleForceAdvancement({ forceChain: situation.forceChain, movementIntents: situation.movementIntents, retirements });
+  const error = secureResolution.attemptAvailable && !secureResolution.secured || thrown?.throwQuality === "offline";
+  const primaryCause = !secureResolution.secured ? "playerFieldingControl" : thrown?.throwQuality === "offline" ? "playerFirstThrow"
+    : !self && !hold && delivery && !receiverReady ? receiver?.position === "一壘手" || receiver?.position === "1B" ? "teammateFirstBaseReceive" : "teammatePivot"
+      : isDoublePlay && firstOut && !pivot ? "teammatePivot" : isDoublePlay && firstOut && !secondThrow ? "teammateSecondThrow"
+        : isDoublePlay && firstOut && !firstBaseReceive ? "teammateFirstBaseReceive"
+          : hold || firstOut && (!isDoublePlay || secondOut) ? "balancedExecution" : "timingWindow";
+  const playerLeg = { reach: handoff.defensiveAccess.reachResolution.reached ? "completed" : "late",
+    control: secureResolution.secured ? "completed" : secureResolution.attemptAvailable ? "failed" : "notAttempted",
+    transfer: controlled && !self && !hold ? thrown.releaseQuality === "delayedRelease" ? "delayed" : "completed" : "notAttempted",
+    firstThrow: thrown?.throwAttempted ? thrown.throwQuality === "offline" ? "failed" : "completed" : "notAttempted",
+    ...(self ? { baseTouch: firstOut ? "completed" : controlled ? "late" : "notAttempted" } : {}) };
+  const teammateLeg = { receiver: !delivery ? "notAttempted" : receiverReady ? "completed" : "failed",
+    ...(isDoublePlay ? { secondBaseReceive: !delivery ? "notAttempted" : receiverReady ? "completed" : "failed",
+      secondBasePivot: firstOut ? pivot ? "completed" : "failed" : "notAttempted",
+      secondBaseSecondThrow: pivot ? secondThrow ? "completed" : "failed" : "notAttempted",
+      firstBaseReceive: secondThrow ? firstBaseReceive ? "completed" : "failed" : "notAttempted" } : {}) };
+  const decisionQuality = choice.advisable === "strong" ? "strong" : choice.advisable === "aggressive" ? "aggressive" : choice.advisable === "conservative" ? "conservative" : "reasonable";
+  const timingResolution = { firstLeg: runnerThrowTiming, firstLegSettlement, baseTouch: baseTouchResolution,
+    secondLeg: isDoublePlay ? { receiverId: firstBase.id, throwerId: receiver?.id || null, pivotCompleted: pivot,
+      throwCompleted: secondThrow, receiveCompleted: firstBaseReceive, strengthMargin: relayStrengthMargin, accuracyMargin: relayAccuracyMargin,
+      batterArrival, relativeCompletion: relayCompletion, timingMargin: relayMargin, units: "coarseRelativeArrival", consumedRng: false } : null };
+  const thirdBaseEvidence = { version: "third-base-evidence-v1", physicalIdentity: handoff.physicalTruth.identity,
+    actorId: "player", actorPosition: "3B", actionType: self ? "baseTouch" : hold ? "hold" : "throw",
+    read: { quality: decisionQuality, reasons: ["physicalThirdBaseResponsibility", "canonicalLiveForceAndRoute"] },
+    playerLeg, teammateLeg, timing: timingResolution, groundResponsibility: handoff.defensiveOpportunity.groundResponsibility,
+    demand: { reach: handoff.defensiveAccess.reachResolution.ballDemand, secure: secureResolution.inputs, throw: thrown?.throwDemand || null, baseTouch: baseTouchResolution?.demand || null } };
+  const resultCode = secondOut ? "twoOuts" : firstOut ? "oneOut" : error ? "error" : "zeroOuts";
+  const resolution = attachDefensiveOutcomeExplanation(situation, choice, {
+    familyId: "infield", route: choice.infieldRoute, routeId: choice.routeId, initialRoute: choice.routeId, activeRoute: choice.routeId,
+    playerRole: "initiator", responsibility: situation.responsibility, resultCode,
+    detailedResult: secondOut ? "completedDoublePlay" : firstOut ? isDoublePlay ? "partialDoublePlay" : "cleanOut" : error ? secureResolution.secured ? "inaccurateThrow" : "fieldingError" : hold ? "controlledNoThrow" : "lateThrow",
+    tier: secondOut ? "strong" : firstOut || hold ? "mixed" : "failure", decisionQuality,
+    executionQuality: firstOut ? isDoublePlay && !secondOut ? "partial" : "complete" : error ? "misplay" : hold ? "controlled" : "late",
+    runnerSettlement, runnerSettlementIdentity: situation.runnerSettlementIdentity, outsCreated: runnerSettlement.outsCreated,
+    runnerChanges: runnerSettlement.runnerChanges, runnersAfter: runnerSettlement.runnersAfter,
+    scoringRunnerIds: runnerSettlement.scoringRunnerIds, runsAllowed: runnerSettlement.runsAllowed, error: Boolean(error),
+    primaryCause, secondaryCause: "", responsibleActor: primaryCause.startsWith("teammate") ? "teammate" : primaryCause === "timingWindow" ? "timingWindow" : "player",
+    playerResponsibility: error ? "major" : "handled", teammateResponsibility: primaryCause.startsWith("teammate") ? "major" : isDoublePlay ? "shared" : "none",
+    causeExplanation: primaryCause.startsWith("teammate") ? "玩家動作與隊友接球、轉傳分開記錄。" : primaryCause === "timingWindow" ? "跑者先到達目標壘，保留實際傳接與跑壘時序。" : "依實際控球與動作完成狀態結算。",
+    playerLeg, teammateLeg, timingResolution, thirdBaseEvidence,
+    firstLegState: { status: firstOut ? "completed" : "failed", targetBase: selection?.route.targetBase || null },
+    continuationState: { status: secondOut ? "completed" : firstOut && isDoublePlay ? "windowClosed" : "settledByActorOutcomes", targetBase: isDoublePlay ? "first" : null },
+    ballContext: situation.ballContext.type, ballDirection: situation.ballDirection, ballDepth: situation.ballDepth,
+    batterSpeed: situation.batterSpeed, runnerSpeed: Math.max(...situation.runnerSpeeds.filter(Number.isFinite), 0),
+    ...situation.playerCapabilities, firstStage: secureResolution.margin ?? 0, secondStage: thrown?.accuracyMargin ?? 0, returnTiming: 0, windows: situation.windows });
+  return { sample, choice: { routeId: choice.routeId, matchDecision: choice.matchDecision },
+    before: { inning: match.inning, half: match.half, outs: match.outs, runners: match.runners.slice(), scores: { ...match.scores }, currentBatter: match.currentBatter },
+    secureResolution, decisionThrowState, runnerThrowTiming,
+    resolution: attachHighSchoolThirdBaseActionFacts(match, situation, choice, resolution, sample) };
+}
+
+function validateHighSchoolThirdBaseExecution(match) {
+  const state = match.groundBallInPlayState, stored = state.thirdBaseExecution;
+  const settled = state.settlementApplied || state.playSettlement?.settlementApplied;
+  const offenseTeam = stored.before.half === "上" ? "away" : "home";
+  const context = settled ? { ...match, ...stored.before, offenseTeam, defenseTeam: offenseTeam === "away" ? "home" : "away",
+    groundBallInPlayState: { ...state, settlementApplied: false, playSettlement: null } } : match;
+  const choice = getInfieldDecisionChoice(context.defensiveSituation, context, stored.choice.matchDecision);
+  if (!choice || choice.routeId !== stored.choice.routeId) throw new Error("Stale 3B legal route");
+  const fresh = buildHighSchoolThirdBaseExecution(context, context.defensiveSituation, choice, stored.sample);
+  if (JSON.stringify(fresh) !== JSON.stringify(stored)
+    || JSON.stringify(state.secureResolution) !== JSON.stringify(fresh.secureResolution)
+    || JSON.stringify(state.decisionThrowState) !== JSON.stringify(fresh.decisionThrowState)
+    || JSON.stringify(state.runnerThrowTiming) !== JSON.stringify(fresh.runnerThrowTiming)) throw new Error("Stale 3B execution / action / timing facts");
+  const lifecycle = match.activeSituation;
+  if (!settled && lifecycle?.type === MatchSituationLifecycle.TYPES.groundBallDefensiveDecision) {
+    const selectedRoute = lifecycle.decision?.selectedRoute || lifecycle.executionState?.selectedRoute;
+    if ((selectedRoute || ["executing", "resolved"].includes(lifecycle.lifecycleState))
+      && selectedRoute !== stored.choice.routeId) throw new Error("Stale 3B lifecycle route");
+    if (lifecycle.lifecycleState === "resolved") {
+      const evidence = lifecycle.resolution?.executionEvidence;
+      if (!evidence || Object.entries(stored.resolution)
+        .some(([key, value]) => JSON.stringify(evidence[key]) !== JSON.stringify(value))) throw new Error("Stale 3B lifecycle execution facts");
+    }
+  }
 }
 
 function buildHighSchoolShortstopExecution(match, situation, choice, sample) {
@@ -11266,6 +11480,13 @@ function getHighSchoolControlledDefensiveRoutes(match) {
 
 function validateHighSchoolDecisionThrowState(match) {
   const state = match?.groundBallInPlayState;
+  if (state?.supported && state.defensiveAccess?.playerPosition === "三壘手" && !state.thirdBaseExecution
+    && (state.secureResolution || state.decisionThrowState || state.runnerThrowTiming
+      || match.activeSituation?.resolution?.executionEvidence?.thirdBaseEvidence)) throw new Error("Invalid incomplete 3B execution stages");
+  if (state?.thirdBaseExecution) {
+    validateHighSchoolThirdBaseExecution(match);
+    return;
+  }
   if (!state?.decisionThrowState || state.settlementApplied || typeof DefensiveDecisionThrowFoundation === "undefined") return;
   if (state.shortstopExecution) {
     const stored = state.shortstopExecution;
@@ -11327,6 +11548,8 @@ function recordGroundBallSituationResolution(match, resolution) {
     || situation.lifecycleState !== "executing") return situation;
   validateHighSchoolDecisionThrowState(match);
   const handoff = match.groundBallInPlayState;
+  if (handoff?.thirdBaseExecution && Object.entries(handoff.thirdBaseExecution.resolution)
+    .some(([key, value]) => JSON.stringify(resolution[key]) !== JSON.stringify(value))) throw new Error("Stale 3B settlement execution facts");
   if (handoff?.shortstopExecution && Object.entries(handoff.shortstopExecution.resolution)
     .some(([key, value]) => JSON.stringify(resolution[key]) !== JSON.stringify(value))) throw new Error("Stale SS settlement execution facts");
   if (handoff?.supported && !handoff.settlementApplied && !handoff.secureResolution
@@ -11486,6 +11709,9 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
     runsAllowed: thirdOutResolution.legalScoringRunnerIds.length,
     thirdOutResolution
   };
+  // Player error attribution stays separate from the team's official PA result.
+  const thirdBaseTeamError = resolution.thirdBaseEvidence && resolution.actionFacts.actions
+    .some(action => action.errorCharged === true && action.status === "failed");
   const groundBallPhysicalOutcome = groundBallContext && typeof BattedBallGroundDefense !== "undefined"
     ? BattedBallGroundDefense.settleGroundBallPhysicalOutcome(groundBallContext, provisionalResolution) : null;
   const paCompatibilityResult = groundBallPhysicalOutcome && typeof BattedBallGroundDefense !== "undefined"
@@ -11493,7 +11719,7 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
       physicalTruth: groundBallContext.physicalTruth,
       defenseOutcome: { ...BattedBallGroundDefense.derivePACompatibilityResult(groundBallPhysicalOutcome), settled: true }
     }) : null;
-  const batterResult = resolution.error ? "error"
+  const batterResult = resolution.error || thirdBaseTeamError ? "error"
     : paCompatibilityResult?.result || (resolution.outsCreated > 0 ? "out" : "single");
   const appliedResolution = {
     ...provisionalResolution,
@@ -11646,7 +11872,9 @@ function applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution) {
     scores: { ...match.scores },
     runners: match.runners.slice()
   };
-  const batterResult = resolution.error ? "error" : match.groundBallInPlayState?.shortstopExecution
+  const thirdBaseTeamError = resolution.thirdBaseEvidence && resolution.actionFacts.actions
+    .some(action => action.errorCharged === true && action.status === "failed");
+  const batterResult = resolution.error || thirdBaseTeamError ? "error" : (match.groundBallInPlayState?.shortstopExecution || match.groundBallInPlayState?.thirdBaseExecution)
     ? resolution.runnerSettlement.outRunnerIds.includes(situation.batterId) ? "out" : "single"
     : resolution.outsCreated > 0 ? "out" : "single";
   const appliedResolution = { ...resolution, runnerChanges, runnersAfter: thirdOutResolution.basesAfter,
@@ -12806,7 +13034,7 @@ function advanceHighSchoolMatchPlaybackStep(match = player.highSchoolMatch) {
   }
   const activeFieldingPosition = match.developmentPositionOverride || match.playerFieldingAssignment || match.currentFieldingPosition || match.position;
   const defensiveOpportunityPhase = target === "defense"
-    || (["二壘手", "游擊手"].includes(activeFieldingPosition) && ["finalOffense", "finish"].includes(target));
+    || (["二壘手", "游擊手", "三壘手"].includes(activeFieldingPosition) && ["finalOffense", "finish"].includes(target));
   const defensiveResponsibilityReached = defensiveOpportunityPhase && shouldReachHighSchoolDefensiveMoment(match);
   if (defensiveOpportunity) defensiveOpportunity.responsibilityCheck = defensiveResponsibilityReached;
   if (defensiveResponsibilityReached) {

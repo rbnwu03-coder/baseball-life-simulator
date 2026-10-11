@@ -3,10 +3,12 @@
     || (typeof module === "object" && module.exports && typeof require === "function" ? require("./offensive-bunt-defensive-handoff.js") : null);
   const forceAdvancement = root.ForceAdvancement
     || (typeof module === "object" && module.exports && typeof require === "function" ? require("./force-advancement.js") : null);
-  const api = factory(sharedRunner, forceAdvancement);
+  const opportunity = root.DefensiveOpportunityFoundation
+    || (typeof module === "object" && module.exports && typeof require === "function" ? require("./defensive-opportunity-foundation.js") : null);
+  const api = factory(sharedRunner, forceAdvancement, opportunity);
   root.BattedBallGroundDefense = api;
   if (typeof module === "object" && module.exports) module.exports = api;
-})(typeof globalThis !== "undefined" ? globalThis : this, function (SharedRunnerPhysical, ForceAdvancement) {
+})(typeof globalThis !== "undefined" ? globalThis : this, function (SharedRunnerPhysical, ForceAdvancement, Opportunity) {
   "use strict";
 
   const VERSION = "bbp-b1-ground-ball-defense-v1";
@@ -234,12 +236,25 @@
     const truth = input.physicalTruth || {};
     const defender = input.defenderContext || {};
     const shortstop = defender.playerPosition === "游擊手";
-    const directionSupported = shortstop ? ["leftSide", "middle"].includes(truth.direction) : truth.direction === "rightSide";
-    const positionSupported = shortstop || defender.playerPosition === "二壘手";
+    const thirdBase = defender.playerPosition === "三壘手";
+    const opportunity = defender.defensiveOpportunity;
+    const classified = Boolean(Opportunity && opportunity?.topologyVersion === Opportunity.GROUND_TOPOLOGY_VERSION);
+    const responsibility = classified ? Opportunity.deriveGroundResponsibility(truth) : null;
+    const playerPosition = shortstop ? "SS" : thirdBase ? "3B" : defender.playerPosition === "二壘手" ? "2B" : "";
+    const classificationMatches = responsibility && opportunity.supported
+      && opportunity.physicalIdentity === truth.identity
+      && JSON.stringify(opportunity.groundResponsibility) === JSON.stringify(responsibility)
+      && opportunity.primaryPosition === responsibility.primaryPosition;
+    const directionSupported = classified ? classificationMatches && responsibility.primaryPosition === playerPosition
+      : shortstop ? ["leftSide", "middle"].includes(truth.direction) : truth.direction === "rightSide";
+    const positionSupported = shortstop || defender.playerPosition === "二壘手" || thirdBase && classified;
+    const classificationFacts = classified && classificationMatches ? {
+      topologyVersion: opportunity.topologyVersion, groundResponsibility: clone(responsibility)
+    } : {};
     if (truth.ballType !== "groundBall" || !directionSupported || !positionSupported) {
       return deepFreeze({ playerPosition: defender.playerPosition || "", level: "unsupported", supported: false, score: 0, reason: truth.direction === "leftSide" ? "leftSideNoPlayerBallMagnet" : "unsupportedScope" });
     }
-    if (defender.reachAccess) return deepFreeze({ playerPosition: defender.playerPosition, ...clone(defender.reachAccess) });
+    if (defender.reachAccess) return deepFreeze({ playerPosition: defender.playerPosition, ...clone(defender.reachAccess), ...classificationFacts });
     const reaction = clamp(defender.reaction, 0, 20, 5);
     const range = clamp(defender.range, 0, 20, 5);
     const paceAdjustment = truth.pace === "hard" ? (reaction - 5) * 0.1
@@ -249,6 +264,7 @@
     const level = score >= 3 ? "favored" : score >= 2 ? "possible" : score >= 1 ? "poor" : "unsupported";
     return deepFreeze({
       playerPosition: defender.playerPosition,
+      ...classificationFacts,
       level,
       supported: level !== "unsupported",
       score: Math.round(score * 1000) / 1000,
@@ -266,8 +282,8 @@
       type,
       family: "groundBall",
       pace,
-      label: defensiveAccess?.playerPosition === "游擊手" ? "進入游擊守區的滾地球" : pace === "hard" ? "強勁的右半邊滾地球" : pace === "weak" ? "需要前壓的緩慢滾地球" : "往右半邊滾動的滾地球",
-      detail: defensiveAccess?.playerPosition === "游擊手" ? "依正式守位與來球方向確認處理責任，再比較跑者及傳球時間。" : pace === "hard" ? "球較早進入守區，但第一步反應壓力較高。" : pace === "weak" ? "球速偏慢，需要前壓並壓縮後續轉傳時間。" : "球進入二壘手一側的合理處理範圍。",
+      label: defensiveAccess?.playerPosition === "三壘手" ? "進入三壘線側守區的滾地球" : defensiveAccess?.playerPosition === "游擊手" ? "進入游擊守區的滾地球" : pace === "hard" ? "強勁的右半邊滾地球" : pace === "weak" ? "需要前壓的緩慢滾地球" : "往右半邊滾動的滾地球",
+      detail: defensiveAccess?.playerPosition === "三壘手" ? "依同一擊球的三壘側責任、到位與控球事實，比較長傳或自踩壘的合法窗口。" : defensiveAccess?.playerPosition === "游擊手" ? "依正式守位與來球方向確認處理責任，再比較跑者及傳球時間。" : pace === "hard" ? "球較早進入守區，但第一步反應壓力較高。" : pace === "weak" ? "球速偏慢，需要前壓並壓縮後續轉傳時間。" : "球進入二壘手一側的合理處理範圍。",
       timeWindow: pace === "hard" ? "reaction" : pace === "weak" ? "charge" : "balanced",
       ballDirection: physicalTruth?.direction || "",
       ballDepth: null,
@@ -276,7 +292,7 @@
       reactionPressure: pace === "hard" ? "high" : "normal",
       physicalTruth: clone(physicalTruth),
       defensiveAccess: clone(defensiveAccess),
-      downstreamSupport: defensiveAccess?.supported ? (defensiveAccess.playerPosition === "游擊手" ? "supportedSSOrdinaryGroundBall" : "supported2BOrdinaryGroundBall") : "legacyFallback"
+      downstreamSupport: defensiveAccess?.supported ? (defensiveAccess.playerPosition === "三壘手" ? "supported3BOrdinaryGroundBall" : defensiveAccess.playerPosition === "游擊手" ? "supportedSSOrdinaryGroundBall" : "supported2BOrdinaryGroundBall") : "legacyFallback"
     });
   }
   function buildGroundBallTimingWindows({ ballContext, runnerRealization } = {}) {
@@ -317,17 +333,22 @@
     const homeRunner = runnerRealization.existingRunners.find(state => state.originBase === 3
       && state.targetBase === "home" && ["advancing", "committed"].includes(state.movementState));
     const choices = defensiveAccess.supported ? ["secureFirstBaseOut"] : [];
+    const thirdBase = defensiveAccess.playerPosition === "三壘手";
     if (defensiveAccess.supported && forceState.forceAtSecond) {
       if (defensiveAccess.playerPosition === "游擊手") choices.push("forceSecond");
-      if (Number(input.outs) < 2) choices.push(defensiveAccess.playerPosition === "游擊手" ? "startDoublePlaySecond" : "initiate463");
+      if (Number(input.outs) < 2) choices.push(thirdBase ? "initiate543"
+        : defensiveAccess.playerPosition === "游擊手" ? "startDoublePlaySecond" : "initiate463");
     }
-    if (defensiveAccess.supported && forceState.forceAtHome && timingWindows.homeOutWindow.state !== "expired") choices.push("homeForceOut");
-    else if (defensiveAccess.supported && homeRunner && timingWindows.homeOutWindow.state !== "expired") choices.push("preventRunHome");
+    if (defensiveAccess.supported && thirdBase && forceState.forceAtThird) choices.push("stepThird");
+    if (!thirdBase && defensiveAccess.supported && forceState.forceAtHome && timingWindows.homeOutWindow.state !== "expired") choices.push("homeForceOut");
+    else if (!thirdBase && defensiveAccess.supported && homeRunner && timingWindows.homeOutWindow.state !== "expired") choices.push("preventRunHome");
     return deepFreeze({
       version: VERSION,
       identity: String(input.identity || "ordinary-ground-ball"),
       sourceAuthority: "BattedBallPhysicalTruth",
       physicalTruth: clone(physicalTruth),
+      ...(Opportunity && input.defenderContext?.defensiveOpportunity?.topologyVersion === Opportunity.GROUND_TOPOLOGY_VERSION
+        ? { defensiveOpportunity: clone(input.defenderContext.defensiveOpportunity) } : {}),
       forceChain,
       forceState,
       runnerRealization,

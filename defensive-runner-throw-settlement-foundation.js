@@ -11,6 +11,15 @@
   function freeze(value){if(!value||typeof value!=="object"||Object.isFrozen(value))return value;Object.values(value).forEach(freeze);return Object.freeze(value);}
   function fail(reason){throw new Error(`Defensive timing / settlement integrity failed: ${reason}`);}
   const classify=margin=>margin>0.5?"defenseClearlyAhead":margin< -0.5?"runnerClearlyAhead":"closePlay";
+  // One coarse runner-arrival contract for throws, self touches, and relay legs.
+  function deriveRunnerArrival(current){
+    if(!current||!Number.isFinite(current.speed)||!["preparedStart","normalStart","lateStart","brokenStart"].includes(current.startQuality))fail("missing runner arrival inputs");
+    const start={preparedStart:-1,normalStart:0,lateStart:1,brokenStart:2}[current.startQuality];
+    const progress={early:0,midway:1.5,late:3,nearArrival:4}[current.advancementProgress||"early"];
+    if(progress===undefined)fail("unknown runner progress");
+    return freeze({...clone(current),profile:Runner.deriveArrivalProfile(current.speed,current.startQuality),
+      relativeArrival:10-Math.max(0,Math.min(20,current.speed))*0.45+start-progress});
+  }
   function resolveTiming(args){
     const {input,opportunity,selection,throwResolution:thrown,runnerState,receiverState}=args;
     Decision.validateSelection(selection,opportunity,input);
@@ -31,12 +40,7 @@
     const forced=Force.getForcedMovement(opportunity.context.forceChain,current.runnerId);
     if(!forced&&!Decision.isAdvancingTo(current,thrown.targetBase))fail("runner not in contest");
     if(!receiverState||receiverState.receiverId!==thrown.receiverId||!same(receiverState,input.receiverState))fail("stale receiver completion");
-    if(!Number.isFinite(current.speed)||!["preparedStart","normalStart","lateStart","brokenStart"].includes(current.startQuality))fail("missing runner arrival inputs");
-    const profile=Runner.deriveArrivalProfile(current.speed,current.startQuality);
-    const start={preparedStart:-1,normalStart:0,lateStart:1,brokenStart:2}[current.startQuality];
-    const progress={early:0,midway:1.5,late:3,nearArrival:4}[current.advancementProgress||"early"];
-    if(progress===undefined)fail("unknown runner progress");
-    const runnerArrival={...clone(current),profile,relativeArrival:10-Math.max(0,Math.min(20,current.speed))*0.45+start-progress};
+    const runnerArrival=deriveRunnerArrival(current);
     const noContest=!thrown.throwAttempted||thrown.throwQuality==="offline"||receiverState.ready!==true;
     const receiveDelay=Number(receiverState.receiveDelay??0),tagDelay=Number(receiverState.tagDelay??1);
     if(!Number.isFinite(receiveDelay)||receiveDelay<0||!Number.isFinite(tagDelay)||tagDelay<0)fail("invalid receiver delay");
@@ -53,6 +57,23 @@
       ballArrival:{relativeArrival:ballTime,quality:thrown.throwQuality,releaseQuality:thrown.releaseQuality,distanceClass:thrown.throwDemand.distanceClass},
       receiverCompletion:{...clone(receiverState),status:thrown.throwQuality==="challengingReceive"?"challengedReceive":"readyReceive",
         relativeCompletion:completionTime,tagCompletion:completionTime+tagDelay},reason:"physicalArrivalComparison"});
+  }
+  function resolveBaseTouchTiming({input,opportunity,selection,baseTouchResolution,runnerState}){
+    const touch=Decision.resolveBaseTouch({input,opportunity,selection});
+    if(!same(touch,baseTouchResolution))fail("stale base-touch execution");
+    const current=(input.runnerPhysicalStates||[]).find(r=>r.runnerId===selection.route.targetRunnerId);
+    if(!current||!same(current,runnerState)||current.targetBase!=="third"
+      ||input.runners[Number(current.originBase)-1]!==current.runnerId)fail("stale base-touch runner");
+    const forced=Force.getForcedMovement(opportunity.context.forceChain,current.runnerId);
+    if(!forced||forced.targetBase!=="third")fail("non-force third-base touch");
+    const runnerArrival=deriveRunnerArrival(current);
+    const margin=Math.round((runnerArrival.relativeArrival-touch.relativeCompletion)*1000)/1000;
+    return freeze({version:VERSION,identity:`${touch.identity}|timing-v1`,decisionIdentity:selection.identity,
+      baseTouchIdentity:touch.identity,throwIdentity:null,targetRunnerId:current.runnerId,targetBase:"third",receiverId:touch.actorId,
+      contestAvailable:touch.possession,timingClassification:classify(margin),timingMargin:margin,
+      runnerArrival,
+      ballArrival:null,receiverCompletion:{receiverId:touch.actorId,atBase:true,status:"baseTouch",relativeCompletion:touch.relativeCompletion},
+      reason:"possessionAndBaseTouchArrivalComparison",authority:"baseTouch+existingRunnerPhysicalState",variationEvidence:{consumed:false}});
   }
   function completeSettlement({identity,timing,routeId,targetRunnerId,targetBase,playType,runnerResult,before,
     runnersAfter,outIds,scoringAttempts,runnerMovement,forceBefore,continuation,resolveThirdOut,scope="genericFirstLeg"}){
@@ -194,5 +215,5 @@
       if(!same(timing,expected))fail("stale projected timing facts");
     }
   }
-  return freeze({VERSION,resolveTiming,deriveSettlement,projectExistingTiming,projectExistingSettlement,projectInfieldSettlement,projectTagUpTiming,projectTagUpSettlement,validateBefore,validateProjectedTiming});
+  return freeze({VERSION,deriveRunnerArrival,resolveTiming,resolveBaseTouchTiming,deriveSettlement,projectExistingTiming,projectExistingSettlement,projectInfieldSettlement,projectTagUpTiming,projectTagUpSettlement,validateBefore,validateProjectedTiming});
 });

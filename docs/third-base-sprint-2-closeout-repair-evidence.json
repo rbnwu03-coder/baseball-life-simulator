@@ -1,0 +1,51 @@
+{
+  "purpose": "Closeout repairs; intermediate suite runs are diagnostic only and are superseded by the final immutable-source run.",
+  "runs": [
+    {
+      "startedAt": "2026-10-11T01:52:39.665Z",
+      "focusedExitCode": 1,
+      "focusedStderr": "FAIL meaningful and density-suppressed routine events use final third-out legality while preserving raw execution\nscript.js:11359\n    if (selectedRoute !== stored.choice.routeId) throw new Error(\"Stale 3B lifecycle route\");\n                                                 ^\n\nError: Stale 3B lifecycle route\n    at validateHighSchoolThirdBaseExecution (script.js:11359:56)\n    at validateHighSchoolDecisionThrowState (script.js:11483:5)\n    at applyRoutineDefensiveResolutionToHighSchoolMatch (script.js:11833:3)\n    at evalmachine.<anonymous>:1:240\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\third-base-ground-production-integration-test.js:282:5\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\third-base-ground-production-integration-test.js:6:33)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\third-base-ground-production-integration-test.js:280:1)\nFAIL normal production entry cohort creates recurring physical 3B work and finalized evidence\nscript.js:5011\n    throw new Error(\"Defensive opportunity integrity failed: stale or unsupported detailed defender\");\n    ^\n\nError: Defensive opportunity integrity failed: stale or unsupported detailed defender\n    at assertHighSchoolDetailedResponsibility (script.js:5011:11)\n    at buildHighSchoolThirdBaseExecution (script.js:11242:3)\n    at validateHighSchoolThirdBaseExecution (script.js:11351:17)\n    at validateHighSchoolDecisionThrowState (script.js:11483:5)\n    at normalizeSave (save.js:540:67)\n    at evalmachine.<anonymous>:1:16\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at json (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:63:51)\n",
+      "sourceSha256": {
+        "script.js": "da013319b95cb4ee95059160988f69d16db6e9b9bf24ae15aacf3f85d550ca07",
+        "save.js": "8e2300f0e160e681686d65ef68ba6e3275563dc318fcaf669f620b4d57e2d6ef",
+        "batted-ball-ground-defense.js": "7ccd7017aab0f3e34f30ef731e10d989d01ff02fb1a44f442a16399410d05548",
+        "defensive-opportunity-foundation.js": "f0aa1679168ae3183edd7a641b6a54235a168959c113d22dd13772fb6a8d602d",
+        "defensive-reach-secure-foundation.js": "c5a51a82adf4900dd46f0788ba458dfadded82ea93daa8ca2f30ca92e8f01365",
+        "defensive-decision-throw-foundation.js": "9db142217a8e92b36c5e1b977d6aca6f1f6c55acdfa5461b498d7518ca03183d",
+        "defensive-runner-throw-settlement-foundation.js": "c0bc714dfed28d8360bc50db1f801eca23b8b259d81f7b64a1fe7217c99a252c",
+        "match-experience-development.js": "64c18073cdf9334a5a5e73bd63aa686071cf5faa37bb113363dfc51b3d48bf4b",
+        "match-game-record.js": "537156370d1cd4aec4a7d9007e18574930c8adf6d73a154b79db33d3d2cb5690"
+      },
+      "fullRepositorySummary": {
+        "passed": 224,
+        "failed": 3,
+        "newFailures": []
+      },
+      "sourcesUnchangedDuringValidation": false
+    },
+    {
+      "startedAt": "2026-10-11T02:02:33.641Z",
+      "focusedExitCode": 0,
+      "focusedStderr": "",
+      "sourceSha256": {
+        "script.js": "f5f52a3a505d100d5e2c35c444c676f47afa4f5fa23c60f0bde3a905af772482",
+        "save.js": "8e2300f0e160e681686d65ef68ba6e3275563dc318fcaf669f620b4d57e2d6ef",
+        "batted-ball-ground-defense.js": "7ccd7017aab0f3e34f30ef731e10d989d01ff02fb1a44f442a16399410d05548",
+        "defensive-opportunity-foundation.js": "f0aa1679168ae3183edd7a641b6a54235a168959c113d22dd13772fb6a8d602d",
+        "defensive-reach-secure-foundation.js": "c5a51a82adf4900dd46f0788ba458dfadded82ea93daa8ca2f30ca92e8f01365",
+        "defensive-decision-throw-foundation.js": "9db142217a8e92b36c5e1b977d6aca6f1f6c55acdfa5461b498d7518ca03183d",
+        "defensive-runner-throw-settlement-foundation.js": "18d8797a16dc963a2148d1591d0d8151d2acc0ebe5daf2b086397b7a0ee47d8c",
+        "match-experience-development.js": "64c18073cdf9334a5a5e73bd63aa686071cf5faa37bb113363dfc51b3d48bf4b",
+        "match-game-record.js": "537156370d1cd4aec4a7d9007e18574930c8adf6d73a154b79db33d3d2cb5690"
+      },
+      "fullRepositorySummary": null,
+      "sourcesUnchangedDuringValidation": false
+    }
+  ],
+  "repairs": [
+    "Reject tampered lifecycle copies and incomplete 3B execution stages.",
+    "Reconstruct settled defense-side roles from the play half, rather than the current match half.",
+    "Charge clear receiver and second-throw errors to the true actor; let the existing PA adapter project the team error result.",
+    "Keep BIP physical mapping result vocabulary intact; the existing PA adapter owns error classification."
+  ]
+}

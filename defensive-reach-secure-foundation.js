@@ -17,8 +17,9 @@
   const ability = value => Math.max(0, Math.min(20, Number.isFinite(Number(value)) ? Number(value) : 5));
   const round = value => Math.round(value * 1000) / 1000;
   function binding(input) {
-    const fresh = Opportunity.resolveDefensiveOpportunity(input);
     const saved = input.opportunity;
+    const fresh = Opportunity.resolveDefensiveOpportunity({ physicalTruth: input.physicalTruth, activeRoster: input.activeRoster,
+      topologyVersion: input.topologyVersion || saved?.topologyVersion || Opportunity.TOPOLOGY_VERSION });
     if (!fresh.supported || !saved || JSON.stringify(fresh) !== JSON.stringify(saved)
       || input.capabilities?.defenderId !== fresh.primaryDefenderId) {
       throw new Error("Reach / Secure integrity failed: invalid or stale opportunity / active defender");
@@ -30,11 +31,14 @@
     const ambiguity = { clear: 0, sharedEdge: 0.3, coarseAmbiguity: 0.6 }[opportunity.responsibilityClassification];
     const pace = { weak: 2.5, moderate: 3.5, firm: 4.5, hard: 6 }[ball.pace];
     const airborne = ball.ballType !== "groundBall";
+    const thirdBase = ball.ballType === "groundBall" && opportunity.primaryPosition === "3B";
     const reactionDemand = ball.ballType === "lineDrive" ? pace + ({ shallow: 2, medium: 0.5, deep: 0 }[ball.depth])
-      : ball.ballType === "flyBall" ? pace * 0.5 : pace;
+      : ball.ballType === "flyBall" ? pace * 0.5 : pace + (thirdBase && ball.pace === "hard" ? 1 : 0);
+    // The near-line lane is closer to 3B; SS retains the greater nominal range.
+    const groundMovement = thirdBase ? (ball.pace === "weak" ? 4 : 2) : (ball.pace === "weak" ? 4.5 : 3);
     const movementDemand = (airborne ? { shallow: 3, medium: 4, deep: 5 }[ball.depth]
-      : ball.pace === "weak" ? 4.5 : 3) + ambiguity;
-    const reactionWeight = ball.ballType === "flyBall" ? 0.3 : ball.ballType === "lineDrive" ? 0.6 : 0.55;
+      : groundMovement) + ambiguity + (thirdBase ? 0.5 : 0);
+    const reactionWeight = ball.ballType === "flyBall" ? 0.3 : ball.ballType === "lineDrive" ? 0.6 : thirdBase ? 0.65 : 0.55;
     return { ...copy(ball), responsibilityClassification: opportunity.responsibilityClassification,
       ambiguity, reactionDemand, movementDemand, reactionWeight,
       reachDemand: round(reactionDemand * reactionWeight + movementDemand * (1 - reactionWeight)),
@@ -53,7 +57,8 @@
     const caps = input.capabilities;
     const inputs = { reaction: ability(caps.reaction), range: ability(caps.range), mobility: ability(caps.mobility ?? caps.range) };
     const movement = inputs.range * 0.75 + inputs.mobility * 0.25;
-    const evidence = variation("reach", identity, input.roll);
+    const variationIdentity = `${op.executionIdentity || op.identity}|${op.primaryDefenderId}|reach-v1`;
+    const evidence = variation("reach", variationIdentity, input.roll);
     const margin = round(inputs.reaction * ballDemand.reactionWeight + movement * (1 - ballDemand.reactionWeight)
       - ballDemand.reachDemand + evidence.adjustment);
     return freeze({ version: VERSION, identity, opportunityIdentity: op.identity, physicalIdentity: op.physicalIdentity,
@@ -96,7 +101,8 @@
       + (ball.ballType === "lineDrive" ? 1 : ball.ballType === "flyBall" ? -1 : 0);
     const arrivalPenalty = reach.reachQuality === "stretchedArrival" ? 2 : 0;
     const secureDemand = pressure + arrivalPenalty;
-    const evidence = variation("secure", base.identity, input.roll);
+    const variationIdentity = `${reach.variationEvidence?.identity || reach.identity}|secure-v1`;
+    const evidence = variation("secure", variationIdentity, input.roll);
     const margin = round((ground ? fielding * 0.75 + catching * 0.25 : catching * 0.8 + fielding * 0.2)
       - secureDemand + evidence.adjustment);
     const secured = margin >= 0;
@@ -130,8 +136,10 @@
   function validatePendingState(state, activeRoster) {
     const reachResult = state?.defensiveAccess?.reachResolution;
     if (!reachResult || !state.supported || state.settlementApplied) return true; // No live detailed stage, or historical actor already settled.
-    const input = { physicalTruth: state.physicalTruth, activeRoster,
-      opportunity: Opportunity.resolveDefensiveOpportunity({ physicalTruth: state.physicalTruth, activeRoster }),
+    const topologyVersion = state.defensiveOpportunity?.topologyVersion || state.defensiveAccess?.topologyVersion
+      || Opportunity.TOPOLOGY_VERSION;
+    const input = { physicalTruth: state.physicalTruth, activeRoster, topologyVersion,
+      opportunity: Opportunity.resolveDefensiveOpportunity({ physicalTruth: state.physicalTruth, activeRoster, topologyVersion }),
       capabilities: state.defensiveAccess.secureCapabilities, reachResult };
     validateReach(input);
     if (!reachResult.reached || state.defensiveAccess.level !== projectAccess(reachResult).level) {

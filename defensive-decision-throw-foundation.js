@@ -69,7 +69,7 @@
     function route(routeId, action, targetBase, targetRunnerId, forceType, receiverPosition, contextualAvailability, continuation = null) {
       const receiver = receiverPosition ? Roster.getCurrentDefender(input.activeRoster, receiverPosition) : null;
       // A self-cover is not a throw to oneself; that execution vocabulary remains downstream.
-      const validReceiver = !receiverPosition || Boolean(receiver && receiver.id !== secure.defenderId);
+      const validReceiver = !receiverPosition || Boolean(receiver && (receiver.id !== secure.defenderId || action === "baseTouch"));
       const window = ctx.routeWindows[routeId] || "unmeasured";
       if (!["wide", "normal", "narrow", "expired", "unmeasured"].includes(window)) fail("invalid route window");
       assessments.push({ routeId, action, targetBase, targetRunnerId, forceType,
@@ -89,11 +89,13 @@
     route("forceSecond", "throwSecond", "second", second?.runnerId || null, forced("second") ? "force" : "tag", middleReceiver, Boolean(second));
     const third = target("third");
     route("attackLeadRunnerThird", "throwThird", "third", third?.runnerId || null, forced("third") ? "force" : "tag", "3B", Boolean(third));
+    if (secure.position === "3B") route("stepThird", "baseTouch", "third", forced("third")?.runnerId || null,
+      "force", "3B", Boolean(forced("third")));
     const home = target("home");
     route(forced("home") ? "homeForceOut" : "preventRunHome", "throwHome", "home", home?.runnerId || null,
       forced("home") ? "force" : "tag", "C", hasHomePlay({ forceHome: Boolean(forced("home")), runner: movement("home") }));
     // Reuse the validated 2B ID only for its 4-6-3 topology, not as a synonym for every double play.
-    const dpId = secure.position === "2B" ? "initiate463" : "startDoublePlaySecond";
+    const dpId = secure.position === "2B" ? "initiate463" : secure.position === "3B" ? "initiate543" : "startDoublePlaySecond";
     route(dpId, "initiateDoublePlay", "second", forced("second")?.runnerId || null, "force", middleReceiver,
       Boolean(forced("second") && ctx.outs < 2), { targetBase: "first", status: "pendingExistingOrFutureSecondLeg" });
     return freeze({ ...base, status: "controlledDecision", routeAssessments: assessments,
@@ -136,6 +138,7 @@
   function resolveThrow({ input, opportunity, selection, capabilities, rolls, transferState } = {}) {
     validateSelection(selection, opportunity, input);
     const base = throwBase(selection);
+    if (selection.route.action === "baseTouch") fail("base touch cannot resolve a throw");
     if (selection.route.action === "holdBall") return freeze({ ...base, throwAttempted: false, throwQuality: "notAttempted",
       releaseQuality: "held", ballArrivalState: "controlledByThrower", variationEvidence: { consumed: false }, authority: "deliberateHold" });
     if (!["ready", "completed", "delayed", "failed"].includes(transferState)) fail("unknown transfer readiness");
@@ -156,6 +159,25 @@
       ballArrivalState: { offline: "outsideReceiverReach", lateWeakThrow: "insufficientDelivery", challengingReceive: "receiverChallenged", onTarget: "atReceiverTarget" }[quality],
       inputs: { arm, throwing, transferState, secureQuality: input.secureResult.secureQuality },
       variationEvidence: { consumed: true, strength: strengthVariation, accuracy: accuracyVariation }, authority: "throwCapabilities+coarseDemand+separateVariation" });
+  }
+  function resolveBaseTouch({ input, opportunity, selection } = {}) {
+    validateSelection(selection, opportunity, input);
+    if (selection.position !== "3B" || selection.route.action !== "baseTouch" || selection.route.targetBase !== "third"
+      || selection.route.receiverId !== selection.defenderId) fail("invalid base-touch action");
+    const movement = Force.getForcedMovement(opportunity.context.forceChain, selection.route.targetRunnerId);
+    if (!movement || movement.targetBase !== "third") fail("base touch requires a live third-base force");
+    const capabilities = input.capabilities;
+    if (capabilities?.defenderId !== selection.defenderId) fail("base-touch capability mismatch");
+    const reaction = Number(capabilities.reaction), mobility = Number(capabilities.mobility);
+    if (!Number.isFinite(reaction) || !Number.isFinite(mobility)) fail("missing base-touch arrival abilities");
+    const baseProximity = input.physicalTruth.depth === "deep" ? 2 : 0.5;
+    const controlDelay = input.secureResult.secureQuality === "bobbleButControlled" ? 1 : 0;
+    const relativeCompletion = 4 + baseProximity + controlDelay + Math.max(0, 5 - reaction) * 0.15 + Math.max(0, 5 - mobility) * 0.1;
+    return freeze({ version: VERSION, identity: `${selection.identity}|base-touch-v1`, decisionIdentity: selection.identity,
+      actorId: selection.defenderId, actorPosition: selection.position, targetBase: "third", targetRunnerId: selection.route.targetRunnerId,
+      possession: controlled(input.secureResult), attemptAvailable: controlled(input.secureResult), relativeCompletion,
+      demand: { baseProximity, controlDelay, reaction, mobility, units: "coarseRelativeArrival" },
+      authority: "securedPossession+coarseBaseProximity+footwork", variationEvidence: { consumed: false } });
   }
   function projectExistingThrow({ input, opportunity, selection, playerLeg, evidence } = {}) {
     validateSelection(selection, opportunity, input);
@@ -243,6 +265,6 @@
       authority: "completedActionDependencies+orderedActualRetirements" });
   }
   return freeze({ VERSION, RNG_NAMESPACES, isAdvancingTo, hasHomePlay, controlled, buildDecisionOpportunity,
-    selectDefensiveRoute, validateOpportunity, validateSelection, resolveThrow, projectExistingThrow, throwDemand, validateStoredStage,
+    selectDefensiveRoute, validateOpportunity, validateSelection, resolveThrow, resolveBaseTouch, projectExistingThrow, throwDemand, validateStoredStage,
     ACTION_TYPES, createActionFacts, projectDefensiveAttribution });
 });
