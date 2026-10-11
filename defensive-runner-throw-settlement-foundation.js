@@ -62,14 +62,14 @@
     const touch=Decision.resolveBaseTouch({input,opportunity,selection});
     if(!same(touch,baseTouchResolution))fail("stale base-touch execution");
     const current=(input.runnerPhysicalStates||[]).find(r=>r.runnerId===selection.route.targetRunnerId);
-    if(!current||!same(current,runnerState)||current.targetBase!=="third"
-      ||input.runners[Number(current.originBase)-1]!==current.runnerId)fail("stale base-touch runner");
+    if(!current||!same(current,runnerState)||current.targetBase!==touch.targetBase
+      ||(current.originBase==="batter"?input.batterRunnerId!==current.runnerId:input.runners[Number(current.originBase)-1]!==current.runnerId))fail("stale base-touch runner");
     const forced=Force.getForcedMovement(opportunity.context.forceChain,current.runnerId);
-    if(!forced||forced.targetBase!=="third")fail("non-force third-base touch");
+    if(!forced||forced.targetBase!==touch.targetBase)fail("non-force base touch");
     const runnerArrival=deriveRunnerArrival(current);
     const margin=Math.round((runnerArrival.relativeArrival-touch.relativeCompletion)*1000)/1000;
     return freeze({version:VERSION,identity:`${touch.identity}|timing-v1`,decisionIdentity:selection.identity,
-      baseTouchIdentity:touch.identity,throwIdentity:null,targetRunnerId:current.runnerId,targetBase:"third",receiverId:touch.actorId,
+      baseTouchIdentity:touch.identity,throwIdentity:null,targetRunnerId:current.runnerId,targetBase:touch.targetBase,receiverId:touch.actorId,
       contestAvailable:touch.possession,timingClassification:classify(margin),timingMargin:margin,
       runnerArrival,
       ballArrival:null,receiverCompletion:{receiverId:touch.actorId,atBase:true,status:"baseTouch",relativeCompletion:touch.relativeCompletion},

@@ -84,6 +84,10 @@
     const forced = base => (ctx.forceChain?.allRequiredMovements || []).find(r => r.targetBase === base);
     const target = base => forced(base) || movement(base);
     route("secureFirstBaseOut", "throwFirst", "first", ctx.batterRunnerId, "batterRunner", "1B", Boolean(ctx.batterRunnerId));
+    if (secure.position === "1B") {
+      route("selfCoverFirst", "baseTouch", "first", ctx.batterRunnerId, "batterRunner", "1B", Boolean(ctx.batterRunnerId));
+      route("pitcherCoverFirst", "throwFirst", "first", ctx.batterRunnerId, "batterRunner", "P", Boolean(ctx.batterRunnerId));
+    }
     const second = target("second");
     const middleReceiver = ["2B", "1B"].includes(secure.position) ? "SS" : "2B";
     route("forceSecond", "throwSecond", "second", second?.runnerId || null, forced("second") ? "force" : "tag", middleReceiver, Boolean(second));
@@ -95,7 +99,7 @@
     route(forced("home") ? "homeForceOut" : "preventRunHome", "throwHome", "home", home?.runnerId || null,
       forced("home") ? "force" : "tag", "C", hasHomePlay({ forceHome: Boolean(forced("home")), runner: movement("home") }));
     // Reuse the validated 2B ID only for its 4-6-3 topology, not as a synonym for every double play.
-    const dpId = secure.position === "2B" ? "initiate463" : secure.position === "3B" ? "initiate543" : "startDoublePlaySecond";
+    const dpId = secure.position === "1B" ? "initiate363" : secure.position === "2B" ? "initiate463" : secure.position === "3B" ? "initiate543" : "startDoublePlaySecond";
     route(dpId, "initiateDoublePlay", "second", forced("second")?.runnerId || null, "force", middleReceiver,
       Boolean(forced("second") && ctx.outs < 2), { targetBase: "first", status: "pendingExistingOrFutureSecondLeg" });
     return freeze({ ...base, status: "controlledDecision", routeAssessments: assessments,
@@ -162,19 +166,21 @@
   }
   function resolveBaseTouch({ input, opportunity, selection } = {}) {
     validateSelection(selection, opportunity, input);
-    if (selection.position !== "3B" || selection.route.action !== "baseTouch" || selection.route.targetBase !== "third"
+    const target = selection.position === "1B" ? "first" : "third";
+    if (!["3B", "1B"].includes(selection.position) || selection.route.action !== "baseTouch" || selection.route.targetBase !== target
       || selection.route.receiverId !== selection.defenderId) fail("invalid base-touch action");
     const movement = Force.getForcedMovement(opportunity.context.forceChain, selection.route.targetRunnerId);
-    if (!movement || movement.targetBase !== "third") fail("base touch requires a live third-base force");
+    if (!movement || movement.targetBase !== target) fail("base touch requires a live force");
     const capabilities = input.capabilities;
     if (capabilities?.defenderId !== selection.defenderId) fail("base-touch capability mismatch");
     const reaction = Number(capabilities.reaction), mobility = Number(capabilities.mobility);
     if (!Number.isFinite(reaction) || !Number.isFinite(mobility)) fail("missing base-touch arrival abilities");
-    const baseProximity = input.physicalTruth.depth === "deep" ? 2 : 0.5;
+    const baseProximity = input.physicalTruth.depth === "deep" ? 2
+      : selection.position === "1B" && input.physicalTruth.pace === "weak" ? 2.5 : 0.5;
     const controlDelay = input.secureResult.secureQuality === "bobbleButControlled" ? 1 : 0;
     const relativeCompletion = 4 + baseProximity + controlDelay + Math.max(0, 5 - reaction) * 0.15 + Math.max(0, 5 - mobility) * 0.1;
     return freeze({ version: VERSION, identity: `${selection.identity}|base-touch-v1`, decisionIdentity: selection.identity,
-      actorId: selection.defenderId, actorPosition: selection.position, targetBase: "third", targetRunnerId: selection.route.targetRunnerId,
+      actorId: selection.defenderId, actorPosition: selection.position, targetBase: target, targetRunnerId: selection.route.targetRunnerId,
       possession: controlled(input.secureResult), attemptAvailable: controlled(input.secureResult), relativeCompletion,
       demand: { baseProximity, controlDelay, reaction, mobility, units: "coarseRelativeArrival" },
       authority: "securedPossession+coarseBaseProximity+footwork", variationEvidence: { consumed: false } });
@@ -209,6 +215,35 @@
     const identityKeys = ["version", "identity", "decisionIdentity", "routeId", "throwerId", "throwerPosition", "targetBase", "targetRunnerId", "receiverId", "receiverPosition"];
     if (!result || identityKeys.some(key => !same(result[key], expected[key]))) fail("stale throw actor / target identity");
     return true;
+  }
+  // Consume a real upstream throw before retirement. No random source or Match State.
+  function resolveIncomingReceive({ playIdentity, physicalIdentity, throwResolution: thrown, receiver,
+    capabilities, sample, returnReady = true, receiveDelay = 0 } = {}) {
+    if (!playIdentity || !physicalIdentity || !thrown?.identity || !thrown.throwerId || !thrown.targetRunnerId
+      || !receiver?.id || thrown.receiverId !== receiver.id || thrown.receiverPosition !== receiver.position
+      || thrown.throwerId === receiver.id || !["onTarget", "challengingReceive", "lateWeakThrow", "offline", "notAttempted"].includes(thrown.throwQuality)
+      || !["first", "second", "third", "home"].includes(thrown.targetBase)
+      || !Number.isFinite(sample) || sample < 0 || sample >= 1 || !Number.isFinite(receiveDelay) || receiveDelay < 0) fail("invalid incoming throw continuation");
+    const swing = (sample - .5) * 4;
+    const fielding = Number(capabilities?.fielding), catching = Number(capabilities?.catching ?? fielding);
+    const reaction = Number(capabilities?.reaction), range = Number(capabilities?.range);
+    if (![fielding, catching, reaction, range].every(Number.isFinite)) fail("missing receiver capability snapshot");
+    const delivery = thrown.throwAttempted === true && !["offline", "notAttempted"].includes(thrown.throwQuality);
+    const readinessMargin = reaction * .6 + range * .4 + swing - 3.2;
+    const ready = delivery && returnReady && readinessMargin >= 0;
+    const secureDemand = 3.2 + (thrown.throwQuality === "challengingReceive" ? 1 : 0);
+    const secureMargin = fielding * .75 + catching * .25 + swing - secureDemand;
+    const secured = ready && secureMargin >= 0;
+    const status = !thrown.throwAttempted ? "notAttempted" : thrown.throwQuality === "offline" ? "outsideReceiverReach"
+      : !ready ? "unavailable" : !secured ? "failed" : "completed";
+    return freeze({ version: "infield-incoming-receive-v1", identity: `${thrown.identity}|receive|${receiver.id}`,
+      playIdentity, physicalIdentity, throwIdentity: thrown.identity, throwerId: thrown.throwerId,
+      receiverId: receiver.id, receiverPosition: receiver.position, targetBase: thrown.targetBase,
+      targetRunnerId: thrown.targetRunnerId, throwQuality: thrown.throwQuality, delivery, ready, secured, status,
+      readinessMargin, secureMargin, secureDemand, receiveDelay,
+      errorCharged: status === "failed" && thrown.throwQuality === "onTarget",
+      provenance: { authority: "resolvedThrow+originalExecutionSample+receiverCapabilitySnapshot", sample,
+        consumedRng: false, capabilities: clone(capabilities), returnReady } });
   }
   // Facts only: this contract neither resolves an action nor applies a retirement.
   // Dependencies describe the actual ball path, so a base touch cannot invent an assist.
@@ -266,5 +301,5 @@
   }
   return freeze({ VERSION, RNG_NAMESPACES, isAdvancingTo, hasHomePlay, controlled, buildDecisionOpportunity,
     selectDefensiveRoute, validateOpportunity, validateSelection, resolveThrow, resolveBaseTouch, projectExistingThrow, throwDemand, validateStoredStage,
-    ACTION_TYPES, createActionFacts, projectDefensiveAttribution });
+    resolveIncomingReceive, ACTION_TYPES, createActionFacts, projectDefensiveAttribution });
 });

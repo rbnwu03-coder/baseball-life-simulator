@@ -237,17 +237,18 @@
     const defender = input.defenderContext || {};
     const shortstop = defender.playerPosition === "游擊手";
     const thirdBase = defender.playerPosition === "三壘手";
+    const firstBase = defender.playerPosition === "一壘手";
     const opportunity = defender.defensiveOpportunity;
-    const classified = Boolean(Opportunity && opportunity?.topologyVersion === Opportunity.GROUND_TOPOLOGY_VERSION);
-    const responsibility = classified ? Opportunity.deriveGroundResponsibility(truth) : null;
-    const playerPosition = shortstop ? "SS" : thirdBase ? "3B" : defender.playerPosition === "二壘手" ? "2B" : "";
+    const classified = Boolean(Opportunity && [Opportunity.GROUND_TOPOLOGY_VERSION, Opportunity.FIRST_BASE_GROUND_TOPOLOGY_VERSION].includes(opportunity?.topologyVersion));
+    const responsibility = classified ? Opportunity.deriveGroundResponsibility(truth, opportunity.topologyVersion) : null;
+    const playerPosition = shortstop ? "SS" : thirdBase ? "3B" : firstBase ? "1B" : defender.playerPosition === "二壘手" ? "2B" : "";
     const classificationMatches = responsibility && opportunity.supported
       && opportunity.physicalIdentity === truth.identity
       && JSON.stringify(opportunity.groundResponsibility) === JSON.stringify(responsibility)
       && opportunity.primaryPosition === responsibility.primaryPosition;
     const directionSupported = classified ? classificationMatches && responsibility.primaryPosition === playerPosition
       : shortstop ? ["leftSide", "middle"].includes(truth.direction) : truth.direction === "rightSide";
-    const positionSupported = shortstop || defender.playerPosition === "二壘手" || thirdBase && classified;
+    const positionSupported = shortstop || defender.playerPosition === "二壘手" || (thirdBase || firstBase) && classified;
     const classificationFacts = classified && classificationMatches ? {
       topologyVersion: opportunity.topologyVersion, groundResponsibility: clone(responsibility)
     } : {};
@@ -292,7 +293,7 @@
       reactionPressure: pace === "hard" ? "high" : "normal",
       physicalTruth: clone(physicalTruth),
       defensiveAccess: clone(defensiveAccess),
-      downstreamSupport: defensiveAccess?.supported ? (defensiveAccess.playerPosition === "三壘手" ? "supported3BOrdinaryGroundBall" : defensiveAccess.playerPosition === "游擊手" ? "supportedSSOrdinaryGroundBall" : "supported2BOrdinaryGroundBall") : "legacyFallback"
+      downstreamSupport: defensiveAccess?.supported ? (defensiveAccess.playerPosition === "一壘手" ? "supported1BOrdinaryGroundBall" : defensiveAccess.playerPosition === "三壘手" ? "supported3BOrdinaryGroundBall" : defensiveAccess.playerPosition === "游擊手" ? "supportedSSOrdinaryGroundBall" : "supported2BOrdinaryGroundBall") : "legacyFallback"
     });
   }
   function buildGroundBallTimingWindows({ ballContext, runnerRealization } = {}) {
@@ -347,7 +348,7 @@
       identity: String(input.identity || "ordinary-ground-ball"),
       sourceAuthority: "BattedBallPhysicalTruth",
       physicalTruth: clone(physicalTruth),
-      ...(Opportunity && input.defenderContext?.defensiveOpportunity?.topologyVersion === Opportunity.GROUND_TOPOLOGY_VERSION
+      ...(Opportunity && [Opportunity.GROUND_TOPOLOGY_VERSION, Opportunity.FIRST_BASE_GROUND_TOPOLOGY_VERSION].includes(input.defenderContext?.defensiveOpportunity?.topologyVersion)
         ? { defensiveOpportunity: clone(input.defenderContext.defensiveOpportunity) } : {}),
       forceChain,
       forceState,

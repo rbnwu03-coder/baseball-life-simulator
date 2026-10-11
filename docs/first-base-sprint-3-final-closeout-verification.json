@@ -1,0 +1,78 @@
+{
+  "focused": {
+    "suite": "first-base-receive-active-ground-production-integration",
+    "passed": 42,
+    "failed": 0,
+    "phase": "SPRINT_GREEN",
+    "evidenceOrigin": "EXPLICIT_PRODUCTION_FIXTURES_AND_SEPARATE_NORMAL_ENTRY"
+  },
+  "manifest": {
+    "passed": 224,
+    "failed": 3,
+    "newFailures": [],
+    "timedOut": 0
+  },
+  "productionHashSnapshotFiles": [
+    "script.js",
+    "save.js",
+    "batted-ball-ground-defense.js",
+    "defensive-opportunity-foundation.js",
+    "defensive-reach-secure-foundation.js",
+    "defensive-decision-throw-foundation.js",
+    "defensive-runner-throw-settlement-foundation.js",
+    "match-experience-development.js",
+    "match-game-record.js"
+  ],
+  "productionHashesUnchanged": true,
+  "currentHashesMatch": true,
+  "boundaryMatches": true,
+  "originalManifestTestSourcesChanged": [],
+  "debtVerification": [
+    {
+      "file": "tests/ability-performance-gradient-test.js",
+      "signature": "AssertionError [ERR_ASSERTION]: Low tier can have a multi-hit game",
+      "currentExitCode": 1,
+      "exactBaselineExitCode": 1,
+      "sourceUnchanged": true,
+      "sameFailure": true
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-2-2-test.js",
+      "signature": "AssertionError [ERR_ASSERTION]: 36. full match",
+      "currentExitCode": 1,
+      "exactBaselineExitCode": 1,
+      "sourceUnchanged": true,
+      "sameFailure": true
+    },
+    {
+      "file": "tests/high-school-year-one-opportunity-two-integration-test.js",
+      "signature": "ReferenceError: DefensiveDecisionThrowFoundation is not defined",
+      "currentExitCode": 1,
+      "exactBaselineExitCode": 1,
+      "sourceUnchanged": true,
+      "sameFailure": true
+    }
+  ],
+  "createdFiles": [
+    "tests/first-base-receive-active-ground-production-integration-test.js",
+    "tests/first-base-sprint-3-validation-runner.cjs",
+    "docs/first-base-receive-active-ground-production-integration-sprint-3.md",
+    "docs/first-base-receive-active-ground-sprint-3-validation.json",
+    "docs/first-base-sprint-3-architecture-coverage-evidence.json",
+    "docs/first-base-sprint-3-boundary-validation.json",
+    "docs/first-base-sprint-3-closeout-repair-evidence.json",
+    "docs/first-base-sprint-3-focused-development-evidence.json",
+    "docs/first-base-sprint-3-red-evidence.json",
+    "docs/first-base-sprint-3-supplemental-coverage-evidence.json",
+    "docs/first-base-sprint-3-final-closeout-verification.json"
+  ],
+  "trailingWhitespace": 0,
+  "git": {
+    "branch": "main",
+    "head": "d0c88522e8205e34f35d245dee6050526f490b94",
+    "originMain": "d0c88522e8205e34f35d245dee6050526f490b94",
+    "staged": "",
+    "status": "M batted-ball-ground-defense.js\n M defensive-decision-throw-foundation.js\n M defensive-opportunity-foundation.js\n M defensive-runner-throw-settlement-foundation.js\n M match-experience-development.js\n M script.js\n M tests/fast-check-smoke-test.cjs\n?? docs/first-base-receive-active-ground-production-integration-sprint-3.md\n?? docs/first-base-receive-active-ground-sprint-3-validation.json\n?? docs/first-base-sprint-3-architecture-coverage-evidence.json\n?? docs/first-base-sprint-3-boundary-validation.json\n?? docs/first-base-sprint-3-closeout-repair-evidence.json\n?? docs/first-base-sprint-3-final-closeout-verification.json\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/first-base-sprint-3-red-evidence.json\n?? docs/first-base-sprint-3-supplemental-coverage-evidence.json\n?? install.ps1\n?? tests/first-base-receive-active-ground-production-integration-test.js\n?? tests/first-base-sprint-3-validation-runner.cjs"
+  },
+  "verifiedAt": "2026-10-11T05:37:21.910Z"
+}

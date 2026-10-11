@@ -297,8 +297,54 @@ const MatchExperienceDevelopment = (() => {
     }));
   }
 
+  function createFirstBaseDefensiveEvidence(match, source, index) {
+    const facts = source.firstBaseEvidence;
+    const actions = source.actionFacts?.actions;
+    if (!facts || facts.version !== "first-base-evidence-v1" || facts.actorId !== "player" || facts.actorPosition !== "1B"
+      || !facts.physicalIdentity || facts.physicalIdentity !== source.actionFacts?.physicalIdentity
+      || facts.playIdentity !== source.actionFacts?.playIdentity || !Array.isArray(actions)
+      || !Array.isArray(facts.playerActionIds) || !facts.playerActionIds.length
+      || facts.playerActionIds.some(id => !actions.some(a => a.identity === id && a.actorId === "player" && a.actorPosition === "1B"))) return [];
+    const playerActions = actions.filter(a => facts.playerActionIds.includes(a.identity));
+    const attempted = type => playerActions.some(a => a.type === type && !["notAttempted", "unavailable"].includes(a.status));
+    const incoming = facts.entry === "incomingReceive";
+    const meaningful = !incoming && (source.domain === "defense" || source.eventClassification === "playerMeaningfulDecision");
+    const family = incoming ? "firstBaseReceive" : facts.actionType === "baseTouch" ? "firstBaseBaseTouch"
+      : facts.actionType === "relay" ? "firstBaseRelay" : facts.actionType === "throw" ? "firstBaseThrow" : "firstBaseGround";
+    const situation = buildSituation({ ...source, meaningful, playFamily: family }, match);
+    const playId = source.id || source.playId || `defense-${index + 1}`;
+    const decisionQuality = meaningful ? normalizeDecisionQuality(facts.read?.quality || source.decisionQuality) : "none";
+    const common = { matchId: match.id, playId, playerId: "player", evidenceType: "active",
+      participationType: normalizeParticipationType(incoming ? "receiver" : "initiator"), role: incoming ? "receiver" : "initiator",
+      situation, meaningful, decisionQuality,
+      decisionEvidence: { opportunity: meaningful, reasons: facts.read?.reasons || ["actualFirstBaseParticipantStage"] },
+      outcomeEvidence: { result: source.resultCode || "", outsCreated: Number(source.outsCreated) || 0, error: source.error === true,
+        runsAllowed: Number(source.runsAllowed) || 0, scoringRunnerIds: clone(source.scoringRunnerIds || []),
+        orderedRetirements: clone(source.orderedRetirements || []), thirdOutResolution: clone(source.thirdOutResolution || null) },
+      attribution: { primaryCause: source.primaryCause || "", responsibleActor: source.responsibleActor || "",
+        playerResponsibility: source.playerResponsibility || "", teammateResponsibility: source.teammateResponsibility || "" },
+      sourceSnapshot: { type: source.type || "completedMoment", sequence: source.sequence ?? null,
+        physicalIdentity: facts.physicalIdentity, playIdentity: facts.playIdentity, actorId: facts.actorId, actorPosition: "1B",
+        firstBaseEvidence: clone(facts) } };
+    const specs = [];
+    if (!incoming && attempted("field")) specs.push(["reaction", "reach"], ["range", "reach"], ["catching", "control"]);
+    if (facts.playerLeg.coverage) specs.push(["reaction", "coverage"], ["range", "coverage"]);
+    if (attempted("receive")) specs.push(["catching", "receive"]);
+    if (facts.playerLeg.footwork) specs.push(["reaction", "footwork"]);
+    if (attempted("throw")) specs.push(["throwing", "firstThrow"]);
+    if (meaningful) specs.push(["baseballIQ", null]);
+    return specs.map(([targetSkill, stage], specIndex) => {
+      const quality = stage ? getStageQuality(facts.playerLeg, [stage]) : "notApplicable";
+      return createEvidenceRecord({ ...common, evidenceId: `${match.id}|${playId}|${targetSkill}|${specIndex + 1}`,
+        targetSkill, component: stage ? "execution" : "decision", activeType: stage ? "execution" : "decision", executionQuality: quality,
+        executionEvidence: { quality, stages: clone(facts.playerLeg), incoming: clone(facts.incoming), feedback: source.primaryCause || "" },
+        difficulty: deriveDifficulty({ ...source, meaningful }), semanticKey: [targetSkill, family, stage || "decision"].join("|") });
+    });
+  }
+
   function createDefensiveEvidence(match, source, index) {
     const position = source.playerPosition || match.developmentPositionOverride || match.playerFieldingAssignment || match.currentFieldingPosition || "";
+    if (position === "一壘手") return createFirstBaseDefensiveEvidence(match, source, index);
     if (position === "三壘手") return createThirdBaseDefensiveEvidence(match, source, index);
     if (!["二壘手", "游擊手"].includes(position)) return [];
     const rawRole = source.playerRole || "primaryFielder";
