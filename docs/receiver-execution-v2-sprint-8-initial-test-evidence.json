@@ -1,0 +1,28 @@
+{
+  "scope": "PURE_CONTRACT_NOT_PRODUCTION_INTEGRATION",
+  "total": 88,
+  "passed": 86,
+  "failed": 2,
+  "failures": [
+    {
+      "name": "late causal stages",
+      "status": "FAIL",
+      "message": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'unreachable'\n- 'late'\n"
+    },
+    {
+      "name": "bobble causal stages",
+      "status": "FAIL",
+      "message": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'cleanControl'\n- 'bobbleControl'\n"
+    }
+  ],
+  "hashes": {
+    "receiver-execution-v2-foundation.js": "c5b6f2d7f9f3df54c4a1455997ee97da106e1cf5a6dcd3f35d84f20c485f258f",
+    "tests/receiver-execution-v2-pure-contract-test.cjs": "9cfecf17bbb4495735cc16c102313a20d1750def25ecc61fdff458e1e5d62dcb"
+  },
+  "classification": "NEW_TEST_FIXTURE_ISSUE",
+  "diagnosis": {
+    "late": "MDU8 exceeds range10 envelope5; correctly unreachable, not late",
+    "bobble": "margin1000 is clean; bobble fixture needs positive margin below1000"
+  },
+  "productionChanges": 0
+}

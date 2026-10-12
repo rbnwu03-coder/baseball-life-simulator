@@ -1,0 +1,143 @@
+{
+  "sprint": 8,
+  "scope": "ISOLATED_PURE_CONTRACT",
+  "versions": {
+    "contract": "receiver-pure-contract-v2-1",
+    "execution": "receiver-pure-stages-v2-1",
+    "adapter": "receiver-explicit-input-v1",
+    "timing": "crt-integer-ticks-v2-1",
+    "sampler": "physical-slot-sha256-u32be-v1",
+    "effort": "ordinary-effort-reference-v1",
+    "physical": "physical-contact-binding-v1"
+  },
+  "runtimeEnabled": false,
+  "canonicalEncoding": {
+    "strings": "UTF-8 of JSON strings, reject unpaired surrogates; no Unicode normalization",
+    "keys": "recursive UTF-16 code-unit sort; preserve arrays",
+    "numbers": "safe integers only; reject negative zero; original sample encoded as big-endian IEEE754 binary64 hex",
+    "nonData": "reject undefined, NaN, Infinity, cycles, getters, symbols, sparse arrays and nonplain objects"
+  },
+  "sampler": {
+    "scheme": "B",
+    "key": [
+      "executionVersion",
+      "physical {version,matchId,plateAppearanceId,contactId,physicalIdentity}",
+      "physicalSlot",
+      "samplerVersion",
+      "stage"
+    ],
+    "slots": [
+      "primaryThrow",
+      "relayThrow"
+    ],
+    "stages": [
+      "positioning",
+      "secure",
+      "touch"
+    ],
+    "excluded": [
+      "actor",
+      "ability",
+      "route",
+      "retry",
+      "outcome",
+      "originalOwnedSample"
+    ],
+    "hash": "SHA-256 UTF-8; first four bytes unsigned big-endian",
+    "unit": "(u32+0.5)/2^32; exact binary64",
+    "stageQuantization": "bin=(u32 >>> 28)-8; 16 fixed bins; no redraw"
+  },
+  "timing": {
+    "version": "crt-integer-ticks-v2-1",
+    "unit": "1000 integer ticks per coarse relative time CRT; not seconds",
+    "inputTicksRange": [
+      0,
+      1000000000
+    ],
+    "runnerInputRange": [
+      -1000000000,
+      1000000000
+    ],
+    "origin": "one same-play upstream launch origin; primary launch=0, relay launch absolute and >= first contest completion",
+    "precision": "No float timing conversion accepted; adapter must provide already versioned integer ticks. Positive movement duration uses ceil. No epsilon/tie tolerance.",
+    "moments": [
+      "launch",
+      "ballArrival",
+      "positioningStart",
+      "positioningCompletion",
+      "secureCompletion",
+      "touch/tagCompletion",
+      "runnerArrival"
+    ],
+    "tie": "no retirement candidate",
+    "unknown": "explicit reason; insufficient, never zero",
+    "ordinalWindow": "v1 {value,state} rejected",
+    "thirdOut": "candidate flag only; scoring requires current Third-Out owner",
+    "seam": {
+      "currentFile": "defensive-runner-throw-settlement-foundation.js",
+      "currentFunction": "deriveSettlement",
+      "blocker": "requires equality to legacy resolveTiming; cannot accept added v2 positioning/secure/touch times",
+      "futureOwner": "same RunnerThrowSettlement owner with explicit version discriminator + timing validation; no parallel apply",
+      "implemented": false
+    }
+  },
+  "pureArithmetic": {
+    "calibration": "FROZEN_UNCALIBRATED_PURE_POLICY; not authorized for Production probabilities or balance",
+    "abilityScale": "explicit integer 0..20; no Career/NPC aliases or hidden defaults",
+    "movementScale": "MDU integer0..8; not measured meters",
+    "positioning": "reachable:MDU*1000<=1000+400*range; duration=max(100,1500-60*reaction+10*binPosition)+ceil(MDU*1000000/(500+60*mobility)); absolute completion=start+duration",
+    "hands": "marginMilli=650*catching+350*fielding+125*binSecure-demandMilli; negative=>failedHands; [0,1000)=>bobble; >=1000 clean",
+    "secureCompletion": "ballArrival+declared cleanDelay + bobbleDelay only on bobble",
+    "touchCompletion": "secureCompletion+declared delayTicks+binTouch+8; duration never negative",
+    "delivery": "Consumes explicit completed upstream fact, accuracy/quality and arrival; no new throw roll or flight inference",
+    "notes": [
+      "A/B classifications within pureFixture are declared fixture facts, not observed Production authority.",
+      "No historical synthetic projection can supply missing execution fact via success boolean.",
+      "Digest is consistency evidence, not authentication."
+    ]
+  },
+  "dependencies": [
+    {
+      "stage": "A",
+      "requires": "completed acquisition/transfer and delivery; original sourceThrowActionId",
+      "missing": "notAttempted/insufficient; offline blocks Secure"
+    },
+    {
+      "stage": "B",
+      "requires": "owned receiver availability, start, MDU and actual abilities",
+      "missing": "unavailable/unreachable/late/insufficient; no hands failure"
+    },
+    {
+      "stage": "C",
+      "requires": "A completed receivable delivery + B ready; matching leg/actor/target",
+      "missing": "notAttempted; no possession"
+    },
+    {
+      "stage": "D",
+      "requires": "C possession + declared touch/tag contact + eligible live legality + known runner timing",
+      "missing": "no candidate; insufficient timing stays unresolved"
+    },
+    {
+      "stage": "relay",
+      "requires": "validated prior serialized output, same contact/origin, declared completed first retirement and pivot, outs<3, live target",
+      "missing": "blocked second delivery; no second candidate"
+    }
+  ],
+  "effortBoundary": {
+    "version": "ordinary-effort-reference-v1",
+    "actual": "receiver capabilities determine execution only",
+    "reference": "independent position/league/environment/version/provenance profile; does not change execution",
+    "calibrationAuthority": "NOT_IMPLEMENTED",
+    "missingOrUncalibrated": "insufficientScorerFacts; official E and would-be A null",
+    "claimedCalibrated": "returns insufficient unavailableCalibrationAuthority",
+    "officialScorerCalled": false
+  },
+  "blockersFor63Shadow": [
+    "Approve explicit physical contact/slot identity adapter; verify source handoff/roster copies rather than trusting digest.",
+    "Provide real NPC1B start/movement, incoming quality/demand, touch and same-origin CRT input sources; legacy combined booleans cannot supply them.",
+    "Review and calibrate pure coefficients/real ability mapping; no activation from pure fixtures.",
+    "Define model pins, read-only shadow storage and meaningful/routine/cold/duplicate no-interference tests without changing official outcome.",
+    "Design version-aware timing seam before any authoritative settlement.",
+    "Independent effort calibration and clean counterfactual/late attribution before official scorer eligibility; L03 remains PARTIAL."
+  ]
+}

@@ -1,0 +1,4025 @@
+{
+  "scope": "PURE_CONTRACT_NOT_PRODUCTION_INTEGRATION",
+  "total": 91,
+  "passed": 91,
+  "failed": 0,
+  "rows": [
+    {
+      "name": "SHA-256 golden empty",
+      "status": "PASS"
+    },
+    {
+      "name": "SHA-256 golden abc",
+      "status": "PASS"
+    },
+    {
+      "name": "SHA-256 UTF-8, padding boundaries and multiblock match Node crypto",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical encoding sorts nested keys and preserves array order",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical rejects fraction",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical rejects NaN",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical rejects infinity",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical rejects negative zero",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical rejects undefined",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical rejects unpaired surrogate",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical rejects sparse array",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical rejects date",
+      "status": "PASS"
+    },
+    {
+      "name": "binary64 big endian exact owned-sample binding",
+      "status": "PASS"
+    },
+    {
+      "name": "sample vector equals independent SHA-256 u32BE reference",
+      "status": "PASS"
+    },
+    {
+      "name": "physical slots and stage namespaces remain distinct",
+      "status": "PASS"
+    },
+    {
+      "name": "sampler ignores actor, ability, route and old execution sample",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid physical identity, sampler and slot rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "clean stages preserve identities, ownership, possession and only candidate",
+      "status": "PASS"
+    },
+    {
+      "name": "initial outs 0 candidate defers scoring",
+      "status": "PASS"
+    },
+    {
+      "name": "initial outs 1 candidate defers scoring",
+      "status": "PASS"
+    },
+    {
+      "name": "initial outs 2 candidate defers scoring",
+      "status": "PASS"
+    },
+    {
+      "name": "offline causal stages",
+      "status": "PASS"
+    },
+    {
+      "name": "unavailable causal stages",
+      "status": "PASS"
+    },
+    {
+      "name": "late causal stages",
+      "status": "PASS"
+    },
+    {
+      "name": "hands causal stages",
+      "status": "PASS"
+    },
+    {
+      "name": "bobble causal stages",
+      "status": "PASS"
+    },
+    {
+      "name": "fast causal stages",
+      "status": "PASS"
+    },
+    {
+      "name": "safe causal stages",
+      "status": "PASS"
+    },
+    {
+      "name": "noTouch causal stages",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown causal stages",
+      "status": "PASS"
+    },
+    {
+      "name": "unreachable envelope cannot become hands failure",
+      "status": "PASS"
+    },
+    {
+      "name": "exact runner tie has no retirement candidate",
+      "status": "PASS"
+    },
+    {
+      "name": "no completed acquisition means no downstream receive",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown ball arrival never becomes zero time",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown positioning time blocks hands",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown and ineligible live force produce no candidate",
+      "status": "PASS"
+    },
+    {
+      "name": "tag requires possession AND independently declared runner contact",
+      "status": "PASS"
+    },
+    {
+      "name": "pure relay shares absolute origin and requires declared completed retirement/pivot",
+      "status": "PASS"
+    },
+    {
+      "name": "failed first force cannot create second leg even forged completed summary",
+      "status": "PASS"
+    },
+    {
+      "name": "failed retirement or pivot suppresses second leg",
+      "status": "PASS"
+    },
+    {
+      "name": "first force third out never creates fourth retirement",
+      "status": "PASS"
+    },
+    {
+      "name": "relay launch reset to zero is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing relay prior and modified prior execution rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "unrelated relay source/actor/runner identity rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing physical identity",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy synthetic physical identity cannot be v2",
+      "status": "PASS"
+    },
+    {
+      "name": "missing contact id",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid actor position",
+      "status": "PASS"
+    },
+    {
+      "name": "self throw actor cannot masquerade receive",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid runner id",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid target base",
+      "status": "PASS"
+    },
+    {
+      "name": "handoff actor mismatch",
+      "status": "PASS"
+    },
+    {
+      "name": "unsupported execution version",
+      "status": "PASS"
+    },
+    {
+      "name": "unsupported adapter version",
+      "status": "PASS"
+    },
+    {
+      "name": "unsupported timing version",
+      "status": "PASS"
+    },
+    {
+      "name": "unsupported sampler version",
+      "status": "PASS"
+    },
+    {
+      "name": "unsupported effort version",
+      "status": "PASS"
+    },
+    {
+      "name": "missing source provenance",
+      "status": "PASS"
+    },
+    {
+      "name": "unavailable source is insufficient not legacy fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy success boolean is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "completed throw with incomplete acquisition",
+      "status": "PASS"
+    },
+    {
+      "name": "same action id across stages",
+      "status": "PASS"
+    },
+    {
+      "name": "throw action identity mismatch",
+      "status": "PASS"
+    },
+    {
+      "name": "ability snapshot has wrong actor",
+      "status": "PASS"
+    },
+    {
+      "name": "fractional unversioned capability",
+      "status": "PASS"
+    },
+    {
+      "name": "v1 ordinal window is not CRT",
+      "status": "PASS"
+    },
+    {
+      "name": "mixed timing origins rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "arrival before launch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "primary launch cannot reset origin",
+      "status": "PASS"
+    },
+    {
+      "name": "negative actor completion time rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid outs",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid original execution sample",
+      "status": "PASS"
+    },
+    {
+      "name": "getter rejected without evaluating it",
+      "status": "PASS"
+    },
+    {
+      "name": "malformed sampler and stage dependencies return invalid without getter reads",
+      "status": "PASS"
+    },
+    {
+      "name": "sealed abilities and sample tampering rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized delivery dependency tampering rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized positioning dependency tampering rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized secure dependency tampering rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "independently callable stages agree with pipeline",
+      "status": "PASS"
+    },
+    {
+      "name": "repeat, frozen original input and JSON cold round trip are identical",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical object key reordering keeps sealed input identical",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized bindings and dependency property order are semantically canonical",
+      "status": "PASS"
+    },
+    {
+      "name": "arm, throwing and decision cannot improve receiver stages",
+      "status": "PASS"
+    },
+    {
+      "name": "reaction/mobility change positioning only, catching/fielding change hands only",
+      "status": "PASS"
+    },
+    {
+      "name": "range affects reach not speed or hands when still reachable",
+      "status": "PASS"
+    },
+    {
+      "name": "fixed-vector mobility gradient across all 21 abilities and 9 MDU demands",
+      "status": "PASS"
+    },
+    {
+      "name": "missing objective effort never derives E/A from actual weak capability",
+      "status": "PASS"
+    },
+    {
+      "name": "unapproved average=10 reference remains uncalibrated insufficient",
+      "status": "PASS"
+    },
+    {
+      "name": "ordinary effort profile cannot silently change execution",
+      "status": "PASS"
+    },
+    {
+      "name": "no Math.random or Match RNG access in standalone calls",
+      "status": "PASS"
+    },
+    {
+      "name": "browser-style VM load without Node imports matches CommonJS",
+      "status": "PASS"
+    }
+  ],
+  "cases": [
+    {
+      "name": "clean",
+      "sealed": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "input": {
+          "capabilities": {
+            "actorId": "first-base-1",
+            "adapterVersion": "receiver-explicit-input-v1",
+            "values": {
+              "arm": 10,
+              "catching": 16,
+              "decision": 10,
+              "fielding": 16,
+              "mobility": 10,
+              "range": 10,
+              "reaction": 10,
+              "throwing": 10
+            }
+          },
+          "contest": {
+            "actionId": "touch-1",
+            "attempted": true,
+            "contact": true,
+            "delayTicks": 100,
+            "legality": {
+              "base": "first",
+              "runnerId": "batter-1",
+              "sourceActionId": "force-state-1",
+              "status": "eligible"
+            },
+            "runnerArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 8000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "type": "batterBeforeFirst"
+          },
+          "context": {
+            "competitionLevel": "high-school",
+            "environmentId": "neutral-field-v1",
+            "initialOuts": 0,
+            "originId": "play-1:launch",
+            "receiverAvailable": true,
+            "routeId": "directFirst"
+          },
+          "continuation": null,
+          "contractVersion": "receiver-pure-contract-v2-1",
+          "delivery": {
+            "accuracy": "onTarget",
+            "actionId": "throw-1",
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "quality": "clean",
+            "status": "completed",
+            "upstreamActionId": "acquisition-1",
+            "upstreamStatus": "completed"
+          },
+          "effortReference": null,
+          "handoff": {
+            "base": "first",
+            "physicalIdentity": "owned-ground-contact-1",
+            "playId": "play-1",
+            "receiverId": "first-base-1",
+            "runnerId": "batter-1",
+            "throwerId": "ss-1"
+          },
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "owned-ground-contact-1",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-v1"
+            },
+            "playId": "play-1",
+            "receiver": {
+              "actorId": "first-base-1",
+              "position": "1B"
+            },
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "thrower": {
+              "actorId": "ss-1",
+              "position": "SS"
+            }
+          },
+          "ownedSample": 0.62,
+          "positioning": {
+            "actionId": "position-1",
+            "movementMdu": 0,
+            "startContext": "atBase",
+            "startTime": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            }
+          },
+          "provenance": {
+            "actors": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "capabilities": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "contest": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "delivery": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "physicalIdentity": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "positioning": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "runnerArrival": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            }
+          },
+          "secure": {
+            "actionId": "receive-1",
+            "bobbleDelayTicks": 600,
+            "cleanDelayTicks": 150,
+            "demandMilli": 5000
+          },
+          "versions": {
+            "adapter": "receiver-explicit-input-v1",
+            "effort": "ordinary-effort-reference-v1",
+            "execution": "receiver-pure-stages-v2-1",
+            "sampler": "physical-slot-sha256-u32be-v1",
+            "timing": "crt-integer-ticks-v2-1"
+          }
+        },
+        "inputDigest": "6cbb2768728d19c0aadb23b5e1ca9b26a019ee834698f15b8addcbed4ef16698",
+        "samples": {
+          "status": "ok",
+          "samplerVersion": "physical-slot-sha256-u32be-v1",
+          "stages": {
+            "positioning": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+              "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+              "u32": 3287115555,
+              "unit": 0.7653412305517122
+            },
+            "secure": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+              "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+              "u32": 3799248446,
+              "unit": 0.8845814611995593
+            },
+            "touch": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+              "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+              "u32": 3273682742,
+              "unit": 0.7622136600548401
+            }
+          }
+        }
+      },
+      "execution": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "6cbb2768728d19c0aadb23b5e1ca9b26a019ee834698f15b8addcbed4ef16698",
+        "identity": {
+          "leg": {
+            "actionId": "receive-1",
+            "parentActionId": null,
+            "physicalSlot": "primaryThrow",
+            "sourceThrowActionId": "throw-1"
+          },
+          "physical": {
+            "contactId": "contact-1",
+            "matchId": "match-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "plateAppearanceId": "pa-1",
+            "version": "physical-contact-binding-v1"
+          },
+          "playId": "play-1",
+          "receiver": {
+            "actorId": "first-base-1",
+            "position": "1B"
+          },
+          "target": {
+            "base": "first",
+            "runnerId": "batter-1"
+          },
+          "thrower": {
+            "actorId": "ss-1",
+            "position": "SS"
+          }
+        },
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "throw-1",
+            "accuracy": "onTarget",
+            "quality": "clean",
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "upstreamActionId": "acquisition-1"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "ready",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "position-1",
+            "ready": true,
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 940
+            },
+            "durationTicks": 940
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "cleanControl",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "receive-1",
+            "secured": true,
+            "attempted": true,
+            "handsMarginMilli": 11750,
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5150
+            },
+            "possession": {
+              "actorId": "first-base-1",
+              "actionId": "receive-1",
+              "sourceThrowActionId": "throw-1"
+            }
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "retirementCandidate",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "touch-1",
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5262
+            },
+            "runnerArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 8000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "timingMarginTicks": 2738,
+            "candidate": {
+              "kind": "unappliedRetirementCandidate",
+              "runnerId": "batter-1",
+              "base": "first",
+              "receiverId": "first-base-1",
+              "actionId": "touch-1",
+              "type": "batterBeforeFirst",
+              "initialOuts": 0,
+              "wouldBeThirdOut": false,
+              "legalScoring": "requiresExistingThirdOutOwner",
+              "possessionActionId": "receive-1"
+            }
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "referenceId": null,
+          "reason": "missingOrdinaryEffortReference",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      }
+    },
+    {
+      "name": "offline",
+      "sealed": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "input": {
+          "capabilities": {
+            "actorId": "first-base-1",
+            "adapterVersion": "receiver-explicit-input-v1",
+            "values": {
+              "arm": 10,
+              "catching": 16,
+              "decision": 10,
+              "fielding": 16,
+              "mobility": 10,
+              "range": 10,
+              "reaction": 10,
+              "throwing": 10
+            }
+          },
+          "contest": {
+            "actionId": "touch-1",
+            "attempted": true,
+            "contact": true,
+            "delayTicks": 100,
+            "legality": {
+              "base": "first",
+              "runnerId": "batter-1",
+              "sourceActionId": "force-state-1",
+              "status": "eligible"
+            },
+            "runnerArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 8000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "type": "batterBeforeFirst"
+          },
+          "context": {
+            "competitionLevel": "high-school",
+            "environmentId": "neutral-field-v1",
+            "initialOuts": 0,
+            "originId": "play-1:launch",
+            "receiverAvailable": true,
+            "routeId": "directFirst"
+          },
+          "continuation": null,
+          "contractVersion": "receiver-pure-contract-v2-1",
+          "delivery": {
+            "accuracy": "offline",
+            "actionId": "throw-1",
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "quality": "clean",
+            "status": "completed",
+            "upstreamActionId": "acquisition-1",
+            "upstreamStatus": "completed"
+          },
+          "effortReference": null,
+          "handoff": {
+            "base": "first",
+            "physicalIdentity": "owned-ground-contact-1",
+            "playId": "play-1",
+            "receiverId": "first-base-1",
+            "runnerId": "batter-1",
+            "throwerId": "ss-1"
+          },
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "owned-ground-contact-1",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-v1"
+            },
+            "playId": "play-1",
+            "receiver": {
+              "actorId": "first-base-1",
+              "position": "1B"
+            },
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "thrower": {
+              "actorId": "ss-1",
+              "position": "SS"
+            }
+          },
+          "ownedSample": 0.62,
+          "positioning": {
+            "actionId": "position-1",
+            "movementMdu": 0,
+            "startContext": "atBase",
+            "startTime": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            }
+          },
+          "provenance": {
+            "actors": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "capabilities": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "contest": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "delivery": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "physicalIdentity": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "positioning": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "runnerArrival": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            }
+          },
+          "secure": {
+            "actionId": "receive-1",
+            "bobbleDelayTicks": 600,
+            "cleanDelayTicks": 150,
+            "demandMilli": 5000
+          },
+          "versions": {
+            "adapter": "receiver-explicit-input-v1",
+            "effort": "ordinary-effort-reference-v1",
+            "execution": "receiver-pure-stages-v2-1",
+            "sampler": "physical-slot-sha256-u32be-v1",
+            "timing": "crt-integer-ticks-v2-1"
+          }
+        },
+        "inputDigest": "c4210c05193d0cd208b077e0879fbf9995997dedd1bbf37db67581b8c517d07d",
+        "samples": {
+          "status": "ok",
+          "samplerVersion": "physical-slot-sha256-u32be-v1",
+          "stages": {
+            "positioning": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+              "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+              "u32": 3287115555,
+              "unit": 0.7653412305517122
+            },
+            "secure": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+              "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+              "u32": 3799248446,
+              "unit": 0.8845814611995593
+            },
+            "touch": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+              "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+              "u32": 3273682742,
+              "unit": 0.7622136600548401
+            }
+          }
+        }
+      },
+      "execution": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "c4210c05193d0cd208b077e0879fbf9995997dedd1bbf37db67581b8c517d07d",
+        "identity": {
+          "leg": {
+            "actionId": "receive-1",
+            "parentActionId": null,
+            "physicalSlot": "primaryThrow",
+            "sourceThrowActionId": "throw-1"
+          },
+          "physical": {
+            "contactId": "contact-1",
+            "matchId": "match-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "plateAppearanceId": "pa-1",
+            "version": "physical-contact-binding-v1"
+          },
+          "playId": "play-1",
+          "receiver": {
+            "actorId": "first-base-1",
+            "position": "1B"
+          },
+          "target": {
+            "base": "first",
+            "runnerId": "batter-1"
+          },
+          "thrower": {
+            "actorId": "ss-1",
+            "position": "SS"
+          }
+        },
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "offline",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "throw-1",
+            "accuracy": "offline",
+            "quality": "clean",
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "upstreamActionId": "acquisition-1"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "positionedWithoutReception",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "position-1",
+            "ready": false,
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 940
+            },
+            "durationTicks": 940
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "notAttempted",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "receive-1",
+            "secured": false,
+            "attempted": false,
+            "reason": "noReceivableDelivery"
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "notAttempted",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "touch-1",
+            "candidate": null,
+            "reason": "noSecuredPossession"
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "referenceId": null,
+          "reason": "missingOrdinaryEffortReference",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      }
+    },
+    {
+      "name": "unavailable",
+      "sealed": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "input": {
+          "capabilities": {
+            "actorId": "first-base-1",
+            "adapterVersion": "receiver-explicit-input-v1",
+            "values": {
+              "arm": 10,
+              "catching": 16,
+              "decision": 10,
+              "fielding": 16,
+              "mobility": 10,
+              "range": 10,
+              "reaction": 10,
+              "throwing": 10
+            }
+          },
+          "contest": {
+            "actionId": "touch-1",
+            "attempted": true,
+            "contact": true,
+            "delayTicks": 100,
+            "legality": {
+              "base": "first",
+              "runnerId": "batter-1",
+              "sourceActionId": "force-state-1",
+              "status": "eligible"
+            },
+            "runnerArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 8000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "type": "batterBeforeFirst"
+          },
+          "context": {
+            "competitionLevel": "high-school",
+            "environmentId": "neutral-field-v1",
+            "initialOuts": 0,
+            "originId": "play-1:launch",
+            "receiverAvailable": false,
+            "routeId": "directFirst"
+          },
+          "continuation": null,
+          "contractVersion": "receiver-pure-contract-v2-1",
+          "delivery": {
+            "accuracy": "onTarget",
+            "actionId": "throw-1",
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "quality": "clean",
+            "status": "completed",
+            "upstreamActionId": "acquisition-1",
+            "upstreamStatus": "completed"
+          },
+          "effortReference": null,
+          "handoff": {
+            "base": "first",
+            "physicalIdentity": "owned-ground-contact-1",
+            "playId": "play-1",
+            "receiverId": "first-base-1",
+            "runnerId": "batter-1",
+            "throwerId": "ss-1"
+          },
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "owned-ground-contact-1",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-v1"
+            },
+            "playId": "play-1",
+            "receiver": {
+              "actorId": "first-base-1",
+              "position": "1B"
+            },
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "thrower": {
+              "actorId": "ss-1",
+              "position": "SS"
+            }
+          },
+          "ownedSample": 0.62,
+          "positioning": {
+            "actionId": "position-1",
+            "movementMdu": 0,
+            "startContext": "atBase",
+            "startTime": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            }
+          },
+          "provenance": {
+            "actors": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "capabilities": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "contest": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "delivery": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "physicalIdentity": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "positioning": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "runnerArrival": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            }
+          },
+          "secure": {
+            "actionId": "receive-1",
+            "bobbleDelayTicks": 600,
+            "cleanDelayTicks": 150,
+            "demandMilli": 5000
+          },
+          "versions": {
+            "adapter": "receiver-explicit-input-v1",
+            "effort": "ordinary-effort-reference-v1",
+            "execution": "receiver-pure-stages-v2-1",
+            "sampler": "physical-slot-sha256-u32be-v1",
+            "timing": "crt-integer-ticks-v2-1"
+          }
+        },
+        "inputDigest": "48ed80936eb2babef86f369dbe79fd63fea07d75bca352bf2d8efc451541d786",
+        "samples": {
+          "status": "ok",
+          "samplerVersion": "physical-slot-sha256-u32be-v1",
+          "stages": {
+            "positioning": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+              "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+              "u32": 3287115555,
+              "unit": 0.7653412305517122
+            },
+            "secure": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+              "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+              "u32": 3799248446,
+              "unit": 0.8845814611995593
+            },
+            "touch": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+              "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+              "u32": 3273682742,
+              "unit": 0.7622136600548401
+            }
+          }
+        }
+      },
+      "execution": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "48ed80936eb2babef86f369dbe79fd63fea07d75bca352bf2d8efc451541d786",
+        "identity": {
+          "leg": {
+            "actionId": "receive-1",
+            "parentActionId": null,
+            "physicalSlot": "primaryThrow",
+            "sourceThrowActionId": "throw-1"
+          },
+          "physical": {
+            "contactId": "contact-1",
+            "matchId": "match-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "plateAppearanceId": "pa-1",
+            "version": "physical-contact-binding-v1"
+          },
+          "playId": "play-1",
+          "receiver": {
+            "actorId": "first-base-1",
+            "position": "1B"
+          },
+          "target": {
+            "base": "first",
+            "runnerId": "batter-1"
+          },
+          "thrower": {
+            "actorId": "ss-1",
+            "position": "SS"
+          }
+        },
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "throw-1",
+            "accuracy": "onTarget",
+            "quality": "clean",
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "upstreamActionId": "acquisition-1"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "unavailable",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "position-1",
+            "ready": false
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "notAttempted",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "receive-1",
+            "secured": false,
+            "attempted": false,
+            "reason": "receiverNotReady"
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "notAttempted",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "touch-1",
+            "candidate": null,
+            "reason": "noSecuredPossession"
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "referenceId": null,
+          "reason": "missingOrdinaryEffortReference",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      }
+    },
+    {
+      "name": "late",
+      "sealed": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "input": {
+          "capabilities": {
+            "actorId": "first-base-1",
+            "adapterVersion": "receiver-explicit-input-v1",
+            "values": {
+              "arm": 10,
+              "catching": 16,
+              "decision": 10,
+              "fielding": 16,
+              "mobility": 10,
+              "range": 10,
+              "reaction": 10,
+              "throwing": 10
+            }
+          },
+          "contest": {
+            "actionId": "touch-1",
+            "attempted": true,
+            "contact": true,
+            "delayTicks": 100,
+            "legality": {
+              "base": "first",
+              "runnerId": "batter-1",
+              "sourceActionId": "force-state-1",
+              "status": "eligible"
+            },
+            "runnerArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 8000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "type": "batterBeforeFirst"
+          },
+          "context": {
+            "competitionLevel": "high-school",
+            "environmentId": "neutral-field-v1",
+            "initialOuts": 0,
+            "originId": "play-1:launch",
+            "receiverAvailable": true,
+            "routeId": "directFirst"
+          },
+          "continuation": null,
+          "contractVersion": "receiver-pure-contract-v2-1",
+          "delivery": {
+            "accuracy": "onTarget",
+            "actionId": "throw-1",
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "quality": "clean",
+            "status": "completed",
+            "upstreamActionId": "acquisition-1",
+            "upstreamStatus": "completed"
+          },
+          "effortReference": null,
+          "handoff": {
+            "base": "first",
+            "physicalIdentity": "owned-ground-contact-1",
+            "playId": "play-1",
+            "receiverId": "first-base-1",
+            "runnerId": "batter-1",
+            "throwerId": "ss-1"
+          },
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "owned-ground-contact-1",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-v1"
+            },
+            "playId": "play-1",
+            "receiver": {
+              "actorId": "first-base-1",
+              "position": "1B"
+            },
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "thrower": {
+              "actorId": "ss-1",
+              "position": "SS"
+            }
+          },
+          "ownedSample": 0.62,
+          "positioning": {
+            "actionId": "position-1",
+            "movementMdu": 5,
+            "startContext": "distant",
+            "startTime": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            }
+          },
+          "provenance": {
+            "actors": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "capabilities": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "contest": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "delivery": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "physicalIdentity": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "positioning": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "runnerArrival": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            }
+          },
+          "secure": {
+            "actionId": "receive-1",
+            "bobbleDelayTicks": 600,
+            "cleanDelayTicks": 150,
+            "demandMilli": 5000
+          },
+          "versions": {
+            "adapter": "receiver-explicit-input-v1",
+            "effort": "ordinary-effort-reference-v1",
+            "execution": "receiver-pure-stages-v2-1",
+            "sampler": "physical-slot-sha256-u32be-v1",
+            "timing": "crt-integer-ticks-v2-1"
+          }
+        },
+        "inputDigest": "b0f04a4d414cbbfa17fd2e8c8802b18536fd00249639921b5b3ee7f2899306e3",
+        "samples": {
+          "status": "ok",
+          "samplerVersion": "physical-slot-sha256-u32be-v1",
+          "stages": {
+            "positioning": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+              "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+              "u32": 3287115555,
+              "unit": 0.7653412305517122
+            },
+            "secure": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+              "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+              "u32": 3799248446,
+              "unit": 0.8845814611995593
+            },
+            "touch": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+              "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+              "u32": 3273682742,
+              "unit": 0.7622136600548401
+            }
+          }
+        }
+      },
+      "execution": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "b0f04a4d414cbbfa17fd2e8c8802b18536fd00249639921b5b3ee7f2899306e3",
+        "identity": {
+          "leg": {
+            "actionId": "receive-1",
+            "parentActionId": null,
+            "physicalSlot": "primaryThrow",
+            "sourceThrowActionId": "throw-1"
+          },
+          "physical": {
+            "contactId": "contact-1",
+            "matchId": "match-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "plateAppearanceId": "pa-1",
+            "version": "physical-contact-binding-v1"
+          },
+          "playId": "play-1",
+          "receiver": {
+            "actorId": "first-base-1",
+            "position": "1B"
+          },
+          "target": {
+            "base": "first",
+            "runnerId": "batter-1"
+          },
+          "thrower": {
+            "actorId": "ss-1",
+            "position": "SS"
+          }
+        },
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "throw-1",
+            "accuracy": "onTarget",
+            "quality": "clean",
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "upstreamActionId": "acquisition-1"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "late",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "position-1",
+            "ready": false,
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5486
+            },
+            "durationTicks": 5486
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "notAttempted",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "receive-1",
+            "secured": false,
+            "attempted": false,
+            "reason": "receiverNotReady"
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "notAttempted",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "touch-1",
+            "candidate": null,
+            "reason": "noSecuredPossession"
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "referenceId": null,
+          "reason": "missingOrdinaryEffortReference",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      }
+    },
+    {
+      "name": "hands",
+      "sealed": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "input": {
+          "capabilities": {
+            "actorId": "first-base-1",
+            "adapterVersion": "receiver-explicit-input-v1",
+            "values": {
+              "arm": 10,
+              "catching": 0,
+              "decision": 10,
+              "fielding": 0,
+              "mobility": 10,
+              "range": 10,
+              "reaction": 10,
+              "throwing": 10
+            }
+          },
+          "contest": {
+            "actionId": "touch-1",
+            "attempted": true,
+            "contact": true,
+            "delayTicks": 100,
+            "legality": {
+              "base": "first",
+              "runnerId": "batter-1",
+              "sourceActionId": "force-state-1",
+              "status": "eligible"
+            },
+            "runnerArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 8000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "type": "batterBeforeFirst"
+          },
+          "context": {
+            "competitionLevel": "high-school",
+            "environmentId": "neutral-field-v1",
+            "initialOuts": 0,
+            "originId": "play-1:launch",
+            "receiverAvailable": true,
+            "routeId": "directFirst"
+          },
+          "continuation": null,
+          "contractVersion": "receiver-pure-contract-v2-1",
+          "delivery": {
+            "accuracy": "onTarget",
+            "actionId": "throw-1",
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "quality": "clean",
+            "status": "completed",
+            "upstreamActionId": "acquisition-1",
+            "upstreamStatus": "completed"
+          },
+          "effortReference": null,
+          "handoff": {
+            "base": "first",
+            "physicalIdentity": "owned-ground-contact-1",
+            "playId": "play-1",
+            "receiverId": "first-base-1",
+            "runnerId": "batter-1",
+            "throwerId": "ss-1"
+          },
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "owned-ground-contact-1",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-v1"
+            },
+            "playId": "play-1",
+            "receiver": {
+              "actorId": "first-base-1",
+              "position": "1B"
+            },
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "thrower": {
+              "actorId": "ss-1",
+              "position": "SS"
+            }
+          },
+          "ownedSample": 0.62,
+          "positioning": {
+            "actionId": "position-1",
+            "movementMdu": 0,
+            "startContext": "atBase",
+            "startTime": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            }
+          },
+          "provenance": {
+            "actors": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "capabilities": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "contest": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "delivery": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "physicalIdentity": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "positioning": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "runnerArrival": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            }
+          },
+          "secure": {
+            "actionId": "receive-1",
+            "bobbleDelayTicks": 600,
+            "cleanDelayTicks": 150,
+            "demandMilli": 5000
+          },
+          "versions": {
+            "adapter": "receiver-explicit-input-v1",
+            "effort": "ordinary-effort-reference-v1",
+            "execution": "receiver-pure-stages-v2-1",
+            "sampler": "physical-slot-sha256-u32be-v1",
+            "timing": "crt-integer-ticks-v2-1"
+          }
+        },
+        "inputDigest": "229613b0a174d07b627b0572b6cd84358e9c6f85df1ca34d883dc93241d4de08",
+        "samples": {
+          "status": "ok",
+          "samplerVersion": "physical-slot-sha256-u32be-v1",
+          "stages": {
+            "positioning": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+              "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+              "u32": 3287115555,
+              "unit": 0.7653412305517122
+            },
+            "secure": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+              "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+              "u32": 3799248446,
+              "unit": 0.8845814611995593
+            },
+            "touch": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+              "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+              "u32": 3273682742,
+              "unit": 0.7622136600548401
+            }
+          }
+        }
+      },
+      "execution": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "229613b0a174d07b627b0572b6cd84358e9c6f85df1ca34d883dc93241d4de08",
+        "identity": {
+          "leg": {
+            "actionId": "receive-1",
+            "parentActionId": null,
+            "physicalSlot": "primaryThrow",
+            "sourceThrowActionId": "throw-1"
+          },
+          "physical": {
+            "contactId": "contact-1",
+            "matchId": "match-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "plateAppearanceId": "pa-1",
+            "version": "physical-contact-binding-v1"
+          },
+          "playId": "play-1",
+          "receiver": {
+            "actorId": "first-base-1",
+            "position": "1B"
+          },
+          "target": {
+            "base": "first",
+            "runnerId": "batter-1"
+          },
+          "thrower": {
+            "actorId": "ss-1",
+            "position": "SS"
+          }
+        },
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "throw-1",
+            "accuracy": "onTarget",
+            "quality": "clean",
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "upstreamActionId": "acquisition-1"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "ready",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "position-1",
+            "ready": true,
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 940
+            },
+            "durationTicks": 940
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "failedHands",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "receive-1",
+            "secured": false,
+            "attempted": true,
+            "handsMarginMilli": -4250
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "notAttempted",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "touch-1",
+            "candidate": null,
+            "reason": "noSecuredPossession"
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "referenceId": null,
+          "reason": "missingOrdinaryEffortReference",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      }
+    },
+    {
+      "name": "bobble",
+      "sealed": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "input": {
+          "capabilities": {
+            "actorId": "first-base-1",
+            "adapterVersion": "receiver-explicit-input-v1",
+            "values": {
+              "arm": 10,
+              "catching": 16,
+              "decision": 10,
+              "fielding": 16,
+              "mobility": 10,
+              "range": 10,
+              "reaction": 10,
+              "throwing": 10
+            }
+          },
+          "contest": {
+            "actionId": "touch-1",
+            "attempted": true,
+            "contact": true,
+            "delayTicks": 100,
+            "legality": {
+              "base": "first",
+              "runnerId": "batter-1",
+              "sourceActionId": "force-state-1",
+              "status": "eligible"
+            },
+            "runnerArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 8000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "type": "batterBeforeFirst"
+          },
+          "context": {
+            "competitionLevel": "high-school",
+            "environmentId": "neutral-field-v1",
+            "initialOuts": 0,
+            "originId": "play-1:launch",
+            "receiverAvailable": true,
+            "routeId": "directFirst"
+          },
+          "continuation": null,
+          "contractVersion": "receiver-pure-contract-v2-1",
+          "delivery": {
+            "accuracy": "onTarget",
+            "actionId": "throw-1",
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "quality": "clean",
+            "status": "completed",
+            "upstreamActionId": "acquisition-1",
+            "upstreamStatus": "completed"
+          },
+          "effortReference": null,
+          "handoff": {
+            "base": "first",
+            "physicalIdentity": "owned-ground-contact-1",
+            "playId": "play-1",
+            "receiverId": "first-base-1",
+            "runnerId": "batter-1",
+            "throwerId": "ss-1"
+          },
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "owned-ground-contact-1",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-v1"
+            },
+            "playId": "play-1",
+            "receiver": {
+              "actorId": "first-base-1",
+              "position": "1B"
+            },
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "thrower": {
+              "actorId": "ss-1",
+              "position": "SS"
+            }
+          },
+          "ownedSample": 0.62,
+          "positioning": {
+            "actionId": "position-1",
+            "movementMdu": 0,
+            "startContext": "atBase",
+            "startTime": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            }
+          },
+          "provenance": {
+            "actors": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "capabilities": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "contest": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "delivery": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "physicalIdentity": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "positioning": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "runnerArrival": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            }
+          },
+          "secure": {
+            "actionId": "receive-1",
+            "bobbleDelayTicks": 600,
+            "cleanDelayTicks": 150,
+            "demandMilli": 16250
+          },
+          "versions": {
+            "adapter": "receiver-explicit-input-v1",
+            "effort": "ordinary-effort-reference-v1",
+            "execution": "receiver-pure-stages-v2-1",
+            "sampler": "physical-slot-sha256-u32be-v1",
+            "timing": "crt-integer-ticks-v2-1"
+          }
+        },
+        "inputDigest": "aa2b3042ccf5b4d4c1ea6cbb139d490b29f7b8cf41e290d8e9959528a63c5101",
+        "samples": {
+          "status": "ok",
+          "samplerVersion": "physical-slot-sha256-u32be-v1",
+          "stages": {
+            "positioning": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+              "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+              "u32": 3287115555,
+              "unit": 0.7653412305517122
+            },
+            "secure": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+              "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+              "u32": 3799248446,
+              "unit": 0.8845814611995593
+            },
+            "touch": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+              "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+              "u32": 3273682742,
+              "unit": 0.7622136600548401
+            }
+          }
+        }
+      },
+      "execution": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "aa2b3042ccf5b4d4c1ea6cbb139d490b29f7b8cf41e290d8e9959528a63c5101",
+        "identity": {
+          "leg": {
+            "actionId": "receive-1",
+            "parentActionId": null,
+            "physicalSlot": "primaryThrow",
+            "sourceThrowActionId": "throw-1"
+          },
+          "physical": {
+            "contactId": "contact-1",
+            "matchId": "match-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "plateAppearanceId": "pa-1",
+            "version": "physical-contact-binding-v1"
+          },
+          "playId": "play-1",
+          "receiver": {
+            "actorId": "first-base-1",
+            "position": "1B"
+          },
+          "target": {
+            "base": "first",
+            "runnerId": "batter-1"
+          },
+          "thrower": {
+            "actorId": "ss-1",
+            "position": "SS"
+          }
+        },
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "throw-1",
+            "accuracy": "onTarget",
+            "quality": "clean",
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "upstreamActionId": "acquisition-1"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "ready",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "position-1",
+            "ready": true,
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 940
+            },
+            "durationTicks": 940
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "bobbleControl",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "receive-1",
+            "secured": true,
+            "attempted": true,
+            "handsMarginMilli": 500,
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5750
+            },
+            "possession": {
+              "actorId": "first-base-1",
+              "actionId": "receive-1",
+              "sourceThrowActionId": "throw-1"
+            }
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "retirementCandidate",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "touch-1",
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5862
+            },
+            "runnerArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 8000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "timingMarginTicks": 2138,
+            "candidate": {
+              "kind": "unappliedRetirementCandidate",
+              "runnerId": "batter-1",
+              "base": "first",
+              "receiverId": "first-base-1",
+              "actionId": "touch-1",
+              "type": "batterBeforeFirst",
+              "initialOuts": 0,
+              "wouldBeThirdOut": false,
+              "legalScoring": "requiresExistingThirdOutOwner",
+              "possessionActionId": "receive-1"
+            }
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "referenceId": null,
+          "reason": "missingOrdinaryEffortReference",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      }
+    },
+    {
+      "name": "fast",
+      "sealed": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "input": {
+          "capabilities": {
+            "actorId": "first-base-1",
+            "adapterVersion": "receiver-explicit-input-v1",
+            "values": {
+              "arm": 10,
+              "catching": 16,
+              "decision": 10,
+              "fielding": 16,
+              "mobility": 10,
+              "range": 10,
+              "reaction": 10,
+              "throwing": 10
+            }
+          },
+          "contest": {
+            "actionId": "touch-1",
+            "attempted": true,
+            "contact": true,
+            "delayTicks": 100,
+            "legality": {
+              "base": "first",
+              "runnerId": "batter-1",
+              "sourceActionId": "force-state-1",
+              "status": "eligible"
+            },
+            "runnerArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": -1000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "type": "batterBeforeFirst"
+          },
+          "context": {
+            "competitionLevel": "high-school",
+            "environmentId": "neutral-field-v1",
+            "initialOuts": 0,
+            "originId": "play-1:launch",
+            "receiverAvailable": true,
+            "routeId": "directFirst"
+          },
+          "continuation": null,
+          "contractVersion": "receiver-pure-contract-v2-1",
+          "delivery": {
+            "accuracy": "onTarget",
+            "actionId": "throw-1",
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "quality": "clean",
+            "status": "completed",
+            "upstreamActionId": "acquisition-1",
+            "upstreamStatus": "completed"
+          },
+          "effortReference": null,
+          "handoff": {
+            "base": "first",
+            "physicalIdentity": "owned-ground-contact-1",
+            "playId": "play-1",
+            "receiverId": "first-base-1",
+            "runnerId": "batter-1",
+            "throwerId": "ss-1"
+          },
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "owned-ground-contact-1",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-v1"
+            },
+            "playId": "play-1",
+            "receiver": {
+              "actorId": "first-base-1",
+              "position": "1B"
+            },
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "thrower": {
+              "actorId": "ss-1",
+              "position": "SS"
+            }
+          },
+          "ownedSample": 0.62,
+          "positioning": {
+            "actionId": "position-1",
+            "movementMdu": 0,
+            "startContext": "atBase",
+            "startTime": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            }
+          },
+          "provenance": {
+            "actors": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "capabilities": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "contest": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "delivery": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "physicalIdentity": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "positioning": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "runnerArrival": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            }
+          },
+          "secure": {
+            "actionId": "receive-1",
+            "bobbleDelayTicks": 600,
+            "cleanDelayTicks": 150,
+            "demandMilli": 5000
+          },
+          "versions": {
+            "adapter": "receiver-explicit-input-v1",
+            "effort": "ordinary-effort-reference-v1",
+            "execution": "receiver-pure-stages-v2-1",
+            "sampler": "physical-slot-sha256-u32be-v1",
+            "timing": "crt-integer-ticks-v2-1"
+          }
+        },
+        "inputDigest": "d4968292e5b05c747aab822b893cf5ada559478448f99440d6494ed529adfffa",
+        "samples": {
+          "status": "ok",
+          "samplerVersion": "physical-slot-sha256-u32be-v1",
+          "stages": {
+            "positioning": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+              "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+              "u32": 3287115555,
+              "unit": 0.7653412305517122
+            },
+            "secure": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+              "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+              "u32": 3799248446,
+              "unit": 0.8845814611995593
+            },
+            "touch": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+              "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+              "u32": 3273682742,
+              "unit": 0.7622136600548401
+            }
+          }
+        }
+      },
+      "execution": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "d4968292e5b05c747aab822b893cf5ada559478448f99440d6494ed529adfffa",
+        "identity": {
+          "leg": {
+            "actionId": "receive-1",
+            "parentActionId": null,
+            "physicalSlot": "primaryThrow",
+            "sourceThrowActionId": "throw-1"
+          },
+          "physical": {
+            "contactId": "contact-1",
+            "matchId": "match-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "plateAppearanceId": "pa-1",
+            "version": "physical-contact-binding-v1"
+          },
+          "playId": "play-1",
+          "receiver": {
+            "actorId": "first-base-1",
+            "position": "1B"
+          },
+          "target": {
+            "base": "first",
+            "runnerId": "batter-1"
+          },
+          "thrower": {
+            "actorId": "ss-1",
+            "position": "SS"
+          }
+        },
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "throw-1",
+            "accuracy": "onTarget",
+            "quality": "clean",
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "upstreamActionId": "acquisition-1"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "ready",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "position-1",
+            "ready": true,
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 940
+            },
+            "durationTicks": 940
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "cleanControl",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "receive-1",
+            "secured": true,
+            "attempted": true,
+            "handsMarginMilli": 11750,
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5150
+            },
+            "possession": {
+              "actorId": "first-base-1",
+              "actionId": "receive-1",
+              "sourceThrowActionId": "throw-1"
+            }
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "alreadySafe",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "touch-1",
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5262
+            },
+            "runnerArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": -1000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "timingMarginTicks": -6262,
+            "candidate": null
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "referenceId": null,
+          "reason": "missingOrdinaryEffortReference",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      }
+    },
+    {
+      "name": "safe",
+      "sealed": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "input": {
+          "capabilities": {
+            "actorId": "first-base-1",
+            "adapterVersion": "receiver-explicit-input-v1",
+            "values": {
+              "arm": 10,
+              "catching": 16,
+              "decision": 10,
+              "fielding": 16,
+              "mobility": 10,
+              "range": 10,
+              "reaction": 10,
+              "throwing": 10
+            }
+          },
+          "contest": {
+            "actionId": "touch-1",
+            "attempted": true,
+            "contact": true,
+            "delayTicks": 100,
+            "legality": {
+              "base": "first",
+              "runnerId": "batter-1",
+              "sourceActionId": "force-state-1",
+              "status": "eligible"
+            },
+            "runnerArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5200,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "type": "batterBeforeFirst"
+          },
+          "context": {
+            "competitionLevel": "high-school",
+            "environmentId": "neutral-field-v1",
+            "initialOuts": 0,
+            "originId": "play-1:launch",
+            "receiverAvailable": true,
+            "routeId": "directFirst"
+          },
+          "continuation": null,
+          "contractVersion": "receiver-pure-contract-v2-1",
+          "delivery": {
+            "accuracy": "onTarget",
+            "actionId": "throw-1",
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "quality": "clean",
+            "status": "completed",
+            "upstreamActionId": "acquisition-1",
+            "upstreamStatus": "completed"
+          },
+          "effortReference": null,
+          "handoff": {
+            "base": "first",
+            "physicalIdentity": "owned-ground-contact-1",
+            "playId": "play-1",
+            "receiverId": "first-base-1",
+            "runnerId": "batter-1",
+            "throwerId": "ss-1"
+          },
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "owned-ground-contact-1",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-v1"
+            },
+            "playId": "play-1",
+            "receiver": {
+              "actorId": "first-base-1",
+              "position": "1B"
+            },
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "thrower": {
+              "actorId": "ss-1",
+              "position": "SS"
+            }
+          },
+          "ownedSample": 0.62,
+          "positioning": {
+            "actionId": "position-1",
+            "movementMdu": 0,
+            "startContext": "atBase",
+            "startTime": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            }
+          },
+          "provenance": {
+            "actors": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "capabilities": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "contest": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "delivery": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "physicalIdentity": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "positioning": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "runnerArrival": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            }
+          },
+          "secure": {
+            "actionId": "receive-1",
+            "bobbleDelayTicks": 600,
+            "cleanDelayTicks": 150,
+            "demandMilli": 5000
+          },
+          "versions": {
+            "adapter": "receiver-explicit-input-v1",
+            "effort": "ordinary-effort-reference-v1",
+            "execution": "receiver-pure-stages-v2-1",
+            "sampler": "physical-slot-sha256-u32be-v1",
+            "timing": "crt-integer-ticks-v2-1"
+          }
+        },
+        "inputDigest": "e624a0a5620b0bf6c0b199c39b2598222596ecb1abeaa49d0055a702b9a33c22",
+        "samples": {
+          "status": "ok",
+          "samplerVersion": "physical-slot-sha256-u32be-v1",
+          "stages": {
+            "positioning": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+              "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+              "u32": 3287115555,
+              "unit": 0.7653412305517122
+            },
+            "secure": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+              "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+              "u32": 3799248446,
+              "unit": 0.8845814611995593
+            },
+            "touch": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+              "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+              "u32": 3273682742,
+              "unit": 0.7622136600548401
+            }
+          }
+        }
+      },
+      "execution": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "e624a0a5620b0bf6c0b199c39b2598222596ecb1abeaa49d0055a702b9a33c22",
+        "identity": {
+          "leg": {
+            "actionId": "receive-1",
+            "parentActionId": null,
+            "physicalSlot": "primaryThrow",
+            "sourceThrowActionId": "throw-1"
+          },
+          "physical": {
+            "contactId": "contact-1",
+            "matchId": "match-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "plateAppearanceId": "pa-1",
+            "version": "physical-contact-binding-v1"
+          },
+          "playId": "play-1",
+          "receiver": {
+            "actorId": "first-base-1",
+            "position": "1B"
+          },
+          "target": {
+            "base": "first",
+            "runnerId": "batter-1"
+          },
+          "thrower": {
+            "actorId": "ss-1",
+            "position": "SS"
+          }
+        },
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "throw-1",
+            "accuracy": "onTarget",
+            "quality": "clean",
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "upstreamActionId": "acquisition-1"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "ready",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "position-1",
+            "ready": true,
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 940
+            },
+            "durationTicks": 940
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "cleanControl",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "receive-1",
+            "secured": true,
+            "attempted": true,
+            "handsMarginMilli": 11750,
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5150
+            },
+            "possession": {
+              "actorId": "first-base-1",
+              "actionId": "receive-1",
+              "sourceThrowActionId": "throw-1"
+            }
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "alreadySafe",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "touch-1",
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5262
+            },
+            "runnerArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5200,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "timingMarginTicks": -62,
+            "candidate": null
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "referenceId": null,
+          "reason": "missingOrdinaryEffortReference",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      }
+    },
+    {
+      "name": "noTouch",
+      "sealed": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "input": {
+          "capabilities": {
+            "actorId": "first-base-1",
+            "adapterVersion": "receiver-explicit-input-v1",
+            "values": {
+              "arm": 10,
+              "catching": 16,
+              "decision": 10,
+              "fielding": 16,
+              "mobility": 10,
+              "range": 10,
+              "reaction": 10,
+              "throwing": 10
+            }
+          },
+          "contest": {
+            "actionId": "touch-1",
+            "attempted": false,
+            "contact": false,
+            "delayTicks": 100,
+            "legality": {
+              "base": "first",
+              "runnerId": "batter-1",
+              "sourceActionId": "force-state-1",
+              "status": "eligible"
+            },
+            "runnerArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 8000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "type": "batterBeforeFirst"
+          },
+          "context": {
+            "competitionLevel": "high-school",
+            "environmentId": "neutral-field-v1",
+            "initialOuts": 0,
+            "originId": "play-1:launch",
+            "receiverAvailable": true,
+            "routeId": "directFirst"
+          },
+          "continuation": null,
+          "contractVersion": "receiver-pure-contract-v2-1",
+          "delivery": {
+            "accuracy": "onTarget",
+            "actionId": "throw-1",
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "quality": "clean",
+            "status": "completed",
+            "upstreamActionId": "acquisition-1",
+            "upstreamStatus": "completed"
+          },
+          "effortReference": null,
+          "handoff": {
+            "base": "first",
+            "physicalIdentity": "owned-ground-contact-1",
+            "playId": "play-1",
+            "receiverId": "first-base-1",
+            "runnerId": "batter-1",
+            "throwerId": "ss-1"
+          },
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "owned-ground-contact-1",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-v1"
+            },
+            "playId": "play-1",
+            "receiver": {
+              "actorId": "first-base-1",
+              "position": "1B"
+            },
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "thrower": {
+              "actorId": "ss-1",
+              "position": "SS"
+            }
+          },
+          "ownedSample": 0.62,
+          "positioning": {
+            "actionId": "position-1",
+            "movementMdu": 0,
+            "startContext": "atBase",
+            "startTime": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            }
+          },
+          "provenance": {
+            "actors": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "capabilities": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "contest": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "delivery": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "physicalIdentity": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "positioning": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "runnerArrival": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            }
+          },
+          "secure": {
+            "actionId": "receive-1",
+            "bobbleDelayTicks": 600,
+            "cleanDelayTicks": 150,
+            "demandMilli": 5000
+          },
+          "versions": {
+            "adapter": "receiver-explicit-input-v1",
+            "effort": "ordinary-effort-reference-v1",
+            "execution": "receiver-pure-stages-v2-1",
+            "sampler": "physical-slot-sha256-u32be-v1",
+            "timing": "crt-integer-ticks-v2-1"
+          }
+        },
+        "inputDigest": "40fa01360a96efb3248b97dd27dd1a8c22f2cfceae0fd170ae9186393ba8f6e6",
+        "samples": {
+          "status": "ok",
+          "samplerVersion": "physical-slot-sha256-u32be-v1",
+          "stages": {
+            "positioning": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+              "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+              "u32": 3287115555,
+              "unit": 0.7653412305517122
+            },
+            "secure": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+              "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+              "u32": 3799248446,
+              "unit": 0.8845814611995593
+            },
+            "touch": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+              "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+              "u32": 3273682742,
+              "unit": 0.7622136600548401
+            }
+          }
+        }
+      },
+      "execution": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "40fa01360a96efb3248b97dd27dd1a8c22f2cfceae0fd170ae9186393ba8f6e6",
+        "identity": {
+          "leg": {
+            "actionId": "receive-1",
+            "parentActionId": null,
+            "physicalSlot": "primaryThrow",
+            "sourceThrowActionId": "throw-1"
+          },
+          "physical": {
+            "contactId": "contact-1",
+            "matchId": "match-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "plateAppearanceId": "pa-1",
+            "version": "physical-contact-binding-v1"
+          },
+          "playId": "play-1",
+          "receiver": {
+            "actorId": "first-base-1",
+            "position": "1B"
+          },
+          "target": {
+            "base": "first",
+            "runnerId": "batter-1"
+          },
+          "thrower": {
+            "actorId": "ss-1",
+            "position": "SS"
+          }
+        },
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "throw-1",
+            "accuracy": "onTarget",
+            "quality": "clean",
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "upstreamActionId": "acquisition-1"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "ready",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "position-1",
+            "ready": true,
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 940
+            },
+            "durationTicks": 940
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "cleanControl",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "receive-1",
+            "secured": true,
+            "attempted": true,
+            "handsMarginMilli": 11750,
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5150
+            },
+            "possession": {
+              "actorId": "first-base-1",
+              "actionId": "receive-1",
+              "sourceThrowActionId": "throw-1"
+            }
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "notAttempted",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "touch-1",
+            "candidate": null,
+            "reason": "noCompletedTouchOrTag"
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "referenceId": null,
+          "reason": "missingOrdinaryEffortReference",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      }
+    },
+    {
+      "name": "unknown",
+      "sealed": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "input": {
+          "capabilities": {
+            "actorId": "first-base-1",
+            "adapterVersion": "receiver-explicit-input-v1",
+            "values": {
+              "arm": 10,
+              "catching": 16,
+              "decision": 10,
+              "fielding": 16,
+              "mobility": 10,
+              "range": 10,
+              "reaction": 10,
+              "throwing": 10
+            }
+          },
+          "contest": {
+            "actionId": "touch-1",
+            "attempted": true,
+            "contact": true,
+            "delayTicks": 100,
+            "legality": {
+              "base": "first",
+              "runnerId": "batter-1",
+              "sourceActionId": "force-state-1",
+              "status": "eligible"
+            },
+            "runnerArrival": {
+              "originId": "play-1:launch",
+              "reason": "missing-runner-time",
+              "status": "unknown",
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "type": "batterBeforeFirst"
+          },
+          "context": {
+            "competitionLevel": "high-school",
+            "environmentId": "neutral-field-v1",
+            "initialOuts": 0,
+            "originId": "play-1:launch",
+            "receiverAvailable": true,
+            "routeId": "directFirst"
+          },
+          "continuation": null,
+          "contractVersion": "receiver-pure-contract-v2-1",
+          "delivery": {
+            "accuracy": "onTarget",
+            "actionId": "throw-1",
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "quality": "clean",
+            "status": "completed",
+            "upstreamActionId": "acquisition-1",
+            "upstreamStatus": "completed"
+          },
+          "effortReference": null,
+          "handoff": {
+            "base": "first",
+            "physicalIdentity": "owned-ground-contact-1",
+            "playId": "play-1",
+            "receiverId": "first-base-1",
+            "runnerId": "batter-1",
+            "throwerId": "ss-1"
+          },
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "owned-ground-contact-1",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-v1"
+            },
+            "playId": "play-1",
+            "receiver": {
+              "actorId": "first-base-1",
+              "position": "1B"
+            },
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "thrower": {
+              "actorId": "ss-1",
+              "position": "SS"
+            }
+          },
+          "ownedSample": 0.62,
+          "positioning": {
+            "actionId": "position-1",
+            "movementMdu": 0,
+            "startContext": "atBase",
+            "startTime": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            }
+          },
+          "provenance": {
+            "actors": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "capabilities": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "contest": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "delivery": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "physicalIdentity": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "positioning": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            },
+            "runnerArrival": {
+              "classification": "A",
+              "owner": "declared-fixture",
+              "reference": "fixture-v1",
+              "scope": "pureFixture",
+              "version": "fixture-source-v1"
+            }
+          },
+          "secure": {
+            "actionId": "receive-1",
+            "bobbleDelayTicks": 600,
+            "cleanDelayTicks": 150,
+            "demandMilli": 5000
+          },
+          "versions": {
+            "adapter": "receiver-explicit-input-v1",
+            "effort": "ordinary-effort-reference-v1",
+            "execution": "receiver-pure-stages-v2-1",
+            "sampler": "physical-slot-sha256-u32be-v1",
+            "timing": "crt-integer-ticks-v2-1"
+          }
+        },
+        "inputDigest": "ecd9057dca87d1c147a92480a0ff30e0ceeae233215ef645f7b7edde6de46ddb",
+        "samples": {
+          "status": "ok",
+          "samplerVersion": "physical-slot-sha256-u32be-v1",
+          "stages": {
+            "positioning": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+              "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+              "u32": 3287115555,
+              "unit": 0.7653412305517122
+            },
+            "secure": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+              "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+              "u32": 3799248446,
+              "unit": 0.8845814611995593
+            },
+            "touch": {
+              "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+              "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+              "u32": 3273682742,
+              "unit": 0.7622136600548401
+            }
+          }
+        }
+      },
+      "execution": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "ecd9057dca87d1c147a92480a0ff30e0ceeae233215ef645f7b7edde6de46ddb",
+        "identity": {
+          "leg": {
+            "actionId": "receive-1",
+            "parentActionId": null,
+            "physicalSlot": "primaryThrow",
+            "sourceThrowActionId": "throw-1"
+          },
+          "physical": {
+            "contactId": "contact-1",
+            "matchId": "match-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "plateAppearanceId": "pa-1",
+            "version": "physical-contact-binding-v1"
+          },
+          "playId": "play-1",
+          "receiver": {
+            "actorId": "first-base-1",
+            "position": "1B"
+          },
+          "target": {
+            "base": "first",
+            "runnerId": "batter-1"
+          },
+          "thrower": {
+            "actorId": "ss-1",
+            "position": "SS"
+          }
+        },
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "throw-1",
+            "accuracy": "onTarget",
+            "quality": "clean",
+            "launch": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 0,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "ballArrival": {
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5000,
+              "version": "crt-integer-ticks-v2-1"
+            },
+            "upstreamActionId": "acquisition-1"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "ready",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "position-1",
+            "ready": true,
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 940
+            },
+            "durationTicks": 940
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "cleanControl",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "receive-1",
+            "secured": true,
+            "attempted": true,
+            "handsMarginMilli": 11750,
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5150
+            },
+            "possession": {
+              "actorId": "first-base-1",
+              "actionId": "receive-1",
+              "sourceThrowActionId": "throw-1"
+            }
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "insufficient",
+            "playId": "play-1",
+            "physicalIdentity": "owned-ground-contact-1",
+            "legActionId": "receive-1",
+            "receiverId": "first-base-1",
+            "target": {
+              "base": "first",
+              "runnerId": "batter-1"
+            },
+            "actionId": "touch-1",
+            "completion": {
+              "version": "crt-integer-ticks-v2-1",
+              "originId": "play-1:launch",
+              "status": "known",
+              "ticks": 5262
+            },
+            "candidate": null,
+            "reason": "unknownRunnerTime"
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "referenceId": null,
+          "reason": "missingOrdinaryEffortReference",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      }
+    }
+  ],
+  "schemaValidation": {
+    "status": "PASS",
+    "keywordScope": "Only keywords used in delivered schema; not a general JSON-Schema implementation",
+    "cases": [
+      {
+        "case": "clean",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "offline",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "unavailable",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "late",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "hands",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "bobble",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "fast",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "safe",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "noTouch",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "unknown",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "unknownPosition",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "unknownBall",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "noDelivery",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "unreachable",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "ineligible",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "unknownForce",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "challenging",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "maximumTime",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "tie",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "relay",
+        "input": "PASS",
+        "output": "PASS"
+      },
+      {
+        "case": "blockedRelay",
+        "input": "PASS",
+        "output": "PASS"
+      }
+    ]
+  },
+  "sourceHashes": {
+    "receiver-execution-v2-foundation.js": "44581d76bb5bacbac1515dd762afe4e0e6814b8b3f9adb8a2b60963a523f514e",
+    "tests/receiver-execution-v2-pure-contract-test.cjs": "04d435de56fa44cfdb411568dea8528c9d321b49ffdae160f2803bbe3acb0859",
+    "tests/receiver-execution-v2-sprint-8-runner.cjs": "fc669cbe6666f74f797e7a4c4bfa1b3458bed6d9ce3a3cdb039792eaca783856"
+  }
+}

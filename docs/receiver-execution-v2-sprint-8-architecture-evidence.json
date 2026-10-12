@@ -1,0 +1,457 @@
+{
+  "sprint": 8,
+  "tier": 2,
+  "index": {
+    "project": "E-meng-baseball_life_sim_semirefactor",
+    "nodes": 54809,
+    "edges": 73085,
+    "status": "ready",
+    "root_path": "E:/meng/baseball_life_sim_semirefactor",
+    "indexed_at": "2026-10-12T14:17:02Z",
+    "parse_partial": {
+      "files": [
+        {
+          "path": "docs/ability-performance-correlation-audit-sprint-1.1.md",
+          "error_ranges": "48-48,49-49,50-50,51-51,52-52,53-53,54-54,55-55,56-56"
+        }
+      ],
+      "count": 1,
+      "truncated": false
+    },
+    "parse_unusable": {
+      "files": [],
+      "count": 0,
+      "truncated": false
+    },
+    "skipped": {
+      "files": [],
+      "count": 0,
+      "truncated": false
+    },
+    "not_indexed": {
+      "dirs": [
+        ".git",
+        "node_modules"
+      ],
+      "dirs_count": 2,
+      "files": [],
+      "files_count": 0,
+      "truncated": false,
+      "note": "Purposely not indexed — excluded BY DESIGN via gitignore/.cbmignore/skip-lists (see each file's reason). Not an error: change the ignore rules and re-index to include them."
+    },
+    "coverage_note": "Best-effort signal, not a completeness guarantee: parse_partial files WERE indexed, but constructs inside the listed line ranges (1-based) MAY be missing from the graph (tree-sitter error recovery still salvages some). skipped files were not indexed at all. Prefer text search (grep) for flagged files/ranges. Files absent from this list are NOT guaranteed to be fully indexed. (not_indexed entries are a separate, BY-DESIGN class — deliberate ignore rules, not failures.)"
+  },
+  "search": {
+    "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+    "cols": [
+      "name",
+      "label",
+      "lines",
+      "in",
+      "out"
+    ],
+    "groups": [
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.match-situation-lifecycle",
+        "file": "match-situation-lifecycle.js",
+        "rows": [
+          [
+            "beginExecution",
+            "Function",
+            "114-124",
+            1,
+            3
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation",
+        "file": "defensive-runner-throw-settlement-foundation.js",
+        "rows": [
+          [
+            "deriveSettlement",
+            "Function",
+            "94-133",
+            3,
+            10
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+        "file": "script.js",
+        "rows": [
+          [
+            "resolveHighSchoolInfieldReceiver",
+            "Function",
+            "8111-8127",
+            1,
+            7
+          ],
+          [
+            "resolveInfieldRelayToFirst",
+            "Function",
+            "8103-8109",
+            2,
+            1
+          ]
+        ]
+      }
+    ],
+    "total": 4,
+    "returned": 4,
+    "count": 4,
+    "has_more": false,
+    "truncated": false
+  },
+  "traces": [
+    {
+      "function": "resolveHighSchoolInfieldReceiver",
+      "direction": "both",
+      "callees_total": 1,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "getDefensiveSimulationCapability",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 1,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "resolveSecondBaseInitiatedRoute",
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "function": "resolveInfieldRelayToFirst",
+      "direction": "both",
+      "callees_total": 0,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": []
+      },
+      "callers_total": 2,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "resolveSecondBaseInitiatedRoute",
+                1
+              ],
+              [
+                "buildHighSchoolShortstopExecution",
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "function": "deriveSettlement",
+      "direction": "both",
+      "callees_total": 5,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation",
+            "rows": [
+              [
+                "clone",
+                1
+              ],
+              [
+                "same",
+                1
+              ],
+              [
+                "fail",
+                1
+              ],
+              [
+                "resolveTiming",
+                1
+              ],
+              [
+                "completeSettlement",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 0,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": []
+      }
+    },
+    {
+      "function": "beginExecution",
+      "direction": "both",
+      "callees_total": 1,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.match-situation-lifecycle",
+            "rows": [
+              [
+                "transition",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 0,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": []
+      }
+    }
+  ],
+  "snippets": [
+    {
+      "name": "resolveHighSchoolInfieldReceiver",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.resolveHighSchoolInfieldReceiver",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+      "start_line": 8111,
+      "end_line": 8127,
+      "source_mode": "full",
+      "source": "function resolveHighSchoolInfieldReceiver(situation, choice, sample, deliveryCompleted, match) {\n  const position = choice.targetBase === \"third\" ? \"3B\" : choice.targetBase === \"home\" ? \"C\"\n    : choice.targetBase === \"second\" || choice.targetBase === \"secondThenFirst\" ? \"SS\" : \"1B\";\n  const legacy = position === \"1B\" ? situation.teammates?.firstBaseReceiver : position === \"3B\" ? situation.teammates?.thirdBaseReceiver\n    : position === \"C\" ? situation.teammates?.catcher : situation.teammates?.shortstop;\n  const actor = match?.rosters?.[match.defenseTeam] && typeof TeamRosterFoundation !== \"undefined\"\n    ? TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam], position) : null;\n  const capabilities = actor ? getDefensiveSimulationCapability(actor, actor.position, match) : legacy?.capabilities || {};\n  const fielding = Number(capabilities.fielding ?? 5), swing = (sample - .5) * 4;\n  const available = Boolean((actor ? actor.id !== \"player\" : legacy) && legacy?.receivingAvailable !== false);\n  const ready = available && fielding + swing >= 2.8;\n  return Object.freeze({ receiverId: actor?.id || legacy?.id || null, receiverPosition: position, available, ready,\n    secured: Boolean(deliveryCompleted && ready), status: !deliveryCompleted ? \"notAttempted\" : !available ? \"unavailable\" : ready ? \"completed\" : \"failed\",\n    responsibleActor: deliveryCompleted && !ready ? \"teammate\" : \"player\",\n    provenance: Object.freeze({ authority: actor ? \"activeRosterReceiver+existingExecutionSample\" : \"declaredLegacyReceiver+existingExecutionSample\",\n      fielding, sample, swing, threshold: 2.8, consumedRng: false }) });\n}\n",
+      "match_method": "suffix",
+      "callers": 1,
+      "callees": 1
+    },
+    {
+      "name": "resolveInfieldRelayToFirst",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.resolveInfieldRelayToFirst",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+      "start_line": 8103,
+      "end_line": 8109,
+      "source_mode": "full",
+      "source": "function resolveInfieldRelayToFirst(situation, firstThrowCompleted, sample, continuationWindow, pivot) {\n  const swing = (sample - 0.5) * 4;\n  const receive = firstThrowCompleted && (Number(pivot.fielding) || 5) + swing >= 3.2;\n  const turn = receive && (Number(pivot.reaction) || 5) + (Number(pivot.throwing) || 5) * 0.35 + swing - situation.batterSpeed * 0.25 >= 4.2;\n  const firstBaseReceive = turn && (Number(situation.teammates?.firstBaseReceiver?.capabilities?.fielding) || 5) + swing >= 2.8;\n  return { receive, turn, firstBaseReceive, secondOutAvailable: turn && firstBaseReceive && ![\"narrow\", \"expired\"].includes(continuationWindow) };\n}\n",
+      "match_method": "suffix",
+      "callers": 2,
+      "callees": 0
+    },
+    {
+      "name": "deriveSettlement",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation.deriveSettlement",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/defensive-runner-throw-settlement-foundation.js",
+      "start_line": 94,
+      "end_line": 133,
+      "source_mode": "full",
+      "source": "  function deriveSettlement(args){\n    const {timing,input,opportunity,selection,resolveThirdOut}=args;\n    if(!same(timing,resolveTiming(args)))fail(\"stale timing facts\");\n    const route=selection.route,hold=route.action===\"holdBall\",runner=timing.runnerArrival;\n    const force=Force.getForcedMovement(opportunity.context.forceChain,route.targetRunnerId);\n    const forced=Boolean(force&&force.targetBase===route.targetBase);\n    if(!hold&&((route.forceType===\"force\"||route.forceType===\"batterRunner\")!==forced))fail(\"stale force semantics\");\n    const playType=hold?\"hold\":route.forceType===\"batterRunner\"?\"batterRunner\":forced?\"force\":\"tag\";\n    const receiver=timing.receiverCompletion;\n    const ahead=timing.contestAvailable&&timing.timingMargin>0; // Ties do not establish defense before arrival.\n    const out=Boolean(ahead&&(playType===\"tag\"?receiver.tagAvailable===true&&receiver.tagCompletion<runner.relativeArrival:receiver.atBase===true));\n    const runnersAfter=input.runners.slice(),movements=[],outIds=out?[route.targetRunnerId]:[],inTransit=[];\n    const attempts=clone(args.scoringAttempts||[]);\n    const known=new Set([...input.runners.filter(Boolean),input.batterRunnerId].filter(Boolean));\n    if(new Set(attempts.map(a=>a.runnerId)).size!==attempts.length||attempts.some(a=>!known.has(a.runnerId)||a.runnerId===route.targetRunnerId))fail(\"invalid other scoring attempt\");\n    const contest=timing.contestAvailable&&!hold;\n    if(contest){\n      const origin=runnersAfter.indexOf(route.targetRunnerId);if(origin>=0)runnersAfter[origin]=null;\n      if(!out&&route.targetBase===\"home\")attempts.push({runnerId:route.targetRunnerId,timing:\"beforeThirdOut\"});\n      else if(!out){\n        const index=[\"first\",\"second\",\"third\"].indexOf(route.targetBase),occupant=runnersAfter[index];\n        if(index<0)fail(\"invalid destination\");\n        if(occupant){\n          const moving=Force.getForcedMovement(opportunity.context.forceChain,occupant);\n          if(!moving)fail(\"destination occupied by a non-forced runner\");\n          inTransit.push(clone(moving));\n        }\n        runnersAfter[index]=route.targetRunnerId;\n      }\n      movements.push({runnerId:route.targetRunnerId,from:runner.originBase,to:out?\"out\":route.targetBase});\n    }\n    for(const attempt of attempts){const index=runnersAfter.indexOf(attempt.runnerId);if(index>=0)runnersAfter[index]=null;}\n    const dp=route.action===\"initiateDoublePlay\";\n    const continuation={status:hold?\"heldBallAwaitRunnerContinuation\":!contest?\"liveBallRecoveryRequired\":dp&&out?\"secondLegPending\":dp?\"reassessAfterSafeFirstLeg\":\"liveBallContinuation\",\n      targetBase:dp&&out?\"first\":null,inTransitRunners:inTransit,\n      pendingRunners:(input.runnerPhysicalStates||[]).filter(r=>r.runnerId!==route.targetRunnerId||!contest).map(clone)};\n    return completeSettlement({identity:`${timing.identity}|settlement-v1`,timing,routeId:route.routeId,targetRunnerId:route.targetRunnerId,targetBase:route.targetBase,\n      playType,runnerResult:hold?\"held\":!contest?\"unresolved\":out?\"out\":\"safe\",before:{outs:input.outs,runners:input.runners,scores:input.scores||null},\n      runnersAfter,outIds,scoringAttempts:attempts,runnerMovement:movements,forceBefore:opportunity.context.forceChain,continuation,resolveThirdOut});\n  }\n",
+      "match_method": "suffix",
+      "callers": 3,
+      "callees": 5
+    },
+    {
+      "name": "beginExecution",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.match-situation-lifecycle.beginExecution",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/match-situation-lifecycle.js",
+      "start_line": 114,
+      "end_line": 124,
+      "source_mode": "full",
+      "source": "  function beginExecution(situation, input = {}) {\n    return transition(situation, \"executing\", {\n      executionState: {\n        status: \"inProgress\",\n        selectedRoute: input.selectedRoute || situation.decision?.selectedRoute || \"\",\n        handoffRef: input.handoffRef || \"\",\n        physicalConsequenceApplied: false,\n        executionIdentity: input.executionIdentity || \"\"\n      }\n    }, { reason: input.reason || \"physicalResolverHandoff\" });\n  }\n",
+      "match_method": "suffix",
+      "callers": 1,
+      "callees": 1
+    }
+  ],
+  "coverage": {
+    "project": "E-meng-baseball_life_sim_semirefactor",
+    "signal": "best_effort",
+    "indexed_at": "2026-10-12T14:29:15Z",
+    "metadata": {
+      "generation": "2026-10-12T14:29:15Z",
+      "index_mode": "full",
+      "recorded_at": "2026-10-12T14:29:17Z",
+      "recording_status": "complete",
+      "ignored_files_stored": 0,
+      "ignored_files_total": 0,
+      "hash_records_complete": true,
+      "coverage_version": 3,
+      "generation_matches": true
+    },
+    "paths": [
+      {
+        "requested_path": "script.js",
+        "path": "script.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "defensive-runner-throw-settlement-foundation.js",
+        "path": "defensive-runner-throw-settlement-foundation.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "match-situation-lifecycle.js",
+        "path": "match-situation-lifecycle.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "defensive-decision-throw-foundation.js",
+        "path": "defensive-decision-throw-foundation.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "force-advancement.js",
+        "path": "force-advancement.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "match-game-record.js",
+        "path": "match-game-record.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "match-experience-development.js",
+        "path": "match-experience-development.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "save.js",
+        "path": "save.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "index.html",
+        "path": "index.html",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "docs/receiver-execution-v2-architecture-migration-design.md",
+        "path": "docs/receiver-execution-v2-architecture-migration-design.md",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "docs/receiver-execution-v2-sprint-7-stage-sample-contract.json",
+        "path": "docs/receiver-execution-v2-sprint-7-stage-sample-contract.json",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "docs/receiver-execution-v2-isolated-prototype.cjs",
+        "path": "docs/receiver-execution-v2-isolated-prototype.cjs",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      }
+    ],
+    "path_total": 12,
+    "path_returned": 12,
+    "path_has_more": false,
+    "scopes": [],
+    "scope_total": 0,
+    "scope_returned": 0,
+    "scope_truncated": false,
+    "has_more": false,
+    "caveat": "Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable."
+  },
+  "limits": [
+    "Graph missing namespace/registry edges is not unreachability.",
+    "metadata_changed requires current source/hash verification.",
+    "No protected files were searched or opened."
+  ]
+}

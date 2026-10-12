@@ -1,0 +1,2580 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Receiver v2 isolated pure input and output contract",
+  "$ref": "#/$defs/input",
+  "$comment": "Structural schema only. Runtime validate additionally checks canonical data, cross-field identity, provenance, timing and causal dependencies. Calibrated profile is structurally recognized but returns insufficient until independent calibration authority exists. Not a formal Match/Save schema.",
+  "$defs": {
+    "input": {
+      "type": "object",
+      "properties": {
+        "contractVersion": {
+          "const": "receiver-pure-contract-v2-1"
+        },
+        "versions": {
+          "type": "object",
+          "properties": {
+            "execution": {
+              "const": "receiver-pure-stages-v2-1"
+            },
+            "adapter": {
+              "const": "receiver-explicit-input-v1"
+            },
+            "timing": {
+              "const": "crt-integer-ticks-v2-1"
+            },
+            "sampler": {
+              "const": "physical-slot-sha256-u32be-v1"
+            },
+            "effort": {
+              "const": "ordinary-effort-reference-v1"
+            }
+          },
+          "required": [
+            "execution",
+            "adapter",
+            "timing",
+            "sampler",
+            "effort"
+          ],
+          "additionalProperties": false
+        },
+        "identity": {
+          "$ref": "#/$defs/identity"
+        },
+        "context": {
+          "$ref": "#/$defs/context"
+        },
+        "handoff": {
+          "type": "object",
+          "properties": {
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "throwerId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "runnerId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "base": {
+              "enum": [
+                "first",
+                "second",
+                "third",
+                "home"
+              ]
+            }
+          },
+          "required": [
+            "playId",
+            "physicalIdentity",
+            "throwerId",
+            "receiverId",
+            "runnerId",
+            "base"
+          ],
+          "additionalProperties": false
+        },
+        "capabilities": {
+          "type": "object",
+          "properties": {
+            "actorId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "adapterVersion": {
+              "const": "receiver-explicit-input-v1"
+            },
+            "values": {
+              "$ref": "#/$defs/capabilities"
+            }
+          },
+          "required": [
+            "actorId",
+            "adapterVersion",
+            "values"
+          ],
+          "additionalProperties": false
+        },
+        "ownedSample": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 1
+        },
+        "delivery": {
+          "type": "object",
+          "properties": {
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "upstreamActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "upstreamStatus": {
+              "enum": [
+                "completed",
+                "failed",
+                "notAttempted"
+              ]
+            },
+            "status": {
+              "enum": [
+                "completed",
+                "notAttempted"
+              ]
+            },
+            "accuracy": {
+              "enum": [
+                "onTarget",
+                "challenging",
+                "offline",
+                "none"
+              ]
+            },
+            "quality": {
+              "enum": [
+                "clean",
+                "challenging",
+                "none"
+              ]
+            },
+            "launch": {
+              "$ref": "#/$defs/time"
+            },
+            "ballArrival": {
+              "$ref": "#/$defs/time"
+            }
+          },
+          "required": [
+            "actionId",
+            "upstreamActionId",
+            "upstreamStatus",
+            "status",
+            "accuracy",
+            "quality",
+            "launch",
+            "ballArrival"
+          ],
+          "additionalProperties": false
+        },
+        "positioning": {
+          "type": "object",
+          "properties": {
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "startContext": {
+              "enum": [
+                "atBase",
+                "covering",
+                "lateCover",
+                "distant"
+              ]
+            },
+            "movementMdu": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8
+            },
+            "startTime": {
+              "$ref": "#/$defs/time"
+            }
+          },
+          "required": [
+            "actionId",
+            "startContext",
+            "movementMdu",
+            "startTime"
+          ],
+          "additionalProperties": false
+        },
+        "secure": {
+          "type": "object",
+          "properties": {
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "demandMilli": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 30000
+            },
+            "cleanDelayTicks": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
+            },
+            "bobbleDelayTicks": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
+            }
+          },
+          "required": [
+            "actionId",
+            "demandMilli",
+            "cleanDelayTicks",
+            "bobbleDelayTicks"
+          ],
+          "additionalProperties": false
+        },
+        "contest": {
+          "type": "object",
+          "properties": {
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "type": {
+              "enum": [
+                "force",
+                "batterBeforeFirst",
+                "tag"
+              ]
+            },
+            "attempted": {
+              "type": "boolean"
+            },
+            "contact": {
+              "type": "boolean"
+            },
+            "legality": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "enum": [
+                    "eligible",
+                    "ineligible",
+                    "unknown"
+                  ]
+                },
+                "runnerId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                },
+                "base": {
+                  "enum": [
+                    "first",
+                    "second",
+                    "third",
+                    "home"
+                  ]
+                },
+                "sourceActionId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                }
+              },
+              "required": [
+                "status",
+                "runnerId",
+                "base",
+                "sourceActionId"
+              ],
+              "additionalProperties": false
+            },
+            "delayTicks": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000
+            },
+            "runnerArrival": {
+              "$ref": "#/$defs/runnerTime"
+            }
+          },
+          "required": [
+            "actionId",
+            "type",
+            "attempted",
+            "contact",
+            "legality",
+            "delayTicks",
+            "runnerArrival"
+          ],
+          "additionalProperties": false
+        },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "physicalIdentity": {
+              "$ref": "#/$defs/source"
+            },
+            "actors": {
+              "$ref": "#/$defs/source"
+            },
+            "capabilities": {
+              "$ref": "#/$defs/source"
+            },
+            "delivery": {
+              "$ref": "#/$defs/source"
+            },
+            "positioning": {
+              "$ref": "#/$defs/source"
+            },
+            "runnerArrival": {
+              "$ref": "#/$defs/source"
+            },
+            "contest": {
+              "$ref": "#/$defs/source"
+            }
+          },
+          "required": [
+            "physicalIdentity",
+            "actors",
+            "capabilities",
+            "delivery",
+            "positioning",
+            "runnerArrival",
+            "contest"
+          ],
+          "additionalProperties": false
+        },
+        "effortReference": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "version": {
+                  "const": "ordinary-effort-reference-v1"
+                },
+                "status": {
+                  "enum": [
+                    "uncalibrated",
+                    "calibrated"
+                  ]
+                },
+                "position": {
+                  "enum": [
+                    "P",
+                    "C",
+                    "1B",
+                    "2B",
+                    "3B",
+                    "SS",
+                    "LF",
+                    "CF",
+                    "RF"
+                  ]
+                },
+                "competitionLevel": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                },
+                "environmentId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                },
+                "referenceId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                },
+                "capabilities": {
+                  "$ref": "#/$defs/capabilities"
+                },
+                "provenance": {
+                  "$ref": "#/$defs/source"
+                }
+              },
+              "required": [
+                "version",
+                "status",
+                "position",
+                "competitionLevel",
+                "environmentId",
+                "referenceId",
+                "capabilities",
+                "provenance"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "continuation": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "firstRetirement": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "enum": [
+                        "completed",
+                        "failed"
+                      ]
+                    },
+                    "actionId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                    },
+                    "runnerId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                    },
+                    "base": {
+                      "enum": [
+                        "first",
+                        "second",
+                        "third",
+                        "home"
+                      ]
+                    },
+                    "outsBefore": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 2
+                    },
+                    "outsAfter": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 3
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "actionId",
+                    "runnerId",
+                    "base",
+                    "outsBefore",
+                    "outsAfter"
+                  ],
+                  "additionalProperties": false
+                },
+                "pivot": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "enum": [
+                        "completed",
+                        "failed",
+                        "notAttempted"
+                      ]
+                    },
+                    "actorId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                    },
+                    "actionId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "actorId",
+                    "actionId"
+                  ],
+                  "additionalProperties": false
+                },
+                "provenance": {
+                  "$ref": "#/$defs/source"
+                }
+              },
+              "required": [
+                "firstRetirement",
+                "pivot",
+                "provenance"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "contractVersion",
+        "versions",
+        "identity",
+        "context",
+        "handoff",
+        "capabilities",
+        "ownedSample",
+        "delivery",
+        "positioning",
+        "secure",
+        "contest",
+        "provenance",
+        "effortReference",
+        "continuation"
+      ],
+      "additionalProperties": false
+    },
+    "physical": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "physical-contact-binding-v1"
+        },
+        "matchId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "plateAppearanceId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "contactId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "physicalIdentity": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        }
+      },
+      "required": [
+        "version",
+        "matchId",
+        "plateAppearanceId",
+        "contactId",
+        "physicalIdentity"
+      ],
+      "additionalProperties": false
+    },
+    "actor": {
+      "type": "object",
+      "properties": {
+        "actorId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "position": {
+          "enum": [
+            "P",
+            "C",
+            "1B",
+            "2B",
+            "3B",
+            "SS",
+            "LF",
+            "CF",
+            "RF"
+          ]
+        }
+      },
+      "required": [
+        "actorId",
+        "position"
+      ],
+      "additionalProperties": false
+    },
+    "target": {
+      "type": "object",
+      "properties": {
+        "runnerId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "base": {
+          "enum": [
+            "first",
+            "second",
+            "third",
+            "home"
+          ]
+        }
+      },
+      "required": [
+        "runnerId",
+        "base"
+      ],
+      "additionalProperties": false
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "playId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "physical": {
+          "$ref": "#/$defs/physical"
+        },
+        "leg": {
+          "type": "object",
+          "properties": {
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "sourceThrowActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalSlot": {
+              "enum": [
+                "primaryThrow",
+                "relayThrow"
+              ]
+            },
+            "parentActionId": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "actionId",
+            "sourceThrowActionId",
+            "physicalSlot",
+            "parentActionId"
+          ],
+          "additionalProperties": false
+        },
+        "thrower": {
+          "$ref": "#/$defs/actor"
+        },
+        "receiver": {
+          "$ref": "#/$defs/actor"
+        },
+        "target": {
+          "$ref": "#/$defs/target"
+        }
+      },
+      "required": [
+        "playId",
+        "physical",
+        "leg",
+        "thrower",
+        "receiver",
+        "target"
+      ],
+      "additionalProperties": false
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "initialOuts": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "originId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "routeId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "competitionLevel": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "environmentId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "receiverAvailable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "initialOuts",
+        "originId",
+        "routeId",
+        "competitionLevel",
+        "environmentId",
+        "receiverAvailable"
+      ],
+      "additionalProperties": false
+    },
+    "capabilities": {
+      "type": "object",
+      "properties": {
+        "reaction": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "range": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "mobility": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "catching": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "fielding": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "arm": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "throwing": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "decision": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        }
+      },
+      "required": [
+        "reaction",
+        "range",
+        "mobility",
+        "catching",
+        "fielding",
+        "arm",
+        "throwing",
+        "decision"
+      ],
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "classification": {
+          "enum": [
+            "A",
+            "B",
+            "C"
+          ]
+        },
+        "scope": {
+          "enum": [
+            "pureFixture",
+            "ownedInput"
+          ]
+        },
+        "owner": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "reference": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        }
+      },
+      "required": [
+        "classification",
+        "scope",
+        "owner",
+        "reference",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "time": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "const": "crt-integer-ticks-v2-1"
+            },
+            "originId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "status": {
+              "const": "known"
+            },
+            "ticks": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            }
+          },
+          "required": [
+            "version",
+            "originId",
+            "status",
+            "ticks"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "const": "crt-integer-ticks-v2-1"
+            },
+            "originId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "status": {
+              "const": "unknown"
+            },
+            "reason": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            }
+          },
+          "required": [
+            "version",
+            "originId",
+            "status",
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "runnerTime": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "const": "crt-integer-ticks-v2-1"
+            },
+            "originId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "status": {
+              "const": "known"
+            },
+            "ticks": {
+              "type": "integer",
+              "minimum": -1000000000,
+              "maximum": 1000000000
+            }
+          },
+          "required": [
+            "version",
+            "originId",
+            "status",
+            "ticks"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "version": {
+              "const": "crt-integer-ticks-v2-1"
+            },
+            "originId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "status": {
+              "const": "unknown"
+            },
+            "reason": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            }
+          },
+          "required": [
+            "version",
+            "originId",
+            "status",
+            "reason"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "knownTime": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "crt-integer-ticks-v2-1"
+        },
+        "originId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "status": {
+          "const": "known"
+        },
+        "ticks": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1003000015
+        }
+      },
+      "required": [
+        "version",
+        "originId",
+        "status",
+        "ticks"
+      ],
+      "additionalProperties": false
+    },
+    "knownRunnerTime": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": "crt-integer-ticks-v2-1"
+        },
+        "originId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "status": {
+          "const": "known"
+        },
+        "ticks": {
+          "type": "integer",
+          "minimum": -1000000000,
+          "maximum": 1000000000
+        }
+      },
+      "required": [
+        "version",
+        "originId",
+        "status",
+        "ticks"
+      ],
+      "additionalProperties": false
+    },
+    "candidate": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "unappliedRetirementCandidate"
+        },
+        "runnerId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "base": {
+          "enum": [
+            "first",
+            "second",
+            "third",
+            "home"
+          ]
+        },
+        "receiverId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "actionId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "type": {
+          "enum": [
+            "force",
+            "batterBeforeFirst",
+            "tag"
+          ]
+        },
+        "initialOuts": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "wouldBeThirdOut": {
+          "type": "boolean"
+        },
+        "legalScoring": {
+          "const": "requiresExistingThirdOutOwner"
+        },
+        "possessionActionId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        }
+      },
+      "required": [
+        "kind",
+        "runnerId",
+        "base",
+        "receiverId",
+        "actionId",
+        "type",
+        "initialOuts",
+        "wouldBeThirdOut",
+        "legalScoring",
+        "possessionActionId"
+      ],
+      "additionalProperties": false
+    },
+    "deliveryOutput": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "delivery"
+            },
+            "status": {
+              "const": "blocked"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "reason": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "reason"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "delivery"
+            },
+            "status": {
+              "const": "notAttempted"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "reason": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "reason"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "delivery"
+            },
+            "status": {
+              "const": "insufficient"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "reason": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "reason"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "delivery"
+            },
+            "status": {
+              "const": "completed"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "accuracy": {
+              "enum": [
+                "onTarget",
+                "challenging",
+                "offline"
+              ]
+            },
+            "quality": {
+              "enum": [
+                "clean",
+                "challenging"
+              ]
+            },
+            "launch": {
+              "$ref": "#/$defs/knownTime"
+            },
+            "ballArrival": {
+              "$ref": "#/$defs/knownTime"
+            },
+            "upstreamActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "accuracy",
+            "quality",
+            "launch",
+            "ballArrival",
+            "upstreamActionId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "delivery"
+            },
+            "status": {
+              "const": "offline"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "accuracy": {
+              "enum": [
+                "onTarget",
+                "challenging",
+                "offline"
+              ]
+            },
+            "quality": {
+              "enum": [
+                "clean",
+                "challenging"
+              ]
+            },
+            "launch": {
+              "$ref": "#/$defs/knownTime"
+            },
+            "ballArrival": {
+              "$ref": "#/$defs/knownTime"
+            },
+            "upstreamActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "accuracy",
+            "quality",
+            "launch",
+            "ballArrival",
+            "upstreamActionId"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "positioningOutput": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "positioning"
+            },
+            "status": {
+              "const": "blocked"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "reason": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "reason"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "positioning"
+            },
+            "status": {
+              "const": "unavailable"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "ready": {
+              "const": false
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "ready"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "positioning"
+            },
+            "status": {
+              "const": "unreachable"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "ready": {
+              "const": false
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "ready"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "positioning"
+            },
+            "status": {
+              "const": "insufficient"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "ready": {
+              "const": false
+            },
+            "reason": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "ready",
+            "reason"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "positioning"
+            },
+            "status": {
+              "const": "positionedWithoutReception"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "ready": {
+              "const": false
+            },
+            "completion": {
+              "$ref": "#/$defs/knownTime"
+            },
+            "durationTicks": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "ready",
+            "completion",
+            "durationTicks"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "positioning"
+            },
+            "status": {
+              "const": "ready"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "ready": {
+              "const": true
+            },
+            "completion": {
+              "$ref": "#/$defs/knownTime"
+            },
+            "durationTicks": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "ready",
+            "completion",
+            "durationTicks"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "positioning"
+            },
+            "status": {
+              "const": "late"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "ready": {
+              "const": false
+            },
+            "completion": {
+              "$ref": "#/$defs/knownTime"
+            },
+            "durationTicks": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000000000
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "ready",
+            "completion",
+            "durationTicks"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "secureOutput": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "secure"
+            },
+            "status": {
+              "const": "notAttempted"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "secured": {
+              "const": false
+            },
+            "attempted": {
+              "const": false
+            },
+            "reason": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "secured",
+            "attempted",
+            "reason"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "secure"
+            },
+            "status": {
+              "const": "failedHands"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "secured": {
+              "const": false
+            },
+            "attempted": {
+              "const": true
+            },
+            "handsMarginMilli": {
+              "type": "integer",
+              "minimum": -31000,
+              "maximum": 30000
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "secured",
+            "attempted",
+            "handsMarginMilli"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "secure"
+            },
+            "status": {
+              "const": "cleanControl"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "secured": {
+              "const": true
+            },
+            "attempted": {
+              "const": true
+            },
+            "handsMarginMilli": {
+              "type": "integer",
+              "minimum": -31000,
+              "maximum": 30000
+            },
+            "completion": {
+              "$ref": "#/$defs/knownTime"
+            },
+            "possession": {
+              "type": "object",
+              "properties": {
+                "actorId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                },
+                "actionId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                },
+                "sourceThrowActionId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                }
+              },
+              "required": [
+                "actorId",
+                "actionId",
+                "sourceThrowActionId"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "secured",
+            "attempted",
+            "handsMarginMilli",
+            "completion",
+            "possession"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "secure"
+            },
+            "status": {
+              "const": "bobbleControl"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "secured": {
+              "const": true
+            },
+            "attempted": {
+              "const": true
+            },
+            "handsMarginMilli": {
+              "type": "integer",
+              "minimum": -31000,
+              "maximum": 30000
+            },
+            "completion": {
+              "$ref": "#/$defs/knownTime"
+            },
+            "possession": {
+              "type": "object",
+              "properties": {
+                "actorId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                },
+                "actionId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                },
+                "sourceThrowActionId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                }
+              },
+              "required": [
+                "actorId",
+                "actionId",
+                "sourceThrowActionId"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "secured",
+            "attempted",
+            "handsMarginMilli",
+            "completion",
+            "possession"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "contestOutput": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "contest"
+            },
+            "status": {
+              "const": "notAttempted"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "candidate": {
+              "type": "null"
+            },
+            "reason": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "candidate",
+            "reason"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "contest"
+            },
+            "status": {
+              "const": "ineligible"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "candidate": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "candidate"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "contest"
+            },
+            "status": {
+              "const": "insufficient"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "candidate": {
+              "type": "null"
+            },
+            "reason": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "candidate",
+            "reason"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "contest"
+            },
+            "status": {
+              "const": "insufficient"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "completion": {
+              "$ref": "#/$defs/knownTime"
+            },
+            "candidate": {
+              "type": "null"
+            },
+            "reason": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "completion",
+            "candidate",
+            "reason"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "contest"
+            },
+            "status": {
+              "const": "retirementCandidate"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "completion": {
+              "$ref": "#/$defs/knownTime"
+            },
+            "runnerArrival": {
+              "$ref": "#/$defs/knownRunnerTime"
+            },
+            "timingMarginTicks": {
+              "type": "integer",
+              "minimum": -2003000015,
+              "maximum": 2000000000
+            },
+            "candidate": {
+              "$ref": "#/$defs/candidate"
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "completion",
+            "runnerArrival",
+            "timingMarginTicks",
+            "candidate"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "contest"
+            },
+            "status": {
+              "const": "tie"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "completion": {
+              "$ref": "#/$defs/knownTime"
+            },
+            "runnerArrival": {
+              "$ref": "#/$defs/knownRunnerTime"
+            },
+            "timingMarginTicks": {
+              "type": "integer",
+              "minimum": -2003000015,
+              "maximum": 2000000000
+            },
+            "candidate": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "completion",
+            "runnerArrival",
+            "timingMarginTicks",
+            "candidate"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "stage": {
+              "const": "contest"
+            },
+            "status": {
+              "const": "alreadySafe"
+            },
+            "playId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "physicalIdentity": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "legActionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "receiverId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "target": {
+              "$ref": "#/$defs/target"
+            },
+            "actionId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+            },
+            "completion": {
+              "$ref": "#/$defs/knownTime"
+            },
+            "runnerArrival": {
+              "$ref": "#/$defs/knownRunnerTime"
+            },
+            "timingMarginTicks": {
+              "type": "integer",
+              "minimum": -2003000015,
+              "maximum": 2000000000
+            },
+            "candidate": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "stage",
+            "status",
+            "playId",
+            "physicalIdentity",
+            "legActionId",
+            "receiverId",
+            "target",
+            "actionId",
+            "completion",
+            "runnerArrival",
+            "timingMarginTicks",
+            "candidate"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "execution": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "ok"
+        },
+        "runtimeEnabled": {
+          "const": false
+        },
+        "inputDigest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "identity": {
+          "$ref": "#/$defs/identity"
+        },
+        "stages": {
+          "type": "object",
+          "properties": {
+            "delivery": {
+              "$ref": "#/$defs/deliveryOutput"
+            },
+            "positioning": {
+              "$ref": "#/$defs/positioningOutput"
+            },
+            "secure": {
+              "$ref": "#/$defs/secureOutput"
+            },
+            "contest": {
+              "$ref": "#/$defs/contestOutput"
+            }
+          },
+          "required": [
+            "delivery",
+            "positioning",
+            "secure",
+            "contest"
+          ],
+          "additionalProperties": false
+        },
+        "scorerFacts": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "const": "insufficientScorerFacts"
+            },
+            "referenceVersion": {
+              "const": "ordinary-effort-reference-v1"
+            },
+            "referenceId": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "reason": {
+              "enum": [
+                "missingOrdinaryEffortReference",
+                "uncalibratedOrdinaryEffortReference"
+              ]
+            },
+            "officialScorerEligibility": {
+              "const": "insufficient"
+            },
+            "officialError": {
+              "type": "null"
+            },
+            "wouldBeAssist": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "status",
+            "referenceVersion",
+            "referenceId",
+            "reason",
+            "officialScorerEligibility",
+            "officialError",
+            "wouldBeAssist"
+          ],
+          "additionalProperties": false
+        },
+        "application": {
+          "type": "object",
+          "properties": {
+            "matchStateWrites": {
+              "const": 0
+            },
+            "gameRecordWrites": {
+              "const": 0
+            },
+            "rngCallbacks": {
+              "const": 0
+            },
+            "actualRetirements": {
+              "const": 0
+            }
+          },
+          "required": [
+            "matchStateWrites",
+            "gameRecordWrites",
+            "rngCallbacks",
+            "actualRetirements"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "status",
+        "runtimeEnabled",
+        "inputDigest",
+        "identity",
+        "stages",
+        "scorerFacts",
+        "application"
+      ],
+      "additionalProperties": false
+    },
+    "invalid": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "invalid",
+            "insufficient"
+          ]
+        },
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.:|/\\-]{1,512}$"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "code",
+        "details"
+      ],
+      "additionalProperties": false
+    },
+    "result": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/execution"
+        },
+        {
+          "$ref": "#/$defs/invalid"
+        }
+      ]
+    }
+  }
+}
