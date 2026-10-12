@@ -1,0 +1,675 @@
+{
+  "capturedAt": "2026-10-12T08:43:12.402Z",
+  "project": "E-meng-baseball_life_sim_semirefactor",
+  "tier": "Tier 2",
+  "initialIndex": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "project: E-meng-baseball_life_sim_semirefactor\nnodes: 49089\nedges: 67294\nstatus: ready\nroot_path: E:/meng/baseball_life_sim_semirefactor\nindexed_at: 2026-10-12T07:37:51Z\nparse_partial:\n  files: 0\n  count: 1\n  truncated: true\n  omitted: 1\nparse_unusable:\n  files: 0\n  count: 0\n  truncated: false\nskipped:\n  files: 0\n  count: 0\n  truncated: false\nnot_indexed:\n  dirs: 0\n  dirs_count: 2\n  files: 0\n  files_count: 0\n  truncated: true\n  dirs_omitted: 2\n"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "schema": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "node_labels: 9  (cols: label count)\n  Variable 39076\n  Function 4782\n  Section 3991\n  File 616\n  Module 610\n  Folder 10\n  EnvVar 2\n  Branch 1\n  Project 1\nedge_types: 15  (cols: type count)\n  DEFINES 48460\n  USAGE 8434\n  CALLS 7120\n  IMPORTS 1095\n  SIMILAR_TO 900\n  CONTAINS_FILE 616\n  WRITES 364\n  CONFIGURES 161\n  FILE_CHANGES_WITH 102\n  CALL_REFERENCE 18\n  CONTAINS_FOLDER 10\n  SEMANTICALLY_RELATED 9\n  RAISES 3\n  HAS_BRANCH 1\n  THROWS 1\ntotal: 24\nreturned: 24\nhas_more: false\nadr_present: false\n"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "searches": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "results: 11  (rows: name label lines in out; group prefix \"-\" means empty; qn = prefix empty ? name : prefix + \".\" + name)\nE-meng-baseball_life_sim_semirefactor.script (script.js):\n  buildHighSchoolShortstopExecution Function 11859-11946 2 16\n  buildInfieldTeammateContext Function 7178-7203 1 5\n  deriveSecondBaseExecutionWindows Function 7279-7301 2 3\n  getHighSchoolInfieldScorerFacts Function 11361-11465 2 10\n  getInfieldTeammateForPosition Function 7173-7176 1 3\n  getSecondBaseCauseExplanation Function 7911-7936 3 1\n  getSecondBaseRouteWindow Function 7303-7309 4 1\n  resolveHighSchoolInfieldReceiver Function 8111-8127 1 7\nE-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation (defensive-decision-throw-foundation.js):\n  resolveIncomingReceive Function 220-247 1 8\nE-meng-baseball_life_sim_semirefactor.script (script.js):\n  resolveSecondBaseCoverage643 Function 8300-8370 2 11\n  resolveSecondBaseInitiatedRoute Function 8129-8298 2 15\ntotal: 11\nreturned: 11\nhas_more: false\ntruncated: false\n"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "results_refs: 6  (cols: id prefix)\n  0 E-meng-baseball_life_sim_semirefactor.\n  1 E-meng-baseball_life_sim_semirefactor.script.\n  2 E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation.\n  3 defensive-runner-throw-settlement-foundation.js\n  4 E-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation.\n  5 defensive-decision-throw-foundation.js\nresults_ref_rule: @N+suffix=prefix+suffix\nresults: 34  (cols: qn label file lines in out)\n  @1+attachHighSchoolInfieldActionFacts Function script.js 11213-11291 3 9\n  @1+attachHighSchoolThirdBaseActionFacts Function script.js 11509-11551 2 8\n  @0+batted-ball-line-drive-defense.buildCatchTimingWindow Function batted-ball-line-drive-defense.js 100-106 1 3\n  @0+batted-ball-fly-ball-defense.buildFlyBallCatchTimingWindow Function batted-ball-fly-ball-defense.js 93-100 1 3\n  @0+batted-ball-ground-defense.buildGroundBallTimingWindows Function batted-ball-ground-defense.js 299-319 1 7\n  @0+offensive-bunt-defensive-handoff.buildTimingWindows Function offensive-bunt-defensive-handoff.js 162-175 2 8\n  @4+createActionFacts Function @5+ 251-268 3 6\n  @1+getHighSchoolLegacyReceiverScorerSource Function script.js 11295-11357 1 9\n  @1+getInfieldDecisionChoice Function script.js 7797-7800 6 1\n  @1+isInfieldDecisionFamilyPosition Function script.js 7118-7120 4 1\n  @0+save.normalizeSave Function save.js 12-628 1 42\n  @1+presentInfieldDecision Function script.js 8623-8676 2 9\n  @4+projectDefensiveAttribution Function @5+ 325-360 1 11\n  @2+projectExistingTiming Function @3+ 134-143 1 7\n  @2+projectTagUpTiming Function @3+ 173-182 1 5\n  @0+match-game-record.recordDefensivePlay Function match-game-record.js 237-275 1 6\n  @2+resolveBaseTouchTiming Function @3+ 61-77 1 11\n  @0+baseball-defense-prototype.resolveDefensivePlay Function baseball-defense-prototype.js 269-341 1 12\n  @1+resolveDefensivePlayResponsibility Function script.js 7238-7263 2 5\n  @1+resolveHighSchoolDefensivePlay Function script.js 10308-10324 2 7\n  @1+resolveHighSchoolInfieldReceiver Function script.js 8111-8127 1 7\n  @1+resolveInfieldDecision Function script.js 8372-8507 1 17\n  @1+resolveInfieldRelayToFirst Function script.js 8103-8109 2 1\n  @1+resolveLegacyHighSchoolDefensivePlay Function script.js 10235-10306 1 10\n  @1+resolveRoutineDefensivePlay Function script.js 10335-10356 1 6\n  @4+resolveScorerEligibility Function @5+ 271-324 2 11\n  @2+resolveTiming Function @3+ 23-60 5 15\n  @1+resumeResolvedHighSchoolGroundBallSettlement Function script.js 13453-13485 2 9\n  @1+timingFor Function script.js 6797-6801 1 1\n  @0+tests.baseball-match-foundation-2-2-4-3-audit.timingFrequency Function tests/baseball-match-foundation-2-2-4-3-audit.js 330-332 1 1\n  @0+match-game-record.validateDefensiveAttribution Function match-game-record.js 226-235 1 1\n  @1+validateHighSchoolDecisionThrowState Function script.js 11990-12046 8 12\n  @1+validateHighSchoolRunnerTagUpTiming Function script.js 5791-5801 3 2\n  @2+validateProjectedTiming Function @3+ 202-217 0 7\ntotal: 34\nreturned: 34\nhas_more: false\ntruncated: false\n"
+        }
+      ],
+      "isError": false
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "results: 5  (rows: name label lines in out; group prefix \"-\" means empty; qn = prefix empty ? name : prefix + \".\" + name)\nE-meng-baseball_life_sim_semirefactor.script (script.js):\n  abandonActiveMatchSituation Function 12140-12150 1 0\n  buildHighSchoolFirstBaseExecution Function 11555-11702 2 15\n  buildHighSchoolThirdBaseExecution Function 11728-11831 2 19\n  createGroundBallMatchSituation Function 11104-11170 1 6\nE-meng-baseball_life_sim_semirefactor.save (save.js):\n  normalizeSave Function 12-628 1 42\ntotal: 5\nreturned: 5\nhas_more: false\ntruncated: false\n"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "content": [
+        {
+          "type": "text",
+          "text": "results: 1  (cols: qn label file lines in out)\n  E-meng-baseball_life_sim_semirefactor.script.validateHighSchoolStoredDefensiveResolution Function script.js 12186-12191 3 0\ntotal: 1\nreturned: 1\nhas_more: false\ntruncated: false\n"
+        }
+      ],
+      "isError": false
+    }
+  ],
+  "traces": [
+    {
+      "name": "buildHighSchoolShortstopExecution",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "function: buildHighSchoolShortstopExecution\ndirection: both\ncallees_total: 8\ncallees_total_relation: eq\ncallees: 8  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.script:\n  assertHighSchoolDetailedResponsibility 1\n  attachDefensiveOutcomeExplanation 1\n  attachHighSchoolInfieldActionFacts 1\n  getDefensiveSimulationCapability 1\n  getHighSchoolControlledDecisionInput 1\n  getSecondBaseCauseExplanation 1\n  resolveHighSchoolCanonicalSecure 1\n  resolveInfieldRelayToFirst 1\ncallers_total: 2\ncallers_total_relation: eq\ncallers: 2  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.resolveInfieldDecision 1\n  E-meng-baseball_life_sim_semirefactor.script.validateHighSchoolDecisionThrowState 1\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "resolveHighSchoolInfieldReceiver",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "function: resolveHighSchoolInfieldReceiver\ndirection: both\ncallees_total: 1\ncallees_total_relation: eq\ncallees: 1  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.getDefensiveSimulationCapability 1\ncallers_total: 1\ncallers_total_relation: eq\ncallers: 1  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.resolveSecondBaseInitiatedRoute 1\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "resolveSecondBaseInitiatedRoute",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "function: resolveSecondBaseInitiatedRoute\ndirection: both\ncallees_total: 7\ncallees_total_relation: eq\ncallees: 7  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.script:\n  buildInfieldRunnerFacts 1\n  getInfieldChoiceTradeoff 1\n  getSecondBaseCauseExplanation 1\n  getSecondBaseRouteWindow 1\n  reassessDefensiveRoutesAfterExecutionChange 1\n  resolveHighSchoolInfieldReceiver 1\n  resolveInfieldRelayToFirst 1\ncallers_total: 2\ncallers_total_relation: eq\ncallers: 2  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.resolveInfieldDecision 1\n  E-meng-baseball_life_sim_semirefactor.script.validateHighSchoolDecisionThrowState 1\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "resolveSecondBaseCoverage643",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "function: resolveSecondBaseCoverage643\ndirection: both\ncallees_total: 4\ncallees_total_relation: eq\ncallees: 4  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.script:\n  buildInfieldRunnerFacts 1\n  getSecondBaseCauseExplanation 1\n  getSecondBaseRouteWindow 1\n  reassessDefensiveRoutesAfterExecutionChange 1\ncallers_total: 2\ncallers_total_relation: eq\ncallers: 2  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.resolveInfieldDecision 1\n  E-meng-baseball_life_sim_semirefactor.script.validateHighSchoolDecisionThrowState 1\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "resolveInfieldRelayToFirst",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "function: resolveInfieldRelayToFirst\ndirection: both\ncallees_total: 0\ncallees_total_relation: eq\ncallees: 0  (cols: qn hop)\ncallers_total: 2\ncallers_total_relation: eq\ncallers: 2  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.resolveSecondBaseInitiatedRoute 1\n  E-meng-baseball_life_sim_semirefactor.script.buildHighSchoolShortstopExecution 1\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "resolveHighSchoolDefensivePlay",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "function: resolveHighSchoolDefensivePlay\ndirection: both\ncallees_total: 4\ncallees_total_relation: eq\ncallees: 4  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.script:\n  assertHighSchoolGroundParticipant 1\n  resolveHighSchoolCatcherDecision 1\n  resolveLegacyHighSchoolDefensivePlay 1\n  validateHighSchoolDecisionThrowState 1\ncallers_total: 2\ncallers_total_relation: eq\ncallers: 2  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.advanceHighSchoolYearOneAfterMomentTwo 1\n  E-meng-baseball_life_sim_semirefactor.script.resolveHighSchoolYearOneMatch 1\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "resumeResolvedHighSchoolGroundBallSettlement",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "function: resumeResolvedHighSchoolGroundBallSettlement\ndirection: both\ncallees_total: 6\ncallees_total_relation: eq\ncallees: 6  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.script:\n  applyInfieldResolutionToHighSchoolMatch 1\n  applyRoutineDefensiveResolutionToHighSchoolMatch 1\n  restoreHighSchoolMatchAfterDefensiveDecision 1\n  same 1\n  validateHighSchoolDecisionThrowState 1\n  validateHighSchoolStoredDefensiveResolution 1\ncallers_total: 2\ncallers_total_relation: eq\ncallers: 2  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.resolveSimulatedHighSchoolPlateAppearance 1\n  E-meng-baseball_life_sim_semirefactor.script.advanceHighSchoolMatchPlaybackStep 1\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "resolveIncomingReceive",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "function: resolveIncomingReceive\ndirection: both\ncallees_total: 3\ncallees_total_relation: eq\ncallees: 3  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation:\n  clone 1\n  fail 1\n  freeze 1\ncallers_total: 1\ncallers_total_relation: eq\ncallers: 1  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.docs.infield-baseball-logic-audit-runner.main 1\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "resolveScorerEligibility",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "function: resolveScorerEligibility\ndirection: both\ncallees_total: 7\ncallees_total_relation: eq\ncallees: 7  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation:\n  clone 1\n  createActionFacts 1\n  dependsOn 1\n  fail 1\n  freeze 1\n  same 1\n  visit 1\ncallers_total: 1\ncallers_total_relation: eq\ncallers: 1  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation.projectDefensiveAttribution 1\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "normalizeSave",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "function: normalizeSave\ndirection: both\ncallees_total: 13\ncallees_total_relation: eq\ncallees: 13  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.player:\n  applyCanonicalPositionProfile 1\n  createInitialPlayer 1\n  ensureCapabilityStateShape 1\n  ensureDevelopmentStateShape 1\n  ensureSchoolInvitationRosterContexts 1\n  markLegacySchoolInvitationCompatibility 1\n  migrateLegacyPlayerCapability 1\n  restoreSchoolInvitationState 1\n  settleHighSchoolEntryCapability 1\n  validateSchoolInvitationSet 1\nE-meng-baseball_life_sim_semirefactor.script:\n  normalizeHighSchoolMatchDecisionDensityState 1\n  validateHighSchoolDecisionThrowState 1\n  validateHighSchoolRunnerTagUpTiming 1\ncallers_total: 1\ncallers_total_relation: eq\ncallers: 1  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.save.loadGame 1\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "validateHighSchoolStoredDefensiveResolution",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "function: validateHighSchoolStoredDefensiveResolution\ndirection: both\ncallees_total: 0\ncallees_total_relation: eq\ncallees: 0  (cols: qn hop)\ncallers_total: 3\ncallers_total_relation: eq\ncallers: 3  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.script:\n  applyInfieldResolutionToHighSchoolMatch 1\n  applyRoutineDefensiveResolutionToHighSchoolMatch 1\n  resumeResolvedHighSchoolGroundBallSettlement 1\n"
+          }
+        ],
+        "isError": false
+      }
+    }
+  ],
+  "snippets": [
+    {
+      "name": "resolveHighSchoolInfieldReceiver",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "name: resolveHighSchoolInfieldReceiver\nqualified_name: E-meng-baseball_life_sim_semirefactor.script.resolveHighSchoolInfieldReceiver\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/script.js\nstart_line: 8111\nend_line: 8127\nsource_mode: full\nsource: |\n  function resolveHighSchoolInfieldReceiver(situation, choice, sample, deliveryCompleted, match) {\n    const position = choice.targetBase === \"third\" ? \"3B\" : choice.targetBase === \"home\" ? \"C\"\n      : choice.targetBase === \"second\" || choice.targetBase === \"secondThenFirst\" ? \"SS\" : \"1B\";\n    const legacy = position === \"1B\" ? situation.teammates?.firstBaseReceiver : position === \"3B\" ? situation.teammates?.thirdBaseReceiver\n      : position === \"C\" ? situation.teammates?.catcher : situation.teammates?.shortstop;\n    const actor = match?.rosters?.[match.defenseTeam] && typeof TeamRosterFoundation !== \"undefined\"\n      ? TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam], position) : null;\n    const capabilities = actor ? getDefensiveSimulationCapability(actor, actor.position, match) : legacy?.capabilities || {};\n    const fielding = Number(capabilities.fielding ?? 5), swing = (sample - .5) * 4;\n    const available = Boolean((actor ? actor.id !== \"player\" : legacy) && legacy?.receivingAvailable !== false);\n    const ready = available && fielding + swing >= 2.8;\n    return Object.freeze({ receiverId: actor?.id || legacy?.id || null, receiverPosition: position, available, ready,\n      secured: Boolean(deliveryCompleted && ready), status: !deliveryCompleted ? \"notAttempted\" : !available ? \"unavailable\" : ready ? \"completed\" : \"failed\",\n      responsibleActor: deliveryCompleted && !ready ? \"teammate\" : \"player\",\n      provenance: Object.freeze({ authority: actor ? \"activeRosterReceiver+existingExecutionSample\" : \"declaredLegacyReceiver+existingExecutionSample\",\n        fielding, sample, swing, threshold: 2.8, consumedRng: false }) });\n  }\ncallers: 1\ncallees: 1\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "resolveInfieldRelayToFirst",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "name: resolveInfieldRelayToFirst\nqualified_name: E-meng-baseball_life_sim_semirefactor.script.resolveInfieldRelayToFirst\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/script.js\nstart_line: 8103\nend_line: 8109\nsource_mode: full\nsource: |\n  function resolveInfieldRelayToFirst(situation, firstThrowCompleted, sample, continuationWindow, pivot) {\n    const swing = (sample - 0.5) * 4;\n    const receive = firstThrowCompleted && (Number(pivot.fielding) || 5) + swing >= 3.2;\n    const turn = receive && (Number(pivot.reaction) || 5) + (Number(pivot.throwing) || 5) * 0.35 + swing - situation.batterSpeed * 0.25 >= 4.2;\n    const firstBaseReceive = turn && (Number(situation.teammates?.firstBaseReceiver?.capabilities?.fielding) || 5) + swing >= 2.8;\n    return { receive, turn, firstBaseReceive, secondOutAvailable: turn && firstBaseReceive && ![\"narrow\", \"expired\"].includes(continuationWindow) };\n  }\ncallers: 2\ncallees: 0\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "resolveSecondBaseCoverage643",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "name: resolveSecondBaseCoverage643\nqualified_name: E-meng-baseball_life_sim_semirefactor.script.resolveSecondBaseCoverage643\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/script.js\nstart_line: 8300\nend_line: 8370\nsource_mode: full\nsource: |\n  function resolveSecondBaseCoverage643(situation, choice, sample) {\n    const swing = (sample - 0.5) * 4;\n    const ss = situation.teammates?.shortstop?.capabilities || {};\n    const upstreamThrowQuality = situation.upstreamThrowQuality || (sample >= 0.72 ? \"clean\" : sample >= 0.45 ? \"slightlyOffLine\" : sample >= 0.22 ? \"late\" : \"difficultReceive\");\n    const coverageScore = (Number(situation.playerCapabilities.reaction) || 5) * 0.45 + (Number(situation.playerCapabilities.range) || 5) * 0.35 + (Number(situation.playerCapabilities.decision) || 5) * 0.2 + swing - situation.firstStepDemand * 0.25;\n    const coverageQuality = situation.coverageQuality || (coverageScore >= 3.8 ? \"good\" : coverageScore >= 2.2 ? \"late\" : \"failed\");\n    const ssFielded = (Number(ss.fielding) || 5) + swing >= 2.5;\n    let reassessment = null;\n    if (!ssFielded || coverageQuality === \"failed\") {\n      reassessment = reassessDefensiveRoutesAfterExecutionChange(situation, {\n        reason: !ssFielded ? \"upstreamFieldingChanged\" : \"coverageFailure\",\n        expiredRouteIds: [\"coverSecondFor643\", \"initiate463\"],\n        routeWindowOverrides: { ...(situation.routeWindowOverrides || {}), doublePlayWindow: \"expired\" }\n      });\n      const fallback = reassessment.fallbackRoute;\n      const completed = Boolean(ssFielded && fallback && getSecondBaseRouteWindow(fallback.id, reassessment.liveSituation.routeWindows).state !== \"expired\");\n      const fallbackChoice = fallback ? { ...fallback, infieldRoute: fallback.infieldRoute } : { infieldRoute: \"controlledNoThrow\", id: \"\" };\n      const resultCode = completed ? \"oneOut\" : \"zeroOuts\";\n      const runnerFacts = buildInfieldRunnerFacts(situation, fallbackChoice, resultCode);\n      const primaryCause = coverageQuality === \"failed\" ? \"playerCoverage\" : \"teammateUpstreamThrow\";\n      return Object.freeze({\n        familyId: \"infield\", route: fallbackChoice.infieldRoute, routeId: fallback?.id || \"\", initialRoute: choice.id, activeRoute: fallback?.id || \"\", fallbackRoute: fallback?.id || \"\", reassessed: true,\n        playerRole: \"coverPivot\", responsibility: situation.responsibility, coverageQuality, upstreamThrowQuality,\n        resultCode, detailedResult: completed ? \"coverageFallbackOut\" : \"coverageFailure\", tier: completed ? \"mixed\" : \"failure\", decisionQuality: \"routine\", executionQuality: completed ? \"adjusted\" : \"failed\",\n        outsCreated: runnerFacts.outsCreated, runnerSettlement: runnerFacts, runnerSettlementIdentity: situation.runnerSettlementIdentity, runnerChanges: runnerFacts.runnerChanges, runnersAfter: runnerFacts.runnersAfter, scoringRunnerIds: runnerFacts.scoringRunnerIds, runsAllowed: runnerFacts.runsAllowed, error: false,\n        primaryCause, secondaryCause: coverageQuality === \"failed\" ? \"timingWindow\" : \"\", responsibleActor: coverageQuality === \"failed\" ? \"player\" : \"teammate\",\n        playerResponsibility: coverageQuality === \"failed\" ? \"major\" : \"limited\", teammateResponsibility: coverageQuality === \"failed\" ? \"limited\" : \"major\",\n        causeExplanation: getSecondBaseCauseExplanation(primaryCause, coverageQuality === \"failed\" ? \"timingWindow\" : \"\", fallback),\n        playerLeg: Object.freeze({ coverage: coverageQuality, receive: \"notAttempted\", pivot: \"notAttempted\", secondThrow: \"notAttempted\" }),\n        teammateLeg: Object.freeze({ shortstopFielding: ssFielded ? \"completed\" : \"failed\", shortstopFirstThrow: coverageQuality === \"failed\" ? \"heldForReassessment\" : upstreamThrowQuality, firstBaseReceive: completed ? \"completed\" : \"notReached\" }),\n        timingResolution: Object.freeze({ secondBaseForceWindow: \"expired\", batterSpeed: situation.batterSpeed }), executionStage: \"reassessment\", routeAvailability: choice.availability, readiness: choice.readiness,\n        ballContext: situation.ballContext.type, ballDirection: situation.ballDirection, ballDepth: situation.ballDepth, batterSpeed: situation.batterSpeed, runnerSpeed: Number(situation.runnerSpeeds[0]) || 5,\n        fielding: situation.playerCapabilities.fielding, reaction: situation.playerCapabilities.reaction, arm: situation.playerCapabilities.arm, throwing: situation.playerCapabilities.throwing,\n        firstStage: Number(coverageScore.toFixed(2)), secondStage: 0, returnTiming: 0, windows: Object.freeze({ ...situation.windows }), routeWindows: situation.routeWindows,\n        reassessment: Object.freeze({ reason: reassessment.reason, forceState: reassessment.forceState, availableRouteIds: Object.freeze(reassessment.availableRoutes.map(route => route.id)), fallbackRoute: fallback?.id || \"\" })\n      });\n    }\n    const receivePenalty = { clean: 0, slightlyOffLine: 1, late: 1.6, difficultReceive: 2.5 }[upstreamThrowQuality] || 0;\n    const receiveCompleted = (Number(situation.playerCapabilities.fielding) || 5) + swing - receivePenalty >= 2.8;\n    const forceCompleted = receiveCompleted && coverageQuality !== \"failed\";\n    const pivotCompleted = forceCompleted && (Number(situation.playerCapabilities.reaction) || 5) + (Number(situation.playerCapabilities.decision) || 5) * 0.35 + swing - receivePenalty >= 4;\n    const secondThrowCompleted = pivotCompleted && (Number(situation.playerCapabilities.throwing) || 5) + (Number(situation.playerCapabilities.arm) || 5) * 0.3 + swing >= 4;\n    const firstBaseReceive = secondThrowCompleted && (Number(situation.teammates?.firstBaseReceiver?.capabilities?.fielding) || 5) + swing >= 2.8;\n    const secondOutCompleted = firstBaseReceive && getSecondBaseRouteWindow(choice.id, situation.routeWindows).state !== \"narrow\";\n    const resultCode = secondOutCompleted ? \"twoOuts\" : forceCompleted ? \"oneOut\" : \"zeroOuts\";\n    const runnerFacts = buildInfieldRunnerFacts(situation, choice, resultCode);\n    let primaryCause = \"balancedExecution\";\n    let responsibleActor = \"player\";\n    if (!receiveCompleted && upstreamThrowQuality !== \"clean\") { primaryCause = \"teammateUpstreamThrow\"; responsibleActor = \"teammate\"; }\n    else if (!pivotCompleted) primaryCause = \"playerPivot\";\n    else if (!secondThrowCompleted) primaryCause = \"playerSecondThrow\";\n    else if (!firstBaseReceive) { primaryCause = \"teammateFirstBaseReceive\"; responsibleActor = \"teammate\"; }\n    else if (!secondOutCompleted) { primaryCause = \"timingWindow\"; responsibleActor = \"timingWindow\"; }\n    return Object.freeze({\n      familyId: \"infield\", route: \"doublePlay\", routeId: choice.id, initialRoute: choice.id, activeRoute: choice.id, fallbackRoute: \"\", reassessed: false,\n      playerRole: \"coverPivot\", responsibility: situation.responsibility, coverageQuality, upstreamThrowQuality,\n      resultCode, detailedResult: secondOutCompleted ? \"completedDoublePlay\" : forceCompleted ? \"pivotPartial\" : \"receiveFailure\", tier: secondOutCompleted ? \"strong\" : forceCompleted ? \"mixed\" : \"failure\",\n      decisionQuality: \"routine\", executionQuality: secondOutCompleted ? \"complete\" : forceCompleted ? \"partial\" : \"failed\", outsCreated: runnerFacts.outsCreated,\n      runnerSettlement: runnerFacts, runnerSettlementIdentity: situation.runnerSettlementIdentity, runnerChanges: runnerFacts.runnerChanges, runnersAfter: runnerFacts.runnersAfter, scoringRunnerIds: runnerFacts.scoringRunnerIds, runsAllowed: runnerFacts.runsAllowed, error: false,\n      primaryCause, secondaryCause: upstreamThrowQuality !== \"clean\" && primaryCause !== \"teammateUpstreamThrow\" ? \"teammateUpstreamThrow\" : \"\", responsibleActor,\n      playerResponsibility: responsibleActor === \"player\" ? \"handled\" : \"limited\", teammateResponsibility: responsibleActor === \"teammate\" ? \"major\" : \"shared\",\n      causeExplanation: getSecondBaseCauseExplanation(primaryCause, upstreamThrowQuality !== \"clean\" && primaryCause !== \"teammateUpstreamThrow\" ? \"teammateUpstreamThrow\" : \"\"),\n      playerLeg: Object.freeze({ coverage: coverageQuality, receive: receiveCompleted ? \"completed\" : \"failed\", force: forceCompleted ? \"completed\" : \"notCompleted\", pivot: pivotCompleted ? \"completed\" : \"late\", secondThrow: secondThrowCompleted ? \"completed\" : \"notCompleted\" }),\n      teammateLeg: Object.freeze({ shortstopFielding: \"completed\", shortstopFirstThrow: upstreamThrowQuality, firstBaseReceive: firstBaseReceive ? \"completed\" : \"notCompleted\" }),\n      timingResolution: Object.freeze({ secondBaseForceWindow: getSecondBaseRouteWindow(choice.id, situation.routeWindows).state, batterSpeed: situation.batterSpeed }), executionStage: secondOutCompleted ? \"complete\" : \"partial\", routeAvailability: choice.availability, readiness: choice.readiness,\n      ballContext: situation.ballContext.type, ballDirection: situation.ballDirection, ballDepth: situation.ballDepth, batterSpeed: situation.batterSpeed, runnerSpeed: Number(situation.runnerSpeeds[0]) || 5,\n      fielding: situation.playerCapabilities.fielding, reaction: situation.playerCapabilities.reaction, arm: situation.playerCapabilities.arm, throwing: situation.playerCapabilities.throwing,\n      firstStage: Number(coverageScore.toFixed(2)), secondStage: Number(((Number(situation.playerCapabilities.throwing) || 5) + swing).toFixed(2)), returnTiming: 0,\n      windows: Object.freeze({ ...situation.windows }), routeWindows: situation.routeWindows, reassessment: null\n    });\n  }\ncallers: 2\ncallees: 4\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "buildHighSchoolShortstopExecution",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "name: buildHighSchoolShortstopExecution\nqualified_name: E-meng-baseball_life_sim_semirefactor.script.buildHighSchoolShortstopExecution\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/script.js\nstart_line: 11859\nend_line: 11946\nsource_mode: full\nsource: |\n  function buildHighSchoolShortstopExecution(match, situation, choice, sample) {\n    const handoff = match.groundBallInPlayState;\n    if (!Number.isFinite(sample) || sample < 0 || sample >= 1) throw new Error(\"Invalid SS execution sample\");\n    assertHighSchoolDetailedResponsibility(match, handoff.physicalTruth, \"SS\", \"player\");\n    if (situation.playerPosition !== \"游擊手\" || !handoff.supported) throw new Error(\"Invalid SS production context\");\n    const secureResolution = resolveHighSchoolCanonicalSecure(match, handoff, sample);\n    const input = getHighSchoolControlledDecisionInput(match, { ...handoff, secureResolution });\n    const opportunity = DefensiveDecisionThrowFoundation.buildDecisionOpportunity(input);\n    const controlled = opportunity.status === \"controlledDecision\";\n    const selection = controlled ? DefensiveDecisionThrowFoundation.selectDefensiveRoute(opportunity, choice.routeId, input) : null;\n    const thrown = selection ? DefensiveDecisionThrowFoundation.resolveThrow({ input, opportunity, selection,\n      capabilities: { defenderId: \"player\", arm: situation.playerCapabilities.arm, throwing: situation.playerCapabilities.throwing },\n      transferState: secureResolution.secureQuality === \"bobbleButControlled\" ? \"delayed\" : \"ready\" }) : null;\n    const swing = (sample - 0.5) * 4;\n    const receiver = selection?.route.receiverPosition\n      ? TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam], selection.route.receiverPosition) : null;\n    const receiverCapabilities = receiver ? getDefensiveSimulationCapability(receiver, receiver.position, match) : {};\n    const receiverReady = Boolean(receiver && (Number(receiverCapabilities.fielding) || 5) + swing >= 3.2);\n    input.receiverState = { receiverId: receiver?.id || null, ready: receiverReady, atBase: true, tagAvailable: receiverReady, tagDelay: 1 };\n    const decisionThrowState = { opportunity, preControlIntent: choice.routeId, selection, activeSelection: selection, throwResolution: thrown };\n    // Failed acquisition has no controlled decision or throw. Preserve the existing\n    // Foundation's no-contest diagnostic so lifecycle recovery still has an owner.\n    let runnerThrowTiming = selection ? null : DefensiveRunnerThrowSettlementFoundation.projectExistingTiming({\n      stage: decisionThrowState, runnerState: null, windowState: \"expired\", receiverFact: \"unavailable\" });\n    let firstLegSettlement = null;\n    if (selection) {\n      const timingArgs = { input, opportunity, selection, throwResolution: thrown,\n        runnerState: input.runnerPhysicalStates.find(r => r.runnerId === selection.route.targetRunnerId),\n        receiverState: input.receiverState, resolveThirdOut: resolveHighSchoolThirdOutIntegrity };\n      runnerThrowTiming = DefensiveRunnerThrowSettlementFoundation.resolveTiming(timingArgs);\n      firstLegSettlement = DefensiveRunnerThrowSettlementFoundation.deriveSettlement({ ...timingArgs, timing: runnerThrowTiming });\n    }\n    const firstOut = firstLegSettlement?.outRecorded === true;\n    const continuationWindow = handoff.timingWindows.relayToFirstWindow.state;\n    const isDoublePlay = choice.infieldRoute === \"doublePlay\";\n    // Relay completion reuses the established 2B/SS receive-turn-deliver model.\n    const relay = resolveInfieldRelayToFirst(situation, firstOut, sample, continuationWindow, receiverCapabilities);\n    const secondOut = isDoublePlay && firstOut && situation.outs < 2 && relay.secondOutAvailable;\n    const retirements = firstOut ? [{ runnerId: selection.route.targetRunnerId, targetBase: selection.route.targetBase,\n      outType: firstLegSettlement.playType === \"batterRunner\" ? \"batterRunnerBeforeFirst\" : firstLegSettlement.playType === \"force\" ? \"force\" : \"nonForceTag\", sequence: 1 }] : [];\n    if (secondOut) retirements.push({ runnerId: situation.batterId, targetBase: \"first\", outType: \"batterRunnerBeforeFirst\", sequence: 2 });\n    // Complete all committed actors after the first-leg contest. The existing force\n    // owner accounts for in-transit runners, collisions, and force removal after outs.\n    const runnerSettlement = ForceAdvancement.settleForceAdvancement({ forceChain: situation.forceChain,\n      movementIntents: situation.movementIntents, retirements });\n    const error = (secureResolution.attemptAvailable && !secureResolution.secured) || thrown?.throwQuality === \"offline\";\n    const resultCode = secondOut ? \"twoOuts\" : firstOut ? \"oneOut\" : error ? \"error\" : \"zeroOuts\";\n    const detailedResult = secondOut ? \"completedDoublePlay\" : firstOut ? (isDoublePlay ? \"secondStageExpired\" : \"cleanOut\")\n      : error ? (secureResolution.secured ? \"inaccurateThrow\" : \"fieldingError\") : !secureResolution.secured ? \"lateFielding\"\n        : choice.infieldRoute === \"controlledNoThrow\" ? \"controlledNoThrow\" : \"lateThrow\";\n    const primaryCause = !secureResolution.secured ? \"playerFieldingControl\" : thrown?.throwQuality === \"offline\" ? \"playerFirstThrow\"\n      : !receiverReady && selection?.route.action !== \"holdBall\"\n        ? selection?.route.receiverPosition === \"1B\" ? \"teammateFirstBaseReceive\" : selection?.route.receiverPosition === \"C\" ? \"teammateHomeReceive\" : \"teammatePivot\"\n        : isDoublePlay && firstOut && !relay.turn && situation.batterSpeed < 8 && continuationWindow !== \"narrow\" ? \"teammatePivot\"\n          : isDoublePlay && firstOut && relay.turn && !relay.firstBaseReceive ? \"teammateFirstBaseReceive\"\n            : choice.infieldRoute === \"controlledNoThrow\" ? \"balancedExecution\"\n              : !firstOut || (isDoublePlay && !secondOut) ? \"timingWindow\" : \"balancedExecution\";\n    const resolution = attachDefensiveOutcomeExplanation(situation, choice, {\n      familyId: \"infield\", route: choice.infieldRoute, routeId: choice.routeId, initialRoute: choice.routeId, activeRoute: choice.routeId,\n      playerRole: \"initiator\", responsibility: situation.responsibility, resultCode, detailedResult,\n      tier: secondOut ? \"strong\" : firstOut || choice.infieldRoute === \"controlledNoThrow\" ? \"mixed\" : \"failure\",\n      decisionQuality: choice.advisable === \"strong\" ? \"strong\" : choice.advisable === \"aggressive\" ? \"aggressive\" : choice.advisable === \"conservative\" ? \"conservative\" : \"reasonable\",\n      executionQuality: firstOut ? (isDoublePlay && !secondOut ? \"partial\" : \"complete\") : error ? \"misplay\" : choice.infieldRoute === \"controlledNoThrow\" ? \"controlled\" : \"late\",\n      runnerSettlement, runnerSettlementIdentity: situation.runnerSettlementIdentity, outsCreated: runnerSettlement.outsCreated,\n      runnerChanges: runnerSettlement.runnerChanges, runnersAfter: runnerSettlement.runnersAfter,\n      scoringRunnerIds: runnerSettlement.scoringRunnerIds, runsAllowed: runnerSettlement.runsAllowed, error,\n      primaryCause, secondaryCause: \"\", responsibleActor: primaryCause.startsWith(\"teammate\") ? \"teammate\" : primaryCause === \"timingWindow\" ? \"timingWindow\" : \"player\",\n      playerResponsibility: error ? \"major\" : \"handled\", teammateResponsibility: primaryCause.startsWith(\"teammate\") ? \"major\" : isDoublePlay ? \"shared\" : \"none\",\n      causeExplanation: primaryCause === \"teammatePivot\" ? \"傳球的接球端未完成接球或轉傳；二壘手與游擊手的責任分開記錄。\"\n        : primaryCause === \"teammateFirstBaseReceive\" ? \"傳球已進入一壘接球位置，但一壘手未完成接球；傳球與接球責任分開記錄。\" : getSecondBaseCauseExplanation(primaryCause, \"\"),\n      playerLeg: { reach: handoff.defensiveAccess.reachResolution.reached ? \"completed\" : \"late\",\n        control: secureResolution.secured ? \"completed\" : \"failed\", transfer: thrown?.releaseQuality === \"delayedRelease\" ? \"delayed\" : controlled ? \"completed\" : \"notReached\",\n        firstThrow: thrown?.throwAttempted ? thrown.throwQuality === \"offline\" ? \"failed\" : \"completed\" : \"notAttempted\" },\n      teammateLeg: { receiver: receiverReady ? \"completed\" : \"notReached\", ...(isDoublePlay ? {\n        secondBaseReceive: relay.receive ? \"completed\" : \"notCompleted\", secondBasePivot: relay.turn ? \"completed\" : \"notCompleted\",\n        secondBaseSecondThrow: relay.turn ? \"completed\" : \"notCompleted\", firstBaseReceive: relay.firstBaseReceive ? \"completed\" : \"notCompleted\" } : {}) },\n      firstLegState: { status: firstOut ? \"completed\" : \"failed\", targetBase: selection?.route.targetBase || null },\n      continuationState: { status: secondOut ? \"completed\" : firstOut && isDoublePlay ? \"windowClosed\" : \"settledByActorOutcomes\", targetBase: isDoublePlay ? \"first\" : null, window: continuationWindow },\n      timingResolution: { firstLeg: runnerThrowTiming, firstLegSettlement, relayToFirstWindow: continuationWindow },\n      ballContext: situation.ballContext.type, ballDirection: situation.ballDirection, ballDepth: situation.ballDepth,\n      batterSpeed: situation.batterSpeed, runnerSpeed: Math.max(...situation.runnerSpeeds.filter(Number.isFinite), 0),\n      ...situation.playerCapabilities, firstStage: secureResolution.margin ?? handoff.defensiveAccess.reachResolution.margin,\n      secondStage: thrown?.accuracyMargin ?? 0, returnTiming: 0, windows: situation.windows\n    });\n    return { sample, choice: { routeId: choice.routeId, matchDecision: choice.matchDecision }, secureResolution,\n      decisionThrowState,\n      runnerThrowTiming, resolution: attachHighSchoolInfieldActionFacts(match, situation, choice, resolution, sample) };\n  }\ncallers: 2\ncallees: 8\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "resolveSecondBaseInitiatedRoute",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "name: resolveSecondBaseInitiatedRoute\nqualified_name: E-meng-baseball_life_sim_semirefactor.script.resolveSecondBaseInitiatedRoute\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/script.js\nstart_line: 8129\nsource_mode: full\ncallers: 2\ncallees: 7\nsource: |\n  function resolveSecondBaseInitiatedRoute(situation, choice, sample, match) {\n    const swing = (sample - 0.5) * 4;\n    const windows = situation.windows;\n    const physicalContext = situation.groundBallDefensiveContext || situation.buntDefensiveContext;\n    const routeWindow = getSecondBaseRouteWindow(choice.routeId, situation.routeWindows);\n    let firstLegTimingWindow = routeWindow;\n    const fieldControlled = situation.executionChange === \"bobble\" ? true : windows.fielding + swing >= 2.8;\n    const transferCompleted = fieldControlled && situation.executionChange !== \"bobble\" && windows.transfer + swing >= 3.8;\n    const firstThrowCompleted = transferCompleted && windows.throw + swing >= 2.8;\n    let reassessment = null;\n    let actualChoice = choice;\n    if (choice.routeId === \"initiate463\" && (situation.executionChange === \"bobble\" || routeWindow.state === \"expired\")) {\n      reassessment = reassessDefensiveRoutesAfterExecutionChange(situation, {\n        reason: situation.executionChange || \"routeWindowExpired\",\n        expiredRouteIds: [\"initiate463\", \"coverSecondFor643\"],\n        routeWindowOverrides: { ...(situation.routeWindowOverrides || {}), doublePlayWindow: \"expired\" }\n      });\n      if (reassessment.fallbackRoute) {\n        actualChoice = {\n          ...getInfieldChoiceTradeoff(situation, reassessment.fallbackRoute.infieldRoute),\n          ...reassessment.fallbackRoute,\n          routeId: reassessment.fallbackRoute.id,\n          infieldRoute: reassessment.fallbackRoute.infieldRoute,\n          advisable: \"reasonable\"\n        };\n      }\n    }\n    let resultCode = \"zeroOuts\";\n    let detailedResult = \"lateThrow\";\n    let playerStages = {\n      reach: physicalContext?.defensiveAccess?.reachResolution\n        ? (physicalContext.defensiveAccess.reachResolution.reached ? \"completed\" : \"late\")\n        : windows.fielding + swing >= 2.2 ? \"completed\" : \"late\",\n      control: fieldControlled ? (situation.executionChange === \"bobble\" ? \"recovered\" : \"completed\") : \"failed\",\n      transfer: transferCompleted ? \"completed\" : situation.executionChange === \"bobble\" ? \"delayed\" : \"failed\",\n      firstThrow: firstThrowCompleted ? \"completed\" : \"notCompleted\"\n    };\n    let teammateStages = {};\n    let receiverResolution = null;\n    let homeTagLeg = null;\n    let primaryCause = \"balancedExecution\";\n    let secondaryCause = \"\";\n    let responsibleActor = \"player\";\n    if (reassessment?.fallbackRoute) {\n      const fallbackWindow = getSecondBaseRouteWindow(actualChoice.routeId, reassessment.liveSituation.routeWindows);\n      firstLegTimingWindow = fallbackWindow;\n      const fallbackRelease = fieldControlled && fallbackWindow.state !== \"expired\";\n      receiverResolution = resolveHighSchoolInfieldReceiver(situation, actualChoice, sample, fallbackRelease, match);\n      const fallbackCompleted = fallbackRelease && receiverResolution.secured;\n      resultCode = fallbackCompleted ? \"oneOut\" : \"zeroOuts\";\n      detailedResult = fallbackCompleted ? \"fallbackOut\" : \"fallbackLate\";\n      playerStages = { ...playerStages, reassessment: \"completed\", fallbackRelease: fallbackRelease ? \"completed\" : \"late\" };\n      teammateStages = { receiver: receiverResolution.status };\n      primaryCause = fallbackRelease && !receiverResolution.secured ? \"teammateFirstBaseReceive\" : \"playerFieldingControl\";\n      if (fallbackRelease && !receiverResolution.secured) responsibleActor = \"teammate\";\n      secondaryCause = fallbackCompleted ? \"\" : \"timingWindow\";\n    } else if (!fieldControlled) {\n      resultCode = windows.fielding + swing < 1 ? \"error\" : \"zeroOuts\";\n      detailedResult = resultCode === \"error\" ? \"fieldingError\" : \"lateFielding\";\n      primaryCause = \"playerFieldingControl\";\n    } else if (choice.routeId === \"initiate463\") {\n      const ss = situation.teammates?.shortstop?.capabilities || situation.teammates?.pivotFielder?.capabilities || {};\n      const continuationWindow = physicalContext?.timingWindows?.relayToFirstWindow?.state || routeWindow.state;\n      const relay = resolveInfieldRelayToFirst(situation, firstThrowCompleted, sample, continuationWindow, ss);\n      const ssReceive = relay.receive, ssPivot = relay.turn;\n      // A completed pivot preserves the force out, but cannot guarantee delivery.\n      // Reuse the existing cover/pivot throw threshold and the owned sample.\n      const ssSecondThrow = ssPivot && Number(ss.throwing ?? 5) + Number(ss.arm ?? 5) * .3 + swing >= 4;\n      const firstBaseReceive = ssSecondThrow && relay.firstBaseReceive;\n      const firstOutCompleted = firstThrowCompleted && routeWindow.state !== \"expired\" && ssReceive;\n      const secondOutCompleted = firstOutCompleted && ssSecondThrow && relay.secondOutAvailable;\n      resultCode = secondOutCompleted ? \"twoOuts\" : firstOutCompleted ? \"oneOut\" : \"zeroOuts\";\n      detailedResult = secondOutCompleted ? \"completedDoublePlay\" : firstOutCompleted ? \"secondStageExpired\" : \"lateForce\";\n      teammateStages = { shortstopReceive: ssReceive ? \"completed\" : \"failed\", shortstopPivot: ssPivot ? \"completed\" : \"late\", shortstopSecondThrow: ssSecondThrow ? \"completed\" : \"notCompleted\", firstBaseReceive: firstBaseReceive ? \"completed\" : \"notCompleted\" };\n      if (!firstThrowCompleted) primaryCause = \"playerFirstThrow\";\n      else if (!ssReceive) { primaryCause = \"teammatePivot\"; responsibleActor = \"teammate\"; }\n      else if (!ssPivot && (situation.batterSpeed >= 8 || continuationWindow === \"narrow\")) { primaryCause = \"timingWindow\"; secondaryCause = \"teammatePivot\"; responsibleActor = \"timingWindow\"; }\n      else if (!ssPivot) { primaryCause = \"teammatePivot\"; responsibleActor = \"teammate\"; }\n      else if (!ssSecondThrow) { primaryCause = \"teammateSecondThrow\"; responsibleActor = \"teammate\"; }\n      else if (!firstBaseReceive) { primaryCause = \"teammateFirstBaseReceive\"; responsibleActor = \"teammate\"; }\n      else if (!secondOutCompleted) { primaryCause = \"timingWindow\"; responsibleActor = \"timingWindow\"; secondaryCause = situation.batterSpeed >= 8 ? \"timingWindow\" : \"\"; }\n    } else if (actualChoice.routeId === \"preventRunHome\") {\n      const catcher = situation.teammates?.catcher || {};\n      const catcherCapabilities = catcher.capabilities || {};\n      const runnerAtThird = situation.runnerContext?.[2] || {};\n      const catcherReceive = firstThrowCompleted && catcher.receivingAvailable !== false\n        && (Number(catcherCapabilities.fielding) || 5) + (Number(catcherCapabilities.reaction) || 5) * 0.25 + swing >= 3.2;\n      const tagOpportunity = catcherReceive && routeWindow.state !== \"expired\";\n      const tagScore = (Number(catcherCapabilities.reaction) || 5) * 0.55\n        + (Number(catcherCapabilities.fielding) || 5) * 0.25 + swing\n        - (Number(runnerAtThird.speed) || 5) * 0.35;\n      const tagCompleted = tagOpportunity && tagScore >= 2.4;\n      resultCode = tagCompleted ? \"oneOut\" : \"zeroOuts\";\n      detailedResult = tagCompleted ? \"tagOutHome\" : catcherReceive ? \"homeTagMiss\" : \"homeReceiveFailure\";\n      teammateStages = {\n        catcherReceive: catcherReceive ? \"completed\" : \"failed\",\n        catcherTag: tagCompleted ? \"completed\" : tagOpportunity ? \"runnerBeatTag\" : \"notReached\"\n      };\n      homeTagLeg = Object.freeze({\n        routeType: \"nonForceHomeTag\",\n        runnerId: runnerAtThird.runnerId || \"\",\n        catcherId: catcher.id || \"\",\n        possession: catcherReceive ? \"secured\" : \"notSecured\",\n        tagRequired: true,\n        tagOpportunity: tagOpportunity ? \"formed\" : \"notFormed\",\n        arrivalComparison: tagCompleted ? \"tagBeforeRunnerTouch\" : tagOpportunity ? \"runnerTouchBeforeTag\" : \"unresolved\",\n        result: tagCompleted ? \"out\" : \"safe\"\n      });\n      if (!firstThrowCompleted) primaryCause = fieldControlled ? \"playerFirstThrow\" : \"playerFieldingControl\";\n      else if (!catcherReceive) { primaryCause = \"teammateHomeReceive\"; responsibleActor = \"teammate\"; }\n      else if (!tagCompleted) { primaryCause = \"timingWindow\"; responsibleActor = \"timingWindow\"; }\n    } else {\n      receiverResolution = resolveHighSchoolInfieldReceiver(situation, actualChoice, sample, firstThrowCompleted, match);\n      const completed = firstThrowCompleted && receiverResolution.secured && routeWindow.state !== \"expired\";\n      resultCode = completed ? \"oneOut\" : \"zeroOuts\";\n      detailedResult = completed ? (actualChoice.routeId === \"preventRunHome\" ? \"tagOutHome\" : actualChoice.routeId === \"homeForceOut\" ? \"forceOutHome\" : actualChoice.routeId === \"attackLeadRunnerThird\" ? \"leadRunnerOut\" : \"cleanOut\") : \"lateThrow\";\n      teammateStages = { receiver: receiverResolution.status };\n      if (!firstThrowCompleted) primaryCause = fieldControlled ? \"playerFirstThrow\" : \"playerFieldingControl\";\n      else if (!receiverResolution.secured) {\n        primaryCause = receiverResolution.receiverPosition === \"1B\" ? \"teammateFirstBaseReceive\"\n          : receiverResolution.receiverPosition === \"C\" ? \"teammateHomeReceive\" : \"teammateReceive\";\n        responsibleActor = \"teammate\";\n      }\n      else if (!completed) { primaryCause = \"timingWindow\"; responsibleActor = \"timingWindow\"; }\n    }\n    const runnerFacts = buildInfieldRunnerFacts(situation, actualChoice, resultCode);\n    const outsCreated = resultCode === \"twoOuts\" ? 2 : resultCode === \"oneOut\" ? 1 : 0;\n    const executionQuality = resultCode === \"twoOuts\" ? \"complete\" : resultCode === \"oneOut\" && choice.routeId === \"initiate463\" ? \"partial\" : resultCode === \"oneOut\" ? \"complete\" : resultCode === \"error\" ? \"misplay\" : \"late\";\n    return Object.freeze({\nend_line: 8257\nsource_truncated: true\nsource_clipped: true\ntruncation_reason: output_budget\nnext_start_line: 8258\noriginal_end_line: 8298\nsource_lines_returned: 129\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "2B continuation",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "name: resolveSecondBaseInitiatedRoute\nqualified_name: E-meng-baseball_life_sim_semirefactor.script.resolveSecondBaseInitiatedRoute\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/script.js\nstart_line: 8258\nend_line: 8298\nsource_mode: full\nsource: |\n      familyId: \"infield\", route: actualChoice.infieldRoute, routeId: actualChoice.routeId, initialRoute: choice.routeId,\n      activeRoute: actualChoice.routeId, fallbackRoute: reassessment?.fallbackRoute?.id || \"\", reassessed: Boolean(reassessment),\n      playerRole: situation.responsibility?.playerRole || choice.playerRole, responsibility: situation.responsibility,\n      resultCode, detailedResult, tier: outsCreated >= 2 ? \"strong\" : outsCreated === 1 ? \"mixed\" : resultCode === \"error\" ? \"failure\" : \"failure\",\n      decisionQuality: choice.advisable === \"aggressive\" ? \"aggressive\" : choice.advisable === \"strong\" ? \"strong\" : \"reasonable\",\n      executionQuality, outsCreated: runnerFacts.outsCreated, runnerSettlement: runnerFacts, runnerSettlementIdentity: situation.runnerSettlementIdentity, runnerChanges: runnerFacts.runnerChanges, runnersAfter: runnerFacts.runnersAfter,\n      scoringRunnerIds: runnerFacts.scoringRunnerIds, runsAllowed: runnerFacts.runsAllowed, error: resultCode === \"error\",\n      primaryCause, secondaryCause, responsibleActor,\n      playerResponsibility: responsibleActor === \"player\" ? (resultCode === \"error\" ? \"major\" : \"handled\") : \"limited\",\n      teammateResponsibility: responsibleActor === \"teammate\" ? \"major\" : choice.teammateChain?.length ? \"shared\" : \"none\",\n      causeExplanation: getSecondBaseCauseExplanation(primaryCause, secondaryCause, reassessment?.fallbackRoute),\n      ...(situation.groundBallDefensiveContext?.defensiveAccess?.reachResolution ? {\n        firstLegTimingWindow: Object.freeze({ ...firstLegTimingWindow }),\n        controlEvidence: Object.freeze({ fieldingWindow: windows.fielding, controlThreshold: 2.8, sample, swing,\n          fielding: situation.playerCapabilities.fielding, reaction: situation.playerCapabilities.reaction,\n          range: situation.playerCapabilities.range, executionChange: situation.executionChange || \"\" })\n      } : {}),\n      playerLeg: Object.freeze(playerStages), teammateLeg: Object.freeze(teammateStages), timingResolution: Object.freeze({\n        routeWindow: routeWindow.state,\n        homeOutWindow: actualChoice.routeId === \"preventRunHome\" ? routeWindow.state : null,\n        leadRunnerForceWindow: physicalContext?.timingWindows?.leadRunnerForceWindow?.state || routeWindow.state,\n        relayToFirstWindow: physicalContext?.timingWindows?.relayToFirstWindow?.state || routeWindow.state,\n        batterSpeed: situation.batterSpeed\n      }),\n      firstLegState: choice.routeId === \"initiate463\" ? Object.freeze({ status: resultCode === \"zeroOuts\" ? \"failed\" : \"completed\", targetBase: \"second\" })\n        : choice.routeId === \"preventRunHome\" ? Object.freeze({ status: resultCode === \"oneOut\" ? \"completed\" : \"failed\", targetBase: \"home\", playType: \"tag\" }) : null,\n      continuationState: choice.routeId === \"initiate463\" ? Object.freeze({\n        status: resultCode === \"twoOuts\" ? \"completed\" : resultCode === \"oneOut\" ? \"windowClosed\" : \"notReached\",\n        window: physicalContext?.timingWindows?.relayToFirstWindow?.state || routeWindow.state,\n        targetBase: \"first\"\n      }) : choice.routeId === \"preventRunHome\" ? Object.freeze({ status: \"settledByActorOutcomes\", window: routeWindow.state, targetBase: \"firstAndSecond\" }) : null,\n      homeTagLeg, receiverResolution,\n      executionStage: detailedResult, routeAvailability: choice.availability, readiness: choice.readiness,\n      ballContext: situation.ballContext.type, ballDirection: situation.ballDirection, ballDepth: situation.ballDepth,\n      batterSpeed: situation.batterSpeed, runnerSpeed: Math.max(...situation.runnerSpeeds.filter(Number.isFinite), 0),\n      fielding: situation.playerCapabilities.fielding, reaction: situation.playerCapabilities.reaction, arm: situation.playerCapabilities.arm, throwing: situation.playerCapabilities.throwing,\n      firstStage: Number((windows.fielding + swing).toFixed(2)), secondStage: Number((windows.throw + swing).toFixed(2)), returnTiming: 0,\n      windows: Object.freeze({ ...windows }), routeWindows: situation.routeWindows,\n      reassessment: reassessment ? Object.freeze({ reason: reassessment.reason, forceState: reassessment.forceState, availableRouteIds: Object.freeze(reassessment.availableRoutes.map(route => route.id)), fallbackRoute: reassessment.fallbackRoute?.id || \"\" }) : null\n    });\n  }\ncallers: 2\ncallees: 7\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "incoming receive",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "name: resolveIncomingReceive\nqualified_name: E-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation.resolveIncomingReceive\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/defensive-decision-throw-foundation.js\nstart_line: 220\nend_line: 247\nsource_mode: full\nsource: |\n    function resolveIncomingReceive({ playIdentity, physicalIdentity, throwResolution: thrown, receiver,\n      capabilities, sample, returnReady = true, receiveDelay = 0 } = {}) {\n      if (!playIdentity || !physicalIdentity || !thrown?.identity || !thrown.throwerId || !thrown.targetRunnerId\n        || !receiver?.id || thrown.receiverId !== receiver.id || thrown.receiverPosition !== receiver.position\n        || thrown.throwerId === receiver.id || ![\"onTarget\", \"challengingReceive\", \"lateWeakThrow\", \"offline\", \"notAttempted\"].includes(thrown.throwQuality)\n        || ![\"first\", \"second\", \"third\", \"home\"].includes(thrown.targetBase)\n        || !Number.isFinite(sample) || sample < 0 || sample >= 1 || !Number.isFinite(receiveDelay) || receiveDelay < 0) fail(\"invalid incoming throw continuation\");\n      const swing = (sample - .5) * 4;\n      const fielding = Number(capabilities?.fielding), catching = Number(capabilities?.catching ?? fielding);\n      const reaction = Number(capabilities?.reaction), range = Number(capabilities?.range);\n      if (![fielding, catching, reaction, range].every(Number.isFinite)) fail(\"missing receiver capability snapshot\");\n      const delivery = thrown.throwAttempted === true && ![\"offline\", \"notAttempted\"].includes(thrown.throwQuality);\n      const readinessMargin = reaction * .6 + range * .4 + swing - 3.2;\n      const ready = delivery && returnReady && readinessMargin >= 0;\n      const secureDemand = 3.2 + (thrown.throwQuality === \"challengingReceive\" ? 1 : 0);\n      const secureMargin = fielding * .75 + catching * .25 + swing - secureDemand;\n      const secured = ready && secureMargin >= 0;\n      const status = !thrown.throwAttempted ? \"notAttempted\" : thrown.throwQuality === \"offline\" ? \"outsideReceiverReach\"\n        : !ready ? \"unavailable\" : !secured ? \"failed\" : \"completed\";\n      return freeze({ version: \"infield-incoming-receive-v1\", identity: `${thrown.identity}|receive|${receiver.id}`,\n        playIdentity, physicalIdentity, throwIdentity: thrown.identity, throwerId: thrown.throwerId,\n        receiverId: receiver.id, receiverPosition: receiver.position, targetBase: thrown.targetBase,\n        targetRunnerId: thrown.targetRunnerId, throwQuality: thrown.throwQuality, delivery, ready, secured, status,\n        readinessMargin, secureMargin, secureDemand, receiveDelay,\n        errorCharged: status === \"failed\" && thrown.throwQuality === \"onTarget\",\n        provenance: { authority: \"resolvedThrow+originalExecutionSample+receiverCapabilitySnapshot\", sample,\n          consumedRng: false, capabilities: clone(capabilities), returnReady } });\n    }\ncallers: 1\ncallees: 3\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "relative timing",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "content": [
+            {
+              "type": "text",
+              "text": "name: resolveTiming\nqualified_name: E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation.resolveTiming\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/defensive-runner-throw-settlement-foundation.js\nstart_line: 23\nend_line: 60\nsource_mode: full\nsource: |\n    function resolveTiming(args){\n      const {input,opportunity,selection,throwResolution:thrown,runnerState,receiverState}=args;\n      Decision.validateSelection(selection,opportunity,input);\n      if(!thrown||thrown.identity!==`${selection.identity}|throw-v1`||thrown.decisionIdentity!==selection.identity\n        ||thrown.throwerId!==selection.defenderId||thrown.throwerPosition!==selection.position\n        ||[\"routeId\",\"targetRunnerId\",\"targetBase\",\"receiverId\",\"receiverPosition\"].some(key=>thrown[key]!==selection.route[key]))fail(\"stale throw / receiver / target\");\n      const base={version:VERSION,identity:`${thrown.identity}|timing-v1`,decisionIdentity:selection.identity,throwIdentity:thrown.identity,\n        targetRunnerId:thrown.targetRunnerId,targetBase:thrown.targetBase,receiverId:thrown.receiverId,\n        authority:\"resolvedThrow+existingRunnerPhysicalState+receiverReadiness\",variationEvidence:{consumed:false}};\n      if(selection.route.action===\"holdBall\"){\n        if(thrown.throwAttempted!==false)fail(\"hold includes throw\");\n        return freeze({...base,contestAvailable:false,timingClassification:\"noContest\",timingMargin:null,\n          runnerArrival:null,ballArrival:null,receiverCompletion:null,reason:\"heldBall\"});\n      }\n      const current=(input.runnerPhysicalStates||[]).find(r=>r.runnerId===thrown.targetRunnerId);\n      if(!current||!same(current,runnerState)||current.targetBase!==thrown.targetBase\n        ||(current.originBase===\"batter\"?input.batterRunnerId!==current.runnerId:input.runners[Number(current.originBase)-1]!==current.runnerId))fail(\"stale runner physical state\");\n      const forced=Force.getForcedMovement(opportunity.context.forceChain,current.runnerId);\n      if(!forced&&!Decision.isAdvancingTo(current,thrown.targetBase))fail(\"runner not in contest\");\n      if(!receiverState||receiverState.receiverId!==thrown.receiverId||!same(receiverState,input.receiverState))fail(\"stale receiver completion\");\n      const runnerArrival=deriveRunnerArrival(current);\n      const noContest=!thrown.throwAttempted||thrown.throwQuality===\"offline\"||receiverState.ready!==true;\n      const receiveDelay=Number(receiverState.receiveDelay??0),tagDelay=Number(receiverState.tagDelay??1);\n      if(!Number.isFinite(receiveDelay)||receiveDelay<0||!Number.isFinite(tagDelay)||tagDelay<0)fail(\"invalid receiver delay\");\n      if(noContest)return freeze({...base,contestAvailable:false,timingClassification:\"noContest\",timingMargin:null,\n        runnerArrival,ballArrival:{quality:thrown.throwQuality},receiverCompletion:{...clone(receiverState),status:\"unavailableReceive\"},reason:\"unusableThrowOrReceiver\"});\n      const qualityDelay={onTarget:0,challengingReceive:1,lateWeakThrow:3}[thrown.throwQuality];\n      if(qualityDelay===undefined)fail(\"generic timing cannot reinterpret legacy composite throw\");\n      const distanceDelay={short:0,medium:1,long:2}[thrown.throwDemand?.distanceClass];\n      if(distanceDelay===undefined)fail(\"missing throw distance\");\n      const ballTime=4+distanceDelay+qualityDelay+(thrown.releaseQuality===\"delayedRelease\"?1:0);\n      const completionTime=ballTime+receiveDelay;\n      const margin=Math.round((runnerArrival.relativeArrival-completionTime)*1000)/1000;\n      return freeze({...base,contestAvailable:true,timingClassification:classify(margin),timingMargin:margin,runnerArrival,\n        ballArrival:{relativeArrival:ballTime,quality:thrown.throwQuality,releaseQuality:thrown.releaseQuality,distanceClass:thrown.throwDemand.distanceClass},\n        receiverCompletion:{...clone(receiverState),status:thrown.throwQuality===\"challengingReceive\"?\"challengedReceive\":\"readyReceive\",\n          relativeCompletion:completionTime,tagCompletion:completionTime+tagDelay},reason:\"physicalArrivalComparison\"});\n    }\ncallers: 5\ncallees: 6\n"
+            }
+          ],
+          "isError": false
+        }
+      }
+    },
+    {
+      "name": "stored resolution guard",
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "name: validateHighSchoolStoredDefensiveResolution\nqualified_name: E-meng-baseball_life_sim_semirefactor.script.validateHighSchoolStoredDefensiveResolution\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/script.js\nstart_line: 12186\nend_line: 12191\nsource_mode: full\nsource: |\n  function validateHighSchoolStoredDefensiveResolution(match, resolution) {\n    const stored = match.activeSituation?.resolution?.executionEvidence;\n    if ((match.groundBallInPlayState?.runnerThrowTiming || match.groundBallInPlayState?.shortstopExecution) && stored && JSON.stringify(stored) !== JSON.stringify(resolution)) {\n      throw new Error(\"Stale defensive settlement execution facts\");\n    }\n  }\ncallers: 3\ncallees: 0\n"
+          }
+        ],
+        "isError": false
+      }
+    }
+  ],
+  "coverage": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"project\":\"E-meng-baseball_life_sim_semirefactor\",\"signal\":\"best_effort\",\"indexed_at\":\"2026-10-12T08:26:05Z\",\"metadata\":{\"generation\":\"2026-10-12T08:26:05Z\",\"index_mode\":\"full\",\"recorded_at\":\"2026-10-12T08:26:07Z\",\"recording_status\":\"complete\",\"ignored_files_stored\":0,\"ignored_files_total\":0,\"hash_records_complete\":true,\"coverage_version\":3,\"generation_matches\":true},\"paths\":[{\"requested_path\":\"script.js\",\"path\":\"script.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"defensive-decision-throw-foundation.js\",\"path\":\"defensive-decision-throw-foundation.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"defensive-runner-throw-settlement-foundation.js\",\"path\":\"defensive-runner-throw-settlement-foundation.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"defensive-reach-secure-foundation.js\",\"path\":\"defensive-reach-secure-foundation.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"match-game-record.js\",\"path\":\"match-game-record.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"match-experience-development.js\",\"path\":\"match-experience-development.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"save.js\",\"path\":\"save.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"force-advancement.js\",\"path\":\"force-advancement.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"team-roster-foundation.js\",\"path\":\"team-roster-foundation.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"batted-ball-ground-defense.js\",\"path\":\"batted-ball-ground-defense.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/infield-scorer-recovery-integrity-repair-test.js\",\"path\":\"tests/infield-scorer-recovery-integrity-repair-test.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/infield-legacy-receiver-scorer-closeout-test.js\",\"path\":\"tests/infield-legacy-receiver-scorer-closeout-test.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/infield-legacy-receiver-scorer-closeout-runner.cjs\",\"path\":\"tests/infield-legacy-receiver-scorer-closeout-runner.cjs\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/high-school-career-test-context.js\",\"path\":\"tests/high-school-career-test-context.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"match-situation-lifecycle.js\",\"path\":\"match-situation-lifecycle.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/shared-infield-contract-2b-production-integration-test.js\",\"path\":\"tests/shared-infield-contract-2b-production-integration-test.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/first-base-receive-active-ground-production-integration-test.js\",\"path\":\"tests/first-base-receive-active-ground-production-integration-test.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/ss-defensive-production-integration-test.js\",\"path\":\"tests/ss-defensive-production-integration-test.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]}],\"path_total\":18,\"path_returned\":18,\"path_has_more\":false,\"scopes\":[{\"requested_scope\":\"script.js\",\"scope\":\"script.js\",\"total\":0,\"returned\":0,\"truncated\":false,\"entries\":[],\"status\":\"no_recorded_issue\"},{\"requested_scope\":\"defensive-decision-throw-foundation.js\",\"scope\":\"defensive-decision-throw-foundation.js\",\"total\":0,\"returned\":0,\"truncated\":false,\"entries\":[],\"status\":\"no_recorded_issue\"},{\"requested_scope\":\"defensive-runner-throw-settlement-foundation.js\",\"scope\":\"defensive-runner-throw-settlement-foundation.js\",\"total\":0,\"returned\":0,\"truncated\":false,\"entries\":[],\"status\":\"no_recorded_issue\"},{\"requested_scope\":\"save.js\",\"scope\":\"save.js\",\"total\":0,\"returned\":0,\"truncated\":false,\"entries\":[],\"status\":\"no_recorded_issue\"},{\"requested_scope\":\"match-situation-lifecycle.js\",\"scope\":\"match-situation-lifecycle.js\",\"total\":0,\"returned\":0,\"truncated\":false,\"entries\":[],\"status\":\"no_recorded_issue\"}],\"scope_total\":0,\"scope_returned\":0,\"scope_truncated\":false,\"has_more\":false,\"caveat\":\"Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable.\"}"
+      }
+    ],
+    "structuredContent": {
+      "project": "E-meng-baseball_life_sim_semirefactor",
+      "signal": "best_effort",
+      "indexed_at": "2026-10-12T08:26:05Z",
+      "metadata": {
+        "generation": "2026-10-12T08:26:05Z",
+        "index_mode": "full",
+        "recorded_at": "2026-10-12T08:26:07Z",
+        "recording_status": "complete",
+        "ignored_files_stored": 0,
+        "ignored_files_total": 0,
+        "hash_records_complete": true,
+        "coverage_version": 3,
+        "generation_matches": true
+      },
+      "paths": [
+        {
+          "requested_path": "script.js",
+          "path": "script.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "defensive-decision-throw-foundation.js",
+          "path": "defensive-decision-throw-foundation.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "defensive-runner-throw-settlement-foundation.js",
+          "path": "defensive-runner-throw-settlement-foundation.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "defensive-reach-secure-foundation.js",
+          "path": "defensive-reach-secure-foundation.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "match-game-record.js",
+          "path": "match-game-record.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "match-experience-development.js",
+          "path": "match-experience-development.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "save.js",
+          "path": "save.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "force-advancement.js",
+          "path": "force-advancement.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "team-roster-foundation.js",
+          "path": "team-roster-foundation.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "batted-ball-ground-defense.js",
+          "path": "batted-ball-ground-defense.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "tests/infield-scorer-recovery-integrity-repair-test.js",
+          "path": "tests/infield-scorer-recovery-integrity-repair-test.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "tests/infield-legacy-receiver-scorer-closeout-test.js",
+          "path": "tests/infield-legacy-receiver-scorer-closeout-test.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "tests/infield-legacy-receiver-scorer-closeout-runner.cjs",
+          "path": "tests/infield-legacy-receiver-scorer-closeout-runner.cjs",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "tests/high-school-career-test-context.js",
+          "path": "tests/high-school-career-test-context.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "match-situation-lifecycle.js",
+          "path": "match-situation-lifecycle.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "tests/shared-infield-contract-2b-production-integration-test.js",
+          "path": "tests/shared-infield-contract-2b-production-integration-test.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "tests/first-base-receive-active-ground-production-integration-test.js",
+          "path": "tests/first-base-receive-active-ground-production-integration-test.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "tests/ss-defensive-production-integration-test.js",
+          "path": "tests/ss-defensive-production-integration-test.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        }
+      ],
+      "path_total": 18,
+      "path_returned": 18,
+      "path_has_more": false,
+      "scopes": [
+        {
+          "requested_scope": "script.js",
+          "scope": "script.js",
+          "total": 0,
+          "returned": 0,
+          "truncated": false,
+          "entries": [],
+          "status": "no_recorded_issue"
+        },
+        {
+          "requested_scope": "defensive-decision-throw-foundation.js",
+          "scope": "defensive-decision-throw-foundation.js",
+          "total": 0,
+          "returned": 0,
+          "truncated": false,
+          "entries": [],
+          "status": "no_recorded_issue"
+        },
+        {
+          "requested_scope": "defensive-runner-throw-settlement-foundation.js",
+          "scope": "defensive-runner-throw-settlement-foundation.js",
+          "total": 0,
+          "returned": 0,
+          "truncated": false,
+          "entries": [],
+          "status": "no_recorded_issue"
+        },
+        {
+          "requested_scope": "save.js",
+          "scope": "save.js",
+          "total": 0,
+          "returned": 0,
+          "truncated": false,
+          "entries": [],
+          "status": "no_recorded_issue"
+        },
+        {
+          "requested_scope": "match-situation-lifecycle.js",
+          "scope": "match-situation-lifecycle.js",
+          "total": 0,
+          "returned": 0,
+          "truncated": false,
+          "entries": [],
+          "status": "no_recorded_issue"
+        }
+      ],
+      "scope_total": 0,
+      "scope_returned": 0,
+      "scope_truncated": false,
+      "has_more": false,
+      "caveat": "Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable."
+    },
+    "isError": false
+  },
+  "discoveryCorrections": {
+    "nonexistentCandidates": [
+      "defensive-decision-family-registry.js",
+      "defensive-ground-ball-situation-lifecycle.js"
+    ],
+    "actualOwners": [
+      "script.js registry/family dispatch",
+      "match-situation-lifecycle.js"
+    ],
+    "schemaRetriedWithProject": true
+  },
+  "sourceFallback": {
+    "criticalSourceRead": true,
+    "areas": [
+      [
+        "script.js",
+        6466,
+        6502
+      ],
+      [
+        "script.js",
+        7105,
+        7203
+      ],
+      [
+        "script.js",
+        8103,
+        8507
+      ],
+      [
+        "script.js",
+        8678,
+        8693
+      ],
+      [
+        "script.js",
+        10308,
+        10324
+      ],
+      [
+        "script.js",
+        11213,
+        11496
+      ],
+      [
+        "script.js",
+        11555,
+        12046
+      ],
+      [
+        "script.js",
+        12048,
+        12191
+      ],
+      [
+        "script.js",
+        13453,
+        13485
+      ],
+      [
+        "save.js",
+        408,
+        430
+      ],
+      [
+        "save.js",
+        534,
+        541
+      ]
+    ],
+    "limitations": [
+      "All actual paths freshness=metadata_changed; no_recorded_issue is not completeness proof.",
+      "Registry and namespace-property calls incomplete in graph; current source controls.",
+      "Truncated 2B snippet continued at8258 and current source read.",
+      "3B NPC receiver remains a proxy. Only 1B incoming reference has separate readiness/secure execution."
+    ]
+  },
+  "phaseACompletedBeforeProductionChange": true
+}

@@ -12022,6 +12022,13 @@ function validateHighSchoolDecisionThrowState(match) {
       || JSON.stringify(state.secureResolution) !== JSON.stringify(fresh.secureResolution)
       || JSON.stringify(state.decisionThrowState) !== JSON.stringify(fresh.decisionThrowState)
       || JSON.stringify(state.runnerThrowTiming) !== JSON.stringify(fresh.runnerThrowTiming)) throw new Error("Stale SS execution / timing facts");
+    const evidence = match.activeSituation?.resolution?.executionEvidence;
+    if (evidence && Object.entries(stored.resolution).some(([key, value]) => {
+      // Pre-action-contract saves can omit these additive facts. Every present
+      // copy must agree with the reconstructed execution owner, not itself.
+      if (["actionFacts", "executionSample"].includes(key) && !Object.prototype.hasOwnProperty.call(evidence, key)) return false;
+      return JSON.stringify(evidence[key]) !== JSON.stringify(value);
+    })) throw new Error("Stale SS lifecycle execution facts");
     return;
   }
   DefensiveDecisionThrowFoundation.validateStoredStage(state.decisionThrowState, getHighSchoolControlledDecisionInput(match, state));

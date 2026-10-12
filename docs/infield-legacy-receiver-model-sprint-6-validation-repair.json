@@ -1,0 +1,17 @@
+{
+  "changedAt": "2026-10-12T08:44:12.613Z",
+  "baseline": "c4121ce1fa0a2a3fac808226cf610706976fcc24",
+  "owner": "validateHighSchoolDecisionThrowState / SS branch",
+  "sourceBeforeSha256": "edb96ce9d8afa83e0fa28a056be336588456ed399bc035afcb95c4a08778fde0",
+  "sourceAfterSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d",
+  "normalizedAfterSha256": "64ab3a2e05180e13ef42bc9f6a342ba28f0cc9a5c58217dc21cd3c640894db1b",
+  "addition": "    const evidence = match.activeSituation?.resolution?.executionEvidence;\n    if (evidence && Object.entries(stored.resolution).some(([key, value]) => {\n      // Pre-action-contract saves can omit these additive facts. Every present\n      // copy must agree with the reconstructed execution owner, not itself.\n      if ([\"actionFacts\", \"executionSample\"].includes(key) && !Object.prototype.hasOwnProperty.call(evidence, key)) return false;\n      return JSON.stringify(evidence[key]) !== JSON.stringify(value);\n    })) throw new Error(\"Stale SS lifecycle execution facts\");\n",
+  "allOtherProductionBytesNormalizedUnchanged": true,
+  "executionAuthorityChange": false,
+  "scorerRuleChange": false,
+  "sampleChange": false,
+  "historicalAdditiveOmissionsPreserved": true,
+  "source": "Exact baseline save-red / save-probe; lifecycle dependency tamper caused A1->0 before repair",
+  "phaseAArchitectureCompletedBeforeChange": true,
+  "scope": "Phase G validation only; receiver strategy remains C"
+}

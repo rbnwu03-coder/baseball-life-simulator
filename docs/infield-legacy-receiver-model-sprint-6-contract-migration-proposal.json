@@ -1,0 +1,119 @@
+{
+  "createdAt": "2026-10-12T08:42:27.173Z",
+  "decision": {
+    "strategy": "C",
+    "newReceiverAuthorityEnabled": false,
+    "productionModelExpansionStopped": true,
+    "validationRepairOnly": "Phase G SS lifecycle execution evidence must agree with the validated shortstopExecution cache; sourced exact c4121ce reproducer",
+    "reason": "No independent readiness/secure for legacy stages; direct existing incoming replacement has a same-input outcome change."
+  },
+  "proposedContract": {
+    "version": "legacy-receiver-stage-v1 (PROPOSAL ONLY)",
+    "runtimeEnabled": false,
+    "owner": "future receiver execution owner, before outcome",
+    "fields": [
+      {
+        "field": "playIdentity / physicalIdentity",
+        "requirement": "same original play and ground handoff"
+      },
+      {
+        "field": "sourceActionIdentity / throwIdentity",
+        "requirement": "completed upstream throw dependency; no duplicate action"
+      },
+      {
+        "field": "actorId / receiverId / receiverPosition",
+        "requirement": "captured active roster actor, never current player-position attraction"
+      },
+      {
+        "field": "targetBase / targetRunnerId",
+        "requirement": "original route and live force/tag contest"
+      },
+      {
+        "field": "executionAuthorityVersion",
+        "requirement": "mandatory separate execution-version dispatch, not inferred from result"
+      },
+      {
+        "field": "ownedSample / sourceNamespace",
+        "requirement": "existing original sample reused, no additional RNG"
+      },
+      {
+        "field": "capabilitySnapshot",
+        "requirement": "original actor fields with adapter version; cannot infer independent skills from NPC defense"
+      },
+      {
+        "field": "deliveryAvailability",
+        "requirement": "original throw outcome; legacyUsableDelivery is not a location"
+      },
+      {
+        "field": "incomingQuality",
+        "requirement": "known coarse quality plus provenance, or unavailable; no fabricated coordinates"
+      },
+      {
+        "field": "positioning / readiness",
+        "requirement": "independently owned pre-receive positioning/arrival fact; explicit unavailable otherwise"
+      },
+      {
+        "field": "receiveAttempt",
+        "requirement": "available delivery AND ready receiver"
+      },
+      {
+        "field": "secureExecution",
+        "requirement": "owned hands decision from pre-outcome inputs; no after-the-fact relabel"
+      },
+      {
+        "field": "ordinaryEffortEvidence",
+        "requirement": "catchable incoming + readiness source + effort demand independent of result"
+      },
+      {
+        "field": "ballArrival / receiverCompletion / runnerArrival",
+        "requirement": "consistent relative units and explicit sources; ordinal window cannot become time"
+      },
+      {
+        "field": "actualReceiverOutcome",
+        "requirement": "actual execution outcome with same action identity; scorer separate"
+      },
+      {
+        "field": "scorerEligibilityProvenance",
+        "requirement": "existing infield-scorer-eligibility-v1 only"
+      },
+      {
+        "field": "errorAttributedAdvancement",
+        "requirement": "same-misplay runner/base evidence, not final-minus-initial bases"
+      }
+    ],
+    "unknownFieldRepresentation": {
+      "status": "insufficientScorerFacts",
+      "value": null,
+      "source": "specific missing authority",
+      "classification": "Unavailable"
+    },
+    "invariants": [
+      "No second success roll.",
+      "Ready and Secure must be independently meaningful input decisions, never reverse-engineered from safe/out.",
+      "A versioned model that changes reception outcome is an execution migration, never metadata repair.",
+      "No BaseTouch/Tag or retirement inferred only from receive completion.",
+      "No scorer owner or GameRecord ledger parallel to Sprint5."
+    ]
+  },
+  "migrationPlan": {
+    "status": "proposalNotEnabled",
+    "prerequisites": [
+      "Close the existing SS execution-copy validation gap before adding any new receiver facts.",
+      "Approve exact new receive demand and capability mapping; no default incoming location mapping from legacyUsableDelivery.",
+      "Provide readiness source and coarse relative units for each direct and relay leg.",
+      "Predeclare expected execution changes and scorer changes separately.",
+      "Build pending/executed/settled new-version admission before feature activation."
+    ],
+    "versionAdmission": {
+      "oldPending": "Keep legacy by default. Opt-in conversion only before first execution with explicit version recorded; absent field stays legacy.",
+      "oldExecuted": "Never rerun or silently upgrade. Validate and replay the originally owned cache/sample/actor snapshot.",
+      "oldSettled": "Never rebuild or backfill GameRecord/evaluation; retain old scorer/evidence.",
+      "newPending": "Record approved authority version at admission and bind route/actor/physical identities.",
+      "newExecuted": "Only matching version resolver validates exact stored inputs/stages; no fallback to legacy on error.",
+      "newSettled": "Exactly-once owner; stored official record not regenerated on reload.",
+      "unknownVersion": "Reject or defer explicitly; do not infer stages from legacy fields.",
+      "missingNewFacts": "Reject new-version admission; leave old-version insufficiency explicit."
+    },
+    "activation": "Not implemented this Sprint. Human review required on execution changes; no automatic next Sprint."
+  }
+}
