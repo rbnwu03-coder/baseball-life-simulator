@@ -1,0 +1,686 @@
+{
+  "baseline": "37c0735dbe22e101b572f76b1847d47d9adca590",
+  "runtimeEnabled": false,
+  "status": "DESIGNED; no Production schema changed",
+  "v2RuntimeSaveStatus": "NOT IMPLEMENTED / NOT TESTED; NOT PASS",
+  "axes": {
+    "groundTopology": [
+      "regulation-coarse-zones-v1",
+      "regulation-coarse-ground-lanes-v2",
+      "regulation-coarse-ground-lanes-v3"
+    ],
+    "receiverExecution": [
+      "explicit legacy adapter variant",
+      "receiver-v2-proposed"
+    ],
+    "other": [
+      "admissionFormatVersion",
+      "timingVersion",
+      "capabilityAdapterVersion",
+      "effortProfileVersion",
+      "samplerVersion"
+    ],
+    "constraint": "Topology does not choose receiver execution model. Test legal admitted topology/route combinations; do not force unsupported actor/route geometry."
+  },
+  "proposedPlacement": {
+    "authority": "Future common groundBallInPlayState.receiverModelAdmission, mirrored by lifecycle contextSnapshot when present; supports routine paths without requiring a synthetic extra situation",
+    "execution": "Future versioned receiver output in the existing owner cache (SS shortstopExecution / per-family original cache), plus matching executionEvidence",
+    "binding": "Versioned model/adapter/effort/timing/sampler selection and admission context first; selected route/actor/capability/runner/action binding before first execution; owned sample added exactly once when original callback occurs",
+    "warning": "Names are draft additive contract, not actual current Save keys. beginExecution currently replaces executionState; future explicit carry/validation required."
+  },
+  "validationOrder": [
+    "recognize save/admission format before legacy early returns",
+    "resolve explicit supported receiver variant; unknown reject",
+    "validate variant-specific required fields and model plan copies",
+    "cross-check physical/topology/roster/route/runner/action/capability contexts and original sample",
+    "validate version-specific timing and action/output copies against authoritative cache",
+    "use original lifecycle exact-once recovery/apply and GameRecord dedupe, never new statistics backfill"
+  ],
+  "historicalAdmission": {
+    "preV2": "Only explicit recognizable pre-v2 save format/admission provenance may imply legacy when receiver tag genuinely absent; keep original SS/2B/3B/1B cache authority and L03 insufficiency.",
+    "newV2Missing": "Future format that requires model tag cannot be treated as legacy when tag absent; deleting receiver tag/required facts rejects. No current flag default during load.",
+    "unrecognized": "Unknown/unprovable format quarantined/rejected for user review; never guess from out/E or upgrade version."
+  },
+  "stateMatrix": [
+    {
+      "variant": "legacy",
+      "state": "pending",
+      "status": "PLANNED_NOT_RUN",
+      "requirements": "recognized pre-v2 format or explicit legacy tag; original cache/window provenance retained",
+      "coldReload": "retain exact model/route/actor/context; later original sample callback occurs once, never preload a second RNG sample",
+      "duplicate": "same identity consumes original execution sample once in total, returns same execution",
+      "rolloutFlagOff": "pinned variant unchanged; flag affects only not-yet-admitted new opportunities"
+    },
+    {
+      "variant": "legacy",
+      "state": "executed",
+      "status": "PLANNED_NOT_RUN",
+      "requirements": "recognized pre-v2 format or explicit legacy tag; original cache/window provenance retained",
+      "coldReload": "validate original inputs/output copies; recover same cached result without rerunning stages or RNG",
+      "duplicate": "return same canonical cache; no new sample; one apply only",
+      "rolloutFlagOff": "pinned variant unchanged; flag affects only not-yet-admitted new opportunities"
+    },
+    {
+      "variant": "legacy",
+      "state": "settled",
+      "status": "PLANNED_NOT_RUN",
+      "requirements": "recognized pre-v2 format or explicit legacy tag; original cache/window provenance retained",
+      "coldReload": "validate recorded binding/dedupe; do not execute or re-record historical statistics",
+      "duplicate": "same closed/settled reference; no additional E/A/PO/DP/H/FC, PA, Evaluation or cursor",
+      "rolloutFlagOff": "pinned variant unchanged; flag affects only not-yet-admitted new opportunities"
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "status": "PLANNED_NOT_RUN",
+      "requirements": "receiver-v2 admission plan, physical/topology identity, adapter/effort/timing/sampler versions and pre-execution context required; final owned-sample binding only after original execution callback",
+      "coldReload": "retain exact model/route/actor/context; later original sample callback occurs once, never preload a second RNG sample",
+      "duplicate": "same identity consumes original execution sample once in total, returns same execution",
+      "rolloutFlagOff": "pinned variant unchanged; flag affects only not-yet-admitted new opportunities"
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "status": "PLANNED_NOT_RUN",
+      "requirements": "all v2 required identities, sealed original sample vector/input context, complete versioned stage output/action cache and matching copies",
+      "coldReload": "validate original inputs/output copies; recover same cached result without rerunning stages or RNG",
+      "duplicate": "return same canonical cache; no new sample; one apply only",
+      "rolloutFlagOff": "pinned variant unchanged; flag affects only not-yet-admitted new opportunities"
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "status": "PLANNED_NOT_RUN",
+      "requirements": "all v2 required identities, sealed original sample vector/input context, complete versioned stage output/action cache and matching copies",
+      "coldReload": "validate recorded binding/dedupe; do not execute or re-record historical statistics",
+      "duplicate": "same closed/settled reference; no additional E/A/PO/DP/H/FC, PA, Evaluation or cursor",
+      "rolloutFlagOff": "pinned variant unchanged; flag affects only not-yet-admitted new opportunities"
+    }
+  ],
+  "tamperMatrix": [
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "physicalIdentity",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "playIdentity",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "sourceThrowIdentity/dependency",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "actor/receiverId",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "actorPosition",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "selectedRoute",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "targetRunner/base",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "capability/adapter snapshot",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "ownedSample",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": "Validate only fields required/allocated at this phase; absent execution output before execution is legitimate, malformed present field is not"
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "stage sample vector/namespace/algorithm",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": "Validate only fields required/allocated at this phase; absent execution output before execution is legitimate, malformed present field is not"
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "timing units/version",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "execution evidence action/retirement/timing copy",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": "Validate only fields required/allocated at this phase; absent execution output before execution is legitimate, malformed present field is not"
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "modelVersion upgrade",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "modelVersion downgrade",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "unknown modelVersion",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "missing v2 stage or admission field",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "remove v2 discriminator to masquerade as historical legacy",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "pending",
+      "field": "topology version contradictory copy",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "physicalIdentity",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "playIdentity",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "sourceThrowIdentity/dependency",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "actor/receiverId",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "actorPosition",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "selectedRoute",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "targetRunner/base",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "capability/adapter snapshot",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "ownedSample",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "stage sample vector/namespace/algorithm",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "timing units/version",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "execution evidence action/retirement/timing copy",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "modelVersion upgrade",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "modelVersion downgrade",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "unknown modelVersion",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "missing v2 stage or admission field",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "remove v2 discriminator to masquerade as historical legacy",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "executed",
+      "field": "topology version contradictory copy",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "physicalIdentity",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "playIdentity",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "sourceThrowIdentity/dependency",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "actor/receiverId",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "actorPosition",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "selectedRoute",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "targetRunner/base",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "capability/adapter snapshot",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "ownedSample",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "stage sample vector/namespace/algorithm",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "timing units/version",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "execution evidence action/retirement/timing copy",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "modelVersion upgrade",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "modelVersion downgrade",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "unknown modelVersion",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "missing v2 stage or admission field",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "remove v2 discriminator to masquerade as historical legacy",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    },
+    {
+      "variant": "receiver-v2-proposed",
+      "state": "settled",
+      "field": "topology version contradictory copy",
+      "expected": "REJECT before live mutation; preserve candidate input/live player/RNG cursor/cache/record",
+      "status": "PLANNED_NOT_RUN",
+      "pendingException": null
+    }
+  ],
+  "legacyMatrix": [
+    {
+      "variant": "legacy",
+      "state": "pending",
+      "field": "actor/receiver",
+      "expected": "REJECT conflicting persisted identity/cache or forced model upgrade; no mutation/resim",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "pending",
+      "field": "selectedRoute",
+      "expected": "REJECT conflicting persisted identity/cache or forced model upgrade; no mutation/resim",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "pending",
+      "field": "ownedSample",
+      "expected": "REJECT conflicting persisted identity/cache or forced model upgrade; no mutation/resim",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "pending",
+      "field": "evidenceCopy",
+      "expected": "REJECT conflicting persisted identity/cache or forced model upgrade; no mutation/resim",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "pending",
+      "field": "upgradeToV2",
+      "expected": "REJECT conflicting persisted identity/cache or forced model upgrade; no mutation/resim",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "pending",
+      "field": "oldAdditiveCopyAbsent",
+      "expected": "ADMIT only recognized historical omission, retain original authority without new stage facts",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "executed",
+      "field": "actor/receiver",
+      "expected": "REJECT conflicting persisted identity/cache or forced model upgrade; no mutation/resim",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "executed",
+      "field": "selectedRoute",
+      "expected": "REJECT conflicting persisted identity/cache or forced model upgrade; no mutation/resim",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "executed",
+      "field": "ownedSample",
+      "expected": "REJECT conflicting persisted identity/cache or forced model upgrade; no mutation/resim",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "executed",
+      "field": "evidenceCopy",
+      "expected": "REJECT conflicting persisted identity/cache or forced model upgrade; no mutation/resim",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "executed",
+      "field": "upgradeToV2",
+      "expected": "REJECT conflicting persisted identity/cache or forced model upgrade; no mutation/resim",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "executed",
+      "field": "oldAdditiveCopyAbsent",
+      "expected": "ADMIT only recognized historical omission, retain original authority without new stage facts",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "settled",
+      "field": "actor/receiver",
+      "expected": "REJECT conflicting persisted identity/cache or forced model upgrade; no mutation/resim",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "settled",
+      "field": "selectedRoute",
+      "expected": "REJECT conflicting persisted identity/cache or forced model upgrade; no mutation/resim",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "settled",
+      "field": "ownedSample",
+      "expected": "REJECT conflicting persisted identity/cache or forced model upgrade; no mutation/resim",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "settled",
+      "field": "evidenceCopy",
+      "expected": "REJECT conflicting persisted identity/cache or forced model upgrade; no mutation/resim",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "settled",
+      "field": "upgradeToV2",
+      "expected": "REJECT conflicting persisted identity/cache or forced model upgrade; no mutation/resim",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    },
+    {
+      "variant": "legacy",
+      "state": "settled",
+      "field": "oldAdditiveCopyAbsent",
+      "expected": "ADMIT only recognized historical omission, retain original authority without new stage facts",
+      "status": "PLANNED_S7_NOT_RERUN; old S5/S6 guards remain source reference"
+    }
+  ],
+  "additionalPlannedChecks": [
+    "all valid legacy topology/route versions remain fixed under new rollout setting",
+    "cold process load with Math.random forbidden after original sample saved",
+    "same play three repeated public submissions: sample count total=1, execution/apply/PA/defense/Evaluation once",
+    "meaningful and routine use same common admission owner",
+    "malformed copy rejected without mutation of candidate input, player, cursor or record",
+    "current S6 lifecycle execution-evidence guard and S5 route guard retained in both branches",
+    "v2 timed contest rejected if presented as v1; never convert 2B ordinal window silently",
+    "actual outs/bases/runs, physical hash, sample/cursor, record/evidence counts compared, not only reason strings"
+  ],
+  "rollback": {
+    "beforeAdmission": "Disable future route flag; new opportunities choose explicit legacy plan",
+    "pendingPinned": "Keep originally chosen model even before first execution; do not regenerate/sample/change policy",
+    "executed": "Recover original cache with same resolver version, no replay sample",
+    "settled": "Keep original stats and references, no backfill",
+    "resolverRetention": "Retain all active pinned variant resolvers across flag rollback and compatible app releases; unsupported pinned version rejects/quarantines rather than falling back",
+    "risk": "An affected v2 pinned play needs reviewed repair process or quarantine, never clandestine downgrade"
+  },
+  "prototypeCoverage": {
+    "pureBindingProbes": 6,
+    "whatProved": "proposed isolated input digest rejects changed actor/route/sample/ability/version/action copy",
+    "whatNotProved": "No normalizeSave v2 admission, lifecycle version preservation, GameRecord exactly-once v2 runtime or historical save compatibility tested"
+  },
+  "expectedGate": "DESIGNED only"
+}

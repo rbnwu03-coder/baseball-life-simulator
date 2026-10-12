@@ -1,0 +1,263 @@
+{
+  "baseline": "37c0735dbe22e101b572f76b1847d47d9adca590",
+  "runtimeEnabled": false,
+  "riskRegister": [
+    {
+      "id": "R01",
+      "severity": "P0",
+      "category": "Execution ownership conflict",
+      "evidence": "SS receiver is embedded in canonical builder, 2B has composite authority; incoming-v1 independently authoritative",
+      "impactedRoutes": "all direct/relay",
+      "mitigation": "one explicit receiver variant dispatch; no simultaneous proxy and v2 secure result; cache only one selected model",
+      "validation": "execution/action/retirement source hashes, unique chain, completed upstream proof",
+      "blocking": "BLOCKS any activation"
+    },
+    {
+      "id": "R02",
+      "severity": "P1",
+      "category": "New RNG / sample divergence",
+      "evidence": "old sample reused across field/throw/receive; actor-dependent decision hashes exist upstream",
+      "impactedRoutes": "all",
+      "mitigation": "fixed physical slot namespaces, algorithm/version, sealed vector; preserve original Match RNG callback order and count",
+      "validation": "OFF/ON wrapped/unwrapped fixed-seed equality; actor/skill sample freeze; cold reload no Math.random",
+      "blocking": "BLOCKS activation"
+    },
+    {
+      "id": "R03",
+      "severity": "P0",
+      "category": "Timing unit mismatch",
+      "evidence": "deriveSettlement rejects timing unequal to resolveTiming(v1); 2B ordinal windows; prototype relay already-safe second leg",
+      "impactedRoutes": "4-3, all relays, home/tag; first slice timing extension",
+      "mitigation": "version-aware pure timing validation in existing owner; align ball/runner/secure/pivot origins; forbid ordinal conversion",
+      "validation": "independent timing edge cases, tie/unknown, ordered force/third-out, first failure stops second",
+      "blocking": "BLOCKS integration"
+    },
+    {
+      "id": "R04",
+      "severity": "P1",
+      "category": "Ability adapter distortion",
+      "evidence": "ground catching aliases fielding, NPC defense aliases reaction/range/fielding; speed-to-mobility mapping uncalibrated",
+      "impactedRoutes": "all; NPC 1B and pitcher; later player 1B",
+      "mitigation": "versioned actual adapter with explicit aliases/missing inputs, freeze sample and routes; no current formula changes",
+      "validation": "fixed truth one-variable stage margins; arm self-touch invariance; safe-catch Evaluation remains strong",
+      "blocking": "BLOCKS first real slice until approved; broad mapping remains PARTIAL"
+    },
+    {
+      "id": "R05",
+      "severity": "P0",
+      "category": "Ordinary-effort / clean-counterfactual ambiguity",
+      "evidence": "8 S6 source Red still open; prototype avg10 effort C; positioning failure not hands; no causal extra-base source",
+      "impactedRoutes": "SS/2B direct/relay; 3B NPC receiver; home/tag",
+      "mitigation": "objective calibrated level/position/weather effort profile; stage-cause counterfactual; explicit insufficient for missing provenance; retain S5 rules",
+      "validation": "ordinary muff vs already-safe/offline/late; subsequent-E A without PO; DP wild/muff differences; H/FC and actor/team dedupe",
+      "blocking": "BLOCKS scorer activation for affected contexts; no silent E exemption"
+    },
+    {
+      "id": "R06",
+      "severity": "P0",
+      "category": "Legacy save admission failure",
+      "evidence": "beginExecution replaces executionState; legacy validator has firstBase/3B/settled early returns",
+      "impactedRoutes": "all caches/states and topologies",
+      "mitigation": "new format discriminator and model validation before legacy returns; explicit preservation of pins; no upgrade/downgrade/fallback; retain legacy resolver",
+      "validation": "6 state rows +54 v2 tamper +18 legacy tamper planned; complete cold/duplicate/no-mutation matrix",
+      "blocking": "BLOCKS every live version"
+    },
+    {
+      "id": "R07",
+      "severity": "P0",
+      "category": "GameRecord duplication / virtual retirement",
+      "evidence": "current actor/PA error delegation and physical-play/event dedupe are shared owners",
+      "impactedRoutes": "all; same-player 363, meaningful/routine",
+      "mitigation": "existing scorer/attribution/PA/Evaluation owners; v2 supplies facts only; one legal apply; no settled backfill",
+      "validation": "actor/team E totals, A/PO/DP, batter/pitcher H/FC, PA/cursor/Evaluation count vs duplicates",
+      "blocking": "BLOCKS rollout"
+    },
+    {
+      "id": "R08",
+      "severity": "P2",
+      "category": "Cross-position balance drift",
+      "evidence": "12 counterfactuals use unapproved coefficients; relay new CRT already-safe; whole-game ground denominator remains limited",
+      "impactedRoutes": "all; sparse3B/1B, relays",
+      "mitigation": "shadow first; preregister skill/entry/policy cohorts; compare per admitted-stage exposure; separate coverage denominator unknown from rate",
+      "validation": "fixed seeds/capability tiers and no sample fishing; failure/reach/secure/touch/DP histograms; offline/error and ability gradients",
+      "blocking": "NONBLOCKING pure contract design; BLOCKS balance/production acceptance"
+    },
+    {
+      "id": "R09",
+      "severity": "P1",
+      "category": "Old tests implicitly expect legacy behavior",
+      "evidence": "current legacy fixtures assert composite windows/outcomes and historical cache identity",
+      "impactedRoutes": "SS/2B/3B/1B source scope/save tests",
+      "mitigation": "pin legacy tests; new version-specific expected facts reviewed from cause; do not weaken old assertions or repair baseline Debt",
+      "validation": "old112+S6 52+13 representative; original227 after future Production change; maintain exact baseline Debt signatures",
+      "blocking": "BLOCKS merge/rollout on new failures"
+    }
+  ],
+  "implementationSprints": [
+    {
+      "step": 1,
+      "title": "Receiver v2 Contract / Pure Stages",
+      "ownedScope": "new pure APIs in existing DecisionThrow module + versioned type/timing contract tests, feature off",
+      "tasks": [
+        "approve separate stage/input/result schema and bounded CRT/MDU meanings",
+        "approve objective effort profile and capability alias policy",
+        "approve model/sample algorithm and stable physical leg slots",
+        "design version-aware timing validation in existing RunnerThrowSettlement before any runtime integration"
+      ],
+      "gate": "pure dependency and monotonic/noninterference tests; unknown/missing sources explicit; no Production admission enabled",
+      "notIncluded": "2B control/throw rewrite, geometry overhaul, all positions"
+    },
+    {
+      "step": 2,
+      "title": "6-3 First Vertical Slice (shadow before applying)",
+      "ownedScope": "SS ordinary empty-base admission + one NPC1B receiver adapter + common model/version persistence and timing validation seam",
+      "tasks": [
+        "pin version before sample or throw result; same version handles offline/no delivery/hold",
+        "build new start context authority explicitly C->new versioned fact",
+        "minimal Save/identity/sample-copy/cold/duplicate tests before any apply",
+        "shadow compare legacy and candidate without writing second record; calibrate all 6-3 delivery statuses"
+      ],
+      "gate": "approved timing/effort/NPCadapter; 6-3 actor+stage chain, lawful scorer H/E/A, same-play dedupe, legacy saves unchanged; default feature off",
+      "notIncluded": "SS DP or 2B composite adapters; model switch by successful throw outcome"
+    },
+    {
+      "step": 3,
+      "title": "Direct Receiver Integration",
+      "ownedScope": "5-3 NPC1B then SS force targets; 3-1 pitcher and independent player1B incoming comparison separately",
+      "tasks": [
+        "calibrate long/short demand independently",
+        "resolve 4-3 new delivery-quality/CRT prerequisites before enabling 2B receiver; keep 2B ground-control authority",
+        "player1B adapter separate release from NPC alias; no inherited stage-PASS assumption"
+      ],
+      "gate": "route-by-route version/save tests and scorer known cases; representative tests and original manifest after Production changes",
+      "notIncluded": "all direct positions simultaneously; ordinal time fabrication"
+    },
+    {
+      "step": 4,
+      "title": "Relay Integration",
+      "ownedScope": "6-4-3 first, then sourced 4-6-3 /5-4-3 /3-6-3; tag/coverage only later independent sub-slices",
+      "tasks": [
+        "define concurrent cover vs launch timing, pivot/transfer possession, second throw actor/delivery owner",
+        "freeze fixed leg sample slots regardless first success/failure",
+        "first force fail =>no pivot/second attempt; first third-out=>no continuation; force removal each retirement",
+        "require new second-arrival/effort evidence before final muff A and DP attribution"
+      ],
+      "gate": "independent partial/full DP, first/second wild vs muff, fast-safe, Third-Out/force/timing tests; no blanket relay immunity",
+      "notIncluded": "null-identity coverage migration or unsourced home tag"
+    },
+    {
+      "step": 5,
+      "title": "Scorer / Evaluation / Save Closeout",
+      "ownedScope": "cross-route existing scorer and record/evidence owners; full v2 save matrix",
+      "tasks": [
+        "cross-route contests clean correction, objective ordinary effort and causal extra advancement or explicit insufficiency",
+        "late-positioning failure ownership must be resolved before broad enabled coverage; no fake hands event",
+        "quality stage labels separate safe/out/E; actual and would-be A dedupe; virtual PO prohibited",
+        "run planned model/version tamper/history matrices and original227 manifest once on final changed source"
+      ],
+      "gate": "all adopted routes source-complete or explicitly excluded; L03 only becomes PASS within demonstrably implemented admitted routes; no new regression",
+      "notIncluded": "retroactive stats backfill, scorer duplication, three baseline Debt fixes"
+    },
+    {
+      "step": 6,
+      "title": "Controlled Production Rollout (separate authorization)",
+      "ownedScope": "feature policy/admission, preregistered deterministic cohorts and read-only monitoring",
+      "tasks": [
+        "new opportunities only; release 6-3 then independently approved routes",
+        "historical/pinned plays use original version with retained resolvers",
+        "monitor stage failure, athlete gradients, errors/assists/H/FC, exact-once, exposure and version distribution",
+        "rollback flags affect only unadmitted opportunities; pinned affected saves quarantine/review without silent resim"
+      ],
+      "gate": "reviewed distribution/correctness evidence and rollback drill; approved activation; no all-position switch",
+      "notIncluded": "automatic activation following design approval"
+    }
+  ],
+  "rollout": {
+    "currentState": "NO activation this sprint",
+    "policy": "explicit per-route allowlist and model/adapter/effort/timing/sampler versions captured before execution; on admission only",
+    "stages": [
+      "off/pure tests",
+      "read-only shadow",
+      "reviewed small route-specific deterministic cohort",
+      "larger predeclared tier/entry/policy cohort",
+      "separately authorized expansion"
+    ],
+    "cohortProposal": "Before implementation comparison, preregister 4 positions x skills4/10/16 x starter/bench entry x first-legal/declared alternate policy x seeds88001..88040. Analyze only legal new admitted route subset, report zero exposure explicitly; never change seeds to get failure. This is a future proposed plan, NOT run this sprint.",
+    "measurements": [
+      "raw physical/contact identity and original sample/cursor draws",
+      "route/actor/exposure/selected model counts",
+      "positioning reach/late and secure clean/bobble/failure margins",
+      "actual retires/outs/bases/runs and timing ties/unknown",
+      "E/A/PO/DP/H/FC before-after with sourced reason",
+      "player stage Evaluation versus teammate/runner outcome",
+      "legacy-save admission and v2 reject/quarantine counts",
+      "deterministic skill gradients and absent natural denominator"
+    ],
+    "distribution": "No fabricated full-PA ground denominator; compare like admitted/exposed stages and mark global ground proportions unavailable.",
+    "stopTriggers": [
+      "any identity/force/third-out/score/duplicate illegal result",
+      "reroll or changed callback count/cursor",
+      "unknown version fallback or old save rejection",
+      "unsupported E/A or hit suppression",
+      "unreviewed statistical shift outside preregistered tolerance"
+    ],
+    "numericTolerances": "To be preregistered with approved calibration; no universal acceptable success/error rate invented here."
+  },
+  "openDecisions": [
+    {
+      "id": "D01",
+      "decision": "Approve CRT extension and version-specific timing validation seam; relay launch/cover origin unresolved",
+      "blocks": "any live application"
+    },
+    {
+      "id": "D02",
+      "decision": "Approve objective effort profile by league/position/environment; prototype avg10 is hypothesis",
+      "blocks": "new E/A source eligibility"
+    },
+    {
+      "id": "D03",
+      "decision": "Approve NPC speed-to-mobility and catching alias policy, separate actual Career adapter",
+      "blocks": "first slice"
+    },
+    {
+      "id": "D04",
+      "decision": "Approve SHA256 B sampler/immutable physical leg identity/time quantization",
+      "blocks": "persistent new runtime version"
+    },
+    {
+      "id": "D05",
+      "decision": "Approve admission/new-save discriminator, exact field placement and retained resolver compatibility window",
+      "blocks": "legacy/v2 runtime loading"
+    },
+    {
+      "id": "D06",
+      "decision": "Define culprit positioning failure action responsibility and clean correction; pure prototype late receiver is insufficiency",
+      "blocks": "broad late-cover scorer activation"
+    },
+    {
+      "id": "D07",
+      "decision": "Define true delivery/CRT source for 2B composite and second relay legs without relabeling threshold as quality",
+      "blocks": "4-3 / relay adoption"
+    },
+    {
+      "id": "D08",
+      "decision": "Source error-specific extra advancement from runner movement owner, or exclude unsupported branch explicitly",
+      "blocks": "extra-base scorer closeout, not pure direct prototype"
+    },
+    {
+      "id": "D09",
+      "decision": "Approve preregistered rollout cohorts/tolerances and activation separately",
+      "blocks": "any production enablement"
+    }
+  ],
+  "readiness": "CONDITIONAL: ready for reviewed pure-contract work only. Production integration/activation blocked by D01-D05 and adopted-route-specific D06-D09.",
+  "inherited": {
+    "Sprint6Safety": "52/52",
+    "Sprint5Focused": "79+33=112/112",
+    "representative": "13/13",
+    "fullRepository": "224/227 PARTIAL; three original Debt",
+    "independentSourceRed": "8 unresolved",
+    "L03": "PARTIAL",
+    "rerunInSprint7": false
+  }
+}

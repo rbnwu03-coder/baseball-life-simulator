@@ -1,0 +1,244 @@
+{
+  "baseline": "37c0735dbe22e101b572f76b1847d47d9adca590",
+  "status": "DESIGN ONLY",
+  "runtimeEnabled": false,
+  "proposedContractVersion": "receiver-execution-v2-proposal-0",
+  "productionVersionAssigned": false,
+  "binding": {
+    "fields": [
+      "playIdentity",
+      "physicalIdentity",
+      "sourceThrowIdentity",
+      "legIdentity",
+      "actualThrowerId/position",
+      "actualReceiverId/position",
+      "targetRunnerId/base",
+      "selectedRoute",
+      "groundTopologyVersion",
+      "receiverExecutionVersion",
+      "timingVersion",
+      "capabilityAdapterVersion",
+      "effortProfileVersion",
+      "samplerVersion",
+      "inputDigest"
+    ],
+    "source": "Captured legal roster and immutable handoff at admission; no later lookup to attract player to ball",
+    "when": "Model version pinned at opportunity admission before first execution; route/actor/caps/runner contexts sealed before first execution",
+    "hashLimit": "Hash is a consistency aid, not authentication; reconcile all copies against immutable handoff/roster and authoritative cache"
+  },
+  "units": {
+    "time": "CRT: existing-family coarse relative arrival. Ball flight origin is upstream launch time=0; later legs use one same-play absolute origin. No seconds or meters claim.",
+    "movement": "MDU: proposed movement-demand index 0..8. Categorical atBase/covering/lateCover/distant; no inferred measured coordinates.",
+    "reachability": "movement<=reachEnvelope; independent of completion speed",
+    "constraints": [
+      "actor-stage completion/duration finite and nonnegative; current runner relativeArrival may be <=0 (already arrived) and must not be clamped or rerolled; unknown stays unknown, never zero",
+      "same timingVersion required for ball, positioning, secure, touch/tag and runner",
+      "margin=runnerArrival-contestCompletion; exact ties do not establish retirement",
+      "positioning may precede delivery; prototype simplification starts each relay leg at its launch; concurrent-cover design unresolved",
+      "Never convert ordinal 2B window into CRT; Delivery/runner timing for that route needs an explicit new authority"
+    ],
+    "calibration": "Illustrative coefficients not approved; timing extension must be validated in existing RunnerThrowSettlement owner before activation"
+  },
+  "stages": [
+    {
+      "stage": "A Delivery",
+      "owner": "Existing throw owner emits versioned delivery envelope; Receiver consumes it",
+      "required": [
+        "real thrower/receiver",
+        "same-ball/action identity",
+        "target base/runner",
+        "throw direction or declared coarse accuracy class and provenance",
+        "throwQuality",
+        "delivery availability",
+        "distance class",
+        "release time",
+        "ball arrival",
+        "timing units/version"
+      ],
+      "preconditions": [
+        "completed acquisition/transfer",
+        "legal admitted route",
+        "known receiver actor"
+      ],
+      "reuse": "SS/3B/1B canonical first throw and original release/distance/quality; do not add a new throw success draw",
+      "missing": "2B composite and SS relay do not independently establish incoming accuracy; keep C and require new versioned delivery facts before those migrations",
+      "offline": "No secure attempt. If planned ball path intersects a legal reachable reception envelope, it is a separately declared challengingReceive; do not silently convert an existing offline into onTarget"
+    },
+    {
+      "stage": "B Positioning",
+      "owner": "Proposed pure receiver owner, inside existing DecisionThrow Foundation module; versioned route adapter supplies contexts",
+      "required": [
+        "receiver starting context",
+        "actual defensive position",
+        "target base",
+        "required movement/source",
+        "reaction/range/mobility snapshot",
+        "reach envelope",
+        "start/completion time",
+        "reachable",
+        "readyBeforeDelivery"
+      ],
+      "preconditions": [
+        "legal actor and owned start context"
+      ],
+      "outcomes": [
+        "unavailable actor",
+        "unreachable envelope",
+        "reachable but late",
+        "ready"
+      ],
+      "note": "May position without delivery, but no hands or possession follows missing delivery. Prototype evaluates readiness only when delivered; not a full coverage-misplay authority."
+    },
+    {
+      "stage": "C Secure",
+      "owner": "Same proposed pure receiver owner",
+      "required": [
+        "Stage A delivered",
+        "Stage B reachable+ready",
+        "attempt flag",
+        "fielding/catching snapshot/source",
+        "hands margin",
+        "secured",
+        "quality",
+        "secure completion",
+        "possession evidence"
+      ],
+      "preconditions": [
+        "received delivery envelope matches target/actor/action",
+        "no attempt when prior stages unavailable"
+      ],
+      "outcomes": [
+        "notAttempted",
+        "failedHands",
+        "bobbleButControlled",
+        "cleanControl"
+      ],
+      "effort": "Separate normative effort projection using frozen average-at-position/league/weather profile, not this player's weak skill nor their sample; calibration required",
+      "separation": "No arm/throwing input; upstream quality affects demand, never supplies a second chance"
+    },
+    {
+      "stage": "D Base Contest",
+      "owner": "Existing RunnerThrowSettlement Foundation via explicit version-aware pure timing validator; ForceAdvancement and Third-Out keep legality",
+      "required": [
+        "secured possession identity",
+        "baseTouch/tag attempt and completion",
+        "runner arrival",
+        "current live force or legal tag proof",
+        "same target runner/base",
+        "ordered retirement",
+        "third-out timing"
+      ],
+      "preconditions": [
+        "possession or completed receive",
+        "live target",
+        "baseTouch needs contact and possession; tag requires runner contact plus declared tag geometry/timing"
+      ],
+      "outcomes": [
+        "legal candidate retirement",
+        "runner already safe",
+        "timing unresolved / no commit",
+        "notAttempted"
+      ],
+      "selfTouch": "3U/5U reuse existing acquisition/touch owner and bypass A/C; arm/throwing cannot improve touch. Do not migrate them in first slice.",
+      "limits": "Prototype covers admitted initial-out=0 force/baseTouch only; full tag, retreat/reinstatement and third-out runtime remain outside prototype"
+    }
+  ],
+  "abilityMapping": [
+    {
+      "ability": "reaction",
+      "stage": "B start delay; D footwork only if independently sourced",
+      "pureInput": "independent [0,20] reaction",
+      "career": "current reaction is a composite, preserve existing adapter until versioned mapping approved",
+      "NPC": "legacy defense alias; label adapter version, not independent reaction skill"
+    },
+    {
+      "ability": "range",
+      "stage": "B reach envelope",
+      "pureInput": "independent [0,20] range",
+      "career": "current range composite with position differences",
+      "NPC": "legacy defense alias"
+    },
+    {
+      "ability": "mobility",
+      "stage": "B movement speed",
+      "pureInput": "independent [0,20] mobility",
+      "career": "explicit approved speed/mobility observation needed; no invented Career field",
+      "NPC": "original roster speed exists; mapping to MDU speed still proposed"
+    },
+    {
+      "ability": "catching / fielding",
+      "stage": "C hands/control",
+      "pureInput": "separate explicit capabilities with source status",
+      "career": "ground catching aliases fielding today; incoming player 1B supplies independent catching. Proposed adapter must preserve source distinction.",
+      "NPC": "fielding from defense; catching alias may be declared compatibility, cannot claim independent skill"
+    },
+    {
+      "ability": "arm / throwing",
+      "stage": "A existing strength/accuracy / later relay throw",
+      "pureInput": "no input to B/C or possession-only self touch",
+      "career": "existing observation/composites stay unchanged this sprint",
+      "NPC": "arm alias throwing; later relay actor must own its throw"
+    },
+    {
+      "ability": "baseballIQ / decision",
+      "stage": "pre-execution legal cover/target intent, deterministic rule evaluation",
+      "pureInput": "no extra success draw for a fixed legal explicit route",
+      "career": "current decision IQ/observation/discipline composite remains",
+      "NPC": "defense/contact derived value; not independent strategy witness"
+    }
+  ],
+  "normativeEffort": {
+    "status": "C; unapproved",
+    "basis": "Objective average fielder at position/level under same field/weather and ball demand",
+    "inputs": [
+      "position",
+      "competitionLevel",
+      "movement demand",
+      "incoming quality",
+      "weather/field conditions",
+      "average capability profile version"
+    ],
+    "cleanCounterfactual": "Correct only specified ordinary misplay; preserve runner, upstream strength/release, actual route, frozen capability/context, sample vector and other actors. Do not make fast runner slower or create missing delivery.",
+    "lateReceiverGap": "Prototype returns unavailable rather than manufacturing hands failure. A culpable positioning misplay needs explicit responsibility and failure-cause attribution; conservative E/A insufficiency is not permanent receiver-error exemption.",
+    "extraAdvancement": "C until runner movement owner produces sourceActionId causal deviation from normal expected destination; initial/final base difference insufficient"
+  },
+  "rng": {
+    "recommended": "B",
+    "A": "SHA256 canonical key including original owned sample IEEE754 binary64 big-endian hex, immutable physicalIdentity, fixed model/sampler version, leg and stage namespaces. No additional Match RNG.",
+    "B": "Same fixed SHA256 namespaces keyed on physicalIdentity without old sample. Pin vector at admission; callback count of upstream execution remains unchanged.",
+    "sampling": "Sort object keys recursively, preserve arrays; SHA256 first 4 bytes unsigned big-endian; (n+0.5)/2^32; finite [0,1) old sample. Freeze algorithm/version and time quantization before release.",
+    "stages": [
+      "positioning",
+      "secure",
+      "touch"
+    ],
+    "excludedKeys": [
+      "actorId",
+      "selectedRoute",
+      "capability",
+      "decision correctness",
+      "stage outcome",
+      "retry count"
+    ],
+    "ownership": "Leg identity is fixed physical action slot, never rebuilt from selected route or status. Sample vector reused if same slot changes eligibility; unused slots never consume RNG.",
+    "identityUniqueness": "Require globally unique immutable match/PA/physical contact identity, not hash of secure capability/decision. Null-identity legacy coverage cannot opt in.",
+    "tradeoff": "B separates receiver variation from legacy reused sample correlation and simplifies fixed-input skill comparison. Deterministic hash is no independence/natural-frequency proof; existing owned sample still bound and stored.",
+    "actorTamper": "Vector unchanged when actor/ability changes, but sealed actor/ability input change is rejected; no swap-and-reroll."
+  },
+  "prototypeCoefficients": {
+    "status": "ILLUSTRATIVE ONLY",
+    "positioning": "start=max(.1,1.5-.06*reaction+(uPosition-.5)*.25); speed=.5+.06*mobility; completion=start+MDU/speed; reach=MDU<=1+.4*range",
+    "secure": "margin=.65*catching+.35*fielding+(uSecure-.5)*4 - [5 + challenging1.2 + declaredEnvironmentAdjustment]",
+    "completion": "flight=4+distance(short0,medium1,long2)+quality(onTarget0,challenging1,weak3)+releaseDelay; secureDelay=.15+challenging.3+bobble.6; touchDelay=.1+(uTouch-.5)*.04",
+    "runner": "Unchanged saved speed/start/progress current deriveRunnerArrival arithmetic; not regenerated random speed",
+    "effort": "Average profile=10 and neutral weather are C illustrations. Production bridge must retain insufficient until approved.",
+    "relay": "Proposed pivotDelay=1 plus original completed pivot prerequisite; second delivery classes/distance where absent are declared C, not reconstructed historical truth"
+  },
+  "seamDecisions": [
+    "New pure receiver APIs may be hosted in existing DefensiveDecisionThrowFoundation; model dispatch remains existing family registry",
+    "New timingVersion-specific validation in existing RunnerThrowSettlement; preserve original resolveTiming/deriveSettlement for legacy",
+    "New v2 scorer adapter emits existing contest schema; do not call old v1 scorer timing fallback for v2",
+    "Lifecycle.beginExecution must deliberately carry the version/input binding; arbitrary added pre-execution field is currently dropped",
+    "Non-force home/tag and culpable positioning errors need separate contract evidence before broad enablement"
+  ]
+}
