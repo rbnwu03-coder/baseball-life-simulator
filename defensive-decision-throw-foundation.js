@@ -266,8 +266,65 @@
     return freeze({ version: VERSION, identity: `${playIdentity}|actions-v1`, playIdentity, physicalIdentity,
       sourceAuthority, factType: "execution", actions: normalized });
   }
-  function projectDefensiveAttribution(facts, retirements = []) {
+  // Official scoring interprets already-owned execution facts. It never changes
+  // an action, samples a result, or proposes a retirement.
+  function resolveScorerEligibility({ actionFacts: facts, retirements = [], contests = [] } = {}) {
+    if (!facts || !same(facts, createActionFacts(facts)) || !Array.isArray(contests)) fail("invalid scorer action context");
+    const byId = new Map(facts.actions.map(a => [a.identity, a])), seen = new Set();
+    function dependsOn(action, ancestorId) {
+      return action.dependsOn.some(id => id === ancestorId || dependsOn(byId.get(id), ancestorId));
+    }
+    const decisions = contests.map(contest => {
+      const action = byId.get(contest.failedActionId);
+      if (!action || action.status !== "failed" || !["field", "throw", "receive"].includes(action.type)
+        || seen.has(action.identity) || !contest.runnerId || !["first", "second", "third", "home"].includes(contest.targetBase)
+        || action.targetBase && action.targetBase !== contest.targetBase
+        || action.runnerId && action.runnerId !== contest.runnerId
+        || !facts.actions.some(a => ["baseTouch", "tag"].includes(a.type) && a.runnerId === contest.runnerId
+          && a.targetBase === contest.targetBase && (action.type === "field" || dependsOn(a, action.identity)))) fail("invalid scorer contest identity");
+      seen.add(action.identity);
+      const effort = contest.ordinaryEffort, potential = contest.potentialOut;
+      if (!["eligible", "ineligible", "insufficient"].includes(effort?.status) || !effort.source
+        || !["feasible", "alreadySafe", "insufficient"].includes(potential?.status) || !potential.source) fail("missing scorer provenance");
+      if (Number.isFinite(potential.cleanCompletion) && Number.isFinite(potential.runnerArrival)
+        && potential.status !== (potential.cleanCompletion < potential.runnerArrival ? "feasible" : "alreadySafe")) fail("inconsistent scorer arrival proof");
+      const advancement = contest.attributableAdvancement || [];
+      const order = { batter: 0, first: 1, second: 2, third: 3, home: 4 };
+      if (!Array.isArray(advancement) || advancement.some(a => !a.runnerId || !a.source || a.sourceActionId !== action.identity
+        || !Number.isFinite(order[a.expectedBase]) || !Number.isFinite(order[a.actualBase]) || order[a.actualBase] <= order[a.expectedBase])) fail("invalid attributable advancement");
+      const actualOut = retirements.some(r => r.runnerId === contest.runnerId && r.targetBase === contest.targetBase);
+      const dpCompletionThrow = action.type === "throw" && contest.dpLeg === 2
+        && retirements.some(r => r.runnerId === contest.firstRetirementId && r.outType === "force");
+      const charged = effort.status === "eligible" && (advancement.length > 0
+        || !actualOut && potential.status === "feasible" && !dpCompletionThrow);
+      const reason = charged ? advancement.length ? "attributableExtraAdvancement" : "ordinaryEffortPutoutPrevented"
+        : effort.status === "insufficient" || potential.status === "insufficient" ? "insufficientScorerFacts"
+          : actualOut ? "runnerRetiredDespiteMisplay" : dpCompletionThrow ? "doublePlayCompletionWildThrowException"
+            : effort.status !== "eligible" ? "notOrdinaryEffort" : "cleanExecutionAlreadySafe";
+      return { failedActionId: action.identity, actorId: action.actorId, runnerId: contest.runnerId,
+        targetBase: contest.targetBase, charged, reason, potentialOut: potential.status,
+        extraAdvancement: advancement.length > 0, batterReachedOnError: charged && !actualOut
+          && potential.status === "feasible" && contest.targetBase === "first" };
+    });
+    const wouldBeAssists = [];
+    decisions.filter(d => d.charged && d.potentialOut === "feasible" && byId.get(d.failedActionId).type === "receive").forEach(d => {
+      const chain = new Map();
+      function visit(action) { if (!action || chain.has(action.identity)) return; chain.set(action.identity, action); action.dependsOn.forEach(id => visit(byId.get(id))); }
+      byId.get(d.failedActionId).dependsOn.forEach(id => visit(byId.get(id)));
+      if ([...chain.values()].some(a => a.status !== "completed")) fail("would-be assist uses incomplete upstream action");
+      [...chain.values()].filter(a => a.type === "throw" && a.actorId !== d.actorId).forEach(a => {
+        if (!wouldBeAssists.some(prior => prior.actorId === a.actorId)) wouldBeAssists.push({ actorId: a.actorId,
+          actionId: a.identity, subsequentErrorActionId: d.failedActionId, runnerId: d.runnerId, targetBase: d.targetBase });
+      });
+    });
+    return freeze({ version: "infield-scorer-eligibility-v1", identity: `${facts.playIdentity}|scorer-v1`,
+      playIdentity: facts.playIdentity, physicalIdentity: facts.physicalIdentity, factType: "scorerInterpretation",
+      contests: clone(contests), decisions, wouldBeAssists, batterReachedOnError: decisions.some(d => d.batterReachedOnError),
+      authority: "sameBallExecution+ordinaryEffort+potentialOut+attributableAdvancement", consumedRng: false });
+  }
+  function projectDefensiveAttribution(facts, retirements = [], scorerFacts = null) {
     if (!facts || !same(facts, createActionFacts(facts))) fail("invalid action contract");
+    if (scorerFacts && !same(scorerFacts, resolveScorerEligibility({ actionFacts: facts, retirements, contests: scorerFacts.contests }))) fail("invalid scorer interpretation");
     const actors = new Map(), byId = new Map(facts.actions.map(a => [a.identity, a]));
     function actor(action) {
       if (!actors.has(action.actorId)) actors.set(action.actorId, { actorId: action.actorId, actorPosition: action.actorPosition,
@@ -276,7 +333,8 @@
       if (!result.actionIds.includes(action.identity)) result.actionIds.push(action.identity);
       return result;
     }
-    facts.actions.forEach(a => { actor(a); if (a.errorCharged === true && a.status === "failed") actor(a).E = 1; });
+    facts.actions.forEach(a => { actor(a); if (!scorerFacts && a.errorCharged === true && a.status === "failed") actor(a).E = 1; });
+    if (scorerFacts) scorerFacts.decisions.filter(d => d.charged).forEach(d => { actors.get(d.actorId).E = 1; });
     const ledger = retirements.map(retirement => {
       const terminal = facts.actions.find(a => ["baseTouch", "tag"].includes(a.type) && a.status === "completed"
         && a.runnerId === retirement.runnerId && a.targetBase === retirement.targetBase);
@@ -295,11 +353,12 @@
         participantActorIds: participants, terminalActionId: terminal.identity };
     });
     if (ledger.length >= 2) ledger.forEach(r => r.participantActorIds.forEach(id => { actors.get(id).DP = 1; }));
+    if (scorerFacts) scorerFacts.wouldBeAssists.forEach(a => { actors.get(a.actorId).A = 1; });
     return freeze({ version: VERSION, identity: `${facts.playIdentity}|attribution-v1`, playIdentity: facts.playIdentity,
       physicalIdentity: facts.physicalIdentity, factType: "settlement", retirements: ledger, actors: [...actors.values()],
-      authority: "completedActionDependencies+orderedActualRetirements" });
+      authority: scorerFacts ? "completedActionDependencies+orderedActualRetirements+legalScorerExceptions" : "completedActionDependencies+orderedActualRetirements" });
   }
   return freeze({ VERSION, RNG_NAMESPACES, isAdvancingTo, hasHomePlay, controlled, buildDecisionOpportunity,
     selectDefensiveRoute, validateOpportunity, validateSelection, resolveThrow, resolveBaseTouch, projectExistingThrow, throwDemand, validateStoredStage,
-    resolveIncomingReceive, ACTION_TYPES, createActionFacts, projectDefensiveAttribution });
+    resolveIncomingReceive, ACTION_TYPES, createActionFacts, resolveScorerEligibility, projectDefensiveAttribution });
 });

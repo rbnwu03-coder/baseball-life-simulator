@@ -258,7 +258,10 @@ test('5-4-3 completed pivot with weak second throw retains first out and credits
   assert.equal(run('x.r.teammateLeg.secondBaseSecondThrow'),'failed');
   assert.equal(run('x.r.outsCreated'),1);assert.equal(run('x.r.executionQuality'),'partial');
   assert.equal(run('x.r.responsibleActor'),'teammate');assert.equal(run('x.r.error'),false);
-  assert.equal(run('MatchGameRecord.getPlayerGameLine(m.gameRecord,TeamRosterFoundation.getCurrentDefender(m.rosters.home,"2B").id).defense.E'),1);
+  // OBR 9.12(d)(3): a wild DP-completion throw without extra advancement is not E.
+  assert.equal(run('MatchGameRecord.getPlayerGameLine(m.gameRecord,TeamRosterFoundation.getCurrentDefender(m.rosters.home,"2B").id).defense.E'),0);
+  assert.equal(run('m.gameRecord.totals.home.errors'),0);
+  assert.equal(run('m.lastDefensiveResolution.scorerFacts.decisions[0].reason'),'doublePlayCompletionWildThrowException');
   for(const p of ['3B','2B','1B'])assert.equal(run('MatchGameRecord.getPlayerGameLine(m.gameRecord,TeamRosterFoundation.getCurrentDefender(m.rosters.home,"'+p+'").id).defense.DP'),0);
 });
 test('5-4-3 failed first throw records zero retirements and does not execute the relay',()=>{

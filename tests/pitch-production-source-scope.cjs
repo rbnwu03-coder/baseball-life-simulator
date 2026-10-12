@@ -86,6 +86,10 @@ const ROUTINE_INFIELD_ADDITION = `    ...(runnerFacts.outcomeAuthority === "exis
       defensiveOpportunity: runnerFacts.defensiveOpportunity ? JSON.parse(JSON.stringify(runnerFacts.defensiveOpportunity)) : null
     } : {}),
 `;
+// Sprint 5: exact additive defensive metadata, with the ordinary/offensive body frozen.
+const SCORER_OWNER_ADDITION = `    ...(runnerFacts.scorerFacts ? { scorerErrorOwner: { playIdentity: runnerFacts.scorerFacts.playIdentity,
+      authority: "defensiveActionAttribution" } } : {}),
+`;
 const normalize = text => text.replace(/\r\n?/g, '\n');
 const cache = new Map();
 function readSource(text) {
@@ -192,9 +196,12 @@ function expectedFunction(baseline, name) {
   if (name === 'recordHighSchoolYearOneMoment') return original.replace(
     '    error: Boolean(eventFacts.error)\n',
     '    error: Boolean(eventFacts.error),\n    ...(eventFacts.defensiveFacts || {})\n');
+  if (name === 'recordHighSchoolMeaningfulPlateAppearance') return original.replace(
+    '    runsBattedIn,\n', '    runsBattedIn,\n' + SCORER_OWNER_ADDITION);
   if (name === 'recordHighSchoolRoutinePlateAppearance') return original.replace(
     '    eventClassification: "playerRoutinePlay",\n',
-    '    eventClassification: "playerRoutinePlay",\n' + ROUTINE_INFIELD_ADDITION);
+    '    eventClassification: "playerRoutinePlay",\n' + ROUTINE_INFIELD_ADDITION).replace(
+    '    runsBattedIn,\n', '    runsBattedIn,\n' + SCORER_OWNER_ADDITION);
   return original;
 }
 function assertPitchProductionSourceScope(currentText, baselineText) {

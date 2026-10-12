@@ -6677,6 +6677,8 @@ function recordHighSchoolMeaningfulPlateAppearance(match, batterId, result, befo
     batterId,
     result,
     runsBattedIn,
+    ...(runnerFacts.scorerFacts ? { scorerErrorOwner: { playIdentity: runnerFacts.scorerFacts.playIdentity,
+      authority: "defensiveActionAttribution" } } : {}),
     runnerChanges: Array.isArray(runnerFacts.runnerChanges) ? runnerFacts.runnerChanges : [],
     scoringRunnerIds: Array.isArray(runnerFacts.scoringRunnerIds) ? runnerFacts.scoringRunnerIds : [],
     thirdOutResolution: runnerFacts.thirdOutResolution || null,
@@ -6703,6 +6705,8 @@ function recordHighSchoolRoutinePlateAppearance(match, batterId, result, before,
     batterId,
     result,
     runsBattedIn,
+    ...(runnerFacts.scorerFacts ? { scorerErrorOwner: { playIdentity: runnerFacts.scorerFacts.playIdentity,
+      authority: "defensiveActionAttribution" } } : {}),
     runnerChanges: Array.isArray(runnerFacts.runnerChanges) ? runnerFacts.runnerChanges : [],
     scoringRunnerIds: Array.isArray(runnerFacts.scoringRunnerIds) ? runnerFacts.scoringRunnerIds : [],
     thirdOutResolution: runnerFacts.thirdOutResolution || null,
@@ -11286,13 +11290,210 @@ function attachHighSchoolInfieldActionFacts(match, situation, choice, resolution
   return Object.freeze({ ...resolution, executionSample: sample, actionFacts });
 }
 
+// Source labels do not create receiver execution or resolve scorer eligibility.
+// A is saved execution, B is a deterministic projection, C is unavailable.
+function getHighSchoolLegacyReceiverScorerSource(match, situation, resolution, action) {
+  const position = TeamRosterFoundation.normalizePosition(situation.playerPosition);
+  if (!["SS", "2B"].includes(position)) return null;
+  const actions = resolution.actionFacts?.actions || [];
+  const receive = action?.type === "receive" ? action : actions.find(a => a.type === "receive" && a.dependsOn.includes(action?.identity));
+  if (!receive) return null;
+  const upstream = actions.find(a => a.type === "throw" && receive.dependsOn.includes(a.identity));
+  if (!upstream) return null;
+  const throws = actions.filter(a => a.type === "throw"), second = upstream.identity === throws[1]?.identity;
+  const state = match.groundBallInPlayState, timing = resolution.timingResolution || {};
+  const stage = state?.shortstopExecution?.decisionThrowState || state?.decisionThrowState;
+  const thrown = second ? null : stage?.throwResolution;
+  const receiver = !second ? resolution.receiverResolution : null;
+  const savedCompletion = !second ? timing.firstLeg?.receiverCompletion : null;
+  const savedArrival = !second ? timing.firstLeg?.runnerArrival : null;
+  const terminal = actions.find(a => ["baseTouch", "tag"].includes(a.type) && a.dependsOn.includes(receive.identity));
+  const caps = receive.provenance.capabilities, sample = receive.provenance.sample;
+  const coverage = resolution.playerRole === "coverPivot" && !second;
+  const homeTag = resolution.activeRoute === "preventRunHome" && position === "2B" && !second;
+  const threshold = second || coverage ? 2.8 : receiver?.provenance.threshold
+    ?? (homeTag || position === "SS" || resolution.initialRoute === "initiate463" ? 3.2 : null);
+  const incoming = coverage ? resolution.upstreamThrowQuality : thrown?.throwQuality;
+  const receivePenalty = coverage ? { clean: 0, slightlyOffLine: 1, late: 1.6, difficultReceive: 2.5 }[incoming] || 0 : 0;
+  const combinedScore = (receiver ? Number(caps.fielding ?? 5) : Number(caps.fielding) || 5)
+    + (sample - .5) * 4 + (homeTag ? (Number(caps.reaction) || 5) * .25 : 0) - receivePenalty;
+  const window = second ? resolution.continuationState?.window || timing.relayToFirstWindow
+    : resolution.firstLegTimingWindow || timing.routeWindow || timing.secondBaseForceWindow;
+  const fact = (classification, value, source, missing = null) => ({ classification, value, source, ...(missing ? { status: "insufficientScorerFacts", missing } : {}) });
+  const unavailable = (source, missing) => fact("C", null, source, missing);
+  return {
+    version: "legacy-receiver-scorer-source-v1", physicalIdentity: resolution.actionFacts.physicalIdentity,
+    routeId: resolution.activeRoute || resolution.routeId, dpLeg: second ? 2 : 1,
+    receiverId: receive.actorId, throwerId: upstream.actorId, receiverActionId: receive.identity,
+    consumedRng: false, fields: {
+      receiverActor: fact("A", { id: receive.actorId, position: receive.actorPosition }, "actionFacts.receive+activeRoster"),
+      throwerActor: fact("A", { id: upstream.actorId, position: upstream.actorPosition }, "actionFacts.throw+dependency"),
+      throwDelivery: fact("A", upstream.status, "actionFacts.throw.status;compositeDeliveryIsNotLocation"),
+      incomingLocation: incoming && !incoming.startsWith("legacy")
+        ? fact("A", incoming, coverage ? "savedLegacyCoverage.upstreamThrowQuality;coarseCategory" : "savedCanonicalFirstThrow.throwQuality")
+        : unavailable("legacyDeliveryStage", "independentThrowLocationOrAccuracy"),
+      receiveOutcome: fact("A", receive.status, "actionFacts.receive.status;mayBeCompositeOrUpstreamGated"),
+      receiverReadiness: receiver || savedCompletion || coverage ? fact("A", receiver || savedCompletion || { coverageQuality: resolution.coverageQuality },
+        "savedReceiverResolutionOrFirstLegCompletion;readyMayMergeHands")
+        : unavailable("legacyRelayReceiveStage", "separateReceiverAvailabilityAndReadiness"),
+      combinedHandsInput: Number.isFinite(threshold) && Number.isFinite(sample)
+        ? fact("B", { score: combinedScore, threshold, receivePenalty },
+          "savedReceiverCapability+ownedSample+unchangedLegacyThreshold;diagnosticOnly")
+        : unavailable("legacyReceiveStage", "ownedCompositeThreshold"),
+      independentReadiness: unavailable("legacyCombinedReadinessHands", "independentArrivalAtBaseAndReadiness"),
+      independentHands: unavailable("legacyCombinedReadinessHands", "separateHandsOrSecureExecution"),
+      ordinaryEffort: unavailable("legacyCombinedReadinessHandsAndDelivery", "independentCatchableLocation+receiverReadiness+ordinaryEffort"),
+      runnerArrival: savedArrival ? fact("A", savedArrival, "savedFirstLeg.runnerArrival")
+        : unavailable("legacyOrdinalWindow", "continuousRunnerArrivalForThisLeg"),
+      timingWindow: window ? fact("A", window, "savedFirstLegTimingWindowOrContinuationWindow;ordinalNotTime")
+        : unavailable("legacyRoute", "savedTimingWindow"),
+      originalRunnerState: fact("A", { runners: situation.runners, batterId: situation.batterId,
+        targetRunnerId: terminal?.runnerId || null, targetBase: terminal?.targetBase || null }, "originalSituation+terminalAction"),
+      capabilities: fact("A", caps, "receiveAction.provenance.capabilities"),
+      ownedSample: fact("A", sample, "receiveAction.provenance.sample"),
+      errorSpecificAdvancement: unavailable("committedMovementIntentsOnly", "advancementAttributedToThisMisplay")
+    }
+  };
+}
+
+// Scorer-only counterfactuals consume this play's saved stages. Missing legacy
+// delivery/arrival facts remain insufficient; they never trigger a new roll.
+function getHighSchoolInfieldScorerFacts(match, situation, resolution) {
+  if (resolution.scorerFacts) return resolution.scorerFacts;
+  const facts = resolution.actionFacts;
+  if (!facts?.physicalIdentity || typeof DefensiveDecisionThrowFoundation === "undefined"
+    || typeof DefensiveDecisionThrowFoundation.resolveScorerEligibility !== "function") return null;
+  const state = match.groundBallInPlayState;
+  const cache = state?.firstBaseExecution || state?.thirdBaseExecution || state?.shortstopExecution;
+  const stage = cache?.decisionThrowState || state?.decisionThrowState;
+  const firstThrow = stage?.throwResolution, timing = resolution.timingResolution || {};
+  const retirements = resolution.runnerSettlement.retirements;
+  const firstForce = retirements.find(r => r.outType === "force");
+  const actions = facts.actions, throws = actions.filter(a => a.type === "throw");
+  // Failed acquisition has no selected throw or clean-arrival snapshot. Keep
+  // its existing field-scoring adapter until that separate contract is owned;
+  // do not manufacture a hypothetical throw from a failed Secure stage.
+  if (actions.some(a => a.type === "field" && a.status === "failed")) return null;
+  const failed = actions.filter(a => a.status === "failed" && ["field", "throw", "receive"].includes(a.type));
+  const contests = failed.map(action => {
+    const index = actions.indexOf(action);
+    const terminal = actions.slice(index + 1).find(a => ["baseTouch", "tag"].includes(a.type));
+    if (!terminal?.runnerId) return null;
+    const upstream = action.type === "receive" ? actions.find(a => action.dependsOn.includes(a.identity) && a.type === "throw") : action;
+    const second = upstream?.identity === throws[1]?.identity;
+    const leg = second ? timing.secondLeg : timing.firstLeg;
+    let effort = { status: "insufficient", source: "originalExecutionDoesNotSeparateOrdinaryEffort" };
+    let potential = { status: "insufficient", source: "originalExecutionHasNoCleanArrivalProof" };
+    const evidence = { actionStatus: action.status, rawErrorCandidate: action.errorCharged === true,
+      incomingQuality: null, readiness: null, hands: null, originalRunnerState: null,
+      baselineDestinations: (situation.movementIntents || []).map(m => ({ ...m })),
+      advancementSource: "committedMovementIntentsOnly;noErrorSpecificExtraAdvancement" };
+    function arrival(completion, runnerArrival, source) {
+      if (Number.isFinite(completion) && Number.isFinite(runnerArrival)) potential = {
+        status: completion < runnerArrival ? "feasible" : "alreadySafe", cleanCompletion: completion, runnerArrival, source };
+    }
+    if (!second && firstThrow?.throwAttempted && firstThrow.targetRunnerId === terminal.runnerId
+      && firstThrow.targetBase === terminal.targetBase && firstThrow.throwDemand && leg?.runnerArrival) {
+      const quality = firstThrow.throwQuality;
+      evidence.incomingQuality = quality;
+      evidence.originalRunnerState = leg.runnerArrival;
+      evidence.readiness = leg.receiverCompletion || null;
+      evidence.hands = { source: "originalReceiverStage", status: resolution.teammateLeg?.receiver || action.status };
+      if (["onTarget", "challengingReceive", "lateWeakThrow", "offline"].includes(quality)) {
+        const distance = { short: 0, medium: 1, long: 2 }[firstThrow.throwDemand.distanceClass];
+        // Correct accuracy only; preserve an actually weak delivery and delayed release.
+        const cleanQuality = action.type === "throw" && quality === "offline"
+          ? firstThrow.strengthMargin < 0 ? "lateWeakThrow" : "onTarget" : quality;
+        const delay = { onTarget: 0, challengingReceive: 1, lateWeakThrow: 3 }[cleanQuality];
+        const receiver = leg.receiverCompletion;
+        const receiveAction = actions.find(a => a.type === "receive" && a.dependsOn.includes(throws[0]?.identity));
+        const caps = receiveAction?.provenance?.capabilities;
+        const sample = receiveAction?.provenance?.sample;
+        // Incoming's atBase=false also covers an offline ball; its original
+        // actor snapshot separates that from a genuinely unavailable receiver.
+        const incomingReadiness = cache?.context && caps && Number.isFinite(sample)
+          ? Number(caps.reaction) * .6 + Number(caps.range) * .4 + (sample - .5) * 4 - 3.2 : null;
+        const available = action.type === "throw" && quality === "offline" && Number.isFinite(incomingReadiness)
+          ? incomingReadiness >= 0 && receiveAction.actorPosition !== "P" : receiver?.atBase !== false;
+        if (available && Number.isFinite(distance) && Number.isFinite(delay)) arrival(4 + distance + delay
+          + (firstThrow.releaseQuality === "delayedRelease" ? 1 : 0) + Number(receiver?.receiveDelay || 0)
+          + (terminal.type === "tag" ? Number(receiver?.tagDelay ?? 1) : 0), leg.runnerArrival.relativeArrival,
+          "savedResolvedThrowDistanceStrengthRelease+originalReceiverDelay+savedRunnerArrival");
+        if (action.type === "throw") effort = { status: available && quality === "offline" ? "eligible" : "insufficient",
+          source: "securedPossession+savedFirstThrowAccuracy+receiverBaseReadiness" };
+        else if (action.type === "receive") effort = { status: available && ["onTarget", "lateWeakThrow"].includes(quality) ? "eligible" : "ineligible",
+          source: "savedUsableDelivery+originalReceiverAtBase;handsMayBeLegacyProxy" };
+        if (action.type === "receive" && cache?.choice && cache === state?.shortstopExecution) effort = {
+          status: "insufficient", source: "legacyShortstopReceiverMergesReadinessAndHands;noIndependentOrdinaryEffortProof" };
+      }
+    } else if (second && leg && firstForce) {
+      const thrown = leg.throw;
+      const quality = thrown?.throwQuality || (leg.accuracyMargin < 0 ? "offline"
+        : leg.strengthMargin < 0 ? "lateWeakThrow" : leg.accuracyMargin < 1 ? "challengingReceive" : "onTarget");
+      evidence.incomingQuality = quality;
+      evidence.readiness = leg.receive ? { ready: leg.receive.ready, returnReady: leg.returnReady,
+        readinessMargin: leg.receive.readinessMargin } : { source: "legacyFirstBaseFieldingProxy", status: resolution.teammateLeg?.firstBaseReceive };
+      evidence.hands = leg.receive ? { secureMargin: leg.receive.secureMargin, secureDemand: leg.receive.secureDemand }
+        : { source: "legacyFirstBaseFieldingProxy", status: resolution.teammateLeg?.firstBaseReceive };
+      const available = leg.receive ? leg.returnReady !== false && leg.receive.readinessMargin >= 0 : true;
+      let completion = leg.relativeCompletion;
+      if (thrown && quality === "offline" && thrown.strengthMargin < 0 && Number.isFinite(completion)) completion += 3;
+      if (available) arrival(completion, leg.batterArrival, "savedFirstForceCompletion+savedRelayDemand+savedBatterArrival");
+      effort = { status: action.type === "throw" ? quality === "offline" ? "eligible" : "insufficient"
+        : available && ["onTarget", "lateWeakThrow"].includes(quality) ? "eligible" : "ineligible",
+        source: "savedRelayAccuracy+originalReceiverReadinessHands+firstActualForce" };
+    } else if (!second && firstThrow?.throwQuality?.startsWith("legacy")) {
+      // Preserve the 2B composite authority. Its ordinal window can prove a
+      // feasible target, but cannot prove ordinary-effort incoming accuracy.
+        const window = resolution.firstLegTimingWindow;
+      const receiver = resolution.receiverResolution;
+      evidence.incomingQuality = firstThrow.throwQuality;
+      evidence.readiness = receiver ? { available: receiver.available, ready: receiver.ready, source: receiver.provenance } : null;
+      evidence.hands = receiver ? { fielding: receiver.provenance.fielding, sample: receiver.provenance.sample,
+        threshold: receiver.provenance.threshold, source: "legacyCombinedReadinessHands" } : null;
+      if (firstThrow.throwQuality === "legacyUsableDelivery" && receiver?.available && window?.state) potential = {
+        status: window.state === "expired" ? "alreadySafe" : "feasible", source: "existingDelivery+availableReceiver+authoritativeLegacyRouteWindow",
+        window: window.state, timingMargin: null };
+    }
+      const legacySource = getHighSchoolLegacyReceiverScorerSource(match, situation, resolution, action);
+      if (legacySource) evidence.legacyReceiverSource = legacySource;
+      return { failedActionId: action.identity, runnerId: terminal.runnerId, targetBase: terminal.targetBase,
+      ordinaryEffort: effort, potentialOut: potential, dpLeg: second ? 2 : 1,
+      firstRetirementId: firstForce?.runnerId || null, attributableAdvancement: [], evidence };
+  }).filter(Boolean);
+  return DefensiveDecisionThrowFoundation.resolveScorerEligibility({ actionFacts: facts, retirements, contests });
+}
+
+function projectHighSchoolInfieldScoredResolution(match, situation, resolution) {
+  const scorerFacts = getHighSchoolInfieldScorerFacts(match, situation, resolution);
+  if (!scorerFacts) return resolution; // Historical isolated / synthetic contract.
+  const defensiveAttribution = DefensiveDecisionThrowFoundation.projectDefensiveAttribution(resolution.actionFacts,
+    resolution.runnerSettlement.retirements, scorerFacts);
+  const precedingForce = resolution.runnerSettlement.retirements.find(r => r.outType === "force" && r.runnerId !== situation.batterId);
+  const preventedForce = scorerFacts.decisions.find(d => d.charged && d.potentialOut === "feasible" && d.runnerId !== situation.batterId
+    && situation.forceChain?.allRequiredMovements?.some(m => m.runnerId === d.runnerId && m.targetBase === d.targetBase));
+  const forceProof = precedingForce || preventedForce;
+  const batterScoring = forceProof && !resolution.runnerSettlement.outRunnerIds.includes(situation.batterId)
+    ? { classification: "fieldersChoice", reason: precedingForce ? "OBR9.05b1PrecedingRunnerForcedOut" : "OBR9.05b1PrecedingForcePreventedByError",
+      batterId: situation.batterId, forcedRunnerId: forceProof.runnerId, targetBase: forceProof.targetBase, compatibilityResult: "out" } : null;
+  return Object.freeze({ ...resolution, rawExecutionError: resolution.error, scorerFacts, defensiveAttribution,
+    ...(batterScoring ? { batterScoring } : {}),
+    error: defensiveAttribution.actors.some(a => a.actorId === "player" && a.E > 0) });
+}
+
 function getHighSchoolInfieldFinalFacts(match, situation, resolution) {
   if (!resolution.actionFacts || typeof DefensiveDecisionThrowFoundation === "undefined") return {};
   const actionFacts = resolution.actionFacts;
-  const defensiveAttribution = DefensiveDecisionThrowFoundation.projectDefensiveAttribution(actionFacts, resolution.runnerSettlement.retirements);
+  const scorerFacts = getHighSchoolInfieldScorerFacts(match, situation, resolution);
+  const defensiveAttribution = DefensiveDecisionThrowFoundation.projectDefensiveAttribution(actionFacts, resolution.runnerSettlement.retirements, scorerFacts);
   const lifecycle = match.activeSituation;
   const stage = match.groundBallInPlayState?.decisionThrowState;
-  return { actionFacts, defensiveAttribution, playerPosition: situation.playerPosition,
+  return { actionFacts, defensiveAttribution, ...(resolution.batterScoring ? { batterScoring: resolution.batterScoring } : {}),
+    ...(scorerFacts ? { scorerFacts } : actionFacts.physicalIdentity
+    && actionFacts.actions.some(a => a.type === "field" && a.status === "failed") ? {
+      scorerCompatibility: { status: "insufficientScorerFacts", source: "existingFieldScoringAdapter",
+        reason: "failedAcquisitionHasNoCleanThrowArrival;originalFieldClassificationPreserved" }
+    } : {}), playerPosition: situation.playerPosition,
     ...(resolution.firstBaseEvidence ? { firstBaseEvidence: resolution.firstBaseEvidence,
       runnersAfter: match.runners.slice(), orderedRetirements: resolution.runnerSettlement.retirements.map(r => ({ ...r })) } : {}),
     ...(resolution.thirdBaseEvidence ? { thirdBaseEvidence: resolution.thirdBaseEvidence,
@@ -11764,7 +11965,30 @@ function getHighSchoolControlledDefensiveRoutes(match) {
   return input ? DefensiveDecisionThrowFoundation.buildDecisionOpportunity(input) : null;
 }
 
+function validateHighSchoolGroundLifecycleRoutes(match) {
+  const lifecycle = match?.activeSituation;
+  if (lifecycle?.type !== "groundBallDefensiveDecision") return;
+  // A historical save may omit one copy; every copy that is present must
+  // describe the same legal intent. Do not prefer decision over execution.
+  const routes = [lifecycle.decision, lifecycle.executionState]
+    .filter(copy => copy && Object.prototype.hasOwnProperty.call(copy, "selectedRoute"))
+    .map(copy => copy.selectedRoute);
+  if (routes.some(route => typeof route !== "string" || !route)
+    || routes.some(route => route !== routes[0])
+    || (Array.isArray(lifecycle.legalRoutes) && lifecycle.legalRoutes.length > 0
+      && routes.some(route => !lifecycle.legalRoutes.some(choice => (choice.routeId || choice.id || choice.matchDecision) === route)))) {
+    throw new Error("Stale ground-ball lifecycle route copies");
+  }
+  const state = match?.groundBallInPlayState;
+  const executionRoute = state?.firstBaseExecution?.choice.routeId
+    || state?.thirdBaseExecution?.choice.routeId || state?.shortstopExecution?.choice.routeId
+    || state?.decisionThrowState?.preControlIntent;
+  if (lifecycle.sourcePhysicalStateRef === state?.identity && executionRoute
+    && routes.some(route => route !== executionRoute)) throw new Error("Stale ground-ball lifecycle cached route");
+}
+
 function validateHighSchoolDecisionThrowState(match) {
+  validateHighSchoolGroundLifecycleRoutes(match);
   const state = match?.groundBallInPlayState;
   if (state?.supported && !state.firstBaseContext && (state.firstBaseExecution
     || match.activeSituation?.contextSnapshot?.firstBaseContext
@@ -11992,6 +12216,7 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
       identity: situation.runnerSettlementIdentity, before: situationBefore, resolution, thirdOut: thirdOutResolution });
     applyHighSchoolDefensiveSettlementFacts(match, settlement, "infield-decision-family");
   }
+  resolution = projectHighSchoolInfieldScoredResolution(match, situation, resolution);
   if (resolution.error) match.playerContribution.errors += 1;
   match.playerContribution.outsCreated += resolution.outsCreated;
   syncHighSchoolMatchPlayerRunnerLocation(match);
@@ -12007,8 +12232,9 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
     thirdOutResolution
   };
   // Player error attribution stays separate from the team's official PA result.
-  const thirdBaseTeamError = (resolution.thirdBaseEvidence || resolution.firstBaseEvidence) && resolution.actionFacts.actions
-    .some(action => action.errorCharged === true && action.status === "failed");
+  const thirdBaseTeamError = resolution.scorerFacts ? resolution.scorerFacts.batterReachedOnError
+    : (resolution.thirdBaseEvidence || resolution.firstBaseEvidence) && resolution.actionFacts.actions
+      .some(action => action.errorCharged === true && action.status === "failed");
   const groundBallPhysicalOutcome = groundBallContext && typeof BattedBallGroundDefense !== "undefined"
     ? BattedBallGroundDefense.settleGroundBallPhysicalOutcome(groundBallContext, provisionalResolution) : null;
   const paCompatibilityResult = groundBallPhysicalOutcome && typeof BattedBallGroundDefense !== "undefined"
@@ -12016,7 +12242,8 @@ function applyInfieldResolutionToHighSchoolMatch(match, decision, resolution) {
       physicalTruth: groundBallContext.physicalTruth,
       defenseOutcome: { ...BattedBallGroundDefense.derivePACompatibilityResult(groundBallPhysicalOutcome), settled: true }
     }) : null;
-  const batterResult = resolution.error || thirdBaseTeamError ? "error"
+  const batterResult = resolution.batterScoring?.classification === "fieldersChoice" ? "out"
+    : (resolution.scorerFacts ? thirdBaseTeamError : resolution.error || thirdBaseTeamError) ? "error"
     : paCompatibilityResult?.result || (resolution.outsCreated > 0 ? "out" : "single");
   const appliedResolution = {
     ...provisionalResolution,
@@ -12159,6 +12386,7 @@ function applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution) {
       identity: situation.runnerSettlementIdentity, before: situationBefore, resolution, thirdOut: thirdOutResolution });
     applyHighSchoolDefensiveSettlementFacts(match, settlement, "player-routine-play");
   }
+  resolution = projectHighSchoolInfieldScoredResolution(match, situation, resolution);
   if (resolution.error) match.playerContribution.errors += 1;
   match.playerContribution.outsCreated += resolution.outsCreated;
   syncHighSchoolMatchPlayerRunnerLocation(match);
@@ -12169,9 +12397,11 @@ function applyRoutineDefensiveResolutionToHighSchoolMatch(match, resolution) {
     scores: { ...match.scores },
     runners: match.runners.slice()
   };
-  const thirdBaseTeamError = (resolution.thirdBaseEvidence || resolution.firstBaseEvidence) && resolution.actionFacts.actions
-    .some(action => action.errorCharged === true && action.status === "failed");
-  const batterResult = resolution.error || thirdBaseTeamError ? "error" : (match.groundBallInPlayState?.shortstopExecution || match.groundBallInPlayState?.thirdBaseExecution || match.groundBallInPlayState?.firstBaseExecution)
+  const thirdBaseTeamError = resolution.scorerFacts ? resolution.scorerFacts.batterReachedOnError
+    : (resolution.thirdBaseEvidence || resolution.firstBaseEvidence) && resolution.actionFacts.actions
+      .some(action => action.errorCharged === true && action.status === "failed");
+  const batterResult = resolution.batterScoring?.classification === "fieldersChoice" ? "out"
+    : (resolution.scorerFacts ? thirdBaseTeamError : resolution.error || thirdBaseTeamError) ? "error" : (match.groundBallInPlayState?.shortstopExecution || match.groundBallInPlayState?.thirdBaseExecution || match.groundBallInPlayState?.firstBaseExecution)
     ? resolution.runnerSettlement.outRunnerIds.includes(situation.batterId) ? "out" : "single"
     : resolution.outsCreated > 0 ? "out" : "single";
   const appliedResolution = { ...resolution, runnerChanges, runnersAfter: thirdOutResolution.basesAfter,

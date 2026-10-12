@@ -1,0 +1,158 @@
+{
+  "initialIndex": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "project: E-meng-baseball_life_sim_semirefactor\nnodes: 45871\nedges: 63868\nstatus: ready\nroot_path: E:/meng/baseball_life_sim_semirefactor\nindexed_at: 2026-10-12T01:26:51Z\nparse_partial:\n  files: 0\n  count: 1\n  truncated: true\n  omitted: 1\nparse_unusable:\n  files: 0\n  count: 0\n  truncated: false\nskipped:\n  files: 0\n  count: 0\n  truncated: false\nnot_indexed:\n  dirs: 0\n  dirs_count: 2\n  files: 0\n  files_count: 0\n  truncated: true\n  dirs_omitted: 2\n"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "schema": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "node_labels: 9  (cols: label count)\n  Variable 35919\n  Function 4751\n  Section 3985\n  File 604\n  Module 598\n  Folder 10\n  EnvVar 2\n  Branch 1\n  Project 1\nedge_types: 15  (cols: type count)\n  DEFINES 45254\n  USAGE 8331\n  CALLS 7038\n  IMPORTS 1092\n  SIMILAR_TO 881\n  CONTAINS_FILE 604\n  WRITES 364\n  CONFIGURES 160\n  FILE_CHANGES_WITH 102\n  CALL_REFERENCE 18\n  CONTAINS_FOLDER 10\n  SEMANTICALLY_RELATED 9\n  RAISES 3\n  HAS_BRANCH 1\n  THROWS 1\ntotal: 24\nreturned: 24\nhas_more: false\nadr_present: false\n"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "symbols": {
+    "content": [
+      {
+        "type": "text",
+        "text": "results: 8  (rows: name label lines in out; group prefix \"-\" means empty; qn = prefix empty ? name : prefix + \".\" + name)\nE-meng-baseball_life_sim_semirefactor.script (script.js):\n  buildHighSchoolShortstopExecution Function 11791-11878 2 16\n  deriveInfieldExecutionWindows Function 7397-7414 1 0\n  deriveSecondBaseExecutionWindows Function 7279-7301 2 3\n  getSecondBaseCauseExplanation Function 7911-7936 3 1\n  getSecondBaseRouteWindow Function 7303-7309 4 1\n  resolveHighSchoolInfieldReceiver Function 8111-8127 1 7\n  resolveSecondBaseCoverage643 Function 8300-8370 2 11\n  resolveSecondBaseInitiatedRoute Function 8129-8298 2 15\ntotal: 8\nreturned: 8\nhas_more: false\ntruncated: false\n"
+      }
+    ],
+    "isError": false
+  },
+  "traces": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "function: getHighSchoolInfieldScorerFacts\ndirection: both\ncallees_total: 1\ncallees_total_relation: eq\ncallees: 1  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.arrival 1\ncallers_total: 2\ncallers_total_relation: eq\ncallers: 2  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.projectHighSchoolInfieldScoredResolution 1\n  E-meng-baseball_life_sim_semirefactor.script.getHighSchoolInfieldFinalFacts 1\n"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "function: resolveHighSchoolInfieldReceiver\ndirection: both\ncallees_total: 1\ncallees_total_relation: eq\ncallees: 1  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.getDefensiveSimulationCapability 1\ncallers_total: 1\ncallers_total_relation: eq\ncallers: 1  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.resolveSecondBaseInitiatedRoute 1\n"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "function: resolveSecondBaseInitiatedRoute\ndirection: both\ncallees_total: 7\ncallees_total_relation: eq\ncallees: 7  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.script:\n  buildInfieldRunnerFacts 1\n  getInfieldChoiceTradeoff 1\n  getSecondBaseCauseExplanation 1\n  getSecondBaseRouteWindow 1\n  reassessDefensiveRoutesAfterExecutionChange 1\n  resolveHighSchoolInfieldReceiver 1\n  resolveInfieldRelayToFirst 1\ncallers_total: 2\ncallers_total_relation: eq\ncallers: 2  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.resolveInfieldDecision 1\n  E-meng-baseball_life_sim_semirefactor.script.validateHighSchoolDecisionThrowState 1\n"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "function: resolveInfieldRelayToFirst\ndirection: both\ncallees_total: 0\ncallees_total_relation: eq\ncallees: 0  (cols: qn hop)\ncallers_total: 2\ncallers_total_relation: eq\ncallers: 2  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.resolveSecondBaseInitiatedRoute 1\n  E-meng-baseball_life_sim_semirefactor.script.buildHighSchoolShortstopExecution 1\n"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "function: buildHighSchoolShortstopExecution\ndirection: both\ncallees_total: 8\ncallees_total_relation: eq\ncallees: 8  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.script:\n  assertHighSchoolDetailedResponsibility 1\n  attachDefensiveOutcomeExplanation 1\n  attachHighSchoolInfieldActionFacts 1\n  getDefensiveSimulationCapability 1\n  getHighSchoolControlledDecisionInput 1\n  getSecondBaseCauseExplanation 1\n  resolveHighSchoolCanonicalSecure 1\n  resolveInfieldRelayToFirst 1\ncallers_total: 2\ncallers_total_relation: eq\ncallers: 2  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.resolveInfieldDecision 1\n  E-meng-baseball_life_sim_semirefactor.script.validateHighSchoolDecisionThrowState 1\n"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "function: projectHighSchoolInfieldScoredResolution\ndirection: both\ncallees_total: 1\ncallees_total_relation: eq\ncallees: 1  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.getHighSchoolInfieldScorerFacts 1\ncallers_total: 2\ncallers_total_relation: eq\ncallers: 2  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.applyInfieldResolutionToHighSchoolMatch 1\n  E-meng-baseball_life_sim_semirefactor.script.applyRoutineDefensiveResolutionToHighSchoolMatch 1\n"
+          }
+        ],
+        "isError": false
+      }
+    }
+  ],
+  "snippets": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "name: getHighSchoolInfieldScorerFacts\nqualified_name: E-meng-baseball_life_sim_semirefactor.script.getHighSchoolInfieldScorerFacts\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/script.js\nstart_line: 11295\nend_line: 11397\nsource_mode: full\nsource: |\n  function getHighSchoolInfieldScorerFacts(match, situation, resolution) {\n    if (resolution.scorerFacts) return resolution.scorerFacts;\n    const facts = resolution.actionFacts;\n    if (!facts?.physicalIdentity || typeof DefensiveDecisionThrowFoundation === \"undefined\"\n      || typeof DefensiveDecisionThrowFoundation.resolveScorerEligibility !== \"function\") return null;\n    const state = match.groundBallInPlayState;\n    const cache = state?.firstBaseExecution || state?.thirdBaseExecution || state?.shortstopExecution;\n    const stage = cache?.decisionThrowState || state?.decisionThrowState;\n    const firstThrow = stage?.throwResolution, timing = resolution.timingResolution || {};\n    const retirements = resolution.runnerSettlement.retirements;\n    const firstForce = retirements.find(r => r.outType === \"force\");\n    const actions = facts.actions, throws = actions.filter(a => a.type === \"throw\");\n    // Failed acquisition has no selected throw or clean-arrival snapshot. Keep\n    // its existing field-scoring adapter until that separate contract is owned;\n    // do not manufacture a hypothetical throw from a failed Secure stage.\n    if (actions.some(a => a.type === \"field\" && a.status === \"failed\")) return null;\n    const failed = actions.filter(a => a.status === \"failed\" && [\"field\", \"throw\", \"receive\"].includes(a.type));\n    const contests = failed.map(action => {\n      const index = actions.indexOf(action);\n      const terminal = actions.slice(index + 1).find(a => [\"baseTouch\", \"tag\"].includes(a.type));\n      if (!terminal?.runnerId) return null;\n      const upstream = action.type === \"receive\" ? actions.find(a => action.dependsOn.includes(a.identity) && a.type === \"throw\") : action;\n      const second = upstream?.identity === throws[1]?.identity;\n      const leg = second ? timing.secondLeg : timing.firstLeg;\n      let effort = { status: \"insufficient\", source: \"originalExecutionDoesNotSeparateOrdinaryEffort\" };\n      let potential = { status: \"insufficient\", source: \"originalExecutionHasNoCleanArrivalProof\" };\n      const evidence = { actionStatus: action.status, rawErrorCandidate: action.errorCharged === true,\n        incomingQuality: null, readiness: null, hands: null, originalRunnerState: null,\n        baselineDestinations: (situation.movementIntents || []).map(m => ({ ...m })),\n        advancementSource: \"committedMovementIntentsOnly;noErrorSpecificExtraAdvancement\" };\n      function arrival(completion, runnerArrival, source) {\n        if (Number.isFinite(completion) && Number.isFinite(runnerArrival)) potential = {\n          status: completion < runnerArrival ? \"feasible\" : \"alreadySafe\", cleanCompletion: completion, runnerArrival, source };\n      }\n      if (!second && firstThrow?.throwAttempted && firstThrow.targetRunnerId === terminal.runnerId\n        && firstThrow.targetBase === terminal.targetBase && firstThrow.throwDemand && leg?.runnerArrival) {\n        const quality = firstThrow.throwQuality;\n        evidence.incomingQuality = quality;\n        evidence.originalRunnerState = leg.runnerArrival;\n        evidence.readiness = leg.receiverCompletion || null;\n        evidence.hands = { source: \"originalReceiverStage\", status: resolution.teammateLeg?.receiver || action.status };\n        if ([\"onTarget\", \"challengingReceive\", \"lateWeakThrow\", \"offline\"].includes(quality)) {\n          const distance = { short: 0, medium: 1, long: 2 }[firstThrow.throwDemand.distanceClass];\n          // Correct accuracy only; preserve an actually weak delivery and delayed release.\n          const cleanQuality = action.type === \"throw\" && quality === \"offline\"\n            ? firstThrow.strengthMargin < 0 ? \"lateWeakThrow\" : \"onTarget\" : quality;\n          const delay = { onTarget: 0, challengingReceive: 1, lateWeakThrow: 3 }[cleanQuality];\n          const receiver = leg.receiverCompletion;\n          const receiveAction = actions.find(a => a.type === \"receive\" && a.dependsOn.includes(throws[0]?.identity));\n          const caps = receiveAction?.provenance?.capabilities;\n          const sample = receiveAction?.provenance?.sample;\n          // Incoming's atBase=false also covers an offline ball; its original\n          // actor snapshot separates that from a genuinely unavailable receiver.\n          const incomingReadiness = cache?.context && caps && Number.isFinite(sample)\n            ? Number(caps.reaction) * .6 + Number(caps.range) * .4 + (sample - .5) * 4 - 3.2 : null;\n          const available = action.type === \"throw\" && quality === \"offline\" && Number.isFinite(incomingReadiness)\n            ? incomingReadiness >= 0 && receiveAction.actorPosition !== \"P\" : receiver?.atBase !== false;\n          if (available && Number.isFinite(distance) && Number.isFinite(delay)) arrival(4 + distance + delay\n            + (firstThrow.releaseQuality === \"delayedRelease\" ? 1 : 0) + Number(receiver?.receiveDelay || 0)\n            + (terminal.type === \"tag\" ? Number(receiver?.tagDelay ?? 1) : 0), leg.runnerArrival.relativeArrival,\n            \"savedResolvedThrowDistanceStrengthRelease+originalReceiverDelay+savedRunnerArrival\");\n          if (action.type === \"throw\") effort = { status: available && quality === \"offline\" ? \"eligible\" : \"insufficient\",\n            source: \"securedPossession+savedFirstThrowAccuracy+receiverBaseReadiness\" };\n          else if (action.type === \"receive\") effort = { status: available && [\"onTarget\", \"lateWeakThrow\"].includes(quality) ? \"eligible\" : \"ineligible\",\n            source: \"savedUsableDelivery+originalReceiverAtBase;handsMayBeLegacyProxy\" };\n          if (action.type === \"receive\" && cache?.choice && cache === state?.shortstopExecution) effort = {\n            status: \"insufficient\", source: \"legacyShortstopReceiverMergesReadinessAndHands;noIndependentOrdinaryEffortProof\" };\n        }\n      } else if (second && leg && firstForce) {\n        const thrown = leg.throw;\n        const quality = thrown?.throwQuality || (leg.accuracyMargin < 0 ? \"offline\"\n          : leg.strengthMargin < 0 ? \"lateWeakThrow\" : leg.accuracyMargin < 1 ? \"challengingReceive\" : \"onTarget\");\n        evidence.incomingQuality = quality;\n        evidence.readiness = leg.receive ? { ready: leg.receive.ready, returnReady: leg.returnReady,\n          readinessMargin: leg.receive.readinessMargin } : { source: \"legacyFirstBaseFieldingProxy\", status: resolution.teammateLeg?.firstBaseReceive };\n        evidence.hands = leg.receive ? { secureMargin: leg.receive.secureMargin, secureDemand: leg.receive.secureDemand }\n          : { source: \"legacyFirstBaseFieldingProxy\", status: resolution.teammateLeg?.firstBaseReceive };\n        const available = leg.receive ? leg.returnReady !== false && leg.receive.readinessMargin >= 0 : true;\n        let completion = leg.relativeCompletion;\n        if (thrown && quality === \"offline\" && thrown.strengthMargin < 0 && Number.isFinite(completion)) completion += 3;\n        if (available) arrival(completion, leg.batterArrival, \"savedFirstForceCompletion+savedRelayDemand+savedBatterArrival\");\n        effort = { status: action.type === \"throw\" ? quality === \"offline\" ? \"eligible\" : \"insufficient\"\n          : available && [\"onTarget\", \"lateWeakThrow\"].includes(quality) ? \"eligible\" : \"ineligible\",\n          source: \"savedRelayAccuracy+originalReceiverReadinessHands+firstActualForce\" };\n      } else if (!second && firstThrow?.throwQuality?.startsWith(\"legacy\")) {\n        // Preserve the 2B composite authority. Its ordinal window can prove a\n        // feasible target, but cannot prove ordinary-effort incoming accuracy.\n        const window = timing.firstLegTimingWindow || timing.routeWindow;\n        const receiver = resolution.receiverResolution;\n        evidence.incomingQuality = firstThrow.throwQuality;\n        evidence.readiness = receiver ? { available: receiver.available, ready: receiver.ready, source: receiver.provenance } : null;\n        evidence.hands = receiver ? { fielding: receiver.provenance.fielding, sample: receiver.provenance.sample,\n          threshold: receiver.provenance.threshold, source: \"legacyCombinedReadinessHands\" } : null;\n        if (firstThrow.throwQuality === \"legacyUsableDelivery\" && receiver?.available && window?.state) potential = {\n          status: window.state === \"expired\" ? \"alreadySafe\" : \"feasible\", source: \"existingDelivery+availableReceiver+authoritativeLegacyRouteWindow\",\n          window: window.state, timingMargin: null };\n      }\n      return { failedActionId: action.identity, runnerId: terminal.runnerId, targetBase: terminal.targetBase,\n        ordinaryEffort: effort, potentialOut: potential, dpLeg: second ? 2 : 1,\n        firstRetirementId: firstForce?.runnerId || null, attributableAdvancement: [], evidence };\n    }).filter(Boolean);\n    return DefensiveDecisionThrowFoundation.resolveScorerEligibility({ actionFacts: facts, retirements, contests });\n  }\ncallers: 2\ncallees: 1\n"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "name: resolveHighSchoolInfieldReceiver\nqualified_name: E-meng-baseball_life_sim_semirefactor.script.resolveHighSchoolInfieldReceiver\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/script.js\nstart_line: 8111\nend_line: 8127\nsource_mode: full\nsource: |\n  function resolveHighSchoolInfieldReceiver(situation, choice, sample, deliveryCompleted, match) {\n    const position = choice.targetBase === \"third\" ? \"3B\" : choice.targetBase === \"home\" ? \"C\"\n      : choice.targetBase === \"second\" || choice.targetBase === \"secondThenFirst\" ? \"SS\" : \"1B\";\n    const legacy = position === \"1B\" ? situation.teammates?.firstBaseReceiver : position === \"3B\" ? situation.teammates?.thirdBaseReceiver\n      : position === \"C\" ? situation.teammates?.catcher : situation.teammates?.shortstop;\n    const actor = match?.rosters?.[match.defenseTeam] && typeof TeamRosterFoundation !== \"undefined\"\n      ? TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam], position) : null;\n    const capabilities = actor ? getDefensiveSimulationCapability(actor, actor.position, match) : legacy?.capabilities || {};\n    const fielding = Number(capabilities.fielding ?? 5), swing = (sample - .5) * 4;\n    const available = Boolean((actor ? actor.id !== \"player\" : legacy) && legacy?.receivingAvailable !== false);\n    const ready = available && fielding + swing >= 2.8;\n    return Object.freeze({ receiverId: actor?.id || legacy?.id || null, receiverPosition: position, available, ready,\n      secured: Boolean(deliveryCompleted && ready), status: !deliveryCompleted ? \"notAttempted\" : !available ? \"unavailable\" : ready ? \"completed\" : \"failed\",\n      responsibleActor: deliveryCompleted && !ready ? \"teammate\" : \"player\",\n      provenance: Object.freeze({ authority: actor ? \"activeRosterReceiver+existingExecutionSample\" : \"declaredLegacyReceiver+existingExecutionSample\",\n        fielding, sample, swing, threshold: 2.8, consumedRng: false }) });\n  }\ncallers: 1\ncallees: 1\n"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "name: resolveInfieldRelayToFirst\nqualified_name: E-meng-baseball_life_sim_semirefactor.script.resolveInfieldRelayToFirst\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/script.js\nstart_line: 8103\nend_line: 8109\nsource_mode: full\nsource: |\n  function resolveInfieldRelayToFirst(situation, firstThrowCompleted, sample, continuationWindow, pivot) {\n    const swing = (sample - 0.5) * 4;\n    const receive = firstThrowCompleted && (Number(pivot.fielding) || 5) + swing >= 3.2;\n    const turn = receive && (Number(pivot.reaction) || 5) + (Number(pivot.throwing) || 5) * 0.35 + swing - situation.batterSpeed * 0.25 >= 4.2;\n    const firstBaseReceive = turn && (Number(situation.teammates?.firstBaseReceiver?.capabilities?.fielding) || 5) + swing >= 2.8;\n    return { receive, turn, firstBaseReceive, secondOutAvailable: turn && firstBaseReceive && ![\"narrow\", \"expired\"].includes(continuationWindow) };\n  }\ncallers: 2\ncallees: 0\n"
+          }
+        ],
+        "isError": false
+      }
+    }
+  ],
+  "finalCoverage": {
+    "content": [
+      {
+        "type": "text",
+        "text": "project: E-meng-baseball_life_sim_semirefactor\nsignal: best_effort\nindexed_at: 2026-10-12T07:11:42Z\nmetadata:\n  generation: 2026-10-12T07:11:42Z\n  index_mode: full\n  recorded_at: 2026-10-12T07:11:44Z\n  recording_status: complete\n  ignored_files_stored: 0\n  ignored_files_total: 0\n  hash_records_complete: true\n  coverage_version: 3\n  generation_matches: true\npaths: 18  (cols: requested_path path status freshness recommended_action coverage)\n  script.js script.js no_recorded_issue metadata_changed read_source_and_reindex []\n  defensive-decision-throw-foundation.js defensive-decision-throw-foundation.js no_recorded_issue metadata_changed read_source_and_reindex []\n  defensive-runner-throw-settlement-foundation.js defensive-runner-throw-settlement-foundation.js no_recorded_issue metadata_changed read_source_and_reindex []\n  match-game-record.js match-game-record.js no_recorded_issue metadata_changed read_source_and_reindex []\n  match-experience-development.js match-experience-development.js no_recorded_issue metadata_changed read_source_and_reindex []\n  save.js save.js no_recorded_issue metadata_changed read_source_and_reindex []\n  team-roster-foundation.js team-roster-foundation.js no_recorded_issue metadata_changed read_source_and_reindex []\n  force-advancement.js force-advancement.js no_recorded_issue metadata_changed read_source_and_reindex []\n  tests/high-school-career-test-context.js tests/high-school-career-test-context.js no_recorded_issue metadata_changed read_source_and_reindex []\n  tests/first-base-receive-active-ground-production-integration-test.js tests/first-base-receive-active-ground-production-integration-test.js no_recorded_issue metadata_changed read_source_and_reindex []\n  tests/infield-scorer-recovery-integrity-repair-test.js tests/infield-scorer-recovery-integrity-repair-test.js no_recorded_issue metadata_changed read_source_and_reindex []\n  tests/infield-scorer-sprint-5-validation-runner.cjs tests/infield-scorer-sprint-5-validation-runner.cjs no_recorded_issue metadata_changed read_source_and_reindex []\n  tests/infield-legacy-receiver-scorer-closeout-test.js tests/infield-legacy-receiver-scorer-closeout-test.js no_recorded_issue metadata_changed read_source_and_reindex []\n  tests/infield-legacy-receiver-scorer-closeout-runner.cjs tests/infield-legacy-receiver-scorer-closeout-runner.cjs no_recorded_issue not_tracked read_source_and_reindex []\n  tests/shared-infield-contract-2b-production-integration-test.js tests/shared-infield-contract-2b-production-integration-test.js no_recorded_issue metadata_changed read_source_and_reindex []\n  tests/ss-defensive-production-integration-test.js tests/ss-defensive-production-integration-test.js no_recorded_issue metadata_changed read_source_and_reindex []\n  tests/pitch-production-source-scope.cjs tests/pitch-production-source-scope.cjs no_recorded_issue metadata_changed read_source_and_reindex []\n  docs/infield-baseball-logic-audit-runner.cjs docs/infield-baseball-logic-audit-runner.cjs no_recorded_issue metadata_changed read_source_and_reindex []\npath_total: 18\npath_returned: 18\npath_has_more: false\nscopes: 2  (cols: requested_scope scope total returned truncated entries status)\n  script.js script.js 0 0 false [] no_recorded_issue\n  defensive-decision-throw-foundation.js defensive-decision-throw-foundation.js 0 0 false [] no_recorded_issue\nscope_total: 0\nscope_returned: 0\nscope_truncated: false\nhas_more: false\ncaveat: \"Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable.\"\n"
+      }
+    ],
+    "isError": false
+  },
+  "fallback": "All owner/current scorer and legacy execution source ranges read from disk; metadata_changed and graph end ranges are not treated as proof of complete/current source. Registry admission is verified by actual fixtures.",
+  "tier": "Tier 2"
+}

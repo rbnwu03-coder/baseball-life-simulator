@@ -187,7 +187,7 @@
       stats.RBI += integer(event.runsBattedIn);
     }
     if (HIT_RESULTS.has(result)) record.totals[offenseSide].hits += 1;
-    if (result === "error") record.totals[defenseSide].errors += 1;
+    if (result === "error" && event.scorerErrorOwner?.authority !== "defensiveActionAttribution") record.totals[defenseSide].errors += 1;
     const pitcher = getActivePitcher(record, defenseSide, context);
     if (pitcher) {
       const stats = pitcher.pitching;
@@ -230,7 +230,7 @@
       "Defensive action / attribution contract is required");
     check(attribution.playIdentity === event.actionFacts.playIdentity, "Defensive action / attribution identity mismatch");
     const contract = getActionContract();
-    check(contract && JSON.stringify(contract.projectDefensiveAttribution(event.actionFacts, attribution.retirements)) === JSON.stringify(attribution),
+    check(contract && JSON.stringify(contract.projectDefensiveAttribution(event.actionFacts, attribution.retirements, event.scorerFacts || null)) === JSON.stringify(attribution),
       "Defensive attribution does not match completed actor actions");
   }
 
@@ -249,6 +249,9 @@
         for (const stat of ["PO", "A", "E", "DP"]) line.defense[stat] += integer(facts[stat]);
         addPositionAppearance(line, facts.actorPosition, line.role, eventId);
       }
+      // A lawful E can concern another runner or extra advancement while the
+      // batter retains a hit. The same actor ledger owns the team's E total.
+      if (event.scorerFacts) record.totals[defenseSide].errors += attribution.actors.reduce((sum, a) => sum + integer(a.E), 0);
       return;
     }
     const playerId = String(event.fielderId || event.playerId || context.playerId || (event.type === "playerRoutinePlay" || event.domain === "defense" ? "player" : ""));
