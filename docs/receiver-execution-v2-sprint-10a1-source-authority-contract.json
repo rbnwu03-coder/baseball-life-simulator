@@ -1,0 +1,559 @@
+{
+  "sprint": "10A.1",
+  "scope": "ISOLATED_SOURCE_AUTHORITY_FOUNDATION",
+  "versions": {
+    "source": "receiver-source-authority-isolated-v1",
+    "positioning": "npc1b-initial-cover-policy-v1",
+    "incoming": "ss-canonical-incoming-policy-v1",
+    "adapter": "npc1b-explicit-alias-adapter-v1",
+    "bridge": "common-launch-crt-bridge-proposal-v1",
+    "touch": "npc1b-possession-touch-policy-v1",
+    "delivery": "canonical-ss-delivery-view-v1",
+    "timing": "crt-integer-ticks-v2-1",
+    "sampler": "physical-slot-sha256-u32be-v1"
+  },
+  "runtimeEnabled": false,
+  "productionAdapterImplemented": false,
+  "calibration": "UNCALIBRATED",
+  "inputScopes": {
+    "isolatedFixture": "accepted; declared test facts only",
+    "productionSnapshot": "insufficient: productionSourceAdapterNotIntegrated"
+  },
+  "classification": {
+    "A": "existing Production raw facts only when read from actual owner; fixture A is declared fixture fact and not Production witness",
+    "B": "deterministic projection with source, units and frozen version",
+    "C": "missing actual Production authority; cannot fill from legacy result",
+    "newModel": "explicit versioned C-to-model policy, usable in isolated fixtures only; not relabeled Production A"
+  },
+  "apis": {
+    "initialCoverPlan": {
+      "input": [
+        "version",
+        "phase",
+        "receiverId",
+        "position",
+        "assignment",
+        "referenceId",
+        "provenance"
+      ],
+      "result": "frozen cover intent and policy reference beforeExecution; no default for unknown intent"
+    },
+    "createPin": {
+      "closedKeys": [
+        "version",
+        "scope",
+        "phase",
+        "mode",
+        "identity",
+        "handoff",
+        "routeId",
+        "initialOuts",
+        "bases",
+        "receiverRole",
+        "npc",
+        "coverPlan",
+        "competitionLevel",
+        "environmentId",
+        "provenance"
+      ],
+      "phase": "beforeExecution",
+      "allowedRoute": [
+        "secureFirstBaseOut",
+        "holdBall"
+      ],
+      "initialOuts": [
+        0,
+        1,
+        2
+      ],
+      "bases": [
+        null,
+        null,
+        null
+      ],
+      "role": "player SS to NPC1B",
+      "samplePresent": false,
+      "digest": "canonical JSON SHA256; consistency aid not authentication"
+    },
+    "adaptNpc": {
+      "inputKeys": [
+        "actorId",
+        "position",
+        "source",
+        "defense",
+        "speed",
+        "arm",
+        "contact"
+      ],
+      "values": [
+        "reaction",
+        "range",
+        "mobility",
+        "catching",
+        "fielding",
+        "arm",
+        "throwing",
+        "decision"
+      ],
+      "scale": "integer0..20; reject absent values and unknown source"
+    },
+    "prepare": {
+      "closedKeys": [
+        "version",
+        "pinDigest",
+        "ownedSample",
+        "throwFact",
+        "timing",
+        "touch",
+        "provenance",
+        "effortReference"
+      ],
+      "deliveryKeys": [
+        "version",
+        "actionId",
+        "canonicalThrowIdentity",
+        "physicalIdentity",
+        "routeId",
+        "throwerId",
+        "receiverId",
+        "targetRunnerId",
+        "targetBase",
+        "throwAttempted",
+        "throwQuality",
+        "releaseQuality",
+        "distanceClass",
+        "upstreamActionId",
+        "upstreamStatus"
+      ],
+      "timingKeys": [
+        "version",
+        "sourceDomain",
+        "physicalIdentity",
+        "originId",
+        "launchOffset",
+        "ballArrival",
+        "runnerArrival",
+        "positioningStart",
+        "provenance"
+      ],
+      "touchKeys": [
+        "version",
+        "actionId",
+        "attempted",
+        "contact",
+        "legality",
+        "sourceActionId"
+      ],
+      "ownedSample": "original binary64 retained, not sampled; null insufficient",
+      "output": "isolated models and S8 seal; no Match/Save admission"
+    },
+    "evaluate": {
+      "output": "isolated S8 candidate evaluation only; actualRetirements/Match writes/record/RNG callbacks0",
+      "officialError": null,
+      "wouldBeAssist": null,
+      "timeline": [
+        "throwLaunch",
+        "ballArrival",
+        "positioningCompletion",
+        "receiveAttempt",
+        "secureCompletion",
+        "baseTouchCompletion",
+        "runnerArrival"
+      ]
+    }
+  },
+  "positioning": {
+    "assignmentMap": {
+      "baseGuard": "baseCovering",
+      "firstBaseShade": "nearFirstBase",
+      "coverFromInterior": "movingToFirstBase",
+      "delayedCover": "lateCover",
+      "unassigned": "unavailable"
+    },
+    "contextTable": {
+      "baseCovering": {
+        "movementMdu": 0,
+        "startDelayTicks": 0,
+        "touchDelayTicks": 100
+      },
+      "nearFirstBase": {
+        "movementMdu": 1,
+        "startDelayTicks": 0,
+        "touchDelayTicks": 150
+      },
+      "movingToFirstBase": {
+        "movementMdu": 3,
+        "startDelayTicks": 250,
+        "touchDelayTicks": 200
+      },
+      "lateCover": {
+        "movementMdu": 5,
+        "startDelayTicks": 1500,
+        "touchDelayTicks": 250
+      },
+      "unavailable": {
+        "movementMdu": 0,
+        "startDelayTicks": 0,
+        "touchDelayTicks": 100
+      }
+    },
+    "source": "explicit defensive formation/cover intent supplied before execution; formal generator not implemented",
+    "storage": "frozen isolated pin holds context/version/request/provenance/digest; not saved in actual Match",
+    "readiness": "uses unchanged S8 integer positioning policy; reaction reduces start duration, range controls reach, mobility reduces movement duration",
+    "incomingLateralMdu": "add independent incoming catch-demand offset to base-cover movement; never consume atBase/receiverReady/out",
+    "legacyFormulaChanged": false,
+    "coverPlanClosedKeys": [
+      "version",
+      "context",
+      "referenceId",
+      "receiverId",
+      "phase"
+    ],
+    "actorAndPhaseBinding": "Cover plan receiver matches pinned NPC actor; cover phase must independently be beforeExecution."
+  },
+  "incoming": {
+    "policy": {
+      "onTarget": {
+        "demandMilli": 6000,
+        "cleanDelayTicks": 200,
+        "lateralReachMdu": 0
+      },
+      "challengingReceive": {
+        "demandMilli": 9500,
+        "cleanDelayTicks": 350,
+        "lateralReachMdu": 1
+      },
+      "lateWeakThrow": {
+        "demandMilli": 10000,
+        "cleanDelayTicks": 450,
+        "lateralReachMdu": 1
+      },
+      "offline": {
+        "demandMilli": 0,
+        "cleanDelayTicks": 0,
+        "lateralReachMdu": 0
+      },
+      "notAttempted": {
+        "demandMilli": 0,
+        "cleanDelayTicks": 0,
+        "lateralReachMdu": 0
+      }
+    },
+    "distancePenaltyMilli": {
+      "short": 0,
+      "medium": 250,
+      "long": 500
+    },
+    "delayedReleasePenaltyMilli": 250,
+    "bobbleDelayTicks": 800,
+    "prohibitedInputs": [
+      "legacy receiverCompleted",
+      "legacy combined ready",
+      "safe/out",
+      "official E/A",
+      "second throw sample"
+    ],
+    "rawCanonicalView": "normalized closed source view; original canonical throw ID and action ledger ID distinct, explicit linked copies required; no automatic Production extractor implemented",
+    "reachability": "incoming lateral MDU plus positioning requirement checked by S8 range; offline bypasses hands",
+    "handsFormulaOwner": "unchanged isolated S8 stage; fixed physical-slot B vector; original sample not a new hands/throw roll",
+    "noDeliveryTiming": "A notAttempted/hold source with known ball arrival is rejected; unknown flight is preserved, not silently masked."
+  },
+  "timing": {
+    "version": "crt-integer-ticks-v2-1",
+    "unit": "1000 integer ticks per coarse CRT; not seconds or measured geometry",
+    "bridgeVersion": "common-launch-crt-bridge-proposal-v1",
+    "sourceDomain": "isolated-common-origin-fixture",
+    "legacyV1Domain": "always insufficient until separately approved shared origin adapter",
+    "inputFormat": "strict decimal text up to6 decimals; BigInt half-away-from-zero quantization; each absolute time quantized then subtract common quantized launch offset",
+    "maximumAbsoluteTicks": 1000000000,
+    "firstLaunchTicks": 0,
+    "runnerNegativeAllowed": true,
+    "actorNegativeRejected": true,
+    "unknownOrigin": "insufficient no evaluate",
+    "unknownBallPositionRunner": "preserve reason, no zero fill/no candidate",
+    "tie": "no candidate",
+    "preLaunchPositioning": "not representable in current S8 nonnegative actor contract; rejects; future timing revision required",
+    "losslessLegacyClaim": false,
+    "quantizationLimit": "up to0.5 tick per absolute scalar; up to1 tick per mapped relative timestamp; ties may collapse. Not a lossless v1 migration.",
+    "officialSeamImplemented": false,
+    "modeledOutputBounds": "Known stage completions must stay within1e9 ticks; otherwise modelTimeOutOfRange. No possession/no attempt yields explicit unknown time, never zero."
+  },
+  "capability": {
+    "version": "npc1b-explicit-alias-adapter-v1",
+    "mapping": {
+      "reaction": "defense alias",
+      "range": "defense alias",
+      "fielding": "defense alias",
+      "mobility": "NEW uncalibrated speed identity mapping",
+      "catching": "NEW uncalibrated defense alias",
+      "arm": "original arm",
+      "throwing": "arm alias",
+      "decision": "floor((defense+contact+1)/2)"
+    },
+    "pureTransportTag": "receiver-explicit-input-v1 remains unchanged; outer adapter version and alias provenance are additionally frozen, never relabeled as current Production adapter",
+    "CareerAdapterImplemented": false,
+    "receiverArmInfluencesHands": false,
+    "gradientAcceptance": "fixed physical vector defense aliases joint monotonic / speed mobility monotonic; not independent Career skills or natural calibration"
+  },
+  "ordinaryEffort": {
+    "referenceContract": "separate same-league/position/environment average plus approved calibration authority",
+    "status": "insufficient",
+    "calibration": "unavailable",
+    "actualCapabilityIsReference": false,
+    "average10Authorized": false,
+    "officialError": null,
+    "wouldBeAssist": null,
+    "L03": "PARTIAL"
+  },
+  "provenanceSources": {
+    "request": [
+      "physicalIdentity",
+      "actors",
+      "capabilities",
+      "coverIntent"
+    ],
+    "execution": [
+      "delivery",
+      "timing",
+      "contact"
+    ],
+    "requiredC": "insufficient; no fake completed legacy-source projection",
+    "fixtureScope": "pureFixture",
+    "newPolicies": {
+      "authority": "NEW_VERSIONED_MODEL",
+      "notProductionAuthority": true
+    }
+  },
+  "exampleFixture": {
+    "request": {
+      "version": "receiver-source-authority-isolated-v1",
+      "scope": "isolatedFixture",
+      "phase": "beforeExecution",
+      "mode": "routine",
+      "identity": {
+        "playId": "isolated-play-1",
+        "physical": {
+          "version": "physical-contact-binding-v1",
+          "matchId": "fixture-match-1",
+          "plateAppearanceId": "fixture-pa-1",
+          "contactId": "fixture-contact-1",
+          "physicalIdentity": "declared-fixture-physical-1"
+        },
+        "leg": {
+          "actionId": "receive-1",
+          "sourceThrowActionId": "throw-action-1",
+          "physicalSlot": "primaryThrow",
+          "parentActionId": null
+        },
+        "thrower": {
+          "actorId": "player",
+          "position": "SS"
+        },
+        "receiver": {
+          "actorId": "npc1b-1",
+          "position": "1B"
+        },
+        "target": {
+          "runnerId": "batter-1",
+          "base": "first"
+        }
+      },
+      "handoff": {
+        "playId": "isolated-play-1",
+        "physicalIdentity": "declared-fixture-physical-1",
+        "throwerId": "player",
+        "receiverId": "npc1b-1",
+        "runnerId": "batter-1",
+        "base": "first"
+      },
+      "routeId": "secureFirstBaseOut",
+      "initialOuts": 0,
+      "bases": [
+        null,
+        null,
+        null
+      ],
+      "receiverRole": "npc",
+      "npc": {
+        "actorId": "npc1b-1",
+        "position": "1B",
+        "source": "team-roster-foundation",
+        "defense": 12,
+        "speed": 12,
+        "arm": 8,
+        "contact": 10
+      },
+      "coverPlan": {
+        "version": "npc1b-initial-cover-policy-v1",
+        "context": "baseCovering",
+        "referenceId": "frozen-preexecution-cover-intent-1",
+        "receiverId": "npc1b-1",
+        "phase": "beforeExecution"
+      },
+      "competitionLevel": "high-school",
+      "environmentId": "neutral-fixture-field",
+      "provenance": {
+        "physicalIdentity": {
+          "classification": "A",
+          "scope": "pureFixture",
+          "owner": "isolatedDeclaredFixture",
+          "reference": "source-fixture-1",
+          "version": "fixture-source-v1"
+        },
+        "actors": {
+          "classification": "A",
+          "scope": "pureFixture",
+          "owner": "isolatedDeclaredFixture",
+          "reference": "source-fixture-1",
+          "version": "fixture-source-v1"
+        },
+        "capabilities": {
+          "classification": "A",
+          "scope": "pureFixture",
+          "owner": "isolatedDeclaredFixture",
+          "reference": "source-fixture-1",
+          "version": "fixture-source-v1"
+        },
+        "coverIntent": {
+          "classification": "A",
+          "scope": "pureFixture",
+          "owner": "isolatedDeclaredFixture",
+          "reference": "source-fixture-1",
+          "version": "fixture-source-v1"
+        }
+      }
+    },
+    "execution": {
+      "version": "receiver-source-authority-isolated-v1",
+      "pinDigest": "assignedByFixture",
+      "ownedSample": 0.62,
+      "throwFact": {
+        "version": "canonical-ss-delivery-view-v1",
+        "actionId": "throw-action-1",
+        "canonicalThrowIdentity": "declared-original-ss-throw-v1",
+        "physicalIdentity": "declared-fixture-physical-1",
+        "routeId": "secureFirstBaseOut",
+        "throwerId": "player",
+        "receiverId": "npc1b-1",
+        "targetRunnerId": "batter-1",
+        "targetBase": "first",
+        "throwAttempted": true,
+        "throwQuality": "onTarget",
+        "releaseQuality": "ready",
+        "distanceClass": "medium",
+        "upstreamActionId": "acquisition-1",
+        "upstreamStatus": "completed"
+      },
+      "timing": {
+        "version": "common-launch-crt-bridge-proposal-v1",
+        "sourceDomain": "isolated-common-origin-fixture",
+        "physicalIdentity": "declared-fixture-physical-1",
+        "originId": "fixture-launch-origin-1",
+        "launchOffset": {
+          "status": "known",
+          "decimal": "2.000"
+        },
+        "ballArrival": {
+          "status": "known",
+          "decimal": "7.000"
+        },
+        "runnerArrival": {
+          "status": "known",
+          "decimal": "12.000"
+        },
+        "positioningStart": {
+          "status": "known",
+          "decimal": "2.000"
+        },
+        "provenance": {
+          "classification": "A",
+          "scope": "pureFixture",
+          "owner": "isolatedDeclaredFixture",
+          "reference": "source-fixture-1",
+          "version": "fixture-source-v1"
+        }
+      },
+      "touch": {
+        "version": "npc1b-possession-touch-policy-v1",
+        "actionId": "receive-1:touch",
+        "attempted": true,
+        "contact": true,
+        "legality": "eligible",
+        "sourceActionId": "first-obligation-fixture-1"
+      },
+      "provenance": {
+        "delivery": {
+          "classification": "A",
+          "scope": "pureFixture",
+          "owner": "isolatedDeclaredFixture",
+          "reference": "source-fixture-1",
+          "version": "fixture-source-v1"
+        },
+        "timing": {
+          "classification": "A",
+          "scope": "pureFixture",
+          "owner": "isolatedDeclaredFixture",
+          "reference": "source-fixture-1",
+          "version": "fixture-source-v1"
+        },
+        "contact": {
+          "classification": "A",
+          "scope": "pureFixture",
+          "owner": "isolatedDeclaredFixture",
+          "reference": "source-fixture-1",
+          "version": "fixture-source-v1"
+        }
+      },
+      "effortReference": null
+    }
+  },
+  "sourceMatrix": [
+    {
+      "field": "raw player SS/NPC1B/batter/physical bindings",
+      "Production": "A",
+      "isolatedInput": "declared fixture A only"
+    },
+    {
+      "field": "canonical first throw quality/release/distance",
+      "Production": "A after original execution",
+      "isolatedInput": "declared closed delivery view"
+    },
+    {
+      "field": "receiver start/cover demand",
+      "Production": "C",
+      "foundation": "new initial-cover policy, uncalibrated"
+    },
+    {
+      "field": "incoming secure demand/duration",
+      "Production": "C",
+      "foundation": "new canonical-quality incoming policy, uncalibrated"
+    },
+    {
+      "field": "mobility/catching adapter",
+      "Production": "C",
+      "foundation": "new alias mapping, uncalibrated"
+    },
+    {
+      "field": "v1 arrival quantities",
+      "Production": "A/B",
+      "foundation": "legacy origin bridge still unapproved"
+    },
+    {
+      "field": "possession/touch duration",
+      "Production": "C",
+      "foundation": "S8 possession gate plus new coarse touch policy; fixture contact source"
+    },
+    {
+      "field": "ordinary effort",
+      "Production": "C",
+      "foundation": "insufficient; no E/A"
+    }
+  ],
+  "nextPrerequisites": [
+    "Production source owner must emit preexecution cover intent/physical slot with actor copies",
+    "Approve and calibrate NPC speed/catching aliases and incoming/position/touch coefficients",
+    "Resolve actual shared launch origin and prelaunch actor time; version-aware seam in existing owner only",
+    "Formal lifecycle/version pin and Save guards remain separate scope",
+    "No full Shadow without separately authorized non-interference/storage gates"
+  ]
+}

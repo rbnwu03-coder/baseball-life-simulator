@@ -1,0 +1,817 @@
+{
+  "tier": 2,
+  "project": "E-meng-baseball_life_sim_semirefactor",
+  "generationAtStart": "2026-10-13T04:36:34Z",
+  "symbols": [
+    {
+      "key": "ss",
+      "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.buildHighSchoolShortstopExecution",
+      "trace": {
+        "function": "E-meng-baseball_life_sim_semirefactor.script.buildHighSchoolShortstopExecution",
+        "direction": "both",
+        "callees_total": 8,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "resolveHighSchoolCanonicalSecure",
+                  1
+                ],
+                [
+                  "assertHighSchoolDetailedResponsibility",
+                  1
+                ],
+                [
+                  "getDefensiveSimulationCapability",
+                  1
+                ],
+                [
+                  "getSecondBaseCauseExplanation",
+                  1
+                ],
+                [
+                  "attachDefensiveOutcomeExplanation",
+                  1
+                ],
+                [
+                  "resolveInfieldRelayToFirst",
+                  1
+                ],
+                [
+                  "attachHighSchoolInfieldActionFacts",
+                  1
+                ],
+                [
+                  "getHighSchoolControlledDecisionInput",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 2,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "resolveInfieldDecision",
+                  1
+                ],
+                [
+                  "validateHighSchoolDecisionThrowState",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "snippet": {
+        "name": "buildHighSchoolShortstopExecution",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.buildHighSchoolShortstopExecution",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 11859,
+        "end_line": 11946,
+        "source_mode": "full",
+        "source": "function buildHighSchoolShortstopExecution(match, situation, choice, sample) {\n  const handoff = match.groundBallInPlayState;\n  if (!Number.isFinite(sample) || sample < 0 || sample >= 1) throw new Error(\"Invalid SS execution sample\");\n  assertHighSchoolDetailedResponsibility(match, handoff.physicalTruth, \"SS\", \"player\");\n  if (situation.playerPosition !== \"游擊手\" || !handoff.supported) throw new Error(\"Invalid SS production context\");\n  const secureResolution = resolveHighSchoolCanonicalSecure(match, handoff, sample);\n  const input = getHighSchoolControlledDecisionInput(match, { ...handoff, secureResolution });\n  const opportunity = DefensiveDecisionThrowFoundation.buildDecisionOpportunity(input);\n  const controlled = opportunity.status === \"controlledDecision\";\n  const selection = controlled ? DefensiveDecisionThrowFoundation.selectDefensiveRoute(opportunity, choice.routeId, input) : null;\n  const thrown = selection ? DefensiveDecisionThrowFoundation.resolveThrow({ input, opportunity, selection,\n    capabilities: { defenderId: \"player\", arm: situation.playerCapabilities.arm, throwing: situation.playerCapabilities.throwing },\n    transferState: secureResolution.secureQuality === \"bobbleButControlled\" ? \"delayed\" : \"ready\" }) : null;\n  const swing = (sample - 0.5) * 4;\n  const receiver = selection?.route.receiverPosition\n    ? TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam], selection.route.receiverPosition) : null;\n  const receiverCapabilities = receiver ? getDefensiveSimulationCapability(receiver, receiver.position, match) : {};\n  const receiverReady = Boolean(receiver && (Number(receiverCapabilities.fielding) || 5) + swing >= 3.2);\n  input.receiverState = { receiverId: receiver?.id || null, ready: receiverReady, atBase: true, tagAvailable: receiverReady, tagDelay: 1 };\n  const decisionThrowState = { opportunity, preControlIntent: choice.routeId, selection, activeSelection: selection, throwResolution: thrown };\n  // Failed acquisition has no controlled decision or throw. Preserve the existing\n  // Foundation's no-contest diagnostic so lifecycle recovery still has an owner.\n  let runnerThrowTiming = selection ? null : DefensiveRunnerThrowSettlementFoundation.projectExistingTiming({\n    stage: decisionThrowState, runnerState: null, windowState: \"expired\", receiverFact: \"unavailable\" });\n  let firstLegSettlement = null;\n  if (selection) {\n    const timingArgs = { input, opportunity, selection, throwResolution: thrown,\n      runnerState: input.runnerPhysicalStates.find(r => r.runnerId === selection.route.targetRunnerId),\n      receiverState: input.receiverState, resolveThirdOut: resolveHighSchoolThirdOutIntegrity };\n    runnerThrowTiming = DefensiveRunnerThrowSettlementFoundation.resolveTiming(timingArgs);\n    firstLegSettlement = DefensiveRunnerThrowSettlementFoundation.deriveSettlement({ ...timingArgs, timing: runnerThrowTiming });\n  }\n  const firstOut = firstLegSettlement?.outRecorded === true;\n  const continuationWindow = handoff.timingWindows.relayToFirstWindow.state;\n  const isDoublePlay = choice.infieldRoute === \"doublePlay\";\n  // Relay completion reuses the established 2B/SS receive-turn-deliver model.\n  const relay = resolveInfieldRelayToFirst(situation, firstOut, sample, continuationWindow, receiverCapabilities);\n  const secondOut = isDoublePlay && firstOut && situation.outs < 2 && relay.secondOutAvailable;\n  const retirements = firstOut ? [{ runnerId: selection.route.targetRunnerId, targetBase: selection.route.targetBase,\n    outType: firstLegSettlement.playType === \"batterRunner\" ? \"batterRunnerBeforeFirst\" : firstLegSettlement.playType === \"force\" ? \"force\" : \"nonForceTag\", sequence: 1 }] : [];\n  if (secondOut) retirements.push({ runnerId: situation.batterId, targetBase: \"first\", outType: \"batterRunnerBeforeFirst\", sequence: 2 });\n  // Complete all committed actors after the first-leg contest. The existing force\n  // owner accounts for in-transit runners, collisions, and force removal after outs.\n  const runnerSettlement = ForceAdvancement.settleForceAdvancement({ forceChain: situation.forceChain,\n    movementIntents: situation.movementIntents, retirements });\n  const error = (secureResolution.attemptAvailable && !secureResolution.secured) || thrown?.throwQuality === \"offline\";\n  const resultCode = secondOut ? \"twoOuts\" : firstOut ? \"oneOut\" : error ? \"error\" : \"zeroOuts\";\n  const detailedResult = secondOut ? \"completedDoublePlay\" : firstOut ? (isDoublePlay ? \"secondStageExpired\" : \"cleanOut\")\n    : error ? (secureResolution.secured ? \"inaccurateThrow\" : \"fieldingError\") : !secureResolution.secured ? \"lateFielding\"\n      : choice.infieldRoute === \"controlledNoThrow\" ? \"controlledNoThrow\" : \"lateThrow\";\n  const primaryCause = !secureResolution.secured ? \"playerFieldingControl\" : thrown?.throwQuality === \"offline\" ? \"playerFirstThrow\"\n    : !receiverReady && selection?.route.action !== \"holdBall\"\n      ? selection?.route.receiverPosition === \"1B\" ? \"teammateFirstBaseReceive\" : selection?.route.receiverPosition === \"C\" ? \"teammateHomeReceive\" : \"teammatePivot\"\n      : isDoublePlay && firstOut && !relay.turn && situation.batterSpeed < 8 && continuationWindow !== \"narrow\" ? \"teammatePivot\"\n        : isDoublePlay && firstOut && relay.turn && !relay.firstBaseReceive ? \"teammateFirstBaseReceive\"\n          : choice.infieldRoute === \"controlledNoThrow\" ? \"balancedExecution\"\n            : !firstOut || (isDoublePlay && !secondOut) ? \"timingWindow\" : \"balancedExecution\";\n  const resolution = attachDefensiveOutcomeExplanation(situation, choice, {\n    familyId: \"infield\", route: choice.infieldRoute, routeId: choice.routeId, initialRoute: choice.routeId, activeRoute: choice.routeId,\n    playerRole: \"initiator\", responsibility: situation.responsibility, resultCode, detailedResult,\n    tier: secondOut ? \"strong\" : firstOut || choice.infieldRoute === \"controlledNoThrow\" ? \"mixed\" : \"failure\",\n    decisionQuality: choice.advisable === \"strong\" ? \"strong\" : choice.advisable === \"aggressive\" ? \"aggressive\" : choice.advisable === \"conservative\" ? \"conservative\" : \"reasonable\",\n    executionQuality: firstOut ? (isDoublePlay && !secondOut ? \"partial\" : \"complete\") : error ? \"misplay\" : choice.infieldRoute === \"controlledNoThrow\" ? \"controlled\" : \"late\",\n    runnerSettlement, runnerSettlementIdentity: situation.runnerSettlementIdentity, outsCreated: runnerSettlement.outsCreated,\n    runnerChanges: runnerSettlement.runnerChanges, runnersAfter: runnerSettlement.runnersAfter,\n    scoringRunnerIds: runnerSettlement.scoringRunnerIds, runsAllowed: runnerSettlement.runsAllowed, error,\n    primaryCause, secondaryCause: \"\", responsibleActor: primaryCause.startsWith(\"teammate\") ? \"teammate\" : primaryCause === \"timingWindow\" ? \"timingWindow\" : \"player\",\n    playerResponsibility: error ? \"major\" : \"handled\", teammateResponsibility: primaryCause.startsWith(\"teammate\") ? \"major\" : isDoublePlay ? \"shared\" : \"none\",\n    causeExplanation: primaryCause === \"teammatePivot\" ? \"傳球的接球端未完成接球或轉傳；二壘手與游擊手的責任分開記錄。\"\n      : primaryCause === \"teammateFirstBaseReceive\" ? \"傳球已進入一壘接球位置，但一壘手未完成接球；傳球與接球責任分開記錄。\" : getSecondBaseCauseExplanation(primaryCause, \"\"),\n    playerLeg: { reach: handoff.defensiveAccess.reachResolution.reached ? \"completed\" : \"late\",\n      control: secureResolution.secured ? \"completed\" : \"failed\", transfer: thrown?.releaseQuality === \"delayedRelease\" ? \"delayed\" : controlled ? \"completed\" : \"notReached\",\n      firstThrow: thrown?.throwAttempted ? thrown.throwQuality === \"offline\" ? \"failed\" : \"completed\" : \"notAttempted\" },\n    teammateLeg: { receiver: receiverReady ? \"completed\" : \"notReached\", ...(isDoublePlay ? {\n      secondBaseReceive: relay.receive ? \"completed\" : \"notCompleted\", secondBasePivot: relay.turn ? \"completed\" : \"notCompleted\",\n      secondBaseSecondThrow: relay.turn ? \"completed\" : \"notCompleted\", firstBaseReceive: relay.firstBaseReceive ? \"completed\" : \"notCompleted\" } : {}) },\n    firstLegState: { status: firstOut ? \"completed\" : \"failed\", targetBase: selection?.route.targetBase || null },\n    continuationState: { status: secondOut ? \"completed\" : firstOut && isDoublePlay ? \"windowClosed\" : \"settledByActorOutcomes\", targetBase: isDoublePlay ? \"first\" : null, window: continuationWindow },\n    timingResolution: { firstLeg: runnerThrowTiming, firstLegSettlement, relayToFirstWindow: continuationWindow },\n    ballContext: situation.ballContext.type, ballDirection: situation.ballDirection, ballDepth: situation.ballDepth,\n    batterSpeed: situation.batterSpeed, runnerSpeed: Math.max(...situation.runnerSpeeds.filter(Number.isFinite), 0),\n    ...situation.playerCapabilities, firstStage: secureResolution.margin ?? handoff.defensiveAccess.reachResolution.margin,\n    secondStage: thrown?.accuracyMargin ?? 0, returnTiming: 0, windows: situation.windows\n  });\n  return { sample, choice: { routeId: choice.routeId, matchDecision: choice.matchDecision }, secureResolution,\n    decisionThrowState,\n    runnerThrowTiming, resolution: attachHighSchoolInfieldActionFacts(match, situation, choice, resolution, sample) };\n}\n",
+        "callers": 2,
+        "callees": 8
+      }
+    },
+    {
+      "key": "capability",
+      "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.getDefensiveSimulationCapability",
+      "trace": {
+        "function": "E-meng-baseball_life_sim_semirefactor.script.getDefensiveSimulationCapability",
+        "direction": "both",
+        "callees_total": 1,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getDevelopmentMatchPositionTestCapabilityAudit",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 20,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getHighSchoolReachAccess",
+                  1
+                ],
+                [
+                  "getHighSchoolPhysicalDefensePlayerContext",
+                  1
+                ],
+                [
+                  "createHighSchoolFirstBaseContext",
+                  1
+                ],
+                [
+                  "getHighSchoolFlyBallDefenderCatchContext",
+                  1
+                ],
+                [
+                  "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+                  1
+                ],
+                [
+                  "getHighSchoolLineDriveCatchDefenderContext",
+                  1
+                ],
+                [
+                  "getHighSchoolTagUpReceivingTarget",
+                  1
+                ],
+                [
+                  "createHighSchoolRunnerTagUpSituation",
+                  1
+                ],
+                [
+                  "createHighSchoolRosterPlayerActor",
+                  1
+                ],
+                [
+                  "getPlayerCapabilitySnapshotForMatch",
+                  1
+                ],
+                [
+                  "resolveSimulatedHighSchoolPlateAppearance",
+                  1
+                ],
+                [
+                  "adapt",
+                  1
+                ],
+                [
+                  "buildInfieldMeaningfulMoment",
+                  1
+                ],
+                [
+                  "resolveHighSchoolInfieldReceiver",
+                  1
+                ],
+                [
+                  "getHighSchoolDefensiveDecisionContextModifier",
+                  1
+                ],
+                [
+                  "resolveHighSchoolCatcherDecision",
+                  1
+                ],
+                [
+                  "resolveLegacyHighSchoolDefensivePlay",
+                  1
+                ],
+                [
+                  "add",
+                  1
+                ],
+                [
+                  "buildHighSchoolThirdBaseExecution",
+                  1
+                ],
+                [
+                  "buildHighSchoolShortstopExecution",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "snippet": {
+        "name": "getDefensiveSimulationCapability",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.getDefensiveSimulationCapability",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 6466,
+        "end_line": 6495,
+        "source_mode": "full",
+        "source": "function getDefensiveSimulationCapability(subject = player, position = player.primaryPosition, matchContext = subject?.highSchoolMatch) {\n  if ([\"simulation-roster\", \"team-roster-foundation\"].includes(subject?.source)) {\n    return Object.freeze({ fielding: subject.defense, reaction: subject.defense, range: subject.defense, arm: subject.arm, throwing: subject.arm, decision: Math.round((subject.defense + subject.contact) / 2) });\n  }\n  const rawSkills = subject.baseballSkills || {};\n  const activeMatch = matchContext || (subject === player ? player.highSchoolMatch : null);\n  const audit = getDevelopmentMatchPositionTestCapabilityAudit(subject, activeMatch);\n  const skills = audit.active && !activeMatch?.completed\n    ? Object.fromEntries(Object.keys(rawSkills).map(skill => [skill, audit.skills[skill]?.effective ?? rawSkills[skill]]))\n    : rawSkills;\n  const effectivePosition = audit.active ? audit.position : position;\n  const positionTools = {\n    \"內野手\": [\"catching\", \"reaction\", \"throwing\"],\n    \"外野手\": [\"catching\", \"range\", \"armStrength\"],\n    \"捕手\": [\"blocking\", \"gameCalling\", \"throwing\"],\n    \"投手\": [\"control\", \"reaction\", \"throwing\"]\n  }[position] || [\"catching\", \"reaction\", \"throwing\"];\n  const values = positionTools.map(key => Number(skills[key]) || 0);\n  const reactionSkill = Number(skills.reaction) || values[1] || 0;\n  const throwingSkill = values[2] || 0;\n  const armSkill = [\"游擊手\", \"三壘手\"].includes(effectivePosition) ? Number(skills.armStrength) || throwingSkill : throwingSkill;\n  return Object.freeze({\n    fielding: Math.round((values[0] * 2 + values[1] + (Number(subject.ballSense) || 0)) / 4),\n    reaction: Math.round((reactionSkill * 2 + (Number(subject.ballSense) || 0)) / 3),\n    range: Math.round(((Number(skills.range) || reactionSkill) * 2 + (Number(subject.fitness) || 0)) / 3),\n    arm: Math.round((armSkill * 2 + (Number(subject.fitness) || 0)) / 3),\n    throwing: Math.round((throwingSkill * 2 + (Number(subject.observe) || 0)) / 3),\n    decision: Math.round(((Number(skills.baseballIQ) || 0) + (Number(subject.observe) || 0) + (Number(subject.discipline) || 0)) / 3)\n  });\n}\n",
+        "callers": 20,
+        "callees": 1
+      }
+    },
+    {
+      "key": "timing",
+      "qualifiedName": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation.resolveTiming",
+      "trace": {
+        "function": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation.resolveTiming",
+        "direction": "both",
+        "callees_total": 6,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation",
+              "rows": [
+                [
+                  "clone",
+                  1
+                ],
+                [
+                  "same",
+                  1
+                ],
+                [
+                  "freeze",
+                  1
+                ],
+                [
+                  "fail",
+                  1
+                ],
+                [
+                  "classify",
+                  1
+                ],
+                [
+                  "deriveRunnerArrival",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 2,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation",
+              "rows": [
+                [
+                  "deriveSettlement",
+                  1
+                ]
+              ]
+            },
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.infield-baseball-logic-audit-runner",
+              "rows": [
+                [
+                  "main",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "snippet": {
+        "name": "resolveTiming",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation.resolveTiming",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/defensive-runner-throw-settlement-foundation.js",
+        "start_line": 23,
+        "end_line": 60,
+        "source_mode": "full",
+        "source": "  function resolveTiming(args){\n    const {input,opportunity,selection,throwResolution:thrown,runnerState,receiverState}=args;\n    Decision.validateSelection(selection,opportunity,input);\n    if(!thrown||thrown.identity!==`${selection.identity}|throw-v1`||thrown.decisionIdentity!==selection.identity\n      ||thrown.throwerId!==selection.defenderId||thrown.throwerPosition!==selection.position\n      ||[\"routeId\",\"targetRunnerId\",\"targetBase\",\"receiverId\",\"receiverPosition\"].some(key=>thrown[key]!==selection.route[key]))fail(\"stale throw / receiver / target\");\n    const base={version:VERSION,identity:`${thrown.identity}|timing-v1`,decisionIdentity:selection.identity,throwIdentity:thrown.identity,\n      targetRunnerId:thrown.targetRunnerId,targetBase:thrown.targetBase,receiverId:thrown.receiverId,\n      authority:\"resolvedThrow+existingRunnerPhysicalState+receiverReadiness\",variationEvidence:{consumed:false}};\n    if(selection.route.action===\"holdBall\"){\n      if(thrown.throwAttempted!==false)fail(\"hold includes throw\");\n      return freeze({...base,contestAvailable:false,timingClassification:\"noContest\",timingMargin:null,\n        runnerArrival:null,ballArrival:null,receiverCompletion:null,reason:\"heldBall\"});\n    }\n    const current=(input.runnerPhysicalStates||[]).find(r=>r.runnerId===thrown.targetRunnerId);\n    if(!current||!same(current,runnerState)||current.targetBase!==thrown.targetBase\n      ||(current.originBase===\"batter\"?input.batterRunnerId!==current.runnerId:input.runners[Number(current.originBase)-1]!==current.runnerId))fail(\"stale runner physical state\");\n    const forced=Force.getForcedMovement(opportunity.context.forceChain,current.runnerId);\n    if(!forced&&!Decision.isAdvancingTo(current,thrown.targetBase))fail(\"runner not in contest\");\n    if(!receiverState||receiverState.receiverId!==thrown.receiverId||!same(receiverState,input.receiverState))fail(\"stale receiver completion\");\n    const runnerArrival=deriveRunnerArrival(current);\n    const noContest=!thrown.throwAttempted||thrown.throwQuality===\"offline\"||receiverState.ready!==true;\n    const receiveDelay=Number(receiverState.receiveDelay??0),tagDelay=Number(receiverState.tagDelay??1);\n    if(!Number.isFinite(receiveDelay)||receiveDelay<0||!Number.isFinite(tagDelay)||tagDelay<0)fail(\"invalid receiver delay\");\n    if(noContest)return freeze({...base,contestAvailable:false,timingClassification:\"noContest\",timingMargin:null,\n      runnerArrival,ballArrival:{quality:thrown.throwQuality},receiverCompletion:{...clone(receiverState),status:\"unavailableReceive\"},reason:\"unusableThrowOrReceiver\"});\n    const qualityDelay={onTarget:0,challengingReceive:1,lateWeakThrow:3}[thrown.throwQuality];\n    if(qualityDelay===undefined)fail(\"generic timing cannot reinterpret legacy composite throw\");\n    const distanceDelay={short:0,medium:1,long:2}[thrown.throwDemand?.distanceClass];\n    if(distanceDelay===undefined)fail(\"missing throw distance\");\n    const ballTime=4+distanceDelay+qualityDelay+(thrown.releaseQuality===\"delayedRelease\"?1:0);\n    const completionTime=ballTime+receiveDelay;\n    const margin=Math.round((runnerArrival.relativeArrival-completionTime)*1000)/1000;\n    return freeze({...base,contestAvailable:true,timingClassification:classify(margin),timingMargin:margin,runnerArrival,\n      ballArrival:{relativeArrival:ballTime,quality:thrown.throwQuality,releaseQuality:thrown.releaseQuality,distanceClass:thrown.throwDemand.distanceClass},\n      receiverCompletion:{...clone(receiverState),status:thrown.throwQuality===\"challengingReceive\"?\"challengedReceive\":\"readyReceive\",\n        relativeCompletion:completionTime,tagCompletion:completionTime+tagDelay},reason:\"physicalArrivalComparison\"});\n  }\n",
+        "callers": 5,
+        "callees": 6
+      }
+    },
+    {
+      "key": "settlement",
+      "qualifiedName": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation.deriveSettlement",
+      "trace": {
+        "function": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation.deriveSettlement",
+        "direction": "both",
+        "callees_total": 5,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation",
+              "rows": [
+                [
+                  "clone",
+                  1
+                ],
+                [
+                  "same",
+                  1
+                ],
+                [
+                  "fail",
+                  1
+                ],
+                [
+                  "resolveTiming",
+                  1
+                ],
+                [
+                  "completeSettlement",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 0,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": []
+        }
+      },
+      "snippet": {
+        "name": "deriveSettlement",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation.deriveSettlement",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/defensive-runner-throw-settlement-foundation.js",
+        "start_line": 94,
+        "end_line": 133,
+        "source_mode": "full",
+        "source": "  function deriveSettlement(args){\n    const {timing,input,opportunity,selection,resolveThirdOut}=args;\n    if(!same(timing,resolveTiming(args)))fail(\"stale timing facts\");\n    const route=selection.route,hold=route.action===\"holdBall\",runner=timing.runnerArrival;\n    const force=Force.getForcedMovement(opportunity.context.forceChain,route.targetRunnerId);\n    const forced=Boolean(force&&force.targetBase===route.targetBase);\n    if(!hold&&((route.forceType===\"force\"||route.forceType===\"batterRunner\")!==forced))fail(\"stale force semantics\");\n    const playType=hold?\"hold\":route.forceType===\"batterRunner\"?\"batterRunner\":forced?\"force\":\"tag\";\n    const receiver=timing.receiverCompletion;\n    const ahead=timing.contestAvailable&&timing.timingMargin>0; // Ties do not establish defense before arrival.\n    const out=Boolean(ahead&&(playType===\"tag\"?receiver.tagAvailable===true&&receiver.tagCompletion<runner.relativeArrival:receiver.atBase===true));\n    const runnersAfter=input.runners.slice(),movements=[],outIds=out?[route.targetRunnerId]:[],inTransit=[];\n    const attempts=clone(args.scoringAttempts||[]);\n    const known=new Set([...input.runners.filter(Boolean),input.batterRunnerId].filter(Boolean));\n    if(new Set(attempts.map(a=>a.runnerId)).size!==attempts.length||attempts.some(a=>!known.has(a.runnerId)||a.runnerId===route.targetRunnerId))fail(\"invalid other scoring attempt\");\n    const contest=timing.contestAvailable&&!hold;\n    if(contest){\n      const origin=runnersAfter.indexOf(route.targetRunnerId);if(origin>=0)runnersAfter[origin]=null;\n      if(!out&&route.targetBase===\"home\")attempts.push({runnerId:route.targetRunnerId,timing:\"beforeThirdOut\"});\n      else if(!out){\n        const index=[\"first\",\"second\",\"third\"].indexOf(route.targetBase),occupant=runnersAfter[index];\n        if(index<0)fail(\"invalid destination\");\n        if(occupant){\n          const moving=Force.getForcedMovement(opportunity.context.forceChain,occupant);\n          if(!moving)fail(\"destination occupied by a non-forced runner\");\n          inTransit.push(clone(moving));\n        }\n        runnersAfter[index]=route.targetRunnerId;\n      }\n      movements.push({runnerId:route.targetRunnerId,from:runner.originBase,to:out?\"out\":route.targetBase});\n    }\n    for(const attempt of attempts){const index=runnersAfter.indexOf(attempt.runnerId);if(index>=0)runnersAfter[index]=null;}\n    const dp=route.action===\"initiateDoublePlay\";\n    const continuation={status:hold?\"heldBallAwaitRunnerContinuation\":!contest?\"liveBallRecoveryRequired\":dp&&out?\"secondLegPending\":dp?\"reassessAfterSafeFirstLeg\":\"liveBallContinuation\",\n      targetBase:dp&&out?\"first\":null,inTransitRunners:inTransit,\n      pendingRunners:(input.runnerPhysicalStates||[]).filter(r=>r.runnerId!==route.targetRunnerId||!contest).map(clone)};\n    return completeSettlement({identity:`${timing.identity}|settlement-v1`,timing,routeId:route.routeId,targetRunnerId:route.targetRunnerId,targetBase:route.targetBase,\n      playType,runnerResult:hold?\"held\":!contest?\"unresolved\":out?\"out\":\"safe\",before:{outs:input.outs,runners:input.runners,scores:input.scores||null},\n      runnersAfter,outIds,scoringAttempts:attempts,runnerMovement:movements,forceBefore:opportunity.context.forceChain,continuation,resolveThirdOut});\n  }\n",
+        "callers": 3,
+        "callees": 5
+      }
+    },
+    {
+      "key": "2bReceiver",
+      "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.resolveHighSchoolInfieldReceiver",
+      "trace": {
+        "function": "E-meng-baseball_life_sim_semirefactor.script.resolveHighSchoolInfieldReceiver",
+        "direction": "both",
+        "callees_total": 1,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getDefensiveSimulationCapability",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 1,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "resolveSecondBaseInitiatedRoute",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "snippet": {
+        "name": "resolveHighSchoolInfieldReceiver",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.resolveHighSchoolInfieldReceiver",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 8111,
+        "end_line": 8127,
+        "source_mode": "full",
+        "source": "function resolveHighSchoolInfieldReceiver(situation, choice, sample, deliveryCompleted, match) {\n  const position = choice.targetBase === \"third\" ? \"3B\" : choice.targetBase === \"home\" ? \"C\"\n    : choice.targetBase === \"second\" || choice.targetBase === \"secondThenFirst\" ? \"SS\" : \"1B\";\n  const legacy = position === \"1B\" ? situation.teammates?.firstBaseReceiver : position === \"3B\" ? situation.teammates?.thirdBaseReceiver\n    : position === \"C\" ? situation.teammates?.catcher : situation.teammates?.shortstop;\n  const actor = match?.rosters?.[match.defenseTeam] && typeof TeamRosterFoundation !== \"undefined\"\n    ? TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam], position) : null;\n  const capabilities = actor ? getDefensiveSimulationCapability(actor, actor.position, match) : legacy?.capabilities || {};\n  const fielding = Number(capabilities.fielding ?? 5), swing = (sample - .5) * 4;\n  const available = Boolean((actor ? actor.id !== \"player\" : legacy) && legacy?.receivingAvailable !== false);\n  const ready = available && fielding + swing >= 2.8;\n  return Object.freeze({ receiverId: actor?.id || legacy?.id || null, receiverPosition: position, available, ready,\n    secured: Boolean(deliveryCompleted && ready), status: !deliveryCompleted ? \"notAttempted\" : !available ? \"unavailable\" : ready ? \"completed\" : \"failed\",\n    responsibleActor: deliveryCompleted && !ready ? \"teammate\" : \"player\",\n    provenance: Object.freeze({ authority: actor ? \"activeRosterReceiver+existingExecutionSample\" : \"declaredLegacyReceiver+existingExecutionSample\",\n      fielding, sample, swing, threshold: 2.8, consumedRng: false }) });\n}\n",
+        "callers": 1,
+        "callees": 1
+      }
+    },
+    {
+      "key": "sampler",
+      "qualifiedName": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation.sampleVector",
+      "trace": {
+        "function": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation.sampleVector",
+        "direction": "both",
+        "callees_total": 6,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation",
+              "rows": [
+                [
+                  "freeze",
+                  1
+                ],
+                [
+                  "reject",
+                  1
+                ],
+                [
+                  "encode",
+                  1
+                ],
+                [
+                  "sha256",
+                  1
+                ],
+                [
+                  "physicalValid",
+                  1
+                ],
+                [
+                  "dataOnly",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 3,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-admission-timing-foundation",
+              "rows": [
+                [
+                  "validateRequest",
+                  1
+                ]
+              ]
+            },
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation",
+              "rows": [
+                [
+                  "seal",
+                  1
+                ],
+                [
+                  "checkSeal",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "snippet": {
+        "name": "sampleVector",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation.sampleVector",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/receiver-execution-v2-foundation.js",
+        "start_line": 111,
+        "end_line": 123,
+        "source_mode": "full",
+        "source": "  function sampleVector(physical, slot, samplerVersion = V.sampler) {\n    try { dataOnly(physical); encode(physical); } catch (error) { return reject(\"invalidPhysicalIdentity\"); }\n    if (!physicalValid(physical)) return reject(\"invalidPhysicalIdentity\");\n    if (![\"primaryThrow\",\"relayThrow\"].includes(slot)) return reject(\"unsupportedPhysicalSlot\");\n    if (samplerVersion !== V.sampler) return reject(\"unsupportedSampler\");\n    const stages = {};\n    for (const stage of STAGES) {\n      const key = { executionVersion: V.execution, physical, physicalSlot: slot, samplerVersion, stage };\n      const canonical = encode(key), hash = sha256(canonical), u32 = parseInt(hash.slice(0,8),16);\n      stages[stage] = { canonical, sha256: hash, u32, unit: (u32 + 0.5) / 4294967296 };\n    }\n    return freeze({ status: \"ok\", samplerVersion, stages });\n  }\n",
+        "callers": 6,
+        "callees": 6
+      }
+    },
+    {
+      "key": "pureValidate",
+      "qualifiedName": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation.validate",
+      "trace": {
+        "function": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation.validate",
+        "direction": "both",
+        "callees_total": 13,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation",
+              "rows": [
+                [
+                  "object",
+                  1
+                ],
+                [
+                  "id",
+                  1
+                ],
+                [
+                  "integer",
+                  1
+                ],
+                [
+                  "freeze",
+                  1
+                ],
+                [
+                  "reject",
+                  1
+                ],
+                [
+                  "exact",
+                  1
+                ],
+                [
+                  "encode",
+                  1
+                ],
+                [
+                  "binary64",
+                  1
+                ],
+                [
+                  "physicalValid",
+                  1
+                ],
+                [
+                  "source",
+                  1
+                ],
+                [
+                  "time",
+                  1
+                ],
+                [
+                  "known",
+                  1
+                ],
+                [
+                  "dataOnly",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 2,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation",
+              "rows": [
+                [
+                  "seal",
+                  1
+                ],
+                [
+                  "checkSeal",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "snippet": {
+        "name": "validate",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation.validate",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/receiver-execution-v2-foundation.js",
+        "start_line": 144,
+        "end_line": 213,
+        "source_mode": "full",
+        "source": "  function validate(input) {\n    try {\n      if (!object(input)) return reject(\"invalidInput\");\n      // Perform the canonical JSON check before any property-based schema reads.\n      dataOnly(input);\n      const copy = { ...input, ownedSample: input.ownedSample === undefined ? null : binary64(input.ownedSample) };\n      encode(copy);\n      if (!exact(input,[\"contractVersion\",\"versions\",\"identity\",\"context\",\"handoff\",\"capabilities\",\"ownedSample\",\"delivery\",\"positioning\",\"secure\",\"contest\",\"provenance\",\"effortReference\",\"continuation\"])) return reject(\"invalidInputSchema\");\n      if (input.contractVersion !== V.contract || !exact(input.versions,[\"execution\",\"adapter\",\"timing\",\"sampler\",\"effort\"]) ||\n        Object.keys(input.versions).some(k => input.versions[k] !== V[k])) return reject(\"unsupportedVersion\");\n      const i=input.identity, c=input.context, caps=input.capabilities;\n      if (!exact(i,[\"playId\",\"physical\",\"leg\",\"thrower\",\"receiver\",\"target\"]) || !id(i.playId) || !physicalValid(i.physical)) return reject(\"invalidPhysicalIdentity\");\n      if (!exact(i.leg,[\"actionId\",\"sourceThrowActionId\",\"physicalSlot\",\"parentActionId\"]) || !id(i.leg.actionId) || !id(i.leg.sourceThrowActionId) ||\n        ![\"primaryThrow\",\"relayThrow\"].includes(i.leg.physicalSlot) || (i.leg.physicalSlot === \"primaryThrow\" ? i.leg.parentActionId !== null : !id(i.leg.parentActionId))) return reject(\"invalidLegIdentity\");\n      if (![i.thrower,i.receiver].every(a => exact(a,[\"actorId\",\"position\"]) && id(a.actorId) && POSITIONS.includes(a.position)) || i.thrower.actorId === i.receiver.actorId) return reject(\"invalidActor\");\n      if (!exact(i.target,[\"runnerId\",\"base\"]) || !id(i.target.runnerId) || !BASES.includes(i.target.base) || [i.thrower.actorId,i.receiver.actorId].includes(i.target.runnerId)) return reject(\"invalidRunner\");\n      if (!exact(c,[\"initialOuts\",\"originId\",\"routeId\",\"competitionLevel\",\"environmentId\",\"receiverAvailable\"]) || !integer(c.initialOuts,0,2) ||\n        ![c.originId,c.routeId,c.competitionLevel,c.environmentId].every(id) || typeof c.receiverAvailable !== \"boolean\") return reject(\"invalidContext\");\n      if (!exact(input.handoff,[\"playId\",\"physicalIdentity\",\"throwerId\",\"receiverId\",\"runnerId\",\"base\"]) ||\n        encode(input.handoff) !== encode({playId:i.playId,physicalIdentity:i.physical.physicalIdentity,throwerId:i.thrower.actorId,receiverId:i.receiver.actorId,runnerId:i.target.runnerId,base:i.target.base})) return reject(\"handoffIdentityMismatch\");\n      if (!exact(caps,[\"actorId\",\"adapterVersion\",\"values\"]) || caps.actorId !== i.receiver.actorId || caps.adapterVersion !== V.adapter ||\n        !exact(caps.values,ABILITIES) || ABILITIES.some(k => !integer(caps.values[k],0,20))) return reject(\"invalidAbilitySnapshot\");\n      const d=input.delivery, p=input.positioning, s=input.secure, b=input.contest;\n      if (!exact(d,[\"actionId\",\"upstreamActionId\",\"upstreamStatus\",\"status\",\"accuracy\",\"quality\",\"launch\",\"ballArrival\"]) ||\n        d.actionId !== i.leg.sourceThrowActionId || !id(d.upstreamActionId) || ![\"completed\",\"failed\",\"notAttempted\"].includes(d.upstreamStatus) ||\n        ![\"completed\",\"notAttempted\"].includes(d.status) || ![\"onTarget\",\"challenging\",\"offline\",\"none\"].includes(d.accuracy) ||\n        ![\"clean\",\"challenging\",\"none\"].includes(d.quality) || !time(d.launch,c.originId) || !time(d.ballArrival,c.originId)) return reject(\"invalidDelivery\");\n      if (d.status === \"completed\" && (d.upstreamStatus !== \"completed\" || d.accuracy === \"none\" || d.quality === \"none\") ||\n        d.status === \"notAttempted\" && (d.accuracy !== \"none\" || d.quality !== \"none\" || known(d.ballArrival)) ||\n        d.accuracy === \"onTarget\" && d.quality !== \"clean\" || d.accuracy === \"challenging\" && d.quality !== \"challenging\") return reject(\"deliveryDependencyMismatch\");\n      if (known(d.launch) && known(d.ballArrival) && d.ballArrival.ticks < d.launch.ticks) return reject(\"arrivalBeforeLaunch\");\n      if (i.leg.physicalSlot === \"primaryThrow\" && known(d.launch) && d.launch.ticks !== 0) return reject(\"firstLaunchMustBeZero\");\n      if (!exact(p,[\"actionId\",\"startContext\",\"movementMdu\",\"startTime\"]) || !id(p.actionId) || ![\"atBase\",\"covering\",\"lateCover\",\"distant\"].includes(p.startContext) ||\n        !integer(p.movementMdu,0,8) || !time(p.startTime,c.originId) || p.startContext === \"atBase\" && p.movementMdu !== 0) return reject(\"invalidPositioning\");\n      if (!exact(s,[\"actionId\",\"demandMilli\",\"cleanDelayTicks\",\"bobbleDelayTicks\"]) || s.actionId !== i.leg.actionId || !integer(s.demandMilli,0,30000) ||\n        !integer(s.cleanDelayTicks,0,1000000) || !integer(s.bobbleDelayTicks,0,1000000)) return reject(\"invalidSecure\");\n      if (!exact(b,[\"actionId\",\"type\",\"attempted\",\"contact\",\"legality\",\"delayTicks\",\"runnerArrival\"]) || !id(b.actionId) ||\n        ![\"force\",\"batterBeforeFirst\",\"tag\"].includes(b.type) || typeof b.attempted !== \"boolean\" || typeof b.contact !== \"boolean\" ||\n        !integer(b.delayTicks,0,1000000) || !time(b.runnerArrival,c.originId,true) ||\n        !exact(b.legality,[\"status\",\"runnerId\",\"base\",\"sourceActionId\"]) || ![\"eligible\",\"ineligible\",\"unknown\"].includes(b.legality.status) ||\n        b.legality.runnerId !== i.target.runnerId || b.legality.base !== i.target.base || !id(b.legality.sourceActionId) ||\n        b.type === \"batterBeforeFirst\" && i.target.base !== \"first\") return reject(\"invalidContest\");\n      const actionIds=[d.actionId,p.actionId,s.actionId,b.actionId];\n      if (new Set(actionIds).size !== actionIds.length || actionIds.includes(d.upstreamActionId)) return reject(\"duplicateActionIdentity\");\n      if (!exact(input.provenance,SOURCES) || SOURCES.some(k => !source(input.provenance[k]))) return reject(\"missingOrInvalidProvenance\");\n      const missing=SOURCES.filter(k => input.provenance[k].classification === \"C\");\n      if (missing.length) return reject(\"insufficientExecutionSources\",missing,\"insufficient\");\n      if (input.effortReference !== null) {\n        const e=input.effortReference;\n        if (!exact(e,[\"version\",\"status\",\"position\",\"competitionLevel\",\"environmentId\",\"referenceId\",\"capabilities\",\"provenance\"]) ||\n          e.version !== V.effort || ![\"uncalibrated\",\"calibrated\"].includes(e.status) || e.position !== i.receiver.position ||\n          e.competitionLevel !== c.competitionLevel || e.environmentId !== c.environmentId || !id(e.referenceId) ||\n          !exact(e.capabilities,ABILITIES) || ABILITIES.some(k=>!integer(e.capabilities[k],0,20)) || !source(e.provenance)) return reject(\"invalidEffortReference\");\n        // Calibration authority is intentionally not implemented in this pure sprint.\n        if (e.status === \"calibrated\") return reject(\"unavailableCalibrationAuthority\",[],\"insufficient\");\n      }\n      if (i.leg.physicalSlot === \"primaryThrow\" && input.continuation !== null) return reject(\"unexpectedContinuation\");\n      if (i.leg.physicalSlot === \"relayThrow\") {\n        const q=input.continuation;\n        if (!exact(q,[\"firstRetirement\",\"pivot\",\"provenance\"]) || !source(q.provenance)) return reject(\"missingContinuation\",[],\"insufficient\");\n        if (q.provenance.classification === \"C\") return reject(\"insufficientContinuation\",[],\"insufficient\");\n        if (!exact(q.firstRetirement,[\"status\",\"actionId\",\"runnerId\",\"base\",\"outsBefore\",\"outsAfter\"]) ||\n          ![\"completed\",\"failed\"].includes(q.firstRetirement.status) || ![q.firstRetirement.actionId,q.firstRetirement.runnerId].every(id) ||\n          !BASES.includes(q.firstRetirement.base) || !integer(q.firstRetirement.outsBefore,0,2) || !integer(q.firstRetirement.outsAfter,0,3) ||\n          !exact(q.pivot,[\"status\",\"actorId\",\"actionId\"]) || ![\"completed\",\"failed\",\"notAttempted\"].includes(q.pivot.status) ||\n          q.pivot.actorId !== i.thrower.actorId || !id(q.pivot.actionId)) return reject(\"invalidContinuation\");\n      }\n      return freeze({status:\"ok\"});\n    } catch (error) { return reject(\"noncanonicalInput\",[String(error.message)]); }\n  }\n",
+        "callers": 2,
+        "callees": 13
+      }
+    },
+    {
+      "key": "roster",
+      "qualifiedName": "E-meng-baseball_life_sim_semirefactor.team-roster-foundation.getCurrentDefender",
+      "trace": {
+        "function": "E-meng-baseball_life_sim_semirefactor.team-roster-foundation.getCurrentDefender",
+        "direction": "both",
+        "callees_total": 2,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.team-roster-foundation",
+              "rows": [
+                [
+                  "normalizePosition",
+                  1
+                ],
+                [
+                  "validateActiveDefense",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 0,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": []
+        }
+      },
+      "snippet": {
+        "name": "getCurrentDefender",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.team-roster-foundation.getCurrentDefender",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/team-roster-foundation.js",
+        "start_line": 346,
+        "end_line": 350,
+        "source_mode": "full",
+        "source": "  function getCurrentDefender(roster, position) {\n    if (!validateActiveDefense(roster).ok) return null;\n    const code = normalizePosition(position);\n    return roster.lineup.find(actor => normalizePosition(actor.defensivePosition || actor.position) === code) || null;\n  }\n",
+        "callers": 1,
+        "callees": 2
+      }
+    }
+  ],
+  "coverage": {
+    "project": "E-meng-baseball_life_sim_semirefactor",
+    "signal": "best_effort",
+    "indexed_at": "2026-10-13T04:56:09Z",
+    "metadata": {
+      "generation": "2026-10-13T04:56:09Z",
+      "index_mode": "full",
+      "recorded_at": "2026-10-13T04:56:11Z",
+      "recording_status": "complete",
+      "ignored_files_stored": 0,
+      "ignored_files_total": 0,
+      "hash_records_complete": true,
+      "coverage_version": 3,
+      "generation_matches": true
+    },
+    "paths": [
+      {
+        "requested_path": "script.js",
+        "path": "script.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "team-roster-foundation.js",
+        "path": "team-roster-foundation.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "defensive-runner-throw-settlement-foundation.js",
+        "path": "defensive-runner-throw-settlement-foundation.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "receiver-execution-v2-foundation.js",
+        "path": "receiver-execution-v2-foundation.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "receiver-execution-v2-admission-timing-foundation.js",
+        "path": "receiver-execution-v2-admission-timing-foundation.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "docs/receiver-execution-v2-sprint-10a-source-ownership-matrix.json",
+        "path": "docs/receiver-execution-v2-sprint-10a-source-ownership-matrix.json",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "docs/receiver-execution-v2-sprint-10a-capability-adapter-proposal.json",
+        "path": "docs/receiver-execution-v2-sprint-10a-capability-adapter-proposal.json",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "docs/receiver-execution-v2-sprint-10a-lifecycle-save-matrix.json",
+        "path": "docs/receiver-execution-v2-sprint-10a-lifecycle-save-matrix.json",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "docs/receiver-execution-v2-sprint-8-contract-specification.json",
+        "path": "docs/receiver-execution-v2-sprint-8-contract-specification.json",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "docs/receiver-execution-v2-sprint-9-contract-specification.json",
+        "path": "docs/receiver-execution-v2-sprint-9-contract-specification.json",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      }
+    ],
+    "path_total": 10,
+    "path_returned": 10,
+    "path_has_more": false,
+    "scopes": [],
+    "scope_total": 0,
+    "scope_returned": 0,
+    "scope_truncated": false,
+    "has_more": false,
+    "caveat": "Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable."
+  },
+  "caveat": "Best-effort graph metadata is not freshness/completeness proof. All material source snippets are compared against current disk. A protected caller name in graph metadata is not permission to read its source."
+}
