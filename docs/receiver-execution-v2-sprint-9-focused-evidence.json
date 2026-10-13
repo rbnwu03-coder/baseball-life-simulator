@@ -1,0 +1,612 @@
+{
+  "scope": "ISOLATED_ADMISSION_TIMING_SAFETY_NOT_PRODUCTION_SAVE",
+  "total": 151,
+  "passed": 151,
+  "failed": 0,
+  "rows": [
+    {
+      "name": "candidate pin keeps runtime disabled and official execution with legacy",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy pin has no candidate versions and remains existing-owner metadata",
+      "status": "PASS"
+    },
+    {
+      "name": "pin creation does not mutate or freeze caller input",
+      "status": "PASS"
+    },
+    {
+      "name": "all three historical topology tags remain distinct from receiver version",
+      "status": "PASS"
+    },
+    {
+      "name": "explicit hold surface pins before no-delivery diagnostic preparation",
+      "status": "PASS"
+    },
+    {
+      "name": "legal held ball with notAttempted delivery has only an isolated execution binding",
+      "status": "PASS"
+    },
+    {
+      "name": "completed delivery cannot be bound to a held-ball admission",
+      "status": "PASS"
+    },
+    {
+      "name": "player receiver role is excluded from NPC receiver candidate slice",
+      "status": "PASS"
+    },
+    {
+      "name": "actorId player cannot masquerade as NPC receiver role",
+      "status": "PASS"
+    },
+    {
+      "name": "missing explicit throwerRole has no inferred role fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "missing explicit receiverRole has no inferred role fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "non-primary npc thrower cannot use SS primary-player admission",
+      "status": "PASS"
+    },
+    {
+      "name": "non-primary player thrower cannot use SS primary-player admission",
+      "status": "PASS"
+    },
+    {
+      "name": "candidateV2 cannot be newly pinned after executed",
+      "status": "PASS"
+    },
+    {
+      "name": "candidateV2 cannot be newly pinned after settled",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy cannot be newly pinned after executed",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy cannot be newly pinned after settled",
+      "status": "PASS"
+    },
+    {
+      "name": "missing phaseAtAdmission cannot infer before-execution admission",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown admission phase cannot select an execution model",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects unknown model",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects removed execution discriminator",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects null physical identity",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects synthetic legacy physical version",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects missing contact identity",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects invalid actor position",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects self throw",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects runner is receiving actor",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects retry physical slot",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects unknown topology",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects three outs at admission",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects capability actor mismatch",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects unknown ability adapter",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects fractional actual ability",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects missing provenance",
+      "status": "PASS"
+    },
+    {
+      "name": "admission rejects legacy success boolean",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate excludes previously admitted opportunity",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate excludes 2B primary owner",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate excludes occupied bases",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate excludes wrong force target",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate excludes route outside direct allowlist",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate excludes hold route with direct surface",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate excludes direct route with hold surface",
+      "status": "PASS"
+    },
+    {
+      "name": "missing source C remains insufficient: physicalIdentity",
+      "status": "PASS"
+    },
+    {
+      "name": "missing source C remains insufficient: actors",
+      "status": "PASS"
+    },
+    {
+      "name": "missing source C remains insufficient: capabilities",
+      "status": "PASS"
+    },
+    {
+      "name": "missing source C remains insufficient: eligibility",
+      "status": "PASS"
+    },
+    {
+      "name": "pureFixture sources permit isolated pin only, not official admission",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime-enabled policy rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown policy version rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "new candidate preparation can be disabled",
+      "status": "PASS"
+    },
+    {
+      "name": "policy rollback does not replace admitted pin: pending",
+      "status": "PASS"
+    },
+    {
+      "name": "policy rollback does not replace admitted pin: executed",
+      "status": "PASS"
+    },
+    {
+      "name": "policy rollback does not replace admitted pin: settled",
+      "status": "PASS"
+    },
+    {
+      "name": "retention refuses pinned actor change",
+      "status": "PASS"
+    },
+    {
+      "name": "retention refuses pinned capability change",
+      "status": "PASS"
+    },
+    {
+      "name": "retention refuses pinned physical change",
+      "status": "PASS"
+    },
+    {
+      "name": "retention refuses pinned route change",
+      "status": "PASS"
+    },
+    {
+      "name": "retention refuses pinned model downgrade change",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy pending cannot upgrade model under changed policy",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown pinned execution version refused",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown pinned adapter version refused",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown pinned timing version refused",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown pinned sampler version refused",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown pinned effort version refused",
+      "status": "PASS"
+    },
+    {
+      "name": "removed candidate version tag refused",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown safety version refused",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown legacy timing version refused",
+      "status": "PASS"
+    },
+    {
+      "name": "JSON cold round-trip preserves pin and pending isolated serialization",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate executed Save is explicitly not implemented",
+      "status": "PASS"
+    },
+    {
+      "name": "candidate settled Save is explicitly not implemented",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy executed recovery belongs to existing owner",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy settled recovery belongs to existing owner",
+      "status": "PASS"
+    },
+    {
+      "name": "new snapshot missing required formatVersion cannot fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "new snapshot missing required admission cannot fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "new snapshot missing required admissionCopy cannot fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "new snapshot missing required executionBinding cannot fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "snapshot null pin cannot be historical omission",
+      "status": "PASS"
+    },
+    {
+      "name": "different otherwise-valid admission copies rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "snapshot cannot replace independently expected pin",
+      "status": "PASS"
+    },
+    {
+      "name": "pending snapshot cannot pretend execution binding already present",
+      "status": "PASS"
+    },
+    {
+      "name": "explicit historical evidence routes only to existing legacy owner",
+      "status": "PASS"
+    },
+    {
+      "name": "missing historical evidence does not infer legacy from omission",
+      "status": "PASS"
+    },
+    {
+      "name": "unsupported historical claim remains insufficient",
+      "status": "PASS"
+    },
+    {
+      "name": "historical source C remains insufficient",
+      "status": "PASS"
+    },
+    {
+      "name": "present new tag cannot masquerade as historical: formatVersion",
+      "status": "PASS"
+    },
+    {
+      "name": "present new tag cannot masquerade as historical: admission",
+      "status": "PASS"
+    },
+    {
+      "name": "present new tag cannot masquerade as historical: admissionCopy",
+      "status": "PASS"
+    },
+    {
+      "name": "present new tag cannot masquerade as historical: executionBinding",
+      "status": "PASS"
+    },
+    {
+      "name": "present new tag cannot masquerade as historical: receiverExecutionVersion",
+      "status": "PASS"
+    },
+    {
+      "name": "present new tag cannot masquerade as historical: kind",
+      "status": "PASS"
+    },
+    {
+      "name": "present new tag cannot masquerade as historical: safetyVersion",
+      "status": "PASS"
+    },
+    {
+      "name": "present new tag cannot masquerade as historical: candidateVersions",
+      "status": "PASS"
+    },
+    {
+      "name": "present new tag cannot masquerade as historical: timingVersion",
+      "status": "PASS"
+    },
+    {
+      "name": "present new tag cannot masquerade as historical: samplerVersion",
+      "status": "PASS"
+    },
+    {
+      "name": "present new tag cannot masquerade as historical: adapterVersion",
+      "status": "PASS"
+    },
+    {
+      "name": "present new tag cannot masquerade as historical: effortProfileVersion",
+      "status": "PASS"
+    },
+    {
+      "name": "present new tag cannot masquerade as historical: runtimeEnabled",
+      "status": "PASS"
+    },
+    {
+      "name": "all exported new envelope kinds prohibit historical fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "diagnostic preparation seals supplied input without producing execution",
+      "status": "PASS"
+    },
+    {
+      "name": "diagnostic preparation never calls full pure execute",
+      "status": "PASS"
+    },
+    {
+      "name": "saved execution binding validates unchanged and after JSON cold round-trip",
+      "status": "PASS"
+    },
+    {
+      "name": "saved binding rejects changed inputDigest",
+      "status": "PASS"
+    },
+    {
+      "name": "saved binding rejects changed originalSampleBinary64",
+      "status": "PASS"
+    },
+    {
+      "name": "saved binding rejects changed sampleVectorDigest",
+      "status": "PASS"
+    },
+    {
+      "name": "saved binding rejects changed pinDigest",
+      "status": "PASS"
+    },
+    {
+      "name": "removed saved original sample cannot become pending omission",
+      "status": "PASS"
+    },
+    {
+      "name": "valid resealing of changed original sample cannot replace saved execution binding",
+      "status": "PASS"
+    },
+    {
+      "name": "saved binding getters do not execute during recovery validation",
+      "status": "PASS"
+    },
+    {
+      "name": "diagnostic lacks positioning source instead of legacy fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "execution binding refuses admitted capability mismatch",
+      "status": "PASS"
+    },
+    {
+      "name": "execution binding refuses admitted route mismatch",
+      "status": "PASS"
+    },
+    {
+      "name": "execution binding refuses admitted actor mismatch",
+      "status": "PASS"
+    },
+    {
+      "name": "timing consistency accepts only an unapplied diagnostic and zero actual retirements",
+      "status": "PASS"
+    },
+    {
+      "name": "timing candidate initial outs 0 cannot settle score",
+      "status": "PASS"
+    },
+    {
+      "name": "timing candidate initial outs 1 cannot settle score",
+      "status": "PASS"
+    },
+    {
+      "name": "timing candidate initial outs 2 cannot settle score",
+      "status": "PASS"
+    },
+    {
+      "name": "exact tie remains known with no out candidate",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown runner time stays unresolved",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown ball time stays unresolved",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown position time stays unresolved",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown legality time stays unresolved",
+      "status": "PASS"
+    },
+    {
+      "name": "timing validates preserved causal branch: offline",
+      "status": "PASS"
+    },
+    {
+      "name": "timing validates preserved causal branch: unavailable",
+      "status": "PASS"
+    },
+    {
+      "name": "timing validates preserved causal branch: late",
+      "status": "PASS"
+    },
+    {
+      "name": "timing validates preserved causal branch: hands failure",
+      "status": "PASS"
+    },
+    {
+      "name": "timing validates preserved causal branch: already-safe runner",
+      "status": "PASS"
+    },
+    {
+      "name": "timing validates preserved causal branch: missing touch",
+      "status": "PASS"
+    },
+    {
+      "name": "relay timing keeps original absolute origin, no additional actual retirement",
+      "status": "PASS"
+    },
+    {
+      "name": "failed first force suppresses second candidate despite claimed continuation",
+      "status": "PASS"
+    },
+    {
+      "name": "first force third out prevents a fourth retirement candidate",
+      "status": "PASS"
+    },
+    {
+      "name": "relay requires supplied validated prior",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized timing dependency rejects unknown packet version",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized timing dependency rejects removed packet version",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized timing dependency rejects formal packet kind",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized timing dependency rejects changed actor",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized timing dependency rejects changed runner",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized timing dependency rejects changed route",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized timing dependency rejects changed capability",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized timing dependency rejects changed owned sample",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized timing dependency rejects changed derived sample",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized timing dependency rejects changed timing origin",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized timing dependency rejects v1 ordinal arrival",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized timing dependency rejects forged possession",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized timing dependency rejects forged earlier touch",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized timing dependency rejects forged application",
+      "status": "PASS"
+    },
+    {
+      "name": "modified prior output cannot support relay timing",
+      "status": "PASS"
+    },
+    {
+      "name": "JSON serialization and repeated validation preserve all sealed values",
+      "status": "PASS"
+    },
+    {
+      "name": "no Match RNG or Math.random is consumed by safety APIs",
+      "status": "PASS"
+    },
+    {
+      "name": "getters are rejected without invoking source or version accessors",
+      "status": "PASS"
+    },
+    {
+      "name": "cycles, symbols and non-JSON types cannot become version facts",
+      "status": "PASS"
+    },
+    {
+      "name": "every diagnostic output remains unavailable to official admission",
+      "status": "PASS"
+    }
+  ]
+}

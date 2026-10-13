@@ -1,0 +1,23 @@
+{
+  "scope": "BASELINE_MISSING_ISOLATED_SAFETY_CONTRACT_NOT_PRODUCTION_RULE_REGRESSION",
+  "baseline": "00d0d61654a4fbe97413617dadfd70285a816c47",
+  "module": "receiver-execution-v2-admission-timing-foundation.js",
+  "probe": {
+    "exitCode": 128,
+    "stderr": "fatal: path 'receiver-execution-v2-admission-timing-foundation.js' exists on disk, but not in '00d0d61654a4fbe97413617dadfd70285a816c47'"
+  },
+  "missing": [
+    "isolated version pin API",
+    "pure version-copy snapshot contract",
+    "saved sample execution binding",
+    "candidate CRT timing validator",
+    "diagnostic preparation without execution"
+  ],
+  "formalRemaining": [
+    "lifecycle pin persistence",
+    "new format pre-early-return Save recognition",
+    "actual v2 executed and settled recovery",
+    "formal timing owner seam"
+  ],
+  "classification": "MISSING_CONTRACT / NOT_IMPLEMENTED; no old PASS assertion changed"
+}

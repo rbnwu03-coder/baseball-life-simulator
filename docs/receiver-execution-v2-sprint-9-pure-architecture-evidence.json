@@ -1,0 +1,182 @@
+{
+  "scope": "PURE_FOUNDATION_SEARCH_TRACE_SNIPPET_SUPPLEMENT",
+  "rows": [
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation.seal",
+      "direction": "both",
+      "callees_total": 6,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation",
+            "rows": [
+              [
+                "freeze",
+                1
+              ],
+              [
+                "digest",
+                1
+              ],
+              [
+                "sampleVector",
+                1
+              ],
+              [
+                "validate",
+                1
+              ],
+              [
+                "payload",
+                1
+              ],
+              [
+                "canonicalInputClone",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 1,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-admission-timing-foundation",
+            "rows": [
+              [
+                "prepareDiagnosticRaw",
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "seal",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation.seal",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/receiver-execution-v2-foundation.js",
+      "start_line": 219,
+      "end_line": 223,
+      "source_mode": "full",
+      "source": "  function seal(input) {\n    const validation=validate(input); if (validation.status !== \"ok\") return validation;\n    const cloned=canonicalInputClone(input);\n    return freeze({status:\"ok\",runtimeEnabled:false,input:cloned,inputDigest:digest(payload(cloned)),samples:sampleVector(cloned.identity.physical,cloned.identity.leg.physicalSlot)});\n  }\n",
+      "callers": 5,
+      "callees": 6
+    },
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation.execute",
+      "direction": "both",
+      "callees_total": 10,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation",
+            "rows": [
+              [
+                "freeze",
+                1
+              ],
+              [
+                "reject",
+                1
+              ],
+              [
+                "canonicalInputClone",
+                1
+              ],
+              [
+                "checkSeal",
+                1
+              ],
+              [
+                "deliveryRaw",
+                1
+              ],
+              [
+                "positioningRaw",
+                1
+              ],
+              [
+                "secureRaw",
+                1
+              ],
+              [
+                "contestRaw",
+                1
+              ],
+              [
+                "continuationAllowed",
+                1
+              ],
+              [
+                "effortBoundary",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 2,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-admission-timing-foundation",
+            "rows": [
+              [
+                "validateTimingRaw",
+                1
+              ]
+            ]
+          },
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation",
+            "rows": [
+              [
+                "continuationAllowed",
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "execute",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation.execute",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/receiver-execution-v2-foundation.js",
+      "start_line": 308,
+      "end_line": 318,
+      "source_mode": "full",
+      "source": "  function execute(sealed, prior = null) {\n    try {\n      const validation=checkSeal(sealed); if (validation.status!==\"ok\") return validation;\n      const input=canonicalInputClone(sealed.input), continuation=continuationAllowed(input,prior); if(continuation.status!==\"ok\")return continuation;\n      const a=deliveryRaw(input,continuation.allowed), b=positioningRaw(input,sealed.samples,a,continuation.allowed);\n      const c=secureRaw(input,sealed.samples,a,b), d=contestRaw(input,sealed.samples,c);\n      return freeze({status:\"ok\",runtimeEnabled:false,inputDigest:sealed.inputDigest,identity:input.identity,\n        stages:{delivery:a,positioning:b,secure:c,contest:d},scorerFacts:effortBoundary(input),\n        application:{matchStateWrites:0,gameRecordWrites:0,rngCallbacks:0,actualRetirements:0}});\n    } catch(error) { return reject(\"malformedExecution\",[String(error.message)]); }\n  }\n",
+      "callers": 5,
+      "callees": 10
+    }
+  ]
+}

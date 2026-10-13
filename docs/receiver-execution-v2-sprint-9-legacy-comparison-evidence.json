@@ -1,0 +1,1919 @@
+{
+  "suite": "receiver-execution-v2-sprint-9-legacy-comparison",
+  "baseline": "00d0d61654a4fbe97413617dadfd70285a816c47",
+  "runtimeModel": "LEGACY_ONLY",
+  "summary": {
+    "passed": 20,
+    "failed": 0,
+    "total": 20,
+    "publicHandlerPairs": 4,
+    "recoveryPairs": 16
+  },
+  "sourceBoundary": {
+    "existingFixtureBodiesUnchanged": true,
+    "rootBaselineLoader": "git show; maxBuffer30MB",
+    "protectedContentReads": 0,
+    "evidencePaths": [
+      "ai-plate-appearance-outcome.js",
+      "baseball-defense-prototype.js",
+      "baseball-gameplay-integration.js",
+      "baseball-gameplay-prototype-utils.js",
+      "baseball-offense-prototype.js",
+      "baseball-training-resolver.js",
+      "batted-ball-fly-ball-defense.js",
+      "batted-ball-ground-defense.js",
+      "batted-ball-line-drive-defense.js",
+      "batted-ball-outcome-mapping.js",
+      "batted-ball-physical.js",
+      "batted-ball-tag-up-execution.js",
+      "batter-anticipation.js",
+      "career-age22-outcome-resolver.js",
+      "career-development-progression.js",
+      "career-development-runtime-resolver.js",
+      "career-save-admission.js",
+      "career-spine-contract.js",
+      "career-transition-commit.js",
+      "career-transition-progression.js",
+      "career-transition-resolver.js",
+      "career-transition-runtime-resolver.js",
+      "coach-evaluation-boundary.js",
+      "coach-response-flow.js",
+      "coach.js",
+      "competition-presentation.js",
+      "competition-rules.js",
+      "county-selection-opportunity.js",
+      "current-state-boundary.js",
+      "day-completion-flow.js",
+      "decision-flow.js",
+      "defensive-decision-throw-foundation.js",
+      "defensive-opportunity-foundation.js",
+      "defensive-reach-secure-foundation.js",
+      "defensive-runner-throw-settlement-foundation.js",
+      "evaluation-registry-bootstrap.js",
+      "evaluation-registry.js",
+      "force-advancement.js",
+      "high-school-career-evaluation.js",
+      "high-school-career-offers.js",
+      "high-school-competition-evidence.js",
+      "high-school-competition-foundation.js",
+      "high-school-competition-reassessment.js",
+      "high-school-entry-roster-context.js",
+      "high-school-exchange-network.js",
+      "high-school-friendly-invitation-producer.js",
+      "high-school-match-opportunity-generation.js",
+      "high-school-opportunity-probability.js",
+      "high-school-opportunity-selection.js",
+      "high-school-relationship-recency.js",
+      "high-school-relationship-temporal-authority.js",
+      "high-school-schedule-opportunity.js",
+      "high-school-training-camp-producer.js",
+      "high-school-year-transition.js",
+      "index.html",
+      "match-context-foundation.js",
+      "match-development-settlement-presentation.js",
+      "match-experience-development.js",
+      "match-game-record.js",
+      "match-situation-lifecycle.js",
+      "narrative-condition-boundary.js",
+      "narrative-condition-flow.js",
+      "national-selection-pipeline.js",
+      "npc.js",
+      "offensive-bunt-count-rules.js",
+      "offensive-bunt-defensive-handoff.js",
+      "offensive-bunt-execution.js",
+      "offensive-plate-approach.js",
+      "offensive-tactical-action.js",
+      "offensive-tactical-decision.js",
+      "offensive-tactical-opportunity.js",
+      "pitch-observation-foundation.js",
+      "pitch-sequence-state-foundation.js",
+      "pitch-sequencing.js",
+      "pitch-tactical-decision-foundation.js",
+      "pitch-tactical-decision-production-adapter.js",
+      "pitch-tactical-interpretation-foundation.js",
+      "pitcher-catcher-tactical-integration.js",
+      "pitcher-mental-state.js",
+      "pitcher-process-state.js",
+      "plate-decision-foundation.js",
+      "player.js",
+      "playing-time-game-exposure.js",
+      "relationship-boundary.js",
+      "relationship-flow.js",
+      "rival.js",
+      "save.js",
+      "script.js",
+      "story.js",
+      "team-roster-foundation.js",
+      "team-strength-model.js",
+      "tests/first-base-receive-active-ground-production-integration-test.js",
+      "tests/high-school-career-test-context.js",
+      "time-boundary.js"
+    ]
+  },
+  "measurements": [
+    "physical identity / opportunity",
+    "roster",
+    "route / cached owned sample",
+    "original RNG values / callback count / order",
+    "raw action / retirement stages",
+    "outs / bases / scores / cursor",
+    "E / A / H / FC record / PA",
+    "GameRecord / Evaluation / experience",
+    "pending / executed / settled cold reload",
+    "three duplicate submissions / forbidden recovery RNG"
+  ],
+  "limits": [
+    "Declared legal Production fixture inputs, not natural career frequencies.",
+    "No full match cohort or v2 shadow simulation.",
+    "Executed recovery uses the original family resolver sample callback; four public cases measure the public handler callback.",
+    "No v2 formal Save admission or candidate executed / settled lifecycle validation."
+  ],
+  "rows": [
+    {
+      "position": "SS",
+      "name": "public secure",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "0c3191a34078ae8b569bd757ed75a37f86c176dbc8b9cccef6f4e1f5069e69bc",
+      "currentSha256": "0c3191a34078ae8b569bd757ed75a37f86c176dbc8b9cccef6f4e1f5069e69bc",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "9166deaa17f25ee3eb96c56cbe180fa2aa43d99dfbc47608798a5dd7ad42aab0",
+          "currentSha256": "9166deaa17f25ee3eb96c56cbe180fa2aa43d99dfbc47608798a5dd7ad42aab0"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "a4f7ed7bbebb0865ca20b8a04830de8307ddf022290a5c5563f02619b609274e",
+          "currentSha256": "a4f7ed7bbebb0865ca20b8a04830de8307ddf022290a5c5563f02619b609274e"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "a4f7ed7bbebb0865ca20b8a04830de8307ddf022290a5c5563f02619b609274e",
+          "currentSha256": "a4f7ed7bbebb0865ca20b8a04830de8307ddf022290a5c5563f02619b609274e"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "734f5aa88e98733abf03cf2c3d3043c0dd14d01ad9d6f655bd36f230b55291d3",
+          "currentSha256": "734f5aa88e98733abf03cf2c3d3043c0dd14d01ad9d6f655bd36f230b55291d3"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "actualOuts": 1,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        null,
+        "hs-y3-final-regional-opponent-player-08",
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 1,
+        "E": 0,
+        "DP": 0
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [
+        {
+          "decision": "secure",
+          "momentId": "hs_y1_match_moment_2",
+          "value": 0.8
+        }
+      ],
+      "executionSamples": [
+        {
+          "decision": "secure",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "actual public choice callback"
+    },
+    {
+      "position": "SS",
+      "name": "clean",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "ddc41e03f6b0226cada1cb5e81e45691bbb78b72465d6eb1d2bfc7b3408b2405",
+      "currentSha256": "ddc41e03f6b0226cada1cb5e81e45691bbb78b72465d6eb1d2bfc7b3408b2405",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "9166deaa17f25ee3eb96c56cbe180fa2aa43d99dfbc47608798a5dd7ad42aab0",
+          "currentSha256": "9166deaa17f25ee3eb96c56cbe180fa2aa43d99dfbc47608798a5dd7ad42aab0"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "bafed1ad8288ffe7789c50a71bff9eb5b40f4b478fd232ef3c18ced57708e96e",
+          "currentSha256": "bafed1ad8288ffe7789c50a71bff9eb5b40f4b478fd232ef3c18ced57708e96e"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "5b3e73eedebef3cc6c003f0d14b0d34e2a4a6c0667f705b8eabd19f4db9d4ba1",
+          "currentSha256": "5b3e73eedebef3cc6c003f0d14b0d34e2a4a6c0667f705b8eabd19f4db9d4ba1"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "5b3e73eedebef3cc6c003f0d14b0d34e2a4a6c0667f705b8eabd19f4db9d4ba1",
+          "currentSha256": "5b3e73eedebef3cc6c003f0d14b0d34e2a4a6c0667f705b8eabd19f4db9d4ba1"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "e086d666a61eebad6c256af3fc3017a683c5d27b039ae64e6f5c16b3aa9c4a93",
+          "currentSha256": "e086d666a61eebad6c256af3fc3017a683c5d27b039ae64e6f5c16b3aa9c4a93"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "e086d666a61eebad6c256af3fc3017a683c5d27b039ae64e6f5c16b3aa9c4a93",
+          "currentSha256": "e086d666a61eebad6c256af3fc3017a683c5d27b039ae64e6f5c16b3aa9c4a93"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "e086d666a61eebad6c256af3fc3017a683c5d27b039ae64e6f5c16b3aa9c4a93",
+          "currentSha256": "e086d666a61eebad6c256af3fc3017a683c5d27b039ae64e6f5c16b3aa9c4a93"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "actualOuts": 2,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 1,
+        "E": 0,
+        "DP": 1
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    },
+    {
+      "position": "SS",
+      "name": "low hands",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "97ff23f903e9a6a4af1a370cc9d16f0f63218fb78b1a5171e28bc8cf26a5fa0d",
+      "currentSha256": "97ff23f903e9a6a4af1a370cc9d16f0f63218fb78b1a5171e28bc8cf26a5fa0d",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "ec4db37132eeca9e005a128925fcf4f4a7a5fa408ca883b56ca8fd8e3b99ad90",
+          "currentSha256": "ec4db37132eeca9e005a128925fcf4f4a7a5fa408ca883b56ca8fd8e3b99ad90"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "c9b06b3a83a5f7ced343542b6c2d1e0be79de58bade1fc900420942b98d17264",
+          "currentSha256": "c9b06b3a83a5f7ced343542b6c2d1e0be79de58bade1fc900420942b98d17264"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "755c77d02aff19a821025a800d31bc7324970a636bb710916c868965514e615a",
+          "currentSha256": "755c77d02aff19a821025a800d31bc7324970a636bb710916c868965514e615a"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "755c77d02aff19a821025a800d31bc7324970a636bb710916c868965514e615a",
+          "currentSha256": "755c77d02aff19a821025a800d31bc7324970a636bb710916c868965514e615a"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "ccb32eb54498c44137b168ec92d8ded9fc7106875eb096735479518ff9792e49",
+          "currentSha256": "ccb32eb54498c44137b168ec92d8ded9fc7106875eb096735479518ff9792e49"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "ccb32eb54498c44137b168ec92d8ded9fc7106875eb096735479518ff9792e49",
+          "currentSha256": "ccb32eb54498c44137b168ec92d8ded9fc7106875eb096735479518ff9792e49"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "ccb32eb54498c44137b168ec92d8ded9fc7106875eb096735479518ff9792e49",
+          "currentSha256": "ccb32eb54498c44137b168ec92d8ded9fc7106875eb096735479518ff9792e49"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "actualOuts": 0,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        "hs-y3-final-regional-opponent-player-05",
+        "hs-y3-final-regional-opponent-player-08",
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 0,
+        "E": 1,
+        "DP": 0
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 1
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    },
+    {
+      "position": "SS",
+      "name": "low throwing",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "5d426727350d9af40c25bd7634ce83b890b1223e6f2c56a9d73f0e55e9c8a866",
+      "currentSha256": "5d426727350d9af40c25bd7634ce83b890b1223e6f2c56a9d73f0e55e9c8a866",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "cf54a3845a8670c720de5bee614db1ce17cffb1458c6d7dd98e233af45624944",
+          "currentSha256": "cf54a3845a8670c720de5bee614db1ce17cffb1458c6d7dd98e233af45624944"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "3f32334ffc6945efc6ecc3c829d677259649cfd446b6d98d0990c206de411534",
+          "currentSha256": "3f32334ffc6945efc6ecc3c829d677259649cfd446b6d98d0990c206de411534"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "04e05907cf6108eb067f60193117b59a51ca12e94caf51d3470da277dbea4685",
+          "currentSha256": "04e05907cf6108eb067f60193117b59a51ca12e94caf51d3470da277dbea4685"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "04e05907cf6108eb067f60193117b59a51ca12e94caf51d3470da277dbea4685",
+          "currentSha256": "04e05907cf6108eb067f60193117b59a51ca12e94caf51d3470da277dbea4685"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "469a3e5170c18479244e188598aee33a1dfd2f027d2e80ff05b5ec3390b99eab",
+          "currentSha256": "469a3e5170c18479244e188598aee33a1dfd2f027d2e80ff05b5ec3390b99eab"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "469a3e5170c18479244e188598aee33a1dfd2f027d2e80ff05b5ec3390b99eab",
+          "currentSha256": "469a3e5170c18479244e188598aee33a1dfd2f027d2e80ff05b5ec3390b99eab"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "469a3e5170c18479244e188598aee33a1dfd2f027d2e80ff05b5ec3390b99eab",
+          "currentSha256": "469a3e5170c18479244e188598aee33a1dfd2f027d2e80ff05b5ec3390b99eab"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "actualOuts": 0,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        "hs-y3-final-regional-opponent-player-05",
+        "hs-y3-final-regional-opponent-player-08",
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 0,
+        "E": 1,
+        "DP": 0
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 1
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    },
+    {
+      "position": "SS",
+      "name": "historical topology",
+      "historical": true,
+      "pass": true,
+      "baselineSha256": "8c3f0547d273bb1e9af05680590afa7a611f26075cf80ca76bb8735010f28bad",
+      "currentSha256": "8c3f0547d273bb1e9af05680590afa7a611f26075cf80ca76bb8735010f28bad",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "9166deaa17f25ee3eb96c56cbe180fa2aa43d99dfbc47608798a5dd7ad42aab0",
+          "currentSha256": "9166deaa17f25ee3eb96c56cbe180fa2aa43d99dfbc47608798a5dd7ad42aab0"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "bafed1ad8288ffe7789c50a71bff9eb5b40f4b478fd232ef3c18ced57708e96e",
+          "currentSha256": "bafed1ad8288ffe7789c50a71bff9eb5b40f4b478fd232ef3c18ced57708e96e"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "5b3e73eedebef3cc6c003f0d14b0d34e2a4a6c0667f705b8eabd19f4db9d4ba1",
+          "currentSha256": "5b3e73eedebef3cc6c003f0d14b0d34e2a4a6c0667f705b8eabd19f4db9d4ba1"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "5b3e73eedebef3cc6c003f0d14b0d34e2a4a6c0667f705b8eabd19f4db9d4ba1",
+          "currentSha256": "5b3e73eedebef3cc6c003f0d14b0d34e2a4a6c0667f705b8eabd19f4db9d4ba1"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "e086d666a61eebad6c256af3fc3017a683c5d27b039ae64e6f5c16b3aa9c4a93",
+          "currentSha256": "e086d666a61eebad6c256af3fc3017a683c5d27b039ae64e6f5c16b3aa9c4a93"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "e086d666a61eebad6c256af3fc3017a683c5d27b039ae64e6f5c16b3aa9c4a93",
+          "currentSha256": "e086d666a61eebad6c256af3fc3017a683c5d27b039ae64e6f5c16b3aa9c4a93"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "e086d666a61eebad6c256af3fc3017a683c5d27b039ae64e6f5c16b3aa9c4a93",
+          "currentSha256": "e086d666a61eebad6c256af3fc3017a683c5d27b039ae64e6f5c16b3aa9c4a93"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "actualOuts": 2,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 1,
+        "E": 0,
+        "DP": 1
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    },
+    {
+      "position": "2B",
+      "name": "public secure",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "afc5babc765187ed86ce281d137c77c3bcb14dc371e62c463f503617af0a1ddf",
+      "currentSha256": "afc5babc765187ed86ce281d137c77c3bcb14dc371e62c463f503617af0a1ddf",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "eab0a91fcc34527794730422711c9e8f427fd571b87b9d26dd2151ef96b7157e",
+          "currentSha256": "eab0a91fcc34527794730422711c9e8f427fd571b87b9d26dd2151ef96b7157e"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "b2aed204ff71d73fd6c0502a057d6f42f5c1e4d99e842ec44211f2e7239f49fb",
+          "currentSha256": "b2aed204ff71d73fd6c0502a057d6f42f5c1e4d99e842ec44211f2e7239f49fb"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "b2aed204ff71d73fd6c0502a057d6f42f5c1e4d99e842ec44211f2e7239f49fb",
+          "currentSha256": "b2aed204ff71d73fd6c0502a057d6f42f5c1e4d99e842ec44211f2e7239f49fb"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "3610b2617bad44d6f6c9bfa50555cbbbf12a884c60c1727e35b8d85274a00472",
+          "currentSha256": "3610b2617bad44d6f6c9bfa50555cbbbf12a884c60c1727e35b8d85274a00472"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-07|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "actualOuts": 1,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        null,
+        "hs-y3-final-regional-opponent-player-09",
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 1,
+        "E": 0,
+        "DP": 0
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [
+        {
+          "decision": "secure",
+          "momentId": "hs_y1_match_moment_2",
+          "value": 0.8
+        }
+      ],
+      "executionSamples": [
+        {
+          "decision": "secure",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "actual public choice callback"
+    },
+    {
+      "position": "2B",
+      "name": "clean",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "9e607650f8208f70f6f247f2027072bdb650edf09cb710e6e394955e950ae2f2",
+      "currentSha256": "9e607650f8208f70f6f247f2027072bdb650edf09cb710e6e394955e950ae2f2",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "eab0a91fcc34527794730422711c9e8f427fd571b87b9d26dd2151ef96b7157e",
+          "currentSha256": "eab0a91fcc34527794730422711c9e8f427fd571b87b9d26dd2151ef96b7157e"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "85adc670087fe95dd1674261f309589124119718fd3f8cfb1658e8b8ecf1734f",
+          "currentSha256": "85adc670087fe95dd1674261f309589124119718fd3f8cfb1658e8b8ecf1734f"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "f7be9298af5dca1f96f7e5d7e6dda2074bb59f5730d5b641716a756d4217d669",
+          "currentSha256": "f7be9298af5dca1f96f7e5d7e6dda2074bb59f5730d5b641716a756d4217d669"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "f7be9298af5dca1f96f7e5d7e6dda2074bb59f5730d5b641716a756d4217d669",
+          "currentSha256": "f7be9298af5dca1f96f7e5d7e6dda2074bb59f5730d5b641716a756d4217d669"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "2372868938286c3966e4fe31ee88ea61b5ef7ebb9186764dbc91175917ee2f88",
+          "currentSha256": "2372868938286c3966e4fe31ee88ea61b5ef7ebb9186764dbc91175917ee2f88"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "2372868938286c3966e4fe31ee88ea61b5ef7ebb9186764dbc91175917ee2f88",
+          "currentSha256": "2372868938286c3966e4fe31ee88ea61b5ef7ebb9186764dbc91175917ee2f88"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "2372868938286c3966e4fe31ee88ea61b5ef7ebb9186764dbc91175917ee2f88",
+          "currentSha256": "2372868938286c3966e4fe31ee88ea61b5ef7ebb9186764dbc91175917ee2f88"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-07|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "actualOuts": 2,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 1,
+        "E": 0,
+        "DP": 1
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    },
+    {
+      "position": "2B",
+      "name": "low hands",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "14479245ea3e1d69415efa7286f7b6146e851c00e43586a52ba43a8874285eb5",
+      "currentSha256": "14479245ea3e1d69415efa7286f7b6146e851c00e43586a52ba43a8874285eb5",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "92aa64f39ca170d344fb96a583e40beed097c277747b21ef827c7082139f4d2c",
+          "currentSha256": "92aa64f39ca170d344fb96a583e40beed097c277747b21ef827c7082139f4d2c"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "b46e594d679e143dad3bca2f7b967d2374010afa8c159672bba9464f04faee17",
+          "currentSha256": "b46e594d679e143dad3bca2f7b967d2374010afa8c159672bba9464f04faee17"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "2182b9a676fe2aa48ec03b587609393bbc50a4496087b22238adcc39db475a5a",
+          "currentSha256": "2182b9a676fe2aa48ec03b587609393bbc50a4496087b22238adcc39db475a5a"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "2182b9a676fe2aa48ec03b587609393bbc50a4496087b22238adcc39db475a5a",
+          "currentSha256": "2182b9a676fe2aa48ec03b587609393bbc50a4496087b22238adcc39db475a5a"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "cb5b0aee131b29cb512e0534b0454566b6aa482910c669c73cec738acdc644aa",
+          "currentSha256": "cb5b0aee131b29cb512e0534b0454566b6aa482910c669c73cec738acdc644aa"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "cb5b0aee131b29cb512e0534b0454566b6aa482910c669c73cec738acdc644aa",
+          "currentSha256": "cb5b0aee131b29cb512e0534b0454566b6aa482910c669c73cec738acdc644aa"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "cb5b0aee131b29cb512e0534b0454566b6aa482910c669c73cec738acdc644aa",
+          "currentSha256": "cb5b0aee131b29cb512e0534b0454566b6aa482910c669c73cec738acdc644aa"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-07|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "actualOuts": 2,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 1,
+        "E": 0,
+        "DP": 1
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    },
+    {
+      "position": "2B",
+      "name": "low throwing",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "dd9edc638b7d1f9550ff7c33ab60fdd6d264339a5c68dbed8a27bd5bde9598ae",
+      "currentSha256": "dd9edc638b7d1f9550ff7c33ab60fdd6d264339a5c68dbed8a27bd5bde9598ae",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "445242e4fe99dd2fd38a755d198c8a438b709216719c69ba869bb742e41438cd",
+          "currentSha256": "445242e4fe99dd2fd38a755d198c8a438b709216719c69ba869bb742e41438cd"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "a3c3d416fbe3c7a440e664c623e5e058687f1faed9e572aec69e6003552577ae",
+          "currentSha256": "a3c3d416fbe3c7a440e664c623e5e058687f1faed9e572aec69e6003552577ae"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "5bc190664e9fbff7c34feff7a200b9b86b53bb6cbda62dda7bb17c751f80985a",
+          "currentSha256": "5bc190664e9fbff7c34feff7a200b9b86b53bb6cbda62dda7bb17c751f80985a"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "5bc190664e9fbff7c34feff7a200b9b86b53bb6cbda62dda7bb17c751f80985a",
+          "currentSha256": "5bc190664e9fbff7c34feff7a200b9b86b53bb6cbda62dda7bb17c751f80985a"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "2e4e167b3ab9192256f8a92fb0d462e3f399b8b37ba9c50009e9b79bfe37422e",
+          "currentSha256": "2e4e167b3ab9192256f8a92fb0d462e3f399b8b37ba9c50009e9b79bfe37422e"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "2e4e167b3ab9192256f8a92fb0d462e3f399b8b37ba9c50009e9b79bfe37422e",
+          "currentSha256": "2e4e167b3ab9192256f8a92fb0d462e3f399b8b37ba9c50009e9b79bfe37422e"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "2e4e167b3ab9192256f8a92fb0d462e3f399b8b37ba9c50009e9b79bfe37422e",
+          "currentSha256": "2e4e167b3ab9192256f8a92fb0d462e3f399b8b37ba9c50009e9b79bfe37422e"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-07|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "actualOuts": 2,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 1,
+        "E": 0,
+        "DP": 1
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    },
+    {
+      "position": "2B",
+      "name": "historical topology",
+      "historical": true,
+      "pass": true,
+      "baselineSha256": "72895ffd5f442ca1bfa411ee75effdb92a37183a97f9c70297a4be4b236d8dd1",
+      "currentSha256": "72895ffd5f442ca1bfa411ee75effdb92a37183a97f9c70297a4be4b236d8dd1",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "eab0a91fcc34527794730422711c9e8f427fd571b87b9d26dd2151ef96b7157e",
+          "currentSha256": "eab0a91fcc34527794730422711c9e8f427fd571b87b9d26dd2151ef96b7157e"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "85adc670087fe95dd1674261f309589124119718fd3f8cfb1658e8b8ecf1734f",
+          "currentSha256": "85adc670087fe95dd1674261f309589124119718fd3f8cfb1658e8b8ecf1734f"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "f7be9298af5dca1f96f7e5d7e6dda2074bb59f5730d5b641716a756d4217d669",
+          "currentSha256": "f7be9298af5dca1f96f7e5d7e6dda2074bb59f5730d5b641716a756d4217d669"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "f7be9298af5dca1f96f7e5d7e6dda2074bb59f5730d5b641716a756d4217d669",
+          "currentSha256": "f7be9298af5dca1f96f7e5d7e6dda2074bb59f5730d5b641716a756d4217d669"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "2372868938286c3966e4fe31ee88ea61b5ef7ebb9186764dbc91175917ee2f88",
+          "currentSha256": "2372868938286c3966e4fe31ee88ea61b5ef7ebb9186764dbc91175917ee2f88"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "2372868938286c3966e4fe31ee88ea61b5ef7ebb9186764dbc91175917ee2f88",
+          "currentSha256": "2372868938286c3966e4fe31ee88ea61b5ef7ebb9186764dbc91175917ee2f88"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "2372868938286c3966e4fe31ee88ea61b5ef7ebb9186764dbc91175917ee2f88",
+          "currentSha256": "2372868938286c3966e4fe31ee88ea61b5ef7ebb9186764dbc91175917ee2f88"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-07|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "actualOuts": 2,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 1,
+        "E": 0,
+        "DP": 1
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    },
+    {
+      "position": "3B",
+      "name": "public secure",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "7d8319c65bd25277b269b8f6a6531657348d0581f0ad9710b96900fc313df564",
+      "currentSha256": "7d8319c65bd25277b269b8f6a6531657348d0581f0ad9710b96900fc313df564",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "d1bd8c5a54d6a0f199d4a38274a3f0a58f058d0ffe87b4506c308e7d49a23e10",
+          "currentSha256": "d1bd8c5a54d6a0f199d4a38274a3f0a58f058d0ffe87b4506c308e7d49a23e10"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "606ab7fad69e58d8ed641fd4ea0e78285291648970808b4ce8e8ad61ac22a7bb",
+          "currentSha256": "606ab7fad69e58d8ed641fd4ea0e78285291648970808b4ce8e8ad61ac22a7bb"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "606ab7fad69e58d8ed641fd4ea0e78285291648970808b4ce8e8ad61ac22a7bb",
+          "currentSha256": "606ab7fad69e58d8ed641fd4ea0e78285291648970808b4ce8e8ad61ac22a7bb"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "61695bff8989ac50a7d2824039e8a379ead49b1debbe3730c57d0a7565673b9c",
+          "currentSha256": "61695bff8989ac50a7d2824039e8a379ead49b1debbe3730c57d0a7565673b9c"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-03|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "topologyVersion": "regulation-coarse-ground-lanes-v2",
+      "actualOuts": 1,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        null,
+        "hs-y3-final-regional-opponent-player-07",
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 1,
+        "E": 0,
+        "DP": 0
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [
+        {
+          "decision": "secure",
+          "momentId": "hs_y1_match_moment_2",
+          "value": 0.8
+        }
+      ],
+      "executionSamples": [
+        {
+          "decision": "secure",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "actual public choice callback"
+    },
+    {
+      "position": "3B",
+      "name": "clean",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "21f8c0e9e8f1d0d6f3f3272d5bbabb1edfeca44e30fe66ffdaf35a89ada28aa3",
+      "currentSha256": "21f8c0e9e8f1d0d6f3f3272d5bbabb1edfeca44e30fe66ffdaf35a89ada28aa3",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "d1bd8c5a54d6a0f199d4a38274a3f0a58f058d0ffe87b4506c308e7d49a23e10",
+          "currentSha256": "d1bd8c5a54d6a0f199d4a38274a3f0a58f058d0ffe87b4506c308e7d49a23e10"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "a84ed611202f52919a5669f4770d012f3e764a03456a9995038f4b858a172cdb",
+          "currentSha256": "a84ed611202f52919a5669f4770d012f3e764a03456a9995038f4b858a172cdb"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "2cc17301b27af6cbb980e66c9fe1db3f5b5dba0a4823cfad364278f86229052e",
+          "currentSha256": "2cc17301b27af6cbb980e66c9fe1db3f5b5dba0a4823cfad364278f86229052e"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "2cc17301b27af6cbb980e66c9fe1db3f5b5dba0a4823cfad364278f86229052e",
+          "currentSha256": "2cc17301b27af6cbb980e66c9fe1db3f5b5dba0a4823cfad364278f86229052e"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "3edea3685f225e99ea4d2843999981a616f3a44dd0dd748cd61fdeea90370bd3",
+          "currentSha256": "3edea3685f225e99ea4d2843999981a616f3a44dd0dd748cd61fdeea90370bd3"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "3edea3685f225e99ea4d2843999981a616f3a44dd0dd748cd61fdeea90370bd3",
+          "currentSha256": "3edea3685f225e99ea4d2843999981a616f3a44dd0dd748cd61fdeea90370bd3"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "3edea3685f225e99ea4d2843999981a616f3a44dd0dd748cd61fdeea90370bd3",
+          "currentSha256": "3edea3685f225e99ea4d2843999981a616f3a44dd0dd748cd61fdeea90370bd3"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-03|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "topologyVersion": "regulation-coarse-ground-lanes-v2",
+      "actualOuts": 2,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 1,
+        "E": 0,
+        "DP": 1
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    },
+    {
+      "position": "3B",
+      "name": "low hands",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "d88a2e236ae89e051f8aa73d71d0d050719d148a01bfbefdf402cfc4f73b7d23",
+      "currentSha256": "d88a2e236ae89e051f8aa73d71d0d050719d148a01bfbefdf402cfc4f73b7d23",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "8ce0a276302200dc7b58a1dd1703886cab44cb339495a6e8ddb20d0fe66f9667",
+          "currentSha256": "8ce0a276302200dc7b58a1dd1703886cab44cb339495a6e8ddb20d0fe66f9667"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "521d42672b3f032c99846fc4f01461d2354eadbb905cb2e4059f0cf2a60c92dc",
+          "currentSha256": "521d42672b3f032c99846fc4f01461d2354eadbb905cb2e4059f0cf2a60c92dc"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "8462fbbc22ff677b213f4176e37f7bb4321700c23025ecc86c833d2cb6a93cf6",
+          "currentSha256": "8462fbbc22ff677b213f4176e37f7bb4321700c23025ecc86c833d2cb6a93cf6"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "8462fbbc22ff677b213f4176e37f7bb4321700c23025ecc86c833d2cb6a93cf6",
+          "currentSha256": "8462fbbc22ff677b213f4176e37f7bb4321700c23025ecc86c833d2cb6a93cf6"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "956763846e508bac646a3fb11a0d70362367b703b7cf7df63793129343c7de03",
+          "currentSha256": "956763846e508bac646a3fb11a0d70362367b703b7cf7df63793129343c7de03"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "956763846e508bac646a3fb11a0d70362367b703b7cf7df63793129343c7de03",
+          "currentSha256": "956763846e508bac646a3fb11a0d70362367b703b7cf7df63793129343c7de03"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "956763846e508bac646a3fb11a0d70362367b703b7cf7df63793129343c7de03",
+          "currentSha256": "956763846e508bac646a3fb11a0d70362367b703b7cf7df63793129343c7de03"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-03|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "topologyVersion": "regulation-coarse-ground-lanes-v2",
+      "actualOuts": 0,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        "hs-y3-final-regional-opponent-player-03",
+        "hs-y3-final-regional-opponent-player-07",
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 0,
+        "E": 1,
+        "DP": 0
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 1
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    },
+    {
+      "position": "3B",
+      "name": "low throwing",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "bb8d4676480459ae3c2b9b5663a6ef327ebf13e8569fa39a3a841ed49a042e88",
+      "currentSha256": "bb8d4676480459ae3c2b9b5663a6ef327ebf13e8569fa39a3a841ed49a042e88",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "c4a29ce7656f72c861ded6443fd8834f8dcf5382e7b5d1401c70ea2b147305a0",
+          "currentSha256": "c4a29ce7656f72c861ded6443fd8834f8dcf5382e7b5d1401c70ea2b147305a0"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "7ac80405f6d7680c55c7d247e9c73a25c65208a61898c92b0c63e1d213f8751d",
+          "currentSha256": "7ac80405f6d7680c55c7d247e9c73a25c65208a61898c92b0c63e1d213f8751d"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "406b33cfbf8589631c1d5a71eee80aae41cf2fe545940e2f1d3ea1029a983fc6",
+          "currentSha256": "406b33cfbf8589631c1d5a71eee80aae41cf2fe545940e2f1d3ea1029a983fc6"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "406b33cfbf8589631c1d5a71eee80aae41cf2fe545940e2f1d3ea1029a983fc6",
+          "currentSha256": "406b33cfbf8589631c1d5a71eee80aae41cf2fe545940e2f1d3ea1029a983fc6"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "8598650808e8f598b7370ff10b59a57bd2ace8fc58e3eb2f4e6bce2ac0830996",
+          "currentSha256": "8598650808e8f598b7370ff10b59a57bd2ace8fc58e3eb2f4e6bce2ac0830996"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "8598650808e8f598b7370ff10b59a57bd2ace8fc58e3eb2f4e6bce2ac0830996",
+          "currentSha256": "8598650808e8f598b7370ff10b59a57bd2ace8fc58e3eb2f4e6bce2ac0830996"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "8598650808e8f598b7370ff10b59a57bd2ace8fc58e3eb2f4e6bce2ac0830996",
+          "currentSha256": "8598650808e8f598b7370ff10b59a57bd2ace8fc58e3eb2f4e6bce2ac0830996"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-03|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "topologyVersion": "regulation-coarse-ground-lanes-v2",
+      "actualOuts": 0,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        "hs-y3-final-regional-opponent-player-03",
+        "hs-y3-final-regional-opponent-player-07",
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 0,
+        "E": 1,
+        "DP": 0
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 1
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    },
+    {
+      "position": "3B",
+      "name": "historical topology",
+      "historical": true,
+      "pass": true,
+      "baselineSha256": "08dc4d6a7e49ca8afac0087726fa5d524f63d9e799d8a3bda12e966a4e50a6fb",
+      "currentSha256": "08dc4d6a7e49ca8afac0087726fa5d524f63d9e799d8a3bda12e966a4e50a6fb",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "d1bd8c5a54d6a0f199d4a38274a3f0a58f058d0ffe87b4506c308e7d49a23e10",
+          "currentSha256": "d1bd8c5a54d6a0f199d4a38274a3f0a58f058d0ffe87b4506c308e7d49a23e10"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "a84ed611202f52919a5669f4770d012f3e764a03456a9995038f4b858a172cdb",
+          "currentSha256": "a84ed611202f52919a5669f4770d012f3e764a03456a9995038f4b858a172cdb"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "2cc17301b27af6cbb980e66c9fe1db3f5b5dba0a4823cfad364278f86229052e",
+          "currentSha256": "2cc17301b27af6cbb980e66c9fe1db3f5b5dba0a4823cfad364278f86229052e"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "2cc17301b27af6cbb980e66c9fe1db3f5b5dba0a4823cfad364278f86229052e",
+          "currentSha256": "2cc17301b27af6cbb980e66c9fe1db3f5b5dba0a4823cfad364278f86229052e"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "3edea3685f225e99ea4d2843999981a616f3a44dd0dd748cd61fdeea90370bd3",
+          "currentSha256": "3edea3685f225e99ea4d2843999981a616f3a44dd0dd748cd61fdeea90370bd3"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "3edea3685f225e99ea4d2843999981a616f3a44dd0dd748cd61fdeea90370bd3",
+          "currentSha256": "3edea3685f225e99ea4d2843999981a616f3a44dd0dd748cd61fdeea90370bd3"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "3edea3685f225e99ea4d2843999981a616f3a44dd0dd748cd61fdeea90370bd3",
+          "currentSha256": "3edea3685f225e99ea4d2843999981a616f3a44dd0dd748cd61fdeea90370bd3"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-03|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "topologyVersion": "regulation-coarse-ground-lanes-v2",
+      "actualOuts": 2,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 1,
+        "E": 0,
+        "DP": 1
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    },
+    {
+      "position": "1B",
+      "name": "public secure",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "1c7a070bab4543b63c3dade53392ada4828b417c51df2b419a546e5107ffb839",
+      "currentSha256": "1c7a070bab4543b63c3dade53392ada4828b417c51df2b419a546e5107ffb839",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "5f8496673062893afb632f5f029619489a78fcd239cf4ec385b9c80e3c0f36b4",
+          "currentSha256": "5f8496673062893afb632f5f029619489a78fcd239cf4ec385b9c80e3c0f36b4"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "dbc5e616ed8e1d2af4a22c90cc6f7f69fa0975f114abe592ba7ed44395ce2e4a",
+          "currentSha256": "dbc5e616ed8e1d2af4a22c90cc6f7f69fa0975f114abe592ba7ed44395ce2e4a"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "dbc5e616ed8e1d2af4a22c90cc6f7f69fa0975f114abe592ba7ed44395ce2e4a",
+          "currentSha256": "dbc5e616ed8e1d2af4a22c90cc6f7f69fa0975f114abe592ba7ed44395ce2e4a"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "6652296a4de13c2674b8cdb5746a3cfb041754cefbe012159ad812b43a773410",
+          "currentSha256": "6652296a4de13c2674b8cdb5746a3cfb041754cefbe012159ad812b43a773410"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-03|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "topologyVersion": "regulation-coarse-ground-lanes-v3",
+      "actualOuts": 1,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        null,
+        "hs-y3-final-regional-opponent-player-04",
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 1,
+        "A": 0,
+        "E": 0,
+        "DP": 0
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [
+        {
+          "decision": "secure",
+          "momentId": "hs_y1_match_moment_2",
+          "value": 0.8
+        }
+      ],
+      "executionSamples": [
+        {
+          "decision": "secure",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "actual public choice callback"
+    },
+    {
+      "position": "1B",
+      "name": "clean",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "c6f60612d8b780716602ceb3fa8d989811ecf6e9a361260ef3ca1924d569c10b",
+      "currentSha256": "c6f60612d8b780716602ceb3fa8d989811ecf6e9a361260ef3ca1924d569c10b",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "5f8496673062893afb632f5f029619489a78fcd239cf4ec385b9c80e3c0f36b4",
+          "currentSha256": "5f8496673062893afb632f5f029619489a78fcd239cf4ec385b9c80e3c0f36b4"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "c4f0ee471c1337af2ccf496e71fe1b842b5c2e931674f532f996a071cfd804ac",
+          "currentSha256": "c4f0ee471c1337af2ccf496e71fe1b842b5c2e931674f532f996a071cfd804ac"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "2d93acbac406141330129b0778000743c3f394735944bdf5a28a078555999700",
+          "currentSha256": "2d93acbac406141330129b0778000743c3f394735944bdf5a28a078555999700"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "2d93acbac406141330129b0778000743c3f394735944bdf5a28a078555999700",
+          "currentSha256": "2d93acbac406141330129b0778000743c3f394735944bdf5a28a078555999700"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "bd2382cc7968863dbb905fd00ec583dd7654d58c404b7bfaa9e54c21338ed0c0",
+          "currentSha256": "bd2382cc7968863dbb905fd00ec583dd7654d58c404b7bfaa9e54c21338ed0c0"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "bd2382cc7968863dbb905fd00ec583dd7654d58c404b7bfaa9e54c21338ed0c0",
+          "currentSha256": "bd2382cc7968863dbb905fd00ec583dd7654d58c404b7bfaa9e54c21338ed0c0"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "1de4ec86242656906a6ec52614edf3ea83445b9886c6a767a1d4bb96573aae61",
+          "currentSha256": "1de4ec86242656906a6ec52614edf3ea83445b9886c6a767a1d4bb96573aae61"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-03|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "topologyVersion": "regulation-coarse-ground-lanes-v3",
+      "actualOuts": 2,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 1,
+        "A": 1,
+        "E": 0,
+        "DP": 1
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    },
+    {
+      "position": "1B",
+      "name": "low hands",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "026e76c33ad505d67547c637a091d0d96851ff93377f63ed6a6df4b4863f8970",
+      "currentSha256": "026e76c33ad505d67547c637a091d0d96851ff93377f63ed6a6df4b4863f8970",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "fb9dc29938529dba42cdfa6a61a8e7d3e98fa8c4a01c82388add0d746367d782",
+          "currentSha256": "fb9dc29938529dba42cdfa6a61a8e7d3e98fa8c4a01c82388add0d746367d782"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "9c8ee21c62d0c720e2de049c07c5ad2dce0755946ac6da4da9b25a950257e628",
+          "currentSha256": "9c8ee21c62d0c720e2de049c07c5ad2dce0755946ac6da4da9b25a950257e628"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "013505fda4e747bd9f22196386b8bc713214db7844cfa8deabdb45c904b56621",
+          "currentSha256": "013505fda4e747bd9f22196386b8bc713214db7844cfa8deabdb45c904b56621"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "013505fda4e747bd9f22196386b8bc713214db7844cfa8deabdb45c904b56621",
+          "currentSha256": "013505fda4e747bd9f22196386b8bc713214db7844cfa8deabdb45c904b56621"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "85c82b6b0f2ba1fe2ee01864e524da8afd78803db801989cdd072a8380b0d37c",
+          "currentSha256": "85c82b6b0f2ba1fe2ee01864e524da8afd78803db801989cdd072a8380b0d37c"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "85c82b6b0f2ba1fe2ee01864e524da8afd78803db801989cdd072a8380b0d37c",
+          "currentSha256": "85c82b6b0f2ba1fe2ee01864e524da8afd78803db801989cdd072a8380b0d37c"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "521cf3ef35d48f564333e73c5d5e5ac2c5ad598bb2ffaf0a91853d1dfd04162f",
+          "currentSha256": "521cf3ef35d48f564333e73c5d5e5ac2c5ad598bb2ffaf0a91853d1dfd04162f"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-03|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "topologyVersion": "regulation-coarse-ground-lanes-v3",
+      "actualOuts": 0,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        "hs-y3-final-regional-opponent-player-03",
+        "hs-y3-final-regional-opponent-player-04",
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 0,
+        "E": 1,
+        "DP": 0
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 1
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    },
+    {
+      "position": "1B",
+      "name": "low throwing",
+      "historical": false,
+      "pass": true,
+      "baselineSha256": "cc1ab87c701f87419f17915ca00d12df64e1bc37c5ffc7eca81da74ce4c87fb2",
+      "currentSha256": "cc1ab87c701f87419f17915ca00d12df64e1bc37c5ffc7eca81da74ce4c87fb2",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "2d56f8b2bfe75afda884a318c4ab52c81a40602f312f2fc28adb96672bf1ef39",
+          "currentSha256": "2d56f8b2bfe75afda884a318c4ab52c81a40602f312f2fc28adb96672bf1ef39"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "52e52b5f0e396c864f93d15834376c5c6a70ce5e35a77c8009446bfa3754f850",
+          "currentSha256": "52e52b5f0e396c864f93d15834376c5c6a70ce5e35a77c8009446bfa3754f850"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "8db6553259af6403db742fc2061e3add601a9d10041c7790c6c2166f6c359bac",
+          "currentSha256": "8db6553259af6403db742fc2061e3add601a9d10041c7790c6c2166f6c359bac"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "8db6553259af6403db742fc2061e3add601a9d10041c7790c6c2166f6c359bac",
+          "currentSha256": "8db6553259af6403db742fc2061e3add601a9d10041c7790c6c2166f6c359bac"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "d066dcc265654f453ed7c7debc1f169803abc2785354fff3b062faa3abfd2c8c",
+          "currentSha256": "d066dcc265654f453ed7c7debc1f169803abc2785354fff3b062faa3abfd2c8c"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "d066dcc265654f453ed7c7debc1f169803abc2785354fff3b062faa3abfd2c8c",
+          "currentSha256": "d066dcc265654f453ed7c7debc1f169803abc2785354fff3b062faa3abfd2c8c"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "692bc6f143690bf2604530619fac3ff441f6a55540ded3395f6a8c0291b80041",
+          "currentSha256": "692bc6f143690bf2604530619fac3ff441f6a55540ded3395f6a8c0291b80041"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-03|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "topologyVersion": "regulation-coarse-ground-lanes-v3",
+      "actualOuts": 0,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        "hs-y3-final-regional-opponent-player-03",
+        "hs-y3-final-regional-opponent-player-04",
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 0,
+        "A": 0,
+        "E": 1,
+        "DP": 0
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 1
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    },
+    {
+      "position": "1B",
+      "name": "historical topology",
+      "historical": true,
+      "pass": true,
+      "baselineSha256": "14446a3556207d7b318005c6d7190b0ba1eee29e6754c7255eb655e233da7b61",
+      "currentSha256": "14446a3556207d7b318005c6d7190b0ba1eee29e6754c7255eb655e233da7b61",
+      "phases": [
+        {
+          "phase": "pending",
+          "baselineSha256": "5f8496673062893afb632f5f029619489a78fcd239cf4ec385b9c80e3c0f36b4",
+          "currentSha256": "5f8496673062893afb632f5f029619489a78fcd239cf4ec385b9c80e3c0f36b4"
+        },
+        {
+          "phase": "pendingReload",
+          "baselineSha256": "c4f0ee471c1337af2ccf496e71fe1b842b5c2e931674f532f996a071cfd804ac",
+          "currentSha256": "c4f0ee471c1337af2ccf496e71fe1b842b5c2e931674f532f996a071cfd804ac"
+        },
+        {
+          "phase": "executed",
+          "baselineSha256": "2d93acbac406141330129b0778000743c3f394735944bdf5a28a078555999700",
+          "currentSha256": "2d93acbac406141330129b0778000743c3f394735944bdf5a28a078555999700"
+        },
+        {
+          "phase": "executedReload",
+          "baselineSha256": "2d93acbac406141330129b0778000743c3f394735944bdf5a28a078555999700",
+          "currentSha256": "2d93acbac406141330129b0778000743c3f394735944bdf5a28a078555999700"
+        },
+        {
+          "phase": "settled",
+          "baselineSha256": "bd2382cc7968863dbb905fd00ec583dd7654d58c404b7bfaa9e54c21338ed0c0",
+          "currentSha256": "bd2382cc7968863dbb905fd00ec583dd7654d58c404b7bfaa9e54c21338ed0c0"
+        },
+        {
+          "phase": "duplicate",
+          "baselineSha256": "bd2382cc7968863dbb905fd00ec583dd7654d58c404b7bfaa9e54c21338ed0c0",
+          "currentSha256": "bd2382cc7968863dbb905fd00ec583dd7654d58c404b7bfaa9e54c21338ed0c0"
+        },
+        {
+          "phase": "settledReload",
+          "baselineSha256": "1de4ec86242656906a6ec52614edf3ea83445b9886c6a767a1d4bb96573aae61",
+          "currentSha256": "1de4ec86242656906a6ec52614edf3ea83445b9886c6a767a1d4bb96573aae61"
+        }
+      ],
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-03|3|0|truefalsefalse|ordinary-contact|pitch-1",
+      "topologyVersion": "regulation-coarse-ground-lanes-v3",
+      "actualOuts": 2,
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "actorDefense": {
+        "chances": 1,
+        "PO": 1,
+        "A": 1,
+        "E": 0,
+        "DP": 1
+      },
+      "recordTotals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        }
+      },
+      "matchRngValues": [],
+      "publicSamples": [],
+      "executionSamples": [
+        {
+          "decision": "challenge",
+          "value": 0.8
+        }
+      ],
+      "recovery": {
+        "pending": true,
+        "executed": true,
+        "settled": true,
+        "duplicateRetries": 3,
+        "rerollForbidden": true
+      },
+      "sampleObservation": "original family resolver callback, not public choice callback"
+    }
+  ]
+}

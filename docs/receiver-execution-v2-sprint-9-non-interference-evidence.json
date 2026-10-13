@@ -1,0 +1,289 @@
+{
+  "scope": "EXISTING_LEGACY_BYTES_AND_UNLOADED_SAFETY_MODULE",
+  "baseline": "00d0d61654a4fbe97413617dadfd70285a816c47",
+  "trackedHashCount": 655,
+  "existingTrackedDelta": 0,
+  "protectedContentRead": false,
+  "protectedContentHashed": false,
+  "protectedMetadata": {
+    "tests/fast-check-smoke-test.cjs": {
+      "size": 232,
+      "mtimeMs": 1790843210697.4724
+    },
+    "install.ps1": {
+      "size": 18481,
+      "mtimeMs": 1790645780931.8794
+    },
+    "docs/first-base-sprint-3-focused-development-evidence.json": {
+      "size": 909541,
+      "mtimeMs": 1791695452470.9353
+    },
+    "docs/infield-baseball-logic-audit-architecture-evidence.json": {
+      "size": 22275,
+      "mtimeMs": 1791724873822.1465
+    },
+    "docs/infield-baseball-logic-audit-evidence.json": {
+      "size": 9987073,
+      "mtimeMs": 1791725791525.787
+    },
+    "docs/infield-baseball-logic-audit-runner.cjs": {
+      "size": 51962,
+      "mtimeMs": 1791725789937.2622
+    },
+    "docs/infield-baseball-logic-validation-audit-v1.md": {
+      "size": 39820,
+      "mtimeMs": 1791725790304.0483
+    },
+    "docs/infield-scorer-recovery-sprint-5-green-evidence.json": {
+      "size": 9378500,
+      "mtimeMs": 1791766904157.9292
+    },
+    "docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json": {
+      "size": 11457925,
+      "mtimeMs": 1791767373630.792
+    },
+    "docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json": {
+      "size": 686464,
+      "mtimeMs": 1791788973106.34
+    },
+    "docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json": {
+      "size": 889584,
+      "mtimeMs": 1791767570328.417
+    },
+    "docs/infield-scorer-recovery-sprint-5-validation.json": {
+      "size": 1027011,
+      "mtimeMs": 1791767101736.8584
+    }
+  },
+  "oldProductionReferences": [],
+  "onlyDependency": "receiver-execution-v2-foundation.js",
+  "sourceVerifications": [
+    {
+      "path": "match-situation-lifecycle.js",
+      "symbol": "beginExecution",
+      "lines": [
+        114,
+        124
+      ],
+      "matches": true,
+      "sha256": "5710375ad6aaec819391c72ad6a93f74857a023f660cd69af8662947467f6b40"
+    },
+    {
+      "path": "defensive-runner-throw-settlement-foundation.js",
+      "symbol": "deriveSettlement",
+      "lines": [
+        94,
+        133
+      ],
+      "matches": true,
+      "sha256": "e66ffe5926b468e05f207ca90b9d602ee38f3cfc5e8c307fc874bf8172f2c043"
+    },
+    {
+      "path": "script.js",
+      "symbol": "buildHighSchoolShortstopExecution",
+      "lines": [
+        11859,
+        11946
+      ],
+      "matches": true,
+      "sha256": "109bac87444638ce7029cd64bd5e4413cf2b8dafe0cf4bdeb6f6b3d28e01b942"
+    },
+    {
+      "path": "script.js",
+      "symbol": "validateHighSchoolDecisionThrowState",
+      "lines": [
+        11990,
+        12053
+      ],
+      "matches": true,
+      "sha256": "53e7e4e532415b07db7ecfee5ba33fb6cf6dbef84601a053de6a85046c043783"
+    },
+    {
+      "path": "match-game-record.js",
+      "symbol": "recordDefensivePlay",
+      "lines": [
+        237,
+        275
+      ],
+      "matches": true,
+      "sha256": "274e091c9f4477e2dca7ce835457ccb48e02870631c951cdbc85520905c13a36"
+    },
+    {
+      "path": "defensive-decision-throw-foundation.js",
+      "symbol": "resolveScorerEligibility",
+      "lines": [
+        271,
+        324
+      ],
+      "matches": true,
+      "sha256": "2e7e7217b0da63cb67e326ffb388df6bf109b64fba44c5361757d1319a53cd53"
+    },
+    {
+      "path": "script.js",
+      "symbol": "registerPositionDecisionFamily",
+      "lines": [
+        7105,
+        7110
+      ],
+      "matches": true,
+      "sha256": "14771c4485e437e8c0de13ad6082f93011e842a4d1396f7c4a4511499902340c"
+    },
+    {
+      "path": "script.js",
+      "symbol": "resolveInfieldDecision",
+      "lines": [
+        8372,
+        8507
+      ],
+      "matches": true,
+      "sha256": "47a71c1ad1d1ed94870ed625847f57167e3c8b8e4ba0cb7274bbe1b7338eb712"
+    },
+    {
+      "path": "match-experience-development.js",
+      "symbol": "normalizeExecutionQuality",
+      "lines": [
+        64,
+        71
+      ],
+      "matches": true,
+      "sha256": "2e42cca3bdac163403da3c297be39d8dc2b30257eb72ac9ae135da8792274f91"
+    },
+    {
+      "path": "match-situation-lifecycle.js",
+      "symbol": "resolveSituation",
+      "lines": [
+        162,
+        177
+      ],
+      "matches": true,
+      "sha256": "a26b6bcb96d2be066ca80470806b5c93714797e33780f3e0bec258fb16197a39"
+    },
+    {
+      "path": "match-situation-lifecycle.js",
+      "symbol": "markSettled",
+      "lines": [
+        178,
+        183
+      ],
+      "matches": true,
+      "sha256": "af49c4a3bc90d93300d9fbde9db8bbf21c0dc83a6e269c32bfa5dddd73d0e35f"
+    },
+    {
+      "path": "save.js",
+      "symbol": "normalizeSave",
+      "lines": [
+        12,
+        511
+      ],
+      "matches": true,
+      "sha256": "24b98db496822f2bd369bd1fefad5e56898348a260c29a58218f8c7b765cebe8"
+    },
+    {
+      "path": "save.js",
+      "symbol": "normalizeSave",
+      "lines": [
+        512,
+        628
+      ],
+      "matches": true,
+      "sha256": "ee80eb8fa10401d8435443e2f01e630a471ad57eb3d93082e660358d66c3445f"
+    },
+    {
+      "path": "receiver-execution-v2-foundation.js",
+      "symbol": "seal",
+      "lines": [
+        219,
+        223
+      ],
+      "matches": true,
+      "sha256": "cee19b7f5c81ee744f42c9d1862d6243f1c8586d3b4232e01d2f4213f46359b0"
+    },
+    {
+      "path": "receiver-execution-v2-foundation.js",
+      "symbol": "execute",
+      "lines": [
+        308,
+        318
+      ],
+      "matches": true,
+      "sha256": "18d0db459326ef800feb50b905aa9e26a9bf6f401fae46d5d350b2b9d2d867da"
+    }
+  ],
+  "gitDiffCheckExit": 0,
+  "whitespaceCheck": "all new text paths",
+  "files": [
+    {
+      "path": "receiver-execution-v2-admission-timing-foundation.js",
+      "bytes": 17064,
+      "sha256": "3ef4ae16a2ea011f915184600d9688956e7750f720999e5b126f83af8e215a1e"
+    },
+    {
+      "path": "tests/receiver-execution-v2-version-admission-timing-test.cjs",
+      "bytes": 34947,
+      "sha256": "8a14adebd71dfa1dfa8c0d0e518e50fbba5441a1728eaa9f463caf5d9cfb49fc"
+    },
+    {
+      "path": "tests/receiver-execution-v2-sprint-9-legacy-comparison.cjs",
+      "bytes": 12841,
+      "sha256": "7655cf6af6f9a859a2ac17613775b7d4e1f1f0f4d6f0753c1efd50c74dcce9a1"
+    },
+    {
+      "path": "tests/receiver-execution-v2-sprint-9-runner.cjs",
+      "bytes": 8165,
+      "sha256": "532572981052180e46da8e48e42f3be69df51ec7636f2ee0101abfd8c1cff881"
+    },
+    {
+      "path": "docs/receiver-execution-v2-version-admission-timing-seam-sprint-9.md",
+      "bytes": 20325,
+      "sha256": "4a15f3bc3b15340bb44a15de805ad81cfee15b9cabafc3d15b760ad9da9415cd"
+    },
+    {
+      "path": "docs/receiver-execution-v2-sprint-9-baseline-evidence.json",
+      "bytes": 85071,
+      "sha256": "4f74ff19ac8e3ef2c1c190a0c154b079f698aa58ad1711bdc91d17a694ab3a83"
+    },
+    {
+      "path": "docs/receiver-execution-v2-sprint-9-architecture-evidence.json",
+      "bytes": 116142,
+      "sha256": "9cd0541c1e1d930f901bf9dbdcf6e441a833ec79098aff5ca65b269eb333474c"
+    },
+    {
+      "path": "docs/receiver-execution-v2-sprint-9-pure-architecture-evidence.json",
+      "bytes": 5890,
+      "sha256": "1d29b426bd11235f78b19cfe0a4fb02713a9cb068b5bd891691a59e8a577ff4f"
+    },
+    {
+      "path": "docs/receiver-execution-v2-sprint-9-contract-specification.json",
+      "bytes": 10757,
+      "sha256": "5dba7b463f83edf270039b7c0387ec2d35cd6de55798a56822be24c2d16be025"
+    },
+    {
+      "path": "docs/receiver-execution-v2-sprint-9-red-source-evidence.json",
+      "bytes": 906,
+      "sha256": "1819e2c6a6e97dc6af1cca32832e2e6b57d96e3b7c2ab31bfb7e96104eb2286a"
+    },
+    {
+      "path": "docs/receiver-execution-v2-sprint-9-initial-test-evidence.json",
+      "bytes": 21594,
+      "sha256": "8c9e50d78fb291d43fe4a2b27211a235360d44fabd3612967e6f39bb40c7735c"
+    },
+    {
+      "path": "docs/receiver-execution-v2-sprint-9-coverage-evidence.json",
+      "bytes": 37079,
+      "sha256": "9faa16cc28c4e94fb849a87fe394819161fb3401cf0772f32c2b84c19bbc60e5"
+    },
+    {
+      "path": "docs/receiver-execution-v2-sprint-9-legacy-regression-evidence.json",
+      "bytes": 13456,
+      "sha256": "8ae52e060d3bc29b703a626bbe0e16e29db8e58fa38a5f36d5f17c35d71e6243"
+    }
+  ],
+  "head": "00d0d61654a4fbe97413617dadfd70285a816c47",
+  "originMain": "00d0d61654a4fbe97413617dadfd70285a816c47",
+  "index": "",
+  "status": "M tests/fast-check-smoke-test.cjs\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/infield-baseball-logic-audit-architecture-evidence.json\n?? docs/infield-baseball-logic-audit-evidence.json\n?? docs/infield-baseball-logic-audit-runner.cjs\n?? docs/infield-baseball-logic-validation-audit-v1.md\n?? docs/infield-scorer-recovery-sprint-5-green-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json\n?? docs/infield-scorer-recovery-sprint-5-validation.json\n?? docs/receiver-execution-v2-sprint-9-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-9-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-9-contract-specification.json\n?? docs/receiver-execution-v2-sprint-9-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-9-initial-test-evidence.json\n?? docs/receiver-execution-v2-sprint-9-legacy-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-9-pure-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-9-red-source-evidence.json\n?? docs/receiver-execution-v2-version-admission-timing-seam-sprint-9.md\n?? install.ps1\n?? receiver-execution-v2-admission-timing-foundation.js\n?? tests/receiver-execution-v2-sprint-9-legacy-comparison.cjs\n?? tests/receiver-execution-v2-sprint-9-runner.cjs\n?? tests/receiver-execution-v2-version-admission-timing-test.cjs",
+  "formalRuntimeEnabled": false,
+  "formalSaveSchemaChanged": false,
+  "modelRegistration": false,
+  "fullRepositoryRun": false
+}

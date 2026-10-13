@@ -1,0 +1,232 @@
+{
+  "scope": "ISOLATED_VERSION_ADMISSION_AND_TIMING_SAFETY_NOT_FORMAL_MATCH_OR_SAVE",
+  "actualBaseline": "00d0d61654a4fbe97413617dadfd70285a816c47",
+  "runtimeEnabled": false,
+  "officialExecutionOwner": "existingLegacyOwner",
+  "versions": {
+    "safety": "receiver-admission-timing-contract-v1",
+    "format": "isolated-receiver-version-envelope-v1",
+    "policy": "inactive-ss-direct-policy-v1",
+    "legacyTiming": "defensive-runner-throw-settlement-v1",
+    "candidate": {
+      "execution": "receiver-pure-stages-v2-1",
+      "adapter": "receiver-explicit-input-v1",
+      "timing": "crt-integer-ticks-v2-1",
+      "sampler": "physical-slot-sha256-u32be-v1",
+      "effort": "ordinary-effort-reference-v1"
+    }
+  },
+  "admission": {
+    "requestClosedKeys": [
+      "mode",
+      "identity",
+      "topologyVersion",
+      "initialOuts",
+      "basesAtAdmission",
+      "routeId",
+      "routeEligibility",
+      "capabilities",
+      "provenance"
+    ],
+    "identity": "S8 typed physical-contact-binding-v1; playId,matchId,plateAppearanceId,contactId,physicalIdentity; original leg/actions; real thrower/receiver/runner/base",
+    "topologyVersions": [
+      "regulation-coarse-zones-v1",
+      "regulation-coarse-ground-lanes-v2",
+      "regulation-coarse-ground-lanes-v3"
+    ],
+    "policyClosedKeys": [
+      "version",
+      "runtimeEnabled",
+      "candidatePreparationEnabled"
+    ],
+    "candidateEligibility": {
+      "newOpportunity": true,
+      "ownerPosition": "SS",
+      "throwerPosition": "SS",
+      "receiverPosition": "1B",
+      "targetBase": "first",
+      "basesAtAdmission": [
+        null,
+        null,
+        null
+      ],
+      "initialOuts": [
+        0,
+        1,
+        2
+      ],
+      "slot": "primaryThrow",
+      "routes": {
+        "secureFirstBaseOut": "directFirst",
+        "holdBall": "hold"
+      },
+      "throwerRole": "primaryPlayer",
+      "receiverRole": "npc",
+      "playerReceiverCanonicalId": "player is excluded",
+      "phaseAtAdmission": "beforeExecution"
+    },
+    "modeChoice": "explicit request plus frozen policy BEFORE first execution; no success/accuracy/outcome/attractive-player-role fields admitted",
+    "candidatePreparationEnabled": "isolated preparation permission only; runtimeEnabled must remain false",
+    "pin": "canonical clone/deep freeze; identity, cap snapshot, eligibility, source, policy, topology and every version bound; pinDigest consistency NOT authentication",
+    "pendingSample": "ABSENT; no sample callback, no early original sample extraction; B vector already determined by physical slot only",
+    "retention": "retained pending/executed/settled pin metadata is NEVER reselected after policy changes; does not implement those candidate runtime lifecycle states",
+    "executionBinding": [
+      "pinDigest",
+      "inputDigest",
+      "originalSampleBinary64",
+      "sampleVectorDigest",
+      "runtimeEnabled=false",
+      "formalSaveAdmission=false"
+    ],
+    "bindingTrust": "original sample first supplied by original owner; saved binding validated against sealed inputs; no way to authenticate forged but consistent sources",
+    "provenance": {
+      "required": [
+        "physicalIdentity",
+        "actors",
+        "capabilities",
+        "eligibility"
+      ],
+      "type": "S8 A/B/C+scope/owner/reference/version",
+      "C": "explicit insufficientAdmissionSources; never use legacy success booleans",
+      "pureFixture": "declared test facts; never Production witness"
+    },
+    "unsupportedVersions": "unknown, malformed or missing pin/copy rejects; no default fallback",
+    "historical": "independent knownHistoricalLegacy/sourceSaveVersion/provenance required; absence of tags is insufficient evidence; present new discriminators reject. This is routing metadata, not normalizeSave validation.",
+    "roleProvenance": "roles are explicit eligibility/actors source facts; future authoritative roster cross-check required",
+    "holdBinding": "holdBall requires notAttempted delivery; completed throw cannot bind",
+    "phaseGuard": "Explicit phaseAtAdmission is required on every new pin; executed/settled or absent phase rejects. Retention carries original admission-phase facts unchanged; formal owner must verify phase source."
+  },
+  "timing": {
+    "packetClosedKeys": [
+      "kind",
+      "safetyVersion",
+      "sealed",
+      "execution",
+      "prior"
+    ],
+    "kind": "unappliedPureTimingPacket",
+    "validator": "uses S8 frozen inputs/vector to verify already-produced serialized outputs; no Match opportunity sampling",
+    "contract": "crt-integer-ticks-v2-1; 1000 integer ticks=1 coarse CRT, not seconds",
+    "origin": "primary launch=0; relay absolute timestamps keep original origin; relay launch>=first valid contest",
+    "timestamps": [
+      "launch",
+      "ballArrival",
+      "positioningCompletion",
+      "secureCompletion",
+      "contactCompletion",
+      "runnerArrival"
+    ],
+    "ownership": "candidate only; existing Force/Third-Out/Runner Settlement remains only formal authority",
+    "statuses": {
+      "tie": "no candidate",
+      "unknown": "validated unresolved branch; settlementAdmission=false",
+      "invalid": "reject wrong unit/origin/action/possession/target/live legality/version or serialized output",
+      "relay": "same physical/play/origin, prior validated output, real parent action, explicit completed retirement/pivot; first force failure or third out suppresses second"
+    },
+    "seam": "CURRENT deriveSettlement still compares against v1 resolveTiming. Future version-aware routing must live in the existing owner; no legacy replacement performed here",
+    "diagnosticOutput": "validatedUnappliedTimingDiagnostic; no settlement identity/outRecorded/outsAfter/baseChanges/runChanges, settlementAdmission=false, scoringAdmission=false, actualRetirements=0",
+    "ordinaryEffort": "S8 effort insufficient remains unchanged; no calibration source/no official E or would-be A"
+  },
+  "saveMatrix": [
+    {
+      "model": "Legacy",
+      "phase": "pending",
+      "formal": "PASS_BOUNDED_EXISTING_SAVE_OWNER",
+      "evidence": "20 fixed Legacy comparison pairs, plus S5/S6 regressions"
+    },
+    {
+      "model": "Legacy",
+      "phase": "executed",
+      "formal": "PASS_BOUNDED_EXISTING_SAVE_OWNER",
+      "evidence": "original cache reconstruction and lifecycle copied evidence only"
+    },
+    {
+      "model": "Legacy",
+      "phase": "settled",
+      "formal": "PASS_BOUNDED_EXISTING_SAVE_OWNER",
+      "evidence": "cold reload + 3 duplicate retries, no record/backfill/reroll"
+    },
+    {
+      "model": "candidateV2",
+      "phase": "pending",
+      "pure": "ISOLATED_SERIALIZATION_VALIDATED",
+      "formal": "NOT_CONNECTED_NOT_IMPLEMENTED",
+      "evidence": "required discriminator/pin/copy/expectedPin; missing/unknown/contradictory fields reject"
+    },
+    {
+      "model": "candidateV2",
+      "phase": "executed",
+      "pure": "EXPLICIT_INSUFFICIENCY",
+      "formal": "NOT_IMPLEMENTED_NOT_TESTED",
+      "evidence": "candidateRuntimeSaveNotImplemented; executionBinding tested separately is not runtime Save"
+    },
+    {
+      "model": "candidateV2",
+      "phase": "settled",
+      "pure": "EXPLICIT_INSUFFICIENCY",
+      "formal": "NOT_IMPLEMENTED_NOT_TESTED",
+      "evidence": "candidateRuntimeSaveNotImplemented; no official record/evaluation/saved totals"
+    }
+  ],
+  "proposedOwnerMatrix": [
+    {
+      "current": "groundBallInPlayState + infield registry/family resolver",
+      "proposed": "single common admission chooser for new opportunities, pin in handoff and context snapshot",
+      "responsibility": "physical ownership/eligible route/policy/actor/versions BEFORE outcome",
+      "implemented": "isolated createPin only; no registry hook"
+    },
+    {
+      "current": "MatchSituationLifecycle.beginExecution/resolveSituation/markSettled",
+      "proposed": "explicit pin preservation across execution replacement",
+      "responsibility": "pending/executed/settled copies, retry equality, no reselection",
+      "implemented": "retainPin metadata only; lifecycle unchanged"
+    },
+    {
+      "current": "family-specific SS/2B/3B/1B cache + reconstruction",
+      "proposed": "cache-version validator selects the pinned algorithm",
+      "responsibility": "physical/actors/routes/abilities/owned sample/stage outputs/dependency copies",
+      "implemented": "bindExecution/validateExecutionBinding for supplied S8 pure data; no Production cache"
+    },
+    {
+      "current": "RunnerThrowSettlement.deriveSettlement/resolveTiming + Force + ThirdOut",
+      "proposed": "version discriminator and candidate validation inside original owner before one apply",
+      "responsibility": "CRT common origin, source/action/possession/live legal race and ordered retirements",
+      "implemented": "isolated candidate validator; formal seam NOT_CONNECTED"
+    },
+    {
+      "current": "Save.normalizeSave -> validateHighSchoolDecisionThrowState",
+      "proposed": "recognition + all present version/copy validation BEFORE firstBase/3B/settlementApplied early returns",
+      "responsibility": "historical evidence vs new format omissions; reject unknown version; no reinterpretation",
+      "implemented": "isolated snapshot/historical APIs only; formal early-return gap remains blocking"
+    },
+    {
+      "current": "MatchGameRecord + MatchExperienceDevelopment",
+      "proposed": "no new owner; diagnostics excluded",
+      "responsibility": "same PA/E-A-H-FC/actor totals, raw evaluation and exactly-once",
+      "implemented": "unchanged current owner; no diagnostic consumer"
+    }
+  ],
+  "shadowPreparation": {
+    "API": "prepareDiagnostic(pin,input)",
+    "execution": false,
+    "callbackAccess": false,
+    "writes": false,
+    "requirements": "complete S8 independent owned input AND original owner-supplied sample; missing sources insufficient; no live Match access",
+    "diagnosticCannotPromote": "admitOfficial always formalReceiverV2AdmissionUnavailable; formal modules do not import or consume these types"
+  },
+  "remainingBlockers": [
+    "official pin/save discriminator and lifecycle preservation not implemented",
+    "pre-early-return model guard not installed",
+    "real NPC1B position/movement/incoming demand/touch CRT sources and adapter calibration missing",
+    "read-only shadow storage/pinned historical isolation not implemented",
+    "formal version-aware timing seam/ordinary effort/late blame/extra advancement not implemented; no Sprint10 authorization"
+  ],
+  "gates": {
+    "VersionAdmission": "PARTIAL",
+    "TimingSeam": "PARTIAL",
+    "LegacySaveCompatibility": "PASS_BOUNDED",
+    "CandidateV2SaveContract": "PARTIAL",
+    "ShadowIsolation": "PASS_PREPARATION_ONLY",
+    "L03": "PARTIAL"
+  }
+}
