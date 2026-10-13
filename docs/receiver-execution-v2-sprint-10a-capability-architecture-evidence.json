@@ -1,0 +1,447 @@
+{
+  "search": {
+    "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+    "cols": [
+      "name",
+      "label",
+      "lines",
+      "in",
+      "out"
+    ],
+    "groups": [
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+        "file": "script.js",
+        "rows": [
+          [
+            "assertHighSchoolMatchCapabilityAdmission",
+            "Function",
+            "6497-6503",
+            9,
+            2
+          ],
+          [
+            "chooseYouthGrounderFielding",
+            "Function",
+            "2153-2184",
+            1,
+            14
+          ],
+          [
+            "createDevelopmentMatchPositionTestCapabilityOverride",
+            "Function",
+            "396-410",
+            1,
+            7
+          ],
+          [
+            "createHighSchoolMatchSimulationRoster",
+            "Function",
+            "6340-6364",
+            1,
+            4
+          ],
+          [
+            "createHighSchoolRosterPlayerActor",
+            "Function",
+            "6271-6284",
+            6,
+            4
+          ],
+          [
+            "createLegacyHighSchoolMatchSimulationRoster",
+            "Function",
+            "6244-6269",
+            1,
+            5
+          ],
+          [
+            "getDefensiveSimulationCapability",
+            "Function",
+            "6466-6495",
+            21,
+            4
+          ],
+          [
+            "getDevelopmentMatchPositionTestCapabilityAudit",
+            "Function",
+            "412-431",
+            2,
+            4
+          ],
+          [
+            "getDevelopmentTestEffectiveCapabilityDisplay",
+            "Function",
+            "16270-16282",
+            1,
+            5
+          ],
+          [
+            "getHighSchoolProvisionalBuntExecutionCapabilities",
+            "Function",
+            "4706-4715",
+            1,
+            2
+          ],
+          [
+            "getHighSchoolProvisionalOffensiveTacticalCapabilities",
+            "Function",
+            "4619-4628",
+            2,
+            2
+          ],
+          [
+            "getNarrativeCapabilityMutationSource",
+            "Function",
+            "1600-1617",
+            3,
+            4
+          ],
+          [
+            "getOffensiveSimulationCapability",
+            "Function",
+            "6452-6464",
+            8,
+            3
+          ],
+          [
+            "getPlayerCapabilitySnapshotForMatch",
+            "Function",
+            "6505-6542",
+            0,
+            9
+          ],
+          [
+            "materializeSelectedHighSchoolRoster",
+            "Function",
+            "6286-6321",
+            5,
+            8
+          ],
+          [
+            "renderDevelopmentTestCapabilityBar",
+            "Function",
+            "16284-16291",
+            1,
+            3
+          ],
+          [
+            "renderDevelopmentTestCapabilityNotice",
+            "Function",
+            "16293-16296",
+            1,
+            0
+          ]
+        ]
+      }
+    ],
+    "total": 17,
+    "returned": 17,
+    "count": 17,
+    "has_more": false,
+    "truncated": false
+  },
+  "tier": 2,
+  "evidence": [
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.script.getDefensiveSimulationCapability",
+      "direction": "both",
+      "callees_total": 1,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "getDevelopmentMatchPositionTestCapabilityAudit",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 20,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "getHighSchoolReachAccess",
+                1
+              ],
+              [
+                "getHighSchoolPhysicalDefensePlayerContext",
+                1
+              ],
+              [
+                "createHighSchoolFirstBaseContext",
+                1
+              ],
+              [
+                "getHighSchoolFlyBallDefenderCatchContext",
+                1
+              ],
+              [
+                "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+                1
+              ],
+              [
+                "getHighSchoolLineDriveCatchDefenderContext",
+                1
+              ],
+              [
+                "getHighSchoolTagUpReceivingTarget",
+                1
+              ],
+              [
+                "createHighSchoolRunnerTagUpSituation",
+                1
+              ],
+              [
+                "createHighSchoolRosterPlayerActor",
+                1
+              ],
+              [
+                "getPlayerCapabilitySnapshotForMatch",
+                1
+              ],
+              [
+                "resolveSimulatedHighSchoolPlateAppearance",
+                1
+              ],
+              [
+                "adapt",
+                1
+              ],
+              [
+                "buildInfieldMeaningfulMoment",
+                1
+              ],
+              [
+                "resolveHighSchoolInfieldReceiver",
+                1
+              ],
+              [
+                "getHighSchoolDefensiveDecisionContextModifier",
+                1
+              ],
+              [
+                "resolveHighSchoolCatcherDecision",
+                1
+              ],
+              [
+                "resolveLegacyHighSchoolDefensivePlay",
+                1
+              ],
+              [
+                "add",
+                1
+              ],
+              [
+                "buildHighSchoolThirdBaseExecution",
+                1
+              ],
+              [
+                "buildHighSchoolShortstopExecution",
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "getDefensiveSimulationCapability",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.getDefensiveSimulationCapability",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+      "start_line": 6466,
+      "end_line": 6495,
+      "source_mode": "full",
+      "source": "function getDefensiveSimulationCapability(subject = player, position = player.primaryPosition, matchContext = subject?.highSchoolMatch) {\n  if ([\"simulation-roster\", \"team-roster-foundation\"].includes(subject?.source)) {\n    return Object.freeze({ fielding: subject.defense, reaction: subject.defense, range: subject.defense, arm: subject.arm, throwing: subject.arm, decision: Math.round((subject.defense + subject.contact) / 2) });\n  }\n  const rawSkills = subject.baseballSkills || {};\n  const activeMatch = matchContext || (subject === player ? player.highSchoolMatch : null);\n  const audit = getDevelopmentMatchPositionTestCapabilityAudit(subject, activeMatch);\n  const skills = audit.active && !activeMatch?.completed\n    ? Object.fromEntries(Object.keys(rawSkills).map(skill => [skill, audit.skills[skill]?.effective ?? rawSkills[skill]]))\n    : rawSkills;\n  const effectivePosition = audit.active ? audit.position : position;\n  const positionTools = {\n    \"內野手\": [\"catching\", \"reaction\", \"throwing\"],\n    \"外野手\": [\"catching\", \"range\", \"armStrength\"],\n    \"捕手\": [\"blocking\", \"gameCalling\", \"throwing\"],\n    \"投手\": [\"control\", \"reaction\", \"throwing\"]\n  }[position] || [\"catching\", \"reaction\", \"throwing\"];\n  const values = positionTools.map(key => Number(skills[key]) || 0);\n  const reactionSkill = Number(skills.reaction) || values[1] || 0;\n  const throwingSkill = values[2] || 0;\n  const armSkill = [\"游擊手\", \"三壘手\"].includes(effectivePosition) ? Number(skills.armStrength) || throwingSkill : throwingSkill;\n  return Object.freeze({\n    fielding: Math.round((values[0] * 2 + values[1] + (Number(subject.ballSense) || 0)) / 4),\n    reaction: Math.round((reactionSkill * 2 + (Number(subject.ballSense) || 0)) / 3),\n    range: Math.round(((Number(skills.range) || reactionSkill) * 2 + (Number(subject.fitness) || 0)) / 3),\n    arm: Math.round((armSkill * 2 + (Number(subject.fitness) || 0)) / 3),\n    throwing: Math.round((throwingSkill * 2 + (Number(subject.observe) || 0)) / 3),\n    decision: Math.round(((Number(skills.baseballIQ) || 0) + (Number(subject.observe) || 0) + (Number(subject.discipline) || 0)) / 3)\n  });\n}\n",
+      "callers": 20,
+      "callees": 1
+    },
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.script.createHighSchoolRosterPlayerActor",
+      "direction": "both",
+      "callees_total": 2,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "getOffensiveSimulationCapability",
+                1
+              ],
+              [
+                "getDefensiveSimulationCapability",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 5,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "materializeSelectedHighSchoolRoster",
+                1
+              ],
+              [
+                "refreshSelectedPositionCompetitionContext",
+                1
+              ],
+              [
+                "createHighSchoolMatchSimulationRoster",
+                1
+              ],
+              [
+                "initializeHighSchoolYearTransition",
+                1
+              ]
+            ]
+          },
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.player",
+            "rows": [
+              [
+                "createSchoolInvitation",
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "createHighSchoolRosterPlayerActor",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.createHighSchoolRosterPlayerActor",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+      "start_line": 6271,
+      "end_line": 6284,
+      "source_mode": "full",
+      "source": "function createHighSchoolRosterPlayerActor(subject = player, playerPosition = subject?.primaryPosition) {\n  const highSchoolYear = Number(subject?.highSchoolYearTransitionState?.currentHighSchoolYear)\n    || Math.max(1, Math.min(3, (Number(subject?.age) || 16) - 15));\n  return {\n    id: \"player\", name: subject?.name || \"你\", age: subject?.age,\n    year: highSchoolYear,\n    primaryPosition: playerPosition, secondaryPositions: subject?.secondaryPositions || [],\n    bats: subject?.bats, throws: subject?.throws,\n    simulationCapability: {\n      offense: getOffensiveSimulationCapability(subject),\n      defense: getDefensiveSimulationCapability(subject, playerPosition)\n    }\n  };\n}\n",
+      "callers": 5,
+      "callees": 2
+    },
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.script.getPlayerCapabilitySnapshotForMatch",
+      "direction": "both",
+      "callees_total": 4,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "getOffensiveSimulationCapability",
+                1
+              ],
+              [
+                "getDefensiveSimulationCapability",
+                1
+              ]
+            ]
+          },
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.player",
+            "rows": [
+              [
+                "getDebugCapabilitySnapshot",
+                1
+              ],
+              [
+                "createInitialPlayer",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 0,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": []
+      }
+    },
+    {
+      "name": "getPlayerCapabilitySnapshotForMatch",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.getPlayerCapabilitySnapshotForMatch",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+      "start_line": 6505,
+      "end_line": 6542,
+      "source_mode": "full",
+      "source": "function getPlayerCapabilitySnapshotForMatch(subject = player, match = subject?.highSchoolMatch) {\n  const skills = subject?.baseballSkills || {};\n  const position = match?.developmentPositionOverride || match?.playerFieldingAssignment || match?.currentFieldingPosition\n    || subject?.primaryPosition || match?.position || \"\";\n  const genesis = Object.fromEntries(CHARACTER_GENESIS_ABILITY_KEYS.map(key => {\n    const base = Number(subject?.characterGenesis?.baseRoll?.[key]);\n    const allocation = Number(subject?.characterGenesis?.allocation?.[key]);\n    const current = [\"batting\", \"baseRunning\", \"baseballIQ\"].includes(key) ? skills[key] : subject?.[key];\n    return [key, Number.isFinite(base) && base > 0 ? base + (Number.isFinite(allocation) ? allocation : 0) : Number(current) || 0];\n  }));\n  const baseballSkills = Object.fromEntries(Object.keys(createInitialPlayer().baseballSkills).map(key => [key, Number.isFinite(Number(skills[key])) ? Number(skills[key]) : null]));\n  const foundation = getDebugCapabilitySnapshot(subject);\n  return Object.freeze({\n    route: match?.developmentFullMatchStart ? \"highSchoolFullMatch\" : subject?.chapter === \"青棒\" ? \"normalHighSchoolNarrative\" : subject?.route || \"\",\n    role: match?.role || subject?.highSchoolRoleCode || \"\",\n    position,\n    idealSelf: subject?.idealSelf || \"\",\n    genesis: Object.freeze(genesis),\n    baseballSkills: Object.freeze(baseballSkills),\n    capabilityFoundation: foundation,\n    derivedMatchCapabilities: Object.freeze({\n      offense: getOffensiveSimulationCapability(subject),\n      defense: getDefensiveSimulationCapability(subject, position)\n    }),\n    developmentState: Object.freeze({\n      age: Number(subject?.age) || 0,\n      chapter: subject?.chapter || \"\",\n      highSchoolStep: Number(subject?.highSchoolStep) || 0,\n      characterGenesisCompleted: subject?.characterGenesis?.completed === true,\n      characterGenesisArchetype: subject?.characterGenesis?.archetype || \"\",\n      directStartHistory: Array.isArray(subject?.flags) && subject.flags.includes(\"direct_start_history\"),\n      primaryPosition: subject?.primaryPosition || \"\",\n      secondaryPositions: Object.freeze((subject?.secondaryPositions || []).slice()),\n      highSchoolRoleCode: subject?.highSchoolRoleCode || \"\",\n      skillPointLedger: Number(subject?.balanceDebug?.chapterSkillPoints) || 0\n    })\n  });\n}\n",
+      "callers": 0,
+      "callees": 4
+    }
+  ],
+  "currentSourceVerification": [
+    {
+      "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.getDefensiveSimulationCapability",
+      "path": "script.js",
+      "start": 6466,
+      "end": 6495,
+      "equal": true
+    },
+    {
+      "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.createHighSchoolRosterPlayerActor",
+      "path": "script.js",
+      "start": 6271,
+      "end": 6284,
+      "equal": true
+    },
+    {
+      "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.getPlayerCapabilitySnapshotForMatch",
+      "path": "script.js",
+      "start": 6505,
+      "end": 6542,
+      "equal": true
+    }
+  ],
+  "sourceHash": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+}

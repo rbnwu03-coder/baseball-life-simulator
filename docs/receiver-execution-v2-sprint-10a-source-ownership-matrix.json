@@ -1,0 +1,789 @@
+{
+  "schemaVersion": "receiver-v2-sprint-10a-source-ownership-matrix-v1",
+  "baseline": "32ee5ec55e4791952a9ef5d68c126389ab1e1ff6",
+  "date": "2026-10-13",
+  "runtimeEnabled": false,
+  "scope": {
+    "physicalOwner": "new actual SS player primary",
+    "bases": "empty at original admission",
+    "outs": [
+      0,
+      1,
+      2
+    ],
+    "receiver": "legal actual NPC1B",
+    "routes": [
+      "secureFirstBaseOut",
+      "holdBall"
+    ],
+    "executionPaths": [
+      "meaningful if truly admitted",
+      "routine automatic"
+    ],
+    "excluded": [
+      "player1B incoming",
+      "2B/3B/relay/tag migration",
+      "legacy synthetic/null physical identity",
+      "settled backfill",
+      "v2 candidate execution or shadow comparison"
+    ]
+  },
+  "classificationDefinitions": {
+    "A": "Existing owned input or authoritative LEGACY execution fact. A combined boolean/constant remains its old authority and does not prove independent physical receiver stages.",
+    "B": "Deterministic projection from named existing facts; proposed projection is labeled not currently emitted/pinned. It cannot promote model assumptions to observed physical authority.",
+    "C": "Unavailable independent authority/input/calibration/version integration; keep insufficient and do not fill from legacy success/out/ordinal window."
+  },
+  "rows": [
+    {
+      "field": "matchId",
+      "classification": "A",
+      "owner": "HighSchoolMatch",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 4595,
+          "endLine": 4606
+        }
+      ],
+      "generated": "Match creation",
+      "saved": "match.id; inherited in ordinary PA identity",
+      "beforeExecution": "yes",
+      "limitations": "Creator has legacy 'match' fallback; new candidate requires real nonempty match.id, not fallback text.",
+      "minimalFutureSource": "Cross-check actual Match and handoff/PA copies; never parse identity text as sole authority."
+    },
+    {
+      "field": "plateAppearanceId",
+      "classification": "A",
+      "owner": "OffensivePlateApproach / ordinary ground handoff",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 5117,
+          "endLine": 5131
+        },
+        {
+          "path": "script.js",
+          "startLine": 4595,
+          "endLine": 4606
+        }
+      ],
+      "generated": "Before ordinary fair contact; original paIdentity includes |ordinary-contact",
+      "saved": "match.ordinaryDefensivePlateAppearanceState.paIdentity",
+      "beforeExecution": "yes after original handoff generation",
+      "limitations": "Identity includes original inning/half/batter/order/outs/base context; do not rebuild from mutated settled Match.",
+      "minimalFutureSource": "Retain cached original PA identity with physical contact and Match ID."
+    },
+    {
+      "field": "physicalIdentity / contactId",
+      "classification": "A",
+      "owner": "BattedBallPhysical + OffensivePlateApproach",
+      "sources": [
+        {
+          "path": "offensive-plate-approach.js",
+          "startLine": 444,
+          "endLine": 457
+        },
+        {
+          "path": "batted-ball-physical.js",
+          "startLine": 105,
+          "endLine": 131
+        }
+      ],
+      "generated": "Original fair contact; identity = state.paIdentity + |pitch-N",
+      "saved": "ordinaryDefensivePlateAppearanceState.battedBallPhysicalTruth.identity; groundBallInPlayState.physicalTruth.identity",
+      "beforeExecution": "yes",
+      "limitations": "Physical primitive itself permits ordinary-contact fallback in isolated callers; direct typed candidate must verify genuine supported same-contact handoff and copied identity.",
+      "minimalFutureSource": "Use original physicalIdentity as contact reference, not a new synthetic generated contact or stripped identity."
+    },
+    {
+      "field": "playId / handoff identity",
+      "classification": "A",
+      "owner": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 5117,
+          "endLine": 5131
+        },
+        {
+          "path": "script.js",
+          "startLine": 5254,
+          "endLine": 5306
+        }
+      ],
+      "generated": "Original supported ground opportunity",
+      "saved": "groundBallInPlayState.identity = paIdentity + |ground-defense; lifecycle.sourcePhysicalStateRef when present",
+      "beforeExecution": "yes",
+      "limitations": "Unsupported path has legacy physical/synthetic fallback authority. Exclude it from candidate scope.",
+      "minimalFutureSource": "Require supported BattedBallPhysicalTruth handoff and active SS ownership."
+    },
+    {
+      "field": "typed physical contact binding",
+      "classification": "B",
+      "owner": "Future read-only contact adapter",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 5117,
+          "endLine": 5131
+        },
+        {
+          "path": "offensive-plate-approach.js",
+          "startLine": 444,
+          "endLine": 457
+        }
+      ],
+      "generated": "Proposed deterministic bundle of existing Match / PA / contact / physical facts",
+      "saved": "not currently saved as physical-contact-binding-v1",
+      "beforeExecution": "not currently emitted; ingredients available",
+      "limitations": "Versioned bundle can be projected, but original topology is not receiver model version. Digest is consistency, not source authentication.",
+      "minimalFutureSource": "Freeze explicit adapter/physical-binding version; verify original cache, roster and PA copies before accepting projection."
+    },
+    {
+      "field": "ledger action and throw IDs",
+      "classification": "A",
+      "owner": "attachHighSchoolInfieldActionFacts / canonical first throw",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 11213,
+          "endLine": 11291
+        },
+        {
+          "path": "defensive-decision-throw-foundation.js",
+          "startLine": 109,
+          "endLine": 123
+        },
+        {
+          "path": "defensive-decision-throw-foundation.js",
+          "startLine": 135,
+          "endLine": 166
+        }
+      ],
+      "generated": "During original execution; ledger uses situation.runnerSettlementIdentity + |action|ordinal; canonical throw uses selection.identity + |throw-v1",
+      "saved": "shortstopExecution.resolution.actionFacts; shortstopExecution.decisionThrowState.throwResolution.identity",
+      "beforeExecution": "no; exact completed action IDs are execution facts",
+      "limitations": "Ledger IDs and canonical throw IDs use different namespaces. Selection identity includes route. Neither is an existing pinned physical slot.",
+      "minimalFutureSource": "Record explicit source/action namespace mapping after original execution; do not equate ordinal ledger ID with canonical throw ID."
+    },
+    {
+      "field": "fixed primaryThrow physical slot",
+      "classification": "B",
+      "owner": "Proposed independent physical-slot adapter",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 11213,
+          "endLine": 11291
+        },
+        {
+          "path": "defensive-decision-throw-foundation.js",
+          "startLine": 109,
+          "endLine": 123
+        }
+      ],
+      "generated": "Proposed before first original execution for one SS direct/hold action surface",
+      "saved": "NOT currently pinned in handoff/lifecycle/cache",
+      "beforeExecution": "proposal only",
+      "limitations": "Route-keyed selection/throw IDs change when route changes. A future stable slot label must not depend on accuracy/result/retry/route text.",
+      "minimalFutureSource": "Pin a versioned primaryThrow slot to the original contact before execution; preserve it through hold/offline/notAttempted. Existing completed action IDs remain separate references."
+    },
+    {
+      "field": "SS thrower / physical primary owner",
+      "classification": "A",
+      "owner": "DefensiveOpportunity + active roster",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 5059,
+          "endLine": 5073
+        },
+        {
+          "path": "script.js",
+          "startLine": 11859,
+          "endLine": 11874
+        },
+        {
+          "path": "team-roster-foundation.js",
+          "startLine": 346,
+          "endLine": 350
+        }
+      ],
+      "generated": "Handoff/reach/admission and original execution validation",
+      "saved": "defensiveOpportunity.primaryDefenderId/primaryPosition; reachResolution; player initiator action facts",
+      "beforeExecution": "yes",
+      "limitations": "New slice must be actual SS player primary with actual NPC1B; not a player1B incoming surface or categorical coverage fixture.",
+      "minimalFutureSource": "Cross-check current active roster plus frozen same-contact ownership before any future candidate pin."
+    },
+    {
+      "field": "NPC1B receiver identity",
+      "classification": "A",
+      "owner": "canonical decision opportunity / active roster",
+      "sources": [
+        {
+          "path": "defensive-decision-throw-foundation.js",
+          "startLine": 70,
+          "endLine": 110
+        },
+        {
+          "path": "script.js",
+          "startLine": 11871,
+          "endLine": 11877
+        },
+        {
+          "path": "team-roster-foundation.js",
+          "startLine": 346,
+          "endLine": 350
+        }
+      ],
+      "generated": "Roster exists before execution; canonical selection resolves actual target receiver",
+      "saved": "opportunity route receiverId; selected route / throw receiverId; actionFacts",
+      "beforeExecution": "yes roster / legal route surface; selected output later",
+      "limitations": "A legal actor at position 1B is not evidence of physical readiness or NPC/player role solely from position.",
+      "minimalFutureSource": "Require same legal NPC actor across active roster, eligible route, selected delivery and pinned snapshot; exclude receiver actorId=player for this slice."
+    },
+    {
+      "field": "target runner / first base / initial outs / bases",
+      "classification": "A",
+      "owner": "Ground runner realization + Force context",
+      "sources": [
+        {
+          "path": "batted-ball-ground-defense.js",
+          "startLine": 146,
+          "endLine": 234
+        },
+        {
+          "path": "script.js",
+          "startLine": 11948,
+          "endLine": 11961
+        }
+      ],
+      "generated": "Original supported ground handoff before execution",
+      "saved": "runnerRealization.batterRunner; runnerPhysicalStates; forceChain; situation.outs/runners; selected route target",
+      "beforeExecution": "yes",
+      "limitations": "Initial outs 0/1/2 and empty bases must be read from original admission context; settled outs/base state is different.",
+      "minimalFutureSource": "Cross-check same original batter runner and live first-base obligation. No extra-base or relay admission in this slice."
+    },
+    {
+      "field": "topology version",
+      "classification": "A",
+      "owner": "getHighSchoolDefensiveOpportunity",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 4954,
+          "endLine": 4970
+        }
+      ],
+      "generated": "Original physical ownership resolution; same-contact historical topology retained",
+      "saved": "saved defensiveOpportunity/reach identity; otherwise existing resolver default",
+      "beforeExecution": "yes via original owner",
+      "limitations": "SS lanes use original/default topology; topology version is not receiverExecutionVersion.",
+      "minimalFutureSource": "Retain exact original topology separately from future model/adapter/timing/sampler/effort versions."
+    },
+    {
+      "field": "route eligibility / selected route",
+      "classification": "A",
+      "owner": "infield family + canonical controlled route selection",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 8678,
+          "endLine": 8691
+        },
+        {
+          "path": "script.js",
+          "startLine": 11948,
+          "endLine": 11961
+        },
+        {
+          "path": "defensive-decision-throw-foundation.js",
+          "startLine": 70,
+          "endLine": 123
+        }
+      ],
+      "generated": "Legal route surface available before execution; actual selection at original execution",
+      "saved": "defensiveSituation.legalChoices; lifecycle.legalRoutes/decision; shortstopExecution.choice/selection",
+      "beforeExecution": "legal surface yes; controlled actual selection not yet",
+      "limitations": "Candidate selection cannot wait for onTarget/secured/success. Empty SS may auto-enter routine before callback; no fabricated meaningful lifecycle.",
+      "minimalFutureSource": "Freeze eligible directFirst/hold policy for new physical opportunity independently of later outcome; retain actual phase."
+    },
+    {
+      "field": "original owned SS execution sample",
+      "classification": "A",
+      "owner": "resolveInfieldDecision original execution callback",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 8405,
+          "endLine": 8419
+        },
+        {
+          "path": "script.js",
+          "startLine": 11859,
+          "endLine": 11866
+        },
+        {
+          "path": "script.js",
+          "startLine": 11236,
+          "endLine": 11242
+        }
+      ],
+      "generated": "First original execution only; finite input normalized by current resolver",
+      "saved": "shortstopExecution.sample; resolution.executionSample; action provenance.sample",
+      "beforeExecution": "no",
+      "limitations": "Sample drives original canonical acquisition and combined receiver swing. Cached retries validate/reuse before callback. No preload or new callback allowed.",
+      "minimalFutureSource": "Observe/cache the original binary64 only after original owner generates it; never substitute fixed fixture sample as natural Production source."
+    },
+    {
+      "field": "Match RNG / public callback ownership",
+      "classification": "A",
+      "owner": "Existing routine/public handler owners",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 10308,
+          "endLine": 10356
+        },
+        {
+          "path": "script.js",
+          "startLine": 6544,
+          "endLine": 6549
+        }
+      ],
+      "generated": "Routine default callback advances original simulationCursor; public handler supplies original source",
+      "saved": "simulationCursor/seed and execution sample cache; callbacks themselves not persistent arrays",
+      "beforeExecution": "future values no",
+      "limitations": "A read-only source audit cannot generate a future sample. Default routine source differs from externally supplied public callback.",
+      "minimalFutureSource": "Any future observer must preserve callback count/order/values and cursor; no candidate execution in Sprint10A."
+    },
+    {
+      "field": "canonical SS delivery quality / accuracy / release",
+      "classification": "A",
+      "owner": "DefensiveDecisionThrowFoundation.resolveThrow",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 11859,
+          "endLine": 11872
+        },
+        {
+          "path": "defensive-decision-throw-foundation.js",
+          "startLine": 142,
+          "endLine": 166
+        }
+      ],
+      "generated": "During original execution after controlled acquisition and actual route selection",
+      "saved": "shortstopExecution.decisionThrowState.throwResolution",
+      "beforeExecution": "no",
+      "limitations": "Canonical onTarget/challengingReceive/lateWeakThrow/offline and release are abstract execution classes, not field geometry. Offline/notAttempted stays its real branch.",
+      "minimalFutureSource": "Reuse original completed fact and actual identities; never infer quality from receiver boolean or final out."
+    },
+    {
+      "field": "canonical throw variations",
+      "classification": "A",
+      "owner": "DefensiveDecisionThrowFoundation separate namespaces",
+      "sources": [
+        {
+          "path": "defensive-decision-throw-foundation.js",
+          "startLine": 151,
+          "endLine": 164
+        }
+      ],
+      "generated": "Original throw resolution; deterministic strength/accuracy keyed to canonical throw identity when explicit rolls absent",
+      "saved": "throwResolution.variationEvidence.strength/accuracy",
+      "beforeExecution": "not sampled by SS owned callback; deterministic derivation waits on selected action identity",
+      "limitations": "First-throw variations are not a second receiver roll and are not the receiver sampler B. Their existing key includes route selection.",
+      "minimalFutureSource": "Retain original variation evidence without rerunning or replacing namespaces; future receiver sampler key must use separately pinned physical slot."
+    },
+    {
+      "field": "throw distance / strength / accuracy demand",
+      "classification": "A",
+      "owner": "canonical throwDemand",
+      "sources": [
+        {
+          "path": "defensive-decision-throw-foundation.js",
+          "startLine": 125,
+          "endLine": 134
+        }
+      ],
+      "generated": "Original canonical selected throw",
+      "saved": "throwResolution.throwDemand",
+      "beforeExecution": "no selected demand before controlled choice",
+      "limitations": "SS→1B is medium in this owner; coarseRelativeDemand values are thrower demands. They do not determine receiver Secure demand or measured location.",
+      "minimalFutureSource": "Reuse as upstream class evidence only; separate new incoming demand/arrival contract needed."
+    },
+    {
+      "field": "v1 ball arrival / release flight",
+      "classification": "A",
+      "owner": "RunnerThrowSettlement.resolveTiming",
+      "sources": [
+        {
+          "path": "defensive-runner-throw-settlement-foundation.js",
+          "startLine": 23,
+          "endLine": 60
+        }
+      ],
+      "generated": "Original timing resolution when throw and receiver are usable",
+      "saved": "runnerThrowTiming.ballArrival; resolution.timingResolution.firstLeg",
+      "beforeExecution": "no",
+      "limitations": "v1 ballTime=4+distanceDelay+qualityDelay+delayedRelease. Offline/not-ready noContest may save only quality and no numeric arrival. This is old coarse authority, not v2 launch-relative CRT.",
+      "minimalFutureSource": "Preserve v1 exactly. A future explicit timing bridge must define origin and units; do not relabel or multiply into CRT2 as proven physical timing."
+    },
+    {
+      "field": "v1 runner arrival",
+      "classification": "A",
+      "owner": "Runner physical owner + deriveRunnerArrival",
+      "sources": [
+        {
+          "path": "batted-ball-ground-defense.js",
+          "startLine": 146,
+          "endLine": 234
+        },
+        {
+          "path": "defensive-runner-throw-settlement-foundation.js",
+          "startLine": 15,
+          "endLine": 22
+        }
+      ],
+      "generated": "Runner physical inputs before execution; arrival projection in original contest",
+      "saved": "runnerPhysicalStates; runnerThrowTiming.runnerArrival when contest evaluated",
+      "beforeExecution": "inputs yes; existing formula deterministic projection available",
+      "limitations": "Saved v1 relativeArrival uses 10-.45*speed+start-progress and can be negative. It is not an independently observed time from the proposed upstream launch origin.",
+      "minimalFutureSource": "Keep original speed/start/progress and arrival version; specify a separate verified same-origin conversion before v2 timing use."
+    },
+    {
+      "field": "v1 timing window",
+      "classification": "A",
+      "owner": "buildGroundBallTimingWindows / handoff",
+      "sources": [
+        {
+          "path": "batted-ball-ground-defense.js",
+          "startLine": 299,
+          "endLine": 366
+        }
+      ],
+      "generated": "Ground handoff",
+      "saved": "timingWindows.* {value,state}; situation route windows",
+      "beforeExecution": "yes",
+      "limitations": "Ordinal wide/normal/narrow/expired is not v2 absolute timing and cannot be substituted for CRT ticks.",
+      "minimalFutureSource": "Keep diagnostic legacy window only; return insufficient for unavailable absolute timing."
+    },
+    {
+      "field": "legacy receiver availability",
+      "classification": "A",
+      "owner": "buildInfieldTeammateContext roster-presence proxy",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 7178,
+          "endLine": 7203
+        },
+        {
+          "path": "script.js",
+          "startLine": 8111,
+          "endLine": 8127
+        },
+        {
+          "path": "script.js",
+          "startLine": 11871,
+          "endLine": 11877
+        }
+      ],
+      "generated": "Teammate context before execution",
+      "saved": "defensiveSituation.teammates.firstBaseReceiver.receivingAvailable = Boolean(entity)",
+      "beforeExecution": "yes as roster-presence metadata",
+      "limitations": "SS builder ignores this flag; only audited 2B helper consumes it. Even where true, it does not prove at-base/readiness.",
+      "minimalFutureSource": "Do not treat false/true flag as a new SS physical availability execution stage. Future real availability/location authority must be explicit."
+    },
+    {
+      "field": "legacy receiver readiness / hands combined proxy",
+      "classification": "A",
+      "owner": "SS builder receiverReady threshold",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 11872,
+          "endLine": 11877
+        },
+        {
+          "path": "script.js",
+          "startLine": 11929,
+          "endLine": 11939
+        }
+      ],
+      "generated": "Original SS execution; fielding+(sample-.5)*4 >=3.2",
+      "saved": "runnerThrowTiming.receiverCompletion ready/status; teammateLeg.receiver; receive action status/provenance",
+      "beforeExecution": "no",
+      "limitations": "This authoritative old boolean combines readiness/hands and sample; not independent Secure. fielding zero uses fallback5 in SS expression.",
+      "minimalFutureSource": "Keep proxy labeled Legacy. New readiness and Secure need their own owned inputs, execution authority and sources."
+    },
+    {
+      "field": "NPC ability raw values / current adapter aliases",
+      "classification": "B",
+      "owner": "getDefensiveSimulationCapability",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 6466,
+          "endLine": 6495
+        },
+        {
+          "path": "script.js",
+          "startLine": 11872,
+          "endLine": 11876
+        },
+        {
+          "path": "script.js",
+          "startLine": 11232,
+          "endLine": 11242
+        }
+      ],
+      "generated": "Roster generation and adapter lookup; action snapshot after execution",
+      "saved": "actual NPC roster defense/arm/speed; receiver action provenance.capabilities",
+      "beforeExecution": "raw roster yes; per-action frozen snapshot later",
+      "limitations": "NPC fielding/reaction/range alias defense; throwing aliases arm. Adapter does not provide independent catching/mobility. Known speed exists but speed→movement calibration is new.",
+      "minimalFutureSource": "Version actual adapter; preserve raw roster source. Any fielding→catching or speed→mobility use must be explicit compatibility/calibration, not invented skill."
+    },
+    {
+      "field": "receiver start context / position / movement MDU",
+      "classification": "C",
+      "owner": "No independent authority in audited SS slice",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 11871,
+          "endLine": 11877
+        },
+        {
+          "path": "script.js",
+          "startLine": 7178,
+          "endLine": 7203
+        }
+      ],
+      "generated": "not generated",
+      "saved": "not saved",
+      "beforeExecution": "no",
+      "limitations": "Roster position 1B is a legal assignment, not atBase physical location or movement demand. No starting coordinates/context or MDU source saved.",
+      "minimalFutureSource": "Minimal future owned source: receiver pre-contact/launch starting context plus required cover demand, reachable domain and versioned MDU mapping. Do not default atBase or MDU0."
+    },
+    {
+      "field": "positioning start / completion / ready time",
+      "classification": "C",
+      "owner": "No independent receiver positioning execution authority",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 11876,
+          "endLine": 11877
+        },
+        {
+          "path": "defensive-runner-throw-settlement-foundation.js",
+          "startLine": 40,
+          "endLine": 58
+        }
+      ],
+      "generated": "not generated independently",
+      "saved": "legacy ready boolean only; no separate positioning times",
+      "beforeExecution": "no",
+      "limitations": "Independent reaction/range/mobility-stage duration cannot be recovered from ready/out or from fixed atBase=true.",
+      "minimalFutureSource": "New immutable availability/start/movement and calibrated actual-capability adapter; one versioned CRT origin and separate completion timestamp."
+    },
+    {
+      "field": "incoming demand / clean-delay / bobble-delay",
+      "classification": "C",
+      "owner": "No receiver Secure demand authority in canonical upstream envelope",
+      "sources": [
+        {
+          "path": "defensive-decision-throw-foundation.js",
+          "startLine": 125,
+          "endLine": 166
+        },
+        {
+          "path": "script.js",
+          "startLine": 11872,
+          "endLine": 11877
+        }
+      ],
+      "generated": "not generated as receiver demand",
+      "saved": "thrower coarse demand/quality present; receiver demandMilli and delay facts absent",
+      "beforeExecution": "no",
+      "limitations": "Quality/challengingReceive is upstream class evidence; it cannot supply arbitrary S8 demandMilli/cleanDelay/bobbleDelay coefficients.",
+      "minimalFutureSource": "Provide versioned incoming reception demand and delay source derived from actual delivery/context via calibrated independent adapter; source bundle stays C until then."
+    },
+    {
+      "field": "receiver possession / Secure quality / completion",
+      "classification": "C",
+      "owner": "Legacy combined proxy is insufficient for independent v2 Secure",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 11876,
+          "endLine": 11877
+        },
+        {
+          "path": "script.js",
+          "startLine": 11261,
+          "endLine": 11276
+        }
+      ],
+      "generated": "no independent Secure execution",
+      "saved": "receive action completed/failed is projection of combined proxy; v1 completion includes default receiveDelay0",
+      "beforeExecution": "no",
+      "limitations": "A completed receive label and v1 receiverCompletion do not distinguish clean/bobble/failedHands or independent possession timing.",
+      "minimalFutureSource": "Future positioning→receivable-delivery→hands dependency must output actual possession and completion without another legacy success roll."
+    },
+    {
+      "field": "atBase / baseTouch / tag completion",
+      "classification": "C",
+      "owner": "No independent NPC1B touch execution time",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 11877,
+          "endLine": 11877
+        },
+        {
+          "path": "defensive-runner-throw-settlement-foundation.js",
+          "startLine": 43,
+          "endLine": 58
+        },
+        {
+          "path": "script.js",
+          "startLine": 11268,
+          "endLine": 11276
+        }
+      ],
+      "generated": "SS sets atBase=true; ledger terminal action derived after actual retirement",
+      "saved": "receiverState constant; actionFacts terminal baseTouch completed/late from retirement / receive result",
+      "beforeExecution": "constant legacy input available, independent fact no",
+      "limitations": "Legacy constant and retirement-derived touch status are not new physical at-base/touch authority. tagDelay1 is a default, not calibrated contact timing.",
+      "minimalFutureSource": "Owned secured possession plus actual base-contact action/demand/delay source in same origin; never reverse-infer physical touch from out."
+    },
+    {
+      "field": "v2 launch origin / absolute CRT stamps",
+      "classification": "C",
+      "owner": "No current Match receiver-v2 origin / timing bridge",
+      "sources": [
+        {
+          "path": "defensive-runner-throw-settlement-foundation.js",
+          "startLine": 23,
+          "endLine": 60
+        },
+        {
+          "path": "script.js",
+          "startLine": 11878,
+          "endLine": 11895
+        }
+      ],
+      "generated": "not pinned in original Match",
+      "saved": "only v1 coarse timing version",
+      "beforeExecution": "no",
+      "limitations": "No original upstream launch timestamp establishes CRT2 origin. First launch=0 is a proposed contract convention, not cached observed timing.",
+      "minimalFutureSource": "Explicit model/timing/origin adapter contract before any future v2 evaluation; all arrival/position/Secure/touch/runner stamps must share it."
+    },
+    {
+      "field": "ordinary-effort profile / cause-only clean counterfactual",
+      "classification": "C",
+      "owner": "Missing independent average-reference/calibration authority",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 11872,
+          "endLine": 11877
+        }
+      ],
+      "generated": "not available from SS proxy",
+      "saved": "Sprint5 insufficiency retained; no trustworthy v2 effort inputs",
+      "beforeExecution": "no",
+      "limitations": "Actual weak capability or sample failure cannot stand in for average receiver. No average10 scorer authorization.",
+      "minimalFutureSource": "Versioned league/position/environment reference and calibration authority plus clean-action causal facts; until then explicit insufficient; L03 PARTIAL."
+    },
+    {
+      "field": "candidate model / adapter / timing / slot pin persistence",
+      "classification": "C",
+      "owner": "Future common admission + lifecycle/cache/save owners",
+      "sources": [
+        {
+          "path": "match-situation-lifecycle.js",
+          "startLine": 114,
+          "endLine": 124
+        },
+        {
+          "path": "script.js",
+          "startLine": 11118,
+          "endLine": 11191
+        },
+        {
+          "path": "script.js",
+          "startLine": 8405,
+          "endLine": 8419
+        }
+      ],
+      "generated": "not in formal Match admission",
+      "saved": "S9 isolated pins only; current beginExecution replaces enumerated executionState",
+      "beforeExecution": "no formal pin",
+      "limitations": "Designing an envelope does not implement official Save or resolver selection. Diagnostic fields must not be consumed as actual outcome.",
+      "minimalFutureSource": "Future owner-approved handoff+context+cache version discriminator/pin before execution, explicit retention, early guards and disabled-only observer storage; outside this audit."
+    }
+  ],
+  "beforeExecutionPhaseCaveat": "Empty-base SS commonly auto-enters routine execution. A helper called pending can intercept an already-executing lifecycle with no sample. Capture actual entry before callback; do not relabel it a presented player decision or claim completed action facts existed before execution.",
+  "originAndSamplerCaveats": [
+    "Existing Match/PA/physical raw identity copies can support a future typed bundle; fixed-slot projection is not currently pinned.",
+    "Original canonical throw namespaces include selected route; receiver sampler B must not reuse them as physical slot or incorporate retry/outcome.",
+    "SS original sample is generated only once by original owner; no second receiver roll, preload, callback or stage simulation is authorized.",
+    "v1 saved coarse timing is reusable as v1 evidence, not automatically a v2 upstream-launch CRT timestamp; unknown numeric arrival stays unavailable.",
+    "atBase=true, roster assignment and available NPC identity are distinct from measured starting context/readiness/contact."
+  ],
+  "timingBoundaryAnalysis": {
+    "status": "SOURCE_REVIEW_AND_DESIGNED_SEAM_ONLY",
+    "sources": [
+      {"path": "defensive-runner-throw-settlement-foundation.js", "startLine": 13, "endLine": 21},
+      {"path": "defensive-runner-throw-settlement-foundation.js", "startLine": 44, "endLine": 59},
+      {"path": "defensive-runner-throw-settlement-foundation.js", "startLine": 94, "endLine": 104}
+    ],
+    "legacyOrigin": "The v1 ball scalar and runner relativeArrival share the existing coarse race convention. Neither establishes an observed contact-to-upstream-launch offset. The named upstream-launch zero of the isolated S8 contract is a different proposed origin, not a currently saved Production timestamp.",
+    "quantizationVersusOrigin": "A versioned deterministic conversion such as scalar*1000 can only be a unit-quantization projection B. It cannot establish a new origin. To preserve the same race under a new upstream-launch origin, both BALL and RUNNER must subtract the same authoritative launch offset before applying the same versioned quantization policy; that offset/source is currently C.",
+    "legacyTie": "v1 classify uses margin>0.5 / margin<-0.5 for clearly-ahead labels and otherwise closePlay. Actual deriveSettlement requires timingMargin>0, so exact tie does not establish a defensive out; tag also requires tagCompletion<runner.relativeArrival. A closePlay label alone is not an out.",
+    "v2Tie": "The isolated S8 candidate contract separately requires runnerArrival-contestCompletion>0 and emits no candidate for exact tie. Preserving v1 timing does not itself admit a v2 candidate or prove the required possession/contact stage.",
+    "unknown": "Hold saves null arrival/completion. Offline or unavailable receive may retain runnerArrival but no numeric ball arrival, only a quality object and noContest. These states remain unavailable/insufficient rather than zero-valued time.",
+    "physicalTouch": "v1 receiverCompletion.relativeCompletion is ballTime+receiveDelay; v1 retirement uses the constant atBase=true for force/base contests. It is not an independently observed physical base touch. The later terminal action status is derived from retirement and does not supply a physical touch timestamp.",
+    "futureMinimum": [
+      "Original timing owner must define explicit source, origin version, CRT unit/quantization version, and supported conversion semantics.",
+      "An authoritative common launch offset or independently sourced common-origin ball and runner times must precede the proposed upstream-launch binding.",
+      "Positioning, Secure possession and contact completion need independent same-origin sources; old default delays do not certify them.",
+      "The existing strict v1 resolveTiming equality must remain; a future owner-approved version seam is required rather than adding v2 delay to a v1 object."
+    ],
+    "formalTimingOwnerChanged": false,
+    "candidateSimulationPerformed": false
+  },
+  "minimalFutureSourceProposal": {
+    "status": "DESIGNED_NOT_IMPLEMENTED",
+    "physicalAndVersionBinding": [
+      "validated raw Match/PA/contact/physical ownership copies",
+      "stable physical primaryThrow slot pinned before execution",
+      "explicit model/adapter/timing/sampler/effort discriminators retained in actual owners"
+    ],
+    "receiverExecutionInputs": [
+      "actual receiver availability/start context",
+      "owned required movement and versioned MDU mapping",
+      "calibrated NPC capability/compatibility adapter",
+      "separate incoming demand and Secure delay source",
+      "independent possession and base-contact source"
+    ],
+    "timing": [
+      "explicit common upstream origin and authoritative launch offset",
+      "versioned ball/runner unit-quantization and origin bridge or independent time source",
+      "positioning/Secure/contact completion with same origin"
+    ],
+    "sourceDiscipline": "All missing proposed physical inputs remain C. This proposal supplies neither generated receiver positions nor model coefficients nor formal E/A."
+  },
+  "gate": {
+    "sourceContract": "PARTIAL",
+    "independentReceiverExecutionAuthority": "NOT_AVAILABLE",
+    "L03": "PARTIAL",
+    "modelActivation": "NO",
+    "shadowExecution": "NOT_STARTED",
+    "formalSaveCompatibility": "NOT_IMPLEMENTED"
+  }
+}

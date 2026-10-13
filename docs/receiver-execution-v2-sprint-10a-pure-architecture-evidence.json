@@ -1,0 +1,197 @@
+{
+  "tier": 2,
+  "search": "see initial graph search and source",
+  "evidence": [
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation.validate",
+      "direction": "both",
+      "callees_total": 13,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation",
+            "rows": [
+              [
+                "object",
+                1
+              ],
+              [
+                "id",
+                1
+              ],
+              [
+                "integer",
+                1
+              ],
+              [
+                "freeze",
+                1
+              ],
+              [
+                "reject",
+                1
+              ],
+              [
+                "exact",
+                1
+              ],
+              [
+                "encode",
+                1
+              ],
+              [
+                "binary64",
+                1
+              ],
+              [
+                "physicalValid",
+                1
+              ],
+              [
+                "source",
+                1
+              ],
+              [
+                "time",
+                1
+              ],
+              [
+                "known",
+                1
+              ],
+              [
+                "dataOnly",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 2,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation",
+            "rows": [
+              [
+                "seal",
+                1
+              ],
+              [
+                "checkSeal",
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "validate",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation.validate",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/receiver-execution-v2-foundation.js",
+      "start_line": 144,
+      "end_line": 213,
+      "source_mode": "full",
+      "source": "  function validate(input) {\n    try {\n      if (!object(input)) return reject(\"invalidInput\");\n      // Perform the canonical JSON check before any property-based schema reads.\n      dataOnly(input);\n      const copy = { ...input, ownedSample: input.ownedSample === undefined ? null : binary64(input.ownedSample) };\n      encode(copy);\n      if (!exact(input,[\"contractVersion\",\"versions\",\"identity\",\"context\",\"handoff\",\"capabilities\",\"ownedSample\",\"delivery\",\"positioning\",\"secure\",\"contest\",\"provenance\",\"effortReference\",\"continuation\"])) return reject(\"invalidInputSchema\");\n      if (input.contractVersion !== V.contract || !exact(input.versions,[\"execution\",\"adapter\",\"timing\",\"sampler\",\"effort\"]) ||\n        Object.keys(input.versions).some(k => input.versions[k] !== V[k])) return reject(\"unsupportedVersion\");\n      const i=input.identity, c=input.context, caps=input.capabilities;\n      if (!exact(i,[\"playId\",\"physical\",\"leg\",\"thrower\",\"receiver\",\"target\"]) || !id(i.playId) || !physicalValid(i.physical)) return reject(\"invalidPhysicalIdentity\");\n      if (!exact(i.leg,[\"actionId\",\"sourceThrowActionId\",\"physicalSlot\",\"parentActionId\"]) || !id(i.leg.actionId) || !id(i.leg.sourceThrowActionId) ||\n        ![\"primaryThrow\",\"relayThrow\"].includes(i.leg.physicalSlot) || (i.leg.physicalSlot === \"primaryThrow\" ? i.leg.parentActionId !== null : !id(i.leg.parentActionId))) return reject(\"invalidLegIdentity\");\n      if (![i.thrower,i.receiver].every(a => exact(a,[\"actorId\",\"position\"]) && id(a.actorId) && POSITIONS.includes(a.position)) || i.thrower.actorId === i.receiver.actorId) return reject(\"invalidActor\");\n      if (!exact(i.target,[\"runnerId\",\"base\"]) || !id(i.target.runnerId) || !BASES.includes(i.target.base) || [i.thrower.actorId,i.receiver.actorId].includes(i.target.runnerId)) return reject(\"invalidRunner\");\n      if (!exact(c,[\"initialOuts\",\"originId\",\"routeId\",\"competitionLevel\",\"environmentId\",\"receiverAvailable\"]) || !integer(c.initialOuts,0,2) ||\n        ![c.originId,c.routeId,c.competitionLevel,c.environmentId].every(id) || typeof c.receiverAvailable !== \"boolean\") return reject(\"invalidContext\");\n      if (!exact(input.handoff,[\"playId\",\"physicalIdentity\",\"throwerId\",\"receiverId\",\"runnerId\",\"base\"]) ||\n        encode(input.handoff) !== encode({playId:i.playId,physicalIdentity:i.physical.physicalIdentity,throwerId:i.thrower.actorId,receiverId:i.receiver.actorId,runnerId:i.target.runnerId,base:i.target.base})) return reject(\"handoffIdentityMismatch\");\n      if (!exact(caps,[\"actorId\",\"adapterVersion\",\"values\"]) || caps.actorId !== i.receiver.actorId || caps.adapterVersion !== V.adapter ||\n        !exact(caps.values,ABILITIES) || ABILITIES.some(k => !integer(caps.values[k],0,20))) return reject(\"invalidAbilitySnapshot\");\n      const d=input.delivery, p=input.positioning, s=input.secure, b=input.contest;\n      if (!exact(d,[\"actionId\",\"upstreamActionId\",\"upstreamStatus\",\"status\",\"accuracy\",\"quality\",\"launch\",\"ballArrival\"]) ||\n        d.actionId !== i.leg.sourceThrowActionId || !id(d.upstreamActionId) || ![\"completed\",\"failed\",\"notAttempted\"].includes(d.upstreamStatus) ||\n        ![\"completed\",\"notAttempted\"].includes(d.status) || ![\"onTarget\",\"challenging\",\"offline\",\"none\"].includes(d.accuracy) ||\n        ![\"clean\",\"challenging\",\"none\"].includes(d.quality) || !time(d.launch,c.originId) || !time(d.ballArrival,c.originId)) return reject(\"invalidDelivery\");\n      if (d.status === \"completed\" && (d.upstreamStatus !== \"completed\" || d.accuracy === \"none\" || d.quality === \"none\") ||\n        d.status === \"notAttempted\" && (d.accuracy !== \"none\" || d.quality !== \"none\" || known(d.ballArrival)) ||\n        d.accuracy === \"onTarget\" && d.quality !== \"clean\" || d.accuracy === \"challenging\" && d.quality !== \"challenging\") return reject(\"deliveryDependencyMismatch\");\n      if (known(d.launch) && known(d.ballArrival) && d.ballArrival.ticks < d.launch.ticks) return reject(\"arrivalBeforeLaunch\");\n      if (i.leg.physicalSlot === \"primaryThrow\" && known(d.launch) && d.launch.ticks !== 0) return reject(\"firstLaunchMustBeZero\");\n      if (!exact(p,[\"actionId\",\"startContext\",\"movementMdu\",\"startTime\"]) || !id(p.actionId) || ![\"atBase\",\"covering\",\"lateCover\",\"distant\"].includes(p.startContext) ||\n        !integer(p.movementMdu,0,8) || !time(p.startTime,c.originId) || p.startContext === \"atBase\" && p.movementMdu !== 0) return reject(\"invalidPositioning\");\n      if (!exact(s,[\"actionId\",\"demandMilli\",\"cleanDelayTicks\",\"bobbleDelayTicks\"]) || s.actionId !== i.leg.actionId || !integer(s.demandMilli,0,30000) ||\n        !integer(s.cleanDelayTicks,0,1000000) || !integer(s.bobbleDelayTicks,0,1000000)) return reject(\"invalidSecure\");\n      if (!exact(b,[\"actionId\",\"type\",\"attempted\",\"contact\",\"legality\",\"delayTicks\",\"runnerArrival\"]) || !id(b.actionId) ||\n        ![\"force\",\"batterBeforeFirst\",\"tag\"].includes(b.type) || typeof b.attempted !== \"boolean\" || typeof b.contact !== \"boolean\" ||\n        !integer(b.delayTicks,0,1000000) || !time(b.runnerArrival,c.originId,true) ||\n        !exact(b.legality,[\"status\",\"runnerId\",\"base\",\"sourceActionId\"]) || ![\"eligible\",\"ineligible\",\"unknown\"].includes(b.legality.status) ||\n        b.legality.runnerId !== i.target.runnerId || b.legality.base !== i.target.base || !id(b.legality.sourceActionId) ||\n        b.type === \"batterBeforeFirst\" && i.target.base !== \"first\") return reject(\"invalidContest\");\n      const actionIds=[d.actionId,p.actionId,s.actionId,b.actionId];\n      if (new Set(actionIds).size !== actionIds.length || actionIds.includes(d.upstreamActionId)) return reject(\"duplicateActionIdentity\");\n      if (!exact(input.provenance,SOURCES) || SOURCES.some(k => !source(input.provenance[k]))) return reject(\"missingOrInvalidProvenance\");\n      const missing=SOURCES.filter(k => input.provenance[k].classification === \"C\");\n      if (missing.length) return reject(\"insufficientExecutionSources\",missing,\"insufficient\");\n      if (input.effortReference !== null) {\n        const e=input.effortReference;\n        if (!exact(e,[\"version\",\"status\",\"position\",\"competitionLevel\",\"environmentId\",\"referenceId\",\"capabilities\",\"provenance\"]) ||\n          e.version !== V.effort || ![\"uncalibrated\",\"calibrated\"].includes(e.status) || e.position !== i.receiver.position ||\n          e.competitionLevel !== c.competitionLevel || e.environmentId !== c.environmentId || !id(e.referenceId) ||\n          !exact(e.capabilities,ABILITIES) || ABILITIES.some(k=>!integer(e.capabilities[k],0,20)) || !source(e.provenance)) return reject(\"invalidEffortReference\");\n        // Calibration authority is intentionally not implemented in this pure sprint.\n        if (e.status === \"calibrated\") return reject(\"unavailableCalibrationAuthority\",[],\"insufficient\");\n      }\n      if (i.leg.physicalSlot === \"primaryThrow\" && input.continuation !== null) return reject(\"unexpectedContinuation\");\n      if (i.leg.physicalSlot === \"relayThrow\") {\n        const q=input.continuation;\n        if (!exact(q,[\"firstRetirement\",\"pivot\",\"provenance\"]) || !source(q.provenance)) return reject(\"missingContinuation\",[],\"insufficient\");\n        if (q.provenance.classification === \"C\") return reject(\"insufficientContinuation\",[],\"insufficient\");\n        if (!exact(q.firstRetirement,[\"status\",\"actionId\",\"runnerId\",\"base\",\"outsBefore\",\"outsAfter\"]) ||\n          ![\"completed\",\"failed\"].includes(q.firstRetirement.status) || ![q.firstRetirement.actionId,q.firstRetirement.runnerId].every(id) ||\n          !BASES.includes(q.firstRetirement.base) || !integer(q.firstRetirement.outsBefore,0,2) || !integer(q.firstRetirement.outsAfter,0,3) ||\n          !exact(q.pivot,[\"status\",\"actorId\",\"actionId\"]) || ![\"completed\",\"failed\",\"notAttempted\"].includes(q.pivot.status) ||\n          q.pivot.actorId !== i.thrower.actorId || !id(q.pivot.actionId)) return reject(\"invalidContinuation\");\n      }\n      return freeze({status:\"ok\"});\n    } catch (error) { return reject(\"noncanonicalInput\",[String(error.message)]); }\n  }\n",
+      "callers": 2,
+      "callees": 13
+    },
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-admission-timing-foundation.prepareDiagnosticRaw",
+      "direction": "both",
+      "callees_total": 5,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation",
+            "rows": [
+              [
+                "seal",
+                1
+              ]
+            ]
+          },
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-admission-timing-foundation",
+            "rows": [
+              [
+                "freeze",
+                1
+              ],
+              [
+                "invalid",
+                1
+              ],
+              [
+                "validatePinRaw",
+                1
+              ],
+              [
+                "bindExecutionRaw",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 0,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": []
+      }
+    },
+    {
+      "name": "prepareDiagnosticRaw",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-admission-timing-foundation.prepareDiagnosticRaw",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/receiver-execution-v2-admission-timing-foundation.js",
+      "start_line": 136,
+      "end_line": 145,
+      "source_mode": "full",
+      "source": "function prepareDiagnosticRaw(pin, input) {\n  // Input must already contain owned facts and the original sample supplied by its owner.\n  // No public callback or legacy boolean is used to fill absent facts.\n  const valid = validatePinRaw(pin); if (valid.status !== \"ok\") return valid;\n  if (pin.body.request.mode !== \"candidateV2\") return invalid(\"legacyPinCannotUpgrade\");\n  const sealed = Pure.seal(input); if (sealed.status !== \"ok\") return sealed;\n  const binding = bindExecutionRaw(pin, sealed); if (binding.status !== \"ok\") return binding;\n  return freeze({ status: \"ok\", kind: \"diagnosticPreparationOnly\", runtimeEnabled: false, binding, sealed,\n    simulationPerformed: false, officialExecutionConsumed: false, formalSaveAdmission: false });\n}\n",
+      "callers": 0,
+      "callees": 5
+    }
+  ],
+  "currentSourceVerification": [
+    {
+      "path": "receiver-execution-v2-foundation.js",
+      "start": 144,
+      "end": 213,
+      "equal": true,
+      "sha256": "44581d76bb5bacbac1515dd762afe4e0e6814b8b3f9adb8a2b60963a523f514e"
+    },
+    {
+      "path": "receiver-execution-v2-admission-timing-foundation.js",
+      "start": 136,
+      "end": 145,
+      "equal": true,
+      "sha256": "3ef4ae16a2ea011f915184600d9688956e7750f720999e5b126f83af8e215a1e"
+    }
+  ]
+}

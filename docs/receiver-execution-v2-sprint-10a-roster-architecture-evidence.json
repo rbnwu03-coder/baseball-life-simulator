@@ -1,0 +1,206 @@
+{
+  "search": {
+    "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+    "cols": [
+      "name",
+      "label",
+      "lines",
+      "in",
+      "out"
+    ],
+    "groups": [
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.team-roster-foundation",
+        "file": "team-roster-foundation.js",
+        "rows": [
+          [
+            "createGeneratedPlayer",
+            "Function",
+            "86-117",
+            1,
+            6
+          ],
+          [
+            "createPlayerActor",
+            "Function",
+            "119-135",
+            2,
+            4
+          ],
+          [
+            "createSeededRandom",
+            "Function",
+            "41-50",
+            2,
+            1
+          ],
+          [
+            "injectPlayerIntoRoster",
+            "Function",
+            "352-387",
+            0,
+            7
+          ],
+          [
+            "rebuildTeamRoster",
+            "Function",
+            "165-205",
+            0,
+            4
+          ],
+          [
+            "sampleCapability",
+            "Function",
+            "81-84",
+            1,
+            2
+          ]
+        ]
+      }
+    ],
+    "total": 6,
+    "returned": 6,
+    "count": 6,
+    "has_more": false,
+    "truncated": false
+  },
+  "evidence": [
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.team-roster-foundation.createGeneratedPlayer",
+      "direction": "both",
+      "callees_total": 2,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.player",
+            "rows": [
+              [
+                "random",
+                1
+              ]
+            ]
+          },
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.team-roster-foundation",
+            "rows": [
+              [
+                "sampleCapability",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 1,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.team-roster-foundation",
+            "rows": [
+              [
+                "generateTeamRoster",
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "createGeneratedPlayer",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.team-roster-foundation.createGeneratedPlayer",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/team-roster-foundation.js",
+      "start_line": 86,
+      "end_line": 117,
+      "source_mode": "full",
+      "source": "  function createGeneratedPlayer(input) {\n    const { random, teamId, index, primaryPosition, standardPrior, bench, weakness } = input;\n    const roleOffset = (bench ? standardPrior.benchOffset : 0) + (Number(input.talentModifier) || 0);\n    const positionPenalty = Number(weakness) || 0;\n    const center = standardPrior.center + roleOffset - positionPenalty;\n    const throws = LEFT_HANDED_RESTRICTED.includes(primaryPosition) ? \"R\" : random() < 0.24 ? \"L\" : \"R\";\n    const secondaryPool = POSITION_ORDER.filter(position => position !== primaryPosition\n      && !(throws === \"L\" && LEFT_HANDED_RESTRICTED.includes(position)));\n    const secondary = secondaryPool[Math.floor(random() * secondaryPool.length)];\n    const positionModifiers = {\n      P: { pitching: 1.4, arm: 0.8, power: -0.5 }, C: { defense: 0.8, arm: 0.8, speed: -0.7 },\n      \"1B\": { power: 0.8, speed: -0.5 }, \"2B\": { contact: 0.5, speed: 0.4 }, \"3B\": { power: 0.5, arm: 0.6 },\n      SS: { defense: 1, speed: 0.4 }, LF: { power: 0.5 }, CF: { defense: 0.8, speed: 0.8 }, RF: { arm: 0.8, power: 0.3 }\n    }[primaryPosition] || {};\n    const capability = {};\n    [\"contact\", \"power\", \"speed\", \"defense\", \"arm\", \"pitching\"].forEach(key => {\n      const nonPitcherPenalty = key === \"pitching\" && primaryPosition !== \"P\" ? -3.8 : 0;\n      capability[key] = sampleCapability(random, center, standardPrior.spread, (positionModifiers[key] || 0) + nonPitcherPenalty);\n    });\n    const control = primaryPosition === \"P\" ? sampleCapability(random, center, standardPrior.spread, 0.6) : Math.max(1, capability.pitching - 1);\n    const stuff = primaryPosition === \"P\" ? sampleCapability(random, center, standardPrior.spread, 0.8) : capability.pitching;\n    return Object.freeze({\n      playerId: `${teamId}-player-${String(index + 1).padStart(2, \"0\")}`,\n      id: `${teamId}-player-${String(index + 1).padStart(2, \"0\")}`,\n      name: DEFAULT_NAMES[index % DEFAULT_NAMES.length], age: 16 + (index % 3), year: 1 + (index % 3),\n      primaryPosition, secondaryPositions: Object.freeze(secondary ? [secondary] : []),\n      bats: random() < 0.28 ? \"L\" : \"R\", throws,\n      ...capability,\n      pitchingProfile: Object.freeze({ effectiveness: capability.pitching, control, stuff }),\n      source: \"team-roster-foundation\"\n    });\n  }\n",
+      "callers": 1,
+      "callees": 2
+    },
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.script.createLegacyHighSchoolMatchSimulationRoster",
+      "direction": "both",
+      "callees_total": 1,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "createEntity",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 1,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "createHighSchoolMatchSimulationRoster",
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "createLegacyHighSchoolMatchSimulationRoster",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.createLegacyHighSchoolMatchSimulationRoster",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+      "start_line": 6244,
+      "end_line": 6269,
+      "source_mode": "full",
+      "source": "function createLegacyHighSchoolMatchSimulationRoster(role, playerPosition) {\n  const positions = [\"投手\", \"捕手\", \"一壘手\", \"二壘手\", \"三壘手\", \"游擊手\", \"左外野手\", \"中外野手\", \"右外野手\"];\n  const homeNames = [\"佐藤\", \"森\", \"小林\", \"中村\", \"伊藤\", \"渡邊\", \"山田\", \"吉田\", \"松本\"];\n  const awayNames = [\"高橋\", \"石井\", \"清水\", \"林\", \"山口\", \"阿部\", \"池田\", \"橋本\", \"山崎\"];\n  const createEntity = (team, index, name) => ({\n    id: `${team}-sim-${index + 1}`,\n    name,\n    position: positions[index],\n    contact: 4 + ((index * 2 + (team === \"away\" ? 1 : 0)) % 5),\n    power: 3 + ((index * 3 + (team === \"away\" ? 2 : 0)) % 5),\n    speed: 3 + ((index * 4 + 1) % 5),\n    defense: 4 + ((index * 5 + 2) % 5),\n    arm: 4 + ((index * 3 + 3) % 5),\n    bats: (index + (team === \"away\" ? 1 : 0)) % 4 === 0 ? \"L\" : \"R\",\n    pitching: index === 0 ? 7 : 1,\n    source: \"simulation-roster\"\n  });\n  const home = homeNames.map((name, index) => createEntity(\"home\", index, name));\n  const away = awayNames.map((name, index) => createEntity(\"away\", index, name));\n  const playerEntity = { id: \"player\", name: player.name || \"你\", position: playerPosition, bats: player.bats, source: \"canonical-player\" };\n  if (role === \"starter\") home[5] = playerEntity;\n  return {\n    home: { lineup: home, bench: role === \"starter\" ? [] : [playerEntity] },\n    away: { lineup: away, bench: [] }\n  };\n}\n",
+      "callers": 1,
+      "callees": 1
+    }
+  ],
+  "currentSourceVerification": [
+    {
+      "path": "team-roster-foundation.js",
+      "start": 86,
+      "end": 117,
+      "equal": true,
+      "sha256": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8"
+    },
+    {
+      "path": "script.js",
+      "start": 6244,
+      "end": 6269,
+      "equal": true,
+      "sha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+    }
+  ]
+}

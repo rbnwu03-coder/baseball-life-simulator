@@ -1,0 +1,2192 @@
+{
+  "schemaVersion": "receiver-v2-sprint-10a-ss-source-audit-v1",
+  "baseline": "32ee5ec55e4791952a9ef5d68c126389ab1e1ff6",
+  "capturedDate": "2026-10-13",
+  "scope": "READ_ONLY_NEW_SS_PRIMARY_EMPTY_BASES_DIRECT_OR_HOLD_SOURCE_AUDIT",
+  "runtimeEnabled": false,
+  "candidateExecutionPerformed": false,
+  "productionSourcesEdited": false,
+  "graph": {
+    "project": "E-meng-baseball_life_sim_semirefactor",
+    "tier": 2,
+    "sessionInitialIndex": {
+      "status": "ready",
+      "indexedAt": "2026-10-12T16:21:59Z"
+    },
+    "caveat": "Index auto-refreshed during parallel work. Individual coverage generation retained; no single-generation freshness claim. No recorded issue is not completeness proof. Current full snippets and source fallback take precedence.",
+    "exactSymbolSearch": {
+      "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+      "cols": [
+        "name",
+        "label",
+        "lines",
+        "in",
+        "out"
+      ],
+      "groups": [
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+          "file": "script.js",
+          "rows": [
+            [
+              "attachHighSchoolInfieldActionFacts",
+              "Function",
+              "11213-11291",
+              3,
+              9
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.batted-ball-ground-defense",
+          "file": "batted-ball-ground-defense.js",
+          "rows": [
+            [
+              "buildGroundBallDefensiveOpportunity",
+              "Function",
+              "320-366",
+              3,
+              10
+            ],
+            [
+              "buildGroundBallRunnerRealization",
+              "Function",
+              "146-234",
+              1,
+              8
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+          "file": "script.js",
+          "rows": [
+            [
+              "buildHighSchoolShortstopExecution",
+              "Function",
+              "11859-11946",
+              2,
+              17
+            ],
+            [
+              "buildInfieldTeammateContext",
+              "Function",
+              "7178-7203",
+              1,
+              5
+            ],
+            [
+              "createHighSchoolOffensiveTacticalIdentity",
+              "Function",
+              "4595-4606",
+              2,
+              1
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation",
+          "file": "defensive-runner-throw-settlement-foundation.js",
+          "rows": [
+            [
+              "deriveRunnerArrival",
+              "Function",
+              "15-22",
+              2,
+              4
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+          "file": "script.js",
+          "rows": [
+            [
+              "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+              "Function",
+              "5117-5306",
+              1,
+              18
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.team-roster-foundation",
+          "file": "team-roster-foundation.js",
+          "rows": [
+            [
+              "getCurrentDefender",
+              "Function",
+              "346-350",
+              1,
+              2
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+          "file": "script.js",
+          "rows": [
+            [
+              "getDefensiveSimulationCapability",
+              "Function",
+              "6466-6495",
+              21,
+              4
+            ],
+            [
+              "getHighSchoolControlledDecisionInput",
+              "Function",
+              "11948-11961",
+              6,
+              6
+            ],
+            [
+              "nextHighSchoolMatchSimulationRandom",
+              "Function",
+              "6544-6549",
+              3,
+              0
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.batted-ball-physical",
+          "file": "batted-ball-physical.js",
+          "rows": [
+            [
+              "resolveBattedBallPhysicalTruth",
+              "Function",
+              "105-131",
+              3,
+              9
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.offensive-plate-approach",
+          "file": "offensive-plate-approach.js",
+          "rows": [
+            [
+              "resolveFairContactBallInPlay",
+              "Function",
+              "444-474",
+              2,
+              5
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+          "file": "script.js",
+          "rows": [
+            [
+              "resolveHighSchoolDefensivePlay",
+              "Function",
+              "10308-10324",
+              2,
+              7
+            ],
+            [
+              "resolveHighSchoolInfieldReceiver",
+              "Function",
+              "8111-8127",
+              1,
+              7
+            ],
+            [
+              "resolveRoutineDefensivePlay",
+              "Function",
+              "10335-10356",
+              1,
+              6
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation",
+          "file": "defensive-decision-throw-foundation.js",
+          "rows": [
+            [
+              "resolveThrow",
+              "Function",
+              "142-166",
+              5,
+              8
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation",
+          "file": "defensive-runner-throw-settlement-foundation.js",
+          "rows": [
+            [
+              "resolveTiming",
+              "Function",
+              "23-60",
+              5,
+              15
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation",
+          "file": "defensive-decision-throw-foundation.js",
+          "rows": [
+            [
+              "throwDemand",
+              "Function",
+              "125-134",
+              9,
+              2
+            ]
+          ]
+        }
+      ],
+      "total": 20,
+      "returned": 20,
+      "count": 20,
+      "has_more": false,
+      "truncated": false
+    },
+    "supplementarySearch": {
+      "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+      "cols": [
+        "name",
+        "label",
+        "lines",
+        "in",
+        "out"
+      ],
+      "groups": [
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+          "file": "script.js",
+          "rows": [
+            [
+              "assertHighSchoolDetailedResponsibility",
+              "Function",
+              "5059-5073",
+              9,
+              3
+            ],
+            [
+              "buildInfieldTeammateContext",
+              "Function",
+              "7178-7203",
+              1,
+              5
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.team-roster-foundation",
+          "file": "team-roster-foundation.js",
+          "rows": [
+            [
+              "getCurrentDefender",
+              "Function",
+              "346-350",
+              1,
+              2
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+          "file": "script.js",
+          "rows": [
+            [
+              "prepareHighSchoolDefensiveMomentFromSimulation",
+              "Function",
+              "13183-13385",
+              1,
+              43
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.offensive-plate-approach",
+          "file": "offensive-plate-approach.js",
+          "rows": [
+            [
+              "resolveFairContactBallInPlay",
+              "Function",
+              "444-474",
+              2,
+              5
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+          "file": "script.js",
+          "rows": [
+            [
+              "resolveRoutineDefensivePlay",
+              "Function",
+              "10335-10356",
+              1,
+              6
+            ]
+          ]
+        }
+      ],
+      "total": 6,
+      "returned": 6,
+      "count": 6,
+      "has_more": false,
+      "truncated": false
+    },
+    "traces": [
+      {
+        "function": "buildHighSchoolShortstopExecution",
+        "direction": "both",
+        "callees_total": 8,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "resolveHighSchoolCanonicalSecure",
+                  1
+                ],
+                [
+                  "assertHighSchoolDetailedResponsibility",
+                  1
+                ],
+                [
+                  "getDefensiveSimulationCapability",
+                  1
+                ],
+                [
+                  "getSecondBaseCauseExplanation",
+                  1
+                ],
+                [
+                  "attachDefensiveOutcomeExplanation",
+                  1
+                ],
+                [
+                  "resolveInfieldRelayToFirst",
+                  1
+                ],
+                [
+                  "attachHighSchoolInfieldActionFacts",
+                  1
+                ],
+                [
+                  "getHighSchoolControlledDecisionInput",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 2,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "resolveInfieldDecision",
+                  1
+                ],
+                [
+                  "validateHighSchoolDecisionThrowState",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+        "direction": "both",
+        "callees_total": 12,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getHighSchoolMatchSimulationEntity",
+                  1
+                ],
+                [
+                  "createHighSchoolOffensiveTacticalIdentity",
+                  1
+                ],
+                [
+                  "getHighSchoolProvisionalOffensiveTacticalCapabilities",
+                  1
+                ],
+                [
+                  "getHighSchoolDefensiveOpportunity",
+                  1
+                ],
+                [
+                  "assertHighSchoolGroundParticipant",
+                  1
+                ],
+                [
+                  "createHighSchoolFirstBaseContext",
+                  1
+                ],
+                [
+                  "assertHighSchoolDetailedResponsibility",
+                  1
+                ],
+                [
+                  "getHighSchoolFlyBallDefenderCatchContext",
+                  1
+                ],
+                [
+                  "physicalDefenderContext",
+                  1
+                ],
+                [
+                  "getDefensiveSimulationCapability",
+                  1
+                ],
+                [
+                  "isInfieldDecisionFamilyPosition",
+                  1
+                ],
+                [
+                  "getHighSchoolInfieldAssignmentPosition",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 1,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "prepareHighSchoolDefensiveMomentFromSimulation",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "resolveHighSchoolDefensivePlay",
+        "direction": "both",
+        "callees_total": 4,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "assertHighSchoolGroundParticipant",
+                  1
+                ],
+                [
+                  "resolveHighSchoolCatcherDecision",
+                  1
+                ],
+                [
+                  "resolveLegacyHighSchoolDefensivePlay",
+                  1
+                ],
+                [
+                  "validateHighSchoolDecisionThrowState",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 2,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "advanceHighSchoolYearOneAfterMomentTwo",
+                  1
+                ],
+                [
+                  "resolveHighSchoolYearOneMatch",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "resolveHighSchoolInfieldReceiver",
+        "direction": "both",
+        "callees_total": 1,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getDefensiveSimulationCapability",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 1,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "resolveSecondBaseInitiatedRoute",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "createHighSchoolOffensiveTacticalIdentity",
+        "direction": "both",
+        "callees_total": 0,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": []
+        },
+        "callers_total": 2,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "prepareHighSchoolOffensiveTacticalAction",
+                  1
+                ],
+                [
+                  "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "getHighSchoolControlledDecisionInput",
+        "direction": "both",
+        "callees_total": 2,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getHighSchoolDefensiveOpportunity",
+                  1
+                ],
+                [
+                  "getSecondBaseRouteWindow",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 6,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "buildHighSchoolFirstBaseExecution",
+                  1
+                ],
+                [
+                  "buildHighSchoolThirdBaseExecution",
+                  1
+                ],
+                [
+                  "buildHighSchoolShortstopExecution",
+                  1
+                ],
+                [
+                  "getHighSchoolControlledDefensiveRoutes",
+                  1
+                ],
+                [
+                  "validateHighSchoolDecisionThrowState",
+                  1
+                ],
+                [
+                  "projectHighSchoolControlledDecisionThrow",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "attachHighSchoolInfieldActionFacts",
+        "direction": "both",
+        "callees_total": 4,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "completed",
+                  1
+                ],
+                [
+                  "status",
+                  1
+                ],
+                [
+                  "add",
+                  1
+                ],
+                [
+                  "attachHighSchoolThirdBaseActionFacts",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 3,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "resolveInfieldDecision",
+                  1
+                ],
+                [
+                  "buildHighSchoolShortstopExecution",
+                  1
+                ],
+                [
+                  "validateHighSchoolDecisionThrowState",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "getDefensiveSimulationCapability",
+        "direction": "both",
+        "callees_total": 1,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getDevelopmentMatchPositionTestCapabilityAudit",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 20,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getHighSchoolReachAccess",
+                  1
+                ],
+                [
+                  "getHighSchoolPhysicalDefensePlayerContext",
+                  1
+                ],
+                [
+                  "createHighSchoolFirstBaseContext",
+                  1
+                ],
+                [
+                  "getHighSchoolFlyBallDefenderCatchContext",
+                  1
+                ],
+                [
+                  "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+                  1
+                ],
+                [
+                  "getHighSchoolLineDriveCatchDefenderContext",
+                  1
+                ],
+                [
+                  "getHighSchoolTagUpReceivingTarget",
+                  1
+                ],
+                [
+                  "createHighSchoolRunnerTagUpSituation",
+                  1
+                ],
+                [
+                  "createHighSchoolRosterPlayerActor",
+                  1
+                ],
+                [
+                  "getPlayerCapabilitySnapshotForMatch",
+                  1
+                ],
+                [
+                  "resolveSimulatedHighSchoolPlateAppearance",
+                  1
+                ],
+                [
+                  "adapt",
+                  1
+                ],
+                [
+                  "buildInfieldMeaningfulMoment",
+                  1
+                ],
+                [
+                  "resolveHighSchoolInfieldReceiver",
+                  1
+                ],
+                [
+                  "getHighSchoolDefensiveDecisionContextModifier",
+                  1
+                ],
+                [
+                  "resolveHighSchoolCatcherDecision",
+                  1
+                ],
+                [
+                  "resolveLegacyHighSchoolDefensivePlay",
+                  1
+                ],
+                [
+                  "add",
+                  1
+                ],
+                [
+                  "buildHighSchoolThirdBaseExecution",
+                  1
+                ],
+                [
+                  "buildHighSchoolShortstopExecution",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "nextHighSchoolMatchSimulationRandom",
+        "direction": "both",
+        "callees_total": 0,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": []
+        },
+        "callers_total": 2,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "resolveSimulatedHighSchoolPlateAppearance",
+                  1
+                ],
+                [
+                  "resolveRoutineDefensivePlay",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "resolveBattedBallPhysicalTruth",
+        "direction": "both",
+        "callees_total": 8,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.batted-ball-physical",
+              "rows": [
+                [
+                  "clone",
+                  1
+                ],
+                [
+                  "deepFreeze",
+                  1
+                ],
+                [
+                  "resolveRoll",
+                  1
+                ],
+                [
+                  "resolveContactQuality",
+                  1
+                ],
+                [
+                  "resolveBattedBallType",
+                  1
+                ],
+                [
+                  "resolveBattedBallPace",
+                  1
+                ],
+                [
+                  "resolveBattedBallDirection",
+                  1
+                ],
+                [
+                  "resolveBattedBallDepth",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 1,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.infield-baseball-logic-audit-runner",
+              "rows": [
+                [
+                  "main",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "buildGroundBallDefensiveOpportunity",
+        "direction": "both",
+        "callees_total": 7,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.batted-ball-ground-defense",
+              "rows": [
+                [
+                  "clone",
+                  1
+                ],
+                [
+                  "deepFreeze",
+                  1
+                ],
+                [
+                  "deriveForceState",
+                  1
+                ],
+                [
+                  "buildGroundBallRunnerRealization",
+                  1
+                ],
+                [
+                  "resolveGroundBallDefensiveAccess",
+                  1
+                ],
+                [
+                  "projectGroundBallCompatibilityContext",
+                  1
+                ],
+                [
+                  "buildGroundBallTimingWindows",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 0,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": []
+        }
+      },
+      {
+        "function": "buildGroundBallRunnerRealization",
+        "direction": "both",
+        "callees_total": 6,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.batted-ball-ground-defense",
+              "rows": [
+                [
+                  "clone",
+                  1
+                ],
+                [
+                  "deepFreeze",
+                  1
+                ],
+                [
+                  "buildRunner3BAdvanceOpportunity",
+                  1
+                ],
+                [
+                  "resolveRunner3BAdvanceDecision",
+                  1
+                ],
+                [
+                  "deriveForceState",
+                  1
+                ],
+                [
+                  "createRunnerState",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 1,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.batted-ball-ground-defense",
+              "rows": [
+                [
+                  "buildGroundBallDefensiveOpportunity",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "resolveThrow",
+        "direction": "both",
+        "callees_total": 6,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation",
+              "rows": [
+                [
+                  "freeze",
+                  1
+                ],
+                [
+                  "fail",
+                  1
+                ],
+                [
+                  "validateSelection",
+                  1
+                ],
+                [
+                  "throwDemand",
+                  1
+                ],
+                [
+                  "throwBase",
+                  1
+                ],
+                [
+                  "sample",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 1,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.infield-baseball-logic-audit-runner",
+              "rows": [
+                [
+                  "main",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "throwDemand",
+        "direction": "both",
+        "callees_total": 0,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": []
+        },
+        "callers_total": 2,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation",
+              "rows": [
+                [
+                  "resolveThrow",
+                  1
+                ],
+                [
+                  "projectExistingThrow",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "resolveTiming",
+        "direction": "both",
+        "callees_total": 6,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation",
+              "rows": [
+                [
+                  "clone",
+                  1
+                ],
+                [
+                  "same",
+                  1
+                ],
+                [
+                  "freeze",
+                  1
+                ],
+                [
+                  "fail",
+                  1
+                ],
+                [
+                  "classify",
+                  1
+                ],
+                [
+                  "deriveRunnerArrival",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 2,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.infield-baseball-logic-audit-runner",
+              "rows": [
+                [
+                  "main",
+                  1
+                ]
+              ]
+            },
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation",
+              "rows": [
+                [
+                  "deriveSettlement",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "deriveRunnerArrival",
+        "direction": "both",
+        "callees_total": 3,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation",
+              "rows": [
+                [
+                  "clone",
+                  1
+                ],
+                [
+                  "freeze",
+                  1
+                ],
+                [
+                  "fail",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 2,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation",
+              "rows": [
+                [
+                  "resolveTiming",
+                  1
+                ],
+                [
+                  "resolveBaseTouchTiming",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "resolveFairContactBallInPlay",
+        "direction": "both",
+        "callees_total": 3,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.offensive-plate-approach",
+              "rows": [
+                [
+                  "clone",
+                  1
+                ],
+                [
+                  "deepFreeze",
+                  1
+                ],
+                [
+                  "resolveLegacyBallInPlayOutcome",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 1,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.offensive-plate-approach",
+              "rows": [
+                [
+                  "resolveNextPitch",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "buildInfieldTeammateContext",
+        "direction": "both",
+        "callees_total": 3,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getInfieldTeammateForPosition",
+                  1
+                ],
+                [
+                  "adapt",
+                  1
+                ],
+                [
+                  "getHighSchoolPlayerTeamSide",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 1,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "buildInfieldMeaningfulMoment",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "resolveRoutineDefensivePlay",
+        "direction": "both",
+        "callees_total": 4,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "assertHighSchoolGroundParticipant",
+                  1
+                ],
+                [
+                  "nextHighSchoolMatchSimulationRandom",
+                  1
+                ],
+                [
+                  "classifyPositionFamilyPlay",
+                  1
+                ],
+                [
+                  "getInfieldRoutineExecutionRoute",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 1,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "prepareHighSchoolDefensiveMomentFromSimulation",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "function": "getCurrentDefender",
+        "direction": "both",
+        "callees_total": 2,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.team-roster-foundation",
+              "rows": [
+                [
+                  "normalizePosition",
+                  1
+                ],
+                [
+                  "validateActiveDefense",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 0,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": []
+        }
+      }
+    ],
+    "snippets": [
+      {
+        "name": "buildHighSchoolShortstopExecution",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.buildHighSchoolShortstopExecution",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 11859,
+        "end_line": 11946,
+        "source_mode": "full",
+        "source": "function buildHighSchoolShortstopExecution(match, situation, choice, sample) {\n  const handoff = match.groundBallInPlayState;\n  if (!Number.isFinite(sample) || sample < 0 || sample >= 1) throw new Error(\"Invalid SS execution sample\");\n  assertHighSchoolDetailedResponsibility(match, handoff.physicalTruth, \"SS\", \"player\");\n  if (situation.playerPosition !== \"游擊手\" || !handoff.supported) throw new Error(\"Invalid SS production context\");\n  const secureResolution = resolveHighSchoolCanonicalSecure(match, handoff, sample);\n  const input = getHighSchoolControlledDecisionInput(match, { ...handoff, secureResolution });\n  const opportunity = DefensiveDecisionThrowFoundation.buildDecisionOpportunity(input);\n  const controlled = opportunity.status === \"controlledDecision\";\n  const selection = controlled ? DefensiveDecisionThrowFoundation.selectDefensiveRoute(opportunity, choice.routeId, input) : null;\n  const thrown = selection ? DefensiveDecisionThrowFoundation.resolveThrow({ input, opportunity, selection,\n    capabilities: { defenderId: \"player\", arm: situation.playerCapabilities.arm, throwing: situation.playerCapabilities.throwing },\n    transferState: secureResolution.secureQuality === \"bobbleButControlled\" ? \"delayed\" : \"ready\" }) : null;\n  const swing = (sample - 0.5) * 4;\n  const receiver = selection?.route.receiverPosition\n    ? TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam], selection.route.receiverPosition) : null;\n  const receiverCapabilities = receiver ? getDefensiveSimulationCapability(receiver, receiver.position, match) : {};\n  const receiverReady = Boolean(receiver && (Number(receiverCapabilities.fielding) || 5) + swing >= 3.2);\n  input.receiverState = { receiverId: receiver?.id || null, ready: receiverReady, atBase: true, tagAvailable: receiverReady, tagDelay: 1 };\n  const decisionThrowState = { opportunity, preControlIntent: choice.routeId, selection, activeSelection: selection, throwResolution: thrown };\n  // Failed acquisition has no controlled decision or throw. Preserve the existing\n  // Foundation's no-contest diagnostic so lifecycle recovery still has an owner.\n  let runnerThrowTiming = selection ? null : DefensiveRunnerThrowSettlementFoundation.projectExistingTiming({\n    stage: decisionThrowState, runnerState: null, windowState: \"expired\", receiverFact: \"unavailable\" });\n  let firstLegSettlement = null;\n  if (selection) {\n    const timingArgs = { input, opportunity, selection, throwResolution: thrown,\n      runnerState: input.runnerPhysicalStates.find(r => r.runnerId === selection.route.targetRunnerId),\n      receiverState: input.receiverState, resolveThirdOut: resolveHighSchoolThirdOutIntegrity };\n    runnerThrowTiming = DefensiveRunnerThrowSettlementFoundation.resolveTiming(timingArgs);\n    firstLegSettlement = DefensiveRunnerThrowSettlementFoundation.deriveSettlement({ ...timingArgs, timing: runnerThrowTiming });\n  }\n  const firstOut = firstLegSettlement?.outRecorded === true;\n  const continuationWindow = handoff.timingWindows.relayToFirstWindow.state;\n  const isDoublePlay = choice.infieldRoute === \"doublePlay\";\n  // Relay completion reuses the established 2B/SS receive-turn-deliver model.\n  const relay = resolveInfieldRelayToFirst(situation, firstOut, sample, continuationWindow, receiverCapabilities);\n  const secondOut = isDoublePlay && firstOut && situation.outs < 2 && relay.secondOutAvailable;\n  const retirements = firstOut ? [{ runnerId: selection.route.targetRunnerId, targetBase: selection.route.targetBase,\n    outType: firstLegSettlement.playType === \"batterRunner\" ? \"batterRunnerBeforeFirst\" : firstLegSettlement.playType === \"force\" ? \"force\" : \"nonForceTag\", sequence: 1 }] : [];\n  if (secondOut) retirements.push({ runnerId: situation.batterId, targetBase: \"first\", outType: \"batterRunnerBeforeFirst\", sequence: 2 });\n  // Complete all committed actors after the first-leg contest. The existing force\n  // owner accounts for in-transit runners, collisions, and force removal after outs.\n  const runnerSettlement = ForceAdvancement.settleForceAdvancement({ forceChain: situation.forceChain,\n    movementIntents: situation.movementIntents, retirements });\n  const error = (secureResolution.attemptAvailable && !secureResolution.secured) || thrown?.throwQuality === \"offline\";\n  const resultCode = secondOut ? \"twoOuts\" : firstOut ? \"oneOut\" : error ? \"error\" : \"zeroOuts\";\n  const detailedResult = secondOut ? \"completedDoublePlay\" : firstOut ? (isDoublePlay ? \"secondStageExpired\" : \"cleanOut\")\n    : error ? (secureResolution.secured ? \"inaccurateThrow\" : \"fieldingError\") : !secureResolution.secured ? \"lateFielding\"\n      : choice.infieldRoute === \"controlledNoThrow\" ? \"controlledNoThrow\" : \"lateThrow\";\n  const primaryCause = !secureResolution.secured ? \"playerFieldingControl\" : thrown?.throwQuality === \"offline\" ? \"playerFirstThrow\"\n    : !receiverReady && selection?.route.action !== \"holdBall\"\n      ? selection?.route.receiverPosition === \"1B\" ? \"teammateFirstBaseReceive\" : selection?.route.receiverPosition === \"C\" ? \"teammateHomeReceive\" : \"teammatePivot\"\n      : isDoublePlay && firstOut && !relay.turn && situation.batterSpeed < 8 && continuationWindow !== \"narrow\" ? \"teammatePivot\"\n        : isDoublePlay && firstOut && relay.turn && !relay.firstBaseReceive ? \"teammateFirstBaseReceive\"\n          : choice.infieldRoute === \"controlledNoThrow\" ? \"balancedExecution\"\n            : !firstOut || (isDoublePlay && !secondOut) ? \"timingWindow\" : \"balancedExecution\";\n  const resolution = attachDefensiveOutcomeExplanation(situation, choice, {\n    familyId: \"infield\", route: choice.infieldRoute, routeId: choice.routeId, initialRoute: choice.routeId, activeRoute: choice.routeId,\n    playerRole: \"initiator\", responsibility: situation.responsibility, resultCode, detailedResult,\n    tier: secondOut ? \"strong\" : firstOut || choice.infieldRoute === \"controlledNoThrow\" ? \"mixed\" : \"failure\",\n    decisionQuality: choice.advisable === \"strong\" ? \"strong\" : choice.advisable === \"aggressive\" ? \"aggressive\" : choice.advisable === \"conservative\" ? \"conservative\" : \"reasonable\",\n    executionQuality: firstOut ? (isDoublePlay && !secondOut ? \"partial\" : \"complete\") : error ? \"misplay\" : choice.infieldRoute === \"controlledNoThrow\" ? \"controlled\" : \"late\",\n    runnerSettlement, runnerSettlementIdentity: situation.runnerSettlementIdentity, outsCreated: runnerSettlement.outsCreated,\n    runnerChanges: runnerSettlement.runnerChanges, runnersAfter: runnerSettlement.runnersAfter,\n    scoringRunnerIds: runnerSettlement.scoringRunnerIds, runsAllowed: runnerSettlement.runsAllowed, error,\n    primaryCause, secondaryCause: \"\", responsibleActor: primaryCause.startsWith(\"teammate\") ? \"teammate\" : primaryCause === \"timingWindow\" ? \"timingWindow\" : \"player\",\n    playerResponsibility: error ? \"major\" : \"handled\", teammateResponsibility: primaryCause.startsWith(\"teammate\") ? \"major\" : isDoublePlay ? \"shared\" : \"none\",\n    causeExplanation: primaryCause === \"teammatePivot\" ? \"傳球的接球端未完成接球或轉傳；二壘手與游擊手的責任分開記錄。\"\n      : primaryCause === \"teammateFirstBaseReceive\" ? \"傳球已進入一壘接球位置，但一壘手未完成接球；傳球與接球責任分開記錄。\" : getSecondBaseCauseExplanation(primaryCause, \"\"),\n    playerLeg: { reach: handoff.defensiveAccess.reachResolution.reached ? \"completed\" : \"late\",\n      control: secureResolution.secured ? \"completed\" : \"failed\", transfer: thrown?.releaseQuality === \"delayedRelease\" ? \"delayed\" : controlled ? \"completed\" : \"notReached\",\n      firstThrow: thrown?.throwAttempted ? thrown.throwQuality === \"offline\" ? \"failed\" : \"completed\" : \"notAttempted\" },\n    teammateLeg: { receiver: receiverReady ? \"completed\" : \"notReached\", ...(isDoublePlay ? {\n      secondBaseReceive: relay.receive ? \"completed\" : \"notCompleted\", secondBasePivot: relay.turn ? \"completed\" : \"notCompleted\",\n      secondBaseSecondThrow: relay.turn ? \"completed\" : \"notCompleted\", firstBaseReceive: relay.firstBaseReceive ? \"completed\" : \"notCompleted\" } : {}) },\n    firstLegState: { status: firstOut ? \"completed\" : \"failed\", targetBase: selection?.route.targetBase || null },\n    continuationState: { status: secondOut ? \"completed\" : firstOut && isDoublePlay ? \"windowClosed\" : \"settledByActorOutcomes\", targetBase: isDoublePlay ? \"first\" : null, window: continuationWindow },\n    timingResolution: { firstLeg: runnerThrowTiming, firstLegSettlement, relayToFirstWindow: continuationWindow },\n    ballContext: situation.ballContext.type, ballDirection: situation.ballDirection, ballDepth: situation.ballDepth,\n    batterSpeed: situation.batterSpeed, runnerSpeed: Math.max(...situation.runnerSpeeds.filter(Number.isFinite), 0),\n    ...situation.playerCapabilities, firstStage: secureResolution.margin ?? handoff.defensiveAccess.reachResolution.margin,\n    secondStage: thrown?.accuracyMargin ?? 0, returnTiming: 0, windows: situation.windows\n  });\n  return { sample, choice: { routeId: choice.routeId, matchDecision: choice.matchDecision }, secureResolution,\n    decisionThrowState,\n    runnerThrowTiming, resolution: attachHighSchoolInfieldActionFacts(match, situation, choice, resolution, sample) };\n}\n",
+        "callers": 2,
+        "callees": 8
+      },
+      {
+        "name": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 5117,
+        "end_line": 5306,
+        "source_mode": "full",
+        "source": "function ensureHighSchoolOrdinaryGroundBallInPlayHandoff(match, options = {}) {\n  if (!match || typeof BattedBallGroundDefense === \"undefined\" || typeof OffensivePlateApproach === \"undefined\") return null;\n  if (match.offensiveTacticalActionState?.selectedTacticalAction !== \"standardAttack\") return null;\n  const playerPosition = match.developmentPositionOverride || getHighSchoolInfieldAssignmentPosition(match, player);\n  const batter = getHighSchoolMatchSimulationEntity(match, match.currentBatter);\n  const paIdentity = `${createHighSchoolOffensiveTacticalIdentity(match)}|ordinary-contact`;\n  const existing = BattedBallGroundDefense.normalizeHandoff(match.groundBallInPlayState);\n  const existingLineDrive = typeof BattedBallLineDriveDefense !== \"undefined\"\n    ? BattedBallLineDriveDefense.normalizeCatchState(match.lineDriveCatchState) : null;\n  const existingFlyBall = typeof BattedBallFlyBallDefense !== \"undefined\"\n    ? BattedBallFlyBallDefense.normalizeFlyBallCatchState(match.flyBallCatchState) : null;\n  if (existing?.identity === `${paIdentity}|ground-defense`) {\n    if (existing.supported && !existing.settlementApplied) assertHighSchoolGroundParticipant(match);\n    match.groundBallInPlayState = existing;\n    return existing;\n  }\n  if (existingLineDrive?.identity === `${paIdentity}|line-drive-catch`) {\n    if (existingLineDrive.supported && !existingLineDrive.settlementApplied) assertHighSchoolDetailedResponsibility(match, existingLineDrive.physicalTruth, \"2B\", \"player\");\n    match.lineDriveCatchState = existingLineDrive;\n    return null;\n  }\n  if (existingFlyBall?.identity === `${paIdentity}|fly-ball-catch`) {\n    if (existingFlyBall.supported && !existingFlyBall.settlementApplied) assertHighSchoolDetailedResponsibility(match, existingFlyBall.physicalTruth, existingFlyBall.defenderContext?.position, existingFlyBall.defenderContext?.defenderId);\n    match.flyBallCatchState = existingFlyBall;\n    return null;\n  }\n  const defender = {\n    ...getDefensiveSimulationCapability(player, \"內野手\"),\n    ...(options.situationOverrides?.playerCapabilities || {})\n  };\n  const physicalDefenderContext = physicalTruth => getHighSchoolPhysicalDefensePlayerContext(match, physicalTruth, {\n    playerPosition, catching: defender.fielding, reaction: defender.reaction, range: defender.range\n  }, options);\n  const offense = getHighSchoolProvisionalOffensiveTacticalCapabilities(match);\n  const initial = OffensivePlateApproach.createPlateAppearanceState({\n    paIdentity,\n    batterId: match.currentBatter,\n    approach: \"balancedAttack\",\n    context: { outs: match.outs, runners: match.runners.slice(), hasRunner: match.runners.some(Boolean) }\n  });\n  const fixture = options.ordinaryPlateAppearance || {};\n  const pitch = fixture.pitch || { pitchLocationClass: \"hitterPitch\" };\n  const pitchOptions = {\n    recognitionRoll: fixture.recognitionRoll ?? 0,\n    decisionRoll: fixture.decisionRoll ?? 0,\n    contactRoll: fixture.contactRoll ?? 0,\n    foulRoll: fixture.foulRoll ?? 1,\n    physicalRolls: fixture.physicalRolls,\n    outcomeRoll: fixture.outcomeRoll,\n    physicalOutcomeResolver({ physicalTruth }) {\n      const access = BattedBallGroundDefense.resolveGroundBallDefensiveAccess({\n        physicalTruth,\n        defenderContext: physicalDefenderContext(physicalTruth)\n      });\n      if (access.supported) return {\n        result: \"groundBallDefensePending\",\n        authority: \"bbpB1PhysicalDefensePending\",\n        contactQuality: Number(physicalTruth.executionEvidence?.continuousContactScore) || 0,\n        resolvedContact: null\n      };\n      if (typeof BattedBallLineDriveDefense !== \"undefined\") {\n        const airborneContext = BattedBallLineDriveDefense.buildAirborneBallContext(physicalTruth);\n        const catchAccess = airborneContext ? BattedBallLineDriveDefense.resolveCatchAccess({\n          airborneContext,\n          defenderContext: physicalDefenderContext(physicalTruth)\n        }) : null;\n        const catchWindow = catchAccess ? BattedBallLineDriveDefense.buildCatchTimingWindow({ airborneContext, defensiveAccess: catchAccess }) : null;\n        if (catchAccess?.supported && catchWindow?.state !== \"expired\") return {\n          result: \"lineDriveCatchPending\",\n          authority: \"bbpB2APhysicalCatchPending\",\n          contactQuality: Number(physicalTruth.executionEvidence?.continuousContactScore) || 0,\n          resolvedContact: null\n        };\n      }\n      if (typeof BattedBallFlyBallDefense !== \"undefined\") {\n        const flyBallDefender = getHighSchoolFlyBallDefenderCatchContext(match, physicalTruth, options);\n        const flyBallOpportunity = BattedBallFlyBallDefense.buildFlyBallCatchOpportunity({\n          identity: `${paIdentity}|fly-ball-catch`, physicalTruth, runners: [], outs: match.outs,\n          runnerEntities: [], defenderContext: flyBallDefender\n        });\n        if (flyBallOpportunity?.supported) return {\n          result: \"flyBallCatchPending\",\n          authority: \"bbpB2B1PhysicalCatchPending\",\n          contactQuality: Number(physicalTruth.executionEvidence?.continuousContactScore) || 0,\n          resolvedContact: null\n        };\n      }\n      return null;\n    }\n  };\n  const plateAppearanceState = OffensivePlateApproach.simulatePlateAppearance({\n    state: initial,\n    abilities: {\n      observe: Number(offense.baseballIQ) || 5,\n      baseballIQ: Number(offense.baseballIQ) || 5,\n      ballSense: Number(offense.ballSense) || 5,\n      batting: Number(offense.batting) || 5,\n      power: Number(batter?.power) || Number(offense.batting) || 5,\n      bats: batter?.bats || \"R\"\n    },\n    pitchSequence: [pitch],\n    pitchOptions: [pitchOptions]\n  });\n  match.ordinaryDefensivePlateAppearanceState = JSON.parse(JSON.stringify(plateAppearanceState));\n  const physicalTruth = plateAppearanceState.battedBallPhysicalTruth;\n  const runnerEntities = match.runners.map((runnerId, index) => {\n    if (!runnerId) return null;\n    const entity = getHighSchoolMatchSimulationEntity(match, runnerId);\n    return {\n      runnerId,\n      originBase: index + 1,\n      speed: Number(entity?.speed) || 5,\n      reaction: Number(entity?.reaction) || Number(entity?.defense) || 5,\n      baseballIQ: Number(entity?.baseballIQ) || Number(entity?.decision) || 5\n    };\n  }).filter(Boolean);\n  if (plateAppearanceState.result === \"lineDriveCatchPending\" && physicalTruth && typeof BattedBallLineDriveDefense !== \"undefined\") {\n    match.groundBallInPlayState = null;\n    match.flyBallCatchState = null;\n    match.lineDriveCatchState = BattedBallLineDriveDefense.buildCatchOpportunity({\n      identity: `${paIdentity}|line-drive-catch`,\n      physicalTruth,\n      runners: match.runners,\n      outs: match.outs,\n      runnerEntities,\n      preContactRunnerStates: options.preContactRunnerStates || {},\n      defenderContext: physicalDefenderContext(physicalTruth)\n    });\n    return null;\n  }\n  if (plateAppearanceState.result === \"flyBallCatchPending\" && physicalTruth && typeof BattedBallFlyBallDefense !== \"undefined\") {\n    match.groundBallInPlayState = null;\n    match.lineDriveCatchState = null;\n    match.flyBallCatchState = BattedBallFlyBallDefense.buildFlyBallCatchOpportunity({\n      identity: `${paIdentity}|fly-ball-catch`,\n      physicalTruth,\n      runners: match.runners,\n      outs: match.outs,\n      runnerEntities,\n      preContactRunnerStates: options.preContactRunnerStates || {},\n      defenderContext: getHighSchoolFlyBallDefenderCatchContext(match, physicalTruth, options)\n    });\n    return null;\n  }\n  if (plateAppearanceState.result !== \"groundBallDefensePending\" || !physicalTruth) {\n    const ordinaryInfield = isInfieldDecisionFamilyPosition(match.developmentPositionOverride || match.playerFieldingAssignment || match.position);\n    match.groundBallInPlayState = BattedBallGroundDefense.normalizeHandoff({\n      version: BattedBallGroundDefense.VERSION,\n      identity: `${paIdentity}|ground-defense`,\n      sourceAuthority: \"unsupportedOrdinaryContactLegacyFallback\",\n      physicalTruth: physicalTruth ? JSON.parse(JSON.stringify(physicalTruth)) : null,\n      supported: false,\n      ...(ordinaryInfield ? { fallbackAuthority: \"existingOrdinaryPhysicalOutcome\",\n        defensiveOpportunity: physicalTruth ? getHighSchoolDefensiveOpportunity(match, physicalTruth) : null }\n        : { fallbackAuthority: \"existingSyntheticDefensiveContext\" }),\n      legacyFallbackResult: plateAppearanceState.result || \"\"\n    });\n    match.lineDriveCatchState = physicalTruth?.ballType === \"lineDrive\" && typeof BattedBallLineDriveDefense !== \"undefined\"\n      ? BattedBallLineDriveDefense.buildCatchOpportunity({\n        identity: `${paIdentity}|line-drive-catch`, physicalTruth, runners: match.runners, outs: match.outs,\n        runnerEntities, preContactRunnerStates: options.preContactRunnerStates || {},\n        defenderContext: physicalDefenderContext(physicalTruth)\n      }) : null;\n    match.flyBallCatchState = physicalTruth?.ballType === \"flyBall\" && typeof BattedBallFlyBallDefense !== \"undefined\"\n      ? BattedBallFlyBallDefense.buildFlyBallCatchOpportunity({\n        identity: `${paIdentity}|fly-ball-catch`, physicalTruth, runners: match.runners, outs: match.outs,\n        runnerEntities, preContactRunnerStates: options.preContactRunnerStates || {},\n        defenderContext: getHighSchoolFlyBallDefenderCatchContext(match, physicalTruth, options)\n      }) : null;\n    return match.groundBallInPlayState;\n  }\n  const forceState = BattedBallGroundDefense.deriveForceState({ runners: match.runners, outs: match.outs });\n  match.lineDriveCatchState = null;\n  match.flyBallCatchState = null;\n  match.groundBallInPlayState = BattedBallGroundDefense.buildGroundBallDefensiveOpportunity({\n    identity: `${paIdentity}|ground-defense`,\n    physicalTruth,\n    runners: match.runners,\n    outs: match.outs,\n    forceState,\n    runnerEntities,\n    batterRunner: { runnerId: match.currentBatter, speed: Number(batter?.speed) || 5 },\n    preContactRunnerStates: options.preContactRunnerStates || {},\n    defenderContext: physicalDefenderContext(physicalTruth)\n  });\n  const firstBaseContext = createHighSchoolFirstBaseContext(match, match.groundBallInPlayState, options);\n  if (firstBaseContext) match.groundBallInPlayState = BattedBallGroundDefense.normalizeHandoff({\n    ...match.groundBallInPlayState, defensiveOpportunity: getHighSchoolDefensiveOpportunity(match, physicalTruth), firstBaseContext });\n  return match.groundBallInPlayState;\n}\n",
+        "callers": 1,
+        "callees": 12
+      },
+      {
+        "name": "resolveHighSchoolDefensivePlay",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.resolveHighSchoolDefensivePlay",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 10308,
+        "end_line": 10324,
+        "source_mode": "full",
+        "source": "function resolveHighSchoolDefensivePlay(match, decision, randomSource = Math.random) {\n  const pending = match?.activeSituation;\n  if ((match?.groundBallInPlayState?.runnerThrowTiming || match?.groundBallInPlayState?.shortstopExecution) && pending?.lifecycleState === \"resolved\" && pending.resolution?.executionEvidence) {\n    validateHighSchoolDecisionThrowState(match);\n    const selected = pending.legalRoutes.find(route => route.matchDecision === decision || route.routeId === decision);\n    if (!selected || (selected.routeId || selected.matchDecision) !== pending.decision?.selectedRoute) throw new Error(\"Stale defensive decision after execution\");\n    return pending.resolution.executionEvidence;\n  }\n  if (match?.positionDecisionFamily === \"infield\" && match.defensiveSituation?.familyId === \"infield\") {\n    if (match.defensiveSituation.groundBallDefensiveContext?.supported) {\n      assertHighSchoolGroundParticipant(match);\n    }\n    return infieldDecisionFamily.resolve(match.defensiveSituation, decision, match, randomSource);\n  }\n  if (match?.position === \"捕手\") return resolveHighSchoolCatcherDecision(match, decision, randomSource);\n  return resolveLegacyHighSchoolDefensivePlay(match, decision, randomSource);\n}\n",
+        "callers": 2,
+        "callees": 4
+      },
+      {
+        "name": "resolveHighSchoolInfieldReceiver",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.resolveHighSchoolInfieldReceiver",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 8111,
+        "end_line": 8127,
+        "source_mode": "full",
+        "source": "function resolveHighSchoolInfieldReceiver(situation, choice, sample, deliveryCompleted, match) {\n  const position = choice.targetBase === \"third\" ? \"3B\" : choice.targetBase === \"home\" ? \"C\"\n    : choice.targetBase === \"second\" || choice.targetBase === \"secondThenFirst\" ? \"SS\" : \"1B\";\n  const legacy = position === \"1B\" ? situation.teammates?.firstBaseReceiver : position === \"3B\" ? situation.teammates?.thirdBaseReceiver\n    : position === \"C\" ? situation.teammates?.catcher : situation.teammates?.shortstop;\n  const actor = match?.rosters?.[match.defenseTeam] && typeof TeamRosterFoundation !== \"undefined\"\n    ? TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam], position) : null;\n  const capabilities = actor ? getDefensiveSimulationCapability(actor, actor.position, match) : legacy?.capabilities || {};\n  const fielding = Number(capabilities.fielding ?? 5), swing = (sample - .5) * 4;\n  const available = Boolean((actor ? actor.id !== \"player\" : legacy) && legacy?.receivingAvailable !== false);\n  const ready = available && fielding + swing >= 2.8;\n  return Object.freeze({ receiverId: actor?.id || legacy?.id || null, receiverPosition: position, available, ready,\n    secured: Boolean(deliveryCompleted && ready), status: !deliveryCompleted ? \"notAttempted\" : !available ? \"unavailable\" : ready ? \"completed\" : \"failed\",\n    responsibleActor: deliveryCompleted && !ready ? \"teammate\" : \"player\",\n    provenance: Object.freeze({ authority: actor ? \"activeRosterReceiver+existingExecutionSample\" : \"declaredLegacyReceiver+existingExecutionSample\",\n      fielding, sample, swing, threshold: 2.8, consumedRng: false }) });\n}\n",
+        "callers": 1,
+        "callees": 1
+      },
+      {
+        "name": "createHighSchoolOffensiveTacticalIdentity",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.createHighSchoolOffensiveTacticalIdentity",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 4595,
+        "end_line": 4606,
+        "source_mode": "full",
+        "source": "function createHighSchoolOffensiveTacticalIdentity(match) {\n  return [\n    match?.id || \"match\",\n    match?.inning || 0,\n    match?.half || \"\",\n    match?.offenseTeam || \"\",\n    match?.currentBatter || \"\",\n    Number(match?.battingOrderIndex?.[match?.offenseTeam]) || 0,\n    Number(match?.outs) || 0,\n    (match?.runners || []).map(Boolean).join(\"\")\n  ].join(\"|\");\n}\n",
+        "callers": 2,
+        "callees": 0
+      },
+      {
+        "name": "getHighSchoolControlledDecisionInput",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.getHighSchoolControlledDecisionInput",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 11948,
+        "end_line": 11961,
+        "source_mode": "full",
+        "source": "function getHighSchoolControlledDecisionInput(match, state = match?.groundBallInPlayState) {\n  if (typeof DefensiveDecisionThrowFoundation === \"undefined\" || state?.settlementApplied || !state?.secureResolution || !state.defensiveAccess?.reachResolution) return null;\n  const routeWindows = {};\n  for (const id of Object.keys(SECOND_BASE_ROUTE_DEFINITIONS)) {\n    routeWindows[id] = getSecondBaseRouteWindow(id, match.defensiveSituation?.routeWindows || {}).state;\n  }\n  return { physicalTruth: state.physicalTruth, opportunity: getHighSchoolDefensiveOpportunity(match, state.physicalTruth),\n    activeRoster: match.rosters[match.defenseTeam], capabilities: state.defensiveAccess.secureCapabilities,\n    reachResult: state.defensiveAccess.reachResolution, secureResult: state.secureResolution,\n    runners: match.runners, outs: match.outs, inning: match.inning, half: match.half, scores: match.scores,\n    batterRunnerId: state.runnerRealization?.batterRunner?.runnerId, forceChain: state.forceChain,\n    runnerStates: (state.runnerPhysicalStates || []).filter(r => match.runners.includes(r.runnerId)),\n    runnerPhysicalStates: state.runnerPhysicalStates || [], routeWindows };\n}\n",
+        "callers": 6,
+        "callees": 2
+      },
+      {
+        "name": "attachHighSchoolInfieldActionFacts",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.attachHighSchoolInfieldActionFacts",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 11213,
+        "end_line": 11291,
+        "source_mode": "full",
+        "source": "function attachHighSchoolInfieldActionFacts(match, situation, choice, resolution, sample) {\n  if (situation.playerPosition === \"三壘手\" && situation.groundBallDefensiveContext?.supported)\n    return attachHighSchoolThirdBaseActionFacts(match, situation, choice, resolution, sample);\n  if (typeof DefensiveDecisionThrowFoundation === \"undefined\" || typeof TeamRosterFoundation === \"undefined\"\n    || !match?.rosters?.[match.defenseTeam]) return resolution; // Isolated historical scenario harnesses.\n  const roster = match.rosters[match.defenseTeam], playerPosition = TeamRosterFoundation.normalizePosition(situation.playerPosition);\n  const coverage = resolution.playerRole === \"coverPivot\";\n  const primaryPosition = coverage ? \"SS\" : playerPosition;\n  const primary = TeamRosterFoundation.getCurrentDefender(roster, primaryPosition);\n  const physicalIdentity = situation.groundBallDefensiveContext?.physicalTruth?.identity || null;\n  const playIdentity = situation.runnerSettlementIdentity;\n  const actions = [];\n  const timing = resolution.timingResolution || {};\n  const timingProvenance = { routeWindow: timing.routeWindow || timing.secondBaseForceWindow || null,\n    timingClassification: timing.firstLeg?.timingClassification || null, timingMargin: timing.firstLeg?.timingMargin ?? null,\n    relayToFirstWindow: timing.relayToFirstWindow || timing.relayToFirstWindowState || null, batterSpeed: situation.batterSpeed };\n  const completed = value => [\"completed\", \"recovered\", \"clean\", \"slightlyOffLine\", \"good\"].includes(value);\n  const status = (value, attempted = true) => completed(value) ? \"completed\" : !attempted ? \"notAttempted\" : \"failed\";\n  function add(position, type, state, targetBase, receiverId, dependsOn = [], extra = {}) {\n    const actor = TeamRosterFoundation.getCurrentDefender(roster, position);\n    if (!actor) throw new Error(\"Invalid infield action actor\");\n    const capabilities = actor.id === \"player\" ? situation.playerCapabilities : getDefensiveSimulationCapability(actor, actor.position, match);\n    const identity = `${playIdentity}|action|${actions.length + 1}`;\n    actions.push({ actorId: actor.id, actorPosition: position, type, status: state, targetBase, receiverId,\n      dependsOn, responsibleActor: actor.id === \"player\" ? \"player\" : \"teammate\",\n      provenance: { authority: physicalIdentity ? \"existingInfieldExecution+activeRoster\" : \"declaredLegacyInfieldExecution+activeRoster\",\n        sample, consumedRng: false, capabilities: { ...capabilities }, timing: timingProvenance,\n        sourceStage: extra.sourceStage || type }, ...extra });\n    return identity;\n  }\n  const control = coverage ? resolution.teammateLeg?.shortstopFielding : resolution.playerLeg?.control;\n  const field = add(primaryPosition, \"field\", status(control), null, null, [], {\n    sourceStage: coverage ? \"shortstopFielding\" : \"control\", errorCharged: resolution.error && !completed(control) });\n  const routeId = resolution.activeRoute || resolution.routeId || choice.routeId;\n  const dp = resolution.route === \"doublePlay\" && !resolution.reassessed;\n  const target = dp || routeId === \"forceSecond\" ? \"second\" : routeId === \"attackLeadRunnerThird\" ? \"third\"\n    : [\"homeForceOut\", \"preventRunHome\"].includes(routeId) ? \"home\" : \"first\";\n  const receiverPosition = target === \"second\" ? (primaryPosition === \"SS\" ? \"2B\" : \"SS\")\n    : target === \"third\" ? \"3B\" : target === \"home\" ? \"C\" : \"1B\";\n  const receiver = TeamRosterFoundation.getCurrentDefender(roster, receiverPosition);\n  const held = resolution.route === \"controlledNoThrow\" || routeId === \"holdBall\";\n  const throwStage = coverage ? resolution.teammateLeg?.shortstopFirstThrow\n    : resolution.reassessed ? resolution.playerLeg?.fallbackRelease : resolution.playerLeg?.firstThrow;\n  const throwStatus = held ? \"notAttempted\" : status(throwStage, completed(control));\n  const firstThrow = add(primaryPosition, \"throw\", throwStatus, target, receiver?.id, [field], {\n    sourceStage: coverage ? \"shortstopFirstThrow\" : resolution.reassessed ? \"fallbackRelease\" : \"firstThrow\",\n    errorCharged: resolution.error && completed(control) });\n  const received = coverage ? resolution.playerLeg?.receive : dp\n    ? (playerPosition === \"SS\" ? resolution.teammateLeg?.secondBaseReceive : resolution.teammateLeg?.shortstopReceive)\n    : resolution.teammateLeg?.catcherReceive || resolution.teammateLeg?.receiver;\n  const receiveStatus = throwStatus !== \"completed\" ? \"notAttempted\" : status(received);\n  const receive = add(receiverPosition, \"receive\", receiveStatus, target, null, [firstThrow], { sourceStage: \"receiver\" });\n  const retirements = resolution.runnerSettlement?.retirements || [];\n  const firstRetirement = retirements.find(r => r.targetBase === target);\n  const firstTargetRunner = firstRetirement?.runnerId || (target === \"first\" ? situation.batterId\n    : target === \"second\" ? situation.runners[0] : target === \"third\" ? situation.runners[1] : situation.runners[2]);\n  const tagged = routeId === \"preventRunHome\" || firstRetirement?.outType === \"nonForceTag\";\n  const terminal = add(receiverPosition, tagged ? \"tag\" : \"baseTouch\",\n    firstRetirement ? \"completed\" : receiveStatus === \"completed\" ? \"late\" : \"notAttempted\", target, null, [receive], {\n      runnerId: firstTargetRunner, sourceStage: tagged ? \"tagCompletion\" : \"retirementBaseTouch\" });\n  if (dp) {\n    const pivotStage = coverage ? resolution.playerLeg?.pivot\n      : playerPosition === \"SS\" ? resolution.teammateLeg?.secondBasePivot : resolution.teammateLeg?.shortstopPivot;\n    const secondThrowStage = coverage ? resolution.playerLeg?.secondThrow\n      : playerPosition === \"SS\" ? resolution.teammateLeg?.secondBaseSecondThrow : resolution.teammateLeg?.shortstopSecondThrow;\n    const pivot = add(receiverPosition, \"pivot\", firstRetirement ? status(pivotStage) : \"notAttempted\", \"first\", null, [terminal]);\n    const firstBase = TeamRosterFoundation.getCurrentDefender(roster, \"1B\");\n    const secondThrow = add(receiverPosition, \"throw\", firstRetirement ? status(secondThrowStage, completed(pivotStage)) : \"notAttempted\",\n      \"first\", firstBase?.id, [pivot], { sourceStage: \"secondThrow\" });\n    const firstReceive = add(\"1B\", \"receive\", completed(secondThrowStage) && firstRetirement\n      ? status(resolution.teammateLeg?.firstBaseReceive) : \"notAttempted\", \"first\", null, [secondThrow], { sourceStage: \"firstBaseReceive\" });\n    const secondRetirement = retirements.find(r => r.targetBase === \"first\");\n    add(\"1B\", \"baseTouch\", secondRetirement ? \"completed\" : \"notAttempted\", \"first\", null, [firstReceive], {\n      runnerId: situation.batterId, sourceStage: \"secondRetirementBaseTouch\" });\n  }\n  const actionFacts = DefensiveDecisionThrowFoundation.createActionFacts({ playIdentity, physicalIdentity,\n    sourceAuthority: physicalIdentity ? \"physicalInfieldExecution\" : \"declaredLegacyInfieldScenario\", actions });\n  return Object.freeze({ ...resolution, executionSample: sample, actionFacts });\n}\n",
+        "callers": 3,
+        "callees": 4
+      },
+      {
+        "name": "getDefensiveSimulationCapability",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.getDefensiveSimulationCapability",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 6466,
+        "end_line": 6495,
+        "source_mode": "full",
+        "source": "function getDefensiveSimulationCapability(subject = player, position = player.primaryPosition, matchContext = subject?.highSchoolMatch) {\n  if ([\"simulation-roster\", \"team-roster-foundation\"].includes(subject?.source)) {\n    return Object.freeze({ fielding: subject.defense, reaction: subject.defense, range: subject.defense, arm: subject.arm, throwing: subject.arm, decision: Math.round((subject.defense + subject.contact) / 2) });\n  }\n  const rawSkills = subject.baseballSkills || {};\n  const activeMatch = matchContext || (subject === player ? player.highSchoolMatch : null);\n  const audit = getDevelopmentMatchPositionTestCapabilityAudit(subject, activeMatch);\n  const skills = audit.active && !activeMatch?.completed\n    ? Object.fromEntries(Object.keys(rawSkills).map(skill => [skill, audit.skills[skill]?.effective ?? rawSkills[skill]]))\n    : rawSkills;\n  const effectivePosition = audit.active ? audit.position : position;\n  const positionTools = {\n    \"內野手\": [\"catching\", \"reaction\", \"throwing\"],\n    \"外野手\": [\"catching\", \"range\", \"armStrength\"],\n    \"捕手\": [\"blocking\", \"gameCalling\", \"throwing\"],\n    \"投手\": [\"control\", \"reaction\", \"throwing\"]\n  }[position] || [\"catching\", \"reaction\", \"throwing\"];\n  const values = positionTools.map(key => Number(skills[key]) || 0);\n  const reactionSkill = Number(skills.reaction) || values[1] || 0;\n  const throwingSkill = values[2] || 0;\n  const armSkill = [\"游擊手\", \"三壘手\"].includes(effectivePosition) ? Number(skills.armStrength) || throwingSkill : throwingSkill;\n  return Object.freeze({\n    fielding: Math.round((values[0] * 2 + values[1] + (Number(subject.ballSense) || 0)) / 4),\n    reaction: Math.round((reactionSkill * 2 + (Number(subject.ballSense) || 0)) / 3),\n    range: Math.round(((Number(skills.range) || reactionSkill) * 2 + (Number(subject.fitness) || 0)) / 3),\n    arm: Math.round((armSkill * 2 + (Number(subject.fitness) || 0)) / 3),\n    throwing: Math.round((throwingSkill * 2 + (Number(subject.observe) || 0)) / 3),\n    decision: Math.round(((Number(skills.baseballIQ) || 0) + (Number(subject.observe) || 0) + (Number(subject.discipline) || 0)) / 3)\n  });\n}\n",
+        "callers": 20,
+        "callees": 1
+      },
+      {
+        "name": "nextHighSchoolMatchSimulationRandom",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.nextHighSchoolMatchSimulationRandom",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 6544,
+        "end_line": 6549,
+        "source_mode": "full",
+        "source": "function nextHighSchoolMatchSimulationRandom(match) {\n  const cursor = Math.max(0, Number(match.simulationCursor) || 0);\n  const seed = (Math.max(1, Number(match.simulationSeed) || 1) + cursor * 73) % 997;\n  match.simulationCursor = cursor + 1;\n  return ((seed * 37 + 17) % 997) / 997;\n}\n",
+        "callers": 2,
+        "callees": 0
+      },
+      {
+        "name": "resolveBattedBallPhysicalTruth",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.batted-ball-physical.resolveBattedBallPhysicalTruth",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/batted-ball-physical.js",
+        "start_line": 105,
+        "end_line": 131,
+        "source_mode": "full",
+        "source": "  function resolveBattedBallPhysicalTruth(input = {}) {\n    const identity = String(input.identity || \"ordinary-contact\");\n    const quality = resolveContactQuality({ ...input, identity });\n    const ballType = resolveBattedBallType({ ...input, identity, contactQuality: quality.contactQuality });\n    const pace = resolveBattedBallPace({ ...input, identity, contactQuality: quality.contactQuality, ballType });\n    const direction = resolveBattedBallDirection({ ...input, identity });\n    const depth = resolveBattedBallDepth({ ...input, identity, contactQuality: quality.contactQuality, ballType });\n    return deepFreeze({\n      version: VERSION,\n      identity,\n      contactQuality: quality.contactQuality,\n      ballType,\n      pace: pace.pace,\n      direction: direction.direction,\n      depth: depth.depth,\n      executionEvidence: {\n        actualPitch: clone(input.actualPitch || {}),\n        recognition: clone(input.recognition || {}),\n        swing: { action: input.action || \"swing\", contact: input.contact === true, swingIntent: input.swingIntent || \"normal\" },\n        continuousContactScore: quality.score,\n        paceScore: pace.score,\n        depthScore: depth.score,\n        rolls: { contactQuality: quality.roll, ballType: resolveRoll(input, \"ballType\", RNG_NAMESPACES.ballType, identity), pace: pace.roll, direction: direction.roll, depth: depth.roll },\n        depthRollConsumed: depth.consumed\n      }\n    });\n  }\n",
+        "callers": 3,
+        "callees": 8
+      },
+      {
+        "name": "buildGroundBallDefensiveOpportunity",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.batted-ball-ground-defense.buildGroundBallDefensiveOpportunity",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/batted-ball-ground-defense.js",
+        "start_line": 320,
+        "end_line": 366,
+        "source_mode": "full",
+        "source": "  function buildGroundBallDefensiveOpportunity(input = {}) {\n    const physicalTruth = input.physicalTruth || {};\n    const forceChain = input.forceChain || (ForceAdvancement ? ForceAdvancement.buildInitialLiveBallForceChain({\n      runners: input.runners,\n      batterRunnerId: input.batterRunner?.runnerId || \"batter-runner\"\n    }) : null);\n    const forceState = forceChain && ForceAdvancement\n      ? ForceAdvancement.deriveCompatibilityForceState(forceChain, { outs: input.outs })\n      : input.forceState || deriveForceState({ runners: input.runners, outs: input.outs });\n    const defensiveAccess = resolveGroundBallDefensiveAccess(input);\n    const ballContext = projectGroundBallCompatibilityContext(physicalTruth, defensiveAccess);\n    const runnerRealization = buildGroundBallRunnerRealization({ ...input, forceChain, forceState, defensiveAccess, ballContext });\n    if (!runnerRealization) return null;\n    const timingWindows = buildGroundBallTimingWindows({ ballContext, runnerRealization });\n    const homeRunner = runnerRealization.existingRunners.find(state => state.originBase === 3\n      && state.targetBase === \"home\" && [\"advancing\", \"committed\"].includes(state.movementState));\n    const choices = defensiveAccess.supported ? [\"secureFirstBaseOut\"] : [];\n    const thirdBase = defensiveAccess.playerPosition === \"三壘手\";\n    if (defensiveAccess.supported && forceState.forceAtSecond) {\n      if (defensiveAccess.playerPosition === \"游擊手\") choices.push(\"forceSecond\");\n      if (Number(input.outs) < 2) choices.push(thirdBase ? \"initiate543\"\n        : defensiveAccess.playerPosition === \"游擊手\" ? \"startDoublePlaySecond\" : \"initiate463\");\n    }\n    if (defensiveAccess.supported && thirdBase && forceState.forceAtThird) choices.push(\"stepThird\");\n    if (!thirdBase && defensiveAccess.supported && forceState.forceAtHome && timingWindows.homeOutWindow.state !== \"expired\") choices.push(\"homeForceOut\");\n    else if (!thirdBase && defensiveAccess.supported && homeRunner && timingWindows.homeOutWindow.state !== \"expired\") choices.push(\"preventRunHome\");\n    return deepFreeze({\n      version: VERSION,\n      identity: String(input.identity || \"ordinary-ground-ball\"),\n      sourceAuthority: \"BattedBallPhysicalTruth\",\n      physicalTruth: clone(physicalTruth),\n      ...(Opportunity && [Opportunity.GROUND_TOPOLOGY_VERSION, Opportunity.FIRST_BASE_GROUND_TOPOLOGY_VERSION].includes(input.defenderContext?.defensiveOpportunity?.topologyVersion)\n        ? { defensiveOpportunity: clone(input.defenderContext.defensiveOpportunity) } : {}),\n      forceChain,\n      forceState,\n      runnerRealization,\n      runnerPhysicalStates: runnerRealization.runnerPhysicalStates,\n      defensiveAccess,\n      ballContext,\n      timingWindows,\n      availableDecisionIds: choices,\n      firstLegState: { status: \"pending\", targetBase: forceState.forceAtSecond ? \"second\" : \"first\" },\n      continuationState: { status: \"pendingReassessment\", window: timingWindows.relayToFirstWindow.state, targetBase: \"first\" },\n      supported: defensiveAccess.supported,\n      settlementApplied: false\n    });\n  }\n",
+        "callers": 3,
+        "callees": 7
+      },
+      {
+        "name": "buildGroundBallRunnerRealization",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.batted-ball-ground-defense.buildGroundBallRunnerRealization",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/batted-ball-ground-defense.js",
+        "start_line": 146,
+        "end_line": 234,
+        "source_mode": "full",
+        "source": "  function buildGroundBallRunnerRealization(input = {}) {\n    const truth = input.physicalTruth || {};\n    if (truth.ballType !== \"groundBall\") return null;\n    const forceChain = input.forceChain || (ForceAdvancement ? ForceAdvancement.buildInitialLiveBallForceChain({\n      runners: input.runners,\n      batterRunnerId: input.batterRunner?.runnerId || \"batter-runner\"\n    }) : null);\n    const forceState = forceChain && ForceAdvancement\n      ? ForceAdvancement.deriveCompatibilityForceState(forceChain, { outs: input.outs })\n      : input.forceState || deriveForceState({ runners: input.runners, outs: input.outs });\n    const entities = Array.isArray(input.runnerEntities) ? input.runnerEntities : [];\n    const preContact = input.preContactRunnerStates || {};\n    const existingRunners = entities.filter(runner => runner?.runnerId).map(runner => {\n      const originBase = Number(runner.originBase);\n      const forcedMovement = forceChain && ForceAdvancement ? ForceAdvancement.getForcedMovement(forceChain, runner.runnerId) : null;\n      const forced = forcedMovement ? true : originBase === 1 ? forceState.forceAtSecond\n        : originBase === 2 ? forceState.forceAtThird : originBase === 3 ? forceState.forceAtHome : false;\n      const observed = preContact[runner.runnerId] || {};\n      const nextTarget = [\"\", \"second\", \"third\", \"home\"][originBase] || \"\";\n      const hasObservedDecision = [\"commitAdvance\", \"holdBase\"].includes(observed.movementDecision);\n      const opportunity = originBase === 3 && !forced ? buildRunner3BAdvanceOpportunity({\n        physicalTruth: truth,\n        runner,\n        defensiveAccess: input.defensiveAccess,\n        playerPosition: input.defenderContext?.playerPosition,\n        outs: input.outs,\n        isForced: false\n      }) : null;\n      const advanceDecision = opportunity ? resolveRunner3BAdvanceDecision(opportunity, runner, { identity: input.identity }) : null;\n      const observedAdvance = observed.movementDecision === \"commitAdvance\"\n        && (!observed.targetBase || observed.targetBase === nextTarget);\n      const movementDecision = forced ? \"commitAdvance\"\n        : hasObservedDecision ? (observedAdvance ? \"commitAdvance\" : \"holdBase\")\n          : advanceDecision?.decision || \"holdBase\";\n      const naturalStartQuality = Number(runner.reaction) >= 8 ? \"preparedStart\"\n        : Number(runner.reaction) <= 3 ? \"lateStart\" : \"normalStart\";\n      const state = createRunnerState({\n        runnerId: runner.runnerId,\n        originBase,\n        targetBase: forcedMovement?.targetBase || (movementDecision === \"commitAdvance\" ? nextTarget : [\"\", \"first\", \"second\", \"third\"][originBase]),\n        movementDecision,\n        startQuality: observed.startQuality || naturalStartQuality,\n        speed: runner.speed\n      });\n      return deepFreeze({\n        ...state,\n        movementState: observed.movementState === \"committed\" && movementDecision === \"commitAdvance\" ? \"committed\" : state.movementState,\n        advancementProgress: [\"early\", \"midway\", \"late\"].includes(observed.advancementProgress) ? observed.advancementProgress\n          : movementDecision === \"commitAdvance\" && Number(runner.speed) >= 8 ? \"midway\" : \"early\",\n        isForced: forced,\n        forcedMovementTarget: forcedMovement?.targetBase || (forced ? state.targetBase : null),\n        forceReason: forcedMovement?.forceReason || \"\",\n        chainDepth: forcedMovement?.chainDepth ?? null,\n        advanceOpportunity: opportunity,\n        advanceDecision: opportunity ? (hasObservedDecision ? {\n          ...clone(advanceDecision),\n          authority: \"explicitPreContactRunnerState\",\n          decision: movementDecision,\n          decisionBasis: \"explicitPreContactRunnerState\"\n        } : advanceDecision) : null\n      });\n    });\n    const batterState = createRunnerState({\n      runnerId: input.batterRunner?.runnerId || \"batter-runner\",\n      originBase: \"batter\",\n      targetBase: \"first\",\n      movementDecision: \"commitAdvance\",\n      startQuality: input.batterRunner?.startQuality || \"normalStart\",\n      speed: input.batterRunner?.speed\n    });\n    const batterRunner = deepFreeze({\n      ...batterState,\n      isForced: true,\n      forcedMovementTarget: \"first\",\n      forceReason: forceChain?.batterRunner?.forceReason || \"batterRunnerRequiredToFirst\",\n      chainDepth: 0\n    });\n    return deepFreeze({\n      version: \"ground-ball-runner-realization-v1\",\n      authority: \"bbpPhysicalTruth+baseForceState\",\n      forceChain,\n      forceState,\n      existingRunners,\n      batterRunner,\n      runnerAdvanceOpportunities: existingRunners.map(state => state.advanceOpportunity).filter(Boolean),\n      runnerAdvanceDecisions: existingRunners.map(state => state.advanceDecision).filter(Boolean),\n      runnerPhysicalStates: [...existingRunners, batterRunner]\n    });\n  }\n",
+        "callers": 1,
+        "callees": 6
+      },
+      {
+        "name": "resolveThrow",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation.resolveThrow",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/defensive-decision-throw-foundation.js",
+        "start_line": 142,
+        "end_line": 166,
+        "source_mode": "full",
+        "source": "  function resolveThrow({ input, opportunity, selection, capabilities, rolls, transferState } = {}) {\n    validateSelection(selection, opportunity, input);\n    const base = throwBase(selection);\n    if (selection.route.action === \"baseTouch\") fail(\"base touch cannot resolve a throw\");\n    if (selection.route.action === \"holdBall\") return freeze({ ...base, throwAttempted: false, throwQuality: \"notAttempted\",\n      releaseQuality: \"held\", ballArrivalState: \"controlledByThrower\", variationEvidence: { consumed: false }, authority: \"deliberateHold\" });\n    if (![\"ready\", \"completed\", \"delayed\", \"failed\"].includes(transferState)) fail(\"unknown transfer readiness\");\n    if (transferState === \"failed\") return freeze({ ...base, throwAttempted: false, throwQuality: \"notAttempted\",\n      releaseQuality: \"transferUnavailable\", ballArrivalState: \"releaseUnavailable\", variationEvidence: { consumed: false }, authority: \"upstreamTransfer\" });\n    if (capabilities?.defenderId !== selection.defenderId || !Number.isFinite(capabilities.arm) || !Number.isFinite(capabilities.throwing)) fail(\"throw capability adapter mismatch\");\n    const demand = throwDemand(selection, input.secureResult);\n    const sample = stage => { const explicit = rolls?.[stage]; const namespace = RNG_NAMESPACES[stage];\n      const roll = Number.isFinite(explicit) ? Math.max(0, Math.min(1, explicit)) : Physical.deterministicUnit(namespace, base.identity, stage);\n      return { namespace, roll, adjustment: (0.5 - roll) * 2 }; };\n    const strengthVariation = sample(\"strength\"), accuracyVariation = sample(\"accuracy\");\n    const arm = Math.max(0, Math.min(20, capabilities.arm)), throwing = Math.max(0, Math.min(20, capabilities.throwing));\n    const strengthMargin = arm - demand.strength + strengthVariation.adjustment;\n    const accuracyMargin = throwing - demand.accuracy + accuracyVariation.adjustment;\n    const quality = accuracyMargin < -1 ? \"offline\" : strengthMargin < 0 ? \"lateWeakThrow\" : accuracyMargin < 1 ? \"challengingReceive\" : \"onTarget\";\n    return freeze({ ...base, throwAttempted: true, throwDemand: demand, strengthMargin, accuracyMargin,\n      throwQuality: quality, releaseQuality: transferState === \"delayed\" ? \"delayedRelease\" : \"readyRelease\",\n      ballArrivalState: { offline: \"outsideReceiverReach\", lateWeakThrow: \"insufficientDelivery\", challengingReceive: \"receiverChallenged\", onTarget: \"atReceiverTarget\" }[quality],\n      inputs: { arm, throwing, transferState, secureQuality: input.secureResult.secureQuality },\n      variationEvidence: { consumed: true, strength: strengthVariation, accuracy: accuracyVariation }, authority: \"throwCapabilities+coarseDemand+separateVariation\" });\n  }\n",
+        "callers": 5,
+        "callees": 6
+      },
+      {
+        "name": "throwDemand",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation.throwDemand",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/defensive-decision-throw-foundation.js",
+        "start_line": 125,
+        "end_line": 134,
+        "source_mode": "full",
+        "source": "  function throwDemand(selection, secure) {\n    const position = selection.position, target = selection.route.targetBase;\n    const distanceClass = [\"LF\", \"CF\", \"RF\"].includes(position) || (position === \"3B\" && target === \"first\") ? \"long\"\n      : ([\"1B\", \"2B\", \"SS\"].includes(position) && target === \"second\") || (position === \"3B\" && target === \"home\") ? \"short\" : \"medium\";\n    const arrivalPressure = secure.inputs?.arrivalQuality === \"stretchedArrival\" ? 1 : 0;\n    const controlPressure = secure.secureQuality === \"bobbleButControlled\" ? 1 : 0;\n    return { distanceClass, strength: { short: 3, medium: 5, long: 7 }[distanceClass] + arrivalPressure,\n      accuracy: { short: 3, medium: 4, long: 5 }[distanceClass] + arrivalPressure + controlPressure,\n      arrivalPressure, controlPressure, units: \"coarseRelativeDemand\" };\n  }\n",
+        "callers": 3,
+        "callees": 0
+      },
+      {
+        "name": "resolveTiming",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation.resolveTiming",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/defensive-runner-throw-settlement-foundation.js",
+        "start_line": 23,
+        "end_line": 60,
+        "source_mode": "full",
+        "source": "  function resolveTiming(args){\n    const {input,opportunity,selection,throwResolution:thrown,runnerState,receiverState}=args;\n    Decision.validateSelection(selection,opportunity,input);\n    if(!thrown||thrown.identity!==`${selection.identity}|throw-v1`||thrown.decisionIdentity!==selection.identity\n      ||thrown.throwerId!==selection.defenderId||thrown.throwerPosition!==selection.position\n      ||[\"routeId\",\"targetRunnerId\",\"targetBase\",\"receiverId\",\"receiverPosition\"].some(key=>thrown[key]!==selection.route[key]))fail(\"stale throw / receiver / target\");\n    const base={version:VERSION,identity:`${thrown.identity}|timing-v1`,decisionIdentity:selection.identity,throwIdentity:thrown.identity,\n      targetRunnerId:thrown.targetRunnerId,targetBase:thrown.targetBase,receiverId:thrown.receiverId,\n      authority:\"resolvedThrow+existingRunnerPhysicalState+receiverReadiness\",variationEvidence:{consumed:false}};\n    if(selection.route.action===\"holdBall\"){\n      if(thrown.throwAttempted!==false)fail(\"hold includes throw\");\n      return freeze({...base,contestAvailable:false,timingClassification:\"noContest\",timingMargin:null,\n        runnerArrival:null,ballArrival:null,receiverCompletion:null,reason:\"heldBall\"});\n    }\n    const current=(input.runnerPhysicalStates||[]).find(r=>r.runnerId===thrown.targetRunnerId);\n    if(!current||!same(current,runnerState)||current.targetBase!==thrown.targetBase\n      ||(current.originBase===\"batter\"?input.batterRunnerId!==current.runnerId:input.runners[Number(current.originBase)-1]!==current.runnerId))fail(\"stale runner physical state\");\n    const forced=Force.getForcedMovement(opportunity.context.forceChain,current.runnerId);\n    if(!forced&&!Decision.isAdvancingTo(current,thrown.targetBase))fail(\"runner not in contest\");\n    if(!receiverState||receiverState.receiverId!==thrown.receiverId||!same(receiverState,input.receiverState))fail(\"stale receiver completion\");\n    const runnerArrival=deriveRunnerArrival(current);\n    const noContest=!thrown.throwAttempted||thrown.throwQuality===\"offline\"||receiverState.ready!==true;\n    const receiveDelay=Number(receiverState.receiveDelay??0),tagDelay=Number(receiverState.tagDelay??1);\n    if(!Number.isFinite(receiveDelay)||receiveDelay<0||!Number.isFinite(tagDelay)||tagDelay<0)fail(\"invalid receiver delay\");\n    if(noContest)return freeze({...base,contestAvailable:false,timingClassification:\"noContest\",timingMargin:null,\n      runnerArrival,ballArrival:{quality:thrown.throwQuality},receiverCompletion:{...clone(receiverState),status:\"unavailableReceive\"},reason:\"unusableThrowOrReceiver\"});\n    const qualityDelay={onTarget:0,challengingReceive:1,lateWeakThrow:3}[thrown.throwQuality];\n    if(qualityDelay===undefined)fail(\"generic timing cannot reinterpret legacy composite throw\");\n    const distanceDelay={short:0,medium:1,long:2}[thrown.throwDemand?.distanceClass];\n    if(distanceDelay===undefined)fail(\"missing throw distance\");\n    const ballTime=4+distanceDelay+qualityDelay+(thrown.releaseQuality===\"delayedRelease\"?1:0);\n    const completionTime=ballTime+receiveDelay;\n    const margin=Math.round((runnerArrival.relativeArrival-completionTime)*1000)/1000;\n    return freeze({...base,contestAvailable:true,timingClassification:classify(margin),timingMargin:margin,runnerArrival,\n      ballArrival:{relativeArrival:ballTime,quality:thrown.throwQuality,releaseQuality:thrown.releaseQuality,distanceClass:thrown.throwDemand.distanceClass},\n      receiverCompletion:{...clone(receiverState),status:thrown.throwQuality===\"challengingReceive\"?\"challengedReceive\":\"readyReceive\",\n        relativeCompletion:completionTime,tagCompletion:completionTime+tagDelay},reason:\"physicalArrivalComparison\"});\n  }\n",
+        "callers": 5,
+        "callees": 6
+      },
+      {
+        "name": "deriveRunnerArrival",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation.deriveRunnerArrival",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/defensive-runner-throw-settlement-foundation.js",
+        "start_line": 15,
+        "end_line": 22,
+        "source_mode": "full",
+        "source": "  function deriveRunnerArrival(current){\n    if(!current||!Number.isFinite(current.speed)||![\"preparedStart\",\"normalStart\",\"lateStart\",\"brokenStart\"].includes(current.startQuality))fail(\"missing runner arrival inputs\");\n    const start={preparedStart:-1,normalStart:0,lateStart:1,brokenStart:2}[current.startQuality];\n    const progress={early:0,midway:1.5,late:3,nearArrival:4}[current.advancementProgress||\"early\"];\n    if(progress===undefined)fail(\"unknown runner progress\");\n    return freeze({...clone(current),profile:Runner.deriveArrivalProfile(current.speed,current.startQuality),\n      relativeArrival:10-Math.max(0,Math.min(20,current.speed))*0.45+start-progress});\n  }\n",
+        "callers": 2,
+        "callees": 3
+      },
+      {
+        "name": "resolveFairContactBallInPlay",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.offensive-plate-approach.resolveFairContactBallInPlay",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/offensive-plate-approach.js",
+        "start_line": 444,
+        "end_line": 474,
+        "source_mode": "full",
+        "source": "  function resolveFairContactBallInPlay(state, pitch, abilities, recognition, options = {}) {\n    const identity = `${state.paIdentity}|pitch-${state.pitchNumber + 1}`;\n    const swingIntent = options.swingIntent || state.swingIntent;\n    const physicalTruth = BattedBallPhysical ? BattedBallPhysical.resolveBattedBallPhysicalTruth({\n      identity,\n      actualPitch: pitch,\n      recognition,\n      action: \"swing\",\n      contact: true,\n      swingIntent,\n      bats: abilities.bats || \"R\",\n      abilities: { batting: abilities.batting, power: abilities.power },\n      rolls: options.physicalRolls\n    }) : null;\n    const physicalOutcome = physicalTruth && typeof options.physicalOutcomeResolver === \"function\"\n      ? options.physicalOutcomeResolver({ physicalTruth, state, pitch, abilities, recognition }) : null;\n    let outcome;\n    if (physicalOutcome?.result && /Pending$/.test(physicalOutcome.result)) {\n      outcome = deepFreeze({ ...clone(physicalOutcome), adapterAuthority: physicalOutcome.authority || \"physicalOutcomeResolver\" });\n    } else if (physicalTruth) {\n      if (!OutcomeMapping) throw new Error(\"Physical BIP requires BattedBallOutcomeMapping\");\n      const official = OutcomeMapping.resolveOfficialBallInPlayOutcome({\n        physicalTruth,\n        defenseOutcome: physicalOutcome?.result ? { ...physicalOutcome, authority: physicalOutcome.authority || \"physicalOutcomeResolver\", settled: true, physicalIdentity: physicalTruth.identity } : physicalOutcome,\n        rolls: { ...options.mappingRolls, ...(options.outcomeRoll !== undefined && options.mappingRolls?.hit === undefined ? { hit: options.outcomeRoll } : {}) }\n      });\n      outcome = deepFreeze({ ...official, adapterAuthority: official.authority,\n        contactQuality: physicalTruth.executionEvidence.continuousContactScore, resolvedContact: official.trace.hitScore });\n    } else outcome = resolveLegacyBallInPlayOutcome({ ...state, swingIntent }, pitch, abilities, recognition, null, options.outcomeRoll);\n    return deepFreeze({ physicalTruth, outcome });\n  }\n",
+        "callers": 2,
+        "callees": 3
+      },
+      {
+        "name": "buildInfieldTeammateContext",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.buildInfieldTeammateContext",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 7178,
+        "end_line": 7203,
+        "source_mode": "full",
+        "source": "function buildInfieldTeammateContext(match, playerPosition) {\n  if (typeof TeamRosterFoundation !== \"undefined\") TeamRosterFoundation.assertActiveDefense(match?.rosters?.[getHighSchoolPlayerTeamSide(match)]);\n  const pivotPosition = playerPosition === \"二壘手\" ? \"游擊手\" : playerPosition === \"一壘手\" ? \"游擊手\" : \"二壘手\";\n  const firstBasePosition = playerPosition === \"一壘手\" ? \"投手\" : \"一壘手\";\n  const pivot = getInfieldTeammateForPosition(match, pivotPosition);\n  const firstBase = getInfieldTeammateForPosition(match, firstBasePosition);\n  const adapt = (entity, fallbackPosition) => {\n    const capability = entity ? getDefensiveSimulationCapability(entity, entity.position) : {};\n    return Object.freeze({\n      id: entity?.id || \"\",\n      name: entity?.name || fallbackPosition,\n      position: entity?.position || fallbackPosition,\n      receivingAvailable: Boolean(entity),\n      capabilities: Object.freeze({ ...capability })\n    });\n  };\n  return Object.freeze({\n    receivingFielder: adapt(pivot, pivotPosition),\n    pivotFielder: adapt(pivot, pivotPosition),\n    firstBaseReceiver: adapt(firstBase, firstBasePosition),\n    shortstop: adapt(getInfieldTeammateForPosition(match, \"游擊手\"), \"游擊手\"),\n    secondBaseman: adapt(getInfieldTeammateForPosition(match, \"二壘手\"), \"二壘手\"),\n    thirdBaseReceiver: adapt(getInfieldTeammateForPosition(match, \"三壘手\"), \"三壘手\"),\n    catcher: adapt(getInfieldTeammateForPosition(match, \"捕手\"), \"捕手\")\n  });\n}\n",
+        "callers": 1,
+        "callees": 3
+      },
+      {
+        "name": "resolveRoutineDefensivePlay",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.resolveRoutineDefensivePlay",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 10335,
+        "end_line": 10356,
+        "source_mode": "full",
+        "source": "function resolveRoutineDefensivePlay(match, situation = match?.defensiveSituation, randomSource = null, options = {}) {\n  if (!match || situation?.familyId !== \"infield\") return null;\n  if (situation.groundBallDefensiveContext?.supported) {\n    assertHighSchoolGroundParticipant(match);\n  }\n  const legalChoices = infieldDecisionFamily.generateLegalChoices(situation, match);\n  const classification = classifyPositionFamilyPlay(situation, legalChoices, true);\n  if (classification.eventClassification !== \"playerRoutinePlay\" && options.densitySuppressed !== true) return null;\n  const source = randomSource === null ? () => nextHighSchoolMatchSimulationRandom(match) : randomSource;\n  const routineChoice = situation.groundBallDefensiveContext?.firstBaseContext && legalChoices[0]?.routeId === \"pitcherCoverFirst\"\n    ? legalChoices[0] : legalChoices.find(choice => choice.routeId === \"coverSecondFor643\") || legalChoices.find(choice => choice.matchDecision === \"secure\") || legalChoices[0];\n  const resolution = routineChoice ? infieldDecisionFamily.resolve(situation, routineChoice.matchDecision, match, source) : null;\n  if (!resolution) return null;\n  return Object.freeze({\n    ...resolution,\n    // Density suppression already admitted this execution as a routine play.\n    // Reusing the candidate's meaningful label would make routine settlement reject it.\n    eventClassification: \"playerRoutinePlay\",\n    decisionTension: classification.decisionTension,\n    executionRoute: resolution.firstBaseEvidence ? routineChoice.route : getInfieldRoutineExecutionRoute(situation)\n  });\n}\n",
+        "callers": 1,
+        "callees": 4
+      },
+      {
+        "name": "getCurrentDefender",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.team-roster-foundation.getCurrentDefender",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/team-roster-foundation.js",
+        "start_line": 346,
+        "end_line": 350,
+        "source_mode": "full",
+        "source": "  function getCurrentDefender(roster, position) {\n    if (!validateActiveDefense(roster).ok) return null;\n    const code = normalizePosition(position);\n    return roster.lineup.find(actor => normalizePosition(actor.defensivePosition || actor.position) === code) || null;\n  }\n",
+        "callers": 1,
+        "callees": 2
+      }
+    ],
+    "currentDiskVerification": [
+      {
+        "name": "buildHighSchoolShortstopExecution",
+        "path": "script.js",
+        "start": 11859,
+        "end": 11946,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+      },
+      {
+        "name": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+        "path": "script.js",
+        "start": 5117,
+        "end": 5306,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+      },
+      {
+        "name": "resolveHighSchoolDefensivePlay",
+        "path": "script.js",
+        "start": 10308,
+        "end": 10324,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+      },
+      {
+        "name": "resolveHighSchoolInfieldReceiver",
+        "path": "script.js",
+        "start": 8111,
+        "end": 8127,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+      },
+      {
+        "name": "createHighSchoolOffensiveTacticalIdentity",
+        "path": "script.js",
+        "start": 4595,
+        "end": 4606,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+      },
+      {
+        "name": "getHighSchoolControlledDecisionInput",
+        "path": "script.js",
+        "start": 11948,
+        "end": 11961,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+      },
+      {
+        "name": "attachHighSchoolInfieldActionFacts",
+        "path": "script.js",
+        "start": 11213,
+        "end": 11291,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+      },
+      {
+        "name": "getDefensiveSimulationCapability",
+        "path": "script.js",
+        "start": 6466,
+        "end": 6495,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+      },
+      {
+        "name": "nextHighSchoolMatchSimulationRandom",
+        "path": "script.js",
+        "start": 6544,
+        "end": 6549,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+      },
+      {
+        "name": "resolveBattedBallPhysicalTruth",
+        "path": "batted-ball-physical.js",
+        "start": 105,
+        "end": 131,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "4c0847af7b085c6da68223e47114164af417567dbc9d65644ec51fc7427cfec8"
+      },
+      {
+        "name": "buildGroundBallDefensiveOpportunity",
+        "path": "batted-ball-ground-defense.js",
+        "start": 320,
+        "end": 366,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "71b12034b813179180250a5c533b3a95c1bd05f5640cd4a523e0e8b5efacb777"
+      },
+      {
+        "name": "buildGroundBallRunnerRealization",
+        "path": "batted-ball-ground-defense.js",
+        "start": 146,
+        "end": 234,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "71b12034b813179180250a5c533b3a95c1bd05f5640cd4a523e0e8b5efacb777"
+      },
+      {
+        "name": "resolveThrow",
+        "path": "defensive-decision-throw-foundation.js",
+        "start": 142,
+        "end": 166,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "1a8a65ee11a98ace76f2b0b807bf3227df789514abdbefdf2decf2de378e831e"
+      },
+      {
+        "name": "throwDemand",
+        "path": "defensive-decision-throw-foundation.js",
+        "start": 125,
+        "end": 134,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "1a8a65ee11a98ace76f2b0b807bf3227df789514abdbefdf2decf2de378e831e"
+      },
+      {
+        "name": "resolveTiming",
+        "path": "defensive-runner-throw-settlement-foundation.js",
+        "start": 23,
+        "end": 60,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "4c54b171252c3a93df15304d5a7520335877a4a621b0cba8268354ed4563d136"
+      },
+      {
+        "name": "deriveRunnerArrival",
+        "path": "defensive-runner-throw-settlement-foundation.js",
+        "start": 15,
+        "end": 22,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "4c54b171252c3a93df15304d5a7520335877a4a621b0cba8268354ed4563d136"
+      },
+      {
+        "name": "resolveFairContactBallInPlay",
+        "path": "offensive-plate-approach.js",
+        "start": 444,
+        "end": 474,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "f3c2ae25fe261006a76e3cbdc583f7c8e2a45d45c20a98a623b36e651380b317"
+      },
+      {
+        "name": "buildInfieldTeammateContext",
+        "path": "script.js",
+        "start": 7178,
+        "end": 7203,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+      },
+      {
+        "name": "resolveRoutineDefensivePlay",
+        "path": "script.js",
+        "start": 10335,
+        "end": 10356,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+      },
+      {
+        "name": "getCurrentDefender",
+        "path": "team-roster-foundation.js",
+        "start": 346,
+        "end": 350,
+        "diskMatchesSnippet": true,
+        "sourceSha256": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8"
+      }
+    ],
+    "coverage": {
+      "project": "E-meng-baseball_life_sim_semirefactor",
+      "signal": "best_effort",
+      "indexed_at": "2026-10-13T01:58:58Z",
+      "metadata": {
+        "generation": "2026-10-13T01:58:58Z",
+        "index_mode": "full",
+        "recorded_at": "2026-10-13T01:59:01Z",
+        "recording_status": "complete",
+        "ignored_files_stored": 0,
+        "ignored_files_total": 0,
+        "hash_records_complete": true,
+        "coverage_version": 3,
+        "generation_matches": true
+      },
+      "paths": [
+        {
+          "requested_path": "script.js",
+          "path": "script.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "batted-ball-physical.js",
+          "path": "batted-ball-physical.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "batted-ball-ground-defense.js",
+          "path": "batted-ball-ground-defense.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "defensive-decision-throw-foundation.js",
+          "path": "defensive-decision-throw-foundation.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "defensive-runner-throw-settlement-foundation.js",
+          "path": "defensive-runner-throw-settlement-foundation.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "offensive-plate-approach.js",
+          "path": "offensive-plate-approach.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "team-roster-foundation.js",
+          "path": "team-roster-foundation.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "match-situation-lifecycle.js",
+          "path": "match-situation-lifecycle.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "defensive-opportunity-foundation.js",
+          "path": "defensive-opportunity-foundation.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "tests/high-school-career-test-context.js",
+          "path": "tests/high-school-career-test-context.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        },
+        {
+          "requested_path": "tests/first-base-receive-active-ground-production-integration-test.js",
+          "path": "tests/first-base-receive-active-ground-production-integration-test.js",
+          "status": "no_recorded_issue",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": []
+        }
+      ],
+      "path_total": 11,
+      "path_returned": 11,
+      "path_has_more": false,
+      "scopes": [],
+      "scope_total": 0,
+      "scope_returned": 0,
+      "scope_truncated": false,
+      "has_more": false,
+      "caveat": "Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable."
+    }
+  },
+  "sourceHashes": [
+    {
+      "path": "script.js",
+      "bytes": 1087072,
+      "sha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+    },
+    {
+      "path": "batted-ball-physical.js",
+      "bytes": 9200,
+      "sha256": "4c0847af7b085c6da68223e47114164af417567dbc9d65644ec51fc7427cfec8"
+    },
+    {
+      "path": "batted-ball-ground-defense.js",
+      "bytes": 25154,
+      "sha256": "71b12034b813179180250a5c533b3a95c1bd05f5640cd4a523e0e8b5efacb777"
+    },
+    {
+      "path": "defensive-decision-throw-foundation.js",
+      "bytes": 31460,
+      "sha256": "1a8a65ee11a98ace76f2b0b807bf3227df789514abdbefdf2decf2de378e831e"
+    },
+    {
+      "path": "defensive-runner-throw-settlement-foundation.js",
+      "bytes": 20220,
+      "sha256": "4c54b171252c3a93df15304d5a7520335877a4a621b0cba8268354ed4563d136"
+    },
+    {
+      "path": "offensive-plate-approach.js",
+      "bytes": 46923,
+      "sha256": "f3c2ae25fe261006a76e3cbdc583f7c8e2a45d45c20a98a623b36e651380b317"
+    },
+    {
+      "path": "team-roster-foundation.js",
+      "bytes": 24328,
+      "sha256": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8"
+    },
+    {
+      "path": "match-situation-lifecycle.js",
+      "bytes": 11747,
+      "sha256": "421ad31e7f71ab39a34b39e8f5c00f296a3f3a42076c73b7c539b089ac08740e"
+    },
+    {
+      "path": "defensive-opportunity-foundation.js",
+      "bytes": 10068,
+      "sha256": "834395d3f829e27cce798fd859c11f8fee2ed0e9586b8015d5554108aa773a32"
+    },
+    {
+      "path": "tests/high-school-career-test-context.js",
+      "bytes": 4768,
+      "sha256": "c77afdf9f9e63e5fcf740605e66afee4cc54bd93e3e63ee4c12382a7b3f012e0"
+    },
+    {
+      "path": "tests/first-base-receive-active-ground-production-integration-test.js",
+      "bytes": 34545,
+      "sha256": "c07c1481bb8dbf554c2f6f5d63cd83a61ffbcbcbf378c95da4b332a46e7e6734"
+    }
+  ],
+  "supplementalCurrentSourceReads": [
+    {
+      "path": "script.js",
+      "lines": "5059-5073",
+      "purpose": "Real physical responsibility/active defender and pending reach validation; absence of legacy opportunity uses old compatibility return."
+    },
+    {
+      "path": "script.js",
+      "lines": "8372-8425",
+      "purpose": "SS cache reuse occurs before original callback; first execution samples once, normalizes sample, stores original SS execution."
+    },
+    {
+      "path": "script.js",
+      "lines": "7178-7203",
+      "purpose": "receivingAvailable is roster-presence metadata. SS builder does not use this property; 2B helper does."
+    },
+    {
+      "path": "script.js",
+      "lines": "7423-7505",
+      "purpose": "Situation and runnerSettlementIdentity are generated from match moment/cursor/batter, not a frozen new physical slot."
+    },
+    {
+      "path": "script.js",
+      "lines": "8678-8691",
+      "purpose": "Existing infield family dispatch registration, namespace calls absent from graph edges supplemented by source."
+    },
+    {
+      "path": "script.js",
+      "lines": "11118-11191",
+      "purpose": "Lifecycle stores source handoff/physical ref, legal routes and context. Active routine lifecycle may already be executing before sampler callback."
+    },
+    {
+      "path": "script.js",
+      "lines": "4949-4970",
+      "purpose": "Existing SS topology uses original/default or same-physical historical topology; other route owner versions remain separate."
+    },
+    {
+      "path": "match-situation-lifecycle.js",
+      "lines": "114-124",
+      "purpose": "beginExecution replaces executionState with enumerated fields. Future admission/slot pin must be preserved deliberately."
+    }
+  ],
+  "conclusions": {
+    "canonicalSSUpstream": "Secure/reach and first throw are existing distinct authorities. Receiver remains a fielding/sample combined proxy; no new receiver physical authority found in audited owner/cache.",
+    "receiverAvailability": "SS fetches actual roster actor then applies fielding+swing>=3.2; it ignores teammate.receivingAvailable. atBase=true is assigned constant; tagAvailable mirrors receiverReady.",
+    "identities": "Match, cached PA, raw physical contact and handoff identities are reusable facts. Ledger action IDs appear after execution and are ordinal within situation.runnerSettlementIdentity. Throw variation includes route selection ID. Future fixed primaryThrow namespace is a proposed projection, not currently pinned.",
+    "timing": "v1 runner/flight/receiver completion are authoritative old coarse facts. No saved upstream launch/receiver movement/touch origin establishes v2 CRT. v1 ordinal windows are not absolute CRT.",
+    "sampling": "Original owned SS sample is generated only by the original execution callback and retained in cache; no audit execution/callback performed. First throw variations are separate deterministic canonical namespaces, not the SS sample.",
+    "scopeLimit": "The structural negative findings are bounded to the cited SS direct/hold owners and saved fields, not an exhaustive claim about every route or future model.",
+    "protectedContentReads": 0,
+    "fixtureExecutionByThisAudit": 0,
+    "parentFixtureRecommendation": "Use original firstBaseFixture / firstBaseIncomingBoundary VM definitions as declared Legacy witnesses only. Empty-base SS normally auto-enters routine execution: pending trap can be executing with sample absent; capture the actual entry before callback and report real lifecycle phase."
+  }
+}

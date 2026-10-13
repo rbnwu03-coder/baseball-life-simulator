@@ -1,0 +1,426 @@
+{
+  "index": {
+    "project": "E-meng-baseball_life_sim_semirefactor",
+    "nodes": 57575,
+    "edges": 76712,
+    "status": "ready",
+    "root_path": "E:/meng/baseball_life_sim_semirefactor",
+    "indexed_at": "2026-10-12T16:21:59Z",
+    "parse_partial": {
+      "files": [],
+      "count": 1,
+      "truncated": true,
+      "omitted": 1
+    },
+    "parse_unusable": {
+      "files": [],
+      "count": 0,
+      "truncated": false
+    },
+    "skipped": {
+      "files": [],
+      "count": 0,
+      "truncated": false
+    },
+    "not_indexed": {
+      "dirs": [],
+      "dirs_count": 2,
+      "files": [],
+      "files_count": 0,
+      "truncated": true,
+      "dirs_omitted": 2
+    }
+  },
+  "schema": {
+    "node_labels": [
+      {
+        "label": "Variable",
+        "count": 47207
+      },
+      {
+        "label": "Function",
+        "count": 4961
+      },
+      {
+        "label": "Section",
+        "count": 4045
+      },
+      {
+        "label": "File",
+        "count": 677
+      },
+      {
+        "label": "Module",
+        "count": 671
+      },
+      {
+        "label": "Folder",
+        "count": 10
+      },
+      {
+        "label": "EnvVar",
+        "count": 2
+      },
+      {
+        "label": "Branch",
+        "count": 1
+      },
+      {
+        "label": "Project",
+        "count": 1
+      }
+    ],
+    "edge_types": [
+      {
+        "type": "DEFINES",
+        "count": 56885
+      },
+      {
+        "type": "USAGE",
+        "count": 8959
+      },
+      {
+        "type": "CALLS",
+        "count": 7490
+      },
+      {
+        "type": "IMPORTS",
+        "count": 1128
+      },
+      {
+        "type": "SIMILAR_TO",
+        "count": 902
+      },
+      {
+        "type": "CONTAINS_FILE",
+        "count": 677
+      },
+      {
+        "type": "WRITES",
+        "count": 370
+      },
+      {
+        "type": "CONFIGURES",
+        "count": 161
+      },
+      {
+        "type": "FILE_CHANGES_WITH",
+        "count": 102
+      },
+      {
+        "type": "CALL_REFERENCE",
+        "count": 19
+      },
+      {
+        "type": "CONTAINS_FOLDER",
+        "count": 10
+      },
+      {
+        "type": "SEMANTICALLY_RELATED",
+        "count": 4
+      },
+      {
+        "type": "RAISES",
+        "count": 3
+      },
+      {
+        "type": "HAS_BRANCH",
+        "count": 1
+      },
+      {
+        "type": "THROWS",
+        "count": 1
+      }
+    ],
+    "total": 24,
+    "returned": 24,
+    "has_more": false,
+    "adr_present": false
+  },
+  "search": {
+    "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+    "cols": [
+      "name",
+      "label",
+      "lines",
+      "in",
+      "out"
+    ],
+    "groups": [
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.match-situation-lifecycle",
+        "file": "match-situation-lifecycle.js",
+        "rows": [
+          [
+            "beginExecution",
+            "Function",
+            "114-124",
+            1,
+            3
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.receiver-execution-v2-sprint-9-architecture-evidence",
+        "file": "docs/receiver-execution-v2-sprint-9-architecture-evidence.json",
+        "rows": [
+          [
+            "beginExecution",
+            "Variable",
+            "45-78",
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.receiver-execution-v2-sprint-7-architecture-source-matrix",
+        "file": "docs/receiver-execution-v2-sprint-7-architecture-source-matrix.json",
+        "rows": [
+          [
+            "beginExecution",
+            "Variable",
+            "3633-3633",
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.receiver-execution-v2-sprint-9-architecture-evidence",
+        "file": "docs/receiver-execution-v2-sprint-9-architecture-evidence.json",
+        "rows": [
+          [
+            "buildHighSchoolShortstopExecution",
+            "Variable",
+            "129-204",
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+        "file": "script.js",
+        "rows": [
+          [
+            "buildHighSchoolShortstopExecution",
+            "Function",
+            "11859-11946",
+            2,
+            17
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation",
+        "file": "defensive-runner-throw-settlement-foundation.js",
+        "rows": [
+          [
+            "deriveSettlement",
+            "Function",
+            "94-133",
+            3,
+            10
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.receiver-execution-v2-sprint-9-architecture-evidence",
+        "file": "docs/receiver-execution-v2-sprint-9-architecture-evidence.json",
+        "rows": [
+          [
+            "deriveSettlement",
+            "Variable",
+            "79-128",
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.receiver-execution-v2-sprint-9-closeout-evidence",
+        "file": "docs/receiver-execution-v2-sprint-9-closeout-evidence.json",
+        "rows": [
+          [
+            "normalizeSave",
+            "Variable",
+            "322-322",
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.receiver-execution-v2-sprint-9-architecture-evidence",
+        "file": "docs/receiver-execution-v2-sprint-9-architecture-evidence.json",
+        "rows": [
+          [
+            "normalizeSave",
+            "Variable",
+            "681-777",
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.save",
+        "file": "save.js",
+        "rows": [
+          [
+            "normalizeSave",
+            "Function",
+            "12-628",
+            2,
+            42
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+        "file": "script.js",
+        "rows": [
+          [
+            "resolveHighSchoolInfieldReceiver",
+            "Function",
+            "8111-8127",
+            1,
+            7
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.receiver-execution-v2-sprint-9-architecture-evidence",
+        "file": "docs/receiver-execution-v2-sprint-9-architecture-evidence.json",
+        "rows": [
+          [
+            "validateHighSchoolDecisionThrowState",
+            "Variable",
+            "205-317",
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+        "file": "script.js",
+        "rows": [
+          [
+            "validateHighSchoolDecisionThrowState",
+            "Function",
+            "11990-12053",
+            8,
+            12
+          ]
+        ]
+      }
+    ],
+    "total": 13,
+    "returned": 13,
+    "count": 13,
+    "has_more": false,
+    "truncated": false
+  },
+  "coverage": {
+    "project": "E-meng-baseball_life_sim_semirefactor",
+    "signal": "best_effort",
+    "indexed_at": "2026-10-12T16:21:59Z",
+    "metadata": {
+      "generation": "2026-10-12T16:21:59Z",
+      "index_mode": "full",
+      "recorded_at": "2026-10-12T16:22:01Z",
+      "recording_status": "complete",
+      "ignored_files_stored": 0,
+      "ignored_files_total": 0,
+      "hash_records_complete": true,
+      "coverage_version": 3,
+      "generation_matches": true
+    },
+    "paths": [
+      {
+        "requested_path": "script.js",
+        "path": "script.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "match-situation-lifecycle.js",
+        "path": "match-situation-lifecycle.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "save.js",
+        "path": "save.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "receiver-execution-v2-foundation.js",
+        "path": "receiver-execution-v2-foundation.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "receiver-execution-v2-admission-timing-foundation.js",
+        "path": "receiver-execution-v2-admission-timing-foundation.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "defensive-decision-throw-foundation.js",
+        "path": "defensive-decision-throw-foundation.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "defensive-runner-throw-settlement-foundation.js",
+        "path": "defensive-runner-throw-settlement-foundation.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "match-game-record.js",
+        "path": "match-game-record.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "match-experience-development.js",
+        "path": "match-experience-development.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      }
+    ],
+    "path_total": 9,
+    "path_returned": 9,
+    "path_has_more": false,
+    "scopes": [],
+    "scope_total": 0,
+    "scope_returned": 0,
+    "scope_truncated": false,
+    "has_more": false,
+    "caveat": "Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable."
+  },
+  "tier": 2
+}

@@ -1,0 +1,138 @@
+{
+  "scope": "SPRINT_10A_DESIGN_ONLY",
+  "runtimeEnabled": false,
+  "actualAdapterImplemented": false,
+  "adapterVersion": "DRAFT_receiver-production-source-adapter-v1",
+  "compatibility": {
+    "currentPureAdapter": "receiver-explicit-input-v1",
+    "newVersionAcceptedByS8": false,
+    "requiredFollowup": "Explicit version registry/contract update after approval; do not relabel current composite values as independent capability"
+  },
+  "owners": {
+    "actualSource": "existing getDefensiveSimulationCapability and owned roster actor",
+    "futureConversion": "versioned adapter in existing defensive capability owner",
+    "calibration": "separate receiver model policy; not implemented here"
+  },
+  "rows": [
+    {
+      "ability": "reaction",
+      "stage": "positioning start",
+      "NPC": "defense alias",
+      "Career": "round((reactionSkill*2+ballSense)/3)",
+      "classification": "B",
+      "independentPhysicalMeasurement": false,
+      "source": "script.js:6466-6495",
+      "requirements": "preserve alias provenance and matched actor snapshot; validate timing sensitivity later"
+    },
+    {
+      "ability": "range",
+      "stage": "reach envelope",
+      "NPC": "defense alias",
+      "Career": "round(((skills.range || reactionSkill)*2+fitness)/3)",
+      "classification": "B",
+      "source": "script.js:6466-6495",
+      "requirements": "calibrate MDU range scale; not geometry"
+    },
+    {
+      "ability": "mobility",
+      "stage": "movement duration",
+      "NPC": "roster speed exists (A); speed-to-mobility conversion unavailable (C)",
+      "Career": "fitness/baseRunning derived offense speed exists (B); defensive mobility conversion unavailable (C)",
+      "classification": "C",
+      "source": [
+        "team-roster-foundation.js:86-117",
+        "script.js:6452-6495"
+      ],
+      "requirements": "new versioned mapping and units; no default/zero/speed-as-identical-mobility"
+    },
+    {
+      "ability": "catching",
+      "stage": "hands secure",
+      "NPC": "absent as independent roster field",
+      "Career": "baseballSkills.catching feeds composite fielding; independent S8 input has no general production adapter",
+      "classification": "C",
+      "source": "script.js:6466-6495",
+      "requirements": "if fielding alias chosen, declare B compatibility, explicitly approve/version and calibrate; do not invent independent skill"
+    },
+    {
+      "ability": "fielding",
+      "stage": "hands control",
+      "NPC": "defense",
+      "Career": "round((positionTools[0] skill*2+positionTools[1] skill+ballSense)/4); ordinary infield/default uses catching/reaction, catcher/outfield tools differ",
+      "classification": "B",
+      "source": "script.js:6466-6495",
+      "requirements": "snapshot same actor; must not substitute for readiness or average effort"
+    },
+    {
+      "ability": "arm",
+      "stage": "existing upstream delivery",
+      "NPC": "arm",
+      "Career": "round((armSkill*2+fitness)/3); SS/3B use armStrength when available",
+      "classification": "B",
+      "source": "script.js:6466-6495",
+      "requirements": "receiver arm must not improve receiver hands or positioning; preserve current throw resolver"
+    },
+    {
+      "ability": "throwing",
+      "stage": "existing upstream delivery",
+      "NPC": "arm alias",
+      "Career": "round((throwingSkill*2+observe)/3)",
+      "classification": "B",
+      "source": "script.js:6466-6495",
+      "requirements": "no second throw roll; actual relay actor only, outside first slice"
+    },
+    {
+      "ability": "decision",
+      "stage": "legal preexecution cover/target intent",
+      "NPC": "round((defense+contact)/2)",
+      "Career": "round((baseballIQ+observe+discipline)/3)",
+      "classification": "B",
+      "source": "script.js:6466-6495",
+      "requirements": "no additional out/safe roll for fixed explicit legal route"
+    }
+  ],
+  "snapshotContract": {
+    "phase": "before receiver execution using legal roster actor, original immutable handoff",
+    "fields": [
+      "actorId",
+      "actorRole",
+      "position",
+      "sourceRosterVersion",
+      "adapterVersion",
+      "capabilitySourceVersion",
+      "values",
+      "sourceAliases",
+      "modelCalibrationVersion",
+      "competitionLevel",
+      "environmentId"
+    ],
+    "missing": "insufficient; do not pad eight S8 values",
+    "generatedCareerSkills": false,
+    "positionDifferences": "actual SS/3B arm branch; current NPC position modifiers affect original roster prior, not a new mobility mapping"
+  },
+  "gradientAcceptance": {
+    "currentProductionFormulasChanged": false,
+    "currentCompositeGradientClaim": "not newly accepted in this sprint",
+    "future": [
+      "same ball/vector with one ability changed",
+      "reaction/mobility nonnegative completion monotonic",
+      "range reach monotonic",
+      "catching/fielding hands margin monotonic",
+      "receiver arm/throwing/decision noninterference",
+      "NPC/Career alias, position/environment calibration cohorts"
+    ],
+    "run": false
+  },
+  "ordinaryEffort": {
+    "classification": "C",
+    "version": "ordinary-effort-reference-v1",
+    "referenceSource": "separate calibrated average same league/position/environment",
+    "actualWeakCapabilitySubstitution": false,
+    "average10Authorized": false,
+    "scorerStatus": "insufficientScorerFacts",
+    "officialE": null,
+    "wouldBeAssist": null,
+    "existingLegacyScorerUnchanged": true
+  },
+  "status": "PARTIAL"
+}

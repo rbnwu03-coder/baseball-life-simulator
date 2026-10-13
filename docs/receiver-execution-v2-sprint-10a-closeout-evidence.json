@@ -1,0 +1,235 @@
+{
+  "sprint": "10A",
+  "scope": "6-3_SOURCE_AND_LIFECYCLE_READINESS_ONLY",
+  "baseline": "32ee5ec55e4791952a9ef5d68c126389ab1e1ff6",
+  "createdAt": "2026-10-13T04:36:08.668Z",
+  "runtimeEnabled": false,
+  "candidateExecutionCalls": 0,
+  "formalShadowSimulation": false,
+  "formalV2Save": "NOT_IMPLEMENTED_NOT_TESTED",
+  "newRuntimeModules": 0,
+  "manifest": {
+    "count": 21,
+    "paths": [
+      "docs/receiver-execution-v2-6-3-shadow-readiness-sprint-10a.md",
+      "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs",
+      "tests/receiver-execution-v2-sprint-10a-runner.cjs",
+      "docs/receiver-execution-v2-sprint-10a-baseline-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a-initial-architecture-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a-capability-architecture-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a-roster-architecture-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a-pure-architecture-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a-root-coverage-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a-capability-adapter-proposal.json",
+      "docs/receiver-execution-v2-sprint-10a-source-adapter-contract.json",
+      "docs/receiver-execution-v2-sprint-10a-shadow-storage-contract.json",
+      "docs/receiver-execution-v2-sprint-10a-ss-architecture-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a-source-ownership-matrix.json",
+      "docs/receiver-execution-v2-sprint-10a-lifecycle-architecture-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a-lifecycle-save-matrix.json",
+      "docs/receiver-execution-v2-sprint-10a-initial-test-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a-focused-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a-coverage-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a-non-interference-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a-closeout-evidence.json"
+    ],
+    "hashes": {
+      "docs/receiver-execution-v2-6-3-shadow-readiness-sprint-10a.md": {
+        "size": 22690,
+        "sha256": "6792b712051e43c954a2ae2e5ea5c547a954beb6c112ac0cb4dc9aab2f21f85f"
+      },
+      "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs": {
+        "size": 30514,
+        "sha256": "e30f6779ce8dbb8e45755f8aeb85eeef6a1766f5cd3f8b5b4ef734f45e098d6c"
+      },
+      "tests/receiver-execution-v2-sprint-10a-runner.cjs": {
+        "size": 3804,
+        "sha256": "e9acf8414319810aa026ff169366ba325f349fc7a88e746e45ccf322d434042d"
+      },
+      "docs/receiver-execution-v2-sprint-10a-baseline-evidence.json": {
+        "size": 86613,
+        "sha256": "c32009beaf2ed4efd925309d570ebca7e48861eb0f4a6caf0109c95c3f1d3180"
+      },
+      "docs/receiver-execution-v2-sprint-10a-initial-architecture-evidence.json": {
+        "size": 10734,
+        "sha256": "f2ff8e245aa00b569981414b3deaad27d98d3f8172c5a5b3efc5155afa8bfe89"
+      },
+      "docs/receiver-execution-v2-sprint-10a-capability-architecture-evidence.json": {
+        "size": 16740,
+        "sha256": "cc8d4bf38be5b9b1117d790e5185785a4285bf381d99f73d56dcb750bb9ee9cd"
+      },
+      "docs/receiver-execution-v2-sprint-10a-roster-architecture-evidence.json": {
+        "size": 8947,
+        "sha256": "c2a12f5c7dbecff1536fdffd707c6edb1b39192222aed962652ada727a3dbdf7"
+      },
+      "docs/receiver-execution-v2-sprint-10a-pure-architecture-evidence.json": {
+        "size": 14194,
+        "sha256": "24fd245ba79f63716c451d01b1ccc6fdc58e900c2ca5ddb070a56cbd16b5ddbf"
+      },
+      "docs/receiver-execution-v2-sprint-10a-root-coverage-evidence.json": {
+        "size": 2136,
+        "sha256": "d154c9eead29199107d05f1bb9a013d58ff569e3bc51f5439af8abf3b85b244b"
+      },
+      "docs/receiver-execution-v2-sprint-10a-capability-adapter-proposal.json": {
+        "size": 5463,
+        "sha256": "1f99dd2b2e42d271f2a6520d4d93179ea0f4bc7fe8ee3e7bb8458ea3acb2c2a8"
+      },
+      "docs/receiver-execution-v2-sprint-10a-source-adapter-contract.json": {
+        "size": 5616,
+        "sha256": "15e5b16e3c7d3a6ba5594283cdf1a2ff304883823a43efb7de4e58cbc5e15994"
+      },
+      "docs/receiver-execution-v2-sprint-10a-shadow-storage-contract.json": {
+        "size": 2760,
+        "sha256": "dba6d511c18592d2d1d194fb422c9416cf3be216f7753d685ff2b5e32c74aa4c"
+      },
+      "docs/receiver-execution-v2-sprint-10a-ss-architecture-evidence.json": {
+        "size": 123735,
+        "sha256": "9f6556ac841faa29f66df1441b6d6ee7a0fcd066090d44bded4d6c87d2d560e6"
+      },
+      "docs/receiver-execution-v2-sprint-10a-source-ownership-matrix.json": {
+        "size": 36832,
+        "sha256": "9517a8261e8047bd5575c9029469b0f564385d0207da66b5ddb29ae0465c4fb5"
+      },
+      "docs/receiver-execution-v2-sprint-10a-lifecycle-architecture-evidence.json": {
+        "size": 377804,
+        "sha256": "0edd4c68f93bbafd9871d8a13c2a5eef4e7e32b1504ec53d0935facd5f5234d7"
+      },
+      "docs/receiver-execution-v2-sprint-10a-lifecycle-save-matrix.json": {
+        "size": 23127,
+        "sha256": "ae20fe12935a04a1c76cdcd8b8441bbe2b2b95b67e0f50249a69922cc4e40e32"
+      },
+      "docs/receiver-execution-v2-sprint-10a-initial-test-evidence.json": {
+        "size": 28075,
+        "sha256": "028c3ba52b4385266329e7307584f40578350f087329ea636730219d73437a24"
+      },
+      "docs/receiver-execution-v2-sprint-10a-focused-evidence.json": {
+        "size": 98512,
+        "sha256": "b2b8b639facbf5f6e64e86b1a0df8de48242dfeb147e0ab8158d4ae5f9e732d1"
+      },
+      "docs/receiver-execution-v2-sprint-10a-coverage-evidence.json": {
+        "size": 249141,
+        "sha256": "53cda9fc7268807395f5152712201fe5a2edab69aa291dfe5d7629ed06f66700"
+      },
+      "docs/receiver-execution-v2-sprint-10a-non-interference-evidence.json": {
+        "size": 8040,
+        "sha256": "42e2dafb9281e0a710272cf5911df87733bea9903d3ccf50b9e8a2e25c65c954"
+      }
+    },
+    "hashScope": "All other new artifacts; this self-referential closeout file intentionally excluded from its own hash map."
+  },
+  "validation": {
+    "newArtifactWhitespace": "PASS_NO_TRAILING_SPACE_AND_ONE_FINAL_NEWLINE",
+    "gitDiffCheck": {
+      "exitCode": 0,
+      "paths": "Explicit new artifact paths only; untracked content separately checked"
+    },
+    "newJsonParsing": "PASS",
+    "reportLocalLinks": {
+      "count": 19,
+      "paths": [
+        "docs/receiver-execution-v2-sprint-10a-baseline-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a-non-interference-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a-ss-architecture-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a-lifecycle-architecture-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a-capability-architecture-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a-roster-architecture-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a-pure-architecture-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a-coverage-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a-source-ownership-matrix.json",
+        "docs/receiver-execution-v2-sprint-10a-source-adapter-contract.json",
+        "docs/receiver-execution-v2-sprint-10a-lifecycle-save-matrix.json",
+        "docs/receiver-execution-v2-sprint-10a-capability-adapter-proposal.json",
+        "docs/receiver-execution-v2-sprint-10a-lifecycle-save-matrix.json",
+        "docs/receiver-execution-v2-sprint-10a-shadow-storage-contract.json",
+        "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs",
+        "docs/receiver-execution-v2-sprint-10a-focused-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a-initial-test-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a-non-interference-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a-closeout-evidence.json"
+      ],
+      "plannedSelfLink": "docs/receiver-execution-v2-sprint-10a-closeout-evidence.json"
+    },
+    "finalCaptureInputHashesMatch": true,
+    "readableExistingTrackedCount": 672,
+    "readableExistingTrackedHashesUnchanged": true,
+    "protectedCount": 12,
+    "protectedContentReads": 0,
+    "protectedContentHashes": 0,
+    "protectedMetadataEqual": true,
+    "originalStatusEqual": true,
+    "noUnknownDifferences": true,
+    "independentReportReview": "CLEAR",
+    "coverage": {
+      "requested": 693,
+      "returned": 693,
+      "batches": 7,
+      "caveat": "Metadata is not freshness or completeness proof; current source and executed bounded fixtures take precedence."
+    }
+  },
+  "gitAtCloseoutBeforeExclusiveCreate": {
+    "branch": "main",
+    "head": "32ee5ec55e4791952a9ef5d68c126389ab1e1ff6",
+    "originMain": "32ee5ec55e4791952a9ef5d68c126389ab1e1ff6",
+    "index": "",
+    "status": " M tests/fast-check-smoke-test.cjs\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/infield-baseball-logic-audit-architecture-evidence.json\n?? docs/infield-baseball-logic-audit-evidence.json\n?? docs/infield-baseball-logic-audit-runner.cjs\n?? docs/infield-baseball-logic-validation-audit-v1.md\n?? docs/infield-scorer-recovery-sprint-5-green-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json\n?? docs/infield-scorer-recovery-sprint-5-validation.json\n?? docs/receiver-execution-v2-6-3-shadow-readiness-sprint-10a.md\n?? docs/receiver-execution-v2-sprint-10a-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a-capability-adapter-proposal.json\n?? docs/receiver-execution-v2-sprint-10a-capability-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a-initial-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a-initial-test-evidence.json\n?? docs/receiver-execution-v2-sprint-10a-lifecycle-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a-lifecycle-save-matrix.json\n?? docs/receiver-execution-v2-sprint-10a-non-interference-evidence.json\n?? docs/receiver-execution-v2-sprint-10a-pure-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a-root-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a-roster-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a-shadow-storage-contract.json\n?? docs/receiver-execution-v2-sprint-10a-source-adapter-contract.json\n?? docs/receiver-execution-v2-sprint-10a-source-ownership-matrix.json\n?? docs/receiver-execution-v2-sprint-10a-ss-architecture-evidence.json\n?? install.ps1\n?? tests/receiver-execution-v2-sprint-10a-readiness-test.cjs\n?? tests/receiver-execution-v2-sprint-10a-runner.cjs\n"
+  },
+  "actions": {
+    "stage": false,
+    "commit": false,
+    "push": false,
+    "reset": false,
+    "clean": false,
+    "stash": false
+  },
+  "regressionScope": {
+    "fullRepository": "NOT_RUN",
+    "priorFocusedSuites": "NOT_RERUN",
+    "inheritedFullRepository": "224/227_PARTIAL_THREE_EXISTING_DEBT",
+    "boundedLegacyReadinessChecks": "51/51_PASS",
+    "existingTrackedProductionDelta": 0,
+    "newFullRepositoryVerdict": false
+  },
+  "gates": {
+    "architectureSourceTrace": "PASS",
+    "physicalIdentityActorHandoff": "PARTIAL",
+    "npc1BPositioningSource": "BLOCKED",
+    "incomingDeliveryDemand": "PARTIAL",
+    "crtTouchTimingSource": "BLOCKED",
+    "actualCapabilityAdapter": "PARTIAL",
+    "lifecycleVersionPin": "PARTIAL",
+    "saveEarlyReturnGuard": "PARTIAL",
+    "shadowReadOnlyBoundary": "PASS_LIMITED_SOURCE_AND_TEST_LOCAL_PROOF",
+    "focusedReadiness": {
+      "total": 51,
+      "passed": 51,
+      "failed": 0
+    },
+    "legacyNonInterference": "PASS",
+    "fullRepository": "NOT_RUN",
+    "l03": "PARTIAL",
+    "readyForSprint10B": "NO",
+    "readyForCommit": "YES_ISOLATED_READINESS_ARTIFACTS_ONLY"
+  },
+  "remainingExecutionBlockers": [
+    "Authoritative NPC1B start and movement",
+    "Incoming Secure demand and duration",
+    "Shared launch origin, CRT bridge and independent touch completion",
+    "Production capability adapter and calibration",
+    "Formal version pin retention and raw/shared Save guards",
+    "Read-only runtime collector and recovery isolation validation"
+  ],
+  "scorerSourceBlockers": [
+    "Ordinary effort calibration authority",
+    "Cause-only clean counterfactual",
+    "Culpable late-position action",
+    "Error-specific extra advancement"
+  ],
+  "limits": [
+    "A/B/C source classification does not create new runtime authority.",
+    "Missing-source BLOCKED checks do not prove Production integration.",
+    "Protected preservation is metadata/status evidence, not content hash evidence.",
+    "Ordinary-effort insufficiency blocks formal scoring, not by itself non-scoring pure execution.",
+    "No Sprint 10B, Sprint 11 or Defensive Foundation Closeout begun."
+  ],
+  "capturePolicy": "exclusive-create; never overwrite original evidence"
+}

@@ -1,0 +1,411 @@
+{
+  "kind": "NEW_TEST_HARNESS_DIAGNOSTIC_NOT_PRODUCTION_REGRESSION",
+  "baseline": "32ee5ec55e4791952a9ef5d68c126389ab1e1ff6",
+  "initial": {
+    "sourceSha256": "d8489f82abf6363af13b2f4b8490809b1a2c20b2784ba462f28eb568b8e6fec0",
+    "summary": {
+      "total": 46,
+      "passed": 34,
+      "failed": 12
+    },
+    "checks": [
+      {
+        "name": "outs 0: actual SS primary / empty bases / NPC1B handoff before execution",
+        "pass": false,
+        "error": "evalmachine.<anonymous>:6\n      catch(error){if(error.message!=='S10A_BEFORE_EXECUTION_BOUNDARY')throw error;}\n                                                                       ^\n\nError: Expected original execution entry\n    at s10aBeforeExecution (evalmachine.<anonymous>:5:44)\n    at evalmachine.<anonymous>:1:7\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at originalFixture (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:86:5)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:169:7\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:168:5)\n    at run ([stdin]:5:179)"
+      },
+      {
+        "name": "outs 0: pending has no owned execution sample or callback pre-extraction",
+        "pass": false,
+        "error": "TypeError: Cannot read properties of undefined (reading 'cache')\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:177:28\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:176:5)\n    at run ([stdin]:5:179)\n    at [stdin]:6:9\n    at runScriptInThisContext (node:internal/vm:219:10)\n    at node:internal/process/execution:451:12\n    at [stdin]-wrapper:6:24\n    at runScriptInContext (node:internal/process/execution:449:60)\n    at evalFunction (node:internal/process/execution:283:30)"
+      },
+      {
+        "name": "outs 0: real missing sources remain BLOCKED without mutation",
+        "pass": false,
+        "error": "SyntaxError: \"undefined\" is not valid JSON\n    at JSON.parse (<anonymous>)\n    at copy (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:26:28)\n    at unchanged (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:152:38)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:181:15\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:180:5)\n    at run ([stdin]:5:179)\n    at [stdin]:6:9\n    at runScriptInThisContext (node:internal/vm:219:10)\n    at node:internal/process/execution:451:12"
+      },
+      {
+        "name": "outs 0: ordinary legacy 6-3 uses one original sample after execution begins",
+        "pass": true
+      },
+      {
+        "name": "outs 0: read-only source observation preserves legacy Match / record / Evaluation / RNG",
+        "pass": true
+      },
+      {
+        "name": "outs 1: actual SS primary / empty bases / NPC1B handoff before execution",
+        "pass": false,
+        "error": "evalmachine.<anonymous>:6\n      catch(error){if(error.message!=='S10A_BEFORE_EXECUTION_BOUNDARY')throw error;}\n                                                                       ^\n\nError: Expected original execution entry\n    at s10aBeforeExecution (evalmachine.<anonymous>:5:44)\n    at evalmachine.<anonymous>:1:7\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at originalFixture (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:86:5)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:169:7\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:168:5)\n    at run ([stdin]:5:179)"
+      },
+      {
+        "name": "outs 1: pending has no owned execution sample or callback pre-extraction",
+        "pass": false,
+        "error": "TypeError: Cannot read properties of undefined (reading 'cache')\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:177:28\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:176:5)\n    at run ([stdin]:5:179)\n    at [stdin]:6:9\n    at runScriptInThisContext (node:internal/vm:219:10)\n    at node:internal/process/execution:451:12\n    at [stdin]-wrapper:6:24\n    at runScriptInContext (node:internal/process/execution:449:60)\n    at evalFunction (node:internal/process/execution:283:30)"
+      },
+      {
+        "name": "outs 1: real missing sources remain BLOCKED without mutation",
+        "pass": false,
+        "error": "SyntaxError: \"undefined\" is not valid JSON\n    at JSON.parse (<anonymous>)\n    at copy (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:26:28)\n    at unchanged (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:152:38)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:181:15\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:180:5)\n    at run ([stdin]:5:179)\n    at [stdin]:6:9\n    at runScriptInThisContext (node:internal/vm:219:10)\n    at node:internal/process/execution:451:12"
+      },
+      {
+        "name": "outs 1: ordinary legacy 6-3 uses one original sample after execution begins",
+        "pass": true
+      },
+      {
+        "name": "outs 1: read-only source observation preserves legacy Match / record / Evaluation / RNG",
+        "pass": true
+      },
+      {
+        "name": "outs 2: actual SS primary / empty bases / NPC1B handoff before execution",
+        "pass": false,
+        "error": "evalmachine.<anonymous>:6\n      catch(error){if(error.message!=='S10A_BEFORE_EXECUTION_BOUNDARY')throw error;}\n                                                                       ^\n\nError: Expected original execution entry\n    at s10aBeforeExecution (evalmachine.<anonymous>:5:44)\n    at evalmachine.<anonymous>:1:7\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at originalFixture (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:86:5)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:169:7\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:168:5)\n    at run ([stdin]:5:179)"
+      },
+      {
+        "name": "outs 2: pending has no owned execution sample or callback pre-extraction",
+        "pass": false,
+        "error": "TypeError: Cannot read properties of undefined (reading 'cache')\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:177:28\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:176:5)\n    at run ([stdin]:5:179)\n    at [stdin]:6:9\n    at runScriptInThisContext (node:internal/vm:219:10)\n    at node:internal/process/execution:451:12\n    at [stdin]-wrapper:6:24\n    at runScriptInContext (node:internal/process/execution:449:60)\n    at evalFunction (node:internal/process/execution:283:30)"
+      },
+      {
+        "name": "outs 2: real missing sources remain BLOCKED without mutation",
+        "pass": false,
+        "error": "SyntaxError: \"undefined\" is not valid JSON\n    at JSON.parse (<anonymous>)\n    at copy (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:26:28)\n    at unchanged (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:152:38)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:181:15\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:180:5)\n    at run ([stdin]:5:179)\n    at [stdin]:6:9\n    at runScriptInThisContext (node:internal/vm:219:10)\n    at node:internal/process/execution:451:12"
+      },
+      {
+        "name": "outs 2: ordinary legacy 6-3 uses one original sample after execution begins",
+        "pass": true
+      },
+      {
+        "name": "outs 2: read-only source observation preserves legacy Match / record / Evaluation / RNG",
+        "pass": true
+      },
+      {
+        "name": "offline: actual original branch and physical action identity are retained",
+        "pass": true
+      },
+      {
+        "name": "offline: failure or already-safe result does not fill missing new receiver sources",
+        "pass": true
+      },
+      {
+        "name": "initial acquisition failure: actual original branch and physical action identity are retained",
+        "pass": true
+      },
+      {
+        "name": "initial acquisition failure: failure or already-safe result does not fill missing new receiver sources",
+        "pass": true
+      },
+      {
+        "name": "legacy combined receiver failure: actual original branch and physical action identity are retained",
+        "pass": true
+      },
+      {
+        "name": "legacy combined receiver failure: failure or already-safe result does not fill missing new receiver sources",
+        "pass": true
+      },
+      {
+        "name": "fast runner already safe: actual original branch and physical action identity are retained",
+        "pass": true
+      },
+      {
+        "name": "fast runner already safe: failure or already-safe result does not fill missing new receiver sources",
+        "pass": true
+      },
+      {
+        "name": "hold branch uses actual legal no-delivery action; physical slot remains unpinned",
+        "pass": false,
+        "error": "evalmachine.<anonymous>:6\n      catch(error){if(error.message!=='S10A_BEFORE_EXECUTION_BOUNDARY')throw error;}\n                                                                       ^\n\nError: Expected original execution entry\n    at s10aBeforeExecution (evalmachine.<anonymous>:5:44)\n    at evalmachine.<anonymous>:1:7\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at originalFixture (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:86:5)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:223:5\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:222:3)\n    at run ([stdin]:5:179)"
+      },
+      {
+        "name": "NPC adapter aliases are observed; independent catching / mobility are missing",
+        "pass": true
+      },
+      {
+        "name": "canonical throw quality is available but receiver demand / touch CRT are not inferred",
+        "pass": true
+      },
+      {
+        "name": "atBase and combined ready are legacy facts, not independent positioning completion",
+        "pass": true
+      },
+      {
+        "name": "detached missing physical identity is invalid without fallback or content mutation",
+        "pass": true
+      },
+      {
+        "name": "detached unsupported physical version is invalid",
+        "pass": true
+      },
+      {
+        "name": "detached incorrect player primary handoff is invalid",
+        "pass": true
+      },
+      {
+        "name": "detached player1B receiver cannot masquerade as NPC1B",
+        "pass": true
+      },
+      {
+        "name": "detached receiver context / roster mismatch is invalid",
+        "pass": true
+      },
+      {
+        "name": "success boolean / fake coordinates / fixture times cannot unblock this source audit",
+        "pass": true
+      },
+      {
+        "name": "actual beginExecution replaces executionState and loses arbitrary pin metadata",
+        "pass": true
+      },
+      {
+        "name": "legacy empty-base pending / executed / settled cold recovery and three duplicates remain original-owner only",
+        "pass": false,
+        "error": "evalmachine.<anonymous>:6\n      catch(error){if(error.message!=='S10A_BEFORE_EXECUTION_BOUNDARY')throw error;}\n                                                                       ^\n\nError: Expected original execution entry\n    at s10aBeforeExecution (evalmachine.<anonymous>:5:44)\n    at evalmachine.<anonymous>:1:7\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at originalFixture (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:86:5)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:278:5\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:277:3)\n    at run ([stdin]:5:179)"
+      },
+      {
+        "name": "actual public SS handler compatibility reference is outside empty-base slice and remains exactly once",
+        "pass": true
+      },
+      {
+        "name": "historical v1 topology / original pending-executed-settled recovery keeps source ownership",
+        "pass": false,
+        "error": "evalmachine.<anonymous>:6\n      catch(error){if(error.message!=='S10A_BEFORE_EXECUTION_BOUNDARY')throw error;}\n                                                                       ^\n\nError: Expected original execution entry\n    at s10aBeforeExecution (evalmachine.<anonymous>:5:44)\n    at evalmachine.<anonymous>:1:7\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at originalFixture (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:86:5)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:303:10\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:301:3)\n    at run ([stdin]:5:179)"
+      },
+      {
+        "name": "detached diagnostic sidecar proof stores BLOCKED null output outside live Match / Save",
+        "pass": true
+      },
+      {
+        "name": "diagnostic local packet rejects official authority field resolution",
+        "pass": true
+      },
+      {
+        "name": "diagnostic local packet rejects official authority field actionFacts",
+        "pass": true
+      },
+      {
+        "name": "diagnostic local packet rejects official authority field outRecorded",
+        "pass": true
+      },
+      {
+        "name": "diagnostic local packet rejects official authority field retirements",
+        "pass": true
+      },
+      {
+        "name": "diagnostic local packet rejects official authority field baseChanges",
+        "pass": true
+      },
+      {
+        "name": "diagnostic local packet rejects official authority field runChanges",
+        "pass": true
+      },
+      {
+        "name": "diagnostic local packet rejects activation / candidate outcome / scoring admission",
+        "pass": true
+      },
+      {
+        "name": "source contract and storage draft keep required C gaps and forbid candidate simulation",
+        "pass": true
+      }
+    ]
+  },
+  "afterBoundaryFix": {
+    "sourceSha256": "53eae2f55205593bde940b1a0c54fd18bad9bfe55e9a644c7f475f59b0206cda",
+    "summary": {
+      "total": 46,
+      "passed": 42,
+      "failed": 4
+    },
+    "checks": [
+      {
+        "name": "outs 0: actual SS primary / empty bases / NPC1B handoff before execution",
+        "pass": false,
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   null,\n+   null,\n+   null\n-   false,\n-   false,\n-   false\n  ]\n\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:170:54\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:168:5)\n    at run ([stdin]:5:179)\n    at [stdin]:6:24\n    at runScriptInThisContext (node:internal/vm:219:10)\n    at node:internal/process/execution:451:12\n    at [stdin]-wrapper:6:24\n    at runScriptInContext (node:internal/process/execution:449:60)\n    at evalFunction (node:internal/process/execution:283:30)"
+      },
+      {
+        "name": "outs 0: pending has no owned execution sample or callback pre-extraction",
+        "pass": true
+      },
+      {
+        "name": "outs 0: real missing sources remain BLOCKED without mutation",
+        "pass": true
+      },
+      {
+        "name": "outs 0: ordinary legacy 6-3 uses one original sample after execution begins",
+        "pass": true
+      },
+      {
+        "name": "outs 0: read-only source observation preserves legacy Match / record / Evaluation / RNG",
+        "pass": true
+      },
+      {
+        "name": "outs 1: actual SS primary / empty bases / NPC1B handoff before execution",
+        "pass": false,
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   null,\n+   null,\n+   null\n-   false,\n-   false,\n-   false\n  ]\n\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:170:54\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:168:5)\n    at run ([stdin]:5:179)\n    at [stdin]:6:24\n    at runScriptInThisContext (node:internal/vm:219:10)\n    at node:internal/process/execution:451:12\n    at [stdin]-wrapper:6:24\n    at runScriptInContext (node:internal/process/execution:449:60)\n    at evalFunction (node:internal/process/execution:283:30)"
+      },
+      {
+        "name": "outs 1: pending has no owned execution sample or callback pre-extraction",
+        "pass": true
+      },
+      {
+        "name": "outs 1: real missing sources remain BLOCKED without mutation",
+        "pass": true
+      },
+      {
+        "name": "outs 1: ordinary legacy 6-3 uses one original sample after execution begins",
+        "pass": true
+      },
+      {
+        "name": "outs 1: read-only source observation preserves legacy Match / record / Evaluation / RNG",
+        "pass": true
+      },
+      {
+        "name": "outs 2: actual SS primary / empty bases / NPC1B handoff before execution",
+        "pass": false,
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  [\n+   null,\n+   null,\n+   null\n-   false,\n-   false,\n-   false\n  ]\n\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:170:54\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:168:5)\n    at run ([stdin]:5:179)\n    at [stdin]:6:24\n    at runScriptInThisContext (node:internal/vm:219:10)\n    at node:internal/process/execution:451:12\n    at [stdin]-wrapper:6:24\n    at runScriptInContext (node:internal/process/execution:449:60)\n    at evalFunction (node:internal/process/execution:283:30)"
+      },
+      {
+        "name": "outs 2: pending has no owned execution sample or callback pre-extraction",
+        "pass": true
+      },
+      {
+        "name": "outs 2: real missing sources remain BLOCKED without mutation",
+        "pass": true
+      },
+      {
+        "name": "outs 2: ordinary legacy 6-3 uses one original sample after execution begins",
+        "pass": true
+      },
+      {
+        "name": "outs 2: read-only source observation preserves legacy Match / record / Evaluation / RNG",
+        "pass": true
+      },
+      {
+        "name": "offline: actual original branch and physical action identity are retained",
+        "pass": true
+      },
+      {
+        "name": "offline: failure or already-safe result does not fill missing new receiver sources",
+        "pass": true
+      },
+      {
+        "name": "initial acquisition failure: actual original branch and physical action identity are retained",
+        "pass": true
+      },
+      {
+        "name": "initial acquisition failure: failure or already-safe result does not fill missing new receiver sources",
+        "pass": true
+      },
+      {
+        "name": "legacy combined receiver failure: actual original branch and physical action identity are retained",
+        "pass": true
+      },
+      {
+        "name": "legacy combined receiver failure: failure or already-safe result does not fill missing new receiver sources",
+        "pass": true
+      },
+      {
+        "name": "fast runner already safe: actual original branch and physical action identity are retained",
+        "pass": true
+      },
+      {
+        "name": "fast runner already safe: failure or already-safe result does not fill missing new receiver sources",
+        "pass": true
+      },
+      {
+        "name": "hold branch uses actual legal no-delivery action; physical slot remains unpinned",
+        "pass": false,
+        "error": "TypeError: Cannot read properties of undefined (reading 'actions')\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:225:57\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:151:31)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a-readiness-test.cjs:222:3)\n    at run ([stdin]:5:179)\n    at [stdin]:6:24\n    at runScriptInThisContext (node:internal/vm:219:10)\n    at node:internal/process/execution:451:12\n    at [stdin]-wrapper:6:24\n    at runScriptInContext (node:internal/process/execution:449:60)\n    at evalFunction (node:internal/process/execution:283:30)"
+      },
+      {
+        "name": "NPC adapter aliases are observed; independent catching / mobility are missing",
+        "pass": true
+      },
+      {
+        "name": "canonical throw quality is available but receiver demand / touch CRT are not inferred",
+        "pass": true
+      },
+      {
+        "name": "atBase and combined ready are legacy facts, not independent positioning completion",
+        "pass": true
+      },
+      {
+        "name": "detached missing physical identity is invalid without fallback or content mutation",
+        "pass": true
+      },
+      {
+        "name": "detached unsupported physical version is invalid",
+        "pass": true
+      },
+      {
+        "name": "detached incorrect player primary handoff is invalid",
+        "pass": true
+      },
+      {
+        "name": "detached player1B receiver cannot masquerade as NPC1B",
+        "pass": true
+      },
+      {
+        "name": "detached receiver context / roster mismatch is invalid",
+        "pass": true
+      },
+      {
+        "name": "success boolean / fake coordinates / fixture times cannot unblock this source audit",
+        "pass": true
+      },
+      {
+        "name": "actual beginExecution replaces executionState and loses arbitrary pin metadata",
+        "pass": true
+      },
+      {
+        "name": "legacy empty-base pending / executed / settled cold recovery and three duplicates remain original-owner only",
+        "pass": true
+      },
+      {
+        "name": "actual public SS handler compatibility reference is outside empty-base slice and remains exactly once",
+        "pass": true
+      },
+      {
+        "name": "historical v1 topology / original pending-executed-settled recovery keeps source ownership",
+        "pass": true
+      },
+      {
+        "name": "detached diagnostic sidecar proof stores BLOCKED null output outside live Match / Save",
+        "pass": true
+      },
+      {
+        "name": "diagnostic local packet rejects official authority field resolution",
+        "pass": true
+      },
+      {
+        "name": "diagnostic local packet rejects official authority field actionFacts",
+        "pass": true
+      },
+      {
+        "name": "diagnostic local packet rejects official authority field outRecorded",
+        "pass": true
+      },
+      {
+        "name": "diagnostic local packet rejects official authority field retirements",
+        "pass": true
+      },
+      {
+        "name": "diagnostic local packet rejects official authority field baseChanges",
+        "pass": true
+      },
+      {
+        "name": "diagnostic local packet rejects official authority field runChanges",
+        "pass": true
+      },
+      {
+        "name": "diagnostic local packet rejects activation / candidate outcome / scoring admission",
+        "pass": true
+      },
+      {
+        "name": "source contract and storage draft keep required C gaps and forbid candidate simulation",
+        "pass": true
+      }
+    ]
+  },
+  "cause": "First trap used player decision entry while actual empty-base SS flow uses automatic entry. Later new fixture assumptions used false instead of actual null bases and assumed hold exposes last-defensive action facts.",
+  "existingProductionOrTestChanges": false,
+  "protectedContentReads": 0
+}

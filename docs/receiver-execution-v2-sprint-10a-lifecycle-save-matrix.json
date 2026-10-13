@@ -1,0 +1,436 @@
+{
+  "artifactVersion": "receiver-v2-sprint-10a-lifecycle-save-matrix-v1",
+  "sprint": "10A",
+  "baseline": "32ee5ec55e4791952a9ef5d68c126389ab1e1ff6",
+  "scope": "READ_ONLY_SOURCE_AUDIT_AND_FUTURE_SEAM_DESIGN",
+  "runtimeEnabled": false,
+  "formalSaveSchemaModified": false,
+  "productionShadowExecuted": false,
+  "formalReceiverV2SaveCompatibility": "NOT_IMPLEMENTED_NOT_TESTED",
+  "L03": "PARTIAL",
+  "evidenceClassification": {
+    "A": "Current authoritative source or existing owned-input fact; not proof that receiver-v2 has formal ownership.",
+    "B": "Deterministic consistency/projection from available facts; an isolated design packet is not formal Match or Save admission.",
+    "C": "Unavailable authoritative source or integration; block the affected receiver-v2 surface instead of inventing values."
+  },
+  "lifecycleRows": [
+    {
+      "id": "L01",
+      "phase": "creation",
+      "currentOwner": "MatchSituationLifecycle.createSituation",
+      "available": "A",
+      "currentFact": "The owner explicitly selects fields and clones contextSnapshot; unknown top-level request fields are dropped.",
+      "receiverV2Authority": "C",
+      "formalGate": "BLOCKED",
+      "draftChange": "Common physical handoff must own a version pin before any execution. Meaningful contextSnapshot may carry a validated consistency copy; routine must use the same common owner without creating a situation.",
+      "source": {
+        "path": "match-situation-lifecycle.js",
+        "startLine": 59,
+        "endLine": 85,
+        "symbol": "createSituation",
+        "sourceSha256": "421ad31e7f71ab39a34b39e8f5c00f296a3f3a42076c73b7c539b089ac08740e"
+      }
+    },
+    {
+      "id": "L02",
+      "phase": "pending admission",
+      "currentOwner": "MatchSituationLifecycle.admitSituation",
+      "available": "A",
+      "currentFact": "Existing admission records playerDecision/automaticResolution/aiDecision ownership and route count, not receiver execution version.",
+      "receiverV2Authority": "C",
+      "formalGate": "BLOCKED",
+      "draftChange": "Keep player decision admission separate from receiver model admission. New SS-primary empty-base policy must pin before first execution, including hold/offline/no-delivery branches; never choose by outcome.",
+      "source": {
+        "path": "match-situation-lifecycle.js",
+        "startLine": 86,
+        "endLine": 100,
+        "symbol": "admitSituation",
+        "sourceSha256": "421ad31e7f71ab39a34b39e8f5c00f296a3f3a42076c73b7c539b089ac08740e"
+      }
+    },
+    {
+      "id": "L03",
+      "phase": "beginExecution",
+      "currentOwner": "MatchSituationLifecycle.beginExecution",
+      "available": "A",
+      "currentFact": "executionState is replaced by status/selectedRoute/handoffRef/physicalConsequenceApplied/executionIdentity. Additive pin/binding fields would be lost.",
+      "receiverV2Authority": "C",
+      "formalGate": "BLOCKED",
+      "draftChange": "Explicitly retain only validated receiver admission reference and binding locations. Compare common handoff to meaningful context copy before this replacement; do not pull current policy on recovery.",
+      "source": {
+        "path": "match-situation-lifecycle.js",
+        "startLine": 114,
+        "endLine": 124,
+        "symbol": "beginExecution",
+        "sourceSha256": "421ad31e7f71ab39a34b39e8f5c00f296a3f3a42076c73b7c539b089ac08740e"
+      }
+    },
+    {
+      "id": "L04",
+      "phase": "executed evidence",
+      "currentOwner": "script.recordGroundBallSituationResolution / MatchSituationLifecycle.resolveSituation",
+      "available": "A",
+      "currentFact": "Current family execution cache is checked against resolution, then resolveSituation copies executionEvidence and spreads the existing executionState with complete status.",
+      "receiverV2Authority": "C",
+      "formalGate": "BLOCKED",
+      "draftChange": "A future version-aware validator must compare frozen actors/capabilities/sample/timing against authoritative cache before preserving a receiver binding copy. A shadow diagnostic must stay outside executionEvidence.",
+      "sources": [
+        {
+          "path": "script.js",
+          "startLine": 12070,
+          "endLine": 12126,
+          "symbol": "recordGroundBallSituationResolution",
+          "sourceSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+        },
+        {
+          "path": "match-situation-lifecycle.js",
+          "startLine": 162,
+          "endLine": 177,
+          "symbol": "resolveSituation",
+          "sourceSha256": "421ad31e7f71ab39a34b39e8f5c00f296a3f3a42076c73b7c539b089ac08740e"
+        }
+      ]
+    },
+    {
+      "id": "L05",
+      "phase": "settled",
+      "currentOwner": "MatchSituationLifecycle.markSettled",
+      "available": "A",
+      "currentFact": "The existing settlement identity is marked applied once and settled/closed duplicates return unchanged; it neither selects nor validates a receiver model.",
+      "receiverV2Authority": "C",
+      "formalGate": "BLOCKED",
+      "draftChange": "Keep actual settlement authority and exactly-once identity. Persist only validated version references if future runtime needs them; do not infer v2 from settled statistics or backfill legacy.",
+      "source": {
+        "path": "match-situation-lifecycle.js",
+        "startLine": 178,
+        "endLine": 183,
+        "symbol": "markSettled",
+        "sourceSha256": "421ad31e7f71ab39a34b39e8f5c00f296a3f3a42076c73b7c539b089ac08740e"
+      }
+    },
+    {
+      "id": "L06",
+      "phase": "close and summary",
+      "currentOwner": "MatchSituationLifecycle.closeSituation / createClosedSituationSummary",
+      "available": "A",
+      "currentFact": "Close requires resolution, applied settlement and no pending execution/reassessment. Summary explicitly emits a limited field set and omits receiver version/binding.",
+      "receiverV2Authority": "C",
+      "formalGate": "BLOCKED",
+      "draftChange": "Future summary retention needs an explicit reference-only design; a summary cannot reconstruct receiver output or justify re-recording a settled play.",
+      "sources": [
+        {
+          "path": "match-situation-lifecycle.js",
+          "startLine": 184,
+          "endLine": 209,
+          "symbol": "closeSituation / createClosedSituationSummary",
+          "sourceSha256": "421ad31e7f71ab39a34b39e8f5c00f296a3f3a42076c73b7c539b089ac08740e"
+        }
+      ]
+    },
+    {
+      "id": "L07",
+      "phase": "lifecycle normalization",
+      "currentOwner": "MatchSituationLifecycle.normalizeSituation",
+      "available": "A",
+      "currentFact": "Outer lifecycle version and state are checked, then the saved object is cloned/frozen. Arbitrary additive fields can survive structurally but receive no receiver-v2 semantic validation.",
+      "receiverV2Authority": "C",
+      "formalGate": "BLOCKED",
+      "draftChange": "Retaining a field is not validating a pin. A format-aware receiver guard must run before normalization can be treated as v2 admission.",
+      "source": {
+        "path": "match-situation-lifecycle.js",
+        "startLine": 210,
+        "endLine": 213,
+        "symbol": "normalizeSituation",
+        "sourceSha256": "421ad31e7f71ab39a34b39e8f5c00f296a3f3a42076c73b7c539b089ac08740e"
+      }
+    },
+    {
+      "id": "L08",
+      "phase": "handoff normalization",
+      "currentOwner": "BattedBallGroundDefense.normalizeHandoff",
+      "available": "A",
+      "currentFact": "Existing normalizeHandoff deep-clones and freezes any object; it does not choose a receiver version, validate source provenance or reconcile receiver copies.",
+      "receiverV2Authority": "C",
+      "formalGate": "BLOCKED",
+      "draftChange": "Keep the common physical handoff as proposed sole pin authority. Validate raw format and cross-owner copies before accepting receiver-v2 fields; clone/freeze remains legacy-preserving.",
+      "source": {
+        "path": "batted-ball-ground-defense.js",
+        "startLine": 402,
+        "endLine": 402,
+        "symbol": "normalizeHandoff",
+        "sourceSha256": "71b12034b813179180250a5c533b3a95c1bd05f5640cd4a523e0e8b5efacb777"
+      }
+    },
+    {
+      "id": "L09",
+      "phase": "normalizeSave raw format",
+      "currentOwner": "save.normalizeSave",
+      "available": "A",
+      "currentFact": "sourceSaveVersion is captured at entry; fresh defaults and Object.assign precede downstream handoff/lifecycle normalization, and saveVersion is overwritten with current SAVE_VERSION near return.",
+      "receiverV2Authority": "C",
+      "formalGate": "BLOCKED",
+      "draftChange": "Inspect raw saved format/model discriminators at function entry, before defaults/normalization or version rewriting. Future-version missing/malformed tags cannot masquerade as historical saves; optional tag absence alone cannot authenticate history.",
+      "sources": [
+        {
+          "path": "save.js",
+          "startLine": 12,
+          "endLine": 15,
+          "symbol": "normalizeSave raw entry",
+          "sourceSha256": "8e2300f0e160e681686d65ef68ba6e3275563dc318fcaf669f620b4d57e2d6ef"
+        },
+        {
+          "path": "save.js",
+          "startLine": 408,
+          "endLine": 430,
+          "symbol": "normalizeSave match normalization",
+          "sourceSha256": "8e2300f0e160e681686d65ef68ba6e3275563dc318fcaf669f620b4d57e2d6ef"
+        },
+        {
+          "path": "save.js",
+          "startLine": 606,
+          "endLine": 628,
+          "symbol": "normalizeSave saveVersion and final restoration",
+          "sourceSha256": "8e2300f0e160e681686d65ef68ba6e3275563dc318fcaf669f620b4d57e2d6ef"
+        }
+      ]
+    },
+    {
+      "id": "L10",
+      "phase": "normalizeSave owned validation",
+      "currentOwner": "save.normalizeSave / script.validateHighSchoolDecisionThrowState",
+      "available": "A",
+      "currentFact": "Pending reach validation uses actual defense roster, then shared decision-throw validation runs. The shared function returns early for firstBase, thirdBase, missing decision facts and settlementApplied.",
+      "receiverV2Authority": "C",
+      "formalGate": "BLOCKED",
+      "draftChange": "Run a common receiver format/pin/copy guard before every family/settled early return, preserving current family validators. Unknown or contradictory new versions must reject before live player/cursor/record mutation.",
+      "sources": [
+        {
+          "path": "save.js",
+          "startLine": 524,
+          "endLine": 541,
+          "symbol": "normalizeSave validators",
+          "sourceSha256": "8e2300f0e160e681686d65ef68ba6e3275563dc318fcaf669f620b4d57e2d6ef"
+        },
+        {
+          "path": "script.js",
+          "startLine": 11990,
+          "endLine": 12009,
+          "symbol": "validateHighSchoolDecisionThrowState earliest returns",
+          "sourceSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+        }
+      ]
+    },
+    {
+      "id": "L11",
+      "phase": "historical SS/2B copy compatibility",
+      "currentOwner": "script.validateHighSchoolDecisionThrowState",
+      "available": "A",
+      "currentFact": "SS historical saves may omit additive actionFacts/executionSample; present copies must equal reconstructed owner facts. Legacy 2B stages retain their admission when no new action contract is present.",
+      "receiverV2Authority": "C",
+      "formalGate": "PRESERVE_LEGACY_ONLY",
+      "draftChange": "Keep these legacy rules exact. A future required-format receiver pin cannot use the legacy omission exceptions. Do not globally require new additive copies for genuinely historical saves.",
+      "source": {
+        "path": "script.js",
+        "startLine": 12010,
+        "endLine": 12052,
+        "symbol": "validateHighSchoolDecisionThrowState historical/copy validation",
+        "sourceSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+      }
+    },
+    {
+      "id": "L12",
+      "phase": "cold resolved recovery",
+      "currentOwner": "script.resumeResolvedHighSchoolGroundBallSettlement",
+      "available": "A",
+      "currentFact": "Recovery requires matching physical identity, situation, original outs/bases/score and settlement identity, rejects already-applied handoff state, validates stored resolution, then uses the existing routine/meaningful apply path.",
+      "receiverV2Authority": "C",
+      "formalGate": "PRESERVE_LEGACY_ONLY",
+      "draftChange": "A future receiver pin guard must precede cache delivery and preserve original execution version. Recovery must not execute a candidate diagnostic or reinterpret a pinned play through current policy.",
+      "source": {
+        "path": "script.js",
+        "startLine": 13460,
+        "endLine": 13492,
+        "symbol": "resumeResolvedHighSchoolGroundBallSettlement",
+        "sourceSha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d"
+      }
+    },
+    {
+      "id": "L13",
+      "phase": "S9 isolated pin / policy retention",
+      "currentOwner": "Standalone admission-timing pure module",
+      "available": "B",
+      "currentFact": "createPin freezes a beforeExecution policy/request and keeps official execution owner legacy; retainPin is metadata-only across pending/executed/settled and never reselects.",
+      "receiverV2Authority": "C",
+      "formalGate": "ISOLATED_ONLY",
+      "draftChange": "Use this as contract review input. Formal owner must verify phase/handoff/roster/source authority and preserve fields; importing this module alone is not lifecycle integration.",
+      "source": {
+        "path": "receiver-execution-v2-admission-timing-foundation.js",
+        "startLine": 67,
+        "endLine": 97,
+        "symbol": "createPinRaw / retainPinRaw",
+        "sourceSha256": "3ef4ae16a2ea011f915184600d9688956e7750f720999e5b126f83af8e215a1e"
+      }
+    },
+    {
+      "id": "L14",
+      "phase": "S9 isolated snapshots",
+      "currentOwner": "validateSnapshotRaw",
+      "available": "B",
+      "currentFact": "Only isolated pending serialization can return ok with formalSaveAdmission=false. Candidate executed/settled explicitly return insufficient candidateRuntimeSaveNotImplemented.",
+      "receiverV2Authority": "C",
+      "formalGate": "NOT_IMPLEMENTED_NOT_TESTED",
+      "draftChange": "Formal v2 Save admission needs raw discriminator, sealed execution binding, every present copy, actual owner inputs and cold/duplicate tests. Never relabel insufficient branches as Save PASS.",
+      "source": {
+        "path": "receiver-execution-v2-admission-timing-foundation.js",
+        "startLine": 152,
+        "endLine": 165,
+        "symbol": "validateSnapshotRaw",
+        "sourceSha256": "3ef4ae16a2ea011f915184600d9688956e7750f720999e5b126f83af8e215a1e"
+      }
+    },
+    {
+      "id": "L15",
+      "phase": "S9 historical routing",
+      "currentOwner": "recognizeHistoricalRaw",
+      "available": "B",
+      "currentFact": "Requires a separate known-history/source-version/provenance claim and rejects present new discriminators. It is a routing contract, not normalizeSave or authentication.",
+      "receiverV2Authority": "C",
+      "formalGate": "ISOLATED_ONLY",
+      "draftChange": "Existing Save owner must supply independently validated format/history evidence. Removing all tags plus forging old format cannot be identified by a digest or this isolated API alone.",
+      "source": {
+        "path": "receiver-execution-v2-admission-timing-foundation.js",
+        "startLine": 166,
+        "endLine": 176,
+        "symbol": "recognizeHistoricalRaw",
+        "sourceSha256": "3ef4ae16a2ea011f915184600d9688956e7750f720999e5b126f83af8e215a1e"
+      }
+    },
+    {
+      "id": "L16",
+      "phase": "authoritative timing",
+      "currentOwner": "DefensiveRunnerThrowSettlementFoundation.deriveSettlement",
+      "available": "A",
+      "currentFact": "Current owner strictly recomputes v1 resolveTiming and rejects stale timing; it then owns force semantics, legal receiver touch/tag, runner results and completeSettlement/third-out projection.",
+      "receiverV2Authority": "C",
+      "formalGate": "BLOCKED",
+      "draftChange": "Define a version-aware validation seam in this existing owner before v2 can affect an outcome. Legacy v1 remains exact; v2 CRT must validate common origin/possession/contact/live force/ordered third-out. No new settlement or apply owner.",
+      "sources": [
+        {
+          "path": "defensive-runner-throw-settlement-foundation.js",
+          "startLine": 23,
+          "endLine": 60,
+          "symbol": "resolveTiming",
+          "sourceSha256": "4c54b171252c3a93df15304d5a7520335877a4a621b0cba8268354ed4563d136"
+        },
+        {
+          "path": "defensive-runner-throw-settlement-foundation.js",
+          "startLine": 94,
+          "endLine": 133,
+          "symbol": "deriveSettlement",
+          "sourceSha256": "4c54b171252c3a93df15304d5a7520335877a4a621b0cba8268354ed4563d136"
+        }
+      ]
+    }
+  ],
+  "proposedFieldMap": {
+    "status": "DRAFT_NOT_IMPLEMENTED",
+    "authoritativeAdmission": "groundBallInPlayState.receiverModelAdmission, chosen by the existing physical-play/admission owner before first execution",
+    "meaningfulConsistencyCopy": "activeSituation.contextSnapshot.receiverModelAdmission; compare to common handoff, never independently select",
+    "routineRule": "Common handoff only; no invented player-decision situation",
+    "executionBinding": "Existing family execution cache receiverModelExecutionBinding (draft); carry a validated reference through lifecycle executionState explicitly",
+    "sampleRule": "Original owned sample is bound only at its existing first execution callback; pending admission must not pre-draw, recovery and duplicate must not call RNG",
+    "diagnosticStorage": "Separate read-only sidecar/design artifact, outside official executionEvidence, simulationLog, completedMoments, GameRecord, MatchExperience and Save; no storage implementation in this sprint",
+    "settledReference": "Deliberate version/binding references only if needed by future pinned resolver; never backfill legacy statistics"
+  },
+  "formalGuardOrder": [
+    "1. Raw saved format/model discriminator and trusted-history policy before normalizeSave defaults/clone/version upgrade.",
+    "2. Current physical handoff/roster/runner/route/version/phase checks before beginning any new execution.",
+    "3. Common receiver version/pin/copy validation at shared decision-throw entry before firstBase/3B/settlementApplied early returns.",
+    "4. Validate original cache/execution binding before recovery, record or existing one-time apply.",
+    "5. Existing settlement/Force/Third-Out and record/development owners remain sole official consumers; diagnostic packets are excluded."
+  ],
+  "timingSeam": {
+    "status": "DESIGNED_NOT_IMPLEMENTED",
+    "owner": "DefensiveRunnerThrowSettlementFoundation",
+    "legacyPath": "Keep exact v1 resolveTiming equality and all legal force/third-out behavior.",
+    "receiverV2Path": "New explicit model/timing discriminator selecting a validator for already-owned frozen delivery and CRT stage facts; reject unknown versions, contradictory origin, missing possession or contact.",
+    "noNewApply": true,
+    "insufficientSourceBehavior": "BLOCK affected v2 route. Do not convert ordinal windows to CRT, synthesize missing movement/touch facts, run new success rolls or create retirement from an unapplied pure candidate."
+  },
+  "officialDiagnosticBoundaries": {
+    "gameRecord": {
+      "status": "EXCLUDE_DIAGNOSTICS_REQUIRED",
+      "fact": "recordEvent dispatches PA/run/defensive events and maintains event IDs; recordDefensivePlay additionally deduplicates actor stats by defensivePlayIdentity. Candidate diagnostics must never become one of those official event types.",
+      "sources": [
+        {
+          "path": "match-game-record.js",
+          "startLine": 237,
+          "endLine": 275,
+          "symbol": "recordDefensivePlay",
+          "sourceSha256": "8e172a1b99f8e54963f1d2434d6fbe4d3bfdf40ce915f8307765d1557d2a6085"
+        },
+        {
+          "path": "match-game-record.js",
+          "startLine": 312,
+          "endLine": 341,
+          "symbol": "recordEvent",
+          "sourceSha256": "8e172a1b99f8e54963f1d2434d6fbe4d3bfdf40ce915f8307765d1557d2a6085"
+        }
+      ]
+    },
+    "evaluation": {
+      "status": "EXCLUDE_DIAGNOSTICS_REQUIRED",
+      "fact": "deriveMatchExperienceEvidence consumes simulationLog playerRoutinePlay and completedMoments defense/offense, or supplied activeEvidence. settleMatchExperienceDevelopment applies derived contexts once per settled match. A candidate stage/possible E/out must not be supplied as actual activeEvidence or a completed moment.",
+      "sources": [
+        {
+          "path": "match-experience-development.js",
+          "startLine": 345,
+          "endLine": 396,
+          "symbol": "createDefensiveEvidence",
+          "sourceSha256": "24190484dc80beb5761be6bfb9d4dc5ea9b24337b83c11143177b9895702643b"
+        },
+        {
+          "path": "match-experience-development.js",
+          "startLine": 450,
+          "endLine": 460,
+          "symbol": "deriveMatchExperienceEvidence",
+          "sourceSha256": "24190484dc80beb5761be6bfb9d4dc5ea9b24337b83c11143177b9895702643b"
+        },
+        {
+          "path": "match-experience-development.js",
+          "startLine": 566,
+          "endLine": 608,
+          "symbol": "settleMatchExperienceDevelopment",
+          "sourceSha256": "24190484dc80beb5761be6bfb9d4dc5ea9b24337b83c11143177b9895702643b"
+        }
+      ]
+    },
+    "scorer": "No new scorer owner, E/A accumulator or official PA path. Ordinary effort/clean-correction/extra-advance authority gaps remain C; no automatic E, would-be A or H suppression."
+  },
+  "preservationRules": [
+    "Historical pending uses original legacy authority; no v2 sampling or stages.",
+    "Historical executed validates present existing copies and delivers original cache; no reroll.",
+    "Historical settled retains original record/reference; no backfill, replay apply or re-record.",
+    "Policy changes affect only unadmitted new opportunities; a pinned pending/executed/settled opportunity cannot upgrade/downgrade.",
+    "Required new-format field removal is invalid rather than historical omission. Fully stripped/forged format needs authoritative external history/format evidence; no digest authentication claim."
+  ],
+  "verification": {
+    "productionExecutionRuns": 0,
+    "shadowRuns": 0,
+    "formalSaveRuns": 0,
+    "testsRun": 0,
+    "existingFilesEdited": 0,
+    "gitMutations": 0,
+    "method": "Bounded source/graph comparison only; formal lifecycle and Save statuses derive from current source limits, not newly executed acceptance tests."
+  },
+  "finalGate": {
+    "lifecycleSaveDesign": "DESIGNED",
+    "formalReceiverV2Compatibility": "BLOCKED",
+    "legacyPreservation": "SOURCE_BOUNDARY_CONFIRMED_NOT_RERUN",
+    "timingSeam": "DESIGNED_NOT_IMPLEMENTED",
+    "diagnosticBoundary": "DESIGNED_NOT_INTEGRATED",
+    "readyFor10BFullShadow": "NO",
+    "L03": "PARTIAL",
+    "foundationCloseout": "NOT_STARTED"
+  }
+}

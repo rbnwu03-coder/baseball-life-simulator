@@ -1,0 +1,64 @@
+{
+  "contractVersion": "DRAFT_receiver-shadow-sidecar-v1",
+  "status": "DESIGNED_NOT_CONNECTED",
+  "runtimeEnabled": false,
+  "formalSimulationPerformed": false,
+  "owner": "future diagnostic collector external to Match State, Save and player",
+  "storage": "immutable in-memory sidecar Map owned by opt-in external audit session; optional exclusive-create docs artifact outside live match save",
+  "key": [
+    "rawPhysicalIdentity",
+    "pinned candidate model/adapter/timing/sampler versions",
+    "fixed physical slot"
+  ],
+  "separation": {
+    "actual": "existing Match authoritative raw execution cache/record",
+    "diagnostic": "kind=readOnlyReceiverShadowDiagnostic; authority=none; settlementAdmission=false; scoringAdmission=false; evaluationAdmission=false"
+  },
+  "fields": [
+    "kind",
+    "authority",
+    "rawPhysicalIdentity",
+    "sourceSnapshotDigest",
+    "sourceProvenance",
+    "versions",
+    "actualExecutionReference",
+    "sourceReadiness",
+    "blockedReasons",
+    "candidateOutputOrNull",
+    "observerVersion"
+  ],
+  "missingSource": {
+    "sourceReadiness": "insufficient",
+    "candidateOutputOrNull": null,
+    "callCandidateExecute": false
+  },
+  "lifecycle": {
+    "create": "after independent source snapshots are sealed and original execution sample legitimately exists",
+    "pending": "source readiness only; no sample pre-extraction",
+    "repeat": "same primary key requires same frozen source digest and actor/route binding; return original frozen artifact, reject contradictory copies; never admit a new result by changing input digest",
+    "recovery": "retain original pinned versions and source digest; no latest-policy reselection, new callback/vector; sidecar omission does not change official save",
+    "settled": "append/read diagnostic only; no backfill or duplicate statistics",
+    "cleanup": "external session close or bounded diagnostic retention; cleanup touches sidecar only"
+  },
+  "futureValidation": [
+    "original callback count/order and Match RNG unchanged",
+    "no live cache writes",
+    "no receiver model registration in family dispatch",
+    "no PlayerDecision/cursor mutation",
+    "full Match/GameRecord/Evaluation before-after identical",
+    "cold/duplicate retained versions/source digest",
+    "unsupported diagnostic cannot be admitted as Settlement"
+  ],
+  "negativeAuthority": {
+    "MatchStateApply": false,
+    "RunnerSettlementConsumer": false,
+    "PO": false,
+    "A": false,
+    "E": false,
+    "H": false,
+    "FC": false,
+    "PlayerEvaluation": false
+  },
+  "thisSprint": "readiness observations and source tests only; no candidate simulation or live storage implementation",
+  "sourceSnapshotDigest": "immutable first-observation binding, not a retry-dependent key"
+}

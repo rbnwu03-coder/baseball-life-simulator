@@ -1,0 +1,2458 @@
+{
+  "suite": "receiver-execution-v2-sprint-10a-readiness",
+  "baseline": "32ee5ec55e4791952a9ef5d68c126389ab1e1ff6",
+  "summary": {
+    "total": 51,
+    "passed": 51,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "name": "outs 0: actual SS primary / empty bases / NPC1B handoff before execution",
+      "pass": true
+    },
+    {
+      "name": "outs 0: pending has no owned execution sample or callback pre-extraction",
+      "pass": true
+    },
+    {
+      "name": "outs 0: real missing sources remain BLOCKED without mutation",
+      "pass": true
+    },
+    {
+      "name": "outs 0: ordinary legacy 6-3 uses one original sample after execution begins",
+      "pass": true
+    },
+    {
+      "name": "outs 0: read-only source observation preserves legacy Match / record / Evaluation / RNG",
+      "pass": true
+    },
+    {
+      "name": "outs 1: actual SS primary / empty bases / NPC1B handoff before execution",
+      "pass": true
+    },
+    {
+      "name": "outs 1: pending has no owned execution sample or callback pre-extraction",
+      "pass": true
+    },
+    {
+      "name": "outs 1: real missing sources remain BLOCKED without mutation",
+      "pass": true
+    },
+    {
+      "name": "outs 1: ordinary legacy 6-3 uses one original sample after execution begins",
+      "pass": true
+    },
+    {
+      "name": "outs 1: read-only source observation preserves legacy Match / record / Evaluation / RNG",
+      "pass": true
+    },
+    {
+      "name": "outs 2: actual SS primary / empty bases / NPC1B handoff before execution",
+      "pass": true
+    },
+    {
+      "name": "outs 2: pending has no owned execution sample or callback pre-extraction",
+      "pass": true
+    },
+    {
+      "name": "outs 2: real missing sources remain BLOCKED without mutation",
+      "pass": true
+    },
+    {
+      "name": "outs 2: ordinary legacy 6-3 uses one original sample after execution begins",
+      "pass": true
+    },
+    {
+      "name": "outs 2: read-only source observation preserves legacy Match / record / Evaluation / RNG",
+      "pass": true
+    },
+    {
+      "name": "offline: actual original branch and physical action identity are retained",
+      "pass": true
+    },
+    {
+      "name": "offline: failure or already-safe result does not fill missing new receiver sources",
+      "pass": true
+    },
+    {
+      "name": "initial acquisition failure: actual original branch and physical action identity are retained",
+      "pass": true
+    },
+    {
+      "name": "initial acquisition failure: failure or already-safe result does not fill missing new receiver sources",
+      "pass": true
+    },
+    {
+      "name": "legacy combined receiver failure: actual original branch and physical action identity are retained",
+      "pass": true
+    },
+    {
+      "name": "legacy combined receiver failure: failure or already-safe result does not fill missing new receiver sources",
+      "pass": true
+    },
+    {
+      "name": "fast runner already safe: actual original branch and physical action identity are retained",
+      "pass": true
+    },
+    {
+      "name": "fast runner already safe: failure or already-safe result does not fill missing new receiver sources",
+      "pass": true
+    },
+    {
+      "name": "hold branch uses actual legal no-delivery action; physical slot remains unpinned",
+      "pass": true
+    },
+    {
+      "name": "NPC adapter aliases are observed; independent catching / mobility are missing",
+      "pass": true
+    },
+    {
+      "name": "canonical throw quality is available but receiver demand / touch CRT are not inferred",
+      "pass": true
+    },
+    {
+      "name": "atBase and combined ready are legacy facts, not independent positioning completion",
+      "pass": true
+    },
+    {
+      "name": "detached missing physical identity is invalid without fallback or content mutation",
+      "pass": true
+    },
+    {
+      "name": "detached unsupported physical version is invalid",
+      "pass": true
+    },
+    {
+      "name": "detached incorrect player primary handoff is invalid",
+      "pass": true
+    },
+    {
+      "name": "detached player1B receiver cannot masquerade as NPC1B",
+      "pass": true
+    },
+    {
+      "name": "detached receiver context / roster mismatch is invalid",
+      "pass": true
+    },
+    {
+      "name": "success boolean / fake coordinates / fixture times cannot unblock this source audit",
+      "pass": true
+    },
+    {
+      "name": "uncalibrated average=10 is not an effort authority or a receiver source",
+      "pass": true
+    },
+    {
+      "name": "detached unavailable receiver flag cannot fabricate positioning or a hands result",
+      "pass": true
+    },
+    {
+      "name": "actual beginExecution replaces executionState and loses arbitrary pin metadata",
+      "pass": true
+    },
+    {
+      "name": "legacy empty-base pending / executed / settled cold recovery and three duplicates remain original-owner only",
+      "pass": true
+    },
+    {
+      "name": "actual public SS handler compatibility reference is outside empty-base slice and remains exactly once",
+      "pass": true
+    },
+    {
+      "name": "historical v1 topology / original pending-executed-settled recovery keeps source ownership",
+      "pass": true
+    },
+    {
+      "name": "legacy settled Save entry has no receiver-v2 discriminator guard (copy-only unknown metadata probe)",
+      "pass": true
+    },
+    {
+      "name": "detached diagnostic sidecar proof stores BLOCKED null output outside live Match / Save",
+      "pass": true
+    },
+    {
+      "name": "detached diagnostic duplicate returns original immutable artifact, not a retry-generated result",
+      "pass": true
+    },
+    {
+      "name": "detached diagnostic same physical/version/slot key rejects changed actor/route/source digest",
+      "pass": true
+    },
+    {
+      "name": "diagnostic local packet rejects official authority field resolution",
+      "pass": true
+    },
+    {
+      "name": "diagnostic local packet rejects official authority field actionFacts",
+      "pass": true
+    },
+    {
+      "name": "diagnostic local packet rejects official authority field outRecorded",
+      "pass": true
+    },
+    {
+      "name": "diagnostic local packet rejects official authority field retirements",
+      "pass": true
+    },
+    {
+      "name": "diagnostic local packet rejects official authority field baseChanges",
+      "pass": true
+    },
+    {
+      "name": "diagnostic local packet rejects official authority field runChanges",
+      "pass": true
+    },
+    {
+      "name": "diagnostic local packet rejects activation / candidate outcome / scoring admission",
+      "pass": true
+    },
+    {
+      "name": "source contract and storage draft keep required C gaps and forbid candidate simulation",
+      "pass": true
+    }
+  ],
+  "observations": [
+    {
+      "name": "before execution outs 0",
+      "classification": "DECLARED_LEGACY_PRODUCTION_FIXTURE_NOT_NATURAL_COHORT",
+      "rawPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+      "physicalVersion": "batted-ball-physical-v1",
+      "primary": "SS",
+      "throwerId": "player",
+      "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+      "initialOuts": 0,
+      "routeId": null,
+      "lifecycle": "admitted",
+      "ownedSample": null,
+      "sampleObservation": {
+        "matchRng": [],
+        "ownedSamples": [],
+        "publicSamples": []
+      },
+      "throw": null,
+      "actions": [],
+      "legacyTiming": null,
+      "readiness": {
+        "status": "blocked",
+        "reason": "insufficientIndependentReceiverSources",
+        "blockedReasons": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "calibratedOrdinaryEffort",
+          "lifecyclePinGuard"
+        ],
+        "runtimeEnabled": false,
+        "executionSourceBlockers": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "lifecyclePinGuard"
+        ],
+        "scorerSourceBlockers": [
+          "calibratedOrdinaryEffort",
+          "cleanCounterfactual",
+          "culpableLatePositionAction",
+          "errorSpecificAdvancement"
+        ],
+        "officialExecutionOwner": "existingLegacyOwner",
+        "simulationPerformed": false,
+        "candidateInput": null,
+        "candidateOutput": null,
+        "settlementAdmission": false,
+        "scoringAdmission": false,
+        "evaluationAdmission": false,
+        "sourceFacts": {
+          "physicalIdentity": {
+            "classification": "A",
+            "value": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+          },
+          "actorHandoff": {
+            "classification": "A",
+            "throwerId": "player",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04"
+          },
+          "legacyReceiverReadiness": {
+            "classification": "C",
+            "scope": "legacy-combined-proxy-only",
+            "generationPhase": "notGeneratedBeforeExecution"
+          },
+          "fixedPhysicalSlot": {
+            "classification": "C",
+            "proposal": "primaryThrow",
+            "productionPinned": false
+          }
+        },
+        "observedOwnedSample": null
+      },
+      "currentOuts": 0,
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "fullShadowPerformed": false
+    },
+    {
+      "name": "routine direct outs 0",
+      "classification": "DECLARED_LEGACY_PRODUCTION_FIXTURE_NOT_NATURAL_COHORT",
+      "rawPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+      "physicalVersion": "batted-ball-physical-v1",
+      "primary": "SS",
+      "throwerId": "player",
+      "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+      "initialOuts": 0,
+      "routeId": "secureFirstBaseOut",
+      "lifecycle": null,
+      "ownedSample": 0.8,
+      "sampleObservation": {
+        "matchRng": [],
+        "ownedSamples": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "publicSamples": []
+      },
+      "throw": {
+        "version": "defensive-decision-throw-v1",
+        "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut|throw-v1",
+        "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut",
+        "routeId": "secureFirstBaseOut",
+        "throwerId": "player",
+        "throwerPosition": "SS",
+        "targetBase": "first",
+        "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+        "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+        "receiverPosition": "1B",
+        "throwDemand": {
+          "distanceClass": "medium",
+          "strength": 5,
+          "accuracy": 4,
+          "arrivalPressure": 0,
+          "controlPressure": 0,
+          "units": "coarseRelativeDemand"
+        },
+        "strengthMargin": 4.966289856471121,
+        "accuracyMargin": 6.592274361290038,
+        "throwAttempted": true,
+        "throwQuality": "onTarget",
+        "releaseQuality": "readyRelease",
+        "ballArrivalState": "atReceiverTarget",
+        "inputs": {
+          "arm": 10,
+          "throwing": 10,
+          "transferState": "ready",
+          "secureQuality": "cleanControl"
+        },
+        "variationEvidence": {
+          "consumed": true,
+          "strength": {
+            "namespace": "defensive-throw-strength-v1",
+            "roll": 0.5168550717644393,
+            "adjustment": -0.03371014352887869
+          },
+          "accuracy": {
+            "namespace": "defensive-throw-accuracy-v1",
+            "roll": 0.20386281935498118,
+            "adjustment": 0.5922743612900376
+          }
+        },
+        "authority": "throwCapabilities+coarseDemand+separateVariation"
+      },
+      "actions": [
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "field",
+          "status": "completed",
+          "actorId": "player",
+          "receiverId": null,
+          "targetBase": null
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "throw",
+          "status": "completed",
+          "actorId": "player",
+          "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|3",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "receive",
+          "status": "completed",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|4",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "baseTouch",
+          "status": "completed",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        }
+      ],
+      "legacyTiming": {
+        "version": "defensive-runner-throw-settlement-v1",
+        "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut|throw-v1|timing-v1",
+        "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut",
+        "throwIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut|throw-v1",
+        "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+        "targetBase": "first",
+        "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+        "authority": "resolvedThrow+existingRunnerPhysicalState+receiverReadiness",
+        "variationEvidence": {
+          "consumed": false
+        },
+        "contestAvailable": true,
+        "timingClassification": "defenseClearlyAhead",
+        "timingMargin": 4.55,
+        "runnerArrival": {
+          "runnerId": "hs-y3-final-regional-opponent-player-05",
+          "originBase": "batter",
+          "targetBase": "first",
+          "movementDecision": "commitAdvance",
+          "startQuality": "normalStart",
+          "movementState": "advancing",
+          "timingProfile": "late",
+          "speed": 1,
+          "isForced": true,
+          "forcedMovementTarget": "first",
+          "forceReason": "batterRunnerRequiredToFirst",
+          "chainDepth": 0,
+          "profile": "late",
+          "relativeArrival": 9.55
+        },
+        "ballArrival": {
+          "relativeArrival": 5,
+          "quality": "onTarget",
+          "releaseQuality": "readyRelease",
+          "distanceClass": "medium"
+        },
+        "receiverCompletion": {
+          "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "ready": true,
+          "atBase": true,
+          "tagAvailable": true,
+          "tagDelay": 1,
+          "status": "readyReceive",
+          "relativeCompletion": 5,
+          "tagCompletion": 6
+        },
+        "reason": "physicalArrivalComparison"
+      },
+      "readiness": {
+        "status": "blocked",
+        "reason": "insufficientIndependentReceiverSources",
+        "blockedReasons": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "calibratedOrdinaryEffort",
+          "lifecyclePinGuard"
+        ],
+        "runtimeEnabled": false,
+        "executionSourceBlockers": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "lifecyclePinGuard"
+        ],
+        "scorerSourceBlockers": [
+          "calibratedOrdinaryEffort",
+          "cleanCounterfactual",
+          "culpableLatePositionAction",
+          "errorSpecificAdvancement"
+        ],
+        "officialExecutionOwner": "existingLegacyOwner",
+        "simulationPerformed": false,
+        "candidateInput": null,
+        "candidateOutput": null,
+        "settlementAdmission": false,
+        "scoringAdmission": false,
+        "evaluationAdmission": false,
+        "sourceFacts": {
+          "physicalIdentity": {
+            "classification": "A",
+            "value": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+          },
+          "actorHandoff": {
+            "classification": "A",
+            "throwerId": "player",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04"
+          },
+          "legacyReceiverReadiness": {
+            "classification": "A",
+            "scope": "legacy-combined-proxy-only",
+            "generationPhase": "legacyExecution"
+          },
+          "fixedPhysicalSlot": {
+            "classification": "C",
+            "proposal": "primaryThrow",
+            "productionPinned": false
+          }
+        },
+        "observedOwnedSample": 0.8
+      },
+      "currentOuts": 1,
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "fullShadowPerformed": false
+    },
+    {
+      "name": "before execution outs 1",
+      "classification": "DECLARED_LEGACY_PRODUCTION_FIXTURE_NOT_NATURAL_COHORT",
+      "rawPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+      "physicalVersion": "batted-ball-physical-v1",
+      "primary": "SS",
+      "throwerId": "player",
+      "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+      "initialOuts": 1,
+      "routeId": null,
+      "lifecycle": "admitted",
+      "ownedSample": null,
+      "sampleObservation": {
+        "matchRng": [],
+        "ownedSamples": [],
+        "publicSamples": []
+      },
+      "throw": null,
+      "actions": [],
+      "legacyTiming": null,
+      "readiness": {
+        "status": "blocked",
+        "reason": "insufficientIndependentReceiverSources",
+        "blockedReasons": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "calibratedOrdinaryEffort",
+          "lifecyclePinGuard"
+        ],
+        "runtimeEnabled": false,
+        "executionSourceBlockers": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "lifecyclePinGuard"
+        ],
+        "scorerSourceBlockers": [
+          "calibratedOrdinaryEffort",
+          "cleanCounterfactual",
+          "culpableLatePositionAction",
+          "errorSpecificAdvancement"
+        ],
+        "officialExecutionOwner": "existingLegacyOwner",
+        "simulationPerformed": false,
+        "candidateInput": null,
+        "candidateOutput": null,
+        "settlementAdmission": false,
+        "scoringAdmission": false,
+        "evaluationAdmission": false,
+        "sourceFacts": {
+          "physicalIdentity": {
+            "classification": "A",
+            "value": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1"
+          },
+          "actorHandoff": {
+            "classification": "A",
+            "throwerId": "player",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04"
+          },
+          "legacyReceiverReadiness": {
+            "classification": "C",
+            "scope": "legacy-combined-proxy-only",
+            "generationPhase": "notGeneratedBeforeExecution"
+          },
+          "fixedPhysicalSlot": {
+            "classification": "C",
+            "proposal": "primaryThrow",
+            "productionPinned": false
+          }
+        },
+        "observedOwnedSample": null
+      },
+      "currentOuts": 1,
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "fullShadowPerformed": false
+    },
+    {
+      "name": "routine direct outs 1",
+      "classification": "DECLARED_LEGACY_PRODUCTION_FIXTURE_NOT_NATURAL_COHORT",
+      "rawPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+      "physicalVersion": "batted-ball-physical-v1",
+      "primary": "SS",
+      "throwerId": "player",
+      "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+      "initialOuts": 1,
+      "routeId": "secureFirstBaseOut",
+      "lifecycle": null,
+      "ownedSample": 0.8,
+      "sampleObservation": {
+        "matchRng": [],
+        "ownedSamples": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "publicSamples": []
+      },
+      "throw": {
+        "version": "defensive-decision-throw-v1",
+        "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|3548150486|select|secureFirstBaseOut|throw-v1",
+        "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|3548150486|select|secureFirstBaseOut",
+        "routeId": "secureFirstBaseOut",
+        "throwerId": "player",
+        "throwerPosition": "SS",
+        "targetBase": "first",
+        "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+        "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+        "receiverPosition": "1B",
+        "throwDemand": {
+          "distanceClass": "medium",
+          "strength": 5,
+          "accuracy": 4,
+          "arrivalPressure": 0,
+          "controlPressure": 0,
+          "units": "coarseRelativeDemand"
+        },
+        "strengthMargin": 4.502810804639012,
+        "accuracyMargin": 5.695465093944222,
+        "throwAttempted": true,
+        "throwQuality": "onTarget",
+        "releaseQuality": "readyRelease",
+        "ballArrivalState": "atReceiverTarget",
+        "inputs": {
+          "arm": 10,
+          "throwing": 10,
+          "transferState": "ready",
+          "secureQuality": "cleanControl"
+        },
+        "variationEvidence": {
+          "consumed": true,
+          "strength": {
+            "namespace": "defensive-throw-strength-v1",
+            "roll": 0.7485945976804942,
+            "adjustment": -0.4971891953609884
+          },
+          "accuracy": {
+            "namespace": "defensive-throw-accuracy-v1",
+            "roll": 0.6522674530278891,
+            "adjustment": -0.30453490605577826
+          }
+        },
+        "authority": "throwCapabilities+coarseDemand+separateVariation"
+      },
+      "actions": [
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "field",
+          "status": "completed",
+          "actorId": "player",
+          "receiverId": null,
+          "targetBase": null
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "throw",
+          "status": "completed",
+          "actorId": "player",
+          "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|3",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "receive",
+          "status": "completed",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|4",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "baseTouch",
+          "status": "completed",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        }
+      ],
+      "legacyTiming": {
+        "version": "defensive-runner-throw-settlement-v1",
+        "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|3548150486|select|secureFirstBaseOut|throw-v1|timing-v1",
+        "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|3548150486|select|secureFirstBaseOut",
+        "throwIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|3548150486|select|secureFirstBaseOut|throw-v1",
+        "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+        "targetBase": "first",
+        "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+        "authority": "resolvedThrow+existingRunnerPhysicalState+receiverReadiness",
+        "variationEvidence": {
+          "consumed": false
+        },
+        "contestAvailable": true,
+        "timingClassification": "defenseClearlyAhead",
+        "timingMargin": 4.55,
+        "runnerArrival": {
+          "runnerId": "hs-y3-final-regional-opponent-player-05",
+          "originBase": "batter",
+          "targetBase": "first",
+          "movementDecision": "commitAdvance",
+          "startQuality": "normalStart",
+          "movementState": "advancing",
+          "timingProfile": "late",
+          "speed": 1,
+          "isForced": true,
+          "forcedMovementTarget": "first",
+          "forceReason": "batterRunnerRequiredToFirst",
+          "chainDepth": 0,
+          "profile": "late",
+          "relativeArrival": 9.55
+        },
+        "ballArrival": {
+          "relativeArrival": 5,
+          "quality": "onTarget",
+          "releaseQuality": "readyRelease",
+          "distanceClass": "medium"
+        },
+        "receiverCompletion": {
+          "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "ready": true,
+          "atBase": true,
+          "tagAvailable": true,
+          "tagDelay": 1,
+          "status": "readyReceive",
+          "relativeCompletion": 5,
+          "tagCompletion": 6
+        },
+        "reason": "physicalArrivalComparison"
+      },
+      "readiness": {
+        "status": "blocked",
+        "reason": "insufficientIndependentReceiverSources",
+        "blockedReasons": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "calibratedOrdinaryEffort",
+          "lifecyclePinGuard"
+        ],
+        "runtimeEnabled": false,
+        "executionSourceBlockers": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "lifecyclePinGuard"
+        ],
+        "scorerSourceBlockers": [
+          "calibratedOrdinaryEffort",
+          "cleanCounterfactual",
+          "culpableLatePositionAction",
+          "errorSpecificAdvancement"
+        ],
+        "officialExecutionOwner": "existingLegacyOwner",
+        "simulationPerformed": false,
+        "candidateInput": null,
+        "candidateOutput": null,
+        "settlementAdmission": false,
+        "scoringAdmission": false,
+        "evaluationAdmission": false,
+        "sourceFacts": {
+          "physicalIdentity": {
+            "classification": "A",
+            "value": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1"
+          },
+          "actorHandoff": {
+            "classification": "A",
+            "throwerId": "player",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04"
+          },
+          "legacyReceiverReadiness": {
+            "classification": "A",
+            "scope": "legacy-combined-proxy-only",
+            "generationPhase": "legacyExecution"
+          },
+          "fixedPhysicalSlot": {
+            "classification": "C",
+            "proposal": "primaryThrow",
+            "productionPinned": false
+          }
+        },
+        "observedOwnedSample": 0.8
+      },
+      "currentOuts": 2,
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "fullShadowPerformed": false
+    },
+    {
+      "name": "before execution outs 2",
+      "classification": "DECLARED_LEGACY_PRODUCTION_FIXTURE_NOT_NATURAL_COHORT",
+      "rawPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+      "physicalVersion": "batted-ball-physical-v1",
+      "primary": "SS",
+      "throwerId": "player",
+      "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+      "initialOuts": 2,
+      "routeId": null,
+      "lifecycle": "admitted",
+      "ownedSample": null,
+      "sampleObservation": {
+        "matchRng": [],
+        "ownedSamples": [],
+        "publicSamples": []
+      },
+      "throw": null,
+      "actions": [],
+      "legacyTiming": null,
+      "readiness": {
+        "status": "blocked",
+        "reason": "insufficientIndependentReceiverSources",
+        "blockedReasons": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "calibratedOrdinaryEffort",
+          "lifecyclePinGuard"
+        ],
+        "runtimeEnabled": false,
+        "executionSourceBlockers": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "lifecyclePinGuard"
+        ],
+        "scorerSourceBlockers": [
+          "calibratedOrdinaryEffort",
+          "cleanCounterfactual",
+          "culpableLatePositionAction",
+          "errorSpecificAdvancement"
+        ],
+        "officialExecutionOwner": "existingLegacyOwner",
+        "simulationPerformed": false,
+        "candidateInput": null,
+        "candidateOutput": null,
+        "settlementAdmission": false,
+        "scoringAdmission": false,
+        "evaluationAdmission": false,
+        "sourceFacts": {
+          "physicalIdentity": {
+            "classification": "A",
+            "value": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1"
+          },
+          "actorHandoff": {
+            "classification": "A",
+            "throwerId": "player",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04"
+          },
+          "legacyReceiverReadiness": {
+            "classification": "C",
+            "scope": "legacy-combined-proxy-only",
+            "generationPhase": "notGeneratedBeforeExecution"
+          },
+          "fixedPhysicalSlot": {
+            "classification": "C",
+            "proposal": "primaryThrow",
+            "productionPinned": false
+          }
+        },
+        "observedOwnedSample": null
+      },
+      "currentOuts": 2,
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "fullShadowPerformed": false
+    },
+    {
+      "name": "routine direct outs 2",
+      "classification": "DECLARED_LEGACY_PRODUCTION_FIXTURE_NOT_NATURAL_COHORT",
+      "rawPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+      "physicalVersion": "batted-ball-physical-v1",
+      "primary": "SS",
+      "throwerId": "player",
+      "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+      "initialOuts": 2,
+      "routeId": "secureFirstBaseOut",
+      "lifecycle": null,
+      "ownedSample": 0.8,
+      "sampleObservation": {
+        "matchRng": [],
+        "ownedSamples": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "publicSamples": []
+      },
+      "throw": {
+        "version": "defensive-decision-throw-v1",
+        "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2154074174|select|secureFirstBaseOut|throw-v1",
+        "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2154074174|select|secureFirstBaseOut",
+        "routeId": "secureFirstBaseOut",
+        "throwerId": "player",
+        "throwerPosition": "SS",
+        "targetBase": "first",
+        "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+        "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+        "receiverPosition": "1B",
+        "throwDemand": {
+          "distanceClass": "medium",
+          "strength": 5,
+          "accuracy": 4,
+          "arrivalPressure": 0,
+          "controlPressure": 0,
+          "units": "coarseRelativeDemand"
+        },
+        "strengthMargin": 4.884269825648516,
+        "accuracyMargin": 6.595221213530749,
+        "throwAttempted": true,
+        "throwQuality": "onTarget",
+        "releaseQuality": "readyRelease",
+        "ballArrivalState": "atReceiverTarget",
+        "inputs": {
+          "arm": 10,
+          "throwing": 10,
+          "transferState": "ready",
+          "secureQuality": "cleanControl"
+        },
+        "variationEvidence": {
+          "consumed": true,
+          "strength": {
+            "namespace": "defensive-throw-strength-v1",
+            "roll": 0.5578650871757418,
+            "adjustment": -0.11573017435148358
+          },
+          "accuracy": {
+            "namespace": "defensive-throw-accuracy-v1",
+            "roll": 0.20238939323462546,
+            "adjustment": 0.5952212135307491
+          }
+        },
+        "authority": "throwCapabilities+coarseDemand+separateVariation"
+      },
+      "actions": [
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "field",
+          "status": "completed",
+          "actorId": "player",
+          "receiverId": null,
+          "targetBase": null
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "throw",
+          "status": "completed",
+          "actorId": "player",
+          "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|3",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "receive",
+          "status": "completed",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|4",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "baseTouch",
+          "status": "completed",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        }
+      ],
+      "legacyTiming": {
+        "version": "defensive-runner-throw-settlement-v1",
+        "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2154074174|select|secureFirstBaseOut|throw-v1|timing-v1",
+        "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2154074174|select|secureFirstBaseOut",
+        "throwIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2154074174|select|secureFirstBaseOut|throw-v1",
+        "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+        "targetBase": "first",
+        "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+        "authority": "resolvedThrow+existingRunnerPhysicalState+receiverReadiness",
+        "variationEvidence": {
+          "consumed": false
+        },
+        "contestAvailable": true,
+        "timingClassification": "defenseClearlyAhead",
+        "timingMargin": 4.55,
+        "runnerArrival": {
+          "runnerId": "hs-y3-final-regional-opponent-player-05",
+          "originBase": "batter",
+          "targetBase": "first",
+          "movementDecision": "commitAdvance",
+          "startQuality": "normalStart",
+          "movementState": "advancing",
+          "timingProfile": "late",
+          "speed": 1,
+          "isForced": true,
+          "forcedMovementTarget": "first",
+          "forceReason": "batterRunnerRequiredToFirst",
+          "chainDepth": 0,
+          "profile": "late",
+          "relativeArrival": 9.55
+        },
+        "ballArrival": {
+          "relativeArrival": 5,
+          "quality": "onTarget",
+          "releaseQuality": "readyRelease",
+          "distanceClass": "medium"
+        },
+        "receiverCompletion": {
+          "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "ready": true,
+          "atBase": true,
+          "tagAvailable": true,
+          "tagDelay": 1,
+          "status": "readyReceive",
+          "relativeCompletion": 5,
+          "tagCompletion": 6
+        },
+        "reason": "physicalArrivalComparison"
+      },
+      "readiness": {
+        "status": "blocked",
+        "reason": "insufficientIndependentReceiverSources",
+        "blockedReasons": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "calibratedOrdinaryEffort",
+          "lifecyclePinGuard"
+        ],
+        "runtimeEnabled": false,
+        "executionSourceBlockers": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "lifecyclePinGuard"
+        ],
+        "scorerSourceBlockers": [
+          "calibratedOrdinaryEffort",
+          "cleanCounterfactual",
+          "culpableLatePositionAction",
+          "errorSpecificAdvancement"
+        ],
+        "officialExecutionOwner": "existingLegacyOwner",
+        "simulationPerformed": false,
+        "candidateInput": null,
+        "candidateOutput": null,
+        "settlementAdmission": false,
+        "scoringAdmission": false,
+        "evaluationAdmission": false,
+        "sourceFacts": {
+          "physicalIdentity": {
+            "classification": "A",
+            "value": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1"
+          },
+          "actorHandoff": {
+            "classification": "A",
+            "throwerId": "player",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04"
+          },
+          "legacyReceiverReadiness": {
+            "classification": "A",
+            "scope": "legacy-combined-proxy-only",
+            "generationPhase": "legacyExecution"
+          },
+          "fixedPhysicalSlot": {
+            "classification": "C",
+            "proposal": "primaryThrow",
+            "productionPinned": false
+          }
+        },
+        "observedOwnedSample": 0.8
+      },
+      "currentOuts": 3,
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "fullShadowPerformed": false
+    },
+    {
+      "name": "offline",
+      "classification": "DECLARED_LEGACY_PRODUCTION_FIXTURE_NOT_NATURAL_COHORT",
+      "rawPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+      "physicalVersion": "batted-ball-physical-v1",
+      "primary": "SS",
+      "throwerId": "player",
+      "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+      "initialOuts": 0,
+      "routeId": "secureFirstBaseOut",
+      "lifecycle": null,
+      "ownedSample": 0.8,
+      "sampleObservation": {
+        "matchRng": [],
+        "ownedSamples": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "publicSamples": []
+      },
+      "throw": {
+        "version": "defensive-decision-throw-v1",
+        "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut|throw-v1",
+        "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut",
+        "routeId": "secureFirstBaseOut",
+        "throwerId": "player",
+        "throwerPosition": "SS",
+        "targetBase": "first",
+        "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+        "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+        "receiverPosition": "1B",
+        "throwDemand": {
+          "distanceClass": "medium",
+          "strength": 5,
+          "accuracy": 4,
+          "arrivalPressure": 0,
+          "controlPressure": 0,
+          "units": "coarseRelativeDemand"
+        },
+        "strengthMargin": -4.033710143528879,
+        "accuracyMargin": -2.4077256387099624,
+        "throwAttempted": true,
+        "throwQuality": "offline",
+        "releaseQuality": "readyRelease",
+        "ballArrivalState": "outsideReceiverReach",
+        "inputs": {
+          "arm": 1,
+          "throwing": 1,
+          "transferState": "ready",
+          "secureQuality": "cleanControl"
+        },
+        "variationEvidence": {
+          "consumed": true,
+          "strength": {
+            "namespace": "defensive-throw-strength-v1",
+            "roll": 0.5168550717644393,
+            "adjustment": -0.03371014352887869
+          },
+          "accuracy": {
+            "namespace": "defensive-throw-accuracy-v1",
+            "roll": 0.20386281935498118,
+            "adjustment": 0.5922743612900376
+          }
+        },
+        "authority": "throwCapabilities+coarseDemand+separateVariation"
+      },
+      "actions": [
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "field",
+          "status": "completed",
+          "actorId": "player",
+          "receiverId": null,
+          "targetBase": null
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "throw",
+          "status": "failed",
+          "actorId": "player",
+          "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|3",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "receive",
+          "status": "notAttempted",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|4",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "baseTouch",
+          "status": "notAttempted",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        }
+      ],
+      "legacyTiming": {
+        "version": "defensive-runner-throw-settlement-v1",
+        "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut|throw-v1|timing-v1",
+        "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut",
+        "throwIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut|throw-v1",
+        "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+        "targetBase": "first",
+        "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+        "authority": "resolvedThrow+existingRunnerPhysicalState+receiverReadiness",
+        "variationEvidence": {
+          "consumed": false
+        },
+        "contestAvailable": false,
+        "timingClassification": "noContest",
+        "timingMargin": null,
+        "runnerArrival": {
+          "runnerId": "hs-y3-final-regional-opponent-player-05",
+          "originBase": "batter",
+          "targetBase": "first",
+          "movementDecision": "commitAdvance",
+          "startQuality": "normalStart",
+          "movementState": "advancing",
+          "timingProfile": "late",
+          "speed": 1,
+          "isForced": true,
+          "forcedMovementTarget": "first",
+          "forceReason": "batterRunnerRequiredToFirst",
+          "chainDepth": 0,
+          "profile": "late",
+          "relativeArrival": 9.55
+        },
+        "ballArrival": {
+          "quality": "offline"
+        },
+        "receiverCompletion": {
+          "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "ready": true,
+          "atBase": true,
+          "tagAvailable": true,
+          "tagDelay": 1,
+          "status": "unavailableReceive"
+        },
+        "reason": "unusableThrowOrReceiver"
+      },
+      "readiness": {
+        "status": "blocked",
+        "reason": "insufficientIndependentReceiverSources",
+        "blockedReasons": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "calibratedOrdinaryEffort",
+          "lifecyclePinGuard"
+        ],
+        "runtimeEnabled": false,
+        "executionSourceBlockers": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "lifecyclePinGuard"
+        ],
+        "scorerSourceBlockers": [
+          "calibratedOrdinaryEffort",
+          "cleanCounterfactual",
+          "culpableLatePositionAction",
+          "errorSpecificAdvancement"
+        ],
+        "officialExecutionOwner": "existingLegacyOwner",
+        "simulationPerformed": false,
+        "candidateInput": null,
+        "candidateOutput": null,
+        "settlementAdmission": false,
+        "scoringAdmission": false,
+        "evaluationAdmission": false,
+        "sourceFacts": {
+          "physicalIdentity": {
+            "classification": "A",
+            "value": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+          },
+          "actorHandoff": {
+            "classification": "A",
+            "throwerId": "player",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04"
+          },
+          "legacyReceiverReadiness": {
+            "classification": "A",
+            "scope": "legacy-combined-proxy-only",
+            "generationPhase": "legacyExecution"
+          },
+          "fixedPhysicalSlot": {
+            "classification": "C",
+            "proposal": "primaryThrow",
+            "productionPinned": false
+          }
+        },
+        "observedOwnedSample": 0.8
+      },
+      "currentOuts": 0,
+      "runners": [
+        "hs-y3-final-regional-opponent-player-05",
+        null,
+        null
+      ],
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "fullShadowPerformed": false
+    },
+    {
+      "name": "initial acquisition failure",
+      "classification": "DECLARED_LEGACY_PRODUCTION_FIXTURE_NOT_NATURAL_COHORT",
+      "rawPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+      "physicalVersion": "batted-ball-physical-v1",
+      "primary": "SS",
+      "throwerId": "player",
+      "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+      "initialOuts": 0,
+      "routeId": "secureFirstBaseOut",
+      "lifecycle": null,
+      "ownedSample": 0.8,
+      "sampleObservation": {
+        "matchRng": [],
+        "ownedSamples": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "publicSamples": []
+      },
+      "throw": null,
+      "actions": [
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "field",
+          "status": "failed",
+          "actorId": "player",
+          "receiverId": null,
+          "targetBase": null
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "throw",
+          "status": "notAttempted",
+          "actorId": "player",
+          "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|3",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "receive",
+          "status": "notAttempted",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|4",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "baseTouch",
+          "status": "notAttempted",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        }
+      ],
+      "legacyTiming": {
+        "version": "defensive-runner-throw-settlement-v1",
+        "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|3383077083|legacy-timing-v1",
+        "decisionIdentity": null,
+        "throwIdentity": null,
+        "targetRunnerId": null,
+        "targetBase": null,
+        "receiverId": null,
+        "runnerArrival": null,
+        "ballArrival": {
+          "windowState": "expired"
+        },
+        "receiverCompletion": {
+          "fact": "unavailable",
+          "tagFact": null
+        },
+        "timingMargin": null,
+        "contestAvailable": false,
+        "timingClassification": "noContest",
+        "authority": "existingDetailedWindowAndReceiverProjection",
+        "variationEvidence": {
+          "consumed": false
+        }
+      },
+      "readiness": {
+        "status": "blocked",
+        "reason": "insufficientIndependentReceiverSources",
+        "blockedReasons": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "calibratedOrdinaryEffort",
+          "lifecyclePinGuard"
+        ],
+        "runtimeEnabled": false,
+        "executionSourceBlockers": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "lifecyclePinGuard"
+        ],
+        "scorerSourceBlockers": [
+          "calibratedOrdinaryEffort",
+          "cleanCounterfactual",
+          "culpableLatePositionAction",
+          "errorSpecificAdvancement"
+        ],
+        "officialExecutionOwner": "existingLegacyOwner",
+        "simulationPerformed": false,
+        "candidateInput": null,
+        "candidateOutput": null,
+        "settlementAdmission": false,
+        "scoringAdmission": false,
+        "evaluationAdmission": false,
+        "sourceFacts": {
+          "physicalIdentity": {
+            "classification": "A",
+            "value": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+          },
+          "actorHandoff": {
+            "classification": "A",
+            "throwerId": "player",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04"
+          },
+          "legacyReceiverReadiness": {
+            "classification": "A",
+            "scope": "legacy-combined-proxy-only",
+            "generationPhase": "legacyExecution"
+          },
+          "fixedPhysicalSlot": {
+            "classification": "C",
+            "proposal": "primaryThrow",
+            "productionPinned": false
+          }
+        },
+        "observedOwnedSample": 0.8
+      },
+      "currentOuts": 0,
+      "runners": [
+        "hs-y3-final-regional-opponent-player-05",
+        null,
+        null
+      ],
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "fullShadowPerformed": false
+    },
+    {
+      "name": "legacy combined receiver failure",
+      "classification": "DECLARED_LEGACY_PRODUCTION_FIXTURE_NOT_NATURAL_COHORT",
+      "rawPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+      "physicalVersion": "batted-ball-physical-v1",
+      "primary": "SS",
+      "throwerId": "player",
+      "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+      "initialOuts": 0,
+      "routeId": "secureFirstBaseOut",
+      "lifecycle": null,
+      "ownedSample": 0.8,
+      "sampleObservation": {
+        "matchRng": [],
+        "ownedSamples": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "publicSamples": []
+      },
+      "throw": {
+        "version": "defensive-decision-throw-v1",
+        "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut|throw-v1",
+        "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut",
+        "routeId": "secureFirstBaseOut",
+        "throwerId": "player",
+        "throwerPosition": "SS",
+        "targetBase": "first",
+        "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+        "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+        "receiverPosition": "1B",
+        "throwDemand": {
+          "distanceClass": "medium",
+          "strength": 5,
+          "accuracy": 4,
+          "arrivalPressure": 0,
+          "controlPressure": 0,
+          "units": "coarseRelativeDemand"
+        },
+        "strengthMargin": 4.966289856471121,
+        "accuracyMargin": 6.592274361290038,
+        "throwAttempted": true,
+        "throwQuality": "onTarget",
+        "releaseQuality": "readyRelease",
+        "ballArrivalState": "atReceiverTarget",
+        "inputs": {
+          "arm": 10,
+          "throwing": 10,
+          "transferState": "ready",
+          "secureQuality": "cleanControl"
+        },
+        "variationEvidence": {
+          "consumed": true,
+          "strength": {
+            "namespace": "defensive-throw-strength-v1",
+            "roll": 0.5168550717644393,
+            "adjustment": -0.03371014352887869
+          },
+          "accuracy": {
+            "namespace": "defensive-throw-accuracy-v1",
+            "roll": 0.20386281935498118,
+            "adjustment": 0.5922743612900376
+          }
+        },
+        "authority": "throwCapabilities+coarseDemand+separateVariation"
+      },
+      "actions": [
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "field",
+          "status": "completed",
+          "actorId": "player",
+          "receiverId": null,
+          "targetBase": null
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "throw",
+          "status": "completed",
+          "actorId": "player",
+          "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|3",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "receive",
+          "status": "failed",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|4",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "baseTouch",
+          "status": "notAttempted",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        }
+      ],
+      "legacyTiming": {
+        "version": "defensive-runner-throw-settlement-v1",
+        "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut|throw-v1|timing-v1",
+        "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut",
+        "throwIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut|throw-v1",
+        "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+        "targetBase": "first",
+        "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+        "authority": "resolvedThrow+existingRunnerPhysicalState+receiverReadiness",
+        "variationEvidence": {
+          "consumed": false
+        },
+        "contestAvailable": false,
+        "timingClassification": "noContest",
+        "timingMargin": null,
+        "runnerArrival": {
+          "runnerId": "hs-y3-final-regional-opponent-player-05",
+          "originBase": "batter",
+          "targetBase": "first",
+          "movementDecision": "commitAdvance",
+          "startQuality": "normalStart",
+          "movementState": "advancing",
+          "timingProfile": "late",
+          "speed": 1,
+          "isForced": true,
+          "forcedMovementTarget": "first",
+          "forceReason": "batterRunnerRequiredToFirst",
+          "chainDepth": 0,
+          "profile": "late",
+          "relativeArrival": 9.55
+        },
+        "ballArrival": {
+          "quality": "onTarget"
+        },
+        "receiverCompletion": {
+          "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "ready": false,
+          "atBase": true,
+          "tagAvailable": false,
+          "tagDelay": 1,
+          "status": "unavailableReceive"
+        },
+        "reason": "unusableThrowOrReceiver"
+      },
+      "readiness": {
+        "status": "blocked",
+        "reason": "insufficientIndependentReceiverSources",
+        "blockedReasons": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "calibratedOrdinaryEffort",
+          "lifecyclePinGuard"
+        ],
+        "runtimeEnabled": false,
+        "executionSourceBlockers": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "lifecyclePinGuard"
+        ],
+        "scorerSourceBlockers": [
+          "calibratedOrdinaryEffort",
+          "cleanCounterfactual",
+          "culpableLatePositionAction",
+          "errorSpecificAdvancement"
+        ],
+        "officialExecutionOwner": "existingLegacyOwner",
+        "simulationPerformed": false,
+        "candidateInput": null,
+        "candidateOutput": null,
+        "settlementAdmission": false,
+        "scoringAdmission": false,
+        "evaluationAdmission": false,
+        "sourceFacts": {
+          "physicalIdentity": {
+            "classification": "A",
+            "value": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+          },
+          "actorHandoff": {
+            "classification": "A",
+            "throwerId": "player",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04"
+          },
+          "legacyReceiverReadiness": {
+            "classification": "A",
+            "scope": "legacy-combined-proxy-only",
+            "generationPhase": "legacyExecution"
+          },
+          "fixedPhysicalSlot": {
+            "classification": "C",
+            "proposal": "primaryThrow",
+            "productionPinned": false
+          }
+        },
+        "observedOwnedSample": 0.8
+      },
+      "currentOuts": 0,
+      "runners": [
+        "hs-y3-final-regional-opponent-player-05",
+        null,
+        null
+      ],
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "fullShadowPerformed": false
+    },
+    {
+      "name": "fast runner already safe",
+      "classification": "DECLARED_LEGACY_PRODUCTION_FIXTURE_NOT_NATURAL_COHORT",
+      "rawPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+      "physicalVersion": "batted-ball-physical-v1",
+      "primary": "SS",
+      "throwerId": "player",
+      "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+      "initialOuts": 0,
+      "routeId": "secureFirstBaseOut",
+      "lifecycle": null,
+      "ownedSample": 0.8,
+      "sampleObservation": {
+        "matchRng": [],
+        "ownedSamples": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "publicSamples": []
+      },
+      "throw": {
+        "version": "defensive-decision-throw-v1",
+        "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|804679558|select|secureFirstBaseOut|throw-v1",
+        "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|804679558|select|secureFirstBaseOut",
+        "routeId": "secureFirstBaseOut",
+        "throwerId": "player",
+        "throwerPosition": "SS",
+        "targetBase": "first",
+        "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+        "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+        "receiverPosition": "1B",
+        "throwDemand": {
+          "distanceClass": "medium",
+          "strength": 5,
+          "accuracy": 4,
+          "arrivalPressure": 0,
+          "controlPressure": 0,
+          "units": "coarseRelativeDemand"
+        },
+        "strengthMargin": 5.597052091732621,
+        "accuracyMargin": 5.873358683660626,
+        "throwAttempted": true,
+        "throwQuality": "onTarget",
+        "releaseQuality": "readyRelease",
+        "ballArrivalState": "atReceiverTarget",
+        "inputs": {
+          "arm": 10,
+          "throwing": 10,
+          "transferState": "ready",
+          "secureQuality": "cleanControl"
+        },
+        "variationEvidence": {
+          "consumed": true,
+          "strength": {
+            "namespace": "defensive-throw-strength-v1",
+            "roll": 0.2014739541336894,
+            "adjustment": 0.5970520917326212
+          },
+          "accuracy": {
+            "namespace": "defensive-throw-accuracy-v1",
+            "roll": 0.5633206581696868,
+            "adjustment": -0.1266413163393736
+          }
+        },
+        "authority": "throwCapabilities+coarseDemand+separateVariation"
+      },
+      "actions": [
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "field",
+          "status": "completed",
+          "actorId": "player",
+          "receiverId": null,
+          "targetBase": null
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "throw",
+          "status": "completed",
+          "actorId": "player",
+          "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|3",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "receive",
+          "status": "completed",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|4",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "baseTouch",
+          "status": "late",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        }
+      ],
+      "legacyTiming": {
+        "version": "defensive-runner-throw-settlement-v1",
+        "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|804679558|select|secureFirstBaseOut|throw-v1|timing-v1",
+        "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|804679558|select|secureFirstBaseOut",
+        "throwIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|804679558|select|secureFirstBaseOut|throw-v1",
+        "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+        "targetBase": "first",
+        "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+        "authority": "resolvedThrow+existingRunnerPhysicalState+receiverReadiness",
+        "variationEvidence": {
+          "consumed": false
+        },
+        "contestAvailable": true,
+        "timingClassification": "runnerClearlyAhead",
+        "timingMargin": -3.1,
+        "runnerArrival": {
+          "runnerId": "hs-y3-final-regional-opponent-player-05",
+          "originBase": "batter",
+          "targetBase": "first",
+          "movementDecision": "commitAdvance",
+          "startQuality": "normalStart",
+          "movementState": "advancing",
+          "timingProfile": "early",
+          "speed": 18,
+          "isForced": true,
+          "forcedMovementTarget": "first",
+          "forceReason": "batterRunnerRequiredToFirst",
+          "chainDepth": 0,
+          "profile": "early",
+          "relativeArrival": 1.9000000000000004
+        },
+        "ballArrival": {
+          "relativeArrival": 5,
+          "quality": "onTarget",
+          "releaseQuality": "readyRelease",
+          "distanceClass": "medium"
+        },
+        "receiverCompletion": {
+          "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "ready": true,
+          "atBase": true,
+          "tagAvailable": true,
+          "tagDelay": 1,
+          "status": "readyReceive",
+          "relativeCompletion": 5,
+          "tagCompletion": 6
+        },
+        "reason": "physicalArrivalComparison"
+      },
+      "readiness": {
+        "status": "blocked",
+        "reason": "insufficientIndependentReceiverSources",
+        "blockedReasons": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "calibratedOrdinaryEffort",
+          "lifecyclePinGuard"
+        ],
+        "runtimeEnabled": false,
+        "executionSourceBlockers": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "lifecyclePinGuard"
+        ],
+        "scorerSourceBlockers": [
+          "calibratedOrdinaryEffort",
+          "cleanCounterfactual",
+          "culpableLatePositionAction",
+          "errorSpecificAdvancement"
+        ],
+        "officialExecutionOwner": "existingLegacyOwner",
+        "simulationPerformed": false,
+        "candidateInput": null,
+        "candidateOutput": null,
+        "settlementAdmission": false,
+        "scoringAdmission": false,
+        "evaluationAdmission": false,
+        "sourceFacts": {
+          "physicalIdentity": {
+            "classification": "A",
+            "value": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+          },
+          "actorHandoff": {
+            "classification": "A",
+            "throwerId": "player",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04"
+          },
+          "legacyReceiverReadiness": {
+            "classification": "A",
+            "scope": "legacy-combined-proxy-only",
+            "generationPhase": "legacyExecution"
+          },
+          "fixedPhysicalSlot": {
+            "classification": "C",
+            "proposal": "primaryThrow",
+            "productionPinned": false
+          }
+        },
+        "observedOwnedSample": 0.8
+      },
+      "currentOuts": 0,
+      "runners": [
+        "hs-y3-final-regional-opponent-player-05",
+        null,
+        null
+      ],
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "fullShadowPerformed": false
+    },
+    {
+      "name": "explicit legal hold / legacy resolver",
+      "classification": "DECLARED_LEGACY_PRODUCTION_FIXTURE_NOT_NATURAL_COHORT",
+      "rawPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+      "physicalVersion": "batted-ball-physical-v1",
+      "primary": "SS",
+      "throwerId": "player",
+      "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+      "initialOuts": 0,
+      "routeId": "holdBall",
+      "lifecycle": "admitted",
+      "ownedSample": 0.8,
+      "sampleObservation": {
+        "matchRng": [],
+        "ownedSamples": [],
+        "publicSamples": []
+      },
+      "throw": {
+        "version": "defensive-decision-throw-v1",
+        "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|holdBall|throw-v1",
+        "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|holdBall",
+        "routeId": "holdBall",
+        "throwerId": "player",
+        "throwerPosition": "SS",
+        "targetBase": null,
+        "targetRunnerId": null,
+        "receiverId": null,
+        "receiverPosition": null,
+        "throwDemand": null,
+        "strengthMargin": null,
+        "accuracyMargin": null,
+        "throwAttempted": false,
+        "throwQuality": "notAttempted",
+        "releaseQuality": "held",
+        "ballArrivalState": "controlledByThrower",
+        "variationEvidence": {
+          "consumed": false
+        },
+        "authority": "deliberateHold"
+      },
+      "actions": [
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "field",
+          "status": "completed",
+          "actorId": "player",
+          "receiverId": null,
+          "targetBase": null
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "throw",
+          "status": "notAttempted",
+          "actorId": "player",
+          "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|3",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "receive",
+          "status": "notAttempted",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        },
+        {
+          "identity": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|4",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "type": "baseTouch",
+          "status": "notAttempted",
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "receiverId": null,
+          "targetBase": "first"
+        }
+      ],
+      "legacyTiming": {
+        "version": "defensive-runner-throw-settlement-v1",
+        "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|holdBall|throw-v1|timing-v1",
+        "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|holdBall",
+        "throwIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|holdBall|throw-v1",
+        "targetRunnerId": null,
+        "targetBase": null,
+        "receiverId": null,
+        "authority": "resolvedThrow+existingRunnerPhysicalState+receiverReadiness",
+        "variationEvidence": {
+          "consumed": false
+        },
+        "contestAvailable": false,
+        "timingClassification": "noContest",
+        "timingMargin": null,
+        "runnerArrival": null,
+        "ballArrival": null,
+        "receiverCompletion": null,
+        "reason": "heldBall"
+      },
+      "readiness": {
+        "status": "blocked",
+        "reason": "insufficientIndependentReceiverSources",
+        "blockedReasons": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "calibratedOrdinaryEffort",
+          "lifecyclePinGuard"
+        ],
+        "runtimeEnabled": false,
+        "executionSourceBlockers": [
+          "positioningStartContext",
+          "requiredMovement",
+          "positioningStart",
+          "positioningCompletion",
+          "secureDemand",
+          "secureDuration",
+          "touchDuration",
+          "originVersionMapping",
+          "productionCapabilityAdapter",
+          "lifecyclePinGuard"
+        ],
+        "scorerSourceBlockers": [
+          "calibratedOrdinaryEffort",
+          "cleanCounterfactual",
+          "culpableLatePositionAction",
+          "errorSpecificAdvancement"
+        ],
+        "officialExecutionOwner": "existingLegacyOwner",
+        "simulationPerformed": false,
+        "candidateInput": null,
+        "candidateOutput": null,
+        "settlementAdmission": false,
+        "scoringAdmission": false,
+        "evaluationAdmission": false,
+        "sourceFacts": {
+          "physicalIdentity": {
+            "classification": "A",
+            "value": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+          },
+          "actorHandoff": {
+            "classification": "A",
+            "throwerId": "player",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04"
+          },
+          "legacyReceiverReadiness": {
+            "classification": "C",
+            "scope": "legacy-combined-proxy-only",
+            "generationPhase": "notGeneratedBeforeExecution"
+          },
+          "fixedPhysicalSlot": {
+            "classification": "C",
+            "proposal": "primaryThrow",
+            "productionPinned": false
+          }
+        },
+        "observedOwnedSample": 0.8
+      },
+      "currentOuts": 0,
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "scores": {
+        "home": 1,
+        "away": 1
+      },
+      "fullShadowPerformed": false
+    },
+    {
+      "name": "SS public compatibility reference",
+      "scope": "OUTSIDE_SLICE_OCCUPIED_FIRST_BASE",
+      "sampleCallbacks": 1,
+      "duplicateRetries": 3,
+      "fullShadowPerformed": false
+    }
+  ],
+  "lifecycleObservation": {
+    "executionStateReplaced": true,
+    "arbitraryExecutionPinLost": true,
+    "contextMetadataRetained": true,
+    "officialPinImplemented": false,
+    "formalSaveGuardImplemented": false
+  },
+  "recoveryObservation": {
+    "model": "LEGACY_ONLY",
+    "pending": true,
+    "executed": true,
+    "settled": true,
+    "duplicateRetries": 3,
+    "originalSample": 0.8,
+    "recoveryRandomForbidden": true
+  },
+  "storageObservation": {
+    "scope": "TEST_LOCAL_DETACHED_MAP_PROOF_NOT_LIVE_STORE",
+    "immutable": true,
+    "output": null,
+    "matchMutation": false,
+    "saveConsumer": false,
+    "settlementConsumer": false,
+    "recordMutation": false,
+    "cleanupMatchMutation": false
+  },
+  "sourceBoundary": {
+    "sourcePaths": [
+      "ai-plate-appearance-outcome.js",
+      "baseball-defense-prototype.js",
+      "baseball-gameplay-integration.js",
+      "baseball-gameplay-prototype-utils.js",
+      "baseball-offense-prototype.js",
+      "baseball-training-resolver.js",
+      "batted-ball-fly-ball-defense.js",
+      "batted-ball-ground-defense.js",
+      "batted-ball-line-drive-defense.js",
+      "batted-ball-outcome-mapping.js",
+      "batted-ball-physical.js",
+      "batted-ball-tag-up-execution.js",
+      "batter-anticipation.js",
+      "career-age22-outcome-resolver.js",
+      "career-development-progression.js",
+      "career-development-runtime-resolver.js",
+      "career-save-admission.js",
+      "career-spine-contract.js",
+      "career-transition-commit.js",
+      "career-transition-progression.js",
+      "career-transition-resolver.js",
+      "career-transition-runtime-resolver.js",
+      "coach-evaluation-boundary.js",
+      "coach-response-flow.js",
+      "coach.js",
+      "competition-presentation.js",
+      "competition-rules.js",
+      "county-selection-opportunity.js",
+      "current-state-boundary.js",
+      "day-completion-flow.js",
+      "decision-flow.js",
+      "defensive-decision-throw-foundation.js",
+      "defensive-opportunity-foundation.js",
+      "defensive-reach-secure-foundation.js",
+      "defensive-runner-throw-settlement-foundation.js",
+      "docs/receiver-execution-v2-sprint-10a-shadow-storage-contract.json",
+      "docs/receiver-execution-v2-sprint-10a-source-adapter-contract.json",
+      "evaluation-registry-bootstrap.js",
+      "evaluation-registry.js",
+      "force-advancement.js",
+      "high-school-career-evaluation.js",
+      "high-school-career-offers.js",
+      "high-school-competition-evidence.js",
+      "high-school-competition-foundation.js",
+      "high-school-competition-reassessment.js",
+      "high-school-entry-roster-context.js",
+      "high-school-exchange-network.js",
+      "high-school-friendly-invitation-producer.js",
+      "high-school-match-opportunity-generation.js",
+      "high-school-opportunity-probability.js",
+      "high-school-opportunity-selection.js",
+      "high-school-relationship-recency.js",
+      "high-school-relationship-temporal-authority.js",
+      "high-school-schedule-opportunity.js",
+      "high-school-training-camp-producer.js",
+      "high-school-year-transition.js",
+      "index.html",
+      "match-context-foundation.js",
+      "match-development-settlement-presentation.js",
+      "match-experience-development.js",
+      "match-game-record.js",
+      "match-situation-lifecycle.js",
+      "narrative-condition-boundary.js",
+      "narrative-condition-flow.js",
+      "national-selection-pipeline.js",
+      "npc.js",
+      "offensive-bunt-count-rules.js",
+      "offensive-bunt-defensive-handoff.js",
+      "offensive-bunt-execution.js",
+      "offensive-plate-approach.js",
+      "offensive-tactical-action.js",
+      "offensive-tactical-decision.js",
+      "offensive-tactical-opportunity.js",
+      "pitch-observation-foundation.js",
+      "pitch-sequence-state-foundation.js",
+      "pitch-sequencing.js",
+      "pitch-tactical-decision-foundation.js",
+      "pitch-tactical-decision-production-adapter.js",
+      "pitch-tactical-interpretation-foundation.js",
+      "pitcher-catcher-tactical-integration.js",
+      "pitcher-mental-state.js",
+      "pitcher-process-state.js",
+      "plate-decision-foundation.js",
+      "player.js",
+      "playing-time-game-exposure.js",
+      "relationship-boundary.js",
+      "relationship-flow.js",
+      "rival.js",
+      "save.js",
+      "script.js",
+      "story.js",
+      "team-roster-foundation.js",
+      "team-strength-model.js",
+      "tests/first-base-receive-active-ground-production-integration-test.js",
+      "tests/high-school-career-test-context.js",
+      "time-boundary.js"
+    ],
+    "originalFixtureDefinitionsOnly": true,
+    "declaredSeed": 77001,
+    "protectedContentReads": 0,
+    "candidateExecutionCalls": 0,
+    "fullShadowComparison": false,
+    "capturesWritten": false,
+    "existingSourcesUnmodifiedByTests": true
+  },
+  "limits": [
+    "Readiness assertions prove BLOCKED classifications, not a receiver-v2 integration PASS.",
+    "Legacy witnesses are declared existing legal Production fixtures, not a natural cohort.",
+    "Empty-base SS witnessed automatic handling; meaningful chooser / version pin is not connected.",
+    "Detached Map tests demonstrate a proposed separation boundary, not a live Shadow or Save implementation.",
+    "No ordinary-effort authority, formal v2 Save, or authoritative timing seam is supplied."
+  ],
+  "runner": {
+    "baseline": "32ee5ec55e4791952a9ef5d68c126389ab1e1ff6",
+    "mode": "READINESS_ONLY_NO_CANDIDATE_EXECUTION",
+    "sourceHashes": {
+      "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs": {
+        "sha256": "e30f6779ce8dbb8e45755f8aeb85eeef6a1766f5cd3f8b5b4ef734f45e098d6c",
+        "size": 30514
+      },
+      "tests/receiver-execution-v2-sprint-10a-runner.cjs": {
+        "sha256": "e9acf8414319810aa026ff169366ba325f349fc7a88e746e45ccf322d434042d",
+        "size": 3804
+      },
+      "docs/receiver-execution-v2-sprint-10a-source-adapter-contract.json": {
+        "sha256": "15e5b16e3c7d3a6ba5594283cdf1a2ff304883823a43efb7de4e58cbc5e15994",
+        "size": 5616
+      },
+      "docs/receiver-execution-v2-sprint-10a-shadow-storage-contract.json": {
+        "sha256": "dba6d511c18592d2d1d194fb422c9416cf3be216f7753d685ff2b5e32c74aa4c",
+        "size": 2760
+      }
+    },
+    "existingOwnerHashes": {
+      "index.html": {
+        "sha256": "913bf2617d7243243a5072f1b926b357c17f437a454e1bffaa002f47e9308b63",
+        "size": 17376
+      },
+      "script.js": {
+        "sha256": "a54ec78a9fab0f0534fc7cdc13a7967b3ba2ba826d0635d41f0709367f408d6d",
+        "size": 1087072
+      },
+      "save.js": {
+        "sha256": "8e2300f0e160e681686d65ef68ba6e3275563dc318fcaf669f620b4d57e2d6ef",
+        "size": 49845
+      },
+      "match-situation-lifecycle.js": {
+        "sha256": "421ad31e7f71ab39a34b39e8f5c00f296a3f3a42076c73b7c539b089ac08740e",
+        "size": 11747
+      },
+      "defensive-decision-throw-foundation.js": {
+        "sha256": "1a8a65ee11a98ace76f2b0b807bf3227df789514abdbefdf2decf2de378e831e",
+        "size": 31460
+      },
+      "defensive-runner-throw-settlement-foundation.js": {
+        "sha256": "4c54b171252c3a93df15304d5a7520335877a4a621b0cba8268354ed4563d136",
+        "size": 20220
+      },
+      "force-advancement.js": {
+        "sha256": "d588865c2e234799d5e60a12230df5b0caa9903c07635255d60008fa4aae0e13",
+        "size": 12367
+      },
+      "match-game-record.js": {
+        "sha256": "8e172a1b99f8e54963f1d2434d6fbe4d3bfdf40ce915f8307765d1557d2a6085",
+        "size": 27704
+      },
+      "match-experience-development.js": {
+        "sha256": "24190484dc80beb5761be6bfb9d4dc5ea9b24337b83c11143177b9895702643b",
+        "size": 38805
+      },
+      "receiver-execution-v2-foundation.js": {
+        "sha256": "44581d76bb5bacbac1515dd762afe4e0e6814b8b3f9adb8a2b60963a523f514e",
+        "size": 28120
+      },
+      "receiver-execution-v2-admission-timing-foundation.js": {
+        "sha256": "3ef4ae16a2ea011f915184600d9688956e7750f720999e5b126f83af8e215a1e",
+        "size": 17064
+      }
+    },
+    "ownersUnchanged": true,
+    "gitBefore": {
+      "branch": "main",
+      "head": "32ee5ec55e4791952a9ef5d68c126389ab1e1ff6",
+      "originMain": "32ee5ec55e4791952a9ef5d68c126389ab1e1ff6",
+      "index": ""
+    },
+    "gitAfter": {
+      "branch": "main",
+      "head": "32ee5ec55e4791952a9ef5d68c126389ab1e1ff6",
+      "originMain": "32ee5ec55e4791952a9ef5d68c126389ab1e1ff6",
+      "index": ""
+    },
+    "fullRepositoryManifest": "NOT_RUN",
+    "priorFocusedSuites": "NOT_RERUN_THIS_READINESS_AUDIT",
+    "capturePolicy": "exclusive-create; never overwrite originals"
+  }
+}
