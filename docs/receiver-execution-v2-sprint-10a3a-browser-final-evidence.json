@@ -1,0 +1,3121 @@
+{
+  "status": "PASS",
+  "runtime": "independent Chrome headless process",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+  "count": 10,
+  "MathRandom": "trap",
+  "comparison": "canonical UTF8/hash/u32BE/unit and complete stage outputs equal Node",
+  "temporaryProbe": "C:\\Users\\User\\AppData\\Local\\Temp\\receiver-v22-browser-EOzWZe",
+  "sourceHashes": {
+    "receiver-execution-v2-foundation.js": "44581d76bb5bacbac1515dd762afe4e0e6814b8b3f9adb8a2b60963a523f514e",
+    "receiver-execution-v2-2-foundation.js": "e3d66df106bdac3d9d3697c0a276bf2b328ef23470379c21b6807e7c6cc9769d"
+  },
+  "results": [
+    {
+      "name": "plain",
+      "vector": {
+        "status": "ok",
+        "samplerVersion": "physical-slot-sha256-u32be-utf8-v2",
+        "stages": {
+          "positioning": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"positioning\"}",
+            "sha256": "5b60979e0d9bcd6407057bd58bd051229d0840d6732d4668dd739726d59509ab",
+            "u32": 1533056926,
+            "unit": 0.3569426309550181
+          },
+          "secure": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"secure\"}",
+            "sha256": "1c5085dd87e006d7155a10da560a7b1c0382ab221951bd940f8330d8466b735e",
+            "u32": 475039197,
+            "unit": 0.1106036821147427
+          },
+          "touch": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"touch\"}",
+            "sha256": "ec89b4a26d319189166a90f4f3d7ca10944a2fea765592848d7b4c2e800afff2",
+            "u32": 3968447650,
+            "unit": 0.9239762207726017
+          }
+        }
+      },
+      "output": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "b4ea09f3783ac6141c6b6b292f90b047a61dbc1809e0bb658a16b1fbc3a636f8",
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "throw-1",
+            "launch": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 2000,
+              "exactMicroOffset": "2000000"
+            },
+            "ballArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "accuracy": "onTarget",
+            "quality": "clean"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "ready",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "position-1",
+            "ready": true,
+            "start": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 250,
+              "exactMicroOffset": "250000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 1120,
+              "exactMicroOffset": "1120000"
+            },
+            "durationTicks": 870
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "cleanControl",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "receive-1",
+            "attempted": true,
+            "secured": true,
+            "handsMarginMilli": 10125,
+            "attemptTime": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5150,
+              "exactMicroOffset": "5150000"
+            },
+            "possession": {
+              "actorId": "npc1b",
+              "actionId": "receive-1",
+              "sourceThrowActionId": "throw-1"
+            }
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "retirementCandidate",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "touch-1",
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5264,
+              "exactMicroOffset": "5264000"
+            },
+            "runnerArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 8000,
+              "exactMicroOffset": "8000000"
+            },
+            "timingMarginTicks": 2736,
+            "candidate": {
+              "kind": "unappliedRetirementCandidate",
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              },
+              "actor": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "actionId": "touch-1",
+              "possessionActionId": "receive-1",
+              "initialOuts": 0,
+              "wouldBeThirdOut": false,
+              "legalScoring": "requiresExistingThirdOutOwner"
+            }
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      },
+      "encoding": "{\"leg\":{\"actionId\":\"receive-1\",\"parentActionId\":null,\"physicalSlot\":\"primaryThrow\",\"sourceThrowActionId\":\"throw-1\"},\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"playId\":\"ground-play-1\",\"thrower\":{\"actorId\":\"player\",\"position\":\"SS\",\"role\":\"player\"}}"
+    },
+    {
+      "name": "unicode",
+      "vector": {
+        "status": "ok",
+        "samplerVersion": "physical-slot-sha256-u32be-utf8-v2",
+        "stages": {
+          "positioning": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"上|棒球\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"positioning\"}",
+            "sha256": "fe974258fee89ee4e432a96374eda9152dc0cf30cde6fb896850e5d8b8bd0ca0",
+            "u32": 4271325784,
+            "unit": 0.9944955316605046
+          },
+          "secure": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"上|棒球\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"secure\"}",
+            "sha256": "788222601786d65ff64196fe6c131e7365b05b80ef34b3c105f8235662e0b597",
+            "u32": 2021794400,
+            "unit": 0.4707356916042045
+          },
+          "touch": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"上|棒球\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"touch\"}",
+            "sha256": "0b0e2427069fde2751f859e57054b7b9f280910969c7c556dfe0d6e68f2307e7",
+            "u32": 185476135,
+            "unit": 0.04318452801089734
+          }
+        }
+      },
+      "output": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "8be4dd1338cbdae4d0c0e0782fa0082fb311b4698dd4f03d37ee05ee60981ad5",
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "上|棒球",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "throw-1",
+            "launch": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 2000,
+              "exactMicroOffset": "2000000"
+            },
+            "ballArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "accuracy": "onTarget",
+            "quality": "clean"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "ready",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "上|棒球",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "position-1",
+            "ready": true,
+            "start": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 250,
+              "exactMicroOffset": "250000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 1220,
+              "exactMicroOffset": "1220000"
+            },
+            "durationTicks": 970
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "cleanControl",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "上|棒球",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "receive-1",
+            "attempted": true,
+            "secured": true,
+            "handsMarginMilli": 10875,
+            "attemptTime": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5150,
+              "exactMicroOffset": "5150000"
+            },
+            "possession": {
+              "actorId": "npc1b",
+              "actionId": "receive-1",
+              "sourceThrowActionId": "throw-1"
+            }
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "retirementCandidate",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "上|棒球",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "touch-1",
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5250,
+              "exactMicroOffset": "5250000"
+            },
+            "runnerArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 8000,
+              "exactMicroOffset": "8000000"
+            },
+            "timingMarginTicks": 2750,
+            "candidate": {
+              "kind": "unappliedRetirementCandidate",
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              },
+              "actor": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "actionId": "touch-1",
+              "possessionActionId": "receive-1",
+              "initialOuts": 0,
+              "wouldBeThirdOut": false,
+              "legalScoring": "requiresExistingThirdOutOwner"
+            }
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      },
+      "encoding": "{\"leg\":{\"actionId\":\"receive-1\",\"parentActionId\":null,\"physicalSlot\":\"primaryThrow\",\"sourceThrowActionId\":\"throw-1\"},\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"上|棒球\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"playId\":\"ground-play-1\",\"thrower\":{\"actorId\":\"player\",\"position\":\"SS\",\"role\":\"player\"}}"
+    },
+    {
+      "name": "nonbmp",
+      "vector": {
+        "status": "ok",
+        "samplerVersion": "physical-slot-sha256-u32be-utf8-v2",
+        "stages": {
+          "positioning": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"🏟\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"positioning\"}",
+            "sha256": "62142f1cb9db5b797cab7dd7c1d7cb3115bca99e8faa33eec0805d85c69974fc",
+            "u32": 1645489948,
+            "unit": 0.3831204838352278
+          },
+          "secure": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"🏟\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"secure\"}",
+            "sha256": "bacfc947d4cec55ea7b678afa070ce4c5f0b029773789140044057746051c144",
+            "u32": 3134179655,
+            "unit": 0.7297330665169284
+          },
+          "touch": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"🏟\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"touch\"}",
+            "sha256": "6224eb0fc9aef72136c68f6d7470f5bc9d03db49b0be53545a889c077c016487",
+            "u32": 1646586639,
+            "unit": 0.3833758271066472
+          }
+        }
+      },
+      "output": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "25905f948baed10fa6ba1bf292fe67b13d95a062a0d29bb58e88487e06f134f3",
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "🏟",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "throw-1",
+            "launch": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 2000,
+              "exactMicroOffset": "2000000"
+            },
+            "ballArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "accuracy": "onTarget",
+            "quality": "clean"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "ready",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "🏟",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "position-1",
+            "ready": true,
+            "start": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 250,
+              "exactMicroOffset": "250000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 1130,
+              "exactMicroOffset": "1130000"
+            },
+            "durationTicks": 880
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "cleanControl",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "🏟",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "receive-1",
+            "attempted": true,
+            "secured": true,
+            "handsMarginMilli": 11375,
+            "attemptTime": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5150,
+              "exactMicroOffset": "5150000"
+            },
+            "possession": {
+              "actorId": "npc1b",
+              "actionId": "receive-1",
+              "sourceThrowActionId": "throw-1"
+            }
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "retirementCandidate",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "🏟",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "touch-1",
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5256,
+              "exactMicroOffset": "5256000"
+            },
+            "runnerArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 8000,
+              "exactMicroOffset": "8000000"
+            },
+            "timingMarginTicks": 2744,
+            "candidate": {
+              "kind": "unappliedRetirementCandidate",
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              },
+              "actor": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "actionId": "touch-1",
+              "possessionActionId": "receive-1",
+              "initialOuts": 0,
+              "wouldBeThirdOut": false,
+              "legalScoring": "requiresExistingThirdOutOwner"
+            }
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      },
+      "encoding": "{\"leg\":{\"actionId\":\"receive-1\",\"parentActionId\":null,\"physicalSlot\":\"primaryThrow\",\"sourceThrowActionId\":\"throw-1\"},\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"🏟\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"playId\":\"ground-play-1\",\"thrower\":{\"actorId\":\"player\",\"position\":\"SS\",\"role\":\"player\"}}"
+    },
+    {
+      "name": "combining",
+      "vector": {
+        "status": "ok",
+        "samplerVersion": "physical-slot-sha256-u32be-utf8-v2",
+        "stages": {
+          "positioning": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"é\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"positioning\"}",
+            "sha256": "306b21478f2a584f10f5e3a8d48ba34dd7ca1d04ccde517cda7034890217db92",
+            "u32": 812327239,
+            "unit": 0.1891346740303561
+          },
+          "secure": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"é\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"secure\"}",
+            "sha256": "1d398e91055903a9f73f93079ff9c3c376ea4d05ffa97ed43ffad2ae736f385b",
+            "u32": 490311313,
+            "unit": 0.11415949871297926
+          },
+          "touch": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"é\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"touch\"}",
+            "sha256": "b798dec2d7cfd98aaab591d3b116e9c3b0580cd7a1af43556e5024d59873657c",
+            "u32": 3080249026,
+            "unit": 0.7171763634542003
+          }
+        }
+      },
+      "output": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "792d2b1a68a75abe1c9ac98ec145b3bcb14aef52d371d1298fc99eac3803dfc3",
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "é",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "throw-1",
+            "launch": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 2000,
+              "exactMicroOffset": "2000000"
+            },
+            "ballArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "accuracy": "onTarget",
+            "quality": "clean"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "ready",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "é",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "position-1",
+            "ready": true,
+            "start": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 250,
+              "exactMicroOffset": "250000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 1100,
+              "exactMicroOffset": "1100000"
+            },
+            "durationTicks": 850
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "cleanControl",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "é",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "receive-1",
+            "attempted": true,
+            "secured": true,
+            "handsMarginMilli": 10125,
+            "attemptTime": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5150,
+              "exactMicroOffset": "5150000"
+            },
+            "possession": {
+              "actorId": "npc1b",
+              "actionId": "receive-1",
+              "sourceThrowActionId": "throw-1"
+            }
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "retirementCandidate",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "é",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "touch-1",
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5261,
+              "exactMicroOffset": "5261000"
+            },
+            "runnerArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 8000,
+              "exactMicroOffset": "8000000"
+            },
+            "timingMarginTicks": 2739,
+            "candidate": {
+              "kind": "unappliedRetirementCandidate",
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              },
+              "actor": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "actionId": "touch-1",
+              "possessionActionId": "receive-1",
+              "initialOuts": 0,
+              "wouldBeThirdOut": false,
+              "legalScoring": "requiresExistingThirdOutOwner"
+            }
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      },
+      "encoding": "{\"leg\":{\"actionId\":\"receive-1\",\"parentActionId\":null,\"physicalSlot\":\"primaryThrow\",\"sourceThrowActionId\":\"throw-1\"},\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"é\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"playId\":\"ground-play-1\",\"thrower\":{\"actorId\":\"player\",\"position\":\"SS\",\"role\":\"player\"}}"
+    },
+    {
+      "name": "long264",
+      "vector": {
+        "status": "ok",
+        "samplerVersion": "physical-slot-sha256-u32be-utf8-v2",
+        "stages": {
+          "positioning": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"positioning\"}",
+            "sha256": "5b60979e0d9bcd6407057bd58bd051229d0840d6732d4668dd739726d59509ab",
+            "u32": 1533056926,
+            "unit": 0.3569426309550181
+          },
+          "secure": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"secure\"}",
+            "sha256": "1c5085dd87e006d7155a10da560a7b1c0382ab221951bd940f8330d8466b735e",
+            "u32": 475039197,
+            "unit": 0.1106036821147427
+          },
+          "touch": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"touch\"}",
+            "sha256": "ec89b4a26d319189166a90f4f3d7ca10944a2fea765592848d7b4c2e800afff2",
+            "u32": 3968447650,
+            "unit": 0.9239762207726017
+          }
+        }
+      },
+      "output": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "0f3f3f2e98482f0849aeaba4b00f802f079603ff7265253ddc3d6451f7a9a494",
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "throw-1",
+            "launch": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 2000,
+              "exactMicroOffset": "2000000"
+            },
+            "ballArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "accuracy": "onTarget",
+            "quality": "clean"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "ready",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "position-1",
+            "ready": true,
+            "start": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 250,
+              "exactMicroOffset": "250000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 1120,
+              "exactMicroOffset": "1120000"
+            },
+            "durationTicks": 870
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "cleanControl",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "receive-1",
+            "attempted": true,
+            "secured": true,
+            "handsMarginMilli": 10125,
+            "attemptTime": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5150,
+              "exactMicroOffset": "5150000"
+            },
+            "possession": {
+              "actorId": "npc1b",
+              "actionId": "receive-1",
+              "sourceThrowActionId": "throw-1"
+            }
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "retirementCandidate",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "touch-1",
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5264,
+              "exactMicroOffset": "5264000"
+            },
+            "runnerArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 8000,
+              "exactMicroOffset": "8000000"
+            },
+            "timingMarginTicks": 2736,
+            "candidate": {
+              "kind": "unappliedRetirementCandidate",
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              },
+              "actor": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "actionId": "touch-1",
+              "possessionActionId": "receive-1",
+              "initialOuts": 0,
+              "wouldBeThirdOut": false,
+              "legalScoring": "requiresExistingThirdOutOwner"
+            }
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      },
+      "encoding": "{\"leg\":{\"actionId\":\"receive-1\",\"parentActionId\":null,\"physicalSlot\":\"primaryThrow\",\"sourceThrowActionId\":\"throw-1\"},\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"playId\":\"ground-play-1\",\"thrower\":{\"actorId\":\"player\",\"position\":\"SS\",\"role\":\"player\"}}"
+    },
+    {
+      "name": "max4096",
+      "vector": {
+        "status": "ok",
+        "samplerVersion": "physical-slot-sha256-u32be-utf8-v2",
+        "stages": {
+          "positioning": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"positioning\"}",
+            "sha256": "a7a81cbc9883698e9092ee1e47786980e48f96bfe1f9ac12fe97b2d3464f9c28",
+            "u32": 2812812476,
+            "unit": 0.65490893938113
+          },
+          "secure": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"secure\"}",
+            "sha256": "055eb5ccfe9b6aaa709405e28239657ec8e5b9115b7487e5a11d697138a93659",
+            "u32": 90093004,
+            "unit": 0.020976412226445973
+          },
+          "touch": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"touch\"}",
+            "sha256": "89b145d714cffa8ddb83be680bd803929b30edb0acb3dddbe09db1d0d26f0cd7",
+            "u32": 2310096343,
+            "unit": 0.5378612185595557
+          }
+        }
+      },
+      "output": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "a3034bd9b304a0547a22c6e331f2814c593d0b0ce022b06166f0184cc7b2695f",
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "throw-1",
+            "launch": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 2000,
+              "exactMicroOffset": "2000000"
+            },
+            "ballArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "accuracy": "onTarget",
+            "quality": "clean"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "ready",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "position-1",
+            "ready": true,
+            "start": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 250,
+              "exactMicroOffset": "250000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 1170,
+              "exactMicroOffset": "1170000"
+            },
+            "durationTicks": 920
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "cleanControl",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "receive-1",
+            "attempted": true,
+            "secured": true,
+            "handsMarginMilli": 10000,
+            "attemptTime": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5150,
+              "exactMicroOffset": "5150000"
+            },
+            "possession": {
+              "actorId": "npc1b",
+              "actionId": "receive-1",
+              "sourceThrowActionId": "throw-1"
+            }
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "retirementCandidate",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "touch-1",
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5258,
+              "exactMicroOffset": "5258000"
+            },
+            "runnerArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 8000,
+              "exactMicroOffset": "8000000"
+            },
+            "timingMarginTicks": 2742,
+            "candidate": {
+              "kind": "unappliedRetirementCandidate",
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              },
+              "actor": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "actionId": "touch-1",
+              "possessionActionId": "receive-1",
+              "initialOuts": 0,
+              "wouldBeThirdOut": false,
+              "legalScoring": "requiresExistingThirdOutOwner"
+            }
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      },
+      "encoding": "{\"leg\":{\"actionId\":\"receive-1\",\"parentActionId\":null,\"physicalSlot\":\"primaryThrow\",\"sourceThrowActionId\":\"throw-1\"},\"physical\":{\"contactId\":\"上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上上\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"playId\":\"ground-play-1\",\"thrower\":{\"actorId\":\"player\",\"position\":\"SS\",\"role\":\"player\"}}"
+    },
+    {
+      "name": "precontact",
+      "vector": {
+        "status": "ok",
+        "samplerVersion": "physical-slot-sha256-u32be-utf8-v2",
+        "stages": {
+          "positioning": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"positioning\"}",
+            "sha256": "5b60979e0d9bcd6407057bd58bd051229d0840d6732d4668dd739726d59509ab",
+            "u32": 1533056926,
+            "unit": 0.3569426309550181
+          },
+          "secure": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"secure\"}",
+            "sha256": "1c5085dd87e006d7155a10da560a7b1c0382ab221951bd940f8330d8466b735e",
+            "u32": 475039197,
+            "unit": 0.1106036821147427
+          },
+          "touch": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"touch\"}",
+            "sha256": "ec89b4a26d319189166a90f4f3d7ca10944a2fea765592848d7b4c2e800afff2",
+            "u32": 3968447650,
+            "unit": 0.9239762207726017
+          }
+        }
+      },
+      "output": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "a894346ce65f8fa448f1fef512cbfb0b0e40374e2580c7fa10d16253d6ede5fa",
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "throw-1",
+            "launch": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 2000,
+              "exactMicroOffset": "2000000"
+            },
+            "ballArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "accuracy": "onTarget",
+            "quality": "clean"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "ready",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "position-1",
+            "ready": true,
+            "start": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": -250,
+              "exactMicroOffset": "-250000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 620,
+              "exactMicroOffset": "620000"
+            },
+            "durationTicks": 870
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "cleanControl",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "receive-1",
+            "attempted": true,
+            "secured": true,
+            "handsMarginMilli": 10125,
+            "attemptTime": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5150,
+              "exactMicroOffset": "5150000"
+            },
+            "possession": {
+              "actorId": "npc1b",
+              "actionId": "receive-1",
+              "sourceThrowActionId": "throw-1"
+            }
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "retirementCandidate",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "touch-1",
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5264,
+              "exactMicroOffset": "5264000"
+            },
+            "runnerArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 8000,
+              "exactMicroOffset": "8000000"
+            },
+            "timingMarginTicks": 2736,
+            "candidate": {
+              "kind": "unappliedRetirementCandidate",
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              },
+              "actor": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "actionId": "touch-1",
+              "possessionActionId": "receive-1",
+              "initialOuts": 0,
+              "wouldBeThirdOut": false,
+              "legalScoring": "requiresExistingThirdOutOwner"
+            }
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      },
+      "encoding": "{\"leg\":{\"actionId\":\"receive-1\",\"parentActionId\":null,\"physicalSlot\":\"primaryThrow\",\"sourceThrowActionId\":\"throw-1\"},\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"playId\":\"ground-play-1\",\"thrower\":{\"actorId\":\"player\",\"position\":\"SS\",\"role\":\"player\"}}"
+    },
+    {
+      "name": "late",
+      "vector": {
+        "status": "ok",
+        "samplerVersion": "physical-slot-sha256-u32be-utf8-v2",
+        "stages": {
+          "positioning": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"positioning\"}",
+            "sha256": "5b60979e0d9bcd6407057bd58bd051229d0840d6732d4668dd739726d59509ab",
+            "u32": 1533056926,
+            "unit": 0.3569426309550181
+          },
+          "secure": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"secure\"}",
+            "sha256": "1c5085dd87e006d7155a10da560a7b1c0382ab221951bd940f8330d8466b735e",
+            "u32": 475039197,
+            "unit": 0.1106036821147427
+          },
+          "touch": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"touch\"}",
+            "sha256": "ec89b4a26d319189166a90f4f3d7ca10944a2fea765592848d7b4c2e800afff2",
+            "u32": 3968447650,
+            "unit": 0.9239762207726017
+          }
+        }
+      },
+      "output": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "084ad1855bd78823bea2dd7655a85c9ccd64c7350b41f0018d815f171f60c000",
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "throw-1",
+            "launch": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 2000,
+              "exactMicroOffset": "2000000"
+            },
+            "ballArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "accuracy": "onTarget",
+            "quality": "clean"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "late",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "position-1",
+            "ready": false,
+            "start": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 250,
+              "exactMicroOffset": "250000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5666,
+              "exactMicroOffset": "5666000"
+            },
+            "durationTicks": 5416
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "notAttempted",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "receive-1",
+            "attempted": false,
+            "secured": false,
+            "reason": "noReceivableDeliveryOrReadiness"
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "notAttempted",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "touch-1",
+            "candidate": null,
+            "reason": "noSecuredPossession"
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      },
+      "encoding": "{\"leg\":{\"actionId\":\"receive-1\",\"parentActionId\":null,\"physicalSlot\":\"primaryThrow\",\"sourceThrowActionId\":\"throw-1\"},\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"playId\":\"ground-play-1\",\"thrower\":{\"actorId\":\"player\",\"position\":\"SS\",\"role\":\"player\"}}"
+    },
+    {
+      "name": "hold",
+      "vector": {
+        "status": "ok",
+        "samplerVersion": "physical-slot-sha256-u32be-utf8-v2",
+        "stages": {
+          "positioning": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"positioning\"}",
+            "sha256": "5b60979e0d9bcd6407057bd58bd051229d0840d6732d4668dd739726d59509ab",
+            "u32": 1533056926,
+            "unit": 0.3569426309550181
+          },
+          "secure": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"secure\"}",
+            "sha256": "1c5085dd87e006d7155a10da560a7b1c0382ab221951bd940f8330d8466b735e",
+            "u32": 475039197,
+            "unit": 0.1106036821147427
+          },
+          "touch": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"touch\"}",
+            "sha256": "ec89b4a26d319189166a90f4f3d7ca10944a2fea765592848d7b4c2e800afff2",
+            "u32": 3968447650,
+            "unit": 0.9239762207726017
+          }
+        }
+      },
+      "output": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "d44ee52707b12f7e83b63063800fc86c137bb9d635c7d3db51adb7fd07ee6710",
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "notAttempted",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": null,
+            "actualTarget": null,
+            "actionId": "throw-1",
+            "reason": "hold"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "positionedWithoutReception",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": null,
+            "actualTarget": null,
+            "actionId": "position-1",
+            "ready": false,
+            "start": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 250,
+              "exactMicroOffset": "250000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 1120,
+              "exactMicroOffset": "1120000"
+            },
+            "durationTicks": 870
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "notAttempted",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": null,
+            "actualTarget": null,
+            "actionId": "receive-1",
+            "attempted": false,
+            "secured": false,
+            "reason": "noReceivableDeliveryOrReadiness"
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "notAttempted",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": null,
+            "actualTarget": null,
+            "actionId": "touch-1",
+            "candidate": null,
+            "reason": "noSecuredPossession"
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      },
+      "encoding": "{\"leg\":{\"actionId\":\"receive-1\",\"parentActionId\":null,\"physicalSlot\":\"primaryThrow\",\"sourceThrowActionId\":\"throw-1\"},\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"playId\":\"ground-play-1\",\"thrower\":{\"actorId\":\"player\",\"position\":\"SS\",\"role\":\"player\"}}"
+    },
+    {
+      "name": "negativeRunner",
+      "vector": {
+        "status": "ok",
+        "samplerVersion": "physical-slot-sha256-u32be-utf8-v2",
+        "stages": {
+          "positioning": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"positioning\"}",
+            "sha256": "5b60979e0d9bcd6407057bd58bd051229d0840d6732d4668dd739726d59509ab",
+            "u32": 1533056926,
+            "unit": 0.3569426309550181
+          },
+          "secure": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"secure\"}",
+            "sha256": "1c5085dd87e006d7155a10da560a7b1c0382ab221951bd940f8330d8466b735e",
+            "u32": 475039197,
+            "unit": 0.1106036821147427
+          },
+          "touch": {
+            "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"touch\"}",
+            "sha256": "ec89b4a26d319189166a90f4f3d7ca10944a2fea765592848d7b4c2e800afff2",
+            "u32": 3968447650,
+            "unit": 0.9239762207726017
+          }
+        }
+      },
+      "output": {
+        "status": "ok",
+        "runtimeEnabled": false,
+        "inputDigest": "7458a813f1c64246c48dbcc5278dfa8a733db599701382fa65a680e3345107a6",
+        "stages": {
+          "delivery": {
+            "stage": "delivery",
+            "status": "completed",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "throw-1",
+            "launch": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 2000,
+              "exactMicroOffset": "2000000"
+            },
+            "ballArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "accuracy": "onTarget",
+            "quality": "clean"
+          },
+          "positioning": {
+            "stage": "positioning",
+            "status": "ready",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "position-1",
+            "ready": true,
+            "start": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 250,
+              "exactMicroOffset": "250000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 1120,
+              "exactMicroOffset": "1120000"
+            },
+            "durationTicks": 870
+          },
+          "secure": {
+            "stage": "secure",
+            "status": "cleanControl",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "receive-1",
+            "attempted": true,
+            "secured": true,
+            "handsMarginMilli": 10125,
+            "attemptTime": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5000,
+              "exactMicroOffset": "5000000"
+            },
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5150,
+              "exactMicroOffset": "5150000"
+            },
+            "possession": {
+              "actorId": "npc1b",
+              "actionId": "receive-1",
+              "sourceThrowActionId": "throw-1"
+            }
+          },
+          "contest": {
+            "stage": "contest",
+            "status": "alreadySafe",
+            "identity": {
+              "leg": {
+                "actionId": "receive-1",
+                "parentActionId": null,
+                "physicalSlot": "primaryThrow",
+                "sourceThrowActionId": "throw-1"
+              },
+              "physical": {
+                "contactId": "contact-1",
+                "matchId": "match-1",
+                "physicalIdentity": "contact-1",
+                "plateAppearanceId": "pa-1",
+                "version": "physical-contact-binding-utf8-v2"
+              },
+              "playId": "ground-play-1",
+              "thrower": {
+                "actorId": "player",
+                "position": "SS",
+                "role": "player"
+              }
+            },
+            "planned": {
+              "receiver": {
+                "actorId": "npc1b",
+                "position": "1B",
+                "role": "npc"
+              },
+              "target": {
+                "base": "first",
+                "kind": "runner",
+                "runnerId": "batter"
+              }
+            },
+            "actualReceiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actualTarget": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actionId": "touch-1",
+            "completion": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": 5264,
+              "exactMicroOffset": "5264000"
+            },
+            "runnerArrival": {
+              "version": "crt-physical-play-integer-ticks-v2-2",
+              "originId": "contact-clock-1",
+              "status": "known",
+              "ticks": -1000,
+              "exactMicroOffset": "-1000000"
+            },
+            "timingMarginTicks": -6264,
+            "candidate": null
+          }
+        },
+        "scorerFacts": {
+          "status": "insufficientScorerFacts",
+          "referenceVersion": "ordinary-effort-reference-v1",
+          "officialScorerEligibility": "insufficient",
+          "officialError": null,
+          "wouldBeAssist": null
+        },
+        "application": {
+          "matchStateWrites": 0,
+          "gameRecordWrites": 0,
+          "rngCallbacks": 0,
+          "actualRetirements": 0
+        }
+      },
+      "encoding": "{\"leg\":{\"actionId\":\"receive-1\",\"parentActionId\":null,\"physicalSlot\":\"primaryThrow\",\"sourceThrowActionId\":\"throw-1\"},\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"playId\":\"ground-play-1\",\"thrower\":{\"actorId\":\"player\",\"position\":\"SS\",\"role\":\"player\"}}"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "decision": "4096_UTF16_CODE_UNITS_NEW_PURE_RESOURCE_CAP",
+  "observedCanonicalIdLength": 264,
+  "sourceBoundary": [
+    {
+      "file": "save.js",
+      "lines": [
+        403,
+        411,
+        631,
+        634
+      ],
+      "finding": "JSON cloning/handoff owner, no new receiver-specific ID truncation; formal Save guard unchanged"
+    },
+    {
+      "file": "batted-ball-ground-defense.js",
+      "lines": [
+        402,
+        402
+      ],
+      "finding": "normalizeHandoff deepFreeze clone; 4096 Unicode transport unit test preserves raw text"
+    },
+    {
+      "file": "offensive-bunt-defensive-handoff.js",
+      "lines": [
+        196,
+        198
+      ],
+      "finding": "same clone transport, no explicit per-ID length cap"
+    },
+    {
+      "file": "docs/receiver-execution-v2-sprint-8-final-contract-schema.json",
+      "finding": "existing pure schema remains version-v2-1; does not become v2.2 schema"
+    },
+    {
+      "file": "receiver-execution-v2-foundation.js",
+      "finding": "old ASCII predicate512 unchanged"
+    },
+    {
+      "file": "receiver-execution-v2-source-authority-foundation.js",
+      "finding": "old ASCII predicate240 unchanged"
+    }
+  ],
+  "rationale": "Accept reviewed Sprint10A.2 proposal with explicit bounded pure validator; exact4096/max+1 tests and JSON/handoff transport proof. No evidence in inspected generic serialization path requires a lower new pure cap.",
+  "limit": "Not a browser localStorage quota/load test or normalizeSave admission PASS; formal storage/version guards remain separate prerequisites.",
+  "rawIdPreserved": true,
+  "normalization": "none",
+  "formalSave": "UNCHANGED_NOT_V2_2_TESTED"
+}

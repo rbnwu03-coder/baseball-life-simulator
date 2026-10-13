@@ -1,0 +1,90 @@
+{
+  "scope": "EXISTING_CONTRACT_TO_NEW_CONTRACT_TO_MIGRATION_BOUNDARY",
+  "existing": {
+    "pure": {
+      "contract": "receiver-pure-contract-v2-1",
+      "execution": "receiver-pure-stages-v2-1",
+      "adapter": "receiver-explicit-input-v1",
+      "timing": "crt-integer-ticks-v2-1",
+      "sampler": "physical-slot-sha256-u32be-v1",
+      "effort": "ordinary-effort-reference-v1",
+      "physical": "physical-contact-binding-v1"
+    },
+    "admissionBinding": {
+      "safety": "receiver-admission-timing-contract-v1",
+      "format": "isolated-receiver-version-envelope-v1",
+      "policy": "inactive-ss-direct-policy-v1",
+      "legacyTiming": "defensive-runner-throw-settlement-v1"
+    },
+    "sourceAdapter": {
+      "source": "receiver-source-authority-isolated-v1",
+      "positioning": "npc1b-initial-cover-policy-v1",
+      "incoming": "ss-canonical-incoming-policy-v1",
+      "adapter": "npc1b-explicit-alias-adapter-v1",
+      "bridge": "common-launch-crt-bridge-proposal-v1",
+      "touch": "npc1b-possession-touch-policy-v1",
+      "delivery": "canonical-ss-delivery-view-v1",
+      "timing": "crt-integer-ticks-v2-1",
+      "sampler": "physical-slot-sha256-u32be-v1"
+    }
+  },
+  "new": {
+    "contract": "receiver-pure-contract-v2-2",
+    "execution": "receiver-pure-stages-v2-2",
+    "physical": "physical-contact-binding-utf8-v2",
+    "timing": "crt-physical-play-integer-ticks-v2-2",
+    "sampler": "physical-slot-sha256-u32be-utf8-v2",
+    "adapter": "receiver-explicit-input-v2-2",
+    "source": "receiver-pure-source-boundary-v2-2",
+    "effort": "ordinary-effort-reference-v1",
+    "pin": "isolated-receiver-revision-pin-v2-2"
+  },
+  "rows": [
+    {
+      "area": "Identity",
+      "old": "ASCII512 in S8/S9; ASCII240 in S10A.1",
+      "new": "raw well-formed Unicode, explicit4096 cap",
+      "boundary": "new physical version only; old resolver still rejects old unsupported strings"
+    },
+    {
+      "area": "Nullable delivery",
+      "old": "receiver/target required; S10A.1 isolated noattempt view differs from raw hold",
+      "new": "planned and nullable actual explicit distinct facts",
+      "boundary": "no changing old pin, production handoff not connected"
+    },
+    {
+      "area": "Timing",
+      "old": "launch0; actor positioning nonnegative launch-local; legacy bridge unavailable",
+      "new": "contact-global common anchor, nonzero launch, signed start, exact source subtraction",
+      "boundary": "new timing version; no v1 conversion or formal settlement seam"
+    },
+    {
+      "area": "Sampler",
+      "old": "physical-slot-sha256-u32be-v1",
+      "new": "physical-slot-sha256-u32be-utf8-v2",
+      "boundary": "old vectors preserved under old APIs; new namespace vector difference is explicit migration"
+    },
+    {
+      "area": "Source",
+      "old": "receiver-source-authority-isolated-v1",
+      "new": "receiver-pure-source-boundary-v2-2",
+      "boundary": "pure source validator, not approved production adapter-v2-1; proposed adapter remains unimplemented"
+    },
+    {
+      "area": "Pins",
+      "old": "receiver-admission-timing-contract-v1",
+      "new": "isolated-receiver-revision-pin-v2-2",
+      "boundary": "new metadata only; no downgrade after pin or upgrade after execution; formal lifecycle/Save unchanged"
+    }
+  ],
+  "rejection": [
+    "missing",
+    "unknown",
+    "mixed",
+    "incompatible sampler/timing/source",
+    "downgrade after pin",
+    "upgrade after execution"
+  ],
+  "formalRuntimeSave": "NOT_IMPLEMENTED_NOT_TESTED",
+  "L03": "PARTIAL"
+}

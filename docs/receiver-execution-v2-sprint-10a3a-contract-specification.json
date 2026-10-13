@@ -1,0 +1,985 @@
+{
+  "sprint": "10A.3a",
+  "scope": "ISOLATED_PURE_V2_2_NOT_SAVE_SCHEMA",
+  "runtimeEnabled": false,
+  "versions": {
+    "contract": "receiver-pure-contract-v2-2",
+    "execution": "receiver-pure-stages-v2-2",
+    "physical": "physical-contact-binding-utf8-v2",
+    "timing": "crt-physical-play-integer-ticks-v2-2",
+    "sampler": "physical-slot-sha256-u32be-utf8-v2",
+    "adapter": "receiver-explicit-input-v2-2",
+    "source": "receiver-pure-source-boundary-v2-2",
+    "effort": "ordinary-effort-reference-v1",
+    "pin": "isolated-receiver-revision-pin-v2-2"
+  },
+  "api": [
+    "validateVersions",
+    "validateIdentity",
+    "idAccepted",
+    "sampleVector",
+    "validateTimeline",
+    "validate",
+    "sourceBoundary",
+    "seal",
+    "execute",
+    "resolveStage",
+    "createPin",
+    "retainPin"
+  ],
+  "closedObjectShapes": {
+    "input": {
+      "closed": true,
+      "required": [
+        "versions",
+        "scope",
+        "identity",
+        "planned",
+        "actual",
+        "handoff",
+        "context",
+        "capabilities",
+        "ownedSample",
+        "timing",
+        "positioning",
+        "secure",
+        "contest",
+        "provenance",
+        "effortReference",
+        "continuation"
+      ]
+    },
+    "versions": {
+      "closed": true,
+      "required": [
+        "contract",
+        "execution",
+        "physical",
+        "timing",
+        "sampler",
+        "adapter",
+        "source",
+        "effort",
+        "pin"
+      ]
+    },
+    "identity": {
+      "closed": true,
+      "required": [
+        "playId",
+        "physical",
+        "leg",
+        "thrower"
+      ]
+    },
+    "identity.physical": {
+      "closed": true,
+      "required": [
+        "version",
+        "matchId",
+        "plateAppearanceId",
+        "contactId",
+        "physicalIdentity"
+      ]
+    },
+    "identity.leg": {
+      "closed": true,
+      "required": [
+        "actionId",
+        "sourceThrowActionId",
+        "physicalSlot",
+        "parentActionId"
+      ]
+    },
+    "identity.thrower": {
+      "closed": true,
+      "required": [
+        "actorId",
+        "position",
+        "role"
+      ]
+    },
+    "planned": {
+      "closed": true,
+      "required": [
+        "receiver",
+        "target"
+      ]
+    },
+    "planned.receiver": {
+      "closed": true,
+      "required": [
+        "actorId",
+        "position",
+        "role"
+      ]
+    },
+    "planned.target": {
+      "closed": true,
+      "required": [
+        "runnerId",
+        "base",
+        "kind"
+      ]
+    },
+    "actual": {
+      "closed": true,
+      "required": [
+        "actionId",
+        "canonicalSourceId",
+        "upstreamActionId",
+        "upstreamStatus",
+        "status",
+        "receiver",
+        "target",
+        "release",
+        "accuracy",
+        "quality"
+      ]
+    },
+    "actual.receiver": {
+      "closed": true,
+      "required": [
+        "actorId",
+        "position",
+        "role"
+      ]
+    },
+    "actual.target": {
+      "closed": true,
+      "required": [
+        "runnerId",
+        "base",
+        "kind"
+      ]
+    },
+    "handoff": {
+      "closed": true,
+      "required": [
+        "identity",
+        "planned",
+        "actual"
+      ]
+    },
+    "handoff.identity": {
+      "closed": true,
+      "required": [
+        "playId",
+        "physical",
+        "leg",
+        "thrower"
+      ]
+    },
+    "handoff.identity.physical": {
+      "closed": true,
+      "required": [
+        "version",
+        "matchId",
+        "plateAppearanceId",
+        "contactId",
+        "physicalIdentity"
+      ]
+    },
+    "handoff.identity.leg": {
+      "closed": true,
+      "required": [
+        "actionId",
+        "sourceThrowActionId",
+        "physicalSlot",
+        "parentActionId"
+      ]
+    },
+    "handoff.identity.thrower": {
+      "closed": true,
+      "required": [
+        "actorId",
+        "position",
+        "role"
+      ]
+    },
+    "handoff.planned": {
+      "closed": true,
+      "required": [
+        "receiver",
+        "target"
+      ]
+    },
+    "handoff.planned.receiver": {
+      "closed": true,
+      "required": [
+        "actorId",
+        "position",
+        "role"
+      ]
+    },
+    "handoff.planned.target": {
+      "closed": true,
+      "required": [
+        "runnerId",
+        "base",
+        "kind"
+      ]
+    },
+    "handoff.actual": {
+      "closed": true,
+      "required": [
+        "actionId",
+        "canonicalSourceId",
+        "upstreamActionId",
+        "upstreamStatus",
+        "status",
+        "receiver",
+        "target",
+        "release",
+        "accuracy",
+        "quality"
+      ]
+    },
+    "handoff.actual.receiver": {
+      "closed": true,
+      "required": [
+        "actorId",
+        "position",
+        "role"
+      ]
+    },
+    "handoff.actual.target": {
+      "closed": true,
+      "required": [
+        "runnerId",
+        "base",
+        "kind"
+      ]
+    },
+    "context": {
+      "closed": true,
+      "required": [
+        "initialOuts",
+        "routeId",
+        "competitionLevel",
+        "environmentId",
+        "receiverAvailable"
+      ]
+    },
+    "capabilities": {
+      "closed": true,
+      "required": [
+        "actorId",
+        "adapterVersion",
+        "values"
+      ]
+    },
+    "capabilities.values": {
+      "closed": true,
+      "required": [
+        "reaction",
+        "range",
+        "mobility",
+        "catching",
+        "fielding",
+        "arm",
+        "throwing",
+        "decision"
+      ]
+    },
+    "timing": {
+      "closed": true,
+      "required": [
+        "version",
+        "sourceDomain",
+        "anchor",
+        "times"
+      ]
+    },
+    "timing.anchor": {
+      "closed": true,
+      "required": [
+        "version",
+        "originId",
+        "physical",
+        "status",
+        "decimal"
+      ]
+    },
+    "timing.anchor.physical": {
+      "closed": true,
+      "required": [
+        "version",
+        "matchId",
+        "plateAppearanceId",
+        "contactId",
+        "physicalIdentity"
+      ]
+    },
+    "timing.times": {
+      "closed": true,
+      "required": [
+        "positioningStart",
+        "acquisitionCompletion",
+        "throwLaunch",
+        "ballArrival",
+        "receiveAttempt",
+        "positioningCompletion",
+        "secureCompletion",
+        "baseTouch",
+        "runnerArrival"
+      ]
+    },
+    "timing.times.positioningStart": {
+      "closed": true,
+      "required": [
+        "originId",
+        "status",
+        "decimal"
+      ]
+    },
+    "timing.times.acquisitionCompletion": {
+      "closed": true,
+      "required": [
+        "originId",
+        "status",
+        "decimal"
+      ]
+    },
+    "timing.times.throwLaunch": {
+      "closed": true,
+      "required": [
+        "originId",
+        "status",
+        "decimal"
+      ]
+    },
+    "timing.times.ballArrival": {
+      "closed": true,
+      "required": [
+        "originId",
+        "status",
+        "decimal"
+      ]
+    },
+    "timing.times.receiveAttempt": {
+      "closed": true,
+      "required": [
+        "originId",
+        "status",
+        "decimal"
+      ]
+    },
+    "timing.times.positioningCompletion": {
+      "closed": true,
+      "required": [
+        "originId",
+        "status",
+        "reason"
+      ]
+    },
+    "timing.times.secureCompletion": {
+      "closed": true,
+      "required": [
+        "originId",
+        "status",
+        "reason"
+      ]
+    },
+    "timing.times.baseTouch": {
+      "closed": true,
+      "required": [
+        "originId",
+        "status",
+        "reason"
+      ]
+    },
+    "timing.times.runnerArrival": {
+      "closed": true,
+      "required": [
+        "originId",
+        "status",
+        "decimal"
+      ]
+    },
+    "positioning": {
+      "closed": true,
+      "required": [
+        "actionId",
+        "startContext",
+        "movementMdu",
+        "preContactAuthorized"
+      ]
+    },
+    "secure": {
+      "closed": true,
+      "required": [
+        "actionId",
+        "demandMilli",
+        "cleanDelayTicks",
+        "bobbleDelayTicks"
+      ]
+    },
+    "contest": {
+      "closed": true,
+      "required": [
+        "actionId",
+        "type",
+        "attempted",
+        "contact",
+        "legality",
+        "delayTicks"
+      ]
+    },
+    "contest.legality": {
+      "closed": true,
+      "required": [
+        "status",
+        "target",
+        "sourceActionId"
+      ]
+    },
+    "contest.legality.target": {
+      "closed": true,
+      "required": [
+        "runnerId",
+        "base",
+        "kind"
+      ]
+    },
+    "provenance": {
+      "closed": true,
+      "required": [
+        "identity",
+        "actors",
+        "capabilities",
+        "delivery",
+        "positioning",
+        "timing",
+        "secure",
+        "contest"
+      ]
+    },
+    "provenance.identity": {
+      "closed": true,
+      "required": [
+        "classification",
+        "scope",
+        "owner",
+        "reference",
+        "version"
+      ]
+    },
+    "provenance.actors": {
+      "closed": true,
+      "required": [
+        "classification",
+        "scope",
+        "owner",
+        "reference",
+        "version"
+      ]
+    },
+    "provenance.capabilities": {
+      "closed": true,
+      "required": [
+        "classification",
+        "scope",
+        "owner",
+        "reference",
+        "version"
+      ]
+    },
+    "provenance.delivery": {
+      "closed": true,
+      "required": [
+        "classification",
+        "scope",
+        "owner",
+        "reference",
+        "version"
+      ]
+    },
+    "provenance.positioning": {
+      "closed": true,
+      "required": [
+        "classification",
+        "scope",
+        "owner",
+        "reference",
+        "version"
+      ]
+    },
+    "provenance.timing": {
+      "closed": true,
+      "required": [
+        "classification",
+        "scope",
+        "owner",
+        "reference",
+        "version"
+      ]
+    },
+    "provenance.secure": {
+      "closed": true,
+      "required": [
+        "classification",
+        "scope",
+        "owner",
+        "reference",
+        "version"
+      ]
+    },
+    "provenance.contest": {
+      "closed": true,
+      "required": [
+        "classification",
+        "scope",
+        "owner",
+        "reference",
+        "version"
+      ]
+    }
+  },
+  "referenceFixture": {
+    "versions": {
+      "contract": "receiver-pure-contract-v2-2",
+      "execution": "receiver-pure-stages-v2-2",
+      "physical": "physical-contact-binding-utf8-v2",
+      "timing": "crt-physical-play-integer-ticks-v2-2",
+      "sampler": "physical-slot-sha256-u32be-utf8-v2",
+      "adapter": "receiver-explicit-input-v2-2",
+      "source": "receiver-pure-source-boundary-v2-2",
+      "effort": "ordinary-effort-reference-v1",
+      "pin": "isolated-receiver-revision-pin-v2-2"
+    },
+    "scope": "isolatedFixture",
+    "identity": {
+      "playId": "ground-play-1",
+      "physical": {
+        "version": "physical-contact-binding-utf8-v2",
+        "matchId": "match-1",
+        "plateAppearanceId": "pa-1",
+        "contactId": "contact-1",
+        "physicalIdentity": "contact-1"
+      },
+      "leg": {
+        "actionId": "receive-1",
+        "sourceThrowActionId": "throw-1",
+        "physicalSlot": "primaryThrow",
+        "parentActionId": null
+      },
+      "thrower": {
+        "actorId": "player",
+        "position": "SS",
+        "role": "player"
+      }
+    },
+    "planned": {
+      "receiver": {
+        "actorId": "npc1b",
+        "position": "1B",
+        "role": "npc"
+      },
+      "target": {
+        "runnerId": "batter",
+        "base": "first",
+        "kind": "runner"
+      }
+    },
+    "actual": {
+      "actionId": "throw-1",
+      "canonicalSourceId": "canonical-throw-1",
+      "upstreamActionId": "acquire-1",
+      "upstreamStatus": "completed",
+      "status": "completed",
+      "receiver": {
+        "actorId": "npc1b",
+        "position": "1B",
+        "role": "npc"
+      },
+      "target": {
+        "runnerId": "batter",
+        "base": "first",
+        "kind": "runner"
+      },
+      "release": "readyRelease",
+      "accuracy": "onTarget",
+      "quality": "clean"
+    },
+    "handoff": {
+      "identity": {
+        "playId": "ground-play-1",
+        "physical": {
+          "version": "physical-contact-binding-utf8-v2",
+          "matchId": "match-1",
+          "plateAppearanceId": "pa-1",
+          "contactId": "contact-1",
+          "physicalIdentity": "contact-1"
+        },
+        "leg": {
+          "actionId": "receive-1",
+          "sourceThrowActionId": "throw-1",
+          "physicalSlot": "primaryThrow",
+          "parentActionId": null
+        },
+        "thrower": {
+          "actorId": "player",
+          "position": "SS",
+          "role": "player"
+        }
+      },
+      "planned": {
+        "receiver": {
+          "actorId": "npc1b",
+          "position": "1B",
+          "role": "npc"
+        },
+        "target": {
+          "runnerId": "batter",
+          "base": "first",
+          "kind": "runner"
+        }
+      },
+      "actual": {
+        "actionId": "throw-1",
+        "canonicalSourceId": "canonical-throw-1",
+        "upstreamActionId": "acquire-1",
+        "upstreamStatus": "completed",
+        "status": "completed",
+        "receiver": {
+          "actorId": "npc1b",
+          "position": "1B",
+          "role": "npc"
+        },
+        "target": {
+          "runnerId": "batter",
+          "base": "first",
+          "kind": "runner"
+        },
+        "release": "readyRelease",
+        "accuracy": "onTarget",
+        "quality": "clean"
+      }
+    },
+    "context": {
+      "initialOuts": 0,
+      "routeId": "secureFirstBaseOut",
+      "competitionLevel": "high-school",
+      "environmentId": "neutral-field",
+      "receiverAvailable": true
+    },
+    "capabilities": {
+      "actorId": "npc1b",
+      "adapterVersion": "receiver-explicit-input-v2-2",
+      "values": {
+        "reaction": 10,
+        "range": 10,
+        "mobility": 10,
+        "catching": 16,
+        "fielding": 16,
+        "arm": 10,
+        "throwing": 10,
+        "decision": 10
+      }
+    },
+    "ownedSample": 0.62,
+    "timing": {
+      "version": "crt-physical-play-integer-ticks-v2-2",
+      "sourceDomain": "physicalContactClock",
+      "anchor": {
+        "version": "physical-play-contact-anchor-v1",
+        "originId": "contact-clock-1",
+        "physical": {
+          "version": "physical-contact-binding-utf8-v2",
+          "matchId": "match-1",
+          "plateAppearanceId": "pa-1",
+          "contactId": "contact-1",
+          "physicalIdentity": "contact-1"
+        },
+        "status": "known",
+        "decimal": "100"
+      },
+      "times": {
+        "positioningStart": {
+          "originId": "contact-clock-1",
+          "status": "known",
+          "decimal": "100.25"
+        },
+        "acquisitionCompletion": {
+          "originId": "contact-clock-1",
+          "status": "known",
+          "decimal": "101"
+        },
+        "throwLaunch": {
+          "originId": "contact-clock-1",
+          "status": "known",
+          "decimal": "102"
+        },
+        "ballArrival": {
+          "originId": "contact-clock-1",
+          "status": "known",
+          "decimal": "105"
+        },
+        "receiveAttempt": {
+          "originId": "contact-clock-1",
+          "status": "known",
+          "decimal": "105"
+        },
+        "positioningCompletion": {
+          "originId": "contact-clock-1",
+          "status": "unknown",
+          "reason": "computedByPositioning"
+        },
+        "secureCompletion": {
+          "originId": "contact-clock-1",
+          "status": "unknown",
+          "reason": "computedBySecure"
+        },
+        "baseTouch": {
+          "originId": "contact-clock-1",
+          "status": "unknown",
+          "reason": "computedByContest"
+        },
+        "runnerArrival": {
+          "originId": "contact-clock-1",
+          "status": "known",
+          "decimal": "108"
+        }
+      }
+    },
+    "positioning": {
+      "actionId": "position-1",
+      "startContext": "atBase",
+      "movementMdu": 0,
+      "preContactAuthorized": false
+    },
+    "secure": {
+      "actionId": "receive-1",
+      "demandMilli": 5000,
+      "cleanDelayTicks": 150,
+      "bobbleDelayTicks": 600
+    },
+    "contest": {
+      "actionId": "touch-1",
+      "type": "batterBeforeFirst",
+      "attempted": true,
+      "contact": true,
+      "legality": {
+        "status": "eligible",
+        "target": {
+          "runnerId": "batter",
+          "base": "first",
+          "kind": "runner"
+        },
+        "sourceActionId": "force-1"
+      },
+      "delayTicks": 100
+    },
+    "provenance": {
+      "identity": {
+        "classification": "A",
+        "scope": "isolatedFixture",
+        "owner": "explicit-fixture",
+        "reference": "fixture-1",
+        "version": "fixture-v1"
+      },
+      "actors": {
+        "classification": "A",
+        "scope": "isolatedFixture",
+        "owner": "explicit-fixture",
+        "reference": "fixture-1",
+        "version": "fixture-v1"
+      },
+      "capabilities": {
+        "classification": "A",
+        "scope": "isolatedFixture",
+        "owner": "explicit-fixture",
+        "reference": "fixture-1",
+        "version": "fixture-v1"
+      },
+      "delivery": {
+        "classification": "A",
+        "scope": "isolatedFixture",
+        "owner": "explicit-fixture",
+        "reference": "fixture-1",
+        "version": "fixture-v1"
+      },
+      "positioning": {
+        "classification": "A",
+        "scope": "isolatedFixture",
+        "owner": "explicit-fixture",
+        "reference": "fixture-1",
+        "version": "fixture-v1"
+      },
+      "timing": {
+        "classification": "A",
+        "scope": "isolatedFixture",
+        "owner": "explicit-fixture",
+        "reference": "fixture-1",
+        "version": "fixture-v1"
+      },
+      "secure": {
+        "classification": "A",
+        "scope": "isolatedFixture",
+        "owner": "explicit-fixture",
+        "reference": "fixture-1",
+        "version": "fixture-v1"
+      },
+      "contest": {
+        "classification": "A",
+        "scope": "isolatedFixture",
+        "owner": "explicit-fixture",
+        "reference": "fixture-1",
+        "version": "fixture-v1"
+      }
+    },
+    "effortReference": null,
+    "continuation": null
+  },
+  "identity": {
+    "physical": "version/matchId/plateAppearanceId/contactId/physicalIdentity; playId separate typed play binding",
+    "action": "original actionId and canonicalSourceId preserved separately",
+    "actor": "actorId/position/role player or npc",
+    "runner": "runnerId/base/kind runner",
+    "raw": "No ASCII conversion, truncation, replacement hash or Unicode normalization",
+    "bound": "1..4096 UTF16 code units",
+    "reject": [
+      "controls U0000-U001F and U007F",
+      "lone surrogate",
+      "empty",
+      "oversize",
+      "getter/symbol/cycle/nonplain JSON"
+    ],
+    "consistency": "full typed handoff and same physical anchor; digest is not authentication"
+  },
+  "nullableDelivery": {
+    "states": [
+      "completed",
+      "offline",
+      "acquisitionFailed",
+      "notAttempted",
+      "hold",
+      "unknown"
+    ],
+    "attempted": "actual receiver and target bind to original planned identities, original canonicalSourceId required, upstream completed",
+    "noDelivery": "actual receiver/target null; no known launch/arrival/receive; no contact request; release held, or unknown for unknown delivery",
+    "hold": "route holdBall, upstream completed; canonical ID may persist from original no-attempt object",
+    "acquisitionFailure": "canonicalSourceId null, upstream failed",
+    "planned": "Preserved independent frozen intent, never copied into nullable actual facts",
+    "samples": "nullable original ownedSample on no-delivery/pending; binary64 binding when available, never pre-extracted"
+  },
+  "canonical": {
+    "objectKeys": "UTF16 code-unit sorted recursive JSON",
+    "arrays": "preserve order",
+    "unicode": "original code points; well-formed UTF8, no normalization",
+    "numbers": "safe integers only; original sample/unit encoded binary64 BE in digest payload",
+    "hash": "portable S8 primitive SHA256, independently matched Node crypto and browser",
+    "samplerKeys": [
+      "executionVersion",
+      "full physical binding including physical.version",
+      "physicalSlot primaryThrow or relayThrow",
+      "samplerVersion",
+      "stage positioning/secure/touch"
+    ],
+    "excludedKeys": [
+      "actor",
+      "capabilities",
+      "route",
+      "outcome",
+      "retry",
+      "ownedSample"
+    ],
+    "u32": "first 4 bytes unsigned big endian",
+    "unit": "(u32+0.5)/2^32 exact binary64",
+    "variation": "16 bin top nibble; frozen same physical slot",
+    "migration": "MODEL_MIGRATION_DIFFERENCE; new namespaces do not preserve old numerical vectors"
+  },
+  "stages": {
+    "delivery": {
+      "owner": "provided canonical/upstream facts, no throw roll",
+      "output": [
+        "completed",
+        "offline",
+        "notAttempted",
+        "insufficient",
+        "blocked"
+      ]
+    },
+    "positioning": {
+      "inputs": [
+        "frozen MDU/context",
+        "reaction",
+        "range",
+        "mobility",
+        "source signed start"
+      ],
+      "duration": "max(100,1500-60*reaction+bin*10)+ceil(MDU*1000000/(500+60*mobility)) ticks",
+      "reach": "MDU*1000 <= 1000+400*range",
+      "output": [
+        "ready",
+        "late",
+        "unavailable",
+        "unreachable",
+        "insufficient",
+        "positionedWithoutReception",
+        "blocked"
+      ]
+    },
+    "secure": {
+      "dependency": "receivable delivery and positioning ready at ball arrival; known planned receive time at/after ball arrival",
+      "margin": "650*catching+350*fielding+bin*125-demandMilli",
+      "completion": "exact receive offset + clean delay + optional bobble delay",
+      "output": [
+        "notAttempted",
+        "insufficient",
+        "failedHands",
+        "bobbleControl",
+        "cleanControl"
+      ]
+    },
+    "contest": {
+      "dependency": "secured possession, independent contact request, eligible live legality, runner time",
+      "completion": "exact secure offset + delayTicks + top-nibble touch jitter",
+      "candidate": "only runnerTicks-completionTicks>0; tie/safe/unknown no candidate; no actual retirement or scoring",
+      "output": [
+        "notAttempted",
+        "ineligible",
+        "insufficient",
+        "retirementCandidate",
+        "tie",
+        "alreadySafe"
+      ]
+    },
+    "relay": {
+      "source": "explicit completed first retirement and pivot from caller provenance, not inferred from pure candidate",
+      "binding": "same typed play/physical/anchor; prior output reconstructed with same frozen vector; action parent and real pivot actor",
+      "stop": "failed first force, failed pivot or third out blocks second delivery/retirement",
+      "time": "next acquisition and launch cannot precede exact prior contest completion"
+    }
+  },
+  "ability": {
+    "policy": "UNCALIBRATED pure coefficients; no Production ability adapter acceptance",
+    "actual": "reaction/range/mobility affect B; catching/fielding affect C; receiver arm/throwing/decision do not affect B/C/D",
+    "ordinaryEffort": "separate versioned position/level/environment profile, never derived from actual weak capability; calibration authority unavailable, official E/A always null"
+  },
+  "sourceBoundary": {
+    "classification": [
+      "A original fact",
+      "B deterministic projection",
+      "C missing source"
+    ],
+    "scopes": [
+      "isolatedFixture",
+      "productionWitness"
+    ],
+    "C": "insufficientExecutionSources",
+    "production": "shape validation possible, seal/execution insufficient without future Production adapter authority",
+    "fixture": "A declared fixture fact is not actual Production measurement"
+  },
+  "application": {
+    "runtimeEnabled": false,
+    "officialMatchWrites": 0,
+    "recordWrites": 0,
+    "rngCallbacks": 0,
+    "actualRetirements": 0,
+    "formalSaveAdmission": false,
+    "officialScorerEligibility": "insufficient"
+  },
+  "capturePolicy": "exclusive-create; no original evidence overwritten"
+}

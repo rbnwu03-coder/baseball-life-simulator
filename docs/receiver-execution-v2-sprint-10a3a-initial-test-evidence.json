@@ -1,0 +1,21 @@
+{
+  "sprint": "10A.3a",
+  "summary": {
+    "total": 146,
+    "passed": 144,
+    "failed": 2
+  },
+  "failures": [
+    {
+      "name": "relay cannot reset contact anchor",
+      "cause": "New test anchor101 unintentionally created unauthorized precontact start; fixed to99 to isolate relay-anchor mismatch."
+    },
+    {
+      "name": "original Production Unicode and canonical264 witness accepted without truncation",
+      "cause": "New witness harness changed original runner but omitted matching legality copy; fixed new legality copy."
+    }
+  ],
+  "productionDelta": 0,
+  "modelThresholdsChanged": false,
+  "oldFixturesModified": false
+}

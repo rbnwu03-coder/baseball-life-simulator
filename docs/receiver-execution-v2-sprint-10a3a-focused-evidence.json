@@ -1,0 +1,2081 @@
+{
+  "scope": "ISOLATED_V2_2_PURE_CONTRACT_ONLY",
+  "summary": {
+    "total": 155,
+    "passed": 155,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "name": "identity accepts Chinese",
+      "status": "PASS"
+    },
+    {
+      "name": "identity accepts mixed",
+      "status": "PASS"
+    },
+    {
+      "name": "identity accepts nonBMP",
+      "status": "PASS"
+    },
+    {
+      "name": "identity accepts combining",
+      "status": "PASS"
+    },
+    {
+      "name": "identity accepts canonical264",
+      "status": "PASS"
+    },
+    {
+      "name": "identity accepts max4096",
+      "status": "PASS"
+    },
+    {
+      "name": "identity rejects empty",
+      "status": "PASS"
+    },
+    {
+      "name": "identity rejects over4096",
+      "status": "PASS"
+    },
+    {
+      "name": "identity rejects high surrogate",
+      "status": "PASS"
+    },
+    {
+      "name": "identity rejects low surrogate",
+      "status": "PASS"
+    },
+    {
+      "name": "identity rejects control",
+      "status": "PASS"
+    },
+    {
+      "name": "identity rejects DEL",
+      "status": "PASS"
+    },
+    {
+      "name": "Unicode normalization is never implicit",
+      "status": "PASS"
+    },
+    {
+      "name": "typed handoff rejects tampered matchId",
+      "status": "PASS"
+    },
+    {
+      "name": "typed handoff rejects tampered plateAppearanceId",
+      "status": "PASS"
+    },
+    {
+      "name": "typed handoff rejects tampered contactId",
+      "status": "PASS"
+    },
+    {
+      "name": "typed handoff rejects tampered physicalIdentity",
+      "status": "PASS"
+    },
+    {
+      "name": "version missing contract",
+      "status": "PASS"
+    },
+    {
+      "name": "version unknown contract",
+      "status": "PASS"
+    },
+    {
+      "name": "version missing execution",
+      "status": "PASS"
+    },
+    {
+      "name": "version unknown execution",
+      "status": "PASS"
+    },
+    {
+      "name": "version missing physical",
+      "status": "PASS"
+    },
+    {
+      "name": "version unknown physical",
+      "status": "PASS"
+    },
+    {
+      "name": "version missing timing",
+      "status": "PASS"
+    },
+    {
+      "name": "version unknown timing",
+      "status": "PASS"
+    },
+    {
+      "name": "version missing sampler",
+      "status": "PASS"
+    },
+    {
+      "name": "version unknown sampler",
+      "status": "PASS"
+    },
+    {
+      "name": "version missing adapter",
+      "status": "PASS"
+    },
+    {
+      "name": "version unknown adapter",
+      "status": "PASS"
+    },
+    {
+      "name": "version missing source",
+      "status": "PASS"
+    },
+    {
+      "name": "version unknown source",
+      "status": "PASS"
+    },
+    {
+      "name": "version missing effort",
+      "status": "PASS"
+    },
+    {
+      "name": "version unknown effort",
+      "status": "PASS"
+    },
+    {
+      "name": "version missing pin",
+      "status": "PASS"
+    },
+    {
+      "name": "version unknown pin",
+      "status": "PASS"
+    },
+    {
+      "name": "old/new mixed timing",
+      "status": "PASS"
+    },
+    {
+      "name": "old/new mixed sampler",
+      "status": "PASS"
+    },
+    {
+      "name": "old/new mixed source",
+      "status": "PASS"
+    },
+    {
+      "name": "old/new mixed adapter",
+      "status": "PASS"
+    },
+    {
+      "name": "old/new mixed physical",
+      "status": "PASS"
+    },
+    {
+      "name": "complete old registry directs to old API",
+      "status": "PASS"
+    },
+    {
+      "name": "pinned versions cannot downgrade pending",
+      "status": "PASS"
+    },
+    {
+      "name": "pinned versions cannot downgrade executed",
+      "status": "PASS"
+    },
+    {
+      "name": "pinned versions cannot downgrade settled",
+      "status": "PASS"
+    },
+    {
+      "name": "executed old pin cannot upgrade",
+      "status": "PASS"
+    },
+    {
+      "name": "pure revision pin remains metadata-only after JSON",
+      "status": "PASS"
+    },
+    {
+      "name": "revision pin refuses admission after execution",
+      "status": "PASS"
+    },
+    {
+      "name": "nullable actual hold never produces reception",
+      "status": "PASS"
+    },
+    {
+      "name": "nullable actual notAttempted never produces reception",
+      "status": "PASS"
+    },
+    {
+      "name": "nullable actual acquisitionFailed never produces reception",
+      "status": "PASS"
+    },
+    {
+      "name": "nullable actual unknown never produces reception",
+      "status": "PASS"
+    },
+    {
+      "name": "planned actor cannot masquerade as held actual",
+      "status": "PASS"
+    },
+    {
+      "name": "held known arrival is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "hold route cannot include completed throw",
+      "status": "PASS"
+    },
+    {
+      "name": "held attempted touch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "direct canonical source ID nullable is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "planned/actual target mismatch",
+      "status": "PASS"
+    },
+    {
+      "name": "actor role mismatch",
+      "status": "PASS"
+    },
+    {
+      "name": "runner role is typed",
+      "status": "PASS"
+    },
+    {
+      "name": "self throw invalid",
+      "status": "PASS"
+    },
+    {
+      "name": "clean candidate at outs 0",
+      "status": "PASS"
+    },
+    {
+      "name": "clean candidate at outs 1",
+      "status": "PASS"
+    },
+    {
+      "name": "clean candidate at outs 2",
+      "status": "PASS"
+    },
+    {
+      "name": "offline delivery never attempts hands",
+      "status": "PASS"
+    },
+    {
+      "name": "receiver unavailable is not hands failure",
+      "status": "PASS"
+    },
+    {
+      "name": "late positioning is not hands failure",
+      "status": "PASS"
+    },
+    {
+      "name": "unreachable positioning stops reception",
+      "status": "PASS"
+    },
+    {
+      "name": "failed hands never produces possession",
+      "status": "PASS"
+    },
+    {
+      "name": "bobble delay is independent completion quality",
+      "status": "PASS"
+    },
+    {
+      "name": "clean hands but runner safe 99",
+      "status": "PASS"
+    },
+    {
+      "name": "clean hands but runner safe 105.1",
+      "status": "PASS"
+    },
+    {
+      "name": "secure completed without touch has no candidate",
+      "status": "PASS"
+    },
+    {
+      "name": "legal contest ineligible",
+      "status": "PASS"
+    },
+    {
+      "name": "legal contest unknown",
+      "status": "PASS"
+    },
+    {
+      "name": "tag requires both possession and contact",
+      "status": "PASS"
+    },
+    {
+      "name": "signed prelaunch coordinate is preserved",
+      "status": "PASS"
+    },
+    {
+      "name": "precontact movement requires explicit source authorization",
+      "status": "PASS"
+    },
+    {
+      "name": "exact causal reversal acquisitionCompletion -> throwLaunch",
+      "status": "PASS"
+    },
+    {
+      "name": "exact causal reversal throwLaunch -> ballArrival",
+      "status": "PASS"
+    },
+    {
+      "name": "exact causal reversal positioningStart -> positioningCompletion",
+      "status": "PASS"
+    },
+    {
+      "name": "exact causal reversal ballArrival -> receiveAttempt",
+      "status": "PASS"
+    },
+    {
+      "name": "exact causal reversal receiveAttempt -> secureCompletion",
+      "status": "PASS"
+    },
+    {
+      "name": "exact causal reversal secureCompletion -> baseTouch",
+      "status": "PASS"
+    },
+    {
+      "name": "strict decimal rejects 1e2",
+      "status": "PASS"
+    },
+    {
+      "name": "strict decimal rejects 100.1234567",
+      "status": "PASS"
+    },
+    {
+      "name": "strict decimal rejects +100",
+      "status": "PASS"
+    },
+    {
+      "name": "strict decimal rejects 0100",
+      "status": "PASS"
+    },
+    {
+      "name": "strict decimal rejects  100",
+      "status": "PASS"
+    },
+    {
+      "name": "strict decimal rejects -0",
+      "status": "PASS"
+    },
+    {
+      "name": "strict decimal rejects -0.000000",
+      "status": "PASS"
+    },
+    {
+      "name": "exact origin subtraction before quantization",
+      "status": "PASS"
+    },
+    {
+      "name": "negative half ties round away from zero",
+      "status": "PASS"
+    },
+    {
+      "name": "overflow is rejected without clamping",
+      "status": "PASS"
+    },
+    {
+      "name": "exact tick tie produces no retirement",
+      "status": "PASS"
+    },
+    {
+      "name": "subtick margin collapse is explicit tie",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown remains unresolved positioningStart",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown remains unresolved runnerArrival",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown remains unresolved receiveAttempt",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown acquisition cannot fabricate known launch",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown launch cannot fabricate arrival",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown ball cannot fabricate receive",
+      "status": "PASS"
+    },
+    {
+      "name": "different origin rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "v1 ordinal is not absolute timing",
+      "status": "PASS"
+    },
+    {
+      "name": "legacy relative domain is insufficient",
+      "status": "PASS"
+    },
+    {
+      "name": "no delivery timeline cannot fabricate chain",
+      "status": "PASS"
+    },
+    {
+      "name": "no possession timeline cannot touch",
+      "status": "PASS"
+    },
+    {
+      "name": "no contact timeline cannot touch",
+      "status": "PASS"
+    },
+    {
+      "name": "late timeline cannot attempt hands after arrival",
+      "status": "PASS"
+    },
+    {
+      "name": "acquisition failure cannot retain fabricated canonical source",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical ID upper bound is executable and raw",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical ID over bound rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "4096 transport stays raw through current handoff JSON clone",
+      "status": "PASS"
+    },
+    {
+      "name": "quantization error bounded across signed micro offsets",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown common origin is insufficient",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown delivery time has no downstream attempt",
+      "status": "PASS"
+    },
+    {
+      "name": "stage outputs cannot be input",
+      "status": "PASS"
+    },
+    {
+      "name": "relay retains one origin and nonzero second launch",
+      "status": "PASS"
+    },
+    {
+      "name": "first force failed blocks second leg",
+      "status": "PASS"
+    },
+    {
+      "name": "actual third out stops second leg",
+      "status": "PASS"
+    },
+    {
+      "name": "relay cannot reset contact anchor",
+      "status": "PASS"
+    },
+    {
+      "name": "relay cannot launch before completed prior contest",
+      "status": "PASS"
+    },
+    {
+      "name": "tampered serialized prior rejects continuation",
+      "status": "PASS"
+    },
+    {
+      "name": "isolated independent stage APIs agree with full execution",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized dependency tamper delivery",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized dependency tamper positioning",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized dependency tamper secure",
+      "status": "PASS"
+    },
+    {
+      "name": "sample vector frozen under ability/actor/sample/route changes",
+      "status": "PASS"
+    },
+    {
+      "name": "sealed tamper inputDigest",
+      "status": "PASS"
+    },
+    {
+      "name": "sealed tamper samples",
+      "status": "PASS"
+    },
+    {
+      "name": "sampler matches independent crypto UTF8/u32BE",
+      "status": "PASS"
+    },
+    {
+      "name": "model migration sampler difference retains old vector",
+      "status": "PASS"
+    },
+    {
+      "name": "physical slot namespace is fixed",
+      "status": "PASS"
+    },
+    {
+      "name": "fixed vector gradient reaction",
+      "status": "PASS"
+    },
+    {
+      "name": "fixed vector gradient mobility",
+      "status": "PASS"
+    },
+    {
+      "name": "fixed vector gradient range",
+      "status": "PASS"
+    },
+    {
+      "name": "fixed vector gradient catching",
+      "status": "PASS"
+    },
+    {
+      "name": "fixed vector gradient fielding",
+      "status": "PASS"
+    },
+    {
+      "name": "noninterference receiver arm",
+      "status": "PASS"
+    },
+    {
+      "name": "noninterference receiver throwing",
+      "status": "PASS"
+    },
+    {
+      "name": "noninterference receiver decision",
+      "status": "PASS"
+    },
+    {
+      "name": "source C blocks execution identity",
+      "status": "PASS"
+    },
+    {
+      "name": "source C blocks execution timing",
+      "status": "PASS"
+    },
+    {
+      "name": "source C blocks execution secure",
+      "status": "PASS"
+    },
+    {
+      "name": "source C blocks execution positioning",
+      "status": "PASS"
+    },
+    {
+      "name": "missing provenance rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "productionWitness cannot be executed",
+      "status": "PASS"
+    },
+    {
+      "name": "ordinary effort always insufficient and separate",
+      "status": "PASS"
+    },
+    {
+      "name": "repeat and JSON roundtrip do not mutate or freeze caller",
+      "status": "PASS"
+    },
+    {
+      "name": "cold serialized seal remains mutable after execution",
+      "status": "PASS"
+    },
+    {
+      "name": "getter rejected without execution",
+      "status": "PASS"
+    },
+    {
+      "name": "no Match RNG or Math.random dependency",
+      "status": "PASS"
+    },
+    {
+      "name": "UMD sandbox matches Node without CommonJS",
+      "status": "PASS"
+    },
+    {
+      "name": "normal and jitless independent process agree",
+      "status": "PASS"
+    },
+    {
+      "name": "existing v2.1 result and vectors match baseline bytes in VM",
+      "status": "PASS"
+    },
+    {
+      "name": "original Production Unicode and canonical264 witness accepted without truncation",
+      "status": "PASS"
+    }
+  ],
+  "gradients": [
+    {
+      "ability": "reaction",
+      "rows": [
+        {
+          "value": 0,
+          "position": "ready",
+          "duration": 3289,
+          "margin": 10125
+        },
+        {
+          "value": 1,
+          "position": "ready",
+          "duration": 3229,
+          "margin": 10125
+        },
+        {
+          "value": 2,
+          "position": "ready",
+          "duration": 3169,
+          "margin": 10125
+        },
+        {
+          "value": 3,
+          "position": "ready",
+          "duration": 3109,
+          "margin": 10125
+        },
+        {
+          "value": 4,
+          "position": "ready",
+          "duration": 3049,
+          "margin": 10125
+        },
+        {
+          "value": 5,
+          "position": "ready",
+          "duration": 2989,
+          "margin": 10125
+        },
+        {
+          "value": 6,
+          "position": "ready",
+          "duration": 2929,
+          "margin": 10125
+        },
+        {
+          "value": 7,
+          "position": "ready",
+          "duration": 2869,
+          "margin": 10125
+        },
+        {
+          "value": 8,
+          "position": "ready",
+          "duration": 2809,
+          "margin": 10125
+        },
+        {
+          "value": 9,
+          "position": "ready",
+          "duration": 2749,
+          "margin": 10125
+        },
+        {
+          "value": 10,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 11,
+          "position": "ready",
+          "duration": 2629,
+          "margin": 10125
+        },
+        {
+          "value": 12,
+          "position": "ready",
+          "duration": 2569,
+          "margin": 10125
+        },
+        {
+          "value": 13,
+          "position": "ready",
+          "duration": 2509,
+          "margin": 10125
+        },
+        {
+          "value": 14,
+          "position": "ready",
+          "duration": 2449,
+          "margin": 10125
+        },
+        {
+          "value": 15,
+          "position": "ready",
+          "duration": 2389,
+          "margin": 10125
+        },
+        {
+          "value": 16,
+          "position": "ready",
+          "duration": 2329,
+          "margin": 10125
+        },
+        {
+          "value": 17,
+          "position": "ready",
+          "duration": 2269,
+          "margin": 10125
+        },
+        {
+          "value": 18,
+          "position": "ready",
+          "duration": 2209,
+          "margin": 10125
+        },
+        {
+          "value": 19,
+          "position": "ready",
+          "duration": 2149,
+          "margin": 10125
+        },
+        {
+          "value": 20,
+          "position": "ready",
+          "duration": 2089,
+          "margin": 10125
+        }
+      ]
+    },
+    {
+      "ability": "mobility",
+      "rows": [
+        {
+          "value": 0,
+          "position": "ready",
+          "duration": 4870,
+          "margin": 10125
+        },
+        {
+          "value": 1,
+          "position": "ready",
+          "duration": 4442,
+          "margin": 10125
+        },
+        {
+          "value": 2,
+          "position": "ready",
+          "duration": 4096,
+          "margin": 10125
+        },
+        {
+          "value": 3,
+          "position": "ready",
+          "duration": 3812,
+          "margin": 10125
+        },
+        {
+          "value": 4,
+          "position": "ready",
+          "duration": 3573,
+          "margin": 10125
+        },
+        {
+          "value": 5,
+          "position": "ready",
+          "duration": 3370,
+          "margin": 10125
+        },
+        {
+          "value": 6,
+          "position": "ready",
+          "duration": 3196,
+          "margin": 10125
+        },
+        {
+          "value": 7,
+          "position": "ready",
+          "duration": 3044,
+          "margin": 10125
+        },
+        {
+          "value": 8,
+          "position": "ready",
+          "duration": 2911,
+          "margin": 10125
+        },
+        {
+          "value": 9,
+          "position": "ready",
+          "duration": 2794,
+          "margin": 10125
+        },
+        {
+          "value": 10,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 11,
+          "position": "ready",
+          "duration": 2595,
+          "margin": 10125
+        },
+        {
+          "value": 12,
+          "position": "ready",
+          "duration": 2510,
+          "margin": 10125
+        },
+        {
+          "value": 13,
+          "position": "ready",
+          "duration": 2433,
+          "margin": 10125
+        },
+        {
+          "value": 14,
+          "position": "ready",
+          "duration": 2363,
+          "margin": 10125
+        },
+        {
+          "value": 15,
+          "position": "ready",
+          "duration": 2299,
+          "margin": 10125
+        },
+        {
+          "value": 16,
+          "position": "ready",
+          "duration": 2240,
+          "margin": 10125
+        },
+        {
+          "value": 17,
+          "position": "ready",
+          "duration": 2186,
+          "margin": 10125
+        },
+        {
+          "value": 18,
+          "position": "ready",
+          "duration": 2136,
+          "margin": 10125
+        },
+        {
+          "value": 19,
+          "position": "ready",
+          "duration": 2090,
+          "margin": 10125
+        },
+        {
+          "value": 20,
+          "position": "ready",
+          "duration": 2047,
+          "margin": 10125
+        }
+      ]
+    },
+    {
+      "ability": "range",
+      "rows": [
+        {
+          "value": 0,
+          "position": "unreachable",
+          "duration": null,
+          "margin": null
+        },
+        {
+          "value": 1,
+          "position": "unreachable",
+          "duration": null,
+          "margin": null
+        },
+        {
+          "value": 2,
+          "position": "unreachable",
+          "duration": null,
+          "margin": null
+        },
+        {
+          "value": 3,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 4,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 5,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 6,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 7,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 8,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 9,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 10,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 11,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 12,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 13,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 14,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 15,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 16,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 17,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 18,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 19,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 20,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        }
+      ]
+    },
+    {
+      "ability": "catching",
+      "rows": [
+        {
+          "value": 0,
+          "position": "ready",
+          "duration": 2689,
+          "margin": -275
+        },
+        {
+          "value": 1,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 375
+        },
+        {
+          "value": 2,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 1025
+        },
+        {
+          "value": 3,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 1675
+        },
+        {
+          "value": 4,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 2325
+        },
+        {
+          "value": 5,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 2975
+        },
+        {
+          "value": 6,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 3625
+        },
+        {
+          "value": 7,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 4275
+        },
+        {
+          "value": 8,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 4925
+        },
+        {
+          "value": 9,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 5575
+        },
+        {
+          "value": 10,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 6225
+        },
+        {
+          "value": 11,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 6875
+        },
+        {
+          "value": 12,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 7525
+        },
+        {
+          "value": 13,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 8175
+        },
+        {
+          "value": 14,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 8825
+        },
+        {
+          "value": 15,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 9475
+        },
+        {
+          "value": 16,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 17,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10775
+        },
+        {
+          "value": 18,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 11425
+        },
+        {
+          "value": 19,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 12075
+        },
+        {
+          "value": 20,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 12725
+        }
+      ]
+    },
+    {
+      "ability": "fielding",
+      "rows": [
+        {
+          "value": 0,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 4525
+        },
+        {
+          "value": 1,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 4875
+        },
+        {
+          "value": 2,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 5225
+        },
+        {
+          "value": 3,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 5575
+        },
+        {
+          "value": 4,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 5925
+        },
+        {
+          "value": 5,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 6275
+        },
+        {
+          "value": 6,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 6625
+        },
+        {
+          "value": 7,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 6975
+        },
+        {
+          "value": 8,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 7325
+        },
+        {
+          "value": 9,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 7675
+        },
+        {
+          "value": 10,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 8025
+        },
+        {
+          "value": 11,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 8375
+        },
+        {
+          "value": 12,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 8725
+        },
+        {
+          "value": 13,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 9075
+        },
+        {
+          "value": 14,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 9425
+        },
+        {
+          "value": 15,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 9775
+        },
+        {
+          "value": 16,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10125
+        },
+        {
+          "value": 17,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10475
+        },
+        {
+          "value": 18,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 10825
+        },
+        {
+          "value": 19,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 11175
+        },
+        {
+          "value": 20,
+          "position": "ready",
+          "duration": 2689,
+          "margin": 11525
+        }
+      ]
+    }
+  ],
+  "gradientRows": 105,
+  "witness": {
+    "scope": "originalLegacyOwnerInIsolatedFixture",
+    "rawIdentity": {
+      "matchId": "hs-y3-final-competition-1",
+      "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+      "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+      "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|ground-defense"
+    },
+    "typedPhysical": {
+      "version": "physical-contact-binding-utf8-v2",
+      "matchId": "hs-y3-final-competition-1",
+      "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+      "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+      "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+    },
+    "canonicalId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut|throw-v1",
+    "canonicalIdLength": 264,
+    "originalActionId": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+    "actors": {
+      "thrower": {
+        "actorId": "player",
+        "position": "SS",
+        "role": "player"
+      },
+      "planned": {
+        "receiver": {
+          "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "position": "1B",
+          "role": "npc"
+        },
+        "target": {
+          "runnerId": "hs-y3-final-regional-opponent-player-05",
+          "base": "first",
+          "kind": "runner"
+        }
+      }
+    },
+    "hold": {
+      "actualReceiverId": null,
+      "actualTarget": {
+        "runnerId": null,
+        "base": null
+      },
+      "release": "held",
+      "plannedReceiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04"
+    },
+    "missingFacts": [
+      "preExecutionFormationPolicyAuthority",
+      "fixedSlotAndVersionPinInProduction",
+      "commonPhysicalClockOrigin",
+      "independentSecureDemandAndDuration",
+      "independentPossessionTouchTime",
+      "capabilityCoefficientCalibration",
+      "runtimeLifecycleAndSaveGuard",
+      "currentPureAsciiIdentityContract"
+    ],
+    "identityShapeAcceptance": "PASS",
+    "fullProductionExecutionAcceptance": "PARTIAL_INSUFFICIENT_SOURCES",
+    "candidateExecutionsOnProductionWitness": 0,
+    "playerUnchanged": true
+  },
+  "readPaths": [
+    "tests/high-school-career-test-context.js",
+    "tests/first-base-receive-active-ground-production-integration-test.js",
+    "index.html",
+    "team-roster-foundation.js",
+    "team-strength-model.js",
+    "high-school-entry-roster-context.js",
+    "high-school-competition-foundation.js",
+    "match-context-foundation.js",
+    "competition-rules.js",
+    "high-school-schedule-opportunity.js",
+    "high-school-exchange-network.js",
+    "high-school-friendly-invitation-producer.js",
+    "high-school-training-camp-producer.js",
+    "high-school-match-opportunity-generation.js",
+    "high-school-opportunity-probability.js",
+    "high-school-opportunity-selection.js",
+    "high-school-relationship-temporal-authority.js",
+    "high-school-relationship-recency.js",
+    "match-game-record.js",
+    "high-school-competition-evidence.js",
+    "county-selection-opportunity.js",
+    "national-selection-pipeline.js",
+    "player.js",
+    "current-state-boundary.js",
+    "time-boundary.js",
+    "relationship-boundary.js",
+    "evaluation-registry.js",
+    "coach-evaluation-boundary.js",
+    "narrative-condition-boundary.js",
+    "evaluation-registry-bootstrap.js",
+    "decision-flow.js",
+    "day-completion-flow.js",
+    "relationship-flow.js",
+    "coach-response-flow.js",
+    "narrative-condition-flow.js",
+    "competition-presentation.js",
+    "baseball-gameplay-prototype-utils.js",
+    "baseball-defense-prototype.js",
+    "baseball-offense-prototype.js",
+    "pitcher-mental-state.js",
+    "pitcher-process-state.js",
+    "pitch-sequencing.js",
+    "pitcher-catcher-tactical-integration.js",
+    "batter-anticipation.js",
+    "batted-ball-physical.js",
+    "batted-ball-outcome-mapping.js",
+    "defensive-opportunity-foundation.js",
+    "defensive-reach-secure-foundation.js",
+    "offensive-plate-approach.js",
+    "pitch-observation-foundation.js",
+    "pitch-sequence-state-foundation.js",
+    "pitch-tactical-interpretation-foundation.js",
+    "pitch-tactical-decision-foundation.js",
+    "pitch-tactical-decision-production-adapter.js",
+    "offensive-tactical-opportunity.js",
+    "offensive-tactical-decision.js",
+    "offensive-tactical-action.js",
+    "offensive-bunt-count-rules.js",
+    "offensive-bunt-execution.js",
+    "force-advancement.js",
+    "defensive-decision-throw-foundation.js",
+    "offensive-bunt-defensive-handoff.js",
+    "defensive-runner-throw-settlement-foundation.js",
+    "batted-ball-ground-defense.js",
+    "batted-ball-line-drive-defense.js",
+    "batted-ball-fly-ball-defense.js",
+    "batted-ball-tag-up-execution.js",
+    "match-situation-lifecycle.js",
+    "plate-decision-foundation.js",
+    "baseball-gameplay-integration.js",
+    "baseball-training-resolver.js",
+    "playing-time-game-exposure.js",
+    "match-experience-development.js",
+    "high-school-competition-reassessment.js",
+    "high-school-year-transition.js",
+    "high-school-career-evaluation.js",
+    "high-school-career-offers.js",
+    "match-development-settlement-presentation.js",
+    "career-spine-contract.js",
+    "career-transition-resolver.js",
+    "career-transition-commit.js",
+    "career-transition-runtime-resolver.js",
+    "career-transition-progression.js",
+    "career-development-runtime-resolver.js",
+    "career-development-progression.js",
+    "career-age22-outcome-resolver.js",
+    "career-save-admission.js",
+    "npc.js",
+    "coach.js",
+    "rival.js",
+    "story.js",
+    "save.js",
+    "ai-plate-appearance-outcome.js",
+    "script.js"
+  ],
+  "runtimeProbe": {
+    "vector": {
+      "status": "ok",
+      "samplerVersion": "physical-slot-sha256-u32be-utf8-v2",
+      "stages": {
+        "positioning": {
+          "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"上|contact|🏟|é\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"positioning\"}",
+          "sha256": "ac454b783e0de526b0513efbad93fce4b922c46a21f760d2f1b82f7736b17c3c",
+          "u32": 2890222456,
+          "unit": 0.6729323548497632
+        },
+        "secure": {
+          "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"上|contact|🏟|é\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"secure\"}",
+          "sha256": "e37b8f25ad08732af4e7468c573c1c6a22d0b39d8878c6e5f262bda48abe8ebb",
+          "u32": 3816525605,
+          "unit": 0.8886041132500395
+        },
+        "touch": {
+          "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-2\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"上|contact|🏟|é\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-utf8-v2\",\"stage\":\"touch\"}",
+          "sha256": "188a4d4d1eab6dc6046f660c1a1705b94a3769e90744151b51d3ffbdbe8ac526",
+          "u32": 411716941,
+          "unit": 0.09586032049264759
+        }
+      }
+    },
+    "execution": {
+      "status": "ok",
+      "runtimeEnabled": false,
+      "inputDigest": "5b6e3893234fbe530e64e4dc9d37b4f9b6d714f311d8cc9fb39471c0d058007b",
+      "stages": {
+        "delivery": {
+          "stage": "delivery",
+          "status": "completed",
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "上|contact|🏟|é",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-utf8-v2"
+            },
+            "playId": "ground-play-1",
+            "thrower": {
+              "actorId": "player",
+              "position": "SS",
+              "role": "player"
+            }
+          },
+          "planned": {
+            "receiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "target": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            }
+          },
+          "actualReceiver": {
+            "actorId": "npc1b",
+            "position": "1B",
+            "role": "npc"
+          },
+          "actualTarget": {
+            "base": "first",
+            "kind": "runner",
+            "runnerId": "batter"
+          },
+          "actionId": "throw-1",
+          "launch": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "contact-clock-1",
+            "status": "known",
+            "ticks": 2000,
+            "exactMicroOffset": "2000000"
+          },
+          "ballArrival": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "contact-clock-1",
+            "status": "known",
+            "ticks": 5000,
+            "exactMicroOffset": "5000000"
+          },
+          "accuracy": "onTarget",
+          "quality": "clean"
+        },
+        "positioning": {
+          "stage": "positioning",
+          "status": "ready",
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "上|contact|🏟|é",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-utf8-v2"
+            },
+            "playId": "ground-play-1",
+            "thrower": {
+              "actorId": "player",
+              "position": "SS",
+              "role": "player"
+            }
+          },
+          "planned": {
+            "receiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "target": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            }
+          },
+          "actualReceiver": {
+            "actorId": "npc1b",
+            "position": "1B",
+            "role": "npc"
+          },
+          "actualTarget": {
+            "base": "first",
+            "kind": "runner",
+            "runnerId": "batter"
+          },
+          "actionId": "position-1",
+          "ready": true,
+          "start": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "contact-clock-1",
+            "status": "known",
+            "ticks": 250,
+            "exactMicroOffset": "250000"
+          },
+          "completion": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "contact-clock-1",
+            "status": "known",
+            "ticks": 1170,
+            "exactMicroOffset": "1170000"
+          },
+          "durationTicks": 920
+        },
+        "secure": {
+          "stage": "secure",
+          "status": "cleanControl",
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "上|contact|🏟|é",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-utf8-v2"
+            },
+            "playId": "ground-play-1",
+            "thrower": {
+              "actorId": "player",
+              "position": "SS",
+              "role": "player"
+            }
+          },
+          "planned": {
+            "receiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "target": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            }
+          },
+          "actualReceiver": {
+            "actorId": "npc1b",
+            "position": "1B",
+            "role": "npc"
+          },
+          "actualTarget": {
+            "base": "first",
+            "kind": "runner",
+            "runnerId": "batter"
+          },
+          "actionId": "receive-1",
+          "attempted": true,
+          "secured": true,
+          "handsMarginMilli": 11750,
+          "attemptTime": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "contact-clock-1",
+            "status": "known",
+            "ticks": 5000,
+            "exactMicroOffset": "5000000"
+          },
+          "completion": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "contact-clock-1",
+            "status": "known",
+            "ticks": 5150,
+            "exactMicroOffset": "5150000"
+          },
+          "possession": {
+            "actorId": "npc1b",
+            "actionId": "receive-1",
+            "sourceThrowActionId": "throw-1"
+          }
+        },
+        "contest": {
+          "stage": "contest",
+          "status": "retirementCandidate",
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "上|contact|🏟|é",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-utf8-v2"
+            },
+            "playId": "ground-play-1",
+            "thrower": {
+              "actorId": "player",
+              "position": "SS",
+              "role": "player"
+            }
+          },
+          "planned": {
+            "receiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "target": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            }
+          },
+          "actualReceiver": {
+            "actorId": "npc1b",
+            "position": "1B",
+            "role": "npc"
+          },
+          "actualTarget": {
+            "base": "first",
+            "kind": "runner",
+            "runnerId": "batter"
+          },
+          "actionId": "touch-1",
+          "completion": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "contact-clock-1",
+            "status": "known",
+            "ticks": 5251,
+            "exactMicroOffset": "5251000"
+          },
+          "runnerArrival": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "contact-clock-1",
+            "status": "known",
+            "ticks": 8000,
+            "exactMicroOffset": "8000000"
+          },
+          "timingMarginTicks": 2749,
+          "candidate": {
+            "kind": "unappliedRetirementCandidate",
+            "target": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            },
+            "actor": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "actionId": "touch-1",
+            "possessionActionId": "receive-1",
+            "initialOuts": 0,
+            "wouldBeThirdOut": false,
+            "legalScoring": "requiresExistingThirdOutOwner"
+          }
+        }
+      },
+      "scorerFacts": {
+        "status": "insufficientScorerFacts",
+        "referenceVersion": "ordinary-effort-reference-v1",
+        "officialScorerEligibility": "insufficient",
+        "officialError": null,
+        "wouldBeAssist": null
+      },
+      "application": {
+        "matchStateWrites": 0,
+        "gameRecordWrites": 0,
+        "rngCallbacks": 0,
+        "actualRetirements": 0
+      }
+    },
+    "encoding": "{\"leg\":{\"actionId\":\"receive-1\",\"parentActionId\":null,\"physicalSlot\":\"primaryThrow\",\"sourceThrowActionId\":\"throw-1\"},\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"上|contact|🏟|é\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-utf8-v2\"},\"playId\":\"ground-play-1\",\"thrower\":{\"actorId\":\"player\",\"position\":\"SS\",\"role\":\"player\"}}",
+    "sha": "3499d0a8a0e8554bc14dbb93bf3581f894806980b99d28870074b789d24962fe",
+    "timeline": {
+      "status": "ok",
+      "timeline": {
+        "positioningStart": {
+          "version": "crt-physical-play-integer-ticks-v2-2",
+          "originId": "contact-clock-1",
+          "status": "known",
+          "ticks": 250,
+          "exactMicroOffset": "250000"
+        },
+        "acquisitionCompletion": {
+          "version": "crt-physical-play-integer-ticks-v2-2",
+          "originId": "contact-clock-1",
+          "status": "known",
+          "ticks": 1000,
+          "exactMicroOffset": "1000000"
+        },
+        "throwLaunch": {
+          "version": "crt-physical-play-integer-ticks-v2-2",
+          "originId": "contact-clock-1",
+          "status": "known",
+          "ticks": 2000,
+          "exactMicroOffset": "2000000"
+        },
+        "ballArrival": {
+          "version": "crt-physical-play-integer-ticks-v2-2",
+          "originId": "contact-clock-1",
+          "status": "known",
+          "ticks": 5000,
+          "exactMicroOffset": "5000000"
+        },
+        "receiveAttempt": {
+          "version": "crt-physical-play-integer-ticks-v2-2",
+          "originId": "contact-clock-1",
+          "status": "known",
+          "ticks": 5000,
+          "exactMicroOffset": "5000000"
+        },
+        "positioningCompletion": {
+          "version": "crt-physical-play-integer-ticks-v2-2",
+          "originId": "contact-clock-1",
+          "status": "known",
+          "ticks": 1000,
+          "exactMicroOffset": "1000000"
+        },
+        "secureCompletion": {
+          "version": "crt-physical-play-integer-ticks-v2-2",
+          "originId": "contact-clock-1",
+          "status": "known",
+          "ticks": 5150,
+          "exactMicroOffset": "5150000"
+        },
+        "baseTouch": {
+          "version": "crt-physical-play-integer-ticks-v2-2",
+          "originId": "contact-clock-1",
+          "status": "known",
+          "ticks": 5250,
+          "exactMicroOffset": "5250000"
+        },
+        "runnerArrival": {
+          "version": "crt-physical-play-integer-ticks-v2-2",
+          "originId": "contact-clock-1",
+          "status": "known",
+          "ticks": 8000,
+          "exactMicroOffset": "8000000"
+        }
+      },
+      "launchLocalPositioning": {
+        "version": "crt-physical-play-integer-ticks-v2-2",
+        "originId": "contact-clock-1",
+        "status": "known",
+        "ticks": -1750,
+        "exactMicroOffset": "-1750000"
+      },
+      "authoritativeLocalClock": false,
+      "actualRetirements": 0,
+      "runtimeEnabled": false
+    },
+    "hold": {
+      "status": "ok",
+      "runtimeEnabled": false,
+      "inputDigest": "d44ee52707b12f7e83b63063800fc86c137bb9d635c7d3db51adb7fd07ee6710",
+      "stages": {
+        "delivery": {
+          "stage": "delivery",
+          "status": "notAttempted",
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "contact-1",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-utf8-v2"
+            },
+            "playId": "ground-play-1",
+            "thrower": {
+              "actorId": "player",
+              "position": "SS",
+              "role": "player"
+            }
+          },
+          "planned": {
+            "receiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "target": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            }
+          },
+          "actualReceiver": null,
+          "actualTarget": null,
+          "actionId": "throw-1",
+          "reason": "hold"
+        },
+        "positioning": {
+          "stage": "positioning",
+          "status": "positionedWithoutReception",
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "contact-1",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-utf8-v2"
+            },
+            "playId": "ground-play-1",
+            "thrower": {
+              "actorId": "player",
+              "position": "SS",
+              "role": "player"
+            }
+          },
+          "planned": {
+            "receiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "target": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            }
+          },
+          "actualReceiver": null,
+          "actualTarget": null,
+          "actionId": "position-1",
+          "ready": false,
+          "start": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "contact-clock-1",
+            "status": "known",
+            "ticks": 250,
+            "exactMicroOffset": "250000"
+          },
+          "completion": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "contact-clock-1",
+            "status": "known",
+            "ticks": 1120,
+            "exactMicroOffset": "1120000"
+          },
+          "durationTicks": 870
+        },
+        "secure": {
+          "stage": "secure",
+          "status": "notAttempted",
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "contact-1",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-utf8-v2"
+            },
+            "playId": "ground-play-1",
+            "thrower": {
+              "actorId": "player",
+              "position": "SS",
+              "role": "player"
+            }
+          },
+          "planned": {
+            "receiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "target": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            }
+          },
+          "actualReceiver": null,
+          "actualTarget": null,
+          "actionId": "receive-1",
+          "attempted": false,
+          "secured": false,
+          "reason": "noReceivableDeliveryOrReadiness"
+        },
+        "contest": {
+          "stage": "contest",
+          "status": "notAttempted",
+          "identity": {
+            "leg": {
+              "actionId": "receive-1",
+              "parentActionId": null,
+              "physicalSlot": "primaryThrow",
+              "sourceThrowActionId": "throw-1"
+            },
+            "physical": {
+              "contactId": "contact-1",
+              "matchId": "match-1",
+              "physicalIdentity": "contact-1",
+              "plateAppearanceId": "pa-1",
+              "version": "physical-contact-binding-utf8-v2"
+            },
+            "playId": "ground-play-1",
+            "thrower": {
+              "actorId": "player",
+              "position": "SS",
+              "role": "player"
+            }
+          },
+          "planned": {
+            "receiver": {
+              "actorId": "npc1b",
+              "position": "1B",
+              "role": "npc"
+            },
+            "target": {
+              "base": "first",
+              "kind": "runner",
+              "runnerId": "batter"
+            }
+          },
+          "actualReceiver": null,
+          "actualTarget": null,
+          "actionId": "touch-1",
+          "candidate": null,
+          "reason": "noSecuredPossession"
+        }
+      },
+      "scorerFacts": {
+        "status": "insufficientScorerFacts",
+        "referenceVersion": "ordinary-effort-reference-v1",
+        "officialScorerEligibility": "insufficient",
+        "officialError": null,
+        "wouldBeAssist": null
+      },
+      "application": {
+        "matchStateWrites": 0,
+        "gameRecordWrites": 0,
+        "rngCallbacks": 0,
+        "actualRetirements": 0
+      }
+    }
+  },
+  "modelPolicy": "uncalibrated versioned pure arithmetic; not measured success rates",
+  "modelMigrationDifference": "new execution/physical/sampler namespaces intentionally yield new vectors",
+  "formalShadowSimulation": false,
+  "runtimeEnabled": false,
+  "runner": {
+    "baseline": "10c738ce380c2cfd8cce6cb796b3a1b577e437dd",
+    "node": "v24.19.0",
+    "sourceHashes": {
+      "receiver-execution-v2-2-foundation.js": {
+        "size": 31010,
+        "sha256": "e3d66df106bdac3d9d3697c0a276bf2b328ef23470379c21b6807e7c6cc9769d"
+      },
+      "tests/receiver-execution-v2-2-contract-test.cjs": {
+        "size": 36216,
+        "sha256": "09fd7ae21eb6f18602709d7dd90956332fa1bac2ed0c4be5cd3a32110bbfd708"
+      },
+      "tests/receiver-execution-v2-sprint-10a3a-runner.cjs": {
+        "size": 6800,
+        "sha256": "988ae6f58d26ca62c3e9a2032d1157a1ac39fee291f7a018cc05c5a2dd52654a"
+      },
+      "tests/receiver-execution-v2-sprint-10a3a-browser-probe.cjs": {
+        "size": 4721,
+        "sha256": "89b3688bcda9a5fc06969e6bcfb3b31b0e9e7a9c387d671ad2c7957981cc906f"
+      }
+    },
+    "capturePolicy": "exclusive-create",
+    "fullRepository": "NOT_RUN"
+  }
+}

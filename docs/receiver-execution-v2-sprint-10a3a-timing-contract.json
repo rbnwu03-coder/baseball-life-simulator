@@ -1,0 +1,189 @@
+{
+  "version": "crt-physical-play-integer-ticks-v2-2",
+  "origin": "existing physical-play owner contact anchor, proposed clock, not currently emitted Production authority",
+  "anchorVersion": "physical-play-contact-anchor-v1",
+  "timestamps": [
+    "contactAnchor",
+    "positioningStart",
+    "acquisitionCompletion",
+    "throwLaunch",
+    "ballArrival",
+    "receiveAttempt",
+    "positioningCompletion",
+    "secureCompletion",
+    "baseTouch",
+    "runnerArrival"
+  ],
+  "sourceDecimal": "strict decimal text, <=18 integral digits and <=6 fractional digits; no exponent/leading plus/negative zero",
+  "arithmetic": "BigInt source microCRT minus exact anchor before half-away-from-zero to1000 ticks/CRT",
+  "duration": "nonnegative; exact causal comparison before quantization",
+  "prelaunch": "global positioningStart .25CRT and launch2CRT -> local -1.75CRT, no clamp. Precontact start requires explicit preContactAuthorized plus sourced context.",
+  "bounds": {
+    "relativeTicks": 1000000000,
+    "perTimestampErrorMaxTicks": "0.5",
+    "raceMarginErrorMaxTicks": "1.0",
+    "signedOffsetChecks": 2001
+  },
+  "unknown": "retained reason; no known downstream time without required upstream; unknown anchor insufficient",
+  "ordering": [
+    "acquisition <= launch",
+    "launch <= ball",
+    "positionStart <= completion",
+    "ball <= receive",
+    "positioningReady at ball",
+    "receive <= secure",
+    "secure <= touch"
+  ],
+  "relay": "same full anchor and physical identity, no per-leg reset; prior exact contest completion <= next acquisition/launch",
+  "tie": "exact tick tie no candidate; rounding may collapse subtick positive margins, explicitly tie",
+  "runner": "can precede contact or touch; never clamp",
+  "legacy": "legacy-v1-relative insufficient, no implicit origin0 or ordinal conversion",
+  "formalTimingSeam": "UNCHANGED_NOT_CONNECTED",
+  "exampleFixture": {
+    "timing": {
+      "version": "crt-physical-play-integer-ticks-v2-2",
+      "sourceDomain": "physicalContactClock",
+      "anchor": {
+        "version": "physical-play-contact-anchor-v1",
+        "originId": "contact-clock-1",
+        "physical": {
+          "version": "physical-contact-binding-utf8-v2",
+          "matchId": "match-1",
+          "plateAppearanceId": "pa-1",
+          "contactId": "contact-1",
+          "physicalIdentity": "contact-1"
+        },
+        "status": "known",
+        "decimal": "100"
+      },
+      "times": {
+        "positioningStart": {
+          "originId": "contact-clock-1",
+          "status": "known",
+          "decimal": "100.25"
+        },
+        "acquisitionCompletion": {
+          "originId": "contact-clock-1",
+          "status": "known",
+          "decimal": "101"
+        },
+        "throwLaunch": {
+          "originId": "contact-clock-1",
+          "status": "known",
+          "decimal": "102"
+        },
+        "ballArrival": {
+          "originId": "contact-clock-1",
+          "status": "known",
+          "decimal": "105"
+        },
+        "receiveAttempt": {
+          "originId": "contact-clock-1",
+          "status": "known",
+          "decimal": "105"
+        },
+        "positioningCompletion": {
+          "originId": "contact-clock-1",
+          "status": "known",
+          "decimal": "101"
+        },
+        "secureCompletion": {
+          "originId": "contact-clock-1",
+          "status": "known",
+          "decimal": "105.15"
+        },
+        "baseTouch": {
+          "originId": "contact-clock-1",
+          "status": "known",
+          "decimal": "105.25"
+        },
+        "runnerArrival": {
+          "originId": "contact-clock-1",
+          "status": "known",
+          "decimal": "108"
+        }
+      }
+    },
+    "deliveryCompleted": true,
+    "possession": true,
+    "contact": true
+  },
+  "exampleResult": {
+    "status": "ok",
+    "timeline": {
+      "positioningStart": {
+        "version": "crt-physical-play-integer-ticks-v2-2",
+        "originId": "contact-clock-1",
+        "status": "known",
+        "ticks": 250,
+        "exactMicroOffset": "250000"
+      },
+      "acquisitionCompletion": {
+        "version": "crt-physical-play-integer-ticks-v2-2",
+        "originId": "contact-clock-1",
+        "status": "known",
+        "ticks": 1000,
+        "exactMicroOffset": "1000000"
+      },
+      "throwLaunch": {
+        "version": "crt-physical-play-integer-ticks-v2-2",
+        "originId": "contact-clock-1",
+        "status": "known",
+        "ticks": 2000,
+        "exactMicroOffset": "2000000"
+      },
+      "ballArrival": {
+        "version": "crt-physical-play-integer-ticks-v2-2",
+        "originId": "contact-clock-1",
+        "status": "known",
+        "ticks": 5000,
+        "exactMicroOffset": "5000000"
+      },
+      "receiveAttempt": {
+        "version": "crt-physical-play-integer-ticks-v2-2",
+        "originId": "contact-clock-1",
+        "status": "known",
+        "ticks": 5000,
+        "exactMicroOffset": "5000000"
+      },
+      "positioningCompletion": {
+        "version": "crt-physical-play-integer-ticks-v2-2",
+        "originId": "contact-clock-1",
+        "status": "known",
+        "ticks": 1000,
+        "exactMicroOffset": "1000000"
+      },
+      "secureCompletion": {
+        "version": "crt-physical-play-integer-ticks-v2-2",
+        "originId": "contact-clock-1",
+        "status": "known",
+        "ticks": 5150,
+        "exactMicroOffset": "5150000"
+      },
+      "baseTouch": {
+        "version": "crt-physical-play-integer-ticks-v2-2",
+        "originId": "contact-clock-1",
+        "status": "known",
+        "ticks": 5250,
+        "exactMicroOffset": "5250000"
+      },
+      "runnerArrival": {
+        "version": "crt-physical-play-integer-ticks-v2-2",
+        "originId": "contact-clock-1",
+        "status": "known",
+        "ticks": 8000,
+        "exactMicroOffset": "8000000"
+      }
+    },
+    "launchLocalPositioning": {
+      "version": "crt-physical-play-integer-ticks-v2-2",
+      "originId": "contact-clock-1",
+      "status": "known",
+      "ticks": -1750,
+      "exactMicroOffset": "-1750000"
+    },
+    "authoritativeLocalClock": false,
+    "actualRetirements": 0,
+    "runtimeEnabled": false
+  }
+}
