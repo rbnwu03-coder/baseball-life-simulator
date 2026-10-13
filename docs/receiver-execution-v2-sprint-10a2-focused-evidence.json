@@ -1,0 +1,3337 @@
+{
+  "suite": "receiver-production-source-timing-design-sprint-10a2",
+  "summary": {
+    "total": 96,
+    "passed": 96,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "name": "real before-execution physical/actor snapshot outs 0",
+      "status": "PASS"
+    },
+    {
+      "name": "actual Unicode identity is preserved and current S8 rejects it outs 0",
+      "status": "PASS"
+    },
+    {
+      "name": "post-execution retains original PA runner and fixed slot outs 0",
+      "status": "PASS"
+    },
+    {
+      "name": "real before-execution physical/actor snapshot outs 1",
+      "status": "PASS"
+    },
+    {
+      "name": "actual Unicode identity is preserved and current S8 rejects it outs 1",
+      "status": "PASS"
+    },
+    {
+      "name": "post-execution retains original PA runner and fixed slot outs 1",
+      "status": "PASS"
+    },
+    {
+      "name": "real before-execution physical/actor snapshot outs 2",
+      "status": "PASS"
+    },
+    {
+      "name": "actual Unicode identity is preserved and current S8 rejects it outs 2",
+      "status": "PASS"
+    },
+    {
+      "name": "post-execution retains original PA runner and fixed slot outs 2",
+      "status": "PASS"
+    },
+    {
+      "name": "original offline never fills independent source gaps",
+      "status": "PASS"
+    },
+    {
+      "name": "original acquisition failure never fills independent source gaps",
+      "status": "PASS"
+    },
+    {
+      "name": "original legacy receiver failure never fills independent source gaps",
+      "status": "PASS"
+    },
+    {
+      "name": "original fast runner already safe never fills independent source gaps",
+      "status": "PASS"
+    },
+    {
+      "name": "actual hold preserves null canonical receiver and target",
+      "status": "PASS"
+    },
+    {
+      "name": "physical handoff copy tamper",
+      "status": "PASS"
+    },
+    {
+      "name": "PA physical copy tamper",
+      "status": "PASS"
+    },
+    {
+      "name": "unsupported legacy synthetic handoff",
+      "status": "PASS"
+    },
+    {
+      "name": "primary SS opportunity actor mismatch",
+      "status": "PASS"
+    },
+    {
+      "name": "NPC1B context/roster mismatch",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid active lineup cannot become receiver source",
+      "status": "PASS"
+    },
+    {
+      "name": "occupied initial bases rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "source must use original PA batter",
+      "status": "PASS"
+    },
+    {
+      "name": "runner obligation tamper",
+      "status": "PASS"
+    },
+    {
+      "name": "preload sample rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "malformed sample log cannot pose empty pre-execution evidence",
+      "status": "PASS"
+    },
+    {
+      "name": "partial original execution facts cannot pose before snapshot",
+      "status": "PASS"
+    },
+    {
+      "name": "executing snapshot cannot pose before execution",
+      "status": "PASS"
+    },
+    {
+      "name": "unrelated route rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "malformed present provenance scope rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "post snapshot cannot reconstruct missing original anchor from settled outs",
+      "status": "PASS"
+    },
+    {
+      "name": "serialized anchor tamper rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical throw receiver tamper rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "canonical route/selection copy mismatch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "completed raw action cannot hide absent canonical throw",
+      "status": "PASS"
+    },
+    {
+      "name": "throw action physical tamper rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing original action provenance remains insufficient",
+      "status": "PASS"
+    },
+    {
+      "name": "original sample/action copy mismatch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "real canonical throw ID also exceeds old isolated adapter id limit",
+      "status": "PASS"
+    },
+    {
+      "name": "raw capability aliases are source values, not calibrated skills",
+      "status": "PASS"
+    },
+    {
+      "name": "absent raw NPC attribute is C and never padded",
+      "status": "PASS"
+    },
+    {
+      "name": "repeat and JSON source round-trip preserve complete observation",
+      "status": "PASS"
+    },
+    {
+      "name": "NEW deterministic formation baseGuard",
+      "status": "PASS"
+    },
+    {
+      "name": "NEW deterministic formation firstBaseShade",
+      "status": "PASS"
+    },
+    {
+      "name": "NEW deterministic formation coverFromInterior",
+      "status": "PASS"
+    },
+    {
+      "name": "NEW deterministic formation delayedCover",
+      "status": "PASS"
+    },
+    {
+      "name": "NEW deterministic formation unassigned",
+      "status": "PASS"
+    },
+    {
+      "name": "formation seed does not change with actor/assignment",
+      "status": "PASS"
+    },
+    {
+      "name": "formation rejects after execution",
+      "status": "PASS"
+    },
+    {
+      "name": "formation rejects unknown intent",
+      "status": "PASS"
+    },
+    {
+      "name": "formation rejects production scope",
+      "status": "PASS"
+    },
+    {
+      "name": "formation rejects unknown version",
+      "status": "PASS"
+    },
+    {
+      "name": "formation cannot consume route success or retry",
+      "status": "PASS"
+    },
+    {
+      "name": "physical origin C supports pre-launch movement without clamp",
+      "status": "PASS"
+    },
+    {
+      "name": "all proposed timestamps share one immutable physical origin",
+      "status": "PASS"
+    },
+    {
+      "name": "receiver movement before contact may be signed in proposed version",
+      "status": "PASS"
+    },
+    {
+      "name": "already-arrived runner remains negative without reroll",
+      "status": "PASS"
+    },
+    {
+      "name": "exact tie cannot imply actual out",
+      "status": "PASS"
+    },
+    {
+      "name": "subtick race may collapse to tie; not called lossless v1 migration",
+      "status": "PASS"
+    },
+    {
+      "name": "origin subtraction happens before quantization",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown throwLaunch preserved, never zero-filled",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown ballArrival preserved, never zero-filled",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown positioningStart preserved, never zero-filled",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown positioningCompletion preserved, never zero-filled",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown receiveAttempt preserved, never zero-filled",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown secureCompletion preserved, never zero-filled",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown baseTouchCompletion preserved, never zero-filled",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown runnerArrival preserved, never zero-filled",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown common origin blocks clock interpretation",
+      "status": "PASS"
+    },
+    {
+      "name": "v1 relative values never acquire a fabricated new origin",
+      "status": "PASS"
+    },
+    {
+      "name": "v1 ordinal window rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "wrong physical clock source rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "reject exact causal reversal throwLaunch -> ballArrival",
+      "status": "PASS"
+    },
+    {
+      "name": "reject exact causal reversal positioningStart -> positioningCompletion",
+      "status": "PASS"
+    },
+    {
+      "name": "reject exact causal reversal ballArrival -> receiveAttempt",
+      "status": "PASS"
+    },
+    {
+      "name": "reject exact causal reversal positioningCompletion -> receiveAttempt",
+      "status": "PASS"
+    },
+    {
+      "name": "reject exact causal reversal receiveAttempt -> secureCompletion",
+      "status": "PASS"
+    },
+    {
+      "name": "reject exact causal reversal secureCompletion -> baseTouchCompletion",
+      "status": "PASS"
+    },
+    {
+      "name": "subtick negative causal duration rejected before rounding",
+      "status": "PASS"
+    },
+    {
+      "name": "no possession cannot produce touch time",
+      "status": "PASS"
+    },
+    {
+      "name": "no legal contact cannot produce touch time",
+      "status": "PASS"
+    },
+    {
+      "name": "late positioning cannot be relabeled as a hands attempt",
+      "status": "PASS"
+    },
+    {
+      "name": "hands attempt time remains original receivable ball arrival",
+      "status": "PASS"
+    },
+    {
+      "name": "no delivery has no receive Secure or touch completion",
+      "status": "PASS"
+    },
+    {
+      "name": "strict decimal rejects -0",
+      "status": "PASS"
+    },
+    {
+      "name": "strict decimal rejects 01",
+      "status": "PASS"
+    },
+    {
+      "name": "strict decimal rejects 1e3",
+      "status": "PASS"
+    },
+    {
+      "name": "strict decimal rejects NaN",
+      "status": "PASS"
+    },
+    {
+      "name": "strict decimal rejects 0.0000001",
+      "status": "PASS"
+    },
+    {
+      "name": "strict decimal rejects 1000000000",
+      "status": "PASS"
+    },
+    {
+      "name": "bounded relative overflow rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "clock relay offsets do not redefine contact origin",
+      "status": "PASS"
+    },
+    {
+      "name": "current S8 contract continues to reject new timing version",
+      "status": "PASS"
+    },
+    {
+      "name": "current S8 nonnegative positioning contract remains unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "clock repeat JSON round-trip and independent jitless process agree",
+      "status": "PASS"
+    },
+    {
+      "name": "prototype cannot consume Math.random or mutate actual legacy Match",
+      "status": "PASS"
+    },
+    {
+      "name": "getter input is rejected without reads",
+      "status": "PASS"
+    }
+  ],
+  "observations": [
+    {
+      "name": "before outs 0",
+      "sourceScope": "ORIGINAL_LEGACY_OWNER_IN_ISOLATED_EXISTING_FIXTURE_NOT_NATURAL_COHORT",
+      "result": {
+        "status": "insufficient",
+        "code": "productionSourceCompletenessBlocked",
+        "runtimeEnabled": false,
+        "observationPhase": "beforeExecution",
+        "sourceSnapshotDigest": "431e227e5b2ac8e7f801b0b4a417abd2701f5b0b8a033e1c4d89b078ce539d60",
+        "anchor": {
+          "kind": "detachedPreExecutionSourceObservation",
+          "body": {
+            "version": "receiver-source-observation-v1",
+            "rawBindings": {
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|ground-defense"
+            },
+            "proposedPhysical": {
+              "version": "physical-contact-binding-utf8-v2",
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+            },
+            "physicalSlot": "primaryThrow",
+            "initialOuts": 0,
+            "initialBases": [
+              null,
+              null,
+              null
+            ],
+            "runner": {
+              "runnerId": "hs-y3-final-regional-opponent-player-05",
+              "originBase": "batter",
+              "targetBase": "first",
+              "movementDecision": "commitAdvance",
+              "startQuality": "normalStart",
+              "movementState": "advancing",
+              "timingProfile": "late",
+              "speed": 1,
+              "isForced": true,
+              "forcedMovementTarget": "first",
+              "forceReason": "batterRunnerRequiredToFirst",
+              "chainDepth": 0
+            },
+            "ssActor": {
+              "playerId": "player",
+              "id": "player",
+              "name": "Career fixture",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "SS",
+              "secondaryPositions": [],
+              "bats": "R",
+              "throws": "R",
+              "contact": 8,
+              "power": 4,
+              "speed": 8,
+              "defense": 10,
+              "arm": 8,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "canonical-player",
+              "rosterTeamId": "school-powerhouse-409d352a",
+              "position": "游擊手",
+              "defensivePosition": "SS"
+            },
+            "npcActor": {
+              "playerId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "name": "上田",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 8,
+              "power": 8,
+              "speed": 5,
+              "defense": 10,
+              "arm": 10,
+              "pitching": 4,
+              "pitchingProfile": {
+                "effectiveness": 4,
+                "control": 3,
+                "stuff": 4
+              },
+              "source": "simulation-roster",
+              "position": "一壘手",
+              "defensivePosition": "1B"
+            },
+            "originalDefenseTeam": "home",
+            "rosterDigest": "3f420e464c1629a98fc3b9754379b770af0ebe657fe99661e749f24120a6b780",
+            "legalRoutes": [
+              "secureFirstBaseOut",
+              "holdBall"
+            ],
+            "sourcePhase": "beforeExecution",
+            "sourceScope": "originalLegacyOwnerInIsolatedFixture",
+            "formationSnapshot": null
+          },
+          "digest": "cccb1f0d60498f621520a4b23cb89fafb57e14279bb289845a7bf7e002e14235"
+        },
+        "binding": {
+          "version": "physical-contact-binding-utf8-v2",
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+        },
+        "rawBindings": {
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|ground-defense"
+        },
+        "fixedSlot": {
+          "value": "primaryThrow",
+          "classification": "B_PROPOSED_MAPPING",
+          "formallyPinned": false
+        },
+        "originalSample": null,
+        "delivery": null,
+        "rawNpcCapabilities": {
+          "defense": 10,
+          "speed": 5,
+          "arm": 10,
+          "contact": 8,
+          "attributeSources": {
+            "defense": "A",
+            "speed": "A",
+            "arm": "A",
+            "contact": "A"
+          },
+          "scope": "originalActiveRosterObservation"
+        },
+        "timingSource": {
+          "status": "insufficient",
+          "reason": "v1HasNoApprovedCommonLaunchOrigin",
+          "legacyVersion": null,
+          "originalRunnerRelativeArrival": null,
+          "originalBallRelativeArrival": null,
+          "receiverCompletionConsumed": false
+        },
+        "pureCompatibility": {
+          "status": "invalid",
+          "code": "invalidPhysicalIdentity",
+          "acceptedNewPhysicalVersion": false
+        },
+        "missingFacts": [
+          "preExecutionFormationPolicyAuthority",
+          "fixedSlotAndVersionPinInProduction",
+          "commonPhysicalClockOrigin",
+          "independentSecureDemandAndDuration",
+          "independentPossessionTouchTime",
+          "capabilityCoefficientCalibration",
+          "runtimeLifecycleAndSaveGuard",
+          "currentPureAsciiIdentityContract"
+        ],
+        "sealedCandidateInput": null,
+        "candidateExecutionCalls": 0,
+        "formalProductionAuthority": false,
+        "writes": {
+          "match": 0,
+          "record": 0,
+          "evaluation": 0,
+          "rng": 0
+        }
+      }
+    },
+    {
+      "name": "post outs 0",
+      "sourceScope": "ORIGINAL_LEGACY_OWNER_IN_ISOLATED_EXISTING_FIXTURE_NOT_NATURAL_COHORT",
+      "result": {
+        "status": "insufficient",
+        "code": "productionSourceCompletenessBlocked",
+        "runtimeEnabled": false,
+        "observationPhase": "postExecution",
+        "sourceSnapshotDigest": "c8591cf5319f4497777c47bea0dc038f3b961573a67ba42d1477e4b7ab8f41ce",
+        "anchor": {
+          "kind": "detachedPreExecutionSourceObservation",
+          "body": {
+            "version": "receiver-source-observation-v1",
+            "rawBindings": {
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|ground-defense"
+            },
+            "proposedPhysical": {
+              "version": "physical-contact-binding-utf8-v2",
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+            },
+            "physicalSlot": "primaryThrow",
+            "initialOuts": 0,
+            "initialBases": [
+              null,
+              null,
+              null
+            ],
+            "runner": {
+              "runnerId": "hs-y3-final-regional-opponent-player-05",
+              "originBase": "batter",
+              "targetBase": "first",
+              "movementDecision": "commitAdvance",
+              "startQuality": "normalStart",
+              "movementState": "advancing",
+              "timingProfile": "late",
+              "speed": 1,
+              "isForced": true,
+              "forcedMovementTarget": "first",
+              "forceReason": "batterRunnerRequiredToFirst",
+              "chainDepth": 0
+            },
+            "ssActor": {
+              "playerId": "player",
+              "id": "player",
+              "name": "Career fixture",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "SS",
+              "secondaryPositions": [],
+              "bats": "R",
+              "throws": "R",
+              "contact": 8,
+              "power": 4,
+              "speed": 8,
+              "defense": 10,
+              "arm": 8,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "canonical-player",
+              "rosterTeamId": "school-powerhouse-409d352a",
+              "position": "游擊手",
+              "defensivePosition": "SS"
+            },
+            "npcActor": {
+              "playerId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "name": "上田",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 8,
+              "power": 8,
+              "speed": 5,
+              "defense": 10,
+              "arm": 10,
+              "pitching": 4,
+              "pitchingProfile": {
+                "effectiveness": 4,
+                "control": 3,
+                "stuff": 4
+              },
+              "source": "simulation-roster",
+              "position": "一壘手",
+              "defensivePosition": "1B"
+            },
+            "originalDefenseTeam": "home",
+            "rosterDigest": "3f420e464c1629a98fc3b9754379b770af0ebe657fe99661e749f24120a6b780",
+            "legalRoutes": [
+              "secureFirstBaseOut",
+              "holdBall"
+            ],
+            "sourcePhase": "beforeExecution",
+            "sourceScope": "originalLegacyOwnerInIsolatedFixture",
+            "formationSnapshot": null
+          },
+          "digest": "cccb1f0d60498f621520a4b23cb89fafb57e14279bb289845a7bf7e002e14235"
+        },
+        "binding": {
+          "version": "physical-contact-binding-utf8-v2",
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+        },
+        "rawBindings": {
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|ground-defense"
+        },
+        "fixedSlot": {
+          "value": "primaryThrow",
+          "classification": "B_PROPOSED_MAPPING",
+          "formallyPinned": false
+        },
+        "originalSample": {
+          "value": 0.8,
+          "binary64": "3fe999999999999a",
+          "source": "shortstopExecution.sample",
+          "callbackNotInvokedByAdapter": true
+        },
+        "delivery": {
+          "classification": "A",
+          "canonicalThrow": {
+            "version": "defensive-decision-throw-v1",
+            "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut|throw-v1",
+            "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut",
+            "routeId": "secureFirstBaseOut",
+            "throwerId": "player",
+            "throwerPosition": "SS",
+            "targetBase": "first",
+            "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+            "receiverPosition": "1B",
+            "throwDemand": {
+              "distanceClass": "medium",
+              "strength": 5,
+              "accuracy": 4,
+              "arrivalPressure": 0,
+              "controlPressure": 0,
+              "units": "coarseRelativeDemand"
+            },
+            "strengthMargin": 4.966289856471121,
+            "accuracyMargin": 6.592274361290038,
+            "throwAttempted": true,
+            "throwQuality": "onTarget",
+            "releaseQuality": "readyRelease",
+            "ballArrivalState": "atReceiverTarget",
+            "inputs": {
+              "arm": 10,
+              "throwing": 10,
+              "transferState": "ready",
+              "secureQuality": "cleanControl"
+            },
+            "variationEvidence": {
+              "consumed": true,
+              "strength": {
+                "namespace": "defensive-throw-strength-v1",
+                "roll": 0.5168550717644393,
+                "adjustment": -0.03371014352887869
+              },
+              "accuracy": {
+                "namespace": "defensive-throw-accuracy-v1",
+                "roll": 0.20386281935498118,
+                "adjustment": 0.5922743612900376
+              }
+            },
+            "authority": "throwCapabilities+coarseDemand+separateVariation"
+          },
+          "originalThrowActionId": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "originalActionProvenance": {
+            "authority": "existingInfieldExecution+activeRoster",
+            "sample": 0.8,
+            "consumedRng": false,
+            "capabilities": {
+              "fielding": 10,
+              "reaction": 10,
+              "range": 10,
+              "arm": 10,
+              "throwing": 10,
+              "decision": 10,
+              "catching": 10
+            },
+            "timing": {
+              "routeWindow": null,
+              "timingClassification": "defenseClearlyAhead",
+              "timingMargin": 4.55,
+              "relayToFirstWindow": "normal",
+              "batterSpeed": 1
+            },
+            "sourceStage": "firstThrow"
+          },
+          "actionPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "plannedReceiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "plannedTarget": {
+            "runnerId": "hs-y3-final-regional-opponent-player-05",
+            "base": "first"
+          },
+          "actualDeliveryReceiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "actualDeliveryTarget": {
+            "runnerId": "hs-y3-final-regional-opponent-player-05",
+            "base": "first"
+          },
+          "status": "completed",
+          "canonicalSourceAbsentReason": null,
+          "legacyReceiverOutcomeConsumed": false
+        },
+        "rawNpcCapabilities": {
+          "defense": 10,
+          "speed": 5,
+          "arm": 10,
+          "contact": 8,
+          "attributeSources": {
+            "defense": "A",
+            "speed": "A",
+            "arm": "A",
+            "contact": "A"
+          },
+          "scope": "originalActiveRosterObservation"
+        },
+        "timingSource": {
+          "status": "insufficient",
+          "reason": "v1HasNoApprovedCommonLaunchOrigin",
+          "legacyVersion": "defensive-runner-throw-settlement-v1",
+          "originalRunnerRelativeArrival": 9.55,
+          "originalBallRelativeArrival": 5,
+          "receiverCompletionConsumed": false
+        },
+        "pureCompatibility": {
+          "status": "invalid",
+          "code": "invalidPhysicalIdentity",
+          "acceptedNewPhysicalVersion": false
+        },
+        "missingFacts": [
+          "preExecutionFormationPolicyAuthority",
+          "fixedSlotAndVersionPinInProduction",
+          "commonPhysicalClockOrigin",
+          "independentSecureDemandAndDuration",
+          "independentPossessionTouchTime",
+          "capabilityCoefficientCalibration",
+          "runtimeLifecycleAndSaveGuard",
+          "currentPureAsciiIdentityContract"
+        ],
+        "sealedCandidateInput": null,
+        "candidateExecutionCalls": 0,
+        "formalProductionAuthority": false,
+        "writes": {
+          "match": 0,
+          "record": 0,
+          "evaluation": 0,
+          "rng": 0
+        }
+      }
+    },
+    {
+      "name": "before outs 1",
+      "sourceScope": "ORIGINAL_LEGACY_OWNER_IN_ISOLATED_EXISTING_FIXTURE_NOT_NATURAL_COHORT",
+      "result": {
+        "status": "insufficient",
+        "code": "productionSourceCompletenessBlocked",
+        "runtimeEnabled": false,
+        "observationPhase": "beforeExecution",
+        "sourceSnapshotDigest": "724a6f730ed6b632e921ae266ae0d5fa0a4817812d3224b269c775881e6c9243",
+        "anchor": {
+          "kind": "detachedPreExecutionSourceObservation",
+          "body": {
+            "version": "receiver-source-observation-v1",
+            "rawBindings": {
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+              "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|ground-defense"
+            },
+            "proposedPhysical": {
+              "version": "physical-contact-binding-utf8-v2",
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1"
+            },
+            "physicalSlot": "primaryThrow",
+            "initialOuts": 1,
+            "initialBases": [
+              null,
+              null,
+              null
+            ],
+            "runner": {
+              "runnerId": "hs-y3-final-regional-opponent-player-05",
+              "originBase": "batter",
+              "targetBase": "first",
+              "movementDecision": "commitAdvance",
+              "startQuality": "normalStart",
+              "movementState": "advancing",
+              "timingProfile": "late",
+              "speed": 1,
+              "isForced": true,
+              "forcedMovementTarget": "first",
+              "forceReason": "batterRunnerRequiredToFirst",
+              "chainDepth": 0
+            },
+            "ssActor": {
+              "playerId": "player",
+              "id": "player",
+              "name": "Career fixture",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "SS",
+              "secondaryPositions": [],
+              "bats": "R",
+              "throws": "R",
+              "contact": 8,
+              "power": 4,
+              "speed": 8,
+              "defense": 10,
+              "arm": 8,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "canonical-player",
+              "rosterTeamId": "school-powerhouse-409d352a",
+              "position": "游擊手",
+              "defensivePosition": "SS"
+            },
+            "npcActor": {
+              "playerId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "name": "上田",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 8,
+              "power": 8,
+              "speed": 5,
+              "defense": 10,
+              "arm": 10,
+              "pitching": 4,
+              "pitchingProfile": {
+                "effectiveness": 4,
+                "control": 3,
+                "stuff": 4
+              },
+              "source": "simulation-roster",
+              "position": "一壘手",
+              "defensivePosition": "1B"
+            },
+            "originalDefenseTeam": "home",
+            "rosterDigest": "3f420e464c1629a98fc3b9754379b770af0ebe657fe99661e749f24120a6b780",
+            "legalRoutes": [
+              "secureFirstBaseOut",
+              "holdBall"
+            ],
+            "sourcePhase": "beforeExecution",
+            "sourceScope": "originalLegacyOwnerInIsolatedFixture",
+            "formationSnapshot": null
+          },
+          "digest": "f04b473225cce507a41e0b1db20bccaf66d04323174ba9a9bef6a9fa1bb7378e"
+        },
+        "binding": {
+          "version": "physical-contact-binding-utf8-v2",
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1"
+        },
+        "rawBindings": {
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+          "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|ground-defense"
+        },
+        "fixedSlot": {
+          "value": "primaryThrow",
+          "classification": "B_PROPOSED_MAPPING",
+          "formallyPinned": false
+        },
+        "originalSample": null,
+        "delivery": null,
+        "rawNpcCapabilities": {
+          "defense": 10,
+          "speed": 5,
+          "arm": 10,
+          "contact": 8,
+          "attributeSources": {
+            "defense": "A",
+            "speed": "A",
+            "arm": "A",
+            "contact": "A"
+          },
+          "scope": "originalActiveRosterObservation"
+        },
+        "timingSource": {
+          "status": "insufficient",
+          "reason": "v1HasNoApprovedCommonLaunchOrigin",
+          "legacyVersion": null,
+          "originalRunnerRelativeArrival": null,
+          "originalBallRelativeArrival": null,
+          "receiverCompletionConsumed": false
+        },
+        "pureCompatibility": {
+          "status": "invalid",
+          "code": "invalidPhysicalIdentity",
+          "acceptedNewPhysicalVersion": false
+        },
+        "missingFacts": [
+          "preExecutionFormationPolicyAuthority",
+          "fixedSlotAndVersionPinInProduction",
+          "commonPhysicalClockOrigin",
+          "independentSecureDemandAndDuration",
+          "independentPossessionTouchTime",
+          "capabilityCoefficientCalibration",
+          "runtimeLifecycleAndSaveGuard",
+          "currentPureAsciiIdentityContract"
+        ],
+        "sealedCandidateInput": null,
+        "candidateExecutionCalls": 0,
+        "formalProductionAuthority": false,
+        "writes": {
+          "match": 0,
+          "record": 0,
+          "evaluation": 0,
+          "rng": 0
+        }
+      }
+    },
+    {
+      "name": "post outs 1",
+      "sourceScope": "ORIGINAL_LEGACY_OWNER_IN_ISOLATED_EXISTING_FIXTURE_NOT_NATURAL_COHORT",
+      "result": {
+        "status": "insufficient",
+        "code": "productionSourceCompletenessBlocked",
+        "runtimeEnabled": false,
+        "observationPhase": "postExecution",
+        "sourceSnapshotDigest": "f5ca5aefdc9fa92a6b299d09bcb8163dc53d4f2f89b3526d6cce8b15dc605dbb",
+        "anchor": {
+          "kind": "detachedPreExecutionSourceObservation",
+          "body": {
+            "version": "receiver-source-observation-v1",
+            "rawBindings": {
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+              "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|ground-defense"
+            },
+            "proposedPhysical": {
+              "version": "physical-contact-binding-utf8-v2",
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1"
+            },
+            "physicalSlot": "primaryThrow",
+            "initialOuts": 1,
+            "initialBases": [
+              null,
+              null,
+              null
+            ],
+            "runner": {
+              "runnerId": "hs-y3-final-regional-opponent-player-05",
+              "originBase": "batter",
+              "targetBase": "first",
+              "movementDecision": "commitAdvance",
+              "startQuality": "normalStart",
+              "movementState": "advancing",
+              "timingProfile": "late",
+              "speed": 1,
+              "isForced": true,
+              "forcedMovementTarget": "first",
+              "forceReason": "batterRunnerRequiredToFirst",
+              "chainDepth": 0
+            },
+            "ssActor": {
+              "playerId": "player",
+              "id": "player",
+              "name": "Career fixture",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "SS",
+              "secondaryPositions": [],
+              "bats": "R",
+              "throws": "R",
+              "contact": 8,
+              "power": 4,
+              "speed": 8,
+              "defense": 10,
+              "arm": 8,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "canonical-player",
+              "rosterTeamId": "school-powerhouse-409d352a",
+              "position": "游擊手",
+              "defensivePosition": "SS"
+            },
+            "npcActor": {
+              "playerId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "name": "上田",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 8,
+              "power": 8,
+              "speed": 5,
+              "defense": 10,
+              "arm": 10,
+              "pitching": 4,
+              "pitchingProfile": {
+                "effectiveness": 4,
+                "control": 3,
+                "stuff": 4
+              },
+              "source": "simulation-roster",
+              "position": "一壘手",
+              "defensivePosition": "1B"
+            },
+            "originalDefenseTeam": "home",
+            "rosterDigest": "3f420e464c1629a98fc3b9754379b770af0ebe657fe99661e749f24120a6b780",
+            "legalRoutes": [
+              "secureFirstBaseOut",
+              "holdBall"
+            ],
+            "sourcePhase": "beforeExecution",
+            "sourceScope": "originalLegacyOwnerInIsolatedFixture",
+            "formationSnapshot": null
+          },
+          "digest": "f04b473225cce507a41e0b1db20bccaf66d04323174ba9a9bef6a9fa1bb7378e"
+        },
+        "binding": {
+          "version": "physical-contact-binding-utf8-v2",
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1"
+        },
+        "rawBindings": {
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+          "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|ground-defense"
+        },
+        "fixedSlot": {
+          "value": "primaryThrow",
+          "classification": "B_PROPOSED_MAPPING",
+          "formallyPinned": false
+        },
+        "originalSample": {
+          "value": 0.8,
+          "binary64": "3fe999999999999a",
+          "source": "shortstopExecution.sample",
+          "callbackNotInvokedByAdapter": true
+        },
+        "delivery": {
+          "classification": "A",
+          "canonicalThrow": {
+            "version": "defensive-decision-throw-v1",
+            "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|3548150486|select|secureFirstBaseOut|throw-v1",
+            "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|3548150486|select|secureFirstBaseOut",
+            "routeId": "secureFirstBaseOut",
+            "throwerId": "player",
+            "throwerPosition": "SS",
+            "targetBase": "first",
+            "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+            "receiverPosition": "1B",
+            "throwDemand": {
+              "distanceClass": "medium",
+              "strength": 5,
+              "accuracy": 4,
+              "arrivalPressure": 0,
+              "controlPressure": 0,
+              "units": "coarseRelativeDemand"
+            },
+            "strengthMargin": 4.502810804639012,
+            "accuracyMargin": 5.695465093944222,
+            "throwAttempted": true,
+            "throwQuality": "onTarget",
+            "releaseQuality": "readyRelease",
+            "ballArrivalState": "atReceiverTarget",
+            "inputs": {
+              "arm": 10,
+              "throwing": 10,
+              "transferState": "ready",
+              "secureQuality": "cleanControl"
+            },
+            "variationEvidence": {
+              "consumed": true,
+              "strength": {
+                "namespace": "defensive-throw-strength-v1",
+                "roll": 0.7485945976804942,
+                "adjustment": -0.4971891953609884
+              },
+              "accuracy": {
+                "namespace": "defensive-throw-accuracy-v1",
+                "roll": 0.6522674530278891,
+                "adjustment": -0.30453490605577826
+              }
+            },
+            "authority": "throwCapabilities+coarseDemand+separateVariation"
+          },
+          "originalThrowActionId": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "originalActionProvenance": {
+            "authority": "existingInfieldExecution+activeRoster",
+            "sample": 0.8,
+            "consumedRng": false,
+            "capabilities": {
+              "fielding": 10,
+              "reaction": 10,
+              "range": 10,
+              "arm": 10,
+              "throwing": 10,
+              "decision": 10,
+              "catching": 10
+            },
+            "timing": {
+              "routeWindow": null,
+              "timingClassification": "defenseClearlyAhead",
+              "timingMargin": 4.55,
+              "relayToFirstWindow": "normal",
+              "batterSpeed": 1
+            },
+            "sourceStage": "firstThrow"
+          },
+          "actionPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+          "plannedReceiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "plannedTarget": {
+            "runnerId": "hs-y3-final-regional-opponent-player-05",
+            "base": "first"
+          },
+          "actualDeliveryReceiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "actualDeliveryTarget": {
+            "runnerId": "hs-y3-final-regional-opponent-player-05",
+            "base": "first"
+          },
+          "status": "completed",
+          "canonicalSourceAbsentReason": null,
+          "legacyReceiverOutcomeConsumed": false
+        },
+        "rawNpcCapabilities": {
+          "defense": 10,
+          "speed": 5,
+          "arm": 10,
+          "contact": 8,
+          "attributeSources": {
+            "defense": "A",
+            "speed": "A",
+            "arm": "A",
+            "contact": "A"
+          },
+          "scope": "originalActiveRosterObservation"
+        },
+        "timingSource": {
+          "status": "insufficient",
+          "reason": "v1HasNoApprovedCommonLaunchOrigin",
+          "legacyVersion": "defensive-runner-throw-settlement-v1",
+          "originalRunnerRelativeArrival": 9.55,
+          "originalBallRelativeArrival": 5,
+          "receiverCompletionConsumed": false
+        },
+        "pureCompatibility": {
+          "status": "invalid",
+          "code": "invalidPhysicalIdentity",
+          "acceptedNewPhysicalVersion": false
+        },
+        "missingFacts": [
+          "preExecutionFormationPolicyAuthority",
+          "fixedSlotAndVersionPinInProduction",
+          "commonPhysicalClockOrigin",
+          "independentSecureDemandAndDuration",
+          "independentPossessionTouchTime",
+          "capabilityCoefficientCalibration",
+          "runtimeLifecycleAndSaveGuard",
+          "currentPureAsciiIdentityContract"
+        ],
+        "sealedCandidateInput": null,
+        "candidateExecutionCalls": 0,
+        "formalProductionAuthority": false,
+        "writes": {
+          "match": 0,
+          "record": 0,
+          "evaluation": 0,
+          "rng": 0
+        }
+      }
+    },
+    {
+      "name": "before outs 2",
+      "sourceScope": "ORIGINAL_LEGACY_OWNER_IN_ISOLATED_EXISTING_FIXTURE_NOT_NATURAL_COHORT",
+      "result": {
+        "status": "insufficient",
+        "code": "productionSourceCompletenessBlocked",
+        "runtimeEnabled": false,
+        "observationPhase": "beforeExecution",
+        "sourceSnapshotDigest": "86dabd725131009afd588543488d77db8f4b9db88eac95f2f8f368560f67eb01",
+        "anchor": {
+          "kind": "detachedPreExecutionSourceObservation",
+          "body": {
+            "version": "receiver-source-observation-v1",
+            "rawBindings": {
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+              "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|ground-defense"
+            },
+            "proposedPhysical": {
+              "version": "physical-contact-binding-utf8-v2",
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1"
+            },
+            "physicalSlot": "primaryThrow",
+            "initialOuts": 2,
+            "initialBases": [
+              null,
+              null,
+              null
+            ],
+            "runner": {
+              "runnerId": "hs-y3-final-regional-opponent-player-05",
+              "originBase": "batter",
+              "targetBase": "first",
+              "movementDecision": "commitAdvance",
+              "startQuality": "normalStart",
+              "movementState": "advancing",
+              "timingProfile": "late",
+              "speed": 1,
+              "isForced": true,
+              "forcedMovementTarget": "first",
+              "forceReason": "batterRunnerRequiredToFirst",
+              "chainDepth": 0
+            },
+            "ssActor": {
+              "playerId": "player",
+              "id": "player",
+              "name": "Career fixture",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "SS",
+              "secondaryPositions": [],
+              "bats": "R",
+              "throws": "R",
+              "contact": 8,
+              "power": 4,
+              "speed": 8,
+              "defense": 10,
+              "arm": 8,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "canonical-player",
+              "rosterTeamId": "school-powerhouse-409d352a",
+              "position": "游擊手",
+              "defensivePosition": "SS"
+            },
+            "npcActor": {
+              "playerId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "name": "上田",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 8,
+              "power": 8,
+              "speed": 5,
+              "defense": 10,
+              "arm": 10,
+              "pitching": 4,
+              "pitchingProfile": {
+                "effectiveness": 4,
+                "control": 3,
+                "stuff": 4
+              },
+              "source": "simulation-roster",
+              "position": "一壘手",
+              "defensivePosition": "1B"
+            },
+            "originalDefenseTeam": "home",
+            "rosterDigest": "3f420e464c1629a98fc3b9754379b770af0ebe657fe99661e749f24120a6b780",
+            "legalRoutes": [
+              "secureFirstBaseOut",
+              "holdBall"
+            ],
+            "sourcePhase": "beforeExecution",
+            "sourceScope": "originalLegacyOwnerInIsolatedFixture",
+            "formationSnapshot": null
+          },
+          "digest": "20fef363c5b7d51749dc7f0ba5efbd2d0c1b261ea7b824ce34d17f6433d7996b"
+        },
+        "binding": {
+          "version": "physical-contact-binding-utf8-v2",
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1"
+        },
+        "rawBindings": {
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+          "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|ground-defense"
+        },
+        "fixedSlot": {
+          "value": "primaryThrow",
+          "classification": "B_PROPOSED_MAPPING",
+          "formallyPinned": false
+        },
+        "originalSample": null,
+        "delivery": null,
+        "rawNpcCapabilities": {
+          "defense": 10,
+          "speed": 5,
+          "arm": 10,
+          "contact": 8,
+          "attributeSources": {
+            "defense": "A",
+            "speed": "A",
+            "arm": "A",
+            "contact": "A"
+          },
+          "scope": "originalActiveRosterObservation"
+        },
+        "timingSource": {
+          "status": "insufficient",
+          "reason": "v1HasNoApprovedCommonLaunchOrigin",
+          "legacyVersion": null,
+          "originalRunnerRelativeArrival": null,
+          "originalBallRelativeArrival": null,
+          "receiverCompletionConsumed": false
+        },
+        "pureCompatibility": {
+          "status": "invalid",
+          "code": "invalidPhysicalIdentity",
+          "acceptedNewPhysicalVersion": false
+        },
+        "missingFacts": [
+          "preExecutionFormationPolicyAuthority",
+          "fixedSlotAndVersionPinInProduction",
+          "commonPhysicalClockOrigin",
+          "independentSecureDemandAndDuration",
+          "independentPossessionTouchTime",
+          "capabilityCoefficientCalibration",
+          "runtimeLifecycleAndSaveGuard",
+          "currentPureAsciiIdentityContract"
+        ],
+        "sealedCandidateInput": null,
+        "candidateExecutionCalls": 0,
+        "formalProductionAuthority": false,
+        "writes": {
+          "match": 0,
+          "record": 0,
+          "evaluation": 0,
+          "rng": 0
+        }
+      }
+    },
+    {
+      "name": "post outs 2",
+      "sourceScope": "ORIGINAL_LEGACY_OWNER_IN_ISOLATED_EXISTING_FIXTURE_NOT_NATURAL_COHORT",
+      "result": {
+        "status": "insufficient",
+        "code": "productionSourceCompletenessBlocked",
+        "runtimeEnabled": false,
+        "observationPhase": "postExecution",
+        "sourceSnapshotDigest": "cff95943b6c91eb619dd2eb3926fefa159d8696077621e0d2b3b0265a15dce62",
+        "anchor": {
+          "kind": "detachedPreExecutionSourceObservation",
+          "body": {
+            "version": "receiver-source-observation-v1",
+            "rawBindings": {
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+              "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|ground-defense"
+            },
+            "proposedPhysical": {
+              "version": "physical-contact-binding-utf8-v2",
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1"
+            },
+            "physicalSlot": "primaryThrow",
+            "initialOuts": 2,
+            "initialBases": [
+              null,
+              null,
+              null
+            ],
+            "runner": {
+              "runnerId": "hs-y3-final-regional-opponent-player-05",
+              "originBase": "batter",
+              "targetBase": "first",
+              "movementDecision": "commitAdvance",
+              "startQuality": "normalStart",
+              "movementState": "advancing",
+              "timingProfile": "late",
+              "speed": 1,
+              "isForced": true,
+              "forcedMovementTarget": "first",
+              "forceReason": "batterRunnerRequiredToFirst",
+              "chainDepth": 0
+            },
+            "ssActor": {
+              "playerId": "player",
+              "id": "player",
+              "name": "Career fixture",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "SS",
+              "secondaryPositions": [],
+              "bats": "R",
+              "throws": "R",
+              "contact": 8,
+              "power": 4,
+              "speed": 8,
+              "defense": 10,
+              "arm": 8,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "canonical-player",
+              "rosterTeamId": "school-powerhouse-409d352a",
+              "position": "游擊手",
+              "defensivePosition": "SS"
+            },
+            "npcActor": {
+              "playerId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "name": "上田",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 8,
+              "power": 8,
+              "speed": 5,
+              "defense": 10,
+              "arm": 10,
+              "pitching": 4,
+              "pitchingProfile": {
+                "effectiveness": 4,
+                "control": 3,
+                "stuff": 4
+              },
+              "source": "simulation-roster",
+              "position": "一壘手",
+              "defensivePosition": "1B"
+            },
+            "originalDefenseTeam": "home",
+            "rosterDigest": "3f420e464c1629a98fc3b9754379b770af0ebe657fe99661e749f24120a6b780",
+            "legalRoutes": [
+              "secureFirstBaseOut",
+              "holdBall"
+            ],
+            "sourcePhase": "beforeExecution",
+            "sourceScope": "originalLegacyOwnerInIsolatedFixture",
+            "formationSnapshot": null
+          },
+          "digest": "20fef363c5b7d51749dc7f0ba5efbd2d0c1b261ea7b824ce34d17f6433d7996b"
+        },
+        "binding": {
+          "version": "physical-contact-binding-utf8-v2",
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1"
+        },
+        "rawBindings": {
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+          "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|ground-defense"
+        },
+        "fixedSlot": {
+          "value": "primaryThrow",
+          "classification": "B_PROPOSED_MAPPING",
+          "formallyPinned": false
+        },
+        "originalSample": {
+          "value": 0.8,
+          "binary64": "3fe999999999999a",
+          "source": "shortstopExecution.sample",
+          "callbackNotInvokedByAdapter": true
+        },
+        "delivery": {
+          "classification": "A",
+          "canonicalThrow": {
+            "version": "defensive-decision-throw-v1",
+            "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2154074174|select|secureFirstBaseOut|throw-v1",
+            "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2154074174|select|secureFirstBaseOut",
+            "routeId": "secureFirstBaseOut",
+            "throwerId": "player",
+            "throwerPosition": "SS",
+            "targetBase": "first",
+            "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+            "receiverPosition": "1B",
+            "throwDemand": {
+              "distanceClass": "medium",
+              "strength": 5,
+              "accuracy": 4,
+              "arrivalPressure": 0,
+              "controlPressure": 0,
+              "units": "coarseRelativeDemand"
+            },
+            "strengthMargin": 4.884269825648516,
+            "accuracyMargin": 6.595221213530749,
+            "throwAttempted": true,
+            "throwQuality": "onTarget",
+            "releaseQuality": "readyRelease",
+            "ballArrivalState": "atReceiverTarget",
+            "inputs": {
+              "arm": 10,
+              "throwing": 10,
+              "transferState": "ready",
+              "secureQuality": "cleanControl"
+            },
+            "variationEvidence": {
+              "consumed": true,
+              "strength": {
+                "namespace": "defensive-throw-strength-v1",
+                "roll": 0.5578650871757418,
+                "adjustment": -0.11573017435148358
+              },
+              "accuracy": {
+                "namespace": "defensive-throw-accuracy-v1",
+                "roll": 0.20238939323462546,
+                "adjustment": 0.5952212135307491
+              }
+            },
+            "authority": "throwCapabilities+coarseDemand+separateVariation"
+          },
+          "originalThrowActionId": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "originalActionProvenance": {
+            "authority": "existingInfieldExecution+activeRoster",
+            "sample": 0.8,
+            "consumedRng": false,
+            "capabilities": {
+              "fielding": 10,
+              "reaction": 10,
+              "range": 10,
+              "arm": 10,
+              "throwing": 10,
+              "decision": 10,
+              "catching": 10
+            },
+            "timing": {
+              "routeWindow": null,
+              "timingClassification": "defenseClearlyAhead",
+              "timingMargin": 4.55,
+              "relayToFirstWindow": "normal",
+              "batterSpeed": 1
+            },
+            "sourceStage": "firstThrow"
+          },
+          "actionPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+          "plannedReceiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "plannedTarget": {
+            "runnerId": "hs-y3-final-regional-opponent-player-05",
+            "base": "first"
+          },
+          "actualDeliveryReceiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "actualDeliveryTarget": {
+            "runnerId": "hs-y3-final-regional-opponent-player-05",
+            "base": "first"
+          },
+          "status": "completed",
+          "canonicalSourceAbsentReason": null,
+          "legacyReceiverOutcomeConsumed": false
+        },
+        "rawNpcCapabilities": {
+          "defense": 10,
+          "speed": 5,
+          "arm": 10,
+          "contact": 8,
+          "attributeSources": {
+            "defense": "A",
+            "speed": "A",
+            "arm": "A",
+            "contact": "A"
+          },
+          "scope": "originalActiveRosterObservation"
+        },
+        "timingSource": {
+          "status": "insufficient",
+          "reason": "v1HasNoApprovedCommonLaunchOrigin",
+          "legacyVersion": "defensive-runner-throw-settlement-v1",
+          "originalRunnerRelativeArrival": 9.55,
+          "originalBallRelativeArrival": 5,
+          "receiverCompletionConsumed": false
+        },
+        "pureCompatibility": {
+          "status": "invalid",
+          "code": "invalidPhysicalIdentity",
+          "acceptedNewPhysicalVersion": false
+        },
+        "missingFacts": [
+          "preExecutionFormationPolicyAuthority",
+          "fixedSlotAndVersionPinInProduction",
+          "commonPhysicalClockOrigin",
+          "independentSecureDemandAndDuration",
+          "independentPossessionTouchTime",
+          "capabilityCoefficientCalibration",
+          "runtimeLifecycleAndSaveGuard",
+          "currentPureAsciiIdentityContract"
+        ],
+        "sealedCandidateInput": null,
+        "candidateExecutionCalls": 0,
+        "formalProductionAuthority": false,
+        "writes": {
+          "match": 0,
+          "record": 0,
+          "evaluation": 0,
+          "rng": 0
+        }
+      }
+    },
+    {
+      "name": "offline",
+      "sourceScope": "ORIGINAL_LEGACY_OWNER_IN_ISOLATED_EXISTING_FIXTURE_NOT_NATURAL_COHORT",
+      "result": {
+        "status": "insufficient",
+        "code": "productionSourceCompletenessBlocked",
+        "runtimeEnabled": false,
+        "observationPhase": "postExecution",
+        "sourceSnapshotDigest": "d63cff10e8ee7745b2efeeaf0a408a713f5a8134cc185b3f14ac1c33d9899eed",
+        "anchor": {
+          "kind": "detachedPreExecutionSourceObservation",
+          "body": {
+            "version": "receiver-source-observation-v1",
+            "rawBindings": {
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|ground-defense"
+            },
+            "proposedPhysical": {
+              "version": "physical-contact-binding-utf8-v2",
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+            },
+            "physicalSlot": "primaryThrow",
+            "initialOuts": 0,
+            "initialBases": [
+              null,
+              null,
+              null
+            ],
+            "runner": {
+              "runnerId": "hs-y3-final-regional-opponent-player-05",
+              "originBase": "batter",
+              "targetBase": "first",
+              "movementDecision": "commitAdvance",
+              "startQuality": "normalStart",
+              "movementState": "advancing",
+              "timingProfile": "late",
+              "speed": 1,
+              "isForced": true,
+              "forcedMovementTarget": "first",
+              "forceReason": "batterRunnerRequiredToFirst",
+              "chainDepth": 0
+            },
+            "ssActor": {
+              "playerId": "player",
+              "id": "player",
+              "name": "Career fixture",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "SS",
+              "secondaryPositions": [],
+              "bats": "R",
+              "throws": "R",
+              "contact": 8,
+              "power": 4,
+              "speed": 8,
+              "defense": 10,
+              "arm": 8,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "canonical-player",
+              "rosterTeamId": "school-powerhouse-409d352a",
+              "position": "游擊手",
+              "defensivePosition": "SS"
+            },
+            "npcActor": {
+              "playerId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "name": "上田",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 8,
+              "power": 8,
+              "speed": 5,
+              "defense": 10,
+              "arm": 10,
+              "pitching": 4,
+              "pitchingProfile": {
+                "effectiveness": 4,
+                "control": 3,
+                "stuff": 4
+              },
+              "source": "simulation-roster",
+              "position": "一壘手",
+              "defensivePosition": "1B"
+            },
+            "originalDefenseTeam": "home",
+            "rosterDigest": "3f420e464c1629a98fc3b9754379b770af0ebe657fe99661e749f24120a6b780",
+            "legalRoutes": [
+              "secureFirstBaseOut",
+              "holdBall"
+            ],
+            "sourcePhase": "beforeExecution",
+            "sourceScope": "originalLegacyOwnerInIsolatedFixture",
+            "formationSnapshot": null
+          },
+          "digest": "cccb1f0d60498f621520a4b23cb89fafb57e14279bb289845a7bf7e002e14235"
+        },
+        "binding": {
+          "version": "physical-contact-binding-utf8-v2",
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+        },
+        "rawBindings": {
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|ground-defense"
+        },
+        "fixedSlot": {
+          "value": "primaryThrow",
+          "classification": "B_PROPOSED_MAPPING",
+          "formallyPinned": false
+        },
+        "originalSample": {
+          "value": 0.8,
+          "binary64": "3fe999999999999a",
+          "source": "shortstopExecution.sample",
+          "callbackNotInvokedByAdapter": true
+        },
+        "delivery": {
+          "classification": "A",
+          "canonicalThrow": {
+            "version": "defensive-decision-throw-v1",
+            "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut|throw-v1",
+            "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut",
+            "routeId": "secureFirstBaseOut",
+            "throwerId": "player",
+            "throwerPosition": "SS",
+            "targetBase": "first",
+            "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+            "receiverPosition": "1B",
+            "throwDemand": {
+              "distanceClass": "medium",
+              "strength": 5,
+              "accuracy": 4,
+              "arrivalPressure": 0,
+              "controlPressure": 0,
+              "units": "coarseRelativeDemand"
+            },
+            "strengthMargin": -4.033710143528879,
+            "accuracyMargin": -2.4077256387099624,
+            "throwAttempted": true,
+            "throwQuality": "offline",
+            "releaseQuality": "readyRelease",
+            "ballArrivalState": "outsideReceiverReach",
+            "inputs": {
+              "arm": 1,
+              "throwing": 1,
+              "transferState": "ready",
+              "secureQuality": "cleanControl"
+            },
+            "variationEvidence": {
+              "consumed": true,
+              "strength": {
+                "namespace": "defensive-throw-strength-v1",
+                "roll": 0.5168550717644393,
+                "adjustment": -0.03371014352887869
+              },
+              "accuracy": {
+                "namespace": "defensive-throw-accuracy-v1",
+                "roll": 0.20386281935498118,
+                "adjustment": 0.5922743612900376
+              }
+            },
+            "authority": "throwCapabilities+coarseDemand+separateVariation"
+          },
+          "originalThrowActionId": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "originalActionProvenance": {
+            "authority": "existingInfieldExecution+activeRoster",
+            "sample": 0.8,
+            "consumedRng": false,
+            "capabilities": {
+              "fielding": 10,
+              "reaction": 10,
+              "range": 10,
+              "arm": 1,
+              "throwing": 1,
+              "decision": 10,
+              "catching": 10
+            },
+            "timing": {
+              "routeWindow": null,
+              "timingClassification": "noContest",
+              "timingMargin": null,
+              "relayToFirstWindow": "normal",
+              "batterSpeed": 1
+            },
+            "sourceStage": "firstThrow"
+          },
+          "actionPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "plannedReceiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "plannedTarget": {
+            "runnerId": "hs-y3-final-regional-opponent-player-05",
+            "base": "first"
+          },
+          "actualDeliveryReceiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "actualDeliveryTarget": {
+            "runnerId": "hs-y3-final-regional-opponent-player-05",
+            "base": "first"
+          },
+          "status": "offline",
+          "canonicalSourceAbsentReason": null,
+          "legacyReceiverOutcomeConsumed": false
+        },
+        "rawNpcCapabilities": {
+          "defense": 10,
+          "speed": 5,
+          "arm": 10,
+          "contact": 8,
+          "attributeSources": {
+            "defense": "A",
+            "speed": "A",
+            "arm": "A",
+            "contact": "A"
+          },
+          "scope": "originalActiveRosterObservation"
+        },
+        "timingSource": {
+          "status": "insufficient",
+          "reason": "v1HasNoApprovedCommonLaunchOrigin",
+          "legacyVersion": "defensive-runner-throw-settlement-v1",
+          "originalRunnerRelativeArrival": 9.55,
+          "originalBallRelativeArrival": null,
+          "receiverCompletionConsumed": false
+        },
+        "pureCompatibility": {
+          "status": "invalid",
+          "code": "invalidPhysicalIdentity",
+          "acceptedNewPhysicalVersion": false
+        },
+        "missingFacts": [
+          "preExecutionFormationPolicyAuthority",
+          "fixedSlotAndVersionPinInProduction",
+          "commonPhysicalClockOrigin",
+          "independentSecureDemandAndDuration",
+          "independentPossessionTouchTime",
+          "capabilityCoefficientCalibration",
+          "runtimeLifecycleAndSaveGuard",
+          "currentPureAsciiIdentityContract"
+        ],
+        "sealedCandidateInput": null,
+        "candidateExecutionCalls": 0,
+        "formalProductionAuthority": false,
+        "writes": {
+          "match": 0,
+          "record": 0,
+          "evaluation": 0,
+          "rng": 0
+        }
+      }
+    },
+    {
+      "name": "acquisition failure",
+      "sourceScope": "ORIGINAL_LEGACY_OWNER_IN_ISOLATED_EXISTING_FIXTURE_NOT_NATURAL_COHORT",
+      "result": {
+        "status": "insufficient",
+        "code": "productionSourceCompletenessBlocked",
+        "runtimeEnabled": false,
+        "observationPhase": "postExecution",
+        "sourceSnapshotDigest": "7e30179ac63c72242d7fc2f550af47244dc78cdaedea2f33d53cd950c8e4aa05",
+        "anchor": {
+          "kind": "detachedPreExecutionSourceObservation",
+          "body": {
+            "version": "receiver-source-observation-v1",
+            "rawBindings": {
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|ground-defense"
+            },
+            "proposedPhysical": {
+              "version": "physical-contact-binding-utf8-v2",
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+            },
+            "physicalSlot": "primaryThrow",
+            "initialOuts": 0,
+            "initialBases": [
+              null,
+              null,
+              null
+            ],
+            "runner": {
+              "runnerId": "hs-y3-final-regional-opponent-player-05",
+              "originBase": "batter",
+              "targetBase": "first",
+              "movementDecision": "commitAdvance",
+              "startQuality": "normalStart",
+              "movementState": "advancing",
+              "timingProfile": "late",
+              "speed": 1,
+              "isForced": true,
+              "forcedMovementTarget": "first",
+              "forceReason": "batterRunnerRequiredToFirst",
+              "chainDepth": 0
+            },
+            "ssActor": {
+              "playerId": "player",
+              "id": "player",
+              "name": "Career fixture",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "SS",
+              "secondaryPositions": [],
+              "bats": "R",
+              "throws": "R",
+              "contact": 8,
+              "power": 4,
+              "speed": 8,
+              "defense": 10,
+              "arm": 8,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "canonical-player",
+              "rosterTeamId": "school-powerhouse-409d352a",
+              "position": "游擊手",
+              "defensivePosition": "SS"
+            },
+            "npcActor": {
+              "playerId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "name": "上田",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 8,
+              "power": 8,
+              "speed": 5,
+              "defense": 10,
+              "arm": 10,
+              "pitching": 4,
+              "pitchingProfile": {
+                "effectiveness": 4,
+                "control": 3,
+                "stuff": 4
+              },
+              "source": "simulation-roster",
+              "position": "一壘手",
+              "defensivePosition": "1B"
+            },
+            "originalDefenseTeam": "home",
+            "rosterDigest": "3f420e464c1629a98fc3b9754379b770af0ebe657fe99661e749f24120a6b780",
+            "legalRoutes": [
+              "secureFirstBaseOut",
+              "holdBall"
+            ],
+            "sourcePhase": "beforeExecution",
+            "sourceScope": "originalLegacyOwnerInIsolatedFixture",
+            "formationSnapshot": null
+          },
+          "digest": "cccb1f0d60498f621520a4b23cb89fafb57e14279bb289845a7bf7e002e14235"
+        },
+        "binding": {
+          "version": "physical-contact-binding-utf8-v2",
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+        },
+        "rawBindings": {
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|ground-defense"
+        },
+        "fixedSlot": {
+          "value": "primaryThrow",
+          "classification": "B_PROPOSED_MAPPING",
+          "formallyPinned": false
+        },
+        "originalSample": {
+          "value": 0.8,
+          "binary64": "3fe999999999999a",
+          "source": "shortstopExecution.sample",
+          "callbackNotInvokedByAdapter": true
+        },
+        "delivery": {
+          "classification": "A",
+          "canonicalThrow": null,
+          "originalThrowActionId": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "originalActionProvenance": {
+            "authority": "existingInfieldExecution+activeRoster",
+            "sample": 0.8,
+            "consumedRng": false,
+            "capabilities": {
+              "fielding": 1,
+              "reaction": 10,
+              "range": 10,
+              "arm": 10,
+              "throwing": 10,
+              "decision": 10,
+              "catching": 1
+            },
+            "timing": {
+              "routeWindow": null,
+              "timingClassification": "noContest",
+              "timingMargin": null,
+              "relayToFirstWindow": "normal",
+              "batterSpeed": 1
+            },
+            "sourceStage": "firstThrow"
+          },
+          "actionPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "plannedReceiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "plannedTarget": {
+            "runnerId": "hs-y3-final-regional-opponent-player-05",
+            "base": "first"
+          },
+          "actualDeliveryReceiverId": null,
+          "actualDeliveryTarget": null,
+          "status": "notAttempted",
+          "canonicalSourceAbsentReason": "acquisitionDidNotCreateCanonicalThrow",
+          "legacyReceiverOutcomeConsumed": false
+        },
+        "rawNpcCapabilities": {
+          "defense": 10,
+          "speed": 5,
+          "arm": 10,
+          "contact": 8,
+          "attributeSources": {
+            "defense": "A",
+            "speed": "A",
+            "arm": "A",
+            "contact": "A"
+          },
+          "scope": "originalActiveRosterObservation"
+        },
+        "timingSource": {
+          "status": "insufficient",
+          "reason": "v1HasNoApprovedCommonLaunchOrigin",
+          "legacyVersion": "defensive-runner-throw-settlement-v1",
+          "originalRunnerRelativeArrival": null,
+          "originalBallRelativeArrival": null,
+          "receiverCompletionConsumed": false
+        },
+        "pureCompatibility": {
+          "status": "invalid",
+          "code": "invalidPhysicalIdentity",
+          "acceptedNewPhysicalVersion": false
+        },
+        "missingFacts": [
+          "preExecutionFormationPolicyAuthority",
+          "fixedSlotAndVersionPinInProduction",
+          "commonPhysicalClockOrigin",
+          "independentSecureDemandAndDuration",
+          "independentPossessionTouchTime",
+          "capabilityCoefficientCalibration",
+          "runtimeLifecycleAndSaveGuard",
+          "currentPureAsciiIdentityContract"
+        ],
+        "sealedCandidateInput": null,
+        "candidateExecutionCalls": 0,
+        "formalProductionAuthority": false,
+        "writes": {
+          "match": 0,
+          "record": 0,
+          "evaluation": 0,
+          "rng": 0
+        }
+      }
+    },
+    {
+      "name": "legacy receiver failure",
+      "sourceScope": "ORIGINAL_LEGACY_OWNER_IN_ISOLATED_EXISTING_FIXTURE_NOT_NATURAL_COHORT",
+      "result": {
+        "status": "insufficient",
+        "code": "productionSourceCompletenessBlocked",
+        "runtimeEnabled": false,
+        "observationPhase": "postExecution",
+        "sourceSnapshotDigest": "980217e7f82f6f75814e46d891146fc0135d2c2b0fd94b1f15c882396df2b36b",
+        "anchor": {
+          "kind": "detachedPreExecutionSourceObservation",
+          "body": {
+            "version": "receiver-source-observation-v1",
+            "rawBindings": {
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|ground-defense"
+            },
+            "proposedPhysical": {
+              "version": "physical-contact-binding-utf8-v2",
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+            },
+            "physicalSlot": "primaryThrow",
+            "initialOuts": 0,
+            "initialBases": [
+              null,
+              null,
+              null
+            ],
+            "runner": {
+              "runnerId": "hs-y3-final-regional-opponent-player-05",
+              "originBase": "batter",
+              "targetBase": "first",
+              "movementDecision": "commitAdvance",
+              "startQuality": "normalStart",
+              "movementState": "advancing",
+              "timingProfile": "late",
+              "speed": 1,
+              "isForced": true,
+              "forcedMovementTarget": "first",
+              "forceReason": "batterRunnerRequiredToFirst",
+              "chainDepth": 0
+            },
+            "ssActor": {
+              "playerId": "player",
+              "id": "player",
+              "name": "Career fixture",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "SS",
+              "secondaryPositions": [],
+              "bats": "R",
+              "throws": "R",
+              "contact": 8,
+              "power": 4,
+              "speed": 8,
+              "defense": 10,
+              "arm": 8,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "canonical-player",
+              "rosterTeamId": "school-powerhouse-409d352a",
+              "position": "游擊手",
+              "defensivePosition": "SS"
+            },
+            "npcActor": {
+              "playerId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "name": "上田",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 8,
+              "power": 8,
+              "speed": 5,
+              "defense": 1,
+              "arm": 10,
+              "pitching": 4,
+              "pitchingProfile": {
+                "effectiveness": 4,
+                "control": 3,
+                "stuff": 4
+              },
+              "source": "simulation-roster",
+              "position": "一壘手",
+              "defensivePosition": "1B"
+            },
+            "originalDefenseTeam": "home",
+            "rosterDigest": "3d84be77282d7a20aadbc04f8d086719784299903508d71740a4d0e202ebb790",
+            "legalRoutes": [
+              "secureFirstBaseOut",
+              "holdBall"
+            ],
+            "sourcePhase": "beforeExecution",
+            "sourceScope": "originalLegacyOwnerInIsolatedFixture",
+            "formationSnapshot": null
+          },
+          "digest": "a1cc488c903db560961b491b6df89445164b88ce22785dd439b8153de360c466"
+        },
+        "binding": {
+          "version": "physical-contact-binding-utf8-v2",
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+        },
+        "rawBindings": {
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|ground-defense"
+        },
+        "fixedSlot": {
+          "value": "primaryThrow",
+          "classification": "B_PROPOSED_MAPPING",
+          "formallyPinned": false
+        },
+        "originalSample": {
+          "value": 0.8,
+          "binary64": "3fe999999999999a",
+          "source": "shortstopExecution.sample",
+          "callbackNotInvokedByAdapter": true
+        },
+        "delivery": {
+          "classification": "A",
+          "canonicalThrow": {
+            "version": "defensive-decision-throw-v1",
+            "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut|throw-v1",
+            "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|secureFirstBaseOut",
+            "routeId": "secureFirstBaseOut",
+            "throwerId": "player",
+            "throwerPosition": "SS",
+            "targetBase": "first",
+            "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+            "receiverPosition": "1B",
+            "throwDemand": {
+              "distanceClass": "medium",
+              "strength": 5,
+              "accuracy": 4,
+              "arrivalPressure": 0,
+              "controlPressure": 0,
+              "units": "coarseRelativeDemand"
+            },
+            "strengthMargin": 4.966289856471121,
+            "accuracyMargin": 6.592274361290038,
+            "throwAttempted": true,
+            "throwQuality": "onTarget",
+            "releaseQuality": "readyRelease",
+            "ballArrivalState": "atReceiverTarget",
+            "inputs": {
+              "arm": 10,
+              "throwing": 10,
+              "transferState": "ready",
+              "secureQuality": "cleanControl"
+            },
+            "variationEvidence": {
+              "consumed": true,
+              "strength": {
+                "namespace": "defensive-throw-strength-v1",
+                "roll": 0.5168550717644393,
+                "adjustment": -0.03371014352887869
+              },
+              "accuracy": {
+                "namespace": "defensive-throw-accuracy-v1",
+                "roll": 0.20386281935498118,
+                "adjustment": 0.5922743612900376
+              }
+            },
+            "authority": "throwCapabilities+coarseDemand+separateVariation"
+          },
+          "originalThrowActionId": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "originalActionProvenance": {
+            "authority": "existingInfieldExecution+activeRoster",
+            "sample": 0.8,
+            "consumedRng": false,
+            "capabilities": {
+              "fielding": 10,
+              "reaction": 10,
+              "range": 10,
+              "arm": 10,
+              "throwing": 10,
+              "decision": 10,
+              "catching": 10
+            },
+            "timing": {
+              "routeWindow": null,
+              "timingClassification": "noContest",
+              "timingMargin": null,
+              "relayToFirstWindow": "normal",
+              "batterSpeed": 1
+            },
+            "sourceStage": "firstThrow"
+          },
+          "actionPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "plannedReceiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "plannedTarget": {
+            "runnerId": "hs-y3-final-regional-opponent-player-05",
+            "base": "first"
+          },
+          "actualDeliveryReceiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "actualDeliveryTarget": {
+            "runnerId": "hs-y3-final-regional-opponent-player-05",
+            "base": "first"
+          },
+          "status": "completed",
+          "canonicalSourceAbsentReason": null,
+          "legacyReceiverOutcomeConsumed": false
+        },
+        "rawNpcCapabilities": {
+          "defense": 1,
+          "speed": 5,
+          "arm": 10,
+          "contact": 8,
+          "attributeSources": {
+            "defense": "A",
+            "speed": "A",
+            "arm": "A",
+            "contact": "A"
+          },
+          "scope": "originalActiveRosterObservation"
+        },
+        "timingSource": {
+          "status": "insufficient",
+          "reason": "v1HasNoApprovedCommonLaunchOrigin",
+          "legacyVersion": "defensive-runner-throw-settlement-v1",
+          "originalRunnerRelativeArrival": 9.55,
+          "originalBallRelativeArrival": null,
+          "receiverCompletionConsumed": false
+        },
+        "pureCompatibility": {
+          "status": "invalid",
+          "code": "invalidPhysicalIdentity",
+          "acceptedNewPhysicalVersion": false
+        },
+        "missingFacts": [
+          "preExecutionFormationPolicyAuthority",
+          "fixedSlotAndVersionPinInProduction",
+          "commonPhysicalClockOrigin",
+          "independentSecureDemandAndDuration",
+          "independentPossessionTouchTime",
+          "capabilityCoefficientCalibration",
+          "runtimeLifecycleAndSaveGuard",
+          "currentPureAsciiIdentityContract"
+        ],
+        "sealedCandidateInput": null,
+        "candidateExecutionCalls": 0,
+        "formalProductionAuthority": false,
+        "writes": {
+          "match": 0,
+          "record": 0,
+          "evaluation": 0,
+          "rng": 0
+        }
+      }
+    },
+    {
+      "name": "fast runner already safe",
+      "sourceScope": "ORIGINAL_LEGACY_OWNER_IN_ISOLATED_EXISTING_FIXTURE_NOT_NATURAL_COHORT",
+      "result": {
+        "status": "insufficient",
+        "code": "productionSourceCompletenessBlocked",
+        "runtimeEnabled": false,
+        "observationPhase": "postExecution",
+        "sourceSnapshotDigest": "7662e321c75bd1762a75bced27e6783d60c9ae527c10acd442083c5a4d634d54",
+        "anchor": {
+          "kind": "detachedPreExecutionSourceObservation",
+          "body": {
+            "version": "receiver-source-observation-v1",
+            "rawBindings": {
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|ground-defense"
+            },
+            "proposedPhysical": {
+              "version": "physical-contact-binding-utf8-v2",
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+            },
+            "physicalSlot": "primaryThrow",
+            "initialOuts": 0,
+            "initialBases": [
+              null,
+              null,
+              null
+            ],
+            "runner": {
+              "runnerId": "hs-y3-final-regional-opponent-player-05",
+              "originBase": "batter",
+              "targetBase": "first",
+              "movementDecision": "commitAdvance",
+              "startQuality": "normalStart",
+              "movementState": "advancing",
+              "timingProfile": "early",
+              "speed": 18,
+              "isForced": true,
+              "forcedMovementTarget": "first",
+              "forceReason": "batterRunnerRequiredToFirst",
+              "chainDepth": 0
+            },
+            "ssActor": {
+              "playerId": "player",
+              "id": "player",
+              "name": "Career fixture",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "SS",
+              "secondaryPositions": [],
+              "bats": "R",
+              "throws": "R",
+              "contact": 8,
+              "power": 4,
+              "speed": 8,
+              "defense": 10,
+              "arm": 8,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "canonical-player",
+              "rosterTeamId": "school-powerhouse-409d352a",
+              "position": "游擊手",
+              "defensivePosition": "SS"
+            },
+            "npcActor": {
+              "playerId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "name": "上田",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 8,
+              "power": 8,
+              "speed": 5,
+              "defense": 10,
+              "arm": 10,
+              "pitching": 4,
+              "pitchingProfile": {
+                "effectiveness": 4,
+                "control": 3,
+                "stuff": 4
+              },
+              "source": "simulation-roster",
+              "position": "一壘手",
+              "defensivePosition": "1B"
+            },
+            "originalDefenseTeam": "home",
+            "rosterDigest": "3f420e464c1629a98fc3b9754379b770af0ebe657fe99661e749f24120a6b780",
+            "legalRoutes": [
+              "secureFirstBaseOut",
+              "holdBall"
+            ],
+            "sourcePhase": "beforeExecution",
+            "sourceScope": "originalLegacyOwnerInIsolatedFixture",
+            "formationSnapshot": null
+          },
+          "digest": "ad8650490d5fa538eb21d8ef1cb8c0414be8e2d246d155977ba6c20a84bde3d9"
+        },
+        "binding": {
+          "version": "physical-contact-binding-utf8-v2",
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+        },
+        "rawBindings": {
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|ground-defense"
+        },
+        "fixedSlot": {
+          "value": "primaryThrow",
+          "classification": "B_PROPOSED_MAPPING",
+          "formallyPinned": false
+        },
+        "originalSample": {
+          "value": 0.8,
+          "binary64": "3fe999999999999a",
+          "source": "shortstopExecution.sample",
+          "callbackNotInvokedByAdapter": true
+        },
+        "delivery": {
+          "classification": "A",
+          "canonicalThrow": {
+            "version": "defensive-decision-throw-v1",
+            "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|804679558|select|secureFirstBaseOut|throw-v1",
+            "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|804679558|select|secureFirstBaseOut",
+            "routeId": "secureFirstBaseOut",
+            "throwerId": "player",
+            "throwerPosition": "SS",
+            "targetBase": "first",
+            "targetRunnerId": "hs-y3-final-regional-opponent-player-05",
+            "receiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+            "receiverPosition": "1B",
+            "throwDemand": {
+              "distanceClass": "medium",
+              "strength": 5,
+              "accuracy": 4,
+              "arrivalPressure": 0,
+              "controlPressure": 0,
+              "units": "coarseRelativeDemand"
+            },
+            "strengthMargin": 5.597052091732621,
+            "accuracyMargin": 5.873358683660626,
+            "throwAttempted": true,
+            "throwQuality": "onTarget",
+            "releaseQuality": "readyRelease",
+            "ballArrivalState": "atReceiverTarget",
+            "inputs": {
+              "arm": 10,
+              "throwing": 10,
+              "transferState": "ready",
+              "secureQuality": "cleanControl"
+            },
+            "variationEvidence": {
+              "consumed": true,
+              "strength": {
+                "namespace": "defensive-throw-strength-v1",
+                "roll": 0.2014739541336894,
+                "adjustment": 0.5970520917326212
+              },
+              "accuracy": {
+                "namespace": "defensive-throw-accuracy-v1",
+                "roll": 0.5633206581696868,
+                "adjustment": -0.1266413163393736
+              }
+            },
+            "authority": "throwCapabilities+coarseDemand+separateVariation"
+          },
+          "originalThrowActionId": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "originalActionProvenance": {
+            "authority": "existingInfieldExecution+activeRoster",
+            "sample": 0.8,
+            "consumedRng": false,
+            "capabilities": {
+              "fielding": 10,
+              "reaction": 10,
+              "range": 10,
+              "arm": 10,
+              "throwing": 10,
+              "decision": 10,
+              "catching": 10
+            },
+            "timing": {
+              "routeWindow": null,
+              "timingClassification": "runnerClearlyAhead",
+              "timingMargin": -3.1,
+              "relayToFirstWindow": "expired",
+              "batterSpeed": 18
+            },
+            "sourceStage": "firstThrow"
+          },
+          "actionPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "plannedReceiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "plannedTarget": {
+            "runnerId": "hs-y3-final-regional-opponent-player-05",
+            "base": "first"
+          },
+          "actualDeliveryReceiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "actualDeliveryTarget": {
+            "runnerId": "hs-y3-final-regional-opponent-player-05",
+            "base": "first"
+          },
+          "status": "completed",
+          "canonicalSourceAbsentReason": null,
+          "legacyReceiverOutcomeConsumed": false
+        },
+        "rawNpcCapabilities": {
+          "defense": 10,
+          "speed": 5,
+          "arm": 10,
+          "contact": 8,
+          "attributeSources": {
+            "defense": "A",
+            "speed": "A",
+            "arm": "A",
+            "contact": "A"
+          },
+          "scope": "originalActiveRosterObservation"
+        },
+        "timingSource": {
+          "status": "insufficient",
+          "reason": "v1HasNoApprovedCommonLaunchOrigin",
+          "legacyVersion": "defensive-runner-throw-settlement-v1",
+          "originalRunnerRelativeArrival": 1.9000000000000004,
+          "originalBallRelativeArrival": 5,
+          "receiverCompletionConsumed": false
+        },
+        "pureCompatibility": {
+          "status": "invalid",
+          "code": "invalidPhysicalIdentity",
+          "acceptedNewPhysicalVersion": false
+        },
+        "missingFacts": [
+          "preExecutionFormationPolicyAuthority",
+          "fixedSlotAndVersionPinInProduction",
+          "commonPhysicalClockOrigin",
+          "independentSecureDemandAndDuration",
+          "independentPossessionTouchTime",
+          "capabilityCoefficientCalibration",
+          "runtimeLifecycleAndSaveGuard",
+          "currentPureAsciiIdentityContract"
+        ],
+        "sealedCandidateInput": null,
+        "candidateExecutionCalls": 0,
+        "formalProductionAuthority": false,
+        "writes": {
+          "match": 0,
+          "record": 0,
+          "evaluation": 0,
+          "rng": 0
+        }
+      }
+    },
+    {
+      "name": "hold",
+      "sourceScope": "ORIGINAL_LEGACY_OWNER_IN_ISOLATED_EXISTING_FIXTURE_NOT_NATURAL_COHORT",
+      "result": {
+        "status": "insufficient",
+        "code": "productionSourceCompletenessBlocked",
+        "runtimeEnabled": false,
+        "observationPhase": "postExecution",
+        "sourceSnapshotDigest": "49b31696d6d92d492a0e8194abfcc390e20751df6d11344a57cf0a8476402422",
+        "anchor": {
+          "kind": "detachedPreExecutionSourceObservation",
+          "body": {
+            "version": "receiver-source-observation-v1",
+            "rawBindings": {
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|ground-defense"
+            },
+            "proposedPhysical": {
+              "version": "physical-contact-binding-utf8-v2",
+              "matchId": "hs-y3-final-competition-1",
+              "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+              "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+            },
+            "physicalSlot": "primaryThrow",
+            "initialOuts": 0,
+            "initialBases": [
+              null,
+              null,
+              null
+            ],
+            "runner": {
+              "runnerId": "hs-y3-final-regional-opponent-player-05",
+              "originBase": "batter",
+              "targetBase": "first",
+              "movementDecision": "commitAdvance",
+              "startQuality": "normalStart",
+              "movementState": "advancing",
+              "timingProfile": "late",
+              "speed": 1,
+              "isForced": true,
+              "forcedMovementTarget": "first",
+              "forceReason": "batterRunnerRequiredToFirst",
+              "chainDepth": 0
+            },
+            "ssActor": {
+              "playerId": "player",
+              "id": "player",
+              "name": "Career fixture",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "SS",
+              "secondaryPositions": [],
+              "bats": "R",
+              "throws": "R",
+              "contact": 8,
+              "power": 4,
+              "speed": 8,
+              "defense": 10,
+              "arm": 8,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "canonical-player",
+              "rosterTeamId": "school-powerhouse-409d352a",
+              "position": "游擊手",
+              "defensivePosition": "SS"
+            },
+            "npcActor": {
+              "playerId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "name": "上田",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 8,
+              "power": 8,
+              "speed": 5,
+              "defense": 10,
+              "arm": 10,
+              "pitching": 4,
+              "pitchingProfile": {
+                "effectiveness": 4,
+                "control": 3,
+                "stuff": 4
+              },
+              "source": "simulation-roster",
+              "position": "一壘手",
+              "defensivePosition": "1B"
+            },
+            "originalDefenseTeam": "home",
+            "rosterDigest": "3f420e464c1629a98fc3b9754379b770af0ebe657fe99661e749f24120a6b780",
+            "legalRoutes": [
+              "secureFirstBaseOut",
+              "holdBall"
+            ],
+            "sourcePhase": "beforeExecution",
+            "sourceScope": "originalLegacyOwnerInIsolatedFixture",
+            "formationSnapshot": null
+          },
+          "digest": "cccb1f0d60498f621520a4b23cb89fafb57e14279bb289845a7bf7e002e14235"
+        },
+        "binding": {
+          "version": "physical-contact-binding-utf8-v2",
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1"
+        },
+        "rawBindings": {
+          "matchId": "hs-y3-final-competition-1",
+          "plateAppearanceId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact",
+          "contactId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "playId": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|ground-defense"
+        },
+        "fixedSlot": {
+          "value": "primaryThrow",
+          "classification": "B_PROPOSED_MAPPING",
+          "formallyPinned": false
+        },
+        "originalSample": {
+          "value": 0.8,
+          "binary64": "3fe999999999999a",
+          "source": "shortstopExecution.sample",
+          "callbackNotInvokedByAdapter": true
+        },
+        "delivery": {
+          "classification": "A",
+          "canonicalThrow": {
+            "version": "defensive-decision-throw-v1",
+            "identity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|holdBall|throw-v1",
+            "decisionIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1|secure-v1|decision-opportunity|2695731230|select|holdBall",
+            "routeId": "holdBall",
+            "throwerId": "player",
+            "throwerPosition": "SS",
+            "targetBase": null,
+            "targetRunnerId": null,
+            "receiverId": null,
+            "receiverPosition": null,
+            "throwDemand": null,
+            "strengthMargin": null,
+            "accuracyMargin": null,
+            "throwAttempted": false,
+            "throwQuality": "notAttempted",
+            "releaseQuality": "held",
+            "ballArrivalState": "controlledByThrower",
+            "variationEvidence": {
+              "consumed": false
+            },
+            "authority": "deliberateHold"
+          },
+          "originalThrowActionId": "hs-y3-final-competition-1:infield:hs_y1_match_moment_2|0|5|上|hs-y3-final-regional-opponent-player-05|action|2",
+          "originalActionProvenance": {
+            "authority": "existingInfieldExecution+activeRoster",
+            "sample": 0.8,
+            "consumedRng": false,
+            "capabilities": {
+              "fielding": 10,
+              "reaction": 10,
+              "range": 10,
+              "arm": 10,
+              "throwing": 10,
+              "decision": 10,
+              "catching": 10
+            },
+            "timing": {
+              "routeWindow": null,
+              "timingClassification": "noContest",
+              "timingMargin": null,
+              "relayToFirstWindow": "normal",
+              "batterSpeed": 1
+            },
+            "sourceStage": "firstThrow"
+          },
+          "actionPhysicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+          "plannedReceiverId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+          "plannedTarget": {
+            "runnerId": "hs-y3-final-regional-opponent-player-05",
+            "base": "first"
+          },
+          "actualDeliveryReceiverId": null,
+          "actualDeliveryTarget": {
+            "runnerId": null,
+            "base": null
+          },
+          "status": "notAttempted",
+          "canonicalSourceAbsentReason": null,
+          "legacyReceiverOutcomeConsumed": false
+        },
+        "rawNpcCapabilities": {
+          "defense": 10,
+          "speed": 5,
+          "arm": 10,
+          "contact": 8,
+          "attributeSources": {
+            "defense": "A",
+            "speed": "A",
+            "arm": "A",
+            "contact": "A"
+          },
+          "scope": "originalActiveRosterObservation"
+        },
+        "timingSource": {
+          "status": "insufficient",
+          "reason": "v1HasNoApprovedCommonLaunchOrigin",
+          "legacyVersion": "defensive-runner-throw-settlement-v1",
+          "originalRunnerRelativeArrival": null,
+          "originalBallRelativeArrival": null,
+          "receiverCompletionConsumed": false
+        },
+        "pureCompatibility": {
+          "status": "invalid",
+          "code": "invalidPhysicalIdentity",
+          "acceptedNewPhysicalVersion": false
+        },
+        "missingFacts": [
+          "preExecutionFormationPolicyAuthority",
+          "fixedSlotAndVersionPinInProduction",
+          "commonPhysicalClockOrigin",
+          "independentSecureDemandAndDuration",
+          "independentPossessionTouchTime",
+          "capabilityCoefficientCalibration",
+          "runtimeLifecycleAndSaveGuard",
+          "currentPureAsciiIdentityContract"
+        ],
+        "sealedCandidateInput": null,
+        "candidateExecutionCalls": 0,
+        "formalProductionAuthority": false,
+        "writes": {
+          "match": 0,
+          "record": 0,
+          "evaluation": 0,
+          "rng": 0
+        }
+      }
+    },
+    {
+      "name": "isolatedFixture prelaunch clock",
+      "result": {
+        "status": "ok",
+        "kind": "unappliedPhysicalClockDesignDiagnostic",
+        "version": "crt-physical-play-integer-ticks-v2-2",
+        "origin": {
+          "version": "physical-play-contact-anchor-v1",
+          "originId": "fixture-common-contact-origin-1",
+          "physicalIdentity": "fixture-contact-clock-1",
+          "status": "known",
+          "decimal": "100.000"
+        },
+        "timeline": {
+          "throwLaunch": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "fixture-common-contact-origin-1",
+            "status": "known",
+            "ticks": 2000
+          },
+          "ballArrival": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "fixture-common-contact-origin-1",
+            "status": "known",
+            "ticks": 7000
+          },
+          "positioningStart": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "fixture-common-contact-origin-1",
+            "status": "known",
+            "ticks": 250
+          },
+          "positioningCompletion": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "fixture-common-contact-origin-1",
+            "status": "known",
+            "ticks": 1500
+          },
+          "receiveAttempt": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "fixture-common-contact-origin-1",
+            "status": "known",
+            "ticks": 7000
+          },
+          "secureCompletion": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "fixture-common-contact-origin-1",
+            "status": "known",
+            "ticks": 7200
+          },
+          "baseTouchCompletion": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "fixture-common-contact-origin-1",
+            "status": "known",
+            "ticks": 7350
+          },
+          "runnerArrival": {
+            "version": "crt-physical-play-integer-ticks-v2-2",
+            "originId": "fixture-common-contact-origin-1",
+            "status": "known",
+            "ticks": 8000
+          }
+        },
+        "firstThrowLocalProjection": {
+          "throwLaunch": {
+            "status": "known",
+            "ticks": 0,
+            "relativeTo": "firstThrowLaunch",
+            "authoritativeClock": false
+          },
+          "ballArrival": {
+            "status": "known",
+            "ticks": 5000,
+            "relativeTo": "firstThrowLaunch",
+            "authoritativeClock": false
+          },
+          "positioningStart": {
+            "status": "known",
+            "ticks": -1750,
+            "relativeTo": "firstThrowLaunch",
+            "authoritativeClock": false
+          },
+          "positioningCompletion": {
+            "status": "known",
+            "ticks": -500,
+            "relativeTo": "firstThrowLaunch",
+            "authoritativeClock": false
+          },
+          "receiveAttempt": {
+            "status": "known",
+            "ticks": 5000,
+            "relativeTo": "firstThrowLaunch",
+            "authoritativeClock": false
+          },
+          "secureCompletion": {
+            "status": "known",
+            "ticks": 5200,
+            "relativeTo": "firstThrowLaunch",
+            "authoritativeClock": false
+          },
+          "baseTouchCompletion": {
+            "status": "known",
+            "ticks": 5350,
+            "relativeTo": "firstThrowLaunch",
+            "authoritativeClock": false
+          },
+          "runnerArrival": {
+            "status": "known",
+            "ticks": 6000,
+            "relativeTo": "firstThrowLaunch",
+            "authoritativeClock": false
+          }
+        },
+        "timingMarginTicks": 650,
+        "relation": "defenseBeforeRunner",
+        "rounding": "exact decimal origin subtraction before half-away-from-zero to integer ticks",
+        "perRelativeTimestampErrorBoundTicks": "0.5",
+        "actualRetirements": 0,
+        "formalSettlementAdmission": false,
+        "formalScoringAdmission": false,
+        "runtimeEnabled": false
+      }
+    }
+  ],
+  "sourcePaths": [
+    "ai-plate-appearance-outcome.js",
+    "baseball-defense-prototype.js",
+    "baseball-gameplay-integration.js",
+    "baseball-gameplay-prototype-utils.js",
+    "baseball-offense-prototype.js",
+    "baseball-training-resolver.js",
+    "batted-ball-fly-ball-defense.js",
+    "batted-ball-ground-defense.js",
+    "batted-ball-line-drive-defense.js",
+    "batted-ball-outcome-mapping.js",
+    "batted-ball-physical.js",
+    "batted-ball-tag-up-execution.js",
+    "batter-anticipation.js",
+    "career-age22-outcome-resolver.js",
+    "career-development-progression.js",
+    "career-development-runtime-resolver.js",
+    "career-save-admission.js",
+    "career-spine-contract.js",
+    "career-transition-commit.js",
+    "career-transition-progression.js",
+    "career-transition-resolver.js",
+    "career-transition-runtime-resolver.js",
+    "coach-evaluation-boundary.js",
+    "coach-response-flow.js",
+    "coach.js",
+    "competition-presentation.js",
+    "competition-rules.js",
+    "county-selection-opportunity.js",
+    "current-state-boundary.js",
+    "day-completion-flow.js",
+    "decision-flow.js",
+    "defensive-decision-throw-foundation.js",
+    "defensive-opportunity-foundation.js",
+    "defensive-reach-secure-foundation.js",
+    "defensive-runner-throw-settlement-foundation.js",
+    "evaluation-registry-bootstrap.js",
+    "evaluation-registry.js",
+    "force-advancement.js",
+    "high-school-career-evaluation.js",
+    "high-school-career-offers.js",
+    "high-school-competition-evidence.js",
+    "high-school-competition-foundation.js",
+    "high-school-competition-reassessment.js",
+    "high-school-entry-roster-context.js",
+    "high-school-exchange-network.js",
+    "high-school-friendly-invitation-producer.js",
+    "high-school-match-opportunity-generation.js",
+    "high-school-opportunity-probability.js",
+    "high-school-opportunity-selection.js",
+    "high-school-relationship-recency.js",
+    "high-school-relationship-temporal-authority.js",
+    "high-school-schedule-opportunity.js",
+    "high-school-training-camp-producer.js",
+    "high-school-year-transition.js",
+    "index.html",
+    "match-context-foundation.js",
+    "match-development-settlement-presentation.js",
+    "match-experience-development.js",
+    "match-game-record.js",
+    "match-situation-lifecycle.js",
+    "narrative-condition-boundary.js",
+    "narrative-condition-flow.js",
+    "national-selection-pipeline.js",
+    "npc.js",
+    "offensive-bunt-count-rules.js",
+    "offensive-bunt-defensive-handoff.js",
+    "offensive-bunt-execution.js",
+    "offensive-plate-approach.js",
+    "offensive-tactical-action.js",
+    "offensive-tactical-decision.js",
+    "offensive-tactical-opportunity.js",
+    "pitch-observation-foundation.js",
+    "pitch-sequence-state-foundation.js",
+    "pitch-sequencing.js",
+    "pitch-tactical-decision-foundation.js",
+    "pitch-tactical-decision-production-adapter.js",
+    "pitch-tactical-interpretation-foundation.js",
+    "pitcher-catcher-tactical-integration.js",
+    "pitcher-mental-state.js",
+    "pitcher-process-state.js",
+    "plate-decision-foundation.js",
+    "player.js",
+    "playing-time-game-exposure.js",
+    "relationship-boundary.js",
+    "relationship-flow.js",
+    "rival.js",
+    "save.js",
+    "script.js",
+    "story.js",
+    "team-roster-foundation.js",
+    "team-strength-model.js",
+    "tests/first-base-receive-active-ground-production-integration-test.js",
+    "tests/high-school-career-test-context.js",
+    "time-boundary.js"
+  ],
+  "limits": {
+    "prototypeScope": "DESIGN_ONLY_NOT_RUNTIME_REGISTERED",
+    "sourceWitnesses": "existing Legacy code in original isolated fixture",
+    "timingAndFormationAssumptions": "isolatedFixture",
+    "candidateExecutionCalls": 0,
+    "runtimeEnabled": false,
+    "formalShadowSimulation": false,
+    "syntheticProductionIdentities": false,
+    "formalSourceAuthorityPassClaim": false,
+    "actualRetirements": 0,
+    "L03": "PARTIAL"
+  },
+  "runner": {
+    "baseline": "9f768212116bd267f6d436a67b7ed9b0088a2f86",
+    "before": {
+      "head": "9f768212116bd267f6d436a67b7ed9b0088a2f86",
+      "originMain": "9f768212116bd267f6d436a67b7ed9b0088a2f86",
+      "branch": "main",
+      "indexEmpty": true,
+      "existingTrackedCount": 708,
+      "existingTrackedHashesUnchanged": true,
+      "protectedMetadataEqual": true,
+      "originalStatusEqual": true,
+      "protectedContentReads": 0,
+      "protectedContentHashes": 0,
+      "status": " M tests/fast-check-smoke-test.cjs\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/infield-baseball-logic-audit-architecture-evidence.json\n?? docs/infield-baseball-logic-audit-evidence.json\n?? docs/infield-baseball-logic-audit-runner.cjs\n?? docs/infield-baseball-logic-validation-audit-v1.md\n?? docs/infield-scorer-recovery-sprint-5-green-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json\n?? docs/infield-scorer-recovery-sprint-5-validation.json\n?? docs/receiver-execution-v2-production-source-timing-origin-sprint-10a2.md\n?? docs/receiver-execution-v2-sprint-10a2-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a2-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a2-blocking-source-evidence.json\n?? docs/receiver-execution-v2-sprint-10a2-calibration-lifecycle-plan.json\n?? docs/receiver-execution-v2-sprint-10a2-current-source-verification.json\n?? docs/receiver-execution-v2-sprint-10a2-initial-test-evidence.json\n?? docs/receiver-execution-v2-sprint-10a2-production-entry-matrix.json\n?? docs/receiver-execution-v2-sprint-10a2-pure-contract-revision-proposal.json\n?? docs/receiver-execution-v2-sprint-10a2-runner-initial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a2-source-adapter-specification.json\n?? docs/receiver-execution-v2-sprint-10a2-timing-origin-decision.json\n?? install.ps1\n?? receiver-execution-v2-production-source-adapter-prototype.cjs\n?? tests/receiver-execution-v2-production-source-timing-test.cjs\n?? tests/receiver-execution-v2-sprint-10a2-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a2-source-probe.cjs\n"
+    },
+    "after": {
+      "head": "9f768212116bd267f6d436a67b7ed9b0088a2f86",
+      "originMain": "9f768212116bd267f6d436a67b7ed9b0088a2f86",
+      "branch": "main",
+      "indexEmpty": true,
+      "existingTrackedCount": 708,
+      "existingTrackedHashesUnchanged": true,
+      "protectedMetadataEqual": true,
+      "originalStatusEqual": true,
+      "protectedContentReads": 0,
+      "protectedContentHashes": 0,
+      "status": " M tests/fast-check-smoke-test.cjs\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/infield-baseball-logic-audit-architecture-evidence.json\n?? docs/infield-baseball-logic-audit-evidence.json\n?? docs/infield-baseball-logic-audit-runner.cjs\n?? docs/infield-baseball-logic-validation-audit-v1.md\n?? docs/infield-scorer-recovery-sprint-5-green-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json\n?? docs/infield-scorer-recovery-sprint-5-validation.json\n?? docs/receiver-execution-v2-production-source-timing-origin-sprint-10a2.md\n?? docs/receiver-execution-v2-sprint-10a2-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a2-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a2-blocking-source-evidence.json\n?? docs/receiver-execution-v2-sprint-10a2-calibration-lifecycle-plan.json\n?? docs/receiver-execution-v2-sprint-10a2-current-source-verification.json\n?? docs/receiver-execution-v2-sprint-10a2-initial-test-evidence.json\n?? docs/receiver-execution-v2-sprint-10a2-production-entry-matrix.json\n?? docs/receiver-execution-v2-sprint-10a2-pure-contract-revision-proposal.json\n?? docs/receiver-execution-v2-sprint-10a2-runner-initial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a2-source-adapter-specification.json\n?? docs/receiver-execution-v2-sprint-10a2-timing-origin-decision.json\n?? install.ps1\n?? receiver-execution-v2-production-source-adapter-prototype.cjs\n?? tests/receiver-execution-v2-production-source-timing-test.cjs\n?? tests/receiver-execution-v2-sprint-10a2-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a2-source-probe.cjs\n"
+    },
+    "sourceHashes": {
+      "receiver-execution-v2-production-source-adapter-prototype.cjs": {
+        "size": 19654,
+        "sha256": "d589eabe59642adadee59c3d753b1ef6ec0175222f20b85247f55bd098753742"
+      },
+      "tests/receiver-execution-v2-production-source-timing-test.cjs": {
+        "size": 25437,
+        "sha256": "ad272fb381c101d13a6323017a4cf285c9390a5b671d86487cb1fd36f9202ae1"
+      },
+      "tests/receiver-execution-v2-sprint-10a2-source-probe.cjs": {
+        "size": 4509,
+        "sha256": "ebaef2c11ce0ed62c46192a542c9156611061e2bf297d93c66cb8f436345e1b8"
+      },
+      "tests/receiver-execution-v2-sprint-10a2-runner.cjs": {
+        "size": 6950,
+        "sha256": "3144335c5629e102584a5368556c78b36284ac317723c4f19d1e7352e458a4d1"
+      },
+      "docs/receiver-execution-v2-sprint-10a2-production-entry-matrix.json": {
+        "size": 27869,
+        "sha256": "ef14cf77b49d08705bea00d47eff1e15cfab0d04da1256951af7be58cd4e267c"
+      },
+      "docs/receiver-execution-v2-sprint-10a2-source-adapter-specification.json": {
+        "size": 6340,
+        "sha256": "101e506cc1aafa481285743cf5c2847c19b3dc25f14a203f075f692a34c0b0d3"
+      },
+      "docs/receiver-execution-v2-sprint-10a2-timing-origin-decision.json": {
+        "size": 3962,
+        "sha256": "cadf9b41160fc615d1bf35178593e3f58818f21ce48824a2418433b8cae418d5"
+      },
+      "docs/receiver-execution-v2-sprint-10a2-pure-contract-revision-proposal.json": {
+        "size": 3248,
+        "sha256": "b2394d6d7e3c292eca493c69f912b2cb227a0570158fdb80d991057bb9010726"
+      },
+      "docs/receiver-execution-v2-sprint-10a2-calibration-lifecycle-plan.json": {
+        "size": 12920,
+        "sha256": "5188bedadabc465a69f333f08ddef742bd896dbaa7dab7682c9d6f635407355b"
+      }
+    },
+    "node": "v24.19.0",
+    "fullRepository": "NOT_RUN",
+    "capturePolicy": "exclusive-create"
+  }
+}

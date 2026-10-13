@@ -1,0 +1,732 @@
+{
+  "scope": "DESIGN_ONLY",
+  "classifications": {
+    "A": "existing authoritative owner fact",
+    "B": "deterministic projection of retained original source",
+    "C": "missing or unconnected authority",
+    "NEW": "proposed versioned model, not existing A"
+  },
+  "rows": [
+    {
+      "id": "physicalTruth",
+      "classification": "A",
+      "existingOwner": "resolveBattedBallPhysicalTruth",
+      "generationPhase": "fair-contact simulation",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "ordinary PA physicalTruth and ground handoff",
+      "actorPhysicalBinding": "raw physical identity; physical inputs/rolls retained",
+      "meaningfulRoutineEntry": "common ordinary physical path",
+      "historicalCompatibilityLimit": "unsupported/synthetic default identity excluded",
+      "minimumNewFacts": [
+        "none for raw fact; new origin tag separate"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.batted-ball-physical.resolveBattedBallPhysicalTruth",
+        "file": "batted-ball-physical.js",
+        "function": "resolveBattedBallPhysicalTruth",
+        "lines": [
+          [
+            105,
+            131
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": false
+    },
+    {
+      "id": "plateAppearanceIdentity",
+      "classification": "A",
+      "existingOwner": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+      "generationPhase": "before first defensive execution",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "ordinaryDefensivePlateAppearanceState",
+      "actorPhysicalBinding": "paIdentity/batter/context; never reconstruct from current settled state",
+      "meaningfulRoutineEntry": "same common handoff",
+      "historicalCompatibilityLimit": "retain original historical topology/identity",
+      "minimumNewFacts": [
+        "new typed wrapper after contract review"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+        "file": "script.js",
+        "function": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+        "lines": [
+          [
+            5117,
+            5306
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "groundHandoff",
+      "classification": "A",
+      "existingOwner": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+      "generationPhase": "physical owner creates supported opportunity",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "groundBallInPlayState",
+      "actorPhysicalBinding": "ground-defense identity and physical copy",
+      "meaningfulRoutineEntry": "shared preparation before classification",
+      "historicalCompatibilityLimit": "cached existing contact must retain pin; no backfill",
+      "minimumNewFacts": [
+        "receiverSourceFormatVersion",
+        "receiverSourceSnapshot"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+        "file": "script.js",
+        "function": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+        "lines": [
+          [
+            5117,
+            5306
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "SSPrimary",
+      "classification": "A",
+      "existingOwner": "getHighSchoolDefensiveOpportunity",
+      "generationPhase": "physical responsibility resolution",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "defensive opportunity/access",
+      "actorPhysicalBinding": "player SS active roster and physical identity",
+      "meaningfulRoutineEntry": "shared physical opportunity",
+      "historicalCompatibilityLimit": "historical lanes keep source topology",
+      "minimumNewFacts": [
+        "frozen actor references and eligible slice proof"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.getHighSchoolDefensiveOpportunity",
+        "file": "script.js",
+        "function": "getHighSchoolDefensiveOpportunity",
+        "lines": [
+          [
+            4954,
+            4970
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "NPC1BRoster",
+      "classification": "A",
+      "existingOwner": "getCurrentDefender",
+      "generationPhase": "active defense validation",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "rosters plus situation teammate projection",
+      "actorPhysicalBinding": "legal actor ID; assignment is not position",
+      "meaningfulRoutineEntry": "same actor lookup source",
+      "historicalCompatibilityLimit": "current post-third-out defense cannot substitute for original roster",
+      "minimumNewFacts": [
+        "original defenseTeam/rosterVersion/actor snapshot"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.team-roster-foundation.getCurrentDefender",
+        "file": "team-roster-foundation.js",
+        "function": "getCurrentDefender",
+        "lines": [
+          [
+            346,
+            350
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "NPCCapability",
+      "classification": "A/B",
+      "existingOwner": "getDefensiveSimulationCapability",
+      "generationPhase": "actor capability projection",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "actor and situation capabilities",
+      "actorPhysicalBinding": "defense aliases; speed raw; no independent catching/mobility",
+      "meaningfulRoutineEntry": "same capability owner",
+      "historicalCompatibilityLimit": "never use weak actual as average effort",
+      "minimumNewFacts": [
+        "adapterVersion and per-alias provenance; calibration status"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.getDefensiveSimulationCapability",
+        "file": "script.js",
+        "function": "getDefensiveSimulationCapability",
+        "lines": [
+          [
+            6466,
+            6495
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "coverIntent",
+      "classification": "C/NEW",
+      "existingOwner": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+      "generationPhase": "proposed contact-time snapshot BEFORE outcome",
+      "availableBeforeFirstExecution": false,
+      "savedCache": "not currently emitted",
+      "actorPhysicalBinding": "role assignment does not establish actual location",
+      "meaningfulRoutineEntry": "one future common chooser, not separate family pins",
+      "historicalCompatibilityLimit": "old saves keep legacy absence",
+      "minimumNewFacts": [
+        "formationPolicyVersion",
+        "sourceKind policyNominal/explicitFormationState",
+        "context",
+        "seed",
+        "sourceDigest"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+        "file": "script.js",
+        "function": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+        "lines": [
+          [
+            5117,
+            5306
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "formationMemory",
+      "classification": "C/NEW",
+      "existingOwner": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+      "generationPhase": "future reset/cover-state policy at new opportunity",
+      "availableBeforeFirstExecution": false,
+      "savedCache": "no independent positional memory in traced owner",
+      "actorPhysicalBinding": "prior action may leave base; cannot infer from previous out",
+      "meaningfulRoutineEntry": "future physical owner only",
+      "historicalCompatibilityLimit": "do not invent position in old saved plays",
+      "minimumNewFacts": [
+        "coarseFielderStateVersion or explicitly approved per-contact nominal reset policy"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+        "file": "script.js",
+        "function": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+        "lines": [
+          [
+            5117,
+            5306
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "fixedSlot",
+      "classification": "B_PROPOSAL",
+      "existingOwner": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+      "generationPhase": "pre-execution snapshot",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "not formally pinned",
+      "actorPhysicalBinding": "primaryThrow mapped from same physical opportunity, not selected route ID",
+      "meaningfulRoutineEntry": "same handoff owner",
+      "historicalCompatibilityLimit": "no rename on retry/hold/offline",
+      "minimumNewFacts": [
+        "physicalSlotVersion and common pin"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+        "file": "script.js",
+        "function": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+        "lines": [
+          [
+            5117,
+            5306
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "originalSample",
+      "classification": "A",
+      "existingOwner": "resolveInfieldDecision",
+      "generationPhase": "original randomSource after beginExecution",
+      "availableBeforeFirstExecution": false,
+      "savedCache": "shortstopExecution.sample and action provenance",
+      "actorPhysicalBinding": "exact binary64; callback order is owned by legacy",
+      "meaningfulRoutineEntry": "same resolver/cache owner",
+      "historicalCompatibilityLimit": "executed duplicate/recovery reads saved sample only",
+      "minimumNewFacts": [
+        "source binding after original callback; pending has no sample"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.resolveInfieldDecision",
+        "file": "script.js",
+        "function": "resolveInfieldDecision",
+        "lines": [
+          [
+            8372,
+            8507
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "canonicalThrow",
+      "classification": "A",
+      "existingOwner": "buildHighSchoolShortstopExecution",
+      "generationPhase": "after acquisition/selected route",
+      "availableBeforeFirstExecution": false,
+      "savedCache": "decisionThrowState.throwResolution",
+      "actorPhysicalBinding": "original throw ID, actor,target,quality,release,distance; independent variation",
+      "meaningfulRoutineEntry": "same SS builder for routine/meaningful",
+      "historicalCompatibilityLimit": "hold actual target null; acquisition failure may create no throw object",
+      "minimumNewFacts": [
+        "detached source view; no second roll"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.buildHighSchoolShortstopExecution",
+        "file": "script.js",
+        "function": "buildHighSchoolShortstopExecution",
+        "lines": [
+          [
+            11859,
+            11946
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "actionLedger",
+      "classification": "A",
+      "existingOwner": "buildHighSchoolShortstopExecution",
+      "generationPhase": "original action facts projection",
+      "availableBeforeFirstExecution": false,
+      "savedCache": "resolution.actionFacts",
+      "actorPhysicalBinding": "original IDs/physical/action links; not reusable as preexisting fixed slot",
+      "meaningfulRoutineEntry": "same raw action owner",
+      "historicalCompatibilityLimit": "missing original facts stay insufficient; never fabricate IDs",
+      "minimumNewFacts": [
+        "UTF8 identifier rule and original-source links"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.buildHighSchoolShortstopExecution",
+        "file": "script.js",
+        "function": "buildHighSchoolShortstopExecution",
+        "lines": [
+          [
+            11859,
+            11946
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "firstBaseObligation",
+      "classification": "A",
+      "existingOwner": "buildGroundBallDefensiveOpportunity",
+      "generationPhase": "runner realization at contact",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "forceChain and runnerPhysicalStates",
+      "actorPhysicalBinding": "batter-runner to first from original base state",
+      "meaningfulRoutineEntry": "shared force/runner source",
+      "historicalCompatibilityLimit": "do not use later currentBatter/outs/bases",
+      "minimumNewFacts": [
+        "frozen original obligation reference"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.batted-ball-ground-defense.buildGroundBallDefensiveOpportunity",
+        "file": "batted-ball-ground-defense.js",
+        "function": "buildGroundBallDefensiveOpportunity",
+        "lines": [
+          [
+            320,
+            366
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": false
+    },
+    {
+      "id": "v1RunnerQuantity",
+      "classification": "A/B",
+      "existingOwner": "deriveRunnerArrival",
+      "generationPhase": "runner state arithmetic",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "runnerState; resolved timing after execution",
+      "actorPhysicalBinding": "relative arrival is unanchored coarse v1 quantity",
+      "meaningfulRoutineEntry": "existing timing owner",
+      "historicalCompatibilityLimit": "negative value kept; no implicit v2 contact anchor",
+      "minimumNewFacts": [
+        "approved NEW runner clock policy with explicit origin/version"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation.deriveRunnerArrival",
+        "file": "defensive-runner-throw-settlement-foundation.js",
+        "function": "deriveRunnerArrival",
+        "lines": [
+          [
+            15,
+            22
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "v1BallQuantity",
+      "classification": "A/B",
+      "existingOwner": "resolveTiming",
+      "generationPhase": "during legacy timing resolution",
+      "availableBeforeFirstExecution": false,
+      "savedCache": "runnerThrowTiming",
+      "actorPhysicalBinding": "quality/distance/release-derived v1 relative quantity; may be absent",
+      "meaningfulRoutineEntry": "same existing timing owner",
+      "historicalCompatibilityLimit": "noContest/offline has no guaranteed numeric arrival",
+      "minimumNewFacts": [
+        "NEW flight duration policy; do not re-label v1 absolute as flight"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation.resolveTiming",
+        "file": "defensive-runner-throw-settlement-foundation.js",
+        "function": "resolveTiming",
+        "lines": [
+          [
+            23,
+            60
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "SSLaunchClock",
+      "classification": "C/NEW",
+      "existingOwner": "buildHighSchoolShortstopExecution",
+      "generationPhase": "after acquisition and transfer",
+      "availableBeforeFirstExecution": false,
+      "savedCache": "no timestamp currently emitted",
+      "actorPhysicalBinding": "release quality is not elapsed time",
+      "meaningfulRoutineEntry": "future source handoff must preserve original throw",
+      "historicalCompatibilityLimit": "cannot fill old clock offset as zero",
+      "minimumNewFacts": [
+        "acquisition completion",
+        "transfer duration",
+        "launch offset and clockPolicyVersion"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.buildHighSchoolShortstopExecution",
+        "file": "script.js",
+        "function": "buildHighSchoolShortstopExecution",
+        "lines": [
+          [
+            11859,
+            11946
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "incomingDemand",
+      "classification": "C/NEW",
+      "existingOwner": "bridgeTiming",
+      "generationPhase": "versioned canonical-to-incoming model",
+      "availableBeforeFirstExecution": false,
+      "savedCache": "isolated10A.1 only",
+      "actorPhysicalBinding": "onTarget/challenging/weak to new demand; no receiver outcome input",
+      "meaningfulRoutineEntry": "source adapter separate from outcome owner",
+      "historicalCompatibilityLimit": "do not backfill demand on old saves",
+      "minimumNewFacts": [
+        "reviewed policy/calibration version and source provenance"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-source-authority-foundation.bridgeTiming",
+        "file": "receiver-execution-v2-source-authority-foundation.js",
+        "function": "bridgeTiming",
+        "lines": [
+          [
+            144,
+            175
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "positionSecureTouchTime",
+      "classification": "C/NEW",
+      "existingOwner": "validate",
+      "generationPhase": "new model stage outputs",
+      "availableBeforeFirstExecution": false,
+      "savedCache": "isolated pure only",
+      "actorPhysicalBinding": "possession/readiness/hands/contact separate",
+      "meaningfulRoutineEntry": "future same physical-clock origin",
+      "historicalCompatibilityLimit": "not derivable from official out or completed ledger touch",
+      "minimumNewFacts": [
+        "signed actor start",
+        "secure duration",
+        "independent contact/touch duration"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation.validate",
+        "file": "receiver-execution-v2-foundation.js",
+        "function": "validate",
+        "lines": [
+          [
+            144,
+            213
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "routineAutomatic",
+      "classification": "A/B",
+      "existingOwner": "beginAutomaticGroundBallSituationExecution",
+      "generationPhase": "admitted to executing before callback",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "activeSituation.executionState",
+      "actorPhysicalBinding": "replaces enum fields; no new pin retained today",
+      "meaningfulRoutineEntry": "same handoff snapshot as meaningful",
+      "historicalCompatibilityLimit": "snapshot missing on old case stays legacy",
+      "minimumNewFacts": [
+        "validate snapshot before automatic begin; retain reference"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.beginAutomaticGroundBallSituationExecution",
+        "file": "script.js",
+        "function": "beginAutomaticGroundBallSituationExecution",
+        "lines": [
+          [
+            11195,
+            11209
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "meaningfulDispatch",
+      "classification": "A/B",
+      "existingOwner": "resolveHighSchoolDefensivePlay",
+      "generationPhase": "player decision or cached resolution",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "context and decision/selected route",
+      "actorPhysicalBinding": "registry namespace calls verified from source",
+      "meaningfulRoutineEntry": "one pin in handoff; context copy only",
+      "historicalCompatibilityLimit": "do not invent meaningful empty-base fixture",
+      "minimumNewFacts": [
+        "shared pre-execution validation before family dispatch"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.resolveHighSchoolDefensivePlay",
+        "file": "script.js",
+        "function": "resolveHighSchoolDefensivePlay",
+        "lines": [
+          [
+            10308,
+            10324
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "lifecycleRetention",
+      "classification": "C",
+      "existingOwner": "beginExecution",
+      "generationPhase": "beginExecution replacement",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "only current explicit keys",
+      "actorPhysicalBinding": "context clone does not validate versions",
+      "meaningfulRoutineEntry": "same lifecycle owner",
+      "historicalCompatibilityLimit": "old optional omissions vs new required fields separated",
+      "minimumNewFacts": [
+        "source snapshot/pin/binding references retained explicitly"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.match-situation-lifecycle.beginExecution",
+        "file": "match-situation-lifecycle.js",
+        "function": "beginExecution",
+        "lines": [
+          [
+            114,
+            124
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "settledSummary",
+      "classification": "A/C",
+      "existingOwner": "createClosedSituationSummary",
+      "generationPhase": "after markSettled and close",
+      "availableBeforeFirstExecution": false,
+      "savedCache": "closed summary enumerated keys",
+      "actorPhysicalBinding": "existing exactly-once owner; no new version reference today",
+      "meaningfulRoutineEntry": "same lifecycle summary owner",
+      "historicalCompatibilityLimit": "no record backfill; metadata only",
+      "minimumNewFacts": [
+        "minimal source/model version reference if required"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.match-situation-lifecycle.createClosedSituationSummary",
+        "file": "match-situation-lifecycle.js",
+        "function": "createClosedSituationSummary",
+        "lines": [
+          [
+            195,
+            209
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "rawSaveDiscriminator",
+      "classification": "C",
+      "existingOwner": "normalizeSave",
+      "generationPhase": "BEFORE createInitialPlayer/Object.assign",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "saved.saveVersion capture then normalization",
+      "actorPhysicalBinding": "present new-format missing tag must reject",
+      "meaningfulRoutineEntry": "one Save admission owner",
+      "historicalCompatibilityLimit": "external format/history evidence required; digest not authentication",
+      "minimumNewFacts": [
+        "raw source-format guard before defaults/version overwrite"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.save.normalizeSave",
+        "file": "save.js",
+        "function": "normalizeSave",
+        "lines": [
+          [
+            12,
+            511
+          ],
+          [
+            512,
+            628
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "sharedGuardEarlyReturn",
+      "classification": "C",
+      "existingOwner": "validateHighSchoolDecisionThrowState",
+      "generationPhase": "before firstBase/3B/missing facts/settlementApplied returns",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "existing route/execution validation",
+      "actorPhysicalBinding": "all present copies must agree",
+      "meaningfulRoutineEntry": "same guard called by recovery/dispatch",
+      "historicalCompatibilityLimit": "old recognizably legacy omissions remain accepted",
+      "minimumNewFacts": [
+        "version/source copy validation before ALL returns"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.script.validateHighSchoolDecisionThrowState",
+        "file": "script.js",
+        "function": "validateHighSchoolDecisionThrowState",
+        "lines": [
+          [
+            11990,
+            12053
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "officialSettlement",
+      "classification": "A_UNCHANGED",
+      "existingOwner": "deriveSettlement",
+      "generationPhase": "strict v1 recomputation then settlement",
+      "availableBeforeFirstExecution": false,
+      "savedCache": "existing settlement ledger",
+      "actorPhysicalBinding": "Force/Third-Out/single apply own retirement",
+      "meaningfulRoutineEntry": "do not create new apply owner",
+      "historicalCompatibilityLimit": "legacy v1 path stays unchanged",
+      "minimumNewFacts": [
+        "version discriminator only in future authoritative timing sprint"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.defensive-runner-throw-settlement-foundation.deriveSettlement",
+        "file": "defensive-runner-throw-settlement-foundation.js",
+        "function": "deriveSettlement",
+        "lines": [
+          [
+            94,
+            133
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": false
+    },
+    {
+      "id": "PureInputLimits",
+      "classification": "C_REVISION",
+      "existingOwner": "validate",
+      "generationPhase": "current contract validation",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "S8 seal",
+      "actorPhysicalBinding": "ASCII-only IDs; first launch0; nonnegative actor time",
+      "meaningfulRoutineEntry": "not connected to Match",
+      "historicalCompatibilityLimit": "old versions remain resolvable and immutable",
+      "minimumNewFacts": [
+        "explicit UTF8 identifier and physical-origin timing contract revisions"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-foundation.validate",
+        "file": "receiver-execution-v2-foundation.js",
+        "function": "validate",
+        "lines": [
+          [
+            144,
+            213
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    },
+    {
+      "id": "IsolatedAdmissionLimits",
+      "classification": "C_INTEGRATION",
+      "existingOwner": "createPinRaw",
+      "generationPhase": "isolated createPin only",
+      "availableBeforeFirstExecution": true,
+      "savedCache": "not formal Save",
+      "actorPhysicalBinding": "guarded Raw API exports; retention is metadata only",
+      "meaningfulRoutineEntry": "not a formal chooser",
+      "historicalCompatibilityLimit": "executed/settled v2 runtime Save not implemented",
+      "minimumNewFacts": [
+        "real pre-execution owner/phase/roster guards; new registry versions"
+      ],
+      "source": {
+        "qualifiedName": "E-meng-baseball_life_sim_semirefactor.receiver-execution-v2-admission-timing-foundation.createPinRaw",
+        "file": "receiver-execution-v2-admission-timing-foundation.js",
+        "function": "createPinRaw",
+        "lines": [
+          [
+            67,
+            77
+          ]
+        ]
+      },
+      "requiresExistingProductionChange": true
+    }
+  ],
+  "count": 27,
+  "limits": [
+    "Fixture values are not Production positioning/time authority.",
+    "RequiresProductionChange flags are proposed future scope, not edits in this sprint.",
+    "All identities from original cached source, not reconstructed post-settlement."
+  ]
+}

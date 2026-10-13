@@ -1,0 +1,68 @@
+{
+  "decision": "DECIDED_DESIGN_ONLY",
+  "selected": "C: existing Match Physical Play Owner owns one common absolute clock anchored at contact, with action offsets",
+  "anchorVersion": "physical-play-contact-anchor-v1",
+  "timingVersion": "crt-physical-play-integer-ticks-v2-2",
+  "alternatives": [
+    {
+      "option": "A_contact_only",
+      "benefit": "natural same-ball origin for runner and cover movement",
+      "limitation": "needs versioned physical owner to persist origin and offsets across legs/replay"
+    },
+    {
+      "option": "B_first_throw_launch",
+      "benefit": "current S8 first launch0 fits simple direct receive",
+      "limitation": "prelaunch movement becomes signed; relay resetting would lose chronology; original launch offset absent in v1"
+    },
+    {
+      "option": "C_physical_play_owner_plus_contact_anchor",
+      "benefit": "single owner/common origin for cover,runner,delivery,relay and Save; local launch is derived projection only",
+      "cost": "new source fields/model clock policies and explicit contract versions required"
+    }
+  ],
+  "timeOwnership": {
+    "contact": "physical owner creates shared origin at raw contact; NEW software clock model, not measured seconds",
+    "SSLaunch": "NEW acquisition/transfer duration clock from original stage facts; requires reviewed policy version/calibration",
+    "ballArrival": "launch+NEW flightDuration policy using canonical distance/quality; release belongs in launch exactly once, no double count",
+    "runnerArrival": "original runner state inputs feed separately reviewed NEW contact-relative runner clock; old v1 quantity remains diagnostic A/B, not automatically anchored",
+    "positioning": "frozen formation+NEW start/movement policy; signed start allowed if source identifies precontact activity",
+    "receiveAttempt": "only receivable arrival and receiver ready at arrival; no late hands attempt",
+    "Secure": "attempt+independent hands clean/bobble delay, possession required",
+    "touch": "secured possession+independent legal contact+touch delay",
+    "relay": "same physical origin and absolute offsets; current leg launch follows validated prior stage; actual force/third-out authority remains original owners"
+  },
+  "precision": {
+    "input": "strict decimal CRT text, max6 fractional digits; no exponent, no ordinal windows",
+    "arithmetic": "BigInt exact source micro-CRT difference (time-origin), then half-away-from-zero once to 1000 ticks/CRT",
+    "relativeErrorBoundTicks": "0.5",
+    "raceMarginErrorBoundTicks": "1.0",
+    "ties": "quantization may collapse near margins; exact tick tie creates no candidate/out",
+    "causalOrder": "check exact decimal micro-values BEFORE rounding; negative duration rejected even if would collapse to tick tie",
+    "overflow": "relative ticks bounded +/-1e9; reject, no clamp",
+    "unknown": "retain unknown reason; missing origin blocks interpretation",
+    "clockUnits": "coarse relative model CRT, never seconds/meters"
+  },
+  "prelaunch": {
+    "globalStartMayBeSigned": true,
+    "example": "contact0, positionStart.25, launch2 -> launch-local positioning=-1.75CRT; no clamp",
+    "firstLaunchNoLongerRequiredZero": true,
+    "actorDurationsNonnegative": true,
+    "legacyS8Compatible": false,
+    "revisionRequired": true
+  },
+  "compatibility": {
+    "currentV1Origin": "unapproved/unavailable",
+    "v1BallNumber": "not flight duration; includes release contribution in original formula",
+    "v1RunnerNumber": "unanchored scalar; cannot assign contact0 silently",
+    "policy": "old model/timing path preserved; unknown versions reject; no adding v2 delay to v1 resolved timing",
+    "formalSettlement": "NOT_MODIFIED",
+    "formalSave": "NOT_MODIFIED"
+  },
+  "prototype": {
+    "scope": "isolatedFixture proposedPhysicalClock only",
+    "v1Domain": "insufficient",
+    "kind": "unappliedPhysicalClockDesignDiagnostic",
+    "actualRetirements": 0,
+    "scoringAdmission": false
+  }
+}

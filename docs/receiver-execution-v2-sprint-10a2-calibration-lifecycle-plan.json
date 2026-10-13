@@ -1,0 +1,343 @@
+{
+  "calibration": {
+    "status": "DESIGNED_NOT_RUN_NOT_CALIBRATED",
+    "preservedCoefficientSource": "Sprint10A.1 module and policy tables bytes unchanged",
+    "mapping": [
+      {
+        "field": "defense/speed/arm/contact",
+        "class": "A raw roster"
+      },
+      {
+        "field": "reaction/range/fielding <-defense, throwing<-arm, decision rounded(defense+contact)/2",
+        "class": "B compatible aliases"
+      },
+      {
+        "field": "mobility<-speed, catching<-defense",
+        "class": "NEW versioned uncalibrated mapping"
+      }
+    ],
+    "order": [
+      "identity/actor/source-phase invariants",
+      "clock anchors, units and duration causality",
+      "formation MDU/start policy and range/mobility mappings",
+      "canonical-quality incoming reach/demand",
+      "hands success/bobble/secure durations",
+      "possession/touch timing",
+      "read-only exposure/distribution review after separate authorization"
+    ],
+    "cohortProposal": {
+      "status": "PLANNED_NOT_RUN",
+      "SSQuality": [
+        "onTarget",
+        "challengingReceive",
+        "lateWeakThrow"
+      ],
+      "NPCDefense": [
+        0,
+        5,
+        10,
+        15,
+        20
+      ],
+      "runnerSpeed": [
+        1,
+        10,
+        18
+      ],
+      "coverContext": [
+        "baseCovering",
+        "nearFirstBase",
+        "movingToFirstBase",
+        "lateCover",
+        "unavailable"
+      ],
+      "initialOuts": [
+        0,
+        1,
+        2
+      ],
+      "branches": [
+        "direct",
+        "hold",
+        "offline",
+        "acquisitionNoDelivery"
+      ],
+      "policy": "explicit legal exposure rows; do not cross impossible hold with attempted quality or report fabricated denominator",
+      "seeds": "predeclare before future cohort; no seed search to rescue failing results"
+    },
+    "hardAcceptance": [
+      "same physical vector per one-axis comparison",
+      "no reverse monotonic range/reaction/mobility/hands",
+      "receiver arm/throwing/decision does not improve receiving",
+      "readiness failure never hands failure",
+      "same-origin exact ordering/tie",
+      "no new original callback/sample/cursor",
+      "actor/target ownership/no virtual official out",
+      "no calibrated claim based only on matching Legacy out rate"
+    ],
+    "distributionAcceptance": "preregister exposure-based tolerances after source/clock review; no numerical Production balance tolerance accepted in this sprint",
+    "ordinaryEffort": "separate approved same competition/position/environment average; actual aliases and guessed average10 do not suffice; L03 PARTIAL"
+  },
+  "changeMap": [
+    {
+      "id": "C01",
+      "file": "script.js",
+      "function": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+      "plannedResponsibility": "generate new source snapshot only on fresh supported contact; validate/reuse existing snapshot on cache branch",
+      "minimumFields": [
+        "receiverSourceFormatVersion",
+        "receiverSourceSnapshot",
+        "receiverSourceSnapshotVersion"
+      ],
+      "stage": "before route classification/first callback",
+      "historicalPolicy": "recognizable old absent snapshot stays legacy; new-format missing snapshot reject",
+      "tests": [
+        "new/old cached contact",
+        "routine/meaningful shared pin",
+        "actor/physical tamper",
+        "hold/offline/noAttempt parity"
+      ],
+      "implemented": false
+    },
+    {
+      "id": "C02",
+      "file": "script.js",
+      "function": "getHighSchoolDefensiveOpportunity / existing active roster owner",
+      "plannedResponsibility": "cross-check SS player and NPC1B from original defenseTeam; preserve current responsibility lanes",
+      "minimumFields": [
+        "originalActorRefs",
+        "originalDefenseTeam",
+        "rosterSourceVersion",
+        "frozenCapabilitySnapshot"
+      ],
+      "stage": "snapshot creation and before first execution",
+      "historicalPolicy": "do not reinterpret saved topology as receiver version",
+      "tests": [
+        "playerSS/NPC1B",
+        "roster injection/change",
+        "no responsibility changes"
+      ],
+      "implemented": false
+    },
+    {
+      "id": "C03",
+      "file": "script.js",
+      "function": "resolveInfieldDecision / buildHighSchoolShortstopExecution",
+      "plannedResponsibility": "consume original callback once; detach source view after facts; no second receiver execution in source-only slice",
+      "minimumFields": [
+        "sourceSnapshotRef",
+        "originalSampleBinary64",
+        "canonicalThrowRef",
+        "originalActionRefs"
+      ],
+      "stage": "during original execution after required facts exist",
+      "historicalPolicy": "historical missing action facts stay explicit insufficient; never create new success roll",
+      "tests": [
+        "callback/order equality",
+        "source IDs",
+        "hold null actual target",
+        "acquisition no throw object"
+      ],
+      "implemented": false
+    },
+    {
+      "id": "C04",
+      "file": "script.js",
+      "function": "beginAutomaticGroundBallSituationExecution / resolveHighSchoolDefensivePlay / resolveRoutineDefensivePlay",
+      "plannedResponsibility": "shared snapshot validation BEFORE either execution path",
+      "minimumFields": [
+        "sourceSnapshotRef",
+        "selectedVersionRef"
+      ],
+      "stage": "before begin/callback and on retry",
+      "historicalPolicy": "pending pinned version does not follow latest policy",
+      "tests": [
+        "all execution entrances",
+        "no pre-sample",
+        "policy toggles",
+        "no competing owners"
+      ],
+      "implemented": false
+    },
+    {
+      "id": "C05",
+      "file": "match-situation-lifecycle.js",
+      "function": "createSituation / beginExecution",
+      "plannedResponsibility": "retain validated consistency copy/ref; replacement must explicitly preserve fields",
+      "minimumFields": [
+        "contextSnapshot.receiverSourceSnapshotRef",
+        "executionState.receiverSourceBindingRef"
+      ],
+      "stage": "pending ->executing",
+      "historicalPolicy": "true old omissions accepted; malformed present copy reject",
+      "tests": [
+        "replacement loss",
+        "JSON cold",
+        "route/actor copies"
+      ],
+      "implemented": false
+    },
+    {
+      "id": "C06",
+      "file": "match-situation-lifecycle.js",
+      "function": "markSettled / createClosedSituationSummary",
+      "plannedResponsibility": "metadata reference only; no new settlement owner/record",
+      "minimumFields": [
+        "receiverSourceVersionRef if needed"
+      ],
+      "stage": "settled/closed",
+      "historicalPolicy": "no retroactive stats/source backfill",
+      "tests": [
+        "duplicate3",
+        "settled record stable",
+        "no reselect"
+      ],
+      "implemented": false
+    },
+    {
+      "id": "C07",
+      "file": "save.js",
+      "function": "normalizeSave entry BEFORE defaults/Object.assign",
+      "plannedResponsibility": "trusted raw format validation before field loss/version overwrite",
+      "minimumFields": [
+        "requiredReceiverSourceFormatVersion / trusted source-format policy"
+      ],
+      "stage": "raw admission",
+      "historicalPolicy": "old format with independent history evidence stays legacy; new required omission rejects",
+      "tests": [
+        "missing/new/unknown tags",
+        "metadata-only legacy fallback",
+        "no live player/cursor mutation"
+      ],
+      "implemented": false
+    },
+    {
+      "id": "C08",
+      "file": "script.js",
+      "function": "validateHighSchoolDecisionThrowState entry BEFORE all early returns",
+      "plannedResponsibility": "semantic version/source/copy validation ahead of firstBase,3B,missingfacts,settlementApplied returns",
+      "minimumFields": [
+        "source format/pin/copy",
+        "family cache source binding"
+      ],
+      "stage": "save/recovery/public dispatch",
+      "historicalPolicy": "optional historical action facts retain original contract; new-present source rejects contradiction",
+      "tests": [
+        "all early returns",
+        "snapshot/actor/cap/sample tamper",
+        "old executed cases"
+      ],
+      "implemented": false
+    },
+    {
+      "id": "C09",
+      "file": "receiver-execution-v2-foundation.js or new versioned sibling",
+      "function": "proposed version resolver registry",
+      "plannedResponsibility": "implement reviewed Unicode/signed timing contract without altering old semantic resolver",
+      "minimumFields": [
+        "new explicit contract/model/physical/timing/sampler versions"
+      ],
+      "stage": "pure foundation before Production adapter",
+      "historicalPolicy": "old pinned inputs still use old version",
+      "tests": [
+        "S8v2-1 regression",
+        "new actual Unicode IDs",
+        "version discrimination"
+      ],
+      "implemented": false
+    },
+    {
+      "id": "C10",
+      "file": "receiver-execution-v2-source-authority-foundation.js or versioned sibling",
+      "function": "proposed Production source adapter",
+      "plannedResponsibility": "implement approved raw DTO/nullable hold mapping and reviewed policy sources",
+      "minimumFields": [
+        "ProductionSourceScope",
+        "capability adapterVersion",
+        "formation/clock policyVersions"
+      ],
+      "stage": "detached adapter only after approved fields exist",
+      "historicalPolicy": "current isolated scope stays explicit; do not turn pure fixture into Production A",
+      "tests": [
+        "actual source completeness",
+        "missing C",
+        "no legacy receiver flags"
+      ],
+      "implemented": false
+    },
+    {
+      "id": "C11",
+      "file": "defensive-runner-throw-settlement-foundation.js",
+      "function": "future deriveSettlement version discriminator",
+      "plannedResponsibility": "DEFERRED to separately authorized authoritative timing slice; preserve current v1 exact recomputation",
+      "minimumFields": [
+        "model/timing version with original validated source links"
+      ],
+      "stage": "only before any future official retirement",
+      "historicalPolicy": "old v1 fully unchanged; unknown version never fallback",
+      "tests": [
+        "Force/ThirdOut ordered ret",
+        "tie/unknown",
+        "single apply"
+      ],
+      "implemented": false
+    },
+    {
+      "id": "C12",
+      "file": "external diagnostic collector (new, no official owner)",
+      "function": "future read-only collector",
+      "plannedResponsibility": "DEFERRED to separately authorized observation integration",
+      "minimumFields": [
+        "sidecar key raw physical+versions+slot",
+        "immutable input/source digest"
+      ],
+      "stage": "outside actual cache/record/Save",
+      "historicalPolicy": "same key duplicate reads old; changed binding rejects",
+      "tests": [
+        "no official fields",
+        "callback/cursor/record unchanged",
+        "cold reload observer neutrality"
+      ],
+      "implemented": false
+    }
+  ],
+  "changeMapScope": "bounded new SS-primary empty-base6-3/hold source-only design; not full receiver/Save migration",
+  "sourceOnlyA3Sequence": [
+    "review explicit UTF8/signed-time/version proposals",
+    "implement new pure-version tests and keep old resolver intact",
+    "approve initial formation/clock/capability source policy before any new Production fields",
+    "then separately authorize minimal common handoff snapshot and guards; official execution stays Legacy",
+    "implement/verify raw Save+shared guard+pin retention before admitting new required snapshot saves"
+  ],
+  "states": [
+    {
+      "state": "legacy pending/executed/settled",
+      "policy": "existing owner/model/cache remains; no backfill/reroll/record rewrite"
+    },
+    {
+      "state": "new source-only pending",
+      "policy": "required format+frozen snapshot; no owned sample; before-execution actor/physical/versions validated"
+    },
+    {
+      "state": "new source-only executed",
+      "policy": "original Legacy cache/sample plus source binding; original resolver recovery, no candidate authority"
+    },
+    {
+      "state": "new source-only settled",
+      "policy": "source reference retention only; actual GameRecord unaffected"
+    },
+    {
+      "state": "future authoritative v2 executed/settled",
+      "policy": "NOT IMPLEMENTED; requires new full cache/Save/version/seam validation; source-only metadata PASS never upgrades this"
+    }
+  ],
+  "SaveAuthLimit": "digest and caller history label cannot authenticate a completely rewritten format/header; trusted storage/version provenance is a separate owner requirement",
+  "forbiddenOwners": [
+    "ForceAdvancement/ThirdOut outcomes",
+    "scorer/GameRecord/Evaluation owners",
+    "legacy ability/execution formulas",
+    "responsibility lanes"
+  ],
+  "implementationReadiness": "CONDITIONAL_REVIEW_AND_SEPARATE_APPROVAL",
+  "L03": "PARTIAL"
+}

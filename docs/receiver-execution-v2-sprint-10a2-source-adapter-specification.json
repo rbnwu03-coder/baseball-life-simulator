@@ -1,0 +1,157 @@
+{
+  "scope": "DESIGNED_NOT_CONNECTED",
+  "soleSnapshotAuthority": {
+    "owner": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff in script.js",
+    "location": "after supported ordinary ground handoff and original role/runner binding, before decision classification or beginExecution",
+    "cachedReplay": "reuse and validate same saved snapshot; never choose current policy again",
+    "formalOwner": "existing groundBallInPlayState; not a new Match owner",
+    "proposedField": "receiverSourceSnapshot",
+    "meaningfulCopy": "activeSituation.contextSnapshot.receiverSourceSnapshotRef+consistency copy",
+    "routine": "same handoff snapshot; no artificial player decision"
+  },
+  "formation": {
+    "version": "npc1b-contact-cover-plan-proposal-v1",
+    "source": "NEW approved Initial Defensive Formation Policy, NOT roster assignment interpreted as physical position",
+    "categories": [
+      "baseCovering",
+      "nearFirstBase",
+      "movingToFirstBase",
+      "lateCover",
+      "unavailable"
+    ],
+    "firstPolicy": "deterministic nominal baseGuard may be selected only as explicitly approved policyNominal model for fresh contact; not observed physical fact",
+    "otherCategories": "explicit coarse formation state/cover intent from future owner; absence is C, not random default",
+    "priorState": "existing traced owner has no independent NPC1B location memory; per-contact nominal reset policy or persistent coarse formation state requires separate approval",
+    "seed": {
+      "key": [
+        "policyVersion",
+        "raw typed physical binding",
+        "primaryThrow",
+        "initialFormation namespace"
+      ],
+      "excludes": [
+        "actor",
+        "ability",
+        "route",
+        "outcome",
+        "retry",
+        "originalSample"
+      ],
+      "role": "frozen provenance; first deterministic policy consumes no random variation or Match RNG"
+    },
+    "sameBall": "shared frozen formation across direct/hold/offline/notAttempted; later action updates may use prior physical stage, never reselect initial context"
+  },
+  "identityMapping": {
+    "matchId": "match.id",
+    "plateAppearanceId": "ordinaryDefensivePlateAppearanceState.paIdentity",
+    "contactId": "battedBallPhysicalTruth.identity",
+    "physicalIdentity": "groundBallInPlayState.physicalTruth.identity with PA/opportunity copies cross-checked",
+    "playId": "groundBallInPlayState.identity",
+    "runner": "original runnerPhysicalStates batterRunner +forceChain",
+    "actors": "original defenseTeam active roster, getCurrentDefender SS/NPC1B; frozen before execution",
+    "target": "original first-base obligation, not later currentBatter",
+    "slot": "primaryThrow across same opportunity route changes/retries; new fixed-slot pin required",
+    "unicode": "retain raw Unicode; propose physical-contact-binding-utf8-v2; currentS8 ASCII validation blocks admission",
+    "originalActionIds": "generated later in action facts; never invent them pending; no-delivery keeps nullable canonical target separate from planned contest"
+  },
+  "phases": {
+    "beforeExecution": {
+      "available": [
+        "raw physical/PA/handoff IDs",
+        "roster/roles",
+        "original runners/outs",
+        "legal route surface",
+        "raw capability attributes"
+      ],
+      "new": [
+        "formation snapshot",
+        "fixed slot/version pins",
+        "physical clock domain"
+      ],
+      "absent": [
+        "owned sample",
+        "selected throw/action output",
+        "hands result"
+      ]
+    },
+    "duringExecution": {
+      "entry": "resolveInfieldDecision original callback and buildHighSchoolShortstopExecution canonical result",
+      "retain": [
+        "original owned sample binary64",
+        "canonical throw identity/quality/release/distance/variation",
+        "original action ID/dependencies",
+        "null actual hold receiver/target"
+      ],
+      "new": "source view only after original facts exist; no second roll/target change"
+    },
+    "postExecution": {
+      "kind": "detached read-only observation",
+      "required": "original pre-execution snapshot; never recover actor/runner from later outs/bases/defenseTeam",
+      "output": "explicit missing facts and sealedCandidateInput=null until revised contract/source/time authorities available"
+    }
+  },
+  "closedProductionDtoProposal": {
+    "before": [
+      "formatVersion",
+      "snapshotVersion",
+      "physicalBinding",
+      "sourceCopies",
+      "originalActorRefs",
+      "initialOuts",
+      "initialBases",
+      "runnerObligation",
+      "legalRouteSurface",
+      "formation",
+      "capabilitySnapshot",
+      "clockOrigin",
+      "policyVersions",
+      "sourceDigest"
+    ],
+    "during": [
+      "snapshotRef",
+      "originalSampleBinary64",
+      "canonicalThrowSourceRef",
+      "actualNullableDeliveryTarget",
+      "plannedContestTarget",
+      "originalActionRefs",
+      "sourceProvenance",
+      "clockOffsets"
+    ],
+    "diagnostic": [
+      "sourceCompleteness",
+      "insufficientFacts",
+      "candidateInputOrNull",
+      "formalExecutionConsumed=false",
+      "recordWrites=0",
+      "rngCallbacks=0"
+    ]
+  },
+  "requiredMissingFacts": [
+    "authoritative NEW preexecution formation/clock emissions",
+    "independent Secure/touch sources",
+    "capability/coefficient calibration",
+    "UTF8 and signed timing contract revisions",
+    "real lifecycle/pin/Save guards"
+  ],
+  "holdMapping": {
+    "rawRelease": "held",
+    "rawReceiver": null,
+    "rawTargetRunner": null,
+    "rawTargetBase": null,
+    "normalization": "No attempted delivery; preserve raw nulls. Any future S8-style transport planned target remains a separately labeled non-executed contest, not a forged canonical throw."
+  },
+  "safety": [
+    "never call scorer/GameRecord/evaluation/apply",
+    "never mutate source/cache/Match",
+    "never preload original sample",
+    "never derive readiness/hands/demand from legacy receiver outcome",
+    "never choose version after throw success"
+  ],
+  "prototype": {
+    "module": "receiver-execution-v2-production-source-adapter-prototype.cjs",
+    "scope": "original Legacy-source observation in isolated fixture; no completed v2 input",
+    "formationTimingAssumptions": "isolatedFixture",
+    "sourceCompleteness": "insufficient",
+    "formalProductionAuthority": false
+  }
+}

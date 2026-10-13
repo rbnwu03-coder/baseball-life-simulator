@@ -1,0 +1,72 @@
+{
+  "status": "DESIGNED_NOT_IMPLEMENTED",
+  "current": {
+    "contract": "receiver-pure-contract-v2-1",
+    "execution": "receiver-pure-stages-v2-1",
+    "physical": "physical-contact-binding-v1",
+    "timing": "crt-integer-ticks-v2-1",
+    "source": "receiver-source-authority-isolated-v1"
+  },
+  "proposed": {
+    "contract": "receiver-pure-contract-v2-2",
+    "execution": "receiver-pure-stages-v2-2",
+    "physical": "physical-contact-binding-utf8-v2",
+    "timing": "crt-physical-play-integer-ticks-v2-2",
+    "sampler": "physical-slot-sha256-u32be-utf8-v2",
+    "sourceAdapter": "receiver-production-source-adapter-v2-1"
+  },
+  "actualBlockingEvidence": {
+    "productionPhysicalContainsUnicode": true,
+    "oldPureIdPredicate": "ASCII [A-Za-z0-9_.:|/\\-], limit512",
+    "oldSourceIdPredicate": "ASCII, limit240",
+    "originalCanonicalIdLength": 264,
+    "hold": "null actual target/receiver and held release do not match old isolated transport view"
+  },
+  "identity": {
+    "preserveRaw": true,
+    "normalization": "none; original code points and byte encoding retained",
+    "canonicalEncoding": "existing sorted JSON/UTF8 behavior, reject lone surrogates/control IDs; explicitly versioned new physical/schema validation",
+    "proposedBound": "4096 UTF16 code units per ID; validate before hash; review storage limits",
+    "covers": [
+      "playId",
+      "PA/contact/physical identity",
+      "original action IDs",
+      "canonical throw source ID",
+      "provenance reference IDs"
+    ],
+    "actorRoles": "player/NPC roster references retain exact original ID and role; codec alone does not authorize actors"
+  },
+  "sampler": {
+    "algorithm": "same canonical JSON+SHA256/u32BE mathematical algorithm with explicit new execution/physical/sampler versions",
+    "keys": "physical binding+fixed physical slot+stage+versions only",
+    "migration": "new versions can change sample vector; classify as MODEL_MIGRATION_DIFFERENCE, not reroll under old pin",
+    "oldPinned": "never rewrite old version or vector; retain old resolver"
+  },
+  "timing": {
+    "signedActorStart": true,
+    "firstLaunch": "absolute offset from shared contact, not required0",
+    "durations": "nonnegative and exact causal ordering",
+    "globalOrigin": "same across legs; local projection diagnostic only"
+  },
+  "sourceAdapter": {
+    "ProductionScope": "old10A.1 rejects; new approved version must explicitly implement real snapshot handoff",
+    "nullableNoDelivery": "separate planned actor/target from canonical null no-attempt target; never fabricate completed action",
+    "oldPureInput": "do not relabel proposed time/identity as current v2-1"
+  },
+  "changeBoundary": [
+    "new version-dispatched pure resolver/schema tests first",
+    "keep current S8/S9/10A.1 source and captures immutable",
+    "no automatic Production consumer",
+    "no formal Save PASS from prototype"
+  ],
+  "requiredTests": [
+    "actual Unicode identity golden UTF8 encoding",
+    "long raw canonical action/reference ID",
+    "signed prelaunch and contact offset launch",
+    "exact/tick tie and near tie collapse",
+    "hold with null canonical target",
+    "pinned old/new version JSON repeat",
+    "unknown/missing version rejection"
+  ],
+  "L03": "PARTIAL"
+}
