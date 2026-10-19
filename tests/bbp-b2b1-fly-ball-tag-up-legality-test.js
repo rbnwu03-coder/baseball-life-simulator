@@ -63,7 +63,7 @@ verify("RNG. Fly catch 使用獨立 deterministic namespace", caughtThird.catchR
 
 const left = build({ direction: "leftSide" });
 const shallow = build({ depth: "shallow" });
-verify("Fallback. Left-side 與 shallow fly 不建立本次 supported catch opportunity", !left.supported && !shallow.supported && left.fallbackAuthority === "existingLegacyOutcomeAdapter" && shallow.fallbackAuthority === "existingLegacyOutcomeAdapter");
+verify("Fallback. Wrong left-side actor and shallow fly remain unsupported", !left.supported && !shallow.supported && left.defensiveAccess.reason === "defenderAssignmentUnavailable" && shallow.fallbackAuthority === "existingLegacyOutcomeAdapter");
 verify("Firewall. BBP-A truth 未被 catch／runner legality 回寫", JSON.stringify(thirdBase.physicalTruth) === JSON.stringify(truth()) && Object.isFrozen(thirdBase.physicalTruth));
 
 console.log(`BBP-B2B1 Fly Ball Tag-Up Legality tests: ${passed}/${passed} passed`);

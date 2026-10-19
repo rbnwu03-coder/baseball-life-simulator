@@ -5,12 +5,27 @@ function saveGame() {
   if (typeof isBaseballGameplayPending === "function" && isBaseballGameplayPending()) {
     return showNotice("目前場上處理尚未完成，請完成後再儲存。", "warning");
   }
-  localStorage.setItem(SAVE_KEY, JSON.stringify(player));
+  const sourceOnlySave = player.saveVersion === 16 || Object.prototype.hasOwnProperty.call(player, "receiverSourceSaveFormatVersion")
+    || Object.prototype.hasOwnProperty.call(player.highSchoolMatch || {}, "receiverSourceFormatVersion");
+  if (sourceOnlySave) {
+    if (typeof ReceiverSourceSnapshot === "undefined") throw new Error("Receiver source snapshot module required for new Save format");
+    // Source-only envelope preparation is detached; the live Player/Match is unchanged.
+    localStorage.setItem(SAVE_KEY, ReceiverSourceSnapshot.serializeSave(player));
+  } else {
+    if (typeof ReceiverSourceSnapshot !== "undefined") ReceiverSourceSnapshot.validateRawSave(player);
+    // Keep the actual ordinary Legacy storage path and Player JSON boundary.
+    localStorage.setItem(SAVE_KEY, JSON.stringify(player));
+  }
   showNotice("進度已儲存。", "success");
 }
 
 function normalizeSave(saved) {
   const sourceSaveVersion = saved.saveVersion;
+  // Raw owner validation precedes defaults, Object.assign and generic normalizers.
+  if (typeof ReceiverSourceSnapshot !== "undefined") ReceiverSourceSnapshot.validateRawSave(saved);
+  else if (sourceSaveVersion === 16 || saved.receiverSourceSaveFormatVersion || saved.highSchoolMatch?.receiverSourceFormatVersion) {
+    throw new Error("Receiver source snapshot module required for new Save format");
+  }
   const fresh = createInitialPlayer(saved.name || "");
   Object.assign(fresh, saved);
   if (typeof HighSchoolExchangeNetwork !== "undefined") {
@@ -603,7 +618,7 @@ function normalizeSave(saved) {
       fresh.age22OutcomeCode = migratedOutcome.outcomeCode;
     }
   }
-  fresh.saveVersion = SAVE_VERSION;
+  fresh.saveVersion = sourceSaveVersion === 16 ? 16 : SAVE_VERSION;
   if (typeof HighSchoolCompetitionFoundation !== "undefined") {
     HighSchoolCompetitionFoundation.restorePlayer(fresh);
   } else if (saved.competitionFoundation || saved.primaryTeamAssignment || saved.temporaryTeamAssignments?.length) {

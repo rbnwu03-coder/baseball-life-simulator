@@ -1,8 +1,10 @@
 (function (root, factory) {
-  const api = factory();
+  const sourceMetadata = root.ReceiverSourceSnapshot
+    || (typeof module === "object" && module.exports && typeof require === "function" ? require("./receiver-source-snapshot.js") : null);
+  const api = factory(sourceMetadata);
   root.MatchSituationLifecycle = api;
   if (typeof module === "object" && module.exports) module.exports = api;
-})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+})(typeof globalThis !== "undefined" ? globalThis : this, function (SourceMetadata) {
   "use strict";
 
   const VERSION = "match-situation-lifecycle-v1";
@@ -44,6 +46,7 @@
     return history;
   }
   function transition(situation, nextState, changes = {}, details = {}) {
+    if (SourceMetadata) SourceMetadata.assertLifecycle(situation);
     if (!situation || !STATES.includes(situation.lifecycleState)) throw new Error("invalid match situation");
     if (situation.lifecycleState === nextState && ["settled", "closed"].includes(nextState)) return situation;
     if (!(ALLOWED_TRANSITIONS[situation.lifecycleState] || []).includes(nextState)) {
@@ -70,6 +73,7 @@
       sourcePhysicalStateRef: String(input.sourcePhysicalStateRef || ""),
       createdAt: clone(input.createdAt || {}),
       contextSnapshot: clone(input.contextSnapshot || {}),
+      ...(input.contextSnapshot?.receiverSourcePin ? { receiverSourcePin: clone(input.contextSnapshot.receiverSourcePin) } : {}),
       legalRoutes: normalizeRoutes(input.legalRoutes),
       recommendation: clone(input.recommendation || null),
       admission: null,
@@ -118,7 +122,8 @@
         selectedRoute: input.selectedRoute || situation.decision?.selectedRoute || "",
         handoffRef: input.handoffRef || "",
         physicalConsequenceApplied: false,
-        executionIdentity: input.executionIdentity || ""
+        executionIdentity: input.executionIdentity || "",
+        ...(situation.receiverSourcePin ? { receiverSourcePin: clone(situation.receiverSourcePin) } : {})
       }
     }, { reason: input.reason || "physicalResolverHandoff" });
   }
@@ -193,6 +198,7 @@
   }
   function canResumeSimulation(situation) { return !situation || situation.lifecycleState === "closed"; }
   function createClosedSituationSummary(situation) {
+    if (SourceMetadata) SourceMetadata.assertLifecycle(situation);
     if (situation?.lifecycleState !== "closed") return null;
     return deepFreeze({
       situationId: situation.situationId,
@@ -204,18 +210,29 @@
       outsBefore: Number(situation.createdAt?.outs) || 0,
       outsAfter: (Number(situation.createdAt?.outs) || 0) + (Number(situation.resolution?.outsDelta) || 0),
       settlementIdentity: situation.settlement?.identity || "",
-      transitionHistory: clone(situation.transitionHistory || [])
+      transitionHistory: clone(situation.transitionHistory || []),
+      ...(situation.receiverSourcePin ? { receiverSourcePin: clone(situation.receiverSourcePin) } : {}),
+      ...(situation.receiverSourceExecutionBinding ? { receiverSourceExecutionBinding: clone(situation.receiverSourceExecutionBinding) } : {})
     });
   }
   function normalizeSituation(saved) {
+    if (SourceMetadata) SourceMetadata.assertLifecycle(saved);
     if (!saved || typeof saved !== "object" || saved.version !== VERSION || !STATES.includes(saved.lifecycleState)) return null;
     return deepFreeze(clone(saved));
+  }
+
+  function bindReceiverSourceExecution(situation, binding) {
+    if (!SourceMetadata || !situation?.receiverSourcePin) throw new Error("Receiver source lifecycle reference required");
+    SourceMetadata.assertLifecycle(situation);
+    const saved = { ...clone(situation), receiverSourceExecutionBinding: clone(binding) };
+    SourceMetadata.assertLifecycle(saved);
+    return deepFreeze(saved);
   }
 
   return deepFreeze({
     VERSION, TYPES, STATES, PHASES, ALLOWED_TRANSITIONS, createSituationId, createSituation,
     admitSituation, presentSituation, recordDecision, beginExecution, beginReassessment,
     resolveSituation, markSettled, closeSituation, abandonSituation, canResumeSimulation,
-    createClosedSituationSummary, normalizeSituation
+    createClosedSituationSummary, normalizeSituation, bindReceiverSourceExecution
   });
 });

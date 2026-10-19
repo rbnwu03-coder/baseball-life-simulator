@@ -1,7 +1,7 @@
 'use strict';
 const assert = require('assert/strict'), fs = require('fs'), cp = require('child_process'), path = require('path');
 const { discover } = require('./match-m0-after-r2-admission-context.cjs');
-const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');
+const { assertPitchProductionSourceScope, assertMatchVNextSourceDelta } = require('./pitch-production-source-scope.cjs');
 const O = require('../pitch-observation-foundation'), S = require('../pitch-sequence-state-foundation');
 const clone = value => JSON.parse(JSON.stringify(value));
 const rebuild = history => S.build(history.map(O.observePitch));
@@ -137,7 +137,9 @@ test('8 protected pitch sources retain scoped script freeze and exact repeat eli
     const current = fs.readFileSync(path.join(root, file), 'utf8').replace(/\r\n?/g, '\n');
     const baseline = cp.execFileSync('git', ['show', 'a0e512b439446990d8df118e3e7d737b9f2f51d3:' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\r\n?/g, '\n');
     if (file === 'pitcher-catcher-tactical-integration.js') require('./pitch-tactical-selector-extraction-baseline.cjs').assertOnlyRepeatEligibilityExtraction(current, baseline);
+    else if (file === 'save.js') require('./receiver-source-save-authorized-delta.cjs').assertReceiverSourceSaveAuthorizedDelta(current, baseline, fs.readFileSync(path.join(root, 'receiver-source-snapshot.js'), 'utf8'));
     else if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);
+    else if (file === 'offensive-plate-approach.js') assertMatchVNextSourceDelta(file, current, baseline);
     else assert.equal(current, baseline, file);
   }
 });

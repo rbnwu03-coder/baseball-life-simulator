@@ -39,7 +39,7 @@
   function prepare(input = {}) {
     assertDependencies();
     let plateAppearanceState = OffensivePlateApproach.normalizePlateAppearanceState(input.plateAppearanceState);
-    if (!plateAppearanceState || plateAppearanceState.completed) return deepFreeze({ plateAppearanceState, situation: null, duplicate: Boolean(plateAppearanceState?.completed) });
+    if (!plateAppearanceState || plateAppearanceState.completed || plateAppearanceState.awaitingDefense) return deepFreeze({ plateAppearanceState, situation: null, duplicate: Boolean(plateAppearanceState?.completed) });
     plateAppearanceState = OffensivePlateApproach.prepareNextPitch(plateAppearanceState, input.pitch || null);
     const pitch = plateAppearanceState.pendingPitch;
     const recognition = OffensivePlateApproach.getRecognitionResult(plateAppearanceState, pitch, input.abilities || {}, input.recognitionRoll);
@@ -82,7 +82,7 @@
     return deepFreeze({ plateAppearanceState, situation, recognition, duplicate: false });
   }
 
-  function resolve(input = {}) {
+  function resolve(input = {}, trustedPhysicalOutcomeResolver = null) {
     assertDependencies();
     let situation = MatchSituationLifecycle.normalizeSituation(input.situation);
     const plateAppearanceState = OffensivePlateApproach.normalizePlateAppearanceState(input.plateAppearanceState);
@@ -107,6 +107,7 @@
     if (!recognition.perceivedPitchClass) recognition.perceivedPitchClass = input.recognition?.perceivedPitchClass || "competitiveStrike";
     const resolved = OffensivePlateApproach.resolveNextPitch(plateAppearanceState, input.abilities || {}, {
       ...clone(input.executionOptions || {}),
+      ...(typeof trustedPhysicalOutcomeResolver === "function" ? { physicalOutcomeResolver: trustedPhysicalOutcomeResolver } : {}),
       decisionRoute: selectedRoute,
       recognition
     });

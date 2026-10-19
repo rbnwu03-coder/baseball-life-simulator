@@ -234,7 +234,45 @@
       "Defensive attribution does not match completed actor actions");
   }
 
+  // Adapt a completed flyout to the existing catch ledger. PA/pitcher outs remain
+  // owned by the original plateAppearance event; no second scoring calculation.
+  function validateFlyBallCatchCredit(record, event, context) {
+    const credit = event.flyBallCatchCredit;
+    if (!credit) return null; // Historical fly events carry no inferred credit.
+    const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+    const ball = event.physicalTruth, result = event.catchResult;
+    const position = { leftSide: "LF", middle: "CF", rightSide: "RF" }[ball?.direction];
+    const label = { LF: "左外野手", CF: "中外野手", RF: "右外野手" }[position];
+    const defenseSide = sideForEvent(record, event, context) === "home" ? "away" : "home";
+    const actor = context.rosters?.[defenseSide]?.lineup?.find(a => a.id === credit.actorId);
+    const paRef = record.eventRefs.find(ref => ref.eventId === credit.paEventId && ref.type === "plateAppearance");
+    const retirement = event.thirdOutResolution?.orderedRetirements;
+    check(["flyBallCatchResolution", "defensivePlay"].includes(event.type) && !event.defensiveAttribution && ball
+      && credit.gameId === record.gameId && credit.physicalIdentity === ball?.identity && event.physicalIdentity === ball.identity
+      && credit.playIdentity === `${record.gameId}|${ball.identity}|flyout`
+      && credit.paIdentity === event.paIdentity && credit.catchSource === `${event.paIdentity}|fly-ball-catch`
+      && ball.ballType === "flyBall" && ["medium", "deep"].includes(ball.depth) && Boolean(label)
+      && credit.actorPosition === label && event.playerPosition === label && event.fielderId === credit.actorId
+      && actor && actor.id !== "player" && [position, label].includes(actor.defensivePosition || actor.position)
+      && event.defenderContext?.defenderId === actor.id && event.defenderContext.position === label
+      && credit.capabilityProvenance?.actorId === actor.id && credit.completedCatch === true
+      && result?.caught === true && result.result === "caught" && result.ballState === "securedBeforeGround"
+      && result.batterRunner?.result === "out" && result.batterRunner.finalBaseOutcome === "out"
+      && (!result.secureResolution || (result.secureResolution.defenderId === actor.id
+        && result.secureResolution.physicalIdentity === ball.identity && result.secureResolution.secureQuality === "caughtBeforeGround"))
+      && event.paCompatibilityResult?.result === "out" && event.paCompatibilityResult.resolutionMode === "settledDefense"
+      && event.paCompatibilityResult.physicalIdentity === ball.identity && event.paCompatibilityResult.trace?.caught === true
+      && event.outsCreated === 1 && event.after?.outs === event.before?.outs + 1 && event.after.outs <= 3
+      && retirement?.length === 1 && same(credit.retirement, retirement[0])
+      && credit.retirement.runnerId === event.batterId && credit.retirement.outType === "caughtBallOut"
+      && credit.retirement.targetBase === "caught" && credit.retirement.isBatterRunner === true
+      && paRef && paRef.sequence === credit.paSequence && paRef.inning === event.inning && paRef.half === event.half,
+    "Fly catch credit requires completed catch, actual defender and original PA retirement");
+    return credit.playIdentity;
+  }
+
   function recordDefensivePlay(record, event, context, eventId) {
+    if (event.flyBallCatchCredit && record.eventRefs.some(ref => ref.defensivePlayIdentity === event.flyBallCatchCredit.playIdentity)) return;
     const defenseSide = sideForEvent(record, event, context) === "home" ? "away" : "home";
     const attribution = event.defensiveAttribution;
     if (attribution?.factType === "settlement" && attribution.playIdentity && event.actionFacts) {
@@ -315,10 +353,12 @@
     const eventId = getEventId(record, event);
     if (record.eventRefs.some(ref => ref.eventId === eventId)) return Object.freeze({ status: "duplicate", eventId });
     validateDefensiveAttribution(event);
+    const flyoutIdentity = validateFlyBallCatchCredit(record, event, context);
+    if (flyoutIdentity && record.eventRefs.some(ref => ref.defensivePlayIdentity === flyoutIdentity)) return Object.freeze({ status: "duplicate", eventId });
     ensureInningLine(record, event.inning || 1);
     if (event.type === "plateAppearance") recordPlateAppearance(record, event, context, eventId);
     if (event.type === "run") recordRun(record, event, context);
-    if (event.type === "playerRoutinePlay" || (event.type === "meaningfulMomentResolved" && event.domain === "defense") || event.type === "defensivePlay") {
+    if (event.type === "playerRoutinePlay" || (event.type === "meaningfulMomentResolved" && event.domain === "defense") || event.type === "defensivePlay" || flyoutIdentity) {
       recordDefensivePlay(record, event, context, eventId);
     }
     if (event.type === "playerEntry" || event.type === "positionChange") {
@@ -336,7 +376,7 @@
     recordRunnerEvent(record, event, context);
     const pitcherOuts = attributePitcherOuts(record, event, context);
     record.eventRefs.push({ eventId, type: String(event.type || "event"), sequence: integer(event.sequence), inning: Math.max(1, integer(event.inning) || 1), half: String(event.half || ""),
-      ...(event.defensiveAttribution ? { defensivePlayIdentity: event.defensiveAttribution.playIdentity } : {}), ...(pitcherOuts ? { pitcherOuts } : {}) });
+      ...(event.defensiveAttribution || flyoutIdentity ? { defensivePlayIdentity: event.defensiveAttribution?.playIdentity || flyoutIdentity } : {}), ...(pitcherOuts ? { pitcherOuts } : {}) });
     return Object.freeze({ status: "applied", eventId });
   }
 

@@ -82,11 +82,11 @@ test("production fly lookup consumes depth-aware responsibility", () => {
   assert.equal(run("fly.m.flyBallCatchState.supported"), true);
   assert.equal(run("fly.m.flyBallCatchState.catchResult.caught"), true);
 });
-test("left/deep fly responsibility exists without expanding detailed catch execution", () => {
+test("left/deep fly responsibility enters the shared LF catch access", () => {
   run('var deepLeft={...flyTruth,identity:"deep-left-fixture",direction:"leftSide"};var leftContext=getHighSchoolFlyBallDefenderCatchContext(fly.m,deepLeft);');
   assert.equal(run("getHighSchoolDefensiveOpportunity(fly.m,deepLeft).primaryPosition"), "LF");
   assert.equal(run("leftContext.position"), "左外野手");
-  assert.equal(run("BattedBallFlyBallDefense.buildFlyBallCatchOpportunity({physicalTruth:deepLeft,defenderContext:leftContext}).supported"), false);
+  assert.equal(run("BattedBallFlyBallDefense.buildFlyBallCatchOpportunity({physicalTruth:deepLeft,defenderContext:leftContext}).supported"), true);
 });
 test("shallow right fly uses infield topology, not ad hoc RF", () => {
   run('var shallowRight={...flyTruth,identity:"shallow-right-fixture",depth:"shallow"};');

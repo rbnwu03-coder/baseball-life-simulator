@@ -2,7 +2,7 @@
 const assert = require('assert/strict'), fs = require('fs'), cp = require('child_process'), path = require('path');
 const { discover } = require('./match-m0-after-r2-admission-context.cjs');
 const { BASELINE, assertOnlyRepeatEligibilityExtraction } = require('./pitch-tactical-selector-extraction-baseline.cjs');
-const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');
+const { assertPitchProductionSourceScope, assertMatchVNextSourceDelta } = require('./pitch-production-source-scope.cjs');
 const O = require('../pitch-observation-foundation'), S = require('../pitch-sequence-state-foundation');
 const I = require('../pitch-tactical-interpretation-foundation'), D = require('../pitch-tactical-decision-foundation');
 const A = require('../pitch-tactical-decision-production-adapter'), T = require('../pitcher-catcher-tactical-integration');
@@ -180,6 +180,8 @@ function main() {
       const baseline = cp.execFileSync('git', ['show', BASELINE + ':' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\r\n?/g, '\n');
       if (file === 'pitcher-catcher-tactical-integration.js') assertOnlyRepeatEligibilityExtraction(current, baseline);
       else if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);
+      else if (file === 'save.js') require('./receiver-source-save-authorized-delta.cjs').assertReceiverSourceSaveAuthorizedDelta(current, baseline, fs.readFileSync(path.join(root, 'receiver-source-snapshot.js'), 'utf8'));
+      else if (file === 'offensive-plate-approach.js' || file === 'plate-decision-foundation.js') assertMatchVNextSourceDelta(file, current, baseline);
       else assert.equal(current, baseline, file);
     }
   });

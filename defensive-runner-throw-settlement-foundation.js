@@ -215,5 +215,52 @@
       if(!same(timing,expected))fail("stale projected timing facts");
     }
   }
-  return freeze({VERSION,deriveRunnerArrival,resolveTiming,resolveBaseTouchTiming,deriveSettlement,projectExistingTiming,projectExistingSettlement,projectInfieldSettlement,projectTagUpTiming,projectTagUpSettlement,validateBefore,validateProjectedTiming});
+  // S2-RECOVERY-001 additive API. Runner decisions are independent of H/E tokens.
+  function resolveRecoveryContinuation(args = {}) {
+    const reject=reason=>freeze({status:"unsupported",closed:false,reason});
+    try {
+      const {ballInput,ballState:ball,recoveryInput,recoveryAction:recovery,timingArgs,timing,resolveThirdOut}=args;
+      if(Object.keys(args).some(k=>!["ballInput","ballState","recoveryInput","recoveryAction","timingArgs","timing","resolveThirdOut"].includes(k)))return reject("UNDECLARED_CONTINUATION_INPUT");
+      const Reach=globalThis.DefensiveReachSecureFoundation||(typeof require==="function"?require("./defensive-reach-secure-foundation.js"):null);
+      const freshBall=Decision.resolvePostDeliveryBallState(ballInput),freshRecovery=Reach.resolveRecoveryAction(recoveryInput);
+      if(freshBall.status!=="supported"||!same(ball,freshBall)||!same(recoveryInput.ballInput,ballInput)
+        ||!same(recoveryInput.ballState,ball)||!same(recovery,freshRecovery)||!["completed","failed"].includes(recovery.status))return reject("UNVERIFIED_RECOVERY_CHAIN");
+      if(!same(ball.timeBase,recovery.timeBase)||recovery.startAt!==ball.occurredAt||recovery.completedAt<recovery.startAt)return reject("RECOVERY_TIME");
+      const ctx=ballInput.context,current=timingArgs?.runnerState;
+      if(Object.keys(timingArgs||{}).some(k=>!["input","opportunity","selection","throwResolution","runnerState","receiverState"].includes(k)))return reject("UNDECLARED_TIMING_INPUT");
+      const receiverState={receiverId:ballInput.received.receiverId,ready:ballInput.received.ready&&ballInput.received.secured,atBase:true,receiveDelay:ballInput.received.receiveDelay,
+        physicalIdentity:ballInput.received.physicalIdentity,receiveIdentity:ballInput.received.identity};
+      if(!same(timingArgs.input,{...ballInput.input,receiverState})||!same(timingArgs.opportunity,ballInput.decision)
+        ||!same(timingArgs.selection,ballInput.selection)||!same(timingArgs.throwResolution,ballInput.thrown)||!same(timingArgs.receiverState,receiverState)
+        ||current?.runnerId!=="player"||current.originBase!=="batter"||current.targetBase!=="first"||current.startQuality!=="normalStart"
+        ||current.speed!==ctx.capabilities.batter.consumed.speed||!Number.isFinite(current.speed)||current.speed<0||current.speed>20
+        ||!same(timing,resolveTiming(timingArgs)))return reject("ORIGINAL_RUNNER_TIMING");
+      const first=deriveRunnerArrival(current),second=deriveRunnerArrival({...current,originBase:"first",targetBase:"second",startQuality:"normalStart",advancementProgress:"early"});
+      const r=n=>Math.round(n*1000)/1000,decisionAt=r(Math.max(first.relativeArrival,ball.occurredAt));
+      const secondArrival=r(decisionAt+second.relativeArrival),attemptSecond=recovery.selection.forecastPossessionAt>secondArrival;
+      const decision={policy:"clearLooseBallWindow-v1",at:decisionAt,status:decisionAt<=recovery.completedAt?"executed":"notReached",
+        type:decisionAt>recovery.completedAt?null:attemptSecond?"attemptSecond":"holdFirst",observedBallId:ball.identity,
+        forecastPossessionAt:recovery.selection.forecastPossessionAt,secondLegDuration:second.relativeArrival,secondArrivalIfAttempted:secondArrival,
+        source:"originalRunnerArrivalPrimitive+prelockedConservativePolicy+visibleAccessForecast"};
+      const attained=first.relativeArrival<=recovery.completedAt?[{runnerId:"player",base:"first",at:first.relativeArrival,sourceTimingId:timing.identity,reason:"unopposedOriginalFirstMovement"}]:[];
+      const base={version:"s2-recovery-continuation-v1",identity:recovery.identity+"|runner-v1",sameBall:clone(ball.sameBall),phase:4,
+        dependsOn:[ball.identity,recovery.identity,timing.identity],timeBase:clone(ball.timeBase),elapsed:recovery.completedAt,runnerId:"player",
+        originalArrival:clone(first),attainedBases:attained,decision,
+        progression:{originBase:attemptSecond?"first":"batter",targetBase:attemptSecond?"second":"first",elapsed:r(Math.max(0,recovery.completedAt-(attemptSecond?decisionAt:0))),
+          duration:attemptSecond?second.relativeArrival:first.relativeArrival,completionFraction:r(Math.max(0,Math.min(1,(recovery.completedAt-(attemptSecond?decisionAt:0))/(attemptSecond?second.relativeArrival:first.relativeArrival))))},
+        orderedRetirements:[],outsCreated:0,finalBase:null,finalBases:null,closed:false};
+      if(recovery.status!=="completed")return freeze({...base,status:"pending",reason:"RECOVERY_FAILED"});
+      if(attemptSecond)return freeze({...base,status:"pending",reason:"SECOND_ATTEMPT_REQUIRES_TERMINAL_EXECUTION"});
+      if(!attained.length)return freeze({...base,status:"pending",reason:"FIRST_CONTEST_REQUIRES_TERMINAL_EXECUTION"});
+      if(typeof resolveThirdOut!=="function")return reject("CANONICAL_CALLBACK_REQUIRED");
+      const force=Force.settleForceAdvancement({forceChain:ballInput.input.forceChain,movementIntents:Force.buildMovementIntents(ballInput.input.forceChain),retirements:[]});
+      const thirdOut=resolveThirdOut({outsBefore:ctx.before.outs,outsCreated:force.outsCreated,runnersBefore:ctx.before.runners,
+        proposedRunnersAfter:force.runnersAfter,scoringAttempts:[],orderedRetirements:force.retirements});
+      if(force.outsCreated!==0||!same(force.runnersAfter,["player",null,null])||!thirdOut.settlementReady)return reject("FORCE_CANONICAL_CLOSURE");
+      return freeze({...base,status:"closed",closed:true,reason:"ATTAINED_FIRST_AND_DECLINED_EXTRA_RISK",finalBase:"first",finalBases:clone(force.runnersAfter),
+        finalOuts:ctx.before.outs,force,thirdOut});
+    } catch(error){return reject("INVALID_RUNNER_SOURCE:"+error.message);}
+  }
+  // End S2-RECOVERY-001 additive API.
+  return freeze({VERSION,deriveRunnerArrival,resolveTiming,resolveBaseTouchTiming,deriveSettlement,projectExistingTiming,projectExistingSettlement,projectInfieldSettlement,projectTagUpTiming,projectTagUpSettlement,validateBefore,validateProjectedTiming,resolveRecoveryContinuation});
 });

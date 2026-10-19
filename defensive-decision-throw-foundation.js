@@ -358,7 +358,212 @@
       physicalIdentity: facts.physicalIdentity, factType: "settlement", retirements: ledger, actors: [...actors.values()],
       authority: scorerFacts ? "completedActionDependencies+orderedActualRetirements+legalScorerExceptions" : "completedActionDependencies+orderedActualRetirements" });
   }
+  // S2-SCORER-001: interpret a completed clean play; never select or sample an outcome.
+  function resolveBatterReachClassification(proof = {}) {
+    const reject = (reason, status = "insufficient") => freeze({ version: "batter-reach-classification-v1",
+      status, reason, authority: "existingInfieldScorer", consumedRng: false });
+    try {
+      const { context: ctx, physicalTruth: truth, opportunity, reach, secure, ground, decision, selection,
+        thrown, received, timing, firstLeg, actionFacts, scorerFacts } = proof;
+      if (ctx?.coveragePolicy !== "s2-safe-first-v1") return reject("UNSUPPORTED_COVERAGE_POLICY", "unsupported");
+      const admission = ctx.admission, caps = ctx.capabilities, actors = caps?.actors, pitch = truth?.executionEvidence?.actualPitch;
+      if (!admission || admission.authority !== "originalPlayerDetailedPA" || admission.lockedAt !== "beforeFirstPitch"
+        || admission.coveragePolicy !== ctx.coveragePolicy || admission.matchId !== ctx.matchId
+        || admission.paId !== ctx.paId || admission.batterId !== ctx.batterId
+        || !same(admission.capabilities, caps)) return reject("PA_ADMISSION_PROVENANCE");
+      if (![ctx.matchId, ctx.paId, ctx.pitchId, ctx.physicalId, ctx.situationId].every(id => typeof id === "string" && id.length)
+        || ctx.batterId !== "player" || actors?.batterId !== ctx.batterId || ctx.offenseTeam === ctx.defenseTeam
+        || ctx.version !== "match-vnext-execution-v0.1" || truth?.identity !== ctx.physicalId
+        || pitch?.pitchId !== ctx.pitchId || pitch.paIdentity !== ctx.paId || pitch.pitcherId !== actors.pitcherId
+        || pitch.pitchTacticalState?.context?.gameIdentity !== ctx.matchId) return reject("PLAY_IDENTITY");
+      if (truth.ballType !== "groundBall" || ctx.before?.runners?.length !== 3 || ctx.before.runners.some(Boolean)
+        || !Number.isInteger(ctx.before.outs) || ctx.before.outs < 0 || ctx.before.outs > 2) return reject("OUTSIDE_EMPTY_GROUND_SCOPE", "unsupported");
+      const tactical = pitch.pitchTacticalState.context;
+      if (tactical.paIdentity !== ctx.paId || tactical.pitchIdentity !== ctx.pitchId || tactical.outs !== ctx.before.outs
+        || !same(tactical.bases, ctx.before.runners) || !same(tactical.score, ctx.before.scores)) return reject("STALE_PITCH_CONTEXT");
+      Roster.assertActiveDefense(ctx.activeRoster);
+      if (!actors || new Set([actors.batterId, actors.pitcherId, actors.shortstopId, actors.receiverId]).size !== 4
+        || [actors.pitcherId, actors.shortstopId, actors.receiverId].some(id => !id || /^(player|opponent-pitcher|batter-runner)$/.test(id))) return reject("NPC_ACTOR_BINDING");
+      if (!same(caps.assignment, Roster.POSITION_ORDER.map(position => ({ position, id: Roster.getCurrentDefender(ctx.activeRoster, position).id })))) return reject("STALE_ACTIVE_ASSIGNMENT");
+      for (const [position, key, actorKey] of [["P", "pitcher", "pitcherId"], ["SS", "shortstop", "shortstopId"], ["1B", "receiver", "receiverId"]]) {
+        const actor = Roster.getCurrentDefender(ctx.activeRoster, position), snapshot = caps[key];
+        if (actor.id !== actors[actorKey] || snapshot?.actorId !== actor.id || snapshot.fallback !== false
+          || !["simulation-roster", "team-roster-foundation"].includes(actor.source)
+          || snapshot.source !== (key === "pitcher" ? "activeRoster.pitchingProfile.control" : "activeRoster.defense/arm/speed")) return reject("CAPABILITY_ACTOR_SOURCE");
+        if (key === "pitcher") {
+          if (snapshot.raw !== actor.pitchingProfile?.control || snapshot.consumed !== pitch.controlRealization?.control
+            || !Number.isFinite(snapshot.consumed)) return reject("STALE_PITCHER_CAPABILITY");
+        } else {
+          if (!same(snapshot.raw, { defense: actor.defense, arm: actor.arm, speed: actor.speed })
+            || snapshot.consumed?.defenderId !== actor.id) return reject("STALE_NPC_CAPABILITY");
+          for (const [skill, source] of [["fielding", "defense"], ["reaction", "defense"], ["range", "defense"], ["catching", "defense"], ["arm", "arm"], ["throwing", "arm"], ["mobility", "speed"]])
+            if (!Number.isFinite(snapshot.consumed[skill]) || snapshot.consumed[skill] !== snapshot.raw[source]) return reject("CAPABILITY_ALIAS_PROVENANCE");
+        }
+      }
+      if (caps.batter?.actorId !== ctx.batterId || caps.batter.fallback !== false || caps.batter.source !== "livePlayer+existingOffensiveAdapter"
+        || !Number.isFinite(caps.batter.raw?.baseRunning) || !Number.isFinite(caps.batter.consumed?.speed)) return reject("BATTER_CAPABILITY_PROVENANCE");
+      const input = { physicalTruth: truth, opportunity, activeRoster: ctx.activeRoster, capabilities: caps.shortstop.consumed,
+        reachResult: reach, secureResult: secure, runners: ctx.before.runners, outs: ctx.before.outs,
+        inning: ctx.inning, half: ctx.half, scores: ctx.before.scores, batterRunnerId: ctx.batterId,
+        forceChain: ground?.forceChain, runnerStates: [], runnerPhysicalStates: ground?.runnerPhysicalStates };
+      ReachSecure.validateReach(input);
+      if (opportunity.primaryPosition !== "SS" || opportunity.primaryDefenderId !== actors.shortstopId
+        || reach.position !== "SS" || !reach.reached || reach.reachQuality !== "cleanArrival"
+        || !secure?.secured || secure.secureQuality !== "cleanControl" || secure.ballState !== "secured") return reject("UNRESOLVED_OR_NONCLEAN_FIELD", "unsupported");
+      if (!same(reach.inputs, { reaction: caps.shortstop.consumed.reaction, range: caps.shortstop.consumed.range, mobility: caps.shortstop.consumed.mobility })
+        || secure.inputs?.fielding !== caps.shortstop.consumed.fielding || secure.inputs?.catching !== caps.shortstop.consumed.catching) return reject("FIELD_CAPABILITY_PROVENANCE");
+      validateSelection(selection, decision, input);
+      if (selection.route.routeId !== "secureFirstBaseOut" || selection.route.receiverId !== actors.receiverId
+        || selection.route.targetRunnerId !== ctx.batterId || selection.route.targetBase !== "first") return reject("UNSUPPORTED_DEFENSIVE_CHOICE", "unsupported");
+      if (thrown?.identity !== `${selection.identity}|throw-v1` || thrown.throwerId !== actors.shortstopId
+        || thrown.receiverId !== actors.receiverId || thrown.targetRunnerId !== ctx.batterId || thrown.targetBase !== "first"
+        || !thrown.throwAttempted || thrown.throwQuality !== "onTarget" || thrown.releaseQuality !== "readyRelease"
+        || !(thrown.strengthMargin >= 0) || !(thrown.accuracyMargin >= 1)
+        || thrown.inputs?.arm !== caps.shortstop.consumed.arm || thrown.inputs?.throwing !== caps.shortstop.consumed.throwing
+        || thrown.inputs.transferState !== "ready" || !thrown.variationEvidence?.consumed) return reject("NONCLEAN_THROW", "unsupported");
+      if (!received?.ready || !received.secured || received.status !== "completed" || received.throwQuality !== "onTarget"
+        || received.physicalIdentity !== truth.identity || received.playIdentity !== truth.identity || received.errorCharged
+        || !same(received.provenance?.capabilities, caps.receiver.consumed) || received.provenance.returnReady !== true
+        || !Number.isFinite(received.provenance.sample)) return reject("UNRESOLVED_RECEIVE", "unsupported");
+      // IncomingReceive consumes this saved explicit sample, not a random source.
+      if (!same(received, resolveIncomingReceive({ playIdentity: truth.identity, physicalIdentity: truth.identity,
+        throwResolution: thrown, receiver: { id: actors.receiverId, position: "1B" }, capabilities: caps.receiver.consumed,
+        sample: received.provenance.sample, returnReady: true, receiveDelay: received.receiveDelay }))) return reject("RECEIVE_PROVENANCE");
+      const runner = ground?.runnerPhysicalStates?.[0];
+      const Ground = globalThis.BattedBallGroundDefense
+        || (typeof require === "function" ? require("./batted-ball-ground-defense.js") : null);
+      if (!Ground || !same(ground, Ground.buildGroundBallDefensiveOpportunity({ identity: truth.identity, physicalTruth: truth,
+        runners: ctx.before.runners, outs: ctx.before.outs,
+        batterRunner: { runnerId: ctx.batterId, speed: caps.batter.consumed.speed, startQuality: "normalStart" },
+        defenderContext: { playerPosition: "游擊手", defensiveOpportunity: opportunity, reachAccess: ReachSecure.projectAccess(reach) } }))) return reject("GROUND_RUNNER_SOURCE");
+      if (!ground?.supported || ground.identity !== truth.identity || !same(ground.physicalTruth, truth)
+        || ground.runnerPhysicalStates.length !== 1 || runner.runnerId !== ctx.batterId || runner.originBase !== "batter"
+        || runner.targetBase !== "first" || runner.speed !== caps.batter.consumed.speed || runner.startQuality !== "normalStart"
+        || !same(ground.forceChain, Force.buildInitialLiveBallForceChain({ runners: ctx.before.runners, batterRunnerId: ctx.batterId }))) return reject("RUNNER_PHYSICAL_PROVENANCE");
+      const receiverState = { receiverId: received.receiverId, ready: true, atBase: true, receiveDelay: received.receiveDelay,
+        physicalIdentity: received.physicalIdentity, receiveIdentity: received.identity };
+      input.receiverState = receiverState;
+      // Loaded lazily after the existing Decision -> Runner dependency is initialized.
+      // Revalidate saved timing with its owner; no second arrival formula or draw.
+      const Runner = globalThis.DefensiveRunnerThrowSettlementFoundation
+        || (typeof require === "function" ? require("./defensive-runner-throw-settlement-foundation.js") : null);
+      if (!Runner || !same(timing, Runner.resolveTiming({ input, opportunity: decision, selection, throwResolution: thrown,
+        runnerState: runner, receiverState }))) return reject("TIMING_PROVENANCE");
+      if (!timing.contestAvailable || !(timing.timingMargin < 0)
+        || !(timing.runnerArrival.relativeArrival < timing.receiverCompletion.relativeCompletion)) return reject("NOT_SAFE_BEFORE_COMPLETED_THROW", "unsupported");
+      const bases = [ctx.batterId, null, null], third = firstLeg?.thirdOut;
+      if (!firstLeg || firstLeg.identity !== `${timing.identity}|settlement-v1` || firstLeg.timingIdentity !== timing.identity || firstLeg.runnerResult !== "safe" || firstLeg.outRecorded !== false
+        || firstLeg.targetRunnerId !== ctx.batterId || firstLeg.targetBase !== "first" || firstLeg.playType !== "batterRunner"
+        || !same(firstLeg.before, ctx.before) || firstLeg.outsBefore !== ctx.before.outs || firstLeg.outsAfter !== ctx.before.outs
+        || !same(firstLeg.baseChanges, bases) || !same(firstLeg.outRunnerIds, []) || !same(firstLeg.orderedRetirements, [])
+        || !same(firstLeg.runChanges, []) || !same(firstLeg.runnerMovement, [{ runnerId: ctx.batterId, from: "batter", to: "first" }])
+        || firstLeg.settlementApplied !== false || firstLeg.continuation?.status !== "liveBallContinuation"
+        || firstLeg.continuation.targetBase !== null || firstLeg.ballRemainsLive !== true
+        || !same(firstLeg.forceStateBefore, ground.forceChain) || !same(firstLeg.forceStateAfter, Force.deriveForceChainAfterRetirements(ground.forceChain, []))
+        || !same(firstLeg.continuation.pendingRunners, []) || !same(firstLeg.continuation.inTransitRunners, [])
+        || !third?.settlementReady || third.halfInningEnded || third.thirdOutType !== "none" || third.thirdRetirement !== null
+        || third.outsBefore !== ctx.before.outs || third.outsAfter !== ctx.before.outs || !same(third.basesAfter, bases)
+        || !same(third.basesBefore, ctx.before.runners) || third.timingStatus !== "resolved" || third.halfInningTransition !== "none"
+        || !same(third.orderedRetirements, []) || !same(third.legalScoringRunnerIds, []) || !same(third.unresolvedScoringRunnerIds, [])) return reject("UNCLOSED_SAFE_FIRST");
+      if (!actionFacts || !same(actionFacts, createActionFacts(actionFacts)) || actionFacts.playIdentity !== truth.identity
+        || actionFacts.physicalIdentity !== truth.identity || actionFacts.sourceAuthority !== "sameBallActualNPCExecution"
+        || !same(actionFacts.actions.map(a => a.type), ["field", "throw", "receive", "baseTouch"])) return reject("ACTION_PROVENANCE");
+      const actions = actionFacts.actions, ids = actions.map(a => a.identity);
+      for (let i = 0; i < 4; i++) if (actions[i].status !== "completed" || actions[i].errorCharged === true
+        || actions[i].actorId !== (i < 2 ? actors.shortstopId : actors.receiverId)
+        || actions[i].actorPosition !== (i < 2 ? "SS" : "1B") || actions[i].runnerId !== ctx.batterId
+        || actions[i].targetBase !== "first" || !same(actions[i].dependsOn, i ? [ids[i - 1]] : [])) return reject("INCOMPLETE_OR_WRONG_ACTION");
+      if (actions[0].provenance.reachId !== reach.identity || actions[0].provenance.secureId !== secure.identity
+        || actions[1].provenance.throwId !== thrown.identity || actions[2].provenance.receiveId !== received.identity
+        || actions[3].provenance.timingId !== timing.identity) return reject("ACTION_SOURCE_REFERENCES");
+      if (!scorerFacts || !same(scorerFacts, resolveScorerEligibility({ actionFacts, retirements: [], contests: [] }))
+        || scorerFacts.batterReachedOnError || scorerFacts.decisions.length || scorerFacts.contests.length) return reject("CONTRARY_OR_MISSING_SCORER_FACTS");
+      return freeze({ version: "batter-reach-classification-v1", identity: `${truth.identity}|batter-reach-scorer-v1`,
+        status: "supported", officialClassification: "infieldHit", compatibleOffensiveResult: "single",
+        responsibleBatterId: ctx.batterId, physicalIdentity: truth.identity, matchId: ctx.matchId, paId: ctx.paId, pitchId: ctx.pitchId,
+        explanation: "Normal completed SS-to-1B execution cannot retire the batter who actually reached first before the secured receive; no other runner choice or contrary scorer fact.",
+        sourceReferences: { admission: clone(admission), actionIds: ids, reachId: reach.identity, secureId: secure.identity,
+          throwId: thrown.identity, receiveId: received.identity, timingId: timing.identity, runnerSettlementId: firstLeg.identity,
+          scorerId: scorerFacts.identity, capabilities: clone(caps) }, authority: "existingInfieldScorer", consumedRng: false });
+    } catch (error) { return reject("INVALID_EXECUTION_PROVENANCE"); }
+  }
+  // S2-RECOVERY-001 additive API. Provisional station model; CRT is not seconds.
+  function resolvePostDeliveryBallState(args = {}) {
+    const reject = reason => freeze({ status:"unsupported", reason, modelVersion:"s2-recovery-model-v1" });
+    const { context:ctx, physicalTruth, input, decision, selection, thrown, received, originalSamples, timeBase } = args;
+    try {
+      if (Object.keys(args).some(k => !["context","physicalTruth","input","decision","selection","thrown","received","originalSamples","timeBase"].includes(k))) return reject("UNDECLARED_BALL_INPUT");
+      const a = ctx?.admission, caps = ctx?.capabilities;
+      if (ctx?.coveragePolicy !== "s2-recovery-facts-v1" || a?.coveragePolicy !== ctx.coveragePolicy
+        || a.authority !== "originalPlayerDetailedPA" || a.lockedAt !== "beforeFirstPitch"
+        || a.matchId !== ctx.matchId || a.paId !== ctx.paId || a.batterId !== ctx.batterId
+        || !same(a.capabilities,caps)) return reject("RECOVERY_ADMISSION");
+      if (!ctx.matchId || !ctx.paId || !ctx.pitchId || ctx.batterId !== "player" || ctx.before.runners.some(Boolean)
+        || !Number.isInteger(ctx.before.outs) || ctx.before.outs < 0 || ctx.before.outs > 2
+        || ctx.physicalId !== physicalTruth?.identity || physicalTruth.ballType !== "groundBall"
+        || physicalTruth.executionEvidence?.actualPitch?.pitchId !== ctx.pitchId
+        || physicalTruth.executionEvidence.actualPitch.pitcherId !== caps.actors.pitcherId) return reject("SAME_BALL_IDENTITY");
+      const clock = { version:"s2-recovery-clock-v1", origin:"samePlayLaunch", unit:"coarseRelativeTime", matchId:ctx.matchId, paId:ctx.paId, pitchId:ctx.pitchId, physicalId:ctx.physicalId };
+      if (!same(timeBase,clock)) return reject("TIME_BASE");
+      const samples = a.recoverySamples, order = ["direction","displacement","contact","approach","acquire"];
+      if (samples?.version !== "s2-recovery-samples-v1" || samples.authority !== "preAdmissionControlledRecoverySamples"
+        || !same(samples.order,order) || Object.keys(samples).sort().join() !== "authority,order,values,version"
+        || Object.keys(samples.values || {}).sort().join() !== [...order].sort().join()
+        || order.some(k => typeof samples.values[k] !== "number" || !Number.isFinite(samples.values[k]) || samples.values[k] < 0 || samples.values[k] >= 1)) return reject("MODEL_SAMPLES");
+      if (!same(ctx.activeRoster,input?.activeRoster) || !same(input.physicalTruth,physicalTruth)
+        || !same(input.capabilities,caps.shortstop.consumed) || !same(input.runners,ctx.before.runners) || input.outs !== ctx.before.outs) return reject("EXECUTION_CONTEXT");
+      Roster.assertActiveDefense(ctx.activeRoster);
+      for (const [position,key] of [["SS","shortstop"],["1B","receiver"]]) {
+        const actor = ctx.activeRoster.lineup.find(p => p.id === caps[key].actorId && p.defensivePosition === position), c = caps[key].consumed;
+        if (!actor || c.defenderId !== actor.id || caps[key].fallback !== false
+          || caps[key].raw.defense !== actor.defense || caps[key].raw.arm !== actor.arm || caps[key].raw.speed !== actor.speed
+          || ["fielding","catching","reaction","range"].some(k => c[k] !== actor.defense)
+          || c.mobility !== actor.speed || c.arm !== actor.arm || c.throwing !== actor.arm
+          || [actor.defense,actor.arm,actor.speed].some(v => !Number.isFinite(v) || v < 0 || v > 20)) return reject("ACTUAL_NPC_CAPABILITY");
+      }
+      if (caps.actors.shortstopId !== caps.shortstop.actorId || caps.actors.receiverId !== caps.receiver.actorId
+        || caps.actors.shortstopId === caps.actors.receiverId || caps.actors.receiverId === "player") return reject("ACTOR_IDENTITY");
+      for (const k of ["reach","secure","strength","accuracy","receive"]) if (typeof originalSamples?.[k] !== "number" || originalSamples[k] < 0 || originalSamples[k] >= 1) return reject("ORIGINAL_SAMPLES");
+      const base = { physicalTruth, activeRoster:ctx.activeRoster, opportunity:input.opportunity, capabilities:caps.shortstop.consumed };
+      const reach = ReachSecure.resolveReach({ ...base, roll:originalSamples.reach });
+      const secure = ReachSecure.resolveSecure({ ...base, reachResult:reach, roll:originalSamples.secure });
+      if (!same(input.reachResult,reach) || !same(input.secureResult,secure) || !secure.secured
+        || !same(buildDecisionOpportunity(input),decision)) return reject("ORIGINAL_FIELD_EXECUTION");
+      const Ground = globalThis.BattedBallGroundDefense || (typeof require === "function" ? require("./batted-ball-ground-defense.js") : null);
+      const ground = Ground.buildGroundBallDefensiveOpportunity({ identity:physicalTruth.identity, physicalTruth, runners:ctx.before.runners, outs:ctx.before.outs,
+        batterRunner:{ runnerId:"player", speed:caps.batter.consumed.speed, startQuality:"normalStart" },
+        defenderContext:{ playerPosition:"\u6e38\u64ca\u624b", defensiveOpportunity:input.opportunity, reachAccess:ReachSecure.projectAccess(reach) } });
+      if (!ground.supported || input.batterRunnerId !== "player" || !same(input.runnerPhysicalStates,ground.runnerPhysicalStates)
+        || !same(input.forceChain,ground.forceChain)) return reject("ORIGINAL_RUNNER_MOVEMENT");
+      validateSelection(selection,decision,input);
+      if (selection.route.routeId !== "secureFirstBaseOut" || selection.position !== "SS" || selection.route.receiverPosition !== "1B"
+        || selection.route.targetBase !== "first" || selection.route.targetRunnerId !== "player") return reject("DELIVERY_SCOPE");
+      const freshThrow = resolveThrow({ input, opportunity:decision, selection, capabilities:caps.shortstop.consumed,
+        rolls:{ strength:originalSamples.strength, accuracy:originalSamples.accuracy }, transferState:"ready" });
+      if (!same(thrown,freshThrow)) return reject("THROW_EXECUTION");
+      const freshReceive = resolveIncomingReceive({ playIdentity:ctx.physicalId, physicalIdentity:ctx.physicalId, throwResolution:thrown,
+        receiver:{ id:caps.actors.receiverId, position:"1B" }, capabilities:caps.receiver.consumed, sample:originalSamples.receive });
+      if (!same(received,freshReceive)) return reject("RECEIVE_EXECUTION");
+      const nominal = { short:4, medium:5, long:6 }[thrown.throwDemand?.distanceClass], quality = thrown.throwQuality, s = samples.values;
+      if (nominal === undefined || !["onTarget","challengingReceive","offline"].includes(quality)) return reject("DELIVERY_MODEL_SCOPE");
+      const r = n => Math.round(n*1000)/1000;
+      const occurredAt = r(nominal + (quality === "challengingReceive" ? 1 : quality === "offline" ? 1+s.displacement : 0) + received.receiveDelay);
+      const held = received.ready && received.secured;
+      const distanceMeters = held ? 0 : r(quality === "offline" ? 6+6*s.displacement : quality === "challengingReceive" ? 2+4*s.displacement : 1+3*s.displacement);
+      const side = held ? "target" : s.direction < .5 ? "infield" : "foul";
+      return freeze({ status:"supported", version:"s2-post-delivery-ball-v1", modelVersion:"s2-recovery-model-v1",
+        identity:ctx.physicalId+"|post-delivery-v1", sameBall:{ matchId:ctx.matchId, paId:ctx.paId, pitchId:ctx.pitchId, physicalId:ctx.physicalId },
+        phase:2, sourceRefs:{ throwId:thrown.identity, receiveId:received.identity, priorSecureId:secure.identity },
+        possession:{ status:held ? "controlled" : "loose", holderId:held ? received.receiverId : null },
+        location:{ station:"firstReceiverTarget", region:held ? "target" : (distanceMeters <= 4 ? "near" : "outer")+"-"+side,
+          side, distanceMeters, boundsMeters:held ? [0,0] : distanceMeters <= 4 ? [0,4] : [4,12] },
+        contact:held ? "securedReceive" : received.ready && received.status === "failed" && s.contact < .5 ? "gloveDeflection" : "untouched",
+        occurredAt, timeBase:clone(timeBase), sampleProvenance:{ version:samples.version, authority:samples.authority,
+          order:held ? [] : order.slice(0,3), values:held ? {} : { direction:s.direction, displacement:s.displacement, contact:s.contact }, stage:"postDelivery", consumedRng:false } });
+    } catch (error) { return reject("INVALID_UPSTREAM:"+error.message); }
+  }
+  // End S2-RECOVERY-001 additive API.
   return freeze({ VERSION, RNG_NAMESPACES, isAdvancingTo, hasHomePlay, controlled, buildDecisionOpportunity,
     selectDefensiveRoute, validateOpportunity, validateSelection, resolveThrow, resolveBaseTouch, projectExistingThrow, throwDemand, validateStoredStage,
-    resolveIncomingReceive, ACTION_TYPES, createActionFacts, resolveScorerEligibility, projectDefensiveAttribution });
+    resolveIncomingReceive, ACTION_TYPES, createActionFacts, resolveScorerEligibility, projectDefensiveAttribution, resolveBatterReachClassification, resolvePostDeliveryBallState });
 });

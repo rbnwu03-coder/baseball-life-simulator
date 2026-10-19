@@ -67,10 +67,15 @@ evaluate(`
     m.pendingDefensiveResumeState={simulationPhase:"moment_2_resolved",momentIndex:1,currentMomentId:"hs_y1_match_defense_1",currentDomain:"flow",currentAssignment:"resume"};
     m.momentIndex=1;m.currentMomentId="hs_y1_match_defense_1";
     const defender=m.rosters[defenseTeam].lineup.find(x=>x.position==="右外野手")||m.rosters[defenseTeam].lineup[0];
+    defender.defense=10; // This existing controlled catch fixture formerly injected catching/reaction/range=10.
     const truth={version:"batted-ball-physical-v1",identity:"tag-up-physical-"+seed,contactQuality:"solid",ballType:"flyBall",pace:"firm",direction:"rightSide",depth:"deep",executionEvidence:{continuousContactScore:.64}};
-    const opportunity=BattedBallFlyBallDefense.buildFlyBallCatchOpportunity({identity:"tag-up-catch-"+seed,physicalTruth:truth,runners:m.runners,outs:m.outs,runnerEntities:[{runnerId,originBase,speed:9,reaction:9,baseballIQ:9}],preContactRunnerStates:{[runnerId]:{movementState:"stationary",touchingOriginBase:true}},defenderContext:{defenderId:defender.id,name:defender.name,position:"右外野手",catching:10,reaction:10,range:10,arm:defender.arm,throwing:defender.arm,source:"simulation-roster"}});
+    const paIdentity="tag-up-pa-"+seed;
+    const admission={gameId:m.id,paIdentity,batterId:m.currentBatter,inning:m.inning,half:m.half,offenseTeam,defenseTeam,
+      outs:m.outs,runners:m.runners.slice(),scores:{...m.scores},continuation:"preAdmittedCompressed",admittedAt:"beforePitch",mappingRolls:null};
+    m.ordinaryDefensivePlateAppearanceState=OffensivePlateApproach.createPlateAppearanceState({paIdentity,batterId:m.currentBatter,battedBallPhysicalTruth:truth});
+    const opportunity=BattedBallFlyBallDefense.buildFlyBallCatchOpportunity({identity:paIdentity+"|fly-ball-catch",admission,physicalTruth:truth,runners:m.runners,outs:m.outs,runnerEntities:[{runnerId,originBase,speed:9,reaction:9,baseballIQ:9}],preContactRunnerStates:{[runnerId]:{movementState:"stationary",touchingOriginBase:true}},defenderContext:getHighSchoolFlyBallDefenderCatchContext(m,truth)});
     const catchResult=BattedBallFlyBallDefense.resolveFlyBallCatchExecution(opportunity,{executionRoll:0});
-    m.flyBallCatchState=BattedBallFlyBallDefense.applyFlyBallCatchResult(opportunity,catchResult,{paCompatibilityResult:{result:"out",authority:"physicalFlyBallCatchToPACompatibility",officialScoring:"deferred"}});
+    m.flyBallCatchState=BattedBallFlyBallDefense.applyFlyBallCatchResult(opportunity,catchResult,{paCompatibilityResult:BattedBallOutcomeMapping.resolveOfficialBallInPlayOutcome({physicalTruth:truth,defenseOutcome:{caught:true,authority:catchResult.authority,physicalIdentity:truth.identity}})});
     player.highSchoolMatch=m;applyHighSchoolFlyBallCatchResolution(m);const situation=createHighSchoolRunnerTagUpSituation(m);return {m,situation};
   }
 `);

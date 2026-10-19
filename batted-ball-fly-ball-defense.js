@@ -63,12 +63,12 @@
   function resolveFlyBallCatchAccess(input = {}) {
     const context = input.airborneContext || AirborneDefense?.buildAirborneBallContext(input.physicalTruth) || {};
     const defender = input.defenderContext || {};
-    const expectedPosition = context.direction === "rightSide" ? "右外野手" : context.direction === "middle" ? "中外野手" : "";
+    const expectedPosition = context.direction === "rightSide" ? "右外野手" : context.direction === "middle" ? "中外野手"
+      : context.direction === "leftSide" ? "左外野手" : "";
     const structuralSupport = context.ballType === "flyBall" && ["medium", "deep"].includes(context.depth)
-      && ["rightSide", "middle"].includes(context.direction) && Boolean(defender.defenderId) && defender.position === expectedPosition;
+      && Boolean(expectedPosition) && Boolean(defender.defenderId) && defender.position === expectedPosition;
     if (!structuralSupport) {
-      const reason = context.direction === "leftSide" ? "unsupportedLeftSideAssignment"
-        : !["medium", "deep"].includes(context.depth) ? "unsupportedFlyBallDepth"
+      const reason = !["medium", "deep"].includes(context.depth) ? "unsupportedFlyBallDepth"
           : !expectedPosition ? "unsupportedFlyBallDirection" : "defenderAssignmentUnavailable";
       return deepFreeze({ defenderId: defender.defenderId || "", defenderPosition: defender.position || "", level: "unsupported", supported: false, score: 0, reason });
     }
@@ -112,6 +112,7 @@
     return deepFreeze({
       version: VERSION,
       identity: String(input.identity || `${physicalTruth.identity || "fly-ball"}|catch`),
+      admission: clone(input.admission || null),
       sourceAuthority: "BattedBallPhysicalTruth",
       physicalTruth: clone(physicalTruth),
       airborneContext,

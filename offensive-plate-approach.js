@@ -321,7 +321,7 @@
 
   function prepareNextPitch(state, override = null) {
     const normalized = normalizePlateAppearanceState(state);
-    if (!normalized || normalized.completed || normalized.pendingPitch) return normalized;
+    if (!normalized || normalized.completed || normalized.awaitingDefense || normalized.pendingPitch) return normalized;
     return createPlateAppearanceState({ ...clone(normalized), pendingPitch: generatePitchOpportunity(normalized, override) });
   }
 
@@ -668,6 +668,32 @@
       recognition: clone(event.recognition || null), batterResponse: event.action || null, pitchResult: event.pitchResult || null });
   }
 
+  function completeHeldBallInPlay(inputState, candidate) {
+    const state = normalizePlateAppearanceState(inputState);
+    const context = candidate?.context;
+    const last = state?.pitchHistory?.at(-1);
+    const safe = candidate?.result === "single" && context?.coveragePolicy === "s2-safe-first-v1";
+    if (!state?.awaitingDefense || state.resultApplied || !candidate?.closed || (candidate.result !== "out" && !safe)
+      || candidate.version !== "match-vnext-execution-v0.1" || context?.paId !== state.paIdentity
+      || context.physicalId !== state.battedBallPhysicalTruth?.identity || context.pitchId !== last?.pitch?.pitchId
+      || last.battedBallPhysicalTruth?.identity !== context.physicalId || state.pendingPitch) {
+      throw new Error("SAME_BALL_INVALID_HELD_COMPLETION");
+    }
+    if (safe) {
+      globalThis.MatchVNextExecutionContract.validateCandidate(candidate, context, state.battedBallPhysicalTruth);
+      if (state.context?.sameBallExecution?.coveragePolicy !== context.coveragePolicy
+        || JSON.stringify(state.context.sameBallExecution.admission) !== JSON.stringify(context.admission)) {
+        throw new Error("SAME_BALL_POLICY_ADMISSION_MISMATCH");
+      }
+    }
+    const official = OutcomeMapping.resolveOfficialBallInPlayOutcome({ physicalTruth: state.battedBallPhysicalTruth,
+      defenseOutcome: { result: candidate.result, settled: true, physicalIdentity: context.physicalId, authority: candidate.authority } });
+    const history = clone(state.pitchHistory);
+    history[history.length - 1] = { ...history.at(-1), paResult: official.result, officialBallInPlayOutcome: clone(official) };
+    return createPlateAppearanceState({ ...clone(state), completed: true, result: official.result, pendingPitch: null,
+      officialBallInPlayOutcome: { ...clone(official), executionCandidate: clone(candidate) }, pitchHistory: history });
+  }
+
   function markResultApplied(state) {
     const normalized = normalizePlateAppearanceState(state);
     return normalized ? createPlateAppearanceState({ ...clone(normalized), resultApplied: true }) : null;
@@ -707,6 +733,7 @@
     assertPitchResultIntegrity,
     resolveNextPitch,
     simulatePlateAppearance,
-    markResultApplied
+    markResultApplied,
+    completeHeldBallInPlay
   });
 });

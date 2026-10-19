@@ -395,6 +395,20 @@ const MatchExperienceDevelopment = (() => {
     }));
   }
 
+  function deriveBatterDecisionPressure(match, source) {
+    const anticipation = source.batterAnticipation;
+    const context = anticipation?.publicContext;
+    const identity = [match.id, source.id, "player", source.inning, source.half].join("|");
+    // Only the same PA's existing pre-resolution context can supply decision pressure.
+    if (!context || anticipation.identity !== identity
+      || !Number.isInteger(context.inning) || context.inning !== source.inning
+      || !Number.isInteger(context.outs) || context.outs < 0 || context.outs > 2
+      || !Number.isFinite(context.scoreDifference)
+      || !Array.isArray(context.runners) || context.runners.length !== 3
+      || !context.runners.every(value => typeof value === "boolean")) return undefined;
+    return derivePressure({ ...context, scoreMargin: context.scoreDifference, regulationInnings: match.regulationInnings });
+  }
+
   function createBatterEvidence(match, source, index) {
     const decisionQuality = normalizeDecisionQuality(source.decisionQuality || (source.decision ? "acceptable" : "none"));
     const executionQuality = normalizeExecutionQuality(source.executionQuality || (source.tier === "strong" ? "strong" : source.tier === "mixed" ? "normal" : "weak"));
@@ -403,6 +417,7 @@ const MatchExperienceDevelopment = (() => {
     const common = {
       matchId: match.id, playId, playerId: "player", evidenceType: "active", participationType: "batter", role: "batter",
       situation, meaningful: true, decisionQuality, executionQuality,
+      pressure: deriveBatterDecisionPressure(match, source),
       decisionEvidence: { opportunity: true, reasons: [source.objective || source.approach || "canonicalPlayerDecision"] },
       executionEvidence: { quality: executionQuality, stages: { contact: executionQuality }, feedback: source.primaryCause || "" },
       outcomeEvidence: { result: source.resultCode || "", objectiveSucceeded: source.objectiveSucceeded === true, runsCreated: Number(source.baseballMeaning?.runsScored) || 0 },

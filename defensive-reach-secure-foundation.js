@@ -158,5 +158,46 @@
     }
     return true;
   }
-  return freeze({ VERSION, RNG_NAMESPACES, resolveReach, resolveSecure, validateReach, projectAccess, projectGroundControl, validatePendingState });
+  // S2-RECOVERY-001 additive API; existing batted-ball reach/secure is unchanged.
+  function resolveRecoveryAction(args = {}) {
+    const reject = reason => freeze({ status:"unsupported", reason, modelVersion:"s2-recovery-model-v1" });
+    try {
+      const { ballInput, ballState:ball, activeRoster, capabilities:c, access, timeBase } = args;
+      if (Object.keys(args).some(k => !["ballInput","ballState","activeRoster","capabilities","access","timeBase"].includes(k))) return reject("UNDECLARED_RECOVERY_INPUT");
+      // Lazy lookup avoids the original Decision -> Reach factory dependency cycle.
+      const Decision = globalThis.DefensiveDecisionThrowFoundation || (typeof require === "function" ? require("./defensive-decision-throw-foundation.js") : null);
+      const same = (a,b) => JSON.stringify(a) === JSON.stringify(b);
+      const fresh = Decision.resolvePostDeliveryBallState(ballInput);
+      if (fresh.status !== "supported" || !same(ball,fresh)) return reject("UNVERIFIED_BALL_STATE");
+      const ctx = ballInput.context;
+      if (ball.possession.status !== "loose" || ball.possession.holderId !== null || ball.phase !== 2) return reject("NOT_LOOSE_POST_DELIVERY");
+      if (!same(timeBase,ball.timeBase) || !same(activeRoster,ctx.activeRoster)
+        || !same(c,ctx.capabilities.receiver.consumed)) return reject("RECOVERY_CONTEXT");
+      const actor = activeRoster.lineup.find(p => p.id === c.defenderId && p.defensivePosition === "1B");
+      const expectedAccess = { actorId:ctx.capabilities.actors.receiverId, position:"1B", station:"firstReceiverTarget", sourceReceiveId:ball.sourceRefs.receiveId };
+      if (!actor || actor.id === "player" || !same(access,expectedAccess) || ball.location.station !== access.station
+        || !["near-infield","near-foul","outer-infield","outer-foul"].includes(ball.location.region)
+        || !(ball.location.distanceMeters > 0 && ball.location.distanceMeters <= 12)) return reject("RECOVERY_ACCESS");
+      const s = ctx.admission.recoverySamples.values, d = ball.location.distanceMeters;
+      const reactionDuration = round(1/(1+.25*c.reaction)), movementSpeed = 1+.25*c.mobility;
+      const movementDuration = round(d/movementSpeed), acquireDuration = round(1/(1+.25*c.fielding));
+      const duration = round(reactionDuration+movementDuration+acquireDuration);
+      const reachMargin = round(.6*c.range+.4*c.mobility+4*(s.approach-.5)-.5*d);
+      const acquireMargin = round(.75*c.fielding+.25*c.catching+4*(s.acquire-.5)-(ball.contact === "gloveDeflection" ? 4 : 2));
+      const reached = reachMargin >= 0, secured = reached && acquireMargin >= 0;
+      return freeze({ status:secured ? "completed" : "failed", version:"s2-recovery-action-v1", modelVersion:ball.modelVersion,
+        identity:ball.identity+"|recovery-v1", sameBall:copy(ball.sameBall), phase:3, dependsOn:[ball.identity], actorId:actor.id, actorPosition:"1B",
+        selection:{ policy:"targetStationFirstBaseman-v1", access:copy(access), candidates:[actor.id],
+          forecastDuration:duration, forecastPossessionAt:round(ball.occurredAt+duration), authority:"visibleBallLocation+admittedNPCCapabilitiesBeforeAcquireSamples" },
+        capabilities:copy(c), startAt:ball.occurredAt, completedAt:round(ball.occurredAt+reactionDuration+movementDuration+(reached ? acquireDuration : 0)), timeBase:copy(timeBase),
+        approach:{ reached, margin:reachMargin, reactionDuration, movementDuration, movementSpeed, distanceMeters:d },
+        acquisition:{ attempted:reached, secured, margin:acquireMargin, duration:reached ? acquireDuration : 0 },
+        beforePossession:copy(ball.possession), afterPossession:{ status:secured ? "controlled" : "loose", holderId:secured ? actor.id : null },
+        sampleProvenance:{ version:ctx.admission.recoverySamples.version, authority:ctx.admission.recoverySamples.authority,
+          stage:"recovery", order:["approach","acquire"], values:{ approach:s.approach, acquire:s.acquire }, consumedRng:false },
+        reason:secured ? "ACTUAL_APPROACH_AND_ACQUISITION" : reached ? "ACQUISITION_FAILED" : "APPROACH_FAILED" });
+    } catch (error) { return reject("INVALID_RECOVERY_SOURCE:"+error.message); }
+  }
+  // End S2-RECOVERY-001 additive API.
+  return freeze({ VERSION, RNG_NAMESPACES, resolveReach, resolveSecure, validateReach, projectAccess, projectGroundControl, validatePendingState, resolveRecoveryAction });
 });

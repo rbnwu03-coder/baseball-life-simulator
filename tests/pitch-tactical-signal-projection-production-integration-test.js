@@ -4,7 +4,7 @@ const { discover } = require('./match-m0-after-r2-admission-context.cjs');
 const O = require('../pitch-observation-foundation'), S = require('../pitch-sequence-state-foundation');
 const I = require('../pitch-tactical-interpretation-foundation'), G = require('../pitch-tactical-signal-projection-foundation');
 const P = require('../offensive-plate-approach');
-const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');
+const { assertPitchProductionSourceScope, assertMatchVNextSourceDelta } = require('./pitch-production-source-scope.cjs');
 const clone = value => JSON.parse(JSON.stringify(value));
 const BASELINE = '674e49115a9ed7d67c69a3023b5a594d41fe584c';
 
@@ -265,6 +265,9 @@ function main() {
       const current = fs.readFileSync(path.join(root, file), 'utf8').replace(/\r\n?/g, '\n');
       const baseline = cp.execFileSync('git', ['show', BASELINE + ':' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\r\n?/g, '\n');
       if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);
+      else if (file === 'save.js') require('./receiver-source-save-authorized-delta.cjs').assertReceiverSourceSaveAuthorizedDelta(current, baseline, fs.readFileSync(path.join(root, 'receiver-source-snapshot.js'), 'utf8'));
+      else if (file === 'index.html') assertMatchVNextSourceDelta(file, current, baseline, fs.readFileSync(path.join(root, 'receiver-source-snapshot.js'), 'utf8'));
+      else if (file === 'offensive-plate-approach.js' || file === 'plate-decision-foundation.js') assertMatchVNextSourceDelta(file, current, baseline);
       else assert.equal(current, baseline, file);
     }
   });
