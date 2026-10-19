@@ -262,5 +262,42 @@
     } catch(error){return reject("INVALID_RUNNER_SOURCE:"+error.message);}
   }
   // End S2-RECOVERY-001 additive API.
-  return freeze({VERSION,deriveRunnerArrival,resolveTiming,resolveBaseTouchTiming,deriveSettlement,projectExistingTiming,projectExistingSettlement,projectInfieldSettlement,projectTagUpTiming,projectTagUpSettlement,validateBefore,validateProjectedTiming,resolveRecoveryContinuation});
+  // G1-B bounded extension. Arrival remains owned by deriveRunnerArrival above.
+  function resolveOutfieldContinuation(args = {}) {
+    const reject=reason=>freeze({status:"unsupported",closed:false,reason});
+    try {
+      if(Object.keys(args).sort().join()!=="ballInput,ballState,retrieval")return reject("UNDECLARED_OUTFIELD_RUNNER_INPUT");
+      const Fly=globalThis.BattedBallFlyBallDefense||(typeof require==="function"?require("./batted-ball-fly-ball-defense.js"):null);
+      const Reach=globalThis.DefensiveReachSecureFoundation||(typeof require==="function"?require("./defensive-reach-secure-foundation.js"):null);
+      const ball=Fly.resolveGroundedOutfieldBall(args.ballInput),retrieval=Reach.resolveOutfieldRetrieval({ballInput:args.ballInput,ballState:args.ballState});
+      if(ball.status!=="supported"||!same(ball,args.ballState)||!same(retrieval,args.retrieval)
+        ||!["completed","failed"].includes(retrieval.status))return reject("UNVERIFIED_OUTFIELD_EXECUTION");
+      const a=args.ballInput.admission,id=a.batterId;
+      const first=deriveRunnerArrival({runnerId:id,originBase:"batter",targetBase:"first",speed:a.batter.speed,startQuality:"normalStart",advancementProgress:"early"});
+      const second=deriveRunnerArrival({...first,originBase:"first",targetBase:"second",startQuality:"normalStart",advancementProgress:"early"});
+      const r=x=>Math.round(x*1000)/1000,decisionAt=r(Math.max(first.relativeArrival,ball.landedAt));
+      const secondArrival=r(decisionAt+second.relativeArrival),attemptSecond=retrieval.selection.forecastPossessionAt>secondArrival;
+      const attained=first.relativeArrival<retrieval.completedAt;
+      const base={version:"g1-b-outfield-runner-v1",identity:retrieval.identity+"|runner",physicalIdentity:ball.physicalIdentity,
+        runnerId:id,timeBase:clone(ball.timeBase),originalArrival:first,secondLeg:second,
+        attainedBases:attained?[{runnerId:id,base:"first",at:first.relativeArrival,reason:"noPossessionBeforeFirstArrival"}]:[],
+        decision:{policy:"declineExtraRiskUnlessClearLooseWindow",at:decisionAt,
+          type:attained?(attemptSecond?"attemptSecond":"holdFirst"):null,
+          forecastPossessionAt:retrieval.selection.forecastPossessionAt,secondArrivalIfAttempted:secondArrival,
+          source:"originalRunnerArrival+knownGroundedLocation+prelockedCapabilityForecast"},
+        defenseControl:{holderId:retrieval.afterPossession.holderId,at:retrieval.completedAt,throwAttempted:false},
+        elapsed:retrieval.completedAt,closed:false,finalBase:null,finalBases:null,outsCreated:0,orderedRetirements:[]};
+      if(retrieval.status!=="completed")return freeze({...base,status:"pending",reason:"OUTFIELD_PICKUP_UNRESOLVED"});
+      if(!attained)return freeze({...base,status:"pending",reason:"FIRST_CONTEST_REQUIRES_EXECUTION"});
+      if(attemptSecond)return freeze({...base,status:"pending",reason:"EXTRA_BASE_ATTEMPT_REQUIRES_TERMINAL"});
+      const forceChain=Force.buildInitialLiveBallForceChain({runners:a.runners,batterRunnerId:id});
+      const force=Force.settleForceAdvancement({forceChain,movementIntents:Force.buildMovementIntents(forceChain),retirements:[]});
+      if(force.outsCreated!==0||!same(force.runnersAfter,[id,null,null]))return reject("OUTFIELD_FORCE_CLOSURE");
+      return freeze({...base,status:"closed",closed:true,reason:"ATTAINED_FIRST_HOLD_AND_ACTUAL_DEFENSIVE_CONTROL",force,
+        finalBase:"first",finalBases:clone(force.runnersAfter),finalOuts:a.outs,
+        terminalRule:"soleRunnerDeclinesExtraAdvanceAndActualOutfielderControlsBall"});
+    }catch(error){return reject("INVALID_OUTFIELD_RUNNER_SOURCE:"+error.message);}
+  }
+  // End G1-B bounded extension.
+  return freeze({VERSION,deriveRunnerArrival,resolveTiming,resolveBaseTouchTiming,deriveSettlement,projectExistingTiming,projectExistingSettlement,projectInfieldSettlement,projectTagUpTiming,projectTagUpSettlement,validateBefore,validateProjectedTiming,resolveRecoveryContinuation,resolveOutfieldContinuation});
 });

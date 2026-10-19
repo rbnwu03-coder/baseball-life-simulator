@@ -199,5 +199,36 @@
     } catch (error) { return reject("INVALID_RECOVERY_SOURCE:"+error.message); }
   }
   // End S2-RECOVERY-001 additive API.
-  return freeze({ VERSION, RNG_NAMESPACES, resolveReach, resolveSecure, validateReach, projectAccess, projectGroundControl, validatePendingState, resolveRecoveryAction });
+  // G1-B bounded extension. Grounded OF access is distinct from failed-delivery 1B recovery.
+  function resolveOutfieldRetrieval(args = {}) {
+    const reject=reason=>freeze({status:"unsupported",reason});
+    try {
+      if(Object.keys(args).sort().join()!=="ballInput,ballState")return reject("UNDECLARED_RETRIEVAL_INPUT");
+      const Fly=globalThis.BattedBallFlyBallDefense||(typeof require==="function"?require("./batted-ball-fly-ball-defense.js"):null);
+      const ball=Fly.resolveGroundedOutfieldBall(args.ballInput),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+      if(ball.status!=="supported"||!same(ball,args.ballState))return reject("UNVERIFIED_GROUNDED_BALL");
+      const c=ball.defender.capabilities,s=args.ballInput.admission.control.samples,d=ball.location.distanceMeters;
+      // Original Recovery reaction/movement/acquire coefficients and capability scale.
+      const reactionDuration=round(1/(1+.25*c.reaction)),movementSpeed=1+.25*c.mobility;
+      const movementDuration=round(d/movementSpeed),acquireDuration=round(1/(1+.25*c.fielding));
+      const duration=round(reactionDuration+movementDuration+acquireDuration);
+      const reachMargin=round(.6*c.range+.4*c.mobility+4*(s.approach-.5)-.5*d);
+      const acquireMargin=round(.75*c.fielding+.25*c.catching+4*(s.acquire-.5)-2);
+      const reached=reachMargin>=0,secured=reached&&acquireMargin>=0;
+      return freeze({status:secured?"completed":"failed",version:"g1-b-outfield-retrieval-v1",
+        identity:ball.identity+"|retrieve",physicalIdentity:ball.physicalIdentity,ballIdentity:ball.identity,
+        actorId:ball.defender.id,position:ball.defender.position,capabilities:copy(c),location:copy(ball.location),
+        timeBase:copy(ball.timeBase),startAt:ball.landedAt,
+        selection:{policy:"actualPrimaryOutfielder",forecastPossessionAt:round(ball.landedAt+duration),
+          authority:"visibleGroundedLocation+admittedCapabilityBeforePickupSamples"},
+        approach:{reached,margin:reachMargin,reactionDuration,movementDuration,movementSpeed,distanceMeters:d},
+        pickup:{attempted:reached,secured,margin:acquireMargin,duration:reached?acquireDuration:0},
+        completedAt:round(ball.landedAt+reactionDuration+movementDuration+(reached?acquireDuration:0)),
+        beforePossession:copy(ball.possession),afterPossession:{status:secured?"controlled":"loose",holderId:secured?ball.defender.id:null},
+        provenance:{authority:"actualNPCApproachAndPickup",samplePolicy:args.ballInput.admission.control.policy,
+          samples:copy(s),consumedRng:false,originalSecureReusedAsPossession:false},throwAttempted:false});
+    }catch(error){return reject("INVALID_RETRIEVAL_SOURCE:"+error.message);}
+  }
+  // End G1-B bounded extension.
+  return freeze({ VERSION, RNG_NAMESPACES, resolveReach, resolveSecure, validateReach, projectAccess, projectGroundControl, validatePendingState, resolveRecoveryAction, resolveOutfieldRetrieval });
 });

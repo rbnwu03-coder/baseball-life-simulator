@@ -221,10 +221,77 @@
 
   function normalizeFlyBallCatchState(saved) { return saved && typeof saved === "object" ? deepFreeze(clone(saved)) : null; }
 
+  // G1-B bounded extension. Existing catch and retouch semantics remain unchanged.
+  function createOutfieldSingleAdmission(input) {
+    const a = clone(input), d = a?.control;
+    if (!a || a.continuation !== "detailedOutfieldSingle" || a.admittedAt !== "beforePitch"
+      || Object.keys(a).sort().join() !== ["gameId","paIdentity","batterId","inning","half","offenseTeam","defenseTeam","outs","runners","scores","admittedAt","continuation","control","activeRoster","defenders","batter","lineupIndex"].sort().join()
+      || !a.gameId || !a.paIdentity || !a.batterId || ![0,1,2].includes(a.outs)
+      || !Number.isInteger(a.inning) || a.inning < 1 || !["上","下"].includes(a.half)
+      || !["home","away"].includes(a.offenseTeam) || a.defenseTeam !== (a.offenseTeam === "home" ? "away" : "home")
+      || !Number.isInteger(a.lineupIndex) || a.lineupIndex < 0 || a.lineupIndex > 8
+      || !Array.isArray(a.runners) || a.runners.length !== 3 || a.runners.some(x => x !== null)
+      || d?.policy !== "g1-b-clean-outfield-single-v1" || Object.keys(d).sort().join() !== "policy,samples"
+      || Object.keys(d.samples || {}).sort().join() !== "acquire,approach"
+      || !Object.values(d.samples).every(x => typeof x === "number" && Number.isFinite(x) && x >= 0 && x < 1)
+      || a.batter?.id !== a.batterId || !Number.isFinite(a.batter.speed) || a.batter.speed < 0 || a.batter.speed > 20
+      || !Array.isArray(a.defenders) || a.defenders.length !== 3) throw new Error("Outfield single admission invalid");
+    const Roster = globalThis.TeamRosterFoundation || (typeof require === "function" ? require("./team-roster-foundation.js") : null);
+    if (!Roster?.validateActiveDefense(a.activeRoster).ok) throw new Error("Outfield single active roster invalid");
+    for (const [i, position] of ["LF","CF","RF"].entries()) {
+      const actor = Roster.getCurrentDefender(a.activeRoster,position), c = a.defenders[i];
+      if (!actor || actor.id === "player" || c.id !== actor.id || c.position !== position || c.source !== actor.source
+        || JSON.stringify(c.raw) !== JSON.stringify({defense:actor.defense,arm:actor.arm,speed:actor.speed})
+        || ![actor.defense,actor.arm,actor.speed].every(x => Number.isFinite(x) && x >= 0 && x <= 20)
+        || JSON.stringify(c.capabilities) !== JSON.stringify({defenderId:actor.id,fielding:actor.defense,
+          catching:actor.defense,reaction:actor.defense,range:actor.defense,mobility:actor.speed})) {
+        throw new Error("Outfield single capability provenance invalid");
+      }
+    }
+    return deepFreeze(a);
+  }
+
+  function resolveGroundedOutfieldBall(args = {}) {
+    const reject = reason => deepFreeze({status:"unsupported",reason});
+    try {
+      if (Object.keys(args).sort().join() !== "admission,physicalTruth") return reject("UNDECLARED_BALL_INPUT");
+      const a = createOutfieldSingleAdmission(args.admission), truth = args.physicalTruth;
+      const Physical = globalThis.BattedBallPhysical || (typeof require === "function" ? require("./batted-ball-physical.js") : null);
+      const Opportunity = globalThis.DefensiveOpportunityFoundation || (typeof require === "function" ? require("./defensive-opportunity-foundation.js") : null);
+      const Reach = globalThis.DefensiveReachSecureFoundation || (typeof require === "function" ? require("./defensive-reach-secure-foundation.js") : null);
+      if (!truth || JSON.stringify(Physical.normalizeBattedBallPhysicalTruth(truth)) !== JSON.stringify(truth)
+        || truth.version !== Physical.VERSION || truth.identity !== a.paIdentity+"|pitch-1"
+        || truth.executionEvidence?.actualPitch?.paIdentity !== a.paIdentity
+        || truth.executionEvidence.actualPitch.pitchId !== truth.identity || truth.executionEvidence.swing?.contact !== true
+        || truth.ballType !== "flyBall" || truth.depth !== "deep" || !["firm","hard"].includes(truth.pace)
+        || !Number.isFinite(truth.executionEvidence.depthScore) || truth.executionEvidence.depthScore < .67
+        || truth.executionEvidence.depthScore > 1) return reject("UNSUPPORTED_OR_STALE_FAIR_CONTACT");
+      const opportunity = Opportunity.resolveDefensiveOpportunity({physicalTruth:truth,activeRoster:a.activeRoster});
+      const defender = a.defenders.find(x => x.position === opportunity.primaryPosition && x.id === opportunity.primaryDefenderId);
+      if (!opportunity.supported || !defender) return reject("OUTFIELD_ASSIGNMENT");
+      // Original Reach roll zero is its BEST execution (+1), not a sampled miss.
+      const reach = Reach.resolveReach({physicalTruth:truth,activeRoster:a.activeRoster,opportunity,
+        capabilities:defender.capabilities,roll:0});
+      if (reach.reached || reach.reachQuality !== "notReached") return reject("ORDINARY_EFFORT_CATCH_STILL_POSSIBLE");
+      const round = x => Math.round(x*1000)/1000;
+      return deepFreeze({status:"supported",version:"g1-b-grounded-ball-v1",identity:truth.identity+"|landed-fair",
+        physicalIdentity:truth.identity,paIdentity:a.paIdentity,batterId:a.batterId,opportunity,defender,
+        ordinaryEffort:{authority:"canonicalReachBestExecutionBound",reach,catchAttempted:false,
+          caught:false,touchedBeforeGround:false,errorEligibility:"noReachOpportunityBeforeGround"},
+        location:{station:opportunity.primaryPosition+"-deep-sector",direction:truth.direction,depth:truth.depth,
+          distanceMeters:round(8+4*truth.executionEvidence.depthScore),authority:"originalPhysicalDepthScoreCoarseProjection"},
+        timeBase:{origin:truth.identity,epoch:"contact",unit:"CRT",model:"g1-b-coarse-outfield-v1"},
+        landedAt:truth.pace === "hard" ? 4 : 5,fair:true,landed:true,live:true,
+        possession:{status:"loose",holderId:null},consumedRng:false});
+    } catch(error) { return reject("INVALID_GROUNDED_SOURCE:"+error.message); }
+  }
+  // End G1-B bounded extension.
+
   return deepFreeze({
     VERSION, RNG_NAMESPACES, TIMING_ABSTRACTION, ACCESS_LEVELS, WINDOW_STATES,
     buildFlyBallRunnerInitialReadStates, resolveFlyBallCatchAccess, buildFlyBallCatchTimingWindow,
     buildFlyBallCatchOpportunity, resolveFlyBallCatchExecution, buildRetouchState,
-    buildTagUpLegality, buildPostCatchRunnerStates, applyFlyBallCatchResult, normalizeFlyBallCatchState
+    buildTagUpLegality, buildPostCatchRunnerStates, applyFlyBallCatchResult, normalizeFlyBallCatchState,
+    createOutfieldSingleAdmission, resolveGroundedOutfieldBall
   });
 });

@@ -1,6 +1,7 @@
 'use strict';
 const assert = require('node:assert/strict'), fs = require('node:fs'), cp = require('node:child_process');
 const H = require('./pitch-production-source-scope.cjs');
+const G1B = require('./g1-b-source-delta.cjs');
 const norm = s => s.replace(/\r\n?/g, '\n');
 const pins = ['ac53bf61964bde4b40501c77e15269bae99b55cc', '98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7',
   '9b9546f94a7286afef474be634fd93c57eb455db', '2a4b44a034b714b8de3c8a6897507995ab0f8ccd', '674e49115a9ed7d67c69a3023b5a594d41fe584c'];
@@ -141,7 +142,7 @@ function runS2ScorerContractTests() {
   ];
   const rows=[];for(const [name,mutate]of negatives){const p=structuredClone(proof);mutate(p);const prior=JSON.stringify(p),r=D.resolveBatterReachClassification(p);assert(['insufficient','unsupported'].includes(r.status),name);assert(r.reason&&!r.compatibleOffensiveResult,name);assert.equal(JSON.stringify(p),prior);rows.push({name,status:r.status,reason:r.reason});}
   for(const mutate of [c=>delete c.batterReachClassification,c=>c.batterReachClassification.responsibleBatterId='other',c=>c.force.outsCreated=1,c=>c.settlement.baseChanges=[null,null,null],c=>c.settlement.outsAfter++,c=>c.defensiveAttribution.actors[0].A=1]){const c=structuredClone(candidate);mutate(c);assert.throws(()=>C.validateCandidate(c,c.context,truth));}
-  const pin='ab3117653945de0b7013636187c446276a96e634',old=pinned(pin,'defensive-decision-throw-foundation.js'),now=norm(fs.readFileSync('defensive-decision-throw-foundation.js','utf8'));
+  const pin='ab3117653945de0b7013636187c446276a96e634',old=pinned(pin,'defensive-decision-throw-foundation.js'),now=G1B.readCore('defensive-decision-throw-foundation.js');
   function originalScorer(source){source=stripRecoveryAPI(source,'resolvePostDeliveryBallState');const start=source.indexOf('  // S2-SCORER-001:'),end=source.indexOf('  return freeze({ VERSION, RNG_NAMESPACES, isAdvancingTo',start);assert(start>0&&end>start);assert.equal(source.split('function resolveBatterReachClassification(').length,2);return(source.slice(0,start)+source.slice(end)).replace('projectDefensiveAttribution, resolveBatterReachClassification });','projectDefensiveAttribution });');}
   assert.equal(originalScorer(now),old,'only additive API/export; all existing scorer behavior frozen');
   assert.notEqual(originalScorer(now.replace('charged && !actualOut','false && !actualOut')),old,'old scorer mutation remains visible');
@@ -161,7 +162,7 @@ function stripRecoveryAPI(source,name) {
 function recoverySourceTests() {
   const crypto=require('node:crypto'),sha=s=>crypto.createHash('sha256').update(s).digest('hex'),rows=[];
   for(const [file,name] of [['defensive-decision-throw-foundation.js','resolvePostDeliveryBallState'],['defensive-reach-secure-foundation.js','resolveRecoveryAction'],['defensive-runner-throw-settlement-foundation.js','resolveRecoveryContinuation']]) {
-    const now=norm(fs.readFileSync(file,'utf8')),stripped=stripRecoveryAPI(now,name),old=pinned('ab3117653945de0b7013636187c446276a96e634',file);
+    const now=G1B.readCore(file),stripped=stripRecoveryAPI(now,name),old=pinned('ab3117653945de0b7013636187c446276a96e634',file);
     if(file.includes('decision-throw')){
       const a=stripped.indexOf('  // S2-SCORER-001:'),b=stripped.indexOf('  return freeze({ VERSION, RNG_NAMESPACES, isAdvancingTo',a);
       assert.equal(sha(stripped.slice(a,b)),'4e3cb8de69c64d963e457e21cc92dfc977de23dd38d9be61bf28b99688b17981','S2-A classifier remains byte exact');

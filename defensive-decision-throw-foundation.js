@@ -563,7 +563,34 @@
     } catch (error) { return reject("INVALID_UPSTREAM:"+error.message); }
   }
   // End S2-RECOVERY-001 additive API.
+  // G1-B bounded extension. Original infield classification and error rules are unchanged.
+  function resolveOutfieldSingleClassification(args = {}) {
+    const reject=reason=>freeze({status:"insufficient",reason});
+    try {
+      if(Object.keys(args).sort().join()!=="ballInput,ballState,retrieval,runnerContinuation")return reject("UNDECLARED_OUTFIELD_SCORER_INPUT");
+      const Fly=globalThis.BattedBallFlyBallDefense||(typeof require==="function"?require("./batted-ball-fly-ball-defense.js"):null);
+      const Runner=globalThis.DefensiveRunnerThrowSettlementFoundation||(typeof require==="function"?require("./defensive-runner-throw-settlement-foundation.js"):null);
+      const ball=Fly.resolveGroundedOutfieldBall(args.ballInput);
+      if(ball.status!=="supported"||!same(ball,args.ballState))return reject("UNVERIFIED_FAIR_LANDING_ORDINARY_EFFORT");
+      const retrieval=ReachSecure.resolveOutfieldRetrieval({ballInput:args.ballInput,ballState:ball});
+      const runner=Runner.resolveOutfieldContinuation({ballInput:args.ballInput,ballState:ball,retrieval});
+      if(!same(retrieval,args.retrieval)||!same(runner,args.runnerContinuation)||retrieval.status!=="completed"
+        ||!runner.closed||runner.status!=="closed"||runner.finalBase!=="first"
+        ||runner.decision.type!=="holdFirst"||!runner.attainedBases.length
+        ||ball.ordinaryEffort.errorEligibility!=="noReachOpportunityBeforeGround"
+        ||ball.ordinaryEffort.reach.reached||ball.ordinaryEffort.catchAttempted||!retrieval.pickup.secured
+        ||retrieval.afterPossession.holderId!==ball.defender.id)return reject("UNCLOSED_OR_CONTRARY_OUTFIELD_FACTS");
+      return freeze({version:"g1-b-outfield-single-scorer-v1",status:"supported",identity:ball.physicalIdentity+"|official-single",
+        physicalIdentity:ball.physicalIdentity,paIdentity:ball.paIdentity,responsibleBatterId:ball.batterId,
+        officialClassification:"cleanOutfieldSingle",compatibleOffensiveResult:"single",authority:"existingOutfieldScorer",
+        explanation:"Untouched fair landing beyond the canonical best primary reach; actual clean pickup, proven first arrival and declined extra-base attempt close the same play.",
+        errorEligibility:{status:"resolved",charged:false,reason:"noOrdinaryReachOpportunityAndCleanGroundPickup"},
+        sourceReferences:{ballId:ball.identity,reachId:ball.ordinaryEffort.reach.identity,retrievalId:retrieval.identity,runnerId:runner.identity},
+        consumedRng:false});
+    }catch(error){return reject("INVALID_OUTFIELD_SCORER_SOURCE:"+error.message);}
+  }
+  // End G1-B bounded extension.
   return freeze({ VERSION, RNG_NAMESPACES, isAdvancingTo, hasHomePlay, controlled, buildDecisionOpportunity,
     selectDefensiveRoute, validateOpportunity, validateSelection, resolveThrow, resolveBaseTouch, projectExistingThrow, throwDemand, validateStoredStage,
-    resolveIncomingReceive, ACTION_TYPES, createActionFacts, resolveScorerEligibility, projectDefensiveAttribution, resolveBatterReachClassification, resolvePostDeliveryBallState });
+    resolveIncomingReceive, ACTION_TYPES, createActionFacts, resolveScorerEligibility, projectDefensiveAttribution, resolveBatterReachClassification, resolvePostDeliveryBallState, resolveOutfieldSingleClassification });
 });
