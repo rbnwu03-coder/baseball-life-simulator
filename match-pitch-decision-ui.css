@@ -1,0 +1,19 @@
+.match-pitch-decision[hidden], .match-player-decisions[hidden] { display: none !important; }
+.match-pitch-decision { margin: 0 0 18px; padding: 20px; border: 2px solid #805839; border-radius: 12px; background: #fffaf0; min-width: 0; }
+.match-pitch-score { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.match-pitch-score strong { font-size: 1.5rem; }
+.match-pitch-decision h2 { margin: 14px 0 10px; font-size: 1.15rem; line-height: 1.5; }
+.match-pitch-count { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.match-pitch-count strong { padding: 7px 12px; background: #efe1c7; border-radius: 6px; }
+.match-pitch-actors { color: #65523e; font-size: .9rem; overflow-wrap: anywhere; }
+.match-pitch-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.match-pitch-actions button { min-height: 80px; padding: 12px; color: #fff; background: #604028; border: 2px solid transparent; border-radius: 8px; cursor: pointer; white-space: normal; overflow-wrap: anywhere; text-align: left; }
+.match-pitch-actions strong, .match-pitch-actions small { display: block; line-height: 1.5; }
+.match-pitch-actions small { margin-top: 5px; font-size: .8rem; }
+.match-pitch-actions button:disabled { opacity: .6; cursor: wait; }
+.match-pitch-actions button:focus-visible, .match-pitch-feedback:focus-visible { outline: 3px solid #2566a8; outline-offset: 3px; }
+.match-pitch-feedback { margin-top: 14px; padding: 10px 14px; background: #f1ebdf; border-radius: 6px; }
+.match-pitch-feedback p { margin: 5px 0; line-height: 1.6; overflow-wrap: anywhere; }
+.match-pitch-decision details { margin-top: 12px; color: #65523e; font-size: .85rem; }
+.match-pitch-decision li { overflow-wrap: anywhere; }
+@media (max-width: 900px) { .match-pitch-actions { grid-template-columns: 1fr; } }

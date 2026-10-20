@@ -85,10 +85,10 @@ test('Exact additive loader and guard migration preserve all original source val
   const original=file=>norm(cp.execFileSync('git',['--no-optional-locks','show',base+':'+file],{encoding:'utf8',maxBuffer:4*1024*1024}));
   const prior='  <script src="script.js"></script>\n  <script src="application-controller.js"></script>';
   const bridge='  <script src="script.js"></script>\n  <script src="live-public-match-bridge.js"></script>\n  <script src="application-controller.js"></script>';
-  const index=norm(fs.readFileSync(path.join(__dirname,'../index.html'),'utf8'));
+  const index=require('./g2-b2-source-delta.cjs').stripIndex(norm(fs.readFileSync(path.join(__dirname,'../index.html'),'utf8')));
   assert.equal(index.split(bridge).length,2);
   assert.equal(index,original('index.html').replace(prior,bridge));
-  const scope=norm(fs.readFileSync(path.join(__dirname,'pitch-production-source-scope.cjs'),'utf8'));
+  const scope=require('./g2-b2-source-delta.cjs').stripScope(norm(fs.readFileSync(path.join(__dirname,'pitch-production-source-scope.cjs'),'utf8')));
   const start=scope.indexOf('  // G2-A exact loader reversal;'),end=scope.indexOf("  const crypto = require('node:crypto');",start);
   assert(start>0&&end>start);
   assert.equal(scope.slice(0,start)+scope.slice(end),original('tests/pitch-production-source-scope.cjs'));

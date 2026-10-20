@@ -404,6 +404,7 @@ const MATCH_VNEXT_SOURCE_EDITS = {
   ]
 };
 function assertMatchVNextSourceDelta(file, currentText, originalPinned, receiverSourceText) {
+  currentText = require('./g2-b2-source-delta.cjs').stripMatchSource(file, currentText);
   // G2-A exact loader reversal; all original pins and full comparisons below remain authoritative.
   if (file === 'index.html' && normalize(currentText).includes('live-public-match-bridge.js')) {
     const bridge = '  <script src="script.js"></script>\n  <script src="live-public-match-bridge.js"></script>\n  <script src="application-controller.js"></script>';
