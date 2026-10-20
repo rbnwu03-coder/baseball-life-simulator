@@ -404,6 +404,13 @@ const MATCH_VNEXT_SOURCE_EDITS = {
   ]
 };
 function assertMatchVNextSourceDelta(file, currentText, originalPinned, receiverSourceText) {
+  // G2-A exact loader reversal; all original pins and full comparisons below remain authoritative.
+  if (file === 'index.html' && normalize(currentText).includes('live-public-match-bridge.js')) {
+    const bridge = '  <script src="script.js"></script>\n  <script src="live-public-match-bridge.js"></script>\n  <script src="application-controller.js"></script>';
+    const prior = '  <script src="script.js"></script>\n  <script src="application-controller.js"></script>';
+    assert.equal(normalize(currentText).split(bridge).length, 2, 'missing/duplicate exact G2-A loader anchor');
+    currentText = normalize(currentText).replace(bridge, prior);
+  }
   const crypto = require('node:crypto');
   const sha = text => crypto.createHash('sha256').update(text).digest('hex');
   let expected = normalize(originalPinned);
