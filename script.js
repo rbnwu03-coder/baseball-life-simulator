@@ -7182,6 +7182,8 @@ function applyHighSchoolSimulatedPlateAppearance(match, result, batterId, offens
 
 function resolveSimulatedHighSchoolPlateAppearance(match, randomSource = null, options = {}) {
   assertHighSchoolOutfieldSingleContinuable(match);
+  if (match.offensivePlateAppearanceState?.completed && !match.offensivePlateAppearanceState.resultApplied
+    && match.offensivePlateAppearanceState.result === "strikeout") throw new Error("THIRD_STRIKE_PENDING_PA_CANNOT_SKIP");
   if (match.completed || match.outs >= 3 || !["home", "away"].includes(match.offenseTeam)) return false;
   // A ground lifecycle owns this PA until its canonical settlement is consumed.
   // Recovery validates the original context before applying recorded execution.
@@ -10999,6 +11001,8 @@ function ensureHighSchoolOffensivePlateAppearanceState(match, choice) {
     tacticalSequenceHistory: match.pitcherTacticalSequenceHistory,
     // Batter-relative target semantics are resolved before the pitch is presented.
     context: {
+      pitcherId: getCurrentHighSchoolMatchDefender(match, match.defenseTeam, "P")?.id || "",
+      thirdStrikeCatcher: captureHighSchoolThirdStrikeCatcher(match),
       ...(sameBall ? { pitcherId: sameBall.actors.pitcherId, sameBallExecution: {
         version: "match-vnext-execution-v0.1", mode: "controlled", status: "fresh", capabilities: sameBall, coveragePolicy, admission
       } } : {}),
@@ -11404,6 +11408,44 @@ function didHighSchoolOffensiveObjectiveSucceed(choice, result, meaning) {
   return Boolean(objectiveSucceeded);
 }
 
+// G1-C bounded third-strike adapter.
+function captureHighSchoolThirdStrikeCatcher(match) {
+  const actor = getCurrentHighSchoolMatchDefender(match, match.defenseTeam, "C");
+  if (!actor || actor.id === "player") return null;
+  return { id: actor.id, position: "C", source: actor.source,
+    raw: { defense: actor.defense, arm: actor.arm, speed: actor.speed },
+    capabilities: { fielding: actor.defense, catching: actor.defense, reaction: actor.defense } };
+}
+
+function resolveHighSchoolThirdStrikeCatch(match, state) {
+  if (state?.result !== "strikeout") return null;
+  const fail = () => { throw new Error("THIRD_STRIKE_UNCLOSED_OR_STALE"); };
+  const pitcher = getCurrentHighSchoolMatchDefender(match, match.defenseTeam, "P");
+  const catcher = getCurrentHighSchoolMatchDefender(match, match.defenseTeam, "C");
+  if (!state.completed || state.resultApplied || state.batterId !== match.currentBatter
+    || getHighSchoolMatchLineupBatter(match, match.offenseTeam)?.id !== state.batterId
+    || state.context?.inning !== match.inning || state.context?.half !== match.half
+    || state.context?.outs !== match.outs || JSON.stringify(state.context?.runners) !== JSON.stringify(match.runners)
+    || JSON.stringify(state.context?.scores) !== JSON.stringify(match.scores)
+    || !pitcher || !catcher || catcher.id === "player" || state.context.pitcherId !== pitcher.id
+    || JSON.stringify(state.context.thirdStrikeCatcher) !== JSON.stringify(captureHighSchoolThirdStrikeCatcher(match))) return fail();
+  const capability = getDefensiveSimulationCapability(catcher, "捕手", match);
+  const input = {
+    paIdentity: state.paIdentity, batterId: state.batterId, pitcherId: pitcher.id,
+    pitchEvent: JSON.parse(JSON.stringify(state.pitchHistory.at(-1))),
+    catcher: { id: catcher.id, position: "C", source: catcher.source,
+      raw: { defense: catcher.defense, arm: catcher.arm, speed: catcher.speed },
+      capabilities: { fielding: capability.fielding, catching: capability.fielding, reaction: capability.reaction } },
+    sample: BattedBallPhysical.deterministicUnit("g1-c-third-strike-catch", state.paIdentity, catcher.id)
+  };
+  const execution = DefensiveReachSecureFoundation.resolveThirdStrikeCatch(input);
+  if (execution.status !== "completed" || !execution.caught) return fail();
+  return { gameId: match.id, paIdentity: state.paIdentity, batterId: state.batterId,
+    inning: match.inning, half: match.half, outsBefore: match.outs,
+    runnersBefore: match.runners.slice(), scoresBefore: { ...match.scores }, input, execution };
+}
+// End G1-C bounded third-strike adapter.
+
 function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
   if (options.sameBallCandidate) {
     const receipt = getHighSchoolSameBallReceipt(match, options.sameBallCandidate);
@@ -11413,6 +11455,7 @@ function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
   const plateAppearanceState = resolveHighSchoolOffensivePlateAppearance(match, choice, options.plateAppearance || {});
   if (!plateAppearanceState?.completed || !plateAppearanceState.result || plateAppearanceState.resultApplied) return false;
   const result = plateAppearanceState.result;
+  const thirdStrikeCatch = resolveHighSchoolThirdStrikeCatch(match, plateAppearanceState);
   const sameBallCandidate = plateAppearanceState.officialBallInPlayOutcome?.executionCandidate || null;
   const sameBallRefs = sameBallCandidate ? validateHighSchoolSameBallCandidate(match, plateAppearanceState, options.sameBallCandidate || sameBallCandidate) : null;
   try {
@@ -11449,7 +11492,7 @@ function resolveHighSchoolOffensiveDecision(match, choice, tier, options = {}) {
   const executionText = formatHighSchoolOffensiveExecutionText(choice, plateAppearanceState);
   const coachFeedback = formatHighSchoolOffensiveCoachFeedback(choice, plateAppearanceState);
   const objectiveSucceeded = didHighSchoolOffensiveObjectiveSucceed(choice, result, baseballMeaning);
-  const plateAppearanceEvent = recordHighSchoolMeaningfulPlateAppearance(match, "player", result, situationBefore, situationAfter, match.scores[getHighSchoolPlayerTeamSide(match)] - scoresBefore[getHighSchoolPlayerTeamSide(match)], runnerFacts);
+  const plateAppearanceEvent = recordHighSchoolMeaningfulPlateAppearance(match, "player", result, situationBefore, situationAfter, match.scores[getHighSchoolPlayerTeamSide(match)] - scoresBefore[getHighSchoolPlayerTeamSide(match)], thirdStrikeCatch ? { ...runnerFacts, sameBallMetadata: { paIdentity: plateAppearanceState.paIdentity, thirdStrikeCatch } } : runnerFacts);
   if (sameBallCandidate) recordHighSchoolMatchSimulationEvent(match, {
     type: "defensivePlay", eventId: sameBallRefs.defensiveEventId, executionRefs: sameBallRefs,
     inning: situationAfter.inning, half: situationAfter.half, offenseTeam: match.offenseTeam,

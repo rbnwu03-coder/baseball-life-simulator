@@ -230,5 +230,34 @@
     }catch(error){return reject("INVALID_RETRIEVAL_SOURCE:"+error.message);}
   }
   // End G1-B bounded extension.
-  return freeze({ VERSION, RNG_NAMESPACES, resolveReach, resolveSecure, validateReach, projectAccess, projectGroundControl, validatePendingState, resolveRecoveryAction, resolveOutfieldRetrieval });
+  // G1-C bounded third-strike catch. A pitch is never a batted ball or a throw.
+  function resolveThirdStrikeCatch(input = {}) {
+    const reject = reason => freeze({ status: "unsupported", caught: false, reason });
+    const { paIdentity, batterId, pitcherId, pitchEvent: e, catcher: c, sample } = input;
+    if (Object.keys(input).sort().join() !== "batterId,catcher,paIdentity,pitchEvent,pitcherId,sample"
+      || !paIdentity || !batterId || !pitcherId || !e?.pitch || !c?.id || c.id === "player"
+      || c.position !== "C" || !["simulation-roster", "team-roster-foundation"].includes(c.source)
+      || c.id === pitcherId || c.id === batterId || ![c.raw?.defense, c.raw?.arm, c.raw?.speed].every(x => Number.isFinite(x) && x >= 0 && x <= 20)
+      || JSON.stringify(c.capabilities) !== JSON.stringify({ fielding: c.raw.defense, catching: c.raw.defense, reaction: c.raw.defense })
+      || !Number.isFinite(sample) || sample < 0 || sample >= 1) return reject("INVALID_ACTIVE_CATCHER_OR_CAPABILITY");
+    const p = e.pitch;
+    if (e.paResult !== "strikeout" || e.countBefore?.strikes !== 2 || e.countAfter?.strikes !== 3
+      || !Number.isInteger(e.pitchNumber) || e.pitchNumber < 1 || p.paIdentity !== paIdentity
+      || p.pitchId !== `${paIdentity}|pitch-${e.pitchNumber}` || p.pitcherId !== pitcherId
+      || !["hitterPitch", "competitiveStrike", "edgeStrike", "chasePitch", "clearBall"].includes(p.pitchLocationClass)
+      || p.bounced === true || p.touchedGround === true || p.uncaught === true || p.catchEligible === false
+      || e.thirdStrikeUncaught === true || e.contact === true
+      || !(e.pitchResult === "calledStrike" && e.action === "take" && p.strike === true
+        || e.pitchResult === "swingingStrike" && e.action === "swing" && e.contact === false)) return reject("NOT_ORDINARY_AIRBORNE_THIRD_STRIKE");
+    const margin = round(.8 * c.capabilities.catching + .2 * c.capabilities.fielding - 2.5 + (0.5 - sample) * 2);
+    const caught = margin >= 0;
+    return freeze({ version: "g1-c-third-strike-catch-v1", identity: `${p.pitchId}|${c.id}|third-strike-catch`,
+      status: caught ? "completed" : "unclosed", caught, paIdentity, batterId, pitcherId, catcherId: c.id,
+      pitchIdentity: p.pitchId, strikeType: e.pitchResult, possession: { status: caught ? "controlled" : "unresolved", holderId: caught ? c.id : null },
+      catchBeforeGround: caught, margin, demand: 2.5, capabilities: copy(c.capabilities), sample,
+      policy: "ordinaryAirbornePitchOnly", authority: "actualThirdStrike+activeNPCCatcher+secureCapability",
+      consumedRng: false, throwAttempted: false });
+  }
+  // End G1-C bounded third-strike catch.
+  return freeze({ VERSION, RNG_NAMESPACES, resolveReach, resolveSecure, validateReach, projectAccess, projectGroundControl, validatePendingState, resolveRecoveryAction, resolveOutfieldRetrieval, resolveThirdStrikeCatch });
 });

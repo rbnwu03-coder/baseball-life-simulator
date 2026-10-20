@@ -104,7 +104,7 @@ const exportsEdits={
  'defensive-decision-throw-foundation.js':['resolvePostDeliveryBallState, resolveOutfieldSingleClassification });','resolvePostDeliveryBallState });']
 };
 function stripG1BExtension(file,source) {
- const t=norm(source),spec=specs.modules.find(x=>x.file===file);assert(spec,'unknown extension owner');
+ const t=norm(require("./g1-c-source-delta.cjs").stripCore(file,source)),spec=specs.modules.find(x=>x.file===file);assert(spec,'unknown extension owner');
  const marker='  // G1-B bounded extension.',endMarker='  // End G1-B bounded extension.\n';
  assert.equal(t.split(marker).length,2,'missing/duplicate G1-B extension');
  const start=t.indexOf(marker),end=t.indexOf(endMarker,start)+endMarker.length;assert(end>start);
@@ -119,7 +119,7 @@ function stripG1BExtension(file,source) {
 }
 function readCore(file){return stripG1BExtension(file,fs.readFileSync(file,'utf8'));}
 function assertScript(source){
- let restored=norm(source);
+ let restored=norm(require("./g1-c-source-delta.cjs").stripScript(source));
  const old=norm(cp.execFileSync('git',['--no-optional-locks','show',BASELINE+':script.js'],{encoding:'utf8',maxBuffer:16*1024*1024}));
  const parsed=H.readSource(restored),baseline=H.readSource(old);
  for(const item of specs.scriptChanges){
@@ -135,7 +135,7 @@ function assertScript(source){
 function runSourceTests(){
  let rejections=0;
  for(const spec of specs.modules){
-  const t=fs.readFileSync(spec.file,'utf8');stripG1BExtension(spec.file,t);
+  const t=require('./g1-c-source-delta.cjs').stripCore(spec.file,fs.readFileSync(spec.file,'utf8'));stripG1BExtension(spec.file,t);
   const changed=[
    t.replace('G1-B bounded extension.','G1-B removed extension.'),
    t+'\nfunction '+spec.names[0]+'(){}\n',

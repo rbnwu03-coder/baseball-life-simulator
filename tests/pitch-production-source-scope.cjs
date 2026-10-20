@@ -284,7 +284,7 @@ const RECOVERY_SCRIPT_EDITS = [
 function assertPitchProductionSourceScope(currentText, baselineText) {
   // Reverse only the final reviewed S1 literals, then retain every original
   // immutable body/global/wiring comparison, including the independent R0 repair.
-  currentText = normalize(currentText);
+  currentText = normalize(require("./g1-c-source-delta.cjs").stripScript(currentText));
   for (const edit of RECOVERY_SCRIPT_EDITS) {
     assert.equal(currentText.split(edit.after).length, 2, "missing/duplicate exact Recovery script anchor");
     currentText = currentText.replace(edit.after, edit.before);

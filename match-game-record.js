@@ -347,6 +347,45 @@
     return { pitcherId: pitcher.playerId, outs: delta };
   }
 
+  // G1-C: validate actual pitch possession before any PA or defensive write.
+  function validateThirdStrikeCatchCredit(record, event, context) {
+    const proof = event.thirdStrikeCatch;
+    if (!proof) return null; // Compressed/historical K has no inferred reception.
+    const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+    const side = sideForEvent(record, event, context) === "home" ? "away" : "home";
+    const roster = context.rosters?.[side];
+    const catcher = roster?.lineup?.find(a => ["C", "捕手"].includes(a.defensivePosition || a.position));
+    const pitcher = roster?.lineup?.find(a => ["P", "投手"].includes(a.defensivePosition || a.position));
+    const input = proof.input, caught = proof.execution;
+    const api = globalThis.DefensiveReachSecureFoundation
+      || (typeof require === "function" ? require("./defensive-reach-secure-foundation.js") : null);
+    const rosterApi = globalThis.TeamRosterFoundation
+      || (typeof require === "function" ? require("./team-roster-foundation.js") : null);
+    const physicalApi = globalThis.BattedBallPhysical
+      || (typeof require === "function" ? require("./batted-ball-physical.js") : null);
+    const retirement = event.thirdOutResolution?.orderedRetirements;
+    check(event.type === "plateAppearance" && event.result === "strikeout" && !event.defensiveAttribution && !event.actionFacts
+      && proof.gameId === record.gameId && proof.paIdentity === event.paIdentity && proof.batterId === event.batterId
+      && proof.inning === event.inning && proof.half === event.half && proof.outsBefore === event.before?.outs
+      && same(proof.runnersBefore, event.before?.runners) && same(proof.scoresBefore, event.before?.scores)
+      && rosterApi?.validateActiveDefense(roster).ok && catcher && catcher.id !== "player" && pitcher && catcher.id !== pitcher.id
+      && input?.catcher?.id === catcher.id && input.catcher.source === catcher.source && input.pitcherId === pitcher.id
+      && input.paIdentity === proof.paIdentity && input.batterId === proof.batterId
+      && same(input.catcher.raw, { defense: catcher.defense, arm: catcher.arm, speed: catcher.speed })
+      && same(input.catcher.capabilities, { fielding: catcher.defense, catching: catcher.defense, reaction: catcher.defense })
+      && physicalApi && input.sample === physicalApi.deterministicUnit("g1-c-third-strike-catch", input.paIdentity, catcher.id)
+      && api && same(api.resolveThirdStrikeCatch(input), caught) && caught?.status === "completed" && caught.caught
+      && caught.possession?.status === "controlled" && caught.possession.holderId === catcher.id && caught.catchBeforeGround
+      && event.before.outs >= 0 && event.before.outs < 3 && event.after?.outs === event.before.outs + 1
+      && same(event.before.scores, event.after.scores) && (event.scoringRunnerIds || []).length === 0
+      && retirement?.length === 1 && retirement[0].runnerId === event.batterId && retirement[0].outType === "strikeout"
+      && retirement[0].isBatterRunner === true && retirement[0].sequence === 1
+      && same(event.after.runners, event.after.outs === 3 ? [null, null, null] : event.before.runners),
+    "Third-strike PO requires active catcher, actual caught pitch and original single retirement");
+    return `${record.gameId}|${caught.identity}`;
+  }
+  // End G1-C third-strike validation.
+
   function recordEvent(record, event = {}, context = {}) {
     check(record?.version === VERSION, "Game record schema is required");
     if (FINAL_STATUSES.has(record.status)) return Object.freeze({ status: "locked", eventId: getEventId(record, event) });
@@ -355,9 +394,13 @@
     validateDefensiveAttribution(event);
     const flyoutIdentity = validateFlyBallCatchCredit(record, event, context);
     if (flyoutIdentity && record.eventRefs.some(ref => ref.defensivePlayIdentity === flyoutIdentity)) return Object.freeze({ status: "duplicate", eventId });
+    const thirdStrikeIdentity = validateThirdStrikeCatchCredit(record, event, context);
+    if (thirdStrikeIdentity && record.eventRefs.some(ref => ref.defensivePlayIdentity === thirdStrikeIdentity)) return Object.freeze({ status: "duplicate", eventId });
     ensureInningLine(record, event.inning || 1);
     if (event.type === "plateAppearance") recordPlateAppearance(record, event, context, eventId);
     if (event.type === "run") recordRun(record, event, context);
+    if (thirdStrikeIdentity) recordDefensivePlay(record, { ...event, fielderId: event.thirdStrikeCatch.execution.catcherId,
+      playerPosition: "捕手", catchResult: event.thirdStrikeCatch.execution, outsCreated: 1 }, context, eventId);
     if (event.type === "playerRoutinePlay" || (event.type === "meaningfulMomentResolved" && event.domain === "defense") || event.type === "defensivePlay" || flyoutIdentity) {
       recordDefensivePlay(record, event, context, eventId);
     }
@@ -376,7 +419,7 @@
     recordRunnerEvent(record, event, context);
     const pitcherOuts = attributePitcherOuts(record, event, context);
     record.eventRefs.push({ eventId, type: String(event.type || "event"), sequence: integer(event.sequence), inning: Math.max(1, integer(event.inning) || 1), half: String(event.half || ""),
-      ...(event.defensiveAttribution || flyoutIdentity ? { defensivePlayIdentity: event.defensiveAttribution?.playIdentity || flyoutIdentity } : {}), ...(pitcherOuts ? { pitcherOuts } : {}) });
+      ...(event.defensiveAttribution || flyoutIdentity || thirdStrikeIdentity ? { defensivePlayIdentity: event.defensiveAttribution?.playIdentity || flyoutIdentity || thirdStrikeIdentity } : {}), ...(pitcherOuts ? { pitcherOuts } : {}) });
     return Object.freeze({ status: "applied", eventId });
   }
 
