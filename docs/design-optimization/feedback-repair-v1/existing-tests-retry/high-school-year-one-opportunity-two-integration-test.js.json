@@ -1,0 +1,20 @@
+{
+  "file": "high-school-year-one-opportunity-two-integration-test.js",
+  "status": "PASS",
+  "nodeAssertions": 40,
+  "customChecks": null,
+  "entry": true,
+  "elapsedMs": 504,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/high-school-year-one-opportunity-two-integration-test.js"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "stdout": "✓ 1. Match 1 正式產生 Opportunity N+1\n✓ 2. Opportunity 2 與 Opportunity 1 identity 不同\n✓ 3. Opportunity 2 直接進入 production follow-up event\n✓ 4. Match 2 直接重用既有 Opportunity 2 而非重抽\n✓ 5. Match 2 使用既有完整 Match Engine state\n✓ 6. Match 2 為 bounded evaluation/practice match\n✓ 7. Match 2 保持 selected school-year roster identity\n✓ 8. Match 2 保持 canonical incumbent actor identities\n✓ 9. Match 1 與 Match 2 各自保存最小 history\n✓ 10. 第二場產生第二筆 performance evidence\n✓ 11. 第二場 actual exposure 回填 Opportunity history\n✓ 12. 第二次 Competition Reassessment 已執行\n✓ 13. Bench 兩筆正向 production evidence 可升 Rotation\n✓ 14. Bench 正向 Match 1 改善 Opportunity 2 context\n✓ 15. Role change aftermath 即時顯示目前 Rotation\n✓ 16. Year journey 讀取起始 Bench 與結束 Rotation\n✓ 17. Match 2 pending save/reload 不 reroll\n✓ 18. 第二場完成後不再生成第三個高一 Opportunity\n✓ 19. Starter 第一筆負向結果進入 Opportunity 2\n✓ 20. Starter 兩筆負向 evidence production-reachable 降為 Rotation\n✓ 21. Demotion feedback 由 canonical reassessment reasons 產生\n✓ 22. Rotation 兩筆正向樣本仍依 canonical smoothing 留在 Rotation\n✓ 23. Rotation 正向 trajectory 保存 promotion pressure\n✓ 24. Rotation 正向 feedback 明示仍需下一筆正式證據\n✓ 25. 下一筆 qualifying evidence 已可沿 canonical 門檻自然升 Starter\n✓ 26. Mixed path 維持 Rotation\n✓ 27. Match 1 no appearance 不虛構負面 performance\n✓ 28. No-appearance 後仍有合法 Opportunity 2 consumer\n✓ 29. 兩次 no appearance 合法維持 Bench\n✓ 30. Call-home 明說未上場且不偽造場上選擇\n✓ 31. Starter 不保存 long-bench low point\n✓ 32. Starter preparation scene 不聲稱名字未被念到\n✓ 33. Starter aspiration 保留名單不保證結果的 truth\n✓ 34. Year settlement 消費兩次 Opportunity journey\n✓ 35. Year summary 使用 final canonical role\n✓ 36. Year settlement/reload 保留 role、evaluation 與 bounded history\n✓ 37. Match 2 evaluation/reassessment exactly once\n✓ 38. Production event 的 Match 2 可由既有 Match Engine 實際走到結算\n✓ 39. Rotation → Starter canonical sampleCount >= 3 未被降低\n✓ 40. 高一小結不清除跨年 evaluation pressure\nHigh School Year One Opportunity Two Integration: 40/40 passed.\n",
+  "stderr": "",
+  "error": null,
+  "timedOut": false
+}

@@ -1,0 +1,20 @@
+{
+  "file": "high-school-year-two-competition-loop-test.js",
+  "status": "FAIL",
+  "nodeAssertions": 37,
+  "customChecks": null,
+  "entry": true,
+  "elapsedMs": 357,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/high-school-year-two-competition-loop-test.js"
+  ],
+  "exitCode": 1,
+  "signal": null,
+  "stdout": "✓ 1. Spring refresh 保持 Opportunity identity\n✓ 2. Spring refresh 保持 match／year／phase identity\n✓ 3. Coach／fatigue／pain／injury risk 進入 refresh snapshot\n✓ 4. 最終準備狀態可改善同一 Opportunity score\n✓ 5. Refresh 更新同一 history record 而非新增 Opportunity\n✓ 6. Training/readiness refresh 不增加 performance sample\n✓ 7. Canonical Spring 永遠進 Existing Match Engine\n✓ 8. Spring 使用 evolved Y2 roster identity\n✓ 9. Spring settlement 形成 Y2 evidence #1\n✓ 10. Autumn Opportunity 不在 preparation events 前預建\n✓ 11. Autumn 建立獨立 deterministic Opportunity 2\n✓ 12. Autumn 讀 post-Spring role／trend／actual exposure\n✓ 13. Autumn 讀最新 trust／health context\n✓ 14. Autumn Opportunity save/reload 不 reroll\n✓ 15. Autumn 進 Existing Match Engine\n✓ 16. Autumn 沿用 selected Y2 roster 且使用不同 opponent identity\n✓ 16a. Autumn pending Match save/reload 保留 roster、cursor 與 Opportunity\n✓ 17. Canonical Autumn event choices 來自 Match decision 而非 fixed performance effects\n✓ 18. Autumn settlement 形成獨立 Y2 evidence #2\n✓ 19. Y2 formal history 保存 Spring 與 Autumn\n✓ 20. Opportunity history 保存 Y2 Spring 與 Autumn 且不超過 bounded limit\n✓ 21. Autumn 後提供 player-facing canonical reassessment feedback\n✓ 22. Autumn settlement exactly once\n✓ 23. Y2 Summary 消費兩場 exposure 與 starting/ending role\n✓ 24. Y2 Summary 不依賴 legacy autumn proof flag\n✓ 24a. Y2 Summary save/reload 保持相同 systemic journey\n✓ 25. Y2→Y3 production 使用 generic transition 並更新 roster identity\n✓ 26. Y3 移除 Y2 year-3 actors並保留未畢業 IDs\n✓ 27. Y3 重算 competition 且不預建 Y3 season content\n✓ 28. Y3 entry save/reload 不 reroll\n✓ 29. Y2-only Bench 兩筆正向 evidence 依原 threshold 可升 Rotation\n✓ 30. Spring／Autumn no appearance 不增加 performance sample\n✓ 31. Rotation 可由累積三筆正向 evidence 依既有 threshold 升 Starter\n✓ 32. Starter 連續負向 Spring／Autumn evidence 可依既有 threshold demote\n✓ 33. Spring good／Autumn bad mixed path 不強制角色變化\n✓ 34. Spring result 透過 evaluation trend 改變 Autumn Opportunity\n✓ 35. Canonical P route 在 Spring／Autumn 一致 deferred/noAppearance\n",
+  "stderr": "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs:27\r\n catch(error){state.assertions.thrown++;sample.returned=false;sample.errorName=error?.name;throw error;}\r\n                                                                                           ^\r\n\r\nAssertionError [ERR_ASSERTION]: 36. Pitcher Summary 不偽造正式投球證明\r\n    at observedCall (E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs:26:26)\r\n    at Object.apply (E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs:39:12)\r\n    at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-two-competition-loop-test.js:8:10)\r\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-two-competition-loop-test.js:183:1)\r\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\r\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\r\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\r\n    at Module.<anonymous> (node:internal/modules/cjs/loader:1396:12)\r\n    at Module._load (E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs:47:22)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.19.0\r\n",
+  "error": null,
+  "timedOut": false
+}

@@ -1,0 +1,1960 @@
+{
+  "audit": "Test Reliability Audit v0.1",
+  "createdAt": "2026-10-14T09:15:51.852Z",
+  "formalBaseline": "ab3117653945de0b7013636187c446276a96e634",
+  "node": "v24.19.0",
+  "rows": [
+    {
+      "file": "tests/ability-performance-gradient-test.js",
+      "matches": [
+        {
+          "line": 23,
+          "text": "assert.equal(JSON.stringify(h.base), before, 'Immutable source fixture');"
+        }
+      ]
+    },
+    {
+      "file": "tests/ai-plate-appearance-outcome-test.js",
+      "matches": [
+        {
+          "line": 19,
+          "text": "test('independent identity rolls vary; no global RNG',()=>{const rolls=new Set(Array.from({length:2000},(_,n)=>AI.deterministicStrikeoutRoll('game|'+n+'|b|p')));assert.equal(rolls.size,2000);assert([...rolls].some(n=>n<.04));assert([...rolls].some(n=>n>.45));const source=require('fs').readFileSync(require.resolve('../ai-plate-appearance-outcome.js'),'utf8');assert(!source.includes('Math.random'));});"
+        }
+      ]
+    },
+    {
+      "file": "tests/career-development-progression-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { execFileSync } = require(\"child_process\");"
+        },
+        {
+          "line": 391,
+          "text": "const protectedDiff = execFileSync(\"git\", [\"diff\", \"--name-only\", \"HEAD\", \"--\", ...protectedFiles], {"
+        }
+      ]
+    },
+    {
+      "file": "tests/career-development-runtime-resolver-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { execFileSync } = require(\"child_process\");"
+        },
+        {
+          "line": 356,
+          "text": "const protectedDiff = execFileSync(\"git\", ["
+        }
+      ]
+    },
+    {
+      "file": "tests/career-network-contract-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { execFileSync } = require(\"child_process\");"
+        },
+        {
+          "line": 325,
+          "text": "const forbiddenDiff = execFileSync(\"git\", ["
+        }
+      ]
+    },
+    {
+      "file": "tests/career-spine-contract-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { execFileSync } = require(\"child_process\");"
+        },
+        {
+          "line": 275,
+          "text": "const forbiddenArchitectureDiff = execFileSync(\"git\", [\"diff\", \"--name-only\", \"--\", \"current-state-boundary.js\", \"decision-flow.js\", \"time-boundary.js\"], { cwd: root, encoding: \"utf8\" }).trim();"
+        }
+      ]
+    },
+    {
+      "file": "tests/career-transition-commit-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { execFileSync } = require(\"child_process\");"
+        },
+        {
+          "line": 212,
+          "text": "const protectedDiff = execFileSync(\"git\", ["
+        }
+      ]
+    },
+    {
+      "file": "tests/career-transition-progression-test.js",
+      "matches": [
+        {
+          "line": 328,
+          "text": "const { execFileSync } = require(\"child_process\");"
+        },
+        {
+          "line": 329,
+          "text": "const protectedDiff = execFileSync(\"git\", [\"diff\", \"--name-only\", \"HEAD\", \"--\", ...protectedFiles], {"
+        }
+      ]
+    },
+    {
+      "file": "tests/career-transition-resolver-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { execFileSync } = require(\"child_process\");"
+        },
+        {
+          "line": 122,
+          "text": "const forbiddenDiff = execFileSync(\"git\", ["
+        }
+      ]
+    },
+    {
+      "file": "tests/career-transition-runtime-resolver-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { execFileSync } = require(\"child_process\");"
+        },
+        {
+          "line": 285,
+          "text": "const protectedDiff = execFileSync(\"git\", ["
+        }
+      ]
+    },
+    {
+      "file": "tests/contextual-status-panel-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { execFileSync } = require(\"child_process\");"
+        },
+        {
+          "line": 111,
+          "text": "const baselineScript = normalizeSourceNewlines(execFileSync(\"git\", [\"show\", \"HEAD:script.js\"], { cwd: root, encoding: \"utf8\" }));"
+        }
+      ]
+    },
+    {
+      "file": "tests/defensive-decision-throw-production-integration-test.js",
+      "matches": [
+        {
+          "line": 80,
+          "text": "  assert.equal(run(\"bs.throwResolution.inputs.sourceLeg\"),\"fallbackRelease\");"
+        }
+      ]
+    },
+    {
+      "file": "tests/defensive-reach-secure-production-integration-test.js",
+      "matches": [
+        {
+          "line": 58,
+          "text": "  assert.equal(run(\"ground.m.groundBallInPlayState.secureResolution.variationEvidence.sourceRoll\"), .8);"
+        }
+      ]
+    },
+    {
+      "file": "tests/evaluation-registry-integration-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { execFileSync } = require(\"child_process\");"
+        },
+        {
+          "line": 65,
+          "text": "    execFileSync(process.execPath, [path.join(__dirname, file)], {"
+        }
+      ]
+    },
+    {
+      "file": "tests/event-continuity-pass-test.js",
+      "matches": [
+        {
+          "line": 142,
+          "text": "  const hash = crypto.createHash(\"sha256\").update(JSON.stringify(choiceGameplayContract(game))).digest(\"hex\");"
+        }
+      ]
+    },
+    {
+      "file": "tests/extra-inning-tiebreak-production-integration-test.js",
+      "matches": [
+        {
+          "line": 123,
+          "text": "  assert.strictEqual(run.source, \"double\");"
+        },
+        {
+          "line": 147,
+          "text": "  assert.strictEqual(run.source, \"error\");"
+        }
+      ]
+    },
+    {
+      "file": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+      "matches": [
+        {
+          "line": 57,
+          "text": "test(\"only current ground-ball handoffs create execution boundaries\",()=>{for(const text of [...away.json(\"boundaries\"),...home.json(\"boundaries\")]){const m=JSON.parse(text).highSchoolMatch;assert.strictEqual(m.activeSituation.sourcePhysicalStateRef,m.defensiveSituation.groundBallDefensiveContext.identity);assert.strictEqual(m.groundBallInPlayState.settlementApplied,false);assert.strictEqual(m.activeSituation.createdAt.inning,m.inning);}});"
+        }
+      ]
+    },
+    {
+      "file": "tests/ground-defensive-decision-identity-repair-test.js",
+      "matches": [
+        {
+          "line": 11,
+          "text": "test('all displayed routes agree with lifecycle routes where present', () => t.moments.forEach(m => assert.deepEqual(m.choices, m.sourceRoutes)));"
+        },
+        {
+          "line": 22,
+          "text": "  const source = cp.execFileSync('git', ['show', '156218b:script.js'], { encoding: 'utf8', maxBuffer: 8e6 }).replace(/\\r\\n?/g, '\\n');"
+        },
+        {
+          "line": 35,
+          "text": "  assert.equal(t.h.run('getHighSchoolYearOneMomentId({momentIndex:0,currentDomain:\"offense\"})'), 'hs_y1_match_moment_1');"
+        },
+        {
+          "line": 36,
+          "text": "  assert.equal(t.h.run('getHighSchoolYearOneMomentId({momentIndex:2,currentDomain:\"offense\",currentMomentId:\"hs_y1_match_offense_3\"})'), 'hs_y1_match_offense_3');"
+        },
+        {
+          "line": 37,
+          "text": "  assert.equal(t.h.run('getHighSchoolYearOneMomentId({completed:true,currentDomain:\"defense\",currentMomentId:\"hs_y1_match_defense_2\"})'), '');"
+        }
+      ]
+    },
+    {
+      "file": "tests/ground-settlement-handoff-r2-production-integration-test.js",
+      "matches": [
+        {
+          "line": 29,
+          "text": "  assert.equal(before.currentBatter,before.rosters.away.lineup[1].id);"
+        },
+        {
+          "line": 49,
+          "text": "  assert.deepEqual(after.runners,[before.currentBatter,before.runners[0],null]);"
+        },
+        {
+          "line": 112,
+          "text": "  const source=cp.execFileSync('git',['show','f1cc66b:script.js'],{encoding:'utf8',maxBuffer:8e6}).replace(/\\r\\n?/g,'\\n');"
+        },
+        {
+          "line": 122,
+          "text": "  const sources=[cp.execFileSync('git',['show','f1cc66b:script.js'],{encoding:'utf8',maxBuffer:8e6}),fs.readFileSync('script.js','utf8')].map(s=>s.replace(/\\r\\n?/g,'\\n'));"
+        },
+        {
+          "line": 124,
+          "text": "  assert.equal(extract(sources[0]),extract(sources[1]));"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-exchange-network-foundation-test.js",
+      "matches": [
+        {
+          "line": 48,
+          "text": "test(\"explicit stable coach source accepted\",()=>{const e=N.deriveCoachSchoolEvidence(fact,authority);assert.strictEqual(e.coachId,\"coach-a\");assert.strictEqual(e.provenance.coachSourceRef,\"contact-1\");N.appendEvidence(ledger,[e]);});"
+        },
+        {
+          "line": 54,
+          "text": "test(\"clean source audit\",()=>{const audit=N.auditRelationshipEvidence(ledger);assert.strictEqual(audit.duplicateIds+audit.selfSchoolFacts+audit.orphanRefs+audit.unknownSourceRefs,0);});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-exchange-network-production-integration-test.js",
+      "matches": [
+        {
+          "line": 53,
+          "text": "test(\"8 real incoming completion and reverse intent\",()=>{run('started=exchangeStart(\"incomingFriendlyInvitation\");next=exchangeFinish(started);m=started.match;');assert.strictEqual(run(\"getHighSchoolPlayerTeamSide(m)\"),\"away\");assert(run('player.highSchoolExchangeNetwork.evidence.some(e=>e.evidenceType===\"awayVisit\"&&e.visitorSchoolId===m.matchContext.playerTeamId)'));assert(run('next.eligible.some(c=>c.source.type===\"schoolRelationship\"&&c.opportunityType===\"outgoingFriendlyInvitation\")'));});"
+        },
+        {
+          "line": 57,
+          "text": "test(\"12 coach identity by itself produces no network\",()=>{run(\"var options=exchangeFixture();var input=getHighSchoolMatchOpportunityGenerationInput({sequence:2});\");assert.strictEqual(run(\"player.highSchoolExchangeNetwork.evidence.length\"),0);assert(!run('deriveHighSchoolMatchOpportunityCandidates({sequence:2}).candidates.some(c=>c.source.type===\"coachNetwork\")'));});"
+        },
+        {
+          "line": 58,
+          "text": "test(\"13 explicit existing coach source generates real candidates\",()=>{run(\"var coachEvidence=connectCoach();var derived=deriveHighSchoolMatchOpportunityCandidates({sequence:2});\");assert(run('derived.eligible.some(c=>c.source.type===\"coachNetwork\"&&c.provenance.networkEvidenceRef===coachEvidence.evidenceId)'));assert.strictEqual(run(\"coachEvidence.coachId\"),run(\"input.currentCoachId\"));});"
+        },
+        {
+          "line": 111,
+          "text": "test(\"22 completed source audit has no orphan/duplicate/unknown\",()=>{const a=json(\"HighSchoolExchangeNetwork.auditRelationshipEvidence(player.highSchoolExchangeNetwork,player.highSchoolSchedule)\");assert.strictEqual(a.orphanRefs+a.duplicateIds+a.selfSchoolFacts+a.unknownSourceRefs,0);});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-friendly-invitation-producer-foundation-test.js",
+      "matches": [
+        {
+          "line": 14,
+          "text": "test(\"return source exists with canonical refs\",()=>{const i=add(fixture());assert(returns(i));assert.strictEqual(returns(i).sourceType,\"returnVisit\");assert(N.getReturnVisitEvidence(i.relationshipLedger,\"A\",\"B\").some(e=>returns(i).evidenceRefs.includes(e.evidenceId)));});"
+        },
+        {
+          "line": 18,
+          "text": "test(\"known counterpart supports both directions without acceptance\",()=>assert.strictEqual(P.deriveCoachNetworkSources(coach(fixture(),\"knownCounterpart\")).length,2));"
+        },
+        {
+          "line": 19,
+          "text": "test(\"coach existence alone produces nothing\",()=>assert.strictEqual(derive(fixture()).sources.length,0));"
+        },
+        {
+          "line": 20,
+          "text": "test(\"mismatched current coach rejected\",()=>{const i=coach(fixture());i.currentCoachId=\"other\";assert.strictEqual(derive(i).sources.length,0);assert(derive(i).diagnostics.some(d=>d.reason===\"coachAffiliationMismatch\"));});"
+        },
+        {
+          "line": 24,
+          "text": "test(\"competition-only negative diagnostic retained\",()=>{const r=derive(add(fixture(),\"competitionEncounter\"));assert.strictEqual(r.sources.length,0);assert.strictEqual(r.diagnostics[0].reason,\"competitionEncounterNotFriendlyRelationship\");});"
+        },
+        {
+          "line": 25,
+          "text": "test(\"self school evidence fails closed\",()=>{const i=add(fixture());i.relationshipLedger.evidence[0].schoolBId=\"A\";assert.strictEqual(derive(i).sources.length,0);assert.strictEqual(derive(i).diagnostics[0].reason,\"invalidEvidenceLedger\");});"
+        },
+        {
+          "line": 27,
+          "text": "test(\"orphan return reference rejected\",()=>{const i=add(fixture());i.relationshipLedger.evidence=i.relationshipLedger.evidence.filter(e=>e.evidenceType===\"returnVisitEligible\");assert.strictEqual(derive(i).sources.length,0);assert.strictEqual(derive(i).diagnostics[0].reason,\"invalidEvidenceLedger\");});"
+        },
+        {
+          "line": 38,
+          "text": "test(\"multiple independent producers retained but IDs unique\",()=>{const r=derive(coach(add(fixture())));assert.strictEqual(new Set(r.sources.map(s=>s.producerType)).size,3);assert.strictEqual(P.auditInvitationSources(r).duplicateSourceIds,0);});"
+        },
+        {
+          "line": 39,
+          "text": "test(\"precedence return over coach over school\",()=>{const i=coach(add(fixture())),c=G.deriveOpportunityCandidates(i).eligible.find(c=>c.opportunityType===\"outgoingFriendlyInvitation\");assert.strictEqual(c.sourceProvenance.producerType,\"returnVisitProducer\");});"
+        },
+        {
+          "line": 42,
+          "text": "test(\"offered opportunity consumes semantic slot exactly once\",()=>{const i=add(fixture()),c=G.deriveOpportunityCandidates(i).eligible.find(c=>c.sourceAuthority===\"canonicalRelationshipProducer\"),o=G.materializeOpportunityCandidate(i.schedule,c,i);assert.strictEqual(o.status,\"offered\");assert.strictEqual(i.schedule.entries.length,0);assert(P.isSourceAlreadyConsumed(returns(i),i));assert.strictEqual(returns(i).eligibilityState,\"consumed\");assert.strictEqual(G.materializeOpportunityCandidate(i.schedule,c,i),o);});"
+        },
+        {
+          "line": 46,
+          "text": "test(\"future evidence never suppresses valid fallback\",()=>{const i=add(fixture());i.context.careerYear=0;assert.strictEqual(derive(i).eligible.length,0);const j=fixture();N.appendEvidence(j.relationshipLedger,[evidence(\"schoolExchangeMatch\",{careerYear:3})]);assert(G.deriveOpportunityCandidates(j).eligible.some(c=>c.sourceAuthority===\"fallback\"));});"
+        },
+        {
+          "line": 48,
+          "text": "test(\"query APIs and audit cover facts and diagnostics\",()=>{const i=coach(add(fixture())),r=derive(i);assert.deepStrictEqual(P.deriveInvitationSourcesForOpponent(i,\"B\"),r.sources);assert.deepStrictEqual(P.getInvitationSourceDiagnostics(i),r.diagnostics);assert.strictEqual(P.auditInvitationSources(r).sourceCount,r.sources.length);});"
+        },
+        {
+          "line": 50,
+          "text": "test(\"ineligible future return does not supersede valid coach contact\",()=>{const i=coach(fixture()),visit=evidence(\"awayVisit\",{careerYear:3});N.appendEvidence(i.relationshipLedger,[visit,N.deriveReturnVisitEvidence(visit)]);const c=G.deriveOpportunityCandidates(i).eligible.find(c=>c.opportunityType===\"outgoingFriendlyInvitation\");assert.strictEqual(c.sourceProvenance.producerType,\"coachNetworkProducer\");});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-friendly-invitation-producer-production-integration-test.js",
+      "matches": [
+        {
+          "line": 43,
+          "text": "test(\"1 real prior away completion derives return source\",()=>{run('var prior=priorExchange();var sources=sourceResult();var source=sources.eligible.find(s=>s.producerType===\"returnVisitProducer\");');assert(run(\"prior.match.completed\"));assert.strictEqual(run(\"source.direction\"),\"opponentVisitsPlayer\");});"
+        },
+        {
+          "line": 44,
+          "text": "test(\"2 Y1 refs derive fresh Y2 source identity\",()=>{assert.strictEqual(run(\"source.careerYear\"),2);assert.deepStrictEqual(json(\"source.provenance.originCareerYears\"),[1]);assert(run('prior.priorSources.sources.some(s=>s.producerType===\"returnVisitProducer\"&&s.sourceId!==source.sourceId&&JSON.stringify(s.evidenceRefs)===JSON.stringify(source.evidenceRefs))'));});"
+        },
+        {
+          "line": 45,
+          "text": "test(\"3 producer direct consumption yields canonical candidate\",()=>{run('var candidate=deriveHighSchoolMatchOpportunityCandidates({sequence:1}).eligible.find(c=>c.sourceProvenance.invitationSourceId===source.sourceId);');assert.strictEqual(run(\"candidate.sourceAuthority\"),\"canonicalRelationshipProducer\");assert.strictEqual(run(\"candidate.opportunityType\"),\"outgoingFriendlyInvitation\");});"
+        },
+        {
+          "line": 47,
+          "text": "test(\"5 opportunity retains lightweight producer provenance\",()=>{assert.strictEqual(run(\"opportunity.provenance.invitationSourceId\"),run(\"source.sourceId\"));assert.strictEqual(run(\"opportunity.provenance.producerType\"),\"returnVisitProducer\");assert.deepStrictEqual(json(\"opportunity.provenance.evidenceRefs\"),json(\"source.evidenceRefs\"));});"
+        },
+        {
+          "line": 51,
+          "text": "test(\"9 schedule and Match Context retain source identity\",()=>{assert.strictEqual(run(\"future.entry.opportunityId\"),run(\"opportunity.opportunityId\"));assert.strictEqual(run(\"future.match.matchContext.provenance.invitationSourceId\"),run(\"source.sourceId\"));assert.strictEqual(run(\"JSON.stringify(player.highSchoolExchangeNetwork)\"),run(\"ledgerBeforeFuture\"));});"
+        },
+        {
+          "line": 53,
+          "text": "test(\"11 prior home produces opposite direction and future away route\",()=>{run('prior=priorExchange(\"outgoingFriendlyInvitation\");sources=sourceResult();source=sources.eligible.find(s=>s.producerType===\"returnVisitProducer\");candidate=deriveHighSchoolMatchOpportunityCandidates({sequence:1}).eligible.find(c=>c.sourceProvenance.invitationSourceId===source.sourceId);future=launchFuture(candidate);');assert.strictEqual(run(\"source.direction\"),\"playerVisitsOpponent\");assert.strictEqual(run(\"getHighSchoolPlayerTeamSide(future.match)\"),\"away\");assert.strictEqual(run(\"future.match.matchContext.matchOrigin\"),\"awayInvitationFriendly\");assert.strictEqual(run(\"future.match.matchContext.venueContext.type\"),\"awayGround\");assert.strictEqual(run(\"future.match.matchContext.hostContext.hostTeamId\"),run(\"candidate.opponentSchoolId\"));});"
+        },
+        {
+          "line": 58,
+          "text": "test(\"16 explicit coach evidence derives outreach source and candidate\",()=>{run('var evidence=realCoachContact();sources=sourceResult();source=sources.eligible.find(s=>s.producerType===\"coachNetworkProducer\");candidate=deriveHighSchoolMatchOpportunityCandidates({sequence:1}).eligible.find(c=>c.sourceProvenance.invitationSourceId===source.sourceId);');assert(run(\"Boolean(candidate)\"));assert.strictEqual(run(\"source.opportunityType\"),\"outgoingFriendlyInvitation\");assert(run(\"source.evidenceRefs.includes(evidence.evidenceId)\"));});"
+        },
+        {
+          "line": 62,
+          "text": "test(\"20 competition-only remains ineligible with reason\",()=>{run('prior=priorExchange(\"officialCompetitionOpportunity\");sources=sourceResult();');assert.strictEqual(run(\"sources.sources.length\"),0);assert(run('sources.diagnostics.some(d=>d.reason===\"competitionEncounterNotFriendlyRelationship\")'));});"
+        },
+        {
+          "line": 63,
+          "text": "test(\"21 coach identity alone not invitation evidence\",()=>assert.strictEqual(run(\"HighSchoolFriendlyInvitationSource.deriveCoachNetworkSources(sourceInput()).length\"),0));"
+        },
+        {
+          "line": 64,
+          "text": "test(\"22 existing fallback preserved when later explicit contact arrives\",()=>{run('candidate=deriveHighSchoolMatchOpportunityCandidates({sequence:1}).eligible.find(c=>c.opportunityType===\"outgoingFriendlyInvitation\"&&c.opponentSchoolId===\"regional-power-school\");opportunity=materializeHighSchoolMatchOpportunityCandidate(candidate,{sequence:1});var originalOpportunity=JSON.stringify(opportunity);realCoachContact(\"regional-power-school\");');assert.strictEqual(run(\"JSON.stringify(opportunity)\"),run(\"originalOpportunity\"));assert(run('sourceResult().diagnostics.some(d=>d.reason===\"existingOpportunityPreserved\")'));assert(!run('deriveHighSchoolMatchOpportunityCandidates({sequence:1}).eligible.some(c=>c.opponentSchoolId===\"regional-power-school\"&&c.opportunityType===\"outgoingFriendlyInvitation\")'));});"
+        },
+        {
+          "line": 65,
+          "text": "test(\"23 multi-source precedence and fallback supersession stable\",()=>{run('prior=priorExchange();realCoachContact(\"regional-power-school\");sources=sourceResult();var derived=deriveHighSchoolMatchOpportunityCandidates({sequence:1});');assert.strictEqual(run('new Set(sources.sources.filter(s=>s.opponentSchoolId===\"regional-power-school\").map(s=>s.producerType)).size'),3);assert(run('derived.eligible.some(c=>c.opponentSchoolId===\"regional-power-school\"&&c.sourceProvenance.producerType===\"returnVisitProducer\")'));assert(run('derived.rejected.some(c=>c.opponentSchoolId===\"regional-power-school\"&&c.exclusionReasons.includes(\"supersededByCanonicalSource\"))'));});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-match-opportunity-foundation-test.js",
+      "matches": [
+        {
+          "line": 38,
+          "text": "  assert.strictEqual(S.createOpportunity(input()).opportunityId,S.createOpportunity(input({displayName:\"renamed\",source:{sourceId:\"coach-contact-1\",type:\"coachNetwork\"}})).opportunityId);"
+        },
+        {
+          "line": 48,
+          "text": "test(\"provenance chain\",()=>{const {state,entry,opportunity}=scheduled();const c=M.createMatchContext(S.deriveMatchContextInput(state,entry.scheduleEntryId,\"match-1\"));assert.strictEqual(c.provenance.opportunityId,opportunity.opportunityId);assert.strictEqual(c.scheduleEntryId,entry.scheduleEntryId);assert.strictEqual(c.provenance.sourceId,\"coach-contact-1\");});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-match-opportunity-generation-foundation-test.js",
+      "matches": [
+        {
+          "line": 25,
+          "text": "for(const type of [\"incomingFriendlyInvitation\",\"outgoingFriendlyInvitation\"])test(type+\" fallback is eligibility only\",()=>{const c=derive(fixture()).eligible.find(c=>c.opportunityType===type);assert(c);assert.strictEqual(c.sourceAuthority,\"fallback\");assert(c.eligibilityReasons.includes(\"foundationEligibilityOnly\"));});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-match-opportunity-generation-production-integration-test.js",
+      "matches": [
+        {
+          "line": 51,
+          "text": "test(\"9 actual away top-half offensive decision\",()=>{run('started=generatedStart();m=started.match;for(let i=0;i<100&&!isHighSchoolMatchDecisionVisible(m);i++)advanceHighSchoolMatchPlaybackStep(m);');assert.strictEqual(run(\"m.currentDomain\"),\"offense\");assert.strictEqual(run(\"m.half\"),\"上\");});"
+        },
+        {
+          "line": 54,
+          "text": "  assert.strictEqual(run(\"m.currentDomain\"),\"offense\");assert.strictEqual(run(\"m.half\"),\"下\");"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-opportunity-exposure-bias-repair-foundation-test.js",
+      "matches": [
+        {
+          "line": 27,
+          "text": "test('camp normalization total three',()=>{const ws=result.probabilityResult.weights.filter(w=>w.provenance.campSourceId);assert.strictEqual(ws.reduce((s,w)=>s+w.finalWeight,0),3);assert.strictEqual(new Set(ws.map(w=>w.provenance.campSourceId)).size,1);});"
+        },
+        {
+          "line": 39,
+          "text": "test('distinct camp groups with distinct match intents retain identity and reachability',()=>{const i=mixed();i.relationshipLedger=N.emptyState();i.sources=['B','C'].map(opponentSchoolId=>({opportunityType:'trainingCampOpportunity',opponentSchoolId,source:{type:'trainingCampPlan',sourceId:'plan:'+opponentSchoolId},explicit:true,plannedContext:{campId:'camp:'+opponentSchoolId}}));const r=Q.selectOpportunityCandidates(i),camp=r.probabilityResult.weights.filter(w=>w.provenance.campSourceId);assert.strictEqual(camp.length,2);assert.strictEqual(new Set(camp.map(w=>w.provenance.campSourceId)).size,2);assert(camp.every(w=>w.finalWeight===3));});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-opportunity-probability-calibration-foundation-test.js",
+      "matches": [
+        {
+          "line": 5,
+          "text": "test(\"1 metadata versions\",()=>{assert.strictEqual(report.metadata.baseline,\"e91fc49\");assert.strictEqual(report.metadata.auditVersion,A.VERSION);assert.strictEqual(report.metadata.probabilityVersion,\"high-school-opportunity-probability-v1\");});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-opportunity-probability-foundation-test.js",
+      "matches": [
+        {
+          "line": 50,
+          "text": "test(\"unknown source safe minimal fallback\",()=>{const p=result([c(\"unknown\",null)]).weights[0];assert.strictEqual(p.finalWeight,1);assert(p.diagnostics.includes(\"unknownSourceWeightFallback\"));});"
+        },
+        {
+          "line": 51,
+          "text": "test(\"source weight explainability\",()=>{const p=result().weights[0];assert.strictEqual(p.weightFactors[0].name,\"sourceAuthorityClass\");assert.strictEqual(p.weightClass,\"explicitReturnVisit\");});"
+        },
+        {
+          "line": 52,
+          "text": "test(\"camp group size total invariant\",()=>{for(const n of [1,3]){const r=result(Array.from({length:n},(_,i)=>camp(\"camp-\"+i)).concat(c(\"fallback\",null,{sourceAuthority:\"fallback\"})));assert.strictEqual(r.weights.filter(w=>w.provenance.campSourceId).reduce((s,w)=>s+w.finalWeight,0),3);assert.strictEqual(r.drawRange,4);}});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-opportunity-probability-production-integration-test.js",
+      "matches": [
+        {
+          "line": 26,
+          "text": "test(\"18 canonical return source maps to three in shared pool\",()=>{assert.strictEqual(run('HighSchoolOpportunityProbability.deriveProbabilityProfile(candidates.eligible.find(c=>c.sourceProvenance.producerType===\"returnVisitProducer\"),r.context).baseWeight'),3);});"
+        },
+        {
+          "line": 28,
+          "text": "test(\"20 multi-opponent camp divides group weight and keeps budget one\",()=>{run('prior=priorExchange(\"officialCompetitionOpportunity\");var input=selectedInput();var members=[...new Set(input.schoolRecords.filter(s=>s.rosterValid&&s.schoolId!==input.context.playerSchoolId).map(s=>s.schoolId))].slice(0,3);members.push(input.context.playerSchoolId);selectionSources=[{opportunityType:\"trainingCampOpportunity\",source:{type:\"trainingCampPlan\",sourceId:\"probability-multi-camp\"},explicit:true,participantSchoolIds:members}];r=selectedResult();');assert.strictEqual(run(\"r.optionalSelections.length\"),1);assert.strictEqual(run(\"r.probabilityResult.weights.filter(w=>w.provenance.campSourceId).length\"),3);assert.strictEqual(run(\"r.probabilityResult.weights.filter(w=>w.provenance.campSourceId).reduce((s,w)=>s+w.finalWeight,0)\"),3);assert.strictEqual(run(\"new Set(r.probabilityResult.weights.filter(w=>w.provenance.campSourceId).map(w=>w.provenance.campSourceId)).size\"),1);});"
+        },
+        {
+          "line": 46,
+          "text": "test(\"37 unknown legal optional source keeps minimal diagnostic weight\",()=>{run('future=probabilityRoute(\"incomingFriendlyInvitation\");');assert.strictEqual(run(\"r.probabilityResult.weights[0].weightClass\"),\"unknownSource\");assert.strictEqual(run(\"r.probabilityResult.weights[0].finalWeight\"),1);assert(run('r.probabilityResult.diagnostics.some(d=>d.reason===\"unknownSourceWeightFallback\")'));});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-opportunity-selection-foundation-test.js",
+      "matches": [
+        {
+          "line": 29,
+          "text": "test(\"friendly source precedence retained\",()=>{const r=select(coach(add(fixture())));assert.strictEqual(r.selectedCandidates[0].sourceProvenance.producerType,\"returnVisitProducer\");assert(r.rejectedCandidates.some(c=>c.reasons.includes(\"supersededByHigherPrecedenceSource\")));});"
+        },
+        {
+          "line": 48,
+          "text": "test(\"camp grouping remains observable\",()=>{const i=plan(fixture(),{participantSchoolIds:[\"A\",\"B\",\"C\"]});i.schoolRecords.push({...i.schoolRecords[1],schoolId:\"C\"});const r=select(i);assert.strictEqual(r.optionalSelections.length,1);assert.strictEqual(new Set(r.selectionReasons.filter(c=>c.campSourceId).map(c=>c.campSourceId)).size,1);});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-opportunity-selection-production-integration-test.js",
+      "matches": [
+        {
+          "line": 24,
+          "text": "test(\"14 multi-opponent camp obeys budget and retains group\",()=>{run('prior=priorExchange(\"officialCompetitionOpportunity\");var input=selectedInput();var members=[...new Set(input.schoolRecords.filter(s=>s.rosterValid&&s.schoolId!==input.context.playerSchoolId).map(s=>s.schoolId))].slice(0,2);members.push(input.context.playerSchoolId);selectionSources=[{opportunityType:\"trainingCampOpportunity\",source:{type:\"trainingCampPlan\",sourceId:\"selection-multi-camp\"},explicit:true,participantSchoolIds:members}];r=selectedResult();');assert.strictEqual(run(\"r.optionalSelections.length\"),1);assert.strictEqual(run('new Set(r.selectionReasons.filter(c=>c.campSourceId).map(c=>c.campSourceId)).size'),1);assert(run('r.rejectedCandidates.some(c=>c.campSourceId&&c.reasons.includes(\"budgetExceeded\"))'));});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-relationship-recency-foundation-test.js",
+      "matches": [
+        {
+          "line": 34,
+          "text": "test('camp merged refs use latest eligible episodic position',()=>assert.strictEqual(R.buildRelationshipRecencySummary(state,{sourceType:'schoolRelationshipCamp',evidenceRefs:[exchange.evidenceId,camp.evidenceId]},y3).recencyClass,'PRIOR_YEAR'));"
+        },
+        {
+          "line": 36,
+          "text": "test('explicit plan with refs keeps relationship age separate',()=>assert.strictEqual(R.buildRelationshipRecencySummary(state,{...y3,sourceType:'explicitCampPlan',evidenceRefs:[exchange.evidenceId]},y3).recencyClass,'OLD'));"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-relationship-recency-production-integration-test.js",
+      "matches": [
+        {
+          "line": 119,
+          "text": "test('old save unknown phase still loads without new schema',()=>{const env=observed.env;env.run('var temporalOld=JSON.parse(JSON.stringify(player));for(const e of temporalOld.highSchoolExchangeNetwork.evidence)e.seasonPhase=\"legacy-unmapped\";var temporalRestored=normalizeSave(temporalOld);');const original=env.json('temporalOld.highSchoolExchangeNetwork'),ledger=env.json('temporalRestored.highSchoolExchangeNetwork');assert.deepStrictEqual(ledger,original);assert(ledger.evidence.length);const source={evidenceRefs:ledger.evidence.map(e=>e.evidenceId)},context={careerYear:3,seasonPhase:'final-competition',sequence:1};const summary=R.buildRelationshipRecencySummary(ledger,source,context);assert.strictEqual(summary.status,'UNKNOWN');assert.deepStrictEqual(R.buildRelationshipRecencySummary(env.json('normalizeSave(temporalOld).highSchoolExchangeNetwork'),source,context),summary);});"
+        },
+        {
+          "line": 122,
+          "text": "test('selection probability producer and evidence source files unchanged',()=>{for(const f of ['high-school-opportunity-selection.js','high-school-opportunity-probability.js','high-school-friendly-invitation-producer.js','high-school-training-camp-producer.js','high-school-exchange-network.js','high-school-competition-evidence.js'])assert.strictEqual(fs.readFileSync(f,'utf8').replace(/\\r\\n?/g,'\\n'),cp.execFileSync('git',['show','1bde29b:'+f],{encoding:'utf8'}).replace(/\\r\\n?/g,'\\n'));});"
+        },
+        {
+          "line": 141,
+          "text": "test('CompetitionEncounter recency does not grant producer legality',()=>{const env=official;env.run('var recencyOfficialInput=getHighSchoolMatchOpportunityGenerationInput({sequence:2});');const input=env.json('recencyOfficialInput'),e=input.relationshipLedger.evidence.find(e=>e.evidenceType==='competitionEncounter');assert(e);assert.strictEqual(input.context.seasonPhase,'critical_public_attention');assert.strictEqual(R.classifyRelationshipRecency(input.relationshipLedger,e.evidenceId,input.context).recencyClass,'UNKNOWN');env.run('recencyOfficialInput.context.seasonPhase=\"final-competition\";');const known=env.json('recencyOfficialInput');assert.strictEqual(R.classifyRelationshipRecency(known.relationshipLedger,e.evidenceId,known.context).recencyClass,'RECENT');assert(!env.json('HighSchoolFriendlyInvitationSource.deriveFriendlyInvitationSources(recencyOfficialInput).sources').some(s=>s.evidenceRefs.includes(e.evidenceId)));assert(!env.json('HighSchoolTrainingCampSource.deriveTrainingCampSources(recencyOfficialInput).sources').some(s=>s.evidenceRefs.includes(e.evidenceId)));});"
+        },
+        {
+          "line": 142,
+          "text": "test('temporal authority itself unchanged',()=>assert.strictEqual(fs.readFileSync('high-school-relationship-temporal-authority.js','utf8').replace(/\\r\\n?/g,'\\n'),cp.execFileSync('git',['show','1bde29b:high-school-relationship-temporal-authority.js'],{encoding:'utf8'}).replace(/\\r\\n?/g,'\\n')));"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-relationship-recency-reputation-feasibility-foundation-test.js",
+      "matches": [
+        {
+          "line": 24,
+          "text": "test('camp has completed-match source rather than plan creation date',()=>{const e=state.evidence.find(e=>e.evidenceType==='sharedTrainingContext');assert.strictEqual(e.source.sourceId,e.matchId);assert(e.completed);});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-relationship-recency-reputation-feasibility-production-integration-test.js",
+      "matches": [
+        {
+          "line": 53,
+          "text": "test('audited opportunity relationship and persistence sources retain their contract',()=>Scope.assertWorkingTree());"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-relationship-temporal-authority-production-integration-test.js",
+      "matches": [
+        {
+          "line": 126,
+          "text": "test('selection probability producer and evidence source files unchanged',()=>{for(const f of ['high-school-opportunity-selection.js','high-school-opportunity-probability.js','high-school-friendly-invitation-producer.js','high-school-training-camp-producer.js','high-school-exchange-network.js','high-school-competition-evidence.js'])assert.strictEqual(fs.readFileSync(f,'utf8').replace(/\\r\\n?/g,'\\n'),cp.execFileSync('git',['show','f300b2f:'+f],{encoding:'utf8'}).replace(/\\r\\n?/g,'\\n'));});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-schedule-opportunity-production-integration-test.js",
+      "matches": [
+        {
+          "line": 32,
+          "text": "  assert.strictEqual(run(\"m.matchContext.provenance.source\"),\"developmentSchedule\");"
+        },
+        {
+          "line": 47,
+          "text": "  assert.strictEqual(run(\"m.currentDomain\"),\"offense\");assert.strictEqual(run(\"m.half\"),\"上\");assert.strictEqual(run(\"getHighSchoolPlayerTeamSide(m)\"),\"away\");"
+        },
+        {
+          "line": 71,
+          "text": "  assert.strictEqual(run(\"m.currentDomain\"),\"offense\");assert.strictEqual(run(\"m.half\"),\"下\");assert.strictEqual(run(\"getHighSchoolPlayerTeamSide(m)\"),\"home\");"
+        },
+        {
+          "line": 80,
+          "text": "  assert.strictEqual(run(\"m.matchContext.provenance.sourceId\"),\"hs-y3-final-competition-1\");"
+        },
+        {
+          "line": 89,
+          "text": "  assert.strictEqual(run(\"player.highSchoolYearTransitionState.currentHighSchoolYear\"),2);"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-three-year-spine-test.js",
+      "matches": [
+        {
+          "line": 109,
+          "text": "  return crypto.createHash(\"sha256\").update(JSON.stringify(data)).digest(\"hex\");"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-training-camp-producer-foundation-test.js",
+      "matches": [
+        {
+          "line": 16,
+          "text": "test(\"explicit plan produces canonical source\",()=>assert.strictEqual(derive(plan(fixture())).sources[0].sourceType,\"explicitCampPlan\"));"
+        },
+        {
+          "line": 17,
+          "text": "test(\"shared training source\",()=>assert.strictEqual(derive(add(fixture(),\"sharedTrainingContext\")).sources[0].sourceType,\"sharedTrainingContextCamp\"));"
+        },
+        {
+          "line": 18,
+          "text": "test(\"established coach network camp\",()=>assert.strictEqual(derive(coach(fixture(),\"knownCounterpart\")).sources[0].sourceType,\"coachNetworkCamp\"));"
+        },
+        {
+          "line": 19,
+          "text": "test(\"school exchange camp\",()=>assert.strictEqual(derive(add(fixture(),\"schoolExchangeMatch\")).sources[0].sourceType,\"schoolRelationshipCamp\"));"
+        },
+        {
+          "line": 20,
+          "text": "test(\"development exchange camp\",()=>assert.strictEqual(derive(add(fixture(),\"developmentExchange\")).sources[0].reasonCode,\"eligibleSchoolRelationship\"));"
+        },
+        {
+          "line": 21,
+          "text": "test(\"competition only negative\",()=>{const r=derive(add(fixture(),\"competitionEncounter\"));assert.strictEqual(r.sources.length,0);assert(r.diagnostics.some(d=>d.reason===\"competitionEncounterNotCampRelationship\"));});"
+        },
+        {
+          "line": 22,
+          "text": "test(\"return visit and visit alone insufficient\",()=>{const r=derive(add(fixture()));assert.strictEqual(r.sources.length,0);assert(r.diagnostics.some(d=>d.reason===\"returnVisitAloneNotCampRelationship\"));});"
+        },
+        {
+          "line": 23,
+          "text": "test(\"coach metadata alone insufficient\",()=>assert.strictEqual(derive(fixture()).sources.length,0));"
+        },
+        {
+          "line": 24,
+          "text": "test(\"initiated contact not established camp contact\",()=>assert.strictEqual(derive(coach(fixture())).sources.length,0));"
+        },
+        {
+          "line": 25,
+          "text": "test(\"current coach affiliation required\",()=>{const i=coach(fixture(),\"knownCounterpart\");i.currentCoachId=\"other\";assert.strictEqual(derive(i).sources.length,0);});"
+        },
+        {
+          "line": 28,
+          "text": "test(\"self opponent rejected\",()=>{const r=derive(plan(fixture(),{opponentSchoolId:\"A\"}));assert.strictEqual(r.sources.length,0);assert(r.diagnostics.some(d=>d.reason===\"selfOpponent\"));});"
+        },
+        {
+          "line": 29,
+          "text": "test(\"missing school rejected\",()=>{const r=derive(plan(fixture(),{participantSchoolIds:[\"A\",\"missing\"]}));assert.strictEqual(r.sources.length,0);assert.strictEqual(P.auditCampSources(r).orphanSchoolRefs,1);});"
+        },
+        {
+          "line": 30,
+          "text": "test(\"minimum two distinct participants\",()=>assert.strictEqual(derive(plan(fixture(),{participantSchoolIds:[\"A\"]})).sources.length,0));"
+        },
+        {
+          "line": 31,
+          "text": "test(\"player membership required\",()=>{const i=plan(fixture(),{participantSchoolIds:[\"B\",\"C\"]});i.schoolRecords.push({...i.schoolRecords[1],schoolId:\"C\"});assert.strictEqual(derive(i).sources.length,0);});"
+        },
+        {
+          "line": 32,
+          "text": "test(\"multi school camp yields only player matchups\",()=>{const i=plan(fixture(),{participantSchoolIds:[\"C\",\"B\",\"A\"]});i.schoolRecords.push({...i.schoolRecords[1],schoolId:\"C\"});const r=derive(i);assert.strictEqual(r.sources.length,1);assert.strictEqual(r.participants.length,3);assert.deepStrictEqual(r.matchSources.map(m=>m.opponentSchoolId),[\"B\",\"C\"]);assert(r.matchSources.every(m=>m.playerSchoolId===\"A\"));});"
+        },
+        {
+          "line": 33,
+          "text": "test(\"precedence combines refs without duplicate camp\",()=>{const i=plan(coach(add(add(fixture(),\"sharedTrainingContext\"),\"developmentExchange\"),\"knownCounterpart\")),r=derive(i);assert.strictEqual(r.sources.length,1);assert.strictEqual(r.sources[0].sourceType,\"explicitCampPlan\");assert.strictEqual(r.sources[0].evidenceRefs.length,3);assert.strictEqual(r.matchSources.length,1);});"
+        },
+        {
+          "line": 34,
+          "text": "test(\"shared training precedes coach\",()=>{const r=derive(coach(add(fixture(),\"sharedTrainingContext\"),\"knownCounterpart\"));assert.strictEqual(r.sources[0].sourceType,\"sharedTrainingContextCamp\");});"
+        },
+        {
+          "line": 35,
+          "text": "test(\"duplicate explicit inputs idempotent\",()=>{const i=plan(fixture());i.sources.push(clone(i.sources[0]));const r=derive(i);assert.strictEqual(r.sources.length,1);assert.strictEqual(r.matchSources.length,1);assert(r.diagnostics.some(d=>d.reason===\"duplicateCampSource\"));});"
+        },
+        {
+          "line": 36,
+          "text": "test(\"distinct explicit camp identity retains facts but dedups candidate slot\",()=>{const i=plan(fixture(),{plannedContext:{campId:\"one\"}});plan(i,{plannedContext:{campId:\"two\"}});const r=derive(i);assert.strictEqual(r.sources.length,2);assert.strictEqual(r.eligible.length,1);assert(r.diagnostics.some(d=>d.reason===\"duplicateMatchSource\"));});"
+        },
+        {
+          "line": 40,
+          "text": "test(\"graduated produces no source\",()=>{const i=plan(fixture());i.context.graduated=true;assert.strictEqual(derive(i).sources.length,0);});"
+        },
+        {
+          "line": 41,
+          "text": "test(\"invalid phase produces no source\",()=>{const i=plan(fixture());i.context.seasonPhase=\"summer\";assert.strictEqual(derive(i).sources.length,0);});"
+        },
+        {
+          "line": 50,
+          "text": "test(\"host must participate\",()=>assert.strictEqual(derive(plan(fixture(),{hostSchoolId:\"unknown\"})).sources.length,0));"
+        },
+        {
+          "line": 55,
+          "text": "test(\"future evidence excluded\",()=>{const i=fixture();N.appendEvidence(i.relationshipLedger,[evidence(\"sharedTrainingContext\",{careerYear:3})]);assert.strictEqual(derive(i).sources.length,0);});"
+        },
+        {
+          "line": 56,
+          "text": "test(\"malformed ledger cannot create evidence camp\",()=>{const i=add(fixture(),\"sharedTrainingContext\");i.relationshipLedger.evidence[0].schoolBId=\"A\";assert.strictEqual(derive(i).sources.length,0);assert(derive(i).diagnostics.some(d=>d.reason===\"invalidEvidenceLedger\"));});"
+        },
+        {
+          "line": 57,
+          "text": "test(\"audit and queries agree\",()=>{const i=plan(fixture()),r=derive(i);assert.deepStrictEqual(P.deriveCampParticipants(i),r.participants);assert.deepStrictEqual(P.deriveCampMatchSources(i),r.matchSources);assert.strictEqual(P.auditCampSources(r).duplicateSourceIds,0);assert.strictEqual(P.auditCampSources(r).duplicateMatchSourceIds,0);assert.strictEqual(P.auditCampSources(r).selfOpponentFacts,0);});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-training-camp-producer-production-integration-test.js",
+      "matches": [
+        {
+          "line": 51,
+          "text": "test(\"1 real explicit hook becomes canonical camp\",()=>{run('var prior=priorExchange(\"officialCompetitionOpportunity\");explicitCamp();var result=camps();');assert.strictEqual(run(\"result.sources[0].sourceType\"),\"explicitCampPlan\");assert.strictEqual(run(\"result.participants.length\"),2);});"
+        },
+        {
+          "line": 52,
+          "text": "test(\"2 canonical match source reaches candidate\",()=>{run(\"var candidate=campCandidate();\");assert.strictEqual(run(\"candidate.sourceAuthority\"),\"canonicalTrainingCampProducer\");assert.strictEqual(run(\"candidate.sourceProvenance.campMatchSourceId\"),run(\"result.matchSources[0].campMatchSourceId\"));});"
+        },
+        {
+          "line": 54,
+          "text": "test(\"4 provenance stores only lightweight refs\",()=>{const p=json(\"opportunity.provenance\");assert.deepStrictEqual(Object.keys(p).sort(),[\"campSourceId\",\"campMatchSourceId\",\"participantRefs\",\"evidenceRefs\",\"producerType\",\"reasonCode\",\"sourceRefs\",\"candidateRef\"].sort());for(const k of [\"campSourceId\",\"campMatchSourceId\"])assert.strictEqual(typeof p[k],\"string\");for(const k of [\"participantRefs\",\"evidenceRefs\",\"sourceRefs\"])assert(p[k].every(v=>typeof v===\"string\"));});"
+        },
+        {
+          "line": 56,
+          "text": "test(\"6 real shared training completion auto-produces camp\",()=>{run('campPlans=[];prior=priorExchange(\"trainingCampOpportunity\");result=camps();candidate=campCandidate();');assert.strictEqual(run(\"result.sources[0].sourceType\"),\"sharedTrainingContextCamp\");assert(run(\"Boolean(candidate)\"));assert.strictEqual(run(\"result.sources[0].provenance.originCareerYears[0]\"),1);});"
+        },
+        {
+          "line": 58,
+          "text": "test(\"8 real established coach connection camp\",()=>{run('campPlans=[];prior=priorExchange(\"officialCompetitionOpportunity\");var input=campInput();var coachEvidence=ingestHighSchoolCoachSchoolConnection({coachId:input.currentCoachId,schoolBId:\"regional-power-school\",source:{type:\"knownCounterpart\",sourceId:\"camp-established-coach-contact\"}});result=camps();candidate=campCandidate();');assert.strictEqual(run(\"result.sources[0].sourceType\"),\"coachNetworkCamp\");assert(run(\"Boolean(candidate)\"));assert(run(\"result.sources[0].evidenceRefs.includes(coachEvidence.evidenceId)\"));});"
+        },
+        {
+          "line": 59,
+          "text": "test(\"9 real development relationship auto-produces camp\",()=>{run('prior=priorExchange(\"developmentMatchOpportunity\");result=camps();candidate=campCandidate();');assert.strictEqual(run(\"result.sources[0].sourceType\"),\"schoolRelationshipCamp\");assert(run(\"Boolean(candidate)\"));});"
+        },
+        {
+          "line": 60,
+          "text": "test(\"10 real school exchange auto-produces camp\",()=>{run('prior=priorExchange(\"neutralExchangeOpportunity\");result=camps();');assert.strictEqual(run(\"result.sources[0].reasonCode\"),\"eligibleSchoolRelationship\");});"
+        },
+        {
+          "line": 61,
+          "text": "test(\"11 competition-only no camp\",()=>{run('prior=priorExchange(\"officialCompetitionOpportunity\");result=camps();');assert.strictEqual(run(\"result.sources.length\"),0);assert(run('result.diagnostics.some(d=>d.reason===\"competitionEncounterNotCampRelationship\")'));});"
+        },
+        {
+          "line": 62,
+          "text": "test(\"12 canonical school pool multi-school camp\",()=>{run('var input=campInput();var members=[...new Set(input.schoolRecords.filter(s=>s.rosterValid&&s.schoolId!==input.context.playerSchoolId).map(s=>s.schoolId))].slice(0,2);members.push(input.context.playerSchoolId);explicitCamp(null,members);result=camps();');assert.strictEqual(run(\"result.sources.length\"),1);assert.strictEqual(run(\"result.participants.length\"),3);assert.strictEqual(run(\"result.matchSources.length\"),2);assert(run(\"result.matchSources.every(m=>m.playerSchoolId===input.context.playerSchoolId)\"));});"
+        },
+        {
+          "line": 67,
+          "text": "test(\"17 schedule and context refs trace camp\",()=>{assert.strictEqual(run(\"future.entry.opportunityId\"),run(\"future.opportunity.opportunityId\"));assert.strictEqual(run(\"future.match.matchContext.provenance.campSourceId\"),run(\"candidate.sourceProvenance.campSourceId\"));assert.strictEqual(run(\"future.match.matchContext.provenance.campMatchSourceId\"),run(\"candidate.sourceProvenance.campMatchSourceId\"));});"
+        }
+      ]
+    },
+    {
+      "file": "tests/infield-legacy-receiver-model-foundation-test.js",
+      "matches": [
+        {
+          "line": 11,
+          "text": "const sha = value => crypto.createHash('sha256').update(value).digest('hex');"
+        },
+        {
+          "line": 13,
+          "text": "  const git = args => cp.execFileSync('git', args, { cwd: root, maxBuffer: 30e6, windowsHide: true, encoding: 'utf8' });"
+        },
+        {
+          "line": 16,
+          "text": "    .map(p => [path.join(root, p), git(['show', baseline + ':' + p])]));"
+        },
+        {
+          "line": 104,
+          "text": "        assert.equal(source.receiverId, receives[i].actorId); assert.equal(source.receiverActionId, receives[i].identity);"
+        },
+        {
+          "line": 105,
+          "text": "        assert.equal(source.fields.ownedSample.value, receives[i].provenance.sample);"
+        },
+        {
+          "line": 106,
+          "text": "        assert.deepEqual(source.fields.capabilities.value, receives[i].provenance.capabilities);"
+        },
+        {
+          "line": 107,
+          "text": "        for (const field of ['independentReadiness', 'independentHands', 'ordinaryEffort', 'errorSpecificAdvancement']) assert.equal(source.fields[field].classification, 'C');"
+        },
+        {
+          "line": 108,
+          "text": "        assert.equal(source.consumedRng, false);"
+        },
+        {
+          "line": 117,
+          "text": "    assert.equal(sources[0].fields.incomingLocation.value, 'offline');"
+        },
+        {
+          "line": 125,
+          "text": "      assert.equal(sources[0].fields.receiverReadiness.value.available, false);"
+        },
+        {
+          "line": 126,
+          "text": "      assert.equal(sources[0].fields.independentReadiness.classification, 'C');"
+        },
+        {
+          "line": 136,
+          "text": "      assert.equal(unavailableFlag.sources[0].fields.independentReadiness.classification, 'C');"
+        },
+        {
+          "line": 170,
+          "text": "    assert.equal(sources[1].fields.incomingLocation.classification, 'C');"
+        },
+        {
+          "line": 180,
+          "text": "    assert.equal(run('s6CoverageSource.receiverId'), 'player'); assert.equal(run('s6CoverageSource.fields.independentReadiness.classification'), 'C');"
+        },
+        {
+          "line": 189,
+          "text": "    assert.equal(sources[0].receiverId, actor(v, receiver).actorId);"
+        }
+      ]
+    },
+    {
+      "file": "tests/infield-legacy-receiver-scorer-closeout-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const root=path.resolve(__dirname,'..'),sha=x=>crypto.createHash('sha256').update(x).digest('hex');"
+        },
+        {
+          "line": 27,
+          "text": "  assert.equal(typeof run('typeof getHighSchoolLegacyReceiverScorerSource'),'string');"
+        },
+        {
+          "line": 28,
+          "text": "  assert.equal(run('typeof getHighSchoolLegacyReceiverScorerSource'),'function','Missing source projection; this is contract coverage, not a new scorer-rule defect');"
+        },
+        {
+          "line": 61,
+          "text": "  assert.equal(actor(v,'SS').E,1);assert.equal(actor(v,'1B').E,0);assert.equal(sources()[0].fields.incomingLocation.value,'offline');"
+        },
+        {
+          "line": 69,
+          "text": "  assert.equal(sources()[1].fields.throwDelivery.value,'notAttempted');assert.equal(sources()[1].fields.incomingLocation.classification,'C');"
+        },
+        {
+          "line": 73,
+          "text": "  assert.equal(sources()[0].fields.throwDelivery.value,'failed');assert.equal(sources()[0].fields.incomingLocation.classification,'C');"
+        },
+        {
+          "line": 77,
+          "text": "  assert.equal(sources()[0].fields.receiverReadiness.value.available,false);assert.equal(sources()[0].fields.independentReadiness.classification,'C');"
+        },
+        {
+          "line": 112,
+          "text": "  run('saveGame();player=createInitialPlayer(\"L03 settled\");loadGame();m=player.highSchoolMatch;');assert.equal(run('JSON.stringify(m.lastDefensiveResolution.scorerFacts)'),run('firstSource'));"
+        },
+        {
+          "line": 120,
+          "text": "  assert.equal(json('getHighSchoolLegacyReceiverScorerSource(m,m.defensiveSituation,m.lastDefensiveResolution,m.lastDefensiveResolution.actionFacts.actions.find(a=>a.actorId===\"player\"&&a.type===\"receive\"))'),null);"
+        }
+      ]
+    },
+    {
+      "file": "tests/infield-scorer-recovery-integrity-repair-test.js",
+      "matches": [
+        {
+          "line": 12,
+          "text": "const sha = value => crypto.createHash('sha256').update(value).digest('hex');"
+        },
+        {
+          "line": 16,
+          "text": "const git = args => cp.execFileSync('git', args, {cwd:root,windowsHide:true,encoding:'utf8',maxBuffer:30e6}).trimEnd();"
+        },
+        {
+          "line": 19,
+          "text": "const exactSources = exactBaseline ? Object.fromEntries(git(['ls-tree','--name-only',baseline]).split(/\\r?\\n/).filter(file=>file.endsWith('.js')).map(file=>[path.join(root,file),cp.execFileSync('git',['show',baseline+':'+file],{cwd:root,windowsHide:true,encoding:'utf8',maxBuffer:30e6})])) : {};"
+        },
+        {
+          "line": 183,
+          "text": "    const {assertPitchProductionSourceScope}=require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 185,
+          "text": "    const old=git(['show','9b9546f94a7286afef474be634fd93c57eb455db:script.js']);"
+        },
+        {
+          "line": 186,
+          "text": "    assertPitchProductionSourceScope(current,old);"
+        },
+        {
+          "line": 189,
+          "text": "      assert.throws(()=>assertPitchProductionSourceScope(mutated,old));"
+        },
+        {
+          "line": 249,
+          "text": "      assert.deepEqual(fields(current),fields(original),'Execution changed in '+original.route+' '+original.options.position);"
+        },
+        {
+          "line": 401,
+          "text": "  assert.equal(exactBaseline,false,'Green evidence requires current Production');"
+        },
+        {
+          "line": 413,
+          "text": "  const evidence={baseline,capturedAt:new Date().toISOString(),command:'node tests/infield-scorer-recovery-integrity-repair-test.js --capture-red',sourceMode:'git show exact f16 root Production JS compiled in memory; unchanged original test fixtures',testSourceHash:sha(ownSource),testSource:ownSource,productionSourceHashes:Object.fromEntries(Object.entries(exactSources).map(([file,source])=>[path.relative(root,file).replace(/\\\\/g,'/'),sha(source)])),summary:{passed,failed,total:passed+failed},results,snapshots,classificationNotes:{confirmed:'Expected formal scorer / route-copy behavior fails on baseline.',missingContract:'Isolated declared extra advancement and explicit legacy insufficiency require a scorer contract; no invented actual retirement.',valid:'Existing legal action / same-state / ownership behavior stays true.'}};"
+        }
+      ]
+    },
+    {
+      "file": "tests/match-context-production-integration-test.js",
+      "matches": [
+        {
+          "line": 35,
+          "text": "  assert.strictEqual(run('m.currentDomain'),\"offense\");assert.strictEqual(run('m.half'),\"上\");"
+        },
+        {
+          "line": 36,
+          "text": "  assert.strictEqual(run('contextScoreboard().currentSituation.battingTeamId'),run('m.matchContext.playerTeamId'));"
+        },
+        {
+          "line": 99,
+          "text": "  assert.strictEqual(run('getHighSchoolPlayerTeamSide(m)'),\"home\");assert.strictEqual(run('m.matchContext.assignmentSource'),\"legacyFallback\");"
+        },
+        {
+          "line": 115,
+          "text": "  assert.strictEqual(run('m.matchContext.assignmentSource'),\"explicitAssignment\");"
+        }
+      ]
+    },
+    {
+      "file": "tests/match-context-schedule-origin-foundation-test.js",
+      "matches": [
+        {
+          "line": 9,
+          "text": "test(\"3 neutral training camp\",()=>{const c=make({matchOrigin:\"trainingCamp\",campId:\"camp-1\"});assert.strictEqual(c.venueContext.type,\"trainingVenue\");assert.strictEqual(c.assignmentSource,\"fallback\");assert.strictEqual(c.campId,\"camp-1\");});"
+        },
+        {
+          "line": 10,
+          "text": "test(\"4 official ordering preserved even when host is away\",()=>{const c=make({matchOrigin:\"officialCompetition\",homeTeamId:\"school-b\",awayTeamId:\"school-a\",hostContext:{hostTeamId:\"school-a\"},assignmentSource:\"competitionSchedule\",scheduleEntryId:\"schedule-1\"});assert.strictEqual(c.homeTeamId,\"school-b\");assert.strictEqual(c.hostContext.hostTeamId,\"school-a\");assert.strictEqual(c.assignmentSource,\"competitionSchedule\");});"
+        },
+        {
+          "line": 18,
+          "text": "test(\"12 legacy fallback is home\",()=>{const c=make({legacyFallback:true});assert(C.isPlayerHome(c));assert.strictEqual(c.assignmentSource,\"legacyFallback\");});"
+        },
+        {
+          "line": 22,
+          "text": "test(\"16 structured invitation provenance preserved\",()=>{const c=make({matchOrigin:\"awayInvitationFriendly\",provenance:{source:\"coachInvitation\",sourceId:\"invite-1\",reasonCode:\"crossCountyExchange\"}});assert.strictEqual(c.provenance.sourceId,\"invite-1\");assert.strictEqual(c.provenance.reasonCode,\"crossCountyExchange\");});"
+        },
+        {
+          "line": 29,
+          "text": "test(\"23 training host may be third party and does not become a participating team\",()=>{const c=make({matchOrigin:\"trainingCamp\",hostContext:{hostTeamId:\"training-center\"}});assert.strictEqual(c.assignmentSource,\"fallback\");assert([base.playerTeamId,base.opponentTeamId].includes(c.homeTeamId));});"
+        },
+        {
+          "line": 30,
+          "text": "test(\"24 official missing assignment is explicitly fallback\",()=>assert.strictEqual(make({matchOrigin:\"officialCompetition\"}).assignmentSource,\"fallback\"));"
+        },
+        {
+          "line": 32,
+          "text": "test(\"26 neutral camp does not equate host with home\",()=>assert.strictEqual(make({matchOrigin:\"trainingCamp\",hostContext:{hostTeamId:\"school-a\"},venueContext:{type:\"neutralVenue\"}}).assignmentSource,\"fallback\"));"
+        }
+      ]
+    },
+    {
+      "file": "tests/match-simulation-outcome-mapping-test.js",
+      "matches": [
+        {
+          "line": 50,
+          "text": "  assert(result.ordinary.source.sourceHash);"
+        }
+      ]
+    },
+    {
+      "file": "tests/outcome-transition-hierarchy-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { execFileSync } = require(\"child_process\");"
+        },
+        {
+          "line": 147,
+          "text": "const baselineScript = execFileSync(\"git\", [\"show\", \"HEAD:script.js\"], { cwd: root, encoding: \"utf8\" });"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-observation-foundation-test.js",
+      "matches": [
+        {
+          "line": 170,
+          "text": "    assert.equal(o.source, 'pitchObservationV1'); assert(O.OBSERVATION_TYPES.includes(o.type));"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-observation-production-integration-test.js",
+      "matches": [
+        {
+          "line": 92,
+          "text": "    assert(run.checks.calls > 0); assert.equal(run.checks.rngDraws, 0); assert.equal(run.checks.sourceMutations, 0);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-production-source-scope-test.js",
+      "matches": [
+        {
+          "line": 3,
+          "text": "const { assertPitchProductionSourceScope, PROTECTED_FUNCTIONS, PROTECTED_GLOBALS, readSource } = require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 8,
+          "text": "const sources = references.map(ref => cp.execFileSync('git', ['show', ref + ':script.js'], {"
+        },
+        {
+          "line": 14,
+          "text": "  assert.throws(() => assertPitchProductionSourceScope(source, baseline)); rejected++;"
+        },
+        {
+          "line": 17,
+          "text": "  for (const source of sources) assert.equal(assertPitchProductionSourceScope(current, source).protectedFunctions, PROTECTED_FUNCTIONS.length);"
+        },
+        {
+          "line": 56,
+          "text": "  assertPitchProductionSourceScope(current + '\\nfunction defenseScopeProbe() { return \"defense-only\"; }\\n', sources[0]);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-sequence-state-foundation-test.js",
+      "matches": [
+        {
+          "line": 36,
+          "text": "  assert.deepEqual(build([p]).currentCount, p.countAfter);"
+        },
+        {
+          "line": 91,
+          "text": "  input[2].countAfter.balls = 3; assert.equal(s.currentCount.balls, 1);"
+        },
+        {
+          "line": 108,
+          "text": "  assert.deepEqual(walk.currentCount, { balls: 4, strikes: 0 });"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-sequence-state-production-integration-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 97,
+          "text": "    assert.deepEqual(state.currentCount, history[i].countAfter);"
+        },
+        {
+          "line": 117,
+          "text": "    assert.equal(run.checks.sourceMutations, 0); assert.equal(run.checks.previousStateMutations, 0);"
+        },
+        {
+          "line": 138,
+          "text": "    const baseline = cp.execFileSync('git', ['show', 'a0e512b439446990d8df118e3e7d737b9f2f51d3:' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\\r\\n?/g, '\\n');"
+        },
+        {
+          "line": 139,
+          "text": "    if (file === 'pitcher-catcher-tactical-integration.js') require('./pitch-tactical-selector-extraction-baseline.cjs').assertOnlyRepeatEligibilityExtraction(current, baseline);"
+        },
+        {
+          "line": 140,
+          "text": "    else if (file === 'save.js') require('./receiver-source-save-authorized-delta.cjs').assertReceiverSourceSaveAuthorizedDelta(current, baseline, fs.readFileSync(path.join(root, 'receiver-source-snapshot.js'), 'utf8'));"
+        },
+        {
+          "line": 141,
+          "text": "    else if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);"
+        },
+        {
+          "line": 142,
+          "text": "    else assert.equal(current, baseline, file);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { BASELINE, assertOnlyRepeatEligibilityExtraction } = require('./pitch-tactical-selector-extraction-baseline.cjs');"
+        },
+        {
+          "line": 5,
+          "text": "const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 159,
+          "text": "      assert.equal(run.checks.rngDraws, 0); assert.equal(run.checks.sourceMutations, 0);"
+        },
+        {
+          "line": 180,
+          "text": "      const baseline = cp.execFileSync('git', ['show', BASELINE + ':' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\\r\\n?/g, '\\n');"
+        },
+        {
+          "line": 181,
+          "text": "      if (file === 'pitcher-catcher-tactical-integration.js') assertOnlyRepeatEligibilityExtraction(current, baseline);"
+        },
+        {
+          "line": 182,
+          "text": "      else if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);"
+        },
+        {
+          "line": 183,
+          "text": "      else assert.equal(current, baseline, file);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-adapter-test.js",
+      "matches": [
+        {
+          "line": 140,
+          "text": "  assert.equal(A.adapt(restrict(d, ['supported', 'version', 'source', 'paIdentity', 'pitchCount', 'selectedIntent']),"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-integration-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 120,
+          "text": "    assert.deepEqual(state.currentCount, history[i].countAfter);"
+        },
+        {
+          "line": 142,
+          "text": "    assert.equal(run.checks.sourceMutations, 0); assert.equal(run.checks.previousStateMutations, 0);"
+        },
+        {
+          "line": 166,
+          "text": "    const baseline = cp.execFileSync('git', ['show', 'ac53bf61964bde4b40501c77e15269bae99b55cc:' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\\r\\n?/g, '\\n');"
+        },
+        {
+          "line": 167,
+          "text": "    if (file === 'pitcher-catcher-tactical-integration.js') require('./pitch-tactical-selector-extraction-baseline.cjs').assertOnlyRepeatEligibilityExtraction(current, baseline);"
+        },
+        {
+          "line": 168,
+          "text": "    else if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);"
+        },
+        {
+          "line": 169,
+          "text": "    else assert.equal(current, baseline, file);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "matches": [
+        {
+          "line": 7,
+          "text": "const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 215,
+          "text": "      const baseline = cp.execFileSync('git', ['show', BASELINE + ':' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\\r\\n?/g, '\\n');"
+        },
+        {
+          "line": 216,
+          "text": "      if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);"
+        },
+        {
+          "line": 217,
+          "text": "      else assert.equal(current, baseline, file);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-interpretation-foundation-test.js",
+      "matches": [
+        {
+          "line": 26,
+          "text": "  assert.deepEqual(item(s, 'TAKE_PATTERN_PRESENT'), { type: 'TAKE_PATTERN_PRESENT', scope: 'CURRENT_PA', source: I.SOURCE,"
+        },
+        {
+          "line": 116,
+          "text": "    assert.deepEqual(Object.keys(row), ['type', 'scope', 'source', 'reasonCode', 'evidence']);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 110,
+          "text": "    assert.deepEqual(state.currentCount, history[i].countAfter);"
+        },
+        {
+          "line": 131,
+          "text": "    assert.equal(run.checks.sourceMutations, 0); assert.equal(run.checks.previousStateMutations, 0);"
+        },
+        {
+          "line": 154,
+          "text": "    const baseline = cp.execFileSync('git', ['show', '98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7:' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\\r\\n?/g, '\\n');"
+        },
+        {
+          "line": 155,
+          "text": "    if (file === 'pitcher-catcher-tactical-integration.js') require('./pitch-tactical-selector-extraction-baseline.cjs').assertOnlyRepeatEligibilityExtraction(current, baseline);"
+        },
+        {
+          "line": 156,
+          "text": "    else if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);"
+        },
+        {
+          "line": 157,
+          "text": "    else assert.equal(current, baseline, file);"
+        },
+        {
+          "line": 165,
+          "text": "      assert.equal(item.scope, 'CURRENT_PA'); assert.equal(item.source, I.SOURCE); assert(item.reasonCode);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-selector-equivalence-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { baselineSource, assertOnlyRepeatEligibilityExtraction, loadTactical, BASELINE } = require('./pitch-tactical-selector-extraction-baseline.cjs');"
+        },
+        {
+          "line": 14,
+          "text": "  assertOnlyRepeatEligibilityExtraction(currentSource, originalSource);"
+        },
+        {
+          "line": 30,
+          "text": "    assert.deepEqual(clone(baseline.buildTacticalContext(input)), context);"
+        },
+        {
+          "line": 39,
+          "text": "      assert.equal(currentHashes - newHash, baselineHashes - oldHash);"
+        },
+        {
+          "line": 68,
+          "text": "    assert.deepEqual(clone(extracted.createTacticalPitchDecision(input)), clone(baseline.createTacticalPitchDecision(input)));"
+        },
+        {
+          "line": 75,
+          "text": "  assert.equal(currentHashes, hashBefore); assert.equal(randomDraws, 0); assert.equal(currentHashes, baselineHashes);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-signal-projection-foundation-test.js",
+      "matches": [
+        {
+          "line": 43,
+          "text": "      assert.deepEqual(signals[0].sourceInterpretations, types.slice(0, 2));"
+        },
+        {
+          "line": 115,
+          "text": "      assert.equal(result.signals[0].sourceInterpretations[0], 'TAKE_PATTERN_PRESENT'); assert.equal(result.paIdentity, PA);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "matches": [
+        {
+          "line": 7,
+          "text": "const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 266,
+          "text": "      const baseline = cp.execFileSync('git', ['show', BASELINE + ':' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\\r\\n?/g, '\\n');"
+        },
+        {
+          "line": 267,
+          "text": "      if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);"
+        },
+        {
+          "line": 268,
+          "text": "      else assert.equal(current, baseline, file);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-target-location-foundation-test.js",
+      "matches": [
+        {
+          "line": 7,
+          "text": "test('existing tactical labels admit semantic target',()=>assert.deepEqual(P.normalizeTargetIntent('outerLow','chasePitch'),{version:'pitch-target-intent-v1',horizontal:'away',vertical:'low',zoneIntent:'chase',frame:'batterRelative',source:'tacticalTarget'}));"
+        },
+        {
+          "line": 8,
+          "text": "test('invalid target has explicit legacy fallback',()=>{const r=realize('a','R',{horizontal:'pixel',vertical:'low'});assert.equal(r.targetSource,'legacyLocationFallback');assert.equal(r.location,'outer-low');assert.equal(r.targetError,null);});"
+        },
+        {
+          "line": 9,
+          "text": "test('no command authority is invented for missing runtime',()=>assert.equal(P.resolvePitchLocation({targetIntent:target,legacyLocation:'outer-low'}).targetSource,'legacyLocationFallback'));"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-target-location-production-integration-test.js",
+      "matches": [
+        {
+          "line": 24,
+          "text": " const ids=new Set();for(const e of events){assert(!ids.has(e.pitch.pitchId),'duplicate detailed pitch');ids.add(e.pitch.pitchId);assert(e.pitch.targetIntent);assert.equal(e.pitch.locationRealization.targetSource,'tacticalTarget');assert.deepEqual(e.tacticalFeedback.targetIntent,e.pitch.targetIntent);assert.equal(e.tacticalFeedback.actualLocation,e.pitch.location);}"
+        },
+        {
+          "line": 26,
+          "text": " for(const e of fallback.values()){assert.equal(e.pitch.targetIntent,null);assert.equal(e.pitch.locationRealization.targetSource,'legacyLocationFallback');assert.equal(e.pitch.locationRealization.fallbackReason,'targetAbsent');}"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-velocity-baseline-extraction-test.js",
+      "matches": [
+        {
+          "line": 9,
+          "text": "const baseline = cp.execFileSync('git', ['show', '5937fe5:offensive-plate-approach.js'], { encoding: 'utf8', cwd: path.join(__dirname, '..') });"
+        },
+        {
+          "line": 20,
+          "text": "    assert.deepEqual(clone(current.generatePitchOpportunity(state, options.pitch)), clone(original.generatePitchOpportunity(state, options.pitch)));"
+        },
+        {
+          "line": 21,
+          "text": "    assert.deepEqual(clone(current.resolveNextPitch(state, abilities, options)), clone(original.resolveNextPitch(state, abilities, options)));"
+        },
+        {
+          "line": 25,
+          "text": "assert.deepEqual(['fastball', 'slider', 'changeup', 'curveball'].map(current.getPitchVelocityBaseline), [89, 82, 80, 76]);"
+        },
+        {
+          "line": 26,
+          "text": "assert.equal(current.getPitchVelocityBaseline('unknown'), null);"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-2-contract-test.cjs",
+      "matches": [
+        {
+          "line": 53,
+          "text": "  return { vector: F.sampleVector(i.identity.physical, \"primaryThrow\"), execution: resolve(i).execution, encoding: F.canonicalEncode(i.identity), sha: F.sha256(F.canonicalEncode(i.identity)),"
+        },
+        {
+          "line": 95,
+          "text": "  test(\"precontact movement requires explicit source authorization\", () => { const i = fixture(); i.timing.times.positioningStart = time(\"99.75\"); assert.equal(F.seal(i).code, \"preContactSourceRequired\"); i.positioning.preContactAuthorized = true; assert.equal(resolve(i).execution.stages.positioning.start.ticks, -250); });"
+        },
+        {
+          "line": 115,
+          "text": "  test(\"canonical ID upper bound is executable and raw\", () => { const i = fixture(); i.actual.canonicalSourceId = \"\\u4e0a\".repeat(4096); sync(i); const s = F.seal(i); assert.equal(s.status, \"ok\"); assert.equal(s.input.actual.canonicalSourceId, i.actual.canonicalSourceId); });"
+        },
+        {
+          "line": 132,
+          "text": "  test(\"sampler matches independent crypto UTF8/u32BE\", () => { const i = fixture(); i.identity.physical.physicalIdentity = \"\\u4e0a|\\ud83c\\udfdf|e\\u0301\"; const v = F.sampleVector(i.identity.physical, \"primaryThrow\"); for (const [stage, row] of Object.entries(v.stages)) { const key = { executionVersion: F.versions.execution, physical: i.identity.physical, physicalSlot: \"primaryThrow\", samplerVersion: F.versions.sampler, stage }; const sorted = o => o && typeof o === \"object\" ? Object.fromEntries(Object.keys(o).sort().map(k => [k, sorted(o[k])])) : o; const bytes = Buffer.from(JSON.stringify(sorted(key)), \"utf8\"), h = crypto.createHash(\"sha256\").update(bytes).digest(); assert.equal(row.canonical, bytes.toString(\"utf8\")); assert.equal(row.sha256, h.toString(\"hex\")); assert.equal(row.u32, h.readUInt32BE(0)); assert.equal(row.unit, (h.readUInt32BE(0) + .5) / 2 ** 32); } });"
+        },
+        {
+          "line": 142,
+          "text": "  test(\"ordinary effort always insufficient and separate\", () => { const a = resolve(fixture()).execution; assert.equal(a.scorerFacts.officialError, null); assert.equal(a.scorerFacts.wouldBeAssist, null); const i = fixture(); i.effortReference = { version: F.versions.effort, status: \"uncalibrated\", position: \"1B\", competitionLevel: i.context.competitionLevel, environmentId: i.context.environmentId, referenceId: \"average-test-only\", capabilities: Object.fromEntries(Object.keys(i.capabilities.values).map(k => [k, 10])), provenance: source() }; assert.deepEqual(resolve(i).execution.stages, a.stages); i.effortReference.status = \"calibrated\"; assert.equal(F.seal(i).code, \"unavailableCalibrationAuthority\"); });"
+        },
+        {
+          "line": 148,
+          "text": "  test(\"normal and jitless independent process agree\", () => { const r = JSON.parse(cp.execFileSync(process.execPath, [\"--jitless\", __filename, \"--runtime-probe\"], { encoding: \"utf8\", stdio: [\"ignore\", \"pipe\", \"pipe\"] })); assert.deepEqual(r, runtimeProbe()); });"
+        },
+        {
+          "line": 149,
+          "text": "  test(\"existing v2.1 result and vectors match baseline bytes in VM\", () => { const baseline = \"10c738ce380c2cfd8cce6cb796b3a1b577e437dd\", raw = cp.execFileSync(\"git\", [\"show\", baseline + \":receiver-execution-v2-foundation.js\"], { encoding: \"utf8\" }), c = vm.createContext({}); vm.runInContext(raw, c); const old = require(\"./receiver-execution-v2-pure-contract-test.cjs\").fixture(), saved = c.ReceiverExecutionV2Foundation; assert.equal(JSON.stringify(saved.execute(saved.seal(old))), JSON.stringify(Old.execute(Old.seal(old)))); assert.equal(JSON.stringify(saved.sampleVector(old.identity.physical, \"primaryThrow\")), JSON.stringify(Old.sampleVector(old.identity.physical, \"primaryThrow\"))); });"
+        },
+        {
+          "line": 155,
+          "text": "    assert.equal(i.actual.canonicalSourceId.length, 264); assert.equal(F.validateIdentity(i.identity).status, \"ok\"); assert.equal(F.idAccepted(i.actual.canonicalSourceId).status, \"ok\");"
+        },
+        {
+          "line": 158,
+          "text": "    assert.equal(F.seal(i).code, \"insufficientExecutionSources\"); assert.equal(after.vm.run(\"JSON.stringify(player)\"), savedPlayer);"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+      "matches": [
+        {
+          "line": 16,
+          "text": "  test(\"baseline RED has no source adapter or guards\", () => { const old = makeHarness(\"baseline\"); old.fresh({}, \"beforeExecution\"); assert.equal(old.run(\"typeof ReceiverSourceSnapshot\"), \"undefined\"); assert.equal(old.run(\"m.groundBallInPlayState.receiverSourceSnapshot\"), undefined); const saved = old.json(\"player\"); saved.saveVersion = 16; old.context.s3bFuture = saved; assert.equal(old.run(\"normalizeSave(s3bFuture).saveVersion\"), 15); });"
+        },
+        {
+          "line": 18,
+          "text": "  test(\"unique owner reuses same physical snapshot without callback\", () => { fresh(); const s = source(), p = pin(); h.run(\"ensureHighSchoolOrdinaryGroundBallInPlayHandoff(m,{receiverSourcePolicyVersion:'future-policy'});\"); assert.deepEqual(source(), s); assert.deepEqual(pin(), p); assert.equal(h.run(\"s3bRng.callbacks.length\"), 0); });"
+        },
+        {
+          "line": 20,
+          "text": "  test(\"fixed physical slot not selected from future outcome\", () => { fresh(); assert.equal(pin().physicalSlot, \"primaryThrow\"); assert.equal(pin().phaseAtAdmission, \"beforeExecution\"); assert.equal(pin().officialReceiverExecutionVersion, \"legacy-infield-execution-v1\"); assert.deepEqual(source().body.planned.routeAllowlist, [\"secureFirstBaseOut\", \"holdBall\"]); });"
+        },
+        {
+          "line": 21,
+          "text": "  test(\"formation/clock/demand insufficiency never promoted\", () => { fresh(); const b = source().body; assert.equal(b.formation.classification, \"C\"); assert.equal(b.formation.nominalPolicyUsed, false); assert.equal(b.completeness.status, \"insufficient\"); assert(b.completeness.missing.includes(\"contactGlobalClock\")); assert.equal(h.run(\"ReceiverSourceSnapshot.observe(m).status\"), \"insufficient\"); });"
+        },
+        {
+          "line": 23,
+          "text": "  test(\"routine automatic does not create player pending decision\", () => { fresh({}, \"automatic\"); assert.equal(h.run(\"m.playerEventClassification\"), \"playerRoutinePlay\"); assert.equal(h.run(\"m.activeSituation\"), null); assert.equal(h.run(\"s3bRng.callbacks.length\"), 1); assert.equal(h.run(\"s3bRng.callbacks[0].phase\"), \"executing\"); assert.equal(h.run(\"m.groundBallInPlayState.receiverSourceExecutionBinding.originalSampleBinary64\"), \"3fe999999999999a\"); });"
+        },
+        {
+          "line": 24,
+          "text": "  test(\"routine lifecycle begins with pin in replacement executionState\", () => { fresh(); const p = pin(); h.run(\"beginAutomaticGroundBallSituationExecution(m);\"); assert.deepEqual(h.json(\"m.activeSituation.executionState.receiverSourcePin\"), p); assert.deepEqual(h.json(\"m.activeSituation.contextSnapshot.receiverSourcePin\"), p); assert.deepEqual(h.json(\"m.activeSituation.receiverSourcePin\"), p); });"
+        },
+        {
+          "line": 25,
+          "text": "  test(\"executed Legacy cache has separate original binding\", () => { fresh(); h.run(\"beginAutomaticGroundBallSituationExecution(m);var s3bResolved=firstBaseExecute(m,'secure',.8);\"); const e = h.json(\"m.groundBallInPlayState.receiverSourceExecutionBinding\"); assert.equal(e.canonicalSourceId.length, 264); assert.equal(e.canonicalSourceId, h.run(\"m.groundBallInPlayState.shortstopExecution.decisionThrowState.throwResolution.identity\")); assert.equal(e.candidateExecutionPerformed, false); assert.equal(h.run(\"m.activeSituation.lifecycleState\"), \"resolved\"); assert.deepEqual(h.json(\"m.activeSituation.receiverSourceExecutionBinding\"), e); assert.equal(h.run(\"s3bResolved.rolls\"), 1); });"
+        },
+        {
+          "line": 26,
+          "text": "  test(\"settled closed summary retains pin and binding\", () => { fresh({}, \"automatic\"); assert.deepEqual(h.json(\"m.lastClosedSituationSummary.receiverSourcePin\"), pin()); assert.deepEqual(h.json(\"m.lastClosedSituationSummary.receiverSourceExecutionBinding\"), h.json(\"m.groundBallInPlayState.receiverSourceExecutionBinding\")); assert.equal(h.run(\"m.groundBallInPlayState.settlementApplied\"), true); });"
+        },
+        {
+          "line": 27,
+          "text": "  for (const outs of [0, 1, 2]) test(\"source pending/executed/settled cold and duplicate outs \" + outs, () => { fresh({ outs }); const p = pin(); h.cold(\"pending source\"); assert.deepEqual(pin(), p); assert.equal(h.run(\"m.groundBallInPlayState.shortstopExecution\"), undefined); h.run(\"beginAutomaticGroundBallSituationExecution(m);var s3bExec=firstBaseExecute(m,'secure',.8);\"); const e = h.json(\"m.groundBallInPlayState.shortstopExecution\"); h.run(\"var s3bOldRandom=Math.random;Math.random=()=>{throw Error('SOURCE_RECOVERY_REROLL')};\"); try { h.cold(\"executed source\"); assert.deepEqual(h.json(\"m.groundBallInPlayState.shortstopExecution\"), e); h.run(\"resumeResolvedHighSchoolGroundBallSettlement(m);var s3bRecord=firstBaseFacts(m);\"); const settled = h.snapshot(); for (let n = 0; n < 3; n++) h.run(\"resumeResolvedHighSchoolGroundBallSettlement(m)\"); assert.equal(h.run(\"firstBaseFacts(m)\"), h.run(\"s3bRecord\")); assert.deepEqual(h.snapshot(), settled); h.cold(\"settled source\"); assert.equal(h.run(\"firstBaseFacts(m)\"), h.run(\"s3bRecord\")); assert.deepEqual(pin(), p); } finally { h.run(\"Math.random=s3bOldRandom;\"); } });"
+        },
+        {
+          "line": 28,
+          "text": "  test(\"actual hold remains nullable with original pin\", () => { fresh(); const p = pin(); h.run(\"var s3bHeld=firstBaseExecute(m,'contain',.8);\"); const binding = h.json(\"m.groundBallInPlayState.receiverSourceExecutionBinding\"); assert.equal(binding.routeId, \"holdBall\"); assert.equal(binding.actualReceiverId, null); assert.deepEqual(binding.actualTarget, { runnerId: null, base: null }); assert.equal(binding.releaseQuality, \"held\"); assert.deepEqual(pin(), p); assert.equal(h.run(\"s3bHeld.rolls\"), 1); assert.equal(h.run(\"ReceiverSourceSnapshot.observe(m).canonicalDeliveryAvailability\"), \"originalHeldNullable\"); });"
+        },
+        {
+          "line": 29,
+          "text": "  for (const [name, opts] of [[\"offline\", { capabilities: { arm: 1, throwing: 1 } }], [\"acquisition failure\", { capabilities: { fielding: 1, catching: 1 } }], [\"fast runner\", { batterSpeed: 18 }], [\"receiver failed\", { weakReceiver: \"1B\" }]]) test(\"source metadata preserves \" + name, () => { fresh(opts, \"automatic\"); const obs = h.json(\"ReceiverSourceSnapshot.observe(m)\"); assert.equal(obs.candidateExecutionCalls, 0); assert.equal(obs.crtTouchAvailability, \"insufficient\"); assert.equal(h.run(\"s3bRng.callbacks.length\"), 1); assert.equal(h.run(\"m.groundBallInPlayState.receiverSourcePin.runtimeEnabled\"), false); });"
+        },
+        {
+          "line": 30,
+          "text": "  for (const [position, direction] of [[\"\\u6e38\\u64ca\\u624b\", .1], [\"\\u4e8c\\u58d8\\u624b\", .9], [\"\\u4e09\\u58d8\\u624b\", .005], [\"\\u4e00\\u58d8\\u624b\", .995]]) test(\"legal meaningful other route uses shared guard \" + position, () => { fresh({ position, direction, occupied: 1 }, \"automatic\"); assert.equal(h.run(\"m.activeSituation.admission.admittedToPlayer\"), true); assert.equal(h.run(\"m.groundBallInPlayState.receiverSourceSnapshot\"), undefined); const before = h.run(\"JSON.stringify(player)\"); h.run(\"validateHighSchoolDecisionThrowState(m)\"); assert.equal(h.run(\"JSON.stringify(player)\"), before); });"
+        },
+        {
+          "line": 33,
+          "text": "  test(\"Save owner emits source format16 without mutating live player\", () => { fresh(); const before = h.run(\"JSON.stringify(player)\"), saved = rawSave(); assert.equal(saved.saveVersion, 16); assert.equal(saved.receiverSourceSaveFormatVersion, \"receiver-source-only-save-v1\"); assert.equal(h.run(\"JSON.stringify(player)\"), before); h.context.s3bSaved = saved; assert.equal(h.run(\"normalizeSave(s3bSaved).saveVersion\"), 16); });"
+        },
+        {
+          "line": 34,
+          "text": "  test(\"later ordinary match serializes15 without old source envelope\", () => { fresh(); h.run(\"var s3bLater={...player,saveVersion:16,receiverSourceSaveFormatVersion:ReceiverSourceSnapshot.versions.saveFormat,highSchoolMatch:createInitialPlayer().highSchoolMatch};var s3bLaterWire=JSON.parse(ReceiverSourceSnapshot.serializeSave(s3bLater));\"); assert.equal(h.run(\"s3bLaterWire.saveVersion\"), 15); assert.equal(h.run(\"s3bLaterWire.receiverSourceSaveFormatVersion\"), undefined); });"
+        },
+        {
+          "line": 59,
+          "text": "  test(\"old historical raw omission remains old without backfill\", () => { const old = makeHarness(\"baseline\"); old.fresh({}, \"beforeExecution\"); const saved = old.json(\"player\"); h.context.s3bHistorical = saved; const before = JSON.stringify(saved); h.run(\"player=normalizeSave(s3bHistorical);m=player.highSchoolMatch;\"); assert.equal(h.run(\"m.groundBallInPlayState.receiverSourceSnapshot\"), undefined); assert.equal(h.run(\"m.receiverSourceAdmission\"), undefined); assert.equal(JSON.stringify(saved), before); h.run(\"ensureHighSchoolOrdinaryGroundBallInPlayHandoff(m);\"); assert.equal(h.run(\"m.groundBallInPlayState.receiverSourceSnapshot\"), undefined); });"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-production-source-timing-test.cjs",
+      "matches": [
+        {
+          "line": 28,
+          "text": "      pending = unchanged(before, () => P.observe(before.view)); assert.equal(pending.code, \"productionSourceCompletenessBlocked\");"
+        },
+        {
+          "line": 39,
+          "text": "      executed = unchanged(after, () => P.observe(after.view, pending.anchor)); assert.equal(executed.code, \"productionSourceCompletenessBlocked\");"
+        },
+        {
+          "line": 52,
+          "text": "      const r = unchanged(b, () => P.observe(b.view, pin.anchor)); assert.equal(r.code, \"productionSourceCompletenessBlocked\"); assert.equal(r.delivery.status, expected);"
+        },
+        {
+          "line": 53,
+          "text": "      assert.equal(r.delivery.legacyReceiverOutcomeConsumed, false); assert.equal(r.timingSource.receiverCompletionConsumed, false);"
+        },
+        {
+          "line": 101,
+          "text": "    assert.equal(r.rawNpcCapabilities.speed, null); assert.equal(r.rawNpcCapabilities.attributeSources.speed, \"C\");"
+        },
+        {
+          "line": 188,
+          "text": "    const a = cp.execFileSync(process.execPath, [\"-e\", script], options), b = cp.execFileSync(process.execPath, [\"--jitless\", \"-e\", script], options);"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-pure-contract-test.cjs",
+      "matches": [
+        {
+          "line": 55,
+          "text": "function runtimeProbe() { return {versions:F.versions,cases:cases(),encoding:F.canonicalEncode({z:1,a:{b:true,a:[3,2,1]},unicode:\"\\u68d2\\u7403\\ud83c\\udfdf\"}),sha:F.sha256(\"\\u68d2\\u7403\\ud83c\\udfdf\"),binary64:F.binary64(0.62)}; }"
+        },
+        {
+          "line": 60,
+          "text": "  for(const [text,hash] of [[\"\",\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"],[\"abc\",\"ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\"]])test(\"SHA-256 golden \"+(text||\"empty\"),()=>assert.equal(F.sha256(text),hash));"
+        },
+        {
+          "line": 61,
+          "text": "  test(\"SHA-256 UTF-8, padding boundaries and multiblock match Node crypto\",()=>{for(const s of [\"\\u68d2\\u7403\\ud83c\\udfdf\",\"a\".repeat(55),\"b\".repeat(56),\"c\".repeat(64),\"d\".repeat(129)])assert.equal(F.sha256(s),crypto.createHash(\"sha256\").update(s,\"utf8\").digest(\"hex\"));});"
+        },
+        {
+          "line": 65,
+          "text": "  test(\"sample vector equals independent SHA-256 u32BE reference\",()=>{const i=fixture();const v=F.sampleVector(i.identity.physical,\"primaryThrow\");for(const stage of Object.values(v.stages)){const h=crypto.createHash(\"sha256\").update(stage.canonical).digest();assert.equal(stage.sha256,h.toString(\"hex\"));assert.equal(stage.u32,h.readUInt32BE(0));assert.equal(stage.unit,(h.readUInt32BE(0)+0.5)/2**32);assert(stage.unit>0&&stage.unit<1);}});"
+        },
+        {
+          "line": 66,
+          "text": "  test(\"physical slots and stage namespaces remain distinct\",()=>{const i=fixture(),a=F.sampleVector(i.identity.physical,\"primaryThrow\"),b=F.sampleVector(i.identity.physical,\"relayThrow\");assert.notDeepEqual(a,b);assert.equal(new Set(Object.values(a.stages).map(s=>s.sha256)).size,3);});"
+        },
+        {
+          "line": 69,
+          "text": "  test(\"clean stages preserve identities, ownership, possession and only candidate\",()=>{const {execution:e}=resolve(fixture());assert.equal(e.stages.delivery.status,\"completed\");assert.equal(e.stages.positioning.status,\"ready\");assert.equal(e.stages.secure.status,\"cleanControl\");assert.equal(e.stages.contest.status,\"retirementCandidate\");assert.equal(e.stages.contest.candidate.possessionActionId,\"receive-1\");assert.equal(e.stages.secure.possession.sourceThrowActionId,\"throw-1\");for(const s of Object.values(e.stages)){assert.equal(s.legActionId,\"receive-1\");assert.equal(s.target.runnerId,\"batter-1\");assert.equal(s.receiverId,\"first-base-1\");}assert.deepEqual(e.application,{matchStateWrites:0,gameRecordWrites:0,rngCallbacks:0,actualRetirements:0});});"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-source-authority-test.cjs",
+      "matches": [
+        {
+          "line": 68,
+          "text": "    assert.equal(F.initialCoverPlan(input).code, \"missingPreexecutionCoverIntent\"); input.provenance = source(); input.assignment = \"unknown\";"
+        },
+        {
+          "line": 202,
+          "text": "    assert.equal(F.evaluate(p, r.execution).code, \"sourcePinTampered\"); });"
+        },
+        {
+          "line": 214,
+          "text": "    const h = crypto.createHash(\"sha256\").update(row.canonical, \"utf8\").digest(); assert.equal(h.toString(\"hex\"), row.sha256); assert.equal(h.readUInt32BE(0), row.u32); } });"
+        },
+        {
+          "line": 243,
+          "text": "    const a = cp.execFileSync(process.execPath, [\"-e\", script], { cwd: require(\"node:path\").resolve(__dirname, \"..\"), maxBuffer: 4 * 1024 * 1024, encoding: \"utf8\" });"
+        },
+        {
+          "line": 244,
+          "text": "    const b = cp.execFileSync(process.execPath, [\"--jitless\", \"-e\", script], { cwd: require(\"node:path\").resolve(__dirname, \"..\"), maxBuffer: 4 * 1024 * 1024, encoding: \"utf8\", stdio: [\"ignore\", \"pipe\", \"pipe\"] });"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs",
+      "matches": [
+        {
+          "line": 24,
+          "text": "const git = args => cp.execFileSync('git', args, {cwd:root,windowsHide:true,encoding:'utf8',maxBuffer:30e6});"
+        },
+        {
+          "line": 25,
+          "text": "const sha = text => crypto.createHash('sha256').update(text).digest('hex');"
+        },
+        {
+          "line": 45,
+          "text": "  assert.equal(normalized(helperSource),normalized(git(['show',baseline+':'+helperPath])));"
+        },
+        {
+          "line": 46,
+          "text": "  assert.equal(normalized(fixtureSource),normalized(git(['show',baseline+':'+fixturePath])));"
+        },
+        {
+          "line": 198,
+          "text": "      assert.equal(a.sourceFacts.legacyReceiverReadiness.classification,'C');"
+        },
+        {
+          "line": 205,
+          "text": "      assert.equal(actual.currentOuts,outs+1);"
+        },
+        {
+          "line": 229,
+          "text": "      assert.equal(actual.cache.choice.routeId,'secureFirstBaseOut');assert.equal(actual.currentOuts,0);"
+        },
+        {
+          "line": 245,
+          "text": "    assert.equal(a.sourceFacts.fixedPhysicalSlot.classification,'C');record('explicit legal hold / legacy resolver',w,a);"
+        },
+        {
+          "line": 385,
+          "text": "    assert.equal(store.missingSource.callCandidateExecute,false);assert.equal(store.missingSource.candidateOutputOrNull,null);"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const sha = o => crypto.createHash(\"sha256\").update(JSON.stringify(o)).digest(\"hex\");"
+        },
+        {
+          "line": 19,
+          "text": "    pair(\"SS direct three-phase recovery outs\" + outs, h => { h.fresh({ outs }, \"beforeExecution\"); const pending = h.snapshot(), pendingCold = h.cold(\"source pending\"); h.run(\"beginAutomaticGroundBallSituationExecution(m);var s3bDirect=firstBaseExecute(m,'secure',.8);\"); assert.equal(h.run(\"s3bDirect.rolls\"), 1); const executed = h.snapshot(); h.run(\"var s3bNoRandom=Math.random;Math.random=()=>{throw Error('RECOVERY_REROLL')};\"); try { const executedCold = h.cold(\"source executed\"); h.run(\"resumeResolvedHighSchoolGroundBallSettlement(m)\"); const settled = h.snapshot(), settledCold = h.cold(\"source settled\"); for (let i = 0; i < 3; i++) h.run(\"resumeResolvedHighSchoolGroundBallSettlement(m)\"); assert.deepEqual(h.snapshot(), settledCold); return { pending, pendingCold, executed, executedCold, settled, settledCold, duplicate: h.snapshot() }; } finally { h.run(\"Math.random=s3bNoRandom\"); } });"
+        },
+        {
+          "line": 31,
+          "text": "    assert.equal(after.run(\"m.groundBallInPlayState.receiverSourceSnapshot\"), undefined);"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+      "matches": [
+        {
+          "line": 19,
+          "text": "    try { const saved = saveUnchanged(); assert.deepEqual(saved, player); assert.equal(saved.saveVersion, 15); assert.equal(saved.receiverSourceSaveFormatVersion, undefined); }"
+        },
+        {
+          "line": 32,
+          "text": "    trap(); const original = h.snapshot(), saved = saveUnchanged(); assert.equal(saved.saveVersion, 16); assert.equal(saved.receiverSourceSaveFormatVersion, \"receiver-source-only-save-v1\");"
+        },
+        {
+          "line": 46,
+          "text": "      const normalized = h.json(\"normalizeSave(r1Historical)\"); assert.equal(normalized.saveVersion, 15); assert.equal(normalized.highSchoolMatch.receiverSourceAdmission, undefined);"
+        },
+        {
+          "line": 52,
+          "text": "    const saved = saveUnchanged(); assert.equal(saved.saveVersion, 15); assert.equal(saved.receiverSourceSaveFormatVersion, undefined);"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs",
+      "matches": [
+        {
+          "line": 43,
+          "text": "        sourceHashes: { test: \"a\".repeat(64), helper: \"b\".repeat(64) }"
+        },
+        {
+          "line": 134,
+          "text": "    check(\"Original full wrapper preserves explicit buffers and non-git-show calls\", () => {"
+        },
+        {
+          "line": 138,
+          "text": "            execFileSync: function (...args) {"
+        },
+        {
+          "line": 154,
+          "text": "        childProcess.execFileSync(\"git\", [\"show\", \"revision:file\"], implicit);"
+        },
+        {
+          "line": 158,
+          "text": "        childProcess.execFileSync(\"git\", [\"show\", \"revision:file\"], explicit);"
+        },
+        {
+          "line": 160,
+          "text": "        childProcess.execFileSync(\"git\", [\"status\"], implicit);"
+        },
+        {
+          "line": 162,
+          "text": "        childProcess.execFileSync(process.execPath, [FIRST_BASE], implicit);"
+        },
+        {
+          "line": 244,
+          "text": "    rejectedPair(\"Changed original test bytes invalidate fixture parity\", (_, current) => { current.sourceHashes.test = \"c\".repeat(64); });"
+        },
+        {
+          "line": 245,
+          "text": "    rejectedPair(\"Changed original helper bytes invalidate fixture parity\", (_, current) => { current.sourceHashes.helper = \"c\".repeat(64); });"
+        },
+        {
+          "line": 246,
+          "text": "    rejectedPair(\"Missing source hashes cannot certify original fixture parity\", (_, current) => { delete current.sourceHashes.helper; });"
+        },
+        {
+          "line": 255,
+          "text": "        assert.equal(Runner.evaluateRuntimePair(pair.baseline, pair.current).passed, true);"
+        },
+        {
+          "line": 257,
+          "text": "        assert.equal(Runner.evaluateRuntimePair(pair.baseline, pair.current).passed, false);"
+        },
+        {
+          "line": 263,
+          "text": "        assert.equal(Runner.evaluateRuntimePair(pair.baseline, pair.current).passed, true);"
+        },
+        {
+          "line": 265,
+          "text": "        assert.equal(Runner.evaluateRuntimePair(pair.baseline, pair.current).passed, false);"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs",
+      "matches": [
+        {
+          "line": 13,
+          "text": "  test(\"actual gradient metadata replay: archived closed versus current Legacy ACCEPT\", () => { assert.equal(Source.validateMatch(reproduction), true); });"
+        },
+        {
+          "line": 25,
+          "text": "    assert.equal(h.run(\"ReceiverSourceSnapshot.validateMatch(m)\"), true); h.cold(\"R3 \" + phase);"
+        },
+        {
+          "line": 50,
+          "text": "    b.lastClosedSituationSummary = a.lastClosedSituationSummary; assert.equal(Source.validateMatch(b), true);"
+        },
+        {
+          "line": 88,
+          "text": "  return { summary: { total: checks.length, passed: checks.filter(x => x.status === \"PASS\").length, failed: checks.filter(x => x.status === \"FAIL\").length }, checks, witnesses, sourceHash: R.hash(R.read(\"receiver-source-snapshot.js\")), runtimeEnabled: false };"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs",
+      "matches": [
+        {
+          "line": 6,
+          "text": "  return { summary: { total: 1, passed: 1, failed: 0 }, expectedRed: true, result, scriptHash: R.hash(R.read(\"script.js\")), testUnchanged: result.sourceHash === R.json(R.prefix + \"baseline-evidence.json\").hashes[R.BBP] };"
+        },
+        {
+          "line": 22,
+          "text": "    assert.equal(m.groundBallInPlayState.shortstopExecution, undefined); assert.equal(b.phaseAtAdmission, \"beforeExecution\"); assert.equal(m.receiverSourceAdmission.pin.runtimeEnabled, false);"
+        },
+        {
+          "line": 26,
+          "text": "    originals(); h.run(action); try { h.fresh({}, \"automatic\"); assert.equal(h.run(\"m.receiverSourceAdmission\"), undefined); assert.equal(h.run(\"s3bRng.callbacks.length\"), 1); h.run(\"validateHighSchoolDecisionThrowState(m)\"); } finally { restore(); }"
+        },
+        {
+          "line": 33,
+          "text": "    try { h.fresh({}, \"beforeExecution\"); assert.equal(h.run(\"m.receiverSourceAdmission\"), undefined); assert.equal(h.run(\"s3bRng.callbacks.length\"), 0); assert(h.json(\"r4Boundary\").some(x => x.rosterAbsent && !x.sourceAvailable)); }"
+        },
+        {
+          "line": 54,
+          "text": "    assert.equal(created.snapshot.body.physical.playId, a.snapshot.body.physical.playId); assert.equal(s.validatePair(created.snapshot, created.pin), true); assert.deepEqual(h.json(\"m.receiverSourceAdmission\"), original);"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs",
+      "matches": [
+        {
+          "line": 5,
+          "text": "  const checks = [], pinned = R.git(\"show\", C.PINNED_COMMIT + \":save.js\").replace(/\\r\\n?/g, \"\\n\"), current = R.read(\"save.js\").toString().replace(/\\r\\n?/g, \"\\n\"), adapter = R.read(\"receiver-source-snapshot.js\").toString();"
+        },
+        {
+          "line": 8,
+          "text": "  function rejectSave(name, change) { test(name, () => { const changed = change(current); assert.notEqual(changed, current); new vm.Script(changed); assert.throws(() => C.assertReceiverSourceSaveAuthorizedDelta(changed, pinned, adapter), /Save source outside exact authorized owner delta/); }, true); }"
+        },
+        {
+          "line": 9,
+          "text": "  test(\"current Save equals pinned source plus the three reviewed exact patches\", () => { const r = C.assertReceiverSourceSaveAuthorizedDelta(current, pinned, adapter); assert.equal(r.exactDeltaCount, 3); assert.equal(r.loadAdmissionFrozen, true); });"
+        },
+        {
+          "line": 10,
+          "text": "  test(\"CRLF normalization preserves the same original authority\", () => C.assertReceiverSourceSaveAuthorizedDelta(current.replace(/\\n/g, \"\\r\\n\"), pinned.replace(/\\n/g, \"\\r\\n\"), adapter.replace(/\\r?\\n/g, \"\\r\\n\")));"
+        },
+        {
+          "line": 11,
+          "text": "  test(\"frozen original without required Source safety is not the new authorized contract\", () => assert.throws(() => C.assertReceiverSourceSaveAuthorizedDelta(pinned, pinned, adapter), /Save source outside/), true);"
+        },
+        {
+          "line": 27,
+          "text": "  for (const [name, statement] of [[\"Storage Writer\", 'localStorage.setItem(\"second\", \"x\");'], [\"RNG\", \"Math.random();\"], [\"candidate execution\", \"ReceiverExecutionV22Foundation.execute({});\"]]) test(\"adapter acquires \" + name + \" FAIL\", () => { const changed = adapter + \"\\n\" + statement; new vm.Script(changed); assert.throws(() => C.assertReceiverSourceSaveAuthorizedDelta(current, pinned, changed), /Source adapter acquired/); }, true);"
+        },
+        {
+          "line": 28,
+          "text": "  test(\"unreviewed adapter branch cannot evade supplemental source freeze\", () => { const changed = adapter.replace(\"return true; // genuine omitted legacy metadata\", \"return false; // genuine omitted legacy metadata\"); assert.notEqual(changed, adapter); assert.throws(() => C.assertReceiverSourceSaveAuthorizedDelta(current, pinned, changed), /Reviewed metadata-only adapter changed/); }, true);"
+        },
+        {
+          "line": 29,
+          "text": "  test(\"changing original pinned authority FAIL\", () => assert.throws(() => C.assertReceiverSourceSaveAuthorizedDelta(current, pinned + \"\\n\", adapter), /Original pinned Save authority changed/), true);"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs",
+      "matches": [
+        {
+          "line": 20,
+          "text": "      const normalized = h.json(\"normalizeSave(r6Raw)\"); assert.equal(normalized.saveVersion, 16); assert.equal(normalized.receiverSourceSaveFormatVersion, \"receiver-source-only-save-v1\");"
+        },
+        {
+          "line": 46,
+          "text": "      try { h.run(\"loadGame()\"); assert.equal(loadErrors.length, 1); assert.match(loadErrors[0].message, /receiver source/); assert.equal(h.run(\"r6Defaults\"), 0); assert.equal(h.run(\"r6Writes\"), 0); assert.equal(h.run(\"r6CandidateCalls\"), 0); assert.deepEqual(h.snapshot(), before); assert.equal(h.run(\"localStorage.getItem(SAVE_KEY)\"), JSON.stringify(raw)); witnesses.push({ entry: \"loadGame\", mutation: label, error: loadErrors[0], defaultsCalls: 0, writes: 0, candidateCalls: 0, liveCommit: false }); } finally { restoreTrap(); }"
+        },
+        {
+          "line": 51,
+          "text": "    try { assert.throws(() => h.run(\"normalizeSave(r6Raw)\"), /module required/); assert.equal(h.run(\"r6Defaults\"), 0); assert.equal(h.run(\"r6Writes\"), 0); assert.deepEqual(h.snapshot(), before); } finally { h.run(\"ReceiverSourceSnapshot=r6Source;\"); restoreTrap(); }"
+        },
+        {
+          "line": 55,
+          "text": "    try { h.run(\"loadGame()\"); assert.equal(loadErrors.length, 1); assert.match(loadErrors[0].message, /module required/); assert.equal(h.run(\"r6Defaults\"), 0); assert.equal(h.run(\"r6Writes\"), 0); assert.deepEqual(h.snapshot(), before); witnesses.push({ entry: \"loadGame\", mutation: \"missing adapter\", error: loadErrors[0], defaultsCalls: 0, writes: 0, liveCommit: false }); } finally { h.run(\"ReceiverSourceSnapshot=r6Source;\"); restoreTrap(); }"
+        },
+        {
+          "line": 59,
+          "text": "    try { h.run(\"saveGame()\"); assert.equal(h.run(\"r6Writes\"), 1); assert.deepEqual(JSON.parse(h.run(\"localStorage.getItem(SAVE_KEY)\")), before.player); assert.deepEqual(h.snapshot(), before); } finally { h.run(\"ReceiverSourceSnapshot=r6Source;\"); restoreTrap(); }"
+        },
+        {
+          "line": 64,
+          "text": "    const raw = old.json(\"player\"), text = JSON.stringify(raw); h.context.r6Historical = raw; const normalized = h.json(\"normalizeSave(r6Historical)\"); assert.equal(normalized.saveVersion, 15); assert(!Object.hasOwn(normalized.highSchoolMatch, \"receiverSourceAdmission\")); assert.equal(JSON.stringify(raw), text); assert.deepEqual(officialProjection(normalized), officialProjection(old.json(\"normalizeSave(player)\")));"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-9-legacy-comparison.cjs",
+      "matches": [
+        {
+          "line": 27,
+          "text": "const sha = value => crypto.createHash('sha256').update(value).digest('hex');"
+        },
+        {
+          "line": 28,
+          "text": "const git = args => cp.execFileSync('git', args, {cwd:root,windowsHide:true,encoding:'utf8',maxBuffer:30e6});"
+        },
+        {
+          "line": 32,
+          "text": "  const index = git(['show',baseline+':index.html']);"
+        },
+        {
+          "line": 35,
+          "text": "  return { 'index.html':index, ...Object.fromEntries(names.map(file => [file,git(['show',baseline+':'+file])])) };"
+        },
+        {
+          "line": 57,
+          "text": "  assert(textEqual(contextSource,git(['show',baseline+':'+contextPath])), 'Existing context helper changed');"
+        },
+        {
+          "line": 58,
+          "text": "  assert(textEqual(fixtureSource,git(['show',baseline+':'+fixturePath])), 'Existing fixture suite changed');"
+        },
+        {
+          "line": 193,
+          "text": "    sourceBoundary:{existingFixtureBodiesUnchanged:true,rootBaselineLoader:'git show; maxBuffer30MB',protectedContentReads:0,"
+        }
+      ]
+    },
+    {
+      "file": "tests/relationship-feasibility-production-scope-test.js",
+      "matches": [
+        {
+          "line": 15,
+          "text": "  scope.assertSources(after, before);"
+        },
+        {
+          "line": 19,
+          "text": "  test('reject protected mismatch: ' + file, () => assert.throws(() => scope.assertSources({ ...baseline, [file]: baseline[file] + 'changed contract' }, baseline), /Protected feasibility source mismatch/));"
+        },
+        {
+          "line": 20,
+          "text": "  test('reject missing protected source: ' + file, () => { const missing = { ...baseline }; delete missing[file]; assert.throws(() => scope.assertSources(missing, baseline), /Missing current protected source/); });"
+        },
+        {
+          "line": 22,
+          "text": "test('cross-platform newlines retain equivalent contract', () => scope.assertSources(Object.fromEntries(scope.FILES.map(f => [f, baseline[f].replace(/\\n/g, '\\r\\n')])), baseline));"
+        },
+        {
+          "line": 23,
+          "text": "test('actual protected sources still match historical baseline', () => scope.assertWorkingTree());"
+        }
+      ]
+    },
+    {
+      "file": "tests/representative-team-contract-test.js",
+      "matches": [
+        {
+          "line": 53,
+          "text": "assert.equal(references[0].sourceTeamId, originalPrimary.teamId);"
+        },
+        {
+          "line": 54,
+          "text": "assert.equal(references[1].sourceTeamId, \"school-b\");"
+        }
+      ]
+    },
+    {
+      "file": "tests/responsive-accessibility-pass-test.js",
+      "matches": [
+        {
+          "line": 4,
+          "text": "const { execFileSync } = require(\"child_process\");"
+        },
+        {
+          "line": 225,
+          "text": "const changedFiles = execFileSync(\"git\", [\"diff\", \"--name-only\"], { cwd: root, encoding: \"utf8\" }).trim().split(/\\r?\\n/).filter(Boolean);"
+        }
+      ]
+    },
+    {
+      "file": "tests/scoreboard-presentation-integrity-test.js",
+      "matches": [
+        {
+          "line": 67,
+          "text": "    assert.strictEqual(run(\"scoreboardView().currentSituation.score.away\"), 2);"
+        },
+        {
+          "line": 71,
+          "text": "    assert.strictEqual(run(\"scoreboardView().currentSituation.outs\"), 1);"
+        }
+      ]
+    },
+    {
+      "file": "tests/scoreboard-presentation-production-integration-test.js",
+      "matches": [
+        {
+          "line": 23,
+          "text": "  assert.strictEqual(run(\"scoreboardView().currentSituation.score.away\"), 2);"
+        },
+        {
+          "line": 26,
+          "text": "  assert.strictEqual(board().away.cellStates[0], \"live\"); assert.strictEqual(run(\"scoreboardView().currentSituation.outs\"), 0);"
+        },
+        {
+          "line": 41,
+          "text": "  assert.strictEqual(run(\"scoreboardView().currentSituation.outs\"), 3);"
+        },
+        {
+          "line": 45,
+          "text": "  assert.strictEqual(board().away.cells[0], 2); assert.strictEqual(run(\"scoreboardView().currentSituation.outs\"), 0);"
+        }
+      ]
+    },
+    {
+      "file": "tests/shared-infield-contract-2b-production-integration-test.js",
+      "matches": [
+        {
+          "line": 224,
+          "text": "  assert.equal(run('r.actionFacts.sourceAuthority'),'declaredLegacyInfieldScenario');"
+        }
+      ]
+    },
+    {
+      "file": "tests/ss-defensive-production-integration-test.js",
+      "matches": [
+        {
+          "line": 295,
+          "text": "    assert.equal(run('JSON.stringify(player)'), run('source'));"
+        }
+      ]
+    },
+    {
+      "file": "tests/ten-year-narrative-architecture-test.js",
+      "matches": [
+        {
+          "line": 125,
+          "text": "  const hash = crypto.createHash(\"sha256\").update(contract).digest(\"hex\");"
+        }
+      ]
+    },
+    {
+      "file": "tests/third-out-run-out-attribution-production-integration-test.js",
+      "matches": [
+        {
+          "line": 92,
+          "text": "  assert.equal(run('JSON.stringify(m.gameRecord.playerLines[m.currentBatter].batting)===beforeBatter'),true);"
+        }
+      ]
+    },
+    {
+      "file": "tests/youth-season-content-pass-test.js",
+      "matches": [
+        {
+          "line": 139,
+          "text": "  const hash = crypto.createHash(\"sha256\").update(JSON.stringify(choiceGameplayContract(game))).digest(\"hex\");"
+        }
+      ]
+    }
+  ],
+  "scope": "literal candidate discovery only; assertions about fixture/runtime data are not confirmed source-freeze contracts",
+  "safety": {
+    "changedExistingPaths": [],
+    "preservedHashes": 945,
+    "protectedMetadataUnchanged": true,
+    "protectedContentReadOrHashed": false,
+    "git": {
+      "branch": "main",
+      "head": "ab3117653945de0b7013636187c446276a96e634",
+      "main": "ab3117653945de0b7013636187c446276a96e634",
+      "originMain": "ab3117653945de0b7013636187c446276a96e634",
+      "index": "",
+      "status": " M index.html\n M match-situation-lifecycle.js\n M save.js\n M script.js\n M tests/fast-check-smoke-test.cjs\n M tests/pitch-sequence-state-production-integration-test.js\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/infield-baseball-logic-audit-architecture-evidence.json\n?? docs/infield-baseball-logic-audit-evidence.json\n?? docs/infield-baseball-logic-audit-runner.cjs\n?? docs/infield-baseball-logic-validation-audit-v1.md\n?? docs/infield-scorer-recovery-sprint-5-green-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json\n?? docs/infield-scorer-recovery-sprint-5-validation.json\n?? docs/receiver-execution-v2-production-snapshot-save-guard-sprint-10a3b.md\n?? docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-lifecycle-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-observed-validation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-current-source-verification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-initial-test-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r1-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-timeout-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-architecture-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout.md\n?? docs/receiver-execution-v2-sprint-10a3b-r2-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-policy-specification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-extra-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gradient-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-guard-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r3-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-original-validator.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-reproduction-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-baseline-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-comparison-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-current-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-green-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-green-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-career-save-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-compatibility-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-audit-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r4-development-focused-1-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-development-focused-2-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-helper-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-helper-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-baseline180-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-current-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-r3-wip-diagnostic-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-runtime-comparison-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-full-repository-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gates-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gradient-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gradient-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-legacy-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-production-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-r3-guard-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-r3-guard-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-red-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-related-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-s8-cross-runtime-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-s8-cross-runtime-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-save-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-before-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-change-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-stdout-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-architecture-extra-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-coverage-paths-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-entrypoint-search-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-freeze-comparisons-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-inherited-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-ownership-contract-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-pitch-red-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-save-ownership-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r6-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-authorized-delta-contract-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-bbp-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-coverage-paths-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-development-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-exact-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-independent-review-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-manifest-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-pitch-green-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r1-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r3-guard-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r4-dependency-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-receiver-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-s8-cross-runtime-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-save-boundary-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-save-ownership-contract.md\n?? docs/receiver-execution-v2-sprint-10a3b-r6-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-confirmation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-witness-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-related-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-evidence.json\n?? docs/test-reliability-audit-v0.1-baseline-evidence.json\n?? docs/test-reliability-audit-v0.1-extract.cjs\n?? docs/test-reliability-audit-v0.1-inventory-evidence.json\n?? docs/test-reliability-audit-v0.1-inventory.cjs\n?? docs/test-reliability-audit-v0.1-known-failure-replays-evidence.json\n?? install.ps1\n?? receiver-source-snapshot.js\n?? tests/receiver-execution-v2-production-snapshot-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-harness.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-closeout.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-source-review.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-closeout.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-dependency-audit.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runtime-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r5-ownership-audit.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-independent-review.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs\n?? tests/receiver-source-save-authorized-delta.cjs\n"
+    }
+  }
+}

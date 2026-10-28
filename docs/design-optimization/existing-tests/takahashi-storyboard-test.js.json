@@ -1,0 +1,19 @@
+{
+  "file": "takahashi-storyboard-test.js",
+  "status": "UNVERIFIED",
+  "entryVerified": true,
+  "observedAssertions": 0,
+  "elapsedMs": 192,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/takahashi-storyboard-test.js"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "timedOut": false,
+  "stdout": "┌─────────┬──────────────┬────────┐\n│ (index) │ event        │ result │\n├─────────┼──────────────┼────────┤\n│ 0       │ '第一次失常' │ '4／4' │\n│ 1       │ '壓力累積'   │ '3／3' │\n│ 2       │ '真正失常'   │ '3／3' │\n│ 3       │ '成年回響'   │ '3／3' │\n└─────────┴──────────────┴────────┘\n跨章物件：第一顆失投球／白板計分頁／磨到發亮的手套，成年全部回收。\n高橋人物線：四個分鏡事件全部通過。\n",
+  "stderr": ""
+}

@@ -1,0 +1,19 @@
+{
+  "file": "pitcher-catcher-tactical-integration-test.js",
+  "status": "PASS",
+  "entryVerified": true,
+  "observedAssertions": 34,
+  "elapsedMs": 59,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/pitcher-catcher-tactical-integration-test.js"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "timedOut": false,
+  "stdout": "✓ A1. 3-0 challenge 建立具名 tactical intent\n✓ A2. challenge recommendation 使用既有可執行 pitch class\n✓ A3. AI pitcher 明確保存 recommended／accepted compatibility path\n✓ A4. 接受的 call 只設定 intended pitch，actual 仍由既有 control authority 產生\n✓ B1. 0-2 expand 形成 outer-low 類抽象目標\n✓ G1. Good call / poor execution 合法保留 expand intent 與 execution miss\n✓ G2. 捕手 recommendation 沒有直接建立 actual pitch truth\n✓ C1. chase／whiff 使 repeatSuccess 成為正式 eligible candidate\n✓ C2. repeatSuccess 保存 recentSuccess 與 batterChase reason codes\n✓ C3. repeatSuccess 建議相同 pitch family 與 target\n✓ C4. repeatSuccess 是 tactical candidate 而非必然鎖定\n✓ D1. 相同 recommendation 仍建立新的 pitch／tactical identity\n✓ D2. 每球 control realization 依新 identity 獨立存在\n✓ E1. failed repeat 的 hard contact 與 command miss 進入下一球 context\n✓ E2. repeat success flag 不會永久 sticky\n✓ E3. failed repeat 提高 changeLook 並留下 batterHardContact／commandConcern reason\n✓ F1. 近期相同 call 使 changeLook 成為 plausible candidate\n✓ F2. changeLook 偏離最近 family，但沒有 anti-repeat 禁令\n✓ H1. canonical tactical context 包含規定的最小情境\n✓ H2. tactical context 不保存 hidden recognition／perception／RNG truth\n✓ H3. 新 PA 即使 current pitch history 為空，仍從 match-local tactical history 延續 recent classes\n✓ I1. production pending pitch 保存 intent／recommendation／acceptance／pitch identity\n✓ I2. pitch execution 前 save/reload 不改 tactical state 或 pitch truth\n✓ J1. pitch 結束後建立 minimal observable tactical feedback\n✓ J2. PA state 保存 bounded tactical sequence history\n✓ J3. previous pitch 後 save/reload 不遺失 sequence history\n✓ J4. next-pitch reassessment 建立新 recommendation object 與 identity\n✓ J5. tactical sequence memory 嚴格限制最近六球\n✓ K1. AI／non-player batter 既有 simulation 仍能完成單一 PA\n✓ L1. Plate Decision 玩家 context 不洩漏 tactical intent／catcher call／acceptance\n✓ L2. Plate Decision 仍只呈現 perceived pitch 與三條 batter routes\n✓ Trace. developer trace 可回答 context／intent／reason／call／acceptance／execution\n✓ Authority. 新模組不使用 Math.random、Date.now 或 UUID identity\n✓ Load order. Tactical Integration 在 Pitch Sequencing 後、OPA 前載入\n\nPitcher / Catcher Tactical Integration v1：34/34 通過\n",
+  "stderr": ""
+}

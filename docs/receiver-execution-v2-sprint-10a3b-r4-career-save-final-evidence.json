@@ -1,0 +1,37 @@
+{
+  "sprint": "10A.3b-R4",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "createdAt": "2026-10-14T05:28:51.999Z",
+  "node": "v24.19.0",
+  "result": {
+    "file": "tests/career-save-admission-test.js",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "tests/career-save-admission-test.js"
+    ],
+    "cwd": "E:\\meng\\baseball_life_sim_semirefactor",
+    "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+    "nodeVersion": "v24.19.0",
+    "timeoutMs": 120000,
+    "maxBuffer": 16000000,
+    "environment": {
+      "NODE_OPTIONS": null,
+      "NODE_PATH": null,
+      "TZ": null
+    },
+    "elapsedMs": 285.0428,
+    "exitCode": 0,
+    "signal": null,
+    "error": null,
+    "stdout": "✓ 1. Admission Boundary 只公開單一正式 API\n✓ 2. 合法 pre-adult save 以 bypassed + admitted 保持相容\n✓ 3. 未知 chapter 明確 rejected，不會被當成 pre-adult bypass\n✓ 4. 五種青棒生涯出口合法狀態全部 admitted\n✓ 5. 四種成年來源的代表 Transition 狀態均 admitted\n✓ 6. Transition admission 會消費 4.6 Runtime Resolver\n✓ 7. 四種 route identity 的 Transition Result 均 admitted\n✓ 8. 四種成年來源的代表 Development 狀態均 admitted\n✓ 9. Development admission 會消費 4.8 Runtime Resolver\n✓ 10. 四種 route identity 的 22 歲結果均 admitted\n✓ 11. 合法垂直切片完成狀態以 completed snapshot admitted\n✓ 12. forcedEventId 不會讓合法底層成年狀態被拒\n✓ 13. Invalid Transition 狀態全部 rejected\n✓ 14. Invalid Transition Result 全部 rejected\n✓ 15. Invalid Development 狀態全部 rejected\n✓ 16. Invalid 22 歲結果狀態全部 rejected\n✓ 17. completed=false 的終止狀態 rejected\n✓ 18. Admission evaluation 對 candidate 為 zero mutation\n✓ 19. Admission evaluation 對 Career Contract 為 zero mutation\n✓ 20. 相同 candidate 的 Admission result deterministic\n✓ 21. admitted／bypassed／rejected 結果全部 deep frozen\n✓ 22. Admission source 不接觸 Storage、UI、live Player 或 Save flow\n✓ 23. Admission source 未保存成年 chapter／careerExit／事件 registry\n✓ 24. 合法成年 Load 在 admission 後才替換 live Player\n✓ 25. 合法 Development Load 恢復既有 development_mentor event\n✓ 26. 合法 Load 隱藏創角區、顯示 success 且不重寫 Storage\n✓ 27. Rejected Load 維持 live Player identity 與完整內容\n✓ 28. Rejected Load 不 Render、不切換主 UI、不清空故事與選項\n✓ 29. Rejected Load 保留原始 localStorage 且不寫入或刪除\n✓ 30. Rejected Load 只顯示 error notice\n✓ 31. Malformed JSON 沿用 catch 且 live Player、UI、Storage 不變\n✓ 32. Admission module unavailable 時 fail closed\n✓ 33. 舊存檔先 normalize 到 v15 再由 pre-adult Admission 放行\n✓ 33a. 合法 v13 二十二歲結果以既有 marketOutcome 遷移到 v15 code\n✓ 33b. v13 Load migration 不自動覆寫原始 Storage\n✓ 33c. 路線與舊中文結果矛盾的 v13 存檔被拒且 live Player zero mutation\n✓ 33d. 無法遷移的 v13 存檔不修改 Storage\n✓ 34. forced-event Save/Load 保留既有 precedence\n✓ 35. completed Save 仍優先於殘留 forced event\n✓ 36. 合法 Transition Save 恢復 Resolver 指定事件\n✓ 37. Transition Result、22 歲 Result 與 Terminal 都不錯套 Runtime Resolver\n✓ 38. Browser dependency 依 Contract → Runtime Resolvers → Admission → Save 載入\n✓ 39. SAVE_VERSION 升級為 15，SAVE_KEY 與 saveGame snapshot shape 保持不變\n✓ 40. Player Schema 只新增 age22OutcomeCode，未新增 currentIdentity 或 Admission persistence 欄位\n✓ 41. loadGame 明確維持 candidate-first、admission-second、commit-last\n\nArchitecture Sprint 4.10 Adult Career Save Admission Boundary：45/45 通過\n",
+    "stderr": "SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)\n    at JSON.parse (<anonymous>)\n    at loadGame (save.js:649:42)\n    at evalmachine.<anonymous>:1:125\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at evaluate (E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-save-admission-test.js:58:13)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-save-admission-test.js:300:1)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n",
+    "sourceHash": "afaffc6dec608df43722b241726767112f28754035f1b894da51a4f69a7baaa2"
+  },
+  "frozenSourceHashes": {
+    "index.html": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+    "script.js": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+    "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+    "match-situation-lifecycle.js": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+    "receiver-source-snapshot.js": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274"
+  }
+}

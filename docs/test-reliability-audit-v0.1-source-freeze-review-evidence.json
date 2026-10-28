@@ -1,0 +1,2278 @@
+{
+  "audit": "Test Reliability Audit v0.1",
+  "createdAt": "2026-10-14T09:27:16.384Z",
+  "formalBaseline": "ab3117653945de0b7013636187c446276a96e634",
+  "node": "v24.19.0",
+  "comparisons": [
+    {
+      "suite": "tests/pitch-sequence-state-production-integration-test.js",
+      "pinnedRef": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+      "file": "pitch-observation-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+      "pinnedNormalizedSha256": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-sequence-state-production-integration-test.js",
+      "pinnedRef": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+      "file": "offensive-plate-approach.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "426538ad6f3d4b4257e0114549724e691cf4eab3f3546686896f972cebfd093a",
+      "pinnedNormalizedSha256": "426538ad6f3d4b4257e0114549724e691cf4eab3f3546686896f972cebfd093a",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-sequence-state-production-integration-test.js",
+      "pinnedRef": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+      "file": "pitcher-catcher-tactical-integration.js",
+      "rule": "exact repeat extraction",
+      "currentNormalizedSha256": "cc6b8bab3c5e20ae7ec48801d71a0ced9d9ffaeb05cf06b8143667e89663aff2",
+      "pinnedNormalizedSha256": "e18547c30630c49953582f3ba4f38c297b467f490a0990dc5afa5f705403ee94",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-sequence-state-production-integration-test.js",
+      "pinnedRef": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+      "file": "pitch-sequencing.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+      "pinnedNormalizedSha256": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-sequence-state-production-integration-test.js",
+      "pinnedRef": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+      "file": "save.js",
+      "rule": "R6 authorized exact owner delta",
+      "currentNormalizedSha256": "9a3a1013cd8451979785f118b1e43fde65d10d71ff507ae8626c771bff3287a7",
+      "pinnedNormalizedSha256": "d093c730a4082a05050476a110553204e5234d72596b3cb449423f56566fe592",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": {
+        "contractVersion": "receiver-source-save-owner-delta-v1",
+        "pinnedCommit": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+        "exactDeltaCount": 3,
+        "untouchedSourceFrozen": true,
+        "legacyWriterFrozen": true,
+        "rawBeforeDefaultsAndMerge": true,
+        "loadAdmissionFrozen": true,
+        "source16Preserved": true,
+        "adapter": {
+          "reviewedAdapterFrozen": true,
+          "storageWriter": false,
+          "rngOwner": false,
+          "candidateExecutionOwner": false
+        }
+      },
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-sequence-state-production-integration-test.js",
+      "pinnedRef": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+      "file": "script.js",
+      "rule": "original Pitch function/constants/wiring scope",
+      "currentNormalizedSha256": "b3dc97ffe59b0f0534fc3a64af57adfbded353370fb8a36fba55fd0c6a9b487d",
+      "pinnedNormalizedSha256": "408dd3fe1485e839392265e6c47b6c1e3fd46d6681f8e650929ab49ed4ad59ea",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": {
+        "protectedFunctions": 95,
+        "topLevelDeclarations": true,
+        "externalWiring": true
+      },
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-integration-test.js",
+      "pinnedRef": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+      "file": "pitch-tactical-interpretation-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "ada9061892b2b0e37c52323730e320a91b1f2832f6bf9acce628f22b8c56161f",
+      "pinnedNormalizedSha256": "ada9061892b2b0e37c52323730e320a91b1f2832f6bf9acce628f22b8c56161f",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-integration-test.js",
+      "pinnedRef": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+      "file": "pitch-sequence-state-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "e91f1159dd06d13869db7c88412d4d8128814289ee88b53a0a64db2a1af5b7e1",
+      "pinnedNormalizedSha256": "e91f1159dd06d13869db7c88412d4d8128814289ee88b53a0a64db2a1af5b7e1",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-integration-test.js",
+      "pinnedRef": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+      "file": "pitch-observation-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+      "pinnedNormalizedSha256": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-integration-test.js",
+      "pinnedRef": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+      "file": "offensive-plate-approach.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "426538ad6f3d4b4257e0114549724e691cf4eab3f3546686896f972cebfd093a",
+      "pinnedNormalizedSha256": "426538ad6f3d4b4257e0114549724e691cf4eab3f3546686896f972cebfd093a",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-integration-test.js",
+      "pinnedRef": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+      "file": "pitcher-catcher-tactical-integration.js",
+      "rule": "exact repeat extraction",
+      "currentNormalizedSha256": "cc6b8bab3c5e20ae7ec48801d71a0ced9d9ffaeb05cf06b8143667e89663aff2",
+      "pinnedNormalizedSha256": "e18547c30630c49953582f3ba4f38c297b467f490a0990dc5afa5f705403ee94",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-integration-test.js",
+      "pinnedRef": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+      "file": "pitch-sequencing.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+      "pinnedNormalizedSha256": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-integration-test.js",
+      "pinnedRef": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+      "file": "save.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "9a3a1013cd8451979785f118b1e43fde65d10d71ff507ae8626c771bff3287a7",
+      "pinnedNormalizedSha256": "d093c730a4082a05050476a110553204e5234d72596b3cb449423f56566fe592",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "FAIL",
+      "error": {
+        "name": "AssertionError",
+        "message": "save.js"
+      },
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-integration-test.js",
+      "pinnedRef": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+      "file": "script.js",
+      "rule": "original Pitch function/constants/wiring scope",
+      "currentNormalizedSha256": "b3dc97ffe59b0f0534fc3a64af57adfbded353370fb8a36fba55fd0c6a9b487d",
+      "pinnedNormalizedSha256": "408dd3fe1485e839392265e6c47b6c1e3fd46d6681f8e650929ab49ed4ad59ea",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": {
+        "protectedFunctions": 95,
+        "topLevelDeclarations": true,
+        "externalWiring": true
+      },
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "pinnedRef": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+      "file": "pitch-sequence-state-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "e91f1159dd06d13869db7c88412d4d8128814289ee88b53a0a64db2a1af5b7e1",
+      "pinnedNormalizedSha256": "e91f1159dd06d13869db7c88412d4d8128814289ee88b53a0a64db2a1af5b7e1",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "pinnedRef": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+      "file": "pitch-observation-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+      "pinnedNormalizedSha256": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "pinnedRef": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+      "file": "offensive-plate-approach.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "426538ad6f3d4b4257e0114549724e691cf4eab3f3546686896f972cebfd093a",
+      "pinnedNormalizedSha256": "426538ad6f3d4b4257e0114549724e691cf4eab3f3546686896f972cebfd093a",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "pinnedRef": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+      "file": "pitcher-catcher-tactical-integration.js",
+      "rule": "exact repeat extraction",
+      "currentNormalizedSha256": "cc6b8bab3c5e20ae7ec48801d71a0ced9d9ffaeb05cf06b8143667e89663aff2",
+      "pinnedNormalizedSha256": "e18547c30630c49953582f3ba4f38c297b467f490a0990dc5afa5f705403ee94",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "pinnedRef": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+      "file": "pitch-sequencing.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+      "pinnedNormalizedSha256": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "pinnedRef": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+      "file": "save.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "9a3a1013cd8451979785f118b1e43fde65d10d71ff507ae8626c771bff3287a7",
+      "pinnedNormalizedSha256": "d093c730a4082a05050476a110553204e5234d72596b3cb449423f56566fe592",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "FAIL",
+      "error": {
+        "name": "AssertionError",
+        "message": "save.js"
+      },
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "pinnedRef": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+      "file": "script.js",
+      "rule": "original Pitch function/constants/wiring scope",
+      "currentNormalizedSha256": "b3dc97ffe59b0f0534fc3a64af57adfbded353370fb8a36fba55fd0c6a9b487d",
+      "pinnedNormalizedSha256": "408dd3fe1485e839392265e6c47b6c1e3fd46d6681f8e650929ab49ed4ad59ea",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": {
+        "protectedFunctions": 95,
+        "topLevelDeclarations": true,
+        "externalWiring": true
+      },
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "pinnedRef": "9b9546f94a7286afef474be634fd93c57eb455db",
+      "file": "pitch-tactical-decision-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "92fe89b086867bb44aa13cac0dfe82764f01468efb512f5f356916fa5ed22511",
+      "pinnedNormalizedSha256": "92fe89b086867bb44aa13cac0dfe82764f01468efb512f5f356916fa5ed22511",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "pinnedRef": "9b9546f94a7286afef474be634fd93c57eb455db",
+      "file": "pitch-tactical-interpretation-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "ada9061892b2b0e37c52323730e320a91b1f2832f6bf9acce628f22b8c56161f",
+      "pinnedNormalizedSha256": "ada9061892b2b0e37c52323730e320a91b1f2832f6bf9acce628f22b8c56161f",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "pinnedRef": "9b9546f94a7286afef474be634fd93c57eb455db",
+      "file": "pitch-sequence-state-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "e91f1159dd06d13869db7c88412d4d8128814289ee88b53a0a64db2a1af5b7e1",
+      "pinnedNormalizedSha256": "e91f1159dd06d13869db7c88412d4d8128814289ee88b53a0a64db2a1af5b7e1",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "pinnedRef": "9b9546f94a7286afef474be634fd93c57eb455db",
+      "file": "pitch-observation-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+      "pinnedNormalizedSha256": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "pinnedRef": "9b9546f94a7286afef474be634fd93c57eb455db",
+      "file": "offensive-plate-approach.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "426538ad6f3d4b4257e0114549724e691cf4eab3f3546686896f972cebfd093a",
+      "pinnedNormalizedSha256": "426538ad6f3d4b4257e0114549724e691cf4eab3f3546686896f972cebfd093a",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "pinnedRef": "9b9546f94a7286afef474be634fd93c57eb455db",
+      "file": "pitcher-catcher-tactical-integration.js",
+      "rule": "exact repeat extraction",
+      "currentNormalizedSha256": "cc6b8bab3c5e20ae7ec48801d71a0ced9d9ffaeb05cf06b8143667e89663aff2",
+      "pinnedNormalizedSha256": "e18547c30630c49953582f3ba4f38c297b467f490a0990dc5afa5f705403ee94",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "pinnedRef": "9b9546f94a7286afef474be634fd93c57eb455db",
+      "file": "pitch-sequencing.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+      "pinnedNormalizedSha256": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "pinnedRef": "9b9546f94a7286afef474be634fd93c57eb455db",
+      "file": "save.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "9a3a1013cd8451979785f118b1e43fde65d10d71ff507ae8626c771bff3287a7",
+      "pinnedNormalizedSha256": "d093c730a4082a05050476a110553204e5234d72596b3cb449423f56566fe592",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "FAIL",
+      "error": {
+        "name": "AssertionError",
+        "message": "save.js"
+      },
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "pinnedRef": "9b9546f94a7286afef474be634fd93c57eb455db",
+      "file": "script.js",
+      "rule": "original Pitch function/constants/wiring scope",
+      "currentNormalizedSha256": "b3dc97ffe59b0f0534fc3a64af57adfbded353370fb8a36fba55fd0c6a9b487d",
+      "pinnedNormalizedSha256": "408dd3fe1485e839392265e6c47b6c1e3fd46d6681f8e650929ab49ed4ad59ea",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": {
+        "protectedFunctions": 95,
+        "topLevelDeclarations": true,
+        "externalWiring": true
+      },
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "pinnedRef": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "file": "pitch-observation-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+      "pinnedNormalizedSha256": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "pinnedRef": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "file": "pitch-sequence-state-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "e91f1159dd06d13869db7c88412d4d8128814289ee88b53a0a64db2a1af5b7e1",
+      "pinnedNormalizedSha256": "e91f1159dd06d13869db7c88412d4d8128814289ee88b53a0a64db2a1af5b7e1",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "pinnedRef": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "file": "pitch-tactical-interpretation-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "ada9061892b2b0e37c52323730e320a91b1f2832f6bf9acce628f22b8c56161f",
+      "pinnedNormalizedSha256": "ada9061892b2b0e37c52323730e320a91b1f2832f6bf9acce628f22b8c56161f",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "pinnedRef": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "file": "pitch-tactical-decision-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "92fe89b086867bb44aa13cac0dfe82764f01468efb512f5f356916fa5ed22511",
+      "pinnedNormalizedSha256": "92fe89b086867bb44aa13cac0dfe82764f01468efb512f5f356916fa5ed22511",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "pinnedRef": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "file": "pitch-tactical-decision-production-adapter.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "43d1fad7ef5d6f4e9eaec52eda5e28d4198b1b16a46bfdcbc70144f6f286df97",
+      "pinnedNormalizedSha256": "43d1fad7ef5d6f4e9eaec52eda5e28d4198b1b16a46bfdcbc70144f6f286df97",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "pinnedRef": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "file": "pitcher-catcher-tactical-integration.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "cc6b8bab3c5e20ae7ec48801d71a0ced9d9ffaeb05cf06b8143667e89663aff2",
+      "pinnedNormalizedSha256": "cc6b8bab3c5e20ae7ec48801d71a0ced9d9ffaeb05cf06b8143667e89663aff2",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "pinnedRef": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "file": "offensive-plate-approach.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "426538ad6f3d4b4257e0114549724e691cf4eab3f3546686896f972cebfd093a",
+      "pinnedNormalizedSha256": "426538ad6f3d4b4257e0114549724e691cf4eab3f3546686896f972cebfd093a",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "pinnedRef": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "file": "plate-decision-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "cfe502bf820761f5d0156a773dd2f3d8dd61c940666e141dc2f8fb2b186c7304",
+      "pinnedNormalizedSha256": "cfe502bf820761f5d0156a773dd2f3d8dd61c940666e141dc2f8fb2b186c7304",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "pinnedRef": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "file": "pitch-sequencing.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+      "pinnedNormalizedSha256": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "pinnedRef": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "file": "script.js",
+      "rule": "original Pitch function/constants/wiring scope",
+      "currentNormalizedSha256": "b3dc97ffe59b0f0534fc3a64af57adfbded353370fb8a36fba55fd0c6a9b487d",
+      "pinnedNormalizedSha256": "408dd3fe1485e839392265e6c47b6c1e3fd46d6681f8e650929ab49ed4ad59ea",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": {
+        "protectedFunctions": 95,
+        "topLevelDeclarations": true,
+        "externalWiring": true
+      },
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "pinnedRef": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "file": "save.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "9a3a1013cd8451979785f118b1e43fde65d10d71ff507ae8626c771bff3287a7",
+      "pinnedNormalizedSha256": "d093c730a4082a05050476a110553204e5234d72596b3cb449423f56566fe592",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "FAIL",
+      "error": {
+        "name": "AssertionError",
+        "message": "save.js"
+      },
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "pinnedRef": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "file": "index.html",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "3cc11be5c8a52bba7d22a4faa9f809c27f6130a385dc5fe61258f8d0d1d8f2df",
+      "pinnedNormalizedSha256": "01a1267379d1732437452e44f1eb49ac49a3a9565ee9f3dda820b906c498d71b",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "FAIL",
+      "error": {
+        "name": "AssertionError",
+        "message": "index.html"
+      },
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "pinnedRef": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "file": "pitch-observation-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+      "pinnedNormalizedSha256": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "pinnedRef": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "file": "pitch-sequence-state-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "e91f1159dd06d13869db7c88412d4d8128814289ee88b53a0a64db2a1af5b7e1",
+      "pinnedNormalizedSha256": "e91f1159dd06d13869db7c88412d4d8128814289ee88b53a0a64db2a1af5b7e1",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "pinnedRef": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "file": "pitch-tactical-interpretation-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "ada9061892b2b0e37c52323730e320a91b1f2832f6bf9acce628f22b8c56161f",
+      "pinnedNormalizedSha256": "ada9061892b2b0e37c52323730e320a91b1f2832f6bf9acce628f22b8c56161f",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "pinnedRef": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "file": "pitch-tactical-decision-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "92fe89b086867bb44aa13cac0dfe82764f01468efb512f5f356916fa5ed22511",
+      "pinnedNormalizedSha256": "92fe89b086867bb44aa13cac0dfe82764f01468efb512f5f356916fa5ed22511",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "pinnedRef": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "file": "pitch-tactical-decision-production-adapter.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "43d1fad7ef5d6f4e9eaec52eda5e28d4198b1b16a46bfdcbc70144f6f286df97",
+      "pinnedNormalizedSha256": "43d1fad7ef5d6f4e9eaec52eda5e28d4198b1b16a46bfdcbc70144f6f286df97",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "pinnedRef": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "file": "pitcher-catcher-tactical-integration.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "cc6b8bab3c5e20ae7ec48801d71a0ced9d9ffaeb05cf06b8143667e89663aff2",
+      "pinnedNormalizedSha256": "cc6b8bab3c5e20ae7ec48801d71a0ced9d9ffaeb05cf06b8143667e89663aff2",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "pinnedRef": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "file": "offensive-plate-approach.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "426538ad6f3d4b4257e0114549724e691cf4eab3f3546686896f972cebfd093a",
+      "pinnedNormalizedSha256": "426538ad6f3d4b4257e0114549724e691cf4eab3f3546686896f972cebfd093a",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "pinnedRef": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "file": "plate-decision-foundation.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "cfe502bf820761f5d0156a773dd2f3d8dd61c940666e141dc2f8fb2b186c7304",
+      "pinnedNormalizedSha256": "cfe502bf820761f5d0156a773dd2f3d8dd61c940666e141dc2f8fb2b186c7304",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "pinnedRef": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "file": "pitch-sequencing.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+      "pinnedNormalizedSha256": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+      "normalizedBytesEqual": true,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "pinnedRef": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "file": "script.js",
+      "rule": "original Pitch function/constants/wiring scope",
+      "currentNormalizedSha256": "b3dc97ffe59b0f0534fc3a64af57adfbded353370fb8a36fba55fd0c6a9b487d",
+      "pinnedNormalizedSha256": "408dd3fe1485e839392265e6c47b6c1e3fd46d6681f8e650929ab49ed4ad59ea",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "PASS",
+      "error": null,
+      "details": {
+        "protectedFunctions": 95,
+        "topLevelDeclarations": true,
+        "externalWiring": true
+      },
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "pinnedRef": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "file": "save.js",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "9a3a1013cd8451979785f118b1e43fde65d10d71ff507ae8626c771bff3287a7",
+      "pinnedNormalizedSha256": "d093c730a4082a05050476a110553204e5234d72596b3cb449423f56566fe592",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "FAIL",
+      "error": {
+        "name": "AssertionError",
+        "message": "save.js"
+      },
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    },
+    {
+      "suite": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "pinnedRef": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "file": "index.html",
+      "rule": "complete normalized source equality",
+      "currentNormalizedSha256": "3cc11be5c8a52bba7d22a4faa9f809c27f6130a385dc5fe61258f8d0d1d8f2df",
+      "pinnedNormalizedSha256": "01a1267379d1732437452e44f1eb49ac49a3a9565ee9f3dda820b906c498d71b",
+      "normalizedBytesEqual": false,
+      "comparisonVerdict": "FAIL",
+      "error": {
+        "name": "AssertionError",
+        "message": "index.html"
+      },
+      "details": null,
+      "scope": "read-only individual source comparison; does not establish a complete suite verdict"
+    }
+  ],
+  "catalogue": [
+    {
+      "file": "tests/pitch-sequence-state-production-integration-test.js",
+      "kind": "program-source freeze",
+      "refs": {
+        "tests/pitch-sequence-state-production-integration-test.js": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+        "tests/pitch-tactical-decision-production-integration-test.js": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+        "tests/pitch-tactical-interpretation-production-integration-test.js": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+        "tests/pitch-tactical-decision-production-adapter-integration-test.js": "9b9546f94a7286afef474be634fd93c57eb455db",
+        "tests/pitch-tactical-intent-evidence-integration-test.js": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+        "tests/pitch-tactical-signal-projection-production-integration-test.js": "674e49115a9ed7d67c69a3023b5a594d41fe584c"
+      },
+      "scope": "See exact per-source comparisons; full equality except original scoped branches and R6 Save exception",
+      "disposition": "Pitch/RNG/ownership protection remains valid; five full-Save clauses conflict with the authorized owner delta. Separate contract review required; no automatic waiver."
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-integration-test.js",
+      "kind": "program-source freeze",
+      "refs": {
+        "tests/pitch-sequence-state-production-integration-test.js": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+        "tests/pitch-tactical-decision-production-integration-test.js": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+        "tests/pitch-tactical-interpretation-production-integration-test.js": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+        "tests/pitch-tactical-decision-production-adapter-integration-test.js": "9b9546f94a7286afef474be634fd93c57eb455db",
+        "tests/pitch-tactical-intent-evidence-integration-test.js": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+        "tests/pitch-tactical-signal-projection-production-integration-test.js": "674e49115a9ed7d67c69a3023b5a594d41fe584c"
+      },
+      "scope": "See exact per-source comparisons; full equality except original scoped branches and R6 Save exception",
+      "disposition": "Pitch/RNG/ownership protection remains valid; five full-Save clauses conflict with the authorized owner delta. Separate contract review required; no automatic waiver."
+    },
+    {
+      "file": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "kind": "program-source freeze",
+      "refs": {
+        "tests/pitch-sequence-state-production-integration-test.js": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+        "tests/pitch-tactical-decision-production-integration-test.js": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+        "tests/pitch-tactical-interpretation-production-integration-test.js": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+        "tests/pitch-tactical-decision-production-adapter-integration-test.js": "9b9546f94a7286afef474be634fd93c57eb455db",
+        "tests/pitch-tactical-intent-evidence-integration-test.js": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+        "tests/pitch-tactical-signal-projection-production-integration-test.js": "674e49115a9ed7d67c69a3023b5a594d41fe584c"
+      },
+      "scope": "See exact per-source comparisons; full equality except original scoped branches and R6 Save exception",
+      "disposition": "Pitch/RNG/ownership protection remains valid; five full-Save clauses conflict with the authorized owner delta. Separate contract review required; no automatic waiver."
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "kind": "program-source freeze",
+      "refs": {
+        "tests/pitch-sequence-state-production-integration-test.js": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+        "tests/pitch-tactical-decision-production-integration-test.js": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+        "tests/pitch-tactical-interpretation-production-integration-test.js": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+        "tests/pitch-tactical-decision-production-adapter-integration-test.js": "9b9546f94a7286afef474be634fd93c57eb455db",
+        "tests/pitch-tactical-intent-evidence-integration-test.js": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+        "tests/pitch-tactical-signal-projection-production-integration-test.js": "674e49115a9ed7d67c69a3023b5a594d41fe584c"
+      },
+      "scope": "See exact per-source comparisons; full equality except original scoped branches and R6 Save exception",
+      "disposition": "Pitch/RNG/ownership protection remains valid; five full-Save clauses conflict with the authorized owner delta. Separate contract review required; no automatic waiver."
+    },
+    {
+      "file": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "kind": "program-source freeze",
+      "refs": {
+        "tests/pitch-sequence-state-production-integration-test.js": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+        "tests/pitch-tactical-decision-production-integration-test.js": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+        "tests/pitch-tactical-interpretation-production-integration-test.js": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+        "tests/pitch-tactical-decision-production-adapter-integration-test.js": "9b9546f94a7286afef474be634fd93c57eb455db",
+        "tests/pitch-tactical-intent-evidence-integration-test.js": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+        "tests/pitch-tactical-signal-projection-production-integration-test.js": "674e49115a9ed7d67c69a3023b5a594d41fe584c"
+      },
+      "scope": "See exact per-source comparisons; full equality except original scoped branches and R6 Save exception",
+      "disposition": "Pitch/RNG/ownership protection remains valid; five full-Save clauses conflict with the authorized owner delta. Separate contract review required; no automatic waiver."
+    },
+    {
+      "file": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "kind": "program-source freeze",
+      "refs": {
+        "tests/pitch-sequence-state-production-integration-test.js": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+        "tests/pitch-tactical-decision-production-integration-test.js": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+        "tests/pitch-tactical-interpretation-production-integration-test.js": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+        "tests/pitch-tactical-decision-production-adapter-integration-test.js": "9b9546f94a7286afef474be634fd93c57eb455db",
+        "tests/pitch-tactical-intent-evidence-integration-test.js": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+        "tests/pitch-tactical-signal-projection-production-integration-test.js": "674e49115a9ed7d67c69a3023b5a594d41fe584c"
+      },
+      "scope": "See exact per-source comparisons; full equality except original scoped branches and R6 Save exception",
+      "disposition": "Pitch/RNG/ownership protection remains valid; five full-Save clauses conflict with the authorized owner delta. Separate contract review required; no automatic waiver."
+    },
+    {
+      "file": "tests/contextual-status-panel-test.js",
+      "kind": "function/call-count preservation",
+      "refs": [
+        "HEAD"
+      ],
+      "scope": "setChoiceTransitionState full function equality; updateStatus/showStory call counts; current presentation structure checks",
+      "disposition": "Valid presentation non-interference scope; moving HEAD baseline and implicit Git buffer make invocation context material."
+    },
+    {
+      "file": "tests/outcome-transition-hierarchy-test.js",
+      "kind": "call-count preservation",
+      "refs": [
+        "HEAD"
+      ],
+      "scope": "showStory/updateStatus call counts, renderer structure and schema exclusions; not complete script equality",
+      "disposition": "Valid bounded presentation protection; implicit Git buffer fails in direct mode."
+    },
+    {
+      "file": "tests/ground-settlement-handoff-r2-production-integration-test.js",
+      "kind": "function/region equality",
+      "refs": [
+        "f1cc66b"
+      ],
+      "scope": "exact getHighSchoolPitcherRuntimeInput region; separate legacy diagnostic extract",
+      "disposition": "Valid protected pitcher scope, unrelated to Save delegation."
+    },
+    {
+      "file": "tests/high-school-relationship-recency-production-integration-test.js",
+      "kind": "complete normalized program equality",
+      "refs": [
+        "1bde29b"
+      ],
+      "scope": "six opportunity/evidence owners and temporal-authority file; Save explicitly absent from freeze",
+      "disposition": "Valid domain ownership; persistence behavior tested separately."
+    },
+    {
+      "file": "tests/high-school-relationship-temporal-authority-production-integration-test.js",
+      "kind": "complete normalized program equality",
+      "refs": [
+        "f300b2f"
+      ],
+      "scope": "six opportunity/evidence owners; Save explicitly absent from freeze",
+      "disposition": "Valid domain ownership; not a remaining full Save freeze."
+    },
+    {
+      "file": "tests/pitch-production-source-scope-test.js",
+      "kind": "scoped function/constants/wiring equality",
+      "refs": [
+        "9b9546f94a7286afef474be634fd93c57eb455db",
+        "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+        "674e49115a9ed7d67c69a3023b5a594d41fe584c"
+      ],
+      "scope": "original 95 protected functions, globals, external wiring and exact approved defensive additions",
+      "disposition": "Valid scoped authority; preserve original helper and mutation rejection."
+    },
+    {
+      "file": "tests/infield-scorer-recovery-integrity-repair-test.js",
+      "kind": "scoped function/constants/wiring equality",
+      "refs": [
+        "9b9546f94a7286afef474be634fd93c57eb455db",
+        "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+        "674e49115a9ed7d67c69a3023b5a594d41fe584c"
+      ],
+      "scope": "original 95 protected functions, globals, external wiring and exact approved defensive additions",
+      "disposition": "Valid scoped authority; preserve original helper and mutation rejection."
+    },
+    {
+      "file": "tests/pitch-tactical-selector-equivalence-test.js",
+      "kind": "exact source extraction",
+      "refs": [
+        "9b9546f94a7286afef474be634fd93c57eb455db"
+      ],
+      "scope": "tactical selector helper-only extraction plus output equivalence",
+      "disposition": "Valid original narrow exception; does not authorize Save changes."
+    },
+    {
+      "file": "tests/relationship-feasibility-production-scope-test.js",
+      "kind": "owner-scoped source equality",
+      "refs": [
+        "758e963"
+      ],
+      "scope": "seven complete domain sources; Save compares nine unique original persistence operation lines, not whole Save",
+      "disposition": "Valid narrow persistence responsibility. Actual suite result remains separate from static compatibility."
+    },
+    {
+      "file": "tests/high-school-relationship-recency-reputation-feasibility-production-integration-test.js",
+      "kind": "owner-scoped source equality",
+      "refs": [
+        "758e963"
+      ],
+      "scope": "seven complete domain sources; Save compares nine unique original persistence operation lines, not whole Save",
+      "disposition": "Valid narrow persistence responsibility. Actual suite result remains separate from static compatibility."
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs",
+      "kind": "normalized source hash + exact owner delta",
+      "refs": [
+        "a0e512b439446990d8df118e3e7d737b9f2f51d3"
+      ],
+      "scope": "original Save normalized hash, three exact patches and reviewed Source adapter hash; positive/negative mutation checks",
+      "disposition": "Valid authorized contract v1; no new permission granted to other test files."
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs",
+      "kind": "fixture/helper source equality",
+      "refs": [
+        "32ee5ec55e4791952a9ef5d68c126389ab1e1ff6"
+      ],
+      "scope": "immutable career helper and first-base fixture compared before production observation",
+      "disposition": "Valid fixture protection; not production Save freeze. Full suite current result UNVERIFIED in selected captures."
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-9-legacy-comparison.cjs",
+      "kind": "fixture/helper source equality",
+      "refs": [
+        "32ee5ec55e4791952a9ef5d68c126389ab1e1ff6"
+      ],
+      "scope": "immutable career helper and first-base fixture compared before production observation",
+      "disposition": "Valid fixture protection; not production Save freeze. Full suite current result UNVERIFIED in selected captures."
+    },
+    {
+      "file": "tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+      "kind": "fixture/helper source equality via harness",
+      "refs": [
+        "ab3117653945de0b7013636187c446276a96e634"
+      ],
+      "scope": "original helper/first-base definitions equality; current/baseline VM roots isolated",
+      "disposition": "Valid fixture non-interference; no whole current Production equality requirement."
+    },
+    {
+      "file": "tests/receiver-execution-v2-production-source-timing-test.cjs",
+      "kind": "fixture/helper source equality via harness",
+      "refs": [
+        "ab3117653945de0b7013636187c446276a96e634"
+      ],
+      "scope": "original helper/first-base definitions equality; current/baseline VM roots isolated",
+      "disposition": "Valid fixture non-interference; no whole current Production equality requirement."
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs",
+      "kind": "fixture/helper source equality via harness",
+      "refs": [
+        "ab3117653945de0b7013636187c446276a96e634"
+      ],
+      "scope": "original helper/first-base definitions equality; current/baseline VM roots isolated",
+      "disposition": "Valid fixture non-interference; no whole current Production equality requirement."
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+      "kind": "fixture/helper source equality via harness",
+      "refs": [
+        "ab3117653945de0b7013636187c446276a96e634"
+      ],
+      "scope": "original helper/first-base definitions equality; current/baseline VM roots isolated",
+      "disposition": "Valid fixture non-interference; no whole current Production equality requirement."
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs",
+      "kind": "fixture/helper source equality via harness",
+      "refs": [
+        "ab3117653945de0b7013636187c446276a96e634"
+      ],
+      "scope": "original helper/first-base definitions equality; current/baseline VM roots isolated",
+      "disposition": "Valid fixture non-interference; no whole current Production equality requirement."
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs",
+      "kind": "fixture/helper source equality via harness",
+      "refs": [
+        "ab3117653945de0b7013636187c446276a96e634"
+      ],
+      "scope": "original helper/first-base definitions equality; current/baseline VM roots isolated",
+      "disposition": "Valid fixture non-interference; no whole current Production equality requirement."
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs",
+      "kind": "fixture/helper source equality via harness",
+      "refs": [
+        "ab3117653945de0b7013636187c446276a96e634"
+      ],
+      "scope": "original helper/first-base definitions equality; current/baseline VM roots isolated",
+      "disposition": "Valid fixture non-interference; no whole current Production equality requirement."
+    },
+    {
+      "file": "tests/career-development-progression-test.js",
+      "kind": "working-tree scope guard",
+      "refs": [
+        "HEAD / Git index"
+      ],
+      "scope": "git diff --name-only restricted architecture paths; current source/schema token constraints",
+      "disposition": "Useful change-scope guard, not complete program freeze. Passing depends on working tree/index and applicable ownership epoch."
+    },
+    {
+      "file": "tests/career-development-runtime-resolver-test.js",
+      "kind": "working-tree scope guard",
+      "refs": [
+        "HEAD / Git index"
+      ],
+      "scope": "git diff --name-only restricted architecture paths; current source/schema token constraints",
+      "disposition": "Useful change-scope guard, not complete program freeze. Passing depends on working tree/index and applicable ownership epoch."
+    },
+    {
+      "file": "tests/career-network-contract-test.js",
+      "kind": "working-tree scope guard",
+      "refs": [
+        "HEAD / Git index"
+      ],
+      "scope": "git diff --name-only restricted architecture paths; current source/schema token constraints",
+      "disposition": "Useful change-scope guard, not complete program freeze. Passing depends on working tree/index and applicable ownership epoch."
+    },
+    {
+      "file": "tests/career-spine-contract-test.js",
+      "kind": "working-tree scope guard",
+      "refs": [
+        "HEAD / Git index"
+      ],
+      "scope": "git diff --name-only restricted architecture paths; current source/schema token constraints",
+      "disposition": "Useful change-scope guard, not complete program freeze. Passing depends on working tree/index and applicable ownership epoch."
+    },
+    {
+      "file": "tests/career-transition-commit-test.js",
+      "kind": "working-tree scope guard",
+      "refs": [
+        "HEAD / Git index"
+      ],
+      "scope": "git diff --name-only restricted architecture paths; current source/schema token constraints",
+      "disposition": "Useful change-scope guard, not complete program freeze. Passing depends on working tree/index and applicable ownership epoch."
+    },
+    {
+      "file": "tests/career-transition-progression-test.js",
+      "kind": "working-tree scope guard",
+      "refs": [
+        "HEAD / Git index"
+      ],
+      "scope": "git diff --name-only restricted architecture paths; current source/schema token constraints",
+      "disposition": "Useful change-scope guard, not complete program freeze. Passing depends on working tree/index and applicable ownership epoch."
+    },
+    {
+      "file": "tests/career-transition-resolver-test.js",
+      "kind": "working-tree scope guard",
+      "refs": [
+        "HEAD / Git index"
+      ],
+      "scope": "git diff --name-only restricted architecture paths; current source/schema token constraints",
+      "disposition": "Useful change-scope guard, not complete program freeze. Passing depends on working tree/index and applicable ownership epoch."
+    },
+    {
+      "file": "tests/career-transition-runtime-resolver-test.js",
+      "kind": "working-tree scope guard",
+      "refs": [
+        "HEAD / Git index"
+      ],
+      "scope": "git diff --name-only restricted architecture paths; current source/schema token constraints",
+      "disposition": "Useful change-scope guard, not complete program freeze. Passing depends on working tree/index and applicable ownership epoch."
+    },
+    {
+      "file": "tests/responsive-accessibility-pass-test.js",
+      "kind": "working-tree scope guard",
+      "refs": [
+        "HEAD / Git index"
+      ],
+      "scope": "git diff --name-only restricted architecture paths; current source/schema token constraints",
+      "disposition": "Useful change-scope guard, not complete program freeze. Passing depends on working tree/index and applicable ownership epoch."
+    },
+    {
+      "file": "tests/ground-defensive-decision-identity-repair-test.js",
+      "kind": "historical program behavior replay",
+      "refs": [
+        "156218b",
+        "5937fe5",
+        "10c738ce380c2cfd8cce6cb796b3a1b577e437dd",
+        "f16 / exact-baseline mode"
+      ],
+      "scope": "Git source is evaluated for original function/model output comparison; not arbitrary whole current-source equality",
+      "disposition": "Keep semantic replay separate from source-freeze verdict; archive object availability and explicit buffers required."
+    },
+    {
+      "file": "tests/pitch-velocity-baseline-extraction-test.js",
+      "kind": "historical program behavior replay",
+      "refs": [
+        "156218b",
+        "5937fe5",
+        "10c738ce380c2cfd8cce6cb796b3a1b577e437dd",
+        "f16 / exact-baseline mode"
+      ],
+      "scope": "Git source is evaluated for original function/model output comparison; not arbitrary whole current-source equality",
+      "disposition": "Keep semantic replay separate from source-freeze verdict; archive object availability and explicit buffers required."
+    },
+    {
+      "file": "tests/receiver-execution-v2-2-contract-test.cjs",
+      "kind": "historical program behavior replay",
+      "refs": [
+        "156218b",
+        "5937fe5",
+        "10c738ce380c2cfd8cce6cb796b3a1b577e437dd",
+        "f16 / exact-baseline mode"
+      ],
+      "scope": "Git source is evaluated for original function/model output comparison; not arbitrary whole current-source equality",
+      "disposition": "Keep semantic replay separate from source-freeze verdict; archive object availability and explicit buffers required."
+    },
+    {
+      "file": "tests/infield-legacy-receiver-model-foundation-test.js",
+      "kind": "historical program behavior replay",
+      "refs": [
+        "156218b",
+        "5937fe5",
+        "10c738ce380c2cfd8cce6cb796b3a1b577e437dd",
+        "f16 / exact-baseline mode"
+      ],
+      "scope": "Git source is evaluated for original function/model output comparison; not arbitrary whole current-source equality",
+      "disposition": "Keep semantic replay separate from source-freeze verdict; archive object availability and explicit buffers required."
+    }
+  ],
+  "reviewedPaths": [
+    "index.html",
+    "offensive-plate-approach.js",
+    "pitch-observation-foundation.js",
+    "pitch-sequence-state-foundation.js",
+    "pitch-sequencing.js",
+    "pitch-tactical-decision-foundation.js",
+    "pitch-tactical-decision-production-adapter.js",
+    "pitch-tactical-interpretation-foundation.js",
+    "pitcher-catcher-tactical-integration.js",
+    "plate-decision-foundation.js",
+    "save.js",
+    "script.js",
+    "tests/career-development-progression-test.js",
+    "tests/career-development-runtime-resolver-test.js",
+    "tests/career-network-contract-test.js",
+    "tests/career-spine-contract-test.js",
+    "tests/career-transition-commit-test.js",
+    "tests/career-transition-progression-test.js",
+    "tests/career-transition-resolver-test.js",
+    "tests/career-transition-runtime-resolver-test.js",
+    "tests/contextual-status-panel-test.js",
+    "tests/ground-defensive-decision-identity-repair-test.js",
+    "tests/ground-settlement-handoff-r2-context.cjs",
+    "tests/ground-settlement-handoff-r2-production-integration-test.js",
+    "tests/high-school-relationship-recency-production-integration-test.js",
+    "tests/high-school-relationship-recency-reputation-feasibility-production-integration-test.js",
+    "tests/high-school-relationship-temporal-authority-production-integration-test.js",
+    "tests/infield-legacy-receiver-model-foundation-test.js",
+    "tests/infield-scorer-recovery-integrity-repair-test.js",
+    "tests/outcome-transition-hierarchy-test.js",
+    "tests/pitch-production-source-scope-test.js",
+    "tests/pitch-production-source-scope.cjs",
+    "tests/pitch-sequence-state-production-integration-test.js",
+    "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+    "tests/pitch-tactical-decision-production-integration-test.js",
+    "tests/pitch-tactical-intent-evidence-integration-test.js",
+    "tests/pitch-tactical-interpretation-production-integration-test.js",
+    "tests/pitch-tactical-selector-equivalence-test.js",
+    "tests/pitch-tactical-selector-extraction-baseline.cjs",
+    "tests/pitch-tactical-signal-projection-production-integration-test.js",
+    "tests/pitch-velocity-baseline-extraction-test.js",
+    "tests/receiver-execution-v2-2-contract-test.cjs",
+    "tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+    "tests/receiver-execution-v2-production-source-timing-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-harness.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs",
+    "tests/receiver-execution-v2-sprint-9-legacy-comparison.cjs",
+    "tests/receiver-source-save-authorized-delta.cjs",
+    "tests/relationship-feasibility-production-scope-test.js",
+    "tests/relationship-feasibility-production-scope.cjs",
+    "tests/responsive-accessibility-pass-test.js"
+  ],
+  "literalScan": [
+    {
+      "file": "tests/ability-performance-observability-extension.cjs",
+      "lines": [
+        {
+          "line": 145,
+          "text": "  const hashes=Object.fromEntries(sourceArtifacts.map(file=>[file,crypto.createHash('sha256').update(fs.readFileSync(path.join(root,file))).digest('hex')]));"
+        }
+      ]
+    },
+    {
+      "file": "tests/career-development-progression-test.js",
+      "lines": [
+        {
+          "line": 391,
+          "text": "const protectedDiff = execFileSync(\"git\", [\"diff\", \"--name-only\", \"HEAD\", \"--\", ...protectedFiles], {"
+        }
+      ]
+    },
+    {
+      "file": "tests/career-development-runtime-resolver-test.js",
+      "lines": [
+        {
+          "line": 356,
+          "text": "const protectedDiff = execFileSync(\"git\", ["
+        }
+      ]
+    },
+    {
+      "file": "tests/career-network-contract-test.js",
+      "lines": [
+        {
+          "line": 325,
+          "text": "const forbiddenDiff = execFileSync(\"git\", ["
+        }
+      ]
+    },
+    {
+      "file": "tests/career-spine-contract-test.js",
+      "lines": [
+        {
+          "line": 275,
+          "text": "const forbiddenArchitectureDiff = execFileSync(\"git\", [\"diff\", \"--name-only\", \"--\", \"current-state-boundary.js\", \"decision-flow.js\", \"time-boundary.js\"], { cwd: root, encoding: \"utf8\" }).trim();"
+        }
+      ]
+    },
+    {
+      "file": "tests/career-transition-commit-test.js",
+      "lines": [
+        {
+          "line": 212,
+          "text": "const protectedDiff = execFileSync(\"git\", ["
+        }
+      ]
+    },
+    {
+      "file": "tests/career-transition-progression-test.js",
+      "lines": [
+        {
+          "line": 329,
+          "text": "const protectedDiff = execFileSync(\"git\", [\"diff\", \"--name-only\", \"HEAD\", \"--\", ...protectedFiles], {"
+        }
+      ]
+    },
+    {
+      "file": "tests/career-transition-resolver-test.js",
+      "lines": [
+        {
+          "line": 122,
+          "text": "const forbiddenDiff = execFileSync(\"git\", ["
+        }
+      ]
+    },
+    {
+      "file": "tests/career-transition-runtime-resolver-test.js",
+      "lines": [
+        {
+          "line": 285,
+          "text": "const protectedDiff = execFileSync(\"git\", ["
+        }
+      ]
+    },
+    {
+      "file": "tests/contextual-status-panel-test.js",
+      "lines": [
+        {
+          "line": 93,
+          "text": "function functionSource(source, name) {"
+        },
+        {
+          "line": 111,
+          "text": "const baselineScript = normalizeSourceNewlines(execFileSync(\"git\", [\"show\", \"HEAD:script.js\"], { cwd: root, encoding: \"utf8\" }));"
+        },
+        {
+          "line": 175,
+          "text": "verify(\"35. 選項鎖定契約不變\", functionSource(script, \"setChoiceTransitionState\") === functionSource(baselineScript, \"setChoiceTransitionState\"));"
+        }
+      ]
+    },
+    {
+      "file": "tests/ground-defensive-decision-identity-repair-test.js",
+      "lines": [
+        {
+          "line": 22,
+          "text": "  const source = cp.execFileSync('git', ['show', '156218b:script.js'], { encoding: 'utf8', maxBuffer: 8e6 }).replace(/\\r\\n?/g, '\\n');"
+        }
+      ]
+    },
+    {
+      "file": "tests/ground-settlement-handoff-r2-context.cjs",
+      "lines": [
+        {
+          "line": 5,
+          "text": "    const source = require('child_process').execFileSync('git', ['show', 'f1cc66b:script.js'], { encoding: 'utf8', maxBuffer: 8e6 }).replace(/\\r\\n?/g, '\\n');"
+        }
+      ]
+    },
+    {
+      "file": "tests/ground-settlement-handoff-r2-production-integration-test.js",
+      "lines": [
+        {
+          "line": 112,
+          "text": "  const source=cp.execFileSync('git',['show','f1cc66b:script.js'],{encoding:'utf8',maxBuffer:8e6}).replace(/\\r\\n?/g,'\\n');"
+        },
+        {
+          "line": 122,
+          "text": "  const sources=[cp.execFileSync('git',['show','f1cc66b:script.js'],{encoding:'utf8',maxBuffer:8e6}),fs.readFileSync('script.js','utf8')].map(s=>s.replace(/\\r\\n?/g,'\\n'));"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-friendly-invitation-producer-foundation-test.js",
+      "lines": [
+        {
+          "line": 23,
+          "text": "test(\"shared training produces friendly not camp\",()=>{const r=derive(add(fixture(),\"sharedTrainingContext\"));assert(r.eligible.every(s=>s.sourceType===\"sharedTrainingContact\"&&s.opportunityType.endsWith(\"FriendlyInvitation\")));});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-friendly-invitation-producer-production-integration-test.js",
+      "lines": [
+        {
+          "line": 61,
+          "text": "test(\"19 real training contact never creates camp opportunity\",()=>{run('prior=priorExchange(\"trainingCampOpportunity\");sources=sourceResult();');assert(run('sources.eligible.some(s=>s.sourceType===\"sharedTrainingContact\")'));assert(!run('sources.sources.some(s=>s.opportunityType===\"trainingCampOpportunity\")'));});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-opportunity-probability-calibration-audit.cjs",
+      "lines": [
+        {
+          "line": 57,
+          "text": "  for(const [k,d] of Object.entries(sources)){d.availabilityShare=k===\"mandatory\"?null:ratio(d.eligible,eligibleTotal);d.selectionShare=k===\"mandatory\"?null:ratio(d.selected,optional);d.admittedShare=ratio(d.admitted,admittedTotal);d.exposureRatio=d.availabilityShare?d.selectionShare/d.availabilityShare:null;d.selectionRate=ratio(d.selected,d.eligible);}"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-opportunity-probability-production-integration-test.js",
+      "lines": [
+        {
+          "line": 26,
+          "text": "test(\"18 canonical return source maps to three in shared pool\",()=>{assert.strictEqual(run('HighSchoolOpportunityProbability.deriveProbabilityProfile(candidates.eligible.find(c=>c.sourceProvenance.producerType===\"returnVisitProducer\"),r.context).baseWeight'),3);});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-relationship-recency-production-integration-test.js",
+      "lines": [
+        {
+          "line": 122,
+          "text": "test('selection probability producer and evidence source files unchanged',()=>{for(const f of ['high-school-opportunity-selection.js','high-school-opportunity-probability.js','high-school-friendly-invitation-producer.js','high-school-training-camp-producer.js','high-school-exchange-network.js','high-school-competition-evidence.js'])assert.strictEqual(fs.readFileSync(f,'utf8').replace(/\\r\\n?/g,'\\n'),cp.execFileSync('git',['show','1bde29b:'+f],{encoding:'utf8'}).replace(/\\r\\n?/g,'\\n'));});"
+        },
+        {
+          "line": 142,
+          "text": "test('temporal authority itself unchanged',()=>assert.strictEqual(fs.readFileSync('high-school-relationship-temporal-authority.js','utf8').replace(/\\r\\n?/g,'\\n'),cp.execFileSync('git',['show','1bde29b:high-school-relationship-temporal-authority.js'],{encoding:'utf8'}).replace(/\\r\\n?/g,'\\n')));"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-relationship-recency-reputation-feasibility-production-integration-test.js",
+      "lines": [
+        {
+          "line": 43,
+          "text": "test('shared training source traces to completed camp and candidate refs',()=>{const x=lineage[2],e=x.ledger.evidence.find(e=>e.evidenceType==='sharedTrainingContext');assert(e&&e.completed);assert(x.camp.sources.some(s=>s.sourceType==='sharedTrainingContextCamp'&&s.evidenceRefs.includes(e.evidenceId)));});"
+        },
+        {
+          "line": 53,
+          "text": "test('audited opportunity relationship and persistence sources retain their contract',()=>Scope.assertWorkingTree());"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-relationship-temporal-authority-production-integration-test.js",
+      "lines": [
+        {
+          "line": 126,
+          "text": "test('selection probability producer and evidence source files unchanged',()=>{for(const f of ['high-school-opportunity-selection.js','high-school-opportunity-probability.js','high-school-friendly-invitation-producer.js','high-school-training-camp-producer.js','high-school-exchange-network.js','high-school-competition-evidence.js'])assert.strictEqual(fs.readFileSync(f,'utf8').replace(/\\r\\n?/g,'\\n'),cp.execFileSync('git',['show','f300b2f:'+f],{encoding:'utf8'}).replace(/\\r\\n?/g,'\\n'));});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-training-camp-producer-foundation-test.js",
+      "lines": [
+        {
+          "line": 17,
+          "text": "test(\"shared training source\",()=>assert.strictEqual(derive(add(fixture(),\"sharedTrainingContext\")).sources[0].sourceType,\"sharedTrainingContextCamp\"));"
+        },
+        {
+          "line": 34,
+          "text": "test(\"shared training precedes coach\",()=>{const r=derive(coach(add(fixture(),\"sharedTrainingContext\"),\"knownCounterpart\"));assert.strictEqual(r.sources[0].sourceType,\"sharedTrainingContextCamp\");});"
+        }
+      ]
+    },
+    {
+      "file": "tests/high-school-training-camp-producer-production-integration-test.js",
+      "lines": [
+        {
+          "line": 56,
+          "text": "test(\"6 real shared training completion auto-produces camp\",()=>{run('campPlans=[];prior=priorExchange(\"trainingCampOpportunity\");result=camps();candidate=campCandidate();');assert.strictEqual(run(\"result.sources[0].sourceType\"),\"sharedTrainingContextCamp\");assert(run(\"Boolean(candidate)\"));assert.strictEqual(run(\"result.sources[0].provenance.originCareerYears[0]\"),1);});"
+        },
+        {
+          "line": 71,
+          "text": "test(\"21 future scope can derive camp and friendly feedback\",()=>{run('completedInput.context.sequence=2;var later=HighSchoolTrainingCampSource.deriveTrainingCampSources(completedInput);var laterFriendly=HighSchoolFriendlyInvitationSource.deriveFriendlyInvitationSources(completedInput);');assert(run(\"later.eligible.length>0\"));assert(run('laterFriendly.eligible.some(s=>s.sourceType===\"sharedTrainingContact\")'));});"
+        }
+      ]
+    },
+    {
+      "file": "tests/infield-legacy-receiver-model-foundation-test.js",
+      "lines": [
+        {
+          "line": 13,
+          "text": "  const git = args => cp.execFileSync('git', args, { cwd: root, maxBuffer: 30e6, windowsHide: true, encoding: 'utf8' });"
+        }
+      ]
+    },
+    {
+      "file": "tests/infield-legacy-receiver-scorer-closeout-test.js",
+      "lines": [
+        {
+          "line": 123,
+          "text": "if(flag){const out=path.join(root,'docs','infield-scorer-recovery-sprint-5-l03-'+flag+'-evidence.json');assert(!fs.existsSync(out),'L03 evidence is immutable');fs.writeFileSync(out,JSON.stringify({capturedAt:new Date().toISOString(),baseline:'f16a7f7b2263681788f3846c2e83fbb6f8b0bc53',sourceMode:flag.startsWith('red')?'Sprint 5 pre-closeout worktree':'Current Production with unchanged authoritative execution',testSource:fs.readFileSync(__filename,'utf8'),testSourceSha256:sha(fs.readFileSync(__filename)),original79TestSha256:sha(original),summary:{passed,failed,total:passed+failed},results,rows,redClassification:'Missing source contract and unconnected saved legacy window; not invented ordinary-effort or potential-out facts'},null,2)+'\\n');}"
+        }
+      ]
+    },
+    {
+      "file": "tests/infield-scorer-recovery-integrity-repair-test.js",
+      "lines": [
+        {
+          "line": 16,
+          "text": "const git = args => cp.execFileSync('git', args, {cwd:root,windowsHide:true,encoding:'utf8',maxBuffer:30e6}).trimEnd();"
+        },
+        {
+          "line": 19,
+          "text": "const exactSources = exactBaseline ? Object.fromEntries(git(['ls-tree','--name-only',baseline]).split(/\\r?\\n/).filter(file=>file.endsWith('.js')).map(file=>[path.join(root,file),cp.execFileSync('git',['show',baseline+':'+file],{cwd:root,windowsHide:true,encoding:'utf8',maxBuffer:30e6})])) : {};"
+        },
+        {
+          "line": 183,
+          "text": "    const {assertPitchProductionSourceScope}=require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 186,
+          "text": "    assertPitchProductionSourceScope(current,old);"
+        },
+        {
+          "line": 189,
+          "text": "      assert.throws(()=>assertPitchProductionSourceScope(mutated,old));"
+        },
+        {
+          "line": 407,
+          "text": "    testSourceHash:sha(ownSource),productionSourceHashes:Object.fromEntries(productionFiles.map(file=>[file,sha(fs.readFileSync(path.join(root,file)))])),"
+        },
+        {
+          "line": 413,
+          "text": "  const evidence={baseline,capturedAt:new Date().toISOString(),command:'node tests/infield-scorer-recovery-integrity-repair-test.js --capture-red',sourceMode:'git show exact f16 root Production JS compiled in memory; unchanged original test fixtures',testSourceHash:sha(ownSource),testSource:ownSource,productionSourceHashes:Object.fromEntries(Object.entries(exactSources).map(([file,source])=>[path.relative(root,file).replace(/\\\\/g,'/'),sha(source)])),summary:{passed,failed,total:passed+failed},results,snapshots,classificationNotes:{confirmed:'Expected formal scorer / route-copy behavior fails on baseline.',missingContract:'Isolated declared extra advancement and explicit legacy insufficiency require a scorer contract; no invented actual retirement.',valid:'Existing legal action / same-state / ownership behavior stays true.'}};"
+        }
+      ]
+    },
+    {
+      "file": "tests/match-simulation-outcome-mapping-audit.cjs",
+      "lines": [
+        {
+          "line": 10,
+          "text": "function reference(file,name){const s=source(file),token=`function ${name}(`,offset=s.indexOf(token);assert(offset>=0,token);return {module:file,function:name,line:s.slice(0,offset).split('\\n').length,sourceHash:crypto.createHash('sha256').update(section(file,name)).digest('hex')};}"
+        }
+      ]
+    },
+    {
+      "file": "tests/match-simulation-outcome-mapping-test.js",
+      "lines": [
+        {
+          "line": 50,
+          "text": "  assert(result.ordinary.source.sourceHash);"
+        }
+      ]
+    },
+    {
+      "file": "tests/narrative-condition-flow-test.js",
+      "lines": [
+        {
+          "line": 28,
+          "text": "verify(\"正式宿敵 identity 為高橋\", /rivalName:\\s*\"高橋\"/.test(playerSource) && /rivalId:\\s*\"takahashi\"/.test(playerSource));"
+        }
+      ]
+    },
+    {
+      "file": "tests/outcome-transition-hierarchy-test.js",
+      "lines": [
+        {
+          "line": 147,
+          "text": "const baselineScript = execFileSync(\"git\", [\"show\", \"HEAD:script.js\"], { cwd: root, encoding: \"utf8\" });"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-production-source-scope-test.js",
+      "lines": [
+        {
+          "line": 3,
+          "text": "const { assertPitchProductionSourceScope, PROTECTED_FUNCTIONS, PROTECTED_GLOBALS, readSource } = require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 8,
+          "text": "const sources = references.map(ref => cp.execFileSync('git', ['show', ref + ':script.js'], {"
+        },
+        {
+          "line": 14,
+          "text": "  assert.throws(() => assertPitchProductionSourceScope(source, baseline)); rejected++;"
+        },
+        {
+          "line": 17,
+          "text": "  for (const source of sources) assert.equal(assertPitchProductionSourceScope(current, source).protectedFunctions, PROTECTED_FUNCTIONS.length);"
+        },
+        {
+          "line": 56,
+          "text": "  assertPitchProductionSourceScope(current + '\\nfunction defenseScopeProbe() { return \"defense-only\"; }\\n', sources[0]);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-production-source-scope.cjs",
+      "lines": [
+        {
+          "line": 207,
+          "text": "function assertPitchProductionSourceScope(currentText, baselineText) {"
+        },
+        {
+          "line": 218,
+          "text": "  if (!wiringBaseline) wiringBaseline = readSource(cp.execFileSync('git', ['show', SPRINT_BASELINE + ':script.js'], {"
+        },
+        {
+          "line": 224,
+          "text": "module.exports = { assertPitchProductionSourceScope, PROTECTED_FUNCTIONS, PROTECTED_GLOBALS, MODULE_SYMBOLS, SPRINT_BASELINE, readSource, normalize };"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-sequence-state-production-integration-test.js",
+      "lines": [
+        {
+          "line": 4,
+          "text": "const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 138,
+          "text": "    const baseline = cp.execFileSync('git', ['show', 'a0e512b439446990d8df118e3e7d737b9f2f51d3:' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\\r\\n?/g, '\\n');"
+        },
+        {
+          "line": 139,
+          "text": "    if (file === 'pitcher-catcher-tactical-integration.js') require('./pitch-tactical-selector-extraction-baseline.cjs').assertOnlyRepeatEligibilityExtraction(current, baseline);"
+        },
+        {
+          "line": 140,
+          "text": "    else if (file === 'save.js') require('./receiver-source-save-authorized-delta.cjs').assertReceiverSourceSaveAuthorizedDelta(current, baseline, fs.readFileSync(path.join(root, 'receiver-source-snapshot.js'), 'utf8'));"
+        },
+        {
+          "line": 141,
+          "text": "    else if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "lines": [
+        {
+          "line": 4,
+          "text": "const { BASELINE, assertOnlyRepeatEligibilityExtraction } = require('./pitch-tactical-selector-extraction-baseline.cjs');"
+        },
+        {
+          "line": 5,
+          "text": "const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 180,
+          "text": "      const baseline = cp.execFileSync('git', ['show', BASELINE + ':' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\\r\\n?/g, '\\n');"
+        },
+        {
+          "line": 181,
+          "text": "      if (file === 'pitcher-catcher-tactical-integration.js') assertOnlyRepeatEligibilityExtraction(current, baseline);"
+        },
+        {
+          "line": 182,
+          "text": "      else if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-integration-test.js",
+      "lines": [
+        {
+          "line": 4,
+          "text": "const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 166,
+          "text": "    const baseline = cp.execFileSync('git', ['show', 'ac53bf61964bde4b40501c77e15269bae99b55cc:' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\\r\\n?/g, '\\n');"
+        },
+        {
+          "line": 167,
+          "text": "    if (file === 'pitcher-catcher-tactical-integration.js') require('./pitch-tactical-selector-extraction-baseline.cjs').assertOnlyRepeatEligibilityExtraction(current, baseline);"
+        },
+        {
+          "line": 168,
+          "text": "    else if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "lines": [
+        {
+          "line": 7,
+          "text": "const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 215,
+          "text": "      const baseline = cp.execFileSync('git', ['show', BASELINE + ':' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\\r\\n?/g, '\\n');"
+        },
+        {
+          "line": 216,
+          "text": "      if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "lines": [
+        {
+          "line": 4,
+          "text": "const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 154,
+          "text": "    const baseline = cp.execFileSync('git', ['show', '98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7:' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\\r\\n?/g, '\\n');"
+        },
+        {
+          "line": 155,
+          "text": "    if (file === 'pitcher-catcher-tactical-integration.js') require('./pitch-tactical-selector-extraction-baseline.cjs').assertOnlyRepeatEligibilityExtraction(current, baseline);"
+        },
+        {
+          "line": 156,
+          "text": "    else if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-selector-equivalence-test.js",
+      "lines": [
+        {
+          "line": 4,
+          "text": "const { baselineSource, assertOnlyRepeatEligibilityExtraction, loadTactical, BASELINE } = require('./pitch-tactical-selector-extraction-baseline.cjs');"
+        },
+        {
+          "line": 10,
+          "text": "const baseline = loadTactical(originalSource, () => { baselineHashes++; }, randomTrap);"
+        },
+        {
+          "line": 11,
+          "text": "const extracted = loadTactical(currentSource, () => { currentHashes++; }, randomTrap);"
+        },
+        {
+          "line": 14,
+          "text": "  assertOnlyRepeatEligibilityExtraction(currentSource, originalSource);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-selector-extraction-baseline.cjs",
+      "lines": [
+        {
+          "line": 8,
+          "text": "  return normalize(cp.execFileSync('git', ['show', commit + ':pitcher-catcher-tactical-integration.js'], { cwd: root, encoding: 'utf8' }));"
+        },
+        {
+          "line": 12,
+          "text": "function assertOnlyRepeatEligibilityExtraction(current, baseline) {"
+        },
+        {
+          "line": 35,
+          "text": "function loadTactical(source, onHash = () => {}, onRandom = () => { throw Error('Production tactical Math.random'); }) {"
+        },
+        {
+          "line": 44,
+          "text": "module.exports = { BASELINE, baselineSource, assertOnlyRepeatEligibilityExtraction, loadTactical, normalize };"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "lines": [
+        {
+          "line": 7,
+          "text": "const { assertPitchProductionSourceScope } = require('./pitch-production-source-scope.cjs');"
+        },
+        {
+          "line": 266,
+          "text": "      const baseline = cp.execFileSync('git', ['show', BASELINE + ':' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\\r\\n?/g, '\\n');"
+        },
+        {
+          "line": 267,
+          "text": "      if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);"
+        }
+      ]
+    },
+    {
+      "file": "tests/pitch-velocity-baseline-extraction-test.js",
+      "lines": [
+        {
+          "line": 9,
+          "text": "const baseline = cp.execFileSync('git', ['show', '5937fe5:offensive-plate-approach.js'], { encoding: 'utf8', cwd: path.join(__dirname, '..') });"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-2-contract-test.cjs",
+      "lines": [
+        {
+          "line": 149,
+          "text": "  test(\"existing v2.1 result and vectors match baseline bytes in VM\", () => { const baseline = \"10c738ce380c2cfd8cce6cb796b3a1b577e437dd\", raw = cp.execFileSync(\"git\", [\"show\", baseline + \":receiver-execution-v2-foundation.js\"], { encoding: \"utf8\" }), c = vm.createContext({}); vm.runInContext(raw, c); const old = require(\"./receiver-execution-v2-pure-contract-test.cjs\").fixture(), saved = c.ReceiverExecutionV2Foundation; assert.equal(JSON.stringify(saved.execute(saved.seal(old))), JSON.stringify(Old.execute(Old.seal(old)))); assert.equal(JSON.stringify(saved.sampleVector(old.identity.physical, \"primaryThrow\")), JSON.stringify(Old.sampleVector(old.identity.physical, \"primaryThrow\"))); });"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs",
+      "lines": [
+        {
+          "line": 24,
+          "text": "const git = args => cp.execFileSync('git', args, {cwd:root,windowsHide:true,encoding:'utf8',maxBuffer:30e6});"
+        },
+        {
+          "line": 137,
+          "text": "    sourceSnapshotDigest:sha(JSON.stringify(w)),sourceReadiness:a.status,blockedReasons:a.blockedReasons,"
+        },
+        {
+          "line": 368,
+          "text": "      const altered={...copy(packet),sourceSnapshotDigest:sha(JSON.stringify(changed))};"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a2-source-probe.cjs",
+      "lines": [
+        {
+          "line": 23,
+          "text": "    const old = cp.execFileSync(\"git\", [\"show\", baseline + \":\" + p], { cwd: root, encoding: \"utf8\", maxBuffer: 30 * 1024 * 1024 });"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-harness.cjs",
+      "lines": [
+        {
+          "line": 6,
+          "text": "const git = (...args) => cp.execFileSync(\"git\", args, { cwd: root, encoding: \"utf8\", windowsHide: true, maxBuffer: 30000000 });"
+        },
+        {
+          "line": 11,
+          "text": "    sources[\"index.html\"] = git(\"show\", baseline + \":index.html\");"
+        },
+        {
+          "line": 12,
+          "text": "    for (const item of sources[\"index.html\"].matchAll(/<script src=\"([^\"]+)\"/g)) if (item[1] !== \"application-controller.js\") sources[item[1]] = git(\"show\", baseline + \":\" + item[1]);"
+        },
+        {
+          "line": 23,
+          "text": "  for (const [p, s] of [[contextPath, helperSource], [fixturePath, fixtureSource]]) assert.equal(s.replace(/\\r\\n/g, \"\\n\"), git(\"show\", baseline + \":\" + p).replace(/\\r\\n/g, \"\\n\"), \"Original fixture changed\");"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+      "lines": [
+        {
+          "line": 81,
+          "text": "  return { summary: { total: checks.length, passed: checks.filter(c => c.status === \"PASS\").length, failed: checks.filter(c => c.status === \"FAIL\").length }, checks, witnesses, limits: \"Source-only Save metadata with existing Legacy caches; no authoritative v2 execution, source calibration or shadow integration acceptance.\" };"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs",
+      "lines": [
+        {
+          "line": 43,
+          "text": "        sourceHashes: { test: \"a\".repeat(64), helper: \"b\".repeat(64) }"
+        },
+        {
+          "line": 154,
+          "text": "        childProcess.execFileSync(\"git\", [\"show\", \"revision:file\"], implicit);"
+        },
+        {
+          "line": 158,
+          "text": "        childProcess.execFileSync(\"git\", [\"show\", \"revision:file\"], explicit);"
+        },
+        {
+          "line": 160,
+          "text": "        childProcess.execFileSync(\"git\", [\"status\"], implicit);"
+        },
+        {
+          "line": 244,
+          "text": "    rejectedPair(\"Changed original test bytes invalidate fixture parity\", (_, current) => { current.sourceHashes.test = \"c\".repeat(64); });"
+        },
+        {
+          "line": 245,
+          "text": "    rejectedPair(\"Changed original helper bytes invalidate fixture parity\", (_, current) => { current.sourceHashes.helper = \"c\".repeat(64); });"
+        },
+        {
+          "line": 246,
+          "text": "    rejectedPair(\"Missing source hashes cannot certify original fixture parity\", (_, current) => { delete current.sourceHashes.helper; });"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs",
+      "lines": [
+        {
+          "line": 9,
+          "text": "const fullWrapper = \"const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);\";"
+        },
+        {
+          "line": 30,
+          "text": "function git(...args) { return cp.execFileSync(\"git\", args, { cwd: root, encoding: \"utf8\", windowsHide: true, maxBuffer: 30000000 }); }"
+        },
+        {
+          "line": 59,
+          "text": "  check(\"original test/helper bytes equal\", same(a.sourceHashes, b.sourceHashes));"
+        },
+        {
+          "line": 67,
+          "text": "  assert.equal(git(\"branch\", \"--show-current\").trim(), \"main\"); assert.equal(git(\"rev-parse\", \"HEAD\").trim(), BASELINE); assert.equal(git(\"rev-parse\", \"origin/main\").trim(), BASELINE); assert.equal(git(\"diff\", \"--cached\", \"--name-only\").trim(), \"\");"
+        },
+        {
+          "line": 68,
+          "text": "  for (const [p, value] of Object.entries(B.hashes)) assert.equal(sha(read(p)), value, \"Existing source/WIP/capture changed: \" + p);"
+        },
+        {
+          "line": 70,
+          "text": "  for (const [p, h] of Object.entries(f.finalSourceHashes)) assert.equal(sha(read(p)), h, \"R1 final source differs\");"
+        },
+        {
+          "line": 76,
+          "text": "  const index = mode === \"baseline\" ? Buffer.from(git(\"show\", BASELINE + \":index.html\")) : read(\"index.html\");"
+        },
+        {
+          "line": 81,
+          "text": "    assert(!protectedPaths.has(file)); reads.add(file); const bytes = mode === \"baseline\" ? Buffer.from(git(\"show\", BASELINE + \":\" + file)) : read(file), destination = path.resolve(dir, file);"
+        },
+        {
+          "line": 83,
+          "text": "    if (file.startsWith(\"tests/\")) assert.equal(bytes.toString(\"utf8\"), git(\"show\", BASELINE + \":\" + file), \"Original fixture/helper changed\");"
+        },
+        {
+          "line": 92,
+          "text": "    row.sourceHashes = { test: tree.hashes[FIRST_BASE], helper: tree.hashes[\"tests/high-school-career-test-context.js\"] }; row.fullSourceHashes = tree.hashes;"
+        },
+        {
+          "line": 96,
+          "text": "  const verdict = evaluateRuntimePair(...results); capture(\"runtime-comparison\", { results: results.map(r => ({ ...r, stdout: undefined, stderr: undefined, fullSourceHashes: undefined })), verdict,"
+        },
+        {
+          "line": 116,
+          "text": "    assert(prior, \"No baseline verdict for suite\"); row.sourceHash = testHashesBefore[file]; row.baselineExitCode = prior.exitCode;"
+        },
+        {
+          "line": 127,
+          "text": "  const file = capture(\"full-repository\", { startedAt, finishedAt: new Date().toISOString(), inheritance, manifestSource: MANIFEST, files, manifestSha256: sha(JSON.stringify(files)),"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs",
+      "lines": [
+        {
+          "line": 67,
+          "text": "  for (const [name, mutate] of [[\"first-base\", m => { m.groundBallInPlayState.firstBaseContext = {}; }], [\"3B\", m => { m.groundBallInPlayState.thirdBaseExecution = {}; }], [\"missingFacts\", m => { delete m.groundBallInPlayState.decisionThrowState; }]]) test(\"shared guard rejects source tamper before \" + name + \" early return\", () => {"
+        },
+        {
+          "line": 84,
+          "text": "  test(\"observer and shared source guard write no official state or RNG\", () => {"
+        },
+        {
+          "line": 88,
+          "text": "  return { summary: { total: checks.length, passed: checks.filter(x => x.status === \"PASS\").length, failed: checks.filter(x => x.status === \"FAIL\").length }, checks, witnesses, sourceHash: R.hash(R.read(\"receiver-source-snapshot.js\")), runtimeEnabled: false };"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r3-runner.cjs",
+      "lines": [
+        {
+          "line": 8,
+          "text": "const git = (...args) => cp.execFileSync(\"git\", args, { cwd: root, encoding: \"utf8\", windowsHide: true, maxBuffer: 30000000 });"
+        },
+        {
+          "line": 13,
+          "text": "function gitState() { return { branch: git(\"branch\", \"--show-current\").trim(), head: git(\"rev-parse\", \"HEAD\").trim(), originMain: git(\"rev-parse\", \"origin/main\").trim(), index: git(\"diff\", \"--cached\", \"--name-only\").trim(), status: git(\"status\", \"--short\") }; }"
+        },
+        {
+          "line": 17,
+          "text": "  const files = git(\"ls-files\", \"--cached\", \"--others\", \"--exclude-standard\", \"-z\").split(\"\\0\").filter(p => p && !protectedPaths.has(p) && !p.includes(\"-10a3b-r3-\"));"
+        },
+        {
+          "line": 30,
+          "text": "const wrapper = \"const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);\";"
+        },
+        {
+          "line": 35,
+          "text": "  return { file, command: [process.execPath, ...args], timeoutMs: full ? 180000 : timeoutMs, maxBuffer, sourceHash: hash(read(file)), elapsedMs: Number(process.hrtime.bigint() - start) / 1e6,"
+        },
+        {
+          "line": 71,
+          "text": "  capture(\"reproduction\", { metadataReplay: replay, note: \"Only identity, source metadata, presence and lifecycle required for validator replay; no Match/gameRecord dump.\", originalSourceHash: hash(oldSource) });"
+        },
+        {
+          "line": 72,
+          "text": "  capture(\"root-cause\", { originalSourceHash: hash(oldSource), fixture: { field: \"baseballSkills.batting\", ...failingFixture }, operands, failure, classification: \"cross-play: archived source-only closed play versus current unpinned Legacy execution\", productionBytesChanged: false, safety: integrity() });"
+        },
+        {
+          "line": 77,
+          "text": "function sourceHashes() { return Object.fromEntries(sourceFiles.map(p => [p, hash(read(p))])); }"
+        },
+        {
+          "line": 82,
+          "text": "  return { file, sourceHash: hash(read(file)), elapsedMs: Number(process.hrtime.bigint() - start) / 1e6, summary, error,"
+        },
+        {
+          "line": 87,
+          "text": "  labels.forEach(reserve); integrity(); const frozenSourceHashes = sourceHashes();"
+        },
+        {
+          "line": 88,
+          "text": "  function save(label, data) { assert.deepEqual(sourceHashes(), frozenSourceHashes, \"Source changed after final freeze\"); capture(label, { ...data, frozenSourceHashes }); }"
+        },
+        {
+          "line": 89,
+          "text": "  function fail(label, data) { save(label, data); capture(\"gates\", { passed: false, stoppedAt: label, frozenSourceHashes, safety: integrity() }); process.exitCode = 1; return false; }"
+        },
+        {
+          "line": 112,
+          "text": "  capture(\"gates\", { passed: true, frozenSourceHashes, safety: integrity(), order: labels });"
+        },
+        {
+          "line": 115,
+          "text": "  reserve(\"full-repository\"); const gate = json(prefix + \"gates-evidence.json\"); assert(gate.passed, \"Related gates failed\"); assert.deepEqual(sourceHashes(), gate.frozenSourceHashes); integrity();"
+        },
+        {
+          "line": 128,
+          "text": "  assert.deepEqual(sourceHashes(), gate.frozenSourceHashes); for (const [p, h] of Object.entries(testHashesBefore)) assert.equal(hash(read(p)), h);"
+        },
+        {
+          "line": 131,
+          "text": "    passed: results.filter(x => x.status === \"PASS\").length, existingDebt: results.filter(x => x.status === \"EXISTING_DEBT\").length, newRegressions, notRun: files.slice(results.length), baselineDebt: old.results.filter(x => x.exitCode !== 0), frozenSourceHashes: gate.frozenSourceHashes, safety: integrity() });"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs",
+      "lines": [
+        {
+          "line": 6,
+          "text": "  return { summary: { total: 1, passed: 1, failed: 0 }, expectedRed: true, result, scriptHash: R.hash(R.read(\"script.js\")), testUnchanged: result.sourceHash === R.json(R.prefix + \"baseline-evidence.json\").hashes[R.BBP] };"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs",
+      "lines": [
+        {
+          "line": 9,
+          "text": "function gitState() { return { branch: git(\"branch\", \"--show-current\").trim(), head: git(\"rev-parse\", \"HEAD\").trim(), originMain: git(\"rev-parse\", \"origin/main\").trim(), index: git(\"diff\", \"--cached\", \"--name-only\").trim(), status: git(\"status\", \"--short\") }; }"
+        },
+        {
+          "line": 13,
+          "text": "  const files = git(\"ls-files\", \"--cached\", \"--others\", \"--exclude-standard\", \"-z\").split(\"\\0\").filter(p => p && !protectedPaths.has(p) && !p.includes(\"-10a3b-r4-\"));"
+        },
+        {
+          "line": 16,
+          "text": "  for (const [p, h] of Object.entries(old.hashes)) assert.equal(hashes[p], p === \"receiver-source-snapshot.js\" ? delivery.finalSourceHash : h, \"Prior WIP changed: \" + p);"
+        },
+        {
+          "line": 18,
+          "text": "  capture(\"source-before\", { script: read(\"script.js\").toString(\"utf8\"), scriptHash: hashes[\"script.js\"], receiverSourceHash: hashes[\"receiver-source-snapshot.js\"] });"
+        },
+        {
+          "line": 31,
+          "text": "    error: r.error ? { code: r.error.code, message: r.error.message } : null, stdout: r.stdout || \"\", stderr: r.stderr || \"\", sourceHash: hash(read(file)) };"
+        },
+        {
+          "line": 36,
+          "text": "  for (const p of files) { assert(!protectedPaths.has(p)); const bytes = mode === \"baseline\" && p !== BBP ? Buffer.from(git(\"show\", baseline + \":\" + p)) : read(p), dest = path.resolve(dir, p); assert(dest.startsWith(dir + path.sep)); fs.mkdirSync(path.dirname(dest), { recursive: true }); fs.writeFileSync(dest, bytes, { flag: \"wx\" }); hashes[p] = hash(bytes); }"
+        },
+        {
+          "line": 37,
+          "text": "  assert.equal(test.toString().replace(/\\r\\n/g, \"\\n\"), git(\"show\", baseline + \":\" + BBP).replace(/\\r\\n/g, \"\\n\")); return { dir, hashes, files };"
+        },
+        {
+          "line": 41,
+          "text": "  return { file, sourceHash: hash(read(file)), elapsedMs: Number(process.hrtime.bigint() - t) / 1e6, summary: result?.summary || (result ? { total: result.total, passed: result.passed, failed: result.failed } : { total: 0, passed: 0, failed: 1 }),"
+        },
+        {
+          "line": 45,
+          "text": "function sourceHashes() { return Object.fromEntries([\"index.html\", \"script.js\", \"save.js\", \"match-situation-lifecycle.js\", \"receiver-source-snapshot.js\"].map(p => [p, hash(read(p))])); }"
+        },
+        {
+          "line": 48,
+          "text": "  labels.forEach(reserve); integrity(); const frozenSourceHashes = sourceHashes();"
+        },
+        {
+          "line": 49,
+          "text": "  const before = json(prefix + \"source-before-evidence.json\"); capture(\"source-change\", { beforeScriptSha256: before.scriptHash, afterScriptSha256: frozenSourceHashes[\"script.js\"], beforeScript: before.script, afterScript: read(\"script.js\").toString(), receiverSourceUnchanged: before.receiverSourceHash === frozenSourceHashes[\"receiver-source-snapshot.js\"] });"
+        },
+        {
+          "line": 50,
+          "text": "  function save(label, data) { assert.deepEqual(sourceHashes(), frozenSourceHashes); capture(label, { ...data, frozenSourceHashes }); }"
+        },
+        {
+          "line": 51,
+          "text": "  function fail(label, data) { save(label, data); capture(\"gates\", { passed: false, stoppedAt: label, frozenSourceHashes, safety: integrity() }); process.exitCode = 1; return false; }"
+        },
+        {
+          "line": 54,
+          "text": "  const pair = []; for (const mode of [\"baseline\", \"current\"]) { const tree = materializeBBP(mode), row = runSuite(BBP, false, tree.dir); row.materializedSourceHashes = tree.hashes; pair.push(row); save(\"bbp-\" + mode, { result: row }); }"
+        },
+        {
+          "line": 55,
+          "text": "  const equal = pair.every(x => x.exitCode === 0 && !x.error) && pair[0].stdout === pair[1].stdout && pair[0].stderr === pair[1].stderr && pair[0].sourceHash === pair[1].sourceHash;"
+        },
+        {
+          "line": 79,
+          "text": "  capture(\"gates\", { passed: true, frozenSourceHashes, safety: integrity(), order: labels });"
+        },
+        {
+          "line": 82,
+          "text": "  reserve(\"full-repository\"); const gate = json(prefix + \"gates\" + captureSuffix + \"-evidence.json\"); assert(gate.passed); assert.deepEqual(sourceHashes(), gate.frozenSourceHashes); integrity();"
+        },
+        {
+          "line": 84,
+          "text": "  assert(runtimeInvestigation.fullAllowed, \"First-base runtime investigation unresolved\"); assert.deepEqual(runtimeInvestigation.frozenSourceHashes, gate.frozenSourceHashes);"
+        },
+        {
+          "line": 96,
+          "text": "  assert.deepEqual(sourceHashes(), gate.frozenSourceHashes); for (const [p, h] of Object.entries(testHashesBefore)) assert.equal(hash(read(p)), h);"
+        },
+        {
+          "line": 99,
+          "text": "    passed: results.filter(x => x.status === \"PASS\").length, existingDebt: results.filter(x => x.status === \"EXISTING_DEBT\").length, newRegressions, notRun: files.slice(results.length), baselineDebt: old.results.filter(x => x.exitCode !== 0), frozenSourceHashes: gate.frozenSourceHashes, safety: integrity() });"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs",
+      "lines": [
+        {
+          "line": 5,
+          "text": "  const checks = [], pinned = R.git(\"show\", C.PINNED_COMMIT + \":save.js\").replace(/\\r\\n?/g, \"\\n\"), current = R.read(\"save.js\").toString().replace(/\\r\\n?/g, \"\\n\"), adapter = R.read(\"receiver-source-snapshot.js\").toString();"
+        },
+        {
+          "line": 8,
+          "text": "  function rejectSave(name, change) { test(name, () => { const changed = change(current); assert.notEqual(changed, current); new vm.Script(changed); assert.throws(() => C.assertReceiverSourceSaveAuthorizedDelta(changed, pinned, adapter), /Save source outside exact authorized owner delta/); }, true); }"
+        },
+        {
+          "line": 9,
+          "text": "  test(\"current Save equals pinned source plus the three reviewed exact patches\", () => { const r = C.assertReceiverSourceSaveAuthorizedDelta(current, pinned, adapter); assert.equal(r.exactDeltaCount, 3); assert.equal(r.loadAdmissionFrozen, true); });"
+        },
+        {
+          "line": 10,
+          "text": "  test(\"CRLF normalization preserves the same original authority\", () => C.assertReceiverSourceSaveAuthorizedDelta(current.replace(/\\n/g, \"\\r\\n\"), pinned.replace(/\\n/g, \"\\r\\n\"), adapter.replace(/\\r?\\n/g, \"\\r\\n\")));"
+        },
+        {
+          "line": 11,
+          "text": "  test(\"frozen original without required Source safety is not the new authorized contract\", () => assert.throws(() => C.assertReceiverSourceSaveAuthorizedDelta(pinned, pinned, adapter), /Save source outside/), true);"
+        },
+        {
+          "line": 27,
+          "text": "  for (const [name, statement] of [[\"Storage Writer\", 'localStorage.setItem(\"second\", \"x\");'], [\"RNG\", \"Math.random();\"], [\"candidate execution\", \"ReceiverExecutionV22Foundation.execute({});\"]]) test(\"adapter acquires \" + name + \" FAIL\", () => { const changed = adapter + \"\\n\" + statement; new vm.Script(changed); assert.throws(() => C.assertReceiverSourceSaveAuthorizedDelta(current, pinned, changed), /Source adapter acquired/); }, true);"
+        },
+        {
+          "line": 28,
+          "text": "  test(\"unreviewed adapter branch cannot evade supplemental source freeze\", () => { const changed = adapter.replace(\"return true; // genuine omitted legacy metadata\", \"return false; // genuine omitted legacy metadata\"); assert.notEqual(changed, adapter); assert.throws(() => C.assertReceiverSourceSaveAuthorizedDelta(current, pinned, changed), /Reviewed metadata-only adapter changed/); }, true);"
+        },
+        {
+          "line": 29,
+          "text": "  test(\"changing original pinned authority FAIL\", () => assert.throws(() => C.assertReceiverSourceSaveAuthorizedDelta(current, pinned + \"\\n\", adapter), /Original pinned Save authority changed/), true);"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs",
+      "lines": [
+        {
+          "line": 8,
+          "text": "function gitState() { return { branch: git(\"branch\", \"--show-current\").trim(), head: git(\"rev-parse\", \"HEAD\").trim(), main: git(\"rev-parse\", \"main\").trim(), originMain: git(\"rev-parse\", \"origin/main\").trim(), index: git(\"diff\", \"--cached\", \"--name-only\").trim(), status: git(\"status\", \"--short\") }; }"
+        },
+        {
+          "line": 13,
+          "text": "  const files = git(\"ls-files\", \"--cached\", \"--others\", \"--exclude-standard\", \"-z\").split(\"\\0\").filter(p => p && !protectedPaths.has(p) && !p.includes(\"-10a3b-r6-\"));"
+        },
+        {
+          "line": 30,
+          "text": "  order.forEach(reserve); integrity(); const frozenSourceHashes = frozenHashes();"
+        },
+        {
+          "line": 31,
+          "text": "  function save(label, data) { assert.deepEqual(frozenHashes(), frozenSourceHashes); capture(label, { ...data, frozenSourceHashes }); }"
+        },
+        {
+          "line": 60,
+          "text": "  save(\"runtime-comparison\", { formalBaselineEvidence: formalFile, priorWipEvidence: priorFile, formalComparison, priorWipComparison, productionSourceIdenticalToR4: [\"index.html\", \"script.js\", \"save.js\", \"match-situation-lifecycle.js\", \"receiver-source-snapshot.js\"].every(p => frozenSourceHashes[p] === json(priorFile).frozenSourceHashes[p]), timingIsSingleInheritedPairNotStatisticalProof: true, priorR4InvestigationPreserved: \"docs/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation-final-evidence.json\" });"
+        },
+        {
+          "line": 65,
+          "text": "  reserve(\"full-repository\"); const gate = json(prefix + \"gates-evidence.json\"); assert(gate.passed); assert.deepEqual(frozenHashes(), gate.frozenSourceHashes); integrity();"
+        },
+        {
+          "line": 66,
+          "text": "  const review = json(prefix + \"independent-review-evidence.json\"); assert(review.passed); assert.deepEqual(review.frozenSourceHashes, gate.frozenSourceHashes);"
+        },
+        {
+          "line": 78,
+          "text": "  assert.deepEqual(frozenHashes(), gate.frozenSourceHashes); for (const [p, h] of Object.entries(testHashesBefore)) assert.equal(hash(read(p)), h);"
+        },
+        {
+          "line": 80,
+          "text": "  capture(\"full-repository\", { startedAt, finishedAt: new Date().toISOString(), files, manifestSha256: hash(JSON.stringify(files)), wrapper, timeoutMs: 180000, maxBuffer: 30000000, testHashesBefore, results, complete, passed: results.filter(x => x.status === \"PASS\").length, existingDebt: results.filter(x => x.status === \"EXISTING_DEBT\").length, newRegressions, notRun: files.slice(results.length), baselineDebt: old.results.filter(x => x.exitCode !== 0), frozenSourceHashes: gate.frozenSourceHashes, safety: integrity() });"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-8-runner.cjs",
+      "lines": [
+        {
+          "line": 7,
+          "text": "const git=(...args)=>cp.execFileSync(\"git\",args,{cwd:root,encoding:\"utf8\",maxBuffer:30*1024*1024}).trimEnd();"
+        },
+        {
+          "line": 140,
+          "text": "  assert.equal(git(\"rev-parse\",\"HEAD\"),baseline.baseline);assert.equal(git(\"rev-parse\",\"origin/main\"),baseline.baseline);assert.equal(git(\"branch\",\"--show-current\"),\"main\");assert.equal(git(\"diff\",\"--cached\",\"--name-only\"),\"\");"
+        },
+        {
+          "line": 148,
+          "text": "  const status=git(\"status\",\"--short\");const baselineRows=baseline.status.split(/\\r?\\n/);for(const row of baselineRows)assert(status.split(/\\r?\\n/).includes(row));"
+        },
+        {
+          "line": 149,
+          "text": "  const diff=cp.spawnSync(\"git\",[\"diff\",\"--check\",\"--\",\".\",\":(exclude)tests/fast-check-smoke-test.cjs\"],{cwd:root,encoding:\"utf8\"});assert.equal(diff.status,0);"
+        },
+        {
+          "line": 150,
+          "text": "  return {status:\"PASS\",baseline:baseline.baseline,originMain:git(\"rev-parse\",\"origin/main\"),branch:\"main\",staging:[],trackedCount:Object.keys(baseline.trackedHashes).length,changedTrackedFiles:changed,"
+        },
+        {
+          "line": 175,
+          "text": "  const data={schema:finalSchema,specification:specification(),focused:{...focused,schemaValidation:{status:\"PASS\",keywordScope:\"Only keywords used in delivered schema; not a general JSON-Schema implementation\",cases:schemaCases},sourceHashes:hashes},runtime:{...cross,sourceHashes:hashes},integrity:{...noninterference,sourceHashes:hashes}};"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-9-legacy-comparison.cjs",
+      "lines": [
+        {
+          "line": 28,
+          "text": "const git = args => cp.execFileSync('git', args, {cwd:root,windowsHide:true,encoding:'utf8',maxBuffer:30e6});"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-source-save-authorized-delta.cjs",
+      "lines": [
+        {
+          "line": 50,
+          "text": "  assert.equal(sha256(source), REVIEWED_ADAPTER_NORMALIZED_SHA256, \"Reviewed metadata-only adapter changed; requires a new contract review\");"
+        },
+        {
+          "line": 58,
+          "text": "function assertReceiverSourceSaveAuthorizedDelta(currentText, pinnedText, adapterText) {"
+        },
+        {
+          "line": 73,
+          "text": "module.exports = { CONTRACT_VERSION, PINNED_COMMIT, PINNED_SAVE_NORMALIZED_SHA256, REVIEWED_ADAPTER_NORMALIZED_SHA256, ORIGINAL_WRITER, PREWRITE_DELEGATION, RAW_ANCHOR, RAW_GUARD, ORIGINAL_VERSION, SOURCE_VERSION, expectedAuthorizedSave, assertAdapterBoundary, assertReceiverSourceSaveAuthorizedDelta };"
+        }
+      ]
+    },
+    {
+      "file": "tests/relationship-feasibility-production-scope-test.js",
+      "lines": [
+        {
+          "line": 23,
+          "text": "test('actual protected sources still match historical baseline', () => scope.assertWorkingTree());"
+        }
+      ]
+    },
+    {
+      "file": "tests/relationship-feasibility-production-scope.cjs",
+      "lines": [
+        {
+          "line": 84,
+          "text": "    baseline[file] = cp.execFileSync('git', ['show', BASELINE + ':' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8e6 });"
+        }
+      ]
+    },
+    {
+      "file": "tests/responsive-accessibility-pass-test.js",
+      "lines": [
+        {
+          "line": 225,
+          "text": "const changedFiles = execFileSync(\"git\", [\"diff\", \"--name-only\"], { cwd: root, encoding: \"utf8\" }).trim().split(/\\r?\\n/).filter(Boolean);"
+        }
+      ]
+    }
+  ],
+  "remainingFullSaveClauses": [
+    "tests/pitch-tactical-decision-production-integration-test.js",
+    "tests/pitch-tactical-interpretation-production-integration-test.js",
+    "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+    "tests/pitch-tactical-intent-evidence-integration-test.js",
+    "tests/pitch-tactical-signal-projection-production-integration-test.js"
+  ],
+  "formalSourceProtectedScopeUnchanged": true,
+  "originalTestsOrPinsChanged": false,
+  "wholeSuiteVerdictsInferred": false,
+  "scopeLimit": "All readable inventory source/dependency paths searched for literal source/Git/hash patterns. Computed external calls or undeclared files are not an exhaustive semantic enumeration; broad initial candidate matches include data/fixture equality and are not counted as program freezes.",
+  "safety": {
+    "changedExistingPaths": [],
+    "preservedHashes": 945,
+    "protectedMetadataUnchanged": true,
+    "protectedContentReadOrHashed": false,
+    "git": {
+      "branch": "main",
+      "head": "ab3117653945de0b7013636187c446276a96e634",
+      "main": "ab3117653945de0b7013636187c446276a96e634",
+      "originMain": "ab3117653945de0b7013636187c446276a96e634",
+      "index": "",
+      "status": " M index.html\n M match-situation-lifecycle.js\n M save.js\n M script.js\n M tests/fast-check-smoke-test.cjs\n M tests/pitch-sequence-state-production-integration-test.js\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/infield-baseball-logic-audit-architecture-evidence.json\n?? docs/infield-baseball-logic-audit-evidence.json\n?? docs/infield-baseball-logic-audit-runner.cjs\n?? docs/infield-baseball-logic-validation-audit-v1.md\n?? docs/infield-scorer-recovery-sprint-5-green-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json\n?? docs/infield-scorer-recovery-sprint-5-validation.json\n?? docs/receiver-execution-v2-production-snapshot-save-guard-sprint-10a3b.md\n?? docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-lifecycle-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-observed-validation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-current-source-verification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-initial-test-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r1-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-timeout-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-architecture-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout.md\n?? docs/receiver-execution-v2-sprint-10a3b-r2-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-policy-specification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-extra-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gradient-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-guard-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r3-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-original-validator.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-reproduction-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-baseline-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-comparison-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-current-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-green-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-green-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-career-save-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-compatibility-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-audit-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r4-development-focused-1-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-development-focused-2-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-helper-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-helper-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-baseline180-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-current-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-r3-wip-diagnostic-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-runtime-comparison-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-full-repository-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gates-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gradient-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gradient-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-legacy-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-production-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-r3-guard-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-r3-guard-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-red-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-related-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-s8-cross-runtime-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-s8-cross-runtime-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-save-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-before-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-change-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-stdout-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-architecture-extra-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-coverage-paths-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-entrypoint-search-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-freeze-comparisons-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-inherited-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-ownership-contract-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-pitch-red-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-save-ownership-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r6-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-authorized-delta-contract-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-bbp-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-coverage-paths-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-development-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-exact-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-independent-review-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-manifest-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-pitch-green-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r1-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r3-guard-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r4-dependency-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-receiver-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-s8-cross-runtime-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-save-boundary-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-save-ownership-contract.md\n?? docs/receiver-execution-v2-sprint-10a3b-r6-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-confirmation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-witness-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-related-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-evidence.json\n?? docs/test-reliability-audit-v0.1-baseline-evidence.json\n?? docs/test-reliability-audit-v0.1-entry-buffer-replays-evidence.json\n?? docs/test-reliability-audit-v0.1-extract.cjs\n?? docs/test-reliability-audit-v0.1-freeze-review.cjs\n?? docs/test-reliability-audit-v0.1-git-buffer-diagnostic-evidence.json\n?? docs/test-reliability-audit-v0.1-inventory-evidence.json\n?? docs/test-reliability-audit-v0.1-inventory.cjs\n?? docs/test-reliability-audit-v0.1-known-failure-replays-evidence.json\n?? docs/test-reliability-audit-v0.1-source-freeze-candidates-evidence.json\n?? install.ps1\n?? receiver-source-snapshot.js\n?? tests/receiver-execution-v2-production-snapshot-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-harness.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-closeout.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-source-review.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-closeout.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-dependency-audit.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runtime-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r5-ownership-audit.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-independent-review.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs\n?? tests/receiver-source-save-authorized-delta.cjs\n"
+    }
+  }
+}

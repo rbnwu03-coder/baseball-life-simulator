@@ -1,0 +1,59 @@
+{
+  "file": "high-school-integration-1-1-test.js",
+  "status": "FAIL",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+    "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-integration-1-1-test.js"
+  ],
+  "node": "v24.19.0",
+  "sourceHash": "72e603301c619f5794e615e2a5770ec241a26214d2b551a7948f39c4f3f12529",
+  "sourceStable": true,
+  "entry": true,
+  "elapsedMs": 123,
+  "exitCode": 1,
+  "signal": null,
+  "error": null,
+  "checks": [
+    {
+      "number": 1,
+      "label": "注入相同 RNG 會得到相同初始能力形狀"
+    },
+    {
+      "number": 2,
+      "label": "初始擲骰固定總量 12 且每項只在 1–3"
+    },
+    {
+      "number": 3,
+      "label": "配置點固定 3 且單項上限 2"
+    },
+    {
+      "number": 4,
+      "label": "創角介面會把能力 key 轉成玩家可讀名稱"
+    },
+    {
+      "number": 5,
+      "label": "正式創角會保存 archetype、能力形狀、配置、投打與最初願望"
+    },
+    {
+      "number": 6,
+      "label": "canonical 守位是唯一寫入來源，舊欄位只做相容映射"
+    },
+    {
+      "number": 7,
+      "label": "理想自我與教練評估可產生一致／部分一致／衝突"
+    },
+    {
+      "number": 8,
+      "label": "複合判定可形成先發／輪替／發展三種內部角色"
+    },
+    {
+      "number": 9,
+      "label": "三種角色都進入同一場正式交流賽"
+    }
+  ],
+  "successfulAssertions": 9,
+  "stdout": "✓ 1. 注入相同 RNG 會得到相同初始能力形狀\n✓ 2. 初始擲骰固定總量 12 且每項只在 1–3\n✓ 3. 配置點固定 3 且單項上限 2\n✓ 4. 創角介面會把能力 key 轉成玩家可讀名稱\n✓ 5. 正式創角會保存 archetype、能力形狀、配置、投打與最初願望\n✓ 6. canonical 守位是唯一寫入來源，舊欄位只做相容映射\n✓ 7. 理想自我與教練評估可產生一致／部分一致／衝突\n✓ 8. 複合判定可形成先發／輪替／發展三種內部角色\n✓ 9. 三種角色都進入同一場正式交流賽\n",
+  "stderr": "offensive-plate-approach.js:464\r\n      if (!OutcomeMapping) throw new Error(\"Physical BIP requires BattedBallOutcomeMapping\");\r\n                           ^\r\n\r\nError: Physical BIP requires BattedBallOutcomeMapping\r\n    at resolveFairContactBallInPlay (offensive-plate-approach.js:464:34)\r\n    at resolveNextPitch (offensive-plate-approach.js:584:23)\r\n    at Object.simulatePlateAppearance (offensive-plate-approach.js:655:15)\r\n    at resolveHighSchoolOffensivePlateAppearance (script.js:11033:70)\r\n    at resolveHighSchoolOffensiveDecision (script.js:11455:32)\r\n    at resolveHighSchoolYearOneFinalMoment (script.js:13324:27)\r\n    at resolveHighSchoolYearOneMatch (script.js:14396:10)\r\n    at run (evalmachine.<anonymous>:7:262)\r\n    at evalmachine.<anonymous>:11:22\r\n    at evalmachine.<anonymous>:12:3\r\n\r\nNode.js v24.19.0\r\n"
+}

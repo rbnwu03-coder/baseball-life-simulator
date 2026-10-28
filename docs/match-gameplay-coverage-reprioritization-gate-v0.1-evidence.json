@@ -1,0 +1,4607 @@
+{
+  "task": "Match Gameplay Coverage & Reprioritization Gate v0.1",
+  "schemaVersion": 1,
+  "clientDate": "2026-10-19",
+  "clientTimezone": "Asia/Taipei",
+  "status": "COVERAGE_GATE_PASS",
+  "statusMeaning": "Audit and development decisions complete. This is not a gameplay coverage completion or Alpha release PASS.",
+  "alphaReady": false,
+  "naturalSameBallRolloutReady": false,
+  "phaserGate": "NEEDS_ONE_EXPLICIT_MATCH_INTERFACE",
+  "allowedWrites": [
+    "docs/match-gameplay-coverage-reprioritization-gate-v0.1.md",
+    "docs/match-gameplay-coverage-reprioritization-gate-v0.1-evidence.json"
+  ],
+  "authorization": {
+    "original": "Focused read-only inspection, existing tests, limited isolated runtime probes, two report files only.",
+    "methodException": {
+      "requiredSkill": "C:/Users/User/.codex/skills/codebase-memory/SKILL.md",
+      "initialRead": "Access denied",
+      "escalatedReadAttempts": 4,
+      "allEscalatedReadsExecuted": false,
+      "approvalError": "Automatic approval review failed: Selected model is at capacity. Action not executed; review could not complete. Not a determination of unsafety.",
+      "userReply": "同意本輪採唯讀來源稽核",
+      "fallback": "rg, exact current sources, existing tests, isolated VM; no graph/reindex; no alternative channel used to read the blocked skill."
+    },
+    "noGameplayImplementation": true,
+    "noTestFileChanges": true,
+    "noGitWrites": true
+  },
+  "baseline": {
+    "capturedAt": "2026-10-19T04:54:54.868Z",
+    "head": {
+      "exit": 0,
+      "output": "ab3117653945de0b7013636187c446276a96e634",
+      "error": ""
+    },
+    "branch": {
+      "exit": 0,
+      "output": "main",
+      "error": ""
+    },
+    "originMain": {
+      "exit": 0,
+      "output": "ab3117653945de0b7013636187c446276a96e634",
+      "error": ""
+    },
+    "status": {
+      "exit": 0,
+      "sha256": "cb54e4752e5f0efd773ce36f205605772752f519b1bd2bcc5d22e590c72d471f",
+      "tracked": [
+        " M defensive-decision-throw-foundation.js",
+        " M defensive-reach-secure-foundation.js",
+        " M defensive-runner-throw-settlement-foundation.js",
+        " M index.html",
+        " M match-experience-development.js",
+        " M match-situation-lifecycle.js",
+        " M offensive-plate-approach.js",
+        " M plate-decision-foundation.js",
+        " M save.js",
+        " M script.js",
+        " M tests/fast-check-smoke-test.cjs",
+        " M tests/high-school-year-one-opportunity-two-integration-test.js",
+        " M tests/pitch-production-source-scope.cjs",
+        " M tests/pitch-sequence-state-production-integration-test.js",
+        " M tests/pitch-tactical-decision-production-adapter-integration-test.js",
+        " M tests/pitch-tactical-decision-production-integration-test.js",
+        " M tests/pitch-tactical-intent-evidence-integration-test.js",
+        " M tests/pitch-tactical-interpretation-production-integration-test.js",
+        " M tests/pitch-tactical-signal-projection-production-integration-test.js"
+      ],
+      "untrackedCount": 1219
+    },
+    "staged": {
+      "exit": 0,
+      "output": "",
+      "error": ""
+    },
+    "indexSha256": "6805182aad285efb6c6dac054bbcee56058baf8adff46cbe920e025efb69d09d"
+  },
+  "protected": {
+    "policy": "Metadata only; no content read/hash/execution",
+    "metadata": [
+      {
+        "path": "tests/fast-check-smoke-test.cjs",
+        "size": 232,
+        "mtimeMs": 1790843210697.4724
+      },
+      {
+        "path": "install.ps1",
+        "size": 18481,
+        "mtimeMs": 1790645780931.8794
+      },
+      {
+        "path": "docs/first-base-sprint-3-focused-development-evidence.json",
+        "size": 909541,
+        "mtimeMs": 1791695452470.9353
+      },
+      {
+        "path": "docs/infield-baseball-logic-audit-architecture-evidence.json",
+        "size": 22275,
+        "mtimeMs": 1791724873822.1465
+      },
+      {
+        "path": "docs/infield-baseball-logic-audit-evidence.json",
+        "size": 9987073,
+        "mtimeMs": 1791725791525.787
+      },
+      {
+        "path": "docs/infield-baseball-logic-audit-runner.cjs",
+        "size": 51962,
+        "mtimeMs": 1791725789937.2622
+      },
+      {
+        "path": "docs/infield-baseball-logic-validation-audit-v1.md",
+        "size": 39820,
+        "mtimeMs": 1791725790304.0483
+      },
+      {
+        "path": "docs/infield-scorer-recovery-sprint-5-green-evidence.json",
+        "size": 9378500,
+        "mtimeMs": 1791766904157.9292
+      },
+      {
+        "path": "docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json",
+        "size": 11457925,
+        "mtimeMs": 1791767373630.792
+      },
+      {
+        "path": "docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json",
+        "size": 686464,
+        "mtimeMs": 1791788973106.34
+      },
+      {
+        "path": "docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json",
+        "size": 889584,
+        "mtimeMs": 1791767570328.417
+      },
+      {
+        "path": "docs/infield-scorer-recovery-sprint-5-validation.json",
+        "size": 1027011,
+        "mtimeMs": 1791767101736.8584
+      }
+    ]
+  },
+  "acceptedSourceComparison": [
+    {
+      "path": "defensive-decision-throw-foundation.js",
+      "acceptedSha256": "c5afcf9c0f0fd1a501e5dec0bdc26d30054ac9a7f29f792c716190a8f7434ed7",
+      "currentSha256": "c5afcf9c0f0fd1a501e5dec0bdc26d30054ac9a7f29f792c716190a8f7434ed7"
+    },
+    {
+      "path": "defensive-reach-secure-foundation.js",
+      "acceptedSha256": "899a5bc5f6c94f6105f1cfac654fb42758bc7ccd9ddb8a39556a1bc0cf937343",
+      "currentSha256": "899a5bc5f6c94f6105f1cfac654fb42758bc7ccd9ddb8a39556a1bc0cf937343"
+    },
+    {
+      "path": "defensive-runner-throw-settlement-foundation.js",
+      "acceptedSha256": "2c7e08c73553cdcf8b5aaa6a0953aec93ba973998b6bc72704647971d070f6fb",
+      "currentSha256": "2c7e08c73553cdcf8b5aaa6a0953aec93ba973998b6bc72704647971d070f6fb"
+    },
+    {
+      "path": "match-vnext-same-ball-execution-adapter.js",
+      "acceptedSha256": "832f009a14689e883a6d57590f2a85f7d475ad508fa8ec51166c5ebe50a853e6",
+      "currentSha256": "832f009a14689e883a6d57590f2a85f7d475ad508fa8ec51166c5ebe50a853e6"
+    },
+    {
+      "path": "contracts/match-vnext-execution-v0.1.cjs",
+      "acceptedSha256": "04254272d4bfff3bff61817d8d49cb99c143885bfbbd35d0f2bca300be5e96a6",
+      "currentSha256": "04254272d4bfff3bff61817d8d49cb99c143885bfbbd35d0f2bca300be5e96a6"
+    },
+    {
+      "path": "script.js",
+      "acceptedSha256": "658479fab49ef9dd5c2ea68dfc6a9513e0c47c693e9fa34e74f2a80a369c9a55",
+      "currentSha256": "658479fab49ef9dd5c2ea68dfc6a9513e0c47c693e9fa34e74f2a80a369c9a55"
+    },
+    {
+      "path": "tests/pitch-production-source-scope.cjs",
+      "acceptedSha256": "4d48e8ded5adfddb044fb9e7d9dc954f9a364fcf9bcd3d45831d7c7ca3836eea",
+      "currentSha256": "4d48e8ded5adfddb044fb9e7d9dc954f9a364fcf9bcd3d45831d7c7ca3836eea"
+    },
+    {
+      "path": "tests/match-vnext-same-ball-execution-contract-test.cjs",
+      "acceptedSha256": "70b39d748b622e3e7d16681997f56d5906b02390aea13c91090a3b4034f6fe03",
+      "currentSha256": "70b39d748b622e3e7d16681997f56d5906b02390aea13c91090a3b4034f6fe03"
+    },
+    {
+      "path": "tests/match-vnext-same-ball-production-integration-test.cjs",
+      "acceptedSha256": "1df515f8537ac40eb1c0648ca61508787bed46f73f5d775e670fc02156c109b4",
+      "currentSha256": "1df515f8537ac40eb1c0648ca61508787bed46f73f5d775e670fc02156c109b4"
+    }
+  ],
+  "scopedManifest": {
+    "count": 125,
+    "qualification": "Focused dependencies/documents/probe fixtures only. Nine critical source hashes captured before the two baseline suites; 109 scoped hashes captured after baseline tests and 16 additional hashes later. Not a repository-wide pre-turn manifest.",
+    "files": [
+      {
+        "path": "ai-plate-appearance-outcome.js",
+        "sha256": "77d65f8807f956f798e78e12515bebc2191a1ff4bdbe77a71c1ca618102e2ba0",
+        "size": 5180
+      },
+      {
+        "path": "application-controller.js",
+        "sha256": "6b91bd6aeb3f723845d28b08541943e3d8530ad940ed23c402d025f5c0e7fabd",
+        "size": 4143
+      },
+      {
+        "path": "baseball-defense-prototype.js",
+        "sha256": "90ee7d2e15aa91e3d81aa136ec33c86fbaac475366a043647147d4b5eca0cb4f",
+        "size": 17449
+      },
+      {
+        "path": "baseball-gameplay-integration.js",
+        "sha256": "a6ff07c43c1f6c460a36fbb155819ec8b2174bd998b40e2522107b0a2f019abf",
+        "size": 24177
+      },
+      {
+        "path": "baseball-gameplay-prototype-utils.js",
+        "sha256": "390a9a6dc1b52e6aaf3d9d7c6bdd454267867903a21f5a072bfc32b0babc1049",
+        "size": 2575
+      },
+      {
+        "path": "baseball-offense-prototype.js",
+        "sha256": "82f8a63122fddb7ac01d54ded0b75c4899bd9ef9fe1b545cea391663918fb204",
+        "size": 21131
+      },
+      {
+        "path": "baseball-training-resolver.js",
+        "sha256": "6f10ce80bfa99b4053017bfbd48c207604d1f3828d9c2372655548cc31bbc339",
+        "size": 4368
+      },
+      {
+        "path": "batted-ball-fly-ball-defense.js",
+        "sha256": "66dfb3867c79b8aadaabbf155c95dcb07673d1298bf2226d1070cf36fa14fffe",
+        "size": 13610
+      },
+      {
+        "path": "batted-ball-ground-defense.js",
+        "sha256": "71b12034b813179180250a5c533b3a95c1bd05f5640cd4a523e0e8b5efacb777",
+        "size": 25154
+      },
+      {
+        "path": "batted-ball-line-drive-defense.js",
+        "sha256": "98fc4a6135f1dceaa137f7e996f4586e758aca28312fae5b5b61932d53673d30",
+        "size": 11284
+      },
+      {
+        "path": "batted-ball-outcome-mapping.js",
+        "sha256": "94ebfbc1e69735560b95592c2a430df5b6f15ecfdfddd6a37f084ab7faf9efac",
+        "size": 6036
+      },
+      {
+        "path": "batted-ball-physical.js",
+        "sha256": "4c0847af7b085c6da68223e47114164af417567dbc9d65644ec51fc7427cfec8",
+        "size": 9200
+      },
+      {
+        "path": "batted-ball-tag-up-execution.js",
+        "sha256": "389f1c9a4801eaa609687274b7ac7cfdf2b2abf02ba819b10db11aa4a606ab7f",
+        "size": 5577
+      },
+      {
+        "path": "batter-anticipation.js",
+        "sha256": "174d20a5f72f2c5241cea2380203e661ff953c441d184cbd176d46f17be16459",
+        "size": 25803
+      },
+      {
+        "path": "career-age22-outcome-resolver.js",
+        "sha256": "6639b534f7fa40e94bf517ce6599bfa2213312ac154e33a70ff9dc0910a3fb1d",
+        "size": 10268
+      },
+      {
+        "path": "career-development-progression.js",
+        "sha256": "d7b214ba19d7d6524fe06a0a003c5bc8b81a07e59cf7f6ad96df88ba7398f77e",
+        "size": 7020
+      },
+      {
+        "path": "career-development-runtime-resolver.js",
+        "sha256": "77036ad44a7ec1927691d55bfe43e5d989edea7dbabe5ede298d2831d74619a4",
+        "size": 5739
+      },
+      {
+        "path": "career-save-admission.js",
+        "sha256": "c7fb7038baa0907adca73946b3bea2d31fc86f9080a2233e07d7036aa804554a",
+        "size": 6918
+      },
+      {
+        "path": "career-spine-contract.js",
+        "sha256": "9958bc22b1fbaeb67a461952a872be6eb2f0a73f73d945c11732a858200a2bc0",
+        "size": 32972
+      },
+      {
+        "path": "career-transition-commit.js",
+        "sha256": "dedd11abf65c2555ab4173ab82967320e9bc0a2a454675a6d8562f59109f18aa",
+        "size": 4500
+      },
+      {
+        "path": "career-transition-progression.js",
+        "sha256": "33fd5f3f79cbac11c3f26facae69dd690ec59636636a6904b6c392fb30e1a414",
+        "size": 5769
+      },
+      {
+        "path": "career-transition-resolver.js",
+        "sha256": "dd2cb7b57ef19f26bcc4bb5d8951819530ad817d5d73cf8944e075f0b789abcf",
+        "size": 4564
+      },
+      {
+        "path": "career-transition-runtime-resolver.js",
+        "sha256": "52cb2c2c13825adb1cde1b23fe19b3d66c0222d793ff5d3c4ffab18ebb0da521",
+        "size": 4511
+      },
+      {
+        "path": "coach-evaluation-boundary.js",
+        "sha256": "6307ebb6d5933771e2c2659ae1f6ab65efa83b8831406671415d0f955e8f9515",
+        "size": 8026
+      },
+      {
+        "path": "coach-response-flow.js",
+        "sha256": "85275abbae5575128cbc2b6b368c94f07b6fc7a854e0b52732630304295940a1",
+        "size": 7850
+      },
+      {
+        "path": "coach.js",
+        "sha256": "79ecda72276276d44ec384d2c96b2f8f5a16c8e5fb43dd2f48c3752353595266",
+        "size": 73
+      },
+      {
+        "path": "competition-presentation.js",
+        "sha256": "b89a018f22f09405ca64e61e718d83d7218d86497072b21720abd99fee5c6b22",
+        "size": 19781
+      },
+      {
+        "path": "competition-rules.js",
+        "sha256": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "size": 4995
+      },
+      {
+        "path": "contracts/match-vnext-execution-v0.1.cjs",
+        "sha256": "04254272d4bfff3bff61817d8d49cb99c143885bfbbd35d0f2bca300be5e96a6",
+        "size": 12778
+      },
+      {
+        "path": "county-selection-opportunity.js",
+        "sha256": "f336bb7572694e3f6baaef533b383427b1aa0743c54e2e1726c7f8dfe0f9b715",
+        "size": 15790
+      },
+      {
+        "path": "current-state-boundary.js",
+        "sha256": "6d844918eb30c886828d57a564b75d0e309b69903e2f34b5365bedffd49e0d51",
+        "size": 7633
+      },
+      {
+        "path": "day-completion-flow.js",
+        "sha256": "6dfc90d43442d036767bdeb13a708f52e80fd5953e556443223dfc74c72af7b5",
+        "size": 4349
+      },
+      {
+        "path": "decision-flow.js",
+        "sha256": "15694c948a621b55747533586d552f56513b79d4989951cf3da1d41b56cae9b2",
+        "size": 7594
+      },
+      {
+        "path": "defensive-decision-throw-foundation.js",
+        "sha256": "c5afcf9c0f0fd1a501e5dec0bdc26d30054ac9a7f29f792c716190a8f7434ed7",
+        "size": 54168
+      },
+      {
+        "path": "defensive-opportunity-foundation.js",
+        "sha256": "834395d3f829e27cce798fd859c11f8fee2ed0e9586b8015d5554108aa773a32",
+        "size": 10068
+      },
+      {
+        "path": "defensive-reach-secure-foundation.js",
+        "sha256": "899a5bc5f6c94f6105f1cfac654fb42758bc7ccd9ddb8a39556a1bc0cf937343",
+        "size": 15741
+      },
+      {
+        "path": "defensive-runner-throw-settlement-foundation.js",
+        "sha256": "2c7e08c73553cdcf8b5aaa6a0953aec93ba973998b6bc72704647971d070f6fb",
+        "size": 25982
+      },
+      {
+        "path": "evaluation-registry-bootstrap.js",
+        "sha256": "b81fabb242f9faf7d53d1036b25da87fd5cf1aad104994f8f3b35bfd9f87e925",
+        "size": 3603
+      },
+      {
+        "path": "evaluation-registry.js",
+        "sha256": "1f6340b2caa4b1127974e35096b515744f14aad9ddbfddcafa21d01bd006c3b8",
+        "size": 4408
+      },
+      {
+        "path": "force-advancement.js",
+        "sha256": "d588865c2e234799d5e60a12230df5b0caa9903c07635255d60008fa4aae0e13",
+        "size": 12367
+      },
+      {
+        "path": "high-school-career-evaluation.js",
+        "sha256": "b59c4de6d63efb8b9788cf94e933f471ddedb4bd451fcfd62222c51b11632677",
+        "size": 7828
+      },
+      {
+        "path": "high-school-career-offers.js",
+        "sha256": "675b9eb6bfd653c56d1c16bb0192dc5185f7be7137345be4fa0f021551414dc7",
+        "size": 6461
+      },
+      {
+        "path": "high-school-competition-evidence.js",
+        "sha256": "973d70c8bf20c46a7d3a996fbea7d26afe483fa335ec2f32ac61efb0825565ba",
+        "size": 18269
+      },
+      {
+        "path": "high-school-competition-foundation.js",
+        "sha256": "a8d630d4c99408d8a6cf77178a306d22cbff37a4d367fe2a637d69f9d0dfde92",
+        "size": 17431
+      },
+      {
+        "path": "high-school-competition-reassessment.js",
+        "sha256": "01c7ef6abaa8ca3db7bdc4a08286b07b0be0731d6fb6e280cf3a9918de6e7460",
+        "size": 12533
+      },
+      {
+        "path": "high-school-entry-roster-context.js",
+        "sha256": "839abe78dbe2975c73ff83b770b8148e0bd2663d2acd05acaeb27018036bbad4",
+        "size": 11122
+      },
+      {
+        "path": "high-school-exchange-network.js",
+        "sha256": "a7e33281d24cf1fcbd9c54f66373000794340a4784728bf68af000b4c3b5fec5",
+        "size": 15452
+      },
+      {
+        "path": "high-school-friendly-invitation-producer.js",
+        "sha256": "626d368ffdd262a88fa70411f095a342d0557821583b850aa98dd10cc544253f",
+        "size": 10195
+      },
+      {
+        "path": "high-school-match-opportunity-generation.js",
+        "sha256": "a1884a9e3fb5c941a19e075d2cde660e24924ff5d7344da89fad6b011b5918f6",
+        "size": 16946
+      },
+      {
+        "path": "high-school-opportunity-probability.js",
+        "sha256": "f4d92008ac8c5b2ffc41dcd3dcc92f93c434d1684f1f579e67446b441622b6cd",
+        "size": 7631
+      },
+      {
+        "path": "high-school-opportunity-selection.js",
+        "sha256": "94677ade55ad683f205cbe96cd31616b3f2b07c2a48c3ce75134863c791a4548",
+        "size": 15948
+      },
+      {
+        "path": "high-school-relationship-recency.js",
+        "sha256": "131292d29e748d45273db6d6371ee943fcec11e87e3ab376eac05fb65101d663",
+        "size": 6234
+      },
+      {
+        "path": "high-school-relationship-temporal-authority.js",
+        "sha256": "2cd719430fdb33edf23570d05c955f56cb74831a552cb64687ffdbd92f08f5b1",
+        "size": 9225
+      },
+      {
+        "path": "high-school-schedule-opportunity.js",
+        "sha256": "ad65e5fe1823c17797a7c30eff9b08741d83326a0ef75f50c053e36ac8fc5673",
+        "size": 13638
+      },
+      {
+        "path": "high-school-training-camp-producer.js",
+        "sha256": "f84978455db9d9fc01cfe674bbcaabb7eb9d9482d8cfa0670c3e454f64004181",
+        "size": 13097
+      },
+      {
+        "path": "high-school-year-transition.js",
+        "sha256": "b1f0384e3eb7b4c7bef6d7a0548e125d42333a60dce87293406b3756cf7504a4",
+        "size": 9048
+      },
+      {
+        "path": "index.html",
+        "sha256": "a635cc3f3ad2f169ee67bab39df87a7fee6f5dbe9a50d9a84ec1593099ae688c",
+        "size": 17571
+      },
+      {
+        "path": "match-context-foundation.js",
+        "sha256": "25581d7b3b6dc8ff7771cd02aae14b1ddc3f16d2b94be5ffc39f81bd7824fd72",
+        "size": 5905
+      },
+      {
+        "path": "match-development-settlement-presentation.js",
+        "sha256": "bf6ffc610c5589144614538d64f8c1b5a468fae6108d306209746502c1701c3f",
+        "size": 10321
+      },
+      {
+        "path": "match-experience-development.js",
+        "sha256": "544a9a3625c69d868645011ff0f67804b48cd0734bcb5b1e4410ca593df766f3",
+        "size": 39761
+      },
+      {
+        "path": "match-game-record.js",
+        "sha256": "8e172a1b99f8e54963f1d2434d6fbe4d3bfdf40ce915f8307765d1557d2a6085",
+        "size": 27704
+      },
+      {
+        "path": "match-situation-lifecycle.js",
+        "sha256": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+        "size": 13078
+      },
+      {
+        "path": "match-vnext-same-ball-execution-adapter.js",
+        "sha256": "832f009a14689e883a6d57590f2a85f7d475ad508fa8ec51166c5ebe50a853e6",
+        "size": 10195
+      },
+      {
+        "path": "narrative-condition-boundary.js",
+        "sha256": "ea752ee1d64fb1cb33e5c3e1fb12b08c4b0049fdf4e6ad8aeae932e20c127c39",
+        "size": 8333
+      },
+      {
+        "path": "narrative-condition-flow.js",
+        "sha256": "f2a3e4d71a7c6d7d7b620518c48e24c6ca51144128042f2f2da848d22db9f5f7",
+        "size": 8077
+      },
+      {
+        "path": "national-selection-pipeline.js",
+        "sha256": "3220958c887612160358966b145155d3c086c144f5b27485f4e9a21b147efe35",
+        "size": 40566
+      },
+      {
+        "path": "npc.js",
+        "sha256": "d9faa55802e60437e5c51c58ab75cb4a29f854147ded1af9bd39f5c7e35c11bb",
+        "size": 202
+      },
+      {
+        "path": "offensive-bunt-count-rules.js",
+        "sha256": "433cb8f7a66ce31fad0557a1dd683a07ecda9dbb61ce6261bb8e000010cf4ddb",
+        "size": 2590
+      },
+      {
+        "path": "offensive-bunt-defensive-handoff.js",
+        "sha256": "ef5508e81fbe01a099878a50f4053d3c9e051493c2f205bcab9895d9a97a0a49",
+        "size": 11429
+      },
+      {
+        "path": "offensive-bunt-execution.js",
+        "sha256": "6e27616cd624f8ba22131eaea0c9a0f8a28e3d07a9be2fc42852b6370de823f4",
+        "size": 17631
+      },
+      {
+        "path": "offensive-plate-approach.js",
+        "sha256": "2af35f764895accbbd31d2ab8d5e04419806502b833707620420e88c93ab2a8b",
+        "size": 48889
+      },
+      {
+        "path": "offensive-tactical-action.js",
+        "sha256": "b7c3f93497072e2d5ae84d34d88a5ae6d6c5f4d9459fc594fda95fee3d396b94",
+        "size": 4501
+      },
+      {
+        "path": "offensive-tactical-decision.js",
+        "sha256": "a8128a4eda2b0b33b5ee9195f53d237c0587f86c9ed4c497b44b345a5e19dfa6",
+        "size": 8351
+      },
+      {
+        "path": "offensive-tactical-opportunity.js",
+        "sha256": "ef6aea7c6bf8b0ed8390bb2f9edebbf89416d4b776a17b0aa1fe2a3e0573042c",
+        "size": 4815
+      },
+      {
+        "path": "pitch-observation-foundation.js",
+        "sha256": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+        "size": 8627
+      },
+      {
+        "path": "pitch-sequence-state-foundation.js",
+        "sha256": "e91f1159dd06d13869db7c88412d4d8128814289ee88b53a0a64db2a1af5b7e1",
+        "size": 10824
+      },
+      {
+        "path": "pitch-sequencing.js",
+        "sha256": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+        "size": 19331
+      },
+      {
+        "path": "pitch-tactical-decision-foundation.js",
+        "sha256": "92fe89b086867bb44aa13cac0dfe82764f01468efb512f5f356916fa5ed22511",
+        "size": 4674
+      },
+      {
+        "path": "pitch-tactical-decision-production-adapter.js",
+        "sha256": "43d1fad7ef5d6f4e9eaec52eda5e28d4198b1b16a46bfdcbc70144f6f286df97",
+        "size": 4305
+      },
+      {
+        "path": "pitch-tactical-interpretation-foundation.js",
+        "sha256": "ada9061892b2b0e37c52323730e320a91b1f2832f6bf9acce628f22b8c56161f",
+        "size": 3598
+      },
+      {
+        "path": "pitcher-catcher-tactical-integration.js",
+        "sha256": "daafacdd3e5daefd87aa2cf8a12fbcec601af26151fec6a42e1883bead738bd7",
+        "size": 20459
+      },
+      {
+        "path": "pitcher-mental-state.js",
+        "sha256": "78ee14921792f40cc5d3010ddff774e94f5f5ff7d1d79658e847321bf8ee79d9",
+        "size": 6778
+      },
+      {
+        "path": "pitcher-process-state.js",
+        "sha256": "ba8a3b0d4ffc3db8fc6f006594485a5e4b81f69649b05db04284f98b7684f3e5",
+        "size": 3621
+      },
+      {
+        "path": "plate-decision-foundation.js",
+        "sha256": "c67885604f81c1be2104b9935d6a1d2fbfd85c4e2cc094394782b0916fe441dc",
+        "size": 9184
+      },
+      {
+        "path": "player.js",
+        "sha256": "3414f5a93429bc1a4adbe3c632485e70b5d9175822261b689543a77fa0eb38bd",
+        "size": 112269
+      },
+      {
+        "path": "playing-time-game-exposure.js",
+        "sha256": "46115f4afe056dcc94c48fb74a0d7da5510e314f9f23d9b3cd6d14d107e9355f",
+        "size": 23492
+      },
+      {
+        "path": "receiver-source-snapshot.js",
+        "sha256": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274",
+        "size": 26148
+      },
+      {
+        "path": "relationship-boundary.js",
+        "sha256": "649a886534e59c8ea162b4a6dfb56286638c796edec002f8d263e978b4eaa3a8",
+        "size": 6822
+      },
+      {
+        "path": "relationship-flow.js",
+        "sha256": "4166c0ee10f7f5640cba63c91c156e35167a2338aaa5c302b6eb9a4c03adabf8",
+        "size": 8649
+      },
+      {
+        "path": "rival.js",
+        "sha256": "2087cffea9ea5e8f2049ea7399356d2293dc38d38328d265de474b6a9304c0ca",
+        "size": 115
+      },
+      {
+        "path": "save.js",
+        "sha256": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+        "size": 51068
+      },
+      {
+        "path": "script.js",
+        "sha256": "658479fab49ef9dd5c2ea68dfc6a9513e0c47c693e9fa34e74f2a80a369c9a55",
+        "size": 1113597
+      },
+      {
+        "path": "story.js",
+        "sha256": "c1885f6e0d62e8d0c328eeb3215dde20c6ee25017fdb41ac65c05c2d12b74819",
+        "size": 219222
+      },
+      {
+        "path": "team-roster-foundation.js",
+        "sha256": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "size": 24328
+      },
+      {
+        "path": "team-strength-model.js",
+        "sha256": "08121c9369272753379b220dc6b10e35eba61364ef28861ba22ab4a3ff9af9b2",
+        "size": 5820
+      },
+      {
+        "path": "tests/baseball-match-foundation-2-2-4-3-audit.js",
+        "sha256": "641384dad47ef08fec011af3d632ae9d6afe6186b9945b80cea60a9fee90aa4b",
+        "size": 27721
+      },
+      {
+        "path": "tests/match-authority-coverage-audit.cjs",
+        "sha256": "a24e991d93e14e8d4fa2fc3d9d08c06f927b1412010eff28c3a97535725f2037",
+        "size": 8605
+      },
+      {
+        "path": "tests/match-m0-after-r2-admission-context.cjs",
+        "sha256": "ea8a30ed10c8f5d0fe0ca73b911a801e4da33a3d6803c4e4d33516a842ff52a9",
+        "size": 7118
+      },
+      {
+        "path": "tests/match-vnext-same-ball-execution-contract-test.cjs",
+        "sha256": "70b39d748b622e3e7d16681997f56d5906b02390aea13c91090a3b4034f6fe03",
+        "size": 25708
+      },
+      {
+        "path": "tests/match-vnext-same-ball-production-integration-test.cjs",
+        "sha256": "1df515f8537ac40eb1c0648ca61508787bed46f73f5d775e670fc02156c109b4",
+        "size": 66373
+      },
+      {
+        "path": "tests/pitch-production-source-scope.cjs",
+        "sha256": "4d48e8ded5adfddb044fb9e7d9dc954f9a364fcf9bcd3d45831d7c7ca3836eea",
+        "size": 102995
+      },
+      {
+        "path": "tests/receiver-source-index-authorized-wiring.cjs",
+        "sha256": "48fe3bc74e385bb55a991096ef0ee1445e04c5b9d38b5e75621c43c8ee06bc36",
+        "size": 3041
+      },
+      {
+        "path": "tests/receiver-source-save-authorized-delta.cjs",
+        "sha256": "94a2cac6e155c3936ea2cd03f0d31e4e19feba87d53f87c4be5c3cc5aab28b82",
+        "size": 6643
+      },
+      {
+        "path": "time-boundary.js",
+        "sha256": "d356c8997152f85b490ed5dfaee5882032d3f0d702e10886c067e0a554658b33",
+        "size": 5129
+      },
+      {
+        "path": "docs/match-vnext-sprint-1-same-ball-execution-v0.1.md",
+        "sha256": "70d799cde101a9a489e87c84316f88144049c356e908628a45969bff73fefd33",
+        "size": 28909
+      },
+      {
+        "path": "docs/match-vnext-sprint-1-same-ball-execution-v0.1-evidence.json",
+        "sha256": "326a828791bd60d627c7927fe974bf772998cefabacd199d7241f8ef2c6908ea",
+        "size": 52462488
+      },
+      {
+        "path": "docs/match-vnext-sprint-2-outcome-coverage-v0.1.md",
+        "sha256": "57042e7226b0c034ea0b185585388ae4440e1b77edb04fee2f27065dfe367a9f",
+        "size": 73903
+      },
+      {
+        "path": "docs/match-vnext-sprint-2-outcome-coverage-v0.1-evidence.json",
+        "sha256": "827f49a1fbdc317bfe64ae5461148644154b3c9bd19d2875e86b525d009ac0d6",
+        "size": 60291120
+      },
+      {
+        "path": "package.json",
+        "sha256": "aed3ef652bff37dcec40d172dbb3f4b3304a46215ef16a91564117d77ebf6fd5",
+        "size": 339
+      },
+      {
+        "path": "tests/first-base-receive-active-ground-production-integration-test.js",
+        "sha256": "c07c1481bb8dbf554c2f6f5d63cd83a61ffbcbcbf378c95da4b332a46e7e6734",
+        "size": 34545
+      },
+      {
+        "path": "tests/third-base-ground-production-integration-test.js",
+        "sha256": "c514c61f61cef202e9f31829e0329b43c14bc7cd805953ccdab90d5be834c800",
+        "size": 39730
+      },
+      {
+        "path": "tests/defensive-opportunity-production-integration-test.js",
+        "sha256": "66e710699c6367192d133966487c31bb1a493e9bdccd344d99817da1d6e9c734",
+        "size": 10890
+      },
+      {
+        "path": "tests/defensive-reach-secure-production-integration-test.js",
+        "sha256": "4c8fa910544c3067da60d3fa59c8972897d52c12c35401e069c7ab8218ff7f41",
+        "size": 8627
+      },
+      {
+        "path": "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+        "sha256": "42866df877b0607d08b01a85ecae8f8ee680395f8abc1058f1a442edd2e49749",
+        "size": 18545
+      },
+      {
+        "path": "tests/high-school-career-test-context.js",
+        "sha256": "c77afdf9f9e63e5fcf740605e66afee4cc54bd93e3e63ee4c12382a7b3f012e0",
+        "size": 4768
+      },
+      {
+        "path": "tests/helpers/canonical-match-contract-context.cjs",
+        "sha256": "b09b35cf404c100b6f1d00ff6b8e67e38093fd6d13a22e788413f3bb7c608fb5",
+        "size": 10570
+      },
+      {
+        "path": "tests/catcher-choice-outcome-integrity-v1-test.js",
+        "sha256": "3d5ec87c5198cef45407a0c7a8086be4f87efe805d7d75bbeaf3454f00fc3351",
+        "size": 11122
+      },
+      {
+        "path": "tests/bbp-b2b1-fly-ball-production-integration-test.js",
+        "sha256": "951e454417ee0502a6d6954eaece2ac5d1ca7573d39a77ef4fcb396928651070",
+        "size": 13056
+      },
+      {
+        "path": "tests/bbp-b2a-line-drive-production-integration-test.js",
+        "sha256": "8aee4d5b522f4ad9866ebf7e45016f4fdf9712c456abcb6f25b61fd38c65624f",
+        "size": 12702
+      },
+      {
+        "path": "prototype/match-ui-p1/README.md",
+        "sha256": "a4156586b20877b20ad4401cb1ff45444ab78af2c3c11b0c91603bf421f87575",
+        "size": 3470
+      },
+      {
+        "path": "prototype/match-ui-p1/app.js",
+        "sha256": "d99a50cdd5a7c92dacb3928c56960a00ad8649aa8c40d7f2b6b5e5fab197234a",
+        "size": 48935
+      },
+      {
+        "path": "prototype/match-ui-p1/index.html",
+        "sha256": "e18e8562d013098a84a3a78527b6947e78f0ec7fd320abfca7d5c358be9a5358",
+        "size": 11711
+      },
+      {
+        "path": "prototype/manga-match-spike/index.html",
+        "sha256": "bcfc546daf6e671b8924a8f2594983ef4ccf05c9784e50b5f73f8c15e13ecb21",
+        "size": 12306
+      },
+      {
+        "path": "prototype/manga-motion-spike/index.html",
+        "sha256": "47df62a0c2f59f54e8a263106ea9ff3aa4c82a64e4876e29cde3fac026f13524",
+        "size": 13177
+      },
+      {
+        "path": "docs/match-ui-slice-data-contract-v0.1.md",
+        "sha256": "5ab58b38ffb6ca1e0e7f6063a9f90b9fd8601f422b1acff3cd62552d3bba50a3",
+        "size": 42609
+      }
+    ]
+  },
+  "acceptedHistory": {
+    "sprint1": {
+      "report": "docs/match-vnext-sprint-1-same-ball-execution-v0.1.md",
+      "latestSections": "9-16",
+      "status": "CONTROLLED_SLICE_PASS",
+      "qualification": "Early BLOCKED sections are preserved history."
+    },
+    "sprint2": {
+      "report": "docs/match-vnext-sprint-2-outcome-coverage-v0.1.md",
+      "evidence": "docs/match-vnext-sprint-2-outcome-coverage-v0.1-evidence.json",
+      "latestSections": "25-32",
+      "jsonPath": "coreRecovery",
+      "status": "CORE_RECOVERY_FACTS_PASS",
+      "overall": "PARTIAL",
+      "s2A": "PASS",
+      "productionCases": 9,
+      "closedRunnerCases": 5,
+      "paCommitted": 0,
+      "formalClassification": null,
+      "historicalRegressionSuitesPassed": 22,
+      "qualification": "Not all 22 rerun in this audit. New Recovery closed runner facts are not official PA/ROE/H/E commits."
+    }
+  },
+  "sourceReferences": [
+    {
+      "id": "S01",
+      "path": "team-roster-foundation.js",
+      "line": 1,
+      "functions": "POSITION_ORDER / getCurrentDefender / assertActiveDefense",
+      "observation": "九守位 active assignment；roster 存在不代表守備執行。"
+    },
+    {
+      "id": "S02",
+      "path": "defensive-opportunity-foundation.js",
+      "line": 39,
+      "functions": "RESPONSIBILITY_TABLE / deriveGroundResponsibility / resolveDefensiveOpportunity",
+      "observation": "LF/CF/RF 責任已存在；3B <.025、1B >.99 是來源 sample 邊界，非已量測事件頻率。"
+    },
+    {
+      "id": "S03",
+      "path": "script.js",
+      "line": 6539,
+      "functions": "getDefensiveSimulationCapability / getHighSchoolReachAccess",
+      "observation": "NPC defense/arm/speed 與玩家能力轉接；部分 legacy fallback 仍有預設值。"
+    },
+    {
+      "id": "S04",
+      "path": "script.js",
+      "line": 6994,
+      "functions": "resolveSimulatedHighSchoolPlateAppearance / applyHighSchoolSimulatedPlateAppearance",
+      "observation": "Compressed 使用 batter/P 能力；單次正式 PA、打序、壘包、比分；沒有逐一消費其餘八守位能力。"
+    },
+    {
+      "id": "S05",
+      "path": "ai-plate-appearance-outcome.js",
+      "line": 33,
+      "functions": "resolveCompressedPlateAppearanceOutcome",
+      "observation": "out/productiveOut/walk/single/double/triple/homeRun/strikeout；不產生 HBP 或球場守備動作。"
+    },
+    {
+      "id": "S06",
+      "path": "offensive-plate-approach.js",
+      "line": 444,
+      "functions": "resolveFairContactBallInPlay / resolveNextPitch / completeHeldBallInPlay",
+      "observation": "先有同一 Physical；既有 compressed mapping 與 held same-ball 分支分開；球四/好球三形成 BB/SO。"
+    },
+    {
+      "id": "S07",
+      "path": "script.js",
+      "line": 10616,
+      "functions": "ensureHighSchoolPitcherRuntimeState / prepareHighSchoolPlateDecision / resolveHighSchoolPlateDecisionPitch",
+      "observation": "actual P/control 與 public pitch decision；未閉合 Same-Ball 明確阻擋，不可事後改走另一結果。"
+    },
+    {
+      "id": "S08",
+      "path": "script.js",
+      "line": 5003,
+      "functions": "getHighSchoolPhysicalDefensePlayerContext / createHighSchoolFirstBaseContext / buildHighSchoolFirstBaseExecution",
+      "observation": "玩家 1B activeGround/incomingReceive；NPC SS/2B/3B 上游接續；3-1 有 actual P。"
+    },
+    {
+      "id": "S09",
+      "path": "script.js",
+      "line": 12060,
+      "functions": "buildHighSchoolThirdBaseExecution / buildHighSchoolShortstopExecution / resolveSecondBaseInitiatedRoute",
+      "observation": "3B/SS/2B decision→execution；共用原 runner/force/record owner。"
+    },
+    {
+      "id": "S10",
+      "path": "script.js",
+      "line": 12533,
+      "functions": "applyInfieldResolutionToHighSchoolMatch / applyRoutineDefensiveResolutionToHighSchoolMatch",
+      "observation": "有界舊內野鏈可記 error/FC/DP；不等於 S2 新 Recovery 可提交。"
+    },
+    {
+      "id": "S11",
+      "path": "batted-ball-fly-ball-defense.js",
+      "line": 63,
+      "functions": "resolveFlyBallCatchAccess",
+      "observation": "只接受中/右方向、medium/deep、CF/RF；LF 明確 unsupported。"
+    },
+    {
+      "id": "S12",
+      "path": "script.js",
+      "line": 5530,
+      "functions": "resolveHighSchoolFlyBallCatchOpportunity / applyHighSchoolFlyBallCatchResolution",
+      "observation": "CF/RF catch 可提交一 PA/out；事件型別 flyBallCatchResolution。"
+    },
+    {
+      "id": "S13",
+      "path": "match-game-record.js",
+      "line": 312,
+      "functions": "recordEvent / recordDefensivePlay",
+      "observation": "守備派送僅 playerRoutinePlay、defense meaningfulMomentResolved、defensivePlay；不含 flyBallCatchResolution。"
+    },
+    {
+      "id": "S14",
+      "path": "batted-ball-line-drive-defense.js",
+      "line": 73,
+      "functions": "resolveCatchAccess / resolveCatchExecution",
+      "observation": "淺右平飛球玩家 2B；其他位置/深度不可由物理球型存在推定有 catch。"
+    },
+    {
+      "id": "S15",
+      "path": "script.js",
+      "line": 10189,
+      "functions": "resolveHighSchoolCatcherDecision / applyCatcherResolutionToHighSchoolMatch",
+      "observation": "捕手有 block/hold/reset/throw 選擇與正式獨立守備結算；仍是 legacy synthetic context。"
+    },
+    {
+      "id": "S16",
+      "path": "script.js",
+      "line": 5649,
+      "functions": "getHighSchoolTagUpReceivingTarget / settleAndCloseHighSchoolRunnerTagUpSituation",
+      "observation": "actual C + receiving/reaction；tag-up runner lifecycle 可 hold/send、score/tag；不等於 SF 重新分類或 C PO 已完成。"
+    },
+    {
+      "id": "S17",
+      "path": "defensive-decision-throw-foundation.js",
+      "line": 271,
+      "functions": "resolveScorerEligibility / projectDefensiveAttribution / resolveBatterReachClassification",
+      "observation": "原 action scorer 與 S2-A clean infieldHit；Recovery classifier 尚缺。"
+    },
+    {
+      "id": "S18",
+      "path": "defensive-runner-throw-settlement-foundation.js",
+      "line": 15,
+      "functions": "deriveRunnerArrival / resolveTiming / resolveRecoveryContinuation",
+      "observation": "原 runner 時間/force/third-out；Recovery 只在有終端事實時閉合。"
+    },
+    {
+      "id": "S19",
+      "path": "match-vnext-same-ball-execution-adapter.js",
+      "line": 17,
+      "functions": "execute",
+      "observation": "受控 SS→1B；新 Recovery facts 與可提交 candidate 分離。"
+    },
+    {
+      "id": "S20",
+      "path": "batted-ball-outcome-mapping.js",
+      "line": 35,
+      "functions": "resolveOfficialBallInPlayOutcome",
+      "observation": "settledDefense 或 compressedOfficialClassification；RESULTS 無 error，officialScoring=paResultOnly。"
+    },
+    {
+      "id": "S21",
+      "path": "script.js",
+      "line": 13346,
+      "functions": "settleHighSchoolYearOneMatch / advanceHighSchoolMatchPlaybackStep",
+      "observation": "原 gameEnd→Record/exposure/development/competition/history；全場 owner 可重用。"
+    },
+    {
+      "id": "S22",
+      "path": "match-experience-development.js",
+      "line": 581,
+      "functions": "settleMatchExperienceDevelopment / createFirstBaseDefensiveEvidence / createThirdBaseDefensiveEvidence",
+      "observation": "completed-match-only、settled 防重；1B/3B stage evidence 已存在，非僅 SS/2B。"
+    },
+    {
+      "id": "S23",
+      "path": "save.js",
+      "line": 22,
+      "functions": "normalizeSave / saveGame / loadGame",
+      "observation": "原 PA、ground/line/fly、Situation、GameRecord、experience normalization。"
+    },
+    {
+      "id": "S24",
+      "path": "script.js",
+      "line": 4377,
+      "functions": "createHighSchoolMatchPresentationSnapshot / getHighSchoolPresentationSnapshot / isHighSchoolMatchDecisionVisible",
+      "observation": "frozen score/bases snapshot + presented prefix；尚非全套 live 公開 DTO/command adapter。"
+    },
+    {
+      "id": "S25",
+      "path": "prototype/match-ui-p1/app.js",
+      "line": 103,
+      "functions": "createDemo",
+      "observation": "只讀固定 fixture、presentation state/timers；無 Production command bridge。"
+    },
+    {
+      "id": "S26",
+      "path": "prototype/match-ui-p1/README.md",
+      "line": 3,
+      "functions": "offline demonstration contract",
+      "observation": "明示 OFFLINE、SVG、無 Phaser、無正式 Match/Save。"
+    },
+    {
+      "id": "S27",
+      "path": "playing-time-game-exposure.js",
+      "line": 93,
+      "functions": "resolvePositionLegality / plannedUsage",
+      "observation": "P exposure deferred/noAppearance；有投手能力/文字選項不等於玩家 P 自然入場。"
+    },
+    {
+      "id": "S28",
+      "path": "script.js",
+      "line": 13765,
+      "functions": "shouldReachHighSchoolDefensiveMoment / defensiveOpportunityPhase",
+      "observation": "1B recurring admission；1B/2B/3B/SS 可後續再入場；未保證每場非零事件。"
+    },
+    {
+      "id": "S29",
+      "path": "match-situation-lifecycle.js",
+      "line": 90,
+      "functions": "admitSituation / presentSituation / canResumeSimulation",
+      "observation": "合法 route 與玩家等待/執行/關閉分界。"
+    },
+    {
+      "id": "S30",
+      "path": "batted-ball-physical.js",
+      "line": 105,
+      "functions": "resolveBattedBallPhysicalTruth",
+      "observation": "ground/line/fly、pace/direction/depth；無全場連續座標、HBP/foul-popup 專用物理。"
+    }
+  ],
+  "positions": {
+    "npc": [
+      {
+        "position": "P",
+        "mode": "NPC",
+        "grade": "C3",
+        "verified": "3-1 actual P 接傳／踩一壘，PO=1；另有投球結果影響。",
+        "entry": "chooseHighSchoolYearOneMatchMoment → buildHighSchoolFirstBaseExecution",
+        "witness": "V1-P-CREDIT",
+        "sources": [
+          "S03",
+          "S08",
+          "S13"
+        ],
+        "gaps": "P 主責短打／滾地／popup 與自然補位主要情境 UNVERIFIED。",
+        "reuse": "保留接傳／能力轉接；補齊最小責任矩陣。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "correspondingTests": [
+          {
+            "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          }
+        ]
+      },
+      {
+        "position": "C",
+        "mode": "NPC",
+        "grade": "C2",
+        "verified": "Tag-up receiving actor/能力及受控 terminal；尚無完整 NPC C 統計閉環證明。",
+        "entry": "getHighSchoolTagUpReceivingTarget → resolveHighSchoolRunnerTagUpDecision",
+        "witness": "T06",
+        "sources": [
+          "S03",
+          "S16",
+          "S13"
+        ],
+        "gaps": "逐球接捕、K 的 C PO、blocking/foul-popup、actor attribution UNVERIFIED。",
+        "reuse": "沿用 receiving/runner；補最小接捕與歸屬，毋須玩家捕手全玩法。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "correspondingTests": [
+          {
+            "file": "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          },
+          {
+            "file": "tests/catcher-choice-outcome-integrity-v1-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          }
+        ]
+      },
+      {
+        "position": "1B",
+        "mode": "NPC",
+        "grade": "C3",
+        "verified": "NPC 接傳／踩壘與 5-3、6-3、5-4-3 的 PO/DP 入帳。",
+        "entry": "buildHighSchoolThirdBaseExecution / buildHighSchoolShortstopExecution → original applier",
+        "witness": "I3-3B-5-3 / I8-3B-5-4-3 / I9-PLAYER-SS",
+        "sources": [
+          "S08",
+          "S09",
+          "S10",
+          "S13"
+        ],
+        "gaps": "一般 NPC primary 1B 全場、漏接後各種 runner continuation 未完整驗證。",
+        "reuse": "重用；S2 Recovery 不當作全部 1B 能力。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "correspondingTests": [
+          {
+            "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          },
+          {
+            "file": "tests/match-vnext-same-ball-production-integration-test.cjs",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          }
+        ]
+      },
+      {
+        "position": "2B",
+        "mode": "NPC",
+        "grade": "C3",
+        "verified": "NPC primary 2B→玩家1B，以及 5-4-3 pivot／PO/A/DP。",
+        "entry": "first-base incoming continuation / third-base execution",
+        "witness": "I7-NPC-2B-PLAYER-1B / I8-3B-5-4-3",
+        "sources": [
+          "S02",
+          "S08",
+          "S09",
+          "S13"
+        ],
+        "gaps": "NPC 全場獨立責任、長平飛、fly／relay 失敗延續未完整覆蓋。",
+        "reuse": "沿用既有接傳與 pivot；薄接正式 NPC policy。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "correspondingTests": [
+          {
+            "file": "tests/defensive-opportunity-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          },
+          {
+            "file": "tests/defensive-reach-secure-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          },
+          {
+            "file": "tests/third-base-ground-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          }
+        ]
+      },
+      {
+        "position": "3B",
+        "mode": "NPC",
+        "grade": "C3",
+        "verified": "NPC 3B→玩家1B，實際 3B A +1。",
+        "entry": "first-base incoming continuation",
+        "witness": "I6-NPC-3B-PLAYER-1B",
+        "sources": [
+          "S02",
+          "S08",
+          "S13"
+        ],
+        "gaps": "不是所有左側球；僅 near-line lane，完整自然主責覆蓋未證明。",
+        "reuse": "沿用 shared classifier 與能力，避免複製 Match owner。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "correspondingTests": [
+          {
+            "file": "tests/third-base-ground-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          },
+          {
+            "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          }
+        ]
+      },
+      {
+        "position": "SS",
+        "mode": "NPC",
+        "grade": "C3",
+        "verified": "S1/S2-A NPC SS→1B；舊 incoming SS→玩家1B 正式 PA/A/PO。",
+        "entry": "same-ball public pitch / first-base incoming continuation",
+        "witness": "T01 / T02 / I4-NPC-SS-PLAYER-1B",
+        "sources": [
+          "S08",
+          "S17",
+          "S18",
+          "S19"
+        ],
+        "gaps": "S2 新 Recovery ROE/PA 尚未提交；其他球型、多跑者自然 rollout 未通過。",
+        "reuse": "重用；模式與範圍明示。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "correspondingTests": [
+          {
+            "file": "tests/ss-defensive-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          },
+          {
+            "file": "tests/match-vnext-same-ball-production-integration-test.cjs",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          }
+        ]
+      },
+      {
+        "position": "LF",
+        "mode": "NPC",
+        "grade": "C1",
+        "verified": "有實際 LF 責任綁定與能力來源；medium-left fly 明確 unsupported，舊 mapper 提交 single。",
+        "entry": "getHighSchoolDefensiveOpportunity → fly access → existing ordinary fallback",
+        "witness": "A1-LF",
+        "sources": [
+          "S02",
+          "S03",
+          "S11",
+          "S20"
+        ],
+        "gaps": "無 LF catch 執行成功；拾球／回傳／基本安打與 error 因果閉環未證明。",
+        "reuse": "EXTEND 共用 airborne／NPC 路徑；不能稱不存在。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "correspondingTests": [
+          {
+            "file": "tests/defensive-opportunity-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          }
+        ]
+      },
+      {
+        "position": "CF",
+        "mode": "NPC",
+        "grade": "C2",
+        "verified": "實際 NPC CF 接殺、PA/out 已提交；本人 chances/PO 仍 0。",
+        "entry": "resolveHighSchoolFlyBallCatchOpportunity → applyHighSchoolFlyBallCatchResolution",
+        "witness": "A2-CF / V2-CF-CREDIT",
+        "sources": [
+          "S11",
+          "S12",
+          "S13"
+        ],
+        "gaps": "守備員正式 PO 缺口；miss 後 single／回傳、其他球型與自然全場未完成。",
+        "reuse": "重用 catch 計算，ADAPT 原 defensivePlay ledger。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "correspondingTests": [
+          {
+            "file": "tests/defensive-reach-secure-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          },
+          {
+            "file": "tests/bbp-b2b1-fly-ball-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          }
+        ]
+      },
+      {
+        "position": "RF",
+        "mode": "NPC",
+        "grade": "C2",
+        "verified": "實際 NPC RF 接殺、PA/out 已提交；本人 chances/PO 仍 0。",
+        "entry": "resolveHighSchoolFlyBallCatchOpportunity → applyHighSchoolFlyBallCatchResolution",
+        "witness": "A3-RF / V3-RF-CREDIT",
+        "sources": [
+          "S11",
+          "S12",
+          "S13"
+        ],
+        "gaps": "同 CF；outfield hit 不能等同 catch failure 的抽樣結果。",
+        "reuse": "同 CF，與 LF 合併一個最小 closure 工作。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "correspondingTests": [
+          {
+            "file": "tests/defensive-reach-secure-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          },
+          {
+            "file": "tests/bbp-b2b1-fly-ball-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          }
+        ]
+      }
+    ],
+    "player": [
+      {
+        "position": "P",
+        "mode": "Player",
+        "grade": "C1",
+        "verified": "有投手能力／legacy 防守文字；正式 playing-time entry 明示 deferred。",
+        "entry": "PlayingTimeGameExposure → plannedUsage/noAppearance",
+        "witness": "S27 source; no fresh player P execution",
+        "sources": [
+          "S27",
+          "S03"
+        ],
+        "gaps": "可自然入場的玩家 P、投球/短打決策、正式專屬發展 UNVERIFIED。",
+        "reuse": "第一版不選 P 玩法；NPC P 保留。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "playableC5": "NOT_DEMONSTRATED",
+        "correspondingTests": [
+          {
+            "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          }
+        ]
+      },
+      {
+        "position": "C",
+        "mode": "Player",
+        "grade": "C3",
+        "verified": "公開 secureAndHold 進原 catcher applier；0 新 PA、0 新 out、原 runner 保留、defense chances+1。",
+        "entry": "chooseHighSchoolYearOneMatchMoment → resolveHighSchoolCatcherDecision → applyCatcherResolutionToHighSchoolMatch",
+        "witness": "I5-PLAYER-C",
+        "sources": [
+          "S15",
+          "S13",
+          "S22"
+        ],
+        "gaps": "synthetic context；逐球接捕、更多自然情境與 catcher 專屬 active 成長未驗證。",
+        "reuse": "可列後續低畫面成本候選，但不優先於既有內野。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "playableC5": "NOT_DEMONSTRATED",
+        "correspondingTests": [
+          {
+            "file": "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          },
+          {
+            "file": "tests/catcher-choice-outcome-integrity-v1-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          }
+        ]
+      },
+      {
+        "position": "1B",
+        "mode": "Player",
+        "grade": "C3",
+        "verified": "公開 3U/3-1、incoming receive；真玩家 PO/A。固定一場正常入口有第7局 incoming receive。",
+        "entry": "public choose → first-base execution / automatic receiving → original record",
+        "witness": "I1-1B-3U / I2-1B-3-1 / N1",
+        "sources": [
+          "S08",
+          "S10",
+          "S22",
+          "S28"
+        ],
+        "gaps": "3-6-3 有來源和原測試但本輪未重跑完整 suite；主要自然情境與全部操作回歸未證明。",
+        "reuse": "低成本 Alpha 候選；自動接傳不是玩家自主決策。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "playableC5": "NOT_DEMONSTRATED",
+        "correspondingTests": [
+          {
+            "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          },
+          {
+            "file": "tests/match-vnext-same-ball-production-integration-test.cjs",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          }
+        ]
+      },
+      {
+        "position": "2B",
+        "mode": "Player",
+        "grade": "C3",
+        "verified": "正式 ground pause→control→一次 settlement；淺右 line catch 為 routine；來源另有 pivot/4-6-3。",
+        "entry": "prepareHighSchoolDefensiveMomentFromSimulation → infield family → original applier",
+        "witness": "T03 / T04",
+        "sources": [
+          "S09",
+          "S10",
+          "S14",
+          "S29"
+        ],
+        "gaps": "非所有平飛／飛球；自然頻率與完整 C4/C5 未證明。",
+        "reuse": "與 SS 作第一版主要守備選擇。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "playableC5": "NOT_DEMONSTRATED",
+        "correspondingTests": [
+          {
+            "file": "tests/defensive-opportunity-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          },
+          {
+            "file": "tests/defensive-reach-secure-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          },
+          {
+            "file": "tests/third-base-ground-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          }
+        ]
+      },
+      {
+        "position": "3B",
+        "mode": "Player",
+        "grade": "C3",
+        "verified": "公開 5-3 與 5-4-3，一次 PA，A/PO/DP 對應真 actor。固定自然一場完成但無 3B physical event。",
+        "entry": "public choose → buildHighSchoolThirdBaseExecution → original applier",
+        "witness": "I3-3B-5-3 / I8-3B-5-4-3 / N2",
+        "sources": [
+          "S02",
+          "S09",
+          "S10",
+          "S22"
+        ],
+        "gaps": "5U 有原來源/測試；200 場 cohort 未重跑；本輪不能升 C4。",
+        "reuse": "低成本後續候選，先確認自然入場密度。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "playableC5": "NOT_DEMONSTRATED",
+        "correspondingTests": [
+          {
+            "file": "tests/third-base-ground-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          },
+          {
+            "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          }
+        ]
+      },
+      {
+        "position": "SS",
+        "mode": "Player",
+        "grade": "C3",
+        "verified": "公開 6-3 真正 A/1B PO；Same-Ball batting 中 NPC SS 不混給玩家守備 credit。",
+        "entry": "public choose → buildHighSchoolShortstopExecution → original applier",
+        "witness": "I9-PLAYER-SS / T02",
+        "sources": [
+          "S09",
+          "S10",
+          "S19",
+          "S22"
+        ],
+        "gaps": "非全部左側球；自然主責全覆蓋、fly/line 與 C5 操作尚未證明。",
+        "reuse": "第一版主要守備候選。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "playableC5": "NOT_DEMONSTRATED",
+        "correspondingTests": [
+          {
+            "file": "tests/ss-defensive-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          },
+          {
+            "file": "tests/match-vnext-same-ball-production-integration-test.cjs",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          }
+        ]
+      },
+      {
+        "position": "LF",
+        "mode": "Player",
+        "grade": "C1",
+        "verified": "有 roster assignment、broad 外野手 legacy 決策文字及能力；正式 fly context 明確排除 player actor。",
+        "entry": "legacy broad 外野手 choice surface; getHighSchoolFlyBallDefenderCatchContext rejects player",
+        "witness": "S11/S12/S15 source",
+        "sources": [
+          "S02",
+          "S03",
+          "S11",
+          "S12"
+        ],
+        "gaps": "精確 LF 玩家 route、真正同球 execution、評價與接續 UNVERIFIED。",
+        "reuse": "延後玩家 OF 深度；不要將 broad 外野手當作 LF 已驗證。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "playableC5": "NOT_DEMONSTRATED",
+        "correspondingTests": [
+          {
+            "file": "tests/defensive-opportunity-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          }
+        ]
+      },
+      {
+        "position": "CF",
+        "mode": "Player",
+        "grade": "C1",
+        "verified": "同 LF；NPC CF catch 成功不代表玩家 CF 有操作。",
+        "entry": "legacy broad OF surface; player catch excluded",
+        "witness": "S11/S12 source",
+        "sources": [
+          "S02",
+          "S03",
+          "S11",
+          "S12"
+        ],
+        "gaps": "精確 CF 公開入場與合法決策改變執行 UNVERIFIED。",
+        "reuse": "同 LF。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "playableC5": "NOT_DEMONSTRATED",
+        "correspondingTests": [
+          {
+            "file": "tests/defensive-reach-secure-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          },
+          {
+            "file": "tests/bbp-b2b1-fly-ball-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          }
+        ]
+      },
+      {
+        "position": "RF",
+        "mode": "Player",
+        "grade": "C1",
+        "verified": "同 LF；NPC RF catch 成功不代表玩家 RF 有操作。",
+        "entry": "legacy broad OF surface; player catch excluded",
+        "witness": "S11/S12 source",
+        "sources": [
+          "S02",
+          "S03",
+          "S11",
+          "S12"
+        ],
+        "gaps": "精確 RF 公開入場與合法決策改變執行 UNVERIFIED。",
+        "reuse": "同 LF。",
+        "naturalMajorCoverage": "UNVERIFIED",
+        "playableC5": "NOT_DEMONSTRATED",
+        "correspondingTests": [
+          {
+            "file": "tests/defensive-reach-secure-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": true,
+            "qualification": "Fresh existing suite; role boundary remains limited to its actual assertions."
+          },
+          {
+            "file": "tests/bbp-b2b1-fly-ball-production-integration-test.js",
+            "executedAsFullSuiteThisAudit": false,
+            "qualification": "Source reviewed or accepted-history only; exact role execution, where present, comes from separately recorded bounded VM probes. No full-suite PASS claimed."
+          }
+        ]
+      }
+    ]
+  },
+  "classificationPolicy": {
+    "C0": "No usable execution source found within inspected scope.",
+    "C1": "Design/foundation exists; formal execution for the relevant role not demonstrated.",
+    "C2": "Controlled runtime success, with required record/role closure incomplete.",
+    "C3": "The explicitly bounded path enters original Match/Game Record settlement.",
+    "C4": "Main natural scenarios and continuation verified.",
+    "C5": "First playable controls and required regression demonstrated.",
+    "unverified": "Insufficient source/execution evidence; do not guess. No C4/C5 claims made. A lower bounded grade does not claim absence of other prototypes.",
+    "conservativeCF_RF": "C2 because the actual catcher's defensive PO/chances are not credited, even though the PA layer has committed."
+  },
+  "outcomes": [
+    {
+      "outcome": "Groundout",
+      "layers": {
+        "simulation": "AI out 沒有 ground subtype；Physical mapper/legacy 可形成 out",
+        "physical": "groundBall 已產生",
+        "defense": "SS/2B/3B/1B→接傳/踩壘已受控成功",
+        "scorer": "內野 action scorer/PO/A 可用",
+        "owner": "原 infield owner 與 S1 正式提交",
+        "player": "公開 6-3/5-3/3U/3-1 可操作並續行"
+      },
+      "closestExistingPath": "先沿原 legacy infield settlement；new Same-Ball 僅既定受控範圍",
+      "sources": [
+        "S06",
+        "S08",
+        "S09",
+        "S10",
+        "S17"
+      ],
+      "witnesses": [
+        "I1-1B-3U",
+        "I2-1B-3-1",
+        "I3-3B-5-3",
+        "I9-PLAYER-SS",
+        "T02"
+      ]
+    },
+    {
+      "outcome": "Infield hit",
+      "layers": {
+        "simulation": "single 可抽樣≠正式 infieldHit",
+        "physical": "fair ground 已有",
+        "defense": "S2-A clean SS→1B runner 先到",
+        "scorer": "resolveBatterReachClassification 明確支持有界 infieldHit",
+        "owner": "S2-A O0/O1/O2 提交；Recovery 非此類",
+        "player": "受控 PA 可接下一棒；自然廣泛使用未開放"
+      },
+      "closestExistingPath": "S2-A clean proof→原 owner；不要套用到所有 safe",
+      "sources": [
+        "S17",
+        "S18",
+        "S19"
+      ],
+      "witnesses": [
+        "T01",
+        "T02"
+      ]
+    },
+    {
+      "outcome": "Outfield flyout",
+      "layers": {
+        "simulation": "generic out 可抽樣",
+        "physical": "flyBall+方向/深度",
+        "defense": "CF/RF medium/deep catch；LF unsupported",
+        "scorer": "caught→out；CF/RF actor PO 未入帳",
+        "owner": "PA/out 有；defensivePlay dispatch 缺口",
+        "player": "可觀看 NPC catch；玩家 OF catch 未接入"
+      },
+      "closestExistingPath": "CF/RF 原 catch→補 existing defensivePlay；擴 LF 同一路徑",
+      "sources": [
+        "S11",
+        "S12",
+        "S13"
+      ],
+      "witnesses": [
+        "A1-LF",
+        "V2-CF-CREDIT",
+        "V3-RF-CREDIT"
+      ]
+    },
+    {
+      "outcome": "Outfield single",
+      "layers": {
+        "simulation": "AI/Physical mapper single",
+        "physical": "line/fly 深淺方向已存在",
+        "defense": "LF probe 只是 fallback single；非拾球/回傳成功",
+        "scorer": "mapper paResultOnly；缺 hit/error/ordinary-effort 與角色完整閉環",
+        "owner": "原 generic single 能進壘/PA/H",
+        "player": "文字結果可續行；具 actor 的自然 single UNVERIFIED"
+      },
+      "closestExistingPath": "保留 generic single 模式；下一 sprint 補同球拾球/保守回傳與 scorer 邊界",
+      "sources": [
+        "S04",
+        "S05",
+        "S20",
+        "S11"
+      ],
+      "witnesses": [
+        "A1-LF"
+      ]
+    },
+    {
+      "outcome": "Line drive",
+      "layers": {
+        "simulation": "generic out/hit；無獨立 AI line subtype",
+        "physical": "lineDrive 已有",
+        "defense": "僅玩家2B淺右 routine catch；其他 unsupported",
+        "scorer": "catch→out；未接住交 compressed classifier",
+        "owner": "既有 routine PA owner 可提交",
+        "player": "自動接球非專屬玩家 catch decision"
+      },
+      "closestExistingPath": "2B existing routine chain；其餘明示 compressed，不冒稱逐守位",
+      "sources": [
+        "S14",
+        "S20",
+        "S10"
+      ],
+      "witnesses": [
+        "T03"
+      ]
+    },
+    {
+      "outcome": "Double",
+      "layers": {
+        "simulation": "AI/mapper 支持",
+        "physical": "相容的 line/fly/ground shape；不直接定 double",
+        "defense": "未驗證完整 OF relay/兩壘 terminal",
+        "scorer": "mapper PA 分類可用；非依 executed OF defense 裁定",
+        "owner": "applyHighSchoolSimulatedPlateAppearance + Record doubles",
+        "player": "既有結果文字/續行；本輪未做新逐球 double probe"
+      },
+      "closestExistingPath": "原 compressed double→原合法保守進壘",
+      "sources": [
+        "S04",
+        "S05",
+        "S20",
+        "S13"
+      ],
+      "witnesses": []
+    },
+    {
+      "outcome": "Triple",
+      "layers": {
+        "simulation": "AI/mapper 支持",
+        "physical": "相容 shape；非三壘保證",
+        "defense": "完整 retrieve/relay/第三壘 terminal 未驗證",
+        "scorer": "compressed PA 分類，無完整 OF scorer proof",
+        "owner": "原 applier/Record triples",
+        "player": "既有文字續行；fresh case UNVERIFIED"
+      },
+      "closestExistingPath": "原 compressed triple；不偽造傳球動作",
+      "sources": [
+        "S04",
+        "S05",
+        "S20",
+        "S13"
+      ],
+      "witnesses": []
+    },
+    {
+      "outcome": "Home run",
+      "layers": {
+        "simulation": "AI/mapper 支持",
+        "physical": "非 ground 深遠 airborne 可映射；不是越牆幾何",
+        "defense": "無需守備出局；牆/場地模型未建立",
+        "scorer": "PA homeRun 分類；非 fence crossing proof",
+        "owner": "原 all-runners-score applier/Record HR",
+        "player": "原結果文字與換棒；fresh new case UNVERIFIED"
+      },
+      "closestExistingPath": "原 compressed HR；第一版不要求精密越牆物理",
+      "sources": [
+        "S04",
+        "S05",
+        "S20",
+        "S30"
+      ],
+      "witnesses": []
+    },
+    {
+      "outcome": "Fielding/throwing error",
+      "layers": {
+        "simulation": "AI RESULTS 無 error；legacy infield 可產生",
+        "physical": "physical + failed secure/throw/receive facts",
+        "defense": "legacy infield error 因果鏈已有；new Recovery 九例中五 runner closed",
+        "scorer": "legacy scorer 有；S2 Recovery affirmative ROE proof 缺",
+        "owner": "legacy error 可提交；S2 Recovery candidate.closed=false",
+        "player": "legacy 可續；new S2 error 明確 BLOCKED"
+      },
+      "closestExistingPath": "沿用 legacy 有界 error；S2 需 scorer→settled-defense-only mapper→held owner",
+      "sources": [
+        "S10",
+        "S17",
+        "S18",
+        "S19",
+        "S20"
+      ],
+      "witnesses": [
+        "T01",
+        "T02",
+        "acceptedS2.coreRecovery"
+      ]
+    },
+    {
+      "outcome": "Fielder's choice",
+      "layers": {
+        "simulation": "AI generic out 無 FC subtype",
+        "physical": "ground+force context",
+        "defense": "前位 force/retirement 與 batter safe proof",
+        "scorer": "legacy batterScoring.fieldersChoice；不是看安全標籤",
+        "owner": "原 owner PA token out + 真 runners/outs；無 hit",
+        "player": "內野已接 choices；本輪未新執行 FC case"
+      },
+      "closestExistingPath": "原 projectHighSchoolInfieldScoredResolution→同一 settlement",
+      "sources": [
+        "S10",
+        "S17",
+        "S18"
+      ],
+      "witnesses": []
+    },
+    {
+      "outcome": "Double play",
+      "layers": {
+        "simulation": "AI 不抽 DP；內野 execution 可形成",
+        "physical": "ground/force context",
+        "defense": "5-4-3 fresh 真兩個 retirements；3-6-3/4-6-3 有原來源",
+        "scorer": "action PO/A/DP，順序與 third-out 共用 owner",
+        "owner": "一 PA 兩 outs，三 actor 各 DP+1",
+        "player": "公開 challenge 可操作；失敗/partial 仍需原案例界線"
+      },
+      "closestExistingPath": "先重用既有 infield DP，無需所有 NPC PA 強制 detailed",
+      "sources": [
+        "S08",
+        "S09",
+        "S10",
+        "S13",
+        "S18"
+      ],
+      "witnesses": [
+        "I8-3B-5-4-3"
+      ]
+    },
+    {
+      "outcome": "Sacrifice fly/tag-up",
+      "layers": {
+        "simulation": "productiveOut 不等於 SF",
+        "physical": "airborne catch/retouch 有來源",
+        "defense": "CF/RF catch + tag-up SEND/HOLD；NPC C receiving",
+        "scorer": "合法跑者裁定有；正式 SF/AB 更正未接",
+        "owner": "tag-up score/out 可提交；未見重分類原 PA 成 SF",
+        "player": "player third-base runner 可決策；其他拓樸 held/deferred"
+      },
+      "closestExistingPath": "Alpha 暫採原 HOLD/retouch；要 SEND 得分就必須先補 SF/RBI/actor correctness",
+      "sources": [
+        "S12",
+        "S13",
+        "S16"
+      ],
+      "witnesses": [
+        "T06"
+      ]
+    },
+    {
+      "outcome": "Foul/popup",
+      "layers": {
+        "simulation": "foul 由 pitch 決定；AI 無 foul/pop subtype",
+        "physical": "OPA foul vs fair；Physical 僅 ground/line/fly，無完整 foul-popup 場地",
+        "defense": "foul catch/P/C pop 未證明；不可把 shallow fly 直接稱 popup",
+        "scorer": "foul 保持 count；popup catch scorer UNVERIFIED",
+        "owner": "foul 不提交 PA；popup 終局未驗證",
+        "player": "投打 foul 可續；捕界外飛球操作未接"
+      },
+      "closestExistingPath": "第一版 foul dead ball、兩好球不再加K；可不生成可接殺 popup",
+      "sources": [
+        "S06",
+        "S07",
+        "S30"
+      ],
+      "witnesses": [
+        "T02"
+      ]
+    },
+    {
+      "outcome": "Strikeout/walk/HBP",
+      "layers": {
+        "simulation": "AI/OPA 產生 SO/BB；未找到 HBP producer",
+        "physical": "SO/BB 非 BIP；HBP 未有 pitch/body collision",
+        "defense": "K 的 C attribution 未完整；BB 用 forced advance",
+        "scorer": "Record 可計 SO/BB/HBP；收 token ≠ HBP gameplay",
+        "owner": "SO/BB 原 count/applier/Record；HBP 只有接收能力",
+        "player": "SO/BB 可操作並續；HBP UNVERIFIED"
+      },
+      "closestExistingPath": "第一版保留 SO/BB，不生成 HBP；C 接捕/PO 納最小責任檢查",
+      "sources": [
+        "S04",
+        "S05",
+        "S06",
+        "S13"
+      ],
+      "witnesses": [
+        "T02",
+        "N1",
+        "N2"
+      ]
+    }
+  ],
+  "reuse": [
+    {
+      "module": "Pitch/Tactical/Plate Decision",
+      "decision": "REUSE",
+      "current": "原投打/球數/策略/真能力；S1 actual P/control 已有證據",
+      "gap": "更廣 natural Same-Ball 未通過；不要把 catcher tactical 當玩家 C",
+      "dependencies": "PitchSequencing、PlateDecision、OPA、active P",
+      "cost": "低：沿公開 decision 接點",
+      "authority": "保留原 PA owner；不新增結果權威",
+      "alphaValue": "高：立即提供 batting agency",
+      "sources": [
+        "S06",
+        "S07"
+      ]
+    },
+    {
+      "module": "BattedBallPhysical",
+      "decision": "REUSE",
+      "current": "同球 ground/line/fly、粗方向深度",
+      "gap": "無全場連續座標/牆/界外接殺；非首版阻礙",
+      "dependencies": "OPA actual pitch/contact",
+      "cost": "低",
+      "authority": "只輸出 facts；不提交 Match",
+      "alphaValue": "高：供 NPC 責任與呈現",
+      "sources": [
+        "S30",
+        "S06"
+      ]
+    },
+    {
+      "module": "Opportunity/Reach/Secure",
+      "decision": "EXTEND",
+      "current": "九守位 active roster、部分 primary topology、能力與接控",
+      "gap": "LF 執行與 C/P 最小責任、更多 NPC admission 缺口",
+      "dependencies": "Physical、Roster、既有 Reach/Secure",
+      "cost": "中：共用角色規則，不逐守位複製結算",
+      "authority": "純 facts→同一 applier",
+      "alphaValue": "最高：補九守位最低責任",
+      "sources": [
+        "S02",
+        "S03",
+        "S08",
+        "S11"
+      ]
+    },
+    {
+      "module": "Legacy infield execution",
+      "decision": "WRAP/ADAPT",
+      "current": "SS/2B/3B/1B 與 NPC 接傳/pivot/cover 已可結算",
+      "gap": "部分結構以玩家/1B context 編排，不能直接稱全場 NPC 通用",
+      "dependencies": "Decision/Throw、Runner、Force、Scorer",
+      "cost": "中：小型 actor/mode adapter；避免每個守位一套提交",
+      "authority": "沿 applyHighSchoolDefensiveSettlementFacts 和 Record",
+      "alphaValue": "高：重用最多已有 gameplay",
+      "sources": [
+        "S08",
+        "S09",
+        "S10",
+        "S18"
+      ]
+    },
+    {
+      "module": "Fly/line defense",
+      "decision": "EXTEND",
+      "current": "CF/RF catch；玩家2B淺右平飛",
+      "gap": "LF 拒絕；OF single/miss/error、catcher PO 及 catch actor ledger 不完整",
+      "dependencies": "Reach、Physical、OutcomeMapping、Record dispatcher",
+      "cost": "中：先 LF/CF/RF catch/single 最小閉環",
+      "authority": "以原 defensivePlay 事件投影；不新建 Record",
+      "alphaValue": "最高：直接增加基本可見結果",
+      "sources": [
+        "S11",
+        "S12",
+        "S13",
+        "S14"
+      ]
+    },
+    {
+      "module": "AI compressed PA",
+      "decision": "REUSE",
+      "current": "BB/SO/1B/2B/3B/HR 與保守合法進壘",
+      "gap": "沒有逐野手責任或非 P 守備能力影響",
+      "dependencies": "Batter/P capability、原 applier",
+      "cost": "低；逐 NPC 覆蓋另補 shared adapter",
+      "authority": "獨立明示的 compressed mode；不得與已執行詳細球重抽並用",
+      "alphaValue": "高：保留完整比賽節奏與成本",
+      "sources": [
+        "S04",
+        "S05"
+      ]
+    },
+    {
+      "module": "OutcomeMapping",
+      "decision": "WRAP/ADAPT",
+      "current": "settledDefense 或一次 compressed PA classification",
+      "gap": "error token 不接受；paResultOnly 不是所有 scorer 裁定",
+      "dependencies": "Physical、已閉合 defense proof",
+      "cost": "低至中：限定既有 settled-defense-only 消費；先定因果證據",
+      "authority": "分類不能取代 runner/Record owner",
+      "alphaValue": "高；S2 ROE 若啟用則必補",
+      "sources": [
+        "S20",
+        "S17"
+      ]
+    },
+    {
+      "module": "Action Scorer / S2 Recovery",
+      "decision": "EXTEND",
+      "current": "legacy E/FC/PO/A；clean S2 infieldHit；5 runner closures",
+      "gap": "new recovered reach 的 ordinary effort/clean potential out/attributable advance/ROE 未完",
+      "dependencies": "真正 actions、Runner terminal、Recovery facts",
+      "cost": "中；先分類與有界提交，深 recovery 另案",
+      "authority": "保留原 scorer；不能在 mapper 寫 safe→single/任意E",
+      "alphaValue": "條件性：新 S2 自然啟用才是 P0；原 Alpha 可先維持 mode-off",
+      "sources": [
+        "S17",
+        "S18",
+        "S19"
+      ]
+    },
+    {
+      "module": "Runner/Force/ThirdOut + canonical applier",
+      "decision": "REUSE",
+      "current": "合法 outs/base/score，ordered retirements，third-out",
+      "gap": "新拓樸仍須 terminal facts；不能以比例或 pending 當到壘",
+      "dependencies": "既有 actions/timing、Force",
+      "cost": "低接線；不重寫公式",
+      "authority": "唯一 canonical state 寫入",
+      "alphaValue": "最高",
+      "sources": [
+        "S18",
+        "S10"
+      ]
+    },
+    {
+      "module": "GameRecord / Experience / Save / Career",
+      "decision": "REUSE",
+      "current": "原 PA/eventRefs、防重、終場、成長、history、normalize",
+      "gap": "缺的是新事件投影與新角色 evidence，不是新 schema",
+      "dependencies": "settled official events、existing context",
+      "cost": "低至中映射；schema/核心另案才動",
+      "authority": "保持原 ledger/settlement IDs；NPC 不給玩家 active 學習",
+      "alphaValue": "最高",
+      "sources": [
+        "S13",
+        "S21",
+        "S22",
+        "S23"
+      ]
+    },
+    {
+      "module": "Public presentation boundary",
+      "decision": "WRAP/ADAPT",
+      "current": "snapshot、cursor、choices、lifecycle 已有",
+      "gap": "缺 live allowlist DTO/command+event drain；不能暴露 raw Match",
+      "dependencies": "原 visible prefix、public decision owner、receipt/eventRefs",
+      "cost": "低至中；薄接口，不建 Director",
+      "authority": "純讀展示；命令只呼原 handler",
+      "alphaValue": "最高：最早 Phaser 接入點",
+      "sources": [
+        "S24",
+        "S25",
+        "S29"
+      ]
+    },
+    {
+      "module": "Legacy generic positional result branch",
+      "decision": "LOCAL REPLACE CANDIDATE",
+      "current": "generic ground-style firstStage/secondStage，可提供舊 broad role 選擇",
+      "gap": "用於精確 LF/CF/RF/P 會有角色錯配與第二種結果解釋風險; Catcher uses a separate explicit legacy handler.",
+      "dependencies": "resolveLegacyHighSchoolDefensivePlay、旧 apply route",
+      "cost": "局部中；只在正式共用 NPC path 覆蓋後替換 admission/selection，保留舊存檔",
+      "authority": "不重寫 canonical owner；禁止每新增守位複製 settlement",
+      "alphaValue": "中；理由是角色/權威衝突，非程式複雜",
+      "sources": [
+        "S15",
+        "S11",
+        "S10"
+      ]
+    },
+    {
+      "module": "Deep receiver/recovery/physics/manga polish",
+      "decision": "DEFER",
+      "current": "既有 receiver、recovery、離線節奏原型可保留",
+      "gap": "首版無需多次補救、連續座標與全守位微操",
+      "dependencies": "首版基本終端事實與呈現接口",
+      "cost": "低：保留；延後擴深",
+      "authority": "不得延後已執行但 unresolved 的活球結算",
+      "alphaValue": "節省工期；只可事前選合法簡化模式",
+      "sources": [
+        "S18",
+        "S25",
+        "S26"
+      ]
+    }
+  ],
+  "priorities": [
+    {
+      "id": "P0-01",
+      "priority": "P0",
+      "name": "九守位 NPC 最低責任與外野記錄/Single 閉環",
+      "current": "內野/P cover C3；C/CF/RF C2；LF C1",
+      "minimalWork": "重用 actor/ability；LF catch；CF/RF catch→原 defensivePlay PO；OF落地拾球/保守回傳與合法終壘；C 接捕/K-PO/本壘接傳最低語義。只補必要角色",
+      "dependencies": "原 Opportunity/Reach/Decision/Runner/Scorer 已有 API",
+      "coreOwnerImpact": "不改 canonical owner/Record schema；正式 script producer 接線必改，純分類不足時擴原 Scorer",
+      "entry": "script::applyHighSchoolFlyBallCatchResolution / getHighSchoolPhysicalDefensePlayerContext；Fly/Opportunity；original recordEvent",
+      "acceptance": "每守位至少一個明示角色案例，含真 actor/能力來源、合法 terminal、PA/PO/A/E唯一；再正常全場接續",
+      "coverage": "九守位 NPC、OF flyout/single、守備記錄",
+      "risk": "不能用單一 generic AI out/hit 充當真野手責任；失敗後不能無條件重抽",
+      "sources": [
+        "S02",
+        "S04",
+        "S08",
+        "S11",
+        "S12",
+        "S13"
+      ]
+    },
+    {
+      "id": "P0-02",
+      "priority": "P0",
+      "name": "Alpha 模式與自然全場連續性",
+      "current": "原混合模式完成；new Same-Ball 受控且部分阻擋",
+      "minimalWork": "保留舊完整模式；PA admission 鎖 detailed/compressed policy 與範圍；驗證玩家 batting/SS/2B、runner occupied、third out、walkoff、end/checkpoint 接續",
+      "dependencies": "P0-01；原 lifecycle/owner/save",
+      "coreOwnerImpact": "不重寫 owner；可能改 admission/dispatch；不可擴大 S2 scope 作假通過",
+      "entry": "script::prepareHighSchoolPlateDecision / advanceHighSchoolMatchPlaybackStep / original appliers",
+      "acceptance": "公開正常入口至終場；每 PA 唯一、不同選擇改執行、真能力對照；Save/Load/Replay 無重抽或雙算；不得用 safety guard 造 outs",
+      "coverage": "自然 mixed-mode match",
+      "risk": "同球已開始執行後才壓回 compressed 會破壞 authority",
+      "sources": [
+        "S04",
+        "S06",
+        "S07",
+        "S21",
+        "S23",
+        "S29"
+      ]
+    },
+    {
+      "id": "P0-03",
+      "priority": "P0",
+      "name": "Live Public Match Presentation Bridge",
+      "current": "有 frozen scoreboard/prefix/choices；原型離線",
+      "minimalWork": "allowlist decision/playback/resolution、可見事件序號、command stale guard、既有 receipt/eventRefs 查詢；presentation freeze，不暴露 private/future",
+      "dependencies": "原 public choices/handlers、snapshot/cursor/lifecycle",
+      "coreOwnerImpact": "薄 adapter；不改 Match/Record 寫入 owner",
+      "entry": "script::getHighSchoolPresentationSnapshot / getHighSchoolYearOneMatchMomentChoices / chooseHighSchoolYearOneMatchMoment",
+      "acceptance": "一球真人選擇→原 owner結算→畫面結果→下一事件；Skip/Replay/連按不執行第二次；未揭露結果不外洩",
+      "coverage": "Phaser live decision + event flow",
+      "risk": "直接把 match/整個log傳進 Phaser 會露未來與重新掌權",
+      "sources": [
+        "S24",
+        "S25",
+        "S29"
+      ]
+    },
+    {
+      "id": "P0-04",
+      "priority": "P0",
+      "name": "PC 可操作完整比賽與賽後證據",
+      "current": "原 HTML handler 可用；Phaser 未接 Runtime",
+      "minimalWork": "打擊/SS/2B 最少操作、文字/2D回饋、正常續行至終場、原評價/成長/儲存；保留原小範圍玩法",
+      "dependencies": "P0-02/P0-03；P0-01 在 Alpha 放行前完成",
+      "coreOwnerImpact": "不改 owner；HTML/CSS/Phaser consumer 施工屬下一輪",
+      "entry": "current UI/presentation bridge；原 settleHighSchoolYearOneMatch",
+      "acceptance": "可由玩家完成一場，取得同一 GameRecord/賽後成長；固定情境可重現；準備約10人測試腳本",
+      "coverage": "Playable PC Alpha",
+      "risk": "不能將動畫結束視為結算命令",
+      "sources": [
+        "S21",
+        "S22",
+        "S23",
+        "S24",
+        "S25"
+      ]
+    },
+    {
+      "id": "P1-01",
+      "priority": "P1",
+      "name": "S2 recovered reach Scorer/ROE 最後串接",
+      "current": "九 Production Recovery；5 runner facts closed；PA提交0",
+      "minimalWork": "原 Scorer recovered-reach/ordinary-effort/potential-out/advancement proof→限定 Mapper error→原 held owner；先空壘 O0/1/2",
+      "dependencies": "S2 Ball/Recovery/Runner facts；原 classifier",
+      "coreOwnerImpact": "需 additive 原 Scorer 與原 Mapper/held handler；不另建 owner",
+      "entry": "resolveScorerEligibility / resolveOfficialBallInPlayOutcome / completeHeldBallInPlay",
+      "acceptance": "實際 recovery→合法 H/E/AB/BF一次→next PA/save；不足仍拒絕",
+      "coverage": "new Same-Ball error/recovery",
+      "risk": "若產品要求 Alpha 自然啟用此 S2 policy，本項立即升 P0；不能在失敗後切換舊模式",
+      "sources": [
+        "S17",
+        "S18",
+        "S19",
+        "S20"
+      ]
+    },
+    {
+      "id": "P1-02",
+      "priority": "P1",
+      "name": "玩家1B/3B擴入Alpha候選",
+      "current": "都C3；1B有自然incoming一例，3B該例無physical work",
+      "minimalWork": "映射既有角色選項與結果；以少數正常入口證明 recurring opportunity；先1B/3B比較，再擴UI",
+      "dependencies": "P0-03；既有 infield/runtime evidence",
+      "coreOwnerImpact": "無新結算 owner；presentation/admission 為主",
+      "entry": "first-base/third-base execution；MatchExperience role evidence",
+      "acceptance": "public 3U/3-1/receive與5-3/5U/5-4-3可見且正確記錄；無捏造機會",
+      "coverage": "更大玩家守位選擇",
+      "risk": "接傳是自動 stage；不得把它當額外決策數",
+      "sources": [
+        "S08",
+        "S09",
+        "S22",
+        "S28"
+      ]
+    },
+    {
+      "id": "P1-03",
+      "priority": "P1",
+      "name": "Line drive／SF/tag-up/FC擴覆蓋",
+      "current": "2B淺右接殺、內野FC/DP、tag-up已有部分鏈",
+      "minimalWork": "補適用角色/終端/actor；SEND得分若啟用必先正確SF/AB/RBI歸屬",
+      "dependencies": "原 catch/Runner/Scorer/Record projections",
+      "coreOwnerImpact": "原 owner 的精確映射可能需擴；不新建統計",
+      "entry": "line/fly/tag-up appliers；recordPlateAppearance",
+      "acceptance": "合法得分/retouch/third-out與記錄一致；原HOLD仍合法",
+      "coverage": "基本打球與跑壘品質",
+      "risk": "SF未接前只用HOLD；不能已得分卻忽略正式分類",
+      "sources": [
+        "S14",
+        "S16",
+        "S13",
+        "S17"
+      ]
+    },
+    {
+      "id": "P1-04",
+      "priority": "P1",
+      "name": "Player C / OF / P gameplay拓展",
+      "current": "C legacy C3；OF/P C1",
+      "minimalWork": "以各位置角色設計真決策與可自然入場，延後全守位微操",
+      "dependencies": "九位NPC穩定；P0-03；Catcher/P exposure",
+      "coreOwnerImpact": "可能需 exposure/admission 舊 owner，另案定界",
+      "entry": "catcher handler / playing-time / OF player exclusion",
+      "acceptance": "位置相關決策改變執行與該玩家評價，可回原比賽",
+      "coverage": "正式版角色廣度",
+      "risk": "broad 外野手不等於LF/CF/RF；Pitch tactical不等於玩家投手",
+      "sources": [
+        "S15",
+        "S27",
+        "S11",
+        "S12"
+      ]
+    },
+    {
+      "id": "P2-01",
+      "priority": "P2",
+      "name": "多次Recovery/二次回傳/罕見拓樸",
+      "current": "現僅 target-station 1B一次補救；二壘attempt pending",
+      "minimalWork": "先完整各terminal再擴，不增加結果預設值",
+      "dependencies": "已完成P1-01或獨立完整legacy路徑",
+      "coreOwnerImpact": "擴原 facts API；owner 維持",
+      "entry": "Recovery/Runner",
+      "acceptance": "新增一類真可續行拓樸",
+      "coverage": "模擬深度",
+      "risk": "已啟用 unresolved 不能延後；以事前不啟用該policy處理",
+      "sources": [
+        "S18",
+        "S19"
+      ]
+    },
+    {
+      "id": "P2-02",
+      "priority": "P2",
+      "name": "精密位置/球場/完整漫畫分鏡與美術",
+      "current": "粗方向深度、離線動作節奏已有",
+      "minimalWork": "先站位錨點/文字，再精細2D、牆、連續球位與鏡頭",
+      "dependencies": "P0-03/04",
+      "coreOwnerImpact": "純presentation；精密physics另案",
+      "entry": "prototype/manga-motion-spike / Physical",
+      "acceptance": "改善讀取與節奏；不改合法結果",
+      "coverage": "polish",
+      "risk": "畫面座標不可回寫比分/出局",
+      "sources": [
+        "S25",
+        "S26",
+        "S30"
+      ]
+    },
+    {
+      "id": "P2-03",
+      "priority": "P2",
+      "name": "HBP/界外popup/進階戰術與規則深度",
+      "current": "Record有HBP/SF欄位；無HBP producer、完整popup handler",
+      "minimalWork": "先不生成；未來補完整producer→runner→record，不以欄位冒稱玩法",
+      "dependencies": "既有 pitch/Physical/Record；rules profile另案",
+      "coreOwnerImpact": "原 producer/scorer 精確擴充",
+      "entry": "OPA/Physical/GameRecord",
+      "acceptance": "新增事件可合法結束並保存",
+      "coverage": "罕見事件/規則深度",
+      "risk": "若未來啟用就不能只跳過未處理事件；無官方規則合規宣稱",
+      "sources": [
+        "S06",
+        "S13",
+        "S30"
+      ]
+    }
+  ],
+  "nextSprints": [
+    {
+      "id": "G1",
+      "name": "NPC Basic Coverage & Outfield Flyout/Single Closure",
+      "dependsOn": [],
+      "includes": [
+        "P0-01"
+      ],
+      "scope": "只補九角色最小責任；優先修已實測的 LF/CF/RF catch/Single/actor ledger 斷點，盤清 C 最低接捕/本壘與 P cover；共用既有 infield/Runner/Scorer/Record。",
+      "excludes": "不做九位玩家操作，不做深 Recovery，不自然啟用 S2 pending policy。",
+      "visibleExit": "正常比賽能出現可追溯的外野接殺與落地一壘安打，記分板/壘包/接殺者PO正確並進下一PA；九守位各有真actor/能力與適用最低責任案例，完整一場不因該類事件卡住。",
+      "acceptance": "指定少數固定案例含成功/必要失敗、第三出局；原兩基線與直接受影響既有回歸；不以新增API數結案。",
+      "risk": "若一般single/failedcatch所需Scorer純API不足，精確擴原owner；不得結果先行。"
+    },
+    {
+      "id": "G2",
+      "name": "Natural Mixed Match Loop & Live Public Bridge",
+      "dependsOn": [
+        "G1"
+      ],
+      "includes": [
+        "P0-02",
+        "P0-03"
+      ],
+      "scope": "用原已能完成的 detailed batting + compressed其餘PA +現有SS/2B模式；鎖PA模式；同一公開呈現adapter接正常入場、逐球選擇、守備、換邊、終場、save/reload。",
+      "excludes": "不要求先做完全自然 S2 Same-Ball，也不把 presentation adapter 變新 Director。",
+      "visibleExit": "現有HTML測試面可以正常開始，玩家做打擊/守備選擇後即見正式結果並續行至終場；同一球Skip/Replay/Reload無重抽，未揭露資料不外洩。",
+      "acceptance": "少數預先宣告情境證明不同選擇/真能力改執行、occupied bases/third-out/score/order一致，原GameRecord及賽後成長唯一；公開DTO由正式live facts產生。",
+      "risk": "不能只交DTO/API；必須用原介面走完實際玩家回合與一場比賽。"
+    },
+    {
+      "id": "G3",
+      "name": "Phaser Batting / SS / 2B PC Playable Alpha",
+      "dependsOn": [
+        "G2"
+      ],
+      "includes": [
+        "P0-04"
+      ],
+      "scope": "HTML/CSS+Phaser consumer；打擊/捕手近主視角、投手/其他野手另一主視角基礎；先batting/SS/2B，1B/3B作既有低成本候選但不綁死核心交付。",
+      "excludes": "不做完整美術、全守位微操、精密物理或新玩法Authority。",
+      "visibleExit": "玩家可用鍵鼠開始並完成一場，讀到合法事件/正式終場Record/原Career與成長，能存讀與重播；交付約10人可照做的測試版本及情境腳本。",
+      "acceptance": "瀏覽器人工操作/閱讀驗收＋重複點擊/失焦/Skip/Replay/Load不中斷與不重交；與同seed原owner事件/Record一致。",
+      "risk": "工程可在G2接口可用後開始，完整Alpha放行仍需G1/G2；本輪未施工。"
+    }
+  ],
+  "continuity": {
+    "normalOwner": "player.highSchoolMatch",
+    "compressedEntry": "script.js::resolveSimulatedHighSchoolPlateAppearance",
+    "detailedEntry": "chooseHighSchoolYearOneMatchMoment / resolveHighSchoolPlateDecisionPitch",
+    "settlement": "applyHighSchoolDefensiveSettlementFacts / original infield and offense appliers",
+    "record": "recordHighSchoolMatchSimulationEvent → MatchGameRecord.recordEvent",
+    "finish": "settleHighSchoolYearOneMatch → finalize GameRecord/exposure/development/competition/history",
+    "save": "original saveGame/loadGame/normalizeSave",
+    "confirmed": "Original mixed-mode full games, canonical Record/score, bounded public infield decisions, dedup/save checks and accepted match-end development.",
+    "limitations": [
+      "Generic compressed AI uses batter and pitcher capability, not all defender capabilities.",
+      "No claim that C4/C5, all-role active development, cross-match Career effects or new Same-Ball natural rollout are verified.",
+      "New Recovery cannot fallback to a newly sampled result after execution."
+    ]
+  },
+  "phaser": {
+    "runtimeObserved": false,
+    "scope": "Current index/package plus match-ui-p1, manga-match-spike, manga-motion-spike runtime entry files; not a whole-repo absence proof.",
+    "snapshot": "Existing frozen presentation scoreboard/bases snapshot selected through presentedEventCursor.",
+    "decisions": "Existing choices, expectedMomentId and original public handlers.",
+    "events": "Existing pitch history/Physical/defense/PA/settlement facts; no general live public allowlist bridge demonstrated.",
+    "positions": "Coarse direction/depth/roles/base targets/limited local recovery station; global continuous ball coordinates unavailable.",
+    "need": "Thin immutable public DTO projection plus original command dispatch, stale checks, visible-prefix event drain, existing receipt/eventRefs lookup.",
+    "earliest": "After G2's first live public command/result round trip; small Phaser slice can start before every gameplay expansion. Full Alpha still depends on P0 coverage.",
+    "authority": "Renderer/replay/skip do not settle or simulate. Animation coordinates/collisions are presentation only.",
+    "views": "Batter/catcher near shared main perspective; pitcher/other fielders another perspective family, preserving position-specific decisions."
+  },
+  "tests": [
+    {
+      "id": "T01",
+      "file": "tests/match-vnext-same-ball-execution-contract-test.cjs",
+      "exit": 0,
+      "status": "PASS",
+      "sourceAssertions": 94,
+      "scriptLockRejections": 13,
+      "candidateRejections": 32,
+      "stdoutQualification": "Tool display truncated the large successful output; no full raw stdout is claimed. Top-level suite PASS and process exit 0 observed."
+    },
+    {
+      "id": "T02",
+      "file": "tests/match-vnext-same-ball-production-integration-test.cjs",
+      "at": "2026-10-19T04:55:47.435Z",
+      "finishedAt": "2026-10-19T04:56:11.673Z",
+      "exit": 0,
+      "signal": null,
+      "stdoutSha256": "d795f6c1f7439eadc0da30d7205a5ffa7ae157aa286e12350cf808f9496c084a",
+      "stdoutBytes": 215,
+      "stderr": "",
+      "summary": {
+        "suite": "match-vnext-same-ball-production",
+        "status": "PASS",
+        "groups": [
+          "suite",
+          "status",
+          "groups"
+        ],
+        "results": {
+          "groups": {
+            "keys": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "T03",
+      "file": "tests/defensive-opportunity-production-integration-test.js",
+      "exit": 0,
+      "passed": 14,
+      "failed": 0,
+      "stdoutSha256": "86917d5fd7f5f55ed9862eb76c7d253ed3faeb074997a0e051dfbf9f483bbf5a",
+      "observed": "14/14 PASS"
+    },
+    {
+      "id": "T04",
+      "file": "tests/defensive-reach-secure-production-integration-test.js",
+      "exit": 0,
+      "passed": 12,
+      "failed": 0,
+      "stdoutSha256": "d0f914f430071d1e0cdcac0b16b68f5d5927ca467835c3132a1b1db8a92d0361",
+      "observed": "12/12 PASS"
+    },
+    {
+      "id": "T05",
+      "file": "tests/canonical-match-regression-integration-test.cjs",
+      "at": "2026-10-19T04:59:47.203Z",
+      "finishedAt": "2026-10-19T04:59:47.987Z",
+      "exit": 0,
+      "signal": null,
+      "stdoutBytes": 9599859,
+      "stdoutSha256": "a300f471d4d4f2c14ce08bc927acf76561f420080217cac22eee755b0582d1fb",
+      "stdoutChecks": "PASS 88221/first: seed and browser-global owners\nPASS 88221/first: lawful entry, unchanged capability and Opportunity/roster agreement\nPASS 88221/first: actual substitution precedes every player decision\nPASS 88221/first: legal decisions each create one result and one completion\nPASS 88221/first: natural full-match closure within original safety bound\nPASS 88221/first: every playback/decision transition has valid Match State\nPASS 88221/first: created/completed defense conservation (zero-coverage fixture)\nPASS 88221/first: final Record agrees with score, totals, PA and event identities\nPASS 88221/first: public resolve/settle/finish duplicates have no effects\nPASS 88221/first: Save memory round-trip retains Match, Record and Career\nPASS 88221/first: Career exposure agrees with real participation and settles once\nPASS 88221/first: resolution preserved, decision pressure sourced, final summary separate\nPASS 88221/replay: seed and browser-global owners\nPASS 88221/replay: lawful entry, unchanged capability and Opportunity/roster agreement\nPASS 88221/replay: actual substitution precedes every player decision\nPASS 88221/replay: legal decisions each create one result and one completion\nPASS 88221/replay: natural full-match closure within original safety bound\nPASS 88221/replay: every playback/decision transition has valid Match State\nPASS 88221/replay: created/completed defense conservation (zero-coverage fixture)\nPASS 88221/replay: final Record agrees with score, totals, PA and event identities\nPASS 88221/replay: public resolve/settle/finish duplicates have no effects\nPASS 88221/replay: Save memory round-trip retains Match, Record and Career\nPASS 88221/replay: Career exposure agrees with real participation and settles once\nPASS 88221/replay: resolution preserved, decision pressure sourced, final summary separate\nPASS 88221: identical fresh-context replay Record/Log/Decision sequence\nPASS 88222/first: seed and browser-global owners\nPASS 88222/first: lawful entry, unchanged capability and Opportunity/roster agreement\nPASS 88222/first: actual substitution precedes every player decision\nPASS 88222/first: legal decisions each create one result and one completion\nPASS 88222/first: natural full-match closure within original safety bound\nPASS 88222/first: every playback/decision transition has valid Match State\nPASS 88222/first: created/completed defense conservation (zero-coverage fixture)\nPASS 88222/first: final Record agrees with score, totals, PA and event identities\nPASS 88222/first: public resolve/settle/finish duplicates have no effects\nPASS 88222/first: Save memory round-trip retains Match, Record and Career\nPASS 88222/first: Career exposure agrees with real participation and settles once\nPASS 88222/first: resolution preserved, decision pressure sourced, final summary separate\nPASS 88222/replay: seed and browser-global owners\nPASS 88222/replay: lawful entry, unchanged capability and Opportunity/roster agreement\nPASS 88222/replay: actual substitution precedes every player decision\nPASS 88222/replay: legal decisions each create one result and one completion\nPASS 88222/replay: natural full-match closure within original safety bound\nPASS 88222/replay: every playback/decision transition has valid Match State\nPASS 88222/replay: created/completed defense conservation (zero-coverage fixture)\nPASS 88222/replay: final Record agrees with score, totals, PA and event identities\nPASS 88222/replay: public resolve/settle/finish duplicates have no effects\nPASS 88222/replay: Save memory round-trip retains Match, Record and Career\nPASS 88222/replay: Career exposure agrees with real participation and settles once\nPASS 88222/replay: resolution preserved, decision pressure sourced, final summary separate\nPASS 88222: identical fresh-context replay Record/Log/Decision sequence\n",
+      "summary": {
+        "parseError": "Unexpected non-whitespace character after JSON at position 9402243 (line 2 column 1)"
+      },
+      "stderr": "",
+      "observedPassedChecks": 50,
+      "fullGames": 4,
+      "fixedSeeds": [
+        88221,
+        88222
+      ],
+      "defenseCreated": 0,
+      "qualification": "Final process exit 0; source assertions unchanged. Summary parser failed on additional stdout after the large evidence JSON; retained exact check text and stdout digest. Not used to claim nonzero natural SS defense."
+    },
+    {
+      "id": "T06",
+      "file": "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+      "at": "2026-10-19T05:03:51.061Z",
+      "finishedAt": "2026-10-19T05:03:51.202Z",
+      "exit": 0,
+      "signal": null,
+      "stdout": "✓ 1. execution 保留 runner／throw／receiving component 與 timing margin\n✓ 2. injectable rolls 可強制 clearly safe／out／borderline\n✓ 3. execution identity 與預設 rolls deterministic\n✓ 4. B2B1 handoff 建立 deterministic presented runnerTagUpDecision\n✓ 5. Decision firewall 前 runner／score／額外 out 不變且無 result leakage\n✓ 6. frozen snapshot 保存 game／runner／defense／catch／physical refs，不複製整場 match\n✓ 7. presentation 與 route 從 frozen situation 讀取\n✓ 8. Save/reload before decision 保留 identity／snapshot／routes／state\n✓ 9. Fixture A SEND safe：得 1 分、離開三壘、outs 留在 catch 後 2、close 後 resume\n✓ 10. Fixture B SEND out：追加第三出局、不計分、runner 移除、non-force half end\n✓ 11. Fixture C HOLD 經完整 lifecycle，runner 留三壘且 score／outs 不變\n✓ 12. Reload after execution 保存 execution identity，settlement 不 reroll、不 double apply\n✓ 13. Fixture G catch 本身第三出局，不建立 tag-up situation\n✓ 14. Fixture H 非玩家 runner 採 aiDecision ownership 後安全 terminal，不呈現玩家 choices\n✓ 15. Fixture I 2B→3B unsupportedFallback 不假造結果且不留下 lock\n✓ 16. Fixture F 重複 decision/settlement 不 double score/out/runner/PA/log\n✓ 17. 正式 match decision entry 可執行 HOLD 並關閉 situation\n✓ 18. runtime load order 在 fly defense 後、script 前載入 execution 與 lifecycle\n✓ 1.3 tag-up projects original timing without reroll and preserves pending facts\nIncluding 1.3: 21/21 PASS\n",
+      "stderr": "",
+      "stdoutSha256": "391e44c63825b87add10d0b5f3fab095f52254625ba7169b91e2391c5b48824a",
+      "passed": 21,
+      "failed": 0
+    }
+  ],
+  "runtime": {
+    "mode": "isolated VM; actual index scripts except application-controller as original harness specifies; in-memory localStorage/timers",
+    "controlledFixture": "Unmodified first-base fixture setup extracted before test registration. Declared capabilities/rolls/runner inputs are explicit controlled inputs, not natural frequencies.",
+    "controlled": [
+      {
+        "id": "I1-1B-3U",
+        "input": {
+          "occupied": 1
+        },
+        "route": {
+          "text": "控制來球後自己踩上一壘，先完成打者出局",
+          "matchDecision": "secure",
+          "infieldRoute": "secureFirst",
+          "advisable": "reasonable",
+          "objective": "secureOut",
+          "risk": "low",
+          "baseballValue": "convertBatterOut",
+          "executionOnly": false,
+          "id": "selfCoverFirst",
+          "action": "baseTouch",
+          "targetBase": "first",
+          "route": "3U",
+          "teammateChain": [],
+          "playerRole": "initiator",
+          "routeId": "selfCoverFirst",
+          "responsibilityChain": [
+            "player"
+          ],
+          "availability": {
+            "legal": true,
+            "viable": true,
+            "windowState": "normal",
+            "reasons": []
+          },
+          "legal": true,
+          "viable": true,
+          "riskProfile": "low",
+          "matchMomentId": "hs_y1_match_moment_2",
+          "readiness": null
+        },
+        "before": {
+          "outs": 0,
+          "runners": [
+            "hs-y3-final-regional-opponent-player-04",
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 0
+        },
+        "observed": {
+          "position": "一壘手",
+          "assignment": "一壘手",
+          "outs": 1,
+          "runners": [
+            null,
+            "hs-y3-final-regional-opponent-player-04",
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1,
+          "groundSupported": true,
+          "primary": "1B",
+          "fly": null,
+          "resolution": {
+            "family": "infield",
+            "outsCreated": 1,
+            "resultCode": "oneOut",
+            "firstBaseEvidence": {
+              "entry": "activeGround",
+              "actor": "player",
+              "action": "baseTouch"
+            },
+            "actions": [
+              {
+                "actorId": "player",
+                "position": "1B",
+                "type": "field",
+                "status": "completed",
+                "targetBase": null
+              },
+              {
+                "actorId": "player",
+                "position": "1B",
+                "type": "baseTouch",
+                "status": "completed",
+                "targetBase": "first"
+              }
+            ],
+            "scorer": false
+          },
+          "playerDefense": {
+            "chances": 1,
+            "PO": 1,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "recordTotals": {
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "lastEvent": "defensiveResolution"
+        }
+      },
+      {
+        "id": "I2-1B-3-1",
+        "input": {
+          "occupied": 1,
+          "pace": 0,
+          "contactQuality": 0.1
+        },
+        "route": {
+          "text": "交給投手補位一壘，與打者到壘時間比較",
+          "matchDecision": "cover",
+          "infieldRoute": "pitcherCover",
+          "advisable": "reasonable",
+          "objective": "controlBall",
+          "risk": "low",
+          "baseballValue": "executionOnly",
+          "executionOnly": false,
+          "id": "pitcherCoverFirst",
+          "action": "throwFirst",
+          "targetBase": "first",
+          "route": "3-1",
+          "teammateChain": [
+            "P"
+          ],
+          "playerRole": "initiator",
+          "routeId": "pitcherCoverFirst",
+          "responsibilityChain": [
+            "player",
+            "P"
+          ],
+          "availability": {
+            "legal": true,
+            "viable": true,
+            "windowState": "normal",
+            "reasons": []
+          },
+          "legal": true,
+          "viable": true,
+          "riskProfile": "low",
+          "matchMomentId": "hs_y1_match_moment_2",
+          "readiness": null
+        },
+        "before": {
+          "outs": 0,
+          "runners": [
+            "hs-y3-final-regional-opponent-player-04",
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 0
+        },
+        "observed": {
+          "position": "一壘手",
+          "assignment": "一壘手",
+          "outs": 1,
+          "runners": [
+            null,
+            "hs-y3-final-regional-opponent-player-04",
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1,
+          "groundSupported": true,
+          "primary": "1B",
+          "fly": null,
+          "resolution": {
+            "family": "infield",
+            "outsCreated": 1,
+            "resultCode": "oneOut",
+            "firstBaseEvidence": {
+              "entry": "activeGround",
+              "actor": "player",
+              "action": "throw"
+            },
+            "actions": [
+              {
+                "actorId": "player",
+                "position": "1B",
+                "type": "field",
+                "status": "completed",
+                "targetBase": null
+              },
+              {
+                "actorId": "player",
+                "position": "1B",
+                "type": "throw",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-player-16",
+                "position": "P",
+                "type": "receive",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-player-16",
+                "position": "P",
+                "type": "baseTouch",
+                "status": "completed",
+                "targetBase": "first"
+              }
+            ],
+            "scorer": false
+          },
+          "playerDefense": {
+            "chances": 1,
+            "PO": 0,
+            "A": 1,
+            "E": 0,
+            "DP": 0
+          },
+          "recordTotals": {
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "lastEvent": "defensiveResolution"
+        }
+      },
+      {
+        "id": "I4-NPC-SS-PLAYER-1B",
+        "input": {
+          "direction": 0.1,
+          "occupied": 0
+        },
+        "route": null,
+        "before": {
+          "outs": 1,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1
+        },
+        "observed": {
+          "position": "一壘手",
+          "assignment": "一壘手",
+          "outs": 1,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1,
+          "groundSupported": true,
+          "primary": "SS",
+          "fly": null,
+          "resolution": {
+            "family": "infield",
+            "outsCreated": 1,
+            "resultCode": "oneOut",
+            "firstBaseEvidence": {
+              "entry": "incomingReceive",
+              "actor": "player",
+              "action": "receive"
+            },
+            "actions": [
+              {
+                "actorId": "school-powerhouse-409d352a-player-13",
+                "position": "SS",
+                "type": "field",
+                "status": "completed",
+                "targetBase": null
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-player-13",
+                "position": "SS",
+                "type": "throw",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "player",
+                "position": "1B",
+                "type": "receive",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "player",
+                "position": "1B",
+                "type": "baseTouch",
+                "status": "completed",
+                "targetBase": "first"
+              }
+            ],
+            "scorer": false
+          },
+          "playerDefense": {
+            "chances": 1,
+            "PO": 1,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "recordTotals": {
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "lastEvent": "playerRoutinePlay"
+        }
+      },
+      {
+        "id": "I5-PLAYER-C",
+        "input": {
+          "position": "捕手",
+          "occupied": 1
+        },
+        "route": {
+          "text": "先擋住球，守住目前壘包",
+          "matchDecision": "secureAndHold",
+          "catcherIntent": "secureAndHold",
+          "routeId": "secureAndHold",
+          "executionText": "你先用身體把彈球擋在身前，控制住球後確認所有跑者仍留在原壘。",
+          "matchMomentId": "hs_y1_match_moment_2"
+        },
+        "before": {
+          "outs": 0,
+          "runners": [
+            "hs-y3-final-regional-opponent-player-02",
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 0
+        },
+        "observed": {
+          "position": "捕手",
+          "assignment": "捕手",
+          "outs": 0,
+          "runners": [
+            "hs-y3-final-regional-opponent-player-02",
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 0,
+          "groundSupported": false,
+          "groundFallback": "existingSyntheticDefensiveContext",
+          "fly": null,
+          "resolution": {
+            "family": "catcher",
+            "outsCreated": 0,
+            "resultCode": "runnersHeld",
+            "firstBaseEvidence": null
+          },
+          "playerDefense": {
+            "chances": 1,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "recordTotals": {
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "lastEvent": "defensiveResolution"
+        }
+      },
+      {
+        "id": "A1-LF",
+        "input": {
+          "position": "二壘手",
+          "occupied": 0,
+          "ballType": 0.95,
+          "direction": 0.05,
+          "depth": 0.5
+        },
+        "route": null,
+        "before": {
+          "outs": 0,
+          "runners": [
+            "hs-y3-final-regional-opponent-player-07",
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1
+        },
+        "observed": {
+          "position": "二壘手",
+          "assignment": "二壘手",
+          "outs": 0,
+          "runners": [
+            "hs-y3-final-regional-opponent-player-07",
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1,
+          "groundSupported": false,
+          "groundFallback": "existingOrdinaryPhysicalOutcome",
+          "primary": "LF",
+          "fly": {
+            "supported": false,
+            "access": {
+              "supported": false,
+              "level": "unsupported",
+              "reason": "unsupportedLeftSideAssignment"
+            },
+            "defender": {
+              "defenderId": "school-powerhouse-409d352a-player-07",
+              "name": "木村",
+              "position": "左外野手",
+              "catching": 8,
+              "reaction": 8,
+              "range": 8,
+              "assignmentAuthority": "defensiveOpportunity"
+            },
+            "result": {},
+            "settlementApplied": false,
+            "mapping": {}
+          },
+          "resolution": {
+            "resultCode": "",
+            "firstBaseEvidence": null
+          },
+          "playerDefense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "recordTotals": {
+            "away": {
+              "runs": 0,
+              "hits": 1,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "lastEvent": "plateAppearance"
+        }
+      },
+      {
+        "id": "A2-CF",
+        "input": {
+          "position": "二壘手",
+          "occupied": 0,
+          "ballType": 0.95,
+          "direction": 0.5,
+          "depth": 0.5
+        },
+        "route": null,
+        "before": {
+          "outs": 1,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1
+        },
+        "observed": {
+          "position": "二壘手",
+          "assignment": "二壘手",
+          "outs": 1,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1,
+          "fly": {
+            "supported": true,
+            "access": {
+              "supported": true,
+              "level": "favored",
+              "reason": "canonicalReachArrival"
+            },
+            "defender": {
+              "defenderId": "school-powerhouse-409d352a-hs-year-3-age-18-incoming-02",
+              "name": "工藤",
+              "position": "中外野手",
+              "catching": 9,
+              "reaction": 9,
+              "range": 9,
+              "assignmentAuthority": "defensiveOpportunity"
+            },
+            "result": {
+              "caught": true,
+              "result": "caught"
+            },
+            "settlementApplied": true,
+            "mapping": {
+              "result": "out",
+              "mode": "settledDefense"
+            }
+          },
+          "resolution": {
+            "family": "flyBallCatch",
+            "outsCreated": 1,
+            "resultCode": "caught",
+            "firstBaseEvidence": null
+          },
+          "playerDefense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "recordTotals": {
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "lastEvent": "flyBallCatchResolution"
+        }
+      },
+      {
+        "id": "A3-RF",
+        "input": {
+          "position": "二壘手",
+          "occupied": 0,
+          "ballType": 0.95,
+          "direction": 0.95,
+          "depth": 0.5
+        },
+        "route": null,
+        "before": {
+          "outs": 1,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1
+        },
+        "observed": {
+          "position": "二壘手",
+          "assignment": "二壘手",
+          "outs": 1,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1,
+          "fly": {
+            "supported": true,
+            "access": {
+              "supported": true,
+              "level": "favored",
+              "reason": "canonicalReachArrival"
+            },
+            "defender": {
+              "defenderId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-01",
+              "name": "小島",
+              "position": "右外野手",
+              "catching": 7,
+              "reaction": 7,
+              "range": 7,
+              "assignmentAuthority": "defensiveOpportunity"
+            },
+            "result": {
+              "caught": true,
+              "result": "caught"
+            },
+            "settlementApplied": true,
+            "mapping": {
+              "result": "out",
+              "mode": "settledDefense"
+            }
+          },
+          "resolution": {
+            "family": "flyBallCatch",
+            "outsCreated": 1,
+            "resultCode": "caught",
+            "firstBaseEvidence": null
+          },
+          "playerDefense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "recordTotals": {
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "lastEvent": "flyBallCatchResolution"
+        }
+      },
+      {
+        "id": "I3-3B-5-3",
+        "input": {
+          "position": "三壘手",
+          "direction": 0.005,
+          "occupied": 1
+        },
+        "route": {
+          "text": "先處理一壘的打者跑者",
+          "matchDecision": "secure",
+          "infieldRoute": "secureFirst",
+          "advisable": "reasonable",
+          "objective": "secureOut",
+          "risk": "low",
+          "baseballValue": "convertBatterOut",
+          "executionOnly": false,
+          "id": "secureFirstBaseOut",
+          "action": "throwFirst",
+          "targetBase": "first",
+          "route": "5-3",
+          "teammateChain": [
+            "1B"
+          ],
+          "playerRole": "initiator",
+          "routeId": "secureFirstBaseOut",
+          "responsibilityChain": [
+            "player",
+            "1B"
+          ],
+          "availability": {
+            "legal": true,
+            "viable": true,
+            "windowState": "normal",
+            "reasons": []
+          },
+          "legal": true,
+          "viable": true,
+          "riskProfile": "low",
+          "matchMomentId": "hs_y1_match_moment_2",
+          "readiness": null
+        },
+        "before": {
+          "outs": 0,
+          "runners": [
+            "hs-y3-final-regional-opponent-player-07",
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 0
+        },
+        "observed": {
+          "position": "三壘手",
+          "assignment": "三壘手",
+          "outs": 1,
+          "runners": [
+            null,
+            "hs-y3-final-regional-opponent-player-07",
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1,
+          "groundSupported": true,
+          "primary": "3B",
+          "fly": null,
+          "resolution": {
+            "family": "infield",
+            "outsCreated": 1,
+            "resultCode": "oneOut",
+            "firstBaseEvidence": null,
+            "actions": [
+              {
+                "actorId": "player",
+                "position": "3B",
+                "type": "field",
+                "status": "completed",
+                "targetBase": null
+              },
+              {
+                "actorId": "player",
+                "position": "3B",
+                "type": "throw",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+                "position": "1B",
+                "type": "receive",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+                "position": "1B",
+                "type": "baseTouch",
+                "status": "completed",
+                "targetBase": "first"
+              }
+            ],
+            "scorer": false
+          },
+          "creditedDefenders": [
+            {
+              "id": "player",
+              "position": "三壘手",
+              "defense": {
+                "chances": 1,
+                "PO": 0,
+                "A": 1,
+                "E": 0,
+                "DP": 0
+              }
+            },
+            {
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "position": "一壘手",
+              "defense": {
+                "chances": 1,
+                "PO": 1,
+                "A": 0,
+                "E": 0,
+                "DP": 0
+              }
+            }
+          ],
+          "playerDefense": {
+            "chances": 1,
+            "PO": 0,
+            "A": 1,
+            "E": 0,
+            "DP": 0
+          },
+          "recordTotals": {
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "lastEvent": "defensiveResolution"
+        }
+      },
+      {
+        "id": "I6-NPC-3B-PLAYER-1B",
+        "input": {
+          "direction": 0.005,
+          "occupied": 0
+        },
+        "route": null,
+        "before": {
+          "outs": 1,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1
+        },
+        "observed": {
+          "position": "一壘手",
+          "assignment": "一壘手",
+          "outs": 1,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1,
+          "groundSupported": true,
+          "primary": "3B",
+          "fly": null,
+          "resolution": {
+            "family": "infield",
+            "outsCreated": 1,
+            "resultCode": "oneOut",
+            "firstBaseEvidence": {
+              "entry": "incomingReceive",
+              "actor": "player",
+              "action": "receive"
+            },
+            "actions": [
+              {
+                "actorId": "school-powerhouse-409d352a-hs-year-3-age-18-incoming-01",
+                "position": "3B",
+                "type": "field",
+                "status": "completed",
+                "targetBase": null
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-hs-year-3-age-18-incoming-01",
+                "position": "3B",
+                "type": "throw",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "player",
+                "position": "1B",
+                "type": "receive",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "player",
+                "position": "1B",
+                "type": "baseTouch",
+                "status": "completed",
+                "targetBase": "first"
+              }
+            ],
+            "scorer": false
+          },
+          "creditedDefenders": [
+            {
+              "id": "player",
+              "position": "一壘手",
+              "defense": {
+                "chances": 1,
+                "PO": 1,
+                "A": 0,
+                "E": 0,
+                "DP": 0
+              }
+            },
+            {
+              "id": "school-powerhouse-409d352a-hs-year-3-age-18-incoming-01",
+              "position": "三壘手",
+              "defense": {
+                "chances": 1,
+                "PO": 0,
+                "A": 1,
+                "E": 0,
+                "DP": 0
+              }
+            }
+          ],
+          "playerDefense": {
+            "chances": 1,
+            "PO": 1,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "recordTotals": {
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "lastEvent": "playerRoutinePlay"
+        }
+      },
+      {
+        "id": "I7-NPC-2B-PLAYER-1B",
+        "input": {
+          "direction": 0.9,
+          "occupied": 0
+        },
+        "route": null,
+        "before": {
+          "outs": 1,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1
+        },
+        "observed": {
+          "position": "一壘手",
+          "assignment": "一壘手",
+          "outs": 1,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1,
+          "groundSupported": true,
+          "primary": "2B",
+          "fly": null,
+          "resolution": {
+            "family": "infield",
+            "outsCreated": 1,
+            "resultCode": "oneOut",
+            "firstBaseEvidence": {
+              "entry": "incomingReceive",
+              "actor": "player",
+              "action": "receive"
+            },
+            "actions": [
+              {
+                "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-05",
+                "position": "2B",
+                "type": "field",
+                "status": "completed",
+                "targetBase": null
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-05",
+                "position": "2B",
+                "type": "throw",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "player",
+                "position": "1B",
+                "type": "receive",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "player",
+                "position": "1B",
+                "type": "baseTouch",
+                "status": "completed",
+                "targetBase": "first"
+              }
+            ],
+            "scorer": false
+          },
+          "creditedDefenders": [
+            {
+              "id": "player",
+              "position": "一壘手",
+              "defense": {
+                "chances": 1,
+                "PO": 1,
+                "A": 0,
+                "E": 0,
+                "DP": 0
+              }
+            },
+            {
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-05",
+              "position": "二壘手",
+              "defense": {
+                "chances": 1,
+                "PO": 0,
+                "A": 1,
+                "E": 0,
+                "DP": 0
+              }
+            }
+          ],
+          "playerDefense": {
+            "chances": 1,
+            "PO": 1,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "recordTotals": {
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "lastEvent": "playerRoutinePlay"
+        }
+      },
+      {
+        "id": "I8-3B-5-4-3",
+        "input": {
+          "position": "三壘手",
+          "direction": 0.005,
+          "occupied": 1
+        },
+        "route": {
+          "text": "傳二壘封殺前位跑者，再由二壘手轉一壘",
+          "matchDecision": "challenge",
+          "infieldRoute": "doublePlay",
+          "advisable": "strong",
+          "objective": "attemptDoublePlay",
+          "risk": "high",
+          "baseballValue": "createMultipleOuts",
+          "executionOnly": false,
+          "id": "initiate543",
+          "action": "throwSecond",
+          "targetBase": "secondThenFirst",
+          "route": "5-4-3",
+          "teammateChain": [
+            "2B",
+            "1B"
+          ],
+          "playerRole": "initiator",
+          "routeId": "initiate543",
+          "responsibilityChain": [
+            "player",
+            "2B",
+            "1B"
+          ],
+          "availability": {
+            "legal": true,
+            "viable": true,
+            "windowState": "normal",
+            "reasons": []
+          },
+          "legal": true,
+          "viable": true,
+          "riskProfile": "high",
+          "matchMomentId": "hs_y1_match_moment_2",
+          "readiness": null
+        },
+        "before": {
+          "outs": 0,
+          "runners": [
+            "hs-y3-final-regional-opponent-player-07",
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 0
+        },
+        "observed": {
+          "position": "三壘手",
+          "assignment": "三壘手",
+          "outs": 2,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1,
+          "groundSupported": true,
+          "primary": "3B",
+          "fly": null,
+          "resolution": {
+            "family": "infield",
+            "outsCreated": 2,
+            "resultCode": "twoOuts",
+            "firstBaseEvidence": null,
+            "actions": [
+              {
+                "actorId": "player",
+                "position": "3B",
+                "type": "field",
+                "status": "completed",
+                "targetBase": null
+              },
+              {
+                "actorId": "player",
+                "position": "3B",
+                "type": "throw",
+                "status": "completed",
+                "targetBase": "second"
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-05",
+                "position": "2B",
+                "type": "receive",
+                "status": "completed",
+                "targetBase": "second"
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-05",
+                "position": "2B",
+                "type": "baseTouch",
+                "status": "completed",
+                "targetBase": "second"
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-05",
+                "position": "2B",
+                "type": "pivot",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-05",
+                "position": "2B",
+                "type": "throw",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+                "position": "1B",
+                "type": "receive",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+                "position": "1B",
+                "type": "baseTouch",
+                "status": "completed",
+                "targetBase": "first"
+              }
+            ],
+            "scorer": false
+          },
+          "creditedDefenders": [
+            {
+              "id": "player",
+              "position": "三壘手",
+              "defense": {
+                "chances": 1,
+                "PO": 0,
+                "A": 1,
+                "E": 0,
+                "DP": 1
+              }
+            },
+            {
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "position": "一壘手",
+              "defense": {
+                "chances": 1,
+                "PO": 1,
+                "A": 0,
+                "E": 0,
+                "DP": 1
+              }
+            },
+            {
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-05",
+              "position": "二壘手",
+              "defense": {
+                "chances": 1,
+                "PO": 1,
+                "A": 1,
+                "E": 0,
+                "DP": 1
+              }
+            }
+          ],
+          "playerDefense": {
+            "chances": 1,
+            "PO": 0,
+            "A": 1,
+            "E": 0,
+            "DP": 1
+          },
+          "recordTotals": {
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "lastEvent": "defensiveResolution"
+        }
+      },
+      {
+        "id": "I9-PLAYER-SS",
+        "input": {
+          "position": "游擊手",
+          "direction": 0.1,
+          "occupied": 1
+        },
+        "route": {
+          "text": "先處理一壘的打者跑者",
+          "matchDecision": "secure",
+          "infieldRoute": "secureFirst",
+          "advisable": "reasonable",
+          "objective": "secureOut",
+          "risk": "low",
+          "baseballValue": "convertBatterOut",
+          "executionOnly": false,
+          "id": "secureFirstBaseOut",
+          "action": "throwFirst",
+          "targetBase": "first",
+          "route": "6-3",
+          "teammateChain": [
+            "1B"
+          ],
+          "playerRole": "initiator",
+          "routeId": "secureFirstBaseOut",
+          "responsibilityChain": [
+            "player",
+            "1B"
+          ],
+          "availability": {
+            "legal": true,
+            "viable": true,
+            "windowState": "normal",
+            "reasons": []
+          },
+          "legal": true,
+          "viable": true,
+          "riskProfile": "low",
+          "matchMomentId": "hs_y1_match_moment_2",
+          "readiness": null
+        },
+        "before": {
+          "outs": 0,
+          "runners": [
+            "hs-y3-final-regional-opponent-player-08",
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 0
+        },
+        "observed": {
+          "position": "游擊手",
+          "assignment": "游擊手",
+          "outs": 1,
+          "runners": [
+            null,
+            "hs-y3-final-regional-opponent-player-08",
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1,
+          "groundSupported": true,
+          "fly": null,
+          "resolution": {
+            "family": "infield",
+            "outsCreated": 1,
+            "resultCode": "oneOut",
+            "firstBaseEvidence": null,
+            "actions": [
+              {
+                "actorId": "player",
+                "position": "SS",
+                "type": "field",
+                "status": "completed",
+                "targetBase": null
+              },
+              {
+                "actorId": "player",
+                "position": "SS",
+                "type": "throw",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+                "position": "1B",
+                "type": "receive",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+                "position": "1B",
+                "type": "baseTouch",
+                "status": "completed",
+                "targetBase": "first"
+              }
+            ],
+            "scorer": false
+          },
+          "creditedDefenders": [
+            {
+              "id": "player",
+              "position": "游擊手",
+              "defense": {
+                "chances": 1,
+                "PO": 0,
+                "A": 1,
+                "E": 0,
+                "DP": 0
+              }
+            },
+            {
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-04",
+              "position": "一壘手",
+              "defense": {
+                "chances": 1,
+                "PO": 1,
+                "A": 0,
+                "E": 0,
+                "DP": 0
+              }
+            }
+          ],
+          "playerDefense": {
+            "chances": 1,
+            "PO": 0,
+            "A": 1,
+            "E": 0,
+            "DP": 0
+          },
+          "recordTotals": {
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "lastEvent": "defensiveResolution"
+        }
+      }
+    ],
+    "creditVerification": [
+      {
+        "id": "V1-P-CREDIT",
+        "input": {
+          "occupied": 1,
+          "pace": 0,
+          "contactQuality": 0.1
+        },
+        "route": {
+          "text": "交給投手補位一壘，與打者到壘時間比較",
+          "matchDecision": "cover",
+          "infieldRoute": "pitcherCover",
+          "advisable": "reasonable",
+          "objective": "controlBall",
+          "risk": "low",
+          "baseballValue": "executionOnly",
+          "executionOnly": false,
+          "id": "pitcherCoverFirst",
+          "action": "throwFirst",
+          "targetBase": "first",
+          "route": "3-1",
+          "teammateChain": [
+            "P"
+          ],
+          "playerRole": "initiator",
+          "routeId": "pitcherCoverFirst",
+          "responsibilityChain": [
+            "player",
+            "P"
+          ],
+          "availability": {
+            "legal": true,
+            "viable": true,
+            "windowState": "normal",
+            "reasons": []
+          },
+          "legal": true,
+          "viable": true,
+          "riskProfile": "low",
+          "matchMomentId": "hs_y1_match_moment_2",
+          "readiness": null
+        },
+        "before": {
+          "outs": 0,
+          "runners": [
+            "hs-y3-final-regional-opponent-player-04",
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 0
+        },
+        "observed": {
+          "position": "一壘手",
+          "assignment": "一壘手",
+          "outs": 1,
+          "runners": [
+            null,
+            "hs-y3-final-regional-opponent-player-04",
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1,
+          "groundSupported": true,
+          "primary": "1B",
+          "fly": null,
+          "resolution": {
+            "family": "infield",
+            "outsCreated": 1,
+            "resultCode": "oneOut",
+            "firstBaseEvidence": {
+              "entry": "activeGround",
+              "actor": "player",
+              "action": "throw"
+            },
+            "actions": [
+              {
+                "actorId": "player",
+                "position": "1B",
+                "type": "field",
+                "status": "completed",
+                "targetBase": null
+              },
+              {
+                "actorId": "player",
+                "position": "1B",
+                "type": "throw",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-player-16",
+                "position": "P",
+                "type": "receive",
+                "status": "completed",
+                "targetBase": "first"
+              },
+              {
+                "actorId": "school-powerhouse-409d352a-player-16",
+                "position": "P",
+                "type": "baseTouch",
+                "status": "completed",
+                "targetBase": "first"
+              }
+            ],
+            "scorer": false
+          },
+          "npcLines": [
+            {
+              "id": "school-powerhouse-409d352a-player-16",
+              "position": "投手",
+              "defense": {
+                "chances": 1,
+                "PO": 1,
+                "A": 0,
+                "E": 0,
+                "DP": 0
+              }
+            }
+          ],
+          "playerDefense": {
+            "chances": 1,
+            "PO": 0,
+            "A": 1,
+            "E": 0,
+            "DP": 0
+          },
+          "recordTotals": {
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "lastEvent": "defensiveResolution"
+        }
+      },
+      {
+        "id": "V2-CF-CREDIT",
+        "input": {
+          "position": "二壘手",
+          "occupied": 0,
+          "ballType": 0.95,
+          "direction": 0.5,
+          "depth": 0.5
+        },
+        "route": null,
+        "before": {
+          "outs": 1,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1
+        },
+        "observed": {
+          "position": "二壘手",
+          "assignment": "二壘手",
+          "outs": 1,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1,
+          "fly": {
+            "supported": true,
+            "access": {
+              "supported": true,
+              "level": "favored",
+              "reason": "canonicalReachArrival"
+            },
+            "defender": {
+              "defenderId": "school-powerhouse-409d352a-hs-year-3-age-18-incoming-02",
+              "name": "工藤",
+              "position": "中外野手",
+              "catching": 9,
+              "reaction": 9,
+              "range": 9,
+              "assignmentAuthority": "defensiveOpportunity"
+            },
+            "result": {
+              "caught": true,
+              "result": "caught"
+            },
+            "settlementApplied": true,
+            "mapping": {
+              "result": "out",
+              "mode": "settledDefense"
+            }
+          },
+          "resolution": {
+            "family": "flyBallCatch",
+            "outsCreated": 1,
+            "resultCode": "caught",
+            "firstBaseEvidence": null
+          },
+          "npcLines": [
+            {
+              "id": "school-powerhouse-409d352a-hs-year-3-age-18-incoming-02",
+              "position": "中外野手",
+              "defense": {
+                "chances": 0,
+                "PO": 0,
+                "A": 0,
+                "E": 0,
+                "DP": 0
+              }
+            }
+          ],
+          "playerDefense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "recordTotals": {
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "lastEvent": "flyBallCatchResolution"
+        }
+      },
+      {
+        "id": "V3-RF-CREDIT",
+        "input": {
+          "position": "二壘手",
+          "occupied": 0,
+          "ballType": 0.95,
+          "direction": 0.95,
+          "depth": 0.5
+        },
+        "route": null,
+        "before": {
+          "outs": 1,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1
+        },
+        "observed": {
+          "position": "二壘手",
+          "assignment": "二壘手",
+          "outs": 1,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "pa": 1,
+          "fly": {
+            "supported": true,
+            "access": {
+              "supported": true,
+              "level": "favored",
+              "reason": "canonicalReachArrival"
+            },
+            "defender": {
+              "defenderId": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-01",
+              "name": "小島",
+              "position": "右外野手",
+              "catching": 7,
+              "reaction": 7,
+              "range": 7,
+              "assignmentAuthority": "defensiveOpportunity"
+            },
+            "result": {
+              "caught": true,
+              "result": "caught"
+            },
+            "settlementApplied": true,
+            "mapping": {
+              "result": "out",
+              "mode": "settledDefense"
+            }
+          },
+          "resolution": {
+            "family": "flyBallCatch",
+            "outsCreated": 1,
+            "resultCode": "caught",
+            "firstBaseEvidence": null
+          },
+          "npcLines": [
+            {
+              "id": "school-powerhouse-409d352a-hs-year-2-age-17-incoming-01",
+              "position": "右外野手",
+              "defense": {
+                "chances": 0,
+                "PO": 0,
+                "A": 0,
+                "E": 0,
+                "DP": 0
+              }
+            }
+          ],
+          "playerDefense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "recordTotals": {
+            "away": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            },
+            "home": {
+              "runs": 0,
+              "hits": 0,
+              "errors": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "lastEvent": "flyBallCatchResolution"
+        }
+      }
+    ],
+    "normalEntry": [
+      {
+        "id": "N1",
+        "position": "一壘手",
+        "seed": 77001,
+        "observed": {
+          "completed": true,
+          "ticks": 107,
+          "recordStatus": "final",
+          "score": {
+            "home": 10,
+            "away": 7
+          },
+          "recordScore": {
+            "away": 7,
+            "home": 10
+          },
+          "assignment": "一壘手",
+          "playerLine": {
+            "playerId": "player",
+            "teamId": "school-powerhouse-409d352a",
+            "role": "substitute",
+            "position": "1B",
+            "positionAppearances": [
+              {
+                "position": "一壘手",
+                "role": "substitute",
+                "eventId": "hs-y3-final-competition-1|6|下|104"
+              },
+              {
+                "position": "1B",
+                "role": "substitute",
+                "eventId": "hs-y3-final-competition-1|7|上|116"
+              }
+            ],
+            "batting": {
+              "PA": 1,
+              "AB": 1,
+              "R": 0,
+              "H": 0,
+              "doubles": 0,
+              "triples": 0,
+              "HR": 0,
+              "RBI": 0,
+              "BB": 0,
+              "HBP": 0,
+              "SO": 1,
+              "SB": 0,
+              "CS": 0,
+              "SH": 0,
+              "SF": 0
+            },
+            "pitching": {
+              "outsRecorded": 0,
+              "BF": 0,
+              "H": 0,
+              "R": 0,
+              "ER": 0,
+              "BB": 0,
+              "HBP": 0,
+              "SO": 0,
+              "HR": 0,
+              "pitches": null,
+              "strikes": null
+            },
+            "defense": {
+              "chances": 1,
+              "PO": 1,
+              "A": 0,
+              "E": 0,
+              "DP": 0
+            },
+            "baserunning": {
+              "R": 0,
+              "SB": 0,
+              "CS": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "physicalDefensiveEvents": [
+            {
+              "type": "playerRoutinePlay",
+              "inning": 7,
+              "position": "一壘手",
+              "entry": "incomingReceive",
+              "route": "secureFirstBaseOut",
+              "physicalIdentity": "hs-y3-final-competition-1|7|上|away|hs-y3-final-regional-opponent-player-04|0|0|falsefalsefalse|ordinary-contact|pitch-1",
+              "outs": 1
+            }
+          ],
+          "experienceEvidence": 8
+        }
+      },
+      {
+        "id": "N2",
+        "position": "三壘手",
+        "seed": 77001,
+        "observed": {
+          "completed": true,
+          "ticks": 144,
+          "recordStatus": "final",
+          "score": {
+            "home": 7,
+            "away": 2
+          },
+          "recordScore": {
+            "away": 2,
+            "home": 7
+          },
+          "assignment": "三壘手",
+          "playerLine": {
+            "playerId": "player",
+            "teamId": "school-powerhouse-409d352a",
+            "role": "starter",
+            "position": "3B",
+            "positionAppearances": [
+              {
+                "position": "3B",
+                "role": "starter",
+                "eventId": "hs-y3-final-competition-1|lineup|home|player"
+              }
+            ],
+            "batting": {
+              "PA": 4,
+              "AB": 3,
+              "R": 0,
+              "H": 0,
+              "doubles": 0,
+              "triples": 0,
+              "HR": 0,
+              "RBI": 0,
+              "BB": 1,
+              "HBP": 0,
+              "SO": 2,
+              "SB": 0,
+              "CS": 0,
+              "SH": 0,
+              "SF": 0
+            },
+            "pitching": {
+              "outsRecorded": 0,
+              "BF": 0,
+              "H": 0,
+              "R": 0,
+              "ER": 0,
+              "BB": 0,
+              "HBP": 0,
+              "SO": 0,
+              "HR": 0,
+              "pitches": null,
+              "strikes": null
+            },
+            "defense": {
+              "chances": 0,
+              "PO": 0,
+              "A": 0,
+              "E": 0,
+              "DP": 0
+            },
+            "baserunning": {
+              "R": 0,
+              "SB": 0,
+              "CS": 0
+            }
+          },
+          "matchIntegrity": [],
+          "recordIntegrity": [],
+          "physicalDefensiveEvents": [],
+          "experienceEvidence": 7
+        }
+      }
+    ],
+    "normalEntryPolicy": "Exactly two predeclared Career harness runs, seed 77001 for 1B and 3B; original skills=12 setup and public sample .62; no in-match result/ball overrides. 1B had a seventh-inning receive; 3B had no physical defensive event.",
+    "reproductionProgram": "'use strict';\nconst fs=require('fs');\nconst {makeContext}=require('./tests/high-school-career-test-context.js');\nconst fixtureSource=fs.readFileSync('tests/first-base-receive-active-ground-production-integration-test.js','utf8');\nconst start=fixtureSource.indexOf('run(\\x60')+5,end=fixtureSource.indexOf('\\x60);',start);\nif(start<5||end<start)throw Error('Fixture extraction anchor missing');\nconst setup=fixtureSource.slice(start,end),rows=[];\nconst specs=[{\"id\":\"I1-1B-3U\",\"options\":{\"occupied\":1},\"route\":\"selfCoverFirst\"},{\"id\":\"I2-1B-3-1\",\"options\":{\"occupied\":1,\"pace\":0,\"contactQuality\":0.1},\"route\":\"pitcherCoverFirst\"},{\"id\":\"I3-3B-5-3\",\"options\":{\"position\":\"\\u4e09\\u58d8\\u624b\",\"direction\":0.005,\"occupied\":1},\"route\":\"secureFirstBaseOut\"},{\"id\":\"I4-NPC-SS-PLAYER-1B\",\"options\":{\"direction\":0.1,\"occupied\":0}},{\"id\":\"I5-PLAYER-C\",\"options\":{\"position\":\"\\u6355\\u624b\",\"occupied\":1}},{\"id\":\"A1-LF\",\"options\":{\"position\":\"\\u4e8c\\u58d8\\u624b\",\"occupied\":0,\"ballType\":0.95,\"direction\":0.05,\"depth\":0.5}},{\"id\":\"A2-CF\",\"options\":{\"position\":\"\\u4e8c\\u58d8\\u624b\",\"occupied\":0,\"ballType\":0.95,\"direction\":0.5,\"depth\":0.5}},{\"id\":\"A3-RF\",\"options\":{\"position\":\"\\u4e8c\\u58d8\\u624b\",\"occupied\":0,\"ballType\":0.95,\"direction\":0.95,\"depth\":0.5}},{\"id\":\"I6-NPC-3B-PLAYER-1B\",\"options\":{\"direction\":0.005,\"occupied\":0}},{\"id\":\"I7-NPC-2B-PLAYER-1B\",\"options\":{\"direction\":0.9,\"occupied\":0}},{\"id\":\"I8-3B-5-4-3\",\"options\":{\"position\":\"\\u4e09\\u58d8\\u624b\",\"direction\":0.005,\"occupied\":1},\"route\":\"initiate543\"},{\"id\":\"I9-PLAYER-SS\",\"options\":{\"position\":\"\\u6e38\\u64ca\\u624b\",\"direction\":0.1,\"occupied\":1},\"route\":\"secureFirstBaseOut\"}];\nfor(const spec of specs){\n const {run,json}=makeContext();run(setup);\n try{\n  run('var m=firstBaseFixture('+JSON.stringify(spec.options)+');');\n  const before=json('({outs:m.outs,runners:m.runners,scores:m.scores,pa:m.simulationLog.filter(e=>e.type===\"plateAppearance\").length})');\n  let chosen=null;\n  if(spec.route||spec.id==='I5-PLAYER-C'){\n    const choices=json('getHighSchoolDefensiveMomentChoices(m)');\n    chosen=spec.route?choices.find(c=>c.routeId===spec.route):choices[0];\n    if(!chosen)throw Error('Requested route unavailable: '+JSON.stringify(choices));\n    run('var gatePublic=firstBasePublic(m,'+JSON.stringify(chosen.matchDecision)+');');\n  }\n  rows.push({id:spec.id,input:spec.options,route:chosen,before,observed:json('({position:m.position,assignment:m.playerFieldingAssignment,outs:m.outs,runners:m.runners,scores:m.scores,pa:m.simulationLog.filter(e=>e.type===\"plateAppearance\").length,groundSupported:m.groundBallInPlayState?.supported,groundFallback:m.groundBallInPlayState?.fallbackAuthority,primary:m.groundBallInPlayState?.defensiveOpportunity?.primaryPosition,fly:m.flyBallCatchState?{supported:m.flyBallCatchState.supported,access:{supported:m.flyBallCatchState.defensiveAccess?.supported,level:m.flyBallCatchState.defensiveAccess?.level,reason:m.flyBallCatchState.defensiveAccess?.reason},defender:m.flyBallCatchState.defenderContext,result:{caught:m.flyBallCatchState.catchResult?.caught,result:m.flyBallCatchState.catchResult?.result},settlementApplied:m.flyBallCatchState.settlementApplied,mapping:{result:m.flyBallCatchState.paCompatibilityResult?.result,mode:m.flyBallCatchState.paCompatibilityResult?.resolutionMode}}:null,resolution:m.lastDefensiveResolution?{family:m.lastDefensiveResolution.familyId,outsCreated:m.lastDefensiveResolution.outsCreated,resultCode:m.lastDefensiveResolution.resultCode,firstBaseEvidence:m.lastDefensiveResolution.firstBaseEvidence?{entry:m.lastDefensiveResolution.firstBaseEvidence.entry,actor:m.lastDefensiveResolution.firstBaseEvidence.actorId,action:m.lastDefensiveResolution.firstBaseEvidence.actionType}:null,actions:m.lastDefensiveResolution.actionFacts?.actions.map(a=>({actorId:a.actorId,position:a.actorPosition,type:a.type,status:a.status,targetBase:a.targetBase})),scorer:m.lastDefensiveResolution.scorerFacts?.batterReachedOnError}:null,defenderLines:m.rosters.home.lineup.map(a=>({id:a.id,position:a.position,defense:MatchGameRecord.getPlayerGameLine(m.gameRecord,a.id)?.defense})),playerDefense:MatchGameRecord.getPlayerGameLine(m.gameRecord,\"player\")?.defense,recordTotals:m.gameRecord.totals,matchIntegrity:getHighSchoolMatchStateIntegrityIssues(m),recordIntegrity:MatchGameRecord.getIntegrityIssues(m.gameRecord),lastEvent:m.simulationLog.at(-1)?.type})')});\n }catch(e){rows.push({id:spec.id,input:spec.options,error:e.message});}\n}\nconst natural=[];\nfor(const position of ['\\u4e00\\u58d8\\u624b','\\u4e09\\u58d8\\u624b']){\n const {run,json}=makeContext();\n try{\n  run('careerFixture('+JSON.stringify(position)+',\"starter\",77001);choose(\"critical_offseason\",1);var gateFull=player.highSchoolMatch;var gateTicks=playCareerMatchToEnd();');\n  natural.push({position,seed:77001,observed:json('({completed:gateFull.completed,ticks:gateTicks,recordStatus:gateFull.gameRecord.status,score:gateFull.scores,recordScore:gateFull.gameRecord.result.finalScore,assignment:gateFull.playerFieldingAssignment,playerLine:MatchGameRecord.getPlayerGameLine(gateFull.gameRecord,\"player\"),matchIntegrity:getHighSchoolMatchStateIntegrityIssues(gateFull),recordIntegrity:MatchGameRecord.getIntegrityIssues(gateFull.gameRecord),physicalDefensiveEvents:gateFull.simulationLog.filter(e=>[\"defensiveResolution\",\"playerRoutinePlay\"].includes(e.type)&&e.physicalIdentity).map(e=>({type:e.type,inning:e.inning,position:e.playerPosition,entry:e.firstBaseEvidence?.entry,route:e.initialRoute,physicalIdentity:e.physicalIdentity,outs:e.outsCreated})),developmentStatus:gateFull.matchExperience?.developmentSettlement?.status,experienceEvidence:gateFull.matchExperience?.evidence?.length,careerHistory:player.matchHistory?.length})')});\n }catch(e){natural.push({position,seed:77001,error:e.message});}\n}\nconsole.log(JSON.stringify({kind:'read-only-isolated-VM',fixture:'unchanged fixture setup extracted before first test registration; controlled options explicitly declared',rows,natural}));",
+    "reproductionQualification": "Consolidates the same corrected declared cases and captures all defender lines. Actual observations came from bounded invocations and additional credit verification; no additional sweep is implied. Run in repository root with node, no file writes.",
+    "probeCorrections": [
+      {
+        "reason": "PowerShell stdin encoding initially replaced literal Chinese labels with question marks. Subsequent inline source uses ASCII Unicode escapes; malformed-label games are excluded from evidence."
+      },
+      {
+        "reason": "An empty-base 1B fixture had already auto-settled as routine; public callback correctly rejected. Corrected declared meaningful fixture uses occupied first base."
+      },
+      {
+        "reason": "Pitcher-cover route was unavailable for the initially declared firm grounder; reused original weak-ball fixture inputs pace=0/contactQuality=.1."
+      },
+      {
+        "reason": "3B selector initially searched throwFirst; original legal routeId is secureFirstBaseOut. Corrected selector, original Production unchanged."
+      }
+    ],
+    "testObserverHistory": {
+      "file": "tests/canonical-match-regression-integration-test.cjs",
+      "firstAttempt": {
+        "exit": null,
+        "signal": "SIGTERM",
+        "error": "ENOBUFS at observer maxBuffer 8 MB; observed checks 50 but no successful process completion"
+      },
+      "retry": {
+        "reason": "Use streamed stdout collection without altering tests",
+        "exit": 0,
+        "stdoutBytes": 9599859,
+        "observation": "50 PASS lines and process exit 0; output contains a large evidence line followed by other text; collector summary JSON parsing failed, no test assertions failed."
+      }
+    }
+  },
+  "limitations": [
+    "Six existing suites passed; historical 22-suite result is explicitly separate.",
+    "1B/3B 200/400-game cohorts not run; no broad Monte Carlo or all-repository suite run.",
+    "No new tests, runner files, source dumps, presentation implementation or Gameplay changes.",
+    "CF/RF actual catch PO missing is reproduced despite empty existing integrity-issue lists.",
+    "LF unsupported execution and C/P/OF player gaps are scoped findings, not whole-repo absence claims.",
+    "SF AB/RBI reclassification, HBP producer, foul-popup execution, full natural coverage and real Phaser/browser user experience unverified."
+  ],
+  "integrity": {
+    "preDelivery": {
+      "at": "2026-10-19T05:05:29.689Z",
+      "scopeCount": 125,
+      "fileDifferences": [],
+      "critical": [
+        {
+          "path": "defensive-decision-throw-foundation.js",
+          "unchanged": true
+        },
+        {
+          "path": "defensive-reach-secure-foundation.js",
+          "unchanged": true
+        },
+        {
+          "path": "defensive-runner-throw-settlement-foundation.js",
+          "unchanged": true
+        },
+        {
+          "path": "match-vnext-same-ball-execution-adapter.js",
+          "unchanged": true
+        },
+        {
+          "path": "contracts/match-vnext-execution-v0.1.cjs",
+          "unchanged": true
+        },
+        {
+          "path": "script.js",
+          "unchanged": true
+        },
+        {
+          "path": "tests/pitch-production-source-scope.cjs",
+          "unchanged": true
+        },
+        {
+          "path": "tests/match-vnext-same-ball-execution-contract-test.cjs",
+          "unchanged": true
+        },
+        {
+          "path": "tests/match-vnext-same-ball-production-integration-test.cjs",
+          "unchanged": true
+        }
+      ],
+      "protectedDifferences": [],
+      "head": "ab3117653945de0b7013636187c446276a96e634",
+      "branch": "main",
+      "originMain": "ab3117653945de0b7013636187c446276a96e634",
+      "statusSha256": "cb54e4752e5f0efd773ce36f205605772752f519b1bd2bcc5d22e590c72d471f",
+      "indexSha256": "6805182aad285efb6c6dac054bbcee56058baf8adff46cbe920e025efb69d09d",
+      "staged": ""
+    },
+    "final": {
+      "status": "PASS",
+      "verifiedAt": "2026-10-19T05:16:44.148Z",
+      "focusedSourcesChecked": 125,
+      "sourceDifferences": [],
+      "protectedMetadataChecked": 12,
+      "protectedDifferences": [],
+      "head": "ab3117653945de0b7013636187c446276a96e634",
+      "branch": "main",
+      "localOriginMain": "ab3117653945de0b7013636187c446276a96e634",
+      "indexSha256": "6805182aad285efb6c6dac054bbcee56058baf8adff46cbe920e025efb69d09d",
+      "staged": "",
+      "trackedWip": 19,
+      "untracked": 1221,
+      "originalStatusWithoutReportsSha256": "cb54e4752e5f0efd773ce36f205605772752f519b1bd2bcc5d22e590c72d471f",
+      "originalStatusUnchanged": true,
+      "outputStatus": [
+        "?? docs/match-gameplay-coverage-reprioritization-gate-v0.1-evidence.json",
+        "?? docs/match-gameplay-coverage-reprioritization-gate-v0.1.md"
+      ],
+      "markdownSha256": "1478fb6590a1fd2a9776e38ca892077b06197de0c232cf4b0f8954870f86b979",
+      "artifactChecks": {
+        "numberedSections": 15,
+        "npcRows": 9,
+        "playerRows": 9,
+        "outcomes": 14,
+        "sixLayers": true,
+        "existingSuitesExitZero": 6,
+        "controlledRowsValidated": 12,
+        "normalExtraFullGames": 2
+      },
+      "qualification": "Only 125 scoped sources and 12 protected metadata entries compared, not a whole-repository content manifest. Original full status digest excluding exactly the two reports matches. Internal Codex refs were not asserted unchanged."
+    },
+    "noSelfHash": "The evidence JSON does not hash itself. Final integrity records the Markdown SHA and unchanged preexisting source/status/index/protected comparisons."
+  },
+  "finalRecommendation": {
+    "audit": "GO",
+    "nextGameplaySprint": "G1 NPC Basic Coverage & Outfield Flyout/Single Closure",
+    "alpha": "NO_GO_UNTIL_P0_01_TO_04",
+    "phaser": "GO_AFTER_EXPLICIT_LIVE_INTERFACE",
+    "newSameBallNatural": "NO_GO",
+    "s2RecoveredReach": "P1 for original mode-off Alpha; P0 if new S2 policy must be naturally enabled",
+    "stop": "Reports only; no gameplay, UI, scorer, mapper, save, freeze or Git implementation this turn."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "file": "high-school-entry-roster-integration-test.js",
+  "status": "PASS",
+  "entryVerified": true,
+  "observedAssertions": 33,
+  "elapsedMs": 238,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/high-school-entry-roster-integration-test.js"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "timedOut": false,
+  "stdout": "✓ 1. School-year roster identity deterministic\n✓ 2. Identity 包含 school／standard／year／roster seed\n✓ 3. Candidate base roster 在玩家加入前已存在\n✓ 4. 所有 invitation position need 都由 base roster 形成\n✓ 5. 相同強先發下，深 bench 形成更高 competition density\n✓ 6. Competition context 保存 starter／bench actor identities\n✓ 7. 相同 starter 下，弱薄 bench 形成更高 position need\n✓ 8. Player 明顯優於 incumbent 時 projected role 可為 starter/core\n✓ 9. Player 略低於 incumbent 但高於 bench 時 projected role 為 rotation\n✓ 10. 深且強的守位群可把玩家 projected role 壓到 bench\n✓ 10a. 強校深守位允許高能力球員仍只獲 Bench projection\n✓ 10b. 強校弱年份允許強球員取得 Starter/Core projection\n✓ 10c. 普通學校的強 incumbent 與深度不保證玩家先發\n✓ 11. Bench injection 保留全部 incumbent 並只增加 player\n✓ 12. Starter injection 將 incumbent 移至 bench 而非刪除\n✓ 13. Shared legality 拒絕左投 C／2B／3B／SS starter assignment\n✓ 14. Production 仍生成 exactly four legal invitations\n✓ 15. Invitation 與 TeamRoster 共用 canonical standard vocabulary\n✓ 16. 每個 candidate 都保存合法 school-year base roster identity\n✓ 17. Invitation need／competition／role 均連到 actual base roster actors\n✓ 18. Four-school tradeoff diversity 在 roster integration 後保留\n✓ 19. Invitation reload 不改 roster／need／competition／role／interest\n✓ 20. Selection 鎖定同一 school-year roster identity\n✓ 21. Selection base roster 與 invitation base roster actor identity 完全相同\n✓ 22. Selection reload 保留 roster、incumbents、competition 與 injection state\n✓ 23. 不同 match seed 不改 selected school roster identity\n✓ 24. Invitation incumbents 在 HS Year 1 Match 仍是同一 actor identities\n✓ 25. Match 主隊直接 consume selected canonical roster\n✓ 26. Opportunity 使用 selected roster-derived need／competition\n✓ 27. Match-specific identity 只影響對手，不重抽玩家學校 roster\n✓ 27a. Match reload 保留 selected school-year identity 與 roster actors\n✓ 28. 左投 Invitation recruiting profile 不再評估 C／2B／3B／SS\n✓ 29. School need 不能把左投硬塞回非法 starter 守位\nHigh School Entry Roster Integration v1: 33/33 passed.\n",
+  "stderr": ""
+}

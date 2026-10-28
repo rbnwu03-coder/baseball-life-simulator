@@ -1,0 +1,318 @@
+{
+  "task": "Current Test Baseline Verification v0.1 — Read-only",
+  "createdAt": "2026-10-15T07:18:00.501Z",
+  "materialExactSnippets": [
+    {
+      "file": "tests/entry-safe-runner.cjs",
+      "start": 23,
+      "end": 40,
+      "sha256": "91659f28bc718eb21569be4a64bfce61a6518b5867a5ca629e5484e15a54a6d0",
+      "exactSource": "function classify(result,witness,nonce,entryMode,sourceStable=true){\n const valid=witness?.version===1&&witness.nonce===nonce&&witness.entryMode===entryMode;\n const entryVerified=Boolean(valid&&witness.entryStarted&&(entryMode===\"standalone\"?witness.standaloneMainMatches:entryMode===\"exported-run\"));\n const custom=witness?.customAssertion,customVerified=Boolean(custom&&custom.reviewedSourceMatches&&!custom.error&&custom.count>0&&custom.count===custom.expectedCount);\n let status,reason;\n if(result.error||result.signal||result.status===null){status=\"UNVERIFIED\";reason=\"Timeout/spawn/output-buffer/signal interruption\";}\n else if(!sourceStable){status=\"UNVERIFIED\";reason=\"Relevant source changed during execution\";}\n else if(!entryVerified){status=\"UNVERIFIED\";reason=\"Missing/invalid assertion witness or entry was not invoked\";}\n else if([\"ENOBUFS\",\"ENOENT\",\"EACCES\",\"MODULE_NOT_FOUND\"].includes(witness.unhandledError?.code)){status=\"UNVERIFIED\";reason=\"Environment/dependency failure prevents verification\";}\n else if(result.status!==0||witness.summary?.failed>0){status=\"FAIL\";reason=\"Executed entry reported assertion/runtime/summary failure\";}\n else if(witness.summary&&(![\"total\",\"passed\",\"failed\"].every(k=>Number.isInteger(witness.summary[k])&&witness.summary[k]>=0)||witness.summary.total!==witness.summary.passed+witness.summary.failed||witness.summary.total===0)){status=\"UNVERIFIED\";reason=\"Invalid/empty exported summary\";}\n else if(entryMode===\"exported-run\"&&!witness.exportCompleted){status=\"UNVERIFIED\";reason=\"Exported run did not complete\";}\n else if(witness.assertions?.unsupportedAsync>0){status=\"UNVERIFIED\";reason=\"Asynchronous assertion API was not observed; partial synchronous evidence is insufficient\";}\n else if(custom&&!customVerified){status=\"UNVERIFIED\";reason=\"Reviewed custom checker coverage missing or incomplete\";}\n else if(!(witness.assertions?.passed>0)&&!customVerified){status=\"UNVERIFIED\";reason=\"Exit0 without observed successful synchronous assertions\";}\n else{status=\"PASS\";reason=\"Verified entry completed with observed successful assertions\";}\n return{status,reason,entryVerified,successfulAssertions:witness?.assertions?.passed||0,customCheckerInvocations:customVerified?custom.count:0};\n}",
+      "graphMatchesCurrent": true
+    },
+    {
+      "file": "tests/entry-safe-runner.cjs",
+      "start": 6,
+      "end": 12,
+      "sha256": "91659f28bc718eb21569be4a64bfce61a6518b5867a5ca629e5484e15a54a6d0",
+      "exactSource": "const registry=Object.freeze({\n \"contextual-status-panel\":{file:\"tests/contextual-status-panel-test.js\",entryMode:\"standalone\",customAssertion:{sourceSha256:\"8620a757e01c720106027dc1dfc81e97000be8c81052a85359d4798d2974680a\",functionName:\"verify\",expectedCount:40,functionFragment:'function verify(title, condition) {\\n  if (!condition) throw new Error(title);\\n  passed += 1;\\n  console.log(`✓ ${title}`);\\n}\\n'}},\n \"outcome-transition-hierarchy\":{file:\"tests/outcome-transition-hierarchy-test.js\",entryMode:\"standalone\",customAssertion:{sourceSha256:\"419d5035db166ae027e2ad75321c132821f98e596fc8032b50fed278134d552a\",functionName:\"verify\",expectedCount:36,functionFragment:'function verify(title, condition) {\\n  if (!condition) throw new Error(title);\\n  passed += 1;\\n  console.log(`✓ ${title}`);\\n}\\n'}},\n \"pitch-tactical-decision-production-adapter\":{file:\"tests/pitch-tactical-decision-production-adapter-test.js\",entryMode:\"standalone\"},\n \"pitch-tactical-decision-production-adapter-integration\":{file:\"tests/pitch-tactical-decision-production-adapter-integration-test.js\",entryMode:\"standalone\"},\n \"r6-exact-checker\":{file:\"tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs\",entryMode:\"exported-run\"}\n});",
+      "graphMatchesCurrent": true
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs",
+      "start": 64,
+      "end": 82,
+      "sha256": "d8dcb7e1d43ab476dda8b457f3292f750232b6b0f49f661093e8d7d1850246e2",
+      "exactSource": "function full() {\n  reserve(\"full-repository\"); const gate = json(prefix + \"gates-evidence.json\"); assert(gate.passed); assert.deepEqual(frozenHashes(), gate.frozenSourceHashes); integrity();\n  const review = json(prefix + \"independent-review-evidence.json\"); assert(review.passed); assert.deepEqual(review.frozenSourceHashes, gate.frozenSourceHashes);\n  const old = json(\"docs/infield-legacy-receiver-model-sprint-6-validation-final.json\"), files = old.files;\n  assert.equal(files.length, 227); assert.equal(new Set(files).size, 227); assert.equal(hash(JSON.stringify(files)), \"871902b4d5ecd7beb2bd23848be8c985ed7ddc52ecc5ebc6b40ba57d2f335a96\");\n  files.forEach(p => assert(!protectedPaths.has(p))); const testHashesBefore = Object.fromEntries(files.map(p => [p, hash(read(p))])), results = [], startedAt = new Date().toISOString();\n  const primary = text => text.split(/\\r?\\n/).find(x => /^(AssertionError|ReferenceError|TypeError|Error)(?:\\b|:)/.test(x)) || null;\n  for (const [i, file] of files.entries()) {\n    const row = runSuite(file, true), prior = old.results.find(x => x.file === file), debt = old.debtVerification.find(x => x.file === file);\n    row.baselineExitCode = prior.exitCode; row.debtSignature = debt?.signature || null; row.primaryError = primary(row.stderr); row.baselinePrimaryError = primary(prior.stderr);\n    row.existingDebt = Boolean(debt && row.exitCode === prior.exitCode && !row.error && row.stderr.includes(debt.signature) && row.primaryError === row.baselinePrimaryError && (!file.includes(\"high-school-year-one-opportunity-two\") || row.stderr.includes(\"buildHighSchoolShortstopExecution\")));\n    row.status = row.error || row.exitCode !== prior.exitCode ? \"NEW_REGRESSION\" : row.exitCode === 0 ? \"PASS\" : row.existingDebt ? \"EXISTING_DEBT\" : \"NEW_REGRESSION\";\n    results.push(row); console.log(JSON.stringify({ index: i + 1, file, exit: row.exitCode, status: row.status, elapsedMs: row.elapsedMs, error: row.error })); if (row.status === \"NEW_REGRESSION\") break;\n  }\n  assert.deepEqual(frozenHashes(), gate.frozenSourceHashes); for (const [p, h] of Object.entries(testHashesBefore)) assert.equal(hash(read(p)), h);\n  const complete = results.length === files.length, newRegressions = results.filter(x => x.status === \"NEW_REGRESSION\").length;\n  capture(\"full-repository\", { startedAt, finishedAt: new Date().toISOString(), files, manifestSha256: hash(JSON.stringify(files)), wrapper, timeoutMs: 180000, maxBuffer: 30000000, testHashesBefore, results, complete, passed: results.filter(x => x.status === \"PASS\").length, existingDebt: results.filter(x => x.status === \"EXISTING_DEBT\").length, newRegressions, notRun: files.slice(results.length), baselineDebt: old.results.filter(x => x.exitCode !== 0), frozenSourceHashes: gate.frozenSourceHashes, safety: integrity() });\n  console.log(JSON.stringify({ complete, executed: results.length, newRegressions })); if (!complete || newRegressions) process.exitCode = 1;\n}",
+      "graphMatchesCurrent": true
+    },
+    {
+      "file": "tests/entry-safe-runner-test.cjs",
+      "start": 3,
+      "end": 53,
+      "sha256": "26a47cdc78e273783abc9d5a279a46cc92959bb09ff38c2c898d889d5239c019",
+      "exactSource": "function run(label){A.reserve(label+\"-focused\");const dir=fs.mkdtempSync(path.join(R.root,\"docs/test-infrastructure-sprint-0.1-fixtures-\")),relative=p=>path.relative(R.root,p).replace(/\\\\/g,\"/\");\n const sources={\n  \"main.cjs\":\"const a=require('node:assert/strict');if(require.main===module){a.equal(require.main,module);a.deepEqual({a:1},{a:1});}\\n\",\n  \"export.cjs\":\"const a=require('assert');module.exports={run(){a(true);a.strict.equal(2,2);return{summary:{total:2,passed:2,failed:0}};}};\\n\",\n  \"legacy.cjs\":\"require('./main.cjs');console.log('PASS-looking output; main skipped');\\n\",\n  \"failure.cjs\":\"require('assert/strict').equal(1,2,'Intentional ENOBUFS-labelled AssertionError');\\n\",\n  \"empty.cjs\":\"console.log('PASS 999 / 999');\\n\",\n  \"runtime.cjs\":\"throw Error('Intentional runtime failure');\\n\",\n  \"timeout.cjs\":\"require('assert').ok(true);setInterval(()=>{},50);\\n\",\n  \"git.cjs\":\"const cp=require('child_process'),a=require('assert/strict'),c=require('crypto');const b=cp.execFileSync('git',['show','\"+R.formalBaseline+\":script.js']);a.equal(b.length,1070296);a.equal(c.createHash('sha256').update(b).digest('hex'),'64ab3a2e05180e13ef42bc9f6a342ba28f0cc9a5c58217dc21cd3c640894db1b');\\n\",\n  \"explicit.cjs\":\"const cp=require('child_process'),a=require('assert/strict');a.throws(()=>cp.execFileSync('git',['show','\"+R.formalBaseline+\":script.js'],{maxBuffer:1024}),e=>e.code==='ENOBUFS');a.throws(()=>cp.execFileSync(process.execPath,['-e','process.stdout.write(\\\"x\\\".repeat(4096))'],{maxBuffer:1024}),e=>e.code==='ENOBUFS');\\n\",\n  \"zero.cjs\":\"module.exports={run(){require('assert').ok(true);return{summary:{total:0,passed:0,failed:0}};}};\\n\",\n  \"caught.cjs\":\"module.exports={run(){try{require('assert').equal(1,2);}catch{}return{summary:{total:1,passed:0,failed:1}};}};\\n\",\n  \"async.cjs\":\"const a=require('assert/strict');a.doesNotReject(async()=>{});\\n\",\n  \"mixed.cjs\":\"const a=require('assert/strict');a.ok(true);a.doesNotReject(async()=>{});\\n\",\n  \"custom.cjs\":\"function verify(condition){if(!condition)throw Error('Custom assertion');}\\nverify(true);verify(2===2);\\n\",\n  \"custom-empty.cjs\":\"function verify(condition){if(!condition)throw Error('Custom assertion');}\\nconsole.log('PASS 2/2');\\n\"\n };for(const[name,text]of Object.entries(sources))fs.writeFileSync(path.join(dir,name),text,{flag:\"wx\"});\n const cases=[],checks=[];\n function test(name,fn){try{fn();checks.push({name,status:\"PASS\"});}catch(e){checks.push({name,status:\"FAIL\",error:e.stack});}}\n function child(name,file,entryMode,expected,extra={}){const evidencePath=A.prefix+label+\"-\"+name+\"-evidence.json\",row=R.runSuite({suiteName:name,file:relative(path.join(dir,file)),entryMode,evidencePath,...extra});cases.push({name,expected,row,evidencePath});assert.equal(row.status,expected,name);return row;}\n test(\"Standalone enters main and observes synchronous assertions\",()=>{const r=child(\"standalone\",\"main.cjs\",\"standalone\",\"PASS\");assert.equal(r.assertionEvidence.standaloneMainMatches,true);assert.equal(r.successfulAssertions,2);});\n test(\"Explicit exported run invokes callable/strict aliases\",()=>{const r=child(\"exported\",\"export.cjs\",\"exported-run\",\"PASS\");assert.equal(r.assertionEvidence.exportCompleted,true);assert.equal(r.successfulAssertions,2);});\n test(\"Export-only loaded as standalone cannot pass\",()=>child(\"export-not-called\",\"export.cjs\",\"standalone\",\"UNVERIFIED\"));\n test(\"Legacy require-only main skip with nonempty stdout is UNVERIFIED\",()=>{const r=child(\"main-skipped\",\"legacy.cjs\",\"standalone\",\"UNVERIFIED\");assert(r.stdout.length);assert.equal(r.successfulAssertions,0);});\n test(\"Real AssertionError remains FAIL even with environment words in message\",()=>{const r=child(\"assertion-failure\",\"failure.cjs\",\"standalone\",\"FAIL\");assert.equal(r.assertionEvidence.unhandledError.name,\"AssertionError\");});\n test(\"Exit0 plus fake PASS output cannot establish assertion execution\",()=>child(\"empty\",\"empty.cjs\",\"standalone\",\"UNVERIFIED\"));\n test(\"Confirmed runtime exception is FAIL\",()=>child(\"runtime\",\"runtime.cjs\",\"standalone\",\"FAIL\"));\n test(\"Implicit nested Git show compatibility preserves exact pinned bytes\",()=>{const r=child(\"git-compatible\",\"git.cjs\",\"standalone\",\"PASS\");assert.equal(r.assertionEvidence.gitCompatibility.calls.length,1);});\n test(\"Without compatibility the same Git read remains ENOBUFS / UNVERIFIED\",()=>{const r=child(\"git-original\",\"git.cjs\",\"standalone\",\"UNVERIFIED\",{policy:{gitCompatibility:false}});assert.equal(r.assertionEvidence.unhandledError.code,\"ENOBUFS\");});\n test(\"Explicit Git buffer and non-Git buffer are unchanged\",()=>{const r=child(\"buffer-isolation\",\"explicit.cjs\",\"standalone\",\"PASS\");assert.equal(r.assertionEvidence.gitCompatibility.calls.length,0);});\n test(\"Timeout cannot be converted to PASS\",()=>{const r=child(\"timeout\",\"timeout.cjs\",\"standalone\",\"UNVERIFIED\",{policy:{timeoutMs:500}});assert.equal(r.spawnError.code,\"ETIMEDOUT\");});\n test(\"Spawn failure retains actual command and cannot PASS\",()=>{const r=child(\"spawn\",\"main.cjs\",\"standalone\",\"UNVERIFIED\",{nodeExecutable:path.join(dir,\"missing-node.exe\")});assert.equal(r.spawnError.code,\"ENOENT\");});\n test(\"Positive observed assertions do not legitimize empty exported summary\",()=>child(\"zero-summary\",\"zero.cjs\",\"exported-run\",\"UNVERIFIED\"));\n test(\"Failed exported summary stays FAIL\",()=>child(\"caught-failure\",\"caught.cjs\",\"exported-run\",\"FAIL\"));\n test(\"Unobserved asynchronous assert API is UNVERIFIED\",()=>{const r=child(\"async-unsupported\",\"async.cjs\",\"standalone\",\"UNVERIFIED\");assert.equal(r.assertionEvidence.assertions.unsupportedAsync,1);});\n test(\"Partial synchronous evidence cannot hide an unsupported asynchronous check\",()=>{const r=child(\"mixed-unsupported\",\"mixed.cjs\",\"standalone\",\"UNVERIFIED\");assert.equal(r.successfulAssertions,1);});\n const customSpec=name=>({sourceSha256:A.hash(fs.readFileSync(path.join(dir,name))),functionName:\"verify\",expectedCount:2,functionFragment:\"function verify(condition){if(!condition)throw Error('Custom assertion');}\\n\"});\n test(\"Reviewed custom checker is witnessed through V8, with no source rewrite\",()=>{const r=child(\"custom\",\"custom.cjs\",\"standalone\",\"PASS\",{customAssertion:customSpec(\"custom.cjs\")});assert.equal(r.customCheckerInvocations,2);assert.equal(r.successfulAssertions,0);});\n test(\"Printed custom PASS without verify invocations is UNVERIFIED\",()=>child(\"custom-empty\",\"custom-empty.cjs\",\"standalone\",\"UNVERIFIED\",{customAssertion:customSpec(\"custom-empty.cjs\")}));\n test(\"Unreviewed custom source is UNVERIFIED\",()=>child(\"custom-unreviewed\",\"custom.cjs\",\"standalone\",\"UNVERIFIED\",{customAssertion:{...customSpec(\"custom.cjs\"),sourceSha256:\"invalid\"}}));\n test(\"No automatic export function guessing\",()=>{assert.throws(()=>R.runSuite({file:relative(path.join(dir,\"export.cjs\")),evidencePath:A.prefix+label+\"-invalid-mode.json\"}),/entry mode/);});\n test(\"Existing evidence refuses execution before a second child starts\",()=>{const c=cases[0];assert.throws(()=>R.runSuite({file:c.row.file,entryMode:\"standalone\",evidencePath:c.evidencePath}),/Existing evidence/);});\n test(\"Protected or escaping target is refused\",()=>{assert.throws(()=>R.runSuite({file:\"tests/fast-check-smoke-test.cjs\",entryMode:\"standalone\",evidencePath:A.prefix+label+\"-protected.json\"}),/protected/);assert.throws(()=>R.runSuite({file:\"../outside.cjs\",entryMode:\"standalone\",evidencePath:A.prefix+label+\"-outside.json\"}),/Outside/);});\n test(\"NOT RUN carries no invented command/exit/assertions\",()=>{const r=R.notRun({file:\"never-started\",entryMode:\"standalone\"});assert.equal(r.status,\"NOT RUN\");assert.equal(r.actualCommand,null);assert.equal(r.assertionEvidence,null);});\n test(\"Invalid witness / changed sources cannot PASS\",()=>{const base=cases[0].row,w=base.assertionEvidence,result={status:0,error:null,signal:null,stdout:\"PASS\",stderr:\"\"};assert.equal(R.classify(result,w,\"wrong\",\"standalone\").status,\"UNVERIFIED\");assert.equal(R.classify(result,w,w.nonce,\"standalone\",false).status,\"UNVERIFIED\");});\n test(\"Per-suite limits preserve first-base exception without global inflation\",()=>{assert.equal(R.policy(\"other\").timeoutMs,120000);assert.equal(R.policy(\"tests/first-base-receive-active-ground-production-integration-test.js\").timeoutMs,180000);assert.equal(R.policy(\"other\").outputMaxBuffer,16000000);assert.equal(R.policy(\"other\",{timeoutMs:500}).timeoutMs,500);});\n const summary={total:checks.length,passed:checks.filter(c=>c.status===\"PASS\").length,failed:checks.filter(c=>c.status===\"FAIL\").length};\n A.capture(label+\"-focused\",{summary,cases:cases.map(c=>({name:c.name,expected:c.expected,status:c.row.status,assertions:c.row.successfulAssertions,evidencePath:c.evidencePath})),checks,fixtureDirectory:relative(dir),fixtureHashes:Object.fromEntries(Object.keys(sources).map(n=>[relative(path.join(dir,n)),A.hash(fs.readFileSync(path.join(dir,n)))])),safety:A.integrity()});\n console.log(JSON.stringify({label,...summary,childProcesses:cases.length}));if(summary.failed)process.exitCode=1;return{summary,cases,checks};\n}",
+      "graphMatchesCurrent": true
+    }
+  ],
+  "registrationProof": {
+    "packageJson": "package.json",
+    "scripts": {
+      "audit:opportunity-probability": "node tests/high-school-opportunity-probability-calibration-runner.cjs",
+      "audit:opportunity-post-repair": "node tests/high-school-opportunity-post-repair-calibration-runner.cjs"
+    },
+    "entrySafe": {
+      "path": "tests/entry-safe-runner.cjs",
+      "registry": [
+        {
+          "name": "contextual-status-panel",
+          "file": "tests/contextual-status-panel-test.js",
+          "entryMode": "standalone",
+          "customAssertion": {
+            "sourceSha256": "8620a757e01c720106027dc1dfc81e97000be8c81052a85359d4798d2974680a",
+            "functionName": "verify",
+            "expectedCount": 40,
+            "functionFragment": "function verify(title, condition) {\n  if (!condition) throw new Error(title);\n  passed += 1;\n  console.log(`✓ ${title}`);\n}\n"
+          }
+        },
+        {
+          "name": "outcome-transition-hierarchy",
+          "file": "tests/outcome-transition-hierarchy-test.js",
+          "entryMode": "standalone",
+          "customAssertion": {
+            "sourceSha256": "419d5035db166ae027e2ad75321c132821f98e596fc8032b50fed278134d552a",
+            "functionName": "verify",
+            "expectedCount": 36,
+            "functionFragment": "function verify(title, condition) {\n  if (!condition) throw new Error(title);\n  passed += 1;\n  console.log(`✓ ${title}`);\n}\n"
+          }
+        },
+        {
+          "name": "pitch-tactical-decision-production-adapter",
+          "file": "tests/pitch-tactical-decision-production-adapter-test.js",
+          "entryMode": "standalone"
+        },
+        {
+          "name": "pitch-tactical-decision-production-adapter-integration",
+          "file": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+          "entryMode": "standalone"
+        },
+        {
+          "name": "r6-exact-checker",
+          "file": "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs",
+          "entryMode": "exported-run"
+        }
+      ],
+      "explicitApiBeyondCli": true,
+      "newSuitesAutoRegistered": false
+    },
+    "fixedR6": {
+      "runner": "tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs",
+      "manifest": "docs/infield-legacy-receiver-model-sprint-6-validation-final.json",
+      "manifestSha256": "871902b4d5ecd7beb2bd23848be8c985ed7ddc52ecc5ebc6b40ba57d2f335a96",
+      "count": 227,
+      "newSuitesIncluded": []
+    },
+    "protectedUmbrella": {
+      "path": "tests/fast-check-smoke-test.cjs",
+      "contentRead": false,
+      "registrationContents": "NOT INSPECTED; do not assume new suites joined umbrella"
+    }
+  },
+  "dedicated80HistoricalReuse": {
+    "file": "tests/source-freeze-reconciliation-exact-contract-test.cjs",
+    "evidence": "docs/test-infrastructure-sprint-0.1-phase-b-index-caller-evidence.json",
+    "recordedCurrentCallerHashDrift": [
+      "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "tests/pitch-tactical-decision-production-integration-test.js",
+      "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "tests/pitch-tactical-signal-projection-production-integration-test.js"
+    ],
+    "actualInput": "Archived baseline.originalSuiteSources plus deterministic allowedSource proposal. Current five caller test files are not read/executed by this suite.",
+    "proofLines": {
+      "start": 53,
+      "end": 73,
+      "source": "  for (const [name, addition] of [[\"Storage\", 'localStorage.setItem(\"second\", \"x\");'], [\"RNG\", \"Math.random();\"], [\"candidate execution\", \"ReceiverExecutionV22Foundation.execute({});\"], [\"unreviewed version\", \"// unreviewed adapter version\\n\"]]) {\n    test(\"Index cannot approve adapter \" + name, () => { const changed = adapter + \"\\n\" + addition; assert.notEqual(changed, adapter); new vm.Script(changed); assert.throws(() => I.assertReceiverSourceIndexAuthorizedWiring(currentIndex, originalIndex, changed), { code: \"ERR_ASSERTION\" }); }, true);\n  }\n  const callerResults = [];\n  for (const row of P.suiteRows) {\n    const original = baseline.originalSuiteSources[row.file], proposed = P.allowedSource(row.file, original), body = guardBody(proposed, row);\n    new vm.Script(proposed, { filename: row.file });\n    const sources = [\"save.js\", ...row.otherGuardSources], originals = Object.fromEntries(sources.map(file => [file, pinned(row.ref, file)]));\n    const current = Object.fromEntries(sources.map(file => [file, normalize(P.read(file).toString(\"utf8\"))]));\n    const nativeRequire = createRequire(path.join(P.root, row.file));\n    function exerciseGuard(currentOverrides = {}, pinnedOverrides = {}) {\n      let comparisons = 0;\n      const context = { assert, path, __dirname: path.join(P.root, \"tests\"), BASELINE: row.ref, require: nativeRequire,\n        assertPitchProductionSourceScope: Scope.assertPitchProductionSourceScope, assertOnlyRepeatEligibilityExtraction: Tactical.assertOnlyRepeatEligibilityExtraction,\n        fs: { readFileSync(absolute, encoding) { assert.equal(encoding, \"utf8\"); const file = path.relative(P.root, absolute).replace(/\\\\/g, \"/\"); if (file === \"receiver-source-snapshot.js\") return adapter; assert(Object.hasOwn(current, file)); return currentOverrides[file] ?? current[file]; } },\n        cp: { execFileSync(command, args, options) { assert.equal(command, \"git\"); assert.equal(args[0], \"show\"); assert.equal(options.maxBuffer, 8 * 1024 * 1024); const separator = args[1].indexOf(\":\"); assert.equal(args[1].slice(0, separator), row.ref); const file = args[1].slice(separator + 1); assert(Object.hasOwn(originals, file)); comparisons++; return pinnedOverrides[file] ?? originals[file]; } } };\n      new vm.Script(body, { filename: \"isolated-guard-\" + path.basename(row.file) }).runInNewContext(context);\n      return comparisons;\n    }\n    const label = path.basename(row.file);\n    test(label + \": whole original guard accepts only planned branches\", () => { const count = exerciseGuard(); assert.equal(count, sources.length); callerResults.push({ file: row.file, callerOriginalRef: row.ref, originalGuardComparisons: count, contractCanonicalRef: S.PINNED_COMMIT, allOtherGuardsExecuted: true }); });"
+    },
+    "materialHashes": [
+      {
+        "path": "index.html",
+        "recorded": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+        "current": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+        "provenance": "Actual raw execution relevant hash"
+      },
+      {
+        "path": "save.js",
+        "recorded": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+        "current": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+        "provenance": "Actual raw execution relevant hash"
+      },
+      {
+        "path": "receiver-source-snapshot.js",
+        "recorded": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274",
+        "current": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274",
+        "provenance": "Actual raw execution relevant hash"
+      },
+      {
+        "path": "tests/source-freeze-reconciliation-exact-contract-test.cjs",
+        "recorded": "4d77721c776f7bef046ef1d4ff7e53c103f199ebbc8ab825a352f0637fa7787e",
+        "current": "4d77721c776f7bef046ef1d4ff7e53c103f199ebbc8ab825a352f0637fa7787e",
+        "provenance": "Actual raw execution relevant hash"
+      },
+      {
+        "path": "docs/source-freeze-contract-reconciliation-v0.1-phase-b-baseline-evidence.json",
+        "recorded": "8525ab4338f55bad4e5ebb4c4599cf3c2b8242995f9b308d588996fb10398e78",
+        "current": "8525ab4338f55bad4e5ebb4c4599cf3c2b8242995f9b308d588996fb10398e78",
+        "provenance": "Accepted Phase B delivery hash; original archive strings independently bound to execution hashes below"
+      },
+      {
+        "path": "docs/source-freeze-contract-reconciliation-v0.1-phase-b-capture.cjs",
+        "recorded": "9e08efa420628146d7de67ae13edf8f9c8478266c38cf75c957d1392658cc127",
+        "current": "9e08efa420628146d7de67ae13edf8f9c8478266c38cf75c957d1392658cc127",
+        "provenance": "Actual raw execution relevant hash"
+      },
+      {
+        "path": "pitch-tactical-interpretation-foundation.js",
+        "recorded": "ada9061892b2b0e37c52323730e320a91b1f2832f6bf9acce628f22b8c56161f",
+        "current": "ada9061892b2b0e37c52323730e320a91b1f2832f6bf9acce628f22b8c56161f",
+        "provenance": "Immutable Phase B baseline and preserved-source closeout chain; not an individually recorded raw execution hash"
+      },
+      {
+        "path": "pitch-sequence-state-foundation.js",
+        "recorded": "e91f1159dd06d13869db7c88412d4d8128814289ee88b53a0a64db2a1af5b7e1",
+        "current": "e91f1159dd06d13869db7c88412d4d8128814289ee88b53a0a64db2a1af5b7e1",
+        "provenance": "Immutable Phase B baseline and preserved-source closeout chain; not an individually recorded raw execution hash"
+      },
+      {
+        "path": "pitch-observation-foundation.js",
+        "recorded": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+        "current": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+        "provenance": "Immutable Phase B baseline and preserved-source closeout chain; not an individually recorded raw execution hash"
+      },
+      {
+        "path": "offensive-plate-approach.js",
+        "recorded": "f3c2ae25fe261006a76e3cbdc583f7c8e2a45d45c20a98a623b36e651380b317",
+        "current": "f3c2ae25fe261006a76e3cbdc583f7c8e2a45d45c20a98a623b36e651380b317",
+        "provenance": "Immutable Phase B baseline and preserved-source closeout chain; not an individually recorded raw execution hash"
+      },
+      {
+        "path": "pitcher-catcher-tactical-integration.js",
+        "recorded": "daafacdd3e5daefd87aa2cf8a12fbcec601af26151fec6a42e1883bead738bd7",
+        "current": "daafacdd3e5daefd87aa2cf8a12fbcec601af26151fec6a42e1883bead738bd7",
+        "provenance": "Immutable Phase B baseline and preserved-source closeout chain; not an individually recorded raw execution hash"
+      },
+      {
+        "path": "pitch-sequencing.js",
+        "recorded": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+        "current": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+        "provenance": "Immutable Phase B baseline and preserved-source closeout chain; not an individually recorded raw execution hash"
+      },
+      {
+        "path": "script.js",
+        "recorded": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+        "current": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+        "provenance": "Actual raw execution relevant hash"
+      },
+      {
+        "path": "pitch-tactical-decision-foundation.js",
+        "recorded": "92fe89b086867bb44aa13cac0dfe82764f01468efb512f5f356916fa5ed22511",
+        "current": "92fe89b086867bb44aa13cac0dfe82764f01468efb512f5f356916fa5ed22511",
+        "provenance": "Immutable Phase B baseline and preserved-source closeout chain; not an individually recorded raw execution hash"
+      },
+      {
+        "path": "pitch-tactical-decision-production-adapter.js",
+        "recorded": "43d1fad7ef5d6f4e9eaec52eda5e28d4198b1b16a46bfdcbc70144f6f286df97",
+        "current": "43d1fad7ef5d6f4e9eaec52eda5e28d4198b1b16a46bfdcbc70144f6f286df97",
+        "provenance": "Immutable Phase B baseline and preserved-source closeout chain; not an individually recorded raw execution hash"
+      },
+      {
+        "path": "plate-decision-foundation.js",
+        "recorded": "cfe502bf820761f5d0156a773dd2f3d8dd61c940666e141dc2f8fb2b186c7304",
+        "current": "cfe502bf820761f5d0156a773dd2f3d8dd61c940666e141dc2f8fb2b186c7304",
+        "provenance": "Immutable Phase B baseline and preserved-source closeout chain; not an individually recorded raw execution hash"
+      }
+    ],
+    "archiveInputs": [
+      {
+        "file": "tests/pitch-tactical-decision-production-integration-test.js",
+        "archivedSourceSha256": "ee6c443aad8093e3f3d14802779eda6a05b50297638ee32657febc1040c0de82",
+        "rawExecutionSourceSha256": "ee6c443aad8093e3f3d14802779eda6a05b50297638ee32657febc1040c0de82"
+      },
+      {
+        "file": "tests/pitch-tactical-interpretation-production-integration-test.js",
+        "archivedSourceSha256": "1d295143fb833ad30ea58469eb2bfe8c3e6fd3451f5fb29434c15fdd3b2ecbcb",
+        "rawExecutionSourceSha256": "1d295143fb833ad30ea58469eb2bfe8c3e6fd3451f5fb29434c15fdd3b2ecbcb"
+      },
+      {
+        "file": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+        "archivedSourceSha256": "09325b921c7b2b161f7177d9bbad74fb2c5504a33cab0c11e6bd7a8f69e18265",
+        "rawExecutionSourceSha256": "09325b921c7b2b161f7177d9bbad74fb2c5504a33cab0c11e6bd7a8f69e18265"
+      },
+      {
+        "file": "tests/pitch-tactical-intent-evidence-integration-test.js",
+        "archivedSourceSha256": "c72b5293de3c28578e2bf994aeb89e3fb42c378bf44121c6362c0a24e47042a4",
+        "rawExecutionSourceSha256": "c72b5293de3c28578e2bf994aeb89e3fb42c378bf44121c6362c0a24e47042a4"
+      },
+      {
+        "file": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+        "archivedSourceSha256": "f6c7820aedf67a91d2cefb88a2eef09ac5ff06b399496369f8076ec370dcc4f9",
+        "rawExecutionSourceSha256": "f6c7820aedf67a91d2cefb88a2eef09ac5ff06b399496369f8076ec370dcc4f9"
+      }
+    ],
+    "historicalPASSRetained": true,
+    "caveat": "This 80-case contract suite validates isolated source proposals; actual current five full suites have their separate post-revision PASS captures."
+  },
+  "originalAuditReuse": {
+    "knownSourceChanges": [
+      "tests/high-school-year-one-opportunity-two-integration-test.js",
+      "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "tests/pitch-tactical-decision-production-integration-test.js",
+      "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "tests/pitch-tactical-signal-projection-production-integration-test.js"
+    ],
+    "allOtherOldBaselineHashesSame": true,
+    "unresolvedHistoricalDynamicInputGuarantee": "No exhaustive dynamic loader coverage claim"
+  },
+  "workingTreeScopeGuards": [
+    {
+      "file": "tests/career-development-progression-test.js",
+      "sha256": "c55738c7ac269105e37d45f864f92d55a2f0d8c3008e0c5e50029a4a48d89ef7",
+      "sourceTail": "    && branch.includes(\"progressionResult.settlementRequired\")\n    && !/>=\\s*7|===\\s*7/.test(branch);\n})());\nverify(\"42. enterDevelopmentYears 的 initialization step 0 保持\", scriptSource.includes(\"player.developmentStep = 0;\"));\nverify(\"43. evaluateDevelopmentYears 仍由 script.js 負責 age 22 與結果章\", scriptSource.includes(\"function evaluateDevelopmentYears()\")\n  && scriptSource.includes(\"player.age = 22;\")\n  && scriptSource.includes('player.chapter = \"二十二歲職涯小結\";'));\nverify(\"44. 發展期 choose preflight 位於 event lookup 與 isTransitioning=true 之前\", (() => {\n  const chooseStart = scriptSource.indexOf(\"function choose(eventId, index)\");\n  const preflight = scriptSource.indexOf('player.chapter === \"發展期\" && getCurrentEventId() !== eventId', chooseStart);\n  const eventLookup = scriptSource.indexOf(\"const event = getEvent(eventId)\", chooseStart);\n  const transitionStart = scriptSource.indexOf(\"isTransitioning = true\", chooseStart);\n  return chooseStart >= 0 && preflight > chooseStart && preflight < eventLookup && preflight < transitionStart;\n})());\n\nconst html = fs.readFileSync(path.join(root, \"index.html\"), \"utf8\");\nconst contractIndex = html.indexOf('src=\"career-spine-contract.js\"');\nconst developmentResolverIndex = html.indexOf('src=\"career-development-runtime-resolver.js\"');\nconst developmentProgressionIndex = html.indexOf('src=\"career-development-progression.js\"');\nconst storyIndex = html.indexOf('src=\"story.js\"');\nconst scriptIndex = html.indexOf('src=\"script.js\"');\nverify(\"45. Browser 依 Contract → Development Resolver → Progression → Story／Script 載入\", contractIndex >= 0\n  && contractIndex < developmentResolverIndex\n  && developmentResolverIndex < developmentProgressionIndex\n  && developmentProgressionIndex < storyIndex\n  && developmentProgressionIndex < scriptIndex);\n\nconst protectedFiles = [\n  \"career-development-runtime-resolver.js\",\n  \"career-transition-resolver.js\", \"career-transition-commit.js\",\n  \"career-transition-runtime-resolver.js\", \"career-transition-progression.js\"\n];\nconst protectedDiff = execFileSync(\"git\", [\"diff\", \"--name-only\", \"HEAD\", \"--\", ...protectedFiles], {\n  cwd: root,\n  encoding: \"utf8\"\n}).trim();\nverify(\"46. 4.8 Resolver 與 Transition 4.4–4.7 均未修改\", protectedDiff === \"\");\nverify(\"47. Player 未新增 Development progression 欄位、Save version 為 15 且 localStorage key 不變\", !/lastDevelopmentEvent|developmentRoute|developmentProgressToken|developmentNonce|developmentNode/.test(fs.readFileSync(path.join(root, \"player.js\"), \"utf8\"))\n  && /age22OutcomeCode:\\s*\"\"/.test(fs.readFileSync(path.join(root, \"player.js\"), \"utf8\"))\n  && evaluate(integrationContext, \"SAVE_VERSION\") === 15\n  && fs.readFileSync(path.join(root, \"save.js\"), \"utf8\").includes('\"baseballLifeRpgSave\"'));\n\nconsole.log(`\\nArchitecture Sprint 4.9 Development Years Progression Boundary：${validations}/${validations} 通過`);\n",
+      "reason": "Reviewed git diff scopes are architecture paths, not the six changed test files. Production bytes, HEAD and index match the audit epoch."
+    },
+    {
+      "file": "tests/career-development-runtime-resolver-test.js",
+      "sha256": "b22a73a1dc6b104201f19dfcee753430b0699db624fd093745eedb5c2487f45f",
+      "sourceTail": "verify(\"29. story.js 發展期 branch 改由 Development Resolver 路由\", developmentBranchStart >= 0\n  && developmentBranch.includes(\"CareerDevelopmentRuntimeResolver.resolveDevelopmentRuntime(player)\")\n  && !developmentBranch.includes(\"const sequence\")\n  && !developmentBranch.includes('|| \"development_result\"'));\nverify(\"30. Resolver 沒有複製七幕事件 ID 或成年 route registry\", !/development_(?:daily_life|competition|mentor|body_choice|opportunity|market|decision)/.test(resolverSource)\n  && !/draft\\s*:\\s*\\[|college\\s*:\\s*\\[|amateur\\s*:\\s*\\[|rehab\\s*:\\s*\\[/.test(resolverSource));\nverify(\"31. Resolver 為 pure readonly 且無 UI、Save、Storage、RNG 或時間依賴\", !/Math\\.random|Date\\.|document\\.|localStorage|sessionStorage|saveGame|loadGame|showStory|showCurrentEvent|choose|advanceAfterAction|evaluateDevelopmentYears/.test(resolverSource)\n  && !/playerState\\s*\\[[^\\]]+\\]\\s*=|playerState\\.[A-Za-z_$][\\w$]*\\s*=/.test(resolverSource));\nverify(\"32. script.js 不再保存 hard-coded Development Narrative topology\", !scriptSource.includes(\"const developmentNarrativeEvents\")\n  && scriptSource.includes(\"function getDevelopmentNarrativeEventIds()\")\n  && scriptSource.includes(\"CareerSpineContract.getCareerNetwork()?.sharedDevelopment?.eventIds\"));\nverify(\"33. 發展期 getAdultRouteKey 使用 Development Resolver\", scriptSource.includes('if (player.chapter === \"發展期\")')\n  && scriptSource.includes(\"CareerDevelopmentRuntimeResolver.resolveDevelopmentRuntime(player)\"));\nverify(\"34. developmentStep mutation ownership交由 4.9 Boundary 且既有結算保持不變\", !scriptSource.includes(\"player.developmentStep += 1\")\n  && scriptSource.includes(\"CareerDevelopmentProgression.advanceDevelopment\")\n  && scriptSource.includes(\"if (progressionResult.settlementRequired) evaluateDevelopmentYears()\")\n  && scriptSource.includes('player.chapter = \"二十二歲職涯小結\"'));\n\nconst html = fs.readFileSync(path.join(root, \"index.html\"), \"utf8\");\nconst contractIndex = html.indexOf('src=\"career-spine-contract.js\"');\nconst transitionProgressionIndex = html.indexOf('src=\"career-transition-progression.js\"');\nconst developmentResolverIndex = html.indexOf('src=\"career-development-runtime-resolver.js\"');\nconst developmentProgressionIndex = html.indexOf('src=\"career-development-progression.js\"');\nconst storyIndex = html.indexOf('src=\"story.js\"');\nconst scriptIndex = html.indexOf('src=\"script.js\"');\nverify(\"35. Browser dependency 依 Contract／Transition modules → Development Resolver → Progression → Story／Script 載入\", contractIndex >= 0\n  && contractIndex < transitionProgressionIndex\n  && transitionProgressionIndex < developmentResolverIndex\n  && developmentResolverIndex < developmentProgressionIndex\n  && developmentProgressionIndex < storyIndex\n  && developmentProgressionIndex < scriptIndex);\n\nconst protectedDiff = execFileSync(\"git\", [\n  \"diff\", \"--name-only\", \"HEAD\", \"--\",\n  \"career-transition-resolver.js\", \"career-transition-commit.js\",\n  \"career-transition-runtime-resolver.js\", \"career-transition-progression.js\",\n], { cwd: root, encoding: \"utf8\" }).trim();\nverify(\"36. Transition 4.4–4.7 均未修改\", protectedDiff === \"\");\nverify(\"37. Player 未新增 Development 路由欄位、Save version 為 15 且 localStorage key 不變\", !/developmentRoute|currentDevelopmentNode|developmentEventId|adultRoute|routeKey/.test(fs.readFileSync(path.join(root, \"player.js\"), \"utf8\"))\n  && evaluate(runtimeContext, \"SAVE_VERSION\") === 15\n  && fs.readFileSync(path.join(root, \"save.js\"), \"utf8\").includes('\"baseballLifeRpgSave\"'));\n\nconsole.log(`\\nArchitecture Sprint 4.8 Development Years Runtime Routing Boundary：${passed}/${passed} 通過`);\n",
+      "reason": "Reviewed git diff scopes are architecture paths, not the six changed test files. Production bytes, HEAD and index match the audit epoch."
+    },
+    {
+      "file": "tests/career-network-contract-test.js",
+      "sha256": "87456fc3cb256b29cdf8fa41a2cc90fcbc6cd756f928c70a252e1cf18807477f",
+      "sourceTail": "}));\n\nsetPlayer(context, {\n  chapter: \"發展期\", age: 20, developmentStep: 4, careerExit: \"大學棒球\",\n  forcedEventId: \"azhe_adult_record_echo\",\n  pendingEvents: [{ id: \"保留事件\", title: \"尚未處理\", remainingActions: 2 }]\n});\nevaluate(context, \"pendingYouthSeasonOutcome = { title: '保留結果', nextStep: 5 };\");\nconst beforePlayer = evaluate(context, \"JSON.stringify(player)\");\nconst beforePendingOutcome = evaluate(context, \"JSON.stringify(pendingYouthSeasonOutcome)\");\nconst beforeCounters = evaluate(context, \"JSON.stringify(__networkCounters)\");\nevaluate(context, \"CareerSpineContract.getCareerNetworkSnapshot(player); CareerSpineContract.auditCareerNetwork(getEvent, player);\");\nverify(\"27. Snapshot 與 audit 前後 Player 深層狀態完全相同\", beforePlayer === evaluate(context, \"JSON.stringify(player)\"));\nverify(\"28. Snapshot 與 audit 不消耗 forced event 或 pending outcome\", evaluate(context, \"player.forcedEventId\") === \"azhe_adult_record_echo\"\n  && beforePendingOutcome === evaluate(context, \"JSON.stringify(pendingYouthSeasonOutcome)\"));\nverify(\"29. Snapshot 與 audit 不觸發 Save、Effects、推進或 Render\", beforeCounters === evaluate(context, \"JSON.stringify(__networkCounters)\"));\n\nconst expectedEdgePairs = nodes.slice(0, -1).map((node, index) => [node.id, nodes[index + 1].id]);\nverify(\"30. Contract 的現行主幹 actual edge 與 chapter 順序一致\", expectedEdgePairs.every(([from, to]) => actualEdges.some(edge => edge.fromNodeId === from && edge.toNodeId === to))\n  && actualEdges.length === expectedEdgePairs.length);\nverify(\"31. 舊 transition_checkpoint 沒有被偽裝成成年正式路由\", !network.initialRoutes.some(route => route.exclusiveEventIds.concat(route.sharedEventIds).includes(\"transition_checkpoint\")));\nconst storySource = fs.readFileSync(path.join(root, \"story.js\"), \"utf8\");\nconst scriptSource = fs.readFileSync(path.join(root, \"script.js\"), \"utf8\");\nconst narrativeHelperStart = scriptSource.indexOf(\"function getDevelopmentNarrativeEventIds()\");\nconst narrativeHelperEnd = scriptSource.indexOf(\"function getAdultRouteKey()\", narrativeHelperStart);\nconst scriptOutsideNarrativeHelper = narrativeHelperStart >= 0 && narrativeHelperEnd > narrativeHelperStart\n  ? scriptSource.slice(0, narrativeHelperStart) + scriptSource.slice(narrativeHelperEnd)\n  : scriptSource;\nverify(\"32. Gameplay Router 不直接讀 Contract；只有 4.8 Narrative topology helper 讀取\", !storySource.includes(\"CareerSpineContract\")\n  && narrativeHelperStart >= 0\n  && scriptSource.slice(narrativeHelperStart, narrativeHelperEnd).includes(\"CareerSpineContract.getCareerNetwork()\")\n  && !scriptOutsideNarrativeHelper.includes(\"CareerSpineContract\"));\nverify(\"33. Contract 未新增 current route 或 transition history Gameplay 欄位\", !/currentCareerRoute|careerTransitionHistory/.test(fs.readFileSync(path.join(root, \"career-spine-contract.js\"), \"utf8\")));\nverify(\"34. Save version 已升級為 v15 且 localStorage key 保持既有契約\", evaluate(context, \"SAVE_VERSION\") === 15\n  && fs.readFileSync(path.join(root, \"save.js\"), \"utf8\").includes('\"baseballLifeRpgSave\"'));\n\nconst forbiddenDiff = execFileSync(\"git\", [\n  \"diff\", \"--name-only\", \"HEAD\", \"--\",\n  \"event.js\", \"time.js\", \"current-state-boundary.js\", \"decision-flow.js\", \"competition-presentation.js\"\n], { cwd: root, encoding: \"utf8\" }).trim();\nverify(\"35. Career Network 相鄰的 Gameplay 事件與既有 Boundary 均未修改\", forbiddenDiff === \"\");\n\nconsole.log(`\\nArchitecture Sprint 4.3 Career Network Contract：${passed}/${passed} 通過`);\n",
+      "reason": "Reviewed git diff scopes are architecture paths, not the six changed test files. Production bytes, HEAD and index match the audit epoch."
+    },
+    {
+      "file": "tests/career-spine-contract-test.js",
+      "sha256": "a6f6a4504becd3055201534a26c08547b724bab1b2cd04f690671d7723c557ef",
+      "sourceTail": ");\nverify(\"36. phase=ending 但 ending 空白時回報 inconsistent 且不視為合法事件\", invalidEndingMissing.exact\n  && invalidEndingMissing.snapshot.status === \"inconsistent\"\n  && invalidEndingMissing.snapshot.issues.some(item => item.code === \"ending-value-missing\")\n  && !evaluate(context, \"Boolean(getEvent('day7_ending'))\"));\n\nconst invalidEndingStateCases = [\n  { chapter: \"十歲暑假\", age: 10, day: 1, phase: \"morning\", ending: \"主動入隊\" },\n  { chapter: \"十歲暑假\", age: 10, day: 6, phase: \"ending\", ending: \"主動入隊\" },\n  { chapter: \"十歲暑假\", age: 10, day: 7, phase: \"night\", ending: \"主動入隊\" }\n];\nverify(\"37. ending 已存在但 day／phase 不符正式結算狀態時回報 inconsistent\", invalidEndingStateCases.every(state => {\n  const result = runtimeMatches(state, \"ending\");\n  return result.exact\n    && result.snapshot.status === \"inconsistent\"\n    && result.snapshot.issues.some(item => item.code === \"ending-state-mismatch\");\n}));\n\nconst illegalDayOneEnding = runtimeMatches(\n  { chapter: \"十歲暑假\", age: 10, day: 1, phase: \"ending\", ending: \"\" },\n  \"day1_ending\"\n);\nverify(\"38. day1_ending 不會被契約視為合法狀態\", illegalDayOneEnding.snapshot.status === \"inconsistent\"\n  && illegalDayOneEnding.snapshot.issues.some(item => item.code === \"ending-value-missing\")\n  && !evaluate(context, \"Boolean(getEvent('day1_ending'))\"));\n\nlet legalSnapshotFailure = null;\nrouteCases.some(state => {\n  setPlayer(context, state);\n  const snapshot = parse(context, \"CareerSpineContract.getCareerSpineSnapshot(player)\");\n  const actualEventId = evaluate(context, \"getCurrentEventId()\");\n  const candidatesExist = snapshot.effectiveEventIds.every(eventId => evaluate(context, `Boolean(getEvent(${JSON.stringify(eventId)}))`));\n  if (![\"recognized\", \"completed\"].includes(snapshot.status)\n    || !snapshot.effectiveEventIds.includes(actualEventId)\n    || !candidatesExist) {\n    legalSnapshotFailure = { state, snapshot, actualEventId, candidatesExist };\n    return true;\n  }\n  return false;\n});\nverify(\"39. 每個合法 Snapshot 都包含真實事件且所有有效候選本身存在\", legalSnapshotFailure === null);\n\nconsole.log(`\\nArchitecture Sprint 4.1 Career Spine Contract：${passed}/${passed} 通過`);\n",
+      "reason": "Reviewed git diff scopes are architecture paths, not the six changed test files. Production bytes, HEAD and index match the audit epoch."
+    },
+    {
+      "file": "tests/career-transition-commit-test.js",
+      "sha256": "8aa2a7909f33ad8e988c08e5924449abf82c571abf66dd14371cc2ae2c44a280",
+      "sourceTail": "  value: nonWritableTransitionState.transitionStep,\n  writable: false,\n  enumerable: true,\n  configurable: true\n});\nconst nonWritableTransitionBefore = JSON.stringify(nonWritableTransitionState);\nlet nonWritableTransitionResult = null;\nlet nonWritableTransitionError = null;\ntry {\n  nonWritableTransitionResult = commitBoundary.commitGraduationTransition(nonWritableTransitionState);\n} catch (error) {\n  nonWritableTransitionError = error;\n}\nverify(\"23. transitionStep 不可寫時會 rejected 且不會 throw\", nonWritableTransitionError === null\n  && nonWritableTransitionResult.status === \"rejected\"\n  && nonWritableTransitionResult.committed === false);\nverify(\"24. transitionStep 不可寫時 chapter 與完整 Player 維持原狀\", nonWritableTransitionState.chapter === \"青棒生涯出口\"\n  && nonWritableTransitionState.transitionStep === 4\n  && JSON.stringify(nonWritableTransitionState) === nonWritableTransitionBefore);\n\nconst nonWritableChapterState = graduationState(\"大學棒球\");\nObject.defineProperty(nonWritableChapterState, \"chapter\", {\n  value: nonWritableChapterState.chapter,\n  writable: false,\n  enumerable: true,\n  configurable: true\n});\nconst nonWritableChapterBefore = JSON.stringify(nonWritableChapterState);\nlet nonWritableChapterResult = null;\nlet nonWritableChapterError = null;\ntry {\n  nonWritableChapterResult = commitBoundary.commitGraduationTransition(nonWritableChapterState);\n} catch (error) {\n  nonWritableChapterError = error;\n}\nverify(\"25. chapter 不可寫時會 rejected 且不會 throw\", nonWritableChapterError === null\n  && nonWritableChapterResult.status === \"rejected\"\n  && nonWritableChapterResult.committed === false);\nverify(\"26. chapter 不可寫時 transitionStep 與完整 Player 維持原狀\", nonWritableChapterState.chapter === \"青棒生涯出口\"\n  && nonWritableChapterState.transitionStep === 4\n  && JSON.stringify(nonWritableChapterState) === nonWritableChapterBefore);\n\nconsole.log(`\\nArchitecture Sprint 4.5 Graduation Transition Commit Boundary：${passed}/${passed} 通過`);\n",
+      "reason": "Reviewed git diff scopes are architecture paths, not the six changed test files. Production bytes, HEAD and index match the audit epoch."
+    },
+    {
+      "file": "tests/career-transition-progression-test.js",
+      "sha256": "19a432874049f0a65430955f0d3744edb9159946b8a196f3dca09d056f448756",
+      "sourceTail": "const source = fs.readFileSync(path.join(root, \"career-transition-progression.js\"), \"utf8\");\nconst scriptSource = fs.readFileSync(path.join(root, \"script.js\"), \"utf8\");\nverify(\"33. Progression 不使用 careerExit 判 route 或保存成年 Event Registry\", !source.includes(\"careerExit\")\n  && !/transition_(?:draft|rookie|pro|college|amateur|rehab|relationship|cost)/.test(source));\nverify(\"34. Progression 不依賴 UI、Save、Storage、RNG、時間或 Settlement\", !/document\\.|localStorage|sessionStorage|saveGame|loadGame|showStory|showCurrentEvent|evaluateCareerTransition|applyEffects|Math\\.random|Date\\./.test(source));\nverify(\"35. script.js 已移除直接 transitionStep progression increment\", !/player\\.transitionStep\\s*(?:\\+=\\s*1|\\+\\+|=\\s*player\\.transitionStep\\s*\\+\\s*1)/.test(scriptSource));\nverify(\"36. advanceAfterAction 只在 Boundary terminal 成功後呼叫既有 settlement\", scriptSource.includes(\"CareerTransitionProgression.advanceTransition\")\n  && scriptSource.includes(\"if (!progressionResult.advanced) return progressionResult;\")\n  && scriptSource.includes(\"if (progressionResult.settlementRequired) evaluateCareerTransition();\"));\nverify(\"37. 生涯轉換期 choose preflight 位於 event lookup 與 isTransitioning=true 之前\", (() => {\n  const chooseStart = scriptSource.indexOf(\"function choose(eventId, index)\");\n  const preflight = scriptSource.indexOf('player.chapter === \"生涯轉換期\" && getCurrentEventId() !== eventId', chooseStart);\n  const eventLookup = scriptSource.indexOf(\"const event = getEvent(eventId)\", chooseStart);\n  const transitionStart = scriptSource.indexOf(\"isTransitioning = true\", chooseStart);\n  return chooseStart >= 0 && preflight > chooseStart && preflight < eventLookup && preflight < transitionStart;\n})());\n\nconst html = fs.readFileSync(path.join(root, \"index.html\"), \"utf8\");\nconst contractIndex = html.indexOf('src=\"career-spine-contract.js\"');\nconst runtimeResolverIndex = html.indexOf('src=\"career-transition-runtime-resolver.js\"');\nconst progressionIndex = html.indexOf('src=\"career-transition-progression.js\"');\nconst storyIndex = html.indexOf('src=\"story.js\"');\nconst scriptIndex = html.indexOf('src=\"script.js\"');\nverify(\"38. Browser 依 Contract → Runtime Resolver → Progression → Story／Script 載入\", contractIndex >= 0\n  && contractIndex < runtimeResolverIndex\n  && runtimeResolverIndex < progressionIndex\n  && progressionIndex < storyIndex\n  && progressionIndex < scriptIndex);\n\nconst protectedFiles = [\n  \"career-transition-resolver.js\", \"career-transition-commit.js\", \"career-transition-runtime-resolver.js\"\n];\nconst { execFileSync } = require(\"child_process\");\nconst protectedDiff = execFileSync(\"git\", [\"diff\", \"--name-only\", \"HEAD\", \"--\", ...protectedFiles], {\n  cwd: root,\n  encoding: \"utf8\"\n}).trim();\nverify(\"39. Resolver、Commit 與 Runtime Resolver 均未修改\", protectedDiff === \"\");\nverify(\"40. Player 未新增 Transition progression 欄位、Save version 為 15 且 localStorage key 不變\", !/adultRoute|careerRouteKey|currentCareerNode|lastCompletedTransitionEvent|transitionNonce|progressToken/.test(fs.readFileSync(path.join(root, \"player.js\"), \"utf8\"))\n  && evaluate(integrationContext, \"SAVE_VERSION\") === 15\n  && fs.readFileSync(path.join(root, \"save.js\"), \"utf8\").includes('\"baseballLifeRpgSave\"'));\n\nconsole.log(`\\nArchitecture Sprint 4.7 Adult Transition Progression Boundary：${validations}/${validations} 通過`);\n",
+      "reason": "Reviewed git diff scopes are architecture paths, not the six changed test files. Production bytes, HEAD and index match the audit epoch."
+    },
+    {
+      "file": "tests/career-transition-resolver-test.js",
+      "sha256": "aacd510048a333964844ad43c628a3b0f8a9051fa11b3b6f5ec781f6471287e4",
+      "sourceTail": "const deterministicA = resolver.resolveGraduationTransition(deterministicInput);\nconst deterministicB = resolver.resolveGraduationTransition(deterministicInput);\nverify(\"14. 相同輸入重複解析得到完全相同輸出\", JSON.stringify(deterministicA) === JSON.stringify(deterministicB));\n\nconst inputBefore = JSON.stringify(deterministicInput);\nresolver.resolveGraduationTransition(deterministicInput);\nverify(\"15. Resolver 不修改輸入 graduation state\", JSON.stringify(deterministicInput) === inputBefore);\n\nconst networkBefore = JSON.stringify(contract.getCareerNetwork());\nresolver.resolveGraduationTransition(deterministicInput);\nverify(\"16. Resolver 不修改 adult career network contract\", JSON.stringify(contract.getCareerNetwork()) === networkBefore);\nverify(\"17. Resolver 輸出與 4.3 Network 均維持 readonly\", Object.isFrozen(deterministicA)\n  && Object.isFrozen(deterministicA.target)\n  && Object.isFrozen(contract.getCareerNetwork()));\n\nconst context = vm.createContext({\n  CareerSpineContract: contract,\n  player: { marker: \"不得變更\", chapter: \"青棒生涯出口\" },\n  window: {}\n});\nvm.runInContext(fs.readFileSync(path.join(root, \"career-transition-resolver.js\"), \"utf8\"), context, {\n  filename: \"career-transition-resolver.js\"\n});\nconst playerBefore = vm.runInContext(\"JSON.stringify(player)\", context);\ncontext.__state = graduationState(\"業餘／社會人棒球\");\nvm.runInContext(\"GraduationTransitionResolver.resolveGraduationTransition(__state)\", context);\nverify(\"18. Resolver 不讀寫全域 player\", vm.runInContext(\"JSON.stringify(player)\", context) === playerBefore);\n\nconst resolverSource = fs.readFileSync(path.join(root, \"career-transition-resolver.js\"), \"utf8\");\nverify(\"19. Resolver 沒有 RNG、時間、UI、Storage 或 Save 依賴\", !/Math\\.random|Date\\.|document\\.|localStorage|sessionStorage|saveGame|showStory|showCurrentEvent/.test(resolverSource));\nverify(\"20. Resolver 沒有複製四條 route key registry\", !/\\[\\s*[\"']draft[\"']\\s*,\\s*[\"']college[\"']\\s*,\\s*[\"']amateur[\"']\\s*,\\s*[\"']rehab[\"']\\s*\\]/.test(resolverSource));\nverify(\"21. Gameplay 與 Save 沒有接入 Resolver\", [\"player.js\", \"story.js\", \"ai-plate-appearance-outcome.js\", \"force-advancement.js\", \"defensive-runner-throw-settlement-foundation.js\", \"script.js\", \"save.js\"].every(file =>\n  !fs.readFileSync(path.join(root, file), \"utf8\").includes(\"GraduationTransitionResolver\")\n));\nverify(\"22. Resolver 不寫入 chapter、careerExit、route 或 Save\", !/\\b(?:player|graduationState)\\s*\\[[^\\]]+\\]\\s*=|\\b(?:player|graduationState)\\.[A-Za-z_$][\\w$]*\\s*=/.test(resolverSource));\n\nconst forbiddenDiff = execFileSync(\"git\", [\n  \"diff\", \"--name-only\", \"HEAD\", \"--\",\n  \"competition-presentation.js\", \"current-state-boundary.js\", \"decision-flow.js\",\n], { cwd: root, encoding: \"utf8\" }).trim();\nverify(\"23. Resolver 相鄰的 Competition 與既有 Boundary 均未修改\", forbiddenDiff === \"\");\n\nconsole.log(`\\nArchitecture Sprint 4.4 Graduation Transition Resolver：${passed}/${passed} 通過`);\n",
+      "reason": "Reviewed git diff scopes are architecture paths, not the six changed test files. Production bytes, HEAD and index match the audit epoch."
+    },
+    {
+      "file": "tests/career-transition-runtime-resolver-test.js",
+      "sha256": "1aceef16e9c6c32bfc39f97b399a3887133be7d4f46008dbe665806455ce98f0",
+      "sourceTail": "const transitionBranchStart = storySource.indexOf('if (player.chapter === \"生涯轉換期\")');\nconst transitionBranchEnd = storySource.indexOf('if (player.chapter === \"青棒生涯出口\")', transitionBranchStart);\nconst transitionBranch = storySource.slice(transitionBranchStart, transitionBranchEnd);\nverify(\"21. story.js 已移除完整成年 transition topology 並改用 Runtime Resolver\", transitionBranchStart >= 0\n  && transitionBranch.includes(\"CareerTransitionRuntimeResolver.resolveTransitionRuntime(player)\")\n  && !transitionBranch.includes(\"const sequences\")\n  && !transitionBranch.includes(\"transition_draft_day\")\n  && !transitionBranch.includes(\"transition_rehab_plateau\"));\nverify(\"22. Runtime Resolver 沒有複製成年事件 ID 或 route registry\", !/transition_(?:draft|rookie|pro|college|amateur|rehab|relationship|cost)/.test(resolverSource)\n  && !/draft\\s*:\\s*\\[|college\\s*:\\s*\\[|amateur\\s*:\\s*\\[|rehab\\s*:\\s*\\[/.test(resolverSource));\nverify(\"23. Runtime Resolver 為 pure readonly 且沒有 UI、Save、Storage、RNG 或時間依賴\", !/Math\\.random|Date\\.|document\\.|localStorage|sessionStorage|saveGame|loadGame|showStory|showCurrentEvent/.test(resolverSource)\n  && !/playerState\\s*\\[[^\\]]+\\]\\s*=|playerState\\.[A-Za-z_$][\\w$]*\\s*=/.test(resolverSource));\nverify(\"24. 生涯轉換期 getAdultRouteKey 與 enterCareerTransition 都使用 Runtime Resolver\", scriptSource.includes('if (player.chapter === \"生涯轉換期\")')\n  && scriptSource.includes(\"const runtimeResult = CareerTransitionRuntimeResolver.resolveTransitionRuntime(player)\")\n  && scriptSource.includes(\"const routeKey = runtimeResult.routeKey\"));\nverify(\"25. transitionStep mutation ownership 已交由 4.7 Boundary 且既有結算仍保留\", !scriptSource.includes(\"player.transitionStep += 1\")\n  && scriptSource.includes(\"CareerTransitionProgression.advanceTransition\")\n  && scriptSource.includes(\"if (progressionResult.settlementRequired) evaluateCareerTransition()\"));\n\nconst html = fs.readFileSync(path.join(root, \"index.html\"), \"utf8\");\nconst contractIndex = html.indexOf('src=\"career-spine-contract.js\"');\nconst graduationResolverIndex = html.indexOf('src=\"career-transition-resolver.js\"');\nconst commitIndex = html.indexOf('src=\"career-transition-commit.js\"');\nconst runtimeResolverIndex = html.indexOf('src=\"career-transition-runtime-resolver.js\"');\nconst progressionIndex = html.indexOf('src=\"career-transition-progression.js\"');\nconst storyIndex = html.indexOf('src=\"story.js\"');\nverify(\"26. Browser dependency 依 Contract → Graduation Resolver → Commit → Runtime Resolver → Progression → Story 載入\", contractIndex >= 0\n  && contractIndex < graduationResolverIndex\n  && graduationResolverIndex < commitIndex\n  && commitIndex < runtimeResolverIndex\n  && runtimeResolverIndex < progressionIndex\n  && progressionIndex < storyIndex);\n\nconst protectedDiff = execFileSync(\"git\", [\n  \"diff\", \"--name-only\", \"HEAD\", \"--\",\n  \"career-transition-resolver.js\", \"career-transition-commit.js\"\n], { cwd: root, encoding: \"utf8\" }).trim();\nverify(\"27. 4.4 Resolver 與 4.5 Commit 均未修改\", protectedDiff === \"\");\nverify(\"28. Player 未新增 Transition 路由欄位、Save version 為 15 且 localStorage key 不變\", !/adultRoute|careerRouteKey|currentCareerNode|transitionRoute|currentTransitionEventId/.test(fs.readFileSync(path.join(root, \"player.js\"), \"utf8\"))\n  && evaluate(runtimeContext, \"SAVE_VERSION\") === 15\n  && fs.readFileSync(path.join(root, \"save.js\"), \"utf8\").includes('\"baseballLifeRpgSave\"'));\n\nconsole.log(`\\nArchitecture Sprint 4.6 Adult Transition Runtime Routing Boundary：${passed}/${passed} 通過`);\n",
+      "reason": "Reviewed git diff scopes are architecture paths, not the six changed test files. Production bytes, HEAD and index match the audit epoch."
+    }
+  ],
+  "originalMatchAssertions": {
+    "file": "tests/baseball-match-foundation-2-2-2-test.js",
+    "sha256": "2019013d7fc81200e9945c00834df7c4f7d33a8d4d1c8074e66d25e9475d4375",
+    "lines": [
+      "verify(\"36. full match 完成兩個既定進攻 Moment；防守 Moment 只在真實 Decision 時成立\", evaluate(`(() => {const x=__finish2222();const ids=x.match.completedMoments.map(moment=>moment.id);return x.match.completed&&ids.includes(highSchoolYearOneMomentIds[0])&&ids.includes(highSchoolYearOneMomentIds[2])&&x.match.completedMoments.filter(moment=>moment.domain===\"defense\").length===x.match.matchDecisionDensityState.defensiveMeaningfulDecisionCount&&x.safety<1400;})()`));",
+      "verify(\"37. full match 全程維持 game-state invariant\", evaluate(`(() => {const x=__finish2222(88222);return x.match.completed&&getHighSchoolMatchStateIntegrityIssues(x.match).length===0;})()`));",
+      "verify(\"38. 玩家可見 routine commentary 不含 raw identifier\", evaluate(`(() => {const x=__candidate2222();const t=formatMatchSimulationEvent(x.event,x.match).text;return ![\"hardGrounder\",\"straightAtPlayer\",\"playerRoutinePlay\",\"selfCoverFirst\",\"decisionTension\"].some(raw=>t.includes(raw));})()`));"
+    ]
+  },
+  "protectedContentReadOrHashed": false,
+  "newProductionFormalTestRunnerRegistryEdits": 0
+}

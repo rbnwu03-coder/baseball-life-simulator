@@ -1,0 +1,615 @@
+{
+  "task": "SS Reachable Controlled Scenario v0.1",
+  "createdAt": "2026-10-15T14:18:03.664Z",
+  "project": "E-meng-baseball_life_sim_semirefactor",
+  "tier": "Tier 2 focused",
+  "generation": "2026-10-15T01:30:19Z",
+  "scope": "Capability fixture, conversion, classifier and SS execution boundaries only",
+  "coordinateCaveat": "Current direct regions and SHA-256 govern stale script coordinates after prior seven-line deletion.",
+  "results": [
+    {
+      "key": "reachableSearch0",
+      "data": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "label",
+          "lines",
+          "in",
+          "out"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.player",
+            "file": "player.js",
+            "rows": [
+              [
+                "CAPABILITY_MUTATION_SOURCE_TYPES",
+                "Variable",
+                "24-32",
+                9,
+                0
+              ],
+              [
+                "CAPABILITY_PROVENANCE_SOURCE_ORDER",
+                "Variable",
+                "35-44",
+                1,
+                0
+              ],
+              [
+                "HS_ENTRY_CAPABILITY_SETTLEMENT_VERSION",
+                "Variable",
+                "17-17",
+                3,
+                0
+              ],
+              [
+                "assertCapabilityMutationSource",
+                "Function",
+                "551-572",
+                2,
+                4
+              ],
+              [
+                "buildCapabilitySkillProvenance",
+                "Function",
+                "854-883",
+                1,
+                7
+              ],
+              [
+                "calculateSchoolCapabilityMatch",
+                "Function",
+                "1172-1196",
+                1,
+                6
+              ],
+              [
+                "createCapabilityCharacterSeed",
+                "Function",
+                "462-470",
+                4,
+                3
+              ],
+              [
+                "createDefaultCapabilityState",
+                "Function",
+                "421-436",
+                4,
+                1
+              ],
+              [
+                "createRepresentativeHighSchoolEntryFixture",
+                "Function",
+                "1623-1651",
+                1,
+                7
+              ],
+              [
+                "ensureCapabilityStateShape",
+                "Function",
+                "524-543",
+                7,
+                1
+              ],
+              [
+                "getDebugCapabilitySnapshot",
+                "Function",
+                "885-917",
+                1,
+                5
+              ],
+              [
+                "initializePlayerCapabilityFromGenesis",
+                "Function",
+                "508-522",
+                2,
+                4
+              ],
+              [
+                "isYouthOrPreHighSchoolCapabilityPhase",
+                "Function",
+                "545-549",
+                2,
+                0
+              ],
+              [
+                "migrateLegacyPlayerCapability",
+                "Function",
+                "815-852",
+                1,
+                13
+              ],
+              [
+                "recordCapabilitySkillChanges",
+                "Function",
+                "574-599",
+                5,
+                5
+              ],
+              [
+                "settleHighSchoolEntryCapability",
+                "Function",
+                "751-813",
+                5,
+                12
+              ],
+              [
+                "stableCapabilityHash",
+                "Function",
+                "438-446",
+                4,
+                0
+              ],
+              [
+                "validateHighSchoolEntryCapability",
+                "Function",
+                "728-749",
+                6,
+                7
+              ]
+            ]
+          }
+        ],
+        "total": 18,
+        "returned": 18,
+        "count": 18,
+        "has_more": false,
+        "truncated": false
+      }
+    },
+    {
+      "key": "reachableSearch1",
+      "data": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "label",
+          "lines",
+          "in",
+          "out"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "file": "script.js",
+            "rows": [
+              [
+                "assertHighSchoolMatchCapabilityAdmission",
+                "Function",
+                "6570-6576",
+                9,
+                2
+              ],
+              [
+                "createHighSchoolRosterPlayerActor",
+                "Function",
+                "6344-6357",
+                6,
+                4
+              ],
+              [
+                "getDefensiveSimulationCapability",
+                "Function",
+                "6539-6568",
+                21,
+                5
+              ],
+              [
+                "prepareHighSchoolYearOneMatch",
+                "Function",
+                "9667-9883",
+                8,
+                33
+              ]
+            ]
+          }
+        ],
+        "total": 4,
+        "returned": 4,
+        "count": 4,
+        "has_more": false,
+        "truncated": false
+      }
+    },
+    {
+      "key": "reachableContracts0",
+      "data": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "label",
+          "lines",
+          "in",
+          "out"
+        ],
+        "groups": [],
+        "hint": "No nodes match; check spelling or broaden the regex.",
+        "total": 0,
+        "returned": 0,
+        "count": 0,
+        "has_more": false,
+        "truncated": false
+      }
+    },
+    {
+      "key": "reachableContracts1",
+      "data": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "label",
+          "lines",
+          "in",
+          "out"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.save",
+            "file": "save.js",
+            "rows": [
+              [
+                "normalizeSave",
+                "Function",
+                "22-643",
+                3,
+                41
+              ]
+            ]
+          }
+        ],
+        "total": 1,
+        "returned": 1,
+        "count": 1,
+        "has_more": false,
+        "truncated": false
+      }
+    },
+    {
+      "key": "reachableContracts2",
+      "data": {
+        "function": "getDefensiveSimulationCapability",
+        "direction": "both",
+        "callees_total": 1,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getDevelopmentMatchPositionTestCapabilityAudit",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 20,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getHighSchoolReachAccess",
+                  1
+                ],
+                [
+                  "getHighSchoolPhysicalDefensePlayerContext",
+                  1
+                ],
+                [
+                  "createHighSchoolFirstBaseContext",
+                  1
+                ],
+                [
+                  "getHighSchoolFlyBallDefenderCatchContext",
+                  1
+                ],
+                [
+                  "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+                  1
+                ],
+                [
+                  "getHighSchoolLineDriveCatchDefenderContext",
+                  1
+                ],
+                [
+                  "getHighSchoolTagUpReceivingTarget",
+                  1
+                ],
+                [
+                  "createHighSchoolRunnerTagUpSituation",
+                  1
+                ],
+                [
+                  "createHighSchoolRosterPlayerActor",
+                  1
+                ],
+                [
+                  "getPlayerCapabilitySnapshotForMatch",
+                  1
+                ],
+                [
+                  "resolveSimulatedHighSchoolPlateAppearance",
+                  1
+                ],
+                [
+                  "adapt",
+                  1
+                ],
+                [
+                  "buildInfieldMeaningfulMoment",
+                  1
+                ],
+                [
+                  "resolveHighSchoolInfieldReceiver",
+                  1
+                ],
+                [
+                  "getHighSchoolDefensiveDecisionContextModifier",
+                  1
+                ],
+                [
+                  "resolveHighSchoolCatcherDecision",
+                  1
+                ],
+                [
+                  "resolveLegacyHighSchoolDefensivePlay",
+                  1
+                ],
+                [
+                  "add",
+                  1
+                ],
+                [
+                  "buildHighSchoolThirdBaseExecution",
+                  1
+                ],
+                [
+                  "buildHighSchoolShortstopExecution",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "reachableContracts3",
+      "data": {
+        "function": "settleHighSchoolEntryCapability",
+        "direction": "both",
+        "callees_total": 5,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.player",
+              "rows": [
+                [
+                  "initializePlayerCapabilityFromGenesis",
+                  1
+                ],
+                [
+                  "ensureCapabilityStateShape",
+                  1
+                ],
+                [
+                  "recordLegacySpecialistNormalization",
+                  1
+                ],
+                [
+                  "validateHighSchoolEntryCapability",
+                  1
+                ],
+                [
+                  "createInitialPlayer",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 5,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "applyDebugBookmarkCharacterProfile",
+                  1
+                ],
+                [
+                  "enterHighSchool",
+                  1
+                ]
+              ]
+            },
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.player",
+              "rows": [
+                [
+                  "migrateLegacyPlayerCapability",
+                  1
+                ],
+                [
+                  "createRepresentativeHighSchoolEntryFixture",
+                  1
+                ]
+              ]
+            },
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.save",
+              "rows": [
+                [
+                  "normalizeSave",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "reachableVertical0",
+      "data": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "label",
+          "lines",
+          "in",
+          "out"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "file": "script.js",
+            "rows": [
+              [
+                "classifyPositionFamilyPlay",
+                "Function",
+                "7846-7854",
+                3,
+                1
+              ],
+              [
+                "getHighSchoolControlledDecisionInput",
+                "Function",
+                "12027-12040",
+                6,
+                6
+              ],
+              [
+                "resolveHighSchoolCanonicalSecure",
+                "Function",
+                "4988-4995",
+                5,
+                3
+              ],
+              [
+                "resolveRoutineDefensivePlay",
+                "Function",
+                "10410-10431",
+                1,
+                6
+              ]
+            ]
+          }
+        ],
+        "total": 4,
+        "returned": 4,
+        "count": 4,
+        "has_more": false,
+        "truncated": false
+      }
+    },
+    {
+      "key": "reachableVertical1",
+      "data": {
+        "function": "buildHighSchoolShortstopExecution",
+        "direction": "both",
+        "callees_total": 8,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "resolveHighSchoolCanonicalSecure",
+                  1
+                ],
+                [
+                  "assertHighSchoolDetailedResponsibility",
+                  1
+                ],
+                [
+                  "getDefensiveSimulationCapability",
+                  1
+                ],
+                [
+                  "getSecondBaseCauseExplanation",
+                  1
+                ],
+                [
+                  "attachDefensiveOutcomeExplanation",
+                  1
+                ],
+                [
+                  "resolveInfieldRelayToFirst",
+                  1
+                ],
+                [
+                  "attachHighSchoolInfieldActionFacts",
+                  1
+                ],
+                [
+                  "getHighSchoolControlledDecisionInput",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 2,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "resolveInfieldDecision",
+                  1
+                ],
+                [
+                  "validateHighSchoolDecisionThrowState",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

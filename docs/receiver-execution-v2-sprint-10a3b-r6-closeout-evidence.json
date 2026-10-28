@@ -1,0 +1,248 @@
+{
+  "sprint": "10A.3b-R6",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "createdAt": "2026-10-14T08:46:35.205Z",
+  "node": "v24.19.0",
+  "safety": {
+    "changedExistingPaths": [
+      "tests/pitch-sequence-state-production-integration-test.js"
+    ],
+    "preservedHashCount": 903,
+    "protectedMetadataUnchanged": true,
+    "protectedContentReadOrHashed": false,
+    "git": {
+      "branch": "main",
+      "head": "ab3117653945de0b7013636187c446276a96e634",
+      "main": "ab3117653945de0b7013636187c446276a96e634",
+      "originMain": "ab3117653945de0b7013636187c446276a96e634",
+      "index": "",
+      "status": " M index.html\n M match-situation-lifecycle.js\n M save.js\n M script.js\n M tests/fast-check-smoke-test.cjs\n M tests/pitch-sequence-state-production-integration-test.js\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/infield-baseball-logic-audit-architecture-evidence.json\n?? docs/infield-baseball-logic-audit-evidence.json\n?? docs/infield-baseball-logic-audit-runner.cjs\n?? docs/infield-baseball-logic-validation-audit-v1.md\n?? docs/infield-scorer-recovery-sprint-5-green-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json\n?? docs/infield-scorer-recovery-sprint-5-validation.json\n?? docs/receiver-execution-v2-production-snapshot-save-guard-sprint-10a3b.md\n?? docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-lifecycle-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-observed-validation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-current-source-verification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-initial-test-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r1-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-timeout-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-architecture-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout.md\n?? docs/receiver-execution-v2-sprint-10a3b-r2-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-policy-specification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-extra-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gradient-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-guard-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r3-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-original-validator.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-reproduction-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-baseline-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-comparison-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-current-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-green-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-green-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-career-save-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-compatibility-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-audit-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r4-development-focused-1-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-development-focused-2-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-helper-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-helper-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-baseline180-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-current-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-r3-wip-diagnostic-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-runtime-comparison-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-full-repository-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gates-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gradient-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gradient-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-legacy-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-production-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-r3-guard-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-r3-guard-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-red-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-related-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-s8-cross-runtime-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-s8-cross-runtime-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-save-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-before-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-change-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-stdout-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-architecture-extra-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-coverage-paths-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-entrypoint-search-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-freeze-comparisons-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-inherited-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-ownership-contract-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-pitch-red-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-save-ownership-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r6-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-authorized-delta-contract-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-bbp-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-coverage-paths-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-development-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-exact-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-independent-review-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-manifest-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-pitch-green-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r1-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r3-guard-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r4-dependency-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-receiver-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-s8-cross-runtime-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-save-boundary-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-save-ownership-contract.md\n?? docs/receiver-execution-v2-sprint-10a3b-r6-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-confirmation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-witness-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-related-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-evidence.json\n?? install.ps1\n?? receiver-source-snapshot.js\n?? tests/receiver-execution-v2-production-snapshot-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-harness.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-closeout.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-source-review.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-closeout.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-dependency-audit.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runtime-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r5-ownership-audit.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-independent-review.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs\n?? tests/receiver-source-save-authorized-delta.cjs\n"
+    }
+  },
+  "productionDelta": 0,
+  "soleExistingDelta": "tests/pitch-sequence-state-production-integration-test.js",
+  "otherOriginalTestsUnchanged": true,
+  "allPreviousCapturesPreserved": true,
+  "originalThreeDebtBytesAndReasonsPreserved": true,
+  "onlySingleSaveComparisonBranchAdded": true,
+  "newFilesBeforeCloseout": [
+    "docs/receiver-execution-v2-sprint-10a3b-r6-architecture-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-authorized-delta-contract-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-baseline-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-bbp-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-blocker-architecture-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-blocking-regression-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-career-save-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-coverage-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-coverage-paths-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-development-focused-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-exact-focused-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-final-coverage-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-first-base-current-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-gates-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-independent-review-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-legacy-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-manifest-policy-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-pitch-green-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-production-focused-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-r1-save-focused-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-r3-guard-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-r4-dependency-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-receiver-coverage-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-runtime-comparison-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-s8-cross-runtime-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-save-boundary-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-save-ownership-contract.md",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-source-change-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-confirmation-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-stdout-witness-evidence.json",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-independent-review.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs",
+    "tests/receiver-source-save-authorized-delta.cjs"
+  ],
+  "hashesBeforeCloseout": {
+    "docs/receiver-execution-v2-sprint-10a3b-r6-architecture-evidence.json": "fab382a055c3a95dd3d27f9f3a6431475b98ba33f0b055d5527463c506c07147",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-authorized-delta-contract-evidence.json": "b7aab4aee2011911b8f30cd97014e03005a19d9c816f5b28853f9403a472ccf0",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-baseline-evidence.json": "07c942448b4d5fdf881c2f3121f3d857c6b5b6b9b04abc90cb128bf5a1bcf22f",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-bbp-evidence.json": "b3f5d86f5b12d80468eca374eb2bceb7ef8106a6f1461fdaa8a6ca277a151f5e",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-blocker-architecture-evidence.json": "705a41dfa0e83d73992f2746e33417bf8ca7700fd8f6e01d0e5310db880f5971",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-blocking-regression-evidence.json": "acc14ba9a25a44861cb1c635e7c5c83385db473ec355f6ab6b3837059e839990",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-career-save-evidence.json": "6ea1c4125795ec671a576aee15f2e16a853162a5bb98d8e63cf485626e0fe5a7",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json": "db4711c26e192b9a9676341fcbeefa218dd9974a50266421ff8d5816594236e3",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-coverage-evidence.json": "1cdf71d8047c9e6afed9b7216ce06167e7b716d9dc9548838eb9bde926f1a6a8",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-coverage-paths-evidence.json": "f7490d72ad9c69e06da527dcbd5721c4a08a10b6d3c52e6db35f7bc6259a46f5",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-development-focused-evidence.json": "4a9c793459b837789a30151ebbef766f1325ed97cd9676f50c812473c167ee91",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-exact-focused-evidence.json": "6dfa74963649d4e8f11149985ff81b7f0e67acdcd5cc121b12cd8af782fe6e4e",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-final-coverage-evidence.json": "ba1691dd9b8ed679f531d289142188ee648d2fe58f14d0623ff7921a1f15ff10",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-first-base-current-evidence.json": "9d573ffd6dcafdbbb32986e217b21b71d986dc2923790f977a7ad0862e03760a",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json": "0fff1fdf89007396ac9b85c510c381950910dadff872170a0d8eaa7e98af2a5c",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-gates-evidence.json": "b641d7b976ebc8fc01d300c5c45573a0e53a366bcd9ee717be7b581c606f446b",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-independent-review-evidence.json": "466700e8b6d29660ebd3cea23e394b7e3d429463bf8f19e120ecf077fce809fa",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-legacy-evidence.json": "334d567825a98719e8ac61be813ec51fc433f9e4f73a4aef4aa2d2ee867a39b6",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-manifest-policy-evidence.json": "30e808f78d835693436f443d8af4089ed8588582d6c2c7ee15d789b5305fea21",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-pitch-green-evidence.json": "8d8042cad7125f9262bc5277257fc2bccf35a2add51e319d3e5715f6dfe54b75",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-production-focused-evidence.json": "f663ac5f51d33d5e833a2a36c24a0817c89b9a47f7405e2cfd3b58fd209f1c9a",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-r1-save-focused-evidence.json": "46e83d6c4972b634c288bd067b5d5c2cc4abd5107ec870ef2a2d3a973c646338",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-r3-guard-evidence.json": "12243bab9296a47818346e4502a6fa851ca01ddb5708070d7b6851ebe8e011df",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-r4-dependency-evidence.json": "e84c3feea3a3ea3fdca5056d1eb785cb35e2adfee4405117b5377274f4ced0e5",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-receiver-coverage-evidence.json": "3a0eb975b04d854eb50b328202faf5f87a81d73387102bc0570dad17bf0bb7b9",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json": "6c53eb80b49b0ab15697bbf002e23b9a03178fb28c9a5b88950d4427dff72e90",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-runtime-comparison-evidence.json": "5ece55a2c5db345aa39bb468e66e523ed957c915912599ee695fbb2127b34d8c",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-s8-cross-runtime-evidence.json": "2df34d5c24780ffea82a329a11af53688e260a4ccfb93708a6d02f22551fe5f5",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-save-boundary-evidence.json": "3c7b65ea65e2f4c94be75ff39deeb8bedca56aa76968edc7d86632256299230a",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-save-ownership-contract.md": "8e2bb1c15963dd1d4bfb0d7ec71df00242ca5f1761213ede0da23b2c7a2868a2",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-source-change-evidence.json": "556b862d4858e2cfa8cf7e5e9a15bc42dd5910be5821cf360844c9b16a5aed2a",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-confirmation-evidence.json": "3ea38522763c2cfecd7fbd61a6d2ce3378931c633cd3dd59a81e2b2a2333113c",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-evidence.json": "6e6d424c8095f2db7da159b569d5a5405041e19281a94ade64da20a29d9861d8",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-stdout-witness-evidence.json": "312ed21398a062a4c3d5f656dd724cc226fe429c402b5a9c64b47bb08c4f2c37",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs": "e8f6a9bbdea182a6b73241d60d9c9bb54e4174fccf56dcdba05399904830504b",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-independent-review.cjs": "ee111254142c3b7c26f5e2385cf32ea6f92c6fc01bb48db80bc5c9122717513e",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs": "d8dcb7e1d43ab476dda8b457f3292f750232b6b0f49f661093e8d7d1850246e2",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs": "7bf28ed1f296feb61b64451982d72ab2c12d7ed719dd0ac30ceae3aaa26d7073",
+    "tests/receiver-source-save-authorized-delta.cjs": "94a2cac6e155c3936ea2cd03f0d31e4e19feba87d53f87c4be5c3cc5aab28b82"
+  },
+  "checks": {
+    "syntax": [
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs",
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r6-independent-review.cjs",
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs",
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs",
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "file": "tests/receiver-source-save-authorized-delta.cjs",
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    ],
+    "whitespace": {
+      "newIssues": [],
+      "gitScope": [
+        "index.html",
+        "match-situation-lifecycle.js",
+        "save.js",
+        "script.js",
+        "tests/pitch-sequence-state-production-integration-test.js"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "warning: in the working copy of 'index.html', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'match-situation-lifecycle.js', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/pitch-sequence-state-production-integration-test.js', LF will be replaced by CRLF the next time Git touches it\n",
+      "protectedContentExcluded": true
+    },
+    "reportLinksValidated": true
+  },
+  "frozenSourceHashes": {
+    "index.html": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+    "script.js": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+    "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+    "player.js": "3414f5a93429bc1a4adbe3c632485e70b5d9175822261b689543a77fa0eb38bd",
+    "match-situation-lifecycle.js": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+    "receiver-source-snapshot.js": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274",
+    "tests/pitch-sequence-state-production-integration-test.js": "7a53369d526de1c3a66b9d3e0c69f45f27f261bdb1d28c354f9831c0e8ae8327",
+    "tests/receiver-source-save-authorized-delta.cjs": "94a2cac6e155c3936ea2cd03f0d31e4e19feba87d53f87c4be5c3cc5aab28b82",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs": "e8f6a9bbdea182a6b73241d60d9c9bb54e4174fccf56dcdba05399904830504b",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs": "7bf28ed1f296feb61b64451982d72ab2c12d7ed719dd0ac30ceae3aaa26d7073"
+  },
+  "verdict": {
+    "authorizedDelta": "PASS",
+    "exactChecker": "PASS",
+    "negativeMutations": {
+      "passed": 21,
+      "failed": 0
+    },
+    "pitchSequence": {
+      "passed": 8,
+      "failed": 0
+    },
+    "rawGuardReachability": "PASS / bounded current Source16 owner fixtures",
+    "historical": "PASS",
+    "career": {
+      "passed": 45,
+      "failed": 0
+    },
+    "bbp": {
+      "passed": 20,
+      "failed": 0
+    },
+    "firstBase": {
+      "passed": 42,
+      "failed": 0,
+      "elapsedMs": 131374.2926,
+      "formalTimingThresholdExceeded": true
+    },
+    "focused": {
+      "passed": 879,
+      "failed": 0
+    },
+    "legacyPairs": {
+      "passed": 25,
+      "failed": 0
+    },
+    "legacyHistorical": {
+      "passed": 3,
+      "failed": 0
+    },
+    "full": {
+      "invocations": 1,
+      "executed": 178,
+      "passed": 174,
+      "existingDebt": 3,
+      "newRegressions": 1,
+      "notRun": 49
+    },
+    "receiverV2": "DISABLED",
+    "L03": "PARTIAL",
+    "sourceOnlyIntegration": "NOT PASS",
+    "readyForSprint10B": "NO",
+    "readyForCommit": "NO"
+  },
+  "observedFailureSet": [
+    {
+      "file": "tests/ability-performance-gradient-test.js",
+      "status": "EXISTING_DEBT",
+      "primary": "AssertionError [ERR_ASSERTION]: Low tier can have a multi-hit game"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-2-2-test.js",
+      "status": "EXISTING_DEBT",
+      "primary": "AssertionError [ERR_ASSERTION]: 36. full match 完成兩個既定進攻 Moment；防守 Moment 只在真實 Decision 時成立"
+    },
+    {
+      "file": "tests/high-school-year-one-opportunity-two-integration-test.js",
+      "status": "EXISTING_DEBT",
+      "primary": "ReferenceError: DefensiveDecisionThrowFoundation is not defined"
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-integration-test.js",
+      "status": "NEW_REGRESSION",
+      "primary": "AssertionError [ERR_ASSERTION]: save.js"
+    }
+  ],
+  "noPostBlockerFixtureReplayOrTestRepair": true,
+  "remainingScope": "Tactical Decision Save full freeze remains outside R6 single-boundary authorization; stopped for manual review"
+}

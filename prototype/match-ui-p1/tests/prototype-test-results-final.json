@@ -1,0 +1,49 @@
+{
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--test",
+    "--test-reporter=tap",
+    "prototype/match-ui-p1/tests/prototype.test.cjs"
+  ],
+  "nodeVersion": "v24.19.0",
+  "createdAt": "2026-10-16T02:58:14.622Z",
+  "elapsedMs": 105.73309999999998,
+  "exitCode": 0,
+  "error": null,
+  "stdout": "TAP version 13\n# Subtest: fixture is an exact copy of the only authorized evidence.examples\nok 1 - fixture is an exact copy of the only authorized evidence.examples\n  ---\n  duration_ms: 1.5916\n  type: 'test'\n  ...\n# Subtest: fixture is recursively frozen and rejects attempted mutation\nok 2 - fixture is recursively frozen and rejects attempted mutation\n  ---\n  duration_ms: 0.3496\n  type: 'test'\n  ...\n# Subtest: Decision has no result, quality, physics internals or RNG fields\nok 3 - Decision has no result, quality, physics internals or RNG fields\n  ---\n  duration_ms: 0.5548\n  type: 'test'\n  ...\n# Subtest: Loading validates into Decision without a Resolution view\nok 4 - Loading validates into Decision without a Resolution view\n  ---\n  duration_ms: 0.3378\n  type: 'test'\n  ...\n# Subtest: forceSecond enters Unsupported, never creates 6-3 playback or result\nok 5 - forceSecond enters Unsupported, never creates 6-3 playback or result\n  ---\n  duration_ms: 0.2563\n  type: 'test'\n  ...\n# Subtest: startDoublePlaySecond enters Unsupported, never creates 6-3 playback or result\nok 6 - startDoublePlaySecond enters Unsupported, never creates 6-3 playback or result\n  ---\n  duration_ms: 0.0902\n  type: 'test'\n  ...\n# Subtest: holdBall enters Unsupported, never creates 6-3 playback or result\nok 7 - holdBall enters Unsupported, never creates 6-3 playback or result\n  ---\n  duration_ms: 0.0997\n  type: 'test'\n  ...\n# Subtest: synchronous submission lock and repeated clicks create only one Playback\nok 8 - synchronous submission lock and repeated clicks create only one Playback\n  ---\n  duration_ms: 0.1838\n  type: 'test'\n  ...\n# Subtest: all seven beats preserve DTO identity; first six reveal no result\nok 9 - all seven beats preserve DTO identity; first six reveal no result\n  ---\n  duration_ms: 0.2395\n  type: 'test'\n  ...\n# Subtest: pause, resume and next have exactly one scheduled timer\nok 10 - pause, resume and next have exactly one scheduled timer\n  ---\n  duration_ms: 0.2474\n  type: 'test'\n  ...\n# Subtest: autoplay reaches Resolution after all seven beats; no remaining timer\nok 11 - autoplay reaches Resolution after all seven beats; no remaining timer\n  ---\n  duration_ms: 0.2091\n  type: 'test'\n  ...\n# Subtest: Resolution alone updates outs and base occupancy; final score is absent\nok 12 - Resolution alone updates outs and base occupancy; final score is absent\n  ---\n  duration_ms: 0.1777\n  type: 'test'\n  ...\n# Subtest: Skip and Continue are idempotent, and never create another submission\nok 13 - Skip and Continue are idempotent, and never create another submission\n  ---\n  duration_ms: 0.1198\n  type: 'test'\n  ...\n# Subtest: Replay reuses original DTOs and resets displayed scoreboard until Resolution\nok 14 - Replay reuses original DTOs and resets displayed scoreboard until Resolution\n  ---\n  duration_ms: 0.1455\n  type: 'test'\n  ...\n# Subtest: stale callbacks cannot advance a finished or restarted demonstration\nok 15 - stale callbacks cannot advance a finished or restarted demonstration\n  ---\n  duration_ms: 0.1576\n  type: 'test'\n  ...\n# Subtest: reduced motion starts each playback paused and still allows explicit autoplay\nok 16 - reduced motion starts each playback paused and still allows explicit autoplay\n  ---\n  duration_ms: 0.0838\n  type: 'test'\n  ...\n# Subtest: invalid, incomplete or mistimed fixture enters readable DataError\nok 17 - invalid, incomplete or mistimed fixture enters readable DataError\n  ---\n  duration_ms: 0.435\n  type: 'test'\n  ...\n# Subtest: renderer preserves original text, four native buttons and hides null observations\nok 18 - renderer preserves original text, four native buttons and hides null observations\n  ---\n  duration_ms: 1.0678\n  type: 'test'\n  ...\n# Subtest: renderer locks buttons during Submitting and focuses every new screen\nok 19 - renderer locks buttons during Submitting and focuses every new screen\n  ---\n  duration_ms: 0.4183\n  type: 'test'\n  ...\n# Subtest: renderer leaves result DTO text empty until Resolution and no seventh-stage spoiler\nok 20 - renderer leaves result DTO text empty until Resolution and no seventh-stage spoiler\n  ---\n  duration_ms: 0.8051\n  type: 'test'\n  ...\n# Subtest: renderer keeps playback control focus stable between beats; result heading receives focus\nok 21 - renderer keeps playback control focus stable between beats; result heading receives focus\n  ---\n  duration_ms: 0.2402\n  type: 'test'\n  ...\n# Subtest: Unsupported return restores choice focus and never writes outcome DOM\nok 22 - Unsupported return restores choice focus and never writes outcome DOM\n  ---\n  duration_ms: 0.1869\n  type: 'test'\n  ...\n# Subtest: Replay and restart clear previously rendered outcome and live announcement\nok 23 - Replay and restart clear previously rendered outcome and live announcement\n  ---\n  duration_ms: 0.228\n  type: 'test'\n  ...\n# Subtest: Loading and DataError have readable DOM, a focus target and recovery control\nok 24 - Loading and DataError have readable DOM, a focus target and recovery control\n  ---\n  duration_ms: 0.1447\n  type: 'test'\n  ...\n# Subtest: static keyboard/accessibility hooks exist without custom key trapping\nok 25 - static keyboard/accessibility hooks exist without custom key trapping\n  ---\n  duration_ms: 0.2752\n  type: 'test'\n  ...\n# Subtest: classic script bootstrap runs with deferred DOM readiness (VM adapter, not browser)\nok 26 - classic script bootstrap runs with deferred DOM readiness (VM adapter, not browser)\n  ---\n  duration_ms: 2.6302\n  type: 'test'\n  ...\n# Subtest: runtime assets are strictly local, no fetch/import/production/Phaser/CDN calls\nok 27 - runtime assets are strictly local, no fetch/import/production/Phaser/CDN calls\n  ---\n  duration_ms: 0.5031\n  type: 'test'\n  ...\n# Subtest: all model and renderer interactions leave the entire fixture byte-equivalent\nok 28 - all model and renderer interactions leave the entire fixture byte-equivalent\n  ---\n  duration_ms: 0.0675\n  type: 'test'\n  ...\n1..28\n# tests 28\n# suites 0\n# pass 28\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 68.1134\n",
+  "stderr": "",
+  "beforeHashes": {
+    "prototype/match-ui-p1/index.html": "18f3fe1ffd808b73fb19aa5f07100102e0ef794005e574a62c1cadee6719b394",
+    "prototype/match-ui-p1/style.css": "57c0d7e6c6fe087a7597e18e44bd663d903460b4e933f34c4e28cef666060127",
+    "prototype/match-ui-p1/app.js": "f58c536deb3ae907d56344ae426caabc50b9b0675826f45a67789aeab5999448",
+    "prototype/match-ui-p1/fixture.js": "858857c5858de497d69c123ba3ad4f09c585a21d21d28df467d7c47ac8117878",
+    "prototype/match-ui-p1/tests/prototype.test.cjs": "f864145622dac938c0d5647768b0472b722f2fc230fe93b7c175a566ff1e056c",
+    "docs/match-ui-slice-data-contract-v0.1-evidence.json": "a0a92044a9776905a4cc602f8948e3fcaa91e748d7fa395ab5d3be5be115f163"
+  },
+  "afterHashes": {
+    "prototype/match-ui-p1/index.html": "18f3fe1ffd808b73fb19aa5f07100102e0ef794005e574a62c1cadee6719b394",
+    "prototype/match-ui-p1/style.css": "57c0d7e6c6fe087a7597e18e44bd663d903460b4e933f34c4e28cef666060127",
+    "prototype/match-ui-p1/app.js": "f58c536deb3ae907d56344ae426caabc50b9b0675826f45a67789aeab5999448",
+    "prototype/match-ui-p1/fixture.js": "858857c5858de497d69c123ba3ad4f09c585a21d21d28df467d7c47ac8117878",
+    "prototype/match-ui-p1/tests/prototype.test.cjs": "f864145622dac938c0d5647768b0472b722f2fc230fe93b7c175a566ff1e056c",
+    "docs/match-ui-slice-data-contract-v0.1-evidence.json": "a0a92044a9776905a4cc602f8948e3fcaa91e748d7fa395ab5d3be5be115f163"
+  },
+  "sourceStable": true,
+  "scope": "isolated prototype only; DOM and classic-script VM adapters, not a real browser",
+  "rerunReason": "Added independent classic-script bootstrap coverage and clarified reduced-motion status copy after the first green run",
+  "previousEvidence": "prototype/match-ui-p1/tests/prototype-test-results.json",
+  "browserSmoke": {
+    "status": "NOT RUN",
+    "attempts": [
+      {
+        "provider": "iab",
+        "result": "Browser is not available: iab"
+      },
+      {
+        "provider": "chrome",
+        "result": "Browser is not available: chrome"
+      }
+    ],
+    "realKeyboardAndAssistiveTechnology": "MANUAL ACCEPTANCE PENDING"
+  }
+}

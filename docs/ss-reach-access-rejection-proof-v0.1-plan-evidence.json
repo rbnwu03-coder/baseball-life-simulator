@@ -1,0 +1,73 @@
+{
+  "task": "SS Reach Access Rejection Proof v0.1",
+  "createdAt": "2026-10-15T13:25:06.001Z",
+  "scenarioId": "ss-controlled-ground-v0.1",
+  "purpose": "Same controlled input; observe actual Reach/Access calls, never rerun owners independently",
+  "maximumCandidateExecutions": 2,
+  "maximumScenarios": 1,
+  "inputSeed": 2884315748,
+  "seedAuthority": "unchanged pending test hook -> official owner",
+  "identity": "Current Event -> prepareCurrentHighSchoolYearOneMatch()",
+  "physicalProgramHash": "005b050f32ce2910f7d0ab6408dd9dfbab84766cf9bacd34c383b19e34f7d650",
+  "physicalProgramMatchesPrior": true,
+  "physicalRolls": {
+    "contactQuality": 0.65,
+    "ballType": 0.1,
+    "pace": 0.68,
+    "direction": 0.05,
+    "depth": 0
+  },
+  "policy": {
+    "sample": 0.72,
+    "safety": 1400,
+    "decisions": "secure / zone / first legal"
+  },
+  "checkpointHash": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+  "programHash": "d6b3249df410505facbaa4fa0cf4313ec46aa191f7400a3fd879bbccd67d33df",
+  "observerHash": "544e06762b723f0bcc4d645fd3b69cb308247525b416c1062e3e4c894b736ca1",
+  "hooks": {
+    "defensive-opportunity-foundation.js": "reachInstallApi('DefensiveOpportunityFoundation',['resolveDefensiveOpportunity']);",
+    "defensive-reach-secure-foundation.js": "reachInstallApi('DefensiveReachSecureFoundation',['resolveReach','projectAccess','resolveSecure']);",
+    "batted-ball-ground-defense.js": "reachInstallApi('BattedBallGroundDefense',['resolveGroundBallDefensiveAccess','buildGroundBallDefensiveOpportunity']);",
+    "offensive-plate-approach.js": "reachInstallApi('OffensivePlateApproach',['simulatePlateAppearance']);",
+    "script.js": "for(const name of ['getHighSchoolDefensiveOpportunity','getHighSchoolReachAccess','getHighSchoolPhysicalDefensePlayerContext','ensureHighSchoolOrdinaryGroundBallInPlayHandoff']){const original=globalThis[name];if(typeof original!=='function')throw Error('Missing script boundary '+name);globalThis[name]=reachWrap('script.'+name,original);}reachProbe.installations.push({name:'script globals',methods:['getHighSchoolDefensiveOpportunity','getHighSchoolReachAccess','getHighSchoolPhysicalDefensePlayerContext','ensureHighSchoolOrdinaryGroundBallInPlayHandoff']});"
+  },
+  "loader": {
+    "source": "tests/helpers/canonical-match-contract-context.cjs",
+    "sourceHash": "b09b35cf404c100b6f1d00ff6b8e67e38093fd6d13a22e788413f3bb7c608fb5",
+    "memoryHash": "8850555a8c1d6dff342c14aa04fdd5f9891340d929e1226172e937f662d1c2d2",
+    "exactReplacement": {
+      "before": "vm.runInContext(source.toString(\"utf8\"), context, { filename: file });",
+      "after": "vm.runInContext(source.toString(\"utf8\"), context, { filename: file });\n    vm.runInContext(\"\\n  if(typeof reachProbe==='undefined')globalThis.reachProbe={ordinal:0,counts:{},calls:[],installations:[]};\\n  function reachSnapshot(value){return JSON.parse(JSON.stringify(value,(key,v)=>v===undefined?{__witnessType:'undefined'}:typeof v==='function'?{__witnessType:'function-reference',name:v.name}:typeof v==='number'&&!Number.isFinite(v)?{__witnessType:'non-finite-number',value:String(v)}:v));}\\n  function reachWrap(label,original){\\n    return function(...args){\\n      const counts=reachProbe.counts[label]||(reachProbe.counts[label]={wrapperInvocations:0,originalInvocations:0,returns:0,throws:0});\\n      counts.wrapperInvocations++;const enter=++reachProbe.ordinal,input=reachSnapshot(args);\\n      let result,error;\\n      try{counts.originalInvocations++;result=Reflect.apply(original,this,args);counts.returns++;}\\n      catch(e){counts.throws++;error=e;}\\n      const exit=++reachProbe.ordinal,target=typeof controlledAdapter==='undefined'?null:controlledAdapter.witnesses[0]?.truth?.identity;\\n      const identities=[args[0]?.physicalTruth?.identity,args[0]?.physicalIdentity,args[1]?.identity,result?.physicalIdentity,result?.physicalTruth?.identity,result?.battedBallPhysicalTruth?.identity,result?.reachResolution?.physicalIdentity];\\n      if(target&&identities.includes(target))reachProbe.calls.push({owner:label,enter,exit,physicalIdentity:target,input,output:error?null:reachSnapshot(result),exception:error?{name:error.name,message:error.message}:null,exactlyOneOriginalCall:true});\\n      if(error)throw error;\\n      return result;\\n    };\\n  }\\n  function reachInstallApi(name,methods){\\n    const original=globalThis[name],replacement={...original},unchanged=[];\\n    for(const method of methods){if(typeof original[method]!=='function')throw Error('Missing observer boundary '+name+'.'+method);replacement[method]=reachWrap(name+'.'+method,original[method]);}\\n    for(const key of Object.keys(original))if(!methods.includes(key))unchanged.push({key,sameReference:replacement[key]===original[key]});\\n    globalThis[name]=Object.freeze(replacement);reachProbe.installations.push({name,methods,unchangedExports:unchanged});\\n  }\\n\", context, {filename:\"readonly-reach-observer\"});\n    if(file===\"batted-ball-physical.js\") vm.runInContext(\"\\n  globalThis.controlledAdapter={armed:false,used:false,witnesses:[],unchangedExports:[]};\\n  (()=>{\\n    const original=BattedBallPhysical;\\n    const replacement={...original,resolveBattedBallPhysicalTruth(input={}){\\n      const a=controlledAdapter,match=typeof m==='undefined'?null:m;\\n      const live=a.armed&&!a.used&&match&&player.highSchoolMatch===match\\n        &&match.playerEntryCompleted&&match.offenseTeam===getHighSchoolOpponentTeamSide(match)\\n        &&match.defenseTeam===getHighSchoolPlayerTeamSide(match)\\n        &&TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam],'SS')?.id==='player'\\n        &&String(input.identity||'').includes('|ordinary-contact|');\\n      if(!live)return original.resolveBattedBallPhysicalTruth(input);\\n      if(match.inning!==7||match.half!=='上'||match.outs!==0||match.runners.some(Boolean))\\n        throw new Error('Fixed controlled starting state not reached; no alternate scenario');\\n      const valid=TeamRosterFoundation.validateActiveDefense(match.rosters[match.defenseTeam]);\\n      if(!valid.ok||getHighSchoolMatchStateIntegrityIssues(match).length)\\n        throw new Error('Illegal controlled input boundary');\\n      const before=JSON.stringify(player),effective={...input,rolls:{...(input.rolls||{}),contactQuality:.65,ballType:.1,pace:.68,direction:.05,depth:0}};\\n      a.used=true;\\n      const truth=original.resolveBattedBallPhysicalTruth(effective);\\n      a.witnesses.push({scenarioId:'ss-controlled-ground-v0.1',before:{matchId:match.id,eventId:getCurrentEventId(),inning:match.inning,half:match.half,outs:match.outs,runners:match.runners.slice(),scores:{...match.scores},offenseTeam:match.offenseTeam,defenseTeam:match.defenseTeam,currentBatter:match.currentBatter,actualSS:TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam],'SS').id,entryCompleted:match.playerEntryCompleted,activeDefense:valid},originalInput:JSON.parse(JSON.stringify(input)),effectiveInput:JSON.parse(JSON.stringify(effective)),truth:JSON.parse(JSON.stringify(truth)),playerUnchanged:before===JSON.stringify(player),normalized:!!original.normalizeBattedBallPhysicalTruth(truth)});\\n      return truth;\\n    }};\\n    controlledAdapter.unchangedExports=Object.keys(original).filter(k=>k!=='resolveBattedBallPhysicalTruth').map(key=>({key,sameReference:replacement[key]===original[key]}));\\n    globalThis.BattedBallPhysical=Object.freeze(replacement);\\n  })();\\n\", context, {filename:\"unchanged-controlled-physical-input\"});\n    {const hooks={\"defensive-opportunity-foundation.js\":\"reachInstallApi('DefensiveOpportunityFoundation',['resolveDefensiveOpportunity']);\",\"defensive-reach-secure-foundation.js\":\"reachInstallApi('DefensiveReachSecureFoundation',['resolveReach','projectAccess','resolveSecure']);\",\"batted-ball-ground-defense.js\":\"reachInstallApi('BattedBallGroundDefense',['resolveGroundBallDefensiveAccess','buildGroundBallDefensiveOpportunity']);\",\"offensive-plate-approach.js\":\"reachInstallApi('OffensivePlateApproach',['simulatePlateAppearance']);\",\"script.js\":\"for(const name of ['getHighSchoolDefensiveOpportunity','getHighSchoolReachAccess','getHighSchoolPhysicalDefensePlayerContext','ensureHighSchoolOrdinaryGroundBallInPlayHandoff']){const original=globalThis[name];if(typeof original!=='function')throw Error('Missing script boundary '+name);globalThis[name]=reachWrap('script.'+name,original);}reachProbe.installations.push({name:'script globals',methods:['getHighSchoolDefensiveOpportunity','getHighSchoolReachAccess','getHighSchoolPhysicalDefensePlayerContext','ensureHighSchoolOrdinaryGroundBallInPlayHandoff']});\"};if(hooks[file])vm.runInContext(hooks[file],context,{filename:\"readonly-owner-boundary\"});}"
+    }
+  },
+  "observerContract": "Capture original arguments and return value, Reflect.apply(original,this,args) exactly once; no substituted results, no owner re-evaluation and no RNG invocation in observer. Original exception rethrown. Non-target output is not retained.",
+  "encoding": "Undefined, functions and non-finite numbers are explicitly tagged in observer snapshots; no synthesized owner field.",
+  "verdicts": {
+    "A": "same-identity runtime Reach rejection and Access/Handoff refusal agree",
+    "B": "same-identity runtime Reach/Access satisfy detailed conditions but downstream rejects",
+    "C": "missing/ambiguous runtime evidence; mark NOT EXPOSED and UNVERIFIED"
+  },
+  "recursiveWhitelist": "docs/ss-reach-access-rejection-proof-v0.1-recursive-read-whitelist-evidence.json",
+  "sourceHashes": {
+    "docs/ss-reach-access-rejection-proof-v0.1-capture.cjs": "a7b1c1f4ac899966d30fce0207e7f4f2f72cd2daed57bcc2a3b9765a99c55664",
+    "docs/ss-reach-access-rejection-proof-v0.1-adapter.cjs": "ee61804e305a5beec9bd1abd1ea0f467452b1d95a8110de9fb3a7204a85b3203",
+    "docs/ss-reach-access-rejection-proof-v0.1-observer.cjs": "16d2dc252335200c4efbab692b0914f1663d8c4abbb65da9aea9b9dcaa8b9e07",
+    "docs/ss-reach-access-rejection-proof-v0.1-proof.cjs": "7afbf2a096385aa5543e59274a4790c10bbe033a5e1a9b411748786ccdd3f24f",
+    "docs/ss-reach-access-rejection-proof-v0.1-replay.cjs": "417fb5c5a82694500a3d98d304c35034494b3533a6cd9db8546adae843312c61",
+    "docs/ss-reach-access-rejection-proof-v0.1-plan.cjs": "13b6701a0bd67d7701045200a7487e3a73ed9b6e7b77e56fb5ffcb1c2d483173",
+    "tests/helpers/canonical-match-contract-context.cjs": "b09b35cf404c100b6f1d00ff6b8e67e38093fd6d13a22e788413f3bb7c608fb5",
+    "tests/entry-safe-runner.cjs": "91659f28bc718eb21569be4a64bfce61a6518b5867a5ca629e5484e15a54a6d0",
+    "tests/entry-safe-preload.cjs": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "formalSuiteNewInvocations": 0,
+  "stops": [
+    "identity/precondition failure",
+    "first public rejection or runtime failure",
+    "first plus one replay only"
+  ],
+  "readyForCommit": false,
+  "readyForSprint10B": false,
+  "receiverV2": "DISABLED"
+}

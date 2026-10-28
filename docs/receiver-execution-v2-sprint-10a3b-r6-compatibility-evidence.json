@@ -1,0 +1,2547 @@
+{
+  "sprint": "10A.3b-R6",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "createdAt": "2026-10-14T06:40:23.813Z",
+  "node": "v24.19.0",
+  "results": [
+    {
+      "file": "tests/receiver-execution-v2-2-contract-test.cjs",
+      "sourceHash": "09fd7ae21eb6f18602709d7dd90956332fa1bac2ed0c4be5cd3a32110bbfd708",
+      "elapsedMs": 1278.138,
+      "summary": {
+        "total": 155,
+        "passed": 155,
+        "failed": 0
+      },
+      "error": null,
+      "checks": [
+        {
+          "name": "identity accepts Chinese",
+          "status": "PASS"
+        },
+        {
+          "name": "identity accepts mixed",
+          "status": "PASS"
+        },
+        {
+          "name": "identity accepts nonBMP",
+          "status": "PASS"
+        },
+        {
+          "name": "identity accepts combining",
+          "status": "PASS"
+        },
+        {
+          "name": "identity accepts canonical264",
+          "status": "PASS"
+        },
+        {
+          "name": "identity accepts max4096",
+          "status": "PASS"
+        },
+        {
+          "name": "identity rejects empty",
+          "status": "PASS"
+        },
+        {
+          "name": "identity rejects over4096",
+          "status": "PASS"
+        },
+        {
+          "name": "identity rejects high surrogate",
+          "status": "PASS"
+        },
+        {
+          "name": "identity rejects low surrogate",
+          "status": "PASS"
+        },
+        {
+          "name": "identity rejects control",
+          "status": "PASS"
+        },
+        {
+          "name": "identity rejects DEL",
+          "status": "PASS"
+        },
+        {
+          "name": "Unicode normalization is never implicit",
+          "status": "PASS"
+        },
+        {
+          "name": "typed handoff rejects tampered matchId",
+          "status": "PASS"
+        },
+        {
+          "name": "typed handoff rejects tampered plateAppearanceId",
+          "status": "PASS"
+        },
+        {
+          "name": "typed handoff rejects tampered contactId",
+          "status": "PASS"
+        },
+        {
+          "name": "typed handoff rejects tampered physicalIdentity",
+          "status": "PASS"
+        },
+        {
+          "name": "version missing contract",
+          "status": "PASS"
+        },
+        {
+          "name": "version unknown contract",
+          "status": "PASS"
+        },
+        {
+          "name": "version missing execution",
+          "status": "PASS"
+        },
+        {
+          "name": "version unknown execution",
+          "status": "PASS"
+        },
+        {
+          "name": "version missing physical",
+          "status": "PASS"
+        },
+        {
+          "name": "version unknown physical",
+          "status": "PASS"
+        },
+        {
+          "name": "version missing timing",
+          "status": "PASS"
+        },
+        {
+          "name": "version unknown timing",
+          "status": "PASS"
+        },
+        {
+          "name": "version missing sampler",
+          "status": "PASS"
+        },
+        {
+          "name": "version unknown sampler",
+          "status": "PASS"
+        },
+        {
+          "name": "version missing adapter",
+          "status": "PASS"
+        },
+        {
+          "name": "version unknown adapter",
+          "status": "PASS"
+        },
+        {
+          "name": "version missing source",
+          "status": "PASS"
+        },
+        {
+          "name": "version unknown source",
+          "status": "PASS"
+        },
+        {
+          "name": "version missing effort",
+          "status": "PASS"
+        },
+        {
+          "name": "version unknown effort",
+          "status": "PASS"
+        },
+        {
+          "name": "version missing pin",
+          "status": "PASS"
+        },
+        {
+          "name": "version unknown pin",
+          "status": "PASS"
+        },
+        {
+          "name": "old/new mixed timing",
+          "status": "PASS"
+        },
+        {
+          "name": "old/new mixed sampler",
+          "status": "PASS"
+        },
+        {
+          "name": "old/new mixed source",
+          "status": "PASS"
+        },
+        {
+          "name": "old/new mixed adapter",
+          "status": "PASS"
+        },
+        {
+          "name": "old/new mixed physical",
+          "status": "PASS"
+        },
+        {
+          "name": "complete old registry directs to old API",
+          "status": "PASS"
+        },
+        {
+          "name": "pinned versions cannot downgrade pending",
+          "status": "PASS"
+        },
+        {
+          "name": "pinned versions cannot downgrade executed",
+          "status": "PASS"
+        },
+        {
+          "name": "pinned versions cannot downgrade settled",
+          "status": "PASS"
+        },
+        {
+          "name": "executed old pin cannot upgrade",
+          "status": "PASS"
+        },
+        {
+          "name": "pure revision pin remains metadata-only after JSON",
+          "status": "PASS"
+        },
+        {
+          "name": "revision pin refuses admission after execution",
+          "status": "PASS"
+        },
+        {
+          "name": "nullable actual hold never produces reception",
+          "status": "PASS"
+        },
+        {
+          "name": "nullable actual notAttempted never produces reception",
+          "status": "PASS"
+        },
+        {
+          "name": "nullable actual acquisitionFailed never produces reception",
+          "status": "PASS"
+        },
+        {
+          "name": "nullable actual unknown never produces reception",
+          "status": "PASS"
+        },
+        {
+          "name": "planned actor cannot masquerade as held actual",
+          "status": "PASS"
+        },
+        {
+          "name": "held known arrival is rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "hold route cannot include completed throw",
+          "status": "PASS"
+        },
+        {
+          "name": "held attempted touch rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "direct canonical source ID nullable is rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "planned/actual target mismatch",
+          "status": "PASS"
+        },
+        {
+          "name": "actor role mismatch",
+          "status": "PASS"
+        },
+        {
+          "name": "runner role is typed",
+          "status": "PASS"
+        },
+        {
+          "name": "self throw invalid",
+          "status": "PASS"
+        },
+        {
+          "name": "clean candidate at outs 0",
+          "status": "PASS"
+        },
+        {
+          "name": "clean candidate at outs 1",
+          "status": "PASS"
+        },
+        {
+          "name": "clean candidate at outs 2",
+          "status": "PASS"
+        },
+        {
+          "name": "offline delivery never attempts hands",
+          "status": "PASS"
+        },
+        {
+          "name": "receiver unavailable is not hands failure",
+          "status": "PASS"
+        },
+        {
+          "name": "late positioning is not hands failure",
+          "status": "PASS"
+        },
+        {
+          "name": "unreachable positioning stops reception",
+          "status": "PASS"
+        },
+        {
+          "name": "failed hands never produces possession",
+          "status": "PASS"
+        },
+        {
+          "name": "bobble delay is independent completion quality",
+          "status": "PASS"
+        },
+        {
+          "name": "clean hands but runner safe 99",
+          "status": "PASS"
+        },
+        {
+          "name": "clean hands but runner safe 105.1",
+          "status": "PASS"
+        },
+        {
+          "name": "secure completed without touch has no candidate",
+          "status": "PASS"
+        },
+        {
+          "name": "legal contest ineligible",
+          "status": "PASS"
+        },
+        {
+          "name": "legal contest unknown",
+          "status": "PASS"
+        },
+        {
+          "name": "tag requires both possession and contact",
+          "status": "PASS"
+        },
+        {
+          "name": "signed prelaunch coordinate is preserved",
+          "status": "PASS"
+        },
+        {
+          "name": "precontact movement requires explicit source authorization",
+          "status": "PASS"
+        },
+        {
+          "name": "exact causal reversal acquisitionCompletion -> throwLaunch",
+          "status": "PASS"
+        },
+        {
+          "name": "exact causal reversal throwLaunch -> ballArrival",
+          "status": "PASS"
+        },
+        {
+          "name": "exact causal reversal positioningStart -> positioningCompletion",
+          "status": "PASS"
+        },
+        {
+          "name": "exact causal reversal ballArrival -> receiveAttempt",
+          "status": "PASS"
+        },
+        {
+          "name": "exact causal reversal receiveAttempt -> secureCompletion",
+          "status": "PASS"
+        },
+        {
+          "name": "exact causal reversal secureCompletion -> baseTouch",
+          "status": "PASS"
+        },
+        {
+          "name": "strict decimal rejects 1e2",
+          "status": "PASS"
+        },
+        {
+          "name": "strict decimal rejects 100.1234567",
+          "status": "PASS"
+        },
+        {
+          "name": "strict decimal rejects +100",
+          "status": "PASS"
+        },
+        {
+          "name": "strict decimal rejects 0100",
+          "status": "PASS"
+        },
+        {
+          "name": "strict decimal rejects  100",
+          "status": "PASS"
+        },
+        {
+          "name": "strict decimal rejects -0",
+          "status": "PASS"
+        },
+        {
+          "name": "strict decimal rejects -0.000000",
+          "status": "PASS"
+        },
+        {
+          "name": "exact origin subtraction before quantization",
+          "status": "PASS"
+        },
+        {
+          "name": "negative half ties round away from zero",
+          "status": "PASS"
+        },
+        {
+          "name": "overflow is rejected without clamping",
+          "status": "PASS"
+        },
+        {
+          "name": "exact tick tie produces no retirement",
+          "status": "PASS"
+        },
+        {
+          "name": "subtick margin collapse is explicit tie",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown remains unresolved positioningStart",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown remains unresolved runnerArrival",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown remains unresolved receiveAttempt",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown acquisition cannot fabricate known launch",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown launch cannot fabricate arrival",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown ball cannot fabricate receive",
+          "status": "PASS"
+        },
+        {
+          "name": "different origin rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "v1 ordinal is not absolute timing",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy relative domain is insufficient",
+          "status": "PASS"
+        },
+        {
+          "name": "no delivery timeline cannot fabricate chain",
+          "status": "PASS"
+        },
+        {
+          "name": "no possession timeline cannot touch",
+          "status": "PASS"
+        },
+        {
+          "name": "no contact timeline cannot touch",
+          "status": "PASS"
+        },
+        {
+          "name": "late timeline cannot attempt hands after arrival",
+          "status": "PASS"
+        },
+        {
+          "name": "acquisition failure cannot retain fabricated canonical source",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical ID upper bound is executable and raw",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical ID over bound rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "4096 transport stays raw through current handoff JSON clone",
+          "status": "PASS"
+        },
+        {
+          "name": "quantization error bounded across signed micro offsets",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown common origin is insufficient",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown delivery time has no downstream attempt",
+          "status": "PASS"
+        },
+        {
+          "name": "stage outputs cannot be input",
+          "status": "PASS"
+        },
+        {
+          "name": "relay retains one origin and nonzero second launch",
+          "status": "PASS"
+        },
+        {
+          "name": "first force failed blocks second leg",
+          "status": "PASS"
+        },
+        {
+          "name": "actual third out stops second leg",
+          "status": "PASS"
+        },
+        {
+          "name": "relay cannot reset contact anchor",
+          "status": "PASS"
+        },
+        {
+          "name": "relay cannot launch before completed prior contest",
+          "status": "PASS"
+        },
+        {
+          "name": "tampered serialized prior rejects continuation",
+          "status": "PASS"
+        },
+        {
+          "name": "isolated independent stage APIs agree with full execution",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized dependency tamper delivery",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized dependency tamper positioning",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized dependency tamper secure",
+          "status": "PASS"
+        },
+        {
+          "name": "sample vector frozen under ability/actor/sample/route changes",
+          "status": "PASS"
+        },
+        {
+          "name": "sealed tamper inputDigest",
+          "status": "PASS"
+        },
+        {
+          "name": "sealed tamper samples",
+          "status": "PASS"
+        },
+        {
+          "name": "sampler matches independent crypto UTF8/u32BE",
+          "status": "PASS"
+        },
+        {
+          "name": "model migration sampler difference retains old vector",
+          "status": "PASS"
+        },
+        {
+          "name": "physical slot namespace is fixed",
+          "status": "PASS"
+        },
+        {
+          "name": "fixed vector gradient reaction",
+          "status": "PASS"
+        },
+        {
+          "name": "fixed vector gradient mobility",
+          "status": "PASS"
+        },
+        {
+          "name": "fixed vector gradient range",
+          "status": "PASS"
+        },
+        {
+          "name": "fixed vector gradient catching",
+          "status": "PASS"
+        },
+        {
+          "name": "fixed vector gradient fielding",
+          "status": "PASS"
+        },
+        {
+          "name": "noninterference receiver arm",
+          "status": "PASS"
+        },
+        {
+          "name": "noninterference receiver throwing",
+          "status": "PASS"
+        },
+        {
+          "name": "noninterference receiver decision",
+          "status": "PASS"
+        },
+        {
+          "name": "source C blocks execution identity",
+          "status": "PASS"
+        },
+        {
+          "name": "source C blocks execution timing",
+          "status": "PASS"
+        },
+        {
+          "name": "source C blocks execution secure",
+          "status": "PASS"
+        },
+        {
+          "name": "source C blocks execution positioning",
+          "status": "PASS"
+        },
+        {
+          "name": "missing provenance rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "productionWitness cannot be executed",
+          "status": "PASS"
+        },
+        {
+          "name": "ordinary effort always insufficient and separate",
+          "status": "PASS"
+        },
+        {
+          "name": "repeat and JSON roundtrip do not mutate or freeze caller",
+          "status": "PASS"
+        },
+        {
+          "name": "cold serialized seal remains mutable after execution",
+          "status": "PASS"
+        },
+        {
+          "name": "getter rejected without execution",
+          "status": "PASS"
+        },
+        {
+          "name": "no Match RNG or Math.random dependency",
+          "status": "PASS"
+        },
+        {
+          "name": "UMD sandbox matches Node without CommonJS",
+          "status": "PASS"
+        },
+        {
+          "name": "normal and jitless independent process agree",
+          "status": "PASS"
+        },
+        {
+          "name": "existing v2.1 result and vectors match baseline bytes in VM",
+          "status": "PASS"
+        },
+        {
+          "name": "original Production Unicode and canonical264 witness accepted without truncation",
+          "status": "PASS"
+        }
+      ],
+      "runtimeEnabled": false
+    },
+    {
+      "file": "tests/receiver-execution-v2-pure-contract-test.cjs",
+      "sourceHash": "04d435de56fa44cfdb411568dea8528c9d321b49ffdae160f2803bbe3acb0859",
+      "elapsedMs": 346.67,
+      "summary": {
+        "total": 91,
+        "passed": 91,
+        "failed": 0
+      },
+      "error": null,
+      "rows": [
+        {
+          "name": "SHA-256 golden empty",
+          "status": "PASS"
+        },
+        {
+          "name": "SHA-256 golden abc",
+          "status": "PASS"
+        },
+        {
+          "name": "SHA-256 UTF-8, padding boundaries and multiblock match Node crypto",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical encoding sorts nested keys and preserves array order",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical rejects fraction",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical rejects NaN",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical rejects infinity",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical rejects negative zero",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical rejects undefined",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical rejects unpaired surrogate",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical rejects sparse array",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical rejects date",
+          "status": "PASS"
+        },
+        {
+          "name": "binary64 big endian exact owned-sample binding",
+          "status": "PASS"
+        },
+        {
+          "name": "sample vector equals independent SHA-256 u32BE reference",
+          "status": "PASS"
+        },
+        {
+          "name": "physical slots and stage namespaces remain distinct",
+          "status": "PASS"
+        },
+        {
+          "name": "sampler ignores actor, ability, route and old execution sample",
+          "status": "PASS"
+        },
+        {
+          "name": "invalid physical identity, sampler and slot rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "clean stages preserve identities, ownership, possession and only candidate",
+          "status": "PASS"
+        },
+        {
+          "name": "initial outs 0 candidate defers scoring",
+          "status": "PASS"
+        },
+        {
+          "name": "initial outs 1 candidate defers scoring",
+          "status": "PASS"
+        },
+        {
+          "name": "initial outs 2 candidate defers scoring",
+          "status": "PASS"
+        },
+        {
+          "name": "offline causal stages",
+          "status": "PASS"
+        },
+        {
+          "name": "unavailable causal stages",
+          "status": "PASS"
+        },
+        {
+          "name": "late causal stages",
+          "status": "PASS"
+        },
+        {
+          "name": "hands causal stages",
+          "status": "PASS"
+        },
+        {
+          "name": "bobble causal stages",
+          "status": "PASS"
+        },
+        {
+          "name": "fast causal stages",
+          "status": "PASS"
+        },
+        {
+          "name": "safe causal stages",
+          "status": "PASS"
+        },
+        {
+          "name": "noTouch causal stages",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown causal stages",
+          "status": "PASS"
+        },
+        {
+          "name": "unreachable envelope cannot become hands failure",
+          "status": "PASS"
+        },
+        {
+          "name": "exact runner tie has no retirement candidate",
+          "status": "PASS"
+        },
+        {
+          "name": "no completed acquisition means no downstream receive",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown ball arrival never becomes zero time",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown positioning time blocks hands",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown and ineligible live force produce no candidate",
+          "status": "PASS"
+        },
+        {
+          "name": "tag requires possession AND independently declared runner contact",
+          "status": "PASS"
+        },
+        {
+          "name": "pure relay shares absolute origin and requires declared completed retirement/pivot",
+          "status": "PASS"
+        },
+        {
+          "name": "failed first force cannot create second leg even forged completed summary",
+          "status": "PASS"
+        },
+        {
+          "name": "failed retirement or pivot suppresses second leg",
+          "status": "PASS"
+        },
+        {
+          "name": "first force third out never creates fourth retirement",
+          "status": "PASS"
+        },
+        {
+          "name": "relay launch reset to zero is rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "missing relay prior and modified prior execution rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "unrelated relay source/actor/runner identity rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "missing physical identity",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy synthetic physical identity cannot be v2",
+          "status": "PASS"
+        },
+        {
+          "name": "missing contact id",
+          "status": "PASS"
+        },
+        {
+          "name": "invalid actor position",
+          "status": "PASS"
+        },
+        {
+          "name": "self throw actor cannot masquerade receive",
+          "status": "PASS"
+        },
+        {
+          "name": "invalid runner id",
+          "status": "PASS"
+        },
+        {
+          "name": "invalid target base",
+          "status": "PASS"
+        },
+        {
+          "name": "handoff actor mismatch",
+          "status": "PASS"
+        },
+        {
+          "name": "unsupported execution version",
+          "status": "PASS"
+        },
+        {
+          "name": "unsupported adapter version",
+          "status": "PASS"
+        },
+        {
+          "name": "unsupported timing version",
+          "status": "PASS"
+        },
+        {
+          "name": "unsupported sampler version",
+          "status": "PASS"
+        },
+        {
+          "name": "unsupported effort version",
+          "status": "PASS"
+        },
+        {
+          "name": "missing source provenance",
+          "status": "PASS"
+        },
+        {
+          "name": "unavailable source is insufficient not legacy fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy success boolean is rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "completed throw with incomplete acquisition",
+          "status": "PASS"
+        },
+        {
+          "name": "same action id across stages",
+          "status": "PASS"
+        },
+        {
+          "name": "throw action identity mismatch",
+          "status": "PASS"
+        },
+        {
+          "name": "ability snapshot has wrong actor",
+          "status": "PASS"
+        },
+        {
+          "name": "fractional unversioned capability",
+          "status": "PASS"
+        },
+        {
+          "name": "v1 ordinal window is not CRT",
+          "status": "PASS"
+        },
+        {
+          "name": "mixed timing origins rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "arrival before launch rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "primary launch cannot reset origin",
+          "status": "PASS"
+        },
+        {
+          "name": "negative actor completion time rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "invalid outs",
+          "status": "PASS"
+        },
+        {
+          "name": "invalid original execution sample",
+          "status": "PASS"
+        },
+        {
+          "name": "getter rejected without evaluating it",
+          "status": "PASS"
+        },
+        {
+          "name": "malformed sampler and stage dependencies return invalid without getter reads",
+          "status": "PASS"
+        },
+        {
+          "name": "sealed abilities and sample tampering rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized delivery dependency tampering rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized positioning dependency tampering rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized secure dependency tampering rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "independently callable stages agree with pipeline",
+          "status": "PASS"
+        },
+        {
+          "name": "repeat, frozen original input and JSON cold round trip are identical",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical object key reordering keeps sealed input identical",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized bindings and dependency property order are semantically canonical",
+          "status": "PASS"
+        },
+        {
+          "name": "arm, throwing and decision cannot improve receiver stages",
+          "status": "PASS"
+        },
+        {
+          "name": "reaction/mobility change positioning only, catching/fielding change hands only",
+          "status": "PASS"
+        },
+        {
+          "name": "range affects reach not speed or hands when still reachable",
+          "status": "PASS"
+        },
+        {
+          "name": "fixed-vector mobility gradient across all 21 abilities and 9 MDU demands",
+          "status": "PASS"
+        },
+        {
+          "name": "missing objective effort never derives E/A from actual weak capability",
+          "status": "PASS"
+        },
+        {
+          "name": "unapproved average=10 reference remains uncalibrated insufficient",
+          "status": "PASS"
+        },
+        {
+          "name": "ordinary effort profile cannot silently change execution",
+          "status": "PASS"
+        },
+        {
+          "name": "no Math.random or Match RNG access in standalone calls",
+          "status": "PASS"
+        },
+        {
+          "name": "browser-style VM load without Node imports matches CommonJS",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-version-admission-timing-test.cjs",
+      "sourceHash": "8a14adebd71dfa1dfa8c0d0e518e50fbba5441a1728eaa9f463caf5d9cfb49fc",
+      "elapsedMs": 283.7136,
+      "summary": {
+        "total": 151,
+        "passed": 151,
+        "failed": 0
+      },
+      "error": null,
+      "rows": [
+        {
+          "name": "candidate pin keeps runtime disabled and official execution with legacy",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy pin has no candidate versions and remains existing-owner metadata",
+          "status": "PASS"
+        },
+        {
+          "name": "pin creation does not mutate or freeze caller input",
+          "status": "PASS"
+        },
+        {
+          "name": "all three historical topology tags remain distinct from receiver version",
+          "status": "PASS"
+        },
+        {
+          "name": "explicit hold surface pins before no-delivery diagnostic preparation",
+          "status": "PASS"
+        },
+        {
+          "name": "legal held ball with notAttempted delivery has only an isolated execution binding",
+          "status": "PASS"
+        },
+        {
+          "name": "completed delivery cannot be bound to a held-ball admission",
+          "status": "PASS"
+        },
+        {
+          "name": "player receiver role is excluded from NPC receiver candidate slice",
+          "status": "PASS"
+        },
+        {
+          "name": "actorId player cannot masquerade as NPC receiver role",
+          "status": "PASS"
+        },
+        {
+          "name": "missing explicit throwerRole has no inferred role fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "missing explicit receiverRole has no inferred role fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "non-primary npc thrower cannot use SS primary-player admission",
+          "status": "PASS"
+        },
+        {
+          "name": "non-primary player thrower cannot use SS primary-player admission",
+          "status": "PASS"
+        },
+        {
+          "name": "candidateV2 cannot be newly pinned after executed",
+          "status": "PASS"
+        },
+        {
+          "name": "candidateV2 cannot be newly pinned after settled",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy cannot be newly pinned after executed",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy cannot be newly pinned after settled",
+          "status": "PASS"
+        },
+        {
+          "name": "missing phaseAtAdmission cannot infer before-execution admission",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown admission phase cannot select an execution model",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects unknown model",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects removed execution discriminator",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects null physical identity",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects synthetic legacy physical version",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects missing contact identity",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects invalid actor position",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects self throw",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects runner is receiving actor",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects retry physical slot",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects unknown topology",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects three outs at admission",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects capability actor mismatch",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects unknown ability adapter",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects fractional actual ability",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects missing provenance",
+          "status": "PASS"
+        },
+        {
+          "name": "admission rejects legacy success boolean",
+          "status": "PASS"
+        },
+        {
+          "name": "candidate excludes previously admitted opportunity",
+          "status": "PASS"
+        },
+        {
+          "name": "candidate excludes 2B primary owner",
+          "status": "PASS"
+        },
+        {
+          "name": "candidate excludes occupied bases",
+          "status": "PASS"
+        },
+        {
+          "name": "candidate excludes wrong force target",
+          "status": "PASS"
+        },
+        {
+          "name": "candidate excludes route outside direct allowlist",
+          "status": "PASS"
+        },
+        {
+          "name": "candidate excludes hold route with direct surface",
+          "status": "PASS"
+        },
+        {
+          "name": "candidate excludes direct route with hold surface",
+          "status": "PASS"
+        },
+        {
+          "name": "missing source C remains insufficient: physicalIdentity",
+          "status": "PASS"
+        },
+        {
+          "name": "missing source C remains insufficient: actors",
+          "status": "PASS"
+        },
+        {
+          "name": "missing source C remains insufficient: capabilities",
+          "status": "PASS"
+        },
+        {
+          "name": "missing source C remains insufficient: eligibility",
+          "status": "PASS"
+        },
+        {
+          "name": "pureFixture sources permit isolated pin only, not official admission",
+          "status": "PASS"
+        },
+        {
+          "name": "runtime-enabled policy rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown policy version rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "new candidate preparation can be disabled",
+          "status": "PASS"
+        },
+        {
+          "name": "policy rollback does not replace admitted pin: pending",
+          "status": "PASS"
+        },
+        {
+          "name": "policy rollback does not replace admitted pin: executed",
+          "status": "PASS"
+        },
+        {
+          "name": "policy rollback does not replace admitted pin: settled",
+          "status": "PASS"
+        },
+        {
+          "name": "retention refuses pinned actor change",
+          "status": "PASS"
+        },
+        {
+          "name": "retention refuses pinned capability change",
+          "status": "PASS"
+        },
+        {
+          "name": "retention refuses pinned physical change",
+          "status": "PASS"
+        },
+        {
+          "name": "retention refuses pinned route change",
+          "status": "PASS"
+        },
+        {
+          "name": "retention refuses pinned model downgrade change",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy pending cannot upgrade model under changed policy",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown pinned execution version refused",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown pinned adapter version refused",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown pinned timing version refused",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown pinned sampler version refused",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown pinned effort version refused",
+          "status": "PASS"
+        },
+        {
+          "name": "removed candidate version tag refused",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown safety version refused",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown legacy timing version refused",
+          "status": "PASS"
+        },
+        {
+          "name": "JSON cold round-trip preserves pin and pending isolated serialization",
+          "status": "PASS"
+        },
+        {
+          "name": "candidate executed Save is explicitly not implemented",
+          "status": "PASS"
+        },
+        {
+          "name": "candidate settled Save is explicitly not implemented",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy executed recovery belongs to existing owner",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy settled recovery belongs to existing owner",
+          "status": "PASS"
+        },
+        {
+          "name": "new snapshot missing required formatVersion cannot fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "new snapshot missing required admission cannot fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "new snapshot missing required admissionCopy cannot fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "new snapshot missing required executionBinding cannot fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "snapshot null pin cannot be historical omission",
+          "status": "PASS"
+        },
+        {
+          "name": "different otherwise-valid admission copies rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "snapshot cannot replace independently expected pin",
+          "status": "PASS"
+        },
+        {
+          "name": "pending snapshot cannot pretend execution binding already present",
+          "status": "PASS"
+        },
+        {
+          "name": "explicit historical evidence routes only to existing legacy owner",
+          "status": "PASS"
+        },
+        {
+          "name": "missing historical evidence does not infer legacy from omission",
+          "status": "PASS"
+        },
+        {
+          "name": "unsupported historical claim remains insufficient",
+          "status": "PASS"
+        },
+        {
+          "name": "historical source C remains insufficient",
+          "status": "PASS"
+        },
+        {
+          "name": "present new tag cannot masquerade as historical: formatVersion",
+          "status": "PASS"
+        },
+        {
+          "name": "present new tag cannot masquerade as historical: admission",
+          "status": "PASS"
+        },
+        {
+          "name": "present new tag cannot masquerade as historical: admissionCopy",
+          "status": "PASS"
+        },
+        {
+          "name": "present new tag cannot masquerade as historical: executionBinding",
+          "status": "PASS"
+        },
+        {
+          "name": "present new tag cannot masquerade as historical: receiverExecutionVersion",
+          "status": "PASS"
+        },
+        {
+          "name": "present new tag cannot masquerade as historical: kind",
+          "status": "PASS"
+        },
+        {
+          "name": "present new tag cannot masquerade as historical: safetyVersion",
+          "status": "PASS"
+        },
+        {
+          "name": "present new tag cannot masquerade as historical: candidateVersions",
+          "status": "PASS"
+        },
+        {
+          "name": "present new tag cannot masquerade as historical: timingVersion",
+          "status": "PASS"
+        },
+        {
+          "name": "present new tag cannot masquerade as historical: samplerVersion",
+          "status": "PASS"
+        },
+        {
+          "name": "present new tag cannot masquerade as historical: adapterVersion",
+          "status": "PASS"
+        },
+        {
+          "name": "present new tag cannot masquerade as historical: effortProfileVersion",
+          "status": "PASS"
+        },
+        {
+          "name": "present new tag cannot masquerade as historical: runtimeEnabled",
+          "status": "PASS"
+        },
+        {
+          "name": "all exported new envelope kinds prohibit historical fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "diagnostic preparation seals supplied input without producing execution",
+          "status": "PASS"
+        },
+        {
+          "name": "diagnostic preparation never calls full pure execute",
+          "status": "PASS"
+        },
+        {
+          "name": "saved execution binding validates unchanged and after JSON cold round-trip",
+          "status": "PASS"
+        },
+        {
+          "name": "saved binding rejects changed inputDigest",
+          "status": "PASS"
+        },
+        {
+          "name": "saved binding rejects changed originalSampleBinary64",
+          "status": "PASS"
+        },
+        {
+          "name": "saved binding rejects changed sampleVectorDigest",
+          "status": "PASS"
+        },
+        {
+          "name": "saved binding rejects changed pinDigest",
+          "status": "PASS"
+        },
+        {
+          "name": "removed saved original sample cannot become pending omission",
+          "status": "PASS"
+        },
+        {
+          "name": "valid resealing of changed original sample cannot replace saved execution binding",
+          "status": "PASS"
+        },
+        {
+          "name": "saved binding getters do not execute during recovery validation",
+          "status": "PASS"
+        },
+        {
+          "name": "diagnostic lacks positioning source instead of legacy fallback",
+          "status": "PASS"
+        },
+        {
+          "name": "execution binding refuses admitted capability mismatch",
+          "status": "PASS"
+        },
+        {
+          "name": "execution binding refuses admitted route mismatch",
+          "status": "PASS"
+        },
+        {
+          "name": "execution binding refuses admitted actor mismatch",
+          "status": "PASS"
+        },
+        {
+          "name": "timing consistency accepts only an unapplied diagnostic and zero actual retirements",
+          "status": "PASS"
+        },
+        {
+          "name": "timing candidate initial outs 0 cannot settle score",
+          "status": "PASS"
+        },
+        {
+          "name": "timing candidate initial outs 1 cannot settle score",
+          "status": "PASS"
+        },
+        {
+          "name": "timing candidate initial outs 2 cannot settle score",
+          "status": "PASS"
+        },
+        {
+          "name": "exact tie remains known with no out candidate",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown runner time stays unresolved",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown ball time stays unresolved",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown position time stays unresolved",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown legality time stays unresolved",
+          "status": "PASS"
+        },
+        {
+          "name": "timing validates preserved causal branch: offline",
+          "status": "PASS"
+        },
+        {
+          "name": "timing validates preserved causal branch: unavailable",
+          "status": "PASS"
+        },
+        {
+          "name": "timing validates preserved causal branch: late",
+          "status": "PASS"
+        },
+        {
+          "name": "timing validates preserved causal branch: hands failure",
+          "status": "PASS"
+        },
+        {
+          "name": "timing validates preserved causal branch: already-safe runner",
+          "status": "PASS"
+        },
+        {
+          "name": "timing validates preserved causal branch: missing touch",
+          "status": "PASS"
+        },
+        {
+          "name": "relay timing keeps original absolute origin, no additional actual retirement",
+          "status": "PASS"
+        },
+        {
+          "name": "failed first force suppresses second candidate despite claimed continuation",
+          "status": "PASS"
+        },
+        {
+          "name": "first force third out prevents a fourth retirement candidate",
+          "status": "PASS"
+        },
+        {
+          "name": "relay requires supplied validated prior",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized timing dependency rejects unknown packet version",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized timing dependency rejects removed packet version",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized timing dependency rejects formal packet kind",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized timing dependency rejects changed actor",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized timing dependency rejects changed runner",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized timing dependency rejects changed route",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized timing dependency rejects changed capability",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized timing dependency rejects changed owned sample",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized timing dependency rejects changed derived sample",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized timing dependency rejects changed timing origin",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized timing dependency rejects v1 ordinal arrival",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized timing dependency rejects forged possession",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized timing dependency rejects forged earlier touch",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized timing dependency rejects forged application",
+          "status": "PASS"
+        },
+        {
+          "name": "modified prior output cannot support relay timing",
+          "status": "PASS"
+        },
+        {
+          "name": "JSON serialization and repeated validation preserve all sealed values",
+          "status": "PASS"
+        },
+        {
+          "name": "no Match RNG or Math.random is consumed by safety APIs",
+          "status": "PASS"
+        },
+        {
+          "name": "getters are rejected without invoking source or version accessors",
+          "status": "PASS"
+        },
+        {
+          "name": "cycles, symbols and non-JSON types cannot become version facts",
+          "status": "PASS"
+        },
+        {
+          "name": "every diagnostic output remains unavailable to official admission",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-source-authority-test.cjs",
+      "sourceHash": "9d378260599a544a7ff0365af6552f56fdb420032fcdedfcdeada503695cb9fb",
+      "elapsedMs": 584.9363,
+      "summary": {
+        "total": 122,
+        "passed": 122,
+        "failed": 0
+      },
+      "error": null,
+      "checks": [
+        {
+          "name": "initial policy from preexecution assignment baseGuard",
+          "status": "PASS"
+        },
+        {
+          "name": "initial policy from preexecution assignment firstBaseShade",
+          "status": "PASS"
+        },
+        {
+          "name": "initial policy from preexecution assignment coverFromInterior",
+          "status": "PASS"
+        },
+        {
+          "name": "initial policy from preexecution assignment delayedCover",
+          "status": "PASS"
+        },
+        {
+          "name": "initial policy from preexecution assignment unassigned",
+          "status": "PASS"
+        },
+        {
+          "name": "initial cover policy rejects result-time decision",
+          "status": "PASS"
+        },
+        {
+          "name": "initial cover policy never accepts legacy atBase",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown formation intent stays insufficient without default base covering",
+          "status": "PASS"
+        },
+        {
+          "name": "cover context baseCovering",
+          "status": "PASS"
+        },
+        {
+          "name": "cover context nearFirstBase",
+          "status": "PASS"
+        },
+        {
+          "name": "cover context movingToFirstBase",
+          "status": "PASS"
+        },
+        {
+          "name": "cover context lateCover",
+          "status": "PASS"
+        },
+        {
+          "name": "cover context unavailable",
+          "status": "PASS"
+        },
+        {
+          "name": "clean 6-3 candidate with initial outs 0",
+          "status": "PASS"
+        },
+        {
+          "name": "clean 6-3 candidate with initial outs 1",
+          "status": "PASS"
+        },
+        {
+          "name": "clean 6-3 candidate with initial outs 2",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical delivery quality onTarget",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical delivery quality challengingReceive",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical delivery quality lateWeakThrow",
+          "status": "PASS"
+        },
+        {
+          "name": "offline never attempts hands",
+          "status": "PASS"
+        },
+        {
+          "name": "unreachable receiver does not become failed hands",
+          "status": "PASS"
+        },
+        {
+          "name": "independent failed hands despite ready receiver",
+          "status": "PASS"
+        },
+        {
+          "name": "bobble delays possession with same fixed vector",
+          "status": "PASS"
+        },
+        {
+          "name": "fast runner negative common-origin time remains already safe",
+          "status": "PASS"
+        },
+        {
+          "name": "clean catch does not imply retirement",
+          "status": "PASS"
+        },
+        {
+          "name": "exact tie produces no candidate",
+          "status": "PASS"
+        },
+        {
+          "name": "no possession prevents touch completion",
+          "status": "PASS"
+        },
+        {
+          "name": "no legal touch attempted",
+          "status": "PASS"
+        },
+        {
+          "name": "no legal touch contact",
+          "status": "PASS"
+        },
+        {
+          "name": "live first-base legality ineligible",
+          "status": "PASS"
+        },
+        {
+          "name": "live first-base legality unknown",
+          "status": "PASS"
+        },
+        {
+          "name": "no delivery branch secureFirstBaseOut",
+          "status": "PASS"
+        },
+        {
+          "name": "no delivery branch holdBall",
+          "status": "PASS"
+        },
+        {
+          "name": "failed acquisition cannot produce incoming delivery",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown CRT ballArrival",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown CRT runnerArrival",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown CRT positioningStart",
+          "status": "PASS"
+        },
+        {
+          "name": "bridge subtracts the same launch offset from ball and runner",
+          "status": "PASS"
+        },
+        {
+          "name": "complete modeled timeline shares one origin and original arrival",
+          "status": "PASS"
+        },
+        {
+          "name": "late readiness has no attempt or possession time",
+          "status": "PASS"
+        },
+        {
+          "name": "failed hands preserves attempt time but has no touch time",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown runner time does not erase completed touch",
+          "status": "PASS"
+        },
+        {
+          "name": "modeled completion cannot overflow bounded CRT",
+          "status": "PASS"
+        },
+        {
+          "name": "decimal quantization golden vectors and half-away-from-zero",
+          "status": "PASS"
+        },
+        {
+          "name": "reject noncanonical CRT -0",
+          "status": "PASS"
+        },
+        {
+          "name": "reject noncanonical CRT 1e3",
+          "status": "PASS"
+        },
+        {
+          "name": "reject noncanonical CRT 01",
+          "status": "PASS"
+        },
+        {
+          "name": "reject noncanonical CRT NaN",
+          "status": "PASS"
+        },
+        {
+          "name": "reject noncanonical CRT 0.0000001",
+          "status": "PASS"
+        },
+        {
+          "name": "reject noncanonical CRT 9999999",
+          "status": "PASS"
+        },
+        {
+          "name": "reject noncanonical CRT 1.2",
+          "status": "PASS"
+        },
+        {
+          "name": "reject missing physical binding",
+          "status": "PASS"
+        },
+        {
+          "name": "reject synthetic primitive identity",
+          "status": "PASS"
+        },
+        {
+          "name": "reject unsupported physical version",
+          "status": "PASS"
+        },
+        {
+          "name": "reject fake SS actor",
+          "status": "PASS"
+        },
+        {
+          "name": "reject player1B",
+          "status": "PASS"
+        },
+        {
+          "name": "reject unmatched receiver snapshot",
+          "status": "PASS"
+        },
+        {
+          "name": "reject unmatched handoff",
+          "status": "PASS"
+        },
+        {
+          "name": "reject wrong target base",
+          "status": "PASS"
+        },
+        {
+          "name": "reject actor as runner",
+          "status": "PASS"
+        },
+        {
+          "name": "reject executed cover policy selection",
+          "status": "PASS"
+        },
+        {
+          "name": "reject occupied-base slice",
+          "status": "PASS"
+        },
+        {
+          "name": "reject meaningful fixture posing as routine slice",
+          "status": "PASS"
+        },
+        {
+          "name": "reject relay slot",
+          "status": "PASS"
+        },
+        {
+          "name": "reject retry-based physical slot",
+          "status": "PASS"
+        },
+        {
+          "name": "reject unknown source version",
+          "status": "PASS"
+        },
+        {
+          "name": "reject unknown initial-cover policy",
+          "status": "PASS"
+        },
+        {
+          "name": "reject cover plan from another receiver",
+          "status": "PASS"
+        },
+        {
+          "name": "reject cover plan decided after execution",
+          "status": "PASS"
+        },
+        {
+          "name": "reject legacy atBase input",
+          "status": "PASS"
+        },
+        {
+          "name": "reject legacy receiver success input",
+          "status": "PASS"
+        },
+        {
+          "name": "reject safe/out outcome input",
+          "status": "PASS"
+        },
+        {
+          "name": "reject pending sample preload",
+          "status": "PASS"
+        },
+        {
+          "name": "reject unknown provenance",
+          "status": "PASS"
+        },
+        {
+          "name": "required source C stays insufficient",
+          "status": "PASS"
+        },
+        {
+          "name": "production scope cannot turn pure policy into live authority",
+          "status": "PASS"
+        },
+        {
+          "name": "reject padded NPC capability",
+          "status": "PASS"
+        },
+        {
+          "name": "reject unsupported NPC scale",
+          "status": "PASS"
+        },
+        {
+          "name": "snapshot and policy clone are frozen without mutating caller",
+          "status": "PASS"
+        },
+        {
+          "name": "reject mismatched pin binding",
+          "status": "PASS"
+        },
+        {
+          "name": "missing original owned sample stays insufficient",
+          "status": "PASS"
+        },
+        {
+          "name": "reject invalid original sample",
+          "status": "PASS"
+        },
+        {
+          "name": "reject canonical handoff mismatch physicalIdentity",
+          "status": "PASS"
+        },
+        {
+          "name": "reject canonical handoff mismatch throwerId",
+          "status": "PASS"
+        },
+        {
+          "name": "reject canonical handoff mismatch receiverId",
+          "status": "PASS"
+        },
+        {
+          "name": "reject canonical handoff mismatch targetRunnerId",
+          "status": "PASS"
+        },
+        {
+          "name": "reject canonical handoff mismatch targetBase",
+          "status": "PASS"
+        },
+        {
+          "name": "reject canonical handoff mismatch actionId",
+          "status": "PASS"
+        },
+        {
+          "name": "reject canonical handoff mismatch routeId",
+          "status": "PASS"
+        },
+        {
+          "name": "reject unknown canonical quality",
+          "status": "PASS"
+        },
+        {
+          "name": "reject second throw-roll sample input",
+          "status": "PASS"
+        },
+        {
+          "name": "reject completed delivery after failed acquisition",
+          "status": "PASS"
+        },
+        {
+          "name": "reject legacy receiver ready as hands input",
+          "status": "PASS"
+        },
+        {
+          "name": "reject official E as hands input",
+          "status": "PASS"
+        },
+        {
+          "name": "missing execution provenance rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "C incoming source stays insufficient",
+          "status": "PASS"
+        },
+        {
+          "name": "legacy v1 origin cannot be silently zeroed",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown launch origin blocks execution",
+          "status": "PASS"
+        },
+        {
+          "name": "wrong physical time binding rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "v1 ordinal window rejected as CRT",
+          "status": "PASS"
+        },
+        {
+          "name": "negative actor time rejected without clamping",
+          "status": "PASS"
+        },
+        {
+          "name": "prelaunch positioning not silently clamped to S8 zero",
+          "status": "PASS"
+        },
+        {
+          "name": "touch without attempted contact rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "unrelated touch action rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "calibrated name cannot authorize ordinary effort",
+          "status": "PASS"
+        },
+        {
+          "name": "hold with completed throw rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "hold cannot hide a forged numeric ball arrival",
+          "status": "PASS"
+        },
+        {
+          "name": "offline missing arrival never fabricates flight",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized pin tamper rejected even after caller edits capability copy",
+          "status": "PASS"
+        },
+        {
+          "name": "repeat and JSON cold round-trip preserve complete output",
+          "status": "PASS"
+        },
+        {
+          "name": "sampler binds physical slot, not actor ability route or sample",
+          "status": "PASS"
+        },
+        {
+          "name": "sample vector matches independent Node SHA256 encoding",
+          "status": "PASS"
+        },
+        {
+          "name": "receiver arm/contact changes cannot improve hands or positioning",
+          "status": "PASS"
+        },
+        {
+          "name": "fixed-vector defense aliases have monotonic reach time and hands margin",
+          "status": "PASS"
+        },
+        {
+          "name": "fixed-vector speed to mobility mapping monotonic across contexts",
+          "status": "PASS"
+        },
+        {
+          "name": "ordinary effort independent of actual receiver weakness",
+          "status": "PASS"
+        },
+        {
+          "name": "no random callback Match object or official record capability",
+          "status": "PASS"
+        },
+        {
+          "name": "source request getter never executes",
+          "status": "PASS"
+        },
+        {
+          "name": "execution source getter never executes",
+          "status": "PASS"
+        },
+        {
+          "name": "input/output objects immutable with no caller mutation",
+          "status": "PASS"
+        },
+        {
+          "name": "normal and jitless Node process reproduce hash encoding and stage arithmetic",
+          "status": "PASS"
+        },
+        {
+          "name": "independent VM load only imports S8 pure API and never random",
+          "status": "PASS"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-production-source-timing-test.cjs",
+      "sourceHash": "ad272fb381c101d13a6323017a4cf285c9390a5b671d86487cb1fd36f9202ae1",
+      "elapsedMs": 2931.7217,
+      "summary": {
+        "total": 96,
+        "passed": 96,
+        "failed": 0
+      },
+      "error": null,
+      "checks": [
+        {
+          "name": "real before-execution physical/actor snapshot outs 0",
+          "status": "PASS"
+        },
+        {
+          "name": "actual Unicode identity is preserved and current S8 rejects it outs 0",
+          "status": "PASS"
+        },
+        {
+          "name": "post-execution retains original PA runner and fixed slot outs 0",
+          "status": "PASS"
+        },
+        {
+          "name": "real before-execution physical/actor snapshot outs 1",
+          "status": "PASS"
+        },
+        {
+          "name": "actual Unicode identity is preserved and current S8 rejects it outs 1",
+          "status": "PASS"
+        },
+        {
+          "name": "post-execution retains original PA runner and fixed slot outs 1",
+          "status": "PASS"
+        },
+        {
+          "name": "real before-execution physical/actor snapshot outs 2",
+          "status": "PASS"
+        },
+        {
+          "name": "actual Unicode identity is preserved and current S8 rejects it outs 2",
+          "status": "PASS"
+        },
+        {
+          "name": "post-execution retains original PA runner and fixed slot outs 2",
+          "status": "PASS"
+        },
+        {
+          "name": "original offline never fills independent source gaps",
+          "status": "PASS"
+        },
+        {
+          "name": "original acquisition failure never fills independent source gaps",
+          "status": "PASS"
+        },
+        {
+          "name": "original legacy receiver failure never fills independent source gaps",
+          "status": "PASS"
+        },
+        {
+          "name": "original fast runner already safe never fills independent source gaps",
+          "status": "PASS"
+        },
+        {
+          "name": "actual hold preserves null canonical receiver and target",
+          "status": "PASS"
+        },
+        {
+          "name": "physical handoff copy tamper",
+          "status": "PASS"
+        },
+        {
+          "name": "PA physical copy tamper",
+          "status": "PASS"
+        },
+        {
+          "name": "unsupported legacy synthetic handoff",
+          "status": "PASS"
+        },
+        {
+          "name": "primary SS opportunity actor mismatch",
+          "status": "PASS"
+        },
+        {
+          "name": "NPC1B context/roster mismatch",
+          "status": "PASS"
+        },
+        {
+          "name": "invalid active lineup cannot become receiver source",
+          "status": "PASS"
+        },
+        {
+          "name": "occupied initial bases rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "source must use original PA batter",
+          "status": "PASS"
+        },
+        {
+          "name": "runner obligation tamper",
+          "status": "PASS"
+        },
+        {
+          "name": "preload sample rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "malformed sample log cannot pose empty pre-execution evidence",
+          "status": "PASS"
+        },
+        {
+          "name": "partial original execution facts cannot pose before snapshot",
+          "status": "PASS"
+        },
+        {
+          "name": "executing snapshot cannot pose before execution",
+          "status": "PASS"
+        },
+        {
+          "name": "unrelated route rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "malformed present provenance scope rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "post snapshot cannot reconstruct missing original anchor from settled outs",
+          "status": "PASS"
+        },
+        {
+          "name": "serialized anchor tamper rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical throw receiver tamper rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "canonical route/selection copy mismatch rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "completed raw action cannot hide absent canonical throw",
+          "status": "PASS"
+        },
+        {
+          "name": "throw action physical tamper rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "missing original action provenance remains insufficient",
+          "status": "PASS"
+        },
+        {
+          "name": "original sample/action copy mismatch rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "real canonical throw ID also exceeds old isolated adapter id limit",
+          "status": "PASS"
+        },
+        {
+          "name": "raw capability aliases are source values, not calibrated skills",
+          "status": "PASS"
+        },
+        {
+          "name": "absent raw NPC attribute is C and never padded",
+          "status": "PASS"
+        },
+        {
+          "name": "repeat and JSON source round-trip preserve complete observation",
+          "status": "PASS"
+        },
+        {
+          "name": "NEW deterministic formation baseGuard",
+          "status": "PASS"
+        },
+        {
+          "name": "NEW deterministic formation firstBaseShade",
+          "status": "PASS"
+        },
+        {
+          "name": "NEW deterministic formation coverFromInterior",
+          "status": "PASS"
+        },
+        {
+          "name": "NEW deterministic formation delayedCover",
+          "status": "PASS"
+        },
+        {
+          "name": "NEW deterministic formation unassigned",
+          "status": "PASS"
+        },
+        {
+          "name": "formation seed does not change with actor/assignment",
+          "status": "PASS"
+        },
+        {
+          "name": "formation rejects after execution",
+          "status": "PASS"
+        },
+        {
+          "name": "formation rejects unknown intent",
+          "status": "PASS"
+        },
+        {
+          "name": "formation rejects production scope",
+          "status": "PASS"
+        },
+        {
+          "name": "formation rejects unknown version",
+          "status": "PASS"
+        },
+        {
+          "name": "formation cannot consume route success or retry",
+          "status": "PASS"
+        },
+        {
+          "name": "physical origin C supports pre-launch movement without clamp",
+          "status": "PASS"
+        },
+        {
+          "name": "all proposed timestamps share one immutable physical origin",
+          "status": "PASS"
+        },
+        {
+          "name": "receiver movement before contact may be signed in proposed version",
+          "status": "PASS"
+        },
+        {
+          "name": "already-arrived runner remains negative without reroll",
+          "status": "PASS"
+        },
+        {
+          "name": "exact tie cannot imply actual out",
+          "status": "PASS"
+        },
+        {
+          "name": "subtick race may collapse to tie; not called lossless v1 migration",
+          "status": "PASS"
+        },
+        {
+          "name": "origin subtraction happens before quantization",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown throwLaunch preserved, never zero-filled",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown ballArrival preserved, never zero-filled",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown positioningStart preserved, never zero-filled",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown positioningCompletion preserved, never zero-filled",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown receiveAttempt preserved, never zero-filled",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown secureCompletion preserved, never zero-filled",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown baseTouchCompletion preserved, never zero-filled",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown runnerArrival preserved, never zero-filled",
+          "status": "PASS"
+        },
+        {
+          "name": "unknown common origin blocks clock interpretation",
+          "status": "PASS"
+        },
+        {
+          "name": "v1 relative values never acquire a fabricated new origin",
+          "status": "PASS"
+        },
+        {
+          "name": "v1 ordinal window rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "wrong physical clock source rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "reject exact causal reversal throwLaunch -> ballArrival",
+          "status": "PASS"
+        },
+        {
+          "name": "reject exact causal reversal positioningStart -> positioningCompletion",
+          "status": "PASS"
+        },
+        {
+          "name": "reject exact causal reversal ballArrival -> receiveAttempt",
+          "status": "PASS"
+        },
+        {
+          "name": "reject exact causal reversal positioningCompletion -> receiveAttempt",
+          "status": "PASS"
+        },
+        {
+          "name": "reject exact causal reversal receiveAttempt -> secureCompletion",
+          "status": "PASS"
+        },
+        {
+          "name": "reject exact causal reversal secureCompletion -> baseTouchCompletion",
+          "status": "PASS"
+        },
+        {
+          "name": "subtick negative causal duration rejected before rounding",
+          "status": "PASS"
+        },
+        {
+          "name": "no possession cannot produce touch time",
+          "status": "PASS"
+        },
+        {
+          "name": "no legal contact cannot produce touch time",
+          "status": "PASS"
+        },
+        {
+          "name": "late positioning cannot be relabeled as a hands attempt",
+          "status": "PASS"
+        },
+        {
+          "name": "hands attempt time remains original receivable ball arrival",
+          "status": "PASS"
+        },
+        {
+          "name": "no delivery has no receive Secure or touch completion",
+          "status": "PASS"
+        },
+        {
+          "name": "strict decimal rejects -0",
+          "status": "PASS"
+        },
+        {
+          "name": "strict decimal rejects 01",
+          "status": "PASS"
+        },
+        {
+          "name": "strict decimal rejects 1e3",
+          "status": "PASS"
+        },
+        {
+          "name": "strict decimal rejects NaN",
+          "status": "PASS"
+        },
+        {
+          "name": "strict decimal rejects 0.0000001",
+          "status": "PASS"
+        },
+        {
+          "name": "strict decimal rejects 1000000000",
+          "status": "PASS"
+        },
+        {
+          "name": "bounded relative overflow rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "clock relay offsets do not redefine contact origin",
+          "status": "PASS"
+        },
+        {
+          "name": "current S8 contract continues to reject new timing version",
+          "status": "PASS"
+        },
+        {
+          "name": "current S8 nonnegative positioning contract remains unchanged",
+          "status": "PASS"
+        },
+        {
+          "name": "clock repeat JSON round-trip and independent jitless process agree",
+          "status": "PASS"
+        },
+        {
+          "name": "prototype cannot consume Math.random or mutate actual legacy Match",
+          "status": "PASS"
+        },
+        {
+          "name": "getter input is rejected without reads",
+          "status": "PASS"
+        }
+      ]
+    }
+  ],
+  "complete": true,
+  "frozenSourceHashes": {
+    "index.html": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+    "script.js": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+    "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+    "player.js": "3414f5a93429bc1a4adbe3c632485e70b5d9175822261b689543a77fa0eb38bd",
+    "match-situation-lifecycle.js": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+    "receiver-source-snapshot.js": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274",
+    "tests/pitch-sequence-state-production-integration-test.js": "7a53369d526de1c3a66b9d3e0c69f45f27f261bdb1d28c354f9831c0e8ae8327",
+    "tests/receiver-source-save-authorized-delta.cjs": "94a2cac6e155c3936ea2cd03f0d31e4e19feba87d53f87c4be5c3cc5aab28b82",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs": "e8f6a9bbdea182a6b73241d60d9c9bb54e4174fccf56dcdba05399904830504b",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs": "7bf28ed1f296feb61b64451982d72ab2c12d7ed719dd0ac30ceae3aaa26d7073"
+  }
+}

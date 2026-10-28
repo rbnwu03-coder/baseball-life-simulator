@@ -1,0 +1,36 @@
+{
+  "task": "Critical Regression Triage v0.1",
+  "createdAt": "2026-10-15T01:38:39.806Z",
+  "snippets": [
+    {
+      "name": "deterministicUnit",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.offensive-plate-approach.deterministicUnit",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/offensive-plate-approach.js",
+      "start_line": 73,
+      "end_line": 75,
+      "source_mode": "full",
+      "source": "  function deterministicUnit(identity, label) {\n    return stableHash(`${PITCH_SEED_NAMESPACE}|${identity}|${label}`) / 4294967296;\n  }\n",
+      "callers": 6,
+      "callees": 1,
+      "currentSourceVerified": true,
+      "rawSha256": "f3c2ae25fe261006a76e3cbdc583f7c8e2a45d45c20a98a623b36e651380b317"
+    },
+    {
+      "name": "createPlateAppearanceIdentity",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.offensive-plate-approach.createPlateAppearanceIdentity",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/offensive-plate-approach.js",
+      "start_line": 194,
+      "end_line": 196,
+      "source_mode": "full",
+      "source": "  function createPlateAppearanceIdentity(input = {}) {\n    return [input.matchId || \"match\", input.paId || input.momentId || \"pa\", input.batterId || \"player\", input.inning || 0, input.half || \"\"].join(\"|\");\n  }\n",
+      "callers": 1,
+      "callees": 0,
+      "currentSourceVerified": true,
+      "rawSha256": "f3c2ae25fe261006a76e3cbdc583f7c8e2a45d45c20a98a623b36e651380b317"
+    }
+  ],
+  "project": "E-meng-baseball_life_sim_semirefactor",
+  "tier": 2
+}

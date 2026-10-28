@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650">
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#9ebcc7"/><stop offset="1" stop-color="#e5dfbd"/></linearGradient>
+    <linearGradient id="grass" x2="0" y2="1"><stop stop-color="#728264"/><stop offset="1" stop-color="#344f3d"/></linearGradient>
+    <linearGradient id="dirt" x2="0" y2="1"><stop stop-color="#c0a07a"/><stop offset="1" stop-color="#907053"/></linearGradient>
+    <pattern id="seats" width="25" height="18" patternUnits="userSpaceOnUse"><rect width="25" height="18" fill="#717a73"/><path d="M0 17H25" stroke="#d4c9af" stroke-width="2"/><circle cx="7" cy="7" r="3" fill="#cbc5b1"/><circle cx="19" cy="8" r="3" fill="#424c48"/></pattern>
+    <pattern id="turf" width="1200" height="90" patternUnits="userSpaceOnUse"><rect width="1200" height="45" fill="#fff" opacity=".035"/></pattern>
+    <pattern id="soil" width="23" height="19" patternUnits="userSpaceOnUse"><path d="M2 4h3m8 10h4m-9 4h2" stroke="#493d32" stroke-opacity=".12"/></pattern>
+    <g id="tree"><path d="M0 110V40" stroke="#586254" stroke-width="7"/><path d="M-35 80-18 45-29 46-9 14-15 16 0-12 18 20 11 17 33 51 20 48 42 84Z" fill="#4f695b"/><path d="M-25 77-9 52-18 54 0 23 0 87Z" fill="#647c63"/></g>
+  </defs>
+  <rect width="1200" height="650" fill="url(#sky)"/>
+  <path d="M0 165 110 110 204 137 350 78 487 141 636 106 770 150 923 89 1086 142 1200 110V280H0Z" fill="#718b83" opacity=".5"/>
+  <g opacity=".9"><use href="#tree" x="35" y="123"/><use href="#tree" x="101" y="102"/><use href="#tree" x="180" y="130"/><use href="#tree" x="271" y="112"/><use href="#tree" x="340" y="125"/><use href="#tree" x="428" y="115"/><use href="#tree" x="520" y="135"/><use href="#tree" x="632" y="116"/><use href="#tree" x="746" y="128"/><use href="#tree" x="840" y="116"/><use href="#tree" x="935" y="129"/><use href="#tree" x="1025" y="102"/><use href="#tree" x="1120" y="117"/><use href="#tree" x="1190" y="124"/></g>
+  <g stroke="#7e8983" stroke-width="5"><path d="M92 35V280M1085 28V280"/><path d="M62 35h60M1055 28h60" stroke-width="12"/></g>
+  <path d="M0 222 365 260V330H0ZM1200 219 837 260V330H1200Z" fill="url(#seats)"/>
+  <path d="M0 250 365 278M0 285 365 299M1200 248 837 278M1200 283 837 299" stroke="#e4d9be" stroke-width="3" opacity=".65"/>
+  <path d="M0 320H1200V378H0Z" fill="#304d47"/><path d="M0 320H1200" stroke="#c0c0a1" stroke-width="4"/>
+  <rect x="458" y="218" width="435" height="104" rx="2" fill="#2c4140"/><rect x="470" y="230" width="411" height="80" fill="#374e49"/>
+  <path d="M480 248H872M480 274H872" stroke="#9da58a" stroke-opacity=".25"/><path d="M535 237V302M591 237V302M647 237V302M703 237V302M759 237V302M815 237V302" stroke="#9da58a" stroke-opacity=".15"/>
+  <rect y="358" width="1200" height="292" fill="url(#grass)"/><rect y="358" width="1200" height="292" fill="url(#turf)"/>
+  <path d="M0 590Q590 341 1200 590V650H0Z" fill="url(#dirt)"/>
+  <path d="m675 378 389 137-389 114-389-114Z" fill="#b69a76"/>
+  <path d="m675 408 306 107-306 85-306-85Z" fill="#64795a"/>
+  <ellipse cx="675" cy="455" rx="93" ry="25" fill="#97765a"/>
+  <ellipse cx="675" cy="450" rx="88" ry="22" fill="#b29a76"/>
+  <path d="M656 448H694" stroke="#e9e0c7" stroke-width="5"/>
+  <path d="m675 629-475-215M675 629l475-215" stroke="#e6ddc8" stroke-width="3" opacity=".8"/>
+  <path d="M609 574h-76v63h76M732 574h76v63h-76" fill="none" stroke="#e9dfc7" stroke-width="3" opacity=".65"/>
+  <path d="m658 611 34 0v14l-17 12-17-12Z" fill="#e7dfcc"/>
+  <rect y="360" width="1200" height="290" fill="url(#soil)"/>
+  <path d="M0 649H1200" stroke="#463f32" stroke-opacity=".3" stroke-width="2"/>
+</svg>

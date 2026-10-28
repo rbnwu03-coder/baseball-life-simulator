@@ -1,0 +1,125 @@
+{
+  "initialToolRun": {
+    "total": 19,
+    "passed": 10,
+    "failed": 9,
+    "reason": "New storage observer used reassignable shared oldSet variable and recursively called itself. New harness corrected; no production code changed."
+  },
+  "secondHarnessResult": {
+    "summary": {
+      "total": 19,
+      "passed": 15,
+      "failed": 4
+    },
+    "checks": [
+      {
+        "name": "ordinary Legacy path executes literal JSON.stringify(player), without serializer",
+        "status": "PASS"
+      },
+      {
+        "name": "ordinary Legacy adapter validation is called before the real write",
+        "status": "PASS"
+      },
+      {
+        "name": "source-only pending real Save / duplicate / cold preserves complete official state",
+        "status": "PASS"
+      },
+      {
+        "name": "source-only executed real Save / duplicate / cold preserves complete official state",
+        "status": "PASS"
+      },
+      {
+        "name": "source-only settled real Save / duplicate / cold preserves complete official state",
+        "status": "PASS"
+      },
+      {
+        "name": "genuine historical Legacy pending/executed/settled saves never backfill source",
+        "status": "PASS"
+      },
+      {
+        "name": "later ordinary Match retains version15 storage without live root mutation",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: unknown live version",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: unknown live format",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: missing source format",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: pin tamper",
+        "status": "FAIL",
+        "error": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r1-save-test.cjs:65:18\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r1-save-test.cjs:7:35)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r1-save-test.cjs:63:6)\n    at [stdin]:1:97\n    at runScriptInThisContext (node:internal/vm:219:10)\n    at node:internal/process/execution:451:12\n    at [stdin]-wrapper:6:24\n    at runScriptInContext (node:internal/process/execution:449:60)\n    at evalFunction (node:internal/process/execution:283:30)\n    at evalTypeScript (node:internal/process/execution:295:3)"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: physical tamper",
+        "status": "FAIL",
+        "error": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r1-save-test.cjs:65:18\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r1-save-test.cjs:7:35)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r1-save-test.cjs:63:6)\n    at [stdin]:1:97\n    at runScriptInThisContext (node:internal/vm:219:10)\n    at node:internal/process/execution:451:12\n    at [stdin]-wrapper:6:24\n    at runScriptInContext (node:internal/process/execution:449:60)\n    at evalFunction (node:internal/process/execution:283:30)\n    at evalTypeScript (node:internal/process/execution:295:3)"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: actor tamper",
+        "status": "FAIL",
+        "error": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r1-save-test.cjs:65:18\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r1-save-test.cjs:7:35)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r1-save-test.cjs:63:6)\n    at [stdin]:1:97\n    at runScriptInThisContext (node:internal/vm:219:10)\n    at node:internal/process/execution:451:12\n    at [stdin]-wrapper:6:24\n    at runScriptInContext (node:internal/process/execution:449:60)\n    at evalFunction (node:internal/process/execution:283:30)\n    at evalTypeScript (node:internal/process/execution:295:3)"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: sample tamper",
+        "status": "FAIL",
+        "error": "AssertionError [ERR_ASSERTION]: Missing expected exception.\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r1-save-test.cjs:65:18\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r1-save-test.cjs:7:35)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r1-save-test.cjs:63:6)\n    at [stdin]:1:97\n    at runScriptInThisContext (node:internal/vm:219:10)\n    at node:internal/process/execution:451:12\n    at [stdin]-wrapper:6:24\n    at runScriptInContext (node:internal/process/execution:449:60)\n    at evalFunction (node:internal/process/execution:283:30)\n    at evalTypeScript (node:internal/process/execution:295:3)"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: no adapter for source-only",
+        "status": "PASS"
+      },
+      {
+        "name": "ordinary unknown version also refuses storage",
+        "status": "PASS"
+      },
+      {
+        "name": "raw restore rejects erased format before normalization defaults",
+        "status": "PASS"
+      },
+      {
+        "name": "shared early-return guard cannot skip source pin validation",
+        "status": "PASS"
+      },
+      {
+        "name": "SAVE_VERSION15 / SAVE_KEY / effective Legacy literal unchanged",
+        "status": "PASS"
+      }
+    ],
+    "witnesses": [
+      {
+        "phase": "pending",
+        "saveVersion": 16,
+        "sourcePin": "fnv1a32:1641e9ec",
+        "duplicateWrites": 4,
+        "cold": "PASS",
+        "officialCandidateCalls": 0
+      },
+      {
+        "phase": "executed",
+        "saveVersion": 16,
+        "sourcePin": "fnv1a32:1641e9ec",
+        "duplicateWrites": 4,
+        "cold": "PASS",
+        "officialCandidateCalls": 0
+      },
+      {
+        "phase": "settled",
+        "saveVersion": 16,
+        "sourcePin": "fnv1a32:1641e9ec",
+        "duplicateWrites": 4,
+        "cold": "PASS",
+        "officialCandidateCalls": 0
+      }
+    ],
+    "limits": "Source-only Save metadata with existing Legacy caches; no authoritative v2 execution, source calibration or shadow integration acceptance."
+  },
+  "reason": "Four tamper attempts targeted deeply frozen live metadata; non-strict VM assignment was ignored. Serialized-clone tamper fixture required. No existing test/assertion/fixture or production threshold changed."
+}

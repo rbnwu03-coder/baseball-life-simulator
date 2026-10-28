@@ -1,0 +1,20 @@
+{
+  "file": "high-school-year-one-opportunity-two-integration-test.js",
+  "status": "FAIL",
+  "nodeAssertions": 29,
+  "customChecks": null,
+  "entry": true,
+  "elapsedMs": 263,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/high-school-year-one-opportunity-two-integration-test.js"
+  ],
+  "exitCode": 1,
+  "signal": null,
+  "stdout": "✓ 1. Match 1 正式產生 Opportunity N+1\n✓ 2. Opportunity 2 與 Opportunity 1 identity 不同\n✓ 3. Opportunity 2 直接進入 production follow-up event\n✓ 4. Match 2 直接重用既有 Opportunity 2 而非重抽\n✓ 5. Match 2 使用既有完整 Match Engine state\n✓ 6. Match 2 為 bounded evaluation/practice match\n✓ 7. Match 2 保持 selected school-year roster identity\n✓ 8. Match 2 保持 canonical incumbent actor identities\n✓ 9. Match 1 與 Match 2 各自保存最小 history\n✓ 10. 第二場產生第二筆 performance evidence\n✓ 11. 第二場 actual exposure 回填 Opportunity history\n✓ 12. 第二次 Competition Reassessment 已執行\n✓ 13. Bench 兩筆正向 production evidence 可升 Rotation\n✓ 14. Bench 正向 Match 1 改善 Opportunity 2 context\n✓ 15. Role change aftermath 即時顯示目前 Rotation\n✓ 16. Year journey 讀取起始 Bench 與結束 Rotation\n✓ 17. Match 2 pending save/reload 不 reroll\n✓ 18. 第二場完成後不再生成第三個高一 Opportunity\n✓ 19. Starter 第一筆負向結果進入 Opportunity 2\n✓ 20. Starter 兩筆負向 evidence production-reachable 降為 Rotation\n✓ 21. Demotion feedback 由 canonical reassessment reasons 產生\n✓ 22. Rotation 兩筆正向樣本仍依 canonical smoothing 留在 Rotation\n✓ 23. Rotation 正向 trajectory 保存 promotion pressure\n✓ 24. Rotation 正向 feedback 明示仍需下一筆正式證據\n✓ 25. 下一筆 qualifying evidence 已可沿 canonical 門檻自然升 Starter\n✓ 26. Mixed path 維持 Rotation\n✓ 27. Match 1 no appearance 不虛構負面 performance\n✓ 28. No-appearance 後仍有合法 Opportunity 2 consumer\n✓ 29. 兩次 no appearance 合法維持 Bench\n",
+  "stderr": "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs:27\r\n catch(error){state.assertions.thrown++;sample.returned=false;sample.errorName=error?.name;throw error;}\r\n                                                                                           ^\r\n\r\nAssertionError [ERR_ASSERTION]: 30. Call-home 明說未上場且不偽造場上選擇\r\n    at observedCall (E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs:26:26)\r\n    at Object.apply (E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs:39:12)\r\n    at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)\r\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:187:1)\r\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\r\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\r\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\r\n    at Module.<anonymous> (node:internal/modules/cjs/loader:1396:12)\r\n    at Module._load (E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs:47:22)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.19.0\r\n",
+  "error": null,
+  "timedOut": false
+}

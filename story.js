@@ -1157,7 +1157,7 @@ const highSchoolEvents = {
       const scout = match.completed
         ? `球探留下比賽編號、角色與「${match.outcome || "已完成任務"}」的可追蹤紀錄。`
         : "球探沒有下結論，只保留球隊提交的比賽名單。";
-      return `${scout}\n${nextOpportunity}\n\n外部對手入口：${rival.entryType || "observed"}\n${rival.encounter || "你從比賽紀錄上重新看見高橋的名字。"}\n高橋不是隊內名單的權威，也不會替你取得機會；他提供的是外部同世代標準。\n\n交流賽結果：${match.outcome || "未留下結果"}\n高二壓力：${rival.yearTwoPressure || "下一次正式任務必須證明這項用途能否重複。"}`;
+      return `${scout}\n${nextOpportunity}\n\n外部對手入口：${rival.entryType || "observed"}\n${getHighSchoolRivalEncounterFeedback(match)}\n高橋不是隊內名單的權威，也不會替你取得機會；他提供的是外部同世代標準。\n\n交流賽結果：${match.teamResult || "未留下結果"}。${getHighSchoolMatchPerformanceFeedback(match)}\n高二壓力：${rival.yearTwoPressure || "下一次正式任務必須證明這項用途能否重複。"}`;
     },
     choices: [
       C("繼續增加多位置與戰術價值", { observe: 1, responsibility: 1 }, ["high_school_commit_utility"], "你接受自己可能不是球星，卻能成為球隊很難取代的人。", { skillEffects: { baseballIQ: 2 }, highSchoolEffects: { scoutEvaluation: 1 } }),

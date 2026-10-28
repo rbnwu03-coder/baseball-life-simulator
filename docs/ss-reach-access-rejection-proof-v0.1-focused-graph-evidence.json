@@ -1,0 +1,357 @@
+{
+  "task": "SS Reach Access Rejection Proof v0.1",
+  "createdAt": "2026-10-15T13:27:52.756Z",
+  "project": "E-meng-baseball_life_sim_semirefactor",
+  "tier": "Tier 2 focused",
+  "generation": "2026-10-15T01:30:19Z",
+  "coordinateCaveat": "Prior script seven-line deletion makes stale graph coordinates insufficient; exact current source regions govern.",
+  "results": [
+    {
+      "key": "search0",
+      "data": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "label",
+          "lines",
+          "in",
+          "out"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-reach-secure-foundation",
+            "file": "defensive-reach-secure-foundation.js",
+            "rows": [
+              [
+                "binding",
+                "Function",
+                "19-28",
+                9,
+                1
+              ],
+              [
+                "demand",
+                "Function",
+                "29-46",
+                5,
+                3
+              ],
+              [
+                "projectAccess",
+                "Function",
+                "129-135",
+                1,
+                3
+              ],
+              [
+                "resolveReach",
+                "Function",
+                "53-71",
+                6,
+                8
+              ],
+              [
+                "variation",
+                "Function",
+                "47-52",
+                3,
+                1
+              ]
+            ]
+          }
+        ],
+        "total": 5,
+        "returned": 5,
+        "count": 5,
+        "has_more": false,
+        "truncated": false
+      }
+    },
+    {
+      "key": "owners0",
+      "data": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "label",
+          "lines",
+          "in",
+          "out"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "file": "script.js",
+            "rows": [
+              [
+                "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+                "Function",
+                "5160-5379",
+                1,
+                26
+              ],
+              [
+                "getHighSchoolPhysicalDefensePlayerContext",
+                "Function",
+                "5003-5023",
+                1,
+                6
+              ],
+              [
+                "getHighSchoolReachAccess",
+                "Function",
+                "4972-4986",
+                2,
+                6
+              ],
+              [
+                "prepareHighSchoolDefensiveMomentFromSimulation",
+                "Function",
+                "13263-13465",
+                1,
+                44
+              ]
+            ]
+          }
+        ],
+        "total": 4,
+        "returned": 4,
+        "count": 4,
+        "has_more": false,
+        "truncated": false
+      }
+    },
+    {
+      "key": "owners1",
+      "data": {
+        "function": "getHighSchoolReachAccess",
+        "direction": "both",
+        "callees_total": 2,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getOffensiveSimulationCapability",
+                  1
+                ],
+                [
+                  "getDefensiveSimulationCapability",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 2,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getHighSchoolPhysicalDefensePlayerContext",
+                  1
+                ],
+                [
+                  "getHighSchoolFlyBallDefenderCatchContext",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "owners2",
+      "data": {
+        "name": "resolveReach",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.defensive-reach-secure-foundation.resolveReach",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/defensive-reach-secure-foundation.js",
+        "start_line": 53,
+        "end_line": 71,
+        "source_mode": "full",
+        "source": "  function resolveReach(input = {}) {\n    const op = binding(input);\n    const identity = `${op.identity}|${op.primaryDefenderId}|reach-v1`;\n    const ballDemand = demand(op);\n    const caps = input.capabilities;\n    const inputs = { reaction: ability(caps.reaction), range: ability(caps.range), mobility: ability(caps.mobility ?? caps.range) };\n    const movement = inputs.range * 0.75 + inputs.mobility * 0.25;\n    const variationIdentity = `${op.executionIdentity || op.identity}|${op.primaryDefenderId}|reach-v1`;\n    const evidence = variation(\"reach\", variationIdentity, input.roll);\n    const margin = round(inputs.reaction * ballDemand.reactionWeight + movement * (1 - ballDemand.reactionWeight)\n      - ballDemand.reachDemand + evidence.adjustment);\n    return freeze({ version: VERSION, identity, opportunityIdentity: op.identity, physicalIdentity: op.physicalIdentity,\n      defenderId: op.primaryDefenderId, position: op.primaryPosition, supported: true,\n      authority: \"physicalOpportunity+activeDefender+reachCapabilities\",\n      reachDemand: ballDemand.reachDemand, reactionDemand: ballDemand.reactionDemand, movementDemand: ballDemand.movementDemand,\n      responsibilityClassification: op.responsibilityClassification, ballDemand, inputs, margin,\n      reached: margin >= 0, reachQuality: margin >= 1.25 ? \"cleanArrival\" : margin >= 0 ? \"stretchedArrival\" : \"notReached\",\n      variationEvidence: evidence });\n  }\n",
+        "callers": 6,
+        "callees": 6
+      }
+    },
+    {
+      "key": "owners3",
+      "data": {
+        "name": "projectAccess",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.defensive-reach-secure-foundation.projectAccess",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/defensive-reach-secure-foundation.js",
+        "start_line": 129,
+        "end_line": 135,
+        "source_mode": "full",
+        "source": "  function projectAccess(reach) {\n    const supported = reach?.supported === true && reach.reached === true;\n    const level = !supported ? \"unsupported\" : reach.reachQuality === \"cleanArrival\" ? \"favored\" : \"possible\";\n    return freeze({ supported, level, score: level === \"favored\" ? 3 : supported ? 2 : 0,\n      reason: supported ? \"canonicalReachArrival\" : \"canonicalReachUnavailable\", reachIdentity: reach?.identity || \"\",\n      reachResolution: reach ? copy(reach) : null });\n  }\n",
+        "callers": 1,
+        "callees": 2
+      }
+    },
+    {
+      "key": "final0",
+      "data": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "label",
+          "lines",
+          "in",
+          "out"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.batted-ball-ground-defense",
+            "file": "batted-ball-ground-defense.js",
+            "rows": [
+              [
+                "resolveGroundBallDefensiveAccess",
+                "Function",
+                "235-275",
+                2,
+                4
+              ]
+            ]
+          }
+        ],
+        "total": 1,
+        "returned": 1,
+        "count": 1,
+        "has_more": false,
+        "truncated": false
+      }
+    },
+    {
+      "key": "final1",
+      "data": {
+        "function": "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+        "direction": "both",
+        "callees_total": 14,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getHighSchoolMatchSimulationEntity",
+                  1
+                ],
+                [
+                  "createHighSchoolOffensiveTacticalIdentity",
+                  1
+                ],
+                [
+                  "getHighSchoolProvisionalOffensiveTacticalCapabilities",
+                  1
+                ],
+                [
+                  "getHighSchoolDefensiveOpportunity",
+                  1
+                ],
+                [
+                  "assertHighSchoolGroundParticipant",
+                  1
+                ],
+                [
+                  "createHighSchoolFirstBaseContext",
+                  1
+                ],
+                [
+                  "assertHighSchoolDetailedResponsibility",
+                  1
+                ],
+                [
+                  "getHighSchoolFlyBallDefenderCatchContext",
+                  1
+                ],
+                [
+                  "getHighSchoolReceiverSourceAdapter",
+                  1
+                ],
+                [
+                  "validateHighSchoolReceiverSourceMetadata",
+                  1
+                ],
+                [
+                  "physicalDefenderContext",
+                  1
+                ],
+                [
+                  "getDefensiveSimulationCapability",
+                  1
+                ],
+                [
+                  "isInfieldDecisionFamilyPosition",
+                  1
+                ],
+                [
+                  "getHighSchoolInfieldAssignmentPosition",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 1,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "prepareHighSchoolDefensiveMomentFromSimulation",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "key": "final2",
+      "data": {
+        "name": "resolveGroundBallDefensiveAccess",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.batted-ball-ground-defense.resolveGroundBallDefensiveAccess",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/batted-ball-ground-defense.js",
+        "start_line": 235,
+        "end_line": 275,
+        "source_mode": "full",
+        "source": "  function resolveGroundBallDefensiveAccess(input = {}) {\n    const truth = input.physicalTruth || {};\n    const defender = input.defenderContext || {};\n    const shortstop = defender.playerPosition === \"游擊手\";\n    const thirdBase = defender.playerPosition === \"三壘手\";\n    const firstBase = defender.playerPosition === \"一壘手\";\n    const opportunity = defender.defensiveOpportunity;\n    const classified = Boolean(Opportunity && [Opportunity.GROUND_TOPOLOGY_VERSION, Opportunity.FIRST_BASE_GROUND_TOPOLOGY_VERSION].includes(opportunity?.topologyVersion));\n    const responsibility = classified ? Opportunity.deriveGroundResponsibility(truth, opportunity.topologyVersion) : null;\n    const playerPosition = shortstop ? \"SS\" : thirdBase ? \"3B\" : firstBase ? \"1B\" : defender.playerPosition === \"二壘手\" ? \"2B\" : \"\";\n    const classificationMatches = responsibility && opportunity.supported\n      && opportunity.physicalIdentity === truth.identity\n      && JSON.stringify(opportunity.groundResponsibility) === JSON.stringify(responsibility)\n      && opportunity.primaryPosition === responsibility.primaryPosition;\n    const directionSupported = classified ? classificationMatches && responsibility.primaryPosition === playerPosition\n      : shortstop ? [\"leftSide\", \"middle\"].includes(truth.direction) : truth.direction === \"rightSide\";\n    const positionSupported = shortstop || defender.playerPosition === \"二壘手\" || (thirdBase || firstBase) && classified;\n    const classificationFacts = classified && classificationMatches ? {\n      topologyVersion: opportunity.topologyVersion, groundResponsibility: clone(responsibility)\n    } : {};\n    if (truth.ballType !== \"groundBall\" || !directionSupported || !positionSupported) {\n      return deepFreeze({ playerPosition: defender.playerPosition || \"\", level: \"unsupported\", supported: false, score: 0, reason: truth.direction === \"leftSide\" ? \"leftSideNoPlayerBallMagnet\" : \"unsupportedScope\" });\n    }\n    if (defender.reachAccess) return deepFreeze({ playerPosition: defender.playerPosition, ...clone(defender.reachAccess), ...classificationFacts });\n    const reaction = clamp(defender.reaction, 0, 20, 5);\n    const range = clamp(defender.range, 0, 20, 5);\n    const paceAdjustment = truth.pace === \"hard\" ? (reaction - 5) * 0.1\n      : truth.pace === \"weak\" ? (range - 5) * 0.1 - 0.2\n        : truth.pace === \"firm\" ? 0.25 : 0;\n    const score = clamp(2.2 + (reaction - 5) * 0.08 + (range - 5) * 0.08 + paceAdjustment, 0, 4, 0);\n    const level = score >= 3 ? \"favored\" : score >= 2 ? \"possible\" : score >= 1 ? \"poor\" : \"unsupported\";\n    return deepFreeze({\n      playerPosition: defender.playerPosition,\n      ...classificationFacts,\n      level,\n      supported: level !== \"unsupported\",\n      score: Math.round(score * 1000) / 1000,\n      reason: level === \"favored\" ? \"physicalAccessFavored\" : level === \"possible\" ? \"physicalAccessPossible\" : \"physicalAccessDifficult\",\n      inputs: { direction: truth.direction, pace: truth.pace, reaction, range }\n    });\n  }\n",
+        "callers": 2,
+        "callees": 3
+      }
+    }
+  ]
+}

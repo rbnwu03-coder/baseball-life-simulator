@@ -1,0 +1,268 @@
+{
+  "task": "SS Reachable Controlled Scenario v0.1",
+  "createdAt": "2026-10-15T14:13:42.008Z",
+  "sourceFiles": [
+    "docs/ss-reachable-controlled-scenario-v0.1-capture.cjs",
+    "docs/ss-reachable-controlled-scenario-v0.1-adapter.cjs",
+    "docs/ss-reachable-controlled-scenario-v0.1-observer.cjs",
+    "docs/ss-reachable-controlled-scenario-v0.1-proof.cjs",
+    "docs/ss-reachable-controlled-scenario-v0.1-replay.cjs",
+    "docs/ss-reachable-controlled-scenario-v0.1-fixture.cjs",
+    "docs/ss-reachable-controlled-scenario-v0.1-plan.cjs",
+    "docs/ss-reach-access-rejection-proof-v0.1-observer.cjs",
+    "tests/helpers/canonical-match-contract-context.cjs",
+    "tests/entry-safe-runner.cjs",
+    "tests/entry-safe-preload.cjs",
+    "tests/entry-safe-export-child.cjs"
+  ],
+  "productionBrowserGlobalFiles": [
+    "team-roster-foundation.js",
+    "team-strength-model.js",
+    "high-school-entry-roster-context.js",
+    "high-school-competition-foundation.js",
+    "match-context-foundation.js",
+    "competition-rules.js",
+    "high-school-schedule-opportunity.js",
+    "high-school-exchange-network.js",
+    "high-school-friendly-invitation-producer.js",
+    "high-school-training-camp-producer.js",
+    "high-school-match-opportunity-generation.js",
+    "high-school-opportunity-probability.js",
+    "high-school-opportunity-selection.js",
+    "high-school-relationship-temporal-authority.js",
+    "high-school-relationship-recency.js",
+    "match-game-record.js",
+    "high-school-competition-evidence.js",
+    "county-selection-opportunity.js",
+    "national-selection-pipeline.js",
+    "player.js",
+    "current-state-boundary.js",
+    "time-boundary.js",
+    "relationship-boundary.js",
+    "evaluation-registry.js",
+    "coach-evaluation-boundary.js",
+    "narrative-condition-boundary.js",
+    "evaluation-registry-bootstrap.js",
+    "decision-flow.js",
+    "day-completion-flow.js",
+    "relationship-flow.js",
+    "coach-response-flow.js",
+    "narrative-condition-flow.js",
+    "competition-presentation.js",
+    "baseball-gameplay-prototype-utils.js",
+    "baseball-defense-prototype.js",
+    "baseball-offense-prototype.js",
+    "pitcher-mental-state.js",
+    "pitcher-process-state.js",
+    "pitch-sequencing.js",
+    "pitcher-catcher-tactical-integration.js",
+    "batter-anticipation.js",
+    "batted-ball-physical.js",
+    "batted-ball-outcome-mapping.js",
+    "defensive-opportunity-foundation.js",
+    "defensive-reach-secure-foundation.js",
+    "offensive-plate-approach.js",
+    "pitch-observation-foundation.js",
+    "pitch-sequence-state-foundation.js",
+    "pitch-tactical-interpretation-foundation.js",
+    "pitch-tactical-decision-foundation.js",
+    "pitch-tactical-decision-production-adapter.js",
+    "offensive-tactical-opportunity.js",
+    "offensive-tactical-decision.js",
+    "offensive-tactical-action.js",
+    "offensive-bunt-count-rules.js",
+    "offensive-bunt-execution.js",
+    "force-advancement.js",
+    "defensive-decision-throw-foundation.js",
+    "offensive-bunt-defensive-handoff.js",
+    "defensive-runner-throw-settlement-foundation.js",
+    "batted-ball-ground-defense.js",
+    "batted-ball-line-drive-defense.js",
+    "batted-ball-fly-ball-defense.js",
+    "batted-ball-tag-up-execution.js",
+    "receiver-source-snapshot.js",
+    "match-situation-lifecycle.js",
+    "plate-decision-foundation.js",
+    "baseball-gameplay-integration.js",
+    "baseball-training-resolver.js",
+    "playing-time-game-exposure.js",
+    "match-experience-development.js",
+    "high-school-competition-reassessment.js",
+    "high-school-year-transition.js",
+    "high-school-career-evaluation.js",
+    "high-school-career-offers.js",
+    "match-development-settlement-presentation.js",
+    "career-spine-contract.js",
+    "career-transition-resolver.js",
+    "career-transition-commit.js",
+    "career-transition-runtime-resolver.js",
+    "career-transition-progression.js",
+    "career-development-runtime-resolver.js",
+    "career-development-progression.js",
+    "career-age22-outcome-resolver.js",
+    "career-save-admission.js",
+    "npc.js",
+    "coach.js",
+    "rival.js",
+    "story.js",
+    "save.js",
+    "ai-plate-appearance-outcome.js",
+    "script.js"
+  ],
+  "dependencies": [
+    {
+      "file": "docs/ss-reachable-controlled-scenario-v0.1-capture.cjs",
+      "sha256": "4b5a51f9dcbc594076020344912b559c98de3906b158cfd6ca5f896d5137a9f3",
+      "requires": [
+        "node:fs",
+        "node:path",
+        "node:child_process",
+        "node:crypto",
+        "node:assert/strict",
+        "node:module"
+      ]
+    },
+    {
+      "file": "docs/ss-reachable-controlled-scenario-v0.1-adapter.cjs",
+      "sha256": "f544273cf12f8fe3ea4591995bdaa22edf35cadb4bc479a7c3997fff40685942",
+      "requires": [
+        "node:path",
+        "node:module",
+        "node:assert/strict",
+        "./ss-reachable-controlled-scenario-v0.1-capture.cjs",
+        "./ss-reachable-controlled-scenario-v0.1-observer.cjs"
+      ]
+    },
+    {
+      "file": "docs/ss-reachable-controlled-scenario-v0.1-observer.cjs",
+      "sha256": "bbbd10716dffa7b3021ba1031117ec51294c209952e71d1cfc6495b56e691c73",
+      "requires": [
+        "./ss-reach-access-rejection-proof-v0.1-observer.cjs"
+      ]
+    },
+    {
+      "file": "docs/ss-reachable-controlled-scenario-v0.1-proof.cjs",
+      "sha256": "c523081a2602c10074096cd896aa85f6c40d2bc695a4d8a8f7c07ded1b05192b",
+      "requires": [
+        "node:fs",
+        "node:path",
+        "node:assert/strict",
+        "./ss-reachable-controlled-scenario-v0.1-capture.cjs",
+        "../tests/helpers/canonical-match-contract-context.cjs",
+        "./ss-reachable-controlled-scenario-v0.1-adapter.cjs"
+      ]
+    },
+    {
+      "file": "docs/ss-reachable-controlled-scenario-v0.1-replay.cjs",
+      "sha256": "2697da2e6942981493593bc6d2a4dd9b9fbfbb239ccbac5e8b71791b031e2a32",
+      "requires": [
+        "./ss-reachable-controlled-scenario-v0.1-proof.cjs"
+      ]
+    },
+    {
+      "file": "docs/ss-reachable-controlled-scenario-v0.1-fixture.cjs",
+      "sha256": "4fdff09b377256e20b4cb62a6a7ac43ce2477f3feb4d492fb2070051dea20851",
+      "requires": [
+        "node:assert/strict",
+        "./ss-reachable-controlled-scenario-v0.1-capture.cjs",
+        "../tests/helpers/canonical-match-contract-context.cjs"
+      ]
+    },
+    {
+      "file": "docs/ss-reachable-controlled-scenario-v0.1-plan.cjs",
+      "sha256": "5cf25404a015733d175bfc6ee742fb4d6be1f44e9e277e948e8d80e55849779f",
+      "requires": [
+        "node:assert/strict",
+        "node:path",
+        "./ss-reachable-controlled-scenario-v0.1-capture.cjs",
+        "./ss-reachable-controlled-scenario-v0.1-adapter.cjs",
+        "./ss-reachable-controlled-scenario-v0.1-observer.cjs",
+        "./ss-reachable-controlled-scenario-v0.1-proof.cjs",
+        "../tests/helpers/canonical-match-contract-context.cjs"
+      ]
+    },
+    {
+      "file": "docs/ss-reach-access-rejection-proof-v0.1-observer.cjs",
+      "sha256": "16d2dc252335200c4efbab692b0914f1663d8c4abbb65da9aea9b9dcaa8b9e07",
+      "requires": []
+    },
+    {
+      "file": "tests/helpers/canonical-match-contract-context.cjs",
+      "sha256": "b09b35cf404c100b6f1d00ff6b8e67e38093fd6d13a22e788413f3bb7c608fb5",
+      "requires": [
+        "node:fs",
+        "node:path",
+        "node:vm",
+        "node:crypto"
+      ]
+    },
+    {
+      "file": "tests/entry-safe-runner.cjs",
+      "sha256": "91659f28bc718eb21569be4a64bfce61a6518b5867a5ca629e5484e15a54a6d0",
+      "requires": [
+        "node:fs",
+        "node:path",
+        "node:child_process",
+        "node:crypto"
+      ]
+    },
+    {
+      "file": "tests/entry-safe-preload.cjs",
+      "sha256": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+      "requires": [
+        "node:fs",
+        "node:path",
+        "node:module",
+        "node:child_process",
+        "node:crypto",
+        "node:url",
+        "node:inspector"
+      ]
+    },
+    {
+      "file": "tests/entry-safe-export-child.cjs",
+      "sha256": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379",
+      "requires": [
+        "./entry-safe-preload.cjs"
+      ]
+    }
+  ],
+  "nodeBuiltins": [
+    "node:fs",
+    "node:path",
+    "node:crypto",
+    "node:child_process",
+    "node:module",
+    "node:assert/strict",
+    "node:vm",
+    "node:url",
+    "node:inspector"
+  ],
+  "dataInputs": [
+    "docs/ss-reachable-controlled-scenario-v0.1-fixture-input-evidence.json",
+    "docs/ss-reachable-controlled-scenario-v0.1-fixture-compatibility-evidence.json",
+    "docs/ss-reachable-controlled-scenario-v0.1-plan-evidence.json",
+    "docs/ss-reachable-controlled-scenario-v0.1-entry-profile-evidence.json",
+    "docs/ss-reachable-controlled-scenario-v0.1-baseline-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json",
+    "docs/ss-reach-access-rejection-proof-v0.1-closeout-evidence.json",
+    "docs/ss-reach-access-rejection-proof-v0.1-delivery-evidence.json"
+  ],
+  "browserMode": "No module/require; UMD CommonJS branches inactive",
+  "unknownDependencyPolicy": "Stop before execution",
+  "protectedExcluded": [
+    "tests/fast-check-smoke-test.cjs",
+    "install.ps1",
+    "docs/first-base-sprint-3-focused-development-evidence.json",
+    "docs/infield-baseball-logic-audit-architecture-evidence.json",
+    "docs/infield-baseball-logic-audit-evidence.json",
+    "docs/infield-baseball-logic-audit-runner.cjs",
+    "docs/infield-baseball-logic-validation-audit-v1.md",
+    "docs/infield-scorer-recovery-sprint-5-green-evidence.json",
+    "docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json",
+    "docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json",
+    "docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json",
+    "docs/infield-scorer-recovery-sprint-5-validation.json"
+  ],
+  "gameplayExecutions": 0
+}

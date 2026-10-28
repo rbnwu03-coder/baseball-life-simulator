@@ -1,0 +1,184 @@
+{
+  "phase": "Source Freeze Contract Reconciliation v0.1 Phase B",
+  "createdAt": "2026-10-14T14:54:18.956Z",
+  "evidence": "docs/test-infrastructure-sprint-0.1-phase-b-save-v1-evidence.json",
+  "status": "PASS",
+  "summary": {
+    "total": 23,
+    "passed": 23,
+    "failed": 0
+  },
+  "negative": {
+    "total": 21,
+    "passed": 21,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "name": "current Save equals pinned source plus the three reviewed exact patches",
+      "negative": false,
+      "status": "PASS"
+    },
+    {
+      "name": "CRLF normalization preserves the same original authority",
+      "negative": false,
+      "status": "PASS"
+    },
+    {
+      "name": "frozen original without required Source safety is not the new authorized contract",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "remove Raw Guard FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "move Raw Guard after defaults FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "move Raw Guard after merge FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "remove ordinary pre-write validation FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "remove source pre-write validation/detached serialization FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "change Legacy Storage Writer FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "change SAVE_KEY FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "allow unknown source version fallback FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "downgrade Source16 during normalization FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "remove adapter-unavailable fail-closed FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "modify non-authorized deleteSave FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "skip loadGame career admission FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "commit Player before candidate admission FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "add second Storage Writer FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "add hidden Save hook outside reviewed hunks FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "adapter acquires Storage Writer FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "adapter acquires RNG FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "adapter acquires candidate execution FAIL",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "unreviewed adapter branch cannot evade supplemental source freeze",
+      "negative": true,
+      "status": "PASS"
+    },
+    {
+      "name": "changing original pinned authority FAIL",
+      "negative": true,
+      "status": "PASS"
+    }
+  ],
+  "existingCheckerHash": "94a2cac6e155c3936ea2cd03f0d31e4e19feba87d53f87c4be5c3cc5aab28b82",
+  "originalStatuses": [
+    {
+      "file": "tests/pitch-tactical-decision-production-integration-test.js",
+      "status": "FAIL",
+      "priorEvidence": {
+        "status": "FAIL",
+        "evidence": "docs/test-reliability-audit-v0.1-known-failure-replays-evidence.json",
+        "exitCode": 1,
+        "elapsedMs": 4159.3637,
+        "command": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "-e",
+          "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+          "E:\\meng\\baseball_life_sim_semirefactor\\tests\\pitch-tactical-decision-production-integration-test.js"
+        ],
+        "primaryFailure": "AssertionError [ERR_ASSERTION]: save.js"
+      }
+    },
+    {
+      "file": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "status": "UNVERIFIED",
+      "priorEvidence": null
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "status": "FAIL",
+      "priorEvidence": {
+        "status": "FAIL",
+        "evidence": "docs/test-reliability-audit-v0.1-entry-buffer-replays-evidence.json",
+        "exitCode": 1,
+        "elapsedMs": 12973.129,
+        "command": [
+          "C:\\Program Files\\nodejs\\node.exe",
+          "tests/pitch-tactical-decision-production-adapter-integration-test.js"
+        ],
+        "primaryFailure": "AssertionError [ERR_ASSERTION]: save.js"
+      }
+    },
+    {
+      "file": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "status": "UNVERIFIED",
+      "priorEvidence": null
+    },
+    {
+      "file": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "status": "UNVERIFIED",
+      "priorEvidence": null
+    }
+  ],
+  "passed": true
+}

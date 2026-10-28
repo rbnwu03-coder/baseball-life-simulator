@@ -1,0 +1,53 @@
+{
+  "sprint": "10A.3b-R4",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "createdAt": "2026-10-14T05:07:26.325Z",
+  "node": "v24.19.0",
+  "result": {
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    "expectedRed": true,
+    "result": {
+      "file": "tests/bbp-b1-ground-ball-production-integration-test.js",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/bbp-b1-ground-ball-production-integration-test.js"
+      ],
+      "cwd": "E:\\meng\\baseball_life_sim_semirefactor",
+      "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "nodeVersion": "v24.19.0",
+      "timeoutMs": 120000,
+      "maxBuffer": 16000000,
+      "environment": {
+        "NODE_OPTIONS": null,
+        "NODE_PATH": null,
+        "TZ": null
+      },
+      "elapsedMs": 86.6015,
+      "exitCode": 1,
+      "signal": null,
+      "error": null,
+      "stdout": "",
+      "stderr": "script.js:5337\r\n  const sourceSs = sourceRoster && TeamRosterFoundation.getCurrentDefender(sourceRoster, \"SS\");\r\n                                   ^\r\n\r\nReferenceError: TeamRosterFoundation is not defined\r\n    at ensureHighSchoolOrdinaryGroundBallInPlayHandoff (script.js:5337:36)\r\n    at prepareHighSchoolDefensiveMomentFromSimulation (script.js:13299:7)\r\n    at __bbpB1Prepare (evalmachine.<anonymous>:18:17)\r\n    at evalmachine.<anonymous>:1:17\r\n    at evalmachine.<anonymous>:4:6\r\n    at Script.runInContext (node:vm:149:12)\r\n    at Object.runInContext (node:vm:301:6)\r\n    at evaluate (E:\\meng\\baseball_life_sim_semirefactor\\tests\\bbp-b1-ground-ball-production-integration-test.js:34:35)\r\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\bbp-b1-ground-ball-production-integration-test.js:58:31)\r\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\r\n\r\nNode.js v24.19.0\r\n",
+      "sourceHash": "c2e4b0cdf315d29ac9af2dc7cce6a1c9645f1e1ca67f9d521bce603d0a395036"
+    },
+    "scriptHash": "fe0cbf4b3e8299bc376e8eafbe5f9b9e53537e78ea47fece976e7c7262ab4a1a",
+    "testUnchanged": true
+  },
+  "safety": {
+    "changedExistingPaths": [],
+    "preservedHashCount": 825,
+    "protectedMetadataUnchanged": true,
+    "protectedContentReadOrHashed": false,
+    "git": {
+      "branch": "main",
+      "head": "ab3117653945de0b7013636187c446276a96e634",
+      "originMain": "ab3117653945de0b7013636187c446276a96e634",
+      "index": "",
+      "status": " M index.html\n M match-situation-lifecycle.js\n M save.js\n M script.js\n M tests/fast-check-smoke-test.cjs\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/infield-baseball-logic-audit-architecture-evidence.json\n?? docs/infield-baseball-logic-audit-evidence.json\n?? docs/infield-baseball-logic-audit-runner.cjs\n?? docs/infield-baseball-logic-validation-audit-v1.md\n?? docs/infield-scorer-recovery-sprint-5-green-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json\n?? docs/infield-scorer-recovery-sprint-5-validation.json\n?? docs/receiver-execution-v2-production-snapshot-save-guard-sprint-10a3b.md\n?? docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-lifecycle-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-observed-validation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-current-source-verification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-initial-test-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r1-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-timeout-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-architecture-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout.md\n?? docs/receiver-execution-v2-sprint-10a3b-r2-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-policy-specification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-extra-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gradient-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-guard-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r3-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-original-validator.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-reproduction-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-before-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-related-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-evidence.json\n?? install.ps1\n?? receiver-source-snapshot.js\n?? tests/receiver-execution-v2-production-snapshot-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-harness.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-closeout.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-source-review.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs\n"
+    }
+  }
+}

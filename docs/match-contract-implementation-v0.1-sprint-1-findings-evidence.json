@@ -1,0 +1,1179 @@
+{
+  "task": "Match Contract Implementation v0.1 — Sprint 1",
+  "createdAt": "2026-10-15T06:50:34.583Z",
+  "formalAcceptance": {
+    "task": "Match Contract Implementation v0.1 — Sprint 1",
+    "createdAt": "2026-10-15T06:47:57.720Z",
+    "results": [
+      {
+        "label": "canonical",
+        "file": "tests/canonical-match-regression-integration-test.cjs",
+        "status": "PASS",
+        "exitCode": 0,
+        "elapsedMs": 891.007,
+        "entryVerified": true,
+        "sourceStable": true,
+        "successfulNodeAssertions": 2668,
+        "evidence": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-canonical-evidence.json",
+        "witness": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-canonical-evidence-assertions.json"
+      },
+      {
+        "label": "routine",
+        "file": "tests/routine-commentary-contract-test.cjs",
+        "status": "PASS",
+        "exitCode": 0,
+        "elapsedMs": 163.3458,
+        "entryVerified": true,
+        "sourceStable": true,
+        "successfulNodeAssertions": 13,
+        "evidence": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-routine-evidence.json",
+        "witness": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-routine-evidence-assertions.json"
+      },
+      {
+        "label": "match-game-record",
+        "file": "tests/match-full-game-record-test.js",
+        "status": "PASS",
+        "exitCode": 0,
+        "elapsedMs": 1036.7505,
+        "entryVerified": true,
+        "sourceStable": true,
+        "successfulNodeAssertions": 13,
+        "evidence": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-match-game-record-evidence.json",
+        "witness": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-match-game-record-evidence-assertions.json"
+      },
+      {
+        "label": "ground-settlement",
+        "file": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+        "status": "PASS",
+        "exitCode": 0,
+        "elapsedMs": 2323.1965,
+        "entryVerified": true,
+        "sourceStable": true,
+        "successfulNodeAssertions": 60,
+        "evidence": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-ground-settlement-evidence.json",
+        "witness": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-ground-settlement-evidence-assertions.json"
+      }
+    ],
+    "standaloneChildren": 4,
+    "newCanonicalFullGames": 4,
+    "newCanonicalNamedChecks": 50,
+    "newRoutineOriginalAssertionChecks": 1,
+    "existingRecordNamedChecks": 13,
+    "existingGroundSettlementNamedChecks": 26,
+    "totalNamedChecks": 90,
+    "originalFull38SuiteInvocations": 0,
+    "original36Verdict": "Historical FAIL preserved; not executed",
+    "S3": "UNVERIFIED",
+    "snapshot": "KNOWN CONTRACT GAP",
+    "readyForCommit": "NO",
+    "readyForSprint10B": "NO",
+    "receiverV2": "DISABLED"
+  },
+  "canonicalSummary": {
+    "suite": "canonical-match-regression",
+    "passed": 50,
+    "failed": 0,
+    "fullGames": 4,
+    "results": [
+      {
+        "seed": 88221,
+        "status": "PASS",
+        "fixture": "legal sixth-inning SS substitute",
+        "runs": 2,
+        "ticks": 110,
+        "score": {
+          "home": 1,
+          "away": 6
+        },
+        "completedIds": [
+          "hs_y1_match_moment_1"
+        ],
+        "defenseCreated": 0,
+        "defenseCompleted": 0,
+        "hashes": {
+          "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+          "initialMatch": "2cb25dd2fd1483a5b3b357edb70958a65a80b4c8f2e076d66551cce15ffcbb92",
+          "record": "abb6ee6487c8f39a3e3de3afe945f2494a374d9b78d6c6a6a358c9808dd6cf92",
+          "log": "2be47a93cf9e5d85831de8067154a47009ff617bae49ab2bc150812e9c5b0e2e",
+          "decisionSequence": "65fcb545854cd4b89f113ff7060eadd0e7c9b0b86aefe780450722ce4bd07226"
+        },
+        "snapshot": "KNOWN CONTRACT GAP",
+        "replay": true
+      },
+      {
+        "seed": 88222,
+        "status": "PASS",
+        "fixture": "legal sixth-inning SS substitute",
+        "runs": 2,
+        "ticks": 107,
+        "score": {
+          "home": 1,
+          "away": 3
+        },
+        "completedIds": [
+          "hs_y1_match_moment_1"
+        ],
+        "defenseCreated": 0,
+        "defenseCompleted": 0,
+        "hashes": {
+          "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+          "initialMatch": "58459bdc12468fc9143bf1f711a19e1f8cebedf273f8ca9c0037f98006cc2084",
+          "record": "6af67e71aba581ac84fc5b215d6af1d9758f14852f8a1282081023a26d2f1ebc",
+          "log": "96679cf657a33a5e840ce74d437ed657b95d2cc35867be2000fe9b82b82a0d4a",
+          "decisionSequence": "ed259ebfd8344db8fb2f51d5421338b9aa0b1c05765b3b7233710e1db2aab227"
+        },
+        "snapshot": "KNOWN CONTRACT GAP",
+        "replay": true
+      }
+    ],
+    "S3": "UNVERIFIED",
+    "SSStartingAdmission": "UNVERIFIED",
+    "nonzeroDefensiveMoment": "UNVERIFIED",
+    "snapshot": "KNOWN CONTRACT GAP",
+    "original36": "NOT EXECUTED / historical verdict unchanged"
+  },
+  "games": [
+    {
+      "seed": 88221,
+      "status": "CONFIRMED / formal new suite PASS",
+      "fixture": "legal sixth-inning SS substitute",
+      "entry": {
+        "accepted": true,
+        "selection": {
+          "ok": true,
+          "existing": false,
+          "selectedSchoolId": "school-development-29d536a2",
+          "context": {
+            "schoolId": "school-development-29d536a2",
+            "schoolName": "森原學園",
+            "schoolStandard": "development",
+            "schoolTier": "development",
+            "schoolYearRosterIdentity": {
+              "version": "high-school-entry-roster-context-v1",
+              "identity": "school-development-29d536a2|hs-year-1-age-16|roster-69587b4f",
+              "schoolId": "school-development-29d536a2",
+              "schoolStandard": "development",
+              "yearIdentity": "hs-year-1-age-16",
+              "rosterGenerationSeed": "roster-69587b4f"
+            },
+            "yearIdentity": "hs-year-1-age-16",
+            "rosterGenerationSeed": "roster-69587b4f",
+            "positionNeed": "high",
+            "positionCompetitionContext": {
+              "position": "SS",
+              "starterId": "school-development-29d536a2-player-06",
+              "starterCapability": 4.85,
+              "competitorIds": [
+                "school-development-29d536a2-player-06",
+                "school-development-29d536a2-player-12",
+                "school-development-29d536a2-player-13"
+              ],
+              "benchCompetitorIds": [
+                "school-development-29d536a2-player-12",
+                "school-development-29d536a2-player-13"
+              ],
+              "competitorCount": 3,
+              "benchCapabilities": [
+                2.978,
+                3.928
+              ],
+              "benchAverageCapability": 3.453,
+              "positionNeed": "high",
+              "playerCapability": 3.45,
+              "playerRelativeGap": -1.4,
+              "competitionDensity": "medium"
+            },
+            "trainingQuality": "limited",
+            "competitionDepth": "low",
+            "matchCompetitionLevel": "lowMedium",
+            "playingTimeOpportunity": "high",
+            "recruitingPreference": "defenseFirst",
+            "coachProfile": {
+              "coachId": "coach-f4dee1cc",
+              "coachStyle": "fundamentals"
+            },
+            "projectedRole": "rotationCandidate"
+          }
+        },
+        "schoolId": "school-development-29d536a2",
+        "invitationIndex": 0,
+        "age": 16,
+        "primaryPosition": "游擊手",
+        "invitationValidation": {
+          "ok": true,
+          "errors": [],
+          "diversity": {
+            "roleCategories": 2,
+            "competitionDepthCategories": 2,
+            "trainingQualityCategories": 2,
+            "tierCategories": 2,
+            "mechanicalSignatures": 4,
+            "roleDiversity": true,
+            "competitionDiversity": true,
+            "environmentDiversity": true,
+            "tierDiversity": true,
+            "noDominantDuplicate": true
+          }
+        },
+        "capabilityValidation": {
+          "ok": true,
+          "errors": []
+        },
+        "abilitiesUnchanged": true,
+        "pendingSeedAfterPrepare": 0,
+        "globals": {
+          "playingTime": "object",
+          "roster": "object",
+          "entryRoster": "object",
+          "record": "object"
+        },
+        "initialState": {
+          "inning": 1,
+          "half": "上",
+          "outs": 0,
+          "scores": {
+            "home": 0,
+            "away": 0
+          },
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "phase": "full_match_flow",
+          "domain": "flow",
+          "currentMomentId": "hs_y1_match_moment_1",
+          "playerSide": "home",
+          "offenseTeam": "away",
+          "currentBatter": "regional-power-school-player-07",
+          "actualBatter": "regional-power-school-player-07",
+          "status": "bench",
+          "entryCompleted": false,
+          "slot": -1,
+          "assignment": "",
+          "playerInLineup": false,
+          "playerOnBench": true,
+          "actualSS": "school-development-29d536a2-player-06",
+          "completedIds": [],
+          "logCount": 1,
+          "integrity": []
+        }
+      },
+      "initialState": {
+        "inning": 1,
+        "half": "上",
+        "outs": 0,
+        "scores": {
+          "home": 0,
+          "away": 0
+        },
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "phase": "full_match_flow",
+        "domain": "flow",
+        "currentMomentId": "hs_y1_match_moment_1",
+        "playerSide": "home",
+        "offenseTeam": "away",
+        "currentBatter": "regional-power-school-player-07",
+        "actualBatter": "regional-power-school-player-07",
+        "status": "bench",
+        "entryCompleted": false,
+        "slot": -1,
+        "assignment": "",
+        "playerInLineup": false,
+        "playerOnBench": true,
+        "actualSS": "school-development-29d536a2-player-06",
+        "completedIds": [],
+        "logCount": 1,
+        "integrity": []
+      },
+      "actualEntry": {
+        "sequence": 85,
+        "presentationImportance": "attention",
+        "type": "playerEntry",
+        "inning": 6,
+        "half": "下",
+        "lineupSlot": 7,
+        "replacedPlayerId": "school-development-29d536a2-player-06",
+        "plannedAppearanceType": "lateGameAppearance",
+        "assignment": "壘上無人、1 出局；你從板凳進入第 8 棒。",
+        "outs": 1,
+        "scores": {
+          "home": 1,
+          "away": 5
+        },
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "presentationSnapshot": {
+          "inning": 6,
+          "half": "下",
+          "outs": 1,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 5
+          },
+          "lineScoreRevealHalfIndex": 11,
+          "assignment": "壘上無人、1 出局；你從板凳進入第 8 棒。",
+          "position": "游擊手",
+          "currentBatter": "player",
+          "battingOrderSlot": 7
+        }
+      },
+      "finalState": {
+        "inning": 7,
+        "half": "終",
+        "outs": 3,
+        "scores": {
+          "home": 1,
+          "away": 6
+        },
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "phase": "complete",
+        "domain": "complete",
+        "currentMomentId": "",
+        "playerSide": "home",
+        "offenseTeam": "home",
+        "currentBatter": "school-development-29d536a2-player-03",
+        "actualBatter": "school-development-29d536a2-player-03",
+        "status": "substitute",
+        "entryCompleted": true,
+        "slot": 7,
+        "assignment": "游擊手",
+        "playerInLineup": true,
+        "playerOnBench": false,
+        "actualSS": "player",
+        "completedIds": [
+          "hs_y1_match_moment_1"
+        ],
+        "logCount": 119,
+        "integrity": []
+      },
+      "ticks": 110,
+      "stateObservations": 220,
+      "score": {
+        "home": 1,
+        "away": 6
+      },
+      "playerPA": 1,
+      "createdDecisions": 1,
+      "completedIds": [
+        "hs_y1_match_moment_1"
+      ],
+      "defenseCreated": 0,
+      "defenseCompleted": 0,
+      "record": {
+        "status": "final",
+        "integrity": true,
+        "totals": {
+          "away": {
+            "runs": 6,
+            "hits": 12,
+            "errors": 0
+          },
+          "home": {
+            "runs": 1,
+            "hits": 8,
+            "errors": 0
+          }
+        },
+        "result": {
+          "winnerTeamId": "regional-power-school",
+          "loserTeamId": "school-development-29d536a2",
+          "finalScore": {
+            "away": 6,
+            "home": 1
+          },
+          "tie": false
+        },
+        "eventRefs": 119,
+        "logEvents": 119
+      },
+      "replay": {
+        "fixture": true,
+        "initialMatch": true,
+        "record": true,
+        "log": true,
+        "decisionSequence": true,
+        "decisionArrayDeepEqual": true
+      },
+      "hashes": {
+        "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+        "initialMatch": "2cb25dd2fd1483a5b3b357edb70958a65a80b4c8f2e076d66551cce15ffcbb92",
+        "record": "abb6ee6487c8f39a3e3de3afe945f2494a374d9b78d6c6a6a358c9808dd6cf92",
+        "log": "2be47a93cf9e5d85831de8067154a47009ff617bae49ab2bc150812e9c5b0e2e",
+        "decisionSequence": "65fcb545854cd4b89f113ff7060eadd0e7c9b0b86aefe780450722ce4bd07226"
+      },
+      "priorEvidenceByteParity": {
+        "fixture": true,
+        "initialMatch": true,
+        "record": true,
+        "log": true
+      },
+      "publicDuplicates": {
+        "decisions": [
+          {
+            "momentId": "hs_y1_match_moment_1",
+            "decision": "zone",
+            "returned": false,
+            "fullPlayerUnchanged": true
+          }
+        ],
+        "settlement": {
+          "returns": [
+            false,
+            false,
+            false
+          ],
+          "fullPlayerUnchanged": true
+        }
+      },
+      "saveMemory": {
+        "recordIntegrity": true,
+        "requiredFieldsRetained": true,
+        "realBrowserStorageReload": false
+      },
+      "career": {
+        "actualExposure": {
+          "matchId": "hs-y1-autumn-exhibition",
+          "participated": true,
+          "started": false,
+          "appearanceType": "lateGameAppearance",
+          "entryInning": 6,
+          "exitInning": 7,
+          "defensiveInnings": 1,
+          "plateAppearances": 1,
+          "role": "starter"
+        },
+        "gameExposure": {
+          "appearanceType": "lateGameAppearance",
+          "defensiveInnings": 1,
+          "plateAppearances": 1
+        },
+        "evaluation": {
+          "started": false,
+          "enteredGame": true,
+          "noAppearance": false,
+          "appearanceType": "lateGameAppearance",
+          "plateAppearances": 1,
+          "defensiveInnings": 1
+        },
+        "sampleCount": 1,
+        "appliedMatchIdentities": [
+          "hs-y1-autumn-exhibition"
+        ],
+        "experienceSettled": true,
+        "historyEntries": 1,
+        "historyActualExposure": {
+          "appearanceType": "lateGameAppearance",
+          "plateAppearances": 1,
+          "defensiveInnings": 1,
+          "participated": true
+        }
+      },
+      "snapshot": {
+        "status": "KNOWN CONTRACT GAP",
+        "decisionBefore": {
+          "inning": 6,
+          "half": "下",
+          "outs": 1,
+          "scores": {
+            "home": 1,
+            "away": 5
+          },
+          "runners": [
+            null,
+            null,
+            null
+          ]
+        },
+        "resultAfter": {
+          "inning": 6,
+          "half": "下",
+          "outs": 2,
+          "scores": {
+            "home": 1,
+            "away": 5
+          },
+          "runners": [
+            null,
+            null,
+            null
+          ]
+        },
+        "completedMomentAfterResult": {
+          "inning": 6,
+          "half": "下",
+          "outs": 2,
+          "scores": {
+            "home": 1,
+            "away": 5
+          },
+          "runners": [
+            null,
+            null,
+            null
+          ]
+        },
+        "finalCompletedMoment": {
+          "inning": 6,
+          "half": "終",
+          "outs": 3,
+          "scores": {
+            "home": 1,
+            "away": 6
+          },
+          "runners": [
+            null,
+            null,
+            null
+          ]
+        },
+        "finalSummary": {
+          "inning": 7,
+          "half": "終",
+          "outs": 3,
+          "scores": {
+            "home": 1,
+            "away": 6
+          },
+          "runners": [
+            null,
+            null,
+            null
+          ]
+        },
+        "rawEvidence": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-canonical-evidence.json"
+      },
+      "original36Operands": {
+        "completed": true,
+        "fixedMoment1": true,
+        "fixedMoment3": false,
+        "defenseEquality": true,
+        "safetyBelow1400": true,
+        "combined": false
+      },
+      "original37SameShapeOperands": {
+        "completed": true,
+        "finalIntegrityEmpty": true,
+        "combined": true
+      }
+    },
+    {
+      "seed": 88222,
+      "status": "CONFIRMED / formal new suite PASS",
+      "fixture": "legal sixth-inning SS substitute",
+      "entry": {
+        "accepted": true,
+        "selection": {
+          "ok": true,
+          "existing": false,
+          "selectedSchoolId": "school-development-29d536a2",
+          "context": {
+            "schoolId": "school-development-29d536a2",
+            "schoolName": "森原學園",
+            "schoolStandard": "development",
+            "schoolTier": "development",
+            "schoolYearRosterIdentity": {
+              "version": "high-school-entry-roster-context-v1",
+              "identity": "school-development-29d536a2|hs-year-1-age-16|roster-69587b4f",
+              "schoolId": "school-development-29d536a2",
+              "schoolStandard": "development",
+              "yearIdentity": "hs-year-1-age-16",
+              "rosterGenerationSeed": "roster-69587b4f"
+            },
+            "yearIdentity": "hs-year-1-age-16",
+            "rosterGenerationSeed": "roster-69587b4f",
+            "positionNeed": "high",
+            "positionCompetitionContext": {
+              "position": "SS",
+              "starterId": "school-development-29d536a2-player-06",
+              "starterCapability": 4.85,
+              "competitorIds": [
+                "school-development-29d536a2-player-06",
+                "school-development-29d536a2-player-12",
+                "school-development-29d536a2-player-13"
+              ],
+              "benchCompetitorIds": [
+                "school-development-29d536a2-player-12",
+                "school-development-29d536a2-player-13"
+              ],
+              "competitorCount": 3,
+              "benchCapabilities": [
+                2.978,
+                3.928
+              ],
+              "benchAverageCapability": 3.453,
+              "positionNeed": "high",
+              "playerCapability": 3.45,
+              "playerRelativeGap": -1.4,
+              "competitionDensity": "medium"
+            },
+            "trainingQuality": "limited",
+            "competitionDepth": "low",
+            "matchCompetitionLevel": "lowMedium",
+            "playingTimeOpportunity": "high",
+            "recruitingPreference": "defenseFirst",
+            "coachProfile": {
+              "coachId": "coach-f4dee1cc",
+              "coachStyle": "fundamentals"
+            },
+            "projectedRole": "rotationCandidate"
+          }
+        },
+        "schoolId": "school-development-29d536a2",
+        "invitationIndex": 0,
+        "age": 16,
+        "primaryPosition": "游擊手",
+        "invitationValidation": {
+          "ok": true,
+          "errors": [],
+          "diversity": {
+            "roleCategories": 2,
+            "competitionDepthCategories": 2,
+            "trainingQualityCategories": 2,
+            "tierCategories": 2,
+            "mechanicalSignatures": 4,
+            "roleDiversity": true,
+            "competitionDiversity": true,
+            "environmentDiversity": true,
+            "tierDiversity": true,
+            "noDominantDuplicate": true
+          }
+        },
+        "capabilityValidation": {
+          "ok": true,
+          "errors": []
+        },
+        "abilitiesUnchanged": true,
+        "pendingSeedAfterPrepare": 0,
+        "globals": {
+          "playingTime": "object",
+          "roster": "object",
+          "entryRoster": "object",
+          "record": "object"
+        },
+        "initialState": {
+          "inning": 1,
+          "half": "上",
+          "outs": 0,
+          "scores": {
+            "home": 0,
+            "away": 0
+          },
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "phase": "full_match_flow",
+          "domain": "flow",
+          "currentMomentId": "hs_y1_match_moment_1",
+          "playerSide": "home",
+          "offenseTeam": "away",
+          "currentBatter": "regional-power-school-player-04",
+          "actualBatter": "regional-power-school-player-04",
+          "status": "bench",
+          "entryCompleted": false,
+          "slot": -1,
+          "assignment": "",
+          "playerInLineup": false,
+          "playerOnBench": true,
+          "actualSS": "school-development-29d536a2-player-06",
+          "completedIds": [],
+          "logCount": 1,
+          "integrity": []
+        }
+      },
+      "initialState": {
+        "inning": 1,
+        "half": "上",
+        "outs": 0,
+        "scores": {
+          "home": 0,
+          "away": 0
+        },
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "phase": "full_match_flow",
+        "domain": "flow",
+        "currentMomentId": "hs_y1_match_moment_1",
+        "playerSide": "home",
+        "offenseTeam": "away",
+        "currentBatter": "regional-power-school-player-04",
+        "actualBatter": "regional-power-school-player-04",
+        "status": "bench",
+        "entryCompleted": false,
+        "slot": -1,
+        "assignment": "",
+        "playerInLineup": false,
+        "playerOnBench": true,
+        "actualSS": "school-development-29d536a2-player-06",
+        "completedIds": [],
+        "logCount": 1,
+        "integrity": []
+      },
+      "actualEntry": {
+        "sequence": 77,
+        "presentationImportance": "attention",
+        "type": "playerEntry",
+        "inning": 6,
+        "half": "下",
+        "lineupSlot": 7,
+        "replacedPlayerId": "school-development-29d536a2-player-06",
+        "plannedAppearanceType": "lateGameAppearance",
+        "assignment": "壘上無人、0 出局；你從板凳進入第 8 棒。",
+        "outs": 0,
+        "scores": {
+          "home": 1,
+          "away": 1
+        },
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "presentationSnapshot": {
+          "inning": 6,
+          "half": "下",
+          "outs": 0,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "lineScoreRevealHalfIndex": 11,
+          "assignment": "壘上無人、0 出局；你從板凳進入第 8 棒。",
+          "position": "游擊手",
+          "currentBatter": "player",
+          "battingOrderSlot": 7
+        }
+      },
+      "finalState": {
+        "inning": 7,
+        "half": "終",
+        "outs": 3,
+        "scores": {
+          "home": 1,
+          "away": 3
+        },
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "phase": "complete",
+        "domain": "complete",
+        "currentMomentId": "",
+        "playerSide": "home",
+        "offenseTeam": "home",
+        "currentBatter": "player",
+        "actualBatter": "player",
+        "status": "substitute",
+        "entryCompleted": true,
+        "slot": 7,
+        "assignment": "游擊手",
+        "playerInLineup": true,
+        "playerOnBench": false,
+        "actualSS": "player",
+        "completedIds": [
+          "hs_y1_match_moment_1"
+        ],
+        "logCount": 113,
+        "integrity": []
+      },
+      "ticks": 107,
+      "stateObservations": 214,
+      "score": {
+        "home": 1,
+        "away": 3
+      },
+      "playerPA": 1,
+      "createdDecisions": 1,
+      "completedIds": [
+        "hs_y1_match_moment_1"
+      ],
+      "defenseCreated": 0,
+      "defenseCompleted": 0,
+      "record": {
+        "status": "final",
+        "integrity": true,
+        "totals": {
+          "away": {
+            "runs": 3,
+            "hits": 13,
+            "errors": 0
+          },
+          "home": {
+            "runs": 1,
+            "hits": 10,
+            "errors": 0
+          }
+        },
+        "result": {
+          "winnerTeamId": "regional-power-school",
+          "loserTeamId": "school-development-29d536a2",
+          "finalScore": {
+            "away": 3,
+            "home": 1
+          },
+          "tie": false
+        },
+        "eventRefs": 113,
+        "logEvents": 113
+      },
+      "replay": {
+        "fixture": true,
+        "initialMatch": true,
+        "record": true,
+        "log": true,
+        "decisionSequence": true,
+        "decisionArrayDeepEqual": true
+      },
+      "hashes": {
+        "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+        "initialMatch": "58459bdc12468fc9143bf1f711a19e1f8cebedf273f8ca9c0037f98006cc2084",
+        "record": "6af67e71aba581ac84fc5b215d6af1d9758f14852f8a1282081023a26d2f1ebc",
+        "log": "96679cf657a33a5e840ce74d437ed657b95d2cc35867be2000fe9b82b82a0d4a",
+        "decisionSequence": "ed259ebfd8344db8fb2f51d5421338b9aa0b1c05765b3b7233710e1db2aab227"
+      },
+      "priorEvidenceByteParity": {
+        "fixture": true,
+        "initialMatch": true,
+        "record": true,
+        "log": true
+      },
+      "publicDuplicates": {
+        "decisions": [
+          {
+            "momentId": "hs_y1_match_moment_1",
+            "decision": "zone",
+            "returned": false,
+            "fullPlayerUnchanged": true
+          }
+        ],
+        "settlement": {
+          "returns": [
+            false,
+            false,
+            false
+          ],
+          "fullPlayerUnchanged": true
+        }
+      },
+      "saveMemory": {
+        "recordIntegrity": true,
+        "requiredFieldsRetained": true,
+        "realBrowserStorageReload": false
+      },
+      "career": {
+        "actualExposure": {
+          "matchId": "hs-y1-autumn-exhibition",
+          "participated": true,
+          "started": false,
+          "appearanceType": "lateGameAppearance",
+          "entryInning": 6,
+          "exitInning": 7,
+          "defensiveInnings": 1,
+          "plateAppearances": 1,
+          "role": "starter"
+        },
+        "gameExposure": {
+          "appearanceType": "lateGameAppearance",
+          "defensiveInnings": 1,
+          "plateAppearances": 1
+        },
+        "evaluation": {
+          "started": false,
+          "enteredGame": true,
+          "noAppearance": false,
+          "appearanceType": "lateGameAppearance",
+          "plateAppearances": 1,
+          "defensiveInnings": 1
+        },
+        "sampleCount": 1,
+        "appliedMatchIdentities": [
+          "hs-y1-autumn-exhibition"
+        ],
+        "experienceSettled": true,
+        "historyEntries": 1,
+        "historyActualExposure": {
+          "appearanceType": "lateGameAppearance",
+          "plateAppearances": 1,
+          "defensiveInnings": 1,
+          "participated": true
+        }
+      },
+      "snapshot": {
+        "status": "KNOWN CONTRACT GAP",
+        "decisionBefore": {
+          "inning": 6,
+          "half": "下",
+          "outs": 0,
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "runners": [
+            null,
+            null,
+            null
+          ]
+        },
+        "resultAfter": {
+          "inning": 6,
+          "half": "下",
+          "outs": 1,
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "runners": [
+            null,
+            null,
+            null
+          ]
+        },
+        "completedMomentAfterResult": {
+          "inning": 6,
+          "half": "下",
+          "outs": 1,
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "runners": [
+            null,
+            null,
+            null
+          ]
+        },
+        "finalCompletedMoment": {
+          "inning": 6,
+          "half": "終",
+          "outs": 3,
+          "scores": {
+            "home": 1,
+            "away": 3
+          },
+          "runners": [
+            null,
+            null,
+            null
+          ]
+        },
+        "finalSummary": {
+          "inning": 7,
+          "half": "終",
+          "outs": 3,
+          "scores": {
+            "home": 1,
+            "away": 3
+          },
+          "runners": [
+            null,
+            null,
+            null
+          ]
+        },
+        "rawEvidence": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-canonical-evidence.json"
+      },
+      "original36Operands": {
+        "completed": true,
+        "fixedMoment1": true,
+        "fixedMoment3": false,
+        "defenseEquality": true,
+        "safetyBelow1400": true,
+        "combined": false
+      },
+      "original37SameShapeOperands": {
+        "completed": true,
+        "finalIntegrityEmpty": true,
+        "combined": true
+      }
+    }
+  ],
+  "routine": {
+    "suite": "routine-commentary-contract",
+    "passedOriginalAssertions": 1,
+    "failed": 0,
+    "originalAssertion": "verify(\"38. 玩家可見 routine commentary 不含 raw identifier\", evaluate(`(() => {const x=__candidate2222();const t=formatMatchSimulationEvent(x.event,x.match).text;return ![\"hardGrounder\",\"straightAtPlayer\",\"playerRoutinePlay\",\"selfCoverFirst\",\"decisionTension\"].some(raw=>t.includes(raw));})()`));",
+    "syntheticSimulationSeed": 222201,
+    "text": "1 出局｜一壘方向的強勁滾地球，你正面把球收住，踩上一壘完成出局。",
+    "rawIdentifiersAbsent": {
+      "hardGrounder": true,
+      "straightAtPlayer": true,
+      "playerRoutinePlay": true,
+      "selfCoverFirst": true,
+      "decisionTension": true
+    },
+    "canonicalAdmissionProof": false,
+    "fullMatchExecuted": false,
+    "originalPrefixSha256": "6d19baf9a1ddde40428248bd861aeacafcde4f69da8a311469cd1d22501bb131"
+  },
+  "protectionMatrix": [
+    {
+      "id": "36.1",
+      "original": "x.match.completed",
+      "purpose": "自然完整終局",
+      "responsibility": "Canonical closure",
+      "status": "CONFIRMED",
+      "evidence": "88221 first/replay; 88222 first/replay",
+      "missing": "原 legacy fixture 及整個 #36 conjunction 未替代",
+      "formallyReplaced": false,
+      "originalSourceEdited": false
+    },
+    {
+      "id": "36.2",
+      "original": "ids.includes(highSchoolYearOneMomentIds[0])",
+      "purpose": "固定 Moment1 出現及完成",
+      "responsibility": "Synthetic slot S1; Canonical real decision observation",
+      "status": "CONFIRMED occurrence only",
+      "evidence": "Both seeds naturally completed ID1; old S1 source-flow proof retained",
+      "missing": "New Canonical suite intentionally has no fixed-ID quota; original slot assertion retained",
+      "formallyReplaced": false,
+      "originalSourceEdited": false
+    },
+    {
+      "id": "36.3",
+      "original": "ids.includes(highSchoolYearOneMomentIds[2])",
+      "purpose": "固定 Moment3 出現及完成",
+      "responsibility": "Synthetic S3",
+      "status": "UNVERIFIED",
+      "evidence": "No ID3 in either reviewed fixed seed",
+      "missing": "Legal source-flow producer/PA/completion; no new candidate search authorized",
+      "formallyReplaced": false,
+      "originalSourceEdited": false
+    },
+    {
+      "id": "36.4",
+      "original": "completed defense count === defensiveMeaningfulDecisionCount",
+      "purpose": "建立與完成守恆",
+      "responsibility": "Canonical decision conservation",
+      "status": "CONFIRMED zero equals zero",
+      "evidence": "All four games: 0 = 0",
+      "missing": "Natural nonzero player defensive Moment coverage",
+      "formallyReplaced": false,
+      "originalSourceEdited": false
+    },
+    {
+      "id": "36.5",
+      "original": "x.safety < 1400",
+      "purpose": "原政策下有界推進",
+      "responsibility": "Canonical closure",
+      "status": "CONFIRMED",
+      "evidence": "88221:110; 88222:107; each replay same",
+      "missing": "SS starting fixture unverified",
+      "formallyReplaced": false,
+      "originalSourceEdited": false
+    },
+    {
+      "id": "37.1",
+      "original": "x.match.completed (88222)",
+      "purpose": "第二固定 seed 終局",
+      "responsibility": "Canonical seed88222",
+      "status": "CONFIRMED",
+      "evidence": "New independent formal suite, both runs",
+      "missing": "Original #37 callsite unchanged / original full suite not run",
+      "formallyReplaced": false,
+      "originalSourceEdited": false
+    },
+    {
+      "id": "37.2",
+      "original": "getHighSchoolMatchStateIntegrityIssues(x.match).length === 0 (88222)",
+      "purpose": "第二固定 seed 狀態正確",
+      "responsibility": "Canonical seed88222 integrity",
+      "status": "CONFIRMED",
+      "evidence": "214 before/after observations per game plus final",
+      "missing": "Browser/other career and owner internal microsteps outside scope",
+      "formallyReplaced": false,
+      "originalSourceEdited": false
+    },
+    {
+      "id": "38.1",
+      "original": "!rawTokens.some(raw => t.includes(raw)) / hardGrounder",
+      "purpose": "玩家 routine 文字不露 raw identifier",
+      "responsibility": "Independent Routine Commentary Contract",
+      "status": "CONFIRMED",
+      "evidence": "Exact original prefix, __candidate2222 default input, formatter and original #38 line; token absent",
+      "missing": "All other routine contexts outside original fixed-case scope",
+      "formallyReplaced": false,
+      "originalSourceEdited": false
+    },
+    {
+      "id": "38.2",
+      "original": "!rawTokens.some(raw => t.includes(raw)) / straightAtPlayer",
+      "purpose": "玩家 routine 文字不露 raw identifier",
+      "responsibility": "Independent Routine Commentary Contract",
+      "status": "CONFIRMED",
+      "evidence": "Exact original prefix, __candidate2222 default input, formatter and original #38 line; token absent",
+      "missing": "All other routine contexts outside original fixed-case scope",
+      "formallyReplaced": false,
+      "originalSourceEdited": false
+    },
+    {
+      "id": "38.3",
+      "original": "!rawTokens.some(raw => t.includes(raw)) / playerRoutinePlay",
+      "purpose": "玩家 routine 文字不露 raw identifier",
+      "responsibility": "Independent Routine Commentary Contract",
+      "status": "CONFIRMED",
+      "evidence": "Exact original prefix, __candidate2222 default input, formatter and original #38 line; token absent",
+      "missing": "All other routine contexts outside original fixed-case scope",
+      "formallyReplaced": false,
+      "originalSourceEdited": false
+    },
+    {
+      "id": "38.4",
+      "original": "!rawTokens.some(raw => t.includes(raw)) / selfCoverFirst",
+      "purpose": "玩家 routine 文字不露 raw identifier",
+      "responsibility": "Independent Routine Commentary Contract",
+      "status": "CONFIRMED",
+      "evidence": "Exact original prefix, __candidate2222 default input, formatter and original #38 line; token absent",
+      "missing": "All other routine contexts outside original fixed-case scope",
+      "formallyReplaced": false,
+      "originalSourceEdited": false
+    },
+    {
+      "id": "38.5",
+      "original": "!rawTokens.some(raw => t.includes(raw)) / decisionTension",
+      "purpose": "玩家 routine 文字不露 raw identifier",
+      "responsibility": "Independent Routine Commentary Contract",
+      "status": "CONFIRMED",
+      "evidence": "Exact original prefix, __candidate2222 default input, formatter and original #38 line; token absent",
+      "missing": "All other routine contexts outside original fixed-case scope",
+      "formallyReplaced": false,
+      "originalSourceEdited": false
+    }
+  ],
+  "knownContractGap": "Last completedMoment receives terminal scores/runners/outs/half but retains original inning; decision-before and resolution-after copied separately; no semantic PASS",
+  "noAdditionalGameplayAfterAcceptance": true,
+  "currentTestBaselineVerification": {
+    "ready": "YES for a separately authorized read-only current baseline verification, with historical FAIL/UNVERIFIED/KNOWN CONTRACT GAP explicitly retained",
+    "started": false,
+    "allTestsGreen": false
+  },
+  "readyForCommit": "NO",
+  "readyForSprint10B": "NO",
+  "receiverV2": "DISABLED"
+}

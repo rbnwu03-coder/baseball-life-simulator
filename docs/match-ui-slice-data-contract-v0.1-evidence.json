@@ -1,0 +1,2418 @@
+{
+  "task": "Match UI Slice Data Contract v0.1",
+  "createdAt": "2026-10-16T01:35:25.191Z",
+  "clientDate": "2026-10-16",
+  "clientTimezone": "Asia/Taipei",
+  "deliverables": [
+    "docs/match-ui-slice-data-contract-v0.1.md",
+    "docs/match-ui-slice-data-contract-v0.1-evidence.json"
+  ],
+  "reportSha256": "5ab58b38ffb6ca1e0e7f6063a9f90b9fd8601f422b1acff3cd62552d3bba50a3",
+  "scope": {
+    "documentationOnly": true,
+    "productionExportsImplemented": false,
+    "newGameScenarios": 0,
+    "gameSimulationExecutions": 0,
+    "productionModuleExecutions": 0,
+    "gameplayReplayExecutions": 0,
+    "formalSuitesRun": 0,
+    "browserUiRun": false,
+    "saveSchemaChanges": 0,
+    "existingFilesWritten": 0
+  },
+  "graph": {
+    "tier": "Tier 2 requested; direct-source fallback with qualified coverage",
+    "project": "E-meng-baseball_life_sim_semirefactor",
+    "indexStatusSucceeded": true,
+    "indexedAt": "2026-10-15T01:30:19Z",
+    "subsequentTools": [
+      "search_graph",
+      "trace_path",
+      "get_code_snippet",
+      "check_index_coverage"
+    ],
+    "subsequentResult": "Transport closed",
+    "coverageVerified": false,
+    "coverageRequestedFiles": [
+      "script.js",
+      "story.js",
+      "decision-flow.js",
+      "match-situation-lifecycle.js",
+      "match-experience-development.js",
+      "batted-ball-physical.js",
+      "defensive-opportunity-foundation.js",
+      "defensive-reach-secure-foundation.js",
+      "defensive-decision-throw-foundation.js",
+      "defensive-runner-throw-settlement-foundation.js",
+      "match-game-record.js",
+      "high-school-competition-reassessment.js",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-baseline-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-closeout-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-delivery-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-findings-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-plan-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-whitelist-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-source-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-focused-graph-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1.md",
+      "docs/match-moment-snapshot-integrity-repair-v0.1.md",
+      "docs/ss-match-identity-public-resolver-contract-v0.1.md",
+      "docs/scoreboard-presentation-integrity-sprint-1.md",
+      "docs/02_Architecture/09_Decision-System.md",
+      "docs/02_Architecture/07_Match-System.md",
+      "docs/match-ui-slice-data-contract-v0.1.md",
+      "docs/match-ui-slice-data-contract-v0.1-evidence.json"
+    ],
+    "absenceOrCompleteGraphClaims": false,
+    "finalCoverageResult": "Transport closed; exact-path current source fallback and qualification retained"
+  },
+  "sourceReadAllowlist": {
+    "codeFiles": [
+      "script.js",
+      "story.js",
+      "decision-flow.js",
+      "match-situation-lifecycle.js",
+      "match-experience-development.js",
+      "batted-ball-physical.js",
+      "defensive-opportunity-foundation.js",
+      "defensive-reach-secure-foundation.js",
+      "defensive-decision-throw-foundation.js",
+      "defensive-runner-throw-settlement-foundation.js",
+      "match-game-record.js",
+      "high-school-competition-reassessment.js"
+    ],
+    "documentsAndData": [
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-baseline-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-closeout-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-delivery-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-findings-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-plan-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-whitelist-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-source-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-focused-graph-evidence.json",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1.md",
+      "docs/match-moment-snapshot-integrity-repair-v0.1.md",
+      "docs/ss-match-identity-public-resolver-contract-v0.1.md",
+      "docs/scoreboard-presentation-integrity-sprint-1.md",
+      "docs/02_Architecture/09_Decision-System.md",
+      "docs/02_Architecture/07_Match-System.md"
+    ],
+    "recording": "Consolidated exact paths from session commands; this is not claimed to be an immutable pre-task manifest",
+    "attachment": "C:/Users/User/.codex/attachments/f54b3ba2-e553-4f3c-af25-39e030fbbebe/Pasted text.txt",
+    "attemptedMissing": [
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-execution-whitelist-evidence.json"
+    ],
+    "hashOnlyManifests": [
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-baseline-evidence.json#hashes",
+      "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-delivery-evidence.json#hashes"
+    ],
+    "protectedRule": "Only fs.stat and Git status metadata; excluded from readFileSync hashing and all source reads"
+  },
+  "sourceEvidence": [
+    {
+      "file": "script.js",
+      "sha256": "b35526671499a5f780ccbd5c0e152b7e935fbacdea1302c26f75730faba70669",
+      "lineCount": 16850,
+      "mode": "current exact-file read; no module loaded",
+      "functions": [
+        {
+          "name": "prepareCurrentHighSchoolYearOneMatch",
+          "startLine": 10113,
+          "endLine": 10125,
+          "regionSha256": "2601dd475616dca30f276603984b591821da8ddb38809caa0244f5aca071dfc9"
+        },
+        {
+          "name": "getHighSchoolYearOneMomentId",
+          "startLine": 4305,
+          "endLine": 4314,
+          "regionSha256": "d8157cfe6181279824ea637d7c6d25548906aacb1104064f17a05f0a88e4a096"
+        },
+        {
+          "name": "getHighSchoolMatchPresentation",
+          "startLine": 6274,
+          "endLine": 6316,
+          "regionSha256": "21d04162e39e9a59e9b468ca47d13b52ce4b3acaead33afcb9677c34a84ad924"
+        },
+        {
+          "name": "getHighSchoolYearOneMatchPresentation",
+          "startLine": 2584,
+          "endLine": 2605,
+          "regionSha256": "0148b1859391c2b42013afe400b40bcf06201333de3d6776057a9e9cf91fa065"
+        },
+        {
+          "name": "getHighSchoolDefensiveMomentChoices",
+          "startLine": 8830,
+          "endLine": 8892,
+          "regionSha256": "afafcaf96883103de7f63f55973d95b7dacc9fd1265b093dee133b41ed50e90c"
+        },
+        {
+          "name": "getHighSchoolYearOneMatchMomentChoices",
+          "startLine": 9308,
+          "endLine": 9322,
+          "regionSha256": "4a78c15bb1fd593a669e552e3320a2e4fcc71c66159723bdac97193206781801"
+        },
+        {
+          "name": "getHighSchoolVisibleScoreboardProjection",
+          "startLine": 6229,
+          "endLine": 6273,
+          "regionSha256": "18e15e5d1ef7a97c4699d9fd7400006113fe3bae495dc293a4e1a0bd317d89f3"
+        },
+        {
+          "name": "createHighSchoolMatchPresentationSnapshot",
+          "startLine": 4377,
+          "endLine": 4405,
+          "regionSha256": "90369fd0b6b18d5d5fa1c25b72fc0ef516cf40e3cf1e459558924253b99eafcd"
+        },
+        {
+          "name": "getHighSchoolPresentationSnapshot",
+          "startLine": 4416,
+          "endLine": 4423,
+          "regionSha256": "1acd08af79b2a5fe252772d127cccf1e8b45fbc4b53034c59c960ac85744c3fa"
+        },
+        {
+          "name": "advanceHighSchoolPresentationCursor",
+          "startLine": 4448,
+          "endLine": 4467,
+          "regionSha256": "3354b4991ebf008e89219000f2169cec179bbbb1395b08f8547045e8ecfe2adb"
+        },
+        {
+          "name": "getHighSchoolDefensiveObservation",
+          "startLine": 5914,
+          "endLine": 5938,
+          "regionSha256": "01a7565ce616ed3b07bae308a5e5e32e116500d18738053e0028c8ec8c764467"
+        },
+        {
+          "name": "adaptInfieldInformation",
+          "startLine": 8584,
+          "endLine": 8634,
+          "regionSha256": "da4e953dbd4196729a5af27ef1cdc659fa42346c746d76a235d82abadeb24dc1"
+        },
+        {
+          "name": "getHighSchoolDefensiveSituationText",
+          "startLine": 8770,
+          "endLine": 8797,
+          "regionSha256": "54943e2bd397eb3cb8033eb3f249f5351ca9b05bf4849427a320b4d032f6685b"
+        },
+        {
+          "name": "generateInfieldLegalChoices",
+          "startLine": 7687,
+          "endLine": 7809,
+          "regionSha256": "ee296786c9c5b19d8c6af2a31b0b6ae9510edc1d80dc80fa9c8139f969657e51"
+        },
+        {
+          "name": "createGroundBallMatchSituation",
+          "startLine": 11179,
+          "endLine": 11248,
+          "regionSha256": "a2184d71d3f33a74c71f1f563adc4c5f4cd90c8bd995b74d74f9f4ff2630914b"
+        },
+        {
+          "name": "beginGroundBallSituationDecision",
+          "startLine": 11249,
+          "endLine": 11272,
+          "regionSha256": "7cb9d501faa01d2e60184e787e9904b0fe89540836931f3bedd114daa96df563"
+        },
+        {
+          "name": "buildHighSchoolShortstopExecution",
+          "startLine": 11938,
+          "endLine": 12026,
+          "regionSha256": "63dc37400f5066cebd8d1aa7a5bb3597aa38473b411a079ff9d21ce4217ca171"
+        },
+        {
+          "name": "recordHighSchoolYearOneMoment",
+          "startLine": 10440,
+          "endLine": 10482,
+          "regionSha256": "1e4227a79f028de7eabe6f1f6d3a8f6f6f1922876edc2769f00fc17d8bb31cae"
+        },
+        {
+          "name": "applyInfieldResolutionToHighSchoolMatch",
+          "startLine": 12280,
+          "endLine": 12445,
+          "regionSha256": "5b7efec1954f6301003d19e4ce194e2452dc54a861b09bfa14ca26c7502fd8b0"
+        },
+        {
+          "name": "getHighSchoolInfieldFinalFacts",
+          "startLine": 11563,
+          "endLine": 11587,
+          "regionSha256": "d7b7a27c906ec64bdac088e85bbcc0f201859edbcb9db8d87aa93be44082e02b"
+        },
+        {
+          "name": "settleAndCloseGroundBallSituation",
+          "startLine": 12208,
+          "endLine": 12226,
+          "regionSha256": "be1ef89802413f0738cc0013379bda5ef8468b825256c5fe35d89e94f693a401"
+        },
+        {
+          "name": "resolveHighSchoolYearOneMatch",
+          "startLine": 13720,
+          "endLine": 13770,
+          "regionSha256": "8b51dc32479bd240c29edfae7fcf5050f496faad14e4ea215ae5000b3dc800f5"
+        },
+        {
+          "name": "recordHighSchoolMatchSimulationEvent",
+          "startLine": 4343,
+          "endLine": 4376,
+          "regionSha256": "f82eaf9bce5103d755b57c77494053e91d488cdc25260a80877e16bae2e80fe3"
+        },
+        {
+          "name": "getHighSchoolMatchEventPresentationImportance",
+          "startLine": 4325,
+          "endLine": 4332,
+          "regionSha256": "277ee04e29877c5ee3bc32e9668544b7158503a6e60076015712fc9e6c3305c6"
+        },
+        {
+          "name": "settleHighSchoolYearOneMatch",
+          "startLine": 13093,
+          "endLine": 13182,
+          "regionSha256": "0cdae74cf121704cd2585da0b3c401b36075cc5f464648d6ee0a99c51f44fcd2"
+        },
+        {
+          "name": "applyHighSchoolCompetitionMatchSettlement",
+          "startLine": 12946,
+          "endLine": 13042,
+          "regionSha256": "4aef9d72cdf06f80fd84b2eba61b9218e2643fcc273543b8747d90056db43d4e"
+        },
+        {
+          "name": "getHighSchoolReachAccess",
+          "startLine": 4972,
+          "endLine": 4987,
+          "regionSha256": "4113b5d40874d299711baa848e77e11ab7bc4782ccddcb59bb86447dfc98c92a"
+        },
+        {
+          "name": "resolveHighSchoolCanonicalSecure",
+          "startLine": 4988,
+          "endLine": 4996,
+          "regionSha256": "b4b155237f3600b6a974fe647a03a6ce2a8e1f5c475cc570bf68819d2712816c"
+        }
+      ]
+    },
+    {
+      "file": "story.js",
+      "sha256": "c1885f6e0d62e8d0c328eeb3215dde20c6ee25017fdb41ac65c05c2d12b74819",
+      "lineCount": 2013,
+      "mode": "current exact-file read; no module loaded",
+      "functions": [
+        {
+          "name": "getCurrentEventId",
+          "startLine": 1921,
+          "endLine": 2003,
+          "regionSha256": "fde18e8c0d2b2a6a66adeb44bd3a173b31057440a4e53ab9f5d2758770dbbef2"
+        }
+      ]
+    },
+    {
+      "file": "decision-flow.js",
+      "sha256": "15694c948a621b55747533586d552f56513b79d4989951cf3da1d41b56cae9b2",
+      "lineCount": 258,
+      "mode": "current exact-file read; no module loaded",
+      "functions": []
+    },
+    {
+      "file": "match-situation-lifecycle.js",
+      "sha256": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+      "lineCount": 239,
+      "mode": "current exact-file read; no module loaded",
+      "functions": [
+        {
+          "name": "createSituation",
+          "startLine": 62,
+          "endLine": 89,
+          "regionSha256": "e985f5b8bfdd9e3b9f5f9b6f84b22965758240f337a801e30274e150cc57c398"
+        },
+        {
+          "name": "admitSituation",
+          "startLine": 90,
+          "endLine": 104,
+          "regionSha256": "2f906ff1830919b6c3f461b26881d6ce9265550877ac3602c606880b78004503"
+        },
+        {
+          "name": "resolveSituation",
+          "startLine": 167,
+          "endLine": 182,
+          "regionSha256": "a26b6bcb96d2be066ca80470806b5c93714797e33780f3e0bec258fb16197a39"
+        },
+        {
+          "name": "markSettled",
+          "startLine": 183,
+          "endLine": 188,
+          "regionSha256": "af49c4a3bc90d93300d9fbde9db8bbf21c0dc83a6e269c32bfa5dddd73d0e35f"
+        },
+        {
+          "name": "createClosedSituationSummary",
+          "startLine": 200,
+          "endLine": 217,
+          "regionSha256": "1d78efb8c52dfb688471c4f53938b45882387d822cbe7af0118dd28b92398adf"
+        }
+      ]
+    },
+    {
+      "file": "match-experience-development.js",
+      "sha256": "544a9a3625c69d868645011ff0f67804b48cd0734bcb5b1e4410ca593df766f3",
+      "lineCount": 660,
+      "mode": "current exact-file read; no module loaded",
+      "functions": [
+        {
+          "name": "deriveBatterDecisionPressure",
+          "startLine": 398,
+          "endLine": 411,
+          "regionSha256": "4a5e522bde8bf2d1276edb6082639c5cf2963326142ef5bffa99cbcea6993dd0"
+        },
+        {
+          "name": "deriveMatchExperienceEvidence",
+          "startLine": 465,
+          "endLine": 476,
+          "regionSha256": "75bdaa86ce5f068c4adc4eb3c148cff7d30007ec588992d104b484fdb530bd41"
+        },
+        {
+          "name": "createMatchExperienceState",
+          "startLine": 547,
+          "endLine": 566,
+          "regionSha256": "08d67fdd03e5f11d154a3ff9d58cb7d15cf7e222804192f24940ae934f79e300"
+        },
+        {
+          "name": "settleMatchExperienceDevelopment",
+          "startLine": 581,
+          "endLine": 624,
+          "regionSha256": "d73ca1e631e8dd67c489274886799677dfb7337ad40d52137d989bfb85b9af0b"
+        }
+      ]
+    },
+    {
+      "file": "batted-ball-physical.js",
+      "sha256": "4c0847af7b085c6da68223e47114164af417567dbc9d65644ec51fc7427cfec8",
+      "lineCount": 166,
+      "mode": "current exact-file read; no module loaded",
+      "functions": [
+        {
+          "name": "resolveBattedBallPhysicalTruth",
+          "startLine": 105,
+          "endLine": 132,
+          "regionSha256": "941e5edbb7c4999684b500d386dde6f74e36b6d4901528a0ef493e32d5ab74a5"
+        }
+      ]
+    },
+    {
+      "file": "defensive-opportunity-foundation.js",
+      "sha256": "834395d3f829e27cce798fd859c11f8fee2ed0e9586b8015d5554108aa773a32",
+      "lineCount": 154,
+      "mode": "current exact-file read; no module loaded",
+      "functions": [
+        {
+          "name": "resolveDefensiveOpportunity",
+          "startLine": 133,
+          "endLine": 154,
+          "regionSha256": "25717e2afa5847d16ef7dfc18dcbe78a9d448662bac2db143c33b65b010c7f41"
+        }
+      ]
+    },
+    {
+      "file": "defensive-reach-secure-foundation.js",
+      "sha256": "c5a51a82adf4900dd46f0788ba458dfadded82ea93daa8ca2f30ca92e8f01365",
+      "lineCount": 163,
+      "mode": "current exact-file read; no module loaded",
+      "functions": [
+        {
+          "name": "resolveReach",
+          "startLine": 53,
+          "endLine": 71,
+          "regionSha256": "e025f06ea48cc8b1866dafe1935767a25957ce94d0d68bab719d7b8c28b71c11"
+        },
+        {
+          "name": "resolveSecure",
+          "startLine": 91,
+          "endLine": 117,
+          "regionSha256": "7bc2e08ccb468594b257cbf448ec52cf84dc212c87b8b95bd355b8b2de985b39"
+        }
+      ]
+    },
+    {
+      "file": "defensive-decision-throw-foundation.js",
+      "sha256": "1a8a65ee11a98ace76f2b0b807bf3227df789514abdbefdf2decf2de378e831e",
+      "lineCount": 365,
+      "mode": "current exact-file read; no module loaded",
+      "functions": [
+        {
+          "name": "buildDecisionOpportunity",
+          "startLine": 61,
+          "endLine": 107,
+          "regionSha256": "c20225b7e69dc6288a3c0a0dd8924c89164d28ce8f8affd6651d5305cb139049"
+        },
+        {
+          "name": "selectDefensiveRoute",
+          "startLine": 113,
+          "endLine": 120,
+          "regionSha256": "f152cb8097a39138dd597753af7af3888c391b60a3aa52d01328a24ddc95a42d"
+        },
+        {
+          "name": "resolveThrow",
+          "startLine": 142,
+          "endLine": 166,
+          "regionSha256": "56654caaff04597bf6adc3a30130141969377a6ff9aacc4cd446eec23dd163c1"
+        },
+        {
+          "name": "createActionFacts",
+          "startLine": 251,
+          "endLine": 270,
+          "regionSha256": "21e510fa7a5f2069936979f3b73a29158e747bbcc1343aa68ab07478e0596360"
+        }
+      ]
+    },
+    {
+      "file": "defensive-runner-throw-settlement-foundation.js",
+      "sha256": "4c54b171252c3a93df15304d5a7520335877a4a621b0cba8268354ed4563d136",
+      "lineCount": 220,
+      "mode": "current exact-file read; no module loaded",
+      "functions": [
+        {
+          "name": "resolveTiming",
+          "startLine": 23,
+          "endLine": 60,
+          "regionSha256": "f1ee3688c7030b296c9487162f5e533a853a97e584043c1f9c42b2ae373a6f28"
+        },
+        {
+          "name": "deriveSettlement",
+          "startLine": 94,
+          "endLine": 133,
+          "regionSha256": "e66ffe5926b468e05f207ca90b9d602ee38f3cfc5e8c307fc874bf8172f2c043"
+        }
+      ]
+    },
+    {
+      "file": "match-game-record.js",
+      "sha256": "8e172a1b99f8e54963f1d2434d6fbe4d3bfdf40ce915f8307765d1557d2a6085",
+      "lineCount": 520,
+      "mode": "current exact-file read; no module loaded",
+      "functions": [
+        {
+          "name": "recordEvent",
+          "startLine": 312,
+          "endLine": 342,
+          "regionSha256": "5eabbf33787610f37b9d82ee9aa75f3723e1e13d4149929a4f712de55dde33cb"
+        },
+        {
+          "name": "finalizeGameRecord",
+          "startLine": 378,
+          "endLine": 400,
+          "regionSha256": "90b21e8d4a00191c5aff9715a145ee42102b7f48a4892ffbc21b2e9099491b39"
+        },
+        {
+          "name": "getScoreboard",
+          "startLine": 432,
+          "endLine": 447,
+          "regionSha256": "48ff0eefbb25f14305584e918bea6a5c5c0930360f880a5ef6566730e48815d7"
+        },
+        {
+          "name": "getScoreboardFromEvents",
+          "startLine": 448,
+          "endLine": 473,
+          "regionSha256": "ccf5122591c36fae19c9c71e65f84d76c286d51d1892f79d8faa97ec1c98ddd4"
+        }
+      ]
+    },
+    {
+      "file": "high-school-competition-reassessment.js",
+      "sha256": "01c7ef6abaa8ca3db7bdc4a08286b07b0be0731d6fb6e280cf3a9918de6e7460",
+      "lineCount": 239,
+      "mode": "current exact-file read; no module loaded",
+      "functions": [
+        {
+          "name": "collectCompetitionEvidence",
+          "startLine": 77,
+          "endLine": 129,
+          "regionSha256": "7ce14e33539ec1777a86470c0722a759cd79d45315f239e06f26deabd0e57e62"
+        },
+        {
+          "name": "updateCompetitionEvaluation",
+          "startLine": 130,
+          "endLine": 153,
+          "regionSha256": "19841720360fae3e8b0f5b30481cfd7cbe8f46d5f58d4e236779bcff2b0bf43a"
+        }
+      ]
+    }
+  ],
+  "docEvidence": [
+    {
+      "file": "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-baseline-evidence.json",
+      "sha256": "9e4ecd4c2fd9265ecba3c5cb94cd6a9db127e2dd9f912ce90f648920fd260d45"
+    },
+    {
+      "file": "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-closeout-evidence.json",
+      "sha256": "2678940aff5f44ab943d64bd055f40419c1466120d7f482537625512c6550809"
+    },
+    {
+      "file": "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-delivery-evidence.json",
+      "sha256": "6e06d8584160dfc3a022102add108fea3d5f36552e1ac83406a0b6774d97d458"
+    },
+    {
+      "file": "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-findings-evidence.json",
+      "sha256": "296a3727be1f18cfc80ace0d174cb929bcc253b5d525cd1b819e31ec08a6d60b"
+    },
+    {
+      "file": "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-plan-evidence.json",
+      "sha256": "abedb39afa42a383f7e11a79c517496271036cf25c70c97d2de33a38dccee3fb"
+    },
+    {
+      "file": "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-whitelist-evidence.json",
+      "sha256": "5b5dd19f5911cb7e9a3ecf747f9af6cc2f74ec5d22de96a0db23133ca291ef08"
+    },
+    {
+      "file": "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-source-evidence.json",
+      "sha256": "6dbf51dacd0413aa394462ca094e03b499b8dcd3c06403e4440254f22dfad9d3"
+    },
+    {
+      "file": "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-focused-graph-evidence.json",
+      "sha256": "f62618e7ac1123fe98453e0b152f6178912177708339f542c9d3ef3db39e079c"
+    },
+    {
+      "file": "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1.md",
+      "sha256": "4d13c501b633edd448dd420cd5a6de102fd896ea1a5fff51ebd857b3395121fe"
+    },
+    {
+      "file": "docs/match-moment-snapshot-integrity-repair-v0.1.md",
+      "sha256": "a7851b7e2993317d740e98fc75aebe1a868bfb191139f14264611f342df71cdd"
+    },
+    {
+      "file": "docs/ss-match-identity-public-resolver-contract-v0.1.md",
+      "sha256": "51f4fe4b4a28c63e997da0eae08a976baf87d3eae572ef79d392a0677309dd4c"
+    },
+    {
+      "file": "docs/scoreboard-presentation-integrity-sprint-1.md",
+      "sha256": "18b810024cbb14079902de29aaf1618f350d2a6088c60cfdb8a1b963487b539c"
+    },
+    {
+      "file": "docs/02_Architecture/09_Decision-System.md",
+      "sha256": "1a6d67fd33586555518165ff866eba14121571557e3affa5a968fd57b24eb238"
+    },
+    {
+      "file": "docs/02_Architecture/07_Match-System.md",
+      "sha256": "a064367a51c04101cc5b3563268a25ac46a2fc72858394f6d492d9c001e0175a"
+    }
+  ],
+  "proposedJsonSchema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Proposed Match UI Slice DTOs v0.1; not a production export",
+    "oneOf": [
+      {
+        "$ref": "#/$defs/MatchDecisionView"
+      },
+      {
+        "$ref": "#/$defs/MatchPlaybackEvent"
+      },
+      {
+        "$ref": "#/$defs/MatchResolutionView"
+      }
+    ],
+    "$defs": {
+      "MatchDecisionView": {
+        "type": "object",
+        "properties": {
+          "schemaVersion": {
+            "const": "match-ui-slice/0.1"
+          },
+          "presentationId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "matchId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "momentId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "presentationSequence": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "inning": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "half": {
+            "enum": [
+              "top",
+              "bottom"
+            ]
+          },
+          "kind": {
+            "const": "decision"
+          },
+          "player": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "position": {
+                "const": "SS"
+              }
+            },
+            "required": [
+              "id",
+              "position"
+            ],
+            "additionalProperties": false
+          },
+          "state": {
+            "type": "object",
+            "properties": {
+              "outs": {
+                "enum": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              "scores": {
+                "type": "object",
+                "properties": {
+                  "home": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "away": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "home",
+                  "away"
+                ],
+                "additionalProperties": false
+              },
+              "bases": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                },
+                "minItems": 3,
+                "maxItems": 3
+              }
+            },
+            "required": [
+              "outs",
+              "scores",
+              "bases"
+            ],
+            "additionalProperties": false
+          },
+          "situationText": {
+            "type": "string",
+            "minLength": 1
+          },
+          "observations": {
+            "type": "object",
+            "properties": {
+              "directionText": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "paceText": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "runnerCue": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "readCue": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "directionText",
+              "paceText",
+              "runnerCue",
+              "readCue"
+            ],
+            "additionalProperties": false
+          },
+          "choices": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "routeId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "matchDecision": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "matchMomentId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "label": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "objectiveText": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "risk": {
+                  "enum": [
+                    "low",
+                    "medium",
+                    "high"
+                  ]
+                },
+                "routeLabel": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "routeId",
+                "matchDecision",
+                "matchMomentId",
+                "label",
+                "objectiveText",
+                "risk",
+                "routeLabel"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "schemaVersion",
+          "presentationId",
+          "matchId",
+          "momentId",
+          "presentationSequence",
+          "inning",
+          "half",
+          "kind",
+          "player",
+          "state",
+          "situationText",
+          "observations",
+          "choices"
+        ],
+        "additionalProperties": false
+      },
+      "MatchPlaybackEvent": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "schemaVersion": {
+                "const": "match-ui-slice/0.1"
+              },
+              "presentationId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "matchId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "momentId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "presentationSequence": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "inning": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "half": {
+                "enum": [
+                  "top",
+                  "bottom"
+                ]
+              },
+              "kind": {
+                "const": "playback"
+              },
+              "eventId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "actualRouteId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "dependsOn": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "type": {
+                "const": "ballInPlay"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "ballType": {
+                    "const": "groundBall"
+                  },
+                  "direction": {
+                    "enum": [
+                      "leftSide",
+                      "middle",
+                      "rightSide"
+                    ]
+                  },
+                  "pace": {
+                    "enum": [
+                      "weak",
+                      "moderate",
+                      "firm",
+                      "hard"
+                    ]
+                  },
+                  "depth": {
+                    "enum": [
+                      "shallow",
+                      "medium",
+                      "deep",
+                      null
+                    ]
+                  }
+                },
+                "required": [
+                  "ballType",
+                  "direction",
+                  "pace",
+                  "depth"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "schemaVersion",
+              "presentationId",
+              "matchId",
+              "momentId",
+              "presentationSequence",
+              "inning",
+              "half",
+              "kind",
+              "eventId",
+              "actualRouteId",
+              "dependsOn",
+              "type",
+              "payload"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "schemaVersion": {
+                "const": "match-ui-slice/0.1"
+              },
+              "presentationId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "matchId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "momentId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "presentationSequence": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "inning": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "half": {
+                "enum": [
+                  "top",
+                  "bottom"
+                ]
+              },
+              "kind": {
+                "const": "playback"
+              },
+              "eventId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "actualRouteId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "dependsOn": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "type": {
+                "const": "approach"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "actorId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "status": {
+                    "enum": [
+                      "completed",
+                      "late"
+                    ]
+                  }
+                },
+                "required": [
+                  "actorId",
+                  "status"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "schemaVersion",
+              "presentationId",
+              "matchId",
+              "momentId",
+              "presentationSequence",
+              "inning",
+              "half",
+              "kind",
+              "eventId",
+              "actualRouteId",
+              "dependsOn",
+              "type",
+              "payload"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "schemaVersion": {
+                "const": "match-ui-slice/0.1"
+              },
+              "presentationId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "matchId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "momentId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "presentationSequence": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "inning": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "half": {
+                "enum": [
+                  "top",
+                  "bottom"
+                ]
+              },
+              "kind": {
+                "const": "playback"
+              },
+              "eventId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "actualRouteId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "dependsOn": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "type": {
+                "const": "control"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "actorId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "status": {
+                    "enum": [
+                      "completed",
+                      "recovered",
+                      "failed"
+                    ]
+                  }
+                },
+                "required": [
+                  "actorId",
+                  "status"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "schemaVersion",
+              "presentationId",
+              "matchId",
+              "momentId",
+              "presentationSequence",
+              "inning",
+              "half",
+              "kind",
+              "eventId",
+              "actualRouteId",
+              "dependsOn",
+              "type",
+              "payload"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "schemaVersion": {
+                "const": "match-ui-slice/0.1"
+              },
+              "presentationId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "matchId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "momentId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "presentationSequence": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "inning": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "half": {
+                "enum": [
+                  "top",
+                  "bottom"
+                ]
+              },
+              "kind": {
+                "const": "playback"
+              },
+              "eventId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "actualRouteId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "dependsOn": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "type": {
+                "const": "throw"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "actorId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "receiverId": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1
+                  },
+                  "targetBase": {
+                    "enum": [
+                      "first",
+                      "second",
+                      "third",
+                      "home"
+                    ]
+                  },
+                  "status": {
+                    "enum": [
+                      "completed",
+                      "failed",
+                      "notAttempted"
+                    ]
+                  }
+                },
+                "required": [
+                  "actorId",
+                  "receiverId",
+                  "targetBase",
+                  "status"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "schemaVersion",
+              "presentationId",
+              "matchId",
+              "momentId",
+              "presentationSequence",
+              "inning",
+              "half",
+              "kind",
+              "eventId",
+              "actualRouteId",
+              "dependsOn",
+              "type",
+              "payload"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "schemaVersion": {
+                "const": "match-ui-slice/0.1"
+              },
+              "presentationId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "matchId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "momentId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "presentationSequence": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "inning": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "half": {
+                "enum": [
+                  "top",
+                  "bottom"
+                ]
+              },
+              "kind": {
+                "const": "playback"
+              },
+              "eventId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "actualRouteId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "dependsOn": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "type": {
+                "const": "receive"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "actorId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "targetBase": {
+                    "enum": [
+                      "first",
+                      "second",
+                      "third",
+                      "home"
+                    ]
+                  },
+                  "status": {
+                    "enum": [
+                      "completed",
+                      "failed",
+                      "notAttempted"
+                    ]
+                  }
+                },
+                "required": [
+                  "actorId",
+                  "targetBase",
+                  "status"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "schemaVersion",
+              "presentationId",
+              "matchId",
+              "momentId",
+              "presentationSequence",
+              "inning",
+              "half",
+              "kind",
+              "eventId",
+              "actualRouteId",
+              "dependsOn",
+              "type",
+              "payload"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "schemaVersion": {
+                "const": "match-ui-slice/0.1"
+              },
+              "presentationId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "matchId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "momentId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "presentationSequence": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "inning": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "half": {
+                "enum": [
+                  "top",
+                  "bottom"
+                ]
+              },
+              "kind": {
+                "const": "playback"
+              },
+              "eventId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "actualRouteId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "dependsOn": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "type": {
+                "const": "contest"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "runnerId": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "targetBase": {
+                    "enum": [
+                      "first",
+                      "second",
+                      "third",
+                      "home"
+                    ]
+                  },
+                  "comparison": {
+                    "enum": [
+                      "defenseClearlyAhead",
+                      "runnerClearlyAhead",
+                      "closePlay",
+                      "noContest"
+                    ]
+                  }
+                },
+                "required": [
+                  "runnerId",
+                  "targetBase",
+                  "comparison"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "schemaVersion",
+              "presentationId",
+              "matchId",
+              "momentId",
+              "presentationSequence",
+              "inning",
+              "half",
+              "kind",
+              "eventId",
+              "actualRouteId",
+              "dependsOn",
+              "type",
+              "payload"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "schemaVersion": {
+                "const": "match-ui-slice/0.1"
+              },
+              "presentationId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "matchId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "momentId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "presentationSequence": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "inning": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "half": {
+                "enum": [
+                  "top",
+                  "bottom"
+                ]
+              },
+              "kind": {
+                "const": "playback"
+              },
+              "eventId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "actualRouteId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "dependsOn": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "type": {
+                "const": "result"
+              },
+              "payload": {
+                "type": "object",
+                "properties": {
+                  "resultCode": {
+                    "enum": [
+                      "oneOut",
+                      "twoOuts",
+                      "zeroOuts",
+                      "error"
+                    ]
+                  },
+                  "outsCreated": {
+                    "enum": [
+                      0,
+                      1,
+                      2
+                    ]
+                  },
+                  "error": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "resultCode",
+                  "outsCreated",
+                  "error"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "schemaVersion",
+              "presentationId",
+              "matchId",
+              "momentId",
+              "presentationSequence",
+              "inning",
+              "half",
+              "kind",
+              "eventId",
+              "actualRouteId",
+              "dependsOn",
+              "type",
+              "payload"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "MatchResolutionView": {
+        "type": "object",
+        "properties": {
+          "schemaVersion": {
+            "const": "match-ui-slice/0.1"
+          },
+          "presentationId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "matchId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "momentId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "presentationSequence": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "inning": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "half": {
+            "enum": [
+              "top",
+              "bottom"
+            ]
+          },
+          "kind": {
+            "const": "resolution"
+          },
+          "status": {
+            "const": "settled"
+          },
+          "selectedRouteId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "actualRouteId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "resultCode": {
+            "enum": [
+              "oneOut",
+              "twoOuts",
+              "zeroOuts",
+              "error"
+            ]
+          },
+          "batterResult": {
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "type": "object",
+            "properties": {
+              "outs": {
+                "enum": [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              },
+              "scores": {
+                "type": "object",
+                "properties": {
+                  "home": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "away": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "home",
+                  "away"
+                ],
+                "additionalProperties": false
+              },
+              "bases": {
+                "type": "array",
+                "items": {
+                  "type": "boolean"
+                },
+                "minItems": 3,
+                "maxItems": 3
+              }
+            },
+            "required": [
+              "outs",
+              "scores",
+              "bases"
+            ],
+            "additionalProperties": false
+          },
+          "runnerChanges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "runnerId": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "from": {
+                  "enum": [
+                    "batter",
+                    1,
+                    2,
+                    3
+                  ]
+                },
+                "to": {
+                  "enum": [
+                    "out",
+                    "home",
+                    1,
+                    2,
+                    3
+                  ]
+                }
+              },
+              "required": [
+                "runnerId",
+                "from",
+                "to"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "outcomeText": {
+            "type": "string",
+            "minLength": 1
+          },
+          "feedbackText": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "schemaVersion",
+          "presentationId",
+          "matchId",
+          "momentId",
+          "presentationSequence",
+          "inning",
+          "half",
+          "kind",
+          "status",
+          "selectedRouteId",
+          "actualRouteId",
+          "resultCode",
+          "batterResult",
+          "state",
+          "runnerChanges",
+          "outcomeText",
+          "feedbackText"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "schemaValidation": {
+    "method": "Local in-memory validator for only the schema keywords used here: type, const, enum, required, additionalProperties, properties, items, minItems, maxItems, minLength, minimum, oneOf, local $ref. No application modules loaded; not a general JSON Schema implementation.",
+    "applicationRuntimeValidation": false,
+    "checks": [
+      {
+        "name": "Three DTO schemas reject additional properties and require declared fields",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "Existing capture projected to 1 Decision, 7 Playback, 1 Resolution with valid shape",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "Every example matches exactly one top-level DTO",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "Decision before snapshot agrees with immutable lifecycle.createdAt",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "All four native route identities, order and public command mappings retained",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "Causal beats ordered uniquely without cycles or missing predecessors",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "Only committed selected route represented by every beat",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "Decision contains no resolution, raw physical truth, quality, margins or RNG fields",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "All output DTOs omit internal provenance, capability values and timing numbers",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "Resolution preserves 4 top 2 outs second occupied home0 away1 and formal runner changes",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "Historical final summary remains separate from Moment DTO",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "Ground depth null retained without fabricated geometry or seconds",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "Eight malformed or leaking static examples rejected",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "Presentation replay input uses identical serialized cached DTOs without game execution",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "All prior readable files and captures preserve bytes",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "Protected 12 paths metadata only unchanged",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "Git refs, index and pre-existing tracked WIP preserved",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "Document contains all 13 sections, all three DTOs and fixed stop gates",
+        "status": "PASS",
+        "scope": "static-only"
+      },
+      {
+        "name": "All local document references resolve or name this newly created evidence",
+        "status": "PASS",
+        "scope": "static-only"
+      }
+    ],
+    "negativeExamples": [
+      {
+        "name": "Premature result on Decision",
+        "status": "REJECTED_AS_EXPECTED",
+        "errors": [
+          "$.resultCode:additionalProperties"
+        ]
+      },
+      {
+        "name": "Raw nested physical data",
+        "status": "REJECTED_AS_EXPECTED",
+        "errors": [
+          "$.observations.rawPhysicalTruth:additionalProperties"
+        ]
+      },
+      {
+        "name": "Unknown schemaVersion",
+        "status": "REJECTED_AS_EXPECTED",
+        "errors": [
+          "$.schemaVersion:const"
+        ]
+      },
+      {
+        "name": "Incomplete base tuple",
+        "status": "REJECTED_AS_EXPECTED",
+        "errors": [
+          "$.state.bases:minItems"
+        ]
+      },
+      {
+        "name": "Closed half-inning presented as Decision",
+        "status": "REJECTED_AS_EXPECTED",
+        "errors": [
+          "$.state.outs:enum"
+        ]
+      },
+      {
+        "name": "No legal choices",
+        "status": "REJECTED_AS_EXPECTED",
+        "errors": [
+          "$.choices:minItems"
+        ]
+      },
+      {
+        "name": "Raw timing number on Playback",
+        "status": "REJECTED_AS_EXPECTED",
+        "errors": [
+          "$:oneOf"
+        ]
+      },
+      {
+        "name": "Missing Resolution state",
+        "status": "REJECTED_AS_EXPECTED",
+        "errors": [
+          "$.state:required"
+        ]
+      }
+    ],
+    "totalPositiveChecks": 19,
+    "totalExpectedRejections": 8
+  },
+  "examples": {
+    "decision": {
+      "schemaVersion": "match-ui-slice/0.1",
+      "presentationId": "example-ss-6-3-20261016",
+      "matchId": "hs-y1-autumn-exhibition",
+      "momentId": "hs_y1_match_moment_2",
+      "inning": 4,
+      "half": "top",
+      "presentationSequence": 0,
+      "kind": "decision",
+      "player": {
+        "id": "player",
+        "position": "SS"
+      },
+      "state": {
+        "outs": 1,
+        "scores": {
+          "home": 0,
+          "away": 1
+        },
+        "bases": [
+          true,
+          false,
+          false
+        ]
+      },
+      "situationText": "1 出局，一壘有人。進入游擊守區的滾地球往你的左側移動；依正式守位與來球方向確認處理責任，再比較跑者及傳球時間。。一壘跑者受迫往二壘，打者跑者正衝向一壘。這是一般擊球形成的滾地守備：二壘封殺窗口很緊，打者的一壘出局窗口很緊。",
+      "observations": {
+        "directionText": null,
+        "paceText": null,
+        "runnerCue": null,
+        "readCue": null
+      },
+      "choices": [
+        {
+          "routeId": "secureFirstBaseOut",
+          "matchDecision": "secure",
+          "matchMomentId": "hs_y1_match_moment_2",
+          "label": "先處理一壘的打者跑者",
+          "objectiveText": "優先爭取打者出局",
+          "risk": "low",
+          "routeLabel": "6-3"
+        },
+        {
+          "routeId": "forceSecond",
+          "matchDecision": "forceSecond",
+          "matchMomentId": "hs_y1_match_moment_2",
+          "label": "傳二壘封殺一壘跑者，先完成一個出局",
+          "objectiveText": "優先處理前位跑者",
+          "risk": "medium",
+          "routeLabel": "6-4"
+        },
+        {
+          "routeId": "startDoublePlaySecond",
+          "matchDecision": "challenge",
+          "matchMomentId": "hs_y1_match_moment_2",
+          "label": "轉傳二壘，再由二壘手轉一壘挑戰雙殺",
+          "objectiveText": "嘗試完成雙殺",
+          "risk": "high",
+          "routeLabel": "6-4-3"
+        },
+        {
+          "routeId": "holdBall",
+          "matchDecision": "contain",
+          "matchMomentId": "hs_y1_match_moment_2",
+          "label": "先控制球與最前方跑者，不勉強擴大失誤",
+          "objectiveText": "控制球與跑者",
+          "risk": "low",
+          "routeLabel": "持球"
+        }
+      ]
+    },
+    "playback": [
+      {
+        "schemaVersion": "match-ui-slice/0.1",
+        "presentationId": "example-ss-6-3-20261016",
+        "matchId": "hs-y1-autumn-exhibition",
+        "momentId": "hs_y1_match_moment_2",
+        "inning": 4,
+        "half": "top",
+        "presentationSequence": 1,
+        "kind": "playback",
+        "eventId": "example-ss-6-3-20261016:beat:1",
+        "actualRouteId": "secureFirstBaseOut",
+        "dependsOn": [],
+        "type": "ballInPlay",
+        "payload": {
+          "ballType": "groundBall",
+          "direction": "leftSide",
+          "pace": "firm",
+          "depth": null
+        }
+      },
+      {
+        "schemaVersion": "match-ui-slice/0.1",
+        "presentationId": "example-ss-6-3-20261016",
+        "matchId": "hs-y1-autumn-exhibition",
+        "momentId": "hs_y1_match_moment_2",
+        "inning": 4,
+        "half": "top",
+        "presentationSequence": 2,
+        "kind": "playback",
+        "eventId": "example-ss-6-3-20261016:beat:2",
+        "actualRouteId": "secureFirstBaseOut",
+        "dependsOn": [
+          "example-ss-6-3-20261016:beat:1"
+        ],
+        "type": "approach",
+        "payload": {
+          "actorId": "player",
+          "status": "completed"
+        }
+      },
+      {
+        "schemaVersion": "match-ui-slice/0.1",
+        "presentationId": "example-ss-6-3-20261016",
+        "matchId": "hs-y1-autumn-exhibition",
+        "momentId": "hs_y1_match_moment_2",
+        "inning": 4,
+        "half": "top",
+        "presentationSequence": 3,
+        "kind": "playback",
+        "eventId": "example-ss-6-3-20261016:beat:3",
+        "actualRouteId": "secureFirstBaseOut",
+        "dependsOn": [
+          "example-ss-6-3-20261016:beat:2"
+        ],
+        "type": "control",
+        "payload": {
+          "actorId": "player",
+          "status": "completed"
+        }
+      },
+      {
+        "schemaVersion": "match-ui-slice/0.1",
+        "presentationId": "example-ss-6-3-20261016",
+        "matchId": "hs-y1-autumn-exhibition",
+        "momentId": "hs_y1_match_moment_2",
+        "inning": 4,
+        "half": "top",
+        "presentationSequence": 4,
+        "kind": "playback",
+        "eventId": "example-ss-6-3-20261016:beat:4",
+        "actualRouteId": "secureFirstBaseOut",
+        "dependsOn": [
+          "example-ss-6-3-20261016:beat:3"
+        ],
+        "type": "throw",
+        "payload": {
+          "actorId": "player",
+          "receiverId": "school-development-29d536a2-player-03",
+          "targetBase": "first",
+          "status": "completed"
+        }
+      },
+      {
+        "schemaVersion": "match-ui-slice/0.1",
+        "presentationId": "example-ss-6-3-20261016",
+        "matchId": "hs-y1-autumn-exhibition",
+        "momentId": "hs_y1_match_moment_2",
+        "inning": 4,
+        "half": "top",
+        "presentationSequence": 5,
+        "kind": "playback",
+        "eventId": "example-ss-6-3-20261016:beat:5",
+        "actualRouteId": "secureFirstBaseOut",
+        "dependsOn": [
+          "example-ss-6-3-20261016:beat:4"
+        ],
+        "type": "receive",
+        "payload": {
+          "actorId": "school-development-29d536a2-player-03",
+          "targetBase": "first",
+          "status": "completed"
+        }
+      },
+      {
+        "schemaVersion": "match-ui-slice/0.1",
+        "presentationId": "example-ss-6-3-20261016",
+        "matchId": "hs-y1-autumn-exhibition",
+        "momentId": "hs_y1_match_moment_2",
+        "inning": 4,
+        "half": "top",
+        "presentationSequence": 6,
+        "kind": "playback",
+        "eventId": "example-ss-6-3-20261016:beat:6",
+        "actualRouteId": "secureFirstBaseOut",
+        "dependsOn": [
+          "example-ss-6-3-20261016:beat:5"
+        ],
+        "type": "contest",
+        "payload": {
+          "runnerId": "regional-power-school-player-09",
+          "targetBase": "first",
+          "comparison": "defenseClearlyAhead"
+        }
+      },
+      {
+        "schemaVersion": "match-ui-slice/0.1",
+        "presentationId": "example-ss-6-3-20261016",
+        "matchId": "hs-y1-autumn-exhibition",
+        "momentId": "hs_y1_match_moment_2",
+        "inning": 4,
+        "half": "top",
+        "presentationSequence": 7,
+        "kind": "playback",
+        "eventId": "example-ss-6-3-20261016:beat:7",
+        "actualRouteId": "secureFirstBaseOut",
+        "dependsOn": [
+          "example-ss-6-3-20261016:beat:6"
+        ],
+        "type": "result",
+        "payload": {
+          "resultCode": "oneOut",
+          "outsCreated": 1,
+          "error": false
+        }
+      }
+    ],
+    "resolution": {
+      "schemaVersion": "match-ui-slice/0.1",
+      "presentationId": "example-ss-6-3-20261016",
+      "matchId": "hs-y1-autumn-exhibition",
+      "momentId": "hs_y1_match_moment_2",
+      "inning": 4,
+      "half": "top",
+      "presentationSequence": 8,
+      "kind": "resolution",
+      "status": "settled",
+      "selectedRouteId": "secureFirstBaseOut",
+      "actualRouteId": "secureFirstBaseOut",
+      "resultCode": "oneOut",
+      "batterResult": "out",
+      "state": {
+        "outs": 2,
+        "scores": {
+          "home": 0,
+          "away": 1
+        },
+        "bases": [
+          false,
+          true,
+          false
+        ]
+      },
+      "runnerChanges": [
+        {
+          "runnerId": "regional-power-school-player-09",
+          "from": "batter",
+          "to": "out"
+        },
+        {
+          "runnerId": "regional-power-school-player-04",
+          "from": 1,
+          "to": 2
+        }
+      ],
+      "outcomeText": "你把球傳向一壘，球趕在打者跑者之前到達，一壘完成打者出局。 一壘跑者從一壘推進到二壘。 現在 2 出局、二壘有人。",
+      "feedbackText": "主要原因：各段守備都在有效窗口內完成。"
+    }
+  },
+  "exampleQualifications": {
+    "source": "docs/ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-findings-evidence.json",
+    "sourceSha256": "296a3727be1f18cfc80ace0d174cb929bcc253b5d525cd1b819e31ec08a6d60b",
+    "isProductionDtoExport": false,
+    "isNewGameplay": false,
+    "presentationMetadata": "Proposed, memory-only example IDs and ordering",
+    "nullableObservations": "Specific separately projected observation strings were not captured here. Nulls deliberately retained; official pre-decision presentationText supplies the observed context. No values reconstructed from raw physics for Decision.",
+    "formalChoiceCommand": {
+      "decision": "secure",
+      "expectedMomentId": "hs_y1_match_moment_2",
+      "productionRandomSource": "existing resolver default; no UI-supplied sample"
+    },
+    "historicalLogSequences": [
+      {
+        "sequence": 48,
+        "type": "plateAppearance"
+      },
+      {
+        "sequence": 49,
+        "type": "meaningfulMomentResolved"
+      },
+      {
+        "sequence": 50,
+        "type": "defensiveResolution"
+      }
+    ],
+    "threeTimes": {
+      "decision": {
+        "inning": 4,
+        "half": "上",
+        "outs": 1,
+        "scores": {
+          "home": 0,
+          "away": 1
+        },
+        "bases": [
+          true,
+          false,
+          false
+        ]
+      },
+      "resolution": {
+        "inning": 4,
+        "half": "上",
+        "outs": 2,
+        "scores": {
+          "home": 0,
+          "away": 1
+        },
+        "bases": [
+          false,
+          true,
+          false
+        ]
+      },
+      "final": {
+        "inning": 7,
+        "half": "終",
+        "outs": 3,
+        "scores": {
+          "home": 1,
+          "away": 7
+        },
+        "bases": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "historicalSnapshotPreserved": true,
+    "unselectedRouteExecutionProven": false,
+    "rawTimingNumbersExposed": false
+  },
+  "integrity": {
+    "baseline1823Count": 1823,
+    "baseline1823Mismatches": [],
+    "priorDeliveryCount": 49,
+    "priorDeliveryMismatches": [],
+    "priorDeliverySelfPreserved": true,
+    "uniquePriorReadableFiles": 1873,
+    "allPriorMismatches": [],
+    "protectedMetadata": [
+      {
+        "file": "tests/fast-check-smoke-test.cjs",
+        "before": {
+          "size": 232,
+          "mtimeMs": 1790843210697.4724
+        },
+        "after": {
+          "size": 232,
+          "mtimeMs": 1790843210697.4724
+        },
+        "same": true
+      },
+      {
+        "file": "install.ps1",
+        "before": {
+          "size": 18481,
+          "mtimeMs": 1790645780931.8794
+        },
+        "after": {
+          "size": 18481,
+          "mtimeMs": 1790645780931.8794
+        },
+        "same": true
+      },
+      {
+        "file": "docs/first-base-sprint-3-focused-development-evidence.json",
+        "before": {
+          "size": 909541,
+          "mtimeMs": 1791695452470.9353
+        },
+        "after": {
+          "size": 909541,
+          "mtimeMs": 1791695452470.9353
+        },
+        "same": true
+      },
+      {
+        "file": "docs/infield-baseball-logic-audit-architecture-evidence.json",
+        "before": {
+          "size": 22275,
+          "mtimeMs": 1791724873822.1465
+        },
+        "after": {
+          "size": 22275,
+          "mtimeMs": 1791724873822.1465
+        },
+        "same": true
+      },
+      {
+        "file": "docs/infield-baseball-logic-audit-evidence.json",
+        "before": {
+          "size": 9987073,
+          "mtimeMs": 1791725791525.787
+        },
+        "after": {
+          "size": 9987073,
+          "mtimeMs": 1791725791525.787
+        },
+        "same": true
+      },
+      {
+        "file": "docs/infield-baseball-logic-audit-runner.cjs",
+        "before": {
+          "size": 51962,
+          "mtimeMs": 1791725789937.2622
+        },
+        "after": {
+          "size": 51962,
+          "mtimeMs": 1791725789937.2622
+        },
+        "same": true
+      },
+      {
+        "file": "docs/infield-baseball-logic-validation-audit-v1.md",
+        "before": {
+          "size": 39820,
+          "mtimeMs": 1791725790304.0483
+        },
+        "after": {
+          "size": 39820,
+          "mtimeMs": 1791725790304.0483
+        },
+        "same": true
+      },
+      {
+        "file": "docs/infield-scorer-recovery-sprint-5-green-evidence.json",
+        "before": {
+          "size": 9378500,
+          "mtimeMs": 1791766904157.9292
+        },
+        "after": {
+          "size": 9378500,
+          "mtimeMs": 1791766904157.9292
+        },
+        "same": true
+      },
+      {
+        "file": "docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json",
+        "before": {
+          "size": 11457925,
+          "mtimeMs": 1791767373630.792
+        },
+        "after": {
+          "size": 11457925,
+          "mtimeMs": 1791767373630.792
+        },
+        "same": true
+      },
+      {
+        "file": "docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json",
+        "before": {
+          "size": 686464,
+          "mtimeMs": 1791788973106.34
+        },
+        "after": {
+          "size": 686464,
+          "mtimeMs": 1791788973106.34
+        },
+        "same": true
+      },
+      {
+        "file": "docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json",
+        "before": {
+          "size": 889584,
+          "mtimeMs": 1791767570328.417
+        },
+        "after": {
+          "size": 889584,
+          "mtimeMs": 1791767570328.417
+        },
+        "same": true
+      },
+      {
+        "file": "docs/infield-scorer-recovery-sprint-5-validation.json",
+        "before": {
+          "size": 1027011,
+          "mtimeMs": 1791767101736.8584
+        },
+        "after": {
+          "size": 1027011,
+          "mtimeMs": 1791767101736.8584
+        },
+        "same": true
+      }
+    ],
+    "protectedContentReadHashedExecuted": false,
+    "snapshotFixFiles": [
+      {
+        "file": "script.js",
+        "sha256": "b35526671499a5f780ccbd5c0e152b7e935fbacdea1302c26f75730faba70669",
+        "unchanged": true
+      },
+      {
+        "file": "match-experience-development.js",
+        "sha256": "544a9a3625c69d868645011ff0f67804b48cd0734bcb5b1e4410ca593df766f3",
+        "unchanged": true
+      },
+      {
+        "file": "tests/helpers/canonical-match-contract-context.cjs",
+        "sha256": "b09b35cf404c100b6f1d00ff6b8e67e38093fd6d13a22e788413f3bb7c608fb5",
+        "unchanged": true
+      },
+      {
+        "file": "tests/canonical-match-regression-integration-test.cjs",
+        "sha256": "1265fb28109fe80726f50ad7ddd82af60a95faaa2083b5ebf11883f0b799df1c",
+        "unchanged": true
+      }
+    ],
+    "git": {
+      "branch": "main",
+      "head": "ab3117653945de0b7013636187c446276a96e634",
+      "main": "ab3117653945de0b7013636187c446276a96e634",
+      "originMain": "ab3117653945de0b7013636187c446276a96e634",
+      "indexSha256": "66af8b71c8e6927d272db9dd2109a75466042915b1fb1e0929c737d90401cd75",
+      "indexUnchanged": true,
+      "stagedChanges": [],
+      "trackedStatus": " M index.html\n M match-experience-development.js\n M match-situation-lifecycle.js\n M save.js\n M script.js\n M tests/fast-check-smoke-test.cjs\n M tests/high-school-year-one-opportunity-two-integration-test.js\n M tests/pitch-sequence-state-production-integration-test.js\n M tests/pitch-tactical-decision-production-adapter-integration-test.js\n M tests/pitch-tactical-decision-production-integration-test.js\n M tests/pitch-tactical-intent-evidence-integration-test.js\n M tests/pitch-tactical-interpretation-production-integration-test.js\n M tests/pitch-tactical-signal-projection-production-integration-test.js\n",
+      "trackedWipUnchanged": true,
+      "preExistingStatusDigest": "ed5a327715615b652e01bc6807d31ca6d404a91c4a81ffc68adfc182903f35e5",
+      "newStatusLinesBeforeEvidenceCreation": [
+        "?? docs/match-ui-slice-data-contract-v0.1.md"
+      ],
+      "removedStatusLines": [],
+      "evidenceCreation": "exclusive wx after these checks; own hash intentionally excluded"
+    },
+    "deviations": [
+      "Before attachment restrictions were decoded: global filename listings and unscoped git diff --name-only / git diff --cached --name-only. Only filenames/status returned; no diff body or protected content read. Subsequent searches bounded to exact paths.",
+      "Codebase-memory query and coverage transport failed after initial index_status. Direct current source fallback used; no successful current graph coverage claim."
+    ],
+    "toolOnlyFailures": [
+      "python not available on PATH; no script executed",
+      "Node stdin syntax failure due to PowerShell text encoding; no application module executed"
+    ],
+    "forbiddenGitMutationsPerformed": []
+  },
+  "gates": {
+    "document": "COMPLETE within proposed contract/static evidence scope",
+    "productionDtoApi": "NOT IMPLEMENTED",
+    "htmlCss": "NOT STARTED",
+    "phaser": "NOT INTRODUCED",
+    "controller": "NOT IMPLEMENTED",
+    "readyForCommit": false,
+    "readyForSprint10B": false,
+    "receiverV2": "DISABLED",
+    "stopAfterDocumentation": true
+  },
+  "finalArtifactVerification": {
+    "createdAt": "2026-10-16T01:36:32.728Z",
+    "status": "PASS",
+    "reportHashMatches": true,
+    "priorReadableFilesVerified": 1873,
+    "changedPriorReadableFiles": [],
+    "protectedMetadataChanges": [],
+    "onlyNewPaths": [
+      "docs/match-ui-slice-data-contract-v0.1-evidence.json",
+      "docs/match-ui-slice-data-contract-v0.1.md"
+    ],
+    "trackedWipUnchanged": true,
+    "indexUnchanged": true,
+    "refsUnchanged": true,
+    "gameExecutions": 0,
+    "evidenceSelfHashExcluded": true,
+    "schemaClarification": "Nullable throw.receiverId is nonempty when a string; no example data changed"
+  }
+}

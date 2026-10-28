@@ -1,0 +1,1368 @@
+{
+  "task": "Critical Regression Repair B1 — Canonical Match Fixture Contract Validation v0.1",
+  "createdAt": "2026-10-15T03:28:25.954Z",
+  "outcome": "B — Canonical Contract Gap Confirmed",
+  "classification": "CONFIRMED",
+  "proofA": "UNVERIFIED / NOT ACHIEVED",
+  "fixture": {
+    "sourceSha256": "2019013d7fc81200e9945c00834df7c4f7d33a8d4d1c8074e66d25e9475d4375",
+    "hash": "73151fe274d81f7eceb5589bd381f7fdec2d9b015dbdcfadce20e3c82ed36190",
+    "rawNumericAbilitiesUnchanged": true,
+    "originalAge": 10,
+    "primaryPositionBefore": "內野手",
+    "primaryPositionAfter": "游擊手",
+    "normalEntryComplete": false,
+    "invitationValidation": {
+      "ok": false,
+      "errors": [
+        "invitation-count-invalid",
+        "diversity-invalid:roleDiversity",
+        "diversity-invalid:competitionDiversity",
+        "diversity-invalid:environmentDiversity",
+        "diversity-invalid:tierDiversity",
+        "diversity-invalid:noDominantDuplicate",
+        "invitation-state-incomplete"
+      ],
+      "diversity": {
+        "roleCategories": 0,
+        "competitionDepthCategories": 0,
+        "trainingQualityCategories": 0,
+        "tierCategories": 0,
+        "mechanicalSignatures": 0,
+        "roleDiversity": false,
+        "competitionDiversity": false,
+        "environmentDiversity": false,
+        "tierDiversity": false,
+        "noDominantDuplicate": false
+      }
+    },
+    "canonicalRosterMembership": [
+      {
+        "id": "player",
+        "playerId": "player",
+        "primaryPosition": "SS"
+      }
+    ],
+    "initialLineup": [
+      {
+        "slot": 1,
+        "id": "home-school-player-06",
+        "playerId": "home-school-player-06",
+        "position": "游擊手",
+        "defensivePosition": "SS"
+      },
+      {
+        "slot": 2,
+        "id": "home-school-player-04",
+        "playerId": "home-school-player-04",
+        "position": "二壘手",
+        "defensivePosition": "2B"
+      },
+      {
+        "slot": 3,
+        "id": "home-school-player-08",
+        "playerId": "home-school-player-08",
+        "position": "中外野手",
+        "defensivePosition": "CF"
+      },
+      {
+        "slot": 4,
+        "id": "home-school-player-03",
+        "playerId": "home-school-player-03",
+        "position": "一壘手",
+        "defensivePosition": "1B"
+      },
+      {
+        "slot": 5,
+        "id": "home-school-player-05",
+        "playerId": "home-school-player-05",
+        "position": "三壘手",
+        "defensivePosition": "3B"
+      },
+      {
+        "slot": 6,
+        "id": "home-school-player-01",
+        "playerId": "home-school-player-01",
+        "position": "投手",
+        "defensivePosition": "P"
+      },
+      {
+        "slot": 7,
+        "id": "home-school-player-07",
+        "playerId": "home-school-player-07",
+        "position": "左外野手",
+        "defensivePosition": "LF"
+      },
+      {
+        "slot": 8,
+        "id": "home-school-player-02",
+        "playerId": "home-school-player-02",
+        "position": "捕手",
+        "defensivePosition": "C"
+      },
+      {
+        "slot": 9,
+        "id": "home-school-player-09",
+        "playerId": "home-school-player-09",
+        "position": "右外野手",
+        "defensivePosition": "RF"
+      }
+    ],
+    "canonicalBattingOrder": [
+      {
+        "battingOrder": 1,
+        "playerId": "home-school-player-06",
+        "defensivePosition": "SS"
+      },
+      {
+        "battingOrder": 2,
+        "playerId": "home-school-player-04",
+        "defensivePosition": "2B"
+      },
+      {
+        "battingOrder": 3,
+        "playerId": "home-school-player-08",
+        "defensivePosition": "CF"
+      },
+      {
+        "battingOrder": 4,
+        "playerId": "home-school-player-03",
+        "defensivePosition": "1B"
+      },
+      {
+        "battingOrder": 5,
+        "playerId": "home-school-player-05",
+        "defensivePosition": "3B"
+      },
+      {
+        "battingOrder": 6,
+        "playerId": "home-school-player-01",
+        "defensivePosition": "P"
+      },
+      {
+        "battingOrder": 7,
+        "playerId": "home-school-player-07",
+        "defensivePosition": "LF"
+      },
+      {
+        "battingOrder": 8,
+        "playerId": "home-school-player-02",
+        "defensivePosition": "C"
+      },
+      {
+        "battingOrder": 9,
+        "playerId": "home-school-player-09",
+        "defensivePosition": "RF"
+      }
+    ],
+    "actualSS": "home-school-player-06",
+    "opportunity": {
+      "version": "playing-time-opportunity-v1",
+      "sourceVersion": "playing-time-opportunity-v1",
+      "decisionId": "hs-y1-autumn-exhibition|2.2.2 測試球員|體能＋棒球理解|school-context-unavailable|55b99ae7",
+      "matchId": "hs-y1-autumn-exhibition",
+      "playerId": "2.2.2 測試球員|體能＋棒球理解|school-context-unavailable",
+      "exposureSource": "opportunity-resolver",
+      "actualRole": "starter",
+      "actualRoleAtDecision": "starter",
+      "projectedRolePrior": "",
+      "playingTimeEnvironment": "medium",
+      "schoolPlayingTimeEnvironment": "medium",
+      "competitionDepth": "medium",
+      "positionCompetition": "medium",
+      "positionNeed": "medium",
+      "evaluationTrend": 0,
+      "previousActualExposure": null,
+      "coachUsageStyle": "balanced",
+      "positionCapability": 3,
+      "positionFit": 0,
+      "positionExperience": 7,
+      "assignedPosition": "游擊手",
+      "requestedPosition": "游擊手",
+      "positionFallbackApplied": false,
+      "assignmentSource": "requested-position",
+      "assignmentReason": "specific-position-request",
+      "pitcherExposureDeferred": false,
+      "startingOpportunity": "bench",
+      "startingDecision": "bench",
+      "appearancePlan": {
+        "appearanceType": "noAppearance",
+        "entryInning": null,
+        "entryHalf": ""
+      },
+      "substitutionOpportunity": "noAppearance",
+      "opportunityReasons": [
+        "actual-role:starter",
+        "school-environment:medium",
+        "competition-depth:medium",
+        "position-need:medium",
+        "coach-usage:balanced",
+        "position-legal"
+      ],
+      "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|2.2.2 測試球員|體能＋棒球理解|school-context-unavailable|capability|school-context-unavailable|legacy-high-school-year-one|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|starter||medium|medium|medium|balanced|游擊手|3|0|7|highSchoolExhibition|0|0|regular|normal",
+      "gameContext": {
+        "gameType": "highSchoolExhibition",
+        "inning": 0,
+        "expectedGameImportance": "regular",
+        "importance": "regular",
+        "leverage": "normal",
+        "scoreMargin": 0
+      },
+      "readinessSnapshot": {
+        "version": "opportunity-readiness-v1",
+        "playerId": "2.2.2 測試球員|體能＋棒球理解|school-context-unavailable",
+        "position": "游擊手",
+        "requestedPosition": "游擊手",
+        "sourceType": "system-derived-provisional",
+        "sourceVersion": "opportunity-readiness-v1",
+        "readinessBand": "low",
+        "positionReadiness": 3,
+        "positionFit": 0,
+        "fieldingReadiness": 4,
+        "reactionReadiness": 3,
+        "decisionReadiness": 2,
+        "experienceReadiness": 7,
+        "confidence": "provisional",
+        "positionLegal": true,
+        "positionFallbackApplied": false,
+        "assignmentSource": "requested-position",
+        "assignmentReason": "specific-position-request",
+        "pitcherExposureDeferred": false,
+        "reasons": [
+          "competitiveFieldingReadiness",
+          "developingReaction",
+          "developingDecisionReadiness",
+          "strongPositionExperience",
+          "limitedPositionFit",
+          "positionLegal"
+        ],
+        "provenance": {
+          "snapshotId": "readiness-8b7800da",
+          "sourceType": "system-derived-provisional",
+          "sourceVersion": "opportunity-readiness-v1",
+          "inputVersion": "hs-entry-capability-v1",
+          "deterministicIdentity": "opportunity-readiness-v1|2.2.2 測試球員|體能＋棒球理解|school-context-unavailable|游擊手|游擊手|3|0|4|3|2|7|hs-entry-capability-v1"
+        }
+      },
+      "plannedUsage": {
+        "appearanceType": "noAppearance",
+        "entryInning": null,
+        "entryHalf": ""
+      },
+      "debug": {
+        "opportunityHash": 1438227175,
+        "opportunityScore": 27,
+        "scoreBreakdown": {
+          "actualRole": 58,
+          "positionCapability": -8,
+          "positionFit": -10,
+          "positionExperience": 3,
+          "schoolEnvironment": -1,
+          "competitionDepth": 0,
+          "positionNeed": 0,
+          "projectedRolePrior": 0,
+          "coachUsage": 0,
+          "gameContext": 0,
+          "deterministicVariation": -15
+        },
+        "reasons": [
+          "actual-role:starter",
+          "school-environment:medium",
+          "competition-depth:medium",
+          "position-need:medium",
+          "coach-usage:balanced",
+          "position-legal"
+        ]
+      }
+    },
+    "plannedUsage": {
+      "appearanceType": "noAppearance",
+      "entryInning": null,
+      "entryHalf": ""
+    }
+  },
+  "operands": {
+    "completed": true,
+    "firstIdPresent": false,
+    "finalIdPresent": false,
+    "defenseCount": 0,
+    "defensiveMeaningfulDecisionCount": 0,
+    "defenseCountsEqual": true,
+    "safetyBelow1400": true
+  },
+  "original36Boolean": false,
+  "safety": 128,
+  "decisionCount": 0,
+  "decisionSequence": [],
+  "final": {
+    "completed": true,
+    "inning": 9,
+    "half": "終",
+    "outs": 2,
+    "runners": [
+      null,
+      null,
+      null
+    ],
+    "scores": {
+      "home": 6,
+      "away": 5
+    },
+    "settled": true
+  },
+  "record": {
+    "sha256": "4b34fac8b64c6559d14a821f077b698d03295262c848b5990de53ed5057e872d",
+    "integrity": {
+      "accepted": true
+    },
+    "status": "final",
+    "playerLine": {
+      "playerId": "player",
+      "teamId": "home-school",
+      "role": "bench",
+      "position": "游擊手",
+      "positionAppearances": [],
+      "batting": {
+        "PA": 0,
+        "AB": 0,
+        "R": 0,
+        "H": 0,
+        "doubles": 0,
+        "triples": 0,
+        "HR": 0,
+        "RBI": 0,
+        "BB": 0,
+        "HBP": 0,
+        "SO": 0,
+        "SB": 0,
+        "CS": 0,
+        "SH": 0,
+        "SF": 0
+      },
+      "pitching": {
+        "outsRecorded": 0,
+        "BF": 0,
+        "H": 0,
+        "R": 0,
+        "ER": 0,
+        "BB": 0,
+        "HBP": 0,
+        "SO": 0,
+        "HR": 0,
+        "pitches": null,
+        "strikes": null
+      },
+      "defense": {
+        "chances": 0,
+        "PO": 0,
+        "A": 0,
+        "E": 0,
+        "DP": 0
+      },
+      "baserunning": {
+        "R": 0,
+        "SB": 0,
+        "CS": 0
+      }
+    },
+    "totals": {
+      "away": {
+        "runs": 5,
+        "hits": 14,
+        "errors": 0
+      },
+      "home": {
+        "runs": 6,
+        "hits": 15,
+        "errors": 0
+      }
+    }
+  },
+  "stateIntegrity": [],
+  "allStepIntegrityIssues": [],
+  "eventCounts": {
+    "matchEntry": 1,
+    "plateAppearance": 92,
+    "halfInningEnd": 17,
+    "sideChange": 17,
+    "run": 11,
+    "walkOff": 1,
+    "gameEnd": 1
+  },
+  "ownerCallCounts": {
+    "createHighSchoolPlayingTimeOpportunity": 2,
+    "materializeSelectedHighSchoolRoster": 2,
+    "createHighSchoolMatchSimulationRoster": 1,
+    "prepareHighSchoolYearOneMatch": 1,
+    "finalizeHighSchoolGameRecord": 1,
+    "settleHighSchoolYearOneMatch": 1
+  },
+  "replay": {
+    "fixtureSha256": "73151fe274d81f7eceb5589bd381f7fdec2d9b015dbdcfadce20e3c82ed36190",
+    "initialMatchSha256": "fb7119abe40094e29b915f515bd42c6a24faba56454cd7fd39a216c15778f495",
+    "recordSha256": "4b34fac8b64c6559d14a821f077b698d03295262c848b5990de53ed5057e872d",
+    "logSha256": "7cf0a6c2275906178a2882192a60b9b01babcb0b71dd641dd6ad6ec3909ccf80",
+    "decisionSequenceSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "identicalToFirst": true
+  },
+  "negativeCases": [
+    {
+      "name": "starter-without-lineup",
+      "classification": "CONFIRMED",
+      "mutation": "bad.playerLineupStatus='starter';bad.playerEntryCompleted=true;",
+      "requiredIssue": "starter-without-player-lineup",
+      "contractIssues": [
+        "starter-without-player-lineup"
+      ],
+      "native": {
+        "matchIssues": [],
+        "matchError": null,
+        "activeDefense": {
+          "ok": true,
+          "issues": []
+        },
+        "canonicalRoster": {
+          "ok": true,
+          "errors": []
+        }
+      },
+      "contractGap": true
+    },
+    {
+      "name": "roster-player-missing",
+      "classification": "CONFIRMED",
+      "mutation": "bad.rosters.home.teamRoster.players=bad.rosters.home.teamRoster.players.filter(a=>(a.playerId||a.id)!=='player');",
+      "requiredIssue": "canonical-roster-player-missing",
+      "contractIssues": [
+        "canonical-roster-player-missing"
+      ],
+      "native": {
+        "matchIssues": [],
+        "matchError": null,
+        "activeDefense": {
+          "ok": true,
+          "issues": []
+        },
+        "canonicalRoster": {
+          "ok": true,
+          "errors": []
+        }
+      },
+      "contractGap": true
+    },
+    {
+      "name": "batting-order-batter-mismatch",
+      "classification": "CONFIRMED",
+      "mutation": "bad.currentBatter='not-the-current-lineup-batter';",
+      "requiredIssue": "batting-order-batter-mismatch",
+      "contractIssues": [
+        "batting-order-batter-mismatch"
+      ],
+      "native": {
+        "matchIssues": [
+          "current-batter-mismatch"
+        ],
+        "matchError": {
+          "name": "Error",
+          "message": "High school match integrity failed at b1-negative: current-batter-mismatch"
+        },
+        "activeDefense": {
+          "ok": true,
+          "issues": []
+        },
+        "canonicalRoster": {
+          "ok": true,
+          "errors": []
+        }
+      },
+      "contractGap": false
+    },
+    {
+      "name": "ss-assignment-mismatch",
+      "classification": "CONFIRMED",
+      "mutation": "bad.playerFieldingAssignment='游擊手';",
+      "requiredIssue": "ss-assignment-roster-mismatch",
+      "contractIssues": [
+        "ss-assignment-roster-mismatch"
+      ],
+      "native": {
+        "matchIssues": [],
+        "matchError": null,
+        "activeDefense": {
+          "ok": true,
+          "issues": []
+        },
+        "canonicalRoster": {
+          "ok": true,
+          "errors": []
+        }
+      },
+      "contractGap": true
+    }
+  ],
+  "wrongCommonJS": {
+    "mode": "module.exports present, require absent",
+    "error": {
+      "name": "ReferenceError",
+      "message": "require is not defined",
+      "stack": "high-school-schedule-opportunity.js:2\n  const api = factory(typeof module === \"object\" && module.exports ? require(\"./match-context-foundation\") : root.MatchContextFoundation);\n                                                           ^\n\nReferenceError: require is not defined\n    at high-school-schedule-opportunity.js:2:60\n    at high-school-schedule-opportunity.js:5:3\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.makeContext (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-repair-b1-canonical-match-fixture-contract-harness.cjs:11:30)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-repair-b1-canonical-match-fixture-contract-contract-proof.cjs:24:20)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module.<anonymous> (node:internal/modules/cjs/loader:1396:12)"
+    }
+  },
+  "missingRequiredOwner": {
+    "classification": "CONFIRMED",
+    "omitted": "playing-time-game-exposure.js",
+    "nativePreparationSucceeded": true,
+    "requiredOwnerRecognizedMissing": true,
+    "facts": {
+      "age": 10,
+      "primaryPosition": "游擊手",
+      "side": "home",
+      "playerLineupStatus": "starter",
+      "playerEntryCompleted": true,
+      "playerLineupSlot": 8,
+      "playerFieldingAssignment": "游擊手",
+      "developmentPositionOverride": "",
+      "developmentTestCapabilityOverride": null,
+      "rosterMembership": [
+        {
+          "playerId": "player",
+          "id": "player",
+          "name": "2.2.2 測試球員",
+          "age": 10,
+          "year": 1,
+          "primaryPosition": "SS",
+          "secondaryPositions": [
+            "LF"
+          ],
+          "bats": "R",
+          "throws": "R",
+          "contact": 3,
+          "power": 2,
+          "speed": 2,
+          "defense": 4,
+          "arm": 3,
+          "pitching": 1,
+          "pitchingProfile": {
+            "effectiveness": 1,
+            "control": 1,
+            "stuff": 1
+          },
+          "source": "canonical-player",
+          "rosterTeamId": "home-school"
+        }
+      ],
+      "startingLineup": [
+        {
+          "slot": 1,
+          "id": "home-school-player-01",
+          "playerId": "home-school-player-01",
+          "position": "投手",
+          "defensivePosition": "P"
+        },
+        {
+          "slot": 2,
+          "id": "home-school-player-04",
+          "playerId": "home-school-player-04",
+          "position": "二壘手",
+          "defensivePosition": "2B"
+        },
+        {
+          "slot": 3,
+          "id": "home-school-player-08",
+          "playerId": "home-school-player-08",
+          "position": "中外野手",
+          "defensivePosition": "CF"
+        },
+        {
+          "slot": 4,
+          "id": "home-school-player-03",
+          "playerId": "home-school-player-03",
+          "position": "一壘手",
+          "defensivePosition": "1B"
+        },
+        {
+          "slot": 5,
+          "id": "home-school-player-05",
+          "playerId": "home-school-player-05",
+          "position": "三壘手",
+          "defensivePosition": "3B"
+        },
+        {
+          "slot": 6,
+          "id": "home-school-player-07",
+          "playerId": "home-school-player-07",
+          "position": "左外野手",
+          "defensivePosition": "LF"
+        },
+        {
+          "slot": 7,
+          "id": "home-school-player-02",
+          "playerId": "home-school-player-02",
+          "position": "捕手",
+          "defensivePosition": "C"
+        },
+        {
+          "slot": 8,
+          "id": "home-school-player-09",
+          "playerId": "home-school-player-09",
+          "position": "右外野手",
+          "defensivePosition": "RF"
+        },
+        {
+          "slot": 9,
+          "id": "player",
+          "playerId": "player",
+          "position": "游擊手",
+          "defensivePosition": "SS"
+        }
+      ],
+      "canonicalBattingOrder": [
+        {
+          "battingOrder": 1,
+          "playerId": "home-school-player-01",
+          "defensivePosition": "P"
+        },
+        {
+          "battingOrder": 2,
+          "playerId": "home-school-player-04",
+          "defensivePosition": "2B"
+        },
+        {
+          "battingOrder": 3,
+          "playerId": "home-school-player-08",
+          "defensivePosition": "CF"
+        },
+        {
+          "battingOrder": 4,
+          "playerId": "home-school-player-03",
+          "defensivePosition": "1B"
+        },
+        {
+          "battingOrder": 5,
+          "playerId": "home-school-player-05",
+          "defensivePosition": "3B"
+        },
+        {
+          "battingOrder": 6,
+          "playerId": "home-school-player-07",
+          "defensivePosition": "LF"
+        },
+        {
+          "battingOrder": 7,
+          "playerId": "home-school-player-02",
+          "defensivePosition": "C"
+        },
+        {
+          "battingOrder": 8,
+          "playerId": "home-school-player-09",
+          "defensivePosition": "RF"
+        },
+        {
+          "battingOrder": 9,
+          "playerId": "player",
+          "defensivePosition": "SS"
+        }
+      ],
+      "canonicalStarters": [
+        {
+          "id": "home-school-player-01",
+          "playerId": "home-school-player-01",
+          "primaryPosition": "P"
+        },
+        {
+          "id": "home-school-player-02",
+          "playerId": "home-school-player-02",
+          "primaryPosition": "C"
+        },
+        {
+          "id": "home-school-player-03",
+          "playerId": "home-school-player-03",
+          "primaryPosition": "1B"
+        },
+        {
+          "id": "home-school-player-04",
+          "playerId": "home-school-player-04",
+          "primaryPosition": "2B"
+        },
+        {
+          "id": "home-school-player-05",
+          "playerId": "home-school-player-05",
+          "primaryPosition": "3B"
+        },
+        {
+          "id": "player",
+          "playerId": "player",
+          "primaryPosition": "SS"
+        },
+        {
+          "id": "home-school-player-07",
+          "playerId": "home-school-player-07",
+          "primaryPosition": "LF"
+        },
+        {
+          "id": "home-school-player-08",
+          "playerId": "home-school-player-08",
+          "primaryPosition": "CF"
+        },
+        {
+          "id": "home-school-player-09",
+          "playerId": "home-school-player-09",
+          "primaryPosition": "RF"
+        }
+      ],
+      "ssDefender": {
+        "playerId": "player",
+        "id": "player",
+        "name": "2.2.2 測試球員",
+        "age": 10,
+        "year": 1,
+        "primaryPosition": "SS",
+        "secondaryPositions": [
+          "LF"
+        ],
+        "bats": "R",
+        "throws": "R",
+        "contact": 3,
+        "power": 2,
+        "speed": 2,
+        "defense": 4,
+        "arm": 3,
+        "pitching": 1,
+        "pitchingProfile": {
+          "effectiveness": 1,
+          "control": 1,
+          "stuff": 1
+        },
+        "source": "canonical-player",
+        "rosterTeamId": "home-school",
+        "position": "游擊手",
+        "defensivePosition": "SS"
+      },
+      "currentBatter": "regional-power-school-player-04",
+      "actualCurrentBatter": "regional-power-school-player-04",
+      "battingOrderIndex": {
+        "home": 0,
+        "away": 0
+      }
+    },
+    "contractGap": true,
+    "notExecutedToPassOriginal36": true
+  },
+  "duplicateSettlement": {
+    "beforeHash": "c2546e97721517ec70a8631385e86d58d7c81ed24a605f1767b3ee7b4729c8df",
+    "afterHash": "c2546e97721517ec70a8631385e86d58d7c81ed24a605f1767b3ee7b4729c8df",
+    "results": [
+      false,
+      false,
+      false
+    ],
+    "noPlayerRecordLogMutation": true,
+    "gameEndCount": 1,
+    "actualSettlementEffectsOnce": true
+  },
+  "entryAPI": {
+    "actualMatchFacts": {
+      "age": 10,
+      "primaryPosition": "游擊手",
+      "side": "home",
+      "playerLineupStatus": "bench",
+      "playerEntryCompleted": false,
+      "playerLineupSlot": -1,
+      "playerFieldingAssignment": "",
+      "developmentPositionOverride": "",
+      "developmentTestCapabilityOverride": null,
+      "rosterMembership": [
+        {
+          "playerId": "player",
+          "id": "player",
+          "name": "2.2.2 測試球員",
+          "age": 10,
+          "year": 1,
+          "primaryPosition": "SS",
+          "secondaryPositions": [
+            "LF"
+          ],
+          "bats": "R",
+          "throws": "R",
+          "contact": 3,
+          "power": 2,
+          "speed": 2,
+          "defense": 4,
+          "arm": 3,
+          "pitching": 1,
+          "pitchingProfile": {
+            "effectiveness": 1,
+            "control": 1,
+            "stuff": 1
+          },
+          "source": "canonical-player",
+          "rosterTeamId": "home-school"
+        }
+      ],
+      "startingLineup": [
+        {
+          "slot": 1,
+          "id": "home-school-player-06",
+          "playerId": "home-school-player-06",
+          "position": "游擊手",
+          "defensivePosition": "SS"
+        },
+        {
+          "slot": 2,
+          "id": "home-school-player-04",
+          "playerId": "home-school-player-04",
+          "position": "二壘手",
+          "defensivePosition": "2B"
+        },
+        {
+          "slot": 3,
+          "id": "home-school-player-08",
+          "playerId": "home-school-player-08",
+          "position": "中外野手",
+          "defensivePosition": "CF"
+        },
+        {
+          "slot": 4,
+          "id": "home-school-player-03",
+          "playerId": "home-school-player-03",
+          "position": "一壘手",
+          "defensivePosition": "1B"
+        },
+        {
+          "slot": 5,
+          "id": "home-school-player-05",
+          "playerId": "home-school-player-05",
+          "position": "三壘手",
+          "defensivePosition": "3B"
+        },
+        {
+          "slot": 6,
+          "id": "home-school-player-01",
+          "playerId": "home-school-player-01",
+          "position": "投手",
+          "defensivePosition": "P"
+        },
+        {
+          "slot": 7,
+          "id": "home-school-player-07",
+          "playerId": "home-school-player-07",
+          "position": "左外野手",
+          "defensivePosition": "LF"
+        },
+        {
+          "slot": 8,
+          "id": "home-school-player-02",
+          "playerId": "home-school-player-02",
+          "position": "捕手",
+          "defensivePosition": "C"
+        },
+        {
+          "slot": 9,
+          "id": "home-school-player-09",
+          "playerId": "home-school-player-09",
+          "position": "右外野手",
+          "defensivePosition": "RF"
+        }
+      ],
+      "canonicalBattingOrder": [
+        {
+          "battingOrder": 1,
+          "playerId": "home-school-player-06",
+          "defensivePosition": "SS"
+        },
+        {
+          "battingOrder": 2,
+          "playerId": "home-school-player-04",
+          "defensivePosition": "2B"
+        },
+        {
+          "battingOrder": 3,
+          "playerId": "home-school-player-08",
+          "defensivePosition": "CF"
+        },
+        {
+          "battingOrder": 4,
+          "playerId": "home-school-player-03",
+          "defensivePosition": "1B"
+        },
+        {
+          "battingOrder": 5,
+          "playerId": "home-school-player-05",
+          "defensivePosition": "3B"
+        },
+        {
+          "battingOrder": 6,
+          "playerId": "home-school-player-01",
+          "defensivePosition": "P"
+        },
+        {
+          "battingOrder": 7,
+          "playerId": "home-school-player-07",
+          "defensivePosition": "LF"
+        },
+        {
+          "battingOrder": 8,
+          "playerId": "home-school-player-02",
+          "defensivePosition": "C"
+        },
+        {
+          "battingOrder": 9,
+          "playerId": "home-school-player-09",
+          "defensivePosition": "RF"
+        }
+      ],
+      "canonicalStarters": [
+        {
+          "id": "home-school-player-01",
+          "playerId": "home-school-player-01",
+          "primaryPosition": "P"
+        },
+        {
+          "id": "home-school-player-02",
+          "playerId": "home-school-player-02",
+          "primaryPosition": "C"
+        },
+        {
+          "id": "home-school-player-03",
+          "playerId": "home-school-player-03",
+          "primaryPosition": "1B"
+        },
+        {
+          "id": "home-school-player-04",
+          "playerId": "home-school-player-04",
+          "primaryPosition": "2B"
+        },
+        {
+          "id": "home-school-player-05",
+          "playerId": "home-school-player-05",
+          "primaryPosition": "3B"
+        },
+        {
+          "id": "home-school-player-06",
+          "playerId": "home-school-player-06",
+          "primaryPosition": "SS"
+        },
+        {
+          "id": "home-school-player-07",
+          "playerId": "home-school-player-07",
+          "primaryPosition": "LF"
+        },
+        {
+          "id": "home-school-player-08",
+          "playerId": "home-school-player-08",
+          "primaryPosition": "CF"
+        },
+        {
+          "id": "home-school-player-09",
+          "playerId": "home-school-player-09",
+          "primaryPosition": "RF"
+        }
+      ],
+      "ssDefender": {
+        "playerId": "home-school-player-06",
+        "id": "home-school-player-06",
+        "name": "加藤",
+        "age": 18,
+        "year": 3,
+        "primaryPosition": "SS",
+        "secondaryPositions": [
+          "RF"
+        ],
+        "bats": "R",
+        "throws": "R",
+        "contact": 7,
+        "power": 5,
+        "speed": 6,
+        "defense": 8,
+        "arm": 6,
+        "pitching": 1,
+        "pitchingProfile": {
+          "effectiveness": 1,
+          "control": 1,
+          "stuff": 1
+        },
+        "source": "simulation-roster",
+        "position": "游擊手",
+        "defensivePosition": "SS"
+      },
+      "currentBatter": "regional-power-school-player-04",
+      "actualCurrentBatter": "regional-power-school-player-04",
+      "battingOrderIndex": {
+        "home": 0,
+        "away": 0
+      },
+      "opportunity": {
+        "version": "playing-time-opportunity-v1",
+        "sourceVersion": "playing-time-opportunity-v1",
+        "decisionId": "hs-y1-autumn-exhibition|2.2.2 測試球員|體能＋棒球理解|school-context-unavailable|55b99ae7",
+        "matchId": "hs-y1-autumn-exhibition",
+        "playerId": "2.2.2 測試球員|體能＋棒球理解|school-context-unavailable",
+        "exposureSource": "opportunity-resolver",
+        "actualRole": "starter",
+        "actualRoleAtDecision": "starter",
+        "projectedRolePrior": "",
+        "playingTimeEnvironment": "medium",
+        "schoolPlayingTimeEnvironment": "medium",
+        "competitionDepth": "medium",
+        "positionCompetition": "medium",
+        "positionNeed": "medium",
+        "evaluationTrend": 0,
+        "previousActualExposure": null,
+        "coachUsageStyle": "balanced",
+        "positionCapability": 3,
+        "positionFit": 0,
+        "positionExperience": 7,
+        "assignedPosition": "游擊手",
+        "requestedPosition": "游擊手",
+        "positionFallbackApplied": false,
+        "assignmentSource": "requested-position",
+        "assignmentReason": "specific-position-request",
+        "pitcherExposureDeferred": false,
+        "startingOpportunity": "bench",
+        "startingDecision": "bench",
+        "appearancePlan": {
+          "appearanceType": "noAppearance",
+          "entryInning": null,
+          "entryHalf": ""
+        },
+        "substitutionOpportunity": "noAppearance",
+        "opportunityReasons": [
+          "actual-role:starter",
+          "school-environment:medium",
+          "competition-depth:medium",
+          "position-need:medium",
+          "coach-usage:balanced",
+          "position-legal"
+        ],
+        "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|2.2.2 測試球員|體能＋棒球理解|school-context-unavailable|capability|school-context-unavailable|legacy-high-school-year-one|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|starter||medium|medium|medium|balanced|游擊手|3|0|7|highSchoolExhibition|0|0|regular|normal",
+        "gameContext": {
+          "gameType": "highSchoolExhibition",
+          "inning": 0,
+          "expectedGameImportance": "regular",
+          "importance": "regular",
+          "leverage": "normal",
+          "scoreMargin": 0
+        },
+        "readinessSnapshot": {
+          "version": "opportunity-readiness-v1",
+          "playerId": "2.2.2 測試球員|體能＋棒球理解|school-context-unavailable",
+          "position": "游擊手",
+          "requestedPosition": "游擊手",
+          "sourceType": "system-derived-provisional",
+          "sourceVersion": "opportunity-readiness-v1",
+          "readinessBand": "low",
+          "positionReadiness": 3,
+          "positionFit": 0,
+          "fieldingReadiness": 4,
+          "reactionReadiness": 3,
+          "decisionReadiness": 2,
+          "experienceReadiness": 7,
+          "confidence": "provisional",
+          "positionLegal": true,
+          "positionFallbackApplied": false,
+          "assignmentSource": "requested-position",
+          "assignmentReason": "specific-position-request",
+          "pitcherExposureDeferred": false,
+          "reasons": [
+            "competitiveFieldingReadiness",
+            "developingReaction",
+            "developingDecisionReadiness",
+            "strongPositionExperience",
+            "limitedPositionFit",
+            "positionLegal"
+          ],
+          "provenance": {
+            "snapshotId": "readiness-8b7800da",
+            "sourceType": "system-derived-provisional",
+            "sourceVersion": "opportunity-readiness-v1",
+            "inputVersion": "hs-entry-capability-v1",
+            "deterministicIdentity": "opportunity-readiness-v1|2.2.2 測試球員|體能＋棒球理解|school-context-unavailable|游擊手|游擊手|3|0|4|3|2|7|hs-entry-capability-v1"
+          }
+        },
+        "plannedUsage": {
+          "appearanceType": "noAppearance",
+          "entryInning": null,
+          "entryHalf": ""
+        },
+        "debug": {
+          "opportunityHash": 1438227175,
+          "opportunityScore": 27,
+          "scoreBreakdown": {
+            "actualRole": 58,
+            "positionCapability": -8,
+            "positionFit": -10,
+            "positionExperience": 3,
+            "schoolEnvironment": -1,
+            "competitionDepth": 0,
+            "positionNeed": 0,
+            "projectedRolePrior": 0,
+            "coachUsage": 0,
+            "gameContext": 0,
+            "deterministicVariation": -15
+          },
+          "reasons": [
+            "actual-role:starter",
+            "school-environment:medium",
+            "competition-depth:medium",
+            "position-need:medium",
+            "coach-usage:balanced",
+            "position-legal"
+          ]
+        }
+      },
+      "plannedUsage": {
+        "appearanceType": "noAppearance",
+        "entryInning": null,
+        "entryHalf": ""
+      }
+    },
+    "generatedRosterPlayer": {
+      "playerId": "player",
+      "id": "player",
+      "name": "2.2.2 測試球員",
+      "age": 10,
+      "year": 1,
+      "primaryPosition": "SS",
+      "secondaryPositions": [
+        "LF"
+      ],
+      "bats": "R",
+      "throws": "R",
+      "contact": 3,
+      "power": 2,
+      "speed": 2,
+      "defense": 4,
+      "arm": 3,
+      "pitching": 1,
+      "pitchingProfile": {
+        "effectiveness": 1,
+        "control": 1,
+        "stuff": 1
+      },
+      "source": "canonical-player",
+      "rosterTeamId": "home-school",
+      "position": "游擊手",
+      "defensivePosition": "SS"
+    },
+    "generatedRosterLineup": [
+      {
+        "id": "home-school-player-01",
+        "position": "投手"
+      },
+      {
+        "id": "home-school-player-04",
+        "position": "二壘手"
+      },
+      {
+        "id": "home-school-player-08",
+        "position": "中外野手"
+      },
+      {
+        "id": "home-school-player-03",
+        "position": "一壘手"
+      },
+      {
+        "id": "home-school-player-05",
+        "position": "三壘手"
+      },
+      {
+        "id": "home-school-player-07",
+        "position": "左外野手"
+      },
+      {
+        "id": "home-school-player-02",
+        "position": "捕手"
+      },
+      {
+        "id": "home-school-player-09",
+        "position": "右外野手"
+      },
+      {
+        "id": "player",
+        "position": "游擊手"
+      }
+    ],
+    "generatedRosterValidation": {
+      "ok": true,
+      "errors": []
+    },
+    "generatedRosterDefense": {
+      "ok": true,
+      "issues": []
+    },
+    "awayRosterUnchanged": true,
+    "startingOpportunity": {
+      "version": "playing-time-opportunity-v1",
+      "sourceVersion": "playing-time-opportunity-v1",
+      "decisionId": "hs-y1-autumn-exhibition|2.2.2 測試球員|體能＋棒球理解|school-context-unavailable|55b99ae7",
+      "matchId": "hs-y1-autumn-exhibition",
+      "playerId": "2.2.2 測試球員|體能＋棒球理解|school-context-unavailable",
+      "exposureSource": "direct-start-forced",
+      "actualRole": "starter",
+      "actualRoleAtDecision": "starter",
+      "projectedRolePrior": "",
+      "playingTimeEnvironment": "medium",
+      "schoolPlayingTimeEnvironment": "medium",
+      "competitionDepth": "medium",
+      "positionCompetition": "medium",
+      "positionNeed": "medium",
+      "evaluationTrend": 0,
+      "previousActualExposure": null,
+      "coachUsageStyle": "balanced",
+      "positionCapability": 3,
+      "positionFit": 0,
+      "positionExperience": 7,
+      "assignedPosition": "游擊手",
+      "requestedPosition": "游擊手",
+      "positionFallbackApplied": false,
+      "assignmentSource": "requested-position",
+      "assignmentReason": "specific-position-request",
+      "pitcherExposureDeferred": false,
+      "startingOpportunity": "start",
+      "startingDecision": "start",
+      "appearancePlan": {
+        "appearanceType": "start",
+        "entryInning": 1,
+        "entryHalf": "上"
+      },
+      "substitutionOpportunity": "none",
+      "opportunityReasons": [
+        "actual-role:starter",
+        "school-environment:medium",
+        "competition-depth:medium",
+        "position-need:medium",
+        "coach-usage:balanced",
+        "position-legal"
+      ],
+      "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|2.2.2 測試球員|體能＋棒球理解|school-context-unavailable|capability|school-context-unavailable|legacy-high-school-year-one|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|starter||medium|medium|medium|balanced|游擊手|3|0|7|highSchoolExhibition|0|0|regular|normal",
+      "gameContext": {
+        "gameType": "highSchoolExhibition",
+        "inning": 0,
+        "expectedGameImportance": "regular",
+        "importance": "regular",
+        "leverage": "normal",
+        "scoreMargin": 0
+      },
+      "readinessSnapshot": {
+        "version": "opportunity-readiness-v1",
+        "playerId": "2.2.2 測試球員|體能＋棒球理解|school-context-unavailable",
+        "position": "游擊手",
+        "requestedPosition": "游擊手",
+        "sourceType": "system-derived-provisional",
+        "sourceVersion": "opportunity-readiness-v1",
+        "readinessBand": "low",
+        "positionReadiness": 3,
+        "positionFit": 0,
+        "fieldingReadiness": 4,
+        "reactionReadiness": 3,
+        "decisionReadiness": 2,
+        "experienceReadiness": 7,
+        "confidence": "provisional",
+        "positionLegal": true,
+        "positionFallbackApplied": false,
+        "assignmentSource": "requested-position",
+        "assignmentReason": "specific-position-request",
+        "pitcherExposureDeferred": false,
+        "reasons": [
+          "competitiveFieldingReadiness",
+          "developingReaction",
+          "developingDecisionReadiness",
+          "strongPositionExperience",
+          "limitedPositionFit",
+          "positionLegal"
+        ],
+        "provenance": {
+          "snapshotId": "readiness-8b7800da",
+          "sourceType": "system-derived-provisional",
+          "sourceVersion": "opportunity-readiness-v1",
+          "inputVersion": "hs-entry-capability-v1",
+          "deterministicIdentity": "opportunity-readiness-v1|2.2.2 測試球員|體能＋棒球理解|school-context-unavailable|游擊手|游擊手|3|0|4|3|2|7|hs-entry-capability-v1"
+        }
+      },
+      "plannedUsage": {
+        "appearanceType": "start",
+        "entryInning": 1,
+        "entryHalf": "上"
+      },
+      "debug": {
+        "opportunityHash": 1438227175,
+        "opportunityScore": 27,
+        "scoreBreakdown": {
+          "actualRole": 58,
+          "positionCapability": -8,
+          "positionFit": -10,
+          "positionExperience": 3,
+          "schoolEnvironment": -1,
+          "competitionDepth": 0,
+          "positionNeed": 0,
+          "projectedRolePrior": 0,
+          "coachUsage": 0,
+          "gameContext": 0,
+          "deterministicVariation": -15
+        },
+        "reasons": [
+          "actual-role:starter",
+          "school-environment:medium",
+          "competition-depth:medium",
+          "position-need:medium",
+          "coach-usage:balanced",
+          "position-legal"
+        ]
+      }
+    },
+    "suppliedOpportunitySeed": 3144261226,
+    "pendingSeedContract": 88221
+  },
+  "normalEntry": {
+    "classification": "CONFIRMED",
+    "inputFixtureSha256": "73151fe274d81f7eceb5589bd381f7fdec2d9b015dbdcfadce20e3c82ed36190",
+    "beforeHash": "61470bf399db7aace8fc5e2d3fa26abf88000ade525df67a6d867782f9a43150",
+    "afterHash": "61470bf399db7aace8fc5e2d3fa26abf88000ade525df67a6d867782f9a43150",
+    "validation": {
+      "capability": {
+        "ok": true,
+        "errors": []
+      },
+      "invitation": {
+        "ok": false,
+        "errors": [
+          "invitation-count-invalid",
+          "diversity-invalid:roleDiversity",
+          "diversity-invalid:competitionDiversity",
+          "diversity-invalid:environmentDiversity",
+          "diversity-invalid:tierDiversity",
+          "diversity-invalid:noDominantDuplicate",
+          "invitation-state-incomplete"
+        ],
+        "diversity": {
+          "roleCategories": 0,
+          "competitionDepthCategories": 0,
+          "trainingQualityCategories": 0,
+          "tierCategories": 0,
+          "mechanicalSignatures": 0,
+          "roleDiversity": false,
+          "competitionDiversity": false,
+          "environmentDiversity": false,
+          "tierDiversity": false,
+          "noDominantDuplicate": false
+        }
+      },
+      "selectedSchool": null,
+      "age": 10,
+      "chapter": "青棒"
+    },
+    "completeEntryReturned": false,
+    "normalEntryNotCompleted": true,
+    "noNumericAbilityChange": true,
+    "noRosterOrMatchRewrite": true,
+    "developmentDirectStartNotExecuted": {
+      "reason": "applyHighSchoolDirectStartHistory calls applySyntheticYouthOrigin, which adds catching/throwing/reaction/baseballIQ and position experience. This is outside the unchanged-ability proof."
+    },
+    "hypothesisLimits": "This rejects this original-derived debug fixture; it is not an exhaustive claim that no other normal career can start legally."
+  },
+  "explicitStarterGameNotExecuted": true,
+  "noSeedOrAbilityTuning": true,
+  "phaseB2Started": false,
+  "productionOrFormalTestDelta": 0,
+  "readyForCommit": "NO"
+}

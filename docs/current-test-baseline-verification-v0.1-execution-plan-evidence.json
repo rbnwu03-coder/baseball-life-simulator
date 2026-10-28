@@ -1,0 +1,53 @@
+{
+  "task": "Current Test Baseline Verification v0.1 — Read-only",
+  "createdAt": "2026-10-15T07:07:25.111Z",
+  "scope": "At most two explicitly listed standalone suites, not discovery-driven full execution",
+  "suites": [
+    {
+      "label": "r4-dependency",
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs",
+      "expectedChecks": 44,
+      "previousStatus": "PASS",
+      "changedStaticDependencies": [
+        "tests/high-school-year-one-opportunity-two-integration-test.js"
+      ]
+    },
+    {
+      "label": "r6-exact-checker",
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs",
+      "expectedChecks": 23,
+      "previousStatus": "PASS",
+      "changedStaticDependencies": [
+        "tests/high-school-year-one-opportunity-two-integration-test.js"
+      ]
+    }
+  ],
+  "reason": "Historical dependency candidates include the Opportunity-two source changed by Repair A. Refresh these two guards conservatively; normal metadata-only/Save checker scopes do not enable Receiver v2.",
+  "estimates": {
+    "children": 2,
+    "expectedNamedChecks": 67,
+    "eachTimeoutMs": 120000,
+    "eachOutputMaxBuffer": 16000000,
+    "expectedElapsedSeconds": "Historical suite runtimes indicate a few seconds; hard total cap 240 seconds"
+  },
+  "reuse": "Phase B five full suite captures; Repair A formal40 and reviewed regressions; Sprint1 formal50/routine1/Record13/Ground26; original Match and Gradient standalone FAIL captures with unchanged inputs",
+  "noRerunNeededForUnchangedEvidence": true,
+  "remainingUnknownSuites": "Remain UNVERIFIED; no automatic expansion",
+  "additionalExpansion": "Must be separately proposed with concrete list and necessity; no further suites in this task",
+  "changedSinceAudit": [
+    "tests/high-school-year-one-opportunity-two-integration-test.js",
+    "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+    "tests/pitch-tactical-decision-production-integration-test.js",
+    "tests/pitch-tactical-intent-evidence-integration-test.js",
+    "tests/pitch-tactical-interpretation-production-integration-test.js",
+    "tests/pitch-tactical-signal-projection-production-integration-test.js"
+  ],
+  "forbidden": {
+    "Full251": 0,
+    "R6Full227": 0,
+    "firstBaseTiming": 0,
+    "browserFull": 0,
+    "ReceiverV2Enabled": false
+  },
+  "expectedFailurePolicy": "Record any unexpected result truthfully; do not repair Production or modify suite inputs"
+}

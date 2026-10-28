@@ -1,0 +1,162 @@
+{
+  "sprint": "10A.3b-R6",
+  "tier": 2,
+  "trace": {
+    "function": "E-meng-baseball_life_sim_semirefactor.tests.pitch-tactical-decision-production-integration-test.play",
+    "direction": "both",
+    "callees_total": 6,
+    "callees_total_relation": "eq",
+    "callees": {
+      "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+      "cols": [
+        "name",
+        "hop",
+        "test"
+      ],
+      "groups": [
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.pitch-tactical-decision-production-integration-test",
+          "rows": [
+            [
+              "clone",
+              1,
+              true
+            ],
+            [
+              "rebuild",
+              1,
+              true
+            ],
+            [
+              "discover",
+              1,
+              true
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.application-controller-test",
+          "rows": [
+            [
+              "assert",
+              1,
+              true
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.pitch-tactical-decision-foundation",
+          "rows": [
+            [
+              "decide",
+              1,
+              false
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.pitch-tactical-interpretation-foundation",
+          "rows": [
+            [
+              "interpret",
+              1,
+              false
+            ]
+          ]
+        }
+      ]
+    },
+    "callers_total": 1,
+    "callers_total_relation": "eq",
+    "callers": {
+      "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+      "cols": [
+        "name",
+        "hop",
+        "test"
+      ],
+      "groups": [
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests",
+          "rows": [
+            [
+              "pitch-tactical-decision-production-integration-test",
+              1,
+              true
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "snippet": {
+    "name": "tests/pitch-tactical-decision-production-integration-test.js",
+    "qualified_name": "E-meng-baseball_life_sim_semirefactor.tests.pitch-tactical-decision-production-integration-test",
+    "label": "Module",
+    "file_path": "E:/meng/baseball_life_sim_semirefactor/tests/pitch-tactical-decision-production-integration-test.js",
+    "start_line": 164,
+    "end_line": 179,
+    "source_truncated": true,
+    "source_clipped": true,
+    "next_start_line": 180,
+    "original_end_line": 215,
+    "source_mode": "full",
+    "source": "  for (const file of ['pitch-tactical-interpretation-foundation.js', 'pitch-sequence-state-foundation.js', 'pitch-observation-foundation.js', 'offensive-plate-approach.js', 'pitcher-catcher-tactical-integration.js', 'pitch-sequencing.js', 'save.js', 'script.js']) {\n    const current = fs.readFileSync(path.join(root, file), 'utf8').replace(/\\r\\n?/g, '\\n');\n    const baseline = cp.execFileSync('git', ['show', 'ac53bf61964bde4b40501c77e15269bae99b55cc:' + file], { cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024 }).replace(/\\r\\n?/g, '\\n');\n    if (file === 'pitcher-catcher-tactical-integration.js') require('./pitch-tactical-selector-extraction-baseline.cjs').assertOnlyRepeatEligibilityExtraction(current, baseline);\n    else if (file === 'script.js') assertPitchProductionSourceScope(current, baseline);\n    else assert.equal(current, baseline, file);\n  }\n});\ntest('9 production decisions contain no recommendation, physical pitch, scoring or psychology', () => {\n  for (const run of [on, reload, swingOn]) for (const row of run.captured) {\n    const text = JSON.stringify(row.decision);\n    assert(!/recommended|nextPitch|confidence|passive|discipline|fear|fatigue|pitchType|targetIntent|probability|competitiveStrike|chasePitch|fastball|slider|changeup|curveball/.test(text));\n    for (const key of ['velocity', 'location', 'zoneIntent', 'targetLocation', 'physicalPitchType', 'intentScore', 'utilityScore']) assert(!text.includes('\"' + key + '\"'));\n    for (const item of row.decision.candidates) {\n      assert.deepEqual(Object.keys(item), ['intent', 'reasonCodes', 'interpretationTypes']);\n      for (const type of item.interpretationTypes) assert(row.interpretation.interpretations.some(i => i.type === type));\n",
+    "callers": 0,
+    "callees": 10
+  },
+  "coverage": {
+    "project": "E-meng-baseball_life_sim_semirefactor",
+    "signal": "best_effort",
+    "indexed_at": "2026-10-14T06:52:18Z",
+    "metadata": {
+      "generation": "2026-10-14T06:52:18Z",
+      "index_mode": "full",
+      "recorded_at": "2026-10-14T06:52:20Z",
+      "recording_status": "complete",
+      "ignored_files_stored": 0,
+      "ignored_files_total": 0,
+      "hash_records_complete": true,
+      "coverage_version": 3,
+      "generation_matches": true
+    },
+    "paths": [
+      {
+        "requested_path": "tests/pitch-tactical-decision-production-integration-test.js",
+        "path": "tests/pitch-tactical-decision-production-integration-test.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "save.js",
+        "path": "save.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "tests/pitch-production-source-scope.cjs",
+        "path": "tests/pitch-production-source-scope.cjs",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      }
+    ],
+    "path_total": 3,
+    "path_returned": 3,
+    "path_has_more": false,
+    "scopes": [],
+    "scope_total": 0,
+    "scope_returned": 0,
+    "scope_truncated": false,
+    "has_more": false,
+    "caveat": "Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable."
+  },
+  "fallback": "Original Test8 callback read directly; dynamic source-equality contract is established by captured stderr and literal assertion, not play() call graph.",
+  "noRuntimeReplay": true
+}
+

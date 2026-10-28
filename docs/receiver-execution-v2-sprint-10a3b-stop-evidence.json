@@ -1,0 +1,169 @@
+{
+  "sprint": "10A.3b",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "createdAt": "2026-10-13T14:24:30.797Z",
+  "status": "FAIL_STOPPED_ON_NEW_REGRESSION",
+  "manifest": {
+    "modifiedProduction": [
+      "script.js",
+      "save.js",
+      "match-situation-lifecycle.js",
+      "index.html"
+    ],
+    "newPaths": [
+      "docs/receiver-execution-v2-production-snapshot-save-guard-sprint-10a3b.md",
+      "docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-blocking-regression-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-initial-architecture-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-initial-compatibility-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-lifecycle-regression-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-observed-validation-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-related-regression-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-stop-coverage-evidence.json",
+      "receiver-source-snapshot.js",
+      "tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+      "tests/receiver-execution-v2-sprint-10a3b-harness.cjs",
+      "tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs",
+      "docs/receiver-execution-v2-sprint-10a3b-stop-evidence.json"
+    ],
+    "newCount": 14,
+    "productionHashes": {
+      "script.js": {
+        "size": 1091903,
+        "sha256": "fe0cbf4b3e8299bc376e8eafbe5f9b9e53537e78ea47fece976e7c7262ab4a1a"
+      },
+      "save.js": {
+        "size": 50384,
+        "sha256": "dda54498c52952b58bad7bc2465af9577f12b3998ae8a4927fb9291070d41a10"
+      },
+      "match-situation-lifecycle.js": {
+        "size": 13078,
+        "sha256": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544"
+      },
+      "index.html": {
+        "size": 17433,
+        "sha256": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315"
+      }
+    },
+    "newHashes": {
+      "docs/receiver-execution-v2-production-snapshot-save-guard-sprint-10a3b.md": {
+        "size": 11557,
+        "sha256": "c28012fbea9f084130b91d0f2b6ef887a55ef843cfe8e1e9c7616edeaa8b522a"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json": {
+        "size": 97214,
+        "sha256": "b60b24f83167585b488da7e3e0d18ec1037b79273350d4bfd748dce432546b46"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-blocking-regression-evidence.json": {
+        "size": 8874,
+        "sha256": "e813abe8661f9c40ca911362709a78b3e41353b96f49cadc80ad39d603110307"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-initial-architecture-evidence.json": {
+        "size": 257926,
+        "sha256": "73144d1c10ad96dfbd098ce35012735fb7cd15dfcd2ac3b0fd76c4821af8f83f"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-initial-compatibility-evidence.json": {
+        "size": 817,
+        "sha256": "4bcd1eddd898d0bc639b69c32a6826a17e58e46fcbc40e15a1f739e639b123a9"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-lifecycle-regression-evidence.json": {
+        "size": 5393,
+        "sha256": "006ecdacf522b1e3a57870533d125c2960e961f8a10fa26c93f3ccf3133550de"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-observed-validation-evidence.json": {
+        "size": 1460,
+        "sha256": "c7dc4fad08c2f8bb3aae467e8fd6b20d93148f88162cb290cb7121b62e5bc083"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-related-regression-evidence.json": {
+        "size": 78080,
+        "sha256": "3797ba06316388a3f5a4fbcde415f6e67e8697b99f97e6724cf579a2b685b3f8"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-stop-coverage-evidence.json": {
+        "size": 503749,
+        "sha256": "2e5f566c96a43e8960aa1014d9b460933ad87d1147832996b852b097737a97df"
+      },
+      "receiver-source-snapshot.js": {
+        "size": 22985,
+        "sha256": "6eabf42d8a438726b02f2598419e21d81b630336187bcda17274e7dc4d42df5f"
+      },
+      "tests/receiver-execution-v2-production-snapshot-save-test.cjs": {
+        "size": 20533,
+        "sha256": "13775331b92655eb47c6e9781718621b919d62b72fbfc4b73e6d40895fb1d38c"
+      },
+      "tests/receiver-execution-v2-sprint-10a3b-harness.cjs": {
+        "size": 5236,
+        "sha256": "83f3aa6781e678d7fcf2dcc08dc7f8997c78f88f6b06aea2dfde7406ad9effae"
+      },
+      "tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs": {
+        "size": 6175,
+        "sha256": "4ecadd69eb7d04bccc785fa4268d122e32dd0b01bc580229e842cd967d380934"
+      }
+    },
+    "hashScope": "Explicit allowed artifacts only; self-referential stop JSON excluded."
+  },
+  "validation": {
+    "otherExistingTrackedCount": 745,
+    "otherExistingTrackedHashesUnchanged": true,
+    "protectedStatusMetadataEqual": true,
+    "protectedContentReads": 0,
+    "protectedContentHashes": 0,
+    "unknownDifferences": false,
+    "whitespaceExit": 0,
+    "newJsonParse": "PASS",
+    "coverageRequested": 761,
+    "coverageReturned": 761,
+    "partialFallback": {
+      "path": "docs/ability-performance-correlation-audit-sprint-1.1.md",
+      "lines": [
+        48,
+        56
+      ],
+      "directRead": true,
+      "scope": "original bytes only"
+    },
+    "initialStopScriptIssue": "Status filtering normalized leading spaces before slicing paths; read-only verifier corrected, no implementation change."
+  },
+  "git": {
+    "branch": "main",
+    "head": "ab3117653945de0b7013636187c446276a96e634",
+    "originMain": "ab3117653945de0b7013636187c446276a96e634",
+    "index": "",
+    "status": " M index.html\n M match-situation-lifecycle.js\n M save.js\n M script.js\n M tests/fast-check-smoke-test.cjs\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/infield-baseball-logic-audit-architecture-evidence.json\n?? docs/infield-baseball-logic-audit-evidence.json\n?? docs/infield-baseball-logic-audit-runner.cjs\n?? docs/infield-baseball-logic-validation-audit-v1.md\n?? docs/infield-scorer-recovery-sprint-5-green-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json\n?? docs/infield-scorer-recovery-sprint-5-validation.json\n?? docs/receiver-execution-v2-production-snapshot-save-guard-sprint-10a3b.md\n?? docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-lifecycle-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-observed-validation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-related-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-coverage-evidence.json\n?? install.ps1\n?? receiver-source-snapshot.js\n?? tests/receiver-execution-v2-production-snapshot-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-harness.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs\n"
+  },
+  "actions": {
+    "stage": false,
+    "commit": false,
+    "push": false,
+    "reset": false,
+    "clean": false,
+    "stash": false,
+    "implementationStoppedAfterNewRegressionObserved": true
+  },
+  "gates": {
+    "finalSourceFocused": "NOT_RERUN_INITIAL_108_PASS_ONLY",
+    "priorFocused": "INITIAL_779_PASS_ONLY",
+    "boundedComparison": "INITIAL_25_PAIRS_EQUAL_AND_3_HISTORICAL_STATES",
+    "confirmedNewProductionRegression": 1,
+    "unresolvedTimeout": 1,
+    "full227Manifest": "NOT_RUN_STOP_TRIGGER",
+    "expectedBaselineDebt": [
+      "tests/ability-performance-gradient-test.js",
+      "tests/baseball-match-foundation-2-2-2-test.js",
+      "tests/high-school-year-one-opportunity-two-integration-test.js"
+    ],
+    "productionSourceAcceptance": "PARTIAL",
+    "readyForCommit": "NO",
+    "readyForSprint10B": "NO",
+    "L03": "PARTIAL"
+  },
+  "runtimeEnabled": false,
+  "formalShadowSimulation": false,
+  "limits": [
+    "No final Production integration PASS claimed.",
+    "Implementation left reviewable uncommitted WIP; no unauthorized rollback or cleanup.",
+    "Related regression failure is not reassigned to Baseline Debt.",
+    "Captured initial passes do not validate later source refinements.",
+    "FNV consistency checksum is not authentication.",
+    "No Sprint10B,11 or Defensive Foundation Closeout begun."
+  ]
+}

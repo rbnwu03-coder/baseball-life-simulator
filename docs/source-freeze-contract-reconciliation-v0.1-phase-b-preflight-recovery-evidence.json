@@ -1,0 +1,30 @@
+{
+  "phase": "Source Freeze Contract Reconciliation v0.1 Phase B",
+  "createdAt": "2026-10-14T15:05:13.634Z",
+  "baselineSavedAndVerified": true,
+  "existingReadableFiles": 1269,
+  "bookkeepingDevelopmentFailures": [
+    {
+      "type": "Compared Phase A opening Git status without its subsequently verified deliveries",
+      "capture": "docs/source-freeze-contract-reconciliation-v0.1-phase-b-preflight-status-diagnostic-evidence.json",
+      "interactiveStderrComplete": false,
+      "suiteInvocations": 0
+    },
+    {
+      "type": "Buffer allocation failure while hashing large old captures",
+      "errorCode": "ERR_MEMORY_ALLOCATION_FAILED",
+      "resolvedBy": "Read-only 1MiB block hashing; digest and protected-path exclusions unchanged",
+      "suiteInvocations": 0
+    },
+    {
+      "type": "Similarly prefixed Phase A phase-b-plan classified as a new artifact",
+      "observedCount": 1268,
+      "actualOldCount": 1269,
+      "resolvedBy": "Keep the original Phase A plan in immutable baseline hashes",
+      "suiteInvocations": 0
+    }
+  ],
+  "productionOrOriginalTestChangesDuringPreflight": 0,
+  "priorCapturesOverwritten": false,
+  "developmentErrorsNotCountedAsSuiteResults": true
+}

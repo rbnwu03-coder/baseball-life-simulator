@@ -1,0 +1,304 @@
+{
+  "sprint": "10A.3b-R6",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "createdAt": "2026-10-14T06:39:26.695Z",
+  "node": "v24.19.0",
+  "result": {
+    "file": "tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs",
+    "sourceHash": "7bf28ed1f296feb61b64451982d72ab2c12d7ed719dd0ac30ceae3aaa26d7073",
+    "elapsedMs": 7799.6737,
+    "summary": {
+      "total": 30,
+      "passed": 30,
+      "failed": 0
+    },
+    "error": null,
+    "checks": [
+      {
+        "name": "Source16 pending direct normalizeSave preserves official state without writes/RNG/candidate",
+        "status": "PASS"
+      },
+      {
+        "name": "Source16 pending loadGame uses same raw owner and commits only admitted candidate",
+        "status": "PASS"
+      },
+      {
+        "name": "Source16 executed direct normalizeSave preserves official state without writes/RNG/candidate",
+        "status": "PASS"
+      },
+      {
+        "name": "Source16 executed loadGame uses same raw owner and commits only admitted candidate",
+        "status": "PASS"
+      },
+      {
+        "name": "Source16 settled direct normalizeSave preserves official state without writes/RNG/candidate",
+        "status": "PASS"
+      },
+      {
+        "name": "Source16 settled loadGame uses same raw owner and commits only admitted candidate",
+        "status": "PASS"
+      },
+      {
+        "name": "direct raw missing header rejects BEFORE defaults/merge",
+        "status": "PASS"
+      },
+      {
+        "name": "loadGame raw missing header rejects without live commit/normalization/writer",
+        "status": "PASS"
+      },
+      {
+        "name": "direct raw tampered legitimate header rejects BEFORE defaults/merge",
+        "status": "PASS"
+      },
+      {
+        "name": "loadGame raw tampered legitimate header rejects without live commit/normalization/writer",
+        "status": "PASS"
+      },
+      {
+        "name": "direct raw future Save version rejects BEFORE defaults/merge",
+        "status": "PASS"
+      },
+      {
+        "name": "loadGame raw future Save version rejects without live commit/normalization/writer",
+        "status": "PASS"
+      },
+      {
+        "name": "direct raw missing match format rejects BEFORE defaults/merge",
+        "status": "PASS"
+      },
+      {
+        "name": "loadGame raw missing match format rejects without live commit/normalization/writer",
+        "status": "PASS"
+      },
+      {
+        "name": "direct raw missing pin rejects BEFORE defaults/merge",
+        "status": "PASS"
+      },
+      {
+        "name": "loadGame raw missing pin rejects without live commit/normalization/writer",
+        "status": "PASS"
+      },
+      {
+        "name": "direct raw missing executed binding rejects BEFORE defaults/merge",
+        "status": "PASS"
+      },
+      {
+        "name": "loadGame raw missing executed binding rejects without live commit/normalization/writer",
+        "status": "PASS"
+      },
+      {
+        "name": "direct raw physical tamper rejects BEFORE defaults/merge",
+        "status": "PASS"
+      },
+      {
+        "name": "loadGame raw physical tamper rejects without live commit/normalization/writer",
+        "status": "PASS"
+      },
+      {
+        "name": "direct raw actor tamper rejects BEFORE defaults/merge",
+        "status": "PASS"
+      },
+      {
+        "name": "loadGame raw actor tamper rejects without live commit/normalization/writer",
+        "status": "PASS"
+      },
+      {
+        "name": "direct raw sample tamper rejects BEFORE defaults/merge",
+        "status": "PASS"
+      },
+      {
+        "name": "loadGame raw sample tamper rejects without live commit/normalization/writer",
+        "status": "PASS"
+      },
+      {
+        "name": "Source16 missing adapter rejects direct raw before defaults",
+        "status": "PASS"
+      },
+      {
+        "name": "Source16 missing adapter loadGame cannot replace live Player",
+        "status": "PASS"
+      },
+      {
+        "name": "Ordinary Legacy15 with no adapter uses original JSON writer exactly once",
+        "status": "PASS"
+      },
+      {
+        "name": "genuine formal owner Historical pending retains15 and no backfill",
+        "status": "PASS"
+      },
+      {
+        "name": "genuine formal owner Historical executed retains15 and no backfill",
+        "status": "PASS"
+      },
+      {
+        "name": "genuine formal owner Historical settled retains15 and no backfill",
+        "status": "PASS"
+      }
+    ],
+    "witnesses": [
+      {
+        "phase": "pending",
+        "entry": "direct normalizeSave",
+        "rawUnchanged": true,
+        "writes": 0,
+        "candidate": 0
+      },
+      {
+        "phase": "executed",
+        "entry": "direct normalizeSave",
+        "rawUnchanged": true,
+        "writes": 0,
+        "candidate": 0
+      },
+      {
+        "phase": "settled",
+        "entry": "direct normalizeSave",
+        "rawUnchanged": true,
+        "writes": 0,
+        "candidate": 0
+      },
+      {
+        "entry": "loadGame",
+        "mutation": "missing header",
+        "error": {
+          "name": "Error",
+          "message": "Invalid receiver source metadata: new save requires source format",
+          "stack": "Error: Invalid receiver source metadata: new save requires source format\n    at reject (receiver-source-snapshot.js:35:36)\n    at Object.validateRawSave (receiver-source-snapshot.js:210:129)\n    at normalizeSave (save.js:25:77)\n    at loadGame (save.js:649:23)\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs:46:15\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs:8:35)"
+        },
+        "defaultsCalls": 0,
+        "writes": 0,
+        "candidateCalls": 0,
+        "liveCommit": false
+      },
+      {
+        "entry": "loadGame",
+        "mutation": "tampered legitimate header",
+        "error": {
+          "name": "Error",
+          "message": "Invalid receiver source metadata: new save requires source format",
+          "stack": "Error: Invalid receiver source metadata: new save requires source format\n    at reject (receiver-source-snapshot.js:35:36)\n    at Object.validateRawSave (receiver-source-snapshot.js:210:129)\n    at normalizeSave (save.js:25:77)\n    at loadGame (save.js:649:23)\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs:46:15\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs:8:35)"
+        },
+        "defaultsCalls": 0,
+        "writes": 0,
+        "candidateCalls": 0,
+        "liveCommit": false
+      },
+      {
+        "entry": "loadGame",
+        "mutation": "future Save version",
+        "error": {
+          "name": "Error",
+          "message": "Invalid receiver source metadata: future save format not implemented",
+          "stack": "Error: Invalid receiver source metadata: future save format not implemented\n    at reject (receiver-source-snapshot.js:35:36)\n    at Object.validateRawSave (receiver-source-snapshot.js:208:44)\n    at normalizeSave (save.js:25:77)\n    at loadGame (save.js:649:23)\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs:46:15\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs:8:35)"
+        },
+        "defaultsCalls": 0,
+        "writes": 0,
+        "candidateCalls": 0,
+        "liveCommit": false
+      },
+      {
+        "entry": "loadGame",
+        "mutation": "missing match format",
+        "error": {
+          "name": "Error",
+          "message": "Invalid receiver source metadata: new save requires source format",
+          "stack": "Error: Invalid receiver source metadata: new save requires source format\n    at reject (receiver-source-snapshot.js:35:36)\n    at Object.validateRawSave (receiver-source-snapshot.js:210:129)\n    at normalizeSave (save.js:25:77)\n    at loadGame (save.js:649:23)\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs:46:15\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs:8:35)"
+        },
+        "defaultsCalls": 0,
+        "writes": 0,
+        "candidateCalls": 0,
+        "liveCommit": false
+      },
+      {
+        "entry": "loadGame",
+        "mutation": "missing pin",
+        "error": {
+          "name": "Error",
+          "message": "Invalid receiver source metadata: required handoff source fields",
+          "stack": "Error: Invalid receiver source metadata: required handoff source fields\n    at reject (receiver-source-snapshot.js:35:36)\n    at validateMatch (receiver-source-snapshot.js:153:136)\n    at Object.validateRawSave (receiver-source-snapshot.js:215:5)\n    at normalizeSave (save.js:25:77)\n    at loadGame (save.js:649:23)\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs:46:15"
+        },
+        "defaultsCalls": 0,
+        "writes": 0,
+        "candidateCalls": 0,
+        "liveCommit": false
+      },
+      {
+        "entry": "loadGame",
+        "mutation": "missing executed binding",
+        "error": {
+          "name": "Error",
+          "message": "Invalid receiver source metadata: required original execution binding",
+          "stack": "Error: Invalid receiver source metadata: required original execution binding\n    at reject (receiver-source-snapshot.js:35:36)\n    at validateMatch (receiver-source-snapshot.js:171:60)\n    at Object.validateRawSave (receiver-source-snapshot.js:215:5)\n    at normalizeSave (save.js:25:77)\n    at loadGame (save.js:649:23)\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs:46:15"
+        },
+        "defaultsCalls": 0,
+        "writes": 0,
+        "candidateCalls": 0,
+        "liveCommit": false
+      },
+      {
+        "entry": "loadGame",
+        "mutation": "physical tamper",
+        "error": {
+          "name": "Error",
+          "message": "Invalid receiver source metadata: snapshot/pin consistency",
+          "stack": "Error: Invalid receiver source metadata: snapshot/pin consistency\n    at reject (receiver-source-snapshot.js:35:36)\n    at validatePair (receiver-source-snapshot.js:70:80)\n    at validateMatch (receiver-source-snapshot.js:154:7)\n    at Object.validateRawSave (receiver-source-snapshot.js:215:5)\n    at normalizeSave (save.js:25:77)\n    at loadGame (save.js:649:23)\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)"
+        },
+        "defaultsCalls": 0,
+        "writes": 0,
+        "candidateCalls": 0,
+        "liveCommit": false
+      },
+      {
+        "entry": "loadGame",
+        "mutation": "actor tamper",
+        "error": {
+          "name": "Error",
+          "message": "Invalid receiver source metadata: fixed slot/planned intent",
+          "stack": "Error: Invalid receiver source metadata: fixed slot/planned intent\n    at reject (receiver-source-snapshot.js:35:36)\n    at validatePair (receiver-source-snapshot.js:62:206)\n    at validateMatch (receiver-source-snapshot.js:154:7)\n    at Object.validateRawSave (receiver-source-snapshot.js:215:5)\n    at normalizeSave (save.js:25:77)\n    at loadGame (save.js:649:23)\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)"
+        },
+        "defaultsCalls": 0,
+        "writes": 0,
+        "candidateCalls": 0,
+        "liveCommit": false
+      },
+      {
+        "entry": "loadGame",
+        "mutation": "sample tamper",
+        "error": {
+          "name": "Error",
+          "message": "Invalid receiver source metadata: required original execution binding",
+          "stack": "Error: Invalid receiver source metadata: required original execution binding\n    at reject (receiver-source-snapshot.js:35:36)\n    at validateMatch (receiver-source-snapshot.js:173:67)\n    at Object.validateRawSave (receiver-source-snapshot.js:215:5)\n    at normalizeSave (save.js:25:77)\n    at loadGame (save.js:649:23)\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs:46:15"
+        },
+        "defaultsCalls": 0,
+        "writes": 0,
+        "candidateCalls": 0,
+        "liveCommit": false
+      },
+      {
+        "entry": "loadGame",
+        "mutation": "missing adapter",
+        "error": {
+          "name": "Error",
+          "message": "Receiver source snapshot module required for new Save format",
+          "stack": "Error: Receiver source snapshot module required for new Save format\n    at normalizeSave (save.js:27:11)\n    at loadGame (save.js:649:23)\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs:55:13\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs:8:35)\n    at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs:53:3)\n    at focusedSuite (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r4-runner.cjs:40:110)"
+        },
+        "defaultsCalls": 0,
+        "writes": 0,
+        "liveCommit": false
+      }
+    ],
+    "runtimeEnabled": false
+  },
+  "frozenSourceHashes": {
+    "index.html": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+    "script.js": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+    "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+    "player.js": "3414f5a93429bc1a4adbe3c632485e70b5d9175822261b689543a77fa0eb38bd",
+    "match-situation-lifecycle.js": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+    "receiver-source-snapshot.js": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274",
+    "tests/pitch-sequence-state-production-integration-test.js": "7a53369d526de1c3a66b9d3e0c69f45f27f261bdb1d28c354f9831c0e8ae8327",
+    "tests/receiver-source-save-authorized-delta.cjs": "94a2cac6e155c3936ea2cd03f0d31e4e19feba87d53f87c4be5c3cc5aab28b82",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs": "e8f6a9bbdea182a6b73241d60d9c9bb54e4174fccf56dcdba05399904830504b",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs": "7bf28ed1f296feb61b64451982d72ab2c12d7ed719dd0ac30ceae3aaa26d7073"
+  }
+}

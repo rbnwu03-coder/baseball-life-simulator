@@ -1,0 +1,2125 @@
+{
+  "checks": [
+    {
+      "name": "Y2 training tradeoff sweep through real Development owner",
+      "status": "EXECUTED",
+      "evidence": {
+        "cases": 75,
+        "battingPairs": [
+          {
+            "skill": 2,
+            "trait": 2,
+            "power": 19,
+            "contact": 22,
+            "powerFatigue": 8,
+            "contactFatigue": 7
+          },
+          {
+            "skill": 2,
+            "trait": 5,
+            "power": 25,
+            "contact": 27,
+            "powerFatigue": 8,
+            "contactFatigue": 7
+          },
+          {
+            "skill": 2,
+            "trait": 8,
+            "power": 28,
+            "contact": 31,
+            "powerFatigue": 8,
+            "contactFatigue": 7
+          },
+          {
+            "skill": 8,
+            "trait": 2,
+            "power": 16,
+            "contact": 18,
+            "powerFatigue": 8,
+            "contactFatigue": 7
+          },
+          {
+            "skill": 8,
+            "trait": 5,
+            "power": 21,
+            "contact": 22,
+            "powerFatigue": 8,
+            "contactFatigue": 7
+          },
+          {
+            "skill": 8,
+            "trait": 8,
+            "power": 25,
+            "contact": 26,
+            "powerFatigue": 8,
+            "contactFatigue": 7
+          },
+          {
+            "skill": 14,
+            "trait": 2,
+            "power": 10,
+            "contact": 11,
+            "powerFatigue": 8,
+            "contactFatigue": 7
+          },
+          {
+            "skill": 14,
+            "trait": 5,
+            "power": 13,
+            "contact": 13,
+            "powerFatigue": 8,
+            "contactFatigue": 7
+          },
+          {
+            "skill": 14,
+            "trait": 8,
+            "power": 15,
+            "contact": 15,
+            "powerFatigue": 8,
+            "contactFatigue": 7
+          },
+          {
+            "skill": 18,
+            "trait": 2,
+            "power": 7,
+            "contact": 7,
+            "powerFatigue": 8,
+            "contactFatigue": 7
+          },
+          {
+            "skill": 18,
+            "trait": 5,
+            "power": 9,
+            "contact": 9,
+            "powerFatigue": 8,
+            "contactFatigue": 7
+          },
+          {
+            "skill": 18,
+            "trait": 8,
+            "power": 11,
+            "contact": 10,
+            "powerFatigue": 8,
+            "contactFatigue": 7
+          },
+          {
+            "skill": 20,
+            "trait": 2,
+            "power": 0,
+            "contact": 0,
+            "powerFatigue": 8,
+            "contactFatigue": 7
+          },
+          {
+            "skill": 20,
+            "trait": 5,
+            "power": 0,
+            "contact": 0,
+            "powerFatigue": 8,
+            "contactFatigue": 7
+          },
+          {
+            "skill": 20,
+            "trait": 8,
+            "power": 0,
+            "contact": 0,
+            "powerFatigue": 8,
+            "contactFatigue": 7
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pitcher actual no-appearance match and post-match claims",
+      "status": "EXECUTED",
+      "evidence": {
+        "appearance": "noAppearance",
+        "pitcherDeferred": true,
+        "coach": "「有幾球你看對了，也有一步慢了。下一輪把判斷後的第一個動作做得更乾淨。」",
+        "feedback": "正式角色由「先發／關鍵任務」調整為「先發／關鍵任務」；評估趨勢：承壓；目前正式樣本仍有限、上一場沒有實際上場樣本、同守位競爭者目前仍居前。",
+        "rival": "賽後高橋直接走到休息區，指出你在第七局做出的選擇"
+      }
+    },
+    {
+      "name": "Y1 post-choice fresh-runtime save reload state and reading boundary",
+      "status": "EXECUTED",
+      "evidence": {
+        "beforePending": false,
+        "afterPending": false,
+        "restoredEvent": "high_school_load",
+        "statePreserved": true
+      }
+    },
+    {
+      "name": "Y2 training result save/reload and duplicate click",
+      "status": "EXECUTED",
+      "evidence": {
+        "duplicateNoEffect": true,
+        "sameRuntime": {
+          "pending": false,
+          "event": "high_school_year_two_role_test"
+        },
+        "freshRuntime": {
+          "pending": false,
+          "event": "high_school_year_two_role_test"
+        },
+        "growthPreserved": true
+      }
+    },
+    {
+      "name": "Azhe branch threshold and persistence plus role-only rival context",
+      "status": "EXECUTED",
+      "evidence": [
+        {
+          "bond": 0,
+          "shared": false,
+          "variant": "azhe-guides",
+          "evidence": [
+            "關係證據 0",
+            "能力證據 16"
+          ]
+        },
+        {
+          "bond": 4,
+          "shared": false,
+          "variant": "co-discovery",
+          "evidence": [
+            "關係證據 4",
+            "能力證據 16"
+          ]
+        },
+        {
+          "bond": 8,
+          "shared": true,
+          "variant": "player-guides",
+          "evidence": [
+            "關係證據 8",
+            "能力證據 16",
+            "azhe_error_reworked"
+          ]
+        }
+      ]
+    }
+  ],
+  "experiments": {
+    "training": [
+      {
+        "skill": 2,
+        "trait": 2,
+        "code": "power-hitting",
+        "ok": true,
+        "progress": 19,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 8,
+        "topLevel": {},
+        "development": {
+          "traitScore": 2.536,
+          "traitModifier": 0.9536,
+          "skillDifficultyModifier": 1.2,
+          "difficultyFitModifier": 0.8769499999999999,
+          "readiness": 0.2278,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9914309550941528
+        }
+      },
+      {
+        "skill": 2,
+        "trait": 2,
+        "code": "contact-control",
+        "ok": true,
+        "progress": 22,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {
+          "ballSense": 1,
+          "discipline": 1
+        },
+        "development": {
+          "traitScore": 2.536,
+          "traitModifier": 0.9536,
+          "skillDifficultyModifier": 1.2,
+          "difficultyFitModifier": 1,
+          "readiness": 0.2278,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 1.0119225467163888
+        }
+      },
+      {
+        "skill": 2,
+        "trait": 2,
+        "code": "defensive-footwork",
+        "ok": true,
+        "progress": 21,
+        "target": "reaction",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 2.556,
+          "traitModifier": 0.9556,
+          "skillDifficultyModifier": 1.2,
+          "difficultyFitModifier": 1,
+          "readiness": 0.23005000000000003,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9796263435016448
+        }
+      },
+      {
+        "skill": 2,
+        "trait": 2,
+        "code": "throwing-basics",
+        "ok": true,
+        "progress": 20,
+        "target": "throwing",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 2.0740000000000003,
+          "traitModifier": 0.9074,
+          "skillDifficultyModifier": 1.2,
+          "difficultyFitModifier": 1,
+          "readiness": 0.17582500000000004,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9912589148621213
+        }
+      },
+      {
+        "skill": 2,
+        "trait": 2,
+        "code": "recovery",
+        "ok": true,
+        "progress": 0,
+        "target": null,
+        "levelUps": 0,
+        "fatigue": 4,
+        "topLevel": {},
+        "development": null
+      },
+      {
+        "skill": 2,
+        "trait": 5,
+        "code": "power-hitting",
+        "ok": true,
+        "progress": 25,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 8,
+        "topLevel": {},
+        "development": {
+          "traitScore": 4.732,
+          "traitModifier": 1.1732,
+          "skillDifficultyModifier": 1.2,
+          "difficultyFitModifier": 0.9387125,
+          "readiness": 0.47485000000000005,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9914309550941528
+        }
+      },
+      {
+        "skill": 2,
+        "trait": 5,
+        "code": "contact-control",
+        "ok": true,
+        "progress": 27,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {
+          "ballSense": 1,
+          "discipline": 1
+        },
+        "development": {
+          "traitScore": 4.732,
+          "traitModifier": 1.1732,
+          "skillDifficultyModifier": 1.2,
+          "difficultyFitModifier": 1,
+          "readiness": 0.47485000000000005,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 1.0119225467163888
+        }
+      },
+      {
+        "skill": 2,
+        "trait": 5,
+        "code": "defensive-footwork",
+        "ok": true,
+        "progress": 25,
+        "target": "reaction",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 4.578,
+          "traitModifier": 1.1578,
+          "skillDifficultyModifier": 1.2,
+          "difficultyFitModifier": 1,
+          "readiness": 0.457525,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9796263435016448
+        }
+      },
+      {
+        "skill": 2,
+        "trait": 5,
+        "code": "throwing-basics",
+        "ok": true,
+        "progress": 26,
+        "target": "throwing",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 4.800999999999999,
+          "traitModifier": 1.1801,
+          "skillDifficultyModifier": 1.2,
+          "difficultyFitModifier": 1,
+          "readiness": 0.48261249999999994,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9912589148621213
+        }
+      },
+      {
+        "skill": 2,
+        "trait": 5,
+        "code": "recovery",
+        "ok": true,
+        "progress": 0,
+        "target": null,
+        "levelUps": 0,
+        "fatigue": 4,
+        "topLevel": {},
+        "development": null
+      },
+      {
+        "skill": 2,
+        "trait": 8,
+        "code": "power-hitting",
+        "ok": true,
+        "progress": 28,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 8,
+        "topLevel": {},
+        "development": {
+          "traitScore": 6.928,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 1.2,
+          "difficultyFitModifier": 0.9462499999999999,
+          "readiness": 0.505,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9914309550941528
+        }
+      },
+      {
+        "skill": 2,
+        "trait": 8,
+        "code": "contact-control",
+        "ok": true,
+        "progress": 31,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {
+          "ballSense": 1,
+          "discipline": 1
+        },
+        "development": {
+          "traitScore": 6.928,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 1.2,
+          "difficultyFitModifier": 1,
+          "readiness": 0.505,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 1.0119225467163888
+        }
+      },
+      {
+        "skill": 2,
+        "trait": 8,
+        "code": "defensive-footwork",
+        "ok": true,
+        "progress": 30,
+        "target": "reaction",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 6.6,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 1.2,
+          "difficultyFitModifier": 1,
+          "readiness": 0.505,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9796263435016448
+        }
+      },
+      {
+        "skill": 2,
+        "trait": 8,
+        "code": "throwing-basics",
+        "ok": true,
+        "progress": 30,
+        "target": "throwing",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 7.528,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 1.2,
+          "difficultyFitModifier": 1,
+          "readiness": 0.505,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9912589148621213
+        }
+      },
+      {
+        "skill": 2,
+        "trait": 8,
+        "code": "recovery",
+        "ok": true,
+        "progress": 0,
+        "target": null,
+        "levelUps": 0,
+        "fatigue": 4,
+        "topLevel": {},
+        "development": null
+      },
+      {
+        "skill": 8,
+        "trait": 2,
+        "code": "power-hitting",
+        "ok": true,
+        "progress": 16,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 8,
+        "topLevel": {},
+        "development": {
+          "traitScore": 2.536,
+          "traitModifier": 0.9536,
+          "skillDifficultyModifier": 1,
+          "difficultyFitModifier": 0.9181999999999999,
+          "readiness": 0.39280000000000004,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9914309550941528
+        }
+      },
+      {
+        "skill": 8,
+        "trait": 2,
+        "code": "contact-control",
+        "ok": true,
+        "progress": 18,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {
+          "ballSense": 1,
+          "discipline": 1
+        },
+        "development": {
+          "traitScore": 2.536,
+          "traitModifier": 0.9536,
+          "skillDifficultyModifier": 1,
+          "difficultyFitModifier": 1,
+          "readiness": 0.39280000000000004,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 1.0119225467163888
+        }
+      },
+      {
+        "skill": 8,
+        "trait": 2,
+        "code": "defensive-footwork",
+        "ok": true,
+        "progress": 18,
+        "target": "reaction",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 2.556,
+          "traitModifier": 0.9556,
+          "skillDifficultyModifier": 1,
+          "difficultyFitModifier": 1,
+          "readiness": 0.39505,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9796263435016448
+        }
+      },
+      {
+        "skill": 8,
+        "trait": 2,
+        "code": "throwing-basics",
+        "ok": true,
+        "progress": 17,
+        "target": "throwing",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 2.0740000000000003,
+          "traitModifier": 0.9074,
+          "skillDifficultyModifier": 1,
+          "difficultyFitModifier": 1,
+          "readiness": 0.34082500000000004,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9912589148621213
+        }
+      },
+      {
+        "skill": 8,
+        "trait": 2,
+        "code": "recovery",
+        "ok": true,
+        "progress": 0,
+        "target": null,
+        "levelUps": 0,
+        "fatigue": 4,
+        "topLevel": {},
+        "development": null
+      },
+      {
+        "skill": 8,
+        "trait": 5,
+        "code": "power-hitting",
+        "ok": true,
+        "progress": 21,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 8,
+        "topLevel": {},
+        "development": {
+          "traitScore": 4.732,
+          "traitModifier": 1.1732,
+          "skillDifficultyModifier": 1,
+          "difficultyFitModifier": 0.9799625,
+          "readiness": 0.63985,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9914309550941528
+        }
+      },
+      {
+        "skill": 8,
+        "trait": 5,
+        "code": "contact-control",
+        "ok": true,
+        "progress": 22,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {
+          "ballSense": 1,
+          "discipline": 1
+        },
+        "development": {
+          "traitScore": 4.732,
+          "traitModifier": 1.1732,
+          "skillDifficultyModifier": 1,
+          "difficultyFitModifier": 1,
+          "readiness": 0.63985,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 1.0119225467163888
+        }
+      },
+      {
+        "skill": 8,
+        "trait": 5,
+        "code": "defensive-footwork",
+        "ok": true,
+        "progress": 21,
+        "target": "reaction",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 4.578,
+          "traitModifier": 1.1578,
+          "skillDifficultyModifier": 1,
+          "difficultyFitModifier": 1,
+          "readiness": 0.622525,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9796263435016448
+        }
+      },
+      {
+        "skill": 8,
+        "trait": 5,
+        "code": "throwing-basics",
+        "ok": true,
+        "progress": 22,
+        "target": "throwing",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 4.800999999999999,
+          "traitModifier": 1.1801,
+          "skillDifficultyModifier": 1,
+          "difficultyFitModifier": 1,
+          "readiness": 0.6476124999999999,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9912589148621213
+        }
+      },
+      {
+        "skill": 8,
+        "trait": 5,
+        "code": "recovery",
+        "ok": true,
+        "progress": 0,
+        "target": null,
+        "levelUps": 0,
+        "fatigue": 4,
+        "topLevel": {},
+        "development": null
+      },
+      {
+        "skill": 8,
+        "trait": 8,
+        "code": "power-hitting",
+        "ok": true,
+        "progress": 25,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 8,
+        "topLevel": {},
+        "development": {
+          "traitScore": 6.928,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 1,
+          "difficultyFitModifier": 0.9874999999999999,
+          "readiness": 0.67,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9914309550941528
+        }
+      },
+      {
+        "skill": 8,
+        "trait": 8,
+        "code": "contact-control",
+        "ok": true,
+        "progress": 26,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {
+          "ballSense": 1,
+          "discipline": 1
+        },
+        "development": {
+          "traitScore": 6.928,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 1,
+          "difficultyFitModifier": 1,
+          "readiness": 0.67,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 1.0119225467163888
+        }
+      },
+      {
+        "skill": 8,
+        "trait": 8,
+        "code": "defensive-footwork",
+        "ok": true,
+        "progress": 25,
+        "target": "reaction",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 6.6,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 1,
+          "difficultyFitModifier": 1,
+          "readiness": 0.67,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9796263435016448
+        }
+      },
+      {
+        "skill": 8,
+        "trait": 8,
+        "code": "throwing-basics",
+        "ok": true,
+        "progress": 25,
+        "target": "throwing",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 7.528,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 1,
+          "difficultyFitModifier": 1,
+          "readiness": 0.67,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9912589148621213
+        }
+      },
+      {
+        "skill": 8,
+        "trait": 8,
+        "code": "recovery",
+        "ok": true,
+        "progress": 0,
+        "target": null,
+        "levelUps": 0,
+        "fatigue": 4,
+        "topLevel": {},
+        "development": null
+      },
+      {
+        "skill": 14,
+        "trait": 2,
+        "code": "power-hitting",
+        "ok": true,
+        "progress": 10,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 8,
+        "topLevel": {},
+        "development": {
+          "traitScore": 2.536,
+          "traitModifier": 0.9536,
+          "skillDifficultyModifier": 0.6,
+          "difficultyFitModifier": 0.9594499999999999,
+          "readiness": 0.5578000000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9914309550941528
+        }
+      },
+      {
+        "skill": 14,
+        "trait": 2,
+        "code": "contact-control",
+        "ok": true,
+        "progress": 11,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {
+          "ballSense": 1,
+          "discipline": 1
+        },
+        "development": {
+          "traitScore": 2.536,
+          "traitModifier": 0.9536,
+          "skillDifficultyModifier": 0.6,
+          "difficultyFitModifier": 1,
+          "readiness": 0.5578000000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 1.0119225467163888
+        }
+      },
+      {
+        "skill": 14,
+        "trait": 2,
+        "code": "defensive-footwork",
+        "ok": true,
+        "progress": 11,
+        "target": "reaction",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 2.556,
+          "traitModifier": 0.9556,
+          "skillDifficultyModifier": 0.6,
+          "difficultyFitModifier": 1,
+          "readiness": 0.56005,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9796263435016448
+        }
+      },
+      {
+        "skill": 14,
+        "trait": 2,
+        "code": "throwing-basics",
+        "ok": true,
+        "progress": 10,
+        "target": "throwing",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 2.0740000000000003,
+          "traitModifier": 0.9074,
+          "skillDifficultyModifier": 0.6,
+          "difficultyFitModifier": 1,
+          "readiness": 0.5058250000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9912589148621213
+        }
+      },
+      {
+        "skill": 14,
+        "trait": 2,
+        "code": "recovery",
+        "ok": true,
+        "progress": 0,
+        "target": null,
+        "levelUps": 0,
+        "fatigue": 4,
+        "topLevel": {},
+        "development": null
+      },
+      {
+        "skill": 14,
+        "trait": 5,
+        "code": "power-hitting",
+        "ok": true,
+        "progress": 13,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 8,
+        "topLevel": {},
+        "development": {
+          "traitScore": 4.732,
+          "traitModifier": 1.1732,
+          "skillDifficultyModifier": 0.6,
+          "difficultyFitModifier": 1.0212124999999999,
+          "readiness": 0.8048500000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9914309550941528
+        }
+      },
+      {
+        "skill": 14,
+        "trait": 5,
+        "code": "contact-control",
+        "ok": true,
+        "progress": 13,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {
+          "ballSense": 1,
+          "discipline": 1
+        },
+        "development": {
+          "traitScore": 4.732,
+          "traitModifier": 1.1732,
+          "skillDifficultyModifier": 0.6,
+          "difficultyFitModifier": 1,
+          "readiness": 0.8048500000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 1.0119225467163888
+        }
+      },
+      {
+        "skill": 14,
+        "trait": 5,
+        "code": "defensive-footwork",
+        "ok": true,
+        "progress": 13,
+        "target": "reaction",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 4.578,
+          "traitModifier": 1.1578,
+          "skillDifficultyModifier": 0.6,
+          "difficultyFitModifier": 1,
+          "readiness": 0.787525,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9796263435016448
+        }
+      },
+      {
+        "skill": 14,
+        "trait": 5,
+        "code": "throwing-basics",
+        "ok": true,
+        "progress": 13,
+        "target": "throwing",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 4.800999999999999,
+          "traitModifier": 1.1801,
+          "skillDifficultyModifier": 0.6,
+          "difficultyFitModifier": 1,
+          "readiness": 0.8126125,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9912589148621213
+        }
+      },
+      {
+        "skill": 14,
+        "trait": 5,
+        "code": "recovery",
+        "ok": true,
+        "progress": 0,
+        "target": null,
+        "levelUps": 0,
+        "fatigue": 4,
+        "topLevel": {},
+        "development": null
+      },
+      {
+        "skill": 14,
+        "trait": 8,
+        "code": "power-hitting",
+        "ok": true,
+        "progress": 15,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 8,
+        "topLevel": {},
+        "development": {
+          "traitScore": 6.928,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 0.6,
+          "difficultyFitModifier": 1.02875,
+          "readiness": 0.835,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9914309550941528
+        }
+      },
+      {
+        "skill": 14,
+        "trait": 8,
+        "code": "contact-control",
+        "ok": true,
+        "progress": 15,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {
+          "ballSense": 1,
+          "discipline": 1
+        },
+        "development": {
+          "traitScore": 6.928,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 0.6,
+          "difficultyFitModifier": 1,
+          "readiness": 0.835,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 1.0119225467163888
+        }
+      },
+      {
+        "skill": 14,
+        "trait": 8,
+        "code": "defensive-footwork",
+        "ok": true,
+        "progress": 15,
+        "target": "reaction",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 6.6,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 0.6,
+          "difficultyFitModifier": 1,
+          "readiness": 0.835,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9796263435016448
+        }
+      },
+      {
+        "skill": 14,
+        "trait": 8,
+        "code": "throwing-basics",
+        "ok": true,
+        "progress": 15,
+        "target": "throwing",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 7.528,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 0.6,
+          "difficultyFitModifier": 1,
+          "readiness": 0.835,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9912589148621213
+        }
+      },
+      {
+        "skill": 14,
+        "trait": 8,
+        "code": "recovery",
+        "ok": true,
+        "progress": 0,
+        "target": null,
+        "levelUps": 0,
+        "fatigue": 4,
+        "topLevel": {},
+        "development": null
+      },
+      {
+        "skill": 18,
+        "trait": 2,
+        "code": "power-hitting",
+        "ok": true,
+        "progress": 7,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 8,
+        "topLevel": {},
+        "development": {
+          "traitScore": 2.536,
+          "traitModifier": 0.9536,
+          "skillDifficultyModifier": 0.4,
+          "difficultyFitModifier": 0.98695,
+          "readiness": 0.6678000000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9914309550941528
+        }
+      },
+      {
+        "skill": 18,
+        "trait": 2,
+        "code": "contact-control",
+        "ok": true,
+        "progress": 7,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {
+          "ballSense": 1,
+          "discipline": 1
+        },
+        "development": {
+          "traitScore": 2.536,
+          "traitModifier": 0.9536,
+          "skillDifficultyModifier": 0.4,
+          "difficultyFitModifier": 1,
+          "readiness": 0.6678000000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 1.0119225467163888
+        }
+      },
+      {
+        "skill": 18,
+        "trait": 2,
+        "code": "defensive-footwork",
+        "ok": true,
+        "progress": 7,
+        "target": "reaction",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 2.556,
+          "traitModifier": 0.9556,
+          "skillDifficultyModifier": 0.4,
+          "difficultyFitModifier": 1,
+          "readiness": 0.67005,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9796263435016448
+        }
+      },
+      {
+        "skill": 18,
+        "trait": 2,
+        "code": "throwing-basics",
+        "ok": true,
+        "progress": 7,
+        "target": "throwing",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 2.0740000000000003,
+          "traitModifier": 0.9074,
+          "skillDifficultyModifier": 0.4,
+          "difficultyFitModifier": 1,
+          "readiness": 0.6158250000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9912589148621213
+        }
+      },
+      {
+        "skill": 18,
+        "trait": 2,
+        "code": "recovery",
+        "ok": true,
+        "progress": 0,
+        "target": null,
+        "levelUps": 0,
+        "fatigue": 4,
+        "topLevel": {},
+        "development": null
+      },
+      {
+        "skill": 18,
+        "trait": 5,
+        "code": "power-hitting",
+        "ok": true,
+        "progress": 9,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 8,
+        "topLevel": {},
+        "development": {
+          "traitScore": 4.732,
+          "traitModifier": 1.1732,
+          "skillDifficultyModifier": 0.4,
+          "difficultyFitModifier": 1.0487125,
+          "readiness": 0.9148500000000002,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9914309550941528
+        }
+      },
+      {
+        "skill": 18,
+        "trait": 5,
+        "code": "contact-control",
+        "ok": true,
+        "progress": 9,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {
+          "ballSense": 1,
+          "discipline": 1
+        },
+        "development": {
+          "traitScore": 4.732,
+          "traitModifier": 1.1732,
+          "skillDifficultyModifier": 0.4,
+          "difficultyFitModifier": 1,
+          "readiness": 0.9148500000000002,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 1.0119225467163888
+        }
+      },
+      {
+        "skill": 18,
+        "trait": 5,
+        "code": "defensive-footwork",
+        "ok": true,
+        "progress": 8,
+        "target": "reaction",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 4.578,
+          "traitModifier": 1.1578,
+          "skillDifficultyModifier": 0.4,
+          "difficultyFitModifier": 1,
+          "readiness": 0.8975250000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9796263435016448
+        }
+      },
+      {
+        "skill": 18,
+        "trait": 5,
+        "code": "throwing-basics",
+        "ok": true,
+        "progress": 9,
+        "target": "throwing",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 4.800999999999999,
+          "traitModifier": 1.1801,
+          "skillDifficultyModifier": 0.4,
+          "difficultyFitModifier": 1,
+          "readiness": 0.9226125000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9912589148621213
+        }
+      },
+      {
+        "skill": 18,
+        "trait": 5,
+        "code": "recovery",
+        "ok": true,
+        "progress": 0,
+        "target": null,
+        "levelUps": 0,
+        "fatigue": 4,
+        "topLevel": {},
+        "development": null
+      },
+      {
+        "skill": 18,
+        "trait": 8,
+        "code": "power-hitting",
+        "ok": true,
+        "progress": 11,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 8,
+        "topLevel": {},
+        "development": {
+          "traitScore": 6.928,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 0.4,
+          "difficultyFitModifier": 1.05625,
+          "readiness": 0.9450000000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9914309550941528
+        }
+      },
+      {
+        "skill": 18,
+        "trait": 8,
+        "code": "contact-control",
+        "ok": true,
+        "progress": 10,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {
+          "ballSense": 1,
+          "discipline": 1
+        },
+        "development": {
+          "traitScore": 6.928,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 0.4,
+          "difficultyFitModifier": 1,
+          "readiness": 0.9450000000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 1.0119225467163888
+        }
+      },
+      {
+        "skill": 18,
+        "trait": 8,
+        "code": "defensive-footwork",
+        "ok": true,
+        "progress": 10,
+        "target": "reaction",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 6.6,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 0.4,
+          "difficultyFitModifier": 1,
+          "readiness": 0.9450000000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9796263435016448
+        }
+      },
+      {
+        "skill": 18,
+        "trait": 8,
+        "code": "throwing-basics",
+        "ok": true,
+        "progress": 10,
+        "target": "throwing",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 7.528,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 0.4,
+          "difficultyFitModifier": 1,
+          "readiness": 0.9450000000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9912589148621213
+        }
+      },
+      {
+        "skill": 18,
+        "trait": 8,
+        "code": "recovery",
+        "ok": true,
+        "progress": 0,
+        "target": null,
+        "levelUps": 0,
+        "fatigue": 4,
+        "topLevel": {},
+        "development": null
+      },
+      {
+        "skill": 20,
+        "trait": 2,
+        "code": "power-hitting",
+        "ok": true,
+        "progress": 0,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 8,
+        "topLevel": {},
+        "development": {
+          "traitScore": 2.536,
+          "traitModifier": 0.9536,
+          "skillDifficultyModifier": 0,
+          "difficultyFitModifier": 1.0007,
+          "readiness": 0.7228000000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9914309550941528
+        }
+      },
+      {
+        "skill": 20,
+        "trait": 2,
+        "code": "contact-control",
+        "ok": true,
+        "progress": 0,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {
+          "ballSense": 1,
+          "discipline": 1
+        },
+        "development": {
+          "traitScore": 2.536,
+          "traitModifier": 0.9536,
+          "skillDifficultyModifier": 0,
+          "difficultyFitModifier": 1,
+          "readiness": 0.7228000000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 1.0119225467163888
+        }
+      },
+      {
+        "skill": 20,
+        "trait": 2,
+        "code": "defensive-footwork",
+        "ok": true,
+        "progress": 0,
+        "target": "reaction",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 2.556,
+          "traitModifier": 0.9556,
+          "skillDifficultyModifier": 0,
+          "difficultyFitModifier": 1,
+          "readiness": 0.7250500000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9796263435016448
+        }
+      },
+      {
+        "skill": 20,
+        "trait": 2,
+        "code": "throwing-basics",
+        "ok": true,
+        "progress": 0,
+        "target": "throwing",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 2.0740000000000003,
+          "traitModifier": 0.9074,
+          "skillDifficultyModifier": 0,
+          "difficultyFitModifier": 1,
+          "readiness": 0.6708250000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9912589148621213
+        }
+      },
+      {
+        "skill": 20,
+        "trait": 2,
+        "code": "recovery",
+        "ok": true,
+        "progress": 0,
+        "target": null,
+        "levelUps": 0,
+        "fatigue": 4,
+        "topLevel": {},
+        "development": null
+      },
+      {
+        "skill": 20,
+        "trait": 5,
+        "code": "power-hitting",
+        "ok": true,
+        "progress": 0,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 8,
+        "topLevel": {},
+        "development": {
+          "traitScore": 4.732,
+          "traitModifier": 1.1732,
+          "skillDifficultyModifier": 0,
+          "difficultyFitModifier": 1.0624625,
+          "readiness": 0.9698500000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9914309550941528
+        }
+      },
+      {
+        "skill": 20,
+        "trait": 5,
+        "code": "contact-control",
+        "ok": true,
+        "progress": 0,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {
+          "ballSense": 1,
+          "discipline": 1
+        },
+        "development": {
+          "traitScore": 4.732,
+          "traitModifier": 1.1732,
+          "skillDifficultyModifier": 0,
+          "difficultyFitModifier": 1,
+          "readiness": 0.9698500000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 1.0119225467163888
+        }
+      },
+      {
+        "skill": 20,
+        "trait": 5,
+        "code": "defensive-footwork",
+        "ok": true,
+        "progress": 0,
+        "target": "reaction",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 4.578,
+          "traitModifier": 1.1578,
+          "skillDifficultyModifier": 0,
+          "difficultyFitModifier": 1,
+          "readiness": 0.9525250000000001,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9796263435016448
+        }
+      },
+      {
+        "skill": 20,
+        "trait": 5,
+        "code": "throwing-basics",
+        "ok": true,
+        "progress": 0,
+        "target": "throwing",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 4.800999999999999,
+          "traitModifier": 1.1801,
+          "skillDifficultyModifier": 0,
+          "difficultyFitModifier": 1,
+          "readiness": 0.9776125,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9912589148621213
+        }
+      },
+      {
+        "skill": 20,
+        "trait": 5,
+        "code": "recovery",
+        "ok": true,
+        "progress": 0,
+        "target": null,
+        "levelUps": 0,
+        "fatigue": 4,
+        "topLevel": {},
+        "development": null
+      },
+      {
+        "skill": 20,
+        "trait": 8,
+        "code": "power-hitting",
+        "ok": true,
+        "progress": 0,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 8,
+        "topLevel": {},
+        "development": {
+          "traitScore": 6.928,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 0,
+          "difficultyFitModifier": 1.0699999999999998,
+          "readiness": 1,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9914309550941528
+        }
+      },
+      {
+        "skill": 20,
+        "trait": 8,
+        "code": "contact-control",
+        "ok": true,
+        "progress": 0,
+        "target": "batting",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {
+          "ballSense": 1,
+          "discipline": 1
+        },
+        "development": {
+          "traitScore": 6.928,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 0,
+          "difficultyFitModifier": 1,
+          "readiness": 1,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 1.0119225467163888
+        }
+      },
+      {
+        "skill": 20,
+        "trait": 8,
+        "code": "defensive-footwork",
+        "ok": true,
+        "progress": 0,
+        "target": "reaction",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 6.6,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 0,
+          "difficultyFitModifier": 1,
+          "readiness": 1,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9796263435016448
+        }
+      },
+      {
+        "skill": 20,
+        "trait": 8,
+        "code": "throwing-basics",
+        "ok": true,
+        "progress": 0,
+        "target": "throwing",
+        "levelUps": 0,
+        "fatigue": 7,
+        "topLevel": {},
+        "development": {
+          "traitScore": 7.528,
+          "traitModifier": 1.35,
+          "skillDifficultyModifier": 0,
+          "difficultyFitModifier": 1,
+          "readiness": 1,
+          "qualityModifier": 1,
+          "biasModifier": 1.04,
+          "variation": 0.9912589148621213
+        }
+      },
+      {
+        "skill": 20,
+        "trait": 8,
+        "code": "recovery",
+        "ok": true,
+        "progress": 0,
+        "target": null,
+        "levelUps": 0,
+        "fatigue": 4,
+        "topLevel": {},
+        "development": null
+      }
+    ],
+    "noAppearance": {
+      "exposure": {
+        "version": "game-exposure-v1",
+        "matchId": "hs-y1-autumn-exhibition",
+        "opportunitySnapshot": {
+          "version": "playing-time-opportunity-v1",
+          "sourceVersion": "playing-time-opportunity-v1",
+          "decisionId": "hs-y1-autumn-exhibition|Edge audit|ballSense＋baseballIQ|school-development-5109806c|3a154e93",
+          "matchId": "hs-y1-autumn-exhibition",
+          "playerId": "Edge audit|ballSense＋baseballIQ|school-development-5109806c",
+          "exposureSource": "opportunity-resolver",
+          "actualRole": "starter",
+          "actualRoleAtDecision": "starter",
+          "projectedRolePrior": "rotationCandidate",
+          "playingTimeEnvironment": "high",
+          "schoolPlayingTimeEnvironment": "high",
+          "competitionDepth": "medium",
+          "positionCompetition": "medium",
+          "positionNeed": "high",
+          "evaluationTrend": 0,
+          "previousActualExposure": null,
+          "coachUsageStyle": "developmental",
+          "positionCapability": 3,
+          "positionFit": 2.3333333333333335,
+          "positionExperience": 7,
+          "assignedPosition": "投手",
+          "requestedPosition": "投手",
+          "positionFallbackApplied": false,
+          "assignmentSource": "requested-position",
+          "assignmentReason": "pitcher-exposure-deferred",
+          "pitcherExposureDeferred": true,
+          "startingOpportunity": "bench",
+          "startingDecision": "bench",
+          "appearancePlan": {
+            "appearanceType": "noAppearance",
+            "entryInning": null,
+            "entryHalf": ""
+          },
+          "substitutionOpportunity": "noAppearance",
+          "opportunityReasons": [
+            "actual-role:starter",
+            "school-environment:high",
+            "competition-depth:medium",
+            "position-need:high",
+            "coach-usage:developmental",
+            "position-legal",
+            "pitcher-exposure-deferred"
+          ],
+          "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Edge audit|ballSense＋baseballIQ|school-development-5109806c|capability|school-development-5109806c|hs-year-1-age-16|roster-4bfa37a7|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|starter|rotationCandidate|high|medium|high|developmental|投手|3|2.3333333333333335|7|highSchoolExhibition|0|0|regular|normal",
+          "gameContext": {
+            "gameType": "highSchoolExhibition",
+            "inning": 0,
+            "expectedGameImportance": "regular",
+            "importance": "regular",
+            "leverage": "normal",
+            "scoreMargin": 0
+          },
+          "readinessSnapshot": {
+            "version": "opportunity-readiness-v1",
+            "playerId": "Edge audit|ballSense＋baseballIQ|school-development-5109806c",
+            "position": "投手",
+            "requestedPosition": "投手",
+            "sourceType": "system-derived-provisional",
+            "sourceVersion": "opportunity-readiness-v1",
+            "readinessBand": "low",
+            "positionReadiness": 3,
+            "positionFit": 2.3333333333333335,
+            "fieldingReadiness": 2,
+            "reactionReadiness": 4,
+            "decisionReadiness": 3,
+            "experienceReadiness": 7,
+            "confidence": "provisional",
+            "positionLegal": true,
+            "positionFallbackApplied": false,
+            "assignmentSource": "requested-position",
+            "assignmentReason": "pitcher-exposure-deferred",
+            "pitcherExposureDeferred": true,
+            "reasons": [
+              "developingFieldingReadiness",
+              "competitiveReactionReadiness",
+              "developingDecisionReadiness",
+              "strongPositionExperience",
+              "limitedPositionFit",
+              "positionLegal"
+            ],
+            "provenance": {
+              "snapshotId": "readiness-99b0aac4",
+              "sourceType": "system-derived-provisional",
+              "sourceVersion": "opportunity-readiness-v1",
+              "inputVersion": "hs-entry-capability-v1",
+              "deterministicIdentity": "opportunity-readiness-v1|Edge audit|ballSense＋baseballIQ|school-development-5109806c|投手|投手|3|2.3333333333333335|2|4|3|7|hs-entry-capability-v1"
+            }
+          },
+          "plannedUsage": {
+            "appearanceType": "noAppearance",
+            "entryInning": null,
+            "entryHalf": ""
+          },
+          "debug": {
+            "opportunityHash": 974474899,
+            "opportunityScore": 48,
+            "scoreBreakdown": {
+              "actualRole": 58,
+              "positionCapability": -8,
+              "positionFit": -5,
+              "positionExperience": 3,
+              "schoolEnvironment": 6,
+              "competitionDepth": 0,
+              "positionNeed": 5,
+              "projectedRolePrior": 0,
+              "coachUsage": -1,
+              "gameContext": 0,
+              "deterministicVariation": -10
+            },
+            "reasons": [
+              "actual-role:starter",
+              "school-environment:high",
+              "competition-depth:medium",
+              "position-need:high",
+              "coach-usage:developmental",
+              "position-legal",
+              "pitcher-exposure-deferred"
+            ]
+          }
+        },
+        "plannedUsage": {
+          "appearanceType": "noAppearance",
+          "entryInning": null,
+          "entryHalf": ""
+        },
+        "actualUsage": {
+          "appearanceType": "noAppearance",
+          "defensiveInnings": 0,
+          "plateAppearances": 0
+        },
+        "entryInning": null,
+        "exitInning": null,
+        "defensiveInnings": 0,
+        "plateAppearances": 0,
+        "appearanceType": "noAppearance",
+        "exposureSource": "opportunity-resolver",
+        "pitcherExposureDeferred": true,
+        "finalized": true,
+        "finalizationId": "hs-y1-autumn-exhibition|player|game-exposure-v1"
+      },
+      "summary": "本場比賽完整結束，但教練沒有把你換上場；沒有虛構守備局數、打席或比賽成長。",
+      "coach": "「有幾球你看對了，也有一步慢了。下一輪把判斷後的第一個動作做得更乾淨。」",
+      "feedback": "正式角色由「先發／關鍵任務」調整為「先發／關鍵任務」；評估趨勢：承壓；目前正式樣本仍有限、上一場沒有實際上場樣本、同守位競爭者目前仍居前。",
+      "rival": {
+        "rivalId": "takahashi",
+        "rivalName": "高橋",
+        "entryType": "direct",
+        "encounter": "賽後高橋直接走到休息區，指出你在第七局做出的選擇",
+        "yearTwoPressure": "高二必須用第二次正式任務證明：這不是單場偶然，而是可重複的球員用途。"
+      },
+      "moments": [],
+      "team": "球隊落敗，終場 1：5",
+      "line": {
+        "playerId": "player",
+        "teamId": "school-development-5109806c",
+        "role": "bench",
+        "position": "投手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      }
+    },
+    "y1OutcomeReload": {
+      "before": {
+        "step": 1,
+        "pending": false,
+        "flags": [
+          "accepted_high_school_reset"
+        ],
+        "body": {
+          "stamina": 10,
+          "fatigue": 0,
+          "recovery": 5,
+          "maturity": 0,
+          "injuryRisk": 0,
+          "pain": 0
+        },
+        "memories": [
+          "你沒有把國中的位置當成高中理所當然的起點。"
+        ]
+      },
+      "after": {
+        "step": 1,
+        "pending": false,
+        "flags": [
+          "accepted_high_school_reset"
+        ],
+        "body": {
+          "stamina": 10,
+          "fatigue": 0,
+          "recovery": 5,
+          "maturity": 0,
+          "injuryRisk": 0,
+          "pain": 0
+        },
+        "memories": [
+          "你沒有把國中的位置當成高中理所當然的起點。"
+        ],
+        "event": "high_school_load"
+      }
+    },
+    "y2TrainingReload": {
+      "before": {
+        "fatigue": 1,
+        "development": {
+          "version": "development-v1",
+          "formulaVersion": "development-result-v1",
+          "initialized": true,
+          "skillProgress": {
+            "catching": 0,
+            "throwing": 0,
+            "batting": 24,
+            "baseRunning": 0,
+            "baseballIQ": 0,
+            "armStrength": 0,
+            "reaction": 0,
+            "range": 0,
+            "blocking": 0,
+            "gameCalling": 0,
+            "control": 0,
+            "pitchStamina": 0
+          },
+          "history": [
+            {
+              "settlementId": "high_school_year_two_training_a|contact-control",
+              "developmentVersion": "development-v1",
+              "formulaVersion": "development-result-v1",
+              "sourceId": "high_school_year_two_training_a",
+              "sourceType": "training",
+              "targetSkill": "batting",
+              "activityType": "technical",
+              "difficulty": "appropriate",
+              "quality": "standard",
+              "playerChoice": "contact-control",
+              "developmentBias": "ideal-self",
+              "skillBefore": 2,
+              "skillAfter": 2,
+              "progressBefore": 0,
+              "progressGained": 24,
+              "progressAfter": 24,
+              "levelUps": 0,
+              "skillCapReached": false,
+              "learningQuality": "excellent",
+              "reasons": [
+                "strongTraitFit",
+                "appropriateDifficulty",
+                "developmentBias"
+              ],
+              "resolvedSeed": "cap-5143c9c4|high_school_year_two_training_a|contact-control",
+              "diagnostics": {
+                "traitScore": 3.673,
+                "traitModifier": 1.0673,
+                "skillDifficultyModifier": 1.2,
+                "difficultyFitModifier": 1,
+                "readiness": 0.3557125,
+                "qualityModifier": 1,
+                "biasModifier": 1.04,
+                "variation": 1.0119225467163888
+              },
+              "metadata": {
+                "settlementId": "high_school_year_two_training_a|contact-control",
+                "trainingCode": "contact-control",
+                "schoolTrainingQualityBridge": "future-only-not-applied",
+                "playingTimeExperienceBridge": "future-only-not-applied"
+              }
+            }
+          ],
+          "appliedSettlementIds": [
+            "high_school_year_two_training_a|contact-control"
+          ],
+          "migration": null
+        },
+        "flags": [
+          "hs_y2_training_a_contact_control",
+          "hs_y2_training_contact_coach_echo"
+        ],
+        "trust": 1
+      },
+      "same": {
+        "pending": false,
+        "event": "high_school_year_two_role_test"
+      },
+      "restored": {
+        "pending": false,
+        "event": "high_school_year_two_role_test",
+        "fatigue": 1,
+        "development": {
+          "version": "development-v1",
+          "formulaVersion": "development-result-v1",
+          "initialized": true,
+          "skillProgress": {
+            "catching": 0,
+            "throwing": 0,
+            "batting": 24,
+            "baseRunning": 0,
+            "baseballIQ": 0,
+            "armStrength": 0,
+            "reaction": 0,
+            "range": 0,
+            "blocking": 0,
+            "gameCalling": 0,
+            "control": 0,
+            "pitchStamina": 0
+          },
+          "history": [
+            {
+              "settlementId": "high_school_year_two_training_a|contact-control",
+              "developmentVersion": "development-v1",
+              "formulaVersion": "development-result-v1",
+              "sourceId": "high_school_year_two_training_a",
+              "sourceType": "training",
+              "targetSkill": "batting",
+              "activityType": "technical",
+              "difficulty": "appropriate",
+              "quality": "standard",
+              "playerChoice": "contact-control",
+              "developmentBias": "ideal-self",
+              "skillBefore": 2,
+              "skillAfter": 2,
+              "progressBefore": 0,
+              "progressGained": 24,
+              "progressAfter": 24,
+              "levelUps": 0,
+              "skillCapReached": false,
+              "learningQuality": "excellent",
+              "reasons": [
+                "strongTraitFit",
+                "appropriateDifficulty",
+                "developmentBias"
+              ],
+              "resolvedSeed": "cap-5143c9c4|high_school_year_two_training_a|contact-control",
+              "diagnostics": {
+                "traitScore": 3.673,
+                "traitModifier": 1.0673,
+                "skillDifficultyModifier": 1.2,
+                "difficultyFitModifier": 1,
+                "readiness": 0.3557125,
+                "qualityModifier": 1,
+                "biasModifier": 1.04,
+                "variation": 1.0119225467163888
+              },
+              "metadata": {
+                "settlementId": "high_school_year_two_training_a|contact-control",
+                "trainingCode": "contact-control",
+                "schoolTrainingQualityBridge": "future-only-not-applied",
+                "playingTimeExperienceBridge": "future-only-not-applied"
+              }
+            }
+          ],
+          "appliedSettlementIds": [
+            "high_school_year_two_training_a|contact-control"
+          ],
+          "migration": null
+        },
+        "trust": 1
+      }
+    },
+    "azhe": [
+      {
+        "bond": 0,
+        "shared": false,
+        "variant": "azhe-guides",
+        "evidence": [
+          "關係證據 0",
+          "能力證據 16"
+        ]
+      },
+      {
+        "bond": 4,
+        "shared": false,
+        "variant": "co-discovery",
+        "evidence": [
+          "關係證據 4",
+          "能力證據 16"
+        ]
+      },
+      {
+        "bond": 8,
+        "shared": true,
+        "variant": "player-guides",
+        "evidence": [
+          "關係證據 8",
+          "能力證據 16",
+          "azhe_error_reworked"
+        ]
+      }
+    ]
+  }
+}

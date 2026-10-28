@@ -1,0 +1,61 @@
+{
+  "sprint": "10A.3b-R2",
+  "createdAt": "2026-10-13T15:33:10.225Z",
+  "baseline": {
+    "exitCode": 1,
+    "signature": "AssertionError [ERR_ASSERTION]: Low tier can have a multi-hit game",
+    "stderr": "node:internal/assert/utils:77\r\n    throw err;\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Low tier can have a multi-hit game\r\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:45:1)\r\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\r\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\r\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\r\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\r\n    at Module.require (node:internal/modules/cjs/loader:1617:12)\r\n    at require (node:internal/modules/helpers:153:16)\r\n    at [eval]:1:306\r\n    at runScriptInThisContext (node:internal/vm:219:10) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.19.0\r\n"
+  },
+  "status": "STOPPED_ON_NEW_FAILURE_REASON",
+  "scope": "READ_ONLY_FAILURE_COMPARISON_NO_PRODUCTION_FIX",
+  "file": "tests/ability-performance-gradient-test.js",
+  "testHash": "1038c92e98c4a040f61a44e23c464d2a9daf544a613e9e3b0f6a9cf5e4017611",
+  "originalTestBytesUnchanged": true,
+  "current": {
+    "exitCode": 1,
+    "spawnError": null,
+    "stderr": "receiver-source-snapshot.js:23\r\n    if (!o || typeof o !== \"object\" || active.has(o)) throw Error(\"non-JSON metadata\");\r\n                                                      ^\r\n\r\nError: non-JSON metadata\r\n    at canonical (receiver-source-snapshot.js:23:61)\r\n    at same (receiver-source-snapshot.js:31:81)\r\n    at Object.validateMatch (receiver-source-snapshot.js:165:160)\r\n    at validateHighSchoolReceiverSourceMetadata (script.js:5119:28)\r\n    at validateHighSchoolDecisionThrowState (script.js:12053:3)\r\n    at recordGroundBallSituationResolution (script.js:12138:3)\r\n    at resolveHighSchoolYearOneMatch (script.js:13753:5)\r\n    at chooseHighSchoolYearOneMatchMoment (script.js:3689:21)\r\n    at auditPlay (evalmachine.<anonymous>:10:9)\r\n    at evalmachine.<anonymous>:1:1\r\n\r\nNode.js v24.19.0\r\n",
+    "elapsedMs": 11641.5621,
+    "expectedStatus": "NEW_REGRESSION"
+  },
+  "comparison": {
+    "sameFailingFilename": true,
+    "sameFailureReason": false,
+    "originalBaselineAssertionReached": false,
+    "newObservedProductionBlockers": 1,
+    "remainingManifestSuitesNotRun": 226
+  },
+  "currentSource": {
+    "path": "receiver-source-snapshot.js",
+    "sha256": "d049f98bdbaece9aed3aa16469167a2b3120d8f9078c0d3571bef0fb04510ceb",
+    "canonical": {
+      "startLine": 17,
+      "endLine": 32,
+      "source": "  const exact = (o, keys) => o && typeof o === \"object\" && !Array.isArray(o) && Object.keys(o).length === keys.length && keys.every(k => own(o, k));\n  const freeze = o => { if (o && typeof o === \"object\" && !Object.isFrozen(o)) { Object.values(o).forEach(freeze); Object.freeze(o); } return o; };\n  function canonical(o, active = new Set()) {\n    if (o === null || typeof o === \"boolean\") return JSON.stringify(o);\n    if (typeof o === \"string\") { for (let i = 0; i < o.length; i++) { const c = o.charCodeAt(i); if (c >= 0xd800 && c <= 0xdbff) { const n = o.charCodeAt(++i); if (!(n >= 0xdc00 && n <= 0xdfff)) throw Error(\"unpaired surrogate\"); } else if (c >= 0xdc00 && c <= 0xdfff) throw Error(\"unpaired surrogate\"); } return JSON.stringify(o); }\n    if (typeof o === \"number\" && Number.isFinite(o) && !Object.is(o, -0)) return JSON.stringify(o);\n    if (!o || typeof o !== \"object\" || active.has(o)) throw Error(\"non-JSON metadata\");\n    const proto = Object.getPrototypeOf(o); if (!Array.isArray(o) && proto !== null && Object.getPrototypeOf(proto) !== null) throw Error(\"nonplain metadata\");\n    for (const k of Reflect.ownKeys(o)) if (typeof k === \"symbol\" || !own(Object.getOwnPropertyDescriptor(o, k), \"value\")) throw Error(\"metadata accessor\");\n    active.add(o); let s;\n    if (Array.isArray(o)) { if (Object.keys(o).length !== o.length || o.some((_, i) => !own(o, i))) throw Error(\"sparse metadata\"); s = \"[\" + o.map(x => canonical(x, active)).join(\",\") + \"]\"; }\n    else s = \"{\" + Object.keys(o).sort().map(k => JSON.stringify(k) + \":\" + canonical(o[k], active)).join(\",\") + \"}\";\n    active.delete(o); return s;\n  }\n  const copy = o => JSON.parse(canonical(o)), same = (a, b) => canonical(a) === canonical(b);\n  // Consistency checksum only. Every present body/copy and original owner binding is also compared."
+    },
+    "closedSummaryGuard": {
+      "startLine": 156,
+      "endLine": 166,
+      "source": "      if (!same(active.receiverSourcePin, admission.pin)) reject(\"required active lifecycle pin\");\n      if (active.createdAt?.outs !== b.original.outs || !same(active.createdAt?.bases, b.original.bases)) reject(\"lifecycle original outs/bases\");\n      if (state?.shortstopExecution && (!own(active, \"receiverSourceExecutionBinding\") || !same(active.receiverSourceExecutionBinding, state.receiverSourceExecutionBinding))) reject(\"required active source binding\");\n    }\n    const summary = match.lastClosedSituationSummary;\n    if (state?.settlementApplied && summary?.situationId?.includes(b.physical.playId) && !own(summary, \"receiverSourcePin\")) reject(\"closed source pin missing\");\n    if (own(summary, \"receiverSourcePin\")) { assertReference(summary.receiverSourcePin);\n      if (summary.receiverSourcePin.physical.playId === b.physical.playId && !same(summary.receiverSourcePin, admission.pin)) reject(\"closed pin copy\");\n      if (summary.receiverSourcePin.physical.playId === b.physical.playId && summary.outsBefore !== b.original.outs) reject(\"closed original outs\");\n      if (summary.receiverSourcePin.physical.playId === b.physical.playId && state?.shortstopExecution && (!own(summary, \"receiverSourceExecutionBinding\") || !same(summary.receiverSourceExecutionBinding, state.receiverSourceExecutionBinding))) reject(\"closed execution binding\"); }\n    return true;"
+    }
+  },
+  "readOnlyReview": {
+    "finding": "The closed-summary binding comparison does not explicitly require current state binding presence or current physical identity match at that branch. canonical rejects non-JSON inputs.",
+    "plausibleCause": "An absent current binding or a later unpinned Legacy state compared with an archived source pin is possible from source.",
+    "limits": "The captured stack does not expose operand values. Exact offending operand/cross-play scenario is NOT proven; no extra execution or source repair after stop."
+  },
+  "runnerReview": {
+    "manifestAndDefaultsPreserved": true,
+    "oneActualFullInvocation": true,
+    "newCapturesWrittenExclusively": true,
+    "limitation": "Runner checks wx on capture write after suites, without an initial existing-capture guard; do not invoke it again against existing R2 captures. No repeat/overwrite occurred.",
+    "noStatus0SpawnErrorsInExecutedRows": true
+  },
+  "runtimeEnabled": false,
+  "sourceChangesAfterStop": 0,
+  "actions": {
+    "stage": false,
+    "commit": false,
+    "push": false
+  }
+}

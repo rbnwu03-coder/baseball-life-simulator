@@ -1,0 +1,457 @@
+{
+  "phase": "Source Freeze Contract Reconciliation v0.1 Phase B",
+  "createdAt": "2026-10-14T14:59:10.872Z",
+  "evidence": "docs/test-infrastructure-sprint-0.1-phase-b-index-caller-evidence.json",
+  "status": "PASS",
+  "summary": {
+    "total": 80,
+    "passed": 80,
+    "failed": 0
+  },
+  "negative": {
+    "total": 72,
+    "passed": 72,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "name": "exact original Index + one insertion: 2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "status": "PASS",
+      "negative": false
+    },
+    {
+      "name": "exact original Index + one insertion: 674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "status": "PASS",
+      "negative": false
+    },
+    {
+      "name": "Original CRLF normalization remains compatible",
+      "status": "PASS",
+      "negative": false
+    },
+    {
+      "name": "missing Source tag rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "duplicate Source tag rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "moved Source tag rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "old script tag reorder rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "old script tag deletion rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "old script tag duplicate rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "Source async change rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "Source defer change rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "Source type change rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "Source src change rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "Source query change rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "old tag attribute change rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "other module insertion rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "DOM change rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "style change rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "inline handler change rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "other text and whitespace change rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "wrong original pinned Index rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "Index cannot approve adapter Storage",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "Index cannot approve adapter RNG",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "Index cannot approve adapter candidate execution",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "Index cannot approve adapter unreviewed version",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-integration-test.js: whole original guard accepts only planned branches",
+      "status": "PASS",
+      "negative": false
+    },
+    {
+      "name": "pitch-tactical-decision-production-integration-test.js: rejects missing raw guard",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-integration-test.js: rejects ordinary metadata guard removal",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-integration-test.js: rejects Source serializer bypass",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-integration-test.js: rejects unapproved version migration",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-integration-test.js: wrong pinned Save rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-integration-test.js: other full-source mismatch rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-integration-test.js: original script function scope mismatch rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-integration-test.js: wrong caller ref rejected by exact source contract",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-integration-test.js: extra comparison branch rejected by reverse contract",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-integration-test.js: extra hook rejected by reverse contract",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-interpretation-production-integration-test.js: whole original guard accepts only planned branches",
+      "status": "PASS",
+      "negative": false
+    },
+    {
+      "name": "pitch-tactical-interpretation-production-integration-test.js: rejects missing raw guard",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-interpretation-production-integration-test.js: rejects ordinary metadata guard removal",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-interpretation-production-integration-test.js: rejects Source serializer bypass",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-interpretation-production-integration-test.js: rejects unapproved version migration",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-interpretation-production-integration-test.js: wrong pinned Save rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-interpretation-production-integration-test.js: other full-source mismatch rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-interpretation-production-integration-test.js: original script function scope mismatch rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-interpretation-production-integration-test.js: wrong caller ref rejected by exact source contract",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-interpretation-production-integration-test.js: extra comparison branch rejected by reverse contract",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-interpretation-production-integration-test.js: extra hook rejected by reverse contract",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-adapter-integration-test.js: whole original guard accepts only planned branches",
+      "status": "PASS",
+      "negative": false
+    },
+    {
+      "name": "pitch-tactical-decision-production-adapter-integration-test.js: rejects missing raw guard",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-adapter-integration-test.js: rejects ordinary metadata guard removal",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-adapter-integration-test.js: rejects Source serializer bypass",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-adapter-integration-test.js: rejects unapproved version migration",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-adapter-integration-test.js: wrong pinned Save rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-adapter-integration-test.js: other full-source mismatch rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-adapter-integration-test.js: original script function scope mismatch rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-adapter-integration-test.js: wrong caller ref rejected by exact source contract",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-adapter-integration-test.js: extra comparison branch rejected by reverse contract",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-decision-production-adapter-integration-test.js: extra hook rejected by reverse contract",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-intent-evidence-integration-test.js: whole original guard accepts only planned branches",
+      "status": "PASS",
+      "negative": false
+    },
+    {
+      "name": "pitch-tactical-intent-evidence-integration-test.js: rejects missing raw guard",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-intent-evidence-integration-test.js: rejects ordinary metadata guard removal",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-intent-evidence-integration-test.js: rejects Source serializer bypass",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-intent-evidence-integration-test.js: rejects unapproved version migration",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-intent-evidence-integration-test.js: wrong pinned Save rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-intent-evidence-integration-test.js: other full-source mismatch rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-intent-evidence-integration-test.js: original script function scope mismatch rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-intent-evidence-integration-test.js: wrong caller ref rejected by exact source contract",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-intent-evidence-integration-test.js: extra comparison branch rejected by reverse contract",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-intent-evidence-integration-test.js: extra hook rejected by reverse contract",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-signal-projection-production-integration-test.js: whole original guard accepts only planned branches",
+      "status": "PASS",
+      "negative": false
+    },
+    {
+      "name": "pitch-tactical-signal-projection-production-integration-test.js: rejects missing raw guard",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-signal-projection-production-integration-test.js: rejects ordinary metadata guard removal",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-signal-projection-production-integration-test.js: rejects Source serializer bypass",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-signal-projection-production-integration-test.js: rejects unapproved version migration",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-signal-projection-production-integration-test.js: wrong pinned Save rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-signal-projection-production-integration-test.js: other full-source mismatch rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-signal-projection-production-integration-test.js: original script function scope mismatch rejected",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-signal-projection-production-integration-test.js: wrong caller ref rejected by exact source contract",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-signal-projection-production-integration-test.js: extra comparison branch rejected by reverse contract",
+      "status": "PASS",
+      "negative": true
+    },
+    {
+      "name": "pitch-tactical-signal-projection-production-integration-test.js: extra hook rejected by reverse contract",
+      "status": "PASS",
+      "negative": true
+    }
+  ],
+  "callerResults": [
+    {
+      "file": "tests/pitch-tactical-decision-production-integration-test.js",
+      "callerOriginalRef": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+      "originalGuardComparisons": 8,
+      "contractCanonicalRef": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+      "allOtherGuardsExecuted": true
+    },
+    {
+      "file": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "callerOriginalRef": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+      "originalGuardComparisons": 7,
+      "contractCanonicalRef": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+      "allOtherGuardsExecuted": true
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "callerOriginalRef": "9b9546f94a7286afef474be634fd93c57eb455db",
+      "originalGuardComparisons": 9,
+      "contractCanonicalRef": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+      "allOtherGuardsExecuted": true
+    },
+    {
+      "file": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "callerOriginalRef": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "originalGuardComparisons": 12,
+      "contractCanonicalRef": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+      "allOtherGuardsExecuted": true
+    },
+    {
+      "file": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "callerOriginalRef": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "originalGuardComparisons": 12,
+      "contractCanonicalRef": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+      "allOtherGuardsExecuted": true
+    }
+  ],
+  "stderr": "",
+  "passed": true
+}

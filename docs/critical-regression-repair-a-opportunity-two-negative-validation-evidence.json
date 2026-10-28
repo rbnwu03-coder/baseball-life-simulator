@@ -1,0 +1,139 @@
+{
+  "task": "Critical Regression Repair A — Opportunity-two Manifest Correction",
+  "createdAt": "2026-10-15T01:53:11.048Z",
+  "runtimeNegativeResults": [
+    {
+      "omitted": "defensive-opportunity-foundation.js",
+      "suiteStatus": "FAIL",
+      "negativeValidation": "PASS",
+      "exitCode": 1,
+      "successfulOriginalChecks": 37,
+      "missingGlobalWitness": {
+        "omitted": "defensive-opportunity-foundation.js",
+        "globals": {
+          "DefensiveOpportunityFoundation": "undefined",
+          "DefensiveReachSecureFoundation": "object",
+          "DefensiveDecisionThrowFoundation": "object"
+        }
+      },
+      "actualRuntimeError": {
+        "name": "TypeError",
+        "code": null,
+        "message": "Cannot read properties of null (reading 'activeRoster')"
+      },
+      "rawEvidence": "docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-missing-owner-1-evidence.json"
+    },
+    {
+      "omitted": "defensive-reach-secure-foundation.js",
+      "suiteStatus": "FAIL",
+      "negativeValidation": "PASS",
+      "exitCode": 1,
+      "successfulOriginalChecks": 37,
+      "missingGlobalWitness": {
+        "omitted": "defensive-reach-secure-foundation.js",
+        "globals": {
+          "DefensiveOpportunityFoundation": "object",
+          "DefensiveReachSecureFoundation": "undefined",
+          "DefensiveDecisionThrowFoundation": "object"
+        }
+      },
+      "actualRuntimeError": {
+        "name": "TypeError",
+        "code": null,
+        "message": "Cannot read properties of null (reading 'activeRoster')"
+      },
+      "rawEvidence": "docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-missing-owner-2-evidence.json"
+    },
+    {
+      "omitted": "defensive-decision-throw-foundation.js",
+      "suiteStatus": "FAIL",
+      "negativeValidation": "PASS",
+      "exitCode": 1,
+      "successfulOriginalChecks": 37,
+      "missingGlobalWitness": {
+        "omitted": "defensive-decision-throw-foundation.js",
+        "globals": {
+          "DefensiveOpportunityFoundation": "object",
+          "DefensiveReachSecureFoundation": "object",
+          "DefensiveDecisionThrowFoundation": "undefined"
+        }
+      },
+      "actualRuntimeError": {
+        "name": "ReferenceError",
+        "code": null,
+        "message": "DefensiveDecisionThrowFoundation is not defined"
+      },
+      "rawEvidence": "docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-missing-owner-3-evidence.json"
+    }
+  ],
+  "runtimeNegativeValidations": {
+    "passed": 3,
+    "total": 3
+  },
+  "manifestContractCases": [
+    {
+      "case": "reviewed-manifest",
+      "expected": "ACCEPT",
+      "passed": true
+    },
+    {
+      "case": "missing",
+      "owner": "defensive-opportunity-foundation.js",
+      "expected": "REJECT",
+      "passed": true
+    },
+    {
+      "case": "duplicate",
+      "owner": "defensive-opportunity-foundation.js",
+      "expected": "REJECT",
+      "passed": true
+    },
+    {
+      "case": "moved-before-dependencies",
+      "owner": "defensive-opportunity-foundation.js",
+      "expected": "REJECT",
+      "passed": true
+    },
+    {
+      "case": "missing",
+      "owner": "defensive-reach-secure-foundation.js",
+      "expected": "REJECT",
+      "passed": true
+    },
+    {
+      "case": "duplicate",
+      "owner": "defensive-reach-secure-foundation.js",
+      "expected": "REJECT",
+      "passed": true
+    },
+    {
+      "case": "moved-before-dependencies",
+      "owner": "defensive-reach-secure-foundation.js",
+      "expected": "REJECT",
+      "passed": true
+    },
+    {
+      "case": "missing",
+      "owner": "defensive-decision-throw-foundation.js",
+      "expected": "REJECT",
+      "passed": true
+    },
+    {
+      "case": "duplicate",
+      "owner": "defensive-decision-throw-foundation.js",
+      "expected": "REJECT",
+      "passed": true
+    },
+    {
+      "case": "moved-before-dependencies",
+      "owner": "defensive-decision-throw-foundation.js",
+      "expected": "REJECT",
+      "passed": true
+    }
+  ],
+  "manifestContractValidations": {
+    "passed": 10,
+    "total": 10
+  },
+  "copiesRetainOfficialFailStatus": true
+}

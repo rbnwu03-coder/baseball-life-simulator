@@ -1,0 +1,117 @@
+{
+  "suiteName": "custom-empty",
+  "file": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/custom-empty.cjs",
+  "entryMode": "standalone",
+  "actualCommand": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+    "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq\\custom-empty.cjs"
+  ],
+  "cwd": "E:\\meng\\baseball_life_sim_semirefactor",
+  "runnerNodeVersion": "v24.19.0",
+  "nodeVersion": "v24.19.0",
+  "startedAt": "2026-10-14T10:54:21.623Z",
+  "elapsedMs": 63.8775,
+  "exitCode": 0,
+  "signal": null,
+  "spawnError": null,
+  "policy": {
+    "timeoutMs": 120000,
+    "outputMaxBuffer": 16000000,
+    "implicitGitShowMaxBuffer": 30000000,
+    "gitCompatibility": true
+  },
+  "environment": {
+    "NODE_OPTIONS": null,
+    "NODE_PATH": null,
+    "TZ": null,
+    "ENTRY_SAFE_CONFIG": {
+      "nonce": "cabcc90bbbfd8d47aaae5b20ec44f024",
+      "target": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq\\custom-empty.cjs",
+      "entryMode": "standalone",
+      "gitCompatibility": true,
+      "customAssertion": {
+        "sourceSha256": "96d9430c4d72e7fe306cf53395a21a77f87abdab51c9ac2be55ad997c6e75e52",
+        "functionName": "verify",
+        "expectedCount": 2,
+        "functionFragment": "function verify(condition){if(!condition)throw Error('Custom assertion');}\n"
+      },
+      "assertionRoots": [
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests",
+        "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq"
+      ]
+    }
+  },
+  "assertionEvidence": {
+    "version": 1,
+    "nonce": "cabcc90bbbfd8d47aaae5b20ec44f024",
+    "entryMode": "standalone",
+    "target": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq\\custom-empty.cjs",
+    "nodeVersion": "v24.19.0",
+    "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+    "entryStarted": true,
+    "exportCompleted": false,
+    "summary": null,
+    "unhandledError": null,
+    "assertions": {
+      "attempted": 0,
+      "passed": 0,
+      "thrown": 0,
+      "unsupportedAsync": 0,
+      "methods": {},
+      "samples": []
+    },
+    "customAssertion": {
+      "sourceHash": "96d9430c4d72e7fe306cf53395a21a77f87abdab51c9ac2be55ad997c6e75e52",
+      "reviewedSourceMatches": true,
+      "functionName": "verify",
+      "expectedCount": 2,
+      "count": 0,
+      "ranges": [
+        {
+          "startOffset": 0,
+          "endOffset": 74,
+          "count": 0
+        }
+      ],
+      "error": null
+    },
+    "gitCompatibility": {
+      "enabled": true,
+      "calls": []
+    },
+    "exitCode": 0,
+    "mainFilename": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq\\custom-empty.cjs",
+    "standaloneMainMatches": true
+  },
+  "witnessParseError": null,
+  "witnessPath": "docs/test-infrastructure-sprint-0.1-development-3-custom-empty-evidence-assertions.json",
+  "stdout": "PASS 2/2\n",
+  "stderr": "",
+  "gitBaseline": {
+    "branch": "main",
+    "head": "ab3117653945de0b7013636187c446276a96e634",
+    "main": "ab3117653945de0b7013636187c446276a96e634",
+    "originMain": "ab3117653945de0b7013636187c446276a96e634",
+    "index": ""
+  },
+  "relevantSourceHashesBefore": {
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/custom-empty.cjs": "96d9430c4d72e7fe306cf53395a21a77f87abdab51c9ac2be55ad997c6e75e52",
+    "tests/entry-safe-runner.cjs": "0859f3b19aa9d2e4510049a490744869e7937dc9bf15356612f53c011b6a6fb1",
+    "tests/entry-safe-preload.cjs": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "relevantSourceHashesAfter": {
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/custom-empty.cjs": "96d9430c4d72e7fe306cf53395a21a77f87abdab51c9ac2be55ad997c6e75e52",
+    "tests/entry-safe-runner.cjs": "0859f3b19aa9d2e4510049a490744869e7937dc9bf15356612f53c011b6a6fb1",
+    "tests/entry-safe-preload.cjs": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "sourceStable": true,
+  "status": "UNVERIFIED",
+  "reason": "Reviewed custom checker coverage missing or incomplete",
+  "entryVerified": true,
+  "successfulAssertions": 0,
+  "customCheckerInvocations": 0
+}

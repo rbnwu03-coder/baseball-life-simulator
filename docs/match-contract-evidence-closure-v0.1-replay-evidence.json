@@ -1,0 +1,37 @@
+{
+  "task": "Match Contract Evidence Closure v0.1 — Focused Evidence Completion",
+  "createdAt": "2026-10-15T05:09:21.781Z",
+  "primary": {
+    "path": "docs/test-infrastructure-sprint-0.1-match-contract-evidence-closure-v0.1-canonical-88222-evidence.json",
+    "sha256": "7e80e9bad6186e205294ff383ee7008e4cd4c1c9b9b04897679cb4d26125faff",
+    "hashes": {
+      "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+      "initialMatch": "58459bdc12468fc9143bf1f711a19e1f8cebedf273f8ca9c0037f98006cc2084",
+      "record": "6af67e71aba581ac84fc5b215d6af1d9758f14852f8a1282081023a26d2f1ebc",
+      "log": "96679cf657a33a5e840ce74d437ed657b95d2cc35867be2000fe9b82b82a0d4a",
+      "decisionSequence": "8275a9f0f61d147cc217e85c689d38b6f5b55b1cfd191625773adff8c4c6f8a4"
+    }
+  },
+  "replay": {
+    "path": "docs/test-infrastructure-sprint-0.1-match-contract-evidence-closure-v0.1-canonical-88222-replay-evidence.json",
+    "sha256": "6d489fd5cd701dbeb482f100f6d1b36809227b0cf1cbca1a216b04c0b03df31c",
+    "hashes": {
+      "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+      "initialMatch": "58459bdc12468fc9143bf1f711a19e1f8cebedf273f8ca9c0037f98006cc2084",
+      "record": "6af67e71aba581ac84fc5b215d6af1d9758f14852f8a1282081023a26d2f1ebc",
+      "log": "96679cf657a33a5e840ce74d437ed657b95d2cc35867be2000fe9b82b82a0d4a",
+      "decisionSequence": "8275a9f0f61d147cc217e85c689d38b6f5b55b1cfd191625773adff8c4c6f8a4"
+    }
+  },
+  "parity": {
+    "fixture": true,
+    "initialMatch": true,
+    "record": true,
+    "log": true,
+    "decisionSequence": true
+  },
+  "decisionSequencesDeepEqual": true,
+  "exactSameStandaloneSource": true,
+  "actualSeedBoth88222": true,
+  "seed88221Executions": 0
+}

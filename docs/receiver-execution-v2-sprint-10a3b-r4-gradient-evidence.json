@@ -1,0 +1,39 @@
+{
+  "sprint": "10A.3b-R4",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "createdAt": "2026-10-14T05:17:37.190Z",
+  "node": "v24.19.0",
+  "result": {
+    "file": "tests/ability-performance-gradient-test.js",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "tests/ability-performance-gradient-test.js"
+    ],
+    "cwd": "E:\\meng\\baseball_life_sim_semirefactor",
+    "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+    "nodeVersion": "v24.19.0",
+    "timeoutMs": 120000,
+    "maxBuffer": 16000000,
+    "environment": {
+      "NODE_OPTIONS": null,
+      "NODE_PATH": null,
+      "TZ": null
+    },
+    "elapsedMs": 17231.3738,
+    "exitCode": 1,
+    "signal": null,
+    "error": null,
+    "stdout": "",
+    "stderr": "node:internal/assert/utils:77\r\n    throw err;\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Low tier can have a multi-hit game\r\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:45:1)\r\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\r\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\r\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\r\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\r\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)\r\n    at node:internal/main/run_main_module:33:47 {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.19.0\r\n",
+    "sourceHash": "1038c92e98c4a040f61a44e23c464d2a9daf544a613e9e3b0f6a9cf5e4017611",
+    "originalDebtReproduced": true,
+    "baselineStderr": "node:internal/assert/utils:77\r\n    throw err;\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Low tier can have a multi-hit game\r\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:45:1)\r\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\r\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\r\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\r\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\r\n    at Module.require (node:internal/modules/cjs/loader:1617:12)\r\n    at require (node:internal/modules/helpers:153:16)\r\n    at [eval]:1:306\r\n    at runScriptInThisContext (node:internal/vm:219:10) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.19.0\r\n"
+  },
+  "frozenSourceHashes": {
+    "index.html": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+    "script.js": "1783fc801a4ab0eabb423a1f7acbdc8cb9320441b5279c614255eeea92622268",
+    "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+    "match-situation-lifecycle.js": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+    "receiver-source-snapshot.js": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274"
+  }
+}

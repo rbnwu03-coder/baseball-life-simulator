@@ -1,0 +1,327 @@
+{
+  "task": "SS Strategic Ground-Ball Scenario Contract v0.1",
+  "createdAt": "2026-10-15T14:50:14.989Z",
+  "verdict": "B",
+  "verdictName": "Isolated Fixture Contract Required",
+  "basis": "No pre-Match arbitrary state contract in reviewed preparation/Schedule owners; coherent PA/base/record primitives exist for a new isolated setup-ledger contract. This is source-level feasibility, not implemented or runtime-accepted target fixture.",
+  "entryRoutes": [
+    {
+      "path": "A: pre-Match input",
+      "owners": [
+        "prepareCurrentHighSchoolYearOneMatch()",
+        "prepareHighSchoolYearOneMatch(options={})",
+        "launchHighSchoolScheduleEntry(scheduleEntryId,options)"
+      ],
+      "status": "NOT FOUND WITHIN REVIEWED SCOPE",
+      "state": "new state fixed inning1/top/outs0/bases empty; MatchContext is identity/origin/teams/rules, not arbitrary starting PA state",
+      "currentIdentity": "Event-specific owner; custom ID alone is insufficient"
+    },
+    {
+      "path": "B: Production advancement",
+      "owners": [
+        "advanceHighSchoolMatchPlaybackStep(match)",
+        "resolveSimulatedHighSchoolPlateAppearance(match,randomSource=null,options={})",
+        "resolveHighSchoolYearOneMatch(decision,expectedMomentId,randomSource)"
+      ],
+      "status": "EXISTING LEGAL ADVANCEMENT; TARGET REACHABILITY UNVERIFIED",
+      "validation": "real lineup batter, active pitcher, native base/out transition, event/Record, order and state checks; no result option on full resolver",
+      "runnerIdentity": "prior real PA batter ID on offense lineup",
+      "bypassesAdvancement": false
+    },
+    {
+      "path": "C: existing test fixture",
+      "owners": [
+        "tests/ss-defensive-production-integration-test.js:ssFixture(options)",
+        "tests/high-school-career-test-context.js:careerFixture(position,role,seed)"
+      ],
+      "status": "EXPLICIT COMPONENT/INTEGRATION FIXTURE; NOT QUALIFIED TARGET CHECKPOINT CONTRACT",
+      "limitation": "ssFixture writes active Match fields and capability/runner overrides; local integrity does not prove full prefix ledger or Current route parity"
+    }
+  ],
+  "classifications": {
+    "A": "Not established for deterministic reusable target state; ordinary legal advancement exists but no target runtime proof",
+    "B": "Selected: propose isolated prelude-ledger constructor composed from original state/event owners",
+    "C": "Not demonstrated; no convenience constructor is not a Production defect",
+    "D": "Not selected as overall verdict; target reach/admission/runtime replay remain UNVERIFIED"
+  },
+  "prior": {
+    "original": {
+      "physicalIdentity": "hs-y1-autumn-exhibition|7|上|away|regional-power-school-player-04|0|0|falsefalsefalse|ordinary-contact|pitch-1",
+      "primary": {
+        "version": "defensive-opportunity-v1",
+        "identity": "hs-y1-autumn-exhibition|7|上|away|regional-power-school-player-04|0|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1",
+        "physicalIdentity": "hs-y1-autumn-exhibition|7|上|away|regional-power-school-player-04|0|0|falsefalsefalse|ordinary-contact|pitch-1",
+        "topologyVersion": "regulation-coarse-zones-v1",
+        "sourceAuthority": "BattedBallPhysicalTruth+canonicalActiveDefense",
+        "ballContext": {
+          "ballType": "groundBall",
+          "pace": "firm",
+          "direction": "leftSide",
+          "depth": null
+        },
+        "opportunityFamily": "groundBallSpatialResponsibility",
+        "primaryPosition": "SS",
+        "secondaryPositions": [
+          "3B"
+        ],
+        "primaryDefenderId": "player",
+        "secondaryDefenders": [
+          {
+            "position": "3B",
+            "defenderId": "school-development-29d536a2-player-05"
+          }
+        ],
+        "responsibilityClassification": "coarseAmbiguity",
+        "responsibilityBasis": "regulation-coarse-zones-v1:left-infield-shortstop-third-overlap",
+        "bindingStatus": "bound",
+        "supported": true,
+        "fallbackReason": ""
+      },
+      "reach": {
+        "version": "defensive-reach-secure-v1",
+        "identity": "hs-y1-autumn-exhibition|7|上|away|regional-power-school-player-04|0|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1",
+        "opportunityIdentity": "hs-y1-autumn-exhibition|7|上|away|regional-power-school-player-04|0|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1",
+        "physicalIdentity": "hs-y1-autumn-exhibition|7|上|away|regional-power-school-player-04|0|0|falsefalsefalse|ordinary-contact|pitch-1",
+        "defenderId": "player",
+        "position": "SS",
+        "supported": true,
+        "authority": "physicalOpportunity+activeDefender+reachCapabilities",
+        "reachDemand": 4.095,
+        "reactionDemand": 4.5,
+        "movementDemand": 3.6,
+        "responsibilityClassification": "coarseAmbiguity",
+        "ballDemand": {
+          "ballType": "groundBall",
+          "pace": "firm",
+          "direction": "leftSide",
+          "depth": null,
+          "responsibilityClassification": "coarseAmbiguity",
+          "ambiguity": 0.6,
+          "reactionDemand": 4.5,
+          "movementDemand": 3.6,
+          "reactionWeight": 0.55,
+          "reachDemand": 4.095,
+          "units": "coarseRelativeDemand"
+        },
+        "inputs": {
+          "reaction": 3,
+          "range": 3,
+          "mobility": 2
+        },
+        "margin": -0.325,
+        "reached": false,
+        "reachQuality": "notReached",
+        "variationEvidence": {
+          "namespace": "defensive-reach-v1",
+          "identity": "hs-y1-autumn-exhibition|7|上|away|regional-power-school-player-04|0|0|falsefalsefalse|ordinary-contact|pitch-1|defensive-opportunity-v1|regulation-coarse-zones-v1|player|reach-v1",
+          "roll": 0.059226802783086896,
+          "adjustment": 0.882,
+          "consumed": true
+        }
+      },
+      "access": "canonicalReachUnavailable",
+      "handoff": "unsupportedOrdinaryContactLegacyFallback",
+      "result": "single"
+    },
+    "reachable": {
+      "physicalIdentity": "hs-y1-autumn-exhibition|4|上|away|regional-power-school-player-07|8|0|falsefalsefalse|ordinary-contact|pitch-1",
+      "reach": 4.759,
+      "secure": 4.572,
+      "classification": {
+        "eventClassification": "playerRoutinePlay",
+        "decisionTension": "low",
+        "gate": {
+          "playerPosition": "游擊手",
+          "ballContext": "normalGrounder",
+          "outs": 0,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "forceState": {
+            "first": false,
+            "second": false,
+            "third": false,
+            "forceAtSecond": false,
+            "forceAtThird": false,
+            "forceAtHome": false,
+            "doublePlayEligible": false,
+            "forceChainVersion": "force-advancement-foundation-v1",
+            "authority": "initialLiveBallForceChainProjection"
+          },
+          "scoreContext": {
+            "differential": -1,
+            "phase": "middle",
+            "runPriority": "balanced"
+          },
+          "inningPhase": "middle",
+          "legalChoiceCount": 2,
+          "meaningfulChoiceCount": 1,
+          "objectives": [
+            "secureOut"
+          ],
+          "commitments": [
+            "throwFirst|6-3|first|player>1B|low"
+          ],
+          "tradeoffs": [
+            "convertBatterOut|low|normal"
+          ],
+          "decisionTension": "low",
+          "shouldCreateDecision": false
+        },
+        "density": {
+          "version": "match-decision-density-v1",
+          "allowed": false,
+          "meaningfulCandidate": false,
+          "suppressionReason": "not-meaningful",
+          "playIndex": 45,
+          "spacing": null,
+          "repeated": false,
+          "situationNovel": false,
+          "routeNovel": false,
+          "highNovelty": false,
+          "absoluteSafetyCap": 6,
+          "maxConsecutiveMeaningfulDecisions": 2,
+          "situationFamily": "routineGroundBall|000|0|primaryFielder|normalGrounder|leftSide|balanced",
+          "routeFamily": "holdBall+secureFirstBaseOut",
+          "noveltyKey": "routineGroundBall|000|0|primaryFielder|normalGrounder|leftSide|balanced|holdBall+secureFirstBaseOut",
+          "topology": "000",
+          "leverage": "balanced"
+        }
+      },
+      "choices": [
+        {
+          "text": "先處理一壘的打者跑者",
+          "matchDecision": "secure",
+          "infieldRoute": "secureFirst",
+          "advisable": "reasonable",
+          "objective": "secureOut",
+          "risk": "low",
+          "baseballValue": "convertBatterOut",
+          "executionOnly": false,
+          "id": "secureFirstBaseOut",
+          "action": "throwFirst",
+          "targetBase": "first",
+          "route": "6-3",
+          "teammateChain": [
+            "1B"
+          ],
+          "playerRole": "initiator",
+          "routeId": "secureFirstBaseOut",
+          "responsibilityChain": [
+            "player",
+            "1B"
+          ],
+          "availability": {
+            "legal": true,
+            "viable": true,
+            "windowState": "normal",
+            "reasons": []
+          },
+          "legal": true,
+          "viable": true,
+          "riskProfile": "low",
+          "matchMomentId": "hs_y1_match_moment_2",
+          "readiness": null
+        },
+        {
+          "text": "先把球控制在手中，不勉強做失去準頭的傳球",
+          "matchDecision": "contain",
+          "infieldRoute": "controlledNoThrow",
+          "advisable": "conservative",
+          "objective": "controlBall",
+          "risk": "low",
+          "baseballValue": "executionOnly",
+          "executionOnly": false,
+          "id": "holdBall",
+          "action": "holdBall",
+          "targetBase": "none",
+          "route": "controlledHold",
+          "teammateChain": [],
+          "playerRole": "initiator",
+          "routeId": "holdBall",
+          "responsibilityChain": [
+            "player"
+          ],
+          "availability": {
+            "legal": true,
+            "viable": true,
+            "windowState": "normal",
+            "reasons": []
+          },
+          "legal": true,
+          "viable": true,
+          "riskProfile": "low",
+          "matchMomentId": "hs_y1_match_moment_2",
+          "readiness": null
+        }
+      ],
+      "stop": {
+        "gate": "Classification",
+        "classification": "playerRoutinePlay",
+        "reason": "not-meaningful",
+        "tick": 44
+      },
+      "partialRecordStatus": "active",
+      "fullFinalRecord": false,
+      "fullCareer": false
+    }
+  },
+  "sourceFeasibility": {
+    "preconditions": [
+      "actual SS player binding",
+      "opponent offense",
+      "outs1",
+      "runner first with prior PA provenance",
+      "valid ground Physical and handoff",
+      "no unsupported overrides"
+    ],
+    "forceAtSecond": "source-conditional true",
+    "doublePlayEligible": "source-conditional true at outs1",
+    "routes": [
+      "secureFirstBaseOut / secure / 6-3",
+      "forceSecond / forceSecond / 6-4",
+      "startDoublePlaySecond / challenge / 6-4-3",
+      "holdBall / contain"
+    ],
+    "meaningful": "legal>=2 AND non-executionOnly baseballValue choices>=2 AND distinct commitments>=2 AND distinct tradeoffs>=2",
+    "tension": "high if eligible DP remains a meaningful route; source inference only",
+    "density": "must separately allow actual candidate; no reset or forced quota",
+    "runtimeProof": "UNVERIFIED; no owner evaluated this turn"
+  },
+  "proposal": {
+    "state": "PROPOSAL ONLY; NOT IMPLEMENTED",
+    "name": "Isolated strategic SS prelude-ledger fixture contract",
+    "start": "same higher-defense complete pre-Match fixture; Current owner identity, same seed, formal playback/public policy to first eligible opponent top half with zero outs/empty bases, before any controlled target contact",
+    "setup": "exactly one declared strikeout then one declared walk for next two real lineup batters; these are controlled setup facts, not AI-produced PA outcomes; no synthetic target-play result",
+    "authority": [
+      "applyHighSchoolSimulatedPlateAppearance(match,result,batterId,offenseTeam)",
+      "recordHighSchoolMatchPlateAppearanceEvidence(match,batterId,result,0)",
+      "recordHighSchoolMatchSimulationEvent(match,event)",
+      "advanceHighSchoolMatchBattingOrder(match,offenseTeam)"
+    ],
+    "requiredNewValidation": [
+      "strict prelude input enum/order/precondition/schema; apply primitive alone is not sufficient",
+      "setup identity duplicate rejection; record once and advance once",
+      "current/reference/id/Event and starter/active SS from formal owners",
+      "one legal opponent runner from second setup batter; distinct next batter, not retired/bench/unknown",
+      "0->1 out from declared strikeout; empty->first from declared walk; same inning/half; no score change",
+      "native state and active roster checks PLUS full prefix Log/Record ref/before-after continuity/statistics checks",
+      "setup event source explicitly isolatedScenarioSetupFixture; never masquerade as natural AI/Physical output",
+      "no direct active Match state/phase/lineup/binding writes or fresh blank Record at target"
+    ],
+    "target": "original five rolls at Physical input boundary only; full pipeline still decides tactical action, binding, Reach, Secure, choices, density, execution and result",
+    "replay": "one locked scenario plus at most one replay; stop if setup boundary, identity, meaningful or other gates fail; no outcome or seed search",
+    "post": "target public decision duplicate + lifecycle recovery/one-commit checks; partial/final scope kept separate"
+  },
+  "UIReady": false,
+  "newGameplay": 0,
+  "newFormalSuites": 0,
+  "productionDelta": 0,
+  "existingTestsDelta": 0,
+  "fullBaselineReverified": false,
+  "readyForCommit": false,
+  "readyForSprint10B": false,
+  "receiverV2": "DISABLED"
+}

@@ -1,0 +1,108 @@
+{
+  "suiteName": "assertion-failure",
+  "file": "docs/test-infrastructure-sprint-0.1-fixtures-njh333/failure.cjs",
+  "entryMode": "standalone",
+  "actualCommand": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+    "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-njh333\\failure.cjs"
+  ],
+  "cwd": "E:\\meng\\baseball_life_sim_semirefactor",
+  "runnerNodeVersion": "v24.19.0",
+  "nodeVersion": "v24.19.0",
+  "startedAt": "2026-10-14T10:49:12.229Z",
+  "elapsedMs": 38.2139,
+  "exitCode": 1,
+  "signal": null,
+  "spawnError": null,
+  "policy": {
+    "timeoutMs": 120000,
+    "outputMaxBuffer": 16000000,
+    "implicitGitShowMaxBuffer": 30000000,
+    "gitCompatibility": true
+  },
+  "environment": {
+    "NODE_OPTIONS": null,
+    "NODE_PATH": null,
+    "TZ": null,
+    "ENTRY_SAFE_CONFIG": {
+      "nonce": "5320bb83533f12f5d8fbde401ced7723",
+      "target": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-njh333\\failure.cjs",
+      "entryMode": "standalone",
+      "gitCompatibility": true,
+      "assertionRoots": [
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests",
+        "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-njh333"
+      ]
+    }
+  },
+  "assertionEvidence": {
+    "version": 1,
+    "nonce": "5320bb83533f12f5d8fbde401ced7723",
+    "entryMode": "standalone",
+    "target": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-njh333\\failure.cjs",
+    "nodeVersion": "v24.19.0",
+    "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+    "entryStarted": true,
+    "exportCompleted": false,
+    "summary": null,
+    "unhandledError": {
+      "name": "AssertionError",
+      "code": "ERR_ASSERTION",
+      "message": "Intentional ENOBUFS-labelled AssertionError\n\n1 !== 2\n"
+    },
+    "assertions": {
+      "attempted": 1,
+      "passed": 0,
+      "thrown": 1,
+      "unsupportedAsync": 0,
+      "methods": {
+        "equal": 1
+      },
+      "samples": [
+        {
+          "method": "equal",
+          "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-njh333\\failure.cjs:1:26)",
+          "returned": false,
+          "errorName": "AssertionError"
+        }
+      ]
+    },
+    "gitCompatibility": {
+      "enabled": true,
+      "calls": []
+    },
+    "exitCode": 1,
+    "mainFilename": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-njh333\\failure.cjs",
+    "standaloneMainMatches": true
+  },
+  "witnessParseError": null,
+  "witnessPath": "docs/test-infrastructure-sprint-0.1-development-1-assertion-failure-evidence-assertions.json",
+  "stdout": "",
+  "stderr": "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs:19\r\n catch(error){state.assertions.thrown++;sample.returned=false;sample.errorName=error?.name;throw error;}\r\n                                                                                           ^\r\n\r\nAssertionError [ERR_ASSERTION]: Intentional ENOBUFS-labelled AssertionError\r\n\r\n1 !== 2\r\n\r\n    at observedCall (E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs:18:26)\r\n    at Object.apply (E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs:31:12)\r\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-njh333\\failure.cjs:1:26)\r\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\r\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\r\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\r\n    at Module.<anonymous> (node:internal/modules/cjs/loader:1396:12)\r\n    at Module._load (E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs:39:22)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\r\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: 1,\r\n  expected: 2,\r\n  operator: 'strictEqual',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.19.0\r\n",
+  "gitBaseline": {
+    "branch": "main",
+    "head": "ab3117653945de0b7013636187c446276a96e634",
+    "main": "ab3117653945de0b7013636187c446276a96e634",
+    "originMain": "ab3117653945de0b7013636187c446276a96e634",
+    "index": ""
+  },
+  "relevantSourceHashesBefore": {
+    "docs/test-infrastructure-sprint-0.1-fixtures-njh333/failure.cjs": "ad3b86c8893dd81ab122b1c0da303f77424ab14e108f223e67ed3e41287623aa",
+    "tests/entry-safe-runner.cjs": "03e75d865265f110f7c532e131745d551df5d87d3a5ae0e19d41ae08b50348e8",
+    "tests/entry-safe-preload.cjs": "35bde7c4d94193362e4f0cbbe9bbbcfbea111f2fcf6a32462ceec44f5442aab1",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "relevantSourceHashesAfter": {
+    "docs/test-infrastructure-sprint-0.1-fixtures-njh333/failure.cjs": "ad3b86c8893dd81ab122b1c0da303f77424ab14e108f223e67ed3e41287623aa",
+    "tests/entry-safe-runner.cjs": "03e75d865265f110f7c532e131745d551df5d87d3a5ae0e19d41ae08b50348e8",
+    "tests/entry-safe-preload.cjs": "35bde7c4d94193362e4f0cbbe9bbbcfbea111f2fcf6a32462ceec44f5442aab1",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "sourceStable": true,
+  "status": "FAIL",
+  "reason": "Executed entry reported assertion/runtime/summary failure",
+  "entryVerified": true,
+  "successfulAssertions": 0
+}

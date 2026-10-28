@@ -1,0 +1,237 @@
+{
+  "sprint": "10A.3b-R2",
+  "tier": 2,
+  "r1RuntimeGraph": [
+    {
+      "name": "runSuite",
+      "trace": {
+        "function": "E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r1-runner.runSuite",
+        "direction": "both",
+        "callees_total": 0,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": []
+        },
+        "callers_total": 0,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": []
+        }
+      },
+      "snippet": {
+        "name": "runSuite",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r1-runner.runSuite",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs",
+        "start_line": 16,
+        "end_line": 21,
+        "source_mode": "full",
+        "source": "function runSuite(file, cwd = root, timeout = 120000) {\n  assert(!protectedPaths.has(file)); const start = process.hrtime.bigint();\n  const r = cp.spawnSync(process.execPath, [file], { cwd, encoding: \"utf8\", windowsHide: true, timeout, maxBuffer: 16000000 });\n  return { file, command: [process.execPath, file], cwd, timeoutMs: timeout, elapsedMs: Number(process.hrtime.bigint() - start) / 1e6,\n    exitCode: r.status, signal: r.signal, error: r.error ? { code: r.error.code, message: r.error.message } : null, stdout: r.stdout || \"\", stderr: r.stderr || \"\" };\n}\n",
+        "callers": 2,
+        "callees": 1
+      }
+    },
+    {
+      "name": "materialize",
+      "trace": {
+        "function": "E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r1-runner.materialize",
+        "direction": "both",
+        "callees_total": 0,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": []
+        },
+        "callers_total": 0,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": []
+        }
+      },
+      "snippet": {
+        "name": "materialize",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r1-runner.materialize",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs",
+        "start_line": 22,
+        "end_line": 37,
+        "source_mode": "full",
+        "source": "function materialize(mode) {\n  assert([\"baseline\", \"current\"].includes(mode));\n  const dir = fs.mkdtempSync(path.join(os.tmpdir(), \"receiver-r1-\" + mode + \"-\"));\n  const index = mode === \"baseline\" ? Buffer.from(git(\"show\", baseline + \":index.html\")) : read(\"index.html\");\n  const files = new Set([\"index.html\", \"tests/high-school-career-test-context.js\", \"tests/first-base-receive-active-ground-production-integration-test.js\"]);\n  for (const x of index.toString(\"utf8\").matchAll(/<script src=\"([^\"]+)\"/g)) if (x[1] !== \"application-controller.js\") files.add(x[1]);\n  const hashes = {};\n  for (const p of files) {\n    assert(!protectedPaths.has(p)); reads.add(p);\n    const bytes = mode === \"baseline\" ? Buffer.from(git(\"show\", baseline + \":\" + p)) : read(p);\n    const dest = path.resolve(dir, p); assert(dest.startsWith(dir + path.sep));\n    fs.mkdirSync(path.dirname(dest), { recursive: true }); fs.writeFileSync(dest, bytes, { flag: \"wx\" }); hashes[p] = hash(bytes);\n    if (p.startsWith(\"tests/\")) assert.equal(bytes.toString(\"utf8\").replace(/\\r\\n/g, \"\\n\"), git(\"show\", baseline + \":\" + p).replace(/\\r\\n/g, \"\\n\"), \"Original test/helper altered\");\n  }\n  return { dir, hashes };\n}\n",
+        "callers": 1,
+        "callees": 4
+      }
+    },
+    {
+      "name": "timeoutRecovery",
+      "trace": {
+        "function": "E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r1-runner.timeoutRecovery",
+        "direction": "both",
+        "callees_total": 0,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": []
+        },
+        "callers_total": 0,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": []
+        }
+      },
+      "snippet": {
+        "name": "timeoutRecovery",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r1-runner.timeoutRecovery",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs",
+        "start_line": 45,
+        "end_line": 53,
+        "source_mode": "full",
+        "source": "function timeoutRecovery() {\n  // Sequential comparable executions, no overlapping suites. Wider runs remain diagnostic only.\n  const a = firstBase(\"baseline\", 120000, \"-serial\"), b = firstBase(\"current\", 120000, \"-serial\");\n  if (b.exitCode !== null && b.exitCode !== 0) { capture(\"timeout-comparison\", { baseline: a, current: b, stop: \"current non-timeout failure; do not expand\" }); process.exitCode = 1; return; }\n  const da = firstBase(\"baseline\", 300000), db = firstBase(\"current\", 300000);\n  capture(\"timeout-comparison\", { executionOrder: \"baseline120,current120,baseline300diagnostic,current300diagnostic; sequential\", originalCondition: { baseline: { exitCode: a.exitCode, error: a.error, elapsedMs: a.elapsedMs }, current: { exitCode: b.exitCode, error: b.error, elapsedMs: b.elapsedMs }, accepted: b.exitCode === 0 },\n    diagnosticOnly: { timeoutMs: 300000, baseline: { exitCode: da.exitCode, error: da.error, elapsedMs: da.elapsedMs }, current: { exitCode: db.exitCode, error: db.error, elapsedMs: db.elapsedMs }, completeStdoutEqual: da.stdout === db.stdout, baselineStdoutSha256: hash(da.stdout), currentStdoutSha256: hash(db.stdout) },\n    verdict: b.exitCode === 0 ? \"PASS_ORIGINAL_CONDITION\" : \"UNRESOLVED_ORIGINAL120_TIMEOUT; wider diagnostic cannot replace acceptance\", formalTimeoutUnchanged: true });\n}\n",
+        "callers": 1,
+        "callees": 3
+      }
+    }
+  ],
+  "initialCoverage": {
+    "project": "E-meng-baseball_life_sim_semirefactor",
+    "signal": "best_effort",
+    "indexed_at": "2026-10-13T15:22:42Z",
+    "metadata": {
+      "generation": "2026-10-13T15:22:42Z",
+      "index_mode": "full",
+      "recorded_at": "2026-10-13T15:22:44Z",
+      "recording_status": "complete",
+      "ignored_files_stored": 0,
+      "ignored_files_total": 0,
+      "hash_records_complete": true,
+      "coverage_version": 3,
+      "generation_matches": true
+    },
+    "paths": [
+      {
+        "requested_path": "tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs",
+        "path": "tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs",
+        "path": "tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs",
+        "path": "tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "tests/infield-legacy-receiver-model-sprint-6-runner.cjs",
+        "path": "tests/infield-legacy-receiver-model-sprint-6-runner.cjs",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "docs/infield-legacy-receiver-model-sprint-6-validation-final.json",
+        "path": "docs/infield-legacy-receiver-model-sprint-6-validation-final.json",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "docs/receiver-execution-v2-sprint-10a3b-r2-baseline-evidence.json",
+        "path": "docs/receiver-execution-v2-sprint-10a3b-r2-baseline-evidence.json",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "tests/first-base-receive-active-ground-production-integration-test.js",
+        "path": "tests/first-base-receive-active-ground-production-integration-test.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "tests/high-school-career-test-context.js",
+        "path": "tests/high-school-career-test-context.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      }
+    ],
+    "path_total": 8,
+    "path_returned": 8,
+    "path_has_more": false,
+    "scopes": [],
+    "scope_total": 0,
+    "scope_returned": 0,
+    "scope_truncated": false,
+    "has_more": false,
+    "caveat": "Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable."
+  },
+  "readOnlyIndependentAudit": {
+    "manifestCount": 227,
+    "manifestSha256": "871902b4d5ecd7beb2bd23848be8c985ed7ddc52ecc5ebc6b40ba57d2f335a96",
+    "firstBaseMember": false,
+    "fullDefaultTimeoutMs": 180000,
+    "fullMaxBuffer": 30000000,
+    "runnerPath": "tests/infield-legacy-receiver-model-sprint-6-runner.cjs",
+    "runnerSha256": "4051fa09610bbb5c296e6d8b99510cefcfca7377a356fbd5802c8ba95032c52b",
+    "fullCommand": "node -e originalGitShowBufferWrapper absoluteSuitePath",
+    "currentTestBytesEqualPrior": true,
+    "coverageCount": 231,
+    "coverageReturned": 231,
+    "pages": [
+      100,
+      100,
+      31
+    ],
+    "unfinishedPagination": false,
+    "protectedContentReads": 0,
+    "filesModified": 0,
+    "caveat": "Agent source/coverage audit, no suite execution; metadata is not completeness proof."
+  },
+  "caveat": "Best-effort graph metadata is supplemented by exact current bytes, source hashes and sequential execution; no production structural change in R2."
+}

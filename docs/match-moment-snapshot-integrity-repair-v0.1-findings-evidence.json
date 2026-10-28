@@ -1,0 +1,1823 @@
+{
+  "task": "Match Moment Snapshot Integrity Repair v0.1 — Bounded Production Fix",
+  "createdAt": "2026-10-15T08:04:11.082Z",
+  "beforeReproduction": "docs/match-moment-snapshot-integrity-repair-v0.1-before-reproduction-evidence.json",
+  "openingBaseline": "255 suites: 203 PASS / 2 FAIL / 48 UNVERIFIED / 2 BLOCKED; historical evidence, not revalidated wholesale after Production delta",
+  "summary": {
+    "suite": "canonical-match-regression",
+    "passed": 50,
+    "failed": 0,
+    "fullGames": 4,
+    "results": [
+      {
+        "seed": 88221,
+        "status": "PASS",
+        "fixture": "legal sixth-inning SS substitute",
+        "runs": 2,
+        "ticks": 110,
+        "score": {
+          "home": 1,
+          "away": 6
+        },
+        "completedIds": [
+          "hs_y1_match_moment_1"
+        ],
+        "defenseCreated": 0,
+        "defenseCompleted": 0,
+        "hashes": {
+          "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+          "initialMatch": "2cb25dd2fd1483a5b3b357edb70958a65a80b4c8f2e076d66551cce15ffcbb92",
+          "record": "abb6ee6487c8f39a3e3de3afe945f2494a374d9b78d6c6a6a358c9808dd6cf92",
+          "log": "2be47a93cf9e5d85831de8067154a47009ff617bae49ab2bc150812e9c5b0e2e",
+          "decisionSequence": "65fcb545854cd4b89f113ff7060eadd0e7c9b0b86aefe780450722ce4bd07226"
+        },
+        "snapshot": "RESOLUTION SNAPSHOT PRESERVED",
+        "replay": true
+      },
+      {
+        "seed": 88222,
+        "status": "PASS",
+        "fixture": "legal sixth-inning SS substitute",
+        "runs": 2,
+        "ticks": 107,
+        "score": {
+          "home": 1,
+          "away": 3
+        },
+        "completedIds": [
+          "hs_y1_match_moment_1"
+        ],
+        "defenseCreated": 0,
+        "defenseCompleted": 0,
+        "hashes": {
+          "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+          "initialMatch": "58459bdc12468fc9143bf1f711a19e1f8cebedf273f8ca9c0037f98006cc2084",
+          "record": "6af67e71aba581ac84fc5b215d6af1d9758f14852f8a1282081023a26d2f1ebc",
+          "log": "96679cf657a33a5e840ce74d437ed657b95d2cc35867be2000fe9b82b82a0d4a",
+          "decisionSequence": "ed259ebfd8344db8fb2f51d5421338b9aa0b1c05765b3b7233710e1db2aab227"
+        },
+        "snapshot": "RESOLUTION SNAPSHOT PRESERVED",
+        "replay": true
+      }
+    ],
+    "S3": "UNVERIFIED",
+    "SSStartingAdmission": "UNVERIFIED",
+    "nonzeroDefensiveMoment": "UNVERIFIED",
+    "snapshot": "RESOLUTION SNAPSHOT PRESERVED",
+    "decisionPressure": "Existing PA publicContext; missing/stale legacy context UNVERIFIED",
+    "original36": "NOT EXECUTED / historical verdict unchanged"
+  },
+  "runs": [
+    {
+      "seed": 88221,
+      "run": "first",
+      "fixture": "legal sixth-inning SS substitute",
+      "hashes": {
+        "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+        "initialMatch": "2cb25dd2fd1483a5b3b357edb70958a65a80b4c8f2e076d66551cce15ffcbb92",
+        "record": "abb6ee6487c8f39a3e3de3afe945f2494a374d9b78d6c6a6a358c9808dd6cf92",
+        "log": "2be47a93cf9e5d85831de8067154a47009ff617bae49ab2bc150812e9c5b0e2e",
+        "decisionSequence": "65fcb545854cd4b89f113ff7060eadd0e7c9b0b86aefe780450722ce4bd07226"
+      },
+      "ticks": 110,
+      "decisionBefore": {
+        "inning": 6,
+        "half": "下",
+        "outs": 1,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 5
+        }
+      },
+      "resolutionSnapshot": {
+        "inning": 6,
+        "half": "下",
+        "outs": 2,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 5
+        }
+      },
+      "lastMomentAtFinal": {
+        "inning": 6,
+        "half": "下",
+        "outs": 2,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 5
+        }
+      },
+      "oldLastMomentAtFinal": {
+        "inning": 6,
+        "half": "終",
+        "outs": 3,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 6
+        }
+      },
+      "finalSummary": {
+        "inning": 7,
+        "half": "終",
+        "outs": 3,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 6
+        }
+      },
+      "entireLastMomentUnchanged": true,
+      "entireLastMomentHash": "1db5e5b287eb36693bf199faa2e213ef4dc44250510fe37f6b638bdd354fcad8",
+      "resolutionHash": "1db5e5b287eb36693bf199faa2e213ef4dc44250510fe37f6b638bdd354fcad8",
+      "parityWithAcceptedSprint1": {
+        "fixture": true,
+        "initialMatch": true,
+        "decisions": true,
+        "gameRecord": true,
+        "simulationLog": true,
+        "playerContribution": true,
+        "rosters": true,
+        "scores": true,
+        "baseballSkills": true,
+        "capabilityState": true,
+        "highSchoolYearOneMatchHistory": true,
+        "highSchoolCoachEvaluation": true,
+        "highSchoolCompetitionEvaluation": true,
+        "skillProgress": true
+      },
+      "oldEvidence": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-canonical-evidence.json",
+      "pressure": {
+        "before": [
+          {
+            "pressure": {
+              "band": "normal",
+              "modifier": 1.02,
+              "reasons": [
+                "lateGame"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "終",
+              "outs": 3,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": -5,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          },
+          {
+            "pressure": {
+              "band": "normal",
+              "modifier": 1.02,
+              "reasons": [
+                "lateGame"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "終",
+              "outs": 3,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": -5,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          }
+        ],
+        "after": [
+          {
+            "pressure": {
+              "band": "normal",
+              "modifier": 1.02,
+              "reasons": [
+                "lateGame"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "下",
+              "outs": 2,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": -4,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          },
+          {
+            "pressure": {
+              "band": "normal",
+              "modifier": 1.02,
+              "reasons": [
+                "lateGame"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "下",
+              "outs": 2,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": -4,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          }
+        ],
+        "identity": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|6|下",
+        "publicContext": {
+          "balls": 0,
+          "strikes": 0,
+          "outs": 1,
+          "runners": [
+            false,
+            false,
+            false
+          ],
+          "scoreDifference": -4,
+          "inning": 6,
+          "highLeverage": false,
+          "previousPitchResult": "",
+          "previousPAResult": ""
+        },
+        "fallbackProbes": [
+          {
+            "kind": "missing",
+            "pressure": [
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "twoOuts"
+                ]
+              },
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "twoOuts"
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "stale",
+            "pressure": [
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "twoOuts"
+                ]
+              },
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "twoOuts"
+                ]
+              }
+            ]
+          }
+        ],
+        "legacyDecisionBeforeCorrectness": "UNVERIFIED when existing context missing/stale/invalid; resolution fallback retained"
+      },
+      "developmentDiff": [],
+      "aggregated": {
+        "before": [
+          {
+            "targetSkill": "baseballIQ",
+            "evidenceCount": 3,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 2,
+            "activeValue": 1.999,
+            "exposureValue": 1.936,
+            "totalValue": 3.935,
+            "noveltyGroupCount": 3,
+            "difficulty": "challenging",
+            "experienceQuality": "valuable",
+            "developmentQuality": "good",
+            "reasons": [
+              "reachBase"
+            ]
+          },
+          {
+            "targetSkill": "batting",
+            "evidenceCount": 2,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 1,
+            "activeValue": 1.999,
+            "exposureValue": 0.924,
+            "totalValue": 2.923,
+            "noveltyGroupCount": 2,
+            "difficulty": "challenging",
+            "experienceQuality": "normal",
+            "developmentQuality": "standard",
+            "reasons": [
+              "reachBase"
+            ]
+          }
+        ],
+        "after": [
+          {
+            "targetSkill": "baseballIQ",
+            "evidenceCount": 3,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 2,
+            "activeValue": 1.999,
+            "exposureValue": 1.936,
+            "totalValue": 3.935,
+            "noveltyGroupCount": 3,
+            "difficulty": "challenging",
+            "experienceQuality": "valuable",
+            "developmentQuality": "good",
+            "reasons": [
+              "reachBase"
+            ]
+          },
+          {
+            "targetSkill": "batting",
+            "evidenceCount": 2,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 1,
+            "activeValue": 1.999,
+            "exposureValue": 0.924,
+            "totalValue": 2.923,
+            "noveltyGroupCount": 2,
+            "difficulty": "challenging",
+            "experienceQuality": "normal",
+            "developmentQuality": "standard",
+            "reasons": [
+              "reachBase"
+            ]
+          }
+        ]
+      },
+      "callHome": "交流賽結束後，你在寮舍走廊打給阿哲。你只說明親自經歷的內容：6局下，球被扎實擊中，以一般力道滾向右半邊。 這個打席形成打者出局。你沒有把球探內部評語當成已知事實。\n\n比賽結果：球隊落敗，終場 1：6。本場一個關鍵時刻：第一次：球被扎實擊中，以一般力道滾向右半邊。 這個打席形成打者出局。。\n你們已不在同一支隊伍，仍認得彼此說起失敗時會停頓多久。\n你不知道這通電話會改變誰；只有之後的行動，能證明這段共同經驗是否真的被帶到了下一個球場。",
+      "record": {
+        "integrity": true,
+        "saveIntegrity": true,
+        "eventRefs": 119,
+        "logEvents": 119,
+        "result": {
+          "winnerTeamId": "regional-power-school",
+          "loserTeamId": "school-development-29d536a2",
+          "finalScore": {
+            "away": 6,
+            "home": 1
+          },
+          "tie": false
+        },
+        "totals": {
+          "away": {
+            "runs": 6,
+            "hits": 12,
+            "errors": 0
+          },
+          "home": {
+            "runs": 1,
+            "hits": 8,
+            "errors": 0
+          }
+        }
+      },
+      "exposure": {
+        "matchId": "hs-y1-autumn-exhibition",
+        "participated": true,
+        "started": false,
+        "appearanceType": "lateGameAppearance",
+        "entryInning": 6,
+        "exitInning": 7,
+        "defensiveInnings": 1,
+        "plateAppearances": 1,
+        "role": "starter"
+      },
+      "duplicates": [
+        {
+          "momentId": "hs_y1_match_moment_1",
+          "decision": "zone",
+          "returned": false,
+          "fullPlayerUnchanged": true
+        }
+      ],
+      "repeatedSettlement": {
+        "returns": [
+          false,
+          false,
+          false
+        ],
+        "fullPlayerUnchanged": true
+      },
+      "savePreserved": true,
+      "readOnlyProbesDidNotChangePlayer": true
+    },
+    {
+      "seed": 88221,
+      "run": "replay",
+      "fixture": "legal sixth-inning SS substitute",
+      "hashes": {
+        "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+        "initialMatch": "2cb25dd2fd1483a5b3b357edb70958a65a80b4c8f2e076d66551cce15ffcbb92",
+        "record": "abb6ee6487c8f39a3e3de3afe945f2494a374d9b78d6c6a6a358c9808dd6cf92",
+        "log": "2be47a93cf9e5d85831de8067154a47009ff617bae49ab2bc150812e9c5b0e2e",
+        "decisionSequence": "65fcb545854cd4b89f113ff7060eadd0e7c9b0b86aefe780450722ce4bd07226"
+      },
+      "ticks": 110,
+      "decisionBefore": {
+        "inning": 6,
+        "half": "下",
+        "outs": 1,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 5
+        }
+      },
+      "resolutionSnapshot": {
+        "inning": 6,
+        "half": "下",
+        "outs": 2,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 5
+        }
+      },
+      "lastMomentAtFinal": {
+        "inning": 6,
+        "half": "下",
+        "outs": 2,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 5
+        }
+      },
+      "oldLastMomentAtFinal": {
+        "inning": 6,
+        "half": "終",
+        "outs": 3,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 6
+        }
+      },
+      "finalSummary": {
+        "inning": 7,
+        "half": "終",
+        "outs": 3,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 6
+        }
+      },
+      "entireLastMomentUnchanged": true,
+      "entireLastMomentHash": "1db5e5b287eb36693bf199faa2e213ef4dc44250510fe37f6b638bdd354fcad8",
+      "resolutionHash": "1db5e5b287eb36693bf199faa2e213ef4dc44250510fe37f6b638bdd354fcad8",
+      "parityWithAcceptedSprint1": {
+        "fixture": true,
+        "initialMatch": true,
+        "decisions": true,
+        "gameRecord": true,
+        "simulationLog": true,
+        "playerContribution": true,
+        "rosters": true,
+        "scores": true,
+        "baseballSkills": true,
+        "capabilityState": true,
+        "highSchoolYearOneMatchHistory": true,
+        "highSchoolCoachEvaluation": true,
+        "highSchoolCompetitionEvaluation": true,
+        "skillProgress": true
+      },
+      "oldEvidence": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-canonical-evidence.json",
+      "pressure": {
+        "before": [
+          {
+            "pressure": {
+              "band": "normal",
+              "modifier": 1.02,
+              "reasons": [
+                "lateGame"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "終",
+              "outs": 3,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": -5,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          },
+          {
+            "pressure": {
+              "band": "normal",
+              "modifier": 1.02,
+              "reasons": [
+                "lateGame"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "終",
+              "outs": 3,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": -5,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          }
+        ],
+        "after": [
+          {
+            "pressure": {
+              "band": "normal",
+              "modifier": 1.02,
+              "reasons": [
+                "lateGame"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "下",
+              "outs": 2,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": -4,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          },
+          {
+            "pressure": {
+              "band": "normal",
+              "modifier": 1.02,
+              "reasons": [
+                "lateGame"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "下",
+              "outs": 2,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": -4,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          }
+        ],
+        "identity": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|6|下",
+        "publicContext": {
+          "balls": 0,
+          "strikes": 0,
+          "outs": 1,
+          "runners": [
+            false,
+            false,
+            false
+          ],
+          "scoreDifference": -4,
+          "inning": 6,
+          "highLeverage": false,
+          "previousPitchResult": "",
+          "previousPAResult": ""
+        },
+        "fallbackProbes": [
+          {
+            "kind": "missing",
+            "pressure": [
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "twoOuts"
+                ]
+              },
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "twoOuts"
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "stale",
+            "pressure": [
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "twoOuts"
+                ]
+              },
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "twoOuts"
+                ]
+              }
+            ]
+          }
+        ],
+        "legacyDecisionBeforeCorrectness": "UNVERIFIED when existing context missing/stale/invalid; resolution fallback retained"
+      },
+      "developmentDiff": [],
+      "aggregated": {
+        "before": [
+          {
+            "targetSkill": "baseballIQ",
+            "evidenceCount": 3,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 2,
+            "activeValue": 1.999,
+            "exposureValue": 1.936,
+            "totalValue": 3.935,
+            "noveltyGroupCount": 3,
+            "difficulty": "challenging",
+            "experienceQuality": "valuable",
+            "developmentQuality": "good",
+            "reasons": [
+              "reachBase"
+            ]
+          },
+          {
+            "targetSkill": "batting",
+            "evidenceCount": 2,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 1,
+            "activeValue": 1.999,
+            "exposureValue": 0.924,
+            "totalValue": 2.923,
+            "noveltyGroupCount": 2,
+            "difficulty": "challenging",
+            "experienceQuality": "normal",
+            "developmentQuality": "standard",
+            "reasons": [
+              "reachBase"
+            ]
+          }
+        ],
+        "after": [
+          {
+            "targetSkill": "baseballIQ",
+            "evidenceCount": 3,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 2,
+            "activeValue": 1.999,
+            "exposureValue": 1.936,
+            "totalValue": 3.935,
+            "noveltyGroupCount": 3,
+            "difficulty": "challenging",
+            "experienceQuality": "valuable",
+            "developmentQuality": "good",
+            "reasons": [
+              "reachBase"
+            ]
+          },
+          {
+            "targetSkill": "batting",
+            "evidenceCount": 2,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 1,
+            "activeValue": 1.999,
+            "exposureValue": 0.924,
+            "totalValue": 2.923,
+            "noveltyGroupCount": 2,
+            "difficulty": "challenging",
+            "experienceQuality": "normal",
+            "developmentQuality": "standard",
+            "reasons": [
+              "reachBase"
+            ]
+          }
+        ]
+      },
+      "callHome": "交流賽結束後，你在寮舍走廊打給阿哲。你只說明親自經歷的內容：6局下，球被扎實擊中，以一般力道滾向右半邊。 這個打席形成打者出局。你沒有把球探內部評語當成已知事實。\n\n比賽結果：球隊落敗，終場 1：6。本場一個關鍵時刻：第一次：球被扎實擊中，以一般力道滾向右半邊。 這個打席形成打者出局。。\n你們已不在同一支隊伍，仍認得彼此說起失敗時會停頓多久。\n你不知道這通電話會改變誰；只有之後的行動，能證明這段共同經驗是否真的被帶到了下一個球場。",
+      "record": {
+        "integrity": true,
+        "saveIntegrity": true,
+        "eventRefs": 119,
+        "logEvents": 119,
+        "result": {
+          "winnerTeamId": "regional-power-school",
+          "loserTeamId": "school-development-29d536a2",
+          "finalScore": {
+            "away": 6,
+            "home": 1
+          },
+          "tie": false
+        },
+        "totals": {
+          "away": {
+            "runs": 6,
+            "hits": 12,
+            "errors": 0
+          },
+          "home": {
+            "runs": 1,
+            "hits": 8,
+            "errors": 0
+          }
+        }
+      },
+      "exposure": {
+        "matchId": "hs-y1-autumn-exhibition",
+        "participated": true,
+        "started": false,
+        "appearanceType": "lateGameAppearance",
+        "entryInning": 6,
+        "exitInning": 7,
+        "defensiveInnings": 1,
+        "plateAppearances": 1,
+        "role": "starter"
+      },
+      "duplicates": [
+        {
+          "momentId": "hs_y1_match_moment_1",
+          "decision": "zone",
+          "returned": false,
+          "fullPlayerUnchanged": true
+        }
+      ],
+      "repeatedSettlement": {
+        "returns": [
+          false,
+          false,
+          false
+        ],
+        "fullPlayerUnchanged": true
+      },
+      "savePreserved": true,
+      "readOnlyProbesDidNotChangePlayer": true
+    },
+    {
+      "seed": 88222,
+      "run": "first",
+      "fixture": "legal sixth-inning SS substitute",
+      "hashes": {
+        "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+        "initialMatch": "58459bdc12468fc9143bf1f711a19e1f8cebedf273f8ca9c0037f98006cc2084",
+        "record": "6af67e71aba581ac84fc5b215d6af1d9758f14852f8a1282081023a26d2f1ebc",
+        "log": "96679cf657a33a5e840ce74d437ed657b95d2cc35867be2000fe9b82b82a0d4a",
+        "decisionSequence": "ed259ebfd8344db8fb2f51d5421338b9aa0b1c05765b3b7233710e1db2aab227"
+      },
+      "ticks": 107,
+      "decisionBefore": {
+        "inning": 6,
+        "half": "下",
+        "outs": 0,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 1
+        }
+      },
+      "resolutionSnapshot": {
+        "inning": 6,
+        "half": "下",
+        "outs": 1,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 1
+        }
+      },
+      "lastMomentAtFinal": {
+        "inning": 6,
+        "half": "下",
+        "outs": 1,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 1
+        }
+      },
+      "oldLastMomentAtFinal": {
+        "inning": 6,
+        "half": "終",
+        "outs": 3,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 3
+        }
+      },
+      "finalSummary": {
+        "inning": 7,
+        "half": "終",
+        "outs": 3,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 3
+        }
+      },
+      "entireLastMomentUnchanged": true,
+      "entireLastMomentHash": "1f4f62d93301b23dcd34059c085453966aec386b416c6c3942ac39e70fac2ad0",
+      "resolutionHash": "1f4f62d93301b23dcd34059c085453966aec386b416c6c3942ac39e70fac2ad0",
+      "parityWithAcceptedSprint1": {
+        "fixture": true,
+        "initialMatch": true,
+        "decisions": true,
+        "gameRecord": true,
+        "simulationLog": true,
+        "playerContribution": true,
+        "rosters": true,
+        "scores": true,
+        "baseballSkills": true,
+        "capabilityState": true,
+        "highSchoolYearOneMatchHistory": true,
+        "highSchoolCoachEvaluation": true,
+        "highSchoolCompetitionEvaluation": true,
+        "skillProgress": true
+      },
+      "oldEvidence": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-canonical-evidence.json",
+      "pressure": {
+        "before": [
+          {
+            "pressure": {
+              "band": "normal",
+              "modifier": 1.02,
+              "reasons": [
+                "lateGame"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "終",
+              "outs": 3,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": -2,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          },
+          {
+            "pressure": {
+              "band": "normal",
+              "modifier": 1.02,
+              "reasons": [
+                "lateGame"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "終",
+              "outs": 3,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": -2,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          }
+        ],
+        "after": [
+          {
+            "pressure": {
+              "band": "high",
+              "modifier": 1.05,
+              "reasons": [
+                "lateGame",
+                "closeScore"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "下",
+              "outs": 1,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": 0,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          },
+          {
+            "pressure": {
+              "band": "high",
+              "modifier": 1.05,
+              "reasons": [
+                "lateGame",
+                "closeScore"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "下",
+              "outs": 1,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": 0,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          }
+        ],
+        "identity": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|6|下",
+        "publicContext": {
+          "balls": 0,
+          "strikes": 0,
+          "outs": 0,
+          "runners": [
+            false,
+            false,
+            false
+          ],
+          "scoreDifference": 0,
+          "inning": 6,
+          "highLeverage": true,
+          "previousPitchResult": "",
+          "previousPAResult": ""
+        },
+        "fallbackProbes": [
+          {
+            "kind": "missing",
+            "pressure": [
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "closeScore"
+                ]
+              },
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "closeScore"
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "stale",
+            "pressure": [
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "closeScore"
+                ]
+              },
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "closeScore"
+                ]
+              }
+            ]
+          }
+        ],
+        "legacyDecisionBeforeCorrectness": "UNVERIFIED when existing context missing/stale/invalid; resolution fallback retained"
+      },
+      "developmentDiff": [
+        {
+          "path": ".history.0.metadata.experienceValue",
+          "before": 3.935,
+          "after": 3.994
+        },
+        {
+          "path": ".history.1.metadata.experienceValue",
+          "before": 2.923,
+          "after": 2.982
+        }
+      ],
+      "aggregated": {
+        "before": [
+          {
+            "targetSkill": "baseballIQ",
+            "evidenceCount": 3,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 2,
+            "activeValue": 1.999,
+            "exposureValue": 1.936,
+            "totalValue": 3.935,
+            "noveltyGroupCount": 3,
+            "difficulty": "challenging",
+            "experienceQuality": "valuable",
+            "developmentQuality": "good",
+            "reasons": [
+              "reachBase"
+            ]
+          },
+          {
+            "targetSkill": "batting",
+            "evidenceCount": 2,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 1,
+            "activeValue": 1.999,
+            "exposureValue": 0.924,
+            "totalValue": 2.923,
+            "noveltyGroupCount": 2,
+            "difficulty": "challenging",
+            "experienceQuality": "normal",
+            "developmentQuality": "standard",
+            "reasons": [
+              "reachBase"
+            ]
+          }
+        ],
+        "after": [
+          {
+            "targetSkill": "baseballIQ",
+            "evidenceCount": 3,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 2,
+            "activeValue": 2.058,
+            "exposureValue": 1.936,
+            "totalValue": 3.994,
+            "noveltyGroupCount": 3,
+            "difficulty": "challenging",
+            "experienceQuality": "valuable",
+            "developmentQuality": "good",
+            "reasons": [
+              "reachBase"
+            ]
+          },
+          {
+            "targetSkill": "batting",
+            "evidenceCount": 2,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 1,
+            "activeValue": 2.058,
+            "exposureValue": 0.924,
+            "totalValue": 2.982,
+            "noveltyGroupCount": 2,
+            "difficulty": "challenging",
+            "experienceQuality": "normal",
+            "developmentQuality": "standard",
+            "reasons": [
+              "reachBase"
+            ]
+          }
+        ]
+      },
+      "callHome": "交流賽結束後，你在寮舍走廊打給阿哲。你只說明親自經歷的內容：6局下，球被扎實擊中，以一般力道滾向右半邊。 這個打席形成打者出局。你沒有把球探內部評語當成已知事實。\n\n比賽結果：球隊落敗，終場 1：3。本場一個關鍵時刻：第一次：球被扎實擊中，以一般力道滾向右半邊。 這個打席形成打者出局。。\n你們已不在同一支隊伍，仍認得彼此說起失敗時會停頓多久。\n你不知道這通電話會改變誰；只有之後的行動，能證明這段共同經驗是否真的被帶到了下一個球場。",
+      "record": {
+        "integrity": true,
+        "saveIntegrity": true,
+        "eventRefs": 113,
+        "logEvents": 113,
+        "result": {
+          "winnerTeamId": "regional-power-school",
+          "loserTeamId": "school-development-29d536a2",
+          "finalScore": {
+            "away": 3,
+            "home": 1
+          },
+          "tie": false
+        },
+        "totals": {
+          "away": {
+            "runs": 3,
+            "hits": 13,
+            "errors": 0
+          },
+          "home": {
+            "runs": 1,
+            "hits": 10,
+            "errors": 0
+          }
+        }
+      },
+      "exposure": {
+        "matchId": "hs-y1-autumn-exhibition",
+        "participated": true,
+        "started": false,
+        "appearanceType": "lateGameAppearance",
+        "entryInning": 6,
+        "exitInning": 7,
+        "defensiveInnings": 1,
+        "plateAppearances": 1,
+        "role": "starter"
+      },
+      "duplicates": [
+        {
+          "momentId": "hs_y1_match_moment_1",
+          "decision": "zone",
+          "returned": false,
+          "fullPlayerUnchanged": true
+        }
+      ],
+      "repeatedSettlement": {
+        "returns": [
+          false,
+          false,
+          false
+        ],
+        "fullPlayerUnchanged": true
+      },
+      "savePreserved": true,
+      "readOnlyProbesDidNotChangePlayer": true
+    },
+    {
+      "seed": 88222,
+      "run": "replay",
+      "fixture": "legal sixth-inning SS substitute",
+      "hashes": {
+        "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+        "initialMatch": "58459bdc12468fc9143bf1f711a19e1f8cebedf273f8ca9c0037f98006cc2084",
+        "record": "6af67e71aba581ac84fc5b215d6af1d9758f14852f8a1282081023a26d2f1ebc",
+        "log": "96679cf657a33a5e840ce74d437ed657b95d2cc35867be2000fe9b82b82a0d4a",
+        "decisionSequence": "ed259ebfd8344db8fb2f51d5421338b9aa0b1c05765b3b7233710e1db2aab227"
+      },
+      "ticks": 107,
+      "decisionBefore": {
+        "inning": 6,
+        "half": "下",
+        "outs": 0,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 1
+        }
+      },
+      "resolutionSnapshot": {
+        "inning": 6,
+        "half": "下",
+        "outs": 1,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 1
+        }
+      },
+      "lastMomentAtFinal": {
+        "inning": 6,
+        "half": "下",
+        "outs": 1,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 1
+        }
+      },
+      "oldLastMomentAtFinal": {
+        "inning": 6,
+        "half": "終",
+        "outs": 3,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 3
+        }
+      },
+      "finalSummary": {
+        "inning": 7,
+        "half": "終",
+        "outs": 3,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 1,
+          "away": 3
+        }
+      },
+      "entireLastMomentUnchanged": true,
+      "entireLastMomentHash": "1f4f62d93301b23dcd34059c085453966aec386b416c6c3942ac39e70fac2ad0",
+      "resolutionHash": "1f4f62d93301b23dcd34059c085453966aec386b416c6c3942ac39e70fac2ad0",
+      "parityWithAcceptedSprint1": {
+        "fixture": true,
+        "initialMatch": true,
+        "decisions": true,
+        "gameRecord": true,
+        "simulationLog": true,
+        "playerContribution": true,
+        "rosters": true,
+        "scores": true,
+        "baseballSkills": true,
+        "capabilityState": true,
+        "highSchoolYearOneMatchHistory": true,
+        "highSchoolCoachEvaluation": true,
+        "highSchoolCompetitionEvaluation": true,
+        "skillProgress": true
+      },
+      "oldEvidence": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-canonical-evidence.json",
+      "pressure": {
+        "before": [
+          {
+            "pressure": {
+              "band": "normal",
+              "modifier": 1.02,
+              "reasons": [
+                "lateGame"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "終",
+              "outs": 3,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": -2,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          },
+          {
+            "pressure": {
+              "band": "normal",
+              "modifier": 1.02,
+              "reasons": [
+                "lateGame"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "終",
+              "outs": 3,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": -2,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          }
+        ],
+        "after": [
+          {
+            "pressure": {
+              "band": "high",
+              "modifier": 1.05,
+              "reasons": [
+                "lateGame",
+                "closeScore"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "下",
+              "outs": 1,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": 0,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          },
+          {
+            "pressure": {
+              "band": "high",
+              "modifier": 1.05,
+              "reasons": [
+                "lateGame",
+                "closeScore"
+              ]
+            },
+            "situation": {
+              "inning": 6,
+              "half": "下",
+              "outs": 1,
+              "runners": [
+                null,
+                null,
+                null
+              ],
+              "scoreMargin": 0,
+              "regulationInnings": 7,
+              "playFamily": "meaningfulPlateAppearance",
+              "ballContext": "",
+              "ballDirection": "",
+              "ballDepth": "",
+              "route": "selectivePlateAppearance",
+              "decisionTension": "none"
+            }
+          }
+        ],
+        "identity": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|6|下",
+        "publicContext": {
+          "balls": 0,
+          "strikes": 0,
+          "outs": 0,
+          "runners": [
+            false,
+            false,
+            false
+          ],
+          "scoreDifference": 0,
+          "inning": 6,
+          "highLeverage": true,
+          "previousPitchResult": "",
+          "previousPAResult": ""
+        },
+        "fallbackProbes": [
+          {
+            "kind": "missing",
+            "pressure": [
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "closeScore"
+                ]
+              },
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "closeScore"
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "stale",
+            "pressure": [
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "closeScore"
+                ]
+              },
+              {
+                "band": "high",
+                "modifier": 1.05,
+                "reasons": [
+                  "lateGame",
+                  "closeScore"
+                ]
+              }
+            ]
+          }
+        ],
+        "legacyDecisionBeforeCorrectness": "UNVERIFIED when existing context missing/stale/invalid; resolution fallback retained"
+      },
+      "developmentDiff": [
+        {
+          "path": ".history.0.metadata.experienceValue",
+          "before": 3.935,
+          "after": 3.994
+        },
+        {
+          "path": ".history.1.metadata.experienceValue",
+          "before": 2.923,
+          "after": 2.982
+        }
+      ],
+      "aggregated": {
+        "before": [
+          {
+            "targetSkill": "baseballIQ",
+            "evidenceCount": 3,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 2,
+            "activeValue": 1.999,
+            "exposureValue": 1.936,
+            "totalValue": 3.935,
+            "noveltyGroupCount": 3,
+            "difficulty": "challenging",
+            "experienceQuality": "valuable",
+            "developmentQuality": "good",
+            "reasons": [
+              "reachBase"
+            ]
+          },
+          {
+            "targetSkill": "batting",
+            "evidenceCount": 2,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 1,
+            "activeValue": 1.999,
+            "exposureValue": 0.924,
+            "totalValue": 2.923,
+            "noveltyGroupCount": 2,
+            "difficulty": "challenging",
+            "experienceQuality": "normal",
+            "developmentQuality": "standard",
+            "reasons": [
+              "reachBase"
+            ]
+          }
+        ],
+        "after": [
+          {
+            "targetSkill": "baseballIQ",
+            "evidenceCount": 3,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 2,
+            "activeValue": 2.058,
+            "exposureValue": 1.936,
+            "totalValue": 3.994,
+            "noveltyGroupCount": 3,
+            "difficulty": "challenging",
+            "experienceQuality": "valuable",
+            "developmentQuality": "good",
+            "reasons": [
+              "reachBase"
+            ]
+          },
+          {
+            "targetSkill": "batting",
+            "evidenceCount": 2,
+            "activeEvidenceCount": 1,
+            "exposureEvidenceCount": 1,
+            "activeValue": 2.058,
+            "exposureValue": 0.924,
+            "totalValue": 2.982,
+            "noveltyGroupCount": 2,
+            "difficulty": "challenging",
+            "experienceQuality": "normal",
+            "developmentQuality": "standard",
+            "reasons": [
+              "reachBase"
+            ]
+          }
+        ]
+      },
+      "callHome": "交流賽結束後，你在寮舍走廊打給阿哲。你只說明親自經歷的內容：6局下，球被扎實擊中，以一般力道滾向右半邊。 這個打席形成打者出局。你沒有把球探內部評語當成已知事實。\n\n比賽結果：球隊落敗，終場 1：3。本場一個關鍵時刻：第一次：球被扎實擊中，以一般力道滾向右半邊。 這個打席形成打者出局。。\n你們已不在同一支隊伍，仍認得彼此說起失敗時會停頓多久。\n你不知道這通電話會改變誰；只有之後的行動，能證明這段共同經驗是否真的被帶到了下一個球場。",
+      "record": {
+        "integrity": true,
+        "saveIntegrity": true,
+        "eventRefs": 113,
+        "logEvents": 113,
+        "result": {
+          "winnerTeamId": "regional-power-school",
+          "loserTeamId": "school-development-29d536a2",
+          "finalScore": {
+            "away": 3,
+            "home": 1
+          },
+          "tie": false
+        },
+        "totals": {
+          "away": {
+            "runs": 3,
+            "hits": 13,
+            "errors": 0
+          },
+          "home": {
+            "runs": 1,
+            "hits": 10,
+            "errors": 0
+          }
+        }
+      },
+      "exposure": {
+        "matchId": "hs-y1-autumn-exhibition",
+        "participated": true,
+        "started": false,
+        "appearanceType": "lateGameAppearance",
+        "entryInning": 6,
+        "exitInning": 7,
+        "defensiveInnings": 1,
+        "plateAppearances": 1,
+        "role": "starter"
+      },
+      "duplicates": [
+        {
+          "momentId": "hs_y1_match_moment_1",
+          "decision": "zone",
+          "returned": false,
+          "fullPlayerUnchanged": true
+        }
+      ],
+      "repeatedSettlement": {
+        "returns": [
+          false,
+          false,
+          false
+        ],
+        "fullPlayerUnchanged": true
+      },
+      "savePreserved": true,
+      "readOnlyProbesDidNotChangePlayer": true
+    }
+  ],
+  "replay": [
+    {
+      "seed": 88221,
+      "hashes": {
+        "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+        "initialMatch": "2cb25dd2fd1483a5b3b357edb70958a65a80b4c8f2e076d66551cce15ffcbb92",
+        "record": "abb6ee6487c8f39a3e3de3afe945f2494a374d9b78d6c6a6a358c9808dd6cf92",
+        "log": "2be47a93cf9e5d85831de8067154a47009ff617bae49ab2bc150812e9c5b0e2e",
+        "decisionSequence": "65fcb545854cd4b89f113ff7060eadd0e7c9b0b86aefe780450722ce4bd07226"
+      },
+      "fullPlayerDeepEqual": true
+    },
+    {
+      "seed": 88222,
+      "hashes": {
+        "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+        "initialMatch": "58459bdc12468fc9143bf1f711a19e1f8cebedf273f8ca9c0037f98006cc2084",
+        "record": "6af67e71aba581ac84fc5b215d6af1d9758f14852f8a1282081023a26d2f1ebc",
+        "log": "96679cf657a33a5e840ce74d437ed657b95d2cc35867be2000fe9b82b82a0d4a",
+        "decisionSequence": "ed259ebfd8344db8fb2f51d5421338b9aa0b1c05765b3b7233710e1db2aab227"
+      },
+      "fullPlayerDeepEqual": true
+    }
+  ],
+  "acceptance": [
+    {
+      "label": "canonical",
+      "file": "tests/canonical-match-regression-integration-test.cjs",
+      "checks": 50,
+      "accepted": true,
+      "status": "PASS",
+      "exitCode": 0,
+      "elapsedMs": 792.6183,
+      "entryVerified": true,
+      "sourceStable": true,
+      "successfulAssertions": 2772,
+      "evidence": "docs/test-infrastructure-sprint-0.1-match-moment-snapshot-integrity-repair-v0.1-canonical-evidence.json",
+      "witness": "docs/test-infrastructure-sprint-0.1-match-moment-snapshot-integrity-repair-v0.1-canonical-evidence-assertions.json"
+    },
+    {
+      "label": "game-record",
+      "file": "tests/match-full-game-record-test.js",
+      "checks": 13,
+      "accepted": true,
+      "status": "PASS",
+      "exitCode": 0,
+      "elapsedMs": 836.8885,
+      "entryVerified": true,
+      "sourceStable": true,
+      "successfulAssertions": 13,
+      "evidence": "docs/test-infrastructure-sprint-0.1-match-moment-snapshot-integrity-repair-v0.1-game-record-evidence.json",
+      "witness": "docs/test-infrastructure-sprint-0.1-match-moment-snapshot-integrity-repair-v0.1-game-record-evidence-assertions.json"
+    },
+    {
+      "label": "experience",
+      "file": "tests/match-experience-development-foundation-v1-test.js",
+      "checks": 46,
+      "accepted": true,
+      "status": "PASS",
+      "exitCode": 0,
+      "elapsedMs": 632.7192,
+      "entryVerified": true,
+      "sourceStable": true,
+      "successfulAssertions": 46,
+      "evidence": "docs/test-infrastructure-sprint-0.1-match-moment-snapshot-integrity-repair-v0.1-experience-evidence.json",
+      "witness": "docs/test-infrastructure-sprint-0.1-match-moment-snapshot-integrity-repair-v0.1-experience-evidence-assertions.json"
+    },
+    {
+      "label": "presentation",
+      "file": "tests/match-development-settlement-presentation-v1-test.js",
+      "checks": 35,
+      "accepted": true,
+      "status": "PASS",
+      "exitCode": 0,
+      "elapsedMs": 174.629,
+      "entryVerified": true,
+      "sourceStable": true,
+      "successfulAssertions": 35,
+      "evidence": "docs/test-infrastructure-sprint-0.1-match-moment-snapshot-integrity-repair-v0.1-presentation-evidence.json",
+      "witness": "docs/test-infrastructure-sprint-0.1-match-moment-snapshot-integrity-repair-v0.1-presentation-evidence-assertions.json"
+    }
+  ],
+  "greenNamedChecks": 144,
+  "fullGamesInNewCanonicalGreen": 4,
+  "expectedRedCanonicalGames": 1,
+  "publicIdempotency": "CONFIRMED in all four fixed-context runs",
+  "decisionContext": "Existing immutable publicContext from same formal PA identity only; no invented before or persisted field",
+  "eventSnapshotCorrectness": "CONFIRMED in two fixed seeds and replays",
+  "finalMatchRecordCorrectness": "CONFIRMED; exact prior Record/Log parity",
+  "remaining": {
+    "original36": "Historical FAIL retained; NOT EXECUTED; original assertion unchanged",
+    "abilityGradient": "Historical FAIL retained; NOT EXECUTED; no ability/seed/sample tuning",
+    "S3": "UNVERIFIED",
+    "SSStartingAdmission": "UNVERIFIED",
+    "nonzeroNaturalSSDefensiveMoment": "UNVERIFIED",
+    "legacyMissingContext": "Decision-before pressure UNVERIFIED; no backfill/migration",
+    "browserLifecycle": "UNVERIFIED; memory round-trip only"
+  },
+  "readyForCommit": false,
+  "readyForSprint10B": false,
+  "receiverV2": "DISABLED"
+}

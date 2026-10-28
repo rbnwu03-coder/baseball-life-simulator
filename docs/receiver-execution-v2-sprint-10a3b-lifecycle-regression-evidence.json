@@ -1,0 +1,27 @@
+{
+  "rows": [
+    {
+      "file": "tests/match-situation-lifecycle-test.js",
+      "exitCode": 0,
+      "stdout": "✓ 1. stable identity 綁定 game／inning／half／PA／simulation point／type\n✓ 2. created snapshot 不包含整場 match，且 canonical context deep frozen\n✓ 3. Fixture A 三條 distinct routes 准入 playerDecision 並進入 presented\n✓ 4. Fixture F decision 前 reload 保留 identity、routes、recommendation、phase\n✓ 5. Fixture B decision 只保存 route intent，不保存 safe/out\n✓ 6. Home execution 依序完成 decided→executing→resolved→settled→closed\n✓ 7. close 後才允許 simulation resume\n✓ 8. Settlement／Close 重複呼叫 idempotent\n✓ 9. Fixture C 第一腿後維持同 situationId，以 reassessment phase 保存剩餘 route\n✓ 10. Fixture G reassessment reload 保留 first-leg guard 與 remaining route\n✓ 11. Reassessment 沒有 pending meaningful decision 時可解析與關閉\n✓ 12. Fixture D relay window expired 不建立假選項，直接 resolve／settle／close\n✓ 13. Fixture E 單一路線 admission 為 automaticResolution，不停在 player decision\n✓ 14. Transition guard 拒絕 presented→settled\n✓ 15. Closed summary 保存最小 previous-situation memory\n✓ 16. 尚無 physical consequence 的 execution 可由 lifecycle 正式 abandon\n✓ 17. abandon 保存 terminal reason 與 transition history\n✓ 18. 重複 abandon 為 idempotent\n✓ 19.resolved happy-path state 不可 abandon\n✓ 19.settled happy-path state 不可 abandon\n✓ 19.closed happy-path state 不可 abandon\n✓ 20. physical consequence 資料不足時採保守拒絕\n✓ 21. runnerTagUpDecision 已是 canonical lifecycle type\nMatch Situation Lifecycle tests: 23/23 passed\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "file": "tests/ground-settlement-handoff-r2-production-integration-test.js",
+      "exitCode": 0,
+      "stdout": "PASS known seed completes without exception or accounting failure\nPASS no zombie lifecycle at completion\nPASS full-game PA batting PA and pitcher BF agree\nPASS same seed deterministic full match\nPASS repeated actual ground lifecycles exercised without leaking ownership\nPASS fixture is a live regulation-inning ground-ball Match\nPASS canonical route-family observations reach density threshold\nPASS production density suppression occurs for the route family\nPASS suppressed production resolver retains routine admission\nPASS canonical runner handoff moves lead runner to second and batter to first\nPASS non-scoring density play leaves both scores and record totals unchanged\nPASS production route consumes exactly one simulation RNG draw\nPASS one real plate appearance and one batting PA and BF\nPASS exactly one canonical physical settlement and one routine application\nPASS resolved pre-apply boundary preserves pending handoff\nPASS compressed entry delivers pending canonical execution before RNG\nPASS repeated delivery cannot mutate any state or ledger\nPASS canonical settlement owns outs runners runs and record\nPASS stale guard rejects m.outs++ without mutation\nPASS stale guard rejects m.currentBatter=\"stale-batter\" without mutation\nPASS historical resolver bug remains a valid counterfactual on this input\nPASS stale guard function is byte-identical to baseline\nR2_JSON={\"passed\":22,\"seed\":22430361,\"check\":{\"seed\":22430361,\"role\":\"bench\",\"pa\":68,\"battingPA\":68,\"pitcherBF\":68,\"failures\":[]},\"steps\":137,\"score\":{\"home\":0,\"away\":2},\"densitySuppression\":\"route-family-density\",\"classification\":\"playerRoutinePlay\",\"runnerBefore\":[\"regional-power-school-player-07\",null,null],\"runnerAfter\":[\"regional-power-school-player-06\",\"regional-power-school-player-07\",null],\"paDelta\":1,\"battingPADelta\":1,\"pitcherBFDelta\":1,\"scoreDelta\":0,\"rngCursorDelta\":1,\"physicalSettlements\":1,\"duplicateSettlements\":0,\"validStaleRejections\":2,\"deterministic\":true}\n22/22 PASS\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "file": "tests/force-multi-runner-settlement-production-integration-test.js",
+      "exitCode": 0,
+      "stdout": "PASS legacy meaningful moment establishes canonical chain before decision\nPASS BUG-PLAYTEST-LOADED-DP-001 real 2B execution settles every actor\nPASS actual application produces 2 outs, R2 at third and one legal R3 run\nPASS duplicate application preserves bases, score, outs, order and all events\nPASS completed play normalizeSave replay is idempotent\nPASS pending defensive save restores movement identities and deterministic result\nPASS R1 production DP keeps correct survivors\nPASS R1+R2 production DP keeps correct survivors\nPASS R1+R3 production DP keeps correct survivors\nPASS R3 alone holds during secure first, no invented scoring\nPASS BR first retirement removes production R1 force and requires a tag\nPASS loaded one-out DP delegates run cancellation to existing third-out authority\nPASS legal run reaches canonical event and GameRecord\nPASS presentation and repeated render do not replay runner settlement\nPASS physical DP with expired second-leg window keeps BR and settles both other survivors\nPASS walk and uncontested BIP share contiguous-force concept\nForce multi-runner production integration: 16/16 PASS\n",
+      "stderr": "",
+      "error": null
+    }
+  ],
+  "passed": 3,
+  "failed": 0
+}

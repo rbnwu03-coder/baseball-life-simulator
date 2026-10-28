@@ -1,0 +1,34 @@
+"use strict";
+const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),assert=require('node:assert/strict');
+const C=require('./ss-reach-access-rejection-proof-v0.1-capture.cjs');
+const phase=process.argv[2];
+if(phase==='verify'){
+ const integrity=C.integrity(),own=C.files().filter(C.isNew),allowed=new Set(['capture','adapter','observer','proof','replay','plan','findings','source','graph','coverage','finalize','supplement-coverage'].map(x=>C.prefix+x+'.cjs'));
+ const sources=own.filter(f=>f.endsWith('.cjs'));for(const f of sources)assert(allowed.has(f),f);
+ C.capture('reporting-whitelist',{sourcePaths:sources,artifactPaths:own.filter(f=>!f.endsWith('.cjs')),plannedFinalArtifacts:['verification','supplemental-coverage','closeout','delivery'].map(x=>C.prefix+x+'-evidence.json')});
+ const syntax=sources.map(file=>{const r=cp.spawnSync(process.execPath,['--check',path.join(C.root,file)],{encoding:'utf8',windowsHide:true,timeout:120000});assert.equal(r.status,0,file+': '+r.stderr);return{file,sha256:C.fileHash(file),actualCommand:[process.execPath,'--check',path.join(C.root,file)],exit:r.status,stdout:r.stdout,stderr:r.stderr};});
+ const parsed=own.filter(f=>f.endsWith('.json')).map(file=>{C.json(file);return{file,sha256:C.fileHash(file)};});
+ const future=new Set(['verification','closeout','delivery'].map(s=>C.prefix+s+'-evidence.json'));
+ const links=[...C.readSource(C.report).matchAll(/\]\(([^)]+)\)/g)].map(x=>x[1]).filter(p=>!p.includes('://')).map(link=>{const file=path.relative(C.root,path.resolve(C.root,'docs',link.split('#')[0])).replace(/\\/g,'/');C.normalized(file);assert(fs.existsSync(path.join(C.root,file))||future.has(file),file);return{file,present:fs.existsSync(path.join(C.root,file)),planned:future.has(file)};});
+ const source=C.json(C.prefix+'source-evidence.json');C.runtimeWhitelist();
+ for(const row of [...source.files,...source.snippets])assert.equal(C.fileHash(row.file),row.sha256||row.fileSha256,row.file);
+ for(const row of source.snippets)assert.equal(C.readSource(row.file).split('\n').slice(row.startLine-1,row.endLine).join('\n'),row.source,row.name);
+ const plan=C.json(C.prefix+'plan-evidence.json'),input=C.json(C.prefix+'fixture-input-evidence.json'),a=C.json(C.prefix+'candidate-first-facts-evidence.json'),b=C.json(C.prefix+'candidate-replay-facts-evidence.json');
+ assert.equal(plan.programHash,a.programHash);assert.equal(a.programHash,b.programHash);assert.equal(C.hash(JSON.stringify(input.fixture)),plan.checkpointHash);assert.equal(input.actualSeed,2884315748);
+ for(const [f,h]of Object.entries(plan.sourceHashes))assert.equal(C.fileHash(f),h,f);
+ const O=require('./ss-reach-access-rejection-proof-v0.1-observer.cjs'),A=require('./ss-reach-access-rejection-proof-v0.1-adapter.cjs');assert.equal(C.hash(O.observerProgram),plan.observerHash);assert.equal(C.hash(A.adapterProgram),plan.physicalProgramHash);
+ assert(!/Math\.random\s*\(|deterministicUnit\s*\(/.test(O.observerProgram));
+ assert.deepEqual(a.hashes,b.hashes);assert.deepEqual(a.reachProbe,b.reachProbe);assert.deepEqual(a.adapter,b.adapter);
+ const findings=C.json(C.prefix+'findings-evidence.json');assert.equal(findings.verdict,'A');assert(findings.runs.every(r=>r.verdict==='A'&&r.reach.output.margin===-.325&&r.reach.output.reached===false&&r.access.output.reason==='canonicalReachUnavailable'&&r.handoff.output.supported===false));
+ const executions=['candidate-first','candidate-replay'].map((label,i)=>{const file=C.childPrefix+label+'-evidence.json',r=C.json(file);assert.equal(r.status,'PASS');assert.equal(r.exitCode,0);assert.equal(r.stderr,'');assert(r.entryVerified&&r.sourceStable);assert.equal(r.successfulAssertions,i?1668:1658);assert.equal(r.stdout.split('\n').filter(l=>l.startsWith('PASS ')).length,i?15:14);assert.equal(r.policy.timeoutMs,120000);assert.equal(r.policy.outputMaxBuffer,16000000);assert.equal(r.policy.implicitGitShowMaxBuffer,30000000);return{file,sha256:C.fileHash(file),actualCommand:r.actualCommand,status:r.status,exit:r.exitCode,signal:r.signal,elapsedMs:r.elapsedMs,witness:r.witnessPath,successfulAssertions:r.successfulAssertions,policy:r.policy,stdoutBytes:Buffer.byteLength(r.stdout),stderrBytes:Buffer.byteLength(r.stderr)};});
+ C.capture('verification',{syntax,parsed,links,executions,verdict:'A - Legitimate Reach Rejection',newDiagnosticInvocations:2,newFormalSuiteInvocations:0,scenarioCandidates:1,completedScenarioGames:2,diagnosticNamedChecks:29,successfulNodeAssertions:3326,recursiveReadWhitelist:C.prefix+'recursive-read-whitelist-evidence.json',observerIndependentOwnerCalls:0,observerRngCalls:0,protectedContentReadHashedExecuted:false,noUnscopedGitDiffOrGrep:true,remoteServerRechecked:false,integrity,afterIntegrity:C.integrity()});
+ console.log(JSON.stringify({syntax:sources.length,json:parsed.length,links:links.length,diagnostics:2,verdict:'A',existingDelta:0}));
+}else if(phase==='close'){
+ const integrity=C.integrity(),baseline=C.json(C.prefix+'baseline-evidence.json');
+ C.capture('closeout',{git:integrity.git,hashes:Object.fromEntries(Object.keys(baseline.hashes).map(f=>[f,C.fileHash(f)])),preservedExistingHashes:integrity.preservedExistingHashes,existingDelta:0,previousSnapshotFixPreserved:true,protectedMetadata:C.metadata(),protectedContentReadHashedExecuted:false,recursiveReadWhitelist:C.prefix+'recursive-read-whitelist-evidence.json',sourceWhitelistDeviation:false,noUnscopedGitDiffOrGrep:true,remoteServerRechecked:false,diagnosticInvocations:2,formalSuiteInvocations:0,scenarioCandidates:1,completedScenarioGames:2,full255Invocations:0,full251Invocations:0,r6Full227Invocations:0,firstBaseTimingInvocations:0,browserFullInvocations:0,receiverIntegrationInvocations:0,verdict:'A - Legitimate Reach Rejection',productionFixStarted:false,SSMatchUISliceReady:false,readyForCommit:false,readyForSprint10B:false,receiverV2:'DISABLED',finalArtifactTiming:'Git snapshot precedes closeout/delivery creation; exact final artifacts are recorded in delivery.'});
+ const files=C.files().filter(C.isNew);assert(!files.includes(C.prefix+'delivery-evidence.json'));
+ C.capture('delivery',{files,hashes:Object.fromEntries(files.map(f=>[f,C.fileHash(f)])),report:C.report,baseline:C.prefix+'baseline-evidence.json',closeout:C.prefix+'closeout-evidence.json',existingDelta:0,verdict:'A - Legitimate Reach Rejection',readyForCommit:false,readyForSprint10B:false,receiverV2:'DISABLED'});
+ const d=C.json(C.prefix+'delivery-evidence.json');for(const [f,h]of Object.entries(d.hashes))assert.equal(C.fileHash(f),h,f);
+ for(const row of C.json(C.prefix+'verification-evidence.json').links)assert(fs.existsSync(path.join(C.root,row.file)),row.file);
+ C.integrity();console.log(JSON.stringify({existingHashesPreserved:integrity.preservedExistingHashes,newDeliveryEntries:files.length,indexEmpty:integrity.git.index==='',allLinksResolved:true,verdict:'A',stopped:true}));
+}else assert.fail('Use verify or close');

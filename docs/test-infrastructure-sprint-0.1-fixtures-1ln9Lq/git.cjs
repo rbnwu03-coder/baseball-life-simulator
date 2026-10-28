@@ -1,0 +1,1 @@
+const cp=require('child_process'),a=require('assert/strict'),c=require('crypto');const b=cp.execFileSync('git',['show','ab3117653945de0b7013636187c446276a96e634:script.js']);a.equal(b.length,1070296);a.equal(c.createHash('sha256').update(b).digest('hex'),'64ab3a2e05180e13ef42bc9f6a342ba28f0cc9a5c58217dc21cd3c640894db1b');

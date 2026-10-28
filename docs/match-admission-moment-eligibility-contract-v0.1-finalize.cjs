@@ -1,0 +1,13 @@
+"use strict";
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const C=require('./match-admission-moment-eligibility-contract-v0.1-capture.cjs');
+const v=C.json(C.prefix+'verification-evidence.json'),integrity=C.integrity();
+assert.equal(C.fileHash(C.report),v.report.sha256);
+C.capture('closeout',{...integrity,report:v.report,sourceEvidence:{path:C.prefix+'source-evidence.json',sha256:C.fileHash(C.prefix+'source-evidence.json')},verification:{path:C.prefix+'verification-evidence.json',sha256:C.fileHash(C.prefix+'verification-evidence.json')},recommendation:'A — separate Synthetic / Canonical responsibilities; human approval required before implementation',readyForPhaseB2:'NO',canonicalSSStarterProof:'UNVERIFIED',original36:'false on same legal substitution execution; original suite not invoked',seed88222:'UNVERIFIED / NOT EXECUTED',newDiagnosticChildren:1,newFullMatchExecutions:1,formalSuiteInvocations:0,full251:0,r6Full227:0,firstBaseTiming:0,receiverV2Integration:0,browserSuite:0,phaseB2Started:false,receiverV2:'DISABLED',L03:'PARTIAL',readyForCommit:'NO',readyForSprint10B:'NO',resetCleanStashStageCommitPush:false,stopped:true});
+const files=C.files().filter(C.isNew),hashes=Object.fromEntries(files.map(p=>[p,C.fileHash(p)]));
+C.capture('delivery',{files,hashes,deliverySelfHashExcluded:true,unchangedExistingHashes:1460,changedExistingPaths:[],productionDelta:0,formalTestDelta:0,existingFixtureSeedPinDelta:0,oldCapturesPreserved:true,protectedMetadataUnchanged:true,phaseB2Started:false,readyForPhaseB2:'NO',readyForCommit:'NO',readyForSprint10B:'NO',stopped:true});
+const report=fs.readFileSync(path.join(C.root,C.report),'utf8'),links=[...report.matchAll(/\]\(([^)]+)\)/g)].map(x=>x[1]);
+for(const href of links)assert(fs.existsSync(path.resolve(C.root,'docs',href.split('#')[0])),href);
+for(const [p,h] of Object.entries(hashes))assert.equal(C.fileHash(p),h,p);
+C.integrity();
+console.log(JSON.stringify({report:C.report,delivery:C.prefix+'delivery-evidence.json',newArtifacts:files.length+1,existingHashesPreserved:1460,allReportLinksResolved:links.length,indexEmpty:integrity.git.index==='',productionDelta:0,formalTestDelta:0,readyForPhaseB2:'NO',stopped:true}));

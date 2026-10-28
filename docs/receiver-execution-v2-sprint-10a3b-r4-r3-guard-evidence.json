@@ -1,0 +1,209 @@
+{
+  "sprint": "10A.3b-R4",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "createdAt": "2026-10-14T05:17:19.955Z",
+  "node": "v24.19.0",
+  "result": {
+    "file": "tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs",
+    "sourceHash": "450ce6f691a22a4adf9c84d651baf82f6b388c5aa4e799a20203cbb0a61185de",
+    "elapsedMs": 9302.462,
+    "summary": {
+      "total": 40,
+      "passed": 40,
+      "failed": 0
+    },
+    "error": null,
+    "checks": [
+      {
+        "name": "actual gradient metadata replay: archived closed versus current Legacy ACCEPT",
+        "status": "PASS"
+      },
+      {
+        "name": "original R2 validator reproduces canonical(undefined) on captured operands",
+        "status": "PASS"
+      },
+      {
+        "name": "same play complete metadata ACCEPT pending",
+        "status": "PASS"
+      },
+      {
+        "name": "same play complete metadata ACCEPT executed",
+        "status": "PASS"
+      },
+      {
+        "name": "same play complete metadata ACCEPT settled",
+        "status": "PASS"
+      },
+      {
+        "name": "same play complete metadata ACCEPT closed",
+        "status": "PASS"
+      },
+      {
+        "name": "same play required current binding missing REJECT",
+        "status": "PASS"
+      },
+      {
+        "name": "same play required current binding undefined REJECT explicit",
+        "status": "PASS"
+      },
+      {
+        "name": "same play binding tamper REJECT",
+        "status": "PASS"
+      },
+      {
+        "name": "same play actor tamper REJECT",
+        "status": "PASS"
+      },
+      {
+        "name": "same play physical tamper REJECT matchId",
+        "status": "PASS"
+      },
+      {
+        "name": "same play physical tamper REJECT plateAppearanceId",
+        "status": "PASS"
+      },
+      {
+        "name": "same play physical tamper REJECT contactId",
+        "status": "PASS"
+      },
+      {
+        "name": "same play physical tamper REJECT physicalIdentity",
+        "status": "PASS"
+      },
+      {
+        "name": "same play physical tamper REJECT playId",
+        "status": "PASS"
+      },
+      {
+        "name": "pending binding is forbidden",
+        "status": "PASS"
+      },
+      {
+        "name": "missing current source-format tag REJECT",
+        "status": "PASS"
+      },
+      {
+        "name": "unknown current source-format version REJECT",
+        "status": "PASS"
+      },
+      {
+        "name": "undefined tag is present, not historical omission",
+        "status": "PASS"
+      },
+      {
+        "name": "same identity erase handoff source tags REJECT",
+        "status": "PASS"
+      },
+      {
+        "name": "non-JSON binding metadata REJECT explicit undefined",
+        "status": "PASS"
+      },
+      {
+        "name": "non-JSON binding metadata REJECT explicit NaN",
+        "status": "PASS"
+      },
+      {
+        "name": "non-JSON binding metadata REJECT explicit function",
+        "status": "PASS"
+      },
+      {
+        "name": "cyclic snapshot metadata REJECT explicit",
+        "status": "PASS"
+      },
+      {
+        "name": "missing closed binding REJECT",
+        "status": "PASS"
+      },
+      {
+        "name": "cross-play archive tamper still REJECT against its own pin",
+        "status": "PASS"
+      },
+      {
+        "name": "cross-play archive physical pin tamper REJECT",
+        "status": "PASS"
+      },
+      {
+        "name": "cross-play archive requires closed lifecycle",
+        "status": "PASS"
+      },
+      {
+        "name": "cross-play new source admission independently validates archive and current",
+        "status": "PASS"
+      },
+      {
+        "name": "real consecutive full games have multiple ground opportunities, no candidate calls",
+        "status": "PASS"
+      },
+      {
+        "name": "automatic routine callback/order preserved; duplicate no RNG/record/evaluation writes",
+        "status": "PASS"
+      },
+      {
+        "name": "meaningful occupied-base public execution and duplicate preserve official facts",
+        "status": "PASS"
+      },
+      {
+        "name": "shared guard rejects source tamper before first-base early return",
+        "status": "PASS"
+      },
+      {
+        "name": "shared guard rejects source tamper before 3B early return",
+        "status": "PASS"
+      },
+      {
+        "name": "shared guard rejects source tamper before missingFacts early return",
+        "status": "PASS"
+      },
+      {
+        "name": "raw Save unknown/missing versions and erased header cannot downgrade",
+        "status": "PASS"
+      },
+      {
+        "name": "genuine historical omission remains compatible in three phases",
+        "status": "PASS"
+      },
+      {
+        "name": "explicitly undefined lifecycle pin is not historical omission",
+        "status": "PASS"
+      },
+      {
+        "name": "binding without pin cannot escape legacy early return",
+        "status": "PASS"
+      },
+      {
+        "name": "observer and shared source guard write no official state or RNG",
+        "status": "PASS"
+      }
+    ],
+    "witnesses": [
+      {
+        "phase": "pending",
+        "sourceFormat": "receiver-source-snapshot-format-v1",
+        "lifecycle": "admitted"
+      },
+      {
+        "phase": "executed",
+        "sourceFormat": "receiver-source-snapshot-format-v1",
+        "lifecycle": "resolved"
+      },
+      {
+        "phase": "settled",
+        "sourceFormat": "receiver-source-snapshot-format-v1",
+        "lifecycle": "closed"
+      },
+      {
+        "phase": "closed",
+        "sourceFormat": "receiver-source-snapshot-format-v1",
+        "lifecycle": "closed"
+      }
+    ],
+    "runtimeEnabled": false
+  },
+  "frozenSourceHashes": {
+    "index.html": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+    "script.js": "1783fc801a4ab0eabb423a1f7acbdc8cb9320441b5279c614255eeea92622268",
+    "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+    "match-situation-lifecycle.js": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+    "receiver-source-snapshot.js": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274"
+  }
+}

@@ -1,0 +1,325 @@
+{
+  "sprint": "10A.3b-R2",
+  "createdAt": "2026-10-13T15:41:11.423Z",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "status": "FIRST_BASE_GATE_PASS_FULL_STOPPED_ON_NEW_REASON",
+  "scope": "RUNNER_POLICY_AND_VALIDATION_ONLY_NO_PRODUCTION_EDITS",
+  "manifest": {
+    "modifiedExistingPaths": [],
+    "newPaths": [
+      "docs/receiver-execution-v2-sprint-10a3b-r2-architecture-policy-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r2-baseline-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r2-blocking-regression-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r2-closeout.md",
+      "docs/receiver-execution-v2-sprint-10a3b-r2-coverage-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r2-first-base-baseline-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r2-first-base-current-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r2-focused-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r2-full-repository-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r2-runtime-comparison-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r2-runtime-policy-specification.json",
+      "tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs",
+      "tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs",
+      "docs/receiver-execution-v2-sprint-10a3b-r2-closeout-evidence.json"
+    ],
+    "newCount": 14,
+    "hashes": {
+      "docs/receiver-execution-v2-sprint-10a3b-r2-architecture-policy-evidence.json": {
+        "size": 11642,
+        "sha256": "773f96ba09cabc70d3fe50059faf1d0eb1fec992cd6da91e98ebcbb33bb46bc0"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r2-baseline-evidence.json": {
+        "size": 104746,
+        "sha256": "5559cf4ace9ba95fb8006a15a38820f2f47cc7ae1ebe8823007f8980a91e4e19"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r2-blocking-regression-evidence.json": {
+        "size": 7363,
+        "sha256": "9ddb5cf7a50225e49def5f31372fe1b2fb62b2f156f6d1a3afa3516c295c43d3"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r2-closeout.md": {
+        "size": 12260,
+        "sha256": "d8f1073700176adf005d3f2f360996c14991e0af0d9f5b5f8d17a1cce4259e76"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r2-coverage-evidence.json": {
+        "size": 285116,
+        "sha256": "1f7bd3d6477888c123e3a83a6d45af6ff5cbab676e17bc7322c10ad96d77091c"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r2-first-base-baseline-evidence.json": {
+        "size": 2606756,
+        "sha256": "e6de7a5f970ebb21986f2a8520ee90c3002a85d6a7bc71573aa906681a6aa2ef"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r2-first-base-current-evidence.json": {
+        "size": 2606859,
+        "sha256": "1c7572611e38df3bab15921b214312b8e64bf80fa837bbe118a57ea5f0066e8a"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r2-focused-evidence.json": {
+        "size": 53540,
+        "sha256": "ba03fbb4fe4ff9a5d05495d48e5abefb70084a28a548da704632951caafd4c8f"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r2-full-repository-evidence.json": {
+        "size": 95728,
+        "sha256": "f36fdbfade93964bb1b49ca37d9076a55f9cf25343e8423fad07693b871a71a3"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r2-runtime-comparison-evidence.json": {
+        "size": 50931,
+        "sha256": "4348fc3828f3e98a151d7175e6b1caa6f3a4ded8ab9b7533ab2cc1814cb4c760"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r2-runtime-policy-specification.json": {
+        "size": 4411,
+        "sha256": "a2fb71043bc8d21828c47c2f5215b97ff158b58fe6b55d106ccf02181746cf57"
+      },
+      "tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs": {
+        "size": 15611,
+        "sha256": "bbda7018ffe79680e123856d45843cff6cb74e8ee13b324ba9f3d2528705e631"
+      },
+      "tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs": {
+        "size": 14112,
+        "sha256": "b90ac905f2f8a65f22f265e09f220e156378707264b253e8bb3daa36cbba1e24"
+      }
+    },
+    "hashScope": "All new R2 paths except this self-referential capture"
+  },
+  "validation": {
+    "existingReadableTrackedWipAndCaptureCount": 782,
+    "allExistingHashesUnchanged": true,
+    "r1FinalSourceStillMatches": true,
+    "protectedCount": 12,
+    "protectedContentReads": 0,
+    "protectedContentHashes": 0,
+    "protectedMetadataEqual": true,
+    "protectedMetadata": {
+      "tests/fast-check-smoke-test.cjs": {
+        "size": 232,
+        "mtimeMs": 1790843210697.4724
+      },
+      "install.ps1": {
+        "size": 18481,
+        "mtimeMs": 1790645780931.8794
+      },
+      "docs/first-base-sprint-3-focused-development-evidence.json": {
+        "size": 909541,
+        "mtimeMs": 1791695452470.9353
+      },
+      "docs/infield-baseball-logic-audit-architecture-evidence.json": {
+        "size": 22275,
+        "mtimeMs": 1791724873822.1465
+      },
+      "docs/infield-baseball-logic-audit-evidence.json": {
+        "size": 9987073,
+        "mtimeMs": 1791725791525.787
+      },
+      "docs/infield-baseball-logic-audit-runner.cjs": {
+        "size": 51962,
+        "mtimeMs": 1791725789937.2622
+      },
+      "docs/infield-baseball-logic-validation-audit-v1.md": {
+        "size": 39820,
+        "mtimeMs": 1791725790304.0483
+      },
+      "docs/infield-scorer-recovery-sprint-5-green-evidence.json": {
+        "size": 9378500,
+        "mtimeMs": 1791766904157.9292
+      },
+      "docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json": {
+        "size": 11457925,
+        "mtimeMs": 1791767373630.792
+      },
+      "docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json": {
+        "size": 686464,
+        "mtimeMs": 1791788973106.34
+      },
+      "docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json": {
+        "size": 889584,
+        "mtimeMs": 1791767570328.417
+      },
+      "docs/infield-scorer-recovery-sprint-5-validation.json": {
+        "size": 1027011,
+        "mtimeMs": 1791767101736.8584
+      }
+    },
+    "originalWipStatusEqual": true,
+    "unknownDifferences": false,
+    "sourceDelta": 0,
+    "newWhitespace": "PASS_ONE_FINAL_NEWLINE_NO_TRAILING_SPACE",
+    "newJson": "PASS",
+    "gitDiffCheck": {
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "paths": [
+        "docs/receiver-execution-v2-sprint-10a3b-r2-architecture-policy-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a3b-r2-baseline-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a3b-r2-blocking-regression-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a3b-r2-closeout.md",
+        "docs/receiver-execution-v2-sprint-10a3b-r2-coverage-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a3b-r2-first-base-baseline-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a3b-r2-first-base-current-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a3b-r2-focused-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a3b-r2-full-repository-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a3b-r2-runtime-comparison-evidence.json",
+        "docs/receiver-execution-v2-sprint-10a3b-r2-runtime-policy-specification.json",
+        "tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs",
+        "tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs"
+      ]
+    },
+    "reportLinks": [
+      "receiver-execution-v2-sprint-10a3b-r2-baseline-evidence.json",
+      "../tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs",
+      "receiver-execution-v2-sprint-10a3b-r2-runtime-policy-specification.json",
+      "receiver-execution-v2-sprint-10a3b-r2-architecture-policy-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r2-first-base-baseline-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r2-first-base-current-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r2-runtime-comparison-evidence.json",
+      "../tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs",
+      "receiver-execution-v2-sprint-10a3b-r2-focused-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r2-full-repository-evidence.json",
+      "../receiver-source-snapshot.js#L165",
+      "receiver-execution-v2-sprint-10a3b-r2-blocking-regression-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r2-closeout-evidence.json"
+    ],
+    "coverage": {
+      "requested": 796,
+      "returned": 796,
+      "noUnfinishedPagination": true,
+      "partialFallback": {
+        "path": "docs/ability-performance-correlation-audit-sprint-1.1.md",
+        "lines": [
+          48,
+          56
+        ],
+        "readDirectly": true,
+        "scope": "Historical bytes integrity only"
+      },
+      "caveat": "Graph metadata is best-effort, not freshness/completeness proof. Exact disk hashes and captured real results take precedence. Full1/227 stops on a new source guard failure; no metadata conclusion upgrades that result."
+    }
+  },
+  "git": {
+    "branch": "main",
+    "head": "ab3117653945de0b7013636187c446276a96e634",
+    "originMain": "ab3117653945de0b7013636187c446276a96e634",
+    "index": "",
+    "statusBeforeExclusiveSelfCreate": " M index.html\n M match-situation-lifecycle.js\n M save.js\n M script.js\n M tests/fast-check-smoke-test.cjs\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/infield-baseball-logic-audit-architecture-evidence.json\n?? docs/infield-baseball-logic-audit-evidence.json\n?? docs/infield-baseball-logic-audit-runner.cjs\n?? docs/infield-baseball-logic-validation-audit-v1.md\n?? docs/infield-scorer-recovery-sprint-5-green-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json\n?? docs/infield-scorer-recovery-sprint-5-validation.json\n?? docs/receiver-execution-v2-production-snapshot-save-guard-sprint-10a3b.md\n?? docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-lifecycle-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-observed-validation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-current-source-verification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-initial-test-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r1-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-timeout-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-architecture-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout.md\n?? docs/receiver-execution-v2-sprint-10a3b-r2-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-policy-specification.json\n?? docs/receiver-execution-v2-sprint-10a3b-related-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-evidence.json\n?? install.ps1\n?? receiver-source-snapshot.js\n?? tests/receiver-execution-v2-production-snapshot-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-harness.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs\n"
+  },
+  "actions": {
+    "stage": false,
+    "commit": false,
+    "push": false,
+    "reset": false,
+    "clean": false,
+    "stash": false
+  },
+  "gates": {
+    "saveSourceContract": "PASS_R1_UNCHANGED_FINAL_SOURCE_45_OF_45",
+    "rawGuardAndHistoricalSave": "PASS_R1_BOUNDED_FIXTURES_NOT_NEW_FULL_GAME_VERDICT",
+    "firstBaseBaseline": {
+      "status": "PASS",
+      "total": 42,
+      "passed": 42,
+      "exitCode": 0,
+      "timeoutMs": 180000,
+      "elapsedMs": 92359.8021
+    },
+    "firstBaseWip": {
+      "status": "PASS",
+      "total": 42,
+      "passed": 42,
+      "exitCode": 0,
+      "timeoutMs": 180000,
+      "elapsedMs": 98794.6388
+    },
+    "firstBaseOutputParity": "PASS_EXACT_STDOUT_STDERR_HASHES",
+    "runnerPolicyIsolation": "PASS_ACTUAL_ENTRY_POLICY_DEFAULTS_AND_MEMBERS_UNCHANGED",
+    "focusedRegression": {
+      "inheritedR1": {
+        "total": 906,
+        "passed": 906,
+        "rerunInR2": false
+      },
+      "executedR2": {
+        "total": 55,
+        "passed": 55,
+        "failed": 0
+      }
+    },
+    "legacyComparison": {
+      "inheritedPairs": 25,
+      "historicalStates": 3,
+      "rerunInR2": false
+    },
+    "fullRepository": "FAIL_STOPPED_1_OF_227_EXECUTED_226_NOT_RUN",
+    "existingDebt": {
+      "baselineSet": [
+        {
+          "file": "tests/ability-performance-gradient-test.js",
+          "signature": "AssertionError [ERR_ASSERTION]: Low tier can have a multi-hit game"
+        },
+        {
+          "file": "tests/baseball-match-foundation-2-2-2-test.js",
+          "signature": "AssertionError [ERR_ASSERTION]: 36. full match"
+        },
+        {
+          "file": "tests/high-school-year-one-opportunity-two-integration-test.js",
+          "signature": "ReferenceError: DefensiveDecisionThrowFoundation is not defined"
+        }
+      ],
+      "sameReasonReproducedCount": 0,
+      "remainingNotRunCount": 2,
+      "currentFailureReasonIsBaselineDebt": false
+    },
+    "newProductionRegression": 1,
+    "newPassToFailFilesObserved": 0,
+    "newFailureReasonsObserved": 1,
+    "receiverV2Runtime": "DISABLED",
+    "L03": "PARTIAL",
+    "productionSourceAcceptance": "PARTIAL",
+    "CRT": "PARTIAL",
+    "capability": "PARTIAL",
+    "ordinaryEffort": "PARTIAL",
+    "sprint10a3bSourceOnlyIntegration": "NOT_PASS_NEW_BLOCKER",
+    "readyForSprint10B": "NO",
+    "readyForCommit": "NO"
+  },
+  "fullRepository": {
+    "manifestCount": 227,
+    "manifestSha256": "871902b4d5ecd7beb2bd23848be8c985ed7ddc52ecc5ebc6b40ba57d2f335a96",
+    "originalMembershipAndOrder": true,
+    "firstBaseIsMember": false,
+    "actualFullInvocations": 1,
+    "executed": 1,
+    "passed": 0,
+    "failed": 1,
+    "remainingNotRun": 226,
+    "newTimeouts": [],
+    "baselineFailureSet": [
+      "tests/ability-performance-gradient-test.js",
+      "tests/baseball-match-foundation-2-2-2-test.js",
+      "tests/high-school-year-one-opportunity-two-integration-test.js"
+    ],
+    "observedFailureSet": [
+      "tests/ability-performance-gradient-test.js"
+    ],
+    "failureSetComparisonComplete": false,
+    "baselineAssertion": "AssertionError [ERR_ASSERTION]: Low tier can have a multi-hit game",
+    "actualFailure": "Error: non-JSON metadata",
+    "actualFailureSource": "canonical23 -> same31 -> validateMatch165 -> shared guard -> recordGroundBallSituationResolution",
+    "newFailureReason": true,
+    "sourceAndTestFixesAfterStop": 0
+  },
+  "review": {
+    "manifestAudit": "Independent read-only source/graph/bytes verification231paths, no suite execution",
+    "runnerFocusedAuthor": "Separate worker owns only new R2 test file, no existing edits or production suite execution",
+    "blockerReview": "Read-only exact stderr/source comparison; operands not captured, cross-play or missing binding not proven",
+    "runnerReplayLimit": "Capture wx is checked at write, not preflight; do not repeat commands against existing captures. No repeats/overwrites occurred."
+  },
+  "limits": [
+    "Original120/300 captures keep their historical conditions and verdicts.",
+    "180 approval is specific to first-base; original full default180000/30MB unchanged.",
+    "Original227 does not contain first-base; it was independently accepted, never appended.",
+    "R1 906/25+3/18 cited only because all final source and original hashes remain equal.",
+    "Current original Debt filename now fails for a different source-guard reason, so this is a new observed blocker.",
+    "226 unexecuted suites have no R2 verdict; inherited224/227 is historical only.",
+    "No actual v2 stage or Shadow integration enabled; no Foundation Closeout.",
+    "Protected preservation is metadata/status, not protected hashes."
+  ],
+  "capturePolicy": "exclusive-create; preserve all prior WIP/captures"
+}

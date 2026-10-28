@@ -1,0 +1,42 @@
+{
+  "sprint": "10A.3b-R6",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "createdAt": "2026-10-14T06:40:37.504Z",
+  "node": "v24.19.0",
+  "result": {
+    "file": "tests/bbp-b1-ground-ball-production-integration-test.js",
+    "command": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "tests/bbp-b1-ground-ball-production-integration-test.js"
+    ],
+    "cwd": "E:\\meng\\baseball_life_sim_semirefactor",
+    "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+    "nodeVersion": "v24.19.0",
+    "timeoutMs": 120000,
+    "maxBuffer": 16000000,
+    "environment": {
+      "NODE_OPTIONS": null,
+      "NODE_PATH": null,
+      "TZ": null
+    },
+    "elapsedMs": 133.5717,
+    "exitCode": 0,
+    "signal": null,
+    "error": null,
+    "stdout": "✓ 1. Production Standard Attack 自動走 Actual Pitch → Recognition → Swing → Contact\n✓ 2. Fair contact 先建立 BBP-A truth，再標記 physical defense pending\n✓ 3. BBP-B1 handoff 的 upstream authority 是 BBP-A，不是 legacy PA result\n✓ 4. Canonical runner state 投影進既有 infield situation\n✓ 5. Synthetic context 僅為 physical truth compatibility projection\n✓ 6. 玩家第一層選項是先抓一壘或先抓二壘跑者\n✓ 7. 玩家資訊可讀且不顯示 raw identifier\n✓ 8. 先傳二壘後第一腿與 relay continuation 分開解析\n✓ 9. Physical outcome 先產生，再投影 PA-compatible result\n✓ 10. Supported play 只增加一次 outs、PA、打序與 defensive event\n✓ 11. 重送結算不會再次改 outs、bases、PA、打序或 event\n✓ 12. Physical outcome 保存 batter/lead runner safe-out 與 base occupancy\n✓ K. Tight lead window 的 aggressive quality 不隨失敗 outcome 改寫\n✓ 13. Left-side ordinary ground ball 保留原責任並不建立 synthetic 2B situation\n✓ 14. Unsupported scope 已由原始普通 PA 一次結算\n✓ 15. Unsupported airborne contact 維持原始普通 PA\n✓ 16. Save/reload 保留同一 ball、runner、windows 與 choice state\n✓ 17. 結算後 reload 不重抽也不重複 settlement\n✓ 18. Runtime script order 在 BBP-B1 前已載入 BBP-A 與 shared Bunt runner primitive\n✓ 19. Original bug：1B+2B 成功 4-6-3 後只留下 original 2B runner 於 3B\nBBP-B1 Ground Ball Production Integration tests: 20/20 passed\n",
+    "stderr": "",
+    "sourceHash": "c2e4b0cdf315d29ac9af2dc7cce6a1c9645f1e1ca67f9d521bce603d0a395036"
+  },
+  "frozenSourceHashes": {
+    "index.html": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+    "script.js": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+    "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+    "player.js": "3414f5a93429bc1a4adbe3c632485e70b5d9175822261b689543a77fa0eb38bd",
+    "match-situation-lifecycle.js": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+    "receiver-source-snapshot.js": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274",
+    "tests/pitch-sequence-state-production-integration-test.js": "7a53369d526de1c3a66b9d3e0c69f45f27f261bdb1d28c354f9831c0e8ae8327",
+    "tests/receiver-source-save-authorized-delta.cjs": "94a2cac6e155c3936ea2cd03f0d31e4e19feba87d53f87c4be5c3cc5aab28b82",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs": "e8f6a9bbdea182a6b73241d60d9c9bb54e4174fccf56dcdba05399904830504b",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs": "7bf28ed1f296feb61b64451982d72ab2c12d7ed719dd0ac30ceae3aaa26d7073"
+  }
+}

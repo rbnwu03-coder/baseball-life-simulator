@@ -1,0 +1,20 @@
+{
+  "file": "match-experience-development-foundation-v1-test.js",
+  "status": "PASS",
+  "nodeAssertions": 46,
+  "customChecks": null,
+  "entry": true,
+  "elapsedMs": 633,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/match-experience-development-foundation-v1-test.js"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "stdout": "✓ 1. Match Experience 使用獨立 version／settlement contract\n✓ 2. Production index 在 script.js 前載入 Match Experience module\n✓ 3. player.baseballSkills 仍是唯一 Current Skill truth\n✓ 4. Evidence derivation 不呼叫 Development processor\n✓ 5. Evidence contract 含 identity／participation／三層 evidence／attribution／snapshot\n✓ 6. Outcome、Experience、Development state 分離\n✓ 7. 7 局 Exposure 大於 1 局\n✓ 8. Defensive innings exposure 具 diminishing return\n✓ 9. 4 PA Exposure 大於 1 PA\n✓ 10. PA exposure 非線性固定倍率\n✓ 11. Bench 0 innings／0 PA 沒有 Evidence\n✓ 12. Bench 0 participation 沒有 Development Context\n✓ 13. 1 defensive inning／0 chances 只有 Exposure Evidence\n✓ 14. 無守備機會不產生 catching／throwing／reaction Active Evidence\n✓ 15. 相同 decision／execution 不因 hit／strikeout outcome 改 Experience value\n✓ 16. Strong decision＋weak execution 可同時留下 IQ 與 corrective execution Evidence\n✓ 17. Poor decision＋successful execution 不給 high IQ reinforcement\n✓ 18. Teammate-caused failure 保留 Player strong execution\n✓ 19. Routine 2B play 即使無 Decision UI 仍有 Active Evidence\n✓ 20. 2B pivot fixture 映射 reaction／catching／throwing／baseballIQ\n✓ 21. 2B evidence 使用 canonical pivot participation type\n✓ 22. Hit＋ordinary execution 不會自動成為 highValue\n✓ 23. Correct approach＋incomplete execution＋strikeout 仍有正 batting Evidence\n✓ 24. Strikeout 不會抹除 strong decision 的 baseballIQ Evidence\n✓ 25. 相似 Evidence #1／#2／#4／#7 邊際價值逐步下降\n✓ 26. Aggregator 聚合同 skill 全部 evidence，不只取 top 3 plays\n✓ 27. High pressure 只有有限 salience bonus\n✓ 28. 每場主要 Development Context 上限為 3\n✓ 29. Context 使用 gameExperience 與既有 Development shape\n✓ 30. 1 vs 7 innings：7 局 Exposure 較多但非 7 倍\n✓ 31. 2 innings＋3 high-value active experiences 勝過 7 innings 無 active\n✓ 32. Same Active Evidence＋7 innings moderately 高於 1 inning\n✓ 33. 4 PA opportunity 高於 1 PA 且維持 diminishing\n✓ 34. Completed match 只在 match-level settlement 呼叫既有 processor\n✓ 35. gameExperience settlement exactly once\n✓ 36. Settlement 不改 score／line score／cursor／completed truth\n✓ 37. Development history 保存 gameExperience source 與 provenance\n✓ 38. Match Experience state 保存 exposure／evidence／aggregation／contexts／IDs\n✓ 39. Mid-match 不允許永久 Development settlement\n✓ 40. Saved settled state normalize 後維持 exactly-once identity\n✓ 41. Skill cap 與 progress threshold 完全重用 Development v1\n✓ 42. School trainingQuality／playingTimeOpportunity 不作自動 multiplier\n✓ 43. Distribution audit 完成 1000 deterministic player-match samples\n✓ 44. Distribution structural errors 全為 0\n✓ 45. 0-play bench contexts 為 0\n✓ 46. Exposure band 隨實際局數上升且非線性\n\nMatch Experience → Development Foundation v1：46/46 通過\nMATCH_EXPERIENCE_PLAYING_TIME_AUDIT_JSON={\"inningExposure\":{\"one\":2.4,\"seven\":9.1},\"paExposure\":{\"one\":2.2,\"four\":6.05},\"playingTimeAudit\":{\"one\":1.32,\"seven\":5.005,\"short\":9.733,\"sameOne\":3.105,\"sameSeven\":6.79,\"pa1\":1.54,\"pa4\":4.234999999999999}}\nMATCH_EXPERIENCE_DISTRIBUTION_AUDIT_JSON={\"samples\":1000,\"avgEvidence\":3.6,\"avgActiveEvidence\":1.2,\"avgContexts\":2.2,\"avgExposureByInningsBand\":{\"0\":0,\"1-2\":3.353558052434442,\"3-4\":7,\"5-7\":8.531749999999981},\"starterExposure\":8.14953095684802,\"substituteExposure\":3.3661654135338197,\"benchContexts\":0,\"errors\":{\"nan\":0,\"negative\":0,\"duplicate\":0,\"noParticipationActive\":0,\"matchMutation\":0,\"rngDrift\":0,\"aboveCap\":0,\"missingProvenance\":0}}\nThis is structural validation, not population balance.\n",
+  "stderr": "",
+  "error": null,
+  "timedOut": false
+}

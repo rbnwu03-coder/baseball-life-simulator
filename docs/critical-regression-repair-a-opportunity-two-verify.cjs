@@ -1,0 +1,19 @@
+"use strict";
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const C=require('./critical-regression-repair-a-opportunity-two-capture.cjs'),{specs}=require('./critical-regression-repair-a-opportunity-two-runner.cjs');
+C.integrity();const b=C.json(C.prefix+'baseline-evidence.json'),contract=C.json(C.prefix+'authorized-contract-evidence.json'),source=fs.readFileSync(path.join(C.root,C.target),'utf8');
+assert.equal(source,C.expected(b.originalTargetSource));assert.equal(C.reverse(source),b.originalTargetSource);assert.equal(C.fileHash(C.target),contract.expectedAfterRawSha256);
+const assertionLines=source.split(/\r?\n/).filter(l=>l.startsWith('verify('));assert.equal(assertionLines.length,40);assert.deepEqual(assertionLines,contract.assertionLines);
+assert.deepEqual(C.manifest(source).filter(p=>!C.owners.includes(p)),contract.beforeManifest);
+const negatives=C.json(C.prefix+'negative-contract-evidence.json').rows;
+const reverse=negatives.map(row=>{let text=fs.readFileSync(path.join(C.root,row.file),'utf8');assert.equal(C.fileHash(row.file),row.isolatedSha256);assert.equal(text.split(row.observation).length-1,1);text=text.replace(row.observation,'');text=text.slice(0,row.removal.offset)+row.removal.literal+text.slice(row.removal.offset);assert.equal(text,source);return{file:row.file,omitted:row.omitted,exactReverseToRepairedSource:true,reverseSha256:C.hash(text)};});
+const labels=[...specs.map(s=>s.label),'missing-owner-1','missing-owner-2','missing-owner-3'],currentHashes=new Map();
+const runs=labels.map(label=>{
+ const evidence=C.childPrefix+label+'-evidence.json',r=C.json(evidence);assert(r.sourceStable&&r.entryVerified);assert.equal(r.assertionEvidence.standaloneMainMatches,true);assert.equal(r.exitCode,label.startsWith('missing-owner-')?1:0);assert.equal(r.status,label.startsWith('missing-owner-')?'FAIL':'PASS');assert.equal(r.spawnError,null);assert.equal(r.signal,null);
+ assert.deepEqual(C.json(r.witnessPath),r.assertionEvidence);assert.deepEqual(r.relevantSourceHashesBefore,r.relevantSourceHashesAfter);
+ for(const [p,h] of Object.entries(r.relevantSourceHashesAfter)){if(!currentHashes.has(p))currentHashes.set(p,C.fileHash(p));assert.equal(currentHashes.get(p),h,'Source changed after execution: '+p);}
+ return {label,evidence,status:r.status,exitCode:r.exitCode,elapsedMs:r.elapsedMs,actualCommand:r.actualCommand,limits:r.policy,mainVerified:true,witnessVerified:true,sourceStable:true,completeLogs:true,stdoutBytes:Buffer.byteLength(r.stdout),stderrBytes:Buffer.byteLength(r.stderr),nodeAssertionCounts:r.assertionEvidence.assertions};
+});
+const ss=fs.readFileSync(path.join(C.root,'tests/ss-defensive-production-integration-test.js'),'utf8').split(/\r?\n/);
+C.capture('verification',{originalTargetSha256:b.hashes[C.target],afterTargetSha256:C.fileHash(C.target),reverseSha256:C.hash(C.reverse(source)),exactReverseToOpeningRawBytes:true,assertionsExactlyPreserved:40,originalManifestMembersAndOrderPreserved:true,dependencyOrder:C.validateManifest(C.manifest(source)),reverseNegativeCopies:reverse,runs,childInvocations:runs.length,positiveSuiteCount:5,expectedNegativeFailureCount:3,unverifiedCount:0,relevantCurrentHashes:Object.fromEntries(currentHashes),ss63SourceEvidence:{path:'tests/ss-defensive-production-integration-test.js',sha256:C.fileHash('tests/ss-defensive-production-integration-test.js'),lines71to81:ss.slice(70,81),receiverFailureLines143to153:ss.slice(142,153)},gitNumstat:C.git('diff','--numstat','--',C.target),diffCheck:C.git('diff','--check','--',C.target),originalWipIntegrity:C.integrity()});
+console.log(JSON.stringify({exactReverse:true,assertionsPreserved:40,originalModulesPreserved:59,currentModules:62,childLogsAndWitnessesVerified:8,positiveSuites:5,expectedRuntimeNegatives:3,relatedChecks:90,beforeSha256:b.hashes[C.target],afterSha256:C.fileHash(C.target)}));

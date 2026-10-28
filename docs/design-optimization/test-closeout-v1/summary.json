@@ -1,0 +1,133 @@
+{
+  "branch": "accepted-gameplay-g2-b2-v0.1",
+  "head": "0d3ed173952b9b8e5d5842a73761f649b50be594",
+  "before": [
+    {
+      "file": "high-school-integration-1-1-test.js",
+      "status": "FAIL",
+      "groups": 9,
+      "successfulAssertions": 9
+    },
+    {
+      "file": "high-school-year-two-competition-loop-test.js",
+      "status": "FAIL",
+      "groups": 35,
+      "successfulAssertions": 37
+    }
+  ],
+  "after": [
+    {
+      "file": "high-school-integration-1-1-test.js",
+      "status": "PASS",
+      "groups": 16,
+      "successfulAssertions": 16,
+      "coverage": {
+        "sourceUrl": "script.js",
+        "adapterCalls": 3,
+        "physicalSampleRange": {
+          "startOffset": 661832,
+          "endOffset": 662616,
+          "count": 1
+        },
+        "catchExecutionRange": {
+          "startOffset": 661832,
+          "endOffset": 662616,
+          "count": 1
+        },
+        "officialCatchResolverCalls": 1
+      }
+    },
+    {
+      "file": "high-school-year-two-competition-loop-test.js",
+      "status": "PASS",
+      "groups": 37,
+      "successfulAssertions": 54,
+      "coverage": null
+    }
+  ],
+  "manifests": [
+    {
+      "file": "high-school-integration-1-1-test.js",
+      "added": [
+        {
+          "module": "batted-ball-physical.js",
+          "formalIndexOrder": 42,
+          "testOrder": 20
+        },
+        {
+          "module": "batted-ball-outcome-mapping.js",
+          "formalIndexOrder": 43,
+          "testOrder": 21
+        },
+        {
+          "module": "defensive-opportunity-foundation.js",
+          "formalIndexOrder": 44,
+          "testOrder": 22
+        },
+        {
+          "module": "defensive-reach-secure-foundation.js",
+          "formalIndexOrder": 45,
+          "testOrder": 23
+        }
+      ],
+      "allOtherChecksPreserved": true
+    },
+    {
+      "file": "high-school-year-two-competition-loop-test.js",
+      "added": [
+        {
+          "module": "match-game-record.js",
+          "formalIndexOrder": 16,
+          "testOrder": 4
+        }
+      ],
+      "allOtherChecksPreserved": true
+    }
+  ],
+  "preserved": [
+    {
+      "file": "script.js",
+      "sha256": "9549187989afb7a12dc8a05fbae3c5b96bd1542473ad316d5d8e22e037f6e2a3",
+      "unchanged": true
+    },
+    {
+      "file": "story.js",
+      "sha256": "e8858bef8f007c878d16bb5c54d176fada21565667fff8e6aca8d3c3e5484cd4",
+      "unchanged": true
+    },
+    {
+      "file": "index.html",
+      "sha256": "802d0a8fbf9fa966b83f1508efd2eb2807cdf6355dbfaecf4fd689cdb397e273",
+      "unchanged": true
+    },
+    {
+      "file": "tests/high-school-match-feedback-factuality-test.cjs",
+      "sha256": "801c1e406efeddc98dad8a329f5206715dbb74e24e2b7434a412de6aade6ca1c",
+      "unchanged": true
+    },
+    {
+      "file": "tests/high-school-legacy-feedback-boundary-test.cjs",
+      "sha256": "8760ac1f13dcd404a59defda27c5e0682adccf6bfdd10813849c472e8c3d7a12",
+      "unchanged": true
+    },
+    {
+      "file": "tests/high-school-career-test-context.js",
+      "sha256": "c77afdf9f9e63e5fcf740605e66afee4cc54bd93e3e63ee4c12382a7b3f012e0",
+      "unchanged": true
+    },
+    {
+      "file": "tests/entry-safe-preload.cjs",
+      "sha256": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+      "unchanged": true
+    }
+  ],
+  "preservation": {
+    "checked": 2305,
+    "changed": [
+      "tests/high-school-integration-1-1-test.js",
+      "tests/high-school-year-two-competition-loop-test.js"
+    ],
+    "headSame": true
+  },
+  "limits": "Only two full suites ran. No shared loader changed; original 14 and legacy 15 are preserved, not rerun this round."
+}

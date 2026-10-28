@@ -1,0 +1,16 @@
+{
+  "sprint": "10A.3b-R4",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "createdAt": "2026-10-14T05:55:22.827Z",
+  "node": "v24.19.0",
+  "goal": {
+    "exitCode": 0,
+    "fixedTapeWitness": "LONG_GAME_WITNESS={\"seed\":82627,\"draws\":1,\"matchCompletionIteration\":19,\"resultCompletionIteration\":21,\"noProgress\":false,\"guardChecks\":5,\"result\":\"教練願意給你穩定的任務\"}",
+    "historicalFixedTapeWitness": "LONG_GAME_WITNESS={\"seed\":82627,\"draws\":1,\"matchCompletionIteration\":19,\"resultCompletionIteration\":21,\"noProgress\":false,\"guardChecks\":5,\"result\":\"教練願意給你穩定的任務\"}",
+    "fixedTapeWitnessEqual": true,
+    "currentStdoutHash": "aebb388316eb70c1767656b8e236e1f652b5c9a8baeaf0ee9d4d62817d872109",
+    "historicalStdoutHash": "cd3a006bdfef49f43671c31ad46ab115fbd5d38afdd48a5b7a3551b211995462"
+  },
+  "finding": "goal-balance report runs 25 routes without supplying randomSource; makeGame leaves Math.random untouched when no injected randomSource. Dynamic aggregate tables differ; fixed captured-tape witness is identical. Full original assertions PASS.",
+  "newBlocker": "pitch-sequence exact Save bytes assertion; unchanged classification"
+}

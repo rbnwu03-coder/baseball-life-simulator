@@ -1,0 +1,105 @@
+{
+  "task": "SS Defensive Controlled Scenario Contract v0.1",
+  "createdAt": "2026-10-15T09:15:36.139Z",
+  "scenarioId": "ss-controlled-ground-v0.1",
+  "maximumCandidates": 1,
+  "maximumCandidateExecutions": 2,
+  "replayPurpose": "same condition reproducibility, never another candidate",
+  "checkpoint": {
+    "file": "docs/ss-match-identity-public-resolver-contract-v0.1-fixture-input-evidence.json",
+    "hash": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+    "origin": "reviewed pre-Match admitted step5 checkpoint; no new story progression proof"
+  },
+  "identitySource": "Current Event -> prepareCurrentHighSchoolYearOneMatch() without custom identity or supplied Opportunity",
+  "actualSeed": 2884315748,
+  "seedAuthority": "existing pending test hook, unchanged prior actual numeric seed, consumed by formal owner",
+  "abilitiesRosterSchool": "unchanged checkpoint abilities, SS, invitation index0 and existing formal owners",
+  "state": {
+    "inning": 7,
+    "half": "top",
+    "outs": 0,
+    "runners": [
+      null,
+      null,
+      null
+    ],
+    "provenance": "first ordinary fair contact after owner substitution; historical prior runtime tick90; never direct Match state writes",
+    "preferredOneOutRunnerFirst": "not imposed: prepare owns fixed 1/top/0/empty and no scenario options in inspected prepare body"
+  },
+  "physicalInputs": {
+    "contactQuality": 0.65,
+    "ballType": 0.1,
+    "pace": 0.68,
+    "direction": 0.05,
+    "depth": 0,
+    "origin": "same declared physical rolls as existing SS integration fixture; no outcomeRoll or capability overrides"
+  },
+  "policy": {
+    "sample": 0.72,
+    "safety": 1400,
+    "decisions": "secure / zone / first legal"
+  },
+  "adapter": {
+    "boundary": "BattedBallPhysical.resolveBattedBallPhysicalTruth input.rolls once at first live SS ordinary contact",
+    "helperFile": "tests/helpers/canonical-match-contract-context.cjs",
+    "helperSourceHash": "b09b35cf404c100b6f1d00ff6b8e67e38093fd6d13a22e788413f3bb7c608fb5",
+    "memoryLoaderHash": "6cfbd2ed35933d73d3a6a1a0225520927a70cbf41fbe7d2c403d0ff428a86831",
+    "exactLoaderReplacement": {
+      "before": "vm.runInContext(source.toString(\"utf8\"), context, { filename: file });",
+      "after": "vm.runInContext(source.toString(\"utf8\"), context, { filename: file });\n    if (file === \"batted-ball-physical.js\") vm.runInContext(\"\\n  globalThis.controlledAdapter={armed:false,used:false,witnesses:[],unchangedExports:[]};\\n  (()=>{\\n    const original=BattedBallPhysical;\\n    const replacement={...original,resolveBattedBallPhysicalTruth(input={}){\\n      const a=controlledAdapter,match=typeof m==='undefined'?null:m;\\n      const live=a.armed&&!a.used&&match&&player.highSchoolMatch===match\\n        &&match.playerEntryCompleted&&match.offenseTeam===getHighSchoolOpponentTeamSide(match)\\n        &&match.defenseTeam===getHighSchoolPlayerTeamSide(match)\\n        &&TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam],'SS')?.id==='player'\\n        &&String(input.identity||'').includes('|ordinary-contact|');\\n      if(!live)return original.resolveBattedBallPhysicalTruth(input);\\n      if(match.inning!==7||match.half!=='上'||match.outs!==0||match.runners.some(Boolean))\\n        throw new Error('Fixed controlled starting state not reached; no alternate scenario');\\n      const valid=TeamRosterFoundation.validateActiveDefense(match.rosters[match.defenseTeam]);\\n      if(!valid.ok||getHighSchoolMatchStateIntegrityIssues(match).length)\\n        throw new Error('Illegal controlled input boundary');\\n      const before=JSON.stringify(player),effective={...input,rolls:{...(input.rolls||{}),contactQuality:.65,ballType:.1,pace:.68,direction:.05,depth:0}};\\n      a.used=true;\\n      const truth=original.resolveBattedBallPhysicalTruth(effective);\\n      a.witnesses.push({scenarioId:'ss-controlled-ground-v0.1',before:{matchId:match.id,eventId:getCurrentEventId(),inning:match.inning,half:match.half,outs:match.outs,runners:match.runners.slice(),scores:{...match.scores},offenseTeam:match.offenseTeam,defenseTeam:match.defenseTeam,currentBatter:match.currentBatter,actualSS:TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam],'SS').id,entryCompleted:match.playerEntryCompleted,activeDefense:valid},originalInput:JSON.parse(JSON.stringify(input)),effectiveInput:JSON.parse(JSON.stringify(effective)),truth:JSON.parse(JSON.stringify(truth)),playerUnchanged:before===JSON.stringify(player),normalized:!!original.normalizeBattedBallPhysicalTruth(truth)});\\n      return truth;\\n    }};\\n    controlledAdapter.unchangedExports=Object.keys(original).filter(k=>k!=='resolveBattedBallPhysicalTruth').map(key=>({key,sameReference:replacement[key]===original[key]}));\\n    globalThis.BattedBallPhysical=Object.freeze(replacement);\\n  })();\\n\", context, { filename: \"controlled-physical-input-adapter\" });"
+    },
+    "adapterProgramHash": "005b050f32ce2910f7d0ab6408dd9dfbab84766cf9bacd34c383b19e34f7d650",
+    "unchangedOwners": [
+      "original Physical producer output",
+      "Opportunity binding",
+      "Reach",
+      "Secure",
+      "classification",
+      "density",
+      "legal choices",
+      "Throw",
+      "Receiver",
+      "Runner Timing",
+      "Settlement",
+      "GameRecord",
+      "Career"
+    ],
+    "forbidden": [
+      "Match state or capability mutation",
+      "chosen primary defender",
+      "forced meaningful",
+      "forced successful execution",
+      "forced route or out",
+      "Production routing installation"
+    ]
+  },
+  "programSha256": "3b0f334a5fc88b538d5fa5b7f2b312f2560cda34cc2018455e940c052680b5f9",
+  "sourceHashes": {
+    "docs/ss-defensive-controlled-scenario-contract-v0.1-capture.cjs": "2e56a496d268b7c2cc7dfad6e29e8b35bc3b38ef3500be784e77743581210c6c",
+    "docs/ss-defensive-controlled-scenario-contract-v0.1-adapter.cjs": "a976c02482a31dcf79a92355e47d6bb4d9811c0672803b93eb43d74f4883634d",
+    "docs/ss-defensive-controlled-scenario-contract-v0.1-proof.cjs": "32dd16e5e853fc23a530edd14288361f516bf73f3c4f2e5237dec94cfd9c646c",
+    "docs/ss-defensive-controlled-scenario-contract-v0.1-replay.cjs": "ba6bd3a296dd0db5f51c5705e2197a7432a5f2f4d7b4bcd29a1d0adb13708964",
+    "docs/ss-defensive-controlled-scenario-contract-v0.1-plan.cjs": "10013bd73547ba8af1146546bf2b31bd45b48065b1b9e7f10cd45a24dbff9e5f"
+  },
+  "stops": [
+    "first identity / public refusal / legality failure",
+    "input boundary differs from fixed state",
+    "runtime unexpected failure",
+    "no new candidate if routine or unreachable"
+  ],
+  "regressionStrategy": {
+    "freshnessFirst": true,
+    "newFormalCandidates": [
+      "tests/ss-defensive-production-integration-test.js",
+      "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js"
+    ],
+    "reuseCandidates": [
+      "tests/canonical-match-regression-integration-test.cjs",
+      "tests/match-full-game-record-test.js"
+    ],
+    "noFullOrBrowser": true
+  },
+  "readyForCommit": false,
+  "readyForSprint10B": false,
+  "receiverV2": "DISABLED"
+}

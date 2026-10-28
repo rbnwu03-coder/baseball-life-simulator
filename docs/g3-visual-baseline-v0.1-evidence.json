@@ -1,0 +1,1009 @@
+{
+  "task": "G3 Visual Baseline v0.1",
+  "status": "VISUAL_BASELINE_PARTIAL",
+  "at": "2026-10-24T07:40:04.595Z",
+  "timeZone": "Asia/Taipei",
+  "layoutAndGameplay": "PASS",
+  "ready": false,
+  "reason": "Original neutral SVG people remain placeholders; character art and detailed field art are not finalized.",
+  "baseline": {
+    "head": "0d3ed173952b9b8e5d5842a73761f649b50be594",
+    "tree": "866b134fc720bbc93582d3172965e68c527b25ce",
+    "branch": "accepted-gameplay-g2-b2-v0.1",
+    "upstream": "origin/accepted-gameplay-g2-b2-v0.1",
+    "aheadBehind": [
+      0,
+      0
+    ]
+  },
+  "reference": {
+    "path": "E:/meng/references/match-visual-baseline-v0.1.png",
+    "bytes": 2035138,
+    "sha256": "27f8a3cfa8ae2c8d48e6d08771e24d94ca6eddeb2d97721dfdadabc17fbcd5af",
+    "inspected": true,
+    "compositionOnly": true,
+    "wholeReferenceAsBackground": false
+  },
+  "manifest": {
+    "modified": [
+      "match-pitch-decision-ui.js",
+      "match-pitch-decision-ui.css"
+    ],
+    "added": [
+      "assets/g3-match/field.svg",
+      "assets/g3-match/pitcher-neutral.svg",
+      "assets/g3-match/batter-neutral.svg",
+      "assets/g3-match/catcher-neutral.svg",
+      "tests/g3-visual-baseline-test.cjs",
+      "docs/g3-visual-baseline-v0.1.md",
+      "docs/g3-visual-baseline-v0.1-evidence.json",
+      "docs/g3-visual-baseline-v0.1/before-strategy-1366x768.png",
+      "docs/g3-visual-baseline-v0.1/before-pitch-1366x768.png",
+      "docs/g3-visual-baseline-v0.1/after-strategy-1366x768.png",
+      "docs/g3-visual-baseline-v0.1/after-pitch-1366x768.png",
+      "docs/g3-visual-baseline-v0.1/after-take-1366x768.png",
+      "docs/g3-visual-baseline-v0.1/after-swing-1366x768.png",
+      "docs/g3-visual-baseline-v0.1/after-pa-1366x768.png",
+      "docs/g3-visual-baseline-v0.1/after-reload-1366x768.png",
+      "docs/g3-visual-baseline-v0.1/after-pitch-1600x900.png",
+      "docs/g3-visual-baseline-v0.1/after-pitch-1920x1080.png"
+    ],
+    "files": [
+      {
+        "path": "match-pitch-decision-ui.js",
+        "action": "modified",
+        "bytes": 25360,
+        "sha256": "6abf8a436dd14cb611d7b3c0bcbaab0b99972a2709706ec582e6fd2e74ef0dcb"
+      },
+      {
+        "path": "match-pitch-decision-ui.css",
+        "action": "modified",
+        "bytes": 17191,
+        "sha256": "b07bba233aa2b637959a6d1235ffcacc349f6682b47f5b556029bcd348111b69"
+      },
+      {
+        "path": "assets/g3-match/field.svg",
+        "action": "added",
+        "bytes": 3655,
+        "sha256": "9142a044a3dc7431a2a49a3ff93cd283b28ee4e584d88c3693dacefe07c2feb8"
+      },
+      {
+        "path": "assets/g3-match/pitcher-neutral.svg",
+        "action": "added",
+        "bytes": 1511,
+        "sha256": "e3186d04c968aa263edb8b2d65f8c4284e30597a9d2239257de051ddb3a73a01"
+      },
+      {
+        "path": "assets/g3-match/batter-neutral.svg",
+        "action": "added",
+        "bytes": 2058,
+        "sha256": "8b4ea8e688a9d465c50fb04ac35c684f62025584484f3e497dd88cd016134b8a"
+      },
+      {
+        "path": "assets/g3-match/catcher-neutral.svg",
+        "action": "added",
+        "bytes": 1065,
+        "sha256": "82146c65e95084f8ff97cda0dafc6a695a2989b19e52dbd90b878363d62d2563"
+      },
+      {
+        "path": "tests/g3-visual-baseline-test.cjs",
+        "action": "added",
+        "bytes": 6053,
+        "sha256": "555300a636b5b7e026a3a7ffca8c4a5787200a1ac7d676bdacbcae62947b6d58"
+      },
+      {
+        "path": "docs/g3-visual-baseline-v0.1.md",
+        "action": "added",
+        "bytes": 8760,
+        "sha256": "db361706c6265453248cca4ee8b5c6583a29db28cb2d8f419aedef06472b8a27"
+      },
+      {
+        "path": "docs/g3-visual-baseline-v0.1/before-strategy-1366x768.png",
+        "action": "added",
+        "bytes": 94497,
+        "sha256": "8c20b41297a4db52ebc57911c55ec516d871cbbc61cb1f9fbfb30eab8dbe10f6"
+      },
+      {
+        "path": "docs/g3-visual-baseline-v0.1/before-pitch-1366x768.png",
+        "action": "added",
+        "bytes": 87238,
+        "sha256": "bcc81705fd4bd670d4108de679aebf1eb30b85a63b9a54cafd7e32badba312a5"
+      },
+      {
+        "path": "docs/g3-visual-baseline-v0.1/after-strategy-1366x768.png",
+        "action": "added",
+        "bytes": 222036,
+        "sha256": "cbb7910dd9c21a472423f1f7fdabd7d389f54a1c9939516cb887335b089ca2dd"
+      },
+      {
+        "path": "docs/g3-visual-baseline-v0.1/after-pitch-1366x768.png",
+        "action": "added",
+        "bytes": 215411,
+        "sha256": "6bccd4b6f9427b828dc1cb2da0c28d7326d2c3fc3071f188539b4ec1fba3113f"
+      },
+      {
+        "path": "docs/g3-visual-baseline-v0.1/after-take-1366x768.png",
+        "action": "added",
+        "bytes": 222921,
+        "sha256": "116f101db04c489d4996737c3520c623440aab707ce5d1c74ca523e5b78d9cc3"
+      },
+      {
+        "path": "docs/g3-visual-baseline-v0.1/after-swing-1366x768.png",
+        "action": "added",
+        "bytes": 203587,
+        "sha256": "97eee0748b6842bce317cc746a989f6411c5779eecdac119399ed70733fb65fb"
+      },
+      {
+        "path": "docs/g3-visual-baseline-v0.1/after-pa-1366x768.png",
+        "action": "added",
+        "bytes": 202759,
+        "sha256": "cc2b8dc13f5a1b7cae7f5030e9dfed84240d3f193fbfda9e705657c2cc3600bc"
+      },
+      {
+        "path": "docs/g3-visual-baseline-v0.1/after-reload-1366x768.png",
+        "action": "added",
+        "bytes": 214506,
+        "sha256": "83a0545743963e0b4cc0e999cfd0688dfae932c191ec069021bfcb55a7910312"
+      },
+      {
+        "path": "docs/g3-visual-baseline-v0.1/after-pitch-1600x900.png",
+        "action": "added",
+        "bytes": 245988,
+        "sha256": "dd6caf2c96a59293f9cb0607a1602c0d249e6b85f88b5d085b283229b102065c"
+      },
+      {
+        "path": "docs/g3-visual-baseline-v0.1/after-pitch-1920x1080.png",
+        "action": "added",
+        "bytes": 315231,
+        "sha256": "f0df78cd6a877f5dfa6d0ebd0367df2308642b9863c04ca0b4ee41808c05bd54"
+      }
+    ],
+    "self": "docs/g3-visual-baseline-v0.1-evidence.json",
+    "selfHashOmitted": true
+  },
+  "assetProvenance": {
+    "originalCodeDrawnSVG": true,
+    "thirdPartyArt": false,
+    "characterIdentity": "neutral placeholders",
+    "cssPersonTransform": false,
+    "charactersFinal": false
+  },
+  "ownership": {
+    "adapterPrefix": "G2-B2 prefix preserved byte-for-byte; original G3-A regression PASS",
+    "scoreboard": "Original cursor-bounded Match DOM relocated, R/H/E and inning cells verified against public record",
+    "metadata": "Original rendered scoreboard event/team names; Bridge participant fields only",
+    "scene": "Presentation only; no gameplay clock, RNG, scorer, save, resolver, ball trajectory or pitch-location animation",
+    "kZone": "Neutral illustration only; not actual location",
+    "observedPitchCopy": "Existing public PITCH_RESOLVED.facts.observed only",
+    "phaser": "Not loaded; #matchPhaserMount matches .match-scene rectangle",
+    "unchangedOwners": [
+      "script.js",
+      "style.css",
+      "index.html",
+      "live-public-match-bridge.js",
+      "save.js",
+      "match-game-record.js"
+    ]
+  },
+  "tests": {
+    "status": "PASS",
+    "totalPass": 81,
+    "rows": [
+      {
+        "file": "tests/g3-visual-baseline-test.cjs",
+        "exitCode": 0,
+        "durationMs": 47,
+        "passLines": 3,
+        "violations": [],
+        "status": "PASS",
+        "summary": "{\"suite\":\"g3-visual-baseline\",\"status\":\"PASS\",\"passed\":3}"
+      },
+      {
+        "file": "tests/g3-a-pc-match-shell-test.cjs",
+        "exitCode": 0,
+        "durationMs": 70,
+        "passLines": 7,
+        "violations": [],
+        "status": "PASS",
+        "summary": "{\"suite\":\"g3-a-pc-match-shell\",\"status\":\"PASS\",\"passed\":7,\"browserAssertions\":\"inspectShell + assertShell; executed by isolated Chrome acceptance runner\"}"
+      },
+      {
+        "file": "tests/g2-b2-playable-match-decision-test.cjs",
+        "exitCode": 0,
+        "durationMs": 1718,
+        "passLines": 21,
+        "violations": [],
+        "status": "PASS",
+        "summary": "{\"suite\":\"g2-b2-playable-match-decision\",\"status\":\"PASS\",\"passed\":21,\"pa\":{\"id\":\"hs-y3-final-competition-1|hs_y1_match_moment_1|player|6|下\",\"result\":\"out\",\"pitchCount\":2,\"history\":[{\"pitchId\":\"hs-y3-final-competition-1|hs_y1_match_moment_1|player|6|下|pitch-1\",\"action\":\"take\",\"result\":\"calledStrike\"},{\"pitchId\":\"hs-y3-final-competition-1|hs_y1_match_moment_1|player|6|下|pitch-2\",\"action\":\"swing\",\"result\":\"ballInPlay\"}]}}"
+      },
+      {
+        "file": "tests/g2-a-live-public-match-bridge-test.cjs",
+        "exitCode": 0,
+        "durationMs": 11137,
+        "passLines": 34,
+        "violations": [],
+        "status": "PASS",
+        "summary": "{\"suite\":\"g2-a-live-public-match-bridge\",\"status\":\"PASS\",\"passed\":34,\"cases\":[\"A\",\"B\",\"C\",\"D\"],\"normalGame\":true}"
+      },
+      {
+        "file": "tests/g2-b1-natural-mixed-match-continuity-test.cjs",
+        "exitCode": 0,
+        "durationMs": 76999,
+        "passLines": 9,
+        "violations": [],
+        "status": "PASS",
+        "summary": "{\"suite\":\"g2-b1-natural-mixed-match-continuity\",\"status\":\"PASS\",\"passed\":9,\"games\":[{\"label\":\"original G2-A take policy\",\"ticks\":146,\"scores\":{\"home\":5,\"away\":3},\"detailed\":2,\"compressed\":77,\"handoffs\":[\"CompressedToDetailed\",\"DetailedToCompressed\",\"CompressedToDetailed\",\"DetailedToCompressed\"],\"publicEvents\":272},{\"label\":\"same Career with six real save/load boundaries\",\"ticks\":146,\"scores\":{\"home\":5,\"away\":3},\"detailed\":2,\"compressed\":77,\"handoffs\":[\"CompressedToDetailed\",\"DetailedToCompressed\",\"CompressedToDetailed\",\"DetailedToCompressed\"],\"publicEvents\":272},{\"label\":\"same Career legal contactSwing policy\",\"ticks\":178,\"scores\":{\"home\":6,\"away\":8},\"detailed\":3,\"compressed\":89,\"handoffs\":[\"CompressedToDetailed\",\"DetailedToCompressed\",\"CompressedToDetailed\",\"CompressedToDetailed\"],\"publicEvents\":333}]}"
+      },
+      {
+        "file": "tests/pitch-production-source-scope-test.js",
+        "exitCode": 0,
+        "durationMs": 17656,
+        "passLines": 7,
+        "violations": [],
+        "status": "PASS",
+        "summary": "{\"suite\":\"pitch-production-source-scope\",\"passed\":7,\"failed\":0,\"immutableReferences\":[\"9b9546f94a7286afef474be634fd93c57eb455db\",\"2a4b44a034b714b8de3c8a6897507995ab0f8ccd\",\"674e49115a9ed7d67c69a3023b5a594d41fe584c\"],\"protectedFunctions\":95,\"protectedGlobals\":25,\"rejectedMutations\":131,\"productionExecuted\":false}"
+      }
+    ],
+    "protectedAccessViolations": [],
+    "monitoredReadPathCount": 115,
+    "fullSuiteRun": false,
+    "originalG3ABrowserGeometry": "Original test file unchanged; prior side-by-side geometry replaced by new assertVisual for required stacked decisions; inspectShell reused"
+  },
+  "chrome": {
+    "status": "PASS",
+    "version": {
+      "protocolVersion": "1.3",
+      "product": "Chrome/155.0.8059.85",
+      "revision": "@0e66b94549a8bd85f03fbdf189b752d6e7b63c32",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+      "jsVersion": "15.5.35.25"
+    },
+    "mode": "Installed Chrome, isolated temporary headless profile, native CDP input",
+    "checks": {
+      "sameNaturallyEnteredSavedMatchAsBefore": true,
+      "originalStrategyAvailable": true,
+      "readerFailureRestoresOriginalUI": true,
+      "refreshHasNoGameplayOrRng": true,
+      "strategyToPitchSamePosition": true,
+      "nativeKeyboardTake": true,
+      "staleAndDoubleClickRejected": true,
+      "saveReloadAndOldCallback": true,
+      "heldEnterRejected": true,
+      "nativeKeyboardSwing": true,
+      "paSettledOnceAndNextState": true,
+      "fullPageReload": true,
+      "noBlockingConsoleErrors": true
+    },
+    "viewports": [
+      {
+        "width": 1366,
+        "height": 768,
+        "stage": {
+          "x": 355.75,
+          "y": 210,
+          "width": 751.875,
+          "height": 320,
+          "right": 1107.625,
+          "bottom": 530
+        },
+        "phaserMount": {
+          "x": 355.75,
+          "y": 210,
+          "width": 751.875,
+          "height": 320,
+          "right": 1107.625,
+          "bottom": 530
+        },
+        "frame": {
+          "x": 353.75,
+          "y": 208,
+          "width": 981.25,
+          "height": 324,
+          "bottom": 532
+        },
+        "decision": {
+          "x": 353.75,
+          "y": 540,
+          "width": 981.25,
+          "height": 190,
+          "bottom": 730
+        },
+        "overflow": false,
+        "actors": [
+          {
+            "src": "assets/g3-match/pitcher-neutral.svg",
+            "rect": {
+              "x": 761.75,
+              "y": 331.609375,
+              "width": 45.609375,
+              "height": 108.796875,
+              "right": 807.359375,
+              "bottom": 440.40625
+            },
+            "naturalWidth": 63,
+            "naturalHeight": 150,
+            "transform": "none",
+            "parentTransform": "none",
+            "fit": "contain",
+            "loaded": true
+          },
+          {
+            "src": "assets/g3-match/batter-neutral.svg",
+            "rect": {
+              "x": 378.296875,
+              "y": 248.390625,
+              "width": 176.9375,
+              "height": 300.796875,
+              "right": 555.234375,
+              "bottom": 549.1875
+            },
+            "naturalWidth": 88,
+            "naturalHeight": 150,
+            "transform": "none",
+            "parentTransform": "none",
+            "fit": "contain",
+            "loaded": true
+          },
+          {
+            "src": "assets/g3-match/catcher-neutral.svg",
+            "rect": {
+              "x": 709.125,
+              "y": 443.609375,
+              "width": 120.9375,
+              "height": 115.1875,
+              "right": 830.0625,
+              "bottom": 558.796875
+            },
+            "naturalWidth": 158,
+            "naturalHeight": 150,
+            "transform": "none",
+            "parentTransform": "none",
+            "fit": "contain",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "width": 1600,
+        "height": 900,
+        "stage": {
+          "x": 416.25,
+          "y": 232,
+          "width": 886.75,
+          "height": 406,
+          "right": 1303,
+          "bottom": 638
+        },
+        "phaserMount": {
+          "x": 416.25,
+          "y": 232,
+          "width": 886.75,
+          "height": 406,
+          "right": 1303,
+          "bottom": 638
+        },
+        "frame": {
+          "x": 414.25,
+          "y": 230,
+          "width": 1154.75,
+          "height": 410,
+          "bottom": 640
+        },
+        "decision": {
+          "x": 414.25,
+          "y": 650,
+          "width": 1154.75,
+          "height": 200,
+          "bottom": 850
+        },
+        "overflow": false,
+        "actors": [
+          {
+            "src": "assets/g3-match/pitcher-neutral.svg",
+            "rect": {
+              "x": 895.09375,
+              "y": 386.296875,
+              "width": 57.875,
+              "height": 138.03125,
+              "right": 952.96875,
+              "bottom": 524.328125
+            },
+            "naturalWidth": 63,
+            "naturalHeight": 150,
+            "transform": "none",
+            "parentTransform": "none",
+            "fit": "contain",
+            "loaded": true
+          },
+          {
+            "src": "assets/g3-match/batter-neutral.svg",
+            "rect": {
+              "x": 442.84375,
+              "y": 280.734375,
+              "width": 224.484375,
+              "height": 381.625,
+              "right": 667.328125,
+              "bottom": 662.359375
+            },
+            "naturalWidth": 88,
+            "naturalHeight": 150,
+            "transform": "none",
+            "parentTransform": "none",
+            "fit": "contain",
+            "loaded": true
+          },
+          {
+            "src": "assets/g3-match/catcher-neutral.svg",
+            "rect": {
+              "x": 833.015625,
+              "y": 528.375,
+              "width": 153.453125,
+              "height": 146.15625,
+              "right": 986.46875,
+              "bottom": 674.53125
+            },
+            "naturalWidth": 158,
+            "naturalHeight": 150,
+            "transform": "none",
+            "parentTransform": "none",
+            "fit": "contain",
+            "loaded": true
+          }
+        ]
+      },
+      {
+        "width": 1920,
+        "height": 1080,
+        "stage": {
+          "x": 496.25,
+          "y": 232,
+          "width": 1098.75,
+          "height": 586,
+          "right": 1595,
+          "bottom": 818
+        },
+        "phaserMount": {
+          "x": 496.25,
+          "y": 232,
+          "width": 1098.75,
+          "height": 586,
+          "right": 1595,
+          "bottom": 818
+        },
+        "frame": {
+          "x": 494.25,
+          "y": 230,
+          "width": 1394.75,
+          "height": 590,
+          "bottom": 820
+        },
+        "decision": {
+          "x": 494.25,
+          "y": 830,
+          "width": 1394.75,
+          "height": 200,
+          "bottom": 1030
+        },
+        "overflow": false,
+        "actors": [
+          {
+            "src": "assets/g3-match/pitcher-neutral.svg",
+            "rect": {
+              "x": 1089.5625,
+              "y": 454.6875,
+              "width": 83.546875,
+              "height": 199.234375,
+              "right": 1173.109375,
+              "bottom": 653.921875
+            },
+            "naturalWidth": 63,
+            "naturalHeight": 150,
+            "transform": "none",
+            "parentTransform": "none",
+            "fit": "contain",
+            "loaded": true
+          },
+          {
+            "src": "assets/g3-match/batter-neutral.svg",
+            "rect": {
+              "x": 529.203125,
+              "y": 302.328125,
+              "width": 324.015625,
+              "height": 550.828125,
+              "right": 853.21875,
+              "bottom": 853.15625
+            },
+            "naturalWidth": 88,
+            "naturalHeight": 150,
+            "transform": "none",
+            "parentTransform": "none",
+            "fit": "contain",
+            "loaded": true
+          },
+          {
+            "src": "assets/g3-match/catcher-neutral.svg",
+            "rect": {
+              "x": 1012.65625,
+              "y": 659.78125,
+              "width": 221.5,
+              "height": 210.953125,
+              "right": 1234.15625,
+              "bottom": 870.734375
+            },
+            "naturalWidth": 158,
+            "naturalHeight": 150,
+            "transform": "none",
+            "parentTransform": "none",
+            "fit": "contain",
+            "loaded": true
+          }
+        ]
+      }
+    ],
+    "executedAdapterSha256": "6abf8a436dd14cb611d7b3c0bcbaab0b99972a2709706ec582e6fd2e74ef0dcb",
+    "sourceRequests": [
+      {
+        "name": "index.html",
+        "url": "http://127.0.0.1:8137/",
+        "sha256": "802d0a8fbf9fa966b83f1508efd2eb2807cdf6355dbfaecf4fd689cdb397e273",
+        "bytes": 17742,
+        "fromDiskCache": false
+      },
+      {
+        "name": "match-pitch-decision-ui.css",
+        "url": "http://127.0.0.1:8137/match-pitch-decision-ui.css",
+        "sha256": "b07bba233aa2b637959a6d1235ffcacc349f6682b47f5b556029bcd348111b69",
+        "bytes": 17191,
+        "fromDiskCache": false
+      }
+    ],
+    "completedPA": {
+      "id": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|2|下",
+      "result": "out",
+      "resultApplied": true,
+      "pitchCount": 2,
+      "history": [
+        {
+          "pitchId": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|2|下|pitch-1",
+          "action": "take",
+          "result": "calledStrike"
+        },
+        {
+          "pitchId": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|2|下|pitch-2",
+          "action": "swing",
+          "result": "ballInPlay"
+        }
+      ]
+    },
+    "publicPA": {
+      "eventId": "[\"g2-a-live-public-match-v1\",\"hs-y1-autumn-exhibition\",\"PA_SETTLED\",\"hs-y1-autumn-exhibition|2|下|28\"]",
+      "type": "PA_SETTLED",
+      "matchId": "hs-y1-autumn-exhibition",
+      "paId": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|2|下",
+      "source": {
+        "owner": "simulationLog.plateAppearance/MatchGameRecord.eventRefs",
+        "identity": "hs-y1-autumn-exhibition|2|下|28",
+        "eventId": "hs-y1-autumn-exhibition|2|下|28"
+      },
+      "order": {
+        "sourceSequence": 28,
+        "evidenceOrder": 140000,
+        "basis": "originalSimulationLog"
+      },
+      "facts": {
+        "batterId": "player",
+        "result": "out",
+        "before": {
+          "outs": 1,
+          "scores": {
+            "home": 1,
+            "away": 0
+          },
+          "bases": [
+            "home-school-player-08",
+            null,
+            null
+          ]
+        },
+        "after": {
+          "outs": 2,
+          "scores": {
+            "home": 1,
+            "away": 0
+          },
+          "bases": [
+            "home-school-player-08",
+            null,
+            null
+          ]
+        },
+        "runnerChanges": [
+          {
+            "runnerId": "home-school-player-08",
+            "from": 1,
+            "to": 1
+          },
+          {
+            "runnerId": "player",
+            "from": "batter",
+            "to": "out"
+          }
+        ],
+        "retirements": [
+          {
+            "runnerId": "player",
+            "targetBase": "first",
+            "outType": "batterRunnerBeforeFirst",
+            "sequence": 1,
+            "isBatterRunner": true,
+            "beforeFirst": true
+          }
+        ],
+        "physicalId": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|2|下|pitch-2",
+        "settlementId": null,
+        "attribution": []
+      }
+    },
+    "consoleBlocking": [],
+    "nonBlockingNetworkErrors": [
+      {
+        "method": "Log.entryAdded",
+        "params": {
+          "entry": {
+            "source": "network",
+            "level": "error",
+            "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+            "timestamp": 1792827177450.734,
+            "url": "http://127.0.0.1:8137/favicon.ico",
+            "networkRequestId": "3392.1220"
+          }
+        }
+      },
+      {
+        "method": "Log.entryAdded",
+        "params": {
+          "entry": {
+            "source": "network",
+            "level": "error",
+            "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+            "timestamp": 1792827180313.286,
+            "url": "http://127.0.0.1:8137/favicon.ico",
+            "networkRequestId": "3392.1424"
+          }
+        }
+      }
+    ],
+    "fullMatchPlayedInChrome": false,
+    "fullMatchOnceProof": "G2-B1 original natural full matches, six Save/Reload boundaries and duplicate-final no-op; browser checks a single PA",
+    "ordinaryCareer": {
+      "active": false,
+      "storyY": 376,
+      "storyBottom": 1165.75,
+      "logY": 1183.75,
+      "logBottom": 1261.75,
+      "choicesY": 1283.75,
+      "buttons": [
+        "把手指勾上鐵網，站到最前面看接球",
+        "留在家人身後，沿著每個人的腳步看",
+        "指著最近的接球組，問家人自己能不能試"
+      ],
+      "decisionBorder": "0px",
+      "errors": [],
+      "event": "day1_morning",
+      "status": "PASS"
+    }
+  },
+  "screenshots": [
+    {
+      "path": "docs/g3-visual-baseline-v0.1/before-strategy-1366x768.png",
+      "bytes": 94497,
+      "sha256": "8c20b41297a4db52ebc57911c55ec516d871cbbc61cb1f9fbfb30eab8dbe10f6",
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "path": "docs/g3-visual-baseline-v0.1/before-pitch-1366x768.png",
+      "bytes": 87238,
+      "sha256": "bcc81705fd4bd670d4108de679aebf1eb30b85a63b9a54cafd7e32badba312a5",
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "path": "docs/g3-visual-baseline-v0.1/after-strategy-1366x768.png",
+      "bytes": 222036,
+      "sha256": "cbb7910dd9c21a472423f1f7fdabd7d389f54a1c9939516cb887335b089ca2dd",
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "path": "docs/g3-visual-baseline-v0.1/after-pitch-1366x768.png",
+      "bytes": 215411,
+      "sha256": "6bccd4b6f9427b828dc1cb2da0c28d7326d2c3fc3071f188539b4ec1fba3113f",
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "path": "docs/g3-visual-baseline-v0.1/after-take-1366x768.png",
+      "bytes": 222921,
+      "sha256": "116f101db04c489d4996737c3520c623440aab707ce5d1c74ca523e5b78d9cc3",
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "path": "docs/g3-visual-baseline-v0.1/after-swing-1366x768.png",
+      "bytes": 203587,
+      "sha256": "97eee0748b6842bce317cc746a989f6411c5779eecdac119399ed70733fb65fb",
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "path": "docs/g3-visual-baseline-v0.1/after-pa-1366x768.png",
+      "bytes": 202759,
+      "sha256": "cc2b8dc13f5a1b7cae7f5030e9dfed84240d3f193fbfda9e705657c2cc3600bc",
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "path": "docs/g3-visual-baseline-v0.1/after-reload-1366x768.png",
+      "bytes": 214506,
+      "sha256": "83a0545743963e0b4cc0e999cfd0688dfae932c191ec069021bfcb55a7910312",
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "path": "docs/g3-visual-baseline-v0.1/after-pitch-1600x900.png",
+      "bytes": 245988,
+      "sha256": "dd6caf2c96a59293f9cb0607a1602c0d249e6b85f88b5d085b283229b102065c",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "path": "docs/g3-visual-baseline-v0.1/after-pitch-1920x1080.png",
+      "bytes": 315231,
+      "sha256": "f0df78cd6a877f5dfa6d0ebd0367df2308642b9863c04ca0b4ee41808c05bd54",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "originalG3": [
+    {
+      "path": "tests/g3-a-pc-match-shell-test.cjs",
+      "bytes": 7861,
+      "sha256": "f98485541feb8bcc9911e9f95c68b6e663718b5bef8b276c92cbe131b3d62fec",
+      "unchanged": true
+    },
+    {
+      "path": "docs/g3-a-pc-match-shell-v0.1.md",
+      "bytes": 7224,
+      "sha256": "1789f3fdec99984bc6f4ae1df3319b80a182c45bb8eea5511e25aea07ddafaa3",
+      "unchanged": true
+    },
+    {
+      "path": "docs/g3-a-pc-match-shell-v0.1-evidence.json",
+      "bytes": 34608,
+      "sha256": "814de32c9b39c335b2ff8aa29c2428bf683604e8b4c06ab1d83584c5ed346340",
+      "unchanged": true
+    }
+  ],
+  "accepted": [
+    {
+      "path": "index.html",
+      "unchanged": true
+    },
+    {
+      "path": "tests/g2-b2-source-delta.cjs",
+      "unchanged": true
+    },
+    {
+      "path": "tests/g2-b2-playable-match-decision-test.cjs",
+      "unchanged": true
+    },
+    {
+      "path": "tests/g2-a-live-public-match-bridge-test.cjs",
+      "unchanged": true
+    },
+    {
+      "path": "tests/pitch-production-source-scope.cjs",
+      "unchanged": true
+    },
+    {
+      "path": "docs/g2-b2-playable-match-decision-v0.1.md",
+      "unchanged": true
+    },
+    {
+      "path": "docs/g2-b2-playable-match-decision-v0.1-evidence.json",
+      "unchanged": true
+    }
+  ],
+  "exploration": {
+    "skill": "codebase-memory",
+    "graphToolsExposed": false,
+    "fallback": "Scoped reads of UI, original Match presentation, Public Bridge and relevant tests; no graph coverage claim"
+  },
+  "pending": [
+    "Replace neutral character placeholders with reviewed production art and correct poses",
+    "Refine field perspective, materials, stands and distant scenery",
+    "Keep unavailable portraits/statistics until public sources exist",
+    "Require lawful public coordinate contract before showing actual pitch paths/locations"
+  ],
+  "rawEvidenceDirectory": "C:/Users/User/AppData/Local/Temp/g3-visual-f9fFq2",
+  "rawArtifacts": [
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-visual-f9fFq2\\preflight.json",
+      "bytes": 161694,
+      "sha256": "a86d4eb76fdf30d514aeff606049e21e143ad723c470122f23b36707396e1cd1"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-visual-f9fFq2\\browser-evidence.json",
+      "bytes": 1746112,
+      "sha256": "d1bf2b406ac4234c0cc0ae38ebace2bcb293d8972d01cc4fa83223c800187805"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-visual-f9fFq2\\browser-acceptance.cjs",
+      "bytes": 13525,
+      "sha256": "7d5b1f764cc955b2c5d4032df65145dbac23f75b6d1178ec7df00066c913c19a"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-visual-f9fFq2\\cdp.cjs",
+      "bytes": 2957,
+      "sha256": "6736826c0341e5ec1a56076ab84ac4beb20e39fb42bd0d55339c430d7732ba7f"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-visual-f9fFq2\\before.cjs",
+      "bytes": 1924,
+      "sha256": "95c9c0e37a02f6abc5cb4a1d944c48acf00cc7151f8a552523c65bcd34ee1399"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-visual-f9fFq2\\before-state.json",
+      "bytes": 110429,
+      "sha256": "2359ed3a4e302377ecdd92198256bc5d825963805705e62d213538a76dcc1d16"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-visual-f9fFq2\\ordinary-career-layout.json",
+      "bytes": 413,
+      "sha256": "ec772d2fc500dee66ef62ce78956616fba81e0acc8072448e7275427559a6c13"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-visual-f9fFq2\\regressions\\results.json",
+      "bytes": 3389,
+      "sha256": "a79bbed1ce32fb17709c29d17d6389c803d81bd408596ba36cd403a80b7d2e01"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-visual-f9fFq2\\run-regressions.cjs",
+      "bytes": 2672,
+      "sha256": "d665b265f7c71173af046ba67470c3816b680cb6d6f1cf1679a30a568677679a"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-visual-f9fFq2\\dependency-monitor.mjs",
+      "bytes": 3947,
+      "sha256": "46a2f92c7afea997f285735e36a3610271dedf8652e7cb8dfead077d72a6abb9"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-visual-f9fFq2\\monitor-config.json",
+      "bytes": 1720,
+      "sha256": "822a194adbd10d95064495fd88632edc4c91e8e9aee503338c4e198657f2dfa3"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-visual-f9fFq2\\postflight.json",
+      "bytes": 160466,
+      "sha256": "24abee31c674a838351d5ea7e5549139ff09ae15762e549c8ce2bfa7f0bf311b"
+    }
+  ],
+  "stop": "No Stage/Commit/Push, no G3-B or complete Phaser animation.",
+  "integrity": {
+    "status": "PASS",
+    "checks": {
+      "head": true,
+      "tree": true,
+      "branch": true,
+      "upstream": true,
+      "aheadBehind": true,
+      "exactStatusSet": true,
+      "originalUntrackedPreserved": true,
+      "protectedMetadata": true,
+      "originalG3": true,
+      "accepted": true,
+      "stagedEmpty": true,
+      "index": true,
+      "config": true,
+      "formalRefs": true,
+      "executedJsAndCssMatchDisk": true,
+      "protectedContentAccess": true
+    },
+    "untrackedCount": 1248,
+    "protectedMetadata": [
+      {
+        "path": "tests/fast-check-smoke-test.cjs",
+        "status": " M",
+        "size": 232,
+        "mtimeMs": 1790843210697.4724,
+        "unchanged": true
+      },
+      {
+        "path": "install.ps1",
+        "status": "??",
+        "size": 18481,
+        "mtimeMs": 1790645780931.8794,
+        "unchanged": true
+      },
+      {
+        "path": "docs/first-base-sprint-3-focused-development-evidence.json",
+        "status": "??",
+        "size": 909541,
+        "mtimeMs": 1791695452470.9353,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-baseball-logic-audit-architecture-evidence.json",
+        "status": "??",
+        "size": 22275,
+        "mtimeMs": 1791724873822.1465,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-baseball-logic-audit-evidence.json",
+        "status": "??",
+        "size": 9987073,
+        "mtimeMs": 1791725791525.787,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-baseball-logic-audit-runner.cjs",
+        "status": "??",
+        "size": 51962,
+        "mtimeMs": 1791725789937.2622,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-baseball-logic-validation-audit-v1.md",
+        "status": "??",
+        "size": 39820,
+        "mtimeMs": 1791725790304.0483,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-scorer-recovery-sprint-5-green-evidence.json",
+        "status": "??",
+        "size": 9378500,
+        "mtimeMs": 1791766904157.9292,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json",
+        "status": "??",
+        "size": 11457925,
+        "mtimeMs": 1791767373630.792,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json",
+        "status": "??",
+        "size": 686464,
+        "mtimeMs": 1791788973106.34,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json",
+        "status": "??",
+        "size": 889584,
+        "mtimeMs": 1791767570328.417,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-scorer-recovery-sprint-5-validation.json",
+        "status": "??",
+        "size": 1027011,
+        "mtimeMs": 1791767101736.8584,
+        "unchanged": true
+      }
+    ],
+    "indexSha256": "57c4fd9aeaa8a4955adb8d7d18436c224a1f39ec3f058e83eea6f3a2fd818ea1",
+    "configSha256": "b0b855eb7a6aaa9b0b5e0cde9a3c3cf1c8dabe9bd6a14ac17c6497508ca85403",
+    "gitWrites": "None",
+    "diffScope": [
+      "match-pitch-decision-ui.js",
+      "match-pitch-decision-ui.css"
+    ],
+    "originalWipCheck": "status/size/mtime only; protected contents never read/hash/diff/executed"
+  }
+}

@@ -1,0 +1,10 @@
+"use strict";
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const C=require('./match-contract-evidence-closure-v0.1-capture.cjs'),v=C.json(C.prefix+'verification-evidence.json'),integrity=C.integrity();
+assert.equal(C.fileHash(C.report),v.report.sha256);
+C.capture('closeout',{...integrity,report:v.report,verification:{path:C.prefix+'verification-evidence.json',sha256:C.fileHash(C.prefix+'verification-evidence.json')},findings:{path:C.prefix+'findings-evidence.json',sha256:C.fileHash(C.prefix+'findings-evidence.json')},TaskA:'CONFIRMED canonical88222 / replay',TaskB:'CONFIRMED exact isolated #38 synthetic predicate',TaskC:'UNVERIFIED single predeclared candidate; no extension',old36:'FAIL retained; no new original suite invocation',oldC9:'CONTRACT GAP retained; no re-audit or fix',executions:v.executions,phaseB2Started:false,receiverV2:'DISABLED',L03:'PARTIAL',readyForPhaseB2:'NO',readyForCommit:'NO',readyForSprint10B:'NO',resetCleanStashStageCommitPush:false,stopped:true});
+const files=C.files().filter(C.isNew),hashes=Object.fromEntries(files.map(p=>[p,C.fileHash(p)]));
+C.capture('delivery',{files,hashes,deliverySelfHashExcluded:true,unchangedExistingHashes:1494,changedExistingPaths:[],productionDelta:0,formalTestDelta:0,existingFixtureSeedPinDelta:0,oldCapturesPreserved:true,protectedMetadataUnchanged:true,readyForPhaseB2:'NO',readyForCommit:'NO',readyForSprint10B:'NO',receiverV2:'DISABLED',stopped:true});
+const links=[...fs.readFileSync(path.join(C.root,C.report),'utf8').matchAll(/\]\(([^)]+)\)/g)].map(m=>m[1]);for(const href of links)assert(fs.existsSync(path.resolve(C.root,'docs',href.split('#')[0])),href);
+for(const [p,h] of Object.entries(hashes))assert.equal(C.fileHash(p),h,p);C.integrity();
+console.log(JSON.stringify({report:C.report,existingHashesPreserved:1494,newArtifacts:files.length+1,linksResolved:links.length,indexEmpty:integrity.git.index==='',productionDelta:0,formalTestDelta:0,TaskA:'CONFIRMED',TaskB:'CONFIRMED isolated',TaskC:'UNVERIFIED',readyForPhaseB2:'NO',stopped:true}));

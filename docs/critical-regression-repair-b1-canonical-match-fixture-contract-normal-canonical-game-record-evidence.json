@@ -1,0 +1,2920 @@
+{
+  "task": "Critical Regression Repair B1 — Canonical Match Fixture Contract Validation v0.1",
+  "createdAt": "2026-10-15T03:34:24.860Z",
+  "classification": "CONFIRMED",
+  "sourceChild": "docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-normal-entry-proof-evidence.json",
+  "seed": 88221,
+  "fixtureSha256": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+  "recordSha256": "abb6ee6487c8f39a3e3de3afe945f2494a374d9b78d6c6a6a358c9808dd6cf92",
+  "record": {
+    "version": "match-game-record-v1",
+    "gameId": "hs-y1-autumn-exhibition",
+    "competitionEditionId": null,
+    "competitionEntryId": null,
+    "homeTeamId": "school-development-29d536a2",
+    "awayTeamId": "regional-power-school",
+    "status": "final",
+    "inningsScheduled": 7,
+    "inningsPlayed": 7,
+    "inningLines": [
+      {
+        "inning": 1,
+        "awayRuns": 0,
+        "homeRuns": 1
+      },
+      {
+        "inning": 2,
+        "awayRuns": 0,
+        "homeRuns": 0
+      },
+      {
+        "inning": 3,
+        "awayRuns": 1,
+        "homeRuns": 0
+      },
+      {
+        "inning": 4,
+        "awayRuns": 3,
+        "homeRuns": 0
+      },
+      {
+        "inning": 5,
+        "awayRuns": 0,
+        "homeRuns": 0
+      },
+      {
+        "inning": 6,
+        "awayRuns": 1,
+        "homeRuns": 0
+      },
+      {
+        "inning": 7,
+        "awayRuns": 1,
+        "homeRuns": 0
+      }
+    ],
+    "totals": {
+      "away": {
+        "runs": 6,
+        "hits": 12,
+        "errors": 0
+      },
+      "home": {
+        "runs": 1,
+        "hits": 8,
+        "errors": 0
+      }
+    },
+    "result": {
+      "winnerTeamId": "regional-power-school",
+      "loserTeamId": "school-development-29d536a2",
+      "finalScore": {
+        "away": 6,
+        "home": 1
+      },
+      "tie": false
+    },
+    "playerLines": {
+      "school-development-29d536a2-player-08": {
+        "playerId": "school-development-29d536a2-player-08",
+        "teamId": "school-development-29d536a2",
+        "role": "starter",
+        "position": "CF",
+        "positionAppearances": [
+          {
+            "position": "CF",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|home|school-development-29d536a2-player-08"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 3,
+          "R": 1,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 1,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 1,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-05": {
+        "playerId": "school-development-29d536a2-player-05",
+        "teamId": "school-development-29d536a2",
+        "role": "starter",
+        "position": "3B",
+        "positionAppearances": [
+          {
+            "position": "3B",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|home|school-development-29d536a2-player-05"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-07": {
+        "playerId": "school-development-29d536a2-player-07",
+        "teamId": "school-development-29d536a2",
+        "role": "starter",
+        "position": "LF",
+        "positionAppearances": [
+          {
+            "position": "LF",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|home|school-development-29d536a2-player-07"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 0,
+          "H": 3,
+          "doubles": 2,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-01": {
+        "playerId": "school-development-29d536a2-player-01",
+        "teamId": "school-development-29d536a2",
+        "role": "starter",
+        "position": "P",
+        "positionAppearances": [
+          {
+            "position": "P",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|home|school-development-29d536a2-player-01"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 3,
+          "R": 0,
+          "H": 1,
+          "doubles": 1,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 1,
+          "BB": 1,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 21,
+          "BF": 36,
+          "H": 12,
+          "R": 6,
+          "ER": 6,
+          "BB": 3,
+          "HBP": 0,
+          "SO": 3,
+          "HR": 1,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-02": {
+        "playerId": "school-development-29d536a2-player-02",
+        "teamId": "school-development-29d536a2",
+        "role": "starter",
+        "position": "C",
+        "positionAppearances": [
+          {
+            "position": "C",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|home|school-development-29d536a2-player-02"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 3,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 1,
+          "HBP": 0,
+          "SO": 2,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-09": {
+        "playerId": "school-development-29d536a2-player-09",
+        "teamId": "school-development-29d536a2",
+        "role": "starter",
+        "position": "RF",
+        "positionAppearances": [
+          {
+            "position": "RF",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|home|school-development-29d536a2-player-09"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 0,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-03": {
+        "playerId": "school-development-29d536a2-player-03",
+        "teamId": "school-development-29d536a2",
+        "role": "starter",
+        "position": "1B",
+        "positionAppearances": [
+          {
+            "position": "1B",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|home|school-development-29d536a2-player-03"
+          }
+        ],
+        "batting": {
+          "PA": 3,
+          "AB": 3,
+          "R": 0,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-06": {
+        "playerId": "school-development-29d536a2-player-06",
+        "teamId": "school-development-29d536a2",
+        "role": "starter",
+        "position": "SS",
+        "positionAppearances": [
+          {
+            "position": "SS",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|home|school-development-29d536a2-player-06"
+          }
+        ],
+        "batting": {
+          "PA": 2,
+          "AB": 2,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-04": {
+        "playerId": "school-development-29d536a2-player-04",
+        "teamId": "school-development-29d536a2",
+        "role": "starter",
+        "position": "2B",
+        "positionAppearances": [
+          {
+            "position": "2B",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|home|school-development-29d536a2-player-04"
+          }
+        ],
+        "batting": {
+          "PA": 3,
+          "AB": 2,
+          "R": 0,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 1,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-10": {
+        "playerId": "school-development-29d536a2-player-10",
+        "teamId": "school-development-29d536a2",
+        "role": "bench",
+        "position": "捕手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-11": {
+        "playerId": "school-development-29d536a2-player-11",
+        "teamId": "school-development-29d536a2",
+        "role": "bench",
+        "position": "一壘手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-12": {
+        "playerId": "school-development-29d536a2-player-12",
+        "teamId": "school-development-29d536a2",
+        "role": "bench",
+        "position": "二壘手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-13": {
+        "playerId": "school-development-29d536a2-player-13",
+        "teamId": "school-development-29d536a2",
+        "role": "bench",
+        "position": "游擊手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-14": {
+        "playerId": "school-development-29d536a2-player-14",
+        "teamId": "school-development-29d536a2",
+        "role": "bench",
+        "position": "左外野手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-15": {
+        "playerId": "school-development-29d536a2-player-15",
+        "teamId": "school-development-29d536a2",
+        "role": "bench",
+        "position": "中外野手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-16": {
+        "playerId": "school-development-29d536a2-player-16",
+        "teamId": "school-development-29d536a2",
+        "role": "bench",
+        "position": "投手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-development-29d536a2-player-17": {
+        "playerId": "school-development-29d536a2-player-17",
+        "teamId": "school-development-29d536a2",
+        "role": "bench",
+        "position": "投手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "player": {
+        "playerId": "player",
+        "teamId": "school-development-29d536a2",
+        "role": "substitute",
+        "position": "游擊手",
+        "positionAppearances": [
+          {
+            "position": "游擊手",
+            "role": "substitute",
+            "eventId": "hs-y1-autumn-exhibition|6|下|85"
+          }
+        ],
+        "batting": {
+          "PA": 1,
+          "AB": 1,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-07": {
+        "playerId": "regional-power-school-player-07",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "LF",
+        "positionAppearances": [
+          {
+            "position": "LF",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-07"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 0,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-08": {
+        "playerId": "regional-power-school-player-08",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "CF",
+        "positionAppearances": [
+          {
+            "position": "CF",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-08"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 0,
+          "H": 2,
+          "doubles": 1,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 1,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-09": {
+        "playerId": "regional-power-school-player-09",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "RF",
+        "positionAppearances": [
+          {
+            "position": "RF",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-09"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 3,
+          "R": 0,
+          "H": 1,
+          "doubles": 0,
+          "triples": 1,
+          "HR": 0,
+          "RBI": 1,
+          "BB": 1,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-05": {
+        "playerId": "regional-power-school-player-05",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "3B",
+        "positionAppearances": [
+          {
+            "position": "3B",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-05"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 3,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 1,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-03": {
+        "playerId": "regional-power-school-player-03",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "1B",
+        "positionAppearances": [
+          {
+            "position": "1B",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-03"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 0,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 1,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-01": {
+        "playerId": "regional-power-school-player-01",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "P",
+        "positionAppearances": [
+          {
+            "position": "P",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-01"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 2,
+          "H": 3,
+          "doubles": 2,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 21,
+          "BF": 33,
+          "H": 8,
+          "R": 1,
+          "ER": 1,
+          "BB": 4,
+          "HBP": 0,
+          "SO": 2,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 2,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-02": {
+        "playerId": "regional-power-school-player-02",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "C",
+        "positionAppearances": [
+          {
+            "position": "C",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-02"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 3,
+          "R": 1,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 1,
+          "HBP": 0,
+          "SO": 1,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 1,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-06": {
+        "playerId": "regional-power-school-player-06",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "SS",
+        "positionAppearances": [
+          {
+            "position": "SS",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-06"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 1,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 1,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 1,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-04": {
+        "playerId": "regional-power-school-player-04",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "2B",
+        "positionAppearances": [
+          {
+            "position": "2B",
+            "role": "starter",
+            "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-04"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 2,
+          "H": 2,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 1,
+          "RBI": 3,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 1,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 2,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-10": {
+        "playerId": "regional-power-school-player-10",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "捕手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-11": {
+        "playerId": "regional-power-school-player-11",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "一壘手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-12": {
+        "playerId": "regional-power-school-player-12",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "二壘手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-13": {
+        "playerId": "regional-power-school-player-13",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "游擊手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-14": {
+        "playerId": "regional-power-school-player-14",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "左外野手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-15": {
+        "playerId": "regional-power-school-player-15",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "中外野手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-16": {
+        "playerId": "regional-power-school-player-16",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "投手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-17": {
+        "playerId": "regional-power-school-player-17",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "投手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      }
+    },
+    "eventRefs": [
+      {
+        "eventId": "hs-y1-autumn-exhibition|1|上|0",
+        "type": "matchEntry",
+        "sequence": 0,
+        "inning": 1,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|1|上|1",
+        "type": "plateAppearance",
+        "sequence": 1,
+        "inning": 1,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|1|上|2",
+        "type": "plateAppearance",
+        "sequence": 2,
+        "inning": 1,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|1|上|3",
+        "type": "plateAppearance",
+        "sequence": 3,
+        "inning": 1,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|1|上|4",
+        "type": "plateAppearance",
+        "sequence": 4,
+        "inning": 1,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|1|上|5",
+        "type": "halfInningEnd",
+        "sequence": 5,
+        "inning": 1,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|1|下|6",
+        "type": "sideChange",
+        "sequence": 6,
+        "inning": 1,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|1|下|7",
+        "type": "plateAppearance",
+        "sequence": 7,
+        "inning": 1,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|1|下|8",
+        "type": "plateAppearance",
+        "sequence": 8,
+        "inning": 1,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|1|下|9",
+        "type": "plateAppearance",
+        "sequence": 9,
+        "inning": 1,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|1|下|10",
+        "type": "run",
+        "sequence": 10,
+        "inning": 1,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|1|下|11",
+        "type": "plateAppearance",
+        "sequence": 11,
+        "inning": 1,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|1|下|12",
+        "type": "plateAppearance",
+        "sequence": 12,
+        "inning": 1,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|1|下|13",
+        "type": "plateAppearance",
+        "sequence": 13,
+        "inning": 1,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|1|下|14",
+        "type": "halfInningEnd",
+        "sequence": 14,
+        "inning": 1,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|2|上|15",
+        "type": "sideChange",
+        "sequence": 15,
+        "inning": 2,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|2|上|16",
+        "type": "plateAppearance",
+        "sequence": 16,
+        "inning": 2,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|2|上|17",
+        "type": "plateAppearance",
+        "sequence": 17,
+        "inning": 2,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|2|上|18",
+        "type": "plateAppearance",
+        "sequence": 18,
+        "inning": 2,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|2|上|19",
+        "type": "plateAppearance",
+        "sequence": 19,
+        "inning": 2,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|2|上|20",
+        "type": "halfInningEnd",
+        "sequence": 20,
+        "inning": 2,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|2|下|21",
+        "type": "sideChange",
+        "sequence": 21,
+        "inning": 2,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|2|下|22",
+        "type": "plateAppearance",
+        "sequence": 22,
+        "inning": 2,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|2|下|23",
+        "type": "plateAppearance",
+        "sequence": 23,
+        "inning": 2,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|2|下|24",
+        "type": "plateAppearance",
+        "sequence": 24,
+        "inning": 2,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|2|下|25",
+        "type": "plateAppearance",
+        "sequence": 25,
+        "inning": 2,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|2|下|26",
+        "type": "halfInningEnd",
+        "sequence": 26,
+        "inning": 2,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|3|上|27",
+        "type": "sideChange",
+        "sequence": 27,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|3|上|28",
+        "type": "plateAppearance",
+        "sequence": 28,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|3|上|29",
+        "type": "plateAppearance",
+        "sequence": 29,
+        "inning": 3,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|3|上|30",
+        "type": "plateAppearance",
+        "sequence": 30,
+        "inning": 3,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|3|上|31",
+        "type": "run",
+        "sequence": 31,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|3|上|32",
+        "type": "plateAppearance",
+        "sequence": 32,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|3|上|33",
+        "type": "plateAppearance",
+        "sequence": 33,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|3|上|34",
+        "type": "plateAppearance",
+        "sequence": 34,
+        "inning": 3,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|3|上|35",
+        "type": "halfInningEnd",
+        "sequence": 35,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|3|下|36",
+        "type": "sideChange",
+        "sequence": 36,
+        "inning": 3,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|3|下|37",
+        "type": "plateAppearance",
+        "sequence": 37,
+        "inning": 3,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|3|下|38",
+        "type": "plateAppearance",
+        "sequence": 38,
+        "inning": 3,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|3|下|39",
+        "type": "plateAppearance",
+        "sequence": 39,
+        "inning": 3,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|3|下|40",
+        "type": "plateAppearance",
+        "sequence": 40,
+        "inning": 3,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|3|下|41",
+        "type": "halfInningEnd",
+        "sequence": 41,
+        "inning": 3,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|上|42",
+        "type": "sideChange",
+        "sequence": 42,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|上|43",
+        "type": "plateAppearance",
+        "sequence": 43,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|上|44",
+        "type": "plateAppearance",
+        "sequence": 44,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|上|45",
+        "type": "plateAppearance",
+        "sequence": 45,
+        "inning": 4,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|上|46",
+        "type": "run",
+        "sequence": 46,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|上|47",
+        "type": "run",
+        "sequence": 47,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|上|48",
+        "type": "run",
+        "sequence": 48,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|上|49",
+        "type": "plateAppearance",
+        "sequence": 49,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|上|50",
+        "type": "plateAppearance",
+        "sequence": 50,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|上|51",
+        "type": "plateAppearance",
+        "sequence": 51,
+        "inning": 4,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|上|52",
+        "type": "plateAppearance",
+        "sequence": 52,
+        "inning": 4,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|上|53",
+        "type": "halfInningEnd",
+        "sequence": 53,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|下|54",
+        "type": "sideChange",
+        "sequence": 54,
+        "inning": 4,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|下|55",
+        "type": "plateAppearance",
+        "sequence": 55,
+        "inning": 4,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|下|56",
+        "type": "plateAppearance",
+        "sequence": 56,
+        "inning": 4,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|下|57",
+        "type": "plateAppearance",
+        "sequence": 57,
+        "inning": 4,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|下|58",
+        "type": "plateAppearance",
+        "sequence": 58,
+        "inning": 4,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|下|59",
+        "type": "plateAppearance",
+        "sequence": 59,
+        "inning": 4,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|下|60",
+        "type": "plateAppearance",
+        "sequence": 60,
+        "inning": 4,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|4|下|61",
+        "type": "halfInningEnd",
+        "sequence": 61,
+        "inning": 4,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|5|上|62",
+        "type": "sideChange",
+        "sequence": 62,
+        "inning": 5,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|5|上|63",
+        "type": "plateAppearance",
+        "sequence": 63,
+        "inning": 5,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|5|上|64",
+        "type": "plateAppearance",
+        "sequence": 64,
+        "inning": 5,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|5|上|65",
+        "type": "plateAppearance",
+        "sequence": 65,
+        "inning": 5,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|5|上|66",
+        "type": "plateAppearance",
+        "sequence": 66,
+        "inning": 5,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|5|上|67",
+        "type": "halfInningEnd",
+        "sequence": 67,
+        "inning": 5,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|5|下|68",
+        "type": "sideChange",
+        "sequence": 68,
+        "inning": 5,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|5|下|69",
+        "type": "plateAppearance",
+        "sequence": 69,
+        "inning": 5,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|5|下|70",
+        "type": "plateAppearance",
+        "sequence": 70,
+        "inning": 5,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|5|下|71",
+        "type": "plateAppearance",
+        "sequence": 71,
+        "inning": 5,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|5|下|72",
+        "type": "plateAppearance",
+        "sequence": 72,
+        "inning": 5,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|5|下|73",
+        "type": "halfInningEnd",
+        "sequence": 73,
+        "inning": 5,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|上|74",
+        "type": "sideChange",
+        "sequence": 74,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|上|75",
+        "type": "plateAppearance",
+        "sequence": 75,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|上|76",
+        "type": "plateAppearance",
+        "sequence": 76,
+        "inning": 6,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|上|77",
+        "type": "plateAppearance",
+        "sequence": 77,
+        "inning": 6,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|上|78",
+        "type": "run",
+        "sequence": 78,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|上|79",
+        "type": "plateAppearance",
+        "sequence": 79,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|上|80",
+        "type": "plateAppearance",
+        "sequence": 80,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|上|81",
+        "type": "plateAppearance",
+        "sequence": 81,
+        "inning": 6,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|上|82",
+        "type": "halfInningEnd",
+        "sequence": 82,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|下|83",
+        "type": "sideChange",
+        "sequence": 83,
+        "inning": 6,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|下|84",
+        "type": "plateAppearance",
+        "sequence": 84,
+        "inning": 6,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|下|85",
+        "type": "playerEntry",
+        "sequence": 85,
+        "inning": 6,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|下|86",
+        "type": "meaningfulMomentReached",
+        "sequence": 86,
+        "inning": 6,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|下|87",
+        "type": "plateAppearance",
+        "sequence": 87,
+        "inning": 6,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|下|88",
+        "type": "meaningfulMomentResolved",
+        "sequence": 88,
+        "inning": 6,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|下|89",
+        "type": "plateAppearance",
+        "sequence": 89,
+        "inning": 6,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|下|90",
+        "type": "plateAppearance",
+        "sequence": 90,
+        "inning": 6,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|6|下|91",
+        "type": "halfInningEnd",
+        "sequence": 91,
+        "inning": 6,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|92",
+        "type": "sideChange",
+        "sequence": 92,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|93",
+        "type": "buntPitchResolved",
+        "sequence": 93,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|94",
+        "type": "buntDefensiveFallback",
+        "sequence": 94,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|95",
+        "type": "plateAppearance",
+        "sequence": 95,
+        "inning": 7,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|96",
+        "type": "buntPitchResolved",
+        "sequence": 96,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|97",
+        "type": "buntPitchResolved",
+        "sequence": 97,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|98",
+        "type": "buntDefensiveFallback",
+        "sequence": 98,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|99",
+        "type": "plateAppearance",
+        "sequence": 99,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|100",
+        "type": "plateAppearance",
+        "sequence": 100,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|101",
+        "type": "buntPitchResolved",
+        "sequence": 101,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|102",
+        "type": "buntPitchResolved",
+        "sequence": 102,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|103",
+        "type": "buntDefensiveFallback",
+        "sequence": 103,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|104",
+        "type": "run",
+        "sequence": 104,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|105",
+        "type": "plateAppearance",
+        "sequence": 105,
+        "inning": 7,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|106",
+        "type": "buntPitchResolved",
+        "sequence": 106,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|107",
+        "type": "buntPitchResolved",
+        "sequence": 107,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|108",
+        "type": "plateAppearance",
+        "sequence": 108,
+        "inning": 7,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-development-29d536a2-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|109",
+        "type": "buntPitchResolved",
+        "sequence": 109,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|上|110",
+        "type": "halfInningEnd",
+        "sequence": 110,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|下|111",
+        "type": "sideChange",
+        "sequence": 111,
+        "inning": 7,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|下|112",
+        "type": "plateAppearance",
+        "sequence": 112,
+        "inning": 7,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|下|113",
+        "type": "plateAppearance",
+        "sequence": 113,
+        "inning": 7,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|下|114",
+        "type": "plateAppearance",
+        "sequence": 114,
+        "inning": 7,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|下|115",
+        "type": "plateAppearance",
+        "sequence": 115,
+        "inning": 7,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|下|116",
+        "type": "plateAppearance",
+        "sequence": 116,
+        "inning": 7,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|下|117",
+        "type": "halfInningEnd",
+        "sequence": 117,
+        "inning": 7,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-autumn-exhibition|7|終|118",
+        "type": "gameEnd",
+        "sequence": 118,
+        "inning": 7,
+        "half": "終"
+      }
+    ],
+    "integrity": {
+      "checked": true,
+      "issues": []
+    },
+    "finalizedAtEventId": "hs-y1-autumn-exhibition|7|終|118"
+  },
+  "started": false,
+  "actualAppearance": "lateGameAppearance",
+  "original36Passed": false
+}

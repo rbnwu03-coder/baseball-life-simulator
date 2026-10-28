@@ -1,0 +1,20 @@
+{
+  "file": "g2-a-live-public-match-bridge-test.cjs",
+  "status": "PASS",
+  "nodeAssertions": 616,
+  "customChecks": null,
+  "entry": true,
+  "elapsedMs": 10819,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/g2-a-live-public-match-bridge-test.cjs"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "stdout": "PASS CommonJS API and unavailable source have explicit statuses\nPASS Exact additive loader and guard migration preserve all original source validation\nPASS Case A before original decision has no fabricated PA or count\nPASS Case A actual pitch decision identity/routes and immutable public schema\nPASS Illegal route cannot bypass the original decision entry\nPASS Stale Match/PA/Pitch identity rejects without changing source\nPASS Unexecuted pending pitch and private AI intent never enter public output\nPASS Case A submitted decision respects original reveal boundary\nPASS Future scoreboard/physical facts cannot leak across cursor\nPASS Case A original SS to 1B execution, legal out, PO/A, PA and Record project together\nPASS Already completed decision cannot settle a second time\nPASS Repeated source event identities deduplicate; conflicting evidence rejects\nPASS Executed but unobserved pitch fields stay absent\nPASS Decision lifecycle order survives settlement with stable original identities\nPASS Reordered source journal and conflicting completed actions reject\nPASS Case A real save/load retains projection without settlement replay\nPASS Case A next legal PA changes batter without reusing stale current PA identity\nPASS Pending same-ball execution never appears as official settlement\nPASS Missing visible outs/base facts remain unavailable without plausible defaults\nPASS Case B original outfield fixture before execution has no public result\nPASS Case B projects actual G1 owner result and canonical record\nPASS Case B duplicate original callback and real Save/Load preserve result\nPASS Case B legal next PA projects original batting-order continuation\nPASS Case C original outfield fixture before execution has no public result\nPASS Case C projects actual G1 owner result and canonical record\nPASS Case C duplicate original callback and real Save/Load preserve result\nPASS Case C legal next PA projects original batting-order continuation\nPASS Case D nonterminal original pitch updates public count and survives real reload\nPASS Case D original third-strike catch, catcher PO, pitcher SO and original PA\nPASS Case D real Save/Load and next PA never replay catcher or pitcher credit\nPASS Lost retained pitch evidence is unavailable, never reconstructed from the PA result\nPASS Scoreboard/Record mismatch and missing provenance fail closed\nPASS Consumer presentation advance never submits or repeats gameplay\nPASS Normal public Career match supports bridge reads, half changes, final Record, reload and unique settlement\n{\"suite\":\"g2-a-live-public-match-bridge\",\"status\":\"PASS\",\"passed\":34,\"cases\":[\"A\",\"B\",\"C\",\"D\"],\"normalGame\":true}\n",
+  "stderr": "",
+  "error": null,
+  "timedOut": false
+}

@@ -1,0 +1,408 @@
+{
+  "review": "Source Freeze Contract Reconciliation v0.1 Phase A",
+  "createdAt": "2026-10-14T14:23:00.951Z",
+  "suiteCandidates": [
+    {
+      "suite": "tests/pitch-tactical-decision-production-integration-test.js",
+      "testSha256": "ee6c443aad8093e3f3d14802779eda6a05b50297638ee32657febc1040c0de82",
+      "originalPinnedAuthority": {
+        "commit": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+        "saveHash": "d093c730a4082a05050476a110553204e5234d72596b3cb449423f56566fe592",
+        "indexHash": null
+      },
+      "conflictingClauses": {
+        "guardNumber": 8,
+        "sourceRange": [
+          162,
+          172
+        ],
+        "originalSaveRule": "complete normalized save.js equality",
+        "index": false
+      },
+      "proposedReplacement": {
+        "save": "else if (file === 'save.js') require('./receiver-source-save-authorized-delta.cjs').assertReceiverSourceSaveAuthorizedDelta(current, baseline, fs.readFileSync(path.join(root, 'receiver-source-snapshot.js'), 'utf8'));",
+        "index": null,
+        "implemented": false
+      },
+      "preservedProtections": [
+        "All behavior assertions, fixtures, seeds and suite ordering outside explicit comparison branches",
+        "Sequence ON/OFF, identity/history/lifecycle, no terminal leakage",
+        "No RNG/source mutation, no production selector/arbitration consumer",
+        "Reload and persisted source truth; no new tactical Save schema",
+        "Original script scope and every other original source comparison",
+        "Each original pinned commit literal; no current-index/Save whitelist"
+      ],
+      "additionalNegativeTests": [
+        "Remove/move pre-default raw guard",
+        "Remove Source pre-write serializer/validation",
+        "Change ordinary literal JSON writer or SAVE_KEY",
+        "Downgrade Source16 / broaden unknown-version migration",
+        "Change Load/Delete/Career admission or early Player commit",
+        "Add Storage writer/hook",
+        "Change reviewed metadata adapter, RNG or candidate consumer",
+        "Alter original caller pinned literal / other source guard branch"
+      ],
+      "risk": [
+        "Equal pinned bytes do not authorize changing this suite",
+        "Preserve exact branch restoration/source hash so wrong pinned ref cannot be hidden by hash equivalence",
+        "Existing v1 ordinary metadata raw pre-write guard must not be deleted",
+        "Unrun behavior clauses may reveal new independent failures"
+      ],
+      "authorizationStatus": "AUTHORIZED CANDIDATE",
+      "formalRevisionPermissionReceived": false
+    },
+    {
+      "suite": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "testSha256": "1d295143fb833ad30ea58469eb2bfe8c3e6fd3451f5fb29434c15fdd3b2ecbcb",
+      "originalPinnedAuthority": {
+        "commit": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+        "saveHash": "d093c730a4082a05050476a110553204e5234d72596b3cb449423f56566fe592",
+        "indexHash": null
+      },
+      "conflictingClauses": {
+        "guardNumber": 8,
+        "sourceRange": [
+          150,
+          160
+        ],
+        "originalSaveRule": "complete normalized save.js equality",
+        "index": false
+      },
+      "proposedReplacement": {
+        "save": "else if (file === 'save.js') require('./receiver-source-save-authorized-delta.cjs').assertReceiverSourceSaveAuthorizedDelta(current, baseline, fs.readFileSync(path.join(root, 'receiver-source-snapshot.js'), 'utf8'));",
+        "index": null,
+        "implemented": false
+      },
+      "preservedProtections": [
+        "All behavior assertions, fixtures, seeds and suite ordering outside explicit comparison branches",
+        "Sequence ON/OFF, identity/history/lifecycle, no terminal leakage",
+        "No RNG/source mutation, no production selector/arbitration consumer",
+        "Reload and persisted source truth; no new tactical Save schema",
+        "Original script scope and every other original source comparison",
+        "Each original pinned commit literal; no current-index/Save whitelist"
+      ],
+      "additionalNegativeTests": [
+        "Remove/move pre-default raw guard",
+        "Remove Source pre-write serializer/validation",
+        "Change ordinary literal JSON writer or SAVE_KEY",
+        "Downgrade Source16 / broaden unknown-version migration",
+        "Change Load/Delete/Career admission or early Player commit",
+        "Add Storage writer/hook",
+        "Change reviewed metadata adapter, RNG or candidate consumer",
+        "Alter original caller pinned literal / other source guard branch"
+      ],
+      "risk": [
+        "Equal pinned bytes do not authorize changing this suite",
+        "Preserve exact branch restoration/source hash so wrong pinned ref cannot be hidden by hash equivalence",
+        "Existing v1 ordinary metadata raw pre-write guard must not be deleted",
+        "Unrun behavior clauses may reveal new independent failures"
+      ],
+      "authorizationStatus": "AUTHORIZED CANDIDATE",
+      "formalRevisionPermissionReceived": false
+    },
+    {
+      "suite": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "testSha256": "09325b921c7b2b161f7177d9bbad74fb2c5504a33cab0c11e6bd7a8f69e18265",
+      "originalPinnedAuthority": {
+        "commit": "9b9546f94a7286afef474be634fd93c57eb455db",
+        "saveHash": "d093c730a4082a05050476a110553204e5234d72596b3cb449423f56566fe592",
+        "indexHash": null
+      },
+      "conflictingClauses": {
+        "guardNumber": 8,
+        "sourceRange": [
+          175,
+          186
+        ],
+        "originalSaveRule": "complete normalized save.js equality",
+        "index": false
+      },
+      "proposedReplacement": {
+        "save": "else if (file === 'save.js') require('./receiver-source-save-authorized-delta.cjs').assertReceiverSourceSaveAuthorizedDelta(current, baseline, fs.readFileSync(path.join(root, 'receiver-source-snapshot.js'), 'utf8'));",
+        "index": null,
+        "implemented": false
+      },
+      "preservedProtections": [
+        "All behavior assertions, fixtures, seeds and suite ordering outside explicit comparison branches",
+        "Sequence ON/OFF, identity/history/lifecycle, no terminal leakage",
+        "No RNG/source mutation, no production selector/arbitration consumer",
+        "Reload and persisted source truth; no new tactical Save schema",
+        "Original script scope and every other original source comparison",
+        "Each original pinned commit literal; no current-index/Save whitelist"
+      ],
+      "additionalNegativeTests": [
+        "Remove/move pre-default raw guard",
+        "Remove Source pre-write serializer/validation",
+        "Change ordinary literal JSON writer or SAVE_KEY",
+        "Downgrade Source16 / broaden unknown-version migration",
+        "Change Load/Delete/Career admission or early Player commit",
+        "Add Storage writer/hook",
+        "Change reviewed metadata adapter, RNG or candidate consumer",
+        "Alter original caller pinned literal / other source guard branch"
+      ],
+      "risk": [
+        "Equal pinned bytes do not authorize changing this suite",
+        "Preserve exact branch restoration/source hash so wrong pinned ref cannot be hidden by hash equivalence",
+        "Existing v1 ordinary metadata raw pre-write guard must not be deleted",
+        "Unrun behavior clauses may reveal new independent failures"
+      ],
+      "authorizationStatus": "AUTHORIZED CANDIDATE",
+      "formalRevisionPermissionReceived": false
+    },
+    {
+      "suite": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "testSha256": "c72b5293de3c28578e2bf994aeb89e3fb42c378bf44121c6362c0a24e47042a4",
+      "originalPinnedAuthority": {
+        "commit": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+        "saveHash": "d093c730a4082a05050476a110553204e5234d72596b3cb449423f56566fe592",
+        "indexHash": "01a1267379d1732437452e44f1eb49ac49a3a9565ee9f3dda820b906c498d71b"
+      },
+      "conflictingClauses": {
+        "guardNumber": 10,
+        "sourceRange": [
+          209,
+          221
+        ],
+        "originalSaveRule": "complete normalized save.js equality",
+        "index": true
+      },
+      "proposedReplacement": {
+        "save": "else if (file === 'save.js') require('./receiver-source-save-authorized-delta.cjs').assertReceiverSourceSaveAuthorizedDelta(current, baseline, fs.readFileSync(path.join(root, 'receiver-source-snapshot.js'), 'utf8'));",
+        "index": "else if (file === 'index.html') require('./receiver-source-index-authorized-wiring.cjs').assertReceiverSourceIndexAuthorizedWiring(current, baseline, fs.readFileSync(path.join(root, 'receiver-source-snapshot.js'), 'utf8'));",
+        "implemented": false
+      },
+      "preservedProtections": [
+        "All behavior assertions, fixtures, seeds and suite ordering outside explicit comparison branches",
+        "Sequence ON/OFF, identity/history/lifecycle, no terminal leakage",
+        "No RNG/source mutation, no production selector/arbitration consumer",
+        "Reload and persisted source truth; no new tactical Save schema",
+        "Original script scope and every other original source comparison",
+        "Each original pinned commit literal; no current-index/Save whitelist"
+      ],
+      "additionalNegativeTests": [
+        "Remove/move pre-default raw guard",
+        "Remove Source pre-write serializer/validation",
+        "Change ordinary literal JSON writer or SAVE_KEY",
+        "Downgrade Source16 / broaden unknown-version migration",
+        "Change Load/Delete/Career admission or early Player commit",
+        "Add Storage writer/hook",
+        "Change reviewed metadata adapter, RNG or candidate consumer",
+        "Alter original caller pinned literal / other source guard branch",
+        "Second source tag",
+        "Missing source tag",
+        "Move source or old owner tag",
+        "Add async/defer/type or alter src/query",
+        "Add any other module",
+        "Change DOM/style/inline handler/link/outside whitespace",
+        "Delete/duplicate/reorder old Match/Pitch/Save/controller tags",
+        "Changed original pinned authority",
+        "Source adapter changes Storage/RNG/candidate authority or reviewed hash"
+      ],
+      "risk": [
+        "Equal pinned bytes do not authorize changing this suite",
+        "Preserve exact branch restoration/source hash so wrong pinned ref cannot be hidden by hash equivalence",
+        "Existing v1 ordinary metadata raw pre-write guard must not be deleted",
+        "Unrun behavior clauses may reveal new independent failures"
+      ],
+      "authorizationStatus": "AUTHORIZED CANDIDATE",
+      "formalRevisionPermissionReceived": false
+    },
+    {
+      "suite": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "testSha256": "f6c7820aedf67a91d2cefb88a2eef09ac5ff06b399496369f8076ec370dcc4f9",
+      "originalPinnedAuthority": {
+        "commit": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+        "saveHash": "d093c730a4082a05050476a110553204e5234d72596b3cb449423f56566fe592",
+        "indexHash": "01a1267379d1732437452e44f1eb49ac49a3a9565ee9f3dda820b906c498d71b"
+      },
+      "conflictingClauses": {
+        "guardNumber": 14,
+        "sourceRange": [
+          260,
+          272
+        ],
+        "originalSaveRule": "complete normalized save.js equality",
+        "index": true
+      },
+      "proposedReplacement": {
+        "save": "else if (file === 'save.js') require('./receiver-source-save-authorized-delta.cjs').assertReceiverSourceSaveAuthorizedDelta(current, baseline, fs.readFileSync(path.join(root, 'receiver-source-snapshot.js'), 'utf8'));",
+        "index": "else if (file === 'index.html') require('./receiver-source-index-authorized-wiring.cjs').assertReceiverSourceIndexAuthorizedWiring(current, baseline, fs.readFileSync(path.join(root, 'receiver-source-snapshot.js'), 'utf8'));",
+        "implemented": false
+      },
+      "preservedProtections": [
+        "All behavior assertions, fixtures, seeds and suite ordering outside explicit comparison branches",
+        "Sequence ON/OFF, identity/history/lifecycle, no terminal leakage",
+        "No RNG/source mutation, no production selector/arbitration consumer",
+        "Reload and persisted source truth; no new tactical Save schema",
+        "Original script scope and every other original source comparison",
+        "Each original pinned commit literal; no current-index/Save whitelist"
+      ],
+      "additionalNegativeTests": [
+        "Remove/move pre-default raw guard",
+        "Remove Source pre-write serializer/validation",
+        "Change ordinary literal JSON writer or SAVE_KEY",
+        "Downgrade Source16 / broaden unknown-version migration",
+        "Change Load/Delete/Career admission or early Player commit",
+        "Add Storage writer/hook",
+        "Change reviewed metadata adapter, RNG or candidate consumer",
+        "Alter original caller pinned literal / other source guard branch",
+        "Second source tag",
+        "Missing source tag",
+        "Move source or old owner tag",
+        "Add async/defer/type or alter src/query",
+        "Add any other module",
+        "Change DOM/style/inline handler/link/outside whitespace",
+        "Delete/duplicate/reorder old Match/Pitch/Save/controller tags",
+        "Changed original pinned authority",
+        "Source adapter changes Storage/RNG/candidate authority or reviewed hash"
+      ],
+      "risk": [
+        "Equal pinned bytes do not authorize changing this suite",
+        "Preserve exact branch restoration/source hash so wrong pinned ref cannot be hidden by hash equivalence",
+        "Existing v1 ordinary metadata raw pre-write guard must not be deleted",
+        "Unrun behavior clauses may reveal new independent failures"
+      ],
+      "authorizationStatus": "AUTHORIZED CANDIDATE",
+      "formalRevisionPermissionReceived": false
+    }
+  ],
+  "indexDesign": {
+    "status": "PROPOSAL ONLY; not implemented",
+    "contractName": "receiver-source-index-wiring-delta-v1",
+    "proposedHelper": "tests/receiver-source-index-authorized-wiring.cjs",
+    "originalPinnedIndexNormalizedSha256": "01a1267379d1732437452e44f1eb49ac49a3a9565ee9f3dda820b906c498d71b",
+    "exactUniqueAnchor": "    <script src=\"batted-ball-tag-up-execution.js\"></script>\n    <script src=\"match-situation-lifecycle.js\"></script>\n",
+    "proposedExpectedAnchor": "    <script src=\"batted-ball-tag-up-execution.js\"></script>\n    <script src=\"receiver-source-snapshot.js\"></script>\n    <script src=\"match-situation-lifecycle.js\"></script>\n",
+    "algorithm": [
+      "Validate original pinned normalized index hash and unique original anchor",
+      "Build expected source only from original pinned source plus exact one-line insertion",
+      "Compare complete normalized current index with expected; keep every DOM/attribute/old tag/outside byte frozen",
+      "Check unique new source tag, all original tags/order and availability before Lifecycle/Save/script/controller",
+      "Reuse existing reviewed metadata adapter boundary/freeze; do not add modules or consumers"
+    ],
+    "requiredNegativeMutations": [
+      "Second source tag",
+      "Missing source tag",
+      "Move source or old owner tag",
+      "Add async/defer/type or alter src/query",
+      "Add any other module",
+      "Change DOM/style/inline handler/link/outside whitespace",
+      "Delete/duplicate/reorder old Match/Pitch/Save/controller tags",
+      "Changed original pinned authority",
+      "Source adapter changes Storage/RNG/candidate authority or reviewed hash"
+    ]
+  },
+  "batchRecommendation": "One bounded authorization covering five Save branches and two Index branches; each caller authority and protection stays distinct.",
+  "candidateFiles": [
+    "tests/pitch-tactical-decision-production-integration-test.js",
+    "tests/pitch-tactical-interpretation-production-integration-test.js",
+    "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+    "tests/pitch-tactical-intent-evidence-integration-test.js",
+    "tests/pitch-tactical-signal-projection-production-integration-test.js",
+    "tests/receiver-source-index-authorized-wiring.cjs",
+    "tests/source-freeze-reconciliation-exact-contract-test.cjs",
+    "tests/entry-safe-runner.cjs"
+  ],
+  "newCheckerOrTestsImplemented": false,
+  "existingSaveCheckerUnmodified": true,
+  "runnerPlan": {
+    "mainMode": "standalone for all five; exported main is not exported run()",
+    "registry": "One of five is presently registered; add four reviewed entries only if CLI use is authorized, or explicit reviewed API specs; do not assume support from equal hashes.",
+    "capturePathConstraint": "Current API accepts docs/test-infrastructure-sprint-0.1-*.json. Reuse with new phase-b/run IDs and link from PhaseB report; widening prefix requires explicit separate scope.",
+    "limits": "Five PhaseB per-suite historical full limits 180000ms/30000000 bytes; keep explicit nested Git8MiB; no global change/full manifest invocation.",
+    "dependencies": "Declare original helper/root sources including index.html, Save, Source adapter and suite/runner/checker hashes."
+  },
+  "wordingReview": {
+    "issue": "PhaseA pre-write table says Source branch detached serialization/validation. Existing R6 v1 also validates ordinary raw metadata before the unchanged literal writer.",
+    "recommendation": "Authorize reuse of exact v1 including ordinary metadata validation; detached Source serialization stays Source branch only. Removing the ordinary raw guard is NOT AUTHORIZED by this review.",
+    "manualConfirmationNeededForScope": true
+  },
+  "unsupportedAlternatives": [
+    {
+      "proposal": "Current Save/index full-file whitelist, drop freeze, new arbitrary module or consumer, change pins/fixtures/seeds",
+      "status": "NOT AUTHORIZED"
+    },
+    {
+      "proposal": "Automatically include every Source module or claim all runtime inputs are non-interfering",
+      "status": "NOT AUTHORIZED"
+    },
+    {
+      "proposal": "Disable ordinary raw metadata validation under an only-Source wording interpretation",
+      "status": "NOT AUTHORIZED"
+    }
+  ],
+  "boundedGlobalOwnerSites": [
+    {
+      "file": "receiver-source-snapshot.js",
+      "line": 6,
+      "text": "  const api = factory(rosterOwner); root.ReceiverSourceSnapshot = api;"
+    }
+  ],
+  "inheritedEvidence": [
+    {
+      "file": "docs/receiver-execution-v2-sprint-10a3b-r6-authorized-delta-contract-evidence.json",
+      "sha256": "b7aab4aee2011911b8f30cd97014e03005a19d9c816f5b28853f9403a472ccf0",
+      "rerunThisPhase": false
+    },
+    {
+      "file": "docs/test-infrastructure-sprint-0.1-r6-exact-checker-accepted-evidence.json",
+      "sha256": "f4d0694889aa7611170d943b8c45fa76096d23fec91ba02e239fb8b705df642e",
+      "rerunThisPhase": false
+    },
+    {
+      "file": "docs/receiver-execution-v2-sprint-10a3b-r6-save-boundary-evidence.json",
+      "sha256": "3c7b65ea65e2f4c94be75ff39deeb8bedca56aa76968edc7d86632256299230a",
+      "rerunThisPhase": false
+    },
+    {
+      "file": "docs/receiver-execution-v2-sprint-10a3b-r6-r1-save-focused-evidence.json",
+      "sha256": "46e83d6c4972b634c288bd067b5d5c2cc4abd5107ec870ef2a2d3a973c646338",
+      "rerunThisPhase": false
+    },
+    {
+      "file": "docs/receiver-execution-v2-sprint-10a3b-r6-r3-guard-evidence.json",
+      "sha256": "12243bab9296a47818346e4502a6fa851ca01ddb5708070d7b6851ebe8e011df",
+      "rerunThisPhase": false
+    },
+    {
+      "file": "docs/receiver-execution-v2-sprint-10a3b-r6-legacy-evidence.json",
+      "sha256": "334d567825a98719e8ac61be813ec51fc433f9e4f73a4aef4aa2d2ee867a39b6",
+      "rerunThisPhase": false
+    },
+    {
+      "file": "docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-accepted-evidence.json",
+      "sha256": "3d4d7fb70249a726182395a360b2e1f8edc4357d7fd71ebd02e22cf6b53b1c21",
+      "rerunThisPhase": false
+    }
+  ],
+  "unverified": [
+    "Interpretation/Intent/Signal full current suites",
+    "Actual full-browser network/loading lifecycle",
+    "All remaining repository members",
+    "Universal arbitrary runtime/global collision safety"
+  ],
+  "stopConditions": [
+    "Baseline/WIP/source/capture mutation",
+    "Different pinned bytes/hash or extra index delta",
+    "Unsupported/unverified entry evidence",
+    "Mutation checker accepts any unrelated source/wiring change",
+    "Different/new error during future complete suite run; stop and capture without broadening scope"
+  ],
+  "reconciliationPassed": false,
+  "readyForCommit": "NO",
+  "readyForSprint10B": "NO",
+  "phaseBStarted": false,
+  "safety": {
+    "preservedHashes": 1259,
+    "git": {
+      "branch": "main",
+      "head": "ab3117653945de0b7013636187c446276a96e634",
+      "main": "ab3117653945de0b7013636187c446276a96e634",
+      "originMain": "ab3117653945de0b7013636187c446276a96e634",
+      "index": "",
+      "status": " M index.html\n M match-situation-lifecycle.js\n M save.js\n M script.js\n M tests/fast-check-smoke-test.cjs\n M tests/pitch-sequence-state-production-integration-test.js\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/infield-baseball-logic-audit-architecture-evidence.json\n?? docs/infield-baseball-logic-audit-evidence.json\n?? docs/infield-baseball-logic-audit-runner.cjs\n?? docs/infield-baseball-logic-validation-audit-v1.md\n?? docs/infield-scorer-recovery-sprint-5-green-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json\n?? docs/infield-scorer-recovery-sprint-5-validation.json\n?? docs/receiver-execution-v2-production-snapshot-save-guard-sprint-10a3b.md\n?? docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-lifecycle-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-observed-validation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-current-source-verification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-initial-test-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r1-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-timeout-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-architecture-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout.md\n?? docs/receiver-execution-v2-sprint-10a3b-r2-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-policy-specification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-extra-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gradient-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-guard-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r3-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-original-validator.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-reproduction-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-baseline-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-comparison-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-current-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-green-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-green-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-career-save-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-compatibility-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-audit-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r4-development-focused-1-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-development-focused-2-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-helper-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-helper-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-baseline180-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-current-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-r3-wip-diagnostic-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-runtime-comparison-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-full-repository-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gates-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gradient-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gradient-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-legacy-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-production-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-r3-guard-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-r3-guard-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-red-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-related-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-s8-cross-runtime-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-s8-cross-runtime-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-save-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-before-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-change-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-stdout-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-architecture-extra-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-coverage-paths-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-entrypoint-search-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-freeze-comparisons-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-inherited-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-ownership-contract-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-pitch-red-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-save-ownership-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r6-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-authorized-delta-contract-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-bbp-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-coverage-paths-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-development-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-exact-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-independent-review-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-manifest-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-pitch-green-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r1-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r3-guard-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r4-dependency-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-receiver-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-s8-cross-runtime-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-save-boundary-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-save-ownership-contract.md\n?? docs/receiver-execution-v2-sprint-10a3b-r6-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-confirmation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-witness-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-related-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-audit.cjs\n?? docs/source-freeze-contract-reconciliation-v0.1-baseline-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-source-review-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-source-review.cjs\n?? docs/test-infrastructure-sprint-0.1-accepted-assertion-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-assertion-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-async-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-async-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-buffer-isolation-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-buffer-isolation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-caught-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-caught-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-custom-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-custom-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-custom-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-custom-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-custom-unreviewed-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-custom-unreviewed-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-export-not-called-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-export-not-called-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-exported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-exported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-focused-driver-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-focused-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-gates-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-git-compatible-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-git-compatible-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-git-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-git-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-main-skipped-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-main-skipped-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-mixed-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-mixed-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-runtime-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-runtime-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-spawn-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-spawn-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-standalone-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-standalone-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-timeout-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-timeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-zero-summary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-zero-summary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-architecture-coverage-evidence.json\n?? docs/test-infrastructure-sprint-0.1-baseline-evidence.json\n?? docs/test-infrastructure-sprint-0.1-capture.cjs\n?? docs/test-infrastructure-sprint-0.1-closeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-contextual-status-panel-accepted-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-contextual-status-panel-accepted-evidence.json\n?? docs/test-infrastructure-sprint-0.1-contextual-status-panel-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-contextual-status-panel-evidence.json\n?? docs/test-infrastructure-sprint-0.1-contextual-status-panel-final-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-contextual-status-panel-final-evidence.json\n?? docs/test-infrastructure-sprint-0.1-delivery-evidence.json\n?? docs/test-infrastructure-sprint-0.1-dependency-supplement-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-assertion-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-assertion-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-async-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-async-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-buffer-isolation-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-buffer-isolation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-caught-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-caught-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-export-not-called-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-export-not-called-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-exported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-exported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-git-compatible-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-git-compatible-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-git-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-git-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-main-skipped-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-main-skipped-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-recovery-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-runtime-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-runtime-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-spawn-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-spawn-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-standalone-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-standalone-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-timeout-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-timeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-zero-summary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-zero-summary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-assertion-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-assertion-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-async-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-async-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-buffer-isolation-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-buffer-isolation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-caught-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-caught-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-driver-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-export-not-called-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-export-not-called-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-exported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-exported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-focused-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-git-compatible-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-git-compatible-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-git-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-git-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-main-skipped-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-main-skipped-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-runtime-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-runtime-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-spawn-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-spawn-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-standalone-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-standalone-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-timeout-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-timeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-zero-summary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-zero-summary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-assertion-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-assertion-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-async-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-async-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-buffer-isolation-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-buffer-isolation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-caught-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-caught-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-unreviewed-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-unreviewed-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-driver-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-export-not-called-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-export-not-called-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-exported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-exported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-focused-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-git-compatible-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-git-compatible-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-git-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-git-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-main-skipped-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-main-skipped-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-runtime-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-runtime-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-spawn-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-spawn-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-standalone-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-standalone-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-timeout-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-timeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-zero-summary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-zero-summary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-entry-safe-runner.md\n?? docs/test-infrastructure-sprint-0.1-extra-coverage-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-assertion-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-assertion-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-async-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-async-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-buffer-isolation-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-buffer-isolation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-caught-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-caught-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-unreviewed-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-unreviewed-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-export-not-called-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-export-not-called-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-exported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-exported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-focused-driver-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-focused-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-gates-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-git-compatible-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-git-compatible-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-git-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-git-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-main-skipped-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-main-skipped-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-runtime-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-runtime-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-spawn-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-spawn-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-standalone-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-standalone-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-timeout-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-timeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-zero-summary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-zero-summary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/\n?? docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/\n?? docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/\n?? docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/\n?? docs/test-infrastructure-sprint-0.1-fixtures-njh333/\n?? docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-accepted-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-accepted-evidence.json\n?? docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-evidence.json\n?? docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-final-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-final-evidence.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-accepted-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-accepted-evidence.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-evidence.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-final-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-final-evidence.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-accepted-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-accepted-evidence.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-evidence.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-final-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-final-evidence.json\n?? docs/test-infrastructure-sprint-0.1-r6-exact-checker-accepted-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-r6-exact-checker-accepted-evidence.json\n?? docs/test-infrastructure-sprint-0.1-r6-exact-checker-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-r6-exact-checker-evidence.json\n?? docs/test-infrastructure-sprint-0.1-r6-exact-checker-final-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-r6-exact-checker-final-evidence.json\n?? docs/test-infrastructure-sprint-0.1-source-change-evidence.json\n?? docs/test-infrastructure-sprint-0.1-targets-evidence.json\n?? docs/test-infrastructure-sprint-0.1-validation-evidence.json\n?? docs/test-reliability-audit-v0.1-architecture-evidence.json\n?? docs/test-reliability-audit-v0.1-baseline-evidence.json\n?? docs/test-reliability-audit-v0.1-closeout-evidence.json\n?? docs/test-reliability-audit-v0.1-coverage-evidence.json\n?? docs/test-reliability-audit-v0.1-delivery-evidence.json\n?? docs/test-reliability-audit-v0.1-entry-buffer-replays-evidence.json\n?? docs/test-reliability-audit-v0.1-extra-coverage-evidence.json\n?? docs/test-reliability-audit-v0.1-extract.cjs\n?? docs/test-reliability-audit-v0.1-finalize-inventory.cjs\n?? docs/test-reliability-audit-v0.1-freeze-review.cjs\n?? docs/test-reliability-audit-v0.1-git-buffer-diagnostic-evidence.json\n?? docs/test-reliability-audit-v0.1-infrastructure-review-evidence.json\n?? docs/test-reliability-audit-v0.1-inventory-evidence.json\n?? docs/test-reliability-audit-v0.1-inventory-final-evidence.json\n?? docs/test-reliability-audit-v0.1-inventory.cjs\n?? docs/test-reliability-audit-v0.1-known-failure-replays-evidence.json\n?? docs/test-reliability-audit-v0.1-source-freeze-candidates-evidence.json\n?? docs/test-reliability-audit-v0.1-source-freeze-review-evidence.json\n?? docs/test-reliability-audit-v0.1-test-inventory.md\n?? docs/test-reliability-audit-v0.1-validation-evidence.json\n?? docs/test-reliability-audit-v0.1.md\n?? install.ps1\n?? receiver-source-snapshot.js\n?? tests/entry-safe-export-child.cjs\n?? tests/entry-safe-preload.cjs\n?? tests/entry-safe-runner-test.cjs\n?? tests/entry-safe-runner.cjs\n?? tests/receiver-execution-v2-production-snapshot-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-harness.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-closeout.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-source-review.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-closeout.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-dependency-audit.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runtime-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r5-ownership-audit.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-independent-review.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs\n?? tests/receiver-source-save-authorized-delta.cjs\n"
+    },
+    "protectedMetadataUnchanged": true,
+    "protectedContentReadOrHashed": false
+  }
+}

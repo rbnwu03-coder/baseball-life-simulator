@@ -1,0 +1,2419 @@
+{
+  "sprint": "10A.3b-R5",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "createdAt": "2026-10-14T06:11:52.660Z",
+  "node": "v24.19.0",
+  "scope": [
+    "receiver-source-snapshot.js",
+    "tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-harness.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r3-closeout.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r3-runner.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r3-source-review.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r4-closeout.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r4-dependency-audit.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r4-runtime-comparison.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation.cjs",
+    "ai-plate-appearance-outcome.js",
+    "application-controller.js",
+    "baseball-defense-prototype.js",
+    "baseball-gameplay-integration.js",
+    "baseball-gameplay-prototype-sandbox.js",
+    "baseball-gameplay-prototype-utils.js",
+    "baseball-offense-prototype.js",
+    "baseball-training-resolver.js",
+    "batted-ball-fly-ball-defense.js",
+    "batted-ball-ground-defense.js",
+    "batted-ball-line-drive-defense.js",
+    "batted-ball-outcome-mapping.js",
+    "batted-ball-physical.js",
+    "batted-ball-tag-up-execution.js",
+    "batter-anticipation.js",
+    "career-age22-outcome-resolver.js",
+    "career-development-progression.js",
+    "career-development-runtime-resolver.js",
+    "career-rejoin-contract.js",
+    "career-save-admission.js",
+    "career-spine-contract.js",
+    "career-transition-commit.js",
+    "career-transition-progression.js",
+    "career-transition-resolver.js",
+    "career-transition-runtime-resolver.js",
+    "coach-evaluation-boundary.js",
+    "coach-response-flow.js",
+    "coach.js",
+    "competition-presentation.js",
+    "competition-rules.js",
+    "county-selection-opportunity.js",
+    "current-state-boundary.js",
+    "day-completion-flow.js",
+    "decision-flow.js",
+    "defensive-decision-throw-foundation.js",
+    "defensive-opportunity-foundation.js",
+    "defensive-reach-secure-foundation.js",
+    "defensive-runner-throw-settlement-foundation.js",
+    "evaluation-registry-bootstrap.js",
+    "evaluation-registry.js",
+    "event.js",
+    "force-advancement.js",
+    "high-school-career-evaluation.js",
+    "high-school-career-offers.js",
+    "high-school-competition-evidence.js",
+    "high-school-competition-foundation.js",
+    "high-school-competition-reassessment.js",
+    "high-school-entry-roster-context.js",
+    "high-school-exchange-network.js",
+    "high-school-friendly-invitation-producer.js",
+    "high-school-match-opportunity-generation.js",
+    "high-school-opportunity-probability.js",
+    "high-school-opportunity-selection.js",
+    "high-school-relationship-recency.js",
+    "high-school-relationship-temporal-authority.js",
+    "high-school-schedule-opportunity.js",
+    "high-school-training-camp-producer.js",
+    "high-school-year-transition.js",
+    "injury.js",
+    "match-context-foundation.js",
+    "match-development-settlement-presentation.js",
+    "match-experience-development.js",
+    "match-game-record.js",
+    "match-situation-lifecycle.js",
+    "narrative-condition-boundary.js",
+    "narrative-condition-flow.js",
+    "national-selection-pipeline.js",
+    "npc.js",
+    "offensive-bunt-count-rules.js",
+    "offensive-bunt-defensive-handoff.js",
+    "offensive-bunt-execution.js",
+    "offensive-plate-approach.js",
+    "offensive-tactical-action.js",
+    "offensive-tactical-decision.js",
+    "offensive-tactical-opportunity.js",
+    "pitch-observation-foundation.js",
+    "pitch-sequence-state-foundation.js",
+    "pitch-sequencing.js",
+    "pitch-tactical-decision-foundation.js",
+    "pitch-tactical-decision-production-adapter.js",
+    "pitch-tactical-interpretation-foundation.js",
+    "pitch-tactical-signal-projection-foundation.js",
+    "pitcher-catcher-tactical-integration.js",
+    "pitcher-mental-state.js",
+    "pitcher-process-state.js",
+    "plate-decision-foundation.js",
+    "player.js",
+    "playing-time-game-exposure.js",
+    "receiver-execution-v2-2-foundation.js",
+    "receiver-execution-v2-admission-timing-foundation.js",
+    "receiver-execution-v2-foundation.js",
+    "receiver-execution-v2-production-source-adapter-prototype.cjs",
+    "receiver-execution-v2-source-authority-foundation.js",
+    "relationship-boundary.js",
+    "relationship-flow.js",
+    "rival.js",
+    "save.js",
+    "script.js",
+    "story.js",
+    "team-roster-foundation.js",
+    "team-strength-model.js",
+    "tests/ability-performance-correlation-audit.cjs",
+    "tests/ability-performance-gradient-test.js",
+    "tests/ability-performance-observability-extension-test.js",
+    "tests/ability-performance-observability-extension.cjs",
+    "tests/active-defensive-assignment-integrity-test.js",
+    "tests/adult-route-chain-test.js",
+    "tests/ai-plate-appearance-outcome-production-integration-test.js",
+    "tests/ai-plate-appearance-outcome-test.js",
+    "tests/ai-plate-appearance-outcome-validation.cjs",
+    "tests/application-controller-test.js",
+    "tests/aspiration-narrative-test.js",
+    "tests/azhe-storyboard-test.js",
+    "tests/baseball-defense-prototype-test.js",
+    "tests/baseball-gameplay-integration-test.js",
+    "tests/baseball-gameplay-prototype-isolation-test.js",
+    "tests/baseball-match-foundation-2-1-1-1-test.js",
+    "tests/baseball-match-foundation-2-1-1-test.js",
+    "tests/baseball-match-foundation-2-1-test.js",
+    "tests/baseball-match-foundation-2-2-1-test.js",
+    "tests/baseball-match-foundation-2-2-2-test.js",
+    "tests/baseball-match-foundation-2-2-3-test.js",
+    "tests/baseball-match-foundation-2-2-4-1-test.js",
+    "tests/baseball-match-foundation-2-2-4-2-test.js",
+    "tests/baseball-match-foundation-2-2-4-3-audit.js",
+    "tests/baseball-match-foundation-2-2-4-4-test.js",
+    "tests/baseball-match-foundation-2-2-4-5-test.js",
+    "tests/baseball-match-foundation-2-2-4-test.js",
+    "tests/baseball-match-foundation-2-2-test.js",
+    "tests/baseball-offense-base-state-test.js",
+    "tests/baseball-offense-prototype-test.js",
+    "tests/baseball-offensive-production-integration-test.js",
+    "tests/baseball-training-rhythm-test.js",
+    "tests/batted-ball-outcome-mapping-test.js",
+    "tests/batted-ball-outcome-mapping-validation.cjs",
+    "tests/batted-ball-outcome-production-integration-test.js",
+    "tests/batted-ball-physical-foundation-test.js",
+    "tests/batted-ball-physical-production-integration-test.js",
+    "tests/batter-anticipation-sprint-b-test.js",
+    "tests/bbp-b1-ground-ball-production-integration-test.js",
+    "tests/bbp-b1-ground-ball-runner-handoff-test.js",
+    "tests/bbp-b2a-line-drive-production-integration-test.js",
+    "tests/bbp-b2a-line-drive-read-catch-test.js",
+    "tests/bbp-b2b1-fly-ball-production-integration-test.js",
+    "tests/bbp-b2b1-fly-ball-tag-up-legality-test.js",
+    "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+    "tests/callbackTest.js",
+    "tests/career-age22-outcome-resolver-test.js",
+    "tests/career-arc-test.js",
+    "tests/career-development-progression-test.js",
+    "tests/career-development-runtime-resolver-test.js",
+    "tests/career-network-contract-test.js",
+    "tests/career-rejoin-contract-test.js",
+    "tests/career-save-admission-test.js",
+    "tests/career-spine-contract-test.js",
+    "tests/career-transition-commit-test.js",
+    "tests/career-transition-progression-test.js",
+    "tests/career-transition-resolver-test.js",
+    "tests/career-transition-role-test.js",
+    "tests/career-transition-route-difference-test.js",
+    "tests/career-transition-runtime-resolver-test.js",
+    "tests/catcher-choice-outcome-integrity-v1-test.js",
+    "tests/coach-evaluation-boundary-test.js",
+    "tests/coach-response-expansion-test.js",
+    "tests/coach-response-flow-test.js",
+    "tests/competition-flow-framework-test.js",
+    "tests/competition-rules-contract-foundation-test.js",
+    "tests/content-flow-audit.js",
+    "tests/contextual-status-panel-test.js",
+    "tests/county-selection-opportunity-test.js",
+    "tests/current-state-boundary-test.js",
+    "tests/day-completion-flow-test.js",
+    "tests/decision-flow-test.js",
+    "tests/defensive-decision-throw-foundation-test.js",
+    "tests/defensive-decision-throw-production-integration-test.js",
+    "tests/defensive-opportunity-foundation-test.js",
+    "tests/defensive-opportunity-production-integration-test.js",
+    "tests/defensive-outcome-cause-explainability-foundation-v1-test.js",
+    "tests/defensive-reach-secure-foundation-test.js",
+    "tests/defensive-reach-secure-production-integration-test.js",
+    "tests/defensive-runner-throw-settlement-foundation-test.js",
+    "tests/development-match-position-test-fallback-v1-test.js",
+    "tests/development-training-result-foundation-v1-test.js",
+    "tests/emotional-payoff-test.js",
+    "tests/evaluation-registry-integration-test.js",
+    "tests/evaluation-registry-test.js",
+    "tests/event-continuity-pass-test.js",
+    "tests/extra-inning-tiebreak-foundation-test.js",
+    "tests/extra-inning-tiebreak-production-integration-test.js",
+    "tests/first-base-receive-active-ground-production-integration-test.js",
+    "tests/first-base-sprint-3-validation-runner.cjs",
+    "tests/first-offensive-moment-role-presentation-test.js",
+    "tests/force-advancement-foundation-test.js",
+    "tests/force-multi-runner-settlement-integration-test.js",
+    "tests/force-multi-runner-settlement-production-integration-test.js",
+    "tests/full-game-competition-evidence-test.js",
+    "tests/full-game-player-line-test.js",
+    "tests/generic-infield-position-admission-diagnostic-test.js",
+    "tests/goal-balance-test.js",
+    "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+    "tests/ground-ball-home-route-integrity-test.js",
+    "tests/ground-ball-home-route-production-integration-test.js",
+    "tests/ground-defensive-decision-identity-production-integration-test.js",
+    "tests/ground-defensive-decision-identity-repair-test.js",
+    "tests/ground-defensive-decision-identity-test-context.cjs",
+    "tests/ground-settlement-handoff-r2-context.cjs",
+    "tests/ground-settlement-handoff-r2-production-integration-test.js",
+    "tests/high-school-career-evidence-test.js",
+    "tests/high-school-career-exit-integration-test.js",
+    "tests/high-school-career-offer-test.js",
+    "tests/high-school-career-test-context.js",
+    "tests/high-school-competition-evidence-test.js",
+    "tests/high-school-competition-foundation-test.js",
+    "tests/high-school-competition-reassessment-test.js",
+    "tests/high-school-entry-roster-integration-test.js",
+    "tests/high-school-exchange-network-foundation-test.js",
+    "tests/high-school-exchange-network-production-integration-test.js",
+    "tests/high-school-friendly-invitation-producer-foundation-test.js",
+    "tests/high-school-friendly-invitation-producer-production-integration-test.js",
+    "tests/high-school-integration-1-1-1-test.js",
+    "tests/high-school-integration-1-1-test.js",
+    "tests/high-school-integration-1-2-1-test.js",
+    "tests/high-school-integration-1-2-2-1-test.js",
+    "tests/high-school-integration-1-2-2-2-test.js",
+    "tests/high-school-integration-1-2-2-test.js",
+    "tests/high-school-integration-1-2-3-test.js",
+    "tests/high-school-integration-1-2-test.js",
+    "tests/high-school-match-opportunity-foundation-test.js",
+    "tests/high-school-match-opportunity-generation-foundation-test.js",
+    "tests/high-school-match-opportunity-generation-production-integration-test.js",
+    "tests/high-school-opportunity-exposure-bias-repair-foundation-test.js",
+    "tests/high-school-opportunity-exposure-bias-repair-production-integration-test.js",
+    "tests/high-school-opportunity-exposure-flow.cjs",
+    "tests/high-school-opportunity-post-repair-calibration-audit.cjs",
+    "tests/high-school-opportunity-post-repair-calibration-foundation-test.js",
+    "tests/high-school-opportunity-post-repair-calibration-production-integration-test.js",
+    "tests/high-school-opportunity-post-repair-calibration-runner.cjs",
+    "tests/high-school-opportunity-probability-calibration-audit.cjs",
+    "tests/high-school-opportunity-probability-calibration-career.cjs",
+    "tests/high-school-opportunity-probability-calibration-foundation-test.js",
+    "tests/high-school-opportunity-probability-calibration-production-integration-test.js",
+    "tests/high-school-opportunity-probability-calibration-runner.cjs",
+    "tests/high-school-opportunity-probability-foundation-test.js",
+    "tests/high-school-opportunity-probability-production-integration-test.js",
+    "tests/high-school-opportunity-selection-foundation-test.js",
+    "tests/high-school-opportunity-selection-production-integration-test.js",
+    "tests/high-school-opportunity-selection-test-context.cjs",
+    "tests/high-school-position-code-normalization-test.js",
+    "tests/high-school-relationship-recency-foundation-test.js",
+    "tests/high-school-relationship-recency-production-integration-test.js",
+    "tests/high-school-relationship-recency-reputation-feasibility-audit.cjs",
+    "tests/high-school-relationship-recency-reputation-feasibility-foundation-test.js",
+    "tests/high-school-relationship-recency-reputation-feasibility-production-integration-test.js",
+    "tests/high-school-relationship-temporal-authority-foundation-test.js",
+    "tests/high-school-relationship-temporal-authority-production-integration-test.js",
+    "tests/high-school-schedule-opportunity-production-integration-test.js",
+    "tests/high-school-three-year-spine-test.js",
+    "tests/high-school-training-camp-producer-foundation-test.js",
+    "tests/high-school-training-camp-producer-production-integration-test.js",
+    "tests/high-school-year-one-competition-loop-test.js",
+    "tests/high-school-year-one-opportunity-two-integration-test.js",
+    "tests/high-school-year-three-competition-loop-test.js",
+    "tests/high-school-year-transition-continuity-test.js",
+    "tests/high-school-year-two-autumn-match-integration-test.js",
+    "tests/high-school-year-two-competition-loop-test.js",
+    "tests/infield-legacy-receiver-model-foundation-test.js",
+    "tests/infield-legacy-receiver-model-save-probe.cjs",
+    "tests/infield-legacy-receiver-model-sprint-6-runner.cjs",
+    "tests/infield-legacy-receiver-scorer-closeout-runner.cjs",
+    "tests/infield-legacy-receiver-scorer-closeout-test.js",
+    "tests/infield-scorer-recovery-integrity-repair-test.js",
+    "tests/infield-scorer-sprint-5-validation-runner.cjs",
+    "tests/invitation-presentation-school-choice-integration-v1-test.js",
+    "tests/invitation-presentation-v1-0-1-legacy-route-conflict-test.js",
+    "tests/match-authority-coverage-audit.cjs",
+    "tests/match-authority-coverage-blocker-repro.cjs",
+    "tests/match-authority-coverage-cohort.cjs",
+    "tests/match-authority-coverage-resume-blocker-repro.cjs",
+    "tests/match-context-production-integration-test.js",
+    "tests/match-context-schedule-origin-foundation-test.js",
+    "tests/match-development-settlement-presentation-v1-test.js",
+    "tests/match-experience-development-foundation-v1-test.js",
+    "tests/match-full-game-record-test.js",
+    "tests/match-m0-after-r2-admission-context.cjs",
+    "tests/match-m0-after-r2-audit-test.js",
+    "tests/match-m0-after-r2-census.cjs",
+    "tests/match-m0-after-r2-cohort.cjs",
+    "tests/match-m0-after-r2-coverage.cjs",
+    "tests/match-opportunity-structural-completion-v1-test.js",
+    "tests/match-simulation-outcome-mapping-audit.cjs",
+    "tests/match-simulation-outcome-mapping-test.js",
+    "tests/match-situation-lifecycle-test.js",
+    "tests/narrative-condition-boundary-test.js",
+    "tests/narrative-condition-flow-test.js",
+    "tests/narrative-continuity-test.js",
+    "tests/national-selection-fixture.cjs",
+    "tests/national-selection-pipeline-test.js",
+    "tests/npc-role-refactor-test.js",
+    "tests/offensive-plate-approach-foundation-v1-test.js",
+    "tests/offensive-production-presentation-sprint-c-test.js",
+    "tests/offensive-tactical-action-sprint-a-test.js",
+    "tests/offensive-tactical-action-sprint-b1-0-1-test.js",
+    "tests/offensive-tactical-action-sprint-b1-test.js",
+    "tests/offensive-tactical-action-sprint-b2-defensive-handoff-test.js",
+    "tests/offensive-tactical-action-sprint-b2-runner-realization-test.js",
+    "tests/opportunity-evaluation-boundary-v1-0-1-test.js",
+    "tests/outcome-transition-hierarchy-test.js",
+    "tests/pitch-observation-foundation-test.js",
+    "tests/pitch-observation-production-integration-test.js",
+    "tests/pitch-production-source-scope-test.js",
+    "tests/pitch-production-source-scope.cjs",
+    "tests/pitch-sequence-state-foundation-test.js",
+    "tests/pitch-sequence-state-production-integration-test.js",
+    "tests/pitch-sequencing-core-sprint-a-test.js",
+    "tests/pitch-tactical-decision-foundation-test.js",
+    "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+    "tests/pitch-tactical-decision-production-adapter-test.js",
+    "tests/pitch-tactical-decision-production-integration-test.js",
+    "tests/pitch-tactical-intent-evidence-integration-test.js",
+    "tests/pitch-tactical-intent-semantic-boundary-test.js",
+    "tests/pitch-tactical-interpretation-foundation-test.js",
+    "tests/pitch-tactical-interpretation-production-integration-test.js",
+    "tests/pitch-tactical-selector-equivalence-test.js",
+    "tests/pitch-tactical-selector-extraction-baseline.cjs",
+    "tests/pitch-tactical-signal-projection-foundation-test.js",
+    "tests/pitch-tactical-signal-projection-production-integration-test.js",
+    "tests/pitch-target-location-foundation-test.js",
+    "tests/pitch-target-location-production-integration-test.js",
+    "tests/pitch-target-location-statistical-audit.cjs",
+    "tests/pitch-velocity-baseline-extraction-test.js",
+    "tests/pitcher-catcher-tactical-integration-test.js",
+    "tests/pitcher-mental-state-sprint-a-test.js",
+    "tests/pitcher-process-state-sprint-a-test.js",
+    "tests/plate-approach-semantic-integrity-test.js",
+    "tests/plate-decision-foundation-test.js",
+    "tests/plate-decision-production-integration-test.js",
+    "tests/player-archetype-test.js",
+    "tests/player-capability-hierarchy-foundation-v1-0-1-test.js",
+    "tests/player-capability-hierarchy-foundation-v1-test.js",
+    "tests/player-data-boundary-test.js",
+    "tests/playing-time-game-exposure-foundation-v1-test.js",
+    "tests/presentation-interaction-clarity-test.js",
+    "tests/receiver-execution-v2-2-contract-test.cjs",
+    "tests/receiver-execution-v2-production-source-timing-test.cjs",
+    "tests/receiver-execution-v2-pure-contract-test.cjs",
+    "tests/receiver-execution-v2-source-authority-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a-runner.cjs",
+    "tests/receiver-execution-v2-sprint-10a1-runner.cjs",
+    "tests/receiver-execution-v2-sprint-10a2-runner.cjs",
+    "tests/receiver-execution-v2-sprint-10a2-source-probe.cjs",
+    "tests/receiver-execution-v2-sprint-10a3a-browser-probe.cjs",
+    "tests/receiver-execution-v2-sprint-10a3a-runner.cjs",
+    "tests/receiver-execution-v2-sprint-8-runner.cjs",
+    "tests/receiver-execution-v2-sprint-9-legacy-comparison.cjs",
+    "tests/receiver-execution-v2-sprint-9-runner.cjs",
+    "tests/receiver-execution-v2-version-admission-timing-test.cjs",
+    "tests/relationship-boundary-test.js",
+    "tests/relationship-feasibility-production-scope-test.js",
+    "tests/relationship-feasibility-production-scope.cjs",
+    "tests/relationship-flow-test.js",
+    "tests/relationship-payoff-test.js",
+    "tests/representative-team-contract-test.js",
+    "tests/responsive-accessibility-pass-test.js",
+    "tests/scene-context-layer-test.js",
+    "tests/scene-depth-test.js",
+    "tests/school-invitation-foundation-v1-0-1-test.js",
+    "tests/school-invitation-foundation-v1-test.js",
+    "tests/scoreboard-presentation-integrity-test.js",
+    "tests/scoreboard-presentation-production-integration-test.js",
+    "tests/shared-infield-contract-2b-production-integration-test.js",
+    "tests/sprint-c-human-ux-closeout-test.js",
+    "tests/ss-defensive-production-integration-test.js",
+    "tests/status-panel-disclosure-persistence-test.js",
+    "tests/takahashi-storyboard-test.js",
+    "tests/team-roster-foundation-test.js",
+    "tests/team-roster-match-integration-test.js",
+    "tests/team-strength-model-test.js",
+    "tests/ten-year-narrative-architecture-test.js",
+    "tests/third-base-ground-production-integration-test.js",
+    "tests/third-base-sprint-2-validation-runner.cjs",
+    "tests/third-out-run-out-attribution-integrity-test.js",
+    "tests/third-out-run-out-attribution-production-integration-test.js",
+    "tests/third-out-runner-resolution-integrity-v1-test.js",
+    "tests/time-boundary-test.js",
+    "tests/u18-roster-construction-test.js",
+    "tests/vertical-slice-smoke.js",
+    "tests/youth-season-content-pass-test.js",
+    "time-boundary.js",
+    "time.js"
+  ],
+  "protectedExcluded": true,
+  "rows": [
+    {
+      "file": "tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+      "line": 13,
+      "text": "h.context.s3bTamperedSave = saved; assert.throws(() => h.run(\"normalizeSave(s3bTamperedSave)\")); assert.equal(JSON.stringify(saved), input); assert.equal(h.run(\"JSON.stringify(player)\"), before); }); }"
+    },
+    {
+      "file": "tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+      "line": 16,
+      "text": "test(\"baseline RED has no source adapter or guards\", () => { const old = makeHarness(\"baseline\"); old.fresh({}, \"beforeExecution\"); assert.equal(old.run(\"typeof ReceiverSourceSnapshot\"), \"undefined\"); assert.equal(old.run(\"m.groundBallInPlayState.receiverSourceSnapshot\"), undefined); const saved = old.json(\"player\"); saved.saveVersion = 16; old.context.s3bFuture = saved; assert.equal(old.run(\"normalizeSave(s3bFuture).saveVersion\"), 15); });"
+    },
+    {
+      "file": "tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+      "line": 33,
+      "text": "test(\"Save owner emits source format16 without mutating live player\", () => { fresh(); const before = h.run(\"JSON.stringify(player)\"), saved = rawSave(); assert.equal(saved.saveVersion, 16); assert.equal(saved.receiverSourceSaveFormatVersion, \"receiver-source-only-save-v1\"); assert.equal(h.run(\"JSON.stringify(player)\"), before); h.context.s3bSaved = saved; assert.equal(h.run(\"normalizeSave(s3bSaved).saveVersion\"), 16); });"
+    },
+    {
+      "file": "tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+      "line": 54,
+      "text": "for (const k of [\"receiverSourcePin\", \"receiverSourceExecutionBinding\"]) test(\"settled Save rejects missing closed copy \" + k, () => { fresh({}, \"automatic\"); const saved = rawSave(); delete saved.highSchoolMatch.lastClosedSituationSummary[k]; h.context.s3bTamperedSave = saved; assert.throws(() => h.run(\"normalizeSave(s3bTamperedSave)\")); });"
+    },
+    {
+      "file": "tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+      "line": 55,
+      "text": "for (const k of [\"originalSampleBinary64\", \"canonicalSourceId\", \"actualReceiverId\", \"actualTarget\", \"routeId\", \"pinDigest\", \"version\"]) test(\"executed binding tamper \" + k, () => { fresh({}, \"automatic\"); const saved = rawSave(); saved.highSchoolMatch.groundBallInPlayState.receiverSourceExecutionBinding[k] = \"other\"; h.context.s3bTamperedSave = saved; assert.throws(() => h.run(\"normalizeSave(s3bTamperedSave)\")); });"
+    },
+    {
+      "file": "tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+      "line": 56,
+      "text": "test(\"canonical cache sample tamper remains fail closed after settlement\", () => { fresh({}, \"automatic\"); const saved = rawSave(); saved.highSchoolMatch.groundBallInPlayState.shortstopExecution.sample = .3; h.context.s3bTamperedSave = saved; assert.throws(() => h.run(\"normalizeSave(s3bTamperedSave)\")); });"
+    },
+    {
+      "file": "tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+      "line": 57,
+      "text": "test(\"pending cannot contain original sample binding\", () => { fresh(); const saved = rawSave(); saved.highSchoolMatch.groundBallInPlayState.receiverSourceExecutionBinding = { version: \"fake\" }; h.context.s3bTamperedSave = saved; assert.throws(() => h.run(\"normalizeSave(s3bTamperedSave)\")); });"
+    },
+    {
+      "file": "tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+      "line": 59,
+      "text": "test(\"old historical raw omission remains old without backfill\", () => { const old = makeHarness(\"baseline\"); old.fresh({}, \"beforeExecution\"); const saved = old.json(\"player\"); h.context.s3bHistorical = saved; const before = JSON.stringify(saved); h.run(\"player=normalizeSave(s3bHistorical);m=player.highSchoolMatch;\"); assert.equal(h.run(\"m.groundBallInPlayState.receiverSourceSnapshot\"), undefined); assert.equal(h.run(\"m.receiverSourceAdmission\"), undefined); assert.equal(JSON.stringify(saved), before); h.run(\"ensureHighSchoolOrdinaryGroundBallInPlayHandoff(m);\"); assert.equal(h.run(\"m.groundBallInPlayState.receiverSourceSnapshot\"), undefined); });"
+    },
+    {
+      "file": "tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+      "line": 61,
+      "text": "test(\"raw validation precedes createInitialPlayer/default mutation\", () => { fresh(); const saved = rawSave(); delete saved.highSchoolMatch.receiverSourceAdmission; h.context.s3bTamperedSave = saved; h.run(\"var s3bInitialCalls=0;var s3bInitial=createInitialPlayer;createInitialPlayer=()=>{s3bInitialCalls++;throw Error('DEFAULT_CALLED')};\"); try { assert.throws(() => h.run(\"normalizeSave(s3bTamperedSave)\"), /receiver source/); assert.equal(h.run(\"s3bInitialCalls\"), 0); } finally { h.run(\"createInitialPlayer=s3bInitial;\"); } });"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-harness.cjs",
+      "line": 45,
+      "text": "c.run(\"var s3bSourceWire=JSON.stringify(player);saveGame();var s3bSavedWire=localStorage.getItem(SAVE_KEY);var s3bExpected=normalizeSave(JSON.parse(s3bSavedWire));player=createInitialPlayer(\" + JSON.stringify(label) + \");loadGame();m=player.highSchoolMatch;\");"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs",
+      "line": 29,
+      "text": "for (const h of [before, after]) { h.context.s3bHistorical = JSON.parse(JSON.stringify(historical)); h.run(\"player=normalizeSave(s3bHistorical);m=player.highSchoolMatch;\"); }"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+      "line": 12,
+      "text": "const before = h.snapshot(); h.run(\"saveGame()\"); assert.deepEqual(h.snapshot(), before); assert.equal(h.run(\"r1Calls\"), 0);"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+      "line": 24,
+      "text": "try { assert.throws(() => h.run(\"saveGame()\"), /PREWRITE_VALIDATION/); assert.equal(h.run(\"r1Writes.length\"), 0); }"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+      "line": 35,
+      "text": "h.context.r1Saved = saved; const expected = h.json(\"normalizeSave(r1Saved)\"); h.cold(\"R1 cold \" + phase);"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+      "line": 46,
+      "text": "const normalized = h.json(\"normalizeSave(r1Historical)\"); assert.equal(normalized.saveVersion, 15); assert.equal(normalized.highSchoolMatch.receiverSourceAdmission, undefined);"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+      "line": 47,
+      "text": "assert.deepEqual(officialProjection(normalized), officialProjection(old.json(\"normalizeSave(player)\")));"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+      "line": 65,
+      "text": "try { assert.throws(() => h.run(\"saveGame()\")); assert.equal(h.run(\"r1Writes.length\"), 0); assert.deepEqual(h.snapshot(), before); }"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+      "line": 68,
+      "text": "test(\"ordinary unknown version also refuses storage\", () => { h.fresh({ occupied: 1 }); trap(); h.run(\"player.saveVersion=17\"); assert.throws(() => h.run(\"saveGame()\")); assert.equal(h.run(\"r1Writes.length\"), 0); });"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+      "line": 71,
+      "text": "assert.throws(() => h.run(\"normalizeSave(r1Raw)\"));"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs",
+      "line": 73,
+      "text": "const bad = clone(raw); mutate(bad); h.context.r3BadSave = bad; assert.throws(() => h.run(\"normalizeSave(r3BadSave)\"), /receiver source/);"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs",
+      "line": 79,
+      "text": "h.context.r3Historical = old.json(\"player\"); assert.deepEqual(officialProjection(h.json(\"normalizeSave(r3Historical)\")), officialProjection(old.json(\"normalizeSave(player)\")));"
+    },
+    {
+      "file": "save.js",
+      "line": 3,
+      "text": "function saveGame() {"
+    },
+    {
+      "file": "save.js",
+      "line": 22,
+      "text": "function normalizeSave(saved) {"
+    },
+    {
+      "file": "save.js",
+      "line": 645,
+      "text": "function loadGame() {"
+    },
+    {
+      "file": "save.js",
+      "line": 649,
+      "text": "const candidate = normalizeSave(JSON.parse(raw));"
+    },
+    {
+      "file": "script.js",
+      "line": 710,
+      "text": "if (typeof saveGame === \"function\") saveGame();"
+    },
+    {
+      "file": "tests/active-defensive-assignment-integrity-test.js",
+      "line": 49,
+      "text": "run(\"var savedAssignment=JSON.parse(JSON.stringify(player));var loadedAssignment=normalizeSave(savedAssignment);\");"
+    },
+    {
+      "file": "tests/active-defensive-assignment-integrity-test.js",
+      "line": 54,
+      "text": "assert.throws(() => run(\"normalizeSave(badAssignment)\"), /Active defense integrity/);"
+    },
+    {
+      "file": "tests/active-defensive-assignment-integrity-test.js",
+      "line": 58,
+      "text": "assert.throws(() => run(\"normalizeSave(badAssignment)\"), /active-position-missing/);"
+    },
+    {
+      "file": "tests/active-defensive-assignment-integrity-test.js",
+      "line": 62,
+      "text": "assert.throws(() => run(\"normalizeSave(badAssignment)\"), /ineligible/);"
+    },
+    {
+      "file": "tests/active-defensive-assignment-integrity-test.js",
+      "line": 67,
+      "text": "assert.throws(() => run(\"normalizeSave(badAssignment)\"), /active-defense-size/);"
+    },
+    {
+      "file": "tests/active-defensive-assignment-integrity-test.js",
+      "line": 71,
+      "text": "assert.throws(() => run(\"normalizeSave(badAssignment)\"), /active-actor-not-in-roster/);"
+    },
+    {
+      "file": "tests/azhe-storyboard-test.js",
+      "line": 125,
+      "text": "vm.runInContext(`player=createInitialPlayer(\"物件存檔\"); addFlags([\"azhe_grounder_object\",\"azhe_red_dirt_line\",\"azhe_record_sheet\"]); saveGame(); player=createInitialPlayer(\"覆蓋\"); loadGame();`, persistence);"
+    },
+    {
+      "file": "tests/baseball-gameplay-integration-test.js",
+      "line": 499,
+      "text": "game.saveGame();"
+    },
+    {
+      "file": "tests/baseball-gameplay-integration-test.js",
+      "line": 503,
+      "text": "game.saveGame();"
+    },
+    {
+      "file": "tests/baseball-gameplay-integration-test.js",
+      "line": 506,
+      "text": "game.saveGame();"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-1-1-1-test.js",
+      "line": 126,
+      "text": "verify(\"14. reload 在 B 後會從 C 繼續且不重複 simulator mutation\", evaluate(`(() => {const {match,start}=__queue2111();advanceHighSchoolMatchPlaybackStep(match);advanceHighSchoolMatchPlaybackStep(match);const before={log:match.simulationLog.length,score:JSON.stringify(match.scores),outs:match.outs};player=normalizeSave(JSON.parse(JSON.stringify(player)));const restored=player.highSchoolMatch;const result=advanceHighSchoolMatchPlaybackStep(restored);return result===\"outState\"&&restored.presentedEventCursor===start+3&&restored.simulationLog.length===before.log&&JSON.stringify(restored.scores)===before.score&&restored.outs===before.outs;})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-1-1-1-test.js",
+      "line": 127,
+      "text": "verify(\"15. reload 在 D 的 Decision pause 保留畫面且 timer 不續跑\", evaluate(`(() => {const {match}=__queue2111();for(let i=0;i<4;i+=1)advanceHighSchoolMatchPlaybackStep(match);const before=JSON.stringify(getHighSchoolMatchPresentation(match).currentSituation);player=normalizeSave(JSON.parse(JSON.stringify(player)));const restored=player.highSchoolMatch;return isHighSchoolMatchDecisionVisible(restored)&&!isHighSchoolMatchPlaybackPhase(restored)&&advanceHighSchoolMatchPlaybackStep(restored)===false&&before===JSON.stringify(getHighSchoolMatchPresentation(restored).currentSituation);})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-1-1-1-test.js",
+      "line": 142,
+      "text": "verify(\"19. 舊 event 缺少 snapshot 時依事件順序 migration\", evaluate(`(() => {const m=__setup2111();m.simulationLog=[{type:\"matchEntry\",inning:3,half:\"下\",outs:1,runners:[\"r1\",null,null],scores:{home:0,away:1}},{type:\"plateAppearance\",inning:3,half:\"下\",after:{outs:2,runners:[\"r1\",null,null],scores:{home:0,away:1}}}];m.presentedEventCursor=1;player.highSchoolMatch=m;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const shown=getHighSchoolMatchPresentation(restored).currentSituation;return restored.simulationLog.every(e=>e.presentationSnapshot)&&restored.simulationLog[0].presentationImportance===\"hidden\"&&shown.outs===1&&shown.runners[0]===\"r1\";})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-1-1-test.js",
+      "line": 121,
+      "text": "verify(\"17. save/reload 保留 snapshot、cursor 與 reveal position\", evaluate(`(() => {const {match}=__recordPa211(\"single\",{runners:[null,null,\"away-sim-7\"]});match.presentedEventCursor=match.simulationLog.length-1;match.scoreboardRevealHalfIndex=8;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return restored.presentedEventCursor===match.presentedEventCursor&&restored.scoreboardRevealHalfIndex===8&&JSON.stringify(restored.simulationLog.map(e=>e.presentationSnapshot))===JSON.stringify(match.simulationLog.map(e=>e.presentationSnapshot));})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-1-1-test.js",
+      "line": 122,
+      "text": "verify(\"18. reload 後呈現下一拍不重複比分、log 或 simulation cursor\", evaluate(`(() => {const {match}=__recordPa211(\"single\",{runners:[null,null,\"away-sim-7\"]});match.presentedEventCursor=match.simulationLog.length-1;const before={score:JSON.stringify(match.scores),log:match.simulationLog.length,sim:match.simulationCursor};player=normalizeSave(JSON.parse(JSON.stringify(player)));advanceHighSchoolMatchPlaybackStep(player.highSchoolMatch);return before.score===JSON.stringify(player.highSchoolMatch.scores)&&before.log===player.highSchoolMatch.simulationLog.length&&before.sim===player.highSchoolMatch.simulationCursor;})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-1-1-test.js",
+      "line": 123,
+      "text": "verify(\"19. reload 前後 presentation model 完全一致\", evaluate(`(() => {const {match}=__recordPa211(\"double\",{runners:[\"away-sim-5\",null,null]});match.presentedEventCursor=match.simulationLog.length;const before=JSON.stringify(getHighSchoolMatchPresentation(match));player=normalizeSave(JSON.parse(JSON.stringify(player)));return before===JSON.stringify(getHighSchoolMatchPresentation(player.highSchoolMatch));})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-1-test.js",
+      "line": 165,
+      "text": "verify(\"39. pre-decision save/reload 保留同一顆球與合法選項\", evaluate(`(() => {const m=__infield21(\"三壘手\",\"slowGrounder\",{direction:\"lineSide\"});const before=JSON.stringify({s:m.defensiveSituation,c:getHighSchoolDefensiveMomentChoices(m)});const restored=normalizeSave(JSON.parse(JSON.stringify(player)));player=restored;const after=JSON.stringify({s:player.highSchoolMatch.defensiveSituation,c:getHighSchoolDefensiveMomentChoices(player.highSchoolMatch)});return before===after;})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-1-test.js",
+      "line": 166,
+      "text": "verify(\"40. resolved save/reload 不會重骰或重複 mutation\", evaluate(`(() => {const m=__infield21(\"游擊手\",\"hardGrounder\");resolveHighSchoolYearOneMatch(\"challenge\",m.currentMomentId,()=>.7);const snapshot=JSON.stringify({outs:m.outs,runners:m.runners,score:m.scores,contribution:m.playerContribution,resolution:m.lastDefensiveResolution});player=normalizeSave(JSON.parse(JSON.stringify(player)));prepareHighSchoolYearOneMatch();return snapshot===JSON.stringify({outs:player.highSchoolMatch.outs,runners:player.highSchoolMatch.runners,score:player.highSchoolMatch.scores,contribution:player.highSchoolMatch.playerContribution,resolution:player.highSchoolMatch.lastDefensiveResolution});})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-2-1-test.js",
+      "line": 140,
+      "text": "verify(\"36. save normalization 深層保存 runnerChanges 與 scoring identity\", evaluate(`(() => {const m=__infield221([\"away-sim-2\",null,null]);const r=resolveHighSchoolDefensivePlay(m,\"secure\",0);applyInfieldResolutionToHighSchoolMatch(m,\"secure\",r);const saved=JSON.parse(JSON.stringify(player));const restored=normalizeSave(saved);const event=restored.highSchoolMatch.simulationLog.find(e=>e.type===\"meaningfulMomentResolved\");const same=JSON.stringify(event.runnerChanges)===JSON.stringify(m.simulationLog.find(e=>e.type===\"meaningfulMomentResolved\").runnerChanges);saved.highSchoolMatch.simulationLog.find(e=>e.type===\"meaningfulMomentResolved\").runnerChanges[0].to=\"tampered\";return same&&event.runnerChanges[0].to!==\"tampered\";})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-2-2-test.js",
+      "line": 151,
+      "text": "verify(\"34. routine save/reload 保留 gate、事件分類與目前打者 snapshot\", evaluate(`(() => {const x=__candidate2222();player.highSchoolMatch=x.match;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const e=restored.simulationLog.find(v=>v.type===\"playerRoutinePlay\");return restored.playerEventClassification===\"playerRoutinePlay\"&&restored.decisionGate.meaningfulChoiceCount===1&&e.presentationSnapshot.currentBatter===x.event.presentationSnapshot.currentBatter;})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-2-3-test.js",
+      "line": 152,
+      "text": "verify(\"36. offensive choice metadata 與 before/after 可通過 save normalization\", evaluate(`(() => {const m=__off223({runners:[\"runner-1\",null,null]});const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.objective===\"advanceRunner\");__resolveGrounder223(m,c);player.highSchoolMatch=m;const r=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return r.completedMoments[0].objective===\"advanceRunner\"&&r.completedMoments[0].approach&&r.lastOffensiveResolution.before.runners[0]===\"runner-1\"&&r.lastOffensiveResolution.after.runners[1]===\"runner-1\";})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-2-4-1-test.js",
+      "line": 211,
+      "text": "verify(\"B10. active match 讀檔不保存 timer 並重建唯一排程\", evaluate(`(() => {const m=__setup241(224110);const cursor=m.presentedEventCursor,log=m.simulationLog.length;saveGame();loadGame();const d=getHighSchoolMatchPlaybackDebugState();return d.cursor===cursor&&d.logLength===log&&d.timerScheduled&&__timerCount()===1;})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-2-4-2-test.js",
+      "line": 156,
+      "text": "verify(\"T7. Reload 後由新 runtime generation 重建唯一 owner\", evaluate(`(() => {__setup242();__advanceUntil242(m=>m.inning>=5&&m.playerEntryCompleted);const before=getHighSchoolMatchPlaybackDebugState().activeTimerGeneration;saveGame();loadGame();const d=getHighSchoolMatchPlaybackDebugState();return d.matchActive&&d.timerScheduled&&d.timerGeneration===d.activeTimerGeneration&&d.activeTimerGeneration>before&&__timerCount()===1;})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-2-4-4-test.js",
+      "line": 150,
+      "text": "saveGame(); loadGame(); match = player.highSchoolMatch; reloaded = true;"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-2-4-test.js",
+      "line": 143,
+      "text": "verify(\"40. resolved save/reload 深層保留 route、stage、readiness 與 attribution\", evaluate(`(() => {const x=__case224({runners:[\"r1\",null,null],outs:1,routeWindows:{doublePlayWindow:\"wide\"}});const r=resolveInfieldDecision(x.situation,\"challenge\",x.match,()=>.9);x.match.lastDefensiveResolution=JSON.parse(JSON.stringify(r));player.highSchoolMatch=x.match;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return restored.defensiveSituation.responsibility.playerRole===\"initiator\"&&restored.lastDefensiveResolution.initialRoute===\"initiate463\"&&restored.lastDefensiveResolution.playerLeg&&restored.lastDefensiveResolution.readiness&&restored.lastDefensiveResolution.responsibleActor;})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-2-4-test.js",
+      "line": 144,
+      "text": "verify(\"41. reload 後合法 route list 不由 stale state 改寫\", evaluate(`(() => {const x=__case224({runners:[\"r1\",null,null],outs:1,routeWindows:{doublePlayWindow:\"wide\"}});player.highSchoolMatch=x.match;const before=JSON.stringify(x.choices.map(c=>({id:c.routeId,a:c.availability,r:c.readiness})));player=normalizeSave(JSON.parse(JSON.stringify(player)));return before===JSON.stringify(getHighSchoolDefensiveMomentChoices(player.highSchoolMatch).map(c=>({id:c.routeId,a:c.availability,r:c.readiness})));})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-2-test.js",
+      "line": 135,
+      "text": "verify(\"29. 中場存讀檔保留完整 live match 與 RNG 游標\", evaluate(`(() => {const m=__setup22(\"starter\",73001);let n=0;while(!(m.inning>=3&&m.half===\"上\")&&n++<500){if(isHighSchoolMatchDecisionVisible(m)){const c=getHighSchoolYearOneMatchMomentChoices(m)[0];resolveHighSchoolYearOneMatch(c.matchDecision,c.matchMomentId,()=>.62);}else advanceHighSchoolMatchPlaybackStep(m);}const before=JSON.stringify({i:m.inning,h:m.half,o:m.outs,r:m.runners,s:m.scores,l:m.lineScore,b:m.battingOrderIndex,ro:m.rosters,ls:m.playerLineupStatus,f:m.playerFieldingAssignment,log:m.simulationLog,c:m.presentedEventCursor,rng:m.simulationCursor,e:m.performanceEvidence});player=normalizeSave(JSON.parse(JSON.stringify(player)));const x=player.highSchoolMatch;return before===JSON.stringify({i:x.inning,h:x.half,o:x.outs,r:x.runners,s:x.scores,l:x.lineScore,b:x.battingOrderIndex,ro:x.rosters,ls:x.playerLineupStatus,f:x.playerFieldingAssignment,log:x.simulationLog,c:x.presentedEventCursor,rng:x.simulationCursor,e:x.performanceEvidence});})()`));"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-2-test.js",
+      "line": 136,
+      "text": "verify(\"30. 板凳登場後存讀檔不會重複替換打序\", evaluate(`(() => {const m=__setup22(\"bench\");Object.assign(m,{inning:5,half:\"下\",offenseTeam:\"home\",defenseTeam:\"away\",outs:1});__alignPlayerEntrySlot22(m);enterHighSchoolMatchPlayer(m);const slot=m.playerLineupSlot;player=normalizeSave(JSON.parse(JSON.stringify(player)));const x=prepareHighSchoolYearOneMatch();return x.playerEntryCompleted&&x.playerLineupStatus===\"substitute\"&&x.playerLineupSlot===slot&&x.rosters.home.lineup.filter(p=>p.id===\"player\").length===1;})()`));"
+    },
+    {
+      "file": "tests/baseball-offensive-production-integration-test.js",
+      "line": 361,
+      "text": "game.saveGame();"
+    },
+    {
+      "file": "tests/baseball-offensive-production-integration-test.js",
+      "line": 368,
+      "text": "game.saveGame();"
+    },
+    {
+      "file": "tests/baseball-offensive-production-integration-test.js",
+      "line": 376,
+      "text": "game.saveGame();"
+    },
+    {
+      "file": "tests/baseball-offensive-production-integration-test.js",
+      "line": 378,
+      "text": "game.loadGame();"
+    },
+    {
+      "file": "tests/baseball-training-rhythm-test.js",
+      "line": 128,
+      "text": "evaluate(context, \"saveGame()\");"
+    },
+    {
+      "file": "tests/baseball-training-rhythm-test.js",
+      "line": 135,
+      "text": "evaluate(context, \"player.ballSense = 0; pendingTrainingOutcome = { stale: true }; loadGame()\");"
+    },
+    {
+      "file": "tests/baseball-training-rhythm-test.js",
+      "line": 147,
+      "text": "evaluate(context, \"saveGame()\");"
+    },
+    {
+      "file": "tests/baseball-training-rhythm-test.js",
+      "line": 151,
+      "text": "evaluate(context, \"player.body.fatigue = 20; pendingTrainingOutcome = { stale: true }; loadGame()\");"
+    },
+    {
+      "file": "tests/baseball-training-rhythm-test.js",
+      "line": 154,
+      "text": "evaluate(context, `var __preDevelopmentSave=JSON.parse(JSON.stringify(player)); delete __preDevelopmentSave.developmentState; var __preDevelopmentSkills=JSON.stringify(__preDevelopmentSave.baseballSkills); var __preDevelopmentInvitations=JSON.stringify(__preDevelopmentSave.schoolInvitationState); var __migratedDevelopmentSave=normalizeSave(__preDevelopmentSave);`);"
+    },
+    {
+      "file": "tests/batted-ball-physical-production-integration-test.js",
+      "line": 96,
+      "text": "player.highSchoolMatch=match; const loaded=normalizeSave(JSON.parse(JSON.stringify(player))); const restored=loaded.highSchoolMatch;"
+    },
+    {
+      "file": "tests/bbp-b1-ground-ball-production-integration-test.js",
+      "line": 109,
+      "text": "const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;"
+    },
+    {
+      "file": "tests/bbp-b1-ground-ball-production-integration-test.js",
+      "line": 118,
+      "text": "const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch,before={outs:restored.outs,order:restored.battingOrderIndex.away,logs:restored.simulationLog.length};"
+    },
+    {
+      "file": "tests/bbp-b2a-line-drive-production-integration-test.js",
+      "line": 90,
+      "text": "const saveReload = JSON.parse(evaluate(`(() => {const x=__bbpB2APrepare(99208,{preContactRunnerStates:{\"away-sim-2\":{movementState:\"advancing\"}}}),m=x.m;player.highSchoolMatch=m;const before=JSON.stringify(m.lineDriveCatchState),restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch,after=JSON.stringify(restored.lineDriveCatchState),snapshot={outs:restored.outs,order:restored.battingOrderIndex.away,logs:restored.simulationLog.length};applyHighSchoolLineDriveCatchResolution(restored);const duplicate={outs:restored.outs,order:restored.battingOrderIndex.away,logs:restored.simulationLog.length};return JSON.stringify({same:before===after,settled:restored.lineDriveCatchState.settlementApplied,noDuplicate:JSON.stringify(snapshot)===JSON.stringify(duplicate)});})()`));"
+    },
+    {
+      "file": "tests/bbp-b2b1-fly-ball-production-integration-test.js",
+      "line": 91,
+      "text": "const saved = JSON.parse(evaluate(`(() => {const x=__bbpB2B1Prepare(99409),m=x.m;player.highSchoolMatch=m;const before=JSON.stringify(m.flyBallCatchState),restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch,after=JSON.stringify(restored.flyBallCatchState),snapshot={outs:restored.outs,order:restored.battingOrderIndex.away,logs:restored.simulationLog.length};applyHighSchoolFlyBallCatchResolution(restored);const duplicate={outs:restored.outs,order:restored.battingOrderIndex.away,logs:restored.simulationLog.length};return JSON.stringify({same:before===after,settled:restored.flyBallCatchState.settlementApplied,noDuplicate:JSON.stringify(snapshot)===JSON.stringify(duplicate)});})()`));"
+    },
+    {
+      "file": "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+      "line": 84,
+      "text": "const beforeReload = JSON.parse(evaluate(`(() => {const x=__bbpB2B2Match({seed:99602});const before=JSON.stringify(x.situation),restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return JSON.stringify({same:before===JSON.stringify(restored.activeSituation),state:restored.activeSituation.lifecycleState,routes:restored.activeSituation.legalRoutes.length});})()`));"
+    },
+    {
+      "file": "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+      "line": 96,
+      "text": "const pendingReload = JSON.parse(evaluate(`(() => {const x=__bbpB2B2Match({seed:99606}),m=x.m;resolveHighSchoolRunnerTagUpDecision(m,\"tagUpSendHome\",{rolls:{runnerRoll:0,throwRoll:.999,receivingRoll:.999},deferSettlement:true});player.highSchoolMatch=m;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch,before={outs:restored.outs,score:restored.scores.home,runner:restored.runners[2],execution:restored.activeSituation.resolution.executionEvidence.executionIdentity};settleAndCloseHighSchoolRunnerTagUpSituation(restored);const once={outs:restored.outs,score:restored.scores.home,runner:restored.runners[2],logs:restored.simulationLog.filter(e=>e.type===\"runnerTagUpResolution\").length};settleAndCloseHighSchoolRunnerTagUpSituation(restored);const twice={outs:restored.outs,score:restored.scores.home,runner:restored.runners[2],logs:restored.simulationLog.filter(e=>e.type===\"runnerTagUpResolution\").length};return JSON.stringify({before,once,twice,active:restored.activeSituation});})()`));"
+    },
+    {
+      "file": "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+      "line": 114,
+      "text": "const timingProjection=JSON.parse(evaluate(`(() => {const {m}=__bbpB2B2Match({seed:99701});resolveHighSchoolRunnerTagUpDecision(m,\"tagUpSendHome\",{rolls:{runnerRoll:0,throwRoll:.999,receivingRoll:.999},deferSettlement:true});const execution=m.activeSituation.resolution.executionEvidence;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const same=JSON.stringify(restored.activeSituation.resolution.executionEvidence)===JSON.stringify(execution);settleAndCloseHighSchoolRunnerTagUpSituation(restored);return JSON.stringify({same,timing:execution.runnerThrowTiming,margin:execution.timingMargin,score:restored.scores.home});})()`));"
+    },
+    {
+      "file": "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+      "line": 117,
+      "text": "assert.throws(()=>evaluate('normalizeSave(badTag)'),/stale settlement/);passed++;"
+    },
+    {
+      "file": "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+      "line": 119,
+      "text": "assert.throws(()=>evaluate('normalizeSave(badTag)'),/Stale tag-up/);passed++;"
+    },
+    {
+      "file": "tests/callbackTest.js",
+      "line": 76,
+      "text": "const normalized = vm.runInContext(\"normalizeSave({name:'舊存檔',saveVersion:5})\", game);"
+    },
+    {
+      "file": "tests/career-save-admission-test.js",
+      "line": 281,
+      "text": "evaluate(validLoad.context, \"player = createInitialPlayer('載入前'); var __beforeValidLoad = player; loadGame()\");"
+    },
+    {
+      "file": "tests/career-save-admission-test.js",
+      "line": 292,
+      "text": "evaluate(invalidLoad.context, \"player = createInitialPlayer('既有玩家'); player.flags.push('unchanged'); var __beforeRejectedLoad = player; var __beforeRejectedJson = JSON.stringify(player); loadGame()\");"
+    },
+    {
+      "file": "tests/career-save-admission-test.js",
+      "line": 300,
+      "text": "evaluate(malformed.context, \"player = createInitialPlayer('JSON 前'); var __beforeMalformed = player; var __beforeMalformedJson = JSON.stringify(player); loadGame()\");"
+    },
+    {
+      "file": "tests/career-save-admission-test.js",
+      "line": 306,
+      "text": "evaluate(missingModule.context, \"player = createInitialPlayer('模組缺失前'); var __beforeMissingModule = player; loadGame()\");"
+    },
+    {
+      "file": "tests/career-save-admission-test.js",
+      "line": 317,
+      "text": "evaluate(legacyLoad.context, \"loadGame()\");"
+    },
+    {
+      "file": "tests/career-save-admission-test.js",
+      "line": 325,
+      "text": "evaluate(legacyAge22Load.context, \"loadGame()\");"
+    },
+    {
+      "file": "tests/career-save-admission-test.js",
+      "line": 337,
+      "text": "evaluate(invalidLegacyAge22Load.context, \"player = createInitialPlayer('遷移拒絕前'); var __beforeInvalidLegacy = player; var __beforeInvalidLegacyJson = JSON.stringify(player); loadGame()\");"
+    },
+    {
+      "file": "tests/career-save-admission-test.js",
+      "line": 343,
+      "text": "evaluate(forcedLoad.context, \"loadGame()\");"
+    },
+    {
+      "file": "tests/career-save-admission-test.js",
+      "line": 348,
+      "text": "evaluate(completedLoad.context, \"loadGame()\");"
+    },
+    {
+      "file": "tests/career-save-admission-test.js",
+      "line": 353,
+      "text": "evaluate(transitionLoad.context, \"loadGame()\");"
+    },
+    {
+      "file": "tests/career-spine-contract-test.js",
+      "line": 269,
+      "text": "evaluate(context, \"saveGame()\");"
+    },
+    {
+      "file": "tests/career-spine-contract-test.js",
+      "line": 270,
+      "text": "evaluate(context, \"player = createInitialPlayer('被覆蓋'); loadGame()\");"
+    },
+    {
+      "file": "tests/catcher-choice-outcome-integrity-v1-test.js",
+      "line": 92,
+      "text": "verify(\"15. save/reload 深層保留 selected／final route 與 stages\", evaluate(`(() => {const x=__resolveCatcher(\"secureAndReset\");player.highSchoolMatch=x.match;const m=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return m.catcherDecisionState.selectedRoute===\"secureAndReset\"&&m.catcherDecisionState.finalRoute===\"secureAndReset\"&&m.catcherDecisionState.executionStages.reset===\"completed\";})()`));"
+    },
+    {
+      "file": "tests/catcher-choice-outcome-integrity-v1-test.js",
+      "line": 93,
+      "text": "verify(\"16. reassessment state save/reload 後不退回另一 generic route\", evaluate(`(() => {const x=__resolveCatcher(\"holdRunnerAndReset\",[false,false,true],.9,{active:true,runnerBase:3});player.highSchoolMatch=x.match;const m=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return m.catcherDecisionState.selectedRoute===\"holdRunnerAndReset\"&&m.catcherDecisionState.reassessment.explicit&&m.catcherDecisionState.finalRoute===\"attemptHomeOut\";})()`));"
+    },
+    {
+      "file": "tests/coach-evaluation-boundary-test.js",
+      "line": 52,
+      "text": "saveGame() {"
+    },
+    {
+      "file": "tests/coach-response-flow-test.js",
+      "line": 487,
+      "text": "evaluate(saveBundle.context, \"saveGame()\");"
+    },
+    {
+      "file": "tests/coach-response-flow-test.js",
+      "line": 491,
+      "text": "\"player.relationships.coachTrust = 2; coach.trust = 20; loadGame(); coach.trust = 1;\""
+    },
+    {
+      "file": "tests/competition-rules-contract-foundation-test.js",
+      "line": 110,
+      "text": "fixture.run(\"player=normalizeSave(JSON.parse(JSON.stringify(player)));rulesMatch=player.highSchoolMatch;\");"
+    },
+    {
+      "file": "tests/competition-rules-contract-foundation-test.js",
+      "line": 119,
+      "text": "player=normalizeSave(legacy);"
+    },
+    {
+      "file": "tests/county-selection-opportunity-test.js",
+      "line": 174,
+      "text": "saveGame();player=createInitialPlayer();loadGame();"
+    },
+    {
+      "file": "tests/county-selection-opportunity-test.js",
+      "line": 180,
+      "text": "run(\"var legacySprint2=createInitialPlayer('legacy');legacySprint2=normalizeSave(legacySprint2);\");"
+    },
+    {
+      "file": "tests/current-state-boundary-test.js",
+      "line": 454,
+      "text": "saveGame();"
+    },
+    {
+      "file": "tests/current-state-boundary-test.js",
+      "line": 459,
+      "text": "loadGame();"
+    },
+    {
+      "file": "tests/day-completion-flow-test.js",
+      "line": 474,
+      "text": "evaluate(stableBundle.context, \"saveGame()\");"
+    },
+    {
+      "file": "tests/day-completion-flow-test.js",
+      "line": 477,
+      "text": "\"手動 saveGame() 沒有且只寫入一次\""
+    },
+    {
+      "file": "tests/day-completion-flow-test.js",
+      "line": 481,
+      "text": "loadGame();"
+    },
+    {
+      "file": "tests/decision-flow-test.js",
+      "line": 526,
+      "text": "saveGame();"
+    },
+    {
+      "file": "tests/decision-flow-test.js",
+      "line": 543,
+      "text": "loadGame();"
+    },
+    {
+      "file": "tests/defensive-decision-throw-production-integration-test.js",
+      "line": 33,
+      "text": "run(\"var m=decisionMatch();var paused=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;\");"
+    },
+    {
+      "file": "tests/defensive-decision-throw-production-integration-test.js",
+      "line": 51,
+      "text": "run(\"var stored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;var beforeStored=JSON.stringify(stored.groundBallInPlayState.decisionThrowState);recordGroundBallSituationResolution(stored,execution.resolution);\");"
+    },
+    {
+      "file": "tests/defensive-decision-throw-production-integration-test.js",
+      "line": 57,
+      "text": "assert.throws(()=>run(\"normalizeSave(bad)\"),/stale|runner|force chain/);"
+    },
+    {
+      "file": "tests/defensive-decision-throw-production-integration-test.js",
+      "line": 59,
+      "text": "assert.throws(()=>run(\"normalizeSave(bad)\"),/stale throw/);"
+    },
+    {
+      "file": "tests/defensive-decision-throw-production-integration-test.js",
+      "line": 61,
+      "text": "assert.throws(()=>run(\"normalizeSave(bad)\"),/stale opportunity/);"
+    },
+    {
+      "file": "tests/defensive-decision-throw-production-integration-test.js",
+      "line": 102,
+      "text": "run('var restoredTiming=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;');"
+    },
+    {
+      "file": "tests/defensive-decision-throw-production-integration-test.js",
+      "line": 110,
+      "text": "assert.throws(()=>run('normalizeSave(badTiming)'),/stale projected timing/);"
+    },
+    {
+      "file": "tests/defensive-decision-throw-production-integration-test.js",
+      "line": 117,
+      "text": "assert.throws(()=>run('normalizeSave(tampered)'),/stale projected timing facts/);"
+    },
+    {
+      "file": "tests/defensive-decision-throw-production-integration-test.js",
+      "line": 118,
+      "text": "run('var persisted=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;applyInfieldResolutionToHighSchoolMatch(persisted,ie.choice.matchDecision,persisted.activeSituation.resolution.executionEvidence);var savedSettlement=persisted.groundBallInPlayState.playSettlement;');"
+    },
+    {
+      "file": "tests/defensive-decision-throw-production-integration-test.js",
+      "line": 120,
+      "text": "run('player.highSchoolMatch=persisted;var closedReload=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;');"
+    },
+    {
+      "file": "tests/defensive-decision-throw-production-integration-test.js",
+      "line": 124,
+      "text": "run('var resumeMatch=decisionMatch();var re=executeDecision(resumeMatch);var resumeReload=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;var resumedResolution=resolveHighSchoolDefensivePlay(resumeReload,re.choice.matchDecision,()=>{throw Error(\"reroll\");});');"
+    },
+    {
+      "file": "tests/defensive-opportunity-production-integration-test.js",
+      "line": 55,
+      "text": "run(\"var groundReload=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;\");"
+    },
+    {
+      "file": "tests/defensive-opportunity-production-integration-test.js",
+      "line": 119,
+      "text": "assert.throws(() => run(\"normalizeSave(reloadPlayer)\"), /invalid or stale/);"
+    },
+    {
+      "file": "tests/defensive-outcome-cause-explainability-foundation-v1-test.js",
+      "line": 129,
+      "text": "verify(\"27. resolved explanation 可經 save/reload 原樣保留\", evaluate(`(() => {const a=__resolveDef(${dp},.5);player.highSchoolMatch=a.x.match;applyInfieldResolutionToHighSchoolMatch(a.x.match,a.choice.matchDecision,a.resolution);const restored=normalizeSave(JSON.parse(JSON.stringify(player))),last=restored.highSchoolMatch.completedMoments.at(-1);return JSON.stringify(restored.highSchoolMatch.lastDefensiveResolution.defensiveOutcomeExplanation)===JSON.stringify(a.explanation)&&JSON.stringify(last.defensiveOutcomeExplanation)===JSON.stringify(a.explanation);})()`));"
+    },
+    {
+      "file": "tests/defensive-outcome-cause-explainability-foundation-v1-test.js",
+      "line": 130,
+      "text": "verify(\"28. pending defensive choices save/reload 不漂移\", evaluate(`(() => {const a=__defCase({runners:[\"r1\",null,null],outs:1,routeWindows:{doublePlayWindow:\"wide\"}});player.highSchoolMatch=a.match;const before=JSON.stringify(a.choices.map(c=>({id:c.routeId,a:c.availability,r:c.readiness})));player=normalizeSave(JSON.parse(JSON.stringify(player)));const after=JSON.stringify(getHighSchoolDefensiveMomentChoices(player.highSchoolMatch).map(c=>({id:c.routeId,a:c.availability,r:c.readiness})));return before===after;})()`));"
+    },
+    {
+      "file": "tests/defensive-reach-secure-production-integration-test.js",
+      "line": 42,
+      "text": "run(`var savedGround=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;"
+    },
+    {
+      "file": "tests/defensive-reach-secure-production-integration-test.js",
+      "line": 76,
+      "text": "run(`var ${label}Saved=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;"
+    },
+    {
+      "file": "tests/defensive-reach-secure-production-integration-test.js",
+      "line": 98,
+      "text": "assert.throws(() => run(\"normalizeSave(corrupt)\"), /stale persisted secure/);"
+    },
+    {
+      "file": "tests/defensive-reach-secure-production-integration-test.js",
+      "line": 101,
+      "text": "assert.throws(() => run(\"normalizeSave(corrupt)\"), /incompatible reach/);"
+    },
+    {
+      "file": "tests/defensive-reach-secure-production-integration-test.js",
+      "line": 107,
+      "text": "var legacyReload=normalizeSave(legacy);`);"
+    },
+    {
+      "file": "tests/development-match-position-test-fallback-v1-test.js",
+      "line": 200,
+      "text": "verify(\"22. save/reload 保存 position、version、benchmark 與 floors\", evaluate(`(() => {const x=__fallbackSituation();const before=JSON.stringify(x.match.developmentTestCapabilityOverride);saveGame();loadGame();return player.highSchoolMatch.playerFieldingAssignment===\"二壘手\"&&before===JSON.stringify(player.highSchoolMatch.developmentTestCapabilityOverride);})()`));"
+    },
+    {
+      "file": "tests/development-match-position-test-fallback-v1-test.js",
+      "line": 201,
+      "text": "verify(\"23. reload 後 raw/effective audit 不漂移\", evaluate(`(() => {const before=getDevelopmentMatchPositionTestCapabilityAudit(player,player.highSchoolMatch);const raw=JSON.stringify(player.baseballSkills);saveGame();loadGame();return raw===JSON.stringify(player.baseballSkills)&&JSON.stringify(before)===JSON.stringify(getDevelopmentMatchPositionTestCapabilityAudit(player,player.highSchoolMatch));})()`));"
+    },
+    {
+      "file": "tests/development-match-position-test-fallback-v1-test.js",
+      "line": 250,
+      "text": "verify(\"50. save/reload 後 effective display 穩定且不消耗 RNG/cursor\", evaluate(`(() => {const x=__fallbackFixture({skills:{catching:4,throwing:10,reaction:3,range:9,baseballIQ:4}});const before=JSON.stringify(getDevelopmentTestEffectiveCapabilityDisplay(player,x.match));const cursors=x.match.simulationCursor+\"|\"+x.match.presentedEventCursor;saveGame();loadGame();const after=JSON.stringify(getDevelopmentTestEffectiveCapabilityDisplay(player,player.highSchoolMatch));return before===after&&cursors===player.highSchoolMatch.simulationCursor+\"|\"+player.highSchoolMatch.presentedEventCursor;})()`));"
+    },
+    {
+      "file": "tests/event-continuity-pass-test.js",
+      "line": 264,
+      "text": "game.saveGame();"
+    },
+    {
+      "file": "tests/event-continuity-pass-test.js",
+      "line": 266,
+      "text": "game.loadGame();"
+    },
+    {
+      "file": "tests/extra-inning-tiebreak-production-integration-test.js",
+      "line": 159,
+      "text": "env.run(\"saveGame();var tiebreakRenderer=showCurrentEvent;try{showCurrentEvent=()=>{};loadGame();}finally{showCurrentEvent=tiebreakRenderer;}\");"
+    },
+    {
+      "file": "tests/extra-inning-tiebreak-production-integration-test.js",
+      "line": 164,
+      "text": "env.run(\"saveGame();var tiebreakRenderer=showCurrentEvent;try{showCurrentEvent=()=>{};loadGame();}finally{showCurrentEvent=tiebreakRenderer;}\");"
+    },
+    {
+      "file": "tests/extra-inning-tiebreak-production-integration-test.js",
+      "line": 183,
+      "text": "env.run(\"saveGame();var tiebreakRenderer=showCurrentEvent;try{showCurrentEvent=()=>{};loadGame();}finally{showCurrentEvent=tiebreakRenderer;}\");"
+    },
+    {
+      "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+      "line": 212,
+      "text": "run('var m=firstBaseFixture('+JSON.stringify(options)+');var pending=JSON.stringify(m.activeSituation);saveGame();player=createInitialPlayer(\"1B pending cold\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+      "line": 214,
+      "text": "run('var x=firstBaseExecute(m,'+JSON.stringify(decision)+','+sample+');var raw=JSON.stringify(x.r);var stage=JSON.stringify(m.groundBallInPlayState.firstBaseExecution);var cursor=m.simulationCursor;saveGame();player=createInitialPlayer(\"1B executed cold\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+      "line": 218,
+      "text": "run('saveGame();player=createInitialPlayer(\"1B settled cold\");loadGame();m=player.highSchoolMatch;');assert.equal(run('firstBaseFacts(m)'),run('once'));"
+    },
+    {
+      "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+      "line": 236,
+      "text": "run('var m=firstBaseIncomingBoundary('+JSON.stringify(options)+',\"pending\");var identity=m.groundBallInPlayState.physicalTruth.identity;saveGame();player=createInitialPlayer(\"1B incoming pending\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+      "line": 238,
+      "text": "run('var r=resolveRoutineDefensivePlay(m,m.defensiveSituation,()=>.8);recordGroundBallSituationResolution(m,r);var execution=JSON.stringify(m.groundBallInPlayState.firstBaseExecution);var cursor=m.simulationCursor;saveGame();player=createInitialPlayer(\"1B incoming executed\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+      "line": 243,
+      "text": "assert.equal(run('firstBaseFacts(m)'),run('once'));integrity();run('saveGame();player=createInitialPlayer(\"1B incoming settled\");loadGame();m=player.highSchoolMatch;');assert.equal(run('firstBaseFacts(m)'),run('once'));"
+    },
+    {
+      "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+      "line": 248,
+      "text": "assert.throws(()=>run('normalizeSave(bad)'),/incoming continuation admission/);"
+    },
+    {
+      "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+      "line": 253,
+      "text": "try {run('var normalized=normalizeSave(saved);');assert.equal(run('JSON.stringify(normalized.highSchoolMatch.groundBallInPlayState.firstBaseExecution)'),run('before'));}"
+    },
+    {
+      "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+      "line": 272,
+      "text": "assert.throws(()=>run('normalizeSave(bad)'),/Stale|stale|Invalid|integrity|mismatch/,mutation);assert.deepEqual(json('bad'),before);"
+    },
+    {
+      "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+      "line": 276,
+      "text": "execute({},'challenge');run('var once=JSON.stringify(m.groundBallInPlayState.firstBaseExecution);var roster=m.rosters.home;var slot=roster.lineup.findIndex(a=>a.id===\"player\");var replacement=roster.bench.find(a=>TeamRosterFoundation.isHighSchoolPositionAssignmentLegal(a,\"1B\"));roster.bench=roster.bench.filter(a=>a.id!==replacement.id);roster.lineup[slot]={...replacement,position:\"一壘手\",defensivePosition:\"1B\"};TeamRosterFoundation.assertActiveDefense(roster);saveGame();player=createInitialPlayer(\"1B historical actor cold\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+      "line": 293,
+      "text": "run('saveGame();player=createInitialPlayer(\"historical pending\");loadGame();m=player.highSchoolMatch;var x=firstBaseExecute(m);saveGame();player=createInitialPlayer(\"historical executed\");loadGame();m=player.highSchoolMatch;resumeResolvedHighSchoolGroundBallSettlement(m);');integrity();"
+    },
+    {
+      "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+      "line": 341,
+      "text": "const saved=json('normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch');"
+    },
+    {
+      "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+      "line": 342,
+      "text": "run('saveGame();player=createInitialPlayer(\"normal cohort cold\");loadGame();');assert.deepEqual(json('player.highSchoolMatch'),saved);"
+    },
+    {
+      "file": "tests/force-multi-runner-settlement-production-integration-test.js",
+      "line": 62,
+      "text": "run('var restored = normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch; var restoredOnce = JSON.stringify(restored); applyInfieldResolutionToHighSchoolMatch(restored,\"challenge\",result);');"
+    },
+    {
+      "file": "tests/force-multi-runner-settlement-production-integration-test.js",
+      "line": 66,
+      "text": "run('m=forceMatch(); var pending = normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;');"
+    },
+    {
+      "file": "tests/generic-infield-position-admission-diagnostic-test.js",
+      "line": 132,
+      "text": "verify(\"11. save/reload 保留 career、actual assignment 與 provenance\", evaluate(`(() => {const x=__admissionSituation(\"內野手\",\"R\",93011);const role=x.situation.responsibility.playerRole;saveGame();loadGame();const m=player.highSchoolMatch;return player.primaryPosition===\"內野手\"&&m.playerFieldingAssignment===\"二壘手\"&&m.gameExposureState.opportunitySnapshot.assignmentSource===\"match-assignment\"&&m.gameExposureState.opportunitySnapshot.assignmentReason===\"playable-2b-vertical\"&&m.defensiveSituation.responsibility.playerRole===role;})()`));"
+    },
+    {
+      "file": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+      "line": 40,
+      "text": "function restoreBoundary(h,text) {h.context.blockerBoundary=text;h.run('player=normalizeSave(JSON.parse(blockerBoundary));m=player.highSchoolMatch;pendingYouthSeasonOutcome=null;isTransitioning=false;');}"
+    },
+    {
+      "file": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+      "line": 48,
+      "text": "test(\"save reload pending execution settles once without RNG\",()=>{restoreBoundary(recovery,snapshot);recovery.run(\"saveGame();loadGame();stopHighSchoolMatchPlayback();m=player.highSchoolMatch;var savedExecution=m.activeSituation.resolution.executionEvidence;var randomBefore=Math.random;Math.random=()=>{throw new Error('unexpected RNG');};try {advanceHighSchoolMatchPlaybackStep(m);} finally {Math.random=randomBefore;}var settled=JSON.stringify(m);applyRoutineDefensiveResolutionToHighSchoolMatch(m,savedExecution);\");assert.strictEqual(recovery.run(\"JSON.stringify(m)\"),recovery.run(\"settled\"));assert.strictEqual(recovery.run(\"m.activeSituation\"),null);});"
+    },
+    {
+      "file": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+      "line": 49,
+      "text": "test(\"reload after settlement cannot duplicate record\",()=>{const record=recovery.json(\"m.gameRecord\");recovery.run(\"saveGame();loadGame();stopHighSchoolMatchPlayback();m=player.highSchoolMatch;applyRoutineDefensiveResolutionToHighSchoolMatch(m,savedExecution);getHighSchoolMatchPresentation(m);\");assert.deepStrictEqual(recovery.json(\"m.gameRecord\"),record);});"
+    },
+    {
+      "file": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+      "line": 74,
+      "text": "test(\"manual reload playback delivers canonical apply and remains idempotent\",()=>{manual.run(\"saveGame();loadGame();stopHighSchoolMatchPlayback();m=player.highSchoolMatch;advanceHighSchoolMatchPlaybackStep(m);var manualOnce=JSON.stringify(m);applyInfieldResolutionToHighSchoolMatch(m,choice.matchDecision,resolution);\");assert.strictEqual(manual.run(\"m.activeSituation\"),null);assert.strictEqual(manual.run(\"JSON.stringify(m)\"),manual.run(\"manualOnce\"));assert(manual.run(\"m.groundBallInPlayState.settlementApplied\"));assert(manual.run(\"MatchGameRecord.assertIntegrity(m.gameRecord)\"));});"
+    },
+    {
+      "file": "tests/ground-ball-home-route-production-integration-test.js",
+      "line": 108,
+      "text": "const saveReload = JSON.parse(evaluate(`(() => {const x=__prepareHome(99508),m=x.m;player.highSchoolMatch=m;const before=JSON.stringify({runner:m.groundBallInPlayState.runnerRealization,window:m.defensiveSituation.routeWindows.homeOutWindow,evaluation:m.defensiveSituation.homeRouteEvaluation,routes:getHighSchoolDefensiveMomentChoices(m),coach:m.coachInstruction,lifecycle:m.activeSituation});const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const after=JSON.stringify({runner:restored.groundBallInPlayState.runnerRealization,window:restored.defensiveSituation.routeWindows.homeOutWindow,evaluation:restored.defensiveSituation.homeRouteEvaluation,routes:getHighSchoolDefensiveMomentChoices(restored),coach:restored.coachInstruction,lifecycle:restored.activeSituation});return JSON.stringify({same:before===after});})()`));"
+    },
+    {
+      "file": "tests/ground-ball-home-route-production-integration-test.js",
+      "line": 136,
+      "text": "const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;"
+    },
+    {
+      "file": "tests/ground-defensive-decision-identity-repair-test.js",
+      "line": 42,
+      "text": "h.run('player=normalizeSave(JSON.parse(r1Save));pendingYouthSeasonOutcome=null;isTransitioning=false;saveGame();loadGame();stopHighSchoolMatchPlayback();');"
+    },
+    {
+      "file": "tests/ground-defensive-decision-identity-repair-test.js",
+      "line": 50,
+      "text": "h.run('pendingYouthSeasonOutcome=null;isTransitioning=false;saveGame();loadGame();stopHighSchoolMatchPlayback();');"
+    },
+    {
+      "file": "tests/high-school-career-exit-integration-test.js",
+      "line": 9,
+      "text": "run(\"saveGame();loadGame();ensureHighSchoolCareerOffers()\");"
+    },
+    {
+      "file": "tests/high-school-career-exit-integration-test.js",
+      "line": 13,
+      "text": "run(`player=normalizeSave(${JSON.stringify(beforeSelection)});pendingYouthSeasonOutcome=null;isTransitioning=false;selectHighSchoolCareerOffer(${JSON.stringify(offer.offerId)})`);"
+    },
+    {
+      "file": "tests/high-school-career-exit-integration-test.js",
+      "line": 17,
+      "text": "run(\"saveGame();loadGame()\");"
+    },
+    {
+      "file": "tests/high-school-career-exit-integration-test.js",
+      "line": 65,
+      "text": "run(`player=normalizeSave(${JSON.stringify(beforeSelection)})`);"
+    },
+    {
+      "file": "tests/high-school-career-exit-integration-test.js",
+      "line": 68,
+      "text": "assert.throws(()=>run(`normalizeSave(${JSON.stringify(forged)})`),/邀請資料不一致/);"
+    },
+    {
+      "file": "tests/high-school-career-exit-integration-test.js",
+      "line": 71,
+      "text": "assert.throws(()=>run(`normalizeSave(${JSON.stringify(modifiedOffer)})`),/邀請資料不一致/);"
+    },
+    {
+      "file": "tests/high-school-career-exit-integration-test.js",
+      "line": 79,
+      "text": "run(\"saveGame();loadGame()\");"
+    },
+    {
+      "file": "tests/high-school-career-exit-integration-test.js",
+      "line": 83,
+      "text": "run(`player=normalizeSave(${JSON.stringify(beforeOffers)});pendingYouthSeasonOutcome=null;isTransitioning=false;choose('critical_farewell',0)`);flushTransitions();"
+    },
+    {
+      "file": "tests/high-school-entry-roster-integration-test.js",
+      "line": 133,
+      "text": "const reloadInvitation = evaluate(`(() => {player=__entryPlayer(9102);generateSchoolInvitationSet(player,{generationSeed:\"reload-invitation\"});const before=JSON.stringify(player.schoolInvitationState);player=normalizeSave(JSON.parse(JSON.stringify(player)));return before===JSON.stringify(player.schoolInvitationState);})()`);"
+    },
+    {
+      "file": "tests/high-school-entry-roster-integration-test.js",
+      "line": 136,
+      "text": "const selected = JSON.parse(evaluate(`(() => {player=__entryPlayer(9103);const state=generateSchoolInvitationSet(player,{generationSeed:\"selection\"});const invitation=state.invitations[1];finalizeSchoolInvitationSelection(player,invitation.schoolId);materializeSelectedHighSchoolRoster(player,{rosterRole:\"bench\"});const before=JSON.parse(JSON.stringify(player.schoolInvitationState));player=normalizeSave(JSON.parse(JSON.stringify(player)));const after=player.schoolInvitationState;return JSON.stringify({before,after,same:JSON.stringify(before)===JSON.stringify(after),invitation});})()`));"
+    },
+    {
+      "file": "tests/high-school-entry-roster-integration-test.js",
+      "line": 148,
+      "text": "const matchReload = evaluate(`(() => {player=normalizeSave(JSON.parse(JSON.stringify(player)));return player.schoolInvitationState.selectedSchoolYearRosterIdentity.rosterGenerationSeed===player.highSchoolMatch.rosters.home.teamRoster.generationSeed&&player.schoolInvitationState.selectedSchoolRoster.players.every(actor=>player.highSchoolMatch.rosters.home.teamRoster.players.some(matchActor=>matchActor.playerId===actor.playerId));})()`);"
+    },
+    {
+      "file": "tests/high-school-exchange-network-production-integration-test.js",
+      "line": 52,
+      "text": "test(\"7 actual save reload preserves evidence exactly\",()=>{const before=json(\"player.highSchoolExchangeNetwork\");run(\"saveGame();loadGame();stopHighSchoolMatchPlayback();m=player.highSchoolMatch;recordHighSchoolExchangeCompletion(m);\");assert.deepStrictEqual(json(\"player.highSchoolExchangeNetwork\"),before);});"
+    },
+    {
+      "file": "tests/high-school-exchange-network-production-integration-test.js",
+      "line": 99,
+      "text": "test(\"20 legacy save normalizes empty ledger without backfill\",()=>{run(\"var legacy=JSON.parse(JSON.stringify(player));delete legacy.highSchoolExchangeNetwork;var restored=normalizeSave(legacy);\");assert.deepStrictEqual(json(\"restored.highSchoolExchangeNetwork\"),{version:\"high-school-exchange-network-v1\",evidence:[]});});"
+    },
+    {
+      "file": "tests/high-school-friendly-invitation-producer-production-integration-test.js",
+      "line": 56,
+      "text": "test(\"14 reload derives same source IDs reasons ordering precedence\",()=>{const before=json(\"sourceResult()\");run(\"saveGame();loadGame();stopHighSchoolMatchPlayback();\");assert.deepStrictEqual(json(\"sourceResult()\"),before);});"
+    },
+    {
+      "file": "tests/high-school-integration-1-1-1-test.js",
+      "line": 145,
+      "text": "saveGame(); const expected=player.highSchoolAzheEcho.summary; player=createInitialPlayer(); loadGame(); return player.highSchoolAzheEcho.summary===expected && hasFlag(\"hs_y1_azhe_player_guides\");"
+    },
+    {
+      "file": "tests/high-school-integration-1-1-test.js",
+      "line": 144,
+      "text": "const migrated=normalizeSave(old); return migrated.saveVersion===15 && migrated.primaryPosition===\"捕手\" && migrated.secondaryPositions[0]===\"內野手\" && migrated.highSchoolYearOneComplete && migrated.highSchoolMatch.completed && migrated.highSchoolStep===8;"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-1-test.js",
+      "line": 227,
+      "text": "verify(\"32. normalizeSave 深層保存 player runner identity 與 simulation phase\", evaluate(`(() => {const match=__setup121();match.runners=[null,\"player\",\"home-sim-2\"];match.playerRunnerLocation=1;match.simulationPhase=\"moment_1_resolved\";const restored=normalizeSave(JSON.parse(JSON.stringify(player)));restored.highSchoolMatch.runners[1]=\"changed\";return player.highSchoolMatch.runners[1]===\"player\"&&restored.highSchoolMatch.playerRunnerLocation===1&&restored.highSchoolMatch.simulationPhase===\"moment_1_resolved\";})()`));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-1-test.js",
+      "line": 229,
+      "text": "verify(\"33. half-inning simulation 後存讀檔保留打序、比分、phase 與合法決定\", evaluate(`(() => {const match=__setup121();__resolveAdvance121(\"attack\",0.99);const expected=JSON.stringify({inning:match.inning,half:match.half,scores:match.scores,outs:match.outs,runners:match.runners,order:match.battingOrderIndex,phase:match.simulationPhase,cursor:match.simulationCursor,choices:getHighSchoolYearOneMatchMomentChoices(match).map(item=>item.matchDecision)});const restored=normalizeSave(JSON.parse(JSON.stringify(player)));player=restored;const actual=JSON.stringify({inning:restored.highSchoolMatch.inning,half:restored.highSchoolMatch.half,scores:restored.highSchoolMatch.scores,outs:restored.highSchoolMatch.outs,runners:restored.highSchoolMatch.runners,order:restored.highSchoolMatch.battingOrderIndex,phase:restored.highSchoolMatch.simulationPhase,cursor:restored.highSchoolMatch.simulationCursor,choices:getHighSchoolYearOneMatchMomentChoices(restored.highSchoolMatch).map(item=>item.matchDecision)});return actual===expected;})()`));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-1-test.js",
+      "line": 231,
+      "text": "verify(\"34. Defense outcome reload 後只 resume 一次，不重複已完成守備\", evaluate(`(() => {const match=__setup121();__resolveAdvance121(\"zone\",0.99);__resolve121(\"secure\",0.99);__forceThirdMoment121();if(!__advanceToThird121(0.99))return false;const completed=match.completedMoments.length;const contribution=match.playerContribution.outsCreated;saveGame();player=createInitialPlayer();loadGame();return player.highSchoolMatch.simulationPhase===\"moment_3_ready\"&&player.highSchoolMatch.completedMoments.length===completed&&player.highSchoolMatch.playerContribution.outsCreated===contribution;})()`));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-1-test.js",
+      "line": 233,
+      "text": "verify(\"35. 未完成且缺少 1.2.1 phase／roster 的開發存檔 deterministic reset 到正式比賽入口\", evaluate(`(() => {const saved=__setup121();const legacy=JSON.parse(JSON.stringify(player));delete legacy.highSchoolMatch.simulationPhase;delete legacy.highSchoolMatch.rosters;legacy.highSchoolMatch.momentIndex=1;legacy.highSchoolMatch.completed=false;player=normalizeSave(legacy);const reset=player.highSchoolMatch.id===\"\"&&player.highSchoolMatch.completedMoments.length===0;const entry=prepareHighSchoolYearOneMatch();return reset&&entry.simulationPhase===\"full_match_flow\"&&entry.inning===1&&entry.half===\"上\"&&entry.scores.home===0&&entry.scores.away===0&&entry.rosters.home.lineup.length===9;})()`));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-1-test.js",
+      "line": 235,
+      "text": "verify(\"36. 已完成 v15 高一比賽存檔不會被開發態 migration 重置\", evaluate(`(() => {const match=__complete121();const saved=JSON.parse(JSON.stringify(player));const count=saved.highSchoolMatch.completedMoments.length;delete saved.highSchoolMatch.simulationPhase;delete saved.highSchoolMatch.rosters;const restored=normalizeSave(saved);return restored.highSchoolMatch.completed&&restored.highSchoolMatch.id===\"hs-y1-autumn-exhibition\"&&restored.highSchoolMatch.completedMoments.length===count;})()`));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-2-1-test.js",
+      "line": 125,
+      "text": "verify(\"6. 讀檔會撤銷舊 timer 並只重建一個\", evaluate(`(() => {const m=__setup1221();__resolve1221();scheduleHighSchoolMatchPlayback(m);saveGame();loadGame();return __timerCount()===1&&isHighSchoolMatchPlaybackPhase(player.highSchoolMatch);})()`));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-2-1-test.js",
+      "line": 133,
+      "text": "verify(\"13. 一個關鍵時刻也可合法結算、摘要與存讀\", evaluate(`(() => {const m=__settleWithMomentCount1221(1);const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return m.completed&&m.completedMoments.length===1&&m.performanceSummary.includes(\"一個關鍵時刻\")&&restored.completed&&restored.completedMoments.length===1&&restored.performanceSummary===m.performanceSummary;})()`));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-2-1-test.js",
+      "line": 134,
+      "text": "verify(\"14. 兩個關鍵時刻也可合法結算、摘要與存讀\", evaluate(`(() => {const m=__settleWithMomentCount1221(2);const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return m.completed&&m.completedMoments.length===2&&m.performanceSummary.includes(\"兩個關鍵時刻\")&&restored.completed&&restored.completedMoments.length===2&&restored.performanceSummary===m.performanceSummary;})()`));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-2-1-test.js",
+      "line": 135,
+      "text": "verify(\"15. 三個關鍵時刻仍可合法結算、摘要與存讀\", evaluate(`(() => {const m=__settleWithMomentCount1221(3);const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return m.completed&&m.completedMoments.length===3&&m.performanceSummary.includes(\"三個關鍵時刻\")&&restored.completed&&restored.completedMoments.length===3&&restored.performanceSummary===m.performanceSummary;})()`));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-2-1-test.js",
+      "line": 157,
+      "text": "verify(\"31. normalizeSave 保存 hidden truth 與 settlement guard\", evaluate(`(() => {const m=__setup1221();m.opponentTacticalTruth={code:\"earlyBreak\",targetRunnerId:\"away-sim-2\"};m.eventSettlementApplied=true;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return restored.opponentTacticalTruth.code===\"earlyBreak\"&&restored.opponentTacticalTruth.targetRunnerId===\"away-sim-2\"&&restored.eventSettlementApplied===true;})()`));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-2-1-test.js",
+      "line": 158,
+      "text": "verify(\"32. normalized state 與原 state 不共用 tactical truth reference\", evaluate(`(() => {const m=__setup1221();m.opponentTacticalTruth={code:\"shortSwing\",targetRunnerId:\"r\"};const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;restored.opponentTacticalTruth.code=\"changed\";return m.opponentTacticalTruth.code===\"shortSwing\";})()`));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-2-2-test.js",
+      "line": 132,
+      "text": "verify(\"8. save/load 保留 reveal cursor，且只恢復一個 timer\", evaluate(`(() => {const m=__setup1222();Object.assign(m,{inning:2,half:\"上\",offenseTeam:\"away\",defenseTeam:\"home\"});m.lineScore={away:[0],home:[0]};m.scoreboardRevealHalfIndex=1;saveGame();loadGame();return player.highSchoolMatch.scoreboardRevealHalfIndex===1&&__timerCount()===1;})()`));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-2-2-test.js",
+      "line": 133,
+      "text": "verify(\"9. reload 後下一 tick 不重播 simulation event 或比分\", evaluate(`(() => {const m=__setup1222();Object.assign(m,{inning:2,half:\"上\",offenseTeam:\"away\",defenseTeam:\"home\"});m.lineScore={away:[0],home:[0]};m.scoreboardRevealHalfIndex=1;const log=m.simulationLog.length;const scores=JSON.stringify(m.scores);saveGame();loadGame();__runNextTimer();return player.highSchoolMatch.scoreboardRevealHalfIndex===2&&player.highSchoolMatch.simulationLog.length===log&&JSON.stringify(player.highSchoolMatch.scores)===scores;})()`));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-2-2-test.js",
+      "line": 142,
+      "text": "verify(\"16. normalizeSave 保存 coach context signature\", evaluate(`(() => {const m=__setup1222(\"bench\",10,true);const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return restored.coachTacticalContextSignature===m.coachTacticalContextSignature&&restored.coachTacticalDirection.intent===m.coachTacticalDirection.intent;})()`));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-2-test.js",
+      "line": 212,
+      "text": "const match=__setup122();__resolveAdvance122(\"zone\",0.99);match.presentedEventCursor=2;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const proof={sameLine:JSON.stringify(restored.lineScore.home)===JSON.stringify(match.lineScore.home)&&JSON.stringify(restored.lineScore.away)===JSON.stringify(match.lineScore.away),sameLog:restored.simulationLog.length===match.simulationLog.length&&restored.simulationLog.every((event,index)=>event.type===match.simulationLog[index].type&&event.sequence===match.simulationLog[index].sequence&&event.inning===match.simulationLog[index].inning),sameTactical:JSON.stringify(restored.coachTacticalDirection)===JSON.stringify(match.coachTacticalDirection),cursor:restored.presentedEventCursor};restored.lineScore.home[0]=99;restored.simulationLog[0].type=\"changed\";proof.deepLine=match.lineScore.home[0]!==99;proof.deepLog=match.simulationLog[0].type!==\"changed\";return proof;"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-2-test.js",
+      "line": 219,
+      "text": "const match=__setup122();__resolve122(\"zone\",0.99);match.presentedEventCursor=match.simulationLog.length;advanceHighSchoolMatchSimulation(match);const before={scores:JSON.stringify(match.scores),home:JSON.stringify(match.lineScore.home),away:JSON.stringify(match.lineScore.away),logLength:match.simulationLog.length,eventTypes:match.simulationLog.map(event=>event.type).join(),cursor:match.presentedEventCursor,feed:JSON.stringify(getHighSchoolMatchLiveFeed(match))};player=normalizeSave(JSON.parse(JSON.stringify(player)));const restored=player.highSchoolMatch;return before.scores===JSON.stringify(restored.scores)&&before.home===JSON.stringify(restored.lineScore.home)&&before.away===JSON.stringify(restored.lineScore.away)&&before.logLength===restored.simulationLog.length&&before.eventTypes===restored.simulationLog.map(event=>event.type).join()&&before.cursor===restored.presentedEventCursor&&before.feed===JSON.stringify(getHighSchoolMatchLiveFeed(restored));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-2-test.js",
+      "line": 223,
+      "text": "const match=__setup122();match.inning=5;match.half=\"上\";match.offenseTeam=\"away\";match.defenseTeam=\"home\";match.outs=3;match.lineScore.away=[1,0,0,0,2];match.scores.away=3;endHighSchoolMatchHalfInning(match);const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return match.inning===restored.inning&&match.half===restored.half&&JSON.stringify(match.scores)===JSON.stringify(restored.scores)&&JSON.stringify(match.lineScore.home)===JSON.stringify(restored.lineScore.home)&&JSON.stringify(match.lineScore.away)===JSON.stringify(restored.lineScore.away);"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-2-test.js",
+      "line": 227,
+      "text": "const match=__setup122();__resolveAdvance122(\"zone\",0.99);const defenseIntent=match.coachTacticalDirection.intent;__resolve122(\"secure\",0.99);match.presentedEventCursor=match.simulationLog.length;player=normalizeSave(JSON.parse(JSON.stringify(player)));const restored=player.highSchoolMatch;const preserved=restored.coachTacticalDirection.intent===defenseIntent;advanceHighSchoolMatchSimulation(restored);const feed=getHighSchoolMatchLiveFeed(restored);const nextType=feed.at(-1)?.type;return defenseIntent&&preserved&&[\"moment_2_ready\",\"moment_3_ready\",\"complete\"].includes(restored.simulationPhase)&&feed.length>0&&[\"meaningfulMomentReached\",\"gameEnd\"].includes(nextType);"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-3-test.js",
+      "line": 146,
+      "text": "verify(\"27. save normalization 深層保存 Ball Context 與防守原因\", evaluate(`(() => {const m=__defense123(\"deepGrounder\");resolveHighSchoolYearOneMatch(\"challenge\",m.currentMomentId,()=>0.5);const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return restored.ballContext.type===\"deepGrounder\"&&restored.lastDefensiveResolution.primaryCause&&restored.completedMoments.at(-1).causeExplanation;})()`));"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-test.js",
+      "line": 205,
+      "text": "__setupHighSchoolMatch(\"rotation\",\"外野手\",\"high\");__resolveCurrent(\"attack\",0.99);const outcome=player.highSchoolMatch.previousMomentOutcome;saveGame();player=createInitialPlayer();loadGame();const resumed=player.highSchoolMatch.momentIndex===1&&player.highSchoolMatch.simulationPhase===\"moment_2_ready\"&&player.highSchoolMatch.completedMoments.length===1&&player.highSchoolMatch.previousMomentOutcome===outcome;const before=JSON.stringify(player.highSchoolMatch);const stale=resolveHighSchoolYearOneMatch(\"attack\",\"hs_y1_match_moment_1\",()=>0.99);return resumed&&stale===false&&JSON.stringify(player.highSchoolMatch)===before;"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-test.js",
+      "line": 208,
+      "text": "__setupHighSchoolMatch(\"starter\",\"捕手\",\"high\");__resolveAndAdvance(\"zone\",0.99);__resolveCurrent(\"secure\",0.99);__forceThirdMomentPath();__resumeSimulation();const score=JSON.stringify(player.highSchoolMatch.scores);saveGame();player=createInitialPlayer();loadGame();return player.highSchoolMatch.momentIndex===2&&!player.highSchoolMatch.completed&&player.highSchoolMatch.completedMoments.length===2&&JSON.stringify(player.highSchoolMatch.scores)===score&&getHighSchoolYearOneMomentId()===\"hs_y1_match_moment_3\";"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-test.js",
+      "line": 210,
+      "text": "verify(\"21. normalizeSave 深層恢復 completedMoments 與 accumulated contribution\", evaluate(`(() => {const match=__completeDirect(\"bench\");const saved=JSON.parse(JSON.stringify(player));const expected=JSON.stringify(saved.highSchoolMatch.playerContribution);const total=saved.highSchoolMatch.playerContribution.strong+saved.highSchoolMatch.playerContribution.mixed+saved.highSchoolMatch.playerContribution.failure;const restored=normalizeSave(saved);restored.highSchoolMatch.completedMoments[0].outcome=\"改寫\";return saved.highSchoolMatch.completedMoments[0].outcome!==\"改寫\"&&total>=1&&JSON.stringify(restored.highSchoolMatch.playerContribution)===expected;})()`));"
+    },
+    {
+      "file": "tests/high-school-match-opportunity-generation-production-integration-test.js",
+      "line": 57,
+      "text": "const before=json(\"deriveHighSchoolMatchOpportunityCandidates({sequence:2})\");run(\"saveGame();loadGame();stopHighSchoolMatchPlayback();m=player.highSchoolMatch;\");"
+    },
+    {
+      "file": "tests/high-school-match-opportunity-generation-production-integration-test.js",
+      "line": 70,
+      "text": "run('player=normalizeSave(y1Save);initializeHighSchoolYearTransition(2);player.chapter=\"青棒第二年\";player.highSchoolYearTwoStep=2;var newYear=deriveHighSchoolMatchOpportunityCandidates();');"
+    },
+    {
+      "file": "tests/high-school-opportunity-probability-calibration-career.cjs",
+      "line": 22,
+      "text": "function boundaryReload(){if(!auditSettings.extended||index>100)return;checks.crossYearReloadSamples=(checks.crossYearReloadSamples||0)+1;const snapshot=JSON.stringify([player.highSchoolExchangeNetwork,player.highSchoolSchedule]);saveGame();const render=showCurrentEvent;try{showCurrentEvent=()=>{};loadGame();}finally{showCurrentEvent=render;}checks.crossYearReloadMismatch=(checks.crossYearReloadMismatch||0)+Number(snapshot!==JSON.stringify([player.highSchoolExchangeNetwork,player.highSchoolSchedule]));if(checks.crossYearReloadMismatch)throw Error(\"SAVE_RELOAD_FAILURE at year boundary\");}"
+    },
+    {
+      "file": "tests/high-school-opportunity-probability-calibration-career.cjs",
+      "line": 36,
+      "text": "saveGame();const renderer=showCurrentEvent;try{showCurrentEvent=()=>{};loadGame();}finally{showCurrentEvent=renderer;}"
+    },
+    {
+      "file": "tests/high-school-opportunity-probability-production-integration-test.js",
+      "line": 11,
+      "text": "run('saveGame();var renderAfterLoad=showCurrentEvent;try{showCurrentEvent=()=>{};loadGame();}finally{showCurrentEvent=renderAfterLoad;}');"
+    },
+    {
+      "file": "tests/high-school-opportunity-probability-production-integration-test.js",
+      "line": 20,
+      "text": "test(\"12 actual reload preserves declined identity provenance and consumed budget\",()=>{run('var savedOpportunity=JSON.stringify(opportunity);var savedBudget=JSON.stringify(selectedResult().budget);saveGame();loadGame();stopHighSchoolMatchPlayback();');noDraw();assert.strictEqual(run(\"JSON.stringify(selectedResult().budget)\"),run(\"savedBudget\"));assert.strictEqual(run('JSON.stringify(player.highSchoolSchedule.opportunities.find(o=>o.opportunityId===opportunity.opportunityId))'),run(\"savedOpportunity\"));});"
+    },
+    {
+      "file": "tests/high-school-opportunity-selection-production-integration-test.js",
+      "line": 10,
+      "text": "const before=json(\"selectedResult()\");run(\"saveGame();loadGame();stopHighSchoolMatchPlayback();\");const after=json(\"selectedResult()\");"
+    },
+    {
+      "file": "tests/high-school-relationship-recency-production-integration-test.js",
+      "line": 46,
+      "text": "env.run('saveGame();var temporalRenderer=showCurrentEvent;try{showCurrentEvent=()=>{};loadGame();}finally{showCurrentEvent=temporalRenderer;}');"
+    },
+    {
+      "file": "tests/high-school-relationship-recency-production-integration-test.js",
+      "line": 94,
+      "text": "env.run('saveGame();var temporalRenderer=showCurrentEvent;try{showCurrentEvent=()=>{};loadGame();}finally{showCurrentEvent=temporalRenderer;}');"
+    },
+    {
+      "file": "tests/high-school-relationship-recency-production-integration-test.js",
+      "line": 119,
+      "text": "test('old save unknown phase still loads without new schema',()=>{const env=observed.env;env.run('var temporalOld=JSON.parse(JSON.stringify(player));for(const e of temporalOld.highSchoolExchangeNetwork.evidence)e.seasonPhase=\"legacy-unmapped\";var temporalRestored=normalizeSave(temporalOld);');const original=env.json('temporalOld.highSchoolExchangeNetwork'),ledger=env.json('temporalRestored.highSchoolExchangeNetwork');assert.deepStrictEqual(ledger,original);assert(ledger.evidence.length);const source={evidenceRefs:ledger.evidence.map(e=>e.evidenceId)},context={careerYear:3,seasonPhase:'final-competition',sequence:1};const summary=R.buildRelationshipRecencySummary(ledger,source,context);assert.strictEqual(summary.status,'UNKNOWN');assert.deepStrictEqual(R.buildRelationshipRecencySummary(env.json('normalizeSave(temporalOld).highSchoolExchangeNetwork'),source,context),summary);});"
+    },
+    {
+      "file": "tests/high-school-relationship-recency-reputation-feasibility-production-integration-test.js",
+      "line": 37,
+      "text": "env.run('saveGame();var temporalRenderer=showCurrentEvent;try{showCurrentEvent=()=>{};loadGame();}finally{showCurrentEvent=temporalRenderer;}');"
+    },
+    {
+      "file": "tests/high-school-relationship-recency-reputation-feasibility-production-integration-test.js",
+      "line": 50,
+      "text": "test('player reputation is real persisted scalar, not school reputation',()=>{run('var priorReputation=player.reputation;applyCareerEffects({reputation:2});var reputationAfter=player.reputation;var reputationReload=normalizeSave(JSON.parse(JSON.stringify(player)));');assert.strictEqual(run('reputationAfter'),run('priorReputation')+2);assert.strictEqual(run('reputationReload.reputation'),run('reputationAfter'));});"
+    },
+    {
+      "file": "tests/high-school-relationship-temporal-authority-production-integration-test.js",
+      "line": 57,
+      "text": "env.run('saveGame();var temporalRenderer=showCurrentEvent;try{showCurrentEvent=()=>{};loadGame();}finally{showCurrentEvent=temporalRenderer;}');"
+    },
+    {
+      "file": "tests/high-school-relationship-temporal-authority-production-integration-test.js",
+      "line": 107,
+      "text": "env.run('saveGame();var temporalRenderer=showCurrentEvent;try{showCurrentEvent=()=>{};loadGame();}finally{showCurrentEvent=temporalRenderer;}');"
+    },
+    {
+      "file": "tests/high-school-relationship-temporal-authority-production-integration-test.js",
+      "line": 123,
+      "text": "test('old save unknown phase still loads without new schema',()=>{const env=observed.env;env.run('var temporalOld=JSON.parse(JSON.stringify(player));for(const e of temporalOld.highSchoolExchangeNetwork.evidence)e.seasonPhase=\"legacy-unmapped\";var temporalRestored=normalizeSave(temporalOld);');const original=env.json('temporalOld.highSchoolExchangeNetwork'),ledger=env.json('temporalRestored.highSchoolExchangeNetwork');assert.deepStrictEqual(ledger,original);assert(ledger.evidence.length);const result=T.resolveMostRecentRelationshipEvidence(ledger);assert.strictEqual(result.status,'UNKNOWN');assert.deepStrictEqual(T.resolveMostRecentRelationshipEvidence(env.json('normalizeSave(temporalOld).highSchoolExchangeNetwork')),result);});"
+    },
+    {
+      "file": "tests/high-school-schedule-opportunity-production-integration-test.js",
+      "line": 37,
+      "text": "run('HighSchoolScheduleOpportunity.setOpportunityStatus(player.highSchoolSchedule,f.offered.opportunityId,\"accepted\");player=normalizeSave(JSON.parse(JSON.stringify(player)));');"
+    },
+    {
+      "file": "tests/high-school-schedule-opportunity-production-integration-test.js",
+      "line": 42,
+      "text": "const before=json(\"player.highSchoolSchedule\");run(\"player=normalizeSave(JSON.parse(JSON.stringify(player)))\");assert.deepStrictEqual(json(\"player.highSchoolSchedule\"),before);"
+    },
+    {
+      "file": "tests/high-school-schedule-opportunity-production-integration-test.js",
+      "line": 50,
+      "text": "const before=json(\"m.matchContext\");run(\"saveGame();loadGame();stopHighSchoolMatchPlayback();m=player.highSchoolMatch;\");"
+    },
+    {
+      "file": "tests/high-school-schedule-opportunity-production-integration-test.js",
+      "line": 66,
+      "text": "run(\"player=normalizeSave(JSON.parse(JSON.stringify(player)))\");assert.strictEqual(run(\"player.highSchoolSchedule.entries[0].status\"),\"completed\");"
+    },
+    {
+      "file": "tests/high-school-schedule-opportunity-production-integration-test.js",
+      "line": 85,
+      "text": "run(\"delete player.highSchoolSchedule;player=normalizeSave(JSON.parse(JSON.stringify(player)))\");assert.strictEqual(run(\"player.highSchoolSchedule.entries.length\"),0);"
+    },
+    {
+      "file": "tests/high-school-schedule-opportunity-production-integration-test.js",
+      "line": 88,
+      "text": "run('player=normalizeSave(yearOneScheduleSave);var oldYear=JSON.parse(JSON.stringify(player.highSchoolSchedule));initializeHighSchoolYearTransition(2);player.chapter=\"青棒第二年\";');"
+    },
+    {
+      "file": "tests/high-school-schedule-opportunity-production-integration-test.js",
+      "line": 114,
+      "text": "assert.throws(()=>run('var corrupt=JSON.parse(JSON.stringify(player));corrupt.highSchoolMatch.id=\"other\";normalizeSave(corrupt)'));"
+    },
+    {
+      "file": "tests/high-school-schedule-opportunity-production-integration-test.js",
+      "line": 115,
+      "text": "assert.throws(()=>run('var corrupt=JSON.parse(JSON.stringify(player));corrupt.highSchoolMatch.matchContext.provenance.sourceId=\"rerolled\";normalizeSave(corrupt)'),/intent mismatch/);"
+    },
+    {
+      "file": "tests/high-school-three-year-spine-test.js",
+      "line": 163,
+      "text": "var __migratedV12 = normalizeSave(__legacyV12);`);"
+    },
+    {
+      "file": "tests/high-school-three-year-spine-test.js",
+      "line": 167,
+      "text": "evaluate(context, `player = normalizeSave(Object.assign(createInitialPlayer(\"舊高一結果\"), {"
+    },
+    {
+      "file": "tests/high-school-three-year-spine-test.js",
+      "line": 174,
+      "text": "evaluate(context, `player = normalizeSave(Object.assign(createInitialPlayer(\"舊高三\"), { saveVersion: 12, chapter: \"青棒關鍵年\", age: 18, criticalYearStep: 3 }));`);"
+    },
+    {
+      "file": "tests/high-school-three-year-spine-test.js",
+      "line": 176,
+      "text": "evaluate(context, `player = normalizeSave(Object.assign(createInitialPlayer(\"舊成年\"), { saveVersion: 12, chapter: \"發展期\", age: 20, developmentStep: 2, careerExit: \"大學棒球\" }));`);"
+    },
+    {
+      "file": "tests/high-school-three-year-spine-test.js",
+      "line": 180,
+      "text": "evaluate(context, \"saveGame(); player = createInitialPlayer('覆蓋'); loadGame()\");"
+    },
+    {
+      "file": "tests/high-school-three-year-spine-test.js",
+      "line": 186,
+      "text": "evaluate(context, \"saveGame(); player = createInitialPlayer('覆蓋'); loadGame()\");"
+    },
+    {
+      "file": "tests/high-school-training-camp-producer-production-integration-test.js",
+      "line": 63,
+      "text": "test(\"13 reload derives identical facts and diagnostics\",()=>{const before=json(\"camps()\");run(\"saveGame();loadGame();stopHighSchoolMatchPlayback();\");assert.deepStrictEqual(json(\"camps()\"),before);});"
+    },
+    {
+      "file": "tests/high-school-year-one-competition-loop-test.js",
+      "line": 85,
+      "text": "const firstReload = evaluate(`(() => {const before=JSON.stringify({exposure:player.highSchoolMatch.gameExposureState,history:player.highSchoolOpportunityHistory});player=normalizeSave(JSON.parse(JSON.stringify(player)));return before===JSON.stringify({exposure:player.highSchoolMatch.gameExposureState,history:player.highSchoolOpportunityHistory});})()`);"
+    },
+    {
+      "file": "tests/high-school-year-one-competition-loop-test.js",
+      "line": 105,
+      "text": "const reloadLoop = evaluate(`(() => {const before=JSON.stringify({role:player.highSchoolRoleCode,evaluation:player.highSchoolCompetitionEvaluation,history:player.highSchoolOpportunityHistory,competition:player.schoolInvitationState.selectedPositionCompetitionContext,next:player.highSchoolNextOpportunity,roster:player.schoolInvitationState.selectedSchoolRoster});player=normalizeSave(JSON.parse(JSON.stringify(player)));return before===JSON.stringify({role:player.highSchoolRoleCode,evaluation:player.highSchoolCompetitionEvaluation,history:player.highSchoolOpportunityHistory,competition:player.schoolInvitationState.selectedPositionCompetitionContext,next:player.highSchoolNextOpportunity,roster:player.schoolInvitationState.selectedSchoolRoster});})()`);"
+    },
+    {
+      "file": "tests/high-school-year-one-opportunity-two-integration-test.js",
+      "line": 139,
+      "text": "player=normalizeSave(JSON.parse(JSON.stringify(player)));"
+    },
+    {
+      "file": "tests/high-school-year-one-opportunity-two-integration-test.js",
+      "line": 194,
+      "text": "const year = parse(`(() => {const trace=__runTwoMatchTrace(99107,\"bench\",\"strong\",\"strong\");player.highSchoolStep=10;const settled=evaluateHighSchoolYear();const detail=player.highSchoolDetail;const saved=normalizeSave(JSON.parse(JSON.stringify(player)));return {settled,detail,role:player.highSchoolRoleCode,savedRole:saved.highSchoolRoleCode,savedEvaluation:saved.highSchoolCompetitionEvaluation,savedHistory:saved.highSchoolYearOneMatchHistory};})()`);"
+    },
+    {
+      "file": "tests/high-school-year-three-competition-loop-test.js",
+      "line": 23,
+      "text": "run(\"saveGame();loadGame()\");"
+    },
+    {
+      "file": "tests/high-school-year-three-competition-loop-test.js",
+      "line": 58,
+      "text": "run(\"careerFixture();choose('critical_offseason',1);advanceHighSchoolMatchPlaybackStep();saveGame();loadGame()\");"
+    },
+    {
+      "file": "tests/high-school-year-three-competition-loop-test.js",
+      "line": 62,
+      "text": "run(`stopHighSchoolMatchPlayback();pendingYouthSeasonOutcome=null;isTransitioning=false;player=normalizeSave(${JSON.stringify(midMatch)});playCareerMatchToEnd()`);"
+    },
+    {
+      "file": "tests/high-school-year-three-competition-loop-test.js",
+      "line": 64,
+      "text": "run(\"saveGame();loadGame();applyHighSchoolCompetitionMatchSettlement(player.highSchoolMatch)\");"
+    },
+    {
+      "file": "tests/high-school-year-transition-continuity-test.js",
+      "line": 164,
+      "text": "evaluate(\"player=normalizeSave(JSON.parse(JSON.stringify(player))); enterHighSchoolYearTwo()\");"
+    },
+    {
+      "file": "tests/high-school-year-transition-continuity-test.js",
+      "line": 193,
+      "text": "evaluate(\"player=normalizeSave(JSON.parse(JSON.stringify(player)))\");"
+    },
+    {
+      "file": "tests/high-school-year-transition-continuity-test.js",
+      "line": 207,
+      "text": "evaluate(\"player=normalizeSave(JSON.parse(JSON.stringify(player)))\");"
+    },
+    {
+      "file": "tests/high-school-year-two-competition-loop-test.js",
+      "line": 126,
+      "text": "evaluate(\"player=normalizeSave(JSON.parse(JSON.stringify(player)))\");"
+    },
+    {
+      "file": "tests/high-school-year-two-competition-loop-test.js",
+      "line": 133,
+      "text": "evaluate(\"player=normalizeSave(JSON.parse(JSON.stringify(player)))\");"
+    },
+    {
+      "file": "tests/high-school-year-two-competition-loop-test.js",
+      "line": 149,
+      "text": "evaluate(\"player=normalizeSave(JSON.parse(JSON.stringify(player)))\");"
+    },
+    {
+      "file": "tests/high-school-year-two-competition-loop-test.js",
+      "line": 158,
+      "text": "evaluate(\"player=normalizeSave(JSON.parse(JSON.stringify(player)))\");"
+    },
+    {
+      "file": "tests/infield-legacy-receiver-model-foundation-test.js",
+      "line": 218,
+      "text": "run('var m=firstBaseIncomingBoundary(' + JSON.stringify(options(pos)) + ',\"pending\");var s6Pending=JSON.stringify(m.groundBallInPlayState);saveGame();player=createInitialPlayer(\"S6 cold pending\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/infield-legacy-receiver-model-foundation-test.js",
+      "line": 224,
+      "text": "run('saveGame();player=createInitialPlayer(\"S6 cold executed\");loadGame();m=player.highSchoolMatch;'); assert.equal(run('JSON.stringify(m.groundBallInPlayState)'), run('s6Owned'));"
+    },
+    {
+      "file": "tests/infield-legacy-receiver-model-foundation-test.js",
+      "line": 226,
+      "text": "run('saveGame();player=createInitialPlayer(\"S6 cold settled\");loadGame();m=player.highSchoolMatch;'); assert.equal(run('firstBaseFacts(m)'), run('s6Once'));"
+    },
+    {
+      "file": "tests/infield-legacy-receiver-model-foundation-test.js",
+      "line": 241,
+      "text": "assert.throws(() => run('normalizeSave(probe);'));"
+    },
+    {
+      "file": "tests/infield-legacy-receiver-model-foundation-test.js",
+      "line": 251,
+      "text": "assert.throws(() => run('normalizeSave(probe);')); assert.equal(run('JSON.stringify(probe)'), run('s6Probe'));"
+    },
+    {
+      "file": "tests/infield-legacy-receiver-model-save-probe.cjs",
+      "line": 23,
+      "text": "try { run('var restoredMatch=normalizeSave(probe).highSchoolMatch;'); row.normalizationAccepted = true; }"
+    },
+    {
+      "file": "tests/infield-legacy-receiver-scorer-closeout-runner.cjs",
+      "line": 164,
+      "text": "const expected = c.json('normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch');"
+    },
+    {
+      "file": "tests/infield-legacy-receiver-scorer-closeout-runner.cjs",
+      "line": 165,
+      "text": "c.run('saveGame();player=createInitialPlayer(\"Sprint 5 cold reload\");loadGame();');"
+    },
+    {
+      "file": "tests/infield-legacy-receiver-scorer-closeout-test.js",
+      "line": 102,
+      "text": "const input=options(pos,{weakReceiver:'1B'});run('var m=firstBaseIncomingBoundary('+JSON.stringify(input)+',\"pending\");var originalPhysical=JSON.stringify(m.groundBallInPlayState.physicalTruth);saveGame();player=createInitialPlayer(\"L03 pending\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/infield-legacy-receiver-scorer-closeout-test.js",
+      "line": 104,
+      "text": "run('var choice=getHighSchoolDefensiveMomentChoices(m).find(x=>x.routeId===\"secureFirstBaseOut\");beginGroundBallSituationDecision(m,choice.matchDecision);var rolls=0;var raw=resolveHighSchoolDefensivePlay(m,choice.matchDecision,()=>{rolls++;return .8;});recordGroundBallSituationResolution(m,raw);var cursor=m.simulationCursor;var owned=JSON.stringify(m.groundBallInPlayState.shortstopExecution||m.groundBallInPlayState.decisionThrowState);saveGame();player=createInitialPlayer(\"L03 executed\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/infield-legacy-receiver-scorer-closeout-test.js",
+      "line": 112,
+      "text": "run('saveGame();player=createInitialPlayer(\"L03 settled\");loadGame();m=player.highSchoolMatch;');assert.equal(run('JSON.stringify(m.lastDefensiveResolution.scorerFacts)'),run('firstSource'));"
+    },
+    {
+      "file": "tests/infield-scorer-recovery-integrity-repair-test.js",
+      "line": 123,
+      "text": "const input=json('forged');assert.throws(()=>run('normalizeSave(forged);'));assert.deepEqual(json('forged'),input);"
+    },
+    {
+      "file": "tests/infield-scorer-recovery-integrity-repair-test.js",
+      "line": 174,
+      "text": "const input=json('routeProbe');assert.throws(()=>run('normalizeSave(routeProbe);'));"
+    },
+    {
+      "file": "tests/infield-scorer-recovery-integrity-repair-test.js",
+      "line": 178,
+      "text": "run('var omittedRoute=JSON.parse(JSON.stringify(player));if(omittedRoute.highSchoolMatch.activeSituation.executionState)delete omittedRoute.highSchoolMatch.activeSituation.executionState.selectedRoute;normalizeSave(omittedRoute);');"
+    },
+    {
+      "file": "tests/infield-scorer-recovery-integrity-repair-test.js",
+      "line": 195,
+      "text": "run('var m=firstBaseIncomingBoundary('+JSON.stringify(options(position,{occupied:1,...extra}))+',\"pending\");var pendingGround=JSON.stringify(m.groundBallInPlayState);saveGame();player=createInitialPlayer(\"scorer pending cold\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/infield-scorer-recovery-integrity-repair-test.js",
+      "line": 197,
+      "text": "run('var savedExecution=firstBaseExecute(m,\"challenge\",.8);var groundExecution=JSON.stringify(m.groundBallInPlayState);var initialCursor=m.simulationCursor;saveGame();player=createInitialPlayer(\"scorer executed cold\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/infield-scorer-recovery-integrity-repair-test.js",
+      "line": 205,
+      "text": "run('saveGame();player=createInitialPlayer(\"scorer settled cold\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/infield-scorer-recovery-integrity-repair-test.js",
+      "line": 225,
+      "text": "run('saveGame();player=createInitialPlayer(\"scorer historical pending\");loadGame();m=player.highSchoolMatch;firstBaseExecute(m,\"secure\",.8);saveGame();player=createInitialPlayer(\"scorer historical executed\");loadGame();m=player.highSchoolMatch;resumeResolvedHighSchoolGroundBallSettlement(m);');"
+    },
+    {
+      "file": "tests/infield-scorer-sprint-5-validation-runner.cjs",
+      "line": 163,
+      "text": "const expected = c.json('normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch');"
+    },
+    {
+      "file": "tests/infield-scorer-sprint-5-validation-runner.cjs",
+      "line": 164,
+      "text": "c.run('saveGame();player=createInitialPlayer(\"Sprint 5 cold reload\");loadGame();');"
+    },
+    {
+      "file": "tests/invitation-presentation-school-choice-integration-v1-test.js",
+      "line": 213,
+      "text": "saveGame(); player=createInitialPlayer(); loadGame();"
+    },
+    {
+      "file": "tests/invitation-presentation-school-choice-integration-v1-test.js",
+      "line": 221,
+      "text": "saveGame(); player=createInitialPlayer(); loadGame();"
+    },
+    {
+      "file": "tests/invitation-presentation-school-choice-integration-v1-test.js",
+      "line": 234,
+      "text": "const left=normalizeSave(JSON.parse(JSON.stringify(base)));"
+    },
+    {
+      "file": "tests/invitation-presentation-school-choice-integration-v1-test.js",
+      "line": 235,
+      "text": "const right=normalizeSave(JSON.parse(JSON.stringify(base)));"
+    },
+    {
+      "file": "tests/invitation-presentation-school-choice-integration-v1-test.js",
+      "line": 265,
+      "text": "const restored=normalizeSave(legacy);"
+    },
+    {
+      "file": "tests/invitation-presentation-v1-0-1-legacy-route-conflict-test.js",
+      "line": 186,
+      "text": "saveGame(); player=createInitialPlayer(); loadGame();"
+    },
+    {
+      "file": "tests/invitation-presentation-v1-0-1-legacy-route-conflict-test.js",
+      "line": 215,
+      "text": "player=createInitialPlayer();loadGame();"
+    },
+    {
+      "file": "tests/invitation-presentation-v1-0-1-legacy-route-conflict-test.js",
+      "line": 226,
+      "text": "__normalPreHs101(19030);player.juniorSeasonStep=9;saveGame();player=createInitialPlayer();loadGame();"
+    },
+    {
+      "file": "tests/invitation-presentation-v1-0-1-legacy-route-conflict-test.js",
+      "line": 241,
+      "text": "const restored=normalizeSave({saveVersion:14,name:\"既有高中舊存檔\",age:17,chapter:\"青棒第二年\",idealSelf:\"守備型\",primaryPosition:\"內野手\",highSchoolRoute:\"普通高中・穩定出賽\",baseballSkills:{batting:4,baseRunning:3,baseballIQ:4}});"
+    },
+    {
+      "file": "tests/match-context-production-integration-test.js",
+      "line": 68,
+      "text": "run('saveGame();loadGame();stopHighSchoolMatchPlayback();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/match-context-production-integration-test.js",
+      "line": 94,
+      "text": "const before=json('m.matchContext');run('prepareCurrentHighSchoolYearOneMatch();player=normalizeSave(JSON.parse(JSON.stringify(player)));m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/match-context-production-integration-test.js",
+      "line": 98,
+      "text": "run('m=contextFixture(null);delete m.matchContext;player=normalizeSave(JSON.parse(JSON.stringify(player)));m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/match-context-production-integration-test.js",
+      "line": 113,
+      "text": "run('m=contextFixture();Object.assign(m,{homeTeamId:m.matchContext.homeTeamId,awayTeamId:m.matchContext.awayTeamId,playerTeamId:m.matchContext.playerTeamId,opponentTeamId:m.matchContext.opponentTeamId});delete m.matchContext;player=normalizeSave(JSON.parse(JSON.stringify(player)));m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/match-context-production-integration-test.js",
+      "line": 125,
+      "text": "assert.throws(()=>run('var bad=JSON.parse(JSON.stringify(player));bad.highSchoolMatch.matchContext.matchId=\"another-game\";normalizeSave(bad)'));"
+    },
+    {
+      "file": "tests/match-development-settlement-presentation-v1-test.js",
+      "line": 149,
+      "text": "verify(\"19. Legacy completed save migration 可 bypass 已看過的舊 outcome\", evaluate(`(()=>{const saved=Object.assign(createInitialPlayer(\"Legacy\"),{highSchoolMatch:Object.assign(createInitialPlayer().highSchoolMatch,{completed:true,eventSettlementApplied:true})});delete saved.highSchoolMatch.developmentPresentationCompleted;return normalizeSave(saved).highSchoolMatch.developmentPresentationCompleted===true;})()`));"
+    },
+    {
+      "file": "tests/match-development-settlement-presentation-v1-test.js",
+      "line": 165,
+      "text": "const reload = parse(`(()=>{const summaryBefore=JSON.stringify(__mdModel(player.highSchoolMatch));const developmentBefore=JSON.stringify(player.developmentState);const settlementId=player.highSchoolMatch.matchExperience.matchExperienceSettlementId;saveGame();loadGame();const summaryAfter=JSON.stringify(__mdModel(player.highSchoolMatch));const developmentAfter=JSON.stringify(player.developmentState);const beforeDuplicate=JSON.stringify(player.developmentState);const duplicate=MatchExperienceDevelopment.settleMatchExperienceDevelopment(player,player.highSchoolMatch);return {sameSummary:summaryBefore===summaryAfter,sameDevelopment:developmentBefore===developmentAfter,sameSettlement:settlementId===player.highSchoolMatch.matchExperience.matchExperienceSettlementId,presentationCompleted:player.highSchoolMatch.developmentPresentationCompleted,pending:pendingYouthSeasonOutcome?.eventId||\"\",screen:document.getElementById(\"story\").innerHTML,duplicateStatus:duplicate.status,noDuplicate:beforeDuplicate===JSON.stringify(player.developmentState)};})()`);"
+    },
+    {
+      "file": "tests/match-full-game-record-test.js",
+      "line": 45,
+      "text": "saveGame();loadGame();"
+    },
+    {
+      "file": "tests/match-full-game-record-test.js",
+      "line": 50,
+      "text": "run(\"playCareerMatchToEnd();saveGame();loadGame();var completedRecordBefore=JSON.stringify(player.highSchoolMatch.gameRecord);var duplicateFinalize=finalizeHighSchoolGameRecord(player.highSchoolMatch);var completedRecordSame=completedRecordBefore===JSON.stringify(player.highSchoolMatch.gameRecord)\");"
+    },
+    {
+      "file": "tests/match-m0-after-r2-audit-test.js",
+      "line": 25,
+      "text": "test('presented plate decision survives save reload',()=>{const before=h.json(signature);assert.equal(before.active.lifecycleState,'presented');h.run('saveGame();loadGame();stopHighSchoolMatchPlayback();');assert.deepEqual(h.json(signature),before);});"
+    },
+    {
+      "file": "tests/match-m0-after-r2-audit-test.js",
+      "line": 31,
+      "text": "h.run('saveGame();loadGame();stopHighSchoolMatchPlayback();loadGame();stopHighSchoolMatchPlayback();');"
+    },
+    {
+      "file": "tests/match-m0-after-r2-audit-test.js",
+      "line": 41,
+      "text": "test('resolved unapplied ground identity and ledger survive reload',()=>{const before=h.json(signature);h.run('saveGame();loadGame();stopHighSchoolMatchPlayback();');assert.deepEqual(h.json(signature),before);});"
+    },
+    {
+      "file": "tests/match-m0-after-r2-audit-test.js",
+      "line": 43,
+      "text": "test('completed-play reload keeps the ledger unchanged',()=>{const once=h.json(signature);h.run('saveGame();loadGame();stopHighSchoolMatchPlayback();');assert.deepEqual(h.json(signature),once);});"
+    },
+    {
+      "file": "tests/match-opportunity-structural-completion-v1-test.js",
+      "line": 178,
+      "text": "verify(\"16. Save / Reload 保留 routes、density 與 selected/final route 欄位\", evaluate(`(() => {const x=__structuralCase(${JSON.stringify(forceThird)});const before=x.choices.map(c=>c.routeId).sort().join(\"|\");x.match.matchDecisionDensityState={...createHighSchoolMatchDecisionDensityState(),defensiveMeaningfulDecisionCount:2,lastSelectedRoute:\"attackLeadRunnerThird\",lastFinalRoute:\"attackLeadRunnerThird\",recentSituationFamilies:[\"a\"],recentRouteFamilies:[\"b\"]};player.highSchoolMatch=x.match;saveGame();loadGame();const d=player.highSchoolMatch.matchDecisionDensityState;const after=getHighSchoolDefensiveMomentChoices(player.highSchoolMatch).map(c=>c.routeId).sort().join(\"|\");return before===after&&d.defensiveMeaningfulDecisionCount===2&&d.lastSelectedRoute===\"attackLeadRunnerThird\"&&d.lastFinalRoute===\"attackLeadRunnerThird\"&&d.recentSituationFamilies[0]===\"a\";})()`));"
+    },
+    {
+      "file": "tests/national-selection-pipeline-test.js",
+      "line": 103,
+      "text": "var nationalShortlistSnapshot=JSON.stringify(player.nationalSelectionState);saveGame();player=createInitialPlayer();loadGame();"
+    },
+    {
+      "file": "tests/national-selection-pipeline-test.js",
+      "line": 108,
+      "text": "var nationalFinalSnapshot=JSON.stringify(player.nationalSelectionState);saveGame();player=createInitialPlayer();loadGame();"
+    },
+    {
+      "file": "tests/national-selection-pipeline-test.js",
+      "line": 113,
+      "text": "run(\"var legacyNational=createInitialPlayer('legacy-national');legacyNational=normalizeSave(legacyNational);\");"
+    },
+    {
+      "file": "tests/offensive-plate-approach-foundation-v1-test.js",
+      "line": 241,
+      "text": "player=normalizeSave(JSON.parse(JSON.stringify(player)));match=player.highSchoolMatch;"
+    },
+    {
+      "file": "tests/offensive-plate-approach-foundation-v1-test.js",
+      "line": 433,
+      "text": "verify(\"23. 進行中 PA state 通過 save normalization 不重抽 pending pitch\", evaluate(`(() => {const m=__opaMatch();const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.matchDecision===\"zone\");let s=ensureHighSchoolOffensivePlateAppearanceState(m,c);s=OffensivePlateApproach.prepareNextPitch(s,__pitch(\"edgeStrike\"));m.offensivePlateAppearanceState=JSON.parse(JSON.stringify(s));player.highSchoolMatch=m;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch.offensivePlateAppearanceState;return restored.paIdentity===s.paIdentity&&restored.pitchNumber===0&&restored.pendingPitch.pitchId===s.pendingPitch.pitchId;})()`));"
+    },
+    {
+      "file": "tests/offensive-plate-approach-foundation-v1-test.js",
+      "line": 525,
+      "text": "verify(\"51. save/reload 保留 pending opportunity classification 與 density\", evaluate(`(() => {const m=__opaMatch({momentIndex:2});m.simulationPhase=\"moment_2_resolved\";m.currentDomain=\"flow\";prepareHighSchoolFinalOffensiveMomentFromSimulation(m);player.highSchoolMatch=m;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch.pendingOffensiveOpportunity;return restored.status===\"pending\"&&restored.classification.leverageClass&&restored.density.allowed===true&&restored.momentId===m.currentMomentId;})()`));"
+    },
+    {
+      "file": "tests/offensive-plate-approach-foundation-v1-test.js",
+      "line": 543,
+      "text": "verify(\"66. reload 前尚未選擇時保留同一 agency participation choice\", evaluate(`(() => {const m=__agencyMatch();__reachAgency(m);player.highSchoolMatch=m;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return restored.simulationPhase===\"offensive_agency_ready\"&&restored.offensivePlayerAgencyState.status===\"pending\"&&restored.offensivePlayerAgencyState.agencyIdentity===m.offensivePlayerAgencyState.agencyIdentity&&isHighSchoolMatchDecisionVisible(restored)&&getHighSchoolOffensiveAgencyChoices(restored).length===2;})()`));"
+    },
+    {
+      "file": "tests/offensive-plate-approach-foundation-v1-test.js",
+      "line": 544,
+      "text": "verify(\"67. manual selection 後進行中 PA reload 不重抽 pending pitch\", evaluate(`(() => {const m=__agencyMatch();__reachAgency(m);const id=m.offensivePlayerAgencyState.momentId;chooseHighSchoolOffensiveAgency(\"manual\",id);const choice=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.matchDecision===\"zone\");let pa=ensureHighSchoolOffensivePlateAppearanceState(m,choice);pa=OffensivePlateApproach.prepareNextPitch(pa,__pitch(\"edgeStrike\"));m.offensivePlateAppearanceState=JSON.parse(JSON.stringify(pa));player.highSchoolMatch=m;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return restored.offensivePlayerAgencyState.selection===\"manual\"&&restored.offensivePlayerAgencyState.status===\"manualReady\"&&restored.offensivePlateAppearanceState.paIdentity===pa.paIdentity&&restored.offensivePlateAppearanceState.pendingPitch.pitchId===pa.pendingPitch.pitchId;})()`));"
+    },
+    {
+      "file": "tests/offensive-plate-approach-foundation-v1-test.js",
+      "line": 545,
+      "text": "verify(\"68. simulate selection 完成後 reload 不重新詢問或重複模擬\", evaluate(`(() => {const m=__agencyMatch();__reachAgency(m);const id=m.offensivePlayerAgencyState.momentId;chooseHighSchoolOffensiveAgency(\"simulate\",id);player.highSchoolMatch=m;const before=m.simulationLog.filter(x=>x.type===\"plateAppearance\"&&x.batterId===\"player\").length;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const c=classifyHighSchoolOffensiveOpportunity(restored,__opportunityChoices());const a=evaluateHighSchoolOffensivePlayerAgency(restored,c);return restored.offensivePlayerAgencyState.status===\"resolved\"&&restored.offensivePlayerAgencyState.resultApplied&&!a.lateGamePlayerAgency&&restored.simulationLog.filter(x=>x.type===\"plateAppearance\"&&x.batterId===\"player\").length===before;})()`));"
+    },
+    {
+      "file": "tests/offensive-plate-approach-foundation-v1-test.js",
+      "line": 618,
+      "text": "verify(\"111. resolved PA 經正式 save normalization 保留 result text 與 feedback category\", evaluate(`(() => {const m=__opaMatch();const moment=__resolveOPA(m,\"zone\",[__pitch(\"clearBall\"),__pitch(\"clearBall\"),__pitch(\"clearBall\"),__pitch(\"clearBall\")],Array.from({length:4},()=>({decisionRoll:.99,recognitionRoll:0})));const before={outcome:moment.outcome,feedback:moment.coachFeedback};player.highSchoolMatch=m;player=normalizeSave(JSON.parse(JSON.stringify(player)));const loaded=player.highSchoolMatch.completedMoments.at(-1);return loaded.outcome===before.outcome&&loaded.coachFeedback===before.feedback&&player.highSchoolMatch.lastOffensiveResolution.coachFeedback===before.feedback;})()`));"
+    },
+    {
+      "file": "tests/offensive-plate-approach-foundation-v1-test.js",
+      "line": 652,
+      "text": "verify(\"127. 正式 pending pitch save/reload 保留 frozen distribution、intent 與 actual\", evaluate(`(() => {const m=__opaMatch({seed:94803});const c=getHighSchoolYearOneMatchMomentChoices(m).find(x=>x.matchDecision===\"zone\");const pending=OffensivePlateApproach.prepareNextPitch(ensureHighSchoolOffensivePlateAppearanceState(m,c));m.offensivePlateAppearanceState=JSON.parse(JSON.stringify(pending));player.highSchoolMatch=m;const loaded=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return JSON.stringify(loaded.offensivePlateAppearanceState.pendingPitch)===JSON.stringify(pending.pendingPitch)&&JSON.stringify(loaded.pitcherRuntimeState)===JSON.stringify(m.pitcherRuntimeState);})()`));"
+    },
+    {
+      "file": "tests/offensive-plate-approach-foundation-v1-test.js",
+      "line": 657,
+      "text": "verify(\"132. 正式 save/reload 保留 Anticipation snapshot 與 pre-pitch planning，不 reroll\", evaluate(`(() => {const m=__opaMatch({seed:94904});getHighSchoolYearOneMatchMomentChoices(m);player.highSchoolMatch=m;const before=JSON.stringify({a:m.batterAnticipationState,p:m.prePitchPlanningState,e:m.pitcherObservableHistory});const loaded=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return before===JSON.stringify({a:loaded.batterAnticipationState,p:loaded.prePitchPlanningState,e:loaded.pitcherObservableHistory});})()`));"
+    },
+    {
+      "file": "tests/offensive-plate-approach-foundation-v1-test.js",
+      "line": 659,
+      "text": "verify(\"134. 正式 save/reload 後 canonical history 與 rebuilt evidence 完全一致\", evaluate(`(() => {const m=__opaMatch({seed:94906});m.pitcherObservableHistory=[{pitchClass:\"competitiveStrike\",pitchResult:\"calledStrike\",ballsAfter:0,strikesAfter:1,commandCue:\"commandAppearsStable\"},{pitchClass:\"edgeStrike\",pitchResult:\"foul\",ballsAfter:0,strikesAfter:2,commandCue:\"recentEdgeAttempts\"},{pitchClass:\"chasePitch\",pitchResult:\"ball\",ballsAfter:1,strikesAfter:2,commandCue:\"recentExpansionPattern\"}];const before=PitchSequencing.buildObservablePitcherEvidence({observableHistory:m.pitcherObservableHistory});player.highSchoolMatch=m;const loaded=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const after=PitchSequencing.buildObservablePitcherEvidence({observableHistory:loaded.pitcherObservableHistory});return JSON.stringify(loaded.pitcherObservableHistory)===JSON.stringify(m.pitcherObservableHistory)&&JSON.stringify(after)===JSON.stringify(before)&&after.sampleSize===3&&after.previousPitchResult===\"ball\";})()`));"
+    },
+    {
+      "file": "tests/offensive-production-presentation-sprint-c-test.js",
+      "line": 129,
+      "text": "verify(\"19. Pre-choice save/reload 由 canonical state 重建相同 presentation\", evaluate(`(() => {const m=__sprintCMatch(97102);getHighSchoolYearOneMatchMomentChoices(m);const before=JSON.stringify(BatterAnticipation.createPrePAPresentation(m.batterAnticipationState));player.highSchoolMatch=m;const loaded=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return before===JSON.stringify(BatterAnticipation.createPrePAPresentation(loaded.batterAnticipationState))&&JSON.stringify(loaded.prePitchPlanningState)===JSON.stringify(m.prePitchPlanningState);})()`));"
+    },
+    {
+      "file": "tests/offensive-production-presentation-sprint-c-test.js",
+      "line": 195,
+      "text": "verify(\"35. Save/reload 保留 pitch history order 與 opening attribution\", evaluate(`(() => {const m=__sprintCMatch(97107);m.completedMoments=[{batterAnticipation:${JSON.stringify(challengeAnticipation)},pitchHistory:[{pitch:{pitchLocationClass:\"competitiveStrike\"},recognition:{correct:true},action:\"take\",contact:false,pitchResult:\"calledStrike\"},{pitch:{pitchLocationClass:\"chasePitch\"},recognition:{correct:true},action:\"take\",contact:false,pitchResult:\"ball\"}],outcome:\"這個打席形成保送\"}];player.highSchoolMatch=m;const loaded=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const savedMoment=loaded.completedMoments[0];const model=createHighSchoolOffensiveExplainabilityModel(savedMoment);return savedMoment.pitchHistory[0].pitch.pitchLocationClass===\"competitiveStrike\"&&savedMoment.pitchHistory[1].pitch.pitchLocationClass===\"chasePitch\"&&model.directionMatched===true&&model.openingAttributionText.includes(\"讀到了第一球\");})()`));"
+    },
+    {
+      "file": "tests/offensive-tactical-action-sprint-a-test.js",
+      "line": 113,
+      "text": "verify(\"32. save/reload 保留 selected action、reveal phase 與 emitted event 且不重抽／重複\", evaluate(`(() => {const m=__tacticalMatch();m.currentDomain=\"defense\";prepareHighSchoolOffensiveTacticalAction(m,{tacticalActionOverride:\"surpriseBunt\"});advanceHighSchoolOffensiveTacticalReveal(m,\"lateReveal\");player.highSchoolMatch=m;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const before=JSON.stringify(restored.offensiveTacticalActionState);prepareHighSchoolOffensiveTacticalAction(restored);advanceHighSchoolOffensiveTacticalReveal(restored,\"lateReveal\");return restored.offensiveTacticalActionState.selectedTacticalAction===\"surpriseBunt\"&&restored.offensiveTacticalActionState.currentPhase===\"lateReveal\"&&restored.offensiveTacticalActionState.observableEvents.length===1&&before===JSON.stringify(restored.offensiveTacticalActionState);})()`));"
+    },
+    {
+      "file": "tests/offensive-tactical-action-sprint-b1-0-1-test.js",
+      "line": 66,
+      "text": "verify(\"7. Two-strike Foul render／save normalization 不會重複 count、out 或 PA event\", evaluate(`(() => {const m=player.highSchoolMatch;const before={outs:m.outs,index:m.battingOrderIndex.away,pa:m.simulationLog.filter(x=>x.type===\"plateAppearance\").length,bunt:m.simulationLog.filter(x=>x.type===\"buntPitchResolved\").length};getHighSchoolMatchPresentation(m);getHighSchoolMatchPresentation(m);normalizeSave(JSON.parse(JSON.stringify(player)));return m.outs===before.outs&&m.battingOrderIndex.away===before.index&&m.simulationLog.filter(x=>x.type===\"plateAppearance\").length===before.pa&&m.simulationLog.filter(x=>x.type===\"buntPitchResolved\").length===before.bunt;})()`));"
+    },
+    {
+      "file": "tests/offensive-tactical-action-sprint-b1-0-1-test.js",
+      "line": 77,
+      "text": "verify(\"13. Production save/reload：未呈現 pitch 不 reroll、不重複 history/count/reveal\", evaluate(`(() => {const m=__b101Match(77307);const e=prepareHighSchoolDefensiveMomentFromSimulation(m,${holdOptions});player.highSchoolMatch=m;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const before=JSON.stringify(restored.offensiveBuntPAState);const revealCount=restored.offensiveTacticalActionState.observableEvents.length;const again=prepareHighSchoolDefensiveMomentFromSimulation(restored,${holdOptions});return again.buntPitchIdentity===e.buntPitchIdentity&&JSON.stringify(restored.offensiveBuntPAState)===before&&restored.offensiveTacticalActionState.observableEvents.length===revealCount&&restored.offensiveBuntPAState.pitchHistory.length===1;})()`));"
+    },
+    {
+      "file": "tests/offensive-tactical-action-sprint-b1-test.js",
+      "line": 153,
+      "text": "verify(\"50. production save/reload 保留 completed Bunt realization 且不重抽\", evaluate(`(() => {const before=JSON.stringify(player.highSchoolMatch.offensiveBuntPAState);const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return before===JSON.stringify(restored.offensiveBuntPAState)&&restored.offensiveBuntPAState.pitchHistory[0].buntResolution.placement===\"thirdBaseSide\";})()`));"
+    },
+    {
+      "file": "tests/offensive-tactical-action-sprint-b1-test.js",
+      "line": 154,
+      "text": "verify(\"51. production foul 後 save/reload 保留 count 並可接續下一球\", evaluate(`(() => {const m=__b1Match(77222);prepareHighSchoolOffensiveTacticalAction(m,{tacticalActionOverride:\"surpriseBunt\"});resolveHighSchoolOffensiveBuntPitch(m,{actualPitch:{pitchLocationClass:\"competitiveStrike\",strike:true},recognition:{correct:true,perceivedPitchClass:\"competitiveStrike\"},rolls:{attempt:0,preparation:0,contact:0.15}});player.highSchoolMatch=m;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;const second=resolveHighSchoolOffensiveBuntPitch(restored,{actualPitch:{pitchLocationClass:\"clearBall\",strike:false},recognition:{correct:true,perceivedPitchClass:\"clearBall\"},rolls:{attempt:0.99}});return restored.offensiveBuntPAState.count.balls===1&&restored.offensiveBuntPAState.count.strikes===1&&second.plan.pitchNumber===2;})()`));"
+    },
+    {
+      "file": "tests/offensive-tactical-action-sprint-b2-defensive-handoff-test.js",
+      "line": 85,
+      "text": "verify(\"19. Save/reload 保留 handoff、windows 與 pending legs\", evaluate(`(() => {const x=__b2Prepare(2,\"sacrificeBunt\",88223);player.highSchoolMatch=x.m;const before=JSON.stringify(x.m.buntBallInPlayState);const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return before===JSON.stringify(restored.buntBallInPlayState)&&restored.buntBallInPlayState.firstLegState.status===\"pending\";})()`));"
+    },
+    {
+      "file": "tests/offensive-tactical-action-sprint-b2-defensive-handoff-test.js",
+      "line": 92,
+      "text": "verify(\"24. 已解析 first leg／continuation 經 apply 與 save-reload 不重算\", evaluate(`(() => {const x=__b2Prepare(2,\"sacrificeBunt\",88226);const r=resolveHighSchoolDefensivePlay(x.m,\"challenge\",()=>.99);applyInfieldResolutionToHighSchoolMatch(x.m,\"challenge\",r);player.highSchoolMatch=x.m;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return restored.buntBallInPlayState.firstLegState.status===\"completed\"&&restored.buntBallInPlayState.continuationState.status===\"completed\"&&restored.lastDefensiveResolution.outsCreated===2;})()`));"
+    },
+    {
+      "file": "tests/outcome-transition-hierarchy-test.js",
+      "line": 212,
+      "text": "persistence.saveGame();"
+    },
+    {
+      "file": "tests/outcome-transition-hierarchy-test.js",
+      "line": 213,
+      "text": "persistence.loadGame();"
+    },
+    {
+      "file": "tests/pitch-observation-production-integration-test.js",
+      "line": 43,
+      "text": "h.run('stopHighSchoolMatchPlayback();saveGame();loadGame();stopHighSchoolMatchPlayback();');"
+    },
+    {
+      "file": "tests/pitch-observation-production-integration-test.js",
+      "line": 62,
+      "text": "h.run('stopHighSchoolMatchPlayback();saveGame();loadGame();stopHighSchoolMatchPlayback();');"
+    },
+    {
+      "file": "tests/pitch-sequence-state-production-integration-test.js",
+      "line": 57,
+      "text": "h.run('stopHighSchoolMatchPlayback();saveGame();loadGame();stopHighSchoolMatchPlayback();');"
+    },
+    {
+      "file": "tests/pitch-sequence-state-production-integration-test.js",
+      "line": 79,
+      "text": "h.run('stopHighSchoolMatchPlayback();saveGame();loadGame();stopHighSchoolMatchPlayback();');"
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "line": 76,
+      "text": "h.run('stopHighSchoolMatchPlayback();saveGame();loadGame();stopHighSchoolMatchPlayback();');"
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "line": 93,
+      "text": "h.run('stopHighSchoolMatchPlayback();saveGame();loadGame();stopHighSchoolMatchPlayback();');"
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-integration-test.js",
+      "line": 74,
+      "text": "h.run('stopHighSchoolMatchPlayback();saveGame();loadGame();stopHighSchoolMatchPlayback();');"
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-integration-test.js",
+      "line": 98,
+      "text": "h.run('stopHighSchoolMatchPlayback();saveGame();loadGame();stopHighSchoolMatchPlayback();');"
+    },
+    {
+      "file": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "line": 67,
+      "text": "h.run('stopHighSchoolMatchPlayback();saveGame();loadGame();stopHighSchoolMatchPlayback();');"
+    },
+    {
+      "file": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "line": 90,
+      "text": "h.run('stopHighSchoolMatchPlayback();saveGame();loadGame();stopHighSchoolMatchPlayback();');"
+    },
+    {
+      "file": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "line": 121,
+      "text": "h.run('stopHighSchoolMatchPlayback();saveGame();loadGame();stopHighSchoolMatchPlayback();');"
+    },
+    {
+      "file": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "line": 155,
+      "text": "h.run('stopHighSchoolMatchPlayback();saveGame();loadGame();stopHighSchoolMatchPlayback();');"
+    },
+    {
+      "file": "tests/pitch-target-location-production-integration-test.js",
+      "line": 11,
+      "text": "const before=h.json(signature);assert(before.pitch.targetIntent);h.run('stopHighSchoolMatchPlayback();saveGame();loadGame();stopHighSchoolMatchPlayback();');assert.deepEqual(h.json(signature),before);"
+    },
+    {
+      "file": "tests/plate-decision-production-integration-test.js",
+      "line": 59,
+      "text": "const reloaded = JSON.parse(evaluate(`(() => {const m=__plateMatch(99702),c=__choice(m);prepareHighSchoolPlateDecision(m,c,{recognitionRoll:.5});player.highSchoolMatch=m;const before={pitch:m.offensivePlateAppearanceState.pendingPitch,perceived:m.activeSituation.contextSnapshot.perceivedPitch,id:m.activeSituation.situationId};player=normalizeSave(JSON.parse(JSON.stringify(player)));const after=player.highSchoolMatch;return JSON.stringify({before,after:{pitch:after.offensivePlateAppearanceState.pendingPitch,perceived:after.activeSituation.contextSnapshot.perceivedPitch,id:after.activeSituation.situationId,type:after.activeSituation.type,plate:after.plateDecisionState}});})()`));"
+    },
+    {
+      "file": "tests/plate-decision-production-integration-test.js",
+      "line": 78,
+      "text": "const tacticalContinuity = JSON.parse(evaluate(`(() => {const m=__plateMatch(99708),c=__choice(m);prepareHighSchoolPlateDecision(m,c,{recognitionRoll:0});const first=m.offensivePlateAppearanceState.pendingPitch.pitchId;resolveHighSchoolPlateDecisionPitch(m,\"powerSwing\",{timingRoll:1,batToBallRoll:1});player.highSchoolMatch=m;player=normalizeSave(JSON.parse(JSON.stringify(player)));const saved=player.highSchoolMatch;const history=saved.pitcherTacticalSequenceHistory;const trace=saved.pitcherTacticalDebugTrace;const next=saved.offensivePlateAppearanceState.pendingPitch;return JSON.stringify({first,history,trace,next});})()`));"
+    },
+    {
+      "file": "tests/player-capability-hierarchy-foundation-v1-0-1-test.js",
+      "line": 139,
+      "text": "verify(\"20. Reload 不會 double normalize 或造成 skill drift\", evaluate(`(() => {const before=JSON.stringify([player.baseballSkills,player.capabilityState.provenance.normalizations]);const restored=normalizeSave(JSON.parse(JSON.stringify(player)));return before===JSON.stringify([restored.baseballSkills,restored.capabilityState.provenance.normalizations]);})()`));"
+    },
+    {
+      "file": "tests/player-capability-hierarchy-foundation-v1-0-1-test.js",
+      "line": 144,
+      "text": "verify(\"24. Direct Start reload 完全 identical 且不 reroll\", evaluate(`(() => {const p=__boundaryPlayer(651);applyHighSchoolDirectStartHistory(p);settleHighSchoolEntryCapability(p,{originType:\"synthetic-youth-origin-v1\"});const before=JSON.stringify(getDebugCapabilitySnapshot(p));const restored=normalizeSave(JSON.parse(JSON.stringify(p)));return before===JSON.stringify(getDebugCapabilitySnapshot(restored));})()`));"
+    },
+    {
+      "file": "tests/player-capability-hierarchy-foundation-v1-test.js",
+      "line": 137,
+      "text": "verify(\"23. 新 save reload 後 capability truth 完全不變\", evaluate(`(() => {player=__capPlayer(\"技巧型\",51020);const before=JSON.stringify(getDebugCapabilitySnapshot(player));const restored=normalizeSave(JSON.parse(JSON.stringify(player)));return before===JSON.stringify(getDebugCapabilitySnapshot(restored));})()`));"
+    },
+    {
+      "file": "tests/player-capability-hierarchy-foundation-v1-test.js",
+      "line": 138,
+      "text": "verify(\"24. Reload 不重產 Character Variation\", evaluate(`(() => {player=__capPlayer(\"技巧型\",51021);const before=JSON.stringify(player.capabilityState.provenance.initialSkills);player=normalizeSave(JSON.parse(JSON.stringify(player)));return before===JSON.stringify(player.capabilityState.provenance.initialSkills);})()`));"
+    },
+    {
+      "file": "tests/player-capability-hierarchy-foundation-v1-test.js",
+      "line": 139,
+      "text": "verify(\"25. Direct Start reload 不重套 synthetic youth outcomes\", evaluate(`(() => {player=__capPlayer(\"守備型\",51022);const before=JSON.stringify([player.baseballSkills,player.capabilityState.youthOutcomes]);player=normalizeSave(JSON.parse(JSON.stringify(player)));return before===JSON.stringify([player.baseballSkills,player.capabilityState.youthOutcomes]);})()`));"
+    },
+    {
+      "file": "tests/player-capability-hierarchy-foundation-v1-test.js",
+      "line": 140,
+      "text": "verify(\"26. 舊高中 save deterministic migration 產生合法 capability\", evaluate(`(() => {const legacy={saveVersion:14,name:\"Legacy\",age:16,chapter:\"青棒\",idealSelf:\"守備型\",baseballSkills:{batting:4,baseRunning:3,baseballIQ:3}};const a=normalizeSave(JSON.parse(JSON.stringify(legacy))),b=normalizeSave(JSON.parse(JSON.stringify(legacy)));return validateHighSchoolEntryCapability(a).ok&&JSON.stringify(getDebugCapabilitySnapshot(a))===JSON.stringify(getDebugCapabilitySnapshot(b));})()`));"
+    },
+    {
+      "file": "tests/player-capability-hierarchy-foundation-v1-test.js",
+      "line": 141,
+      "text": "verify(\"27. Repeated migration／load 不造成 stat drift\", evaluate(`(() => {let p=normalizeSave({saveVersion:14,name:\"Legacy Drift\",age:16,chapter:\"青棒\",idealSelf:\"全能型\"});const before=JSON.stringify(p.baseballSkills);p=normalizeSave(JSON.parse(JSON.stringify(p)));p=normalizeSave(JSON.parse(JSON.stringify(p)));return before===JSON.stringify(p.baseballSkills);})()`));"
+    },
+    {
+      "file": "tests/player-capability-hierarchy-foundation-v1-test.js",
+      "line": 142,
+      "text": "verify(\"28. Migration 不消耗 Math.random 或 Match RNG\", evaluate(`(() => {let calls=0;const original=Math.random;Math.random=()=>{calls+=1;return .5};normalizeSave({saveVersion:14,name:\"Legacy RNG\",age:16,chapter:\"青棒\",idealSelf:\"全能型\"});Math.random=original;return calls===0;})()`));"
+    },
+    {
+      "file": "tests/player-data-boundary-test.js",
+      "line": 283,
+      "text": "evaluate(persistence.context, \"saveGame(); player=createInitialPlayer('覆蓋'); loadGame()\");"
+    },
+    {
+      "file": "tests/player-data-boundary-test.js",
+      "line": 289,
+      "text": "evaluate(legacyFixture.context, \"player=normalizeSave({name:'舊存檔球員'}); updateStatus()\");"
+    },
+    {
+      "file": "tests/playing-time-game-exposure-foundation-v1-test.js",
+      "line": 241,
+      "text": "const reloadIntegration = parse(`(() => {__playingTimePlayer(\"Reload\", \"rotation\", false);const match=prepareHighSchoolYearOneMatch();const before=JSON.stringify(match.gameExposureState);const restored=normalizeSave(JSON.parse(JSON.stringify(player)));return {same:before===JSON.stringify(restored.highSchoolMatch.gameExposureState),plan:restored.highSchoolMatch.gameExposureState.plannedUsage};})()`);"
+    },
+    {
+      "file": "tests/playing-time-game-exposure-foundation-v1-test.js",
+      "line": 243,
+      "text": "verify(\"39. 已完成且沒有新 state 的舊 Match 不被 retroactively rewrite\", evaluate(`(() => {const p=__playingTimePlayer(\"Legacy Completed\", \"starter\", false);p.highSchoolMatch.completed=true;p.highSchoolMatch.id=\"legacy-completed\";delete p.highSchoolMatch.gameExposureState;return normalizeSave(JSON.parse(JSON.stringify(p))).highSchoolMatch.gameExposureState===null;})()`));"
+    },
+    {
+      "file": "tests/presentation-interaction-clarity-test.js",
+      "line": 193,
+      "text": "game.saveGame();"
+    },
+    {
+      "file": "tests/presentation-interaction-clarity-test.js",
+      "line": 196,
+      "text": "game.loadGame();"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs",
+      "line": 306,
+      "text": "const reload=label=>{const expected=c.json('normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch');c.run('saveGame();player=createInitialPlayer('+JSON.stringify(label)+');loadGame();m=player.highSchoolMatch;');assert.deepEqual(c.json('m'),expected);};"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs",
+      "line": 332,
+      "text": "c.run('saveGame();player=createInitialPlayer(\"S10A historical pending\");loadGame();m=player.highSchoolMatch;var s10aHistorical=firstBaseExecute(m,\"secure\",.8);saveGame();player=createInitialPlayer(\"S10A historical executed\");loadGame();m=player.highSchoolMatch;resumeResolvedHighSchoolGroundBallSettlement(m);');"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs",
+      "line": 335,
+      "text": "const settled=c.json('normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch');"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs",
+      "line": 336,
+      "text": "c.run('saveGame();player=createInitialPlayer(\"S10A historical settled\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs",
+      "line": 341,
+      "text": "c.run('var s10aGuardProbe=JSON.parse(JSON.stringify(player));s10aGuardProbe.highSchoolMatch.groundBallInPlayState.receiverModelAdmission={probeOnly:true,executionVersion:\"S10A_UNKNOWN_NOT_AN_ADMISSION\"};var s10aGuardNormalized=normalizeSave(s10aGuardProbe);');"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs",
+      "line": 352,
+      "text": "const normalizedSave=c.json('normalizeSave(JSON.parse(JSON.stringify(player)))');"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-9-legacy-comparison.cjs",
+      "line": 106,
+      "text": "const expected = c.json('normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch');"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-9-legacy-comparison.cjs",
+      "line": 107,
+      "text": "c.run('saveGame();player=createInitialPlayer('+JSON.stringify(label)+');loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/relationship-feasibility-production-scope.cjs",
+      "line": 31,
+      "text": "'const candidate = normalizeSave(JSON.parse(raw))',"
+    },
+    {
+      "file": "tests/relationship-feasibility-production-scope.cjs",
+      "line": 60,
+      "text": "env.run('saveGame();var feasibilityRenderer=showCurrentEvent;try{showCurrentEvent=()=>{};loadGame();}finally{showCurrentEvent=feasibilityRenderer;}');"
+    },
+    {
+      "file": "tests/relationship-feasibility-production-scope.cjs",
+      "line": 64,
+      "text": "const legacySnapshot = `(()=>{const current=player;try{player=normalizeSave(feasibilityLegacy);return ${snapshot};}finally{player=current;}})()`;"
+    },
+    {
+      "file": "tests/relationship-flow-test.js",
+      "line": 498,
+      "text": "evaluate(saveBundle.context, \"saveGame()\");"
+    },
+    {
+      "file": "tests/relationship-flow-test.js",
+      "line": 499,
+      "text": "assert(saveBundle.getStorageWrites() === 1, \"手動 saveGame() 應維持一次寫入\");"
+    },
+    {
+      "file": "tests/relationship-flow-test.js",
+      "line": 502,
+      "text": "\"player.relationships.coachTrust = 1; loadGame();\""
+    },
+    {
+      "file": "tests/representative-team-contract-test.js",
+      "line": 35,
+      "text": "run(\"saveGame(); player = createInitialPlayer(); loadGame();\");"
+    },
+    {
+      "file": "tests/representative-team-contract-test.js",
+      "line": 44,
+      "text": "run(\"F.startTemporaryAssignment(player, { assignmentId: 'county-selection', teamId: 'county-a', competitionEditionId: 'county-2031' }); saveGame(); loadGame();\");"
+    },
+    {
+      "file": "tests/representative-team-contract-test.js",
+      "line": 68,
+      "text": "run(\"var legacy = createInitialPlayer(); legacy.schoolInvitationState = player.schoolInvitationState; legacy = normalizeSave(legacy);\");"
+    },
+    {
+      "file": "tests/representative-team-contract-test.js",
+      "line": 77,
+      "text": "try { loadGame(); } finally { console.error = savedConsoleError; }"
+    },
+    {
+      "file": "tests/school-invitation-foundation-v1-0-1-test.js",
+      "line": 85,
+      "text": "verify(\"23. Save／reload invitation state identical\", evaluate(`(() => {const p=__invitationPlayer(\"ordinary\",80023);generateSchoolInvitationSet(p);const before=JSON.stringify(p.schoolInvitationState),restored=normalizeSave(JSON.parse(JSON.stringify(p)));return before===JSON.stringify(restored.schoolInvitationState);})()`));"
+    },
+    {
+      "file": "tests/school-invitation-foundation-v1-0-1-test.js",
+      "line": 86,
+      "text": "verify(\"24. Reload 後 Identity mutation 仍回傳 saved set\", evaluate(`(() => {let p=__invitationPlayer(\"ordinary\",80024);generateSchoolInvitationSet(p);p=normalizeSave(JSON.parse(JSON.stringify(p)));const before=JSON.stringify(p.schoolInvitationState);__applyIdentityVariant(p,__identityVariants[3]);return before===JSON.stringify(generateSchoolInvitationSet(p));})()`));"
+    },
+    {
+      "file": "tests/school-invitation-foundation-v1-0-1-test.js",
+      "line": 88,
+      "text": "verify(\"26. Pre-HS legacy save settlement 後仍可 deterministic generate\", evaluate(`(() => {const raw={saveVersion:14,name:\"Legacy Youth\",age:15,chapter:\"青少棒分化\",idealSelf:\"全能型\",primaryPosition:\"內野手\",baseballSkills:{batting:3,baseRunning:3,baseballIQ:3}};const a=normalizeSave(JSON.parse(JSON.stringify(raw))),b=normalizeSave(JSON.parse(JSON.stringify(raw)));a.age=16;b.age=16;settleHighSchoolEntryCapability(a,{originType:\"legacy-pre-hs-entry\"});settleHighSchoolEntryCapability(b,{originType:\"legacy-pre-hs-entry\"});return JSON.stringify(generateSchoolInvitationSet(a))===JSON.stringify(generateSchoolInvitationSet(b));})()`));"
+    },
+    {
+      "file": "tests/school-invitation-foundation-v1-0-1-test.js",
+      "line": 89,
+      "text": "verify(\"27. Existing high-school legacy save compatibility bypass 不變\", evaluate(`(() => {const p=normalizeSave({saveVersion:14,name:\"Legacy HS\",age:17,chapter:\"青棒第二年\",idealSelf:\"守備型\",primaryPosition:\"內野手\",highSchoolRoute:\"普通高中・穩定出賽\",baseballSkills:{batting:4,baseRunning:3,baseballIQ:4}});return p.schoolInvitationState.bypassed===true&&p.schoolInvitationState.compatibilityMode===\"legacy-existing-school\"&&p.schoolInvitationState.invitations.length===0;})()`));"
+    },
+    {
+      "file": "tests/school-invitation-foundation-v1-test.js",
+      "line": 19,
+      "text": "const clone=normalizeSave(JSON.parse(JSON.stringify(target)));"
+    },
+    {
+      "file": "tests/school-invitation-foundation-v1-test.js",
+      "line": 69,
+      "text": "verify(\"24. Save／reload invitation set 完全 identical\", evaluate(`(() => {const p=__schoolPlayer(\"ordinary\",70024);generateSchoolInvitationSet(p,{generationSeed:\"reload\"});const before=JSON.stringify(p.schoolInvitationState);const restored=normalizeSave(JSON.parse(JSON.stringify(p)));return before===JSON.stringify(restored.schoolInvitationState);})()`));"
+    },
+    {
+      "file": "tests/school-invitation-foundation-v1-test.js",
+      "line": 70,
+      "text": "verify(\"25. Reload 後再次 generate 仍不 reroll\", evaluate(`(() => {let p=__schoolPlayer(\"ordinary\",70025);generateSchoolInvitationSet(p,{generationSeed:\"persist\"});p=normalizeSave(JSON.parse(JSON.stringify(p)));const before=JSON.stringify(p.schoolInvitationState);return before===JSON.stringify(generateSchoolInvitationSet(p,{generationSeed:\"new-seed\"}));})()`));"
+    },
+    {
+      "file": "tests/school-invitation-foundation-v1-test.js",
+      "line": 77,
+      "text": "verify(\"30. Pre-HS legacy save 可 load 且在 settlement 後 deterministic generate\", evaluate(`(() => {const raw={saveVersion:14,name:\"Legacy Youth\",age:15,chapter:\"青少棒分化\",idealSelf:\"全能型\",primaryPosition:\"內野手\",baseballSkills:{batting:3,baseRunning:3,baseballIQ:3}};const a=normalizeSave(JSON.parse(JSON.stringify(raw))),b=normalizeSave(JSON.parse(JSON.stringify(raw)));a.age=16;b.age=16;settleHighSchoolEntryCapability(a,{originType:\"legacy-pre-hs-entry\"});settleHighSchoolEntryCapability(b,{originType:\"legacy-pre-hs-entry\"});return JSON.stringify(generateSchoolInvitationSet(a,{generationSeed:\"legacy-youth\"}))===JSON.stringify(generateSchoolInvitationSet(b,{generationSeed:\"legacy-youth\"}));})()`));"
+    },
+    {
+      "file": "tests/school-invitation-foundation-v1-test.js",
+      "line": 78,
+      "text": "verify(\"31. 已進高中 legacy save load 後使用 compatibility bypass\", evaluate(`(() => {const p=normalizeSave({saveVersion:14,name:\"Legacy HS\",age:17,chapter:\"青棒第二年\",idealSelf:\"守備型\",primaryPosition:\"內野手\",highSchoolRoute:\"普通高中・穩定出賽\",baseballSkills:{batting:4,baseRunning:3,baseballIQ:4}});return p.schoolInvitationState.bypassed===true&&p.schoolInvitationState.compatibilityMode===\"legacy-existing-school\"&&p.schoolInvitationState.invitations.length===0;})()`));"
+    },
+    {
+      "file": "tests/school-invitation-foundation-v1-test.js",
+      "line": 79,
+      "text": "verify(\"32. Legacy bypass 不造成 capability drift\", evaluate(`(() => {let p=normalizeSave({saveVersion:14,name:\"Legacy Drift\",age:17,chapter:\"青棒\",idealSelf:\"全能型\",primaryPosition:\"外野手\"});const before=JSON.stringify(p.baseballSkills);p=normalizeSave(JSON.parse(JSON.stringify(p)));return before===JSON.stringify(p.baseballSkills);})()`));"
+    },
+    {
+      "file": "tests/scoreboard-presentation-integrity-test.js",
+      "line": 106,
+      "text": "run(\"player = normalizeSave(JSON.parse(JSON.stringify(player)))\");"
+    },
+    {
+      "file": "tests/scoreboard-presentation-production-integration-test.js",
+      "line": 30,
+      "text": "const expected = board(); run(\"saveGame(); loadGame(); stopHighSchoolMatchPlayback();\");"
+    },
+    {
+      "file": "tests/shared-infield-contract-2b-production-integration-test.js",
+      "line": 94,
+      "text": "run('saveGame();player=createInitialPlayer(\"Outside-scope cold reload\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/shared-infield-contract-2b-production-integration-test.js",
+      "line": 163,
+      "text": "saveGame();player=createInitialPlayer(\"cold pending\");loadGame();m=player.highSchoolMatch;`);"
+    },
+    {
+      "file": "tests/shared-infield-contract-2b-production-integration-test.js",
+      "line": 168,
+      "text": "run('var restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;');"
+    },
+    {
+      "file": "tests/shared-infield-contract-2b-production-integration-test.js",
+      "line": 172,
+      "text": "run(`saveGame();player=createInitialPlayer(\"cold executed\");loadGame();m=player.highSchoolMatch;resumeResolvedHighSchoolGroundBallSettlement(m);var once=infieldFacts(m);var cached=JSON.parse(JSON.stringify(m.lastDefensiveResolution));"
+    },
+    {
+      "file": "tests/shared-infield-contract-2b-production-integration-test.js",
+      "line": 173,
+      "text": "saveGame();player=createInitialPlayer(\"cold settled\");loadGame();m=player.highSchoolMatch;applyInfieldResolutionToHighSchoolMatch(m,\"secure\",x.r);`);"
+    },
+    {
+      "file": "tests/shared-infield-contract-2b-production-integration-test.js",
+      "line": 185,
+      "text": "assert.throws(()=>run('normalizeSave(bad)'),/Stale|stale|Invalid|integrity/);"
+    },
+    {
+      "file": "tests/shared-infield-contract-2b-production-integration-test.js",
+      "line": 262,
+      "text": "var historicalCursor=historical.highSchoolMatch.simulationCursor;var restored=normalizeSave(historical).highSchoolMatch;"
+    },
+    {
+      "file": "tests/ss-defensive-production-integration-test.js",
+      "line": 260,
+      "text": "run('var settled=ssFacts(m);saveGame();player=createInitialPlayer(\"2B evidence reload\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/ss-defensive-production-integration-test.js",
+      "line": 273,
+      "text": "run(`var m=ssFixture({occupied:1,capabilities:${JSON.stringify(capabilities)}});var before=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;`);"
+    },
+    {
+      "file": "tests/ss-defensive-production-integration-test.js",
+      "line": 275,
+      "text": "run('var r=ssExecute(m);saveGame();player=createInitialPlayer(\"Different reload context\");loadGame();var restored=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/ss-defensive-production-integration-test.js",
+      "line": 277,
+      "text": "run('player.highSchoolMatch=restored;resumeResolvedHighSchoolGroundBallSettlement(restored);var once=ssFacts(restored);var settled=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;');"
+    },
+    {
+      "file": "tests/ss-defensive-production-integration-test.js",
+      "line": 279,
+      "text": "run('player.highSchoolMatch=settled;saveGame();player=createInitialPlayer(\"Different settled reload context\");loadGame();var settled=player.highSchoolMatch;applyInfieldResolutionToHighSchoolMatch(settled,\"secure\",r);');"
+    },
+    {
+      "file": "tests/ss-defensive-production-integration-test.js",
+      "line": 287,
+      "text": "assert.throws(() => run('normalizeSave(bad)'), /Stale|Invalid/);"
+    },
+    {
+      "file": "tests/ss-defensive-production-integration-test.js",
+      "line": 342,
+      "text": "run('saveGame();loadGame();');"
+    },
+    {
+      "file": "tests/ss-defensive-production-integration-test.js",
+      "line": 383,
+      "text": "run('saveGame();player=createInitialPlayer(\"Public SS pending reload\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/ss-defensive-production-integration-test.js",
+      "line": 443,
+      "text": "run('saveGame();player=createInitialPlayer(\"Public SS settled reload\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/team-roster-match-integration-test.js",
+      "line": 81,
+      "text": "const reload = JSON.parse(evaluate(`(() => {const m=__rosterSetup(\"starter\",61004);const before=JSON.parse(JSON.stringify(m.rosters));player=normalizeSave(JSON.parse(JSON.stringify(player)));const after=JSON.parse(JSON.stringify(player.highSchoolMatch.rosters));function firstDiff(a,b,path=\"root\"){if(typeof a!==typeof b)return path+\":type\";if(a===null||b===null||typeof a!==\"object\")return a===b?\"\":path+\":\"+a+\"!=\"+b;const keys=new Set([...Object.keys(a),...Object.keys(b)]);for(const key of keys){const d=firstDiff(a[key],b[key],path+\".\"+key);if(d)return d;}return \"\";}return JSON.stringify({same:JSON.stringify(before)===JSON.stringify(after),diff:firstDiff(before,after)});})()`));"
+    },
+    {
+      "file": "tests/ten-year-narrative-architecture-test.js",
+      "line": 290,
+      "text": "saveGame();"
+    },
+    {
+      "file": "tests/ten-year-narrative-architecture-test.js",
+      "line": 300,
+      "text": "loadGame();"
+    },
+    {
+      "file": "tests/third-base-ground-production-integration-test.js",
+      "line": 319,
+      "text": "run('saveGame();player=createInitialPlayer(\"3B settled cold context\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/third-base-ground-production-integration-test.js",
+      "line": 329,
+      "text": "'saveGame();player=createInitialPlayer(\"3B pending cold context\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/third-base-ground-production-integration-test.js",
+      "line": 333,
+      "text": "'saveGame();player=createInitialPlayer(\"3B executed cold context\");loadGame();m=player.highSchoolMatch;');"
+    },
+    {
+      "file": "tests/third-base-ground-production-integration-test.js",
+      "line": 338,
+      "text": "run('saveGame();player=createInitialPlayer(\"3B recovered settled cold context\");loadGame();m=player.highSchoolMatch;applyInfieldResolutionToHighSchoolMatch(m,\"'+decision+'\",x.r);');"
+    },
+    {
+      "file": "tests/third-base-ground-production-integration-test.js",
+      "line": 366,
+      "text": "const before=json('bad');assert.throws(()=>run('normalizeSave(bad)'),/Stale|stale|Invalid|integrity|mismatch/);"
+    },
+    {
+      "file": "tests/third-base-ground-production-integration-test.js",
+      "line": 395,
+      "text": "run('saveGame();player=createInitialPlayer(\"legacy v1 pending\");loadGame();m=player.highSchoolMatch;var x=thirdBaseExecute(m);saveGame();player=createInitialPlayer(\"legacy v1 executed\");loadGame();m=player.highSchoolMatch;resumeResolvedHighSchoolGroundBallSettlement(m);var once=thirdBaseFacts(m);resumeResolvedHighSchoolGroundBallSettlement(m);');"
+    },
+    {
+      "file": "tests/third-base-ground-production-integration-test.js",
+      "line": 439,
+      "text": "const saved=json('normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch');run('saveGame();loadGame();');assert.deepEqual(json('player.highSchoolMatch'),saved);"
+    },
+    {
+      "file": "tests/third-out-run-out-attribution-production-integration-test.js",
+      "line": 54,
+      "text": "run('var restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;var beforeReplay=JSON.stringify(restored);applyInfieldResolutionToHighSchoolMatch(restored,\"challenge\",result);');"
+    },
+    {
+      "file": "tests/third-out-run-out-attribution-production-integration-test.js",
+      "line": 100,
+      "text": "run('m=tagMatch(1);resolveHighSchoolRunnerTagUpDecision(m,\"tagUpSendHome\",{rolls:{runnerRoll:.999,throwRoll:0,receivingRoll:0}});var tagSaved=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;');"
+    },
+    {
+      "file": "tests/third-out-runner-resolution-integrity-v1-test.js",
+      "line": 104,
+      "text": "verify(\"12. save/reload 後第三出局 pending truth 深層保存\", evaluate(`(() => {const x=__groundballThirdOut();player.highSchoolMatch=x.match;const restored=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;return restored.pendingHalfInningTermination.thirdOutType===\"batterRunnerBeforeFirst\"&&restored.runners.every(v=>v===null);})()`));"
+    },
+    {
+      "file": "tests/third-out-runner-resolution-integrity-v1-test.js",
+      "line": 105,
+      "text": "verify(\"13. 同 seed／同 play fresh 與 reload transition truth 相同\", evaluate(`(() => {const a=__groundballThirdOut(31991).match;player.highSchoolMatch=__groundballThirdOut(31991).match;const b=normalizeSave(JSON.parse(JSON.stringify(player))).highSchoolMatch;advanceHighSchoolMatchAfterHalfInning(a);advanceHighSchoolMatchAfterHalfInning(b);const truth=m=>JSON.stringify({inning:m.inning,half:m.half,outs:m.outs,runners:m.runners,scores:m.scores,order:m.battingOrderIndex});return truth(a)===truth(b);})()`));"
+    },
+    {
+      "file": "tests/vertical-slice-smoke.js",
+      "line": 132,
+      "text": "persistence.saveGame();"
+    },
+    {
+      "file": "tests/vertical-slice-smoke.js",
+      "line": 134,
+      "text": "persistence.loadGame();"
+    },
+    {
+      "file": "tests/vertical-slice-smoke.js",
+      "line": 142,
+      "text": "vm.runInContext(\"player = normalizeSave({ name: '舊存檔球員' }); updateStatus()\", legacyIdealSelf);"
+    },
+    {
+      "file": "tests/vertical-slice-smoke.js",
+      "line": 271,
+      "text": "suspenseTest.saveGame();"
+    },
+    {
+      "file": "tests/vertical-slice-smoke.js",
+      "line": 273,
+      "text": "suspenseTest.loadGame();"
+    },
+    {
+      "file": "tests/youth-season-content-pass-test.js",
+      "line": 247,
+      "text": "game.saveGame();"
+    },
+    {
+      "file": "tests/youth-season-content-pass-test.js",
+      "line": 254,
+      "text": "game.loadGame();"
+    }
+  ]
+}

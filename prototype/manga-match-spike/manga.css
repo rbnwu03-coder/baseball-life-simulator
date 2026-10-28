@@ -1,0 +1,58 @@
+/* Only this entry opts in. Frames sit outside the unchanged full-field SVG. */
+.manga-spike { background:#e9e5dc; }
+.spike-comparison { max-width:1180px; margin:18px auto 0; padding:0 24px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px; font-size:13px; line-height:1.8; }
+.spike-comparison a { color:#355b46; text-underline-offset:4px; }
+.manga-page { max-width:1280px; margin-top:16px; background:#fcf8ed; box-shadow:8px 8px 0 #c5beb0; }
+.manga-page .masthead { border-bottom:3px double #696356; }
+.manga-page .edition span:first-child { font-family:Georgia,serif; letter-spacing:.12em; }
+.manga-page .match-overview { border:1px solid #9c9482; background:#f2ecdf; box-shadow:none; }
+.manga-page .match-layout,
+.manga-page[data-phase="Playback"] .match-layout { grid-template-columns:minmax(0,1.3fr) minmax(330px,1fr); gap:26px; }
+.manga-page .field-column,.manga-page .action-column { min-width:0; }
+.manga-page .field-panel,
+.manga-page[data-phase="Playback"] .field-panel { border:2px solid #777060; padding:16px; box-shadow:none; background:#fffcf3; }
+.manga-page .panel-topline { border-bottom:1px solid #cfc6b4; padding-bottom:9px; }
+.manga-caption { margin:14px 0 10px; min-height:92px; }
+.manga-chapter { display:flex; align-items:baseline; gap:12px; }
+#manga-number { font:italic 34px Georgia,serif; color:#8d826b; line-height:1; }
+#manga-title { font-size:16px; line-height:1.5; margin:0; font-weight:700; }
+#manga-guide { margin:8px 0 0; line-height:1.8; font-size:13px; color:#645d4e; }
+/* Same full viewBox in every unit; no crops or overlays over actors or targets. */
+.manga-page #field,
+.manga-page[data-phase="Playback"] #field { width:100%; height:auto; min-height:0; max-height:none; margin:6px 0; overflow:visible; }
+.manga-page .field-scene-status { font-size:20px; margin:8px 0 0; padding:10px 0 0; border-top:1px solid #cfc6b4; }
+.manga-page .intent-caption:empty { display:none; }
+.manga-page .screen-topline { border-bottom:1px solid #cfc6b4; padding-bottom:10px; }
+.manga-page .context-panel { padding:0 0 16px; }
+.manga-page .context-panel>p:not(.eyebrow) { font-size:14px; line-height:1.95; }
+.manga-page .choice { box-shadow:none; background:#fffcf5; }
+.manga-page .beat-card { min-height:160px; border:1px solid #a69a83; border-left:4px solid #7c7564; background:#fffdf5; box-shadow:none; padding:20px; }
+.manga-page .beat-count { font:italic 23px Georgia,serif; color:#8d826b; }
+.manga-page .playback-controls { padding-top:12px; border-top:1px solid #cfc6b4; }
+.manga-page[data-manga-unit="fielding"] .field-panel { border-top-color:#3d668d; }
+.manga-page[data-manga-unit="action"] .field-panel { border-top-color:#8f674b; }
+.manga-page[data-manga-unit="impact"] .field-panel { border-color:#355b46; }
+.manga-page[data-manga-unit="impact"] .beat-card { border-left-color:#355b46; border-top:3px double #355b46; }
+.manga-page[data-manga-unit="impact"] #beat-title { font-size:28px; letter-spacing:.08em; }
+.manga-page[data-manga-unit="consequence"] .consequence-summary { background:#f0f2e8; border:1px solid #83937c; padding:18px; }
+.manga-page[data-manga-unit="consequence"] .achieved-outcome { font-size:19px; }
+/* Text and Reduced Motion keep all shared controls and formal facts available. */
+.manga-page[data-text-mode="true"] .match-layout { grid-template-columns:minmax(220px,.7fr) minmax(0,1.3fr); }
+.manga-page[data-text-mode="true"] .manga-caption { min-height:0; }
+@media(max-width:900px) {
+  .manga-page .match-layout,.manga-page[data-phase="Playback"] .match-layout { grid-template-columns:minmax(0,1.1fr) minmax(280px,1fr); gap:20px; }
+  .manga-page { padding:24px; }
+  #manga-title { font-size:14px; }
+}
+@media(max-width:700px) {
+  .manga-page .match-layout,.manga-page[data-phase="Playback"] .match-layout,.manga-page[data-text-mode="true"] .match-layout { grid-template-columns:minmax(0,1fr); gap:22px; }
+  .manga-page { margin:12px 10px 24px; padding:20px 16px; }
+  .spike-comparison { padding:0 18px; }
+  .manga-caption { min-height:0; }
+  .manga-page .field-panel,.manga-page[data-phase="Playback"] .field-panel { padding:12px; }
+  .manga-page .match-overview { gap:12px; padding:14px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .manga-page { box-shadow:none; }
+  .manga-page .result-stamp { transform:none; }
+}

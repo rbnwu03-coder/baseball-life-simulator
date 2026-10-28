@@ -1,0 +1,88 @@
+{
+  "tier": 2,
+  "search": {
+    "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+    "cols": [
+      "name",
+      "label",
+      "lines",
+      "in",
+      "out"
+    ],
+    "groups": [
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+        "file": "script.js",
+        "rows": [
+          [
+            "getHighSchoolReceiverSourceAdapter",
+            "Function",
+            "5117-5127",
+            3,
+            3
+          ]
+        ]
+      }
+    ],
+    "total": 1,
+    "returned": 1,
+    "count": 1,
+    "has_more": false,
+    "truncated": false
+  },
+  "trace": {
+    "function": "E-meng-baseball_life_sim_semirefactor.script.getHighSchoolReceiverSourceAdapter",
+    "direction": "both",
+    "callees_total": 0,
+    "callees_total_relation": "eq",
+    "callees": {
+      "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+      "cols": [
+        "name",
+        "hop"
+      ],
+      "groups": []
+    },
+    "callers_total": 3,
+    "callers_total_relation": "eq",
+    "callers": {
+      "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+      "cols": [
+        "name",
+        "hop"
+      ],
+      "groups": [
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+          "rows": [
+            [
+              "validateHighSchoolReceiverSourceMetadata",
+              1
+            ],
+            [
+              "bindHighSchoolReceiverSourceExecution",
+              1
+            ],
+            [
+              "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+              1
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "snippet": {
+    "name": "getHighSchoolReceiverSourceAdapter",
+    "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.getHighSchoolReceiverSourceAdapter",
+    "label": "Function",
+    "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+    "start_line": 5117,
+    "end_line": 5127,
+    "source_mode": "full",
+    "source": "function getHighSchoolReceiverSourceAdapter(match) {\n  const keys = [\"receiverSourceFormatVersion\", \"receiverSourceAdmission\", \"receiverSourceSnapshot\", \"receiverSourcePin\", \"receiverSourceExecutionBinding\"];\n  const present = [match, match?.groundBallInPlayState, match?.activeSituation, match?.activeSituation?.contextSnapshot,\n    match?.activeSituation?.executionState, match?.lastClosedSituationSummary].some(o => o && keys.some(k => Object.prototype.hasOwnProperty.call(o, k)));\n  const source = typeof ReceiverSourceSnapshot === \"undefined\" ? null : ReceiverSourceSnapshot;\n  const available = source && [\"createSnapshot\", \"validateMatch\", \"executionBinding\", \"same\"].every(k => typeof source[k] === \"function\") && source.versions;\n  const rosterAvailable = typeof TeamRosterFoundation !== \"undefined\" && TeamRosterFoundation && typeof TeamRosterFoundation.getCurrentDefender === \"function\";\n  if (present && !available) throw new Error(\"Receiver source snapshot module required\");\n  if (present && !rosterAvailable) throw new Error(\"Receiver source roster module required\");\n  return available && rosterAvailable ? source : null;\n}\n",
+    "callers": 3,
+    "callees": 0
+  },
+  "sourceFallback": "New helper and all three call sites were read directly and verified against the final script SHA-256 captured before formal gates."
+}

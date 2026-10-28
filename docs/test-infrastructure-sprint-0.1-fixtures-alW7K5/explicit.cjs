@@ -1,0 +1,1 @@
+const cp=require('child_process'),a=require('assert/strict');a.throws(()=>cp.execFileSync('git',['show','ab3117653945de0b7013636187c446276a96e634:script.js'],{maxBuffer:1024}),e=>e.code==='ENOBUFS');a.throws(()=>cp.execFileSync(process.execPath,['-e','process.stdout.write("x".repeat(4096))'],{maxBuffer:1024}),e=>e.code==='ENOBUFS');

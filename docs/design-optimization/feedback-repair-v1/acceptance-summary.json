@@ -1,0 +1,237 @@
+{
+  "baseline": "accepted-gameplay-g2-b2-v0.1 @ 0d3ed173952b9b8e5d5842a73761f649b50be594",
+  "node": "v24.19.0",
+  "red": {
+    "total": 14,
+    "failed": 14
+  },
+  "green": {
+    "total": 14,
+    "passed": 14,
+    "parity": "PASS"
+  },
+  "invarianceProof": [
+    {
+      "fixture": "noAppearance",
+      "gameId": "hs-y1-autumn-exhibition",
+      "recordSha256": "23b4422c0f118bd71b652431113d3f9a6714a34988dae65f31a7219a8e2a44f1",
+      "beforeSha256": "0dc640eeba8664a0668131098a7785bb5b5061c7261fdbcbd4b39c5f02d5e0db",
+      "afterSha256": "0dc640eeba8664a0668131098a7785bb5b5061c7261fdbcbd4b39c5f02d5e0db",
+      "equal": true
+    },
+    {
+      "fixture": "played",
+      "gameId": "hs-y1-autumn-exhibition",
+      "recordSha256": "a868c425594c635a42de25a8f9dd9b7a145c1d0e80380fd4f3bc59c7e72048c4",
+      "beforeSha256": "f5a3d93fb195872f65c05477eafe8344e1c83f8e46f4f09fb851f8b8f374956c",
+      "afterSha256": "f5a3d93fb195872f65c05477eafe8344e1c83f8e46f4f09fb851f8b8f374956c",
+      "equal": true
+    },
+    {
+      "fixture": "bench",
+      "gameId": "hs-y1-autumn-exhibition",
+      "recordSha256": "7a528a1eefe3bcd664a1e37d45ec07aba75ef3b310963bba3909eed7f0a4640e",
+      "beforeSha256": "b1e10d38b5ada2a2617eb4743bc0c03cfeabdbb21192444adc5cfc764c795825",
+      "afterSha256": "b1e10d38b5ada2a2617eb4743bc0c03cfeabdbb21192444adc5cfc764c795825",
+      "equal": true
+    },
+    {
+      "fixture": "soundDecisions",
+      "gameId": "hs-y1-autumn-exhibition",
+      "recordSha256": "b07e9dfda012bb1cb965da23bddd14c20da1896e965b4b834f99e761bd85ec42",
+      "beforeSha256": "f9ab13218eef9f3af3af6bfa934066d06ba8cbf3237eea5119b92f1c191b59ba",
+      "afterSha256": "f9ab13218eef9f3af3af6bfa934066d06ba8cbf3237eea5119b92f1c191b59ba",
+      "equal": true
+    }
+  ],
+  "regressions": [
+    {
+      "file": "high-school-year-one-competition-loop-test.js",
+      "status": "PASS",
+      "nodeAssertions": 28,
+      "customChecks": null,
+      "elapsedMs": 235,
+      "timedOut": false,
+      "exitCode": 0
+    },
+    {
+      "file": "high-school-year-one-opportunity-two-integration-test.js",
+      "status": "PASS",
+      "nodeAssertions": 40,
+      "customChecks": null,
+      "elapsedMs": 509,
+      "timedOut": false,
+      "exitCode": 0
+    },
+    {
+      "file": "high-school-year-transition-continuity-test.js",
+      "status": "PASS",
+      "nodeAssertions": 44,
+      "customChecks": null,
+      "elapsedMs": 204,
+      "timedOut": false,
+      "exitCode": 0
+    },
+    {
+      "file": "high-school-integration-1-1-test.js",
+      "status": "FAIL",
+      "nodeAssertions": 9,
+      "customChecks": null,
+      "elapsedMs": 119,
+      "timedOut": false,
+      "exitCode": 1
+    },
+    {
+      "file": "high-school-integration-1-2-3-test.js",
+      "status": "PASS",
+      "nodeAssertions": 28,
+      "customChecks": null,
+      "elapsedMs": 123,
+      "timedOut": false,
+      "exitCode": 0
+    },
+    {
+      "file": "high-school-year-two-competition-loop-test.js",
+      "status": "PASS",
+      "nodeAssertions": 39,
+      "customChecks": null,
+      "elapsedMs": 390,
+      "timedOut": false,
+      "exitCode": 0
+    },
+    {
+      "file": "high-school-three-year-spine-test.js",
+      "status": "PASS",
+      "nodeAssertions": 0,
+      "customChecks": 54,
+      "elapsedMs": 214,
+      "timedOut": false,
+      "exitCode": 0
+    },
+    {
+      "file": "coach-response-expansion-test.js",
+      "status": "PASS",
+      "nodeAssertions": 10,
+      "customChecks": null,
+      "elapsedMs": 41,
+      "timedOut": false,
+      "exitCode": 0
+    },
+    {
+      "file": "match-experience-development-foundation-v1-test.js",
+      "status": "PASS",
+      "nodeAssertions": 46,
+      "customChecks": null,
+      "elapsedMs": 646,
+      "timedOut": false,
+      "exitCode": 0
+    },
+    {
+      "file": "playing-time-game-exposure-foundation-v1-test.js",
+      "status": "PASS",
+      "nodeAssertions": 53,
+      "customChecks": null,
+      "elapsedMs": 1125,
+      "timedOut": false,
+      "exitCode": 0
+    },
+    {
+      "file": "career-save-admission-test.js",
+      "status": "PASS",
+      "nodeAssertions": 0,
+      "customChecks": 45,
+      "elapsedMs": 188,
+      "timedOut": false,
+      "exitCode": 0
+    },
+    {
+      "file": "g2-b2-playable-match-decision-test.cjs",
+      "status": "PASS",
+      "nodeAssertions": 171,
+      "customChecks": null,
+      "elapsedMs": 1730,
+      "timedOut": false,
+      "exitCode": 0
+    },
+    {
+      "file": "g2-a-live-public-match-bridge-test.cjs",
+      "status": "PASS",
+      "nodeAssertions": 616,
+      "customChecks": null,
+      "elapsedMs": 10757,
+      "timedOut": false,
+      "exitCode": 0
+    }
+  ],
+  "knownFailure": {
+    "file": "high-school-integration-1-1-test.js",
+    "reason": "ReferenceError: BattedBallPhysical is not defined",
+    "preChangeReplay": "existing-baseline-failure.json"
+  },
+  "examples": {
+    "noAppearance": {
+      "before": {
+        "coach": "「有幾球你看對了，也有一步慢了。下一輪把判斷後的第一個動作做得更乾淨。」",
+        "rival": {
+          "rivalId": "takahashi",
+          "rivalName": "高橋",
+          "entryType": "direct",
+          "encounter": "賽後高橋直接走到休息區，指出你在第七局做出的選擇",
+          "yearTwoPressure": "高二必須用第二次正式任務證明：這不是單場偶然，而是可重複的球員用途。"
+        },
+        "call": "交流賽結束後，你在寮舍走廊打給阿哲。你坦白說，這場比賽沒有真的輪到你上場；你談的是等待、熱身與看完整場比賽時記下的事，沒有虛構任何打席或守備選擇。\n\n比賽結果：球隊落敗，終場 2：8。本場比賽完整結束，但教練沒有把你換上場；沒有虛構守備局數、打席或比賽成長。。\n你們已不在同一支隊伍，仍認得彼此說起失敗時會停頓多久。\n你不知道這通電話會改變誰；只有之後的行動，能證明這段共同經驗是否真的被帶到了下一個球場。",
+        "azhe": {
+          "variant": "azhe-guides",
+          "influenceDirection": "阿哲影響玩家",
+          "evidence": [
+            "關係證據 0",
+            "能力證據 16"
+          ],
+          "cause": "你說完交流賽的打席後，阿哲沒有先問結果，只問你下一次還能替球隊完成什麼。",
+          "change": "你把他的問題寫進高二準備表，第一次把失敗後的下一個任務列在成績前面。",
+          "recall": "掛電話前，阿哲提醒你：那顆一起重做的滾地球，也不是靠一次結果決定價值。",
+          "summary": "你說完交流賽的打席後，阿哲沒有先問結果，只問你下一次還能替球隊完成什麼。 你把他的問題寫進高二準備表，第一次把失敗後的下一個任務列在成績前面。 掛電話前，阿哲提醒你：那顆一起重做的滾地球，也不是靠一次結果決定價值。",
+          "persistentFlag": "hs_y1_azhe_azhe_guides"
+        },
+        "role": "正式角色由「先發／關鍵任務」調整為「先發／關鍵任務」；評估趨勢：上升；目前正式樣本仍有限、上一場沒有實際上場樣本、訓練與準備度正在提升、同守位競爭者目前仍居前。",
+        "roleDetail": "本次沒有實際上場，教練不把等待算成負面表現。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：目前正式樣本仍有限、上一場沒有實際上場樣本、訓練與準備度正在提升、同守位競爭者目前仍居前。\n目前角色會帶進下一階段，不由球探改寫。",
+        "journey": "角色由「先發／關鍵任務」維持為「先發／關鍵任務」；機會 1：沒有實際上場。"
+      },
+      "after": {
+        "coach": "「本場沒有正式上場樣本，先把備戰做好，下一次任務再看安排。」",
+        "rival": {
+          "rivalId": "takahashi",
+          "rivalName": "高橋",
+          "entryType": "direct",
+          "encounter": "高橋仍是同世代競爭的外部標準；本場沒有你的正式上場樣本，先把下一次的準備做好。",
+          "yearTwoPressure": "高二必須用第二次正式任務證明：這不是單場偶然，而是可重複的球員用途。"
+        },
+        "call": "交流賽結束後，你在寮舍走廊打給阿哲。你坦白說，這場比賽沒有真的輪到你上場；你談的是等待、熱身與看完整場比賽時記下的事，沒有虛構任何打席或守備選擇。\n\n比賽結果：球隊落敗，終場 2：8。\n你們已不在同一支隊伍，仍認得彼此說起失敗時會停頓多久。\n你不知道這通電話會改變誰；只有之後的行動，能證明這段共同經驗是否真的被帶到了下一個球場。",
+        "azhe": {
+          "variant": "azhe-guides",
+          "influenceDirection": "阿哲影響玩家",
+          "evidence": [
+            "關係證據 0",
+            "能力證據 16"
+          ],
+          "cause": "你說完本場紀錄與下一次的準備後，阿哲沒有先問結果，只問你下一次還能替球隊完成什麼。",
+          "change": "你把他的問題寫進高二準備表，第一次把失敗後的下一個任務列在成績前面。",
+          "recall": "掛電話前，阿哲提醒你：那顆一起重做的滾地球，也不是靠一次結果決定價值。",
+          "summary": "你說完本場紀錄與下一次的準備後，阿哲沒有先問結果，只問你下一次還能替球隊完成什麼。 你把他的問題寫進高二準備表，第一次把失敗後的下一個任務列在成績前面。 掛電話前，阿哲提醒你：那顆一起重做的滾地球，也不是靠一次結果決定價值。",
+          "persistentFlag": "hs_y1_azhe_azhe_guides"
+        },
+        "role": "正式角色維持「先發／關鍵任務」；評估趨勢：上升；目前正式樣本仍有限、上一場沒有實際上場樣本、訓練與準備度正在提升、同守位競爭者目前仍居前。",
+        "roleDetail": "本次沒有實際上場，教練不把等待算成負面表現。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：目前正式樣本仍有限、上一場沒有實際上場樣本、訓練與準備度正在提升、同守位競爭者目前仍居前。\n目前角色會帶進下一階段，不由球探改寫。",
+        "journey": "角色維持「先發／關鍵任務」；機會 1：沒有實際上場。"
+      }
+    },
+    "actualDecisions": {
+      "before": "賽後高橋直接走到休息區，指出你在第七局做出的選擇",
+      "after": "高橋留下的問題是：第5局下那次打席選擇，下一次還能不能重複？"
+    },
+    "mixedJudgement": {
+      "before": "「今天幾次輪到你，你都把眼前的球處理清楚。下一場繼續照這個節奏準備。」",
+      "after": "「有幾球你看對了，也有判斷需要再檢查。下一輪把不同局勢下的選擇說清楚。」"
+    }
+  }
+}

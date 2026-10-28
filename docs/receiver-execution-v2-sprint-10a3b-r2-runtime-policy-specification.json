@@ -1,0 +1,44 @@
+{
+  "manifestCount": 227,
+  "orderedManifestSha256": "871902b4d5ecd7beb2bd23848be8c985ed7ddc52ecc5ebc6b40ba57d2f335a96",
+  "firstBaseMember": false,
+  "originalFullPolicy": {
+    "runner": "tests/infield-legacy-receiver-model-sprint-6-runner.cjs",
+    "timeoutMs": 180000,
+    "maxBuffer": 30000000,
+    "gitShowDefaultBufferOnly": 30000000
+  },
+  "r2ComparisonPolicy": {
+    "suite": "tests/first-base-receive-active-ground-production-integration-test.js",
+    "timeoutMs": 180000,
+    "maxBuffer": 16000000
+  },
+  "baselineDebt": [
+    {
+      "file": "tests/ability-performance-gradient-test.js",
+      "exitCode": 1,
+      "sourceHash": "1038c92e98c4a040f61a44e23c464d2a9daf544a613e9e3b0f6a9cf5e4017611",
+      "error": null,
+      "stderr": "node:internal/assert/utils:77\r\n    throw err;\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Low tier can have a multi-hit game\r\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:45:1)\r\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\r\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\r\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\r\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\r\n    at Module.require (node:internal/modules/cjs/loader:1617:12)\r\n    at require (node:internal/modules/helpers:153:16)\r\n    at [eval]:1:306\r\n    at runScriptInThisContext (node:internal/vm:219:10) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.19.0\r\n",
+      "signature": "AssertionError [ERR_ASSERTION]: Low tier can have a multi-hit game"
+    },
+    {
+      "file": "tests/baseball-match-foundation-2-2-2-test.js",
+      "exitCode": 1,
+      "sourceHash": "2019013d7fc81200e9945c00834df7c4f7d33a8d4d1c8074e66d25e9475d4375",
+      "error": null,
+      "stderr": "node:internal/assert/utils:77\r\n    throw err;\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: 36. full match 完成兩個既定進攻 Moment；防守 Moment 只在真實 Decision 時成立\r\n    at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)\r\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:153:1)\r\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\r\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\r\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\r\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\r\n    at Module.require (node:internal/modules/cjs/loader:1617:12)\r\n    at require (node:internal/modules/helpers:153:16)\r\n    at [eval]:1:306 {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.19.0\r\n",
+      "signature": "AssertionError [ERR_ASSERTION]: 36. full match"
+    },
+    {
+      "file": "tests/high-school-year-one-opportunity-two-integration-test.js",
+      "exitCode": 1,
+      "sourceHash": "db46a6e6c15126b357657b1670b1452580718e8609dee43b84df1a0af6e0dc27",
+      "error": null,
+      "stderr": "script.js:11866\r\n  const opportunity = DefensiveDecisionThrowFoundation.buildDecisionOpportunity(input);\r\n                      ^\r\n\r\nReferenceError: DefensiveDecisionThrowFoundation is not defined\r\n    at buildHighSchoolShortstopExecution (script.js:11866:23)\r\n    at Object.resolveInfieldDecision [as resolve] (script.js:8414:23)\r\n    at resolveRoutineDefensivePlay (script.js:10346:60)\r\n    at prepareHighSchoolDefensiveMomentFromSimulation (script.js:13351:24)\r\n    at advanceHighSchoolMatchPlaybackStep (script.js:13578:28)\r\n    at advanceHighSchoolMatchSimulation (script.js:13633:14)\r\n    at evalmachine.<anonymous>:1:640\r\n    at evalmachine.<anonymous>:1:891\r\n    at Script.runInContext (node:vm:149:12)\r\n    at Object.runInContext (node:vm:301:6)\r\n\r\nNode.js v24.19.0\r\n",
+      "signature": "ReferenceError: DefensiveDecisionThrowFoundation is not defined"
+    }
+  ],
+  "priorFullVerdict": "224/227_PARTIAL",
+  "originalManifestUnmodified": true
+}

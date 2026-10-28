@@ -1,1 +1,22 @@
+# Local dependencies and caches
 node_modules/
+.cache/
+**/__pycache__/
+*.py[cod]
+
+# Local credentials and environment files
+.env
+.env.*
+!.env.example
+/credentials/
+/secrets/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Private local game saves; checked-in fixtures and evidence remain eligible
+/local-saves/
+/saves/local/
+*.sav
+*.savegame

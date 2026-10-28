@@ -1,0 +1,255 @@
+{
+  "checks": [
+    {
+      "name": "Y1 complete actual match engine smoke",
+      "status": "PASS"
+    },
+    {
+      "name": "Y1 paired health and role opportunity inputs",
+      "status": "PASS"
+    },
+    {
+      "name": "Paired full matches health / capability / role / policy",
+      "status": "PASS"
+    },
+    {
+      "name": "Save/load before decision reproduces official record and settlement",
+      "status": "PASS"
+    },
+    {
+      "name": "Natural Y1 events through two real matches and year-end",
+      "status": "PASS"
+    },
+    {
+      "name": "Y1 injury recovery then opportunity refresh boundary",
+      "status": "PASS"
+    },
+    {
+      "name": "No-appearance and win/loss independence in official evaluation owner",
+      "status": "PASS"
+    }
+  ],
+  "arms": {
+    "healthy": {
+      "games": 16,
+      "wins": 0,
+      "winRate": 0,
+      "descriptiveWilson95": [
+        0,
+        0.19361341827271994
+      ],
+      "PA": 64,
+      "AB": 61,
+      "H": 7,
+      "AVG": 0.11475409836065574,
+      "SO": 49,
+      "BB": 3,
+      "meanDefensiveInnings": 7,
+      "noAppearances": 0,
+      "meanEvaluation": -2.6020625,
+      "quality": -2.8961250000000005,
+      "choices": 274,
+      "decisions": {
+        "attack": 48,
+        "take": 194,
+        "secure": 23,
+        "agencyManual": 9
+      }
+    },
+    "loaded": {
+      "games": 16,
+      "wins": 0,
+      "winRate": 0,
+      "descriptiveWilson95": [
+        0,
+        0.19361341827271994
+      ],
+      "PA": 64,
+      "AB": 61,
+      "H": 7,
+      "AVG": 0.11475409836065574,
+      "SO": 49,
+      "BB": 3,
+      "meanDefensiveInnings": 7,
+      "noAppearances": 0,
+      "meanEvaluation": -3.4980625000000005,
+      "quality": -2.8961250000000005,
+      "choices": 274,
+      "decisions": {
+        "attack": 48,
+        "take": 194,
+        "secure": 23,
+        "agencyManual": 9
+      }
+    },
+    "strong-loaded": {
+      "games": 16,
+      "wins": 1,
+      "winRate": 0.0625,
+      "descriptiveWilson95": [
+        0.01111905730833121,
+        0.2832926836802987
+      ],
+      "PA": 64,
+      "AB": 64,
+      "H": 10,
+      "AVG": 0.15625,
+      "SO": 49,
+      "BB": 0,
+      "meanDefensiveInnings": 7,
+      "noAppearances": 0,
+      "meanEvaluation": -3.0219374999999995,
+      "quality": -2.9099375000000007,
+      "choices": 275,
+      "decisions": {
+        "attack": 48,
+        "take": 195,
+        "secure": 23,
+        "agencyManual": 9
+      }
+    },
+    "ordinary-healthy": {
+      "games": 16,
+      "wins": 0,
+      "winRate": 0,
+      "descriptiveWilson95": [
+        0,
+        0.19361341827271994
+      ],
+      "PA": 64,
+      "AB": 61,
+      "H": 7,
+      "AVG": 0.11475409836065574,
+      "SO": 49,
+      "BB": 3,
+      "meanDefensiveInnings": 7,
+      "noAppearances": 0,
+      "meanEvaluation": -2.8604375,
+      "quality": -2.9094375000000006,
+      "choices": 274,
+      "decisions": {
+        "attack": 48,
+        "take": 194,
+        "secure": 23,
+        "agencyManual": 9
+      }
+    },
+    "rotation": {
+      "games": 16,
+      "wins": 0,
+      "winRate": 0,
+      "descriptiveWilson95": [
+        0,
+        0.19361341827271994
+      ],
+      "PA": 64,
+      "AB": 61,
+      "H": 7,
+      "AVG": 0.11475409836065574,
+      "SO": 49,
+      "BB": 3,
+      "meanDefensiveInnings": 7,
+      "noAppearances": 0,
+      "meanEvaluation": -2.6020625,
+      "quality": -2.8961250000000005,
+      "choices": 274,
+      "decisions": {
+        "attack": 48,
+        "take": 194,
+        "secure": 23,
+        "agencyManual": 9
+      }
+    },
+    "bench": {
+      "games": 16,
+      "wins": 0,
+      "winRate": 0,
+      "descriptiveWilson95": [
+        0,
+        0.19361341827271994
+      ],
+      "PA": 24,
+      "AB": 24,
+      "H": 0,
+      "AVG": 0,
+      "SO": 24,
+      "BB": 0,
+      "meanDefensiveInnings": 1.625,
+      "noAppearances": 0,
+      "meanEvaluation": -1.8856874999999995,
+      "quality": -2.6206874999999994,
+      "choices": 112,
+      "decisions": {
+        "attack": 24,
+        "take": 74,
+        "secure": 6,
+        "agencyManual": 8
+      }
+    },
+    "last-choice": {
+      "games": 16,
+      "wins": 0,
+      "winRate": 0,
+      "descriptiveWilson95": [
+        0,
+        0.19361341827271994
+      ],
+      "PA": 66,
+      "AB": 60,
+      "H": 28,
+      "AVG": 0.4666666666666667,
+      "SO": 11,
+      "BB": 6,
+      "meanDefensiveInnings": 7.0625,
+      "noAppearances": 0,
+      "meanEvaluation": 1.6010625,
+      "quality": 1.3070625,
+      "choices": 155,
+      "decisions": {
+        "advance": 38,
+        "powerSwing": 76,
+        "contain": 33,
+        "agencySimulate": 8
+      }
+    }
+  },
+  "healthIdenticalPairs": 16,
+  "naturalExamples": {
+    "goodLoss": [
+      {
+        "seed": 45000,
+        "arm": "last-choice",
+        "teamResult": "球隊落敗，終場 0：14",
+        "quality": 2.07,
+        "score": 2.364,
+        "coach": "「今天幾次輪到你，你都把眼前的球處理清楚。下一場繼續照這個節奏準備。」"
+      },
+      {
+        "seed": 45001,
+        "arm": "last-choice",
+        "teamResult": "球隊落敗，終場 1：11",
+        "quality": 1.909,
+        "score": 2.203,
+        "coach": "「今天幾次輪到你，你都把眼前的球處理清楚。下一場繼續照這個節奏準備。」"
+      },
+      {
+        "seed": 45002,
+        "arm": "last-choice",
+        "teamResult": "球隊落敗，終場 4：10",
+        "quality": 0.729,
+        "score": 1.023,
+        "coach": "「有幾球你看對了，也有一步慢了。下一輪把判斷後的第一個動作做得更乾淨。」"
+      }
+    ],
+    "poorWin": [
+      {
+        "seed": 45011,
+        "arm": "strong-loaded",
+        "teamResult": "球隊勝利，終場 3：1",
+        "quality": -3.612,
+        "score": -3.724,
+        "coach": "「你不是沒看懂，動作只是慢了一步。下一輪先把接球到出手的節奏修掉。」"
+      }
+    ]
+  }
+}

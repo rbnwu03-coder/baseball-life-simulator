@@ -1,0 +1,410 @@
+{
+  "task": "Critical Regression Triage v0.1",
+  "createdAt": "2026-10-15T01:34:41.961Z",
+  "originalManifest": {
+    "label": "match-isolated",
+    "seed": 88221,
+    "operands": {
+      "completed": false,
+      "firstIdPresent": true,
+      "finalIdPresent": false,
+      "defenseMomentCount": 4,
+      "defensiveMeaningfulDecisionCount": 4,
+      "defenseCountsEqual": true,
+      "safety": 1401,
+      "safetyBelow1400": false
+    },
+    "ids": [
+      "hs_y1_match_moment_1",
+      "hs_y1_match_defense_1",
+      "hs_y1_match_defense_2",
+      "hs_y1_match_defense_3",
+      "hs_y1_match_defense_4"
+    ],
+    "final": {
+      "inning": 2,
+      "half": "上",
+      "outs": 0,
+      "scores": {
+        "home": 2,
+        "away": 1372
+      },
+      "phase": "moment_2_resolved"
+    },
+    "integrityIssues": [],
+    "events": {
+      "matchEntry": 1,
+      "plateAppearance": 1386,
+      "halfInningEnd": 2,
+      "sideChange": 2,
+      "run": 1374,
+      "meaningfulMomentReached": 5,
+      "meaningfulMomentResolved": 5,
+      "playerRoutinePlay": 1371,
+      "defensiveResolution": 4
+    },
+    "routineBallContexts": {
+      "deepGrounder": 1371
+    },
+    "routineResults": {
+      "error": 1269,
+      "zeroOuts": 102
+    },
+    "routineOuts": {
+      "0": 1371
+    },
+    "groundHandoff": null,
+    "defensiveSituation": {
+      "position": "游擊手",
+      "capabilities": {
+        "fielding": 4,
+        "reaction": 3,
+        "range": 3,
+        "arm": 4,
+        "throwing": 4,
+        "decision": 2
+      },
+      "windows": {
+        "fielding": -0.7,
+        "transfer": 2.3,
+        "throw": 0.32
+      },
+      "demands": {
+        "reach": 9,
+        "control": 5,
+        "release": 7
+      }
+    },
+    "density": {
+      "version": "match-decision-density-v1",
+      "defensiveMeaningfulDecisionCount": 4,
+      "lastDecisionPlayIndex": 38,
+      "lastNoveltyKey": "leadRunnerPressure|111|0|initiator|deepGrounder|towardHole|balanced|controlledNoThrow+doublePlay+forceHome+forceThird+secureFirst",
+      "recentSituationFamilies": [
+        "deepGroundBall|100|0|initiator|deepGrounder|towardHole|balanced",
+        "deepGroundBall|110|0|initiator|deepGrounder|towardHole|balanced",
+        "leadRunnerPressure|111|0|initiator|deepGrounder|towardHole|balanced",
+        "leadRunnerPressure|111|0|initiator|deepGrounder|towardHole|balanced"
+      ],
+      "recentRouteFamilies": [
+        "controlledNoThrow+doublePlay+secureFirst",
+        "controlledNoThrow+doublePlay+forceThird+secureFirst",
+        "controlledNoThrow+doublePlay+forceHome+forceThird+secureFirst",
+        "controlledNoThrow+doublePlay+forceHome+forceThird+secureFirst"
+      ],
+      "repeatedOpportunityCount": 1370,
+      "suppressedOpportunityCount": 1370,
+      "currentConsecutiveMeaningfulDecisions": 0,
+      "maxConsecutiveMeaningfulDecisions": 1,
+      "lastDecisionInning": 2,
+      "lastDecisionHalf": "上",
+      "lastSelectedRoute": "secure",
+      "lastFinalRoute": "secureFirst",
+      "offensiveDecisionCount": 1,
+      "lastOffensiveDecisionPA": 1,
+      "lastOffensiveDecisionPlayIndex": 14,
+      "lastOffensiveNoveltyKey": "early|leading-close|2|100|routine",
+      "recentOffensiveSituationFamilies": [
+        "early|leading-close|2|100|routine"
+      ],
+      "offensiveSuppressedCount": 0,
+      "offensiveRepeatSuppressedCount": 0,
+      "lastOffensiveDecisionInning": 1,
+      "lastOffensiveDecisionHalf": "下"
+    },
+    "player": {
+      "lineupStatus": "starter",
+      "entryCompleted": true,
+      "lineupEntries": [
+        {
+          "id": "player",
+          "name": "2.2.2 測試球員",
+          "position": "內野手",
+          "bats": "R",
+          "source": "canonical-player"
+        }
+      ],
+      "benchEntries": [],
+      "position": "內野手"
+    },
+    "paResults": {
+      "out": 2,
+      "single": 105,
+      "productiveOut": 2,
+      "strikeout": 2,
+      "triple": 1,
+      "walk": 1,
+      "error": 1273
+    },
+    "completedMoments": [
+      {
+        "id": "hs_y1_match_moment_1",
+        "domain": "offense",
+        "inning": 1,
+        "half": "下"
+      },
+      {
+        "id": "hs_y1_match_defense_1",
+        "domain": "defense",
+        "inning": 2,
+        "half": "上",
+        "outsCreated": 0
+      },
+      {
+        "id": "hs_y1_match_defense_2",
+        "domain": "defense",
+        "inning": 2,
+        "half": "上",
+        "outsCreated": 0
+      },
+      {
+        "id": "hs_y1_match_defense_3",
+        "domain": "defense",
+        "inning": 2,
+        "half": "上",
+        "outsCreated": 0
+      },
+      {
+        "id": "hs_y1_match_defense_4",
+        "domain": "defense",
+        "inning": 2,
+        "half": "上",
+        "outsCreated": 0
+      }
+    ],
+    "firstSteps": [
+      {
+        "safety": 1,
+        "inning": 1,
+        "half": "上",
+        "outs": 0,
+        "phase": "full_match_flow",
+        "momentIndex": 0,
+        "currentMomentId": "hs_y1_match_moment_1",
+        "currentBatter": "away-sim-3",
+        "nextBatter": "away-sim-3",
+        "completedIds": [],
+        "visible": false
+      },
+      {
+        "safety": 2,
+        "inning": 1,
+        "half": "上",
+        "outs": 1,
+        "phase": "full_match_flow",
+        "momentIndex": 0,
+        "currentMomentId": "hs_y1_match_moment_1",
+        "currentBatter": "away-sim-4",
+        "nextBatter": "away-sim-4",
+        "completedIds": [],
+        "visible": false
+      }
+    ],
+    "lastSteps": [
+      {
+        "safety": 1399,
+        "inning": 2,
+        "half": "上",
+        "outs": 0,
+        "phase": "moment_2_resolved",
+        "momentIndex": 1,
+        "currentMomentId": "hs_y1_match_moment_2",
+        "currentBatter": "away-sim-3",
+        "nextBatter": "away-sim-3",
+        "completedIds": [
+          "hs_y1_match_moment_1",
+          "hs_y1_match_defense_1",
+          "hs_y1_match_defense_2",
+          "hs_y1_match_defense_3",
+          "hs_y1_match_defense_4"
+        ],
+        "visible": false
+      },
+      {
+        "safety": 1400,
+        "inning": 2,
+        "half": "上",
+        "outs": 0,
+        "phase": "moment_2_resolved",
+        "momentIndex": 1,
+        "currentMomentId": "hs_y1_match_moment_2",
+        "currentBatter": "away-sim-4",
+        "nextBatter": "away-sim-4",
+        "completedIds": [
+          "hs_y1_match_moment_1",
+          "hs_y1_match_defense_1",
+          "hs_y1_match_defense_2",
+          "hs_y1_match_defense_3",
+          "hs_y1_match_defense_4"
+        ],
+        "visible": false
+      }
+    ]
+  },
+  "browserIndexManifest": {
+    "label": "match-browser-manifest-isolated",
+    "seed": 88221,
+    "operands": {
+      "completed": true,
+      "firstIdPresent": false,
+      "finalIdPresent": false,
+      "defenseMomentCount": 0,
+      "defensiveMeaningfulDecisionCount": 0,
+      "defenseCountsEqual": true,
+      "safety": 101,
+      "safetyBelow1400": true
+    },
+    "ids": [],
+    "final": {
+      "inning": 7,
+      "half": "終",
+      "outs": 3,
+      "scores": {
+        "home": 2,
+        "away": 5
+      },
+      "phase": "complete"
+    },
+    "integrityIssues": [],
+    "events": {
+      "matchEntry": 1,
+      "plateAppearance": 73,
+      "halfInningEnd": 14,
+      "sideChange": 13,
+      "run": 7,
+      "gameEnd": 1
+    },
+    "routineBallContexts": {},
+    "routineResults": {},
+    "routineOuts": {},
+    "groundHandoff": "present",
+    "defensiveSituation": {},
+    "density": {
+      "version": "match-decision-density-v1",
+      "defensiveMeaningfulDecisionCount": 0,
+      "lastDecisionPlayIndex": -1,
+      "lastNoveltyKey": "",
+      "recentSituationFamilies": [],
+      "recentRouteFamilies": [],
+      "repeatedOpportunityCount": 0,
+      "suppressedOpportunityCount": 0,
+      "currentConsecutiveMeaningfulDecisions": 0,
+      "maxConsecutiveMeaningfulDecisions": 0,
+      "lastDecisionInning": 0,
+      "lastDecisionHalf": "",
+      "lastSelectedRoute": "",
+      "lastFinalRoute": "",
+      "offensiveDecisionCount": 0,
+      "lastOffensiveDecisionPA": 0,
+      "lastOffensiveDecisionPlayIndex": -1,
+      "lastOffensiveNoveltyKey": "",
+      "recentOffensiveSituationFamilies": [],
+      "offensiveSuppressedCount": 0,
+      "offensiveRepeatSuppressedCount": 0,
+      "lastOffensiveDecisionInning": 0,
+      "lastOffensiveDecisionHalf": ""
+    },
+    "player": {
+      "lineupStatus": "starter",
+      "entryCompleted": true,
+      "lineupEntries": [],
+      "benchEntries": [
+        {
+          "playerId": "player",
+          "id": "player",
+          "name": "2.2.2 測試球員",
+          "age": 10,
+          "year": 1,
+          "primaryPosition": "2B",
+          "secondaryPositions": [
+            "LF"
+          ],
+          "bats": "R",
+          "throws": "R",
+          "contact": 3,
+          "power": 2,
+          "speed": 2,
+          "defense": 4,
+          "arm": 4,
+          "pitching": 1,
+          "pitchingProfile": {
+            "effectiveness": 1,
+            "control": 1,
+            "stuff": 1
+          },
+          "source": "canonical-player",
+          "rosterTeamId": "home-school",
+          "position": "二壘手"
+        }
+      ],
+      "position": "內野手"
+    },
+    "paResults": {
+      "out": 28,
+      "single": 13,
+      "productiveOut": 11,
+      "double": 4,
+      "walk": 8,
+      "triple": 3,
+      "homeRun": 3,
+      "strikeout": 3
+    },
+    "completedMoments": [],
+    "firstSteps": [
+      {
+        "safety": 1,
+        "inning": 1,
+        "half": "上",
+        "outs": 0,
+        "phase": "full_match_flow",
+        "momentIndex": 0,
+        "currentMomentId": "hs_y1_match_moment_1",
+        "currentBatter": "regional-power-school-player-07",
+        "nextBatter": "regional-power-school-player-07",
+        "completedIds": [],
+        "visible": false
+      },
+      {
+        "safety": 2,
+        "inning": 1,
+        "half": "上",
+        "outs": 1,
+        "phase": "full_match_flow",
+        "momentIndex": 0,
+        "currentMomentId": "hs_y1_match_moment_1",
+        "currentBatter": "regional-power-school-player-03",
+        "nextBatter": "regional-power-school-player-03",
+        "completedIds": [],
+        "visible": false
+      }
+    ],
+    "lastSteps": [
+      {
+        "safety": 100,
+        "inning": 7,
+        "half": "下",
+        "outs": 3,
+        "phase": "full_match_flow",
+        "momentIndex": 0,
+        "currentMomentId": "hs_y1_match_moment_1",
+        "currentBatter": "home-school-player-07",
+        "nextBatter": "home-school-player-07",
+        "completedIds": [],
+        "visible": false
+      },
+      {
+        "safety": 101,
+        "inning": 7,
+        "half": "下",
+        "outs": 3,
+        "phase": "full_match_flow",
+        "momentIndex": 0,
+        "currentMomentId": "hs_y1_match_moment_1",
+        "currentBatter": "home-school-player-07",
+        "nextBatter": "home-school-player-07",
+        "completedIds": [],
+        "visible": false
+      }
+    ]
+  }
+}

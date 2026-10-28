@@ -1,0 +1,10 @@
+"use strict";
+const C=require('./critical-regression-triage-v0.1-capture.cjs'),{obs,count}=require('./critical-regression-triage-v0.1-statistics.cjs');
+function summarize(label) {
+ const x=obs(label,'TRIAGE_MATCH');if(!x)return {label,observationMissing:true};
+ const m=x.match,events=m.simulationLog,roster=m.rosters.home;
+ const routine=events.filter(e=>e.type==='playerRoutinePlay'),d=m.defensiveSituation;
+ return {label,seed:x.seed,operands:{completed:x.completed,firstIdPresent:x.firstIdPresent,finalIdPresent:x.finalIdPresent,defenseMomentCount:x.defenseMomentCount,defensiveMeaningfulDecisionCount:x.defensiveMeaningfulDecisionCount,defenseCountsEqual:x.defenseMomentCount===x.defensiveMeaningfulDecisionCount,safety:x.safety,safetyBelow1400:x.safetyBelow1400},ids:x.ids,final:{inning:m.inning,half:m.half,outs:m.outs,scores:m.scores,phase:m.simulationPhase},integrityIssues:x.integrityIssues,events:count(events.map(e=>e.type)),routineBallContexts:count(routine.map(e=>e.ballContext)),routineResults:count(routine.map(e=>e.resultCode)),routineOuts:count(routine.map(e=>e.outsCreated)),groundHandoff:m.groundBallInPlayState===null?null:'present',defensiveSituation:{position:d?.playerPosition,capabilities:d?.playerCapabilities,windows:d?.windows,demands:d?.demands},density:m.matchDecisionDensityState,player:{lineupStatus:m.playerLineupStatus,entryCompleted:m.playerEntryCompleted,lineupEntries:roster.lineup.filter(p=>p.id==='player'),benchEntries:roster.bench?.filter(p=>p.id==='player'),fielders:roster.defenseAssignments,position:m.position},paResults:count(events.filter(e=>e.type==='plateAppearance').map(e=>e.result)),completedMoments:m.completedMoments.map(v=>({id:v.id,domain:v.domain,inning:v.inning,half:v.half,outsCreated:v.outsCreated})),firstSteps:x.steps.slice(0,2),lastSteps:x.steps.slice(-2)};
+}
+if(require.main===module){const data={originalManifest:summarize('match-isolated'),browserIndexManifest:summarize('match-browser-manifest-isolated')};if(process.argv[2]==='capture'){C.integrity();C.capture('match-operands',data);}console.log(JSON.stringify(data,null,2));}
+module.exports={summarize};

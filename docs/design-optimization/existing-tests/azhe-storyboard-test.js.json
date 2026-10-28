@@ -1,0 +1,19 @@
+{
+  "file": "azhe-storyboard-test.js",
+  "status": "UNVERIFIED",
+  "entryVerified": true,
+  "observedAssertions": 0,
+  "elapsedMs": 398,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/azhe-storyboard-test.js"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "timedOut": false,
+  "stdout": "┌─────────┬──────────────────┬──────────────────────────────────┐\n│ (index) │ item             │ result                           │\n├─────────┼──────────────────┼──────────────────────────────────┤\n│ 0       │ '既有阿哲事件'   │ '16／16'                         │\n│ 1       │ '青少棒補位選項' │ '3／3'                           │\n│ 2       │ '總計'           │ '19／19'                         │\n│ 3       │ '成年回響'       │ '2 種觸發、主線不耗回合、不重複' │\n│ 4       │ '跨章物件'       │ '滾地球／紅土線／紀錄表可存讀'   │\n└─────────┴──────────────────┴──────────────────────────────────┘\n┌─────────┬───────────────────┬───────────────────┬──────────┐\n│ (index) │ original          │ final             │ mainFlow │\n├─────────┼───────────────────┼───────────────────┼──────────┤\n│ 0       │ 'respected_equal' │ 'respected_equal' │ '正常'   │\n│ 1       │ 'dependent'       │ 'dependent'       │ '正常'   │\n│ 2       │ 'distant'         │ 'distant'         │ '正常'   │\n│ 3       │ 'neutral'         │ 'confided'        │ '正常'   │\n└─────────┴───────────────────┴───────────────────┴──────────┘\n阿哲人物線分鏡化測試通過。\n",
+  "stderr": ""
+}

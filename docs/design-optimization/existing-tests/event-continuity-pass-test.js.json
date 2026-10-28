@@ -1,0 +1,19 @@
+{
+  "file": "event-continuity-pass-test.js",
+  "status": "UNVERIFIED",
+  "entryVerified": true,
+  "observedAssertions": 0,
+  "elapsedMs": 408,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/event-continuity-pass-test.js"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "timedOut": false,
+  "stdout": "✓ Gameplay 合約雜湊包含 5.2 Grounder Pilot，事件 ID 維持不變\n✓ 位置輪測由玩家交付任務、教練決定初始分組\n✓ 板凳四種結果都結束紅白賽，正式賽入口交代時間經過\n✓ 四種板凳旗標都在正式賽入口得到具體回音\n✓ Choice Outcome 停留、只顯示一個繼續按鈕且不排入 420ms 自動跳轉\n✓ 連點原選項與連點繼續都不會重複套用效果\n✓ 實際 Grounder 結果與其他守位選擇都精確回收上一球\n✓ 第五局 Presentation 使用上一球回收文字與既有比賽狀態\n✓ 存讀結果畫面只還原已推進狀態，不重套效果也不增加 schema\n✓ 四守位仍以原八回合完成少棒第一季\n\nEvent Continuity Pass：10/10 通過\n",
+  "stderr": ""
+}

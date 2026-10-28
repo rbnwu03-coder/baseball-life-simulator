@@ -1,0 +1,779 @@
+{
+  "task": "SS Strategic Ground-Ball Scenario Contract v0.1",
+  "createdAt": "2026-10-15T14:48:39.528Z",
+  "tier": "Tier 2",
+  "project": "E-meng-baseball_life_sim_semirefactor",
+  "index": {
+    "project": "E-meng-baseball_life_sim_semirefactor",
+    "nodes": 107345,
+    "edges": 129126,
+    "status": "ready",
+    "root_path": "E:/meng/baseball_life_sim_semirefactor",
+    "indexed_at": "2026-10-15T01:30:19Z",
+    "parse_partial": {
+      "files": [],
+      "count": 1,
+      "truncated": true,
+      "omitted": 1
+    },
+    "parse_unusable": {
+      "files": [],
+      "count": 0,
+      "truncated": false
+    },
+    "skipped": {
+      "files": [],
+      "count": 0,
+      "truncated": false
+    },
+    "not_indexed": {
+      "dirs": [],
+      "dirs_count": 2,
+      "files": [],
+      "files_count": 0,
+      "truncated": true,
+      "dirs_omitted": 2
+    }
+  },
+  "searches": [
+    {
+      "label": "core",
+      "result": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "label",
+          "lines",
+          "in",
+          "out"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "file": "script.js",
+            "rows": [
+              [
+                "advanceHighSchoolMatchAfterHalfInning",
+                "Function",
+                "7036-7082",
+                1,
+                8
+              ],
+              [
+                "buildHighSchoolShortstopExecution",
+                "Function",
+                "11938-12025",
+                2,
+                18
+              ],
+              [
+                "endHighSchoolMatchHalfInning",
+                "Function",
+                "7084-7086",
+                2,
+                1
+              ],
+              [
+                "evaluateDefensiveRouteAvailability",
+                "Function",
+                "7392-7436",
+                8,
+                5
+              ],
+              [
+                "evaluatePositionDecisionMoment",
+                "Function",
+                "7810-7840",
+                3,
+                2
+              ],
+              [
+                "insertPlayerIntoHighSchoolMatchLineup",
+                "Function",
+                "6439-6467",
+                1,
+                7
+              ],
+              [
+                "prepareHighSchoolDefensiveMomentFromSimulation",
+                "Function",
+                "13263-13465",
+                1,
+                44
+              ],
+              [
+                "recordHighSchoolMatchSimulationEvent",
+                "Function",
+                "4343-4375",
+                25,
+                7
+              ],
+              [
+                "resolveHighSchoolYearOneMatch",
+                "Function",
+                "13727-13776",
+                2,
+                17
+              ]
+            ]
+          }
+        ],
+        "total": 9,
+        "returned": 9,
+        "count": 9,
+        "has_more": false,
+        "truncated": false
+      }
+    },
+    {
+      "label": "foundation-owners",
+      "result": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "label",
+          "lines",
+          "in",
+          "out"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation",
+            "file": "defensive-decision-throw-foundation.js",
+            "rows": [
+              [
+                "buildDecisionOpportunity",
+                "Function",
+                "61-107",
+                7,
+                11
+              ]
+            ]
+          },
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.force-advancement",
+            "file": "force-advancement.js",
+            "rows": [
+              [
+                "buildInitialLiveBallForceChain",
+                "Function",
+                "35-70",
+                7,
+                5
+              ]
+            ]
+          },
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.match-game-record",
+            "file": "match-game-record.js",
+            "rows": [
+              [
+                "createGameRecord",
+                "Function",
+                "66-87",
+                12,
+                6
+              ]
+            ]
+          },
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.match-situation-lifecycle",
+            "file": "match-situation-lifecycle.js",
+            "rows": [
+              [
+                "createSituation",
+                "Function",
+                "62-89",
+                1,
+                7
+              ]
+            ]
+          },
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.force-advancement",
+            "file": "force-advancement.js",
+            "rows": [
+              [
+                "deriveCompatibilityForceState",
+                "Function",
+                "74-86",
+                1,
+                1
+              ]
+            ]
+          },
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.batted-ball-ground-defense",
+            "file": "batted-ball-ground-defense.js",
+            "rows": [
+              [
+                "resolveGroundBallDefensiveAccess",
+                "Function",
+                "235-275",
+                2,
+                4
+              ]
+            ]
+          },
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.team-roster-foundation",
+            "file": "team-roster-foundation.js",
+            "rows": [
+              [
+                "validateActiveDefense",
+                "Function",
+                "308-338",
+                3,
+                6
+              ]
+            ]
+          }
+        ],
+        "total": 7,
+        "returned": 7,
+        "count": 7,
+        "has_more": false,
+        "truncated": false
+      }
+    }
+  ],
+  "traces": [
+    {
+      "label": "classifyPositionFamilyPlay",
+      "result": {
+        "function": "classifyPositionFamilyPlay",
+        "direction": "both",
+        "callees_total": 1,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "evaluatePositionDecisionMoment",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 2,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "classifyHighSchoolMatchDefensiveOpportunity",
+                  1
+                ],
+                [
+                  "resolveRoutineDefensivePlay",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "generateInfieldLegalChoices",
+      "result": {
+        "function": "generateInfieldLegalChoices",
+        "direction": "both",
+        "callees_total": 6,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getHighSchoolYearOneMomentId",
+                  1
+                ],
+                [
+                  "hasHighSchoolHomePlay",
+                  1
+                ],
+                [
+                  "evaluateDefensiveRouteAvailability",
+                  1
+                ],
+                [
+                  "evaluateExecutionReadiness",
+                  1
+                ],
+                [
+                  "dedupePositionDecisionChoices",
+                  1
+                ],
+                [
+                  "make",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 3,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "buildInfieldMeaningfulMoment",
+                  1
+                ],
+                [
+                  "getInfieldDecisionChoice",
+                  1
+                ],
+                [
+                  "validateHighSchoolDecisionThrowState",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "getHighSchoolMatchStateIntegrityIssues",
+      "result": {
+        "function": "getHighSchoolMatchStateIntegrityIssues",
+        "direction": "both",
+        "callees_total": 1,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getHighSchoolMatchLineupBatter",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 1,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "assertHighSchoolMatchStateIntegrity",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "applyHighSchoolSimulatedPlateAppearance",
+      "result": {
+        "function": "applyHighSchoolSimulatedPlateAppearance",
+        "direction": "both",
+        "callees_total": 5,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "recordHighSchoolMatchSimulationEvent",
+                  1
+                ],
+                [
+                  "syncHighSchoolMatchPlayerRunnerLocation",
+                  1
+                ],
+                [
+                  "scoreHighSchoolMatchRunner",
+                  1
+                ],
+                [
+                  "resolveHighSchoolThirdOutIntegrity",
+                  1
+                ],
+                [
+                  "attemptScore",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 6,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "applyHighSchoolBuntTerminalPlateAppearance",
+                  1
+                ],
+                [
+                  "applyHighSchoolLineDriveCatchResolution",
+                  1
+                ],
+                [
+                  "applyHighSchoolFlyBallCatchResolution",
+                  1
+                ],
+                [
+                  "resolveSimulatedHighSchoolPlateAppearance",
+                  1
+                ],
+                [
+                  "resolveHighSchoolOffensiveDecision",
+                  1
+                ],
+                [
+                  "prepareHighSchoolDefensiveMomentFromSimulation",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "prepareHighSchoolYearOneMatch",
+      "result": {
+        "function": "prepareHighSchoolYearOneMatch",
+        "direction": "both",
+        "callees_total": 21,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "formatHandedness",
+                  1
+                ],
+                [
+                  "isDevelopmentTestPositionLegalForThrowingHand",
+                  1
+                ],
+                [
+                  "getDevelopmentTestPositionLegalityMessage",
+                  1
+                ],
+                [
+                  "createDevelopmentMatchPositionTestCapabilityOverride",
+                  1
+                ],
+                [
+                  "isHighSchoolMatchOpportunityDebugMode",
+                  1
+                ],
+                [
+                  "createHighSchoolMatchDecisionDensityState",
+                  1
+                ],
+                [
+                  "ensureHighSchoolMatchOpportunityTrace",
+                  1
+                ],
+                [
+                  "createHighSchoolMatchSimulationSeedFromIdentity",
+                  1
+                ],
+                [
+                  "getHighSchoolYearOneMomentId",
+                  1
+                ],
+                [
+                  "createHighSchoolMatchSimulationSeed",
+                  1
+                ],
+                [
+                  "recordHighSchoolMatchSimulationEvent",
+                  1
+                ],
+                [
+                  "setHighSchoolCoachTacticalDirection",
+                  1
+                ],
+                [
+                  "materializeSelectedHighSchoolRoster",
+                  1
+                ],
+                [
+                  "createHighSchoolMatchSimulationRoster",
+                  1
+                ],
+                [
+                  "assertHighSchoolMatchCapabilityAdmission",
+                  1
+                ],
+                [
+                  "isInfieldDecisionFamilyPosition",
+                  1
+                ],
+                [
+                  "buildInfieldMeaningfulMoment",
+                  1
+                ],
+                [
+                  "getHighSchoolDefensiveSituationText",
+                  1
+                ],
+                [
+                  "createHighSchoolPlayingTimeOpportunity",
+                  1
+                ],
+                [
+                  "getHighSchoolPlayingTimeAssignmentText",
+                  1
+                ],
+                [
+                  "ensureHighSchoolPitcherRuntimeState",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 8,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "createPlayer",
+                  1
+                ],
+                [
+                  "prepareHighSchoolYearThreeMatch",
+                  1
+                ],
+                [
+                  "launchHighSchoolScheduleEntry",
+                  1
+                ],
+                [
+                  "prepareHighSchoolFollowupEvaluationMatch",
+                  1
+                ],
+                [
+                  "prepareHighSchoolYearTwoEvaluationMatch",
+                  1
+                ],
+                [
+                  "prepareHighSchoolYearTwoAutumnMatch",
+                  1
+                ],
+                [
+                  "prepareCurrentHighSchoolYearOneMatch",
+                  1
+                ],
+                [
+                  "processHighSchoolYearOneChoice",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "foundationTrace": {
+    "function": "buildDecisionOpportunity",
+    "direction": "both",
+    "callees_total": 8,
+    "callees_total_relation": "eq",
+    "callees": {
+      "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+      "cols": [
+        "name",
+        "hop"
+      ],
+      "groups": [
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation",
+          "rows": [
+            [
+              "freeze",
+              1
+            ],
+            [
+              "hasHomePlay",
+              1
+            ],
+            [
+              "controlled",
+              1
+            ],
+            [
+              "context",
+              1
+            ],
+            [
+              "route",
+              1
+            ],
+            [
+              "movement",
+              1
+            ],
+            [
+              "forced",
+              1
+            ],
+            [
+              "target",
+              1
+            ]
+          ]
+        }
+      ]
+    },
+    "callers_total": 2,
+    "callers_total_relation": "eq",
+    "callers": {
+      "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+      "cols": [
+        "name",
+        "hop"
+      ],
+      "groups": [
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation",
+          "rows": [
+            [
+              "validateOpportunity",
+              1
+            ]
+          ]
+        },
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.infield-baseball-logic-audit-runner",
+          "rows": [
+            [
+              "main",
+              1
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "snippets": [
+    {
+      "name": "prepareHighSchoolYearOneMatch",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.prepareHighSchoolYearOneMatch",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+      "start_line": 9667,
+      "end_line": 9883
+    },
+    {
+      "name": "generateInfieldLegalChoices",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.generateInfieldLegalChoices",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+      "start_line": 7687,
+      "end_line": 7808
+    },
+    {
+      "name": "resolveSimulatedHighSchoolPlateAppearance",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.resolveSimulatedHighSchoolPlateAppearance",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+      "start_line": 6993,
+      "end_line": 7034
+    },
+    {
+      "name": "deriveCompatibilityForceState",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.force-advancement.deriveCompatibilityForceState",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/force-advancement.js",
+      "start_line": 74,
+      "end_line": 86
+    },
+    {
+      "name": "buildDecisionOpportunity",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.defensive-decision-throw-foundation.buildDecisionOpportunity",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/defensive-decision-throw-foundation.js",
+      "start_line": 61,
+      "end_line": 107
+    },
+    {
+      "name": "evaluatePositionDecisionMoment",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.evaluatePositionDecisionMoment",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+      "start_line": 7810,
+      "end_line": 7840
+    }
+  ],
+  "qualification": "Graph script coordinates after Snapshot settlement are stale; material source re-extracted from explicitly whitelisted current files. Protected caller appeared as graph metadata only, no protected snippet requested."
+}

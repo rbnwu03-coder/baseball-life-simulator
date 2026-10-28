@@ -1,0 +1,100 @@
+{
+  "task": "Match Contract Implementation v0.1 — Sprint 1",
+  "createdAt": "2026-10-15T05:32:47.852Z",
+  "newFormalFiles": [
+    "tests/helpers/canonical-match-contract-context.cjs",
+    "tests/canonical-match-regression-integration-test.cjs",
+    "tests/routine-commentary-contract-test.cjs"
+  ],
+  "canonical": {
+    "seeds": [
+      88221,
+      88222
+    ],
+    "runsPerSeed": 2,
+    "freshContext": true,
+    "originalFixture": "docs/critical-regression-repair-b1-canonical-match-fixture-contract-normal-entry-proof.cjs",
+    "originalFixtureSha256": "93d4990d4a0d38a190be236d9e2e448b6906233d8248f6d8dd07e6e3cd399666",
+    "invitationIndex": 0,
+    "sample": 0.72,
+    "safety": 1400,
+    "policy": "secure/zone/first legal",
+    "SS": "???",
+    "playingTime": "normal producer, no supplied Opportunity",
+    "fixtureClassification": "legal sixth-inning substitute; no SS starter or nonzero defensive Moment claim"
+  },
+  "routine": {
+    "source": "tests/baseball-match-foundation-2-2-2-test.js",
+    "unchangedPrefixAndOriginal38Line": true,
+    "tokens": [
+      "hardGrounder",
+      "straightAtPlayer",
+      "playerRoutinePlay",
+      "selfCoverFirst",
+      "decisionTension"
+    ],
+    "legacyArtificialSetup": "presentation input only, never canonical proof"
+  },
+  "suiteOrder": [
+    {
+      "label": "canonical",
+      "file": "tests/canonical-match-regression-integration-test.cjs"
+    },
+    {
+      "label": "routine",
+      "file": "tests/routine-commentary-contract-test.cjs"
+    },
+    {
+      "label": "match-game-record",
+      "file": "tests/match-full-game-record-test.js"
+    },
+    {
+      "label": "ground-settlement",
+      "file": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js"
+    }
+  ],
+  "stopOnUnexpectedFormalFailure": true,
+  "S3": "UNVERIFIED; no new candidate or fixed ID requirement",
+  "snapshot": "KNOWN CONTRACT GAP; retain three observation times without source repair",
+  "entry": "existing Entry-Safe runner standalone",
+  "limits": {
+    "timeoutMs": 120000,
+    "outputMaxBufferBytes": 16000000,
+    "implicitGitShowMaxBufferBytes": 30000000
+  },
+  "preflight": {
+    "syntax": [
+      {
+        "file": "tests/helpers/canonical-match-contract-context.cjs",
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": "",
+        "sha256": "c7bffc08a9422924acc812f4c2db74beebf54fe2665d160aea3ef40203aa84f3"
+      },
+      {
+        "file": "tests/canonical-match-regression-integration-test.cjs",
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": "",
+        "sha256": "1477afa175188f55666ff51998d988fd200a36a8ab2a690ed3c69440e62c3d1e"
+      },
+      {
+        "file": "tests/routine-commentary-contract-test.cjs",
+        "exitCode": 0,
+        "stdout": "",
+        "stderr": "",
+        "sha256": "d593d99eb0430c32aa0423e4a4d59c18a2ab324ec5635d23f2ead4774b4ca9c7"
+      }
+    ],
+    "gameplayChildrenSoFar": 0,
+    "bookkeepingCorrection": "git status collapses new tests/helpers/ directory; allow that status spelling only, concrete inventory still restricts new files to three authorized paths",
+    "priorFilesUnchanged": 1521
+  },
+  "forbiddenSuiteInvocations": {
+    "Full251": 0,
+    "R6Full227": 0,
+    "firstBaseTiming": 0,
+    "ReceiverV2Integration": 0
+  },
+  "original36To38Edited": false
+}

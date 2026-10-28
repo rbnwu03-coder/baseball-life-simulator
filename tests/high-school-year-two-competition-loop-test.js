@@ -12,7 +12,7 @@ function verify(name, condition) {
 
 const root = path.resolve(__dirname, "..");
 const runtimeFiles = [
-  "team-roster-foundation.js", "team-strength-model.js", "high-school-entry-roster-context.js",
+  "team-roster-foundation.js", "team-strength-model.js", "high-school-entry-roster-context.js", "match-game-record.js",
   "player.js", "current-state-boundary.js", "time-boundary.js", "relationship-boundary.js", "evaluation-registry.js",
   "coach-evaluation-boundary.js", "narrative-condition-boundary.js", "evaluation-registry-bootstrap.js", "decision-flow.js",
   "day-completion-flow.js", "relationship-flow.js", "coach-response-flow.js", "narrative-condition-flow.js", "competition-presentation.js",
@@ -177,10 +177,59 @@ const strongAutumnScore = evaluate("__y2LoopFixture(130007,'bench',[]);player.hi
 const poorAutumnScore = evaluate("__y2LoopFixture(130007,'bench',[]);player.highSchoolYearTwoStep=2;__finishY2Match(prepareHighSchoolYearTwoEvaluationMatch(),'failure',true);player.highSchoolYearTwoStep=6;ensureHighSchoolYearTwoAutumnOpportunity().debug.opportunityScore");
 verify("34. Spring result 透過 evaluation trend 改變 Autumn Opportunity", strongAutumnScore > poorAutumnScore);
 
-evaluate("__y2LoopFixture(130008,'bench',[]);applyCanonicalPositionProfile(player,'投手',[]);materializeSelectedHighSchoolRoster(player,{rosterRole:'bench',playerPosition:'P',refreshCompetition:true});player.highSchoolNextOpportunity=null;ensureHighSchoolYearTwoSpringOpportunity();globalThis.__pitcherSpring=JSON.parse(JSON.stringify(player.highSchoolNextOpportunity));player.highSchoolYearTwoStep=2;__finishY2Match(prepareHighSchoolYearTwoEvaluationMatch(),'strong',false);player.highSchoolYearTwoStep=6;ensureHighSchoolYearTwoAutumnOpportunity();globalThis.__pitcherAutumn=JSON.parse(JSON.stringify(player.highSchoolNextOpportunity));__finishY2Match(prepareHighSchoolYearTwoAutumnMatch(),'strong',false);player.flags.push('year_two_plan_position');player.highSchoolYearTwoStep=8;evaluateHighSchoolYearTwo();globalThis.__pitcherSummary=player.highSchoolYearTwoDetail");
-const pitcher = parse("({spring:globalThis.__pitcherSpring,autumn:globalThis.__pitcherAutumn,summary:globalThis.__pitcherSummary})");
+evaluate(`
+  __y2LoopFixture(130008,'bench',[]);
+  applyCanonicalPositionProfile(player,'投手',[]);
+  materializeSelectedHighSchoolRoster(player,{rosterRole:'bench',playerPosition:'P',refreshCompetition:true});
+  player.highSchoolNextOpportunity=null;
+  ensureHighSchoolYearTwoSpringOpportunity();
+  globalThis.__pitcherSpring=JSON.parse(JSON.stringify(player.highSchoolNextOpportunity));
+  player.highSchoolYearTwoStep=2;
+  globalThis.__pitcherSpringMatch=__finishY2Match(prepareHighSchoolYearTwoEvaluationMatch(),'strong',false);
+  player.highSchoolYearTwoStep=6;
+  ensureHighSchoolYearTwoAutumnOpportunity();
+  globalThis.__pitcherAutumn=JSON.parse(JSON.stringify(player.highSchoolNextOpportunity));
+  globalThis.__pitcherAutumnMatch=__finishY2Match(prepareHighSchoolYearTwoAutumnMatch(),'strong',false);
+  function __pitcherSummaryState() {
+    return JSON.parse(JSON.stringify({
+      records:[__pitcherSpringMatch.gameRecord,__pitcherAutumnMatch.gameRecord],
+      exposure:[__pitcherSpringMatch.gameExposureState,__pitcherAutumnMatch.gameExposureState],
+      contribution:[__pitcherSpringMatch.playerContribution,__pitcherAutumnMatch.playerContribution],
+      performance:{season:player.seasonPerformance,recent:player.recentPerformance,exposure:player.exposure,scout:player.scoutEvaluation},
+      evaluation:player.highSchoolCompetitionEvaluation,
+      history:player.highSchoolYearTwoMatchHistory,
+      development:player.developmentState,
+      skills:player.baseballSkills
+    }));
+  }
+  player.flags.push('year_two_plan_position');
+  player.highSchoolYearTwoStep=8;
+  globalThis.__pitcherBeforeSummary=__pitcherSummaryState();
+  evaluateHighSchoolYearTwo();
+  globalThis.__pitcherAfterSummary=__pitcherSummaryState();
+  globalThis.__pitcherSummary=player.highSchoolYearTwoDetail;
+`);
+const pitcher = parse("({spring:globalThis.__pitcherSpring,autumn:globalThis.__pitcherAutumn,summary:globalThis.__pitcherSummary,before:globalThis.__pitcherBeforeSummary,after:globalThis.__pitcherAfterSummary})");
 verify("35. Canonical P route 在 Spring／Autumn 一致 deferred/noAppearance", pitcher.spring.pitcherExposureDeferred && pitcher.autumn.pitcherExposureDeferred && pitcher.spring.plannedUsage.appearanceType === "noAppearance" && pitcher.autumn.plannedUsage.appearanceType === "noAppearance");
-verify("36. Pitcher Summary 不偽造正式投球證明", pitcher.summary.includes("pitcher") === false && pitcher.summary.includes("投手使用仍延後處理") && pitcher.summary.includes("沒有虛構正式投球局數"));
+verify("36. Pitcher Summary 保留延期與等待安排，且不新增正式投球、曝光或表現", (() => {
+  assert.deepStrictEqual(pitcher.after, pitcher.before, "摘要生成不得改動正式紀錄、曝光、表現或成長");
+  pitcher.before.records.forEach(record => {
+    assert.strictEqual(record.version, evaluate("MatchGameRecord.VERSION"), "使用正式且非空的 Game Record");
+    const line = record.playerLines.player?.pitching;
+    assert.ok(!line || Object.values(line).every(value => value === 0 || value === null), "延期球員沒有正式投球數據");
+  });
+  pitcher.after.exposure.forEach(exposure => {
+    assert.strictEqual(exposure.finalized, true);
+    assert.strictEqual(exposure.pitcherExposureDeferred, true);
+    assert.strictEqual(exposure.appearanceType, "noAppearance");
+    assert.strictEqual(exposure.plateAppearances, 0);
+    assert.strictEqual(exposure.defensiveInnings, 0);
+  });
+  return pitcher.spring.pitcherExposureDeferred && pitcher.autumn.pitcherExposureDeferred
+    && /投手.*延後處理/.test(pitcher.summary)
+    && /(?:仍要等|等待|尚待|待確認)/.test(pitcher.summary) && /安排/.test(pitcher.summary)
+    && !/沒有虛構|不補上打席|暫不補上|內部評語當成已知事實|pitcher/.test(pitcher.summary);
+})());
 
 evaluate("__y2LoopFixture(130009,'rotation',[]);applyCanonicalPositionProfile(player,'捕手',['一壘手']);materializeSelectedHighSchoolRoster(player,{rosterRole:'bench',playerPosition:'C',refreshCompetition:true});player.highSchoolNextOpportunity=null;ensureHighSchoolYearTwoSpringOpportunity();globalThis.__catcherOpportunity=JSON.parse(JSON.stringify(player.highSchoolNextOpportunity));globalThis.__catcherMatch=prepareHighSchoolYearTwoEvaluationMatch()");
 verify("37. Canonical C route 保留 Catcher-compatible formal Match", evaluate("globalThis.__catcherOpportunity.assignedPosition") === "捕手" && !evaluate("globalThis.__catcherOpportunity.pitcherExposureDeferred") && evaluate("globalThis.__catcherMatch.id") === "hs-y2-spring-evaluation-1");

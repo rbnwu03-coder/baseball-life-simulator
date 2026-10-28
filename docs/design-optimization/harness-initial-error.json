@@ -1,0 +1,1768 @@
+{
+  "version": 1,
+  "node": "v24.19.0",
+  "samples": 16,
+  "scope": "Y1 engine fixtures + separately recorded natural event progression; no synthetic match outcomes",
+  "checks": [
+    {
+      "name": "Y1 complete actual match engine smoke",
+      "status": "FAIL",
+      "error": "evalmachine.<anonymous>:36\n    assertHighSchoolMatchIntegrity(match);\n    ^\n\nReferenceError: assertHighSchoolMatchIntegrity is not defined\n    at __auditPlay (evalmachine.<anonymous>:36:5)\n    at evalmachine.<anonymous>:1:16\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at Object.json (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:63:51)\n    at play (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:53:40)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:55:73\n    at check (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:8:44)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:55:1)"
+    },
+    {
+      "name": "Y1 paired health and role opportunity inputs",
+      "status": "PASS",
+      "evidence": [
+        {
+          "role": "starter",
+          "body": {
+            "stamina": 10,
+            "fatigue": 0,
+            "recovery": 5,
+            "maturity": 0,
+            "injuryRisk": 0,
+            "pain": 0
+          },
+          "planned": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "provisional": "rotation"
+        },
+        {
+          "role": "starter",
+          "body": {
+            "stamina": 10,
+            "fatigue": 16,
+            "recovery": 5,
+            "maturity": 0,
+            "injuryRisk": 12,
+            "pain": 8
+          },
+          "planned": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "provisional": "bench"
+        },
+        {
+          "role": "rotation",
+          "body": {
+            "stamina": 10,
+            "fatigue": 0,
+            "recovery": 5,
+            "maturity": 0,
+            "injuryRisk": 0,
+            "pain": 0
+          },
+          "planned": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "provisional": "rotation"
+        },
+        {
+          "role": "rotation",
+          "body": {
+            "stamina": 10,
+            "fatigue": 16,
+            "recovery": 5,
+            "maturity": 0,
+            "injuryRisk": 12,
+            "pain": 8
+          },
+          "planned": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "provisional": "bench"
+        },
+        {
+          "role": "bench",
+          "body": {
+            "stamina": 10,
+            "fatigue": 0,
+            "recovery": 5,
+            "maturity": 0,
+            "injuryRisk": 0,
+            "pain": 0
+          },
+          "planned": {
+            "appearanceType": "defensiveSubstitution",
+            "entryInning": 5,
+            "entryHalf": "下"
+          },
+          "provisional": "rotation"
+        },
+        {
+          "role": "bench",
+          "body": {
+            "stamina": 10,
+            "fatigue": 16,
+            "recovery": 5,
+            "maturity": 0,
+            "injuryRisk": 12,
+            "pain": 8
+          },
+          "planned": {
+            "appearanceType": "defensiveSubstitution",
+            "entryInning": 5,
+            "entryHalf": "下"
+          },
+          "provisional": "bench"
+        }
+      ]
+    },
+    {
+      "name": "Paired full matches health / capability / role / policy",
+      "status": "FAIL",
+      "error": "evalmachine.<anonymous>:36\n    assertHighSchoolMatchIntegrity(match);\n    ^\n\nReferenceError: assertHighSchoolMatchIntegrity is not defined\n    at __auditPlay (evalmachine.<anonymous>:36:5)\n    at evalmachine.<anonymous>:1:16\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at Object.json (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:63:51)\n    at play (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:53:40)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:72:35\n    at check (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:8:44)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:65:1)"
+    },
+    {
+      "name": "Save/load before decision reproduces official record and settlement",
+      "status": "FAIL",
+      "error": "evalmachine.<anonymous>:36\n    assertHighSchoolMatchIntegrity(match);\n    ^\n\nReferenceError: assertHighSchoolMatchIntegrity is not defined\n    at __auditPlay (evalmachine.<anonymous>:36:5)\n    at evalmachine.<anonymous>:1:16\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at Object.json (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:63:51)\n    at play (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:53:40)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:83:10\n    at check (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:8:44)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:78:1)"
+    },
+    {
+      "name": "Natural Y1 events through two real matches and year-end",
+      "status": "FAIL",
+      "error": "evalmachine.<anonymous>:36\n    assertHighSchoolMatchIntegrity(match);\n    ^\n\nReferenceError: assertHighSchoolMatchIntegrity is not defined\n    at __auditPlay (evalmachine.<anonymous>:36:5)\n    at evalmachine.<anonymous>:1:16\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at run (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:14:22)\n    at Object.json (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-test-context.js:63:51)\n    at play (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:53:40)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:99:25\n    at check (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:8:44)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\verify-gameplay.cjs:92:1)"
+    },
+    {
+      "name": "Y1 injury recovery then opportunity refresh boundary",
+      "status": "PASS",
+      "evidence": {
+        "beforeRole": "bench",
+        "afterRole": "rotation",
+        "existingPlanUnchanged": true
+      }
+    },
+    {
+      "name": "No-appearance and win/loss independence in official evaluation owner",
+      "status": "PASS",
+      "evidence": [
+        {
+          "tier": "strong",
+          "win": true,
+          "score": 2.38
+        },
+        {
+          "tier": "strong",
+          "win": false,
+          "score": 2.38
+        },
+        {
+          "tier": "poor",
+          "win": true,
+          "score": -2.273
+        },
+        {
+          "tier": "poor",
+          "win": false,
+          "score": -2.273
+        },
+        {
+          "tier": "noAppearance",
+          "win": true,
+          "score": 0
+        },
+        {
+          "tier": "noAppearance",
+          "win": false,
+          "score": 0
+        }
+      ]
+    }
+  ],
+  "experiments": {
+    "healthOpportunity": [
+      {
+        "role": "starter",
+        "body": {
+          "stamina": 10,
+          "fatigue": 0,
+          "recovery": 5,
+          "maturity": 0,
+          "injuryRisk": 0,
+          "pain": 0
+        },
+        "opportunity": {
+          "version": "playing-time-opportunity-v1",
+          "sourceVersion": "playing-time-opportunity-v1",
+          "decisionId": "hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|87f5baf9",
+          "matchId": "hs-y1-autumn-exhibition",
+          "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+          "exposureSource": "opportunity-resolver",
+          "actualRole": "starter",
+          "actualRoleAtDecision": "starter",
+          "projectedRolePrior": "rotationCandidate",
+          "playingTimeEnvironment": "high",
+          "schoolPlayingTimeEnvironment": "high",
+          "competitionDepth": "low",
+          "positionCompetition": "low",
+          "positionNeed": "high",
+          "evaluationTrend": 0,
+          "previousActualExposure": null,
+          "coachUsageStyle": "developmental",
+          "positionCapability": 8,
+          "positionFit": 0,
+          "positionExperience": 7,
+          "assignedPosition": "游擊手",
+          "requestedPosition": "游擊手",
+          "positionFallbackApplied": false,
+          "assignmentSource": "requested-position",
+          "assignmentReason": "specific-position-request",
+          "pitcherExposureDeferred": false,
+          "startingOpportunity": "start",
+          "startingDecision": "start",
+          "appearancePlan": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "substitutionOpportunity": "none",
+          "opportunityReasons": [
+            "actual-role:starter",
+            "school-environment:high",
+            "competition-depth:low",
+            "position-need:high",
+            "coach-usage:developmental",
+            "position-legal"
+          ],
+          "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|capability|school-development-57ed1970|hs-year-1-age-16|roster-36cbccaf|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|starter|rotationCandidate|high|low|high|developmental|游擊手|8|0|7|highSchoolExhibition|0|0|regular|normal",
+          "gameContext": {
+            "gameType": "highSchoolExhibition",
+            "inning": 0,
+            "expectedGameImportance": "regular",
+            "importance": "regular",
+            "leverage": "normal",
+            "scoreMargin": 0
+          },
+          "readinessSnapshot": {
+            "version": "opportunity-readiness-v1",
+            "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+            "position": "游擊手",
+            "requestedPosition": "游擊手",
+            "sourceType": "system-derived-provisional",
+            "sourceVersion": "opportunity-readiness-v1",
+            "readinessBand": "strong",
+            "positionReadiness": 8,
+            "positionFit": 0,
+            "fieldingReadiness": 8,
+            "reactionReadiness": 8,
+            "decisionReadiness": 8,
+            "experienceReadiness": 7,
+            "confidence": "provisional",
+            "positionLegal": true,
+            "positionFallbackApplied": false,
+            "assignmentSource": "requested-position",
+            "assignmentReason": "specific-position-request",
+            "pitcherExposureDeferred": false,
+            "reasons": [
+              "strongFieldingReadiness",
+              "strongReactionReadiness",
+              "strongDecisionReadiness",
+              "strongPositionExperience",
+              "limitedPositionFit",
+              "positionLegal"
+            ],
+            "provenance": {
+              "snapshotId": "readiness-80e98aa3",
+              "sourceType": "system-derived-provisional",
+              "sourceVersion": "opportunity-readiness-v1",
+              "inputVersion": "hs-entry-capability-v1",
+              "deterministicIdentity": "opportunity-readiness-v1|Design audit|ballSense＋baseballIQ|school-development-57ed1970|游擊手|游擊手|8|0|8|8|8|7|hs-entry-capability-v1"
+            }
+          },
+          "plannedUsage": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "debug": {
+            "opportunityHash": 2281028345,
+            "opportunityScore": 78,
+            "scoreBreakdown": {
+              "actualRole": 58,
+              "positionCapability": 12,
+              "positionFit": -10,
+              "positionExperience": 3,
+              "schoolEnvironment": 6,
+              "competitionDepth": 4,
+              "positionNeed": 5,
+              "projectedRolePrior": 0,
+              "coachUsage": -1,
+              "gameContext": 0,
+              "deterministicVariation": 1
+            },
+            "reasons": [
+              "actual-role:starter",
+              "school-environment:high",
+              "competition-depth:low",
+              "position-need:high",
+              "coach-usage:developmental",
+              "position-legal"
+            ]
+          }
+        },
+        "offense": {
+          "contact": 8,
+          "power": 8,
+          "speed": 8,
+          "discipline": 8
+        },
+        "defense": {
+          "fielding": 8,
+          "reaction": 8,
+          "range": 8,
+          "arm": 8,
+          "throwing": 8,
+          "decision": 8
+        },
+        "provisional": {
+          "code": "rotation",
+          "label": "輪替／替補任務",
+          "evidence": [
+            "守位適配 0",
+            "現任教練已有基本信任",
+            "所選發展工具仍在形成",
+            "身體可承擔正式任務"
+          ],
+          "opportunity": "同一場交流賽的中段代打與守備接替",
+          "assignment": ""
+        }
+      },
+      {
+        "role": "starter",
+        "body": {
+          "stamina": 10,
+          "fatigue": 16,
+          "recovery": 5,
+          "maturity": 0,
+          "injuryRisk": 12,
+          "pain": 8
+        },
+        "opportunity": {
+          "version": "playing-time-opportunity-v1",
+          "sourceVersion": "playing-time-opportunity-v1",
+          "decisionId": "hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|87f5baf9",
+          "matchId": "hs-y1-autumn-exhibition",
+          "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+          "exposureSource": "opportunity-resolver",
+          "actualRole": "starter",
+          "actualRoleAtDecision": "starter",
+          "projectedRolePrior": "rotationCandidate",
+          "playingTimeEnvironment": "high",
+          "schoolPlayingTimeEnvironment": "high",
+          "competitionDepth": "low",
+          "positionCompetition": "low",
+          "positionNeed": "high",
+          "evaluationTrend": 0,
+          "previousActualExposure": null,
+          "coachUsageStyle": "developmental",
+          "positionCapability": 8,
+          "positionFit": 0,
+          "positionExperience": 7,
+          "assignedPosition": "游擊手",
+          "requestedPosition": "游擊手",
+          "positionFallbackApplied": false,
+          "assignmentSource": "requested-position",
+          "assignmentReason": "specific-position-request",
+          "pitcherExposureDeferred": false,
+          "startingOpportunity": "start",
+          "startingDecision": "start",
+          "appearancePlan": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "substitutionOpportunity": "none",
+          "opportunityReasons": [
+            "actual-role:starter",
+            "school-environment:high",
+            "competition-depth:low",
+            "position-need:high",
+            "coach-usage:developmental",
+            "position-legal"
+          ],
+          "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|capability|school-development-57ed1970|hs-year-1-age-16|roster-36cbccaf|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|starter|rotationCandidate|high|low|high|developmental|游擊手|8|0|7|highSchoolExhibition|0|0|regular|normal",
+          "gameContext": {
+            "gameType": "highSchoolExhibition",
+            "inning": 0,
+            "expectedGameImportance": "regular",
+            "importance": "regular",
+            "leverage": "normal",
+            "scoreMargin": 0
+          },
+          "readinessSnapshot": {
+            "version": "opportunity-readiness-v1",
+            "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+            "position": "游擊手",
+            "requestedPosition": "游擊手",
+            "sourceType": "system-derived-provisional",
+            "sourceVersion": "opportunity-readiness-v1",
+            "readinessBand": "strong",
+            "positionReadiness": 8,
+            "positionFit": 0,
+            "fieldingReadiness": 8,
+            "reactionReadiness": 8,
+            "decisionReadiness": 8,
+            "experienceReadiness": 7,
+            "confidence": "provisional",
+            "positionLegal": true,
+            "positionFallbackApplied": false,
+            "assignmentSource": "requested-position",
+            "assignmentReason": "specific-position-request",
+            "pitcherExposureDeferred": false,
+            "reasons": [
+              "strongFieldingReadiness",
+              "strongReactionReadiness",
+              "strongDecisionReadiness",
+              "strongPositionExperience",
+              "limitedPositionFit",
+              "positionLegal"
+            ],
+            "provenance": {
+              "snapshotId": "readiness-80e98aa3",
+              "sourceType": "system-derived-provisional",
+              "sourceVersion": "opportunity-readiness-v1",
+              "inputVersion": "hs-entry-capability-v1",
+              "deterministicIdentity": "opportunity-readiness-v1|Design audit|ballSense＋baseballIQ|school-development-57ed1970|游擊手|游擊手|8|0|8|8|8|7|hs-entry-capability-v1"
+            }
+          },
+          "plannedUsage": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "debug": {
+            "opportunityHash": 2281028345,
+            "opportunityScore": 78,
+            "scoreBreakdown": {
+              "actualRole": 58,
+              "positionCapability": 12,
+              "positionFit": -10,
+              "positionExperience": 3,
+              "schoolEnvironment": 6,
+              "competitionDepth": 4,
+              "positionNeed": 5,
+              "projectedRolePrior": 0,
+              "coachUsage": -1,
+              "gameContext": 0,
+              "deterministicVariation": 1
+            },
+            "reasons": [
+              "actual-role:starter",
+              "school-environment:high",
+              "competition-depth:low",
+              "position-need:high",
+              "coach-usage:developmental",
+              "position-legal"
+            ]
+          }
+        },
+        "offense": {
+          "contact": 8,
+          "power": 8,
+          "speed": 8,
+          "discipline": 8
+        },
+        "defense": {
+          "fielding": 8,
+          "reaction": 8,
+          "range": 8,
+          "arm": 8,
+          "throwing": 8,
+          "decision": 8
+        },
+        "provisional": {
+          "code": "bench",
+          "label": "發展／板凳任務",
+          "evidence": [
+            "守位適配 0",
+            "現任教練已有基本信任",
+            "所選發展工具仍在形成",
+            "健康限制正式任務"
+          ],
+          "opportunity": "同一場交流賽的指定代打與短局守備",
+          "assignment": ""
+        }
+      },
+      {
+        "role": "rotation",
+        "body": {
+          "stamina": 10,
+          "fatigue": 0,
+          "recovery": 5,
+          "maturity": 0,
+          "injuryRisk": 0,
+          "pain": 0
+        },
+        "opportunity": {
+          "version": "playing-time-opportunity-v1",
+          "sourceVersion": "playing-time-opportunity-v1",
+          "decisionId": "hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|8e43786a",
+          "matchId": "hs-y1-autumn-exhibition",
+          "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+          "exposureSource": "opportunity-resolver",
+          "actualRole": "rotation",
+          "actualRoleAtDecision": "rotation",
+          "projectedRolePrior": "rotationCandidate",
+          "playingTimeEnvironment": "high",
+          "schoolPlayingTimeEnvironment": "high",
+          "competitionDepth": "low",
+          "positionCompetition": "low",
+          "positionNeed": "high",
+          "evaluationTrend": 0,
+          "previousActualExposure": null,
+          "coachUsageStyle": "developmental",
+          "positionCapability": 8,
+          "positionFit": 0,
+          "positionExperience": 7,
+          "assignedPosition": "游擊手",
+          "requestedPosition": "游擊手",
+          "positionFallbackApplied": false,
+          "assignmentSource": "requested-position",
+          "assignmentReason": "specific-position-request",
+          "pitcherExposureDeferred": false,
+          "startingOpportunity": "start",
+          "startingDecision": "start",
+          "appearancePlan": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "substitutionOpportunity": "none",
+          "opportunityReasons": [
+            "actual-role:rotation",
+            "school-environment:high",
+            "competition-depth:low",
+            "position-need:high",
+            "coach-usage:developmental",
+            "position-legal"
+          ],
+          "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|capability|school-development-57ed1970|hs-year-1-age-16|roster-36cbccaf|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|rotationCandidate|high|low|high|developmental|游擊手|8|0|7|highSchoolExhibition|0|0|regular|normal",
+          "gameContext": {
+            "gameType": "highSchoolExhibition",
+            "inning": 0,
+            "expectedGameImportance": "regular",
+            "importance": "regular",
+            "leverage": "normal",
+            "scoreMargin": 0
+          },
+          "readinessSnapshot": {
+            "version": "opportunity-readiness-v1",
+            "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+            "position": "游擊手",
+            "requestedPosition": "游擊手",
+            "sourceType": "system-derived-provisional",
+            "sourceVersion": "opportunity-readiness-v1",
+            "readinessBand": "strong",
+            "positionReadiness": 8,
+            "positionFit": 0,
+            "fieldingReadiness": 8,
+            "reactionReadiness": 8,
+            "decisionReadiness": 8,
+            "experienceReadiness": 7,
+            "confidence": "provisional",
+            "positionLegal": true,
+            "positionFallbackApplied": false,
+            "assignmentSource": "requested-position",
+            "assignmentReason": "specific-position-request",
+            "pitcherExposureDeferred": false,
+            "reasons": [
+              "strongFieldingReadiness",
+              "strongReactionReadiness",
+              "strongDecisionReadiness",
+              "strongPositionExperience",
+              "limitedPositionFit",
+              "positionLegal"
+            ],
+            "provenance": {
+              "snapshotId": "readiness-80e98aa3",
+              "sourceType": "system-derived-provisional",
+              "sourceVersion": "opportunity-readiness-v1",
+              "inputVersion": "hs-entry-capability-v1",
+              "deterministicIdentity": "opportunity-readiness-v1|Design audit|ballSense＋baseballIQ|school-development-57ed1970|游擊手|游擊手|8|0|8|8|8|7|hs-entry-capability-v1"
+            }
+          },
+          "plannedUsage": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "debug": {
+            "opportunityHash": 2386786410,
+            "opportunityScore": 57,
+            "scoreBreakdown": {
+              "actualRole": 48,
+              "positionCapability": 12,
+              "positionFit": -10,
+              "positionExperience": 3,
+              "schoolEnvironment": 6,
+              "competitionDepth": 4,
+              "positionNeed": 5,
+              "projectedRolePrior": 0,
+              "coachUsage": 4,
+              "gameContext": 0,
+              "deterministicVariation": -15
+            },
+            "reasons": [
+              "actual-role:rotation",
+              "school-environment:high",
+              "competition-depth:low",
+              "position-need:high",
+              "coach-usage:developmental",
+              "position-legal"
+            ]
+          }
+        },
+        "offense": {
+          "contact": 8,
+          "power": 8,
+          "speed": 8,
+          "discipline": 8
+        },
+        "defense": {
+          "fielding": 8,
+          "reaction": 8,
+          "range": 8,
+          "arm": 8,
+          "throwing": 8,
+          "decision": 8
+        },
+        "provisional": {
+          "code": "rotation",
+          "label": "輪替／替補任務",
+          "evidence": [
+            "守位適配 0",
+            "現任教練已有基本信任",
+            "所選發展工具仍在形成",
+            "身體可承擔正式任務"
+          ],
+          "opportunity": "同一場交流賽的中段代打與守備接替",
+          "assignment": ""
+        }
+      },
+      {
+        "role": "rotation",
+        "body": {
+          "stamina": 10,
+          "fatigue": 16,
+          "recovery": 5,
+          "maturity": 0,
+          "injuryRisk": 12,
+          "pain": 8
+        },
+        "opportunity": {
+          "version": "playing-time-opportunity-v1",
+          "sourceVersion": "playing-time-opportunity-v1",
+          "decisionId": "hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|8e43786a",
+          "matchId": "hs-y1-autumn-exhibition",
+          "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+          "exposureSource": "opportunity-resolver",
+          "actualRole": "rotation",
+          "actualRoleAtDecision": "rotation",
+          "projectedRolePrior": "rotationCandidate",
+          "playingTimeEnvironment": "high",
+          "schoolPlayingTimeEnvironment": "high",
+          "competitionDepth": "low",
+          "positionCompetition": "low",
+          "positionNeed": "high",
+          "evaluationTrend": 0,
+          "previousActualExposure": null,
+          "coachUsageStyle": "developmental",
+          "positionCapability": 8,
+          "positionFit": 0,
+          "positionExperience": 7,
+          "assignedPosition": "游擊手",
+          "requestedPosition": "游擊手",
+          "positionFallbackApplied": false,
+          "assignmentSource": "requested-position",
+          "assignmentReason": "specific-position-request",
+          "pitcherExposureDeferred": false,
+          "startingOpportunity": "start",
+          "startingDecision": "start",
+          "appearancePlan": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "substitutionOpportunity": "none",
+          "opportunityReasons": [
+            "actual-role:rotation",
+            "school-environment:high",
+            "competition-depth:low",
+            "position-need:high",
+            "coach-usage:developmental",
+            "position-legal"
+          ],
+          "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|capability|school-development-57ed1970|hs-year-1-age-16|roster-36cbccaf|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|rotationCandidate|high|low|high|developmental|游擊手|8|0|7|highSchoolExhibition|0|0|regular|normal",
+          "gameContext": {
+            "gameType": "highSchoolExhibition",
+            "inning": 0,
+            "expectedGameImportance": "regular",
+            "importance": "regular",
+            "leverage": "normal",
+            "scoreMargin": 0
+          },
+          "readinessSnapshot": {
+            "version": "opportunity-readiness-v1",
+            "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+            "position": "游擊手",
+            "requestedPosition": "游擊手",
+            "sourceType": "system-derived-provisional",
+            "sourceVersion": "opportunity-readiness-v1",
+            "readinessBand": "strong",
+            "positionReadiness": 8,
+            "positionFit": 0,
+            "fieldingReadiness": 8,
+            "reactionReadiness": 8,
+            "decisionReadiness": 8,
+            "experienceReadiness": 7,
+            "confidence": "provisional",
+            "positionLegal": true,
+            "positionFallbackApplied": false,
+            "assignmentSource": "requested-position",
+            "assignmentReason": "specific-position-request",
+            "pitcherExposureDeferred": false,
+            "reasons": [
+              "strongFieldingReadiness",
+              "strongReactionReadiness",
+              "strongDecisionReadiness",
+              "strongPositionExperience",
+              "limitedPositionFit",
+              "positionLegal"
+            ],
+            "provenance": {
+              "snapshotId": "readiness-80e98aa3",
+              "sourceType": "system-derived-provisional",
+              "sourceVersion": "opportunity-readiness-v1",
+              "inputVersion": "hs-entry-capability-v1",
+              "deterministicIdentity": "opportunity-readiness-v1|Design audit|ballSense＋baseballIQ|school-development-57ed1970|游擊手|游擊手|8|0|8|8|8|7|hs-entry-capability-v1"
+            }
+          },
+          "plannedUsage": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "debug": {
+            "opportunityHash": 2386786410,
+            "opportunityScore": 57,
+            "scoreBreakdown": {
+              "actualRole": 48,
+              "positionCapability": 12,
+              "positionFit": -10,
+              "positionExperience": 3,
+              "schoolEnvironment": 6,
+              "competitionDepth": 4,
+              "positionNeed": 5,
+              "projectedRolePrior": 0,
+              "coachUsage": 4,
+              "gameContext": 0,
+              "deterministicVariation": -15
+            },
+            "reasons": [
+              "actual-role:rotation",
+              "school-environment:high",
+              "competition-depth:low",
+              "position-need:high",
+              "coach-usage:developmental",
+              "position-legal"
+            ]
+          }
+        },
+        "offense": {
+          "contact": 8,
+          "power": 8,
+          "speed": 8,
+          "discipline": 8
+        },
+        "defense": {
+          "fielding": 8,
+          "reaction": 8,
+          "range": 8,
+          "arm": 8,
+          "throwing": 8,
+          "decision": 8
+        },
+        "provisional": {
+          "code": "bench",
+          "label": "發展／板凳任務",
+          "evidence": [
+            "守位適配 0",
+            "現任教練已有基本信任",
+            "所選發展工具仍在形成",
+            "健康限制正式任務"
+          ],
+          "opportunity": "同一場交流賽的指定代打與短局守備",
+          "assignment": ""
+        }
+      },
+      {
+        "role": "bench",
+        "body": {
+          "stamina": 10,
+          "fatigue": 0,
+          "recovery": 5,
+          "maturity": 0,
+          "injuryRisk": 0,
+          "pain": 0
+        },
+        "opportunity": {
+          "version": "playing-time-opportunity-v1",
+          "sourceVersion": "playing-time-opportunity-v1",
+          "decisionId": "hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|a9158da4",
+          "matchId": "hs-y1-autumn-exhibition",
+          "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+          "exposureSource": "opportunity-resolver",
+          "actualRole": "bench",
+          "actualRoleAtDecision": "bench",
+          "projectedRolePrior": "rotationCandidate",
+          "playingTimeEnvironment": "high",
+          "schoolPlayingTimeEnvironment": "high",
+          "competitionDepth": "low",
+          "positionCompetition": "low",
+          "positionNeed": "high",
+          "evaluationTrend": 0,
+          "previousActualExposure": null,
+          "coachUsageStyle": "developmental",
+          "positionCapability": 8,
+          "positionFit": 0,
+          "positionExperience": 7,
+          "assignedPosition": "游擊手",
+          "requestedPosition": "游擊手",
+          "positionFallbackApplied": false,
+          "assignmentSource": "requested-position",
+          "assignmentReason": "specific-position-request",
+          "pitcherExposureDeferred": false,
+          "startingOpportunity": "bench",
+          "startingDecision": "bench",
+          "appearancePlan": {
+            "appearanceType": "defensiveSubstitution",
+            "entryInning": 5,
+            "entryHalf": "下"
+          },
+          "substitutionOpportunity": "defensiveSubstitution",
+          "opportunityReasons": [
+            "actual-role:bench",
+            "school-environment:high",
+            "competition-depth:low",
+            "position-need:high",
+            "coach-usage:developmental",
+            "position-legal"
+          ],
+          "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|capability|school-development-57ed1970|hs-year-1-age-16|roster-36cbccaf|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|bench|rotationCandidate|high|low|high|developmental|游擊手|8|0|7|highSchoolExhibition|0|0|regular|normal",
+          "gameContext": {
+            "gameType": "highSchoolExhibition",
+            "inning": 0,
+            "expectedGameImportance": "regular",
+            "importance": "regular",
+            "leverage": "normal",
+            "scoreMargin": 0
+          },
+          "readinessSnapshot": {
+            "version": "opportunity-readiness-v1",
+            "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+            "position": "游擊手",
+            "requestedPosition": "游擊手",
+            "sourceType": "system-derived-provisional",
+            "sourceVersion": "opportunity-readiness-v1",
+            "readinessBand": "strong",
+            "positionReadiness": 8,
+            "positionFit": 0,
+            "fieldingReadiness": 8,
+            "reactionReadiness": 8,
+            "decisionReadiness": 8,
+            "experienceReadiness": 7,
+            "confidence": "provisional",
+            "positionLegal": true,
+            "positionFallbackApplied": false,
+            "assignmentSource": "requested-position",
+            "assignmentReason": "specific-position-request",
+            "pitcherExposureDeferred": false,
+            "reasons": [
+              "strongFieldingReadiness",
+              "strongReactionReadiness",
+              "strongDecisionReadiness",
+              "strongPositionExperience",
+              "limitedPositionFit",
+              "positionLegal"
+            ],
+            "provenance": {
+              "snapshotId": "readiness-80e98aa3",
+              "sourceType": "system-derived-provisional",
+              "sourceVersion": "opportunity-readiness-v1",
+              "inputVersion": "hs-entry-capability-v1",
+              "deterministicIdentity": "opportunity-readiness-v1|Design audit|ballSense＋baseballIQ|school-development-57ed1970|游擊手|游擊手|8|0|8|8|8|7|hs-entry-capability-v1"
+            }
+          },
+          "plannedUsage": {
+            "appearanceType": "defensiveSubstitution",
+            "entryInning": 5,
+            "entryHalf": "下"
+          },
+          "debug": {
+            "opportunityHash": 2836762020,
+            "opportunityScore": 54,
+            "scoreBreakdown": {
+              "actualRole": 37,
+              "positionCapability": 12,
+              "positionFit": -10,
+              "positionExperience": 3,
+              "schoolEnvironment": 6,
+              "competitionDepth": 4,
+              "positionNeed": 5,
+              "projectedRolePrior": 0,
+              "coachUsage": 4,
+              "gameContext": 0,
+              "deterministicVariation": -7
+            },
+            "reasons": [
+              "actual-role:bench",
+              "school-environment:high",
+              "competition-depth:low",
+              "position-need:high",
+              "coach-usage:developmental",
+              "position-legal"
+            ]
+          }
+        },
+        "offense": {
+          "contact": 8,
+          "power": 8,
+          "speed": 8,
+          "discipline": 8
+        },
+        "defense": {
+          "fielding": 8,
+          "reaction": 8,
+          "range": 8,
+          "arm": 8,
+          "throwing": 8,
+          "decision": 8
+        },
+        "provisional": {
+          "code": "rotation",
+          "label": "輪替／替補任務",
+          "evidence": [
+            "守位適配 0",
+            "現任教練已有基本信任",
+            "所選發展工具仍在形成",
+            "身體可承擔正式任務"
+          ],
+          "opportunity": "同一場交流賽的中段代打與守備接替",
+          "assignment": ""
+        }
+      },
+      {
+        "role": "bench",
+        "body": {
+          "stamina": 10,
+          "fatigue": 16,
+          "recovery": 5,
+          "maturity": 0,
+          "injuryRisk": 12,
+          "pain": 8
+        },
+        "opportunity": {
+          "version": "playing-time-opportunity-v1",
+          "sourceVersion": "playing-time-opportunity-v1",
+          "decisionId": "hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|a9158da4",
+          "matchId": "hs-y1-autumn-exhibition",
+          "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+          "exposureSource": "opportunity-resolver",
+          "actualRole": "bench",
+          "actualRoleAtDecision": "bench",
+          "projectedRolePrior": "rotationCandidate",
+          "playingTimeEnvironment": "high",
+          "schoolPlayingTimeEnvironment": "high",
+          "competitionDepth": "low",
+          "positionCompetition": "low",
+          "positionNeed": "high",
+          "evaluationTrend": 0,
+          "previousActualExposure": null,
+          "coachUsageStyle": "developmental",
+          "positionCapability": 8,
+          "positionFit": 0,
+          "positionExperience": 7,
+          "assignedPosition": "游擊手",
+          "requestedPosition": "游擊手",
+          "positionFallbackApplied": false,
+          "assignmentSource": "requested-position",
+          "assignmentReason": "specific-position-request",
+          "pitcherExposureDeferred": false,
+          "startingOpportunity": "bench",
+          "startingDecision": "bench",
+          "appearancePlan": {
+            "appearanceType": "defensiveSubstitution",
+            "entryInning": 5,
+            "entryHalf": "下"
+          },
+          "substitutionOpportunity": "defensiveSubstitution",
+          "opportunityReasons": [
+            "actual-role:bench",
+            "school-environment:high",
+            "competition-depth:low",
+            "position-need:high",
+            "coach-usage:developmental",
+            "position-legal"
+          ],
+          "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|capability|school-development-57ed1970|hs-year-1-age-16|roster-36cbccaf|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|bench|rotationCandidate|high|low|high|developmental|游擊手|8|0|7|highSchoolExhibition|0|0|regular|normal",
+          "gameContext": {
+            "gameType": "highSchoolExhibition",
+            "inning": 0,
+            "expectedGameImportance": "regular",
+            "importance": "regular",
+            "leverage": "normal",
+            "scoreMargin": 0
+          },
+          "readinessSnapshot": {
+            "version": "opportunity-readiness-v1",
+            "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+            "position": "游擊手",
+            "requestedPosition": "游擊手",
+            "sourceType": "system-derived-provisional",
+            "sourceVersion": "opportunity-readiness-v1",
+            "readinessBand": "strong",
+            "positionReadiness": 8,
+            "positionFit": 0,
+            "fieldingReadiness": 8,
+            "reactionReadiness": 8,
+            "decisionReadiness": 8,
+            "experienceReadiness": 7,
+            "confidence": "provisional",
+            "positionLegal": true,
+            "positionFallbackApplied": false,
+            "assignmentSource": "requested-position",
+            "assignmentReason": "specific-position-request",
+            "pitcherExposureDeferred": false,
+            "reasons": [
+              "strongFieldingReadiness",
+              "strongReactionReadiness",
+              "strongDecisionReadiness",
+              "strongPositionExperience",
+              "limitedPositionFit",
+              "positionLegal"
+            ],
+            "provenance": {
+              "snapshotId": "readiness-80e98aa3",
+              "sourceType": "system-derived-provisional",
+              "sourceVersion": "opportunity-readiness-v1",
+              "inputVersion": "hs-entry-capability-v1",
+              "deterministicIdentity": "opportunity-readiness-v1|Design audit|ballSense＋baseballIQ|school-development-57ed1970|游擊手|游擊手|8|0|8|8|8|7|hs-entry-capability-v1"
+            }
+          },
+          "plannedUsage": {
+            "appearanceType": "defensiveSubstitution",
+            "entryInning": 5,
+            "entryHalf": "下"
+          },
+          "debug": {
+            "opportunityHash": 2836762020,
+            "opportunityScore": 54,
+            "scoreBreakdown": {
+              "actualRole": 37,
+              "positionCapability": 12,
+              "positionFit": -10,
+              "positionExperience": 3,
+              "schoolEnvironment": 6,
+              "competitionDepth": 4,
+              "positionNeed": 5,
+              "projectedRolePrior": 0,
+              "coachUsage": 4,
+              "gameContext": 0,
+              "deterministicVariation": -7
+            },
+            "reasons": [
+              "actual-role:bench",
+              "school-environment:high",
+              "competition-depth:low",
+              "position-need:high",
+              "coach-usage:developmental",
+              "position-legal"
+            ]
+          }
+        },
+        "offense": {
+          "contact": 8,
+          "power": 8,
+          "speed": 8,
+          "discipline": 8
+        },
+        "defense": {
+          "fielding": 8,
+          "reaction": 8,
+          "range": 8,
+          "arm": 8,
+          "throwing": 8,
+          "decision": 8
+        },
+        "provisional": {
+          "code": "bench",
+          "label": "發展／板凳任務",
+          "evidence": [
+            "守位適配 0",
+            "現任教練已有基本信任",
+            "所選發展工具仍在形成",
+            "健康限制正式任務"
+          ],
+          "opportunity": "同一場交流賽的指定代打與短局守備",
+          "assignment": ""
+        }
+      }
+    ],
+    "recoveryBoundary": {
+      "before": {
+        "health": {
+          "stamina": 10,
+          "fatigue": 16,
+          "recovery": 5,
+          "maturity": 0,
+          "injuryRisk": 12,
+          "pain": 8
+        },
+        "planned": {
+          "version": "playing-time-opportunity-v1",
+          "sourceVersion": "playing-time-opportunity-v1",
+          "decisionId": "hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|87f5baf9",
+          "matchId": "hs-y1-autumn-exhibition",
+          "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+          "exposureSource": "opportunity-resolver",
+          "actualRole": "starter",
+          "actualRoleAtDecision": "starter",
+          "projectedRolePrior": "rotationCandidate",
+          "playingTimeEnvironment": "high",
+          "schoolPlayingTimeEnvironment": "high",
+          "competitionDepth": "low",
+          "positionCompetition": "low",
+          "positionNeed": "high",
+          "evaluationTrend": 0,
+          "previousActualExposure": null,
+          "coachUsageStyle": "developmental",
+          "positionCapability": 8,
+          "positionFit": 0,
+          "positionExperience": 7,
+          "assignedPosition": "游擊手",
+          "requestedPosition": "游擊手",
+          "positionFallbackApplied": false,
+          "assignmentSource": "requested-position",
+          "assignmentReason": "specific-position-request",
+          "pitcherExposureDeferred": false,
+          "startingOpportunity": "start",
+          "startingDecision": "start",
+          "appearancePlan": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "substitutionOpportunity": "none",
+          "opportunityReasons": [
+            "actual-role:starter",
+            "school-environment:high",
+            "competition-depth:low",
+            "position-need:high",
+            "coach-usage:developmental",
+            "position-legal"
+          ],
+          "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|capability|school-development-57ed1970|hs-year-1-age-16|roster-36cbccaf|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|starter|rotationCandidate|high|low|high|developmental|游擊手|8|0|7|highSchoolExhibition|0|0|regular|normal",
+          "gameContext": {
+            "gameType": "highSchoolExhibition",
+            "inning": 0,
+            "expectedGameImportance": "regular",
+            "importance": "regular",
+            "leverage": "normal",
+            "scoreMargin": 0
+          },
+          "readinessSnapshot": {
+            "version": "opportunity-readiness-v1",
+            "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+            "position": "游擊手",
+            "requestedPosition": "游擊手",
+            "sourceType": "system-derived-provisional",
+            "sourceVersion": "opportunity-readiness-v1",
+            "readinessBand": "strong",
+            "positionReadiness": 8,
+            "positionFit": 0,
+            "fieldingReadiness": 8,
+            "reactionReadiness": 8,
+            "decisionReadiness": 8,
+            "experienceReadiness": 7,
+            "confidence": "provisional",
+            "positionLegal": true,
+            "positionFallbackApplied": false,
+            "assignmentSource": "requested-position",
+            "assignmentReason": "specific-position-request",
+            "pitcherExposureDeferred": false,
+            "reasons": [
+              "strongFieldingReadiness",
+              "strongReactionReadiness",
+              "strongDecisionReadiness",
+              "strongPositionExperience",
+              "limitedPositionFit",
+              "positionLegal"
+            ],
+            "provenance": {
+              "snapshotId": "readiness-80e98aa3",
+              "sourceType": "system-derived-provisional",
+              "sourceVersion": "opportunity-readiness-v1",
+              "inputVersion": "hs-entry-capability-v1",
+              "deterministicIdentity": "opportunity-readiness-v1|Design audit|ballSense＋baseballIQ|school-development-57ed1970|游擊手|游擊手|8|0|8|8|8|7|hs-entry-capability-v1"
+            }
+          },
+          "plannedUsage": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "debug": {
+            "opportunityHash": 2281028345,
+            "opportunityScore": 78,
+            "scoreBreakdown": {
+              "actualRole": 58,
+              "positionCapability": 12,
+              "positionFit": -10,
+              "positionExperience": 3,
+              "schoolEnvironment": 6,
+              "competitionDepth": 4,
+              "positionNeed": 5,
+              "projectedRolePrior": 0,
+              "coachUsage": -1,
+              "gameContext": 0,
+              "deterministicVariation": 1
+            },
+            "reasons": [
+              "actual-role:starter",
+              "school-environment:high",
+              "competition-depth:low",
+              "position-need:high",
+              "coach-usage:developmental",
+              "position-legal"
+            ]
+          }
+        },
+        "role": {
+          "code": "bench",
+          "label": "發展／板凳任務",
+          "evidence": [
+            "守位適配 0",
+            "現任教練已有基本信任",
+            "所選發展工具仍在形成",
+            "健康限制正式任務"
+          ],
+          "opportunity": "同一場交流賽的指定代打與短局守備",
+          "assignment": ""
+        }
+      },
+      "after": {
+        "health": {
+          "stamina": 10,
+          "fatigue": 4,
+          "recovery": 5,
+          "maturity": 0,
+          "injuryRisk": 2,
+          "pain": 1
+        },
+        "existing": {
+          "version": "playing-time-opportunity-v1",
+          "sourceVersion": "playing-time-opportunity-v1",
+          "decisionId": "hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|87f5baf9",
+          "matchId": "hs-y1-autumn-exhibition",
+          "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+          "exposureSource": "opportunity-resolver",
+          "actualRole": "starter",
+          "actualRoleAtDecision": "starter",
+          "projectedRolePrior": "rotationCandidate",
+          "playingTimeEnvironment": "high",
+          "schoolPlayingTimeEnvironment": "high",
+          "competitionDepth": "low",
+          "positionCompetition": "low",
+          "positionNeed": "high",
+          "evaluationTrend": 0,
+          "previousActualExposure": null,
+          "coachUsageStyle": "developmental",
+          "positionCapability": 8,
+          "positionFit": 0,
+          "positionExperience": 7,
+          "assignedPosition": "游擊手",
+          "requestedPosition": "游擊手",
+          "positionFallbackApplied": false,
+          "assignmentSource": "requested-position",
+          "assignmentReason": "specific-position-request",
+          "pitcherExposureDeferred": false,
+          "startingOpportunity": "start",
+          "startingDecision": "start",
+          "appearancePlan": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "substitutionOpportunity": "none",
+          "opportunityReasons": [
+            "actual-role:starter",
+            "school-environment:high",
+            "competition-depth:low",
+            "position-need:high",
+            "coach-usage:developmental",
+            "position-legal"
+          ],
+          "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Design audit|ballSense＋baseballIQ|school-development-57ed1970|capability|school-development-57ed1970|hs-year-1-age-16|roster-36cbccaf|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|starter|rotationCandidate|high|low|high|developmental|游擊手|8|0|7|highSchoolExhibition|0|0|regular|normal",
+          "gameContext": {
+            "gameType": "highSchoolExhibition",
+            "inning": 0,
+            "expectedGameImportance": "regular",
+            "importance": "regular",
+            "leverage": "normal",
+            "scoreMargin": 0
+          },
+          "readinessSnapshot": {
+            "version": "opportunity-readiness-v1",
+            "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+            "position": "游擊手",
+            "requestedPosition": "游擊手",
+            "sourceType": "system-derived-provisional",
+            "sourceVersion": "opportunity-readiness-v1",
+            "readinessBand": "strong",
+            "positionReadiness": 8,
+            "positionFit": 0,
+            "fieldingReadiness": 8,
+            "reactionReadiness": 8,
+            "decisionReadiness": 8,
+            "experienceReadiness": 7,
+            "confidence": "provisional",
+            "positionLegal": true,
+            "positionFallbackApplied": false,
+            "assignmentSource": "requested-position",
+            "assignmentReason": "specific-position-request",
+            "pitcherExposureDeferred": false,
+            "reasons": [
+              "strongFieldingReadiness",
+              "strongReactionReadiness",
+              "strongDecisionReadiness",
+              "strongPositionExperience",
+              "limitedPositionFit",
+              "positionLegal"
+            ],
+            "provenance": {
+              "snapshotId": "readiness-80e98aa3",
+              "sourceType": "system-derived-provisional",
+              "sourceVersion": "opportunity-readiness-v1",
+              "inputVersion": "hs-entry-capability-v1",
+              "deterministicIdentity": "opportunity-readiness-v1|Design audit|ballSense＋baseballIQ|school-development-57ed1970|游擊手|游擊手|8|0|8|8|8|7|hs-entry-capability-v1"
+            }
+          },
+          "plannedUsage": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "debug": {
+            "opportunityHash": 2281028345,
+            "opportunityScore": 78,
+            "scoreBreakdown": {
+              "actualRole": 58,
+              "positionCapability": 12,
+              "positionFit": -10,
+              "positionExperience": 3,
+              "schoolEnvironment": 6,
+              "competitionDepth": 4,
+              "positionNeed": 5,
+              "projectedRolePrior": 0,
+              "coachUsage": -1,
+              "gameContext": 0,
+              "deterministicVariation": 1
+            },
+            "reasons": [
+              "actual-role:starter",
+              "school-environment:high",
+              "competition-depth:low",
+              "position-need:high",
+              "coach-usage:developmental",
+              "position-legal"
+            ]
+          }
+        },
+        "fresh": {
+          "version": "playing-time-opportunity-v1",
+          "sourceVersion": "playing-time-opportunity-v1",
+          "decisionId": "recovery-comparison|Design audit|ballSense＋baseballIQ|school-development-57ed1970|155f234f",
+          "matchId": "recovery-comparison",
+          "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+          "exposureSource": "opportunity-resolver",
+          "actualRole": "starter",
+          "actualRoleAtDecision": "starter",
+          "projectedRolePrior": "rotationCandidate",
+          "playingTimeEnvironment": "high",
+          "schoolPlayingTimeEnvironment": "high",
+          "competitionDepth": "low",
+          "positionCompetition": "low",
+          "positionNeed": "high",
+          "evaluationTrend": 0,
+          "previousActualExposure": null,
+          "coachUsageStyle": "developmental",
+          "positionCapability": 8,
+          "positionFit": 0,
+          "positionExperience": 7,
+          "assignedPosition": "游擊手",
+          "requestedPosition": "游擊手",
+          "positionFallbackApplied": false,
+          "assignmentSource": "requested-position",
+          "assignmentReason": "specific-position-request",
+          "pitcherExposureDeferred": false,
+          "startingOpportunity": "start",
+          "startingDecision": "start",
+          "appearancePlan": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "substitutionOpportunity": "none",
+          "opportunityReasons": [
+            "actual-role:starter",
+            "school-environment:high",
+            "competition-depth:low",
+            "position-need:high",
+            "coach-usage:developmental",
+            "position-legal"
+          ],
+          "opportunitySeed": "playing-time-opportunity-v1|recovery-comparison|Design audit|ballSense＋baseballIQ|school-development-57ed1970|capability|school-development-57ed1970|hs-year-1-age-16|roster-36cbccaf|high-school-year-one|autumn-exhibition|1|recovery-comparison|starter|rotationCandidate|high|low|high|developmental|游擊手|8|0|7|highSchoolExhibition|0|0|regular|normal|8|-3",
+          "gameContext": {
+            "gameType": "highSchoolExhibition",
+            "inning": 0,
+            "expectedGameImportance": "regular",
+            "importance": "regular",
+            "leverage": "normal",
+            "scoreMargin": 0
+          },
+          "readinessSnapshot": {
+            "version": "opportunity-readiness-v1",
+            "playerId": "Design audit|ballSense＋baseballIQ|school-development-57ed1970",
+            "position": "游擊手",
+            "requestedPosition": "游擊手",
+            "sourceType": "system-derived-provisional",
+            "sourceVersion": "opportunity-readiness-v1",
+            "readinessBand": "strong",
+            "positionReadiness": 8,
+            "positionFit": 0,
+            "fieldingReadiness": 8,
+            "reactionReadiness": 8,
+            "decisionReadiness": 8,
+            "experienceReadiness": 7,
+            "confidence": "provisional",
+            "positionLegal": true,
+            "positionFallbackApplied": false,
+            "assignmentSource": "requested-position",
+            "assignmentReason": "specific-position-request",
+            "pitcherExposureDeferred": false,
+            "reasons": [
+              "strongFieldingReadiness",
+              "strongReactionReadiness",
+              "strongDecisionReadiness",
+              "strongPositionExperience",
+              "limitedPositionFit",
+              "positionLegal"
+            ],
+            "provenance": {
+              "snapshotId": "readiness-80e98aa3",
+              "sourceType": "system-derived-provisional",
+              "sourceVersion": "opportunity-readiness-v1",
+              "inputVersion": "hs-entry-capability-v1",
+              "deterministicIdentity": "opportunity-readiness-v1|Design audit|ballSense＋baseballIQ|school-development-57ed1970|游擊手|游擊手|8|0|8|8|8|7|hs-entry-capability-v1"
+            }
+          },
+          "plannedUsage": {
+            "appearanceType": "start",
+            "entryInning": 1,
+            "entryHalf": "上"
+          },
+          "debug": {
+            "opportunityHash": 358556495,
+            "opportunityScore": 81,
+            "scoreBreakdown": {
+              "actualRole": 58,
+              "positionCapability": 12,
+              "positionFit": -10,
+              "positionExperience": 3,
+              "schoolEnvironment": 6,
+              "competitionDepth": 4,
+              "positionNeed": 5,
+              "projectedRolePrior": 0,
+              "coachUsage": -1,
+              "gameContext": 0,
+              "deterministicVariation": 2,
+              "coachTrust": 5,
+              "healthReadiness": -3
+            },
+            "reasons": [
+              "actual-role:starter",
+              "school-environment:high",
+              "competition-depth:low",
+              "position-need:high",
+              "coach-usage:developmental",
+              "position-legal"
+            ]
+          }
+        },
+        "role": {
+          "code": "rotation",
+          "label": "輪替／替補任務",
+          "evidence": [
+            "守位適配 0",
+            "現任教練已有基本信任",
+            "所選發展工具仍在形成",
+            "身體可承擔正式任務"
+          ],
+          "opportunity": "同一場交流賽的中段代打與守備接替",
+          "assignment": ""
+        }
+      }
+    },
+    "controlledEvidence": [
+      {
+        "tier": "strong",
+        "win": true,
+        "evidence": {
+          "matchIdentity": "design-isolated-evidence",
+          "trainingEvidence": {
+            "positionReadiness": 5,
+            "positionFit": 5,
+            "coachTrust": 6,
+            "fatigue": 0,
+            "injuryRisk": 0,
+            "pain": 0,
+            "score": 0
+          },
+          "exposureEvidence": {
+            "started": false,
+            "enteredGame": true,
+            "noAppearance": false,
+            "appearanceType": "appearance",
+            "plateAppearances": 1,
+            "defensiveInnings": 1
+          },
+          "matchEvidence": {
+            "quality": 3.57,
+            "sampleSize": 2,
+            "sampleConfidence": 0.667,
+            "strong": 1,
+            "mixed": 0,
+            "failure": 0,
+            "errors": 0,
+            "decisionExecutionSamples": 1,
+            "matchExperienceEvidenceCount": 0,
+            "activeExperienceEvidenceCount": 0,
+            "developmentContextCount": 0,
+            "matchExperienceSettlementId": ""
+          },
+          "sampleScore": 2.38
+        }
+      },
+      {
+        "tier": "strong",
+        "win": false,
+        "evidence": {
+          "matchIdentity": "design-isolated-evidence",
+          "trainingEvidence": {
+            "positionReadiness": 5,
+            "positionFit": 5,
+            "coachTrust": 6,
+            "fatigue": 0,
+            "injuryRisk": 0,
+            "pain": 0,
+            "score": 0
+          },
+          "exposureEvidence": {
+            "started": false,
+            "enteredGame": true,
+            "noAppearance": false,
+            "appearanceType": "appearance",
+            "plateAppearances": 1,
+            "defensiveInnings": 1
+          },
+          "matchEvidence": {
+            "quality": 3.57,
+            "sampleSize": 2,
+            "sampleConfidence": 0.667,
+            "strong": 1,
+            "mixed": 0,
+            "failure": 0,
+            "errors": 0,
+            "decisionExecutionSamples": 1,
+            "matchExperienceEvidenceCount": 0,
+            "activeExperienceEvidenceCount": 0,
+            "developmentContextCount": 0,
+            "matchExperienceSettlementId": ""
+          },
+          "sampleScore": 2.38
+        }
+      },
+      {
+        "tier": "poor",
+        "win": true,
+        "evidence": {
+          "matchIdentity": "design-isolated-evidence",
+          "trainingEvidence": {
+            "positionReadiness": 5,
+            "positionFit": 5,
+            "coachTrust": 6,
+            "fatigue": 0,
+            "injuryRisk": 0,
+            "pain": 0,
+            "score": 0
+          },
+          "exposureEvidence": {
+            "started": false,
+            "enteredGame": true,
+            "noAppearance": false,
+            "appearanceType": "appearance",
+            "plateAppearances": 1,
+            "defensiveInnings": 1
+          },
+          "matchEvidence": {
+            "quality": -3.41,
+            "sampleSize": 2,
+            "sampleConfidence": 0.667,
+            "strong": 0,
+            "mixed": 0,
+            "failure": 1,
+            "errors": 0,
+            "decisionExecutionSamples": 1,
+            "matchExperienceEvidenceCount": 0,
+            "activeExperienceEvidenceCount": 0,
+            "developmentContextCount": 0,
+            "matchExperienceSettlementId": ""
+          },
+          "sampleScore": -2.273
+        }
+      },
+      {
+        "tier": "poor",
+        "win": false,
+        "evidence": {
+          "matchIdentity": "design-isolated-evidence",
+          "trainingEvidence": {
+            "positionReadiness": 5,
+            "positionFit": 5,
+            "coachTrust": 6,
+            "fatigue": 0,
+            "injuryRisk": 0,
+            "pain": 0,
+            "score": 0
+          },
+          "exposureEvidence": {
+            "started": false,
+            "enteredGame": true,
+            "noAppearance": false,
+            "appearanceType": "appearance",
+            "plateAppearances": 1,
+            "defensiveInnings": 1
+          },
+          "matchEvidence": {
+            "quality": -3.41,
+            "sampleSize": 2,
+            "sampleConfidence": 0.667,
+            "strong": 0,
+            "mixed": 0,
+            "failure": 1,
+            "errors": 0,
+            "decisionExecutionSamples": 1,
+            "matchExperienceEvidenceCount": 0,
+            "activeExperienceEvidenceCount": 0,
+            "developmentContextCount": 0,
+            "matchExperienceSettlementId": ""
+          },
+          "sampleScore": -2.273
+        }
+      },
+      {
+        "tier": "noAppearance",
+        "win": true,
+        "evidence": {
+          "matchIdentity": "design-isolated-evidence",
+          "trainingEvidence": {
+            "positionReadiness": 5,
+            "positionFit": 5,
+            "coachTrust": 6,
+            "fatigue": 0,
+            "injuryRisk": 0,
+            "pain": 0,
+            "score": 0
+          },
+          "exposureEvidence": {
+            "started": false,
+            "enteredGame": false,
+            "noAppearance": true,
+            "appearanceType": "noAppearance",
+            "plateAppearances": 0,
+            "defensiveInnings": 0
+          },
+          "matchEvidence": {
+            "quality": 0,
+            "sampleSize": 0,
+            "sampleConfidence": 0,
+            "strong": 0,
+            "mixed": 0,
+            "failure": 0,
+            "errors": 0,
+            "decisionExecutionSamples": 0,
+            "matchExperienceEvidenceCount": 0,
+            "activeExperienceEvidenceCount": 0,
+            "developmentContextCount": 0,
+            "matchExperienceSettlementId": ""
+          },
+          "sampleScore": 0
+        }
+      },
+      {
+        "tier": "noAppearance",
+        "win": false,
+        "evidence": {
+          "matchIdentity": "design-isolated-evidence",
+          "trainingEvidence": {
+            "positionReadiness": 5,
+            "positionFit": 5,
+            "coachTrust": 6,
+            "fatigue": 0,
+            "injuryRisk": 0,
+            "pain": 0,
+            "score": 0
+          },
+          "exposureEvidence": {
+            "started": false,
+            "enteredGame": false,
+            "noAppearance": true,
+            "appearanceType": "noAppearance",
+            "plateAppearances": 0,
+            "defensiveInnings": 0
+          },
+          "matchEvidence": {
+            "quality": 0,
+            "sampleSize": 0,
+            "sampleConfidence": 0,
+            "strong": 0,
+            "mixed": 0,
+            "failure": 0,
+            "errors": 0,
+            "decisionExecutionSamples": 0,
+            "matchExperienceEvidenceCount": 0,
+            "activeExperienceEvidenceCount": 0,
+            "developmentContextCount": 0,
+            "matchExperienceSettlementId": ""
+          },
+          "sampleScore": 0
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "Fixture cohorts force canonical roles and capabilities to isolate factors; they are not a population frequency estimate or the normal creation distribution.",
+    "Fixed LCG injected through the existing choice randomSource and VM Math.random; match simulationSeed and deterministic PA identities remain production-owned. Reload comparison restores the external injected RNG state explicitly.",
+    "Controlled evaluation inputs exercise the official owner but are not naturally generated win/loss matches. Natural cohort results are recorded separately.",
+    "No browser visual/playability QA, no adult-career full traversal, no claims of equal policy win rates."
+  ]
+}

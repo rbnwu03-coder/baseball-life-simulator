@@ -1,0 +1,15 @@
+{
+  "task": "Critical Regression Triage v0.1",
+  "createdAt": "2026-10-15T01:33:55.950Z",
+  "from": "docs/critical-regression-triage-v0.1-match-index-manifest-isolated.cjs",
+  "fromSha256": "fb14205c302c95131b51ac4f2be9a8c9522e9b1bf29bfc7b068f420b0e2d1d81",
+  "file": "docs/critical-regression-triage-v0.1-match-browser-manifest-isolated.cjs",
+  "sha256": "796bd97d185851cd6326826e3d25c072df9a88fe9537a5a3818cdfa52b5ea490",
+  "change": {
+    "before": "console, module: { exports: {} },",
+    "after": "console,"
+  },
+  "reason": "Original VM advertises module.exports but supplies no require; real index scripts select browser globals when CommonJS module is absent",
+  "fixtureSeedDecisionsOriginalAssertionUnchanged": true,
+  "originalFullSuiteRemainsFail": true
+}

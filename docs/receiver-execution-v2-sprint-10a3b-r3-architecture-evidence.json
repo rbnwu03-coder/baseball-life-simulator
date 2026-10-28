@@ -1,0 +1,410 @@
+{
+  "tier": 2,
+  "project": "E-meng-baseball_life_sim_semirefactor",
+  "initialTraces": [
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.receiver-source-snapshot.validateMatch",
+      "direction": "both",
+      "callees_total": 9,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-source-snapshot",
+            "rows": [
+              [
+                "own",
+                1
+              ],
+              [
+                "exact",
+                1
+              ],
+              [
+                "same",
+                1
+              ],
+              [
+                "reject",
+                1
+              ],
+              [
+                "validatePair",
+                1
+              ],
+              [
+                "presentState",
+                1
+              ],
+              [
+                "executionBinding",
+                1
+              ],
+              [
+                "assertReference",
+                1
+              ],
+              [
+                "assertLifecycle",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 3,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-source-snapshot",
+            "rows": [
+              [
+                "validateRawSave",
+                1
+              ],
+              [
+                "serializeSave",
+                1
+              ],
+              [
+                "observe",
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.script.recordGroundBallSituationResolution",
+      "direction": "both",
+      "callees_total": 3,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "assertHighSchoolDetailedResponsibility",
+                1
+              ],
+              [
+                "validateHighSchoolDecisionThrowState",
+                1
+              ],
+              [
+                "projectHighSchoolControlledDecisionThrow",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 4,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "applyInfieldResolutionToHighSchoolMatch",
+                1
+              ],
+              [
+                "applyRoutineDefensiveResolutionToHighSchoolMatch",
+                1
+              ],
+              [
+                "prepareHighSchoolDefensiveMomentFromSimulation",
+                1
+              ],
+              [
+                "resolveHighSchoolYearOneMatch",
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "snippets": [
+    {
+      "name": "validateMatch",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.receiver-source-snapshot.validateMatch",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/receiver-source-snapshot.js",
+      "start_line": 120,
+      "end_line": 167,
+      "source_mode": "full",
+      "source": "  function validateMatch(match) {\n    if (!match) return true;\n    const state = match.groundBallInPlayState, admission = match.receiverSourceAdmission;\n    if ([state, match.activeSituation?.executionState].some(o => [\"receiverExecutionVersion\", \"receiverV2Execution\", \"receiverModelAdmission\"].some(k => own(o, k))) ||\n      own(match, \"officialReceiverExecutionVersion\") && match.officialReceiverExecutionVersion !== V.official || own(match, \"receiverExecutionVersion\") && match.receiverExecutionVersion !== V.official) reject(\"actual v2 execution not implemented\");\n    const any = own(match, \"receiverSourceFormatVersion\") || own(match, \"receiverSourceAdmission\") || presentState(state) ||\n      own(match.activeSituation, \"receiverSourcePin\") || own(match.activeSituation?.contextSnapshot, \"receiverSourcePin\") || own(match.activeSituation?.executionState, \"receiverSourcePin\") || own(match.lastClosedSituationSummary, \"receiverSourcePin\");\n    if (!any) return true; // genuine omitted legacy metadata; never build a snapshot here.\n    if (match.receiverSourceFormatVersion !== V.format || !exact(admission, [\"formatVersion\", \"snapshot\", \"pin\"]) || admission.formatVersion !== V.format) reject(\"required match format/admission\");\n    validatePair(admission.snapshot, admission.pin);\n    const b = admission.snapshot.body;\n    if (b.physical.matchId !== match.id) reject(\"match identity\");\n    if (presentState(state)) {\n      if (state.receiverSourceFormatVersion !== V.format || !own(state, \"receiverSourceSnapshot\") || !own(state, \"receiverSourcePin\")) reject(\"required handoff source fields\");\n      validatePair(state.receiverSourceSnapshot, state.receiverSourcePin);\n      if (!same(state.receiverSourceSnapshot, admission.snapshot) || !same(state.receiverSourcePin, admission.pin) || state.identity !== b.physical.playId ||\n        state.physicalTruth?.identity !== b.physical.physicalIdentity || state.runnerRealization?.batterRunner?.runnerId !== b.original.batterRunner || state.defensiveAccess?.playerPosition !== \"游擊手\" ||\n        state.firstBaseContext || state.firstBaseExecution || state.thirdBaseExecution) reject(\"original handoff/actor/physical copies\");\n      if (!same(state.defensiveAccess?.secureCapabilities, b.capabilitySource.thrower) || state.defensiveAccess?.reachResolution?.identity !== b.capabilitySource.reference) reject(\"original thrower capability/reference\");\n      if (!state.settlementApplied && (match.outs !== b.original.outs || !same(match.runners, b.original.bases))) reject(\"original pre-settlement outs/bases\");\n      if (!state.settlementApplied) {\n        if (!Roster || match.defenseTeam !== b.original.defenseTeam) reject(\"original defense team/roster owner\");\n        const roster = match.rosters?.[b.original.defenseTeam], ss = Roster.getCurrentDefender(roster, \"SS\"), first = Roster.getCurrentDefender(roster, \"1B\");\n        if (ss?.id !== b.original.thrower.actorId || first?.id !== b.original.receiver.actorId) reject(\"original active roster actors\");\n        const raw = Object.fromEntries([\"defense\", \"speed\", \"arm\", \"contact\"].map(k => [k, Number.isFinite(first[k]) ? first[k] : null]));\n        if (!same(raw, b.capabilitySource.receiver)) reject(\"original raw receiver capabilities\");\n      }\n      const pa = match.ordinaryDefensivePlateAppearanceState;\n      if (pa?.paIdentity !== b.physical.plateAppearanceId || pa?.battedBallPhysicalTruth?.identity !== b.physical.contactId) reject(\"original PA/contact\");\n      const binding = executionBinding(state);\n      if (binding !== null && (!own(state, \"receiverSourceExecutionBinding\") || !same(binding, state.receiverSourceExecutionBinding))) reject(\"required original execution binding\");\n      if (binding === null && own(state, \"receiverSourceExecutionBinding\")) reject(\"pending cannot contain execution binding\");\n    } else if (state?.identity === b.physical.playId) reject(\"new source handoff cannot omit metadata\");\n    assertLifecycle(match.activeSituation);\n    const active = match.activeSituation;\n    if (active?.sourcePhysicalStateRef === b.physical.playId) {\n      if (!same(active.receiverSourcePin, admission.pin)) reject(\"required active lifecycle pin\");\n      if (active.createdAt?.outs !== b.original.outs || !same(active.createdAt?.bases, b.original.bases)) reject(\"lifecycle original outs/bases\");\n      if (state?.shortstopExecution && (!own(active, \"receiverSourceExecutionBinding\") || !same(active.receiverSourceExecutionBinding, state.receiverSourceExecutionBinding))) reject(\"required active source binding\");\n    }\n    const summary = match.lastClosedSituationSummary;\n    if (state?.settlementApplied && summary?.situationId?.includes(b.physical.playId) && !own(summary, \"receiverSourcePin\")) reject(\"closed source pin missing\");\n    if (own(summary, \"receiverSourcePin\")) { assertReference(summary.receiverSourcePin);\n      if (summary.receiverSourcePin.physical.playId === b.physical.playId && !same(summary.receiverSourcePin, admission.pin)) reject(\"closed pin copy\");\n      if (summary.receiverSourcePin.physical.playId === b.physical.playId && summary.outsBefore !== b.original.outs) reject(\"closed original outs\");\n      if (summary.receiverSourcePin.physical.playId === b.physical.playId && state?.shortstopExecution && (!own(summary, \"receiverSourceExecutionBinding\") || !same(summary.receiverSourceExecutionBinding, state.receiverSourceExecutionBinding))) reject(\"closed execution binding\"); }\n    return true;\n  }\n",
+      "callers": 3,
+      "callees": 9
+    },
+    {
+      "name": "canonical",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.receiver-source-snapshot.canonical",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/receiver-source-snapshot.js",
+      "start_line": 19,
+      "end_line": 30,
+      "source_mode": "full",
+      "source": "  function canonical(o, active = new Set()) {\n    if (o === null || typeof o === \"boolean\") return JSON.stringify(o);\n    if (typeof o === \"string\") { for (let i = 0; i < o.length; i++) { const c = o.charCodeAt(i); if (c >= 0xd800 && c <= 0xdbff) { const n = o.charCodeAt(++i); if (!(n >= 0xdc00 && n <= 0xdfff)) throw Error(\"unpaired surrogate\"); } else if (c >= 0xdc00 && c <= 0xdfff) throw Error(\"unpaired surrogate\"); } return JSON.stringify(o); }\n    if (typeof o === \"number\" && Number.isFinite(o) && !Object.is(o, -0)) return JSON.stringify(o);\n    if (!o || typeof o !== \"object\" || active.has(o)) throw Error(\"non-JSON metadata\");\n    const proto = Object.getPrototypeOf(o); if (!Array.isArray(o) && proto !== null && Object.getPrototypeOf(proto) !== null) throw Error(\"nonplain metadata\");\n    for (const k of Reflect.ownKeys(o)) if (typeof k === \"symbol\" || !own(Object.getOwnPropertyDescriptor(o, k), \"value\")) throw Error(\"metadata accessor\");\n    active.add(o); let s;\n    if (Array.isArray(o)) { if (Object.keys(o).length !== o.length || o.some((_, i) => !own(o, i))) throw Error(\"sparse metadata\"); s = \"[\" + o.map(x => canonical(x, active)).join(\",\") + \"]\"; }\n    else s = \"{\" + Object.keys(o).sort().map(k => JSON.stringify(k) + \":\" + canonical(o[k], active)).join(\",\") + \"}\";\n    active.delete(o); return s;\n  }\n",
+      "callers": 8,
+      "callees": 2
+    },
+    {
+      "name": "recordGroundBallSituationResolution",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.recordGroundBallSituationResolution",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+      "start_line": 12133,
+      "end_line": 12189,
+      "source_mode": "full",
+      "source": "function recordGroundBallSituationResolution(match, resolution) {\n  if (!match || !resolution || typeof MatchSituationLifecycle === \"undefined\") return null;\n  let situation = MatchSituationLifecycle.normalizeSituation(match.activeSituation);\n  if (!situation || situation.type !== MatchSituationLifecycle.TYPES.groundBallDefensiveDecision\n    || situation.lifecycleState !== \"executing\") return situation;\n  validateHighSchoolDecisionThrowState(match);\n  const handoff = match.groundBallInPlayState;\n  if (handoff?.firstBaseExecution && Object.entries(handoff.firstBaseExecution.resolution)\n    .some(([key, value]) => JSON.stringify(resolution[key]) !== JSON.stringify(value))) throw new Error(\"Stale first-base settlement execution facts\");\n  if (handoff?.thirdBaseExecution && Object.entries(handoff.thirdBaseExecution.resolution)\n    .some(([key, value]) => JSON.stringify(resolution[key]) !== JSON.stringify(value))) throw new Error(\"Stale 3B settlement execution facts\");\n  if (handoff?.shortstopExecution && Object.entries(handoff.shortstopExecution.resolution)\n    .some(([key, value]) => JSON.stringify(resolution[key]) !== JSON.stringify(value))) throw new Error(\"Stale SS settlement execution facts\");\n  if (handoff?.supported && !handoff.settlementApplied && !handoff.secureResolution\n    && handoff.defensiveAccess?.reachResolution && resolution.playerLeg?.control\n    && typeof DefensiveReachSecureFoundation !== \"undefined\") {\n    assertHighSchoolDetailedResponsibility(match, handoff.physicalTruth, \"2B\", \"player\");\n    const securedHandoff = BattedBallGroundDefense.normalizeHandoff({ ...handoff,\n      secureResolution: DefensiveReachSecureFoundation.projectGroundControl(handoff.defensiveAccess.reachResolution, resolution.playerLeg.control, resolution.controlEvidence) });\n    const decisionThrowState = projectHighSchoolControlledDecisionThrow(match, resolution, securedHandoff);\n    match.groundBallInPlayState = BattedBallGroundDefense.normalizeHandoff({ ...securedHandoff, ...(decisionThrowState ? { decisionThrowState } : {}) });\n    if (decisionThrowState && typeof DefensiveRunnerThrowSettlementFoundation !== \"undefined\") {\n      const route = decisionThrowState.activeSelection?.route || decisionThrowState.selection?.route;\n      const receiverFact = route?.routeId === \"initiate463\" ? resolution.teammateLeg?.shortstopReceive\n        : route?.routeId === \"preventRunHome\" && !resolution.reassessed ? resolution.teammateLeg?.catcherReceive : resolution.teammateLeg?.receiver;\n      const runnerThrowTiming = DefensiveRunnerThrowSettlementFoundation.projectExistingTiming({ stage: decisionThrowState,\n        runnerState: handoff.runnerPhysicalStates?.find(r => r.runnerId === route?.targetRunnerId),\n        windowState: resolution.firstLegTimingWindow?.state || \"expired\", receiverFact: receiverFact || \"unavailable\",\n        tagFact: resolution.homeTagLeg?.arrivalComparison || null });\n      match.groundBallInPlayState = BattedBallGroundDefense.normalizeHandoff({ ...match.groundBallInPlayState, runnerThrowTiming });\n    }\n  }\n  if (resolution.reassessment) {\n    const remaining = (resolution.reassessment.availableRouteIds || []).map(routeId => ({ routeId }));\n    situation = MatchSituationLifecycle.beginReassessment(situation, {\n      trigger: resolution.reassessment.reason,\n      updatedPhysicalState: {\n        firstLegState: resolution.firstLegState || null,\n        continuationState: resolution.continuationState || null,\n        forceState: resolution.reassessment.forceState || null\n      },\n      remainingLegalRoutes: remaining,\n      requiresDecision: false,\n      firstLegApplied: resolution.firstLegState?.status === \"completed\"\n    });\n  }\n  situation = MatchSituationLifecycle.resolveSituation(situation, {\n    physicalOutcomeRef: `${situation.situationId}|physical-resolution`,\n    outsDelta: resolution.outsCreated,\n    runsDelta: resolution.runsAllowed,\n    runnerActorOutcomes: resolution.runnerChanges,\n    executionEvidence: match.groundBallInPlayState?.runnerThrowTiming || match.groundBallInPlayState?.shortstopExecution ? resolution : null,\n    reason: resolution.reassessment ? \"postExecutionReassessmentComplete\" : \"groundBallExecutionComplete\"\n  });\n  match.activeSituation = situation;\n  return situation;\n}\n",
+      "callers": 4,
+      "callees": 3
+    }
+  ],
+  "sharedGuard": [
+    {
+      "symbol": "validateHighSchoolReceiverSourceMetadata",
+      "trace": {
+        "function": "E-meng-baseball_life_sim_semirefactor.script.validateHighSchoolReceiverSourceMetadata",
+        "direction": "both",
+        "callees_total": 1,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "same",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 7,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "bindHighSchoolReceiverSourceExecution",
+                  1
+                ],
+                [
+                  "ensureHighSchoolOrdinaryGroundBallInPlayHandoff",
+                  1
+                ],
+                [
+                  "resolveInfieldDecision",
+                  1
+                ],
+                [
+                  "createGroundBallMatchSituation",
+                  1
+                ],
+                [
+                  "beginGroundBallSituationDecision",
+                  1
+                ],
+                [
+                  "beginAutomaticGroundBallSituationExecution",
+                  1
+                ],
+                [
+                  "validateHighSchoolDecisionThrowState",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "snippet": {
+        "name": "validateHighSchoolReceiverSourceMetadata",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.validateHighSchoolReceiverSourceMetadata",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 5117,
+        "end_line": 5131,
+        "source_mode": "full",
+        "source": "function validateHighSchoolReceiverSourceMetadata(match) {\n  if (typeof ReceiverSourceSnapshot !== \"undefined\") {\n    ReceiverSourceSnapshot.validateMatch(match);\n    const state = match?.groundBallInPlayState, snapshot = state?.receiverSourceSnapshot;\n    if (snapshot && !state.settlementApplied) {\n      const original = snapshot.body.original, roster = match.rosters?.[original.defenseTeam];\n      const ss = TeamRosterFoundation.getCurrentDefender(roster, \"SS\"), first = TeamRosterFoundation.getCurrentDefender(roster, \"1B\");\n      if (ss?.id !== original.thrower.actorId || first?.id !== original.receiver.actorId) throw new Error(\"Stale receiver source roster actors\");\n      const raw = Object.fromEntries([\"defense\", \"speed\", \"arm\", \"contact\"].map(k => [k, Number.isFinite(first[k]) ? first[k] : null]));\n      if (!ReceiverSourceSnapshot.same(raw, snapshot.body.capabilitySource.receiver)) throw new Error(\"Stale receiver raw capability source\");\n    }\n  } else if (match?.receiverSourceFormatVersion || match?.groundBallInPlayState?.receiverSourceFormatVersion) {\n    throw new Error(\"Receiver source snapshot module required\");\n  }\n}\n",
+        "callers": 7,
+        "callees": 1
+      }
+    },
+    {
+      "symbol": "validateHighSchoolDecisionThrowState",
+      "trace": {
+        "function": "E-meng-baseball_life_sim_semirefactor.script.validateHighSchoolDecisionThrowState",
+        "direction": "both",
+        "callees_total": 12,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "assertHighSchoolGroundParticipant",
+                  1
+                ],
+                [
+                  "validateHighSchoolReceiverSourceMetadata",
+                  1
+                ],
+                [
+                  "generateInfieldLegalChoices",
+                  1
+                ],
+                [
+                  "getInfieldDecisionChoice",
+                  1
+                ],
+                [
+                  "resolveSecondBaseInitiatedRoute",
+                  1
+                ],
+                [
+                  "resolveSecondBaseCoverage643",
+                  1
+                ],
+                [
+                  "attachHighSchoolInfieldActionFacts",
+                  1
+                ],
+                [
+                  "validateHighSchoolFirstBaseExecution",
+                  1
+                ],
+                [
+                  "validateHighSchoolThirdBaseExecution",
+                  1
+                ],
+                [
+                  "buildHighSchoolShortstopExecution",
+                  1
+                ],
+                [
+                  "getHighSchoolControlledDecisionInput",
+                  1
+                ],
+                [
+                  "validateHighSchoolGroundLifecycleRoutes",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 7,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "resolveInfieldDecision",
+                  1
+                ],
+                [
+                  "resolveHighSchoolDefensivePlay",
+                  1
+                ],
+                [
+                  "recordGroundBallSituationResolution",
+                  1
+                ],
+                [
+                  "applyInfieldResolutionToHighSchoolMatch",
+                  1
+                ],
+                [
+                  "applyRoutineDefensiveResolutionToHighSchoolMatch",
+                  1
+                ],
+                [
+                  "resumeResolvedHighSchoolGroundBallSettlement",
+                  1
+                ]
+              ]
+            },
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.save",
+              "rows": [
+                [
+                  "normalizeSave",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "snippet": {
+        "name": "validateHighSchoolDecisionThrowState",
+        "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.validateHighSchoolDecisionThrowState",
+        "label": "Function",
+        "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+        "start_line": 12052,
+        "end_line": 12116,
+        "source_mode": "full",
+        "source": "function validateHighSchoolDecisionThrowState(match) {\n  validateHighSchoolReceiverSourceMetadata(match);\n  validateHighSchoolGroundLifecycleRoutes(match);\n  const state = match?.groundBallInPlayState;\n  if (state?.supported && !state.firstBaseContext && (state.firstBaseExecution\n    || match.activeSituation?.contextSnapshot?.firstBaseContext\n    || match.activeSituation?.resolution?.executionEvidence?.firstBaseEvidence)) throw new Error(\"Invalid missing first-base participant context\");\n  if (state?.firstBaseContext) {\n    if (!state.settlementApplied) assertHighSchoolGroundParticipant(match);\n    if (state.firstBaseExecution) { validateHighSchoolFirstBaseExecution(match); return; }\n    if (state.secureResolution || state.decisionThrowState || state.runnerThrowTiming\n      || match.activeSituation?.resolution?.executionEvidence?.firstBaseEvidence) throw new Error(\"Invalid incomplete first-base execution stages\");\n  }\n  if (state?.supported && state.defensiveAccess?.playerPosition === \"三壘手\" && !state.thirdBaseExecution\n    && (state.secureResolution || state.decisionThrowState || state.runnerThrowTiming\n      || match.activeSituation?.resolution?.executionEvidence?.thirdBaseEvidence)) throw new Error(\"Invalid incomplete 3B execution stages\");\n  if (state?.thirdBaseExecution) {\n    validateHighSchoolThirdBaseExecution(match);\n    return;\n  }\n  if (!state?.decisionThrowState || state.settlementApplied || typeof DefensiveDecisionThrowFoundation === \"undefined\") return;\n  if (state.shortstopExecution) {\n    const stored = state.shortstopExecution;\n    const choice = getInfieldDecisionChoice(match.defensiveSituation, match, stored.choice.matchDecision);\n    if (!choice || choice.routeId !== stored.choice.routeId) throw new Error(\"Stale SS legal route\");\n    const fresh = buildHighSchoolShortstopExecution(match, match.defensiveSituation, choice, stored.sample);\n    if (!stored.resolution.actionFacts) {\n      // New facts are optional for historical executed saves. Validate every\n      // pre-existing SS fact against reconstruction without rewriting the source.\n      const { actionFacts, executionSample, ...historicalResolution } = fresh.resolution;\n      fresh.resolution = historicalResolution;\n    }\n    if (JSON.stringify(fresh) !== JSON.stringify(stored)\n      || JSON.stringify(state.secureResolution) !== JSON.stringify(fresh.secureResolution)\n      || JSON.stringify(state.decisionThrowState) !== JSON.stringify(fresh.decisionThrowState)\n      || JSON.stringify(state.runnerThrowTiming) !== JSON.stringify(fresh.runnerThrowTiming)) throw new Error(\"Stale SS execution / timing facts\");\n    const evidence = match.activeSituation?.resolution?.executionEvidence;\n    if (evidence && Object.entries(stored.resolution).some(([key, value]) => {\n      // Pre-action-contract saves can omit these additive facts. Every present\n      // copy must agree with the reconstructed execution owner, not itself.\n      if ([\"actionFacts\", \"executionSample\"].includes(key) && !Object.prototype.hasOwnProperty.call(evidence, key)) return false;\n      return JSON.stringify(evidence[key]) !== JSON.stringify(value);\n    })) throw new Error(\"Stale SS lifecycle execution facts\");\n    return;\n  }\n  DefensiveDecisionThrowFoundation.validateStoredStage(state.decisionThrowState, getHighSchoolControlledDecisionInput(match, state));\n  const evidence = match.activeSituation?.resolution?.executionEvidence;\n  // Historical stages without the new contract retain their existing admission.\n  if (evidence?.actionFacts) {\n    if (!Number.isFinite(evidence.executionSample) || evidence.executionSample < 0 || evidence.executionSample >= 1) throw new Error(\"Invalid 2B execution sample\");\n    const routeId = match.activeSituation.decision?.selectedRoute || state.decisionThrowState.preControlIntent;\n    const choice = generateInfieldLegalChoices(match.defensiveSituation, match).find(c => c.routeId === routeId);\n    if (!choice) throw new Error(\"Stale 2B execution route\");\n    const raw = choice.routeId === \"coverSecondFor643\" ? resolveSecondBaseCoverage643(match.defensiveSituation, choice, evidence.executionSample)\n      : resolveSecondBaseInitiatedRoute(match.defensiveSituation, choice, evidence.executionSample, match);\n    const fresh = attachHighSchoolInfieldActionFacts(match, match.defensiveSituation, choice, raw, evidence.executionSample);\n    if (JSON.stringify(fresh.actionFacts) !== JSON.stringify(evidence.actionFacts)\n      || JSON.stringify(fresh.receiverResolution) !== JSON.stringify(evidence.receiverResolution)\n      || fresh.outsCreated !== evidence.outsCreated || fresh.resultCode !== evidence.resultCode) throw new Error(\"Stale 2B receiver / action facts\");\n  }\n  if (state.runnerThrowTiming && typeof DefensiveRunnerThrowSettlementFoundation !== \"undefined\") {\n    DefensiveRunnerThrowSettlementFoundation.validateProjectedTiming(state.runnerThrowTiming, state.decisionThrowState, state.runnerPhysicalStates,\n      match.activeSituation?.resolution?.executionEvidence);\n  }\n}\n",
+        "callers": 7,
+        "callees": 12
+      }
+    }
+  ],
+  "qualification": "Graph generation is 2026-10-13T15:41:32Z; freshness metadata_changed. Primary snippets were matched to initial disk source; final changed source read directly. Runtime operand capture establishes the dynamic edge the graph does not resolve."
+}

@@ -1,0 +1,81 @@
+{
+  "task": "Match Contract Evidence Closure v0.1 — Focused Evidence Completion",
+  "createdAt": "2026-10-15T05:04:17.593Z",
+  "preExecution": true,
+  "baselineSha256": "77f12a878275223a856d2300be9c7cd481f9763dfb429a56b498ea3d6c2adb84",
+  "tasks": {
+    "A": {
+      "simulationSeed": 88222,
+      "fixture": "docs/critical-regression-repair-b1-canonical-match-fixture-contract-normal-entry-proof.cjs",
+      "fixtureSha256": "93d4990d4a0d38a190be236d9e2e448b6906233d8248f6d8dd07e6e3cd399666",
+      "entryProgram": "stopHighSchoolMatchPlayback();pendingYouthSeasonOutcome=null;isTransitioning=false;player=createInitialPlayer('2.2.2 測試球員');applyDebugBookmarkCharacterProfile(player);settleHighSchoolEntryCapability(player,{originType:'test-fixture'});applyCanonicalPositionProfile(player,'內野手',['外野手']);globalThis.b1OriginalPlayer=JSON.parse(JSON.stringify(player));globalThis.b1OriginalAbilities=JSON.stringify(b1Abilities());applyCanonicalPositionProfile(player,'游擊手',['外野手']);globalThis.b1Invitations=generateSchoolInvitationSet(player);globalThis.b1ChosenSchool=b1Invitations.invitations[0];globalThis.b1SchoolSelection=finalizeSchoolInvitationSelection(player,b1ChosenSchool.schoolId);globalThis.b1CompleteEntry=completeHighSchoolEntry({source:'b1-normal-entry-proof'});player.highSchoolStep=5;applyHighSchoolRoleState('starter');pendingHighSchoolMatchSimulationSeed=88222;globalThis.b1BeforePreparation=JSON.parse(JSON.stringify(player));globalThis.m=prepareHighSchoolYearOneMatch();globalThis.b1Initial=JSON.parse(JSON.stringify(m));globalThis.b1InitialFacts=b1RosterFacts(m);",
+      "originalEntrySha256": "f2438d6a950fa3148c60557c1966688380c762bf6f144fbacf57d9163d90b6ff",
+      "entryProgramSha256": "54dd6808ac4bc6c6ee3448465e16dd960c16008f407f195c6bfb1713e28e0ab5",
+      "onlyEntryProgramChange": {
+        "before": "pendingHighSchoolMatchSimulationSeed=88221;",
+        "after": "pendingHighSchoolMatchSimulationSeed=88222;"
+      },
+      "originalAbilities": true,
+      "originalSSPosition": true,
+      "schoolPolicy": "default invitation index0, once per context; no search",
+      "owner": "Normal completeEntry / PlayingTime / roster / substitution",
+      "decisionPolicy": "secure/zone/first legal",
+      "sample": 0.72,
+      "safety1400": true,
+      "executions": 2,
+      "reasonForSecond": "Required same-condition replay; exact same standalone source"
+    },
+    "B": {
+      "test": "tests/baseball-match-foundation-2-2-2-test.js",
+      "testSha256": "2019013d7fc81200e9945c00834df7c4f7d33a8d4d1c8074e66d25e9475d4375",
+      "originalPrefix": "const assert = require(\"assert\");\nconst fs = require(\"fs\");\nconst path = require(\"path\");\nconst vm = require(\"vm\");\n\nconst root = path.resolve(__dirname, \"..\");\nconst files = [\n  \"player.js\", \"current-state-boundary.js\", \"time-boundary.js\", \"relationship-boundary.js\",\n  \"evaluation-registry.js\", \"coach-evaluation-boundary.js\", \"narrative-condition-boundary.js\",\n  \"evaluation-registry-bootstrap.js\", \"decision-flow.js\", \"day-completion-flow.js\",\n  \"relationship-flow.js\", \"coach-response-flow.js\", \"narrative-condition-flow.js\",\n  \"competition-presentation.js\", \"baseball-gameplay-prototype-utils.js\", \"baseball-defense-prototype.js\",\n  \"baseball-offense-prototype.js\", \"offensive-plate-approach.js\", \"baseball-gameplay-integration.js\", \"baseball-training-resolver.js\",\n  \"career-spine-contract.js\", \"career-transition-runtime-resolver.js\", \"career-transition-progression.js\",\n  \"career-development-runtime-resolver.js\", \"career-development-progression.js\", \"career-age22-outcome-resolver.js\",\n  \"career-save-admission.js\", \"story.js\", \"save.js\", \"ai-plate-appearance-outcome.js\", \"force-advancement.js\", \"defensive-runner-throw-settlement-foundation.js\", \"script.js\"\n];\n\nfunction makeContext() {\n  const nodes = new Map();\n  const context = vm.createContext({\n    console, module: { exports: {} },\n    document: {\n      body: { classList: { add() {}, remove() {}, toggle() {}, contains() { return false; } } },\n      getElementById(id) {\n        if (!nodes.has(id)) nodes.set(id, {\n          id, innerHTML: \"\", textContent: \"\", value: \"\", style: {}, dataset: {}, disabled: false,\n          classList: { add() {}, remove() {}, toggle() {}, contains() { return false; } },\n          focus() {}, setAttribute() {}, removeAttribute() {}, querySelectorAll() { return []; }\n        });\n        return nodes.get(id);\n      },\n      querySelector() { return null; }, querySelectorAll() { return []; }\n    },\n    localStorage: { setItem() {}, getItem() { return null; }, removeItem() {} },\n    window: { setTimeout() { return 1; }, clearTimeout() {} }\n  });\n  files.forEach(file => vm.runInContext(fs.readFileSync(path.join(root, file), \"utf8\"), context, { filename: file }));\n  vm.runInContext(`\n    function __setup2222(position=\"一壘手\", seed=222201) {\n      stopHighSchoolMatchPlayback();\n      pendingYouthSeasonOutcome=null;\n      isTransitioning=false;\n      player=createInitialPlayer(\"2.2.2 測試球員\");\n      applyDebugBookmarkCharacterProfile(player);\n      settleHighSchoolEntryCapability(player,{originType:\"test-fixture\"});\n      applyCanonicalPositionProfile(player,\"內野手\",[\"外野手\"]);\n      player.chapter=\"青棒\";\n      player.highSchoolStep=5;\n      player.highSchoolRoleCode=\"starter\";\n      player.highSchoolTeamRole=\"starter\";\n      pendingHighSchoolMatchSimulationSeed=seed;\n      const match=prepareHighSchoolYearOneMatch();\n      Object.assign(match,{\n        inning:5,half:\"上\",offenseTeam:\"away\",defenseTeam:\"home\",outs:0,\n        runners:[null,null,null],scores:{home:1,away:1},simulationPhase:\"moment_1_resolved\",\n        momentIndex:0,currentMomentId:highSchoolYearOneMomentIds[0],currentDomain:\"flow\",\n        playerEntryCompleted:true,playerLineupStatus:\"starter\",position:\"內野手\",\n        developmentPositionOverride:position,currentFieldingPosition:\"\",positionDecisionFamily:\"\",defensiveSituation:{},\n        completedMoments:[{id:highSchoolYearOneMomentIds[0],domain:\"offense\",decision:\"zone\",tier:\"mixed\",outcome:\"測試打席\",consequence:\"比賽繼續\",inning:4,half:\"下\",outs:1,scores:{home:1,away:1},runners:[null,null,null]}]\n      });\n      match.battingOrderIndex.away=2;\n      match.currentBatter=getHighSchoolMatchLineupBatter(match,\"away\").id;\n      match.scoreboardRevealHalfIndex=getHighSchoolHalfInningIndex(match.inning,match.half);\n      match.presentedEventCursor=match.simulationLog.length;\n      return match;\n    }\n    function __candidate2222({position=\"一壘手\",runners=[null,null,null],outs=0,inning=5,scores={home:1,away:1},ball=\"hardGrounder\",direction=\"straightAtPlayer\",depth,level=8,sample=.99,batterSpeed,runnerMovementProgress={},runnerTargets={}}={}) {\n      const match=__setup2222(position);\n      Object.assign(match,{runners:runners.slice(),outs,inning,scores:{...scores}});\n      const event=prepareHighSchoolDefensiveMomentFromSimulation(match,{\n        ballContextType:ball,\n        randomSource:()=>sample,\n        situationOverrides:{\n          playerPosition:position,ballDirection:direction,runnerMovementProgress,runnerTargets,\n          ...(depth?{ballDepth:depth}:{}),...(batterSpeed?{batterSpeed}:{}),\n          playerCapabilities:{fielding:level,reaction:level,range:level,arm:level,throwing:level,decision:level}\n        }\n      });\n      return {match,event,choices:getHighSchoolDefensiveMomentChoices(match)};\n    }\n    function __finish2222(seed=88221) {\n      const match=__setup2222(\"游擊手\",seed);\n      match.inning=1;match.half=\"上\";match.offenseTeam=\"away\";match.defenseTeam=\"home\";\n      match.outs=0;match.runners=[null,null,null];match.scores={home:0,away:0};\n      match.completedMoments=[];match.simulationPhase=\"full_match_flow\";match.currentMomentId=highSchoolYearOneMomentIds[0];\n      match.playerEntryCompleted=true;match.presentedEventCursor=match.simulationLog.length;\n      let safety=0;\n      while(!match.completed&&safety++<1400){\n        if(isHighSchoolMatchDecisionVisible(match)){\n          const choices=getHighSchoolYearOneMatchMomentChoices(match);\n          const choice=choices.find(item=>item.matchDecision===\"secure\"||item.matchDecision===\"zone\")||choices[0];\n          resolveHighSchoolYearOneMatch(choice.matchDecision,choice.matchMomentId,()=>.72);\n        }else advanceHighSchoolMatchPlaybackStep(match);\n      }\n      return {match,safety};\n    }\n  `, context);\n  return context;\n}\n\nconst context = makeContext();\nconst evaluate = expression => vm.runInContext(expression, context);\nlet passed = 0;\nfunction verify(title, condition) {\n  assert.ok(condition, title);\n  passed += 1;\n  console.log(`✓ ${title}`);\n}\n\n",
+      "originalPrefixSha256": "6d19baf9a1ddde40428248bd861aeacafcde4f69da8a311469cd1d22501bb131",
+      "assertion38": "verify(\"38. 玩家可見 routine commentary 不含 raw identifier\", evaluate(`(() => {const x=__candidate2222();const t=formatMatchSimulationEvent(x.event,x.match).text;return ![\"hardGrounder\",\"straightAtPlayer\",\"playerRoutinePlay\",\"selfCoverFirst\",\"decisionTension\"].some(raw=>t.includes(raw));})()`));",
+      "rawIdentifiers": [
+        "hardGrounder",
+        "straightAtPlayer",
+        "playerRoutinePlay",
+        "selfCoverFirst",
+        "decisionTension"
+      ],
+      "execution": "Only original #38 assertion with unchanged original manifest / makeContext / __candidate2222 / verify; formatter pass-through observer captures actual input and return",
+      "syntheticPremises": "Original __setup2222 contains artificial phase / starter flags / completed Moment. Preserved exactly for this legacy formatter-only responsibility; never used by A/C.",
+      "changesToOriginalAssertionOrFixture": 0
+    },
+    "C": {
+      "candidateCount": 1,
+      "candidateId": "normal-entry-88222-from-Task-A",
+      "source": "The first Task A execution, with replay as reproducibility evidence of the same candidate",
+      "reason": "Only the required original second seed changes from reviewed normal entry; may legally supply later SS responsibility and a later player PA. No promised Moment3 outcome.",
+      "prepareBeforeRun": "Fixed before any gameplay execution in this task",
+      "manualPhaseLineupCompletedMomentPAOutEdits": false,
+      "seedSchoolAbilitySearch": false,
+      "additionalCandidateAfterFailure": false,
+      "completion": "If actual source reaches fixed ID3, validate legal choices / actual PA / completion / continued progression / duplicate no-op. Otherwise record missing gates and retain UNVERIFIED."
+    }
+  },
+  "plannedChildren": [
+    {
+      "label": "canonical-88222",
+      "file": "docs/match-contract-evidence-closure-v0.1-canonical.cjs"
+    },
+    {
+      "label": "canonical-88222-replay",
+      "file": "docs/match-contract-evidence-closure-v0.1-canonical.cjs"
+    },
+    {
+      "label": "routine-38",
+      "file": "docs/match-contract-evidence-closure-v0.1-routine.cjs"
+    }
+  ],
+  "targetedOnly": true,
+  "seed88221FullMatchExecutions": 0,
+  "originalFormalSuiteInvocations": 0,
+  "productionDelta": 0,
+  "formalTestDelta": 0,
+  "oldCapturesImmutable": true,
+  "full251": 0,
+  "r6Full227": 0,
+  "firstBaseTiming": 0,
+  "receiverV2Integration": 0
+}

@@ -1,0 +1,785 @@
+{
+  "task": "G3-A — PC Match Shell & Stable Panel Flow v0.1",
+  "status": "G3_A_PARTIAL",
+  "at": "2026-10-21T14:55:22.865Z",
+  "timeZone": "Asia/Taipei",
+  "coreImplementation": "PASS",
+  "unclosedRequirements": [
+    {
+      "requirement": "B1: actual event name and human-readable team names in persistent header",
+      "reason": "The unchanged LivePublicMatchBridge snapshot has no event-name or team-name fields. offenseTeam/defenseTeam expose side + teamId only. UI displays 正式比賽 / 賽事名稱未提供 and the public team IDs.",
+      "owner": "live-public-match-bridge.js / Public Bridge contract",
+      "resolution": "Requires a separately authorized public metadata contract extension; not attempted in G3-A.",
+      "doesNotAffect": "Existing legal routes, score/count reveal, gameplay, Save, playback or host stability"
+    }
+  ],
+  "baseline": {
+    "branch": "accepted-gameplay-g2-b2-v0.1",
+    "head": "0d3ed173952b9b8e5d5842a73761f649b50be594",
+    "tree": "866b134fc720bbc93582d3172965e68c527b25ce",
+    "upstream": "origin/accepted-gameplay-g2-b2-v0.1",
+    "aheadBehind": [
+      0,
+      0
+    ]
+  },
+  "changes": {
+    "modified": [
+      "match-pitch-decision-ui.js",
+      "match-pitch-decision-ui.css"
+    ],
+    "added": [
+      "tests/g3-a-pc-match-shell-test.cjs",
+      "docs/g3-a-pc-match-shell-v0.1.md",
+      "docs/g3-a-pc-match-shell-v0.1-evidence.json"
+    ],
+    "sources": [
+      {
+        "path": "match-pitch-decision-ui.js",
+        "bytes": 18826,
+        "sha256": "a508d69b8028c4eb9489030a1b8881e8c2c7c76c203a960382e66d38e386b00f"
+      },
+      {
+        "path": "match-pitch-decision-ui.css",
+        "bytes": 7926,
+        "sha256": "a70daf0eeb953635dd9f5253f5eaa8af16a0e9694f8300d68c293ddfe0de9a7a"
+      },
+      {
+        "path": "tests/g3-a-pc-match-shell-test.cjs",
+        "bytes": 7861,
+        "sha256": "f98485541feb8bcc9911e9f95c68b6e663718b5bef8b276c92cbe131b3d62fec"
+      }
+    ]
+  },
+  "shell": {
+    "persistent": [
+      "matchShell",
+      "matchShellHeader",
+      "matchPresentationHost",
+      "matchDecisionFrame"
+    ],
+    "supporting": "matchSupportingFrame; original story retained",
+    "originalRoots": "Original story, choices and changeLog DOM nodes retain their IDs, owner callbacks, and inactive Career visual order.",
+    "headerSource": "LivePublicMatchBridge.snapshot.game only; team IDs from public offenseTeam/defenseTeam",
+    "context": "Original already-rendered presentation nodes relocated into a disclosure in the main frame; original choice metadata supplies risk/tradeoff text.",
+    "kZone": "Neutral dashed placeholder; no pitch coordinates, trajectory, physics, RNG, timer or simulation.",
+    "resolution": "Only published current/accepted PA events; unavailable data remains unavailable. Submit awaits original reveal. Old PA summary removed on a new decision.",
+    "strategyToPitch": {
+      "frameBefore": {
+        "x": 24,
+        "y": 104,
+        "width": 716.109375,
+        "height": 407.03125,
+        "bottom": 511.03125
+      },
+      "frameAfter": {
+        "x": 24,
+        "y": 104,
+        "width": 716.109375,
+        "height": 407.03125,
+        "bottom": 511.03125
+      },
+      "decisionBefore": {
+        "x": 754.109375,
+        "y": 104,
+        "width": 572.890625,
+        "height": 407.03125,
+        "bottom": 511.03125
+      },
+      "decisionAfter": {
+        "x": 754.109375,
+        "y": 104,
+        "width": 572.890625,
+        "height": 407.03125,
+        "bottom": 511.03125
+      },
+      "scrollBefore": 71,
+      "scrollAfter": 71,
+      "firstActionYBefore": 184,
+      "firstActionYAfter": 184
+    }
+  },
+  "ownership": {
+    "originalCreateAdapter": "Byte-for-byte prefix equal to pinned G2-B2 source, enforced by new UI regression",
+    "submitAuthority": "chooseHighSchoolYearOneMatchMoment only",
+    "preserved": [
+      "matchId + paId + pitchId + situationId",
+      "expectedMomentId + exact route/choice mapping",
+      "stale callbacks, in-flight and submit-once rejection",
+      "native double-click and held Enter rejection",
+      "original unsupported UI, including original agency routes",
+      "original presentation cursor, scheduler, Match/PA/GameRecord settlement",
+      "Save schema and reload boundaries"
+    ],
+    "supportedButtonExclusion": "Original group hidden + inert; original buttons disabled while public routes available. Entire original choices root hidden to avoid overlap. Restored for unsupported/read failure.",
+    "unchangedOwners": [
+      "script.js (including original Match render/resolvers/playback)",
+      "live-public-match-bridge.js",
+      "save.js",
+      "match-game-record.js",
+      "all engine, physics, admission, Scorer, S1/S2/Recovery owners"
+    ],
+    "unchangedAccepted": [
+      {
+        "path": "index.html",
+        "sha256": "802d0a8fbf9fa966b83f1508efd2eb2807cdf6355dbfaecf4fd689cdb397e273",
+        "expected": "802d0a8fbf9fa966b83f1508efd2eb2807cdf6355dbfaecf4fd689cdb397e273"
+      },
+      {
+        "path": "tests/g2-b2-source-delta.cjs",
+        "sha256": "d5698840902e9e756cce9ba32e13ec68288180d5da1ab59a72a92ec4383867bf",
+        "expected": "d5698840902e9e756cce9ba32e13ec68288180d5da1ab59a72a92ec4383867bf"
+      },
+      {
+        "path": "tests/g2-b2-playable-match-decision-test.cjs",
+        "sha256": "f326835bc261d78293080b29b69957184f849c8a7a82fac40072b9caa235c993",
+        "expected": "f326835bc261d78293080b29b69957184f849c8a7a82fac40072b9caa235c993"
+      },
+      {
+        "path": "tests/g2-a-live-public-match-bridge-test.cjs",
+        "sha256": "3db745400d50a15abb6177cece123b15c1f15ba452b12cccd6a8d7f62e015fe2",
+        "expected": "3db745400d50a15abb6177cece123b15c1f15ba452b12cccd6a8d7f62e015fe2"
+      },
+      {
+        "path": "tests/pitch-production-source-scope.cjs",
+        "sha256": "5971286587b85b26108b2906c4d543b933f4ecc411b2c301120f79d40faa38c7",
+        "expected": "5971286587b85b26108b2906c4d543b933f4ecc411b2c301120f79d40faa38c7"
+      },
+      {
+        "path": "docs/g2-b2-playable-match-decision-v0.1.md",
+        "sha256": "36e1adb1d3fc157d85001e57e36316dee088f0773e1d3ac0118f915cf34e859c",
+        "expected": "36e1adb1d3fc157d85001e57e36316dee088f0773e1d3ac0118f915cf34e859c"
+      },
+      {
+        "path": "docs/g2-b2-playable-match-decision-v0.1-evidence.json",
+        "sha256": "19f3f4d4456039f79793509e85031a352817efaac7e88ff8db60feafda8bccfe",
+        "expected": "19f3f4d4456039f79793509e85031a352817efaac7e88ff8db60feafda8bccfe"
+      }
+    ]
+  },
+  "browser": {
+    "status": "PASS",
+    "mode": "isolated headless Chrome; native CDP mouse and keyboard input; no gameplay fixture or state injection",
+    "checks": {
+      "normalCareerFullMatchEntry": true,
+      "originalStrategyAvailable": true,
+      "readerFailureRestoresOriginalUI": true,
+      "refreshHasNoGameplayOrRng": true,
+      "strategyToPitchSamePosition": true,
+      "nativeKeyboardTake": true,
+      "staleAndDoubleClickRejected": true,
+      "saveReloadAndOldCallback": true,
+      "heldEnterRejected": true,
+      "nativeKeyboardSwing": true,
+      "paSettledOnceAndNextState": true,
+      "fullPageReload": true,
+      "noBlockingConsoleErrors": true
+    },
+    "completedPA": {
+      "id": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|2|下",
+      "result": "out",
+      "resultApplied": true,
+      "pitchCount": 2,
+      "history": [
+        {
+          "pitchId": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|2|下|pitch-1",
+          "action": "take",
+          "result": "calledStrike"
+        },
+        {
+          "pitchId": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|2|下|pitch-2",
+          "action": "swing",
+          "result": "ballInPlay"
+        }
+      ]
+    },
+    "publicPlayerPA": {
+      "eventId": "[\"g2-a-live-public-match-v1\",\"hs-y1-autumn-exhibition\",\"PA_SETTLED\",\"hs-y1-autumn-exhibition|2|下|27\"]",
+      "type": "PA_SETTLED",
+      "matchId": "hs-y1-autumn-exhibition",
+      "paId": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|2|下",
+      "source": {
+        "owner": "simulationLog.plateAppearance/MatchGameRecord.eventRefs",
+        "identity": "hs-y1-autumn-exhibition|2|下|27",
+        "eventId": "hs-y1-autumn-exhibition|2|下|27"
+      },
+      "order": {
+        "sourceSequence": 27,
+        "evidenceOrder": 140000,
+        "basis": "originalSimulationLog"
+      },
+      "facts": {
+        "batterId": "player",
+        "result": "out",
+        "before": {
+          "outs": 2,
+          "scores": {
+            "home": 0,
+            "away": 0
+          },
+          "bases": [
+            "home-school-player-01",
+            null,
+            null
+          ]
+        },
+        "after": {
+          "outs": 3,
+          "scores": {
+            "home": 0,
+            "away": 0
+          },
+          "bases": [
+            null,
+            null,
+            null
+          ]
+        },
+        "runnerChanges": [
+          {
+            "runnerId": "home-school-player-01",
+            "from": 1,
+            "to": "halfInningEnd"
+          },
+          {
+            "runnerId": "player",
+            "from": "batter",
+            "to": "out"
+          }
+        ],
+        "retirements": [
+          {
+            "runnerId": "player",
+            "targetBase": "first",
+            "outType": "batterRunnerBeforeFirst",
+            "sequence": 1,
+            "isBatterRunner": true,
+            "beforeFirst": true
+          }
+        ],
+        "physicalId": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|2|下|pitch-2",
+        "settlementId": null,
+        "attribution": []
+      }
+    },
+    "officialPlayerPAs": [
+      {
+        "sequence": 27,
+        "result": "out",
+        "pitchCount": 2
+      }
+    ],
+    "nextLegalState": {
+      "phase": "moment_1_resolved",
+      "decision": "unsupported",
+      "waiting": false,
+      "playbackScheduled": true,
+      "integrity": {
+        "match": [],
+        "record": [],
+        "eventRefs": 29,
+        "uniqueRefs": 29
+      }
+    },
+    "viewports": [
+      [
+        1366,
+        768
+      ],
+      [
+        1600,
+        900
+      ],
+      [
+        1920,
+        1080
+      ]
+    ],
+    "executedAdapterSha256": "a508d69b8028c4eb9489030a1b8881e8c2c7c76c203a960382e66d38e386b00f",
+    "sourceRequests": [
+      {
+        "name": "index.html",
+        "url": "http://127.0.0.1:8000/",
+        "sha256": "802d0a8fbf9fa966b83f1508efd2eb2807cdf6355dbfaecf4fd689cdb397e273",
+        "bytes": 17742,
+        "fromDiskCache": false
+      },
+      {
+        "name": "match-pitch-decision-ui.css",
+        "url": "http://127.0.0.1:8000/match-pitch-decision-ui.css",
+        "sha256": "a70daf0eeb953635dd9f5253f5eaa8af16a0e9694f8300d68c293ddfe0de9a7a",
+        "bytes": 7926,
+        "fromDiskCache": false
+      }
+    ],
+    "blockingConsoleErrors": [],
+    "nonBlockingNetworkErrors": [
+      {
+        "method": "Log.entryAdded",
+        "params": {
+          "entry": {
+            "source": "network",
+            "level": "error",
+            "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+            "timestamp": 1792594304498.081,
+            "url": "http://127.0.0.1:8000/favicon.ico",
+            "networkRequestId": "28660.2200"
+          }
+        }
+      },
+      {
+        "method": "Log.entryAdded",
+        "params": {
+          "entry": {
+            "source": "network",
+            "level": "error",
+            "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+            "timestamp": 1792594341494.1,
+            "url": "http://127.0.0.1:8000/favicon.ico",
+            "networkRequestId": "28660.2400"
+          }
+        }
+      }
+    ],
+    "ordinaryCareer": {
+      "active": false,
+      "storyY": 376,
+      "storyBottom": 1165.75,
+      "logY": 1183.75,
+      "logBottom": 1261.75,
+      "choicesY": 1283.75,
+      "buttons": [
+        "把手指勾上鐵網，站到最前面看接球",
+        "留在家人身後，沿著每個人的腳步看",
+        "指著最近的接球組，問家人自己能不能試"
+      ],
+      "decisionBorder": "0px",
+      "errors": [],
+      "event": "day1_morning",
+      "status": "PASS"
+    },
+    "fullEvidence": {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\browser-evidence.json",
+      "relative": "browser-evidence.json",
+      "bytes": 1533472,
+      "sha256": "028af63b71b7e392b2cb8d911d8e0b9a72b47640559f749a00b7d3deaaca7d6a"
+    }
+  },
+  "regressions": {
+    "status": "PASS",
+    "suites": [
+      {
+        "file": "tests/g3-a-pc-match-shell-test.cjs",
+        "exitCode": 0,
+        "durationMs": 105,
+        "passLines": 7,
+        "violations": [],
+        "status": "PASS",
+        "summary": "{\"suite\":\"g3-a-pc-match-shell\",\"status\":\"PASS\",\"passed\":7,\"browserAssertions\":\"inspectShell + assertShell; executed by isolated Chrome acceptance runner\"}"
+      },
+      {
+        "file": "tests/g2-b2-playable-match-decision-test.cjs",
+        "exitCode": 0,
+        "durationMs": 1944,
+        "passLines": 21,
+        "violations": [],
+        "status": "PASS",
+        "summary": "{\"suite\":\"g2-b2-playable-match-decision\",\"status\":\"PASS\",\"passed\":21,\"pa\":{\"id\":\"hs-y3-final-competition-1|hs_y1_match_moment_1|player|6|下\",\"result\":\"out\",\"pitchCount\":2,\"history\":[{\"pitchId\":\"hs-y3-final-competition-1|hs_y1_match_moment_1|player|6|下|pitch-1\",\"action\":\"take\",\"result\":\"calledStrike\"},{\"pitchId\":\"hs-y3-final-competition-1|hs_y1_match_moment_1|player|6|下|pitch-2\",\"action\":\"swing\",\"result\":\"ballInPlay\"}]}}"
+      },
+      {
+        "file": "tests/g2-a-live-public-match-bridge-test.cjs",
+        "exitCode": 0,
+        "durationMs": 11723,
+        "passLines": 34,
+        "violations": [],
+        "status": "PASS",
+        "summary": "{\"suite\":\"g2-a-live-public-match-bridge\",\"status\":\"PASS\",\"passed\":34,\"cases\":[\"A\",\"B\",\"C\",\"D\"],\"normalGame\":true}"
+      },
+      {
+        "file": "tests/g2-b1-natural-mixed-match-continuity-test.cjs",
+        "exitCode": 0,
+        "durationMs": 80909,
+        "passLines": 9,
+        "violations": [],
+        "status": "PASS",
+        "summary": "{\"suite\":\"g2-b1-natural-mixed-match-continuity\",\"status\":\"PASS\",\"passed\":9,\"games\":[{\"label\":\"original G2-A take policy\",\"ticks\":146,\"scores\":{\"home\":5,\"away\":3},\"detailed\":2,\"compressed\":77,\"handoffs\":[\"CompressedToDetailed\",\"DetailedToCompressed\",\"CompressedToDetailed\",\"DetailedToCompressed\"],\"publicEvents\":272},{\"label\":\"same Career with six real save/load boundaries\",\"ticks\":146,\"scores\":{\"home\":5,\"away\":3},\"detailed\":2,\"compressed\":77,\"handoffs\":[\"CompressedToDetailed\",\"DetailedToCompressed\",\"CompressedToDetailed\",\"DetailedToCompressed\"],\"publicEvents\":272},{\"label\":\"same Career legal contactSwing policy\",\"ticks\":178,\"scores\":{\"home\":6,\"away\":8},\"detailed\":3,\"compressed\":89,\"handoffs\":[\"CompressedToDetailed\",\"DetailedToCompressed\",\"CompressedToDetailed\",\"CompressedToDetailed\"],\"publicEvents\":333}]}"
+      },
+      {
+        "file": "tests/pitch-production-source-scope-test.js",
+        "exitCode": 0,
+        "durationMs": 20885,
+        "passLines": 7,
+        "violations": [],
+        "status": "PASS",
+        "summary": "{\"suite\":\"pitch-production-source-scope\",\"passed\":7,\"failed\":0,\"immutableReferences\":[\"9b9546f94a7286afef474be634fd93c57eb455db\",\"2a4b44a034b714b8de3c8a6897507995ab0f8ccd\",\"674e49115a9ed7d67c69a3023b5a594d41fe584c\"],\"protectedFunctions\":95,\"protectedGlobals\":25,\"rejectedMutations\":131,\"productionExecuted\":false}"
+      }
+    ],
+    "totalChecks": 78,
+    "sourceGuardRejectedMutations": 131,
+    "dependencyReads": 114,
+    "protectedAccessCount": 0,
+    "violations": [],
+    "executedSourceConsistency": "All monitored G3 sources match final manifest; Chrome executed script and index/CSS response bytes match disk."
+  },
+  "integrity": {
+    "status": "PASS",
+    "checks": {
+      "branch": true,
+      "head": true,
+      "tree": true,
+      "upstream": true,
+      "aheadBehind": true,
+      "exactStatusSet": true,
+      "originalUntrackedPreserved": true,
+      "untrackedCount": true,
+      "protectedMetadata": true,
+      "stagedEmpty": true,
+      "index": true,
+      "config": true,
+      "formalRefs": true,
+      "unchangedAccepted": true
+    },
+    "originalTrackedWip": [
+      {
+        "status": " M",
+        "path": "tests/fast-check-smoke-test.cjs"
+      }
+    ],
+    "originalUntrackedCount": 1228,
+    "retainedOriginalUntracked": 1228,
+    "finalUntrackedCount": 1231,
+    "expectedNewUntracked": 3,
+    "protected": [
+      {
+        "path": "tests/fast-check-smoke-test.cjs",
+        "status": " M",
+        "size": 232,
+        "mtimeMs": 1790843210697.4724,
+        "unchanged": true
+      },
+      {
+        "path": "install.ps1",
+        "status": "??",
+        "size": 18481,
+        "mtimeMs": 1790645780931.8794,
+        "unchanged": true
+      },
+      {
+        "path": "docs/first-base-sprint-3-focused-development-evidence.json",
+        "status": "??",
+        "size": 909541,
+        "mtimeMs": 1791695452470.9353,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-baseball-logic-audit-architecture-evidence.json",
+        "status": "??",
+        "size": 22275,
+        "mtimeMs": 1791724873822.1465,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-baseball-logic-audit-evidence.json",
+        "status": "??",
+        "size": 9987073,
+        "mtimeMs": 1791725791525.787,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-baseball-logic-audit-runner.cjs",
+        "status": "??",
+        "size": 51962,
+        "mtimeMs": 1791725789937.2622,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-baseball-logic-validation-audit-v1.md",
+        "status": "??",
+        "size": 39820,
+        "mtimeMs": 1791725790304.0483,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-scorer-recovery-sprint-5-green-evidence.json",
+        "status": "??",
+        "size": 9378500,
+        "mtimeMs": 1791766904157.9292,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json",
+        "status": "??",
+        "size": 11457925,
+        "mtimeMs": 1791767373630.792,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json",
+        "status": "??",
+        "size": 686464,
+        "mtimeMs": 1791788973106.34,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json",
+        "status": "??",
+        "size": 889584,
+        "mtimeMs": 1791767570328.417,
+        "unchanged": true
+      },
+      {
+        "path": "docs/infield-scorer-recovery-sprint-5-validation.json",
+        "status": "??",
+        "size": 1027011,
+        "mtimeMs": 1791767101736.8584,
+        "unchanged": true
+      }
+    ],
+    "indexSha256": "57c4fd9aeaa8a4955adb8d7d18436c224a1f39ec3f058e83eea6f3a2fd818ea1",
+    "configSha256": "b0b855eb7a6aaa9b0b5e0cde9a3c3cf1c8dabe9bd6a14ac17c6497508ca85403",
+    "formalRefs": [
+      "refs/heads/accepted-gameplay-baseline-v0.1 bd657b5f18462be2c365abdec1ca14497725557e",
+      "refs/heads/accepted-gameplay-g1-b-v0.1 95c75a7ebeba7f052a6d227733dc48555f356d3c",
+      "refs/heads/accepted-gameplay-g1-c-v0.1 9c829c32663c808686b187ce15807b297663ed4f",
+      "refs/heads/accepted-gameplay-g2-a-v0.1 285c4da83a51334dc2e867492c84c9b9d879e3d8",
+      "refs/heads/accepted-gameplay-g2-b1-v0.1 630eb43efe65745ac0e6a05f2d204365bcfe8705",
+      "refs/heads/accepted-gameplay-g2-b2-v0.1 0d3ed173952b9b8e5d5842a73761f649b50be594",
+      "refs/heads/main ab3117653945de0b7013636187c446276a96e634",
+      "refs/remotes/origin/HEAD ab3117653945de0b7013636187c446276a96e634",
+      "refs/remotes/origin/accepted-gameplay-baseline-v0.1 bd657b5f18462be2c365abdec1ca14497725557e",
+      "refs/remotes/origin/accepted-gameplay-g1-b-v0.1 95c75a7ebeba7f052a6d227733dc48555f356d3c",
+      "refs/remotes/origin/accepted-gameplay-g1-c-v0.1 9c829c32663c808686b187ce15807b297663ed4f",
+      "refs/remotes/origin/accepted-gameplay-g2-a-v0.1 285c4da83a51334dc2e867492c84c9b9d879e3d8",
+      "refs/remotes/origin/accepted-gameplay-g2-b1-v0.1 630eb43efe65745ac0e6a05f2d204365bcfe8705",
+      "refs/remotes/origin/accepted-gameplay-g2-b2-v0.1 0d3ed173952b9b8e5d5842a73761f649b50be594",
+      "refs/remotes/origin/main ab3117653945de0b7013636187c446276a96e634",
+      "refs/stash 0daf1e954f74ddb45efe620107970567dec6fffd"
+    ],
+    "codexRefs": {
+      "before": [
+        "refs/codex/turn-diffs/captures/1792592910061/ffe83d4d-0b2f-4427-b49d-e68bfa8fbb93/base 403aeabab4336984a9d50516eaf68d3145f02710",
+        "refs/codex/turn-diffs/checkpoints/1b30eef5edc9edcbf4553088f61d71e4/6824be3866841d553c3cc136bc2cc676/1792591679377/bd6e1e77-0401-4dd5-9833-e809cf317602 403aeabab4336984a9d50516eaf68d3145f02710",
+        "refs/codex/turn-diffs/checkpoints/64d2722c51465ccab661d30344d4a96d/e8fe6e66a5e8baeb986381e38ffef3d3/1792036431404/1b6c4160-7163-495e-9552-caea1f9d95e1 427f813cfbd1e30ace8947c043d76ce77ebe213b",
+        "refs/codex/turn-diffs/checkpoints/66e49217659712ef2e11f7a9aab8ba7b/6d3edb3b91e625ef555a5600782f3b75/1792133378026/2cc5a7f7-3aba-4e6e-8700-e955800eac91 006ffaeb18c3be38038f22f6bb2eedcb921cd1ee",
+        "refs/codex/turn-diffs/checkpoints/7525e41b395af968564a4312882d0ccc/9a9ae8ccdab36bb49e040dc32add848c/1792375435150/3f014802-287d-46dc-902e-d9baf7d50004 e6c94a8242e86553e9ff91c15c0bc2ccef0cc040",
+        "refs/codex/turn-diffs/checkpoints/9d7e15a690a180355619964e67c79e50/4d0b6c2846ad37a0114db0b08cd92fa0/1792384836477/d346c771-2144-42b1-8afb-fd2fb086c4a0 e6c94a8242e86553e9ff91c15c0bc2ccef0cc040",
+        "refs/codex/turn-diffs/checkpoints/ac7d753eed2512837c386fb21f385f08/3af0e564e8a35a458e41b038721777de/1791988309789/224cd1cc-fa54-42d8-8fcf-d8efda10104c e4a9da8dcb5ed1607c5b25d971e7f94a09c710d9",
+        "refs/codex/turn-diffs/checkpoints/b9cfcd5a106be1846ac734dbcfaf8e5c/73e384fb586d781dde4994327b6d97ef/1792509316634/342ed55b-1420-48ae-a05f-3e35bfffaa21 403aeabab4336984a9d50516eaf68d3145f02710",
+        "refs/codex/turn-diffs/checkpoints/c3786c92b70b091c6418042ba46c004f/93ee0e63614d1c3b1bca810afccd852b/1792042370688/596b0e95-85cf-413b-8687-9d646670c644 561365d72a06edf846231b475b74b461a35337ee",
+        "refs/codex/turn-diffs/checkpoints/f3e01db55d040a7d898742becc2302d8/98035a6a8a12744e39662d286e576bb5/1792205218107/529e6f1f-2239-451a-91dd-352426964ec3 41893dc9d59bdd6e0e4edfa228384cf0ee2f0fe3",
+        "refs/codex/turn-diffs/checkpoints/f8008fec3168b21b9d51b89d19cb97a2/0aeb311e4cd46c6d038e09af95eb84de/1792162815713/cea73784-8b93-460c-9944-ab6600003dae 8573fbde23eb503d372fd5aebb82fe28e357fee9"
+      ],
+      "after": [
+        "refs/codex/turn-diffs/captures/1792592910061/ffe83d4d-0b2f-4427-b49d-e68bfa8fbb93/base 403aeabab4336984a9d50516eaf68d3145f02710",
+        "refs/codex/turn-diffs/checkpoints/1b30eef5edc9edcbf4553088f61d71e4/6824be3866841d553c3cc136bc2cc676/1792591679377/bd6e1e77-0401-4dd5-9833-e809cf317602 403aeabab4336984a9d50516eaf68d3145f02710",
+        "refs/codex/turn-diffs/checkpoints/64d2722c51465ccab661d30344d4a96d/e8fe6e66a5e8baeb986381e38ffef3d3/1792036431404/1b6c4160-7163-495e-9552-caea1f9d95e1 427f813cfbd1e30ace8947c043d76ce77ebe213b",
+        "refs/codex/turn-diffs/checkpoints/66e49217659712ef2e11f7a9aab8ba7b/6d3edb3b91e625ef555a5600782f3b75/1792133378026/2cc5a7f7-3aba-4e6e-8700-e955800eac91 006ffaeb18c3be38038f22f6bb2eedcb921cd1ee",
+        "refs/codex/turn-diffs/checkpoints/7525e41b395af968564a4312882d0ccc/9a9ae8ccdab36bb49e040dc32add848c/1792375435150/3f014802-287d-46dc-902e-d9baf7d50004 e6c94a8242e86553e9ff91c15c0bc2ccef0cc040",
+        "refs/codex/turn-diffs/checkpoints/9d7e15a690a180355619964e67c79e50/4d0b6c2846ad37a0114db0b08cd92fa0/1792384836477/d346c771-2144-42b1-8afb-fd2fb086c4a0 e6c94a8242e86553e9ff91c15c0bc2ccef0cc040",
+        "refs/codex/turn-diffs/checkpoints/ac7d753eed2512837c386fb21f385f08/3af0e564e8a35a458e41b038721777de/1791988309789/224cd1cc-fa54-42d8-8fcf-d8efda10104c e4a9da8dcb5ed1607c5b25d971e7f94a09c710d9",
+        "refs/codex/turn-diffs/checkpoints/b9cfcd5a106be1846ac734dbcfaf8e5c/73e384fb586d781dde4994327b6d97ef/1792509316634/342ed55b-1420-48ae-a05f-3e35bfffaa21 403aeabab4336984a9d50516eaf68d3145f02710",
+        "refs/codex/turn-diffs/checkpoints/c3786c92b70b091c6418042ba46c004f/93ee0e63614d1c3b1bca810afccd852b/1792042370688/596b0e95-85cf-413b-8687-9d646670c644 561365d72a06edf846231b475b74b461a35337ee",
+        "refs/codex/turn-diffs/checkpoints/f3e01db55d040a7d898742becc2302d8/98035a6a8a12744e39662d286e576bb5/1792205218107/529e6f1f-2239-451a-91dd-352426964ec3 41893dc9d59bdd6e0e4edfa228384cf0ee2f0fe3",
+        "refs/codex/turn-diffs/checkpoints/f8008fec3168b21b9d51b89d19cb97a2/0aeb311e4cd46c6d038e09af95eb84de/1792162815713/cea73784-8b93-460c-9944-ab6600003dae 8573fbde23eb503d372fd5aebb82fe28e357fee9"
+      ]
+    },
+    "stagedEmpty": true,
+    "gitWrites": "No Stage, Commit, Push, reset, restore, clean, stash, merge, rebase, EOL/config changes.",
+    "diffScope": "Only match-pitch-decision-ui.js, match-pitch-decision-ui.css, the new G3 test and two G3 reports. No unrestricted worktree content diff/stat/check."
+  },
+  "exploration": {
+    "skill": "codebase-memory",
+    "graphAvailability": "No list_projects/index_status/search_graph/check_index_coverage tools were exposed; no graph coverage claim.",
+    "fallback": "Direct scoped source reads of index, style, adapter, original render, Bridge and relevant G2 tests; no repository-wide content search.",
+    "phaseA": "Original Match owns gameplay and unsupported choices; adapter maps presented PlateDecision routes only; shell owns persistent placement."
+  },
+  "screenshots": [
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\before-1366x768.png",
+      "relative": "before-1366x768.png",
+      "bytes": 110490,
+      "sha256": "4dece87e1612f29559bfa1545785b38d1193acd26c7fcb2826b19a906226e4d9"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\before-strategy-1366x768.png",
+      "relative": "before-strategy-1366x768.png",
+      "bytes": 106693,
+      "sha256": "367a8859cd2471db717f5e3e953e66f47aed44d7a7e6c9033bbb0cb13b1daf94"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\after-strategy-1366x768.png",
+      "relative": "after-strategy-1366x768.png",
+      "bytes": 81918,
+      "sha256": "5ed4a10852469f25bd18694336c1e47bb305a03c98ae993d235e81a34ddd2227"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\after-pitch-1366x768.png",
+      "relative": "after-pitch-1366x768.png",
+      "bytes": 77417,
+      "sha256": "54a87c9975fe7a6e0d21097b068f1a1ff324189b4a5778f551d0c567fe1d19e0"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\after-pitch-1600x900.png",
+      "relative": "after-pitch-1600x900.png",
+      "bytes": 84773,
+      "sha256": "0e6b7a4a4b15b3d4d592364e17562a5d4a1334554e5d4a793a62e5e7c10456ba"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\after-pitch-1920x1080.png",
+      "relative": "after-pitch-1920x1080.png",
+      "bytes": 101142,
+      "sha256": "58661abb9a52dd2b694441435fa964eeae5d1a029a00b60d74242af785f4f13f"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\after-take-1366x768.png",
+      "relative": "after-take-1366x768.png",
+      "bytes": 81985,
+      "sha256": "0f5ac6d87387878334a93f41fd0db041b6c25a16de97967e99d35d00d7df8dbc"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\after-swing-1366x768.png",
+      "relative": "after-swing-1366x768.png",
+      "bytes": 73882,
+      "sha256": "c1749419ec836b774be3c245858ecde329c3042cdadfc0c0185d93cfa4e71ced"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\after-pa-1366x768.png",
+      "relative": "after-pa-1366x768.png",
+      "bytes": 73136,
+      "sha256": "a525318255c5eb4ccdc15bd7ed589908297017e60a572ae85f117196954098ec"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\after-reload-1366x768.png",
+      "relative": "after-reload-1366x768.png",
+      "bytes": 69795,
+      "sha256": "892822b5169d5f005f3ab49b55caa94357bc2844a916a6246bbbd33a43384491"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\preflight.json",
+      "relative": "preflight.json",
+      "bytes": 160516,
+      "sha256": "bf357a6df9e4261cdbf3b3f625ef6cc239e3eb0899be36af7b842605e0f2a332"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\postflight.json",
+      "relative": "postflight.json",
+      "bytes": 165533,
+      "sha256": "1c6cf69e5b1a22681c33ed24d94758ae5ee957d3867092558f0d33fc1565c36d"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\source-before.json",
+      "relative": "source-before.json",
+      "bytes": 306,
+      "sha256": "2574fcd0cf86a6ef431e290f2790e831216a550e42ec7f5e85607b2608d3d0ea"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\before-state.json",
+      "relative": "before-state.json",
+      "bytes": 121454,
+      "sha256": "3be79bb99a7daa5432a5d993399e2e8ffc722e960197d21d5e1b634beb30bf36"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\browser-session.json",
+      "relative": "browser-session.json",
+      "bytes": 186,
+      "sha256": "30a7b2e718317c8f4b693a7b7f85352ec7edcf334dd03c51105b08177e24b8a1"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\browser-evidence.json",
+      "relative": "browser-evidence.json",
+      "bytes": 1533472,
+      "sha256": "028af63b71b7e392b2cb8d911d8e0b9a72b47640559f749a00b7d3deaaca7d6a"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\ordinary-career-layout.json",
+      "relative": "ordinary-career-layout.json",
+      "bytes": 413,
+      "sha256": "ec772d2fc500dee66ef62ce78956616fba81e0acc8072448e7275427559a6c13"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\regressions\\results.json",
+      "relative": "regressions/results.json",
+      "bytes": 3124,
+      "sha256": "4df26a943585b09c2d01b0cd9010cff4c65083782c03e787ff2a296136c5530b"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\browser-acceptance.cjs",
+      "relative": "browser-acceptance.cjs",
+      "bytes": 13509,
+      "sha256": "e896aa3f2f2e11c54b9af430c575a5080ae7663194eb0cc87807e1db65186f14"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\cdp.cjs",
+      "relative": "cdp.cjs",
+      "bytes": 2957,
+      "sha256": "6736826c0341e5ec1a56076ab84ac4beb20e39fb42bd0d55339c430d7732ba7f"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\run-regressions.cjs",
+      "relative": "run-regressions.cjs",
+      "bytes": 2600,
+      "sha256": "d9117ab8c000870d120e8d94fde675163a58218ddd5fb9939172970069d7f5d1"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\dependency-monitor.mjs",
+      "relative": "dependency-monitor.mjs",
+      "bytes": 3947,
+      "sha256": "46a2f92c7afea997f285735e36a3610271dedf8652e7cb8dfead077d72a6abb9"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\monitor-config.json",
+      "relative": "monitor-config.json",
+      "bytes": 1721,
+      "sha256": "54c4a615eded937c30e1883b482e47a437046a8bcaa6924899e6192070efaab3"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\postflight.cjs",
+      "relative": "postflight.cjs",
+      "bytes": 3893,
+      "sha256": "20dd0ea137c54bb05949a82ccc1f217942d1656d15bde94be7e2487cd69e1954"
+    }
+  ],
+  "historicalAttempts": [
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\browser-attempt-1792593815840.json",
+      "relative": "browser-attempt-1792593815840.json",
+      "bytes": 980,
+      "sha256": "64ecd3cb514928be37f1fb4734fec0086ae763620d6a1e9b24ea822965d210c5"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\browser-attempt-1792593845376.json",
+      "relative": "browser-attempt-1792593845376.json",
+      "bytes": 805120,
+      "sha256": "4dd9eefcba94215316f64492828d25e058c2244888b017887a7ea54cc900f0a7"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\browser-attempt-1792594021347.json",
+      "relative": "browser-attempt-1792594021347.json",
+      "bytes": 1325221,
+      "sha256": "704ac739e5eebaef8b9accb049b2f559722a0a6981376f7faad3fd4d887bf610"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\browser-attempt-1792594128640.json",
+      "relative": "browser-attempt-1792594128640.json",
+      "bytes": 1538939,
+      "sha256": "6aecaa42266e4b6bcbf3e2f3ad1679762156f18213de32221ca0eb68712c37fa"
+    },
+    {
+      "path": "C:\\Users\\User\\AppData\\Local\\Temp\\g3-a-shell-rN98kU\\browser-attempt-1792594304272.json",
+      "relative": "browser-attempt-1792594304272.json",
+      "bytes": 1604429,
+      "sha256": "addd0c7f089a54d1aed60e604451fa01da5dd5d68dae38d2d3d812299072c05a"
+    }
+  ],
+  "historicalAttemptNotes": [
+    "Stale CDP script ID from pre-reload was corrected in the runner.",
+    "Native key input was corrected to include Enter/Space character text.",
+    "The runner now accepts the legitimate scheduled original Playback state after a PA.",
+    "PA feedback was scoped to its public PA identity before final acceptance.",
+    "Favicon 404 is retained as non-blocking network noise."
+  ],
+  "g3bFeasibleScope": "The stable matchPresentationHost can host a read-only Phaser view driven by existing public snapshot/timeline IDs. It may replace neutral scenery and show published events. It may not own input submission, gameplay advancement, physics, reveal cursors, Save or settlement. No real pitch trajectories until a lawful public coordinate contract exists. Metadata names remain a separate authorization gap.",
+  "stop": "No G3-B or Phaser work started."
+}

@@ -1,0 +1,14 @@
+{
+  "task": "Match Moment Snapshot Integrity Repair v0.1 — Bounded Production Fix",
+  "createdAt": "2026-10-15T08:08:26.797Z",
+  "command": "git diff --stat",
+  "scope": "Unrestricted tracked worktree",
+  "protectedPathAffected": "tests/fast-check-smoke-test.cjs",
+  "output": "10 added lines statistic; no source text emitted",
+  "metadataOnlyBoundaryDeviation": true,
+  "protectedContentNotReadByOwnHashLoop": true,
+  "gitInternallyComputedDiff": true,
+  "protectedContentHashProof": false,
+  "protectedFileExecutedOrModified": false,
+  "correction": "Record exception explicitly; do not claim whole-session metadata-only access. No more unrestricted diff commands."
+}

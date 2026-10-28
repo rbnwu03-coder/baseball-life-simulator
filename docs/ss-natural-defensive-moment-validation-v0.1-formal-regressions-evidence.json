@@ -1,0 +1,31 @@
+{
+  "task": "SS Natural Defensive Moment Validation v0.1",
+  "createdAt": "2026-10-15T08:22:46.625Z",
+  "rows": [
+    {
+      "file": "tests/ss-defensive-production-integration-test.js",
+      "status": "PASS",
+      "exit": 0,
+      "elapsedMs": 3479.0138,
+      "entryVerified": true,
+      "sourceStable": true,
+      "successfulAssertions": 649,
+      "evidence": "docs/test-infrastructure-sprint-0.1-ss-natural-defensive-moment-validation-v0.1-ss-regression-evidence.json",
+      "stdoutSummary": "cores\":{\"home\":1,\"away\":1},\"gameRecordRunDelta\":{\"home\":0,\"away\":0},\"defense\":{\"chances\":1,\"PO\":0,\"A\":1,\"E\":0,\"DP\":0},\"evidenceRecords\":5,\"momentRunsAllowed\":0,\"eventRunsAllowed\":0,\"resolutionRunsAllowed\":0,\"scoringRunnerIds\":[],\"attemptedScorer\":{\"runnerId\":\"hs-y3-final-regional-opponent-player-04\",\"from\":3,\"to\":\"halfInningEnd\",\"targetBase\":\"home\",\"isForced\":true,\"movementRequired\":true,\"committed\":true,\"retired\":false,\"safe\":true,\"scored\":false,\"forceReason\":\"precedingForcedRunnerRequiresOccupiedBase\"},\"pendingColdReloadValidated\":false,\"saveReloadEquivalent\":true,\"duplicateSubmissionNoMutation\":true}\nPASS public production handler: force third out cancels attempted run\n{\"suite\":\"ss-defensive-production-integration\",\"passed\":26,\"failed\":0,\"evidenceOrigin\":\"EXPLICIT_PRODUCTION_FIXTURES\"}\n"
+    },
+    {
+      "file": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+      "status": "PASS",
+      "exit": 0,
+      "elapsedMs": 2176.3698,
+      "entryVerified": true,
+      "sourceStable": true,
+      "successfulAssertions": 60,
+      "evidence": "docs/test-infrastructure-sprint-0.1-ss-natural-defensive-moment-validation-v0.1-ground-regression-evidence.json",
+      "stdoutSummary": "er settlement cannot duplicate record\nPASS recovered game resumes and completes\nPASS reject stale situation before mutation\nPASS reject stale inning before mutation\nPASS reject stale half before mutation\nPASS reject stale batter before mutation\nPASS reject stale bases before mutation\nPASS reject stale score before mutation\nPASS reject stale physical identity before mutation\nPASS player-home also completes unchanged seed\nPASS completed home and away matches leave no active orphan\nPASS only current ground-ball handoffs create execution boundaries\nPASS manual resolved state is a legal pre-apply boundary\nPASS manual reload playback delivers canonical apply and remains idempotent\nPASS same seed deterministic full outcome\nPASS instrumentation does not alter settlement or final result\n26/26 PASS\n"
+    }
+  ],
+  "notNaturalProof": true,
+  "unchangedFormalTests": true,
+  "canonicalKnownZeroRuns": 0
+}

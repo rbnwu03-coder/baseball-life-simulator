@@ -1,0 +1,196 @@
+{
+  "suiteName": "contextual-status-panel",
+  "file": "tests/contextual-status-panel-test.js",
+  "entryMode": "standalone",
+  "actualCommand": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+    "E:\\meng\\baseball_life_sim_semirefactor\\tests\\contextual-status-panel-test.js"
+  ],
+  "cwd": "E:\\meng\\baseball_life_sim_semirefactor",
+  "runnerNodeVersion": "v24.19.0",
+  "nodeVersion": "v24.19.0",
+  "startedAt": "2026-10-14T10:58:29.905Z",
+  "elapsedMs": 132.6788,
+  "exitCode": 0,
+  "signal": null,
+  "spawnError": null,
+  "policy": {
+    "timeoutMs": 120000,
+    "outputMaxBuffer": 16000000,
+    "implicitGitShowMaxBuffer": 30000000,
+    "gitCompatibility": true
+  },
+  "environment": {
+    "NODE_OPTIONS": null,
+    "NODE_PATH": null,
+    "TZ": null,
+    "ENTRY_SAFE_CONFIG": {
+      "nonce": "3cd5df7acf5769d5eb9e0fda2a43cde3",
+      "target": "E:\\meng\\baseball_life_sim_semirefactor\\tests\\contextual-status-panel-test.js",
+      "entryMode": "standalone",
+      "gitCompatibility": true,
+      "customAssertion": {
+        "sourceSha256": "8620a757e01c720106027dc1dfc81e97000be8c81052a85359d4798d2974680a",
+        "functionName": "verify",
+        "expectedCount": 40,
+        "functionFragment": "function verify(title, condition) {\n  if (!condition) throw new Error(title);\n  passed += 1;\n  console.log(`✓ ${title}`);\n}\n"
+      },
+      "assertionRoots": [
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests"
+      ]
+    }
+  },
+  "assertionEvidence": {
+    "version": 1,
+    "nonce": "3cd5df7acf5769d5eb9e0fda2a43cde3",
+    "entryMode": "standalone",
+    "target": "E:\\meng\\baseball_life_sim_semirefactor\\tests\\contextual-status-panel-test.js",
+    "nodeVersion": "v24.19.0",
+    "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+    "entryStarted": true,
+    "exportCompleted": false,
+    "summary": null,
+    "unhandledError": null,
+    "assertions": {
+      "attempted": 0,
+      "passed": 0,
+      "thrown": 0,
+      "unsupportedAsync": 0,
+      "methods": {},
+      "samples": []
+    },
+    "customAssertion": {
+      "sourceHash": "8620a757e01c720106027dc1dfc81e97000be8c81052a85359d4798d2974680a",
+      "reviewedSourceMatches": true,
+      "functionName": "verify",
+      "expectedCount": 40,
+      "count": 40,
+      "ranges": [
+        {
+          "startOffset": 786,
+          "endOffset": 909,
+          "count": 40
+        },
+        {
+          "startOffset": 840,
+          "endOffset": 863,
+          "count": 0
+        }
+      ],
+      "error": null
+    },
+    "gitCompatibility": {
+      "enabled": true,
+      "calls": [
+        {
+          "command": "git",
+          "args": [
+            "show",
+            "HEAD:script.js"
+          ],
+          "policy": "implicit git show only",
+          "maxBuffer": 30000000
+        }
+      ]
+    },
+    "exitCode": 0,
+    "mainFilename": "E:\\meng\\baseball_life_sim_semirefactor\\tests\\contextual-status-panel-test.js",
+    "standaloneMainMatches": true
+  },
+  "witnessParseError": null,
+  "witnessPath": "docs/test-infrastructure-sprint-0.1-contextual-status-panel-accepted-evidence-assertions.json",
+  "stdout": "✓ 1. Status Panel 有單一 Current Summary 根區塊\n✓ 2. Current Summary 位於詳細資料之前\n✓ 3. 有有效目標時顯示目標\n✓ 4. 無有效目標時不顯示空目標區\n✓ 5. 顯示既有人生階段或身份資料\n✓ 6. 身體狀態只使用既有 Player 欄位\n✓ 7. 摘要不重新執行 Goal、Evaluation 或 Competition 計算\n✓ 8. 摘要 Helper 不修改 Player\n✓ 9. 能力與技能為獨立區塊\n✓ 10. 人物關係為獨立區塊\n✓ 11. 成長與身份為獨立區塊\n✓ 12. 章節評估為獨立區塊契約\n✓ 13. 生涯與市場為獨立區塊契約\n✓ 14. 無資料區塊不渲染\n✓ 15. 未登場人物不提前顯示\n✓ 16. 少棒前期不顯示成年市場空值\n✓ 17. 詳細區塊使用可鍵盤操作的原生 details/summary\n✓ 18. 收合不呼叫 updateStatus\n✓ 19. 收合不修改 Player\n✓ 20. 收合不寫入 Save\n✓ 21. 收合狀態不寫入 localStorage\n✓ 22. 收合後 Gameplay 更新仍投影最新值\n✓ 23. 下一次完整狀態重建不產生錯誤\n✓ 24. Debug 資料不混入正式 Current Summary\n✓ 25. Debug 關閉時不顯示測試資訊\n✓ 26. Debug 開啟時只顯示既有測試資料\n✓ 27. Debug DOM 狀態不修改 Gameplay Schema\n✓ 28. updateStatus() 呼叫次數不增加\n✓ 29. showStory() 呼叫次數不增加\n✓ 30. Status Panel 未新增專用 Player Schema\n✓ 31. Status Panel 收合狀態不進入 Save Schema\n✓ 32. 既有 Competition 摘要仍由 Presentation 提供\n✓ 33. Outcome Hierarchy 保持原有資料與順序\n✓ 34. Scene Context 保持純 Presentation\n✓ 35. 選項鎖定契約不變\n✓ 36. 桌面狀態欄不改變主故事欄寬\n✓ 37. 390px 狀態內容可自然換行\n✓ 38. 390px 不使用固定寬度或水平捲動\n✓ 39. Summary 操作區在手機可完整點擊\n✓ 40. 收合內容不使用固定高度裁切\n\nUX Sprint 3.4 Contextual Status Panel：40/40 通過\n",
+  "stderr": "",
+  "gitBaseline": {
+    "branch": "main",
+    "head": "ab3117653945de0b7013636187c446276a96e634",
+    "main": "ab3117653945de0b7013636187c446276a96e634",
+    "originMain": "ab3117653945de0b7013636187c446276a96e634",
+    "index": ""
+  },
+  "relevantSourceHashesBefore": {
+    "tests/contextual-status-panel-test.js": "8620a757e01c720106027dc1dfc81e97000be8c81052a85359d4798d2974680a",
+    "./batted-ball-physical.js": "4c0847af7b085c6da68223e47114164af417567dbc9d65644ec51fc7427cfec8",
+    "./defensive-decision-throw-foundation.js": "1a8a65ee11a98ace76f2b0b807bf3227df789514abdbefdf2decf2de378e831e",
+    "./defensive-opportunity-foundation.js": "834395d3f829e27cce798fd859c11f8fee2ed0e9586b8015d5554108aa773a32",
+    "./defensive-reach-secure-foundation.js": "c5a51a82adf4900dd46f0788ba458dfadded82ea93daa8ca2f30ca92e8f01365",
+    "./force-advancement.js": "d588865c2e234799d5e60a12230df5b0caa9903c07635255d60008fa4aae0e13",
+    "./offensive-bunt-defensive-handoff.js": "ef5508e81fbe01a099878a50f4053d3c9e051493c2f205bcab9895d9a97a0a49",
+    "./team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+    "ai-plate-appearance-outcome.js": "77d65f8807f956f798e78e12515bebc2191a1ff4bdbe77a71c1ca618102e2ba0",
+    "batted-ball-physical.js": "4c0847af7b085c6da68223e47114164af417567dbc9d65644ec51fc7427cfec8",
+    "coach-evaluation-boundary.js": "6307ebb6d5933771e2c2659ae1f6ab65efa83b8831406671415d0f955e8f9515",
+    "coach-response-flow.js": "85275abbae5575128cbc2b6b368c94f07b6fc7a854e0b52732630304295940a1",
+    "coach.js": "79ecda72276276d44ec384d2c96b2f8f5a16c8e5fb43dd2f48c3752353595266",
+    "competition-presentation.js": "b89a018f22f09405ca64e61e718d83d7218d86497072b21720abd99fee5c6b22",
+    "current-state-boundary.js": "6d844918eb30c886828d57a564b75d0e309b69903e2f34b5365bedffd49e0d51",
+    "day-completion-flow.js": "6dfc90d43442d036767bdeb13a708f52e80fd5953e556443223dfc74c72af7b5",
+    "decision-flow.js": "15694c948a621b55747533586d552f56513b79d4989951cf3da1d41b56cae9b2",
+    "defensive-runner-throw-settlement-foundation.js": "4c54b171252c3a93df15304d5a7520335877a4a621b0cba8268354ed4563d136",
+    "evaluation-registry-bootstrap.js": "b81fabb242f9faf7d53d1036b25da87fd5cf1aad104994f8f3b35bfd9f87e925",
+    "evaluation-registry.js": "1f6340b2caa4b1127974e35096b515744f14aad9ddbfddcafa21d01bd006c3b8",
+    "force-advancement.js": "d588865c2e234799d5e60a12230df5b0caa9903c07635255d60008fa4aae0e13",
+    "narrative-condition-boundary.js": "ea752ee1d64fb1cb33e5c3e1fb12b08c4b0049fdf4e6ad8aeae932e20c127c39",
+    "narrative-condition-flow.js": "f2a3e4d71a7c6d7d7b620518c48e24c6ca51144128042f2f2da848d22db9f5f7",
+    "npc.js": "d9faa55802e60437e5c51c58ab75cb4a29f854147ded1af9bd39f5c7e35c11bb",
+    "player.js": "3414f5a93429bc1a4adbe3c632485e70b5d9175822261b689543a77fa0eb38bd",
+    "relationship-boundary.js": "649a886534e59c8ea162b4a6dfb56286638c796edec002f8d263e978b4eaa3a8",
+    "relationship-flow.js": "4166c0ee10f7f5640cba63c91c156e35167a2338aaa5c302b6eb9a4c03adabf8",
+    "rival.js": "2087cffea9ea5e8f2049ea7399356d2293dc38d38328d265de474b6a9304c0ca",
+    "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+    "script.js": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+    "story.js": "c1885f6e0d62e8d0c328eeb3215dde20c6ee25017fdb41ac65c05c2d12b74819",
+    "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+    "time-boundary.js": "d356c8997152f85b490ed5dfaee5882032d3f0d702e10886c067e0a554658b33",
+    "tests/entry-safe-runner.cjs": "91659f28bc718eb21569be4a64bfce61a6518b5867a5ca629e5484e15a54a6d0",
+    "tests/entry-safe-preload.cjs": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "relevantSourceHashesAfter": {
+    "tests/contextual-status-panel-test.js": "8620a757e01c720106027dc1dfc81e97000be8c81052a85359d4798d2974680a",
+    "./batted-ball-physical.js": "4c0847af7b085c6da68223e47114164af417567dbc9d65644ec51fc7427cfec8",
+    "./defensive-decision-throw-foundation.js": "1a8a65ee11a98ace76f2b0b807bf3227df789514abdbefdf2decf2de378e831e",
+    "./defensive-opportunity-foundation.js": "834395d3f829e27cce798fd859c11f8fee2ed0e9586b8015d5554108aa773a32",
+    "./defensive-reach-secure-foundation.js": "c5a51a82adf4900dd46f0788ba458dfadded82ea93daa8ca2f30ca92e8f01365",
+    "./force-advancement.js": "d588865c2e234799d5e60a12230df5b0caa9903c07635255d60008fa4aae0e13",
+    "./offensive-bunt-defensive-handoff.js": "ef5508e81fbe01a099878a50f4053d3c9e051493c2f205bcab9895d9a97a0a49",
+    "./team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+    "ai-plate-appearance-outcome.js": "77d65f8807f956f798e78e12515bebc2191a1ff4bdbe77a71c1ca618102e2ba0",
+    "batted-ball-physical.js": "4c0847af7b085c6da68223e47114164af417567dbc9d65644ec51fc7427cfec8",
+    "coach-evaluation-boundary.js": "6307ebb6d5933771e2c2659ae1f6ab65efa83b8831406671415d0f955e8f9515",
+    "coach-response-flow.js": "85275abbae5575128cbc2b6b368c94f07b6fc7a854e0b52732630304295940a1",
+    "coach.js": "79ecda72276276d44ec384d2c96b2f8f5a16c8e5fb43dd2f48c3752353595266",
+    "competition-presentation.js": "b89a018f22f09405ca64e61e718d83d7218d86497072b21720abd99fee5c6b22",
+    "current-state-boundary.js": "6d844918eb30c886828d57a564b75d0e309b69903e2f34b5365bedffd49e0d51",
+    "day-completion-flow.js": "6dfc90d43442d036767bdeb13a708f52e80fd5953e556443223dfc74c72af7b5",
+    "decision-flow.js": "15694c948a621b55747533586d552f56513b79d4989951cf3da1d41b56cae9b2",
+    "defensive-runner-throw-settlement-foundation.js": "4c54b171252c3a93df15304d5a7520335877a4a621b0cba8268354ed4563d136",
+    "evaluation-registry-bootstrap.js": "b81fabb242f9faf7d53d1036b25da87fd5cf1aad104994f8f3b35bfd9f87e925",
+    "evaluation-registry.js": "1f6340b2caa4b1127974e35096b515744f14aad9ddbfddcafa21d01bd006c3b8",
+    "force-advancement.js": "d588865c2e234799d5e60a12230df5b0caa9903c07635255d60008fa4aae0e13",
+    "narrative-condition-boundary.js": "ea752ee1d64fb1cb33e5c3e1fb12b08c4b0049fdf4e6ad8aeae932e20c127c39",
+    "narrative-condition-flow.js": "f2a3e4d71a7c6d7d7b620518c48e24c6ca51144128042f2f2da848d22db9f5f7",
+    "npc.js": "d9faa55802e60437e5c51c58ab75cb4a29f854147ded1af9bd39f5c7e35c11bb",
+    "player.js": "3414f5a93429bc1a4adbe3c632485e70b5d9175822261b689543a77fa0eb38bd",
+    "relationship-boundary.js": "649a886534e59c8ea162b4a6dfb56286638c796edec002f8d263e978b4eaa3a8",
+    "relationship-flow.js": "4166c0ee10f7f5640cba63c91c156e35167a2338aaa5c302b6eb9a4c03adabf8",
+    "rival.js": "2087cffea9ea5e8f2049ea7399356d2293dc38d38328d265de474b6a9304c0ca",
+    "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+    "script.js": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+    "story.js": "c1885f6e0d62e8d0c328eeb3215dde20c6ee25017fdb41ac65c05c2d12b74819",
+    "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+    "time-boundary.js": "d356c8997152f85b490ed5dfaee5882032d3f0d702e10886c067e0a554658b33",
+    "tests/entry-safe-runner.cjs": "91659f28bc718eb21569be4a64bfce61a6518b5867a5ca629e5484e15a54a6d0",
+    "tests/entry-safe-preload.cjs": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "sourceStable": true,
+  "status": "PASS",
+  "reason": "Verified entry completed with observed successful assertions",
+  "entryVerified": true,
+  "successfulAssertions": 0,
+  "customCheckerInvocations": 40
+}

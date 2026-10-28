@@ -1,0 +1,51 @@
+{
+  "task": "Critical Regression Repair A — Opportunity-two Manifest Correction",
+  "createdAt": "2026-10-15T01:53:02.809Z",
+  "rows": [
+    {
+      "omitted": "defensive-opportunity-foundation.js",
+      "file": "docs/critical-regression-repair-a-opportunity-two-missing-owner-1-isolated.cjs",
+      "originalRepairedSha256": "7c67d25fcd60ac784fe01884e55a2be0a8886131178731fbde75eae19f074005",
+      "isolatedSha256": "3a62a8171d38384e6dae472e45dc8858f3ab2a7dbad983cf22c3271a962c7678",
+      "removal": {
+        "literal": "\"defensive-opportunity-foundation.js\", ",
+        "offset": 1108
+      },
+      "observation": "console.log(\"MISSING_OWNER_WITNESS \"+JSON.stringify({omitted:\"defensive-opportunity-foundation.js\",globals:vm.runInContext(\"({DefensiveOpportunityFoundation:typeof DefensiveOpportunityFoundation,DefensiveReachSecureFoundation:typeof DefensiveReachSecureFoundation,DefensiveDecisionThrowFoundation:typeof DefensiveDecisionThrowFoundation})\",context)}));\n",
+      "allOtherOriginalSourceBytesUnchanged": true,
+      "actualOwnersOnly": true
+    },
+    {
+      "omitted": "defensive-reach-secure-foundation.js",
+      "file": "docs/critical-regression-repair-a-opportunity-two-missing-owner-2-isolated.cjs",
+      "originalRepairedSha256": "7c67d25fcd60ac784fe01884e55a2be0a8886131178731fbde75eae19f074005",
+      "isolatedSha256": "8f3d048a8d599b454aa223a72c73980945a512eb1bce33509b4046190d7da0a9",
+      "removal": {
+        "literal": "\"defensive-reach-secure-foundation.js\", ",
+        "offset": 1147
+      },
+      "observation": "console.log(\"MISSING_OWNER_WITNESS \"+JSON.stringify({omitted:\"defensive-reach-secure-foundation.js\",globals:vm.runInContext(\"({DefensiveOpportunityFoundation:typeof DefensiveOpportunityFoundation,DefensiveReachSecureFoundation:typeof DefensiveReachSecureFoundation,DefensiveDecisionThrowFoundation:typeof DefensiveDecisionThrowFoundation})\",context)}));\n",
+      "allOtherOriginalSourceBytesUnchanged": true,
+      "actualOwnersOnly": true
+    },
+    {
+      "omitted": "defensive-decision-throw-foundation.js",
+      "file": "docs/critical-regression-repair-a-opportunity-two-missing-owner-3-isolated.cjs",
+      "originalRepairedSha256": "7c67d25fcd60ac784fe01884e55a2be0a8886131178731fbde75eae19f074005",
+      "isolatedSha256": "0002c2129c32731ec09fecd6293bf872f1f165a25556d565c99b4ac708679775",
+      "removal": {
+        "literal": "\"defensive-decision-throw-foundation.js\", ",
+        "offset": 1413
+      },
+      "observation": "console.log(\"MISSING_OWNER_WITNESS \"+JSON.stringify({omitted:\"defensive-decision-throw-foundation.js\",globals:vm.runInContext(\"({DefensiveOpportunityFoundation:typeof DefensiveOpportunityFoundation,DefensiveReachSecureFoundation:typeof DefensiveReachSecureFoundation,DefensiveDecisionThrowFoundation:typeof DefensiveDecisionThrowFoundation})\",context)}));\n",
+      "allOtherOriginalSourceBytesUnchanged": true,
+      "actualOwnersOnly": true
+    }
+  ],
+  "requiredOwners": [
+    "defensive-opportunity-foundation.js",
+    "defensive-reach-secure-foundation.js",
+    "defensive-decision-throw-foundation.js"
+  ],
+  "policy": "Each standalone original-suite copy omits exactly one real module; original fixtures/seeds/40 assertions remain. Expected runtime failure must be observed, never reclassified as a suite PASS."
+}

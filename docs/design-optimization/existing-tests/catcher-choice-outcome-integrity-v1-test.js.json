@@ -1,0 +1,19 @@
+{
+  "file": "catcher-choice-outcome-integrity-v1-test.js",
+  "status": "PASS",
+  "entryVerified": true,
+  "observedAssertions": 20,
+  "elapsedMs": 85,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/catcher-choice-outcome-integrity-v1-test.js"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "timedOut": false,
+  "stdout": "✓ 1. 每個 player-visible 捕手選項都有唯一 canonical intent\n✓ 2. 無跑者時只顯示控制／重設 route，不顯示抓跑者 route\n✓ 3. 有跑者時不提供悠閒 secureAndReset\n✓ 4. 接穩交回投手保留 selectedRoute 與 finalRoute\n✓ 5. secureAndReset execution 真的回傳投手且不傳壘\n✓ 6. secureAndReset outcome 不產生 phantom runner／base throw\n✓ 7. holdRunner route 不傳球、不虛構出局且跑者守恆\n✓ 8. attemptRunnerOut 才會實際傳向壘包並解算 timing\n✓ 9. aggressive route 才允許出現 runner out／趁傳類 consequence\n✓ 10. secure intent 發生 late runner break 時建立 explicit reassessment\n✓ 11. reassessment presentation 說明原 intent 與局勢改變\n✓ 12. 無 explicit trigger 時不得 silent route rewrite\n✓ 13. 捕手 attribution 沿用 responsibleActor／cause contract\n✓ 14. 捕手處理不把 blocked pitch 虛構成打者完成打席\n✓ 15. save/reload 深層保留 selected／final route 與 stages\n✓ 16. reassessment state save/reload 後不退回另一 generic route\n✓ 17. 同 seed／同 choice selected route 與 outcome deterministic\n✓ 18. 捕手修正沒有消耗 match simulation RNG cursor\n✓ 19. Match Experience 支援邊界仍只有 2B defense 與 batter\n✓ 20. 捕手 decision 不直接寫入永久 skill growth\n\nCatcher Choice Outcome Integrity v1：20/20 通過\n",
+  "stderr": ""
+}

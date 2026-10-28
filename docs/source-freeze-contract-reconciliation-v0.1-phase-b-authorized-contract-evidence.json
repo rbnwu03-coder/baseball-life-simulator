@@ -1,0 +1,71 @@
+{
+  "phase": "Source Freeze Contract Reconciliation v0.1 Phase B",
+  "createdAt": "2026-10-14T15:01:10.399Z",
+  "manualAuthorization": "Current user Phase B instruction: five Save and two Index comparison branches, new checker, negative tests and explicit entry only; no Production edits",
+  "saveContract": "receiver-source-save-owner-delta-v1",
+  "indexContract": "receiver-source-index-wiring-delta-v1",
+  "saveCanonicalRef": "a0e512b439446990d8df118e3e7d737b9f2f51d3",
+  "originalIndexAnchor": "    <script src=\"batted-ball-tag-up-execution.js\"></script>\n    <script src=\"match-situation-lifecycle.js\"></script>\n",
+  "authorizedIndexAnchor": "    <script src=\"batted-ball-tag-up-execution.js\"></script>\n    <script src=\"receiver-source-snapshot.js\"></script>\n    <script src=\"match-situation-lifecycle.js\"></script>\n",
+  "indexOriginalNormalizedSha256": "01a1267379d1732437452e44f1eb49ac49a3a9565ee9f3dda820b906c498d71b",
+  "adapterReviewedNormalizedSha256": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274",
+  "saveBranch": "else if (file === 'save.js') require('./receiver-source-save-authorized-delta.cjs').assertReceiverSourceSaveAuthorizedDelta(current, baseline, fs.readFileSync(path.join(root, 'receiver-source-snapshot.js'), 'utf8'));",
+  "indexBranch": "else if (file === 'index.html') require('./receiver-source-index-authorized-wiring.cjs').assertReceiverSourceIndexAuthorizedWiring(current, baseline, fs.readFileSync(path.join(root, 'receiver-source-snapshot.js'), 'utf8'));",
+  "callerSpecs": [
+    {
+      "file": "tests/pitch-tactical-decision-production-integration-test.js",
+      "guard": 8,
+      "callerOriginalRef": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+      "beforeSha256": "ee6c443aad8093e3f3d14802779eda6a05b50297638ee32657febc1040c0de82",
+      "branches": 1,
+      "expectedAfterSha256": "a2de3df778b64378341c77d5da748df0bb1beb0c68e93ea207bb21a4ecad4144"
+    },
+    {
+      "file": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "guard": 8,
+      "callerOriginalRef": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+      "beforeSha256": "1d295143fb833ad30ea58469eb2bfe8c3e6fd3451f5fb29434c15fdd3b2ecbcb",
+      "branches": 1,
+      "expectedAfterSha256": "cf7a42c337f25e3220aee5045e3fb0ee7f2e39d693856892511a99b916c7b351"
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "guard": 8,
+      "callerOriginalRef": "9b9546f94a7286afef474be634fd93c57eb455db",
+      "beforeSha256": "09325b921c7b2b161f7177d9bbad74fb2c5504a33cab0c11e6bd7a8f69e18265",
+      "branches": 1,
+      "expectedAfterSha256": "cb3e98cef62b3ff0c79b26f6f285d666629c9a2984a0ab1ca44a6e2fe6c84bb5"
+    },
+    {
+      "file": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "guard": 10,
+      "callerOriginalRef": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "beforeSha256": "c72b5293de3c28578e2bf994aeb89e3fb42c378bf44121c6362c0a24e47042a4",
+      "branches": 2,
+      "expectedAfterSha256": "2ab2fb3f2af4a00a9e78f1b1e9ff79e347cde0fde05ed85d8d3b9454f37a84fc"
+    },
+    {
+      "file": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "guard": 14,
+      "callerOriginalRef": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "beforeSha256": "f6c7820aedf67a91d2cefb88a2eef09ac5ff06b399496369f8076ec370dcc4f9",
+      "branches": 2,
+      "expectedAfterSha256": "439bc96bb14b7fdc39df0eff4788798afafb72e08515363bd48b88330327d7d7"
+    }
+  ],
+  "negativeGates": {
+    "saveV1": {
+      "total": 23,
+      "passed": 23,
+      "failed": 0
+    },
+    "indexAndCallers": {
+      "total": 80,
+      "passed": 80,
+      "failed": 0
+    }
+  },
+  "ordinaryMetadataGuardPreserved": true,
+  "registryApproach": "Explicit five standalone API specs; existing registry and runner files unchanged",
+  "otherSourceGuardsBehaviorFixturesSeedsPinsPreserved": true
+}

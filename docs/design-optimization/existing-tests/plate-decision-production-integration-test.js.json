@@ -1,0 +1,19 @@
+{
+  "file": "plate-decision-production-integration-test.js",
+  "status": "PASS",
+  "entryVerified": true,
+  "observedAssertions": 15,
+  "elapsedMs": 121,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/plate-decision-production-integration-test.js"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "timedOut": false,
+  "stdout": "✓ 1. Production PA-level approach 下接 canonical plateDecision Situation\n✓ 2. Production 只呈現 Take／Contact Swing／Power Swing 三條逐球 route\n✓ 3. Pitch truth 具 identity、type、velocity、location、zone、movement、pitcher、PA、count\n✓ 4. UI 只顯示 perceived context，不洩漏 pitch type、mph 或 raw identity\n✓ 5. Decision 前 situation 不含 whiff/contact/ball/strike outcome\n✓ 6. Save/reload before decision 保留同一 actual pitch、tactical call、perception 與 situation identity\n✓ 7. Take ball 只更新一次 count，未提前完成 PA\n✓ 8. 未終止 PA 會建立下一顆不同 identity，上一球不 reroll\n✓ 9. Production Contact Swing 成功交給既有 BBP authority\n✓ 10. Ball four 由逐球 count 終止並交既有 PA settlement\n✓ 11. PA settlement idempotent，不 double walk／PA／打序\n✓ 12. Production Power Swing miss 在兩好球形成 strikeout\n✓ 13. 非玩家 PA 維持既有 simulation，未被 plateDecision 攔截\n✓ 14. Production pitch feedback 同步至 match-local history 並跨 reload 餵入下一球\n✓ 15. Runtime load order 先建立 Sequencing／Tactical／OPA，再於 lifecycle 後載入 Plate Decision\nPlate Decision Production Integration tests: 15/15 passed\n",
+  "stderr": ""
+}

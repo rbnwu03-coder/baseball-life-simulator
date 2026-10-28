@@ -1,0 +1,118 @@
+{
+  "task": "Critical Regression Triage v0.1",
+  "createdAt": "2026-10-15T01:41:28.781Z",
+  "classifications": {
+    "A": "CONFIRMED TEST INFRASTRUCTURE",
+    "B": "CONFIRMED CONTRACT DEFECT",
+    "C": "STATISTICAL ASSUMPTION RISK"
+  },
+  "originalVerdicts": {
+    "opportunity": "FAIL",
+    "match": "FAIL",
+    "gradient": "FAIL"
+  },
+  "A": {
+    "missingOwners": [
+      "defensive-opportunity-foundation.js",
+      "defensive-reach-secure-foundation.js",
+      "defensive-decision-throw-foundation.js"
+    ],
+    "singleModuleInsufficient": true,
+    "isolatedThreeOwnerChecks": 40,
+    "isolatedStatus": "PASS",
+    "officialRemains": "FAIL",
+    "productionRepairNeeded": false
+  },
+  "B": {
+    "fixtureFailureMechanism": "Forced recurring deepGrounder in legacy VM at fieldingWindow=-0.7; no legal sample can satisfy fieldControlled>=2.8",
+    "originalFalseOperands": [
+      "completed",
+      "finalMomentIdPresent",
+      "safetyBelow1400"
+    ],
+    "defenseCountParity": [
+      4,
+      4
+    ],
+    "originalSafety": 1401,
+    "formalModuleDiagnostic": {
+      "completed": true,
+      "safety": 101,
+      "playerInLineup": false,
+      "playerInBench": true,
+      "originalAssertionPass": false
+    },
+    "fixedMomentContractObsoleteNotProven": true,
+    "canonicalFixturePatchNotValidated": true
+  },
+  "C": {
+    "low": {
+      "games": 20,
+      "H0": 15,
+      "H1": 5,
+      "H2": 0,
+      "PA": 81,
+      "AB": 74,
+      "H": 5
+    },
+    "high": {
+      "games": 20,
+      "H0": 10,
+      "H1": 8,
+      "H2": 2,
+      "PA": 80,
+      "AB": 79,
+      "H": 12
+    },
+    "lowMultiHitFraction": 0,
+    "highHitlessFraction": 0.5,
+    "originalHighAssertionReached": false,
+    "sharedFirstPAIdentityAcrossAll40": true,
+    "lastDetailedPAsAll40Strikeouts": true,
+    "lastPAActualActions": {
+      "take": 155
+    },
+    "all40FullRecordAndEventLogHashesRepeat": true,
+    "requiresSeparateStatisticalContractReview": true,
+    "productionProbabilityDefectNotProven": true
+  },
+  "minimalProposals": [
+    {
+      "problem": "A",
+      "files": [
+        "tests/high-school-year-one-opportunity-two-integration-test.js"
+      ],
+      "change": "Add exactly three actual prerequisite owners in dependency order",
+      "authorizationRequired": true,
+      "productionDeltaExpected": 0,
+      "completion": "Original standalone 40/40 plus approved SS/lifecycle targeted regressions and integrity"
+    },
+    {
+      "problem": "B",
+      "files": [
+        "tests/baseball-match-foundation-2-2-2-test.js",
+        "optional new dedicated full-match context helper"
+      ],
+      "change": "Review canonical entry/assignment and current browser-module context for __finish2222 only, preserving original synthetic checks and boolean conditions",
+      "authorizationRequired": true,
+      "productionDeltaExpected": 0,
+      "completion": "All original 38 checks reached and passed with unchanged seeds, capabilities, decisions, moment IDs, count and safety conditions"
+    },
+    {
+      "problem": "C",
+      "files": [
+        "tests/ability-performance-gradient-test.js",
+        "tests/ability-performance-correlation-audit.cjs only if required by separately approved measurement contract"
+      ],
+      "change": "Review statistical tail-event contract, decision policy and identity-related dependence before any implementation",
+      "authorizationRequired": true,
+      "productionDeltaExpected": 0,
+      "completion": "Preapproved measurement protocol with retained original failure evidence, deterministic neutrality and independently reviewable statistical tail support"
+    }
+  ],
+  "repairReadiness": "LIMITED YES FOR REVIEW; no automatic implementation; B/C contract authorization pending",
+  "receiverV2": "DISABLED",
+  "L03": "PARTIAL",
+  "readyForCommit": "NO",
+  "readyForSprint10B": "NO"
+}

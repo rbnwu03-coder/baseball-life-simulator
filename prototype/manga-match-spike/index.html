@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>棒球人生 · Manga Match Spike · SS 6-3</title>
+  <link rel="stylesheet" href="../match-ui-p1/style.css">
+  <script defer src="../match-ui-p1/fixture.js"></script>
+  <script defer src="../match-ui-p1/presentation-v02.generated.js"></script>
+  <script defer src="../match-ui-p1/presentation.js"></script>
+  <script defer src="../match-ui-p1/app.js"></script>
+  <link rel="stylesheet" href="./manga.css">
+  <script defer src="./manga.js"></script>
+</head>
+<body class="manga-spike">
+  <a class="skip-link" href="#screen-heading">跳至目前事件</a>
+  <div class="demo-banner">OFFLINE DEMO — NOT CONNECTED TO MATCH SIMULATION</div>
+  <nav class="spike-comparison" aria-label="版本比較"><span>漫畫版 · 同一球</span><a href="../match-ui-p1/index.html" target="_blank" rel="noopener">另開 UI-P2.3 基準版 ↗</a></nav>
+  <main id="demo" class="paper manga-page" aria-busy="true">
+    <header class="masthead">
+      <div><p class="eyebrow">BASEBALL LIFE / MATCH ROOM</p><h1>棒球人生<span>每一球，都是一次選擇。</span></h1></div>
+      <div class="edition"><span>MANGA</span><span>SS 6-3 · SPIKE 01</span></div>
+    </header>
+    <nav class="phase-track" aria-label="示範進度">
+      <span id="phase-decision">01 <b>判斷</b></span><i aria-hidden="true"></i>
+      <span id="phase-playback">02 <b>經過</b></span><i aria-hidden="true"></i>
+      <span id="phase-resolution">03 <b>結果</b></span>
+    </nav>
+    <div class="display-tools"><button id="toggle-text-mode" type="button" aria-pressed="false">使用文字模式</button><span id="display-mode-note">球場演出</span><details class="play-help"><summary>操作說明</summary><p>金色外環標示你的守備員；藍色是守方，暖橘色是攻方。角色也以所在位置、路線和動作辨識。</p><p>以 Tab 移動焦點，Enter 或空白鍵操作。選項焦點可預覽戰術意圖；虛線只表示意圖。播放時可暫停或逐段閱讀；本球結果等待確認。</p></details></div>
+    <section id="match-overview" class="match-overview" aria-label="當前比賽" hidden>
+      <div class="inning-block"><p class="eyebrow">CURRENT MOMENT</p><strong id="inning-label"></strong><span id="position-label"></span></div>
+      <div class="team-score"><span>主隊</span><strong id="home-score"></strong></div>
+      <span class="score-divider" aria-hidden="true">:</span>
+      <div class="team-score"><span>客隊</span><strong id="away-score"></strong></div>
+      <div class="outs-block"><strong id="outs-label"></strong><div class="out-dots" aria-hidden="true"><i></i><i></i><i></i></div><span id="bases-label"></span></div>
+    </section>
+    <div class="match-layout">
+      <aside class="field-column" aria-label="球場與事件說明">
+        <section class="field-panel" aria-labelledby="field-heading">
+          <div class="panel-topline"><h2 id="field-heading">這一球的焦點</h2><span id="field-stage-label" class="sr-only"></span></div>
+          <header id="manga-caption" class="manga-caption" hidden>
+            <div class="manga-chapter"><span id="manga-number"></span><h3 id="manga-title"></h3></div>
+            <p id="manga-guide"></p>
+          </header>
+          <svg id="field" viewBox="0 0 340 285" role="img" aria-labelledby="field-title field-desc">
+            <title id="field-title">球場示意</title><desc id="field-desc">離線資料載入中，尚未顯示壘況。</desc>
+            <g id="field-layer" data-layer="environment">
+              <path class="outfield" d="M39 129 Q170 -48 301 129 L170 260 Z"/>
+              <path class="foul-line" d="M30 121 L170 261 L310 121"/>
+              <path class="diamond" d="M170 252 L268 154 L170 56 L72 154 Z"/>
+              <path class="infield-line" d="M170 252 L170 157"/>
+              <circle class="mound" cx="170" cy="157" r="8"/>
+              <g id="base-first" class="base"><path d="M268 146 L276 154 L268 162 L260 154 Z"/><text x="296" y="170">一壘</text></g>
+              <g id="base-second" class="base"><path d="M170 48 L178 56 L170 64 L162 56 Z"/><text x="170" y="35" text-anchor="middle">二壘</text><circle class="occupant" cx="170" cy="56" r="4"/></g>
+              <g id="base-third" class="base"><path d="M72 146 L80 154 L72 162 L64 154 Z"/><text x="24" y="158">三壘</text><circle class="occupant" cx="72" cy="154" r="4"/></g>
+              <path class="home-plate" d="M164 248 L176 248 L176 255 L170 261 L164 255 Z"/>
+            </g>
+            <g id="ball-route-layer" data-layer="action" aria-hidden="true">
+              <path id="incoming-route" class="incoming-route" d=""/>
+              <path id="executed-route" class="executed-route" d=""/>
+              <path id="competition-route" class="competition-route" d=""/>
+              <g id="intent-routes" hidden><path id="intent-route-first" d=""/><path id="intent-route-second" d=""/><circle id="hold-intent" cx="115" cy="101" r="27" hidden/></g>
+            </g>
+            <g id="actors-layer" data-layer="action" aria-hidden="true">
+              <g id="actor-ss" class="actor actor-ss" data-team="defense" data-player="true"><circle class="player-ring" r="12"/><circle class="actor-body" r="8.5"/></g>
+              <g id="actor-receiver" class="actor actor-receiver" data-team="defense" data-player="false"><circle class="actor-body" r="8.5"/></g>
+              <g id="actor-original-runner" class="actor actor-original-runner" data-team="offense" data-player="false"><circle class="actor-body" r="8.5"/></g>
+              <g id="actor-batter-runner" class="actor actor-batter-runner" data-team="offense" data-player="false"><circle class="actor-body" r="8.5"/></g>
+            </g>
+            <g id="ball-marker" aria-hidden="true"><circle r="6"/><path d="M-3 -4 Q1 0 -3 4 M3 -4 Q-1 0 3 4"/></g>
+            <g id="focus-layer" data-layer="focus" aria-hidden="true" hidden>
+              <rect id="player-focus-paper" class="player-focus-paper" x="6" y="5" width="120" height="114"/>
+              <svg id="player-focus-viewport" x="10" y="9" width="112" height="106" viewBox="91 85 78 78" overflow="hidden">
+                <g class="player-focus-context"><use href="#field-layer"/></g><use href="#actor-ss"/><use href="#ball-marker"/>
+              </svg>
+            </g>
+            <g id="svg-result-layer" data-layer="result" aria-hidden="true" hidden><rect x="61" y="264" width="260" height="20"/><text id="svg-result-text" x="191" y="278" text-anchor="middle"></text></g>
+          </svg>
+          <p id="field-scene-status" class="field-scene-status">等待本地資料</p>
+          <p id="intent-caption" class="intent-caption" aria-live="polite"></p><p id="intent-notice" class="intent-notice" hidden>戰術意圖預覽</p>
+          <p id="field-occupancy" class="sr-only">資料載入後顯示壘況</p>
+        </section>
+      </aside>
+      <section class="action-column" aria-label="事件操作">
+        <div class="screen-topline"><span id="screen-kicker" class="eyebrow">一球之間</span><span id="phase-label">準備中</span></div>
+        <h2 id="screen-heading" tabindex="-1">正在載入離線示範</h2>
+        <section id="loading-screen" class="screen"><p>正在檢查本地固定資料。無需網路連線。</p></section>
+        <section class="context-panel" aria-labelledby="context-heading" hidden id="context-panel">
+          <p class="eyebrow">THE SITUATION</p><h2 id="context-heading">觀察眼前這一球</h2>
+          <p id="situation-text"></p><dl id="observations" hidden></dl>
+        </section>
+        <section id="decision-screen" class="screen" hidden>
+          <p class="screen-intro">看清來球與壘況，選擇你的守備路線。</p>
+          <div id="choices" class="choices" aria-label="正式守備選項"></div>
+          <p class="demo-note">本示範收錄「6-3」完整經過。其餘選項可操作並查看支援說明。</p>
+        </section>
+        <section id="submitting-screen" class="screen" hidden aria-busy="true"><p>選擇已確認，準備回到場上。</p></section>
+        <section id="playback-screen" class="screen" hidden>
+          <p id="playback-mode" class="sr-only"></p>
+          <div class="beat-card"><span id="beat-count" class="beat-count"></span><h3 id="beat-title"></h3><p id="beat-text"></p></div>
+          <details class="play-history"><summary>回看本球經過</summary><ol id="beat-history" class="beat-history" aria-label="已揭露的事件階段"></ol></details>
+          <div class="playback-controls" aria-label="演出控制"><button id="toggle-playback" type="button">暫停</button><button id="next-beat" type="button">下一段</button><button id="skip-playback" type="button">略過演出</button></div>
+          <p id="playback-status" class="playback-status" aria-live="polite" aria-atomic="true"></p>
+          <details id="debug-beat" class="dto-details" hidden><summary>Debug · 本段資料識別</summary><dl><dt>eventId</dt><dd id="beat-event-id"></dd><dt>presentationSequence</dt><dd id="beat-sequence"></dd><dt>type</dt><dd id="beat-type"></dd></dl></details>
+        </section>
+        <section id="resolution-screen" class="screen" hidden>
+          <p class="result-stamp">本球結算完成</p>
+          <section id="consequence-summary" class="consequence-summary" aria-label="本球局勢變化與策略回顧" hidden>
+            <div class="state-change"><p id="outs-change"></p><p id="score-change"></p></div>
+            <p id="selected-objective" class="selected-objective"></p>
+            <p id="achieved-outcome" class="achieved-outcome"></p>
+          </section>
+          <details id="resolution-details" class="resolution-details" hidden>
+            <summary>本球完整敘事與回饋</summary>
+            <p id="verified-tradeoff-text"></p>
+            <p id="outcome-text" class="outcome-text"></p><p id="feedback-text" class="feedback-text" hidden></p>
+          </details>
+          <dl id="debug-routes" class="route-receipt" hidden><div><dt>選擇路線 · selectedRouteId</dt><dd id="selected-route"></dd></div><div><dt>實際路線 · actualRouteId</dt><dd id="actual-route"></dd></div></dl>
+          <div class="resolution-controls"><button id="continue-demo" class="primary-button" type="button">確認，結束示範 <span aria-hidden="true">→</span></button><button id="replay-demo" type="button">重播本球</button></div>
+        </section>
+        <section id="unsupported-screen" class="screen" hidden><p id="unsupported-text"></p><p class="muted">目前只收錄「6-3」的完整經過。</p><button id="back-to-decision" class="primary-button" type="button">返回選擇</button></section>
+        <section id="error-screen" class="screen" hidden><p>離線資料不完整或識別不一致，無法安全顯示此球。</p><p id="error-text" class="error-detail"></p><button id="retry-data" type="button">重新檢查本地資料</button></section>
+        <section id="continue-screen" class="screen" hidden><p>這一球的示範到此結束。沒有推進比賽、重新結算或產生下一球。</p><button id="restart-demo" class="primary-button" type="button">重新開始示範</button></section>
+      </section>
+    </div>
+    <footer class="page-footer"><span>一次守備，連續閱讀。</span><button id="toggle-debug" type="button" aria-pressed="false" aria-controls="debug-scene debug-beat debug-routes">開發資訊</button></footer>
+    <section id="debug-scene" class="dto-details" aria-label="Debug / Development" hidden><h2>Debug / Development</h2><p id="actor-position-notice"></p><pre id="actor-debug-identities"></pre></section>
+    <p id="result-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+  </main>
+  <noscript><p class="noscript-note">此原型需要啟用 JavaScript；所有資料均在本地，不需網路。</p></noscript>
+</body>
+</html>
+

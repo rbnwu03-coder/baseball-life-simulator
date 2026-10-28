@@ -1,0 +1,333 @@
+{
+  "suiteName": "tests/source-freeze-reconciliation-exact-contract-test.cjs",
+  "file": "tests/source-freeze-reconciliation-exact-contract-test.cjs",
+  "entryMode": "standalone",
+  "actualCommand": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+    "E:\\meng\\baseball_life_sim_semirefactor\\tests\\source-freeze-reconciliation-exact-contract-test.cjs"
+  ],
+  "cwd": "E:\\meng\\baseball_life_sim_semirefactor",
+  "runnerNodeVersion": "v24.19.0",
+  "nodeVersion": "v24.19.0",
+  "startedAt": "2026-10-14T14:59:02.883Z",
+  "elapsedMs": 7974.0219,
+  "exitCode": 0,
+  "signal": null,
+  "spawnError": null,
+  "policy": {
+    "timeoutMs": 120000,
+    "outputMaxBuffer": 16000000,
+    "implicitGitShowMaxBuffer": 30000000,
+    "gitCompatibility": true
+  },
+  "environment": {
+    "NODE_OPTIONS": null,
+    "NODE_PATH": null,
+    "TZ": null,
+    "ENTRY_SAFE_CONFIG": {
+      "nonce": "c50fcfe6036a263645dca3dff71c817b",
+      "target": "E:\\meng\\baseball_life_sim_semirefactor\\tests\\source-freeze-reconciliation-exact-contract-test.cjs",
+      "entryMode": "standalone",
+      "gitCompatibility": true,
+      "customAssertion": null,
+      "assertionRoots": [
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests"
+      ]
+    }
+  },
+  "assertionEvidence": {
+    "version": 1,
+    "nonce": "c50fcfe6036a263645dca3dff71c817b",
+    "entryMode": "standalone",
+    "target": "E:\\meng\\baseball_life_sim_semirefactor\\tests\\source-freeze-reconciliation-exact-contract-test.cjs",
+    "nodeVersion": "v24.19.0",
+    "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+    "entryStarted": true,
+    "exportCompleted": false,
+    "summary": null,
+    "unhandledError": null,
+    "assertions": {
+      "attempted": 11264,
+      "passed": 11197,
+      "thrown": 67,
+      "unsupportedAsync": 0,
+      "methods": {
+        "assert": 8097,
+        "equal": 2967,
+        "deepEqual": 51,
+        "notEqual": 77,
+        "throws": 72
+      },
+      "samples": [
+        {
+          "method": "assert",
+          "site": "at read (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r3-runner.cjs:9:20)",
+          "returned": true
+        },
+        {
+          "method": "assert",
+          "site": "at read (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r3-runner.cjs:9:20)",
+          "returned": true
+        },
+        {
+          "method": "assert",
+          "site": "at Object.read (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r3-runner.cjs:9:20)",
+          "returned": true
+        },
+        {
+          "method": "assert",
+          "site": "at Object.read (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r3-runner.cjs:9:20)",
+          "returned": true
+        },
+        {
+          "method": "assert",
+          "site": "at Object.read (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r3-runner.cjs:9:20)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at normalize (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:9:35)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at normalize (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:9:35)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at normalize (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:9:35)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at expectedAuthorizedIndex (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:14:10)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at expectedAuthorizedIndex (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:15:10)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at expectedAuthorizedIndex (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:16:10)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at Object.assertReceiverSourceIndexAuthorizedWiring (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:23:10)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at Object.assertReceiverSourceIndexAuthorizedWiring (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:25:10)",
+          "returned": true
+        },
+        {
+          "method": "deepEqual",
+          "site": "at Object.assertReceiverSourceIndexAuthorizedWiring (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:27:10)",
+          "returned": true
+        },
+        {
+          "method": "deepEqual",
+          "site": "at Object.assertReceiverSourceIndexAuthorizedWiring (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:28:10)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at Object.assertReceiverSourceIndexAuthorizedWiring (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:29:10)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at normalize (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-save-authorized-delta.cjs:11:33)",
+          "returned": true
+        },
+        {
+          "method": "assert",
+          "site": "at assertAdapterBoundary (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-save-authorized-delta.cjs:49:3)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at assertAdapterBoundary (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-save-authorized-delta.cjs:50:10)",
+          "returned": true
+        },
+        {
+          "method": "assert",
+          "site": "at assertAdapterBoundary (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-save-authorized-delta.cjs:53:3)",
+          "returned": true
+        },
+        {
+          "method": "assert",
+          "site": "at assertAdapterBoundary (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-save-authorized-delta.cjs:54:3)",
+          "returned": true
+        },
+        {
+          "method": "assert",
+          "site": "at assertAdapterBoundary (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-save-authorized-delta.cjs:55:3)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at E:\\meng\\baseball_life_sim_semirefactor\\tests\\source-freeze-reconciliation-exact-contract-test.cjs:29:12",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at E:\\meng\\baseball_life_sim_semirefactor\\tests\\source-freeze-reconciliation-exact-contract-test.cjs:29:57",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at E:\\meng\\baseball_life_sim_semirefactor\\tests\\source-freeze-reconciliation-exact-contract-test.cjs:29:101",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at normalize (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:9:35)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at normalize (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:9:35)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at normalize (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:9:35)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at expectedAuthorizedIndex (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:14:10)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at expectedAuthorizedIndex (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:15:10)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at expectedAuthorizedIndex (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:16:10)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at Object.assertReceiverSourceIndexAuthorizedWiring (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:23:10)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at Object.assertReceiverSourceIndexAuthorizedWiring (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:25:10)",
+          "returned": true
+        },
+        {
+          "method": "deepEqual",
+          "site": "at Object.assertReceiverSourceIndexAuthorizedWiring (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:27:10)",
+          "returned": true
+        },
+        {
+          "method": "deepEqual",
+          "site": "at Object.assertReceiverSourceIndexAuthorizedWiring (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:28:10)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at Object.assertReceiverSourceIndexAuthorizedWiring (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-index-authorized-wiring.cjs:29:10)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at normalize (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-save-authorized-delta.cjs:11:33)",
+          "returned": true
+        },
+        {
+          "method": "assert",
+          "site": "at assertAdapterBoundary (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-save-authorized-delta.cjs:49:3)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at assertAdapterBoundary (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-save-authorized-delta.cjs:50:10)",
+          "returned": true
+        },
+        {
+          "method": "assert",
+          "site": "at assertAdapterBoundary (E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-source-save-authorized-delta.cjs:53:3)",
+          "returned": true
+        }
+      ]
+    },
+    "customAssertion": null,
+    "gitCompatibility": {
+      "enabled": true,
+      "calls": []
+    },
+    "exitCode": 0,
+    "mainFilename": "E:\\meng\\baseball_life_sim_semirefactor\\tests\\source-freeze-reconciliation-exact-contract-test.cjs",
+    "standaloneMainMatches": true
+  },
+  "witnessParseError": null,
+  "witnessPath": "docs/test-infrastructure-sprint-0.1-phase-b-index-caller-evidence-assertions.json",
+  "stdout": "{\n  \"summary\": {\n    \"total\": 80,\n    \"passed\": 80,\n    \"failed\": 0\n  },\n  \"negative\": {\n    \"total\": 72,\n    \"passed\": 72,\n    \"failed\": 0\n  },\n  \"checks\": [\n    {\n      \"name\": \"exact original Index + one insertion: 2a4b44a034b714b8de3c8a6897507995ab0f8ccd\",\n      \"status\": \"PASS\",\n      \"negative\": false\n    },\n    {\n      \"name\": \"exact original Index + one insertion: 674e49115a9ed7d67c69a3023b5a594d41fe584c\",\n      \"status\": \"PASS\",\n      \"negative\": false\n    },\n    {\n      \"name\": \"Original CRLF normalization remains compatible\",\n      \"status\": \"PASS\",\n      \"negative\": false\n    },\n    {\n      \"name\": \"missing Source tag rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"duplicate Source tag rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"moved Source tag rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"old script tag reorder rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"old script tag deletion rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"old script tag duplicate rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"Source async change rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"Source defer change rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"Source type change rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"Source src change rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"Source query change rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"old tag attribute change rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"other module insertion rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"DOM change rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"style change rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"inline handler change rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"other text and whitespace change rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"wrong original pinned Index rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"Index cannot approve adapter Storage\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"Index cannot approve adapter RNG\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"Index cannot approve adapter candidate execution\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"Index cannot approve adapter unreviewed version\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-integration-test.js: whole original guard accepts only planned branches\",\n      \"status\": \"PASS\",\n      \"negative\": false\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-integration-test.js: rejects missing raw guard\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-integration-test.js: rejects ordinary metadata guard removal\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-integration-test.js: rejects Source serializer bypass\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-integration-test.js: rejects unapproved version migration\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-integration-test.js: wrong pinned Save rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-integration-test.js: other full-source mismatch rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-integration-test.js: original script function scope mismatch rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-integration-test.js: wrong caller ref rejected by exact source contract\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-integration-test.js: extra comparison branch rejected by reverse contract\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-integration-test.js: extra hook rejected by reverse contract\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-interpretation-production-integration-test.js: whole original guard accepts only planned branches\",\n      \"status\": \"PASS\",\n      \"negative\": false\n    },\n    {\n      \"name\": \"pitch-tactical-interpretation-production-integration-test.js: rejects missing raw guard\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-interpretation-production-integration-test.js: rejects ordinary metadata guard removal\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-interpretation-production-integration-test.js: rejects Source serializer bypass\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-interpretation-production-integration-test.js: rejects unapproved version migration\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-interpretation-production-integration-test.js: wrong pinned Save rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-interpretation-production-integration-test.js: other full-source mismatch rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-interpretation-production-integration-test.js: original script function scope mismatch rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-interpretation-production-integration-test.js: wrong caller ref rejected by exact source contract\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-interpretation-production-integration-test.js: extra comparison branch rejected by reverse contract\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-interpretation-production-integration-test.js: extra hook rejected by reverse contract\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-adapter-integration-test.js: whole original guard accepts only planned branches\",\n      \"status\": \"PASS\",\n      \"negative\": false\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-adapter-integration-test.js: rejects missing raw guard\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-adapter-integration-test.js: rejects ordinary metadata guard removal\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-adapter-integration-test.js: rejects Source serializer bypass\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-adapter-integration-test.js: rejects unapproved version migration\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-adapter-integration-test.js: wrong pinned Save rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-adapter-integration-test.js: other full-source mismatch rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-adapter-integration-test.js: original script function scope mismatch rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-adapter-integration-test.js: wrong caller ref rejected by exact source contract\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-adapter-integration-test.js: extra comparison branch rejected by reverse contract\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-decision-production-adapter-integration-test.js: extra hook rejected by reverse contract\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-intent-evidence-integration-test.js: whole original guard accepts only planned branches\",\n      \"status\": \"PASS\",\n      \"negative\": false\n    },\n    {\n      \"name\": \"pitch-tactical-intent-evidence-integration-test.js: rejects missing raw guard\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-intent-evidence-integration-test.js: rejects ordinary metadata guard removal\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-intent-evidence-integration-test.js: rejects Source serializer bypass\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-intent-evidence-integration-test.js: rejects unapproved version migration\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-intent-evidence-integration-test.js: wrong pinned Save rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-intent-evidence-integration-test.js: other full-source mismatch rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-intent-evidence-integration-test.js: original script function scope mismatch rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-intent-evidence-integration-test.js: wrong caller ref rejected by exact source contract\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-intent-evidence-integration-test.js: extra comparison branch rejected by reverse contract\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-intent-evidence-integration-test.js: extra hook rejected by reverse contract\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-signal-projection-production-integration-test.js: whole original guard accepts only planned branches\",\n      \"status\": \"PASS\",\n      \"negative\": false\n    },\n    {\n      \"name\": \"pitch-tactical-signal-projection-production-integration-test.js: rejects missing raw guard\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-signal-projection-production-integration-test.js: rejects ordinary metadata guard removal\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-signal-projection-production-integration-test.js: rejects Source serializer bypass\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-signal-projection-production-integration-test.js: rejects unapproved version migration\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-signal-projection-production-integration-test.js: wrong pinned Save rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-signal-projection-production-integration-test.js: other full-source mismatch rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-signal-projection-production-integration-test.js: original script function scope mismatch rejected\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-signal-projection-production-integration-test.js: wrong caller ref rejected by exact source contract\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-signal-projection-production-integration-test.js: extra comparison branch rejected by reverse contract\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    },\n    {\n      \"name\": \"pitch-tactical-signal-projection-production-integration-test.js: extra hook rejected by reverse contract\",\n      \"status\": \"PASS\",\n      \"negative\": true\n    }\n  ],\n  \"callerResults\": [\n    {\n      \"file\": \"tests/pitch-tactical-decision-production-integration-test.js\",\n      \"callerOriginalRef\": \"ac53bf61964bde4b40501c77e15269bae99b55cc\",\n      \"originalGuardComparisons\": 8,\n      \"contractCanonicalRef\": \"a0e512b439446990d8df118e3e7d737b9f2f51d3\",\n      \"allOtherGuardsExecuted\": true\n    },\n    {\n      \"file\": \"tests/pitch-tactical-interpretation-production-integration-test.js\",\n      \"callerOriginalRef\": \"98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7\",\n      \"originalGuardComparisons\": 7,\n      \"contractCanonicalRef\": \"a0e512b439446990d8df118e3e7d737b9f2f51d3\",\n      \"allOtherGuardsExecuted\": true\n    },\n    {\n      \"file\": \"tests/pitch-tactical-decision-production-adapter-integration-test.js\",\n      \"callerOriginalRef\": \"9b9546f94a7286afef474be634fd93c57eb455db\",\n      \"originalGuardComparisons\": 9,\n      \"contractCanonicalRef\": \"a0e512b439446990d8df118e3e7d737b9f2f51d3\",\n      \"allOtherGuardsExecuted\": true\n    },\n    {\n      \"file\": \"tests/pitch-tactical-intent-evidence-integration-test.js\",\n      \"callerOriginalRef\": \"2a4b44a034b714b8de3c8a6897507995ab0f8ccd\",\n      \"originalGuardComparisons\": 12,\n      \"contractCanonicalRef\": \"a0e512b439446990d8df118e3e7d737b9f2f51d3\",\n      \"allOtherGuardsExecuted\": true\n    },\n    {\n      \"file\": \"tests/pitch-tactical-signal-projection-production-integration-test.js\",\n      \"callerOriginalRef\": \"674e49115a9ed7d67c69a3023b5a594d41fe584c\",\n      \"originalGuardComparisons\": 12,\n      \"contractCanonicalRef\": \"a0e512b439446990d8df118e3e7d737b9f2f51d3\",\n      \"allOtherGuardsExecuted\": true\n    }\n  ],\n  \"indexContract\": \"receiver-source-index-wiring-delta-v1\",\n  \"saveContract\": \"receiver-source-save-owner-delta-v1\",\n  \"mutationScope\": \"in-memory source copies and isolated guard callbacks; no original suite main or Production execution\",\n  \"productionWrites\": 0\n}\n",
+  "stderr": "",
+  "gitBaseline": {
+    "branch": "main",
+    "head": "ab3117653945de0b7013636187c446276a96e634",
+    "main": "ab3117653945de0b7013636187c446276a96e634",
+    "originMain": "ab3117653945de0b7013636187c446276a96e634",
+    "index": ""
+  },
+  "relevantSourceHashesBefore": {
+    "tests/source-freeze-reconciliation-exact-contract-test.cjs": "4d77721c776f7bef046ef1d4ff7e53c103f199ebbc8ab825a352f0637fa7787e",
+    "tests/receiver-source-index-authorized-wiring.cjs": "48fe3bc74e385bb55a991096ef0ee1445e04c5b9d38b5e75621c43c8ee06bc36",
+    "tests/receiver-source-save-authorized-delta.cjs": "94a2cac6e155c3936ea2cd03f0d31e4e19feba87d53f87c4be5c3cc5aab28b82",
+    "tests/pitch-production-source-scope.cjs": "a77919df1b25b42659612ae7325e1723cf2867ce7ed4629f065b084fc28adbf2",
+    "tests/pitch-tactical-selector-extraction-baseline.cjs": "c74f369a0da399a9fe859a49cfbc98442847eddb3df670b17b542f903c16c528",
+    "docs/source-freeze-contract-reconciliation-v0.1-phase-b-capture.cjs": "9e08efa420628146d7de67ae13edf8f9c8478266c38cf75c957d1392658cc127",
+    "tests/pitch-tactical-decision-production-integration-test.js": "ee6c443aad8093e3f3d14802779eda6a05b50297638ee32657febc1040c0de82",
+    "tests/pitch-tactical-interpretation-production-integration-test.js": "1d295143fb833ad30ea58469eb2bfe8c3e6fd3451f5fb29434c15fdd3b2ecbcb",
+    "tests/pitch-tactical-decision-production-adapter-integration-test.js": "09325b921c7b2b161f7177d9bbad74fb2c5504a33cab0c11e6bd7a8f69e18265",
+    "tests/pitch-tactical-intent-evidence-integration-test.js": "c72b5293de3c28578e2bf994aeb89e3fb42c378bf44121c6362c0a24e47042a4",
+    "tests/pitch-tactical-signal-projection-production-integration-test.js": "f6c7820aedf67a91d2cefb88a2eef09ac5ff06b399496369f8076ec370dcc4f9",
+    "receiver-source-snapshot.js": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274",
+    "index.html": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+    "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+    "script.js": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+    "tests/entry-safe-runner.cjs": "91659f28bc718eb21569be4a64bfce61a6518b5867a5ca629e5484e15a54a6d0",
+    "tests/entry-safe-preload.cjs": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "relevantSourceHashesAfter": {
+    "tests/source-freeze-reconciliation-exact-contract-test.cjs": "4d77721c776f7bef046ef1d4ff7e53c103f199ebbc8ab825a352f0637fa7787e",
+    "tests/receiver-source-index-authorized-wiring.cjs": "48fe3bc74e385bb55a991096ef0ee1445e04c5b9d38b5e75621c43c8ee06bc36",
+    "tests/receiver-source-save-authorized-delta.cjs": "94a2cac6e155c3936ea2cd03f0d31e4e19feba87d53f87c4be5c3cc5aab28b82",
+    "tests/pitch-production-source-scope.cjs": "a77919df1b25b42659612ae7325e1723cf2867ce7ed4629f065b084fc28adbf2",
+    "tests/pitch-tactical-selector-extraction-baseline.cjs": "c74f369a0da399a9fe859a49cfbc98442847eddb3df670b17b542f903c16c528",
+    "docs/source-freeze-contract-reconciliation-v0.1-phase-b-capture.cjs": "9e08efa420628146d7de67ae13edf8f9c8478266c38cf75c957d1392658cc127",
+    "tests/pitch-tactical-decision-production-integration-test.js": "ee6c443aad8093e3f3d14802779eda6a05b50297638ee32657febc1040c0de82",
+    "tests/pitch-tactical-interpretation-production-integration-test.js": "1d295143fb833ad30ea58469eb2bfe8c3e6fd3451f5fb29434c15fdd3b2ecbcb",
+    "tests/pitch-tactical-decision-production-adapter-integration-test.js": "09325b921c7b2b161f7177d9bbad74fb2c5504a33cab0c11e6bd7a8f69e18265",
+    "tests/pitch-tactical-intent-evidence-integration-test.js": "c72b5293de3c28578e2bf994aeb89e3fb42c378bf44121c6362c0a24e47042a4",
+    "tests/pitch-tactical-signal-projection-production-integration-test.js": "f6c7820aedf67a91d2cefb88a2eef09ac5ff06b399496369f8076ec370dcc4f9",
+    "receiver-source-snapshot.js": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274",
+    "index.html": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+    "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+    "script.js": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+    "tests/entry-safe-runner.cjs": "91659f28bc718eb21569be4a64bfce61a6518b5867a5ca629e5484e15a54a6d0",
+    "tests/entry-safe-preload.cjs": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "sourceStable": true,
+  "status": "PASS",
+  "reason": "Verified entry completed with observed successful assertions",
+  "entryVerified": true,
+  "successfulAssertions": 11197,
+  "customCheckerInvocations": 0
+}

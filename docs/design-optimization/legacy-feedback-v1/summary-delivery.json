@@ -1,0 +1,158 @@
+{
+  "semantic": {
+    "total": 15,
+    "passed": 15,
+    "beforePassed": 2,
+    "beforeFailed": 13
+  },
+  "original14": {
+    "total": 14,
+    "passed": 14,
+    "parity": "PASS",
+    "protectedFixtures": 4
+  },
+  "normalTwoMatchRecord": {
+    "equal": true,
+    "sha256": "6b07e58c891f82820cfeb3fac658d385a19ff910ca578df42093bbd4483a2084"
+  },
+  "reachability": {
+    "successfulLoadCount": 14,
+    "exposureMissingPermitted": true,
+    "missingCurrentRoleJourneyDirectCall": true,
+    "yearEndResolvesRoleBeforeDisplay": "rotation"
+  },
+  "regressions": [
+    {
+      "file": "high-school-year-one-competition-loop-test.js",
+      "status": "PASS",
+      "nodeAssertions": 28,
+      "customChecks": null,
+      "timedOut": false,
+      "elapsedMs": 224,
+      "exitCode": 0
+    },
+    {
+      "file": "high-school-year-one-opportunity-two-integration-test.js",
+      "status": "PASS",
+      "nodeAssertions": 40,
+      "customChecks": null,
+      "timedOut": false,
+      "elapsedMs": 512,
+      "exitCode": 0
+    },
+    {
+      "file": "high-school-year-transition-continuity-test.js",
+      "status": "PASS",
+      "nodeAssertions": 44,
+      "customChecks": null,
+      "timedOut": false,
+      "elapsedMs": 214,
+      "exitCode": 0
+    },
+    {
+      "file": "high-school-integration-1-1-test.js",
+      "status": "FAIL",
+      "nodeAssertions": 9,
+      "customChecks": null,
+      "timedOut": false,
+      "elapsedMs": 118,
+      "exitCode": 1
+    },
+    {
+      "file": "high-school-integration-1-2-3-test.js",
+      "status": "PASS",
+      "nodeAssertions": 28,
+      "customChecks": null,
+      "timedOut": false,
+      "elapsedMs": 124,
+      "exitCode": 0
+    },
+    {
+      "file": "high-school-year-two-competition-loop-test.js",
+      "status": "FAIL",
+      "nodeAssertions": 37,
+      "customChecks": null,
+      "timedOut": false,
+      "elapsedMs": 357,
+      "exitCode": 1
+    },
+    {
+      "file": "high-school-three-year-spine-test.js",
+      "status": "PASS",
+      "nodeAssertions": 0,
+      "customChecks": 54,
+      "timedOut": false,
+      "elapsedMs": 219,
+      "exitCode": 0
+    },
+    {
+      "file": "coach-response-expansion-test.js",
+      "status": "PASS",
+      "nodeAssertions": 10,
+      "customChecks": null,
+      "timedOut": false,
+      "elapsedMs": 42,
+      "exitCode": 0
+    },
+    {
+      "file": "match-experience-development-foundation-v1-test.js",
+      "status": "PASS",
+      "nodeAssertions": 46,
+      "customChecks": null,
+      "timedOut": false,
+      "elapsedMs": 636,
+      "exitCode": 0
+    },
+    {
+      "file": "playing-time-game-exposure-foundation-v1-test.js",
+      "status": "PASS",
+      "nodeAssertions": 53,
+      "customChecks": null,
+      "timedOut": false,
+      "elapsedMs": 1109,
+      "exitCode": 0
+    },
+    {
+      "file": "career-save-admission-test.js",
+      "status": "PASS",
+      "nodeAssertions": 0,
+      "customChecks": 45,
+      "timedOut": false,
+      "elapsedMs": 193,
+      "exitCode": 0
+    },
+    {
+      "file": "g2-b2-playable-match-decision-test.cjs",
+      "status": "PASS",
+      "nodeAssertions": 171,
+      "customChecks": null,
+      "timedOut": false,
+      "elapsedMs": 1740,
+      "exitCode": 0
+    },
+    {
+      "file": "g2-a-live-public-match-bridge-test.cjs",
+      "status": "PASS",
+      "nodeAssertions": 616,
+      "customChecks": null,
+      "timedOut": false,
+      "elapsedMs": 10631,
+      "exitCode": 0
+    }
+  ],
+  "examples": {
+    "missingExposure": {
+      "before": "本次沒有實際上場，教練不把等待算成負面表現。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。",
+      "after": "本次：4 打席、7 局守備。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。"
+    },
+    "unknownEarlier": {
+      "before": "角色維持「先發／關鍵任務」；機會 1：沒有實際上場；機會 2：4 打席、7 局守備。",
+      "after": "角色維持「先發／關鍵任務」；機會 1：出賽紀錄還在整理；機會 2：4 打席、7 局守備。"
+    },
+    "missingRole": {
+      "before": "角色維持「先發／關鍵任務」；機會 1：4 打席、7 局守備；機會 2：4 打席、7 局守備。",
+      "after": "入隊時的角色是「先發／關鍵任務」；目前角色仍待確認；機會 1：4 打席、7 局守備；機會 2：4 打席、7 局守備。"
+    },
+    "pitcherYearTwo": "跨年名單移出 0 名畢業球員，加入 0 名新生。目前正式角色為「先發／關鍵任務」；春季：沒有實際上場。評估趨勢：持平；訓練與準備度正在提升、與同守位競爭者的差距已縮小。主要原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。高三前方向：打擊入口；教練信任 8，疲勞 2，傷病風險 1。投手使用仍延後處理；下一次正式出賽的安排，仍要等教練確認。"
+  }
+}

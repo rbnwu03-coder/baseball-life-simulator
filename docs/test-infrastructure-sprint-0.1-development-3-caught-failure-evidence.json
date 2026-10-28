@@ -1,0 +1,111 @@
+{
+  "suiteName": "caught-failure",
+  "file": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/caught.cjs",
+  "entryMode": "exported-run",
+  "actualCommand": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+    "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-export-child.cjs"
+  ],
+  "cwd": "E:\\meng\\baseball_life_sim_semirefactor",
+  "runnerNodeVersion": "v24.19.0",
+  "nodeVersion": "v24.19.0",
+  "startedAt": "2026-10-14T10:54:20.973Z",
+  "elapsedMs": 47.8203,
+  "exitCode": 1,
+  "signal": null,
+  "spawnError": null,
+  "policy": {
+    "timeoutMs": 120000,
+    "outputMaxBuffer": 16000000,
+    "implicitGitShowMaxBuffer": 30000000,
+    "gitCompatibility": true
+  },
+  "environment": {
+    "NODE_OPTIONS": null,
+    "NODE_PATH": null,
+    "TZ": null,
+    "ENTRY_SAFE_CONFIG": {
+      "nonce": "785d9e40d81b66f9c6e584d3c5c34418",
+      "target": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq\\caught.cjs",
+      "entryMode": "exported-run",
+      "gitCompatibility": true,
+      "customAssertion": null,
+      "assertionRoots": [
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests",
+        "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq"
+      ]
+    }
+  },
+  "assertionEvidence": {
+    "version": 1,
+    "nonce": "785d9e40d81b66f9c6e584d3c5c34418",
+    "entryMode": "exported-run",
+    "target": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq\\caught.cjs",
+    "nodeVersion": "v24.19.0",
+    "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+    "entryStarted": true,
+    "exportCompleted": true,
+    "summary": {
+      "total": 1,
+      "passed": 0,
+      "failed": 1
+    },
+    "unhandledError": null,
+    "assertions": {
+      "attempted": 1,
+      "passed": 0,
+      "thrown": 1,
+      "unsupportedAsync": 0,
+      "methods": {
+        "equal": 1
+      },
+      "samples": [
+        {
+          "method": "equal",
+          "site": "at Object.run (E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq\\caught.cjs:1:45)",
+          "returned": false,
+          "errorName": "AssertionError"
+        }
+      ]
+    },
+    "customAssertion": null,
+    "gitCompatibility": {
+      "enabled": true,
+      "calls": []
+    },
+    "exitCode": 1,
+    "mainFilename": "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-export-child.cjs",
+    "standaloneMainMatches": false
+  },
+  "witnessParseError": null,
+  "witnessPath": "docs/test-infrastructure-sprint-0.1-development-3-caught-failure-evidence-assertions.json",
+  "stdout": "",
+  "stderr": "",
+  "gitBaseline": {
+    "branch": "main",
+    "head": "ab3117653945de0b7013636187c446276a96e634",
+    "main": "ab3117653945de0b7013636187c446276a96e634",
+    "originMain": "ab3117653945de0b7013636187c446276a96e634",
+    "index": ""
+  },
+  "relevantSourceHashesBefore": {
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/caught.cjs": "3588f4e82b9c415bdd081170f20c6b644f2c6978d5db5e8e7cad4e958c389c48",
+    "tests/entry-safe-runner.cjs": "0859f3b19aa9d2e4510049a490744869e7937dc9bf15356612f53c011b6a6fb1",
+    "tests/entry-safe-preload.cjs": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "relevantSourceHashesAfter": {
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/caught.cjs": "3588f4e82b9c415bdd081170f20c6b644f2c6978d5db5e8e7cad4e958c389c48",
+    "tests/entry-safe-runner.cjs": "0859f3b19aa9d2e4510049a490744869e7937dc9bf15356612f53c011b6a6fb1",
+    "tests/entry-safe-preload.cjs": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "sourceStable": true,
+  "status": "FAIL",
+  "reason": "Executed entry reported assertion/runtime/summary failure",
+  "entryVerified": true,
+  "successfulAssertions": 0,
+  "customCheckerInvocations": 0
+}

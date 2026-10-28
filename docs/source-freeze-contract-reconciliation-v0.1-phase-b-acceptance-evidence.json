@@ -1,0 +1,298 @@
+{
+  "phase": "Source Freeze Contract Reconciliation v0.1 Phase B",
+  "createdAt": "2026-10-14T15:05:13.627Z",
+  "exactSave": {
+    "total": 23,
+    "passed": 23,
+    "failed": 0
+  },
+  "exactSaveNegative": {
+    "total": 21,
+    "passed": 21,
+    "failed": 0
+  },
+  "indexCaller": {
+    "total": 80,
+    "passed": 80,
+    "failed": 0
+  },
+  "indexCallerNegative": {
+    "total": 72,
+    "passed": 72,
+    "failed": 0
+  },
+  "formalSuites": [
+    {
+      "file": "tests/pitch-tactical-decision-production-integration-test.js",
+      "entryMode": "standalone",
+      "mainMatches": true,
+      "assertionEvidence": {
+        "attempted": 6292,
+        "passed": 6292,
+        "thrown": 0,
+        "unsupportedAsync": 0
+      },
+      "completion": {
+        "passed": 12,
+        "failed": 0,
+        "historical": null
+      },
+      "originalCallerRef": "ac53bf61964bde4b40501c77e15269bae99b55cc",
+      "actualPolicy": {
+        "timeoutMs": 180000,
+        "outputMaxBuffer": 30000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "fullStdoutSha256": "1f70c57f674b7eb7dcc18c57280fa67adb26673d83b1e7f4272594e3ccc53a63",
+      "fullStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "relevantHashes": 412,
+      "reportedCoverageGaps": [],
+      "fullRawCapture": "docs/test-infrastructure-sprint-0.1-phase-b-decision-evidence.json"
+    },
+    {
+      "file": "tests/pitch-tactical-interpretation-production-integration-test.js",
+      "entryMode": "standalone",
+      "mainMatches": true,
+      "assertionEvidence": {
+        "attempted": 5968,
+        "passed": 5968,
+        "thrown": 0,
+        "unsupportedAsync": 0
+      },
+      "completion": {
+        "passed": 10,
+        "failed": 0,
+        "historical": null
+      },
+      "originalCallerRef": "98bcd1db941f63d17bacd2cbf75d8c4b8e717ac7",
+      "actualPolicy": {
+        "timeoutMs": 180000,
+        "outputMaxBuffer": 30000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "fullStdoutSha256": "350f5afec02cba156bbca1a55a54d8562844aa6937425599406b6395e162c9a6",
+      "fullStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "relevantHashes": 412,
+      "reportedCoverageGaps": [],
+      "fullRawCapture": "docs/test-infrastructure-sprint-0.1-phase-b-interpretation-evidence.json"
+    },
+    {
+      "file": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "entryMode": "standalone",
+      "mainMatches": true,
+      "assertionEvidence": {
+        "attempted": 7793,
+        "passed": 7793,
+        "thrown": 0,
+        "unsupportedAsync": 0
+      },
+      "completion": {
+        "passed": 11,
+        "failed": 0,
+        "historical": null
+      },
+      "originalCallerRef": "9b9546f94a7286afef474be634fd93c57eb455db",
+      "actualPolicy": {
+        "timeoutMs": 180000,
+        "outputMaxBuffer": 30000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "fullStdoutSha256": "2011d57af378c54f1c370026caf1fe23952a10b2cb36b32cec675533564dba5d",
+      "fullStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "relevantHashes": 412,
+      "reportedCoverageGaps": [
+        "changeLook"
+      ],
+      "fullRawCapture": "docs/test-infrastructure-sprint-0.1-phase-b-adapter-integration-evidence.json"
+    },
+    {
+      "file": "tests/pitch-tactical-intent-evidence-integration-test.js",
+      "entryMode": "standalone",
+      "mainMatches": true,
+      "assertionEvidence": {
+        "attempted": 6663,
+        "passed": 6663,
+        "thrown": 0,
+        "unsupportedAsync": 0
+      },
+      "completion": {
+        "passed": 10,
+        "failed": 0,
+        "historical": null
+      },
+      "originalCallerRef": "2a4b44a034b714b8de3c8a6897507995ab0f8ccd",
+      "actualPolicy": {
+        "timeoutMs": 180000,
+        "outputMaxBuffer": 30000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "fullStdoutSha256": "3f02a7afef87a8c02c832e6f58c8c6c5972a74436f15b5ce26d2eecd754585aa",
+      "fullStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "relevantHashes": 412,
+      "reportedCoverageGaps": [
+        "COVERAGE_GAP: NATURAL_TERMINAL_LOCATION_MISS_PUNISHED",
+        "COVERAGE_GAP: HIGH_COGNITIVE_LOAD",
+        "COVERAGE_GAP: MAJOR_DRIFT",
+        "COVERAGE_GAP: FAILED_REPEAT"
+      ],
+      "fullRawCapture": "docs/test-infrastructure-sprint-0.1-phase-b-intent-evidence-evidence.json"
+    },
+    {
+      "file": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "entryMode": "standalone",
+      "mainMatches": true,
+      "assertionEvidence": {
+        "attempted": 7740,
+        "passed": 7740,
+        "thrown": 0,
+        "unsupportedAsync": 0
+      },
+      "completion": {
+        "passed": 14,
+        "failed": 0,
+        "historical": null
+      },
+      "originalCallerRef": "674e49115a9ed7d67c69a3023b5a594d41fe584c",
+      "actualPolicy": {
+        "timeoutMs": 180000,
+        "outputMaxBuffer": 30000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "fullStdoutSha256": "0fbeb5b01abd51c8d7d145387618c346e31f4b41fbecc598dd91ac1c8d24652c",
+      "fullStderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "relevantHashes": 412,
+      "reportedCoverageGaps": [
+        "COVERAGE_GAP: NATURAL_TERMINAL_BIP_WITH_READY_PATTERN",
+        "COVERAGE_GAP: NATURAL_DEFERRED_LOCATION_MISS_PUNISHED"
+      ],
+      "fullRawCapture": "docs/test-infrastructure-sprint-0.1-phase-b-signal-projection-evidence.json"
+    }
+  ],
+  "bounded": [
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs",
+      "name": "save-boundary",
+      "evidence": "docs/test-infrastructure-sprint-0.1-phase-b-save-boundary-evidence.json",
+      "status": "PASS",
+      "runnerStatus": "PASS",
+      "entryMode": "standalone",
+      "entryVerified": true,
+      "successfulAssertions": 168,
+      "suiteChecks": {
+        "passed": 30,
+        "failed": 0,
+        "historical": null
+      },
+      "expectedTotal": 30,
+      "completionVerified": true,
+      "callerOriginalRef": null,
+      "contractCanonicalRef": null,
+      "exitCode": 0,
+      "elapsedMs": 6972.3863,
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      }
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+      "name": "r1-save",
+      "evidence": "docs/test-infrastructure-sprint-0.1-phase-b-r1-save-evidence.json",
+      "status": "PASS",
+      "runnerStatus": "PASS",
+      "entryMode": "standalone",
+      "entryVerified": true,
+      "successfulAssertions": 129,
+      "suiteChecks": {
+        "passed": 19,
+        "failed": 0,
+        "historical": null
+      },
+      "expectedTotal": 19,
+      "completionVerified": true,
+      "callerOriginalRef": null,
+      "contractCanonicalRef": null,
+      "exitCode": 0,
+      "elapsedMs": 7663.2585,
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      }
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs",
+      "name": "r3-guard",
+      "evidence": "docs/test-infrastructure-sprint-0.1-phase-b-r3-guard-evidence.json",
+      "status": "PASS",
+      "runnerStatus": "PASS",
+      "entryMode": "standalone",
+      "entryVerified": true,
+      "successfulAssertions": 77,
+      "suiteChecks": {
+        "passed": 40,
+        "failed": 0,
+        "historical": null
+      },
+      "expectedTotal": 40,
+      "completionVerified": true,
+      "callerOriginalRef": null,
+      "contractCanonicalRef": null,
+      "exitCode": 0,
+      "elapsedMs": 10173.462,
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      }
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs",
+      "name": "legacy-historical",
+      "evidence": "docs/test-infrastructure-sprint-0.1-phase-b-legacy-historical-evidence.json",
+      "status": "PASS",
+      "runnerStatus": "PASS",
+      "entryMode": "standalone",
+      "entryVerified": true,
+      "successfulAssertions": 142,
+      "suiteChecks": {
+        "passed": 25,
+        "failed": 0,
+        "historical": 3
+      },
+      "expectedTotal": 25,
+      "completionVerified": true,
+      "callerOriginalRef": null,
+      "contractCanonicalRef": null,
+      "exitCode": 0,
+      "elapsedMs": 12642.6206,
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      }
+    }
+  ],
+  "formalSuiteChecks": 57,
+  "nonLegacyBoundedChecks": 89,
+  "legacyPairs": 25,
+  "genuineHistoricalCases": 3,
+  "childInvocations": 11,
+  "allExpectedGatesPassed": true,
+  "newUnexpectedSuiteFailures": 0,
+  "criticalRegressionTriageConditions": "YES for separately scoped triage; no automatic next sprint",
+  "readyForCommit": "NO",
+  "readyForSprint10B": "NO",
+  "receiverRuntime": "DISABLED",
+  "L03": "PARTIAL"
+}

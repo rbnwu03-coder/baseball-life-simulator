@@ -1,0 +1,133 @@
+{
+  "sprint": "10A.3b-R6",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "createdAt": "2026-10-14T06:39:59.117Z",
+  "node": "v24.19.0",
+  "result": {
+    "file": "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+    "sourceHash": "24a2e3c4b77a212695fde636b8e25247972a075f3b1e99293378862b45c164be",
+    "elapsedMs": 6962.7089,
+    "summary": {
+      "total": 19,
+      "passed": 19,
+      "failed": 0
+    },
+    "error": null,
+    "checks": [
+      {
+        "name": "ordinary Legacy path executes literal JSON.stringify(player), without serializer",
+        "status": "PASS"
+      },
+      {
+        "name": "ordinary Legacy adapter validation is called before the real write",
+        "status": "PASS"
+      },
+      {
+        "name": "source-only pending real Save / duplicate / cold preserves complete official state",
+        "status": "PASS"
+      },
+      {
+        "name": "source-only executed real Save / duplicate / cold preserves complete official state",
+        "status": "PASS"
+      },
+      {
+        "name": "source-only settled real Save / duplicate / cold preserves complete official state",
+        "status": "PASS"
+      },
+      {
+        "name": "genuine historical Legacy pending/executed/settled saves never backfill source",
+        "status": "PASS"
+      },
+      {
+        "name": "later ordinary Match retains version15 storage without live root mutation",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: unknown live version",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: unknown live format",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: missing source format",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: pin tamper",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: physical tamper",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: actor tamper",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: sample tamper",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: no adapter for source-only",
+        "status": "PASS"
+      },
+      {
+        "name": "ordinary unknown version also refuses storage",
+        "status": "PASS"
+      },
+      {
+        "name": "raw restore rejects erased format before normalization defaults",
+        "status": "PASS"
+      },
+      {
+        "name": "shared early-return guard cannot skip source pin validation",
+        "status": "PASS"
+      },
+      {
+        "name": "SAVE_VERSION15 / SAVE_KEY / effective Legacy literal unchanged",
+        "status": "PASS"
+      }
+    ],
+    "witnesses": [
+      {
+        "phase": "pending",
+        "saveVersion": 16,
+        "sourcePin": "fnv1a32:1641e9ec",
+        "duplicateWrites": 4,
+        "cold": "PASS",
+        "officialCandidateCalls": 0
+      },
+      {
+        "phase": "executed",
+        "saveVersion": 16,
+        "sourcePin": "fnv1a32:1641e9ec",
+        "duplicateWrites": 4,
+        "cold": "PASS",
+        "officialCandidateCalls": 0
+      },
+      {
+        "phase": "settled",
+        "saveVersion": 16,
+        "sourcePin": "fnv1a32:1641e9ec",
+        "duplicateWrites": 4,
+        "cold": "PASS",
+        "officialCandidateCalls": 0
+      }
+    ]
+  },
+  "frozenSourceHashes": {
+    "index.html": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+    "script.js": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+    "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+    "player.js": "3414f5a93429bc1a4adbe3c632485e70b5d9175822261b689543a77fa0eb38bd",
+    "match-situation-lifecycle.js": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+    "receiver-source-snapshot.js": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274",
+    "tests/pitch-sequence-state-production-integration-test.js": "7a53369d526de1c3a66b9d3e0c69f45f27f261bdb1d28c354f9831c0e8ae8327",
+    "tests/receiver-source-save-authorized-delta.cjs": "94a2cac6e155c3936ea2cd03f0d31e4e19feba87d53f87c4be5c3cc5aab28b82",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs": "e8f6a9bbdea182a6b73241d60d9c9bb54e4174fccf56dcdba05399904830504b",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs": "7bf28ed1f296feb61b64451982d72ab2c12d7ed719dd0ac30ceae3aaa26d7073"
+  }
+}

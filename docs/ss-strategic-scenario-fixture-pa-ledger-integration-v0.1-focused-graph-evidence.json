@@ -1,0 +1,196 @@
+{
+  "task": "SS Strategic Scenario Fixture & PA Ledger Integration v0.1",
+  "createdAt": "2026-10-15T15:23:28.133Z",
+  "tier": "Tier 2",
+  "index": {
+    "project": "E-meng-baseball_life_sim_semirefactor",
+    "nodes": 107345,
+    "edges": 129126,
+    "status": "ready",
+    "root_path": "E:/meng/baseball_life_sim_semirefactor",
+    "indexed_at": "2026-10-15T01:30:19Z",
+    "parse_partial": {
+      "files": [],
+      "count": 1,
+      "truncated": true,
+      "omitted": 1
+    },
+    "parse_unusable": {
+      "files": [],
+      "count": 0,
+      "truncated": false
+    },
+    "skipped": {
+      "files": [],
+      "count": 0,
+      "truncated": false
+    },
+    "not_indexed": {
+      "dirs": [],
+      "dirs_count": 2,
+      "files": [],
+      "files_count": 0,
+      "truncated": true,
+      "dirs_omitted": 2
+    }
+  },
+  "graph": {
+    "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+    "cols": [
+      "name",
+      "label",
+      "lines",
+      "in",
+      "out"
+    ],
+    "groups": [
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+        "file": "script.js",
+        "rows": [
+          [
+            "advanceHighSchoolMatchBattingOrder",
+            "Function",
+            "6673-6677",
+            9,
+            3
+          ],
+          [
+            "applyHighSchoolSimulatedPlateAppearance",
+            "Function",
+            "6907-6991",
+            6,
+            8
+          ],
+          [
+            "recordHighSchoolMatchPlateAppearanceEvidence",
+            "Function",
+            "6730-6738",
+            4,
+            1
+          ],
+          [
+            "recordHighSchoolMatchSimulationEvent",
+            "Function",
+            "4343-4375",
+            25,
+            7
+          ],
+          [
+            "resolveHighSchoolYearOneMatch",
+            "Function",
+            "13727-13776",
+            2,
+            17
+          ],
+          [
+            "shouldReachHighSchoolDefensiveMoment",
+            "Function",
+            "13519-13531",
+            1,
+            6
+          ]
+        ]
+      }
+    ],
+    "total": 6,
+    "returned": 6,
+    "count": 6,
+    "has_more": false,
+    "truncated": false
+  },
+  "trace": {
+    "function": "applyHighSchoolSimulatedPlateAppearance",
+    "direction": "both",
+    "callees_total": 5,
+    "callees_total_relation": "eq",
+    "callees": {
+      "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+      "cols": [
+        "name",
+        "hop"
+      ],
+      "groups": [
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+          "rows": [
+            [
+              "recordHighSchoolMatchSimulationEvent",
+              1
+            ],
+            [
+              "syncHighSchoolMatchPlayerRunnerLocation",
+              1
+            ],
+            [
+              "scoreHighSchoolMatchRunner",
+              1
+            ],
+            [
+              "resolveHighSchoolThirdOutIntegrity",
+              1
+            ],
+            [
+              "attemptScore",
+              1
+            ]
+          ]
+        }
+      ]
+    },
+    "callers_total": 6,
+    "callers_total_relation": "eq",
+    "callers": {
+      "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+      "cols": [
+        "name",
+        "hop"
+      ],
+      "groups": [
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+          "rows": [
+            [
+              "applyHighSchoolBuntTerminalPlateAppearance",
+              1
+            ],
+            [
+              "applyHighSchoolLineDriveCatchResolution",
+              1
+            ],
+            [
+              "applyHighSchoolFlyBallCatchResolution",
+              1
+            ],
+            [
+              "resolveSimulatedHighSchoolPlateAppearance",
+              1
+            ],
+            [
+              "resolveHighSchoolOffensiveDecision",
+              1
+            ],
+            [
+              "prepareHighSchoolDefensiveMomentFromSimulation",
+              1
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "snippet": {
+    "name": "recordHighSchoolMatchSimulationEvent",
+    "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.recordHighSchoolMatchSimulationEvent",
+    "label": "Function",
+    "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+    "start_line": 4343,
+    "end_line": 4375,
+    "source_mode": "full",
+    "source": "function recordHighSchoolMatchSimulationEvent(match, event) {\n  if (event.type === \"plateAppearance\" && /Pending$/.test(event.result || \"\")) throw new Error(\"Pending defense cannot enter the official PA ledger\");\n  if (!Array.isArray(match.simulationLog)) match.simulationLog = [];\n  const defaultImportance = getHighSchoolMatchEventPresentationImportance(event);\n  const record = Object.assign({ sequence: match.simulationLog.length, presentationImportance: defaultImportance }, event);\n  if (record.scores) record.scores = { ...record.scores };\n  if (record.runners) record.runners = record.runners.slice(0, 3);\n  if (Array.isArray(record.runnerChanges)) record.runnerChanges = record.runnerChanges.map(change => ({ ...change }));\n  if (Array.isArray(record.scoringRunnerIds)) record.scoringRunnerIds = record.scoringRunnerIds.slice();\n  record.presentationSnapshot = createHighSchoolMatchPresentationSnapshot(match, record);\n  match.simulationLog.push(record);\n  if (typeof MatchGameRecord !== \"undefined\") {\n    if (!match.gameRecord) {\n      match.gameRecord = MatchGameRecord.createGameRecord({\n        gameId: match.id,\n        competitionEditionId: match.competitionEditionId,\n        competitionEntryId: match.competitionEntryId,\n        homeTeamId: match.matchContext?.homeTeamId || match.competitionTeamId || match.rosters?.home?.teamRoster?.teamId || \"home\",\n        awayTeamId: match.matchContext?.awayTeamId || match.rosters?.away?.teamRoster?.teamId || \"away\",\n        inningsScheduled: match.regulationInnings,\n        rosters: match.rosters\n      });\n    }\n    MatchGameRecord.recordEvent(match.gameRecord, record, {\n      rosters: match.rosters,\n      playerId: \"player\",\n      playerTeam: getHighSchoolPlayerTeamSide(match),\n      playerRole: match.playerLineupStatus || match.role,\n      playerPosition: match.playerFieldingAssignment || match.currentFieldingPosition || match.position\n    });\n  }\n  return record;\n}\n",
+    "match_method": "suffix",
+    "callers": 25,
+    "callees": 3
+  },
+  "qualification": "Current exact source regions/hashes separately verified; graph script line coordinates after Snapshot deletion are stale; no broad architecture audit"
+}

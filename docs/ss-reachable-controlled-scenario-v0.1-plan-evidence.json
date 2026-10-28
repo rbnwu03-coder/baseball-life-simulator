@@ -1,0 +1,150 @@
+{
+  "task": "SS Reachable Controlled Scenario v0.1",
+  "createdAt": "2026-10-15T14:13:42.018Z",
+  "scenarioId": "ss-controlled-ground-v0.1",
+  "maximumScenarios": 1,
+  "maximumExecutions": 2,
+  "abilitySpec": "docs/ss-reachable-controlled-scenario-v0.1-ability-spec-evidence.json",
+  "compatibility": "docs/ss-reachable-controlled-scenario-v0.1-fixture-compatibility-evidence.json",
+  "fixtureHash": "229ae45cea4580936d0ec992a440b375f335fa967cc3c19cfe2fc4bb665f2867",
+  "changedInputFields": [
+    {
+      "field": "baseballSkills.catching",
+      "before": 4,
+      "input": 12,
+      "normalized": 12
+    },
+    {
+      "field": "baseballSkills.reaction",
+      "before": 3,
+      "input": 12,
+      "normalized": 12
+    },
+    {
+      "field": "baseballSkills.range",
+      "before": 3,
+      "input": 12,
+      "normalized": 12
+    },
+    {
+      "field": "baseballSkills.throwing",
+      "before": 4,
+      "input": 12,
+      "normalized": 12
+    },
+    {
+      "field": "baseballSkills.armStrength",
+      "before": 3,
+      "input": 12,
+      "normalized": 12
+    }
+  ],
+  "abilitySource": "SS Integration raw12 defensive subset, complete pre-Match fixture accepted through normalizeSave/settle/validate; no per-play capability10 override",
+  "nonDefenseInput": "byte-equivalent to prior fixture outside five raw defensive skill fields",
+  "currentIdentitySource": "prepareCurrentHighSchoolYearOneMatch(), no supplied id or Opportunity",
+  "seed": 2884315748,
+  "seedAuthority": "unchanged pending test hook -> formal owner",
+  "physicalRolls": {
+    "contactQuality": 0.65,
+    "ballType": 0.1,
+    "pace": 0.68,
+    "direction": 0.05,
+    "depth": 0
+  },
+  "contactBoundary": "first ordinary fair contact after actual SS admission and opponent offense; actual inning/base state is produced by owners and logged, not assigned",
+  "priorGuardChange": "prior seven-top/zero/empty assertion is replaced with live legal outs validation because capability may change owner admission; no extra ball/state control added",
+  "policy": {
+    "offense": "secure/zone/first legal",
+    "defense": "first legal as required for this vertical proof",
+    "sample": 0.72,
+    "safety": 1400
+  },
+  "stopPolicy": [
+    "Fixture incompatible: no gameplay",
+    "controlled Reach false: stop after current owner returns, no retry",
+    "Reach true but not meaningful: record exact classifier/density gate and stop",
+    "Secure false: preserve result and stop, no forced Throw",
+    "unexpected identity/runtime/public refusal: fail and stop"
+  ],
+  "phaseOrder": "Do not independently call Secure; source places canonical Secure inside public SS execution after Moment choice. Observe original actual order.",
+  "programHash": "2c8a18a8690fe90ea3c2574075fa893fdc00d8cca418b7ffa35b68832a571226",
+  "adapterProgramHash": "538d15fb5dd0d4773606a8e15cf0dd822fcaffbd1c4e20ade835077f97c32736",
+  "observerHash": "f95f731e81f025c44b577a597a41ed78edeb1cb99f4704a01dbbfe8277505d5c",
+  "hooks": {
+    "defensive-opportunity-foundation.js": "reachInstallApi('DefensiveOpportunityFoundation',['resolveDefensiveOpportunity']);",
+    "defensive-reach-secure-foundation.js": "reachInstallApi('DefensiveReachSecureFoundation',['resolveReach','projectAccess','resolveSecure']);",
+    "batted-ball-ground-defense.js": "reachInstallApi('BattedBallGroundDefense',['resolveGroundBallDefensiveAccess','buildGroundBallDefensiveOpportunity']);",
+    "offensive-plate-approach.js": "reachInstallApi('OffensivePlateApproach',['simulatePlateAppearance']);",
+    "script.js": "for(const name of ['getHighSchoolDefensiveOpportunity','getHighSchoolReachAccess','getHighSchoolPhysicalDefensePlayerContext','ensureHighSchoolOrdinaryGroundBallInPlayHandoff','classifyHighSchoolMatchDefensiveOpportunity','buildHighSchoolShortstopExecution','applyInfieldResolutionToHighSchoolMatch']){const original=globalThis[name];if(typeof original!=='function')throw Error('Missing script boundary '+name);globalThis[name]=reachWrap('script.'+name,original);}reachProbe.installations.push({name:'script globals',methods:['getHighSchoolDefensiveOpportunity','getHighSchoolReachAccess','getHighSchoolPhysicalDefensePlayerContext','ensureHighSchoolOrdinaryGroundBallInPlayHandoff','classifyHighSchoolMatchDefensiveOpportunity','buildHighSchoolShortstopExecution','applyInfieldResolutionToHighSchoolMatch']});",
+    "defensive-decision-throw-foundation.js": "reachInstallApi('DefensiveDecisionThrowFoundation',['buildDecisionOpportunity','selectDefensiveRoute','resolveThrow']);",
+    "defensive-runner-throw-settlement-foundation.js": "reachInstallApi('DefensiveRunnerThrowSettlementFoundation',['resolveTiming','deriveSettlement']);",
+    "force-advancement.js": "reachInstallApi('ForceAdvancement',['settleForceAdvancement']);"
+  },
+  "hookValidation": {
+    "throwMethods": [
+      [
+        "buildDecisionOpportunity",
+        "function"
+      ],
+      [
+        "selectDefensiveRoute",
+        "function"
+      ],
+      [
+        "resolveThrow",
+        "function"
+      ]
+    ],
+    "runnerMethods": [
+      [
+        "resolveTiming",
+        "function"
+      ],
+      [
+        "deriveSettlement",
+        "function"
+      ]
+    ],
+    "force": "function",
+    "observerInstalled": [
+      "DefensiveOpportunityFoundation",
+      "DefensiveReachSecureFoundation",
+      "OffensivePlateApproach",
+      "ForceAdvancement",
+      "DefensiveDecisionThrowFoundation",
+      "DefensiveRunnerThrowSettlementFoundation",
+      "BattedBallGroundDefense",
+      "script globals"
+    ]
+  },
+  "loader": {
+    "source": "tests/helpers/canonical-match-contract-context.cjs",
+    "sourceHash": "b09b35cf404c100b6f1d00ff6b8e67e38093fd6d13a22e788413f3bb7c608fb5",
+    "memoryHash": "c70034fe78f59464f667f4deffdadf241d72045576f328abeed2b7381e8d576a",
+    "exactReplacement": {
+      "before": "vm.runInContext(source.toString(\"utf8\"), context, { filename: file });",
+      "after": "vm.runInContext(source.toString(\"utf8\"), context, { filename: file });\n    vm.runInContext(\"\\n  if(typeof reachProbe==='undefined')globalThis.reachProbe={ordinal:0,stack:[],counts:{},calls:[],installations:[]};\\n  function reachSnapshot(value){return JSON.parse(JSON.stringify(value,(key,v)=>v===undefined?{__witnessType:'undefined'}:typeof v==='function'?{__witnessType:'function-reference',name:v.name}:typeof v==='number'&&!Number.isFinite(v)?{__witnessType:'non-finite-number',value:String(v)}:v));}\\n  function reachWrap(label,original){\\n    return function(...args){\\n      const counts=reachProbe.counts[label]||(reachProbe.counts[label]={wrapperInvocations:0,originalInvocations:0,returns:0,throws:0});\\n      counts.wrapperInvocations++;const enter=++reachProbe.ordinal,input=reachSnapshot(args),known=typeof controlledAdapter==='undefined'?null:controlledAdapter.witnesses[0]?.truth?.identity,argumentIds=[args[0]?.physicalTruth?.identity,args[0]?.physicalIdentity,args[1]?.identity,args[0]?.groundBallInPlayState?.physicalTruth?.identity,args[0]?.groundBallDefensiveContext?.physicalTruth?.identity,args[0]?.opportunity?.physicalIdentity,args[0]?.input?.physicalIdentity],context=known&&(argumentIds.includes(known)||reachProbe.stack.at(-1)?.physicalIdentity===known)?known:null;reachProbe.stack.push({owner:label,physicalIdentity:context});\\n      let result,error;\\n      try{counts.originalInvocations++;result=Reflect.apply(original,this,args);counts.returns++;}\\n      catch(e){counts.throws++;error=e;}\\n      const inherited=reachProbe.stack.pop().physicalIdentity;const exit=++reachProbe.ordinal,target=typeof controlledAdapter==='undefined'?null:controlledAdapter.witnesses[0]?.truth?.identity;\\n      const identities=[args[0]?.physicalTruth?.identity,args[0]?.physicalIdentity,args[1]?.identity,result?.physicalIdentity,result?.physicalTruth?.identity,result?.battedBallPhysicalTruth?.identity,result?.reachResolution?.physicalIdentity];\\n      if(target&&(identities.includes(target)||inherited===target))reachProbe.calls.push({owner:label,enter,exit,physicalIdentity:target,input,output:error?null:reachSnapshot(result),exception:error?{name:error.name,message:error.message}:null,exactlyOneOriginalCall:true});\\n      if(error)throw error;\\n      return result;\\n    };\\n  }\\n  function reachInstallApi(name,methods){\\n    const original=globalThis[name],replacement={...original},unchanged=[];\\n    for(const method of methods){if(typeof original[method]!=='function')throw Error('Missing observer boundary '+name+'.'+method);replacement[method]=reachWrap(name+'.'+method,original[method]);}\\n    for(const key of Object.keys(original))if(!methods.includes(key))unchanged.push({key,sameReference:replacement[key]===original[key]});\\n    globalThis[name]=Object.freeze(replacement);reachProbe.installations.push({name,methods,unchangedExports:unchanged});\\n  }\\n\", context, {filename:\"readonly-reach-observer\"});\n    if(file===\"batted-ball-physical.js\") vm.runInContext(\"\\n  globalThis.controlledAdapter={armed:false,used:false,witnesses:[],unchangedExports:[]};\\n  (()=>{\\n    const original=BattedBallPhysical;\\n    const replacement={...original,resolveBattedBallPhysicalTruth(input={}){\\n      const a=controlledAdapter,match=typeof m==='undefined'?null:m;\\n      const live=a.armed&&!a.used&&match&&player.highSchoolMatch===match\\n        &&match.playerEntryCompleted&&match.offenseTeam===getHighSchoolOpponentTeamSide(match)\\n        &&match.defenseTeam===getHighSchoolPlayerTeamSide(match)\\n        &&TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam],'SS')?.id==='player'\\n        &&String(input.identity||'').includes('|ordinary-contact|');\\n      if(!live)return original.resolveBattedBallPhysicalTruth(input);\\n      if(match.outs<0||match.outs>=3)\\n        throw new Error('Fixed controlled starting state not reached; no alternate scenario');\\n      const valid=TeamRosterFoundation.validateActiveDefense(match.rosters[match.defenseTeam]);\\n      if(!valid.ok||getHighSchoolMatchStateIntegrityIssues(match).length)\\n        throw new Error('Illegal controlled input boundary');\\n      const before=JSON.stringify(player),effective={...input,rolls:{...(input.rolls||{}),contactQuality:.65,ballType:.1,pace:.68,direction:.05,depth:0}};\\n      a.used=true;\\n      const truth=original.resolveBattedBallPhysicalTruth(effective);\\n      a.witnesses.push({scenarioId:'ss-controlled-ground-v0.1',before:{matchId:match.id,eventId:getCurrentEventId(),inning:match.inning,half:match.half,outs:match.outs,runners:match.runners.slice(),scores:{...match.scores},offenseTeam:match.offenseTeam,defenseTeam:match.defenseTeam,currentBatter:match.currentBatter,actualSS:TeamRosterFoundation.getCurrentDefender(match.rosters[match.defenseTeam],'SS').id,entryCompleted:match.playerEntryCompleted,activeDefense:valid},originalInput:JSON.parse(JSON.stringify(input)),effectiveInput:JSON.parse(JSON.stringify(effective)),truth:JSON.parse(JSON.stringify(truth)),playerUnchanged:before===JSON.stringify(player),normalized:!!original.normalizeBattedBallPhysicalTruth(truth)});\\n      return truth;\\n    }};\\n    controlledAdapter.unchangedExports=Object.keys(original).filter(k=>k!=='resolveBattedBallPhysicalTruth').map(key=>({key,sameReference:replacement[key]===original[key]}));\\n    globalThis.BattedBallPhysical=Object.freeze(replacement);\\n  })();\\n\", context, {filename:\"unchanged-controlled-physical-input\"});\n    {const hooks={\"defensive-opportunity-foundation.js\":\"reachInstallApi('DefensiveOpportunityFoundation',['resolveDefensiveOpportunity']);\",\"defensive-reach-secure-foundation.js\":\"reachInstallApi('DefensiveReachSecureFoundation',['resolveReach','projectAccess','resolveSecure']);\",\"batted-ball-ground-defense.js\":\"reachInstallApi('BattedBallGroundDefense',['resolveGroundBallDefensiveAccess','buildGroundBallDefensiveOpportunity']);\",\"offensive-plate-approach.js\":\"reachInstallApi('OffensivePlateApproach',['simulatePlateAppearance']);\",\"script.js\":\"for(const name of ['getHighSchoolDefensiveOpportunity','getHighSchoolReachAccess','getHighSchoolPhysicalDefensePlayerContext','ensureHighSchoolOrdinaryGroundBallInPlayHandoff','classifyHighSchoolMatchDefensiveOpportunity','buildHighSchoolShortstopExecution','applyInfieldResolutionToHighSchoolMatch']){const original=globalThis[name];if(typeof original!=='function')throw Error('Missing script boundary '+name);globalThis[name]=reachWrap('script.'+name,original);}reachProbe.installations.push({name:'script globals',methods:['getHighSchoolDefensiveOpportunity','getHighSchoolReachAccess','getHighSchoolPhysicalDefensePlayerContext','ensureHighSchoolOrdinaryGroundBallInPlayHandoff','classifyHighSchoolMatchDefensiveOpportunity','buildHighSchoolShortstopExecution','applyInfieldResolutionToHighSchoolMatch']});\",\"defensive-decision-throw-foundation.js\":\"reachInstallApi('DefensiveDecisionThrowFoundation',['buildDecisionOpportunity','selectDefensiveRoute','resolveThrow']);\",\"defensive-runner-throw-settlement-foundation.js\":\"reachInstallApi('DefensiveRunnerThrowSettlementFoundation',['resolveTiming','deriveSettlement']);\",\"force-advancement.js\":\"reachInstallApi('ForceAdvancement',['settleForceAdvancement']);\"};if(hooks[file])vm.runInContext(hooks[file],context,{filename:\"readonly-owner-boundary\"});}"
+    }
+  },
+  "sourceHashes": {
+    "docs/ss-reachable-controlled-scenario-v0.1-capture.cjs": "4b5a51f9dcbc594076020344912b559c98de3906b158cfd6ca5f896d5137a9f3",
+    "docs/ss-reachable-controlled-scenario-v0.1-adapter.cjs": "f544273cf12f8fe3ea4591995bdaa22edf35cadb4bc479a7c3997fff40685942",
+    "docs/ss-reachable-controlled-scenario-v0.1-observer.cjs": "bbbd10716dffa7b3021ba1031117ec51294c209952e71d1cfc6495b56e691c73",
+    "docs/ss-reachable-controlled-scenario-v0.1-proof.cjs": "c523081a2602c10074096cd896aa85f6c40d2bc695a4d8a8f7c07ded1b05192b",
+    "docs/ss-reachable-controlled-scenario-v0.1-replay.cjs": "2697da2e6942981493593bc6d2a4dd9b9fbfbb239ccbac5e8b71791b031e2a32",
+    "docs/ss-reachable-controlled-scenario-v0.1-fixture.cjs": "4fdff09b377256e20b4cb62a6a7ac43ce2477f3feb4d492fb2070051dea20851",
+    "docs/ss-reachable-controlled-scenario-v0.1-plan.cjs": "5cf25404a015733d175bfc6ee742fb4d6be1f44e9e277e948e8d80e55849779f",
+    "docs/ss-reach-access-rejection-proof-v0.1-observer.cjs": "16d2dc252335200c4efbab692b0914f1663d8c4abbb65da9aea9b9dcaa8b9e07",
+    "tests/helpers/canonical-match-contract-context.cjs": "b09b35cf404c100b6f1d00ff6b8e67e38093fd6d13a22e788413f3bb7c608fb5",
+    "tests/entry-safe-runner.cjs": "91659f28bc718eb21569be4a64bfce61a6518b5867a5ca629e5484e15a54a6d0",
+    "tests/entry-safe-preload.cjs": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "executionWhitelist": "docs/ss-reachable-controlled-scenario-v0.1-execution-read-whitelist-evidence.json",
+  "newFormalSuiteInvocations": 0,
+  "regressionPolicy": "Reuse exact source/dependency-current prior formal evidence; run only isolated new scenario and one necessary replay",
+  "setupOnlyContexts": "Fixture normalization and hook export availability, zero Matches prepared / zero gameplay",
+  "readyForCommit": false,
+  "readyForSprint10B": false,
+  "receiverV2": "DISABLED"
+}

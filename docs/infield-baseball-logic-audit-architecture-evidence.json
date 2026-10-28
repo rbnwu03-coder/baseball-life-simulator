@@ -1,0 +1,261 @@
+{
+  "project": "E-meng-baseball_life_sim_semirefactor",
+  "tier": 2,
+  "method": "Structural discovery via schema / search / bidirectional CALLS depth 1 / source snippet; current disk source and execution govern conclusions.",
+  "schema": [
+    "node_labels: 9  (cols: label count)\n  Variable 29370\n  Function 4701\n  Section 3953\n  File 586\n  Module 580\n  Folder 10\n  EnvVar 2\n  Branch 1\n  Project 1\nedge_types: 15  (cols: type count)\n  DEFINES 38605\n  USAGE 8533\n  CALLS 6908\n  IMPORTS 1078\n  SIMILAR_TO 879\n  CONTAINS_FILE 586\n  WRITES 364\n  CONFIGURES 158\n  FILE_CHANGES_WITH 102\n  CALL_REFERENCE 18\n  SEMANTICALLY_RELATED 11\n  CONTAINS_FOLDER 10\n  RAISES 3\n  HAS_BRANCH 1\n  THROWS 1\ntotal: 24\nreturned: 24\nhas_more: false\nadr_present: false\n"
+  ],
+  "symbols": [
+    "results: 10  (rows: name label lines in out; group prefix \"-\" means empty; qn = prefix empty ? name : prefix + \".\" + name)\nE-meng-baseball_life_sim_semirefactor.script (script.js):\n  advanceHighSchoolMatchPlaybackStep Function 13257-13385 2 41\n  applyHighSchoolDefensiveSettlementFacts Function 11945-11960 3 3\n  buildHighSchoolFirstBaseExecution Function 11354-11501 2 16\n  buildHighSchoolShortstopExecution Function 11658-11745 2 17\n  buildHighSchoolThirdBaseExecution Function 11527-11630 2 20\n  prepareHighSchoolDefensiveMomentFromSimulation Function 12946-13148 1 44\n  recordHighSchoolMatchSimulationEvent Function 4343-4375 25 7\n  resolveHighSchoolThirdOutIntegrity Function 6770-6828 8 3\n  resolveInfieldDecision Function 8368-8503 1 17\n  resumeResolvedHighSchoolGroundBallSettlement Function 13223-13255 2 10\ntotal: 10\nreturned: 10\nhas_more: false\ntruncated: false\n"
+  ],
+  "traces": [
+    [
+      "function: prepareHighSchoolDefensiveMomentFromSimulation\ndirection: both\ncallees_total: 37\ncallees_total_relation: eq\ncallees: 37  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.script:\n  abandonActiveMatchSituation 1\n  advanceHighSchoolMatchBattingOrder 1\n  advanceHighSchoolOffensiveTacticalReveal 1\n  applyHighSchoolFlyBallCatchResolution 1\n  applyHighSchoolLineDriveCatchResolution 1\n  applyHighSchoolMatchDefensiveDecisionDensity 1\n  applyHighSchoolSimulatedPlateAppearance 1\n  applyRoutineDefensiveResolutionToHighSchoolMatch 1\n  assertHighSchoolMatchStateIntegrity 1\n  beginAutomaticGroundBallSituationExecution 1\n  buildInfieldMeaningfulMoment 1\n  classifyHighSchoolMatchDefensiveOpportunity 1\n  createGroundBallMatchSituation 1\n  createHighSchoolRunnerTagUpSituation 1\n  ensureHighSchoolBuntBallInPlayHandoff 1\n  ensureHighSchoolMatchDecisionDensityState 1\n  ensureHighSchoolOrdinaryGroundBallInPlayHandoff 1\n  finalizeHighSchoolMatchDefensiveOpportunity 1\n  findHighSchoolMatchOpportunity 1\n  getHighSchoolBuntDefensiveSituationOverrides 1\n  getHighSchoolDefensiveMomentChoices 1\n  getHighSchoolDefensiveSituationText 1\n  getHighSchoolGroundBallDefensiveSituationOverrides 1\n  getHighSchoolMatchLineupBatter 1\n  isInfieldDecisionFamilyPosition 1\n  prepareHighSchoolOffensiveTacticalAction 1\n  recordGroundBallSituationResolution 1\n  recordHighSchoolMatchSimulationEvent 1\n  recordHighSchoolRoutinePlateAppearance 1\n  resolveHighSchoolFlyBallCatchOpportunity 1\n  resolveHighSchoolLineDriveCatchOpportunity 1\n  resolveHighSchoolProductionBuntPitch 1\n  resolveRoutineDefensivePlay 1\n  restoreHighSchoolMatchAfterDefensiveDecision 1\n  setHighSchoolCoachTacticalDirection 1\n  setHighSchoolDefensiveBallContext 1\n  updateHighSchoolMatchDefensiveOpportunityFromSituation 1\ncallers_total: 1\ncallers_total_relation: eq\ncallers: 1  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.advanceHighSchoolMatchPlaybackStep 1\n"
+    ],
+    [
+      "function: buildHighSchoolFirstBaseExecution\ndirection: both\ncallees_total: 4\ncallees_total_relation: eq\ncallees: 4  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.script:\n  add 1\n  assertHighSchoolGroundParticipant 1\n  getHighSchoolControlledDecisionInput 1\n  resolveHighSchoolCanonicalSecure 1\ncallers_total: 2\ncallers_total_relation: eq\ncallers: 2  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.resolveInfieldDecision 1\n  E-meng-baseball_life_sim_semirefactor.script.validateHighSchoolFirstBaseExecution 1\n"
+    ],
+    [
+      "function: resolveInfieldDecision\ndirection: both\ncallees_total: 12\ncallees_total_relation: eq\ncallees: 12  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.script:\n  analyzeInfieldResolutionCauses 1\n  attachDefensiveOutcomeExplanation 1\n  attachHighSchoolInfieldActionFacts 1\n  buildHighSchoolFirstBaseExecution 1\n  buildHighSchoolShortstopExecution 1\n  buildHighSchoolThirdBaseExecution 1\n  buildInfieldRunnerFacts 1\n  getInfieldCauseExplanation 1\n  getInfieldDecisionChoice 1\n  resolveSecondBaseCoverage643 1\n  resolveSecondBaseInitiatedRoute 1\n  validateHighSchoolDecisionThrowState 1\ncallers_total: 0\ncallers_total_relation: eq\ncallers: 0  (cols: qn hop)\n"
+    ],
+    [
+      "function: applyHighSchoolDefensiveSettlementFacts\ndirection: both\ncallees_total: 2\ncallees_total_relation: eq\ncallees: 2  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.syncHighSchoolMatchPlayerRunnerLocation 1\n  E-meng-baseball_life_sim_semirefactor.script.scoreHighSchoolMatchRunner 1\ncallers_total: 3\ncallers_total_relation: eq\ncallers: 3  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.script:\n  applyInfieldResolutionToHighSchoolMatch 1\n  applyRoutineDefensiveResolutionToHighSchoolMatch 1\n  settleAndCloseHighSchoolRunnerTagUpSituation 1\n"
+    ],
+    [
+      "function: resumeResolvedHighSchoolGroundBallSettlement\ndirection: both\ncallees_total: 6\ncallees_total_relation: eq\ncallees: 6  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.script:\n  applyInfieldResolutionToHighSchoolMatch 1\n  applyRoutineDefensiveResolutionToHighSchoolMatch 1\n  restoreHighSchoolMatchAfterDefensiveDecision 1\n  same 1\n  validateHighSchoolDecisionThrowState 1\n  validateHighSchoolStoredDefensiveResolution 1\ncallers_total: 2\ncallers_total_relation: eq\ncallers: 2  (cols: qn hop)\n  E-meng-baseball_life_sim_semirefactor.script.resolveSimulatedHighSchoolPlateAppearance 1\n  E-meng-baseball_life_sim_semirefactor.script.advanceHighSchoolMatchPlaybackStep 1\n"
+    ],
+    [
+      "function: recordHighSchoolMatchSimulationEvent\ndirection: both\ncallees_total: 3\ncallees_total_relation: eq\ncallees: 3  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.script:\n  createHighSchoolMatchPresentationSnapshot 1\n  getHighSchoolMatchEventPresentationImportance 1\n  getHighSchoolPlayerTeamSide 1\ncallers_total: 25\ncallers_total_relation: eq\ncallers: 25  (rows: name hop; qn = group prefix empty ? name : prefix + \".\" + name; \"\" marks empty prefix)\nE-meng-baseball_life_sim_semirefactor.script:\n  advanceHighSchoolMatchAfterHalfInning 1\n  advanceHighSchoolMatchPlaybackStep 1\n  applyCatcherResolutionToHighSchoolMatch 1\n  applyHighSchoolBuntTerminalPlateAppearance 1\n  applyHighSchoolFlyBallCatchResolution 1\n  applyHighSchoolLineDriveCatchResolution 1\n  applyHighSchoolSimulatedPlateAppearance 1\n  applyInfieldResolutionToHighSchoolMatch 1\n  applyRoutineDefensiveResolutionToHighSchoolMatch 1\n  chooseHighSchoolOffensiveAgency 1\n  enterHighSchoolMatchPlayer 1\n  finishHighSchoolMatchAtCompletedHalf 1\n  prepareHighSchoolDefensiveMomentFromSimulation 1\n  prepareHighSchoolFirstOffensiveMomentFromSimulation 1\n  prepareHighSchoolMeaningfulOffensiveMomentFromSimulation 1\n  prepareHighSchoolOffensiveAgencyChoice 1\n  prepareHighSchoolYearOneMatch 1\n  recordHighSchoolMeaningfulPlateAppearance 1\n  recordHighSchoolProductionBuntPitchEvent 1\n  recordHighSchoolRoutinePlateAppearance 1\n  recordHighSchoolYearOneMoment 1\n  resolveSimulatedHighSchoolPlateAppearance 1\n  scoreHighSchoolMatchRunner 1\n  settleAndCloseHighSchoolRunnerTagUpSituation 1\n  settleHighSchoolYearOneMatch 1\n"
+    ]
+  ],
+  "initialCoverage": [
+    "project: E-meng-baseball_life_sim_semirefactor\nsignal: best_effort\nindexed_at: 2026-10-11T10:47:35Z\nmetadata:\n  generation: 2026-10-11T10:47:35Z\n  index_mode: full\n  recorded_at: 2026-10-11T10:47:36Z\n  recording_status: complete\n  ignored_files_stored: 0\n  ignored_files_total: 0\n  hash_records_complete: true\n  coverage_version: 3\n  generation_matches: true\npaths: 20  (cols: requested_path path status freshness recommended_action coverage)\n  script.js script.js no_recorded_issue metadata_changed read_source_and_reindex []\n  save.js save.js no_recorded_issue metadata_changed read_source_and_reindex []\n  batted-ball-physical.js batted-ball-physical.js no_recorded_issue metadata_changed read_source_and_reindex []\n  batted-ball-ground-defense.js batted-ball-ground-defense.js no_recorded_issue metadata_changed read_source_and_reindex []\n  defensive-opportunity-foundation.js defensive-opportunity-foundation.js no_recorded_issue metadata_changed read_source_and_reindex []\n  defensive-reach-secure-foundation.js defensive-reach-secure-foundation.js no_recorded_issue metadata_changed read_source_and_reindex []\n  defensive-decision-throw-foundation.js defensive-decision-throw-foundation.js no_recorded_issue metadata_changed read_source_and_reindex []\n  defensive-runner-throw-settlement-foundation.js defensive-runner-throw-settlement-foundation.js no_recorded_issue metadata_changed read_source_and_reindex []\n  force-advancement.js force-advancement.js no_recorded_issue metadata_changed read_source_and_reindex []\n  match-situation-lifecycle.js match-situation-lifecycle.js no_recorded_issue metadata_changed read_source_and_reindex []\n  match-game-record.js match-game-record.js no_recorded_issue metadata_changed read_source_and_reindex []\n  match-experience-development.js match-experience-development.js no_recorded_issue metadata_changed read_source_and_reindex []\n  playing-time-game-exposure.js playing-time-game-exposure.js no_recorded_issue metadata_changed read_source_and_reindex []\n  team-roster-foundation.js team-roster-foundation.js no_recorded_issue metadata_changed read_source_and_reindex []\n  offensive-bunt-defensive-handoff.js offensive-bunt-defensive-handoff.js no_recorded_issue metadata_changed read_source_and_reindex []\n  offensive-plate-approach.js offensive-plate-approach.js no_recorded_issue metadata_changed read_source_and_reindex []\n  tests/high-school-career-test-context.js tests/high-school-career-test-context.js no_recorded_issue metadata_changed read_source_and_reindex []\n  tests/first-base-receive-active-ground-production-integration-test.js tests/first-base-receive-active-ground-production-integration-test.js no_recorded_issue metadata_changed read_source_and_reindex []\n  tests/third-base-ground-production-integration-test.js tests/third-base-ground-production-integration-test.js no_recorded_issue metadata_changed read_source_and_reindex []\n  tests/ss-defensive-production-integration-test.js tests/ss-defensive-production-integration-test.js no_recorded_issue metadata_changed read_source_and_reindex []\npath_total: 22\npath_returned: 20\npath_has_more: true\npath_next_offset: 20\nscopes: 7  (cols: requested_scope scope total returned truncated entries status)\n  script.js script.js 0 0 false [] no_recorded_issue\n  defensive-opportunity-foundation.js defensive-opportunity-foundation.js 0 0 false [] no_recorded_issue\n  defensive-decision-throw-foundation.js defensive-decision-throw-foundation.js 0 0 false [] no_recorded_issue\n  force-advancement.js force-advancement.js 0 0 false [] no_recorded_issue\n  match-game-record.js match-game-record.js 0 0 false [] no_recorded_issue\n  match-experience-development.js match-experience-development.js 0 0 false [] no_recorded_issue\n  save.js save.js 0 0 false [] no_recorded_issue\nscope_total: 0\nscope_returned: 0\nscope_truncated: false\nhas_more: false\ncaveat: \"Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable.\"\n"
+  ],
+  "initialCoverageRemainder": [
+    "project: E-meng-baseball_life_sim_semirefactor\nsignal: best_effort\nindexed_at: 2026-10-11T10:59:14Z\nmetadata:\n  generation: 2026-10-11T10:59:14Z\n  index_mode: full\n  recorded_at: 2026-10-11T10:59:15Z\n  recording_status: complete\n  ignored_files_stored: 0\n  ignored_files_total: 0\n  hash_records_complete: true\n  coverage_version: 3\n  generation_matches: true\npaths: 2  (cols: requested_path path status freshness recommended_action coverage)\n  tests/defensive-runner-throw-settlement-foundation-test.js tests/defensive-runner-throw-settlement-foundation-test.js no_recorded_issue metadata_changed read_source_and_reindex []\n  tests/defensive-decision-throw-production-integration-test.js tests/defensive-decision-throw-production-integration-test.js no_recorded_issue metadata_changed read_source_and_reindex []\npath_total: 22\npath_returned: 2\npath_has_more: false\nscopes: 0\nscope_total: 0\nscope_returned: 0\nscope_truncated: false\nhas_more: false\ncaveat: \"Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable.\"\n"
+  ],
+  "finalCoverage": {
+    "project": "E-meng-baseball_life_sim_semirefactor",
+    "signal": "best_effort",
+    "indexed_at": "2026-10-11T13:20:57Z",
+    "metadata": {
+      "generation": "2026-10-11T13:20:57Z",
+      "index_mode": "full",
+      "recorded_at": "2026-10-11T13:20:58Z",
+      "recording_status": "complete",
+      "ignored_files_stored": 0,
+      "ignored_files_total": 0,
+      "hash_records_complete": true,
+      "coverage_version": 3,
+      "generation_matches": true
+    },
+    "paths": [
+      {
+        "requested_path": "script.js",
+        "path": "script.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "save.js",
+        "path": "save.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "batted-ball-physical.js",
+        "path": "batted-ball-physical.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "batted-ball-ground-defense.js",
+        "path": "batted-ball-ground-defense.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "defensive-opportunity-foundation.js",
+        "path": "defensive-opportunity-foundation.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "defensive-reach-secure-foundation.js",
+        "path": "defensive-reach-secure-foundation.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "defensive-decision-throw-foundation.js",
+        "path": "defensive-decision-throw-foundation.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "defensive-runner-throw-settlement-foundation.js",
+        "path": "defensive-runner-throw-settlement-foundation.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "force-advancement.js",
+        "path": "force-advancement.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "match-situation-lifecycle.js",
+        "path": "match-situation-lifecycle.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "match-game-record.js",
+        "path": "match-game-record.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "match-experience-development.js",
+        "path": "match-experience-development.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "playing-time-game-exposure.js",
+        "path": "playing-time-game-exposure.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "team-roster-foundation.js",
+        "path": "team-roster-foundation.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "offensive-bunt-defensive-handoff.js",
+        "path": "offensive-bunt-defensive-handoff.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "offensive-plate-approach.js",
+        "path": "offensive-plate-approach.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "tests/high-school-career-test-context.js",
+        "path": "tests/high-school-career-test-context.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "tests/first-base-receive-active-ground-production-integration-test.js",
+        "path": "tests/first-base-receive-active-ground-production-integration-test.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "tests/third-base-ground-production-integration-test.js",
+        "path": "tests/third-base-ground-production-integration-test.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "tests/ss-defensive-production-integration-test.js",
+        "path": "tests/ss-defensive-production-integration-test.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "tests/defensive-runner-throw-settlement-foundation-test.js",
+        "path": "tests/defensive-runner-throw-settlement-foundation-test.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "tests/defensive-decision-throw-production-integration-test.js",
+        "path": "tests/defensive-decision-throw-production-integration-test.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "tests/force-advancement-foundation-test.js",
+        "path": "tests/force-advancement-foundation-test.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "tests/match-full-game-record-test.js",
+        "path": "tests/match-full-game-record-test.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      }
+    ],
+    "path_total": 24,
+    "path_returned": 24,
+    "path_has_more": false,
+    "scopes": [],
+    "scope_total": 0,
+    "scope_returned": 0,
+    "scope_truncated": false,
+    "has_more": false,
+    "caveat": "Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable."
+  },
+  "limitations": [
+    "Every relied path has metadata_changed; no recorded issue does not establish complete or fresh graph. Current disk source read fallback was used.",
+    "Registry / family dispatch calls resolveInfieldDecision despite zero graph callers. External Foundation relationships may be absent.",
+    "No rebuild requested; automatic generation updates observed. Initial 1B snippet clipping was completed with a continuation read."
+  ]
+}

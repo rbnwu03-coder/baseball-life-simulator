@@ -1,0 +1,68 @@
+{
+  "task": "Match Contract Implementation v0.1 — Sprint 1",
+  "createdAt": "2026-10-15T06:47:57.720Z",
+  "results": [
+    {
+      "label": "canonical",
+      "file": "tests/canonical-match-regression-integration-test.cjs",
+      "status": "PASS",
+      "exitCode": 0,
+      "elapsedMs": 891.007,
+      "entryVerified": true,
+      "sourceStable": true,
+      "successfulNodeAssertions": 2668,
+      "evidence": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-canonical-evidence.json",
+      "witness": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-canonical-evidence-assertions.json"
+    },
+    {
+      "label": "routine",
+      "file": "tests/routine-commentary-contract-test.cjs",
+      "status": "PASS",
+      "exitCode": 0,
+      "elapsedMs": 163.3458,
+      "entryVerified": true,
+      "sourceStable": true,
+      "successfulNodeAssertions": 13,
+      "evidence": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-routine-evidence.json",
+      "witness": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-routine-evidence-assertions.json"
+    },
+    {
+      "label": "match-game-record",
+      "file": "tests/match-full-game-record-test.js",
+      "status": "PASS",
+      "exitCode": 0,
+      "elapsedMs": 1036.7505,
+      "entryVerified": true,
+      "sourceStable": true,
+      "successfulNodeAssertions": 13,
+      "evidence": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-match-game-record-evidence.json",
+      "witness": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-match-game-record-evidence-assertions.json"
+    },
+    {
+      "label": "ground-settlement",
+      "file": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+      "status": "PASS",
+      "exitCode": 0,
+      "elapsedMs": 2323.1965,
+      "entryVerified": true,
+      "sourceStable": true,
+      "successfulNodeAssertions": 60,
+      "evidence": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-ground-settlement-evidence.json",
+      "witness": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-ground-settlement-evidence-assertions.json"
+    }
+  ],
+  "standaloneChildren": 4,
+  "newCanonicalFullGames": 4,
+  "newCanonicalNamedChecks": 50,
+  "newRoutineOriginalAssertionChecks": 1,
+  "existingRecordNamedChecks": 13,
+  "existingGroundSettlementNamedChecks": 26,
+  "totalNamedChecks": 90,
+  "originalFull38SuiteInvocations": 0,
+  "original36Verdict": "Historical FAIL preserved; not executed",
+  "S3": "UNVERIFIED",
+  "snapshot": "KNOWN CONTRACT GAP",
+  "readyForCommit": "NO",
+  "readyForSprint10B": "NO",
+  "receiverV2": "DISABLED"
+}

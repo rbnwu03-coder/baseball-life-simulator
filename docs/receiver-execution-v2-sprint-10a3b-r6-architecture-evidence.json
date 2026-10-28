@@ -1,0 +1,809 @@
+{
+  "sprint": "10A.3b-R6",
+  "tier": 2,
+  "project": "E-meng-baseball_life_sim_semirefactor",
+  "index": {
+    "project": "E-meng-baseball_life_sim_semirefactor",
+    "nodes": 77132,
+    "edges": 98412,
+    "status": "ready",
+    "root_path": "E:/meng/baseball_life_sim_semirefactor",
+    "indexed_at": "2026-10-14T06:22:20Z",
+    "parse_partial": {
+      "files": [
+        {
+          "path": "docs/ability-performance-correlation-audit-sprint-1.1.md",
+          "error_ranges": "48-48,49-49,50-50,51-51,52-52,53-53,54-54,55-55,56-56"
+        }
+      ],
+      "count": 1,
+      "truncated": false
+    },
+    "parse_unusable": {
+      "files": [],
+      "count": 0,
+      "truncated": false
+    },
+    "skipped": {
+      "files": [],
+      "count": 0,
+      "truncated": false
+    },
+    "not_indexed": {
+      "dirs": [
+        ".git",
+        "node_modules"
+      ],
+      "dirs_count": 2,
+      "files": [],
+      "files_count": 0,
+      "truncated": false,
+      "note": "Purposely not indexed — excluded BY DESIGN via gitignore/.cbmignore/skip-lists (see each file's reason). Not an error: change the ignore rules and re-index to include them."
+    },
+    "coverage_note": "Best-effort signal, not a completeness guarantee: parse_partial files WERE indexed, but constructs inside the listed line ranges (1-based) MAY be missing from the graph (tree-sitter error recovery still salvages some). skipped files were not indexed at all. Prefer text search (grep) for flagged files/ranges. Files absent from this list are NOT guaranteed to be fully indexed. (not_indexed entries are a separate, BY-DESIGN class — deliberate ignore rules, not failures.)"
+  },
+  "search": {
+    "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+    "cols": [
+      "name",
+      "label",
+      "lines",
+      "in",
+      "out"
+    ],
+    "groups": [
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.pitch-sequence-state-production-integration-test",
+        "file": "tests/pitch-sequence-state-production-integration-test.js",
+        "rows": [
+          [
+            "assertPitchProductionSourceScope",
+            "Variable",
+            "4-4",
+            1,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.pitch-tactical-signal-projection-production-integration-test",
+        "file": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+        "rows": [
+          [
+            "assertPitchProductionSourceScope",
+            "Variable",
+            "7-7",
+            1,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.pitch-tactical-intent-evidence-integration-test",
+        "file": "tests/pitch-tactical-intent-evidence-integration-test.js",
+        "rows": [
+          [
+            "assertPitchProductionSourceScope",
+            "Variable",
+            "7-7",
+            1,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.pitch-production-source-scope-test",
+        "file": "tests/pitch-production-source-scope-test.js",
+        "rows": [
+          [
+            "assertPitchProductionSourceScope",
+            "Variable",
+            "3-3",
+            3,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.pitch-tactical-decision-production-integration-test",
+        "file": "tests/pitch-tactical-decision-production-integration-test.js",
+        "rows": [
+          [
+            "assertPitchProductionSourceScope",
+            "Variable",
+            "4-4",
+            1,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.pitch-production-source-scope",
+        "file": "tests/pitch-production-source-scope.cjs",
+        "rows": [
+          [
+            "assertPitchProductionSourceScope",
+            "Function",
+            "207-223",
+            0,
+            11
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.pitch-tactical-decision-production-adapter-integration-test",
+        "file": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+        "rows": [
+          [
+            "assertPitchProductionSourceScope",
+            "Variable",
+            "5-5",
+            1,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.pitch-tactical-interpretation-production-integration-test",
+        "file": "tests/pitch-tactical-interpretation-production-integration-test.js",
+        "rows": [
+          [
+            "assertPitchProductionSourceScope",
+            "Variable",
+            "4-4",
+            1,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-source-snapshot",
+        "file": "receiver-source-snapshot.js",
+        "rows": [
+          [
+            "createSnapshot",
+            "Function",
+            "73-85",
+            1,
+            13
+          ],
+          [
+            "executionBinding",
+            "Function",
+            "90-106",
+            3,
+            11
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.receiver-execution-v2-sprint-10a-lifecycle-save-matrix",
+        "file": "docs/receiver-execution-v2-sprint-10a-lifecycle-save-matrix.json",
+        "rows": [
+          [
+            "executionBinding",
+            "Variable",
+            "340-340",
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.receiver-execution-v2-sprint-9-contract-specification",
+        "file": "docs/receiver-execution-v2-sprint-9-contract-specification.json",
+        "rows": [
+          [
+            "executionBinding",
+            "Variable",
+            "73-80",
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.application-controller-test",
+        "file": "tests/application-controller-test.js",
+        "rows": [
+          [
+            "loadGame",
+            "Function",
+            "94-94",
+            3,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.receiver-execution-v2-sprint-10a3b-r5-ownership-contract-evidence",
+        "file": "docs/receiver-execution-v2-sprint-10a3b-r5-ownership-contract-evidence.json",
+        "rows": [
+          [
+            "loadGame",
+            "Variable",
+            "49-52",
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.save",
+        "file": "save.js",
+        "rows": [
+          [
+            "loadGame",
+            "Function",
+            "645-682",
+            2,
+            20
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.receiver-execution-v2-sprint-9-architecture-evidence",
+        "file": "docs/receiver-execution-v2-sprint-9-architecture-evidence.json",
+        "rows": [
+          [
+            "normalizeSave",
+            "Variable",
+            "681-777",
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.receiver-execution-v2-sprint-10a3b-r5-ownership-contract-evidence",
+        "file": "docs/receiver-execution-v2-sprint-10a3b-r5-ownership-contract-evidence.json",
+        "rows": [
+          [
+            "normalizeSave",
+            "Variable",
+            "45-48",
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.save",
+        "file": "save.js",
+        "rows": [
+          [
+            "normalizeSave",
+            "Function",
+            "22-643",
+            3,
+            42
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.receiver-execution-v2-sprint-9-closeout-evidence",
+        "file": "docs/receiver-execution-v2-sprint-9-closeout-evidence.json",
+        "rows": [
+          [
+            "normalizeSave",
+            "Variable",
+            "322-322",
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.application-controller-test",
+        "file": "tests/application-controller-test.js",
+        "rows": [
+          [
+            "saveGame",
+            "Function",
+            "93-93",
+            3,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.coach-evaluation-boundary-test",
+        "file": "tests/coach-evaluation-boundary-test.js",
+        "rows": [
+          [
+            "saveGame",
+            "Function",
+            "52-54",
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.docs.receiver-execution-v2-sprint-10a3b-r5-ownership-contract-evidence",
+        "file": "docs/receiver-execution-v2-sprint-10a3b-r5-ownership-contract-evidence.json",
+        "rows": [
+          [
+            "saveGame",
+            "Variable",
+            "41-44",
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.save",
+        "file": "save.js",
+        "rows": [
+          [
+            "saveGame",
+            "Function",
+            "3-20",
+            4,
+            5
+          ]
+        ]
+      },
+      {
+        "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-source-snapshot",
+        "file": "receiver-source-snapshot.js",
+        "rows": [
+          [
+            "serializeSave",
+            "Function",
+            "217-228",
+            0,
+            4
+          ],
+          [
+            "validateRawSave",
+            "Function",
+            "205-216",
+            1,
+            3
+          ]
+        ]
+      }
+    ],
+    "total": 25,
+    "returned": 25,
+    "count": 25,
+    "has_more": false,
+    "truncated": false
+  },
+  "traces": [
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.save.saveGame",
+      "direction": "both",
+      "callees_total": 2,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "isBaseballGameplayPending",
+                1
+              ],
+              [
+                "showNotice",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 1,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "confirmSchoolInvitationSelection",
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.save.normalizeSave",
+      "direction": "both",
+      "callees_total": 13,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "normalizeHighSchoolMatchDecisionDensityState",
+                1
+              ],
+              [
+                "validateHighSchoolRunnerTagUpTiming",
+                1
+              ],
+              [
+                "validateHighSchoolDecisionThrowState",
+                1
+              ]
+            ]
+          },
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.player",
+            "rows": [
+              [
+                "ensureDevelopmentStateShape",
+                1
+              ],
+              [
+                "ensureCapabilityStateShape",
+                1
+              ],
+              [
+                "settleHighSchoolEntryCapability",
+                1
+              ],
+              [
+                "migrateLegacyPlayerCapability",
+                1
+              ],
+              [
+                "restoreSchoolInvitationState",
+                1
+              ],
+              [
+                "markLegacySchoolInvitationCompatibility",
+                1
+              ],
+              [
+                "validateSchoolInvitationSet",
+                1
+              ],
+              [
+                "ensureSchoolInvitationRosterContexts",
+                1
+              ],
+              [
+                "applyCanonicalPositionProfile",
+                1
+              ],
+              [
+                "createInitialPlayer",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 1,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.save",
+            "rows": [
+              [
+                "loadGame",
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.save.loadGame",
+      "direction": "both",
+      "callees_total": 10,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.story",
+            "rows": [
+              [
+                "getCurrentEventId",
+                1
+              ]
+            ]
+          },
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+            "rows": [
+              [
+                "clearPendingSchoolInvitationSelection",
+                1
+              ],
+              [
+                "clearPendingBaseballGameplay",
+                1
+              ],
+              [
+                "recordHighSchoolMatchOpportunityCheckpoint",
+                1
+              ],
+              [
+                "stopHighSchoolMatchPlayback",
+                1
+              ],
+              [
+                "clearTransientYouthSeasonOutcome",
+                1
+              ],
+              [
+                "ensureMatchPlaybackLiveness",
+                1
+              ],
+              [
+                "showNotice",
+                1
+              ],
+              [
+                "showCurrentEvent",
+                1
+              ]
+            ]
+          },
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.save",
+            "rows": [
+              [
+                "normalizeSave",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 0,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": []
+      }
+    },
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.receiver-source-snapshot.validateRawSave",
+      "direction": "both",
+      "callees_total": 3,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-source-snapshot",
+            "rows": [
+              [
+                "own",
+                1
+              ],
+              [
+                "reject",
+                1
+              ],
+              [
+                "validateMatch",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 1,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-source-snapshot",
+            "rows": [
+              [
+                "serializeSave",
+                1
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.receiver-source-snapshot.serializeSave",
+      "direction": "both",
+      "callees_total": 4,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": [
+          {
+            "qn_prefix": "E-meng-baseball_life_sim_semirefactor.receiver-source-snapshot",
+            "rows": [
+              [
+                "own",
+                1
+              ],
+              [
+                "reject",
+                1
+              ],
+              [
+                "validateMatch",
+                1
+              ],
+              [
+                "validateRawSave",
+                1
+              ]
+            ]
+          }
+        ]
+      },
+      "callers_total": 0,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": []
+      }
+    },
+    {
+      "function": "E-meng-baseball_life_sim_semirefactor.tests.pitch-production-source-scope.assertPitchProductionSourceScope",
+      "direction": "both",
+      "callees_total": 0,
+      "callees_total_relation": "eq",
+      "callees": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": []
+      },
+      "callers_total": 0,
+      "callers_total_relation": "eq",
+      "callers": {
+        "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+        "cols": [
+          "name",
+          "hop"
+        ],
+        "groups": []
+      }
+    }
+  ],
+  "snippets": [
+    {
+      "name": "saveGame",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.save.saveGame",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/save.js",
+      "start_line": 3,
+      "end_line": 20,
+      "source_mode": "full",
+      "source": "function saveGame() {\n  if (!player.name) return showNotice(\"請先建立角色。\", \"warning\");\n  if (typeof isBaseballGameplayPending === \"function\" && isBaseballGameplayPending()) {\n    return showNotice(\"目前場上處理尚未完成，請完成後再儲存。\", \"warning\");\n  }\n  const sourceOnlySave = player.saveVersion === 16 || Object.prototype.hasOwnProperty.call(player, \"receiverSourceSaveFormatVersion\")\n    || Object.prototype.hasOwnProperty.call(player.highSchoolMatch || {}, \"receiverSourceFormatVersion\");\n  if (sourceOnlySave) {\n    if (typeof ReceiverSourceSnapshot === \"undefined\") throw new Error(\"Receiver source snapshot module required for new Save format\");\n    // Source-only envelope preparation is detached; the live Player/Match is unchanged.\n    localStorage.setItem(SAVE_KEY, ReceiverSourceSnapshot.serializeSave(player));\n  } else {\n    if (typeof ReceiverSourceSnapshot !== \"undefined\") ReceiverSourceSnapshot.validateRawSave(player);\n    // Keep the actual ordinary Legacy storage path and Player JSON boundary.\n    localStorage.setItem(SAVE_KEY, JSON.stringify(player));\n  }\n  showNotice(\"進度已儲存。\", \"success\");\n}\n",
+      "callers": 3,
+      "callees": 2
+    },
+    {
+      "name": "normalizeSave",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.save.normalizeSave",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/save.js",
+      "start_line": 22,
+      "source_mode": "full",
+      "callers": 1,
+      "callees": 13,
+      "source": "function normalizeSave(saved) {\n  const sourceSaveVersion = saved.saveVersion;\n  // Raw owner validation precedes defaults, Object.assign and generic normalizers.\n  if (typeof ReceiverSourceSnapshot !== \"undefined\") ReceiverSourceSnapshot.validateRawSave(saved);\n  else if (sourceSaveVersion === 16 || saved.receiverSourceSaveFormatVersion || saved.highSchoolMatch?.receiverSourceFormatVersion) {\n    throw new Error(\"Receiver source snapshot module required for new Save format\");\n  }\n  const fresh = createInitialPlayer(saved.name || \"\");\n  Object.assign(fresh, saved);\n  if (typeof HighSchoolExchangeNetwork !== \"undefined\") {\n    fresh.highSchoolExchangeNetwork = HighSchoolExchangeNetwork.normalizeState(saved.highSchoolExchangeNetwork);\n  } else if (saved.highSchoolExchangeNetwork?.evidence?.length) throw new Error(\"Exchange network module required to restore evidence\");\n  if (typeof HighSchoolScheduleOpportunity !== \"undefined\") {\n    fresh.highSchoolSchedule = HighSchoolScheduleOpportunity.normalizeState(saved.highSchoolSchedule);\n  }\n  const savedPrimaryPosition = saved.primaryPosition !== undefined ? saved.primaryPosition : saved.seasonPosition;\n  const savedSecondaryPositions = Array.isArray(saved.secondaryPositions)\n    ? saved.secondaryPositions\n    : saved.secondaryPosition ? [saved.secondaryPosition] : [];\n  applyCanonicalPositionProfile(fresh, savedPrimaryPosition || \"\", savedSecondaryPositions);\n  fresh.bats = PlayerIdentityOptions.bats.includes(saved.bats) ? saved.bats : \"R\";\n  fresh.throws = PlayerIdentityOptions.throws.includes(saved.throws) ? saved.throws : \"R\";\n  const legacyIdealSelfMap = {\n    \"技術鑽研型\": \"技巧型\",\n    \"直覺天賦型\": \"全能型\",\n    \"關鍵時刻型\": \"強打型\",\n    \"團隊核心型\": \"棒球理解型\"\n  };\n  if (sourceSaveVersion < 15 && legacyIdealSelfMap[fresh.idealSelf]) fresh.idealSelf = legacyIdealSelfMap[fresh.idealSelf];\n  const defaultGenesis = createInitialPlayer().characterGenesis;\n  fresh.characterGenesis = Object.assign({}, defaultGenesis, saved.characterGenesis || {});\n  fresh.characterGenesis.baseRoll = Object.assign({}, defaultGenesis.baseRoll, saved.characterGenesis?.baseRoll || {});\n  fresh.characterGenesis.allocation = Object.assign({}, defaultGenesis.allocation, saved.characterGenesis?.allocation || {});\n  fresh.characterGenesis.finalAbilities = Object.assign({}, defaultGenesis.finalAbilities, saved.characterGenesis?.finalAbilities || {});\n  if (sourceSaveVersion < 15 && fresh.name && !saved.characterGenesis) {\n    fresh.characterGenesis.completed = true;\n    fresh.characterGenesis.shape = \"舊存檔沿用既有成長\";\n    fresh.characterGenesis.archetype = fresh.idealSelf || \"全能型\";\n    fresh.characterGenesis.initialAspiration = fresh.origin || PlayerIdentityOptions.origins[0];\n  }\n  if (saved.highSchoolYearTwoStep === undefined) fresh.highSchoolYearTwoStep = 0;\n  if (saved.highSchoolYearTwoResult === undefined) fresh.highSchoolYearTwoResult = \"\";\n  if (saved.highSchoolYearTwoDetail === undefined) fresh.highSchoolYearTwoDetail = \"\";\n  fresh.baseballSkills = Object.assign({}, createInitialPlayer().baseballSkills, saved.baseballSkills || {});\n  const capabilityState = ensureCapabilityStateShape(fresh);\n  const hasVersionedInitialCapability = capabilityState.initialSkillFormulaVersion === INITIAL_SKILL_FORMULA_VERSION\n    && UNIVERSAL_BASEBALL_SKILL_KEYS.every(skill => Number.isFinite(Number(capabilityState.initialBaseballSkills?.[skill])) && Number(capabilityState.initialBaseballSkills[skill]) >= 1);\n  if (!hasVersionedInitialCapability) {\n    const migration = migrateLegacyPlayerCapability(fresh, { sourceSaveVersion });\n    if (!migration.ok) throw new Error(`舊存檔 Capability migration 失敗：${migration.error}`);\n  }\n  else {\n    const reachedHighSchool = Number(fresh.age) >= 16 || String(fresh.chapter || \"\").includes(\"青棒\") || Number(fresh.highSchoolStep) > 0;\n    if (reachedHighSchool && capabilityState.initialized !== true) {\n      const settlement = settleHighSchoolEntryCapability(fresh, { originType: capabilityState.originType || \"save-reload-settlement\" });\n      if (!settlement.ok) throw new Error(`存檔 Capability settlement 失敗：${settlement.error}`);\n    }\n  }\n  fresh.developmentState = ensureDevelopmentStateShape(fresh, saved.developmentState || null, {\n    migrateMissing: true,\n    sourceSaveVersion\n  });\n  fresh.schoolInvitationState = restoreSchoolInvitationState(saved.schoolInvitationState);\n  if (typeof ensureSchoolInvitationRosterContexts === \"function\" && fresh.schoolInvitationState.invitations.length === 4) {\n    ensureSchoolInvitationRosterContexts(fresh);\n  }\n  const reachedHighSchoolStory = Number(fresh.age) >= 16 || /青棒|高中/.test(String(fresh.chapter || \"\")) || Number(fresh.highSchoolStep) > 0;\n  if (reachedHighSchoolStory && !validateSchoolInvitationSet(fresh.schoolInvitationState).ok) {\n    markLegacySchoolInvitationCompatibility(fresh, \"legacy-existing-school\");\n  }\n  fresh.relationships = Object.assign({}, createInitialPlayer().relationships, saved.relationships || {});\n  fresh.positionAffinity = Object.assign({}, createInitialPlayer().positionAffinity, saved.positionAffinity || {});\n  fresh.matchState = Object.assign({}, createInitialPlayer().matchState, saved.matchState || {});\n  fresh.body = Object.assign({}, createInitialPlayer().body, saved.body || {});\n  fresh.personality = Object.assign({}, createInitialPlayer().personality, saved.personality || {});\n  fresh.impression = {\n    coach: Object.assign({}, createInitialPlayer().impression.coach, saved.impression?.coach || {}),\n    azhe: Object.assign({}, createInitialPlayer().impression.azhe, saved.impression?.azhe || {}),\n    takahashi: Object.assign({}, createInitialPlayer().impression.takahashi, saved.impression?.takahashi || {}),\n    family: Object.assign({}, createInitialPlayer().impression.family, saved.impression?.family || {})\n  };\n  fresh.characterArc = Object.assign({}, createInitialPlayer().characterArc, saved.characterArc || {});\n  fresh.startingCompetition = Object.assign({}, createInitialPlayer().startingCompetition, saved.startingCompetition || {});\n  fresh.flags = Array.isArray(saved.flags) ? saved.flags : [];\n  fresh.memories = Array.isArray(saved.memories) ? saved.memories : [];\n  fresh.pendingEvents = Array.isArray(saved.pendingEvents) ? saved.pendingEvents : [];\n  fresh.callbacks = Array.isArray(saved.callbacks) ? saved.callbacks.map(item => Object.assign({ id: \"\", title: \"\", sourceFlag: \"\", chapter: \"\", resolved: false, impact: 0 }, item)) : [];\n  fresh.consequences = Array.isArray(saved.consequences) ? saved.consequences.map(item => Object.assign({ id: \"\", title: \"\", active: true, severity: 1 }, item)) : [];\n  fresh.lifeThemes = Object.assign({}, createInitialPlayer().lifeThemes, saved.lifeThemes || {});\n  const defaultGoals = createInitialPlayer().goalState;\n  fresh.goalState = {\n    current: saved.goalState?.current ? Object.assign({}, saved.goalState.current) : null,\n    short: saved.goalState?.short ? Object.assign({}, saved.goalState.short) : null,\n    chapter: saved.goalState?.chapter ? Object.assign({}, saved.goalState.chapter) : null,\n    completedGoals: Array.isArray(saved.goalState?.completedGoals) ? saved.goalState.completedGoals : defaultGoals.completedGoals,\n    recentProgress: Array.isArray(saved.goalState?.recentProgress) ? saved.goalState.recentProgress : defaultGoals.recentProgress\n  };\n  fresh.trainingFocus = Object.assign({}, createInitialPlayer().trainingFocus, saved.trainingFocus || {});\n  fresh.balanceDebug = Object.assign({}, createInitialPlayer().balanceDebug, saved.balanceDebug || {});\n  fresh.juniorSchoolFit = Object.assign({}, createInitialPlayer().juniorSchoolFit, saved.juniorSchoolFit || {});\n  fresh.juniorSchoolFit.reasons = Array.isArray(saved.juniorSchoolFit?.reasons) ? saved.juniorSchoolFit.reasons : [];\n  fresh.highSchoolValueAssessment = Object.assign({}, createInitialPlayer().highSchoolValueAssessment, saved.highSchoolValueAssessment || {});\n  fresh.highSchoolValueAssessment.reasons = Array.isArray(saved.highSchoolValueAssessment?.reasons) ? saved.highSchoolValueAssessment.reasons : [];\n",
+      "end_line": 124,
+      "source_truncated": true,
+      "source_clipped": true,
+      "truncation_reason": "output_budget",
+      "next_start_line": 125,
+      "original_end_line": 643,
+      "source_lines_returned": 103
+    },
+    {
+      "name": "loadGame",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.save.loadGame",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/save.js",
+      "start_line": 645,
+      "end_line": 682,
+      "source_mode": "full",
+      "source": "function loadGame() {\n  const raw = localStorage.getItem(SAVE_KEY);\n  if (!raw) return showNotice(\"目前沒有可讀取的存檔。\", \"warning\");\n  try {\n    const candidate = normalizeSave(JSON.parse(raw));\n    if (\n      typeof AdultCareerSaveAdmission !== \"object\" ||\n      typeof AdultCareerSaveAdmission.evaluate !== \"function\"\n    ) {\n      showNotice(\"存檔驗證模組無法使用，無法讀取。\", \"error\");\n      return;\n    }\n\n    const admission = AdultCareerSaveAdmission.evaluate(candidate);\n    if (!admission || admission.admitted !== true) {\n      showNotice(\"存檔生涯狀態不一致，無法讀取。\", \"error\");\n      return;\n    }\n\n    if (typeof stopHighSchoolMatchPlayback === \"function\") stopHighSchoolMatchPlayback();\n    if (typeof clearPendingBaseballGameplay === \"function\") clearPendingBaseballGameplay();\n    if (typeof clearTransientYouthSeasonOutcome === \"function\") clearTransientYouthSeasonOutcome();\n    if (typeof clearPendingSchoolInvitationSelection === \"function\") clearPendingSchoolInvitationSelection();\n    player = candidate;\n    if (typeof recordHighSchoolMatchOpportunityCheckpoint === \"function\" && player.highSchoolMatch?.opportunityDebugTrace) {\n      recordHighSchoolMatchOpportunityCheckpoint(\"save-reload-restored\", player.highSchoolMatch);\n    }\n    document.getElementById(\"characterCreation\").style.display = \"none\";\n    showCurrentEvent();\n    if (typeof ensureMatchPlaybackLiveness === \"function\" && getCurrentEventId() === \"high_school_showcase\") {\n      ensureMatchPlaybackLiveness(\"active-match-reload\", player.highSchoolMatch);\n    }\n    showNotice(\"進度讀取完成。\", \"success\");\n  } catch (error) {\n    console.error(error);\n    showNotice(\"存檔損壞，無法讀取。\", \"error\");\n  }\n}\n",
+      "callers": 2,
+      "callees": 10
+    },
+    {
+      "name": "validateRawSave",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.receiver-source-snapshot.validateRawSave",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/receiver-source-snapshot.js",
+      "start_line": 205,
+      "end_line": 216,
+      "source_mode": "full",
+      "source": "  function validateRawSave(saved) {\n    if (!saved || typeof saved !== \"object\") reject(\"raw save object\");\n    // Called by the actual Save owner before defaults/merge. No caller history label is accepted.\n    if (saved.saveVersion > V.saveVersion) reject(\"future save format not implemented\");\n    if (saved.saveVersion === V.saveVersion) {\n      if (saved.receiverSourceSaveFormatVersion !== V.saveFormat || !own(saved.highSchoolMatch, \"receiverSourceFormatVersion\")) reject(\"new save requires source format\");\n    } else if (own(saved, \"receiverSourceSaveFormatVersion\")) reject(\"source Save envelope cannot downgrade\");\n    const m = saved.highSchoolMatch;\n    if (own(m, \"officialReceiverExecutionVersion\") && m.officialReceiverExecutionVersion !== V.official || own(m, \"receiverExecutionVersion\") && m.receiverExecutionVersion !== V.official ||\n      [\"receiverExecutionVersion\", \"receiverV2Execution\", \"receiverModelAdmission\"].some(k => own(m?.groundBallInPlayState, k))) reject(\"actual v2 execution Save not implemented\");\n    validateMatch(m); return true;\n  }\n",
+      "callers": 1,
+      "callees": 3
+    },
+    {
+      "name": "serializeSave",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.receiver-source-snapshot.serializeSave",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/receiver-source-snapshot.js",
+      "start_line": 217,
+      "end_line": 228,
+      "source_mode": "full",
+      "source": "  function serializeSave(player) {\n    if (player.saveVersion !== 15 && player.saveVersion !== V.saveVersion) reject(\"unsupported live source Save version\");\n    if (own(player, \"receiverSourceSaveFormatVersion\") && player.receiverSourceSaveFormatVersion !== V.saveFormat) reject(\"unsupported live source Save format\");\n    validateMatch(player.highSchoolMatch);\n    if (!own(player.highSchoolMatch, \"receiverSourceFormatVersion\")) {\n      // A later match with no source admission is an ordinary Save, not a downgrade of a pinned opportunity.\n      const saved = { ...player }; if (saved.saveVersion === V.saveVersion) saved.saveVersion = 15;\n      delete saved.receiverSourceSaveFormatVersion; validateRawSave(saved); return JSON.stringify(saved);\n    }\n    const saved = { ...player, saveVersion: V.saveVersion, receiverSourceSaveFormatVersion: V.saveFormat };\n    validateRawSave(saved); return JSON.stringify(saved);\n  }\n",
+      "callers": 0,
+      "callees": 4
+    },
+    {
+      "name": "assertPitchProductionSourceScope",
+      "qualified_name": "E-meng-baseball_life_sim_semirefactor.tests.pitch-production-source-scope.assertPitchProductionSourceScope",
+      "label": "Function",
+      "file_path": "E:/meng/baseball_life_sim_semirefactor/tests/pitch-production-source-scope.cjs",
+      "start_line": 207,
+      "end_line": 223,
+      "source_mode": "full",
+      "source": "function assertPitchProductionSourceScope(currentText, baselineText) {\n  const current = readSource(currentText), baseline = readSource(baselineText);\n  for (const name of PROTECTED_FUNCTIONS) {\n    const actual = current.get(name).source, original = baseline.get(name).source;\n    assert(actual === original || actual === expectedFunction(baseline, name), 'protected source changed: script.js#' + name);\n  }\n  for (const name of PROTECTED_FUNCTIONS) assert(current.names.includes(name), 'protected declaration is no longer top-level: ' + name);\n  assert.deepEqual(topLevelSource(current), topLevelSource(baseline), 'script.js protected top-level constants/registrations changed');\n  // The historical projection baselines predate the already accepted SS entry.\n  // Keep their protected implementations unchanged, while freezing shared-owner\n  // call sites against the immutable FORMAL Sprint baseline (not mutable WIP).\n  if (!wiringBaseline) wiringBaseline = readSource(cp.execFileSync('git', ['show', SPRINT_BASELINE + ':script.js'], {\n    cwd: path.resolve(__dirname, '..'), encoding: 'utf8', maxBuffer: 8 * 1024 * 1024\n  }));\n  assert.deepEqual(protectedWiring(current), protectedWiring(wiringBaseline), 'script.js pitch/offense call or hook wiring changed');\n  return { protectedFunctions: PROTECTED_FUNCTIONS.length, topLevelDeclarations: true, externalWiring: true };\n}\n",
+      "callers": 0,
+      "callees": 6
+    }
+  ],
+  "limitations": [
+    "Some dynamic adapter member calls are absent from graph traces.",
+    "Clipped normalizeSave source is supplemented by current complete Save bytes and the frozen R6 exact original-plus-delta comparison."
+  ]
+}
+

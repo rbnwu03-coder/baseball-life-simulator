@@ -1,0 +1,5 @@
+"use strict";
+const assert=require('node:assert/strict'),H=require('./critical-regression-repair-b1-canonical-match-fixture-contract-harness.cjs');
+const h=H.makeContext(),fixture=H.prepare(h);assert(fixture.abilitiesUnchanged);assert.equal(fixture.initialMatch.simulationSeed,88221);assert.equal(fixture.initialMatch.developmentTestCapabilityOverride,null);const observed=H.execute(h);assert.equal(observed.seed,88221);assert(observed.abilitiesUnchanged);assert.deepEqual(observed.stateIntegrity,[]);assert.deepEqual(observed.perStepIntegrityIssues,[]);assert.equal(observed.recordIntegrity.accepted,true);
+console.log('B1_NATURAL_PROOF='+JSON.stringify({classification:'CONFIRMED',fixture,observed}));
+console.log('B1_NATURAL_SUMMARY='+JSON.stringify({initialStatus:fixture.initialFacts.playerLineupStatus,initialPlayerInLineup:fixture.initialFacts.startingLineup.some(p=>p.id==='player'),initialSS:fixture.initialFacts.ssDefender.id,operands:observed.operands,recordIntegrity:observed.recordIntegrity,phaseB1ProofStatus:'OBSERVED_NOT_ASSUMED'}));

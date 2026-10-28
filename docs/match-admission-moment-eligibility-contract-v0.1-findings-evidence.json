@@ -1,0 +1,405 @@
+{
+  "task": "Match Admission & Moment Eligibility Contract v0.1",
+  "createdAt": "2026-10-15T04:09:35.264Z",
+  "classification": "READ_ONLY_CONTRACT_AUDIT_COMPLETE",
+  "recommendation": "A — separate synthetic local contracts and canonical full-match contracts; requires human review",
+  "readyForPhaseB2": "NO",
+  "originalFormalSuiteInvocations": 0,
+  "newDiagnosticChildExecutions": 1,
+  "newFullMatchExecutions": 1,
+  "seed": 88221,
+  "seed88222": "UNVERIFIED / NOT EXECUTED",
+  "naturalStarterProof": "UNVERIFIED",
+  "original36": {
+    "completed": true,
+    "Moment1": true,
+    "Moment3": false,
+    "defenseCompletedCount": 0,
+    "defensiveMeaningfulDecisionCount": 0,
+    "safety": 110,
+    "safetyBelow1400": true,
+    "defenseCountsEqual": true,
+    "original36Boolean": false
+  },
+  "entry": {
+    "sequence": 85,
+    "inning": 6,
+    "half": "下",
+    "outs": 1,
+    "lineupSlot": 7,
+    "replacedPlayerId": "school-development-29d536a2-player-06"
+  },
+  "preEntryTicks": 79,
+  "preEntryMomentCount": 0,
+  "allDecisionsLegalPlayerBatter": true,
+  "actualExposure": {
+    "matchId": "hs-y1-autumn-exhibition",
+    "participated": true,
+    "started": false,
+    "appearanceType": "lateGameAppearance",
+    "entryInning": 6,
+    "exitInning": 7,
+    "defensiveInnings": 1,
+    "plateAppearances": 1,
+    "role": "starter"
+  },
+  "eventIdentity": {
+    "logCount": 119,
+    "recordRefCount": 119,
+    "uniqueRecordRefCount": 119,
+    "playerPACount": 1,
+    "playerPAEventSequence": [
+      87
+    ],
+    "playerPAIdentity": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|6|下",
+    "pitchIdentities": [
+      null
+    ],
+    "reached": [
+      {
+        "sequence": 86,
+        "momentId": "hs_y1_match_moment_1",
+        "domain": "offense",
+        "inning": 6,
+        "half": "下"
+      }
+    ],
+    "resolved": [
+      {
+        "sequence": 88,
+        "domain": "offense",
+        "inning": 6,
+        "half": "下",
+        "outs": 2,
+        "resultCode": "out"
+      }
+    ],
+    "finalCompletedMomentSnapshots": [
+      {
+        "id": "hs_y1_match_moment_1",
+        "domain": "offense",
+        "inning": 6,
+        "half": "終",
+        "outs": 3,
+        "scores": {
+          "home": 1,
+          "away": 6
+        }
+      }
+    ]
+  },
+  "duplicateResolve": [
+    {
+      "decision": "zone",
+      "expectedMomentId": "hs_y1_match_moment_1",
+      "result": false,
+      "fullPlayerAndMatchUnchanged": true,
+      "logBefore": 89,
+      "logAfter": 89,
+      "momentsBefore": 1,
+      "momentsAfter": 1
+    }
+  ],
+  "duplicateSettlement": {
+    "returns": [
+      false,
+      false,
+      false
+    ],
+    "fullPlayerAndMatchUnchanged": true
+  },
+  "recordReplay": {
+    "locked": {
+      "status": "locked",
+      "eventId": "hs-y1-autumn-exhibition|6|下|87"
+    },
+    "first": {
+      "status": "applied",
+      "eventId": "hs-y1-autumn-exhibition|6|下|87"
+    },
+    "duplicate": {
+      "status": "duplicate",
+      "eventId": "hs-y1-autumn-exhibition|6|下|87"
+    },
+    "unchanged": true
+  },
+  "recordStatus": "final",
+  "recordIntegrity": true,
+  "recordSha256": "abb6ee6487c8f39a3e3de3afe945f2494a374d9b78d6c6a6a358c9808dd6cf92",
+  "recordScore": {
+    "away": 6,
+    "home": 1
+  },
+  "saveRoundTrip": {
+    "status": "confirmed",
+    "recordUnchanged": true,
+    "completedMomentsUnchanged": true,
+    "originalPlayerUnchanged": true
+  },
+  "evaluation": {
+    "version": "high-school-competition-evaluation-v1",
+    "evaluationIdentity": "school-development-29d536a2|high-school-competition-career",
+    "sampleCount": 1,
+    "trainingEvidence": {
+      "positionReadiness": 3,
+      "positionFit": 0,
+      "coachTrust": 0,
+      "fatigue": 0,
+      "injuryRisk": 0,
+      "pain": 0,
+      "score": -3
+    },
+    "matchEvidence": {
+      "quality": 1.185,
+      "sampleSize": 2,
+      "sampleConfidence": 0.667,
+      "strong": 0,
+      "mixed": 1,
+      "failure": 0,
+      "errors": 0,
+      "decisionExecutionSamples": 1,
+      "matchExperienceEvidenceCount": 5,
+      "activeExperienceEvidenceCount": 2,
+      "developmentContextCount": 2,
+      "matchExperienceSettlementId": "hs-y1-autumn-exhibition|88221|player|match-experience-development-v1"
+    },
+    "exposureEvidence": {
+      "started": false,
+      "enteredGame": true,
+      "noAppearance": false,
+      "appearanceType": "lateGameAppearance",
+      "plateAppearances": 1,
+      "defensiveInnings": 1
+    },
+    "evidenceHistory": [
+      {
+        "matchIdentity": "hs-y1-autumn-exhibition",
+        "trainingEvidence": {
+          "positionReadiness": 3,
+          "positionFit": 0,
+          "coachTrust": 0,
+          "fatigue": 0,
+          "injuryRisk": 0,
+          "pain": 0,
+          "score": -3
+        },
+        "exposureEvidence": {
+          "started": false,
+          "enteredGame": true,
+          "noAppearance": false,
+          "appearanceType": "lateGameAppearance",
+          "plateAppearances": 1,
+          "defensiveInnings": 1
+        },
+        "matchEvidence": {
+          "quality": 1.185,
+          "sampleSize": 2,
+          "sampleConfidence": 0.667,
+          "strong": 0,
+          "mixed": 1,
+          "failure": 0,
+          "errors": 0,
+          "decisionExecutionSamples": 1,
+          "matchExperienceEvidenceCount": 5,
+          "activeExperienceEvidenceCount": 2,
+          "developmentContextCount": 2,
+          "matchExperienceSettlementId": "hs-y1-autumn-exhibition|88221|player|match-experience-development-v1"
+        },
+        "sampleScore": -0.26
+      }
+    ],
+    "recentTrend": "neutral",
+    "trendScore": -0.26,
+    "accumulatedScore": -0.26,
+    "rolePressure": "stable",
+    "promotionPressure": 0,
+    "demotionPressure": 0.26,
+    "lastReassessmentReason": [
+      "limitedSample",
+      "competitionGapClosed"
+    ],
+    "lastReassessmentAt": "hs-y1-autumn-exhibition|settled",
+    "appliedMatchIdentities": [
+      "hs-y1-autumn-exhibition"
+    ]
+  },
+  "matchExperience": {
+    "settled": true,
+    "settlementId": "hs-y1-autumn-exhibition|88221|player|match-experience-development-v1",
+    "evidenceSummary": {
+      "total": 5,
+      "exposure": 3,
+      "active": 2,
+      "noveltyGroups": 5
+    }
+  },
+  "opportunityHistory": [
+    {
+      "opportunityId": "hs-y1-autumn-exhibition|2.2.2 測試球員|體能＋棒球理解|school-development-29d536a2|3d16832b",
+      "matchId": "hs-y1-autumn-exhibition",
+      "opportunityIndex": 1,
+      "roleAtCreation": "starter",
+      "plannedUsage": {
+        "appearanceType": "lateGameAppearance",
+        "entryInning": 6,
+        "entryHalf": "下"
+      },
+      "actualExposure": {
+        "appearanceType": "lateGameAppearance",
+        "started": false,
+        "participated": true,
+        "plateAppearances": 1,
+        "defensiveInnings": 1
+      },
+      "evaluationConsequence": {
+        "evaluationIdentity": "school-development-29d536a2|high-school-competition-career",
+        "accumulatedScore": -0.26,
+        "trend": "neutral",
+        "roleChange": "same",
+        "nextRole": "starter",
+        "reasons": [
+          "limitedSample",
+          "competitionGapClosed"
+        ]
+      }
+    },
+    {
+      "opportunityId": "hs-y1-followup-evaluation-2|2.2.2 測試球員|體能＋棒球理解|school-development-29d536a2|5b3cff75",
+      "matchId": "hs-y1-followup-evaluation-2",
+      "opportunityIndex": 2,
+      "roleAtCreation": "starter",
+      "plannedUsage": {
+        "appearanceType": "defensiveSubstitution",
+        "entryInning": 6,
+        "entryHalf": "下"
+      },
+      "actualExposure": null,
+      "evaluationConsequence": null
+    }
+  ],
+  "parity": {
+    "fixture": true,
+    "initialMatch": true,
+    "record": true,
+    "log": true
+  },
+  "recordStoresFullCompletedMomentObjects": false,
+  "reusedB1Evidence": [
+    {
+      "path": "docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-natural-proof-evidence.json",
+      "sha256": "7709357f1a0ad7be83863ef9da78f959143db263acdaea3b8e571adf15fb4982",
+      "status": "PASS",
+      "stdoutSha256": "a127f6a52ec3365e13e6f2aeae508a652220609a5bc713e06c1d0ff9c3d0a300"
+    },
+    {
+      "path": "docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-contract-proof-evidence.json",
+      "sha256": "d2cc69d4f70034fced86f43bedbdfc233a5fc33972b95e739b33e55a7d6fab58",
+      "status": "PASS",
+      "stdoutSha256": "7d36c23d43c1bc2013449e24a50185a8a069da1958eb2c499f3bbd449936bd3b"
+    },
+    {
+      "path": "docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-normal-negatives-evidence.json",
+      "sha256": "a3216e7b59f0f9c0645f6d1949d97529df3b9cf3ea556759e756373790c519c5",
+      "status": "PASS",
+      "stdoutSha256": "5491e62a3041d7fead231a1121c8a66c3c0e3bfbc41b60ebc4f0749ea928a6fc"
+    }
+  ],
+  "reusedNormalNegatives": [
+    {
+      "name": "starter-without-lineup",
+      "mutation": "bad.playerLineupStatus='starter';bad.playerEntryCompleted=true;",
+      "classification": "CONFIRMED",
+      "contractIssues": [
+        "starter-without-player-lineup"
+      ],
+      "native": {
+        "matchIssues": [],
+        "matchError": null,
+        "activeDefense": {
+          "ok": true,
+          "issues": []
+        },
+        "canonicalRoster": {
+          "ok": true,
+          "errors": []
+        }
+      },
+      "contractGap": true
+    },
+    {
+      "name": "roster-player-missing",
+      "mutation": "bad.rosters.home.teamRoster.players=bad.rosters.home.teamRoster.players.filter(a=>(a.playerId||a.id)!=='player');",
+      "classification": "CONFIRMED",
+      "contractIssues": [
+        "canonical-roster-player-missing"
+      ],
+      "native": {
+        "matchIssues": [],
+        "matchError": null,
+        "activeDefense": {
+          "ok": true,
+          "issues": []
+        },
+        "canonicalRoster": {
+          "ok": true,
+          "errors": []
+        }
+      },
+      "contractGap": true
+    },
+    {
+      "name": "batting-order-batter-mismatch",
+      "mutation": "bad.currentBatter='not-the-current-lineup-batter';",
+      "classification": "CONFIRMED",
+      "contractIssues": [
+        "batting-order-batter-mismatch"
+      ],
+      "native": {
+        "matchIssues": [
+          "current-batter-mismatch"
+        ],
+        "matchError": {
+          "name": "Error",
+          "message": "High school match integrity failed at b1-negative: current-batter-mismatch"
+        },
+        "activeDefense": {
+          "ok": true,
+          "issues": []
+        },
+        "canonicalRoster": {
+          "ok": true,
+          "errors": []
+        }
+      },
+      "contractGap": false
+    },
+    {
+      "name": "ss-assignment-mismatch",
+      "mutation": "bad.playerFieldingAssignment='游擊手';",
+      "classification": "CONFIRMED",
+      "contractIssues": [
+        "ss-assignment-roster-mismatch"
+      ],
+      "native": {
+        "matchIssues": [],
+        "matchError": null,
+        "activeDefense": {
+          "ok": true,
+          "issues": []
+        },
+        "canonicalRoster": {
+          "ok": true,
+          "errors": []
+        }
+      },
+      "contractGap": true
+    }
+  ],
+  "limitations": [
+    "Only one already fixed legal substitution fixture rerun; no school/seed search or capability changes.",
+    "B1 no-appearance debug case is not a legal complete-entry no-appearance fixture.",
+    "No new natural SS defensive decisions; actual defensive and other career branches not runtime-accepted.",
+    "Existing B1 owner observers remain; no observer-free neutrality comparison.",
+    "Public exactly-once proof is bounded; low-level Moment append has no independent deduplication; no universal arbitrary-call guarantee."
+  ]
+}

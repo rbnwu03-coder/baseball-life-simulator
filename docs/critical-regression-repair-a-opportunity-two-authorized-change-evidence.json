@@ -1,0 +1,92 @@
+{
+  "task": "Critical Regression Repair A — Opportunity-two Manifest Correction",
+  "createdAt": "2026-10-15T01:53:01.149Z",
+  "file": "tests/high-school-year-one-opportunity-two-integration-test.js",
+  "beforeSha256": "db46a6e6c15126b357657b1670b1452580718e8609dee43b84df1a0af6e0dc27",
+  "afterSha256": "7c67d25fcd60ac784fe01884e55a2be0a8886131178731fbde75eae19f074005",
+  "exactReverseSha256": "db46a6e6c15126b357657b1670b1452580718e8609dee43b84df1a0af6e0dc27",
+  "dependencyOrder": {
+    "requiredOwners": [
+      "defensive-opportunity-foundation.js",
+      "defensive-reach-secure-foundation.js",
+      "defensive-decision-throw-foundation.js"
+    ],
+    "edges": [
+      {
+        "before": "batted-ball-physical.js",
+        "after": "defensive-opportunity-foundation.js",
+        "manifestBefore": 25,
+        "manifestAfter": 27,
+        "indexBefore": 41,
+        "indexAfter": 43
+      },
+      {
+        "before": "defensive-opportunity-foundation.js",
+        "after": "defensive-reach-secure-foundation.js",
+        "manifestBefore": 27,
+        "manifestAfter": 28,
+        "indexBefore": 43,
+        "indexAfter": 44
+      },
+      {
+        "before": "team-roster-foundation.js",
+        "after": "defensive-reach-secure-foundation.js",
+        "manifestBefore": 0,
+        "manifestAfter": 28,
+        "indexBefore": 0,
+        "indexAfter": 44
+      },
+      {
+        "before": "defensive-reach-secure-foundation.js",
+        "after": "defensive-decision-throw-foundation.js",
+        "manifestBefore": 28,
+        "manifestAfter": 36,
+        "indexBefore": 44,
+        "indexAfter": 57
+      },
+      {
+        "before": "force-advancement.js",
+        "after": "defensive-decision-throw-foundation.js",
+        "manifestBefore": 35,
+        "manifestAfter": 36,
+        "indexBefore": 56,
+        "indexAfter": 57
+      },
+      {
+        "before": "defensive-decision-throw-foundation.js",
+        "after": "offensive-bunt-defensive-handoff.js",
+        "manifestBefore": 36,
+        "manifestAfter": 37,
+        "indexBefore": 57,
+        "indexAfter": 58
+      },
+      {
+        "before": "defensive-decision-throw-foundation.js",
+        "after": "batted-ball-ground-defense.js",
+        "manifestBefore": 36,
+        "manifestAfter": 38,
+        "indexBefore": 57,
+        "indexAfter": 60
+      },
+      {
+        "before": "defensive-decision-throw-foundation.js",
+        "after": "defensive-runner-throw-settlement-foundation.js",
+        "manifestBefore": 36,
+        "manifestAfter": 60,
+        "indexBefore": 57,
+        "indexAfter": 59
+      },
+      {
+        "before": "defensive-decision-throw-foundation.js",
+        "after": "script.js",
+        "manifestBefore": 36,
+        "manifestAfter": 61,
+        "indexBefore": 57,
+        "indexAfter": 91
+      }
+    ]
+  },
+  "rawByteChangesOnlyTwoManifestInsertions": true,
+  "assertionsFixturesSeedsAndOtherSourceBytesUnchanged": true,
+  "diff": "diff --git a/tests/high-school-year-one-opportunity-two-integration-test.js b/tests/high-school-year-one-opportunity-two-integration-test.js\nindex 85b1b84..9441d6c 100644\n--- a/tests/high-school-year-one-opportunity-two-integration-test.js\n+++ b/tests/high-school-year-one-opportunity-two-integration-test.js\n@@ -17,9 +17,9 @@ const runtimeFiles = [\n   \"coach-evaluation-boundary.js\", \"narrative-condition-boundary.js\", \"evaluation-registry-bootstrap.js\", \"decision-flow.js\",\n   \"day-completion-flow.js\", \"relationship-flow.js\", \"coach-response-flow.js\", \"narrative-condition-flow.js\", \"competition-presentation.js\",\n   \"baseball-gameplay-prototype-utils.js\", \"baseball-defense-prototype.js\", \"baseball-offense-prototype.js\", \"pitcher-mental-state.js\",\n-  \"pitcher-process-state.js\", \"pitch-sequencing.js\", \"pitcher-catcher-tactical-integration.js\", \"batter-anticipation.js\", \"batted-ball-physical.js\", \"batted-ball-outcome-mapping.js\", \"offensive-plate-approach.js\",\n+  \"pitcher-process-state.js\", \"pitch-sequencing.js\", \"pitcher-catcher-tactical-integration.js\", \"batter-anticipation.js\", \"batted-ball-physical.js\", \"batted-ball-outcome-mapping.js\", \"defensive-opportunity-foundation.js\", \"defensive-reach-secure-foundation.js\", \"offensive-plate-approach.js\",\n   \"offensive-tactical-opportunity.js\", \"offensive-tactical-decision.js\", \"offensive-tactical-action.js\", \"offensive-bunt-count-rules.js\",\n-  \"offensive-bunt-execution.js\", \"force-advancement.js\", \"offensive-bunt-defensive-handoff.js\", \"batted-ball-ground-defense.js\",\n+  \"offensive-bunt-execution.js\", \"force-advancement.js\", \"defensive-decision-throw-foundation.js\", \"offensive-bunt-defensive-handoff.js\", \"batted-ball-ground-defense.js\",\n   \"batted-ball-line-drive-defense.js\", \"batted-ball-fly-ball-defense.js\", \"batted-ball-tag-up-execution.js\", \"match-situation-lifecycle.js\",\n   \"plate-decision-foundation.js\", \"baseball-gameplay-integration.js\", \"baseball-training-resolver.js\", \"playing-time-game-exposure.js\",\n   \"match-experience-development.js\", \"high-school-competition-reassessment.js\", \"match-development-settlement-presentation.js\",\n"
+}

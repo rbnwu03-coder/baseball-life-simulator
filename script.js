@@ -1817,7 +1817,7 @@ function getYouthSeasonOutcomeHeading(eventId) {
 }
 
 function getYouthSeasonOutcomeReaction(eventId) {
-  if (isHighSchoolYearOneMatchEventId(eventId)) return `${player.highSchoolMatch.coachReaction || "高中現任教練記下這次處理。"}${player.highSchoolMatch.teamReaction ? ` ${player.highSchoolMatch.teamReaction}` : ""}`;
+  if (isHighSchoolYearOneMatchEventId(eventId)) return `${player.highSchoolMatch.completed ? getHighSchoolPostMatchCoachFeedback(player.highSchoolMatch) : player.highSchoolMatch.coachReaction || "高中現任教練記下這次處理。"}${player.highSchoolMatch.teamReaction ? ` ${player.highSchoolMatch.teamReaction}` : ""}`;
   if (eventId === "high_school_year_two_spring_game") return "記錄員把這個打席寫進春季聯賽成績；高中現任教練沒有改動深度表，只讓下一棒走進打擊區。";
   if (eventId === "youth_position_trial") return "山本教練把三球的結果寫進分組表，下一段訓練會依這個安排開始。";
   if (eventId === "youth_teammate") return "器材室的門關上後，阿哲帶著這次互動離開球場；下一次合作時，他不會把它當作沒發生過。";
@@ -3737,7 +3737,7 @@ function renderHighSchoolPostMatchOutcome(choice, statFeedbackHtml) {
   const executionHtml = !offensiveExplainabilityHtml && executionText ? `<section class="outcome__execution choice-outcome-execution" aria-label="你的執行"><small>你的執行</small><p>${escapeHtml(executionText)}</p></section>` : "";
   const pitchFeedHtml = pitchFeed.length
     ? `<section class="post-match-section plate-approach-feed" aria-label="這個打席的逐球紀錄"><small>逐球紀錄</small><ol>${pitchFeed.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ol></section>` : "";
-  const performances = match.completedMoments.map((moment, index) => `<li><strong>第${["一", "二", "三"][index] || index + 1}次關鍵回合</strong>${moment.execution ? `<span class="post-match-execution">你的執行：${escapeHtml(moment.execution)}</span>` : ""}<span>${escapeHtml(moment.outcome)}。${escapeHtml(moment.consequence)}</span>${moment.causeExplanation ? `<span class="post-match-cause">原因：${escapeHtml(moment.causeExplanation)}</span>` : ""}</li>`).join("");
+  const performances = getHighSchoolMatchFeedbackEvidence(match).decisions.map((moment, index) => `<li><strong>第${["一", "二", "三"][index] || index + 1}次關鍵回合</strong>${moment.execution ? `<span class="post-match-execution">你的執行：${escapeHtml(moment.execution)}</span>` : ""}<span>${escapeHtml(moment.outcome)}。${escapeHtml(moment.consequence)}</span>${moment.causeExplanation ? `<span class="post-match-cause">原因：${escapeHtml(moment.causeExplanation)}</span>` : ""}</li>`).join("");
   const feedbackHtml = typeof statFeedbackHtml === "string" && statFeedbackHtml.trim()
     ? `<section class="outcome__feedback choice-outcome-feedback" aria-label="狀態變化"><small>狀態變化</small>${statFeedbackHtml}</section>` : "";
   const developmentPresentationModel = typeof MatchDevelopmentSettlementPresentation !== "undefined"
@@ -3751,9 +3751,9 @@ function renderHighSchoolPostMatchOutcome(choice, statFeedbackHtml) {
     <div class="event-kicker choice-outcome-kicker">${getHighSchoolFormalMatchLabel(match)}・終場</div>
     <h2 id="outcomeTitle" tabindex="-1">${escapeHtml(match.teamResult)}</h2>
     ${confirmationHtml}${offensiveExplainabilityHtml}${executionHtml}${pitchFeedHtml}
-    <section class="post-match-section" aria-labelledby="postMatchPerformance"><small id="postMatchPerformance">你的關鍵表現</small><ol>${performances || "<li>你依照目前角色完成了這場比賽。</li>"}</ol></section>
-    <section class="post-match-section post-match-coach" aria-labelledby="postMatchCoach"><small id="postMatchCoach">教練評語</small><p>${escapeHtml(choice?.coachFeedback || match.coachReaction)}</p></section>
-    <section class="post-match-section post-match-impact" aria-labelledby="postMatchImpact"><small id="postMatchImpact">接下來的影響</small><p>${escapeHtml(match.consequence)}</p></section>
+    <section class="post-match-section" aria-labelledby="postMatchPerformance"><small id="postMatchPerformance">你的關鍵表現</small><ol>${performances || `<li>${escapeHtml(getHighSchoolMatchPerformanceFeedback(match))}</li>`}</ol></section>
+    <section class="post-match-section post-match-coach" aria-labelledby="postMatchCoach"><small id="postMatchCoach">教練評語</small><p>${escapeHtml(getHighSchoolPostMatchCoachFeedback(match))}</p></section>
+    <section class="post-match-section post-match-impact" aria-labelledby="postMatchImpact"><small id="postMatchImpact">接下來的影響</small><p>${escapeHtml(getHighSchoolPostMatchConsequenceFeedback(match))}</p></section>
     ${experienceHtml}
     ${feedbackHtml}
   </article>`;
@@ -13576,6 +13576,151 @@ function recordHighSchoolYearOneMatchHistory(match, competitionSettlement) {
   return player[historyKey];
 }
 
+// Read-only evidence for narrative selection. Never infer an action from a roster role.
+function getHighSchoolMatchFeedbackEvidence(match) {
+  const record = match?.gameRecord;
+  const sameGame = Boolean(match?.id && record?.gameId === match.id && Array.isArray(record.eventRefs));
+  const line = sameGame ? record.playerLines?.player : null;
+  const exposure = match?.gameExposureState?.finalized && match.gameExposureState.matchId === match?.id
+    ? match.gameExposureState : deriveHighSchoolMatchActualExposure(match);
+  const hasPlateAppearance = sameGame && Number(line?.batting?.PA) > 0;
+  const participated = sameGame && (hasPlateAppearance || Number(line?.pitching?.BF) > 0
+    || Number(line?.pitching?.outsRecorded) > 0 || Number(line?.defense?.chances) > 0
+    || Number(exposure?.defensiveInnings) > 0 || Number(exposure?.plateAppearances) > 0);
+  // Older saves may have finalized exposure without the newer official ledger.
+  // This can establish absence, but cannot establish a particular on-field action.
+  const legacyExposure = !record && match?.gameExposureState?.finalized && exposure?.matchId === match?.id;
+  const noAppearance = (sameGame || legacyExposure) && !participated && exposure?.appearanceType === "noAppearance"
+    && !(Number(exposure?.defensiveInnings) > 0 || Number(exposure?.plateAppearances) > 0);
+  const log = Array.isArray(match?.simulationLog) ? match.simulationLog : [];
+  const moments = Array.isArray(match?.completedMoments) ? match.completedMoments : [];
+  const used = new Set();
+  const decisions = participated ? moments.filter(moment => {
+    if (!moment?.decision || !["offense", "defense"].includes(moment.domain)
+      || !Number.isInteger(moment.inning) || moment.inning < 1 || !["上", "下"].includes(moment.half)) return false;
+    const event = log.find(item => item.type === "meaningfulMomentResolved"
+      && item.inning === moment.inning && item.half === moment.half && item.domain === moment.domain
+      && item.decision === moment.decision && item.outcome === moment.outcome
+      && !used.has(item.sequence)
+      && record.eventRefs.some(ref => ref.type === item.type && ref.sequence === item.sequence
+        && ref.inning === item.inning && ref.half === item.half));
+    if (!event) return false;
+    used.add(event.sequence);
+    return true;
+  }) : [];
+  return { participated, noAppearance, hasPlateAppearance, decisions };
+}
+
+function getHighSchoolPostMatchCoachFeedback(match, evidence = getHighSchoolMatchFeedbackEvidence(match)) {
+  if (evidence.noAppearance) return "「本場沒有正式上場樣本，先把備戰做好，下一次任務再看安排。」";
+  if (!evidence.participated) return "「這場的紀錄還在整理。先照準備表練，下次再一起確認內容。」";
+  const decisions = evidence.decisions;
+  const soundDecisions = decisions.filter(moment => ["strong", "acceptable", "reasonable", "routine"].includes(moment.decisionQuality));
+  if (decisions.some(moment => ["poor", "questionable", "poorFit"].includes(moment.decisionQuality))) {
+    if (soundDecisions.length >= 2) return "「有幾球你看對了，也有判斷需要再檢查。下一輪把不同局勢下的選擇說清楚。」";
+    return "「本場有判斷需要再檢查。下一輪先把當時的局勢與選擇說清楚，再談怎麼執行。」";
+  }
+  if (decisions.some(moment => ["weak", "failed", "misplay", "late"].includes(moment.executionQuality))) {
+    return "「本場紀錄裡有執行要修正的地方。下一輪把動作拆開練，不急著用一次結果下結論。」";
+  }
+  if (soundDecisions.length >= 2) return "「有幾球你看對了。下一輪確認這些有根據的判斷能不能持續做出來。」";
+  if (soundDecisions.length === 1) return "「這次有紀錄的判斷有根據，下一輪再確認能不能重複。」";
+  return decisions.length
+    ? "「本場留下了決策紀錄，先回看當時的局勢與處理，再安排下一輪練習。」"
+    : "「本場有正式出賽紀錄。等細節整理好，再一起找下一步要練什麼。」";
+}
+
+function getHighSchoolMatchPerformanceFeedback(match, evidence = getHighSchoolMatchFeedbackEvidence(match)) {
+  if (evidence.noAppearance) return "這場比賽沒有輪到你上場，先把下一次準備做好。";
+  const lines = evidence.decisions.map((moment, index) => `第${["一", "二", "三"][index] || index + 1}次：${moment.outcome}。`).join(" ");
+  if (lines) return `本場有紀錄的關鍵時刻：${lines}`;
+  return evidence.participated ? "本場留下出賽紀錄，詳細內容還在整理。"
+    : "這場的出賽紀錄還在整理，下一次的準備照常進行。";
+}
+
+function formatHighSchoolRoleChange(previousRole, currentRole, prefix = "角色") {
+  const roles = ["bench", "rotation", "starter"];
+  const labels = typeof HighSchoolCompetitionReassessment !== "undefined" ? HighSchoolCompetitionReassessment.ROLE_LABELS : {};
+  if (!roles.includes(currentRole)) return "目前角色仍待確認";
+  const currentLabel = labels[currentRole] || currentRole;
+  if (!roles.includes(previousRole)) return `目前${prefix}為「${currentLabel}」`;
+  if (previousRole === currentRole) return `${prefix}維持「${currentLabel}」`;
+  const verb = roles.indexOf(currentRole) > roles.indexOf(previousRole) ? "升為" : "降為";
+  return `${prefix}由「${labels[previousRole] || previousRole}」${verb}「${currentLabel}」`;
+}
+
+function getHighSchoolFeedbackCurrentRole(expectedMatchId = "") {
+  const roles = ["bench", "rotation", "starter"];
+  const match = player.highSchoolMatch;
+  if (expectedMatchId && match?.id !== expectedMatchId) return "";
+  if (roles.includes(player.highSchoolRoleCode)) return player.highSchoolRoleCode;
+  const year = player.chapter?.startsWith("青棒第二") ? 2 : player.chapter === "青棒關鍵年" ? 3 : 1;
+  if (Number(match?.highSchoolYear) !== year || player.highSchoolCompetitionEvaluation?.lastReassessmentAt !== `${match?.id}|settled`) return "";
+  const history = year === 2 ? player.highSchoolYearTwoMatchHistory : year === 3 ? player.highSchoolYearThreeMatchHistory : player.highSchoolYearOneMatchHistory;
+  const latest = (Array.isArray(history) ? history : []).at(-1);
+  const role = latest?.matchId === match?.id ? latest.evaluationConsequence?.currentRole : "";
+  return roles.includes(role) && player.highSchoolRoleContext?.code === role ? role : "";
+}
+
+function getHighSchoolHistoryExposureFeedback(item = {}) {
+  const read = exposure => {
+    const count = key => Number.isFinite(exposure?.[key]) && exposure[key] >= 0 ? exposure[key] : null;
+    const plateAppearances = count("plateAppearances"), defensiveInnings = count("defensiveInnings");
+    const state = exposure?.participated === true || plateAppearances > 0 || defensiveInnings > 0 ? "participated"
+      : exposure?.participated === false || exposure?.appearanceType === "noAppearance" ? "noAppearance" : "unknown";
+    return { state, plateAppearances, defensiveInnings };
+  };
+  const own = read(item.actualExposure);
+  if (own.state !== "unknown") return own;
+  const matchId = typeof item.matchId === "string" ? item.matchId : "";
+  if (!matchId) return own;
+  const opportunities = Array.isArray(player.highSchoolOpportunityHistory) ? player.highSchoolOpportunityHistory : [];
+  for (const opportunity of [...opportunities].reverse()) {
+    if (opportunity.matchId !== matchId) continue;
+    const exposure = read(opportunity.actualExposure);
+    if (exposure.state !== "unknown") return exposure;
+  }
+  const histories = [player.highSchoolYearOneMatchHistory, player.highSchoolYearTwoMatchHistory];
+  const records = [item, ...histories.flatMap(items => Array.isArray(items) ? items : []).filter(record => record.matchId === matchId)];
+  for (const record of records) {
+    const exposure = read(record.actualExposure);
+    if (exposure.state !== "unknown") return exposure;
+    const line = record.gameRecordId === matchId ? record.gameRecordSummary?.playerLine : null;
+    if (line?.playerId === "player" && (Number(line.batting?.PA) > 0 || Number(line.pitching?.BF) > 0 || Number(line.defense?.chances) > 0)) {
+      return read({ participated: true, plateAppearances: line.batting?.PA });
+    }
+  }
+  const match = player.highSchoolMatch;
+  if (match?.id !== matchId) return own;
+  const finalized = match.gameExposureState?.finalized && match.gameExposureState.matchId === matchId ? match.gameExposureState : null;
+  const evidence = getHighSchoolMatchFeedbackEvidence(match);
+  if (evidence.participated) return read({ ...finalized, participated: true,
+    plateAppearances: match.gameRecord?.gameId === matchId ? match.gameRecord.playerLines?.player?.batting?.PA : finalized?.plateAppearances });
+  return finalized ? read(finalized) : own;
+}
+
+function formatHighSchoolHistoryExposureFeedback(item) {
+  const exposure = getHighSchoolHistoryExposureFeedback(item);
+  if (exposure.state === "noAppearance") return "沒有實際上場";
+  if (exposure.state === "unknown") return "出賽紀錄還在整理";
+  const details = [];
+  if (exposure.plateAppearances !== null) details.push(`${exposure.plateAppearances} 打席`);
+  if (exposure.defensiveInnings !== null) details.push(`${exposure.defensiveInnings} 局守備`);
+  return details.length ? `${details.join("、")}${details.length < 2 ? "，其餘出賽內容還在整理" : ""}` : "已有出賽紀錄，詳細內容還在整理";
+}
+
+function getHighSchoolPostMatchConsequenceFeedback(match) {
+  const evidence = getHighSchoolMatchFeedbackEvidence(match);
+  const base = evidence.noAppearance ? "本場沒有個人上場樣本；下一次用途仍以正式評估與名單安排為準。"
+    : "下一次實戰的用途仍以正式評估與名單安排為準。";
+  const history = [player.highSchoolYearOneMatchHistory, player.highSchoolYearTwoMatchHistory, player.highSchoolYearThreeMatchHistory];
+  const consequence = history.flatMap(items => Array.isArray(items) ? items : []).find(item => item.matchId === match?.id)?.evaluationConsequence;
+  if (!consequence) return base;
+  const roleText = formatHighSchoolRoleChange(consequence.previousRole, consequence.currentRole, "正式角色");
+  const reasons = Array.isArray(consequence.reasons) ? consequence.reasons.map(getHighSchoolCompetitionReasonText) : [];
+  return `${base} ${roleText}${reasons.length ? `；原因：${reasons.join("、")}` : ""}。`;
+}
+
 function settleHighSchoolYearOneMatch(match, finalDecision) {
   if (match.settled || match.completed) return false;
   const contribution = match.playerContribution;
@@ -13584,22 +13729,13 @@ function settleHighSchoolYearOneMatch(match, finalDecision) {
   const momentCount = match.completedMoments.length;
   const participationTruth = deriveHighSchoolMatchActualExposure(match);
   const overallTier = contribution.strong > contribution.failure ? "strong" : contribution.failure > contribution.strong ? "failure" : "mixed";
-  const countLabel = momentCount === 1 ? "一個" : momentCount === 2 ? "兩個" : momentCount === 3 ? "三個" : `${momentCount} 個`;
-  const performanceLines = match.completedMoments.map((moment, index) => `第${["一", "二", "三"][index] || index + 1}次：${moment.outcome}。`).join(" ");
-  match.performanceSummary = participationTruth.participated
-    ? `本場${countLabel}關鍵時刻：${performanceLines || "你依照角色完成了這場比賽。"}`
-    : "本場比賽完整結束，但教練沒有把你換上場；沒有虛構守備局數、打席或比賽成長。";
+  const feedbackEvidence = getHighSchoolMatchFeedbackEvidence(match);
+  match.performanceSummary = getHighSchoolMatchPerformanceFeedback(match, feedbackEvidence);
   match.outcome = `${match.teamResult}。${match.performanceSummary}`;
-  match.coachReaction = overallTier === "strong"
-    ? "「今天幾次輪到你，你都把眼前的球處理清楚。下一場繼續照這個節奏準備。」"
-    : overallTier === "mixed"
-      ? "「有幾球你看對了，也有一步慢了。下一輪把判斷後的第一個動作做得更乾淨。」"
-      : "「你不是沒看懂，動作只是慢了一步。下一輪先把接球到出手的節奏修掉。」";
-  match.consequence = overallTier === "strong"
-    ? "下一場實戰名單仍會保留你的名字。"
-    : overallTier === "mixed"
-      ? "接下來的訓練會更重視判斷後的第一步動作。"
-      : "下一輪訓練會先練接球、轉身與出手之間的銜接。";
+  match.coachReaction = getHighSchoolPostMatchCoachFeedback(match, feedbackEvidence);
+  match.consequence = feedbackEvidence.noAppearance
+    ? "本場沒有個人上場樣本；下一次用途仍以正式評估與名單安排為準。"
+    : "下一次實戰的用途仍以正式評估與名單安排為準。";
   match.teamReaction = match.teamResult;
   match.passage = "終場哨響，記分板停在這場比賽真正結束的局數。";
   match.momentIndex = momentCount;
@@ -13650,11 +13786,8 @@ function settleHighSchoolYearOneMatch(match, finalDecision) {
   }
   const competitionSettlement = applyHighSchoolCompetitionMatchSettlement(match);
   if (competitionSettlement?.status === "applied") {
-    const labels = HighSchoolCompetitionReassessment.ROLE_LABELS || {};
     const roleResult = competitionSettlement.roleResult || {};
-    const roleText = roleResult.change === "unchanged"
-      ? `正式角色維持「${labels[roleResult.nextRole] || player.highSchoolTeamRole || "待評估"}」`
-      : `正式角色由「${labels[roleResult.currentRole] || roleResult.currentRole}」調整為「${labels[roleResult.nextRole] || roleResult.nextRole}」`;
+    const roleText = formatHighSchoolRoleChange(roleResult.currentRole, roleResult.nextRole, "正式角色");
     match.competitionFeedback = `${roleText}；評估趨勢：${formatHighSchoolCompetitionEvaluation(competitionSettlement.evaluation)}。`;
     match.consequence = `${match.consequence} ${match.competitionFeedback}`;
   }
@@ -14270,19 +14403,21 @@ function resolveHighSchoolAzheEcho() {
   const capability = (player.baseballSkills.baseballIQ || 0) + (player.observe || 0) + (player.idealSelf === "棒球理解型" ? 3 : 0);
   let variant = "azhe-guides";
   let influenceDirection = "阿哲影響玩家";
-  let cause = "你說完交流賽的打席後，阿哲沒有先問結果，只問你下一次還能替球隊完成什麼。";
+  const hasPlateAppearance = getHighSchoolMatchFeedbackEvidence(player.highSchoolMatch).hasPlateAppearance;
+  const matchTopic = hasPlateAppearance ? "交流賽的打席" : "本場紀錄與下一次的準備";
+  let cause = `你說完${matchTopic}後，阿哲沒有先問結果，只問你下一次還能替球隊完成什麼。`;
   let change = "你把他的問題寫進高二準備表，第一次把失敗後的下一個任務列在成績前面。";
   let recall = "掛電話前，阿哲提醒你：那顆一起重做的滾地球，也不是靠一次結果決定價值。";
   if (relationshipEvidence >= 8 && capability >= 13 && sharedProof.length) {
     variant = "player-guides";
     influenceDirection = "玩家影響阿哲";
-    cause = "你把交流賽拆成出局數、跑者與下一棒任務，也提起你們少棒時反覆重做的那顆滾地球。";
+    cause = "你把本場局勢拆成出局數、跑者與下一棒任務，也提起你們少棒時反覆重做的那顆滾地球。";
     change = "下一個週末，阿哲在地方球隊先畫好補位線，再請隊友各自說出下一球的責任；他沒有再把一次失誤當成誰不適合上場。";
     recall = "練習後他傳來沾著紅土的守備紙，只寫：『這次我先把下一個任務說清楚了。』";
   } else if (relationshipEvidence >= 4 || sharedProof.length) {
     variant = "co-discovery";
     influenceDirection = "彼此共同發現";
-    cause = "你和阿哲把交流賽的打席，和少棒時一起重做的滾地球放在同一張紙上。";
+    cause = `你和阿哲把${matchTopic}，和少棒時一起重做的滾地球放在同一張紙上。`;
     change = "你們各寫下一個仍能完成的任務；幾天後，阿哲把自己的那一條帶進地方球隊的守備練習。";
     recall = "他傳來練習照片時，紙角還留著你寫的那句：『角色不是先發名稱。』";
   }
@@ -14302,21 +14437,27 @@ function resolveHighSchoolAzheEcho() {
   return player.highSchoolAzheEcho;
 }
 
+function getHighSchoolRivalEncounterFeedback(match = player.highSchoolMatch) {
+  const evidence = getHighSchoolMatchFeedbackEvidence(match);
+  const lastDecision = evidence.decisions.at(-1);
+  return lastDecision
+    ? `高橋留下的問題是：第${lastDecision.inning}局${lastDecision.half}那次${lastDecision.domain === "offense" ? "打席" : "守備"}選擇，下一次還能不能重複？`
+    : evidence.noAppearance
+      ? "高橋仍是同世代競爭的外部標準；這次還沒輪到你上場，先把下一次的準備做好。"
+      : "這場的細節還待整理。高橋的問題仍是：下一次，你想用什麼內容回應同世代的標準？";
+}
+
 function prepareHighSchoolRivalPressure() {
   const role = player.highSchoolRoleCode || "bench";
-  const entry = role === "starter"
-    ? ["direct", "賽後高橋直接走到休息區，指出你在第七局做出的選擇"]
-    : role === "rotation"
-      ? ["limited", "你只在球員通道和高橋短暫交換了那個打席的判讀"]
-      : ["observed", "你沒有和高橋正面交談，但拿到他在同場比賽的打席與守備紀錄"];
+  const entryType = role === "starter" ? "direct" : role === "rotation" ? "limited" : "observed";
   player.highSchoolRivalContext = {
     rivalId: "takahashi",
     rivalName: "高橋",
-    entryType: entry[0],
-    encounter: entry[1],
+    entryType,
+    encounter: getHighSchoolRivalEncounterFeedback(),
     yearTwoPressure: "高二必須用第二次正式任務證明：這不是單場偶然，而是可重複的球員用途。"
   };
-  addFlags([`hs_y1_takahashi_${entry[0]}`, "hs_y2_external_pressure_set"]);
+  addFlags([`hs_y1_takahashi_${entryType}`, "hs_y2_external_pressure_set"]);
   return player.highSchoolRivalContext;
 }
 
@@ -14345,35 +14486,35 @@ function processHighSchoolYearOneChoice(eventId, choice) {
 
 function getHighSchoolCallHomePresentation() {
   const match = player.highSchoolMatch || {};
-  const exposure = match.gameExposureState || {};
-  const moments = Array.isArray(match.completedMoments) ? match.completedMoments : [];
-  const participated = (Number(exposure.plateAppearances) || 0) > 0 || (Number(exposure.defensiveInnings) || 0) > 0;
-  const lastMoment = moments.at(-1) || null;
+  const evidence = getHighSchoolMatchFeedbackEvidence(match);
+  const lastMoment = evidence.decisions.at(-1) || null;
   const situation = lastMoment
     ? `${lastMoment.inning ? `${lastMoment.inning}局${lastMoment.half || ""}` : "實際輪到你的局面"}，${lastMoment.outcome || "你完成了當下任務"}`
-    : "自己實際經歷的比賽片段";
-  const experience = participated
-    ? `你只說明親自經歷的內容：${situation}。你沒有把球探內部評語當成已知事實。`
-    : "你坦白說，這場比賽沒有真的輪到你上場；你談的是等待、熱身與看完整場比賽時記下的事，沒有虛構任何打席或守備選擇。";
+    : "這次出賽與下一次的準備";
+  const experience = evidence.participated
+    ? `你和阿哲聊起${situation}。`
+    : evidence.noAppearance ? "你坦白說，這場比賽沒有真的輪到你上場。阿哲聽你談起等待與熱身，接著問你下一次想先準備什麼。"
+      : "你和阿哲先聊起球隊結果，再把話題留給下一次準備；這場的個人出賽細節，等紀錄整理好再慢慢說。";
   const history = hasFlag("azhe_error_reworked") || hasFlag("azhe_hidden_error_seen")
     ? "你們都記得少棒時那顆反覆重做、卻沒有立刻被看見的滾地球。"
     : "你們已不在同一支隊伍，仍認得彼此說起失敗時會停頓多久。";
-  return `交流賽結束後，你在寮舍走廊打給阿哲。${experience}\n\n比賽結果：${match.outcome || "尚未留下"}。\n${history}\n你不知道這通電話會改變誰；只有之後的行動，能證明這段共同經驗是否真的被帶到了下一個球場。`;
+  return `交流賽結束後，你在寮舍走廊打給阿哲。${experience}\n\n比賽結果：${match.teamResult || "尚未留下"}。\n${history}\n你不知道這通電話會改變誰；只有之後的行動，能證明這段共同經驗是否真的被帶到了下一個球場。`;
 }
 
 function getHighSchoolFollowupEvaluationPresentation() {
   const opportunity = player.highSchoolNextOpportunity || {};
-  const role = player.highSchoolRoleCode || "bench";
+  const role = getHighSchoolFeedbackCurrentRole();
   const trend = player.highSchoolCompetitionEvaluation?.recentTrend || "neutral";
-  const previous = player.highSchoolOpportunityHistory?.find(item => item.opportunityIndex === 1)?.actualExposure || null;
-  const previousText = previous?.participated
-    ? `上一場留下 ${previous.plateAppearances || 0} 個打席、${previous.defensiveInnings || 0} 局守備的正式證據。`
-    : "上一場沒有實際上場樣本，教練沒有把等待當成負面表現。";
+  const previousMatchId = typeof opportunity.previousMatchId === "string" ? opportunity.previousMatchId : "";
+  const previous = previousMatchId ? player.highSchoolOpportunityHistory?.find(item => item.matchId === previousMatchId)
+    || { matchId: previousMatchId } : {};
+  const previousText = `上一場：${formatHighSchoolHistoryExposureFeedback(previous)}。`;
   const roleText = role === "starter"
     ? "你仍在名單核心，但這次用途仍由上一場證據與目前競爭重新決定。"
     : role === "rotation"
       ? "你在輪替名單中接近更重的任務，也仍需要證明執行能夠重複。"
-      : "你仍從發展名單爭取入口；這次機會可能增加、維持，也可能仍停在觀察。";
+      : role === "bench" ? "你仍從發展名單爭取入口；這次機會可能增加、維持，也可能仍停在觀察。"
+        : "教練還在確認這次的角色與用途；先依通知準備。";
   const trendText = { positive: "近期評估上升", negative: "近期評估承壓", neutral: "近期評估持平" }[trend] || "近期評估持平";
   return `數週後，現任教練安排一次不列入正式賽程的隊內實戰評估。\n${previousText}\n${roleText}\n${trendText}；本次安排：${getHighSchoolPlayingTimeAssignmentText(opportunity)}。\n\n這不是保證上場。名單、進場時機與沒有出賽都沿用既有機會安排。`;
 }
@@ -14381,37 +14522,27 @@ function getHighSchoolFollowupEvaluationPresentation() {
 function getHighSchoolRoleReassessmentFeedbackText() {
   const latest = (player.highSchoolYearOneMatchHistory || []).at(-1) || {};
   const consequence = latest.evaluationConsequence || {};
-  const labels = typeof HighSchoolCompetitionReassessment !== "undefined" ? HighSchoolCompetitionReassessment.ROLE_LABELS : {};
-  const previousLabel = labels[consequence.previousRole] || "前次角色";
-  const currentLabel = labels[player.highSchoolRoleCode] || player.highSchoolTeamRole || "目前角色";
-  const changeText = consequence.change === "promotion"
-    ? `角色由「${previousLabel}」升為「${currentLabel}」`
-    : consequence.change === "demotion"
-      ? `角色由「${previousLabel}」降為「${currentLabel}」`
-      : `角色維持「${currentLabel}」`;
+  const currentRole = consequence.currentRole || (latest.matchId ? getHighSchoolFeedbackCurrentRole(latest.matchId) : "");
+  const changeText = formatHighSchoolRoleChange(consequence.previousRole, currentRole);
   const reasons = (consequence.reasons || []).map(getHighSchoolCompetitionReasonText);
-  const exposure = latest.actualExposure || {};
-  const exposureText = exposure.participated
-    ? `本次實際留下 ${exposure.plateAppearances || 0} 個打席、${exposure.defensiveInnings || 0} 局守備。`
-    : "本次沒有實際上場，教練不把等待算成負面表現。";
-  const pressureText = player.highSchoolRoleCode === "rotation" && player.highSchoolCompetitionEvaluation?.recentTrend === "positive"
+  const exposureText = `本次：${formatHighSchoolHistoryExposureFeedback(latest)}。`;
+  const pressureText = currentRole === "rotation" && player.highSchoolCompetitionEvaluation?.recentTrend === "positive"
     ? "目前仍是輪替角色；正向壓力已保存，仍需下一筆正式證據才可能跨過先發門檻。"
-    : "目前角色會帶進下一階段，不由球探改寫。";
+    : ["bench", "rotation", "starter"].includes(currentRole) ? "目前角色會帶進下一階段，不由球探改寫。"
+      : "安排還在確認，先依教練的通知準備下一階段。";
   return `${exposureText}\n現任教練完成第二次評估：${changeText}。\n原因：${reasons.join("、") || "正式樣本與競爭差距仍需繼續累積"}。\n${pressureText}`;
 }
 
 function getHighSchoolYearOneRoleJourneyText() {
   const history = Array.isArray(player.highSchoolYearOneMatchHistory) ? player.highSchoolYearOneMatchHistory : [];
-  const startingRole = player.highSchoolYearOneStartingRole || history[0]?.evaluationConsequence?.previousRole || "bench";
-  const currentRole = player.highSchoolRoleCode || startingRole;
-  const labels = typeof HighSchoolCompetitionReassessment !== "undefined" ? HighSchoolCompetitionReassessment.ROLE_LABELS : {};
+  const startingRole = player.highSchoolYearOneStartingRole || history[0]?.evaluationConsequence?.previousRole || "";
+  const currentRole = getHighSchoolFeedbackCurrentRole();
   const matchLines = history.map((item, index) => {
-    const exposure = item.actualExposure || {};
-    return `機會 ${index + 1}：${exposure.participated ? `${exposure.plateAppearances || 0} 打席、${exposure.defensiveInnings || 0} 局守備` : "沒有實際上場"}`;
+    return `機會 ${index + 1}：${formatHighSchoolHistoryExposureFeedback(item)}`;
   });
-  const transition = startingRole === currentRole
-    ? `角色由「${labels[startingRole] || startingRole}」維持為「${labels[currentRole] || currentRole}」`
-    : `角色由「${labels[startingRole] || startingRole}」變為「${labels[currentRole] || currentRole}」`;
+  const startingLabel = typeof HighSchoolCompetitionReassessment !== "undefined" ? HighSchoolCompetitionReassessment.ROLE_LABELS[startingRole] : "";
+  const transition = !currentRole && startingLabel ? `入隊時的角色是「${startingLabel}」；目前角色仍待確認`
+    : formatHighSchoolRoleChange(startingRole, currentRole);
   const pressure = currentRole === "rotation" && player.highSchoolCompetitionEvaluation?.recentTrend === "positive"
     ? "；正向競爭壓力已累積，但尚未達三筆正式證據的先發門檻" : "";
   return `${transition}；${matchLines.join("；") || "尚未留下實戰機會紀錄"}${pressure}。`;
@@ -16335,10 +16466,7 @@ function evaluateHighSchoolYear() {
   const matchHistory = Array.isArray(player.highSchoolYearOneMatchHistory) ? player.highSchoolYearOneMatchHistory : [];
   if (matchHistory.length) {
     player.highSchoolDetail += matchHistory.map((item, index) => {
-      const exposure = item.actualExposure || {};
-      const exposureText = exposure.participated
-        ? `${exposure.plateAppearances || 0} 打席、${exposure.defensiveInnings || 0} 局守備`
-        : "沒有實際上場";
+      const exposureText = formatHighSchoolHistoryExposureFeedback(item);
       const matchLabel = index === 0 ? "交流賽" : "第二次實戰評估";
       return `\n實戰機會 ${index + 1}（${matchLabel}）：${item.opponent || "對手未記錄"}；${exposureText}；${item.outcome || "比賽已結束"}`;
     }).join("");
@@ -16408,12 +16536,11 @@ function getHighSchoolYearTwoJourneySnapshot() {
   const labels = typeof HighSchoolCompetitionReassessment !== "undefined" ? HighSchoolCompetitionReassessment.ROLE_LABELS : {};
   const transition = [...(player.highSchoolYearTransitionState?.history || [])].reverse().find(item => Number(item.nextHighSchoolYear) === 2) || {};
   const matches = Array.isArray(player.highSchoolYearTwoMatchHistory) ? player.highSchoolYearTwoMatchHistory.slice() : [];
-  const startingRole = transition.currentRole || transition.priorRole || matches[0]?.evaluationConsequence?.previousRole || player.highSchoolRoleCode || "bench";
-  const endingRole = player.highSchoolRoleCode || startingRole;
+  const startingRole = transition.currentRole || transition.priorRole || matches[0]?.evaluationConsequence?.previousRole || "";
+  const endingRole = getHighSchoolFeedbackCurrentRole();
   const exposureText = matches.map(item => {
     const phase = item.opportunityIndex === 2 ? "秋季" : "春季";
-    const exposure = item.actualExposure || {};
-    return `${phase}${exposure.participated ? `${exposure.plateAppearances || 0} 打席、${exposure.defensiveInnings || 0} 局守備` : "未實際上場"}`;
+    return `${phase}：${formatHighSchoolHistoryExposureFeedback(item)}`;
   });
   const finalConsequence = matches.at(-1)?.evaluationConsequence || {};
   const normalizedPrimary = typeof PlayingTimeGameExposure !== "undefined"
@@ -16444,20 +16571,21 @@ function evaluateHighSchoolYearTwo() {
   const journey = getHighSchoolYearTwoJourneySnapshot();
   const evaluation = player.highSchoolCompetitionEvaluation || {};
   const planLabels = { utility: "多位置輪替", position: "主守位專精", batting: "打擊入口", health: "健康重整" };
-  const roleJourney = journey.startingRole === journey.endingRole
-    ? `正式角色由「${journey.startingLabel}」維持為「${journey.endingLabel}」`
-    : `正式角色由「${journey.startingLabel}」調整為「${journey.endingLabel}」`;
+  const roleJourney = formatHighSchoolRoleChange(journey.transition.currentRole || journey.transition.priorRole
+    || journey.matches[0]?.evaluationConsequence?.previousRole, player.highSchoolRoleCode || journey.finalConsequence.currentRole, "正式角色");
   const rosterJourney = `跨年名單移出 ${journey.transition.graduateIds?.length || 0} 名畢業球員，加入 ${journey.transition.incomingIds?.length || 0} 名新生`;
   const evidenceJourney = journey.exposureText.length ? journey.exposureText.join("；") : "尚未留下正式高二實戰紀錄";
   const reasons = (journey.finalConsequence.reasons || evaluation.lastReassessmentReason || []).map(getHighSchoolCompetitionReasonText);
-  const pitcherTruth = journey.pitcherDeferred ? "投手使用仍延後處理；高二沒有虛構正式投球局數或投球表現證據。" : "";
+  const pitcherTruth = journey.pitcherDeferred ? "投手使用仍延後處理；下一次正式出賽的安排，仍要等教練確認。" : "";
 
   if (player.body.injuryRisk >= 8 || player.body.pain >= 5) {
     player.highSchoolYearTwoResult = "角色仍在，身體負荷先成為高三問題";
   } else if (journey.matches.length >= 2) {
-    player.highSchoolYearTwoResult = journey.startingRole === journey.endingRole
-      ? `你以「${journey.endingLabel}」完成高二兩次正式評估`
-      : `高二競爭讓你從「${journey.startingLabel}」走到「${journey.endingLabel}」`;
+    player.highSchoolYearTwoResult = journey.endingRole
+      ? journey.startingRole && journey.startingRole !== journey.endingRole
+        ? `高二競爭讓你從「${journey.startingLabel}」走到「${journey.endingLabel}」`
+        : `你以「${journey.endingLabel}」完成高二兩次正式評估`
+      : "高二評估紀錄還在整理，下一階段角色待確認";
   } else {
     player.highSchoolYearTwoResult = "高二正式競爭證據仍未完整";
   }

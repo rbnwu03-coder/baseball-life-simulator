@@ -1,0 +1,49 @@
+{
+  "task": "Critical Regression Triage v0.1",
+  "createdAt": "2026-10-15T01:32:21.769Z",
+  "rows": [
+    {
+      "file": "docs/critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs",
+      "original": "tests/high-school-year-one-opportunity-two-integration-test.js",
+      "originalSha256": "db46a6e6c15126b357657b1670b1452580718e8609dee43b84df1a0af6e0dc27",
+      "derivedSha256": "2184438cee3d6040d8f0cce21e450f111577a348e686928737e8fe577ffd6bb4",
+      "exactReverse": true,
+      "edits": [
+        {
+          "before": "\"batted-ball-outcome-mapping.js\", \"offensive-plate-approach.js\"",
+          "after": "\"batted-ball-outcome-mapping.js\", \"defensive-opportunity-foundation.js\", \"defensive-reach-secure-foundation.js\", \"offensive-plate-approach.js\""
+        },
+        {
+          "before": "\"force-advancement.js\", \"offensive-bunt-defensive-handoff.js\"",
+          "after": "\"force-advancement.js\", \"defensive-decision-throw-foundation.js\", \"offensive-bunt-defensive-handoff.js\""
+        },
+        {
+          "before": "verify(\"38.",
+          "after": "console.log(\"TRIAGE_OPPORTUNITY=\"+JSON.stringify(liveEngine));\nverify(\"38."
+        }
+      ]
+    },
+    {
+      "file": "docs/critical-regression-triage-v0.1-gradient-compact-isolated.cjs",
+      "original": "tests/ability-performance-gradient-test.js",
+      "originalSha256": "1038c92e98c4a040f61a44e23c464d2a9daf544a613e9e3b0f6a9cf5e4017611",
+      "derivedSha256": "a5e1581cffa785c319d8fe8bdffe6df92dbe43f0ff13524e5ffa5a649153d4cf",
+      "exactReverse": true,
+      "edits": [
+        {
+          "before": "require('./ability-performance-correlation-audit.cjs')",
+          "after": "require('../tests/ability-performance-correlation-audit.cjs')"
+        },
+        {
+          "before": "assert(audit.summarize(low).multiHitFraction>0",
+          "after": "const compact=g=>({seed:g.seed,line:g.line,capabilities:g.capabilities,gameId:g.record.gameId,decisions:g.decisions.map(d=>({id:d.id,domain:d.domain,decision:d.decision,tier:d.tier})),playerEvents:g.log.filter(e=>e.batterId===\"player\"||e.domain===\"offense\").map(e=>({type:e.type,inning:e.inning,half:e.half,batterId:e.batterId,result:e.result,momentId:e.momentId,offensivePlateAppearance:e.offensivePlateAppearance,compressedOutcomeTrace:e.compressedOutcomeTrace,pitchTrace:e.pitchTrace})),recordSha256:require(\"node:crypto\").createHash(\"sha256\").update(JSON.stringify(g.record)).digest(\"hex\"),logSha256:require(\"node:crypto\").createHash(\"sha256\").update(JSON.stringify(g.log)).digest(\"hex\")});\nconsole.log(\"TRIAGE_GRADIENT=\"+JSON.stringify({base:h.base,tiers:audit.TIERS,field:\"baseballSkills.batting\",seeds:Array.from({length:20},(_,i)=>i+1),lowSummary:audit.summarize(low),highSummary:audit.summarize(high),low:low.map(compact),high:high.map(compact)}));\nassert(audit.summarize(low).multiHitFraction>0"
+        }
+      ]
+    }
+  ],
+  "reasons": {
+    "opportunity": "Single-module diagnostic exposed missing Reach/Secure prerequisite; load its real Opportunity prerequisite too, in index dependency order",
+    "gradient": "Prior full-record stdout exceeded original 16MB policy; retain truncated capture UNVERIFIED and compact observational payload without changing games or limits"
+  },
+  "assertionsSeedsFixturesDecisionsUnchanged": true
+}

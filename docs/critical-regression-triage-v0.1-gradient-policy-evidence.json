@@ -1,0 +1,48 @@
+{
+  "task": "Critical Regression Triage v0.1",
+  "createdAt": "2026-10-15T01:38:01.281Z",
+  "lastPAActionCounts": {
+    "take": 155
+  },
+  "lastPAPitchResults": {
+    "calledStrike": 120,
+    "ball": 35
+  },
+  "lastPAApproaches": {
+    "aggressiveEarlySwing": 40
+  },
+  "lastPANumbers": {
+    "3": 10,
+    "4": 25,
+    "5": 5
+  },
+  "example": [
+    {
+      "action": "take",
+      "pitchResult": "calledStrike",
+      "countAfter": {
+        "balls": 0,
+        "strikes": 1
+      },
+      "pitchLocationClass": "competitiveStrike"
+    },
+    {
+      "action": "take",
+      "pitchResult": "calledStrike",
+      "countAfter": {
+        "balls": 0,
+        "strikes": 2
+      },
+      "pitchLocationClass": "competitiveStrike"
+    },
+    {
+      "action": "take",
+      "pitchResult": "calledStrike",
+      "countAfter": {
+        "balls": 0,
+        "strikes": 3
+      },
+      "pitchLocationClass": "edgeStrike"
+    }
+  ]
+}

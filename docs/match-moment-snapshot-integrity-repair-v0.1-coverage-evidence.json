@@ -1,0 +1,323 @@
+{
+  "task": "Match Moment Snapshot Integrity Repair v0.1 — Bounded Production Fix",
+  "createdAt": "2026-10-15T08:01:54.672Z",
+  "tier": 2,
+  "scope": "1582 protected-by-hash existing paths; focused owner exploration only, not a new repository architecture audit",
+  "requestedPathsReference": "docs/match-moment-snapshot-integrity-repair-v0.1-baseline-evidence.json#hashes",
+  "pathsSha256": "3360e73dbbb979ee7fae702d6e2634a3d7585dddc24fc1da15e52ea3870c99c7",
+  "batches": [
+    {
+      "batch": 0,
+      "offset": 0,
+      "requestedCount": 120,
+      "returned": 120,
+      "exactRequestedPathsMatched": true,
+      "hasMore": false,
+      "indexedAt": "2026-10-15T01:30:19Z",
+      "statuses": {
+        "no_recorded_issue": 120
+      },
+      "freshness": {
+        "not_tracked": 118,
+        "metadata_changed": 2
+      },
+      "reportedIssues": []
+    },
+    {
+      "batch": 1,
+      "offset": 120,
+      "requestedCount": 120,
+      "returned": 120,
+      "exactRequestedPathsMatched": true,
+      "hasMore": false,
+      "indexedAt": "2026-10-15T01:30:19Z",
+      "statuses": {
+        "no_recorded_issue": 120
+      },
+      "freshness": {
+        "not_tracked": 73,
+        "metadata_changed": 47
+      },
+      "reportedIssues": []
+    },
+    {
+      "batch": 2,
+      "offset": 240,
+      "requestedCount": 120,
+      "returned": 120,
+      "exactRequestedPathsMatched": true,
+      "hasMore": false,
+      "indexedAt": "2026-10-15T01:30:19Z",
+      "statuses": {
+        "no_recorded_issue": 120
+      },
+      "freshness": {
+        "metadata_changed": 120
+      },
+      "reportedIssues": []
+    },
+    {
+      "batch": 3,
+      "offset": 360,
+      "requestedCount": 120,
+      "returned": 120,
+      "exactRequestedPathsMatched": true,
+      "hasMore": false,
+      "indexedAt": "2026-10-15T01:30:19Z",
+      "statuses": {
+        "no_recorded_issue": 120
+      },
+      "freshness": {
+        "metadata_changed": 98,
+        "not_tracked": 22
+      },
+      "reportedIssues": []
+    },
+    {
+      "batch": 4,
+      "offset": 480,
+      "requestedCount": 120,
+      "returned": 120,
+      "exactRequestedPathsMatched": true,
+      "hasMore": false,
+      "indexedAt": "2026-10-15T01:30:19Z",
+      "statuses": {
+        "no_recorded_issue": 120
+      },
+      "freshness": {
+        "metadata_changed": 120
+      },
+      "reportedIssues": []
+    },
+    {
+      "batch": 5,
+      "offset": 600,
+      "requestedCount": 120,
+      "returned": 120,
+      "exactRequestedPathsMatched": true,
+      "hasMore": false,
+      "indexedAt": "2026-10-15T01:30:19Z",
+      "statuses": {
+        "no_recorded_issue": 120
+      },
+      "freshness": {
+        "metadata_changed": 104,
+        "not_tracked": 16
+      },
+      "reportedIssues": []
+    },
+    {
+      "batch": 6,
+      "offset": 720,
+      "requestedCount": 120,
+      "returned": 120,
+      "exactRequestedPathsMatched": true,
+      "hasMore": false,
+      "indexedAt": "2026-10-15T01:30:19Z",
+      "statuses": {
+        "no_recorded_issue": 120
+      },
+      "freshness": {
+        "metadata_changed": 89,
+        "not_tracked": 31
+      },
+      "reportedIssues": []
+    },
+    {
+      "batch": 7,
+      "offset": 840,
+      "requestedCount": 120,
+      "returned": 120,
+      "exactRequestedPathsMatched": true,
+      "hasMore": false,
+      "indexedAt": "2026-10-15T01:30:19Z",
+      "statuses": {
+        "no_recorded_issue": 119,
+        "partial": 1
+      },
+      "freshness": {
+        "metadata_changed": 67,
+        "metadata_match": 50,
+        "missing": 3
+      },
+      "reportedIssues": [
+        {
+          "requested_path": "docs/ability-performance-correlation-audit-sprint-1.1.md",
+          "path": "docs/ability-performance-correlation-audit-sprint-1.1.md",
+          "status": "partial",
+          "freshness": "metadata_changed",
+          "recommended_action": "read_source_and_reindex",
+          "coverage": [
+            {
+              "path": "docs/ability-performance-correlation-audit-sprint-1.1.md",
+              "kind": "parse_partial",
+              "match": "exact",
+              "ranges": [
+                {
+                  "start": 48,
+                  "end": 48
+                },
+                {
+                  "start": 49,
+                  "end": 49
+                },
+                {
+                  "start": 50,
+                  "end": 50
+                },
+                {
+                  "start": 51,
+                  "end": 51
+                },
+                {
+                  "start": 52,
+                  "end": 52
+                },
+                {
+                  "start": 53,
+                  "end": 53
+                },
+                {
+                  "start": 54,
+                  "end": 54
+                },
+                {
+                  "start": 55,
+                  "end": 55
+                },
+                {
+                  "start": 56,
+                  "end": 56
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "batch": 8,
+      "offset": 960,
+      "requestedCount": 120,
+      "returned": 120,
+      "exactRequestedPathsMatched": true,
+      "hasMore": false,
+      "indexedAt": "2026-10-15T01:30:19Z",
+      "statuses": {
+        "no_recorded_issue": 120
+      },
+      "freshness": {
+        "metadata_changed": 119,
+        "not_tracked": 1
+      },
+      "reportedIssues": []
+    },
+    {
+      "batch": 9,
+      "offset": 1080,
+      "requestedCount": 120,
+      "returned": 120,
+      "exactRequestedPathsMatched": true,
+      "hasMore": false,
+      "indexedAt": "2026-10-15T01:30:19Z",
+      "statuses": {
+        "no_recorded_issue": 120
+      },
+      "freshness": {
+        "metadata_changed": 116,
+        "missing": 4
+      },
+      "reportedIssues": []
+    },
+    {
+      "batch": 10,
+      "offset": 1200,
+      "requestedCount": 120,
+      "returned": 120,
+      "exactRequestedPathsMatched": true,
+      "hasMore": false,
+      "indexedAt": "2026-10-15T01:30:19Z",
+      "statuses": {
+        "no_recorded_issue": 120
+      },
+      "freshness": {
+        "missing": 9,
+        "metadata_match": 9,
+        "metadata_changed": 101,
+        "not_tracked": 1
+      },
+      "reportedIssues": []
+    },
+    {
+      "batch": 11,
+      "offset": 1320,
+      "requestedCount": 120,
+      "returned": 120,
+      "exactRequestedPathsMatched": true,
+      "hasMore": false,
+      "indexedAt": "2026-10-15T01:30:19Z",
+      "statuses": {
+        "no_recorded_issue": 120
+      },
+      "freshness": {
+        "metadata_changed": 116,
+        "metadata_match": 4
+      },
+      "reportedIssues": []
+    },
+    {
+      "batch": 12,
+      "offset": 1440,
+      "requestedCount": 120,
+      "returned": 120,
+      "exactRequestedPathsMatched": true,
+      "hasMore": false,
+      "indexedAt": "2026-10-15T01:30:19Z",
+      "statuses": {
+        "no_recorded_issue": 120
+      },
+      "freshness": {
+        "metadata_changed": 118,
+        "metadata_match": 2
+      },
+      "reportedIssues": []
+    },
+    {
+      "batch": 13,
+      "offset": 1560,
+      "requestedCount": 22,
+      "returned": 22,
+      "exactRequestedPathsMatched": true,
+      "hasMore": false,
+      "indexedAt": "2026-10-15T01:30:19Z",
+      "statuses": {
+        "no_recorded_issue": 22
+      },
+      "freshness": {
+        "metadata_changed": 17,
+        "metadata_match": 3,
+        "missing": 2
+      },
+      "reportedIssues": []
+    }
+  ],
+  "reportedPartialDirectRead": {
+    "file": "docs/ability-performance-correlation-audit-sprint-1.1.md",
+    "start": 48,
+    "end": 56,
+    "lines": [
+      "|Fielding|scorer E|false|||—|—|NOT_OBSERVABLE|Physical foundation does not adjudicate E. Unsecured balls are not automatically errors.|",
+      "|Arm|throw quality|false|||—|—|FIXTURE_SATURATED|All requested SS tiers exceed strength threshold; acquired context and accuracy are fixed.|",
+      "|Speed|steal success|false|||—|—|OUTCOME_SPACE_GAP|Record supports SB/CS ingestion, but production has no steal execution producer. A forced attempt cannot be resolved without constructing a new result.|",
+      "|Speed|hit production|false|||—|—|NOT_OBSERVABLE|No independent infield-hit speed resolver validated in this extension.|",
+      "|Discipline|BB / decision quality|false|||—|—|NOT_OBSERVABLE|No independent discipline input in the standalone PlateApproach ability seam. Its selectionProfile is a tactical policy, not a player ability; do not relabel it discipline.|",
+      "|Pitch Control|ordinary AI BB/BF|false|||—|—|WEAK|B: ordinary AI PA has walk but does not read control. Control is read by human PA sequencing; separate from the ordinary AI stream.|",
+      "|Pitch Quality|ordinary AI SO/BF|false|||—|—|OUTCOME_SPACE_GAP|resolveSimulatedHighSchoolPlateAppearance outcome set excludes SO; human PlateApproach does support strikeout.|",
+      "|Player P|BF / outs / run prevention|false|||—|—|BLOCKED_BY_EXPOSURE|playing-time-game-exposure.js: pitcherExposureDeferred → noAppearance → script.js: shouldEnterHighSchoolMatchPlayer rejects deferred exposure → active roster incumbent remains pitcher → match-game-record.js: BF credited to active defensive P|",
+      "|Catcher-specific|blocking / framing / steal defense|false|||—|—|NOT_OBSERVABLE|Pitcher-catcher tactical calls and receiving/throw legs exist; no complete canonical catcher-specific blocking, framing, passed-ball or steal-defense statistical producer.|"
+    ],
+    "sha256": "f75eeae70b87cc332563167228eb1218b88517be903095110c2b465718b455ce"
+  },
+  "metadataIsFreshnessProof": false,
+  "newReportingArtifacts": "Separately read/hash/parse at verification; untracked graph metadata is only a best-effort signal."
+}

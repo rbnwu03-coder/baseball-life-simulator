@@ -1,0 +1,263 @@
+{
+  "sprint": "Test Infrastructure 0.1",
+  "createdAt": "2026-10-14T10:55:44.634Z",
+  "summary": {
+    "total": 23,
+    "passed": 23,
+    "failed": 0
+  },
+  "cases": [
+    {
+      "name": "standalone",
+      "expected": "PASS",
+      "status": "PASS",
+      "assertions": 2,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-standalone-evidence.json"
+    },
+    {
+      "name": "exported",
+      "expected": "PASS",
+      "status": "PASS",
+      "assertions": 2,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-exported-evidence.json"
+    },
+    {
+      "name": "export-not-called",
+      "expected": "UNVERIFIED",
+      "status": "UNVERIFIED",
+      "assertions": 0,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-export-not-called-evidence.json"
+    },
+    {
+      "name": "main-skipped",
+      "expected": "UNVERIFIED",
+      "status": "UNVERIFIED",
+      "assertions": 0,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-main-skipped-evidence.json"
+    },
+    {
+      "name": "assertion-failure",
+      "expected": "FAIL",
+      "status": "FAIL",
+      "assertions": 0,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-assertion-failure-evidence.json"
+    },
+    {
+      "name": "empty",
+      "expected": "UNVERIFIED",
+      "status": "UNVERIFIED",
+      "assertions": 0,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-empty-evidence.json"
+    },
+    {
+      "name": "runtime",
+      "expected": "FAIL",
+      "status": "FAIL",
+      "assertions": 0,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-runtime-evidence.json"
+    },
+    {
+      "name": "git-compatible",
+      "expected": "PASS",
+      "status": "PASS",
+      "assertions": 2,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-git-compatible-evidence.json"
+    },
+    {
+      "name": "git-original",
+      "expected": "UNVERIFIED",
+      "status": "UNVERIFIED",
+      "assertions": 0,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-git-original-evidence.json"
+    },
+    {
+      "name": "buffer-isolation",
+      "expected": "PASS",
+      "status": "PASS",
+      "assertions": 2,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-buffer-isolation-evidence.json"
+    },
+    {
+      "name": "timeout",
+      "expected": "UNVERIFIED",
+      "status": "UNVERIFIED",
+      "assertions": 0,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-timeout-evidence.json"
+    },
+    {
+      "name": "spawn",
+      "expected": "UNVERIFIED",
+      "status": "UNVERIFIED",
+      "assertions": 0,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-spawn-evidence.json"
+    },
+    {
+      "name": "zero-summary",
+      "expected": "UNVERIFIED",
+      "status": "UNVERIFIED",
+      "assertions": 1,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-zero-summary-evidence.json"
+    },
+    {
+      "name": "caught-failure",
+      "expected": "FAIL",
+      "status": "FAIL",
+      "assertions": 0,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-caught-failure-evidence.json"
+    },
+    {
+      "name": "async-unsupported",
+      "expected": "UNVERIFIED",
+      "status": "UNVERIFIED",
+      "assertions": 0,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-async-unsupported-evidence.json"
+    },
+    {
+      "name": "custom",
+      "expected": "PASS",
+      "status": "PASS",
+      "assertions": 0,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-custom-evidence.json"
+    },
+    {
+      "name": "custom-empty",
+      "expected": "UNVERIFIED",
+      "status": "UNVERIFIED",
+      "assertions": 0,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-custom-empty-evidence.json"
+    },
+    {
+      "name": "custom-unreviewed",
+      "expected": "UNVERIFIED",
+      "status": "UNVERIFIED",
+      "assertions": 0,
+      "evidencePath": "docs/test-infrastructure-sprint-0.1-final-custom-unreviewed-evidence.json"
+    }
+  ],
+  "checks": [
+    {
+      "name": "Standalone enters main and observes synchronous assertions",
+      "status": "PASS"
+    },
+    {
+      "name": "Explicit exported run invokes callable/strict aliases",
+      "status": "PASS"
+    },
+    {
+      "name": "Export-only loaded as standalone cannot pass",
+      "status": "PASS"
+    },
+    {
+      "name": "Legacy require-only main skip with nonempty stdout is UNVERIFIED",
+      "status": "PASS"
+    },
+    {
+      "name": "Real AssertionError remains FAIL even with environment words in message",
+      "status": "PASS"
+    },
+    {
+      "name": "Exit0 plus fake PASS output cannot establish assertion execution",
+      "status": "PASS"
+    },
+    {
+      "name": "Confirmed runtime exception is FAIL",
+      "status": "PASS"
+    },
+    {
+      "name": "Implicit nested Git show compatibility preserves exact pinned bytes",
+      "status": "PASS"
+    },
+    {
+      "name": "Without compatibility the same Git read remains ENOBUFS / UNVERIFIED",
+      "status": "PASS"
+    },
+    {
+      "name": "Explicit Git buffer and non-Git buffer are unchanged",
+      "status": "PASS"
+    },
+    {
+      "name": "Timeout cannot be converted to PASS",
+      "status": "PASS"
+    },
+    {
+      "name": "Spawn failure retains actual command and cannot PASS",
+      "status": "PASS"
+    },
+    {
+      "name": "Positive observed assertions do not legitimize empty exported summary",
+      "status": "PASS"
+    },
+    {
+      "name": "Failed exported summary stays FAIL",
+      "status": "PASS"
+    },
+    {
+      "name": "Unobserved asynchronous assert API is UNVERIFIED",
+      "status": "PASS"
+    },
+    {
+      "name": "Reviewed custom checker is witnessed through V8, with no source rewrite",
+      "status": "PASS"
+    },
+    {
+      "name": "Printed custom PASS without verify invocations is UNVERIFIED",
+      "status": "PASS"
+    },
+    {
+      "name": "Unreviewed custom source is UNVERIFIED",
+      "status": "PASS"
+    },
+    {
+      "name": "No automatic export function guessing",
+      "status": "PASS"
+    },
+    {
+      "name": "Existing evidence refuses execution before a second child starts",
+      "status": "PASS"
+    },
+    {
+      "name": "Protected or escaping target is refused",
+      "status": "PASS"
+    },
+    {
+      "name": "NOT RUN carries no invented command/exit/assertions",
+      "status": "PASS"
+    },
+    {
+      "name": "Invalid witness / changed sources cannot PASS",
+      "status": "PASS"
+    }
+  ],
+  "fixtureDirectory": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5",
+  "fixtureHashes": {
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/main.cjs": "0d95e9586ea6a72d8ac0ea38513de7a0703856e90b32c8fa0407f6bc5f10b582",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/export.cjs": "58f21566dfff5ce6060c8155da768289b8bfc29404f17a39ced293a065331ba7",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/legacy.cjs": "8d2d67ff5edd27318270f0517d018cae5bf1f868100b08c76834069b4fc90f13",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/failure.cjs": "ad3b86c8893dd81ab122b1c0da303f77424ab14e108f223e67ed3e41287623aa",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/empty.cjs": "91c53f85bd7e3e2c3bb68252adfab91b8628e734a22bf01d3a71f1d9b88711c4",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/runtime.cjs": "0ce607ae88de099548dafcffc98970eddc7b63d964fc09de87a46944d8f8b48a",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/timeout.cjs": "63773cfb05b6b044f2bf17cca73a1b034e2909b771b9662aa1226ad35e644462",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/git.cjs": "7d4921d6a5b6ea62ce3c61470a8433652c9e2d95b1d384bcafe82149698f7e4e",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/explicit.cjs": "7e4bb829bacfa84129c2e2231b3cc89db750bcf61deb662ed0e660062b1b06ce",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/zero.cjs": "ceb19e22c35224a6431cc1f1bc369e7023837f2606b94a89c471837bb75ce7a1",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/caught.cjs": "3588f4e82b9c415bdd081170f20c6b644f2c6978d5db5e8e7cad4e958c389c48",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/async.cjs": "ce9ae56bb0cf6f98292c0f5e316e7d331b7cf574efaadf873c37c95bb247df8d",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/custom.cjs": "33f70b06b1caf6bacbe61d66fc3926121213eb8168fdb95bc6106dda407f594e",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/custom-empty.cjs": "96d9430c4d72e7fe306cf53395a21a77f87abdab51c9ac2be55ad997c6e75e52"
+  },
+  "safety": {
+    "preservedHashes": 966,
+    "git": {
+      "branch": "main",
+      "head": "ab3117653945de0b7013636187c446276a96e634",
+      "main": "ab3117653945de0b7013636187c446276a96e634",
+      "originMain": "ab3117653945de0b7013636187c446276a96e634",
+      "index": "",
+      "status": " M index.html\n M match-situation-lifecycle.js\n M save.js\n M script.js\n M tests/fast-check-smoke-test.cjs\n M tests/pitch-sequence-state-production-integration-test.js\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/infield-baseball-logic-audit-architecture-evidence.json\n?? docs/infield-baseball-logic-audit-evidence.json\n?? docs/infield-baseball-logic-audit-runner.cjs\n?? docs/infield-baseball-logic-validation-audit-v1.md\n?? docs/infield-scorer-recovery-sprint-5-green-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json\n?? docs/infield-scorer-recovery-sprint-5-validation.json\n?? docs/receiver-execution-v2-production-snapshot-save-guard-sprint-10a3b.md\n?? docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-lifecycle-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-observed-validation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-current-source-verification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-initial-test-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r1-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-timeout-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-architecture-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout.md\n?? docs/receiver-execution-v2-sprint-10a3b-r2-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-policy-specification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-extra-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gradient-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-guard-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r3-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-original-validator.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-reproduction-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-baseline-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-comparison-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-current-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-green-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-green-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-career-save-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-compatibility-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-audit-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r4-development-focused-1-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-development-focused-2-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-helper-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-helper-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-baseline180-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-current-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-r3-wip-diagnostic-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-runtime-comparison-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-full-repository-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gates-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gradient-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gradient-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-legacy-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-production-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-r3-guard-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-r3-guard-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-red-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-related-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-s8-cross-runtime-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-s8-cross-runtime-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-save-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-before-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-change-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-stdout-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-architecture-extra-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-coverage-paths-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-entrypoint-search-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-freeze-comparisons-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-inherited-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-ownership-contract-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-pitch-red-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-save-ownership-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r6-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-authorized-delta-contract-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-bbp-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-coverage-paths-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-development-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-exact-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-independent-review-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-manifest-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-pitch-green-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r1-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r3-guard-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r4-dependency-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-receiver-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-s8-cross-runtime-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-save-boundary-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-save-ownership-contract.md\n?? docs/receiver-execution-v2-sprint-10a3b-r6-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-confirmation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-witness-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-related-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-evidence.json\n?? docs/test-infrastructure-sprint-0.1-baseline-evidence.json\n?? docs/test-infrastructure-sprint-0.1-capture.cjs\n?? docs/test-infrastructure-sprint-0.1-contextual-status-panel-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-contextual-status-panel-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-assertion-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-assertion-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-async-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-async-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-buffer-isolation-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-buffer-isolation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-caught-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-caught-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-export-not-called-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-export-not-called-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-exported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-exported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-git-compatible-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-git-compatible-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-git-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-git-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-main-skipped-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-main-skipped-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-recovery-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-runtime-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-runtime-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-spawn-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-spawn-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-standalone-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-standalone-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-timeout-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-timeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-zero-summary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-zero-summary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-assertion-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-assertion-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-async-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-async-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-buffer-isolation-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-buffer-isolation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-caught-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-caught-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-driver-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-export-not-called-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-export-not-called-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-exported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-exported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-focused-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-git-compatible-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-git-compatible-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-git-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-git-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-main-skipped-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-main-skipped-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-runtime-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-runtime-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-spawn-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-spawn-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-standalone-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-standalone-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-timeout-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-timeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-zero-summary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-zero-summary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-assertion-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-assertion-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-async-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-async-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-buffer-isolation-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-buffer-isolation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-caught-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-caught-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-unreviewed-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-unreviewed-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-driver-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-export-not-called-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-export-not-called-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-exported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-exported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-focused-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-git-compatible-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-git-compatible-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-git-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-git-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-main-skipped-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-main-skipped-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-runtime-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-runtime-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-spawn-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-spawn-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-standalone-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-standalone-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-timeout-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-timeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-zero-summary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-zero-summary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-assertion-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-assertion-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-async-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-async-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-buffer-isolation-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-buffer-isolation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-caught-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-caught-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-unreviewed-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-unreviewed-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-export-not-called-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-export-not-called-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-exported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-exported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-git-compatible-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-git-compatible-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-git-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-git-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-main-skipped-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-main-skipped-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-runtime-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-runtime-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-spawn-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-spawn-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-standalone-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-standalone-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-timeout-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-timeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-zero-summary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-zero-summary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/\n?? docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/\n?? docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/\n?? docs/test-infrastructure-sprint-0.1-fixtures-njh333/\n?? docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-evidence.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-evidence.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-evidence.json\n?? docs/test-infrastructure-sprint-0.1-r6-exact-checker-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-r6-exact-checker-evidence.json\n?? docs/test-infrastructure-sprint-0.1-targets-evidence.json\n?? docs/test-reliability-audit-v0.1-architecture-evidence.json\n?? docs/test-reliability-audit-v0.1-baseline-evidence.json\n?? docs/test-reliability-audit-v0.1-closeout-evidence.json\n?? docs/test-reliability-audit-v0.1-coverage-evidence.json\n?? docs/test-reliability-audit-v0.1-delivery-evidence.json\n?? docs/test-reliability-audit-v0.1-entry-buffer-replays-evidence.json\n?? docs/test-reliability-audit-v0.1-extra-coverage-evidence.json\n?? docs/test-reliability-audit-v0.1-extract.cjs\n?? docs/test-reliability-audit-v0.1-finalize-inventory.cjs\n?? docs/test-reliability-audit-v0.1-freeze-review.cjs\n?? docs/test-reliability-audit-v0.1-git-buffer-diagnostic-evidence.json\n?? docs/test-reliability-audit-v0.1-infrastructure-review-evidence.json\n?? docs/test-reliability-audit-v0.1-inventory-evidence.json\n?? docs/test-reliability-audit-v0.1-inventory-final-evidence.json\n?? docs/test-reliability-audit-v0.1-inventory.cjs\n?? docs/test-reliability-audit-v0.1-known-failure-replays-evidence.json\n?? docs/test-reliability-audit-v0.1-source-freeze-candidates-evidence.json\n?? docs/test-reliability-audit-v0.1-source-freeze-review-evidence.json\n?? docs/test-reliability-audit-v0.1-test-inventory.md\n?? docs/test-reliability-audit-v0.1-validation-evidence.json\n?? docs/test-reliability-audit-v0.1.md\n?? install.ps1\n?? receiver-source-snapshot.js\n?? tests/entry-safe-export-child.cjs\n?? tests/entry-safe-preload.cjs\n?? tests/entry-safe-runner-test.cjs\n?? tests/entry-safe-runner.cjs\n?? tests/receiver-execution-v2-production-snapshot-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-harness.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-closeout.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-source-review.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-closeout.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-dependency-audit.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runtime-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r5-ownership-audit.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-independent-review.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs\n?? tests/receiver-source-save-authorized-delta.cjs\n"
+    },
+    "protectedMetadataUnchanged": true,
+    "protectedContentReadOrHashed": false,
+    "productionDelta": 0,
+    "originalTestDelta": 0
+  }
+}

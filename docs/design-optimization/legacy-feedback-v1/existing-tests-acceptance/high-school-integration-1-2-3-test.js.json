@@ -1,0 +1,20 @@
+{
+  "file": "high-school-integration-1-2-3-test.js",
+  "status": "PASS",
+  "nodeAssertions": 28,
+  "customChecks": null,
+  "entry": true,
+  "elapsedMs": 123,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/high-school-integration-1-2-3-test.js"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "stdout": "✓ 1. half-inning playback 會在一出局與兩出局形成節奏錨點\n✓ 2. 第三出局後先呈現半局結束，再把 authoritative outs reset 為 0\n✓ 3. 半局結束與攻守交換都保留在 authoritative simulation log\n✓ 4. 出局 feed 使用自然語言標示 out state，不顯示逐球 count\n✓ 5. Current Situation 的 OUT 燈可顯示到第三個出局\n✓ 6. meaningful decision ready phase 不會被 playback step 跳過\n✓ 7. Ball Context schema 支援五種 ground-ball truth\n✓ 8. 防守 Situation 持有 Ball Context，resolver 讀取相同 type\n✓ 9. hard／slow／deep grounder 產生不同玩家可讀描述\n✓ 10. Ball Context presentation 不顯示 raw speed 或 internal identifier\n✓ 11. 打者投打側與腳程以玩家可讀文字呈現\n✓ 12. 強勁正面球的雙殺分布明顯優於慢滾球＋快打者\n✓ 13. 慢滾球＋快打者以 one-out partial 為主要結果\n✓ 14. batter speed 會實際改變第二段傳球分布\n✓ 15. relevant runner speed 會實際改變第一段封殺分布\n✓ 16. 深處滾地球搭配弱臂時第二段傳球風險上升\n✓ 17. fielding／reaction 會改變第一段處理結果\n✓ 18. arm／throwing 會改變第二段傳球品質\n✓ 19. 雙殺 resolver 正式區分 twoOuts／oneOut／zeroOuts／error\n✓ 20. 合理雙殺判斷與執行品質分開記錄\n✓ 21. primary／secondary cause 產生不同語意解釋\n✓ 22. one-out partial outcome 明確說明已完成第一個封殺\n✓ 23. Match Mode 形成 Scoreboard → Situation → Assignment → Coach → Choices 閱讀順序\n✓ 24. Situation 集中呈現比分、出局、壘況、守位、打者與 Ball Context\n✓ 25. Coach 與 Player Choices 相鄰，Feed／舊回饋留在次要 context column\n✓ 26. Choice 後固定以 Execution → Outcome → Cause → 場上回應呈現\n✓ 27. save normalization 深層保存 Ball Context 與防守原因\n✓ 28. match-mode-scoreboard 可作為未來獨立 Match Entry hook\n\nHigh School Integration 1.2.3：28/28 通過\n",
+  "stderr": "",
+  "error": null,
+  "timedOut": false
+}

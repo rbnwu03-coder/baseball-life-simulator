@@ -1,0 +1,12 @@
+{
+  "task": "SS Strategic Scenario Fixture & PA Ledger Integration v0.1",
+  "createdAt": "2026-10-15T15:17:56.749Z",
+  "originalHash": "91659f28bc718eb21569be4a64bfce61a6518b5867a5ca629e5484e15a54a6d0",
+  "adaptedHash": "b9b83e44ce3c1a03e6b5e6c9230891951a38b412a41d516bc07a8b38095aee90",
+  "exactReplacement": {
+    "before": "git(\"diff\",\"--cached\",\"--name-only\").trim()",
+    "after": "git(\"status\",\"--porcelain=v1\",\"--untracked-files=no\").split(/\\r?\\n/).filter(line=>line&&line[0]!==\" \").join(\"\\n\").trim()"
+  },
+  "formalRunnerModified": false,
+  "preloadHash": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90"
+}

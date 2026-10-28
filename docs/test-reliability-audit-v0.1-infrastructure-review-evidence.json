@@ -1,0 +1,568 @@
+{
+  "audit": "Test Reliability Audit v0.1",
+  "createdAt": "2026-10-14T09:33:15.554Z",
+  "formalBaseline": "ab3117653945de0b7013636187c446276a96e634",
+  "node": "v24.19.0",
+  "sources": [
+    {
+      "file": "package.json",
+      "sha256": "aed3ef652bff37dcec40d172dbb3f4b3304a46215ef16a91564117d77ebf6fd5",
+      "policyLines": [
+        {
+          "line": 4,
+          "text": "  \"scripts\": {"
+        }
+      ]
+    },
+    {
+      "file": "tests/infield-legacy-receiver-model-sprint-6-runner.cjs",
+      "sha256": "4051fa09610bbb5c296e6d8b99510cefcfca7377a356fbd5802c8ba95032c52b",
+      "policyLines": [
+        {
+          "line": 9,
+          "text": "const git = args => cp.execFileSync('git', args, { cwd: root, encoding: 'utf8', maxBuffer: 30e6, windowsHide: true }).trimEnd();"
+        },
+        {
+          "line": 30,
+          "text": "  fs.writeFileSync(path.join(root, file), JSON.stringify(value, null, 2) + '\\n', { flag: 'wx' });"
+        },
+        {
+          "line": 33,
+          "text": "  const r = cp.spawnSync(process.execPath, ['tests/infield-legacy-receiver-model-foundation-test.js', ...args, '--json'],"
+        },
+        {
+          "line": 34,
+          "text": "    { cwd: root, encoding: 'utf8', windowsHide: true, maxBuffer: 30e6, timeout: 120000 });"
+        },
+        {
+          "line": 42,
+          "text": "  if (mode === 'red') {"
+        },
+        {
+          "line": 50,
+          "text": "  } else if (mode === 'red-save') {"
+        },
+        {
+          "line": 62,
+          "text": "  } else if (mode === 'green') {"
+        },
+        {
+          "line": 67,
+          "text": "  } else if (mode === 'save-probe' || mode === 'save-probe-final') {"
+        },
+        {
+          "line": 69,
+          "text": "      const r = cp.spawnSync(process.execPath, ['tests/infield-legacy-receiver-model-save-probe.cjs', ...args],"
+        },
+        {
+          "line": 70,
+          "text": "        { cwd: root, encoding: 'utf8', windowsHide: true, maxBuffer: 30e6, timeout: 120000 });"
+        },
+        {
+          "line": 75,
+          "text": "    if (mode === 'save-probe') assert.deepEqual(current.rows, old.rows);"
+        },
+        {
+          "line": 81,
+          "text": "    capture('docs/infield-legacy-receiver-model-sprint-6-' + (mode === 'save-probe' ? 'save-probe' : 'save-probe-final') + '.json', { startedAt,"
+        },
+        {
+          "line": 83,
+          "text": "      controlUnchangedOnExactBaseline: true, expectedValidationChange: mode === 'save-probe-final', current, exactBaseline: old });"
+        },
+        {
+          "line": 85,
+          "text": "  } else if (mode === 'compare') {"
+        },
+        {
+          "line": 101,
+          "text": "  } else if (mode === 'regression' || mode === 'regression-final' || mode === 'full-final') {"
+        },
+        {
+          "line": 104,
+          "text": "    const full = mode === 'full-final';"
+        },
+        {
+          "line": 105,
+          "text": "    const files = full ? validation.fullRepository.manifest : ['tests/infield-scorer-recovery-integrity-repair-test.js', 'tests/infield-legacy-receiver-scorer-closeout-test.js', ...previous.representativeRegression.files];"
+        },
+        {
+          "line": 107,
+          "text": "    const output = 'docs/infield-legacy-receiver-model-sprint-6-' + (full ? 'validation-final' : mode === 'regression-final' ? 'regression-final' : 'regression') + '.json';"
+        },
+        {
+          "line": 114,
+          "text": "      // call without explicit maxBuffer. Tests, assertions and seeds are unchanged."
+        },
+        {
+          "line": 115,
+          "text": "      const wrapper = \"const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);\";"
+        },
+        {
+          "line": 116,
+          "text": "      const r = cp.spawnSync(process.execPath, ['-e', wrapper, path.resolve(root, file)],"
+        },
+        {
+          "line": 117,
+          "text": "        { cwd: root, encoding: 'utf8', windowsHide: true, timeout: 180000, maxBuffer: 30e6 });"
+        },
+        {
+          "line": 124,
+          "text": "    const passed = results.filter(r => r.exitCode === 0 && !r.error).length;"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs",
+      "sha256": "b90ac905f2f8a65f22f265e09f220e156378707264b253e8bb3daa36cbba1e24",
+      "policyLines": [
+        {
+          "line": 9,
+          "text": "const fullWrapper = \"const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);\";"
+        },
+        {
+          "line": 21,
+          "text": "  return Object.freeze({ timeoutMs: p === FIRST_BASE ? 180000 : entry === \"full\" ? 180000 : 120000,"
+        },
+        {
+          "line": 22,
+          "text": "    maxBuffer: entry === \"full\" ? 30000000 : 16000000, policy: p === FIRST_BASE ? \"approved-first-base-180000-v1\" : \"unchanged-\" + entry + \"-default\" });"
+        },
+        {
+          "line": 30,
+          "text": "function git(...args) { return cp.execFileSync(\"git\", args, { cwd: root, encoding: \"utf8\", windowsHide: true, maxBuffer: 30000000 }); }"
+        },
+        {
+          "line": 33,
+          "text": "  fs.writeFileSync(path.join(root, file), JSON.stringify({ sprint: \"10A.3b-R2\", baseline: BASELINE, createdAt: new Date().toISOString(), ...value, readPaths: [...reads] }, null, 2) + \"\\n\", { flag: \"wx\" }); return file;"
+        },
+        {
+          "line": 47,
+          "text": "  const result = cp.spawnSync(command[0], command.slice(1), { cwd, encoding: \"utf8\", windowsHide: true, timeout: policy.timeoutMs, maxBuffer: policy.maxBuffer });"
+        },
+        {
+          "line": 54,
+          "text": "  check(\"baseline actual exit0,42/42,no error\", a.exitCode === 0 && !a.error && a.summary?.passed === 42 && a.summary?.failed === 0);"
+        },
+        {
+          "line": 55,
+          "text": "  check(\"WIP actual exit0,42/42,no error\", b.exitCode === 0 && !b.error && b.summary?.passed === 42 && b.summary?.failed === 0);"
+        },
+        {
+          "line": 56,
+          "text": "  check(\"approved same180000/16MB\", a.timeoutMs === 180000 && b.timeoutMs === 180000 && a.maxBuffer === 16000000 && b.maxBuffer === 16000000);"
+        },
+        {
+          "line": 76,
+          "text": "  const index = mode === \"baseline\" ? Buffer.from(git(\"show\", BASELINE + \":index.html\")) : read(\"index.html\");"
+        },
+        {
+          "line": 77,
+          "text": "  const files = new Set([\"index.html\", \"tests/high-school-career-test-context.js\", FIRST_BASE]);"
+        },
+        {
+          "line": 81,
+          "text": "    assert(!protectedPaths.has(file)); reads.add(file); const bytes = mode === \"baseline\" ? Buffer.from(git(\"show\", BASELINE + \":\" + file)) : read(file), destination = path.resolve(dir, file);"
+        },
+        {
+          "line": 82,
+          "text": "    assert(destination.startsWith(dir + path.sep)); fs.mkdirSync(path.dirname(destination), { recursive: true }); fs.writeFileSync(destination, bytes, { flag: \"wx\" }); hashes[file] = sha(bytes);"
+        },
+        {
+          "line": 105,
+          "text": "function full() {"
+        },
+        {
+          "line": 128,
+          "text": "    firstBaseIsManifestMember: files.includes(FIRST_BASE), defaultFullPolicyUnchanged: { timeoutMs: 180000, maxBuffer: 30000000, wrapper: fullWrapper }, testHashesBefore, results, complete,"
+        },
+        {
+          "line": 136,
+          "text": "if (require.main === module) { const mode = process.argv[2]; if (mode === \"compare\") comparison(); else if (mode === \"focused\") focused(); else if (mode === \"full\") full(); else throw Error(\"Explicit compare / focused / full mode required\"); }"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs",
+      "sha256": "f2fc0e5f72b44b0b4cb76921b12842f9b2fe649f5224e4bfb54e515629958359",
+      "policyLines": [
+        {
+          "line": 7,
+          "text": "function reserve(label) { const p = prefix + label + captureSuffix + \"-evidence.json\"; assert(!fs.existsSync(path.join(root, p)), \"Existing capture: \" + p); return p; }"
+        },
+        {
+          "line": 8,
+          "text": "function capture(label, data) { const p = reserve(label); fs.writeFileSync(path.join(root, p), JSON.stringify({ sprint: \"10A.3b-R4\", baseline, createdAt: new Date().toISOString(), node: process.version, ...data }, null, 2) + \"\\n\", { flag: \"wx\" }); return p; }"
+        },
+        {
+          "line": 12,
+          "text": "  reserve(\"baseline\"); reserve(\"source-before\"); const state = gitState(); assert.equal(state.branch, \"main\"); assert.equal(state.head, baseline); assert.equal(state.originMain, baseline); assert.equal(state.index, \"\");"
+        },
+        {
+          "line": 13,
+          "text": "  const files = git(\"ls-files\", \"--cached\", \"--others\", \"--exclude-standard\", \"-z\").split(\"\\0\").filter(p => p && !protectedPaths.has(p) && !p.includes(\"-10a3b-r4-\"));"
+        },
+        {
+          "line": 24,
+          "text": "  return { changedExistingPaths: changed, preservedHashCount: Object.keys(b.hashes).length - changed.length, protectedMetadataUnchanged: true, protectedContentReadOrHashed: false, git: state };"
+        },
+        {
+          "line": 26,
+          "text": "function runSuite(file, full = false, cwd = root, timeoutMs = 120000) {"
+        },
+        {
+          "line": 27,
+          "text": "  assert(/^tests\\/[A-Za-z0-9_-]+\\.(js|cjs)$/.test(file) && !protectedPaths.has(file)); const args = full ? [\"-e\", wrapper, path.resolve(cwd, file)] : [file], maxBuffer = full ? 30000000 : 16000000, t = process.hrtime.bigint();"
+        },
+        {
+          "line": 28,
+          "text": "  const r = cp.spawnSync(process.execPath, args, { cwd, encoding: \"utf8\", windowsHide: true, maxBuffer, timeout: full ? 180000 : timeoutMs });"
+        },
+        {
+          "line": 29,
+          "text": "  return { file, command: [process.execPath, ...args], cwd, nodeExecutable: process.execPath, nodeVersion: process.version, timeoutMs: full ? 180000 : timeoutMs, maxBuffer,"
+        },
+        {
+          "line": 35,
+          "text": "  const files = [BBP, ...[...list.matchAll(/\"([^\"]+)\"/g)].map(x => x[1])], hashes = {};"
+        },
+        {
+          "line": 36,
+          "text": "  for (const p of files) { assert(!protectedPaths.has(p)); const bytes = mode === \"baseline\" && p !== BBP ? Buffer.from(git(\"show\", baseline + \":\" + p)) : read(p), dest = path.resolve(dir, p); assert(dest.startsWith(dir + path.sep)); fs.mkdirSync(path.dirname(dest), { recursive: true }); fs.writeFileSync(dest, bytes, { flag: \"wx\" }); hashes[p] = hash(bytes); }"
+        },
+        {
+          "line": 39,
+          "text": "function focusedSuite(file, options) {"
+        },
+        {
+          "line": 44,
+          "text": "module.exports = { root, baseline, prefix, BBP, read, json, hash, git, protectedPaths, capture, reserve, integrity, runSuite, materializeBBP, focusedSuite, wrapper };"
+        },
+        {
+          "line": 48,
+          "text": "  labels.forEach(reserve); integrity(); const frozenSourceHashes = sourceHashes();"
+        },
+        {
+          "line": 81,
+          "text": "function full() {"
+        },
+        {
+          "line": 82,
+          "text": "  reserve(\"full-repository\"); const gate = json(prefix + \"gates\" + captureSuffix + \"-evidence.json\"); assert(gate.passed); assert.deepEqual(sourceHashes(), gate.frozenSourceHashes); integrity();"
+        },
+        {
+          "line": 98,
+          "text": "  capture(\"full-repository\", { startedAt, finishedAt: new Date().toISOString(), files, manifestSha256: hash(JSON.stringify(files)), wrapper, timeoutMs: 180000, maxBuffer: 30000000, testHashesBefore, results, complete,"
+        },
+        {
+          "line": 103,
+          "text": "  reserve(\"red\"); assert.deepEqual(integrity().changedExistingPaths, []); const result = require(\"./receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs\").red(); capture(\"red\", { result, safety: integrity() }); console.log(JSON.stringify(result));"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs",
+      "sha256": "d8dcb7e1d43ab476dda8b457f3292f750232b6b0f49f661093e8d7d1850246e2",
+      "policyLines": [
+        {
+          "line": 6,
+          "text": "function reserve(label) { const file = prefix + label + \"-evidence.json\"; assert(!fs.existsSync(path.join(root, file)), \"Existing capture: \" + file); return file; }"
+        },
+        {
+          "line": 7,
+          "text": "function capture(label, data) { const file = reserve(label); fs.writeFileSync(path.join(root, file), JSON.stringify({ sprint: \"10A.3b-R6\", baseline, createdAt: new Date().toISOString(), node: process.version, ...data }, null, 2) + \"\\n\", { flag: \"wx\" }); return file; }"
+        },
+        {
+          "line": 12,
+          "text": "  reserve(\"baseline\"); const state = gitState(); stateCheck(state);"
+        },
+        {
+          "line": 13,
+          "text": "  const files = git(\"ls-files\", \"--cached\", \"--others\", \"--exclude-standard\", \"-z\").split(\"\\0\").filter(p => p && !protectedPaths.has(p) && !p.includes(\"-10a3b-r6-\"));"
+        },
+        {
+          "line": 24,
+          "text": "  return { changedExistingPaths: changed, preservedHashCount: Object.keys(b.hashes).length - changed.length, protectedMetadataUnchanged: true, protectedContentReadOrHashed: false, git: state };"
+        },
+        {
+          "line": 30,
+          "text": "  order.forEach(reserve); integrity(); const frozenSourceHashes = frozenHashes();"
+        },
+        {
+          "line": 60,
+          "text": "  save(\"runtime-comparison\", { formalBaselineEvidence: formalFile, priorWipEvidence: priorFile, formalComparison, priorWipComparison, productionSourceIdenticalToR4: [\"index.html\", \"script.js\", \"save.js\", \"match-situation-lifecycle.js\", \"receiver-source-snapshot.js\"].every(p => frozenSourceHashes[p] === json(priorFile).frozenSourceHashes[p]), timingIsSingleInheritedPairNotStatisticalProof: true, priorR4InvestigationPreserved: \"docs/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation-final-evidence.json\" });"
+        },
+        {
+          "line": 64,
+          "text": "function full() {"
+        },
+        {
+          "line": 65,
+          "text": "  reserve(\"full-repository\"); const gate = json(prefix + \"gates-evidence.json\"); assert(gate.passed); assert.deepEqual(frozenHashes(), gate.frozenSourceHashes); integrity();"
+        },
+        {
+          "line": 80,
+          "text": "  capture(\"full-repository\", { startedAt, finishedAt: new Date().toISOString(), files, manifestSha256: hash(JSON.stringify(files)), wrapper, timeoutMs: 180000, maxBuffer: 30000000, testHashesBefore, results, complete, passed: results.filter(x => x.status === \"PASS\").length, existingDebt: results.filter(x => x.status === \"EXISTING_DEBT\").length, newRegressions, notRun: files.slice(results.length), baselineDebt: old.results.filter(x => x.exitCode !== 0), frozenSourceHashes: gate.frozenSourceHashes, safety: integrity() });"
+        },
+        {
+          "line": 83,
+          "text": "module.exports = { root, baseline, prefix, pitch, read, json, hash, git, protectedPaths, reserve, capture, integrity, metadata, frozenHashes, runSuite, focusedSuite, wrapper, relatedFiles };"
+        }
+      ]
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-8-runner.cjs",
+      "sha256": "fc669cbe6666f74f797e7a4c4bfa1b3458bed6d9ce3a3cdb039792eaca783856",
+      "policyLines": [
+        {
+          "line": 7,
+          "text": "const git=(...args)=>cp.execFileSync(\"git\",args,{cwd:root,encoding:\"utf8\",maxBuffer:30*1024*1024}).trimEnd();"
+        },
+        {
+          "line": 83,
+          "text": "  const cold=JSON.parse(cp.execFileSync(process.execPath,[\"--jitless\",path.join(__dirname,\"receiver-execution-v2-pure-contract-test.cjs\"),\"--cross-runtime-probe\"],{cwd:root,encoding:\"utf8\",maxBuffer:10*1024*1024,stdio:[\"pipe\",\"pipe\",\"pipe\"]}));"
+        },
+        {
+          "line": 88,
+          "text": "  const powershell=String.raw`"
+        },
+        {
+          "line": 111,
+          "text": "  const dotnet=JSON.parse(cp.execFileSync(\"powershell.exe\",[\"-NoProfile\",\"-NonInteractive\",\"-EncodedCommand\",Buffer.from(powershell,\"utf16le\").toString(\"base64\")],{input:JSON.stringify(rows),encoding:\"utf8\",maxBuffer:1024*1024,timeout:30000}));"
+        },
+        {
+          "line": 127,
+          "text": "    canonicalEncoding:{strings:\"UTF-8 of JSON strings, reject unpaired surrogates; no Unicode normalization\",keys:\"recursive UTF-16 code-unit sort; preserve arrays\",numbers:\"safe integers only; reject negative zero; original sample encoded as big-endian IEEE754 binary64 hex\",nonData:\"reject undefined, NaN, Infinity, cycles, getters, symbols, sparse arrays and nonplain objects\"},"
+        },
+        {
+          "line": 128,
+          "text": "    sampler:{scheme:\"B\",key:[\"executionVersion\",\"physical {version,matchId,plateAppearanceId,contactId,physicalIdentity}\",\"physicalSlot\",\"samplerVersion\",\"stage\"],slots:[\"primaryThrow\",\"relayThrow\"],stages:[\"positioning\",\"secure\",\"touch\"],excluded:[\"actor\",\"ability\",\"route\",\"retry\",\"outcome\",\"originalOwnedSample\"],hash:\"SHA-256 UTF-8; first four bytes unsigned big-endian\",unit:\"(u32+0.5)/2^32; exact binary64\",stageQuantization:\"bin=(u32 >>> 28)-8; 16 fixed bins; no redraw\"},"
+        },
+        {
+          "line": 149,
+          "text": "  const diff=cp.spawnSync(\"git\",[\"diff\",\"--check\",\"--\",\".\",\":(exclude)tests/fast-check-smoke-test.cjs\"],{cwd:root,encoding:\"utf8\"});assert.equal(diff.status,0);"
+        },
+        {
+          "line": 151,
+          "text": "    protectedMetadata,protectedContentReadOrHashed:false,protectedStatusRowsPreserved:true,newModuleReferencesInExistingSource:refs,standaloneImportsOrRngCalls:0,currentGraphSnippetsEqual:architecture.snippets.length,debt,"
+        },
+        {
+          "line": 176,
+          "text": "  if(capture)for(const [key,p]of Object.entries(output))fs.writeFileSync(path.join(root,p),JSON.stringify(data[key],null,2)+\"\\n\",{flag:\"wx\"});"
+        }
+      ]
+    }
+  ],
+  "historicalTiming": [
+    {
+      "file": "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-serial-evidence.json",
+      "sourceHash": "07c8bcc4e09a181fcd7cfdc774107b46f2803c1525a58402dc287dcf79f51589",
+      "keys": [
+        "sprint",
+        "baseline",
+        "createdAt",
+        "node",
+        "mode",
+        "diagnosticOnly",
+        "sourceHashes",
+        "fixtureAndHelperUnchanged",
+        "originalRunnerTimeoutMs",
+        "result",
+        "readPaths"
+      ],
+      "result": {
+        "exitCode": null,
+        "elapsedMs": 120043.0425,
+        "timeoutMs": 120000,
+        "error": {
+          "code": "ETIMEDOUT",
+          "message": "spawnSync C:\\Program Files\\nodejs\\node.exe ETIMEDOUT"
+        }
+      }
+    },
+    {
+      "file": "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-serial-evidence.json",
+      "sourceHash": "6ccc5f24cf33784dff132dfc754ae55efb65b5a10d6d9263f54023f1656a2fc6",
+      "keys": [
+        "sprint",
+        "baseline",
+        "createdAt",
+        "node",
+        "mode",
+        "diagnosticOnly",
+        "sourceHashes",
+        "fixtureAndHelperUnchanged",
+        "originalRunnerTimeoutMs",
+        "result",
+        "readPaths"
+      ],
+      "result": {
+        "exitCode": null,
+        "elapsedMs": 120030.3248,
+        "timeoutMs": 120000,
+        "error": {
+          "code": "ETIMEDOUT",
+          "message": "spawnSync C:\\Program Files\\nodejs\\node.exe ETIMEDOUT"
+        }
+      }
+    },
+    {
+      "file": "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-diagnostic-300000-evidence.json",
+      "sourceHash": "6654773264f4ab49db7120995eaa30a287294b030b5f047a448c807a1bc346dd",
+      "keys": [
+        "sprint",
+        "baseline",
+        "createdAt",
+        "node",
+        "mode",
+        "diagnosticOnly",
+        "sourceHashes",
+        "fixtureAndHelperUnchanged",
+        "originalRunnerTimeoutMs",
+        "result",
+        "readPaths"
+      ],
+      "result": {
+        "exitCode": 0,
+        "elapsedMs": 124368.1242,
+        "timeoutMs": 300000,
+        "error": null
+      }
+    },
+    {
+      "file": "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-diagnostic-300000-evidence.json",
+      "sourceHash": "c442fa59b0dabcff3d510206366e21a9048495c1950b758822095cd8ae0c38f8",
+      "keys": [
+        "sprint",
+        "baseline",
+        "createdAt",
+        "node",
+        "mode",
+        "diagnosticOnly",
+        "sourceHashes",
+        "fixtureAndHelperUnchanged",
+        "originalRunnerTimeoutMs",
+        "result",
+        "readPaths"
+      ],
+      "result": {
+        "exitCode": 0,
+        "elapsedMs": 122173.3159,
+        "timeoutMs": 300000,
+        "error": null
+      }
+    }
+  ],
+  "approvedFirstBasePolicy": {
+    "manifestCount": 227,
+    "orderedManifestSha256": "871902b4d5ecd7beb2bd23848be8c985ed7ddc52ecc5ebc6b40ba57d2f335a96",
+    "firstBaseMember": false,
+    "originalFullPolicy": {
+      "runner": "tests/infield-legacy-receiver-model-sprint-6-runner.cjs",
+      "timeoutMs": 180000,
+      "maxBuffer": 30000000,
+      "gitShowDefaultBufferOnly": 30000000
+    },
+    "r2ComparisonPolicy": {
+      "suite": "tests/first-base-receive-active-ground-production-integration-test.js",
+      "timeoutMs": 180000,
+      "maxBuffer": 16000000
+    },
+    "baselineDebt": [
+      {
+        "file": "tests/ability-performance-gradient-test.js",
+        "exitCode": 1,
+        "sourceHash": "1038c92e98c4a040f61a44e23c464d2a9daf544a613e9e3b0f6a9cf5e4017611",
+        "error": null,
+        "stderr": "node:internal/assert/utils:77\r\n    throw err;\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: Low tier can have a multi-hit game\r\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:45:1)\r\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\r\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\r\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\r\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\r\n    at Module.require (node:internal/modules/cjs/loader:1617:12)\r\n    at require (node:internal/modules/helpers:153:16)\r\n    at [eval]:1:306\r\n    at runScriptInThisContext (node:internal/vm:219:10) {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.19.0\r\n",
+        "signature": "AssertionError [ERR_ASSERTION]: Low tier can have a multi-hit game"
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-2-test.js",
+        "exitCode": 1,
+        "sourceHash": "2019013d7fc81200e9945c00834df7c4f7d33a8d4d1c8074e66d25e9475d4375",
+        "error": null,
+        "stderr": "node:internal/assert/utils:77\r\n    throw err;\r\n    ^\r\n\r\nAssertionError [ERR_ASSERTION]: 36. full match 完成兩個既定進攻 Moment；防守 Moment 只在真實 Decision 時成立\r\n    at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)\r\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:153:1)\r\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\r\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\r\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\r\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\r\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\r\n    at Module.require (node:internal/modules/cjs/loader:1617:12)\r\n    at require (node:internal/modules/helpers:153:16)\r\n    at [eval]:1:306 {\r\n  generatedMessage: false,\r\n  code: 'ERR_ASSERTION',\r\n  actual: false,\r\n  expected: true,\r\n  operator: '==',\r\n  diff: 'simple'\r\n}\r\n\r\nNode.js v24.19.0\r\n",
+        "signature": "AssertionError [ERR_ASSERTION]: 36. full match"
+      },
+      {
+        "file": "tests/high-school-year-one-opportunity-two-integration-test.js",
+        "exitCode": 1,
+        "sourceHash": "db46a6e6c15126b357657b1670b1452580718e8609dee43b84df1a0af6e0dc27",
+        "error": null,
+        "stderr": "script.js:11866\r\n  const opportunity = DefensiveDecisionThrowFoundation.buildDecisionOpportunity(input);\r\n                      ^\r\n\r\nReferenceError: DefensiveDecisionThrowFoundation is not defined\r\n    at buildHighSchoolShortstopExecution (script.js:11866:23)\r\n    at Object.resolveInfieldDecision [as resolve] (script.js:8414:23)\r\n    at resolveRoutineDefensivePlay (script.js:10346:60)\r\n    at prepareHighSchoolDefensiveMomentFromSimulation (script.js:13351:24)\r\n    at advanceHighSchoolMatchPlaybackStep (script.js:13578:28)\r\n    at advanceHighSchoolMatchSimulation (script.js:13633:14)\r\n    at evalmachine.<anonymous>:1:640\r\n    at evalmachine.<anonymous>:1:891\r\n    at Script.runInContext (node:vm:149:12)\r\n    at Object.runInContext (node:vm:301:6)\r\n\r\nNode.js v24.19.0\r\n",
+        "signature": "ReferenceError: DefensiveDecisionThrowFoundation is not defined"
+      }
+    ],
+    "priorFullVerdict": "224/227_PARTIAL",
+    "originalManifestUnmodified": true
+  },
+  "r6RuntimeComparison": {
+    "sprint": "10A.3b-R6",
+    "baseline": "ab3117653945de0b7013636187c446276a96e634",
+    "createdAt": "2026-10-14T06:44:45.220Z",
+    "node": "v24.19.0",
+    "formalBaselineEvidence": "docs/receiver-execution-v2-sprint-10a3b-r4-first-base-baseline180-evidence.json",
+    "priorWipEvidence": "docs/receiver-execution-v2-sprint-10a3b-r4-first-base-current-final-evidence.json",
+    "formalComparison": {
+      "baselineElapsedMs": 101026.3495,
+      "currentElapsedMs": 131374.2926,
+      "deltaMs": 30347.94309999999,
+      "thresholdMs": 20205.2699,
+      "withinInvestigationThreshold": false,
+      "outputEqual": true
+    },
+    "priorWipComparison": {
+      "baselineElapsedMs": 124833.7173,
+      "currentElapsedMs": 131374.2926,
+      "deltaMs": 6540.575299999982,
+      "thresholdMs": 24966.74346,
+      "withinInvestigationThreshold": true,
+      "outputEqual": true
+    },
+    "productionSourceIdenticalToR4": true,
+    "timingIsSingleInheritedPairNotStatisticalProof": true,
+    "priorR4InvestigationPreserved": "docs/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation-final-evidence.json",
+    "frozenSourceHashes": {
+      "index.html": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+      "script.js": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+      "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+      "player.js": "3414f5a93429bc1a4adbe3c632485e70b5d9175822261b689543a77fa0eb38bd",
+      "match-situation-lifecycle.js": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+      "receiver-source-snapshot.js": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274",
+      "tests/pitch-sequence-state-production-integration-test.js": "7a53369d526de1c3a66b9d3e0c69f45f27f261bdb1d28c354f9831c0e8ae8327",
+      "tests/receiver-source-save-authorized-delta.cjs": "94a2cac6e155c3936ea2cd03f0d31e4e19feba87d53f87c4be5c3cc5aab28b82",
+      "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs": "e8f6a9bbdea182a6b73241d60d9c9bb54e4174fccf56dcdba05399904830504b",
+      "tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs": "7bf28ed1f296feb61b64451982d72ab2c12d7ed719dd0ac30ceae3aaa26d7073"
+    }
+  },
+  "packageScripts": {
+    "audit:opportunity-probability": "node tests/high-school-opportunity-probability-calibration-runner.cjs",
+    "audit:opportunity-post-repair": "node tests/high-school-opportunity-post-repair-calibration-runner.cjs"
+  },
+  "proposedModesOnly": true,
+  "newFrameworkImplemented": false,
+  "issues": [
+    "require-only full wrapper skips main-guard suites",
+    "outer stdout buffer does not set nested Git buffer",
+    "in-process focused suite lacks child timeout and dedicated raw stdout/stderr",
+    "S6 full stores stdout tail/hash instead of complete stdout and has no per-suite elapsed",
+    "historical single-use capture names reject rerun; reuse exports with new captures",
+    "fixed227 excludes24 current entries; protected entry remains prohibited",
+    "PASS requires actual assertion execution, not just exit0"
+  ],
+  "safety": {
+    "changedExistingPaths": [],
+    "preservedHashes": 945,
+    "protectedMetadataUnchanged": true,
+    "protectedContentReadOrHashed": false,
+    "git": {
+      "branch": "main",
+      "head": "ab3117653945de0b7013636187c446276a96e634",
+      "main": "ab3117653945de0b7013636187c446276a96e634",
+      "originMain": "ab3117653945de0b7013636187c446276a96e634",
+      "index": "",
+      "status": " M index.html\n M match-situation-lifecycle.js\n M save.js\n M script.js\n M tests/fast-check-smoke-test.cjs\n M tests/pitch-sequence-state-production-integration-test.js\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/infield-baseball-logic-audit-architecture-evidence.json\n?? docs/infield-baseball-logic-audit-evidence.json\n?? docs/infield-baseball-logic-audit-runner.cjs\n?? docs/infield-baseball-logic-validation-audit-v1.md\n?? docs/infield-scorer-recovery-sprint-5-green-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json\n?? docs/infield-scorer-recovery-sprint-5-validation.json\n?? docs/receiver-execution-v2-production-snapshot-save-guard-sprint-10a3b.md\n?? docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-lifecycle-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-observed-validation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-current-source-verification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-initial-test-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r1-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-timeout-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-architecture-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout.md\n?? docs/receiver-execution-v2-sprint-10a3b-r2-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-policy-specification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-extra-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gradient-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-guard-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r3-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-original-validator.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-reproduction-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-baseline-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-comparison-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-current-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-green-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-green-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-career-save-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-compatibility-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-audit-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r4-development-focused-1-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-development-focused-2-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-helper-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-helper-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-baseline180-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-current-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-r3-wip-diagnostic-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-runtime-comparison-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-full-repository-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gates-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gradient-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gradient-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-legacy-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-production-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-r3-guard-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-r3-guard-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-red-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-related-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-s8-cross-runtime-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-s8-cross-runtime-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-save-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-before-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-change-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-stdout-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-architecture-extra-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-coverage-paths-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-entrypoint-search-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-freeze-comparisons-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-inherited-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-ownership-contract-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-pitch-red-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-save-ownership-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r6-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-authorized-delta-contract-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-bbp-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-coverage-paths-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-development-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-exact-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-independent-review-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-manifest-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-pitch-green-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r1-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r3-guard-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r4-dependency-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-receiver-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-s8-cross-runtime-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-save-boundary-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-save-ownership-contract.md\n?? docs/receiver-execution-v2-sprint-10a3b-r6-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-confirmation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-witness-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-related-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-evidence.json\n?? docs/test-reliability-audit-v0.1-architecture-evidence.json\n?? docs/test-reliability-audit-v0.1-baseline-evidence.json\n?? docs/test-reliability-audit-v0.1-coverage-evidence.json\n?? docs/test-reliability-audit-v0.1-entry-buffer-replays-evidence.json\n?? docs/test-reliability-audit-v0.1-extract.cjs\n?? docs/test-reliability-audit-v0.1-finalize-inventory.cjs\n?? docs/test-reliability-audit-v0.1-freeze-review.cjs\n?? docs/test-reliability-audit-v0.1-git-buffer-diagnostic-evidence.json\n?? docs/test-reliability-audit-v0.1-inventory-evidence.json\n?? docs/test-reliability-audit-v0.1-inventory-final-evidence.json\n?? docs/test-reliability-audit-v0.1-inventory.cjs\n?? docs/test-reliability-audit-v0.1-known-failure-replays-evidence.json\n?? docs/test-reliability-audit-v0.1-source-freeze-candidates-evidence.json\n?? docs/test-reliability-audit-v0.1-source-freeze-review-evidence.json\n?? docs/test-reliability-audit-v0.1-test-inventory.md\n?? install.ps1\n?? receiver-source-snapshot.js\n?? tests/receiver-execution-v2-production-snapshot-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-harness.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-closeout.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-source-review.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-closeout.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-dependency-audit.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runtime-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r5-ownership-audit.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-independent-review.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs\n?? tests/receiver-source-save-authorized-delta.cjs\n"
+    }
+  }
+}

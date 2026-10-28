@@ -1,0 +1,59 @@
+{
+  "tier": 2,
+  "snippet": {
+    "name": "getHighSchoolReceiverSourceAdapter",
+    "qualified_name": "E-meng-baseball_life_sim_semirefactor.script.getHighSchoolReceiverSourceAdapter",
+    "label": "Function",
+    "file_path": "E:/meng/baseball_life_sim_semirefactor/script.js",
+    "start_line": 5117,
+    "end_line": 5127,
+    "source_mode": "full",
+    "source": "function getHighSchoolReceiverSourceAdapter(match) {\n  const source = typeof ReceiverSourceSnapshot === \"undefined\" ? null : ReceiverSourceSnapshot;\n  const available = source && [\"createSnapshot\", \"validateMatch\", \"executionBinding\", \"same\"].every(k => typeof source[k] === \"function\") && source.versions;\n  const rosterAvailable = typeof TeamRosterFoundation !== \"undefined\" && TeamRosterFoundation && typeof TeamRosterFoundation.getCurrentDefender === \"function\";\n  if (available && rosterAvailable) return source;\n  const keys = [\"receiverSourceFormatVersion\", \"receiverSourceAdmission\", \"receiverSourceSnapshot\", \"receiverSourcePin\", \"receiverSourceExecutionBinding\"];\n  const present = [match, match?.groundBallInPlayState, match?.activeSituation, match?.activeSituation?.contextSnapshot,\n    match?.activeSituation?.executionState, match?.lastClosedSituationSummary].some(o => o && keys.some(k => Object.prototype.hasOwnProperty.call(o, k)));\n  if (present && !available) throw new Error(\"Receiver source snapshot module required\");\n  if (present && !rosterAvailable) throw new Error(\"Receiver source roster module required\");\n  return null;\n",
+    "callers": 3,
+    "callees": 0
+  },
+  "coverage": {
+    "project": "E-meng-baseball_life_sim_semirefactor",
+    "signal": "best_effort",
+    "indexed_at": "2026-10-14T05:26:30Z",
+    "metadata": {
+      "generation": "2026-10-14T05:26:30Z",
+      "index_mode": "full",
+      "recorded_at": "2026-10-14T05:26:33Z",
+      "recording_status": "complete",
+      "ignored_files_stored": 0,
+      "ignored_files_total": 0,
+      "hash_records_complete": true,
+      "coverage_version": 3,
+      "generation_matches": true
+    },
+    "paths": [
+      {
+        "requested_path": "script.js",
+        "path": "script.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "tests/receiver-execution-v2-sprint-10a3b-r4-runtime-comparison.cjs",
+        "path": "tests/receiver-execution-v2-sprint-10a3b-r4-runtime-comparison.cjs",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      }
+    ],
+    "path_total": 2,
+    "path_returned": 2,
+    "path_has_more": false,
+    "scopes": [],
+    "scope_total": 0,
+    "scope_returned": 0,
+    "scope_truncated": false,
+    "has_more": false,
+    "caveat": "Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable."
+  },
+  "qualification": "Current helper read directly. Availability is checked before metadata presence scan; complete available adapters still execute original validateMatch. Missing dependencies still inspect own tags across all scopes and reject new-format state. Initial 1783fc source/captures remain historical."
+}

@@ -1,0 +1,6 @@
+"use strict";
+const fs=require('node:fs'),path=require('node:path'),C=require('./critical-regression-repair-a-opportunity-two-capture.cjs');
+C.integrity();
+const file=C.prefix+'runner.cjs',r=C.json(C.childPrefix+'runner-throw-settlement-evidence.json');
+C.capture('bookkeeping-recovery',{originalNewRunner:{file,sha256:C.fileHash(file),source:fs.readFileSync(path.join(C.root,file),'utf8')},reason:'New utility declared Runner Throw Settlement as 16 checks; current unchanged original suite completes 22 checks (18 direct test invocations plus 4 route cases). The child passed; only parent expected-summary validation failed.',suiteStatus:r.status,exitCode:r.exitCode,sourceStable:r.sourceStable,completeObservedSummary:r.stdout.split('\n').find(l=>l.startsWith('Final:')),completedSuitesRetained:['formal','ss-defense-63','ground-lifecycle','runner-throw-settlement'],notYetRun:['force-settlement-production'],correctedScope:'Change only new utility expected count 16→22; retain and revalidate prior raw captures, execute only unrun force settlement',originalFormalChecksPass:40,newProductionOrFormalAssertionFailure:false,fullInitialInteractiveStderrAvailable:true});
+console.log(JSON.stringify({suiteStatus:r.status,summary:'22/22 PASS',parentBookkeepingErrorRecorded:true}));

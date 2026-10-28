@@ -1,0 +1,19 @@
+{
+  "file": "high-school-position-code-normalization-test.js",
+  "status": "PASS",
+  "entryVerified": true,
+  "observedAssertions": 7,
+  "elapsedMs": 39,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/high-school-position-code-normalization-test.js"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "error": null,
+  "timedOut": false,
+  "stdout": "✓ 1. Canonical roster codes 共用單一玩家守位 normalization\n✓ 2. 中文 compatibility positions 保持 canonical player-facing label\n✓ 3. P 與投手都一致標記 pitcher deferred\n✓ 4. P 與投手都一致 fail closed 為 noAppearance\n✓ 5. P route 不會因高能力被當成 generic starter\n✓ 6. C 與捕手都保留 Catcher gameplay admission\n✓ 7. 左投 C code 與中文捕手共用相同 legality fallback\nHigh School Position Code Normalization: 7/7 passed.\n",
+  "stderr": ""
+}

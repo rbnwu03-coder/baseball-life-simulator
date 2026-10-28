@@ -1,0 +1,2773 @@
+{
+  "task": "Current Test Baseline Verification v0.1 — Read-only",
+  "createdAt": "2026-10-15T07:22:01.124Z",
+  "inventory": "docs/current-test-baseline-verification-v0.1-inventory-final-evidence.json",
+  "suiteIdentity": "normalized repository-relative file path with suite: prefix",
+  "historicalCommandProvenance": [
+    {
+      "stableId": "suite:tests/ability-performance-gradient-test.js",
+      "executionKind": "Recorded audit child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/test-reliability-audit-v0.1-known-failure-replays-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/ability-performance-observability-extension-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-observability-extension-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/active-defensive-assignment-integrity-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\active-defensive-assignment-integrity-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/adult-route-chain-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\adult-route-chain-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/ai-plate-appearance-outcome-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\ai-plate-appearance-outcome-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/ai-plate-appearance-outcome-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\ai-plate-appearance-outcome-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/application-controller-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\application-controller-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/aspiration-narrative-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\aspiration-narrative-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/azhe-storyboard-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\azhe-storyboard-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-defense-prototype-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-defense-prototype-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-gameplay-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-gameplay-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-gameplay-prototype-isolation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-gameplay-prototype-isolation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-match-foundation-2-1-1-1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-1-1-1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-match-foundation-2-1-1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-1-1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-match-foundation-2-1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-match-foundation-2-2-1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-match-foundation-2-2-2-test.js",
+      "executionKind": "Recorded audit child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/test-reliability-audit-v0.1-known-failure-replays-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-match-foundation-2-2-3-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-3-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-match-foundation-2-2-4-1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-4-1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-match-foundation-2-2-4-2-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-4-2-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-match-foundation-2-2-4-4-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-4-4-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-match-foundation-2-2-4-5-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-4-5-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-match-foundation-2-2-4-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-4-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-match-foundation-2-2-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-offense-base-state-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-offense-base-state-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-offense-prototype-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-offense-prototype-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-offensive-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-offensive-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/baseball-training-rhythm-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-training-rhythm-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/batted-ball-outcome-mapping-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\batted-ball-outcome-mapping-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/batted-ball-outcome-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\batted-ball-outcome-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/batted-ball-physical-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\batted-ball-physical-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/batted-ball-physical-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\batted-ball-physical-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/batter-anticipation-sprint-b-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\batter-anticipation-sprint-b-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/bbp-b1-ground-ball-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/bbp-b1-ground-ball-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-bbp-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/bbp-b1-ground-ball-runner-handoff-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\bbp-b1-ground-ball-runner-handoff-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/bbp-b2a-line-drive-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\bbp-b2a-line-drive-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/bbp-b2a-line-drive-read-catch-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\bbp-b2a-line-drive-read-catch-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/bbp-b2b1-fly-ball-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\bbp-b2b1-fly-ball-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/bbp-b2b1-fly-ball-tag-up-legality-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\bbp-b2b1-fly-ball-tag-up-legality-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/bbp-b2b2-tag-up-decision-execution-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\bbp-b2b2-tag-up-decision-execution-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/callbackTest.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/career-age22-outcome-resolver-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-age22-outcome-resolver-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/career-arc-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-arc-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/career-development-progression-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-development-progression-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/career-development-runtime-resolver-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-development-runtime-resolver-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/career-network-contract-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-network-contract-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/career-rejoin-contract-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-rejoin-contract-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/career-save-admission-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/career-save-admission-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-career-save-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/career-spine-contract-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-spine-contract-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/career-transition-commit-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-transition-commit-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/career-transition-progression-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-transition-progression-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/career-transition-resolver-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-transition-resolver-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/career-transition-role-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-transition-role-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/career-transition-route-difference-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-transition-route-difference-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/career-transition-runtime-resolver-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-transition-runtime-resolver-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/catcher-choice-outcome-integrity-v1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\catcher-choice-outcome-integrity-v1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/coach-evaluation-boundary-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\coach-evaluation-boundary-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/coach-response-expansion-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\coach-response-expansion-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/coach-response-flow-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\coach-response-flow-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/competition-flow-framework-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\competition-flow-framework-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/competition-rules-contract-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\competition-rules-contract-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/contextual-status-panel-test.js",
+      "executionKind": "Recorded audit child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\contextual-status-panel-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/test-reliability-audit-v0.1-entry-buffer-replays-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/county-selection-opportunity-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\county-selection-opportunity-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/current-state-boundary-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\current-state-boundary-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/day-completion-flow-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\day-completion-flow-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/decision-flow-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\decision-flow-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/defensive-decision-throw-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\defensive-decision-throw-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/defensive-decision-throw-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/defensive-decision-throw-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/defensive-opportunity-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\defensive-opportunity-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/defensive-opportunity-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\defensive-opportunity-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/defensive-outcome-cause-explainability-foundation-v1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\defensive-outcome-cause-explainability-foundation-v1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/defensive-reach-secure-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\defensive-reach-secure-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/defensive-reach-secure-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\defensive-reach-secure-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/defensive-runner-throw-settlement-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/defensive-runner-throw-settlement-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/development-match-position-test-fallback-v1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\development-match-position-test-fallback-v1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/development-training-result-foundation-v1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\development-training-result-foundation-v1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/emotional-payoff-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\emotional-payoff-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/evaluation-registry-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\evaluation-registry-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/evaluation-registry-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\evaluation-registry-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/event-continuity-pass-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\event-continuity-pass-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/extra-inning-tiebreak-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\extra-inning-tiebreak-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/extra-inning-tiebreak-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\extra-inning-tiebreak-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/fast-check-smoke-test.cjs",
+      "executionKind": "UNVERIFIED",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/first-base-receive-active-ground-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/first-base-receive-active-ground-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-first-base-current-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/first-offensive-moment-role-presentation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\first-offensive-moment-role-presentation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/force-advancement-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/force-advancement-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/force-multi-runner-settlement-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\force-multi-runner-settlement-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/force-multi-runner-settlement-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/force-multi-runner-settlement-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/full-game-competition-evidence-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\full-game-competition-evidence-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/full-game-player-line-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\full-game-player-line-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/generic-infield-position-admission-diagnostic-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\generic-infield-position-admission-diagnostic-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/goal-balance-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\goal-balance-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/ground-ball-home-route-integrity-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\ground-ball-home-route-integrity-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/ground-ball-home-route-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\ground-ball-home-route-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/ground-defensive-decision-identity-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/ground-defensive-decision-identity-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/ground-defensive-decision-identity-repair-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\ground-defensive-decision-identity-repair-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/ground-settlement-handoff-r2-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/ground-settlement-handoff-r2-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-career-evidence-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-evidence-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-career-exit-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-exit-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-career-offer-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-career-offer-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-competition-evidence-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-competition-evidence-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-competition-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-competition-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-competition-reassessment-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-competition-reassessment-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-entry-roster-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-entry-roster-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-exchange-network-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-exchange-network-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-exchange-network-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-exchange-network-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-friendly-invitation-producer-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-friendly-invitation-producer-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-friendly-invitation-producer-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-friendly-invitation-producer-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-integration-1-1-1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-integration-1-1-1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-integration-1-1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-integration-1-1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-integration-1-2-1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-integration-1-2-1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-integration-1-2-2-1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-integration-1-2-2-1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-integration-1-2-2-2-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-integration-1-2-2-2-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-integration-1-2-2-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-integration-1-2-2-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-integration-1-2-3-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-integration-1-2-3-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-integration-1-2-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-integration-1-2-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-match-opportunity-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-match-opportunity-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-match-opportunity-generation-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-match-opportunity-generation-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-match-opportunity-generation-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-match-opportunity-generation-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-opportunity-exposure-bias-repair-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-opportunity-exposure-bias-repair-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-opportunity-exposure-bias-repair-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-opportunity-exposure-bias-repair-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-opportunity-post-repair-calibration-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-opportunity-post-repair-calibration-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-opportunity-post-repair-calibration-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-opportunity-post-repair-calibration-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-opportunity-probability-calibration-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-opportunity-probability-calibration-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-opportunity-probability-calibration-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-opportunity-probability-calibration-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-opportunity-probability-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-opportunity-probability-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-opportunity-probability-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-opportunity-probability-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-opportunity-selection-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-opportunity-selection-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-opportunity-selection-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-opportunity-selection-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-position-code-normalization-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-position-code-normalization-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-relationship-recency-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-relationship-recency-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-relationship-recency-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-relationship-recency-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-relationship-recency-reputation-feasibility-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-relationship-recency-reputation-feasibility-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-relationship-recency-reputation-feasibility-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-relationship-recency-reputation-feasibility-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-relationship-temporal-authority-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-relationship-temporal-authority-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-relationship-temporal-authority-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-relationship-temporal-authority-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-schedule-opportunity-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-schedule-opportunity-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-three-year-spine-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-three-year-spine-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-training-camp-producer-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-training-camp-producer-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-training-camp-producer-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-training-camp-producer-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-year-one-competition-loop-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-competition-loop-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-year-one-opportunity-two-integration-test.js",
+      "executionKind": "Recorded audit child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/test-reliability-audit-v0.1-known-failure-replays-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-year-three-competition-loop-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-three-competition-loop-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-year-transition-continuity-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-transition-continuity-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-year-two-autumn-match-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-two-autumn-match-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/high-school-year-two-competition-loop-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-two-competition-loop-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/infield-legacy-receiver-model-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/infield-legacy-receiver-model-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/infield-legacy-receiver-scorer-closeout-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/infield-legacy-receiver-scorer-closeout-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/infield-scorer-recovery-integrity-repair-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/infield-scorer-recovery-integrity-repair-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/invitation-presentation-school-choice-integration-v1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\invitation-presentation-school-choice-integration-v1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/invitation-presentation-v1-0-1-legacy-route-conflict-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\invitation-presentation-v1-0-1-legacy-route-conflict-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/match-context-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\match-context-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/match-context-schedule-origin-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\match-context-schedule-origin-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/match-development-settlement-presentation-v1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\match-development-settlement-presentation-v1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/match-experience-development-foundation-v1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/match-experience-development-foundation-v1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/match-full-game-record-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/match-full-game-record-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/match-m0-after-r2-audit-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\match-m0-after-r2-audit-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/match-opportunity-structural-completion-v1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\match-opportunity-structural-completion-v1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/match-simulation-outcome-mapping-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\match-simulation-outcome-mapping-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/match-situation-lifecycle-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/match-situation-lifecycle-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/narrative-condition-boundary-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\narrative-condition-boundary-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/narrative-condition-flow-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\narrative-condition-flow-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/narrative-continuity-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\narrative-continuity-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/national-selection-pipeline-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\national-selection-pipeline-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/npc-role-refactor-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\npc-role-refactor-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/offensive-plate-approach-foundation-v1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\offensive-plate-approach-foundation-v1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/offensive-production-presentation-sprint-c-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\offensive-production-presentation-sprint-c-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/offensive-tactical-action-sprint-a-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\offensive-tactical-action-sprint-a-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/offensive-tactical-action-sprint-b1-0-1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\offensive-tactical-action-sprint-b1-0-1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/offensive-tactical-action-sprint-b1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\offensive-tactical-action-sprint-b1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/offensive-tactical-action-sprint-b2-defensive-handoff-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\offensive-tactical-action-sprint-b2-defensive-handoff-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/offensive-tactical-action-sprint-b2-runner-realization-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\offensive-tactical-action-sprint-b2-runner-realization-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/opportunity-evaluation-boundary-v1-0-1-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\opportunity-evaluation-boundary-v1-0-1-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/outcome-transition-hierarchy-test.js",
+      "executionKind": "Recorded audit child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\outcome-transition-hierarchy-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/test-reliability-audit-v0.1-entry-buffer-replays-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/pitch-observation-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\pitch-observation-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/pitch-observation-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\pitch-observation-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/pitch-production-source-scope-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/pitch-production-source-scope-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/pitch-sequence-state-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\pitch-sequence-state-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/pitch-sequence-state-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\pitch-sequence-state-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-pitch-green-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/pitch-sequencing-core-sprint-a-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\pitch-sequencing-core-sprint-a-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/pitch-tactical-decision-foundation-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\pitch-tactical-decision-foundation-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/pitch-tactical-decision-production-adapter-integration-test.js",
+      "executionKind": "Recorded audit child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/pitch-tactical-decision-production-adapter-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/test-reliability-audit-v0.1-entry-buffer-replays-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/pitch-tactical-decision-production-adapter-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\pitch-tactical-decision-production-adapter-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/pitch-tactical-decision-production-integration-test.js",
+      "executionKind": "Recorded audit child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\pitch-tactical-decision-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/test-reliability-audit-v0.1-known-failure-replays-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/pitch-tactical-intent-evidence-integration-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/pitch-tactical-intent-semantic-boundary-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/pitch-tactical-interpretation-foundation-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/pitch-tactical-interpretation-production-integration-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/pitch-tactical-selector-equivalence-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/pitch-tactical-signal-projection-foundation-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/pitch-tactical-signal-projection-production-integration-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/pitch-target-location-foundation-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/pitch-target-location-production-integration-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/pitch-velocity-baseline-extraction-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/pitcher-catcher-tactical-integration-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/pitcher-mental-state-sprint-a-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/pitcher-process-state-sprint-a-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/plate-approach-semantic-integrity-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/plate-decision-foundation-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/plate-decision-production-integration-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/player-archetype-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/player-capability-hierarchy-foundation-v1-0-1-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/player-capability-hierarchy-foundation-v1-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/player-data-boundary-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/playing-time-game-exposure-foundation-v1-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/presentation-interaction-clarity-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/receiver-execution-v2-2-contract-test.cjs",
+      "executionKind": "R6 in-process exported run() capture; displayed -e command is a reconstruction, not a recorded shell invocation",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const r=require(\"./tests/receiver-execution-v2-2-contract-test.cjs\").run(); if(r.summary?.failed)process.exitCode=1;"
+      ],
+      "reconstructedCommandIsNotActual": true,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+      "executionKind": "R6 in-process exported run() capture; displayed -e command is a reconstruction, not a recorded shell invocation",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const r=require(\"./tests/receiver-execution-v2-production-snapshot-save-test.cjs\").run(); if(r.summary?.failed)process.exitCode=1;"
+      ],
+      "reconstructedCommandIsNotActual": true,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-production-focused-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/receiver-execution-v2-production-source-timing-test.cjs",
+      "executionKind": "R6 in-process exported run() capture; displayed -e command is a reconstruction, not a recorded shell invocation",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const r=require(\"./tests/receiver-execution-v2-production-source-timing-test.cjs\").run(); if(r.summary?.failed)process.exitCode=1;"
+      ],
+      "reconstructedCommandIsNotActual": true,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/receiver-execution-v2-pure-contract-test.cjs",
+      "executionKind": "R6 in-process exported run() capture; displayed -e command is a reconstruction, not a recorded shell invocation",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const r=require(\"./tests/receiver-execution-v2-pure-contract-test.cjs\").run(); if(r.summary?.failed)process.exitCode=1;"
+      ],
+      "reconstructedCommandIsNotActual": true,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/receiver-execution-v2-source-authority-test.cjs",
+      "executionKind": "R6 in-process exported run() capture; displayed -e command is a reconstruction, not a recorded shell invocation",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const r=require(\"./tests/receiver-execution-v2-source-authority-test.cjs\").run(); if(r.summary?.failed)process.exitCode=1;"
+      ],
+      "reconstructedCommandIsNotActual": true,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/receiver-execution-v2-sprint-10a-readiness-test.cjs",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs",
+      "executionKind": "R6 in-process exported run() capture; displayed -e command is a reconstruction, not a recorded shell invocation",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const r=require(\"./tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs\").run(); if(r.summary?.failed)process.exitCode=1;"
+      ],
+      "reconstructedCommandIsNotActual": true,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-legacy-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+      "executionKind": "R6 in-process exported run() capture; displayed -e command is a reconstruction, not a recorded shell invocation",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const r=require(\"./tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs\").run(); if(r.summary?.failed)process.exitCode=1;"
+      ],
+      "reconstructedCommandIsNotActual": true,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-r1-save-focused-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs",
+      "executionKind": "R6 in-process exported run() capture; displayed -e command is a reconstruction, not a recorded shell invocation",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const r=require(\"./tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs\").run(); if(r.summary?.failed)process.exitCode=1;"
+      ],
+      "reconstructedCommandIsNotActual": true,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-r3-guard-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs",
+      "executionKind": "R6 in-process exported run() capture; displayed -e command is a reconstruction, not a recorded shell invocation",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const r=require(\"./tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs\").run(); if(r.summary?.failed)process.exitCode=1;"
+      ],
+      "reconstructedCommandIsNotActual": true,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-r4-dependency-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs",
+      "executionKind": "R6 in-process exported run() capture; displayed -e command is a reconstruction, not a recorded shell invocation",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const r=require(\"./tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs\").run(); if(r.summary?.failed)process.exitCode=1;"
+      ],
+      "reconstructedCommandIsNotActual": true,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-exact-focused-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs",
+      "executionKind": "R6 in-process exported run() capture; displayed -e command is a reconstruction, not a recorded shell invocation",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const r=require(\"./tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs\").run(); if(r.summary?.failed)process.exitCode=1;"
+      ],
+      "reconstructedCommandIsNotActual": true,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-save-boundary-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/receiver-execution-v2-sprint-9-legacy-comparison.cjs",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/receiver-execution-v2-version-admission-timing-test.cjs",
+      "executionKind": "R6 in-process exported run() capture; displayed -e command is a reconstruction, not a recorded shell invocation",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const r=require(\"./tests/receiver-execution-v2-version-admission-timing-test.cjs\").run(); if(r.summary?.failed)process.exitCode=1;"
+      ],
+      "reconstructedCommandIsNotActual": true,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/relationship-boundary-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/relationship-feasibility-production-scope-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/relationship-flow-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/relationship-payoff-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/representative-team-contract-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/responsive-accessibility-pass-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/scene-context-layer-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/scene-depth-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/school-invitation-foundation-v1-0-1-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/school-invitation-foundation-v1-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/scoreboard-presentation-integrity-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/scoreboard-presentation-production-integration-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/shared-infield-contract-2b-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/shared-infield-contract-2b-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/sprint-c-human-ux-closeout-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/ss-defensive-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/ss-defensive-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/status-panel-disclosure-persistence-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/takahashi-storyboard-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/team-roster-foundation-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/team-roster-match-integration-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/team-strength-model-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/ten-year-narrative-architecture-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/third-base-ground-production-integration-test.js",
+      "executionKind": "Recorded child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "tests/third-base-ground-production-integration-test.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/third-out-run-out-attribution-integrity-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/third-out-run-out-attribution-production-integration-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/third-out-runner-resolution-integrity-v1-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/time-boundary-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/u18-roster-construction-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    },
+    {
+      "stableId": "suite:tests/vertical-slice-smoke.js",
+      "executionKind": "Recorded audit child command",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "-e",
+        "const cp=require('child_process'),original=cp.execFileSync;cp.execFileSync=function(command,args,opts){if(command==='git'&&args?.[0]==='show'&&opts&&typeof opts==='object'&&opts.maxBuffer===undefined)return original.call(this,command,args,{...opts,maxBuffer:30e6});return original.apply(this,arguments);};require(process.argv[1]);",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\vertical-slice-smoke.js"
+      ],
+      "reconstructedCommandIsNotActual": false,
+      "evidence": "docs/test-reliability-audit-v0.1-known-failure-replays-evidence.json"
+    },
+    {
+      "stableId": "suite:tests/youth-season-content-pass-test.js",
+      "executionKind": "UNVERIFIED; proposed original standalone entry only",
+      "command": null,
+      "reconstructedCommandIsNotActual": false,
+      "evidence": null
+    }
+  ],
+  "counts": {
+    "allTestDirectoryFiles": 333,
+    "jsCjsFiles": 320,
+    "browserFixtures": 13,
+    "oldSuiteEntries": 251,
+    "newSuiteEntries": 4,
+    "currentSuiteEntries": 255,
+    "standardNamedSuites": 251,
+    "nonstandardSuiteEntries": 4,
+    "helpersRunnersProbes": 65,
+    "status": {
+      "PASS": 203,
+      "FAIL": 2,
+      "UNVERIFIED": 48,
+      "BLOCKED": 2
+    },
+    "oldSuiteStatus": {
+      "PASS": 200,
+      "FAIL": 2,
+      "UNVERIFIED": 48,
+      "BLOCKED": 1
+    },
+    "newSuiteStatus": {
+      "PASS": 3,
+      "FAIL": 0,
+      "UNVERIFIED": 0,
+      "BLOCKED": 1
+    },
+    "evidenceAge": {
+      "newlyExecuted": 2,
+      "historicalReused": 203
+    },
+    "entrySafeVerifiedProfiles": 25,
+    "entrySafeCliRegistered": 5,
+    "fixedR6Full227": 227
+  },
+  "currentPassEvidence": {
+    "historicalAcceptedUnchangedInputs": 201,
+    "thisTurnStandalone": 2
+  },
+  "currentFailEvidence": {
+    "historicalAcceptedUnchangedInputs": 2,
+    "thisTurnReproductions": 0
+  },
+  "distinctions": {
+    "newThisTurnFormalSuites": 0,
+    "newThisTurnDiagnostics": 0,
+    "postAuditNewFormalSuites": 4,
+    "postAuditNewSupportFiles": 5,
+    "knownSnapshotGapNotClosed": true,
+    "formalSuiteCountNotSumOfAssertions": true,
+    "originalMatchHistoricalFailNotOverwritten": true
+  },
+  "futureRepairs": [
+    {
+      "priority": 1,
+      "task": "原Match #36／S3驗收契約關閉",
+      "scope": "先裁決固定ID3責任與可追溯合法source-flow；本輪不刪原assertion或改Production，snapshot仍另列KNOWN CONTRACT GAP"
+    },
+    {
+      "priority": 2,
+      "task": "Ability Gradient統計／決策政策契約",
+      "scope": "檢查固定cohort與RNG identity相關性及first-legal政策；原tier、seed與樣本不為PASS調整"
+    }
+  ],
+  "noFurtherExecutions": true,
+  "readOnly": true
+}

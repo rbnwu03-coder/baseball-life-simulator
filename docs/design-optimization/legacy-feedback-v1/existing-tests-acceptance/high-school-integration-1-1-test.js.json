@@ -1,0 +1,20 @@
+{
+  "file": "high-school-integration-1-1-test.js",
+  "status": "FAIL",
+  "nodeAssertions": 9,
+  "customChecks": null,
+  "entry": true,
+  "elapsedMs": 126,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/high-school-integration-1-1-test.js"
+  ],
+  "exitCode": 1,
+  "signal": null,
+  "stdout": "✓ 1. 注入相同 RNG 會得到相同初始能力形狀\n✓ 2. 初始擲骰固定總量 12 且每項只在 1–3\n✓ 3. 配置點固定 3 且單項上限 2\n✓ 4. 創角介面會把能力 key 轉成玩家可讀名稱\n✓ 5. 正式創角會保存 archetype、能力形狀、配置、投打與最初願望\n✓ 6. canonical 守位是唯一寫入來源，舊欄位只做相容映射\n✓ 7. 理想自我與教練評估可產生一致／部分一致／衝突\n✓ 8. 複合判定可形成先發／輪替／發展三種內部角色\n✓ 9. 三種角色都進入同一場正式交流賽\n",
+  "stderr": "script.js:11439\r\n    sample: BattedBallPhysical.deterministicUnit(\"g1-c-third-strike-catch\", state.paIdentity, catcher.id)\r\n            ^\r\n\r\nReferenceError: BattedBallPhysical is not defined\r\n    at resolveHighSchoolThirdStrikeCatch (script.js:11439:13)\r\n    at resolveHighSchoolOffensiveDecision (script.js:11458:28)\r\n    at advanceHighSchoolYearOneAfterMomentOne (script.js:11630:10)\r\n    at resolveHighSchoolYearOneMatch (script.js:14385:10)\r\n    at run (evalmachine.<anonymous>:7:262)\r\n    at evalmachine.<anonymous>:11:22\r\n    at evalmachine.<anonymous>:12:3\r\n    at Script.runInContext (node:vm:149:12)\r\n    at Object.runInContext (node:vm:301:6)\r\n    at evaluate (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-integration-1-1-test.js:51:35)\r\n\r\nNode.js v24.19.0\r\n",
+  "error": null,
+  "timedOut": false
+}

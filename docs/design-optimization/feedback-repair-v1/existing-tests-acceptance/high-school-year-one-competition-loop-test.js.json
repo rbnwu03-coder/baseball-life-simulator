@@ -1,0 +1,20 @@
+{
+  "file": "high-school-year-one-competition-loop-test.js",
+  "status": "PASS",
+  "nodeAssertions": 28,
+  "customChecks": null,
+  "entry": true,
+  "elapsedMs": 235,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/high-school-year-one-competition-loop-test.js"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "stdout": "✓ 1. Opportunity 1 建立正式 persistent history\n✓ 2. Opportunity 1 save/reload 不 reroll\n✓ 3. Match settlement 後建立 accumulated evaluation\n✓ 4. Evaluation 消費 current readiness、coach trust 與 health\n✓ 5. Evaluation 消費 actual PA／defensive innings\n✓ 6. Evaluation 消費 canonical match decision／execution 與 Match Experience truth\n✓ 7. 單一正向樣本因 smoothing 維持 Bench\n✓ 8. Match 1 history 回填 actual exposure 與 evaluation consequence\n✓ 9. Production settlement 正式建立 Opportunity N+1\n✓ 10. Opportunity N+1 讀 updated evaluation trend 與前次 actual exposure\n✓ 11. Opportunity N+1 使用 current canonical role 而非 projected role\n✓ 12. Opportunity N+1 identity 綁定 school-year／phase／index 且與 Opportunity 1 不同\n✓ 13. Competition refresh 重算 current player gap\n✓ 14. selected school-year identity 在 N → N+1 不變\n✓ 15. Canonical incumbent actors 在 refresh 後全數保留\n✓ 15a. 賽後 production narrative 顯示已建立的下一次評估安排\n✓ 15b. 玩家可讀評估不洩漏 raw reason identifiers\n✓ 16. Role／evaluation／history／competition／N+1／roster reload 穩定\n✓ 17. 重進結算不重複 evaluation／role／history\n✓ 18. Rotation sustained success 正式升 Starter 並同步 role derivatives\n✓ 19. Promotion 保留被取代 incumbent actor\n✓ 20. Demotion 恢復 canonical incumbent 且不重生 roster actors\n✓ 21. Positive evaluation 可在不 promotion 時提高 planned exposure\n✓ 22. Evaluation modifier 小於 canonical role base 差距\n✓ 23. Training-only capability growth 縮小 incumbent gap\n✓ 24. Training-only growth 可提高下一次機會但不直接跳角色\n✓ 25. 長板凳文案不再保證未實現的第七局出場\n✓ 26. Production 在 script 前載入 Competition Reassessment module\nHigh School Year One Competition Loop: 28/28 passed.\n",
+  "stderr": "",
+  "error": null,
+  "timedOut": false
+}

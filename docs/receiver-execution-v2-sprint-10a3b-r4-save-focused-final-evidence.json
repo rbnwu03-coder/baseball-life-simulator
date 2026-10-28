@@ -1,0 +1,128 @@
+{
+  "sprint": "10A.3b-R4",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "createdAt": "2026-10-14T05:29:27.707Z",
+  "node": "v24.19.0",
+  "result": {
+    "file": "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+    "sourceHash": "24a2e3c4b77a212695fde636b8e25247972a075f3b1e99293378862b45c164be",
+    "elapsedMs": 9164.5271,
+    "summary": {
+      "total": 19,
+      "passed": 19,
+      "failed": 0
+    },
+    "error": null,
+    "checks": [
+      {
+        "name": "ordinary Legacy path executes literal JSON.stringify(player), without serializer",
+        "status": "PASS"
+      },
+      {
+        "name": "ordinary Legacy adapter validation is called before the real write",
+        "status": "PASS"
+      },
+      {
+        "name": "source-only pending real Save / duplicate / cold preserves complete official state",
+        "status": "PASS"
+      },
+      {
+        "name": "source-only executed real Save / duplicate / cold preserves complete official state",
+        "status": "PASS"
+      },
+      {
+        "name": "source-only settled real Save / duplicate / cold preserves complete official state",
+        "status": "PASS"
+      },
+      {
+        "name": "genuine historical Legacy pending/executed/settled saves never backfill source",
+        "status": "PASS"
+      },
+      {
+        "name": "later ordinary Match retains version15 storage without live root mutation",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: unknown live version",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: unknown live format",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: missing source format",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: pin tamper",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: physical tamper",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: actor tamper",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: sample tamper",
+        "status": "PASS"
+      },
+      {
+        "name": "invalid source-only Save refuses storage: no adapter for source-only",
+        "status": "PASS"
+      },
+      {
+        "name": "ordinary unknown version also refuses storage",
+        "status": "PASS"
+      },
+      {
+        "name": "raw restore rejects erased format before normalization defaults",
+        "status": "PASS"
+      },
+      {
+        "name": "shared early-return guard cannot skip source pin validation",
+        "status": "PASS"
+      },
+      {
+        "name": "SAVE_VERSION15 / SAVE_KEY / effective Legacy literal unchanged",
+        "status": "PASS"
+      }
+    ],
+    "witnesses": [
+      {
+        "phase": "pending",
+        "saveVersion": 16,
+        "sourcePin": "fnv1a32:1641e9ec",
+        "duplicateWrites": 4,
+        "cold": "PASS",
+        "officialCandidateCalls": 0
+      },
+      {
+        "phase": "executed",
+        "saveVersion": 16,
+        "sourcePin": "fnv1a32:1641e9ec",
+        "duplicateWrites": 4,
+        "cold": "PASS",
+        "officialCandidateCalls": 0
+      },
+      {
+        "phase": "settled",
+        "saveVersion": 16,
+        "sourcePin": "fnv1a32:1641e9ec",
+        "duplicateWrites": 4,
+        "cold": "PASS",
+        "officialCandidateCalls": 0
+      }
+    ]
+  },
+  "frozenSourceHashes": {
+    "index.html": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+    "script.js": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+    "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+    "match-situation-lifecycle.js": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+    "receiver-source-snapshot.js": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274"
+  }
+}

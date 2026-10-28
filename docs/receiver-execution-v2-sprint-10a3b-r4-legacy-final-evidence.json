@@ -1,0 +1,378 @@
+{
+  "sprint": "10A.3b-R4",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "createdAt": "2026-10-14T05:29:42.979Z",
+  "node": "v24.19.0",
+  "result": {
+    "file": "tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs",
+    "sourceHash": "4ecadd69eb7d04bccc785fa4268d122e32dd0b01bc580229e842cd967d380934",
+    "elapsedMs": 15269.959,
+    "summary": {
+      "total": 25,
+      "passed": 25,
+      "failed": 0
+    },
+    "error": null,
+    "historicalCompatibility": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "phases": [
+        {
+          "phase": "pending",
+          "rawGeneratedByBaselineOwner": true,
+          "currentNoSourceBackfill": true,
+          "officialProjectionEqual": true
+        },
+        {
+          "phase": "executed",
+          "rawGeneratedByBaselineOwner": true,
+          "currentNoSourceBackfill": true,
+          "officialProjectionEqual": true
+        },
+        {
+          "phase": "settled",
+          "rawGeneratedByBaselineOwner": true,
+          "currentNoSourceBackfill": true,
+          "officialProjectionEqual": true
+        }
+      ]
+    },
+    "rows": [
+      {
+        "name": "SS empty automatic clean outs0",
+        "pass": true,
+        "baselineOfficialSha256": "c4e4fc4b530aae0b622de228222495aa9d044a422992b4a3b7d5cad5294ba9c0",
+        "currentOfficialSha256": "c4e4fc4b530aae0b622de228222495aa9d044a422992b4a3b7d5cad5294ba9c0",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "matchRng": []
+      },
+      {
+        "name": "SS empty automatic offline outs0",
+        "pass": true,
+        "baselineOfficialSha256": "5fc23dcbb290d5c146272c9f8c20141dcb570f1d9adc51aa95585e0b0587fa01",
+        "currentOfficialSha256": "5fc23dcbb290d5c146272c9f8c20141dcb570f1d9adc51aa95585e0b0587fa01",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "matchRng": []
+      },
+      {
+        "name": "SS empty automatic acquisition failed outs0",
+        "pass": true,
+        "baselineOfficialSha256": "9a52323dcda0c46beaf661e1cf7da998755d1909ffbab9613fe6b7f979a8dc87",
+        "currentOfficialSha256": "9a52323dcda0c46beaf661e1cf7da998755d1909ffbab9613fe6b7f979a8dc87",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "matchRng": []
+      },
+      {
+        "name": "SS empty automatic failed receiver outs0",
+        "pass": true,
+        "baselineOfficialSha256": "7cd709dd67032555b35dc752d1c31cf32eefce4f04eb970eaa293251397f212d",
+        "currentOfficialSha256": "7cd709dd67032555b35dc752d1c31cf32eefce4f04eb970eaa293251397f212d",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "matchRng": []
+      },
+      {
+        "name": "SS empty automatic fast runner outs0",
+        "pass": true,
+        "baselineOfficialSha256": "0215cf07d5db779a65805450f23820e2181dad5e1d82542d0b4c0d7c432d67f4",
+        "currentOfficialSha256": "0215cf07d5db779a65805450f23820e2181dad5e1d82542d0b4c0d7c432d67f4",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "matchRng": []
+      },
+      {
+        "name": "SS direct three-phase recovery outs0",
+        "pass": true,
+        "baselineOfficialSha256": "9d80b5dca3589e01f610771961750689c9f83d1f5d167ee0f909d79a5c8e3b69",
+        "currentOfficialSha256": "9d80b5dca3589e01f610771961750689c9f83d1f5d167ee0f909d79a5c8e3b69",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [],
+        "matchRng": []
+      },
+      {
+        "name": "SS hold original nullable delivery outs0",
+        "pass": true,
+        "baselineOfficialSha256": "053d698260b3d63960acb6d832185595d3531eadfcf3f6b01edc3cce69d4f955",
+        "currentOfficialSha256": "053d698260b3d63960acb6d832185595d3531eadfcf3f6b01edc3cce69d4f955",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [],
+        "matchRng": []
+      },
+      {
+        "name": "SS empty automatic clean outs1",
+        "pass": true,
+        "baselineOfficialSha256": "76ff52cff8217095298262a7bd07c1f72013d18ba926e0c49bfb3c5e38293922",
+        "currentOfficialSha256": "76ff52cff8217095298262a7bd07c1f72013d18ba926e0c49bfb3c5e38293922",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "matchRng": []
+      },
+      {
+        "name": "SS empty automatic offline outs1",
+        "pass": true,
+        "baselineOfficialSha256": "813e083f2b4638b4a8c7a7eb183a156517d4a0fb86479a3c70eae9448a938805",
+        "currentOfficialSha256": "813e083f2b4638b4a8c7a7eb183a156517d4a0fb86479a3c70eae9448a938805",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "matchRng": []
+      },
+      {
+        "name": "SS empty automatic acquisition failed outs1",
+        "pass": true,
+        "baselineOfficialSha256": "675969cfdea162a199900abfe20890233deaecf5181972c706987ee30872c0b7",
+        "currentOfficialSha256": "675969cfdea162a199900abfe20890233deaecf5181972c706987ee30872c0b7",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "matchRng": []
+      },
+      {
+        "name": "SS empty automatic failed receiver outs1",
+        "pass": true,
+        "baselineOfficialSha256": "476dc7dc7b490e757f052d30b119b6235669dd0cd01ce7d886182cab75d07f50",
+        "currentOfficialSha256": "476dc7dc7b490e757f052d30b119b6235669dd0cd01ce7d886182cab75d07f50",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "matchRng": []
+      },
+      {
+        "name": "SS empty automatic fast runner outs1",
+        "pass": true,
+        "baselineOfficialSha256": "ee41dc4d8972ae9a28965585057bfd69e611593d23d0154197f2c9b0b1b25041",
+        "currentOfficialSha256": "ee41dc4d8972ae9a28965585057bfd69e611593d23d0154197f2c9b0b1b25041",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "matchRng": []
+      },
+      {
+        "name": "SS direct three-phase recovery outs1",
+        "pass": true,
+        "baselineOfficialSha256": "20b87d1a348022573b300ab106556281d71e3747ebe8193bd929dbd50f353c4c",
+        "currentOfficialSha256": "20b87d1a348022573b300ab106556281d71e3747ebe8193bd929dbd50f353c4c",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [],
+        "matchRng": []
+      },
+      {
+        "name": "SS hold original nullable delivery outs1",
+        "pass": true,
+        "baselineOfficialSha256": "c0ee409a922e3d5dec4cd0bf77e5c2278d4ed969df08ae6312d174a343af651e",
+        "currentOfficialSha256": "c0ee409a922e3d5dec4cd0bf77e5c2278d4ed969df08ae6312d174a343af651e",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|1|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [],
+        "matchRng": []
+      },
+      {
+        "name": "SS empty automatic clean outs2",
+        "pass": true,
+        "baselineOfficialSha256": "3f51bcc7cc2f1ae9599c22d859a812c71034f22c1afdcd9b5f62d4d20ee44090",
+        "currentOfficialSha256": "3f51bcc7cc2f1ae9599c22d859a812c71034f22c1afdcd9b5f62d4d20ee44090",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "matchRng": []
+      },
+      {
+        "name": "SS empty automatic offline outs2",
+        "pass": true,
+        "baselineOfficialSha256": "3803f6fd9e9bcc555a6f3e0635ee3b00a93131c633d7c1dce423f3d844944d92",
+        "currentOfficialSha256": "3803f6fd9e9bcc555a6f3e0635ee3b00a93131c633d7c1dce423f3d844944d92",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "matchRng": []
+      },
+      {
+        "name": "SS empty automatic acquisition failed outs2",
+        "pass": true,
+        "baselineOfficialSha256": "316af1adf932cee4fb4c2b003ef56eecdbf6d85cc965f8b70f467b9b32331dc2",
+        "currentOfficialSha256": "316af1adf932cee4fb4c2b003ef56eecdbf6d85cc965f8b70f467b9b32331dc2",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "matchRng": []
+      },
+      {
+        "name": "SS empty automatic failed receiver outs2",
+        "pass": true,
+        "baselineOfficialSha256": "d35717826e1ab62058074b71c4518d21f1ea0b52d00f2d399891bba24950a986",
+        "currentOfficialSha256": "d35717826e1ab62058074b71c4518d21f1ea0b52d00f2d399891bba24950a986",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "matchRng": []
+      },
+      {
+        "name": "SS empty automatic fast runner outs2",
+        "pass": true,
+        "baselineOfficialSha256": "5056c97e62debb744ace779c53615c4d1c61c7ea47ab5a5132aa81eff8c4dd27",
+        "currentOfficialSha256": "5056c97e62debb744ace779c53615c4d1c61c7ea47ab5a5132aa81eff8c4dd27",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [
+          {
+            "phase": "executing",
+            "value": 0.8
+          }
+        ],
+        "matchRng": []
+      },
+      {
+        "name": "SS direct three-phase recovery outs2",
+        "pass": true,
+        "baselineOfficialSha256": "6bcaa6f478b7f92073fde11f9f0364d9db3f3546779c4babdea0e5f9a2513042",
+        "currentOfficialSha256": "6bcaa6f478b7f92073fde11f9f0364d9db3f3546779c4babdea0e5f9a2513042",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [],
+        "matchRng": []
+      },
+      {
+        "name": "SS hold original nullable delivery outs2",
+        "pass": true,
+        "baselineOfficialSha256": "a31e56f89eb3b38638c0d2f8c49d465a3c058352b4dfbd54150cd8d8b38735df",
+        "currentOfficialSha256": "a31e56f89eb3b38638c0d2f8c49d465a3c058352b4dfbd54150cd8d8b38735df",
+        "metadataExpectedDifferent": true,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|2|falsefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [],
+        "matchRng": []
+      },
+      {
+        "name": "meaningful public 游擊手",
+        "pass": true,
+        "baselineOfficialSha256": "d266f0c38934f688f1a238b2b0d7279c4d2177cd130c175f53848779d974f134",
+        "currentOfficialSha256": "d266f0c38934f688f1a238b2b0d7279c4d2177cd130c175f53848779d974f134",
+        "metadataExpectedDifferent": false,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-05|3|0|truefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [],
+        "matchRng": []
+      },
+      {
+        "name": "meaningful public 二壘手",
+        "pass": true,
+        "baselineOfficialSha256": "3f9c706e7c879b4d467e3ed1bee4c41afdab1cc67b8b9f1780d9c85af322ec6e",
+        "currentOfficialSha256": "3f9c706e7c879b4d467e3ed1bee4c41afdab1cc67b8b9f1780d9c85af322ec6e",
+        "metadataExpectedDifferent": false,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-07|3|0|truefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [],
+        "matchRng": []
+      },
+      {
+        "name": "meaningful public 三壘手",
+        "pass": true,
+        "baselineOfficialSha256": "a3e24692ad935da61930ef4b4e658e886021e1e72466e3b6d158a9055c6f200b",
+        "currentOfficialSha256": "a3e24692ad935da61930ef4b4e658e886021e1e72466e3b6d158a9055c6f200b",
+        "metadataExpectedDifferent": false,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-03|3|0|truefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [],
+        "matchRng": []
+      },
+      {
+        "name": "meaningful public 一壘手",
+        "pass": true,
+        "baselineOfficialSha256": "5f7478bb7c92c05a49888636f478a70129153031283b6f1d04174880aa845b8a",
+        "currentOfficialSha256": "5f7478bb7c92c05a49888636f478a70129153031283b6f1d04174880aa845b8a",
+        "metadataExpectedDifferent": false,
+        "physicalIdentity": "hs-y3-final-competition-1|5|上|away|hs-y3-final-regional-opponent-player-03|3|0|truefalsefalse|ordinary-contact|pitch-1",
+        "callbacks": [],
+        "matchRng": []
+      }
+    ],
+    "candidateExecutionCalls": 0,
+    "runtimeEnabled": false
+  },
+  "frozenSourceHashes": {
+    "index.html": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+    "script.js": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+    "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+    "match-situation-lifecycle.js": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+    "receiver-source-snapshot.js": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274"
+  }
+}

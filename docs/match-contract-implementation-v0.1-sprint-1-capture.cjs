@@ -1,0 +1,23 @@
+"use strict";
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const P=require('./match-contract-evidence-closure-v0.1-capture.cjs'),E=require('../tests/entry-safe-runner.cjs');
+const prefix='docs/match-contract-implementation-v0.1-sprint-1-',report='docs/match-contract-implementation-v0.1-sprint-1.md',childPrefix='docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-';
+const formalFiles=['tests/helpers/canonical-match-contract-context.cjs','tests/canonical-match-regression-integration-test.cjs','tests/routine-commentary-contract-test.cjs'];
+// Porcelain may collapse a newly created directory. files() still checks every
+// concrete path, so this status-only spelling cannot admit unrelated files.
+const isNew=p=>p===report||p.startsWith(prefix)||p.startsWith(childPrefix)||formalFiles.includes(p)||p==='tests/helpers/';
+function capture(label,data){assert(/^[a-z0-9-]+$/.test(label));const p=prefix+label+'-evidence.json';fs.writeFileSync(path.join(P.root,p),JSON.stringify({task:'Match Contract Implementation v0.1 — Sprint 1',createdAt:new Date().toISOString(),...data},null,2)+'\n',{flag:'wx'});return p;}
+function baseline(){
+ const b=P.json(P.prefix+'baseline-evidence.json'),d=P.json(P.prefix+'delivery-evidence.json'),c=P.json(P.prefix+'closeout-evidence.json');
+ for(const [p,h] of Object.entries(b.hashes))assert.equal(P.fileHash(p),h,p);for(const [p,h] of Object.entries(d.hashes))assert.equal(P.fileHash(p),h,p);
+ for(const p of formalFiles)assert(!fs.existsSync(path.join(P.root,p)),'New formal path already exists: '+p);
+ const git=P.gitState();assert.equal(git.branch,'main');assert.equal(git.index,'');for(const k of ['head','main','originMain'])assert.equal(git[k],'ab3117653945de0b7013636187c446276a96e634');assert.deepEqual(P.metadata(),b.protectedMetadata);
+ const finalFiles=new Set([P.prefix+'closeout-evidence.json',P.prefix+'delivery-evidence.json']);const status=s=>s.split(/\r?\n/).filter(l=>l&&!isNew(l.slice(3))&&!finalFiles.has(l.slice(3))).sort();assert.deepEqual(status(git.status),status(c.git.status));
+ const files=P.files().filter(p=>!isNew(p)),allowed=new Set([...Object.keys(b.hashes),...d.files,P.prefix+'delivery-evidence.json']);assert.deepEqual(files.filter(p=>!allowed.has(p)),[]);
+ capture('baseline',{git,hashes:Object.fromEntries(files.map(p=>[p,P.fileHash(p)])),readableExistingFiles:files.length,prior1494Verified:Object.keys(b.hashes).length,priorDeliveryVerified:Object.keys(d.hashes).length,priorDelivery:{path:P.prefix+'delivery-evidence.json',sha256:P.fileHash(P.prefix+'delivery-evidence.json')},priorFinalBookkeepingAccounted:[...finalFiles],protectedMetadata:P.metadata(),protectedContentReadOrHashed:false,remoteServerRechecked:false,authorizedNewFormalFiles:formalFiles,existingFilesMayBeEdited:false});
+ console.log(JSON.stringify({baseline:'VERIFIED',readableExistingFiles:files.length,prior1494Verified:Object.keys(b.hashes).length,priorDeliveryVerified:Object.keys(d.hashes).length,protectedPaths:P.protectedPaths.size,indexEmpty:true}));
+}
+function integrity(){const b=P.json(prefix+'baseline-evidence.json');for(const [p,h] of Object.entries(b.hashes))assert.equal(P.fileHash(p),h,p);assert.deepEqual(P.metadata(),b.protectedMetadata);const git=P.gitState();for(const k of ['branch','head','main','originMain','index'])assert.equal(git[k],b.git[k]);const status=s=>s.split(/\r?\n/).filter(l=>l&&!isNew(l.slice(3))).sort();assert.deepEqual(status(git.status),status(b.git.status));assert.deepEqual(P.files().filter(p=>!(p in b.hashes)&&!isNew(p)),[]);return{preservedExistingHashes:Object.keys(b.hashes).length,changedExistingPaths:[],productionDelta:0,existingFormalTestDelta:0,existingFixtureSeedPinDelta:0,protectedMetadataUnchanged:true,protectedContentReadOrHashed:false,git};}
+function run(label,file,extra=[]){integrity();const b=P.json(prefix+'baseline-evidence.json'),relevant=Object.keys(b.hashes).filter(p=>!p.startsWith('docs/')&&/\.(js|cjs|json|html)$/.test(p));const row=E.runSuite({suiteName:label,file,entryMode:'standalone',evidencePath:childPrefix+label+'-evidence.json',relevantPaths:[...relevant,...formalFiles,prefix+'capture.cjs',prefix+'plan-evidence.json',...extra]});integrity();console.log(JSON.stringify({label,status:row.status,exitCode:row.exitCode,elapsedMs:row.elapsedMs,entryVerified:row.entryVerified,sourceStable:row.sourceStable,summary:row.stdout.split(/\r?\n/).filter(l=>l.includes('_SUMMARY=')||/passed\.|PASS$/.test(l)),stderr:row.stderr}));return row;}
+module.exports={...P,prefix,report,childPrefix,formalFiles,isNew,capture,integrity,run};
+if(require.main===module){assert.equal(process.argv[2],'baseline');baseline();}

@@ -1,0 +1,3845 @@
+{
+  "checks": [
+    {
+      "name": "Save/Load permits missing actualExposure; matching official record recovers participation",
+      "status": "PASS"
+    },
+    {
+      "name": "Earlier history without evidence stays unknown, never borrows the current match",
+      "status": "PASS"
+    },
+    {
+      "name": "Unknown earlier history reaches the real year-end screen through normal choices",
+      "status": "PASS"
+    },
+    {
+      "name": "Missing current role never falls back to starting role in the journey helper",
+      "status": "PASS"
+    },
+    {
+      "name": "Formal year-end route resolves missing canonical role before rendering journey",
+      "status": "PASS"
+    },
+    {
+      "name": "Participation without counts does not manufacture zero plate appearances or innings",
+      "status": "PASS"
+    },
+    {
+      "name": "History without matchId cannot use the current ledger as a fallback",
+      "status": "PASS"
+    },
+    {
+      "name": "Explicit absence remains distinct from missing exposure",
+      "status": "PASS"
+    },
+    {
+      "name": "Missing canonical role can use matching applied evaluation and role context",
+      "status": "PASS"
+    },
+    {
+      "name": "A summary for another game is not a substitute for missing historical exposure",
+      "status": "PASS"
+    },
+    {
+      "name": "Follow-up presentation treats unavailable prior exposure as unknown",
+      "status": "FAIL",
+      "message": "Cannot read properties of undefined (reading 'entryInning')"
+    },
+    {
+      "name": "Adjacent year-two summary uses unknown exposure and cannot carry a prior-year role forward",
+      "status": "PASS"
+    },
+    {
+      "name": "Player-facing feedback drops validation and implementation language",
+      "status": "PASS"
+    }
+  ],
+  "reachability": [
+    {
+      "event": "high_school_role_reassessment_feedback",
+      "notice": "<div class=\"notice success\">進度讀取完成。</div>",
+      "history": [
+        {
+          "matchId": "hs-y1-autumn-exhibition",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "limitedSample",
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "positive"
+          }
+        },
+        {
+          "matchId": "hs-y1-followup-evaluation-2",
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "neutral"
+          }
+        }
+      ]
+    },
+    {
+      "event": "high_school_role_reassessment_feedback",
+      "notice": "<div class=\"notice success\">進度讀取完成。</div>",
+      "history": [
+        {
+          "matchId": "hs-y1-autumn-exhibition",
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "limitedSample",
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "positive"
+          }
+        },
+        {
+          "matchId": "hs-y1-followup-evaluation-2",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "neutral"
+          }
+        }
+      ]
+    },
+    {
+      "event": "high_school_role_reassessment_feedback",
+      "notice": "<div class=\"notice success\">進度讀取完成。</div>",
+      "history": [
+        {
+          "matchId": "hs-y1-autumn-exhibition",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "limitedSample",
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "positive"
+          }
+        },
+        {
+          "matchId": "hs-y1-followup-evaluation-2",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "change": "same",
+            "reasons": [
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "neutral"
+          }
+        }
+      ]
+    },
+    {
+      "event": "high_school_role_reassessment_feedback",
+      "notice": "<div class=\"notice success\">進度讀取完成。</div>",
+      "history": [
+        {
+          "matchId": "hs-y1-autumn-exhibition",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "limitedSample",
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "positive"
+          }
+        },
+        {
+          "actualExposure": {
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "neutral"
+          }
+        }
+      ]
+    },
+    {
+      "event": "high_school_role_reassessment_feedback",
+      "notice": "<div class=\"notice success\">進度讀取完成。</div>",
+      "history": [
+        {
+          "matchId": "hs-y1-autumn-exhibition",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "limitedSample",
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "positive"
+          }
+        },
+        {
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "neutral"
+          }
+        }
+      ]
+    },
+    {
+      "event": "high_school_role_reassessment_feedback",
+      "notice": "<div class=\"notice success\">進度讀取完成。</div>",
+      "history": [
+        {
+          "matchId": "hs-y1-autumn-exhibition",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "limitedSample",
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "positive"
+          }
+        },
+        {
+          "actualExposure": {
+            "participated": false
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "neutral"
+          }
+        }
+      ]
+    },
+    {
+      "event": "high_school_role_reassessment_feedback",
+      "notice": "<div class=\"notice success\">進度讀取完成。</div>",
+      "history": [
+        {
+          "matchId": "hs-y1-autumn-exhibition",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "limitedSample",
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "positive"
+          }
+        },
+        {
+          "matchId": "hs-y1-followup-evaluation-2",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "neutral"
+          }
+        }
+      ]
+    },
+    {
+      "event": "high_school_role_reassessment_feedback",
+      "notice": "<div class=\"notice success\">進度讀取完成。</div>",
+      "history": [
+        {
+          "matchId": "hs-y1-autumn-exhibition",
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "limitedSample",
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "positive"
+          }
+        },
+        {
+          "matchId": "hs-y1-followup-evaluation-2",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "neutral"
+          }
+        }
+      ]
+    },
+    {
+      "event": "high_school_followup_evaluation",
+      "notice": "<div class=\"notice error\">存檔損壞，無法讀取。</div>",
+      "history": [
+        {
+          "matchId": "hs-y1-autumn-exhibition",
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "limitedSample",
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "positive"
+          }
+        },
+        {
+          "matchId": "hs-y1-followup-evaluation-2",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "neutral"
+          }
+        }
+      ]
+    },
+    {
+      "event": "high_school_year_two_senior_plan",
+      "notice": "<div class=\"notice success\">進度讀取完成。</div>",
+      "history": [
+        {
+          "matchId": "hs-y1-autumn-exhibition",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "limitedSample",
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "positive"
+          }
+        },
+        {
+          "matchId": "hs-y1-followup-evaluation-2",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "neutral"
+          }
+        }
+      ]
+    },
+    {
+      "event": "high_school_role_reassessment_feedback",
+      "notice": "<div class=\"notice success\">進度讀取完成。</div>",
+      "history": [
+        {
+          "matchId": "hs-y1-autumn-exhibition",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "limitedSample",
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "positive"
+          }
+        },
+        {
+          "matchId": "hs-y1-followup-evaluation-2",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "neutral"
+          }
+        }
+      ]
+    },
+    {
+      "event": "high_school_role_reassessment_feedback",
+      "notice": "<div class=\"notice success\">進度讀取完成。</div>",
+      "history": [
+        {
+          "matchId": "hs-y1-autumn-exhibition",
+          "actualExposure": {
+            "appearanceType": "start",
+            "plateAppearances": 4,
+            "defensiveInnings": 7,
+            "participated": true
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "limitedSample",
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "positive"
+          }
+        },
+        {
+          "matchId": "hs-y1-followup-evaluation-2",
+          "actualExposure": {
+            "participated": false,
+            "plateAppearances": 0,
+            "defensiveInnings": 0
+          },
+          "role": {
+            "previousRole": "starter",
+            "currentRole": "starter",
+            "change": "same",
+            "reasons": [
+              "trainingImprovement",
+              "competitionGapClosed"
+            ],
+            "trend": "neutral"
+          }
+        }
+      ]
+    }
+  ],
+  "observations": {
+    "missingExposure": {
+      "detail": "本次：4 打席、7 局守備。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。",
+      "journey": "角色維持「先發／關鍵任務」；機會 1：4 打席、7 局守備；機會 2：4 打席、7 局守備。",
+      "html": "<article class=\"event-card\" aria-labelledby=\"currentEventTitle\"><section class=\"scene-context chapter-one-scene-context\" aria-labelledby=\"sceneContextTitle\">\n    <h2 id=\"sceneContextTitle\" class=\"visually-hidden\">場景資訊</h2>\n    <div class=\"scene-context__item scene-context__chapter\">\n      <small class=\"scene-context__label\">章節／階段</small>\n      <span class=\"scene-context__value\">青棒</span>\n    </div>\n    <div class=\"scene-context__item scene-context__time\">\n      <small class=\"scene-context__label\">時間</small>\n      <span class=\"scene-context__value\">青棒第一年・第 9／10 階段</span>\n    </div>\n  </section><h2 id=\"currentEventTitle\" tabindex=\"-1\">現任教練完成第二次角色評估</h2><div class=\"event-text\">本次：4 打席、7 局守備。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。</div></article>"
+    },
+    "unknownEarlier": {
+      "detail": "本次：4 打席、7 局守備。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。",
+      "journey": "角色維持「先發／關鍵任務」；機會 1：出賽紀錄還在整理；機會 2：4 打席、7 局守備。",
+      "html": "<article class=\"event-card\" aria-labelledby=\"currentEventTitle\"><section class=\"scene-context chapter-one-scene-context\" aria-labelledby=\"sceneContextTitle\">\n    <h2 id=\"sceneContextTitle\" class=\"visually-hidden\">場景資訊</h2>\n    <div class=\"scene-context__item scene-context__chapter\">\n      <small class=\"scene-context__label\">章節／階段</small>\n      <span class=\"scene-context__value\">青棒</span>\n    </div>\n    <div class=\"scene-context__item scene-context__time\">\n      <small class=\"scene-context__label\">時間</small>\n      <span class=\"scene-context__value\">青棒第一年・第 9／10 階段</span>\n    </div>\n  </section><h2 id=\"currentEventTitle\" tabindex=\"-1\">現任教練完成第二次角色評估</h2><div class=\"event-text\">本次：4 打席、7 局守備。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。</div></article>"
+    },
+    "yearEndUnknown": "<article class=\"event-card\" aria-labelledby=\"currentEventTitle\"><section class=\"scene-context chapter-one-scene-context\" aria-labelledby=\"sceneContextTitle\">\n    <h2 id=\"sceneContextTitle\" class=\"visually-hidden\">場景資訊</h2>\n    <div class=\"scene-context__item scene-context__chapter\">\n      <small class=\"scene-context__label\">章節／階段</small>\n      <span class=\"scene-context__value\">青棒第一年小結</span>\n    </div>\n    <div class=\"scene-context__item scene-context__time\">\n      <small class=\"scene-context__label\">時間</small>\n      <span class=\"scene-context__value\">青棒・第一年評估</span>\n    </div>\n  </section><h2 id=\"currentEventTitle\" tabindex=\"-1\">青棒第一年評估</h2><div class=\"event-text\">仍在曝光邊緣的高中球員\n\n你完成第一年，卻尚未建立明確市場標籤。第二年需要在專精、全面性或身體上限中選擇真正的投資方向。\n\n守位形成：游擊手；理想自我與教練評估待確認。\n目前角色：先發／關鍵任務；下一次機會：教練把你排進本場游擊手先發，實際任務仍由場上局面決定。\n競爭再評估：持平；訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n高一角色歷程：角色維持「先發／關鍵任務」；機會 1：出賽紀錄還在整理；機會 2：4 打席、7 局守備。\n實戰機會 1（交流賽）：高橋所屬的地區強校；出賽紀錄還在整理；球隊勝利，終場 4：3。本場有紀錄的關鍵時刻：第一次：球被非常完整地擊中，帶著明顯力道形成中等縱深的平飛球，飛向右半邊。 這個打席形成打者出局。 第二次：你把球傳向一壘，球趕在打者跑者之前到達，一壘完成打者出局。 一壘跑者從一壘推進到二壘；二壘跑者從二壘推進到三壘。 現在 2 出局、二壘、三壘有人。。 第三次：球被打進場內，以一般力道滾向左半邊。 這個打席形成一壘安打。\n實戰機會 2（第二次實戰評估）：受邀協助評估的地區校隊；4 打席、7 局守備；球隊落敗，終場 0：1。本場有紀錄的關鍵時刻：第一次：你出棒但揮擊落空，第三個好球形成三振。 第二次：你把球傳向一壘，球趕在打者跑者之前到達，一壘完成打者出局。 一壘跑者從一壘推進到二壘。 現在 2 出局、二壘有人。。 第三次：你出棒但揮擊落空，第三個好球形成三振。 第4次：你出棒但揮擊落空，第三個好球形成三振。 第5次：你把球傳向一壘，球趕在打者跑者之前到達，一壘完成打者出局。 一壘跑者從一壘推進到二壘；二壘跑者從二壘推進到三壘；三壘跑者回本壘得分。 現在三個出局，半局結束。。\n阿哲回聲：阿哲影響玩家；你說完交流賽的打席後，阿哲沒有先問結果，只問你下一次還能替球隊完成什麼。 你把他的問題寫進高二準備表，第一次把失敗後的下一個任務列在成績前面。 掛電話前，阿哲提醒你：那顆一起重做的滾地球，也不是靠一次結果決定價值。\n外部壓力：高橋（direct）；高二必須用第二次正式任務證明：這不是單場偶然，而是可重複的球員用途。\n\n球隊角色：先發／關鍵任務\n角色建立：部分成功\n方向：定位模糊；相應能力尚未跟上選擇；已在交流賽留下實際證明\n下一步：集中補強定位模糊所需能力\n曝光：3　球探評價：2\n疲勞：0　傷病風險：0　倦怠：0\n\n取得任務只是入口；方向、能力與實際證明同時成立，才算建立球隊能描述的價值。\n\n章末記憶：\n你會記得「第一次建立能被描述的價值」。\n\n人物回應：\n阿哲看了你一眼，像是想把這一章的你記住。\n\n這一階段追過的事：\n我想在新的球隊裡找到第一個明確任務。\n\n下一個可以期待的具體時刻：\n下一次隊內賽，教練會把尚未固定的任務交給一名替補球員。</div></article>",
+    "missingRole": {
+      "detail": "本次：4 打席、7 局守備。\n現任教練完成第二次評估：目前角色仍待確認。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。",
+      "journey": "入隊時的角色是「先發／關鍵任務」；目前角色仍待確認；機會 1：4 打席、7 局守備；機會 2：4 打席、7 局守備。",
+      "html": "<article class=\"event-card\" aria-labelledby=\"currentEventTitle\"><section class=\"scene-context chapter-one-scene-context\" aria-labelledby=\"sceneContextTitle\">\n    <h2 id=\"sceneContextTitle\" class=\"visually-hidden\">場景資訊</h2>\n    <div class=\"scene-context__item scene-context__chapter\">\n      <small class=\"scene-context__label\">章節／階段</small>\n      <span class=\"scene-context__value\">青棒</span>\n    </div>\n    <div class=\"scene-context__item scene-context__time\">\n      <small class=\"scene-context__label\">時間</small>\n      <span class=\"scene-context__value\">青棒第一年・第 9／10 階段</span>\n    </div>\n  </section><h2 id=\"currentEventTitle\" tabindex=\"-1\">現任教練完成第二次角色評估</h2><div class=\"event-text\">本次：4 打席、7 局守備。\n現任教練完成第二次評估：目前角色仍待確認。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。</div></article>"
+    },
+    "roleGuard": {
+      "role": "rotation",
+      "html": "<article class=\"event-card\" aria-labelledby=\"currentEventTitle\"><section class=\"scene-context chapter-one-scene-context\" aria-labelledby=\"sceneContextTitle\">\n    <h2 id=\"sceneContextTitle\" class=\"visually-hidden\">場景資訊</h2>\n    <div class=\"scene-context__item scene-context__chapter\">\n      <small class=\"scene-context__label\">章節／階段</small>\n      <span class=\"scene-context__value\">青棒第一年小結</span>\n    </div>\n    <div class=\"scene-context__item scene-context__time\">\n      <small class=\"scene-context__label\">時間</small>\n      <span class=\"scene-context__value\">青棒・第一年評估</span>\n    </div>\n  </section><h2 id=\"currentEventTitle\" tabindex=\"-1\">青棒第一年評估</h2><div class=\"event-text\">仍在曝光邊緣的高中球員\n\n你完成第一年，卻尚未建立明確市場標籤。第二年需要在專精、全面性或身體上限中選擇真正的投資方向。\n\n守位形成：游擊手；理想自我與教練評估待確認。\n目前角色：輪替／替補任務；下一次機會：同一場交流賽的中段代打與守備接替。\n競爭再評估：持平；訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n高一角色歷程：角色由「先發／關鍵任務」降為「輪替／替補任務」；機會 1：4 打席、7 局守備；機會 2：4 打席、7 局守備。\n實戰機會 1（交流賽）：高橋所屬的地區強校；4 打席、7 局守備；球隊勝利，終場 4：3。本場有紀錄的關鍵時刻：第一次：球被非常完整地擊中，帶著明顯力道形成中等縱深的平飛球，飛向右半邊。 這個打席形成打者出局。 第二次：你把球傳向一壘，球趕在打者跑者之前到達，一壘完成打者出局。 一壘跑者從一壘推進到二壘；二壘跑者從二壘推進到三壘。 現在 2 出局、二壘、三壘有人。。 第三次：球被打進場內，以一般力道滾向左半邊。 這個打席形成一壘安打。\n實戰機會 2（第二次實戰評估）：受邀協助評估的地區校隊；4 打席、7 局守備；球隊落敗，終場 0：1。本場有紀錄的關鍵時刻：第一次：你出棒但揮擊落空，第三個好球形成三振。 第二次：你把球傳向一壘，球趕在打者跑者之前到達，一壘完成打者出局。 一壘跑者從一壘推進到二壘。 現在 2 出局、二壘有人。。 第三次：你出棒但揮擊落空，第三個好球形成三振。 第4次：你出棒但揮擊落空，第三個好球形成三振。 第5次：你把球傳向一壘，球趕在打者跑者之前到達，一壘完成打者出局。 一壘跑者從一壘推進到二壘；二壘跑者從二壘推進到三壘；三壘跑者回本壘得分。 現在三個出局，半局結束。。\n阿哲回聲：阿哲影響玩家；你說完交流賽的打席後，阿哲沒有先問結果，只問你下一次還能替球隊完成什麼。 你把他的問題寫進高二準備表，第一次把失敗後的下一個任務列在成績前面。 掛電話前，阿哲提醒你：那顆一起重做的滾地球，也不是靠一次結果決定價值。\n外部壓力：高橋（direct）；高二必須用第二次正式任務證明：這不是單場偶然，而是可重複的球員用途。\n\n球隊角色：輪替／替補任務\n角色建立：部分成功\n方向：定位模糊；相應能力尚未跟上選擇；已在交流賽留下實際證明\n下一步：集中補強定位模糊所需能力\n曝光：3　球探評價：2\n疲勞：0　傷病風險：0　倦怠：0\n\n取得任務只是入口；方向、能力與實際證明同時成立，才算建立球隊能描述的價值。\n\n章末記憶：\n你會記得「第一次建立能被描述的價值」。\n\n人物回應：\n阿哲看了你一眼，像是想把這一章的你記住。\n\n這一階段追過的事：\n我想在新的球隊裡找到第一個明確任務。\n\n下一個可以期待的具體時刻：\n下一次隊內賽，教練會把尚未固定的任務交給一名替補球員。</div></article>"
+    },
+    "partialCounts": {
+      "detail": "本次：已有出賽紀錄，詳細內容還在整理。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。",
+      "journey": "角色維持「先發／關鍵任務」；機會 1：4 打席、7 局守備；機會 2：已有出賽紀錄，詳細內容還在整理。",
+      "html": "<article class=\"event-card\" aria-labelledby=\"currentEventTitle\"><section class=\"scene-context chapter-one-scene-context\" aria-labelledby=\"sceneContextTitle\">\n    <h2 id=\"sceneContextTitle\" class=\"visually-hidden\">場景資訊</h2>\n    <div class=\"scene-context__item scene-context__chapter\">\n      <small class=\"scene-context__label\">章節／階段</small>\n      <span class=\"scene-context__value\">青棒</span>\n    </div>\n    <div class=\"scene-context__item scene-context__time\">\n      <small class=\"scene-context__label\">時間</small>\n      <span class=\"scene-context__value\">青棒第一年・第 9／10 階段</span>\n    </div>\n  </section><h2 id=\"currentEventTitle\" tabindex=\"-1\">現任教練完成第二次角色評估</h2><div class=\"event-text\">本次：已有出賽紀錄，詳細內容還在整理。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。</div></article>"
+    },
+    "noIdentity": {
+      "detail": "本次：出賽紀錄還在整理。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。",
+      "journey": "角色維持「先發／關鍵任務」；機會 1：4 打席、7 局守備；機會 2：出賽紀錄還在整理。",
+      "html": "<article class=\"event-card\" aria-labelledby=\"currentEventTitle\"><section class=\"scene-context chapter-one-scene-context\" aria-labelledby=\"sceneContextTitle\">\n    <h2 id=\"sceneContextTitle\" class=\"visually-hidden\">場景資訊</h2>\n    <div class=\"scene-context__item scene-context__chapter\">\n      <small class=\"scene-context__label\">章節／階段</small>\n      <span class=\"scene-context__value\">青棒</span>\n    </div>\n    <div class=\"scene-context__item scene-context__time\">\n      <small class=\"scene-context__label\">時間</small>\n      <span class=\"scene-context__value\">青棒第一年・第 9／10 階段</span>\n    </div>\n  </section><h2 id=\"currentEventTitle\" tabindex=\"-1\">現任教練完成第二次角色評估</h2><div class=\"event-text\">本次：出賽紀錄還在整理。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。</div></article>"
+    },
+    "explicitAbsence": {
+      "detail": "本次：沒有實際上場。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。",
+      "journey": "角色維持「先發／關鍵任務」；機會 1：4 打席、7 局守備；機會 2：沒有實際上場。",
+      "html": "<article class=\"event-card\" aria-labelledby=\"currentEventTitle\"><section class=\"scene-context chapter-one-scene-context\" aria-labelledby=\"sceneContextTitle\">\n    <h2 id=\"sceneContextTitle\" class=\"visually-hidden\">場景資訊</h2>\n    <div class=\"scene-context__item scene-context__chapter\">\n      <small class=\"scene-context__label\">章節／階段</small>\n      <span class=\"scene-context__value\">青棒</span>\n    </div>\n    <div class=\"scene-context__item scene-context__time\">\n      <small class=\"scene-context__label\">時間</small>\n      <span class=\"scene-context__value\">青棒第一年・第 9／10 階段</span>\n    </div>\n  </section><h2 id=\"currentEventTitle\" tabindex=\"-1\">現任教練完成第二次角色評估</h2><div class=\"event-text\">本次：沒有實際上場。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。</div></article>"
+    },
+    "verifiedAuthority": {
+      "detail": "本次：4 打席、7 局守備。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。",
+      "journey": "角色由「發展／板凳任務」升為「先發／關鍵任務」；機會 1：4 打席、7 局守備；機會 2：4 打席、7 局守備。",
+      "html": "<article class=\"event-card\" aria-labelledby=\"currentEventTitle\"><section class=\"scene-context chapter-one-scene-context\" aria-labelledby=\"sceneContextTitle\">\n    <h2 id=\"sceneContextTitle\" class=\"visually-hidden\">場景資訊</h2>\n    <div class=\"scene-context__item scene-context__chapter\">\n      <small class=\"scene-context__label\">章節／階段</small>\n      <span class=\"scene-context__value\">青棒</span>\n    </div>\n    <div class=\"scene-context__item scene-context__time\">\n      <small class=\"scene-context__label\">時間</small>\n      <span class=\"scene-context__value\">青棒第一年・第 9／10 階段</span>\n    </div>\n  </section><h2 id=\"currentEventTitle\" tabindex=\"-1\">現任教練完成第二次角色評估</h2><div class=\"event-text\">本次：4 打席、7 局守備。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。</div></article>"
+    },
+    "foreignSummary": {
+      "detail": "本次：4 打席、7 局守備。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。",
+      "journey": "角色維持「先發／關鍵任務」；機會 1：出賽紀錄還在整理；機會 2：4 打席、7 局守備。",
+      "html": "<article class=\"event-card\" aria-labelledby=\"currentEventTitle\"><section class=\"scene-context chapter-one-scene-context\" aria-labelledby=\"sceneContextTitle\">\n    <h2 id=\"sceneContextTitle\" class=\"visually-hidden\">場景資訊</h2>\n    <div class=\"scene-context__item scene-context__chapter\">\n      <small class=\"scene-context__label\">章節／階段</small>\n      <span class=\"scene-context__value\">青棒</span>\n    </div>\n    <div class=\"scene-context__item scene-context__time\">\n      <small class=\"scene-context__label\">時間</small>\n      <span class=\"scene-context__value\">青棒第一年・第 9／10 階段</span>\n    </div>\n  </section><h2 id=\"currentEventTitle\" tabindex=\"-1\">現任教練完成第二次角色評估</h2><div class=\"event-text\">本次：4 打席、7 局守備。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。</div></article>"
+    },
+    "yearTwo": "<article class=\"event-card\" aria-labelledby=\"currentEventTitle\"><section class=\"scene-context chapter-one-scene-context\" aria-labelledby=\"sceneContextTitle\">\n    <h2 id=\"sceneContextTitle\" class=\"visually-hidden\">場景資訊</h2>\n    <div class=\"scene-context__item scene-context__chapter\">\n      <small class=\"scene-context__label\">章節／階段</small>\n      <span class=\"scene-context__value\">青棒第二年小結</span>\n    </div>\n    <div class=\"scene-context__item scene-context__time\">\n      <small class=\"scene-context__label\">時間</small>\n      <span class=\"scene-context__value\">青棒・第二年評估</span>\n    </div>\n  </section><h2 id=\"currentEventTitle\" tabindex=\"-1\">青棒第二年評估</h2><div class=\"event-text\">高二評估紀錄還在整理，下一階段角色待確認\n\n跨年名單移出 0 名畢業球員，加入 0 名新生。目前角色仍待確認；春季：出賽紀錄還在整理；秋季：出賽紀錄還在整理。評估趨勢：持平；訓練與準備度正在提升、與同守位競爭者的差距已縮小。主要原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。高三前方向：打擊入口；教練信任 8，疲勞 2，傷病風險 1。\n\n目前球隊角色：先發／關鍵任務\n高三前使用計畫：打擊入口\n近期表現：1　教練信任：8\n疲勞：2　傷病風險：1　疼痛：0\n\n高二沒有決定畢業出口，但它決定你帶著什麼角色與身體狀態進入最後一年。</div></article>",
+    "playerWords": [
+      "交流賽結束後，你在寮舍走廊打給阿哲。你和阿哲聊起7局上，你把球傳向一壘，球趕在打者跑者之前到達，一壘完成打者出局。 一壘跑者從一壘推進到二壘；二壘跑者從二壘推進到三壘；三壘跑者回本壘得分。 現在三個出局，半局結束。。\n\n比賽結果：球隊落敗，終場 0：1。\n你們已不在同一支隊伍，仍認得彼此說起失敗時會停頓多久。\n你不知道這通電話會改變誰；只有之後的行動，能證明這段共同經驗是否真的被帶到了下一個球場。",
+      "本次：沒有實際上場。\n現任教練完成第二次評估：角色維持「先發／關鍵任務」。\n原因：訓練與準備度正在提升、與同守位競爭者的差距已縮小。\n目前角色會帶進下一階段，不由球探改寫。",
+      "本場有紀錄的關鍵時刻：第一次：你出棒但揮擊落空，第三個好球形成三振。 第二次：你把球傳向一壘，球趕在打者跑者之前到達，一壘完成打者出局。 一壘跑者從一壘推進到二壘。 現在 2 出局、二壘有人。。 第三次：你出棒但揮擊落空，第三個好球形成三振。 第4次：你出棒但揮擊落空，第三個好球形成三振。 第5次：你把球傳向一壘，球趕在打者跑者之前到達，一壘完成打者出局。 一壘跑者從一壘推進到二壘；二壘跑者從二壘推進到三壘；三壘跑者回本壘得分。 現在三個出局，半局結束。。",
+      "交流賽結束後，你在寮舍走廊打給阿哲。你坦白說，這場比賽沒有真的輪到你上場。阿哲聽你談起等待與熱身，接著問你下一次想先準備什麼。\n\n比賽結果：球隊落敗，終場 2：8。\n你們已不在同一支隊伍，仍認得彼此說起失敗時會停頓多久。\n你不知道這通電話會改變誰；只有之後的行動，能證明這段共同經驗是否真的被帶到了下一個球場。",
+      "這場比賽沒有輪到你上場，先把下一次準備做好。"
+    ]
+  },
+  "baseRecord": {
+    "version": "match-game-record-v1",
+    "gameId": "hs-y1-followup-evaluation-2",
+    "competitionEditionId": null,
+    "competitionEntryId": null,
+    "homeTeamId": "school-standard-e995f22c",
+    "awayTeamId": "regional-power-school",
+    "status": "final",
+    "inningsScheduled": 7,
+    "inningsPlayed": 7,
+    "inningLines": [
+      {
+        "inning": 1,
+        "awayRuns": 0,
+        "homeRuns": 0
+      },
+      {
+        "inning": 2,
+        "awayRuns": 0,
+        "homeRuns": 0
+      },
+      {
+        "inning": 3,
+        "awayRuns": 0,
+        "homeRuns": 0
+      },
+      {
+        "inning": 4,
+        "awayRuns": 0,
+        "homeRuns": 0
+      },
+      {
+        "inning": 5,
+        "awayRuns": 0,
+        "homeRuns": 0
+      },
+      {
+        "inning": 6,
+        "awayRuns": 0,
+        "homeRuns": 0
+      },
+      {
+        "inning": 7,
+        "awayRuns": 1,
+        "homeRuns": 0
+      }
+    ],
+    "totals": {
+      "away": {
+        "runs": 1,
+        "hits": 8,
+        "errors": 0
+      },
+      "home": {
+        "runs": 0,
+        "hits": 9,
+        "errors": 0
+      }
+    },
+    "result": {
+      "winnerTeamId": "regional-power-school",
+      "loserTeamId": "school-standard-e995f22c",
+      "finalScore": {
+        "away": 1,
+        "home": 0
+      },
+      "tie": false
+    },
+    "playerLines": {
+      "player": {
+        "playerId": "player",
+        "teamId": "school-standard-e995f22c",
+        "role": "starter",
+        "position": "SS",
+        "positionAppearances": [
+          {
+            "position": "SS",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|home|player"
+          },
+          {
+            "position": "SS",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|4|上|69"
+          },
+          {
+            "position": "SS",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|7|上|143"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 4,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 2,
+          "PO": 0,
+          "A": 2,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-09": {
+        "playerId": "school-standard-e995f22c-player-09",
+        "teamId": "school-standard-e995f22c",
+        "role": "starter",
+        "position": "RF",
+        "positionAppearances": [
+          {
+            "position": "RF",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|home|school-standard-e995f22c-player-09"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 0,
+          "H": 1,
+          "doubles": 1,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 1,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-03": {
+        "playerId": "school-standard-e995f22c-player-03",
+        "teamId": "school-standard-e995f22c",
+        "role": "starter",
+        "position": "1B",
+        "positionAppearances": [
+          {
+            "position": "1B",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|home|school-standard-e995f22c-player-03"
+          },
+          {
+            "position": "1B",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|4|上|69"
+          },
+          {
+            "position": "1B",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|7|上|143"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 3,
+          "R": 0,
+          "H": 2,
+          "doubles": 1,
+          "triples": 1,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 1,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 2,
+          "PO": 2,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-07": {
+        "playerId": "school-standard-e995f22c-player-07",
+        "teamId": "school-standard-e995f22c",
+        "role": "starter",
+        "position": "左外野手",
+        "positionAppearances": [
+          {
+            "position": "LF",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|home|school-standard-e995f22c-player-07"
+          },
+          {
+            "position": "左外野手",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|3|上|50"
+          },
+          {
+            "position": "左外野手",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|5|上|88"
+          },
+          {
+            "position": "左外野手",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|6|上|110"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 2,
+          "R": 0,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 2,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 3,
+          "PO": 3,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-02": {
+        "playerId": "school-standard-e995f22c-player-02",
+        "teamId": "school-standard-e995f22c",
+        "role": "starter",
+        "position": "C",
+        "positionAppearances": [
+          {
+            "position": "C",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|home|school-standard-e995f22c-player-02"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 3,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-04": {
+        "playerId": "school-standard-e995f22c-player-04",
+        "teamId": "school-standard-e995f22c",
+        "role": "starter",
+        "position": "2B",
+        "positionAppearances": [
+          {
+            "position": "2B",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|home|school-standard-e995f22c-player-04"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 0,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-05": {
+        "playerId": "school-standard-e995f22c-player-05",
+        "teamId": "school-standard-e995f22c",
+        "role": "starter",
+        "position": "3B",
+        "positionAppearances": [
+          {
+            "position": "3B",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|home|school-standard-e995f22c-player-05"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 0,
+          "H": 3,
+          "doubles": 2,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 1,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-01": {
+        "playerId": "school-standard-e995f22c-player-01",
+        "teamId": "school-standard-e995f22c",
+        "role": "starter",
+        "position": "P",
+        "positionAppearances": [
+          {
+            "position": "P",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|home|school-standard-e995f22c-player-01"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 2,
+          "R": 0,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 2,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 21,
+          "BF": 32,
+          "H": 8,
+          "R": 1,
+          "ER": 1,
+          "BB": 3,
+          "HBP": 0,
+          "SO": 4,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-08": {
+        "playerId": "school-standard-e995f22c-player-08",
+        "teamId": "school-standard-e995f22c",
+        "role": "starter",
+        "position": "中外野手",
+        "positionAppearances": [
+          {
+            "position": "CF",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|home|school-standard-e995f22c-player-08"
+          },
+          {
+            "position": "中外野手",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|2|上|23"
+          },
+          {
+            "position": "中外野手",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|3|上|40"
+          },
+          {
+            "position": "中外野手",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|4|上|72"
+          }
+        ],
+        "batting": {
+          "PA": 3,
+          "AB": 3,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 3,
+          "PO": 3,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-10": {
+        "playerId": "school-standard-e995f22c-player-10",
+        "teamId": "school-standard-e995f22c",
+        "role": "bench",
+        "position": "捕手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-11": {
+        "playerId": "school-standard-e995f22c-player-11",
+        "teamId": "school-standard-e995f22c",
+        "role": "bench",
+        "position": "一壘手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-12": {
+        "playerId": "school-standard-e995f22c-player-12",
+        "teamId": "school-standard-e995f22c",
+        "role": "bench",
+        "position": "二壘手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-13": {
+        "playerId": "school-standard-e995f22c-player-13",
+        "teamId": "school-standard-e995f22c",
+        "role": "bench",
+        "position": "游擊手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-14": {
+        "playerId": "school-standard-e995f22c-player-14",
+        "teamId": "school-standard-e995f22c",
+        "role": "bench",
+        "position": "左外野手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-15": {
+        "playerId": "school-standard-e995f22c-player-15",
+        "teamId": "school-standard-e995f22c",
+        "role": "bench",
+        "position": "中外野手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-16": {
+        "playerId": "school-standard-e995f22c-player-16",
+        "teamId": "school-standard-e995f22c",
+        "role": "bench",
+        "position": "投手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-17": {
+        "playerId": "school-standard-e995f22c-player-17",
+        "teamId": "school-standard-e995f22c",
+        "role": "bench",
+        "position": "投手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "school-standard-e995f22c-player-06": {
+        "playerId": "school-standard-e995f22c-player-06",
+        "teamId": "school-standard-e995f22c",
+        "role": "bench",
+        "position": "游擊手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-07": {
+        "playerId": "regional-power-school-player-07",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "LF",
+        "positionAppearances": [
+          {
+            "position": "LF",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|away|regional-power-school-player-07"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 0,
+          "H": 1,
+          "doubles": 1,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-03": {
+        "playerId": "regional-power-school-player-03",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "1B",
+        "positionAppearances": [
+          {
+            "position": "1B",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|away|regional-power-school-player-03"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 2,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 2,
+          "HBP": 0,
+          "SO": 1,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-05": {
+        "playerId": "regional-power-school-player-05",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "3B",
+        "positionAppearances": [
+          {
+            "position": "3B",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|away|regional-power-school-player-05"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 0,
+          "H": 2,
+          "doubles": 2,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-09": {
+        "playerId": "regional-power-school-player-09",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "RF",
+        "positionAppearances": [
+          {
+            "position": "RF",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|away|regional-power-school-player-09"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 4,
+          "R": 0,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 1,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-02": {
+        "playerId": "regional-power-school-player-02",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "捕手",
+        "positionAppearances": [
+          {
+            "position": "C",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|away|regional-power-school-player-02"
+          },
+          {
+            "position": "捕手",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|1|下|8"
+          },
+          {
+            "position": "捕手",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|4|下|78"
+          },
+          {
+            "position": "捕手",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|6|下|121"
+          }
+        ],
+        "batting": {
+          "PA": 4,
+          "AB": 3,
+          "R": 0,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 1,
+          "HBP": 0,
+          "SO": 1,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 3,
+          "PO": 3,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-01": {
+        "playerId": "regional-power-school-player-01",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "P",
+        "positionAppearances": [
+          {
+            "position": "P",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|away|regional-power-school-player-01"
+          }
+        ],
+        "batting": {
+          "PA": 3,
+          "AB": 3,
+          "R": 0,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 21,
+          "BF": 35,
+          "H": 9,
+          "R": 0,
+          "ER": 0,
+          "BB": 5,
+          "HBP": 0,
+          "SO": 9,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-08": {
+        "playerId": "regional-power-school-player-08",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "CF",
+        "positionAppearances": [
+          {
+            "position": "CF",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|away|regional-power-school-player-08"
+          }
+        ],
+        "batting": {
+          "PA": 3,
+          "AB": 3,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 1,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-04": {
+        "playerId": "regional-power-school-player-04",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "2B",
+        "positionAppearances": [
+          {
+            "position": "2B",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|away|regional-power-school-player-04"
+          }
+        ],
+        "batting": {
+          "PA": 3,
+          "AB": 3,
+          "R": 1,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 1,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-06": {
+        "playerId": "regional-power-school-player-06",
+        "teamId": "regional-power-school",
+        "role": "starter",
+        "position": "SS",
+        "positionAppearances": [
+          {
+            "position": "SS",
+            "role": "starter",
+            "eventId": "hs-y1-followup-evaluation-2|lineup|away|regional-power-school-player-06"
+          }
+        ],
+        "batting": {
+          "PA": 3,
+          "AB": 3,
+          "R": 0,
+          "H": 1,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 1,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-10": {
+        "playerId": "regional-power-school-player-10",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "捕手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-11": {
+        "playerId": "regional-power-school-player-11",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "一壘手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-12": {
+        "playerId": "regional-power-school-player-12",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "二壘手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-13": {
+        "playerId": "regional-power-school-player-13",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "游擊手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-14": {
+        "playerId": "regional-power-school-player-14",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "左外野手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-15": {
+        "playerId": "regional-power-school-player-15",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "中外野手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-16": {
+        "playerId": "regional-power-school-player-16",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "投手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      },
+      "regional-power-school-player-17": {
+        "playerId": "regional-power-school-player-17",
+        "teamId": "regional-power-school",
+        "role": "bench",
+        "position": "投手",
+        "positionAppearances": [],
+        "batting": {
+          "PA": 0,
+          "AB": 0,
+          "R": 0,
+          "H": 0,
+          "doubles": 0,
+          "triples": 0,
+          "HR": 0,
+          "RBI": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "SB": 0,
+          "CS": 0,
+          "SH": 0,
+          "SF": 0
+        },
+        "pitching": {
+          "outsRecorded": 0,
+          "BF": 0,
+          "H": 0,
+          "R": 0,
+          "ER": 0,
+          "BB": 0,
+          "HBP": 0,
+          "SO": 0,
+          "HR": 0,
+          "pitches": null,
+          "strikes": null
+        },
+        "defense": {
+          "chances": 0,
+          "PO": 0,
+          "A": 0,
+          "E": 0,
+          "DP": 0
+        },
+        "baserunning": {
+          "R": 0,
+          "SB": 0,
+          "CS": 0
+        }
+      }
+    },
+    "eventRefs": [
+      {
+        "eventId": "hs-y1-followup-evaluation-2|1|上|0",
+        "type": "matchEntry",
+        "sequence": 0,
+        "inning": 1,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|1|上|1",
+        "type": "plateAppearance",
+        "sequence": 1,
+        "inning": 1,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|1|上|2",
+        "type": "plateAppearance",
+        "sequence": 2,
+        "inning": 1,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|1|上|3",
+        "type": "plateAppearance",
+        "sequence": 3,
+        "inning": 1,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|1|上|4",
+        "type": "plateAppearance",
+        "sequence": 4,
+        "inning": 1,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|1|上|5",
+        "type": "halfInningEnd",
+        "sequence": 5,
+        "inning": 1,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|1|下|6",
+        "type": "sideChange",
+        "sequence": 6,
+        "inning": 1,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|1|下|7",
+        "type": "meaningfulMomentReached",
+        "sequence": 7,
+        "inning": 1,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|1|下|8",
+        "type": "plateAppearance",
+        "sequence": 8,
+        "inning": 1,
+        "half": "下",
+        "defensivePlayIdentity": "hs-y1-followup-evaluation-2|hs-y1-followup-evaluation-2|hs_y1_match_moment_1|player|1|下|pitch-3|regional-power-school-player-02|third-strike-catch",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|1|下|9",
+        "type": "meaningfulMomentResolved",
+        "sequence": 9,
+        "inning": 1,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|1|下|10",
+        "type": "plateAppearance",
+        "sequence": 10,
+        "inning": 1,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|1|下|11",
+        "type": "plateAppearance",
+        "sequence": 11,
+        "inning": 1,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|1|下|12",
+        "type": "plateAppearance",
+        "sequence": 12,
+        "inning": 1,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|1|下|13",
+        "type": "plateAppearance",
+        "sequence": 13,
+        "inning": 1,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|1|下|14",
+        "type": "halfInningEnd",
+        "sequence": 14,
+        "inning": 1,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|上|15",
+        "type": "sideChange",
+        "sequence": 15,
+        "inning": 2,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|上|16",
+        "type": "buntPitchResolved",
+        "sequence": 16,
+        "inning": 2,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|上|17",
+        "type": "buntDefensiveFallback",
+        "sequence": 17,
+        "inning": 2,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|上|18",
+        "type": "plateAppearance",
+        "sequence": 18,
+        "inning": 2,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|上|19",
+        "type": "buntPitchResolved",
+        "sequence": 19,
+        "inning": 2,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|上|20",
+        "type": "buntDefensiveFallback",
+        "sequence": 20,
+        "inning": 2,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|上|21",
+        "type": "plateAppearance",
+        "sequence": 21,
+        "inning": 2,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|上|22",
+        "type": "plateAppearance",
+        "sequence": 22,
+        "inning": 2,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|上|23",
+        "type": "flyBallCatchResolution",
+        "sequence": 23,
+        "inning": 2,
+        "half": "上",
+        "defensivePlayIdentity": "hs-y1-followup-evaluation-2|hs-y1-followup-evaluation-2|2|上|away|regional-power-school-player-08|6|1|truefalsefalse|ordinary-contact|pitch-1|flyout"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|上|24",
+        "type": "buntPitchResolved",
+        "sequence": 24,
+        "inning": 2,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|上|25",
+        "type": "buntDefensiveFallback",
+        "sequence": 25,
+        "inning": 2,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|上|26",
+        "type": "plateAppearance",
+        "sequence": 26,
+        "inning": 2,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|上|27",
+        "type": "halfInningEnd",
+        "sequence": 27,
+        "inning": 2,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|下|28",
+        "type": "sideChange",
+        "sequence": 28,
+        "inning": 2,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|下|29",
+        "type": "plateAppearance",
+        "sequence": 29,
+        "inning": 2,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|下|30",
+        "type": "plateAppearance",
+        "sequence": 30,
+        "inning": 2,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|下|31",
+        "type": "plateAppearance",
+        "sequence": 31,
+        "inning": 2,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|下|32",
+        "type": "plateAppearance",
+        "sequence": 32,
+        "inning": 2,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|下|33",
+        "type": "plateAppearance",
+        "sequence": 33,
+        "inning": 2,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|2|下|34",
+        "type": "halfInningEnd",
+        "sequence": 34,
+        "inning": 2,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|35",
+        "type": "sideChange",
+        "sequence": 35,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|36",
+        "type": "buntPitchResolved",
+        "sequence": 36,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|37",
+        "type": "buntDefensiveFallback",
+        "sequence": 37,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|38",
+        "type": "plateAppearance",
+        "sequence": 38,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|39",
+        "type": "plateAppearance",
+        "sequence": 39,
+        "inning": 3,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|40",
+        "type": "flyBallCatchResolution",
+        "sequence": 40,
+        "inning": 3,
+        "half": "上",
+        "defensivePlayIdentity": "hs-y1-followup-evaluation-2|hs-y1-followup-evaluation-2|3|上|away|regional-power-school-player-07|0|0|truefalsefalse|ordinary-contact|pitch-1|flyout"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|41",
+        "type": "buntPitchResolved",
+        "sequence": 41,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|42",
+        "type": "buntDefensiveFallback",
+        "sequence": 42,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|43",
+        "type": "plateAppearance",
+        "sequence": 43,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|44",
+        "type": "buntPitchResolved",
+        "sequence": 44,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|45",
+        "type": "buntPitchResolved",
+        "sequence": 45,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|46",
+        "type": "buntPitchResolved",
+        "sequence": 46,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|47",
+        "type": "buntDefensiveFallback",
+        "sequence": 47,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|48",
+        "type": "plateAppearance",
+        "sequence": 48,
+        "inning": 3,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|49",
+        "type": "plateAppearance",
+        "sequence": 49,
+        "inning": 3,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|50",
+        "type": "flyBallCatchResolution",
+        "sequence": 50,
+        "inning": 3,
+        "half": "上",
+        "defensivePlayIdentity": "hs-y1-followup-evaluation-2|hs-y1-followup-evaluation-2|3|上|away|regional-power-school-player-09|3|2|truetruefalse|ordinary-contact|pitch-1|flyout"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|上|51",
+        "type": "halfInningEnd",
+        "sequence": 51,
+        "inning": 3,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|下|52",
+        "type": "sideChange",
+        "sequence": 52,
+        "inning": 3,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|下|53",
+        "type": "plateAppearance",
+        "sequence": 53,
+        "inning": 3,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|下|54",
+        "type": "plateAppearance",
+        "sequence": 54,
+        "inning": 3,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|下|55",
+        "type": "plateAppearance",
+        "sequence": 55,
+        "inning": 3,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|下|56",
+        "type": "plateAppearance",
+        "sequence": 56,
+        "inning": 3,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|下|57",
+        "type": "plateAppearance",
+        "sequence": 57,
+        "inning": 3,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|下|58",
+        "type": "plateAppearance",
+        "sequence": 58,
+        "inning": 3,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|3|下|59",
+        "type": "halfInningEnd",
+        "sequence": 59,
+        "inning": 3,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|上|60",
+        "type": "sideChange",
+        "sequence": 60,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|上|61",
+        "type": "plateAppearance",
+        "sequence": 61,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|上|62",
+        "type": "buntPitchResolved",
+        "sequence": 62,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|上|63",
+        "type": "buntPitchResolved",
+        "sequence": 63,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|上|64",
+        "type": "buntPitchResolved",
+        "sequence": 64,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|上|65",
+        "type": "buntDefensiveFallback",
+        "sequence": 65,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|上|66",
+        "type": "plateAppearance",
+        "sequence": 66,
+        "inning": 4,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|上|67",
+        "type": "meaningfulMomentReached",
+        "sequence": 67,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|上|68",
+        "type": "plateAppearance",
+        "sequence": 68,
+        "inning": 4,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|上|69",
+        "type": "meaningfulMomentResolved",
+        "sequence": 69,
+        "inning": 4,
+        "half": "上",
+        "defensivePlayIdentity": "hs-y1-followup-evaluation-2:infield:hs_y1_match_defense_1|26|4|上|regional-power-school-player-08"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|上|70",
+        "type": "defensiveResolution",
+        "sequence": 70,
+        "inning": 4,
+        "half": "上",
+        "defensivePlayIdentity": "hs-y1-followup-evaluation-2:infield:hs_y1_match_defense_1|26|4|上|regional-power-school-player-08"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|上|71",
+        "type": "plateAppearance",
+        "sequence": 71,
+        "inning": 4,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|上|72",
+        "type": "flyBallCatchResolution",
+        "sequence": 72,
+        "inning": 4,
+        "half": "上",
+        "defensivePlayIdentity": "hs-y1-followup-evaluation-2|hs-y1-followup-evaluation-2|4|上|away|regional-power-school-player-04|7|2|falsetruefalse|ordinary-contact|pitch-1|flyout"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|上|73",
+        "type": "halfInningEnd",
+        "sequence": 73,
+        "inning": 4,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|下|74",
+        "type": "sideChange",
+        "sequence": 74,
+        "inning": 4,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|下|75",
+        "type": "plateAppearance",
+        "sequence": 75,
+        "inning": 4,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|下|76",
+        "type": "plateAppearance",
+        "sequence": 76,
+        "inning": 4,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|下|77",
+        "type": "meaningfulMomentReached",
+        "sequence": 77,
+        "inning": 4,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|下|78",
+        "type": "plateAppearance",
+        "sequence": 78,
+        "inning": 4,
+        "half": "下",
+        "defensivePlayIdentity": "hs-y1-followup-evaluation-2|hs-y1-followup-evaluation-2|hs_y1_match_offense_3|player|4|下|pitch-3|regional-power-school-player-02|third-strike-catch",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|下|79",
+        "type": "meaningfulMomentResolved",
+        "sequence": 79,
+        "inning": 4,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|下|80",
+        "type": "plateAppearance",
+        "sequence": 80,
+        "inning": 4,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|4|下|81",
+        "type": "halfInningEnd",
+        "sequence": 81,
+        "inning": 4,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|上|82",
+        "type": "sideChange",
+        "sequence": 82,
+        "inning": 5,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|上|83",
+        "type": "buntPitchResolved",
+        "sequence": 83,
+        "inning": 5,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|上|84",
+        "type": "buntPitchResolved",
+        "sequence": 84,
+        "inning": 5,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|上|85",
+        "type": "plateAppearance",
+        "sequence": 85,
+        "inning": 5,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|上|86",
+        "type": "buntPitchResolved",
+        "sequence": 86,
+        "inning": 5,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|上|87",
+        "type": "plateAppearance",
+        "sequence": 87,
+        "inning": 5,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|上|88",
+        "type": "flyBallCatchResolution",
+        "sequence": 88,
+        "inning": 5,
+        "half": "上",
+        "defensivePlayIdentity": "hs-y1-followup-evaluation-2|hs-y1-followup-evaluation-2|5|上|away|regional-power-school-player-07|0|1|falsefalsefalse|ordinary-contact|pitch-1|flyout"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|上|89",
+        "type": "buntPitchResolved",
+        "sequence": 89,
+        "inning": 5,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|上|90",
+        "type": "buntPitchResolved",
+        "sequence": 90,
+        "inning": 5,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|上|91",
+        "type": "buntPitchResolved",
+        "sequence": 91,
+        "inning": 5,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|上|92",
+        "type": "plateAppearance",
+        "sequence": 92,
+        "inning": 5,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|上|93",
+        "type": "buntPitchResolved",
+        "sequence": 93,
+        "inning": 5,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|上|94",
+        "type": "halfInningEnd",
+        "sequence": 94,
+        "inning": 5,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|下|95",
+        "type": "sideChange",
+        "sequence": 95,
+        "inning": 5,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|下|96",
+        "type": "plateAppearance",
+        "sequence": 96,
+        "inning": 5,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|下|97",
+        "type": "plateAppearance",
+        "sequence": 97,
+        "inning": 5,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|下|98",
+        "type": "plateAppearance",
+        "sequence": 98,
+        "inning": 5,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|下|99",
+        "type": "plateAppearance",
+        "sequence": 99,
+        "inning": 5,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|5|下|100",
+        "type": "halfInningEnd",
+        "sequence": 100,
+        "inning": 5,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|上|101",
+        "type": "sideChange",
+        "sequence": 101,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|上|102",
+        "type": "buntPitchResolved",
+        "sequence": 102,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|上|103",
+        "type": "buntDefensiveFallback",
+        "sequence": 103,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|上|104",
+        "type": "plateAppearance",
+        "sequence": 104,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|上|105",
+        "type": "plateAppearance",
+        "sequence": 105,
+        "inning": 6,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|上|106",
+        "type": "buntPitchResolved",
+        "sequence": 106,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|上|107",
+        "type": "buntDefensiveFallback",
+        "sequence": 107,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|上|108",
+        "type": "plateAppearance",
+        "sequence": 108,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|上|109",
+        "type": "plateAppearance",
+        "sequence": 109,
+        "inning": 6,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|上|110",
+        "type": "flyBallCatchResolution",
+        "sequence": 110,
+        "inning": 6,
+        "half": "上",
+        "defensivePlayIdentity": "hs-y1-followup-evaluation-2|hs-y1-followup-evaluation-2|6|上|away|regional-power-school-player-01|5|1|truetruefalse|ordinary-contact|pitch-1|flyout"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|上|111",
+        "type": "buntPitchResolved",
+        "sequence": 111,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|上|112",
+        "type": "buntPitchResolved",
+        "sequence": 112,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|上|113",
+        "type": "buntDefensiveFallback",
+        "sequence": 113,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|上|114",
+        "type": "plateAppearance",
+        "sequence": 114,
+        "inning": 6,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|上|115",
+        "type": "halfInningEnd",
+        "sequence": 115,
+        "inning": 6,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|下|116",
+        "type": "sideChange",
+        "sequence": 116,
+        "inning": 6,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|下|117",
+        "type": "plateAppearance",
+        "sequence": 117,
+        "inning": 6,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|下|118",
+        "type": "plateAppearance",
+        "sequence": 118,
+        "inning": 6,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|下|119",
+        "type": "plateAppearance",
+        "sequence": 119,
+        "inning": 6,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|下|120",
+        "type": "meaningfulMomentReached",
+        "sequence": 120,
+        "inning": 6,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|下|121",
+        "type": "plateAppearance",
+        "sequence": 121,
+        "inning": 6,
+        "half": "下",
+        "defensivePlayIdentity": "hs-y1-followup-evaluation-2|hs-y1-followup-evaluation-2|hs_y1_match_moment_3|player|6|下|pitch-3|regional-power-school-player-02|third-strike-catch",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|下|122",
+        "type": "meaningfulMomentResolved",
+        "sequence": 122,
+        "inning": 6,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|下|123",
+        "type": "plateAppearance",
+        "sequence": 123,
+        "inning": 6,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|6|下|124",
+        "type": "halfInningEnd",
+        "sequence": 124,
+        "inning": 6,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|125",
+        "type": "sideChange",
+        "sequence": 125,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|126",
+        "type": "plateAppearance",
+        "sequence": 126,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|127",
+        "type": "plateAppearance",
+        "sequence": 127,
+        "inning": 7,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|128",
+        "type": "buntPitchResolved",
+        "sequence": 128,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|129",
+        "type": "buntDefensiveFallback",
+        "sequence": 129,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|130",
+        "type": "plateAppearance",
+        "sequence": 130,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|131",
+        "type": "buntPitchResolved",
+        "sequence": 131,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|132",
+        "type": "buntPitchResolved",
+        "sequence": 132,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|133",
+        "type": "buntPitchResolved",
+        "sequence": 133,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|134",
+        "type": "buntDefensiveFallback",
+        "sequence": 134,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|135",
+        "type": "plateAppearance",
+        "sequence": 135,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|136",
+        "type": "buntPitchResolved",
+        "sequence": 136,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|137",
+        "type": "buntDefensiveFallback",
+        "sequence": 137,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|138",
+        "type": "plateAppearance",
+        "sequence": 138,
+        "inning": 7,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|139",
+        "type": "run",
+        "sequence": 139,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|140",
+        "type": "plateAppearance",
+        "sequence": 140,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|141",
+        "type": "meaningfulMomentReached",
+        "sequence": 141,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|142",
+        "type": "plateAppearance",
+        "sequence": 142,
+        "inning": 7,
+        "half": "上",
+        "pitcherOuts": {
+          "pitcherId": "school-standard-e995f22c-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|143",
+        "type": "meaningfulMomentResolved",
+        "sequence": 143,
+        "inning": 7,
+        "half": "上",
+        "defensivePlayIdentity": "hs-y1-followup-evaluation-2:infield:hs_y1_match_defense_2|43|7|上|regional-power-school-player-02"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|144",
+        "type": "defensiveResolution",
+        "sequence": 144,
+        "inning": 7,
+        "half": "上",
+        "defensivePlayIdentity": "hs-y1-followup-evaluation-2:infield:hs_y1_match_defense_2|43|7|上|regional-power-school-player-02"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|上|145",
+        "type": "halfInningEnd",
+        "sequence": 145,
+        "inning": 7,
+        "half": "上"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|下|146",
+        "type": "sideChange",
+        "sequence": 146,
+        "inning": 7,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|下|147",
+        "type": "plateAppearance",
+        "sequence": 147,
+        "inning": 7,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|下|148",
+        "type": "plateAppearance",
+        "sequence": 148,
+        "inning": 7,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|下|149",
+        "type": "plateAppearance",
+        "sequence": 149,
+        "inning": 7,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|下|150",
+        "type": "plateAppearance",
+        "sequence": 150,
+        "inning": 7,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|下|151",
+        "type": "plateAppearance",
+        "sequence": 151,
+        "inning": 7,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|下|152",
+        "type": "plateAppearance",
+        "sequence": 152,
+        "inning": 7,
+        "half": "下",
+        "pitcherOuts": {
+          "pitcherId": "regional-power-school-player-01",
+          "outs": 1
+        }
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|下|153",
+        "type": "halfInningEnd",
+        "sequence": 153,
+        "inning": 7,
+        "half": "下"
+      },
+      {
+        "eventId": "hs-y1-followup-evaluation-2|7|終|154",
+        "type": "gameEnd",
+        "sequence": 154,
+        "inning": 7,
+        "half": "終"
+      }
+    ],
+    "integrity": {
+      "checked": true,
+      "issues": []
+    },
+    "finalizedAtEventId": "hs-y1-followup-evaluation-2|7|終|154"
+  }
+}

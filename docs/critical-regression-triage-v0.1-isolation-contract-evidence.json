@@ -1,0 +1,67 @@
+{
+  "task": "Critical Regression Triage v0.1",
+  "createdAt": "2026-10-15T01:31:02.137Z",
+  "rows": [
+    {
+      "file": "docs/critical-regression-triage-v0.1-opportunity-isolated.cjs",
+      "original": "tests/high-school-year-one-opportunity-two-integration-test.js",
+      "originalSha256": "db46a6e6c15126b357657b1670b1452580718e8609dee43b84df1a0af6e0dc27",
+      "derivedSha256": "53ff14d9199fb023c708a5e57f07daa37d03ea892302159828636f9d950b34b2",
+      "exactReverse": true,
+      "edits": [
+        {
+          "before": "\"ai-plate-appearance-outcome.js\", \"defensive-runner-throw-settlement-foundation.js\"",
+          "after": "\"ai-plate-appearance-outcome.js\", \"defensive-decision-throw-foundation.js\", \"defensive-runner-throw-settlement-foundation.js\""
+        },
+        {
+          "before": "verify(\"38.",
+          "after": "console.log(\"TRIAGE_OPPORTUNITY=\"+JSON.stringify(liveEngine));\nverify(\"38."
+        }
+      ]
+    },
+    {
+      "file": "docs/critical-regression-triage-v0.1-match-isolated.cjs",
+      "original": "tests/baseball-match-foundation-2-2-2-test.js",
+      "originalSha256": "2019013d7fc81200e9945c00834df7c4f7d33a8d4d1c8074e66d25e9475d4375",
+      "derivedSha256": "1161c23fdd6edec2d89f4129cca5a690ba0bf6f458c9381d818e41b7a43b7e27",
+      "exactReverse": true,
+      "edits": [
+        {
+          "before": "      let safety=0;",
+          "after": "      let safety=0; const triageSteps=[];"
+        },
+        {
+          "before": "      while(!match.completed&&safety++<1400){",
+          "after": "      while(!match.completed&&safety++<1400){\n        triageSteps.push({safety,inning:match.inning,half:match.half,outs:match.outs,phase:match.simulationPhase,momentIndex:match.momentIndex,currentMomentId:match.currentMomentId,currentBatter:match.currentBatter,nextBatter:getHighSchoolMatchLineupBatter(match,match.offenseTeam)?.id,completedIds:match.completedMoments.map(m=>m.id),activeSituation:match.activeSituation,visible:isHighSchoolMatchDecisionVisible(match)});"
+        },
+        {
+          "before": "      return {match,safety};",
+          "after": "      globalThis.__triageMatchSteps=triageSteps; return {match,safety};"
+        },
+        {
+          "before": "const ids=x.match.completedMoments.map(moment=>moment.id);return x.match.completed",
+          "after": "const ids=x.match.completedMoments.map(moment=>moment.id);console.log(\"TRIAGE_MATCH=\"+JSON.stringify({seed:x.match.simulationSeed,expectedIds:highSchoolYearOneMomentIds,ids,completed:x.match.completed,firstIdPresent:ids.includes(highSchoolYearOneMomentIds[0]),finalIdPresent:ids.includes(highSchoolYearOneMomentIds[2]),defenseMomentCount:x.match.completedMoments.filter(m=>m.domain===\"defense\").length,defensiveMeaningfulDecisionCount:x.match.matchDecisionDensityState.defensiveMeaningfulDecisionCount,safety:x.safety,safetyBelow1400:x.safety<1400,integrityIssues:getHighSchoolMatchStateIntegrityIssues(x.match),match:x.match,steps:__triageMatchSteps}));return x.match.completed"
+        }
+      ]
+    },
+    {
+      "file": "docs/critical-regression-triage-v0.1-gradient-isolated.cjs",
+      "original": "tests/ability-performance-gradient-test.js",
+      "originalSha256": "1038c92e98c4a040f61a44e23c464d2a9daf544a613e9e3b0f6a9cf5e4017611",
+      "derivedSha256": "4e7677d62340949d8851bf676e30324fe061119a1d23bd38b8e2b7f56307f3b3",
+      "exactReverse": true,
+      "edits": [
+        {
+          "before": "require('./ability-performance-correlation-audit.cjs')",
+          "after": "require('../tests/ability-performance-correlation-audit.cjs')"
+        },
+        {
+          "before": "assert(audit.summarize(low).multiHitFraction>0",
+          "after": "console.log(\"TRIAGE_GRADIENT=\"+JSON.stringify({base:h.base,tiers:audit.TIERS,field:\"baseballSkills.batting\",seeds:Array.from({length:20},(_,i)=>i+1),lowSummary:audit.summarize(low),highSummary:audit.summarize(high),low,high}));\nassert(audit.summarize(low).multiHitFraction>0"
+        }
+      ]
+    }
+  ],
+  "rootResolution": "docs and tests are both one directory below the repository root",
+  "assertionsSeedsFixturesDecisionsUnchanged": true
+}

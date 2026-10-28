@@ -1,0 +1,112 @@
+{
+  "suiteName": "standalone",
+  "file": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/main.cjs",
+  "entryMode": "standalone",
+  "actualCommand": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+    "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-FWO7C7\\main.cjs"
+  ],
+  "cwd": "E:\\meng\\baseball_life_sim_semirefactor",
+  "runnerNodeVersion": "v24.19.0",
+  "nodeVersion": "v24.19.0",
+  "startedAt": "2026-10-14T10:58:24.692Z",
+  "elapsedMs": 40.4894,
+  "exitCode": 0,
+  "signal": null,
+  "spawnError": null,
+  "policy": {
+    "timeoutMs": 120000,
+    "outputMaxBuffer": 16000000,
+    "implicitGitShowMaxBuffer": 30000000,
+    "gitCompatibility": true
+  },
+  "environment": {
+    "NODE_OPTIONS": null,
+    "NODE_PATH": null,
+    "TZ": null,
+    "ENTRY_SAFE_CONFIG": {
+      "nonce": "c8a243d134cc579db20fc73f349dcec6",
+      "target": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-FWO7C7\\main.cjs",
+      "entryMode": "standalone",
+      "gitCompatibility": true,
+      "customAssertion": null,
+      "assertionRoots": [
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests",
+        "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-FWO7C7"
+      ]
+    }
+  },
+  "assertionEvidence": {
+    "version": 1,
+    "nonce": "c8a243d134cc579db20fc73f349dcec6",
+    "entryMode": "standalone",
+    "target": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-FWO7C7\\main.cjs",
+    "nodeVersion": "v24.19.0",
+    "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+    "entryStarted": true,
+    "exportCompleted": false,
+    "summary": null,
+    "unhandledError": null,
+    "assertions": {
+      "attempted": 2,
+      "passed": 2,
+      "thrown": 0,
+      "unsupportedAsync": 0,
+      "methods": {
+        "equal": 1,
+        "deepEqual": 1
+      },
+      "samples": [
+        {
+          "method": "equal",
+          "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-FWO7C7\\main.cjs:1:67)",
+          "returned": true
+        },
+        {
+          "method": "deepEqual",
+          "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-FWO7C7\\main.cjs:1:96)",
+          "returned": true
+        }
+      ]
+    },
+    "customAssertion": null,
+    "gitCompatibility": {
+      "enabled": true,
+      "calls": []
+    },
+    "exitCode": 0,
+    "mainFilename": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-FWO7C7\\main.cjs",
+    "standaloneMainMatches": true
+  },
+  "witnessParseError": null,
+  "witnessPath": "docs/test-infrastructure-sprint-0.1-accepted-standalone-evidence-assertions.json",
+  "stdout": "",
+  "stderr": "",
+  "gitBaseline": {
+    "branch": "main",
+    "head": "ab3117653945de0b7013636187c446276a96e634",
+    "main": "ab3117653945de0b7013636187c446276a96e634",
+    "originMain": "ab3117653945de0b7013636187c446276a96e634",
+    "index": ""
+  },
+  "relevantSourceHashesBefore": {
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/main.cjs": "0d95e9586ea6a72d8ac0ea38513de7a0703856e90b32c8fa0407f6bc5f10b582",
+    "tests/entry-safe-runner.cjs": "91659f28bc718eb21569be4a64bfce61a6518b5867a5ca629e5484e15a54a6d0",
+    "tests/entry-safe-preload.cjs": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "relevantSourceHashesAfter": {
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/main.cjs": "0d95e9586ea6a72d8ac0ea38513de7a0703856e90b32c8fa0407f6bc5f10b582",
+    "tests/entry-safe-runner.cjs": "91659f28bc718eb21569be4a64bfce61a6518b5867a5ca629e5484e15a54a6d0",
+    "tests/entry-safe-preload.cjs": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "sourceStable": true,
+  "status": "PASS",
+  "reason": "Verified entry completed with observed successful assertions",
+  "entryVerified": true,
+  "successfulAssertions": 2,
+  "customCheckerInvocations": 0
+}

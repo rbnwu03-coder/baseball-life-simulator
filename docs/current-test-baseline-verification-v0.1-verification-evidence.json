@@ -1,0 +1,2962 @@
+{
+  "task": "Current Test Baseline Verification v0.1 — Read-only",
+  "createdAt": "2026-10-15T07:25:06.682Z",
+  "syntax": [
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-capture.cjs",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "sha256": "c076121932bb567f96874eaa9ea4ed4c7a6164dfb2ddadd364082e7925a8d105"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-finalize.cjs",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "sha256": "0f0b34982b3ba0594ad1954c16d1bec9a7201abf55def0b8ffbbb0ab13729123"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-inventory.cjs",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "sha256": "79c994fa0b7528232016662046411854ab3cac0841c2dc3a03e87a26ec6808fb"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-plan.cjs",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "sha256": "02cc9ab91c9c96df044bbe7dde095db5ddc7eea27516d81a720720a3462417cd"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-report.cjs",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "sha256": "eff26065feb681fc9e17c13650f54c581d53e288ff3471d45d3135403c9312fd"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-run.cjs",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "sha256": "28777dac4aaef84cf7e6c7662493f8216288468ffb670db8d305f0dee73f9738"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-save-coverage.cjs",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "sha256": "9c293d6a5d2205bf6c055ad4f7dc95573fde13a21c465fa735c4ca814e8e138b"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-save-graph.cjs",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "sha256": "f915dda3373a453a53c3d947c7b8627aa01dcd22b8f26e844f3cd4ebf40cea6a"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-source-review.cjs",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "",
+      "sha256": "bb563e72f9264d62a6e94a9e33021c08f9603d3d20ee98a8e9541ccf8368d825"
+    }
+  ],
+  "parsedJson": [
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-baseline-evidence.json",
+      "sha256": "427a6ee31f48689a54394bedd34c1172f7bb2cf71668c43b48849f3408312bbc"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-blocked-entry-review-evidence.json",
+      "sha256": "e65a9dc4f77c265d4d292e1afb19e0daa1575badda3e63a38c56ad87e302aa18"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-coverage-evidence.json",
+      "sha256": "a0057a1801c96747578b59860cd348675d6a570cd58dd5499fe974a4a0376f95"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-execution-plan-evidence.json",
+      "sha256": "0c500b7dc3025902407e4f57a5fe98a9718477cce8f38a1f1e7c8c47cf8ba7a9"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-focused-source-graph-evidence.json",
+      "sha256": "3d11056c24097bc164e574db4d1ddda59546571ed2423fa45348cbb9337b98f5"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-inventory-evidence.json",
+      "sha256": "83a016000c6a2717924e310fa41b616a80e014ccaf5e5e0f499b104949a7e60e"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-inventory-final-evidence.json",
+      "sha256": "0fbdf5a021e42b9cc30e09c2314e6e227b22f35f5c743211d8b613ce6f35ba93"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-provenance-evidence.json",
+      "sha256": "19cfec74af3d2fd49698411778ca4ac3256619d9d40b6b6b0177fa83028cf622"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-source-review-evidence.json",
+      "sha256": "88b8159fde06fc464bb3369e9b60a2a1482ff1b196d5a302221d43008f0041a4"
+    },
+    {
+      "file": "docs/current-test-baseline-verification-v0.1-targeted-execution-evidence.json",
+      "sha256": "ad17ec3bc113a78cfd2cf053bf06e6d44d137ac3dc9933060dc1e50b7f63091a"
+    },
+    {
+      "file": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r4-dependency-evidence-assertions.json",
+      "sha256": "b7db61e16772178c92528651f8c9e1004bda0b02256aa14b6073bd9bae6a7e63"
+    },
+    {
+      "file": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r4-dependency-evidence.json",
+      "sha256": "fd6db780d94a18648bd42c18c9a33625cdb7141c30e1a289d89778868a176e3f"
+    },
+    {
+      "file": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r6-exact-checker-evidence-assertions.json",
+      "sha256": "367036b5a22fc9fc8fcbf0cbb7df887b962e2efb96f8551d06891948a7099ace"
+    },
+    {
+      "file": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r6-exact-checker-evidence.json",
+      "sha256": "e8a8017decd22e9e2bdbc0b56b5900723c0b432395b12690f674958ac11f768e"
+    }
+  ],
+  "reportAndInventoryLinks": [
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-execution-plan.md",
+      "target": "docs/current-test-baseline-verification-v0.1-execution-plan-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/current-test-baseline-verification-v0.1-inventory-final-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-critical-triage-gradient-original-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-critical-triage-match-original-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-accepted-focused-driver-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-bbp-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-canonical-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-career-save-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-contextual-status-panel-accepted-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-runner-throw-settlement-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-first-base-current-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-force-settlement-production-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-ground-settlement-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-formal-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-match-game-record-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-accepted-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-pitch-green-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-adapter-integration-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-accepted-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-decision-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-intent-evidence-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-interpretation-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-signal-projection-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-production-focused-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-legacy-historical-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-r1-save-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-r3-guard-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r4-dependency-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r6-exact-checker-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-save-boundary-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-routine-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-index-caller-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-ss-defense-63-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "target": "docs/test-reliability-audit-v0.1-known-failure-replays-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/current-test-baseline-verification-v0.1-inventory-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-critical-triage-gradient-original-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-critical-triage-match-original-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-accepted-focused-driver-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-bbp-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-canonical-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-career-save-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-contextual-status-panel-accepted-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-runner-throw-settlement-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-first-base-current-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-force-settlement-production-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-ground-settlement-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-formal-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-match-game-record-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-accepted-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-pitch-green-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-adapter-integration-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-accepted-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-decision-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-intent-evidence-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-interpretation-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-signal-projection-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-production-focused-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-legacy-historical-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-r1-save-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-r3-guard-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r4-dependency-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r6-exact-checker-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-save-boundary-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-routine-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-index-caller-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-ss-defense-63-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1-inventory.md",
+      "target": "docs/test-reliability-audit-v0.1-known-failure-replays-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/current-test-baseline-verification-v0.1-inventory-final.md",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/current-test-baseline-verification-v0.1-inventory-final-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/current-test-baseline-verification-v0.1-provenance-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/current-test-baseline-verification-v0.1-source-review-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-decision-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-interpretation-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-adapter-integration-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-intent-evidence-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-signal-projection-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-formal-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-canonical-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-routine-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-match-game-record-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-ground-settlement-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-phase-b-index-caller-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/current-test-baseline-verification-v0.1-source-review-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/current-test-baseline-verification-v0.1-execution-plan.md",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r4-dependency-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r4-dependency-evidence-assertions.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r6-exact-checker-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r6-exact-checker-evidence-assertions.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/current-test-baseline-verification-v0.1-targeted-execution-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/current-test-baseline-verification-v0.1-blocked-entry-review-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-critical-triage-match-original-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/critical-regression-triage-v0.1-root-cause.md",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/test-infrastructure-sprint-0.1-critical-triage-gradient-original-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/critical-regression-triage-v0.1-gradient-distribution-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/critical-regression-triage-v0.1-root-cause.md",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/match-contract-implementation-v0.1-sprint-1.md",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/current-test-baseline-verification-v0.1-baseline-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/current-test-baseline-verification-v0.1-closeout-evidence.json",
+      "exists": false,
+      "planned": true
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/current-test-baseline-verification-v0.1-delivery-evidence.json",
+      "exists": false,
+      "planned": true
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/current-test-baseline-verification-v0.1-source-review-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/current-test-baseline-verification-v0.1-coverage-evidence.json",
+      "exists": true,
+      "planned": false
+    },
+    {
+      "from": "docs/current-test-baseline-verification-v0.1.md",
+      "target": "docs/current-test-baseline-verification-v0.1-verification-evidence.json",
+      "exists": false,
+      "planned": true
+    }
+  ],
+  "rawChecks": [
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs",
+      "raw": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r4-dependency-evidence.json",
+      "witness": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r4-dependency-evidence-assertions.json",
+      "actualCommand": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 9979.5607,
+      "entryVerified": true,
+      "sourceStable": true,
+      "successfulNodeAssertions": 94,
+      "caughtExpectedThrows": 0,
+      "stdoutBytes": 5201,
+      "stderrEmpty": true,
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "rawSha256": "fd6db780d94a18648bd42c18c9a33625cdb7141c30e1a289d89778868a176e3f",
+      "witnessSha256": "b7db61e16772178c92528651f8c9e1004bda0b02256aa14b6073bd9bae6a7e63"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs",
+      "raw": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r6-exact-checker-evidence.json",
+      "witness": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r6-exact-checker-evidence-assertions.json",
+      "actualCommand": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 111.6832,
+      "entryVerified": true,
+      "sourceStable": true,
+      "successfulNodeAssertions": 303,
+      "caughtExpectedThrows": 21,
+      "stdoutBytes": 3000,
+      "stderrEmpty": true,
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "rawSha256": "e8a8017decd22e9e2bdbc0b56b5900723c0b432395b12690f674958ac11f768e",
+      "witnessSha256": "367036b5a22fc9fc8fcbf0cbb7df887b962e2efb96f8551d06891948a7099ace"
+    }
+  ],
+  "inventoryCounters": {
+    "allTestDirectoryFiles": 333,
+    "jsCjsFiles": 320,
+    "browserFixtures": 13,
+    "oldSuiteEntries": 251,
+    "newSuiteEntries": 4,
+    "currentSuiteEntries": 255,
+    "standardNamedSuites": 251,
+    "nonstandardSuiteEntries": 4,
+    "helpersRunnersProbes": 65,
+    "status": {
+      "PASS": 203,
+      "FAIL": 2,
+      "UNVERIFIED": 48,
+      "BLOCKED": 2
+    },
+    "oldSuiteStatus": {
+      "PASS": 200,
+      "FAIL": 2,
+      "UNVERIFIED": 48,
+      "BLOCKED": 1
+    },
+    "newSuiteStatus": {
+      "PASS": 3,
+      "FAIL": 0,
+      "UNVERIFIED": 0,
+      "BLOCKED": 1
+    },
+    "evidenceAge": {
+      "newlyExecuted": 2,
+      "historicalReused": 203
+    },
+    "entrySafeVerifiedProfiles": 25,
+    "entrySafeCliRegistered": 5,
+    "fixedR6Full227": 227
+  },
+  "uniqueStableIdentities": 255,
+  "newFormalSuiteExecutions": 2,
+  "newNamedChecks": 67,
+  "newSuccessfulNodeAssertions": 397,
+  "expectedCaughtThrowsAreNotSuiteFailures": true,
+  "historicalPassReuse": 201,
+  "historicalFailReuse": 2,
+  "unknownSuiteExecutions": 0,
+  "newGameplayDiagnostics": 0,
+  "newFormalFiles": 0,
+  "newFormalSuiteDefinitions": 0,
+  "postAcceptanceSuiteReruns": 0,
+  "sourceReuseReview": "docs/current-test-baseline-verification-v0.1-source-review-evidence.json",
+  "provenance": "docs/current-test-baseline-verification-v0.1-provenance-evidence.json",
+  "initialInventorySupersededByFinal": true,
+  "coverage": {
+    "paths": 1576,
+    "batches": 14,
+    "reportedPartialDirectRead": {
+      "path": "docs/ability-performance-correlation-audit-sprint-1.1.md",
+      "lines": "48-56"
+    },
+    "newFinalArtifacts": "direct read/hash plus final session coverage; no graph completeness claim"
+  },
+  "integrity": {
+    "preservedExistingHashes": 1552,
+    "changedExistingPaths": [],
+    "productionDelta": 0,
+    "formalTestsFixturesSeedsPinsRunnerRegistryDelta": 0,
+    "protectedMetadataUnchanged": true,
+    "protectedContentReadOrHashed": false,
+    "git": {
+      "branch": "main",
+      "head": "ab3117653945de0b7013636187c446276a96e634",
+      "main": "ab3117653945de0b7013636187c446276a96e634",
+      "originMain": "ab3117653945de0b7013636187c446276a96e634",
+      "index": "",
+      "status": " M index.html\n M match-situation-lifecycle.js\n M save.js\n M script.js\n M tests/fast-check-smoke-test.cjs\n M tests/high-school-year-one-opportunity-two-integration-test.js\n M tests/pitch-sequence-state-production-integration-test.js\n M tests/pitch-tactical-decision-production-adapter-integration-test.js\n M tests/pitch-tactical-decision-production-integration-test.js\n M tests/pitch-tactical-intent-evidence-integration-test.js\n M tests/pitch-tactical-interpretation-production-integration-test.js\n M tests/pitch-tactical-signal-projection-production-integration-test.js\n?? docs/critical-regression-repair-a-opportunity-two-acceptance-evidence.json\n?? docs/critical-regression-repair-a-opportunity-two-architecture-coverage-evidence.json\n?? docs/critical-regression-repair-a-opportunity-two-authorized-change-evidence.json\n?? docs/critical-regression-repair-a-opportunity-two-authorized-contract-evidence.json\n?? docs/critical-regression-repair-a-opportunity-two-baseline-evidence.json\n?? docs/critical-regression-repair-a-opportunity-two-bookkeeping-recovery-evidence.json\n?? docs/critical-regression-repair-a-opportunity-two-capture.cjs\n?? docs/critical-regression-repair-a-opportunity-two-closeout-evidence.json\n?? docs/critical-regression-repair-a-opportunity-two-delivery-evidence.json\n?? docs/critical-regression-repair-a-opportunity-two-finalize.cjs\n?? docs/critical-regression-repair-a-opportunity-two-graph-capture.cjs\n?? docs/critical-regression-repair-a-opportunity-two-missing-owner-1-isolated.cjs\n?? docs/critical-regression-repair-a-opportunity-two-missing-owner-2-isolated.cjs\n?? docs/critical-regression-repair-a-opportunity-two-missing-owner-3-isolated.cjs\n?? docs/critical-regression-repair-a-opportunity-two-negative-contract-evidence.json\n?? docs/critical-regression-repair-a-opportunity-two-negative-validation-evidence.json\n?? docs/critical-regression-repair-a-opportunity-two-recovery.cjs\n?? docs/critical-regression-repair-a-opportunity-two-report.cjs\n?? docs/critical-regression-repair-a-opportunity-two-runner.cjs\n?? docs/critical-regression-repair-a-opportunity-two-verification-evidence.json\n?? docs/critical-regression-repair-a-opportunity-two-verify.cjs\n?? docs/critical-regression-repair-a-opportunity-two.md\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-architecture-coverage-evidence.json\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-baseline-evidence.json\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-canonical-game-record-evidence.json\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-capture.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-closeout-evidence.json\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-contract-proof.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-contract-run.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-delivery-evidence.json\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-entry-boundary-proof.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-entry-run.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-extract.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-final-findings-evidence.json\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-final-observations.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-finalize.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-findings-evidence.json\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-fixture-premises-evidence.json\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-fixture-premises.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-graph-capture.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-harness.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-manifest-difference-evidence.json\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-natural-proof.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-normal-canonical-game-record-evidence.json\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-normal-entry-proof.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-normal-entry-replay-run.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-normal-entry-run.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-normal-negatives-run.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-normal-negatives.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-report.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-run.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-supplement-coverage.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-supplemental-coverage-evidence.json\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-verification-evidence.json\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract-verification.cjs\n?? docs/critical-regression-repair-b1-canonical-match-fixture-contract.md\n?? docs/critical-regression-triage-v0.1-architecture-coverage-evidence.json\n?? docs/critical-regression-triage-v0.1-baseline-evidence.json\n?? docs/critical-regression-triage-v0.1-capture.cjs\n?? docs/critical-regression-triage-v0.1-closeout-evidence.json\n?? docs/critical-regression-triage-v0.1-delivery-evidence.json\n?? docs/critical-regression-triage-v0.1-execution-summary-evidence.json\n?? docs/critical-regression-triage-v0.1-finalize.cjs\n?? docs/critical-regression-triage-v0.1-followup-isolation-contract-evidence.json\n?? docs/critical-regression-triage-v0.1-followup.cjs\n?? docs/critical-regression-triage-v0.1-gradient-compact-isolated.cjs\n?? docs/critical-regression-triage-v0.1-gradient-distribution-evidence.json\n?? docs/critical-regression-triage-v0.1-gradient-isolated.cjs\n?? docs/critical-regression-triage-v0.1-gradient-policy-evidence.json\n?? docs/critical-regression-triage-v0.1-gradient-rng-isolated.cjs\n?? docs/critical-regression-triage-v0.1-graph-capture.cjs\n?? docs/critical-regression-triage-v0.1-inspect.cjs\n?? docs/critical-regression-triage-v0.1-isolation-contract-evidence.json\n?? docs/critical-regression-triage-v0.1-isolation.cjs\n?? docs/critical-regression-triage-v0.1-match-browser-contract-evidence.json\n?? docs/critical-regression-triage-v0.1-match-browser-manifest-isolated.cjs\n?? docs/critical-regression-triage-v0.1-match-browser.cjs\n?? docs/critical-regression-triage-v0.1-match-findings.cjs\n?? docs/critical-regression-triage-v0.1-match-index-manifest-isolated.cjs\n?? docs/critical-regression-triage-v0.1-match-isolated.cjs\n?? docs/critical-regression-triage-v0.1-match-manifest-contract-evidence.json\n?? docs/critical-regression-triage-v0.1-match-manifest.cjs\n?? docs/critical-regression-triage-v0.1-match-operands-evidence.json\n?? docs/critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs\n?? docs/critical-regression-triage-v0.1-opportunity-isolated.cjs\n?? docs/critical-regression-triage-v0.1-policy-inspect.cjs\n?? docs/critical-regression-triage-v0.1-report.cjs\n?? docs/critical-regression-triage-v0.1-rng-isolation-contract-evidence.json\n?? docs/critical-regression-triage-v0.1-rng-source-evidence.json\n?? docs/critical-regression-triage-v0.1-rng-source.cjs\n?? docs/critical-regression-triage-v0.1-rng.cjs\n?? docs/critical-regression-triage-v0.1-root-cause-evidence.json\n?? docs/critical-regression-triage-v0.1-root-cause.md\n?? docs/critical-regression-triage-v0.1-statistics.cjs\n?? docs/critical-regression-triage-v0.1-verification-evidence.json\n?? docs/critical-regression-triage-v0.1-verification.cjs\n?? docs/current-test-baseline-verification-v0.1-baseline-evidence.json\n?? docs/current-test-baseline-verification-v0.1-blocked-entry-review-evidence.json\n?? docs/current-test-baseline-verification-v0.1-capture.cjs\n?? docs/current-test-baseline-verification-v0.1-coverage-evidence.json\n?? docs/current-test-baseline-verification-v0.1-execution-plan-evidence.json\n?? docs/current-test-baseline-verification-v0.1-execution-plan.md\n?? docs/current-test-baseline-verification-v0.1-finalize.cjs\n?? docs/current-test-baseline-verification-v0.1-focused-source-graph-evidence.json\n?? docs/current-test-baseline-verification-v0.1-inventory-evidence.json\n?? docs/current-test-baseline-verification-v0.1-inventory-final-evidence.json\n?? docs/current-test-baseline-verification-v0.1-inventory-final.md\n?? docs/current-test-baseline-verification-v0.1-inventory.cjs\n?? docs/current-test-baseline-verification-v0.1-inventory.md\n?? docs/current-test-baseline-verification-v0.1-plan.cjs\n?? docs/current-test-baseline-verification-v0.1-provenance-evidence.json\n?? docs/current-test-baseline-verification-v0.1-report.cjs\n?? docs/current-test-baseline-verification-v0.1-run.cjs\n?? docs/current-test-baseline-verification-v0.1-save-coverage.cjs\n?? docs/current-test-baseline-verification-v0.1-save-graph.cjs\n?? docs/current-test-baseline-verification-v0.1-source-review-evidence.json\n?? docs/current-test-baseline-verification-v0.1-source-review.cjs\n?? docs/current-test-baseline-verification-v0.1-targeted-execution-evidence.json\n?? docs/current-test-baseline-verification-v0.1.md\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/infield-baseball-logic-audit-architecture-evidence.json\n?? docs/infield-baseball-logic-audit-evidence.json\n?? docs/infield-baseball-logic-audit-runner.cjs\n?? docs/infield-baseball-logic-validation-audit-v1.md\n?? docs/infield-scorer-recovery-sprint-5-green-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json\n?? docs/infield-scorer-recovery-sprint-5-validation.json\n?? docs/match-admission-moment-eligibility-contract-v0.1-architecture-coverage-evidence.json\n?? docs/match-admission-moment-eligibility-contract-v0.1-baseline-evidence.json\n?? docs/match-admission-moment-eligibility-contract-v0.1-capture.cjs\n?? docs/match-admission-moment-eligibility-contract-v0.1-closeout-evidence.json\n?? docs/match-admission-moment-eligibility-contract-v0.1-delivery-evidence.json\n?? docs/match-admission-moment-eligibility-contract-v0.1-extract.cjs\n?? docs/match-admission-moment-eligibility-contract-v0.1-finalize.cjs\n?? docs/match-admission-moment-eligibility-contract-v0.1-findings-evidence.json\n?? docs/match-admission-moment-eligibility-contract-v0.1-probe.cjs\n?? docs/match-admission-moment-eligibility-contract-v0.1-run.cjs\n?? docs/match-admission-moment-eligibility-contract-v0.1-source-evidence.json\n?? docs/match-admission-moment-eligibility-contract-v0.1-supplemental-coverage-evidence.json\n?? docs/match-admission-moment-eligibility-contract-v0.1-verification-evidence.json\n?? docs/match-admission-moment-eligibility-contract-v0.1-verify.cjs\n?? docs/match-admission-moment-eligibility-contract-v0.1.md\n?? docs/match-contract-evidence-closure-v0.1-baseline-evidence.json\n?? docs/match-contract-evidence-closure-v0.1-build-routine.cjs\n?? docs/match-contract-evidence-closure-v0.1-canonical.cjs\n?? docs/match-contract-evidence-closure-v0.1-capture.cjs\n?? docs/match-contract-evidence-closure-v0.1-closeout-evidence.json\n?? docs/match-contract-evidence-closure-v0.1-coverage-evidence.json\n?? docs/match-contract-evidence-closure-v0.1-delivery-evidence.json\n?? docs/match-contract-evidence-closure-v0.1-extract.cjs\n?? docs/match-contract-evidence-closure-v0.1-finalize.cjs\n?? docs/match-contract-evidence-closure-v0.1-findings-evidence.json\n?? docs/match-contract-evidence-closure-v0.1-focused-source-graph-evidence.json\n?? docs/match-contract-evidence-closure-v0.1-plan-evidence.json\n?? docs/match-contract-evidence-closure-v0.1-plan.cjs\n?? docs/match-contract-evidence-closure-v0.1-replay-evidence.json\n?? docs/match-contract-evidence-closure-v0.1-routine-copy-evidence.json\n?? docs/match-contract-evidence-closure-v0.1-routine.cjs\n?? docs/match-contract-evidence-closure-v0.1-run.cjs\n?? docs/match-contract-evidence-closure-v0.1-source-evidence.json\n?? docs/match-contract-evidence-closure-v0.1-verification-evidence.json\n?? docs/match-contract-evidence-closure-v0.1-verify.cjs\n?? docs/match-contract-evidence-closure-v0.1.md\n?? docs/match-contract-implementation-v0.1-sprint-1-acceptance-evidence.json\n?? docs/match-contract-implementation-v0.1-sprint-1-baseline-evidence.json\n?? docs/match-contract-implementation-v0.1-sprint-1-capture.cjs\n?? docs/match-contract-implementation-v0.1-sprint-1-closeout-evidence.json\n?? docs/match-contract-implementation-v0.1-sprint-1-coverage-evidence.json\n?? docs/match-contract-implementation-v0.1-sprint-1-delivery-evidence.json\n?? docs/match-contract-implementation-v0.1-sprint-1-extract.cjs\n?? docs/match-contract-implementation-v0.1-sprint-1-finalize.cjs\n?? docs/match-contract-implementation-v0.1-sprint-1-findings-evidence.json\n?? docs/match-contract-implementation-v0.1-sprint-1-focused-source-graph-evidence.json\n?? docs/match-contract-implementation-v0.1-sprint-1-plan-evidence.json\n?? docs/match-contract-implementation-v0.1-sprint-1-report.cjs\n?? docs/match-contract-implementation-v0.1-sprint-1-run.cjs\n?? docs/match-contract-implementation-v0.1-sprint-1-save-coverage.cjs\n?? docs/match-contract-implementation-v0.1-sprint-1-save-graph.cjs\n?? docs/match-contract-implementation-v0.1-sprint-1-save-supplement.cjs\n?? docs/match-contract-implementation-v0.1-sprint-1-source-evidence.json\n?? docs/match-contract-implementation-v0.1-sprint-1-supplemental-coverage-evidence.json\n?? docs/match-contract-implementation-v0.1-sprint-1-verification-evidence.json\n?? docs/match-contract-implementation-v0.1-sprint-1.md\n?? docs/match-contract-separation-v0.1-architecture-coverage-evidence.json\n?? docs/match-contract-separation-v0.1-baseline-evidence.json\n?? docs/match-contract-separation-v0.1-capture.cjs\n?? docs/match-contract-separation-v0.1-closeout-evidence.json\n?? docs/match-contract-separation-v0.1-delivery-evidence.json\n?? docs/match-contract-separation-v0.1-extract.cjs\n?? docs/match-contract-separation-v0.1-finalize.cjs\n?? docs/match-contract-separation-v0.1-findings-evidence.json\n?? docs/match-contract-separation-v0.1-proof.cjs\n?? docs/match-contract-separation-v0.1-run.cjs\n?? docs/match-contract-separation-v0.1-source-evidence.json\n?? docs/match-contract-separation-v0.1-supplemental-coverage-evidence.json\n?? docs/match-contract-separation-v0.1-verification-evidence.json\n?? docs/match-contract-separation-v0.1-verify.cjs\n?? docs/match-contract-separation-v0.1.md\n?? docs/receiver-execution-v2-production-snapshot-save-guard-sprint-10a3b.md\n?? docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-lifecycle-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-observed-validation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-current-source-verification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-initial-test-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r1-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-timeout-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-architecture-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-closeout.md\n?? docs/receiver-execution-v2-sprint-10a3b-r2-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r2-runtime-policy-specification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-extra-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-gradient-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-guard-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r3-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-original-validator.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-reproduction-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r3-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-baseline-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-comparison-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-current-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-green-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-bbp-green-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-career-save-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-compatibility-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-audit-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-dependency-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r4-development-focused-1-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-development-focused-2-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-helper-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-final-helper-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-baseline180-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-current-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-r3-wip-diagnostic-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-first-base-runtime-comparison-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-full-repository-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gates-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gradient-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-gradient-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-legacy-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-production-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-r3-guard-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-r3-guard-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-red-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-related-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-s8-cross-runtime-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-s8-cross-runtime-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-save-focused-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-before-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-source-change-final-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r4-stdout-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-architecture-extra-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-coverage-paths-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-entrypoint-search-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-freeze-comparisons-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-inherited-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-ownership-contract-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-pitch-red-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r5-save-ownership-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r6-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-authorized-delta-contract-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-bbp-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-blocker-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-career-save-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-closeout-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-coverage-paths-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-delivery-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-development-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-exact-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-final-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-full-repository-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-gates-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-independent-review-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-legacy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-manifest-policy-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-pitch-green-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-production-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r1-save-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r3-guard-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-r4-dependency-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-receiver-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-runtime-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-s8-cross-runtime-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-save-boundary-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-save-ownership-contract.md\n?? docs/receiver-execution-v2-sprint-10a3b-r6-source-change-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-confirmation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-audit-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r6-stdout-witness-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-related-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-architecture-coverage-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-audit.cjs\n?? docs/source-freeze-contract-reconciliation-v0.1-authorization-review.md\n?? docs/source-freeze-contract-reconciliation-v0.1-baseline-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-closeout-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-delivery-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-acceptance-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-architecture-coverage-corrected-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-architecture-coverage-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-authorized-contract-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-authorized-revisions-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-baseline-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-bounded-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-capture.cjs\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-closeout-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-coverage-corrected-input.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-coverage-input.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-delivery-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-index-caller-validation-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-plan-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-preflight-recovery-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-preflight-status-diagnostic-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-runner.cjs\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-save-v1-validation-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-suites-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-validation-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b-verification-supplement-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-phase-b.md\n?? docs/source-freeze-contract-reconciliation-v0.1-source-review-evidence.json\n?? docs/source-freeze-contract-reconciliation-v0.1-source-review.cjs\n?? docs/source-freeze-contract-reconciliation-v0.1-validation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-assertion-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-assertion-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-async-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-async-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-buffer-isolation-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-buffer-isolation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-caught-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-caught-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-custom-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-custom-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-custom-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-custom-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-custom-unreviewed-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-custom-unreviewed-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-export-not-called-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-export-not-called-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-exported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-exported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-focused-driver-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-focused-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-gates-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-git-compatible-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-git-compatible-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-git-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-git-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-main-skipped-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-main-skipped-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-mixed-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-mixed-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-runtime-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-runtime-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-spawn-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-spawn-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-standalone-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-standalone-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-timeout-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-timeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-accepted-zero-summary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-accepted-zero-summary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-admission-moment-contract-v0.1-probe-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-admission-moment-contract-v0.1-probe-evidence.json\n?? docs/test-infrastructure-sprint-0.1-architecture-coverage-evidence.json\n?? docs/test-infrastructure-sprint-0.1-baseline-evidence.json\n?? docs/test-infrastructure-sprint-0.1-capture.cjs\n?? docs/test-infrastructure-sprint-0.1-closeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-contextual-status-panel-accepted-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-contextual-status-panel-accepted-evidence.json\n?? docs/test-infrastructure-sprint-0.1-contextual-status-panel-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-contextual-status-panel-evidence.json\n?? docs/test-infrastructure-sprint-0.1-contextual-status-panel-final-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-contextual-status-panel-final-evidence.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-gradient-compact-isolated-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-gradient-compact-isolated-evidence.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-gradient-isolated-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-gradient-isolated-evidence.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-gradient-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-gradient-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-gradient-rng-isolated-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-gradient-rng-isolated-evidence.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-match-browser-manifest-isolated-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-match-browser-manifest-isolated-evidence.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-match-index-manifest-isolated-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-match-index-manifest-isolated-evidence.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-match-isolated-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-match-isolated-evidence.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-match-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-match-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-opportunity-dependencies-isolated-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-opportunity-dependencies-isolated-evidence.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-opportunity-isolated-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-opportunity-isolated-evidence.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-opportunity-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-critical-triage-opportunity-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r4-dependency-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r4-dependency-evidence.json\n?? docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r6-exact-checker-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r6-exact-checker-evidence.json\n?? docs/test-infrastructure-sprint-0.1-delivery-evidence.json\n?? docs/test-infrastructure-sprint-0.1-dependency-supplement-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-assertion-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-assertion-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-async-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-async-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-buffer-isolation-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-buffer-isolation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-caught-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-caught-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-export-not-called-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-export-not-called-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-exported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-exported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-git-compatible-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-git-compatible-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-git-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-git-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-main-skipped-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-main-skipped-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-recovery-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-runtime-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-runtime-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-spawn-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-spawn-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-standalone-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-standalone-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-timeout-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-timeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-1-zero-summary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-1-zero-summary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-assertion-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-assertion-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-async-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-async-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-buffer-isolation-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-buffer-isolation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-caught-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-caught-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-driver-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-export-not-called-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-export-not-called-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-exported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-exported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-focused-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-git-compatible-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-git-compatible-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-git-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-git-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-main-skipped-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-main-skipped-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-runtime-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-runtime-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-spawn-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-spawn-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-standalone-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-standalone-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-timeout-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-timeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-2-zero-summary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-2-zero-summary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-assertion-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-assertion-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-async-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-async-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-buffer-isolation-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-buffer-isolation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-caught-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-caught-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-unreviewed-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-custom-unreviewed-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-driver-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-export-not-called-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-export-not-called-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-exported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-exported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-focused-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-git-compatible-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-git-compatible-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-git-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-git-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-main-skipped-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-main-skipped-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-runtime-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-runtime-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-spawn-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-spawn-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-standalone-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-standalone-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-timeout-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-timeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-development-3-zero-summary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-development-3-zero-summary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-entry-safe-runner.md\n?? docs/test-infrastructure-sprint-0.1-extra-coverage-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-assertion-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-assertion-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-async-unsupported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-async-unsupported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-buffer-isolation-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-buffer-isolation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-caught-failure-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-caught-failure-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-unreviewed-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-custom-unreviewed-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-empty-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-empty-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-export-not-called-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-export-not-called-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-exported-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-exported-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-focused-driver-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-focused-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-gates-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-git-compatible-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-git-compatible-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-git-original-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-git-original-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-main-skipped-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-main-skipped-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-runtime-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-runtime-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-spawn-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-spawn-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-standalone-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-standalone-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-timeout-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-timeout-evidence.json\n?? docs/test-infrastructure-sprint-0.1-final-zero-summary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-final-zero-summary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/\n?? docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/\n?? docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/\n?? docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/\n?? docs/test-infrastructure-sprint-0.1-fixtures-njh333/\n?? docs/test-infrastructure-sprint-0.1-match-contract-evidence-closure-v0.1-canonical-88222-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-match-contract-evidence-closure-v0.1-canonical-88222-evidence.json\n?? docs/test-infrastructure-sprint-0.1-match-contract-evidence-closure-v0.1-canonical-88222-replay-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-match-contract-evidence-closure-v0.1-canonical-88222-replay-evidence.json\n?? docs/test-infrastructure-sprint-0.1-match-contract-evidence-closure-v0.1-routine-38-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-match-contract-evidence-closure-v0.1-routine-38-evidence.json\n?? docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-canonical-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-canonical-evidence.json\n?? docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-ground-settlement-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-ground-settlement-evidence.json\n?? docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-match-game-record-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-match-game-record-evidence.json\n?? docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-routine-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-match-contract-implementation-v0.1-sprint-1-routine-evidence.json\n?? docs/test-infrastructure-sprint-0.1-match-contract-separation-v0.1-proof-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-match-contract-separation-v0.1-proof-evidence.json\n?? docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-accepted-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-accepted-evidence.json\n?? docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-evidence.json\n?? docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-final-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-final-evidence.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-adapter-integration-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-adapter-integration-evidence.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-decision-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-decision-evidence.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-index-caller-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-index-caller-evidence.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-intent-evidence-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-intent-evidence-evidence.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-interpretation-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-interpretation-evidence.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-legacy-historical-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-legacy-historical-evidence.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-r1-save-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-r1-save-evidence.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-r3-guard-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-r3-guard-evidence.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-save-boundary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-save-boundary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-save-v1-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-save-v1-evidence.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-signal-projection-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-phase-b-signal-projection-evidence.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-accepted-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-accepted-evidence.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-evidence.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-final-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-final-evidence.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-accepted-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-accepted-evidence.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-evidence.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-final-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-final-evidence.json\n?? docs/test-infrastructure-sprint-0.1-r6-exact-checker-accepted-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-r6-exact-checker-accepted-evidence.json\n?? docs/test-infrastructure-sprint-0.1-r6-exact-checker-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-r6-exact-checker-evidence.json\n?? docs/test-infrastructure-sprint-0.1-r6-exact-checker-final-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-r6-exact-checker-final-evidence.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-force-settlement-production-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-force-settlement-production-evidence.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-formal-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-formal-evidence.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-ground-lifecycle-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-ground-lifecycle-evidence.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-missing-owner-1-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-missing-owner-1-evidence.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-missing-owner-2-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-missing-owner-2-evidence.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-missing-owner-3-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-missing-owner-3-evidence.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-runner-throw-settlement-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-runner-throw-settlement-evidence.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-ss-defense-63-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-ss-defense-63-evidence.json\n?? docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-contract-proof-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-contract-proof-evidence.json\n?? docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-entry-boundary-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-entry-boundary-evidence.json\n?? docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-natural-proof-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-natural-proof-evidence.json\n?? docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-normal-entry-proof-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-normal-entry-proof-evidence.json\n?? docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-normal-entry-replay-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-normal-entry-replay-evidence.json\n?? docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-normal-negatives-evidence-assertions.json\n?? docs/test-infrastructure-sprint-0.1-repair-b1-canonical-fixture-normal-negatives-evidence.json\n?? docs/test-infrastructure-sprint-0.1-source-change-evidence.json\n?? docs/test-infrastructure-sprint-0.1-targets-evidence.json\n?? docs/test-infrastructure-sprint-0.1-validation-evidence.json\n?? docs/test-reliability-audit-v0.1-architecture-evidence.json\n?? docs/test-reliability-audit-v0.1-baseline-evidence.json\n?? docs/test-reliability-audit-v0.1-closeout-evidence.json\n?? docs/test-reliability-audit-v0.1-coverage-evidence.json\n?? docs/test-reliability-audit-v0.1-delivery-evidence.json\n?? docs/test-reliability-audit-v0.1-entry-buffer-replays-evidence.json\n?? docs/test-reliability-audit-v0.1-extra-coverage-evidence.json\n?? docs/test-reliability-audit-v0.1-extract.cjs\n?? docs/test-reliability-audit-v0.1-finalize-inventory.cjs\n?? docs/test-reliability-audit-v0.1-freeze-review.cjs\n?? docs/test-reliability-audit-v0.1-git-buffer-diagnostic-evidence.json\n?? docs/test-reliability-audit-v0.1-infrastructure-review-evidence.json\n?? docs/test-reliability-audit-v0.1-inventory-evidence.json\n?? docs/test-reliability-audit-v0.1-inventory-final-evidence.json\n?? docs/test-reliability-audit-v0.1-inventory.cjs\n?? docs/test-reliability-audit-v0.1-known-failure-replays-evidence.json\n?? docs/test-reliability-audit-v0.1-source-freeze-candidates-evidence.json\n?? docs/test-reliability-audit-v0.1-source-freeze-review-evidence.json\n?? docs/test-reliability-audit-v0.1-test-inventory.md\n?? docs/test-reliability-audit-v0.1-validation-evidence.json\n?? docs/test-reliability-audit-v0.1.md\n?? install.ps1\n?? receiver-source-snapshot.js\n?? tests/canonical-match-regression-integration-test.cjs\n?? tests/entry-safe-export-child.cjs\n?? tests/entry-safe-preload.cjs\n?? tests/entry-safe-runner-test.cjs\n?? tests/entry-safe-runner.cjs\n?? tests/helpers/\n?? tests/receiver-execution-v2-production-snapshot-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-harness.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-closeout.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r3-source-review.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-closeout.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-dependency-audit.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runtime-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r5-ownership-audit.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-independent-review.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs\n?? tests/receiver-source-index-authorized-wiring.cjs\n?? tests/receiver-source-save-authorized-delta.cjs\n?? tests/routine-commentary-contract-test.cjs\n?? tests/source-freeze-reconciliation-exact-contract-test.cjs\n"
+    }
+  },
+  "offlineBookkeepingAndSourceComparisonsAreNotSuiteExecutions": true
+}

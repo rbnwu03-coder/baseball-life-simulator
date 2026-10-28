@@ -1,0 +1,121 @@
+{
+  "suiteName": "git-compatible",
+  "file": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/git.cjs",
+  "entryMode": "standalone",
+  "actualCommand": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+    "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq\\git.cjs"
+  ],
+  "cwd": "E:\\meng\\baseball_life_sim_semirefactor",
+  "runnerNodeVersion": "v24.19.0",
+  "nodeVersion": "v24.19.0",
+  "startedAt": "2026-10-14T10:54:19.138Z",
+  "elapsedMs": 74.9231,
+  "exitCode": 0,
+  "signal": null,
+  "spawnError": null,
+  "policy": {
+    "timeoutMs": 120000,
+    "outputMaxBuffer": 16000000,
+    "implicitGitShowMaxBuffer": 30000000,
+    "gitCompatibility": true
+  },
+  "environment": {
+    "NODE_OPTIONS": null,
+    "NODE_PATH": null,
+    "TZ": null,
+    "ENTRY_SAFE_CONFIG": {
+      "nonce": "b3225b7697690f730cf2699b9e98d349",
+      "target": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq\\git.cjs",
+      "entryMode": "standalone",
+      "gitCompatibility": true,
+      "customAssertion": null,
+      "assertionRoots": [
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests",
+        "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq"
+      ]
+    }
+  },
+  "assertionEvidence": {
+    "version": 1,
+    "nonce": "b3225b7697690f730cf2699b9e98d349",
+    "entryMode": "standalone",
+    "target": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq\\git.cjs",
+    "nodeVersion": "v24.19.0",
+    "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+    "entryStarted": true,
+    "exportCompleted": false,
+    "summary": null,
+    "unhandledError": null,
+    "assertions": {
+      "attempted": 2,
+      "passed": 2,
+      "thrown": 0,
+      "unsupportedAsync": 0,
+      "methods": {
+        "equal": 2
+      },
+      "samples": [
+        {
+          "method": "equal",
+          "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq\\git.cjs:1:177)",
+          "returned": true
+        },
+        {
+          "method": "equal",
+          "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq\\git.cjs:1:203)",
+          "returned": true
+        }
+      ]
+    },
+    "customAssertion": null,
+    "gitCompatibility": {
+      "enabled": true,
+      "calls": [
+        {
+          "command": "git",
+          "args": [
+            "show",
+            "ab3117653945de0b7013636187c446276a96e634:script.js"
+          ],
+          "policy": "implicit git show only",
+          "maxBuffer": 30000000
+        }
+      ]
+    },
+    "exitCode": 0,
+    "mainFilename": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-1ln9Lq\\git.cjs",
+    "standaloneMainMatches": true
+  },
+  "witnessParseError": null,
+  "witnessPath": "docs/test-infrastructure-sprint-0.1-development-3-git-compatible-evidence-assertions.json",
+  "stdout": "",
+  "stderr": "",
+  "gitBaseline": {
+    "branch": "main",
+    "head": "ab3117653945de0b7013636187c446276a96e634",
+    "main": "ab3117653945de0b7013636187c446276a96e634",
+    "originMain": "ab3117653945de0b7013636187c446276a96e634",
+    "index": ""
+  },
+  "relevantSourceHashesBefore": {
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/git.cjs": "7d4921d6a5b6ea62ce3c61470a8433652c9e2d95b1d384bcafe82149698f7e4e",
+    "tests/entry-safe-runner.cjs": "0859f3b19aa9d2e4510049a490744869e7937dc9bf15356612f53c011b6a6fb1",
+    "tests/entry-safe-preload.cjs": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "relevantSourceHashesAfter": {
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/git.cjs": "7d4921d6a5b6ea62ce3c61470a8433652c9e2d95b1d384bcafe82149698f7e4e",
+    "tests/entry-safe-runner.cjs": "0859f3b19aa9d2e4510049a490744869e7937dc9bf15356612f53c011b6a6fb1",
+    "tests/entry-safe-preload.cjs": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "sourceStable": true,
+  "status": "PASS",
+  "reason": "Verified entry completed with observed successful assertions",
+  "entryVerified": true,
+  "successfulAssertions": 2,
+  "customCheckerInvocations": 0
+}

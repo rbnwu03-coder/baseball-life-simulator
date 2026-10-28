@@ -1,0 +1,266 @@
+{
+  "node": "v24.19.0",
+  "gitCompatibility": false,
+  "rows": [
+    {
+      "file": "high-school-year-one-competition-loop-test.js",
+      "status": "PASS",
+      "nodeAssertions": 28,
+      "customChecks": null,
+      "entry": true,
+      "elapsedMs": 232,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "tests/entry-safe-preload.cjs",
+        "tests/high-school-year-one-competition-loop-test.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "✓ 1. Opportunity 1 建立正式 persistent history\n✓ 2. Opportunity 1 save/reload 不 reroll\n✓ 3. Match settlement 後建立 accumulated evaluation\n✓ 4. Evaluation 消費 current readiness、coach trust 與 health\n✓ 5. Evaluation 消費 actual PA／defensive innings\n✓ 6. Evaluation 消費 canonical match decision／execution 與 Match Experience truth\n✓ 7. 單一正向樣本因 smoothing 維持 Bench\n✓ 8. Match 1 history 回填 actual exposure 與 evaluation consequence\n✓ 9. Production settlement 正式建立 Opportunity N+1\n✓ 10. Opportunity N+1 讀 updated evaluation trend 與前次 actual exposure\n✓ 11. Opportunity N+1 使用 current canonical role 而非 projected role\n✓ 12. Opportunity N+1 identity 綁定 school-year／phase／index 且與 Opportunity 1 不同\n✓ 13. Competition refresh 重算 current player gap\n✓ 14. selected school-year identity 在 N → N+1 不變\n✓ 15. Canonical incumbent actors 在 refresh 後全數保留\n✓ 15a. 賽後 production narrative 顯示已建立的下一次評估安排\n✓ 15b. 玩家可讀評估不洩漏 raw reason identifiers\n✓ 16. Role／evaluation／history／competition／N+1／roster reload 穩定\n✓ 17. 重進結算不重複 evaluation／role／history\n✓ 18. Rotation sustained success 正式升 Starter 並同步 role derivatives\n✓ 19. Promotion 保留被取代 incumbent actor\n✓ 20. Demotion 恢復 canonical incumbent 且不重生 roster actors\n✓ 21. Positive evaluation 可在不 promotion 時提高 planned exposure\n✓ 22. Evaluation modifier 小於 canonical role base 差距\n✓ 23. Training-only capability growth 縮小 incumbent gap\n✓ 24. Training-only growth 可提高下一次機會但不直接跳角色\n✓ 25. 長板凳文案不再保證未實現的第七局出場\n✓ 26. Production 在 script 前載入 Competition Reassessment module\nHigh School Year One Competition Loop: 28/28 passed.\n",
+      "stderr": "",
+      "error": null,
+      "timedOut": false
+    },
+    {
+      "file": "high-school-year-one-opportunity-two-integration-test.js",
+      "status": "PASS",
+      "nodeAssertions": 40,
+      "customChecks": null,
+      "entry": true,
+      "elapsedMs": 507,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "tests/entry-safe-preload.cjs",
+        "tests/high-school-year-one-opportunity-two-integration-test.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "✓ 1. Match 1 正式產生 Opportunity N+1\n✓ 2. Opportunity 2 與 Opportunity 1 identity 不同\n✓ 3. Opportunity 2 直接進入 production follow-up event\n✓ 4. Match 2 直接重用既有 Opportunity 2 而非重抽\n✓ 5. Match 2 使用既有完整 Match Engine state\n✓ 6. Match 2 為 bounded evaluation/practice match\n✓ 7. Match 2 保持 selected school-year roster identity\n✓ 8. Match 2 保持 canonical incumbent actor identities\n✓ 9. Match 1 與 Match 2 各自保存最小 history\n✓ 10. 第二場產生第二筆 performance evidence\n✓ 11. 第二場 actual exposure 回填 Opportunity history\n✓ 12. 第二次 Competition Reassessment 已執行\n✓ 13. Bench 兩筆正向 production evidence 可升 Rotation\n✓ 14. Bench 正向 Match 1 改善 Opportunity 2 context\n✓ 15. Role change aftermath 即時顯示目前 Rotation\n✓ 16. Year journey 讀取起始 Bench 與結束 Rotation\n✓ 17. Match 2 pending save/reload 不 reroll\n✓ 18. 第二場完成後不再生成第三個高一 Opportunity\n✓ 19. Starter 第一筆負向結果進入 Opportunity 2\n✓ 20. Starter 兩筆負向 evidence production-reachable 降為 Rotation\n✓ 21. Demotion feedback 由 canonical reassessment reasons 產生\n✓ 22. Rotation 兩筆正向樣本仍依 canonical smoothing 留在 Rotation\n✓ 23. Rotation 正向 trajectory 保存 promotion pressure\n✓ 24. Rotation 正向 feedback 明示仍需下一筆正式證據\n✓ 25. 下一筆 qualifying evidence 已可沿 canonical 門檻自然升 Starter\n✓ 26. Mixed path 維持 Rotation\n✓ 27. Match 1 no appearance 不虛構負面 performance\n✓ 28. No-appearance 後仍有合法 Opportunity 2 consumer\n✓ 29. 兩次 no appearance 合法維持 Bench\n✓ 30. Call-home 明說未上場且不偽造場上選擇\n✓ 31. Starter 不保存 long-bench low point\n✓ 32. Starter preparation scene 不聲稱名字未被念到\n✓ 33. Starter aspiration 保留名單不保證結果的 truth\n✓ 34. Year settlement 消費兩次 Opportunity journey\n✓ 35. Year summary 使用 final canonical role\n✓ 36. Year settlement/reload 保留 role、evaluation 與 bounded history\n✓ 37. Match 2 evaluation/reassessment exactly once\n✓ 38. Production event 的 Match 2 可由既有 Match Engine 實際走到結算\n✓ 39. Rotation → Starter canonical sampleCount >= 3 未被降低\n✓ 40. 高一小結不清除跨年 evaluation pressure\nHigh School Year One Opportunity Two Integration: 40/40 passed.\n",
+      "stderr": "",
+      "error": null,
+      "timedOut": false
+    },
+    {
+      "file": "high-school-year-transition-continuity-test.js",
+      "status": "PASS",
+      "nodeAssertions": 44,
+      "customChecks": null,
+      "entry": true,
+      "elapsedMs": 228,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "tests/entry-safe-preload.cjs",
+        "tests/high-school-year-transition-continuity-test.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "✓ 1. 相同 transition inputs 產生 deterministic Y2 roster\n✓ 2. Y2 建立同校但不同 school-year roster identity\n✓ 3. 非畢業 returner actor IDs 全數保留\n✓ 4. Returner 年級 1→2、2→3 且年齡同步\n✓ 5. Y1 year-3 actors 全數移出 Y2 active roster\n✓ 6. Incoming class 補足畢業人數並全部為 year 1\n✓ 7. Incoming IDs deterministic 且不碰撞 returners\n✓ 8. Evolved roster 保持九守位合法 coverage\n✓ 9. Evolved roster 保留 bench 與 pitching depth\n✓ 10. Y2 Team Strength 由 evolved roster 重算\n✓ 11. Senior starter graduation 使 Y2 starter actor 與 competition snapshot 更新\n✓ 12. Deterministic 強校新生可加入同守位競爭\n✓ 13. Incoming freshman pressure 可提高 competition density\n✓ 14. Generic transition API 可形成 Y2→Y3 schema\n✓ 15. Y2→Y3 仍保留未畢業 actor IDs\n✓ 16. Y1 final canonical role 作為 Y2 prior 並保持 code authority\n✓ 17. Role code／label／context 在 Y2 entry 同步\n✓ 18. Y1 evaluation samples 與 positive pressure 跨年保留\n✓ 19. Evaluation identity 升為同校 career-level identity\n✓ 20. Y1 applied match identities 跨年保留\n✓ 21. Y2 transition 不增加 performance sample\n✓ 22. Y2 transition 建立新 Opportunity 並保留 Y1 history\n✓ 23. Y2 Opportunity 使用 updated role、competition 與 prior exposure\n✓ 24. Y2 roster identity 更新且 school identity 不變\n✓ 25. Production transition 保留 returners、移除 graduates、加入 incoming\n✓ 26. Y2 selected roster assignment 與 canonical Rotation 一致\n✓ 27. Competition context 由 Y2 roster 重算而非沿用 Y1 snapshot\n✓ 28. Y2 team strength 綁定 evolved selected roster\n✓ 29. Development、coachTrust 與 canonical positions 跨年不變\n✓ 30. 舊 season totals 被封存在 transition metadata 且 Y2 從零開始\n✓ 31. 第一個 Y2 role-sensitive narrative 讀 canonical role 與 updated competition\n✓ 32. Y2 initialization save/reload 不 reroll roster／incoming／role／competition\n✓ 33. Y2 Opportunity 進入 Existing Match Engine\n✓ 34. Y2 first formal evidence 追加為第三筆而非 transition sample\n✓ 35. Rotation 三筆正向 evidence 依原門檻升 Starter\n✓ 36. Promotion 同步 code／label／context／roster assignment\n✓ 37. Opportunity history 同時保留 Y1×2 與 Y2×1\n✓ 38. Y2 formal match history 帶 year metadata\n✓ 39. Y2 evidence settlement 不建立錯誤的 Y1 N+1\n✓ 40. Y2 match settlement exactly once\n✓ 41. Y2 evidence save/reload 保留 match identity、evidence、role 與 exactly-once IDs\n✓ 42. Negative pressure 跨年保留且 Y2 poor evidence 繼續累積\n✓ 43. Negative carryover 不會在 Y2 無故升級角色\n✓ 44. Y2 usage plan 與 canonical role 分離\nHigh School Year Transition Continuity v1: 44/44 passed.\n",
+      "stderr": "",
+      "error": null,
+      "timedOut": false
+    },
+    {
+      "file": "high-school-integration-1-1-test.js",
+      "status": "FAIL",
+      "nodeAssertions": 9,
+      "customChecks": null,
+      "entry": true,
+      "elapsedMs": 118,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "tests/entry-safe-preload.cjs",
+        "tests/high-school-integration-1-1-test.js"
+      ],
+      "exitCode": 1,
+      "signal": null,
+      "stdout": "✓ 1. 注入相同 RNG 會得到相同初始能力形狀\n✓ 2. 初始擲骰固定總量 12 且每項只在 1–3\n✓ 3. 配置點固定 3 且單項上限 2\n✓ 4. 創角介面會把能力 key 轉成玩家可讀名稱\n✓ 5. 正式創角會保存 archetype、能力形狀、配置、投打與最初願望\n✓ 6. canonical 守位是唯一寫入來源，舊欄位只做相容映射\n✓ 7. 理想自我與教練評估可產生一致／部分一致／衝突\n✓ 8. 複合判定可形成先發／輪替／發展三種內部角色\n✓ 9. 三種角色都進入同一場正式交流賽\n",
+      "stderr": "script.js:11439\r\n    sample: BattedBallPhysical.deterministicUnit(\"g1-c-third-strike-catch\", state.paIdentity, catcher.id)\r\n            ^\r\n\r\nReferenceError: BattedBallPhysical is not defined\r\n    at resolveHighSchoolThirdStrikeCatch (script.js:11439:13)\r\n    at resolveHighSchoolOffensiveDecision (script.js:11458:28)\r\n    at advanceHighSchoolYearOneAfterMomentOne (script.js:11630:10)\r\n    at resolveHighSchoolYearOneMatch (script.js:14325:10)\r\n    at run (evalmachine.<anonymous>:7:262)\r\n    at evalmachine.<anonymous>:11:22\r\n    at evalmachine.<anonymous>:12:3\r\n    at Script.runInContext (node:vm:149:12)\r\n    at Object.runInContext (node:vm:301:6)\r\n    at evaluate (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-integration-1-1-test.js:51:35)\r\n\r\nNode.js v24.19.0\r\n",
+      "error": null,
+      "timedOut": false
+    },
+    {
+      "file": "high-school-integration-1-2-3-test.js",
+      "status": "PASS",
+      "nodeAssertions": 28,
+      "customChecks": null,
+      "entry": true,
+      "elapsedMs": 126,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "tests/entry-safe-preload.cjs",
+        "tests/high-school-integration-1-2-3-test.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "✓ 1. half-inning playback 會在一出局與兩出局形成節奏錨點\n✓ 2. 第三出局後先呈現半局結束，再把 authoritative outs reset 為 0\n✓ 3. 半局結束與攻守交換都保留在 authoritative simulation log\n✓ 4. 出局 feed 使用自然語言標示 out state，不顯示逐球 count\n✓ 5. Current Situation 的 OUT 燈可顯示到第三個出局\n✓ 6. meaningful decision ready phase 不會被 playback step 跳過\n✓ 7. Ball Context schema 支援五種 ground-ball truth\n✓ 8. 防守 Situation 持有 Ball Context，resolver 讀取相同 type\n✓ 9. hard／slow／deep grounder 產生不同玩家可讀描述\n✓ 10. Ball Context presentation 不顯示 raw speed 或 internal identifier\n✓ 11. 打者投打側與腳程以玩家可讀文字呈現\n✓ 12. 強勁正面球的雙殺分布明顯優於慢滾球＋快打者\n✓ 13. 慢滾球＋快打者以 one-out partial 為主要結果\n✓ 14. batter speed 會實際改變第二段傳球分布\n✓ 15. relevant runner speed 會實際改變第一段封殺分布\n✓ 16. 深處滾地球搭配弱臂時第二段傳球風險上升\n✓ 17. fielding／reaction 會改變第一段處理結果\n✓ 18. arm／throwing 會改變第二段傳球品質\n✓ 19. 雙殺 resolver 正式區分 twoOuts／oneOut／zeroOuts／error\n✓ 20. 合理雙殺判斷與執行品質分開記錄\n✓ 21. primary／secondary cause 產生不同語意解釋\n✓ 22. one-out partial outcome 明確說明已完成第一個封殺\n✓ 23. Match Mode 形成 Scoreboard → Situation → Assignment → Coach → Choices 閱讀順序\n✓ 24. Situation 集中呈現比分、出局、壘況、守位、打者與 Ball Context\n✓ 25. Coach 與 Player Choices 相鄰，Feed／舊回饋留在次要 context column\n✓ 26. Choice 後固定以 Execution → Outcome → Cause → 場上回應呈現\n✓ 27. save normalization 深層保存 Ball Context 與防守原因\n✓ 28. match-mode-scoreboard 可作為未來獨立 Match Entry hook\n\nHigh School Integration 1.2.3：28/28 通過\n",
+      "stderr": "",
+      "error": null,
+      "timedOut": false
+    },
+    {
+      "file": "high-school-year-two-competition-loop-test.js",
+      "status": "PASS",
+      "nodeAssertions": 39,
+      "customChecks": null,
+      "entry": true,
+      "elapsedMs": 392,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "tests/entry-safe-preload.cjs",
+        "tests/high-school-year-two-competition-loop-test.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "✓ 1. Spring refresh 保持 Opportunity identity\n✓ 2. Spring refresh 保持 match／year／phase identity\n✓ 3. Coach／fatigue／pain／injury risk 進入 refresh snapshot\n✓ 4. 最終準備狀態可改善同一 Opportunity score\n✓ 5. Refresh 更新同一 history record 而非新增 Opportunity\n✓ 6. Training/readiness refresh 不增加 performance sample\n✓ 7. Canonical Spring 永遠進 Existing Match Engine\n✓ 8. Spring 使用 evolved Y2 roster identity\n✓ 9. Spring settlement 形成 Y2 evidence #1\n✓ 10. Autumn Opportunity 不在 preparation events 前預建\n✓ 11. Autumn 建立獨立 deterministic Opportunity 2\n✓ 12. Autumn 讀 post-Spring role／trend／actual exposure\n✓ 13. Autumn 讀最新 trust／health context\n✓ 14. Autumn Opportunity save/reload 不 reroll\n✓ 15. Autumn 進 Existing Match Engine\n✓ 16. Autumn 沿用 selected Y2 roster 且使用不同 opponent identity\n✓ 16a. Autumn pending Match save/reload 保留 roster、cursor 與 Opportunity\n✓ 17. Canonical Autumn event choices 來自 Match decision 而非 fixed performance effects\n✓ 18. Autumn settlement 形成獨立 Y2 evidence #2\n✓ 19. Y2 formal history 保存 Spring 與 Autumn\n✓ 20. Opportunity history 保存 Y2 Spring 與 Autumn 且不超過 bounded limit\n✓ 21. Autumn 後提供 player-facing canonical reassessment feedback\n✓ 22. Autumn settlement exactly once\n✓ 23. Y2 Summary 消費兩場 exposure 與 starting/ending role\n✓ 24. Y2 Summary 不依賴 legacy autumn proof flag\n✓ 24a. Y2 Summary save/reload 保持相同 systemic journey\n✓ 25. Y2→Y3 production 使用 generic transition 並更新 roster identity\n✓ 26. Y3 移除 Y2 year-3 actors並保留未畢業 IDs\n✓ 27. Y3 重算 competition 且不預建 Y3 season content\n✓ 28. Y3 entry save/reload 不 reroll\n✓ 29. Y2-only Bench 兩筆正向 evidence 依原 threshold 可升 Rotation\n✓ 30. Spring／Autumn no appearance 不增加 performance sample\n✓ 31. Rotation 可由累積三筆正向 evidence 依既有 threshold 升 Starter\n✓ 32. Starter 連續負向 Spring／Autumn evidence 可依既有 threshold demote\n✓ 33. Spring good／Autumn bad mixed path 不強制角色變化\n✓ 34. Spring result 透過 evaluation trend 改變 Autumn Opportunity\n✓ 35. Canonical P route 在 Spring／Autumn 一致 deferred/noAppearance\n✓ 36. Pitcher Summary 不偽造正式投球證明\n✓ 37. Canonical C route 保留 Catcher-compatible formal Match\nHigh School Year Two Competition Loop: 39/39 passed.\n",
+      "stderr": "",
+      "error": null,
+      "timedOut": false
+    },
+    {
+      "file": "high-school-three-year-spine-test.js",
+      "status": "PASS",
+      "nodeAssertions": 0,
+      "customChecks": 54,
+      "entry": true,
+      "elapsedMs": 220,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "tests/entry-safe-preload.cjs",
+        "tests/high-school-three-year-spine-test.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "✓ 1. Player Schema 保留三個高二持久欄位\n✓ 2. SAVE_VERSION 已升級為 15\n✓ 3. localStorage key 保持不變\n✓ 4. v12 存檔補入高二預設欄位\n✓ 5. v12 遷移後標記為目前 v15\n✓ 6. v12 高一小結載入後仍停在原結果事件\n✓ 7. v12 高一小結可接入新的高二入口\n✓ 8. v12 高三存檔不會倒退到高二\n✓ 9. v12 成年存檔不會倒退到高中\n✓ 10. v13 高二 step 可完整 round-trip\n✓ 11. v13 高二 result 與 detail 可完整 round-trip\n✓ 12. 高二入口固定為 17 歲與 step 0\n✓ 13. 高二八個 step 依固定順序路由\n✓ 14. 高二八個事件與小結都可由 getEvent 取得\n✓ 15. 高二每個事件都提供具體選擇\n✓ 16. 高二每幕選擇都會實際套用既有 Effects\n✓ 17. 高二每幕選擇只推進一個 step\n✓ 18. 快速重複點擊不會重複套用效果\n✓ 19. 快速重複點擊不會重複推進\n✓ 20. 重複 Render 不重複套用 Gameplay 狀態\n✓ 21. 高二小結只會正式產生一次\n✓ 22. 高二小結 result 與 detail 都不是空白\n✓ 23. 八幕完成後進入青棒第二年小結\n✓ 24. 高二整段不會提前寫入 careerExit\n✓ 25. 高二小結正式接回既有高三入口\n✓ 26. 既有高三八幕仍可產生生涯出口\n✓ 27. 高二 Debug 書籤可直接進入合法入口\n✓ 28. 高二時間標籤顯示八幕進度\n✓ 29. 高二狀態面板建立當下、短期與章節目標\n✓ 30. 高二 aspiration guide 已連接\n✓ 31. 高二小結具有下一章期待 hook\n✓ 32. Skill growth audit 正式納入高二事件集合\n✓ 33. 春季聯賽登錄為 Validation Event\n✓ 34. 秋季盃賽登錄為 Validation Event\n✓ 35. 高二 Competition Presentation 不自行管理比分\n✓ 36. Career Spine 節點由 20 增至 22\n✓ 37. 高二與高二小結 Contract node ID 唯一存在\n✓ 38. high-school-year-two-missing 已從已知缺口移除\n✓ 39. 高二 step 0 Snapshot 可辨識且對應真實事件\n✓ 40. 高二錯誤年齡回報 inconsistent\n✓ 41. 高二越界 step 回報 inconsistent\n✓ 42. 結果提前存在於高二主章會回報 inconsistent\n✓ 43. 高二小結缺少 result／detail 會回報 inconsistent\n✓ 44. 合法高二小結 Snapshot 可辨識\n✓ 45. 高一八幕選項與效果指紋更新為 Sprint C Human UX 累積基線\n✓ 46. 高三八幕選項與效果指紋維持 Sprint 前基線\n✓ 47. 高二事件沒有直接寫入 careerExit\n✓ 48. 高二事件沒有新增 roll 或隱藏 outcome 欄位\n✓ 49. Legacy fixture 不再以春秋 flags 冒充 canonical 全年證明\n✓ 50. 教練信任不能替代缺少的 formal match history\n✓ 51. 缺少 formal match history 時如實標記競爭證據未完整\n✓ 52. 傷病風險 6、疼痛 3 且帶傷硬撐的合法流程可抵達健康風險小結\n✓ 53. 三條人工優先路線不會無條件得到相同小結\n✓ 54. 捕手、投手、內野手與外野手各自看到成立的秋季守備行動\n\nArchitecture Sprint 4.2 High School Three-Year Spine：54/54 通過\n",
+      "stderr": "",
+      "error": null,
+      "timedOut": false
+    },
+    {
+      "file": "coach-response-expansion-test.js",
+      "status": "PASS",
+      "nodeAssertions": 10,
+      "customChecks": null,
+      "entry": true,
+      "elapsedMs": 42,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "tests/entry-safe-preload.cjs",
+        "tests/coach-response-expansion-test.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "Coach Response Expansion validations：10\nGolden High School Showcase（三種角色同場三段任務）：通過\nPhase 8 Coach Response Expansion test passed.\n",
+      "stderr": "",
+      "error": null,
+      "timedOut": false
+    },
+    {
+      "file": "match-experience-development-foundation-v1-test.js",
+      "status": "PASS",
+      "nodeAssertions": 46,
+      "customChecks": null,
+      "entry": true,
+      "elapsedMs": 632,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "tests/entry-safe-preload.cjs",
+        "tests/match-experience-development-foundation-v1-test.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "✓ 1. Match Experience 使用獨立 version／settlement contract\n✓ 2. Production index 在 script.js 前載入 Match Experience module\n✓ 3. player.baseballSkills 仍是唯一 Current Skill truth\n✓ 4. Evidence derivation 不呼叫 Development processor\n✓ 5. Evidence contract 含 identity／participation／三層 evidence／attribution／snapshot\n✓ 6. Outcome、Experience、Development state 分離\n✓ 7. 7 局 Exposure 大於 1 局\n✓ 8. Defensive innings exposure 具 diminishing return\n✓ 9. 4 PA Exposure 大於 1 PA\n✓ 10. PA exposure 非線性固定倍率\n✓ 11. Bench 0 innings／0 PA 沒有 Evidence\n✓ 12. Bench 0 participation 沒有 Development Context\n✓ 13. 1 defensive inning／0 chances 只有 Exposure Evidence\n✓ 14. 無守備機會不產生 catching／throwing／reaction Active Evidence\n✓ 15. 相同 decision／execution 不因 hit／strikeout outcome 改 Experience value\n✓ 16. Strong decision＋weak execution 可同時留下 IQ 與 corrective execution Evidence\n✓ 17. Poor decision＋successful execution 不給 high IQ reinforcement\n✓ 18. Teammate-caused failure 保留 Player strong execution\n✓ 19. Routine 2B play 即使無 Decision UI 仍有 Active Evidence\n✓ 20. 2B pivot fixture 映射 reaction／catching／throwing／baseballIQ\n✓ 21. 2B evidence 使用 canonical pivot participation type\n✓ 22. Hit＋ordinary execution 不會自動成為 highValue\n✓ 23. Correct approach＋incomplete execution＋strikeout 仍有正 batting Evidence\n✓ 24. Strikeout 不會抹除 strong decision 的 baseballIQ Evidence\n✓ 25. 相似 Evidence #1／#2／#4／#7 邊際價值逐步下降\n✓ 26. Aggregator 聚合同 skill 全部 evidence，不只取 top 3 plays\n✓ 27. High pressure 只有有限 salience bonus\n✓ 28. 每場主要 Development Context 上限為 3\n✓ 29. Context 使用 gameExperience 與既有 Development shape\n✓ 30. 1 vs 7 innings：7 局 Exposure 較多但非 7 倍\n✓ 31. 2 innings＋3 high-value active experiences 勝過 7 innings 無 active\n✓ 32. Same Active Evidence＋7 innings moderately 高於 1 inning\n✓ 33. 4 PA opportunity 高於 1 PA 且維持 diminishing\n✓ 34. Completed match 只在 match-level settlement 呼叫既有 processor\n✓ 35. gameExperience settlement exactly once\n✓ 36. Settlement 不改 score／line score／cursor／completed truth\n✓ 37. Development history 保存 gameExperience source 與 provenance\n✓ 38. Match Experience state 保存 exposure／evidence／aggregation／contexts／IDs\n✓ 39. Mid-match 不允許永久 Development settlement\n✓ 40. Saved settled state normalize 後維持 exactly-once identity\n✓ 41. Skill cap 與 progress threshold 完全重用 Development v1\n✓ 42. School trainingQuality／playingTimeOpportunity 不作自動 multiplier\n✓ 43. Distribution audit 完成 1000 deterministic player-match samples\n✓ 44. Distribution structural errors 全為 0\n✓ 45. 0-play bench contexts 為 0\n✓ 46. Exposure band 隨實際局數上升且非線性\n\nMatch Experience → Development Foundation v1：46/46 通過\nMATCH_EXPERIENCE_PLAYING_TIME_AUDIT_JSON={\"inningExposure\":{\"one\":2.4,\"seven\":9.1},\"paExposure\":{\"one\":2.2,\"four\":6.05},\"playingTimeAudit\":{\"one\":1.32,\"seven\":5.005,\"short\":9.733,\"sameOne\":3.105,\"sameSeven\":6.79,\"pa1\":1.54,\"pa4\":4.234999999999999}}\nMATCH_EXPERIENCE_DISTRIBUTION_AUDIT_JSON={\"samples\":1000,\"avgEvidence\":3.6,\"avgActiveEvidence\":1.2,\"avgContexts\":2.2,\"avgExposureByInningsBand\":{\"0\":0,\"1-2\":3.353558052434442,\"3-4\":7,\"5-7\":8.531749999999981},\"starterExposure\":8.14953095684802,\"substituteExposure\":3.3661654135338197,\"benchContexts\":0,\"errors\":{\"nan\":0,\"negative\":0,\"duplicate\":0,\"noParticipationActive\":0,\"matchMutation\":0,\"rngDrift\":0,\"aboveCap\":0,\"missingProvenance\":0}}\nThis is structural validation, not population balance.\n",
+      "stderr": "",
+      "error": null,
+      "timedOut": false
+    },
+    {
+      "file": "playing-time-game-exposure-foundation-v1-test.js",
+      "status": "PASS",
+      "nodeAssertions": 53,
+      "customChecks": null,
+      "entry": true,
+      "elapsedMs": 1121,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "tests/entry-safe-preload.cjs",
+        "tests/playing-time-game-exposure-foundation-v1-test.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "✓ 1. Opportunity 與 Game Exposure 使用不同 version contract\n✓ 2. Starting resolver 是純資料輸出，不要求 Match mutation\n✓ 3. 相同 player／match／role／school／coach context 得到相同 decision\n✓ 4. 正式 output 含 identity、actual role、starting、appearance、substitution、reasons、version\n✓ 5. Debug snapshot 含環境、競爭、守位能力、教練與獨立 seed\n✓ 6. Projected Role 只保留 prior，Actual Role 仍是正式 decision truth\n✓ 7. Resolver source 不建立 overall rating 或 raw skill sum\n✓ 8. Resolver 不使用 Math.random\n✓ 9. Exposure contract 分開保存 opportunity snapshot、planned 與 actual\n✓ 10. 新 exposure 尚未 finalize，不能虛構 innings／PA\n✓ 11. planned appearance 可以因實際局勢變成 no appearance\n✓ 12. Actual Exposure exactly once，第二次 finalize 不重寫\n✓ 13. 代打 1 PA 不虛構守備局數\n✓ 14. 代守只保存真實入場後守備局數\n✓ 15. No appearance 固定 0 innings／0 PA\n✓ 16. 國小後左投不會被正式配置到 2B／SS／3B／C\n✓ 17. 左投 1B 與 P 仍合法\n✓ 18. Pitcher 明確 deferred，不硬套野手 usage\n✓ 19. Direct Start 強制參賽並標示 source\n✓ 20. School Environment fixture 每個層級各 500 deterministic samples\n✓ 21. high environment 的 start／appearance 高於 low\n✓ 22. high environment 的平均守備局數／PA 高於 low\n✓ 23. high environment 不是保證先發\n✓ 24. 同環境高守位能力平均 Opportunity 高於低守位能力\n✓ 25. 同球員低競爭平均 Opportunity 高於 veryHigh\n✓ 26. 強校優秀球員仍能取得先發\n✓ 27. 高機會學校弱球員仍不保證先發\n✓ 28. Starter／Rotation／Bench 各完成 400 samples\n✓ 29. Actual Role 平均 start／exposure 呈 Starter > Rotation > Bench\n✓ 30. Rotation 偶爾先發且 Bench 有非零 appearance\n✓ 31. Starter 不是固定 7 局\n✓ 31a. Developmental coach 的 Bench appearance 稍高於 conservative\n✓ 31b. Position Need 是有限 Opportunity prior\n✓ 31c. Game importance／inning context 只作有限 usage weighting\n✓ 32. Structural distribution audit 完成 1600 samples\n✓ 33. Illegal assignment／duplicate opportunity／reload mismatch／NaN 全為 0\n✓ 34. Normal Route 正式建立 Opportunity 與 Game Exposure side state\n✓ 35. Opportunity plan 不 mutation Development，也不消耗 Match RNG cursor\n✓ 36. 比賽入口只顯示自然安排文字，不顯示 raw score／百分比\n✓ 37. High School Direct Start 維持 forced participation\n✓ 38. 賽前 Save／Reload 保存同一 plan，不 reroll\n✓ 39. 已完成且沒有新 state 的舊 Match 不被 retroactively rewrite\n✓ 40. Match End 從 canonical log finalize 真實 3 守備局／2 PA\n✓ 41. Match Experience 明確讀到 finalized actual innings／PA\n✓ 42. Exposure finalization exactly once，不重複 Development\n✓ 43. No appearance 實際為 0 innings／0 PA／0 Development Context\n✓ 44. No appearance 不產生 fake skill 或 Development mutation\n✓ 44a. 正式 continuous Match flow 可自然完成 no appearance\n✓ 45. Opportunity diagnostics 不改 Match RNG stream\n✓ 46. 更多 Actual Exposure 平均提供更多 Match Experience opportunity\n✓ 47. Playing-Time module 不呼叫 Development processor 或修改 skills\n✓ 48. School trainingQuality 未接入 Opportunity resolver\n✓ 49. Production index 在 Match Experience 與 script 前載入 Playing-Time module\n\nPlaying Time / Game Exposure Foundation v1：53/53 通過\nPLAYING_TIME_ENVIRONMENT_AUDIT_JSON={\"low\":{\"samples\":500,\"startRate\":0.266,\"appearanceRate\":0.762,\"noAppearanceRate\":0.238,\"averageDefensiveInnings\":1.936,\"averagePlateAppearances\":1.194},\"medium\":{\"samples\":500,\"startRate\":0.396,\"appearanceRate\":0.91,\"noAppearanceRate\":0.09,\"averageDefensiveInnings\":2.618,\"averagePlateAppearances\":1.58},\"mediumHigh\":{\"samples\":500,\"startRate\":0.474,\"appearanceRate\":0.926,\"noAppearanceRate\":0.074,\"averageDefensiveInnings\":2.984,\"averagePlateAppearances\":1.762},\"high\":{\"samples\":500,\"startRate\":0.612,\"appearanceRate\":0.942,\"noAppearanceRate\":0.058,\"averageDefensiveInnings\":3.622,\"averagePlateAppearances\":2.096}}\nPLAYING_TIME_CAPABILITY_COMPETITION_AUDIT_JSON={\"capabilityLow\":{\"samples\":500,\"startRate\":0,\"appearanceRate\":0.358,\"noAppearanceRate\":0.642,\"averageDefensiveInnings\":0.316,\"averagePlateAppearances\":0.306},\"capabilityHigh\":{\"samples\":500,\"startRate\":1,\"appearanceRate\":1,\"noAppearanceRate\":0,\"averageDefensiveInnings\":5.614,\"averagePlateAppearances\":3.066},\"competitionLow\":{\"samples\":500,\"startRate\":0.546,\"appearanceRate\":0.94,\"noAppearanceRate\":0.06,\"averageDefensiveInnings\":3.364,\"averagePlateAppearances\":1.906},\"competitionVeryHigh\":{\"samples\":500,\"startRate\":0.204,\"appearanceRate\":0.726,\"noAppearanceRate\":0.274,\"averageDefensiveInnings\":1.634,\"averagePlateAppearances\":1.028},\"strongPowerhouse\":{\"samples\":500,\"startRate\":0.768,\"appearanceRate\":0.968,\"noAppearanceRate\":0.032,\"averageDefensiveInnings\":4.404,\"averagePlateAppearances\":2.562},\"weakDevelopment\":{\"samples\":500,\"startRate\":0.198,\"appearanceRate\":0.696,\"noAppearanceRate\":0.304,\"averageDefensiveInnings\":1.538,\"averagePlateAppearances\":0.978},\"coachConservative\":{\"samples\":500,\"startRate\":0,\"appearanceRate\":0.48,\"noAppearanceRate\":0.52,\"averageDefensiveInnings\":0.446,\"averagePlateAppearances\":0.382},\"coachDevelopmental\":{\"samples\":500,\"startRate\":0.114,\"appearanceRate\":0.648,\"noAppearanceRate\":0.352,\"averageDefensiveInnings\":1.434,\"averagePlateAppearances\":0.596},\"needLow\":{\"samples\":500,\"startRate\":0.246,\"appearanceRate\":0.754,\"noAppearanceRate\":0.246,\"averageDefensiveInnings\":1.81,\"averagePlateAppearances\":1.142},\"needHigh\":{\"samples\":500,\"startRate\":0.574,\"appearanceRate\":0.936,\"noAppearanceRate\":0.064,\"averageDefensiveInnings\":3.518,\"averagePlateAppearances\":1.996},\"mustWinContext\":{\"samples\":500,\"startRate\":0,\"appearanceRate\":0.494,\"noAppearanceRate\":0.506,\"averageDefensiveInnings\":0.438,\"averagePlateAppearances\":0.41},\"developmentContext\":{\"samples\":500,\"startRate\":0.198,\"appearanceRate\":0.726,\"noAppearanceRate\":0.274,\"averageDefensiveInnings\":1.502,\"averagePlateAppearances\":1}}\nPLAYING_TIME_ROLE_AUDIT_JSON={\"starter\":{\"samples\":400,\"startRate\":0.7275,\"appearanceRate\":0.9625,\"noAppearanceRate\":0.0375,\"averageDefensiveInnings\":4.2875,\"averagePlateAppearances\":2.405},\"rotation\":{\"samples\":400,\"startRate\":0.385,\"appearanceRate\":0.905,\"noAppearanceRate\":0.095,\"averageDefensiveInnings\":2.595,\"averagePlateAppearances\":1.56},\"bench\":{\"samples\":400,\"startRate\":0.0275,\"appearanceRate\":0.51,\"noAppearanceRate\":0.49,\"averageDefensiveInnings\":0.6,\"averagePlateAppearances\":0.4825}}\nPLAYING_TIME_STRUCTURAL_AUDIT_JSON={\"samples\":1600,\"startRate\":0.47,\"appearanceRate\":0.7775,\"noAppearanceRate\":0.2225,\"averageDefensiveInnings\":2.95625,\"averagePlateAppearances\":1.61875,\"anomalies\":{\"illegalPositionAssignment\":0,\"duplicateOpportunity\":0,\"reloadMismatch\":0,\"nan\":0}}\nThis is structural validation, not population balance.\n",
+      "stderr": "",
+      "error": null,
+      "timedOut": false
+    },
+    {
+      "file": "career-save-admission-test.js",
+      "status": "PASS",
+      "nodeAssertions": 0,
+      "customChecks": 45,
+      "entry": true,
+      "elapsedMs": 195,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "tests/entry-safe-preload.cjs",
+        "tests/career-save-admission-test.js"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "✓ 1. Admission Boundary 只公開單一正式 API\n✓ 2. 合法 pre-adult save 以 bypassed + admitted 保持相容\n✓ 3. 未知 chapter 明確 rejected，不會被當成 pre-adult bypass\n✓ 4. 五種青棒生涯出口合法狀態全部 admitted\n✓ 5. 四種成年來源的代表 Transition 狀態均 admitted\n✓ 6. Transition admission 會消費 4.6 Runtime Resolver\n✓ 7. 四種 route identity 的 Transition Result 均 admitted\n✓ 8. 四種成年來源的代表 Development 狀態均 admitted\n✓ 9. Development admission 會消費 4.8 Runtime Resolver\n✓ 10. 四種 route identity 的 22 歲結果均 admitted\n✓ 11. 合法垂直切片完成狀態以 completed snapshot admitted\n✓ 12. forcedEventId 不會讓合法底層成年狀態被拒\n✓ 13. Invalid Transition 狀態全部 rejected\n✓ 14. Invalid Transition Result 全部 rejected\n✓ 15. Invalid Development 狀態全部 rejected\n✓ 16. Invalid 22 歲結果狀態全部 rejected\n✓ 17. completed=false 的終止狀態 rejected\n✓ 18. Admission evaluation 對 candidate 為 zero mutation\n✓ 19. Admission evaluation 對 Career Contract 為 zero mutation\n✓ 20. 相同 candidate 的 Admission result deterministic\n✓ 21. admitted／bypassed／rejected 結果全部 deep frozen\n✓ 22. Admission source 不接觸 Storage、UI、live Player 或 Save flow\n✓ 23. Admission source 未保存成年 chapter／careerExit／事件 registry\n✓ 24. 合法成年 Load 在 admission 後才替換 live Player\n✓ 25. 合法 Development Load 恢復既有 development_mentor event\n✓ 26. 合法 Load 隱藏創角區、顯示 success 且不重寫 Storage\n✓ 27. Rejected Load 維持 live Player identity 與完整內容\n✓ 28. Rejected Load 不 Render、不切換主 UI、不清空故事與選項\n✓ 29. Rejected Load 保留原始 localStorage 且不寫入或刪除\n✓ 30. Rejected Load 只顯示 error notice\n✓ 31. Malformed JSON 沿用 catch 且 live Player、UI、Storage 不變\n✓ 32. Admission module unavailable 時 fail closed\n✓ 33. 舊存檔先 normalize 到 v15 再由 pre-adult Admission 放行\n✓ 33a. 合法 v13 二十二歲結果以既有 marketOutcome 遷移到 v15 code\n✓ 33b. v13 Load migration 不自動覆寫原始 Storage\n✓ 33c. 路線與舊中文結果矛盾的 v13 存檔被拒且 live Player zero mutation\n✓ 33d. 無法遷移的 v13 存檔不修改 Storage\n✓ 34. forced-event Save/Load 保留既有 precedence\n✓ 35. completed Save 仍優先於殘留 forced event\n✓ 36. 合法 Transition Save 恢復 Resolver 指定事件\n✓ 37. Transition Result、22 歲 Result 與 Terminal 都不錯套 Runtime Resolver\n✓ 38. Browser dependency 依 Contract → Runtime Resolvers → Admission → Save 載入\n✓ 39. SAVE_VERSION 升級為 15，SAVE_KEY 與 saveGame snapshot shape 保持不變\n✓ 40. Player Schema 只新增 age22OutcomeCode，未新增 currentIdentity 或 Admission persistence 欄位\n✓ 41. loadGame 明確維持 candidate-first、admission-second、commit-last\n\nArchitecture Sprint 4.10 Adult Career Save Admission Boundary：45/45 通過\n",
+      "stderr": "SyntaxError: Expected property name or '}' in JSON at position 1 (line 1 column 2)\n    at JSON.parse (<anonymous>)\n    at loadGame (save.js:649:42)\n    at evalmachine.<anonymous>:1:125\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at evaluate (E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-save-admission-test.js:58:13)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\career-save-admission-test.js:300:1)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n",
+      "error": null,
+      "timedOut": false
+    },
+    {
+      "file": "g2-b2-playable-match-decision-test.cjs",
+      "status": "PASS",
+      "nodeAssertions": 171,
+      "customChecks": null,
+      "entry": true,
+      "elapsedMs": 1738,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "tests/entry-safe-preload.cjs",
+        "tests/g2-b2-playable-match-decision-test.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "PASS Exact additive loaders reverse to G2-A and retain all original test assertions\nPASS Loader ordering, duplicate, defer, stylesheet and unrelated mutations are rejected\nPASS Original UI, pitch view, truly pending and unsupported presentation remain distinct\nPASS Unsupported original approach remains an original legal choice, never a pitch request\nPASS Original natural Career reaches a genuinely admitted player pitch\nPASS Public view and request creation do not mutate Match or consume RNG\nPASS Reject stale or illegal matchId without calling original authority\nPASS Reject stale or illegal paId without calling original authority\nPASS Reject stale or illegal pitchId without calling original authority\nPASS Reject stale or illegal situationId without calling original authority\nPASS Reject stale or illegal expectedMomentId without calling original authority\nPASS Reject stale or illegal routeId without calling original authority\nPASS Rerender expires old callback even when every authoritative identity is unchanged\nPASS Admission denial and ambiguous route mapping fail before execution\nPASS Original rejection is reported as rejection, without invented count or events\nPASS Take executes once through the original public Match owner\nPASS Same-moment next pitch cannot be submitted by the previous pitch callback\nPASS Save/Reload rebuilds a fresh boundary and rejects the old match-object callback\nPASS Legal swing and subsequent original pitches finish one official PA\nPASS Record remains unique and stale submission after PA settlement is a no-op\nPASS Public Snapshot and Timeline repeat without execution or unrevealed intent\n{\"suite\":\"g2-b2-playable-match-decision\",\"status\":\"PASS\",\"passed\":21,\"pa\":{\"id\":\"hs-y3-final-competition-1|hs_y1_match_moment_1|player|6|下\",\"result\":\"out\",\"pitchCount\":2,\"history\":[{\"pitchId\":\"hs-y3-final-competition-1|hs_y1_match_moment_1|player|6|下|pitch-1\",\"action\":\"take\",\"result\":\"calledStrike\"},{\"pitchId\":\"hs-y3-final-competition-1|hs_y1_match_moment_1|player|6|下|pitch-2\",\"action\":\"swing\",\"result\":\"ballInPlay\"}]}}\n",
+      "stderr": "",
+      "error": null,
+      "timedOut": false
+    },
+    {
+      "file": "g2-a-live-public-match-bridge-test.cjs",
+      "status": "PASS",
+      "nodeAssertions": 616,
+      "customChecks": null,
+      "entry": true,
+      "elapsedMs": 10656,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "tests/entry-safe-preload.cjs",
+        "tests/g2-a-live-public-match-bridge-test.cjs"
+      ],
+      "exitCode": 0,
+      "signal": null,
+      "stdout": "PASS CommonJS API and unavailable source have explicit statuses\nPASS Exact additive loader and guard migration preserve all original source validation\nPASS Case A before original decision has no fabricated PA or count\nPASS Case A actual pitch decision identity/routes and immutable public schema\nPASS Illegal route cannot bypass the original decision entry\nPASS Stale Match/PA/Pitch identity rejects without changing source\nPASS Unexecuted pending pitch and private AI intent never enter public output\nPASS Case A submitted decision respects original reveal boundary\nPASS Future scoreboard/physical facts cannot leak across cursor\nPASS Case A original SS to 1B execution, legal out, PO/A, PA and Record project together\nPASS Already completed decision cannot settle a second time\nPASS Repeated source event identities deduplicate; conflicting evidence rejects\nPASS Executed but unobserved pitch fields stay absent\nPASS Decision lifecycle order survives settlement with stable original identities\nPASS Reordered source journal and conflicting completed actions reject\nPASS Case A real save/load retains projection without settlement replay\nPASS Case A next legal PA changes batter without reusing stale current PA identity\nPASS Pending same-ball execution never appears as official settlement\nPASS Missing visible outs/base facts remain unavailable without plausible defaults\nPASS Case B original outfield fixture before execution has no public result\nPASS Case B projects actual G1 owner result and canonical record\nPASS Case B duplicate original callback and real Save/Load preserve result\nPASS Case B legal next PA projects original batting-order continuation\nPASS Case C original outfield fixture before execution has no public result\nPASS Case C projects actual G1 owner result and canonical record\nPASS Case C duplicate original callback and real Save/Load preserve result\nPASS Case C legal next PA projects original batting-order continuation\nPASS Case D nonterminal original pitch updates public count and survives real reload\nPASS Case D original third-strike catch, catcher PO, pitcher SO and original PA\nPASS Case D real Save/Load and next PA never replay catcher or pitcher credit\nPASS Lost retained pitch evidence is unavailable, never reconstructed from the PA result\nPASS Scoreboard/Record mismatch and missing provenance fail closed\nPASS Consumer presentation advance never submits or repeats gameplay\nPASS Normal public Career match supports bridge reads, half changes, final Record, reload and unique settlement\n{\"suite\":\"g2-a-live-public-match-bridge\",\"status\":\"PASS\",\"passed\":34,\"cases\":[\"A\",\"B\",\"C\",\"D\"],\"normalGame\":true}\n",
+      "stderr": "",
+      "error": null,
+      "timedOut": false
+    }
+  ]
+}

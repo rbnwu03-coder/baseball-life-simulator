@@ -1,0 +1,99 @@
+{
+  "tier": 2,
+  "trace": {
+    "function": "E-meng-baseball_life_sim_semirefactor.tests.pitch-sequence-state-production-integration-test.test",
+    "direction": "both",
+    "callees_total": 0,
+    "callees_total_relation": "eq",
+    "callees": {
+      "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+      "cols": [
+        "name",
+        "hop"
+      ],
+      "groups": []
+    },
+    "callers_total": 0,
+    "callers_total_relation": "eq",
+    "callers": {
+      "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+      "cols": [
+        "name",
+        "hop"
+      ],
+      "groups": []
+    }
+  },
+  "snippet": {
+    "name": "test",
+    "qualified_name": "E-meng-baseball_life_sim_semirefactor.tests.pitch-sequence-state-production-integration-test.test",
+    "label": "Function",
+    "file_path": "E:/meng/baseball_life_sim_semirefactor/tests/pitch-sequence-state-production-integration-test.js",
+    "start_line": 9,
+    "end_line": 9,
+    "source_mode": "full",
+    "source": "const test = (name, fn) => { fn(); passed++; console.log('PASS ' + name); };\n",
+    "callers": 1,
+    "callees": 0
+  },
+  "coverage": {
+    "project": "E-meng-baseball_life_sim_semirefactor",
+    "signal": "best_effort",
+    "indexed_at": "2026-10-14T05:45:47Z",
+    "metadata": {
+      "generation": "2026-10-14T05:45:47Z",
+      "index_mode": "full",
+      "recorded_at": "2026-10-14T05:45:49Z",
+      "recording_status": "complete",
+      "ignored_files_stored": 0,
+      "ignored_files_total": 0,
+      "hash_records_complete": true,
+      "coverage_version": 3,
+      "generation_matches": true
+    },
+    "paths": [
+      {
+        "requested_path": "tests/pitch-sequence-state-production-integration-test.js",
+        "path": "tests/pitch-sequence-state-production-integration-test.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "save.js",
+        "path": "save.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      },
+      {
+        "requested_path": "script.js",
+        "path": "script.js",
+        "status": "no_recorded_issue",
+        "freshness": "metadata_changed",
+        "recommended_action": "read_source_and_reindex",
+        "coverage": []
+      }
+    ],
+    "path_total": 3,
+    "path_returned": 3,
+    "path_has_more": false,
+    "scopes": [],
+    "scope_total": 0,
+    "scope_returned": 0,
+    "scope_truncated": false,
+    "has_more": false,
+    "caveat": "Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable."
+  },
+  "directSourceRead": {
+    "file": "tests/pitch-sequence-state-production-integration-test.js",
+    "lines": [
+      134,
+      143
+    ],
+    "finding": "Test8 compares normalized save.js to a0e512b439446990d8df118e3e7d737b9f2f51d3 bytes. First seven runtime tests printed PASS; assertion stops at save.js before the final script.js loop member."
+  },
+  "restriction": "Read-only after manifest stop. No test, fixture, Save or Production edits; no suite replay."
+}

@@ -1,0 +1,95 @@
+{
+  "suiteName": "main-skipped",
+  "file": "docs/test-infrastructure-sprint-0.1-fixtures-njh333/legacy.cjs",
+  "entryMode": "standalone",
+  "actualCommand": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+    "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-njh333\\legacy.cjs"
+  ],
+  "cwd": "E:\\meng\\baseball_life_sim_semirefactor",
+  "runnerNodeVersion": "v24.19.0",
+  "nodeVersion": "v24.19.0",
+  "startedAt": "2026-10-14T10:49:12.047Z",
+  "elapsedMs": 36.6849,
+  "exitCode": 0,
+  "signal": null,
+  "spawnError": null,
+  "policy": {
+    "timeoutMs": 120000,
+    "outputMaxBuffer": 16000000,
+    "implicitGitShowMaxBuffer": 30000000,
+    "gitCompatibility": true
+  },
+  "environment": {
+    "NODE_OPTIONS": null,
+    "NODE_PATH": null,
+    "TZ": null,
+    "ENTRY_SAFE_CONFIG": {
+      "nonce": "a35c5aa9a36534eb5f09e568c3cf36ba",
+      "target": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-njh333\\legacy.cjs",
+      "entryMode": "standalone",
+      "gitCompatibility": true,
+      "assertionRoots": [
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests",
+        "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-njh333"
+      ]
+    }
+  },
+  "assertionEvidence": {
+    "version": 1,
+    "nonce": "a35c5aa9a36534eb5f09e568c3cf36ba",
+    "entryMode": "standalone",
+    "target": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-njh333\\legacy.cjs",
+    "nodeVersion": "v24.19.0",
+    "nodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+    "entryStarted": true,
+    "exportCompleted": false,
+    "summary": null,
+    "unhandledError": null,
+    "assertions": {
+      "attempted": 0,
+      "passed": 0,
+      "thrown": 0,
+      "unsupportedAsync": 0,
+      "methods": {},
+      "samples": []
+    },
+    "gitCompatibility": {
+      "enabled": true,
+      "calls": []
+    },
+    "exitCode": 0,
+    "mainFilename": "E:\\meng\\baseball_life_sim_semirefactor\\docs\\test-infrastructure-sprint-0.1-fixtures-njh333\\legacy.cjs",
+    "standaloneMainMatches": true
+  },
+  "witnessParseError": null,
+  "witnessPath": "docs/test-infrastructure-sprint-0.1-development-1-main-skipped-evidence-assertions.json",
+  "stdout": "PASS-looking output; main skipped\n",
+  "stderr": "",
+  "gitBaseline": {
+    "branch": "main",
+    "head": "ab3117653945de0b7013636187c446276a96e634",
+    "main": "ab3117653945de0b7013636187c446276a96e634",
+    "originMain": "ab3117653945de0b7013636187c446276a96e634",
+    "index": ""
+  },
+  "relevantSourceHashesBefore": {
+    "docs/test-infrastructure-sprint-0.1-fixtures-njh333/legacy.cjs": "8d2d67ff5edd27318270f0517d018cae5bf1f868100b08c76834069b4fc90f13",
+    "tests/entry-safe-runner.cjs": "03e75d865265f110f7c532e131745d551df5d87d3a5ae0e19d41ae08b50348e8",
+    "tests/entry-safe-preload.cjs": "35bde7c4d94193362e4f0cbbe9bbbcfbea111f2fcf6a32462ceec44f5442aab1",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "relevantSourceHashesAfter": {
+    "docs/test-infrastructure-sprint-0.1-fixtures-njh333/legacy.cjs": "8d2d67ff5edd27318270f0517d018cae5bf1f868100b08c76834069b4fc90f13",
+    "tests/entry-safe-runner.cjs": "03e75d865265f110f7c532e131745d551df5d87d3a5ae0e19d41ae08b50348e8",
+    "tests/entry-safe-preload.cjs": "35bde7c4d94193362e4f0cbbe9bbbcfbea111f2fcf6a32462ceec44f5442aab1",
+    "tests/entry-safe-export-child.cjs": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379"
+  },
+  "sourceStable": true,
+  "status": "UNVERIFIED",
+  "reason": "Exit0 without observed successful synchronous assertions",
+  "entryVerified": true,
+  "successfulAssertions": 0
+}

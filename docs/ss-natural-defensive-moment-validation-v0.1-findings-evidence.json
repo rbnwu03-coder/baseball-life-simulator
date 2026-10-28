@@ -1,0 +1,3565 @@
+{
+  "task": "SS Natural Defensive Moment Validation v0.1",
+  "createdAt": "2026-10-15T08:28:59.452Z",
+  "summary": {
+    "matchId": "hs-y1-ss-natural-defense-validation-v0.1",
+    "actualSeed": 2884315748,
+    "seedSource": "createHighSchoolMatchSimulationSeedFromIdentity(formalOpportunity.decisionId)",
+    "opportunity": {
+      "version": "playing-time-opportunity-v1",
+      "sourceVersion": "playing-time-opportunity-v1",
+      "decisionId": "hs-y1-ss-natural-defense-validation-v0.1|2.2.2 測試球員|體能＋棒球理解|school-development-29d536a2|47933079",
+      "matchId": "hs-y1-ss-natural-defense-validation-v0.1",
+      "playerId": "2.2.2 測試球員|體能＋棒球理解|school-development-29d536a2",
+      "exposureSource": "opportunity-resolver",
+      "actualRole": "starter",
+      "actualRoleAtDecision": "starter",
+      "projectedRolePrior": "rotationCandidate",
+      "playingTimeEnvironment": "high",
+      "schoolPlayingTimeEnvironment": "high",
+      "competitionDepth": "medium",
+      "positionCompetition": "medium",
+      "positionNeed": "high",
+      "evaluationTrend": 0,
+      "previousActualExposure": null,
+      "coachUsageStyle": "conservative",
+      "positionCapability": 3,
+      "positionFit": 0,
+      "positionExperience": 7,
+      "assignedPosition": "游擊手",
+      "requestedPosition": "游擊手",
+      "positionFallbackApplied": false,
+      "assignmentSource": "requested-position",
+      "assignmentReason": "specific-position-request",
+      "pitcherExposureDeferred": false,
+      "startingOpportunity": "bench",
+      "startingDecision": "bench",
+      "appearancePlan": {
+        "appearanceType": "lateGameAppearance",
+        "entryInning": 6,
+        "entryHalf": "下"
+      },
+      "substitutionOpportunity": "lateGameAppearance",
+      "opportunityReasons": [
+        "actual-role:starter",
+        "school-environment:high",
+        "competition-depth:medium",
+        "position-need:high",
+        "coach-usage:conservative",
+        "position-legal"
+      ],
+      "opportunitySeed": "playing-time-opportunity-v1|hs-y1-ss-natural-defense-validation-v0.1|2.2.2 測試球員|體能＋棒球理解|school-development-29d536a2|capability|school-development-29d536a2|hs-year-1-age-16|roster-69587b4f|high-school-year-one|autumn-exhibition|1|hs-y1-ss-natural-defense-validation-v0.1|starter|rotationCandidate|high|medium|high|conservative|游擊手|3|0|7|highSchoolExhibition|0|0|regular|normal",
+      "gameContext": {
+        "gameType": "highSchoolExhibition",
+        "inning": 0,
+        "expectedGameImportance": "regular",
+        "importance": "regular",
+        "leverage": "normal",
+        "scoreMargin": 0
+      },
+      "readinessSnapshot": {
+        "version": "opportunity-readiness-v1",
+        "playerId": "2.2.2 測試球員|體能＋棒球理解|school-development-29d536a2",
+        "position": "游擊手",
+        "requestedPosition": "游擊手",
+        "sourceType": "system-derived-provisional",
+        "sourceVersion": "opportunity-readiness-v1",
+        "readinessBand": "low",
+        "positionReadiness": 3,
+        "positionFit": 0,
+        "fieldingReadiness": 4,
+        "reactionReadiness": 3,
+        "decisionReadiness": 2,
+        "experienceReadiness": 7,
+        "confidence": "provisional",
+        "positionLegal": true,
+        "positionFallbackApplied": false,
+        "assignmentSource": "requested-position",
+        "assignmentReason": "specific-position-request",
+        "pitcherExposureDeferred": false,
+        "reasons": [
+          "competitiveFieldingReadiness",
+          "developingReaction",
+          "developingDecisionReadiness",
+          "strongPositionExperience",
+          "limitedPositionFit",
+          "positionLegal"
+        ],
+        "provenance": {
+          "snapshotId": "readiness-da5911ea",
+          "sourceType": "system-derived-provisional",
+          "sourceVersion": "opportunity-readiness-v1",
+          "inputVersion": "hs-entry-capability-v1",
+          "deterministicIdentity": "opportunity-readiness-v1|2.2.2 測試球員|體能＋棒球理解|school-development-29d536a2|游擊手|游擊手|3|0|4|3|2|7|hs-entry-capability-v1"
+        }
+      },
+      "plannedUsage": {
+        "appearanceType": "lateGameAppearance",
+        "entryInning": 6,
+        "entryHalf": "下"
+      },
+      "debug": {
+        "opportunityHash": 1200828537,
+        "opportunityScore": 54,
+        "scoreBreakdown": {
+          "actualRole": 58,
+          "positionCapability": -8,
+          "positionFit": -10,
+          "positionExperience": 3,
+          "schoolEnvironment": 6,
+          "competitionDepth": 0,
+          "positionNeed": 5,
+          "projectedRolePrior": 0,
+          "coachUsage": 2,
+          "gameContext": 0,
+          "deterministicVariation": -2
+        },
+        "reasons": [
+          "actual-role:starter",
+          "school-environment:high",
+          "competition-depth:medium",
+          "position-need:high",
+          "coach-usage:conservative",
+          "position-legal"
+        ]
+      }
+    },
+    "initialPlayerState": {
+      "inning": 1,
+      "half": "上",
+      "outs": 0,
+      "scores": {
+        "home": 0,
+        "away": 0
+      },
+      "runners": [
+        null,
+        null,
+        null
+      ],
+      "phase": "full_match_flow",
+      "domain": "flow",
+      "currentMomentId": "hs_y1_match_moment_1",
+      "playerSide": "home",
+      "offenseTeam": "away",
+      "currentBatter": "regional-power-school-player-04",
+      "actualBatter": "regional-power-school-player-04",
+      "status": "bench",
+      "entryCompleted": false,
+      "slot": -1,
+      "assignment": "",
+      "playerInLineup": false,
+      "playerOnBench": true,
+      "actualSS": "school-development-29d536a2-player-06",
+      "completedIds": [],
+      "logCount": 1,
+      "integrity": []
+    },
+    "entryEvent": {
+      "sequence": 89,
+      "presentationImportance": "attention",
+      "type": "playerEntry",
+      "inning": 6,
+      "half": "下",
+      "lineupSlot": 7,
+      "replacedPlayerId": "school-development-29d536a2-player-06",
+      "plannedAppearanceType": "lateGameAppearance",
+      "assignment": "三壘有人、2 出局；你從板凳進入第 8 棒。",
+      "outs": 2,
+      "scores": {
+        "home": 1,
+        "away": 4
+      },
+      "runners": [
+        null,
+        null,
+        "school-development-29d536a2-player-09"
+      ],
+      "presentationSnapshot": {
+        "inning": 6,
+        "half": "下",
+        "outs": 2,
+        "runners": [
+          null,
+          null,
+          "school-development-29d536a2-player-09"
+        ],
+        "scores": {
+          "home": 1,
+          "away": 4
+        },
+        "lineScoreRevealHalfIndex": 11,
+        "assignment": "三壘有人、2 出局；你從板凳進入第 8 棒。",
+        "position": "游擊手",
+        "currentBatter": "player",
+        "battingOrderSlot": 7
+      }
+    },
+    "entryTick": 84,
+    "firstDecision": {
+      "tick": 86,
+      "before": {
+        "inning": 6,
+        "half": "下",
+        "outs": 2,
+        "scores": {
+          "home": 1,
+          "away": 4
+        },
+        "runners": [
+          null,
+          null,
+          "school-development-29d536a2-player-09"
+        ],
+        "phase": "moment_1_ready",
+        "domain": "offense",
+        "currentMomentId": "hs_y1_match_moment_1",
+        "playerSide": "home",
+        "offenseTeam": "home",
+        "currentBatter": "player",
+        "actualBatter": "player",
+        "status": "substitute",
+        "entryCompleted": true,
+        "slot": 7,
+        "assignment": "游擊手",
+        "playerInLineup": true,
+        "playerOnBench": false,
+        "actualSS": "player",
+        "completedIds": [],
+        "logCount": 91,
+        "integrity": [],
+        "defenseTeam": "away",
+        "target": "finish",
+        "activeDefense": {
+          "ok": true,
+          "issues": []
+        },
+        "defenseOuterGate": false
+      },
+      "choices": [
+        {
+          "approach": "aggressiveEarlySwing",
+          "selectionProfile": "aggressive",
+          "swingIntent": "power",
+          "text": "搶第一顆可攻擊球，嘗試長打縮小差距",
+          "matchDecision": "attack",
+          "matchMomentId": "hs_y1_match_moment_1",
+          "objective": "createExtraBaseHit",
+          "action": "aggressiveEarlySwing",
+          "route": "attackPitchToGap",
+          "riskProfile": "high",
+          "risk": "high",
+          "requirements": [],
+          "executionOnly": false,
+          "executionText": "你提早備妥揮棒，鎖定第一顆進入可攻擊區域的球。"
+        },
+        {
+          "approach": "patientSelection",
+          "selectionProfile": "selective",
+          "swingIntent": "normal",
+          "text": "縮小攻擊區，盡量放掉邊角球，只積極處理真正進入甜蜜區的球",
+          "matchDecision": "zone",
+          "matchMomentId": "hs_y1_match_moment_1",
+          "objective": "reachBase",
+          "action": "patientSelection",
+          "route": "selectivePlateAppearance",
+          "riskProfile": "low",
+          "risk": "low",
+          "requirements": [],
+          "executionOnly": false,
+          "executionText": "你收窄攻擊區，但仍準備攻擊真正進入甜蜜點的球。"
+        },
+        {
+          "approach": "compactLineDrive",
+          "selectionProfile": "balanced",
+          "swingIntent": "contact",
+          "text": "縮短揮棒，爭取用安打送回得分位置上的跑者",
+          "matchDecision": "advance",
+          "matchMomentId": "hs_y1_match_moment_1",
+          "objective": "scoreRunner",
+          "action": "compactLineDrive",
+          "route": "contactForRun",
+          "riskProfile": "medium",
+          "risk": "medium",
+          "requirements": [
+            "runnerInScoringPosition"
+          ],
+          "executionOnly": false,
+          "executionText": "兩出局後不能用出局交換推進；你縮短揮棒，尋找能穿過守備的擊球。"
+        }
+      ],
+      "choice": {
+        "approach": "patientSelection",
+        "selectionProfile": "selective",
+        "swingIntent": "normal",
+        "text": "縮小攻擊區，盡量放掉邊角球，只積極處理真正進入甜蜜區的球",
+        "matchDecision": "zone",
+        "matchMomentId": "hs_y1_match_moment_1",
+        "objective": "reachBase",
+        "action": "patientSelection",
+        "route": "selectivePlateAppearance",
+        "riskProfile": "low",
+        "risk": "low",
+        "requirements": [],
+        "executionOnly": false,
+        "executionText": "你收窄攻擊區，但仍準備攻擊真正進入甜蜜點的球。"
+      },
+      "physicalBefore": {
+        "ground": null,
+        "line": null,
+        "fly": null,
+        "ordinaryPA": null,
+        "situation": {},
+        "gate": null,
+        "density": {
+          "version": "match-decision-density-v1",
+          "defensiveMeaningfulDecisionCount": 0,
+          "lastDecisionPlayIndex": -1,
+          "lastNoveltyKey": "",
+          "recentSituationFamilies": [],
+          "recentRouteFamilies": [],
+          "repeatedOpportunityCount": 0,
+          "suppressedOpportunityCount": 0,
+          "currentConsecutiveMeaningfulDecisions": 0,
+          "maxConsecutiveMeaningfulDecisions": 0,
+          "lastDecisionInning": 0,
+          "lastDecisionHalf": "",
+          "lastSelectedRoute": "",
+          "lastFinalRoute": "",
+          "offensiveDecisionCount": 1,
+          "lastOffensiveDecisionPA": 1,
+          "lastOffensiveDecisionPlayIndex": 90,
+          "lastOffensiveNoveltyKey": "late|trailing-close|2|001|meaningful",
+          "recentOffensiveSituationFamilies": [
+            "late|trailing-close|2|001|meaningful"
+          ],
+          "offensiveSuppressedCount": 0,
+          "offensiveRepeatSuppressedCount": 0,
+          "lastOffensiveDecisionInning": 6,
+          "lastOffensiveDecisionHalf": "下"
+        },
+        "active": null,
+        "closed": null
+      },
+      "sample": 0.72,
+      "returned": false,
+      "after": {
+        "inning": 6,
+        "half": "下",
+        "outs": 2,
+        "scores": {
+          "home": 1,
+          "away": 4
+        },
+        "runners": [
+          null,
+          null,
+          "school-development-29d536a2-player-09"
+        ],
+        "phase": "moment_1_ready",
+        "domain": "offense",
+        "currentMomentId": "hs_y1_match_moment_1",
+        "playerSide": "home",
+        "offenseTeam": "home",
+        "currentBatter": "player",
+        "actualBatter": "player",
+        "status": "substitute",
+        "entryCompleted": true,
+        "slot": 7,
+        "assignment": "游擊手",
+        "playerInLineup": true,
+        "playerOnBench": false,
+        "actualSS": "player",
+        "completedIds": [],
+        "logCount": 91,
+        "integrity": [],
+        "defenseTeam": "away",
+        "target": "finish",
+        "activeDefense": {
+          "ok": true,
+          "issues": []
+        },
+        "defenseOuterGate": false
+      },
+      "newEvents": [],
+      "newCompleted": [],
+      "physicalAfter": {
+        "ground": null,
+        "line": null,
+        "fly": null,
+        "ordinaryPA": null,
+        "situation": {},
+        "gate": null,
+        "density": {
+          "version": "match-decision-density-v1",
+          "defensiveMeaningfulDecisionCount": 0,
+          "lastDecisionPlayIndex": -1,
+          "lastNoveltyKey": "",
+          "recentSituationFamilies": [],
+          "recentRouteFamilies": [],
+          "repeatedOpportunityCount": 0,
+          "suppressedOpportunityCount": 0,
+          "currentConsecutiveMeaningfulDecisions": 0,
+          "maxConsecutiveMeaningfulDecisions": 0,
+          "lastDecisionInning": 0,
+          "lastDecisionHalf": "",
+          "lastSelectedRoute": "",
+          "lastFinalRoute": "",
+          "offensiveDecisionCount": 1,
+          "lastOffensiveDecisionPA": 1,
+          "lastOffensiveDecisionPlayIndex": 90,
+          "lastOffensiveNoveltyKey": "late|trailing-close|2|001|meaningful",
+          "recentOffensiveSituationFamilies": [
+            "late|trailing-close|2|001|meaningful"
+          ],
+          "offensiveSuppressedCount": 0,
+          "offensiveRepeatSuppressedCount": 0,
+          "lastOffensiveDecisionInning": 6,
+          "lastOffensiveDecisionHalf": "下"
+        },
+        "active": null,
+        "closed": null
+      }
+    },
+    "terminalState": {
+      "inning": 6,
+      "half": "下",
+      "outs": 2,
+      "scores": {
+        "home": 1,
+        "away": 4
+      },
+      "runners": [
+        null,
+        null,
+        "school-development-29d536a2-player-09"
+      ],
+      "phase": "moment_1_ready",
+      "domain": "offense",
+      "currentMomentId": "hs_y1_match_moment_1",
+      "playerSide": "home",
+      "offenseTeam": "home",
+      "currentBatter": "player",
+      "actualBatter": "player",
+      "status": "substitute",
+      "entryCompleted": true,
+      "slot": 7,
+      "assignment": "游擊手",
+      "playerInLineup": true,
+      "playerOnBench": false,
+      "actualSS": "player",
+      "completedIds": [],
+      "logCount": 91,
+      "integrity": [],
+      "defenseTeam": "away",
+      "target": "finish",
+      "activeDefense": {
+        "ok": true,
+        "issues": []
+      },
+      "defenseOuterGate": false
+    },
+    "completed": false,
+    "safety": 1400,
+    "retainedCandidateStillCurrent": false,
+    "actualCurrentPlayerMatch": {
+      "first": {
+        "id": "hs-y1-autumn-exhibition",
+        "seed": 197185,
+        "phase": "full_match_flow"
+      },
+      "replay": {
+        "id": "hs-y1-autumn-exhibition",
+        "seed": 543663,
+        "phase": "full_match_flow"
+      }
+    },
+    "rejectedResolves": 1315,
+    "nativeCandidateStateSamples": 2800,
+    "importantSamplingLimit": "Samples after first public resolve describe retained candidate m, not current player.highSchoolMatch. Native integrity=[] cannot prove current-Match authority agreement.",
+    "defenseOuterTrue": 0,
+    "physicalWitnesses": 0,
+    "defenseCreated": 0,
+    "defenseCompleted": 0,
+    "candidateRecord": {
+      "status": "active",
+      "partialIntegrity": true,
+      "refs": 91,
+      "logEvents": 91,
+      "scores": {
+        "home": 1,
+        "away": 4
+      },
+      "finalResult": null
+    },
+    "actualExposurePartial": {
+      "matchId": "hs-y1-ss-natural-defense-validation-v0.1",
+      "participated": true,
+      "started": false,
+      "appearanceType": "lateGameAppearance",
+      "entryInning": 6,
+      "exitInning": 6,
+      "defensiveInnings": 0,
+      "plateAppearances": 0,
+      "role": "starter"
+    },
+    "experienceSettled": false,
+    "actualPlayerEvaluation": null,
+    "saveCandidateId": "hs-y1-autumn-exhibition",
+    "candidateSaveRetained": false
+  },
+  "gates": [
+    {
+      "gate": "Legal SS admission",
+      "status": "CONFIRMED",
+      "scope": "Before public-routing divergence: canonical entry and actual sixth-inning substitute at SS, not starter"
+    },
+    {
+      "gate": "Active defensive responsibility",
+      "status": "UNVERIFIED",
+      "scope": "No opponent half after admission; zero outer-gate true, zero physical handoffs"
+    },
+    {
+      "gate": "Meaningful classification",
+      "status": "UNVERIFIED",
+      "scope": "No actual defensive classification/density/route admission; zero is not coverage"
+    },
+    {
+      "gate": "Legal player choice",
+      "status": "UNVERIFIED",
+      "scope": "Defensive choice never produced; offensive legal choice exists but public resolution fails"
+    },
+    {
+      "gate": "Reach/Secure/Throw",
+      "status": "UNVERIFIED",
+      "scope": "No candidate execution; separate explicit regression evidence retained"
+    },
+    {
+      "gate": "Runner timing/settlement",
+      "status": "UNVERIFIED",
+      "scope": "No candidate defensive outcome or settlement"
+    },
+    {
+      "gate": "Game Record/Career",
+      "status": "UNVERIFIED",
+      "scope": "Candidate Record remains active; partial integrity only, no final career settlement or candidate Save round-trip"
+    },
+    {
+      "gate": "Natural SS defensive Moment end-to-end",
+      "status": "UNVERIFIED",
+      "scope": "Unique candidate blocked upstream of SS defense; no universal impossibility inference"
+    },
+    {
+      "gate": "Selected candidate public resolve/closure",
+      "status": "FAIL",
+      "scope": "Diagnostic assertions fail on returned=false; retained candidate object no longer current"
+    },
+    {
+      "gate": "Explicit SS regression",
+      "status": "CONFIRMED",
+      "scope": "26 named checks; declared capabilities/ball/situation fixtures, not original-capability natural proof"
+    },
+    {
+      "gate": "Explicit Ground lifecycle regression",
+      "status": "CONFIRMED",
+      "scope": "26 named checks; declared fixtures and recovery/settlement, not natural proof"
+    }
+  ],
+  "replay": {
+    "sameProgram": true,
+    "programSha256": "b870174601e9885c3ba7473b375014333be5b984a94cbed0da67aa371c611022",
+    "fixtureInitialPartialRecordLogDecisionsEqual": true,
+    "hashes": {
+      "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+      "initial": "2d2d1e52109a2795d52bb96069ad6b772da07b62a24d3fbb07b3a500c6312164",
+      "record": "5096259a113703518eaeeb6b0a1230f7fc1bb92fb2fa35d311ff6928e2fb3ca1",
+      "log": "533e05d2dbc31a193e294c5d30b0aa2e324ce059fd3f040c32b35a660c94aa41",
+      "decisions": "0ab6382e05035f0bf9f89dbabbc13f0096ff894e9c409f5dc7561baf224c2b69"
+    },
+    "fullPlayerEqual": false,
+    "completeReplayVerified": false,
+    "limitation": "Unintended default Match seeds differ; do not claim completed or observer-free replay"
+  },
+  "historicalCanonical": {
+    "file": "docs/test-infrastructure-sprint-0.1-match-moment-snapshot-integrity-repair-v0.1-canonical-evidence.json",
+    "newExecutions": 0,
+    "sourceFreshness": [
+      {
+        "file": "tests/canonical-match-regression-integration-test.cjs",
+        "recorded": "1265fb28109fe80726f50ad7ddd82af60a95faaa2083b5ebf11883f0b799df1c",
+        "current": "1265fb28109fe80726f50ad7ddd82af60a95faaa2083b5ebf11883f0b799df1c",
+        "matches": true
+      },
+      {
+        "file": "receiver-source-snapshot.js",
+        "recorded": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274",
+        "current": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274",
+        "matches": true
+      },
+      {
+        "file": "tests/entry-safe-export-child.cjs",
+        "recorded": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379",
+        "current": "f5e2f1283859ad9332fc394e376eb7aa40735f201303219b7212b23163ec7379",
+        "matches": true
+      },
+      {
+        "file": "tests/entry-safe-preload.cjs",
+        "recorded": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+        "current": "caee4ac9d3525eb5982a09f204cba5e4d82518663d668c9853c10b2e35b3ea90",
+        "matches": true
+      },
+      {
+        "file": "tests/entry-safe-runner-test.cjs",
+        "recorded": "26a47cdc78e273783abc9d5a279a46cc92959bb09ff38c2c898d889d5239c019",
+        "current": "26a47cdc78e273783abc9d5a279a46cc92959bb09ff38c2c898d889d5239c019",
+        "matches": true
+      },
+      {
+        "file": "tests/entry-safe-runner.cjs",
+        "recorded": "91659f28bc718eb21569be4a64bfce61a6518b5867a5ca629e5484e15a54a6d0",
+        "current": "91659f28bc718eb21569be4a64bfce61a6518b5867a5ca629e5484e15a54a6d0",
+        "matches": true
+      },
+      {
+        "file": "tests/helpers/canonical-match-contract-context.cjs",
+        "recorded": "b09b35cf404c100b6f1d00ff6b8e67e38093fd6d13a22e788413f3bb7c608fb5",
+        "current": "b09b35cf404c100b6f1d00ff6b8e67e38093fd6d13a22e788413f3bb7c608fb5",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-production-snapshot-save-test.cjs",
+        "recorded": "13775331b92655eb47c6e9781718621b919d62b72fbfc4b73e6d40895fb1d38c",
+        "current": "13775331b92655eb47c6e9781718621b919d62b72fbfc4b73e6d40895fb1d38c",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-harness.cjs",
+        "recorded": "83f3aa6781e678d7fcf2dcc08dc7f8997c78f88f6b06aea2dfde7406ad9effae",
+        "current": "83f3aa6781e678d7fcf2dcc08dc7f8997c78f88f6b06aea2dfde7406ad9effae",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs",
+        "recorded": "4ecadd69eb7d04bccc785fa4268d122e32dd0b01bc580229e842cd967d380934",
+        "current": "4ecadd69eb7d04bccc785fa4268d122e32dd0b01bc580229e842cd967d380934",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs",
+        "recorded": "7b01b5ed3dce2fa6d7368358fc89c367c9393409de2866b740363da2745b4f69",
+        "current": "7b01b5ed3dce2fa6d7368358fc89c367c9393409de2866b740363da2745b4f69",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+        "recorded": "24a2e3c4b77a212695fde636b8e25247972a075f3b1e99293378862b45c164be",
+        "current": "24a2e3c4b77a212695fde636b8e25247972a075f3b1e99293378862b45c164be",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r2-runner-test.cjs",
+        "recorded": "bbda7018ffe79680e123856d45843cff6cb74e8ee13b324ba9f3d2528705e631",
+        "current": "bbda7018ffe79680e123856d45843cff6cb74e8ee13b324ba9f3d2528705e631",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r2-runner.cjs",
+        "recorded": "b90ac905f2f8a65f22f265e09f220e156378707264b253e8bb3daa36cbba1e24",
+        "current": "b90ac905f2f8a65f22f265e09f220e156378707264b253e8bb3daa36cbba1e24",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r3-closeout.cjs",
+        "recorded": "8aeac45167b28623175783e90f317f9e6d061732e39db5d95c09a634abd8f89d",
+        "current": "8aeac45167b28623175783e90f317f9e6d061732e39db5d95c09a634abd8f89d",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r3-guard-test.cjs",
+        "recorded": "450ce6f691a22a4adf9c84d651baf82f6b388c5aa4e799a20203cbb0a61185de",
+        "current": "450ce6f691a22a4adf9c84d651baf82f6b388c5aa4e799a20203cbb0a61185de",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r3-runner.cjs",
+        "recorded": "22cbec658791e50fc3c20ae604c0c4a991741005648448151ee127005195624f",
+        "current": "22cbec658791e50fc3c20ae604c0c4a991741005648448151ee127005195624f",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r3-source-review.cjs",
+        "recorded": "11630c0e8c8ce0018554db6ec010d243bb18d4489de041fb72adf10ae20328a5",
+        "current": "11630c0e8c8ce0018554db6ec010d243bb18d4489de041fb72adf10ae20328a5",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r4-closeout.cjs",
+        "recorded": "613eb747ce734cc936182982402a5ebff345cdbc0e4cfa0909d536611ea700c7",
+        "current": "613eb747ce734cc936182982402a5ebff345cdbc0e4cfa0909d536611ea700c7",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r4-dependency-audit.cjs",
+        "recorded": "8f60f16efcfc2dcb5ea557999b7d9997cb7a6b683c8a711fbe179ba097cebe8e",
+        "current": "8f60f16efcfc2dcb5ea557999b7d9997cb7a6b683c8a711fbe179ba097cebe8e",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs",
+        "recorded": "87571187914b5c4049ae3802f7c72e7c2b9c613bcc483a5ebee17a861cfe6166",
+        "current": "87571187914b5c4049ae3802f7c72e7c2b9c613bcc483a5ebee17a861cfe6166",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs",
+        "recorded": "f2fc0e5f72b44b0b4cb76921b12842f9b2fe649f5224e4bfb54e515629958359",
+        "current": "f2fc0e5f72b44b0b4cb76921b12842f9b2fe649f5224e4bfb54e515629958359",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r4-runtime-comparison.cjs",
+        "recorded": "22b8809b9b10091c2c1aa15e6109ddb81aa3050f4e682583d6d15927c0957e8b",
+        "current": "22b8809b9b10091c2c1aa15e6109ddb81aa3050f4e682583d6d15927c0957e8b",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r4-runtime-investigation.cjs",
+        "recorded": "e5d2f9af05ee5d7e0cf36a15cb8cf1d9032cd83e8ddcdf7b70c96f0e74fb238b",
+        "current": "e5d2f9af05ee5d7e0cf36a15cb8cf1d9032cd83e8ddcdf7b70c96f0e74fb238b",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r5-ownership-audit.cjs",
+        "recorded": "7b4750ead5e562ddd6510285dd27f1046090b1e05a818dfb7d4c192b692f472e",
+        "current": "7b4750ead5e562ddd6510285dd27f1046090b1e05a818dfb7d4c192b692f472e",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs",
+        "recorded": "e8f6a9bbdea182a6b73241d60d9c9bb54e4174fccf56dcdba05399904830504b",
+        "current": "e8f6a9bbdea182a6b73241d60d9c9bb54e4174fccf56dcdba05399904830504b",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r6-independent-review.cjs",
+        "recorded": "ee111254142c3b7c26f5e2385cf32ea6f92c6fc01bb48db80bc5c9122717513e",
+        "current": "ee111254142c3b7c26f5e2385cf32ea6f92c6fc01bb48db80bc5c9122717513e",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs",
+        "recorded": "d8dcb7e1d43ab476dda8b457f3292f750232b6b0f49f661093e8d7d1850246e2",
+        "current": "d8dcb7e1d43ab476dda8b457f3292f750232b6b0f49f661093e8d7d1850246e2",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3b-r6-save-boundary-test.cjs",
+        "recorded": "7bf28ed1f296feb61b64451982d72ab2c12d7ed719dd0ac30ceae3aaa26d7073",
+        "current": "7bf28ed1f296feb61b64451982d72ab2c12d7ed719dd0ac30ceae3aaa26d7073",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-source-index-authorized-wiring.cjs",
+        "recorded": "48fe3bc74e385bb55a991096ef0ee1445e04c5b9d38b5e75621c43c8ee06bc36",
+        "current": "48fe3bc74e385bb55a991096ef0ee1445e04c5b9d38b5e75621c43c8ee06bc36",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-source-save-authorized-delta.cjs",
+        "recorded": "94a2cac6e155c3936ea2cd03f0d31e4e19feba87d53f87c4be5c3cc5aab28b82",
+        "current": "94a2cac6e155c3936ea2cd03f0d31e4e19feba87d53f87c4be5c3cc5aab28b82",
+        "matches": true
+      },
+      {
+        "file": "tests/routine-commentary-contract-test.cjs",
+        "recorded": "d593d99eb0430c32aa0423e4a4d59c18a2ab324ec5635d23f2ead4774b4ca9c7",
+        "current": "d593d99eb0430c32aa0423e4a4d59c18a2ab324ec5635d23f2ead4774b4ca9c7",
+        "matches": true
+      },
+      {
+        "file": "tests/source-freeze-reconciliation-exact-contract-test.cjs",
+        "recorded": "4d77721c776f7bef046ef1d4ff7e53c103f199ebbc8ab825a352f0637fa7787e",
+        "current": "4d77721c776f7bef046ef1d4ff7e53c103f199ebbc8ab825a352f0637fa7787e",
+        "matches": true
+      },
+      {
+        "file": "ai-plate-appearance-outcome.js",
+        "recorded": "77d65f8807f956f798e78e12515bebc2191a1ff4bdbe77a71c1ca618102e2ba0",
+        "current": "77d65f8807f956f798e78e12515bebc2191a1ff4bdbe77a71c1ca618102e2ba0",
+        "matches": true
+      },
+      {
+        "file": "application-controller.js",
+        "recorded": "6b91bd6aeb3f723845d28b08541943e3d8530ad940ed23c402d025f5c0e7fabd",
+        "current": "6b91bd6aeb3f723845d28b08541943e3d8530ad940ed23c402d025f5c0e7fabd",
+        "matches": true
+      },
+      {
+        "file": "baseball-defense-prototype.js",
+        "recorded": "90ee7d2e15aa91e3d81aa136ec33c86fbaac475366a043647147d4b5eca0cb4f",
+        "current": "90ee7d2e15aa91e3d81aa136ec33c86fbaac475366a043647147d4b5eca0cb4f",
+        "matches": true
+      },
+      {
+        "file": "baseball-gameplay-integration.js",
+        "recorded": "a6ff07c43c1f6c460a36fbb155819ec8b2174bd998b40e2522107b0a2f019abf",
+        "current": "a6ff07c43c1f6c460a36fbb155819ec8b2174bd998b40e2522107b0a2f019abf",
+        "matches": true
+      },
+      {
+        "file": "baseball-gameplay-prototype-sandbox.js",
+        "recorded": "91c46a8dd60a51409fbcf29e5795497d137b32fbbab68d4932c3f99ba2a30c7e",
+        "current": "91c46a8dd60a51409fbcf29e5795497d137b32fbbab68d4932c3f99ba2a30c7e",
+        "matches": true
+      },
+      {
+        "file": "baseball-gameplay-prototype-utils.js",
+        "recorded": "390a9a6dc1b52e6aaf3d9d7c6bdd454267867903a21f5a072bfc32b0babc1049",
+        "current": "390a9a6dc1b52e6aaf3d9d7c6bdd454267867903a21f5a072bfc32b0babc1049",
+        "matches": true
+      },
+      {
+        "file": "baseball-offense-prototype.js",
+        "recorded": "82f8a63122fddb7ac01d54ded0b75c4899bd9ef9fe1b545cea391663918fb204",
+        "current": "82f8a63122fddb7ac01d54ded0b75c4899bd9ef9fe1b545cea391663918fb204",
+        "matches": true
+      },
+      {
+        "file": "baseball-training-resolver.js",
+        "recorded": "6f10ce80bfa99b4053017bfbd48c207604d1f3828d9c2372655548cc31bbc339",
+        "current": "6f10ce80bfa99b4053017bfbd48c207604d1f3828d9c2372655548cc31bbc339",
+        "matches": true
+      },
+      {
+        "file": "batted-ball-fly-ball-defense.js",
+        "recorded": "66dfb3867c79b8aadaabbf155c95dcb07673d1298bf2226d1070cf36fa14fffe",
+        "current": "66dfb3867c79b8aadaabbf155c95dcb07673d1298bf2226d1070cf36fa14fffe",
+        "matches": true
+      },
+      {
+        "file": "batted-ball-ground-defense.js",
+        "recorded": "71b12034b813179180250a5c533b3a95c1bd05f5640cd4a523e0e8b5efacb777",
+        "current": "71b12034b813179180250a5c533b3a95c1bd05f5640cd4a523e0e8b5efacb777",
+        "matches": true
+      },
+      {
+        "file": "batted-ball-line-drive-defense.js",
+        "recorded": "98fc4a6135f1dceaa137f7e996f4586e758aca28312fae5b5b61932d53673d30",
+        "current": "98fc4a6135f1dceaa137f7e996f4586e758aca28312fae5b5b61932d53673d30",
+        "matches": true
+      },
+      {
+        "file": "batted-ball-outcome-mapping.js",
+        "recorded": "94ebfbc1e69735560b95592c2a430df5b6f15ecfdfddd6a37f084ab7faf9efac",
+        "current": "94ebfbc1e69735560b95592c2a430df5b6f15ecfdfddd6a37f084ab7faf9efac",
+        "matches": true
+      },
+      {
+        "file": "batted-ball-physical.js",
+        "recorded": "4c0847af7b085c6da68223e47114164af417567dbc9d65644ec51fc7427cfec8",
+        "current": "4c0847af7b085c6da68223e47114164af417567dbc9d65644ec51fc7427cfec8",
+        "matches": true
+      },
+      {
+        "file": "batted-ball-tag-up-execution.js",
+        "recorded": "389f1c9a4801eaa609687274b7ac7cfdf2b2abf02ba819b10db11aa4a606ab7f",
+        "current": "389f1c9a4801eaa609687274b7ac7cfdf2b2abf02ba819b10db11aa4a606ab7f",
+        "matches": true
+      },
+      {
+        "file": "batter-anticipation.js",
+        "recorded": "174d20a5f72f2c5241cea2380203e661ff953c441d184cbd176d46f17be16459",
+        "current": "174d20a5f72f2c5241cea2380203e661ff953c441d184cbd176d46f17be16459",
+        "matches": true
+      },
+      {
+        "file": "career-age22-outcome-resolver.js",
+        "recorded": "6639b534f7fa40e94bf517ce6599bfa2213312ac154e33a70ff9dc0910a3fb1d",
+        "current": "6639b534f7fa40e94bf517ce6599bfa2213312ac154e33a70ff9dc0910a3fb1d",
+        "matches": true
+      },
+      {
+        "file": "career-development-progression.js",
+        "recorded": "d7b214ba19d7d6524fe06a0a003c5bc8b81a07e59cf7f6ad96df88ba7398f77e",
+        "current": "d7b214ba19d7d6524fe06a0a003c5bc8b81a07e59cf7f6ad96df88ba7398f77e",
+        "matches": true
+      },
+      {
+        "file": "career-development-runtime-resolver.js",
+        "recorded": "77036ad44a7ec1927691d55bfe43e5d989edea7dbabe5ede298d2831d74619a4",
+        "current": "77036ad44a7ec1927691d55bfe43e5d989edea7dbabe5ede298d2831d74619a4",
+        "matches": true
+      },
+      {
+        "file": "career-rejoin-contract.js",
+        "recorded": "e400eeca668393019f2c40e739d45a7c021c5d4933c9c0599a5a4069fa774876",
+        "current": "e400eeca668393019f2c40e739d45a7c021c5d4933c9c0599a5a4069fa774876",
+        "matches": true
+      },
+      {
+        "file": "career-save-admission.js",
+        "recorded": "c7fb7038baa0907adca73946b3bea2d31fc86f9080a2233e07d7036aa804554a",
+        "current": "c7fb7038baa0907adca73946b3bea2d31fc86f9080a2233e07d7036aa804554a",
+        "matches": true
+      },
+      {
+        "file": "career-spine-contract.js",
+        "recorded": "9958bc22b1fbaeb67a461952a872be6eb2f0a73f73d945c11732a858200a2bc0",
+        "current": "9958bc22b1fbaeb67a461952a872be6eb2f0a73f73d945c11732a858200a2bc0",
+        "matches": true
+      },
+      {
+        "file": "career-transition-commit.js",
+        "recorded": "dedd11abf65c2555ab4173ab82967320e9bc0a2a454675a6d8562f59109f18aa",
+        "current": "dedd11abf65c2555ab4173ab82967320e9bc0a2a454675a6d8562f59109f18aa",
+        "matches": true
+      },
+      {
+        "file": "career-transition-progression.js",
+        "recorded": "33fd5f3f79cbac11c3f26facae69dd690ec59636636a6904b6c392fb30e1a414",
+        "current": "33fd5f3f79cbac11c3f26facae69dd690ec59636636a6904b6c392fb30e1a414",
+        "matches": true
+      },
+      {
+        "file": "career-transition-resolver.js",
+        "recorded": "dd2cb7b57ef19f26bcc4bb5d8951819530ad817d5d73cf8944e075f0b789abcf",
+        "current": "dd2cb7b57ef19f26bcc4bb5d8951819530ad817d5d73cf8944e075f0b789abcf",
+        "matches": true
+      },
+      {
+        "file": "career-transition-runtime-resolver.js",
+        "recorded": "52cb2c2c13825adb1cde1b23fe19b3d66c0222d793ff5d3c4ffab18ebb0da521",
+        "current": "52cb2c2c13825adb1cde1b23fe19b3d66c0222d793ff5d3c4ffab18ebb0da521",
+        "matches": true
+      },
+      {
+        "file": "coach-evaluation-boundary.js",
+        "recorded": "6307ebb6d5933771e2c2659ae1f6ab65efa83b8831406671415d0f955e8f9515",
+        "current": "6307ebb6d5933771e2c2659ae1f6ab65efa83b8831406671415d0f955e8f9515",
+        "matches": true
+      },
+      {
+        "file": "coach-response-flow.js",
+        "recorded": "85275abbae5575128cbc2b6b368c94f07b6fc7a854e0b52732630304295940a1",
+        "current": "85275abbae5575128cbc2b6b368c94f07b6fc7a854e0b52732630304295940a1",
+        "matches": true
+      },
+      {
+        "file": "coach.js",
+        "recorded": "79ecda72276276d44ec384d2c96b2f8f5a16c8e5fb43dd2f48c3752353595266",
+        "current": "79ecda72276276d44ec384d2c96b2f8f5a16c8e5fb43dd2f48c3752353595266",
+        "matches": true
+      },
+      {
+        "file": "competition-presentation.js",
+        "recorded": "b89a018f22f09405ca64e61e718d83d7218d86497072b21720abd99fee5c6b22",
+        "current": "b89a018f22f09405ca64e61e718d83d7218d86497072b21720abd99fee5c6b22",
+        "matches": true
+      },
+      {
+        "file": "competition-rules.js",
+        "recorded": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "current": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "matches": true
+      },
+      {
+        "file": "county-selection-opportunity.js",
+        "recorded": "f336bb7572694e3f6baaef533b383427b1aa0743c54e2e1726c7f8dfe0f9b715",
+        "current": "f336bb7572694e3f6baaef533b383427b1aa0743c54e2e1726c7f8dfe0f9b715",
+        "matches": true
+      },
+      {
+        "file": "current-state-boundary.js",
+        "recorded": "6d844918eb30c886828d57a564b75d0e309b69903e2f34b5365bedffd49e0d51",
+        "current": "6d844918eb30c886828d57a564b75d0e309b69903e2f34b5365bedffd49e0d51",
+        "matches": true
+      },
+      {
+        "file": "day-completion-flow.js",
+        "recorded": "6dfc90d43442d036767bdeb13a708f52e80fd5953e556443223dfc74c72af7b5",
+        "current": "6dfc90d43442d036767bdeb13a708f52e80fd5953e556443223dfc74c72af7b5",
+        "matches": true
+      },
+      {
+        "file": "decision-flow.js",
+        "recorded": "15694c948a621b55747533586d552f56513b79d4989951cf3da1d41b56cae9b2",
+        "current": "15694c948a621b55747533586d552f56513b79d4989951cf3da1d41b56cae9b2",
+        "matches": true
+      },
+      {
+        "file": "defensive-decision-throw-foundation.js",
+        "recorded": "1a8a65ee11a98ace76f2b0b807bf3227df789514abdbefdf2decf2de378e831e",
+        "current": "1a8a65ee11a98ace76f2b0b807bf3227df789514abdbefdf2decf2de378e831e",
+        "matches": true
+      },
+      {
+        "file": "defensive-opportunity-foundation.js",
+        "recorded": "834395d3f829e27cce798fd859c11f8fee2ed0e9586b8015d5554108aa773a32",
+        "current": "834395d3f829e27cce798fd859c11f8fee2ed0e9586b8015d5554108aa773a32",
+        "matches": true
+      },
+      {
+        "file": "defensive-reach-secure-foundation.js",
+        "recorded": "c5a51a82adf4900dd46f0788ba458dfadded82ea93daa8ca2f30ca92e8f01365",
+        "current": "c5a51a82adf4900dd46f0788ba458dfadded82ea93daa8ca2f30ca92e8f01365",
+        "matches": true
+      },
+      {
+        "file": "defensive-runner-throw-settlement-foundation.js",
+        "recorded": "4c54b171252c3a93df15304d5a7520335877a4a621b0cba8268354ed4563d136",
+        "current": "4c54b171252c3a93df15304d5a7520335877a4a621b0cba8268354ed4563d136",
+        "matches": true
+      },
+      {
+        "file": "evaluation-registry-bootstrap.js",
+        "recorded": "b81fabb242f9faf7d53d1036b25da87fd5cf1aad104994f8f3b35bfd9f87e925",
+        "current": "b81fabb242f9faf7d53d1036b25da87fd5cf1aad104994f8f3b35bfd9f87e925",
+        "matches": true
+      },
+      {
+        "file": "evaluation-registry.js",
+        "recorded": "1f6340b2caa4b1127974e35096b515744f14aad9ddbfddcafa21d01bd006c3b8",
+        "current": "1f6340b2caa4b1127974e35096b515744f14aad9ddbfddcafa21d01bd006c3b8",
+        "matches": true
+      },
+      {
+        "file": "event.js",
+        "recorded": "fcc3a191b47c587117a53aa158a411b8bf7d5adea7eb7c541e8f3e5222f7770f",
+        "current": "fcc3a191b47c587117a53aa158a411b8bf7d5adea7eb7c541e8f3e5222f7770f",
+        "matches": true
+      },
+      {
+        "file": "force-advancement.js",
+        "recorded": "d588865c2e234799d5e60a12230df5b0caa9903c07635255d60008fa4aae0e13",
+        "current": "d588865c2e234799d5e60a12230df5b0caa9903c07635255d60008fa4aae0e13",
+        "matches": true
+      },
+      {
+        "file": "gameplay-prototype.html",
+        "recorded": "bb5a2836c93013a18d662521b5c7669c0b6c59ca37629d0973332b935c4c224e",
+        "current": "bb5a2836c93013a18d662521b5c7669c0b6c59ca37629d0973332b935c4c224e",
+        "matches": true
+      },
+      {
+        "file": "high-school-career-evaluation.js",
+        "recorded": "b59c4de6d63efb8b9788cf94e933f471ddedb4bd451fcfd62222c51b11632677",
+        "current": "b59c4de6d63efb8b9788cf94e933f471ddedb4bd451fcfd62222c51b11632677",
+        "matches": true
+      },
+      {
+        "file": "high-school-career-offers.js",
+        "recorded": "675b9eb6bfd653c56d1c16bb0192dc5185f7be7137345be4fa0f021551414dc7",
+        "current": "675b9eb6bfd653c56d1c16bb0192dc5185f7be7137345be4fa0f021551414dc7",
+        "matches": true
+      },
+      {
+        "file": "high-school-competition-evidence.js",
+        "recorded": "973d70c8bf20c46a7d3a996fbea7d26afe483fa335ec2f32ac61efb0825565ba",
+        "current": "973d70c8bf20c46a7d3a996fbea7d26afe483fa335ec2f32ac61efb0825565ba",
+        "matches": true
+      },
+      {
+        "file": "high-school-competition-foundation.js",
+        "recorded": "a8d630d4c99408d8a6cf77178a306d22cbff37a4d367fe2a637d69f9d0dfde92",
+        "current": "a8d630d4c99408d8a6cf77178a306d22cbff37a4d367fe2a637d69f9d0dfde92",
+        "matches": true
+      },
+      {
+        "file": "high-school-competition-reassessment.js",
+        "recorded": "01c7ef6abaa8ca3db7bdc4a08286b07b0be0731d6fb6e280cf3a9918de6e7460",
+        "current": "01c7ef6abaa8ca3db7bdc4a08286b07b0be0731d6fb6e280cf3a9918de6e7460",
+        "matches": true
+      },
+      {
+        "file": "high-school-entry-roster-context.js",
+        "recorded": "839abe78dbe2975c73ff83b770b8148e0bd2663d2acd05acaeb27018036bbad4",
+        "current": "839abe78dbe2975c73ff83b770b8148e0bd2663d2acd05acaeb27018036bbad4",
+        "matches": true
+      },
+      {
+        "file": "high-school-exchange-network.js",
+        "recorded": "a7e33281d24cf1fcbd9c54f66373000794340a4784728bf68af000b4c3b5fec5",
+        "current": "a7e33281d24cf1fcbd9c54f66373000794340a4784728bf68af000b4c3b5fec5",
+        "matches": true
+      },
+      {
+        "file": "high-school-friendly-invitation-producer.js",
+        "recorded": "626d368ffdd262a88fa70411f095a342d0557821583b850aa98dd10cc544253f",
+        "current": "626d368ffdd262a88fa70411f095a342d0557821583b850aa98dd10cc544253f",
+        "matches": true
+      },
+      {
+        "file": "high-school-match-opportunity-generation.js",
+        "recorded": "a1884a9e3fb5c941a19e075d2cde660e24924ff5d7344da89fad6b011b5918f6",
+        "current": "a1884a9e3fb5c941a19e075d2cde660e24924ff5d7344da89fad6b011b5918f6",
+        "matches": true
+      },
+      {
+        "file": "high-school-opportunity-probability.js",
+        "recorded": "f4d92008ac8c5b2ffc41dcd3dcc92f93c434d1684f1f579e67446b441622b6cd",
+        "current": "f4d92008ac8c5b2ffc41dcd3dcc92f93c434d1684f1f579e67446b441622b6cd",
+        "matches": true
+      },
+      {
+        "file": "high-school-opportunity-selection.js",
+        "recorded": "94677ade55ad683f205cbe96cd31616b3f2b07c2a48c3ce75134863c791a4548",
+        "current": "94677ade55ad683f205cbe96cd31616b3f2b07c2a48c3ce75134863c791a4548",
+        "matches": true
+      },
+      {
+        "file": "high-school-relationship-recency.js",
+        "recorded": "131292d29e748d45273db6d6371ee943fcec11e87e3ab376eac05fb65101d663",
+        "current": "131292d29e748d45273db6d6371ee943fcec11e87e3ab376eac05fb65101d663",
+        "matches": true
+      },
+      {
+        "file": "high-school-relationship-temporal-authority.js",
+        "recorded": "2cd719430fdb33edf23570d05c955f56cb74831a552cb64687ffdbd92f08f5b1",
+        "current": "2cd719430fdb33edf23570d05c955f56cb74831a552cb64687ffdbd92f08f5b1",
+        "matches": true
+      },
+      {
+        "file": "high-school-schedule-opportunity.js",
+        "recorded": "ad65e5fe1823c17797a7c30eff9b08741d83326a0ef75f50c053e36ac8fc5673",
+        "current": "ad65e5fe1823c17797a7c30eff9b08741d83326a0ef75f50c053e36ac8fc5673",
+        "matches": true
+      },
+      {
+        "file": "high-school-training-camp-producer.js",
+        "recorded": "f84978455db9d9fc01cfe674bbcaabb7eb9d9482d8cfa0670c3e454f64004181",
+        "current": "f84978455db9d9fc01cfe674bbcaabb7eb9d9482d8cfa0670c3e454f64004181",
+        "matches": true
+      },
+      {
+        "file": "high-school-year-transition.js",
+        "recorded": "b1f0384e3eb7b4c7bef6d7a0548e125d42333a60dce87293406b3756cf7504a4",
+        "current": "b1f0384e3eb7b4c7bef6d7a0548e125d42333a60dce87293406b3756cf7504a4",
+        "matches": true
+      },
+      {
+        "file": "index.html",
+        "recorded": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+        "current": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+        "matches": true
+      },
+      {
+        "file": "injury.js",
+        "recorded": "2401aa93bddd3de13120d874ad908dc70b32207d22e107d2332256503b18b009",
+        "current": "2401aa93bddd3de13120d874ad908dc70b32207d22e107d2332256503b18b009",
+        "matches": true
+      },
+      {
+        "file": "match-context-foundation.js",
+        "recorded": "25581d7b3b6dc8ff7771cd02aae14b1ddc3f16d2b94be5ffc39f81bd7824fd72",
+        "current": "25581d7b3b6dc8ff7771cd02aae14b1ddc3f16d2b94be5ffc39f81bd7824fd72",
+        "matches": true
+      },
+      {
+        "file": "match-development-settlement-presentation.js",
+        "recorded": "bf6ffc610c5589144614538d64f8c1b5a468fae6108d306209746502c1701c3f",
+        "current": "bf6ffc610c5589144614538d64f8c1b5a468fae6108d306209746502c1701c3f",
+        "matches": true
+      },
+      {
+        "file": "match-experience-development.js",
+        "recorded": "544a9a3625c69d868645011ff0f67804b48cd0734bcb5b1e4410ca593df766f3",
+        "current": "544a9a3625c69d868645011ff0f67804b48cd0734bcb5b1e4410ca593df766f3",
+        "matches": true
+      },
+      {
+        "file": "match-game-record.js",
+        "recorded": "8e172a1b99f8e54963f1d2434d6fbe4d3bfdf40ce915f8307765d1557d2a6085",
+        "current": "8e172a1b99f8e54963f1d2434d6fbe4d3bfdf40ce915f8307765d1557d2a6085",
+        "matches": true
+      },
+      {
+        "file": "match-situation-lifecycle.js",
+        "recorded": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+        "current": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+        "matches": true
+      },
+      {
+        "file": "narrative-condition-boundary.js",
+        "recorded": "ea752ee1d64fb1cb33e5c3e1fb12b08c4b0049fdf4e6ad8aeae932e20c127c39",
+        "current": "ea752ee1d64fb1cb33e5c3e1fb12b08c4b0049fdf4e6ad8aeae932e20c127c39",
+        "matches": true
+      },
+      {
+        "file": "narrative-condition-flow.js",
+        "recorded": "f2a3e4d71a7c6d7d7b620518c48e24c6ca51144128042f2f2da848d22db9f5f7",
+        "current": "f2a3e4d71a7c6d7d7b620518c48e24c6ca51144128042f2f2da848d22db9f5f7",
+        "matches": true
+      },
+      {
+        "file": "national-selection-pipeline.js",
+        "recorded": "3220958c887612160358966b145155d3c086c144f5b27485f4e9a21b147efe35",
+        "current": "3220958c887612160358966b145155d3c086c144f5b27485f4e9a21b147efe35",
+        "matches": true
+      },
+      {
+        "file": "npc.js",
+        "recorded": "d9faa55802e60437e5c51c58ab75cb4a29f854147ded1af9bd39f5c7e35c11bb",
+        "current": "d9faa55802e60437e5c51c58ab75cb4a29f854147ded1af9bd39f5c7e35c11bb",
+        "matches": true
+      },
+      {
+        "file": "offensive-bunt-count-rules.js",
+        "recorded": "433cb8f7a66ce31fad0557a1dd683a07ecda9dbb61ce6261bb8e000010cf4ddb",
+        "current": "433cb8f7a66ce31fad0557a1dd683a07ecda9dbb61ce6261bb8e000010cf4ddb",
+        "matches": true
+      },
+      {
+        "file": "offensive-bunt-defensive-handoff.js",
+        "recorded": "ef5508e81fbe01a099878a50f4053d3c9e051493c2f205bcab9895d9a97a0a49",
+        "current": "ef5508e81fbe01a099878a50f4053d3c9e051493c2f205bcab9895d9a97a0a49",
+        "matches": true
+      },
+      {
+        "file": "offensive-bunt-execution.js",
+        "recorded": "6e27616cd624f8ba22131eaea0c9a0f8a28e3d07a9be2fc42852b6370de823f4",
+        "current": "6e27616cd624f8ba22131eaea0c9a0f8a28e3d07a9be2fc42852b6370de823f4",
+        "matches": true
+      },
+      {
+        "file": "offensive-plate-approach.js",
+        "recorded": "f3c2ae25fe261006a76e3cbdc583f7c8e2a45d45c20a98a623b36e651380b317",
+        "current": "f3c2ae25fe261006a76e3cbdc583f7c8e2a45d45c20a98a623b36e651380b317",
+        "matches": true
+      },
+      {
+        "file": "offensive-tactical-action.js",
+        "recorded": "b7c3f93497072e2d5ae84d34d88a5ae6d6c5f4d9459fc594fda95fee3d396b94",
+        "current": "b7c3f93497072e2d5ae84d34d88a5ae6d6c5f4d9459fc594fda95fee3d396b94",
+        "matches": true
+      },
+      {
+        "file": "offensive-tactical-decision.js",
+        "recorded": "a8128a4eda2b0b33b5ee9195f53d237c0587f86c9ed4c497b44b345a5e19dfa6",
+        "current": "a8128a4eda2b0b33b5ee9195f53d237c0587f86c9ed4c497b44b345a5e19dfa6",
+        "matches": true
+      },
+      {
+        "file": "offensive-tactical-opportunity.js",
+        "recorded": "ef6aea7c6bf8b0ed8390bb2f9edebbf89416d4b776a17b0aa1fe2a3e0573042c",
+        "current": "ef6aea7c6bf8b0ed8390bb2f9edebbf89416d4b776a17b0aa1fe2a3e0573042c",
+        "matches": true
+      },
+      {
+        "file": "package-lock.json",
+        "recorded": "37a458081b3bed2476789ebc09248ba73489aae98e16d075710b50c857d65313",
+        "current": "37a458081b3bed2476789ebc09248ba73489aae98e16d075710b50c857d65313",
+        "matches": true
+      },
+      {
+        "file": "package.json",
+        "recorded": "aed3ef652bff37dcec40d172dbb3f4b3304a46215ef16a91564117d77ebf6fd5",
+        "current": "aed3ef652bff37dcec40d172dbb3f4b3304a46215ef16a91564117d77ebf6fd5",
+        "matches": true
+      },
+      {
+        "file": "pitch-observation-foundation.js",
+        "recorded": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+        "current": "940f433646a0e3d4d88dc267d81d74096d388e8cbf4730a84a4137b07f0890e5",
+        "matches": true
+      },
+      {
+        "file": "pitch-sequence-state-foundation.js",
+        "recorded": "e91f1159dd06d13869db7c88412d4d8128814289ee88b53a0a64db2a1af5b7e1",
+        "current": "e91f1159dd06d13869db7c88412d4d8128814289ee88b53a0a64db2a1af5b7e1",
+        "matches": true
+      },
+      {
+        "file": "pitch-sequencing.js",
+        "recorded": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+        "current": "07f18241b7265a53a93a838b4aca59ce881b3f7477c2b641d7e88d81eba6061d",
+        "matches": true
+      },
+      {
+        "file": "pitch-tactical-decision-foundation.js",
+        "recorded": "92fe89b086867bb44aa13cac0dfe82764f01468efb512f5f356916fa5ed22511",
+        "current": "92fe89b086867bb44aa13cac0dfe82764f01468efb512f5f356916fa5ed22511",
+        "matches": true
+      },
+      {
+        "file": "pitch-tactical-decision-production-adapter.js",
+        "recorded": "43d1fad7ef5d6f4e9eaec52eda5e28d4198b1b16a46bfdcbc70144f6f286df97",
+        "current": "43d1fad7ef5d6f4e9eaec52eda5e28d4198b1b16a46bfdcbc70144f6f286df97",
+        "matches": true
+      },
+      {
+        "file": "pitch-tactical-interpretation-foundation.js",
+        "recorded": "ada9061892b2b0e37c52323730e320a91b1f2832f6bf9acce628f22b8c56161f",
+        "current": "ada9061892b2b0e37c52323730e320a91b1f2832f6bf9acce628f22b8c56161f",
+        "matches": true
+      },
+      {
+        "file": "pitch-tactical-signal-projection-foundation.js",
+        "recorded": "66ec4acf3ce73d1c19750122563f07dde033f8bc07310823f1f66e9f851ee466",
+        "current": "66ec4acf3ce73d1c19750122563f07dde033f8bc07310823f1f66e9f851ee466",
+        "matches": true
+      },
+      {
+        "file": "pitcher-catcher-tactical-integration.js",
+        "recorded": "daafacdd3e5daefd87aa2cf8a12fbcec601af26151fec6a42e1883bead738bd7",
+        "current": "daafacdd3e5daefd87aa2cf8a12fbcec601af26151fec6a42e1883bead738bd7",
+        "matches": true
+      },
+      {
+        "file": "pitcher-mental-state.js",
+        "recorded": "78ee14921792f40cc5d3010ddff774e94f5f5ff7d1d79658e847321bf8ee79d9",
+        "current": "78ee14921792f40cc5d3010ddff774e94f5f5ff7d1d79658e847321bf8ee79d9",
+        "matches": true
+      },
+      {
+        "file": "pitcher-process-state.js",
+        "recorded": "ba8a3b0d4ffc3db8fc6f006594485a5e4b81f69649b05db04284f98b7684f3e5",
+        "current": "ba8a3b0d4ffc3db8fc6f006594485a5e4b81f69649b05db04284f98b7684f3e5",
+        "matches": true
+      },
+      {
+        "file": "plate-decision-foundation.js",
+        "recorded": "cfe502bf820761f5d0156a773dd2f3d8dd61c940666e141dc2f8fb2b186c7304",
+        "current": "cfe502bf820761f5d0156a773dd2f3d8dd61c940666e141dc2f8fb2b186c7304",
+        "matches": true
+      },
+      {
+        "file": "player.js",
+        "recorded": "3414f5a93429bc1a4adbe3c632485e70b5d9175822261b689543a77fa0eb38bd",
+        "current": "3414f5a93429bc1a4adbe3c632485e70b5d9175822261b689543a77fa0eb38bd",
+        "matches": true
+      },
+      {
+        "file": "playing-time-game-exposure.js",
+        "recorded": "46115f4afe056dcc94c48fb74a0d7da5510e314f9f23d9b3cd6d14d107e9355f",
+        "current": "46115f4afe056dcc94c48fb74a0d7da5510e314f9f23d9b3cd6d14d107e9355f",
+        "matches": true
+      },
+      {
+        "file": "receiver-execution-v2-2-foundation.js",
+        "recorded": "e3d66df106bdac3d9d3697c0a276bf2b328ef23470379c21b6807e7c6cc9769d",
+        "current": "e3d66df106bdac3d9d3697c0a276bf2b328ef23470379c21b6807e7c6cc9769d",
+        "matches": true
+      },
+      {
+        "file": "receiver-execution-v2-admission-timing-foundation.js",
+        "recorded": "3ef4ae16a2ea011f915184600d9688956e7750f720999e5b126f83af8e215a1e",
+        "current": "3ef4ae16a2ea011f915184600d9688956e7750f720999e5b126f83af8e215a1e",
+        "matches": true
+      },
+      {
+        "file": "receiver-execution-v2-foundation.js",
+        "recorded": "44581d76bb5bacbac1515dd762afe4e0e6814b8b3f9adb8a2b60963a523f514e",
+        "current": "44581d76bb5bacbac1515dd762afe4e0e6814b8b3f9adb8a2b60963a523f514e",
+        "matches": true
+      },
+      {
+        "file": "receiver-execution-v2-production-source-adapter-prototype.cjs",
+        "recorded": "d589eabe59642adadee59c3d753b1ef6ec0175222f20b85247f55bd098753742",
+        "current": "d589eabe59642adadee59c3d753b1ef6ec0175222f20b85247f55bd098753742",
+        "matches": true
+      },
+      {
+        "file": "receiver-execution-v2-source-authority-foundation.js",
+        "recorded": "0a2d536f1a8c5cfcb56b41b30d938d6a6d0919bb28a757e8b75ee784f2f8ecda",
+        "current": "0a2d536f1a8c5cfcb56b41b30d938d6a6d0919bb28a757e8b75ee784f2f8ecda",
+        "matches": true
+      },
+      {
+        "file": "relationship-boundary.js",
+        "recorded": "649a886534e59c8ea162b4a6dfb56286638c796edec002f8d263e978b4eaa3a8",
+        "current": "649a886534e59c8ea162b4a6dfb56286638c796edec002f8d263e978b4eaa3a8",
+        "matches": true
+      },
+      {
+        "file": "relationship-flow.js",
+        "recorded": "4166c0ee10f7f5640cba63c91c156e35167a2338aaa5c302b6eb9a4c03adabf8",
+        "current": "4166c0ee10f7f5640cba63c91c156e35167a2338aaa5c302b6eb9a4c03adabf8",
+        "matches": true
+      },
+      {
+        "file": "rival.js",
+        "recorded": "2087cffea9ea5e8f2049ea7399356d2293dc38d38328d265de474b6a9304c0ca",
+        "current": "2087cffea9ea5e8f2049ea7399356d2293dc38d38328d265de474b6a9304c0ca",
+        "matches": true
+      },
+      {
+        "file": "save.js",
+        "recorded": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+        "current": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+        "matches": true
+      },
+      {
+        "file": "script.js",
+        "recorded": "b35526671499a5f780ccbd5c0e152b7e935fbacdea1302c26f75730faba70669",
+        "current": "b35526671499a5f780ccbd5c0e152b7e935fbacdea1302c26f75730faba70669",
+        "matches": true
+      },
+      {
+        "file": "story.js",
+        "recorded": "c1885f6e0d62e8d0c328eeb3215dde20c6ee25017fdb41ac65c05c2d12b74819",
+        "current": "c1885f6e0d62e8d0c328eeb3215dde20c6ee25017fdb41ac65c05c2d12b74819",
+        "matches": true
+      },
+      {
+        "file": "team-roster-foundation.js",
+        "recorded": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "current": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "matches": true
+      },
+      {
+        "file": "team-strength-model.js",
+        "recorded": "08121c9369272753379b220dc6b10e35eba61364ef28861ba22ab4a3ff9af9b2",
+        "current": "08121c9369272753379b220dc6b10e35eba61364ef28861ba22ab4a3ff9af9b2",
+        "matches": true
+      },
+      {
+        "file": "tests/ability-performance-correlation-audit.cjs",
+        "recorded": "c2fec3f34d18dbd3f042c87ee9dff399c6b834a409d336f17a0a3d90117e010e",
+        "current": "c2fec3f34d18dbd3f042c87ee9dff399c6b834a409d336f17a0a3d90117e010e",
+        "matches": true
+      },
+      {
+        "file": "tests/ability-performance-gradient-test.js",
+        "recorded": "1038c92e98c4a040f61a44e23c464d2a9daf544a613e9e3b0f6a9cf5e4017611",
+        "current": "1038c92e98c4a040f61a44e23c464d2a9daf544a613e9e3b0f6a9cf5e4017611",
+        "matches": true
+      },
+      {
+        "file": "tests/ability-performance-observability-extension-test.js",
+        "recorded": "7cfe012c3274fb8530d3231fa897b99280c73b39383b1235266deaf5f8431d91",
+        "current": "7cfe012c3274fb8530d3231fa897b99280c73b39383b1235266deaf5f8431d91",
+        "matches": true
+      },
+      {
+        "file": "tests/ability-performance-observability-extension.cjs",
+        "recorded": "a8478b64ce409779848de3bfa521383a457a47e2dc119f12f00865938e50edd9",
+        "current": "a8478b64ce409779848de3bfa521383a457a47e2dc119f12f00865938e50edd9",
+        "matches": true
+      },
+      {
+        "file": "tests/active-defensive-assignment-integrity-test.js",
+        "recorded": "18278901d787aa8031f5a07982c51c6ba3f1f9b7d47c02de34869e380e8f2b0d",
+        "current": "18278901d787aa8031f5a07982c51c6ba3f1f9b7d47c02de34869e380e8f2b0d",
+        "matches": true
+      },
+      {
+        "file": "tests/adult-route-chain-test.js",
+        "recorded": "9e9fad5fe131b5fb6a12a47d40122e50e74486bb1a39b043f1782d46aaf6ac0f",
+        "current": "9e9fad5fe131b5fb6a12a47d40122e50e74486bb1a39b043f1782d46aaf6ac0f",
+        "matches": true
+      },
+      {
+        "file": "tests/ai-plate-appearance-outcome-production-integration-test.js",
+        "recorded": "7ce4f1736d0d70ed78a2a5ee783f61705b77e1f146b32d9c9f4f5e82c1b7e816",
+        "current": "7ce4f1736d0d70ed78a2a5ee783f61705b77e1f146b32d9c9f4f5e82c1b7e816",
+        "matches": true
+      },
+      {
+        "file": "tests/ai-plate-appearance-outcome-test.js",
+        "recorded": "d34887a1966a414efa9c2d38017c1b8a39b354c4fa44e3dfa5e803068bc081ed",
+        "current": "d34887a1966a414efa9c2d38017c1b8a39b354c4fa44e3dfa5e803068bc081ed",
+        "matches": true
+      },
+      {
+        "file": "tests/ai-plate-appearance-outcome-validation.cjs",
+        "recorded": "847119f7131d8da9af08e0b04df4656b38fe7a8a454c17b44c0b03175b8575f1",
+        "current": "847119f7131d8da9af08e0b04df4656b38fe7a8a454c17b44c0b03175b8575f1",
+        "matches": true
+      },
+      {
+        "file": "tests/application-controller-test.js",
+        "recorded": "3a1c4ef8e4c9e8f2e55a5932dfb3a90108ceeea6abf5d89dab39c3ff461d0490",
+        "current": "3a1c4ef8e4c9e8f2e55a5932dfb3a90108ceeea6abf5d89dab39c3ff461d0490",
+        "matches": true
+      },
+      {
+        "file": "tests/aspiration-narrative-test.js",
+        "recorded": "b5639b9bd2a817d1fb5eb95ca549580f05782b9c1428ced83f10d7204a590f87",
+        "current": "b5639b9bd2a817d1fb5eb95ca549580f05782b9c1428ced83f10d7204a590f87",
+        "matches": true
+      },
+      {
+        "file": "tests/azhe-storyboard-test.js",
+        "recorded": "b79685087f16a40d5c15ca28e607b948a0a22ff9d157668f7d678629559d73ce",
+        "current": "b79685087f16a40d5c15ca28e607b948a0a22ff9d157668f7d678629559d73ce",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-defense-prototype-test.js",
+        "recorded": "c644773523e7062470ce26aac4d3d0733a430e8ddc708d91611d18bd67396f7f",
+        "current": "c644773523e7062470ce26aac4d3d0733a430e8ddc708d91611d18bd67396f7f",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-gameplay-integration-test.js",
+        "recorded": "0878f7d03952d63d28efde51d6c604b227ce35263bf2315709ce23b95ef28203",
+        "current": "0878f7d03952d63d28efde51d6c604b227ce35263bf2315709ce23b95ef28203",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-gameplay-prototype-isolation-test.js",
+        "recorded": "be41728d0a66eaffe3c75bde53173425b4a16927185ddea5b4ee790232c373e3",
+        "current": "be41728d0a66eaffe3c75bde53173425b4a16927185ddea5b4ee790232c373e3",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-1-1-1-test.js",
+        "recorded": "841d3df01e7407c3144e1477cdcd73727e76fc9b717dba97df82ed6acf91e583",
+        "current": "841d3df01e7407c3144e1477cdcd73727e76fc9b717dba97df82ed6acf91e583",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-1-1-test.js",
+        "recorded": "7085bc3e1cd0a362cbe994af0407b4636088b0c75c6ea4d56aea2677e4c2c3cb",
+        "current": "7085bc3e1cd0a362cbe994af0407b4636088b0c75c6ea4d56aea2677e4c2c3cb",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-1-test.js",
+        "recorded": "e1be4566bbb8ad779d30d8af3f6a62c50758e2f3feb95347ba4181984aa4ea39",
+        "current": "e1be4566bbb8ad779d30d8af3f6a62c50758e2f3feb95347ba4181984aa4ea39",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-1-test.js",
+        "recorded": "0764b4c6d62bc6acc82e48d7da36d23a2352e083378a9411e45668d7880a3848",
+        "current": "0764b4c6d62bc6acc82e48d7da36d23a2352e083378a9411e45668d7880a3848",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-2-test.js",
+        "recorded": "2019013d7fc81200e9945c00834df7c4f7d33a8d4d1c8074e66d25e9475d4375",
+        "current": "2019013d7fc81200e9945c00834df7c4f7d33a8d4d1c8074e66d25e9475d4375",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-3-test.js",
+        "recorded": "2e639eede8542695c9d44a511035d3f7ead998c6e6ca04cd21e45e9adbb8018f",
+        "current": "2e639eede8542695c9d44a511035d3f7ead998c6e6ca04cd21e45e9adbb8018f",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-4-1-test.js",
+        "recorded": "33a07f06841770b43bcd265af86711e2618f514281252d375f12ff5eea963eb5",
+        "current": "33a07f06841770b43bcd265af86711e2618f514281252d375f12ff5eea963eb5",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-4-2-test.js",
+        "recorded": "b60b285eccc66e6d1e349c61ec24356aa906ecf8f2b8f62b0aa467b4ebc5c1ac",
+        "current": "b60b285eccc66e6d1e349c61ec24356aa906ecf8f2b8f62b0aa467b4ebc5c1ac",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-4-3-audit.js",
+        "recorded": "641384dad47ef08fec011af3d632ae9d6afe6186b9945b80cea60a9fee90aa4b",
+        "current": "641384dad47ef08fec011af3d632ae9d6afe6186b9945b80cea60a9fee90aa4b",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-4-4-test.js",
+        "recorded": "0b8c1d6418a9672a15953b3373c49a9467b2a0de33f644758602b1dce8e886f4",
+        "current": "0b8c1d6418a9672a15953b3373c49a9467b2a0de33f644758602b1dce8e886f4",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-4-5-test.js",
+        "recorded": "dd307aa3dd91ae4061b688a336c757c75386f80a9aac1622fb188cb5aff02da0",
+        "current": "dd307aa3dd91ae4061b688a336c757c75386f80a9aac1622fb188cb5aff02da0",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-4-test.js",
+        "recorded": "8310f5b38b242e132598b19e2b5a2cfdcba39df0fb42961d0ad164061f43562d",
+        "current": "8310f5b38b242e132598b19e2b5a2cfdcba39df0fb42961d0ad164061f43562d",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-test.js",
+        "recorded": "8648336d03556c16ff3a8d6334c94f4a126b28838f59cb735a6d4565ce5058fb",
+        "current": "8648336d03556c16ff3a8d6334c94f4a126b28838f59cb735a6d4565ce5058fb",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-offense-base-state-test.js",
+        "recorded": "f19b92ebedb1e73c0c6b6a9cbe03438a2c60a89be71c1abd4a5b80455a41bc61",
+        "current": "f19b92ebedb1e73c0c6b6a9cbe03438a2c60a89be71c1abd4a5b80455a41bc61",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-offense-prototype-test.js",
+        "recorded": "860468ccaeb3c685f6b84b42d1a9081dca4ac07e0a1f3afaae1469b85fb7652b",
+        "current": "860468ccaeb3c685f6b84b42d1a9081dca4ac07e0a1f3afaae1469b85fb7652b",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-offensive-production-integration-test.js",
+        "recorded": "694dd211806efe77a8a9432ea12c6cc04f46c17e6bb759182037ea43e4355d2d",
+        "current": "694dd211806efe77a8a9432ea12c6cc04f46c17e6bb759182037ea43e4355d2d",
+        "matches": true
+      },
+      {
+        "file": "tests/baseball-training-rhythm-test.js",
+        "recorded": "029e2339880adb0b2a2721130ddb28afcd0eed635a5daeaf5adaffbb3b2b3b58",
+        "current": "029e2339880adb0b2a2721130ddb28afcd0eed635a5daeaf5adaffbb3b2b3b58",
+        "matches": true
+      },
+      {
+        "file": "tests/batted-ball-outcome-mapping-test.js",
+        "recorded": "d2c3585f61c0ed39a22868de1411cd5bddb4a2e02ef7b9bf5c39717a7dce7efe",
+        "current": "d2c3585f61c0ed39a22868de1411cd5bddb4a2e02ef7b9bf5c39717a7dce7efe",
+        "matches": true
+      },
+      {
+        "file": "tests/batted-ball-outcome-mapping-validation.cjs",
+        "recorded": "4fe5135bab8e42aa892fd8c9bd01dc13eab7915464def65b5ac0b440a594b8d9",
+        "current": "4fe5135bab8e42aa892fd8c9bd01dc13eab7915464def65b5ac0b440a594b8d9",
+        "matches": true
+      },
+      {
+        "file": "tests/batted-ball-outcome-production-integration-test.js",
+        "recorded": "a4240d99e7449c540b5e5c935d7f3a9d4457f027098aa58ccbe81077d0de97d4",
+        "current": "a4240d99e7449c540b5e5c935d7f3a9d4457f027098aa58ccbe81077d0de97d4",
+        "matches": true
+      },
+      {
+        "file": "tests/batted-ball-physical-foundation-test.js",
+        "recorded": "6fda883548ee4310ee593d3e1cee3822e9cecf3475cb96f5b9b5d7a204a9d5f9",
+        "current": "6fda883548ee4310ee593d3e1cee3822e9cecf3475cb96f5b9b5d7a204a9d5f9",
+        "matches": true
+      },
+      {
+        "file": "tests/batted-ball-physical-production-integration-test.js",
+        "recorded": "3b7c93f8b7810640c348bab7ab2b01e67140875ea8f453d43945458fedaf4fb7",
+        "current": "3b7c93f8b7810640c348bab7ab2b01e67140875ea8f453d43945458fedaf4fb7",
+        "matches": true
+      },
+      {
+        "file": "tests/batter-anticipation-sprint-b-test.js",
+        "recorded": "c840fb99ba38493632fa0ff9d7cae09a264b7bb90996ca9359d5ab8817d196e7",
+        "current": "c840fb99ba38493632fa0ff9d7cae09a264b7bb90996ca9359d5ab8817d196e7",
+        "matches": true
+      },
+      {
+        "file": "tests/bbp-b1-ground-ball-production-integration-test.js",
+        "recorded": "c2e4b0cdf315d29ac9af2dc7cce6a1c9645f1e1ca67f9d521bce603d0a395036",
+        "current": "c2e4b0cdf315d29ac9af2dc7cce6a1c9645f1e1ca67f9d521bce603d0a395036",
+        "matches": true
+      },
+      {
+        "file": "tests/bbp-b1-ground-ball-runner-handoff-test.js",
+        "recorded": "d0089e9719e69a74b8473b1d5fb0db5ffc0ae23290091740ae35db1afc213f05",
+        "current": "d0089e9719e69a74b8473b1d5fb0db5ffc0ae23290091740ae35db1afc213f05",
+        "matches": true
+      },
+      {
+        "file": "tests/bbp-b2a-line-drive-production-integration-test.js",
+        "recorded": "8aee4d5b522f4ad9866ebf7e45016f4fdf9712c456abcb6f25b61fd38c65624f",
+        "current": "8aee4d5b522f4ad9866ebf7e45016f4fdf9712c456abcb6f25b61fd38c65624f",
+        "matches": true
+      },
+      {
+        "file": "tests/bbp-b2a-line-drive-read-catch-test.js",
+        "recorded": "28327b7565eae249bc9245038c126409c00d2ba6af7424a86959a56ed9f61c2f",
+        "current": "28327b7565eae249bc9245038c126409c00d2ba6af7424a86959a56ed9f61c2f",
+        "matches": true
+      },
+      {
+        "file": "tests/bbp-b2b1-fly-ball-production-integration-test.js",
+        "recorded": "951e454417ee0502a6d6954eaece2ac5d1ca7573d39a77ef4fcb396928651070",
+        "current": "951e454417ee0502a6d6954eaece2ac5d1ca7573d39a77ef4fcb396928651070",
+        "matches": true
+      },
+      {
+        "file": "tests/bbp-b2b1-fly-ball-tag-up-legality-test.js",
+        "recorded": "f18c30d70fe4a9191c62a0dea5be3b581ae65de845f6a114257f67666ff2889e",
+        "current": "f18c30d70fe4a9191c62a0dea5be3b581ae65de845f6a114257f67666ff2889e",
+        "matches": true
+      },
+      {
+        "file": "tests/bbp-b2b2-tag-up-decision-execution-test.js",
+        "recorded": "42866df877b0607d08b01a85ecae8f8ee680395f8abc1058f1a442edd2e49749",
+        "current": "42866df877b0607d08b01a85ecae8f8ee680395f8abc1058f1a442edd2e49749",
+        "matches": true
+      },
+      {
+        "file": "tests/callbackTest.js",
+        "recorded": "e9ab6c7e7424fac4dde60415454a87e940468bab8281153522042bf91ff81ddb",
+        "current": "e9ab6c7e7424fac4dde60415454a87e940468bab8281153522042bf91ff81ddb",
+        "matches": true
+      },
+      {
+        "file": "tests/career-age22-outcome-resolver-test.js",
+        "recorded": "6c55118536c010bf342ff1e8a3e0a3e4f7ef1796b4b8fccb340f3c2bf27f88e5",
+        "current": "6c55118536c010bf342ff1e8a3e0a3e4f7ef1796b4b8fccb340f3c2bf27f88e5",
+        "matches": true
+      },
+      {
+        "file": "tests/career-arc-test.js",
+        "recorded": "76b6f84f5473682616a19b1ec5fc9040d09b4881fa08a1389f5442cb4b6ad5c0",
+        "current": "76b6f84f5473682616a19b1ec5fc9040d09b4881fa08a1389f5442cb4b6ad5c0",
+        "matches": true
+      },
+      {
+        "file": "tests/career-development-progression-test.js",
+        "recorded": "c55738c7ac269105e37d45f864f92d55a2f0d8c3008e0c5e50029a4a48d89ef7",
+        "current": "c55738c7ac269105e37d45f864f92d55a2f0d8c3008e0c5e50029a4a48d89ef7",
+        "matches": true
+      },
+      {
+        "file": "tests/career-development-runtime-resolver-test.js",
+        "recorded": "b22a73a1dc6b104201f19dfcee753430b0699db624fd093745eedb5c2487f45f",
+        "current": "b22a73a1dc6b104201f19dfcee753430b0699db624fd093745eedb5c2487f45f",
+        "matches": true
+      },
+      {
+        "file": "tests/career-network-contract-test.js",
+        "recorded": "87456fc3cb256b29cdf8fa41a2cc90fcbc6cd756f928c70a252e1cf18807477f",
+        "current": "87456fc3cb256b29cdf8fa41a2cc90fcbc6cd756f928c70a252e1cf18807477f",
+        "matches": true
+      },
+      {
+        "file": "tests/career-rejoin-contract-test.js",
+        "recorded": "191dc346c084e305769e8924a62e57658ba3804b2c66677f9e63a73881ec70a2",
+        "current": "191dc346c084e305769e8924a62e57658ba3804b2c66677f9e63a73881ec70a2",
+        "matches": true
+      },
+      {
+        "file": "tests/career-save-admission-test.js",
+        "recorded": "afaffc6dec608df43722b241726767112f28754035f1b894da51a4f69a7baaa2",
+        "current": "afaffc6dec608df43722b241726767112f28754035f1b894da51a4f69a7baaa2",
+        "matches": true
+      },
+      {
+        "file": "tests/career-spine-contract-test.js",
+        "recorded": "a6f6a4504becd3055201534a26c08547b724bab1b2cd04f690671d7723c557ef",
+        "current": "a6f6a4504becd3055201534a26c08547b724bab1b2cd04f690671d7723c557ef",
+        "matches": true
+      },
+      {
+        "file": "tests/career-transition-commit-test.js",
+        "recorded": "8aa2a7909f33ad8e988c08e5924449abf82c571abf66dd14371cc2ae2c44a280",
+        "current": "8aa2a7909f33ad8e988c08e5924449abf82c571abf66dd14371cc2ae2c44a280",
+        "matches": true
+      },
+      {
+        "file": "tests/career-transition-progression-test.js",
+        "recorded": "19a432874049f0a65430955f0d3744edb9159946b8a196f3dca09d056f448756",
+        "current": "19a432874049f0a65430955f0d3744edb9159946b8a196f3dca09d056f448756",
+        "matches": true
+      },
+      {
+        "file": "tests/career-transition-resolver-test.js",
+        "recorded": "aacd510048a333964844ad43c628a3b0f8a9051fa11b3b6f5ec781f6471287e4",
+        "current": "aacd510048a333964844ad43c628a3b0f8a9051fa11b3b6f5ec781f6471287e4",
+        "matches": true
+      },
+      {
+        "file": "tests/career-transition-role-test.js",
+        "recorded": "dddf531e88a1d2ff6dc6a4b8118a23c92accbd7aa6d9c7824742ebeadf1b0e71",
+        "current": "dddf531e88a1d2ff6dc6a4b8118a23c92accbd7aa6d9c7824742ebeadf1b0e71",
+        "matches": true
+      },
+      {
+        "file": "tests/career-transition-route-difference-test.js",
+        "recorded": "65c20c130047d16af1b83ca8c1f01512db078cfd41ef8d7b2bcc8a355b3b861f",
+        "current": "65c20c130047d16af1b83ca8c1f01512db078cfd41ef8d7b2bcc8a355b3b861f",
+        "matches": true
+      },
+      {
+        "file": "tests/career-transition-runtime-resolver-test.js",
+        "recorded": "1aceef16e9c6c32bfc39f97b399a3887133be7d4f46008dbe665806455ce98f0",
+        "current": "1aceef16e9c6c32bfc39f97b399a3887133be7d4f46008dbe665806455ce98f0",
+        "matches": true
+      },
+      {
+        "file": "tests/catcher-choice-outcome-integrity-v1-test.js",
+        "recorded": "3d5ec87c5198cef45407a0c7a8086be4f87efe805d7d75bbeaf3454f00fc3351",
+        "current": "3d5ec87c5198cef45407a0c7a8086be4f87efe805d7d75bbeaf3454f00fc3351",
+        "matches": true
+      },
+      {
+        "file": "tests/choice-integrity-browser-fixture.html",
+        "recorded": "2216a3d6f9c55e39b9667f01f9760abf24127bc726a6ef7e73f27d4c9a241461",
+        "current": "2216a3d6f9c55e39b9667f01f9760abf24127bc726a6ef7e73f27d4c9a241461",
+        "matches": true
+      },
+      {
+        "file": "tests/coach-evaluation-boundary-test.js",
+        "recorded": "456db43ca101047661baa3144e5cc29d662670db0ac0d0141375bc1100ffe143",
+        "current": "456db43ca101047661baa3144e5cc29d662670db0ac0d0141375bc1100ffe143",
+        "matches": true
+      },
+      {
+        "file": "tests/coach-response-expansion-test.js",
+        "recorded": "54d5b34867a5d6b176b503463277747360db99da02cc70c354d66cb0e59fc53e",
+        "current": "54d5b34867a5d6b176b503463277747360db99da02cc70c354d66cb0e59fc53e",
+        "matches": true
+      },
+      {
+        "file": "tests/coach-response-flow-test.js",
+        "recorded": "1f72e10b5ffc61af11ef366000bbbc7bcee478fc43ed29a609d2a4433d53216f",
+        "current": "1f72e10b5ffc61af11ef366000bbbc7bcee478fc43ed29a609d2a4433d53216f",
+        "matches": true
+      },
+      {
+        "file": "tests/competition-flow-framework-test.js",
+        "recorded": "ee1162ed887832c61793b5d3e54ad2009f621ff93941070125ef11450e76cbb9",
+        "current": "ee1162ed887832c61793b5d3e54ad2009f621ff93941070125ef11450e76cbb9",
+        "matches": true
+      },
+      {
+        "file": "tests/competition-rules-contract-foundation-test.js",
+        "recorded": "b7beab0ad3da24299fd8f9b6977e121b5f1644666a647adebcee7bb71a26805c",
+        "current": "b7beab0ad3da24299fd8f9b6977e121b5f1644666a647adebcee7bb71a26805c",
+        "matches": true
+      },
+      {
+        "file": "tests/content-flow-audit.js",
+        "recorded": "d92b75fb35778b5c1cae58f179a4636b594586ab2d9eae7202f457b983d36916",
+        "current": "d92b75fb35778b5c1cae58f179a4636b594586ab2d9eae7202f457b983d36916",
+        "matches": true
+      },
+      {
+        "file": "tests/contextual-status-panel-test.js",
+        "recorded": "8620a757e01c720106027dc1dfc81e97000be8c81052a85359d4798d2974680a",
+        "current": "8620a757e01c720106027dc1dfc81e97000be8c81052a85359d4798d2974680a",
+        "matches": true
+      },
+      {
+        "file": "tests/county-selection-opportunity-test.js",
+        "recorded": "d3bee38ae9297586a19ea2b40734eb6ad2c1c1a833426117373e82fa2f9fa58d",
+        "current": "d3bee38ae9297586a19ea2b40734eb6ad2c1c1a833426117373e82fa2f9fa58d",
+        "matches": true
+      },
+      {
+        "file": "tests/current-state-boundary-test.js",
+        "recorded": "e9326b87c7cd19af02ded5ab5cce72b6d7c2d22cdc00ee8644c36dc52ccda96c",
+        "current": "e9326b87c7cd19af02ded5ab5cce72b6d7c2d22cdc00ee8644c36dc52ccda96c",
+        "matches": true
+      },
+      {
+        "file": "tests/day-completion-flow-test.js",
+        "recorded": "de44b927e4f2fbb8026585453b1603f9fa95295c47d95c482f6a5bee374a6021",
+        "current": "de44b927e4f2fbb8026585453b1603f9fa95295c47d95c482f6a5bee374a6021",
+        "matches": true
+      },
+      {
+        "file": "tests/decision-flow-test.js",
+        "recorded": "0aa9cfa322b303e02735b1a476981b53d532b5d5de1f382f942544666eedba4a",
+        "current": "0aa9cfa322b303e02735b1a476981b53d532b5d5de1f382f942544666eedba4a",
+        "matches": true
+      },
+      {
+        "file": "tests/defensive-decision-throw-foundation-test.js",
+        "recorded": "adc73f50bfa2e22f4b0fe5ac05b1b536094c0559f7e9470551eab9c1b7c87154",
+        "current": "adc73f50bfa2e22f4b0fe5ac05b1b536094c0559f7e9470551eab9c1b7c87154",
+        "matches": true
+      },
+      {
+        "file": "tests/defensive-decision-throw-production-integration-test.js",
+        "recorded": "8a2b9782302c8877e544c3d8941e5e38a653e6824dec81b12be7a0e8e73306db",
+        "current": "8a2b9782302c8877e544c3d8941e5e38a653e6824dec81b12be7a0e8e73306db",
+        "matches": true
+      },
+      {
+        "file": "tests/defensive-opportunity-foundation-test.js",
+        "recorded": "5f1426d7f6c9399d59ffc9a7dd21ae97ab5729cf0c8f1bc10e744eaff2e44794",
+        "current": "5f1426d7f6c9399d59ffc9a7dd21ae97ab5729cf0c8f1bc10e744eaff2e44794",
+        "matches": true
+      },
+      {
+        "file": "tests/defensive-opportunity-production-integration-test.js",
+        "recorded": "66e710699c6367192d133966487c31bb1a493e9bdccd344d99817da1d6e9c734",
+        "current": "66e710699c6367192d133966487c31bb1a493e9bdccd344d99817da1d6e9c734",
+        "matches": true
+      },
+      {
+        "file": "tests/defensive-outcome-cause-explainability-foundation-v1-test.js",
+        "recorded": "d939cffc3cd9720d92af628623cf89f0d4c1b60d23012debea420b9bd190a710",
+        "current": "d939cffc3cd9720d92af628623cf89f0d4c1b60d23012debea420b9bd190a710",
+        "matches": true
+      },
+      {
+        "file": "tests/defensive-reach-secure-foundation-test.js",
+        "recorded": "5d33d972224597a27cf4b46bd785edc3b073a8c037f448c7fda26d70eb7365a5",
+        "current": "5d33d972224597a27cf4b46bd785edc3b073a8c037f448c7fda26d70eb7365a5",
+        "matches": true
+      },
+      {
+        "file": "tests/defensive-reach-secure-production-integration-test.js",
+        "recorded": "4c8fa910544c3067da60d3fa59c8972897d52c12c35401e069c7ab8218ff7f41",
+        "current": "4c8fa910544c3067da60d3fa59c8972897d52c12c35401e069c7ab8218ff7f41",
+        "matches": true
+      },
+      {
+        "file": "tests/defensive-runner-throw-settlement-foundation-test.js",
+        "recorded": "cbdec6337aa0b6cc70251e1e1438d5544c08bf88b03bc983414af4641a6724d5",
+        "current": "cbdec6337aa0b6cc70251e1e1438d5544c08bf88b03bc983414af4641a6724d5",
+        "matches": true
+      },
+      {
+        "file": "tests/development-match-position-test-fallback-v1-test.js",
+        "recorded": "b18f38bc5f591d57a4b492be8059596132056bf4f8c28ed83aea8a2de0a8f1eb",
+        "current": "b18f38bc5f591d57a4b492be8059596132056bf4f8c28ed83aea8a2de0a8f1eb",
+        "matches": true
+      },
+      {
+        "file": "tests/development-training-result-foundation-v1-test.js",
+        "recorded": "ec2a5d47892216a9a124f753dc93e5363720a5663333f8f76c576e58305b90e4",
+        "current": "ec2a5d47892216a9a124f753dc93e5363720a5663333f8f76c576e58305b90e4",
+        "matches": true
+      },
+      {
+        "file": "tests/emotional-payoff-test.js",
+        "recorded": "06743ac0f06b96f698c23ecf0fdc3e7f07a87a6ced757efb0da1f2829f0fabf7",
+        "current": "06743ac0f06b96f698c23ecf0fdc3e7f07a87a6ced757efb0da1f2829f0fabf7",
+        "matches": true
+      },
+      {
+        "file": "tests/evaluation-registry-integration-test.js",
+        "recorded": "0d5ff73634809dc819b9fdd856d1f90fa35a42b5e1d05409b61e9ac658e42e14",
+        "current": "0d5ff73634809dc819b9fdd856d1f90fa35a42b5e1d05409b61e9ac658e42e14",
+        "matches": true
+      },
+      {
+        "file": "tests/evaluation-registry-test.js",
+        "recorded": "31b73f2d6fe4b7e5347150a222d2646728288a30808d9d1b925b465858bad7d4",
+        "current": "31b73f2d6fe4b7e5347150a222d2646728288a30808d9d1b925b465858bad7d4",
+        "matches": true
+      },
+      {
+        "file": "tests/event-continuity-pass-test.js",
+        "recorded": "a77bc26f78bd6893cd3c34167784622527b91ae8bb8cfb1c40cd091d1d3bf9e0",
+        "current": "a77bc26f78bd6893cd3c34167784622527b91ae8bb8cfb1c40cd091d1d3bf9e0",
+        "matches": true
+      },
+      {
+        "file": "tests/extra-inning-tiebreak-foundation-test.js",
+        "recorded": "6ff7e8fec63835347069a74df83a0f05a429f601d3b24a5e4878b43c2d4ffe52",
+        "current": "6ff7e8fec63835347069a74df83a0f05a429f601d3b24a5e4878b43c2d4ffe52",
+        "matches": true
+      },
+      {
+        "file": "tests/extra-inning-tiebreak-production-integration-test.js",
+        "recorded": "59e5bd7fedc718ea15cbb418e15a4eb1125b75f79bccd0e07796cb1bf31223cb",
+        "current": "59e5bd7fedc718ea15cbb418e15a4eb1125b75f79bccd0e07796cb1bf31223cb",
+        "matches": true
+      },
+      {
+        "file": "tests/first-base-receive-active-ground-production-integration-test.js",
+        "recorded": "c07c1481bb8dbf554c2f6f5d63cd83a61ffbcbcbf378c95da4b332a46e7e6734",
+        "current": "c07c1481bb8dbf554c2f6f5d63cd83a61ffbcbcbf378c95da4b332a46e7e6734",
+        "matches": true
+      },
+      {
+        "file": "tests/first-base-sprint-3-validation-runner.cjs",
+        "recorded": "db9b4bd26639a8b040ec378cac92dc5bc61847069da7121f4c3e100f75fcb360",
+        "current": "db9b4bd26639a8b040ec378cac92dc5bc61847069da7121f4c3e100f75fcb360",
+        "matches": true
+      },
+      {
+        "file": "tests/first-offensive-moment-role-presentation-test.js",
+        "recorded": "d346f277fdcfa10f75781e052300715422e9cd3b0aaa59612bee1e89403002eb",
+        "current": "d346f277fdcfa10f75781e052300715422e9cd3b0aaa59612bee1e89403002eb",
+        "matches": true
+      },
+      {
+        "file": "tests/force-advancement-foundation-test.js",
+        "recorded": "442a6100abbe0cf9d8fcfd8fa28c878fcb18ae5f9496d555a78b1e1ccf350d52",
+        "current": "442a6100abbe0cf9d8fcfd8fa28c878fcb18ae5f9496d555a78b1e1ccf350d52",
+        "matches": true
+      },
+      {
+        "file": "tests/force-multi-runner-settlement-integration-test.js",
+        "recorded": "e54483c004b77a0d94b38cb2953b81e9bac47c5c9b729d68f6bb48c8e16c3faf",
+        "current": "e54483c004b77a0d94b38cb2953b81e9bac47c5c9b729d68f6bb48c8e16c3faf",
+        "matches": true
+      },
+      {
+        "file": "tests/force-multi-runner-settlement-production-integration-test.js",
+        "recorded": "f5a02f3fb7647cd8305416eb35342f144952d376b487866a971ff112a8f3aa45",
+        "current": "f5a02f3fb7647cd8305416eb35342f144952d376b487866a971ff112a8f3aa45",
+        "matches": true
+      },
+      {
+        "file": "tests/full-game-competition-evidence-test.js",
+        "recorded": "09062d7042463bdba5cc97af1c1a8cfb5ddf53d5681aac60eaa1f39538b97f1f",
+        "current": "09062d7042463bdba5cc97af1c1a8cfb5ddf53d5681aac60eaa1f39538b97f1f",
+        "matches": true
+      },
+      {
+        "file": "tests/full-game-player-line-test.js",
+        "recorded": "3e1011ab0f7e2401e442a24ef34b256b3b3ada933b20774873afa1ae1bfad197",
+        "current": "3e1011ab0f7e2401e442a24ef34b256b3b3ada933b20774873afa1ae1bfad197",
+        "matches": true
+      },
+      {
+        "file": "tests/full-match-simulation-browser-fixture.html",
+        "recorded": "4ab19e6610f268852ec012d99c09be1d7ddebc6e1f0e3f21d734554d77c403ee",
+        "current": "4ab19e6610f268852ec012d99c09be1d7ddebc6e1f0e3f21d734554d77c403ee",
+        "matches": true
+      },
+      {
+        "file": "tests/game-state-integrity-browser-fixture.html",
+        "recorded": "78ac40fda93dcbd802125943bf452bed78267d4fe6728768f37c48d45b1329cc",
+        "current": "78ac40fda93dcbd802125943bf452bed78267d4fe6728768f37c48d45b1329cc",
+        "matches": true
+      },
+      {
+        "file": "tests/generic-infield-position-admission-diagnostic-test.js",
+        "recorded": "145ca4200feacf6b31b4a3913b54cf1fdd652e7b810eb6dc1624565ed107aa89",
+        "current": "145ca4200feacf6b31b4a3913b54cf1fdd652e7b810eb6dc1624565ed107aa89",
+        "matches": true
+      },
+      {
+        "file": "tests/goal-balance-test.js",
+        "recorded": "994359439ecb601e74f1bf3cce200859824eb45f5f70084d0dd2ef02eb2e31a1",
+        "current": "994359439ecb601e74f1bf3cce200859824eb45f5f70084d0dd2ef02eb2e31a1",
+        "matches": true
+      },
+      {
+        "file": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+        "recorded": "6a86b68c5ceac057d934157995ca04eef5847c5b7932c09ab0e2e7a6c1930835",
+        "current": "6a86b68c5ceac057d934157995ca04eef5847c5b7932c09ab0e2e7a6c1930835",
+        "matches": true
+      },
+      {
+        "file": "tests/ground-ball-home-route-integrity-test.js",
+        "recorded": "96be5c659c13fc79dd59838e1164424042292b0702e7efe67f8cf92c20672cd1",
+        "current": "96be5c659c13fc79dd59838e1164424042292b0702e7efe67f8cf92c20672cd1",
+        "matches": true
+      },
+      {
+        "file": "tests/ground-ball-home-route-production-integration-test.js",
+        "recorded": "f7c2c4a50c9602b6b370e9752c7ff88e0d443d2bacc7eac64dc56e4e08a2a733",
+        "current": "f7c2c4a50c9602b6b370e9752c7ff88e0d443d2bacc7eac64dc56e4e08a2a733",
+        "matches": true
+      },
+      {
+        "file": "tests/ground-defensive-decision-identity-production-integration-test.js",
+        "recorded": "818ee89b44e0446b679ebe0e8ad9c1759c6f549ffd61b7569b095dfd0f87c097",
+        "current": "818ee89b44e0446b679ebe0e8ad9c1759c6f549ffd61b7569b095dfd0f87c097",
+        "matches": true
+      },
+      {
+        "file": "tests/ground-defensive-decision-identity-repair-test.js",
+        "recorded": "a257e6924d0a12506eeda22aa701952dfbb68baca471d245d8a7fa0125eb874c",
+        "current": "a257e6924d0a12506eeda22aa701952dfbb68baca471d245d8a7fa0125eb874c",
+        "matches": true
+      },
+      {
+        "file": "tests/ground-defensive-decision-identity-test-context.cjs",
+        "recorded": "d934cc7a03a4243714450f66c9dd94d7fa7ee57ca54ae1c5b30f72d46f8b6cfa",
+        "current": "d934cc7a03a4243714450f66c9dd94d7fa7ee57ca54ae1c5b30f72d46f8b6cfa",
+        "matches": true
+      },
+      {
+        "file": "tests/ground-settlement-handoff-r2-context.cjs",
+        "recorded": "1680117466f1c1432fe53b61f312816727619ca72d862045f0c1373d68172df4",
+        "current": "1680117466f1c1432fe53b61f312816727619ca72d862045f0c1373d68172df4",
+        "matches": true
+      },
+      {
+        "file": "tests/ground-settlement-handoff-r2-production-integration-test.js",
+        "recorded": "e4b0592bc85465ebbb64ff005240b85ad6a4b13a1f6e58ef3cf19b11b9d6a509",
+        "current": "e4b0592bc85465ebbb64ff005240b85ad6a4b13a1f6e58ef3cf19b11b9d6a509",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-career-evidence-test.js",
+        "recorded": "22d4c52017056ffb0a187e8cb23f6c4c8f21f2855c6431e06583052e3a2b26db",
+        "current": "22d4c52017056ffb0a187e8cb23f6c4c8f21f2855c6431e06583052e3a2b26db",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-career-exit-integration-test.js",
+        "recorded": "3be72f473e19b9409d73b5cfc6b813090cc67c6f7de140922647c5c33fc64fd9",
+        "current": "3be72f473e19b9409d73b5cfc6b813090cc67c6f7de140922647c5c33fc64fd9",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-career-offer-test.js",
+        "recorded": "ab2883110ea183ef6cf608b3d59a03968d1948e911cbc32e89ee22ec4adf86bf",
+        "current": "ab2883110ea183ef6cf608b3d59a03968d1948e911cbc32e89ee22ec4adf86bf",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-career-test-context.js",
+        "recorded": "c77afdf9f9e63e5fcf740605e66afee4cc54bd93e3e63ee4c12382a7b3f012e0",
+        "current": "c77afdf9f9e63e5fcf740605e66afee4cc54bd93e3e63ee4c12382a7b3f012e0",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-competition-evidence-test.js",
+        "recorded": "727788e50a956b0cb0e9b2249aa7cf6f9c94516b1d5c62415e4e076730021639",
+        "current": "727788e50a956b0cb0e9b2249aa7cf6f9c94516b1d5c62415e4e076730021639",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-competition-foundation-test.js",
+        "recorded": "6a92b9123f3f568e80a5f4deb5edcd1e34fb22b06cc638fe4aa30a30e7030a88",
+        "current": "6a92b9123f3f568e80a5f4deb5edcd1e34fb22b06cc638fe4aa30a30e7030a88",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-competition-reassessment-test.js",
+        "recorded": "6f13a4f78bd751d222b4bb09b101c124dfcab761416e7728ebc9fde66955b317",
+        "current": "6f13a4f78bd751d222b4bb09b101c124dfcab761416e7728ebc9fde66955b317",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-entry-roster-integration-test.js",
+        "recorded": "4c539a57317cdf92cbb82c29aa741862e53039366c8ddd6dddc4dbfd7caba53f",
+        "current": "4c539a57317cdf92cbb82c29aa741862e53039366c8ddd6dddc4dbfd7caba53f",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-exchange-network-foundation-test.js",
+        "recorded": "1fc65c2847a1c5471b712a5cadbc065cff179f952fe5946fdb629f6da479eddb",
+        "current": "1fc65c2847a1c5471b712a5cadbc065cff179f952fe5946fdb629f6da479eddb",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-exchange-network-production-integration-test.js",
+        "recorded": "0562f8efb7521f34e035a5b10db503a31a72eabc142d08ab88ce73de4bd6d9fb",
+        "current": "0562f8efb7521f34e035a5b10db503a31a72eabc142d08ab88ce73de4bd6d9fb",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-friendly-invitation-producer-foundation-test.js",
+        "recorded": "d2b4da7583d2fa48fe9c05eb03790a510a3a231be4cd56e4f7f9fce1cf553232",
+        "current": "d2b4da7583d2fa48fe9c05eb03790a510a3a231be4cd56e4f7f9fce1cf553232",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-friendly-invitation-producer-production-integration-test.js",
+        "recorded": "0374c242a7b6f8c3eb19bd6bcfc03e5c8d651c90ba3d76b4a45db64fa07b1ab7",
+        "current": "0374c242a7b6f8c3eb19bd6bcfc03e5c8d651c90ba3d76b4a45db64fa07b1ab7",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-integration-1-1-1-test.js",
+        "recorded": "713304d8a01fa3b58224616dfa2b56408bdc0fe59d3f6c43842219bb1d72888c",
+        "current": "713304d8a01fa3b58224616dfa2b56408bdc0fe59d3f6c43842219bb1d72888c",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-integration-1-1-test.js",
+        "recorded": "dd6261df53338a859eba057f6d2a7c435a6171126b2c919ee93bd88e25d6a3b3",
+        "current": "dd6261df53338a859eba057f6d2a7c435a6171126b2c919ee93bd88e25d6a3b3",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-integration-1-2-1-test.js",
+        "recorded": "bab48e92c6f053f9a2c742a80417821ef2978bd80d69ccf662d7f190a1c2912f",
+        "current": "bab48e92c6f053f9a2c742a80417821ef2978bd80d69ccf662d7f190a1c2912f",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-integration-1-2-2-1-test.js",
+        "recorded": "ccabc83046939b0d96c4724a6e588eb2cd51c3bd5ccc399f0dfffd3555f8545f",
+        "current": "ccabc83046939b0d96c4724a6e588eb2cd51c3bd5ccc399f0dfffd3555f8545f",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-integration-1-2-2-2-test.js",
+        "recorded": "a33a86c9f0bd0d4ec0d24481e6d1f0ae4e479ec9e3f393fc79b0aa81d73c2817",
+        "current": "a33a86c9f0bd0d4ec0d24481e6d1f0ae4e479ec9e3f393fc79b0aa81d73c2817",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-integration-1-2-2-test.js",
+        "recorded": "1ffc9bfbb0fd4e3aad361fd25d532a0c1f36bf4727b97d7c0435f33e373a03fb",
+        "current": "1ffc9bfbb0fd4e3aad361fd25d532a0c1f36bf4727b97d7c0435f33e373a03fb",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-integration-1-2-3-test.js",
+        "recorded": "77637a06c8e9407ffae89ff79d2042a74ac2333d57648ab76cda2fa6a00f5b8a",
+        "current": "77637a06c8e9407ffae89ff79d2042a74ac2333d57648ab76cda2fa6a00f5b8a",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-integration-1-2-test.js",
+        "recorded": "9085a6b7095175dafb7ac134a6bddde9b85f758f3414b2dc96c8d951e126609a",
+        "current": "9085a6b7095175dafb7ac134a6bddde9b85f758f3414b2dc96c8d951e126609a",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-match-opportunity-foundation-test.js",
+        "recorded": "26df643fa2f91b8b0de02113af226366120f550c24800881cf3b31556a293d73",
+        "current": "26df643fa2f91b8b0de02113af226366120f550c24800881cf3b31556a293d73",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-match-opportunity-generation-foundation-test.js",
+        "recorded": "6bd637b40631bedf7444d61ba3fb5de90f30c8c5af5861c21831925e7dedd7ca",
+        "current": "6bd637b40631bedf7444d61ba3fb5de90f30c8c5af5861c21831925e7dedd7ca",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-match-opportunity-generation-production-integration-test.js",
+        "recorded": "7a721c0b393f58c986bbf8f1f360e6260c83404a28d1744f2284134812ef2e4a",
+        "current": "7a721c0b393f58c986bbf8f1f360e6260c83404a28d1744f2284134812ef2e4a",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-exposure-bias-repair-foundation-test.js",
+        "recorded": "f0a1c8e06217e12643a949f3be549ea94717a4c89a5e404861ff1d571735caef",
+        "current": "f0a1c8e06217e12643a949f3be549ea94717a4c89a5e404861ff1d571735caef",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-exposure-bias-repair-production-integration-test.js",
+        "recorded": "705d2f2fe3de17adcd8577770aabeb14cec88dbaeb80ea274c80f680e976d0a4",
+        "current": "705d2f2fe3de17adcd8577770aabeb14cec88dbaeb80ea274c80f680e976d0a4",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-exposure-flow.cjs",
+        "recorded": "04b88102efffb7a79e0a393a8c666dd2a7fccae356f78d03e2c478ed27462bc0",
+        "current": "04b88102efffb7a79e0a393a8c666dd2a7fccae356f78d03e2c478ed27462bc0",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-post-repair-calibration-audit.cjs",
+        "recorded": "2fbdca802883678019912c48eb8512fbf16b5e47e9cc2c1f887e14c7e9ca6a68",
+        "current": "2fbdca802883678019912c48eb8512fbf16b5e47e9cc2c1f887e14c7e9ca6a68",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-post-repair-calibration-foundation-test.js",
+        "recorded": "53fbe7e272c5c454559c2eefad6117393d80d97787d5c703584bb16f621a34e2",
+        "current": "53fbe7e272c5c454559c2eefad6117393d80d97787d5c703584bb16f621a34e2",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-post-repair-calibration-production-integration-test.js",
+        "recorded": "f994cc7c3358d26ad881c193abc033bc3e45f5368c538ff8debc4a594fa30324",
+        "current": "f994cc7c3358d26ad881c193abc033bc3e45f5368c538ff8debc4a594fa30324",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-post-repair-calibration-runner.cjs",
+        "recorded": "e153e41fb2c6553331aaf54c35d260b9c6377f23ea5da362b7a69022ecfa0b18",
+        "current": "e153e41fb2c6553331aaf54c35d260b9c6377f23ea5da362b7a69022ecfa0b18",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-probability-calibration-audit.cjs",
+        "recorded": "fe17a55c2f8936fe1c8d5af4024587c9004a7a52ff64226efc60470ee0853c49",
+        "current": "fe17a55c2f8936fe1c8d5af4024587c9004a7a52ff64226efc60470ee0853c49",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-probability-calibration-career.cjs",
+        "recorded": "404567a12664950d2eb6f64b0e82ab7e02194a0fe4134dd3987b11c65e629ccf",
+        "current": "404567a12664950d2eb6f64b0e82ab7e02194a0fe4134dd3987b11c65e629ccf",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-probability-calibration-foundation-test.js",
+        "recorded": "ced1cc1cf03feff4d0d1c50a21b6330f70990e9c2352bf56fb99daef7e951ea1",
+        "current": "ced1cc1cf03feff4d0d1c50a21b6330f70990e9c2352bf56fb99daef7e951ea1",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-probability-calibration-production-integration-test.js",
+        "recorded": "822f92bef4895d15a360d78f903e2a8ea1ed12dbcbfa7bde963730f7076fcf6a",
+        "current": "822f92bef4895d15a360d78f903e2a8ea1ed12dbcbfa7bde963730f7076fcf6a",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-probability-calibration-runner.cjs",
+        "recorded": "f0415b43f478b20d6c2d23b966248f8e02b60963390d70f53fc57f8346bbaaa0",
+        "current": "f0415b43f478b20d6c2d23b966248f8e02b60963390d70f53fc57f8346bbaaa0",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-probability-foundation-test.js",
+        "recorded": "451bda7bf8faf0a35d2c2feff2e6cfb67616acc747dc28482932d636b5417e82",
+        "current": "451bda7bf8faf0a35d2c2feff2e6cfb67616acc747dc28482932d636b5417e82",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-probability-production-integration-test.js",
+        "recorded": "aa27f77ef1028b61ddd62c03ccb0955132b8386ddd2a0128ee71f1283b3c5181",
+        "current": "aa27f77ef1028b61ddd62c03ccb0955132b8386ddd2a0128ee71f1283b3c5181",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-selection-foundation-test.js",
+        "recorded": "005c96b32ef75ea60de2eeb0743dacdbdf8bea683fadc1b1f7b69d40649c77da",
+        "current": "005c96b32ef75ea60de2eeb0743dacdbdf8bea683fadc1b1f7b69d40649c77da",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-selection-production-integration-test.js",
+        "recorded": "67723deb29fe08029d9ab197fc298211f9f99f28b67ef65c02df6e30d851089f",
+        "current": "67723deb29fe08029d9ab197fc298211f9f99f28b67ef65c02df6e30d851089f",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-opportunity-selection-test-context.cjs",
+        "recorded": "83402b0f3c4da9b78586b68e4796dfcfbe057b0a62ed59f6e5f1ed0df776d5b4",
+        "current": "83402b0f3c4da9b78586b68e4796dfcfbe057b0a62ed59f6e5f1ed0df776d5b4",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-position-code-normalization-test.js",
+        "recorded": "284410fcacc94b66526d3c51a00d98eed39d3e20ee62adadfc0914d95ecbeac2",
+        "current": "284410fcacc94b66526d3c51a00d98eed39d3e20ee62adadfc0914d95ecbeac2",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-relationship-recency-foundation-test.js",
+        "recorded": "3262eda015de0f9d3b2d71d51e3309dd99cb1a294f4fee83a1f43db325663a75",
+        "current": "3262eda015de0f9d3b2d71d51e3309dd99cb1a294f4fee83a1f43db325663a75",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-relationship-recency-production-integration-test.js",
+        "recorded": "49e07386539af0b5e83d74c9d8c0c457c7e72e4c551f65043438e77fb82c1dda",
+        "current": "49e07386539af0b5e83d74c9d8c0c457c7e72e4c551f65043438e77fb82c1dda",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-relationship-recency-reputation-feasibility-audit.cjs",
+        "recorded": "5eaa20e7a19f118a7b8c340ff0eeb4ba69f1766d11ae881612978b0113f4ecc4",
+        "current": "5eaa20e7a19f118a7b8c340ff0eeb4ba69f1766d11ae881612978b0113f4ecc4",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-relationship-recency-reputation-feasibility-foundation-test.js",
+        "recorded": "267a8b63b4cd86788c625cb856443d6106dfed280f16becc7a0f719266094827",
+        "current": "267a8b63b4cd86788c625cb856443d6106dfed280f16becc7a0f719266094827",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-relationship-recency-reputation-feasibility-production-integration-test.js",
+        "recorded": "846f56210b7e1c21acb0d2255088fe9cc0c829e0b29360b98e75581b4f6e062a",
+        "current": "846f56210b7e1c21acb0d2255088fe9cc0c829e0b29360b98e75581b4f6e062a",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-relationship-temporal-authority-foundation-test.js",
+        "recorded": "2c99a07235980094677c15ec5153767f175bb65419fc81fd04e329d709dc2d1f",
+        "current": "2c99a07235980094677c15ec5153767f175bb65419fc81fd04e329d709dc2d1f",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-relationship-temporal-authority-production-integration-test.js",
+        "recorded": "f1b9a5e86db2de2a718d7b53013a227bfd0ffd6103e53e9c9b4b4ab53a5d2360",
+        "current": "f1b9a5e86db2de2a718d7b53013a227bfd0ffd6103e53e9c9b4b4ab53a5d2360",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-schedule-opportunity-production-integration-test.js",
+        "recorded": "e8940a35da433ee51d84f84098e8e932104d1a2848ba94557f794ef4c11363a1",
+        "current": "e8940a35da433ee51d84f84098e8e932104d1a2848ba94557f794ef4c11363a1",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-three-year-spine-test.js",
+        "recorded": "d97c0b896ef7ce9083409442f0fd4627138773ce988c2a6c76401ac7373513f9",
+        "current": "d97c0b896ef7ce9083409442f0fd4627138773ce988c2a6c76401ac7373513f9",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-training-camp-producer-foundation-test.js",
+        "recorded": "187e61ea2ff615bc7b7f5566d50a372593eebf3b9619e4e7381a0bbfe36d9398",
+        "current": "187e61ea2ff615bc7b7f5566d50a372593eebf3b9619e4e7381a0bbfe36d9398",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-training-camp-producer-production-integration-test.js",
+        "recorded": "e1b1e9e3fd1187518e80b129070b5e54cdd327e3258d577aefc46061a4dd7eba",
+        "current": "e1b1e9e3fd1187518e80b129070b5e54cdd327e3258d577aefc46061a4dd7eba",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-year-one-competition-loop-test.js",
+        "recorded": "4b1fa1bbeed24398961b288ca44fd240d62a8ac2bdf164af5a30053ada7a3601",
+        "current": "4b1fa1bbeed24398961b288ca44fd240d62a8ac2bdf164af5a30053ada7a3601",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-year-one-opportunity-two-integration-test.js",
+        "recorded": "7c67d25fcd60ac784fe01884e55a2be0a8886131178731fbde75eae19f074005",
+        "current": "7c67d25fcd60ac784fe01884e55a2be0a8886131178731fbde75eae19f074005",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-year-three-competition-loop-test.js",
+        "recorded": "34d931fd69565e23c661db8b5aba2d246ef400dcf981deae2f71707c8d2c32ca",
+        "current": "34d931fd69565e23c661db8b5aba2d246ef400dcf981deae2f71707c8d2c32ca",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-year-transition-continuity-test.js",
+        "recorded": "77ebb85b6b560ae7ac8ac758ca6ab5f93eac2638459fe7290c1c7e9a7165d45e",
+        "current": "77ebb85b6b560ae7ac8ac758ca6ab5f93eac2638459fe7290c1c7e9a7165d45e",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-year-two-autumn-match-integration-test.js",
+        "recorded": "db7c143581b657dc831eff41afe60c8667bbd3c23aea453ce7772b240b6b06a8",
+        "current": "db7c143581b657dc831eff41afe60c8667bbd3c23aea453ce7772b240b6b06a8",
+        "matches": true
+      },
+      {
+        "file": "tests/high-school-year-two-competition-loop-test.js",
+        "recorded": "fa492a5c5dabf34741c72b13507a2041ed5825d8b6d48a22cd9ef207a769e2a4",
+        "current": "fa492a5c5dabf34741c72b13507a2041ed5825d8b6d48a22cd9ef207a769e2a4",
+        "matches": true
+      },
+      {
+        "file": "tests/human-audit-opportunity-parity-browser-fixture.html",
+        "recorded": "8c4ea92ca28ddb27cd5f96f3af126bbf08f5040d76e2ae4d91a5fcaec754904a",
+        "current": "8c4ea92ca28ddb27cd5f96f3af126bbf08f5040d76e2ae4d91a5fcaec754904a",
+        "matches": true
+      },
+      {
+        "file": "tests/infield-decision-family-browser-fixture.html",
+        "recorded": "5ff6bff9fe0290a779512ac4e192af293970bbd0315945e31d678a5efe9f64f1",
+        "current": "5ff6bff9fe0290a779512ac4e192af293970bbd0315945e31d678a5efe9f64f1",
+        "matches": true
+      },
+      {
+        "file": "tests/infield-legacy-receiver-model-foundation-test.js",
+        "recorded": "c084a89926d8ce28ab492fee4285f4a9cde50ed4fe362c5e1db8c8112ecc91a7",
+        "current": "c084a89926d8ce28ab492fee4285f4a9cde50ed4fe362c5e1db8c8112ecc91a7",
+        "matches": true
+      },
+      {
+        "file": "tests/infield-legacy-receiver-model-save-probe.cjs",
+        "recorded": "a8474ac79f3f785801dd62330342a5db1c0d4a5a63e8809d823fdd77346d1594",
+        "current": "a8474ac79f3f785801dd62330342a5db1c0d4a5a63e8809d823fdd77346d1594",
+        "matches": true
+      },
+      {
+        "file": "tests/infield-legacy-receiver-model-sprint-6-runner.cjs",
+        "recorded": "4051fa09610bbb5c296e6d8b99510cefcfca7377a356fbd5802c8ba95032c52b",
+        "current": "4051fa09610bbb5c296e6d8b99510cefcfca7377a356fbd5802c8ba95032c52b",
+        "matches": true
+      },
+      {
+        "file": "tests/infield-legacy-receiver-scorer-closeout-runner.cjs",
+        "recorded": "f07c1c0f00538ace476fe5a16e7d6d71c2cc69e075a2b39cec5241be458f252d",
+        "current": "f07c1c0f00538ace476fe5a16e7d6d71c2cc69e075a2b39cec5241be458f252d",
+        "matches": true
+      },
+      {
+        "file": "tests/infield-legacy-receiver-scorer-closeout-test.js",
+        "recorded": "e3e3db4b4a322d43b478a4c0f00ff9ac6c83df7be05851c012fd363df07c3210",
+        "current": "e3e3db4b4a322d43b478a4c0f00ff9ac6c83df7be05851c012fd363df07c3210",
+        "matches": true
+      },
+      {
+        "file": "tests/infield-scorer-recovery-integrity-repair-test.js",
+        "recorded": "80bd3c35e40f72ef03a49612a2b6553c0c32955a6b067ecb74c319e23ca61b41",
+        "current": "80bd3c35e40f72ef03a49612a2b6553c0c32955a6b067ecb74c319e23ca61b41",
+        "matches": true
+      },
+      {
+        "file": "tests/infield-scorer-sprint-5-validation-runner.cjs",
+        "recorded": "0dd1a0c920f25d3b6d3ea4f40459c96646bed0d93c9d0fb0a423b2275fcaba2c",
+        "current": "0dd1a0c920f25d3b6d3ea4f40459c96646bed0d93c9d0fb0a423b2275fcaba2c",
+        "matches": true
+      },
+      {
+        "file": "tests/integration-integrity-browser-fixture.html",
+        "recorded": "9e6919548c998179945c348b3868f5a7fe05de844afd18dde8d3986ee71c214d",
+        "current": "9e6919548c998179945c348b3868f5a7fe05de844afd18dde8d3986ee71c214d",
+        "matches": true
+      },
+      {
+        "file": "tests/invitation-presentation-school-choice-integration-v1-test.js",
+        "recorded": "7cee0316b89ab0fe08a2e5910291b585088a2672f94945c218e11ec765d3b015",
+        "current": "7cee0316b89ab0fe08a2e5910291b585088a2672f94945c218e11ec765d3b015",
+        "matches": true
+      },
+      {
+        "file": "tests/invitation-presentation-v1-0-1-legacy-route-conflict-test.js",
+        "recorded": "dfaac0d2e11e6b083c554b45e512bac682e8b9711cc7deb4045ad91106e6864e",
+        "current": "dfaac0d2e11e6b083c554b45e512bac682e8b9711cc7deb4045ad91106e6864e",
+        "matches": true
+      },
+      {
+        "file": "tests/match-authority-coverage-audit.cjs",
+        "recorded": "a24e991d93e14e8d4fa2fc3d9d08c06f927b1412010eff28c3a97535725f2037",
+        "current": "a24e991d93e14e8d4fa2fc3d9d08c06f927b1412010eff28c3a97535725f2037",
+        "matches": true
+      },
+      {
+        "file": "tests/match-authority-coverage-blocker-repro.cjs",
+        "recorded": "05994a5a836dffd7e4bb9e55d9e51335510bb3a68834a71b5c1ba790acc0b82d",
+        "current": "05994a5a836dffd7e4bb9e55d9e51335510bb3a68834a71b5c1ba790acc0b82d",
+        "matches": true
+      },
+      {
+        "file": "tests/match-authority-coverage-cohort.cjs",
+        "recorded": "4873acfb7cc91072a575b504e02a45888b1cff172b46823e8ac6d2f92c205b68",
+        "current": "4873acfb7cc91072a575b504e02a45888b1cff172b46823e8ac6d2f92c205b68",
+        "matches": true
+      },
+      {
+        "file": "tests/match-authority-coverage-resume-blocker-repro.cjs",
+        "recorded": "7bcebf486378c433c25ba627936357caebc2ed518379b992382f70dbfac24a06",
+        "current": "7bcebf486378c433c25ba627936357caebc2ed518379b992382f70dbfac24a06",
+        "matches": true
+      },
+      {
+        "file": "tests/match-context-production-integration-test.js",
+        "recorded": "b2b5b350e9296d0930e2e66aa369c1d48f015a5240572170a1f4c17029ed815a",
+        "current": "b2b5b350e9296d0930e2e66aa369c1d48f015a5240572170a1f4c17029ed815a",
+        "matches": true
+      },
+      {
+        "file": "tests/match-context-schedule-origin-foundation-test.js",
+        "recorded": "4ede7c5eedcef66999cedabbf3144d5893511ca2cdd7f418be87b757822cf442",
+        "current": "4ede7c5eedcef66999cedabbf3144d5893511ca2cdd7f418be87b757822cf442",
+        "matches": true
+      },
+      {
+        "file": "tests/match-development-settlement-presentation-v1-test.js",
+        "recorded": "7bb586637b4c6c91236682b7c81b9cd792f2eae987f7fa8ef2c8b98b3d0c67a3",
+        "current": "7bb586637b4c6c91236682b7c81b9cd792f2eae987f7fa8ef2c8b98b3d0c67a3",
+        "matches": true
+      },
+      {
+        "file": "tests/match-experience-development-foundation-v1-test.js",
+        "recorded": "839276f945be1f174d66caba7669caadb67c457db7b25a651610f0d434fe0df6",
+        "current": "839276f945be1f174d66caba7669caadb67c457db7b25a651610f0d434fe0df6",
+        "matches": true
+      },
+      {
+        "file": "tests/match-full-game-record-test.js",
+        "recorded": "4e5eac9c3b9a5c7359658c808234770e2f3611095a610adfb0c2c9770d74e51b",
+        "current": "4e5eac9c3b9a5c7359658c808234770e2f3611095a610adfb0c2c9770d74e51b",
+        "matches": true
+      },
+      {
+        "file": "tests/match-m0-after-r2-admission-context.cjs",
+        "recorded": "ea8a30ed10c8f5d0fe0ca73b911a801e4da33a3d6803c4e4d33516a842ff52a9",
+        "current": "ea8a30ed10c8f5d0fe0ca73b911a801e4da33a3d6803c4e4d33516a842ff52a9",
+        "matches": true
+      },
+      {
+        "file": "tests/match-m0-after-r2-audit-test.js",
+        "recorded": "015a9933cf38ea4956f09c8aefb87b42f3c2d262bceb95d57c8b161fd161980b",
+        "current": "015a9933cf38ea4956f09c8aefb87b42f3c2d262bceb95d57c8b161fd161980b",
+        "matches": true
+      },
+      {
+        "file": "tests/match-m0-after-r2-census.cjs",
+        "recorded": "a113c46181cc5852d8b82ed7f6e9387060183de86231b88de6ba939cb137f998",
+        "current": "a113c46181cc5852d8b82ed7f6e9387060183de86231b88de6ba939cb137f998",
+        "matches": true
+      },
+      {
+        "file": "tests/match-m0-after-r2-cohort.cjs",
+        "recorded": "3d43481690ad4b96c70a8a71afa21c10cbb575a54f7af232d8d1636a1059e04c",
+        "current": "3d43481690ad4b96c70a8a71afa21c10cbb575a54f7af232d8d1636a1059e04c",
+        "matches": true
+      },
+      {
+        "file": "tests/match-m0-after-r2-coverage.cjs",
+        "recorded": "f82a24e2769c85b4ff588f689084555cc7726d22d942b473aae02faaa2648924",
+        "current": "f82a24e2769c85b4ff588f689084555cc7726d22d942b473aae02faaa2648924",
+        "matches": true
+      },
+      {
+        "file": "tests/match-opportunity-structural-completion-v1-test.js",
+        "recorded": "15531cf4d9c37bda0acc160965878ba71c826d13c94b1aa6af6897db50d0e98e",
+        "current": "15531cf4d9c37bda0acc160965878ba71c826d13c94b1aa6af6897db50d0e98e",
+        "matches": true
+      },
+      {
+        "file": "tests/match-simulation-outcome-mapping-audit.cjs",
+        "recorded": "a1ab6a1ac48c6e786e72519345f8df900cdb3f4859433305a8f2c01e189fc563",
+        "current": "a1ab6a1ac48c6e786e72519345f8df900cdb3f4859433305a8f2c01e189fc563",
+        "matches": true
+      },
+      {
+        "file": "tests/match-simulation-outcome-mapping-test.js",
+        "recorded": "0ccd7d65820a1a4f69d3a77012dc54171205c50f283402d5c0bbf8d7fe3dd09f",
+        "current": "0ccd7d65820a1a4f69d3a77012dc54171205c50f283402d5c0bbf8d7fe3dd09f",
+        "matches": true
+      },
+      {
+        "file": "tests/match-situation-lifecycle-test.js",
+        "recorded": "33912460d88d3a4922a46ba5fe92e4149b679792e7af09f0ab7c87dfa29a6d60",
+        "current": "33912460d88d3a4922a46ba5fe92e4149b679792e7af09f0ab7c87dfa29a6d60",
+        "matches": true
+      },
+      {
+        "file": "tests/meaningful-decision-gate-browser-fixture.html",
+        "recorded": "625fa9bf4ad34c451a18ebeab3ea329829ffb462e3fa063a10974e8b7c9e20d7",
+        "current": "625fa9bf4ad34c451a18ebeab3ea329829ffb462e3fa063a10974e8b7c9e20d7",
+        "matches": true
+      },
+      {
+        "file": "tests/narrative-condition-boundary-test.js",
+        "recorded": "883f51c2c1ed296a0bd40151c3e10a11a98c122ec09ae5aa9a3194725ef193bf",
+        "current": "883f51c2c1ed296a0bd40151c3e10a11a98c122ec09ae5aa9a3194725ef193bf",
+        "matches": true
+      },
+      {
+        "file": "tests/narrative-condition-flow-test.js",
+        "recorded": "3dd7753a9012ab5df0bbc4a25461e34c646c132fae815acbb26e5734dbdb867a",
+        "current": "3dd7753a9012ab5df0bbc4a25461e34c646c132fae815acbb26e5734dbdb867a",
+        "matches": true
+      },
+      {
+        "file": "tests/narrative-continuity-test.js",
+        "recorded": "9f9542557ebbcf44d813f4e6122d27a950378b22756d6858c48cfb7fe392eb79",
+        "current": "9f9542557ebbcf44d813f4e6122d27a950378b22756d6858c48cfb7fe392eb79",
+        "matches": true
+      },
+      {
+        "file": "tests/national-selection-fixture.cjs",
+        "recorded": "07797795ac024bdf874a65ab6f57e65d46f6bc47eef0aad25ab0d4e8cbbd4674",
+        "current": "07797795ac024bdf874a65ab6f57e65d46f6bc47eef0aad25ab0d4e8cbbd4674",
+        "matches": true
+      },
+      {
+        "file": "tests/national-selection-pipeline-test.js",
+        "recorded": "57c925d2925848f83785e7cc3da0e402c14017cf16200827499263dece2514b4",
+        "current": "57c925d2925848f83785e7cc3da0e402c14017cf16200827499263dece2514b4",
+        "matches": true
+      },
+      {
+        "file": "tests/npc-role-refactor-test.js",
+        "recorded": "059c0d13ef7a2f4fbecadde4bb49c8f64595582e10bd5460d766d09b3840c2da",
+        "current": "059c0d13ef7a2f4fbecadde4bb49c8f64595582e10bd5460d766d09b3840c2da",
+        "matches": true
+      },
+      {
+        "file": "tests/offensive-plate-approach-foundation-v1-test.js",
+        "recorded": "2c99e2b85f813ec2f70de49a0676d89e08d5081ad0abd5733ce14bf9dba58fb4",
+        "current": "2c99e2b85f813ec2f70de49a0676d89e08d5081ad0abd5733ce14bf9dba58fb4",
+        "matches": true
+      },
+      {
+        "file": "tests/offensive-production-presentation-sprint-c-test.js",
+        "recorded": "f7770a77a472eeeea75d1bf970da65823432699a2a9bd64e2c2fe858e07d7439",
+        "current": "f7770a77a472eeeea75d1bf970da65823432699a2a9bd64e2c2fe858e07d7439",
+        "matches": true
+      },
+      {
+        "file": "tests/offensive-tactical-action-sprint-a-browser-fixture.html",
+        "recorded": "06736e0cc942a127d48c2180671991378ee834da3b2ee1427c0187ebb6f3bd2c",
+        "current": "06736e0cc942a127d48c2180671991378ee834da3b2ee1427c0187ebb6f3bd2c",
+        "matches": true
+      },
+      {
+        "file": "tests/offensive-tactical-action-sprint-a-test.js",
+        "recorded": "12cb40fcb328569397e0126620522727b7a0195badce24d3d6eb2a06f2aafeee",
+        "current": "12cb40fcb328569397e0126620522727b7a0195badce24d3d6eb2a06f2aafeee",
+        "matches": true
+      },
+      {
+        "file": "tests/offensive-tactical-action-sprint-b1-0-1-test.js",
+        "recorded": "4bd9c6141bd59112a4456ab5109ef4eeaa0265c96bbec5fa4101f75f057ffe49",
+        "current": "4bd9c6141bd59112a4456ab5109ef4eeaa0265c96bbec5fa4101f75f057ffe49",
+        "matches": true
+      },
+      {
+        "file": "tests/offensive-tactical-action-sprint-b1-browser-fixture.html",
+        "recorded": "f3afb35109bf6070e9cbeddb2cf47a923247950ca60f24de5b44b7eda83c9532",
+        "current": "f3afb35109bf6070e9cbeddb2cf47a923247950ca60f24de5b44b7eda83c9532",
+        "matches": true
+      },
+      {
+        "file": "tests/offensive-tactical-action-sprint-b1-test.js",
+        "recorded": "d8faf9bca3ff2224278d8d3dd2dce6a14be7868d000fc386ae9eed466f4f3b5d",
+        "current": "d8faf9bca3ff2224278d8d3dd2dce6a14be7868d000fc386ae9eed466f4f3b5d",
+        "matches": true
+      },
+      {
+        "file": "tests/offensive-tactical-action-sprint-b2-browser-fixture.html",
+        "recorded": "6cbb255b7bdd19c8394cc312ad53b8501de18ed9ca3b4a13bc255ca6beb57f96",
+        "current": "6cbb255b7bdd19c8394cc312ad53b8501de18ed9ca3b4a13bc255ca6beb57f96",
+        "matches": true
+      },
+      {
+        "file": "tests/offensive-tactical-action-sprint-b2-defensive-handoff-test.js",
+        "recorded": "9704aed102cede18112b9d302655bd4751405f500a5f9eaa8ab5a5e93412c321",
+        "current": "9704aed102cede18112b9d302655bd4751405f500a5f9eaa8ab5a5e93412c321",
+        "matches": true
+      },
+      {
+        "file": "tests/offensive-tactical-action-sprint-b2-runner-realization-test.js",
+        "recorded": "42b43e5c8a6ce9c02fc3a3e62c85b20f42ea74e51d0e6991c0bccc924f1e9c7c",
+        "current": "42b43e5c8a6ce9c02fc3a3e62c85b20f42ea74e51d0e6991c0bccc924f1e9c7c",
+        "matches": true
+      },
+      {
+        "file": "tests/opportunity-evaluation-boundary-v1-0-1-test.js",
+        "recorded": "77da81b50b6d49b8a3241f18d8eac7b102ea92e2fbbb50f032f3f3baeb5b0594",
+        "current": "77da81b50b6d49b8a3241f18d8eac7b102ea92e2fbbb50f032f3f3baeb5b0594",
+        "matches": true
+      },
+      {
+        "file": "tests/outcome-transition-hierarchy-test.js",
+        "recorded": "419d5035db166ae027e2ad75321c132821f98e596fc8032b50fed278134d552a",
+        "current": "419d5035db166ae027e2ad75321c132821f98e596fc8032b50fed278134d552a",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-observation-foundation-test.js",
+        "recorded": "693eafe58b2999f084e36aeab5d0d64181356ae2022f46a65c11da1a8e5e1ecc",
+        "current": "693eafe58b2999f084e36aeab5d0d64181356ae2022f46a65c11da1a8e5e1ecc",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-observation-production-integration-test.js",
+        "recorded": "d3254ed82ba3dad4403c77950e2d81b57a23e0b939c2c8daa0cd46557de763af",
+        "current": "d3254ed82ba3dad4403c77950e2d81b57a23e0b939c2c8daa0cd46557de763af",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-production-source-scope-test.js",
+        "recorded": "2b14ab9152e837dcf12b988a62fc090a6f3c81823b481708db4bd965cfb773be",
+        "current": "2b14ab9152e837dcf12b988a62fc090a6f3c81823b481708db4bd965cfb773be",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-production-source-scope.cjs",
+        "recorded": "a77919df1b25b42659612ae7325e1723cf2867ce7ed4629f065b084fc28adbf2",
+        "current": "a77919df1b25b42659612ae7325e1723cf2867ce7ed4629f065b084fc28adbf2",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-sequence-state-foundation-test.js",
+        "recorded": "c4e46e47a6ab8d9c176259771cef1c37b0e93f0aed6dc29d87d4599c0bbaf384",
+        "current": "c4e46e47a6ab8d9c176259771cef1c37b0e93f0aed6dc29d87d4599c0bbaf384",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-sequence-state-production-integration-test.js",
+        "recorded": "7a53369d526de1c3a66b9d3e0c69f45f27f261bdb1d28c354f9831c0e8ae8327",
+        "current": "7a53369d526de1c3a66b9d3e0c69f45f27f261bdb1d28c354f9831c0e8ae8327",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-sequencing-core-sprint-a-test.js",
+        "recorded": "a0797b23ad6b73748d8e8141c5dd25a993c7c1860e78ae20e5ab1227059c8f80",
+        "current": "a0797b23ad6b73748d8e8141c5dd25a993c7c1860e78ae20e5ab1227059c8f80",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-tactical-decision-foundation-test.js",
+        "recorded": "13a427a1de2a4eca4bae90f606852a78938e385fbc7d79f564218a764aed58ac",
+        "current": "13a427a1de2a4eca4bae90f606852a78938e385fbc7d79f564218a764aed58ac",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+        "recorded": "cb3e98cef62b3ff0c79b26f6f285d666629c9a2984a0ab1ca44a6e2fe6c84bb5",
+        "current": "cb3e98cef62b3ff0c79b26f6f285d666629c9a2984a0ab1ca44a6e2fe6c84bb5",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-tactical-decision-production-adapter-test.js",
+        "recorded": "03abd810d5d54e960e4d9c329adfd584937c6eed4db25d7cfe9d75e43ca8d615",
+        "current": "03abd810d5d54e960e4d9c329adfd584937c6eed4db25d7cfe9d75e43ca8d615",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-tactical-decision-production-integration-test.js",
+        "recorded": "a2de3df778b64378341c77d5da748df0bb1beb0c68e93ea207bb21a4ecad4144",
+        "current": "a2de3df778b64378341c77d5da748df0bb1beb0c68e93ea207bb21a4ecad4144",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-tactical-intent-evidence-integration-test.js",
+        "recorded": "2ab2fb3f2af4a00a9e78f1b1e9ff79e347cde0fde05ed85d8d3b9454f37a84fc",
+        "current": "2ab2fb3f2af4a00a9e78f1b1e9ff79e347cde0fde05ed85d8d3b9454f37a84fc",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-tactical-intent-semantic-boundary-test.js",
+        "recorded": "67d9445b29ce861ba887465e47cc44f35ae023f471d3ec6305b793fdce10501a",
+        "current": "67d9445b29ce861ba887465e47cc44f35ae023f471d3ec6305b793fdce10501a",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-tactical-interpretation-foundation-test.js",
+        "recorded": "9dd53887ecaf3d19858f6bf9ca6ab8ead98f2e406902938ae2360be188dc4bc6",
+        "current": "9dd53887ecaf3d19858f6bf9ca6ab8ead98f2e406902938ae2360be188dc4bc6",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-tactical-interpretation-production-integration-test.js",
+        "recorded": "cf7a42c337f25e3220aee5045e3fb0ee7f2e39d693856892511a99b916c7b351",
+        "current": "cf7a42c337f25e3220aee5045e3fb0ee7f2e39d693856892511a99b916c7b351",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-tactical-selector-equivalence-test.js",
+        "recorded": "ca6853adcd0c3220789f5c679926d2188a9a91e21cb1bc88b8bd1449d8b887fa",
+        "current": "ca6853adcd0c3220789f5c679926d2188a9a91e21cb1bc88b8bd1449d8b887fa",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-tactical-selector-extraction-baseline.cjs",
+        "recorded": "c74f369a0da399a9fe859a49cfbc98442847eddb3df670b17b542f903c16c528",
+        "current": "c74f369a0da399a9fe859a49cfbc98442847eddb3df670b17b542f903c16c528",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-tactical-signal-projection-foundation-test.js",
+        "recorded": "299db2eddd4802b855cc91dc4dba5b1065eb2e530ce4d1835450446017cdc550",
+        "current": "299db2eddd4802b855cc91dc4dba5b1065eb2e530ce4d1835450446017cdc550",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-tactical-signal-projection-production-integration-test.js",
+        "recorded": "439bc96bb14b7fdc39df0eff4788798afafb72e08515363bd48b88330327d7d7",
+        "current": "439bc96bb14b7fdc39df0eff4788798afafb72e08515363bd48b88330327d7d7",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-target-location-foundation-test.js",
+        "recorded": "07541622c7de7432935965056085488006821574df42676b98954b0e01cdcb6b",
+        "current": "07541622c7de7432935965056085488006821574df42676b98954b0e01cdcb6b",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-target-location-production-integration-test.js",
+        "recorded": "3b81173139f8653f2b5f8092578ff5a4807f55f5b983d9883128bd81f2492d6e",
+        "current": "3b81173139f8653f2b5f8092578ff5a4807f55f5b983d9883128bd81f2492d6e",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-target-location-statistical-audit.cjs",
+        "recorded": "c1ab20d615b45eae64cde211282c1b1fb4cf3a67857a80adbb16deaaa1cce469",
+        "current": "c1ab20d615b45eae64cde211282c1b1fb4cf3a67857a80adbb16deaaa1cce469",
+        "matches": true
+      },
+      {
+        "file": "tests/pitch-velocity-baseline-extraction-test.js",
+        "recorded": "c66842e0fbc49f22ef8878907d8ea3e5dde74cfddeccbbb549e0b116d8fbbac4",
+        "current": "c66842e0fbc49f22ef8878907d8ea3e5dde74cfddeccbbb549e0b116d8fbbac4",
+        "matches": true
+      },
+      {
+        "file": "tests/pitcher-catcher-tactical-integration-test.js",
+        "recorded": "70272ce9212bd00880990fa19cea923d7b9d241c03b058ee1bd44c7712a894d8",
+        "current": "70272ce9212bd00880990fa19cea923d7b9d241c03b058ee1bd44c7712a894d8",
+        "matches": true
+      },
+      {
+        "file": "tests/pitcher-mental-state-sprint-a-test.js",
+        "recorded": "045d9bd3743138674ffa276114c9499f71f0c47a2749de4f7c88809629c57beb",
+        "current": "045d9bd3743138674ffa276114c9499f71f0c47a2749de4f7c88809629c57beb",
+        "matches": true
+      },
+      {
+        "file": "tests/pitcher-process-state-sprint-a-test.js",
+        "recorded": "9587b5c0904b9f20feb5018404944855c17be6514410610d9f46396106c28f54",
+        "current": "9587b5c0904b9f20feb5018404944855c17be6514410610d9f46396106c28f54",
+        "matches": true
+      },
+      {
+        "file": "tests/plate-approach-semantic-integrity-test.js",
+        "recorded": "2466cbd53cf339f24002b8bb6e126cd931aff3175766112778457de4511c4834",
+        "current": "2466cbd53cf339f24002b8bb6e126cd931aff3175766112778457de4511c4834",
+        "matches": true
+      },
+      {
+        "file": "tests/plate-decision-foundation-test.js",
+        "recorded": "53f03a775e378c24f265062d25edeec292305f2cf35be858a9848d231c94e031",
+        "current": "53f03a775e378c24f265062d25edeec292305f2cf35be858a9848d231c94e031",
+        "matches": true
+      },
+      {
+        "file": "tests/plate-decision-production-integration-test.js",
+        "recorded": "bb8196fd8b4acbbf2361f8b570b11778aacf67d75ef46e16da431d10b2c9dcf9",
+        "current": "bb8196fd8b4acbbf2361f8b570b11778aacf67d75ef46e16da431d10b2c9dcf9",
+        "matches": true
+      },
+      {
+        "file": "tests/playback-state-fidelity-browser-fixture.html",
+        "recorded": "0832ea2a7ae082a9f14ad26da827c08bc6def3dfd67c25e09265274e2dd206b7",
+        "current": "0832ea2a7ae082a9f14ad26da827c08bc6def3dfd67c25e09265274e2dd206b7",
+        "matches": true
+      },
+      {
+        "file": "tests/player-archetype-test.js",
+        "recorded": "a182a499d59e335705958959c4375d7de8ff28df50110c634390016122fc23fd",
+        "current": "a182a499d59e335705958959c4375d7de8ff28df50110c634390016122fc23fd",
+        "matches": true
+      },
+      {
+        "file": "tests/player-capability-hierarchy-foundation-v1-0-1-test.js",
+        "recorded": "10344b738f02290b4befdf6dea7241e44bbb940db7cc430fd1784ff064f3499e",
+        "current": "10344b738f02290b4befdf6dea7241e44bbb940db7cc430fd1784ff064f3499e",
+        "matches": true
+      },
+      {
+        "file": "tests/player-capability-hierarchy-foundation-v1-test.js",
+        "recorded": "001b52ab18f6b84cb9d9f5cadeb0381a02ab6f4aafb7929cdc4beb04e17188cb",
+        "current": "001b52ab18f6b84cb9d9f5cadeb0381a02ab6f4aafb7929cdc4beb04e17188cb",
+        "matches": true
+      },
+      {
+        "file": "tests/player-data-boundary-test.js",
+        "recorded": "57357b4ffe06700049c0f3dd49d118b6ae1a817c7a1932c397ce5fc3ec09b963",
+        "current": "57357b4ffe06700049c0f3dd49d118b6ae1a817c7a1932c397ce5fc3ec09b963",
+        "matches": true
+      },
+      {
+        "file": "tests/playing-time-game-exposure-foundation-v1-test.js",
+        "recorded": "bec3a2d43e905754dbdab68d276608abf0972a7329d98fcd6a3d0a3db1c8dfe0",
+        "current": "bec3a2d43e905754dbdab68d276608abf0972a7329d98fcd6a3d0a3db1c8dfe0",
+        "matches": true
+      },
+      {
+        "file": "tests/presentation-interaction-clarity-test.js",
+        "recorded": "6a42a19d76ec929bd63055aea0f1204aeae87412f9f85fefbca0b8d693079f01",
+        "current": "6a42a19d76ec929bd63055aea0f1204aeae87412f9f85fefbca0b8d693079f01",
+        "matches": true
+      },
+      {
+        "file": "tests/production-match-playback-liveness-fixture.html",
+        "recorded": "7e9676b6d361f3bc0f38d670ba061cf40adc2401d5cb5a8ae0dff5169d88e074",
+        "current": "7e9676b6d361f3bc0f38d670ba061cf40adc2401d5cb5a8ae0dff5169d88e074",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-2-contract-test.cjs",
+        "recorded": "09fd7ae21eb6f18602709d7dd90956332fa1bac2ed0c4be5cd3a32110bbfd708",
+        "current": "09fd7ae21eb6f18602709d7dd90956332fa1bac2ed0c4be5cd3a32110bbfd708",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-production-source-timing-test.cjs",
+        "recorded": "ad272fb381c101d13a6323017a4cf285c9390a5b671d86487cb1fd36f9202ae1",
+        "current": "ad272fb381c101d13a6323017a4cf285c9390a5b671d86487cb1fd36f9202ae1",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-pure-contract-test.cjs",
+        "recorded": "04d435de56fa44cfdb411568dea8528c9d321b49ffdae160f2803bbe3acb0859",
+        "current": "04d435de56fa44cfdb411568dea8528c9d321b49ffdae160f2803bbe3acb0859",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-source-authority-test.cjs",
+        "recorded": "9d378260599a544a7ff0365af6552f56fdb420032fcdedfcdeada503695cb9fb",
+        "current": "9d378260599a544a7ff0365af6552f56fdb420032fcdedfcdeada503695cb9fb",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a-readiness-test.cjs",
+        "recorded": "e30f6779ce8dbb8e45755f8aeb85eeef6a1766f5cd3f8b5b4ef734f45e098d6c",
+        "current": "e30f6779ce8dbb8e45755f8aeb85eeef6a1766f5cd3f8b5b4ef734f45e098d6c",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a-runner.cjs",
+        "recorded": "e9acf8414319810aa026ff169366ba325f349fc7a88e746e45ccf322d434042d",
+        "current": "e9acf8414319810aa026ff169366ba325f349fc7a88e746e45ccf322d434042d",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a1-runner.cjs",
+        "recorded": "7c31b36b873d2ac0b836adeae8f31d0101639b7e0133be98acacd09f3f9e5147",
+        "current": "7c31b36b873d2ac0b836adeae8f31d0101639b7e0133be98acacd09f3f9e5147",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a2-runner.cjs",
+        "recorded": "3144335c5629e102584a5368556c78b36284ac317723c4f19d1e7352e458a4d1",
+        "current": "3144335c5629e102584a5368556c78b36284ac317723c4f19d1e7352e458a4d1",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a2-source-probe.cjs",
+        "recorded": "ebaef2c11ce0ed62c46192a542c9156611061e2bf297d93c66cb8f436345e1b8",
+        "current": "ebaef2c11ce0ed62c46192a542c9156611061e2bf297d93c66cb8f436345e1b8",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3a-browser-probe.cjs",
+        "recorded": "89b3688bcda9a5fc06969e6bcfb3b31b0e9e7a9c387d671ad2c7957981cc906f",
+        "current": "89b3688bcda9a5fc06969e6bcfb3b31b0e9e7a9c387d671ad2c7957981cc906f",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-10a3a-runner.cjs",
+        "recorded": "988ae6f58d26ca62c3e9a2032d1157a1ac39fee291f7a018cc05c5a2dd52654a",
+        "current": "988ae6f58d26ca62c3e9a2032d1157a1ac39fee291f7a018cc05c5a2dd52654a",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-8-runner.cjs",
+        "recorded": "fc669cbe6666f74f797e7a4c4bfa1b3458bed6d9ce3a3cdb039792eaca783856",
+        "current": "fc669cbe6666f74f797e7a4c4bfa1b3458bed6d9ce3a3cdb039792eaca783856",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-9-legacy-comparison.cjs",
+        "recorded": "7655cf6af6f9a859a2ac17613775b7d4e1f1f0f4d6f0753c1efd50c74dcce9a1",
+        "current": "7655cf6af6f9a859a2ac17613775b7d4e1f1f0f4d6f0753c1efd50c74dcce9a1",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-sprint-9-runner.cjs",
+        "recorded": "532572981052180e46da8e48e42f3be69df51ec7636f2ee0101abfd8c1cff881",
+        "current": "532572981052180e46da8e48e42f3be69df51ec7636f2ee0101abfd8c1cff881",
+        "matches": true
+      },
+      {
+        "file": "tests/receiver-execution-v2-version-admission-timing-test.cjs",
+        "recorded": "8a14adebd71dfa1dfa8c0d0e518e50fbba5441a1728eaa9f463caf5d9cfb49fc",
+        "current": "8a14adebd71dfa1dfa8c0d0e518e50fbba5441a1728eaa9f463caf5d9cfb49fc",
+        "matches": true
+      },
+      {
+        "file": "tests/relationship-boundary-test.js",
+        "recorded": "983b5d488cbe00b12ae8689f93feab8ca6544307dacd305d267be6c80aa49b7a",
+        "current": "983b5d488cbe00b12ae8689f93feab8ca6544307dacd305d267be6c80aa49b7a",
+        "matches": true
+      },
+      {
+        "file": "tests/relationship-feasibility-production-scope-test.js",
+        "recorded": "8cabca2b9f1b5c15fb4d82e01e59bf3798e8269f8ea7447ed73e2d97bc891022",
+        "current": "8cabca2b9f1b5c15fb4d82e01e59bf3798e8269f8ea7447ed73e2d97bc891022",
+        "matches": true
+      },
+      {
+        "file": "tests/relationship-feasibility-production-scope.cjs",
+        "recorded": "16476f99c26420660747760d5acdcfca0f0c291ad26ef561db6dfc5f60e01334",
+        "current": "16476f99c26420660747760d5acdcfca0f0c291ad26ef561db6dfc5f60e01334",
+        "matches": true
+      },
+      {
+        "file": "tests/relationship-flow-test.js",
+        "recorded": "ab126a8d054b36fdcc27df7c9b025f357b6a11c05537ee958a735e17aca5c6fe",
+        "current": "ab126a8d054b36fdcc27df7c9b025f357b6a11c05537ee958a735e17aca5c6fe",
+        "matches": true
+      },
+      {
+        "file": "tests/relationship-payoff-test.js",
+        "recorded": "3baf09f258a65fc7dbb14fd33439234a85d0badac03ede0b20449a0b2df106ba",
+        "current": "3baf09f258a65fc7dbb14fd33439234a85d0badac03ede0b20449a0b2df106ba",
+        "matches": true
+      },
+      {
+        "file": "tests/representative-team-contract-test.js",
+        "recorded": "aba9952c0d52abedd810a4b69f67cf9f38156667263315a1f43f771aa7886fd9",
+        "current": "aba9952c0d52abedd810a4b69f67cf9f38156667263315a1f43f771aa7886fd9",
+        "matches": true
+      },
+      {
+        "file": "tests/responsive-accessibility-pass-test.js",
+        "recorded": "e2128e91bfac412f71932b24c11c2a98cdec33a90978b680d859116b1b789f8e",
+        "current": "e2128e91bfac412f71932b24c11c2a98cdec33a90978b680d859116b1b789f8e",
+        "matches": true
+      },
+      {
+        "file": "tests/scene-context-layer-test.js",
+        "recorded": "9d942edf54d354244b1b265b09eaf846b318cea04c72b7684a6a7ea4f4ab2f52",
+        "current": "9d942edf54d354244b1b265b09eaf846b318cea04c72b7684a6a7ea4f4ab2f52",
+        "matches": true
+      },
+      {
+        "file": "tests/scene-depth-test.js",
+        "recorded": "942493f84eee6f3eaf2af38af5780cb3fbf90dde1f74eea267172f185efccd5b",
+        "current": "942493f84eee6f3eaf2af38af5780cb3fbf90dde1f74eea267172f185efccd5b",
+        "matches": true
+      },
+      {
+        "file": "tests/school-invitation-foundation-v1-0-1-test.js",
+        "recorded": "f9910f27194db2a62f4590786fe9b2a7b61b1db9950aab403e646354ee4f2d9f",
+        "current": "f9910f27194db2a62f4590786fe9b2a7b61b1db9950aab403e646354ee4f2d9f",
+        "matches": true
+      },
+      {
+        "file": "tests/school-invitation-foundation-v1-test.js",
+        "recorded": "7810ea10f6cb76e7b4bf3a41ea56aec8488ff38bd2f7b4efccccaab7d20c3dd4",
+        "current": "7810ea10f6cb76e7b4bf3a41ea56aec8488ff38bd2f7b4efccccaab7d20c3dd4",
+        "matches": true
+      },
+      {
+        "file": "tests/scoreboard-presentation-integrity-test.js",
+        "recorded": "3c545584a5e41f498c2707c6a3ae7126f5473e8ad6fb042c67be7345074cc44b",
+        "current": "3c545584a5e41f498c2707c6a3ae7126f5473e8ad6fb042c67be7345074cc44b",
+        "matches": true
+      },
+      {
+        "file": "tests/scoreboard-presentation-production-integration-test.js",
+        "recorded": "26470bc70fa785ac752bcd87b3d57a14d3cc13f2aa717e4cb397186d550aea0f",
+        "current": "26470bc70fa785ac752bcd87b3d57a14d3cc13f2aa717e4cb397186d550aea0f",
+        "matches": true
+      },
+      {
+        "file": "tests/second-base-reference-browser-fixture.html",
+        "recorded": "9c6d6a109ad47f547e9d26175f18b6f010cc1efb47bc9a4c5dc524bfe9f944e0",
+        "current": "9c6d6a109ad47f547e9d26175f18b6f010cc1efb47bc9a4c5dc524bfe9f944e0",
+        "matches": true
+      },
+      {
+        "file": "tests/shared-infield-contract-2b-production-integration-test.js",
+        "recorded": "7b7ebe9e0aff64d32a4ce4eee1b7177ecc977f15a5132856ca6643ca649490ce",
+        "current": "7b7ebe9e0aff64d32a4ce4eee1b7177ecc977f15a5132856ca6643ca649490ce",
+        "matches": true
+      },
+      {
+        "file": "tests/sprint-c-human-ux-closeout-test.js",
+        "recorded": "5b522abddedf09a31e6d2c81a821cb83a10d94b2ae536c562c1255ab93f6b39a",
+        "current": "5b522abddedf09a31e6d2c81a821cb83a10d94b2ae536c562c1255ab93f6b39a",
+        "matches": true
+      },
+      {
+        "file": "tests/ss-defensive-production-integration-test.js",
+        "recorded": "c6f8fbaf24a04dfca8ae253fd46bd13dfbbe3c65b349954ad28c44cb417a2909",
+        "current": "c6f8fbaf24a04dfca8ae253fd46bd13dfbbe3c65b349954ad28c44cb417a2909",
+        "matches": true
+      },
+      {
+        "file": "tests/status-panel-disclosure-persistence-test.js",
+        "recorded": "8543d8f0bafe4baebc8c194e9b345526cd56403bc12f851daf400579e26c2455",
+        "current": "8543d8f0bafe4baebc8c194e9b345526cd56403bc12f851daf400579e26c2455",
+        "matches": true
+      },
+      {
+        "file": "tests/takahashi-storyboard-test.js",
+        "recorded": "b06d41915179b6aa99a9e73d723e89bf501c840967ee58c064906d03f2567763",
+        "current": "b06d41915179b6aa99a9e73d723e89bf501c840967ee58c064906d03f2567763",
+        "matches": true
+      },
+      {
+        "file": "tests/team-roster-foundation-test.js",
+        "recorded": "c3e73c6aba3c5810ed5bfa1f77e13a46ab81d4ff88afc24f2b60a7f19c312575",
+        "current": "c3e73c6aba3c5810ed5bfa1f77e13a46ab81d4ff88afc24f2b60a7f19c312575",
+        "matches": true
+      },
+      {
+        "file": "tests/team-roster-match-integration-test.js",
+        "recorded": "3311feca7b2a77e4bcda54fcf0be433ef4a0995e37c790af7b2eb34c8eae4140",
+        "current": "3311feca7b2a77e4bcda54fcf0be433ef4a0995e37c790af7b2eb34c8eae4140",
+        "matches": true
+      },
+      {
+        "file": "tests/team-strength-model-test.js",
+        "recorded": "fff334bdab8b42643ee12bcf4c9e6a99a4f9f835a45913aac0e772b30a45e61c",
+        "current": "fff334bdab8b42643ee12bcf4c9e6a99a4f9f835a45913aac0e772b30a45e61c",
+        "matches": true
+      },
+      {
+        "file": "tests/ten-year-narrative-architecture-test.js",
+        "recorded": "7c3c6b1232fb5b4bc062e2b9ef334a2b1e94158537904ad1fd116a419cbda787",
+        "current": "7c3c6b1232fb5b4bc062e2b9ef334a2b1e94158537904ad1fd116a419cbda787",
+        "matches": true
+      },
+      {
+        "file": "tests/third-base-ground-production-integration-test.js",
+        "recorded": "c514c61f61cef202e9f31829e0329b43c14bc7cd805953ccdab90d5be834c800",
+        "current": "c514c61f61cef202e9f31829e0329b43c14bc7cd805953ccdab90d5be834c800",
+        "matches": true
+      },
+      {
+        "file": "tests/third-base-sprint-2-validation-runner.cjs",
+        "recorded": "b6bb4aec0f7853b25c8d14bd77ddb89e46d5df20046e36215b391fce9013f4a3",
+        "current": "b6bb4aec0f7853b25c8d14bd77ddb89e46d5df20046e36215b391fce9013f4a3",
+        "matches": true
+      },
+      {
+        "file": "tests/third-out-run-out-attribution-integrity-test.js",
+        "recorded": "093a626a0ad2ca7631cd6217921035aba4bec1443dc4b4598e47e789f4ba4c86",
+        "current": "093a626a0ad2ca7631cd6217921035aba4bec1443dc4b4598e47e789f4ba4c86",
+        "matches": true
+      },
+      {
+        "file": "tests/third-out-run-out-attribution-production-integration-test.js",
+        "recorded": "59a89bb7937acead37ef84f450c6f9a487584999bbd0d47434605d32bd42aa44",
+        "current": "59a89bb7937acead37ef84f450c6f9a487584999bbd0d47434605d32bd42aa44",
+        "matches": true
+      },
+      {
+        "file": "tests/third-out-runner-resolution-integrity-v1-test.js",
+        "recorded": "1afa065908f4cf38e08a9ebba9d3bbaa06fd3f27e8e87f4b2532724841c1aece",
+        "current": "1afa065908f4cf38e08a9ebba9d3bbaa06fd3f27e8e87f4b2532724841c1aece",
+        "matches": true
+      },
+      {
+        "file": "tests/time-boundary-test.js",
+        "recorded": "75a9de70935c8aa7f78ee4daf80fb2b9a4e5a93876c2755d3c453935e503e8f4",
+        "current": "75a9de70935c8aa7f78ee4daf80fb2b9a4e5a93876c2755d3c453935e503e8f4",
+        "matches": true
+      },
+      {
+        "file": "tests/u18-roster-construction-test.js",
+        "recorded": "a0a5ba13b0021e74a7fd6d40f9c754386e438c54d8f6498be3a405ae1e651a35",
+        "current": "a0a5ba13b0021e74a7fd6d40f9c754386e438c54d8f6498be3a405ae1e651a35",
+        "matches": true
+      },
+      {
+        "file": "tests/vertical-slice-smoke.js",
+        "recorded": "c34281e4d9dd4d5c8b1b18a634f573de3f0d26573cad93b0202610d0e4a78d7f",
+        "current": "c34281e4d9dd4d5c8b1b18a634f573de3f0d26573cad93b0202610d0e4a78d7f",
+        "matches": true
+      },
+      {
+        "file": "tests/youth-season-content-pass-test.js",
+        "recorded": "a7c88194dbe7ce49442feef35f9d25234dc89a59fa8e5dd852b327093d3d6b14",
+        "current": "a7c88194dbe7ce49442feef35f9d25234dc89a59fa8e5dd852b327093d3d6b14",
+        "matches": true
+      },
+      {
+        "file": "time-boundary.js",
+        "recorded": "d356c8997152f85b490ed5dfaee5882032d3f0d702e10886c067e0a554658b33",
+        "current": "d356c8997152f85b490ed5dfaee5882032d3f0d702e10886c067e0a554658b33",
+        "matches": true
+      },
+      {
+        "file": "time.js",
+        "recorded": "2047a0c4418bf1513745d3759d0b28c7bec3abb9c97594d14fe7a37d62b4edbb",
+        "current": "2047a0c4418bf1513745d3759d0b28c7bec3abb9c97594d14fe7a37d62b4edbb",
+        "matches": true
+      }
+    ],
+    "scope": "Accepted same-source historical zero-defense references only",
+    "runs": [
+      {
+        "seed": 88221,
+        "run": "first",
+        "score": {
+          "home": 1,
+          "away": 6
+        },
+        "defenseCreated": 0,
+        "defenseCompleted": 0,
+        "hashes": {
+          "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+          "initialMatch": "2cb25dd2fd1483a5b3b357edb70958a65a80b4c8f2e076d66551cce15ffcbb92",
+          "record": "abb6ee6487c8f39a3e3de3afe945f2494a374d9b78d6c6a6a358c9808dd6cf92",
+          "log": "2be47a93cf9e5d85831de8067154a47009ff617bae49ab2bc150812e9c5b0e2e",
+          "decisionSequence": "65fcb545854cd4b89f113ff7060eadd0e7c9b0b86aefe780450722ce4bd07226"
+        }
+      },
+      {
+        "seed": 88221,
+        "run": "replay",
+        "score": {
+          "home": 1,
+          "away": 6
+        },
+        "defenseCreated": 0,
+        "defenseCompleted": 0,
+        "hashes": {
+          "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+          "initialMatch": "2cb25dd2fd1483a5b3b357edb70958a65a80b4c8f2e076d66551cce15ffcbb92",
+          "record": "abb6ee6487c8f39a3e3de3afe945f2494a374d9b78d6c6a6a358c9808dd6cf92",
+          "log": "2be47a93cf9e5d85831de8067154a47009ff617bae49ab2bc150812e9c5b0e2e",
+          "decisionSequence": "65fcb545854cd4b89f113ff7060eadd0e7c9b0b86aefe780450722ce4bd07226"
+        }
+      },
+      {
+        "seed": 88222,
+        "run": "first",
+        "score": {
+          "home": 1,
+          "away": 3
+        },
+        "defenseCreated": 0,
+        "defenseCompleted": 0,
+        "hashes": {
+          "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+          "initialMatch": "58459bdc12468fc9143bf1f711a19e1f8cebedf273f8ca9c0037f98006cc2084",
+          "record": "6af67e71aba581ac84fc5b215d6af1d9758f14852f8a1282081023a26d2f1ebc",
+          "log": "96679cf657a33a5e840ce74d437ed657b95d2cc35867be2000fe9b82b82a0d4a",
+          "decisionSequence": "ed259ebfd8344db8fb2f51d5421338b9aa0b1c05765b3b7233710e1db2aab227"
+        }
+      },
+      {
+        "seed": 88222,
+        "run": "replay",
+        "score": {
+          "home": 1,
+          "away": 3
+        },
+        "defenseCreated": 0,
+        "defenseCompleted": 0,
+        "hashes": {
+          "fixture": "f57ee6700bd2dfcd36885b319caf93d8d5dc0948caadd069f99bc3b812ae551d",
+          "initialMatch": "58459bdc12468fc9143bf1f711a19e1f8cebedf273f8ca9c0037f98006cc2084",
+          "record": "6af67e71aba581ac84fc5b215d6af1d9758f14852f8a1282081023a26d2f1ebc",
+          "log": "96679cf657a33a5e840ce74d437ed657b95d2cc35867be2000fe9b82b82a0d4a",
+          "decisionSequence": "ed259ebfd8344db8fb2f51d5421338b9aa0b1c05765b3b7233710e1db2aab227"
+        }
+      }
+    ]
+  },
+  "historicalSS": {
+    "file": "docs/test-infrastructure-sprint-0.1-repair-a-opportunity-two-ss-defense-63-evidence.json",
+    "targetSourceMatchesCurrent": true,
+    "changedDependencies": [
+      {
+        "file": "match-experience-development.js",
+        "recorded": "24190484dc80beb5761be6bfb9d4dc5ea9b24337b83c11143177b9895702643b",
+        "current": "544a9a3625c69d868645011ff0f67804b48cd0734bcb5b1e4410ca593df766f3",
+        "matches": false
+      },
+      {
+        "file": "script.js",
+        "recorded": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+        "current": "b35526671499a5f780ccbd5c0e152b7e935fbacdea1302c26f75730faba70669",
+        "matches": false
+      }
+    ],
+    "acceptedAsCurrentUntouchedDependencyProof": false,
+    "reason": "Snapshot Production delta makes old dependency hashes stale; finite fresh SS/Ground executions used instead"
+  },
+  "newFormal": {
+    "ss": {
+      "namedChecks": 26,
+      "nodeAssertionCalls": 649,
+      "fullMatchWitness": {
+        "matchId": "hs-y3-final-competition-1",
+        "completed": true,
+        "regulationInnings": 7,
+        "recordStatus": "final",
+        "scores": {
+          "home": 1,
+          "away": 3
+        },
+        "recordScore": {
+          "away": 3,
+          "home": 1
+        },
+        "meaningful": 1,
+        "routine": 3,
+        "evaluationFamilies": [
+          "defensiveInningsExposure",
+          "plateAppearanceExposure",
+          "shortstopRoutine",
+          "shortstopMeaningful",
+          "meaningfulPlateAppearance"
+        ],
+        "matchIssues": [],
+        "recordIssues": []
+      },
+      "explicitPublicWitnesses": [
+        {
+          "scenario": "first-base out with runner on first",
+          "evidenceOrigin": "EXPLICIT_PRODUCTION_FIXTURE_PUBLIC_HANDLER",
+          "matchId": "hs-y3-final-competition-1",
+          "outs": 1,
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "gameRecordRunDelta": {
+            "home": 0,
+            "away": 0
+          },
+          "defense": {
+            "chances": 1,
+            "PO": 0,
+            "A": 1,
+            "E": 0,
+            "DP": 0
+          },
+          "evidenceRecords": 5,
+          "momentRunsAllowed": 0,
+          "eventRunsAllowed": 0,
+          "resolutionRunsAllowed": 0,
+          "scoringRunnerIds": [],
+          "attemptedScorer": null,
+          "pendingColdReloadValidated": true,
+          "saveReloadEquivalent": true,
+          "duplicateSubmissionNoMutation": true
+        },
+        {
+          "scenario": "force second",
+          "evidenceOrigin": "EXPLICIT_PRODUCTION_FIXTURE_PUBLIC_HANDLER",
+          "matchId": "hs-y3-final-competition-1",
+          "outs": 1,
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "gameRecordRunDelta": {
+            "home": 0,
+            "away": 0
+          },
+          "defense": {
+            "chances": 1,
+            "PO": 0,
+            "A": 1,
+            "E": 0,
+            "DP": 0
+          },
+          "evidenceRecords": 5,
+          "momentRunsAllowed": 0,
+          "eventRunsAllowed": 0,
+          "resolutionRunsAllowed": 0,
+          "scoringRunnerIds": [],
+          "attemptedScorer": null,
+          "pendingColdReloadValidated": false,
+          "saveReloadEquivalent": true,
+          "duplicateSubmissionNoMutation": true
+        },
+        {
+          "scenario": "6-4-3 double play",
+          "evidenceOrigin": "EXPLICIT_PRODUCTION_FIXTURE_PUBLIC_HANDLER",
+          "matchId": "hs-y3-final-competition-1",
+          "outs": 2,
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "gameRecordRunDelta": {
+            "home": 0,
+            "away": 0
+          },
+          "defense": {
+            "chances": 1,
+            "PO": 0,
+            "A": 1,
+            "E": 0,
+            "DP": 1
+          },
+          "evidenceRecords": 5,
+          "momentRunsAllowed": 0,
+          "eventRunsAllowed": 0,
+          "resolutionRunsAllowed": 0,
+          "scoringRunnerIds": [],
+          "attemptedScorer": null,
+          "pendingColdReloadValidated": false,
+          "saveReloadEquivalent": true,
+          "duplicateSubmissionNoMutation": true
+        },
+        {
+          "scenario": "partial double play",
+          "evidenceOrigin": "EXPLICIT_PRODUCTION_FIXTURE_PUBLIC_HANDLER",
+          "matchId": "hs-y3-final-competition-1",
+          "outs": 1,
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "gameRecordRunDelta": {
+            "home": 0,
+            "away": 0
+          },
+          "defense": {
+            "chances": 1,
+            "PO": 0,
+            "A": 1,
+            "E": 0,
+            "DP": 0
+          },
+          "evidenceRecords": 5,
+          "momentRunsAllowed": 0,
+          "eventRunsAllowed": 0,
+          "resolutionRunsAllowed": 0,
+          "scoringRunnerIds": [],
+          "attemptedScorer": null,
+          "pendingColdReloadValidated": false,
+          "saveReloadEquivalent": true,
+          "duplicateSubmissionNoMutation": true
+        },
+        {
+          "scenario": "throwing failure",
+          "evidenceOrigin": "EXPLICIT_PRODUCTION_FIXTURE_PUBLIC_HANDLER",
+          "matchId": "hs-y3-final-competition-1",
+          "outs": 0,
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "gameRecordRunDelta": {
+            "home": 0,
+            "away": 0
+          },
+          "defense": {
+            "chances": 1,
+            "PO": 0,
+            "A": 0,
+            "E": 1,
+            "DP": 0
+          },
+          "evidenceRecords": 5,
+          "momentRunsAllowed": 0,
+          "eventRunsAllowed": 0,
+          "resolutionRunsAllowed": 0,
+          "scoringRunnerIds": [],
+          "attemptedScorer": null,
+          "pendingColdReloadValidated": false,
+          "saveReloadEquivalent": true,
+          "duplicateSubmissionNoMutation": true
+        },
+        {
+          "scenario": "force third out cancels attempted run",
+          "evidenceOrigin": "EXPLICIT_PRODUCTION_FIXTURE_PUBLIC_HANDLER",
+          "matchId": "hs-y3-final-competition-1",
+          "outs": 3,
+          "scores": {
+            "home": 1,
+            "away": 1
+          },
+          "gameRecordRunDelta": {
+            "home": 0,
+            "away": 0
+          },
+          "defense": {
+            "chances": 1,
+            "PO": 0,
+            "A": 1,
+            "E": 0,
+            "DP": 0
+          },
+          "evidenceRecords": 5,
+          "momentRunsAllowed": 0,
+          "eventRunsAllowed": 0,
+          "resolutionRunsAllowed": 0,
+          "scoringRunnerIds": [],
+          "attemptedScorer": {
+            "runnerId": "hs-y3-final-regional-opponent-player-04",
+            "from": 3,
+            "to": "halfInningEnd",
+            "targetBase": "home",
+            "isForced": true,
+            "movementRequired": true,
+            "committed": true,
+            "retired": false,
+            "safe": true,
+            "scored": false,
+            "forceReason": "precedingForcedRunnerRequiresOccupiedBase"
+          },
+          "pendingColdReloadValidated": false,
+          "saveReloadEquivalent": true,
+          "duplicateSubmissionNoMutation": true
+        }
+      ],
+      "scope": "EXPLICIT_PRODUCTION_FIXTURES; careerFixture changes skills to12 and year-three route"
+    },
+    "ground": {
+      "namedChecks": 26,
+      "nodeAssertionCalls": 60,
+      "scope": "Explicit lifecycle/save/recovery fixtures"
+    }
+  },
+  "interpretation": "Candidate identity setup insufficient for public resolver current-Match routing. No SS Physical/Meaningful rejection observed; those owners were not reached.",
+  "runtimeAttempts": {
+    "candidateScenarios": 1,
+    "candidateRuns": 2,
+    "finishedCandidateMatches": 0,
+    "unintendedDefaultMatchesInitialized": 2,
+    "formalStandaloneRuns": 2
+  },
+  "noSecondCandidate": true,
+  "productionRepairPerformed": false,
+  "SS63MatchUISliceReady": false,
+  "readyForCommit": false,
+  "readyForSprint10B": false,
+  "receiverV2": "DISABLED"
+}

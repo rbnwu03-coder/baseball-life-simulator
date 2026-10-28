@@ -1,0 +1,337 @@
+{
+  "sprint": "10A.3b-R1",
+  "createdAt": "2026-10-13T15:02:51.357Z",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "scope": "SAVE_SOURCE_CONTRACT_FIX_AND_TIMEOUT_RECOVERY_ONLY",
+  "runtimeEnabled": false,
+  "formalShadowSimulation": false,
+  "manifest": {
+    "modifiedR1Paths": [
+      "save.js",
+      "receiver-source-snapshot.js"
+    ],
+    "newPaths": [
+      "docs/receiver-execution-v2-sprint-10a3b-r1-architecture-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-baseline-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-coverage-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-current-source-verification.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-diagnostic-300000-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-serial-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-diagnostic-300000-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-serial-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-focused-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-initial-test-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-recovery.md",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-related-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-root-cause-evidence.json",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-timeout-comparison-evidence.json",
+      "tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs",
+      "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+      "docs/receiver-execution-v2-sprint-10a3b-r1-closeout-evidence.json"
+    ],
+    "newCount": 19,
+    "hashes": {
+      "save.js": {
+        "size": 51068,
+        "sha256": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7"
+      },
+      "receiver-source-snapshot.js": {
+        "size": 23294,
+        "sha256": "d049f98bdbaece9aed3aa16469167a2b3120d8f9078c0d3571bef0fb04510ceb"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-architecture-evidence.json": {
+        "size": 321564,
+        "sha256": "ae1bc1f7d104a31772b8bd9f71a1d9ff400de1f363aa001d4d58e2c64afa8426"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-baseline-evidence.json": {
+        "size": 100237,
+        "sha256": "5dfa9cd42e412fe6a6cd3bf30c840518ce78369d8c7100aeb8eab4f78a5b8875"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-coverage-evidence.json": {
+        "size": 8324,
+        "sha256": "6d86650a9be1efe6f2c559241385bd31e28da81d1843fd037dbe9e7a01121621"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-current-source-verification.json": {
+        "size": 53854,
+        "sha256": "d7f7621963cba43cce0e3f9a0c8360dfc65238485be5d5ca6cc283b2460809ca"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-diagnostic-300000-evidence.json": {
+        "size": 2562735,
+        "sha256": "6654773264f4ab49db7120995eaa30a287294b030b5f047a448c807a1bc346dd"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-evidence.json": {
+        "size": 1243104,
+        "sha256": "e1e4783b03a330e413e0b8b73314d7f870c0c24121362a2d8b27f5e102d49690"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-serial-evidence.json": {
+        "size": 1243104,
+        "sha256": "07c8bcc4e09a181fcd7cfdc774107b46f2803c1525a58402dc287dcf79f51589"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-diagnostic-300000-evidence.json": {
+        "size": 2562836,
+        "sha256": "c442fa59b0dabcff3d510206366e21a9048495c1950b758822095cd8ae0c38f8"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-evidence.json": {
+        "size": 1243240,
+        "sha256": "b27ed41c78695e5f286241b412632cc267fc9f8e1ac0e7507b06492717f6cda0"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-serial-evidence.json": {
+        "size": 1243240,
+        "sha256": "6ccc5f24cf33784dff132dfc754ae55efb65b5a10d6d9263f54023f1656a2fc6"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-focused-evidence.json": {
+        "size": 735021,
+        "sha256": "5105b7e81157f83da6b6f9c9eb38edb8a1be59c9696d791952310354fb8c78ab"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-initial-test-evidence.json": {
+        "size": 6972,
+        "sha256": "9c076d6b0aa4e9cbecefb31ea3c9a84ae4c6ea0990786dcae51b9ab001482212"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-recovery.md": {
+        "size": 13488,
+        "sha256": "56812b5f0550fcd7a0993e4bd8321a0642ebc25c73351eeb93675d5c626714b9"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-related-evidence.json": {
+        "size": 136697,
+        "sha256": "abedb47c30d7308b6751f7e63f7d396145040470f5bcede1ffcc8fd9a65c5082"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-root-cause-evidence.json": {
+        "size": 7124,
+        "sha256": "0af2bdd824962b1f064fe3e1cb15c88d788ec26b599bda158ae6368049f4c80a"
+      },
+      "docs/receiver-execution-v2-sprint-10a3b-r1-timeout-comparison-evidence.json": {
+        "size": 4871,
+        "sha256": "10d9d3bf8ea87511d2279e36002049f90c88c4689d590cee70a3ee85966287e8"
+      },
+      "tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs": {
+        "size": 8282,
+        "sha256": "7b01b5ed3dce2fa6d7368358fc89c367c9393409de2866b740363da2745b4f69"
+      },
+      "tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs": {
+        "size": 7560,
+        "sha256": "24a2e3c4b77a212695fde636b8e25247972a075f3b1e99293378862b45c164be"
+      }
+    },
+    "hashScope": "Modified R1 files and all new artifacts except self"
+  },
+  "integrity": {
+    "initialReadableTrackedAndWipCount": 763,
+    "unchanged": 761,
+    "changed": [
+      {
+        "path": "save.js",
+        "before": "dda54498c52952b58bad7bc2465af9577f12b3998ae8a4927fb9291070d41a10",
+        "after": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7"
+      },
+      {
+        "path": "receiver-source-snapshot.js",
+        "before": "6eabf42d8a438726b02f2598419e21d81b630336187bcda17274e7dc4d42df5f",
+        "after": "d049f98bdbaece9aed3aa16469167a2b3120d8f9078c0d3571bef0fb04510ceb"
+      }
+    ],
+    "otherWipStatusEqual": true,
+    "protectedMetadataEqual": true,
+    "protectedCount": 12,
+    "protectedContentReads": 0,
+    "protectedContentHashes": 0,
+    "protectedMetadata": {
+      "tests/fast-check-smoke-test.cjs": {
+        "size": 232,
+        "mtimeMs": 1790843210697.4724
+      },
+      "install.ps1": {
+        "size": 18481,
+        "mtimeMs": 1790645780931.8794
+      },
+      "docs/first-base-sprint-3-focused-development-evidence.json": {
+        "size": 909541,
+        "mtimeMs": 1791695452470.9353
+      },
+      "docs/infield-baseball-logic-audit-architecture-evidence.json": {
+        "size": 22275,
+        "mtimeMs": 1791724873822.1465
+      },
+      "docs/infield-baseball-logic-audit-evidence.json": {
+        "size": 9987073,
+        "mtimeMs": 1791725791525.787
+      },
+      "docs/infield-baseball-logic-audit-runner.cjs": {
+        "size": 51962,
+        "mtimeMs": 1791725789937.2622
+      },
+      "docs/infield-baseball-logic-validation-audit-v1.md": {
+        "size": 39820,
+        "mtimeMs": 1791725790304.0483
+      },
+      "docs/infield-scorer-recovery-sprint-5-green-evidence.json": {
+        "size": 9378500,
+        "mtimeMs": 1791766904157.9292
+      },
+      "docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json": {
+        "size": 11457925,
+        "mtimeMs": 1791767373630.792
+      },
+      "docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json": {
+        "size": 686464,
+        "mtimeMs": 1791788973106.34
+      },
+      "docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json": {
+        "size": 889584,
+        "mtimeMs": 1791767570328.417
+      },
+      "docs/infield-scorer-recovery-sprint-5-validation.json": {
+        "size": 1027011,
+        "mtimeMs": 1791767101736.8584
+      }
+    },
+    "originalTestsAndCapturesUnchanged": true,
+    "finalFocusedSourceHashesStillMatch": true,
+    "whitespace": "PASS_NO_TRAILING_SPACE_ONE_FINAL_NEWLINE",
+    "json": "PASS",
+    "gitDiffCheck": {
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": "warning: in the working copy of 'index.html', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'match-situation-lifecycle.js', LF will be replaced by CRLF the next time Git touches it\n"
+    },
+    "reportLinks": [
+      "receiver-execution-v2-sprint-10a3b-r1-baseline-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r1-root-cause-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r1-current-source-verification.json",
+      "../tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs",
+      "receiver-execution-v2-sprint-10a3b-r1-timeout-comparison-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-serial-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r1-first-base-current-serial-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-diagnostic-300000-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r1-first-base-current-diagnostic-300000-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r1-focused-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r1-related-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r1-initial-test-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r1-architecture-evidence.json",
+      "receiver-execution-v2-sprint-10a3b-r1-closeout-evidence.json"
+    ]
+  },
+  "git": {
+    "branch": "main",
+    "head": "ab3117653945de0b7013636187c446276a96e634",
+    "originMain": "ab3117653945de0b7013636187c446276a96e634",
+    "index": "",
+    "statusBeforeExclusiveSelfCreate": " M index.html\n M match-situation-lifecycle.js\n M save.js\n M script.js\n M tests/fast-check-smoke-test.cjs\n?? docs/first-base-sprint-3-focused-development-evidence.json\n?? docs/infield-baseball-logic-audit-architecture-evidence.json\n?? docs/infield-baseball-logic-audit-evidence.json\n?? docs/infield-baseball-logic-audit-runner.cjs\n?? docs/infield-baseball-logic-validation-audit-v1.md\n?? docs/infield-scorer-recovery-sprint-5-green-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-green-force-actual-only-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-l03-red-evidence.json\n?? docs/infield-scorer-recovery-sprint-5-validation-force-actual-only.json\n?? docs/infield-scorer-recovery-sprint-5-validation.json\n?? docs/receiver-execution-v2-production-snapshot-save-guard-sprint-10a3b.md\n?? docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-blocking-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-initial-compatibility-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-lifecycle-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-observed-validation-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-architecture-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-current-source-verification.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-baseline-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-diagnostic-300000-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-first-base-current-serial-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-focused-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-initial-test-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-recovery.md\n?? docs/receiver-execution-v2-sprint-10a3b-r1-related-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-root-cause-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-r1-timeout-comparison-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-related-regression-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-coverage-evidence.json\n?? docs/receiver-execution-v2-sprint-10a3b-stop-evidence.json\n?? install.ps1\n?? receiver-source-snapshot.js\n?? tests/receiver-execution-v2-production-snapshot-save-test.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-harness.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-legacy-comparison.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-runner.cjs\n?? tests/receiver-execution-v2-sprint-10a3b-r1-save-test.cjs\n"
+  },
+  "actions": {
+    "stage": false,
+    "commit": false,
+    "push": false,
+    "reset": false,
+    "clean": false,
+    "stash": false
+  },
+  "gates": {
+    "saveSourceContract": "PASS_45_OF_45_ORIGINAL_CAREER_SAVE",
+    "rawSaveGuard": "PASS_BOUNDED_SOURCE_ONLY_NOT_V2_EXECUTION_SAVE",
+    "historicalSaveCompatibility": "PASS_3_STATES_NO_BACKFILL",
+    "firstBaseSuite": "UNRESOLVED_ORIGINAL120_TIMEOUT",
+    "lifecyclePinRetention": "PASS_BOUNDED_FINAL_CHECKS",
+    "sourceSnapshotIntegrity": "PASS_BOUNDED_CONSISTENCY_NOT_AUTHENTICATION",
+    "focusedRegression": {
+      "total": 906,
+      "passed": 906,
+      "failed": 0,
+      "breakdown": {
+        "sprint10a3b": 108,
+        "R1": 19,
+        "v22": 155,
+        "priorPure": 460,
+        "scorer": 112,
+        "safety": 52
+      }
+    },
+    "legacyComparison": {
+      "total": 25,
+      "passed": 25,
+      "failed": 0,
+      "historicalStates": 3
+    },
+    "relatedSuites": {
+      "total": 18,
+      "passed": 18,
+      "failed": 0
+    },
+    "firstBaseDiagnostic": {
+      "baseline": {
+        "exitCode": 0,
+        "error": null,
+        "elapsedMs": 124368.1242
+      },
+      "current": {
+        "exitCode": 0,
+        "error": null,
+        "elapsedMs": 122173.3159
+      },
+      "checks": 42,
+      "completeStdoutEqual": true,
+      "acceptanceReplacement": false
+    },
+    "fullRepository": "NOT_RUN_UNMET_FIRST_BASE_ORIGINAL_CONDITION",
+    "newProductionRegression": "0_CONFIRMED_IN_FINAL_BOUNDED_RESULTS_NOT_FULL_REPOSITORY_VERDICT",
+    "receiverV2Runtime": "DISABLED",
+    "productionSourceAcceptance": "PARTIAL",
+    "crt": "PARTIAL",
+    "capability": "PARTIAL",
+    "ordinaryEffort": "PARTIAL",
+    "L03": "PARTIAL",
+    "readyForSprint10B": "NO",
+    "readyForCommit": "NO"
+  },
+  "fullRepository": {
+    "ran": false,
+    "manifestCount": 227,
+    "priorVerdict": "224/227_PARTIAL",
+    "baselineDebt": [
+      {
+        "file": "tests/ability-performance-gradient-test.js",
+        "signature": "AssertionError [ERR_ASSERTION]: Low tier can have a multi-hit game",
+        "currentExitCode": 1,
+        "exactBaselineExitCode": 1,
+        "testHashUnchanged": true,
+        "sameFailure": true,
+        "sameCurrentSignature": true,
+        "unchangedTestHash": true
+      },
+      {
+        "file": "tests/baseball-match-foundation-2-2-2-test.js",
+        "signature": "AssertionError [ERR_ASSERTION]: 36. full match",
+        "currentExitCode": 1,
+        "exactBaselineExitCode": 1,
+        "testHashUnchanged": true,
+        "sameFailure": true,
+        "sameCurrentSignature": true,
+        "unchangedTestHash": true
+      },
+      {
+        "file": "tests/high-school-year-one-opportunity-two-integration-test.js",
+        "signature": "ReferenceError: DefensiveDecisionThrowFoundation is not defined",
+        "currentExitCode": 1,
+        "exactBaselineExitCode": 1,
+        "testHashUnchanged": true,
+        "sameFailure": true,
+        "sameCurrentSignature": true,
+        "unchangedTestHash": true
+      }
+    ],
+    "currentDebtReproduced": false,
+    "failureSetComparisonPerformed": false,
+    "condition": "All required regression must have valid original-condition results. Original120 first-base unresolved; wider diagnostic cannot authorize full manifest."
+  },
+  "limits": [
+    "No calibrated formation/contact-global clock/demand/touch or ordinary-effort authority created.",
+    "Source-only Save uses existing Legacy execution; actual v2 runtime Save remains unavailable.",
+    "Original120 formal timeout unchanged; diagnostic300 is not acceptance.",
+    "Preliminary overlapping120 runs retained but sequential120 runs govern timing comparison.",
+    "Protected preservation is metadata/status only, not content hash.",
+    "New R1 harness/argument diagnostic issues are recorded and are not old Production failures.",
+    "No Sprint10B,11 or Defensive Foundation Closeout."
+  ],
+  "capturePolicy": "exclusive-create; preserve all original captures"
+}

@@ -1,0 +1,59 @@
+{
+  "task": "Match Moment Snapshot Integrity Repair v0.1 — Bounded Production Fix",
+  "createdAt": "2026-10-15T07:55:37.350Z",
+  "authorized": [
+    "script.js",
+    "match-experience-development.js",
+    "tests/helpers/canonical-match-contract-context.cjs",
+    "tests/canonical-match-regression-integration-test.cjs"
+  ],
+  "production": {
+    "script": "Remove only terminal assignment to last completedMoment; no producer/IDs/RNG/lineup/Save changes",
+    "experience": "Use existing identity-bound batterAnticipation.publicContext for pressure only; situation remains Resolution Snapshot; missing/stale context retains legacy fallback and Decision Context remains UNVERIFIED"
+  },
+  "tests": {
+    "canonical": "Retain 50 named checks; convert four overwrite witnesses to positive snapshot, pressure-source and presentation contracts",
+    "helper": "Read-only presentation and consumer probes; fixture/seed/policy/playback unchanged"
+  },
+  "expectedRed": {
+    "file": "tests/canonical-match-regression-integration-test.cjs",
+    "expectedStatus": "FAIL",
+    "reason": "Completed Moment must preserve resolution state",
+    "firstSeed": 88221,
+    "productionUnchanged": true
+  },
+  "greenSuites": [
+    {
+      "label": "canonical",
+      "file": "tests/canonical-match-regression-integration-test.cjs",
+      "checks": 50
+    },
+    {
+      "label": "game-record",
+      "file": "tests/match-full-game-record-test.js",
+      "checks": 13
+    },
+    {
+      "label": "experience",
+      "file": "tests/match-experience-development-foundation-v1-test.js",
+      "checks": 46
+    },
+    {
+      "label": "presentation",
+      "file": "tests/match-development-settlement-presentation-v1-test.js",
+      "checks": 35
+    }
+  ],
+  "limits": {
+    "timeoutMs": 120000,
+    "outputMaxBuffer": 16000000,
+    "implicitGitShowMaxBuffer": 30000000
+  },
+  "unexpectedFailure": "Stop and classify; no expansion of Production scope",
+  "oldCapturePolicy": "Preserve all; exclusive new paths",
+  "SaveSchema": "UNCHANGED",
+  "original36": "UNCHANGED / historical FAIL",
+  "gradient": "UNCHANGED / historical FAIL",
+  "S3": "UNVERIFIED",
+  "receiverV2": "DISABLED"
+}

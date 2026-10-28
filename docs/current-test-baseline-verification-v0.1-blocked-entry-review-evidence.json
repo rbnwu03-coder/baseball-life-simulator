@@ -1,0 +1,45 @@
+{
+  "task": "Current Test Baseline Verification v0.1 — Read-only",
+  "createdAt": "2026-10-15T07:11:45.390Z",
+  "entrySafeSelfTest": {
+    "file": "tests/entry-safe-runner-test.cjs",
+    "defaultLabel": "development-1",
+    "parentCapture": {
+      "path": "docs/test-infrastructure-sprint-0.1-development-1-focused-evidence.json",
+      "exists": false
+    },
+    "firstChildCapture": {
+      "path": "docs/test-infrastructure-sprint-0.1-development-1-standalone-evidence.json",
+      "exists": true
+    },
+    "oldWipGuard": {
+      "file": "docs/test-infrastructure-sprint-0.1-capture.cjs",
+      "baselinePaths": 966,
+      "knownAuthorizedHashDrift": [
+        "tests/high-school-year-one-opportunity-two-integration-test.js",
+        "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+        "tests/pitch-tactical-decision-production-integration-test.js",
+        "tests/pitch-tactical-intent-evidence-integration-test.js",
+        "tests/pitch-tactical-interpretation-production-integration-test.js",
+        "tests/pitch-tactical-signal-projection-production-integration-test.js"
+      ],
+      "requiresExactOldHashes": true
+    },
+    "newExecutionAttempted": false,
+    "historical25CasePassRetained": true
+  },
+  "initialInventoryCorrection": {
+    "initial": "docs/current-test-baseline-verification-v0.1-inventory-evidence.json",
+    "final": "docs/current-test-baseline-verification-v0.1-inventory-final-evidence.json",
+    "reason": "Initial provisional inventory incorrectly described a parent capture collision. Actual collision is existing child captures; a fresh label is still blocked by old WIP integrity.",
+    "statusCountsChanged": false,
+    "oldCaptureOverwritten": false
+  },
+  "protected": {
+    "file": "tests/fast-check-smoke-test.cjs",
+    "read": false,
+    "hash": false,
+    "execute": false,
+    "status": "BLOCKED"
+  }
+}

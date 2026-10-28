@@ -1,0 +1,50 @@
+{
+  "scope": "INITIAL_OBSERVED_RESULTS_NOT_FINAL_SOURCE_CLOSEOUT",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "focused": {
+    "total": 108,
+    "passed": 108,
+    "failed": 0,
+    "source": "tool run console summary",
+    "fullNamedRowsCaptured": false
+  },
+  "legacyComparison": {
+    "total": 25,
+    "passed": 25,
+    "failed": 0,
+    "historicalStates": 3,
+    "source": "tool run console summary",
+    "fullPairEvidenceCaptured": false,
+    "projection": "source metadata fields removed; player Save envelope16 projects to15; all physical/cache/statistical/RNG/Evaluation data retained"
+  },
+  "priorPure": {
+    "v22": 155,
+    "oldSuites": 460,
+    "passed": 615,
+    "failed": 0,
+    "evidence": "initial-compatibility-evidence.json"
+  },
+  "related": {
+    "passed": 14,
+    "failed": 2,
+    "confirmedFailures": 1,
+    "unresolvedTimeouts": 1,
+    "scorer": "79+33=112 PASS",
+    "safety": "52 PASS"
+  },
+  "supplementaryLifecycle": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0,
+    "evidence": "lifecycle-regression-evidence.json"
+  },
+  "laterSourceRefinementsBeforeFailureObserved": [
+    "original Legacy cache-copy and canonical identity lineage checks",
+    "future actual-v2 tags rejected before shared legacy early return"
+  ],
+  "finalSourceRetested": false,
+  "finalVerdict": "FAIL_BLOCKED_NOT_READY_FOR_COMMIT",
+  "candidateExecutionCallsObserved": 0,
+  "formalShadowSimulation": false,
+  "runtimeEnabled": false
+}

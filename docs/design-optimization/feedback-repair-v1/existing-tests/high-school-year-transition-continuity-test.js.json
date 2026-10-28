@@ -1,0 +1,20 @@
+{
+  "file": "high-school-year-transition-continuity-test.js",
+  "status": "PASS",
+  "nodeAssertions": 44,
+  "customChecks": null,
+  "entry": true,
+  "elapsedMs": 214,
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--require",
+    "tests/entry-safe-preload.cjs",
+    "tests/high-school-year-transition-continuity-test.js"
+  ],
+  "exitCode": 0,
+  "signal": null,
+  "stdout": "✓ 1. 相同 transition inputs 產生 deterministic Y2 roster\n✓ 2. Y2 建立同校但不同 school-year roster identity\n✓ 3. 非畢業 returner actor IDs 全數保留\n✓ 4. Returner 年級 1→2、2→3 且年齡同步\n✓ 5. Y1 year-3 actors 全數移出 Y2 active roster\n✓ 6. Incoming class 補足畢業人數並全部為 year 1\n✓ 7. Incoming IDs deterministic 且不碰撞 returners\n✓ 8. Evolved roster 保持九守位合法 coverage\n✓ 9. Evolved roster 保留 bench 與 pitching depth\n✓ 10. Y2 Team Strength 由 evolved roster 重算\n✓ 11. Senior starter graduation 使 Y2 starter actor 與 competition snapshot 更新\n✓ 12. Deterministic 強校新生可加入同守位競爭\n✓ 13. Incoming freshman pressure 可提高 competition density\n✓ 14. Generic transition API 可形成 Y2→Y3 schema\n✓ 15. Y2→Y3 仍保留未畢業 actor IDs\n✓ 16. Y1 final canonical role 作為 Y2 prior 並保持 code authority\n✓ 17. Role code／label／context 在 Y2 entry 同步\n✓ 18. Y1 evaluation samples 與 positive pressure 跨年保留\n✓ 19. Evaluation identity 升為同校 career-level identity\n✓ 20. Y1 applied match identities 跨年保留\n✓ 21. Y2 transition 不增加 performance sample\n✓ 22. Y2 transition 建立新 Opportunity 並保留 Y1 history\n✓ 23. Y2 Opportunity 使用 updated role、competition 與 prior exposure\n✓ 24. Y2 roster identity 更新且 school identity 不變\n✓ 25. Production transition 保留 returners、移除 graduates、加入 incoming\n✓ 26. Y2 selected roster assignment 與 canonical Rotation 一致\n✓ 27. Competition context 由 Y2 roster 重算而非沿用 Y1 snapshot\n✓ 28. Y2 team strength 綁定 evolved selected roster\n✓ 29. Development、coachTrust 與 canonical positions 跨年不變\n✓ 30. 舊 season totals 被封存在 transition metadata 且 Y2 從零開始\n✓ 31. 第一個 Y2 role-sensitive narrative 讀 canonical role 與 updated competition\n✓ 32. Y2 initialization save/reload 不 reroll roster／incoming／role／competition\n✓ 33. Y2 Opportunity 進入 Existing Match Engine\n✓ 34. Y2 first formal evidence 追加為第三筆而非 transition sample\n✓ 35. Rotation 三筆正向 evidence 依原門檻升 Starter\n✓ 36. Promotion 同步 code／label／context／roster assignment\n✓ 37. Opportunity history 同時保留 Y1×2 與 Y2×1\n✓ 38. Y2 formal match history 帶 year metadata\n✓ 39. Y2 evidence settlement 不建立錯誤的 Y1 N+1\n✓ 40. Y2 match settlement exactly once\n✓ 41. Y2 evidence save/reload 保留 match identity、evidence、role 與 exactly-once IDs\n✓ 42. Negative pressure 跨年保留且 Y2 poor evidence 繼續累積\n✓ 43. Negative carryover 不會在 Y2 無故升級角色\n✓ 44. Y2 usage plan 與 canonical role 分離\nHigh School Year Transition Continuity v1: 44/44 passed.\n",
+  "stderr": "",
+  "error": null,
+  "timedOut": false
+}

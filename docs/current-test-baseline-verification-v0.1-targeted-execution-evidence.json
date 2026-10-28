@@ -1,0 +1,52 @@
+{
+  "task": "Current Test Baseline Verification v0.1 — Read-only",
+  "createdAt": "2026-10-15T07:07:38.195Z",
+  "results": [
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs",
+      "label": "r4-dependency",
+      "status": "PASS",
+      "entryVerified": true,
+      "sourceStable": true,
+      "exitCode": 0,
+      "elapsedMs": 9979.5607,
+      "successfulNodeAssertions": 94,
+      "summary": {
+        "total": 44,
+        "passed": 44,
+        "failed": 0
+      },
+      "negative": null,
+      "runtimeEnabled": false,
+      "candidateExecutionCalls": 0,
+      "raw": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r4-dependency-evidence.json",
+      "witness": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r4-dependency-evidence-assertions.json"
+    },
+    {
+      "file": "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs",
+      "label": "r6-exact-checker",
+      "status": "PASS",
+      "entryVerified": true,
+      "sourceStable": true,
+      "exitCode": 0,
+      "elapsedMs": 111.6832,
+      "successfulNodeAssertions": 303,
+      "summary": {
+        "total": 23,
+        "passed": 23,
+        "failed": 0
+      },
+      "negative": {
+        "total": 21,
+        "passed": 21,
+        "failed": 0
+      },
+      "raw": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r6-exact-checker-evidence.json",
+      "witness": "docs/test-infrastructure-sprint-0.1-current-test-baseline-verification-v0.1-r6-exact-checker-evidence-assertions.json"
+    }
+  ],
+  "children": 2,
+  "totalNamedChecks": 67,
+  "noFurtherExpansion": true,
+  "productionTestsFixturesSeedsPinsRunnerRegistryDelta": 0
+}

@@ -1,0 +1,2309 @@
+{
+  "project": "E-meng-baseball_life_sim_semirefactor",
+  "tier": 2,
+  "index": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"project\":\"E-meng-baseball_life_sim_semirefactor\",\"nodes\":81999,\"edges\":103654,\"status\":\"ready\",\"root_path\":\"E:/meng/baseball_life_sim_semirefactor\",\"indexed_at\":\"2026-10-14T09:40:45Z\",\"parse_partial\":{\"files\":[{\"path\":\"docs/ability-performance-correlation-audit-sprint-1.1.md\",\"error_ranges\":\"48-48,49-49,50-50,51-51,52-52,53-53,54-54,55-55,56-56\"}],\"count\":1,\"truncated\":false},\"parse_unusable\":{\"files\":[],\"count\":0,\"truncated\":false},\"skipped\":{\"files\":[],\"count\":0,\"truncated\":false},\"not_indexed\":{\"dirs\":[\".git\",\"node_modules\"],\"dirs_count\":2,\"files\":[],\"files_count\":0,\"truncated\":false,\"note\":\"Purposely not indexed — excluded BY DESIGN via gitignore/.cbmignore/skip-lists (see each file's reason). Not an error: change the ignore rules and re-index to include them.\"},\"coverage_note\":\"Best-effort signal, not a completeness guarantee: parse_partial files WERE indexed, but constructs inside the listed line ranges (1-based) MAY be missing from the graph (tree-sitter error recovery still salvages some). skipped files were not indexed at all. Prefer text search (grep) for flagged files/ranges. Files absent from this list are NOT guaranteed to be fully indexed. (not_indexed entries are a separate, BY-DESIGN class — deliberate ignore rules, not failures.)\"}"
+      }
+    ],
+    "structuredContent": {
+      "project": "E-meng-baseball_life_sim_semirefactor",
+      "nodes": 81999,
+      "edges": 103654,
+      "status": "ready",
+      "root_path": "E:/meng/baseball_life_sim_semirefactor",
+      "indexed_at": "2026-10-14T09:40:45Z",
+      "parse_partial": {
+        "files": [
+          {
+            "path": "docs/ability-performance-correlation-audit-sprint-1.1.md",
+            "error_ranges": "48-48,49-49,50-50,51-51,52-52,53-53,54-54,55-55,56-56"
+          }
+        ],
+        "count": 1,
+        "truncated": false
+      },
+      "parse_unusable": {
+        "files": [],
+        "count": 0,
+        "truncated": false
+      },
+      "skipped": {
+        "files": [],
+        "count": 0,
+        "truncated": false
+      },
+      "not_indexed": {
+        "dirs": [
+          ".git",
+          "node_modules"
+        ],
+        "dirs_count": 2,
+        "files": [],
+        "files_count": 0,
+        "truncated": false,
+        "note": "Purposely not indexed — excluded BY DESIGN via gitignore/.cbmignore/skip-lists (see each file's reason). Not an error: change the ignore rules and re-index to include them."
+      },
+      "coverage_note": "Best-effort signal, not a completeness guarantee: parse_partial files WERE indexed, but constructs inside the listed line ranges (1-based) MAY be missing from the graph (tree-sitter error recovery still salvages some). skipped files were not indexed at all. Prefer text search (grep) for flagged files/ranges. Files absent from this list are NOT guaranteed to be fully indexed. (not_indexed entries are a separate, BY-DESIGN class — deliberate ignore rules, not failures.)"
+    },
+    "isError": false
+  },
+  "search": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\"qn_rule\":\"qn = qn_prefix == \\\"\\\" ? name : qn_prefix + \\\".\\\" + name\",\"cols\":[\"name\",\"label\",\"lines\",\"in\",\"out\"],\"groups\":[{\"qn_prefix\":\"E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r4-runner\",\"file\":\"tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs\",\"rows\":[[\"focusedSuite\",\"Function\",\"39-43\",1,4],[\"runSuite\",\"Function\",\"26-32\",5,8]]}],\"total\":2,\"returned\":2,\"count\":2,\"has_more\":false,\"truncated\":false}"
+      }
+    ],
+    "structuredContent": {
+      "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+      "cols": [
+        "name",
+        "label",
+        "lines",
+        "in",
+        "out"
+      ],
+      "groups": [
+        {
+          "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r4-runner",
+          "file": "tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs",
+          "rows": [
+            [
+              "focusedSuite",
+              "Function",
+              "39-43",
+              1,
+              4
+            ],
+            [
+              "runSuite",
+              "Function",
+              "26-32",
+              5,
+              8
+            ]
+          ]
+        }
+      ],
+      "total": 2,
+      "returned": 2,
+      "count": 2,
+      "has_more": false,
+      "truncated": false
+    },
+    "isError": false
+  },
+  "trace": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"function\":\"E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r4-runner.runSuite\",\"direction\":\"both\",\"callees_total\":3,\"callees_total_relation\":\"eq\",\"callees\":{\"qn_rule\":\"qn = qn_prefix == \\\"\\\" ? name : qn_prefix + \\\".\\\" + name\",\"cols\":[\"name\",\"hop\",\"test\"],\"groups\":[{\"qn_prefix\":\"E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r4-runner\",\"rows\":[[\"hash\",1,true],[\"read\",1,true]]},{\"qn_prefix\":\"E-meng-baseball_life_sim_semirefactor.tests.application-controller-test\",\"rows\":[[\"assert\",1,true]]}]},\"callers_total\":5,\"callers_total_relation\":\"eq\",\"callers\":{\"qn_rule\":\"qn = qn_prefix == \\\"\\\" ? name : qn_prefix + \\\".\\\" + name\",\"cols\":[\"name\",\"hop\",\"test\"],\"groups\":[{\"qn_prefix\":\"E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r4-runner\",\"rows\":[[\"gates\",1,true],[\"full\",1,true]]},{\"qn_prefix\":\"E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r4-dependency-test\",\"rows\":[[\"red\",1,true]]},{\"qn_prefix\":\"E-meng-baseball_life_sim_semirefactor.tests\",\"rows\":[[\"receiver-execution-v2-sprint-10a3b-r4-runtime-comparison\",1,true],[\"receiver-execution-v2-sprint-10a3b-r4-runtime-investigation\",1,true]]}]}}"
+          }
+        ],
+        "structuredContent": {
+          "function": "E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r4-runner.runSuite",
+          "direction": "both",
+          "callees_total": 3,
+          "callees_total_relation": "eq",
+          "callees": {
+            "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+            "cols": [
+              "name",
+              "hop",
+              "test"
+            ],
+            "groups": [
+              {
+                "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r4-runner",
+                "rows": [
+                  [
+                    "hash",
+                    1,
+                    true
+                  ],
+                  [
+                    "read",
+                    1,
+                    true
+                  ]
+                ]
+              },
+              {
+                "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.application-controller-test",
+                "rows": [
+                  [
+                    "assert",
+                    1,
+                    true
+                  ]
+                ]
+              }
+            ]
+          },
+          "callers_total": 5,
+          "callers_total_relation": "eq",
+          "callers": {
+            "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+            "cols": [
+              "name",
+              "hop",
+              "test"
+            ],
+            "groups": [
+              {
+                "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r4-runner",
+                "rows": [
+                  [
+                    "gates",
+                    1,
+                    true
+                  ],
+                  [
+                    "full",
+                    1,
+                    true
+                  ]
+                ]
+              },
+              {
+                "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r4-dependency-test",
+                "rows": [
+                  [
+                    "red",
+                    1,
+                    true
+                  ]
+                ]
+              },
+              {
+                "qn_prefix": "E-meng-baseball_life_sim_semirefactor.tests",
+                "rows": [
+                  [
+                    "receiver-execution-v2-sprint-10a3b-r4-runtime-comparison",
+                    1,
+                    true
+                  ],
+                  [
+                    "receiver-execution-v2-sprint-10a3b-r4-runtime-investigation",
+                    1,
+                    true
+                  ]
+                ]
+              }
+            ]
+          }
+        },
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"name\":\"runSuite\",\"qualified_name\":\"E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r4-runner.runSuite\",\"label\":\"Function\",\"file_path\":\"E:/meng/baseball_life_sim_semirefactor/tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs\",\"start_line\":26,\"end_line\":32,\"source_mode\":\"full\",\"source\":\"function runSuite(file, full = false, cwd = root, timeoutMs = 120000) {\\n  assert(/^tests\\\\/[A-Za-z0-9_-]+\\\\.(js|cjs)$/.test(file) && !protectedPaths.has(file)); const args = full ? [\\\"-e\\\", wrapper, path.resolve(cwd, file)] : [file], maxBuffer = full ? 30000000 : 16000000, t = process.hrtime.bigint();\\n  const r = cp.spawnSync(process.execPath, args, { cwd, encoding: \\\"utf8\\\", windowsHide: true, maxBuffer, timeout: full ? 180000 : timeoutMs });\\n  return { file, command: [process.execPath, ...args], cwd, nodeExecutable: process.execPath, nodeVersion: process.version, timeoutMs: full ? 180000 : timeoutMs, maxBuffer,\\n    environment: { NODE_OPTIONS: process.env.NODE_OPTIONS || null, NODE_PATH: process.env.NODE_PATH || null, TZ: process.env.TZ || null }, elapsedMs: Number(process.hrtime.bigint() - t) / 1e6, exitCode: r.status, signal: r.signal,\\n    error: r.error ? { code: r.error.code, message: r.error.message } : null, stdout: r.stdout || \\\"\\\", stderr: r.stderr || \\\"\\\", sourceHash: hash(read(file)) };\\n}\\n\",\"callers\":5,\"callees\":3}"
+          }
+        ],
+        "structuredContent": {
+          "name": "runSuite",
+          "qualified_name": "E-meng-baseball_life_sim_semirefactor.tests.receiver-execution-v2-sprint-10a3b-r4-runner.runSuite",
+          "label": "Function",
+          "file_path": "E:/meng/baseball_life_sim_semirefactor/tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs",
+          "start_line": 26,
+          "end_line": 32,
+          "source_mode": "full",
+          "source": "function runSuite(file, full = false, cwd = root, timeoutMs = 120000) {\n  assert(/^tests\\/[A-Za-z0-9_-]+\\.(js|cjs)$/.test(file) && !protectedPaths.has(file)); const args = full ? [\"-e\", wrapper, path.resolve(cwd, file)] : [file], maxBuffer = full ? 30000000 : 16000000, t = process.hrtime.bigint();\n  const r = cp.spawnSync(process.execPath, args, { cwd, encoding: \"utf8\", windowsHide: true, maxBuffer, timeout: full ? 180000 : timeoutMs });\n  return { file, command: [process.execPath, ...args], cwd, nodeExecutable: process.execPath, nodeVersion: process.version, timeoutMs: full ? 180000 : timeoutMs, maxBuffer,\n    environment: { NODE_OPTIONS: process.env.NODE_OPTIONS || null, NODE_PATH: process.env.NODE_PATH || null, TZ: process.env.TZ || null }, elapsedMs: Number(process.hrtime.bigint() - t) / 1e6, exitCode: r.status, signal: r.signal,\n    error: r.error ? { code: r.error.code, message: r.error.message } : null, stdout: r.stdout || \"\", stderr: r.stderr || \"\", sourceHash: hash(read(file)) };\n}\n",
+          "callers": 5,
+          "callees": 3
+        },
+        "isError": false
+      }
+    }
+  ],
+  "coveragePaths": [
+    "ai-plate-appearance-outcome.js",
+    "application-controller.js",
+    "baseball-defense-prototype.js",
+    "baseball-gameplay-integration.js",
+    "baseball-gameplay-prototype-utils.js",
+    "baseball-offense-prototype.js",
+    "baseball-training-resolver.js",
+    "batted-ball-fly-ball-defense.js",
+    "batted-ball-ground-defense.js",
+    "batted-ball-line-drive-defense.js",
+    "batted-ball-outcome-mapping.js",
+    "batted-ball-physical.js",
+    "batted-ball-tag-up-execution.js",
+    "batter-anticipation.js",
+    "career-age22-outcome-resolver.js",
+    "career-development-progression.js",
+    "career-development-runtime-resolver.js",
+    "career-save-admission.js",
+    "career-spine-contract.js",
+    "career-transition-commit.js",
+    "career-transition-progression.js",
+    "career-transition-resolver.js",
+    "career-transition-runtime-resolver.js",
+    "coach-evaluation-boundary.js",
+    "coach-response-flow.js",
+    "coach.js",
+    "competition-presentation.js",
+    "competition-rules.js",
+    "county-selection-opportunity.js",
+    "current-state-boundary.js",
+    "day-completion-flow.js",
+    "decision-flow.js",
+    "defensive-decision-throw-foundation.js",
+    "defensive-opportunity-foundation.js",
+    "defensive-reach-secure-foundation.js",
+    "defensive-runner-throw-settlement-foundation.js",
+    "docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json",
+    "docs/receiver-execution-v2-sprint-10a3b-r6-save-ownership-contract.md",
+    "docs/test-infrastructure-sprint-0.1-accepted-focused-evidence.json",
+    "docs/test-infrastructure-sprint-0.1-capture.cjs",
+    "docs/test-infrastructure-sprint-0.1-contextual-status-panel-accepted-evidence-assertions.json",
+    "docs/test-infrastructure-sprint-0.1-contextual-status-panel-accepted-evidence.json",
+    "docs/test-infrastructure-sprint-0.1-development-2-focused-evidence.json",
+    "docs/test-infrastructure-sprint-0.1-development-3-focused-evidence.json",
+    "docs/test-infrastructure-sprint-0.1-final-focused-evidence.json",
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/async.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/caught.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/custom-empty.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/custom.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/empty.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/explicit.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/export.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/failure.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/git.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/legacy.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/main.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/runtime.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/timeout.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/zero.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/async.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/caught.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/custom-empty.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/custom.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/empty.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/explicit.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/export.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/failure.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/git.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/legacy.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/main.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/mixed.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/runtime.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/timeout.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/zero.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/async.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/caught.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/empty.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/explicit.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/export.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/failure.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/git.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/legacy.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/main.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/runtime.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/timeout.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/zero.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/async.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/caught.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/custom-empty.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/custom.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/empty.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/explicit.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/export.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/failure.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/git.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/legacy.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/main.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/runtime.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/timeout.cjs",
+    "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/zero.cjs",
+    "docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-accepted-evidence-assertions.json",
+    "docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-accepted-evidence.json",
+    "docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-accepted-evidence-assertions.json",
+    "docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-accepted-evidence.json",
+    "docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-accepted-evidence-assertions.json",
+    "docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-accepted-evidence.json",
+    "docs/test-infrastructure-sprint-0.1-r6-exact-checker-accepted-evidence-assertions.json",
+    "docs/test-infrastructure-sprint-0.1-r6-exact-checker-accepted-evidence.json",
+    "docs/test-reliability-audit-v0.1-delivery-evidence.json",
+    "docs/test-reliability-audit-v0.1-inventory-final-evidence.json",
+    "docs/test-reliability-audit-v0.1.md",
+    "evaluation-registry-bootstrap.js",
+    "evaluation-registry.js",
+    "force-advancement.js",
+    "high-school-career-evaluation.js",
+    "high-school-career-offers.js",
+    "high-school-competition-evidence.js",
+    "high-school-competition-foundation.js",
+    "high-school-competition-reassessment.js",
+    "high-school-entry-roster-context.js",
+    "high-school-exchange-network.js",
+    "high-school-friendly-invitation-producer.js",
+    "high-school-match-opportunity-generation.js",
+    "high-school-opportunity-probability.js",
+    "high-school-opportunity-selection.js",
+    "high-school-relationship-recency.js",
+    "high-school-relationship-temporal-authority.js",
+    "high-school-schedule-opportunity.js",
+    "high-school-training-camp-producer.js",
+    "high-school-year-transition.js",
+    "match-context-foundation.js",
+    "match-development-settlement-presentation.js",
+    "match-experience-development.js",
+    "match-game-record.js",
+    "match-situation-lifecycle.js",
+    "narrative-condition-boundary.js",
+    "narrative-condition-flow.js",
+    "national-selection-pipeline.js",
+    "npc.js",
+    "offensive-bunt-count-rules.js",
+    "offensive-bunt-defensive-handoff.js",
+    "offensive-bunt-execution.js",
+    "offensive-plate-approach.js",
+    "offensive-tactical-action.js",
+    "offensive-tactical-decision.js",
+    "offensive-tactical-opportunity.js",
+    "pitch-observation-foundation.js",
+    "pitch-sequence-state-foundation.js",
+    "pitch-sequencing.js",
+    "pitch-tactical-decision-foundation.js",
+    "pitch-tactical-decision-production-adapter.js",
+    "pitch-tactical-interpretation-foundation.js",
+    "pitcher-catcher-tactical-integration.js",
+    "pitcher-mental-state.js",
+    "pitcher-process-state.js",
+    "plate-decision-foundation.js",
+    "player.js",
+    "playing-time-game-exposure.js",
+    "receiver-execution-v2-foundation.js",
+    "receiver-source-snapshot.js",
+    "relationship-boundary.js",
+    "relationship-flow.js",
+    "rival.js",
+    "save.js",
+    "script.js",
+    "story.js",
+    "team-roster-foundation.js",
+    "team-strength-model.js",
+    "tests/ability-performance-correlation-audit.cjs",
+    "tests/ability-performance-gradient-test.js",
+    "tests/ability-performance-observability-extension.cjs",
+    "tests/baseball-match-foundation-2-2-2-test.js",
+    "tests/bbp-b1-ground-ball-production-integration-test.js",
+    "tests/career-save-admission-test.js",
+    "tests/contextual-status-panel-test.js",
+    "tests/defensive-decision-throw-production-integration-test.js",
+    "tests/defensive-runner-throw-settlement-foundation-test.js",
+    "tests/entry-safe-export-child.cjs",
+    "tests/entry-safe-preload.cjs",
+    "tests/entry-safe-runner-test.cjs",
+    "tests/entry-safe-runner.cjs",
+    "tests/first-base-receive-active-ground-production-integration-test.js",
+    "tests/force-advancement-foundation-test.js",
+    "tests/force-multi-runner-settlement-production-integration-test.js",
+    "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+    "tests/ground-defensive-decision-identity-production-integration-test.js",
+    "tests/ground-defensive-decision-identity-test-context.cjs",
+    "tests/ground-settlement-handoff-r2-context.cjs",
+    "tests/ground-settlement-handoff-r2-production-integration-test.js",
+    "tests/high-school-career-test-context.js",
+    "tests/high-school-year-one-opportunity-two-integration-test.js",
+    "tests/infield-legacy-receiver-model-foundation-test.js",
+    "tests/infield-legacy-receiver-scorer-closeout-test.js",
+    "tests/infield-scorer-recovery-integrity-repair-test.js",
+    "tests/match-authority-coverage-audit.cjs",
+    "tests/match-experience-development-foundation-v1-test.js",
+    "tests/match-full-game-record-test.js",
+    "tests/match-m0-after-r2-admission-context.cjs",
+    "tests/match-situation-lifecycle-test.js",
+    "tests/outcome-transition-hierarchy-test.js",
+    "tests/pitch-production-source-scope-test.js",
+    "tests/pitch-production-source-scope.cjs",
+    "tests/pitch-sequence-state-production-integration-test.js",
+    "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+    "tests/pitch-tactical-decision-production-adapter-test.js",
+    "tests/pitch-tactical-selector-extraction-baseline.cjs",
+    "tests/receiver-execution-v2-pure-contract-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-harness.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r3-runner.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs",
+    "tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs",
+    "tests/receiver-execution-v2-sprint-8-runner.cjs",
+    "tests/receiver-source-save-authorized-delta.cjs",
+    "tests/shared-infield-contract-2b-production-integration-test.js",
+    "tests/ss-defensive-production-integration-test.js",
+    "tests/third-base-ground-production-integration-test.js",
+    "time-boundary.js"
+  ],
+  "pages": [
+    {
+      "offset": 0,
+      "result": {
+        "project": "E-meng-baseball_life_sim_semirefactor",
+        "signal": "best_effort",
+        "indexed_at": "2026-10-14T10:59:17Z",
+        "metadata": {
+          "generation": "2026-10-14T10:59:17Z",
+          "index_mode": "full",
+          "recorded_at": "2026-10-14T10:59:19Z",
+          "recording_status": "complete",
+          "ignored_files_stored": 0,
+          "ignored_files_total": 0,
+          "hash_records_complete": true,
+          "coverage_version": 3,
+          "generation_matches": true
+        },
+        "paths": [
+          {
+            "requested_path": "ai-plate-appearance-outcome.js",
+            "path": "ai-plate-appearance-outcome.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "application-controller.js",
+            "path": "application-controller.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "baseball-defense-prototype.js",
+            "path": "baseball-defense-prototype.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "baseball-gameplay-integration.js",
+            "path": "baseball-gameplay-integration.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "baseball-gameplay-prototype-utils.js",
+            "path": "baseball-gameplay-prototype-utils.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "baseball-offense-prototype.js",
+            "path": "baseball-offense-prototype.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "baseball-training-resolver.js",
+            "path": "baseball-training-resolver.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "batted-ball-fly-ball-defense.js",
+            "path": "batted-ball-fly-ball-defense.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "batted-ball-ground-defense.js",
+            "path": "batted-ball-ground-defense.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "batted-ball-line-drive-defense.js",
+            "path": "batted-ball-line-drive-defense.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "batted-ball-outcome-mapping.js",
+            "path": "batted-ball-outcome-mapping.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "batted-ball-physical.js",
+            "path": "batted-ball-physical.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "batted-ball-tag-up-execution.js",
+            "path": "batted-ball-tag-up-execution.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "batter-anticipation.js",
+            "path": "batter-anticipation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "career-age22-outcome-resolver.js",
+            "path": "career-age22-outcome-resolver.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "career-development-progression.js",
+            "path": "career-development-progression.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "career-development-runtime-resolver.js",
+            "path": "career-development-runtime-resolver.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "career-save-admission.js",
+            "path": "career-save-admission.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "career-spine-contract.js",
+            "path": "career-spine-contract.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "career-transition-commit.js",
+            "path": "career-transition-commit.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "career-transition-progression.js",
+            "path": "career-transition-progression.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "career-transition-resolver.js",
+            "path": "career-transition-resolver.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "career-transition-runtime-resolver.js",
+            "path": "career-transition-runtime-resolver.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "coach-evaluation-boundary.js",
+            "path": "coach-evaluation-boundary.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_match",
+            "recommended_action": "use_graph_with_best_effort_caveat",
+            "coverage": []
+          },
+          {
+            "requested_path": "coach-response-flow.js",
+            "path": "coach-response-flow.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_match",
+            "recommended_action": "use_graph_with_best_effort_caveat",
+            "coverage": []
+          },
+          {
+            "requested_path": "coach.js",
+            "path": "coach.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_match",
+            "recommended_action": "use_graph_with_best_effort_caveat",
+            "coverage": []
+          },
+          {
+            "requested_path": "competition-presentation.js",
+            "path": "competition-presentation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "competition-rules.js",
+            "path": "competition-rules.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "county-selection-opportunity.js",
+            "path": "county-selection-opportunity.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "current-state-boundary.js",
+            "path": "current-state-boundary.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_match",
+            "recommended_action": "use_graph_with_best_effort_caveat",
+            "coverage": []
+          },
+          {
+            "requested_path": "day-completion-flow.js",
+            "path": "day-completion-flow.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_match",
+            "recommended_action": "use_graph_with_best_effort_caveat",
+            "coverage": []
+          },
+          {
+            "requested_path": "decision-flow.js",
+            "path": "decision-flow.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_match",
+            "recommended_action": "use_graph_with_best_effort_caveat",
+            "coverage": []
+          },
+          {
+            "requested_path": "defensive-decision-throw-foundation.js",
+            "path": "defensive-decision-throw-foundation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "defensive-opportunity-foundation.js",
+            "path": "defensive-opportunity-foundation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "defensive-reach-secure-foundation.js",
+            "path": "defensive-reach-secure-foundation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "defensive-runner-throw-settlement-foundation.js",
+            "path": "defensive-runner-throw-settlement-foundation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json",
+            "path": "docs/receiver-execution-v2-sprint-10a3b-baseline-evidence.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/receiver-execution-v2-sprint-10a3b-r6-save-ownership-contract.md",
+            "path": "docs/receiver-execution-v2-sprint-10a3b-r6-save-ownership-contract.md",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-accepted-focused-evidence.json",
+            "path": "docs/test-infrastructure-sprint-0.1-accepted-focused-evidence.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-capture.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-capture.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-contextual-status-panel-accepted-evidence-assertions.json",
+            "path": "docs/test-infrastructure-sprint-0.1-contextual-status-panel-accepted-evidence-assertions.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-contextual-status-panel-accepted-evidence.json",
+            "path": "docs/test-infrastructure-sprint-0.1-contextual-status-panel-accepted-evidence.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-development-2-focused-evidence.json",
+            "path": "docs/test-infrastructure-sprint-0.1-development-2-focused-evidence.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-development-3-focused-evidence.json",
+            "path": "docs/test-infrastructure-sprint-0.1-development-3-focused-evidence.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-final-focused-evidence.json",
+            "path": "docs/test-infrastructure-sprint-0.1-final-focused-evidence.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/async.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/async.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/caught.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/caught.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/custom-empty.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/custom-empty.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/custom.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/custom.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/empty.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/empty.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/explicit.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/explicit.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/export.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/export.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/failure.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/failure.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/git.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/git.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/legacy.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/legacy.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/main.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/main.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/runtime.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/runtime.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/timeout.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/timeout.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/zero.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-1ln9Lq/zero.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/async.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/async.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/caught.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/caught.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/custom-empty.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/custom-empty.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/custom.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/custom.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/empty.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/empty.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/explicit.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/explicit.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/export.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/export.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/failure.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/failure.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/git.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/git.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/legacy.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/legacy.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/main.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/main.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/mixed.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/mixed.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/runtime.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/runtime.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/timeout.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/timeout.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/zero.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-FWO7C7/zero.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/async.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/async.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/caught.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/caught.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/empty.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/empty.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/explicit.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/explicit.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/export.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/export.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/failure.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/failure.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/git.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/git.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/legacy.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/legacy.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/main.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/main.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/runtime.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/runtime.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/timeout.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/timeout.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/zero.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-RcbJQR/zero.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/async.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/async.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/caught.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/caught.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/custom-empty.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/custom-empty.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/custom.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/custom.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/empty.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/empty.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/explicit.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/explicit.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/export.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/export.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/failure.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/failure.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/git.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/git.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/legacy.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/legacy.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/main.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/main.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/runtime.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/runtime.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/timeout.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/timeout.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/zero.cjs",
+            "path": "docs/test-infrastructure-sprint-0.1-fixtures-alW7K5/zero.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          }
+        ],
+        "path_total": 100,
+        "path_returned": 100,
+        "path_has_more": false,
+        "scopes": [
+          {
+            "requested_scope": "tests",
+            "scope": "tests",
+            "total": 0,
+            "returned": 0,
+            "truncated": false,
+            "entries": [],
+            "status": "no_recorded_issue"
+          }
+        ],
+        "scope_total": 0,
+        "scope_returned": 0,
+        "scope_truncated": false,
+        "has_more": false,
+        "caveat": "Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable."
+      }
+    },
+    {
+      "offset": 100,
+      "result": {
+        "project": "E-meng-baseball_life_sim_semirefactor",
+        "signal": "best_effort",
+        "indexed_at": "2026-10-14T10:59:17Z",
+        "metadata": {
+          "generation": "2026-10-14T10:59:17Z",
+          "index_mode": "full",
+          "recorded_at": "2026-10-14T10:59:19Z",
+          "recording_status": "complete",
+          "ignored_files_stored": 0,
+          "ignored_files_total": 0,
+          "hash_records_complete": true,
+          "coverage_version": 3,
+          "generation_matches": true
+        },
+        "paths": [
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-accepted-evidence-assertions.json",
+            "path": "docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-accepted-evidence-assertions.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-accepted-evidence.json",
+            "path": "docs/test-infrastructure-sprint-0.1-outcome-transition-hierarchy-accepted-evidence.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-accepted-evidence-assertions.json",
+            "path": "docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-accepted-evidence-assertions.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-accepted-evidence.json",
+            "path": "docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-accepted-evidence.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-accepted-evidence-assertions.json",
+            "path": "docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-accepted-evidence-assertions.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-accepted-evidence.json",
+            "path": "docs/test-infrastructure-sprint-0.1-pitch-tactical-decision-production-adapter-integration-accepted-evidence.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-r6-exact-checker-accepted-evidence-assertions.json",
+            "path": "docs/test-infrastructure-sprint-0.1-r6-exact-checker-accepted-evidence-assertions.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-infrastructure-sprint-0.1-r6-exact-checker-accepted-evidence.json",
+            "path": "docs/test-infrastructure-sprint-0.1-r6-exact-checker-accepted-evidence.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-reliability-audit-v0.1-delivery-evidence.json",
+            "path": "docs/test-reliability-audit-v0.1-delivery-evidence.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-reliability-audit-v0.1-inventory-final-evidence.json",
+            "path": "docs/test-reliability-audit-v0.1-inventory-final-evidence.json",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "docs/test-reliability-audit-v0.1.md",
+            "path": "docs/test-reliability-audit-v0.1.md",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "evaluation-registry-bootstrap.js",
+            "path": "evaluation-registry-bootstrap.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_match",
+            "recommended_action": "use_graph_with_best_effort_caveat",
+            "coverage": []
+          },
+          {
+            "requested_path": "evaluation-registry.js",
+            "path": "evaluation-registry.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_match",
+            "recommended_action": "use_graph_with_best_effort_caveat",
+            "coverage": []
+          },
+          {
+            "requested_path": "force-advancement.js",
+            "path": "force-advancement.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-career-evaluation.js",
+            "path": "high-school-career-evaluation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-career-offers.js",
+            "path": "high-school-career-offers.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-competition-evidence.js",
+            "path": "high-school-competition-evidence.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-competition-foundation.js",
+            "path": "high-school-competition-foundation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-competition-reassessment.js",
+            "path": "high-school-competition-reassessment.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-entry-roster-context.js",
+            "path": "high-school-entry-roster-context.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-exchange-network.js",
+            "path": "high-school-exchange-network.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-friendly-invitation-producer.js",
+            "path": "high-school-friendly-invitation-producer.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-match-opportunity-generation.js",
+            "path": "high-school-match-opportunity-generation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-opportunity-probability.js",
+            "path": "high-school-opportunity-probability.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-opportunity-selection.js",
+            "path": "high-school-opportunity-selection.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-relationship-recency.js",
+            "path": "high-school-relationship-recency.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-relationship-temporal-authority.js",
+            "path": "high-school-relationship-temporal-authority.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-schedule-opportunity.js",
+            "path": "high-school-schedule-opportunity.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-training-camp-producer.js",
+            "path": "high-school-training-camp-producer.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "high-school-year-transition.js",
+            "path": "high-school-year-transition.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "match-context-foundation.js",
+            "path": "match-context-foundation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "match-development-settlement-presentation.js",
+            "path": "match-development-settlement-presentation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "match-experience-development.js",
+            "path": "match-experience-development.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "match-game-record.js",
+            "path": "match-game-record.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "match-situation-lifecycle.js",
+            "path": "match-situation-lifecycle.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "narrative-condition-boundary.js",
+            "path": "narrative-condition-boundary.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_match",
+            "recommended_action": "use_graph_with_best_effort_caveat",
+            "coverage": []
+          },
+          {
+            "requested_path": "narrative-condition-flow.js",
+            "path": "narrative-condition-flow.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_match",
+            "recommended_action": "use_graph_with_best_effort_caveat",
+            "coverage": []
+          },
+          {
+            "requested_path": "national-selection-pipeline.js",
+            "path": "national-selection-pipeline.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "npc.js",
+            "path": "npc.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_match",
+            "recommended_action": "use_graph_with_best_effort_caveat",
+            "coverage": []
+          },
+          {
+            "requested_path": "offensive-bunt-count-rules.js",
+            "path": "offensive-bunt-count-rules.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "offensive-bunt-defensive-handoff.js",
+            "path": "offensive-bunt-defensive-handoff.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "offensive-bunt-execution.js",
+            "path": "offensive-bunt-execution.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "offensive-plate-approach.js",
+            "path": "offensive-plate-approach.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "offensive-tactical-action.js",
+            "path": "offensive-tactical-action.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "offensive-tactical-decision.js",
+            "path": "offensive-tactical-decision.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "offensive-tactical-opportunity.js",
+            "path": "offensive-tactical-opportunity.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "pitch-observation-foundation.js",
+            "path": "pitch-observation-foundation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "pitch-sequence-state-foundation.js",
+            "path": "pitch-sequence-state-foundation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "pitch-sequencing.js",
+            "path": "pitch-sequencing.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "pitch-tactical-decision-foundation.js",
+            "path": "pitch-tactical-decision-foundation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "pitch-tactical-decision-production-adapter.js",
+            "path": "pitch-tactical-decision-production-adapter.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "pitch-tactical-interpretation-foundation.js",
+            "path": "pitch-tactical-interpretation-foundation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "pitcher-catcher-tactical-integration.js",
+            "path": "pitcher-catcher-tactical-integration.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "pitcher-mental-state.js",
+            "path": "pitcher-mental-state.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "pitcher-process-state.js",
+            "path": "pitcher-process-state.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "plate-decision-foundation.js",
+            "path": "plate-decision-foundation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "player.js",
+            "path": "player.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "playing-time-game-exposure.js",
+            "path": "playing-time-game-exposure.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "receiver-execution-v2-foundation.js",
+            "path": "receiver-execution-v2-foundation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "receiver-source-snapshot.js",
+            "path": "receiver-source-snapshot.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "relationship-boundary.js",
+            "path": "relationship-boundary.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_match",
+            "recommended_action": "use_graph_with_best_effort_caveat",
+            "coverage": []
+          },
+          {
+            "requested_path": "relationship-flow.js",
+            "path": "relationship-flow.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_match",
+            "recommended_action": "use_graph_with_best_effort_caveat",
+            "coverage": []
+          },
+          {
+            "requested_path": "rival.js",
+            "path": "rival.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "save.js",
+            "path": "save.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "script.js",
+            "path": "script.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "story.js",
+            "path": "story.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "team-roster-foundation.js",
+            "path": "team-roster-foundation.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "team-strength-model.js",
+            "path": "team-strength-model.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/ability-performance-correlation-audit.cjs",
+            "path": "tests/ability-performance-correlation-audit.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/ability-performance-gradient-test.js",
+            "path": "tests/ability-performance-gradient-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/ability-performance-observability-extension.cjs",
+            "path": "tests/ability-performance-observability-extension.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/baseball-match-foundation-2-2-2-test.js",
+            "path": "tests/baseball-match-foundation-2-2-2-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/bbp-b1-ground-ball-production-integration-test.js",
+            "path": "tests/bbp-b1-ground-ball-production-integration-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/career-save-admission-test.js",
+            "path": "tests/career-save-admission-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/contextual-status-panel-test.js",
+            "path": "tests/contextual-status-panel-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/defensive-decision-throw-production-integration-test.js",
+            "path": "tests/defensive-decision-throw-production-integration-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/defensive-runner-throw-settlement-foundation-test.js",
+            "path": "tests/defensive-runner-throw-settlement-foundation-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/entry-safe-export-child.cjs",
+            "path": "tests/entry-safe-export-child.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/entry-safe-preload.cjs",
+            "path": "tests/entry-safe-preload.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/entry-safe-runner-test.cjs",
+            "path": "tests/entry-safe-runner-test.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/entry-safe-runner.cjs",
+            "path": "tests/entry-safe-runner.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/first-base-receive-active-ground-production-integration-test.js",
+            "path": "tests/first-base-receive-active-ground-production-integration-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/force-advancement-foundation-test.js",
+            "path": "tests/force-advancement-foundation-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/force-multi-runner-settlement-production-integration-test.js",
+            "path": "tests/force-multi-runner-settlement-production-integration-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+            "path": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/ground-defensive-decision-identity-production-integration-test.js",
+            "path": "tests/ground-defensive-decision-identity-production-integration-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/ground-defensive-decision-identity-test-context.cjs",
+            "path": "tests/ground-defensive-decision-identity-test-context.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/ground-settlement-handoff-r2-context.cjs",
+            "path": "tests/ground-settlement-handoff-r2-context.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/ground-settlement-handoff-r2-production-integration-test.js",
+            "path": "tests/ground-settlement-handoff-r2-production-integration-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/high-school-career-test-context.js",
+            "path": "tests/high-school-career-test-context.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/high-school-year-one-opportunity-two-integration-test.js",
+            "path": "tests/high-school-year-one-opportunity-two-integration-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/infield-legacy-receiver-model-foundation-test.js",
+            "path": "tests/infield-legacy-receiver-model-foundation-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/infield-legacy-receiver-scorer-closeout-test.js",
+            "path": "tests/infield-legacy-receiver-scorer-closeout-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/infield-scorer-recovery-integrity-repair-test.js",
+            "path": "tests/infield-scorer-recovery-integrity-repair-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/match-authority-coverage-audit.cjs",
+            "path": "tests/match-authority-coverage-audit.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/match-experience-development-foundation-v1-test.js",
+            "path": "tests/match-experience-development-foundation-v1-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/match-full-game-record-test.js",
+            "path": "tests/match-full-game-record-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/match-m0-after-r2-admission-context.cjs",
+            "path": "tests/match-m0-after-r2-admission-context.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/match-situation-lifecycle-test.js",
+            "path": "tests/match-situation-lifecycle-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/outcome-transition-hierarchy-test.js",
+            "path": "tests/outcome-transition-hierarchy-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          }
+        ],
+        "path_total": 100,
+        "path_returned": 100,
+        "path_has_more": false,
+        "scopes": [],
+        "scope_total": 0,
+        "scope_returned": 0,
+        "scope_truncated": false,
+        "has_more": false,
+        "caveat": "Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable."
+      }
+    },
+    {
+      "offset": 200,
+      "result": {
+        "project": "E-meng-baseball_life_sim_semirefactor",
+        "signal": "best_effort",
+        "indexed_at": "2026-10-14T10:59:17Z",
+        "metadata": {
+          "generation": "2026-10-14T10:59:17Z",
+          "index_mode": "full",
+          "recorded_at": "2026-10-14T10:59:19Z",
+          "recording_status": "complete",
+          "ignored_files_stored": 0,
+          "ignored_files_total": 0,
+          "hash_records_complete": true,
+          "coverage_version": 3,
+          "generation_matches": true
+        },
+        "paths": [
+          {
+            "requested_path": "tests/pitch-production-source-scope-test.js",
+            "path": "tests/pitch-production-source-scope-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/pitch-production-source-scope.cjs",
+            "path": "tests/pitch-production-source-scope.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/pitch-sequence-state-production-integration-test.js",
+            "path": "tests/pitch-sequence-state-production-integration-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+            "path": "tests/pitch-tactical-decision-production-adapter-integration-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/pitch-tactical-decision-production-adapter-test.js",
+            "path": "tests/pitch-tactical-decision-production-adapter-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/pitch-tactical-selector-extraction-baseline.cjs",
+            "path": "tests/pitch-tactical-selector-extraction-baseline.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/receiver-execution-v2-pure-contract-test.cjs",
+            "path": "tests/receiver-execution-v2-pure-contract-test.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/receiver-execution-v2-sprint-10a3b-harness.cjs",
+            "path": "tests/receiver-execution-v2-sprint-10a3b-harness.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/receiver-execution-v2-sprint-10a3b-r3-runner.cjs",
+            "path": "tests/receiver-execution-v2-sprint-10a3b-r3-runner.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs",
+            "path": "tests/receiver-execution-v2-sprint-10a3b-r4-dependency-test.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs",
+            "path": "tests/receiver-execution-v2-sprint-10a3b-r4-runner.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs",
+            "path": "tests/receiver-execution-v2-sprint-10a3b-r6-exact-checker-test.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs",
+            "path": "tests/receiver-execution-v2-sprint-10a3b-r6-runner.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/receiver-execution-v2-sprint-8-runner.cjs",
+            "path": "tests/receiver-execution-v2-sprint-8-runner.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/receiver-source-save-authorized-delta.cjs",
+            "path": "tests/receiver-source-save-authorized-delta.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/shared-infield-contract-2b-production-integration-test.js",
+            "path": "tests/shared-infield-contract-2b-production-integration-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/ss-defensive-production-integration-test.js",
+            "path": "tests/ss-defensive-production-integration-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/third-base-ground-production-integration-test.js",
+            "path": "tests/third-base-ground-production-integration-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "time-boundary.js",
+            "path": "time-boundary.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_match",
+            "recommended_action": "use_graph_with_best_effort_caveat",
+            "coverage": []
+          }
+        ],
+        "path_total": 19,
+        "path_returned": 19,
+        "path_has_more": false,
+        "scopes": [],
+        "scope_total": 0,
+        "scope_returned": 0,
+        "scope_truncated": false,
+        "has_more": false,
+        "caveat": "Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable."
+      }
+    }
+  ],
+  "limitations": [
+    "Coverage is best-effort. Untracked/metadata_changed sources were read completely from disk and verified by hashes.",
+    "Dynamic assert proxies, inspector function counts and main entry semantics are validated by actual isolated/unchanged suite captures, not inferred from graph edges."
+  ]
+}

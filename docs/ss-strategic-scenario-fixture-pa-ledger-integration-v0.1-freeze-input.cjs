@@ -1,0 +1,13 @@
+'use strict';
+const fs=require('node:fs'),vm=require('node:vm');
+const C=require('./ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-capture.cjs');
+const B=require('./ss-strategic-scenario-fixture-pa-ledger-integration-v0.1-builder.cjs');
+let s=C.json(C.prefix+'program.json').program;
+const a=s.indexOf('globalThis.setupLedger='),b=s.indexOf('\n  globalThis.saved=JSON.parse(checkpointJSON);');
+if(a<0||b<a)throw Error('program builder markers');
+s=s.slice(0,a)+B.builderProgram+s.slice(b);
+new vm.Script(s,{filename:'isolated-ledger-program-syntax-only'});
+C.capture('program-final',{program:s,sha256:C.hash(s),syntaxOnly:true,gameplayBeforeFreeze:0});
+const input=C.json('docs/ss-reachable-controlled-scenario-v0.1-fixture-input-evidence.json');
+C.capture('fixture-input',{fixture:input.fixture,actualSeed:input.actualSeed,source:'docs/ss-reachable-controlled-scenario-v0.1-fixture-input-evidence.json',sourceSha256:C.fileHash('docs/ss-reachable-controlled-scenario-v0.1-fixture-input-evidence.json'),fixtureUnchanged:true,setupResults:['strikeout','walk'],setupSource:'isolatedScenarioSetupFixture',physicalRolls:{contactQuality:.65,ballType:.1,pace:.68,direction:.05,depth:0},decisionPolicy:'secure/zone then first legal for defensive decision',sample:.72,safety:1400});
+console.log(JSON.stringify({finalProgramHash:C.hash(s),fixtureFields:Object.keys(input.fixture).length,gameplay:0}));

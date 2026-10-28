@@ -1,0 +1,319 @@
+{
+  "task": "Match Contract Implementation v0.1 — Sprint 1",
+  "createdAt": "2026-10-15T06:49:03.809Z",
+  "tier": 2,
+  "scope": "Focused implementation references only; no new full architecture audit",
+  "indexStatus": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"project\":\"E-meng-baseball_life_sim_semirefactor\",\"nodes\":107345,\"edges\":129126,\"status\":\"ready\",\"root_path\":\"E:/meng/baseball_life_sim_semirefactor\",\"indexed_at\":\"2026-10-15T01:30:19Z\",\"parse_partial\":{\"files\":[{\"path\":\"docs/ability-performance-correlation-audit-sprint-1.1.md\",\"error_ranges\":\"48-48,49-49,50-50,51-51,52-52,53-53,54-54,55-55,56-56\"}],\"count\":1,\"truncated\":false},\"parse_unusable\":{\"files\":[],\"count\":0,\"truncated\":false},\"skipped\":{\"files\":[],\"count\":0,\"truncated\":false},\"not_indexed\":{\"dirs\":[\".git\",\"node_modules\"],\"dirs_count\":2,\"files\":[],\"files_count\":0,\"truncated\":false,\"note\":\"Purposely not indexed — excluded BY DESIGN via gitignore/.cbmignore/skip-lists (see each file's reason). Not an error: change the ignore rules and re-index to include them.\"},\"coverage_note\":\"Best-effort signal, not a completeness guarantee: parse_partial files WERE indexed, but constructs inside the listed line ranges (1-based) MAY be missing from the graph (tree-sitter error recovery still salvages some). skipped files were not indexed at all. Prefer text search (grep) for flagged files/ranges. Files absent from this list are NOT guaranteed to be fully indexed. (not_indexed entries are a separate, BY-DESIGN class — deliberate ignore rules, not failures.)\"}"
+        }
+      ],
+      "structuredContent": {
+        "project": "E-meng-baseball_life_sim_semirefactor",
+        "nodes": 107345,
+        "edges": 129126,
+        "status": "ready",
+        "root_path": "E:/meng/baseball_life_sim_semirefactor",
+        "indexed_at": "2026-10-15T01:30:19Z",
+        "parse_partial": {
+          "files": [
+            {
+              "path": "docs/ability-performance-correlation-audit-sprint-1.1.md",
+              "error_ranges": "48-48,49-49,50-50,51-51,52-52,53-53,54-54,55-55,56-56"
+            }
+          ],
+          "count": 1,
+          "truncated": false
+        },
+        "parse_unusable": {
+          "files": [],
+          "count": 0,
+          "truncated": false
+        },
+        "skipped": {
+          "files": [],
+          "count": 0,
+          "truncated": false
+        },
+        "not_indexed": {
+          "dirs": [
+            ".git",
+            "node_modules"
+          ],
+          "dirs_count": 2,
+          "files": [],
+          "files_count": 0,
+          "truncated": false,
+          "note": "Purposely not indexed — excluded BY DESIGN via gitignore/.cbmignore/skip-lists (see each file's reason). Not an error: change the ignore rules and re-index to include them."
+        },
+        "coverage_note": "Best-effort signal, not a completeness guarantee: parse_partial files WERE indexed, but constructs inside the listed line ranges (1-based) MAY be missing from the graph (tree-sitter error recovery still salvages some). skipped files were not indexed at all. Prefer text search (grep) for flagged files/ranges. Files absent from this list are NOT guaranteed to be fully indexed. (not_indexed entries are a separate, BY-DESIGN class — deliberate ignore rules, not failures.)"
+      },
+      "isError": false
+    }
+  },
+  "actualExposureTrace": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"function\":\"E-meng-baseball_life_sim_semirefactor.script.deriveHighSchoolMatchActualExposure\",\"direction\":\"both\",\"callees_total\":1,\"callees_total_relation\":\"eq\",\"callees\":{\"qn_rule\":\"qn = qn_prefix == \\\"\\\" ? name : qn_prefix + \\\".\\\" + name\",\"cols\":[\"name\",\"hop\"],\"groups\":[{\"qn_prefix\":\"E-meng-baseball_life_sim_semirefactor.script\",\"rows\":[[\"getHighSchoolPlayerTeamSide\",1]]}]},\"callers_total\":2,\"callers_total_relation\":\"eq\",\"callers\":{\"qn_rule\":\"qn = qn_prefix == \\\"\\\" ? name : qn_prefix + \\\".\\\" + name\",\"cols\":[\"name\",\"hop\"],\"groups\":[{\"qn_prefix\":\"E-meng-baseball_life_sim_semirefactor.script\",\"rows\":[[\"finalizeHighSchoolGameExposure\",1],[\"settleHighSchoolYearOneMatch\",1]]}]}}"
+        }
+      ],
+      "structuredContent": {
+        "function": "E-meng-baseball_life_sim_semirefactor.script.deriveHighSchoolMatchActualExposure",
+        "direction": "both",
+        "callees_total": 1,
+        "callees_total_relation": "eq",
+        "callees": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "getHighSchoolPlayerTeamSide",
+                  1
+                ]
+              ]
+            }
+          ]
+        },
+        "callers_total": 2,
+        "callers_total_relation": "eq",
+        "callers": {
+          "qn_rule": "qn = qn_prefix == \"\" ? name : qn_prefix + \".\" + name",
+          "cols": [
+            "name",
+            "hop"
+          ],
+          "groups": [
+            {
+              "qn_prefix": "E-meng-baseball_life_sim_semirefactor.script",
+              "rows": [
+                [
+                  "finalizeHighSchoolGameExposure",
+                  1
+                ],
+                [
+                  "settleHighSchoolYearOneMatch",
+                  1
+                ]
+              ]
+            }
+          ]
+        }
+      },
+      "isError": false
+    }
+  },
+  "actualExposureSnippet": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "name: deriveHighSchoolMatchActualExposure\nqualified_name: E-meng-baseball_life_sim_semirefactor.script.deriveHighSchoolMatchActualExposure\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/script.js\nstart_line: 12851\nend_line: 12875\nsource_mode: full\nsource: |\n  function deriveHighSchoolMatchActualExposure(match) {\n    const log = Array.isArray(match?.simulationLog) ? match.simulationLog : [];\n    const entryEvent = log.find(event => event.type === \"playerEntry\") || null;\n    const started = match?.playerLineupStatus === \"starter\";\n    const participated = started || (match?.playerLineupStatus === \"substitute\" && (match.playerEntryCompleted || entryEvent));\n    if (!participated) {\n      return Object.freeze({ matchId: match?.id || \"\", participated: false, started: false, appearanceType: \"noAppearance\", entryInning: null, exitInning: null, defensiveInnings: 0, plateAppearances: 0, role: match?.role || \"bench\" });\n    }\n    const entrySequence = started ? -1 : Number(entryEvent?.sequence) || 0;\n    const defensiveInnings = new Set(log.filter(event => event.type === \"halfInningEnd\" && event.half === (getHighSchoolPlayerTeamSide(match) === \"home\" ? \"上\" : \"下\")\n      && Number(event.sequence) >= entrySequence).map(event => Number(event.inning) || 0).filter(Boolean)).size;\n    const plateAppearances = log.filter(event => event.type === \"plateAppearance\" && event.batterId === \"player\"\n      && Number(event.sequence) >= entrySequence).length;\n    return Object.freeze({\n      matchId: match?.id || \"\",\n      participated: true,\n      started,\n      appearanceType: started ? \"start\" : match?.gameExposureState?.plannedUsage?.appearanceType || \"lateGameAppearance\",\n      entryInning: started ? 1 : Number(entryEvent?.inning) || Number(match?.inning) || 1,\n      exitInning: Number(match?.inning) || null,\n      defensiveInnings,\n      plateAppearances,\n      role: match?.role || match?.playerLineupStatus || \"bench\"\n    });\n  }\ncallers: 2\ncallees: 1\n"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "snippets": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "name: prepareHighSchoolYearOneMatch\nqualified_name: E-meng-baseball_life_sim_semirefactor.script.prepareHighSchoolYearOneMatch\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/script.js\nstart_line: 9667\nend_line: 9883\nsource_mode: full\nsource: |\n  function prepareHighSchoolYearOneMatch(options = {}) {\n    assertHighSchoolMatchCapabilityAdmission(player);\n    if (options.matchContext && typeof MatchContextFoundation === \"undefined\") throw new Error(\"Explicit match context requires MatchContextFoundation\");\n    const targetMatchId = options.matchId || \"hs-y1-autumn-exhibition\";\n    const targetEventId = options.eventId || \"high_school_showcase\";\n    const highSchoolYear = Math.max(1, Math.min(3, Math.floor(Number(options.highSchoolYear) || 1)));\n    const opportunityIndex = Math.max(1, Number(options.opportunityIndex) || 1);\n    if (player.highSchoolMatch?.id === targetMatchId) {\n      const match = player.highSchoolMatch;\n      if (options.matchContext) {\n        if (!match.matchContext) throw new Error(\"Existing match has no explicit context; cannot reassign a started match\");\n        const requested = MatchContextFoundation.normalizeMatchContext({...match.matchContext, ...options.matchContext});\n        if (JSON.stringify(requested) !== JSON.stringify(match.matchContext)) throw new Error(\"Existing match context cannot change\");\n      }\n      if (match.completed || (typeof match.simulationPhase === \"string\" && match.rosters?.home?.lineup?.length === 9 && match.rosters?.away?.lineup?.length === 9)) {\n        match.currentMomentId = getHighSchoolYearOneMomentId(match);\n        if (!match.completed && match.currentDomain === \"defense\" && isInfieldDecisionFamilyPosition(match.developmentPositionOverride || match.position) && match.defensiveSituation?.familyId !== \"infield\") {\n          buildInfieldMeaningfulMoment(match, player);\n          match.currentAssignment = getHighSchoolDefensiveSituationText(match);\n          setHighSchoolCoachTacticalDirection(match);\n        }\n        return match;\n      }\n    }\n    const code = [\"starter\", \"rotation\", \"bench\"].includes(player.highSchoolRoleCode) ? player.highSchoolRoleCode : \"bench\";\n    if (highSchoolYear === 1 && !player.highSchoolYearOneStartingRole) player.highSchoolYearOneStartingRole = code;\n    const roleAssignments = {\n      starter: { lineupStatus: \"starter\", entryWindowInning: 1, history: `以${player.primaryPosition || \"守備\"}先發，從開賽起進入守備與打序` },\n      rotation: { lineupStatus: \"bench\", entryWindowInning: 4, history: `本場先從板凳待命，預計在中段代打並接替${player.primaryPosition || \"守備\"}` },\n      bench: { lineupStatus: \"bench\", entryWindowInning: 5, history: `本場先從板凳觀察，等待中後段代打與短局守備機會` }\n    };\n    const position = player.primaryPosition || \"內野手\";\n    const requestedDevelopmentPosition = opportunityIndex === 1 && infieldPositions.includes(pendingHighSchoolMatchPositionOverride)\n      ? pendingHighSchoolMatchPositionOverride : \"\";\n    if (requestedDevelopmentPosition && !isDevelopmentTestPositionLegalForThrowingHand(requestedDevelopmentPosition, player.throws, player.age)) {\n      throw new Error(getDevelopmentTestPositionLegalityMessage(requestedDevelopmentPosition, player.throws));\n    }\n    const developmentPositionOverride = requestedDevelopmentPosition;\n    const suppliedOpportunity = options.opportunityDecision || null;\n    const simulationSeed = suppliedOpportunity\n      ? createHighSchoolMatchSimulationSeedFromIdentity(suppliedOpportunity.decisionId || suppliedOpportunity.matchId)\n      : createHighSchoolMatchSimulationSeed();\n    const directStartForced = highSchoolYear === 1 && opportunityIndex === 1\n      && Array.isArray(player.flags) && player.flags.includes(\"direct_start_history\");\n    const opportunityDecision = suppliedOpportunity || createHighSchoolPlayingTimeOpportunity({\n      matchId: targetMatchId,\n      actualRole: code,\n      requestedPosition: developmentPositionOverride || position,\n      directStartForced,\n      opportunityIndex,\n      opportunityPhase: options.opportunityPhase || \"autumn-exhibition\",\n      highSchoolYear\n    });\n    if ((suppliedOpportunity || opportunityIndex > 1) && (!opportunityDecision || opportunityDecision.matchId !== targetMatchId)) {\n      throw new Error(`高中第 ${highSchoolYear} 年第 ${opportunityIndex} 次實戰必須直接消費相同 match identity 的既有 Opportunity。`);\n    }\n    if (opportunityDecision && typeof HighSchoolCompetitionReassessment !== \"undefined\") {\n      player.highSchoolOpportunityHistory = HighSchoolCompetitionReassessment.recordOpportunity(player.highSchoolOpportunityHistory, {\n        opportunity: opportunityDecision,\n        opportunityIndex,\n        roleAtCreation: code\n      });\n    }\n    const plannedAppearance = opportunityDecision?.plannedUsage?.appearanceType || (code === \"starter\" ? \"start\" : \"lateGameAppearance\");\n    const starts = plannedAppearance === \"start\";\n    const roleAssignment = opportunityDecision\n      ? {\n        lineupStatus: starts ? \"starter\" : \"bench\",\n        entryWindowInning: starts ? 1 : Math.max(5, Number(opportunityDecision.plannedUsage.entryInning) || 5),\n        history: getHighSchoolPlayingTimeAssignmentText(opportunityDecision)\n      }\n      : roleAssignments[code];\n    const assignedPosition = opportunityDecision?.assignedPosition || developmentPositionOverride || position;\n    const developmentTestCapabilityOverride = developmentPositionOverride\n      ? createDevelopmentMatchPositionTestCapabilityOverride(developmentPositionOverride, player) : null;\n    const selectedSchoolRoster = materializeSelectedHighSchoolRoster(player, {\n      rosterRole: starts ? \"starter\" : \"bench\",\n      playerPosition: assignedPosition\n    });\n    const rosters = createHighSchoolMatchSimulationRoster(\n      starts ? \"starter\" : code === \"starter\" ? \"bench\" : code,\n      assignedPosition,\n      simulationSeed,\n      selectedSchoolRoster,\n      options.opponentRosterId || \"regional-power-school\"\n    );\n    const matchContext = typeof MatchContextFoundation !== \"undefined\" ? MatchContextFoundation.createMatchContext({\n      matchId: targetMatchId,\n      playerTeamId: rosters.home.teamRoster?.teamId || \"home\",\n      opponentTeamId: rosters.away.teamRoster?.teamId || \"away\",\n      matchOrigin: options.matchType === \"final-competition\" ? \"officialCompetition\" : \"developmentMatch\",\n      legacyFallback: !options.matchContext,\n      ...options.matchContext\n    }) : null;\n    if (matchContext && (matchContext.matchId !== targetMatchId || matchContext.playerTeamId !== (rosters.home.teamRoster?.teamId || \"home\") || matchContext.opponentTeamId !== (rosters.away.teamRoster?.teamId || \"away\"))) throw new Error(\"Match context / roster identity mismatch\");\n    if (matchContext && MatchContextFoundation.isPlayerAway(matchContext)) [rosters.home, rosters.away] = [rosters.away, rosters.home];\n    const playerSide = matchContext ? MatchContextFoundation.playerSide(matchContext) : \"home\";\n    const playerLineupSlot = rosters[playerSide].lineup.findIndex(item => item.id === \"player\");\n    const resolvedCompetitionRules = typeof CompetitionRules !== \"undefined\"\n      ? CompetitionRules.resolveMatchCompetitionRules(matchContext)\n      : null;\n    const regulationInnings = resolvedCompetitionRules?.rules.regulationInnings\n      || Math.max(1, Number(player.highSchoolMatch?.regulationInnings) || 7);\n    player.highSchoolMatch = {\n      id: targetMatchId,\n      matchContext,\n      ...(resolvedCompetitionRules ? {\n        ruleSetId: resolvedCompetitionRules.ruleSetId,\n        rules: resolvedCompetitionRules.rules,\n        ruleSetWarning: resolvedCompetitionRules.warning\n      } : {}),\n      ...(options.scheduleCompetitionRefs || {}),\n      eventId: targetEventId,\n      matchType: options.matchType || \"autumn-exhibition\",\n      highSchoolYear,\n      opportunityIndex,\n      opponent: options.opponent || \"高橋所屬的地區強校\",\n      inning: 1,\n      half: \"上\",\n      outs: 0,\n      scores: { home: 0, away: 0 },\n      runners: [null, null, null],\n      role: code,\n      position,\n      assignment: roleAssignment.history,\n      matchEntryHistory: `${roleAssignment.history}；${formatHandedness(player.bats, player.throws)}`,\n      currentAssignment: starts ? (playerSide === \"home\" ? \"比賽從一局上開始；先完成守備，再等待打序輪到你。\" : \"比賽從一局上開始；依打序完成進攻，再進入守備。\") : \"比賽從一局上開始；你在板凳觀察，但場上每個打席都會完整進行。\",\n      offenseTeam: \"away\",\n      defenseTeam: \"home\",\n      currentBatter: rosters.away.lineup[0]?.id || \"\",\n      battingOrderIndex: { home: 0, away: 0 },\n      tiebreakHalfInitialization: null,\n      halfInningResolved: false,\n      simulationPhase: \"full_match_flow\",\n      simulationCursor: 0,\n      simulationSeed,\n      simulationLog: [],\n      presentedEventCursor: 0,\n      scoreboardRevealHalfIndex: 0,\n      regulationInnings,\n      lineScore: { home: [], away: [] },\n      gameRecord: null,\n      rosters,\n      playerLineupStatus: roleAssignment.lineupStatus,\n      playerLineupSlot,\n      playerFieldingAssignment: starts ? assignedPosition : \"\",\n      playerEntryWindowInning: roleAssignment.entryWindowInning,\n      playerEntryCompleted: starts,\n      performanceEvidence: {},\n      matchExperience: null,\n      gameExposureState: opportunityDecision && typeof PlayingTimeGameExposure !== \"undefined\"\n        ? PlayingTimeGameExposure.createGameExposureState(opportunityDecision) : null,\n      developmentFullMatchStart: pendingHighSchoolFullMatchTest,\n      playerRunnerLocation: -1,\n      momentIndex: 0,\n      currentMomentId: highSchoolYearOneMomentIds[0],\n      currentDomain: \"flow\",\n      coachTacticalDirection: { domain: \"\", intent: \"\", riskPreference: \"\", priority: \"\", sourceCoachId: \"\", presentationStyle: \"\" },\n      coachTacticalContextSignature: \"\",\n      opponentTacticalTruth: { code: \"\", targetRunnerId: \"\" },\n      ballContext: { type: \"\", family: \"\", pace: \"\", label: \"\", detail: \"\", timeWindow: \"\" },\n      positionDecisionFamily: \"\", currentFieldingPosition: starts && (developmentPositionOverride || opportunityDecision?.positionFallbackApplied) ? assignedPosition : \"\", developmentPositionOverride,\n      developmentTestCapabilityOverride, defensiveSituation: {},\n      matchDecisionDensityState: createHighSchoolMatchDecisionDensityState(),\n      pitcherRuntimeState: null,\n      pitcherSequencingDebugTrace: [],\n      pitcherObservableHistory: [],\n      pitcherTacticalSequenceHistory: [],\n      pitcherTacticalDebugTrace: [],\n      batterAnticipationState: null,\n      prePitchPlanningState: null,\n      offensivePlateAppearanceState: null,\n      pendingOffensiveOpportunity: null,\n      offensivePlayerAgencyState: null,\n      offensiveTacticalActionState: null,\n      offensiveBuntPAState: null,\n      buntBallInPlayState: null,\n      pendingDefensiveResumeState: null,\n      lastDefensiveResolution: { resultCode: \"\", tier: \"\", decisionQuality: \"\", executionQuality: \"\", primaryCause: \"\", secondaryCause: \"\", causeExplanation: \"\" },\n      pendingHalfInningTermination: null,\n      catcherDecisionState: null,\n      catcherReassessmentTrigger: null,\n      completedMoments: [],\n      playerContribution: { strong: 0, mixed: 0, failure: 0, runsCreated: 0, runsScored: 0, hits: 0, walks: 0, outsCreated: 0, errors: 0 },\n      previousMomentDecision: \"\",\n      previousMomentOutcome: \"\",\n      passage: \"\",\n      opponentAdjustment: \"\",\n      coachInstruction: starts ? \"先跟著比賽完成每個守備與打席。\" : \"先讀完整比賽流；被叫到時直接接進當下局面。\",\n      decision: \"\",\n      outcomeTier: \"\",\n      outcome: \"\",\n      consequence: \"\",\n      coachReaction: \"現任教練確認你的第一個場上任務。\",\n      teamReaction: \"休息區把下一段比賽交到你手上。\",\n      performanceSummary: \"\",\n      teamResult: \"\",\n      settled: false,\n      pendingGameSettlement: \"\",\n      eventSettlementApplied: false,\n      developmentPresentationCompleted: false,\n      completed: false\n    };\n    ensureHighSchoolPitcherRuntimeState(player.highSchoolMatch);\n    if (isHighSchoolMatchOpportunityDebugMode()) ensureHighSchoolMatchOpportunityTrace(player.highSchoolMatch);\n    setHighSchoolCoachTacticalDirection(player.highSchoolMatch);\n    recordHighSchoolMatchSimulationEvent(player.highSchoolMatch, {\n      type: \"matchEntry\", inning: 1, half: \"上\",\n      outs: 0, runners: player.highSchoolMatch.runners,\n      scores: player.highSchoolMatch.scores,\n      assignment: player.highSchoolMatch.matchEntryHistory\n    });\n    pendingHighSchoolMatchPositionOverride = \"\";\n    pendingHighSchoolFullMatchTest = false;\n    player.highSchoolRoleContext.assignment = roleAssignment.history;\n    return player.highSchoolMatch;\n  }\ncallers: 8\ncallees: 21\n"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "name: settleHighSchoolYearOneMatch\nqualified_name: E-meng-baseball_life_sim_semirefactor.script.settleHighSchoolYearOneMatch\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/script.js\nstart_line: 13093\nend_line: 13188\nsource_mode: full\nsource: |\n  function settleHighSchoolYearOneMatch(match, finalDecision) {\n    if (match.settled || match.completed) return false;\n    const contribution = match.playerContribution;\n    const finalMoment = match.completedMoments.at(-1);\n    if (finalMoment) {\n      finalMoment.scores = { ...match.scores };\n      finalMoment.runners = [null, null, null];\n      finalMoment.outs = 3;\n      finalMoment.half = \"終\";\n    }\n    const resultLabel = getHighSchoolPlayerScoreDifference(match) > 0 ? \"球隊勝利\" : getHighSchoolPlayerScoreDifference(match) < 0 ? \"球隊落敗\" : \"球隊和局\";\n    match.teamResult = `${resultLabel}，終場 ${match.scores[getHighSchoolPlayerTeamSide(match)]}：${match.scores[getHighSchoolOpponentTeamSide(match)]}`;\n    const momentCount = match.completedMoments.length;\n    const participationTruth = deriveHighSchoolMatchActualExposure(match);\n    const overallTier = contribution.strong > contribution.failure ? \"strong\" : contribution.failure > contribution.strong ? \"failure\" : \"mixed\";\n    const countLabel = momentCount === 1 ? \"一個\" : momentCount === 2 ? \"兩個\" : momentCount === 3 ? \"三個\" : `${momentCount} 個`;\n    const performanceLines = match.completedMoments.map((moment, index) => `第${[\"一\", \"二\", \"三\"][index] || index + 1}次：${moment.outcome}。`).join(\" \");\n    match.performanceSummary = participationTruth.participated\n      ? `本場${countLabel}關鍵時刻：${performanceLines || \"你依照角色完成了這場比賽。\"}`\n      : \"本場比賽完整結束，但教練沒有把你換上場；沒有虛構守備局數、打席或比賽成長。\";\n    match.outcome = `${match.teamResult}。${match.performanceSummary}`;\n    match.coachReaction = overallTier === \"strong\"\n      ? \"「今天幾次輪到你，你都把眼前的球處理清楚。下一場繼續照這個節奏準備。」\"\n      : overallTier === \"mixed\"\n        ? \"「有幾球你看對了，也有一步慢了。下一輪把判斷後的第一個動作做得更乾淨。」\"\n        : \"「你不是沒看懂，動作只是慢了一步。下一輪先把接球到出手的節奏修掉。」\";\n    match.consequence = overallTier === \"strong\"\n      ? \"下一場實戰名單仍會保留你的名字。\"\n      : overallTier === \"mixed\"\n        ? \"接下來的訓練會更重視判斷後的第一步動作。\"\n        : \"下一輪訓練會先練接球、轉身與出手之間的銜接。\";\n    match.teamReaction = match.teamResult;\n    match.passage = \"終場哨響，記分板停在這場比賽真正結束的局數。\";\n    match.momentIndex = momentCount;\n    match.currentMomentId = \"\";\n    match.currentDomain = \"complete\";\n    match.simulationPhase = \"complete\";\n    match.currentAssignment = \"比賽已結束。\";\n    match.completed = true;\n    match.settled = true;\n    setHighSchoolCoachTacticalDirection(match);\n    recordHighSchoolMatchSimulationEvent(match, {\n      type: \"gameEnd\", inning: match.inning, half: \"終\", scores: match.scores\n    });\n    finalizeHighSchoolGameRecord(match);\n    finalizeHighSchoolGameExposure(match);\n    if (typeof MatchExperienceDevelopment !== \"undefined\") {\n      const finalizedExposure = match.gameExposureState?.finalized\n        ? {\n          defensiveInnings: match.gameExposureState.defensiveInnings,\n          plateAppearances: match.gameExposureState.plateAppearances,\n          role: match.role || match.playerLineupStatus || \"bench\"\n        }\n        : undefined;\n      MatchExperienceDevelopment.settleMatchExperienceDevelopment(player, match, finalizedExposure ? { exposure: finalizedExposure } : {});\n    }\n    if (typeof HighSchoolCompetitionEvidence !== \"undefined\" && (match.competitionEditionId || match.competitionEntryId)) {\n      HighSchoolCompetitionEvidence.integrateMatchEvidence(player, {\n        playerId: match.playerId || \"player\",\n        competitionEditionId: match.competitionEditionId,\n        competitionEntryId: match.competitionEntryId,\n        teamId: match.competitionTeamId,\n        match,\n        position: match.playerFieldingAssignment || match.position,\n        role: match.role || match.playerLineupStatus,\n        createdContext: { highSchoolYear: match.highSchoolYear, opportunityIndex: match.opportunityIndex }\n      });\n    }\n  \n    if (participationTruth.participated) {\n      player.seasonPerformance += Math.max(0, contribution.strong * 2 + contribution.mixed);\n      player.recentPerformance += overallTier === \"strong\" ? 2 : overallTier === \"mixed\" ? 1 : -1;\n      player.exposure += overallTier === \"strong\" ? 2 : 1;\n      player.scoutEvaluation += overallTier === \"strong\" ? 2 : overallTier === \"mixed\" ? 1 : 0;\n      const proofFlag = finalDecision === \"attack\" ? \"showcase_tools\" : finalDecision === \"advance\" ? \"showcase_baseball_iq\" : \"showcase_team_task\";\n      addFlags([\"hs_y1_match_completed\", `hs_y1_match_${overallTier}`, proofFlag]);\n    } else {\n      addFlags([\"hs_y1_match_completed\", \"hs_y1_match_no_appearance\"]);\n    }\n    const competitionSettlement = applyHighSchoolCompetitionMatchSettlement(match);\n    if (competitionSettlement?.status === \"applied\") {\n      const labels = HighSchoolCompetitionReassessment.ROLE_LABELS || {};\n      const roleResult = competitionSettlement.roleResult || {};\n      const roleText = roleResult.change === \"unchanged\"\n        ? `正式角色維持「${labels[roleResult.nextRole] || player.highSchoolTeamRole || \"待評估\"}」`\n        : `正式角色由「${labels[roleResult.currentRole] || roleResult.currentRole}」調整為「${labels[roleResult.nextRole] || roleResult.nextRole}」`;\n      match.competitionFeedback = `${roleText}；評估趨勢：${formatHighSchoolCompetitionEvaluation(competitionSettlement.evaluation)}。`;\n      match.consequence = `${match.consequence} ${match.competitionFeedback}`;\n    }\n    recordHighSchoolYearOneMatchHistory(match, competitionSettlement);\n    if (typeof HighSchoolScheduleOpportunity !== \"undefined\" && player.highSchoolSchedule) {\n      HighSchoolScheduleOpportunity.markScheduleCompleted(player.highSchoolSchedule,match);\n      recordHighSchoolExchangeCompletion(match);\n    }\n    return match.performanceSummary;\n  }\ncallers: 1\ncallees: 13\n"
+          }
+        ],
+        "isError": false
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "content": [
+          {
+            "type": "text",
+            "text": "name: formatMatchSimulationEvent\nqualified_name: E-meng-baseball_life_sim_semirefactor.script.formatMatchSimulationEvent\nlabel: Function\nfile_path: E:/meng/baseball_life_sim_semirefactor/script.js\nstart_line: 6148\nend_line: 6207\nsource_mode: full\nsource: |\n  function formatMatchSimulationEvent(event, match) {\n    if (!event?.type) return null;\n    const halfLabel = `${event.inning || match.inning}局${event.half || match.half}`;\n    if (event.type === \"matchEntry\") {\n      return { type: event.type, priority: 2, text: `${event.outs ?? 0} 出局｜比賽已進行到${halfLabel}，目前 ${event.scores.away}：${event.scores.home}；${event.assignment}` };\n    }\n    if (event.type === \"playerEntry\") {\n      return { type: event.type, priority: 5, playerRelated: true, text: `${event.outs ?? 0} 出局｜教練叫到你：${event.assignment}` };\n    }\n    if (event.type === \"run\") {\n      const playerRun = event.runnerId === \"player\";\n      return { type: event.type, priority: playerRun ? 5 : 4, playerRelated: playerRun, text: playerRun\n        ? `${event.outs ?? match.outs} 出局｜你回本壘得分，高中球隊攻下一分。`\n        : `${event.outs ?? match.outs} 出局｜${getHighSchoolMatchSimulationEntityName(match, event.runnerId)}回本壘得分，${event.team === getHighSchoolPlayerTeamSide(match) ? \"高中球隊\" : \"對手\"}攻下一分。` };\n    }\n    if (event.type === \"plateAppearance\") {\n      const beforePlayer = event.before?.runners?.indexOf(\"player\") ?? -1;\n      const afterPlayer = event.after?.runners?.indexOf(\"player\") ?? -1;\n      const playerMoved = beforePlayer >= 0 && afterPlayer >= 0 && beforePlayer !== afterPlayer;\n      const terminalThirdOut = event.thirdOutResolution?.halfInningEnded === true;\n      const playerOut = beforePlayer >= 0 && afterPlayer < 0 && !terminalThirdOut && !match.simulationLog.some(item => item.type === \"run\" && item.sequence >= event.sequence - 4 && item.sequence < event.sequence && item.runnerId === \"player\");\n      const thirdOut = event.after?.outs >= 3;\n      const outIncreased = (Number(event.after?.outs) || 0) > (Number(event.before?.outs) || 0);\n      return { type: event.type, priority: playerMoved || playerOut || Number(event.runsBattedIn) > 0 ? 5 : outIncreased ? 4 : 1, playerRelated: playerMoved || playerOut, thirdOut, outIncreased, text: formatHighSchoolPlateAppearanceCommentary(event, match) };\n    }\n    if (event.type === \"halfInningEnd\") {\n      const stranded = event.playerStranded ? \" 你留在壘上，這個半局未能回到本壘。\" : \"\";\n      return { type: event.type, priority: event.playerStranded ? 5 : 4, playerRelated: Boolean(event.playerStranded), text: `3 出局｜${halfLabel}結束，${event.offenseTeam === getHighSchoolPlayerTeamSide(match) ? \"我方\" : \"對手\"}${event.runsScored ? `攻下 ${event.runsScored} 分` : \"沒有得分\"}。${stranded}` };\n    }\n    if (event.type === \"sideChange\") {\n      return { type: event.type, priority: 4, text: `0 出局｜攻守交換，進入${halfLabel}；目前比分 ${event.scores.away}：${event.scores.home}。` };\n    }\n    if (event.type === \"meaningfulMomentReached\") {\n      return { type: event.type, priority: 5, text: `${event.outs ?? match.outs} 出局｜${event.assignment}` };\n    }\n    if (event.type === \"meaningfulMomentResolved\") {\n      const result = event.domain === \"defense\" ? formatHighSchoolDefensiveResolutionCommentary(event, match) : event.outcome || `場上局面更新為${formatHighSchoolMatchRunners(event.runners)}`;\n      return { type: event.type, priority: 5, playerRelated: true, text: `${event.outs ?? match.outs} 出局｜${result}` };\n    }\n    if (event.type === \"playerRoutinePlay\") {\n      return { type: event.type, priority: 5, playerRelated: true, text: formatHighSchoolRoutineDefensiveCommentary(event, match) };\n    }\n    if (event.type === \"buntPitchResolved\") {\n      const continuation = event.paEnds\n        ? event.paResult === \"strikeout\" ? \"這個打席以三振結束。\"\n          : event.paResult === \"walk\" ? \"這個打席形成保送。\" : \"球已進入場內，等待後續守備處理。\"\n        : `球數來到 ${event.countAfter?.balls || 0}-${event.countAfter?.strikes || 0}，打席繼續。`;\n      return { type: event.type, priority: 4, text: `${event.outs ?? match.outs} 出局｜${event.presentation} ${continuation}` };\n    }\n    if (event.type === \"buntDefensiveFallback\") {\n      return { type: event.type, priority: 4, text: `${event.outs ?? match.outs} 出局｜${event.presentation || event.assignment}` };\n    }\n    if (event.type === \"defensiveResolution\") {\n      const result = event.outsCreated >= 2 ? \"完成雙殺\" : event.outsCreated === 1 ? \"取得一個出局\" : event.error ? \"守備失誤讓跑者推進\" : \"沒有取得出局\";\n      return { type: event.type, priority: 5, playerRelated: true, text: `${event.outs ?? match.outs} 出局｜這次守備${result}；目前${formatHighSchoolMatchRunners(event.runners)}。` };\n    }\n    if (event.type === \"walkOff\") return { type: event.type, priority: 5, text: `${halfLabel}，${getHighSchoolPlayerTeamSide(match) === \"home\" ? \"我方\" : \"對手\"}超前，這場比賽就此結束。` };\n    if (event.type === \"gameEnd\") return { type: event.type, priority: 5, text: `比賽結束，終場 ${event.scores.away}：${event.scores.home}。` };\n    return null;\n  }\ncallers: 1\ncallees: 6\n"
+          }
+        ],
+        "isError": false
+      }
+    }
+  ],
+  "initialCoverage": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"project\":\"E-meng-baseball_life_sim_semirefactor\",\"signal\":\"best_effort\",\"indexed_at\":\"2026-10-15T01:30:19Z\",\"metadata\":{\"generation\":\"2026-10-15T01:30:19Z\",\"index_mode\":\"full\",\"recorded_at\":\"2026-10-15T01:30:23Z\",\"recording_status\":\"complete\",\"ignored_files_stored\":0,\"ignored_files_total\":0,\"hash_records_complete\":true,\"coverage_version\":3,\"generation_matches\":true},\"paths\":[{\"requested_path\":\"script.js\",\"path\":\"script.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"index.html\",\"path\":\"index.html\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"player.js\",\"path\":\"player.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"save.js\",\"path\":\"save.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"playing-time-game-exposure.js\",\"path\":\"playing-time-game-exposure.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/entry-safe-runner.cjs\",\"path\":\"tests/entry-safe-runner.cjs\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/entry-safe-preload.cjs\",\"path\":\"tests/entry-safe-preload.cjs\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/baseball-match-foundation-2-2-2-test.js\",\"path\":\"tests/baseball-match-foundation-2-2-2-test.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/match-full-game-record-test.js\",\"path\":\"tests/match-full-game-record-test.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/high-school-career-test-context.js\",\"path\":\"tests/high-school-career-test-context.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/ground-ball-defensive-settlement-lifecycle-regression-test.js\",\"path\":\"tests/ground-ball-defensive-settlement-lifecycle-regression-test.js\",\"status\":\"no_recorded_issue\",\"freshness\":\"metadata_changed\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/helpers/canonical-match-contract-context.cjs\",\"path\":\"tests/helpers/canonical-match-contract-context.cjs\",\"status\":\"no_recorded_issue\",\"freshness\":\"not_tracked\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/canonical-match-regression-integration-test.cjs\",\"path\":\"tests/canonical-match-regression-integration-test.cjs\",\"status\":\"no_recorded_issue\",\"freshness\":\"not_tracked\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]},{\"requested_path\":\"tests/routine-commentary-contract-test.cjs\",\"path\":\"tests/routine-commentary-contract-test.cjs\",\"status\":\"no_recorded_issue\",\"freshness\":\"not_tracked\",\"recommended_action\":\"read_source_and_reindex\",\"coverage\":[]}],\"path_total\":14,\"path_returned\":14,\"path_has_more\":false,\"scopes\":[],\"scope_total\":0,\"scope_returned\":0,\"scope_truncated\":false,\"has_more\":false,\"caveat\":\"Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable.\"}"
+        }
+      ],
+      "structuredContent": {
+        "project": "E-meng-baseball_life_sim_semirefactor",
+        "signal": "best_effort",
+        "indexed_at": "2026-10-15T01:30:19Z",
+        "metadata": {
+          "generation": "2026-10-15T01:30:19Z",
+          "index_mode": "full",
+          "recorded_at": "2026-10-15T01:30:23Z",
+          "recording_status": "complete",
+          "ignored_files_stored": 0,
+          "ignored_files_total": 0,
+          "hash_records_complete": true,
+          "coverage_version": 3,
+          "generation_matches": true
+        },
+        "paths": [
+          {
+            "requested_path": "script.js",
+            "path": "script.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "index.html",
+            "path": "index.html",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "player.js",
+            "path": "player.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "save.js",
+            "path": "save.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "playing-time-game-exposure.js",
+            "path": "playing-time-game-exposure.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/entry-safe-runner.cjs",
+            "path": "tests/entry-safe-runner.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/entry-safe-preload.cjs",
+            "path": "tests/entry-safe-preload.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/baseball-match-foundation-2-2-2-test.js",
+            "path": "tests/baseball-match-foundation-2-2-2-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/match-full-game-record-test.js",
+            "path": "tests/match-full-game-record-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/high-school-career-test-context.js",
+            "path": "tests/high-school-career-test-context.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+            "path": "tests/ground-ball-defensive-settlement-lifecycle-regression-test.js",
+            "status": "no_recorded_issue",
+            "freshness": "metadata_changed",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/helpers/canonical-match-contract-context.cjs",
+            "path": "tests/helpers/canonical-match-contract-context.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "not_tracked",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/canonical-match-regression-integration-test.cjs",
+            "path": "tests/canonical-match-regression-integration-test.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "not_tracked",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          },
+          {
+            "requested_path": "tests/routine-commentary-contract-test.cjs",
+            "path": "tests/routine-commentary-contract-test.cjs",
+            "status": "no_recorded_issue",
+            "freshness": "not_tracked",
+            "recommended_action": "read_source_and_reindex",
+            "coverage": []
+          }
+        ],
+        "path_total": 14,
+        "path_returned": 14,
+        "path_has_more": false,
+        "scopes": [],
+        "scope_total": 0,
+        "scope_returned": 0,
+        "scope_truncated": false,
+        "has_more": false,
+        "caveat": "Best-effort signal only. No recorded issue does not prove graph or source completeness; read flagged source and qualify claims when metadata is changed or unavailable."
+      },
+      "isError": false
+    }
+  }
+}

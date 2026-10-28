@@ -1,0 +1,124 @@
+{
+  "createdAt": "2026-10-16T05:01:06.772Z",
+  "command": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "--test",
+    "--test-reporter=tap",
+    "prototype/match-ui-p1/tests/prototype.test.cjs",
+    "prototype/match-ui-p1/tests/presentation.test.cjs"
+  ],
+  "nodeVersion": "v24.19.0",
+  "exitCode": 0,
+  "elapsedMs": 146.1421,
+  "error": null,
+  "stdout": "TAP version 13\n# Subtest: UI-P2 timing profile is centralized, nonuniform and matches all seven types\nok 1 - UI-P2 timing profile is centralized, nonuniform and matches all seven types\n  ---\n  duration_ms: 2.8198\n  type: 'test'\n  ...\n# Subtest: UI-P2 Decision Incoming Ball transitions once to Fielding Focus in the same phase\nok 2 - UI-P2 Decision Incoming Ball transitions once to Fielding Focus in the same phase\n  ---\n  duration_ms: 1.1454\n  type: 'test'\n  ...\n# Subtest: UI-P2 Decision projection never reads a future beat, resolution or playback history\nok 3 - UI-P2 Decision projection never reads a future beat, resolution or playback history\n  ---\n  duration_ms: 0.2811\n  type: 'test'\n  ...\n# Subtest: UI-P2 route previews use routeId mappings only and remain intentions\nok 4 - UI-P2 route previews use routeId mappings only and remain intentions\n  ---\n  duration_ms: 0.2855\n  type: 'test'\n  ...\n# Subtest: UI-P2 preview interrupts only Decision prelude; no execution or result is created\nok 5 - UI-P2 preview interrupts only Decision prelude; no execution or result is created\n  ---\n  duration_ms: 0.2159\n  type: 'test'\n  ...\n# Subtest: UI-P2 all seven SVG projections change focus, ball, route or actor staging without changing official occupancy\nok 6 - UI-P2 all seven SVG projections change focus, ball, route or actor staging without changing official occupancy\n  ---\n  duration_ms: 0.5197\n  type: 'test'\n  ...\n# Subtest: UI-P2 control and throw projection respects failed/notAttempted DTO status\nok 7 - UI-P2 control and throw projection respects failed/notAttempted DTO status\n  ---\n  duration_ms: 1.0182\n  type: 'test'\n  ...\n# Subtest: UI-P2 actor aliases, shape labels and native runner bindings never merge identities\nok 8 - UI-P2 actor aliases, shape labels and native runner bindings never merge identities\n  ---\n  duration_ms: 0.4378\n  type: 'test'\n  ...\n# Subtest: UI-P2 result is gated by current phase, not old or supplied future result data\nok 9 - UI-P2 result is gated by current phase, not old or supplied future result data\n  ---\n  duration_ms: 0.1773\n  type: 'test'\n  ...\n# Subtest: UI-P2 autoplay consumes each timing-profile duration and leaves no orphan timer\nok 10 - UI-P2 autoplay consumes each timing-profile duration and leaves no orphan timer\n  ---\n  duration_ms: 0.2696\n  type: 'test'\n  ...\n# Subtest: UI-P2 Pause/Resume preserves remaining beat time instead of restarting a full beat\nok 11 - UI-P2 Pause/Resume preserves remaining beat time instead of restarting a full beat\n  ---\n  duration_ms: 0.1642\n  type: 'test'\n  ...\n# Subtest: UI-P2 Next resets only the current presentation timer, Skip resolves once, stale callbacks are inert\nok 12 - UI-P2 Next resets only the current presentation timer, Skip resolves once, stale callbacks are inert\n  ---\n  duration_ms: 0.2078\n  type: 'test'\n  ...\n# Subtest: UI-P2 Replay removes result projection and reuses DTOs/profile without another submission\nok 13 - UI-P2 Replay removes result projection and reuses DTOs/profile without another submission\n  ---\n  duration_ms: 0.2169\n  type: 'test'\n  ...\n# Subtest: UI-P2 Reduced Motion skips incoming motion and defaults to static, slower text pacing\nok 14 - UI-P2 Reduced Motion skips incoming motion and defaults to static, slower text pacing\n  ---\n  duration_ms: 0.1345\n  type: 'test'\n  ...\n# Subtest: UI-P2 Text Mode and live motion preference changes pause safely with no extra timer\nok 15 - UI-P2 Text Mode and live motion preference changes pause safely with no extra timer\n  ---\n  duration_ms: 0.2243\n  type: 'test'\n  ...\n# Subtest: UI-P2 projections and timing interactions preserve frozen DTOs and original fixture bytes\nok 16 - UI-P2 projections and timing interactions preserve frozen DTOs and original fixture bytes\n  ---\n  duration_ms: 2.3696\n  type: 'test'\n  ...\n# Subtest: UI-P2 presentation module has no imports, timers, simulation calls or animation completion callbacks\nok 17 - UI-P2 presentation module has no imports, timers, simulation calls or animation completion callbacks\n  ---\n  duration_ms: 0.7078\n  type: 'test'\n  ...\n# Subtest: fixture is an exact copy of the only authorized evidence.examples\nok 18 - fixture is an exact copy of the only authorized evidence.examples\n  ---\n  duration_ms: 1.5347\n  type: 'test'\n  ...\n# Subtest: fixture is recursively frozen and rejects attempted mutation\nok 19 - fixture is recursively frozen and rejects attempted mutation\n  ---\n  duration_ms: 0.3258\n  type: 'test'\n  ...\n# Subtest: Decision has no result, quality, physics internals or RNG fields\nok 20 - Decision has no result, quality, physics internals or RNG fields\n  ---\n  duration_ms: 0.5797\n  type: 'test'\n  ...\n# Subtest: Loading validates into Decision without a Resolution view\nok 21 - Loading validates into Decision without a Resolution view\n  ---\n  duration_ms: 0.4082\n  type: 'test'\n  ...\n# Subtest: forceSecond enters Unsupported, never creates 6-3 playback or result\nok 22 - forceSecond enters Unsupported, never creates 6-3 playback or result\n  ---\n  duration_ms: 0.2871\n  type: 'test'\n  ...\n# Subtest: startDoublePlaySecond enters Unsupported, never creates 6-3 playback or result\nok 23 - startDoublePlaySecond enters Unsupported, never creates 6-3 playback or result\n  ---\n  duration_ms: 0.1143\n  type: 'test'\n  ...\n# Subtest: holdBall enters Unsupported, never creates 6-3 playback or result\nok 24 - holdBall enters Unsupported, never creates 6-3 playback or result\n  ---\n  duration_ms: 0.1007\n  type: 'test'\n  ...\n# Subtest: synchronous submission lock and repeated clicks create only one Playback\nok 25 - synchronous submission lock and repeated clicks create only one Playback\n  ---\n  duration_ms: 0.201\n  type: 'test'\n  ...\n# Subtest: all seven beats preserve DTO identity; first six reveal no result\nok 26 - all seven beats preserve DTO identity; first six reveal no result\n  ---\n  duration_ms: 0.2557\n  type: 'test'\n  ...\n# Subtest: pause, resume and next have exactly one scheduled timer\nok 27 - pause, resume and next have exactly one scheduled timer\n  ---\n  duration_ms: 0.2726\n  type: 'test'\n  ...\n# Subtest: autoplay reaches Resolution after all seven beats; no remaining timer\nok 28 - autoplay reaches Resolution after all seven beats; no remaining timer\n  ---\n  duration_ms: 0.1903\n  type: 'test'\n  ...\n# Subtest: Resolution alone updates outs and base occupancy; final score is absent\nok 29 - Resolution alone updates outs and base occupancy; final score is absent\n  ---\n  duration_ms: 0.1479\n  type: 'test'\n  ...\n# Subtest: Skip and Continue are idempotent, and never create another submission\nok 30 - Skip and Continue are idempotent, and never create another submission\n  ---\n  duration_ms: 0.1247\n  type: 'test'\n  ...\n# Subtest: Replay reuses original DTOs and resets displayed scoreboard until Resolution\nok 31 - Replay reuses original DTOs and resets displayed scoreboard until Resolution\n  ---\n  duration_ms: 0.1368\n  type: 'test'\n  ...\n# Subtest: stale callbacks cannot advance a finished or restarted demonstration\nok 32 - stale callbacks cannot advance a finished or restarted demonstration\n  ---\n  duration_ms: 0.1524\n  type: 'test'\n  ...\n# Subtest: reduced motion starts each playback paused and still allows explicit autoplay\nok 33 - reduced motion starts each playback paused and still allows explicit autoplay\n  ---\n  duration_ms: 0.1261\n  type: 'test'\n  ...\n# Subtest: invalid, incomplete or mistimed fixture enters readable DataError\nok 34 - invalid, incomplete or mistimed fixture enters readable DataError\n  ---\n  duration_ms: 0.4908\n  type: 'test'\n  ...\n# Subtest: renderer preserves original text, four native buttons and hides null observations\nok 35 - renderer preserves original text, four native buttons and hides null observations\n  ---\n  duration_ms: 2.4207\n  type: 'test'\n  ...\n# Subtest: renderer locks buttons during Submitting and focuses every new screen\nok 36 - renderer locks buttons during Submitting and focuses every new screen\n  ---\n  duration_ms: 1.1171\n  type: 'test'\n  ...\n# Subtest: renderer leaves result DTO text empty until Resolution and no seventh-stage spoiler\nok 37 - renderer leaves result DTO text empty until Resolution and no seventh-stage spoiler\n  ---\n  duration_ms: 0.7257\n  type: 'test'\n  ...\n# Subtest: renderer keeps playback control focus stable between beats; result heading receives focus\nok 38 - renderer keeps playback control focus stable between beats; result heading receives focus\n  ---\n  duration_ms: 0.3874\n  type: 'test'\n  ...\n# Subtest: Unsupported return restores choice focus and never writes outcome DOM\nok 39 - Unsupported return restores choice focus and never writes outcome DOM\n  ---\n  duration_ms: 0.3791\n  type: 'test'\n  ...\n# Subtest: Replay and restart clear previously rendered outcome and live announcement\nok 40 - Replay and restart clear previously rendered outcome and live announcement\n  ---\n  duration_ms: 0.428\n  type: 'test'\n  ...\n# Subtest: Loading and DataError have readable DOM, a focus target and recovery control\nok 41 - Loading and DataError have readable DOM, a focus target and recovery control\n  ---\n  duration_ms: 0.2221\n  type: 'test'\n  ...\n# Subtest: static keyboard/accessibility hooks exist without custom key trapping\nok 42 - static keyboard/accessibility hooks exist without custom key trapping\n  ---\n  duration_ms: 0.28\n  type: 'test'\n  ...\n# Subtest: classic script bootstrap runs with deferred DOM readiness (VM adapter, not browser)\nok 43 - classic script bootstrap runs with deferred DOM readiness (VM adapter, not browser)\n  ---\n  duration_ms: 4.1666\n  type: 'test'\n  ...\n# Subtest: runtime assets are strictly local, no fetch/import/production/Phaser/CDN calls\nok 44 - runtime assets are strictly local, no fetch/import/production/Phaser/CDN calls\n  ---\n  duration_ms: 0.6993\n  type: 'test'\n  ...\n# Subtest: all model and renderer interactions leave the entire fixture byte-equivalent\nok 45 - all model and renderer interactions leave the entire fixture byte-equivalent\n  ---\n  duration_ms: 0.0677\n  type: 'test'\n  ...\n# Subtest: UI-P2 hover and keyboard focus use identical routeId intention previews\nok 46 - UI-P2 hover and keyboard focus use identical routeId intention previews\n  ---\n  duration_ms: 0.5529\n  type: 'test'\n  ...\n# Subtest: UI-P2 actual SVG result layer appears only on result beat or Resolution\nok 47 - UI-P2 actual SVG result layer appears only on result beat or Resolution\n  ---\n  duration_ms: 0.4783\n  type: 'test'\n  ...\n# Subtest: UI-P2 text mode is user-controlled, readable, and pauses current playback\nok 48 - UI-P2 text mode is user-controlled, readable, and pauses current playback\n  ---\n  duration_ms: 0.6639\n  type: 'test'\n  ...\n# Subtest: UI-P2 visual animations follow pause/resume, have no completion authority, and cancel on Skip\nok 49 - UI-P2 visual animations follow pause/resume, have no completion authority, and cancel on Skip\n  ---\n  duration_ms: 0.3292\n  type: 'test'\n  ...\n1..49\n# tests 49\n# suites 0\n# pass 49\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 91.7153\n",
+  "stderr": "",
+  "beforeHashes": {
+    "prototype/match-ui-p1/index.html": "9c66309391b43ff3e37f7af5114b453a580b37f1997f38d86065e599bdb5fcd6",
+    "prototype/match-ui-p1/style.css": "a31308663d46c87cdf8402057f559e03ff9bd8c876753c402c970d049f3535a1",
+    "prototype/match-ui-p1/app.js": "adf031d4824d9779cdf79e70979c03ebee8bbc49e7e0e29f14455a5654302e4b",
+    "prototype/match-ui-p1/fixture.js": "858857c5858de497d69c123ba3ad4f09c585a21d21d28df467d7c47ac8117878",
+    "prototype/match-ui-p1/presentation.js": "d439570aa49976d3b2b8b314a4d8fbe802e31d934194eb583441246cd238fbb8",
+    "prototype/match-ui-p1/tests/prototype.test.cjs": "371ecc01064fac9daedd28d276d56c076b1ebf25812f4f86fd49d1d375adbc76",
+    "prototype/match-ui-p1/tests/presentation.test.cjs": "e0d1d5f6da7a56f98dbfc617c8c6c8cd059768d7bf08ec0f839f6d8e98d5602f"
+  },
+  "afterHashes": {
+    "prototype/match-ui-p1/index.html": "9c66309391b43ff3e37f7af5114b453a580b37f1997f38d86065e599bdb5fcd6",
+    "prototype/match-ui-p1/style.css": "a31308663d46c87cdf8402057f559e03ff9bd8c876753c402c970d049f3535a1",
+    "prototype/match-ui-p1/app.js": "adf031d4824d9779cdf79e70979c03ebee8bbc49e7e0e29f14455a5654302e4b",
+    "prototype/match-ui-p1/fixture.js": "858857c5858de497d69c123ba3ad4f09c585a21d21d28df467d7c47ac8117878",
+    "prototype/match-ui-p1/presentation.js": "d439570aa49976d3b2b8b314a4d8fbe802e31d934194eb583441246cd238fbb8",
+    "prototype/match-ui-p1/tests/prototype.test.cjs": "371ecc01064fac9daedd28d276d56c076b1ebf25812f4f86fd49d1d375adbc76",
+    "prototype/match-ui-p1/tests/presentation.test.cjs": "e0d1d5f6da7a56f98dbfc617c8c6c8cd059768d7bf08ec0f839f6d8e98d5602f"
+  },
+  "scope": "prototype-only; model/DOM/VM adapters, not browser",
+  "sourceStable": true,
+  "totals": {
+    "tests": 49,
+    "pass": 49,
+    "fail": 0,
+    "previousUiP1Checks": 28,
+    "newUiP2Checks": 21
+  },
+  "previousChecksRetained": [
+    "fixture is an exact copy of the only authorized evidence.examples",
+    "fixture is recursively frozen and rejects attempted mutation",
+    "Decision has no result, quality, physics internals or RNG fields",
+    "Loading validates into Decision without a Resolution view",
+    "forceSecond enters Unsupported, never creates 6-3 playback or result",
+    "startDoublePlaySecond enters Unsupported, never creates 6-3 playback or result",
+    "holdBall enters Unsupported, never creates 6-3 playback or result",
+    "synchronous submission lock and repeated clicks create only one Playback",
+    "all seven beats preserve DTO identity; first six reveal no result",
+    "pause, resume and next have exactly one scheduled timer",
+    "autoplay reaches Resolution after all seven beats; no remaining timer",
+    "Resolution alone updates outs and base occupancy; final score is absent",
+    "Skip and Continue are idempotent, and never create another submission",
+    "Replay reuses original DTOs and resets displayed scoreboard until Resolution",
+    "stale callbacks cannot advance a finished or restarted demonstration",
+    "reduced motion starts each playback paused and still allows explicit autoplay",
+    "invalid, incomplete or mistimed fixture enters readable DataError",
+    "renderer preserves original text, four native buttons and hides null observations",
+    "renderer locks buttons during Submitting and focuses every new screen",
+    "renderer leaves result DTO text empty until Resolution and no seventh-stage spoiler",
+    "renderer keeps playback control focus stable between beats; result heading receives focus",
+    "Unsupported return restores choice focus and never writes outcome DOM",
+    "Replay and restart clear previously rendered outcome and live announcement",
+    "Loading and DataError have readable DOM, a focus target and recovery control",
+    "static keyboard/accessibility hooks exist without custom key trapping",
+    "classic script bootstrap runs with deferred DOM readiness (VM adapter, not browser)",
+    "runtime assets are strictly local, no fetch/import/production/Phaser/CDN calls",
+    "all model and renderer interactions leave the entire fixture byte-equivalent"
+  ],
+  "newChecks": [
+    "UI-P2 timing profile is centralized, nonuniform and matches all seven types",
+    "UI-P2 Decision Incoming Ball transitions once to Fielding Focus in the same phase",
+    "UI-P2 Decision projection never reads a future beat, resolution or playback history",
+    "UI-P2 route previews use routeId mappings only and remain intentions",
+    "UI-P2 preview interrupts only Decision prelude; no execution or result is created",
+    "UI-P2 all seven SVG projections change focus, ball, route or actor staging without changing official occupancy",
+    "UI-P2 control and throw projection respects failed/notAttempted DTO status",
+    "UI-P2 actor aliases, shape labels and native runner bindings never merge identities",
+    "UI-P2 result is gated by current phase, not old or supplied future result data",
+    "UI-P2 autoplay consumes each timing-profile duration and leaves no orphan timer",
+    "UI-P2 Pause/Resume preserves remaining beat time instead of restarting a full beat",
+    "UI-P2 Next resets only the current presentation timer, Skip resolves once, stale callbacks are inert",
+    "UI-P2 Replay removes result projection and reuses DTOs/profile without another submission",
+    "UI-P2 Reduced Motion skips incoming motion and defaults to static, slower text pacing",
+    "UI-P2 Text Mode and live motion preference changes pause safely with no extra timer",
+    "UI-P2 projections and timing interactions preserve frozen DTOs and original fixture bytes",
+    "UI-P2 presentation module has no imports, timers, simulation calls or animation completion callbacks",
+    "UI-P2 hover and keyboard focus use identical routeId intention previews",
+    "UI-P2 actual SVG result layer appears only on result beat or Resolution",
+    "UI-P2 text mode is user-controlled, readable, and pauses current playback",
+    "UI-P2 visual animations follow pause/resume, have no completion authority, and cancel on Skip"
+  ],
+  "timingProfile": {
+    "incomingBall": 450,
+    "submission": 420,
+    "beats": {
+      "ballInPlay": 450,
+      "approach": 1100,
+      "control": 850,
+      "throw": 450,
+      "receive": 600,
+      "contest": 1100,
+      "result": 900
+    },
+    "textMinimum": 1400,
+    "units": "UI presentation milliseconds; not baseball timing"
+  },
+  "browserSmoke": {
+    "status": "NOT RUN",
+    "inventory": {
+      "apps": 0,
+      "browsers": 0
+    },
+    "attempt": {
+      "provider": "chrome",
+      "result": "Browser is not available: chrome"
+    },
+    "manualAcceptancePending": true
+  },
+  "testLimitations": "Controller fake-clock, stateless projection, DOM/VM and visual-animation adapter checks only. No real browser layout, keyboard, animation smoothness or screen-reader pass claim."
+}

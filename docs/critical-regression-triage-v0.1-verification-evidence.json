@@ -1,0 +1,508 @@
+{
+  "task": "Critical Regression Triage v0.1",
+  "createdAt": "2026-10-15T01:37:31.300Z",
+  "snippetChecks": [
+    {
+      "file": "script.js",
+      "start": 12027,
+      "end": 12040,
+      "currentMatchesSnippet": true,
+      "sha256": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9"
+    },
+    {
+      "file": "script.js",
+      "start": 6993,
+      "end": 7034,
+      "currentMatchesSnippet": true,
+      "sha256": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9"
+    },
+    {
+      "file": "script.js",
+      "start": 6617,
+      "end": 6622,
+      "currentMatchesSnippet": true,
+      "sha256": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9"
+    },
+    {
+      "file": "script.js",
+      "start": 10634,
+      "end": 10642,
+      "currentMatchesSnippet": true,
+      "sha256": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9"
+    },
+    {
+      "file": "tests/ability-performance-correlation-audit.cjs",
+      "start": 33,
+      "end": 66,
+      "currentMatchesSnippet": true,
+      "sha256": "c2fec3f34d18dbd3f042c87ee9dff399c6b834a409d336f17a0a3d90117e010e"
+    },
+    {
+      "file": "tests/ability-performance-correlation-audit.cjs",
+      "start": 26,
+      "end": 32,
+      "currentMatchesSnippet": true,
+      "sha256": "c2fec3f34d18dbd3f042c87ee9dff399c6b834a409d336f17a0a3d90117e010e"
+    },
+    {
+      "file": "script.js",
+      "start": 4546,
+      "end": 4558,
+      "currentMatchesSnippet": true,
+      "sha256": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9"
+    },
+    {
+      "file": "script.js",
+      "start": 7470,
+      "end": 7487,
+      "currentMatchesSnippet": true,
+      "sha256": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9"
+    },
+    {
+      "file": "script.js",
+      "start": 10410,
+      "end": 10431,
+      "currentMatchesSnippet": true,
+      "sha256": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9"
+    }
+  ],
+  "missedLines": [
+    {
+      "file": "docs/ability-performance-correlation-audit-sprint-1.1.md",
+      "sha256": "f75eeae70b87cc332563167228eb1218b88517be903095110c2b465718b455ce",
+      "lines": [
+        {
+          "line": 48,
+          "text": "|Fielding|scorer E|false|||—|—|NOT_OBSERVABLE|Physical foundation does not adjudicate E. Unsecured balls are not automatically errors.|"
+        },
+        {
+          "line": 49,
+          "text": "|Arm|throw quality|false|||—|—|FIXTURE_SATURATED|All requested SS tiers exceed strength threshold; acquired context and accuracy are fixed.|"
+        },
+        {
+          "line": 50,
+          "text": "|Speed|steal success|false|||—|—|OUTCOME_SPACE_GAP|Record supports SB/CS ingestion, but production has no steal execution producer. A forced attempt cannot be resolved without constructing a new result.|"
+        },
+        {
+          "line": 51,
+          "text": "|Speed|hit production|false|||—|—|NOT_OBSERVABLE|No independent infield-hit speed resolver validated in this extension.|"
+        },
+        {
+          "line": 52,
+          "text": "|Discipline|BB / decision quality|false|||—|—|NOT_OBSERVABLE|No independent discipline input in the standalone PlateApproach ability seam. Its selectionProfile is a tactical policy, not a player ability; do not relabel it discipline.|"
+        },
+        {
+          "line": 53,
+          "text": "|Pitch Control|ordinary AI BB/BF|false|||—|—|WEAK|B: ordinary AI PA has walk but does not read control. Control is read by human PA sequencing; separate from the ordinary AI stream.|"
+        },
+        {
+          "line": 54,
+          "text": "|Pitch Quality|ordinary AI SO/BF|false|||—|—|OUTCOME_SPACE_GAP|resolveSimulatedHighSchoolPlateAppearance outcome set excludes SO; human PlateApproach does support strikeout.|"
+        },
+        {
+          "line": 55,
+          "text": "|Player P|BF / outs / run prevention|false|||—|—|BLOCKED_BY_EXPOSURE|playing-time-game-exposure.js: pitcherExposureDeferred → noAppearance → script.js: shouldEnterHighSchoolMatchPlayer rejects deferred exposure → active roster incumbent remains pitcher → match-game-record.js: BF credited to active defensive P|"
+        },
+        {
+          "line": 56,
+          "text": "|Catcher-specific|blocking / framing / steal defense|false|||—|—|NOT_OBSERVABLE|Pitcher-catcher tactical calls and receiving/throw legs exist; no complete canonical catcher-specific blocking, framing, passed-ball or steal-defense statistical producer.|"
+        }
+      ]
+    }
+  ],
+  "coverageFreshnessFallback": "Relevant sources read directly and hashes locked; all old inventory files rehashed. Metadata signals are not freshness or completeness proof.",
+  "rngSummary": {
+    "originalCohortGames": 40,
+    "newStatisticalSamples": 0,
+    "all40RecordAndLogHashesEqual": true,
+    "summaryParity": true,
+    "simulationSeedCount": 20,
+    "identityFrequency": {
+      "hs-y3-final-competition-1|hs_y1_match_moment_1|player|1|下": 40,
+      "hs-y3-final-competition-1|hs_y1_match_moment_3|player|5|下": 22,
+      "hs-y3-final-competition-1|hs_y1_match_offense_3|player|4|下": 4,
+      "hs-y3-final-competition-1|hs_y1_match_moment_3|player|6|下": 18,
+      "hs-y3-final-competition-1|hs_y1_match_offense_4|player|6|下": 2,
+      "hs-y3-final-competition-1|hs_y1_match_offense_2|player|3|下": 2,
+      "hs-y3-final-competition-1|hs_y1_match_offense_5|player|7|下": 3,
+      "hs-y3-final-competition-1|hs_y1_match_offense_2|player|2|下": 2
+    },
+    "lastPAResultsByTier": {
+      "8": {
+        "strikeout": 20
+      },
+      "16": {
+        "strikeout": 20
+      }
+    },
+    "baseScalarAttributes": {
+      "age": 18,
+      "ballSense": 3,
+      "observe": 4,
+      "fitness": 1,
+      "instinct": 0,
+      "discipline": 0,
+      "pressure": 0,
+      "primaryPosition": "游擊手",
+      "highSchoolRoleCode": "starter"
+    },
+    "baseSkills": {
+      "catching": 12,
+      "throwing": 12,
+      "batting": 12,
+      "baseRunning": 12,
+      "baseballIQ": 12,
+      "armStrength": 12,
+      "reaction": 12,
+      "range": 12,
+      "blocking": 12,
+      "gameCalling": 12,
+      "control": 12,
+      "pitchStamina": 12
+    },
+    "example": [
+      {
+        "seed": 1,
+        "identities": [
+          "hs-y3-final-competition-1|hs_y1_match_moment_1|player|1|下",
+          "hs-y3-final-competition-1|hs_y1_match_moment_3|player|5|下"
+        ],
+        "identityDraws": [
+          {
+            "identity": "hs-y3-final-competition-1|hs_y1_match_moment_1|player|1|下",
+            "draws": {
+              "pitch-class|1": 0.9789319403935224,
+              "pitch-quality|1": 0.41225112322717905,
+              "recognition|1": 0.2505088255275041,
+              "contact|1": 0.10855065612122416,
+              "bip-outcome|1": 0.306787041015923
+            }
+          },
+          {
+            "identity": "hs-y3-final-competition-1|hs_y1_match_moment_3|player|5|下",
+            "draws": {
+              "pitch-class|1": 0.19536328106187284,
+              "pitch-quality|1": 0.6885685776360333,
+              "recognition|1": 0.5477502539288253,
+              "contact|1": 0.6639601029455662,
+              "bip-outcome|1": 0.74997399142012
+            }
+          }
+        ],
+        "lastPAResult": "strikeout"
+      },
+      {
+        "seed": 20,
+        "identities": [
+          "hs-y3-final-competition-1|hs_y1_match_moment_1|player|1|下",
+          "hs-y3-final-competition-1|hs_y1_match_moment_3|player|5|下"
+        ],
+        "identityDraws": [
+          {
+            "identity": "hs-y3-final-competition-1|hs_y1_match_moment_1|player|1|下",
+            "draws": {
+              "pitch-class|1": 0.9789319403935224,
+              "pitch-quality|1": 0.41225112322717905,
+              "recognition|1": 0.2505088255275041,
+              "contact|1": 0.10855065612122416,
+              "bip-outcome|1": 0.306787041015923
+            }
+          },
+          {
+            "identity": "hs-y3-final-competition-1|hs_y1_match_moment_3|player|5|下",
+            "draws": {
+              "pitch-class|1": 0.19536328106187284,
+              "pitch-quality|1": 0.6885685776360333,
+              "recognition|1": 0.5477502539288253,
+              "contact|1": 0.6639601029455662,
+              "bip-outcome|1": 0.74997399142012
+            }
+          }
+        ],
+        "lastPAResult": "strikeout"
+      }
+    ]
+  },
+  "neutrality": [
+    {
+      "tier": 8,
+      "seed": 1,
+      "recordSha256": "be92feee6d50139182c3e9f019c4760a0e17986768b1145eadb1e8062774ddd1",
+      "logSha256": "8c389858ceb0ddff29a883f51dd2ba40914cdeab1af535a7e0610c9f2147addc",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 1,
+      "recordSha256": "f6f4219a1c8ac388e32ed91fcc4fe7e22c634788f0cb42344ef6ada79c726107",
+      "logSha256": "d38d346bc7eadf3d74fcd9fa2a59d077cdee860ad3bcfc185e2a3beea12a2501",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 2,
+      "recordSha256": "587e1d7086c6ed658d37d25db83398b51ccebb55e20c18c6b2a015a79ed07c3b",
+      "logSha256": "56f5b7f8b18b3af38b351df6d7d7e05950edfb300cd633ec3315f4a7c4a4a2ae",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 2,
+      "recordSha256": "2ec87b94d3456398f3434438654f5091f675db6a12cc8f0ce7e89c4d38b16c5a",
+      "logSha256": "401c93127d6e4916914e3fced3478389029c7fa49f2a38ec9ecb0aae87aeb9c7",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 3,
+      "recordSha256": "8ab078c3dd763cd56d48b2268916c9d41590199effa18058059d5f176fbb6ef0",
+      "logSha256": "4ec6cb181c796bbde243a36fb2448294ff092e5d297c0d2c033c8db933520a59",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 3,
+      "recordSha256": "bc554d6f76eb5029941ffc644b151cc1b67f50eaace95227f42c9dbada487454",
+      "logSha256": "7824ccc49264ba199e3ec6dc2fc7cac4f7ce4f0812337e032495f1d19a1cbcba",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 4,
+      "recordSha256": "6127ed3a03160f76bf5c9810595b13760ef148342f8f7446929292877b731c69",
+      "logSha256": "b7bdd73728b3912f627168fcaf021b2aadff7cb85199f349e91f769e040721ac",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 4,
+      "recordSha256": "6127ed3a03160f76bf5c9810595b13760ef148342f8f7446929292877b731c69",
+      "logSha256": "2475c281cc5d26d5c862bbed5dbb666b71f99c752fb5d7397ed8330ff3a4aaad",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 5,
+      "recordSha256": "2326b392d9903cae6d7fbbb8d32e423eac36f5fc264ca46e9d01d725d3ddba32",
+      "logSha256": "14613c9dadd86b21b77b9b2958c0ad48d0deeaa682e5e86a4bf82ce25634b024",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 5,
+      "recordSha256": "2326b392d9903cae6d7fbbb8d32e423eac36f5fc264ca46e9d01d725d3ddba32",
+      "logSha256": "c09df6fde2210f147775519da21efa40484d1067e1e97b441bb994496fd381e7",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 6,
+      "recordSha256": "680fc25c48d0376e996a1d48fd05e5d0e72087c0feccc3127f530c87b8840c1e",
+      "logSha256": "ce9fe2f8e1c90f78c9f112ac48783cafd94c648604facbb4306d26f77b99e9ff",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 6,
+      "recordSha256": "a69e3900598e8845aee1ff31d2a991284f7b53274668bb6579fb4131c3947b20",
+      "logSha256": "a9fabc6730b0b403b154e8942a0cb7554805d28a7fcf86e5e492f2347a8e2299",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 7,
+      "recordSha256": "36b30228810ac5b749d34cc66ba743865f55ad27ef869fc5cefa159b20cd9328",
+      "logSha256": "62f2a1b0ba0e1cf962c792dce4dc039e00f59d9dd4e4521c208780343c702a8d",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 7,
+      "recordSha256": "36b30228810ac5b749d34cc66ba743865f55ad27ef869fc5cefa159b20cd9328",
+      "logSha256": "3c8187e01a46d5fea8d3076b0aa027b872af555be224d7661cc81288ac4b4ffb",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 8,
+      "recordSha256": "227d808b30ba9f836ac1b1df238652896670008d9dbddd23574c41179b87b9d3",
+      "logSha256": "fd09d882111db9bc50fbac60bb5913c3e849003edd7cf17398b8971f8dfee362",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 8,
+      "recordSha256": "227d808b30ba9f836ac1b1df238652896670008d9dbddd23574c41179b87b9d3",
+      "logSha256": "f6eb9ae2fc500e16e883641ee6809e5da2775f5786f78d5858826aafa7d17704",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 9,
+      "recordSha256": "6b5d159b18f140268a1cd14ba72125daccbbb30189f5c2dff2cb368503d419e7",
+      "logSha256": "50d5c3b27bafd594220cb96d4141cf909df9d7d218e3cb420570bbfd5f8a91b9",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 9,
+      "recordSha256": "6b5d159b18f140268a1cd14ba72125daccbbb30189f5c2dff2cb368503d419e7",
+      "logSha256": "0260e37375782278adc95467c5cd7b1f2811616e76febb1ccef24b0486828ba7",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 10,
+      "recordSha256": "34694dba10cb97ed8372ea7e66709eef22df94617bb0529ad8197d2099ee36aa",
+      "logSha256": "a8921e7a2db2e29e00b9d710294d2c31f227fc6e085072c5cae8d1543c2f478c",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 10,
+      "recordSha256": "34694dba10cb97ed8372ea7e66709eef22df94617bb0529ad8197d2099ee36aa",
+      "logSha256": "65c1e226a1cbfa2e2f6cf3bc5e0276fd034623427b3c4b5765458af9b6a05031",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 11,
+      "recordSha256": "d6f5a99950cb8cf2ae294613dabd34b0c37c7f75614e6d29dc22761870395f92",
+      "logSha256": "2832bf30b557367eef2d72b912ebc3b301efa45064c32e8277396f34f4d5dc3f",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 11,
+      "recordSha256": "d15c62587361140d582f60da0a33be1555d763866283b2433ba41e32649ab944",
+      "logSha256": "7b544b777a5e6dcd72adebcbc603605f97d9caefd04df5a3804716659ee43466",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 12,
+      "recordSha256": "45e4d6d10b033e6ca79729f2c178fa89692a7d5229671c534a9ccd7b8a58713d",
+      "logSha256": "18d507d1fa7d36ce47aa2f069f4664caf31d299ebd7be77c0746c76a013e0fd5",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 12,
+      "recordSha256": "45e4d6d10b033e6ca79729f2c178fa89692a7d5229671c534a9ccd7b8a58713d",
+      "logSha256": "163ba67e415adfd4fdf4e21dd74ef3c6aa31ade7edc68483d87677eb3b26d11b",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 13,
+      "recordSha256": "b65d5e6a6eaf45287783a00972860b997a5627b8577a71adc7a46540b0db1410",
+      "logSha256": "a4d3dda8d45e84f6f29514a02b1b20b7ac3a4e305bac75e735608ba28aace382",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 13,
+      "recordSha256": "b65d5e6a6eaf45287783a00972860b997a5627b8577a71adc7a46540b0db1410",
+      "logSha256": "da4480aa5cb1b1ba2eb42e5ba9d7eb3140dd535115ad8ace517062714bde7215",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 14,
+      "recordSha256": "00f46a799e765d40031932a957908aff487049e1b6476446b830b49a2d9b2113",
+      "logSha256": "af87e6ea76c268a65ce9b122ad5eb9fa8c5477d30d6a7b3560170140d356dfa6",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 14,
+      "recordSha256": "4879895ca38ad065bd57c4e8e906c7e905a2cb9e9acba4407cd990244cb42c3c",
+      "logSha256": "a11147a1c104f88854ccf7f239ac8905ad0e4b6edf97bdc1d46e8ce73eba111e",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 15,
+      "recordSha256": "bbc9d0df165265182394aad128ec5bc9caa55ed816682beabb28b519b6a3a980",
+      "logSha256": "cd58658384f1486a65814ab80d8eab189455fb77d92e911346764f1c207b1e0f",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 15,
+      "recordSha256": "1e81f5907da525a8abb112a0a1b3a0e7223593c112c158b474accdcab05cedcb",
+      "logSha256": "975c0f2cf1488a4762d9e846432f866bc7dd4df1ee3e7a731c62c0966e0f2a66",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 16,
+      "recordSha256": "f9efe59c2f07212c4767249a6fff19270c11b6b2d549ebf8926382c9a27ef1cc",
+      "logSha256": "d385481dba98ee1feea7a38c6e7de8a1e10d2f1a4e4060f59db01f4058f1a412",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 16,
+      "recordSha256": "412abca905096b2e6bc2e19d85ff61be3027ce37b73c9dd68aff56eb8debf623",
+      "logSha256": "fa2a14d1571033dc8f5adef6aa31a29503c0b62336bbf08a68a8ffd6a6c48a7b",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 17,
+      "recordSha256": "3d844ec14925bf9bc5effd1b5bebcfbd05d49c13d3fc5fee9b5feb32d7040a2b",
+      "logSha256": "a2895645c872d5b8adca19816aa68454b3a46e6a63039eee279d31097a256572",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 17,
+      "recordSha256": "05b66e61716471d7ba740b2189f0cf2b1be5366eb807acd397c629d9fc853dec",
+      "logSha256": "57d6e627d08a3f6aecc6ca801c9af39098d18eb8bf7370f2429fd031136badde",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 18,
+      "recordSha256": "2b3a9d2e24e38967a3f265b4b86d274e38866ee395aacbce46f9ca7dbaf3e6c4",
+      "logSha256": "588d8b82ed924c5fa986da9950c99e2e774e5112b41ab99e185867be28f67d5a",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 18,
+      "recordSha256": "dc52f005654edda69bc9007ecd7f146a85dce5509d1beeff671ba488ef1a3873",
+      "logSha256": "f5baa42c50130428b09f4e13537b9b77d85ca8238630f9d12d8a0680b5afa238",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 19,
+      "recordSha256": "9158ab76ffe7331a19114db9585d7f8a5d6e8f095ccad5ac32ad1af322f6b151",
+      "logSha256": "be3083e6239b7b95be909519232b8f697adf1c2f20d95a1f56e719b98790b873",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 19,
+      "recordSha256": "808fd9e9bb6e93b00f369c6a850c6c640d7b6745970dc2e6626deb114c52e709",
+      "logSha256": "56be1f26498e63bc0cf95eef21160417d01d71149fba2790c0132bea129fd3a2",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 8,
+      "seed": 20,
+      "recordSha256": "265f0c88e3322d5308cc38b32551eb3c036d65dac0cd46e13bd1a31209848d07",
+      "logSha256": "1b2edaf4b1714e112ea4a0b89df4755915e2178da78de207fbf1142a1c36e654",
+      "exactRecordAndEventLogParity": true
+    },
+    {
+      "tier": 16,
+      "seed": 20,
+      "recordSha256": "265f0c88e3322d5308cc38b32551eb3c036d65dac0cd46e13bd1a31209848d07",
+      "logSha256": "e77342b97ed725f450a90e60d88f8c4ef70af92e2ed9672ec036a28511c16466",
+      "exactRecordAndEventLogParity": true
+    }
+  ]
+}

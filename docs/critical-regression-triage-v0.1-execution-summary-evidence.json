@@ -1,0 +1,1962 @@
+{
+  "task": "Critical Regression Triage v0.1",
+  "createdAt": "2026-10-15T01:37:31.373Z",
+  "runs": [
+    {
+      "label": "opportunity-original",
+      "evidence": "docs/test-infrastructure-sprint-0.1-critical-triage-opportunity-original-evidence.json",
+      "status": "FAIL",
+      "exitCode": 1,
+      "elapsedMs": 401.0784,
+      "sourceStable": true,
+      "entryVerified": true,
+      "assertions": {
+        "attempted": 37,
+        "passed": 37,
+        "thrown": 0,
+        "unsupportedAsync": 0,
+        "methods": {
+          "ok": 37
+        },
+        "samples": [
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js:8:10)",
+            "returned": true
+          }
+        ]
+      },
+      "actualCommand": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\high-school-year-one-opportunity-two-integration-test.js"
+      ],
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "stdoutBytes": 2175,
+      "stderrBytes": 776,
+      "signal": null,
+      "spawnError": null,
+      "originalOfficialSuite": true
+    },
+    {
+      "label": "match-original",
+      "evidence": "docs/test-infrastructure-sprint-0.1-critical-triage-match-original-evidence.json",
+      "status": "FAIL",
+      "exitCode": 1,
+      "elapsedMs": 1988.4357,
+      "sourceStable": true,
+      "entryVerified": true,
+      "assertions": {
+        "attempted": 36,
+        "passed": 35,
+        "thrown": 1,
+        "unsupportedAsync": 0,
+        "methods": {
+          "ok": 36
+        },
+        "samples": [
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js:106:10)",
+            "returned": false,
+            "errorName": "AssertionError"
+          }
+        ]
+      },
+      "actualCommand": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\baseball-match-foundation-2-2-2-test.js"
+      ],
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "stdoutBytes": 2161,
+      "stderrBytes": 1402,
+      "signal": null,
+      "spawnError": null,
+      "originalOfficialSuite": true
+    },
+    {
+      "label": "gradient-original",
+      "evidence": "docs/test-infrastructure-sprint-0.1-critical-triage-gradient-original-evidence.json",
+      "status": "FAIL",
+      "exitCode": 1,
+      "elapsedMs": 14122.9803,
+      "sourceStable": true,
+      "entryVerified": true,
+      "assertions": {
+        "attempted": 158,
+        "passed": 157,
+        "thrown": 1,
+        "unsupportedAsync": 0,
+        "methods": {
+          "deepEqual": 55,
+          "equal": 58,
+          "assert": 44,
+          "notEqual": 1
+        },
+        "samples": [
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:5:8)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js:11:10)",
+            "returned": true
+          }
+        ]
+      },
+      "actualCommand": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\ability-performance-gradient-test.js"
+      ],
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "stdoutBytes": 0,
+      "stderrBytes": 1318,
+      "signal": null,
+      "spawnError": null,
+      "originalOfficialSuite": true
+    },
+    {
+      "label": "opportunity-isolated",
+      "evidence": "docs/test-infrastructure-sprint-0.1-critical-triage-opportunity-isolated-evidence.json",
+      "status": "FAIL",
+      "exitCode": 1,
+      "elapsedMs": 542.3462,
+      "sourceStable": true,
+      "entryVerified": true,
+      "assertions": {
+        "attempted": 37,
+        "passed": 37,
+        "thrown": 0,
+        "unsupportedAsync": 0,
+        "methods": {
+          "ok": 37
+        },
+        "samples": [
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs:8:10)",
+            "returned": true
+          }
+        ]
+      },
+      "actualCommand": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+        "E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-isolated.cjs"
+      ],
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "stdoutBytes": 2175,
+      "stderrBytes": 845,
+      "signal": null,
+      "spawnError": null,
+      "originalOfficialSuite": false
+    },
+    {
+      "label": "match-isolated",
+      "evidence": "docs/test-infrastructure-sprint-0.1-critical-triage-match-isolated-evidence.json",
+      "status": "FAIL",
+      "exitCode": 1,
+      "elapsedMs": 1022.7753,
+      "sourceStable": true,
+      "entryVerified": true,
+      "assertions": {
+        "attempted": 36,
+        "passed": 35,
+        "thrown": 1,
+        "unsupportedAsync": 0,
+        "methods": {
+          "ok": 36
+        },
+        "samples": [
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs:107:10)",
+            "returned": false,
+            "errorName": "AssertionError"
+          }
+        ]
+      },
+      "actualCommand": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+        "E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-isolated.cjs"
+      ],
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "stdoutBytes": 8759252,
+      "stderrBytes": 1422,
+      "signal": null,
+      "spawnError": null,
+      "originalOfficialSuite": false
+    },
+    {
+      "label": "gradient-isolated",
+      "evidence": "docs/test-infrastructure-sprint-0.1-critical-triage-gradient-isolated-evidence.json",
+      "status": "UNVERIFIED",
+      "exitCode": null,
+      "elapsedMs": 13799.003,
+      "sourceStable": true,
+      "entryVerified": false,
+      "actualCommand": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+        "E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-isolated.cjs"
+      ],
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "stdoutBytes": 16056320,
+      "stderrBytes": 0,
+      "signal": "SIGTERM",
+      "spawnError": {
+        "code": "ENOBUFS",
+        "message": "spawnSync C:\\Program Files\\nodejs\\node.exe ENOBUFS"
+      },
+      "originalOfficialSuite": false
+    },
+    {
+      "label": "opportunity-dependencies-isolated",
+      "evidence": "docs/test-infrastructure-sprint-0.1-critical-triage-opportunity-dependencies-isolated-evidence.json",
+      "status": "PASS",
+      "exitCode": 0,
+      "elapsedMs": 513.2684,
+      "sourceStable": true,
+      "entryVerified": true,
+      "assertions": {
+        "attempted": 40,
+        "passed": 40,
+        "thrown": 0,
+        "unsupportedAsync": 0,
+        "methods": {
+          "ok": 40
+        },
+        "samples": [
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          },
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs:8:10)",
+            "returned": true
+          }
+        ]
+      },
+      "actualCommand": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+        "E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-opportunity-dependencies-isolated.cjs"
+      ],
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "stdoutBytes": 2597,
+      "stderrBytes": 0,
+      "signal": null,
+      "spawnError": null,
+      "originalOfficialSuite": false
+    },
+    {
+      "label": "gradient-compact-isolated",
+      "evidence": "docs/test-infrastructure-sprint-0.1-critical-triage-gradient-compact-isolated-evidence.json",
+      "status": "FAIL",
+      "exitCode": 1,
+      "elapsedMs": 15162.8471,
+      "sourceStable": true,
+      "entryVerified": true,
+      "assertions": {
+        "attempted": 158,
+        "passed": 157,
+        "thrown": 1,
+        "unsupportedAsync": 0,
+        "methods": {
+          "deepEqual": 55,
+          "equal": 58,
+          "assert": 44,
+          "notEqual": 1
+        },
+        "samples": [
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:5:8)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:13:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs:11:10)",
+            "returned": true
+          }
+        ]
+      },
+      "actualCommand": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+        "E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-compact-isolated.cjs"
+      ],
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "stdoutBytes": 347701,
+      "stderrBytes": 1342,
+      "signal": null,
+      "spawnError": null,
+      "originalOfficialSuite": false
+    },
+    {
+      "label": "match-index-manifest-isolated",
+      "evidence": "docs/test-infrastructure-sprint-0.1-critical-triage-match-index-manifest-isolated-evidence.json",
+      "status": "FAIL",
+      "exitCode": 1,
+      "elapsedMs": 39.9541,
+      "sourceStable": true,
+      "entryVerified": true,
+      "assertions": {
+        "attempted": 0,
+        "passed": 0,
+        "thrown": 0,
+        "unsupportedAsync": 0,
+        "methods": {},
+        "samples": []
+      },
+      "actualCommand": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+        "E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-index-manifest-isolated.cjs"
+      ],
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "stdoutBytes": 0,
+      "stderrBytes": 1063,
+      "signal": null,
+      "spawnError": null,
+      "originalOfficialSuite": false
+    },
+    {
+      "label": "match-browser-manifest-isolated",
+      "evidence": "docs/test-infrastructure-sprint-0.1-critical-triage-match-browser-manifest-isolated-evidence.json",
+      "status": "FAIL",
+      "exitCode": 1,
+      "elapsedMs": 110.7627,
+      "sourceStable": true,
+      "entryVerified": true,
+      "assertions": {
+        "attempted": 1,
+        "passed": 0,
+        "thrown": 1,
+        "unsupportedAsync": 0,
+        "methods": {
+          "ok": 1
+        },
+        "samples": [
+          {
+            "method": "ok",
+            "site": "at verify (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-browser-manifest-isolated.cjs:190:10)",
+            "returned": false,
+            "errorName": "AssertionError"
+          }
+        ]
+      },
+      "actualCommand": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+        "E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-match-browser-manifest-isolated.cjs"
+      ],
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "stdoutBytes": 303074,
+      "stderrBytes": 1456,
+      "signal": null,
+      "spawnError": null,
+      "originalOfficialSuite": false
+    },
+    {
+      "label": "gradient-rng-isolated",
+      "evidence": "docs/test-infrastructure-sprint-0.1-critical-triage-gradient-rng-isolated-evidence.json",
+      "status": "FAIL",
+      "exitCode": 1,
+      "elapsedMs": 15041.5322,
+      "sourceStable": true,
+      "entryVerified": true,
+      "assertions": {
+        "attempted": 158,
+        "passed": 157,
+        "thrown": 1,
+        "unsupportedAsync": 0,
+        "methods": {
+          "deepEqual": 55,
+          "equal": 58,
+          "assert": 44,
+          "notEqual": 1
+        },
+        "samples": [
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:19:8)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          },
+          {
+            "method": "deepEqual",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:27:10)",
+            "returned": true
+          },
+          {
+            "method": "equal",
+            "site": "at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs:25:10)",
+            "returned": true
+          }
+        ]
+      },
+      "actualCommand": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "--require",
+        "E:\\meng\\baseball_life_sim_semirefactor\\tests\\entry-safe-preload.cjs",
+        "E:\\meng\\baseball_life_sim_semirefactor\\docs\\critical-regression-triage-v0.1-gradient-rng-isolated.cjs"
+      ],
+      "policy": {
+        "timeoutMs": 120000,
+        "outputMaxBuffer": 16000000,
+        "implicitGitShowMaxBuffer": 30000000,
+        "gitCompatibility": true
+      },
+      "stdoutBytes": 3818166,
+      "stderrBytes": 1338,
+      "signal": null,
+      "spawnError": null,
+      "originalOfficialSuite": false
+    }
+  ],
+  "invocations": 11,
+  "statusCounts": {
+    "FAIL": 9,
+    "UNVERIFIED": 1,
+    "PASS": 1
+  },
+  "full251": 0,
+  "r6Full227": 0,
+  "firstBase400": 0,
+  "receiverV2Integration": 0,
+  "browserFullSuite": 0,
+  "limitsUnchanged": true,
+  "originalOfficialVerdictsPreserved": true
+}

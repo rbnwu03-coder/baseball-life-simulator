@@ -1,0 +1,1050 @@
+{
+  "sprint": "10A.3b-R4",
+  "baseline": "ab3117653945de0b7013636187c446276a96e634",
+  "createdAt": "2026-10-14T05:31:49.415Z",
+  "node": "v24.19.0",
+  "schemaRows": [
+    {
+      "name": "clean",
+      "input": "PASS",
+      "output": "PASS"
+    },
+    {
+      "name": "offline",
+      "input": "PASS",
+      "output": "PASS"
+    },
+    {
+      "name": "unavailable",
+      "input": "PASS",
+      "output": "PASS"
+    },
+    {
+      "name": "late",
+      "input": "PASS",
+      "output": "PASS"
+    },
+    {
+      "name": "hands",
+      "input": "PASS",
+      "output": "PASS"
+    },
+    {
+      "name": "bobble",
+      "input": "PASS",
+      "output": "PASS"
+    },
+    {
+      "name": "fast",
+      "input": "PASS",
+      "output": "PASS"
+    },
+    {
+      "name": "safe",
+      "input": "PASS",
+      "output": "PASS"
+    },
+    {
+      "name": "noTouch",
+      "input": "PASS",
+      "output": "PASS"
+    },
+    {
+      "name": "unknown",
+      "input": "PASS",
+      "output": "PASS"
+    }
+  ],
+  "crossRuntime": {
+    "status": "PASS",
+    "normalNode": "v24.19.0",
+    "jitlessSeparateProcess": {
+      "status": "PASS",
+      "fullProbeEqual": true,
+      "cases": 10
+    },
+    "browserStyleVm": "Covered in focused suite: UMD, no CommonJS/imports, forbidden Math.random. Not a real browser engine test.",
+    "dotnet": {
+      "runtime": "Windows PowerShell/.NET",
+      "rows": 30,
+      "status": "PASS"
+    },
+    "canonicalGolden": "{\"a\":{\"a\":[3,2,1],\"b\":true},\"unicode\":\"棒球🏟\",\"z\":1}",
+    "utf8GoldenHash": "ffcc18fd6c26000988b55c4d255ea5ebdd8d5e486d08e5d193dd3c6b944fcc17",
+    "ownedSampleBinary64": "3fe3d70a3d70a3d7",
+    "comparisons": [
+      {
+        "case": "clean",
+        "stage": "positioning",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+        "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+        "u32": 3287115555,
+        "unitHex": "3fe87dace4700000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "clean",
+          "stage": "positioning",
+          "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+          "u32": 3287115555,
+          "unitHex": "3fe87dace4700000",
+          "durationTicks": 940,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "clean",
+        "stage": "secure",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+        "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+        "u32": 3799248446,
+        "unitHex": "3fec4e7dc7d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 960,
+        "handsMarginMilli": 11750,
+        "dotnet": {
+          "case": "clean",
+          "stage": "secure",
+          "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+          "u32": 3799248446,
+          "unitHex": "3fec4e7dc7d00000",
+          "durationTicks": 960,
+          "handsMarginMilli": 11750
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "clean",
+        "stage": "touch",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+        "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+        "u32": 3273682742,
+        "unitHex": "3fe8640de6d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "clean",
+          "stage": "touch",
+          "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+          "u32": 3273682742,
+          "unitHex": "3fe8640de6d00000",
+          "durationTicks": 940,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "offline",
+        "stage": "positioning",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+        "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+        "u32": 3287115555,
+        "unitHex": "3fe87dace4700000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "offline",
+          "stage": "positioning",
+          "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+          "u32": 3287115555,
+          "unitHex": "3fe87dace4700000",
+          "durationTicks": 940,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "offline",
+        "stage": "secure",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+        "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+        "u32": 3799248446,
+        "unitHex": "3fec4e7dc7d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 960,
+        "handsMarginMilli": 11750,
+        "dotnet": {
+          "case": "offline",
+          "stage": "secure",
+          "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+          "u32": 3799248446,
+          "unitHex": "3fec4e7dc7d00000",
+          "durationTicks": 960,
+          "handsMarginMilli": 11750
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "offline",
+        "stage": "touch",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+        "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+        "u32": 3273682742,
+        "unitHex": "3fe8640de6d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "offline",
+          "stage": "touch",
+          "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+          "u32": 3273682742,
+          "unitHex": "3fe8640de6d00000",
+          "durationTicks": 940,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "unavailable",
+        "stage": "positioning",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+        "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+        "u32": 3287115555,
+        "unitHex": "3fe87dace4700000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "unavailable",
+          "stage": "positioning",
+          "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+          "u32": 3287115555,
+          "unitHex": "3fe87dace4700000",
+          "durationTicks": 940,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "unavailable",
+        "stage": "secure",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+        "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+        "u32": 3799248446,
+        "unitHex": "3fec4e7dc7d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 960,
+        "handsMarginMilli": 11750,
+        "dotnet": {
+          "case": "unavailable",
+          "stage": "secure",
+          "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+          "u32": 3799248446,
+          "unitHex": "3fec4e7dc7d00000",
+          "durationTicks": 960,
+          "handsMarginMilli": 11750
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "unavailable",
+        "stage": "touch",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+        "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+        "u32": 3273682742,
+        "unitHex": "3fe8640de6d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "unavailable",
+          "stage": "touch",
+          "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+          "u32": 3273682742,
+          "unitHex": "3fe8640de6d00000",
+          "durationTicks": 940,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "late",
+        "stage": "positioning",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+        "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+        "u32": 3287115555,
+        "unitHex": "3fe87dace4700000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 5,
+        "demandMilli": 5000,
+        "durationTicks": 5486,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "late",
+          "stage": "positioning",
+          "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+          "u32": 3287115555,
+          "unitHex": "3fe87dace4700000",
+          "durationTicks": 5486,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "late",
+        "stage": "secure",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+        "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+        "u32": 3799248446,
+        "unitHex": "3fec4e7dc7d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 5,
+        "demandMilli": 5000,
+        "durationTicks": 5506,
+        "handsMarginMilli": 11750,
+        "dotnet": {
+          "case": "late",
+          "stage": "secure",
+          "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+          "u32": 3799248446,
+          "unitHex": "3fec4e7dc7d00000",
+          "durationTicks": 5506,
+          "handsMarginMilli": 11750
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "late",
+        "stage": "touch",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+        "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+        "u32": 3273682742,
+        "unitHex": "3fe8640de6d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 5,
+        "demandMilli": 5000,
+        "durationTicks": 5486,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "late",
+          "stage": "touch",
+          "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+          "u32": 3273682742,
+          "unitHex": "3fe8640de6d00000",
+          "durationTicks": 5486,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "hands",
+        "stage": "positioning",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+        "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+        "u32": 3287115555,
+        "unitHex": "3fe87dace4700000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 0,
+          "decision": 10,
+          "fielding": 0,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": -4500,
+        "dotnet": {
+          "case": "hands",
+          "stage": "positioning",
+          "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+          "u32": 3287115555,
+          "unitHex": "3fe87dace4700000",
+          "durationTicks": 940,
+          "handsMarginMilli": -4500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "hands",
+        "stage": "secure",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+        "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+        "u32": 3799248446,
+        "unitHex": "3fec4e7dc7d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 0,
+          "decision": 10,
+          "fielding": 0,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 960,
+        "handsMarginMilli": -4250,
+        "dotnet": {
+          "case": "hands",
+          "stage": "secure",
+          "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+          "u32": 3799248446,
+          "unitHex": "3fec4e7dc7d00000",
+          "durationTicks": 960,
+          "handsMarginMilli": -4250
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "hands",
+        "stage": "touch",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+        "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+        "u32": 3273682742,
+        "unitHex": "3fe8640de6d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 0,
+          "decision": 10,
+          "fielding": 0,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": -4500,
+        "dotnet": {
+          "case": "hands",
+          "stage": "touch",
+          "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+          "u32": 3273682742,
+          "unitHex": "3fe8640de6d00000",
+          "durationTicks": 940,
+          "handsMarginMilli": -4500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "bobble",
+        "stage": "positioning",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+        "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+        "u32": 3287115555,
+        "unitHex": "3fe87dace4700000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 16250,
+        "durationTicks": 940,
+        "handsMarginMilli": 250,
+        "dotnet": {
+          "case": "bobble",
+          "stage": "positioning",
+          "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+          "u32": 3287115555,
+          "unitHex": "3fe87dace4700000",
+          "durationTicks": 940,
+          "handsMarginMilli": 250
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "bobble",
+        "stage": "secure",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+        "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+        "u32": 3799248446,
+        "unitHex": "3fec4e7dc7d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 16250,
+        "durationTicks": 960,
+        "handsMarginMilli": 500,
+        "dotnet": {
+          "case": "bobble",
+          "stage": "secure",
+          "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+          "u32": 3799248446,
+          "unitHex": "3fec4e7dc7d00000",
+          "durationTicks": 960,
+          "handsMarginMilli": 500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "bobble",
+        "stage": "touch",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+        "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+        "u32": 3273682742,
+        "unitHex": "3fe8640de6d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 16250,
+        "durationTicks": 940,
+        "handsMarginMilli": 250,
+        "dotnet": {
+          "case": "bobble",
+          "stage": "touch",
+          "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+          "u32": 3273682742,
+          "unitHex": "3fe8640de6d00000",
+          "durationTicks": 940,
+          "handsMarginMilli": 250
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "fast",
+        "stage": "positioning",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+        "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+        "u32": 3287115555,
+        "unitHex": "3fe87dace4700000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "fast",
+          "stage": "positioning",
+          "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+          "u32": 3287115555,
+          "unitHex": "3fe87dace4700000",
+          "durationTicks": 940,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "fast",
+        "stage": "secure",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+        "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+        "u32": 3799248446,
+        "unitHex": "3fec4e7dc7d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 960,
+        "handsMarginMilli": 11750,
+        "dotnet": {
+          "case": "fast",
+          "stage": "secure",
+          "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+          "u32": 3799248446,
+          "unitHex": "3fec4e7dc7d00000",
+          "durationTicks": 960,
+          "handsMarginMilli": 11750
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "fast",
+        "stage": "touch",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+        "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+        "u32": 3273682742,
+        "unitHex": "3fe8640de6d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "fast",
+          "stage": "touch",
+          "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+          "u32": 3273682742,
+          "unitHex": "3fe8640de6d00000",
+          "durationTicks": 940,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "safe",
+        "stage": "positioning",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+        "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+        "u32": 3287115555,
+        "unitHex": "3fe87dace4700000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "safe",
+          "stage": "positioning",
+          "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+          "u32": 3287115555,
+          "unitHex": "3fe87dace4700000",
+          "durationTicks": 940,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "safe",
+        "stage": "secure",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+        "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+        "u32": 3799248446,
+        "unitHex": "3fec4e7dc7d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 960,
+        "handsMarginMilli": 11750,
+        "dotnet": {
+          "case": "safe",
+          "stage": "secure",
+          "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+          "u32": 3799248446,
+          "unitHex": "3fec4e7dc7d00000",
+          "durationTicks": 960,
+          "handsMarginMilli": 11750
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "safe",
+        "stage": "touch",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+        "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+        "u32": 3273682742,
+        "unitHex": "3fe8640de6d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "safe",
+          "stage": "touch",
+          "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+          "u32": 3273682742,
+          "unitHex": "3fe8640de6d00000",
+          "durationTicks": 940,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "noTouch",
+        "stage": "positioning",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+        "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+        "u32": 3287115555,
+        "unitHex": "3fe87dace4700000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "noTouch",
+          "stage": "positioning",
+          "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+          "u32": 3287115555,
+          "unitHex": "3fe87dace4700000",
+          "durationTicks": 940,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "noTouch",
+        "stage": "secure",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+        "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+        "u32": 3799248446,
+        "unitHex": "3fec4e7dc7d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 960,
+        "handsMarginMilli": 11750,
+        "dotnet": {
+          "case": "noTouch",
+          "stage": "secure",
+          "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+          "u32": 3799248446,
+          "unitHex": "3fec4e7dc7d00000",
+          "durationTicks": 960,
+          "handsMarginMilli": 11750
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "noTouch",
+        "stage": "touch",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+        "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+        "u32": 3273682742,
+        "unitHex": "3fe8640de6d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "noTouch",
+          "stage": "touch",
+          "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+          "u32": 3273682742,
+          "unitHex": "3fe8640de6d00000",
+          "durationTicks": 940,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "unknown",
+        "stage": "positioning",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"positioning\"}",
+        "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+        "u32": 3287115555,
+        "unitHex": "3fe87dace4700000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "unknown",
+          "stage": "positioning",
+          "sha256": "c3ed6723d50d2ec095173c2e934e1fa2a123978046793fbb7f5cf28be46448c3",
+          "u32": 3287115555,
+          "unitHex": "3fe87dace4700000",
+          "durationTicks": 940,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "unknown",
+        "stage": "secure",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"secure\"}",
+        "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+        "u32": 3799248446,
+        "unitHex": "3fec4e7dc7d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 960,
+        "handsMarginMilli": 11750,
+        "dotnet": {
+          "case": "unknown",
+          "stage": "secure",
+          "sha256": "e273ee3e3778e868228c4e3e13c127a10e7bc3950ebf0e2e64e47e7db8fb128e",
+          "u32": 3799248446,
+          "unitHex": "3fec4e7dc7d00000",
+          "durationTicks": 960,
+          "handsMarginMilli": 11750
+        },
+        "status": "PASS"
+      },
+      {
+        "case": "unknown",
+        "stage": "touch",
+        "canonical": "{\"executionVersion\":\"receiver-pure-stages-v2-1\",\"physical\":{\"contactId\":\"contact-1\",\"matchId\":\"match-1\",\"physicalIdentity\":\"owned-ground-contact-1\",\"plateAppearanceId\":\"pa-1\",\"version\":\"physical-contact-binding-v1\"},\"physicalSlot\":\"primaryThrow\",\"samplerVersion\":\"physical-slot-sha256-u32be-v1\",\"stage\":\"touch\"}",
+        "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+        "u32": 3273682742,
+        "unitHex": "3fe8640de6d00000",
+        "capabilities": {
+          "arm": 10,
+          "catching": 16,
+          "decision": 10,
+          "fielding": 16,
+          "mobility": 10,
+          "range": 10,
+          "reaction": 10,
+          "throwing": 10
+        },
+        "movementMdu": 0,
+        "demandMilli": 5000,
+        "durationTicks": 940,
+        "handsMarginMilli": 11500,
+        "dotnet": {
+          "case": "unknown",
+          "stage": "touch",
+          "sha256": "c3206f368fb446d25ff90f38996c9cafc17e12462079c3c0e06f6fa3e4ac749a",
+          "u32": 3273682742,
+          "unitHex": "3fe8640de6d00000",
+          "durationTicks": 940,
+          "handsMarginMilli": 11500
+        },
+        "status": "PASS"
+      }
+    ],
+    "limits": [
+      "No claim of statistical independence or calibrated distribution.",
+      "No real browser/runtime Match or Save integration executed."
+    ]
+  },
+  "historicalRunnerCaptureOrIntegrityCalled": false,
+  "frozenSourceHashes": {
+    "index.html": "b1b8b5cc916ca87772e8b34e0382774d65009a3ee17d49c82c330a65ca0ce315",
+    "script.js": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+    "save.js": "7111e2180f93f15fdaa0c402b6fe034240e064c6acff01d0d79bb1755990ebb7",
+    "match-situation-lifecycle.js": "030eb851e2cac85fff8e01f44903b8f182ce417ad03e34db57c0b523b1f3e544",
+    "receiver-source-snapshot.js": "4a9e63e98259b153c09b1c39216fd152c36e56ef911b2693df28aa8caa353274"
+  }
+}

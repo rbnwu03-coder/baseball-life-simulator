@@ -1,0 +1,37 @@
+{
+  "task": "Match Moment Snapshot Integrity Repair v0.1 — Bounded Production Fix",
+  "createdAt": "2026-10-15T07:58:59.338Z",
+  "edits": [
+    {
+      "file": "script.js",
+      "before": "  const finalMoment = match.completedMoments.at(-1);\r\n  if (finalMoment) {\r\n    finalMoment.scores = { ...match.scores };\r\n    finalMoment.runners = [null, null, null];\r\n    finalMoment.outs = 3;\r\n    finalMoment.half = \"終\";\r\n  }\r\n",
+      "after": ""
+    },
+    {
+      "file": "match-experience-development.js",
+      "before": "  function createBatterEvidence(match, source, index) {",
+      "after": "  function deriveBatterDecisionPressure(match, source) {\n    const anticipation = source.batterAnticipation;\n    const context = anticipation?.publicContext;\n    const identity = [match.id, source.id, \"player\", source.inning, source.half].join(\"|\");\n    // Only the same PA's existing pre-resolution context can supply decision pressure.\n    if (!context || anticipation.identity !== identity\n      || !Number.isInteger(context.inning) || context.inning !== source.inning\n      || !Number.isInteger(context.outs) || context.outs < 0 || context.outs > 2\n      || !Number.isFinite(context.scoreDifference)\n      || !Array.isArray(context.runners) || context.runners.length !== 3\n      || !context.runners.every(value => typeof value === \"boolean\")) return undefined;\n    return derivePressure({ ...context, scoreMargin: context.scoreDifference, regulationInnings: match.regulationInnings });\n  }\n\n  function createBatterEvidence(match, source, index) {"
+    },
+    {
+      "file": "match-experience-development.js",
+      "before": "      situation, meaningful: true, decisionQuality, executionQuality,",
+      "after": "      situation, meaningful: true, decisionQuality, executionQuality,\n      pressure: deriveBatterDecisionPressure(match, source),"
+    }
+  ],
+  "files": [
+    {
+      "file": "script.js",
+      "beforeHash": "353adf6db78f57098d655e9ca2067020e4b6bb597c9aacda50c5281b2a65d2e9",
+      "afterHash": "b35526671499a5f780ccbd5c0e152b7e935fbacdea1302c26f75730faba70669",
+      "exactOutsideReplacementsUnchanged": true
+    },
+    {
+      "file": "match-experience-development.js",
+      "beforeHash": "24190484dc80beb5761be6bfb9d4dc5ea9b24337b83c11143177b9895702643b",
+      "afterHash": "544a9a3625c69d868645011ff0f67804b48cd0734bcb5b1e4410ca593df766f3",
+      "exactOutsideReplacementsUnchanged": true
+    }
+  ],
+  "saveSchemaChanged": false,
+  "producersAndRngOutsideReplacementsUnchanged": true
+}
