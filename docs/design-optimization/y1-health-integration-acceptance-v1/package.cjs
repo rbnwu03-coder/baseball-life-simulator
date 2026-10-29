@@ -1,0 +1,8 @@
+"use strict";
+const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'../../..'),env=require('./environment.json'),git=(...a)=>cp.execFileSync('git',['-c','safe.directory='+env.checkout,'-c','core.autocrlf=false',...a],{cwd:env.checkout,maxBuffer:20e6}).toString().trim();
+assert.equal(git('branch','--show-current'),env.branch);assert.equal(git('rev-parse','HEAD'),env.candidate);assert.equal(git('status','--porcelain'),'');
+const paths=['docs/design-optimization/13-y1-health-integration-acceptance.md','docs/design-optimization/y1-health-integration-acceptance-v1'];
+for(const p of paths){const target=path.resolve(env.checkout,p);assert(target.toLowerCase().startsWith(path.resolve(env.checkout).toLowerCase()+path.sep));assert(!fs.existsSync(target),'Never overwrite existing integration evidence: '+p);fs.cpSync(path.join(root,p),target,{recursive:true,errorOnExist:true,force:false});}
+const index='docs/design-optimization/README.md',file=path.join(env.checkout,index);let text=fs.readFileSync(file,'utf8');assert(!text.includes('13-y1-health-integration-acceptance.md'));text+='\n- [高一健康機會限定整合驗收（頁面 BLOCKED）](13-y1-health-integration-acceptance.md)\n';fs.writeFileSync(file,text);
+const allowed=[index,...paths];git('add','--',...allowed);const staged=git('diff','--cached','--name-only').split('\n');assert(staged.every(p=>allowed.some(a=>p===a||p.startsWith(a+'/'))));console.log({branch:env.branch,stagedFiles:staged.length,programChanges:git('diff','--cached','--name-only','--','*.js','*.css','index.html','tests'),overallAcceptance:'BLOCKED'});

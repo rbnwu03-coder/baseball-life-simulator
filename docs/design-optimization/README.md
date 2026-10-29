@@ -39,3 +39,5 @@
 本輪新增內容限於此資料夾；沒有修改 Production、原測試期望、畫面、DTO、依賴或 Git 歷史。下一輪建議先以最小敘事修補處理「未出賽與角色未變」兩種情境，再分開審查高一健康輸入的核心行為提案。
 
 - [高一健康機會刷新候選與舊資料邊界收尾](12-high-school-health-opportunity-candidate.md)
+
+- [高一健康機會限定整合驗收（頁面 BLOCKED）](13-y1-health-integration-acceptance.md)
