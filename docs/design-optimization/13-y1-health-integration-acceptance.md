@@ -2,6 +2,30 @@
 
 **整合與位元組核對已完成；實際頁面驗收為 BLOCKED，整體限定整合驗收尚未通過。本分支保留為待完成頁面驗收的整合版本，暫不列為本切片可採用的開發基線。**
 
+## 頁面續驗：連線仍不可用，交人工 — 2026-10-29
+
+本次固定待驗版本為 `integration/y1-health-opportunity-2026-10-29` 的 `ca3be7e6a537ae91f9bb1c8b8ae093fd0445a84f`，沿用既有整合 worktree。**先確認 HEAD 完全相符、worktree 乾淨，再核對既有 byte-parity 索引的 104 個關鍵程式／測試／模組 hash，0 差異**；script.js SHA-256 仍為 `af4e71229c6456ccd593f2ee0c7d3415877cefec10da53348bd2706bbc7b367a`。[本次版本確認](y1-health-page-acceptance-retry-v1/version-check.json)另存；沒有重做整合或再次逐檔執行 2,552 檔完整核對，也沒有重跑 Node／VM 測試。
+
+受支援連線檢查 `cua.getState()` 仍回報空的 browser inventory 與 `The browser access host is unavailable`。[本次連線紀錄](y1-health-page-acceptance-retry-v1/connection-check.json)只記這個新觀察；**本次沒有重新觸發前輪的桌面 Chrome URL-policy 停止**。在連線檢查後即停止頁面自動操作，不再嘗試該桌面後備或其他 driver，依本次指示交由人工驗收。
+
+| 本次實際執行／引用 | 結果 |
+|---|---|
+| 既有 HEAD、branch、clean 狀態及 104 個關鍵 hash 確認 | PASS，新執行的版本前置檢查 |
+| 受支援瀏覽器連線確認 | BLOCKED，host unavailable |
+| 前輪完整位元組核對及 7／15／16／12 證據 | 僅引用既有紀錄，未重做／重跑 |
+| 一般高中入口、兩場比賽、電話、年末的實際按鈕流程 | 未執行，交人工 |
+| 電話前及 N+1 確認後 Save/Load、重繪／seed／用途核對 | 未執行，交人工 |
+| 關鍵截圖、Console／資源錯誤觀察 | 無法取得；不是零錯誤或頁面通過 |
+| 整體限定驗收／開發基線指定 | **仍為 BLOCKED，暫不指定** |
+
+[人工驗收交接表](y1-health-page-acceptance-retry-v1/manual-acceptance.md)列出確切待驗版本、既有書籤入口、按鈕流程、兩個存讀檔時點、截圖需求與唯讀狀態快照。所有人工項目目前皆為「待驗」，沒有代填 PASS。快照只供取證，不能呼叫 choose／advance 等函式取代點擊，不能改寫 Player 或 RNG，也不能用 VM 結果補上實際頁面證據。
+
+本次沒有取得可重現的遊戲阻塞，因此沒有提出或套用程式修補。文件提交只補記本次版本檢查、連線失敗與人工交接；待驗程式與固定版本保持相同。只有人工完成全部限定流程並保存證據後，才可再判定本切片開發基線，不推論全專案通過或健康效果校準。原工作樹的其他修改、main、checkpoint 與 candidate 分支均不動。
+
+以下第 1–6 節保留前輪整合紀錄；其中「本輪」指前輪，不代表本次重新執行整合、完整位元組稽核或測試。
+
+---
+
 ## 1. 版本與隔離整合
 
 | 項目 | 確切版本／位置 |
