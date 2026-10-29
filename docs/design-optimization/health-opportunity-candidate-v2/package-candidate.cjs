@@ -1,0 +1,10 @@
+"use strict";
+const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),assert=require('node:assert/strict'),crypto=require('node:crypto');
+const root=path.resolve(__dirname,'../../..'),env=require('../health-opportunity-candidate-v1/environment.json'),summary=require('./summary.json');
+const git=(...a)=>cp.execFileSync('git',['-c','safe.directory='+env.candidate,'-c','core.autocrlf=false',...a],{cwd:env.candidate,maxBuffer:16e6}).toString().trim();
+assert.equal(git('branch','--show-current'),env.branch);assert.equal(git('rev-parse','HEAD'),env.base);assert.equal(git('diff','--cached','--name-only'),'');assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(env.candidate,'script.js'))).digest('hex'),summary.candidateScriptSha256);
+const artifacts=['docs/design-optimization/health-opportunity-candidate-v1','docs/design-optimization/health-opportunity-candidate-v2','docs/design-optimization/12-high-school-health-opportunity-candidate.md'];
+for(const p of artifacts){const target=path.resolve(env.candidate,p);assert(target.toLowerCase().startsWith(path.resolve(env.candidate).toLowerCase()+path.sep));assert(!fs.existsSync(target),'Never overwrite a candidate artifact directory: '+p);fs.cpSync(path.join(root,p),target,{recursive:true,errorOnExist:true,force:false});}
+const index=path.join(env.candidate,'docs/design-optimization/README.md');let readme=fs.readFileSync(index,'utf8');assert(!readme.includes('12-high-school-health-opportunity-candidate.md'));readme+='\n- [高一健康機會刷新候選與舊資料邊界收尾](12-high-school-health-opportunity-candidate.md)\n';fs.writeFileSync(index,readme);
+const files=['script.js',...env.manifests.map(r=>r.file),'docs/design-optimization/README.md',...artifacts];
+git('add','--',...files);const staged=git('diff','--cached','--name-only').split('\n');assert(staged.every(p=>files.some(f=>p===f||p.startsWith(f+'/'))));console.log({branch:env.branch,stagedFiles:staged.length,stagedStat:git('diff','--cached','--stat')});

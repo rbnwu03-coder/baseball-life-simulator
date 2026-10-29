@@ -1,0 +1,16 @@
+"use strict";
+const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),crypto=require('node:crypto'),os=require('node:os');
+const root=path.resolve(__dirname,'../../..'),base='33abdcb151d0a6becef640aab778a87ce3cbec68';
+const git=(...a)=>cp.execFileSync('git',['-c','safe.directory='+root,...a],{cwd:root,encoding:'utf8'}).trim();
+const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(path.join(root,p))).digest('hex');
+const files=git('ls-files','--cached','--others','--exclude-standard','-z').split('\0').filter(p=>p&&!p.startsWith('docs/design-optimization/health-opportunity-candidate-v1/'));
+const snapshot={base,head:git('rev-parse','HEAD'),branch:git('branch','--show-current'),node:process.version,hashes:Object.fromEntries(files.map(p=>[p,hash(p)]))};
+if(snapshot.head!==base)throw Error('Unexpected production baseline');
+fs.writeFileSync(path.join(__dirname,'preservation-before.json'),JSON.stringify(snapshot,null,2)+'\n',{flag:'wx'});
+const baseline=path.join(os.tmpdir(),'baseball-health-opportunity-baseline-33abdcb'),candidate=path.join(os.tmpdir(),'baseball-health-opportunity-candidate-33abdcb'),branch='candidate/y1-health-opportunity-2026-10-29';
+git('-c','core.autocrlf=false','worktree','add','--detach',baseline,base);
+git('-c','core.autocrlf=false','worktree','add','-b',branch,candidate,base);
+const manifests=['baseball-match-foundation-2-2-test.js','goal-balance-test.js','high-school-integration-1-2-2-2-test.js','high-school-integration-1-2-test.js'];
+for(const wt of [baseline,candidate])for(const file of manifests)fs.copyFileSync(path.join(root,'tests',file),path.join(wt,'tests',file));
+fs.writeFileSync(path.join(__dirname,'environment.json'),JSON.stringify({base,baseline,candidate,branch,node:process.version,manifests:manifests.map(f=>({file:'tests/'+f,sha256:hash('tests/'+f)}))},null,2)+'\n',{flag:'wx'});
+console.log({base,baseline,candidate,branch,preserved:files.length});

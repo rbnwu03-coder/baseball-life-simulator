@@ -1,0 +1,836 @@
+{
+  "base": "33abdcb151d0a6becef640aab778a87ce3cbec68",
+  "node": "v24.19.0",
+  "spec": {
+    "seeds": [
+      77881,
+      77001,
+      99101
+    ],
+    "normalBodies": {
+      "zero": {
+        "fatigue": 0,
+        "pain": 0,
+        "injuryRisk": 0
+      },
+      "fatigue": {
+        "fatigue": 10,
+        "pain": 0,
+        "injuryRisk": 0
+      },
+      "burden": {
+        "fatigue": 12,
+        "pain": 6,
+        "injuryRisk": 8
+      }
+    },
+    "regressions": [
+      "playing-time-game-exposure-foundation-v1-test.js",
+      "opportunity-evaluation-boundary-v1-0-1-test.js",
+      "high-school-year-one-opportunity-two-integration-test.js",
+      "high-school-schedule-opportunity-production-integration-test.js",
+      "high-school-career-evidence-test.js",
+      "high-school-career-exit-integration-test.js",
+      "career-save-admission-test.js"
+    ],
+    "scope": "Fixed before execution. No seed search, simplified match engine or calibration. Body may be set for research; outcomes and exposure use original owners."
+  },
+  "entry": "Supported canonical high-school entry fixture; original choose/transition/prepare/playback/settlement and index.html modules. Not a childhood-to-entry run.",
+  "rng": "External deterministic test RNG state restored explicitly across fresh VM load; not a new production Save field.",
+  "rows": [
+    {
+      "name": "zero baseline parity 77881",
+      "status": "PASS",
+      "detail": {
+        "firstRecordParity": true,
+        "followupRecordParity": true,
+        "identityAndRngParity": true
+      }
+    },
+    {
+      "name": "health-only paired first and followup 77881",
+      "status": "PASS",
+      "detail": {
+        "pairedNonHealthInputsEqual": true,
+        "identityFrozen": true,
+        "healthDirection": true
+      }
+    },
+    {
+      "name": "zero baseline parity 77001",
+      "status": "PASS",
+      "detail": {
+        "firstRecordParity": true,
+        "followupRecordParity": true,
+        "identityAndRngParity": true
+      }
+    },
+    {
+      "name": "health-only paired first and followup 77001",
+      "status": "PASS",
+      "detail": {
+        "pairedNonHealthInputsEqual": true,
+        "identityFrozen": true,
+        "healthDirection": true
+      }
+    },
+    {
+      "name": "zero baseline parity 99101",
+      "status": "PASS",
+      "detail": {
+        "firstRecordParity": true,
+        "followupRecordParity": true,
+        "identityAndRngParity": true
+      }
+    },
+    {
+      "name": "health-only paired first and followup 99101",
+      "status": "PASS",
+      "detail": {
+        "pairedNonHealthInputsEqual": true,
+        "identityFrozen": true,
+        "healthDirection": true
+      }
+    },
+    {
+      "name": "first recovery and confirmation Save/Load",
+      "status": "PASS",
+      "detail": {
+        "health": {
+          "fatigue": 6,
+          "pain": 0,
+          "injuryRisk": 0,
+          "healthReadiness": -3
+        },
+        "preAndPostLoadParity": true,
+        "displayPlayerReadOnly": true,
+        "redrawNoRefresh": true,
+        "duplicateChoiceRejected": true,
+        "afterLockBodyChangeFrozen": true,
+        "randomDrawDelta": 0
+      }
+    },
+    {
+      "name": "N+1 preview/read, changed body before confirmation, Save/Load and dedup",
+      "status": "PASS",
+      "detail": {
+        "previewPlayerReadOnly": true,
+        "health": {
+          "fatigue": 6,
+          "pain": 0,
+          "injuryRisk": 0,
+          "healthReadiness": -3
+        },
+        "preAndPostLoadParity": true,
+        "opportunityIdsUnique": true,
+        "evaluationIdempotent": true,
+        "displayPlayerReadOnly": true,
+        "redrawNoRefresh": true,
+        "duplicateChoiceRejected": true,
+        "afterLockBodyChangeFrozen": true,
+        "randomDrawDelta": 0
+      }
+    },
+    {
+      "name": "Direct Start separate baseline comparison",
+      "status": "PASS",
+      "detail": {
+        "baselineRecordParity": true,
+        "originalPolicy": true
+      }
+    },
+    {
+      "name": "pitcher deferred separate baseline comparison",
+      "status": "PASS",
+      "detail": {
+        "baselineRecordParity": true,
+        "originalPolicy": true
+      }
+    },
+    {
+      "name": "Direct Start pitcher deferred separate baseline comparison",
+      "status": "PASS",
+      "detail": {
+        "baselineRecordParity": true,
+        "originalPolicy": true
+      }
+    }
+  ],
+  "observations": [
+    {
+      "kind": "zero-first",
+      "seed": 77881,
+      "identity": {
+        "matchId": "hs-y1-autumn-exhibition",
+        "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|b2f48611",
+        "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|capability|school-development-0b20c648|hs-year-1-age-16|roster-b300441a|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|benchCandidate|high|medium|high|developmental|二壘手|9.333333333333334|10|7|highSchoolExhibition|0|0|regular|normal",
+        "stableVariationSeed": null,
+        "variation": 8,
+        "hash": 3002369553,
+        "simulationSeed": 419031
+      },
+      "plan": {
+        "appearanceType": "start",
+        "entryInning": 1,
+        "entryHalf": "上"
+      },
+      "recordHash": "a50e8ac71cdb097da71705997b275b1e1a23fb3e718b5f32c172cb04b7ef5e51",
+      "healthMetadataOnly": true
+    },
+    {
+      "kind": "zero-followup",
+      "seed": 77881,
+      "identity": {
+        "matchId": "hs-y1-followup-evaluation-2",
+        "decisionId": "hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|f91c1258",
+        "opportunitySeed": "playing-time-opportunity-v1|hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|capability|school-development-0b20c648|hs-year-1-age-16|roster-b300441a|high-school-year-one|post-autumn-evaluation|2|hs-y1-followup-evaluation-2|rotation|benchCandidate|high|low|high|developmental|二壘手|9.333333333333334|10|3|highSchoolExhibition|0|0|regular|normal|3.067|start:4:7",
+        "stableVariationSeed": null,
+        "variation": 10,
+        "hash": 4179366488,
+        "simulationSeed": 3619587100
+      },
+      "plan": {
+        "appearanceType": "start",
+        "entryInning": 1,
+        "entryHalf": "上"
+      },
+      "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "healthMetadataOnly": true
+    },
+    {
+      "kind": "health-pairs",
+      "seed": 77881,
+      "pairs": [
+        {
+          "name": "zero",
+          "first": {
+            "health": {
+              "fatigue": 0,
+              "pain": 0,
+              "injuryRisk": 0,
+              "healthReadiness": 0
+            },
+            "identity": {
+              "matchId": "hs-y1-autumn-exhibition",
+              "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|b2f48611",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|capability|school-development-0b20c648|hs-year-1-age-16|roster-b300441a|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|benchCandidate|high|medium|high|developmental|二壘手|9.333333333333334|10|7|highSchoolExhibition|0|0|regular|normal",
+              "stableVariationSeed": null,
+              "variation": 8,
+              "hash": 3002369553,
+              "simulationSeed": 419031
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "a50e8ac71cdb097da71705997b275b1e1a23fb3e718b5f32c172cb04b7ef5e51",
+            "PA": 4,
+            "defensiveInnings": 7
+          },
+          "followup": {
+            "health": {
+              "fatigue": 0,
+              "pain": 0,
+              "injuryRisk": 0,
+              "healthReadiness": 0
+            },
+            "identity": {
+              "matchId": "hs-y1-followup-evaluation-2",
+              "decisionId": "hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|f91c1258",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|capability|school-development-0b20c648|hs-year-1-age-16|roster-b300441a|high-school-year-one|post-autumn-evaluation|2|hs-y1-followup-evaluation-2|rotation|benchCandidate|high|low|high|developmental|二壘手|9.333333333333334|10|3|highSchoolExhibition|0|0|regular|normal|3.067|start:4:7",
+              "stableVariationSeed": null,
+              "variation": 10,
+              "hash": 4179366488,
+              "simulationSeed": 3619587100
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+            "PA": 4,
+            "defensiveInnings": 7
+          }
+        },
+        {
+          "name": "fatigue",
+          "first": {
+            "health": {
+              "fatigue": 9,
+              "pain": 0,
+              "injuryRisk": 0,
+              "healthReadiness": -4
+            },
+            "identity": {
+              "matchId": "hs-y1-autumn-exhibition",
+              "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|b2f48611",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|capability|school-development-0b20c648|hs-year-1-age-16|roster-b300441a|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|benchCandidate|high|medium|high|developmental|二壘手|9.333333333333334|10|7|highSchoolExhibition|0|0|regular|normal",
+              "stableVariationSeed": null,
+              "variation": 8,
+              "hash": 3002369553,
+              "simulationSeed": 419031
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "a50e8ac71cdb097da71705997b275b1e1a23fb3e718b5f32c172cb04b7ef5e51",
+            "PA": 4,
+            "defensiveInnings": 7
+          },
+          "followup": {
+            "health": {
+              "fatigue": 10,
+              "pain": 0,
+              "injuryRisk": 0,
+              "healthReadiness": -5
+            },
+            "identity": {
+              "matchId": "hs-y1-followup-evaluation-2",
+              "decisionId": "hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|f91c1258",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|capability|school-development-0b20c648|hs-year-1-age-16|roster-b300441a|high-school-year-one|post-autumn-evaluation|2|hs-y1-followup-evaluation-2|rotation|benchCandidate|high|low|high|developmental|二壘手|9.333333333333334|10|3|highSchoolExhibition|0|0|regular|normal|3.067|start:4:7",
+              "stableVariationSeed": null,
+              "variation": 10,
+              "hash": 4179366488,
+              "simulationSeed": 3619587100
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+            "PA": 4,
+            "defensiveInnings": 7
+          }
+        },
+        {
+          "name": "burden",
+          "first": {
+            "health": {
+              "fatigue": 11,
+              "pain": 6,
+              "injuryRisk": 8,
+              "healthReadiness": -13
+            },
+            "identity": {
+              "matchId": "hs-y1-autumn-exhibition",
+              "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|b2f48611",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|capability|school-development-0b20c648|hs-year-1-age-16|roster-b300441a|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|benchCandidate|high|medium|high|developmental|二壘手|9.333333333333334|10|7|highSchoolExhibition|0|0|regular|normal",
+              "stableVariationSeed": null,
+              "variation": 8,
+              "hash": 3002369553,
+              "simulationSeed": 419031
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "a50e8ac71cdb097da71705997b275b1e1a23fb3e718b5f32c172cb04b7ef5e51",
+            "PA": 4,
+            "defensiveInnings": 7
+          },
+          "followup": {
+            "health": {
+              "fatigue": 12,
+              "pain": 6,
+              "injuryRisk": 8,
+              "healthReadiness": -13
+            },
+            "identity": {
+              "matchId": "hs-y1-followup-evaluation-2",
+              "decisionId": "hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|f91c1258",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|capability|school-development-0b20c648|hs-year-1-age-16|roster-b300441a|high-school-year-one|post-autumn-evaluation|2|hs-y1-followup-evaluation-2|rotation|benchCandidate|high|low|high|developmental|二壘手|9.333333333333334|10|3|highSchoolExhibition|0|0|regular|normal|3.067|start:4:7",
+              "stableVariationSeed": null,
+              "variation": 10,
+              "hash": 4179366488,
+              "simulationSeed": 3619587100
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+            "PA": 4,
+            "defensiveInnings": 7
+          }
+        }
+      ]
+    },
+    {
+      "kind": "zero-first",
+      "seed": 77001,
+      "identity": {
+        "matchId": "hs-y1-autumn-exhibition",
+        "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|eecda0e7",
+        "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|capability|school-development-d82025c6|hs-year-1-age-16|roster-18afce0b|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|rotationCandidate|high|medium|high|conservative|二壘手|9.333333333333334|10|7|highSchoolExhibition|0|0|regular|normal",
+        "stableVariationSeed": null,
+        "variation": 10,
+        "hash": 4006453479,
+        "simulationSeed": 77991
+      },
+      "plan": {
+        "appearanceType": "start",
+        "entryInning": 1,
+        "entryHalf": "上"
+      },
+      "recordHash": "33c6f3820d0f2e702e114f779fdfa70571fd16d9ca235e0d5a597f1e20761d1c",
+      "healthMetadataOnly": true
+    },
+    {
+      "kind": "zero-followup",
+      "seed": 77001,
+      "identity": {
+        "matchId": "hs-y1-followup-evaluation-2",
+        "decisionId": "hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|c2329221",
+        "opportunitySeed": "playing-time-opportunity-v1|hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|capability|school-development-d82025c6|hs-year-1-age-16|roster-18afce0b|high-school-year-one|post-autumn-evaluation|2|hs-y1-followup-evaluation-2|rotation|rotationCandidate|high|low|high|conservative|二壘手|9.333333333333334|10|3|highSchoolExhibition|0|0|regular|normal|3.389|start:4:7",
+        "stableVariationSeed": null,
+        "variation": -12,
+        "hash": 3258094113,
+        "simulationSeed": 3632363792
+      },
+      "plan": {
+        "appearanceType": "start",
+        "entryInning": 1,
+        "entryHalf": "上"
+      },
+      "recordHash": "739cdd5ad4b3d67098eab13705a92266453ad71d0fc40d7b2db5e48294dfae20",
+      "healthMetadataOnly": true
+    },
+    {
+      "kind": "health-pairs",
+      "seed": 77001,
+      "pairs": [
+        {
+          "name": "zero",
+          "first": {
+            "health": {
+              "fatigue": 0,
+              "pain": 0,
+              "injuryRisk": 0,
+              "healthReadiness": 0
+            },
+            "identity": {
+              "matchId": "hs-y1-autumn-exhibition",
+              "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|eecda0e7",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|capability|school-development-d82025c6|hs-year-1-age-16|roster-18afce0b|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|rotationCandidate|high|medium|high|conservative|二壘手|9.333333333333334|10|7|highSchoolExhibition|0|0|regular|normal",
+              "stableVariationSeed": null,
+              "variation": 10,
+              "hash": 4006453479,
+              "simulationSeed": 77991
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "33c6f3820d0f2e702e114f779fdfa70571fd16d9ca235e0d5a597f1e20761d1c",
+            "PA": 4,
+            "defensiveInnings": 7
+          },
+          "followup": {
+            "health": {
+              "fatigue": 0,
+              "pain": 0,
+              "injuryRisk": 0,
+              "healthReadiness": 0
+            },
+            "identity": {
+              "matchId": "hs-y1-followup-evaluation-2",
+              "decisionId": "hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|c2329221",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|capability|school-development-d82025c6|hs-year-1-age-16|roster-18afce0b|high-school-year-one|post-autumn-evaluation|2|hs-y1-followup-evaluation-2|rotation|rotationCandidate|high|low|high|conservative|二壘手|9.333333333333334|10|3|highSchoolExhibition|0|0|regular|normal|3.389|start:4:7",
+              "stableVariationSeed": null,
+              "variation": -12,
+              "hash": 3258094113,
+              "simulationSeed": 3632363792
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "739cdd5ad4b3d67098eab13705a92266453ad71d0fc40d7b2db5e48294dfae20",
+            "PA": 4,
+            "defensiveInnings": 7
+          }
+        },
+        {
+          "name": "fatigue",
+          "first": {
+            "health": {
+              "fatigue": 9,
+              "pain": 0,
+              "injuryRisk": 0,
+              "healthReadiness": -4
+            },
+            "identity": {
+              "matchId": "hs-y1-autumn-exhibition",
+              "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|eecda0e7",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|capability|school-development-d82025c6|hs-year-1-age-16|roster-18afce0b|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|rotationCandidate|high|medium|high|conservative|二壘手|9.333333333333334|10|7|highSchoolExhibition|0|0|regular|normal",
+              "stableVariationSeed": null,
+              "variation": 10,
+              "hash": 4006453479,
+              "simulationSeed": 77991
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "33c6f3820d0f2e702e114f779fdfa70571fd16d9ca235e0d5a597f1e20761d1c",
+            "PA": 4,
+            "defensiveInnings": 7
+          },
+          "followup": {
+            "health": {
+              "fatigue": 10,
+              "pain": 0,
+              "injuryRisk": 0,
+              "healthReadiness": -5
+            },
+            "identity": {
+              "matchId": "hs-y1-followup-evaluation-2",
+              "decisionId": "hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|c2329221",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|capability|school-development-d82025c6|hs-year-1-age-16|roster-18afce0b|high-school-year-one|post-autumn-evaluation|2|hs-y1-followup-evaluation-2|rotation|rotationCandidate|high|low|high|conservative|二壘手|9.333333333333334|10|3|highSchoolExhibition|0|0|regular|normal|3.389|start:4:7",
+              "stableVariationSeed": null,
+              "variation": -12,
+              "hash": 3258094113,
+              "simulationSeed": 3632363792
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "739cdd5ad4b3d67098eab13705a92266453ad71d0fc40d7b2db5e48294dfae20",
+            "PA": 4,
+            "defensiveInnings": 7
+          }
+        },
+        {
+          "name": "burden",
+          "first": {
+            "health": {
+              "fatigue": 11,
+              "pain": 6,
+              "injuryRisk": 8,
+              "healthReadiness": -13
+            },
+            "identity": {
+              "matchId": "hs-y1-autumn-exhibition",
+              "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|eecda0e7",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|capability|school-development-d82025c6|hs-year-1-age-16|roster-18afce0b|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|rotationCandidate|high|medium|high|conservative|二壘手|9.333333333333334|10|7|highSchoolExhibition|0|0|regular|normal",
+              "stableVariationSeed": null,
+              "variation": 10,
+              "hash": 4006453479,
+              "simulationSeed": 77991
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "33c6f3820d0f2e702e114f779fdfa70571fd16d9ca235e0d5a597f1e20761d1c",
+            "PA": 4,
+            "defensiveInnings": 7
+          },
+          "followup": {
+            "health": {
+              "fatigue": 12,
+              "pain": 6,
+              "injuryRisk": 8,
+              "healthReadiness": -13
+            },
+            "identity": {
+              "matchId": "hs-y1-followup-evaluation-2",
+              "decisionId": "hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|c2329221",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseballIQ|school-development-d82025c6|capability|school-development-d82025c6|hs-year-1-age-16|roster-18afce0b|high-school-year-one|post-autumn-evaluation|2|hs-y1-followup-evaluation-2|rotation|rotationCandidate|high|low|high|conservative|二壘手|9.333333333333334|10|3|highSchoolExhibition|0|0|regular|normal|3.389|start:4:7",
+              "stableVariationSeed": null,
+              "variation": -12,
+              "hash": 3258094113,
+              "simulationSeed": 3632363792
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "739cdd5ad4b3d67098eab13705a92266453ad71d0fc40d7b2db5e48294dfae20",
+            "PA": 4,
+            "defensiveInnings": 7
+          }
+        }
+      ]
+    },
+    {
+      "kind": "zero-first",
+      "seed": 99101,
+      "identity": {
+        "matchId": "hs-y1-autumn-exhibition",
+        "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|09937f13",
+        "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|capability|school-development-8f8fbd5a|hs-year-1-age-16|roster-a0663705|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|rotationCandidate|high|medium|high|conservative|二壘手|9.333333333333334|10|7|highSchoolExhibition|0|0|regular|normal",
+        "stableVariationSeed": null,
+        "variation": 1,
+        "hash": 160661267,
+        "simulationSeed": 642890
+      },
+      "plan": {
+        "appearanceType": "start",
+        "entryInning": 1,
+        "entryHalf": "上"
+      },
+      "recordHash": "76d543cd2131acd8d7657dc517d7a699591fe548c8ebaac845efba5977f7360b",
+      "healthMetadataOnly": true
+    },
+    {
+      "kind": "zero-followup",
+      "seed": 99101,
+      "identity": {
+        "matchId": "hs-y1-followup-evaluation-2",
+        "decisionId": "hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|946079cd",
+        "opportunitySeed": "playing-time-opportunity-v1|hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|capability|school-development-8f8fbd5a|hs-year-1-age-16|roster-a0663705|high-school-year-one|post-autumn-evaluation|2|hs-y1-followup-evaluation-2|rotation|rotationCandidate|high|low|high|conservative|二壘手|9.333333333333334|10|3|highSchoolExhibition|0|0|regular|normal|3.073|start:4:7",
+        "stableVariationSeed": null,
+        "variation": -2,
+        "hash": 2489350605,
+        "simulationSeed": 647425096
+      },
+      "plan": {
+        "appearanceType": "start",
+        "entryInning": 1,
+        "entryHalf": "上"
+      },
+      "recordHash": "b548e116a051819ff650dfc49cafa316fbc488a1a3cc286592d3846be61deb64",
+      "healthMetadataOnly": true
+    },
+    {
+      "kind": "health-pairs",
+      "seed": 99101,
+      "pairs": [
+        {
+          "name": "zero",
+          "first": {
+            "health": {
+              "fatigue": 0,
+              "pain": 0,
+              "injuryRisk": 0,
+              "healthReadiness": 0
+            },
+            "identity": {
+              "matchId": "hs-y1-autumn-exhibition",
+              "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|09937f13",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|capability|school-development-8f8fbd5a|hs-year-1-age-16|roster-a0663705|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|rotationCandidate|high|medium|high|conservative|二壘手|9.333333333333334|10|7|highSchoolExhibition|0|0|regular|normal",
+              "stableVariationSeed": null,
+              "variation": 1,
+              "hash": 160661267,
+              "simulationSeed": 642890
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "76d543cd2131acd8d7657dc517d7a699591fe548c8ebaac845efba5977f7360b",
+            "PA": 4,
+            "defensiveInnings": 7
+          },
+          "followup": {
+            "health": {
+              "fatigue": 0,
+              "pain": 0,
+              "injuryRisk": 0,
+              "healthReadiness": 0
+            },
+            "identity": {
+              "matchId": "hs-y1-followup-evaluation-2",
+              "decisionId": "hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|946079cd",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|capability|school-development-8f8fbd5a|hs-year-1-age-16|roster-a0663705|high-school-year-one|post-autumn-evaluation|2|hs-y1-followup-evaluation-2|rotation|rotationCandidate|high|low|high|conservative|二壘手|9.333333333333334|10|3|highSchoolExhibition|0|0|regular|normal|3.073|start:4:7",
+              "stableVariationSeed": null,
+              "variation": -2,
+              "hash": 2489350605,
+              "simulationSeed": 647425096
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "b548e116a051819ff650dfc49cafa316fbc488a1a3cc286592d3846be61deb64",
+            "PA": 4,
+            "defensiveInnings": 7
+          }
+        },
+        {
+          "name": "fatigue",
+          "first": {
+            "health": {
+              "fatigue": 9,
+              "pain": 0,
+              "injuryRisk": 0,
+              "healthReadiness": -4
+            },
+            "identity": {
+              "matchId": "hs-y1-autumn-exhibition",
+              "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|09937f13",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|capability|school-development-8f8fbd5a|hs-year-1-age-16|roster-a0663705|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|rotationCandidate|high|medium|high|conservative|二壘手|9.333333333333334|10|7|highSchoolExhibition|0|0|regular|normal",
+              "stableVariationSeed": null,
+              "variation": 1,
+              "hash": 160661267,
+              "simulationSeed": 642890
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "76d543cd2131acd8d7657dc517d7a699591fe548c8ebaac845efba5977f7360b",
+            "PA": 4,
+            "defensiveInnings": 7
+          },
+          "followup": {
+            "health": {
+              "fatigue": 10,
+              "pain": 0,
+              "injuryRisk": 0,
+              "healthReadiness": -5
+            },
+            "identity": {
+              "matchId": "hs-y1-followup-evaluation-2",
+              "decisionId": "hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|946079cd",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|capability|school-development-8f8fbd5a|hs-year-1-age-16|roster-a0663705|high-school-year-one|post-autumn-evaluation|2|hs-y1-followup-evaluation-2|rotation|rotationCandidate|high|low|high|conservative|二壘手|9.333333333333334|10|3|highSchoolExhibition|0|0|regular|normal|3.073|start:4:7",
+              "stableVariationSeed": null,
+              "variation": -2,
+              "hash": 2489350605,
+              "simulationSeed": 647425096
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "b548e116a051819ff650dfc49cafa316fbc488a1a3cc286592d3846be61deb64",
+            "PA": 4,
+            "defensiveInnings": 7
+          }
+        },
+        {
+          "name": "burden",
+          "first": {
+            "health": {
+              "fatigue": 11,
+              "pain": 6,
+              "injuryRisk": 8,
+              "healthReadiness": -13
+            },
+            "identity": {
+              "matchId": "hs-y1-autumn-exhibition",
+              "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|09937f13",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|capability|school-development-8f8fbd5a|hs-year-1-age-16|roster-a0663705|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|rotationCandidate|high|medium|high|conservative|二壘手|9.333333333333334|10|7|highSchoolExhibition|0|0|regular|normal",
+              "stableVariationSeed": null,
+              "variation": 1,
+              "hash": 160661267,
+              "simulationSeed": 642890
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "76d543cd2131acd8d7657dc517d7a699591fe548c8ebaac845efba5977f7360b",
+            "PA": 4,
+            "defensiveInnings": 7
+          },
+          "followup": {
+            "health": {
+              "fatigue": 12,
+              "pain": 6,
+              "injuryRisk": 8,
+              "healthReadiness": -13
+            },
+            "identity": {
+              "matchId": "hs-y1-followup-evaluation-2",
+              "decisionId": "hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|946079cd",
+              "opportunitySeed": "playing-time-opportunity-v1|hs-y1-followup-evaluation-2|Health opportunity candidate|observe＋baseRunning|school-development-8f8fbd5a|capability|school-development-8f8fbd5a|hs-year-1-age-16|roster-a0663705|high-school-year-one|post-autumn-evaluation|2|hs-y1-followup-evaluation-2|rotation|rotationCandidate|high|low|high|conservative|二壘手|9.333333333333334|10|3|highSchoolExhibition|0|0|regular|normal|3.073|start:4:7",
+              "stableVariationSeed": null,
+              "variation": -2,
+              "hash": 2489350605,
+              "simulationSeed": 647425096
+            },
+            "plan": {
+              "appearanceType": "start",
+              "entryInning": 1,
+              "entryHalf": "上"
+            },
+            "recordHash": "b548e116a051819ff650dfc49cafa316fbc488a1a3cc286592d3846be61deb64",
+            "PA": 4,
+            "defensiveInnings": 7
+          }
+        }
+      ]
+    },
+    {
+      "kind": "Direct Start",
+      "plan": {
+        "appearanceType": "start",
+        "entryInning": 1,
+        "entryHalf": "上"
+      },
+      "identity": {
+        "matchId": "hs-y1-autumn-exhibition",
+        "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|b2f48611",
+        "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|capability|school-development-0b20c648|hs-year-1-age-16|roster-b300441a|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|benchCandidate|high|medium|high|developmental|二壘手|9.333333333333334|10|7|highSchoolExhibition|0|0|regular|normal",
+        "stableVariationSeed": null,
+        "variation": 8,
+        "hash": 3002369553,
+        "simulationSeed": 419031
+      },
+      "PA": 4,
+      "defensiveInnings": 7,
+      "recordHash": "a50e8ac71cdb097da71705997b275b1e1a23fb3e718b5f32c172cb04b7ef5e51"
+    },
+    {
+      "kind": "pitcher deferred",
+      "plan": {
+        "appearanceType": "noAppearance",
+        "entryInning": null,
+        "entryHalf": ""
+      },
+      "identity": {
+        "matchId": "hs-y1-autumn-exhibition",
+        "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|2c085e20",
+        "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|capability|school-development-0b20c648|hs-year-1-age-16|roster-b300441a|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|benchCandidate|high|medium|high|developmental|投手|9|10|7|highSchoolExhibition|0|0|regular|normal",
+        "stableVariationSeed": null,
+        "variation": 1,
+        "hash": 738745888,
+        "simulationSeed": 419031
+      },
+      "PA": 0,
+      "defensiveInnings": 0,
+      "recordHash": "d246491b2d51446432c327aee1fd98f371894cf44da6a5995bc3e4390705eb14"
+    },
+    {
+      "kind": "Direct Start pitcher deferred",
+      "plan": {
+        "appearanceType": "noAppearance",
+        "entryInning": null,
+        "entryHalf": ""
+      },
+      "identity": {
+        "matchId": "hs-y1-autumn-exhibition",
+        "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|2c085e20",
+        "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|capability|school-development-0b20c648|hs-year-1-age-16|roster-b300441a|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|benchCandidate|high|medium|high|developmental|投手|9|10|7|highSchoolExhibition|0|0|regular|normal",
+        "stableVariationSeed": null,
+        "variation": 1,
+        "hash": 738745888,
+        "simulationSeed": 419031
+      },
+      "PA": 0,
+      "defensiveInnings": 0,
+      "recordHash": "d246491b2d51446432c327aee1fd98f371894cf44da6a5995bc3e4390705eb14"
+    }
+  ]
+}

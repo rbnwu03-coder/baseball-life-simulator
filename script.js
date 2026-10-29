@@ -9584,6 +9584,85 @@ function createHighSchoolPlayingTimeOpportunity(options = {}) {
   });
 }
 
+// A legacy opportunity may be playable without carrying enough evidence to refresh.
+// Validate/replay only its own frozen inputs; never reconstruct history from Player.
+function getHighSchoolYearOneOpportunityHealthRefreshInput(existing) {
+  const object = value => value && typeof value === "object" && !Array.isArray(value);
+  const text = value => typeof value === "string" && value.trim().length > 0;
+  const finite = value => typeof value === "number" && Number.isFinite(value);
+  const readiness = existing?.readinessSnapshot;
+  const breakdown = existing?.debug?.scoreBreakdown;
+  if (!object(existing) || existing.version !== PlayingTimeGameExposure.OPPORTUNITY_VERSION
+    || ![existing.matchId, existing.decisionId, existing.playerId, existing.opportunitySeed].every(text)
+    || !object(existing.debug) || !object(breakdown)
+    || !object(readiness) || readiness.version !== PlayingTimeGameExposure.READINESS_VERSION
+    || readiness.playerId !== existing.playerId || ![readiness.position, readiness.requestedPosition].every(text)
+    || !["positionReadiness", "positionFit", "experienceReadiness"].every(key => finite(readiness[key]) && readiness[key] >= 0 && readiness[key] <= 10)
+    || !["positionLegal", "pitcherExposureDeferred", "positionFallbackApplied"].every(key => typeof readiness[key] === "boolean")
+    || !object(existing.gameContext)
+    || !["gameType", "expectedGameImportance", "importance", "leverage"].every(key => text(existing.gameContext[key]))
+    || !["inning", "scoreMargin"].every(key => finite(existing.gameContext[key]))
+    || !Object.hasOwn(existing, "previousActualExposure")
+    || !finite(existing.evaluationTrend)
+    || existing.debug.opportunityHash !== PlayingTimeGameExposure.stableHash(existing.opportunitySeed)) return null;
+  const previous = existing.previousActualExposure;
+  if (previous !== null && (!object(previous) || !text(previous.appearanceType)
+    || !["plateAppearances", "defensiveInnings"].every(key => finite(previous[key]) && previous[key] >= 0))) return null;
+  const input = {
+    matchId: existing.matchId, readinessSnapshot: readiness, actualRole: existing.actualRole,
+    projectedRole: existing.projectedRolePrior, playingTimeEnvironment: existing.playingTimeEnvironment,
+    competitionDepth: existing.competitionDepth, positionNeed: existing.positionNeed,
+    coachUsageStyle: existing.coachUsageStyle,
+    evaluationTrend: Object.hasOwn(breakdown, "evaluationTrend") ? existing.evaluationTrend : undefined,
+    previousActualExposure: previous, stableVariationSeed: existing.opportunitySeed,
+    directStartForced: existing.exposureSource === "direct-start-forced", gameContext: existing.gameContext
+  };
+  const same = (left, right) => {
+    if (left === right) return true;
+    if (!left || !right || typeof left !== "object" || typeof right !== "object"
+      || Array.isArray(left) !== Array.isArray(right)) return false;
+    const keys = Object.keys(left);
+    return keys.length === Object.keys(right).length && keys.every(key => Object.hasOwn(right, key) && same(left[key], right[key]));
+  };
+  // This pre-health replay must reproduce identity, variation, inputs and usage.
+  // Incomplete/inconsistent legacy evidence opts out; resolver errors still surface.
+  const replayed = PlayingTimeGameExposure.resolveStartingOpportunity(input);
+  return Object.keys(replayed).every(key => key === "opportunitySeed" || same(replayed[key], existing[key])) ? input : null;
+}
+
+// Health is the only live input at the Y1 roster-confirmation boundary.
+// Reuse the original resolver inputs and hash so availability cannot reroll identity.
+function refreshHighSchoolYearOneOpportunityHealth(existing) {
+  const input = getHighSchoolYearOneOpportunityHealthRefreshInput(existing);
+  if (!input) return existing;
+  const refreshed = PlayingTimeGameExposure.resolveStartingOpportunity({ ...input, health: player.body });
+  return Object.freeze({ ...existing, ...cloneSchoolInvitationValue(refreshed),
+    decisionId: existing.decisionId, opportunitySeed: existing.opportunitySeed });
+}
+
+function syncHighSchoolYearOneLockedOpportunityText(match) {
+  const locked = match?.gameExposureState?.opportunitySnapshot;
+  if (match?.id === "hs-y1-followup-evaluation-2" && locked?.matchId === match.id && locked.plannedUsage) {
+    player.highSchoolRoleContext.opportunity = getHighSchoolPlayingTimeAssignmentText(locked);
+  }
+}
+
+function confirmHighSchoolYearOneFollowupOpportunity() {
+  const existing = player.highSchoolNextOpportunity;
+  if (!existing) return null;
+  // Preserve the original entry guard, including its error, inside the transition.
+  if (existing.matchId !== "hs-y1-followup-evaluation-2" || Number(existing.opportunityIndex) !== 2) return prepareHighSchoolFollowupEvaluationMatch();
+  // The existing match lifecycle is the saved lock; never refresh a prepared match.
+  if (player.highSchoolMatch?.id === existing.matchId) {
+    syncHighSchoolYearOneLockedOpportunityText(player.highSchoolMatch);
+    return player.highSchoolMatch;
+  }
+  player.highSchoolNextOpportunity = cloneSchoolInvitationValue(refreshHighSchoolYearOneOpportunityHealth(existing));
+  const match = prepareHighSchoolFollowupEvaluationMatch();
+  syncHighSchoolYearOneLockedOpportunityText(match);
+  return match;
+}
+
 function isCanonicalHighSchoolYearThreeRoute() {
   return Number(player.highSchoolYearTransitionState?.currentHighSchoolYear) === 3
     && Boolean(player.schoolInvitationState?.selectedSchoolYearRosterIdentity?.identity);
@@ -9901,7 +9980,7 @@ function prepareHighSchoolYearOneMatch(options = {}) {
     : createHighSchoolMatchSimulationSeed();
   const directStartForced = highSchoolYear === 1 && opportunityIndex === 1
     && Array.isArray(player.flags) && player.flags.includes("direct_start_history");
-  const opportunityDecision = suppliedOpportunity || createHighSchoolPlayingTimeOpportunity({
+  const provisionalOpportunity = suppliedOpportunity || createHighSchoolPlayingTimeOpportunity({
     matchId: targetMatchId,
     actualRole: code,
     requestedPosition: developmentPositionOverride || position,
@@ -9910,6 +9989,9 @@ function prepareHighSchoolYearOneMatch(options = {}) {
     opportunityPhase: options.opportunityPhase || "autumn-exhibition",
     highSchoolYear
   });
+  // Explicit choice transition only; display/legacy prepare calls do not refresh.
+  const opportunityDecision = options.confirmHealthReadiness === true && highSchoolYear === 1 && opportunityIndex === 1
+    ? refreshHighSchoolYearOneOpportunityHealth(provisionalOpportunity) : provisionalOpportunity;
   if ((suppliedOpportunity || opportunityIndex > 1) && (!opportunityDecision || opportunityDecision.matchId !== targetMatchId)) {
     throw new Error(`高中第 ${highSchoolYear} 年第 ${opportunityIndex} 次實戰必須直接消費相同 match identity 的既有 Opportunity。`);
   }
@@ -14472,7 +14554,7 @@ function processHighSchoolYearOneChoice(eventId, choice) {
     return `${choice.memory} 綜合守位、能力、信任、健康與準備後，你的暫定角色是「${role.label}」；正式交流賽任務仍保留。`;
   }
   if (eventId === "high_school_long_bench") {
-    const match = prepareHighSchoolYearOneMatch();
+    const match = prepareHighSchoolYearOneMatch({ confirmHealthReadiness: true });
     return `${choice.memory} 名單確認你將在${match.opponent}的同一場交流賽執行：${match.assignment}。`;
   }
   if (isHighSchoolYearOneMatchEventId(eventId)) return resolveHighSchoolYearOneMatch(choice.matchDecision);
@@ -16104,7 +16186,20 @@ function advanceAfterAction(decisionContext = null, completedEventId = null) {
     return;
   }
   if (player.chapter === "青棒") {
-    player.highSchoolStep += 1;
+    if (completedEventId === "high_school_call_home") {
+      // Match/schedule owners may reject. Roll back this transition and rethrow;
+      // do not leave a new step/opportunity without its prepared match.
+      const beforeConfirmation = cloneSchoolInvitationValue(player);
+      try {
+        player.highSchoolStep += 1;
+        confirmHighSchoolYearOneFollowupOpportunity();
+      } catch (error) {
+        player = beforeConfirmation;
+        isTransitioning = false;
+        setChoiceTransitionState(false);
+        throw error;
+      }
+    } else player.highSchoolStep += 1;
     if (completedEventId === "high_school_call_home" && !player.highSchoolNextOpportunity) {
       // 沒有 Opportunity side-state 的舊開發 fixture 不偽造第二場，直接進入既有收尾。
       player.highSchoolStep = 9;
@@ -16452,6 +16547,9 @@ function evaluateHighSchoolYear() {
     player.highSchoolDetail = "你完成第一年，卻尚未建立明確市場標籤。第二年需要在專精、全面性或身體上限中選擇真正的投資方向。";
   }
   const formation = player.highSchoolCoachEvaluation || {};
+  // Older confirmed Saves may carry a stale preview string. This year-end writer
+  // reads the already-locked match; display getters never repair Player state.
+  syncHighSchoolYearOneLockedOpportunityText(player.highSchoolMatch);
   const role = player.highSchoolRoleContext || {};
   const match = player.highSchoolMatch || {};
   const azhe = player.highSchoolAzheEcho || {};

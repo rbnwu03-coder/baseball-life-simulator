@@ -1,0 +1,44 @@
+{
+  "base": "33abdcb151d0a6becef640aab778a87ce3cbec68",
+  "branch": "candidate/y1-health-opportunity-2026-10-29",
+  "node": "v24.19.0",
+  "candidatePatchSha256": "47f37fd278176506aa29945189d7a0710f5f6571d196af6e97adf9c26666361d",
+  "candidateScriptSha256": "19fbf3432b98e1a8953ec1ef2df47b39ed2b473515ce2a7d1fe3d358e6bc1a3b",
+  "priorCandidateScriptSha256": "b43d4a229fad7e270e0435d6cf54f272d69fef5e100f95dfc568ee1d7ac52567",
+  "productionDiff": "101\t3\tscript.js",
+  "comparedOriginalTrackedFiles": 2331,
+  "byteDifferences": [
+    "script.js"
+  ],
+  "manifestParity": true,
+  "baselineRegressions": {
+    "PASS": 7,
+    "FAIL": 0
+  },
+  "candidateRegressions": {
+    "PASS": 7,
+    "FAIL": 0
+  },
+  "originalFormalCaseGroups": {
+    "PASS": 15,
+    "FAIL": 0
+  },
+  "newSemanticCaseGroups": {
+    "PASS": 16,
+    "FAIL": 0
+  },
+  "customProof": {
+    "baseline": {
+      "customVerifyChecks": 45,
+      "nodeAssertions": 0
+    },
+    "candidate": {
+      "customVerifyChecks": 45,
+      "nodeAssertions": 0
+    }
+  },
+  "oldEvidencePreserved": true,
+  "sourceGuardsAndOriginalTestsUnchanged": true,
+  "scope": "Eligibility/fallback, Y1 N+1 confirmation rollback, locked opportunity text synchronization. No formula, health numbers, training, full-match success rate, DTO, Save, or state-validator changes.",
+  "healthCalibration": false
+}

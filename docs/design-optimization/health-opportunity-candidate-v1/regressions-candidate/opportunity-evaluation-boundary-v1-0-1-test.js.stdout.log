@@ -1,0 +1,28 @@
+✓ 1. Readiness 使用獨立 versioned contract
+✓ 2. Snapshot schema 含 source、components、confidence、reasons 與 provenance
+✓ 3. 現階段 Producer 明確標記 system-derived-provisional
+✓ 4. Snapshot compact frozen copy 不複製 raw skill truth 或 overall
+✓ 5. 同一 provisional state 產生 deterministic Snapshot
+✓ 6. Match identity 不造成 readiness noise
+✓ 7. Producer 保有 Capability → Snapshot sensitivity
+✓ 8. Snapshot 是 player + position specific
+✓ 9. Producer 保留左投國小後守位合法性 guard
+✓ 10. Resolver 拒絕缺少合法 Readiness Snapshot 的輸入
+✓ 11. Same Snapshot + Different Raw Truth → Same Opportunity
+✓ 12. 同 Snapshot 與同 context 保持同 Opportunity
+✓ 13. Snapshot → Opportunity 仍保有 readiness sensitivity
+✓ 14. High readiness 不等於推薦或保證先發
+✓ 15. Resolver scope 不讀 raw player skills／Simulation Capability／Position helper
+✓ 16. Producer 與 Resolver 都不使用 Match RNG 或 Math.random
+✓ 17. Direct Start bypass 仍強制 start 並保留 source
+✓ 18. Save／Reload 延續原 Opportunity 與 Readiness compact copy，不 reroll
+✓ 19. 1600 組 old direct path vs new snapshot path decision mismatch = 0
+✓ 20. start／appearance／innings／PA 舊新分布完全一致
+✓ 21. Actual Role 分布舊新完全一致
+✓ 22. School Environment 分布舊新完全一致
+✓ 23. Competition 分布舊新完全一致
+✓ 24. Environment 方向仍為 low < medium < mediumHigh < high
+✓ 25. Role 平均 exposure 仍為 Starter > Rotation > Bench
+
+Opportunity Evaluation Boundary Fix v1.0.1：25/25 通過
+OPPORTUNITY_EVALUATION_BOUNDARY_PARITY_JSON={"samples":1600,"decisionMismatch":0,"before":{"overall":{"samples":1600,"startRate":0.458125,"appearanceRate":0.740625,"averageDefensiveInnings":2.8025,"averagePlateAppearances":1.57125},"role":{"starter":{"samples":534,"startRate":0.7191011235955056,"appearanceRate":0.9176029962546817,"averageDefensiveInnings":4.132958801498128,"averagePlateAppearances":2.290262172284644},"rotation":{"samples":533,"startRate":0.43902439024390244,"appearanceRate":0.7523452157598499,"averageDefensiveInnings":2.7223264540337713,"averagePlateAppearances":1.553470919324578},"bench":{"samples":533,"startRate":0.21575984990619138,"appearanceRate":0.551594746716698,"averageDefensiveInnings":1.549718574108818,"averagePlateAppearances":0.8686679174484052}},"environment":{"low":{"samples":400,"startRate":0.1475,"appearanceRate":0.635,"averageDefensiveInnings":1.33,"averagePlateAppearances":0.8225},"medium":{"samples":400,"startRate":0.3675,"appearanceRate":0.6175,"averageDefensiveInnings":2.235,"averagePlateAppearances":1.2725},"mediumHigh":{"samples":400,"startRate":0.58,"appearanceRate":0.745,"averageDefensiveInnings":3.3125,"averagePlateAppearances":1.815},"high":{"samples":400,"startRate":0.7375,"appearanceRate":0.965,"averageDefensiveInnings":4.3325,"averagePlateAppearances":2.375}},"competition":{"veryHigh":{"samples":400,"startRate":0.3775,"appearanceRate":0.6325,"averageDefensiveInnings":2.2875,"averagePlateAppearances":1.27},"high":{"samples":400,"startRate":0.4225,"appearanceRate":0.7275,"averageDefensiveInnings":2.6575,"averagePlateAppearances":1.4825},"medium":{"samples":400,"startRate":0.4725,"appearanceRate":0.79,"averageDefensiveInnings":2.9525,"averagePlateAppearances":1.6675},"low":{"samples":400,"startRate":0.56,"appearanceRate":0.8125,"averageDefensiveInnings":3.3125,"averagePlateAppearances":1.865}}},"after":{"overall":{"samples":1600,"startRate":0.458125,"appearanceRate":0.740625,"averageDefensiveInnings":2.8025,"averagePlateAppearances":1.57125},"role":{"starter":{"samples":534,"startRate":0.7191011235955056,"appearanceRate":0.9176029962546817,"averageDefensiveInnings":4.132958801498128,"averagePlateAppearances":2.290262172284644},"rotation":{"samples":533,"startRate":0.43902439024390244,"appearanceRate":0.7523452157598499,"averageDefensiveInnings":2.7223264540337713,"averagePlateAppearances":1.553470919324578},"bench":{"samples":533,"startRate":0.21575984990619138,"appearanceRate":0.551594746716698,"averageDefensiveInnings":1.549718574108818,"averagePlateAppearances":0.8686679174484052}},"environment":{"low":{"samples":400,"startRate":0.1475,"appearanceRate":0.635,"averageDefensiveInnings":1.33,"averagePlateAppearances":0.8225},"medium":{"samples":400,"startRate":0.3675,"appearanceRate":0.6175,"averageDefensiveInnings":2.235,"averagePlateAppearances":1.2725},"mediumHigh":{"samples":400,"startRate":0.58,"appearanceRate":0.745,"averageDefensiveInnings":3.3125,"averagePlateAppearances":1.815},"high":{"samples":400,"startRate":0.7375,"appearanceRate":0.965,"averageDefensiveInnings":4.3325,"averagePlateAppearances":2.375}},"competition":{"veryHigh":{"samples":400,"startRate":0.3775,"appearanceRate":0.6325,"averageDefensiveInnings":2.2875,"averagePlateAppearances":1.27},"high":{"samples":400,"startRate":0.4225,"appearanceRate":0.7275,"averageDefensiveInnings":2.6575,"averagePlateAppearances":1.4825},"medium":{"samples":400,"startRate":0.4725,"appearanceRate":0.79,"averageDefensiveInnings":2.9525,"averagePlateAppearances":1.6675},"low":{"samples":400,"startRate":0.56,"appearanceRate":0.8125,"averageDefensiveInnings":3.3125,"averagePlateAppearances":1.865}}}}

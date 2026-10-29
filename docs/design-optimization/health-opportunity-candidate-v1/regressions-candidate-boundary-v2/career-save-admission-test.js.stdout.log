@@ -1,0 +1,47 @@
+✓ 1. Admission Boundary 只公開單一正式 API
+✓ 2. 合法 pre-adult save 以 bypassed + admitted 保持相容
+✓ 3. 未知 chapter 明確 rejected，不會被當成 pre-adult bypass
+✓ 4. 五種青棒生涯出口合法狀態全部 admitted
+✓ 5. 四種成年來源的代表 Transition 狀態均 admitted
+✓ 6. Transition admission 會消費 4.6 Runtime Resolver
+✓ 7. 四種 route identity 的 Transition Result 均 admitted
+✓ 8. 四種成年來源的代表 Development 狀態均 admitted
+✓ 9. Development admission 會消費 4.8 Runtime Resolver
+✓ 10. 四種 route identity 的 22 歲結果均 admitted
+✓ 11. 合法垂直切片完成狀態以 completed snapshot admitted
+✓ 12. forcedEventId 不會讓合法底層成年狀態被拒
+✓ 13. Invalid Transition 狀態全部 rejected
+✓ 14. Invalid Transition Result 全部 rejected
+✓ 15. Invalid Development 狀態全部 rejected
+✓ 16. Invalid 22 歲結果狀態全部 rejected
+✓ 17. completed=false 的終止狀態 rejected
+✓ 18. Admission evaluation 對 candidate 為 zero mutation
+✓ 19. Admission evaluation 對 Career Contract 為 zero mutation
+✓ 20. 相同 candidate 的 Admission result deterministic
+✓ 21. admitted／bypassed／rejected 結果全部 deep frozen
+✓ 22. Admission source 不接觸 Storage、UI、live Player 或 Save flow
+✓ 23. Admission source 未保存成年 chapter／careerExit／事件 registry
+✓ 24. 合法成年 Load 在 admission 後才替換 live Player
+✓ 25. 合法 Development Load 恢復既有 development_mentor event
+✓ 26. 合法 Load 隱藏創角區、顯示 success 且不重寫 Storage
+✓ 27. Rejected Load 維持 live Player identity 與完整內容
+✓ 28. Rejected Load 不 Render、不切換主 UI、不清空故事與選項
+✓ 29. Rejected Load 保留原始 localStorage 且不寫入或刪除
+✓ 30. Rejected Load 只顯示 error notice
+✓ 31. Malformed JSON 沿用 catch 且 live Player、UI、Storage 不變
+✓ 32. Admission module unavailable 時 fail closed
+✓ 33. 舊存檔先 normalize 到 v15 再由 pre-adult Admission 放行
+✓ 33a. 合法 v13 二十二歲結果以既有 marketOutcome 遷移到 v15 code
+✓ 33b. v13 Load migration 不自動覆寫原始 Storage
+✓ 33c. 路線與舊中文結果矛盾的 v13 存檔被拒且 live Player zero mutation
+✓ 33d. 無法遷移的 v13 存檔不修改 Storage
+✓ 34. forced-event Save/Load 保留既有 precedence
+✓ 35. completed Save 仍優先於殘留 forced event
+✓ 36. 合法 Transition Save 恢復 Resolver 指定事件
+✓ 37. Transition Result、22 歲 Result 與 Terminal 都不錯套 Runtime Resolver
+✓ 38. Browser dependency 依 Contract → Runtime Resolvers → Admission → Save 載入
+✓ 39. SAVE_VERSION 升級為 15，SAVE_KEY 與 saveGame snapshot shape 保持不變
+✓ 40. Player Schema 只新增 age22OutcomeCode，未新增 currentIdentity 或 Admission persistence 欄位
+✓ 41. loadGame 明確維持 candidate-first、admission-second、commit-last
+
+Architecture Sprint 4.10 Adult Career Save Admission Boundary：45/45 通過

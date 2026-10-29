@@ -1,0 +1,20 @@
+PASS 1 real Y1 lifecycle creates and launches followup opportunity
+PASS 2 real offer remains offered until acceptance
+PASS 3 accepted state survives normalization then schedules
+PASS 4 scheduled save/reload retains entry and adapter
+PASS 5 real incoming invitation top offense
+PASS 6 active match reload preserves links and resumes same object
+PASS 7 reload does not regenerate opportunity or entry
+PASS 8 real completion links schedule to GameRecord and history
+PASS 9 completed reload cannot relaunch
+PASS 10 real outgoing invitation bottom offense
+PASS 11 mandatory career stage rejects optional same slot
+PASS 12 official canonical stage schedules and retains priority
+PASS 13 legacy direct match still works with empty schedule
+PASS 14 old year entry is retained and cannot launch in new year
+PASS 15 scheduled official full game produces canonical CompetitionEvidence
+PASS 16 cancelled entry cannot launch
+PASS 17 deterministic context and schedule with no simulation cursor consumption
+PASS 18 corrupted save cannot detach or alter active schedule context
+PASS 19 wrong competition references rejected before opportunity mutation
+19/19 PASS

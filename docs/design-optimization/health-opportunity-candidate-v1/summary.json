@@ -1,0 +1,206 @@
+{
+  "base": "33abdcb151d0a6becef640aab778a87ce3cbec68",
+  "branch": "candidate/y1-health-opportunity-2026-10-29",
+  "branchHead": "33abdcb151d0a6becef640aab778a87ce3cbec68",
+  "candidateState": "Uncommitted isolated patch; review by exact patch/script hashes. No checkpoint commit or push.",
+  "candidatePatchSha256": "45692159a5d5101d7ee522c442b240c3952dea42b3d30c7e2b1541f199116f5f",
+  "baselineScriptSha256": "113de5da461cb9f831cbabfb06ac7f8b8ebc9a52209aeca98337da7db1c00807",
+  "candidateScriptSha256": "b43d4a229fad7e270e0435d6cf54f272d69fef5e100f95dfc568ee1d7ac52567",
+  "sharedManifestPatchSha256": "5082cda31a9a428f776abcd9bf35b2bba311505002f45978a991e45e45a4a322",
+  "comparedTrackedFiles": 2331,
+  "baselineCandidateByteDifferences": [
+    "script.js"
+  ],
+  "baselineDiff": [
+    "tests/baseball-match-foundation-2-2-test.js",
+    "tests/goal-balance-test.js",
+    "tests/high-school-integration-1-2-2-2-test.js",
+    "tests/high-school-integration-1-2-test.js"
+  ],
+  "candidateDiff": [
+    "script.js",
+    "tests/baseball-match-foundation-2-2-test.js",
+    "tests/goal-balance-test.js",
+    "tests/high-school-integration-1-2-2-2-test.js",
+    "tests/high-school-integration-1-2-test.js"
+  ],
+  "manifestParity": true,
+  "unchangedRegressionSourceHashes": true,
+  "baselineRegressions": [
+    {
+      "file": "playing-time-game-exposure-foundation-v1-test.js",
+      "status": "PASS"
+    },
+    {
+      "file": "opportunity-evaluation-boundary-v1-0-1-test.js",
+      "status": "PASS"
+    },
+    {
+      "file": "high-school-year-one-opportunity-two-integration-test.js",
+      "status": "PASS"
+    },
+    {
+      "file": "high-school-schedule-opportunity-production-integration-test.js",
+      "status": "PASS"
+    },
+    {
+      "file": "high-school-career-evidence-test.js",
+      "status": "PASS"
+    },
+    {
+      "file": "high-school-career-exit-integration-test.js",
+      "status": "PASS"
+    },
+    {
+      "file": "career-save-admission-test.js",
+      "status": "PASS"
+    }
+  ],
+  "candidateRegressions": [
+    {
+      "file": "playing-time-game-exposure-foundation-v1-test.js",
+      "status": "PASS"
+    },
+    {
+      "file": "opportunity-evaluation-boundary-v1-0-1-test.js",
+      "status": "PASS"
+    },
+    {
+      "file": "high-school-year-one-opportunity-two-integration-test.js",
+      "status": "PASS"
+    },
+    {
+      "file": "high-school-schedule-opportunity-production-integration-test.js",
+      "status": "PASS"
+    },
+    {
+      "file": "high-school-career-evidence-test.js",
+      "status": "PASS"
+    },
+    {
+      "file": "high-school-career-exit-integration-test.js",
+      "status": "PASS"
+    },
+    {
+      "file": "career-save-admission-test.js",
+      "status": "PASS"
+    }
+  ],
+  "customProof": {
+    "baseline": {
+      "footer": "45/45 通過",
+      "printedCustomChecks": 45,
+      "nodeAssertions": 0,
+      "qualification": "Original custom verify checker, unchanged source; observed complete numbered output, not a Node assert count."
+    },
+    "candidate-final": {
+      "footer": "45/45 通過",
+      "printedCustomChecks": 45,
+      "nodeAssertions": 0,
+      "qualification": "Original custom verify checker, unchanged source; observed complete numbered output, not a Node assert count."
+    }
+  },
+  "formalCaseGroups": {
+    "pass": 15,
+    "fail": 0
+  },
+  "seeds": [
+    77881,
+    77001,
+    99101
+  ],
+  "zeroBodyRecordPairs": 6,
+  "lowerReadiness": [
+    {
+      "seed": 77881,
+      "role": "bench",
+      "first": [
+        {
+          "score": 42,
+          "usage": "defensiveSubstitution",
+          "PA": 1
+        },
+        {
+          "score": 10,
+          "usage": "noAppearance",
+          "PA": 0
+        }
+      ],
+      "followup": [
+        {
+          "score": 40,
+          "usage": "defensiveSubstitution",
+          "PA": 1,
+          "defensiveInnings": 1
+        },
+        {
+          "score": 8,
+          "usage": "noAppearance",
+          "PA": 0,
+          "defensiveInnings": 0
+        }
+      ]
+    },
+    {
+      "seed": 77001,
+      "role": "bench",
+      "first": [
+        {
+          "score": 65,
+          "usage": "start",
+          "PA": 4
+        },
+        {
+          "score": 33,
+          "usage": "noAppearance",
+          "PA": 0
+        }
+      ],
+      "followup": [
+        {
+          "score": 59,
+          "usage": "start",
+          "PA": 3,
+          "defensiveInnings": 7
+        },
+        {
+          "score": 27,
+          "usage": "noAppearance",
+          "PA": 0,
+          "defensiveInnings": 0
+        }
+      ]
+    },
+    {
+      "seed": 99101,
+      "role": "bench",
+      "first": [
+        {
+          "score": 51,
+          "usage": "defensiveSubstitution",
+          "PA": 1
+        },
+        {
+          "score": 19,
+          "usage": "noAppearance",
+          "PA": 0
+        }
+      ],
+      "followup": [
+        {
+          "score": 51,
+          "usage": "lateGameAppearance",
+          "PA": 2,
+          "defensiveInnings": 1
+        },
+        {
+          "score": 19,
+          "usage": "noAppearance",
+          "PA": 0,
+          "defensiveInnings": 0
+        }
+      ]
+    }
+  ],
+  "healthCalibration": false
+}

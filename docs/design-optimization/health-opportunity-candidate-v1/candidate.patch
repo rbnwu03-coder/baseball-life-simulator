@@ -1,0 +1,81 @@
+diff --git a/script.js b/script.js
+index 5a118a0..4d24f96 100644
+--- a/script.js
++++ b/script.js
+@@ -9584,6 +9584,39 @@ function createHighSchoolPlayingTimeOpportunity(options = {}) {
+   });
+ }
+ 
++// Health is the only live input at the Y1 roster-confirmation boundary.
++// Reuse the original resolver inputs and hash so availability cannot reroll identity.
++function refreshHighSchoolYearOneOpportunityHealth(existing) {
++  if (!existing) return existing;
++  const refreshed = PlayingTimeGameExposure.resolveStartingOpportunity({
++    matchId: existing.matchId,
++    readinessSnapshot: existing.readinessSnapshot,
++    actualRole: existing.actualRole,
++    projectedRole: existing.projectedRolePrior,
++    playingTimeEnvironment: existing.playingTimeEnvironment,
++    competitionDepth: existing.competitionDepth,
++    positionNeed: existing.positionNeed,
++    coachUsageStyle: existing.coachUsageStyle,
++    evaluationTrend: Object.hasOwn(existing.debug.scoreBreakdown, "evaluationTrend") ? existing.evaluationTrend : undefined,
++    previousActualExposure: existing.previousActualExposure,
++    health: player.body,
++    stableVariationSeed: existing.opportunitySeed,
++    directStartForced: existing.exposureSource === "direct-start-forced",
++    gameContext: existing.gameContext
++  });
++  return Object.freeze({ ...existing, ...cloneSchoolInvitationValue(refreshed),
++    decisionId: existing.decisionId, opportunitySeed: existing.opportunitySeed });
++}
++
++function confirmHighSchoolYearOneFollowupOpportunity() {
++  const existing = player.highSchoolNextOpportunity;
++  if (!existing || existing.matchId !== "hs-y1-followup-evaluation-2" || Number(existing.opportunityIndex) !== 2) return null;
++  // The existing match lifecycle is the saved lock; never refresh a prepared match.
++  if (player.highSchoolMatch?.id === existing.matchId) return player.highSchoolMatch;
++  player.highSchoolNextOpportunity = cloneSchoolInvitationValue(refreshHighSchoolYearOneOpportunityHealth(existing));
++  return prepareHighSchoolFollowupEvaluationMatch();
++}
++
+ function isCanonicalHighSchoolYearThreeRoute() {
+   return Number(player.highSchoolYearTransitionState?.currentHighSchoolYear) === 3
+     && Boolean(player.schoolInvitationState?.selectedSchoolYearRosterIdentity?.identity);
+@@ -9901,7 +9934,7 @@ function prepareHighSchoolYearOneMatch(options = {}) {
+     : createHighSchoolMatchSimulationSeed();
+   const directStartForced = highSchoolYear === 1 && opportunityIndex === 1
+     && Array.isArray(player.flags) && player.flags.includes("direct_start_history");
+-  const opportunityDecision = suppliedOpportunity || createHighSchoolPlayingTimeOpportunity({
++  const provisionalOpportunity = suppliedOpportunity || createHighSchoolPlayingTimeOpportunity({
+     matchId: targetMatchId,
+     actualRole: code,
+     requestedPosition: developmentPositionOverride || position,
+@@ -9910,6 +9943,9 @@ function prepareHighSchoolYearOneMatch(options = {}) {
+     opportunityPhase: options.opportunityPhase || "autumn-exhibition",
+     highSchoolYear
+   });
++  // Explicit choice transition only; display/legacy prepare calls do not refresh.
++  const opportunityDecision = options.confirmHealthReadiness === true && highSchoolYear === 1 && opportunityIndex === 1
++    ? refreshHighSchoolYearOneOpportunityHealth(provisionalOpportunity) : provisionalOpportunity;
+   if ((suppliedOpportunity || opportunityIndex > 1) && (!opportunityDecision || opportunityDecision.matchId !== targetMatchId)) {
+     throw new Error(`高中第 ${highSchoolYear} 年第 ${opportunityIndex} 次實戰必須直接消費相同 match identity 的既有 Opportunity。`);
+   }
+@@ -14472,7 +14508,7 @@ function processHighSchoolYearOneChoice(eventId, choice) {
+     return `${choice.memory} 綜合守位、能力、信任、健康與準備後，你的暫定角色是「${role.label}」；正式交流賽任務仍保留。`;
+   }
+   if (eventId === "high_school_long_bench") {
+-    const match = prepareHighSchoolYearOneMatch();
++    const match = prepareHighSchoolYearOneMatch({ confirmHealthReadiness: true });
+     return `${choice.memory} 名單確認你將在${match.opponent}的同一場交流賽執行：${match.assignment}。`;
+   }
+   if (isHighSchoolYearOneMatchEventId(eventId)) return resolveHighSchoolYearOneMatch(choice.matchDecision);
+@@ -16105,6 +16141,8 @@ function advanceAfterAction(decisionContext = null, completedEventId = null) {
+   }
+   if (player.chapter === "青棒") {
+     player.highSchoolStep += 1;
++    // The call-home choice is complete. Lock N+1 before rendering its match event.
++    if (completedEventId === "high_school_call_home") confirmHighSchoolYearOneFollowupOpportunity();
+     if (completedEventId === "high_school_call_home" && !player.highSchoolNextOpportunity) {
+       // 沒有 Opportunity side-state 的舊開發 fixture 不偽造第二場，直接進入既有收尾。
+       player.highSchoolStep = 9;

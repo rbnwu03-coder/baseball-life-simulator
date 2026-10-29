@@ -1,0 +1,98 @@
+{
+  "base": "33abdcb151d0a6becef640aab778a87ce3cbec68",
+  "node": "v24.19.0",
+  "spec": {
+    "seeds": [
+      77881,
+      77001,
+      99101
+    ],
+    "normalBodies": {
+      "zero": {
+        "fatigue": 0,
+        "pain": 0,
+        "injuryRisk": 0
+      },
+      "fatigue": {
+        "fatigue": 10,
+        "pain": 0,
+        "injuryRisk": 0
+      },
+      "burden": {
+        "fatigue": 12,
+        "pain": 6,
+        "injuryRisk": 8
+      }
+    },
+    "regressions": [
+      "playing-time-game-exposure-foundation-v1-test.js",
+      "opportunity-evaluation-boundary-v1-0-1-test.js",
+      "high-school-year-one-opportunity-two-integration-test.js",
+      "high-school-schedule-opportunity-production-integration-test.js",
+      "high-school-career-evidence-test.js",
+      "high-school-career-exit-integration-test.js",
+      "career-save-admission-test.js"
+    ],
+    "scope": "Fixed before execution. No seed search, simplified match engine or calibration. Body may be set for research; outcomes and exposure use original owners."
+  },
+  "entry": "Supported canonical high-school entry fixture; original choose/transition/prepare/playback/settlement and index.html modules. Not a childhood-to-entry run.",
+  "rng": "External deterministic test RNG state restored explicitly across fresh VM load; not a new production Save field.",
+  "rows": [
+    {
+      "name": "zero baseline parity 77881",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'high_school_showcase'\n- 'high_school_intro'\n               ^\n\n    at choose (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:30:41)\n    at setup (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:31:240)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:51:51\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:51:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)"
+    },
+    {
+      "name": "health-only paired first and followup 77881",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'high_school_showcase'\n- 'high_school_intro'\n               ^\n\n    at choose (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:30:41)\n    at setup (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:31:240)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:54:14\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:53:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)"
+    },
+    {
+      "name": "zero baseline parity 77001",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'high_school_showcase'\n- 'high_school_intro'\n               ^\n\n    at choose (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:30:41)\n    at setup (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:31:240)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:51:51\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:51:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)"
+    },
+    {
+      "name": "health-only paired first and followup 77001",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'high_school_showcase'\n- 'high_school_intro'\n               ^\n\n    at choose (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:30:41)\n    at setup (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:31:240)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:54:14\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:53:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)"
+    },
+    {
+      "name": "zero baseline parity 99101",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'high_school_showcase'\n- 'high_school_intro'\n               ^\n\n    at choose (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:30:41)\n    at setup (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:31:240)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:51:51\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:51:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)"
+    },
+    {
+      "name": "health-only paired first and followup 99101",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'high_school_showcase'\n- 'high_school_intro'\n               ^\n\n    at choose (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:30:41)\n    at setup (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:31:240)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:54:14\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:53:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)"
+    },
+    {
+      "name": "first recovery and confirmation Save/Load",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'high_school_showcase'\n- 'high_school_intro'\n               ^\n\n    at choose (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:30:41)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:65:69\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:64:1)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)"
+    },
+    {
+      "name": "N+1 preview/read, changed body before confirmation, Save/Load and dedup",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'high_school_showcase'\n- 'high_school_intro'\n               ^\n\n    at choose (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:30:41)\n    at setup (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:31:240)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:68:10\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:67:1)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)"
+    },
+    {
+      "name": "Direct Start separate baseline comparison",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'high_school_showcase'\n- 'high_school_intro'\n               ^\n\n    at choose (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:30:41)\n    at setup (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:31:240)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:74:72\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:73:138)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)"
+    },
+    {
+      "name": "pitcher deferred separate baseline comparison",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'high_school_showcase'\n- 'high_school_intro'\n               ^\n\n    at choose (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:30:41)\n    at setup (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:31:240)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:74:72\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:73:138)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)"
+    },
+    {
+      "name": "Direct Start pitcher deferred separate baseline comparison",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'high_school_showcase'\n- 'high_school_intro'\n               ^\n\n    at choose (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:30:41)\n    at setup (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:31:240)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:74:72\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:73:138)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)"
+    }
+  ],
+  "observations": []
+}

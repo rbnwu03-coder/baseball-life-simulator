@@ -1,0 +1,185 @@
+{
+  "base": "33abdcb151d0a6becef640aab778a87ce3cbec68",
+  "seed": 77881,
+  "node": "v24.19.0",
+  "fixture": "One legal original N+1 Save copied per case; formal load/telephone/confirm/schedule/engine owners. No manually filled results.",
+  "rows": [
+    {
+      "name": "legacy omission debug",
+      "status": "PASS",
+      "detail": {
+        "loadedBoth": true,
+        "completedBoth": true,
+        "previewExact": true,
+        "identityVariationAndSimulationSeedPreserved": true,
+        "recordHash": "ce49127fbf46cbb073870a361414e018bf3fb22a432d41233f2984cbfb6f08ea",
+        "PA": 1,
+        "saveLoadAndRepeatConfirm": true
+      }
+    },
+    {
+      "name": "legacy omission scoreBreakdown",
+      "status": "PASS",
+      "detail": {
+        "loadedBoth": true,
+        "completedBoth": true,
+        "previewExact": true,
+        "identityVariationAndSimulationSeedPreserved": true,
+        "recordHash": "ce49127fbf46cbb073870a361414e018bf3fb22a432d41233f2984cbfb6f08ea",
+        "PA": 1,
+        "saveLoadAndRepeatConfirm": true
+      }
+    },
+    {
+      "name": "legacy omission opportunitySeed",
+      "status": "PASS",
+      "detail": {
+        "loadedBoth": true,
+        "completedBoth": true,
+        "previewExact": true,
+        "identityVariationAndSimulationSeedPreserved": true,
+        "recordHash": "ce49127fbf46cbb073870a361414e018bf3fb22a432d41233f2984cbfb6f08ea",
+        "PA": 1,
+        "saveLoadAndRepeatConfirm": true
+      }
+    },
+    {
+      "name": "legacy omission readinessSnapshot",
+      "status": "PASS",
+      "detail": {
+        "loadedBoth": true,
+        "completedBoth": true,
+        "previewExact": true,
+        "identityVariationAndSimulationSeedPreserved": true,
+        "recordHash": "ce49127fbf46cbb073870a361414e018bf3fb22a432d41233f2984cbfb6f08ea",
+        "PA": 1,
+        "saveLoadAndRepeatConfirm": true
+      }
+    },
+    {
+      "name": "complete frozen evidence refreshes health and synchronized text reaches year end",
+      "status": "PASS",
+      "detail": {
+        "oldText": "本場先從板凳待命，教練預計在5局後依比分與守位需求決定是否換你上場",
+        "newText": "本場先從板凳觀察；是否獲得實際上場機會仍由比賽局勢決定",
+        "yearEndShowsLockedUsage": true,
+        "loadAndGettersDidNotRepair": true,
+        "healthScoreDelta": -32
+      }
+    },
+    {
+      "name": "already prepared same-match legacy copies preserve the existing match lock",
+      "status": "PASS",
+      "detail": {
+        "copies": 4,
+        "existingSimulationSeedAndSnapshotFrozen": true
+      }
+    },
+    {
+      "name": "insufficient/inconsistent evidence missingGameContext",
+      "status": "PASS",
+      "detail": {
+        "baselineAdmittedAndCompleted": true,
+        "fallbackExact": true
+      }
+    },
+    {
+      "name": "insufficient/inconsistent evidence missingRole",
+      "status": "PASS",
+      "detail": {
+        "baselineAdmittedAndCompleted": true,
+        "fallbackExact": true
+      }
+    },
+    {
+      "name": "insufficient/inconsistent evidence changedReadiness",
+      "status": "PASS",
+      "detail": {
+        "baselineAdmittedAndCompleted": true,
+        "fallbackExact": true
+      }
+    },
+    {
+      "name": "insufficient/inconsistent evidence changedHash",
+      "status": "PASS",
+      "detail": {
+        "baselineAdmittedAndCompleted": true,
+        "fallbackExact": true
+      }
+    },
+    {
+      "name": "insufficient/inconsistent evidence changedVariation",
+      "status": "PASS",
+      "detail": {
+        "baselineAdmittedAndCompleted": true,
+        "fallbackExact": true
+      }
+    },
+    {
+      "name": "insufficient/inconsistent evidence foreignReadinessPlayer",
+      "status": "PASS",
+      "detail": {
+        "baselineAdmittedAndCompleted": true,
+        "fallbackExact": true
+      }
+    },
+    {
+      "name": "baseline-rejected raw Save remains rejected with zero live/Storage mutation",
+      "status": "PASS",
+      "detail": [
+        {
+          "label": "baseline",
+          "notice": "<div class=\"notice error\">存檔損壞，無法讀取。</div>",
+          "errors": [
+            "Error: Invalid receiver source metadata: new save requires source format"
+          ]
+        },
+        {
+          "label": "candidate",
+          "notice": "<div class=\"notice error\">存檔損壞，無法讀取。</div>",
+          "errors": [
+            "Error: Invalid receiver source metadata: new save requires source format"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "baseline entry rejection retains original error and candidate rolls back confirmation",
+      "status": "PASS",
+      "detail": [
+        {
+          "label": "baseline",
+          "error": "Error: 第二次隊內實戰評估缺少既有 Opportunity N+1。",
+          "step": 7,
+          "matchId": "hs-y1-autumn-exhibition"
+        },
+        {
+          "label": "candidate",
+          "error": "Error: 第二次隊內實戰評估缺少既有 Opportunity N+1。",
+          "step": 6,
+          "matchId": "hs-y1-autumn-exhibition"
+        }
+      ]
+    },
+    {
+      "name": "unexpected health-resolver error is exposed and confirmation rolls back",
+      "status": "PASS",
+      "detail": {
+        "sameErrorObject": true,
+        "stepOpportunityMatchScheduleHistoryEvaluationRestored": true,
+        "transitionUnlocked": true,
+        "qualification": "Rollback starts at confirmation boundary after choice effects; does not claim the entire choose transaction is rolled back."
+      }
+    },
+    {
+      "name": "unexpected post-build error is exposed and confirmation rolls back",
+      "status": "PASS",
+      "detail": {
+        "sameErrorObject": true,
+        "stepOpportunityMatchScheduleHistoryEvaluationRestored": true,
+        "transitionUnlocked": true,
+        "qualification": "Rollback starts at confirmation boundary after choice effects; does not claim the entire choose transaction is rolled back."
+      }
+    }
+  ]
+}

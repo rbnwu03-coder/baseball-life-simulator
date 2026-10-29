@@ -1,0 +1,25 @@
+{
+  "seeds": [77881, 77001, 99101],
+  "normalBodies": {
+    "zero": {"fatigue": 0, "pain": 0, "injuryRisk": 0},
+    "fatigue": {"fatigue": 10, "pain": 0, "injuryRisk": 0},
+    "burden": {"fatigue": 12, "pain": 6, "injuryRisk": 8}
+  },
+  "boundaryProfile": {
+    "skill": 4,
+    "traits": 4,
+    "coachTrust": 5,
+    "body": {"fatigue": 20, "pain": 20, "injuryRisk": 20},
+    "purpose": "Added after initial fixed-seed runs all retained start usage; same seeds, no search. Exercise a lower-readiness input profile, not population calibration."
+  },
+  "regressions": [
+    "playing-time-game-exposure-foundation-v1-test.js",
+    "opportunity-evaluation-boundary-v1-0-1-test.js",
+    "high-school-year-one-opportunity-two-integration-test.js",
+    "high-school-schedule-opportunity-production-integration-test.js",
+    "high-school-career-evidence-test.js",
+    "high-school-career-exit-integration-test.js",
+    "career-save-admission-test.js"
+  ],
+  "scope": "Fixed before execution. No seed search, simplified match engine or calibration. Body may be set for research; outcomes and exposure use original owners."
+}

@@ -1,0 +1,168 @@
+{
+  "base": "33abdcb151d0a6becef640aab778a87ce3cbec68",
+  "node": "v24.19.0",
+  "spec": {
+    "seeds": [
+      77881,
+      77001,
+      99101
+    ],
+    "normalBodies": {
+      "zero": {
+        "fatigue": 0,
+        "pain": 0,
+        "injuryRisk": 0
+      },
+      "fatigue": {
+        "fatigue": 10,
+        "pain": 0,
+        "injuryRisk": 0
+      },
+      "burden": {
+        "fatigue": 12,
+        "pain": 6,
+        "injuryRisk": 8
+      }
+    },
+    "regressions": [
+      "playing-time-game-exposure-foundation-v1-test.js",
+      "opportunity-evaluation-boundary-v1-0-1-test.js",
+      "high-school-year-one-opportunity-two-integration-test.js",
+      "high-school-schedule-opportunity-production-integration-test.js",
+      "high-school-career-evidence-test.js",
+      "high-school-career-exit-integration-test.js",
+      "career-save-admission-test.js"
+    ],
+    "scope": "Fixed before execution. No seed search, simplified match engine or calibration. Body may be set for research; outcomes and exposure use original owners."
+  },
+  "entry": "Supported canonical high-school entry fixture; original choose/transition/prepare/playback/settlement and index.html modules. Not a childhood-to-entry run.",
+  "rng": "External deterministic test RNG state restored explicitly across fresh VM load; not a new production Save field.",
+  "rows": [
+    {
+      "name": "zero baseline parity 77881",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 0\n- -0\n\n    at healthCheck (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:39:124)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:54:210\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:54:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)"
+    },
+    {
+      "name": "health-only paired first and followup 77881",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 0\n- -0\n\n    at healthCheck (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:39:124)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:59:126\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:56:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)"
+    },
+    {
+      "name": "zero baseline parity 77001",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 0\n- -0\n\n    at healthCheck (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:39:124)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:54:210\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:54:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)"
+    },
+    {
+      "name": "health-only paired first and followup 77001",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 0\n- -0\n\n    at healthCheck (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:39:124)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:59:126\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:56:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)"
+    },
+    {
+      "name": "zero baseline parity 99101",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 0\n- -0\n\n    at healthCheck (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:39:124)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:54:210\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:54:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)"
+    },
+    {
+      "name": "health-only paired first and followup 99101",
+      "status": "FAIL",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 0\n- -0\n\n    at healthCheck (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:39:124)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:59:126\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:56:2)\n    at Module._compile (node:internal/modules/cjs/loader:1872:14)\n    at Object..js (node:internal/modules/cjs/loader:2003:10)\n    at Module.load (node:internal/modules/cjs/loader:1594:32)\n    at Module._load (node:internal/modules/cjs/loader:1396:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)"
+    },
+    {
+      "name": "first recovery and confirmation Save/Load",
+      "status": "FAIL",
+      "error": "script.js:9878\n  return `本場先從板凳待命，教練預計在${decision.plannedUsage.entryInning || 5}局後依比分與守位需求決定是否換你上場`;\n                                                ^\n\nTypeError: Cannot read properties of undefined (reading 'entryInning')\n    at getHighSchoolPlayingTimeAssignmentText (script.js:9878:49)\n    at getHighSchoolFollowupEvaluationPresentation (script.js:14555:90)\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (C:\\Users\\User\\AppData\\Local\\Temp\\baseball-health-opportunity-candidate-33abdcb\\tests\\high-school-career-test-context.js:14:22)\n    at lockedReads (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:46:48)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:68:666\n    at test (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:6:41)\n    at Object.<anonymous> (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:67:1)"
+    },
+    {
+      "name": "N+1 preview/read, changed body before confirmation, Save/Load and dedup",
+      "status": "FAIL",
+      "error": "script.js:10288\n  if (typeof HighSchoolMatchOpportunityGeneration !== \"undefined\" && !candidate && !alreadyOffered) throw new Error(\"No eligible development match candidate\");\n                                                                                                    ^\n\nError: No eligible development match candidate\n    at prepareHighSchoolFollowupEvaluationMatch (script.js:10288:107)\n    at confirmHighSchoolYearOneFollowupOpportunity (script.js:9617:10)\n    at advanceAfterAction (script.js:16144:55)\n    at choose (script.js:4063:8)\n    at evalmachine.<anonymous>:1:1\n    at Script.runInContext (node:vm:149:12)\n    at Object.runInContext (node:vm:301:6)\n    at Object.run (C:\\Users\\User\\AppData\\Local\\Temp\\baseball-health-opportunity-candidate-33abdcb\\tests\\high-school-career-test-context.js:14:22)\n    at choose (E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:33:85)\n    at E:\\meng\\baseball_life_sim_semirefactor\\docs\\design-optimization\\health-opportunity-candidate-v1\\formal-verification.cjs:74:90"
+    },
+    {
+      "name": "Direct Start separate baseline comparison",
+      "status": "PASS",
+      "detail": {
+        "baselineRecordParity": true,
+        "originalPolicy": true
+      }
+    },
+    {
+      "name": "pitcher deferred separate baseline comparison",
+      "status": "PASS",
+      "detail": {
+        "baselineRecordParity": true,
+        "originalPolicy": true
+      }
+    },
+    {
+      "name": "Direct Start pitcher deferred separate baseline comparison",
+      "status": "PASS",
+      "detail": {
+        "baselineRecordParity": true,
+        "originalPolicy": true
+      }
+    }
+  ],
+  "observations": [
+    {
+      "kind": "Direct Start",
+      "plan": {
+        "appearanceType": "start",
+        "entryInning": 1,
+        "entryHalf": "上"
+      },
+      "identity": {
+        "matchId": "hs-y1-autumn-exhibition",
+        "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|b2f48611",
+        "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|capability|school-development-0b20c648|hs-year-1-age-16|roster-b300441a|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|benchCandidate|high|medium|high|developmental|二壘手|9.333333333333334|10|7|highSchoolExhibition|0|0|regular|normal",
+        "stableVariationSeed": null,
+        "variation": 8,
+        "hash": 3002369553,
+        "simulationSeed": 419031
+      },
+      "PA": 4,
+      "defensiveInnings": 7,
+      "recordHash": "a50e8ac71cdb097da71705997b275b1e1a23fb3e718b5f32c172cb04b7ef5e51"
+    },
+    {
+      "kind": "pitcher deferred",
+      "plan": {
+        "appearanceType": "noAppearance",
+        "entryInning": null,
+        "entryHalf": ""
+      },
+      "identity": {
+        "matchId": "hs-y1-autumn-exhibition",
+        "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|2c085e20",
+        "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|capability|school-development-0b20c648|hs-year-1-age-16|roster-b300441a|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|benchCandidate|high|medium|high|developmental|投手|9|10|7|highSchoolExhibition|0|0|regular|normal",
+        "stableVariationSeed": null,
+        "variation": 1,
+        "hash": 738745888,
+        "simulationSeed": 419031
+      },
+      "PA": 0,
+      "defensiveInnings": 0,
+      "recordHash": "d246491b2d51446432c327aee1fd98f371894cf44da6a5995bc3e4390705eb14"
+    },
+    {
+      "kind": "Direct Start pitcher deferred",
+      "plan": {
+        "appearanceType": "noAppearance",
+        "entryInning": null,
+        "entryHalf": ""
+      },
+      "identity": {
+        "matchId": "hs-y1-autumn-exhibition",
+        "decisionId": "hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|2c085e20",
+        "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|Health opportunity candidate|observe＋baseRunning|school-development-0b20c648|capability|school-development-0b20c648|hs-year-1-age-16|roster-b300441a|high-school-year-one|autumn-exhibition|1|hs-y1-autumn-exhibition|rotation|benchCandidate|high|medium|high|developmental|投手|9|10|7|highSchoolExhibition|0|0|regular|normal",
+        "stableVariationSeed": null,
+        "variation": 1,
+        "hash": 738745888,
+        "simulationSeed": 419031
+      },
+      "PA": 0,
+      "defensiveInnings": 0,
+      "recordHash": "d246491b2d51446432c327aee1fd98f371894cf44da6a5995bc3e4390705eb14"
+    }
+  ]
+}

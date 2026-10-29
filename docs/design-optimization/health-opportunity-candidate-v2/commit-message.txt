@@ -1,0 +1,13 @@
+Harden Y1 health opportunity refresh for legacy saves
+
+Retain baseline-playable legacy opportunities when frozen refresh evidence is
+missing or inconsistent. Preserve identity and variation, roll back rejected
+N+1 confirmation transitions, and synchronize assignment text from the locked
+same-match opportunity at confirmation and year end.
+
+Keep the four shared manifest fixes and archive candidate scripts, evidence,
+and the design report without merging the production checkpoint.
+
+Validation: original 7 suites pass on baseline and candidate; original 15 formal
+case groups pass; 16 new legacy and error-semantics groups pass. No formula,
+training, full-match success rate, DTO, Save schema, or validator changes.
