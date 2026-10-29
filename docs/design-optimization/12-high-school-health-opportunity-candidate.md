@@ -1,3 +1,85 @@
+# 高一健康機會候選 v3：電話失敗重試一致性與切片封存 — 2026-10-29
+
+**本項完成，至此封存候選修補。修補前 12 組重試對照均 FAIL；修補後 12/12 PASS，30 次故障後狀態復原均無差異。原 7 套回歸兩組均 PASS，原 15 組與 16 組驗證重跑全數 PASS。已具備進行限定整合驗收的條件，尚未合併或執行合併後驗收。**
+
+本輪父候選 commit 是 `fcd9135839eaf973297e0ceffc48ce47bc8b2ec4`，仍沿用 `candidate/y1-health-opportunity-2026-10-29`；Production／checkpoint 維持 `33abdcb151d0a6becef640aab778a87ce3cbec68`。使用已讀取的 codebase-memory skill；本 session 仍無圖譜工具，以限定原碼／rg 追查電話 choice、其 writer 及 N+1 確認，不作全專案完整性宣稱。
+
+交付：[本輪 20 行新增／1 行刪除的增量補丁](health-opportunity-candidate-v3/retry.patch)、[相對 Production 的完整候選 diff](health-opportunity-candidate-v3/candidate.patch)、[機器摘要](health-opportunity-candidate-v3/summary.json)、[修補前重現](health-opportunity-candidate-v3/retry-before.json)、[修補後重試驗證](health-opportunity-candidate-v3/retry-sealed-v3.json)。增量 patch SHA-256：`73a887630621fafeee6078aac601c50cc51e8e5974f236e7167fbe34473992d7`；封存 script SHA-256：`af4e71229c6456ccd593f2ee0c7d3415877cefec10da53348bd2706bbc7b367a`。
+
+## v3-1. 正式入口確認會重複套用
+
+從候選正式高中入口，依原 choice／完整 Match Engine 完成首場、前進到電話前，再建立一份合法 Save。研究起始值只在此 Save 建立前設定一次：電話會改的 observe／confidence／responsibility／resilience／dormStress、teammateBond、azhe.trusts 均為 8；memories 保留 6 筆，body 為 fatigue 6／pain 2／risk 3。即使四次失敗後再成功，原問題版本的收益也未因 clamp 被掩蓋。沒有手填比賽結果或曝光。
+
+控制組各正常選一次並完成第二場。故障組從同一 Save 建立獨立 VM，分別在帶 health 的 resolver、正式建賽已完成之後注入失敗；每種故障各試一次失敗與連續四次失敗，三個電話選項合計 **3×2×2＝12 組**。移除故障後仍在同一 VM 透過原 `choose` 重試，沒有重新載入、沒有由測試還原 Player，也沒有重設 RNG。測試 RNG 只在每份獨立副本第一次 load 之前設成相同起點；它不是新增的正式 Save 欄位。
+
+父候選全部 12 組都重現問題：
+
+| 電話選項（原收益不變） | 一次失敗後再成功，相對只成功一次的額外效果 |
+|---|---|
+| 0：完整說明那個打席 | observe、confidence、teammateBond 各多 1，另多記憶；四次失敗後再成功，正式 GameRecord 也與控制組不同 |
+| 1：比較兒時滾地球 | responsibility、resilience 各多 1，另多記憶 |
+| 2：先問阿哲的近況 | responsibility 多 2、azhe.trusts 多 1、dormStress 再降 1，另多記憶 |
+
+三者也留下電話旗標／回顧與角色敘事狀態。原確認 rollback 的 opportunity、schedule、match、evaluation 局部核對仍可通過，所以先前 16 組不能證明整次電話選擇只套用一次。故障本身沒有額外消耗全域 RNG；選項 0 的下游差異來自重複收益，不能解讀為健康直接降低場上成功率。
+
+## v3-2. 只限電話事件的最小修補
+
+只在既有 `choose` 增加兩處處理，函式簽名與其他事件路徑維持：
+
+1. 通過原入口／choice guards 後、任何 choice effects 前，**僅當章節為青棒且 eventId 為 high_school_call_home** 時保存整份 Player 的暫存 clone，以及 `syncNpcRelationships` 會寫到的三個 NPC 欄位原值：coach.trust、teammates[0].friendship、rival.relationship。
+2. 僅該電話事件在 `advanceAfterAction`／N+1 確認拋錯時，回復上述 Player 與 NPC 原值、解鎖選擇，並重新拋出同一個 Error。保留 v2 內層的確認 transition rollback；外層再回到 choice effects 前，使下一次原 choose 從同一起點重新處理電話選擇。
+
+NPC 直接回復原值，不用目前 Player 重新推算；合法 load 後兩者可能還沒同步，不能把「同步到另一個值」冒充原狀態。回復快照只存在本次呼叫的區域變數，沒有永久旗標、DTO 或 Save schema，沒有 RNG 還原程式。
+
+相對父候選，**choose 之外的 script.js 位元組完全一致**；story.js 選項定義、收益與全部其他 tracked 正式模組均未改。這不是通用 choose transaction 重構，也不保證其他事件在任意位置拋錯皆可重試；本版只處理電話選項的 N+1 確認失敗。
+
+## v3-3. 驗證結果與精確比較範圍
+
+新增檢查比較**完整 JSON Player、完整 coach／teammates／rival 及外部測試 RNG**，不是只挑機會與評價欄位。能力／traits、關係、印象、body、記憶、flags、目標／敘事、opportunity、schedule、正式 record、evaluation 的分類表是補充，沒有排除其他 Player 欄位。
+
+| 檢查 | 最終結果 |
+|---|---|
+| 三個電話 choice × 兩個故障位置 × 一次／四次連敗 | **12/12 PASS**；共 30 次失敗後完整狀態均與電話選擇前相同 |
+| 取消故障、原地 choose 重試 | 12 組在確認後及第二場完成後，完整 Player／NPC／RNG 對一次成功控制組皆 **0 差異** |
+| 原錯誤與進度 | 每次均驗證同一 Error 物件透傳；step 6、第一場 match、預計安排及可操作狀態復原，沒有多結算 |
+| 測試是否掩蓋差異 | 每份副本 load 次數固定 1；失敗後測試不寫 Player／RNG，只移除注入的 fault wrapper 再 choose |
+| [原 7 套基線](health-opportunity-candidate-v1/regressions-baseline-sealed-v3/results.json)／[候選](health-opportunity-candidate-v1/regressions-candidate-sealed-v3/results.json) | 各 **7 PASS／0 FAIL／0 TIMEOUT**，原測試來源 hash 一致；自訂 Save checker 原 45/45 完成，不冒充 Node assertion 計數 |
+| [原 15 個正式流程群組](health-opportunity-candidate-v1/formal-sealed-v3.json) | **15/15 PASS**，維持原固定 seed 集合 |
+| [原 16 個舊資料語意群組](health-opportunity-candidate-v2/semantics-sealed-v3.json) | **16/16 PASS**，缺資料相容、已有 match 鎖定、identity／variation／seed、安排文字與正式拒絕均保留 |
+
+16 組舊 checker 的結果仍攜帶原「只觀察確認邊界 rollback」註記；該段是舊測試的觀察範圍，並未因此改寫舊 checker 的期望。整次電話 choice 復原由新增 12 組完整狀態對照證明。
+
+第一次 patch generator 的 anchor 在原碼出現三處，唯一性檢查中止，沒有寫入程式；之後誤啟動的驗證仍跑父候選。已限定 anchor 在 choose 內並成功套用，使用新名稱重跑。[工具紀錄](health-opportunity-candidate-v3/patch-initial-error.json)列明這些保留的中間檔；最終採用上表 `sealed-v3` 結果，不覆寫初次失敗，也不改期望／hash 取得 PASS。
+
+## v3-4. 封存與限定整合驗收條件
+
+**已具備進行「高一健康機會刷新」限定整合驗收的條件：**
+
+- 正常資料只讀 live health，原非健康快照與身份／variation／simulation seed 固定；確認後不重抽。
+- 基線可玩的缺欄資料沿用原安排；基線拒絕仍由原 owner 拒絕，沒有放寬正式保護。
+- 確認與年末安排文字以鎖定的同場 opportunity 為準，getter 不修復狀態。
+- 三個電話選項在兩種失敗及多次重試下，均符合一次成功語意，沒有剩餘本切片的已知失敗。
+- 原 7／15／16 與新增 12 群組全通過，可審閱增量 diff、確切父 commit、程式雜湊及分開保存的新舊證據。
+
+此判定是**可開始限定整合驗收**，不是已執行合併後驗收、全套 278 通過或健康成本分離／平衡完成。checkpoint／正式分支保持不動；先前其他 cohort、source protection 與多層健康成本仍依原報告分類，不在本輪擴修。至本項結束候選修補，後續只保留供限定整合審查。
+
+```powershell
+node docs/design-optimization/health-opportunity-candidate-v3/verify-delivery.cjs
+node docs/design-optimization/health-opportunity-candidate-v3/retry-regression.cjs retry-review-NEW.json
+node docs/design-optimization/health-opportunity-candidate-v1/run-regressions.cjs baseline baseline-review-v3-NEW
+node docs/design-optimization/health-opportunity-candidate-v1/run-regressions.cjs candidate candidate-review-v3-NEW
+node docs/design-optimization/health-opportunity-candidate-v1/formal-verification.cjs formal-review-v3-NEW.json
+node docs/design-optimization/health-opportunity-candidate-v2/semantic-regression.cjs semantics-review-v3-NEW.json
+```
+
+新 checkout 兩組都套原共用 manifest patch；只在候選套 v3 的完整 candidate.patch，或從確切父候選套 retry.patch。`HEALTH_OPPORTUNITY_ENV` 可指定新 environment JSON；所有結果採新名稱／exclusive-create。舊 v1／v2 hash verifier 屬歷史版本，封存版本使用 v3 verifier。
+
+原工作樹開工 **4,010 個既有檔案**僅本報告追加，v2 正文另存 [report-before.md](health-opportunity-candidate-v3/report-before.md)；所有初版、歷史失敗與先前 commit 證據保留。候選程式、驗證腳本、必要文件及新證據追加 commit 並推送同名分支，完整 SHA 與遠端 ref 核對由封存回條提供。
+
+---
+
+以下保留 v2／v1 歷史正文；其中版本 hash、rollback 限制及封存狀態屬各輪時點，現行切片以上方 v3 為準。
+
 # 高一健康機會刷新 v2：舊資料邊界與安排一致性 — 2026-10-29
 
 **本版收尾完成：原 7 套回歸在基線／候選均 PASS；原 15 個正式流程案例群組及新增 16 組語意回歸全部 PASS。沿用 `candidate/y1-health-opportunity-2026-10-29` 保存，不合併 checkpoint／Production。**

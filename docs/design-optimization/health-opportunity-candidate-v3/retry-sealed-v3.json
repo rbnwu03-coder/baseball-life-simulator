@@ -1,0 +1,1091 @@
+{
+  "parentCommit": "fcd9135839eaf973297e0ceffc48ce47bc8b2ec4",
+  "productionBase": "33abdcb151d0a6becef640aab778a87ce3cbec68",
+  "seed": 77881,
+  "failureCounts": [
+    1,
+    4
+  ],
+  "entry": "One legal candidate pre-telephone Save; original loadGame, choose, confirmation, schedule, full Match Engine and settlement.",
+  "rngPolicy": "Initialize test RNG once before initial load per independent copy. Never reset Player or RNG after an injected failure. No retry reload.",
+  "compared": "Entire JSON Player, all coach/teammates/rival fields, and external test RNG; categories are supplemental, not exclusions.",
+  "startingValues": {
+    "observe": 8,
+    "confidence": 8,
+    "responsibility": 8,
+    "resilience": 8,
+    "dormStress": 8,
+    "relationships": {
+      "coachTrust": 8,
+      "teammateBond": 8,
+      "rivalRespect": 8,
+      "rivalCompetition": 8
+    },
+    "azhe": {
+      "trusts": 8,
+      "depends": 8,
+      "feelsDistance": 2,
+      "admires": 0
+    },
+    "body": {
+      "stamina": 10,
+      "fatigue": 6,
+      "recovery": 5,
+      "maturity": 0,
+      "injuryRisk": 3,
+      "pain": 2
+    },
+    "memories": 6
+  },
+  "categoryKeys": {
+    "capability": [
+      "baseballSkills",
+      "capabilityState",
+      "observe",
+      "confidence",
+      "responsibility",
+      "resilience"
+    ],
+    "relationships": [
+      "relationships"
+    ],
+    "impressions": [
+      "impression"
+    ],
+    "body": [
+      "body"
+    ],
+    "memories": [
+      "memories"
+    ],
+    "flags": [
+      "flags"
+    ],
+    "goalsAndNarrative": [
+      "goals",
+      "goalProgress",
+      "callbacks",
+      "consequences",
+      "pendingEvents",
+      "highSchoolAzheEcho",
+      "highSchoolRivalContext",
+      "narrativeThread",
+      "aspirationState",
+      "continuityOutcomes",
+      "lifeEvents",
+      "emotionalPeaks",
+      "lowPoints",
+      "characterArc"
+    ],
+    "opportunity": [
+      "highSchoolNextOpportunity",
+      "highSchoolOpportunityHistory",
+      "highSchoolRoleContext"
+    ],
+    "schedule": [
+      "highSchoolSchedule"
+    ],
+    "formalRecord": [
+      "highSchoolMatch",
+      "highSchoolYearOneMatchHistory"
+    ],
+    "evaluation": [
+      "highSchoolCompetitionEvaluation",
+      "developmentState"
+    ]
+  },
+  "controlHashes": [
+    {
+      "index": 0,
+      "confirmed": "97f44110d957cd23d8807c7ac74be22a736b5be817333c71bf1cd11f77ca2344",
+      "completed": "b47dab07a7d12635ed2cc2bd820253d8979fd45f774dea35f7825f4f4f2443cb",
+      "record": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53"
+    },
+    {
+      "index": 1,
+      "confirmed": "52aaeacce4c7faa1decd85430e4d5d411c97e125bed2d7f39a902a9b41fe4848",
+      "completed": "121d2f48fb16684ea5b3c402a9f7b596fc85d20e26706d57e0d530ef784f9b91",
+      "record": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53"
+    },
+    {
+      "index": 2,
+      "confirmed": "28811666de32ad5adc2d17067d1f1b80a256a8d28795c1b640c98e10cc5a73a3",
+      "completed": "0c53724877b9a72fa3c6ef8e5299c11c85c1bc2c25a6865d6e18ae57b254ebb7",
+      "record": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53"
+    }
+  ],
+  "rows": [
+    {
+      "name": "choice 0 health-resolver failures=1",
+      "index": 0,
+      "target": "health-resolver",
+      "failureCount": 1,
+      "status": "PASS",
+      "attempts": [
+        {
+          "attempt": 1,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        }
+      ],
+      "confirmedDifferenceCount": 0,
+      "confirmedDifferences": [],
+      "completedDifferenceCount": 0,
+      "completedDifferences": [],
+      "completedCategories": {
+        "capability": true,
+        "relationships": true,
+        "impressions": true,
+        "body": true,
+        "memories": true,
+        "flags": true,
+        "goalsAndNarrative": true,
+        "opportunity": true,
+        "schedule": true,
+        "formalRecord": true,
+        "evaluation": true
+      },
+      "loadCount": 1,
+      "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "controlRecordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "rngParity": true,
+      "fullPlayerParity": true
+    },
+    {
+      "name": "choice 0 health-resolver failures=4",
+      "index": 0,
+      "target": "health-resolver",
+      "failureCount": 4,
+      "status": "PASS",
+      "attempts": [
+        {
+          "attempt": 1,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 2,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 3,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 4,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        }
+      ],
+      "confirmedDifferenceCount": 0,
+      "confirmedDifferences": [],
+      "completedDifferenceCount": 0,
+      "completedDifferences": [],
+      "completedCategories": {
+        "capability": true,
+        "relationships": true,
+        "impressions": true,
+        "body": true,
+        "memories": true,
+        "flags": true,
+        "goalsAndNarrative": true,
+        "opportunity": true,
+        "schedule": true,
+        "formalRecord": true,
+        "evaluation": true
+      },
+      "loadCount": 1,
+      "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "controlRecordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "rngParity": true,
+      "fullPlayerParity": true
+    },
+    {
+      "name": "choice 0 post-build failures=1",
+      "index": 0,
+      "target": "post-build",
+      "failureCount": 1,
+      "status": "PASS",
+      "attempts": [
+        {
+          "attempt": 1,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        }
+      ],
+      "confirmedDifferenceCount": 0,
+      "confirmedDifferences": [],
+      "completedDifferenceCount": 0,
+      "completedDifferences": [],
+      "completedCategories": {
+        "capability": true,
+        "relationships": true,
+        "impressions": true,
+        "body": true,
+        "memories": true,
+        "flags": true,
+        "goalsAndNarrative": true,
+        "opportunity": true,
+        "schedule": true,
+        "formalRecord": true,
+        "evaluation": true
+      },
+      "loadCount": 1,
+      "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "controlRecordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "rngParity": true,
+      "fullPlayerParity": true
+    },
+    {
+      "name": "choice 0 post-build failures=4",
+      "index": 0,
+      "target": "post-build",
+      "failureCount": 4,
+      "status": "PASS",
+      "attempts": [
+        {
+          "attempt": 1,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 2,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 3,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 4,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        }
+      ],
+      "confirmedDifferenceCount": 0,
+      "confirmedDifferences": [],
+      "completedDifferenceCount": 0,
+      "completedDifferences": [],
+      "completedCategories": {
+        "capability": true,
+        "relationships": true,
+        "impressions": true,
+        "body": true,
+        "memories": true,
+        "flags": true,
+        "goalsAndNarrative": true,
+        "opportunity": true,
+        "schedule": true,
+        "formalRecord": true,
+        "evaluation": true
+      },
+      "loadCount": 1,
+      "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "controlRecordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "rngParity": true,
+      "fullPlayerParity": true
+    },
+    {
+      "name": "choice 1 health-resolver failures=1",
+      "index": 1,
+      "target": "health-resolver",
+      "failureCount": 1,
+      "status": "PASS",
+      "attempts": [
+        {
+          "attempt": 1,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        }
+      ],
+      "confirmedDifferenceCount": 0,
+      "confirmedDifferences": [],
+      "completedDifferenceCount": 0,
+      "completedDifferences": [],
+      "completedCategories": {
+        "capability": true,
+        "relationships": true,
+        "impressions": true,
+        "body": true,
+        "memories": true,
+        "flags": true,
+        "goalsAndNarrative": true,
+        "opportunity": true,
+        "schedule": true,
+        "formalRecord": true,
+        "evaluation": true
+      },
+      "loadCount": 1,
+      "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "controlRecordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "rngParity": true,
+      "fullPlayerParity": true
+    },
+    {
+      "name": "choice 1 health-resolver failures=4",
+      "index": 1,
+      "target": "health-resolver",
+      "failureCount": 4,
+      "status": "PASS",
+      "attempts": [
+        {
+          "attempt": 1,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 2,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 3,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 4,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        }
+      ],
+      "confirmedDifferenceCount": 0,
+      "confirmedDifferences": [],
+      "completedDifferenceCount": 0,
+      "completedDifferences": [],
+      "completedCategories": {
+        "capability": true,
+        "relationships": true,
+        "impressions": true,
+        "body": true,
+        "memories": true,
+        "flags": true,
+        "goalsAndNarrative": true,
+        "opportunity": true,
+        "schedule": true,
+        "formalRecord": true,
+        "evaluation": true
+      },
+      "loadCount": 1,
+      "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "controlRecordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "rngParity": true,
+      "fullPlayerParity": true
+    },
+    {
+      "name": "choice 1 post-build failures=1",
+      "index": 1,
+      "target": "post-build",
+      "failureCount": 1,
+      "status": "PASS",
+      "attempts": [
+        {
+          "attempt": 1,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        }
+      ],
+      "confirmedDifferenceCount": 0,
+      "confirmedDifferences": [],
+      "completedDifferenceCount": 0,
+      "completedDifferences": [],
+      "completedCategories": {
+        "capability": true,
+        "relationships": true,
+        "impressions": true,
+        "body": true,
+        "memories": true,
+        "flags": true,
+        "goalsAndNarrative": true,
+        "opportunity": true,
+        "schedule": true,
+        "formalRecord": true,
+        "evaluation": true
+      },
+      "loadCount": 1,
+      "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "controlRecordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "rngParity": true,
+      "fullPlayerParity": true
+    },
+    {
+      "name": "choice 1 post-build failures=4",
+      "index": 1,
+      "target": "post-build",
+      "failureCount": 4,
+      "status": "PASS",
+      "attempts": [
+        {
+          "attempt": 1,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 2,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 3,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 4,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        }
+      ],
+      "confirmedDifferenceCount": 0,
+      "confirmedDifferences": [],
+      "completedDifferenceCount": 0,
+      "completedDifferences": [],
+      "completedCategories": {
+        "capability": true,
+        "relationships": true,
+        "impressions": true,
+        "body": true,
+        "memories": true,
+        "flags": true,
+        "goalsAndNarrative": true,
+        "opportunity": true,
+        "schedule": true,
+        "formalRecord": true,
+        "evaluation": true
+      },
+      "loadCount": 1,
+      "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "controlRecordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "rngParity": true,
+      "fullPlayerParity": true
+    },
+    {
+      "name": "choice 2 health-resolver failures=1",
+      "index": 2,
+      "target": "health-resolver",
+      "failureCount": 1,
+      "status": "PASS",
+      "attempts": [
+        {
+          "attempt": 1,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        }
+      ],
+      "confirmedDifferenceCount": 0,
+      "confirmedDifferences": [],
+      "completedDifferenceCount": 0,
+      "completedDifferences": [],
+      "completedCategories": {
+        "capability": true,
+        "relationships": true,
+        "impressions": true,
+        "body": true,
+        "memories": true,
+        "flags": true,
+        "goalsAndNarrative": true,
+        "opportunity": true,
+        "schedule": true,
+        "formalRecord": true,
+        "evaluation": true
+      },
+      "loadCount": 1,
+      "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "controlRecordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "rngParity": true,
+      "fullPlayerParity": true
+    },
+    {
+      "name": "choice 2 health-resolver failures=4",
+      "index": 2,
+      "target": "health-resolver",
+      "failureCount": 4,
+      "status": "PASS",
+      "attempts": [
+        {
+          "attempt": 1,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 2,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 3,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 4,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        }
+      ],
+      "confirmedDifferenceCount": 0,
+      "confirmedDifferences": [],
+      "completedDifferenceCount": 0,
+      "completedDifferences": [],
+      "completedCategories": {
+        "capability": true,
+        "relationships": true,
+        "impressions": true,
+        "body": true,
+        "memories": true,
+        "flags": true,
+        "goalsAndNarrative": true,
+        "opportunity": true,
+        "schedule": true,
+        "formalRecord": true,
+        "evaluation": true
+      },
+      "loadCount": 1,
+      "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "controlRecordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "rngParity": true,
+      "fullPlayerParity": true
+    },
+    {
+      "name": "choice 2 post-build failures=1",
+      "index": 2,
+      "target": "post-build",
+      "failureCount": 1,
+      "status": "PASS",
+      "attempts": [
+        {
+          "attempt": 1,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        }
+      ],
+      "confirmedDifferenceCount": 0,
+      "confirmedDifferences": [],
+      "completedDifferenceCount": 0,
+      "completedDifferences": [],
+      "completedCategories": {
+        "capability": true,
+        "relationships": true,
+        "impressions": true,
+        "body": true,
+        "memories": true,
+        "flags": true,
+        "goalsAndNarrative": true,
+        "opportunity": true,
+        "schedule": true,
+        "formalRecord": true,
+        "evaluation": true
+      },
+      "loadCount": 1,
+      "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "controlRecordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "rngParity": true,
+      "fullPlayerParity": true
+    },
+    {
+      "name": "choice 2 post-build failures=4",
+      "index": 2,
+      "target": "post-build",
+      "failureCount": 4,
+      "status": "PASS",
+      "attempts": [
+        {
+          "attempt": 1,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 2,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 3,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        },
+        {
+          "attempt": 4,
+          "restored": true,
+          "differenceCount": 0,
+          "differences": [],
+          "categories": {
+            "capability": true,
+            "relationships": true,
+            "impressions": true,
+            "body": true,
+            "memories": true,
+            "flags": true,
+            "goalsAndNarrative": true,
+            "opportunity": true,
+            "schedule": true,
+            "formalRecord": true,
+            "evaluation": true
+          },
+          "rngUnchanged": true
+        }
+      ],
+      "confirmedDifferenceCount": 0,
+      "confirmedDifferences": [],
+      "completedDifferenceCount": 0,
+      "completedDifferences": [],
+      "completedCategories": {
+        "capability": true,
+        "relationships": true,
+        "impressions": true,
+        "body": true,
+        "memories": true,
+        "flags": true,
+        "goalsAndNarrative": true,
+        "opportunity": true,
+        "schedule": true,
+        "formalRecord": true,
+        "evaluation": true
+      },
+      "loadCount": 1,
+      "recordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "controlRecordHash": "d3afe104627a9bc418c0a15726ee4aa0a841fba09c9b1a5fc980094864a1be53",
+      "rngParity": true,
+      "fullPlayerParity": true
+    }
+  ]
+}

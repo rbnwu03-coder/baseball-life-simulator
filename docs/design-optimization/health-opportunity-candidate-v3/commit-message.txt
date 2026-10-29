@@ -1,0 +1,12 @@
+Make Y1 phone choice retries atomic on N+1 confirmation failure
+
+Capture Player before telephone choice effects and preserve the three NPC
+relationship fields synchronized by that event. Restore them only when its
+N+1 advance fails, unlock the original choice, and rethrow the original error.
+Keep all other choose paths and the existing health opportunity contracts.
+
+Validation: 12 retry groups cover all three choices, both failure sites, and
+one/four consecutive failures without retry reload or test Player/RNG resets.
+All 30 failed attempts restore exactly; successful retry matches one success.
+Original 7 suites pass on both baseline/candidate, plus 15 formal and 16 legacy
+groups. Preserve prior evidence and seal this bounded candidate slice.

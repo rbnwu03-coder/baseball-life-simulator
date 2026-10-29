@@ -1,0 +1,65 @@
+{
+  "productionBase": "33abdcb151d0a6becef640aab778a87ce3cbec68",
+  "parent": "fcd9135839eaf973297e0ceffc48ce47bc8b2ec4",
+  "branch": "candidate/y1-health-opportunity-2026-10-29",
+  "node": "v24.19.0",
+  "incrementalPatchSha256": "73a887630621fafeee6078aac601c50cc51e8e5974f236e7167fbe34473992d7",
+  "fullCandidatePatchSha256": "6af340141e55f63f2dc3e7136814f4d4b886a4b3cbb417e49620302b4d93cb9e",
+  "candidateScriptSha256": "af4e71229c6456ccd593f2ee0c7d3415877cefec10da53348bd2706bbc7b367a",
+  "parentScriptSha256": "19fbf3432b98e1a8953ec1ef2df47b39ed2b473515ce2a7d1fe3d358e6bc1a3b",
+  "incrementalNumstat": "20\t1\tscript.js",
+  "outsideChooseByteIdentical": true,
+  "optionDefinitionsUnchanged": true,
+  "originalSuiteSourcesIdentical": true,
+  "baselineSuites": {
+    "pass": 7,
+    "fail": 0
+  },
+  "candidateSuites": {
+    "pass": 7,
+    "fail": 0
+  },
+  "formalGroups": {
+    "pass": 15,
+    "fail": 0
+  },
+  "legacyGroups": {
+    "pass": 16,
+    "fail": 0
+  },
+  "retryBefore": {
+    "pass": 0,
+    "fail": 12
+  },
+  "retryAfter": {
+    "pass": 12,
+    "fail": 0,
+    "failedAttemptsRestored": 30,
+    "maxConsecutiveFailures": 4,
+    "choices": [
+      0,
+      1,
+      2
+    ],
+    "targets": [
+      "health-resolver",
+      "post-build"
+    ],
+    "reloadsPerIndependentCopy": 1,
+    "playerOrRngRestoresByTestAfterFailure": 0,
+    "completePlayerNpcAndRngParity": true
+  },
+  "customProof": {
+    "baseline": {
+      "customVerifyChecks": 45,
+      "nodeAssertions": 0
+    },
+    "candidate": {
+      "customVerifyChecks": 45,
+      "nodeAssertions": 0
+    }
+  },
+  "limitedIntegrationAcceptanceReady": true,
+  "acceptanceScope": "Ready for bounded Y1 health-opportunity integration acceptance and review; no production merge, 278-suite rerun, health calibration, or general choose transaction claim.",
+  "sliceSealedAfterThisCommit": true
+}

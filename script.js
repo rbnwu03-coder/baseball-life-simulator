@@ -3964,6 +3964,15 @@ function choose(eventId, index) {
     return;
   }
 
+  // Only this phone event retries the entire choice when N+1 confirmation fails.
+  // Capture before effects; the inner transition rollback starts too late for that.
+  const callHomeChoiceBefore = player.chapter === "青棒" && eventId === "high_school_call_home"
+    ? cloneSchoolInvitationValue(player) : null;
+  const callHomeRelationshipsBefore = callHomeChoiceBefore ? [
+    typeof coach !== "undefined" ? [coach, "trust", coach.trust] : null,
+    typeof teammates !== "undefined" && teammates[0] ? [teammates[0], "friendship", teammates[0].friendship] : null,
+    typeof rival !== "undefined" ? [rival, "relationship", rival.relationship] : null
+  ].filter(Boolean) : [];
   isTransitioning = true;
   setChoiceTransitionState(true);
   const before = getPlayerSnapshot();
@@ -4060,7 +4069,17 @@ function choose(eventId, index) {
   }
 
   if (choice.finishChapterOne) finishChapterOne();
-  else advanceAfterAction(decisionContext, eventId);
+  else if (callHomeChoiceBefore) {
+    try {
+      advanceAfterAction(decisionContext, eventId);
+    } catch (error) {
+      player = callHomeChoiceBefore;
+      callHomeRelationshipsBefore.forEach(([actor, key, value]) => { actor[key] = value; });
+      isTransitioning = false;
+      setChoiceTransitionState(false);
+      throw error;
+    }
+  } else advanceAfterAction(decisionContext, eventId);
   tickPendingEvents(eventId);
 
   if (holdYouthSeasonOutcome) {
