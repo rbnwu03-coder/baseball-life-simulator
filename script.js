@@ -7209,6 +7209,7 @@ function applyHighSchoolSimulatedPlateAppearance(match, result, batterId, offens
 }
 
 function resolveSimulatedHighSchoolPlateAppearance(match, randomSource = null, options = {}) {
+  assertHighSchoolBuntFallbackSettlementReady(match);
   assertHighSchoolOutfieldSingleContinuable(match);
   if (match.offensivePlateAppearanceState?.completed && !match.offensivePlateAppearanceState.resultApplied
     && match.offensivePlateAppearanceState.result === "strikeout") throw new Error("THIRD_STRIKE_PENDING_PA_CANNOT_SKIP");
@@ -10859,6 +10860,18 @@ function assertHighSchoolSameBallContinuable(match) {
   }
 }
 
+function assertHighSchoolBuntFallbackSettlementReady(match) {
+  const handoff = match?.buntBallInPlayState;
+  const plan = match?.offensiveBuntPAState;
+  if (handoff?.supported === false && handoff.fallbackPresented === true
+    && plan?.paResult === "ballInPlayPendingDefense"
+    && handoff.identity === `${plan.identity}|defensive-handoff`) {
+    // Presentation is not settlement. No owner may replace this fair ball with a new PA.
+    stopHighSchoolMatchPlayback("bunt-fallback-settlement-pending");
+    throw new Error("BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING");
+  }
+}
+
 function validateHighSchoolSameBallCandidate(match, state, candidate) {
   const C = MatchVNextExecutionContract, ctx = candidate.context;
   C.validateCandidate(candidate,ctx,state.battedBallPhysicalTruth);
@@ -14051,8 +14064,8 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
     if (buntHandoff.fallbackPresented !== true) {
       const placement = { secondBaseSide: "二壘手一側", thirdBaseSide: "三壘側", firstBaseSide: "一壘側", pitcherArea: "投手附近" }[buntHandoff.ballContext.physicalTruth.placement] || "內野";
       const fallbackText = buntHandoff.ballContext.downstreamSupport === "unsupportedPopBuntFallback"
-        ? `${formatHighSchoolMatchRunners(match.runners)}，短打形成小飛球；本階段不預判接殺或離壘出局。`
-        : `${formatHighSchoolMatchRunners(match.runners)}，${buntHandoff.ballContext.label}落在${placement}；此守備位置尚未納入二壘手垂直切片。`;
+        ? `${formatHighSchoolMatchRunners(match.runners)}，短打形成小飛球；接球結果尚未確定。`
+        : `${formatHighSchoolMatchRunners(match.runners)}，${buntHandoff.ballContext.label}往${placement}滾動；球仍在場內，守備處理尚未完成。`;
       match.buntBallInPlayState = Object.freeze({ ...JSON.parse(JSON.stringify(buntHandoff)), fallbackPresented: true });
       const fallbackEvent = recordHighSchoolMatchSimulationEvent(match, {
         type: "buntDefensiveFallback", presentationImportance: "attention", inning: match.inning, half: match.half,
@@ -14322,6 +14335,7 @@ function advanceHighSchoolMatchPlaybackStep(match = player.highSchoolMatch) {
   if (activeSituation && !MatchSituationLifecycle.canResumeSimulation(activeSituation)) return "decision";
   const pendingEvent = advanceHighSchoolPresentationCursor(match);
   if (pendingEvent) return getHighSchoolPlaybackResultForPresentedEvent(pendingEvent);
+  assertHighSchoolBuntFallbackSettlementReady(match);
   if (match.pendingGameSettlement) {
     finishHighSchoolMatchBySimulation(match);
     return getHighSchoolPlaybackResultForPresentedEvent(advanceHighSchoolPresentationCursor(match)) || "gameEnd";

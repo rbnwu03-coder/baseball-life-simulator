@@ -1,0 +1,167 @@
+diff --git a/offensive-bunt-defensive-handoff.js b/offensive-bunt-defensive-handoff.js
+index 579f93a..9901733 100644
+--- a/offensive-bunt-defensive-handoff.js
++++ b/offensive-bunt-defensive-handoff.js
+@@ -136,0 +137 @@
++    const placementLabel = { firstBaseSide: "一壘側", secondBaseSide: "二壘手一側", thirdBaseSide: "三壘側", pitcherArea: "投手附近" }[placement];
+@@ -145 +146,2 @@
+-      detail: placement === "secondBaseSide" ? "球往二壘手一側滾動。" : "此落點的完整守備位置尚未納入本階段。",
++      detail: !ground ? "短打形成小飛球，接球結果尚未確定。"
++        : placementLabel ? `球往${placementLabel}滾動。` : "球在內野滾動。",
+diff --git a/script.js b/script.js
+index 6c409c3..d0e4f26 100644
+--- a/script.js
++++ b/script.js
+@@ -7211,0 +7212 @@ function resolveSimulatedHighSchoolPlateAppearance(match, randomSource = null, o
++  assertHighSchoolBuntFallbackSettlementReady(match);
+@@ -10861,0 +10863,12 @@ function assertHighSchoolSameBallContinuable(match) {
++function assertHighSchoolBuntFallbackSettlementReady(match) {
++  const handoff = match?.buntBallInPlayState;
++  const plan = match?.offensiveBuntPAState;
++  if (handoff?.supported === false && handoff.fallbackPresented === true
++    && plan?.paResult === "ballInPlayPendingDefense"
++    && handoff.identity === `${plan.identity}|defensive-handoff`) {
++    // Presentation is not settlement. No owner may replace this fair ball with a new PA.
++    stopHighSchoolMatchPlayback("bunt-fallback-settlement-pending");
++    throw new Error("BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING");
++  }
++}
++
+@@ -14054,2 +14067,2 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
+-        ? `${formatHighSchoolMatchRunners(match.runners)}，短打形成小飛球；本階段不預判接殺或離壘出局。`
+-        : `${formatHighSchoolMatchRunners(match.runners)}，${buntHandoff.ballContext.label}落在${placement}；此守備位置尚未納入二壘手垂直切片。`;
++        ? `${formatHighSchoolMatchRunners(match.runners)}，短打形成小飛球；接球結果尚未確定。`
++        : `${formatHighSchoolMatchRunners(match.runners)}，${buntHandoff.ballContext.label}往${placement}滾動；球仍在場內，守備處理尚未完成。`;
+@@ -14324,0 +14338 @@ function advanceHighSchoolMatchPlaybackStep(match = player.highSchoolMatch) {
++  assertHighSchoolBuntFallbackSettlementReady(match);
+diff --git a/tests/catcher-event-context-consistency-test.cjs b/tests/catcher-event-context-consistency-test.cjs
+index c7c8f83..cf7fe0a 100644
+--- a/tests/catcher-event-context-consistency-test.cjs
++++ b/tests/catcher-event-context-consistency-test.cjs
+@@ -23 +23 @@ h.run(`
+-    bases.forEach((occupied, i) => { if (occupied) m.runners[i] = m.rosters.away.lineup[i+1].id; });
++    bases.forEach((occupied, i) => { if (occupied) m.runners[i] = m.rosters.away.lineup[8-i].id; });
+@@ -49 +49,4 @@ h.run(`
+-    m.presentedEventCursor = m.simulationLog.length;
++    for (let i = 0; getHighSchoolPresentedEventCursor(m) <= pitch.sequence; i++) {
++      if (i >= 100) throw new Error("Bunt pitch playback did not finish");
++      advanceHighSchoolMatchPlaybackStep(m);
++    }
+@@ -61,0 +65,63 @@ h.run(`
++  function catcherContinuation(bases, reload) {
++    const fixture = catcherBunt(bases);
++    let m = player.highSchoolMatch;
++    const team = m.offenseTeam, batter = m.currentBatter, slot = m.battingOrderIndex[team];
++    const nextBatter = getHighSchoolMatchNextLineupBatter(m, team).id;
++    const source = JSON.stringify(m.offensiveBuntPAState);
++    const handoff = JSON.stringify(m.buntBallInPlayState);
++    const recordPA = () => m.gameRecord.playerLines[batter]?.batting.PA || 0;
++    const beforePA = recordPA(), beforeRefs = m.gameRecord.eventRefs.length;
++    const startLog = m.simulationLog.length;
++    for (let i = 0; getHighSchoolPresentedEventCursor(m) <= fixture.event.sequence; i++) {
++      if (i >= 100) throw new Error("Fallback playback did not finish");
++      advanceHighSchoolMatchPlaybackStep(m);
++    }
++    const presented = getHighSchoolPresentedEventCursor(m) > fixture.event.sequence;
++    let saveLoad = null;
++    if (reload) {
++      const world = catcherWorld(m);
++      saveGame();
++      const raw = localStorage.getItem(SAVE_KEY);
++      if (!raw) throw new Error("Fallback save was not admitted");
++      player = createInitialPlayer();
++      loadGame();
++      m = player.highSchoolMatch;
++      saveLoad = {restored:m.id === fixture.matchId, worldUnchanged:world === catcherWorld(m),
++        sourceUnchanged:source === JSON.stringify(m.offensiveBuntPAState),
++        handoffUnchanged:handoff === JSON.stringify(m.buntBallInPlayState)};
++    }
++    const beforeResume = {world:catcherWorld(m), source:JSON.stringify(m.offensiveBuntPAState),
++      record:JSON.stringify(m.gameRecord)};
++    const steps = [];
++    for (let i = 0; i < 100 && m.battingOrderIndex[team] === slot; i++) {
++      const cursor = m.simulationCursor, events = m.simulationLog.length;
++      try {
++        const result = advanceHighSchoolMatchPlaybackStep(m);
++        steps.push({result, cursorBefore:cursor, cursorAfter:m.simulationCursor,
++          events:m.simulationLog.slice(events), phase:m.simulationPhase, domain:m.currentDomain});
++        if (result === false || result === "decision") break;
++      } catch (error) {
++        steps.push({error:error.message, cursorBefore:cursor, cursorAfter:m.simulationCursor,
++          events:m.simulationLog.slice(events)});
++        break;
++      }
++    }
++    const events = m.simulationLog.slice(startLog);
++    const paEvents = events.filter(e => e.type === "plateAppearance" && e.batterId === batter);
++    return {bases, reload, presented, saveLoad, matchId:m.id, paIdentity:fixture.paIdentity,
++      batter, nextBatter, slotBefore:slot, slotAfter:m.battingOrderIndex[team], currentBatter:m.currentBatter,
++      sourcePitch:fixture.sourcePitch, sourcePreserved:source === JSON.stringify(m.offensiveBuntPAState),
++      handoffPreserved:handoff === JSON.stringify(m.buntBallInPlayState), steps, paEvents,
++      officialPAIncrement:recordPA() - beforePA,
++      newRecordRefs:m.gameRecord.eventRefs.slice(beforeRefs),
++      recordIntegrity:MatchGameRecord.assertIntegrity(m.gameRecord),
++      noUnsafeMutation:beforeResume.world === catcherWorld(m) &&
++        beforeResume.source === JSON.stringify(m.offensiveBuntPAState) &&
++        beforeResume.record === JSON.stringify(m.gameRecord),
++      completionPassed:paEvents.length === 1 && recordPA() - beforePA === 1 &&
++        m.gameRecord.eventRefs.slice(beforeRefs).filter(e => e.type === "plateAppearance").length === 1 &&
++        m.battingOrderIndex[team] === (slot + 1) % 9 && m.currentBatter === nextBatter &&
++        paEvents[0].sourceAuthority === "offensiveBuntPAState.pitchHistory" &&
++        paEvents[0].buntPAIdentity === fixture.paIdentity &&
++        !paEvents[0].compressedOutcomeTrace && source === JSON.stringify(m.offensiveBuntPAState)};
++  }
+@@ -72,0 +139 @@ let passed = 0;
++let failed = 0;
+@@ -73,0 +141 @@ function verify(name, condition) { assert.ok(condition, name); passed++; console
++if (!process.argv.includes("--continuation-only")) {
+@@ -89,0 +158,3 @@ for (const name of ["buntEmpty", "buntOccupied"]) {
++  verify(`${name}: fallback uses known ball, placement and pending state only`,
++    !/垂直切片|本階段|尚未納入|fallback|unsupported/i.test(x.currentAssignment + x.ballContext.detail) &&
++    x.currentAssignment.includes("往二壘手一側滾動") && x.currentAssignment.includes("尚未完成"));
+@@ -158 +229,44 @@ verify("pending activeSituation still blocks event preparation without mutation"
+-console.log(`Catcher event context consistency: ${passed}/${passed} passed`);
++}
++if (!process.argv.includes("--context-only")) {
++  const continuation = h.json(`[
++    catcherContinuation([],false), catcherContinuation([true,false,false],false),
++    catcherContinuation([],true), catcherContinuation([true,false,false],true)
++  ]`);
++  const target = process.argv.find(arg => arg.startsWith("--continuation-evidence="))?.slice("--continuation-evidence=".length);
++  if (target) fs.writeFileSync(target, JSON.stringify(continuation, null, 2) + "\n");
++  for (const x of continuation) {
++    const name = `fallback continuation: ${x.bases.some(Boolean) ? "occupied" : "empty"}, reload=${x.reload}`;
++    if (process.argv.includes("--capture-continuation-only")) {
++      console.log(JSON.stringify({name, completionPassed:x.completionPassed,
++        observedResults:x.paEvents.map(e => ({result:e.result, authority:e.outcomeAuthority})),
++        blocker:x.steps.at(-1)?.error || null, officialPAIncrement:x.officialPAIncrement, saveLoad:x.saveLoad}));
++    } else {
++      verify(`${name}: pending ball and formal record protected`,
++        x.presented && (!x.reload || Object.values(x.saveLoad).every(Boolean)) &&
++        x.sourcePreserved && x.handoffPreserved && x.noUnsafeMutation &&
++        x.officialPAIncrement === 0 && x.paEvents.length === 0 &&
++        x.newRecordRefs.length === 0 && x.steps.at(-1)?.error === "BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING");
++      try { verify(name, x.presented && (!x.reload || Object.values(x.saveLoad).every(Boolean)) && x.completionPassed); }
++      catch (error) { failed++; console.error(`FAIL ${name}: same bunt PA not completed by its settlement owner`); }
++    }
++  }
++  if (failed) process.exitCode = 1;
++}
++if (!process.argv.includes("--capture-continuation-only")) {
++verify("compressed PA entry also rejects an unsettled bunt before RNG and mutation", h.run(`(() => {
++  catcherBunt([]); const m = player.highSchoolMatch;
++  const before = JSON.stringify(m); let calls = 0, error = "";
++  try { resolveSimulatedHighSchoolPlateAppearance(m, () => {calls++; return .5;}); }
++  catch (e) { error = e.message; }
++  return error === "BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING" && calls === 0 && before === JSON.stringify(m);
++})()`));
++verify("unsupported placement and pop-bunt clues contain no development terminology", h.run(`(() => {
++  const base = {contactResult:"fairContact", fairBallType:"groundBunt", pace:"hard"};
++  return ["firstBaseSide", "thirdBaseSide", "pitcherArea"].every(placement => {
++    const ball = OffensiveBuntDefensiveHandoff.buildDefensiveBallContext({...base, placement}, {playerPosition:"捕手"});
++    return !/本階段|納入|切片/.test(ball.detail) && ball.detail.includes("滾動");
++  }) && OffensiveBuntDefensiveHandoff.buildDefensiveBallContext({...base, fairBallType:"popBunt"},
++    {playerPosition:"捕手"}).detail === "短打形成小飛球，接球結果尚未確定。";
++})()`));
++console.log(`Catcher event context consistency: ${passed} passed, ${failed} failed`);
++}

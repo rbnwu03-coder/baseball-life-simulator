@@ -1,0 +1,20 @@
+PASS 1. BB uses canonical batter and active pitcher counters
+PASS 2. SO uses canonical batter and active pitcher counters
+PASS 3. SO increases match and pitcher outs exactly once
+PASS 4. SO with runner third holds runner and score
+PASS 5. SO with loaded bases holds all runners
+PASS 6. third SO out resolves transition without scoring
+PASS 7. empty walk places batter first
+PASS 8. walk forces first to second
+PASS 9. walk forces first and second chain
+PASS 10. third alone walk cannot score
+PASS 11. bases loaded walk legally scores forced runner
+PASS 12. productive out retains runner advancement
+PASS 13. event compact provenance has no fictitious pitch stream
+PASS 14. active canonical Control and missing profile fallback
+PASS 15. native random cursor advances once; injected source zero
+PASS 16. JSON save/load repeats event and result without extra RNG
+PASS 17. repeated terminal ingestion does not double count
+PASS 18. completed ordinary game BB/SO reaches Evidence once with BF denominator
+PASS 19. interactive PA and physical mapper retain independent resolvers
+Compressed AI integration: 19/19 PASS

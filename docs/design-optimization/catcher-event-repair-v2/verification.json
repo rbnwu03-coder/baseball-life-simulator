@@ -1,0 +1,73 @@
+{
+  "executedAt": "2026-10-30T07:48:53.622Z",
+  "node": "v24.19.0",
+  "sources": [
+    {
+      "file": "script.js",
+      "sha256": "37fe3fca9a816b75aae06c72448e7cf5c3ab1a8bc04027901b95629a7810a914"
+    },
+    {
+      "file": "offensive-bunt-defensive-handoff.js",
+      "sha256": "36fdbe6c0a17d03e7fdb25509c8a6cc2bfcc2a009e4347020b80b4c81a09d453"
+    }
+  ],
+  "suites": [
+    {
+      "file": "tests/catcher-event-context-consistency-test.cjs",
+      "sourceSha256": "cdf3f4533ce7fbf840322370837cf69e0c20f501ba8a756fce67638d64c0eca5",
+      "exitCode": 1,
+      "error": null,
+      "passed": 29,
+      "failed": 4,
+      "log": "catcher-event-context-consistency-test.cjs.txt"
+    },
+    {
+      "file": "tests/catcher-choice-outcome-integrity-v1-test.js",
+      "sourceSha256": "38c1f5f85fbd8b0a2039bce42fb283f8edc5e36f353ef11811e7221d78bd9c27",
+      "exitCode": 0,
+      "error": null,
+      "passed": 20,
+      "failed": 0,
+      "log": "catcher-choice-outcome-integrity-v1-test.js.txt"
+    },
+    {
+      "file": "tests/offensive-tactical-action-sprint-b2-defensive-handoff-test.js",
+      "sourceSha256": "9704aed102cede18112b9d302655bd4751405f500a5f9eaa8ab5a5e93412c321",
+      "exitCode": 0,
+      "error": null,
+      "passed": 26,
+      "failed": 0,
+      "log": "offensive-tactical-action-sprint-b2-defensive-handoff-test.js.txt"
+    },
+    {
+      "file": "tests/offensive-tactical-action-sprint-b2-runner-realization-test.js",
+      "sourceSha256": "42b43e5c8a6ce9c02fc3a3e62c85b20f42ea74e51d0e6991c0bccc924f1e9c7c",
+      "exitCode": 0,
+      "error": null,
+      "passed": 22,
+      "failed": 0,
+      "log": "offensive-tactical-action-sprint-b2-runner-realization-test.js.txt"
+    },
+    {
+      "file": "tests/offensive-tactical-action-sprint-b1-0-1-test.js",
+      "sourceSha256": "4bd9c6141bd59112a4456ab5109ef4eeaa0265c96bbec5fa4101f75f057ffe49",
+      "exitCode": 0,
+      "error": null,
+      "passed": 21,
+      "failed": 0,
+      "log": "offensive-tactical-action-sprint-b1-0-1-test.js.txt"
+    },
+    {
+      "file": "tests/ai-plate-appearance-outcome-production-integration-test.js",
+      "sourceSha256": "7ce4f1736d0d70ed78a2a5ee783f61705b77e1f146b32d9c9f4f5e82c1b7e816",
+      "exitCode": 0,
+      "error": null,
+      "passed": 19,
+      "failed": 0,
+      "log": "ai-plate-appearance-outcome-production-integration-test.js.txt"
+    }
+  ],
+  "completionStatus": "BLOCKED: unsupported bunt settlement owner missing; continuation acceptance fails",
+  "pageAcceptance": "未完成",
+  "fullProjectRerun": false
+}

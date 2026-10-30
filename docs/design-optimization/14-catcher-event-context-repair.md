@@ -1,6 +1,6 @@
 # 捕手情境來源矛盾修補（2026-10-30）
 
-程式修補與定向回歸已完成。**頁面限定驗收仍未完成，待修補後人工續驗**；本文件沒有把 Node/VM 結果列為瀏覽器驗收通過。
+原捕手情境來源修補已提交。**後續檢查發現 fallback 的 PA 接續缺少結算 owner，整體修補尚未完成**；本輪完成文字清理及防止原短打被壓縮 PA 覆蓋的保護。四個端到端續行案例仍失敗，詳見[限定收尾與阻塞提案](15-catcher-bunt-fallback-continuation.md)。頁面限定驗收仍未完成；本文件以下首輪結果不代表續行通過。
 
 分支：`fix/catcher-event-consistency-2026-10-30`，從現有 `integration/y1-health-opportunity-2026-10-29` 的 `f239a8daad60fa3a474cdac838aee783ede80333` 建立獨立 worktree：`C:/Users/User/AppData/Local/Temp/baseball-catcher-event-repair-2026-10-30`。沒有合併回 integration。
 
@@ -29,7 +29,7 @@
 
 因此錯誤早於文字投影：短打被錯誤准入成玩家二壘手事件，再由捕手分支產生另一種事件的任務與選項。另外，原本一般捕手擋球情境使用 `highChop / groundBall` 當觀察球況，本身也與落地投球不同。
 
-## 最小修改
+## 首輪最小修改（5aae9bd）
 
 [程式與測試 diff](catcher-event-repair-v1/minimal.diff) 僅包含三個檔案；production `script.js` 為 **+26/-8**：
 

@@ -134,6 +134,7 @@
     const direction = { firstBaseSide: "leftSide", pitcherArea: "straightAtPlayer", secondBaseSide: "rightSide", thirdBaseSide: "leftSide" }[placement] || "straightAtPlayer";
     const type = pace === "hard" ? "hardGrounder" : "slowGrounder";
     const paceLabel = { dead: "幾乎停住的短打", soft: "很緩的短打", controlled: "受控滾動的短打", hard: "偏強的短打" }[pace] || "短打";
+    const placementLabel = { firstBaseSide: "一壘側", secondBaseSide: "二壘手一側", thirdBaseSide: "三壘側", pitcherArea: "投手附近" }[placement];
     const accessLevel = !ground ? "unsupported" : supported && pace === "hard" ? "favored" : supported ? "possible" : "unsupported";
     return deepFreeze({
       version: "bunt-defensive-ball-context-v1",
@@ -142,7 +143,8 @@
       family: "groundBall",
       pace: pace === "hard" ? "hard" : "slow",
       label: paceLabel,
-      detail: placement === "secondBaseSide" ? "球往二壘手一側滾動。" : "此落點的完整守備位置尚未納入本階段。",
+      detail: !ground ? "短打形成小飛球，接球結果尚未確定。"
+        : placementLabel ? `球往${placementLabel}滾動。` : "球在內野滾動。",
       timeWindow: pace === "hard" ? "reaction" : "charge",
       ballDirection: direction,
       ballDepth: "shallow",
