@@ -1,5 +1,7 @@
 # 捕手短打 fallback 限定收尾（2026-10-30）
 
+後續：本報告保存 owner 修補前的阻塞。限定 NPC 地面短打 owner、原四案轉綠與實際頁面續行證據見 [16 號報告](16-catcher-npc-ground-bunt-settlement.md)；整體高一健康切片仍未完成驗收。
+
 **狀態：文字已清理；PA 續行仍阻塞，不能宣稱修補完成。頁面限定驗收維持未完成。**
 
 沿用 `fix/catcher-event-consistency-2026-10-30`，父版本 `5aae9bd4c7c017a38761ddd690fddbd58e16a661`。本輪不合回 integration，不調整健康公式或 UI 結構。

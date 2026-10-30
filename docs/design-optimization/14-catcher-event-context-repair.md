@@ -1,5 +1,7 @@
 # 捕手情境來源矛盾修補（2026-10-30）
 
+後續限定 NPC 短打 owner 與續行證據已另存於 [16 號報告](16-catcher-npc-ground-bunt-settlement.md)。以下保留首輪歷史紀錄，不代表最新 owner 仍缺失；高一健康切片整體驗收仍未完成。
+
 原捕手情境來源修補已提交。**後續檢查發現 fallback 的 PA 接續缺少結算 owner，整體修補尚未完成**；本輪完成文字清理及防止原短打被壓縮 PA 覆蓋的保護。四個端到端續行案例仍失敗，詳見[限定收尾與阻塞提案](15-catcher-bunt-fallback-continuation.md)。頁面限定驗收仍未完成；本文件以下首輪結果不代表續行通過。
 
 分支：`fix/catcher-event-consistency-2026-10-30`，從現有 `integration/y1-health-opportunity-2026-10-29` 的 `f239a8daad60fa3a474cdac838aee783ede80333` 建立獨立 worktree：`C:/Users/User/AppData/Local/Temp/baseball-catcher-event-repair-2026-10-30`。沒有合併回 integration。

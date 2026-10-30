@@ -22,6 +22,8 @@
 
 ### 後續修補與版本保存
 
+- [捕手視角 NPC 地面短打 owner、續行測試與實際頁面證據](16-catcher-npc-ground-bunt-settlement.md)
+
 - [比賽回饋事實性修補](07-feedback-repair.md)
 - [舊資料邊界與敘事收尾](08-legacy-feedback-boundaries.md)
 - [兩項測試收尾](09-test-closeout.md)

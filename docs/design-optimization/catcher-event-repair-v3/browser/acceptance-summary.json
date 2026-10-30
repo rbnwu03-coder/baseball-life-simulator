@@ -1,0 +1,23 @@
+{
+  "kind": "live Playwright MCP, actual page buttons and automatic playback; no state/RNG injection",
+  "testedCodeCommit": "7cea5dba83e00a0dc5be11a621aaf74a5004f11c",
+  "seed": 604606,
+  "paIdentity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|7|1|falsefalsefalse",
+  "checks": {
+    "sameOriginalPhysicalTruth": true,
+    "groundHardSecond": true,
+    "catcherRetained": true,
+    "noCatcherPitchChoiceDuringBunt": true,
+    "actualNpcActors": true,
+    "oneExistingRngSample": true,
+    "worldRngDeltaOne": true,
+    "oneOfficialPA": true,
+    "oneBattingAdvance": true,
+    "onePaRefOneDefenseRef": true,
+    "noCompressedReplacement": true,
+    "recordIntegrity": true,
+    "visibleNpcCompletion": true
+  },
+  "extraBrowserSaveLoad": "NOT PASSED: stale-ref save failed; reload returned to pre-match checkpoint. Formal Save/Load assertions pass in Node/VM.",
+  "fullYearHealthAcceptance": false
+}

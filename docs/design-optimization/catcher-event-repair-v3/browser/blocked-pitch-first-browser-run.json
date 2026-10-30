@@ -1,0 +1,51 @@
+{
+  "position": "捕手",
+  "assignment": "壘上無人，投手的變化球提前落地，需要先擋住並控制球。控制球後交回投手準備下一球。",
+  "ball": {
+    "type": "blockedPitch",
+    "family": "pitch",
+    "label": "本壘前落地的變化球",
+    "detail": "投手的變化球提前落地，需要先擋住並控制球。",
+    "timeWindow": "reaction"
+  },
+  "choices": [
+    {
+      "text": "先擋住球，控制在本壘區內",
+      "matchDecision": "secureAndHold",
+      "catcherIntent": "secureAndHold",
+      "routeId": "secureAndHold",
+      "executionText": "你先用身體把彈球擋在身前，控制住球後確認所有跑者仍留在原壘。",
+      "matchMomentId": "hs_y1_match_moment_2"
+    },
+    {
+      "text": "接穩彈球後立刻交回投手，重設下一球",
+      "matchDecision": "secureAndReset",
+      "catcherIntent": "secureAndReset",
+      "routeId": "secureAndReset",
+      "executionText": "你把彈球壓在身前，確認沒有跑者啟動後立刻交回投手，重新準備下一球。",
+      "matchMomentId": "hs_y1_match_moment_2"
+    },
+    {
+      "text": "用身體擋在球後方，避免彈球滾離本壘區",
+      "matchDecision": "blockAndControl",
+      "catcherIntent": "blockAndControl",
+      "routeId": "blockAndControl",
+      "executionText": "你用身體封住彈球路線，把球控制在本壘區內，沒有進行傳壘。",
+      "matchMomentId": "hs_y1_match_moment_2"
+    }
+  ],
+  "tactical": {
+    "version": "offensive-tactical-action-v1",
+    "identity": "hs-y1-autumn-exhibition|3|上|away|regional-power-school-player-07|2|0|falsefalsefalse",
+    "selectedTacticalAction": "standardAttack",
+    "batterCommitment": "standard",
+    "runnerCommitment": "noSpecialTacticalCommitment",
+    "revealTiming": "none",
+    "currentPhase": "lateReveal",
+    "observableEventPlan": [],
+    "observableEvents": [],
+    "emittedEventIds": [],
+    "executionDeferred": true
+  },
+  "bunt": null
+}
