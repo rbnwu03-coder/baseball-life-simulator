@@ -22,6 +22,8 @@
 
 ### 後續修補與版本保存
 
+- [高一健康切片頁面續驗：首場 popBunt 阻塞與存讀檔證據](17-y1-health-page-acceptance-blocked.md)
+
 - [捕手視角 NPC 地面短打 owner、續行測試與實際頁面證據](16-catcher-npc-ground-bunt-settlement.md)
 
 - [比賽回饋事實性修補](07-feedback-repair.md)

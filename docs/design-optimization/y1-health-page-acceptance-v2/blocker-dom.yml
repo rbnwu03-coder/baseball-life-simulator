@@ -1,0 +1,157 @@
+- generic [ref=f14e2]:
+  - banner [ref=f14e3]:
+    - heading "棒球人生：十歲的夏天" [level=1] [ref=f14e5]
+    - generic [ref=f14e6]:
+      - button "儲存" [ref=f14e7] [cursor=pointer]
+      - button "讀取" [ref=f14e1] [cursor=pointer]
+      - button "刪除存檔" [ref=f14e8] [cursor=pointer]
+  - main [ref=f14e9]:
+    - region "目前事件與選項" [ref=f14e10]:
+      - generic [ref=f14e11]:
+        - generic "賽事與進度" [ref=f14e12]:
+          - generic [ref=f14e995]:
+            - strong [ref=f14e996]: 青棒賽事
+            - generic [ref=f14e997]: 秋季交流賽
+          - generic [ref=f14e998]:
+            - generic [ref=f14e999]: 比賽進度
+            - strong [ref=f14e1000]: 2 局上
+            - generic [ref=f14e1001]: 正規 7 局
+        - region "完整逐局計分板" [ref=f14e20]:
+          - generic "秋季交流賽即時記分板" [ref=f14e1002]:
+            - generic [ref=f14e1003]:
+              - generic [ref=f14e1004]: 秋季交流賽
+              - strong [ref=f14e1005]: 高橋所屬的地區強校 vs 高中球隊
+            - region "7 局記分板" [ref=f14e1006]:
+              - table [ref=f14e1008]:
+                - rowgroup [ref=f14e1009]:
+                  - row [ref=f14e1010]:
+                    - columnheader "球隊" [ref=f14e1011]
+                    - columnheader "1" [ref=f14e1012]
+                    - columnheader "2" [ref=f14e1013]
+                    - columnheader "3" [ref=f14e1014]
+                    - columnheader "4" [ref=f14e1015]
+                    - columnheader "5" [ref=f14e1016]
+                    - columnheader "6" [ref=f14e1017]
+                    - columnheader "7" [ref=f14e1018]
+                    - columnheader "R" [ref=f14e1019]
+                    - columnheader "H" [ref=f14e1020]
+                    - columnheader "E" [ref=f14e1021]
+                - rowgroup [ref=f14e1022]:
+                  - row [ref=f14e1023]:
+                    - rowheader "客隊高橋所屬的地區強校" [ref=f14e1024]
+                    - cell "0" [ref=f14e1025]
+                    - cell "0" [ref=f14e1026]
+                    - cell "本半局尚未播放" [ref=f14e1027]: …
+                    - cell "本半局尚未播放" [ref=f14e1028]: …
+                    - cell "本半局尚未播放" [ref=f14e1029]: …
+                    - cell "本半局尚未播放" [ref=f14e1030]: …
+                    - cell "本半局尚未播放" [ref=f14e1031]: …
+                    - cell "0" [ref=f14e1032]
+                    - cell "1" [ref=f14e1033]
+                    - cell "0" [ref=f14e1034]
+                  - row [ref=f14e1035]:
+                    - rowheader "主隊高中球隊" [ref=f14e1036]
+                    - cell "0" [ref=f14e1037]
+                    - cell "本半局尚未播放" [ref=f14e1038]: …
+                    - cell "本半局尚未播放" [ref=f14e1039]: …
+                    - cell "本半局尚未播放" [ref=f14e1040]: …
+                    - cell "本半局尚未播放" [ref=f14e1041]: …
+                    - cell "本半局尚未播放" [ref=f14e1042]: …
+                    - cell "本半局尚未播放" [ref=f14e1043]: …
+                    - cell "0" [ref=f14e1044]
+                    - cell "1" [ref=f14e1045]
+                    - cell "0" [ref=f14e1046]
+        - complementary "比賽資訊" [ref=f14e66]:
+          - generic [ref=f14e67]:
+            - generic [ref=f14e1047]:
+              - strong [ref=f14e1048]: 2 局上
+              - generic [ref=f14e1049]: 客隊進攻
+            - generic [ref=f14e1050]:
+              - generic [ref=f14e1051]:
+                - text: 客隊
+                - generic [ref=f14e1052]: 高橋所屬的地區強校
+                - strong [ref=f14e1053]: "0"
+              - generic [ref=f14e1054]: ":"
+              - generic [ref=f14e1055]:
+                - text: 主隊
+                - generic [ref=f14e1056]: 高中球隊
+                - strong [ref=f14e1057]: "0"
+            - generic [ref=f14e1058]:
+              - generic "壘包狀態" [ref=f14e1059]:
+                - generic "三壘空壘" [ref=f14e1060]
+                - generic "二壘空壘" [ref=f14e1061]
+                - generic "一壘空壘" [ref=f14e1062]
+              - paragraph [ref=f14e1063]: 一壘 空壘 · 二壘 空壘 · 三壘 空壘
+            - generic [ref=f14e1064]:
+              - generic [ref=f14e1065]:
+                - text: B
+                - strong [ref=f14e1066]: —
+              - generic [ref=f14e1072]:
+                - text: S
+                - strong [ref=f14e1073]: —
+              - generic [ref=f14e1078]:
+                - text: O
+                - strong [ref=f14e1079]: "0"
+          - region "場上紀錄" [ref=f14e1084]:
+            - generic [ref=f14e1085]:
+              - generic [ref=f14e1086]: 場上紀錄
+              - generic [ref=f14e1087]: 最近進展
+            - list [ref=f14e1088]:
+              - listitem [ref=f14e1089]: 3 出局｜1局下結束，我方沒有得分。
+              - listitem [ref=f14e1090]: 0 出局｜攻守交換，進入2局上；目前比分 0：0。
+              - listitem [ref=f14e1091]: 0 出局｜打者把球點成空中的短飛球。 球已進入場內，等待後續守備處理。
+              - listitem [ref=f14e1092]: 0 出局｜壘上無人，短打形成小飛球；接球結果尚未確定。
+          - group [ref=f14e115]:
+            - generic "情境與策略線索" [ref=f14e116] [cursor=pointer]
+        - region "比賽主畫框" [ref=f14e117]:
+          - generic "本壘後方投打空間，中性人物佔位，尚未完成美術" [ref=f14e118]:
+            - generic:
+              - generic:
+                - img "投手中性佔位"
+              - generic:
+                - img "打者中性佔位"
+              - generic:
+                - img "捕手中性佔位"
+              - generic "好球帶中性示意，未提供位置資訊": K-ZONE
+            - paragraph [ref=f14e119]: 原比賽進行中
+            - generic [aria-hidden] [ref=f14e398]: 看球好球
+            - paragraph [ref=f14e120]: 2D 構圖研究 · 人物為中性佔位，美術未完成 · K-Zone 非實際落點
+        - complementary "投打球員與局面" [ref=f14e121]:
+          - generic [ref=f14e1093]:
+            - generic [ref=f14e1094]:
+              - strong [ref=f14e1095]: 投手
+              - generic [ref=f14e1096]: 正式名單
+            - generic [ref=f14e1097]:
+              - generic "肖像 unavailable" [ref=f14e1098]: P
+              - generic [ref=f14e1099]:
+                - strong [ref=f14e1100]: 青木
+                - generic [ref=f14e1101]: P
+                - generic [ref=f14e1102]: 肖像 unavailable
+          - generic [ref=f14e1103]:
+            - generic [ref=f14e1104]:
+              - strong [ref=f14e1105]: 打者
+              - generic [ref=f14e1106]: 正式名單
+            - generic [ref=f14e1107]:
+              - generic "肖像 unavailable" [ref=f14e1108]: B
+              - generic [ref=f14e1109]:
+                - strong [ref=f14e1110]: 加藤
+                - generic [ref=f14e1111]: SS
+                - generic [ref=f14e1112]: 肖像 unavailable
+          - generic [ref=f14e1113]:
+            - generic [ref=f14e1114]: 當前局面
+            - strong [ref=f14e1115]: 2 局上 · 0 出局
+            - paragraph [ref=f14e1116]: 一壘 空壘 · 二壘 空壘 · 三壘 空壘
+        - region "目前操作" [ref=f14e146]:
+          - region [ref=f14e979]:
+            - heading "場上進行中，輪到你時會停下來" [active] [level=2] [ref=f14e987]
+            - status [ref=f14e988]:
+              - paragraph [ref=f14e989]: 已由原比賽處理這一球。
+              - paragraph [ref=f14e990]: · 第 4 球：看球好球（1 壞球、3 好球） · fastball · 89.3 km/h
+              - paragraph [ref=f14e991]: · 最近正式打席：三振。請依原畫面繼續。
+          - group "事件選項" [ref=f14e151]:
+            - status [ref=f14e992]:
+              - strong [ref=f14e993]: 場上正在進行下一個打席
+              - generic [ref=f14e994]: 輪到你的關鍵判斷時，比賽會停下來。
+        - group [ref=f14e160]:
+          - generic "比賽紀錄與完整情境" [ref=f14e161] [cursor=pointer]
+    - text: － ＋ ＋ ＋ ＋
