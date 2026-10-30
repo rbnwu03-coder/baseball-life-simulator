@@ -1,11 +1,11 @@
 {
-  "executedAt": "2026-10-30T08:56:22.782Z",
+  "executedAt": "2026-10-30T09:25:28.119Z",
   "node": "v24.19.0",
   "baseline": "009037725fbbdc0ce8603105fc6682bca6c4da4f",
   "sources": [
     {
       "file": "script.js",
-      "sha256": "5d343e75e5cae6957713eba6731b67e070cf35a4b7d7156b400c63a7fb047e52"
+      "sha256": "3220ccface61a87a8132c2121a45c70d154977cefdd36151fc5f43f7d977d348"
     },
     {
       "file": "offensive-bunt-defensive-handoff.js",
@@ -15,10 +15,10 @@
   "suites": [
     {
       "file": "tests/catcher-event-context-consistency-test.cjs",
-      "sourceSha256": "f6c9442a0fe5d361554441e027ca0147d361f895901e706eb25e49b9afa85a9e",
+      "sourceSha256": "54e7a06ffb3506be267d8cabbaf21a317f7c55d601aa5b1973ac01b10190e68e",
       "exitCode": 0,
       "error": null,
-      "passed": 39,
+      "passed": 40,
       "log": "catcher-event-context-consistency-test.cjs.txt"
     },
     {
@@ -91,8 +91,7 @@
       "exitCode": 1,
       "error": null,
       "passed": 0,
-      "log": "match-full-game-record-test.js.txt",
-      "baselineComparison": "record-baseline-comparison.json"
+      "log": "match-full-game-record-test.js.txt"
     },
     {
       "file": "tests/shared-infield-contract-2b-production-integration-test.js",

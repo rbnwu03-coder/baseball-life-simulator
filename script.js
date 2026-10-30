@@ -6414,6 +6414,10 @@ function formatMatchSimulationEvent(event, match) {
   if (event.type === "buntDefensiveFallback") {
     return { type: event.type, priority: 4, text: `${event.outs ?? match.outs} 出局｜${event.presentation || event.assignment}` };
   }
+  if (event.type === "defensivePlay" && event.outcomeAuthority === HIGH_SCHOOL_NPC_GROUND_BUNT_OWNER) {
+    return { type: event.type, priority: 5, playerRelated: false,
+      text: `${event.after.outs} 出局｜${event.presentation} 目前${formatHighSchoolMatchRunners(event.after.runners)}；這個短打打席已結束，輪到下一棒。` };
+  }
   if (event.type === "defensiveResolution") {
     const result = event.outsCreated >= 2 ? "完成雙殺" : event.outsCreated === 1 ? "取得一個出局" : event.error ? "守備失誤讓跑者推進" : "沒有取得出局";
     return { type: event.type, priority: 5, playerRelated: true, text: `${event.outs ?? match.outs} 出局｜這次守備${result}；目前${formatHighSchoolMatchRunners(event.runners)}。` };
@@ -10891,6 +10895,7 @@ function getHighSchoolNpcGroundBuntReceipt(match) {
     || pa[0].currentBatterAfter !== receipt.nextBatterId
     || !same(defense[0].execution, receipt.execution) || !same(defense[0].actionFacts, receipt.actionFacts)
     || !same(defense[0].defensiveAttribution, receipt.defensiveAttribution)
+    || !same(defense[0].settlementReceipt, receipt)
     || receipt.battingSlotAfter !== (receipt.before.battingSlot + 1) % receipt.lineupLength
     || receipt.settlement?.identity !== `${identity}|settlement-v1` || receipt.settlement.settlementApplied !== true
     || receipt.settlement.outsAfter !== receipt.after.outs || !same(receipt.settlement.baseChanges, receipt.after.runners)
@@ -11014,11 +11019,13 @@ function settleHighSchoolNpcGroundBunt(match) {
     assignment, presentation: assignment, execution, actionFacts, defensiveAttribution, outsCreated: runnerSettlement.outsCreated });
   advanceHighSchoolMatchBattingOrder(staged, staged.offenseTeam);
   staged.currentAssignment = assignment;
-  staged.buntBallInPlayState = OffensiveBuntDefensiveHandoff.normalizeHandoff({ ...handoff,
-    npcSettlement: { version: HIGH_SCHOOL_NPC_GROUND_BUNT_OWNER, status: "committed", identity, source, before, after,
-      execution, settlement: applied, actionFacts, defensiveAttribution, result, paEventId, defensiveEventId,
-      lineupLength: staged.rosters[staged.offenseTeam].lineup.length,
-      battingSlotAfter: staged.battingOrderIndex[staged.offenseTeam], nextBatterId: staged.currentBatter } });
+  const receipt = { version: HIGH_SCHOOL_NPC_GROUND_BUNT_OWNER, status: "committed", identity, source, before, after,
+    execution, settlement: applied, actionFacts, defensiveAttribution, result, paEventId, defensiveEventId,
+    lineupLength: staged.rosters[staged.offenseTeam].lineup.length,
+    battingSlotAfter: staged.battingOrderIndex[staged.offenseTeam], nextBatterId: staged.currentBatter };
+  // The event ledger outlives the next PA's temporary tactical/handoff state.
+  event.settlementReceipt = JSON.parse(JSON.stringify(receipt));
+  staged.buntBallInPlayState = OffensiveBuntDefensiveHandoff.normalizeHandoff({ ...handoff, npcSettlement: receipt });
   assertHighSchoolMatchStateIntegrity(staged, "npc-ground-bunt-settlement");
   getHighSchoolNpcGroundBuntReceipt(staged);
   Object.assign(match, staged);

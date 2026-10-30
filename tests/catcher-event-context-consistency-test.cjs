@@ -360,5 +360,16 @@ verify("missing or corrupt settlement receipt cannot produce a second official P
     return error === "BUNT_NPC_PARTIAL_OR_CORRUPT_RECEIPT" && before === JSON.stringify(m);
   });
 })()`));
+verify("NPC settlement is visible and its receipt survives next-PA handoff cleanup and Save/Load", h.run(`(() => {
+  let m = catcherReadyForNpc(); const event = settleHighSchoolNpcGroundBunt(m);
+  const receipt = JSON.stringify(event.settlementReceipt), id = event.eventId;
+  const feed = formatMatchSimulationEvent(event, m);
+  if (!feed.text.includes("二壘手") || !feed.text.includes("打席已結束，輪到下一棒") || feed.playerRelated) return false;
+  prepareHighSchoolOffensiveTacticalAction(m, {tacticalActionOverride:"standardAttack"});
+  if(m.buntBallInPlayState !== null) return false;
+  saveGame(); player=createInitialPlayer(); loadGame(); m=player.highSchoolMatch;
+  return receipt === JSON.stringify(m.simulationLog.find(e=>e.eventId===id).settlementReceipt) &&
+    m.gameRecord.eventRefs.filter(e=>e.eventId===id).length===1 && MatchGameRecord.assertIntegrity(m.gameRecord);
+})()`));
 console.log(`Catcher event context consistency: ${passed} passed, ${failed} failed`);
 }
