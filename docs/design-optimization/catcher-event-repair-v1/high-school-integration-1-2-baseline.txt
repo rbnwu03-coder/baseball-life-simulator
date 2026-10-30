@@ -1,0 +1,30 @@
+✓ 1. 比賽固定三個穩定 Moment identity，且沿用唯一 showcase event
+✓ 2. 全部 Moment 共用 match identity、對手與累積比分
+✓ 3. 固定進攻 Moment 1 → 3 保持順序；Moment 2 只在首個真實防守 Decision 成立
+✓ 4. Starter／Rotation／Bench 都依 regulation 完成 density-controlled active decision loop
+✓ 5. 每條角色路線都正式涵蓋 offense 與 defense
+✓ 6. 守備 Moment 正式讀取 canonical primaryPosition
+✓ 7. 投打慣用側只提供可見 context，不 gate 選項
+node:internal/assert/utils:77
+    throw err;
+    ^
+
+AssertionError [ERR_ASSERTION]: 8. Moment 1 成功與失敗都離開首段並形成不同教練 context
+    at verify (C:\Users\User\AppData\Local\Temp\baseball-y1-health-integration-2026-10-29\tests\high-school-integration-1-2-test.js:134:10)
+    at Object.<anonymous> (C:\Users\User\AppData\Local\Temp\baseball-y1-health-integration-2026-10-29\tests\high-school-integration-1-2-test.js:170:1)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

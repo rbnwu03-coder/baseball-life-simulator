@@ -1,0 +1,22 @@
+✓ 1. 每個 player-visible 捕手選項都有唯一 canonical intent
+✓ 2. 無跑者時只顯示控制／重設 route，不顯示抓跑者 route
+✓ 3. 有跑者時不提供悠閒 secureAndReset
+✓ 4. 接穩交回投手保留 selectedRoute 與 finalRoute
+✓ 5. secureAndReset execution 真的回傳投手且不傳壘
+✓ 6. secureAndReset outcome 不產生 phantom runner／base throw
+✓ 7. holdRunner route 不傳球、不虛構出局且跑者守恆
+✓ 8. attemptRunnerOut 才會實際傳向壘包並解算 timing
+✓ 9. aggressive route 才允許出現 runner out／趁傳類 consequence
+✓ 10. secure intent 發生 late runner break 時建立 explicit reassessment
+✓ 11. reassessment presentation 說明原 intent 與局勢改變
+✓ 12. 無 explicit trigger 時不得 silent route rewrite
+✓ 13. 捕手 attribution 沿用 responsibleActor／cause contract
+✓ 14. 捕手處理不把 blocked pitch 虛構成打者完成打席
+✓ 15. save/reload 深層保留 selected／final route 與 stages
+✓ 16. reassessment state save/reload 後不退回另一 generic route
+✓ 17. 同 seed／同 choice selected route 與 outcome deterministic
+✓ 18. 捕手修正沒有消耗 match simulation RNG cursor
+✓ 19. Match Experience 支援邊界仍只有 2B defense 與 batter
+✓ 20. 捕手 decision 不直接寫入永久 skill growth
+
+Catcher Choice Outcome Integrity v1：20/20 通過

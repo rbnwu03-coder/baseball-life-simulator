@@ -1,0 +1,125 @@
+{
+  "executedAt": "2026-10-30T05:36:40.177Z",
+  "runtime": "v24.19.0",
+  "scriptSha256": "bd67bc494b0c91121835079860f8ab5143bdd149a6a9d4ccd9bfff43698bd6e5",
+  "execution": "Node/VM; not browser acceptance",
+  "suites": [
+    {
+      "file": "tests/catcher-event-context-consistency-test.cjs",
+      "sourceSha256": "94465e1f290d742887d241936affcaa327cd3534507242b2ba19f695bbd63e01",
+      "exitCode": 0,
+      "error": null,
+      "elapsedMs": 134,
+      "assertionsPassed": 21,
+      "log": "catcher-event-context-consistency-test.cjs.txt"
+    },
+    {
+      "file": "tests/catcher-choice-outcome-integrity-v1-test.js",
+      "sourceSha256": "38c1f5f85fbd8b0a2039bce42fb283f8edc5e36f353ef11811e7221d78bd9c27",
+      "exitCode": 0,
+      "error": null,
+      "elapsedMs": 86,
+      "assertionsPassed": 20,
+      "log": "catcher-choice-outcome-integrity-v1-test.js.txt"
+    },
+    {
+      "file": "tests/offensive-tactical-action-sprint-b2-defensive-handoff-test.js",
+      "sourceSha256": "9704aed102cede18112b9d302655bd4751405f500a5f9eaa8ab5a5e93412c321",
+      "exitCode": 0,
+      "error": null,
+      "elapsedMs": 104,
+      "assertionsPassed": 26,
+      "log": "offensive-tactical-action-sprint-b2-defensive-handoff-test.js.txt"
+    },
+    {
+      "file": "tests/offensive-tactical-action-sprint-b1-0-1-test.js",
+      "sourceSha256": "4bd9c6141bd59112a4456ab5109ef4eeaa0265c96bbec5fa4101f75f057ffe49",
+      "exitCode": 0,
+      "error": null,
+      "elapsedMs": 95,
+      "assertionsPassed": 21,
+      "log": "offensive-tactical-action-sprint-b1-0-1-test.js.txt"
+    },
+    {
+      "file": "tests/high-school-integration-1-2-test.js",
+      "sourceSha256": "e9cdf9dc03c89b623cd3fc3a8997c46c99e71e1e8c979652ff9e034aa1594fe0",
+      "exitCode": 1,
+      "error": null,
+      "elapsedMs": 210,
+      "assertionsPassed": 7,
+      "log": "high-school-integration-1-2-test.js.txt"
+    },
+    {
+      "file": "tests/match-situation-lifecycle-test.js",
+      "sourceSha256": "33912460d88d3a4922a46ba5fe92e4149b679792e7af09f0ab7c87dfa29a6d60",
+      "exitCode": 0,
+      "error": null,
+      "elapsedMs": 41,
+      "assertionsPassed": 23,
+      "log": "match-situation-lifecycle-test.js.txt"
+    }
+  ],
+  "historicalEvidence": {
+    "manifest": "docs/design-optimization/y1-health-integration-acceptance-v1/historical-evidence.json",
+    "sha256": "02d815c213e3a26ecd8b07769cc0984e00407c726814ac76a47f6b1144359a7f",
+    "references": [
+      {
+        "label": "baseline7",
+        "file": "docs/design-optimization/health-opportunity-candidate-v1/regressions-baseline-sealed-v3/results.json",
+        "sha256": "4f81d6cbc959ecb0e7c2558fa7f33ef96d01a72a7cf6314fee91dd226b746cc1",
+        "groups": 7,
+        "status": "Referenced historical PASS",
+        "rerunThisTurn": false,
+        "execution": "Node/VM, not this turn real-browser evidence",
+        "actualSha256": "4f81d6cbc959ecb0e7c2558fa7f33ef96d01a72a7cf6314fee91dd226b746cc1",
+        "hashMatches": true
+      },
+      {
+        "label": "candidate7",
+        "file": "docs/design-optimization/health-opportunity-candidate-v1/regressions-candidate-sealed-v3/results.json",
+        "sha256": "4f81d6cbc959ecb0e7c2558fa7f33ef96d01a72a7cf6314fee91dd226b746cc1",
+        "groups": 7,
+        "status": "Referenced historical PASS",
+        "rerunThisTurn": false,
+        "execution": "Node/VM, not this turn real-browser evidence",
+        "actualSha256": "4f81d6cbc959ecb0e7c2558fa7f33ef96d01a72a7cf6314fee91dd226b746cc1",
+        "hashMatches": true
+      },
+      {
+        "label": "formal15",
+        "file": "docs/design-optimization/health-opportunity-candidate-v1/formal-sealed-v3.json",
+        "sha256": "0100ac2edd7b7925fef03866d1723076f7f3e794207c91e6297d6bca097bb088",
+        "groups": 15,
+        "status": "Referenced historical PASS",
+        "rerunThisTurn": false,
+        "execution": "Node/VM, not this turn real-browser evidence",
+        "actualSha256": "0100ac2edd7b7925fef03866d1723076f7f3e794207c91e6297d6bca097bb088",
+        "hashMatches": true
+      },
+      {
+        "label": "legacy16",
+        "file": "docs/design-optimization/health-opportunity-candidate-v2/semantics-sealed-v3.json",
+        "sha256": "6e4fc9fe96e3e9e84f3d0e8eacb763c2d72e78d924fc0ab49fde5ba10ce19431",
+        "groups": 16,
+        "status": "Referenced historical PASS",
+        "rerunThisTurn": false,
+        "execution": "Node/VM, not this turn real-browser evidence",
+        "actualSha256": "6e4fc9fe96e3e9e84f3d0e8eacb763c2d72e78d924fc0ab49fde5ba10ce19431",
+        "hashMatches": true
+      },
+      {
+        "label": "retry12",
+        "file": "docs/design-optimization/health-opportunity-candidate-v3/retry-sealed-v3.json",
+        "sha256": "336465d79ebb6b2ab5b968e5c498c565ff66b8eaace2ce8649c47d584f6d263d",
+        "groups": 12,
+        "status": "Referenced historical PASS",
+        "rerunThisTurn": false,
+        "execution": "Node/VM, not this turn real-browser evidence",
+        "actualSha256": "336465d79ebb6b2ab5b968e5c498c565ff66b8eaace2ce8649c47d584f6d263d",
+        "hashMatches": true
+      }
+    ]
+  },
+  "fullProjectRerun": false,
+  "pageAcceptance": "未完成，修補後待人工續驗"
+}

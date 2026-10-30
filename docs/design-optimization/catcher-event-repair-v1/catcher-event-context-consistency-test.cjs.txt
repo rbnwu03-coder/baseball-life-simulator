@@ -1,0 +1,22 @@
+✓ buntEmpty: same PA preserves fair second-base-side bunt truth
+✓ buntEmpty: catcher never admitted as second baseman
+✓ buntEmpty: existing unsupported fallback replaces false catcher decision
+✓ buntEmpty: source, task and observation retain bunt context
+✓ buntEmpty: official bases, count of outs, batter, order and RNG unchanged
+✓ buntOccupied: same PA preserves fair second-base-side bunt truth
+✓ buntOccupied: catcher never admitted as second baseman
+✓ buntOccupied: existing unsupported fallback replaces false catcher decision
+✓ buntOccupied: source, task and observation retain bunt context
+✓ buntOccupied: official bases, count of outs, batter, order and RNG unchanged
+✓ blockedEmpty: task and observation describe the same blocked pitch
+✓ blockedEmpty: all offered routes are catcher pitch routes
+✓ blockedOccupied: task and observation describe the same blocked pitch
+✓ blockedOccupied: all offered routes are catcher pitch routes
+✓ empty bases have no phantom runner or batter-runner cue
+✓ occupied bases retain actual runner and legal throw route
+✓ non-pitch ball rejects catcher block route before RNG or any state mutation
+✓ getters and save/load preserve same PA source, world state and choices
+✓ same PA handoff keeps physical truth when correcting a cached wrong position
+✓ legacy mismatched defense view retains bunt clues and rejects all pitch routes
+✓ pending activeSituation still blocks event preparation without mutation
+Catcher event context consistency: 21/21 passed

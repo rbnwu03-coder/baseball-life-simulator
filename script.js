@@ -4544,6 +4544,7 @@ function formatHighSchoolMatchSpeed(speed) {
 }
 
 const highSchoolBallContexts = Object.freeze({
+  blockedPitch: Object.freeze({ type: "blockedPitch", family: "pitch", label: "本壘前落地的變化球", detail: "投手的變化球提前落地，需要先擋住並控制球。", timeWindow: "reaction" }),
   hardGrounder: Object.freeze({ type: "hardGrounder", family: "groundBall", pace: "hard", label: "強勁正面滾地球", detail: "球快速進入守區，接穩後仍保有完整轉傳窗口。", timeWindow: "wide" }),
   normalGrounder: Object.freeze({ type: "normalGrounder", family: "groundBall", pace: "normal", label: "普通速度滾地球", detail: "球速與距離都在一般守備節奏內。", timeWindow: "balanced" }),
   slowGrounder: Object.freeze({ type: "slowGrounder", family: "groundBall", pace: "slow", label: "慢速滾地球", detail: "需要往前衝接，能留給第二段傳球的時間較少。", timeWindow: "narrow" }),
@@ -4571,7 +4572,7 @@ function deriveHighSchoolDefensiveBallContext(match) {
     "三壘手": "slowGrounder"
   }[match.developmentPositionOverride];
   const type = testContext || (match.position === "外野手" ? "lineDrive"
-    : match.position === "捕手" ? "highChop"
+    : match.position === "捕手" ? "blockedPitch"
       : match.position === "投手" ? "slowGrounder"
         : match.role === "starter" ? "hardGrounder" : match.role === "bench" ? "slowGrounder" : "deepGrounder");
   return Object.freeze({ ...highSchoolBallContexts[type] });
@@ -4921,8 +4922,11 @@ function ensureHighSchoolBuntBallInPlayHandoff(match) {
   const physicalTruth = getHighSchoolCompletedBuntPhysicalTruth(match);
   if (!physicalTruth) return null;
   const identity = `${match.offensiveBuntPAState.identity}|defensive-handoff`;
+  // The infield assignment fallback must not admit a catcher as a second baseman.
+  const playerPosition = match.developmentPositionOverride || (match.position === "捕手"
+    ? match.position : getHighSchoolInfieldAssignmentPosition(match, player));
   const existing = OffensiveBuntDefensiveHandoff.normalizeHandoff(match.buntBallInPlayState);
-  if (existing?.identity === identity) {
+  if (existing?.identity === identity && existing.defensiveAccess?.playerPosition === playerPosition) {
     match.buntBallInPlayState = existing;
     return existing;
   }
@@ -4945,7 +4949,7 @@ function ensureHighSchoolBuntBallInPlayHandoff(match) {
     batterRunner: { runnerId: match.currentBatter, speed: Number(batter?.speed) || 5 },
     forceState,
     priorRunnerCommitment: match.offensiveTacticalActionState?.runnerCommitment || "",
-    defenderContext: { playerPosition: match.developmentPositionOverride || getHighSchoolInfieldAssignmentPosition(match, player) }
+    defenderContext: { playerPosition }
   });
   return match.buntBallInPlayState;
 }
@@ -6101,6 +6105,11 @@ function advanceHighSchoolOffensiveTacticalReveal(match, phase = "lateReveal") {
 }
 
 function getHighSchoolOpponentObservableCues(match) {
+  if (getHighSchoolBallContext(match).type === "blockedPitch") {
+    return Object.freeze((match.runners || []).some(Boolean)
+      ? ["球在本壘前落地，先封住彈跳路線。", "控制球後再確認壘上跑者動向。"]
+      : ["球在本壘前落地，先封住彈跳路線。", "壘上無人，控制球後可交回投手準備下一球。"]);
+  }
   const tacticalCues = typeof OffensiveTacticalAction !== "undefined"
     ? OffensiveTacticalAction.formatObservableTacticalInformation(
       OffensiveTacticalAction.getObservableTacticalEvents(match?.offensiveTacticalActionState)
@@ -8991,7 +9000,12 @@ function getHighSchoolDefensiveSituationText(match) {
   const baseText = formatHighSchoolMatchRunners(match.runners);
   const position = match.position;
   if (position === "外野手") return `${baseText}，一記平飛球落在你前方，跑者正在判斷是否多推進一個壘包。`;
-  if (position === "捕手") return `${baseText}，投手的變化球提前落地，跑者同時離壘。`;
+  if (position === "捕手") {
+    const ball = getHighSchoolBallContext(match);
+    return ball.type === "blockedPitch"
+      ? `${baseText}，${ball.detail}${(match.runners || []).some(Boolean) ? "控制球後再確認壘上跑者動向。" : "控制球後交回投手準備下一球。"}`
+      : `${baseText}，${ball.label}；${ball.detail}`;
+  }
   if (position === "投手") return `${baseText}，短打落在投手丘右側，打者已離開打擊區。`;
   if (match.defensiveSituation?.familyId === "infield") return infieldDecisionFamily.present(match.defensiveSituation).situation;
   const ball = getHighSchoolBallContext(match);
@@ -9067,7 +9081,9 @@ function getHighSchoolDefensiveMomentChoices(match) {
     return choices;
   }
   if (position === "捕手") {
-    choices.push(makeHighSchoolCatcherChoice("先擋住球，守住目前壘包", "secureAndHold", momentId));
+    if (getHighSchoolBallContext(match).type !== "blockedPitch") return [];
+    choices.push(makeHighSchoolCatcherChoice(force.first || force.second || force.third
+      ? "先擋住球，守住目前壘包" : "先擋住球，控制在本壘區內", "secureAndHold", momentId));
     if (force.third) choices.push(makeHighSchoolCatcherChoice("接起彈球後守住本壘，挑戰三壘跑者", "attemptHomeOut", momentId));
     else if (force.first || force.second) choices.push(makeHighSchoolCatcherChoice("接起彈球後傳最前方壘包，挑戰離壘跑者", "attemptLeadRunnerOut", momentId));
     else choices.push(makeHighSchoolCatcherChoice("接穩彈球後立刻交回投手，重設下一球", "secureAndReset", momentId));
@@ -14031,10 +14047,12 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
   // A prior completed grounder must not suppress a later routine defensive settlement.
   match.groundBallInPlayState = groundBallHandoff;
   if (buntHandoff && !buntHandoff.supported) {
+    match.ballContext = JSON.parse(JSON.stringify(buntHandoff.ballContext));
     if (buntHandoff.fallbackPresented !== true) {
+      const placement = { secondBaseSide: "二壘手一側", thirdBaseSide: "三壘側", firstBaseSide: "一壘側", pitcherArea: "投手附近" }[buntHandoff.ballContext.physicalTruth.placement] || "內野";
       const fallbackText = buntHandoff.ballContext.downstreamSupport === "unsupportedPopBuntFallback"
-        ? "短打形成小飛球，壘上跑者回頭確認球是否落地；本階段不預判接殺或離壘出局。"
-        : `短打落在${buntHandoff.ballContext.physicalTruth.placement === "thirdBaseSide" ? "三壘側" : buntHandoff.ballContext.physicalTruth.placement === "firstBaseSide" ? "一壘側" : "投手附近"}；此守備位置尚未納入二壘手垂直切片。`;
+        ? `${formatHighSchoolMatchRunners(match.runners)}，短打形成小飛球；本階段不預判接殺或離壘出局。`
+        : `${formatHighSchoolMatchRunners(match.runners)}，${buntHandoff.ballContext.label}落在${placement}；此守備位置尚未納入二壘手垂直切片。`;
       match.buntBallInPlayState = Object.freeze({ ...JSON.parse(JSON.stringify(buntHandoff)), fallbackPresented: true });
       const fallbackEvent = recordHighSchoolMatchSimulationEvent(match, {
         type: "buntDefensiveFallback", presentationImportance: "attention", inning: match.inning, half: match.half,
@@ -14044,7 +14062,7 @@ function prepareHighSchoolDefensiveMomentFromSimulation(match, options = {}) {
       match.currentMomentId = flowState.currentMomentId;
       match.simulationPhase = flowState.simulationPhase;
       match.currentDomain = flowState.currentDomain;
-      match.currentAssignment = flowState.currentAssignment;
+      match.currentAssignment = fallbackText;
       match.pendingDefensiveResumeState = null;
       finalizeHighSchoolMatchDefensiveOpportunity(match, opportunity, fallbackEvent, "unsupported-bunt-defense");
       return fallbackEvent;

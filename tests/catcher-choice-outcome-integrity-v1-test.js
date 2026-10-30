@@ -50,7 +50,7 @@ function makeContext() {
       Object.assign(match,{position:"捕手",playerFieldingAssignment:"捕手",currentFieldingPosition:"捕手",positionDecisionFamily:"",defensiveSituation:{},momentIndex:1,currentMomentId:highSchoolYearOneMomentIds[1],currentDomain:"defense",simulationPhase:"moment_2_ready",inning:4,half:"上",offenseTeam:"away",defenseTeam:"home",outs:1,runners:[null,null,null]});
       runners.forEach((base,index)=>{if(base)match.runners[index]=match.rosters.away.lineup[index+1].id;});
       match.currentBatter=getHighSchoolMatchLineupBatter(match,"away").id;
-      setHighSchoolDefensiveBallContext(match,"highChop");
+      setHighSchoolDefensiveBallContext(match,"blockedPitch");
       match.currentAssignment=getHighSchoolDefensiveSituationText(match);
       setHighSchoolCoachTacticalDirection(match);
       return match;
