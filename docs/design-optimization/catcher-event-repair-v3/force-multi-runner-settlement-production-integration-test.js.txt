@@ -1,0 +1,17 @@
+PASS legacy meaningful moment establishes canonical chain before decision
+PASS BUG-PLAYTEST-LOADED-DP-001 real 2B execution settles every actor
+PASS actual application produces 2 outs, R2 at third and one legal R3 run
+PASS duplicate application preserves bases, score, outs, order and all events
+PASS completed play normalizeSave replay is idempotent
+PASS pending defensive save restores movement identities and deterministic result
+PASS R1 production DP keeps correct survivors
+PASS R1+R2 production DP keeps correct survivors
+PASS R1+R3 production DP keeps correct survivors
+PASS R3 alone holds during secure first, no invented scoring
+PASS BR first retirement removes production R1 force and requires a tag
+PASS loaded one-out DP delegates run cancellation to existing third-out authority
+PASS legal run reaches canonical event and GameRecord
+PASS presentation and repeated render do not replay runner settlement
+PASS physical DP with expired second-leg window keeps BR and settles both other survivors
+PASS walk and uncontested BIP share contiguous-force concept
+Force multi-runner production integration: 16/16 PASS

@@ -1,0 +1,17 @@
+script.js:10871
+    throw new Error("BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING");
+    ^
+
+Error: BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING
+    at assertHighSchoolBuntFallbackSettlementReady (script.js:10871:11)
+    at advanceHighSchoolMatchPlaybackStep (script.js:14338:3)
+    at playCareerMatchToEnd (evalmachine.<anonymous>:29:16)
+    at evalmachine.<anonymous>:1:69
+    at Script.runInContext (node:vm:149:12)
+    at Object.runInContext (node:vm:301:6)
+    at run (C:\Users\User\AppData\Local\Temp\catcher-v3-record-baseline-StqyYp\tests\high-school-career-test-context.js:14:22)
+    at Object.<anonymous> (C:\Users\User\AppData\Local\Temp\catcher-v3-record-baseline-StqyYp\tests\match-full-game-record-test.js:18:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+
+Node.js v24.19.0

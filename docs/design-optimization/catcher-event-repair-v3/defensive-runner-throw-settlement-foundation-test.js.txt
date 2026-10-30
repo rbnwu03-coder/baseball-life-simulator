@@ -1,0 +1,23 @@
+PASS timing is frozen deterministic and contains no settlement or RNG
+PASS runner speed changes physical margin
+PASS weak and challenged throws delay usable receiver completion
+PASS start and advancement progress affect relative arrival
+PASS close play band exists independently from safe/out
+PASS secureFirstBaseOut: slow runner out, fast runner safe, explicit actor preserved
+PASS forceSecond: slow runner out, fast runner safe, explicit actor preserved
+PASS attackLeadRunnerThird: slow runner out, fast runner safe, explicit actor preserved
+PASS homeForceOut: slow runner out, fast runner safe, explicit actor preserved
+PASS tag possession first is insufficient when tag completes late
+PASS receiver must control the force base
+PASS offline and unavailable receive remain live pending recovery, not fabricated advancement
+PASS weak accurate throw can retire a slow runner
+PASS hold never advances runners or creates an out
+PASS DP settles only first out, recomputes forces, preserves pending batter
+PASS force retirement chain preserves lead-vs-trailing distinctions
+PASS force third out cancels run and clears runners via canonical authority
+PASS tag third out preserves another runner's earlier run only
+PASS stale runner, receiver, throw, outs, route, timing and bases reject
+PASS pending timing survives JSON without RNG or rebinding
+PASS occupied forced destination retains displaced actor in live continuation
+PASS single mutation adapter rejects repeated unapplied facts after first application
+Final: 22/22 PASS

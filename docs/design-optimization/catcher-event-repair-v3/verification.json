@@ -1,0 +1,109 @@
+{
+  "executedAt": "2026-10-30T08:56:22.782Z",
+  "node": "v24.19.0",
+  "baseline": "009037725fbbdc0ce8603105fc6682bca6c4da4f",
+  "sources": [
+    {
+      "file": "script.js",
+      "sha256": "5d343e75e5cae6957713eba6731b67e070cf35a4b7d7156b400c63a7fb047e52"
+    },
+    {
+      "file": "offensive-bunt-defensive-handoff.js",
+      "sha256": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b"
+    }
+  ],
+  "suites": [
+    {
+      "file": "tests/catcher-event-context-consistency-test.cjs",
+      "sourceSha256": "f6c9442a0fe5d361554441e027ca0147d361f895901e706eb25e49b9afa85a9e",
+      "exitCode": 0,
+      "error": null,
+      "passed": 39,
+      "log": "catcher-event-context-consistency-test.cjs.txt"
+    },
+    {
+      "file": "tests/catcher-choice-outcome-integrity-v1-test.js",
+      "sourceSha256": "38c1f5f85fbd8b0a2039bce42fb283f8edc5e36f353ef11811e7221d78bd9c27",
+      "exitCode": 0,
+      "error": null,
+      "passed": 20,
+      "log": "catcher-choice-outcome-integrity-v1-test.js.txt"
+    },
+    {
+      "file": "tests/offensive-tactical-action-sprint-b2-defensive-handoff-test.js",
+      "sourceSha256": "9704aed102cede18112b9d302655bd4751405f500a5f9eaa8ab5a5e93412c321",
+      "exitCode": 0,
+      "error": null,
+      "passed": 26,
+      "log": "offensive-tactical-action-sprint-b2-defensive-handoff-test.js.txt"
+    },
+    {
+      "file": "tests/offensive-tactical-action-sprint-b2-runner-realization-test.js",
+      "sourceSha256": "42b43e5c8a6ce9c02fc3a3e62c85b20f42ea74e51d0e6991c0bccc924f1e9c7c",
+      "exitCode": 0,
+      "error": null,
+      "passed": 22,
+      "log": "offensive-tactical-action-sprint-b2-runner-realization-test.js.txt"
+    },
+    {
+      "file": "tests/offensive-tactical-action-sprint-b1-0-1-test.js",
+      "sourceSha256": "4bd9c6141bd59112a4456ab5109ef4eeaa0265c96bbec5fa4101f75f057ffe49",
+      "exitCode": 0,
+      "error": null,
+      "passed": 21,
+      "log": "offensive-tactical-action-sprint-b1-0-1-test.js.txt"
+    },
+    {
+      "file": "tests/ai-plate-appearance-outcome-production-integration-test.js",
+      "sourceSha256": "7ce4f1736d0d70ed78a2a5ee783f61705b77e1f146b32d9c9f4f5e82c1b7e816",
+      "exitCode": 0,
+      "error": null,
+      "passed": 19,
+      "log": "ai-plate-appearance-outcome-production-integration-test.js.txt"
+    },
+    {
+      "file": "tests/third-out-runner-resolution-integrity-v1-test.js",
+      "sourceSha256": "1afa065908f4cf38e08a9ebba9d3bbaa06fd3f27e8e87f4b2532724841c1aece",
+      "exitCode": 0,
+      "error": null,
+      "passed": 16,
+      "log": "third-out-runner-resolution-integrity-v1-test.js.txt"
+    },
+    {
+      "file": "tests/force-multi-runner-settlement-production-integration-test.js",
+      "sourceSha256": "f5a02f3fb7647cd8305416eb35342f144952d376b487866a971ff112a8f3aa45",
+      "exitCode": 0,
+      "error": null,
+      "passed": 16,
+      "log": "force-multi-runner-settlement-production-integration-test.js.txt"
+    },
+    {
+      "file": "tests/defensive-runner-throw-settlement-foundation-test.js",
+      "sourceSha256": "cbdec6337aa0b6cc70251e1e1438d5544c08bf88b03bc983414af4641a6724d5",
+      "exitCode": 0,
+      "error": null,
+      "passed": 22,
+      "log": "defensive-runner-throw-settlement-foundation-test.js.txt"
+    },
+    {
+      "file": "tests/match-full-game-record-test.js",
+      "sourceSha256": "4e5eac9c3b9a5c7359658c808234770e2f3611095a610adfb0c2c9770d74e51b",
+      "exitCode": 1,
+      "error": null,
+      "passed": 0,
+      "log": "match-full-game-record-test.js.txt",
+      "baselineComparison": "record-baseline-comparison.json"
+    },
+    {
+      "file": "tests/shared-infield-contract-2b-production-integration-test.js",
+      "sourceSha256": "7b7ebe9e0aff64d32a4ce4eee1b7177ecc977f15a5132856ca6643ca649490ce",
+      "exitCode": 0,
+      "error": null,
+      "passed": 17,
+      "log": "shared-infield-contract-2b-production-integration-test.js.txt"
+    }
+  ],
+  "scope": "catcher NPC hard ground bunt toward second base",
+  "fullProjectRerun": false,
+  "fullYearHealthAcceptance": "未完成；仍需原定兩場至年末流程"
+}

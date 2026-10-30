@@ -11,7 +11,7 @@ function asset(file) {
   if (!cache.has(file)) cache.set(file,git("show",`${commit}:${file}`));
   return cache.get(file);
 }
-const version = {commit, root, pageAcceptance:"未完成", continuation:"BLOCKED: BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING",
+const version = {commit, root, pageAcceptance:"未完成：仍需兩場至年末健康切片", continuation:"NPC groundBunt/hard/secondBaseSide owner implemented; other bunt shapes remain guarded",
   scriptSha256:crypto.createHash("sha256").update(asset("script.js")).digest("hex")};
 const mime = {".html":"text/html; charset=utf-8", ".js":"text/javascript; charset=utf-8",
   ".css":"text/css; charset=utf-8", ".json":"application/json; charset=utf-8",

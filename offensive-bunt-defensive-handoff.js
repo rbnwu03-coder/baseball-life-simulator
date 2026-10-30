@@ -130,7 +130,8 @@
     const ground = physicalTruth.contactResult === "fairContact" && physicalTruth.fairBallType === "groundBunt";
     const placement = physicalTruth.placement || "";
     const pace = physicalTruth.pace || "";
-    const supported = ground && placement === "secondBaseSide" && defenderContext.playerPosition === "二壘手";
+    const supported = ground && placement === "secondBaseSide"
+      && (defenderContext.fielderPosition || defenderContext.playerPosition) === "二壘手";
     const direction = { firstBaseSide: "leftSide", pitcherArea: "straightAtPlayer", secondBaseSide: "rightSide", thirdBaseSide: "leftSide" }[placement] || "straightAtPlayer";
     const type = pace === "hard" ? "hardGrounder" : "slowGrounder";
     const paceLabel = { dead: "幾乎停住的短打", soft: "很緩的短打", controlled: "受控滾動的短打", hard: "偏強的短打" }[pace] || "短打";
@@ -151,6 +152,7 @@
       physicalTruth: { fairBallType: physicalTruth.fairBallType || null, pace: pace || null, placement: placement || null },
       defensiveAccess: {
         playerPosition: defenderContext.playerPosition || "",
+        ...(defenderContext.defenderId ? { defenderId: defenderContext.defenderId, fielderPosition: defenderContext.fielderPosition } : {}),
         level: accessLevel,
         supported,
         auditScope: "v1SecondBaseDefensiveVertical"
@@ -199,9 +201,20 @@
     return saved && typeof saved === "object" ? deepFreeze(clone(saved)) : null;
   }
 
+  // Responsibility is derived from the already established ball, independently
+  // of the player's assignment. Other bunt shapes still need their own owner.
+  function deriveNpcGroundResponsibility(physicalTruth = {}) {
+    const supported = physicalTruth.contactResult === "fairContact"
+      && physicalTruth.fairBallType === "groundBunt" && physicalTruth.pace === "hard"
+      && physicalTruth.placement === "secondBaseSide";
+    return deepFreeze({ supported, primaryPosition: supported ? "2B" : null,
+      receiverPosition: supported ? "1B" : null, policy: "secureFirstBaseOut",
+      authority: "originalGroundBuntPlacement" });
+  }
+
   return deepFreeze({
     VERSION, ARRIVAL_PROFILES, WINDOW_STATES, deriveArrivalProfile, deriveStartQuality,
     createRunnerPhysicalState, reassessRunners, projectCanonicalRunnerMovement,
-    buildDefensiveBallContext, buildTimingWindows, createHandoff, normalizeHandoff
+    buildDefensiveBallContext, buildTimingWindows, createHandoff, normalizeHandoff, deriveNpcGroundResponsibility
   });
 });

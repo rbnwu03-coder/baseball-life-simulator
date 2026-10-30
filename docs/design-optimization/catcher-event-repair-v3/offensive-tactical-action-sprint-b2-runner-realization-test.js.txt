@@ -1,0 +1,23 @@
+✓ 1. Runner Reassessment 有正式 authority
+✓ 2. 原一壘跑者與打者跑者是兩個 actor
+✓ 3. fair ground bunt 的強迫跑者 commitAdvance
+✓ 4. 原一壘跑者實體目標為二壘
+✓ 5. 打者跑者由 batter 前進一壘
+✓ 6. movement decision 與 start quality 分離
+✓ 7. conditionalAdvance 只改善 prepared start，不直接宣告 safe
+✓ 8. canonical projection 寫入既有 runnerMovementProgress
+✓ 9. canonical projection 寫入既有 runnerTargets
+✓ 10. 二壘單獨有人時 prior commitment 不會直接生成自願推進
+✓ 11. Hold／未擊成界內球沒有實體推進
+✓ 12. Foul dead-ball reset 沒有持續推進
+✓ 13. Miss 沒有實體推進
+✓ 14. Pop bunt 跑者重估為 retreat
+✓ 15. Pop bunt 不自動宣告出局或雙殺
+✓ 16. Speed 只落在 arrival timing profile
+✓ 17. Speed 不直接產生 safe probability
+✓ 18. slow batter 的 relay window 保持 open equivalent
+✓ 19. fast batter 可關閉 relay window
+✓ 20. 相同 input 完全 deterministic
+✓ 21. normalizeHandoff JSON round-trip 保留 physical state
+✓ 22. Runner resolver 不使用 tactical targetRunnerId
+Offensive Tactical Action Sprint B2 Runner Realization tests: 22/22 passed

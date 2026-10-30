@@ -1,0 +1,22 @@
+✓ 1. production defensive entry point 直接包含 B1 production invocation hook
+✓ 2. Production Hold：正式 defensive flow 自動進入 B1 resolver
+✓ 3. Production Hold：PA continues、plan persists，且沒有 fair-ball defensive moment
+✓ 4. 同一未呈現 pitch 重複 prepare 仍只 resolve 一次
+✓ 5. Production Foul：正式 flow 更新 strike、保留 PA 且不建立守備球
+✓ 5a. Production Miss：正式 flow 更新 strike、保留 PA 且不建立 fair-ball defense
+✓ 6. Production Two-strike Foul：Count／PA authority 結束 PA 且只增加一個 out
+✓ 7. Two-strike Foul render／save normalization 不會重複 count、out 或 PA event
+✓ 8. Production Fair：正式 flow 持久化 hard／secondBaseSide canonical truth
+✓ 9. Fair Bunt 首次 production beat 不產生 runner target、route、DP 或 final outcome
+✓ 10. Fair Bunt presentation 播放後才允許既有 defense 繼續，且不重算 B1 pitch
+✓ 11. surpriseBunt 也由正式 flow 自動進入 B1，late reveal 進 preparation
+✓ 12. Standard Attack 正式 flow 完全不建立或呼叫 B1 state
+✓ 13. Production save/reload：未呈現 pitch 不 reroll、不重複 history/count/reveal
+✓ 14. Production pitch history 是 Actual Pitch／Recognition／Count 的單一 B1 authority
+✓ 15. Bunt presentation 只讀 canonical physical projection，hold 不會顯示球已點進場內
+✓ 16. Mandatory scenario：1 out sacrifice bunt failure 只增加一個 out 並關閉前 tactical situation summary
+✓ 17. 下一 PA 使用新 identity 並重新執行 tactical admission
+✓ 18. 兩出局 sacrificeBunt 從 admission 排除，不只是降低權重
+✓ 19. Surprise Bunt firewall：兩出局仍可 admissible
+✓ 20. 新 tactical selection 不會沿用上一 PA 的 sacrificeBunt
+Offensive Tactical Action Sprint B1.0.1 tests: 21/21 passed

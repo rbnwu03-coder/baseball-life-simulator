@@ -4,7 +4,7 @@ const fs = require("node:fs");
 const { createContext } = require("./helpers/canonical-match-contract-context.cjs");
 const h = createContext();
 h.run(`
-  function catcherFixture(bases = []) {
+  function catcherFixture(bases = [], outs = 0) {
     stopHighSchoolMatchPlayback(); pendingYouthSeasonOutcome = null; isTransitioning = false;
     player = createInitialPlayer("Catcher event regression");
     applyDebugBookmarkCharacterProfile(player);
@@ -16,7 +16,7 @@ h.run(`
     const m = prepareHighSchoolYearOneMatch();
     Object.assign(m, {role:"rotation", position:"捕手", currentFieldingPosition:"捕手",
       playerFieldingAssignment:"捕手", positionDecisionFamily:"", defensiveSituation:{},
-      inning:3, half:"上", outs:0, offenseTeam:"away", defenseTeam:"home",
+      inning:3, half:"上", outs, offenseTeam:"away", defenseTeam:"home",
       currentDomain:"flow", simulationPhase:"moment_1_resolved", momentIndex:0,
       currentMomentId:highSchoolYearOneMomentIds[0], playerEntryCompleted:true,
       playerLineupStatus:"starter", runners:[null,null,null]});
@@ -39,12 +39,12 @@ h.run(`
       task:getHighSchoolDefensiveSituationText(m), observation:getHighSchoolDefensiveObservation(m),
       choices:getHighSchoolDefensiveMomentChoices(m), event};
   }
-  function catcherBunt(bases) {
-    const m = catcherFixture(bases);
+  function catcherBunt(bases, rolls = {}, outs = 0) {
+    const m = catcherFixture(bases, outs);
     const opts = {tacticalActionOverride:"surpriseBunt", buntPitchOptions:{
       actualPitch:{pitchLocationClass:"competitiveStrike", strike:true},
       recognition:{correct:true, perceivedPitchClass:"competitiveStrike"},
-      rolls:{attempt:0, preparation:0, contact:.99, fairBallType:.9, pace:.99, placement:.51}}};
+      rolls:{attempt:0, preparation:0, contact:.99, fairBallType:.9, pace:.99, placement:.51, ...rolls}}};
     const pitch = prepareHighSchoolDefensiveMomentFromSimulation(m, opts);
     for (let i = 0; getHighSchoolPresentedEventCursor(m) <= pitch.sequence; i++) {
       if (i >= 100) throw new Error("Bunt pitch playback did not finish");
@@ -61,6 +61,14 @@ h.run(`
     setHighSchoolDefensiveBallContext(m);
     m.currentAssignment = getHighSchoolDefensiveSituationText(m);
     return catcherSnapshot(m);
+  }
+  function catcherReadyForNpc(bases = [], rolls = {}, outs = 0) {
+    const fixture = catcherBunt(bases, rolls, outs), m = player.highSchoolMatch;
+    for (let i = 0; getHighSchoolPresentedEventCursor(m) <= fixture.event.sequence; i++) {
+      if (i >= 100) throw new Error("Fallback presentation stalled");
+      advanceHighSchoolMatchPlaybackStep(m);
+    }
+    return m;
   }
   function catcherContinuation(bases, reload) {
     const fixture = catcherBunt(bases);
@@ -108,10 +116,12 @@ h.run(`
     }
     const events = m.simulationLog.slice(startLog);
     const paEvents = events.filter(e => e.type === "plateAppearance" && e.batterId === batter);
+    const receipt = m.buntBallInPlayState.npcSettlement || null;
+    const sourceHandoff = JSON.parse(JSON.stringify(m.buntBallInPlayState)); delete sourceHandoff.npcSettlement;
     return {bases, reload, presented, saveLoad, matchId:m.id, paIdentity:fixture.paIdentity,
       batter, nextBatter, slotBefore:slot, slotAfter:m.battingOrderIndex[team], currentBatter:m.currentBatter,
       sourcePitch:fixture.sourcePitch, sourcePreserved:source === JSON.stringify(m.offensiveBuntPAState),
-      handoffPreserved:handoff === JSON.stringify(m.buntBallInPlayState), steps, paEvents,
+      handoffPreserved:handoff === JSON.stringify(sourceHandoff), steps, paEvents, receipt,
       officialPAIncrement:recordPA() - beforePA,
       newRecordRefs:m.gameRecord.eventRefs.slice(beforeRefs),
       recordIntegrity:MatchGameRecord.assertIntegrity(m.gameRecord),
@@ -241,11 +251,13 @@ if (!process.argv.includes("--context-only")) {
         observedResults:x.paEvents.map(e => ({result:e.result, authority:e.outcomeAuthority})),
         blocker:x.steps.at(-1)?.error || null, officialPAIncrement:x.officialPAIncrement, saveLoad:x.saveLoad}));
     } else {
-      verify(`${name}: pending ball and formal record protected`,
+      verify(`${name}: original ball, roster actors and once-only record retained`,
         x.presented && (!x.reload || Object.values(x.saveLoad).every(Boolean)) &&
-        x.sourcePreserved && x.handoffPreserved && x.noUnsafeMutation &&
-        x.officialPAIncrement === 0 && x.paEvents.length === 0 &&
-        x.newRecordRefs.length === 0 && x.steps.at(-1)?.error === "BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING");
+        x.sourcePreserved && x.handoffPreserved && x.receipt?.status === "committed" &&
+        x.receipt.execution.primaryId !== "player" && x.receipt.execution.receiverId !== "player" &&
+        x.receipt.execution.rng.cursorAfter === x.receipt.execution.rng.cursorBefore + 1 &&
+        x.newRecordRefs.filter(e => e.type === "defensivePlay").length === 1 &&
+        x.paEvents[0]?.outcomeAuthority === "npc-ground-bunt-settlement-v1" && x.recordIntegrity);
       try { verify(name, x.presented && (!x.reload || Object.values(x.saveLoad).every(Boolean)) && x.completionPassed); }
       catch (error) { failed++; console.error(`FAIL ${name}: same bunt PA not completed by its settlement owner`); }
     }
@@ -267,6 +279,86 @@ verify("unsupported placement and pop-bunt clues contain no development terminol
     return !/本階段|納入|切片/.test(ball.detail) && ball.detail.includes("滾動");
   }) && OffensiveBuntDefensiveHandoff.buildDefensiveBallContext({...base, fairBallType:"popBunt"},
     {playerPosition:"捕手"}).detail === "短打形成小飛球，接球結果尚未確定。";
+})()`));
+verify("NPC settlement and formal Save/Load are idempotent without consuming RNG", h.run(`(() => {
+  let m = catcherReadyForNpc([true,false,false]);
+  const contribution = JSON.stringify(m.playerContribution), moments = JSON.stringify(m.completedMoments);
+  advanceHighSchoolMatchPlaybackStep(m);
+  const receipt = JSON.stringify(getHighSchoolNpcGroundBuntReceipt(m)), before = JSON.stringify(m);
+  if (settleHighSchoolNpcGroundBunt(m) !== null || settleHighSchoolNpcGroundBunt(m) !== null || before !== JSON.stringify(m)) return false;
+  saveGame(); player = createInitialPlayer(); loadGame(); m = player.highSchoolMatch;
+  const restored = JSON.stringify(m);
+  return receipt === JSON.stringify(getHighSchoolNpcGroundBuntReceipt(m)) && settleHighSchoolNpcGroundBunt(m) === null &&
+    restored === JSON.stringify(m) && contribution === JSON.stringify(m.playerContribution) && moments === JSON.stringify(m.completedMoments);
+})()`));
+verify("NPC roster fielding and receiver capabilities affect execution; catcher abilities do not", h.run(`(() => {
+  function resolve(defense, arm, receiverDefense, playerStrength) {
+    const m = catcherReadyForNpc([true,false,false]);
+    // A shared deterministic execution input isolates capability differences.
+    m.simulationSeed = 1; m.simulationCursor = 0;
+    const primary = m.rosters.home.lineup.find(a => a.id === TeamRosterFoundation.getCurrentDefender(m.rosters.home, "2B").id);
+    const receiver = TeamRosterFoundation.getCurrentDefender(m.rosters.home, "1B");
+    m.rosters.home.lineup = m.rosters.home.lineup.map(a => a.id === primary.id ? {...a,defense,arm}
+      : a.id === receiver.id ? {...a,defense:receiverDefense} : a);
+    Object.keys(player.baseballSkills).forEach(k => player.baseballSkills[k] = playerStrength);
+    player.ballSense = player.observe = player.fitness = playerStrength;
+    const source = JSON.stringify(m.offensiveBuntPAState), roster = JSON.stringify(m.rosters), position = m.position;
+    settleHighSchoolNpcGroundBunt(m);
+    const r = getHighSchoolNpcGroundBuntReceipt(m);
+    return {result:r.result, execution:r.execution, source:source === JSON.stringify(m.offensiveBuntPAState),
+      unchanged:roster === JSON.stringify(m.rosters) && position === m.position && m.currentFieldingPosition === "捕手",
+      actualActions:r.actionFacts.actions.every(a => a.actorId !== "player"),
+      credit:m.gameRecord.playerLines[primary.id].defense.A};
+  }
+  const strong = resolve(10,10,10,1), sameNpc = resolve(10,10,10,99), weak = resolve(1,1,10,99), missed = resolve(10,10,1,99);
+  return strong.result === "out" && strong.credit === 1 && weak.result === "single" && missed.result === "single" &&
+    JSON.stringify(strong.execution) === JSON.stringify(sameNpc.execution) &&
+    [strong,sameNpc,weak,missed].every(x => x.source && x.unchanged && x.actualActions);
+})()`));
+verify("all forced runners and third-out scoring use the canonical settlement", h.run(`(() => {
+  return [0,2].every(outs => {
+    const m = catcherReadyForNpc([true,true,true], {}, outs), original = m.runners.slice();
+    const primary = TeamRosterFoundation.getCurrentDefender(m.rosters.home, "2B"), receiver = TeamRosterFoundation.getCurrentDefender(m.rosters.home, "1B");
+    m.rosters.home.lineup = m.rosters.home.lineup.map(a => a.id === primary.id ? {...a,defense:10,arm:10}
+      : a.id === receiver.id ? {...a,defense:10} : a);
+    const score = m.scores.away; settleHighSchoolNpcGroundBunt(m);
+    const receipt = getHighSchoolNpcGroundBuntReceipt(m), third = receipt.settlement.thirdOut;
+    return receipt.result === "out" && (outs === 2
+      ? m.outs === 3 && m.scores.away === score && m.runners.every(x => !x) && third.thirdOutType === "batterRunnerBeforeFirst"
+      : m.outs === 1 && m.scores.away === score + 1 && m.runners[1] === original[0] && m.runners[2] === original[1]);
+  });
+})()`));
+verify("unsupported bunt shapes retain their explicit pre-RNG continuation boundary", h.run(`(() => {
+  return [{placement:.01}, {placement:.99}, {fairBallType:.01}, {pace:.01}].every(rolls => {
+    const m = catcherReadyForNpc([], rolls), before = JSON.stringify(m); let error = "";
+    try { advanceHighSchoolMatchPlaybackStep(m); } catch(e) { error = e.message; }
+    return error === "BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING" && before === JSON.stringify(m);
+  });
+})()`));
+verify("pending situation and stale base or score reject before NPC execution or mutation", h.run(`(() => {
+  const m = catcherReadyForNpc();
+  const created = MatchSituationLifecycle.createSituation({gameId:m.id, inning:m.inning, half:m.half,
+    paIdentity:createHighSchoolOffensiveTacticalIdentity(m), simulationPoint:"npc-guard", type:"groundBallDefensiveDecision",
+    legalRoutes:[{routeId:"secureFirst",matchDecision:"secure"},{routeId:"controlledNoThrow",matchDecision:"hold"}]});
+  m.activeSituation = MatchSituationLifecycle.presentSituation(MatchSituationLifecycle.admitSituation(created,{supported:true,playerOwnsDecision:true}));
+  const before = JSON.stringify(m);
+  if (advanceHighSchoolMatchPlaybackStep(m) !== "decision" || settleHighSchoolNpcGroundBunt(m) !== null || before !== JSON.stringify(m)) return false;
+  return ["runners", "score"].every(kind => {
+    const x = catcherReadyForNpc(); if(kind === "runners") x.runners[1] = x.rosters.away.lineup[2].id; else x.scores.away++;
+    const initial = JSON.stringify(x); let error = "";
+    try { settleHighSchoolNpcGroundBunt(x); } catch(e) {error = e.message;}
+    return error === "BUNT_NPC_STALE_SOURCE_OR_ACTOR" && initial === JSON.stringify(x);
+  });
+})()`));
+verify("missing or corrupt settlement receipt cannot produce a second official PA", h.run(`(() => {
+  return ["missing", "corrupt"].every(kind => {
+    const m = catcherReadyForNpc(); settleHighSchoolNpcGroundBunt(m);
+    m.buntBallInPlayState = JSON.parse(JSON.stringify(m.buntBallInPlayState));
+    if(kind === "missing") delete m.buntBallInPlayState.npcSettlement; else m.buntBallInPlayState.npcSettlement.paEventId = "wrong";
+    const before = JSON.stringify(m); let error = "";
+    try { settleHighSchoolNpcGroundBunt(m); } catch(e) {error = e.message;}
+    return error === "BUNT_NPC_PARTIAL_OR_CORRUPT_RECEIPT" && before === JSON.stringify(m);
+  });
 })()`));
 console.log(`Catcher event context consistency: ${passed} passed, ${failed} failed`);
 }
