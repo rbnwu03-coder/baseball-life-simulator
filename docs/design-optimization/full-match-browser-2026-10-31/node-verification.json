@@ -1,0 +1,70 @@
+{
+  "node": "v24.19.0",
+  "checks": [
+    {
+      "file": "tests/full-match-browser-acceptance/targeted-regression.cjs",
+      "sha256": "ac42c17b201428fa561c090eef82aaa58f7fd653cda19bde31a190a6ca6f537e",
+      "exit": 0,
+      "log": "targeted-regression.cjs.log"
+    },
+    {
+      "file": "tests/g3-a-pc-match-shell-test.cjs",
+      "sha256": "f98485541feb8bcc9911e9f95c68b6e663718b5bef8b276c92cbe131b3d62fec",
+      "exit": 0,
+      "log": "g3-a-pc-match-shell-test.cjs.log"
+    },
+    {
+      "file": "tests/catcher-event-context-consistency-test.cjs",
+      "sha256": "54e7a06ffb3506be267d8cabbaf21a317f7c55d601aa5b1973ac01b10190e68e",
+      "exit": 0,
+      "log": "catcher-event-context-consistency-test.cjs.log"
+    },
+    {
+      "file": "tests/match-situation-lifecycle-test.js",
+      "sha256": "33912460d88d3a4922a46ba5fe92e4149b679792e7af09f0ab7c87dfa29a6d60",
+      "exit": 0,
+      "log": "match-situation-lifecycle-test.js.log"
+    },
+    {
+      "file": "tests/career-save-admission-test.js",
+      "sha256": "afaffc6dec608df43722b241726767112f28754035f1b894da51a4f69a7baaa2",
+      "exit": 0,
+      "log": "career-save-admission-test.js.log"
+    },
+    {
+      "check": "syntax",
+      "file": "script.js",
+      "exit": 0,
+      "error": ""
+    },
+    {
+      "check": "syntax",
+      "file": "save.js",
+      "exit": 0,
+      "error": ""
+    },
+    {
+      "check": "syntax",
+      "file": "match-pitch-decision-ui.js",
+      "exit": 0,
+      "error": ""
+    },
+    {
+      "check": "syntax",
+      "file": "tests/full-match-browser-acceptance/server.cjs",
+      "exit": 0,
+      "error": ""
+    },
+    {
+      "check": "syntax",
+      "file": "tests/full-match-browser-acceptance/fixture.js",
+      "exit": 0,
+      "error": ""
+    },
+    {
+      "check": "git diff --check",
+      "exit": 0,
+      "stderr": "warning: in the working copy of 'docs/design-optimization/full-match-browser-2026-10-31/career-save-admission-test.js.log', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/design-optimization/full-match-browser-2026-10-31/catcher-event-context-consistency-test.cjs.log', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/design-optimization/full-match-browser-2026-10-31/g3-a-pc-match-shell-test.cjs.log', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/design-optimization/full-match-browser-2026-10-31/match-situation-lifecycle-test.js.log', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/design-optimization/full-match-browser-2026-10-31/targeted-regression.cjs.log', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'docs/design-optimization/full-match-browser-2026-10-31/targeted-regression.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/full-match-browser-acceptance/verify.cjs', LF will be replaced by CRLF the next time Git touches it\n"
+    }
+  ]
+}

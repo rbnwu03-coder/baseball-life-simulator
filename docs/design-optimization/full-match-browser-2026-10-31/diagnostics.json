@@ -1,0 +1,21 @@
+{
+  "gameVerdict":"BLOCKED",
+  "excludedHarnessAttempts":[
+    {"evidence":"bunt-0-0 through bunt-3-0, bunt-pop, bunt-matrix/group-01.json","reason":"Initial fixture admitted a detailed bunt at 1 top before the production defensive gate. Its source was not the later failing popBunt. Excluded from all 17-source coverage. v2 enters independent 2 top and checks sourceSame."},
+    {"evidence":"catcher-natural-baseline-play","reason":"Initial observer searched hidden legacy #choices; the active shell has different visible DOM buttons. This was a harness stall, not a game blocker."},
+    {"evidence":"pitcher-deferred-01 first initialization","reason":"Fixture did not schedule playback after initial render. Fixed in fixture setup; no manual advance was used."},
+    {"reason":"Playwright MCP run_code does not expose require or dynamic imports, and cannot read the repair worktree via filename outside allowed roots. Runner source was read by the shell and passed as MCP code; evidence saved through the dedicated loopback endpoint."},
+    {"reason":"PowerShell UTF-8 BOM in generated inventory JSON caused JSON parse failure. BOM removed before the actual inventory run."},
+    {"reason":"Initial packer read checkpoint git status without per-command safe.directory and hit dubious ownership. Retried with a read-only per-command override; global Git settings were not changed."}
+  ],
+  "checkerCorrections":[
+    "Reconstruct lineups chronologically from playerEntry instead of applying the final substitute lineup to earlier PA.",
+    "Reject OF-assignment / actual-2B mismatch; the completed erroneous run is a FAIL counterexample.",
+    "Do not compare undefined opportunity fields. Use the actual Save and subsequent official Match for exposure lock, and instant snapshots for world/cursor/record."
+  ],
+  "versionPolicy":"Server manifest describes current disk bytes; loaded-versions uses read-only Debugger.getScriptSource. Intermediate UI/source versions are not merged into a final whole-suite PASS.",
+  "tracePolicy":"Human-facing trace.ndjson is compact. Original captured trace bytes remain losslessly archived as trace.ndjson.raw.gz with original SHA-256 in trace-archive.json.",
+  "noSeedSearch":true,
+  "noPlayerRngOrResultInjectionAfterSetup":true,
+  "protectedBranchesNotMerged":true
+}

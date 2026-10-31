@@ -711,7 +711,7 @@ function confirmSchoolInvitationSelection() {
   return completeHighSchoolEntry({ source: "school-choice-confirmation" });
 }
 
-function applyDebugBookmarkCharacterProfile(target) {
+function applyDebugBookmarkCharacterProfile(target, options = {}) {
   const existingSkills = { ...(target.baseballSkills || {}) };
   const existingTraits = Object.fromEntries(["ballSense", "observe", "fitness"].map(key => [key, Number(target[key]) || 0]));
   const roll = rollCharacterGenesis(() => 0.25);
@@ -754,7 +754,15 @@ function applyDebugBookmarkCharacterProfile(target) {
   if (Number(target.age) >= 16 || String(target.chapter || "").includes("青棒")) {
     const settlement = settleHighSchoolEntryCapability(target, { originType: "debug-bookmark-fixture" });
     if (!settlement.ok) throw new Error(settlement.error);
-    generateSchoolInvitationSet(target, { compatibilityMode: "debug-bookmark-bypass" });
+    const invitations = generateSchoolInvitationSet(target, {
+      compatibilityMode: options.canonicalHighSchoolEntry ? "generation-only" : "debug-bookmark-bypass"
+    });
+    if (options.canonicalHighSchoolEntry) {
+      const ordinary = invitations.invitations.find(item => item.schoolTier === "standard");
+      if (!ordinary) throw new Error("High-school bookmark requires an ordinary-school invitation");
+      const selected = finalizeSchoolInvitationSelection(target, ordinary.schoolId);
+      if (!selected.ok) throw new Error(selected.error);
+    }
   }
   return target;
 }
@@ -980,7 +988,7 @@ function loadTestBookmark(bookmark) {
 
   if (!bookmarks[bookmark]) return showNotice("找不到這個測試書籤。", "error");
   bookmarks[bookmark]();
-  applyDebugBookmarkCharacterProfile(player);
+  applyDebugBookmarkCharacterProfile(player, { canonicalHighSchoolEntry: bookmark === "highSchool" });
   player.completed = false;
   player.ending = "";
   document.getElementById("characterCreation").style.display = "none";
@@ -2610,6 +2618,7 @@ function renderHighSchoolYearOneMatch(event, prepared = {}) {
   const agencyActive = decisionActive && match.simulationPhase === "offensive_agency_ready";
   if (decisionActive && !agencyActive) markHighSchoolMatchDecisionLifecycle("presented", match);
   const playbackActive = !decisionActive;
+  const playbackFailed = Boolean(match.playbackFailure);
   const uiMode = decisionActive ? "match-decision-mode" : "match-flow-mode";
   const choices = decisionActive ? getHighSchoolYearOneMatchMomentChoices(match) : [];
   const buttons = choices.map(choice => {
@@ -2628,13 +2637,15 @@ function renderHighSchoolYearOneMatch(event, prepared = {}) {
   const bridgeOutHtml = prepared.bridgeOutHtml || "";
   const model = getHighSchoolMatchPresentation(match);
   const matchLabel = getHighSchoolFormalMatchLabel(match, "同一場交流賽");
-  const kicker = playbackActive ? `${matchLabel}・場上進行中`
+  const kicker = playbackFailed ? `${matchLabel}・比賽暫停` : playbackActive ? `${matchLabel}・場上進行中`
     : agencyActive ? `${matchLabel}・打席參與方式` : `${matchLabel}・第 ${match.completedMoments.length + 1} 個關鍵時刻`;
   const decisionContext = decisionActive
     ? `${agencyActive ? renderHighSchoolOffensiveAgencyContext(match) : match.currentDomain === "offense" ? `${renderHighSchoolPlateAppearanceContext(match)}${renderHighSchoolPlateDecisionContext(match)}${renderHighSchoolBatterAnticipationPanel(match)}` : ""}${agencyActive ? "" : `${renderHighSchoolOpponentInformation(model)}${renderHighSchoolCoachDirection(model)}`}`
     : "";
   document.getElementById("story").innerHTML = `<article class="event-card high-school-match-card match-mode ${uiMode}" aria-labelledby="currentEventTitle">${sceneContextHtml}${renderHighSchoolYearOneScore("header", model)}${bridgeInHtml}<div class="match-mode-lower-grid"><div class="match-mode-context-column">${renderHighSchoolLiveSituation(model)}${renderHighSchoolLiveFeed(model)}${bridgeOutHtml ? `<div class="match-mode-recall">${bridgeOutHtml}</div>` : ""}</div><div class="match-mode-decision-column"><div class="event-kicker">${kicker}</div><h2 id="currentEventTitle" tabindex="-1">${escapeHtml(event.title)}</h2>${renderHighSchoolCurrentBatter(model)}<section class="match-current-assignment" aria-labelledby="matchAssignmentTitle"><small id="matchAssignmentTitle">${playbackActive ? "目前賽況" : "目前任務"}</small><strong>${escapeHtml(model.currentSituation.assignment)}</strong></section><section class="match-recent-context" aria-label="最近賽況"><small>最近賽況</small><div class="event-text">${escapeHtml(text)}</div></section>${decisionContext}</div></div></article>`;
-  document.getElementById("choices").innerHTML = playbackActive
+  document.getElementById("choices").innerHTML = playbackFailed
+    ? `<div class="match-playback-status" role="alert"><strong>比賽播放已停止</strong><span>這球尚未完成處理，目前進度已保留。</span></div>`
+    : playbackActive
     ? `<div class="match-playback-status" role="status"><strong>場上正在進行下一個打席</strong><span>輪到你的關鍵判斷時，比賽會停下來。</span></div>`
     : `<section class="match-player-decisions" aria-labelledby="matchDecisionTitle"><small id="matchDecisionTitle">${agencyActive ? "這個打席要怎麼進行？" : "你的決定"}</small><div class="match-decision-buttons">${buttons}</div></section>`;
   document.getElementById("choices").innerHTML += renderHighSchoolMatchOpportunityDebugControls();
@@ -3412,6 +3423,7 @@ function getHighSchoolMatchPlaybackDebugState(match = player.highSchoolMatch) {
 
 function getHighSchoolMatchPlaybackSkipReason(match, state = getHighSchoolMatchPlaybackDebugState(match)) {
   if (!match || player.highSchoolMatch !== match || !state.matchActive) return "invalid-presentation-state";
+  if (match.playbackFailure) return "playback-failed";
   if (state.matchCompleted) return "match-complete";
   if (state.decisionActive) return "decision-active";
   if (state.blockingOutcome) return "blocking-outcome";
@@ -3505,7 +3517,23 @@ function scheduleHighSchoolMatchPlayback(match = player.highSchoolMatch, reason 
     }
     const before = getHighSchoolMatchPlaybackDebugState(match);
     recordHighSchoolMatchPlaybackTrace("step-start", reason, match, { callbackStarted: true });
-    const stepResult = advanceHighSchoolMatchPlaybackStep(match);
+    let stepResult;
+    try {
+      stepResult = advanceHighSchoolMatchPlaybackStep(match);
+    } catch (error) {
+      stopHighSchoolMatchPlayback("playback-failed");
+      match.playbackFailure = {
+        message: String(error?.message || error),
+        presentedEventCursor: getHighSchoolPresentedEventCursor(match),
+        simulationCursor: match.simulationCursor
+      };
+      highSchoolMatchPlaybackLastCallbackReason = reason;
+      highSchoolMatchPlaybackLastCallbackResult = "failed";
+      recordHighSchoolMatchPlaybackTrace("step-failed", reason, match, { callbackStarted: true, callbackCompleted: true, callbackStatus: "failed" });
+      console.error(error);
+      showCurrentEvent();
+      return;
+    }
     const after = getHighSchoolMatchPlaybackDebugState(match);
     const progressed = before.presentedEventCursor !== after.presentedEventCursor
       || before.simulationLogLength !== after.simulationLogLength
@@ -6577,6 +6605,14 @@ function createHighSchoolRosterPlayerActor(subject = player, playerPosition = su
   };
 }
 
+function getHighSchoolRequestedRosterPosition(rawPosition, invitationPosition) {
+  const invitationCode = TeamRosterFoundation.POSITION_ORDER.includes(invitationPosition) ? invitationPosition
+    : Object.entries(TeamRosterFoundation.POSITION_LABELS).find(([, label]) => label === invitationPosition)?.[0];
+  const family = rawPosition === "內野手" ? ["1B", "2B", "3B", "SS"]
+    : rawPosition === "外野手" ? ["LF", "CF", "RF"] : [];
+  return family.includes(invitationCode) ? invitationCode : TeamRosterFoundation.normalizePosition(rawPosition);
+}
+
 function materializeSelectedHighSchoolRoster(subject = player, options = {}) {
   if (typeof HighSchoolEntryRosterContext === "undefined" || typeof TeamRosterFoundation === "undefined") return null;
   const state = subject?.schoolInvitationState;
@@ -6585,9 +6621,7 @@ function materializeSelectedHighSchoolRoster(subject = player, options = {}) {
   if (!baseRoster || !TeamRosterFoundation.validateRoster(baseRoster).ok) return null;
   const invitationPosition = invitation?.positionCompetitionContext?.position || invitation?.schoolInterest?.candidatePosition || "";
   const rawPosition = options.playerPosition || subject?.primaryPosition || invitationPosition;
-  const normalizedRequested = TeamRosterFoundation.normalizePosition(rawPosition);
-  const requestedPosition = ["內野手", "外野手"].includes(rawPosition) && invitationPosition
-    ? TeamRosterFoundation.normalizePosition(invitationPosition) : normalizedRequested;
+  const requestedPosition = getHighSchoolRequestedRosterPosition(rawPosition, invitationPosition);
   const rosterRole = options.rosterRole === "starter" ? "starter" : "bench";
   const selectedRoster = HighSchoolEntryRosterContext.injectPlayerIntoSelectedRoster(
     baseRoster,
@@ -6621,9 +6655,7 @@ function refreshSelectedPositionCompetitionContext(subject = player, requestedPo
   if (!baseRoster || typeof HighSchoolEntryRosterContext === "undefined" || typeof TeamRosterFoundation === "undefined") return null;
   const invitationPosition = invitation?.positionCompetitionContext?.position || invitation?.schoolInterest?.candidatePosition || "";
   const rawPosition = requestedPosition || subject?.primaryPosition || invitationPosition;
-  const normalized = TeamRosterFoundation.normalizePosition(rawPosition);
-  const position = ["內野手", "外野手"].includes(rawPosition) && invitationPosition
-    ? TeamRosterFoundation.normalizePosition(invitationPosition) : normalized;
+  const position = getHighSchoolRequestedRosterPosition(rawPosition, invitationPosition);
   const actor = createHighSchoolRosterPlayerActor(subject, position);
   const capability = HighSchoolEntryRosterContext.getPositionCapability(actor, position);
   const context = HighSchoolEntryRosterContext.deriveCompetitionContext(baseRoster, position, capability);
@@ -10057,7 +10089,10 @@ function prepareHighSchoolYearOneMatch(options = {}) {
       history: getHighSchoolPlayingTimeAssignmentText(opportunityDecision)
     }
     : roleAssignments[code];
-  const assignedPosition = opportunityDecision?.assignedPosition || developmentPositionOverride || position;
+  const requestedMatchPosition = developmentPositionOverride || position;
+  const opportunityPosition = opportunityDecision?.assignedPosition || requestedMatchPosition;
+  const assignedPosition = opportunityPosition === "外野手" && ["左外野手", "中外野手", "右外野手"].includes(requestedMatchPosition)
+    ? requestedMatchPosition : opportunityPosition;
   const developmentTestCapabilityOverride = developmentPositionOverride
     ? createDevelopmentMatchPositionTestCapabilityOverride(developmentPositionOverride, player) : null;
   const selectedSchoolRoster = materializeSelectedHighSchoolRoster(player, {
@@ -17379,10 +17414,17 @@ function getPositionAssessment(position) {
 function renderPositionPanel() {
   const ratings = calculatePositionRatings();
   const primary = player.primaryPosition || ratings[0].position;
-  const assessment = getPositionAssessment(primary);
+  // Specific roster assignments share the existing family assessment in this
+  // status panel. Keep this display adapter out of gameplay/evaluation formulas.
+  const assessmentPosition = positionConfigs[primary] ? primary
+    : infieldPositions.includes(primary) ? "內野手"
+      : ["左外野手", "中外野手", "右外野手"].includes(primary) ? "外野手" : primary;
+  const assessment = getPositionAssessment(assessmentPosition);
+  if (!assessment) return `<div class="position-card"><strong>${escapeHtml(primary)}</strong><p>尚未建立此守位的能力評估。</p></div>`;
   return `<div class="position-card">
     <div class="position-heading"><span>主要守位</span><strong>${escapeHtml(primary)}</strong><b>${assessment.rating}</b></div>
     <p>第二守位：${escapeHtml(player.secondaryPositions?.[0] || "尚未設定")}</p>
+    ${assessmentPosition !== primary ? `<p>能力評估採用${escapeHtml(assessmentPosition)}共通項目。</p>` : ""}
     <p>投打：${escapeHtml(formatHandedness(player.bats, player.throws))}</p>
     <p><em>目前優勢</em>${escapeHtml(assessment.strengths)}</p>
     <p><em>需要補強</em>${escapeHtml(assessment.gaps)}</p>

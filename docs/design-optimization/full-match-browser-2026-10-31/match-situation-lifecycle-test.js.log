@@ -1,0 +1,24 @@
+✓ 1. stable identity 綁定 game／inning／half／PA／simulation point／type
+✓ 2. created snapshot 不包含整場 match，且 canonical context deep frozen
+✓ 3. Fixture A 三條 distinct routes 准入 playerDecision 並進入 presented
+✓ 4. Fixture F decision 前 reload 保留 identity、routes、recommendation、phase
+✓ 5. Fixture B decision 只保存 route intent，不保存 safe/out
+✓ 6. Home execution 依序完成 decided→executing→resolved→settled→closed
+✓ 7. close 後才允許 simulation resume
+✓ 8. Settlement／Close 重複呼叫 idempotent
+✓ 9. Fixture C 第一腿後維持同 situationId，以 reassessment phase 保存剩餘 route
+✓ 10. Fixture G reassessment reload 保留 first-leg guard 與 remaining route
+✓ 11. Reassessment 沒有 pending meaningful decision 時可解析與關閉
+✓ 12. Fixture D relay window expired 不建立假選項，直接 resolve／settle／close
+✓ 13. Fixture E 單一路線 admission 為 automaticResolution，不停在 player decision
+✓ 14. Transition guard 拒絕 presented→settled
+✓ 15. Closed summary 保存最小 previous-situation memory
+✓ 16. 尚無 physical consequence 的 execution 可由 lifecycle 正式 abandon
+✓ 17. abandon 保存 terminal reason 與 transition history
+✓ 18. 重複 abandon 為 idempotent
+✓ 19.resolved happy-path state 不可 abandon
+✓ 19.settled happy-path state 不可 abandon
+✓ 19.closed happy-path state 不可 abandon
+✓ 20. physical consequence 資料不足時採保守拒絕
+✓ 21. runnerTagUpDecision 已是 canonical lifecycle type
+Match Situation Lifecycle tests: 23/23 passed

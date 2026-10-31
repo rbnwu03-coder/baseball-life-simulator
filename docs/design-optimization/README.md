@@ -45,3 +45,5 @@
 - [高一健康機會刷新候選與舊資料邊界收尾](12-high-school-health-opportunity-candidate.md)
 
 - [高一健康機會限定整合驗收（頁面 BLOCKED）](13-y1-health-integration-acceptance.md)
+
+- [完整比賽瀏覽器驗收、限定修補與未解契約（BLOCKED）](18-full-match-browser-acceptance-blocked.md)

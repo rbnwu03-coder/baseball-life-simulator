@@ -671,7 +671,10 @@ function loadGame() {
     }
     document.getElementById("characterCreation").style.display = "none";
     showCurrentEvent();
-    if (typeof ensureMatchPlaybackLiveness === "function" && getCurrentEventId() === "high_school_showcase") {
+    const restoredMatchEvent = typeof isHighSchoolYearOneMatchEventId === "function"
+      ? isHighSchoolYearOneMatchEventId(getCurrentEventId())
+      : getCurrentEventId() === "high_school_showcase";
+    if (typeof ensureMatchPlaybackLiveness === "function" && restoredMatchEvent) {
       ensureMatchPlaybackLiveness("active-match-reload", player.highSchoolMatch);
     }
     showNotice("進度讀取完成。", "success");

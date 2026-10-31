@@ -1,0 +1,5591 @@
+{
+  "match": {
+    "id": "hs-y1-autumn-exhibition",
+    "matchContext": {
+      "version": "match-context-v1",
+      "matchId": "hs-y1-autumn-exhibition",
+      "matchOrigin": "developmentMatch",
+      "playerTeamId": "school-standard-5833cc5e",
+      "opponentTeamId": "regional-power-school",
+      "homeTeamId": "school-standard-5833cc5e",
+      "awayTeamId": "regional-power-school",
+      "hostContext": {},
+      "venueContext": {
+        "type": "neutralVenue"
+      },
+      "assignmentSource": "legacyFallback",
+      "assignmentReason": "historicalPlayerHome",
+      "provenance": {
+        "source": "legacyFallback",
+        "reasonCode": "historicalPlayerHome"
+      }
+    },
+    "ruleSetId": "highSchoolFullGameV1",
+    "rules": {
+      "version": 1,
+      "regulationInnings": 7,
+      "extraInningTiebreak": {
+        "enabled": true,
+        "startInning": 8,
+        "runnerBase": 2,
+        "runnerSource": "previousLineupSlot",
+        "earnedRunTreatment": "deemedReachedOnError"
+      }
+    },
+    "ruleSetWarning": "",
+    "eventId": "high_school_showcase",
+    "matchType": "autumn-exhibition",
+    "highSchoolYear": 1,
+    "opportunityIndex": 1,
+    "opponent": "高橋所屬的地區強校",
+    "inning": 1,
+    "half": "上",
+    "outs": 0,
+    "scores": {
+      "home": 0,
+      "away": 0
+    },
+    "runners": [
+      null,
+      null,
+      null
+    ],
+    "role": "rotation",
+    "position": "游擊手",
+    "assignment": "本場先從板凳待命，教練預計在5局後依比分與守位需求決定是否換你上場",
+    "matchEntryHistory": "本場先從板凳待命，教練預計在5局後依比分與守位需求決定是否換你上場；右打／右投",
+    "currentAssignment": "比賽從一局上開始；你在板凳觀察，但場上每個打席都會完整進行。",
+    "offenseTeam": "away",
+    "defenseTeam": "home",
+    "currentBatter": "regional-power-school-player-01",
+    "battingOrderIndex": {
+      "home": 0,
+      "away": 0
+    },
+    "tiebreakHalfInitialization": null,
+    "halfInningResolved": false,
+    "simulationPhase": "full_match_flow",
+    "simulationCursor": 0,
+    "simulationSeed": 3041234481,
+    "simulationLog": [
+      {
+        "sequence": 0,
+        "presentationImportance": "hidden",
+        "type": "matchEntry",
+        "inning": 1,
+        "half": "上",
+        "outs": 0,
+        "runners": [
+          null,
+          null,
+          null
+        ],
+        "scores": {
+          "home": 0,
+          "away": 0
+        },
+        "assignment": "本場先從板凳待命，教練預計在5局後依比分與守位需求決定是否換你上場；右打／右投",
+        "presentationSnapshot": {
+          "inning": 1,
+          "half": "上",
+          "outs": 0,
+          "runners": [
+            null,
+            null,
+            null
+          ],
+          "scores": {
+            "home": 0,
+            "away": 0
+          },
+          "lineScoreRevealHalfIndex": 0,
+          "assignment": "本場先從板凳待命，教練預計在5局後依比分與守位需求決定是否換你上場；右打／右投",
+          "position": "板凳待命",
+          "currentBatter": "regional-power-school-player-01",
+          "battingOrderSlot": 0
+        }
+      }
+    ],
+    "presentedEventCursor": 0,
+    "scoreboardRevealHalfIndex": 0,
+    "regulationInnings": 7,
+    "lineScore": {
+      "home": [],
+      "away": []
+    },
+    "gameRecord": {
+      "version": "match-game-record-v1",
+      "gameId": "hs-y1-autumn-exhibition",
+      "competitionEditionId": null,
+      "competitionEntryId": null,
+      "homeTeamId": "school-standard-5833cc5e",
+      "awayTeamId": "regional-power-school",
+      "status": "active",
+      "inningsScheduled": 7,
+      "inningsPlayed": 1,
+      "inningLines": [
+        {
+          "inning": 1,
+          "awayRuns": 0,
+          "homeRuns": 0
+        }
+      ],
+      "totals": {
+        "away": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        },
+        "home": {
+          "runs": 0,
+          "hits": 0,
+          "errors": 0
+        }
+      },
+      "result": null,
+      "playerLines": {
+        "school-standard-5833cc5e-player-04": {
+          "playerId": "school-standard-5833cc5e-player-04",
+          "teamId": "school-standard-5833cc5e",
+          "role": "starter",
+          "position": "2B",
+          "positionAppearances": [
+            {
+              "position": "2B",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|home|school-standard-5833cc5e-player-04"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-07": {
+          "playerId": "school-standard-5833cc5e-player-07",
+          "teamId": "school-standard-5833cc5e",
+          "role": "starter",
+          "position": "LF",
+          "positionAppearances": [
+            {
+              "position": "LF",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|home|school-standard-5833cc5e-player-07"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-05": {
+          "playerId": "school-standard-5833cc5e-player-05",
+          "teamId": "school-standard-5833cc5e",
+          "role": "starter",
+          "position": "3B",
+          "positionAppearances": [
+            {
+              "position": "3B",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|home|school-standard-5833cc5e-player-05"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-08": {
+          "playerId": "school-standard-5833cc5e-player-08",
+          "teamId": "school-standard-5833cc5e",
+          "role": "starter",
+          "position": "CF",
+          "positionAppearances": [
+            {
+              "position": "CF",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|home|school-standard-5833cc5e-player-08"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-01": {
+          "playerId": "school-standard-5833cc5e-player-01",
+          "teamId": "school-standard-5833cc5e",
+          "role": "starter",
+          "position": "P",
+          "positionAppearances": [
+            {
+              "position": "P",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|home|school-standard-5833cc5e-player-01"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-06": {
+          "playerId": "school-standard-5833cc5e-player-06",
+          "teamId": "school-standard-5833cc5e",
+          "role": "starter",
+          "position": "SS",
+          "positionAppearances": [
+            {
+              "position": "SS",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|home|school-standard-5833cc5e-player-06"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-09": {
+          "playerId": "school-standard-5833cc5e-player-09",
+          "teamId": "school-standard-5833cc5e",
+          "role": "starter",
+          "position": "RF",
+          "positionAppearances": [
+            {
+              "position": "RF",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|home|school-standard-5833cc5e-player-09"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-03": {
+          "playerId": "school-standard-5833cc5e-player-03",
+          "teamId": "school-standard-5833cc5e",
+          "role": "starter",
+          "position": "1B",
+          "positionAppearances": [
+            {
+              "position": "1B",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|home|school-standard-5833cc5e-player-03"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-02": {
+          "playerId": "school-standard-5833cc5e-player-02",
+          "teamId": "school-standard-5833cc5e",
+          "role": "starter",
+          "position": "C",
+          "positionAppearances": [
+            {
+              "position": "C",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|home|school-standard-5833cc5e-player-02"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-10": {
+          "playerId": "school-standard-5833cc5e-player-10",
+          "teamId": "school-standard-5833cc5e",
+          "role": "bench",
+          "position": "捕手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-11": {
+          "playerId": "school-standard-5833cc5e-player-11",
+          "teamId": "school-standard-5833cc5e",
+          "role": "bench",
+          "position": "一壘手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-12": {
+          "playerId": "school-standard-5833cc5e-player-12",
+          "teamId": "school-standard-5833cc5e",
+          "role": "bench",
+          "position": "二壘手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-13": {
+          "playerId": "school-standard-5833cc5e-player-13",
+          "teamId": "school-standard-5833cc5e",
+          "role": "bench",
+          "position": "游擊手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-14": {
+          "playerId": "school-standard-5833cc5e-player-14",
+          "teamId": "school-standard-5833cc5e",
+          "role": "bench",
+          "position": "左外野手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-15": {
+          "playerId": "school-standard-5833cc5e-player-15",
+          "teamId": "school-standard-5833cc5e",
+          "role": "bench",
+          "position": "中外野手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-16": {
+          "playerId": "school-standard-5833cc5e-player-16",
+          "teamId": "school-standard-5833cc5e",
+          "role": "bench",
+          "position": "投手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "school-standard-5833cc5e-player-17": {
+          "playerId": "school-standard-5833cc5e-player-17",
+          "teamId": "school-standard-5833cc5e",
+          "role": "bench",
+          "position": "投手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "player": {
+          "playerId": "player",
+          "teamId": "school-standard-5833cc5e",
+          "role": "bench",
+          "position": "游擊手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-01": {
+          "playerId": "regional-power-school-player-01",
+          "teamId": "regional-power-school",
+          "role": "starter",
+          "position": "P",
+          "positionAppearances": [
+            {
+              "position": "P",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-01"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-03": {
+          "playerId": "regional-power-school-player-03",
+          "teamId": "regional-power-school",
+          "role": "starter",
+          "position": "1B",
+          "positionAppearances": [
+            {
+              "position": "1B",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-03"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-04": {
+          "playerId": "regional-power-school-player-04",
+          "teamId": "regional-power-school",
+          "role": "starter",
+          "position": "2B",
+          "positionAppearances": [
+            {
+              "position": "2B",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-04"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-07": {
+          "playerId": "regional-power-school-player-07",
+          "teamId": "regional-power-school",
+          "role": "starter",
+          "position": "LF",
+          "positionAppearances": [
+            {
+              "position": "LF",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-07"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-05": {
+          "playerId": "regional-power-school-player-05",
+          "teamId": "regional-power-school",
+          "role": "starter",
+          "position": "3B",
+          "positionAppearances": [
+            {
+              "position": "3B",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-05"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-09": {
+          "playerId": "regional-power-school-player-09",
+          "teamId": "regional-power-school",
+          "role": "starter",
+          "position": "RF",
+          "positionAppearances": [
+            {
+              "position": "RF",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-09"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-06": {
+          "playerId": "regional-power-school-player-06",
+          "teamId": "regional-power-school",
+          "role": "starter",
+          "position": "SS",
+          "positionAppearances": [
+            {
+              "position": "SS",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-06"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-02": {
+          "playerId": "regional-power-school-player-02",
+          "teamId": "regional-power-school",
+          "role": "starter",
+          "position": "C",
+          "positionAppearances": [
+            {
+              "position": "C",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-02"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-08": {
+          "playerId": "regional-power-school-player-08",
+          "teamId": "regional-power-school",
+          "role": "starter",
+          "position": "CF",
+          "positionAppearances": [
+            {
+              "position": "CF",
+              "role": "starter",
+              "eventId": "hs-y1-autumn-exhibition|lineup|away|regional-power-school-player-08"
+            }
+          ],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-10": {
+          "playerId": "regional-power-school-player-10",
+          "teamId": "regional-power-school",
+          "role": "bench",
+          "position": "捕手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-11": {
+          "playerId": "regional-power-school-player-11",
+          "teamId": "regional-power-school",
+          "role": "bench",
+          "position": "一壘手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-12": {
+          "playerId": "regional-power-school-player-12",
+          "teamId": "regional-power-school",
+          "role": "bench",
+          "position": "二壘手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-13": {
+          "playerId": "regional-power-school-player-13",
+          "teamId": "regional-power-school",
+          "role": "bench",
+          "position": "游擊手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-14": {
+          "playerId": "regional-power-school-player-14",
+          "teamId": "regional-power-school",
+          "role": "bench",
+          "position": "左外野手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-15": {
+          "playerId": "regional-power-school-player-15",
+          "teamId": "regional-power-school",
+          "role": "bench",
+          "position": "中外野手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-16": {
+          "playerId": "regional-power-school-player-16",
+          "teamId": "regional-power-school",
+          "role": "bench",
+          "position": "投手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        },
+        "regional-power-school-player-17": {
+          "playerId": "regional-power-school-player-17",
+          "teamId": "regional-power-school",
+          "role": "bench",
+          "position": "投手",
+          "positionAppearances": [],
+          "batting": {
+            "PA": 0,
+            "AB": 0,
+            "R": 0,
+            "H": 0,
+            "doubles": 0,
+            "triples": 0,
+            "HR": 0,
+            "RBI": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "SB": 0,
+            "CS": 0,
+            "SH": 0,
+            "SF": 0
+          },
+          "pitching": {
+            "outsRecorded": 0,
+            "BF": 0,
+            "H": 0,
+            "R": 0,
+            "ER": 0,
+            "BB": 0,
+            "HBP": 0,
+            "SO": 0,
+            "HR": 0,
+            "pitches": null,
+            "strikes": null
+          },
+          "defense": {
+            "chances": 0,
+            "PO": 0,
+            "A": 0,
+            "E": 0,
+            "DP": 0
+          },
+          "baserunning": {
+            "R": 0,
+            "SB": 0,
+            "CS": 0
+          }
+        }
+      },
+      "eventRefs": [
+        {
+          "eventId": "hs-y1-autumn-exhibition|1|上|0",
+          "type": "matchEntry",
+          "sequence": 0,
+          "inning": 1,
+          "half": "上"
+        }
+      ],
+      "integrity": {
+        "checked": false,
+        "issues": []
+      },
+      "finalizedAtEventId": null
+    },
+    "rosters": {
+      "home": {
+        "lineup": [
+          {
+            "playerId": "school-standard-5833cc5e-player-04",
+            "id": "school-standard-5833cc5e-player-04",
+            "name": "遠藤",
+            "age": 16,
+            "year": 1,
+            "primaryPosition": "2B",
+            "secondaryPositions": [
+              "RF"
+            ],
+            "bats": "L",
+            "throws": "R",
+            "contact": 8,
+            "power": 4,
+            "speed": 7,
+            "defense": 5,
+            "arm": 7,
+            "pitching": 2,
+            "pitchingProfile": {
+              "effectiveness": 2,
+              "control": 1,
+              "stuff": 2
+            },
+            "source": "simulation-roster",
+            "position": "二壘手",
+            "defensivePosition": "2B"
+          },
+          {
+            "playerId": "school-standard-5833cc5e-player-07",
+            "id": "school-standard-5833cc5e-player-07",
+            "name": "木村",
+            "age": 16,
+            "year": 1,
+            "primaryPosition": "LF",
+            "secondaryPositions": [
+              "P"
+            ],
+            "bats": "R",
+            "throws": "L",
+            "contact": 6,
+            "power": 7,
+            "speed": 6,
+            "defense": 5,
+            "arm": 6,
+            "pitching": 1,
+            "pitchingProfile": {
+              "effectiveness": 1,
+              "control": 1,
+              "stuff": 1
+            },
+            "source": "simulation-roster",
+            "position": "左外野手",
+            "defensivePosition": "LF"
+          },
+          {
+            "playerId": "school-standard-5833cc5e-player-05",
+            "id": "school-standard-5833cc5e-player-05",
+            "name": "大野",
+            "age": 17,
+            "year": 2,
+            "primaryPosition": "3B",
+            "secondaryPositions": [
+              "2B"
+            ],
+            "bats": "L",
+            "throws": "R",
+            "contact": 5,
+            "power": 7,
+            "speed": 5,
+            "defense": 6,
+            "arm": 7,
+            "pitching": 3,
+            "pitchingProfile": {
+              "effectiveness": 3,
+              "control": 2,
+              "stuff": 3
+            },
+            "source": "simulation-roster",
+            "position": "三壘手",
+            "defensivePosition": "3B"
+          },
+          {
+            "playerId": "school-standard-5833cc5e-player-08",
+            "id": "school-standard-5833cc5e-player-08",
+            "name": "工藤",
+            "age": 17,
+            "year": 2,
+            "primaryPosition": "CF",
+            "secondaryPositions": [
+              "LF"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 4,
+            "power": 7,
+            "speed": 7,
+            "defense": 6,
+            "arm": 6,
+            "pitching": 1,
+            "pitchingProfile": {
+              "effectiveness": 1,
+              "control": 1,
+              "stuff": 1
+            },
+            "source": "simulation-roster",
+            "position": "中外野手",
+            "defensivePosition": "CF"
+          },
+          {
+            "playerId": "school-standard-5833cc5e-player-01",
+            "id": "school-standard-5833cc5e-player-01",
+            "name": "青木",
+            "age": 16,
+            "year": 1,
+            "primaryPosition": "P",
+            "secondaryPositions": [
+              "SS"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 5,
+            "power": 6,
+            "speed": 4,
+            "defense": 6,
+            "arm": 8,
+            "pitching": 7,
+            "pitchingProfile": {
+              "effectiveness": 7,
+              "control": 7,
+              "stuff": 7
+            },
+            "source": "simulation-roster",
+            "position": "投手",
+            "defensivePosition": "P"
+          },
+          {
+            "playerId": "school-standard-5833cc5e-player-06",
+            "id": "school-standard-5833cc5e-player-06",
+            "name": "加藤",
+            "age": 18,
+            "year": 3,
+            "primaryPosition": "SS",
+            "secondaryPositions": [
+              "LF"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 5,
+            "power": 6,
+            "speed": 6,
+            "defense": 6,
+            "arm": 5,
+            "pitching": 1,
+            "pitchingProfile": {
+              "effectiveness": 1,
+              "control": 1,
+              "stuff": 1
+            },
+            "source": "simulation-roster",
+            "position": "游擊手",
+            "defensivePosition": "SS"
+          },
+          {
+            "playerId": "school-standard-5833cc5e-player-09",
+            "id": "school-standard-5833cc5e-player-09",
+            "name": "小島",
+            "age": 18,
+            "year": 3,
+            "primaryPosition": "RF",
+            "secondaryPositions": [
+              "1B"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 5,
+            "power": 6,
+            "speed": 6,
+            "defense": 6,
+            "arm": 6,
+            "pitching": 3,
+            "pitchingProfile": {
+              "effectiveness": 3,
+              "control": 2,
+              "stuff": 3
+            },
+            "source": "simulation-roster",
+            "position": "右外野手",
+            "defensivePosition": "RF"
+          },
+          {
+            "playerId": "school-standard-5833cc5e-player-03",
+            "id": "school-standard-5833cc5e-player-03",
+            "name": "上田",
+            "age": 18,
+            "year": 3,
+            "primaryPosition": "1B",
+            "secondaryPositions": [
+              "C"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 5,
+            "power": 6,
+            "speed": 5,
+            "defense": 7,
+            "arm": 7,
+            "pitching": 2,
+            "pitchingProfile": {
+              "effectiveness": 2,
+              "control": 1,
+              "stuff": 2
+            },
+            "source": "simulation-roster",
+            "position": "一壘手",
+            "defensivePosition": "1B"
+          },
+          {
+            "playerId": "school-standard-5833cc5e-player-02",
+            "id": "school-standard-5833cc5e-player-02",
+            "name": "石川",
+            "age": 17,
+            "year": 2,
+            "primaryPosition": "C",
+            "secondaryPositions": [
+              "LF"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 6,
+            "power": 4,
+            "speed": 5,
+            "defense": 7,
+            "arm": 6,
+            "pitching": 1,
+            "pitchingProfile": {
+              "effectiveness": 1,
+              "control": 1,
+              "stuff": 1
+            },
+            "source": "simulation-roster",
+            "position": "捕手",
+            "defensivePosition": "C"
+          }
+        ],
+        "bench": [
+          {
+            "playerId": "school-standard-5833cc5e-player-10",
+            "id": "school-standard-5833cc5e-player-10",
+            "name": "齋藤",
+            "age": 16,
+            "year": 1,
+            "primaryPosition": "C",
+            "secondaryPositions": [
+              "3B"
+            ],
+            "bats": "L",
+            "throws": "R",
+            "contact": 4,
+            "power": 6,
+            "speed": 4,
+            "defense": 7,
+            "arm": 5,
+            "pitching": 2,
+            "pitchingProfile": {
+              "effectiveness": 2,
+              "control": 1,
+              "stuff": 2
+            },
+            "source": "simulation-roster",
+            "position": "捕手"
+          },
+          {
+            "playerId": "school-standard-5833cc5e-player-11",
+            "id": "school-standard-5833cc5e-player-11",
+            "name": "佐々木",
+            "age": 17,
+            "year": 2,
+            "primaryPosition": "1B",
+            "secondaryPositions": [
+              "LF"
+            ],
+            "bats": "L",
+            "throws": "L",
+            "contact": 3,
+            "power": 5,
+            "speed": 4,
+            "defense": 4,
+            "arm": 2,
+            "pitching": 1,
+            "pitchingProfile": {
+              "effectiveness": 1,
+              "control": 1,
+              "stuff": 1
+            },
+            "source": "simulation-roster",
+            "position": "一壘手"
+          },
+          {
+            "playerId": "school-standard-5833cc5e-player-12",
+            "id": "school-standard-5833cc5e-player-12",
+            "name": "高田",
+            "age": 18,
+            "year": 3,
+            "primaryPosition": "2B",
+            "secondaryPositions": [
+              "RF"
+            ],
+            "bats": "L",
+            "throws": "R",
+            "contact": 5,
+            "power": 5,
+            "speed": 4,
+            "defense": 4,
+            "arm": 4,
+            "pitching": 1,
+            "pitchingProfile": {
+              "effectiveness": 1,
+              "control": 1,
+              "stuff": 1
+            },
+            "source": "simulation-roster",
+            "position": "二壘手"
+          },
+          {
+            "playerId": "school-standard-5833cc5e-player-13",
+            "id": "school-standard-5833cc5e-player-13",
+            "name": "田中",
+            "age": 16,
+            "year": 1,
+            "primaryPosition": "SS",
+            "secondaryPositions": [
+              "3B"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 5,
+            "power": 3,
+            "speed": 6,
+            "defense": 6,
+            "arm": 4,
+            "pitching": 1,
+            "pitchingProfile": {
+              "effectiveness": 1,
+              "control": 1,
+              "stuff": 1
+            },
+            "source": "simulation-roster",
+            "position": "游擊手"
+          },
+          {
+            "playerId": "school-standard-5833cc5e-player-14",
+            "id": "school-standard-5833cc5e-player-14",
+            "name": "中島",
+            "age": 17,
+            "year": 2,
+            "primaryPosition": "LF",
+            "secondaryPositions": [
+              "C"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 4,
+            "power": 6,
+            "speed": 4,
+            "defense": 6,
+            "arm": 6,
+            "pitching": 1,
+            "pitchingProfile": {
+              "effectiveness": 1,
+              "control": 1,
+              "stuff": 1
+            },
+            "source": "simulation-roster",
+            "position": "左外野手"
+          },
+          {
+            "playerId": "school-standard-5833cc5e-player-15",
+            "id": "school-standard-5833cc5e-player-15",
+            "name": "西村",
+            "age": 18,
+            "year": 3,
+            "primaryPosition": "CF",
+            "secondaryPositions": [
+              "P"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 5,
+            "power": 5,
+            "speed": 4,
+            "defense": 5,
+            "arm": 4,
+            "pitching": 1,
+            "pitchingProfile": {
+              "effectiveness": 1,
+              "control": 1,
+              "stuff": 1
+            },
+            "source": "simulation-roster",
+            "position": "中外野手"
+          },
+          {
+            "playerId": "school-standard-5833cc5e-player-16",
+            "id": "school-standard-5833cc5e-player-16",
+            "name": "長谷川",
+            "age": 16,
+            "year": 1,
+            "primaryPosition": "P",
+            "secondaryPositions": [
+              "C"
+            ],
+            "bats": "L",
+            "throws": "R",
+            "contact": 5,
+            "power": 4,
+            "speed": 5,
+            "defense": 5,
+            "arm": 7,
+            "pitching": 5,
+            "pitchingProfile": {
+              "effectiveness": 5,
+              "control": 3,
+              "stuff": 4
+            },
+            "source": "simulation-roster",
+            "position": "投手"
+          },
+          {
+            "playerId": "school-standard-5833cc5e-player-17",
+            "id": "school-standard-5833cc5e-player-17",
+            "name": "藤田",
+            "age": 17,
+            "year": 2,
+            "primaryPosition": "P",
+            "secondaryPositions": [
+              "C"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 3,
+            "power": 5,
+            "speed": 3,
+            "defense": 6,
+            "arm": 3,
+            "pitching": 6,
+            "pitchingProfile": {
+              "effectiveness": 6,
+              "control": 4,
+              "stuff": 5
+            },
+            "source": "simulation-roster",
+            "position": "投手"
+          },
+          {
+            "playerId": "player",
+            "id": "player",
+            "name": "測試球員",
+            "age": 16,
+            "year": 1,
+            "primaryPosition": "SS",
+            "secondaryPositions": [],
+            "bats": "R",
+            "throws": "R",
+            "contact": 5,
+            "power": 4,
+            "speed": 3,
+            "defense": 6,
+            "arm": 5,
+            "pitching": 1,
+            "pitchingProfile": {
+              "effectiveness": 1,
+              "control": 1,
+              "stuff": 1
+            },
+            "source": "canonical-player",
+            "rosterTeamId": "school-standard-5833cc5e",
+            "position": "游擊手"
+          }
+        ],
+        "pitchingStaff": {
+          "starter": "school-standard-5833cc5e-player-01",
+          "secondaryPitchers": [
+            "school-standard-5833cc5e-player-17",
+            "school-standard-5833cc5e-player-16"
+          ]
+        },
+        "teamRoster": {
+          "version": "team-roster-foundation-v1",
+          "teamId": "school-standard-5833cc5e",
+          "schoolId": "school-standard-5833cc5e",
+          "schoolStandard": "standard",
+          "yearIdentity": "hs-year-1-age-16",
+          "generationSeed": "roster-6b930a40",
+          "composition": "natural",
+          "players": [
+            {
+              "playerId": "school-standard-5833cc5e-player-01",
+              "id": "school-standard-5833cc5e-player-01",
+              "name": "青木",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "P",
+              "secondaryPositions": [
+                "SS"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 6,
+              "speed": 4,
+              "defense": 6,
+              "arm": 8,
+              "pitching": 7,
+              "pitchingProfile": {
+                "effectiveness": 7,
+                "control": 7,
+                "stuff": 7
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-02",
+              "id": "school-standard-5833cc5e-player-02",
+              "name": "石川",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "C",
+              "secondaryPositions": [
+                "LF"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 6,
+              "power": 4,
+              "speed": 5,
+              "defense": 7,
+              "arm": 6,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-03",
+              "id": "school-standard-5833cc5e-player-03",
+              "name": "上田",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "C"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 6,
+              "speed": 5,
+              "defense": 7,
+              "arm": 7,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-04",
+              "id": "school-standard-5833cc5e-player-04",
+              "name": "遠藤",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "2B",
+              "secondaryPositions": [
+                "RF"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 8,
+              "power": 4,
+              "speed": 7,
+              "defense": 5,
+              "arm": 7,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-05",
+              "id": "school-standard-5833cc5e-player-05",
+              "name": "大野",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "3B",
+              "secondaryPositions": [
+                "2B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 5,
+              "power": 7,
+              "speed": 5,
+              "defense": 6,
+              "arm": 7,
+              "pitching": 3,
+              "pitchingProfile": {
+                "effectiveness": 3,
+                "control": 2,
+                "stuff": 3
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-06",
+              "id": "school-standard-5833cc5e-player-06",
+              "name": "加藤",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "SS",
+              "secondaryPositions": [
+                "LF"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 6,
+              "speed": 6,
+              "defense": 6,
+              "arm": 5,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-07",
+              "id": "school-standard-5833cc5e-player-07",
+              "name": "木村",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "LF",
+              "secondaryPositions": [
+                "P"
+              ],
+              "bats": "R",
+              "throws": "L",
+              "contact": 6,
+              "power": 7,
+              "speed": 6,
+              "defense": 5,
+              "arm": 6,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-08",
+              "id": "school-standard-5833cc5e-player-08",
+              "name": "工藤",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "CF",
+              "secondaryPositions": [
+                "LF"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 4,
+              "power": 7,
+              "speed": 7,
+              "defense": 6,
+              "arm": 6,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-09",
+              "id": "school-standard-5833cc5e-player-09",
+              "name": "小島",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "RF",
+              "secondaryPositions": [
+                "1B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 6,
+              "speed": 6,
+              "defense": 6,
+              "arm": 6,
+              "pitching": 3,
+              "pitchingProfile": {
+                "effectiveness": 3,
+                "control": 2,
+                "stuff": 3
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-10",
+              "id": "school-standard-5833cc5e-player-10",
+              "name": "齋藤",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "C",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 4,
+              "power": 6,
+              "speed": 4,
+              "defense": 7,
+              "arm": 5,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-11",
+              "id": "school-standard-5833cc5e-player-11",
+              "name": "佐々木",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "LF"
+              ],
+              "bats": "L",
+              "throws": "L",
+              "contact": 3,
+              "power": 5,
+              "speed": 4,
+              "defense": 4,
+              "arm": 2,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-12",
+              "id": "school-standard-5833cc5e-player-12",
+              "name": "高田",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "2B",
+              "secondaryPositions": [
+                "RF"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 5,
+              "power": 5,
+              "speed": 4,
+              "defense": 4,
+              "arm": 4,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-13",
+              "id": "school-standard-5833cc5e-player-13",
+              "name": "田中",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "SS",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 3,
+              "speed": 6,
+              "defense": 6,
+              "arm": 4,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-14",
+              "id": "school-standard-5833cc5e-player-14",
+              "name": "中島",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "LF",
+              "secondaryPositions": [
+                "C"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 4,
+              "power": 6,
+              "speed": 4,
+              "defense": 6,
+              "arm": 6,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-15",
+              "id": "school-standard-5833cc5e-player-15",
+              "name": "西村",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "CF",
+              "secondaryPositions": [
+                "P"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 5,
+              "speed": 4,
+              "defense": 5,
+              "arm": 4,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-16",
+              "id": "school-standard-5833cc5e-player-16",
+              "name": "長谷川",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "P",
+              "secondaryPositions": [
+                "C"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 5,
+              "power": 4,
+              "speed": 5,
+              "defense": 5,
+              "arm": 7,
+              "pitching": 5,
+              "pitchingProfile": {
+                "effectiveness": 5,
+                "control": 3,
+                "stuff": 4
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-17",
+              "id": "school-standard-5833cc5e-player-17",
+              "name": "藤田",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "P",
+              "secondaryPositions": [
+                "C"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 3,
+              "power": 5,
+              "speed": 3,
+              "defense": 6,
+              "arm": 3,
+              "pitching": 6,
+              "pitchingProfile": {
+                "effectiveness": 6,
+                "control": 4,
+                "stuff": 5
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "player",
+              "id": "player",
+              "name": "測試球員",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "SS",
+              "secondaryPositions": [],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 4,
+              "speed": 3,
+              "defense": 6,
+              "arm": 5,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "canonical-player",
+              "rosterTeamId": "school-standard-5833cc5e"
+            }
+          ],
+          "starters": [
+            {
+              "playerId": "school-standard-5833cc5e-player-01",
+              "id": "school-standard-5833cc5e-player-01",
+              "name": "青木",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "P",
+              "secondaryPositions": [
+                "SS"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 6,
+              "speed": 4,
+              "defense": 6,
+              "arm": 8,
+              "pitching": 7,
+              "pitchingProfile": {
+                "effectiveness": 7,
+                "control": 7,
+                "stuff": 7
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-02",
+              "id": "school-standard-5833cc5e-player-02",
+              "name": "石川",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "C",
+              "secondaryPositions": [
+                "LF"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 6,
+              "power": 4,
+              "speed": 5,
+              "defense": 7,
+              "arm": 6,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-03",
+              "id": "school-standard-5833cc5e-player-03",
+              "name": "上田",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "C"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 6,
+              "speed": 5,
+              "defense": 7,
+              "arm": 7,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-04",
+              "id": "school-standard-5833cc5e-player-04",
+              "name": "遠藤",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "2B",
+              "secondaryPositions": [
+                "RF"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 8,
+              "power": 4,
+              "speed": 7,
+              "defense": 5,
+              "arm": 7,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-05",
+              "id": "school-standard-5833cc5e-player-05",
+              "name": "大野",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "3B",
+              "secondaryPositions": [
+                "2B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 5,
+              "power": 7,
+              "speed": 5,
+              "defense": 6,
+              "arm": 7,
+              "pitching": 3,
+              "pitchingProfile": {
+                "effectiveness": 3,
+                "control": 2,
+                "stuff": 3
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-06",
+              "id": "school-standard-5833cc5e-player-06",
+              "name": "加藤",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "SS",
+              "secondaryPositions": [
+                "LF"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 6,
+              "speed": 6,
+              "defense": 6,
+              "arm": 5,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-07",
+              "id": "school-standard-5833cc5e-player-07",
+              "name": "木村",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "LF",
+              "secondaryPositions": [
+                "P"
+              ],
+              "bats": "R",
+              "throws": "L",
+              "contact": 6,
+              "power": 7,
+              "speed": 6,
+              "defense": 5,
+              "arm": 6,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-08",
+              "id": "school-standard-5833cc5e-player-08",
+              "name": "工藤",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "CF",
+              "secondaryPositions": [
+                "LF"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 4,
+              "power": 7,
+              "speed": 7,
+              "defense": 6,
+              "arm": 6,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-09",
+              "id": "school-standard-5833cc5e-player-09",
+              "name": "小島",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "RF",
+              "secondaryPositions": [
+                "1B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 6,
+              "speed": 6,
+              "defense": 6,
+              "arm": 6,
+              "pitching": 3,
+              "pitchingProfile": {
+                "effectiveness": 3,
+                "control": 2,
+                "stuff": 3
+              },
+              "source": "team-roster-foundation"
+            }
+          ],
+          "benchPlayers": [
+            {
+              "playerId": "school-standard-5833cc5e-player-10",
+              "id": "school-standard-5833cc5e-player-10",
+              "name": "齋藤",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "C",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 4,
+              "power": 6,
+              "speed": 4,
+              "defense": 7,
+              "arm": 5,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-11",
+              "id": "school-standard-5833cc5e-player-11",
+              "name": "佐々木",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "LF"
+              ],
+              "bats": "L",
+              "throws": "L",
+              "contact": 3,
+              "power": 5,
+              "speed": 4,
+              "defense": 4,
+              "arm": 2,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-12",
+              "id": "school-standard-5833cc5e-player-12",
+              "name": "高田",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "2B",
+              "secondaryPositions": [
+                "RF"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 5,
+              "power": 5,
+              "speed": 4,
+              "defense": 4,
+              "arm": 4,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-13",
+              "id": "school-standard-5833cc5e-player-13",
+              "name": "田中",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "SS",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 3,
+              "speed": 6,
+              "defense": 6,
+              "arm": 4,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-14",
+              "id": "school-standard-5833cc5e-player-14",
+              "name": "中島",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "LF",
+              "secondaryPositions": [
+                "C"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 4,
+              "power": 6,
+              "speed": 4,
+              "defense": 6,
+              "arm": 6,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-15",
+              "id": "school-standard-5833cc5e-player-15",
+              "name": "西村",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "CF",
+              "secondaryPositions": [
+                "P"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 5,
+              "speed": 4,
+              "defense": 5,
+              "arm": 4,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-16",
+              "id": "school-standard-5833cc5e-player-16",
+              "name": "長谷川",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "P",
+              "secondaryPositions": [
+                "C"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 5,
+              "power": 4,
+              "speed": 5,
+              "defense": 5,
+              "arm": 7,
+              "pitching": 5,
+              "pitchingProfile": {
+                "effectiveness": 5,
+                "control": 3,
+                "stuff": 4
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "school-standard-5833cc5e-player-17",
+              "id": "school-standard-5833cc5e-player-17",
+              "name": "藤田",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "P",
+              "secondaryPositions": [
+                "C"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 3,
+              "power": 5,
+              "speed": 3,
+              "defense": 6,
+              "arm": 3,
+              "pitching": 6,
+              "pitchingProfile": {
+                "effectiveness": 6,
+                "control": 4,
+                "stuff": 5
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "player",
+              "id": "player",
+              "name": "測試球員",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "SS",
+              "secondaryPositions": [],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 4,
+              "speed": 3,
+              "defense": 6,
+              "arm": 5,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "canonical-player",
+              "rosterTeamId": "school-standard-5833cc5e"
+            }
+          ],
+          "pitchingStaff": {
+            "starter": "school-standard-5833cc5e-player-01",
+            "secondaryPitchers": [
+              "school-standard-5833cc5e-player-17",
+              "school-standard-5833cc5e-player-16"
+            ]
+          },
+          "battingOrder": [
+            {
+              "battingOrder": 1,
+              "playerId": "school-standard-5833cc5e-player-04",
+              "defensivePosition": "2B"
+            },
+            {
+              "battingOrder": 2,
+              "playerId": "school-standard-5833cc5e-player-07",
+              "defensivePosition": "LF"
+            },
+            {
+              "battingOrder": 3,
+              "playerId": "school-standard-5833cc5e-player-05",
+              "defensivePosition": "3B"
+            },
+            {
+              "battingOrder": 4,
+              "playerId": "school-standard-5833cc5e-player-08",
+              "defensivePosition": "CF"
+            },
+            {
+              "battingOrder": 5,
+              "playerId": "school-standard-5833cc5e-player-01",
+              "defensivePosition": "P"
+            },
+            {
+              "battingOrder": 6,
+              "playerId": "school-standard-5833cc5e-player-06",
+              "defensivePosition": "SS"
+            },
+            {
+              "battingOrder": 7,
+              "playerId": "school-standard-5833cc5e-player-09",
+              "defensivePosition": "RF"
+            },
+            {
+              "battingOrder": 8,
+              "playerId": "school-standard-5833cc5e-player-03",
+              "defensivePosition": "1B"
+            },
+            {
+              "battingOrder": 9,
+              "playerId": "school-standard-5833cc5e-player-02",
+              "defensivePosition": "C"
+            }
+          ],
+          "playerInjection": {
+            "playerId": "player",
+            "requestedPosition": "SS",
+            "assignedPosition": "",
+            "rosterRole": "bench",
+            "replacedPlayerId": "",
+            "legal": true
+          }
+        },
+        "teamStrengthProfile": {
+          "version": "team-strength-model-v1",
+          "teamId": "school-standard-5833cc5e",
+          "lineupQuality": {
+            "contact": {
+              "mean": 54,
+              "topThird": 67,
+              "bottomThird": 47,
+              "peak": 80,
+              "spread": 40
+            },
+            "power": {
+              "mean": 59,
+              "topThird": 70,
+              "bottomThird": 47,
+              "peak": 70,
+              "spread": 30
+            },
+            "speed": {
+              "mean": 57,
+              "topThird": 67,
+              "bottomThird": 47,
+              "peak": 70,
+              "spread": 30
+            },
+            "topOfOrderQuality": 62,
+            "middleOrderThreat": 58,
+            "bottomOrderQuality": 53
+          },
+          "powerThreat": {
+            "mean": 59,
+            "topThird": 70,
+            "bottomThird": 47,
+            "peak": 70,
+            "spread": 30
+          },
+          "contactQuality": {
+            "mean": 54,
+            "topThird": 67,
+            "bottomThird": 47,
+            "peak": 80,
+            "spread": 40
+          },
+          "speedQuality": {
+            "mean": 57,
+            "topThird": 67,
+            "bottomThird": 47,
+            "peak": 70,
+            "spread": 30
+          },
+          "defenseQuality": 60,
+          "armQuality": 63,
+          "startingPitchingQuality": 70,
+          "pitchingDepth": 45,
+          "rosterDepth": {
+            "starterFloor": 59,
+            "benchQuality": 46,
+            "starQuality": 56,
+            "balance": 58,
+            "topHeavyGap": 4
+          },
+          "baserunningQuality": 57,
+          "aggressiveRunnerCount": 2,
+          "overallSummary": 56
+        },
+        "source": "team-roster-foundation-v1"
+      },
+      "away": {
+        "lineup": [
+          {
+            "playerId": "regional-power-school-player-01",
+            "id": "regional-power-school-player-01",
+            "name": "青木",
+            "age": 16,
+            "year": 1,
+            "primaryPosition": "P",
+            "secondaryPositions": [
+              "3B"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 7,
+            "power": 6,
+            "speed": 7,
+            "defense": 6,
+            "arm": 8,
+            "pitching": 8,
+            "pitchingProfile": {
+              "effectiveness": 8,
+              "control": 7,
+              "stuff": 7
+            },
+            "source": "simulation-roster",
+            "position": "投手",
+            "defensivePosition": "P"
+          },
+          {
+            "playerId": "regional-power-school-player-03",
+            "id": "regional-power-school-player-03",
+            "name": "上田",
+            "age": 18,
+            "year": 3,
+            "primaryPosition": "1B",
+            "secondaryPositions": [
+              "CF"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 7,
+            "power": 8,
+            "speed": 6,
+            "defense": 6,
+            "arm": 6,
+            "pitching": 2,
+            "pitchingProfile": {
+              "effectiveness": 2,
+              "control": 1,
+              "stuff": 2
+            },
+            "source": "simulation-roster",
+            "position": "一壘手",
+            "defensivePosition": "1B"
+          },
+          {
+            "playerId": "regional-power-school-player-04",
+            "id": "regional-power-school-player-04",
+            "name": "遠藤",
+            "age": 16,
+            "year": 1,
+            "primaryPosition": "2B",
+            "secondaryPositions": [
+              "C"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 7,
+            "power": 7,
+            "speed": 5,
+            "defense": 7,
+            "arm": 6,
+            "pitching": 3,
+            "pitchingProfile": {
+              "effectiveness": 3,
+              "control": 2,
+              "stuff": 3
+            },
+            "source": "simulation-roster",
+            "position": "二壘手",
+            "defensivePosition": "2B"
+          },
+          {
+            "playerId": "regional-power-school-player-07",
+            "id": "regional-power-school-player-07",
+            "name": "木村",
+            "age": 16,
+            "year": 1,
+            "primaryPosition": "LF",
+            "secondaryPositions": [
+              "C"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 7,
+            "power": 7,
+            "speed": 6,
+            "defense": 7,
+            "arm": 7,
+            "pitching": 3,
+            "pitchingProfile": {
+              "effectiveness": 3,
+              "control": 2,
+              "stuff": 3
+            },
+            "source": "simulation-roster",
+            "position": "左外野手",
+            "defensivePosition": "LF"
+          },
+          {
+            "playerId": "regional-power-school-player-05",
+            "id": "regional-power-school-player-05",
+            "name": "大野",
+            "age": 17,
+            "year": 2,
+            "primaryPosition": "3B",
+            "secondaryPositions": [
+              "1B"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 6,
+            "power": 7,
+            "speed": 5,
+            "defense": 6,
+            "arm": 7,
+            "pitching": 4,
+            "pitchingProfile": {
+              "effectiveness": 4,
+              "control": 3,
+              "stuff": 4
+            },
+            "source": "simulation-roster",
+            "position": "三壘手",
+            "defensivePosition": "3B"
+          },
+          {
+            "playerId": "regional-power-school-player-09",
+            "id": "regional-power-school-player-09",
+            "name": "小島",
+            "age": 18,
+            "year": 3,
+            "primaryPosition": "RF",
+            "secondaryPositions": [
+              "1B"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 6,
+            "power": 7,
+            "speed": 6,
+            "defense": 7,
+            "arm": 8,
+            "pitching": 2,
+            "pitchingProfile": {
+              "effectiveness": 2,
+              "control": 1,
+              "stuff": 2
+            },
+            "source": "simulation-roster",
+            "position": "右外野手",
+            "defensivePosition": "RF"
+          },
+          {
+            "playerId": "regional-power-school-player-06",
+            "id": "regional-power-school-player-06",
+            "name": "加藤",
+            "age": 18,
+            "year": 3,
+            "primaryPosition": "SS",
+            "secondaryPositions": [
+              "3B"
+            ],
+            "bats": "L",
+            "throws": "R",
+            "contact": 6,
+            "power": 5,
+            "speed": 8,
+            "defense": 8,
+            "arm": 5,
+            "pitching": 2,
+            "pitchingProfile": {
+              "effectiveness": 2,
+              "control": 1,
+              "stuff": 2
+            },
+            "source": "simulation-roster",
+            "position": "游擊手",
+            "defensivePosition": "SS"
+          },
+          {
+            "playerId": "regional-power-school-player-02",
+            "id": "regional-power-school-player-02",
+            "name": "石川",
+            "age": 17,
+            "year": 2,
+            "primaryPosition": "C",
+            "secondaryPositions": [
+              "3B"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 5,
+            "power": 6,
+            "speed": 6,
+            "defense": 7,
+            "arm": 8,
+            "pitching": 3,
+            "pitchingProfile": {
+              "effectiveness": 3,
+              "control": 2,
+              "stuff": 3
+            },
+            "source": "simulation-roster",
+            "position": "捕手",
+            "defensivePosition": "C"
+          },
+          {
+            "playerId": "regional-power-school-player-08",
+            "id": "regional-power-school-player-08",
+            "name": "工藤",
+            "age": 17,
+            "year": 2,
+            "primaryPosition": "CF",
+            "secondaryPositions": [
+              "P"
+            ],
+            "bats": "R",
+            "throws": "L",
+            "contact": 5,
+            "power": 5,
+            "speed": 6,
+            "defense": 7,
+            "arm": 8,
+            "pitching": 3,
+            "pitchingProfile": {
+              "effectiveness": 3,
+              "control": 2,
+              "stuff": 3
+            },
+            "source": "simulation-roster",
+            "position": "中外野手",
+            "defensivePosition": "CF"
+          }
+        ],
+        "bench": [
+          {
+            "playerId": "regional-power-school-player-10",
+            "id": "regional-power-school-player-10",
+            "name": "齋藤",
+            "age": 16,
+            "year": 1,
+            "primaryPosition": "C",
+            "secondaryPositions": [
+              "SS"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 6,
+            "power": 5,
+            "speed": 4,
+            "defense": 6,
+            "arm": 8,
+            "pitching": 2,
+            "pitchingProfile": {
+              "effectiveness": 2,
+              "control": 1,
+              "stuff": 2
+            },
+            "source": "simulation-roster",
+            "position": "捕手"
+          },
+          {
+            "playerId": "regional-power-school-player-11",
+            "id": "regional-power-school-player-11",
+            "name": "佐々木",
+            "age": 17,
+            "year": 2,
+            "primaryPosition": "1B",
+            "secondaryPositions": [
+              "3B"
+            ],
+            "bats": "L",
+            "throws": "R",
+            "contact": 6,
+            "power": 5,
+            "speed": 6,
+            "defense": 5,
+            "arm": 4,
+            "pitching": 2,
+            "pitchingProfile": {
+              "effectiveness": 2,
+              "control": 1,
+              "stuff": 2
+            },
+            "source": "simulation-roster",
+            "position": "一壘手"
+          },
+          {
+            "playerId": "regional-power-school-player-12",
+            "id": "regional-power-school-player-12",
+            "name": "高田",
+            "age": 18,
+            "year": 3,
+            "primaryPosition": "2B",
+            "secondaryPositions": [
+              "3B"
+            ],
+            "bats": "L",
+            "throws": "R",
+            "contact": 6,
+            "power": 6,
+            "speed": 4,
+            "defense": 6,
+            "arm": 5,
+            "pitching": 1,
+            "pitchingProfile": {
+              "effectiveness": 1,
+              "control": 1,
+              "stuff": 1
+            },
+            "source": "simulation-roster",
+            "position": "二壘手"
+          },
+          {
+            "playerId": "regional-power-school-player-13",
+            "id": "regional-power-school-player-13",
+            "name": "田中",
+            "age": 16,
+            "year": 1,
+            "primaryPosition": "SS",
+            "secondaryPositions": [
+              "1B"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 6,
+            "power": 6,
+            "speed": 5,
+            "defense": 6,
+            "arm": 6,
+            "pitching": 2,
+            "pitchingProfile": {
+              "effectiveness": 2,
+              "control": 1,
+              "stuff": 2
+            },
+            "source": "simulation-roster",
+            "position": "游擊手"
+          },
+          {
+            "playerId": "regional-power-school-player-14",
+            "id": "regional-power-school-player-14",
+            "name": "中島",
+            "age": 17,
+            "year": 2,
+            "primaryPosition": "LF",
+            "secondaryPositions": [
+              "P"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 5,
+            "power": 5,
+            "speed": 5,
+            "defense": 7,
+            "arm": 5,
+            "pitching": 2,
+            "pitchingProfile": {
+              "effectiveness": 2,
+              "control": 1,
+              "stuff": 2
+            },
+            "source": "simulation-roster",
+            "position": "左外野手"
+          },
+          {
+            "playerId": "regional-power-school-player-15",
+            "id": "regional-power-school-player-15",
+            "name": "西村",
+            "age": 18,
+            "year": 3,
+            "primaryPosition": "CF",
+            "secondaryPositions": [
+              "C"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 5,
+            "power": 6,
+            "speed": 6,
+            "defense": 7,
+            "arm": 5,
+            "pitching": 1,
+            "pitchingProfile": {
+              "effectiveness": 1,
+              "control": 1,
+              "stuff": 1
+            },
+            "source": "simulation-roster",
+            "position": "中外野手"
+          },
+          {
+            "playerId": "regional-power-school-player-16",
+            "id": "regional-power-school-player-16",
+            "name": "長谷川",
+            "age": 16,
+            "year": 1,
+            "primaryPosition": "P",
+            "secondaryPositions": [
+              "LF"
+            ],
+            "bats": "R",
+            "throws": "L",
+            "contact": 5,
+            "power": 4,
+            "speed": 7,
+            "defense": 6,
+            "arm": 8,
+            "pitching": 7,
+            "pitchingProfile": {
+              "effectiveness": 7,
+              "control": 7,
+              "stuff": 6
+            },
+            "source": "simulation-roster",
+            "position": "投手"
+          },
+          {
+            "playerId": "regional-power-school-player-17",
+            "id": "regional-power-school-player-17",
+            "name": "藤田",
+            "age": 17,
+            "year": 2,
+            "primaryPosition": "P",
+            "secondaryPositions": [
+              "1B"
+            ],
+            "bats": "R",
+            "throws": "R",
+            "contact": 5,
+            "power": 6,
+            "speed": 5,
+            "defense": 5,
+            "arm": 5,
+            "pitching": 7,
+            "pitchingProfile": {
+              "effectiveness": 7,
+              "control": 6,
+              "stuff": 6
+            },
+            "source": "simulation-roster",
+            "position": "投手"
+          }
+        ],
+        "pitchingStaff": {
+          "starter": "regional-power-school-player-01",
+          "secondaryPitchers": [
+            "regional-power-school-player-16",
+            "regional-power-school-player-17"
+          ]
+        },
+        "teamRoster": {
+          "version": "team-roster-foundation-v1",
+          "teamId": "regional-power-school",
+          "schoolId": "regional-power-school",
+          "schoolStandard": "competitive",
+          "yearIdentity": "hs-y1-16",
+          "generationSeed": "3041234481|away",
+          "composition": "natural",
+          "players": [
+            {
+              "playerId": "regional-power-school-player-01",
+              "id": "regional-power-school-player-01",
+              "name": "青木",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "P",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 7,
+              "power": 6,
+              "speed": 7,
+              "defense": 6,
+              "arm": 8,
+              "pitching": 8,
+              "pitchingProfile": {
+                "effectiveness": 8,
+                "control": 7,
+                "stuff": 7
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-02",
+              "id": "regional-power-school-player-02",
+              "name": "石川",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "C",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 6,
+              "speed": 6,
+              "defense": 7,
+              "arm": 8,
+              "pitching": 3,
+              "pitchingProfile": {
+                "effectiveness": 3,
+                "control": 2,
+                "stuff": 3
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-03",
+              "id": "regional-power-school-player-03",
+              "name": "上田",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "CF"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 7,
+              "power": 8,
+              "speed": 6,
+              "defense": 6,
+              "arm": 6,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-04",
+              "id": "regional-power-school-player-04",
+              "name": "遠藤",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "2B",
+              "secondaryPositions": [
+                "C"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 7,
+              "power": 7,
+              "speed": 5,
+              "defense": 7,
+              "arm": 6,
+              "pitching": 3,
+              "pitchingProfile": {
+                "effectiveness": 3,
+                "control": 2,
+                "stuff": 3
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-05",
+              "id": "regional-power-school-player-05",
+              "name": "大野",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "3B",
+              "secondaryPositions": [
+                "1B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 6,
+              "power": 7,
+              "speed": 5,
+              "defense": 6,
+              "arm": 7,
+              "pitching": 4,
+              "pitchingProfile": {
+                "effectiveness": 4,
+                "control": 3,
+                "stuff": 4
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-06",
+              "id": "regional-power-school-player-06",
+              "name": "加藤",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "SS",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 6,
+              "power": 5,
+              "speed": 8,
+              "defense": 8,
+              "arm": 5,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-07",
+              "id": "regional-power-school-player-07",
+              "name": "木村",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "LF",
+              "secondaryPositions": [
+                "C"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 7,
+              "power": 7,
+              "speed": 6,
+              "defense": 7,
+              "arm": 7,
+              "pitching": 3,
+              "pitchingProfile": {
+                "effectiveness": 3,
+                "control": 2,
+                "stuff": 3
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-08",
+              "id": "regional-power-school-player-08",
+              "name": "工藤",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "CF",
+              "secondaryPositions": [
+                "P"
+              ],
+              "bats": "R",
+              "throws": "L",
+              "contact": 5,
+              "power": 5,
+              "speed": 6,
+              "defense": 7,
+              "arm": 8,
+              "pitching": 3,
+              "pitchingProfile": {
+                "effectiveness": 3,
+                "control": 2,
+                "stuff": 3
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-09",
+              "id": "regional-power-school-player-09",
+              "name": "小島",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "RF",
+              "secondaryPositions": [
+                "1B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 6,
+              "power": 7,
+              "speed": 6,
+              "defense": 7,
+              "arm": 8,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-10",
+              "id": "regional-power-school-player-10",
+              "name": "齋藤",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "C",
+              "secondaryPositions": [
+                "SS"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 6,
+              "power": 5,
+              "speed": 4,
+              "defense": 6,
+              "arm": 8,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-11",
+              "id": "regional-power-school-player-11",
+              "name": "佐々木",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 6,
+              "power": 5,
+              "speed": 6,
+              "defense": 5,
+              "arm": 4,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-12",
+              "id": "regional-power-school-player-12",
+              "name": "高田",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "2B",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 6,
+              "power": 6,
+              "speed": 4,
+              "defense": 6,
+              "arm": 5,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-13",
+              "id": "regional-power-school-player-13",
+              "name": "田中",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "SS",
+              "secondaryPositions": [
+                "1B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 6,
+              "power": 6,
+              "speed": 5,
+              "defense": 6,
+              "arm": 6,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-14",
+              "id": "regional-power-school-player-14",
+              "name": "中島",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "LF",
+              "secondaryPositions": [
+                "P"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 5,
+              "speed": 5,
+              "defense": 7,
+              "arm": 5,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-15",
+              "id": "regional-power-school-player-15",
+              "name": "西村",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "CF",
+              "secondaryPositions": [
+                "C"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 6,
+              "speed": 6,
+              "defense": 7,
+              "arm": 5,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-16",
+              "id": "regional-power-school-player-16",
+              "name": "長谷川",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "P",
+              "secondaryPositions": [
+                "LF"
+              ],
+              "bats": "R",
+              "throws": "L",
+              "contact": 5,
+              "power": 4,
+              "speed": 7,
+              "defense": 6,
+              "arm": 8,
+              "pitching": 7,
+              "pitchingProfile": {
+                "effectiveness": 7,
+                "control": 7,
+                "stuff": 6
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-17",
+              "id": "regional-power-school-player-17",
+              "name": "藤田",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "P",
+              "secondaryPositions": [
+                "1B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 6,
+              "speed": 5,
+              "defense": 5,
+              "arm": 5,
+              "pitching": 7,
+              "pitchingProfile": {
+                "effectiveness": 7,
+                "control": 6,
+                "stuff": 6
+              },
+              "source": "team-roster-foundation"
+            }
+          ],
+          "starters": [
+            {
+              "playerId": "regional-power-school-player-01",
+              "id": "regional-power-school-player-01",
+              "name": "青木",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "P",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 7,
+              "power": 6,
+              "speed": 7,
+              "defense": 6,
+              "arm": 8,
+              "pitching": 8,
+              "pitchingProfile": {
+                "effectiveness": 8,
+                "control": 7,
+                "stuff": 7
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-02",
+              "id": "regional-power-school-player-02",
+              "name": "石川",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "C",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 6,
+              "speed": 6,
+              "defense": 7,
+              "arm": 8,
+              "pitching": 3,
+              "pitchingProfile": {
+                "effectiveness": 3,
+                "control": 2,
+                "stuff": 3
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-03",
+              "id": "regional-power-school-player-03",
+              "name": "上田",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "CF"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 7,
+              "power": 8,
+              "speed": 6,
+              "defense": 6,
+              "arm": 6,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-04",
+              "id": "regional-power-school-player-04",
+              "name": "遠藤",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "2B",
+              "secondaryPositions": [
+                "C"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 7,
+              "power": 7,
+              "speed": 5,
+              "defense": 7,
+              "arm": 6,
+              "pitching": 3,
+              "pitchingProfile": {
+                "effectiveness": 3,
+                "control": 2,
+                "stuff": 3
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-05",
+              "id": "regional-power-school-player-05",
+              "name": "大野",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "3B",
+              "secondaryPositions": [
+                "1B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 6,
+              "power": 7,
+              "speed": 5,
+              "defense": 6,
+              "arm": 7,
+              "pitching": 4,
+              "pitchingProfile": {
+                "effectiveness": 4,
+                "control": 3,
+                "stuff": 4
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-06",
+              "id": "regional-power-school-player-06",
+              "name": "加藤",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "SS",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 6,
+              "power": 5,
+              "speed": 8,
+              "defense": 8,
+              "arm": 5,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-07",
+              "id": "regional-power-school-player-07",
+              "name": "木村",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "LF",
+              "secondaryPositions": [
+                "C"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 7,
+              "power": 7,
+              "speed": 6,
+              "defense": 7,
+              "arm": 7,
+              "pitching": 3,
+              "pitchingProfile": {
+                "effectiveness": 3,
+                "control": 2,
+                "stuff": 3
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-08",
+              "id": "regional-power-school-player-08",
+              "name": "工藤",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "CF",
+              "secondaryPositions": [
+                "P"
+              ],
+              "bats": "R",
+              "throws": "L",
+              "contact": 5,
+              "power": 5,
+              "speed": 6,
+              "defense": 7,
+              "arm": 8,
+              "pitching": 3,
+              "pitchingProfile": {
+                "effectiveness": 3,
+                "control": 2,
+                "stuff": 3
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-09",
+              "id": "regional-power-school-player-09",
+              "name": "小島",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "RF",
+              "secondaryPositions": [
+                "1B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 6,
+              "power": 7,
+              "speed": 6,
+              "defense": 7,
+              "arm": 8,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            }
+          ],
+          "benchPlayers": [
+            {
+              "playerId": "regional-power-school-player-10",
+              "id": "regional-power-school-player-10",
+              "name": "齋藤",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "C",
+              "secondaryPositions": [
+                "SS"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 6,
+              "power": 5,
+              "speed": 4,
+              "defense": 6,
+              "arm": 8,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-11",
+              "id": "regional-power-school-player-11",
+              "name": "佐々木",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "1B",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 6,
+              "power": 5,
+              "speed": 6,
+              "defense": 5,
+              "arm": 4,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-12",
+              "id": "regional-power-school-player-12",
+              "name": "高田",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "2B",
+              "secondaryPositions": [
+                "3B"
+              ],
+              "bats": "L",
+              "throws": "R",
+              "contact": 6,
+              "power": 6,
+              "speed": 4,
+              "defense": 6,
+              "arm": 5,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-13",
+              "id": "regional-power-school-player-13",
+              "name": "田中",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "SS",
+              "secondaryPositions": [
+                "1B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 6,
+              "power": 6,
+              "speed": 5,
+              "defense": 6,
+              "arm": 6,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-14",
+              "id": "regional-power-school-player-14",
+              "name": "中島",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "LF",
+              "secondaryPositions": [
+                "P"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 5,
+              "speed": 5,
+              "defense": 7,
+              "arm": 5,
+              "pitching": 2,
+              "pitchingProfile": {
+                "effectiveness": 2,
+                "control": 1,
+                "stuff": 2
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-15",
+              "id": "regional-power-school-player-15",
+              "name": "西村",
+              "age": 18,
+              "year": 3,
+              "primaryPosition": "CF",
+              "secondaryPositions": [
+                "C"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 6,
+              "speed": 6,
+              "defense": 7,
+              "arm": 5,
+              "pitching": 1,
+              "pitchingProfile": {
+                "effectiveness": 1,
+                "control": 1,
+                "stuff": 1
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-16",
+              "id": "regional-power-school-player-16",
+              "name": "長谷川",
+              "age": 16,
+              "year": 1,
+              "primaryPosition": "P",
+              "secondaryPositions": [
+                "LF"
+              ],
+              "bats": "R",
+              "throws": "L",
+              "contact": 5,
+              "power": 4,
+              "speed": 7,
+              "defense": 6,
+              "arm": 8,
+              "pitching": 7,
+              "pitchingProfile": {
+                "effectiveness": 7,
+                "control": 7,
+                "stuff": 6
+              },
+              "source": "team-roster-foundation"
+            },
+            {
+              "playerId": "regional-power-school-player-17",
+              "id": "regional-power-school-player-17",
+              "name": "藤田",
+              "age": 17,
+              "year": 2,
+              "primaryPosition": "P",
+              "secondaryPositions": [
+                "1B"
+              ],
+              "bats": "R",
+              "throws": "R",
+              "contact": 5,
+              "power": 6,
+              "speed": 5,
+              "defense": 5,
+              "arm": 5,
+              "pitching": 7,
+              "pitchingProfile": {
+                "effectiveness": 7,
+                "control": 6,
+                "stuff": 6
+              },
+              "source": "team-roster-foundation"
+            }
+          ],
+          "pitchingStaff": {
+            "starter": "regional-power-school-player-01",
+            "secondaryPitchers": [
+              "regional-power-school-player-16",
+              "regional-power-school-player-17"
+            ]
+          },
+          "battingOrder": [
+            {
+              "battingOrder": 1,
+              "playerId": "regional-power-school-player-01",
+              "defensivePosition": "P"
+            },
+            {
+              "battingOrder": 2,
+              "playerId": "regional-power-school-player-03",
+              "defensivePosition": "1B"
+            },
+            {
+              "battingOrder": 3,
+              "playerId": "regional-power-school-player-04",
+              "defensivePosition": "2B"
+            },
+            {
+              "battingOrder": 4,
+              "playerId": "regional-power-school-player-07",
+              "defensivePosition": "LF"
+            },
+            {
+              "battingOrder": 5,
+              "playerId": "regional-power-school-player-05",
+              "defensivePosition": "3B"
+            },
+            {
+              "battingOrder": 6,
+              "playerId": "regional-power-school-player-09",
+              "defensivePosition": "RF"
+            },
+            {
+              "battingOrder": 7,
+              "playerId": "regional-power-school-player-06",
+              "defensivePosition": "SS"
+            },
+            {
+              "battingOrder": 8,
+              "playerId": "regional-power-school-player-02",
+              "defensivePosition": "C"
+            },
+            {
+              "battingOrder": 9,
+              "playerId": "regional-power-school-player-08",
+              "defensivePosition": "CF"
+            }
+          ]
+        },
+        "teamStrengthProfile": {
+          "version": "team-strength-model-v1",
+          "teamId": "regional-power-school",
+          "lineupQuality": {
+            "contact": {
+              "mean": 62,
+              "topThird": 70,
+              "bottomThird": 53,
+              "peak": 70,
+              "spread": 20
+            },
+            "power": {
+              "mean": 64,
+              "topThird": 73,
+              "bottomThird": 53,
+              "peak": 80,
+              "spread": 30
+            },
+            "speed": {
+              "mean": 61,
+              "topThird": 70,
+              "bottomThird": 53,
+              "peak": 80,
+              "spread": 30
+            },
+            "topOfOrderQuality": 66,
+            "middleOrderThreat": 68,
+            "bottomOrderQuality": 56
+          },
+          "powerThreat": {
+            "mean": 64,
+            "topThird": 73,
+            "bottomThird": 53,
+            "peak": 80,
+            "spread": 30
+          },
+          "contactQuality": {
+            "mean": 62,
+            "topThird": 70,
+            "bottomThird": 53,
+            "peak": 70,
+            "spread": 20
+          },
+          "speedQuality": {
+            "mean": 61,
+            "topThird": 70,
+            "bottomThird": 53,
+            "peak": 80,
+            "spread": 30
+          },
+          "defenseQuality": 69,
+          "armQuality": 70,
+          "startingPitchingQuality": 73,
+          "pitchingDepth": 65,
+          "rosterDepth": {
+            "starterFloor": 65,
+            "benchQuality": 56,
+            "starQuality": 64,
+            "balance": 64,
+            "topHeavyGap": 3
+          },
+          "baserunningQuality": 61,
+          "aggressiveRunnerCount": 2,
+          "overallSummary": 64
+        },
+        "source": "team-roster-foundation-v1"
+      }
+    },
+    "playerLineupStatus": "bench",
+    "playerLineupSlot": -1,
+    "playerFieldingAssignment": "",
+    "playerEntryWindowInning": 5,
+    "playerEntryCompleted": false,
+    "performanceEvidence": {},
+    "matchExperience": null,
+    "gameExposureState": {
+      "version": "game-exposure-v1",
+      "matchId": "hs-y1-autumn-exhibition",
+      "opportunitySnapshot": {
+        "version": "playing-time-opportunity-v1",
+        "sourceVersion": "playing-time-opportunity-v1",
+        "decisionId": "hs-y1-autumn-exhibition|測試球員|體能＋棒球理解|school-standard-5833cc5e|45245667",
+        "matchId": "hs-y1-autumn-exhibition",
+        "playerId": "測試球員|體能＋棒球理解|school-standard-5833cc5e",
+        "exposureSource": "opportunity-resolver",
+        "actualRole": "rotation",
+        "actualRoleAtDecision": "rotation",
+        "projectedRolePrior": "",
+        "playingTimeEnvironment": "medium",
+        "schoolPlayingTimeEnvironment": "medium",
+        "competitionDepth": "medium",
+        "positionCompetition": "medium",
+        "positionNeed": "medium",
+        "evaluationTrend": 0,
+        "previousActualExposure": null,
+        "coachUsageStyle": "developmental",
+        "positionCapability": 5.666666666666667,
+        "positionFit": 0,
+        "positionExperience": 7,
+        "assignedPosition": "游擊手",
+        "requestedPosition": "游擊手",
+        "positionFallbackApplied": false,
+        "assignmentSource": "requested-position",
+        "assignmentReason": "specific-position-request",
+        "pitcherExposureDeferred": false,
+        "startingOpportunity": "rotationCandidate",
+        "startingDecision": "rotationCandidate",
+        "appearancePlan": {
+          "appearanceType": "defensiveSubstitution",
+          "entryInning": 5,
+          "entryHalf": "下"
+        },
+        "substitutionOpportunity": "defensiveSubstitution",
+        "opportunityReasons": [
+          "actual-role:rotation",
+          "school-environment:medium",
+          "competition-depth:medium",
+          "position-need:medium",
+          "coach-usage:developmental",
+          "position-legal"
+        ],
+        "opportunitySeed": "playing-time-opportunity-v1|hs-y1-autumn-exhibition|測試球員|體能＋棒球理解|school-standard-5833cc5e|browser-substitution-v1|rotation||medium|medium|medium|developmental|游擊手|5.666666666666667|0|7|highSchoolExhibition|0|0|regular|normal|6|-1",
+        "gameContext": {
+          "gameType": "highSchoolExhibition",
+          "importance": "regular",
+          "leverage": "normal",
+          "inning": 0,
+          "scoreMargin": 0
+        },
+        "readinessSnapshot": {
+          "version": "opportunity-readiness-v1",
+          "playerId": "測試球員|體能＋棒球理解|school-standard-5833cc5e",
+          "position": "游擊手",
+          "requestedPosition": "游擊手",
+          "sourceType": "system-derived-provisional",
+          "sourceVersion": "opportunity-readiness-v1",
+          "readinessBand": "competitive",
+          "positionReadiness": 5.666666666666667,
+          "positionFit": 0,
+          "fieldingReadiness": 6,
+          "reactionReadiness": 4,
+          "decisionReadiness": 7,
+          "experienceReadiness": 7,
+          "confidence": "provisional",
+          "positionLegal": true,
+          "positionFallbackApplied": false,
+          "assignmentSource": "requested-position",
+          "assignmentReason": "specific-position-request",
+          "pitcherExposureDeferred": false,
+          "reasons": [
+            "competitiveFieldingReadiness",
+            "competitiveReactionReadiness",
+            "strongDecisionReadiness",
+            "strongPositionExperience",
+            "limitedPositionFit",
+            "positionLegal"
+          ],
+          "provenance": {
+            "snapshotId": "readiness-0a53313e",
+            "sourceType": "system-derived-provisional",
+            "sourceVersion": "opportunity-readiness-v1",
+            "inputVersion": "hs-entry-capability-v1",
+            "deterministicIdentity": "opportunity-readiness-v1|測試球員|體能＋棒球理解|school-standard-5833cc5e|游擊手|游擊手|5.666666666666667|0|6|4|7|7|hs-entry-capability-v1"
+          }
+        },
+        "plannedUsage": {
+          "appearanceType": "defensiveSubstitution",
+          "entryInning": 5,
+          "entryHalf": "下"
+        },
+        "debug": {
+          "opportunityHash": 1160009319,
+          "opportunityScore": 47,
+          "scoreBreakdown": {
+            "actualRole": 48,
+            "positionCapability": 3,
+            "positionFit": -10,
+            "positionExperience": 3,
+            "schoolEnvironment": -1,
+            "competitionDepth": 0,
+            "positionNeed": 0,
+            "projectedRolePrior": 0,
+            "coachUsage": 4,
+            "gameContext": 0,
+            "deterministicVariation": -1,
+            "coachTrust": 2,
+            "healthReadiness": -1
+          },
+          "reasons": [
+            "actual-role:rotation",
+            "school-environment:medium",
+            "competition-depth:medium",
+            "position-need:medium",
+            "coach-usage:developmental",
+            "position-legal"
+          ]
+        }
+      },
+      "plannedUsage": {
+        "appearanceType": "defensiveSubstitution",
+        "entryInning": 5,
+        "entryHalf": "下"
+      },
+      "actualUsage": {
+        "appearanceType": "noAppearance",
+        "defensiveInnings": 0,
+        "plateAppearances": 0
+      },
+      "entryInning": null,
+      "exitInning": null,
+      "defensiveInnings": 0,
+      "plateAppearances": 0,
+      "appearanceType": "noAppearance",
+      "exposureSource": "opportunity-resolver",
+      "pitcherExposureDeferred": false,
+      "finalized": false,
+      "finalizationId": ""
+    },
+    "developmentFullMatchStart": false,
+    "playerRunnerLocation": -1,
+    "momentIndex": 0,
+    "currentMomentId": "hs_y1_match_moment_1",
+    "currentDomain": "flow",
+    "coachTacticalDirection": {
+      "domain": "offense",
+      "intent": "createPressure",
+      "riskPreference": "measured",
+      "priority": "先形成上壘與後續壓力",
+      "sourceCoachId": "high-school-head-coach",
+      "presentationStyle": "detail-oriented"
+    },
+    "coachTacticalContextSignature": "{\"momentId\":\"hs_y1_match_moment_1\",\"domain\":\"flow\",\"inning\":1,\"half\":\"上\",\"home\":0,\"away\":0,\"outs\":0,\"runners\":[\"\",\"\",\"\"],\"ballContext\":\"normalGrounder\",\"role\":\"rotation\",\"assignment\":\"比賽從一局上開始；你在板凳觀察，但場上每個打席都會完整進行。\"}",
+    "opponentTacticalTruth": {
+      "code": "",
+      "targetRunnerId": ""
+    },
+    "ballContext": {
+      "type": "",
+      "family": "",
+      "pace": "",
+      "label": "",
+      "detail": "",
+      "timeWindow": ""
+    },
+    "positionDecisionFamily": "",
+    "currentFieldingPosition": "",
+    "developmentPositionOverride": "",
+    "developmentTestCapabilityOverride": null,
+    "defensiveSituation": {},
+    "matchDecisionDensityState": {
+      "version": "match-decision-density-v1",
+      "defensiveMeaningfulDecisionCount": 0,
+      "lastDecisionPlayIndex": -1,
+      "lastNoveltyKey": "",
+      "recentSituationFamilies": [],
+      "recentRouteFamilies": [],
+      "repeatedOpportunityCount": 0,
+      "suppressedOpportunityCount": 0,
+      "currentConsecutiveMeaningfulDecisions": 0,
+      "maxConsecutiveMeaningfulDecisions": 0,
+      "lastDecisionInning": 0,
+      "lastDecisionHalf": "",
+      "lastSelectedRoute": "",
+      "lastFinalRoute": "",
+      "offensiveDecisionCount": 0,
+      "lastOffensiveDecisionPA": 0,
+      "lastOffensiveDecisionPlayIndex": -1,
+      "lastOffensiveNoveltyKey": "",
+      "recentOffensiveSituationFamilies": [],
+      "offensiveSuppressedCount": 0,
+      "offensiveRepeatSuppressedCount": 0,
+      "lastOffensiveDecisionInning": 0,
+      "lastOffensiveDecisionHalf": ""
+    },
+    "pitcherRuntimeState": {
+      "version": "pitch-sequencing-core-sprint-a",
+      "runtimeId": "hs-y1-autumn-exhibition|regional-power-school-player-01",
+      "responseProfile": {
+        "id": "simplifyReset",
+        "pressureProcessing": "simplify",
+        "failureResponse": "reset",
+        "responsibilityStyle": "distribute"
+      },
+      "mentalState": {
+        "version": "pitcher-mental-state-v1",
+        "arousal": 50,
+        "confidence": 50,
+        "cognitiveLoad": 40,
+        "resultAttachment": 35
+      },
+      "processState": {
+        "version": "pitcher-process-state-v1",
+        "rhythm": 58.85,
+        "aggression": 46.9,
+        "tempo": 48,
+        "precisionIntent": 59.3,
+        "processLabel": "stableFlow"
+      },
+      "control": 14,
+      "previousPAResult": "",
+      "recentPitchClasses": [],
+      "lastMentalTransition": null
+    },
+    "pitcherSequencingDebugTrace": [],
+    "pitcherObservableHistory": [],
+    "pitcherTacticalSequenceHistory": [],
+    "pitcherTacticalDebugTrace": [],
+    "batterAnticipationState": {
+      "version": "batter-anticipation-sprint-b",
+      "identity": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|1|上",
+      "publicContext": {
+        "balls": 0,
+        "strikes": 0,
+        "outs": 0,
+        "runners": [
+          false,
+          false,
+          false
+        ],
+        "scoreDifference": 0,
+        "inning": 1,
+        "highLeverage": false,
+        "previousPitchResult": "",
+        "previousPAResult": ""
+      },
+      "observableEvidenceRaw": {
+        "version": "pitch-sequencing-core-sprint-a",
+        "sampleSize": 0,
+        "recentPitchClasses": [],
+        "observableCues": [],
+        "observedClassCounts": {
+          "hitterPitch": 0,
+          "competitiveStrike": 0,
+          "edgeStrike": 0,
+          "chasePitch": 0,
+          "clearBall": 0
+        },
+        "previousPitchResult": ""
+      },
+      "observationResult": {
+        "version": "batter-anticipation-sprint-b",
+        "observedPitchClasses": [],
+        "observedCues": [],
+        "sourceSampleSize": 0,
+        "retainedSampleSize": 0,
+        "omittedCount": 0,
+        "noiseCount": 0,
+        "sampleAdequacy": 0,
+        "reliability": 0.472
+      },
+      "interpretationResult": {
+        "version": "batter-anticipation-sprint-b",
+        "subjectivePitchDistribution": {
+          "hitterPitch": 0.2,
+          "competitiveStrike": 0.24705,
+          "edgeStrike": 0.148222746,
+          "chasePitch": 0.251777254,
+          "clearBall": 0.15295
+        },
+        "subjectiveDistribution": {
+          "hitterPitch": 0.2,
+          "competitiveStrike": 0.24705,
+          "edgeStrike": 0.148222746,
+          "chasePitch": 0.251777254,
+          "clearBall": 0.15295
+        },
+        "anticipationConfidence": 0.212565,
+        "confidence": 0.212565,
+        "uncertainty": 0.55836,
+        "contextExpectation": {
+          "hitterPitch": 0.2,
+          "competitiveStrike": 0.25,
+          "edgeStrike": 0.2,
+          "chasePitch": 0.2,
+          "clearBall": 0.15
+        },
+        "observedDistribution": {
+          "hitterPitch": 0.2,
+          "competitiveStrike": 0.2,
+          "edgeStrike": 0.2,
+          "chasePitch": 0.2,
+          "clearBall": 0.2
+        },
+        "observedCues": [],
+        "strategicCueModifier": {
+          "hitterPitch": 0,
+          "competitiveStrike": 0,
+          "edgeStrike": 0,
+          "chasePitch": 0,
+          "clearBall": 0
+        },
+        "commandCueAdjustment": {
+          "uncertainty": 0,
+          "confidence": 0
+        },
+        "cueInterpretationStrength": 0.445,
+        "patternWeight": 0.059,
+        "interpretationBias": {
+          "from": "edgeStrike",
+          "to": "chasePitch",
+          "magnitude": 0.051777
+        },
+        "observedSampleSize": 0
+      },
+      "subjectivePitchDistribution": {
+        "hitterPitch": 0.2,
+        "competitiveStrike": 0.24705,
+        "edgeStrike": 0.148222746,
+        "chasePitch": 0.251777254,
+        "clearBall": 0.15295
+      },
+      "subjectiveDistribution": {
+        "hitterPitch": 0.2,
+        "competitiveStrike": 0.24705,
+        "edgeStrike": 0.148222746,
+        "chasePitch": 0.251777254,
+        "clearBall": 0.15295
+      },
+      "anticipationConfidence": 0.212565,
+      "confidence": 0.212565,
+      "chosenApproach": "",
+      "readiness": null,
+      "prePitchReadiness": null,
+      "debug": {
+        "directionAccuracy": 0.919321,
+        "directionCorrect": true,
+        "subjectiveDirection": "challenge",
+        "trueDirection": "challenge",
+        "confidenceCalibration": 0.293244,
+        "frozenTrueDistribution": {
+          "hitterPitch": 0.169088,
+          "competitiveStrike": 0.265536,
+          "edgeStrike": 0.210416,
+          "chasePitch": 0.206696,
+          "clearBall": 0.148264
+        }
+      },
+      "debugTrace": {
+        "publicContext": {
+          "balls": 0,
+          "strikes": 0,
+          "outs": 0,
+          "runners": [
+            false,
+            false,
+            false
+          ],
+          "scoreDifference": 0,
+          "inning": 1,
+          "highLeverage": false,
+          "previousPitchResult": "",
+          "previousPAResult": ""
+        },
+        "observableEvidenceRaw": {
+          "version": "pitch-sequencing-core-sprint-a",
+          "sampleSize": 0,
+          "recentPitchClasses": [],
+          "observableCues": [],
+          "observedClassCounts": {
+            "hitterPitch": 0,
+            "competitiveStrike": 0,
+            "edgeStrike": 0,
+            "chasePitch": 0,
+            "clearBall": 0
+          },
+          "previousPitchResult": ""
+        },
+        "observationResult": {
+          "version": "batter-anticipation-sprint-b",
+          "observedPitchClasses": [],
+          "observedCues": [],
+          "sourceSampleSize": 0,
+          "retainedSampleSize": 0,
+          "omittedCount": 0,
+          "noiseCount": 0,
+          "sampleAdequacy": 0,
+          "reliability": 0.472
+        },
+        "interpretationResult": {
+          "version": "batter-anticipation-sprint-b",
+          "subjectivePitchDistribution": {
+            "hitterPitch": 0.2,
+            "competitiveStrike": 0.24705,
+            "edgeStrike": 0.148222746,
+            "chasePitch": 0.251777254,
+            "clearBall": 0.15295
+          },
+          "subjectiveDistribution": {
+            "hitterPitch": 0.2,
+            "competitiveStrike": 0.24705,
+            "edgeStrike": 0.148222746,
+            "chasePitch": 0.251777254,
+            "clearBall": 0.15295
+          },
+          "anticipationConfidence": 0.212565,
+          "confidence": 0.212565,
+          "uncertainty": 0.55836,
+          "contextExpectation": {
+            "hitterPitch": 0.2,
+            "competitiveStrike": 0.25,
+            "edgeStrike": 0.2,
+            "chasePitch": 0.2,
+            "clearBall": 0.15
+          },
+          "observedDistribution": {
+            "hitterPitch": 0.2,
+            "competitiveStrike": 0.2,
+            "edgeStrike": 0.2,
+            "chasePitch": 0.2,
+            "clearBall": 0.2
+          },
+          "observedCues": [],
+          "strategicCueModifier": {
+            "hitterPitch": 0,
+            "competitiveStrike": 0,
+            "edgeStrike": 0,
+            "chasePitch": 0,
+            "clearBall": 0
+          },
+          "commandCueAdjustment": {
+            "uncertainty": 0,
+            "confidence": 0
+          },
+          "cueInterpretationStrength": 0.445,
+          "patternWeight": 0.059,
+          "interpretationBias": {
+            "from": "edgeStrike",
+            "to": "chasePitch",
+            "magnitude": 0.051777
+          },
+          "observedSampleSize": 0
+        },
+        "subjectivePitchDistribution": {
+          "hitterPitch": 0.2,
+          "competitiveStrike": 0.24705,
+          "edgeStrike": 0.148222746,
+          "chasePitch": 0.251777254,
+          "clearBall": 0.15295
+        },
+        "anticipationConfidence": 0.212565,
+        "directionAccuracy": 0.919321,
+        "confidenceCalibration": 0.293244,
+        "chosenApproach": "",
+        "prePitchReadiness": null,
+        "frozenTrueDistribution": {
+          "hitterPitch": 0.169088,
+          "competitiveStrike": 0.265536,
+          "edgeStrike": 0.210416,
+          "chasePitch": 0.206696,
+          "clearBall": 0.148264
+        }
+      }
+    },
+    "prePitchPlanningState": {
+      "paIdentity": "hs-y1-autumn-exhibition|hs_y1_match_moment_1|player|1|上",
+      "frozenDistribution": {
+        "version": "pitch-sequencing-core-sprint-a",
+        "baseDistribution": {
+          "hitterPitch": 0.18,
+          "competitiveStrike": 0.27,
+          "edgeStrike": 0.2,
+          "chasePitch": 0.2,
+          "clearBall": 0.15
+        },
+        "contextModifiers": {
+          "count": {
+            "hitterPitch": 0,
+            "competitiveStrike": 0,
+            "edgeStrike": 0,
+            "chasePitch": 0,
+            "clearBall": 0
+          },
+          "sequence": {
+            "hitterPitch": 0,
+            "competitiveStrike": 0,
+            "edgeStrike": 0,
+            "chasePitch": 0,
+            "clearBall": 0
+          }
+        },
+        "processModifiers": {
+          "hitterPitch": -0.010912,
+          "competitiveStrike": -0.004464000000000001,
+          "edgeStrike": 0.010415999999999996,
+          "chasePitch": 0.006696,
+          "clearBall": -0.0017359999999999967
+        },
+        "finalFrozenDistribution": {
+          "hitterPitch": 0.169088,
+          "competitiveStrike": 0.265536,
+          "edgeStrike": 0.210416,
+          "chasePitch": 0.206696,
+          "clearBall": 0.148264
+        },
+        "frozenContext": {
+          "balls": 0,
+          "strikes": 0,
+          "previousPitch": "",
+          "previousPAResult": "",
+          "scoringPosition": false,
+          "highLeverage": false
+        }
+      }
+    },
+    "offensivePlateAppearanceState": null,
+    "pendingOffensiveOpportunity": null,
+    "offensivePlayerAgencyState": null,
+    "offensiveTacticalActionState": null,
+    "offensiveBuntPAState": null,
+    "buntBallInPlayState": null,
+    "pendingDefensiveResumeState": null,
+    "lastDefensiveResolution": {
+      "resultCode": "",
+      "tier": "",
+      "decisionQuality": "",
+      "executionQuality": "",
+      "primaryCause": "",
+      "secondaryCause": "",
+      "causeExplanation": ""
+    },
+    "pendingHalfInningTermination": null,
+    "catcherDecisionState": null,
+    "catcherReassessmentTrigger": null,
+    "completedMoments": [],
+    "playerContribution": {
+      "strong": 0,
+      "mixed": 0,
+      "failure": 0,
+      "runsCreated": 0,
+      "runsScored": 0,
+      "hits": 0,
+      "walks": 0,
+      "outsCreated": 0,
+      "errors": 0
+    },
+    "previousMomentDecision": "",
+    "previousMomentOutcome": "",
+    "passage": "",
+    "opponentAdjustment": "",
+    "coachInstruction": "先把這個打席延續下來，讓後面的棒次有施壓空間。",
+    "decision": "",
+    "outcomeTier": "",
+    "outcome": "",
+    "consequence": "",
+    "coachReaction": "現任教練確認你的第一個場上任務。",
+    "teamReaction": "休息區把下一段比賽交到你手上。",
+    "performanceSummary": "",
+    "teamResult": "",
+    "settled": false,
+    "pendingGameSettlement": "",
+    "eventSettlementApplied": false,
+    "developmentPresentationCompleted": false,
+    "completed": false
+  },
+  "playback": {
+    "matchActive": true,
+    "matchCompleted": false,
+    "completed": false,
+    "inning": 1,
+    "half": "上",
+    "outs": 0,
+    "score": {
+      "home": 0,
+      "away": 0
+    },
+    "presentedEventCursor": 0,
+    "cursor": 0,
+    "simulationLogLength": 1,
+    "logLength": 1,
+    "nextRawEventType": "matchEntry",
+    "nextVisibleEventType": "",
+    "playbackPhase": "full_match_flow",
+    "phase": "full_match_flow",
+    "decisionActive": false,
+    "pendingDecisionType": "",
+    "blockingOutcome": false,
+    "pendingOutcomeType": "",
+    "timerHandlePresent": false,
+    "timerScheduledFlag": false,
+    "timerScheduled": false,
+    "timerGeneration": 0,
+    "activeTimerGeneration": 0,
+    "lastScheduledReason": "",
+    "lastTimerClearReason": "",
+    "lastCallbackReason": "",
+    "lastCallbackResult": "",
+    "playerEnteredGame": false,
+    "playerParticipationState": "not-entered",
+    "playerHadPlateAppearanceThisHalf": false,
+    "currentEventId": "high_school_showcase",
+    "matchEventId": "hs-y1-autumn-exhibition"
+  }
+}

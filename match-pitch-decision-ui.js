@@ -90,10 +90,13 @@
   function createShellModel(projection) {
     const s = projection.snapshot, game = s.game || {};
     const accepted = projection.timeline.events.filter(e => e.type === "DECISION_ACCEPTED").at(-1);
-    const paId = value(s.identity?.paId) || (!s.decision?.waiting ? accepted?.paId : null);
+    // Once the public cursor moves to another beat, a retained old decision is
+    // historical evidence. It cannot supply the new batter's pitch feedback.
+    const publicSequence = Math.max(-1, ...projection.timeline.events.map(e => e.order?.sourceSequence ?? -1));
+    const acceptedIsCurrent = accepted && (accepted.order?.sourceSequence ?? -1) >= publicSequence;
+    const paId = value(s.identity?.paId) || (!s.decision?.waiting && acceptedIsCurrent ? accepted.paId : null);
     const pitches = projection.timeline.events.filter(e => e.type === "PITCH_RESOLVED");
-    const latest = paId ? pitches.filter(e => e.paId === paId).at(-1)
-      : !s.decision?.waiting ? pitches.at(-1) : null;
+    const latest = paId ? pitches.filter(e => e.paId === paId).at(-1) : null;
     const settlements = projection.timeline.events.filter(e => e.type === "PA_SETTLED");
     const settlement = settlements.at(-1);
     const currentSettlement = !s.decision?.waiting && paId ? settlements.filter(e => e.paId === paId).at(-1) : null;
@@ -106,7 +109,7 @@
       // A completed previous PA belongs in the supporting record once a new
       // decision is shown, never in place of the current decision.
       currentSettlement,
-      pendingResolution: Boolean(!s.decision?.waiting && accepted && !currentSettlement),
+      pendingResolution: Boolean(!s.decision?.waiting && acceptedIsCurrent && !currentSettlement),
       final: value(game.gameStatus) === "final"
     });
   }
@@ -237,7 +240,9 @@
     const metadata = syncOriginalBoard(doc.getElementById("story"), s.game);
     const visual = createVisualModel(projection, metadata);
     const support = classifyView(s, Boolean(original?.querySelector("button")));
-    const prompt = model.final ? "比賽結束，查看正式結算"
+    const playbackFailed = Boolean(current()?.playbackFailure);
+    const prompt = playbackFailed ? "比賽播放已停止，這球尚未完成處理"
+      : model.final ? "比賽結束，查看正式結算"
       : available ? "輪到你打擊：選擇這一球的應對。"
         : s.decision.waiting ? support === "originalUI" ? "你的決定：選擇目前的應對"
           : "目前決策尚未接通畫面，請保留當前進度。"
@@ -270,7 +275,8 @@
       + '</small><small>肖像 unavailable</small></div></div></section>';
     playerInfo.innerHTML = card("投手", "P", visual.pitcher, s.participants.pitcher) + card("打者", "B", visual.batter, s.participants.batter)
       + '<section class="match-current-context"><small>當前局面</small><strong>' + inningText + ' · ' + displayed(s.game.outs) + ' 出局</strong><p>' + escape(baseText) + '</p></section>';
-    frame.querySelector(".match-scene-event").textContent = available ? "投打對峙 · 等待你的判斷"
+    frame.querySelector(".match-scene-event").textContent = playbackFailed ? "比賽播放已停止"
+      : available ? "投打對峙 · 等待你的判斷"
       : model.final ? "比賽結束" : s.decision.waiting ? "目前情境 · 等待你的決定" : "原比賽進行中";
     frame.querySelector(".match-result-visual").textContent = latest ? pitchLabels[latest.facts.pitchResult] || latest.facts.pitchResult : "";
     panel.dataset.decisionStatus = model.final ? "final" : s.decision.status;
@@ -279,7 +285,8 @@
     panel.innerHTML = '<h2 tabindex="-1" id="matchPitchPrompt">' + prompt + '</h2>'
       + '<div class="match-pitch-actions" role="group" aria-label="這一球的合法選項"></div>'
       + '<div class="match-pitch-feedback" role="status" aria-live="polite" tabindex="-1">'
-      + (notice ? '<p>' + escape(notice) + '</p>' : '') + '<p>' + pitchFeedback + '</p>'
+      + (notice && notice.paId === model.paId && notice.pitchId === (value(s.identity.pitchId) || latest?.facts.pitchId)
+        ? '<p>' + escape(notice.message) + '</p>' : '') + '<p>' + pitchFeedback + '</p>'
       + (settled ? '<p>最近正式打席：' + escape(resultLabels[settled.facts.result] || settled.facts.result || "已結束") + '。請依原畫面繼續。</p>' : "") + '</div>';
     if (available) for (const route of value(s.decision.routes) || []) {
       const button = doc.createElement("button"), captured = adapter.request(route.routeId);
@@ -294,7 +301,7 @@
         if (event.detail > 1) return;
         panel.querySelectorAll("button").forEach(b => { b.disabled = true; });
         const result = adapter.submit(captured);
-        notice = result.message;
+        notice = { message: result.message, paId: captured.paId, pitchId: captured.pitchId };
         focusNext = true;
         refresh();
       });

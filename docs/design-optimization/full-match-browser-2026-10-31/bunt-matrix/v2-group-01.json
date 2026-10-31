@@ -1,0 +1,434 @@
+[
+  {
+    "input": {
+      "pace": 0,
+      "placement": 0
+    },
+    "sourceSame": true,
+    "sourcePitch": {
+      "version": "offensive-bunt-execution-v1",
+      "paTacticalPlan": {
+        "identity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse",
+        "selectedTacticalAction": "surpriseBunt",
+        "status": "active"
+      },
+      "currentPitchTacticalCommitment": {
+        "version": "current-pitch-tactical-commitment-v1",
+        "pitchIdentity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse|pitch-1",
+        "pitchNumber": 1,
+        "commitment": "buntPrepared",
+        "revealTiming": "late",
+        "planIdentity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse"
+      },
+      "revealTiming": "late",
+      "actualPitch": {
+        "pitchLocationClass": "competitiveStrike",
+        "strike": true,
+        "pitchId": ""
+      },
+      "recognition": {
+        "correct": true,
+        "perceivedPitchClass": "competitiveStrike",
+        "authority": "existingActualPitchRecognition"
+      },
+      "attemptDecision": "attempt",
+      "preparationState": "set",
+      "provisionalBuntExecutionFit": {
+        "version": "provisional-bunt-execution-fit-v1",
+        "source": "provisionalExistingCapabilities",
+        "value": 0.377,
+        "components": {
+          "batting": 0.4,
+          "reaction": 0.35,
+          "baseballIQ": 0.35,
+          "ballSense": 0.4
+        }
+      },
+      "contactResult": "fairContact",
+      "fairBallType": "groundBunt",
+      "pace": "dead",
+      "placement": "firstBaseSide",
+      "executionEvidence": {
+        "attempt": {
+          "attemptDecision": "attempt",
+          "attemptProbability": 0.7662,
+          "roll": 0
+        },
+        "preparation": {
+          "preparationState": "set",
+          "stability": 0.3495,
+          "roll": 0
+        },
+        "contact": {
+          "contactResult": "fairContact",
+          "fairProbability": 0.8191,
+          "missProbability": 0.1567,
+          "roll": 0.99
+        },
+        "ball": {
+          "fairBallType": "groundBunt",
+          "pace": "dead",
+          "placement": "firstBaseSide",
+          "typeRoll": 0.9,
+          "paceRoll": 0.125,
+          "placementRoll": 0.125
+        }
+      },
+      "runnerMovement": null,
+      "runnerTargets": null,
+      "defensiveRoutes": null,
+      "batterOut": false,
+      "finalOutcome": null
+    },
+    "failure": "BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING",
+    "original": "groundBunt",
+    "errors": [
+      "error: Error: BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING\n    at assertHighSchoolBuntFallbackSettlementReady (http://127.0.0.1:8770/script.js:11072:11)\n    at advanceHighSchoolMatchPlaybackStep (http://127.0.0.1:8770/script.js:14541:3)\n    at http://127.0.0.1:8770/script.js:3522:20"
+    ]
+  },
+  {
+    "input": {
+      "pace": 1,
+      "placement": 0
+    },
+    "sourceSame": true,
+    "sourcePitch": {
+      "version": "offensive-bunt-execution-v1",
+      "paTacticalPlan": {
+        "identity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse",
+        "selectedTacticalAction": "surpriseBunt",
+        "status": "active"
+      },
+      "currentPitchTacticalCommitment": {
+        "version": "current-pitch-tactical-commitment-v1",
+        "pitchIdentity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse|pitch-1",
+        "pitchNumber": 1,
+        "commitment": "buntPrepared",
+        "revealTiming": "late",
+        "planIdentity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse"
+      },
+      "revealTiming": "late",
+      "actualPitch": {
+        "pitchLocationClass": "competitiveStrike",
+        "strike": true,
+        "pitchId": ""
+      },
+      "recognition": {
+        "correct": true,
+        "perceivedPitchClass": "competitiveStrike",
+        "authority": "existingActualPitchRecognition"
+      },
+      "attemptDecision": "attempt",
+      "preparationState": "set",
+      "provisionalBuntExecutionFit": {
+        "version": "provisional-bunt-execution-fit-v1",
+        "source": "provisionalExistingCapabilities",
+        "value": 0.377,
+        "components": {
+          "batting": 0.4,
+          "reaction": 0.35,
+          "baseballIQ": 0.35,
+          "ballSense": 0.4
+        }
+      },
+      "contactResult": "fairContact",
+      "fairBallType": "groundBunt",
+      "pace": "soft",
+      "placement": "firstBaseSide",
+      "executionEvidence": {
+        "attempt": {
+          "attemptDecision": "attempt",
+          "attemptProbability": 0.7662,
+          "roll": 0
+        },
+        "preparation": {
+          "preparationState": "set",
+          "stability": 0.3495,
+          "roll": 0
+        },
+        "contact": {
+          "contactResult": "fairContact",
+          "fairProbability": 0.8191,
+          "missProbability": 0.1567,
+          "roll": 0.99
+        },
+        "ball": {
+          "fairBallType": "groundBunt",
+          "pace": "soft",
+          "placement": "firstBaseSide",
+          "typeRoll": 0.9,
+          "paceRoll": 0.375,
+          "placementRoll": 0.125
+        }
+      },
+      "runnerMovement": null,
+      "runnerTargets": null,
+      "defensiveRoutes": null,
+      "batterOut": false,
+      "finalOutcome": null
+    },
+    "failure": "BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING",
+    "original": "groundBunt",
+    "errors": [
+      "error: Error: BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING\n    at assertHighSchoolBuntFallbackSettlementReady (http://127.0.0.1:8770/script.js:11072:11)\n    at advanceHighSchoolMatchPlaybackStep (http://127.0.0.1:8770/script.js:14541:3)\n    at http://127.0.0.1:8770/script.js:3522:20"
+    ]
+  },
+  {
+    "input": {
+      "pace": 2,
+      "placement": 0
+    },
+    "sourceSame": true,
+    "sourcePitch": {
+      "version": "offensive-bunt-execution-v1",
+      "paTacticalPlan": {
+        "identity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse",
+        "selectedTacticalAction": "surpriseBunt",
+        "status": "active"
+      },
+      "currentPitchTacticalCommitment": {
+        "version": "current-pitch-tactical-commitment-v1",
+        "pitchIdentity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse|pitch-1",
+        "pitchNumber": 1,
+        "commitment": "buntPrepared",
+        "revealTiming": "late",
+        "planIdentity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse"
+      },
+      "revealTiming": "late",
+      "actualPitch": {
+        "pitchLocationClass": "competitiveStrike",
+        "strike": true,
+        "pitchId": ""
+      },
+      "recognition": {
+        "correct": true,
+        "perceivedPitchClass": "competitiveStrike",
+        "authority": "existingActualPitchRecognition"
+      },
+      "attemptDecision": "attempt",
+      "preparationState": "set",
+      "provisionalBuntExecutionFit": {
+        "version": "provisional-bunt-execution-fit-v1",
+        "source": "provisionalExistingCapabilities",
+        "value": 0.377,
+        "components": {
+          "batting": 0.4,
+          "reaction": 0.35,
+          "baseballIQ": 0.35,
+          "ballSense": 0.4
+        }
+      },
+      "contactResult": "fairContact",
+      "fairBallType": "groundBunt",
+      "pace": "controlled",
+      "placement": "firstBaseSide",
+      "executionEvidence": {
+        "attempt": {
+          "attemptDecision": "attempt",
+          "attemptProbability": 0.7662,
+          "roll": 0
+        },
+        "preparation": {
+          "preparationState": "set",
+          "stability": 0.3495,
+          "roll": 0
+        },
+        "contact": {
+          "contactResult": "fairContact",
+          "fairProbability": 0.8191,
+          "missProbability": 0.1567,
+          "roll": 0.99
+        },
+        "ball": {
+          "fairBallType": "groundBunt",
+          "pace": "controlled",
+          "placement": "firstBaseSide",
+          "typeRoll": 0.9,
+          "paceRoll": 0.625,
+          "placementRoll": 0.125
+        }
+      },
+      "runnerMovement": null,
+      "runnerTargets": null,
+      "defensiveRoutes": null,
+      "batterOut": false,
+      "finalOutcome": null
+    },
+    "failure": "BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING",
+    "original": "groundBunt",
+    "errors": [
+      "error: Error: BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING\n    at assertHighSchoolBuntFallbackSettlementReady (http://127.0.0.1:8770/script.js:11072:11)\n    at advanceHighSchoolMatchPlaybackStep (http://127.0.0.1:8770/script.js:14541:3)\n    at http://127.0.0.1:8770/script.js:3522:20"
+    ]
+  },
+  {
+    "input": {
+      "pace": 3,
+      "placement": 0
+    },
+    "sourceSame": true,
+    "sourcePitch": {
+      "version": "offensive-bunt-execution-v1",
+      "paTacticalPlan": {
+        "identity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse",
+        "selectedTacticalAction": "surpriseBunt",
+        "status": "active"
+      },
+      "currentPitchTacticalCommitment": {
+        "version": "current-pitch-tactical-commitment-v1",
+        "pitchIdentity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse|pitch-1",
+        "pitchNumber": 1,
+        "commitment": "buntPrepared",
+        "revealTiming": "late",
+        "planIdentity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse"
+      },
+      "revealTiming": "late",
+      "actualPitch": {
+        "pitchLocationClass": "competitiveStrike",
+        "strike": true,
+        "pitchId": ""
+      },
+      "recognition": {
+        "correct": true,
+        "perceivedPitchClass": "competitiveStrike",
+        "authority": "existingActualPitchRecognition"
+      },
+      "attemptDecision": "attempt",
+      "preparationState": "set",
+      "provisionalBuntExecutionFit": {
+        "version": "provisional-bunt-execution-fit-v1",
+        "source": "provisionalExistingCapabilities",
+        "value": 0.377,
+        "components": {
+          "batting": 0.4,
+          "reaction": 0.35,
+          "baseballIQ": 0.35,
+          "ballSense": 0.4
+        }
+      },
+      "contactResult": "fairContact",
+      "fairBallType": "groundBunt",
+      "pace": "hard",
+      "placement": "firstBaseSide",
+      "executionEvidence": {
+        "attempt": {
+          "attemptDecision": "attempt",
+          "attemptProbability": 0.7662,
+          "roll": 0
+        },
+        "preparation": {
+          "preparationState": "set",
+          "stability": 0.3495,
+          "roll": 0
+        },
+        "contact": {
+          "contactResult": "fairContact",
+          "fairProbability": 0.8191,
+          "missProbability": 0.1567,
+          "roll": 0.99
+        },
+        "ball": {
+          "fairBallType": "groundBunt",
+          "pace": "hard",
+          "placement": "firstBaseSide",
+          "typeRoll": 0.9,
+          "paceRoll": 0.875,
+          "placementRoll": 0.125
+        }
+      },
+      "runnerMovement": null,
+      "runnerTargets": null,
+      "defensiveRoutes": null,
+      "batterOut": false,
+      "finalOutcome": null
+    },
+    "failure": "BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING",
+    "original": "groundBunt",
+    "errors": [
+      "error: Error: BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING\n    at assertHighSchoolBuntFallbackSettlementReady (http://127.0.0.1:8770/script.js:11072:11)\n    at advanceHighSchoolMatchPlaybackStep (http://127.0.0.1:8770/script.js:14541:3)\n    at http://127.0.0.1:8770/script.js:3522:20"
+    ]
+  },
+  {
+    "input": {
+      "pop": 1
+    },
+    "sourceSame": true,
+    "sourcePitch": {
+      "version": "offensive-bunt-execution-v1",
+      "paTacticalPlan": {
+        "identity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse",
+        "selectedTacticalAction": "surpriseBunt",
+        "status": "active"
+      },
+      "currentPitchTacticalCommitment": {
+        "version": "current-pitch-tactical-commitment-v1",
+        "pitchIdentity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse|pitch-1",
+        "pitchNumber": 1,
+        "commitment": "buntPrepared",
+        "revealTiming": "late",
+        "planIdentity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse"
+      },
+      "revealTiming": "late",
+      "actualPitch": {
+        "pitchLocationClass": "competitiveStrike",
+        "strike": true,
+        "pitchId": ""
+      },
+      "recognition": {
+        "correct": true,
+        "perceivedPitchClass": "competitiveStrike",
+        "authority": "existingActualPitchRecognition"
+      },
+      "attemptDecision": "attempt",
+      "preparationState": "set",
+      "provisionalBuntExecutionFit": {
+        "version": "provisional-bunt-execution-fit-v1",
+        "source": "provisionalExistingCapabilities",
+        "value": 0.377,
+        "components": {
+          "batting": 0.4,
+          "reaction": 0.35,
+          "baseballIQ": 0.35,
+          "ballSense": 0.4
+        }
+      },
+      "contactResult": "fairContact",
+      "fairBallType": "popBunt",
+      "pace": null,
+      "placement": null,
+      "executionEvidence": {
+        "attempt": {
+          "attemptDecision": "attempt",
+          "attemptProbability": 0.7662,
+          "roll": 0
+        },
+        "preparation": {
+          "preparationState": "set",
+          "stability": 0.3495,
+          "roll": 0
+        },
+        "contact": {
+          "contactResult": "fairContact",
+          "fairProbability": 0.8191,
+          "missProbability": 0.1567,
+          "roll": 0.99
+        },
+        "ball": {
+          "fairBallType": "popBunt",
+          "pace": null,
+          "placement": null,
+          "typeRoll": 0
+        }
+      },
+      "runnerMovement": null,
+      "runnerTargets": null,
+      "defensiveRoutes": null,
+      "batterOut": false,
+      "finalOutcome": null
+    },
+    "failure": "BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING",
+    "original": "popBunt",
+    "errors": [
+      "error: Error: BUNT_FALLBACK_SETTLEMENT_OWNER_MISSING\n    at assertHighSchoolBuntFallbackSettlementReady (http://127.0.0.1:8770/script.js:11072:11)\n    at advanceHighSchoolMatchPlaybackStep (http://127.0.0.1:8770/script.js:14541:3)\n    at http://127.0.0.1:8770/script.js:3522:20"
+    ]
+  }
+]

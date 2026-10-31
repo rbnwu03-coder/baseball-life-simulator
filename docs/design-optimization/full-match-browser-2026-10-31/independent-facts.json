@@ -1,0 +1,149 @@
+{
+  "results": [
+    {
+      "name": "pitcher-canonical-01-final",
+      "status": "PASS",
+      "details": {
+        "completed": true,
+        "seed": 49186,
+        "PA": 71,
+        "refs": 111,
+        "score": {
+          "home": 2,
+          "away": 9
+        },
+        "observedOutTypes": [
+          "none",
+          "batterRunnerBeforeFirst",
+          "strikeout"
+        ],
+        "limitation": "Checks retained facts only; does not certify absent catch/touch/scorer evidence or every rendered beat."
+      }
+    },
+    {
+      "name": "pitcher-canonical-02-final",
+      "status": "PASS",
+      "details": {
+        "completed": true,
+        "seed": 1175259511,
+        "PA": 77,
+        "refs": 118,
+        "score": {
+          "home": 2,
+          "away": 10
+        },
+        "observedOutTypes": [
+          "none",
+          "batterRunnerBeforeFirst"
+        ],
+        "limitation": "Checks retained facts only; does not certify absent catch/touch/scorer evidence or every rendered beat."
+      }
+    },
+    {
+      "name": "catcher-final-version",
+      "status": "PASS",
+      "details": {
+        "completed": false,
+        "seed": 182506,
+        "PA": 9,
+        "refs": 23,
+        "score": {
+          "home": 0,
+          "away": 0
+        },
+        "observedOutTypes": [
+          "none",
+          "batterRunnerBeforeFirst",
+          "strikeout"
+        ],
+        "limitation": "Checks retained facts only; does not certify absent catch/touch/scorer evidence or every rendered beat."
+      }
+    },
+    {
+      "name": "outfield-lf-roster-fixed-final",
+      "status": "PASS",
+      "details": {
+        "completed": true,
+        "seed": 49186,
+        "PA": 68,
+        "refs": 111,
+        "score": {
+          "home": 1,
+          "away": 6
+        },
+        "observedOutTypes": [
+          "none",
+          "batterRunnerBeforeFirst",
+          "strikeout"
+        ],
+        "limitation": "Checks retained facts only; does not certify absent catch/touch/scorer evidence or every rendered beat."
+      }
+    },
+    {
+      "name": "substitution-ss-final",
+      "status": "PASS",
+      "details": {
+        "completed": false,
+        "seed": 3041234481,
+        "PA": 50,
+        "refs": 78,
+        "score": {
+          "home": 1,
+          "away": 1
+        },
+        "observedOutTypes": [
+          "none",
+          "batterRunnerBeforeFirst",
+          "strikeout"
+        ],
+        "limitation": "Checks retained facts only; does not certify absent catch/touch/scorer evidence or every rendered beat."
+      }
+    },
+    {
+      "name": "earlier apparent outfield completion is rejected by actor-position contract",
+      "status": "PASS",
+      "details": {
+        "earlierVerdict": "FAIL",
+        "reason": "fielding assignment OF but active actor and official record 2B; excluded from outfield coverage"
+      }
+    },
+    {
+      "name": "catcher final first-decision Save/Load identity and facts",
+      "status": "PASS"
+    },
+    {
+      "name": "final catcher blocked ball Save/Load does not reroll or resume",
+      "status": "PASS"
+    },
+    {
+      "name": "LF terminal Save/Load and passive wait preserve record and growth",
+      "status": "PASS"
+    },
+    {
+      "name": "NPC ground bunt receipt survives actual browser Save/Load",
+      "status": "PASS",
+      "details": {
+        "identity": "hs-y1-autumn-exhibition|2|上|away|regional-power-school-player-08|0|0|falsefalsefalse|defensive-handoff|npc-ground-defense",
+        "result": "single",
+        "actors": [
+          "school-standard-5833cc5e-player-04",
+          "school-standard-5833cc5e-player-03"
+        ]
+      }
+    },
+    {
+      "name": "all 17 registered bunt sources retained the original PA",
+      "status": "PASS",
+      "details": {
+        "sources": 17,
+        "settled": 1,
+        "blocked": 16,
+        "verdict": "BLOCKED for full coverage; source preservation PASS"
+      }
+    },
+    {
+      "name": "N+1 Save/Load restarts from saved identity without new sampling",
+      "status": "PASS"
+    }
+  ]
+}

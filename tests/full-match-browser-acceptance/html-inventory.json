@@ -1,0 +1,179 @@
+[
+    {
+        "classification":  "prototype",
+        "path":  "gameplay-prototype.html",
+        "sourceEvidence":  [
+
+                           ]
+    },
+    {
+        "classification":  "production",
+        "path":  "index.html",
+        "sourceEvidence":  [
+
+                           ]
+    },
+    {
+        "classification":  "prototype",
+        "path":  "prototype/manga-match-spike/index.html",
+        "sourceEvidence":  [
+
+                           ]
+    },
+    {
+        "classification":  "prototype",
+        "path":  "prototype/manga-motion-spike/index.html",
+        "sourceEvidence":  [
+
+                           ]
+    },
+    {
+        "classification":  "prototype",
+        "path":  "prototype/match-ui-p1/index.html",
+        "sourceEvidence":  [
+
+                           ]
+    },
+    {
+        "classification":  "legacy-browser-fixture",
+        "path":  "tests/choice-integrity-browser-fixture.html",
+        "sourceEvidence":  [
+                               "99:        domain: \"offense\", assignment: match.currentAssignment, outs: match.outs,",
+                               "109:        inning: 5, half: \"上\", offenseTeam: \"away\", defenseTeam: \"home\", outs: 0,",
+                               "113:        completedMoments: [{ id: highSchoolYearOneMomentIds[0], domain: \"offense\", decision: \"zone\", tier: \"mixed\", outcome: \"測試打席完成\", consequence: \"比賽繼續\", inning: 4, half: \"下\", outs: 1, scores: { home: 2, away: 2 }, runners: [null, null, null] }]",
+                               "125:      advanceHighSchoolPresentationCursor(match);",
+                               "145:      const moment = resolveHighSchoolOffensiveDecision(match, choice, \"mixed\");",
+                               "148:      window.fixtureAudit = { caseCode: \"B\", outs: match.outs, runners: match.runners.slice(), outcome: moment.outcome, consequence: moment.consequence };",
+                               "164:      const match = prepareOffense({ runners: [null, null, \"runner-third\"], outs: 2 });"
+                           ]
+    },
+    {
+        "classification":  "legacy-browser-fixture",
+        "path":  "tests/full-match-simulation-browser-fixture.html",
+        "sourceEvidence":  [
+                               "30:      \u003cbutton type=\"button\" onclick=\"finishFullMatchFixture()\"\u003e完成七局／延長賽\u003c/button\u003e",
+                               "79:      const result = advanceHighSchoolMatchPlaybackStep(fixtureMatch);",
+                               "88:      while (!fixtureMatch.completed \u0026\u0026 !isHighSchoolMatchDecisionVisible(fixtureMatch) \u0026\u0026 safety++ \u003c 700) {",
+                               "89:        advanceHighSchoolMatchPlaybackStep(fixtureMatch);",
+                               "99:      const result = resolveHighSchoolYearOneMatch(choice.matchDecision, choice.matchMomentId, () =\u003e 0.62);",
+                               "100:      advanceHighSchoolPresentationCursor(fixtureMatch);",
+                               "106:    function finishFullMatchFixture() {"
+                           ]
+    },
+    {
+        "classification":  "legacy-browser-fixture",
+        "path":  "tests/game-state-integrity-browser-fixture.html",
+        "sourceEvidence":  [
+                               "80:        inning: 3, half: \"上\", offenseTeam: \"away\", defenseTeam: \"home\", outs: 0,",
+                               "98:        outs: match.outs, scores: match.scores, runners: match.runners",
+                               "100:      advanceHighSchoolPresentationCursor(match);",
+                               "108:      const before = { outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };",
+                               "115:        after: { outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() }",
+                               "126:      advanceHighSchoolPresentationCursor(match);",
+                               "129:      const halfResult = advanceHighSchoolMatchPlaybackStep(match);"
+                           ]
+    },
+    {
+        "classification":  "legacy-browser-fixture",
+        "path":  "tests/human-audit-opportunity-parity-browser-fixture.html",
+        "sourceEvidence":  [
+                               "107:      while (!match.completed \u0026\u0026 steps++ \u003c 5000) {",
+                               "120:          const progressed = advanceHighSchoolMatchPlaybackStep(match);"
+                           ]
+    },
+    {
+        "classification":  "legacy-browser-fixture",
+        "path":  "tests/infield-decision-family-browser-fixture.html",
+        "sourceEvidence":  [
+                               "82:      routine: { position: \"游擊手\", type: \"hardGrounder\", direction: \"straightAtPlayer\", runners: [\"away-sim-2\", null, null], outs: 1, inning: 5, home: 1, away: 1 },",
+                               "83:      second: { position: \"二壘手\", type: \"hardGrounder\", direction: \"upTheMiddle\", runners: [\"away-sim-2\", null, null], outs: 1, inning: 5, home: 1, away: 1 },",
+                               "84:      slow: { position: \"三壘手\", type: \"slowGrounder\", direction: \"lineSide\", runners: [\"away-sim-2\", null, null], outs: 0, inning: 4, home: 1, away: 1, batterSpeed: 9 },",
+                               "85:      deep: { position: \"游擊手\", type: \"deepGrounder\", direction: \"towardHole\", runners: [null, null, null], outs: 1, inning: 5, home: 2, away: 2, batterSpeed: 6 },",
+                               "86:      loaded: { position: \"三壘手\", type: \"normalGrounder\", direction: \"straightAtPlayer\", runners: [\"away-sim-2\", \"away-sim-3\", \"away-sim-5\"], outs: 1, inning: 7, home: 2, away: 2 }",
+                               "110:        outs: config.outs,",
+                               "157:        const resolution = resolveHighSchoolDefensivePlay(match, decision, index / 101);"
+                           ]
+    },
+    {
+        "classification":  "legacy-browser-fixture",
+        "path":  "tests/integration-integrity-browser-fixture.html",
+        "sourceEvidence":  [
+                               "113:      Object.assign(match, { inning: 5, half: \"下\", offenseTeam: \"home\", defenseTeam: \"away\", outs: 1, runners: [null, null, null],",
+                               "118:      const result = resolveHighSchoolOffensiveDecision(match, choice, \"mixed\");",
+                               "130:      while (!isHighSchoolMatchDecisionVisible(match) \u0026\u0026 guard++ \u003c 500 \u0026\u0026 runFixtureTimer()) {}",
+                               "139:      while (beats \u003c 12 \u0026\u0026 !match.completed \u0026\u0026 guard++ \u003c 1000) {",
+                               "155:      Object.assign(match, { inning: 3, half: \"上\", offenseTeam: \"away\", defenseTeam: \"home\", outs: 3, runners: [null, null, null], simulationPhase: \"full_match_flow\" });",
+                               "165:      const report = { seen, inning: match.inning, half: match.half, outs: match.outs, state, timerDelays };",
+                               "172:      while (!(isHighSchoolMatchDecisionVisible(match) \u0026\u0026 match.currentDomain === \"defense\") \u0026\u0026 !match.completed \u0026\u0026 guard++ \u003c 2000) {"
+                           ]
+    },
+    {
+        "classification":  "legacy-browser-fixture",
+        "path":  "tests/meaningful-decision-gate-browser-fixture.html",
+        "sourceEvidence":  [
+                               "77:        inning: 5, half: \"上\", offenseTeam: \"away\", defenseTeam: \"home\", outs: 0,",
+                               "83:        completedMoments: [{ id: highSchoolYearOneMomentIds[0], domain: \"offense\", decision: \"zone\", tier: \"mixed\", outcome: \"第一個打席完成\", consequence: \"比賽繼續\", inning: 4, half: \"下\", outs: 1, scores: { home: 1, away: 1 }, runners: [null, null, null] }]",
+                               "97:        outs: options.outs || 0,",
+                               "114:      advanceHighSchoolPresentationCursor(match);",
+                               "130:      showFixture(\"A\", \"空壘一壘手自動完成例行出局，沒有決策按鈕。\", { type: event.type, commentary, outs: match.outs, phase: match.simulationPhase, decision: isHighSchoolMatchDecisionVisible(match) });",
+                               "140:      const { match, event } = prepareCandidate({ position: \"游擊手\", runners: [\"away-sim-4\", null, null], outs: 1, ball: \"normalGrounder\" });",
+                               "146:      const { match, event } = prepareCandidate({ position: \"三壘手\", runners: [null, null, \"away-sim-4\"], outs: 1, inning: 7, scores: { home: 2, away: 2 }, ball: \"slowGrounder\", direction: \"lineSide\" });"
+                           ]
+    },
+    {
+        "classification":  "legacy-browser-fixture",
+        "path":  "tests/offensive-tactical-action-sprint-a-browser-fixture.html",
+        "sourceEvidence":  [
+
+                           ]
+    },
+    {
+        "classification":  "legacy-browser-fixture",
+        "path":  "tests/offensive-tactical-action-sprint-b1-browser-fixture.html",
+        "sourceEvidence":  [
+
+                           ]
+    },
+    {
+        "classification":  "legacy-browser-fixture",
+        "path":  "tests/offensive-tactical-action-sprint-b2-browser-fixture.html",
+        "sourceEvidence":  [
+
+                           ]
+    },
+    {
+        "classification":  "legacy-browser-fixture",
+        "path":  "tests/playback-state-fidelity-browser-fixture.html",
+        "sourceEvidence":  [
+                               "79:      Object.assign(match, { inning: 5, half: \"上\", offenseTeam: \"away\", defenseTeam: \"home\", outs: 0, runners: [null, null, null], scores: { home: 1, away: 1 }, simulationPhase: \"moment_1_resolved\" });",
+                               "82:      recordHighSchoolMatchSimulationEvent(match, { type: \"fixtureStart\", presentationImportance: \"hidden\", inning: 5, half: \"上\", outs: 0, scores: match.scores, runners: match.runners });",
+                               "89:      const before = { outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };",
+                               "91:      recordHighSchoolMatchSimulationEvent(match, { type: \"plateAppearance\", inning: match.inning, half: match.half, offenseTeam: match.offenseTeam, batterId: batter.id, result, before, after: { outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() } });",
+                               "92:      advanceHighSchoolMatchBattingOrder(match, match.offenseTeam);",
+                               "110:        recordHighSchoolMatchSimulationEvent(fixtureMatch, { type: \"fixtureStart\", presentationImportance: \"hidden\", inning: 5, half: \"上\", outs: 0, scores: fixtureMatch.scores, runners: fixtureMatch.runners });",
+                               "115:        Object.assign(fixtureMatch, { outs: 1, runners: [\"away-sim-2\", \"away-sim-3\", null] });"
+                           ]
+    },
+    {
+        "classification":  "legacy-browser-fixture",
+        "path":  "tests/production-match-playback-liveness-fixture.html",
+        "sourceEvidence":  [
+                               "84:        outs: match?.outs || 0,",
+                               "119:          inning: event.inning, half: event.half, batterId: event.batterId || \"\", outs: event.outs ?? event.after?.outs ?? -1",
+                               "193:      while (!match.completed \u0026\u0026 report.beats \u003c 5000) {"
+                           ]
+    },
+    {
+        "classification":  "legacy-browser-fixture",
+        "path":  "tests/second-base-reference-browser-fixture.html",
+        "sourceEvidence":  [
+                               "75:        inning: 5, half: \"上\", offenseTeam: \"away\", defenseTeam: \"home\", outs: 0,",
+                               "90:      Object.assign(match, { runners: (options.runners || [null, null, null]).slice(), outs: options.outs ?? 0 });",
+                               "126:          upstreamThrowQuality: result.upstreamThrowQuality, after: { outs: Math.min(3, situation.outs + result.outsCreated) }",
+                               "153:      const x = buildCase({ runners: [\"away-sim-4\", null, null], outs: 1, routeWindows: { doublePlayWindow: \"wide\" } });",
+                               "158:      const x = buildCase({ runners: [\"away-sim-4\", null, null], outs: 1, primary: \"游擊手\", direction: \"leftSide\", coverageQuality: \"good\", upstreamThrowQuality: \"slightlyOffLine\", routeWindows: { doublePlayWindow: \"normal\" } });",
+                               "167:      const x = buildCase({ runners: [null, null, \"away-sim-4\"], outs: 1, activeRunnerBase: 3, runnerMovementProgress: { 2: \"advancing\" }, routeWindows: { homeOutWindow: \"normal\" } });",
+                               "171:      const x = buildCase({ runners: [\"away-sim-2\", \"away-sim-3\", \"away-sim-4\"], outs: 1, executionChange: \"bobble\", routeWindows: { firstBaseOutWindow: \"narrow\", doublePlayWindow: \"wide\", homeOutWindow: \"wide\" } });"
+                           ]
+    }
+]

@@ -1,0 +1,782 @@
+{
+  "overall": "BLOCKED",
+  "minimumRequired": {
+    "catcherComplete": 2,
+    "infieldComplete": 1,
+    "outfieldComplete": 1
+  },
+  "observedCompletedByRoute": {
+    "catcher": 0,
+    "infield": 0,
+    "outfield": 1,
+    "pitcherDeferred": 2
+  },
+  "acceptedForFinalGate": {
+    "catcherComplete": 0,
+    "infieldComplete": 0,
+    "outfieldComplete": 0
+  },
+  "note": "No final whole-suite gate PASS: LF flow was completed and verified, but rare logic coverage remains absent and final UI reload is scoped. Intermediate versions are not merged into a final acceptance PASS.",
+  "cases": [
+    {
+      "case": "C-natural-first",
+      "status": "BLOCKED",
+      "entry": "official highSchool bookmark; Direct Start false",
+      "seed": 182506,
+      "rule": "same-ball bunt / completed PA only",
+      "expected": "full first game",
+      "actual": "2 top, 0 out, empty bases; soft/pitcherArea owner missing",
+      "evidence": "catcher-final-version",
+      "version": {
+        "evidence": "loaded-versions/tab-3.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+      },
+      "scope": ""
+    },
+    {
+      "case": "C-natural-second",
+      "status": "NOT_RUN",
+      "entry": "normal continuation",
+      "seed": null,
+      "rule": "first game prerequisite",
+      "expected": "second game, phone, N+1, year end",
+      "actual": "first game blocked",
+      "evidence": null,
+      "version": {
+        "evidence": "loaded-versions/tab-3.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+      },
+      "scope": ""
+    },
+    {
+      "case": "IF-SS-full",
+      "status": "BLOCKED",
+      "entry": "legal substitution owner fixture",
+      "seed": 3041234481,
+      "rule": "same-ball pop bunt",
+      "expected": "complete representative infield game",
+      "actual": "6 top popBunt owner missing",
+      "evidence": "substitution-ss-final",
+      "version": {
+        "evidence": "loaded-versions/tab-4.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "match-pitch-decision-ui.js": "ab7ac0d4391bfc08aaa1d73c9a9334f2d63d6b2900b7b8525e19378c134bcdab",
+        "script.js": "685fbf527e9d01c777005e1a35724fb55013a299e06fae9341d10aa8f4bfb90a"
+      },
+      "scope": ""
+    },
+    {
+      "case": "IF-SS-entry",
+      "status": "PASS",
+      "entry": "legal substitution owner fixture",
+      "seed": 3041234481,
+      "rule": "active actor + incumbent replacement",
+      "expected": "same position, correct slot and no premature player use",
+      "actual": "5 bottom, 1 out, slot 6; formal SS substitute",
+      "evidence": "substitution-ss-final",
+      "version": {
+        "evidence": "loaded-versions/tab-4.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "match-pitch-decision-ui.js": "ab7ac0d4391bfc08aaa1d73c9a9334f2d63d6b2900b7b8525e19378c134bcdab",
+        "script.js": "685fbf527e9d01c777005e1a35724fb55013a299e06fae9341d10aa8f4bfb90a"
+      },
+      "scope": "entry only; not complete game or all infield branches"
+    },
+    {
+      "case": "OF-LF-full",
+      "status": "PASS",
+      "entry": "legal factory fixture",
+      "seed": 49186,
+      "rule": "seven-inning project rules + actor/record agreement",
+      "expected": "complete game with player actually LF",
+      "actual": "completed 1:6; active LF and official LF; three PA",
+      "evidence": "outfield-lf-roster-fixed-final",
+      "version": [
+        "outfield-lf-roster-fixed/loaded-sources.json",
+        {
+          "evidence": "loaded-versions/tab-5.json",
+          "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+          "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+          "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+          "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+          "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+          "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+          "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+        }
+      ],
+      "scope": "completed before final notice-only UI patch; final UI reloaded from terminal; not merged into final full acceptance"
+    },
+    {
+      "case": "OF-wrong-position-counterexample",
+      "status": "FAIL",
+      "entry": "earlier LF fixture",
+      "seed": 49186,
+      "rule": "roster assignment must match actual actor",
+      "expected": "OF assignment means OF active actor",
+      "actual": "actual actor and record 2B; excluded from route coverage",
+      "evidence": "outfield-lf-after-render-fix-03",
+      "version": "outfield-lf-after-render-fix-03/version.json",
+      "scope": ""
+    },
+    {
+      "case": "P-deferred-no-appearance",
+      "status": "PASS",
+      "entry": "legal fixture; canonical selected school",
+      "seed": [
+        49186,
+        1175259511
+      ],
+      "rule": "pitcher exposure deferred",
+      "expected": "zero player PA/BF/defensive participation; NPC pitchers operate",
+      "actual": "two completed seven-inning games 2:9 and 2:10; year end",
+      "evidence": "pitcher-canonical-year-end",
+      "version": [
+        "pitcher-canonical-01/version.json",
+        {
+          "evidence": "loaded-versions/tab-1.json",
+          "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+          "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+          "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+          "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+          "script.js": "ee49b528843139f92a263b9f57ef5678c6fcb765081d604406987e0b6d41858f",
+          "match-pitch-decision-ui.js": "ab7ac0d4391bfc08aaa1d73c9a9334f2d63d6b2900b7b8525e19378c134bcdab",
+          "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f"
+        }
+      ],
+      "scope": "intermediate loaded sources; not counted as final catcher/infield route"
+    },
+    {
+      "case": "C-first-save-load",
+      "status": "PASS",
+      "entry": "real save button / reload / load",
+      "seed": 182506,
+      "rule": "identity, RNG, opportunity lock",
+      "expected": "retain same match facts",
+      "actual": "instant world/record preserved; locked exposure compared real Save to subsequent official Match",
+      "evidence": "catcher-canonical-final",
+      "version": "catcher-canonical-final/version.json",
+      "scope": "instant exposure fields were not captured; do not compare undefined pairs"
+    },
+    {
+      "case": "C-pending-save-load",
+      "status": "PASS",
+      "entry": "real save button at visible stopped ball",
+      "seed": 182506,
+      "rule": "same source and no duplicate PA",
+      "expected": "retain pending ball and stopped status",
+      "actual": "all core facts stable; no normal-playing claim",
+      "evidence": "catcher-final-version/blocked-save-load.json",
+      "version": {
+        "evidence": "loaded-versions/tab-3.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+      },
+      "scope": ""
+    },
+    {
+      "case": "NPC-bunt-receipt-save-load",
+      "status": "PASS",
+      "entry": "real save after hard/2B settlement",
+      "seed": 49186,
+      "rule": "one PA/ref/receipt",
+      "expected": "receipt survives next PA cleanup and actual reload",
+      "actual": "receipt and official record retained once",
+      "evidence": "bunt-v2-3-2/post-settlement-save-load.json",
+      "version": {
+        "evidence": "loaded-versions/tab-2.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "9a3a1013cd8451979785f118b1e43fde65d10d71ff507ae8626c771bff3287a7",
+        "script.js": "ee49b528843139f92a263b9f57ef5678c6fcb765081d604406987e0b6d41858f",
+        "match-pitch-decision-ui.js": "ab7ac0d4391bfc08aaa1d73c9a9334f2d63d6b2900b7b8525e19378c134bcdab"
+      },
+      "scope": "bounded owner case only"
+    },
+    {
+      "case": "phone-and-N+1",
+      "status": "PASS",
+      "entry": "real phone + save/load",
+      "seed": 1175259511,
+      "rule": "formal opportunity + load liveness",
+      "expected": "once-only choice and resumed same second game",
+      "actual": "school admission and N+1 resume wiring fixed; same seed continued",
+      "evidence": "n-plus-one-load-after-fix",
+      "version": {
+        "evidence": "loaded-versions/tab-1.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "script.js": "ee49b528843139f92a263b9f57ef5678c6fcb765081d604406987e0b6d41858f",
+        "match-pitch-decision-ui.js": "ab7ac0d4391bfc08aaa1d73c9a9334f2d63d6b2900b7b8525e19378c134bcdab",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f"
+      },
+      "scope": "intermediate fixture route"
+    },
+    {
+      "case": "terminal-save-load",
+      "status": "PASS",
+      "entry": "real save at LF terminal",
+      "seed": 49186,
+      "rule": "terminal idempotence",
+      "expected": "record/growth remain unchanged",
+      "actual": "passive and reload invariants pass",
+      "evidence": "outfield-lf-roster-fixed-final/terminal-save-load.json",
+      "version": {
+        "evidence": "loaded-versions/tab-5.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+      },
+      "scope": "does not substitute for repeated terminal button boundary"
+    },
+    {
+      "case": "17-bunt-sources",
+      "status": "BLOCKED",
+      "entry": "registered generator inputs; defensive-entry fixture",
+      "seed": 49186,
+      "rule": "all generated shapes complete original PA",
+      "expected": "16 ground shapes + pop all complete",
+      "actual": "1 settled, 16 blocked; all retain same source",
+      "evidence": "bunt-matrix",
+      "version": {
+        "evidence": "loaded-versions/tab-2.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "9a3a1013cd8451979785f118b1e43fde65d10d71ff507ae8626c771bff3287a7",
+        "script.js": "ee49b528843139f92a263b9f57ef5678c6fcb765081d604406987e0b6d41858f",
+        "match-pitch-decision-ui.js": "ab7ac0d4391bfc08aaa1d73c9a9334f2d63d6b2900b7b8525e19378c134bcdab"
+      },
+      "scope": ""
+    },
+    {
+      "case": "other-position-branches",
+      "status": "NOT_RUN",
+      "entry": "seven separate legal entry fixtures",
+      "seed": 49186,
+      "rule": "specific actual active/bench position",
+      "expected": "full defensive branch coverage",
+      "actual": "entry/render captured individually; resolution/full-game coverage absent",
+      "evidence": "position-entries/results.json",
+      "version": {
+        "evidence": "loaded-versions/tab-6.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "ab7ac0d4391bfc08aaa1d73c9a9334f2d63d6b2900b7b8525e19378c134bcdab"
+      },
+      "scope": "do not treat a generic position as all branches"
+    },
+    {
+      "case": "two-strike-foul",
+      "status": "NOT_RUN",
+      "entry": "legal browser boundary required",
+      "seed": null,
+      "rule": "WBSC rule references + project contract",
+      "expected": "actual UI branch and official fact checks",
+      "actual": "not established/executed this round; no Node substitution",
+      "evidence": "contracts-and-gaps.md",
+      "version": {
+        "evidence": "loaded-versions/tab-3.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+      },
+      "scope": ""
+    },
+    {
+      "case": "two-strike-bunt-foul",
+      "status": "NOT_RUN",
+      "entry": "legal browser boundary required",
+      "seed": null,
+      "rule": "WBSC rule references + project contract",
+      "expected": "actual UI branch and official fact checks",
+      "actual": "not established/executed this round; no Node substitution",
+      "evidence": "contracts-and-gaps.md",
+      "version": {
+        "evidence": "loaded-versions/tab-3.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+      },
+      "scope": ""
+    },
+    {
+      "case": "caught-foul-and-foul-tip",
+      "status": "NOT_RUN",
+      "entry": "legal browser boundary required",
+      "seed": null,
+      "rule": "WBSC rule references + project contract",
+      "expected": "actual UI branch and official fact checks",
+      "actual": "not established/executed this round; no Node substitution",
+      "evidence": "contracts-and-gaps.md",
+      "version": {
+        "evidence": "loaded-versions/tab-3.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+      },
+      "scope": ""
+    },
+    {
+      "case": "uncaught-third-strike",
+      "status": "NOT_RUN",
+      "entry": "legal browser boundary required",
+      "seed": null,
+      "rule": "WBSC rule references + project contract",
+      "expected": "actual UI branch and official fact checks",
+      "actual": "not established/executed this round; no Node substitution",
+      "evidence": "contracts-and-gaps.md",
+      "version": {
+        "evidence": "loaded-versions/tab-3.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+      },
+      "scope": ""
+    },
+    {
+      "case": "unfinished-PA-runner-third-out",
+      "status": "NOT_RUN",
+      "entry": "legal browser boundary required",
+      "seed": null,
+      "rule": "WBSC rule references + project contract",
+      "expected": "actual UI branch and official fact checks",
+      "actual": "not established/executed this round; no Node substitution",
+      "evidence": "contracts-and-gaps.md",
+      "version": {
+        "evidence": "loaded-versions/tab-3.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+      },
+      "scope": ""
+    },
+    {
+      "case": "force-release-and-retouch",
+      "status": "NOT_RUN",
+      "entry": "legal browser boundary required",
+      "seed": null,
+      "rule": "WBSC rule references + project contract",
+      "expected": "actual UI branch and official fact checks",
+      "actual": "not established/executed this round; no Node substitution",
+      "evidence": "contracts-and-gaps.md",
+      "version": {
+        "evidence": "loaded-versions/tab-3.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+      },
+      "scope": ""
+    },
+    {
+      "case": "timing-third-out-score",
+      "status": "NOT_RUN",
+      "entry": "legal browser boundary required",
+      "seed": null,
+      "rule": "WBSC rule references + project contract",
+      "expected": "actual UI branch and official fact checks",
+      "actual": "not established/executed this round; no Node substitution",
+      "evidence": "contracts-and-gaps.md",
+      "version": {
+        "evidence": "loaded-versions/tab-3.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+      },
+      "scope": ""
+    },
+    {
+      "case": "skip-last-bottom",
+      "status": "NOT_RUN",
+      "entry": "legal browser boundary required",
+      "seed": null,
+      "rule": "WBSC rule references + project contract",
+      "expected": "actual UI branch and official fact checks",
+      "actual": "not established/executed this round; no Node substitution",
+      "evidence": "contracts-and-gaps.md",
+      "version": {
+        "evidence": "loaded-versions/tab-3.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+      },
+      "scope": ""
+    },
+    {
+      "case": "walk-off",
+      "status": "NOT_RUN",
+      "entry": "legal browser boundary required",
+      "seed": null,
+      "rule": "WBSC rule references + project contract",
+      "expected": "actual UI branch and official fact checks",
+      "actual": "not established/executed this round; no Node substitution",
+      "evidence": "contracts-and-gaps.md",
+      "version": {
+        "evidence": "loaded-versions/tab-3.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+      },
+      "scope": ""
+    },
+    {
+      "case": "extra-innings",
+      "status": "NOT_RUN",
+      "entry": "legal browser boundary required",
+      "seed": null,
+      "rule": "WBSC rule references + project contract",
+      "expected": "actual UI branch and official fact checks",
+      "actual": "not established/executed this round; no Node substitution",
+      "evidence": "contracts-and-gaps.md",
+      "version": {
+        "evidence": "loaded-versions/tab-3.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+      },
+      "scope": ""
+    },
+    {
+      "case": "duplicate-terminal-button",
+      "status": "NOT_RUN",
+      "entry": "legal browser boundary required",
+      "seed": null,
+      "rule": "WBSC rule references + project contract",
+      "expected": "actual UI branch and official fact checks",
+      "actual": "not established/executed this round; no Node substitution",
+      "evidence": "contracts-and-gaps.md",
+      "version": {
+        "evidence": "loaded-versions/tab-3.json",
+        "team-roster-foundation.js": "f414972e6f3b606349804307c77bf81937387f064844c652b2b9d052d6738bd8",
+        "competition-rules.js": "939204b351675153d54c5e8f2ad9e821a5cb5cf959b88e2db8fba8e39781a697",
+        "player.js": "69d1c0e895624e104e20cf36b3c9646eeaaecf745beefc6f753c5e4ee273916b",
+        "offensive-bunt-defensive-handoff.js": "5fcb9b71fa307e22753d0e7096516a4e2c61ddad5144d7539a7d9c7d9b0daf0b",
+        "save.js": "2ee201a47522136132de863d449c180afef2de230f0a036240075500547ad17f",
+        "script.js": "8efd15a1c20f12e20b46654003770c86a4593e569a682fc34d2f61102b6c7083",
+        "match-pitch-decision-ui.js": "f32a07381cc171252c7b2d3b539dc4702bdd59da8c7f657712ef27f8c90ca363"
+      },
+      "scope": ""
+    },
+    {
+      "case": "html:gameplay-prototype.html",
+      "status": "NOT_RUN",
+      "entry": "gameplay-prototype.html",
+      "seed": null,
+      "rule": "prototype outside formal game",
+      "expected": "formal-page compatible fixture",
+      "actual": "NOT_APPLICABLE_TO_FORMAL_MATCH",
+      "errors": [],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "not applicable to formal match"
+    },
+    {
+      "case": "html:index.html",
+      "status": "NOT_RUN",
+      "entry": "index.html",
+      "seed": null,
+      "rule": "browser harness suitability",
+      "expected": "formal-page compatible fixture",
+      "actual": "EXECUTED_SEPARATELY",
+      "errors": [],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "executed in named natural cases"
+    },
+    {
+      "case": "html:prototype/manga-match-spike/index.html",
+      "status": "NOT_RUN",
+      "entry": "prototype/manga-match-spike/index.html",
+      "seed": null,
+      "rule": "prototype outside formal game",
+      "expected": "formal-page compatible fixture",
+      "actual": "NOT_APPLICABLE_TO_FORMAL_MATCH",
+      "errors": [],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "not applicable to formal match"
+    },
+    {
+      "case": "html:prototype/manga-motion-spike/index.html",
+      "status": "NOT_RUN",
+      "entry": "prototype/manga-motion-spike/index.html",
+      "seed": null,
+      "rule": "prototype outside formal game",
+      "expected": "formal-page compatible fixture",
+      "actual": "NOT_APPLICABLE_TO_FORMAL_MATCH",
+      "errors": [
+        "TypeError: Cannot read properties of undefined (reading 'mount')\n    at boot (http://127.0.0.1:8770/prototype/manga-motion-spike/motion.js:9:31)\n    at http://127.0.0.1:8770/prototype/manga-motion-spike/motion.js:17:116\n    at http://127.0.0.1:8770/prototype/manga-motion-spike/motion.js:18:3"
+      ],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "not applicable to formal match"
+    },
+    {
+      "case": "html:prototype/match-ui-p1/index.html",
+      "status": "NOT_RUN",
+      "entry": "prototype/match-ui-p1/index.html",
+      "seed": null,
+      "rule": "prototype outside formal game",
+      "expected": "formal-page compatible fixture",
+      "actual": "NOT_APPLICABLE_TO_FORMAL_MATCH",
+      "errors": [],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "not applicable to formal match"
+    },
+    {
+      "case": "html:tests/choice-integrity-browser-fixture.html",
+      "status": "NOT_RUN",
+      "entry": "tests/choice-integrity-browser-fixture.html",
+      "seed": null,
+      "rule": "browser harness suitability",
+      "expected": "formal-page compatible fixture",
+      "actual": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+      "errors": [],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "load only; scripted fake-result/advance controls not used for PASS"
+    },
+    {
+      "case": "html:tests/full-match-simulation-browser-fixture.html",
+      "status": "NOT_RUN",
+      "entry": "tests/full-match-simulation-browser-fixture.html",
+      "seed": null,
+      "rule": "browser harness suitability",
+      "expected": "formal-page compatible fixture",
+      "actual": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+      "errors": [],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "load only; scripted fake-result/advance controls not used for PASS"
+    },
+    {
+      "case": "html:tests/game-state-integrity-browser-fixture.html",
+      "status": "BLOCKED",
+      "entry": "tests/game-state-integrity-browser-fixture.html",
+      "seed": null,
+      "rule": "browser harness suitability",
+      "expected": "formal-page compatible fixture",
+      "actual": "BLOCKED",
+      "errors": [
+        "ReferenceError: AIPlateAppearanceOutcome is not defined\n    at resolveSimulatedHighSchoolPlateAppearance (http://127.0.0.1:8770/script.js?v=221:7265:19)\n    at showThirdOutFixture (http://127.0.0.1:8770/tests/game-state-integrity-browser-fixture.html:125:7)\n    at http://127.0.0.1:8770/tests/game-state-integrity-browser-fixture.html:204:5"
+      ],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "load only; scripted fake-result/advance controls not used for PASS"
+    },
+    {
+      "case": "html:tests/human-audit-opportunity-parity-browser-fixture.html",
+      "status": "NOT_RUN",
+      "entry": "tests/human-audit-opportunity-parity-browser-fixture.html",
+      "seed": null,
+      "rule": "browser harness suitability",
+      "expected": "formal-page compatible fixture",
+      "actual": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+      "errors": [],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "load only; scripted fake-result/advance controls not used for PASS"
+    },
+    {
+      "case": "html:tests/infield-decision-family-browser-fixture.html",
+      "status": "BLOCKED",
+      "entry": "tests/infield-decision-family-browser-fixture.html",
+      "seed": null,
+      "rule": "browser harness suitability",
+      "expected": "formal-page compatible fixture",
+      "actual": "BLOCKED",
+      "errors": [
+        "ReferenceError: ForceAdvancement is not defined\n    at buildInfieldMeaningfulMoment (http://127.0.0.1:8770/script.js?v=21:7770:9)\n    at createFixtureMatch (http://127.0.0.1:8770/tests/infield-decision-family-browser-fixture.html:121:7)\n    at renderFixtureMatch (http://127.0.0.1:8770/tests/infield-decision-family-browser-fixture.html:132:21)\n    at showFixtureCase (http://127.0.0.1:8770/tests/infield-decision-family-browser-fixture.html:200:12)\n    at http://127.0.0.1:8770/tests/infield-decision-family-browser-fixture.html:203:5"
+      ],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "load only; scripted fake-result/advance controls not used for PASS"
+    },
+    {
+      "case": "html:tests/integration-integrity-browser-fixture.html",
+      "status": "NOT_RUN",
+      "entry": "tests/integration-integrity-browser-fixture.html",
+      "seed": null,
+      "rule": "browser harness suitability",
+      "expected": "formal-page compatible fixture",
+      "actual": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+      "errors": [],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "load only; scripted fake-result/advance controls not used for PASS"
+    },
+    {
+      "case": "html:tests/meaningful-decision-gate-browser-fixture.html",
+      "status": "BLOCKED",
+      "entry": "tests/meaningful-decision-gate-browser-fixture.html",
+      "seed": null,
+      "rule": "browser harness suitability",
+      "expected": "formal-page compatible fixture",
+      "actual": "BLOCKED",
+      "errors": [
+        "ReferenceError: ForceAdvancement is not defined\n    at buildInfieldMeaningfulMoment (http://127.0.0.1:8770/script.js?v=2222:7770:9)\n    at prepareHighSchoolDefensiveMomentFromSimulation (http://127.0.0.1:8770/script.js?v=2222:14361:5)\n    at prepareCandidate (http://127.0.0.1:8770/tests/meaningful-decision-gate-browser-fixture.html:103:21)\n    at showRoutineSuccess (http://127.0.0.1:8770/tests/meaningful-decision-gate-browser-fixture.html:128:32)\n    at http://127.0.0.1:8770/tests/meaningful-decision-gate-browser-fixture.html:196:5"
+      ],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "load only; scripted fake-result/advance controls not used for PASS"
+    },
+    {
+      "case": "html:tests/offensive-tactical-action-sprint-a-browser-fixture.html",
+      "status": "NOT_RUN",
+      "entry": "tests/offensive-tactical-action-sprint-a-browser-fixture.html",
+      "seed": null,
+      "rule": "browser harness suitability",
+      "expected": "formal-page compatible fixture",
+      "actual": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+      "errors": [],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "load only; scripted fake-result/advance controls not used for PASS"
+    },
+    {
+      "case": "html:tests/offensive-tactical-action-sprint-b1-browser-fixture.html",
+      "status": "NOT_RUN",
+      "entry": "tests/offensive-tactical-action-sprint-b1-browser-fixture.html",
+      "seed": null,
+      "rule": "browser harness suitability",
+      "expected": "formal-page compatible fixture",
+      "actual": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+      "errors": [],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "load only; scripted fake-result/advance controls not used for PASS"
+    },
+    {
+      "case": "html:tests/offensive-tactical-action-sprint-b2-browser-fixture.html",
+      "status": "NOT_RUN",
+      "entry": "tests/offensive-tactical-action-sprint-b2-browser-fixture.html",
+      "seed": null,
+      "rule": "browser harness suitability",
+      "expected": "formal-page compatible fixture",
+      "actual": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+      "errors": [],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "load only; scripted fake-result/advance controls not used for PASS"
+    },
+    {
+      "case": "html:tests/playback-state-fidelity-browser-fixture.html",
+      "status": "NOT_RUN",
+      "entry": "tests/playback-state-fidelity-browser-fixture.html",
+      "seed": null,
+      "rule": "browser harness suitability",
+      "expected": "formal-page compatible fixture",
+      "actual": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+      "errors": [],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "load only; scripted fake-result/advance controls not used for PASS"
+    },
+    {
+      "case": "html:tests/production-match-playback-liveness-fixture.html",
+      "status": "NOT_RUN",
+      "entry": "tests/production-match-playback-liveness-fixture.html",
+      "seed": null,
+      "rule": "browser harness suitability",
+      "expected": "formal-page compatible fixture",
+      "actual": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+      "errors": [],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "load only; scripted fake-result/advance controls not used for PASS"
+    },
+    {
+      "case": "html:tests/second-base-reference-browser-fixture.html",
+      "status": "BLOCKED",
+      "entry": "tests/second-base-reference-browser-fixture.html",
+      "seed": null,
+      "rule": "browser harness suitability",
+      "expected": "formal-page compatible fixture",
+      "actual": "BLOCKED",
+      "errors": [
+        "ReferenceError: ForceAdvancement is not defined\n    at buildInfieldMeaningfulMoment (http://127.0.0.1:8770/script.js?v=224:7770:9)\n    at buildCase (http://127.0.0.1:8770/tests/second-base-reference-browser-fixture.html:93:7)\n    at showCase1 (http://127.0.0.1:8770/tests/second-base-reference-browser-fixture.html:148:17)\n    at http://127.0.0.1:8770/tests/second-base-reference-browser-fixture.html:186:5"
+      ],
+      "evidence": "html-inventory/browser-results.json",
+      "version": "source paths and browser errors retained",
+      "scope": "load only; scripted fake-result/advance controls not used for PASS"
+    }
+  ]
+}

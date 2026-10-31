@@ -1,0 +1,769 @@
+[
+  {
+    "classification": "prototype",
+    "path": "gameplay-prototype.html",
+    "sourceEvidence": [],
+    "status": "NOT_APPLICABLE_TO_FORMAL_MATCH",
+    "httpStatus": 200,
+    "errors": [],
+    "failures": [],
+    "dom": {
+      "title": "Gameplay Sprint 5.3 Prototype",
+      "text": "GAMEPLAY SPRINT 5.3\n\nVariable Baseball Situation Prototype\n\n此頁為隔離式開發 Prototype，不讀取、不修改正式玩家與存檔。\n\nSeed\nReset\nOffensive Prototype A\nDefensive Prototype B\n\n第 7 局・一出局・BASE STATE 可切換\n\n完整打席策略\n\n局勢決定選擇品質；能力與有限波動決定執行。\n\nBase State\n一出局・一壘有人\n一出局・二壘有人\n比分\n落後兩分以上\n落後一分\n平手\n領先\n前位跑者\n慢\n平均\n快\n投手傾向\n內角\n外角\n變化球\n疲勞\n來球難度\n容易\n普通\n困難\n力量\n低\n平均\n高\n頂尖\n打擊技巧\n低\n平均\n高\n頂尖\n觸擊\n低\n平均\n高\n頂尖\n身體\n正常\n疲勞\n輕傷\n下一棒\n低可靠\n中等\n高可靠\n對方守備\n弱\n平均\n強\n拉打\n推打\n握短棒\n犧牲觸擊\nRun Once\nRun 10 固定二壘情境\nDebug Trace",
+      "buttons": [
+        {
+          "text": "Reset",
+          "handler": null
+        },
+        {
+          "text": "Offensive Prototype A",
+          "handler": null
+        },
+        {
+          "text": "Defensive Prototype B",
+          "handler": null
+        },
+        {
+          "text": "拉打",
+          "handler": null
+        },
+        {
+          "text": "推打",
+          "handler": null
+        },
+        {
+          "text": "握短棒",
+          "handler": null
+        },
+        {
+          "text": "犧牲觸擊",
+          "handler": null
+        },
+        {
+          "text": "Run Once",
+          "handler": null
+        },
+        {
+          "text": "Run 10 固定二壘情境",
+          "handler": null
+        }
+      ]
+    }
+  },
+  {
+    "classification": "production",
+    "path": "index.html",
+    "sourceEvidence": [],
+    "status": "EXECUTED_SEPARATELY",
+    "evidence": "catcher natural + canonical fixture; not a blanket PASS"
+  },
+  {
+    "classification": "prototype",
+    "path": "prototype/manga-match-spike/index.html",
+    "sourceEvidence": [],
+    "status": "NOT_APPLICABLE_TO_FORMAL_MATCH",
+    "httpStatus": 200,
+    "errors": [],
+    "failures": [],
+    "dom": {
+      "title": "棒球人生 · Manga Match Spike · SS 6-3",
+      "text": "跳至目前事件\nOFFLINE DEMO — NOT CONNECTED TO MATCH SIMULATION\n漫畫版 · 同一球\n另開 UI-P2.3 基準版 ↗\n\nBASEBALL LIFE / MATCH ROOM\n\n棒球人生\n每一球，都是一次選擇。\nMANGA\nSS 6-3 · SPIKE 01\n01\n判斷\n02\n經過\n03\n結果\n使用文字模式\n球場演出\n操作說明\n\nCURRENT MOMENT\n\n四局上\n你的守位 · 游擊\n主隊\n0\n:\n客隊\n1\n一出局\n一壘有人\n這一球的焦點\n來球進入游擊守區\n01\nWide Field · 局勢\n\n先讀局勢與跑者，再選擇守備路線。\n\n一壘\n二壘\n三壘\n\n來球進入游擊守區\n\n一壘有人\n\n一球之間\n判斷\n這一球，你會怎麼處理？\n\nTHE SITUATION\n\n觀察眼前這一球\n\n1 出局，一壘有人。進入游擊守區的滾地球往你的左側移動；依正式守位與來球方向確認處理責任，再比較跑者及傳球時間。。一壘跑者受迫往二壘，打者跑者正衝向一壘。這是一般擊球形成的滾地守備：二壘封殺窗口很緊，打者的一壘出局窗口很緊。\n\n看清來球與壘況，選擇你的守備路線。\n\n6-3\n優先爭取打者出局\n風險 低\n先處理一壘的打者跑者\n6-4\n優先處理前位跑者\n風險 中\n傳二壘封殺一壘跑者，先完成一個出局\n6-4-3\n嘗試完成雙殺\n風險 高\n轉傳二壘，再由二壘手轉一壘挑戰雙殺\n持球\n控制球與跑者\n風險 低\n先控制球與最前方跑者，不勉強擴大失誤\n\n本示範收錄「6-3」完整經過。其餘選項可操作並查看支援說明。\n\n一次守備，連續閱讀。\n開發資訊",
+      "buttons": [
+        {
+          "text": "使用文字模式",
+          "handler": null
+        },
+        {
+          "text": "6-3\n優先爭取打者出局\n風險 低\n先處理一壘的打者跑者",
+          "handler": null
+        },
+        {
+          "text": "6-4\n優先處理前位跑者\n風險 中\n傳二壘封殺一壘跑者，先完成一個出局",
+          "handler": null
+        },
+        {
+          "text": "6-4-3\n嘗試完成雙殺\n風險 高\n轉傳二壘，再由二壘手轉一壘挑戰雙殺",
+          "handler": null
+        },
+        {
+          "text": "持球\n控制球與跑者\n風險 低\n先控制球與最前方跑者，不勉強擴大失誤",
+          "handler": null
+        },
+        {
+          "text": "開發資訊",
+          "handler": null
+        }
+      ]
+    }
+  },
+  {
+    "classification": "prototype",
+    "path": "prototype/manga-motion-spike/index.html",
+    "sourceEvidence": [],
+    "status": "NOT_APPLICABLE_TO_FORMAL_MATCH",
+    "httpStatus": 200,
+    "errors": [
+      "TypeError: Cannot read properties of undefined (reading 'mount')\n    at boot (http://127.0.0.1:8770/prototype/manga-motion-spike/motion.js:9:31)\n    at http://127.0.0.1:8770/prototype/manga-motion-spike/motion.js:17:116\n    at http://127.0.0.1:8770/prototype/manga-motion-spike/motion.js:18:3"
+    ],
+    "failures": [],
+    "dom": {
+      "title": "棒球人生 · Continuous Motion · SS 6-3",
+      "text": "跳至目前事件\nOFFLINE DEMO — NOT CONNECTED TO MATCH SIMULATION\n同步慢動作\n另開原速比較 ↗\n另開慢動作比較 ↗\n漫畫基準 ↗\n另開 UI-P2.3 基準版 ↗\n\nBASEBALL LIFE / MATCH ROOM\n\n棒球人生\n每一球，都是一次選擇。\nMANGA\nSS 6-3 · MOTION 01\n01\n判斷\n02\n經過\n03\n結果\n\n這是同一球的示意演出。跑者位置不代表正式到壘時間；正式壘況與結果等你確認後更新。文字與場上動作可各自推進。\n\n使用文字模式\n球場演出\n操作說明\n這一球的焦點\n一壘\n二壘\n三壘\n\n等待本地資料\n\n資料載入後顯示壘況\n\n一球之間\n準備中\n正在載入離線示範\n\n正在檢查本地固定資料。無需網路連線。\n\n一次守備，連續閱讀。\n開發資訊",
+      "buttons": [
+        {
+          "text": "使用文字模式",
+          "handler": null
+        },
+        {
+          "text": "開發資訊",
+          "handler": null
+        }
+      ]
+    }
+  },
+  {
+    "classification": "prototype",
+    "path": "prototype/match-ui-p1/index.html",
+    "sourceEvidence": [],
+    "status": "NOT_APPLICABLE_TO_FORMAL_MATCH",
+    "httpStatus": 200,
+    "errors": [],
+    "failures": [],
+    "dom": {
+      "title": "棒球人生 · Match UI-P2.3 離線示範",
+      "text": "跳至目前事件\nOFFLINE DEMO — NOT CONNECTED TO MATCH SIMULATION\n\nBASEBALL LIFE / MATCH ROOM\n\n棒球人生\n每一球，都是一次選擇。\nUI-P2.3\n一球之間 · 02\n01\n判斷\n02\n經過\n03\n結果\n使用文字模式\n球場演出\n操作說明\n\nCURRENT MOMENT\n\n四局上\n你的守位 · 游擊\n主隊\n0\n:\n客隊\n1\n一出局\n一壘有人\n這一球的焦點\n來球進入游擊守區\n一壘\n二壘\n三壘\n\n來球進入游擊守區\n\n一壘有人\n\n一球之間\n判斷\n這一球，你會怎麼處理？\n\nTHE SITUATION\n\n觀察眼前這一球\n\n1 出局，一壘有人。進入游擊守區的滾地球往你的左側移動；依正式守位與來球方向確認處理責任，再比較跑者及傳球時間。。一壘跑者受迫往二壘，打者跑者正衝向一壘。這是一般擊球形成的滾地守備：二壘封殺窗口很緊，打者的一壘出局窗口很緊。\n\n看清來球與壘況，選擇你的守備路線。\n\n6-3\n優先爭取打者出局\n風險 低\n先處理一壘的打者跑者\n6-4\n優先處理前位跑者\n風險 中\n傳二壘封殺一壘跑者，先完成一個出局\n6-4-3\n嘗試完成雙殺\n風險 高\n轉傳二壘，再由二壘手轉一壘挑戰雙殺\n持球\n控制球與跑者\n風險 低\n先控制球與最前方跑者，不勉強擴大失誤\n\n本示範收錄「6-3」完整經過。其餘選項可操作並查看支援說明。\n\n一份局勢，一次選擇，一球結果。\n開發資訊",
+      "buttons": [
+        {
+          "text": "使用文字模式",
+          "handler": null
+        },
+        {
+          "text": "6-3\n優先爭取打者出局\n風險 低\n先處理一壘的打者跑者",
+          "handler": null
+        },
+        {
+          "text": "6-4\n優先處理前位跑者\n風險 中\n傳二壘封殺一壘跑者，先完成一個出局",
+          "handler": null
+        },
+        {
+          "text": "6-4-3\n嘗試完成雙殺\n風險 高\n轉傳二壘，再由二壘手轉一壘挑戰雙殺",
+          "handler": null
+        },
+        {
+          "text": "持球\n控制球與跑者\n風險 低\n先控制球與最前方跑者，不勉強擴大失誤",
+          "handler": null
+        },
+        {
+          "text": "開發資訊",
+          "handler": null
+        }
+      ]
+    }
+  },
+  {
+    "classification": "legacy-browser-fixture",
+    "path": "tests/choice-integrity-browser-fixture.html",
+    "sourceEvidence": [
+      "99:        domain: \"offense\", assignment: match.currentAssignment, outs: match.outs,",
+      "109:        inning: 5, half: \"上\", offenseTeam: \"away\", defenseTeam: \"home\", outs: 0,",
+      "113:        completedMoments: [{ id: highSchoolYearOneMomentIds[0], domain: \"offense\", decision: \"zone\", tier: \"mixed\", outcome: \"測試打席完成\", consequence: \"比賽繼續\", inning: 4, half: \"下\", outs: 1, scores: { home: 2, away: 2 }, runners: [null, null, null] }]",
+      "125:      advanceHighSchoolPresentationCursor(match);",
+      "145:      const moment = resolveHighSchoolOffensiveDecision(match, choice, \"mixed\");",
+      "148:      window.fixtureAudit = { caseCode: \"B\", outs: match.outs, runners: match.runners.slice(), outcome: moment.outcome, consequence: moment.consequence };",
+      "164:      const match = prepareOffense({ runners: [null, null, \"runner-third\"], outs: 2 });"
+    ],
+    "status": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+    "httpStatus": 200,
+    "errors": [],
+    "failures": [],
+    "dom": {
+      "title": "Choice Integrity Browser Validation",
+      "text": "Baseball Match Foundation 2.2.3｜Choice Integrity\n\n所有情境使用正式進攻選項、內野 route resolver、比賽畫面與 authoritative match state。\n\nA｜空壘精確情境\nB｜空壘滾地出局\nC｜一壘有人\nD｜三壘有人\nE｜兩出局\nF｜一壘手守備\nG｜3-6-3 解算\nH｜節奏\nI｜完整流動\n\nCase A5局下、1 OUT、2：2、壘上無人：只有上壘、長打與確實擊球。Invariant：PASSJavaScript errors：0\n\n秋季交流賽\n高橋所屬的地區強校 vs 高中球隊\nstarter・以內野手先發，從開賽起進入守備與打序；右打／右投\n7 局記分板\n秋季交流賽\n球隊\t1\t2\t3\t4\t5\t6\t7\tR\tH\tE\n高橋所屬的地區強校\t0\t…\t…\t…\t…\t…\t…\t0\t0\t0\n高中球隊\t…\t…\t…\t…\t0\t…\t…\t0\t0\t0\n目前局勢\n5 局下\n1 OUT\n\n0：0｜壘上無人\n\n你的守位：內野手\n場上紀錄\n最近進展\n1 出局｜完成目前打席。\n同一場交流賽・第 1 個關鍵時刻\n秋季交流賽\n目前打者\n第1棒｜佐藤\n左打\n目前任務\n完成目前打席。\n最近賽況\n目前守位：內野手\n投打：右打／右投\n\n你在先發計畫裡迎來前段打席。\n\n你要靠自己的反應、接球、傳球與打擊能力完成眼前任務。\n球數 B-S\n0-0\n打席從 0-0 開始；選定打法後，你會依每顆實際來球完成這個打席。\n教練席\n進攻指示\n\n先把這個打席延續下來，讓後面的棒次有施壓空間。\n\n戰術期待：先形成上壘與後續壓力\n你的決定\n搶第一顆可攻擊球，直接挑戰超前機會\n縮小攻擊區，盡量放掉邊角球，只積極處理真正進入甜蜜區的球\n縮短揮棒，提高把球確實打進場內的機會\n尚未建立角色\n10 歲\n十歲暑假\n尚未定型\n右打／右投\n理想球員：尚未形成",
+      "buttons": [
+        {
+          "text": "A｜空壘精確情境",
+          "handler": "showEmptyBaseChoices()"
+        },
+        {
+          "text": "B｜空壘滾地出局",
+          "handler": "showEmptyBaseGroundOut()"
+        },
+        {
+          "text": "C｜一壘有人",
+          "handler": "showRunnerFirstChoices()"
+        },
+        {
+          "text": "D｜三壘有人",
+          "handler": "showRunnerThirdChoices()"
+        },
+        {
+          "text": "E｜兩出局",
+          "handler": "showTwoOutChoices()"
+        },
+        {
+          "text": "F｜一壘手守備",
+          "handler": "showFirstBaseReference()"
+        },
+        {
+          "text": "G｜3-6-3 解算",
+          "handler": "showFirstBaseExecution()"
+        },
+        {
+          "text": "H｜節奏",
+          "handler": "showTempoAudit()"
+        },
+        {
+          "text": "I｜完整流動",
+          "handler": "showFullFlowAudit()"
+        },
+        {
+          "text": "搶第一顆可攻擊球，直接挑戰超前機會",
+          "handler": "chooseHighSchoolYearOneMatchMoment('attack', 'hs_y1_match_moment_1')"
+        },
+        {
+          "text": "縮小攻擊區，盡量放掉邊角球，只積極處理真正進入甜蜜區的球",
+          "handler": "chooseHighSchoolYearOneMatchMoment('zone', 'hs_y1_match_moment_1')"
+        },
+        {
+          "text": "縮短揮棒，提高把球確實打進場內的機會",
+          "handler": "chooseHighSchoolYearOneMatchMoment('advance', 'hs_y1_match_moment_1')"
+        }
+      ]
+    }
+  },
+  {
+    "classification": "legacy-browser-fixture",
+    "path": "tests/full-match-simulation-browser-fixture.html",
+    "sourceEvidence": [
+      "30:      <button type=\"button\" onclick=\"finishFullMatchFixture()\">完成七局／延長賽</button>",
+      "79:      const result = advanceHighSchoolMatchPlaybackStep(fixtureMatch);",
+      "88:      while (!fixtureMatch.completed && !isHighSchoolMatchDecisionVisible(fixtureMatch) && safety++ < 700) {",
+      "89:        advanceHighSchoolMatchPlaybackStep(fixtureMatch);",
+      "99:      const result = resolveHighSchoolYearOneMatch(choice.matchDecision, choice.matchMomentId, () => 0.62);",
+      "100:      advanceHighSchoolPresentationCursor(fixtureMatch);",
+      "106:    function finishFullMatchFixture() {"
+    ],
+    "status": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+    "httpStatus": 200,
+    "errors": [],
+    "failures": [],
+    "dom": {
+      "title": "Full Match Simulation Browser Validation",
+      "text": "Baseball Match Foundation 2.2｜Full Match Simulation\n\n所有控制都呼叫正式 simulator、meaningful interception 與 presentation cursor；按鈕只縮短瀏覽器驗收時間。\n\nA｜先發開場\nB｜板凳開場\n下一個節點\n推進至決策\n執行目前決策\n完成七局／延長賽\n重播差異\n\n先發正式開場狀態：starter登場：是決策：0NPC／玩家證據：0JavaScript errors：0\n\n秋季交流賽\n高橋所屬的地區強校 vs 高中球隊\nstarter・以內野手先發，從開賽起進入守備與打序；右打／右投\n7 局記分板\n秋季交流賽\n球隊\t1\t2\t3\t4\t5\t6\t7\tR\tH\tE\n高橋所屬的地區強校\t…\t…\t…\t…\t…\t…\t…\t0\t0\t0\n高中球隊\t…\t…\t…\t…\t…\t…\t…\t0\t0\t0\n目前局勢\n1 局上\n0 OUT\n\n0：0｜壘上無人\n\n你的守位：內野手\n場上紀錄\n最近進展\n等待下一段比賽推進。\n目前任務\n比賽尚未播放。\n教練席\n進攻指示\n\n先把這個打席延續下來，讓後面的棒次有施壓空間。\n\n戰術期待：先形成上壘與後續壓力\n比賽持續進行\n尚未建立角色\n10 歲\n十歲暑假\n尚未定型\n右打／右投\n理想球員：尚未形成",
+      "buttons": [
+        {
+          "text": "A｜先發開場",
+          "handler": "startFullMatchFixture('starter',22001)"
+        },
+        {
+          "text": "B｜板凳開場",
+          "handler": "startFullMatchFixture('bench',22001)"
+        },
+        {
+          "text": "下一個節點",
+          "handler": "advanceFullMatchFixtureBeat()"
+        },
+        {
+          "text": "推進至決策",
+          "handler": "advanceFullMatchFixtureToDecision()"
+        },
+        {
+          "text": "執行目前決策",
+          "handler": "resolveFullMatchFixtureDecision()"
+        },
+        {
+          "text": "完成七局／延長賽",
+          "handler": "finishFullMatchFixture()"
+        },
+        {
+          "text": "重播差異",
+          "handler": "compareFullMatchFixtureReplay()"
+        }
+      ]
+    }
+  },
+  {
+    "classification": "legacy-browser-fixture",
+    "path": "tests/game-state-integrity-browser-fixture.html",
+    "sourceEvidence": [
+      "80:        inning: 3, half: \"上\", offenseTeam: \"away\", defenseTeam: \"home\", outs: 0,",
+      "98:        outs: match.outs, scores: match.scores, runners: match.runners",
+      "100:      advanceHighSchoolPresentationCursor(match);",
+      "108:      const before = { outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };",
+      "115:        after: { outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() }",
+      "126:      advanceHighSchoolPresentationCursor(match);",
+      "129:      const halfResult = advanceHighSchoolMatchPlaybackStep(match);"
+    ],
+    "status": "BLOCKED",
+    "httpStatus": 200,
+    "errors": [
+      "ReferenceError: AIPlateAppearanceOutcome is not defined\n    at resolveSimulatedHighSchoolPlateAppearance (http://127.0.0.1:8770/script.js?v=221:7265:19)\n    at showThirdOutFixture (http://127.0.0.1:8770/tests/game-state-integrity-browser-fixture.html:125:7)\n    at http://127.0.0.1:8770/tests/game-state-integrity-browser-fixture.html:204:5"
+    ],
+    "failures": [],
+    "dom": {
+      "title": "Game-State Integrity Browser Validation",
+      "text": "Baseball Match Foundation 2.2.1｜Game-State Integrity\n\n所有情境都使用正式 match state、內野 resolver、presentation cursor 與 commentary formatter。\n\nA／B｜第三出局與換邊\nC｜空壘一壘手\nD｜空壘失誤\nE｜一壘安打\nF｜二壘安打得分\nG｜跑完前三局\n\n尚未建立角色\n10 歲\n十歲暑假\n尚未定型\n右打／右投\n理想球員：尚未形成",
+      "buttons": [
+        {
+          "text": "A／B｜第三出局與換邊",
+          "handler": "showThirdOutFixture()"
+        },
+        {
+          "text": "C｜空壘一壘手",
+          "handler": "showEmptyBaseDecisionFixture()"
+        },
+        {
+          "text": "D｜空壘失誤",
+          "handler": "showEmptyBaseErrorFixture()"
+        },
+        {
+          "text": "E｜一壘安打",
+          "handler": "showSingleCommentaryFixture()"
+        },
+        {
+          "text": "F｜二壘安打得分",
+          "handler": "showDoubleScoreFixture()"
+        },
+        {
+          "text": "G｜跑完前三局",
+          "handler": "showMultiInningFixture()"
+        }
+      ]
+    }
+  },
+  {
+    "classification": "legacy-browser-fixture",
+    "path": "tests/human-audit-opportunity-parity-browser-fixture.html",
+    "sourceEvidence": [
+      "107:      while (!match.completed && steps++ < 5000) {",
+      "120:          const progressed = advanceHighSchoolMatchPlaybackStep(match);"
+    ],
+    "status": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+    "httpStatus": 200,
+    "errors": [],
+    "failures": [],
+    "dom": {
+      "title": "2.2.4.4 Human / Audit Opportunity Parity",
+      "text": "Baseball Match Foundation 2.2.4.4｜Human / Audit Parity\n\n透過正式創角與 High School Full Match Direct Start 執行 Browser playback，再以相同 seed、fixture 與 choice policy 做 direct audit replay。\n\nRun 20-seed Parity\nRun Human Seed 22424201\nFixture Debug（不屬於正式玩家 UI）\n尚未執行\n請選擇案例。\n尚未建立角色\n10 歲\n十歲暑假\n尚未定型\n右打／右投\n理想球員：尚未形成",
+      "buttons": [
+        {
+          "text": "Run 20-seed Parity",
+          "handler": "runTwentySeedParity()"
+        },
+        {
+          "text": "Run Human Seed 22424201",
+          "handler": "runHumanSeed()"
+        }
+      ]
+    }
+  },
+  {
+    "classification": "legacy-browser-fixture",
+    "path": "tests/infield-decision-family-browser-fixture.html",
+    "sourceEvidence": [
+      "82:      routine: { position: \"游擊手\", type: \"hardGrounder\", direction: \"straightAtPlayer\", runners: [\"away-sim-2\", null, null], outs: 1, inning: 5, home: 1, away: 1 },",
+      "83:      second: { position: \"二壘手\", type: \"hardGrounder\", direction: \"upTheMiddle\", runners: [\"away-sim-2\", null, null], outs: 1, inning: 5, home: 1, away: 1 },",
+      "84:      slow: { position: \"三壘手\", type: \"slowGrounder\", direction: \"lineSide\", runners: [\"away-sim-2\", null, null], outs: 0, inning: 4, home: 1, away: 1, batterSpeed: 9 },",
+      "85:      deep: { position: \"游擊手\", type: \"deepGrounder\", direction: \"towardHole\", runners: [null, null, null], outs: 1, inning: 5, home: 2, away: 2, batterSpeed: 6 },",
+      "86:      loaded: { position: \"三壘手\", type: \"normalGrounder\", direction: \"straightAtPlayer\", runners: [\"away-sim-2\", \"away-sim-3\", \"away-sim-5\"], outs: 1, inning: 7, home: 2, away: 2 }",
+      "110:        outs: config.outs,",
+      "157:        const resolution = resolveHighSchoolDefensivePlay(match, decision, index / 101);"
+    ],
+    "status": "BLOCKED",
+    "httpStatus": 200,
+    "errors": [
+      "ReferenceError: ForceAdvancement is not defined\n    at buildInfieldMeaningfulMoment (http://127.0.0.1:8770/script.js?v=21:7770:9)\n    at createFixtureMatch (http://127.0.0.1:8770/tests/infield-decision-family-browser-fixture.html:121:7)\n    at renderFixtureMatch (http://127.0.0.1:8770/tests/infield-decision-family-browser-fixture.html:132:21)\n    at showFixtureCase (http://127.0.0.1:8770/tests/infield-decision-family-browser-fixture.html:200:12)\n    at http://127.0.0.1:8770/tests/infield-decision-family-browser-fixture.html:203:5"
+    ],
+    "failures": [],
+    "dom": {
+      "title": "Infield Decision Family Browser Validation",
+      "text": "Baseball Match Foundation 2.1｜瀏覽器驗收情境\n\n以下按鈕使用正式 Situation Builder、Choice Generator、Resolver 與 Presentation Adapter；不是另一套比賽引擎。\n\nA｜游擊例行雙殺\nE｜二壘同類球\nB｜三壘慢滾\nC｜游擊深處球\nD｜滿壘壓力\nF｜四種原因\n當下摘要\n當前目標\n完成今天的選擇\n年齡\n10 歲\n階段\n十歲暑假\n體力\n10\n疲勞\n0\n能力與技能\n能力傾向\n球感\n0\n觀察\n0\n體能\n0\n人物關係\n成長與身份\n十歲暑假\n\n十歲暑假・第 1 天・上午\n\n尚未建立角色\n10 歲\n十歲暑假\n尚未定型\n右打／右投\n理想球員：尚未形成",
+      "buttons": [
+        {
+          "text": "A｜游擊例行雙殺",
+          "handler": "showFixtureCase('routine')"
+        },
+        {
+          "text": "E｜二壘同類球",
+          "handler": "showFixtureCase('second')"
+        },
+        {
+          "text": "B｜三壘慢滾",
+          "handler": "showFixtureCase('slow')"
+        },
+        {
+          "text": "C｜游擊深處球",
+          "handler": "showFixtureCase('deep')"
+        },
+        {
+          "text": "D｜滿壘壓力",
+          "handler": "showFixtureCase('loaded')"
+        },
+        {
+          "text": "F｜四種原因",
+          "handler": "showFixtureCase('causes')"
+        }
+      ]
+    }
+  },
+  {
+    "classification": "legacy-browser-fixture",
+    "path": "tests/integration-integrity-browser-fixture.html",
+    "sourceEvidence": [
+      "113:      Object.assign(match, { inning: 5, half: \"下\", offenseTeam: \"home\", defenseTeam: \"away\", outs: 1, runners: [null, null, null],",
+      "118:      const result = resolveHighSchoolOffensiveDecision(match, choice, \"mixed\");",
+      "130:      while (!isHighSchoolMatchDecisionVisible(match) && guard++ < 500 && runFixtureTimer()) {}",
+      "139:      while (beats < 12 && !match.completed && guard++ < 1000) {",
+      "155:      Object.assign(match, { inning: 3, half: \"上\", offenseTeam: \"away\", defenseTeam: \"home\", outs: 3, runners: [null, null, null], simulationPhase: \"full_match_flow\" });",
+      "165:      const report = { seen, inning: match.inning, half: match.half, outs: match.outs, state, timerDelays };",
+      "172:      while (!(isHighSchoolMatchDecisionVisible(match) && match.currentDomain === \"defense\") && !match.completed && guard++ < 2000) {"
+    ],
+    "status": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+    "httpStatus": 200,
+    "errors": [],
+    "failures": [],
+    "dom": {
+      "title": "2.2.4.1 Integration Integrity Browser Fixture",
+      "text": "Baseball Match Foundation 2.2.4.1｜Integration Integrity\n\n測試用虛擬時鐘只執行正式 scheduler 排入的節點；production 的 1000／1700／1850ms 常數保持不變。\n\nS1｜Empty-base result\nL1｜Offense → 10+ beats\nL2｜Half transition\nL3｜2B Decision\nL4｜Fallback\nFull Match A\nFull Match B\nFixture Debug（不屬於正式玩家 UI）\n尚未執行\n請選擇案例。\n尚未建立角色\n10 歲\n十歲暑假\n尚未定型\n右打／右投\n理想球員：尚未形成",
+      "buttons": [
+        {
+          "text": "S1｜Empty-base result",
+          "handler": "runS1()"
+        },
+        {
+          "text": "L1｜Offense → 10+ beats",
+          "handler": "runL1()"
+        },
+        {
+          "text": "L2｜Half transition",
+          "handler": "runL2()"
+        },
+        {
+          "text": "L3｜2B Decision",
+          "handler": "runL3()"
+        },
+        {
+          "text": "L4｜Fallback",
+          "handler": "runL4()"
+        },
+        {
+          "text": "Full Match A",
+          "handler": "runFullCase('A',224191)"
+        },
+        {
+          "text": "Full Match B",
+          "handler": "runFullCase('B',224192)"
+        }
+      ]
+    }
+  },
+  {
+    "classification": "legacy-browser-fixture",
+    "path": "tests/meaningful-decision-gate-browser-fixture.html",
+    "sourceEvidence": [
+      "77:        inning: 5, half: \"上\", offenseTeam: \"away\", defenseTeam: \"home\", outs: 0,",
+      "83:        completedMoments: [{ id: highSchoolYearOneMomentIds[0], domain: \"offense\", decision: \"zone\", tier: \"mixed\", outcome: \"第一個打席完成\", consequence: \"比賽繼續\", inning: 4, half: \"下\", outs: 1, scores: { home: 1, away: 1 }, runners: [null, null, null] }]",
+      "97:        outs: options.outs || 0,",
+      "114:      advanceHighSchoolPresentationCursor(match);",
+      "130:      showFixture(\"A\", \"空壘一壘手自動完成例行出局，沒有決策按鈕。\", { type: event.type, commentary, outs: match.outs, phase: match.simulationPhase, decision: isHighSchoolMatchDecisionVisible(match) });",
+      "140:      const { match, event } = prepareCandidate({ position: \"游擊手\", runners: [\"away-sim-4\", null, null], outs: 1, ball: \"normalGrounder\" });",
+      "146:      const { match, event } = prepareCandidate({ position: \"三壘手\", runners: [null, null, \"away-sim-4\"], outs: 1, inning: 7, scores: { home: 2, away: 2 }, ball: \"slowGrounder\", direction: \"lineSide\" });"
+    ],
+    "status": "BLOCKED",
+    "httpStatus": 200,
+    "errors": [
+      "ReferenceError: ForceAdvancement is not defined\n    at buildInfieldMeaningfulMoment (http://127.0.0.1:8770/script.js?v=2222:7770:9)\n    at prepareHighSchoolDefensiveMomentFromSimulation (http://127.0.0.1:8770/script.js?v=2222:14361:5)\n    at prepareCandidate (http://127.0.0.1:8770/tests/meaningful-decision-gate-browser-fixture.html:103:21)\n    at showRoutineSuccess (http://127.0.0.1:8770/tests/meaningful-decision-gate-browser-fixture.html:128:32)\n    at http://127.0.0.1:8770/tests/meaningful-decision-gate-browser-fixture.html:196:5"
+    ],
+    "failures": [],
+    "dom": {
+      "title": "Meaningful Decision Gate Browser Validation",
+      "text": "Baseball Match Foundation 2.2.2｜Meaningful Decision Gate\n\n所有情境使用正式 position family、resolver、match truth 與 Match Screen。\n\nA｜一壘手例行出局\nB｜例行守備失誤\nC｜游擊雙殺決策\nD｜三壘防分決策\nE｜慢滾球例行處理\nF｜連跑兩局\nG｜流動後進入決策\nH｜Flow UI 層級\n\n尚未建立角色\n10 歲\n十歲暑假\n尚未定型\n右打／右投\n理想球員：尚未形成",
+      "buttons": [
+        {
+          "text": "A｜一壘手例行出局",
+          "handler": "showRoutineSuccess()"
+        },
+        {
+          "text": "B｜例行守備失誤",
+          "handler": "showRoutineError()"
+        },
+        {
+          "text": "C｜游擊雙殺決策",
+          "handler": "showDoublePlayDecision()"
+        },
+        {
+          "text": "D｜三壘防分決策",
+          "handler": "showPreventRunDecision()"
+        },
+        {
+          "text": "E｜慢滾球例行處理",
+          "handler": "showSlowRollerRoutine()"
+        },
+        {
+          "text": "F｜連跑兩局",
+          "handler": "showTwoInningFlow()"
+        },
+        {
+          "text": "G｜流動後進入決策",
+          "handler": "showFlowToDecision()"
+        },
+        {
+          "text": "H｜Flow UI 層級",
+          "handler": "showFlowHierarchy()"
+        }
+      ]
+    }
+  },
+  {
+    "classification": "legacy-browser-fixture",
+    "path": "tests/offensive-tactical-action-sprint-a-browser-fixture.html",
+    "sourceEvidence": [],
+    "status": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+    "httpStatus": 200,
+    "errors": [],
+    "failures": [],
+    "dom": {
+      "title": "Offensive Tactical Action Sprint A 驗收 Fixture",
+      "text": "Offensive Tactical Action Sprint A\n\nDevelopment-only deterministic fixture；不屬於正式玩家介面。\n\nA：犧牲短打（early） B：突襲短打（reveal 前） B：推進到 late reveal C：正常進攻 D：存檔／讀檔\n守備玩家可見資訊\n\n沒有可觀察到的特殊戰術動作。\n\nDeveloper Trace\n—",
+      "buttons": [
+        {
+          "text": "A：犧牲短打（early）",
+          "handler": null
+        },
+        {
+          "text": "B：突襲短打（reveal 前）",
+          "handler": null
+        },
+        {
+          "text": "B：推進到 late reveal",
+          "handler": null
+        },
+        {
+          "text": "C：正常進攻",
+          "handler": null
+        },
+        {
+          "text": "D：存檔／讀檔",
+          "handler": null
+        }
+      ]
+    }
+  },
+  {
+    "classification": "legacy-browser-fixture",
+    "path": "tests/offensive-tactical-action-sprint-b1-browser-fixture.html",
+    "sourceEvidence": [],
+    "status": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+    "httpStatus": 200,
+    "errors": [],
+    "failures": [],
+    "dom": {
+      "title": "Offensive Tactical Action Sprint B1 — Deterministic Fixtures",
+      "text": "短打執行與打席持續性 — B1 人工驗證\n\n以下六個入口完全固定，不需重開比賽碰運氣。它們只驗證短打的來球、辨識、收／點、準備、接觸、球形與球數；不會建立跑者移動或守備路線。\n\n1. 收棒壞球\n2. 受控犧牲短打\n3. 強勁二壘側\n4. 突襲短打\n5. 兩好球界外\n6. 誤判後碰成界內\n收棒壞球 PASS\n\n打者收回短棒，讓這顆球通過。\n\nPA 戰術\nsacrificeBunt（active）\n本球承諾\nbuntPrepared\nReveal\nearly\n實際來球／辨識\nclearBall／正確\nAttempt／Preparation\nhold／—\nContact／Ball\n—／—\nPace／Placement\n—／—\n球數／打席\n1-0；continues\nB1 防火牆\nPASS：無跑者移動、無守備路線、無最終 outcome",
+      "buttons": [
+        {
+          "text": "1. 收棒壞球",
+          "handler": null
+        },
+        {
+          "text": "2. 受控犧牲短打",
+          "handler": null
+        },
+        {
+          "text": "3. 強勁二壘側",
+          "handler": null
+        },
+        {
+          "text": "4. 突襲短打",
+          "handler": null
+        },
+        {
+          "text": "5. 兩好球界外",
+          "handler": null
+        },
+        {
+          "text": "6. 誤判後碰成界內",
+          "handler": null
+        }
+      ]
+    }
+  },
+  {
+    "classification": "legacy-browser-fixture",
+    "path": "tests/offensive-tactical-action-sprint-b2-browser-fixture.html",
+    "sourceEvidence": [],
+    "status": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+    "httpStatus": 200,
+    "errors": [],
+    "failures": [],
+    "dom": {
+      "title": "Offensive Tactical Action Sprint B2 — 人工驗證",
+      "text": "一般滾地球 vs 短打守備 — B2 固定案例\n\n三個入口都是固定結果。請比較球況、跑者動作、第一出局選擇，以及完成二壘封殺後的一壘轉傳窗口。\n\n1. 一般滾地球\n2. 偏強二壘側短打・慢打者\n3. 同一短打・快打者\nFixture 1\n一般滾地球\n\n一般深度的滾地球進入二壘手守區。一壘跑者隨擊球推進，打者往一壘跑。\n\n第一出局：傳一壘拿打者，或啟動既有二壘封殺路線\n球況來源：一般守備球況\n第二傳：依一般雙殺窗口解析",
+      "buttons": [
+        {
+          "text": "1. 一般滾地球",
+          "handler": null
+        },
+        {
+          "text": "2. 偏強二壘側短打・慢打者",
+          "handler": null
+        },
+        {
+          "text": "3. 同一短打・快打者",
+          "handler": null
+        }
+      ]
+    }
+  },
+  {
+    "classification": "legacy-browser-fixture",
+    "path": "tests/playback-state-fidelity-browser-fixture.html",
+    "sourceEvidence": [
+      "79:      Object.assign(match, { inning: 5, half: \"上\", offenseTeam: \"away\", defenseTeam: \"home\", outs: 0, runners: [null, null, null], scores: { home: 1, away: 1 }, simulationPhase: \"moment_1_resolved\" });",
+      "82:      recordHighSchoolMatchSimulationEvent(match, { type: \"fixtureStart\", presentationImportance: \"hidden\", inning: 5, half: \"上\", outs: 0, scores: match.scores, runners: match.runners });",
+      "89:      const before = { outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() };",
+      "91:      recordHighSchoolMatchSimulationEvent(match, { type: \"plateAppearance\", inning: match.inning, half: match.half, offenseTeam: match.offenseTeam, batterId: batter.id, result, before, after: { outs: match.outs, scores: { ...match.scores }, runners: match.runners.slice() } });",
+      "92:      advanceHighSchoolMatchBattingOrder(match, match.offenseTeam);",
+      "110:        recordHighSchoolMatchSimulationEvent(fixtureMatch, { type: \"fixtureStart\", presentationImportance: \"hidden\", inning: 5, half: \"上\", outs: 0, scores: fixtureMatch.scores, runners: fixtureMatch.runners });",
+      "115:        Object.assign(fixtureMatch, { outs: 1, runners: [\"away-sim-2\", \"away-sim-3\", null] });"
+    ],
+    "status": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+    "httpStatus": 200,
+    "errors": [],
+    "failures": [],
+    "dom": {
+      "title": "Playback State Fidelity Browser Validation",
+      "text": "Baseball Match Foundation 2.1.1｜Playback State Fidelity\n\n使用正式 match event、presentation snapshot、單一游標與 Infield Decision Family；此頁只提供決定性驗收控制。\n\nA｜壘況推進\nB｜0→3 OUT→換局\nC｜得分同步\nD｜決策暫停\nE｜Meaningful Queue\nF｜一壘手\nG｜二壘手\nH｜游擊手\nI｜三壘手\n下一個呈現節點\n\n等待下一個呈現節點目前事件：fixtureStart｜2/6｜Canonical：內野手｜JavaScript errors：0\n\n秋季交流賽\n高橋所屬的地區強校 vs 高中球隊\n先發／關鍵任務・以內野手先發，從開賽起進入守備與打序；右打／右投\n7 局記分板\n秋季交流賽\n球隊\t1\t2\t3\t4\t5\t6\t7\tR\tH\tE\n高橋所屬的地區強校\t0\t…\t…\t…\t0\t…\t…\t0\t0\t0\n高中球隊\t…\t…\t…\t…\t…\t…\t…\t0\t0\t0\n目前局勢\n5 局上\n0 OUT\n\n0：0｜壘上無人\n\n你的守位：內野手\n場上紀錄\n最近進展\n等待下一段比賽推進。\n目前任務\n比賽從一局上開始；先完成守備，再等待打序輪到你。\n尚未建立角色\n10 歲\n十歲暑假\n尚未定型\n右打／右投\n理想球員：尚未形成",
+      "buttons": [
+        {
+          "text": "A｜壘況推進",
+          "handler": "setupPlaybackFixture('bases')"
+        },
+        {
+          "text": "B｜0→3 OUT→換局",
+          "handler": "setupPlaybackFixture('outs')"
+        },
+        {
+          "text": "C｜得分同步",
+          "handler": "setupPlaybackFixture('score')"
+        },
+        {
+          "text": "D｜決策暫停",
+          "handler": "setupPlaybackFixture('decision')"
+        },
+        {
+          "text": "E｜Meaningful Queue",
+          "handler": "setupPlaybackFixture('queue')"
+        },
+        {
+          "text": "F｜一壘手",
+          "handler": "showPositionFixture('一壘手')"
+        },
+        {
+          "text": "G｜二壘手",
+          "handler": "showPositionFixture('二壘手')"
+        },
+        {
+          "text": "H｜游擊手",
+          "handler": "showPositionFixture('游擊手')"
+        },
+        {
+          "text": "I｜三壘手",
+          "handler": "showPositionFixture('三壘手')"
+        },
+        {
+          "text": "下一個呈現節點",
+          "handler": "advanceFixtureBeat()"
+        }
+      ]
+    }
+  },
+  {
+    "classification": "legacy-browser-fixture",
+    "path": "tests/production-match-playback-liveness-fixture.html",
+    "sourceEvidence": [
+      "84:        outs: match?.outs || 0,",
+      "119:          inning: event.inning, half: event.half, batterId: event.batterId || \"\", outs: event.outs ?? event.after?.outs ?? -1",
+      "193:      while (!match.completed && report.beats < 5000) {"
+    ],
+    "status": "LOADED_NOT_BASEBALL_ACCEPTANCE",
+    "httpStatus": 200,
+    "errors": [],
+    "failures": [],
+    "dom": {
+      "title": "2.2.4.2 Production Playback Liveness Fixture",
+      "text": "Baseball Match Foundation 2.2.4.2｜Production Playback Liveness\n\n從正式創角與 High School Full Match Direct Start 進入比賽；不注入 match、游標、局數或球員入場狀態。\n\nProduction A\nProduction B\nReal Timer Smoke\nFixture Debug（不屬於正式玩家 UI）\n尚未執行\n請選擇案例。\n尚未建立角色\n10 歲\n十歲暑假\n尚未定型\n右打／右投\n理想球員：尚未形成",
+      "buttons": [
+        {
+          "text": "Production A",
+          "handler": "runProductionPathCase('A', 22424201)"
+        },
+        {
+          "text": "Production B",
+          "handler": "runProductionPathCase('B', 22424202)"
+        },
+        {
+          "text": "Real Timer Smoke",
+          "handler": "startRealTimerSmoke(22424203)"
+        }
+      ]
+    }
+  },
+  {
+    "classification": "legacy-browser-fixture",
+    "path": "tests/second-base-reference-browser-fixture.html",
+    "sourceEvidence": [
+      "75:        inning: 5, half: \"上\", offenseTeam: \"away\", defenseTeam: \"home\", outs: 0,",
+      "90:      Object.assign(match, { runners: (options.runners || [null, null, null]).slice(), outs: options.outs ?? 0 });",
+      "126:          upstreamThrowQuality: result.upstreamThrowQuality, after: { outs: Math.min(3, situation.outs + result.outsCreated) }",
+      "153:      const x = buildCase({ runners: [\"away-sim-4\", null, null], outs: 1, routeWindows: { doublePlayWindow: \"wide\" } });",
+      "158:      const x = buildCase({ runners: [\"away-sim-4\", null, null], outs: 1, primary: \"游擊手\", direction: \"leftSide\", coverageQuality: \"good\", upstreamThrowQuality: \"slightlyOffLine\", routeWindows: { doublePlayWindow: \"normal\" } });",
+      "167:      const x = buildCase({ runners: [null, null, \"away-sim-4\"], outs: 1, activeRunnerBase: 3, runnerMovementProgress: { 2: \"advancing\" }, routeWindows: { homeOutWindow: \"normal\" } });",
+      "171:      const x = buildCase({ runners: [\"away-sim-2\", \"away-sim-3\", \"away-sim-4\"], outs: 1, executionChange: \"bobble\", routeWindows: { firstBaseOutWindow: \"narrow\", doublePlayWindow: \"wide\", homeOutWindow: \"wide\" } });"
+    ],
+    "status": "BLOCKED",
+    "httpStatus": 200,
+    "errors": [
+      "ReferenceError: ForceAdvancement is not defined\n    at buildInfieldMeaningfulMoment (http://127.0.0.1:8770/script.js?v=224:7770:9)\n    at buildCase (http://127.0.0.1:8770/tests/second-base-reference-browser-fixture.html:93:7)\n    at showCase1 (http://127.0.0.1:8770/tests/second-base-reference-browser-fixture.html:148:17)\n    at http://127.0.0.1:8770/tests/second-base-reference-browser-fixture.html:186:5"
+    ],
+    "failures": [],
+    "dom": {
+      "title": "Second Base Reference v1.0 Browser Fixture",
+      "text": "Baseball Match Foundation 2.2.4｜Second Base Reference v1.0\n\n八個案例都使用正式 Full Match state、Infield Decision Family、責任解析、路線窗口與 resolver。\n\n1｜Routine Grounder\n2｜4-6-3\n3｜6-4-3\n4｜Lead Runner\n5｜Run Prevention\n6｜Bases Loaded\n7｜Slow Roller\n8｜Coverage Failure\nFixture Debug（不屬於正式 UI）\n尚未建立角色\n10 歲\n十歲暑假\n尚未定型\n右打／右投\n理想球員：尚未形成",
+      "buttons": [
+        {
+          "text": "1｜Routine Grounder",
+          "handler": "showCase1()"
+        },
+        {
+          "text": "2｜4-6-3",
+          "handler": "showCase2()"
+        },
+        {
+          "text": "3｜6-4-3",
+          "handler": "showCase3()"
+        },
+        {
+          "text": "4｜Lead Runner",
+          "handler": "showCase4()"
+        },
+        {
+          "text": "5｜Run Prevention",
+          "handler": "showCase5()"
+        },
+        {
+          "text": "6｜Bases Loaded",
+          "handler": "showCase6()"
+        },
+        {
+          "text": "7｜Slow Roller",
+          "handler": "showCase7()"
+        },
+        {
+          "text": "8｜Coverage Failure",
+          "handler": "showCase8()"
+        }
+      ]
+    }
+  }
+]
